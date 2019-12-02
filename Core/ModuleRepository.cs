@@ -5,7 +5,7 @@ namespace Core
 {
     public class ModuleRepository
     {
-        private IList<Module> _modules;
+        private readonly IList<Module> _modules;
 
         public ModuleRepository()
         {

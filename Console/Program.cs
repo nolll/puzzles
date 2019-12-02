@@ -8,15 +8,27 @@ namespace AdventOfCode2019
     {
         static void Main(string[] args)
         {
-            Day1Part2();
-            Day1Part1();
+            Day2Part1();
+            
+            //Day1Part2();
+            //Day1Part1();
+        }
+
+        private static void Day2Part1()
+        {
+            var input = new IntCodeRepository().ResetInput;
+            var computer = new IntCodeComputer(input);
+            var value = computer.GetFirstPos();
+
+            WriteTitle(2, 1);
+            Console.WriteLine($"Value at position 0: {value}");
         }
 
         private static void Day1Part2()
         {
             var modules = new ModuleRepository().List();
             var requiredFuel = modules.Sum(o => o.TotalFuel);
-            WriteTitle(1, 2); 
+            WriteTitle(1, 2);
             Console.WriteLine($"Required fuel: {requiredFuel}");
         }
 

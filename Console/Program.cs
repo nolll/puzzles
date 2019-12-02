@@ -8,17 +8,27 @@ namespace AdventOfCode2019
     {
         static void Main(string[] args)
         {
-            Day2Part1();
+            Day2Part2();
+            //Day2Part1();
             
             //Day1Part2();
             //Day1Part1();
         }
 
+        private static void Day2Part2()
+        {
+            var solutionFinder = new ComputerSolutionFinder();
+            var result = solutionFinder.FindSolution(19690720);
+            var answer = 100 * result.Noun + result.Verb;
+
+            WriteTitle(2, 2);
+            Console.WriteLine($"The answer is: {answer}");
+        }
+
         private static void Day2Part1()
         {
-            var input = new IntCodeRepository().ResetInput;
-            var computer = new IntCodeComputer(input);
-            var value = computer.GetFirstPos();
+            var computer = new IntCodeComputer();
+            var value = computer.Run().Integer;
 
             WriteTitle(2, 1);
             Console.WriteLine($"Value at position 0: {value}");

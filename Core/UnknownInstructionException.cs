@@ -2,9 +2,9 @@
 
 namespace Core
 {
-    public class UnknownOpcodeException : Exception
+    public class UnknownInstructionException : Exception
     {
-        public UnknownOpcodeException(int opCode)
+        public UnknownInstructionException(int opCode)
             : base($"Unknown opcode: {opCode}")
         {
         }

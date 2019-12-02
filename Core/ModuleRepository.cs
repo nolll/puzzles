@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace AdventOfCode2019
+namespace Core
 {
     public class ModuleRepository
     {
@@ -11,7 +11,7 @@ namespace AdventOfCode2019
         {
             var data = Data.Trim();
             var massStrings = data.Split('\n');
-            _modules = massStrings.Select(o => new Module(int.Parse(o.Trim()))).ToList();
+            _modules = massStrings.Select(o => new Module(int.Parse((string) o.Trim()))).ToList();
         }
 
         public IList<Module> List()

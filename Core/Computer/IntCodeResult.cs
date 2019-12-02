@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Core
+namespace Core.Computer
 {
     public class IntCodeResult
     {

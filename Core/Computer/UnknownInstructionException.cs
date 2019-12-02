@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core
+namespace Core.Computer
 {
     public class UnknownInstructionException : Exception
     {

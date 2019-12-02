@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Core;
+using Core.Computer;
+using Core.Modules;
 
 namespace AdventOfCode2019
 {

@@ -1,4 +1,5 @@
 using Core;
+using Core.Computer;
 using NUnit.Framework;
 
 namespace Tests

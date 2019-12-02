@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Core
+namespace Core.Modules
 {
     public class ModuleRepository
     {

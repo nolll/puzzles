@@ -14,7 +14,7 @@ namespace Core.IntersectionFinder
 
         public IList<Point> GetPoints()
         {
-            var points = new List<Point> {new Point(0, 0)};
+            var points = new List<Point> {new Point(0, 0, 0)};
             foreach (var command in _commands)
             {
                 var commandPoints = command.Execute(points.Last());

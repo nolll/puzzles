@@ -6,11 +6,15 @@ namespace Core.IntersectionFinder
     {
         public int X { get; }
         public int Y { get; }
+        public string Id { get; }
+        public int Steps { get; }
 
-        public Point(int x, int y)
+        public Point(int x, int y, int steps)
         {
             X = x;
             Y = y;
+            Id = $"{X}|{Y}";
+            Steps = steps;
         }
 
         public int Distance => Math.Abs(X) + Math.Abs(Y);
@@ -34,7 +38,10 @@ namespace Core.IntersectionFinder
         {
             unchecked
             {
-                return (X * 397) ^ Y;
+                var hash = 17;
+                hash = hash * 23 + X.GetHashCode();
+                hash = hash * 23 + Y.GetHashCode();
+                return hash;
             }
         }
     }

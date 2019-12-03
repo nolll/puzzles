@@ -9,7 +9,7 @@ namespace Core.IntersectionFinder
 
         protected override Point Move(Point lastPoint)
         {
-            return new Point(lastPoint.X + 1, lastPoint.Y);
+            return new Point(lastPoint.X + 1, lastPoint.Y, lastPoint.Steps + 1);
         }
     }
 }

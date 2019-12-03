@@ -11,7 +11,7 @@ namespace Core.Modules
         {
             var data = Data.Trim();
             var massStrings = data.Split('\n');
-            _modules = massStrings.Select(o => new Module(int.Parse((string) o.Trim()))).ToList();
+            _modules = massStrings.Select(o => new Module(int.Parse(o.Trim()))).ToList();
         }
 
         public IList<Module> List()

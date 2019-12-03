@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Modules
+namespace Core.ModuleMass
 {
     public class Module
     {

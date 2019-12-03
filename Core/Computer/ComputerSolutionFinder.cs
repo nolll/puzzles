@@ -2,12 +2,19 @@
 {
     public class ComputerSolutionFinder
     {
+        private readonly string _input;
+
+        public ComputerSolutionFinder(string input)
+        {
+            _input = input;
+        }
+
         private const int LowerBound = 1;
         private const int UpperBound = 99;
 
         public Result FindSolution(int target)
         {
-            var computer = new IntCodeComputer();
+            var computer = new IntCodeComputer(_input);
             for (var noun = LowerBound; noun <= UpperBound; noun++)
             {
                 for (var verb = LowerBound; verb <= UpperBound; verb++)

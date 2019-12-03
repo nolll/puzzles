@@ -1,9 +1,9 @@
-using Core.Modules;
+using Core.ModuleMass;
 using NUnit.Framework;
 
 namespace Tests
 {
-    public class ModuleTests
+    public class ModuleMassTests
     {
         [TestCase(14, 2)]
         [TestCase(1969, 654)]

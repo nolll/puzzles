@@ -1,7 +1,12 @@
-﻿using Console.Inputs;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Transactions;
+using Console.Inputs;
 using Core.Computer;
 using Core.IntersectionFinder;
 using Core.ModuleMass;
+using Core.Passwords;
 
 namespace Console
 {
@@ -16,7 +21,9 @@ namespace Console
             //Day2Part2();
 
             //Day3Part1();
-            Day3Part2();
+            //Day3Part2();
+
+            Day4Part1();
         }
 
         private static void Day1Part1()
@@ -72,10 +79,34 @@ namespace Console
             System.Console.WriteLine($"The fewest combined steps to the closest intersection is: {result}");
         }
 
+        private static void Day4Part1()
+        {
+            var passwordFinder = new PasswordFinder();
+            var passwords = passwordFinder.Find(InputData.PasswordLowerbound, InputData.PasswordUpperbound);
+            var passwordCount = passwords.Count();
+
+            WriteTitle(4, 1);
+            System.Console.WriteLine($"Number of valid passwords: {passwordCount}");
+        }
+
         private static void WriteTitle(int day, int part)
         {
             System.Console.WriteLine();
             System.Console.WriteLine($"Day {day}, part {part}:");
+        }
+    }
+
+    public class PasswordFinder
+    {
+        public IEnumerable<int> Find(int lowerBound, int upperBound)
+        {
+            var passwordValidator = new PasswordValidator();
+
+            for (var pwd = lowerBound; pwd <= upperBound; pwd++)
+            {
+                if (passwordValidator.IsValid(pwd))
+                    yield return pwd;
+            }
         }
     }
 }

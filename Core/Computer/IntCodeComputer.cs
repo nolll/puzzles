@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Core.Computer
+﻿namespace Core.Computer
 {
     public class IntCodeComputer
     {
@@ -8,7 +6,7 @@ namespace Core.Computer
 
         public IntCodeComputer(string input)
         {
-            _startMemory = GetStartMemory(input);
+            _startMemory = MemoryParser.Parse(input);
         }
 
         public IntCodeResult Run(int? noun = null, int? verb = null)
@@ -19,7 +17,7 @@ namespace Core.Computer
             return new IntCodeProcess(memory).Run();
         }
 
-        private int[] CopyMemory(int[] memory)
+        private static int[] CopyMemory(int[] memory)
         {
             var copy = new int[memory.Length];
             for (var i = 0; i < memory.Length; i++)
@@ -28,13 +26,6 @@ namespace Core.Computer
             }
 
             return copy;
-        }
-
-        private static int[] GetStartMemory(string input)
-        {
-            var data = input.Trim();
-            var massStrings = data.Split(',');
-            return massStrings.Select(int.Parse).ToArray();
         }
     }
 }

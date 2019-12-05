@@ -1,4 +1,7 @@
-﻿namespace Core.Computer
+﻿using System;
+using Core.Computer.Instructions;
+
+namespace Core.Computer
 {
     public class IntCodeProcess
     {
@@ -15,34 +18,121 @@
         {
             while (_pointer < _memory.Length)
             {
-                var instruction = GetInstruction(_memory[_pointer]);
+                var instruction = InstructionParser.Parse(_memory, _pointer);
 
-                if (instruction == IntCodeInstruction.End)
+                if (instruction.Type == InstructionType.Halt)
                     break;
 
-                if (instruction == IntCodeInstruction.Unknown)
-                    throw new UnknownInstructionException();
+                if (instruction.Type == InstructionType.Addition)
+                    PerformAddition(instruction);
 
-                PerformOperation(instruction);
-                IncrementPointer();
+                if (instruction.Type == InstructionType.Multiplication)
+                    PerformMultiplication(instruction);
+
+                if (instruction.Type == InstructionType.Input)
+                    PerformInput(instruction);
+
+                if (instruction.Type == InstructionType.Output)
+                    PerformOutput(instruction);
+
+                if (instruction.Type == InstructionType.JumpIfTrue)
+                    PerformJumpIfTrue(instruction);
+
+                if (instruction.Type == InstructionType.JumpIfFalse)
+                    PerformJumpIfFalse(instruction);
+
+                if (instruction.Type == InstructionType.LessThan)
+                    PerformLessThan(instruction);
+
+                if (instruction.Type == InstructionType.Equals)
+                    PerformEquals(instruction);
             }
 
             return new IntCodeResult(_memory);
         }
 
-        private void PerformOperation(IntCodeInstruction instruction)
+        private void PerformAddition(Instruction instruction)
         {
-            var a = _memory[_pointer + 1];
-            var b = _memory[_pointer + 2];
-            var c = _memory[_pointer + 3];
-            _memory[c] = instruction == IntCodeInstruction.Add
-                ? Add(a, b)
-                : Multiply(a, b);
+            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
+            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+            var target = _memory[_pointer + 3];
+
+            _memory[target] = a + b;
+            IncrementPointer(instruction);
         }
 
-        private int Add(int a, int b) => _memory[a] + _memory[b];
-        private int Multiply(int a, int b) => _memory[a] * _memory[b];
-        private void IncrementPointer() => _pointer += 4;
-        private static IntCodeInstruction GetInstruction(int num) => (IntCodeInstruction)num;
+        private void PerformMultiplication(Instruction instruction)
+        {
+            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
+            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+            var target = _memory[_pointer + 3];
+
+            _memory[target] = a * b;
+            IncrementPointer(instruction);
+        }
+
+        private void PerformInput(Instruction instruction)
+        {
+            Console.Write("Enter the ID of the system: ");
+            var str = Console.ReadLine() ?? "";
+            var input = int.Parse(str);
+
+            var pos = _memory[_pointer + 1];
+
+            _memory[pos] = input;
+            IncrementPointer(instruction);
+        }
+
+        private void PerformOutput(Instruction instruction)
+        {
+            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
+
+            Console.WriteLine(a);
+            IncrementPointer(instruction);
+        }
+
+        private void PerformJumpIfTrue(Instruction instruction)
+        {
+            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
+            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+
+            if (a != 0)
+                _pointer = b;
+            else
+                IncrementPointer(instruction);
+        }
+
+        private void PerformJumpIfFalse(Instruction instruction)
+        {
+            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
+            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+
+            if (a == 0)
+                _pointer = b;
+            else
+                IncrementPointer(instruction);
+        }
+
+        private void PerformLessThan(Instruction instruction)
+        {
+            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
+            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+            var target = _memory[_pointer + 3];
+
+            _memory[target] = a < b ? 1 : 0;
+            IncrementPointer(instruction);
+        }
+
+        private void PerformEquals(Instruction instruction)
+        {
+            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
+            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+            var target = _memory[_pointer + 3];
+
+            _memory[target] = a == b ? 1 : 0;
+            IncrementPointer(instruction);
+        }
+
+        private void IncrementPointer(Instruction instruction) => _pointer += instruction.Length + 1;
     }
 }

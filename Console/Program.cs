@@ -23,7 +23,9 @@ namespace Console
             //Day3Part1();
             //Day3Part2();
 
-            Day4Part1();
+            //Day4Parts1And2();
+
+            Day5Part1();
         }
 
         private static void Day1Part1()
@@ -44,7 +46,7 @@ namespace Console
 
         private static void Day2Part1()
         {
-            var computer = new IntCodeComputer(InputData.IntCodeMemory);
+            var computer = new IntCodeComputer(InputData.IntCodeMemoryDay2);
             var value = computer.Run().Integer;
 
             WriteTitle(2, 1);
@@ -53,7 +55,7 @@ namespace Console
 
         private static void Day2Part2()
         {
-            var solutionFinder = new ComputerSolutionFinder(InputData.IntCodeMemory);
+            var solutionFinder = new ComputerSolutionFinder(InputData.IntCodeMemoryDay2);
             var result = solutionFinder.FindSolution(19690720);
             var answer = 100 * result.Noun + result.Verb;
 
@@ -79,7 +81,7 @@ namespace Console
             System.Console.WriteLine($"The fewest combined steps to the closest intersection is: {result}");
         }
 
-        private static void Day4Part1()
+        private static void Day4Parts1And2()
         {
             var passwordFinder = new PasswordFinder();
             var passwords = passwordFinder.Find(InputData.PasswordLowerbound, InputData.PasswordUpperbound);
@@ -87,6 +89,15 @@ namespace Console
 
             WriteTitle(4, 1);
             System.Console.WriteLine($"Number of valid passwords: {passwordCount}");
+        }
+
+        private static void Day5Part1()
+        {
+            var computer = new IntCodeComputer(InputData.IntCodeMemoryDay5);
+
+            WriteTitle(5, 1);
+            
+            computer.Run();
         }
 
         private static void WriteTitle(int day, int part)

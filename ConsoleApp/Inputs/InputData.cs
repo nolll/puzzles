@@ -1,4 +1,4 @@
-﻿namespace Console.Inputs
+﻿namespace ConsoleApp.Inputs
 {
     public static class InputData
     {

@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Transactions;
-using Console.Inputs;
+﻿using System.Linq;
+using ConsoleApp.Inputs;
 using Core.Computer;
 using Core.IntersectionFinder;
 using Core.ModuleMass;
-using Core.Passwords;
+using Core.Orbits;
 
-namespace Console
+namespace ConsoleApp
 {
     class Program
     {
@@ -23,9 +20,12 @@ namespace Console
             //Day3Part1();
             //Day3Part2();
 
-            //Day4Parts1And2();
+            //Day4();
 
-            Day5Part1();
+            //Day5();
+
+            //Day6Part1();
+            Day6Part2();
         }
 
         private static void Day1Part1()
@@ -81,43 +81,51 @@ namespace Console
             System.Console.WriteLine($"The fewest combined steps to the closest intersection is: {result}");
         }
 
-        private static void Day4Parts1And2()
+        private static void Day4()
         {
-            var passwordFinder = new PasswordFinder();
+            var passwordFinder = new Core.Passwords.PasswordFinder();
             var passwords = passwordFinder.Find(InputData.PasswordLowerbound, InputData.PasswordUpperbound);
             var passwordCount = passwords.Count();
 
-            WriteTitle(4, 1);
+            WriteTitle(4);
             System.Console.WriteLine($"Number of valid passwords: {passwordCount}");
         }
 
-        private static void Day5Part1()
+        private static void Day5()
         {
             var computer = new IntCodeComputer(InputData.IntCodeMemoryDay5);
 
-            WriteTitle(5, 1);
-            
+            WriteTitle(5);
+
             computer.Run();
         }
 
-        private static void WriteTitle(int day, int part)
+        private static void Day6Part1()
+        {
+            var calculator = new OrbitCalculator(InputStrings.Orbits);
+            var orbitCount = calculator.GetOrbitCount();
+
+            WriteTitle(6, 1);
+
+            System.Console.WriteLine($"Total number of orbits: {orbitCount}");
+        }
+
+        private static void Day6Part2()
+        {
+            var calculator = new OrbitCalculator(InputStrings.Orbits);
+            var distance = calculator.GetSantaDistance();
+
+            WriteTitle(6, 1);
+
+            System.Console.WriteLine($"Distance to Santa: {distance}");
+        }
+
+        private static void WriteTitle(int day, int? part = null)
         {
             System.Console.WriteLine();
+            if(part == null)
+                System.Console.WriteLine($"Day {day}:");
             System.Console.WriteLine($"Day {day}, part {part}:");
-        }
-    }
-
-    public class PasswordFinder
-    {
-        public IEnumerable<int> Find(int lowerBound, int upperBound)
-        {
-            var passwordValidator = new PasswordValidator();
-
-            for (var pwd = lowerBound; pwd <= upperBound; pwd++)
-            {
-                if (passwordValidator.IsValid(pwd))
-                    yield return pwd;
-            }
         }
     }
 }

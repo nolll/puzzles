@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace Core.Computer.Instructions
 {
-    public class MultiplicationInstruction : Instruction
+    public class LessThanInstruction : Instruction
     {
-        public override InstructionType Type => InstructionType.Multiplication;
+        public override InstructionType Type => InstructionType.LessThan;
 
-        public MultiplicationInstruction(int[] memory, int position, IList<ParameterType> parameterTypes)
+        public LessThanInstruction(int[] memory, int position, IList<ParameterType> parameterTypes)
             : base(memory, position, parameterTypes)
         {
             ReadParameter(0);

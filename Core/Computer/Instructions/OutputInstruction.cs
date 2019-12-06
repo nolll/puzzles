@@ -6,9 +6,10 @@ namespace Core.Computer.Instructions
     {
         public override InstructionType Type => InstructionType.Output;
 
-        public OutputInstruction(IList<Parameter> parameters)
-            : base(parameters)
+        public OutputInstruction(int[] memory, int position, IList<ParameterType> parameterTypes)
+            : base(memory, position, parameterTypes)
         {
+            ReadParameter(0);
         }
     }
 }

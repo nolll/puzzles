@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace Core.Computer.Instructions
 {
-    public class MultiplicationInstruction : Instruction
+    public class EqualsInstruction : Instruction
     {
-        public override InstructionType Type => InstructionType.Multiplication;
+        public override InstructionType Type => InstructionType.Equals;
 
-        public MultiplicationInstruction(int[] memory, int position, IList<ParameterType> parameterTypes)
+        public EqualsInstruction(int[] memory, int position, IList<ParameterType> parameterTypes)
             : base(memory, position, parameterTypes)
         {
             ReadParameter(0);

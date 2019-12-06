@@ -2,9 +2,9 @@ namespace Core.Computer.Instructions
 {
     public class PositionParameter : Parameter
     {
-        public override int ReadValue(int[] memory, int position)
+        public PositionParameter(int[] memory, int position)
+            : base(memory[memory[position]])
         {
-            return memory[memory[position]];
         }
     }
 }

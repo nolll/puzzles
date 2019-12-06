@@ -6,9 +6,10 @@ namespace Core.Computer.Instructions
     {
         public override InstructionType Type => InstructionType.Input;
 
-        public InputInstruction(IList<Parameter> parameters)
-            : base(parameters)
+        public InputInstruction(int[] memory, int position, IList<ParameterType> parameterTypes)
+            : base(memory, position, parameterTypes)
         {
+            ReadParameter(0, ParameterType.Immediate);
         }
     }
 }

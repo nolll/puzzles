@@ -2,9 +2,9 @@ namespace Core.Computer.Instructions
 {
     public class ImmediateParameter : Parameter
     {
-        public override int ReadValue(int[] memory, int position)
+        public ImmediateParameter(int[] memory, int position)
+            : base(memory[position])
         {
-            return memory[position];
         }
     }
 }

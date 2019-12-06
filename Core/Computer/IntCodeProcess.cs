@@ -53,8 +53,8 @@ namespace Core.Computer
 
         private void PerformAddition(Instruction instruction)
         {
-            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
-            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+            var a = instruction.Parameters[0].Value;
+            var b = instruction.Parameters[1].Value;
             var target = _memory[_pointer + 3];
 
             _memory[target] = a + b;
@@ -63,8 +63,8 @@ namespace Core.Computer
 
         private void PerformMultiplication(Instruction instruction)
         {
-            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
-            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+            var a = instruction.Parameters[0].Value;
+            var b = instruction.Parameters[1].Value; 
             var target = _memory[_pointer + 3];
 
             _memory[target] = a * b;
@@ -77,15 +77,15 @@ namespace Core.Computer
             var str = Console.ReadLine() ?? "";
             var input = int.Parse(str);
 
-            var pos = _memory[_pointer + 1];
+            var target = instruction.Parameters[0].Value;
 
-            _memory[pos] = input;
+            _memory[target] = input;
             IncrementPointer(instruction);
         }
 
         private void PerformOutput(Instruction instruction)
         {
-            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
+            var a = instruction.Parameters[0].Value;
 
             Console.WriteLine(a);
             IncrementPointer(instruction);
@@ -93,8 +93,8 @@ namespace Core.Computer
 
         private void PerformJumpIfTrue(Instruction instruction)
         {
-            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
-            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+            var a = instruction.Parameters[0].Value;
+            var b = instruction.Parameters[1].Value;
 
             if (a != 0)
                 _pointer = b;
@@ -104,8 +104,8 @@ namespace Core.Computer
 
         private void PerformJumpIfFalse(Instruction instruction)
         {
-            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
-            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+            var a = instruction.Parameters[0].Value;
+            var b = instruction.Parameters[1].Value;
 
             if (a == 0)
                 _pointer = b;
@@ -115,8 +115,8 @@ namespace Core.Computer
 
         private void PerformLessThan(Instruction instruction)
         {
-            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
-            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+            var a = instruction.Parameters[0].Value;
+            var b = instruction.Parameters[1].Value;
             var target = _memory[_pointer + 3];
 
             _memory[target] = a < b ? 1 : 0;
@@ -125,8 +125,8 @@ namespace Core.Computer
 
         private void PerformEquals(Instruction instruction)
         {
-            var a = instruction.Parameters[0].ReadValue(_memory, _pointer + 1);
-            var b = instruction.Parameters[1].ReadValue(_memory, _pointer + 2);
+            var a = instruction.Parameters[0].Value;
+            var b = instruction.Parameters[1].Value;
             var target = _memory[_pointer + 3];
 
             _memory[target] = a == b ? 1 : 0;

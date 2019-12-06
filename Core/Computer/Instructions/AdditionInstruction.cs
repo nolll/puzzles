@@ -6,49 +6,12 @@ namespace Core.Computer.Instructions
     {
         public override InstructionType Type => InstructionType.Addition;
 
-        public AdditionInstruction(IList<Parameter> parameters)
-            : base(parameters)
+        public AdditionInstruction(int[] memory, int position, IList<ParameterType> parameterTypes)
+            : base(memory, position, parameterTypes)
         {
-        }
-    }
-
-    public class JumpIfTrueInstruction : Instruction
-    {
-        public override InstructionType Type => InstructionType.JumpIfTrue;
-
-        public JumpIfTrueInstruction(IList<Parameter> parameters)
-            : base(parameters)
-        {
-        }
-    }
-
-    public class JumpIfFalseInstruction : Instruction
-    {
-        public override InstructionType Type => InstructionType.JumpIfFalse;
-
-        public JumpIfFalseInstruction(IList<Parameter> parameters)
-            : base(parameters)
-        {
-        }
-    }
-
-    public class LessThanInstruction : Instruction
-    {
-        public override InstructionType Type => InstructionType.LessThan;
-
-        public LessThanInstruction(IList<Parameter> parameters)
-            : base(parameters)
-        {
-        }
-    }
-
-    public class EqualsInstruction : Instruction
-    {
-        public override InstructionType Type => InstructionType.Equals;
-
-        public EqualsInstruction(IList<Parameter> parameters)
-            : base(parameters)
-        {
+            ReadParameter(0);
+            ReadParameter(1);
+            ReadParameter(2, ParameterType.Position);
         }
     }
 }

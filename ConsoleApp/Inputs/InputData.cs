@@ -2,7 +2,9 @@
 {
     public static class InputData
     {
-        public static string IntCodeMemoryDay5 { get; }
+        public static string ComputerProgramDay7 { get; }
+
+        public static string ComputerProgramDay5 { get; }
 
         public static int PasswordLowerbound { get; }
         public static int PasswordUpperbound { get; }
@@ -10,13 +12,15 @@
         public static string WirePathA { get; }
         public static string WirePathB { get; }
 
-        public static string IntCodeMemoryDay2 { get; }
+        public static string ComputerProgramDay2 { get; }
 
         public static string ModulesMasses { get; }
 
         static InputData()
         {
-            IntCodeMemoryDay5 = InputStrings.IntCodeMemoryDay5;
+            ComputerProgramDay7 = InputStrings.ComputerProgramDay7;
+
+            ComputerProgramDay5 = InputStrings.ComputerProgramDay5;
 
             var passwordBounds = InputStrings.PasswordBounds.Split('-');
             PasswordLowerbound = int.Parse(passwordBounds[0]);
@@ -26,7 +30,7 @@
             WirePathA = wirePaths[0].Trim();
             WirePathB = wirePaths[1].Trim();
 
-            IntCodeMemoryDay2 = InputStrings.IntCodeMemoryDay2;
+            ComputerProgramDay2 = InputStrings.ComputerProgramDay2;
 
             ModulesMasses = InputStrings.ModulesMasses;
         }

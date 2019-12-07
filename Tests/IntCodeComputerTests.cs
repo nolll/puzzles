@@ -1,4 +1,3 @@
-using Core;
 using Core.Computer;
 using NUnit.Framework;
 
@@ -12,7 +11,7 @@ namespace Tests
         [TestCase("1,1,1,4,99,5,6,0,99", "30,1,1,4,2,5,6,0,99", 30)]
         public void OutputsAreCorrect(string input, string expectedOutput, int expectedInteger)
         {
-            var computer = new IntCodeComputer(input);
+            var computer = new ConsoleComputer(input);
             var result = computer.Run();
             Assert.That(result.Output, Is.EqualTo(expectedOutput));
             Assert.That(result.Integer, Is.EqualTo(expectedInteger));

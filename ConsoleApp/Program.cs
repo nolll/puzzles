@@ -4,6 +4,7 @@ using Core.Computer;
 using Core.IntersectionFinder;
 using Core.ModuleMass;
 using Core.Orbits;
+using Core.Thrust;
 
 namespace ConsoleApp
 {
@@ -25,7 +26,9 @@ namespace ConsoleApp
             //Day5();
 
             //Day6Part1();
-            Day6Part2();
+            //Day6Part2();
+
+            Day7Part1();
         }
 
         private static void Day1Part1()
@@ -46,7 +49,7 @@ namespace ConsoleApp
 
         private static void Day2Part1()
         {
-            var computer = new IntCodeComputer(InputData.IntCodeMemoryDay2);
+            var computer = new ConsoleComputer(InputData.ComputerProgramDay2);
             var value = computer.Run().Integer;
 
             WriteTitle(2, 1);
@@ -55,7 +58,7 @@ namespace ConsoleApp
 
         private static void Day2Part2()
         {
-            var solutionFinder = new ComputerSolutionFinder(InputData.IntCodeMemoryDay2);
+            var solutionFinder = new ComputerSolutionFinder(InputData.ComputerProgramDay2);
             var result = solutionFinder.FindSolution(19690720);
             var answer = 100 * result.Noun + result.Verb;
 
@@ -93,7 +96,7 @@ namespace ConsoleApp
 
         private static void Day5()
         {
-            var computer = new IntCodeComputer(InputData.IntCodeMemoryDay5);
+            var computer = new ConsoleComputer(InputData.ComputerProgramDay5);
 
             WriteTitle(5);
 
@@ -115,9 +118,19 @@ namespace ConsoleApp
             var calculator = new OrbitCalculator(InputStrings.Orbits);
             var distance = calculator.GetSantaDistance();
 
-            WriteTitle(6, 1);
+            WriteTitle(6, 2);
 
             System.Console.WriteLine($"Distance to Santa: {distance}");
+        }
+
+        private static void Day7Part1()
+        {
+            var calculator = new ThrustCalculator(InputData.ComputerProgramDay7);
+            var maxThrust = calculator.GetMaxThrust();
+
+            WriteTitle(7, 1);
+
+            System.Console.WriteLine($"Maximum thrust: {maxThrust}");
         }
 
         private static void WriteTitle(int day, int? part = null)

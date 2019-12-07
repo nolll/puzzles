@@ -14,7 +14,7 @@
 
         public Result FindSolution(int target)
         {
-            var computer = new IntCodeComputer(_input);
+            var computer = new ConsoleComputer(_input);
             for (var noun = LowerBound; noun <= UpperBound; noun++)
             {
                 for (var verb = LowerBound; verb <= UpperBound; verb++)

@@ -8,10 +8,15 @@ namespace Core.Computer
         private readonly int[] _memory;
         private int _pointer;
 
-        public IntCodeProcess(int[] memory)
+        private readonly Action<int> _writeOutputFunc;
+        private readonly Func<int> _readInputFunc;
+
+        public IntCodeProcess(int[] memory, Func<int> readInputFunc, Action<int> writeOutputFunc)
         {
             _memory = memory;
             _pointer = 0;
+            _readInputFunc = readInputFunc;
+            _writeOutputFunc = writeOutputFunc;
         }
 
         public IntCodeResult Run()
@@ -73,9 +78,7 @@ namespace Core.Computer
 
         private void PerformInput(Instruction instruction)
         {
-            Console.Write("Enter the ID of the system: ");
-            var str = Console.ReadLine() ?? "";
-            var input = int.Parse(str);
+            var input = _readInputFunc();
 
             var target = instruction.Parameters[0].Value;
 
@@ -87,7 +90,7 @@ namespace Core.Computer
         {
             var a = instruction.Parameters[0].Value;
 
-            Console.WriteLine(a);
+            _writeOutputFunc(a);
             IncrementPointer(instruction);
         }
 

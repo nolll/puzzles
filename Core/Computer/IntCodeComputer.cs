@@ -1,10 +1,10 @@
 ﻿namespace Core.Computer
 {
-    public class IntCodeComputer
+    public abstract class IntCodeComputer
     {
         private readonly int[] _startMemory;
 
-        public IntCodeComputer(string input)
+        protected IntCodeComputer(string input)
         {
             _startMemory = MemoryParser.Parse(input);
         }
@@ -14,8 +14,12 @@
             var memory = CopyMemory(_startMemory);
             if (noun != null) memory[1] = noun.Value;
             if(verb != null) memory[2] = verb.Value;
-            return new IntCodeProcess(memory).Run();
+            var process = new IntCodeProcess(memory, ReadInput, WriteOutput);
+            return process.Run();
         }
+
+        protected abstract int ReadInput();
+        protected abstract void WriteOutput(int output);
 
         private static int[] CopyMemory(int[] memory)
         {

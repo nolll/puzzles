@@ -28,7 +28,8 @@ namespace ConsoleApp
             //Day6Part1();
             //Day6Part2();
 
-            Day7Part1();
+            //Day7Part1();
+            Day7Part2();
         }
 
         private static void Day1Part1()
@@ -126,9 +127,19 @@ namespace ConsoleApp
         private static void Day7Part1()
         {
             var calculator = new ThrustCalculator(InputData.ComputerProgramDay7);
-            var maxThrust = calculator.GetMaxThrust();
+            var maxThrust = calculator.GetMaxThrust(new[] { 0, 1, 2, 3, 4 });
 
             WriteTitle(7, 1);
+
+            System.Console.WriteLine($"Maximum thrust: {maxThrust}");
+        }
+
+        private static void Day7Part2()
+        {
+            var calculator = new ThrustCalculator(InputData.ComputerProgramDay7);
+            var maxThrust = calculator.GetMaxThrust(new[] { 5, 6, 7, 8, 9 });
+
+            WriteTitle(7, 2);
 
             System.Console.WriteLine($"Maximum thrust: {maxThrust}");
         }

@@ -20,9 +20,9 @@ namespace Core.Thrust
                 yield return new Amplifier(_computerMemory);
         }
 
-        public int GetMaxThrust()
+        public int GetMaxThrust(int[] phases)
         {
-            var sequences = new SequenceGenerator().GetSequences(new [] {0, 1, 2, 3, 4});
+            var sequences = new SequenceGenerator().GetSequences(phases);
             var highestThrust = 0;
             foreach (var sequence in sequences)
             {

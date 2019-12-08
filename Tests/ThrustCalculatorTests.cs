@@ -26,7 +26,7 @@ namespace Tests
         public void ThrustCalculationsAreCorrect(string program, int phase0, int phase1, int phase2, int phase3, int phase4, int expectedThrust)
         {
             var sequence = new[] { phase0, phase1, phase2, phase3, phase4 };
-            var calculator = new ThrustCalculator2(program);
+            var calculator = new ThrustCalculator(program);
             var thrust = calculator.GetThrust(sequence);
 
             Assert.That(thrust, Is.EqualTo(expectedThrust));

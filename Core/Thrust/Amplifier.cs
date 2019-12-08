@@ -1,4 +1,3 @@
-using System;
 using Core.Computer;
 
 namespace Core.Thrust

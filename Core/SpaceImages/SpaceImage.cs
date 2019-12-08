@@ -64,8 +64,6 @@ namespace Core.SpaceImages
 
                 sb.AppendLine();
             }
-            sb.AppendLine();
-            sb.AppendLine();
 
             return sb.ToString();
         }

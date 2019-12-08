@@ -31,7 +31,6 @@ namespace Core.Thrust
         private void ComputerOutput(int output)
         {
             Output = output;
-            Console.WriteLine($"{Name} output: {output}");
             NextAmp?.Start(output);
         }
 

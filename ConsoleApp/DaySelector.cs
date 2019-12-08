@@ -18,8 +18,11 @@ namespace ConsoleApp
             new Day08()
         };
 
-        public Day GetDay()
+        public Day GetDay(int? selectedDay)
         {
+            if (selectedDay != null)
+                return _days[selectedDay.Value - 1];
+
             return _days.Last();
         }
     }

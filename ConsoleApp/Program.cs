@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using ConsoleApp.Inputs;
 using Core.Computer;
 using Core.IntersectionFinder;
@@ -32,7 +33,8 @@ namespace ConsoleApp
             //Day7Part1();
             //Day7Part2();
 
-            Day8Part1();
+            //Day8Part1();
+            Day8Part2();
         }
 
         private static void Day1Part1()
@@ -40,7 +42,7 @@ namespace ConsoleApp
             var massCalculator = new MassCalculator(InputData.ModulesMasses);
 
             WriteTitle(1, 1);
-            System.Console.WriteLine($"Required fuel: {massCalculator.MassFuel}");
+            Console.WriteLine($"Required fuel: {massCalculator.MassFuel}");
         }
 
         private static void Day1Part2()
@@ -48,7 +50,7 @@ namespace ConsoleApp
             var massCalculator = new MassCalculator(InputData.ModulesMasses);
 
             WriteTitle(1, 2);
-            System.Console.WriteLine($"Required fuel: {massCalculator.TotalFuel}");
+            Console.WriteLine($"Required fuel: {massCalculator.TotalFuel}");
         }
 
         private static void Day2Part1()
@@ -58,7 +60,7 @@ namespace ConsoleApp
             var value = computer.Output;
 
             WriteTitle(2, 1);
-            System.Console.WriteLine($"Value at position 0: {value}");
+            Console.WriteLine($"Value at position 0: {value}");
         }
 
         private static void Day2Part2()
@@ -68,7 +70,7 @@ namespace ConsoleApp
             var answer = 100 * result.Noun + result.Verb;
 
             WriteTitle(2, 2);
-            System.Console.WriteLine($"The answer is: {answer}");
+            Console.WriteLine($"The answer is: {answer}");
         }
 
         private static void Day3Part1()
@@ -77,7 +79,7 @@ namespace ConsoleApp
             var result = intersectionFinder.ClosestIntersection.Distance;
 
             WriteTitle(3, 1);
-            System.Console.WriteLine($"The distance of the closest intersection is: {result}");
+            Console.WriteLine($"The distance of the closest intersection is: {result}");
         }
 
         private static void Day3Part2()
@@ -86,7 +88,7 @@ namespace ConsoleApp
             var result = intersectionFinder.FewestSteps.Steps;
 
             WriteTitle(3, 2);
-            System.Console.WriteLine($"The fewest combined steps to the closest intersection is: {result}");
+            Console.WriteLine($"The fewest combined steps to the closest intersection is: {result}");
         }
 
         private static void Day4()
@@ -96,7 +98,7 @@ namespace ConsoleApp
             var passwordCount = passwords.Count();
 
             WriteTitle(4);
-            System.Console.WriteLine($"Number of valid passwords: {passwordCount}");
+            Console.WriteLine($"Number of valid passwords: {passwordCount}");
         }
 
         private static void Day5()
@@ -115,7 +117,7 @@ namespace ConsoleApp
 
             WriteTitle(6, 1);
 
-            System.Console.WriteLine($"Total number of orbits: {orbitCount}");
+            Console.WriteLine($"Total number of orbits: {orbitCount}");
         }
 
         private static void Day6Part2()
@@ -125,7 +127,7 @@ namespace ConsoleApp
 
             WriteTitle(6, 2);
 
-            System.Console.WriteLine($"Distance to Santa: {distance}");
+            Console.WriteLine($"Distance to Santa: {distance}");
         }
 
         private static void Day7Part1()
@@ -135,7 +137,7 @@ namespace ConsoleApp
 
             WriteTitle(7, 1);
 
-            System.Console.WriteLine($"Maximum thrust: {maxThrust}");
+            Console.WriteLine($"Maximum thrust: {maxThrust}");
         }
 
         private static void Day7Part2()
@@ -145,25 +147,35 @@ namespace ConsoleApp
 
             WriteTitle(7, 2);
 
-            System.Console.WriteLine($"Maximum thrust: {maxThrust}");
+            Console.WriteLine($"Maximum thrust: {maxThrust}");
         }
 
         private static void Day8Part1()
         {
-            var calculator = new ImageDataValidator(InputData.ImageData);
-            var checksum = calculator.Checksum;
+            var image = new SpaceImage(InputData.ImageData);
+            var checksum = image.Checksum;
 
             WriteTitle(8, 1);
 
-            System.Console.WriteLine($"Checksum: {checksum}");
+            Console.WriteLine($"Checksum: {checksum}");
+        }
+
+        private static void Day8Part2()
+        {
+            var image = new SpaceImage(InputData.ImageData);
+
+            WriteTitle(8, 2);
+
+            Console.WriteLine("Image:");
+            Console.WriteLine(image.Print());
         }
 
         private static void WriteTitle(int day, int? part = null)
         {
-            System.Console.WriteLine();
+            Console.WriteLine();
             if (part == null)
-                System.Console.WriteLine($"Day {day}:");
-            System.Console.WriteLine($"Day {day}, part {part}:");
+                Console.WriteLine($"Day {day}:");
+            Console.WriteLine($"Day {day}, part {part}:");
         }
     }
 }

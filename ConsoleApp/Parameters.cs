@@ -8,16 +8,19 @@ namespace ConsoleApp
         private readonly IDictionary<string, string> _dictionary;
 
         public int? Day { get; }
+        public int? Year { get; }
         public bool ShowHelp { get; }
 
         public Parameters(IEnumerable<string> args)
         {
             _dictionary = GetDictionary(args);
             Day = GetDay();
+            Year = GetYear();
             ShowHelp = GetShowHelp();
         }
 
         private int? GetDay() => GetIntValue("-d", "--day");
+        private int? GetYear() => GetIntValue("-y", "--year");
         private bool GetShowHelp() => GetBoolValue("-h", "--help") ?? false;
 
         private bool? GetBoolValue(params string[] keys)

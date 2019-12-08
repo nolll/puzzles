@@ -21,7 +21,11 @@ namespace ConsoleApp
         public Day GetDay(int? selectedDay)
         {
             if (selectedDay != null)
-                return _days[selectedDay.Value - 1];
+            {
+                if(selectedDay < _days.Count)
+                    return _days[selectedDay.Value - 1];
+                return null;
+            }
 
             return _days.Last();
         }

@@ -2,6 +2,8 @@
 {
     public static class InputData
     {
+        public static string ImageData { get; }
+
         public static string ComputerProgramDay7 { get; }
 
         public static string ComputerProgramDay5 { get; }
@@ -18,6 +20,8 @@
 
         static InputData()
         {
+            ImageData = InputStrings.ImageData;
+
             ComputerProgramDay7 = InputStrings.ComputerProgramDay7;
 
             ComputerProgramDay5 = InputStrings.ComputerProgramDay5;

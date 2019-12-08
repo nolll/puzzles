@@ -4,6 +4,7 @@ using Core.Computer;
 using Core.IntersectionFinder;
 using Core.ModuleMass;
 using Core.Orbits;
+using Core.SpaceImages;
 using Core.Thrust;
 
 namespace ConsoleApp
@@ -29,7 +30,9 @@ namespace ConsoleApp
             //Day6Part2();
 
             //Day7Part1();
-            Day7Part2();
+            //Day7Part2();
+
+            Day8Part1();
         }
 
         private static void Day1Part1()
@@ -145,10 +148,20 @@ namespace ConsoleApp
             System.Console.WriteLine($"Maximum thrust: {maxThrust}");
         }
 
+        private static void Day8Part1()
+        {
+            var calculator = new ImageDataValidator(InputData.ImageData);
+            var checksum = calculator.Checksum;
+
+            WriteTitle(8, 1);
+
+            System.Console.WriteLine($"Checksum: {checksum}");
+        }
+
         private static void WriteTitle(int day, int? part = null)
         {
             System.Console.WriteLine();
-            if(part == null)
+            if (part == null)
                 System.Console.WriteLine($"Day {day}:");
             System.Console.WriteLine($"Day {day}, part {part}:");
         }

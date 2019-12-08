@@ -4,7 +4,9 @@
     {
         private readonly int[] _startMemory;
         private IntCodeProcess _process;
-        
+
+        public int Result => _process.Result;
+
         protected IntCodeComputer(string input)
         {
             _startMemory = MemoryParser.Parse(input);

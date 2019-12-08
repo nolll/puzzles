@@ -36,15 +36,17 @@ D)E
 E)F
 B)G
 G)H
-D)SAN
+D)I
 E)J
-J)YOU
-YOU)L";
+J)K
+K)L
+K)YOU
+I)SAN";
 
             var calculator = new OrbitCalculator(input);
             var result = calculator.GetSantaDistance();
 
-            Assert.That(result, Is.EqualTo(3));
+            Assert.That(result, Is.EqualTo(4));
         }
     }
 }

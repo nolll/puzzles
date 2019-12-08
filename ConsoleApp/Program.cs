@@ -28,13 +28,13 @@ namespace ConsoleApp
             //Day5();
 
             //Day6Part1();
-            //Day6Part2();
+            Day6Part2();
 
             //Day7Part1();
             //Day7Part2();
 
             //Day8Part1();
-            Day8Part2();
+            //Day8Part2();
         }
 
         private static void Day1Part1()

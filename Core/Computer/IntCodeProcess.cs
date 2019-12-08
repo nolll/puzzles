@@ -11,6 +11,8 @@ namespace Core.Computer
         private readonly Action<int> _writeOutputFunc;
         private readonly Func<int> _readInputFunc;
 
+        public int Result => _memory[0]; 
+
         public IntCodeProcess(int[] memory, Func<int> readInputFunc, Action<int> writeOutputFunc)
         {
             _memory = memory;

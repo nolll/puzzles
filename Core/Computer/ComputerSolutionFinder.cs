@@ -20,7 +20,7 @@
                 for (var verb = LowerBound; verb <= UpperBound; verb++)
                 {
                     var result = computer.Run(noun, verb);
-                    if(result.Integer == target)
+                    if(result == target)
                         return new Result(noun, verb, target);
                 }
             }

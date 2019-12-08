@@ -13,8 +13,7 @@ namespace Tests
         {
             var computer = new ConsoleComputer(input);
             var result = computer.Run();
-            Assert.That(result.Output, Is.EqualTo(expectedOutput));
-            Assert.That(result.Integer, Is.EqualTo(expectedInteger));
+            Assert.That(result, Is.EqualTo(expectedInteger));
         }
     }
 }

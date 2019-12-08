@@ -9,7 +9,7 @@
             _startMemory = MemoryParser.Parse(input);
         }
 
-        public IntCodeResult Run(int? noun = null, int? verb = null)
+        public int Run(int? noun = null, int? verb = null)
         {
             var memory = CopyMemory(_startMemory);
             if (noun != null) memory[1] = noun.Value;

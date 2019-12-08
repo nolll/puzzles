@@ -19,7 +19,7 @@ namespace Core.Computer
             _writeOutputFunc = writeOutputFunc;
         }
 
-        public IntCodeResult Run()
+        public int Run()
         {
             while (_pointer < _memory.Length)
             {
@@ -38,7 +38,7 @@ namespace Core.Computer
                     PerformInput(instruction);
 
                 if (instruction.Type == InstructionType.Output)
-                    PerformOutput(instruction);
+                    return PerformOutput(instruction);
 
                 if (instruction.Type == InstructionType.JumpIfTrue)
                     PerformJumpIfTrue(instruction);
@@ -53,7 +53,7 @@ namespace Core.Computer
                     PerformEquals(instruction);
             }
 
-            return new IntCodeResult(_memory);
+            return _memory[0];
         }
 
         private void PerformAddition(Instruction instruction)
@@ -86,12 +86,12 @@ namespace Core.Computer
             IncrementPointer(instruction);
         }
 
-        private void PerformOutput(Instruction instruction)
+        private int PerformOutput(Instruction instruction)
         {
             var a = instruction.Parameters[0].Value;
 
-            _writeOutputFunc(a);
             IncrementPointer(instruction);
+            return a;
         }
 
         private void PerformJumpIfTrue(Instruction instruction)

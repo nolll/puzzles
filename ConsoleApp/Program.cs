@@ -50,7 +50,7 @@ namespace ConsoleApp
         private static void Day2Part1()
         {
             var computer = new ConsoleComputer(InputData.ComputerProgramDay2);
-            var value = computer.Run().Integer;
+            var value = computer.Run();
 
             WriteTitle(2, 1);
             System.Console.WriteLine($"Value at position 0: {value}");

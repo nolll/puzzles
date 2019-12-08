@@ -34,8 +34,7 @@ namespace Core.Thrust
             _secondInput = secondInput;
             _inputCount = 0;
             _output = 0;
-            _computer.Run();
-            return _output;
+            return _computer.Run();
         }
     }
 }

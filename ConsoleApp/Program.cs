@@ -51,7 +51,7 @@ namespace ConsoleApp
         private static void Day2Part1()
         {
             var computer = new ConsoleComputer(InputData.ComputerProgramDay2);
-            computer.Run();
+            computer.Start();
             var value = computer.Output;
 
             WriteTitle(2, 1);
@@ -102,7 +102,7 @@ namespace ConsoleApp
 
             WriteTitle(5);
 
-            computer.Run();
+            computer.Start();
         }
 
         private static void Day6Part1()
@@ -137,7 +137,7 @@ namespace ConsoleApp
 
         private static void Day7Part2()
         {
-            var calculator = new ThrustCalculator(InputData.ComputerProgramDay7);
+            var calculator = new ThrustCalculator2(InputData.ComputerProgramDay7);
             var maxThrust = calculator.GetMaxThrust(new[] { 5, 6, 7, 8, 9 });
 
             WriteTitle(7, 2);

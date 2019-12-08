@@ -1,3 +1,4 @@
+using System;
 using Core.Computer;
 
 namespace Core.Thrust
@@ -6,14 +7,16 @@ namespace Core.Thrust
     {
         private int _input;
         private bool _isStarted;
-        private int _output;
         private readonly IntCodeComputer _computer;
 
         public Amplifier NextAmp { get; set; }
         public int Phase { get; set; }
+        public string Name { get; }
+        public int Output { get; private set; }
 
-        public Amplifier(string memory)
+        public Amplifier(string name, string memory)
         {
+            Name = name;
             _computer = new AmplifierComputer(memory, ComputerInput, ComputerOutput);
         }
 
@@ -27,14 +30,18 @@ namespace Core.Thrust
 
         private void ComputerOutput(int output)
         {
-            _output = NextAmp?.GetOutput(output) ?? output;
+            Output = output;
+            Console.WriteLine($"{Name} output: {output}");
+            NextAmp?.Start(output);
         }
 
-        public int GetOutput(int input)
+        public void Start(int input)
         {
             _input = input;
-            _computer.Run();
-            return _output;
+            if(_isStarted)
+                _computer.Resume();
+            else
+                _computer.Start();
         }
     }
 }

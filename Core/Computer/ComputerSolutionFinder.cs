@@ -19,7 +19,7 @@
             {
                 for (var verb = LowerBound; verb <= UpperBound; verb++)
                 {
-                    computer.Run(noun, verb);
+                    computer.Start(noun, verb);
                     var result = computer.Output;
                     if(result == target)
                         return new Result(noun, verb, target);

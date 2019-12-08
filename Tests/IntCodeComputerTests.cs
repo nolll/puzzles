@@ -12,7 +12,7 @@ namespace Tests
         public void OutputsAreCorrect(string input, string expectedOutput, int expectedInteger)
         {
             var computer = new ConsoleComputer(input);
-            computer.Run();
+            computer.Start();
             var result = computer.Output;
             Assert.That(result, Is.EqualTo(expectedInteger));
         }

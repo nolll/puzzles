@@ -3,19 +3,25 @@
     public abstract class IntCodeComputer
     {
         private readonly int[] _startMemory;
-
+        private IntCodeProcess _process;
+        
         protected IntCodeComputer(string input)
         {
             _startMemory = MemoryParser.Parse(input);
         }
 
-        public void Run(int? noun = null, int? verb = null)
+        public void Start(int? noun = null, int? verb = null)
         {
             var memory = CopyMemory(_startMemory);
             if (noun != null) memory[1] = noun.Value;
             if(verb != null) memory[2] = verb.Value;
-            var process = new IntCodeProcess(memory, ReadInput, WriteOutput);
-            process.Run();
+            _process = new IntCodeProcess(memory, ReadInput, WriteOutput);
+            _process.Run();
+        }
+
+        public void Resume()
+        {
+            _process.Run();
         }
 
         protected abstract int ReadInput();

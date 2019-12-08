@@ -4,11 +4,13 @@ namespace Core.Thrust
 {
     public class Amplifier
     {
-        private int _firstInput;
-        private int _secondInput;
-        private int _inputCount;
+        private int _input;
+        private bool _isStarted;
         private int _output;
         private readonly IntCodeComputer _computer;
+
+        public Amplifier NextAmp { get; set; }
+        public int Phase { get; set; }
 
         public Amplifier(string memory)
         {
@@ -17,24 +19,22 @@ namespace Core.Thrust
 
         private int ComputerInput()
         {
-            _inputCount++;
-            if (_inputCount == 1)
-                return _firstInput;
-            return _secondInput;
+            if (_isStarted)
+                return _input;
+            _isStarted = true;
+            return Phase;
         }
 
         private void ComputerOutput(int output)
         {
-            _output = output;
+            _output = NextAmp?.GetOutput(output) ?? output;
         }
 
-        public int GetOutput(int firstInput, int secondInput)
+        public int GetOutput(int input)
         {
-            _firstInput = firstInput;
-            _secondInput = secondInput;
-            _inputCount = 0;
-            _output = 0;
-            return _computer.Run();
+            _input = input;
+            _computer.Run();
+            return _output;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Core.Computer
                     PerformInput(instruction);
 
                 if (instruction.Type == InstructionType.Output)
-                    return PerformOutput(instruction);
+                    PerformOutput(instruction);
 
                 if (instruction.Type == InstructionType.JumpIfTrue)
                     PerformJumpIfTrue(instruction);
@@ -86,12 +86,12 @@ namespace Core.Computer
             IncrementPointer(instruction);
         }
 
-        private int PerformOutput(Instruction instruction)
+        private void PerformOutput(Instruction instruction)
         {
             var a = instruction.Parameters[0].Value;
 
             IncrementPointer(instruction);
-            return a;
+            _writeOutputFunc(a);
         }
 
         private void PerformJumpIfTrue(Instruction instruction)

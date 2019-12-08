@@ -16,8 +16,22 @@ namespace Core.Thrust
 
         private IEnumerable<Amplifier> CreateAmplifiers()
         {
-            for (var i = 0; i < 5; i++)
-                yield return new Amplifier(_computerMemory);
+            var amp1 = new Amplifier(_computerMemory);
+            var amp2 = new Amplifier(_computerMemory);
+            var amp3 = new Amplifier(_computerMemory);
+            var amp4 = new Amplifier(_computerMemory);
+            var amp5 = new Amplifier(_computerMemory);
+
+            amp1.NextAmp = amp2;
+            amp2.NextAmp = amp3;
+            amp3.NextAmp = amp4;
+            amp4.NextAmp = amp5;
+
+            yield return amp1;
+            yield return amp2;
+            yield return amp3;
+            yield return amp4;
+            yield return amp5;
         }
 
         public int GetMaxThrust(int[] phases)
@@ -36,13 +50,12 @@ namespace Core.Thrust
 
         public int GetThrust(int[] sequence)
         {
-            var thrust = 0;
             for (var i = 0; i < 5; i++)
             {
-                thrust = _amplifiers[i].GetOutput(sequence[i], thrust);
+                _amplifiers[i].Phase = sequence[i];
             }
 
-            return thrust;
+            return _amplifiers[0].GetOutput(0);
         }
     }
 }

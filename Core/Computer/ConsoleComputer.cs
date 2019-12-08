@@ -4,6 +4,8 @@ namespace Core.Computer
 {
     public class ConsoleComputer : IntCodeComputer
     {
+        public int Output { get; private set; } = 0;
+
         public ConsoleComputer(string input) : base(input)
         {
         }
@@ -17,6 +19,7 @@ namespace Core.Computer
 
         protected override void WriteOutput(int output)
         {
+            Output = output;
             Console.WriteLine(output);
         }
     }

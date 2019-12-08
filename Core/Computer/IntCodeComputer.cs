@@ -9,13 +9,13 @@
             _startMemory = MemoryParser.Parse(input);
         }
 
-        public int Run(int? noun = null, int? verb = null)
+        public void Run(int? noun = null, int? verb = null)
         {
             var memory = CopyMemory(_startMemory);
             if (noun != null) memory[1] = noun.Value;
             if(verb != null) memory[2] = verb.Value;
             var process = new IntCodeProcess(memory, ReadInput, WriteOutput);
-            return process.Run();
+            process.Run();
         }
 
         protected abstract int ReadInput();

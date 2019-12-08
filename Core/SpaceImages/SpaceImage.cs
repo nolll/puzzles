@@ -53,19 +53,8 @@ namespace Core.SpaceImages
 
         public string Print()
         {
-            var sb = new StringBuilder();
-            foreach (var row in _matrix)
-            {
-                foreach (var pixel in row)
-                {
-                    var output = pixel == '1' ? 'X' : ' ';
-                    sb.Append(output);
-                }
-
-                sb.AppendLine();
-            }
-
-            return sb.ToString();
+            var printer = new SpaceImagePrinter();
+            return printer.Print(_matrix);
         }
 
         public int Checksum

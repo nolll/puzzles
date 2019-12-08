@@ -6,15 +6,17 @@ namespace Core.SpaceImages
     public class SpaceImageLayer
     {
         private readonly string _data;
+        private readonly int _width;
         private readonly IList<IList<char>> _matrix;
         
         public int NumberOfZeros => GetCharCount(_data, '0');
         public int NumberOfOnes => GetCharCount(_data, '1');
         public int NumberOfTwos => GetCharCount(_data, '2');
         
-        public SpaceImageLayer(string data)
+        public SpaceImageLayer(string data, int width = SpaceImageDimensions.Width)
         {
             _data = data;
+            _width = width;
             _matrix = CreateMatrix(data);
         }
 
@@ -26,16 +28,21 @@ namespace Core.SpaceImages
 
         private IEnumerable<IList<char>> GetRows(string imageData)
         {
-            const int rowLength = SpaceImageDimensions.Width;
-            for (var i = 0; i < imageData.Length; i += rowLength)
+            for (var i = 0; i < imageData.Length; i += _width)
             {
-                yield return new List<char>(imageData.Substring(i, rowLength).ToCharArray());
+                yield return new List<char>(imageData.Substring(i, _width).ToCharArray());
             }
         }
 
         public char GetChar(int x, int y)
         {
             return _matrix[y][x];
+        }
+
+        public string Print()
+        {
+            var printer = new SpaceImagePrinter();
+            return printer.Print(_matrix);
         }
 
         private int GetCharCount(string data, char character)

@@ -4,31 +4,6 @@ using NUnit.Framework;
 
 namespace Tests
 {
-    public class BoostTest
-    {
-        //109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99 takes no input and produces a copy of itself as output.
-        //1102,34915192,34915192,7,4,7,99,0 should output a 16-digit number.
-        //104,1125899906842624,99 should output the large number in the middle.
-
-        [Test]
-        public void ReturnsInputMemoryAsOutputMemory()
-        {
-
-        }
-
-        [Test]
-        public void Outputs16DigitNumber()
-        {
-
-        }
-
-        [Test]
-        public void ReturnsLargeMiddleNumber()
-        {
-
-        }
-    }
-
     public class ThrustCalculatorTests
     {
         [TestCase("3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0", 4, 3, 2, 1, 0, 43210)]

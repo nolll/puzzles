@@ -48,12 +48,12 @@ namespace Core.Computer
 
         public class Result
         {
-            private readonly int[] _memory;
             public int Output { get; }
+            public string MemoryString { get; }
 
             public Result(int output, int[] memory)
             {
-                _memory = memory;
+                MemoryString = string.Join(',', memory);
                 Output = output;
             }
         }

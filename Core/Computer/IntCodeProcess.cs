@@ -10,6 +10,7 @@ namespace Core.Computer
 
         private readonly Action<int> _writeOutputFunc;
         private readonly Func<int> _readInputFunc;
+        public int[] Memory => _memory;
 
         public int Result => _memory[0]; 
 

@@ -26,6 +26,8 @@
             _process.Run();
         }
 
+        public int[] Memory => _process.Memory;
+
         protected abstract int ReadInput();
         protected abstract void WriteOutput(int output);
 

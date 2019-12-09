@@ -24,26 +24,38 @@ namespace Core.Computer
         }
     }
 
-    public class AmplifierComputer : IntCodeComputer
+    public class BoostTester
     {
-        private readonly Func<int> _readInputFunc;
-        private readonly Action<int> _writeOutputFunc;
+        private int _output;
 
-        public AmplifierComputer(string input, Func<int> readInputFunc, Action<int> writeOutputFunc)
-            : base(input)
+        public Result Run(string program)
         {
-            _readInputFunc = readInputFunc;
-            _writeOutputFunc = writeOutputFunc;
+            var computer = new AmplifierComputer(program, ReadInput, WriteOutput);
+            computer.Start();
+
+            return new Result(_output, computer.Memory);
         }
 
-        protected override int ReadInput()
+        public int ReadInput()
         {
-            return _readInputFunc();
+            return 0;
         }
 
-        protected override void WriteOutput(int output)
+        public void WriteOutput(int output)
         {
-            _writeOutputFunc(output);
+            _output = output;
+        }
+
+        public class Result
+        {
+            private readonly int[] _memory;
+            public int Output { get; }
+
+            public Result(int output, int[] memory)
+            {
+                _memory = memory;
+                Output = output;
+            }
         }
     }
 }

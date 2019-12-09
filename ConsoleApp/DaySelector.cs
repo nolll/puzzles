@@ -1,34 +1,32 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ConsoleApp.Days;
+using ConsoleApp.Events;
+using ConsoleApp.Events.Event2019;
 
 namespace ConsoleApp
 {
     public class DaySelector
     {
-        private readonly IList<Day> _days = new List<Day>
+        private readonly IList<Event> _events = new List<Event>
         {
-            new Day01(),
-            new Day02(),
-            new Day03(),
-            new Day04(),
-            new Day05(),
-            new Day06(),
-            new Day07(),
-            new Day08(),
-            new Day09()
+            new Event2019()
         };
 
-        public Day GetDay(int? selectedDay)
+        public Day GetDay(int? selectedYear, int? selectedDay)
         {
-            if (selectedDay != null)
+            var year = GetEvent(selectedYear);
+            return year.GetDay(selectedDay);
+        }
+
+        private Event GetEvent(int? selectedYear)
+        {
+            if (selectedYear != null)
             {
-                if(selectedDay < _days.Count)
-                    return _days[selectedDay.Value - 1];
-                return null;
+                var year = _events.FirstOrDefault(o => o.Year == selectedYear.Value);
+                return year ?? _events.Last();
             }
 
-            return _days.Last();
+            return _events.Last();
         }
     }
 }

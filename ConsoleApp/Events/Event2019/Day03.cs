@@ -2,7 +2,7 @@
 using ConsoleApp.Inputs;
 using Core.IntersectionFinder;
 
-namespace ConsoleApp.Days
+namespace ConsoleApp.Events.Event2019
 {
     public class Day03 : Day
     {

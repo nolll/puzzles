@@ -2,7 +2,7 @@
 using ConsoleApp.Inputs;
 using Core.SpaceImages;
 
-namespace ConsoleApp.Days
+namespace ConsoleApp.Events.Event2019
 {
     public class Day08 : Day
     {

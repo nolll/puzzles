@@ -2,7 +2,7 @@
 using ConsoleApp.Inputs;
 using Core.Orbits;
 
-namespace ConsoleApp.Days
+namespace ConsoleApp.Events.Event2019
 {
     public class Day06 : Day
     {

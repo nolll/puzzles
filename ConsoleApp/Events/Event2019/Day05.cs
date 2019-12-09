@@ -2,7 +2,7 @@
 using ConsoleApp.Inputs;
 using Core.Computer;
 
-namespace ConsoleApp.Days
+namespace ConsoleApp.Events.Event2019
 {
     public class Day05 : Day
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using ConsoleApp.Inputs;
 
-namespace ConsoleApp.Days
+namespace ConsoleApp.Events.Event2019
 {
     public class Day04 : Day
     {

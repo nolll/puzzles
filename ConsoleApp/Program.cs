@@ -15,7 +15,7 @@ namespace ConsoleApp
             }
 
             var daySelector = new DaySelector();
-            var day = daySelector.GetDay(parameters.Day);
+            var day = daySelector.GetDay(parameters.Year, parameters.Day);
             if (day == null)
             {
                 Console.WriteLine("The specified day could not be found.");

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Computer.Instructions;
+using Core.Computer.Parameters;
 
 namespace Core.Computer
 {
@@ -65,11 +66,34 @@ namespace Core.Computer
             return Result;
         }
 
+        private long ReadParam(Parameter p)
+        {
+            var storedValue = ReadFromMemory(p.Position);
+
+            if (p.Type == ParameterType.Immediate)
+                return storedValue;
+
+            if (p.Type == ParameterType.Position)
+                return ReadFromMemory((int)storedValue);
+
+            return ReadFromMemory((int)storedValue + _relativeBase);
+        }
+
+        private long ReadTargetPosition(Parameter p)
+        {
+            var storedValue = p.Position;
+
+            if (p.Type == ParameterType.Relative)
+                return ReadFromMemory(storedValue) + _relativeBase;
+
+            return ReadFromMemory(storedValue);
+        }
+
         private void PerformAddition(Instruction instruction)
         {
-            var a = instruction.Parameters[0].Value;
-            var b = instruction.Parameters[1].Value;
-            var target = ReadFromMemory(_pointer + 3);
+            var a = ReadParam(instruction.Parameters[0]);
+            var b = ReadParam(instruction.Parameters[1]);
+            var target = ReadTargetPosition(instruction.Parameters[2]);
 
             WriteToMemory((int) target, a + b);
             IncrementPointer(instruction);
@@ -77,18 +101,18 @@ namespace Core.Computer
 
         private void PerformMultiplication(Instruction instruction)
         {
-            var a = instruction.Parameters[0].Value;
-            var b = instruction.Parameters[1].Value; 
-            var target = ReadFromMemory(_pointer + 3);
+            var a = ReadParam(instruction.Parameters[0]);
+            var b = ReadParam(instruction.Parameters[1]);
+            var target = ReadTargetPosition(instruction.Parameters[2]);
 
-            _memory[(int)target] = a * b;
+            WriteToMemory((int)target, a * b);
             IncrementPointer(instruction);
         }
 
         private void PerformInput(Instruction instruction)
         {
             var input = _readInputFunc();
-            var target = instruction.Parameters[0].Value;
+            var target = ReadTargetPosition(instruction.Parameters[0]);
 
             WriteToMemory((int) target, input);
             IncrementPointer(instruction);
@@ -96,7 +120,7 @@ namespace Core.Computer
 
         private void PerformOutput(Instruction instruction)
         {
-            var a = instruction.Parameters[0].Value;
+            var a = ReadParam(instruction.Parameters[0]);
 
             IncrementPointer(instruction);
             _writeOutputFunc(a);
@@ -104,8 +128,8 @@ namespace Core.Computer
 
         private void PerformJumpIfTrue(Instruction instruction)
         {
-            var a = instruction.Parameters[0].Value;
-            var b = instruction.Parameters[1].Value;
+            var a = ReadParam(instruction.Parameters[0]);
+            var b = ReadParam(instruction.Parameters[1]);
 
             if (a != 0)
                 _pointer = (int)b;
@@ -115,8 +139,8 @@ namespace Core.Computer
 
         private void PerformJumpIfFalse(Instruction instruction)
         {
-            var a = instruction.Parameters[0].Value;
-            var b = instruction.Parameters[1].Value;
+            var a = ReadParam(instruction.Parameters[0]);
+            var b = ReadParam(instruction.Parameters[1]);
 
             if (a == 0)
                 _pointer = (int)b;
@@ -126,9 +150,9 @@ namespace Core.Computer
 
         private void PerformLessThan(Instruction instruction)
         {
-            var a = instruction.Parameters[0].Value;
-            var b = instruction.Parameters[1].Value;
-            var target = ReadFromMemory(_pointer + 3);
+            var a = ReadParam(instruction.Parameters[0]);
+            var b = ReadParam(instruction.Parameters[1]);
+            var target = ReadTargetPosition(instruction.Parameters[2]);
 
             WriteToMemory((int) target, a < b ? 1 : 0);
             IncrementPointer(instruction);
@@ -136,9 +160,9 @@ namespace Core.Computer
 
         private void PerformEquals(Instruction instruction)
         {
-            var a = instruction.Parameters[0].Value;
-            var b = instruction.Parameters[1].Value;
-            var target = ReadFromMemory(_pointer + 3);
+            var a = ReadParam(instruction.Parameters[0]);
+            var b = ReadParam(instruction.Parameters[1]);
+            var target = ReadTargetPosition(instruction.Parameters[2]);
 
             WriteToMemory((int)target, a == b ? 1 : 0);
             IncrementPointer(instruction);
@@ -146,7 +170,7 @@ namespace Core.Computer
 
         private void PerformAdjustRelativeBase(Instruction instruction)
         {
-            var a = instruction.Parameters[0].Value;
+            var a = ReadParam(instruction.Parameters[0]);
 
             _relativeBase += (int)a;
             IncrementPointer(instruction);

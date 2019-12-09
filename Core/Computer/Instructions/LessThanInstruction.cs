@@ -11,7 +11,7 @@ namespace Core.Computer.Instructions
         {
             ReadParameter(0);
             ReadParameter(1);
-            ReadParameter(2, ParameterType.Position);
+            ReadParameter(2);
         }
     }
 }

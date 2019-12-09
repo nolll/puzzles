@@ -19,7 +19,7 @@ namespace Core.Computer
 
         public long ReadInput()
         {
-            return 0;
+            return 1;
         }
 
         public void WriteOutput(long output)

@@ -1,21 +1,14 @@
-using System.Collections.Generic;
-
 namespace Core.Computer.Parameters
 {
     public abstract class Parameter
     {
-        public long Value { get; }
+        public int Position { get; }
+        public ParameterType Type { get; }
 
-        protected Parameter(long value)
+        protected Parameter(ParameterType type, int pos)
         {
-            Value = value;
-        }
-
-        protected static long ReadFromMemory(IList<long> memory, int pos)
-        {
-            if (pos >= memory.Count)
-                return 0;
-            return memory[pos];
+            Position = pos;
+            Type = type;
         }
     }
 }

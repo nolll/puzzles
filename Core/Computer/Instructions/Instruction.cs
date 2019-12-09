@@ -22,16 +22,13 @@ namespace Core.Computer.Instructions
             Parameters = new List<Parameter>();
         }
 
-        protected void ReadParameter(int parameterIndex, ParameterType? type = null)
+        protected void ReadParameter(int parameterIndex)
         {
-            Parameters.Add(CreateParameter(parameterIndex, type));
+            Parameters.Add(CreateParameter(parameterIndex));
         }
 
-        private Parameter CreateParameter(int parameterIndex, ParameterType? type = null)
+        private Parameter CreateParameter(int parameterIndex)
         {
-            if (type != null)
-                return CreateParameter(parameterIndex, type.Value);
-
             if (parameterIndex >= _parameterTypes.Count)
                 return CreateParameter(parameterIndex, ParameterType.Position);
 
@@ -40,13 +37,14 @@ namespace Core.Computer.Instructions
 
         private Parameter CreateParameter(int parameterIndex, ParameterType type)
         {
+            var pos = _pointer + 1 + parameterIndex;
             if (type == ParameterType.Relative)
-                return new RelativeParameter(_memory, _pointer + 1 + parameterIndex, _relativeBase);
+                return new RelativeParameter(pos);
 
             if (type == ParameterType.Immediate)
-                return new ImmediateParameter(_memory, _pointer + 1 + parameterIndex);
+                return new ImmediateParameter(pos);
 
-            return new PositionParameter(_memory, _pointer + 1 + parameterIndex);
+            return new PositionParameter(pos);
         }
     }
 }

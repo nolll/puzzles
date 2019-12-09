@@ -9,7 +9,7 @@ namespace Core.Computer.Instructions
         public InputInstruction(IList<long> memory, int position, int relativeBase, IList<ParameterType> parameterTypes)
             : base(memory, position, relativeBase, parameterTypes)
         {
-            ReadParameter(0, ParameterType.Immediate);
+            ReadParameter(0);
         }
     }
 }

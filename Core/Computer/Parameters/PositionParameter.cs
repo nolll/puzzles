@@ -1,18 +1,10 @@
-using System.Collections.Generic;
-
 namespace Core.Computer.Parameters
 {
     public class PositionParameter : Parameter
     {
-        public PositionParameter(IList<long> memory, int position)
-            : base(ReadPosition(memory, position))
+        public PositionParameter(int pos)
+            : base(ParameterType.Position, pos)
         {
-        }
-
-        private static long ReadPosition(IList<long> memory, int position)
-        {
-            var positionFromMemory = (int) ReadFromMemory(memory, position);
-            return ReadFromMemory(memory, positionFromMemory);
         }
     }
 }

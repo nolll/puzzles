@@ -14,7 +14,7 @@ namespace Core.Computer
         private readonly Func<long> _readInputFunc;
         public IList<long> Memory => _memory;
 
-        public long Result => _memory[0]; 
+        public long Result => ReadFromMemory(0); 
 
         public IntCodeProcess(IList<long> memory, Func<long> readInputFunc, Action<long> writeOutputFunc)
         {
@@ -29,7 +29,7 @@ namespace Core.Computer
         {
             while (_pointer < _memory.Count)
             {
-                var instruction = InstructionParser.Parse(_memory, _pointer);
+                var instruction = InstructionParser.Parse(_memory, _pointer, _relativeBase);
 
                 if (instruction.Type == InstructionType.Halt)
                     break;
@@ -58,20 +58,20 @@ namespace Core.Computer
                 if (instruction.Type == InstructionType.Equals)
                     PerformEquals(instruction);
 
-                if (instruction.Type == InstructionType.Relative)
-                    PerformRelative(instruction);
+                if (instruction.Type == InstructionType.AdjustRelativeBase)
+                    PerformAdjustRelativeBase(instruction);
             }
 
-            return _memory[0];
+            return Result;
         }
 
         private void PerformAddition(Instruction instruction)
         {
             var a = instruction.Parameters[0].Value;
             var b = instruction.Parameters[1].Value;
-            var target = _memory[_pointer + 3];
+            var target = ReadFromMemory(_pointer + 3);
 
-            _memory[(int)target] = a + b;
+            WriteToMemory((int) target, a + b);
             IncrementPointer(instruction);
         }
 
@@ -79,7 +79,7 @@ namespace Core.Computer
         {
             var a = instruction.Parameters[0].Value;
             var b = instruction.Parameters[1].Value; 
-            var target = _memory[_pointer + 3];
+            var target = ReadFromMemory(_pointer + 3);
 
             _memory[(int)target] = a * b;
             IncrementPointer(instruction);
@@ -88,10 +88,9 @@ namespace Core.Computer
         private void PerformInput(Instruction instruction)
         {
             var input = _readInputFunc();
-
             var target = instruction.Parameters[0].Value;
 
-            _memory[(int)target] = input;
+            WriteToMemory((int) target, input);
             IncrementPointer(instruction);
         }
 
@@ -129,9 +128,9 @@ namespace Core.Computer
         {
             var a = instruction.Parameters[0].Value;
             var b = instruction.Parameters[1].Value;
-            var target = _memory[_pointer + 3];
+            var target = ReadFromMemory(_pointer + 3);
 
-            _memory[(int)target] = a < b ? 1 : 0;
+            WriteToMemory((int) target, a < b ? 1 : 0);
             IncrementPointer(instruction);
         }
 
@@ -139,31 +138,37 @@ namespace Core.Computer
         {
             var a = instruction.Parameters[0].Value;
             var b = instruction.Parameters[1].Value;
-            var target = _memory[_pointer + 3];
+            var target = ReadFromMemory(_pointer + 3);
 
-            _memory[(int)target] = a == b ? 1 : 0;
+            WriteToMemory((int)target, a == b ? 1 : 0);
             IncrementPointer(instruction);
         }
 
-        private void PerformRelative(Instruction instruction)
+        private void PerformAdjustRelativeBase(Instruction instruction)
         {
             var a = instruction.Parameters[0].Value;
 
-            _relativeBase = (int)a;
+            _relativeBase += (int)a;
             IncrementPointer(instruction);
+        }
+
+        private long ReadFromMemory(int pos)
+        {
+            if (pos >= _memory.Count)
+                return 0;
+            return _memory[pos];
         }
 
         private void WriteToMemory(int pos, long val)
         {
-            if (pos > _memory.Count - 1)
+            if (pos >= _memory.Count)
                 IncreaseMemory(pos);
             _memory[pos] = val;
         }
 
         private void IncreaseMemory(int pos)
         {
-            var memLength = _memory.Count;
-            for (var i = memLength; i < pos; i++)
+            while(pos >= _memory.Count)
             {
                 _memory.Add(0);
             }

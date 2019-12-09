@@ -13,7 +13,7 @@ namespace Tests
             var boostTester = new BoostTester();
             var result = boostTester.Run(program);
 
-            Assert.That(result.MemoryString, Is.EqualTo(program));
+            Assert.That(string.Join(',', result.AllOutputs), Is.EqualTo(program));
         }
 
         [Test]
@@ -24,19 +24,19 @@ namespace Tests
             var boostTester = new BoostTester();
             var result = boostTester.Run(program);
 
-            Assert.That(result.Output.ToString().Length, Is.EqualTo(16));
+            Assert.That(result.LastOutput.ToString().Length, Is.EqualTo(16));
         }
 
         [Test]
         public void ReturnsLargeMiddleNumber()
         {
             const string program = "104,1125899906842624,99";
-            var expectedNumber = int.Parse(program.Split(',')[1]);
+            var expectedNumber = long.Parse(program.Split(',')[1]);
 
             var boostTester = new BoostTester();
             var result = boostTester.Run(program);
 
-            Assert.That(result.Output, Is.EqualTo(expectedNumber));
+            Assert.That(result.LastOutput, Is.EqualTo(expectedNumber));
         }
     }
 }

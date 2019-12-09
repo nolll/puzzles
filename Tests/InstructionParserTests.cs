@@ -10,7 +10,7 @@ namespace Tests
         [Test]
         public void ReturnsNull()
         {
-            var result = InstructionParser.Parse(new List<long>( ));
+            var result = InstructionParser.Parse(new List<long>(), 0, 0);
 
             Assert.That(result, Is.Null);
         }
@@ -20,7 +20,7 @@ namespace Tests
         {
             const string input = "1,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result, Is.TypeOf<AdditionInstruction>());
             Assert.That(result.Parameters.Count, Is.EqualTo(3));
@@ -34,7 +34,7 @@ namespace Tests
         {
             const string input = "2,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result, Is.TypeOf<MultiplicationInstruction>());
             Assert.That(result.Parameters.Count, Is.EqualTo(3));
@@ -48,7 +48,7 @@ namespace Tests
         {
             const string input = "3,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result.Type, Is.EqualTo(InstructionType.Input));
             Assert.That(result.Parameters.Count, Is.EqualTo(1));
@@ -60,7 +60,7 @@ namespace Tests
         {
             const string input = "4,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result, Is.TypeOf<OutputInstruction>());
             Assert.That(result.Parameters.Count, Is.EqualTo(1));
@@ -72,7 +72,7 @@ namespace Tests
         {
             const string input = "99,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result, Is.TypeOf<HaltInstruction>());
             Assert.That(result.Parameters.Count, Is.EqualTo(0));
@@ -83,7 +83,7 @@ namespace Tests
         {
             const string input = "11101,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result.Type, Is.EqualTo(InstructionType.Addition));
             Assert.That(result.Parameters.Count, Is.EqualTo(3));

@@ -37,8 +37,12 @@ namespace Core.Computer.Instructions
 
         private Parameter CreateParameter(int parameterIndex, ParameterType type)
         {
+            if (type == ParameterType.Relative)
+                return new RelativeParameter(_memory, _pointer + 1 + parameterIndex);
+
             if (type == ParameterType.Immediate)
                 return new ImmediateParameter(_memory, _pointer + 1 + parameterIndex);
+
             return new PositionParameter(_memory, _pointer + 1 + parameterIndex);
         }
     }

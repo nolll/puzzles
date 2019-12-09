@@ -36,6 +36,9 @@ namespace Core.Computer
             if (opcode.Code == 8)
                 return new EqualsInstruction(memory, position, opcode.ParameterTypes);
 
+            if (opcode.Code == 9)
+                return new RelativeInstruction(memory, position, opcode.ParameterTypes);
+
             if (opcode.Code == 99)
                 return new HaltInstruction(memory, position, opcode.ParameterTypes);
 

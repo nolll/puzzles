@@ -8,6 +8,7 @@ namespace Core.Computer
     {
         private readonly IList<long> _memory;
         private int _pointer;
+        private int _relativeBase;
 
         private readonly Action<long> _writeOutputFunc;
         private readonly Func<long> _readInputFunc;
@@ -18,6 +19,7 @@ namespace Core.Computer
         public IntCodeProcess(IList<long> memory, Func<long> readInputFunc, Action<long> writeOutputFunc)
         {
             _memory = memory;
+            _relativeBase = 0;
             _pointer = 0;
             _readInputFunc = readInputFunc;
             _writeOutputFunc = writeOutputFunc;

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Core.Computer.Instructions
+namespace Core.Computer.Parameters
 {
     public class RelativeParameter : Parameter
     {

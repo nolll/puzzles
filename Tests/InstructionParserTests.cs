@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Core.Computer;
 using Core.Computer.Instructions;
+using Core.Computer.Parameters;
 using NUnit.Framework;
 
 namespace Tests

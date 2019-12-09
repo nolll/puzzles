@@ -57,6 +57,9 @@ namespace Core.Computer
 
                 if (instruction.Type == InstructionType.Equals)
                     PerformEquals(instruction);
+
+                if (instruction.Type == InstructionType.Relative)
+                    PerformRelative(instruction);
             }
 
             return _memory[0];
@@ -140,6 +143,30 @@ namespace Core.Computer
 
             _memory[(int)target] = a == b ? 1 : 0;
             IncrementPointer(instruction);
+        }
+
+        private void PerformRelative(Instruction instruction)
+        {
+            var a = instruction.Parameters[0].Value;
+
+            _relativeBase = (int)a;
+            IncrementPointer(instruction);
+        }
+
+        private void WriteToMemory(int pos, long val)
+        {
+            if (pos > _memory.Count - 1)
+                IncreaseMemory(pos);
+            _memory[pos] = val;
+        }
+
+        private void IncreaseMemory(int pos)
+        {
+            var memLength = _memory.Count;
+            for (var i = memLength; i < pos; i++)
+            {
+                _memory.Add(0);
+            }
         }
 
         private void IncrementPointer(Instruction instruction) => _pointer += instruction.Length + 1;

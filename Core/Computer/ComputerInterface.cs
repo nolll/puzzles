@@ -2,12 +2,12 @@
 
 namespace Core.Computer
 {
-    public class AmplifierComputer : IntCodeComputer
+    public class ComputerInterface : IntCodeComputer
     {
         private readonly Func<long> _readInputFunc;
         private readonly Action<long> _writeOutputFunc;
 
-        public AmplifierComputer(string input, Func<long> readInputFunc, Action<long> writeOutputFunc)
+        public ComputerInterface(string input, Func<long> readInputFunc, Action<long> writeOutputFunc)
             : base(input)
         {
             _readInputFunc = readInputFunc;

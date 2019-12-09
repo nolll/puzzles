@@ -13,10 +13,16 @@ namespace ConsoleApp.Days
         protected override void RunDay()
         {
             WritePartTitle();
-            var boostTester = new BoostTester();
-            var result = boostTester.Run(InputData.ComputerProgramDay9);
+            var boostTester = new BoostRunner(InputData.ComputerProgramDay9, 1);
+            var testerResult = boostTester.Run();
 
-            Console.WriteLine($"BOOST keycode: {result.LastOutput}");
+            Console.WriteLine($"BOOST keycode: {testerResult.LastOutput}");
+
+            WritePartTitle();
+            var boostRunner = new BoostRunner(InputData.ComputerProgramDay9, 2);
+            var runnerResult = boostRunner.Run();
+
+            Console.WriteLine($"Coordinates: {runnerResult.LastOutput}");
         }
     }
 }

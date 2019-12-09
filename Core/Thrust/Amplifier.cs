@@ -16,7 +16,7 @@ namespace Core.Thrust
         public Amplifier(string name, string memory)
         {
             Name = name;
-            _computer = new AmplifierComputer(memory, ComputerInput, ComputerOutput);
+            _computer = new ComputerInterface(memory, ComputerInput, ComputerOutput);
         }
 
         private long ComputerInput()

@@ -2,16 +2,24 @@
 
 namespace Core.Computer
 {
-    public class BoostTester
+    public class BoostRunner
     {
+        private readonly string _program;
+        private readonly int _mode;
         private long _lastOutput;
         private IList<long> _outputs;
 
-        public Result Run(string program)
+        public BoostRunner(string program, int mode)
+        {
+            _program = program;
+            _mode = mode;
+        }
+
+        public Result Run()
         {
             _outputs = new List<long>();
 
-            var computer = new AmplifierComputer(program, ReadInput, WriteOutput);
+            var computer = new ComputerInterface(_program, ReadInput, WriteOutput);
             computer.Start();
 
             return new Result(_lastOutput, _outputs);
@@ -19,7 +27,7 @@ namespace Core.Computer
 
         public long ReadInput()
         {
-            return 1;
+            return _mode;
         }
 
         public void WriteOutput(long output)

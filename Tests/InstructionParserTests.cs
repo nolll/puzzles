@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Core.Computer;
 using Core.Computer.Instructions;
+using Core.Computer.Parameters;
 using NUnit.Framework;
 
 namespace Tests
@@ -9,7 +11,7 @@ namespace Tests
         [Test]
         public void ReturnsNull()
         {
-            var result = InstructionParser.Parse(new int[]{});
+            var result = InstructionParser.Parse(new List<long>(), 0, 0);
 
             Assert.That(result, Is.Null);
         }
@@ -19,13 +21,13 @@ namespace Tests
         {
             const string input = "1,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result, Is.TypeOf<AdditionInstruction>());
             Assert.That(result.Parameters.Count, Is.EqualTo(3));
-            Assert.That(result.Parameters[0], Is.TypeOf<PositionParameter>());
-            Assert.That(result.Parameters[1], Is.TypeOf<PositionParameter>());
-            Assert.That(result.Parameters[2], Is.TypeOf<PositionParameter>());
+            Assert.That(result.Parameters[0].Type, Is.EqualTo(ParameterType.Position));
+            Assert.That(result.Parameters[1].Type, Is.EqualTo(ParameterType.Position));
+            Assert.That(result.Parameters[2].Type, Is.EqualTo(ParameterType.Position));
         }
 
         [Test]
@@ -33,13 +35,13 @@ namespace Tests
         {
             const string input = "2,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result, Is.TypeOf<MultiplicationInstruction>());
             Assert.That(result.Parameters.Count, Is.EqualTo(3));
-            Assert.That(result.Parameters[0], Is.TypeOf<PositionParameter>());
-            Assert.That(result.Parameters[1], Is.TypeOf<PositionParameter>());
-            Assert.That(result.Parameters[2], Is.TypeOf<PositionParameter>());
+            Assert.That(result.Parameters[0].Type, Is.EqualTo(ParameterType.Position));
+            Assert.That(result.Parameters[1].Type, Is.EqualTo(ParameterType.Position));
+            Assert.That(result.Parameters[2].Type, Is.EqualTo(ParameterType.Position));
         }
 
         [Test]
@@ -47,11 +49,11 @@ namespace Tests
         {
             const string input = "3,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result.Type, Is.EqualTo(InstructionType.Input));
             Assert.That(result.Parameters.Count, Is.EqualTo(1));
-            Assert.That(result.Parameters[0], Is.TypeOf<ImmediateParameter>());
+            Assert.That(result.Parameters[0].Type, Is.EqualTo(ParameterType.Position));
         }
 
         [Test]
@@ -59,11 +61,11 @@ namespace Tests
         {
             const string input = "4,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result, Is.TypeOf<OutputInstruction>());
             Assert.That(result.Parameters.Count, Is.EqualTo(1));
-            Assert.That(result.Parameters[0], Is.TypeOf<PositionParameter>());
+            Assert.That(result.Parameters[0].Type, Is.EqualTo(ParameterType.Position));
         }
 
         [Test]
@@ -71,7 +73,7 @@ namespace Tests
         {
             const string input = "99,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result, Is.TypeOf<HaltInstruction>());
             Assert.That(result.Parameters.Count, Is.EqualTo(0));
@@ -80,15 +82,15 @@ namespace Tests
         [Test]
         public void ReturnsAdditionInstructionWithImmediateParameters()
         {
-            const string input = "11101,0,0,0";
+            const string input = "01101,0,0,0";
             var memory = MemoryParser.Parse(input);
-            var result = InstructionParser.Parse(memory);
+            var result = InstructionParser.Parse(memory, 0, 0);
 
             Assert.That(result.Type, Is.EqualTo(InstructionType.Addition));
             Assert.That(result.Parameters.Count, Is.EqualTo(3));
-            Assert.That(result.Parameters[0], Is.TypeOf<ImmediateParameter>());
-            Assert.That(result.Parameters[1], Is.TypeOf<ImmediateParameter>());
-            Assert.That(result.Parameters[2], Is.TypeOf<PositionParameter>());
+            Assert.That(result.Parameters[0].Type, Is.EqualTo(ParameterType.Immediate));
+            Assert.That(result.Parameters[1].Type, Is.EqualTo(ParameterType.Immediate));
+            Assert.That(result.Parameters[2].Type, Is.EqualTo(ParameterType.Position));
         }
     }
 }

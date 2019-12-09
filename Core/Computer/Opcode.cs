@@ -5,9 +5,9 @@ namespace Core.Computer
     public class Opcode
     {
         public int Code { get; }
-        public IList<ParameterType> ParameterTypes;
+        public readonly IList<ParameterType> ParameterTypes;
 
-        public Opcode(int code)
+        public Opcode(long code)
         {
             var str = code.ToString();
             var strOperation = str.Length > 2
@@ -25,21 +25,30 @@ namespace Core.Computer
                 str = str.Substring(0, str.Length - 2);
                 foreach (var c in str)
                 {
-                    var parameterType = c == '1'
-                        ? ParameterType.Immediate
-                        : ParameterType.Position;
-
+                    var parameterType = GetParameterType(c);
                     parameterTypes.Insert(0, parameterType);
                 }
             }
 
             ParameterTypes = parameterTypes;
         }
+
+        private ParameterType GetParameterType(char c)
+        {
+            if (c == '2')
+                return ParameterType.Relative;
+
+            if (c == '1')
+                return ParameterType.Immediate;
+            
+            return ParameterType.Position;
+        }
     }
 
     public enum ParameterType
     {
         Position,
-        Immediate
+        Immediate,
+        Relative
     }
 }

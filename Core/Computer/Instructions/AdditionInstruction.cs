@@ -6,12 +6,12 @@ namespace Core.Computer.Instructions
     {
         public override InstructionType Type => InstructionType.Addition;
 
-        public AdditionInstruction(int[] memory, int position, IList<ParameterType> parameterTypes)
-            : base(memory, position, parameterTypes)
+        public AdditionInstruction(IList<long> memory, int position, int relativeBase, IList<ParameterType> parameterTypes)
+            : base(memory, position, relativeBase, parameterTypes)
         {
             ReadParameter(0);
             ReadParameter(1);
-            ReadParameter(2, ParameterType.Position);
+            ReadParameter(2);
         }
     }
 }

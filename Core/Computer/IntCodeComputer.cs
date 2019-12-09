@@ -1,11 +1,14 @@
-﻿namespace Core.Computer
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace Core.Computer
 {
     public abstract class IntCodeComputer
     {
-        private readonly int[] _startMemory;
+        private readonly IList<long> _startMemory;
         private IntCodeProcess _process;
 
-        public int Result => _process.Result;
+        public long Result => _process.Result;
 
         protected IntCodeComputer(string input)
         {
@@ -26,15 +29,17 @@
             _process.Run();
         }
 
-        protected abstract int ReadInput();
-        protected abstract void WriteOutput(int output);
+        public IList<long> Memory => _process.Memory;
 
-        private static int[] CopyMemory(int[] memory)
+        protected abstract long ReadInput();
+        protected abstract void WriteOutput(long output);
+
+        private static IList<long> CopyMemory(IList<long> memory)
         {
-            var copy = new int[memory.Length];
-            for (var i = 0; i < memory.Length; i++)
+            var copy = new List<long>();
+            for (var i = 0; i < memory.Count; i++)
             {
-                copy[i] = memory[i];
+                copy.Add(memory[i]);
             }
 
             return copy;

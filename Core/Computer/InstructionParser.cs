@@ -6,9 +6,9 @@ namespace Core.Computer
 {
     public static class InstructionParser
     {
-        public static Instruction Parse(int[] memory, int position = 0)
+        public static Instruction Parse(IList<long> memory, int position = 0)
         {
-            if (memory.Length <= position)
+            if (memory.Count <= position)
                 return null;
 
             var opcode = new Opcode(memory[position]);

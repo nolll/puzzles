@@ -6,7 +6,7 @@ namespace Core.Computer.Instructions
     {
         public override InstructionType Type => InstructionType.Halt;
 
-        public HaltInstruction(int[] memory, int pointer, IList<ParameterType> parameterTypes)
+        public HaltInstruction(IList<long> memory, int pointer, IList<ParameterType> parameterTypes)
             : base(memory, pointer, parameterTypes)
         {
         }

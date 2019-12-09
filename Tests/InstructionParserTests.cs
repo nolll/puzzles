@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Core.Computer;
 using Core.Computer.Instructions;
 using NUnit.Framework;
@@ -9,7 +10,7 @@ namespace Tests
         [Test]
         public void ReturnsNull()
         {
-            var result = InstructionParser.Parse(new int[]{});
+            var result = InstructionParser.Parse(new List<long>( ));
 
             Assert.That(result, Is.Null);
         }

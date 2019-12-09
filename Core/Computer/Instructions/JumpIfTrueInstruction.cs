@@ -6,7 +6,7 @@ namespace Core.Computer.Instructions
     {
         public override InstructionType Type => InstructionType.JumpIfTrue;
 
-        public JumpIfTrueInstruction(int[] memory, int position, IList<ParameterType> parameterTypes)
+        public JumpIfTrueInstruction(IList<long> memory, int position, IList<ParameterType> parameterTypes)
             : base(memory, position, parameterTypes)
         {
             ReadParameter(0);

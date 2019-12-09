@@ -5,9 +5,9 @@ namespace Core.Computer
     public class Opcode
     {
         public int Code { get; }
-        public IList<ParameterType> ParameterTypes;
+        public readonly IList<ParameterType> ParameterTypes;
 
-        public Opcode(int code)
+        public Opcode(long code)
         {
             var str = code.ToString();
             var strOperation = str.Length > 2

@@ -35,10 +35,10 @@ namespace Core.Thrust
             yield return amp5;
         }
 
-        public int GetMaxThrust(int[] phases)
+        public long GetMaxThrust(int[] phases)
         {
             var sequences = new SequenceGenerator().GetSequences(phases);
-            var highestThrust = 0;
+            long highestThrust = 0;
             foreach (var sequence in sequences)
             {
                 _amplifiers = CreateAmplifiers().ToList();
@@ -50,7 +50,7 @@ namespace Core.Thrust
             return highestThrust;
         }
 
-        public int GetThrust(int[] sequence)
+        public long GetThrust(int[] sequence)
         {
             for (var i = 0; i < 5; i++)
             {

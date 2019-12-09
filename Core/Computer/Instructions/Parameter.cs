@@ -2,9 +2,9 @@ namespace Core.Computer.Instructions
 {
     public abstract class Parameter
     {
-        public int Value { get; }
+        public long Value { get; }
 
-        protected Parameter(int value)
+        protected Parameter(long value)
         {
             Value = value;
         }

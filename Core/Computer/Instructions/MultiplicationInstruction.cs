@@ -6,7 +6,7 @@ namespace Core.Computer.Instructions
     {
         public override InstructionType Type => InstructionType.Multiplication;
 
-        public MultiplicationInstruction(int[] memory, int position, IList<ParameterType> parameterTypes)
+        public MultiplicationInstruction(IList<long> memory, int position, IList<ParameterType> parameterTypes)
             : base(memory, position, parameterTypes)
         {
             ReadParameter(0);

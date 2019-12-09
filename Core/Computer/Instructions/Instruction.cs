@@ -4,14 +4,14 @@ namespace Core.Computer.Instructions
 {
     public abstract class Instruction
     {
-        private readonly int[] _memory;
+        private readonly IList<long> _memory;
         private readonly int _pointer;
         private readonly IList<ParameterType> _parameterTypes;
         public IList<Parameter> Parameters { get; }
         public int Length => Parameters.Count;
         public abstract InstructionType Type { get; }
 
-        protected Instruction(int[] memory, int pointer, IList<ParameterType> parameterTypes)
+        protected Instruction(IList<long> memory, int pointer, IList<ParameterType> parameterTypes)
         {
             _memory = memory;
             _pointer = pointer;

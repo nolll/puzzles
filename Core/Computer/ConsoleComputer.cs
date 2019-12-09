@@ -1,23 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Core.Computer
 {
     public class ConsoleComputer : IntCodeComputer
     {
-        public int Output { get; private set; } = 0;
+        public long Output { get; private set; }
 
         public ConsoleComputer(string input) : base(input)
         {
         }
 
-        protected override int ReadInput()
+        protected override long ReadInput()
         {
             Console.Write("Enter the ID of the system: ");
             var str = Console.ReadLine() ?? "";
             return int.Parse(str);
         }
 
-        protected override void WriteOutput(int output)
+        protected override void WriteOutput(long output)
         {
             Output = output;
             Console.WriteLine(output);
@@ -26,7 +27,7 @@ namespace Core.Computer
 
     public class BoostTester
     {
-        private int _output;
+        private long _output;
 
         public Result Run(string program)
         {
@@ -36,22 +37,22 @@ namespace Core.Computer
             return new Result(_output, computer.Memory);
         }
 
-        public int ReadInput()
+        public long ReadInput()
         {
             return 0;
         }
 
-        public void WriteOutput(int output)
+        public void WriteOutput(long output)
         {
             _output = output;
         }
 
         public class Result
         {
-            public int Output { get; }
+            public long Output { get; }
             public string MemoryString { get; }
 
-            public Result(int output, int[] memory)
+            public Result(long output, IList<long> memory)
             {
                 MemoryString = string.Join(',', memory);
                 Output = output;

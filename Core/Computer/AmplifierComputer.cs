@@ -4,22 +4,22 @@ namespace Core.Computer
 {
     public class AmplifierComputer : IntCodeComputer
     {
-        private readonly Func<int> _readInputFunc;
-        private readonly Action<int> _writeOutputFunc;
+        private readonly Func<long> _readInputFunc;
+        private readonly Action<long> _writeOutputFunc;
 
-        public AmplifierComputer(string input, Func<int> readInputFunc, Action<int> writeOutputFunc)
+        public AmplifierComputer(string input, Func<long> readInputFunc, Action<long> writeOutputFunc)
             : base(input)
         {
             _readInputFunc = readInputFunc;
             _writeOutputFunc = writeOutputFunc;
         }
 
-        protected override int ReadInput()
+        protected override long ReadInput()
         {
             return _readInputFunc();
         }
 
-        protected override void WriteOutput(int output)
+        protected override void WriteOutput(long output)
         {
             _writeOutputFunc(output);
         }

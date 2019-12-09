@@ -1,20 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.Computer.Instructions;
 
 namespace Core.Computer
 {
     public class IntCodeProcess
     {
-        private readonly int[] _memory;
+        private readonly IList<long> _memory;
         private int _pointer;
 
-        private readonly Action<int> _writeOutputFunc;
-        private readonly Func<int> _readInputFunc;
-        public int[] Memory => _memory;
+        private readonly Action<long> _writeOutputFunc;
+        private readonly Func<long> _readInputFunc;
+        public IList<long> Memory => _memory;
 
-        public int Result => _memory[0]; 
+        public long Result => _memory[0]; 
 
-        public IntCodeProcess(int[] memory, Func<int> readInputFunc, Action<int> writeOutputFunc)
+        public IntCodeProcess(IList<long> memory, Func<long> readInputFunc, Action<long> writeOutputFunc)
         {
             _memory = memory;
             _pointer = 0;
@@ -22,9 +23,9 @@ namespace Core.Computer
             _writeOutputFunc = writeOutputFunc;
         }
 
-        public int Run()
+        public long Run()
         {
-            while (_pointer < _memory.Length)
+            while (_pointer < _memory.Count)
             {
                 var instruction = InstructionParser.Parse(_memory, _pointer);
 
@@ -65,7 +66,7 @@ namespace Core.Computer
             var b = instruction.Parameters[1].Value;
             var target = _memory[_pointer + 3];
 
-            _memory[target] = a + b;
+            _memory[(int)target] = a + b;
             IncrementPointer(instruction);
         }
 
@@ -75,7 +76,7 @@ namespace Core.Computer
             var b = instruction.Parameters[1].Value; 
             var target = _memory[_pointer + 3];
 
-            _memory[target] = a * b;
+            _memory[(int)target] = a * b;
             IncrementPointer(instruction);
         }
 
@@ -85,7 +86,7 @@ namespace Core.Computer
 
             var target = instruction.Parameters[0].Value;
 
-            _memory[target] = input;
+            _memory[(int)target] = input;
             IncrementPointer(instruction);
         }
 
@@ -103,7 +104,7 @@ namespace Core.Computer
             var b = instruction.Parameters[1].Value;
 
             if (a != 0)
-                _pointer = b;
+                _pointer = (int)b;
             else
                 IncrementPointer(instruction);
         }
@@ -114,7 +115,7 @@ namespace Core.Computer
             var b = instruction.Parameters[1].Value;
 
             if (a == 0)
-                _pointer = b;
+                _pointer = (int)b;
             else
                 IncrementPointer(instruction);
         }
@@ -125,7 +126,7 @@ namespace Core.Computer
             var b = instruction.Parameters[1].Value;
             var target = _memory[_pointer + 3];
 
-            _memory[target] = a < b ? 1 : 0;
+            _memory[(int)target] = a < b ? 1 : 0;
             IncrementPointer(instruction);
         }
 
@@ -135,7 +136,7 @@ namespace Core.Computer
             var b = instruction.Parameters[1].Value;
             var target = _memory[_pointer + 3];
 
-            _memory[target] = a == b ? 1 : 0;
+            _memory[(int)target] = a == b ? 1 : 0;
             IncrementPointer(instruction);
         }
 

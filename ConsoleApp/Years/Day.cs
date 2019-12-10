@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp.Events
+namespace ConsoleApp.Years
 {
     public abstract class Day
     {

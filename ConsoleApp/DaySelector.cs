@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ConsoleApp.Events;
-using ConsoleApp.Events.Event2019;
+using ConsoleApp.Years;
+using ConsoleApp.Years.Year2018;
+using ConsoleApp.Years.Year2019;
 
 namespace ConsoleApp
 {
@@ -9,7 +10,8 @@ namespace ConsoleApp
     {
         private readonly IList<Event> _events = new List<Event>
         {
-            new Event2019()
+            new Event2019(),
+            new Event2018()
         };
 
         public Day GetDay(int? selectedYear, int? selectedDay)

@@ -4,11 +4,13 @@ namespace Core.Asteroids
 {
     public class Asteroid : IEquatable<Asteroid>
     {
+        public char Name { get; }
         public int X { get; }
         public int Y { get; }
 
-        public Asteroid(int x, int y)
+        public Asteroid(char name, int x, int y)
         {
+            Name = name;
             X = x;
             Y = y;
         }

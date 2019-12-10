@@ -1,6 +1,5 @@
 ﻿using System;
 using ConsoleApp.Inputs;
-using Core.Asteroids;
 using Core.Computer;
 
 namespace ConsoleApp.Events.Event2019
@@ -24,22 +23,6 @@ namespace ConsoleApp.Events.Event2019
             var runnerResult = boostRunner.Run();
 
             Console.WriteLine($"Coordinates: {runnerResult.LastOutput}");
-        }
-    }
-
-    public class Day10 : Day
-    {
-        public Day10() : base(10)
-        {
-        }
-
-        protected override void RunDay()
-        {
-            WritePartTitle();
-            var detector = new AsteroidDetector();
-            var result = detector.Detect(InputData.Asteroids);
-
-            Console.WriteLine($"Asteroid count: {result.RayCount}");
         }
     }
 }

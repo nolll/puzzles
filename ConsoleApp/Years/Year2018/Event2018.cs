@@ -10,7 +10,11 @@ namespace ConsoleApp.Years.Year2018
 
         protected override IList<Day> Days => new List<Day>
         {
-            new Day01()
+            new Day01(),
+            new Day02(),
+            new Day03(),
+            new Day04(),
+            new Day05()
         };
     }
 }

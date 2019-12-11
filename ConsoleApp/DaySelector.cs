@@ -10,8 +10,8 @@ namespace ConsoleApp
     {
         private readonly IList<Event> _events = new List<Event>
         {
-            new Event2019(),
-            new Event2018()
+            new Event2018(),
+            new Event2019()
         };
 
         public Day GetDay(int? selectedYear, int? selectedDay)

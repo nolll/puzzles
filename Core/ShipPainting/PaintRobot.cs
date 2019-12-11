@@ -8,34 +8,33 @@ namespace Core.ShipPainting
     public class PaintRobot
     {
         private readonly string _program;
+        private readonly int _shipSize;
         private readonly Matrix _panels;
         private readonly Matrix _paintCounts;
         private PaintMode _mode;
-        private int? _numberOfPanelsToStopAfter;
         private ComputerInterface _computer;
 
         public PaintRobot(string program, int shipSize = 100)
         {
             _program = program;
-            var startPoint = shipSize / 2;
+            _shipSize = shipSize;
             _panels = new Matrix(shipSize);
             _paintCounts = new Matrix(shipSize);
-            _panels.MoveTo(startPoint, startPoint);
-            _mode = PaintMode.Paint;
         }
 
-        public Result Paint()
+        public Result Paint(bool startOnWhitePanel)
         {
+            var startPoint = _shipSize / 2;
+            _panels.MoveTo(startPoint, startPoint);
+            _mode = PaintMode.Paint;
+
+            if (startOnWhitePanel)
+                PaintWhite();
+
             _computer = new ComputerInterface(_program, ReadInput, WriteOutput);
             _computer.Start();
 
             return new Result(PaintedPanelsCount, _panels.Address.X, _panels.Address.Y, _panels.Print());
-        }
-
-        public Result PaintUntil(int paintedPanelsCount)
-        {
-            _numberOfPanelsToStopAfter = paintedPanelsCount;
-            return Paint();
         }
 
         private IList<int> PaintedPanels => _paintCounts.Values.Where(o => o > 0).ToList();
@@ -47,11 +46,21 @@ namespace Core.ShipPainting
             return value;
         }
 
+        private void Paint(int color)
+        {
+            _panels.WriteValue(color);
+        }
+
+        private void PaintWhite()
+        {
+            _panels.WriteValue(1);
+        }
+
         private void WriteOutput(long output)
         {
             if (_mode == PaintMode.Paint)
             {
-                _panels.WriteValue((int)output);
+                Paint((int)output);
                 _paintCounts.MoveTo(_panels.Address);
                 _paintCounts.IncreaseValue();
                 _mode = PaintMode.Move;
@@ -64,11 +73,6 @@ namespace Core.ShipPainting
                     _panels.TurnRight();
                 _panels.MoveForward();
                 _mode = PaintMode.Paint;
-            }
-
-            if (_numberOfPanelsToStopAfter != null && _numberOfPanelsToStopAfter >= PaintedPanelsCount)
-            {
-                _computer.Stop();
             }
         }
 

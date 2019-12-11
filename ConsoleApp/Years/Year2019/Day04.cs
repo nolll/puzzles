@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using ConsoleApp.Inputs;
+using Data.Inputs;
 
 namespace ConsoleApp.Years.Year2019
 {

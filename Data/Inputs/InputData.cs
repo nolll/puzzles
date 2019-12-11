@@ -1,7 +1,9 @@
-﻿namespace ConsoleApp.Inputs
+﻿namespace Data.Inputs
 {
     public static class InputData
     {
+        public static string ComputerProgramDay11 { get; }
+
         public static string Asteroids { get; }
 
         public static string ComputerProgramDay9 { get; }
@@ -26,6 +28,8 @@
 
         static InputData()
         {
+            ComputerProgramDay11 = InputStrings.ComputerProgramDay11;
+
             Asteroids = InputStrings.Asteroids;
 
             ComputerProgramDay9 = InputStrings.ComputerProgramDay9;

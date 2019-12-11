@@ -1,6 +1,6 @@
 ﻿using System;
-using ConsoleApp.Inputs;
 using Core.Orbits;
+using Data.Inputs;
 
 namespace ConsoleApp.Years.Year2019
 {

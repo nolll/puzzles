@@ -23,8 +23,10 @@ namespace ConsoleApp.Years.Year2019
             var robot2 = new PaintRobot(InputData.ComputerProgramDay11);
             var result2 = robot2.Paint(true);
 
+            var printout = result2.Printout.Replace('0', ' ').Replace('1', 'X');
+
             Console.WriteLine("Painted spaceship:");
-            Console.WriteLine(result2.Printout);
+            Console.WriteLine(printout);
         }
     }
 }

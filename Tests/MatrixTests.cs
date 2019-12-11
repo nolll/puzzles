@@ -8,7 +8,7 @@ namespace Tests
         [Test]
         public void MoveToWorks()
         {
-            var matrix = new Matrix(5);
+            var matrix = new Matrix<int>(5, 5);
             matrix.MoveTo(1, 2);
 
             Assert.That(matrix.Address.X, Is.EqualTo(1));
@@ -18,7 +18,7 @@ namespace Tests
         [Test]
         public void MoveForwardWorks()
         {
-            var matrix = new Matrix(5);
+            var matrix = new Matrix<int>(5, 5);
             matrix.MoveTo(1, 3);
             matrix.MoveForward();
 
@@ -29,7 +29,7 @@ namespace Tests
         [Test]
         public void TurnAndMoveForwardWorks()
         {
-            var matrix = new Matrix(5);
+            var matrix = new Matrix<int>(5, 5);
             matrix.TurnRight();
             matrix.MoveForward();
             matrix.TurnRight();

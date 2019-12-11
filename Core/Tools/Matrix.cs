@@ -4,16 +4,16 @@ using System.Text;
 
 namespace Core.Tools
 {
-    public class Matrix
+    public class Matrix<T>
     {
-        private IList<IList<int>> _matrix;
+        private IList<IList<T>> _matrix;
         private MatrixDirection _direction;
         
         public MatrixAddress Address { get; private set; }
 
-        public Matrix(int size)
+        public Matrix(int width, int height)
         {
-            _matrix = BuildMatrix(size);
+            _matrix = BuildMatrix(width, height);
             Address = new MatrixAddress(0, 0);
             _direction = MatrixDirection.Up;
         }
@@ -73,17 +73,16 @@ namespace Core.Tools
             return direction;
         }
 
-        public IList<int> Values => _matrix.SelectMany(x => x).ToList();
+        public IList<T> Values => _matrix.SelectMany(x => x).ToList();
 
         public string Print()
         {
             var sb = new StringBuilder();
             foreach (var row in _matrix)
             {
-                foreach (var pixel in row)
+                foreach (var o in row)
                 {
-                    var output = pixel == 1 ? 'X' : '.';
-                    sb.Append(output);
+                    sb.Append(o);
                 }
 
                 sb.AppendLine();
@@ -92,30 +91,25 @@ namespace Core.Tools
             return sb.ToString();
         }
 
-        public int ReadValue()
+        public T ReadValue()
         {
             return _matrix[Address.Y][Address.X];
         }
 
-        public void WriteValue(int value)
+        public void WriteValue(T value)
         {
             _matrix[Address.Y][Address.X] = value;
         }
 
-        public void IncreaseValue(int value = 1)
+        private IList<IList<T>> BuildMatrix(int width, int height)
         {
-            _matrix[Address.Y][Address.X] += value;
-        }
-
-        private IList<IList<int>> BuildMatrix(int shipSize)
-        {
-            var matrix = new List<IList<int>>();
-            for (var y = 0; y < shipSize; y++)
+            var matrix = new List<IList<T>>();
+            for (var y = 0; y < height; y++)
             {
-                var row = new List<int>();
-                for (var x = 0; x < shipSize; x++)
+                var row = new List<T>();
+                for (var x = 0; x < width; x++)
                 {
-                    row.Add(0);
+                    row.Add(default);
                 }
                 matrix.Add(row);
             }

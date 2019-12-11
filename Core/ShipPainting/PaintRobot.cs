@@ -8,24 +8,27 @@ namespace Core.ShipPainting
     public class PaintRobot
     {
         private readonly string _program;
-        private readonly int _shipSize;
-        private readonly Matrix _panels;
-        private readonly Matrix _paintCounts;
+        private readonly int _shipWidth;
+        private readonly int _shipHeight;
+        private readonly Matrix<int> _panels;
+        private readonly Matrix<int> _paintCounts;
         private PaintMode _mode;
         private ComputerInterface _computer;
 
-        public PaintRobot(string program, int shipSize = 100)
+        public PaintRobot(string program, int shipWidth = 100, int shipHeight = 100)
         {
             _program = program;
-            _shipSize = shipSize;
-            _panels = new Matrix(shipSize);
-            _paintCounts = new Matrix(shipSize);
+            _shipWidth = shipWidth;
+            _shipHeight = shipHeight;
+            _panels = new Matrix<int>(shipWidth, shipHeight);
+            _paintCounts = new Matrix<int>(shipWidth, shipHeight);
         }
 
         public Result Paint(bool startOnWhitePanel)
         {
-            var startPoint = _shipSize / 2;
-            _panels.MoveTo(startPoint, startPoint);
+            var startX = _shipWidth / 2;
+            var startY = _shipHeight / 2;
+            _panels.MoveTo(startX, startY);
             _mode = PaintMode.Paint;
 
             if (startOnWhitePanel)
@@ -62,7 +65,7 @@ namespace Core.ShipPainting
             {
                 Paint((int)output);
                 _paintCounts.MoveTo(_panels.Address);
-                _paintCounts.IncreaseValue();
+                _paintCounts.WriteValue(_paintCounts.ReadValue() + 1);
                 _mode = PaintMode.Move;
             }
             else

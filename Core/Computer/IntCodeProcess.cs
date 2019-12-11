@@ -14,6 +14,7 @@ namespace Core.Computer
         private readonly Action<long> _writeOutputFunc;
         private readonly Func<long> _readInputFunc;
         public IList<long> Memory => _memory;
+        private bool _stop = false;
 
         public long Result => ReadFromMemory(0); 
 
@@ -26,13 +27,18 @@ namespace Core.Computer
             _writeOutputFunc = writeOutputFunc;
         }
 
+        public void Stop()
+        {
+            _stop = true;
+        }
+
         public long Run()
         {
             while (_pointer < _memory.Count)
             {
                 var instruction = InstructionParser.Parse(_memory, _pointer, _relativeBase);
 
-                if (instruction.Type == InstructionType.Halt)
+                if (_stop || instruction.Type == InstructionType.Halt)
                     break;
 
                 if (instruction.Type == InstructionType.Addition)

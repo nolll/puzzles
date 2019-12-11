@@ -29,6 +29,11 @@ namespace Core.Computer
             _process.Run();
         }
 
+        public void Stop()
+        {
+            _process.Stop();
+        }
+
         public IList<long> Memory => _process.Memory;
 
         protected abstract long ReadInput();

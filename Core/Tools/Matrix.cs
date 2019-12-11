@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Core.Tools
 {
@@ -71,6 +73,25 @@ namespace Core.Tools
             return direction;
         }
 
+        public IList<int> Values => _matrix.SelectMany(x => x).ToList();
+
+        public string Print()
+        {
+            var sb = new StringBuilder();
+            foreach (var row in _matrix)
+            {
+                foreach (var pixel in row)
+                {
+                    var output = pixel == 1 ? 'X' : '.';
+                    sb.Append(output);
+                }
+
+                sb.AppendLine();
+            }
+
+            return sb.ToString();
+        }
+
         public int ReadValue()
         {
             return _matrix[Address.Y][Address.X];
@@ -81,6 +102,11 @@ namespace Core.Tools
             _matrix[Address.Y][Address.X] = value;
         }
 
+        public void IncreaseValue(int value = 1)
+        {
+            _matrix[Address.Y][Address.X] += value;
+        }
+
         private IList<IList<int>> BuildMatrix(int shipSize)
         {
             var matrix = new List<IList<int>>();
@@ -89,7 +115,7 @@ namespace Core.Tools
                 var row = new List<int>();
                 for (var x = 0; x < shipSize; x++)
                 {
-                    row.Add(x);
+                    row.Add(0);
                 }
                 matrix.Add(row);
             }

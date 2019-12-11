@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace ConsoleApp.Events
+namespace ConsoleApp.Years
 {
     public abstract class Event
     {

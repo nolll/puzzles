@@ -22,6 +22,8 @@
 
         public static string ModulesMasses { get; }
 
+        public static string FrequencyChanges { get; }
+
         static InputData()
         {
             Asteroids = InputStrings.Asteroids;
@@ -45,6 +47,8 @@
             ComputerProgramDay2 = InputStrings.ComputerProgramDay2;
 
             ModulesMasses = InputStrings.ModulesMasses;
+
+            FrequencyChanges = InputStrings.FrequencyChanges;
         }
     }
 }

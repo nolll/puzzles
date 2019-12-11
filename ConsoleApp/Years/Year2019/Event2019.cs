@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ConsoleApp.Events.Event2019
+namespace ConsoleApp.Years.Year2019
 {
     public class Event2019 : Event
     {

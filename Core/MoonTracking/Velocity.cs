@@ -8,9 +8,9 @@ namespace Core.MoonTracking
 
         public Velocity(int x, int y, int z)
         {
-            X = 0;
-            Y = 0;
-            Z = 0;
+            X = x;
+            Y = y;
+            Z = z;
         }
     }
 }

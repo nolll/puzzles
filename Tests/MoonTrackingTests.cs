@@ -65,5 +65,20 @@ namespace Tests
             Assert.That(moons[3].Y, Is.EqualTo(-7));
             Assert.That(moons[3].Z, Is.EqualTo(-1));
         }
+
+        [Test]
+        public void TotalEnergyAfter10Steps()
+        {
+            var map = @"
+<x=-1, y=0, z=2>
+<x=2, y=-10, z=-7>
+<x=4, y=-8, z=8>
+<x=3, y=5, z=-1>";
+
+            var moonTracker = new MoonTracker(map);
+            moonTracker.Run(10);
+
+            Assert.That(moonTracker.TotalEnergy, Is.EqualTo(179));
+        }
     }
 }

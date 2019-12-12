@@ -1,3 +1,5 @@
+using System;
+
 namespace Core.MoonTracking
 {
     public class Moon
@@ -7,6 +9,10 @@ namespace Core.MoonTracking
         public int Y { get; private set; }
         public int Z { get; private set; }
         public Velocity Velocity { get; private set; }
+
+        public int PotentialEnergy => Math.Abs(X) + Math.Abs(Y) + Math.Abs(Z);
+        public int KineticEnergy => Velocity.KineticEnergy;
+        public int TotalEnergy => PotentialEnergy * KineticEnergy;
 
         public Moon(int id, int x, int y, int z, Velocity velocity = null)
         {

@@ -10,6 +10,7 @@ namespace Core.MoonTracking
         private int? _maxIterations;
 
         public IList<Moon> Moons { get; }
+        public int TotalEnergy => Moons.Sum(o => o.TotalEnergy);
 
         public MoonTracker(string map)
         {

@@ -24,6 +24,8 @@
 
         public static string ModulesMasses { get; }
 
+        public static string BoxIds { get; }
+
         public static string FrequencyChanges { get; }
 
         static InputData()

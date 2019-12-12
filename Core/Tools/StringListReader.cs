@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.Frequencies
+namespace Core.Tools
 {
     public static class StringListReader
     {

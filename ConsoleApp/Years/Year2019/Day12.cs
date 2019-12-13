@@ -13,10 +13,17 @@ namespace ConsoleApp.Years.Year2019
         protected override void RunDay()
         {
             WritePartTitle();
-            var tracker = new MoonTracker(InputData.MoonPositions);
-            tracker.Run(1000);
+            var tracker1 = new MoonTracker(InputData.MoonPositions);
+            const int iterations = 1000;
+            tracker1.Run(iterations);
 
-            Console.WriteLine($"Panels painted at least once: {tracker.TotalEnergy}");
+            Console.WriteLine($"Total energy after x time units: {tracker1.TotalEnergy}");
+
+            WritePartTitle();
+            var tracker2 = new MoonTracker(InputData.MoonPositions);
+            tracker2.Run(null);
+            
+            Console.WriteLine($"Time units until repeat: {tracker2.TotalCycleLength}");
         }
     }
 }

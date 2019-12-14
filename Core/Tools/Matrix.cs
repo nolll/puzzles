@@ -8,7 +8,7 @@ namespace Core.Tools
     {
         private readonly IList<IList<T>> _matrix;
         private MatrixDirection _direction;
-        
+
         public MatrixAddress Address { get; private set; }
 
         public Matrix(int width, int height)
@@ -20,24 +20,39 @@ namespace Core.Tools
 
         public MatrixAddress MoveTo(MatrixAddress address)
         {
-            //if (IsOutOfRange())
-            //{
-            //    ExtendMatrix();
-            //}
+            if (IsOutOfRange(address))
+            {
+                ExtendMatrix(address);
+            }
 
             Address = address;
             return address;
         }
 
-        //private void ExtendMatrix()
-        //{
-            
-        //}
+        private void ExtendMatrix(MatrixAddress address)
+        {
+            ExtendX(address);
+            ExtendY(address);
+        }
 
-        //private bool IsOutOfRange(MatrixAddress address)
-        //{
-        //    if(address.X > _)
-        //}
+        private void ExtendX(MatrixAddress address)
+        {
+            var extendBy = address.X - (Width - 1);
+            if (extendBy > 0)
+                AddCols(extendBy);
+        }
+
+        private void ExtendY(MatrixAddress address)
+        {
+            var extendBy = address.Y - (Height - 1);
+            if (extendBy > 0)
+                AddRows(extendBy);
+        }
+
+        private bool IsOutOfRange(MatrixAddress address)
+        {
+            return address.Y >= Height || address.X >= Width;
+        }
 
         public MatrixAddress MoveTo(int x, int y)
         {
@@ -114,6 +129,36 @@ namespace Core.Tools
         public void WriteValue(T value)
         {
             _matrix[Address.Y][Address.X] = value;
+        }
+
+        private int Height => _matrix.Count;
+        private int Width => _matrix.Any() ? _matrix[0].Count : 0;
+
+        private void AddRows(int numberOfRows)
+        {
+            var width = Width;
+            for (var y = 0; y < numberOfRows; y++)
+            {
+                var row = new List<T>();
+                for (var x = 0; x < width; x++)
+                {
+                    row.Add(default);
+                }
+                _matrix.Add(row);
+            }
+        }
+
+        private void AddCols(int numberOfRows)
+        {
+            var height = Height;
+            for (var y = 0; y < height; y++)
+            {
+                var row = _matrix[0];
+                for (var x = 0; x < numberOfRows; x++)
+                {
+                    row.Add(default);
+                }
+            }
         }
 
         private IList<IList<T>> BuildMatrix(int width, int height)

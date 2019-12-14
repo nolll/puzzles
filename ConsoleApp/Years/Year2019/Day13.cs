@@ -41,7 +41,7 @@ namespace ConsoleApp.Years.Year2019
         {
             _mode = ArcadeMode.X;
 
-            _screen = new Matrix<int>(2000, 2000);
+            _screen = new Matrix<int>(1, 1);
             _computer = new ComputerInterface(program, ReadInput, WriteOutput);
         }
 

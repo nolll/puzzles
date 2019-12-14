@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using Core.Computer;
 using Core.Tools;
 using Data.Inputs;
@@ -15,10 +16,14 @@ namespace ConsoleApp.Years.Year2019
         protected override void RunDay()
         {
             WritePartTitle();
-            var arcade = new Arcade(InputData.ComputerProgramDay13);
-            arcade.Play();
+            var arcade1 = new Arcade(InputData.ComputerProgramDay13);
+            arcade1.Play();
 
-            Console.WriteLine($"Number of block tiles: {arcade.NumberOfBlockTiles}");
+            Console.WriteLine($"Number of block tiles: {arcade1.NumberOfBlockTiles}");
+
+            WritePartTitle();
+            var arcade2 = new Arcade(InputData.ComputerProgramDay13);
+            arcade2.Play(2);
         }
     }
 
@@ -45,7 +50,7 @@ namespace ConsoleApp.Years.Year2019
             _computer = new ComputerInterface(program, ReadInput, WriteOutput);
         }
 
-        public void Play()
+        public void Play(int startValue = 0)
         {
             _computer.Start();
         }
@@ -79,6 +84,12 @@ namespace ConsoleApp.Years.Year2019
 
         private void WriteToScreen(int x, int y, int tile)
         {
+            if (x == 0 && y == 0)
+            {
+                Console.SetCursorPosition(0, 0);
+                Console.Write(_screen.Print());
+                Thread.Sleep(50);
+            }
             _screen.MoveTo(new MatrixAddress(x, y));
             _screen.WriteValue(tile);
         }

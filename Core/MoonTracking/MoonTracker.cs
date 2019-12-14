@@ -15,6 +15,7 @@ namespace Core.MoonTracking
         public Moon Moon3 { get; }
 
         public int TotalEnergy => Moon0.TotalEnergy + Moon1.TotalEnergy + Moon2.TotalEnergy + Moon3.TotalEnergy;
+        public int CurrentIteration => _iterations + 1;
 
         public MoonTracker(string map)
         {
@@ -47,20 +48,22 @@ namespace Core.MoonTracking
             Run();
         }
 
-        private bool MaxIterationsReached => _maxIterations != null && _iterations >= _maxIterations;
+        private bool MaxIterationsReached => RunFixedNumberOfIterations && _iterations >= _maxIterations;
+        private bool RunFixedNumberOfIterations => _maxIterations != null;
 
         private void Run()
         {
-            while (!MaxIterationsReached && !HasAllCycleLengths)
+            while (!IsDone)
             {
                 UpdateVelocities();
                 Move();
-                //Trace();
+                Trace();
                 _iterations++;
             }
         }
 
-        private bool HasAllCycleLengths => TotalCycleLength != null;
+        private bool IsDone => MaxIterationsReached || HasAllCycleLengths;
+        private bool HasAllCycleLengths => TotalCycleLength != null && !RunFixedNumberOfIterations;
             
         public long? TotalCycleLength
         {
@@ -72,22 +75,66 @@ namespace Core.MoonTracking
                     Moon3.CycleLength == null)
                     return null;
 
-                return Moon0.CycleLength.Value * Moon1.CycleLength.Value * Moon2.CycleLength.Value * Moon3.CycleLength.Value;
+                Console.WriteLine("Cycle lengths complete!");
+
+                var cycleLengths = new List<long>
+                {
+                    Moon0.CycleLength.Value,
+                    Moon1.CycleLength.Value,
+                    Moon2.CycleLength.Value,
+                    Moon3.CycleLength.Value
+                }.Distinct().OrderBy(o => o).ToList();
+
+                var cycleLengthsToUse = new List<long>();
+                while (cycleLengths.Any())
+                {
+                    var currentCycleLength = cycleLengths.First();
+                    
+                    if(!IsInSync(currentCycleLength, cycleLengths.Skip(1).ToList()))
+                        cycleLengthsToUse.Add(currentCycleLength);
+
+                    cycleLengths.RemoveAt(0);
+                }
+
+                var firstCycleLength = cycleLengthsToUse.First();
+                var otherLengths = cycleLengthsToUse.Skip(1).ToList();
+                long totalCycleLength = firstCycleLength;
+                foreach (var c in otherLengths)
+                {
+                    totalCycleLength *= c;
+                }
+
+                return totalCycleLength;
             }
+        }
+
+        private bool IsInSync(long a, IList<long> list)
+        {
+            if (!list.Any())
+                return false;
+            
+            return list.Any(o => IsInSync(a, o));
+        }
+
+        private bool IsInSync(long a, long b)
+        {
+            return a % b == 0 || b % a == 0;
         }
 
         private void Trace()
         {
-            if (_iterations % 1000000 == 0)
-                Console.WriteLine(_iterations);
+            const long traceAfter = 1000000;
+            if (_iterations % traceAfter == 0)
+                Console.WriteLine($"{_iterations / traceAfter}M");
         }
 
         private void Move()
         {
-            Moon0.Move(_iterations);
-            Moon1.Move(_iterations);
-            Moon2.Move(_iterations);
-            Moon3.Move(_iterations);
+            var iterationCounter = _iterations + 1;
+            Moon0.Move(iterationCounter);
+            Moon1.Move(iterationCounter);
+            Moon2.Move(iterationCounter);
+            Moon3.Move(iterationCounter);
         }
 
         private void UpdateVelocities()

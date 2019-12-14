@@ -17,7 +17,7 @@ namespace ConsoleApp.Years.Year2019
             const int iterations = 1000;
             tracker1.Run(iterations);
 
-            Console.WriteLine($"Total energy after x time units: {tracker1.TotalEnergy}");
+            Console.WriteLine($"Total energy after {iterations} time units: {tracker1.TotalEnergy}");
 
             WritePartTitle();
             var tracker2 = new MoonTracker(InputData.MoonPositions);

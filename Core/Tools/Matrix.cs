@@ -6,7 +6,7 @@ namespace Core.Tools
 {
     public class Matrix<T>
     {
-        private IList<IList<T>> _matrix;
+        private readonly IList<IList<T>> _matrix;
         private MatrixDirection _direction;
         
         public MatrixAddress Address { get; private set; }
@@ -20,9 +20,24 @@ namespace Core.Tools
 
         public MatrixAddress MoveTo(MatrixAddress address)
         {
+            //if (IsOutOfRange())
+            //{
+            //    ExtendMatrix();
+            //}
+
             Address = address;
             return address;
         }
+
+        //private void ExtendMatrix()
+        //{
+            
+        //}
+
+        //private bool IsOutOfRange(MatrixAddress address)
+        //{
+        //    if(address.X > _)
+        //}
 
         public MatrixAddress MoveTo(int x, int y)
         {

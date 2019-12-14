@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2019
             WritePartTitle();
             var tracker2 = new MoonTracker(InputData.MoonPositions);
             tracker2.Run(null);
-            
+
             Console.WriteLine($"Time units until repeat: {tracker2.TotalCycleLength}");
         }
     }

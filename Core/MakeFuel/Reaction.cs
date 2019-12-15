@@ -5,12 +5,12 @@ namespace Core.MakeFuel
     public class Reaction
     {
         public ChemicalQuantity Output { get; }
-        public IList<ChemicalQuantity> Input { get; }
+        public IList<ChemicalQuantity> Inputs { get; }
 
-        public Reaction(ChemicalQuantity output, IList<ChemicalQuantity> input)
+        public Reaction(ChemicalQuantity output, IList<ChemicalQuantity> inputs)
         {
             Output = output;
-            Input = input;
+            Inputs = inputs;
         }
     }
 }

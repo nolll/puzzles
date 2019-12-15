@@ -17,6 +17,9 @@ namespace Tests
 7 A, 1 E => 1 FUEL";
 
             var reactor = new NanoReactor(input);
+            var result = reactor.GetRequiredOre();
+
+            Assert.That(result, Is.EqualTo(31));
         }
     }
 }

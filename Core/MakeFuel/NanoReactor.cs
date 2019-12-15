@@ -5,11 +5,13 @@ namespace Core.MakeFuel
 {
     public class NanoReactor
     {
-        private IList<Reaction> _reactions;
+        private readonly IList<Reaction> _reactions;.
+        private readonly IDictionary<string, ChemicalQuantity> _waste;
 
         public NanoReactor(string input)
         {
             _reactions = new ReactionParser().Parse(input);
+            _waste = new Dictionary<string, ChemicalQuantity>();
         }
 
         public int GetRequiredOre()
@@ -37,6 +39,21 @@ namespace Core.MakeFuel
                     }
                 }
             }
+        }
+
+        private ChemicalQuantity TakeFromWaste(string name, int quantity)
+        {
+            if (_waste.TryGetValue(name, out var c))
+            {
+                if (c.Quantity >= quantity)
+                {
+                    var leftInWaste = c.Quantity - quantity;
+                    _waste[name] = new ChemicalQuantity(name, leftInWaste);
+                    return new ChemicalQuantity(name, quantity);
+                }
+            }
+
+            return null;
         }
 
         private Reaction FindReactionByOutputName(string name)

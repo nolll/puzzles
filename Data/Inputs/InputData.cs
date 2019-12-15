@@ -2,6 +2,8 @@
 {
     public static class InputData
     {
+        public static string Reactions { get; }
+
         public static string ComputerProgramDay13 { get; }
         
         public static string MoonPositions { get; }
@@ -34,8 +36,10 @@
 
         static InputData()
         {
+            Reactions = InputStrings.Reactions;
+
             ComputerProgramDay13 = InputStrings.ComputerProgramDay13;
-            
+
             MoonPositions = InputStrings.MoonPositions;
 
             ComputerProgramDay11 = InputStrings.ComputerProgramDay11;

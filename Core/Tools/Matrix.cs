@@ -7,15 +7,14 @@ namespace Core.Tools
     public class Matrix<T>
     {
         private readonly IList<IList<T>> _matrix;
-        private MatrixDirection _direction;
-
+        public MatrixDirection Direction { get; private set; }
         public MatrixAddress Address { get; private set; }
 
         public Matrix(int width, int height)
         {
             _matrix = BuildMatrix(width, height);
             Address = new MatrixAddress(0, 0);
-            _direction = MatrixDirection.Up;
+            Direction = MatrixDirection.Up;
         }
 
         public MatrixAddress MoveTo(MatrixAddress address)
@@ -61,45 +60,45 @@ namespace Core.Tools
 
         public MatrixAddress MoveForward(int distance = 1)
         {
-            return MoveTo(Address.X + _direction.X, Address.Y + _direction.Y);
+            return MoveTo(Address.X + Direction.X, Address.Y + Direction.Y);
         }
 
         public MatrixAddress MoveBackward(int distance = 1)
         {
-            if (_direction == MatrixDirection.Up)
+            if (Direction == MatrixDirection.Up)
                 return MoveTo(Address.X, Address.Y + distance);
-            if (_direction == MatrixDirection.Right)
+            if (Direction == MatrixDirection.Right)
                 return MoveTo(Address.X - distance, Address.Y);
-            if (_direction == MatrixDirection.Down)
+            if (Direction == MatrixDirection.Down)
                 return MoveTo(Address.X, Address.Y - distance);
             return MoveTo(Address.X + distance, Address.Y);
         }
 
         public MatrixDirection TurnLeft()
         {
-            if (_direction == MatrixDirection.Up)
+            if (Direction == MatrixDirection.Up)
                 return TurnTo(MatrixDirection.Left);
-            if (_direction == MatrixDirection.Right)
+            if (Direction == MatrixDirection.Right)
                 return TurnTo(MatrixDirection.Up);
-            if (_direction == MatrixDirection.Down)
+            if (Direction == MatrixDirection.Down)
                 return TurnTo(MatrixDirection.Right);
             return TurnTo(MatrixDirection.Down);
         }
 
         public MatrixDirection TurnRight()
         {
-            if (_direction == MatrixDirection.Up)
+            if (Direction == MatrixDirection.Up)
                 return TurnTo(MatrixDirection.Right);
-            if (_direction == MatrixDirection.Right)
+            if (Direction == MatrixDirection.Right)
                 return TurnTo(MatrixDirection.Down);
-            if (_direction == MatrixDirection.Down)
+            if (Direction == MatrixDirection.Down)
                 return TurnTo(MatrixDirection.Left);
             return TurnTo(MatrixDirection.Up);
         }
 
         public MatrixDirection TurnTo(MatrixDirection direction)
         {
-            _direction = direction;
+            Direction = direction;
             return direction;
         }
 

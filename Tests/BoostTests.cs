@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Core.Computer;
 using NUnit.Framework;
 

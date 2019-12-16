@@ -4,6 +4,8 @@
     {
         public static string FlawedFrequencyTransmission { get; }
 
+        public static string ComputerProgramDay15 { get; }
+        
         public static string Reactions { get; }
 
         public static string ComputerProgramDay13 { get; }
@@ -40,6 +42,8 @@
         {
             FlawedFrequencyTransmission = InputStrings.FlawedFrequencyTransmission;
 
+            ComputerProgramDay15 = InputStrings.ComputerProgramDay15; 
+            
             Reactions = InputStrings.Reactions;
 
             ComputerProgramDay13 = InputStrings.ComputerProgramDay13;

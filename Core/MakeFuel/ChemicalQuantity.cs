@@ -3,9 +3,9 @@ namespace Core.MakeFuel
     public class ChemicalQuantity
     {
         public string Name { get; }
-        public int Quantity { get; }
+        public long Quantity { get; }
 
-        public ChemicalQuantity(string name, int quantity)
+        public ChemicalQuantity(string name, long quantity)
         {
             Name = name;
             Quantity = quantity;

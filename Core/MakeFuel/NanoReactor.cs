@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,16 +8,18 @@ namespace Core.MakeFuel
     {
         private readonly IList<Reaction> _reactions;
         private readonly IDictionary<string, ChemicalQuantity> _waste;
-        private readonly IDictionary<string, int> _storage;
+        private readonly IDictionary<string, long> _storage;
         private readonly IDictionary<string, Reaction> _recipes;
-        private int _oreCount;
+        private long _oreCount;
+        private int _fuelCount;
+        private long? _availableOre;
 
         public NanoReactor(string input)
         {
             _oreCount = 0;
             _reactions = new ReactionParser().Parse(input);
             _waste = new Dictionary<string, ChemicalQuantity>();
-            _storage = new Dictionary<string, int>();
+            _storage = new Dictionary<string, long>();
             _recipes = new Dictionary<string, Reaction>();
             Init();
         }
@@ -31,13 +34,56 @@ namespace Core.MakeFuel
             }
         }
 
-        public int GetRequiredOre()
+        public long GetRequiredOreForOneFuel()
         {
-            var fuel = Get("FUEL", 1).Quantity;
+            var fuel = GetOneFuel();
             return _oreCount;
         }
 
-        private ChemicalQuantity Get(string name, int quantity)
+        public long GetRequiredOreFor1000Fuel()
+        {
+            for (var i = 0; i < 1000; i++)
+            {
+                GetOneFuel();
+            }
+
+            return _oreCount;
+        }
+
+        public int GetUntilOutOfOre(long availableOre)
+        {
+            _availableOre = availableOre;
+            while (true)
+            {
+                try
+                {
+                    GetOneFuel();
+                    Console.WriteLine($"Fuel Count: {_fuelCount}, Ore Count: {_oreCount}");
+                }
+                catch (OutOfOresException)
+                {
+                    break;
+                }
+            }
+
+            return _fuelCount;
+        }
+
+        private ChemicalQuantity GetOneFuel()
+        {
+            var fuel = Get("FUEL", 1);
+            _fuelCount += 1;
+            return fuel;
+        }
+
+        public ChemicalQuantity GetXFuel(int x)
+        {
+            var fuel = Get("FUEL", x);
+            _fuelCount += 1;
+            return fuel;
+        }
+
+        private ChemicalQuantity Get(string name, long quantity)
         {
             var inStorage = _storage[name];
             while (inStorage < quantity)
@@ -46,8 +92,7 @@ namespace Core.MakeFuel
                 inStorage = _storage[name];
             }
 
-            if(name != "FUEL")
-                RemoveFromStorage(name, quantity);
+            RemoveFromStorage(name, quantity);
             return new ChemicalQuantity(name, quantity);
         }
 
@@ -55,7 +100,12 @@ namespace Core.MakeFuel
         {
             if (name == "ORE")
             {
-                _oreCount += 1;
+                var newOreCount = _oreCount + 1;
+                if (_availableOre != null && newOreCount > _availableOre.Value)
+                {
+                    throw new OutOfOresException();
+                }
+                _oreCount = newOreCount;
                 AddToStorage(name, 1);
             }
             else
@@ -69,16 +119,20 @@ namespace Core.MakeFuel
             }
         }
 
-        private void AddToStorage(string name, int quantity)
+        private void AddToStorage(string name, long quantity)
         {
             var inStorage = _storage[name];
             _storage[name] = inStorage + quantity;
         }
 
-        private void RemoveFromStorage(string name, int quantity)
+        private void RemoveFromStorage(string name, long quantity)
         {
             var inStorage = _storage[name];
             _storage[name] = inStorage - quantity;
         }
+    }
+
+    public class OutOfOresException : Exception
+    {
     }
 }

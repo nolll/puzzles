@@ -52,11 +52,19 @@ namespace Tests
         {
             var algorithm = new FrequencyAlgorithm(input);
             var result = algorithm.Run(100);
-            var firstEight = result.Substring(0, 8);
 
-            Assert.That(firstEight, Is.EqualTo(expected));
+            Assert.That(result, Is.EqualTo(expected));
         }
 
-        
+        [TestCase("03036732577212944063491565474664", "84462026")]
+        [TestCase("02935109699940807407585447034323", "78725270")]
+        [TestCase("03081770884921959731165446850517", "53553731")]
+        public void MessageAfter100RealPhases(string input, string expected)
+        {
+            var algorithm = new FrequencyAlgorithm(input);
+            var result = algorithm.RunReal(1);
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
     }
 }

@@ -13,11 +13,16 @@ namespace ConsoleApp.Years.Year2019
         protected override void RunDay()
         {
             WritePartTitle();
-            var algorithm = new FrequencyAlgorithm(InputData.FlawedFrequencyTransmission);
-            var result = algorithm.Run(100);
-            var firstEight = result.Substring(0, 8);
+            var algorithm1 = new FrequencyAlgorithm(InputData.FlawedFrequencyTransmission);
+            var result1 = algorithm1.Run(100);
 
-            Console.WriteLine($"First eight after 100 phases: {firstEight}");
+            Console.WriteLine($"First eight after 100 phases: {result1}");
+
+            //WritePartTitle();
+            //var algorithm2 = new FrequencyAlgorithm("03036732577212944063491565474664");
+            //var result2 = algorithm2.RunReal(1);
+
+            //Console.WriteLine($"First eight after 100 phases: {result2}");
         }
     }
 }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Core.FlawedFrequencyTransmission
 {
@@ -14,12 +16,38 @@ namespace Core.FlawedFrequencyTransmission
 
         public string Run(int phaseCount)
         {
-            var list = _input.ToCharArray().Select(o => int.Parse(o.ToString())).ToList();
+            var result = Run(_input, phaseCount);
+            return result.Substring(0, 8);
+        }
+
+        public string RunReal(int phaseCount)
+        {
+            var input = GetLongInput();
+            var result = Run(input, phaseCount);
+            var messageOffset = int.Parse(_input.Substring(0, 7).TrimStart('0'));
+            return result.Substring(messageOffset, 8);
+        }
+
+        private string Run(string input, int phaseCount)
+        {
+            var list = input.ToCharArray().Select(o => int.Parse(o.ToString())).ToList();
             for (var i = 0; i < phaseCount; i++)
             {
                 list = RunPhase(list).ToList();
+                Console.WriteLine(string.Join("", list));
             }
+
             return string.Join("", list);
+        }
+
+        private string GetLongInput()
+        {
+            var sb = new StringBuilder();
+            for (var i = 0; i < 10000; i++)
+            {
+                sb.Append(_input);
+            }
+            return sb.ToString();
         }
 
         private IEnumerable<int> RunPhase(IList<int> inputList)
@@ -42,6 +70,7 @@ namespace Core.FlawedFrequencyTransmission
                 var str = sum.ToString();
                 str = str.Substring(str.Length - 1);
                 outputList.Add(int.Parse(str));
+                Console.Write(str);
             }
 
             return outputList;

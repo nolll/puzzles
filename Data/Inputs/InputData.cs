@@ -2,6 +2,8 @@
 {
     public static class InputData
     {
+        public static string FlawedFrequencyTransmission { get; }
+
         public static string Reactions { get; }
 
         public static string ComputerProgramDay13 { get; }
@@ -36,6 +38,8 @@
 
         static InputData()
         {
+            FlawedFrequencyTransmission = InputStrings.FlawedFrequencyTransmission;
+
             Reactions = InputStrings.Reactions;
 
             ComputerProgramDay13 = InputStrings.ComputerProgramDay13;

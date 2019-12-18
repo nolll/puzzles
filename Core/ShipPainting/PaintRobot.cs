@@ -37,7 +37,7 @@ namespace Core.ShipPainting
             _computer = new ComputerInterface(_program, ReadInput, WriteOutput);
             _computer.Start();
 
-            return new Result(PaintedPanelsCount, _panels.Address.X, _panels.Address.Y, _panels.Print());
+            return new Result(PaintedPanelsCount, _panels.Address.X, _panels.Address.Y, _panels.Print(false, false));
         }
 
         private IList<int> PaintedPanels => _paintCounts.Values.Where(o => o > 0).ToList();

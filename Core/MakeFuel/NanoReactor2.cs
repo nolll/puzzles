@@ -32,7 +32,6 @@ namespace Core.MakeFuel
         public void MakeFuel(long count)
         {
             Get("FUEL", count);
-            var x = 0;
         }
 
         public long FuelFor(long target)

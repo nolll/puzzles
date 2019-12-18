@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Core.Computer;
 using Core.Tools;
 
@@ -19,22 +21,22 @@ namespace Core.OxygenSystem
         private readonly Matrix<char> _matrix;
         private int _steps;
         private DroidDirection NextDirection => GetDroidDirection();
-        private const int Size = 100;
+        private const int Size = 1;
+        private readonly Random _random;
 
         public RepairDroid(string program)
         {
             _computer = new ComputerInterface(program, ReadInput, WriteOutput);
             _matrix = new Matrix<char>(Size, Size);
-            Console.WriteLine("...");
-            Console.WriteLine(_matrix.Print());
-            Console.WriteLine("---");
+            _random = new Random();
         }
 
         public int Run()
         {
+            Console.Clear();
             _steps = 0;
-            const int startPOint = Size / 2 - 1;
-            _matrix.MoveTo(startPOint, startPOint);
+            //const int startPOint = Size / 2 - 1;
+            //_matrix.MoveTo(startPOint, startPOint);
             _computer.Start();
             return _steps;
         }
@@ -48,37 +50,106 @@ namespace Core.OxygenSystem
         {
             if (output == 0)
             {
-                var currentAddress = _matrix.Address;
                 _matrix.MoveForward();
                 _matrix.WriteValue('#');
-                _matrix.MoveTo(currentAddress);
-                _matrix.TurnRight();
-                return;
+                _matrix.MoveBackward();
+                TurnToUnvisitedDirection();
             }
 
-            if (output == 1)
+            else if (output == 1)
             {
                 _matrix.MoveForward();
                 _matrix.WriteValue('.');
-                return;
+                TurnToUnvisitedDirection();
             }
-            if (output == 2)
+
+            else if (output == 2)
             {
                 _matrix.MoveForward();
                 _matrix.WriteValue('X');
-                return;
             }
 
-            Console.WriteLine(_matrix.Print());
+            else
+            {
+                var x = 0;
+            }
+
+            //Thread.Sleep(50);
+
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine(_matrix.Print(true, true, 'D', 'S'));
+        }
+
+        private void TurnToUnvisitedDirection()
+        {
+            var directions = FindUnvisitedDirections();
+            if (!directions.Any())
+            {
+                directions = new List<MatrixDirection>
+                {
+                    MatrixDirection.Up,
+                    MatrixDirection.Right,
+                    MatrixDirection.Down,
+                    MatrixDirection.Left
+                };
+            }
+            var rnd = _random.Next(directions.Count);
+            _matrix.TurnTo(directions[rnd]);
+        }
+
+        private IList<MatrixDirection> FindUnvisitedDirections()
+        {
+            var directions = new List<MatrixDirection>();
+
+            _matrix.MoveForward();
+            if (_matrix.ReadValue() == '\0')
+                directions.Add(_matrix.Direction);
+            _matrix.MoveBackward();
+            _matrix.TurnRight();
+
+            _matrix.MoveForward();
+            if (_matrix.ReadValue() == '\0')
+                directions.Add(_matrix.Direction);
+            _matrix.MoveBackward();
+            _matrix.TurnRight();
+
+            _matrix.MoveForward();
+            if (_matrix.ReadValue() == '\0')
+                directions.Add(_matrix.Direction);
+            _matrix.MoveBackward();
+            _matrix.TurnRight();
+
+            _matrix.MoveForward();
+            if (_matrix.ReadValue() == '\0')
+                directions.Add(_matrix.Direction);
+            _matrix.MoveBackward();
+            _matrix.TurnRight();
+
+            return directions;
+        }
+
+        private MatrixDirection RandomDirection
+        {
+            get
+            {
+                var rnd = _random.Next(4);
+                if (rnd == 0)
+                    return MatrixDirection.Up;
+                if (rnd == 1)
+                    return MatrixDirection.Right;
+                if (rnd == 1)
+                    return MatrixDirection.Down;
+                return MatrixDirection.Left;
+            }
         }
 
         private DroidDirection GetDroidDirection()
         {
-            if (_matrix.Direction == MatrixDirection.Right)
+            if (_matrix.Direction.Equals(MatrixDirection.Right))
                 return DroidDirection.East;
-            if (_matrix.Direction == MatrixDirection.Down)
+            if (_matrix.Direction.Equals(MatrixDirection.Down))
                 return DroidDirection.South;
-            if (_matrix.Direction == MatrixDirection.Left)
+            if (_matrix.Direction.Equals(MatrixDirection.Left))
                 return DroidDirection.West;
             return DroidDirection.North;
         }

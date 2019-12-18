@@ -2,6 +2,8 @@
 {
     public static class InputData
     {
+        public static string OxygenSystemMap { get; }
+
         public static string FlawedFrequencyTransmission { get; }
 
         public static string ComputerProgramDay15 { get; }
@@ -40,6 +42,8 @@
 
         static InputData()
         {
+            OxygenSystemMap = InputStrings.OxygenSystemMap;
+
             FlawedFrequencyTransmission = InputStrings.FlawedFrequencyTransmission;
 
             ComputerProgramDay15 = InputStrings.ComputerProgramDay15; 

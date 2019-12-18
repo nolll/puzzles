@@ -113,6 +113,23 @@ namespace Core.Tools
             _matrix[Address.Y][Address.X] = value;
         }
 
+        public IList<MatrixAddress> FindAddresses(T value)
+        {
+            var addresses = new List<MatrixAddress>();
+            for (var y = 0; y < _matrix.Count; y++)
+            {
+                for (var x = 0; x < _matrix.Count; x++)
+                {
+                    MoveTo(x, y);
+                    var val = ReadValue();
+                    if(val.Equals(value))
+                        addresses.Add(new MatrixAddress(x, y));
+                }
+            }
+
+            return addresses;
+        }
+
         private bool IsOutOfRange(MatrixAddress address)
         {
             return address.Y >= Height ||

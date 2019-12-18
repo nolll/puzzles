@@ -35,8 +35,6 @@ namespace Core.OxygenSystem
         {
             Console.Clear();
             _steps = 0;
-            //const int startPOint = Size / 2 - 1;
-            //_matrix.MoveTo(startPOint, startPOint);
             _computer.Start();
             return _steps;
         }

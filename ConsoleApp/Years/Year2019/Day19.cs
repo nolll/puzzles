@@ -13,16 +13,16 @@ namespace ConsoleApp.Years.Year2019
         protected override void RunDay()
         {
             WritePartTitle();
-            var tbc = new TractorBeamComputer(InputData.ComputerProgramDay19, 50, 50);
-            var result = tbc.Run();
+            var tbc = new TractorBeamComputer1(InputData.ComputerProgramDay19, 50, 50);
+            var result = tbc.GetPullCount();
 
-            Console.WriteLine($"Number of pulled coordinates: {result.Count}");
+            Console.WriteLine($"Number of pulled coordinates: {result}");
 
             WritePartTitle();
-            var tbc2 = new TractorBeamComputer(InputData.ComputerProgramDay19, 100, 100);
-            var result2 = tbc2.Run();
+            var tbc2 = new TractorBeamComputer2(InputData.ComputerProgramDay19, 100, 100);
+            var result2 = tbc2.Find100By100Square();
 
-            Console.WriteLine($"Square size: {result2.SquareSize}");
+            Console.WriteLine($"Checksum size: {result2.Checksum}");
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Core.Tools
         private int Height => _matrix.Count;
         private int Width => _matrix.Any() ? _matrix[0].Count : 0;
 
-        public Matrix(int width, int height)
+        public Matrix(int width = 1, int height = 1)
         {
             _matrix = BuildMatrix(width, height);
             Address = new MatrixAddress(0, 0);

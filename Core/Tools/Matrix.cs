@@ -12,8 +12,8 @@ namespace Core.Tools
         public MatrixAddress StartAddress { get; private set; }
 
         public IList<T> Values => _matrix.SelectMany(x => x).ToList();
-        private int Height => _matrix.Count;
-        private int Width => _matrix.Any() ? _matrix[0].Count : 0;
+        public int Height => _matrix.Count;
+        public int Width => _matrix.Any() ? _matrix[0].Count : 0;
 
         public Matrix(int width = 1, int height = 1)
         {
@@ -47,6 +47,26 @@ namespace Core.Tools
         public MatrixAddress MoveBackward()
         {
             return MoveTo(Address.X - Direction.X, Address.Y - Direction.Y);
+        }
+
+        public MatrixAddress MoveUp()
+        {
+            return MoveTo(Address.X, Address.Y - 1);
+        }
+
+        public MatrixAddress MoveRight()
+        {
+            return MoveTo(Address.X + 1, Address.Y);
+        }
+
+        public MatrixAddress MoveDown()
+        {
+            return MoveTo(Address.X, Address.Y + 1);
+        }
+
+        public MatrixAddress MoveLeft()
+        {
+            return MoveTo(Address.X - 1, Address.Y);
         }
 
         public MatrixDirection TurnLeft()
@@ -105,7 +125,12 @@ namespace Core.Tools
 
         public T ReadValue()
         {
-            return _matrix[Address.Y][Address.X];
+            return ReadValueAt(Address.X, Address.Y);
+        }
+
+        public T ReadValueAt(int x, int y)
+        {
+            return _matrix[y][x];
         }
 
         public void WriteValue(T value)
@@ -130,7 +155,7 @@ namespace Core.Tools
             return addresses;
         }
 
-        private bool IsOutOfRange(MatrixAddress address)
+        public bool IsOutOfRange(MatrixAddress address)
         {
             return address.Y >= Height ||
                    address.Y < 0 ||

@@ -3,12 +3,12 @@ using Core.Computer;
 
 namespace Core.Scaffolding
 {
-    public class ScaffoldingComputer
+    public class ScaffoldingComputer1
     {
         private readonly ComputerInterface _computer;
         private readonly StringBuilder _sb;
 
-        public ScaffoldingComputer(string program)
+        public ScaffoldingComputer1(string program)
         {
             _sb = new StringBuilder();
             _computer = new ComputerInterface(program, ReadInput, WriteOutput);

@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Core.Computer;
 
 namespace Core.Scaffolding
@@ -11,10 +9,10 @@ namespace Core.Scaffolding
         private readonly ComputerInterface _computer;
         private long _output;
 
-        private readonly int[] _mainRoutine = { 'A', ',', 'B', ',', 'C', ',', 'A', ',', 'B' };
-        private readonly int[] _functionA = { 'R', ',', '6', ',', 'L', ',', '1', '0', ',', 'R', ',', '8', ',', 'R', ',', '8', ',', 'R', ',', '1', '2', ',', 'L', ',', '8', ',', 'L', ',', '1', '0', ',', 'R', ',', '6', ',', 'L', ',', '1', '0' };
-        private readonly int[] _functionB = { 'R', ',', '8', ',', 'R', ',', '8', ',', 'R', ',', '1', '2', ',', 'L', ',', '1', '0', ',', 'R', ',', '6', ',', 'L', ',', '1', '0' };
-        private readonly int[] _functionC = { 'R', ',', '1', '2', ',', 'L', ',', '8', ',', 'L', ',', '1', '0', ',', 'R', ',', '1', '2', ',', 'L', ',', '1', '0', ',', 'R', ',', '6', ',', 'L', ',', '1', '0' };
+        private const string MainRoutine = "A,B,A,C,B,C,A,B,A,C";
+        private const string FunctionA = "R,6,L,10,R,8,R,8";
+        private const string FunctionB = "R,12,L,8,L,10";
+        private const string FunctionC = "R,12,L,10,R,6,L,10";
 
         private readonly IList<int> _inputSequence;
 
@@ -27,13 +25,15 @@ namespace Core.Scaffolding
         private IList<int> BuildInputSequence()
         {
             var inputSequence = new List<int>();
-            inputSequence.AddRange(_mainRoutine);
+            inputSequence.AddRange(MainRoutine.ToCharArray().Select(o => (int)o));
             inputSequence.Add(10);
-            inputSequence.AddRange(_functionA);
+            inputSequence.AddRange(FunctionA.ToCharArray().Select(o => (int)o));
             inputSequence.Add(10);
-            inputSequence.AddRange(_functionB);
+            inputSequence.AddRange(FunctionB.ToCharArray().Select(o => (int)o));
             inputSequence.Add(10);
-            inputSequence.AddRange(_functionC);
+            inputSequence.AddRange(FunctionC.ToCharArray().Select(o => (int)o));
+            inputSequence.Add(10);
+            inputSequence.Add('n');
             inputSequence.Add(10);
 
             return inputSequence;
@@ -54,7 +54,7 @@ namespace Core.Scaffolding
                 return val;
             }
 
-            return 'n';
+            return 0;
         }
 
         private void WriteOutput(long output)

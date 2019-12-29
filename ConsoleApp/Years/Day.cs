@@ -7,14 +7,15 @@ namespace ConsoleApp.Years
     {
         private const string Divider = "--------------------------------------------------";
 
-        private readonly int _day;
         private int _part;
         protected abstract void RunDay();
         private readonly Timer _timer;
 
+        public int Id { get; }
+
         protected Day(int day)
         {
-            _day = day;
+            Id = day;
             _timer = new Timer();
             _part = 1;
         }
@@ -37,7 +38,7 @@ namespace ConsoleApp.Years
         private void WriteDayTitle()
         {
             Console.WriteLine();
-            Console.WriteLine($"Day {_day}:");
+            Console.WriteLine($"Day {Id}:");
             WriteDivider();
         }
 

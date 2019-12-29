@@ -15,14 +15,9 @@ namespace ConsoleApp.Years
 
         public Day GetDay(int? selectedDay)
         {
-            if (selectedDay != null)
-            {
-                if (selectedDay < Days.Count)
-                    return Days[selectedDay.Value - 1];
-                return null;
-            }
-
-            return Days.Last();
+            return selectedDay != null 
+                ? Days.FirstOrDefault(o => o.Id == selectedDay.Value) 
+                : Days.Last();
         }
     }
 }

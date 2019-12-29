@@ -21,13 +21,12 @@ namespace Core.OxygenSystem
         private readonly Matrix<char> _matrix;
         private int _steps;
         private DroidDirection NextDirection => GetDroidDirection();
-        private const int Size = 1;
         private readonly Random _random;
 
         public RepairDroid(string program)
         {
             _computer = new ComputerInterface(program, ReadInput, WriteOutput);
-            _matrix = new Matrix<char>(Size, Size);
+            _matrix = new Matrix<char>();
             _random = new Random();
         }
 
@@ -124,21 +123,6 @@ namespace Core.OxygenSystem
             _matrix.TurnRight();
 
             return directions;
-        }
-
-        private MatrixDirection RandomDirection
-        {
-            get
-            {
-                var rnd = _random.Next(4);
-                if (rnd == 0)
-                    return MatrixDirection.Up;
-                if (rnd == 1)
-                    return MatrixDirection.Right;
-                if (rnd == 1)
-                    return MatrixDirection.Down;
-                return MatrixDirection.Left;
-            }
         }
 
         private DroidDirection GetDroidDirection()

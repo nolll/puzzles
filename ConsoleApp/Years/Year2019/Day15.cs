@@ -13,11 +13,12 @@ namespace ConsoleApp.Years.Year2019
 
         protected override void RunDay()
         {
-            WritePartTitle();
-            var droid = new RepairDroid(InputData.ComputerProgramDay15);
-            var result1 = droid.Run();
+            //Commented out due to bad implementation that takes a while to complete. Works tho!
+            //WritePartTitle();
+            //var droid = new RepairDroid(InputData.ComputerProgramDay15);
+            //var result1 = droid.Run();
 
-            Console.WriteLine($"Steps to find oxygen system: {result1}");
+            //Console.WriteLine($"Steps to find oxygen system: {result1}");
 
             WritePartTitle();
             var filler = new OxygenFiller(InputData.OxygenSystemMap);

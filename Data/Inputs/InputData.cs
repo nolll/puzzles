@@ -2,6 +2,8 @@
 {
     public static class InputData
     {
+        public static string ComputerProgramDay25 { get; }
+
         public static string CardShuffles { get; }
 
         public static string ComputerProgramDay19 { get; }
@@ -48,7 +50,9 @@
 
         static InputData()
         {
-            CardShuffles= InputStrings.CardShuffles;
+            ComputerProgramDay25 = InputStrings.ComputerProgramDay25; 
+            
+            CardShuffles = InputStrings.CardShuffles;
             
             ComputerProgramDay19 = InputStrings.ComputerProgramDay19;
 

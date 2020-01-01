@@ -1,3 +1,4 @@
+using Core.CardShuffling;
 using NUnit.Framework;
 
 namespace Tests
@@ -45,6 +46,29 @@ namespace Tests
             shuffler.Increment(3);
 
             var expectedDeck = new[] { 0, 7, 4, 1, 8, 5, 2, 9, 6, 3 };
+            Assert.That(shuffler.Deck, Is.EqualTo(expectedDeck));
+        }
+
+        [Test]
+        public void ShuffleMany()
+        {
+            var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var shuffler = new CardShuffler(deck);
+
+            const string input = @"
+deal into new stack
+cut -2
+deal with increment 7
+cut 8
+cut -4
+deal with increment 7
+cut 3
+deal with increment 9
+deal with increment 3
+cut -1";
+            shuffler.Shuffle(input);
+
+            var expectedDeck = new[] { 9, 2, 5, 8, 1, 4, 7, 0, 3, 6 };
             Assert.That(shuffler.Deck, Is.EqualTo(expectedDeck));
         }
     }

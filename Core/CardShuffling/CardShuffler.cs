@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Tests
+namespace Core.CardShuffling
 {
     public class CardShuffler
     {
@@ -10,6 +10,15 @@ namespace Tests
         public CardShuffler(IList<int> deck)
         {
             Deck = deck;
+        }
+
+        public CardShuffler(int size)
+        {
+            Deck = new List<int>();
+            for (var i = 0; i < size; i++)
+            {
+                Deck.Add(i);
+            }
         }
 
         public void Reverse()
@@ -43,6 +52,32 @@ namespace Tests
             }
 
             Deck = newDeck;
+        }
+
+        public void Shuffle(string input)
+        {
+            Shuffle(input.Trim().Split('\n').Select(o => o.Trim()).ToList());
+        }
+
+        public void Shuffle(IList<string> shuffles)
+        {
+            foreach (var shuffle in shuffles)
+            {
+                if (shuffle == "deal into new stack")
+                {
+                    Reverse();
+                }
+                else if (shuffle.StartsWith("deal with increment"))
+                {
+                    var n = int.Parse(shuffle.Split(" ").Last());
+                    Increment(n);
+                }
+                else if (shuffle.StartsWith("cut"))
+                {
+                    var n = int.Parse(shuffle.Split(" ").Last());
+                    Cut(n);
+                }
+            }
         }
     }
 }

@@ -50,6 +50,8 @@
 
         public static string FrequencyChanges { get; }
 
+        public static string FloorInstructions { get; }
+
         static InputData()
         {
             ComputerProgramDay25 = InputStrings.ComputerProgramDay25;
@@ -99,6 +101,8 @@
             ModulesMasses = InputStrings.ModulesMasses;
 
             FrequencyChanges = InputStrings.FrequencyChanges;
+
+            FloorInstructions = InputStrings.FloorInstructions;
         }
     }
 }

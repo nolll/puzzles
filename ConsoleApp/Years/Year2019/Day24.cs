@@ -1,6 +1,5 @@
 ﻿using System;
 using Core.BugLife;
-using Data.Inputs;
 
 namespace ConsoleApp.Years.Year2019
 {
@@ -13,10 +12,16 @@ namespace ConsoleApp.Years.Year2019
         protected override void RunDay()
         {
             WritePartTitle();
-            var simulator = new BugLifeSimulator(InputData.Bugs);
+            var simulator = new BugLifeSimulator(Input);
             simulator.RunUntilRepeat();
 
             Console.WriteLine($"Biodiversity rating: {simulator.BiodiversityRating}");
         }
+
+        private const string Input = @".#..#
+#..##
+##..#
+##.##
+#..##";
     }
 }

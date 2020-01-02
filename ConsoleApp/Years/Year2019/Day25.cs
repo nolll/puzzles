@@ -12,7 +12,7 @@ namespace ConsoleApp.Years.Year2019
         protected override void RunDay()
         {
             WritePartTitle();
-            var investigationDroid = new InvestigationDroid(InputStrings.ComputerProgramDay25);
+            var investigationDroid = new InvestigationDroid(InputData.ComputerProgramDay25);
             investigationDroid.Run();
         }
     }

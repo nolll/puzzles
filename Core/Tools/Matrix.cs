@@ -128,6 +128,11 @@ namespace Core.Tools
             return ReadValueAt(Address.X, Address.Y);
         }
 
+        public T ReadValueAt(MatrixAddress address)
+        {
+            return ReadValueAt(address.X, address.Y);
+        }
+
         public T ReadValueAt(int x, int y)
         {
             return _matrix[y][x];
@@ -161,6 +166,31 @@ namespace Core.Tools
                    address.Y < 0 ||
                    address.X >= Width ||
                    address.X < 0;
+        }
+
+        public IList<T> AdjacentValues
+        {
+            get
+            {
+                var values = new List<T>();
+                var address = new MatrixAddress(Address.X, Address.Y - 1);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+                
+                address = new MatrixAddress(Address.X + 1, Address.Y);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+                
+                address = new MatrixAddress(Address.X, Address.Y + 1);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+                
+                address = new MatrixAddress(Address.X - 1, Address.Y);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+
+                return values;
+            }
         }
 
         private IList<IList<T>> BuildMatrix(int width, int height)

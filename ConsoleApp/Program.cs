@@ -7,6 +7,9 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             var parameters = new Parameters(args);
+            
+            parameters = new Parameters(day: 1, year: 2015);
+            
             if (parameters.ShowHelp)
             {
                 var helpPrinter = new HelpPrinter();

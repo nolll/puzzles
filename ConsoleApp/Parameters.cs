@@ -19,6 +19,13 @@ namespace ConsoleApp
             ShowHelp = GetShowHelp();
         }
 
+        public Parameters(int? day = null, int? year = null, bool showHelp = false)
+        {
+            Day = day;
+            Year = year;
+            ShowHelp = showHelp;
+        }
+
         private int? GetDay() => GetIntValue("-d", "--day");
         private int? GetYear() => GetIntValue("-y", "--year");
         private bool GetShowHelp() => GetBoolValue("-h", "--help") ?? false;

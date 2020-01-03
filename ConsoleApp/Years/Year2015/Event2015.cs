@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ConsoleApp.Years.Year2019;
 
 namespace ConsoleApp.Years.Year2015
 {
@@ -11,7 +10,8 @@ namespace ConsoleApp.Years.Year2015
 
         protected override IList<Day> Days => new List<Day>
         {
-            new Day01()
+            new Day01(),
+            new Day02(),
         };
     }
 }

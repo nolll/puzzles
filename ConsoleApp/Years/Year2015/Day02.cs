@@ -12,10 +12,13 @@ namespace ConsoleApp.Years.Year2015
         protected override void RunDay()
         {
             WritePartTitle();
-            var navigator = new WrappingPaperCalculator();
-            var result = navigator.GetRequiredPaper(Input);
-            Console.WriteLine($"Required wrapping paper: {result} square feet");
+            var calc = new GiftWrappingCalculator();
+            var paperResult = calc.GetRequiredPaper(Input);
+            Console.WriteLine($"Required wrapping paper: {paperResult} square feet");
 
+            WritePartTitle();
+            var ribbonResult = calc.GetRequiredRibbon(Input);
+            Console.WriteLine($"Required ribbon: {ribbonResult} feet");
         }
 
         private const string Input = @"20x3x11

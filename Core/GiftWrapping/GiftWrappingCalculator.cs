@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Core.GiftWrapping
 {
-    public class WrappingPaperCalculator
+    public class GiftWrappingCalculator
     {
         public int GetRequiredPaper(string input)
         {
@@ -22,6 +22,18 @@ namespace Core.GiftWrapping
             }.OrderBy(o => o).ToList();
 
             return sides[0] * 3 + sides[1] * 2 + sides[2] * 2;
+        }
+
+        public int GetRequiredRibbon(string input)
+        {
+            var gifts = input.Trim().Split('\n').Select(o => o.Trim());
+            return gifts.Sum(GetRequiredRibbonForOneBox);
+        }
+
+        public int GetRequiredRibbonForOneBox(string input)
+        {
+            var dimensions = input.Split('x').Select(int.Parse).ToList().OrderBy(o => o).ToList();
+            return dimensions[0] * 2 + dimensions[1] * 2 + dimensions[0] * dimensions[1] * dimensions[2];
         }
     }
 }

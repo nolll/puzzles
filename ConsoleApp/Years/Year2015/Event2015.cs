@@ -12,6 +12,7 @@ namespace ConsoleApp.Years.Year2015
         {
             new Day01(),
             new Day02(),
+            new Day03(),
         };
     }
 }

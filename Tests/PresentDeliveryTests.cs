@@ -9,12 +9,23 @@ namespace Tests
         [TestCase(">", 2)]
         [TestCase("^>v<", 4)]
         [TestCase("^v^v^v^v^v", 2)]
-        public void DeliversToCorrectNumberOfHouses(string input, int expected)
+        public void DeliversToCorrectNumberOfHouses_Santa(string input, int expected)
         {
             var grid = new DeliveryGrid();
-            grid.Deliver(input);
+            grid.DeliverBySanta(input);
 
-            Assert.That(grid.DeliveryCount, Is.EqualTo(expected));
+            Assert.That(grid.SantaDeliveryCount, Is.EqualTo(expected));
+        }
+
+        [TestCase("^v", 3)]
+        [TestCase("^>v<", 3)]
+        [TestCase("^v^v^v^v^v", 11)]
+        public void DeliversToCorrectNumberOfHouses_SantaAndRobot(string input, int expected)
+        {
+            var grid = new DeliveryGrid();
+            grid.DeliverBySantaAndRobot(input);
+
+            Assert.That(grid.SantaDeliveryCount, Is.EqualTo(expected));
         }
     }
 }

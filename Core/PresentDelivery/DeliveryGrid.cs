@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
 
@@ -6,23 +7,51 @@ namespace Core.PresentDelivery
     public class DeliveryGrid
     {
         private readonly Matrix<int> _matrix;
-        public int DeliveryCount => _matrix.Values.Count(o => o > 0);
+        public int SantaDeliveryCount => _matrix.Values.Count(o => o > 0);
 
         public DeliveryGrid()
         {
             _matrix = new Matrix<int>();
         }
 
-        public void Deliver(string input)
+        public void DeliverBySanta(string input)
         {
             var directions = input.ToCharArray();
-            _matrix.WriteValue(1);
+            DeliverAccordingToDirections(directions);
+        }
+
+        public void DeliverBySantaAndRobot(string input)
+        {
+            var allDirections = input.ToCharArray();
+            var santaDirections = new List<char>();
+            var robotDirections = new List<char>();
+            for (var i = 0; i < allDirections.Length; i++)
+            {
+                if (i % 2 == 0)
+                    santaDirections.Add(allDirections[i]);
+                else
+                    robotDirections.Add(allDirections[i]);
+            }
+
+            DeliverAccordingToDirections(santaDirections);
+            _matrix.MoveTo(_matrix.StartAddress);
+            DeliverAccordingToDirections(robotDirections);
+        }
+
+        private void DeliverAccordingToDirections(IEnumerable<char> directions)
+        {
+            DeliverPresent();
             foreach (var direction in directions)
             {
                 Move(direction);
-                var oldVal = _matrix.ReadValue();
-                _matrix.WriteValue(oldVal + 1);
+                DeliverPresent();
             }
+        }
+
+        private void DeliverPresent()
+        {
+            var oldVal = _matrix.ReadValue();
+            _matrix.WriteValue(oldVal + 1);
         }
 
         private void Move(char direction)

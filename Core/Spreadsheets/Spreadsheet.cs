@@ -5,15 +5,39 @@ namespace Core.Spreadsheets
 {
     public class Spreadsheet
     {
-        public int Checksum { get; }
+        public int ChecksumMaxMin { get; }
+        public int ChecksumDivision { get; }
 
         public Spreadsheet(string input)
         {
             var numberRows = GetNumbers(input);
+            ChecksumMaxMin = GetChecksumMaxMin(numberRows);
+            ChecksumDivision = GetChecksumDivision(numberRows);
+        }
+
+        private int GetChecksumMaxMin(IList<IList<int>> numberRows)
+        {
+            return numberRows.Sum(row => row.Max() - row.Min());
+        }
+
+        private int GetChecksumDivision(IList<IList<int>> numberRows)
+        {
+            var checksum = 0;
             foreach (var row in numberRows)
             {
-                Checksum += row.Max() - row.Min();
+                foreach (var num1 in row)
+                {
+                    foreach (var num2 in row)
+                    {
+                        if (num1 != num2 && num1 % num2 == 0)
+                        {
+                            checksum += num1 / num2;
+                        }
+                    }
+                }
             }
+
+            return checksum;
         }
 
         private IList<IList<int>> GetNumbers(string input)

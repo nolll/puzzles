@@ -13,7 +13,10 @@ namespace ConsoleApp.Years.Year2017
         {
             WritePartTitle();
             var spreadsheet = new Spreadsheet(Input);
-            Console.WriteLine($"Spreadsheet checksum: {spreadsheet.Checksum}");
+            Console.WriteLine($"Spreadsheet max/min checksum: {spreadsheet.ChecksumMaxMin}");
+
+            WritePartTitle();
+            Console.WriteLine($"Spreadsheet division checksum: {spreadsheet.ChecksumDivision}");
         }
 
         private const string Input = @"278	1689	250	1512	1792	1974	175	1639	235	1635	1690	1947	810	224	928	859

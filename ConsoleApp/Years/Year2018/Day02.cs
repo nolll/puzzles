@@ -15,10 +15,9 @@ namespace ConsoleApp.Years.Year2018
             var boxChecksumPuzzle = new BoxChecksumPuzzle(Input);
             Console.WriteLine($"Checksum: {boxChecksumPuzzle.Checksum}");
 
+            WritePartTitle();
             var similarIdsPuzzle = new SimilarIdsPuzzle(Input);
             Console.WriteLine($"Common letters: {similarIdsPuzzle.CommonLetters}");
-
-            WritePartTitle();
         }
 
         private const string Input = @"ayitmcjvlhedbsyoqfzukjpxwt

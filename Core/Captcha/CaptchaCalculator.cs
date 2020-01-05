@@ -5,30 +5,35 @@ namespace Core.Captcha
 {
     public class CaptchaCalculator
     {
-        public int Sum { get; }
+        public int Sum1 { get; }
+        public int Sum2 { get; }
 
         public CaptchaCalculator(string input)
         {
-            var numbers = input.ToCharArray().Select(o => int.Parse((string) o.ToString())).ToList();
+            var numbers = input.ToCharArray().Select(o => int.Parse(o.ToString())).ToList();
+
+            Sum1 = GetSum(numbers, 1);
+            Sum2 = GetSum(numbers, numbers.Count / 2);
+        }
+
+        private static int GetSum(IList<int> numbers, int offset)
+        {
             var matchingNumbers = new List<int>();
-            var lastIndex = numbers.Count - 1;
             for (var i = 0; i < numbers.Count; i++)
             {
                 var currentValue = numbers[i];
-                if (i == lastIndex)
+                var nextIndex = i + offset;
+                if (nextIndex > numbers.Count - 1)
                 {
-                    if (currentValue == numbers[0])
-                    {
-                        matchingNumbers.Add(currentValue);
-                    }
+                    nextIndex -= numbers.Count;
                 }
-                else if(currentValue == numbers[i + 1])
+                if (currentValue == numbers[nextIndex])
                 {
                     matchingNumbers.Add(currentValue);
                 }
             }
 
-            Sum = matchingNumbers.Sum();
+            return matchingNumbers.Sum();
         }
     }
 }

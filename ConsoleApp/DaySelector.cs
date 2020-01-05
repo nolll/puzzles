@@ -3,6 +3,7 @@ using System.Linq;
 using ConsoleApp.Years;
 using ConsoleApp.Years.Year2015;
 using ConsoleApp.Years.Year2016;
+using ConsoleApp.Years.Year2017;
 using ConsoleApp.Years.Year2018;
 using ConsoleApp.Years.Year2019;
 
@@ -14,6 +15,7 @@ namespace ConsoleApp
         {
             new Event2015(),
             new Event2016(),
+            new Event2017(),
             new Event2018(),
             new Event2019()
         };

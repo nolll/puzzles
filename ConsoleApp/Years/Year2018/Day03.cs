@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"No overlap id: {claimThatDoesNotOverlap.ClaimId}");
         }
 
-        public const string Input = @"#1 @ 669,271: 17x11
+        private const string Input = @"#1 @ 669,271: 17x11
 #2 @ 153,186: 20x26
 #3 @ 186,838: 28x11
 #4 @ 119,248: 18x13

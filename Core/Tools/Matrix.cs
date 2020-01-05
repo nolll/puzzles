@@ -39,9 +39,9 @@ namespace Core.Tools
             return MoveTo(new MatrixAddress(x, y));
         }
 
-        public MatrixAddress MoveForward(int distance = 1)
+        public MatrixAddress MoveForward()
         {
-            return MoveTo(Address.X + Direction.X * distance, Address.Y + Direction.Y * distance);
+            return MoveTo(Address.X + Direction.X, Address.Y + Direction.Y);
         }
 
         public MatrixAddress MoveBackward()

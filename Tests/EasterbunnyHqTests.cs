@@ -13,7 +13,7 @@ namespace Tests
             var calc = new EasterbunnyDistanceCalculator();
             calc.Go(input);
 
-            Assert.That(calc.DistanceFromStart, Is.EqualTo(expected));
+            Assert.That(calc.DistanceToTarget, Is.EqualTo(expected));
         }
     }
 }

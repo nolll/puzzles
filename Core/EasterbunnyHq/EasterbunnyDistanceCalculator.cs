@@ -7,17 +7,18 @@ namespace Core.EasterbunnyHq
     public class EasterbunnyDistanceCalculator
     {
         private readonly Matrix<int> _matrix;
+        private int? _distanceToFirstRepeatedAddress;
 
         public EasterbunnyDistanceCalculator()
         {
             _matrix = new Matrix<int>();
         }
-
-
+        
         public void Go(string input)
         {
             var instructions = input.Split(',').Select(o => o.Trim());
             _matrix.TurnTo(MatrixDirection.Up);
+            _matrix.WriteValue(1);
             foreach (var instruction in instructions)
             {
                 var direction = instruction.Substring(0, 1);
@@ -26,27 +27,32 @@ namespace Core.EasterbunnyHq
                     _matrix.TurnRight();
                 else
                     _matrix.TurnLeft();
-                _matrix.MoveForward(distance);
+                for (var i = 0; i < distance; i++)
+                {
+                    _matrix.MoveForward();
+                    if (_matrix.ReadValue() == 1 && _distanceToFirstRepeatedAddress == null)
+                    {
+                        _distanceToFirstRepeatedAddress = GetDistance(_matrix.StartAddress, _matrix.Address);
+                    }
+                    _matrix.WriteValue(1);
+                }
             }
         }
 
-        public int DistanceFromStart
+        public int DistanceToTarget => GetDistance(_matrix.StartAddress, _matrix.Address);
+        public int DistanceToFirstRepeat => _distanceToFirstRepeatedAddress ?? 0;
+
+        private static int GetDistance(MatrixAddress a, MatrixAddress b)
         {
-            get
-            {
-                var start = _matrix.StartAddress;
-                var current = _matrix.Address;
+            var xMax = Math.Max(a.X, b.X);
+            var xMin = Math.Min(a.X, b.X);
+            var xDiff = xMax - xMin;
 
-                var xMax = Math.Max(start.X, current.X);
-                var xMin = Math.Min(start.X, current.X);
-                var xDiff = xMax - xMin;
+            var yMax = Math.Max(a.Y, b.Y);
+            var yMin = Math.Min(a.Y, b.Y);
+            var yDiff = yMax - yMin;
 
-                var yMax = Math.Max(start.Y, current.Y);
-                var yMin = Math.Min(start.Y, current.Y);
-                var yDiff = yMax - yMin;
-
-                return xDiff + yDiff;
-            }
+            return xDiff + yDiff;
         }
     }
 }

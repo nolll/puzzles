@@ -13,8 +13,12 @@ namespace ConsoleApp.Years.Year2016
         {
             WritePartTitle();
             var validator = new TriangleValidator();
-            var validCount = validator.GetValidCount(Input);
-            Console.WriteLine($"Valid triangles: {validCount}");
+            var horizontalValidCount = validator.GetHorizontalValidCount(Input);
+            Console.WriteLine($"Valid horizontal triangles: {horizontalValidCount}");
+
+            WritePartTitle();
+            var verticalValidCount = validator.GetVerticalValidCount(Input);
+            Console.WriteLine($"Valid vertical triangles: {verticalValidCount}");
         }
 
         private const string Input = @"  883  357  185

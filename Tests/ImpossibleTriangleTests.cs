@@ -14,5 +14,33 @@ namespace Tests
 
             Assert.That(isValid, Is.EqualTo(expectedResult));
         }
+
+        [Test]
+        public void ValidHorizontalCount()
+        {
+            const string input = @"12 13 14
+1 2 5";
+
+            var validator = new TriangleValidator();
+            var validCount = validator.GetHorizontalValidCount(input);
+
+            Assert.That(validCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ValidVerticalCount()
+        {
+            const string input = @"101 301 501
+102 302 502
+103 303 503
+201 401 601
+202 402 602
+203 403 603";
+
+            var validator = new TriangleValidator();
+            var validCount = validator.GetVerticalValidCount(input);
+
+            Assert.That(validCount, Is.EqualTo(6));
+        }
     }
 }

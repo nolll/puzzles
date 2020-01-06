@@ -12,8 +12,12 @@ namespace ConsoleApp.Years.Year2017
         protected override void RunDay()
         {
             WritePartTitle();
-            var memory = new SpiralMemory(Input);
-            Console.WriteLine($"Steps from center: {memory.Distance}");
+            var memory1 = new SpiralMemory(Input, SpiralMemoryMode.RunToTarget);
+            Console.WriteLine($"Steps from center: {memory1.Distance}");
+
+            WritePartTitle();
+            var memory2 = new SpiralMemory(Input, SpiralMemoryMode.RunToValue);
+            Console.WriteLine($"First value above input: {memory2.Value}");
         }
 
         private const int Input = 265149;

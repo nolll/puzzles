@@ -168,7 +168,7 @@ namespace Core.Tools
                    address.X < 0;
         }
 
-        public IList<T> AdjacentValues
+        public IList<T> Adjacent4
         {
             get
             {
@@ -186,6 +186,47 @@ namespace Core.Tools
                     values.Add(ReadValueAt(address));
                 
                 address = new MatrixAddress(Address.X - 1, Address.Y);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+
+                return values;
+            }
+        }
+
+        public IList<T> Adjacent8
+        {
+            get
+            {
+                var values = new List<T>();
+                var address = new MatrixAddress(Address.X, Address.Y - 1);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+
+                address = new MatrixAddress(Address.X + 1, Address.Y - 1);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+
+                address = new MatrixAddress(Address.X + 1, Address.Y);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+
+                address = new MatrixAddress(Address.X + 1, Address.Y + 1);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+
+                address = new MatrixAddress(Address.X, Address.Y + 1);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+
+                address = new MatrixAddress(Address.X - 1, Address.Y + 1);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+
+                address = new MatrixAddress(Address.X - 1, Address.Y);
+                if (!IsOutOfRange(address))
+                    values.Add(ReadValueAt(address));
+
+                address = new MatrixAddress(Address.X - 1, Address.Y - 1);
                 if (!IsOutOfRange(address))
                     values.Add(ReadValueAt(address));
 

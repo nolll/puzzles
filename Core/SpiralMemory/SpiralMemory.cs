@@ -1,22 +1,31 @@
 using System;
+using System.Linq;
 using Core.Tools;
 
 namespace Core.SpiralMemory
 {
+    public enum SpiralMemoryMode
+    {
+        RunToTarget,
+        RunToValue
+    }
+
     public class SpiralMemory
     {
-        private Matrix<int> _matrix;
+        private readonly Matrix<long> _matrix;
         public int Distance { get; }
+        public long Value { get; }
 
-        public SpiralMemory(int targetSquare)
+        public SpiralMemory(int targetSquare, SpiralMemoryMode mode)
         {
-            _matrix = BuildMatrix(targetSquare);
+            _matrix = BuildMatrix(targetSquare, mode);
             Distance = GetDistance(_matrix.Address, _matrix.StartAddress);
+            Value = _matrix.ReadValue();
         }
 
-        private Matrix<int> BuildMatrix(int targetSquare)
+        private Matrix<long> BuildMatrix(int targetSquare, SpiralMemoryMode mode)
         {
-            var matrix = new Matrix<int>();
+            var matrix = new Matrix<long>();
             matrix.TurnTo(MatrixDirection.Down);
             var currentSquare = 1;
             matrix.WriteValue(currentSquare);
@@ -31,7 +40,14 @@ namespace Core.SpiralMemory
                     matrix.TurnRight();
                     matrix.MoveForward();
                 }
-                matrix.WriteValue(currentSquare);
+                var valueToWrite = mode == SpiralMemoryMode.RunToValue
+                    ? matrix.Adjacent8.Sum() 
+                    : currentSquare;
+
+                matrix.WriteValue(valueToWrite);
+                if (mode == SpiralMemoryMode.RunToValue && valueToWrite > targetSquare)
+                    break;
+
                 currentSquare += 1;
             }
 

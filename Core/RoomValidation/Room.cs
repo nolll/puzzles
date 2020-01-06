@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Core.RoomValidation
 {
@@ -7,6 +8,7 @@ namespace Core.RoomValidation
     {
         public int Id { get; }
         public bool IsValid { get; }
+        private string EncryptedName { get; }
 
         public Room(string input)
         {
@@ -15,8 +17,8 @@ namespace Core.RoomValidation
             var sortedChecksum = string.Join('-', checksum.ToCharArray().OrderBy(o => o)).Replace("-", "");
             var split2 = split1[0].Split('-');
             Id = int.Parse(split2.Last());
-            var encryptedName = string.Join('-', split2.Take(split2.Length - 1)).Replace("-", "");
-            var characters = encryptedName.ToCharArray().OrderBy(o => o);
+            EncryptedName = string.Join('-', split2.Take(split2.Length - 1));
+            var characters = EncryptedName.Replace("-", "").ToCharArray().OrderBy(o => o);
             var characterCounts = new List<CharacterCount>();
             foreach (var c in characters)
             {
@@ -34,6 +36,28 @@ namespace Core.RoomValidation
             var charList = sortedCounts.Take(5).Select(o => o.C).OrderBy(o => o);
             var fiveString = string.Join('-', charList).Replace("-", "");
             IsValid = fiveString == sortedChecksum;
+        }
+
+        public string Name
+        {
+            get
+            {
+                var name = new StringBuilder();
+                foreach (var c in EncryptedName)
+                {
+                    if (c == '-')
+                        name.Append(' ');
+                    else
+                    {
+                        var newC = c + Id;
+                        while (newC > 'z')
+                            newC -= 26;
+                        name.Append((char)newC);
+                    }
+                }
+
+                return name.ToString();
+            }
         }
     }
 }

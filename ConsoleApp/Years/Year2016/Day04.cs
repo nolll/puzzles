@@ -12,9 +12,12 @@ namespace ConsoleApp.Years.Year2016
         protected override void RunDay()
         {
             WritePartTitle();
-            var validator = new RoomValidator();
-            var sum = validator.GetSumOfIds(Input);
+            var validator = new RoomValidator(Input);
+            var sum = validator.SumOfIds;
             Console.WriteLine($"Sum of valid room ids: {sum}");
+
+            WritePartTitle();
+            Console.WriteLine($"Northpole object storage room: {validator.NorthpoleObjectStorageId}");
         }
 
         private const string Input = @"aczupnetwp-dnlgpyrpc-sfye-dstaatyr-561[patyc]

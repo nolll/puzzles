@@ -11,7 +11,6 @@ namespace Tests
         [TestCase("totally-real-room-200[decoy]", false)]
         public void ValidatesRooms(string input, bool expected)
         {
-            var validator = new RoomValidator();
             var room = new Room(input);
 
             Assert.That(room.IsValid, Is.EqualTo(expected));

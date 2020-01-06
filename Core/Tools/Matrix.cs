@@ -23,10 +23,25 @@ namespace Core.Tools
             Direction = MatrixDirection.Up;
         }
 
+        public MatrixAddress TryMoveTo(MatrixAddress address)
+        {
+            return MoveTo(address, false);
+        }
+
         public MatrixAddress MoveTo(MatrixAddress address)
         {
+            return MoveTo(address, true);
+        }
+
+        private MatrixAddress MoveTo(MatrixAddress address, bool extend)
+        {
             if (IsOutOfRange(address))
-                ExtendMatrix(address);
+            {
+                if(extend)
+                    ExtendMatrix(address);
+                else
+                    return Address;
+            }
 
             var x = address.X > 0 ? address.X : 0;
             var y = address.Y > 0 ? address.Y : 0;
@@ -34,39 +49,104 @@ namespace Core.Tools
             return Address;
         }
 
+        public MatrixAddress TryMoveTo(int x, int y)
+        {
+            return MoveTo(new MatrixAddress(x, y), false);
+        }
+
         public MatrixAddress MoveTo(int x, int y)
         {
-            return MoveTo(new MatrixAddress(x, y));
+            return MoveTo(new MatrixAddress(x, y), true);
+        }
+
+        public MatrixAddress TryMoveForward()
+        {
+            return MoveForward(false);
         }
 
         public MatrixAddress MoveForward()
         {
-            return MoveTo(Address.X + Direction.X, Address.Y + Direction.Y);
+            return MoveForward(true);
+        }
+
+        private MatrixAddress MoveForward(bool extend)
+        {
+            return MoveTo(new MatrixAddress(Address.X + Direction.X, Address.Y + Direction.Y), extend);
+        }
+
+        public MatrixAddress TryMoveBackward()
+        {
+            return MoveBackward(false);
         }
 
         public MatrixAddress MoveBackward()
         {
-            return MoveTo(Address.X - Direction.X, Address.Y - Direction.Y);
+            return MoveBackward(true);
+        }
+
+        private MatrixAddress MoveBackward(bool extend)
+        {
+            return MoveTo(new MatrixAddress(Address.X - Direction.X, Address.Y - Direction.Y), extend);
+        }
+
+        public MatrixAddress TryMoveUp()
+        {
+            return MoveUp(false);
         }
 
         public MatrixAddress MoveUp()
         {
-            return MoveTo(Address.X, Address.Y - 1);
+            return MoveUp(true);
+        }
+
+        private MatrixAddress MoveUp(bool extend)
+        {
+            return MoveTo(new MatrixAddress(Address.X, Address.Y - 1), extend);
+        }
+
+        public MatrixAddress TryMoveRight()
+        {
+            return MoveRight(false);
         }
 
         public MatrixAddress MoveRight()
         {
-            return MoveTo(Address.X + 1, Address.Y);
+            return MoveRight(true);
+        }
+
+        private MatrixAddress MoveRight(bool extend)
+        {
+            return MoveTo(new MatrixAddress(Address.X + 1, Address.Y), extend);
+        }
+
+        public MatrixAddress TryMoveDown()
+        {
+            return MoveDown(false);
         }
 
         public MatrixAddress MoveDown()
         {
-            return MoveTo(Address.X, Address.Y + 1);
+            return MoveDown(true);
+        }
+
+        private MatrixAddress MoveDown(bool extend)
+        {
+            return MoveTo(new MatrixAddress(Address.X, Address.Y + 1), extend);
+        }
+
+        public MatrixAddress TryMoveLeft()
+        {
+            return MoveLeft(false);
         }
 
         public MatrixAddress MoveLeft()
         {
-            return MoveTo(Address.X - 1, Address.Y);
+            return MoveLeft(true);
+        }
+
+        private MatrixAddress MoveLeft(bool extend)
+        {
+            return MoveTo(new MatrixAddress(Address.X - 1, Address.Y), extend);
         }
 
         public MatrixDirection TurnLeft()
@@ -150,10 +230,11 @@ namespace Core.Tools
             {
                 for (var x = 0; x < _matrix.Count; x++)
                 {
-                    MoveTo(x, y);
+                    var address = new MatrixAddress(x, y);
+                    MoveTo(address);
                     var val = ReadValue();
                     if(val.Equals(value))
-                        addresses.Add(new MatrixAddress(x, y));
+                        addresses.Add(address);
                 }
             }
 

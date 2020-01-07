@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace Core.NaughtyOrNice
@@ -6,13 +7,19 @@ namespace Core.NaughtyOrNice
     {
         private const string Vowels = "aeiou";
 
-        public int GetNiceCount(string input)
+        public int GetNiceCount1(string input)
         {
             var strings = input.Split('\n').Select(o => o.Trim());
-            return strings.Count(IsNice);
+            return strings.Count(IsNice1);
         }
 
-        public bool IsNice(string input)
+        public int GetNiceCount2(string input)
+        {
+            var strings = input.Split('\n').Select(o => o.Trim());
+            return strings.Count(IsNice2);
+        }
+
+        public bool IsNice1(string input)
         {
             if (ContainsForbiddenSubstrings(input))
                 return false;
@@ -24,6 +31,45 @@ namespace Core.NaughtyOrNice
                 return false;
 
             return true;
+        }
+
+        public bool IsNice2(string input)
+        {
+            if (!ContainsRepeatingPair(input))
+                return false;
+
+            if (!ContainsRepeatedCharacterWithOneCharacterBetween(input))
+                return false;
+
+            return true;
+        }
+
+        private bool ContainsRepeatedCharacterWithOneCharacterBetween(string input)
+        {
+            for (var i = 0; i < input.Length - 2; i++)
+            {
+                var str = input.Substring(i, 3);
+                if (str[0] == str[2])
+                    return true;
+            }
+
+            return false;
+        }
+
+        private bool ContainsRepeatingPair(string input)
+        {
+            for (var i = 0; i < input.Length - 1; i++)
+            {
+                var str = input.Substring(i, 2);
+                var firstOccurence = input.IndexOf(str, StringComparison.InvariantCulture);
+                var lastOccurence = input.LastIndexOf(str, StringComparison.InvariantCulture);
+                var diff = lastOccurence - firstOccurence;
+
+                if (diff > 1)
+                    return true;
+            }
+
+            return false;
         }
 
         private bool ContainsForbiddenSubstrings(string input)

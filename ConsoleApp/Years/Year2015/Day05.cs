@@ -13,8 +13,12 @@ namespace ConsoleApp.Years.Year2015
         {
             WritePartTitle();
             var evaluator = new NaughtyOrNiceEvaluator();
-            var niceCount = evaluator.GetNiceCount(Input);
-            Console.WriteLine($"Number of nice strings: {niceCount}");
+            var nice1Count = evaluator.GetNiceCount1(Input);
+            Console.WriteLine($"Number of nice strings (algorithm 1): {nice1Count}");
+
+            WritePartTitle();
+            var nice2Count = evaluator.GetNiceCount2(Input);
+            Console.WriteLine($"Number of nice strings (algorithm 2): {nice2Count}");
         }
 
         private const string Input = @"sszojmmrrkwuftyv

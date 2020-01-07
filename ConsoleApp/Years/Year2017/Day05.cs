@@ -12,9 +12,14 @@ namespace ConsoleApp.Years.Year2017
         protected override void RunDay()
         {
             WritePartTitle();
-            var jumper = new InstructionJumper(Input);
-            jumper.Start();
-            Console.WriteLine($"Steps jumped: {jumper.StepCount}");
+            var jumper1 = new InstructionJumper(Input);
+            jumper1.Start1();
+            Console.WriteLine($"Steps jumped, part 1: {jumper1.StepCount}");
+
+            WritePartTitle();
+            var jumper2 = new InstructionJumper(Input);
+            jumper2.Start2();
+            Console.WriteLine($"Steps jumped, part 2: {jumper2.StepCount}");
         }
 
         private const string Input = @"1

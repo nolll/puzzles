@@ -14,15 +14,27 @@ namespace Core.JumpInstructions
         public InstructionJumper(string input)
         {
             StepCount = 0;
-            _numbers = input.Trim().Split('\n').Select(o => int.Parse((string) o.Trim())).ToList();
+            _numbers = input.Trim().Split('\n').Select(o => int.Parse(o.Trim())).ToList();
         }
 
-        public void Start()
+        public void Start1()
         {
             while (IsInRange)
             {
                 var val = _numbers[_index];
                 _numbers[_index] = val + 1;
+                _index += val;
+                StepCount += 1;
+            }
+        }
+
+        public void Start2()
+        {
+            while (IsInRange)
+            {
+                var val = _numbers[_index];
+                var change = val >= 3 ? -1 : 1;
+                _numbers[_index] = val + change;
                 _index += val;
                 StepCount += 1;
             }

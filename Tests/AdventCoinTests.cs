@@ -10,7 +10,7 @@ namespace Tests
         public void CoinMined(string secretKey, int expected)
         {
             var miner = new AdventCoinMiner();
-            var coin = miner.Mine(secretKey);
+            var coin = miner.Mine(secretKey, 5);
 
             Assert.That(coin, Is.EqualTo(expected));
         }

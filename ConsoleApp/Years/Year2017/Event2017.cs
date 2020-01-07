@@ -12,7 +12,8 @@ namespace ConsoleApp.Years.Year2017
         {
             new Day01(),
             new Day02(),
-            new Day03()
+            new Day03(),
+            new Day04()
         };
     }
 }

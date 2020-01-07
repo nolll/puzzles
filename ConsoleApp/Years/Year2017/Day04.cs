@@ -13,8 +13,12 @@ namespace ConsoleApp.Years.Year2017
         {
             WritePartTitle();
             var validator = new PassphraseValidator();
-            var validCount = validator.GetValidCount(Input);
-            Console.WriteLine($"Valid passphrases: {validCount}");
+            var validCount1 = validator.GetValidCount1(Input);
+            Console.WriteLine($"Valid passphrases 1: {validCount1}");
+
+            WritePartTitle();
+            var validCount2 = validator.GetValidCount2(Input);
+            Console.WriteLine($"Valid passphrases 2: {validCount2}");
         }
 
         private const string Input = @"una bokpr ftz ryw nau yknf fguaczl anu

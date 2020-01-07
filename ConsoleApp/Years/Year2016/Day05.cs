@@ -13,8 +13,12 @@ namespace ConsoleApp.Years.Year2016
         {
             WritePartTitle();
             var generator = new PasswordGenerator();
-            var pwd = generator.Generate(Input);
-            Console.WriteLine($"Password: {pwd}");
+            var pwd1 = generator.Generate1(Input);
+            Console.WriteLine($"Password 1: {pwd1}");
+
+            WritePartTitle();
+            var pwd2 = generator.Generate2(Input);
+            Console.WriteLine($"Password 2: {pwd2}");
         }
 
         private const string Input = "wtnhxymk";

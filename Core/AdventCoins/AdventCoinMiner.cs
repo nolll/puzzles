@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using Core.Tools;
 
 namespace Core.AdventCoins
 {
@@ -9,18 +10,13 @@ namespace Core.AdventCoins
         {
             var index = 1;
             int? coin = null;
+            var hashFactory = new Hashfactory();
             var md5 = MD5.Create();
             var compareString = GetCompareString(leadingZeros);
             while(coin == null)
             {
-                var hash = md5.ComputeHash(Encoding.ASCII.GetBytes($"{key}{index.ToString()}"));
-                var sb = new StringBuilder();
-                foreach (var b in hash)
-                {
-                    sb.Append(b.ToString("X2"));
-                }
-                var hashString = sb.ToString();
-                if (hashString.StartsWith(compareString))
+                var hash = hashFactory.Create($"{key}{index.ToString()}");
+                if (hash.StartsWith(compareString))
                 {
                     coin = index;
                 }

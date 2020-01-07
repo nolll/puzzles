@@ -12,9 +12,14 @@ namespace ConsoleApp.Years.Year2015
         protected override void RunDay()
         {
             WritePartTitle();
-            var controller = new ChristmasLightsController();
-            controller.RunCommands(Input);
-            Console.WriteLine($"Lit lights: {controller.LitCount}");
+            var controller1 = new ChristmasLightsController();
+            controller1.RunCommands(Input, false);
+            Console.WriteLine($"Lit lights: {controller1.LitCount}");
+
+            WritePartTitle();
+            var controller2 = new ChristmasLightsController();
+            controller2.RunCommands(Input, true);
+            Console.WriteLine($"Total brightness: {controller2.TotalBrightness}");
         }
 
         private const string Input = @"turn on 887,9 through 959,629

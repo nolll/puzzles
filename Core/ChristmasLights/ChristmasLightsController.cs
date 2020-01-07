@@ -8,36 +8,53 @@ namespace Core.ChristmasLights
     {
         private readonly Matrix<int> _matrix;
 
-        public int LitCount => _matrix.Values.Count(o => o == 1);
+        public int LitCount => _matrix.Values.Count(o => o > 0);
+        public int TotalBrightness => _matrix.Values.Sum();
 
         public ChristmasLightsController(int size = 1000)
         {
             _matrix = new Matrix<int>(size, size);
         }
 
-        public void RunCommands(string input)
+        public void RunCommands(string input, bool useBrightness)
         {
-            var commands = ParseCommands(input);
+            var commands = ParseCommands(input, useBrightness);
             foreach (var command in commands)
             {
                 command.Move(_matrix);
             }
         }
 
-        private IList<Command> ParseCommands(string input)
+        private IList<Command> ParseCommands(string input, bool useBrightness)
         {
             var strings = input.Split('\n').Select(o => o.Trim());
-            return strings.Select(CreateCommand).ToList();
+            return strings.Select(o => CreateCommand(o, useBrightness)).ToList();
         }
 
-        private Command CreateCommand(string s)
+        private Command CreateCommand(string s, bool useBrightness)
         {
+            var paramString = s.Replace("turn on", "").Replace("turn off", "").Replace("toggle", "");
             if (s.StartsWith("turn on"))
-                return new TurnOnCommand(s);
+            {
+                return useBrightness
+                    ? (Command)new IncreaseCommand(paramString, 1)
+                    : new TurnOnCommand(paramString);
+            }
+
             if (s.StartsWith("turn off"))
-                return new TurnOffCommand(s);
+            {
+                return useBrightness
+                    ? (Command)new IncreaseCommand(paramString, -1)
+                    : new TurnOffCommand(s);
+            }
+
             if (s.StartsWith("toggle"))
-                return new ToggleCommand(s);
+            {
+                return useBrightness
+                    ? (Command)new IncreaseCommand(paramString, 2)
+                    : new ToggleCommand(s);
+            }
+
             return new VoidCommand();
         }
 
@@ -136,6 +153,33 @@ namespace Core.ChristmasLights
                 matrix.MoveTo(x, y);
                 var currentValue = matrix.ReadValue();
                 var newValue = currentValue == 0 ? 1 : 0;
+                matrix.WriteValue(newValue);
+            }
+        }
+
+        private class IncreaseCommand : Command
+        {
+            private readonly int _increment;
+
+            public IncreaseCommand(string s, int increment)
+                : base(s)
+            {
+                _increment = increment;
+            }
+
+            public IncreaseCommand(int xa, int ya, int xb, int yb, int increment)
+                : base(xa, ya, xb, yb)
+            {
+                _increment = increment;
+            }
+
+            protected override void Change(Matrix<int> matrix, int x, int y)
+            {
+                matrix.MoveTo(x, y);
+                var currentValue = matrix.ReadValue();
+                var newValue = currentValue + _increment;
+                if (newValue < 0)
+                    newValue = 0;
                 matrix.WriteValue(newValue);
             }
         }

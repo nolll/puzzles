@@ -7,12 +7,13 @@ namespace Core.MemoryReallocation
     {
         private readonly IList<int> _banks;
 
+        public int Steps { get; private set; }
+        public int LoopSize { get; private set; }
+
         public MemoryReallocator(string input)
         {
             _banks = input.Split(',').Select(int.Parse).ToList();
         }
-
-        public int Steps { get; private set; }
 
         public void Run()
         {
@@ -35,7 +36,11 @@ namespace Core.MemoryReallocation
                 Steps += 1;
                 var currentState = string.Join(',', _banks);
                 if (earlierStates.Contains(currentState))
+                {
+                    var earlierStateIndex = earlierStates.IndexOf(currentState);
+                    LoopSize = earlierStates.Count - earlierStateIndex;
                     break;
+                }
 
                 earlierStates.Add(currentState);
             }

@@ -13,6 +13,7 @@ namespace Tests
             reallocator.Run();
 
             Assert.That(reallocator.Steps, Is.EqualTo(5));
+            Assert.That(reallocator.LoopSize, Is.EqualTo(4));
         }
     }
 }

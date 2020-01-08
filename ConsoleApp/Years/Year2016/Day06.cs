@@ -13,8 +13,12 @@ namespace ConsoleApp.Years.Year2016
         {
             WritePartTitle();
             var reader = new RepetitionCodeReader();
-            var message = reader.Read(Input);
-            Console.WriteLine($"Message: {message}");
+            var messageMostCommon = reader.ReadMostCommon(Input);
+            Console.WriteLine($"Message most common: {messageMostCommon}");
+
+            WritePartTitle();
+            var messageLeastCommon = reader.ReadLeastCommon(Input);
+            Console.WriteLine($"Message least common: {messageLeastCommon}");
         }
 
         private const string Input = @"iyeajeby

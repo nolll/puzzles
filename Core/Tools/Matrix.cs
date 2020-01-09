@@ -15,136 +15,136 @@ namespace Core.Tools
         public int Height => _matrix.Count;
         public int Width => _matrix.Any() ? _matrix[0].Count : 0;
 
-        public Matrix(int width = 1, int height = 1)
+        public Matrix(int width = 1, int height = 1, T defaultValue = default)
         {
-            _matrix = BuildMatrix(width, height);
+            _matrix = BuildMatrix(width, height, defaultValue);
             Address = new MatrixAddress(0, 0);
             StartAddress = new MatrixAddress(0, 0);
             Direction = MatrixDirection.Up;
         }
 
-        public MatrixAddress TryMoveTo(MatrixAddress address)
+        public bool TryMoveTo(MatrixAddress address)
         {
             return MoveTo(address, false);
         }
 
-        public MatrixAddress MoveTo(MatrixAddress address)
+        public bool MoveTo(MatrixAddress address)
         {
             return MoveTo(address, true);
         }
 
-        private MatrixAddress MoveTo(MatrixAddress address, bool extend)
+        private bool MoveTo(MatrixAddress address, bool extend)
         {
             if (IsOutOfRange(address))
             {
                 if(extend)
                     ExtendMatrix(address);
                 else
-                    return Address;
+                    return false;
             }
 
             var x = address.X > 0 ? address.X : 0;
             var y = address.Y > 0 ? address.Y : 0;
             Address = new MatrixAddress(x, y);
-            return Address;
+            return true;
         }
 
-        public MatrixAddress TryMoveTo(int x, int y)
+        public bool TryMoveTo(int x, int y)
         {
             return MoveTo(new MatrixAddress(x, y), false);
         }
 
-        public MatrixAddress MoveTo(int x, int y)
+        public bool MoveTo(int x, int y)
         {
             return MoveTo(new MatrixAddress(x, y), true);
         }
 
-        public MatrixAddress TryMoveForward()
+        public bool TryMoveForward()
         {
             return MoveForward(false);
         }
 
-        public MatrixAddress MoveForward()
+        public bool MoveForward()
         {
             return MoveForward(true);
         }
 
-        private MatrixAddress MoveForward(bool extend)
+        private bool MoveForward(bool extend)
         {
             return MoveTo(new MatrixAddress(Address.X + Direction.X, Address.Y + Direction.Y), extend);
         }
 
-        public MatrixAddress TryMoveBackward()
+        public bool TryMoveBackward()
         {
             return MoveBackward(false);
         }
 
-        public MatrixAddress MoveBackward()
+        public bool MoveBackward()
         {
             return MoveBackward(true);
         }
 
-        private MatrixAddress MoveBackward(bool extend)
+        private bool MoveBackward(bool extend)
         {
             return MoveTo(new MatrixAddress(Address.X - Direction.X, Address.Y - Direction.Y), extend);
         }
 
-        public MatrixAddress TryMoveUp()
+        public bool TryMoveUp()
         {
             return MoveUp(false);
         }
 
-        public MatrixAddress MoveUp()
+        public bool MoveUp()
         {
             return MoveUp(true);
         }
 
-        private MatrixAddress MoveUp(bool extend)
+        private bool MoveUp(bool extend)
         {
             return MoveTo(new MatrixAddress(Address.X, Address.Y - 1), extend);
         }
 
-        public MatrixAddress TryMoveRight()
+        public bool TryMoveRight()
         {
             return MoveRight(false);
         }
 
-        public MatrixAddress MoveRight()
+        public bool MoveRight()
         {
             return MoveRight(true);
         }
 
-        private MatrixAddress MoveRight(bool extend)
+        private bool MoveRight(bool extend)
         {
             return MoveTo(new MatrixAddress(Address.X + 1, Address.Y), extend);
         }
 
-        public MatrixAddress TryMoveDown()
+        public bool TryMoveDown()
         {
             return MoveDown(false);
         }
 
-        public MatrixAddress MoveDown()
+        public bool MoveDown()
         {
             return MoveDown(true);
         }
 
-        private MatrixAddress MoveDown(bool extend)
+        private bool MoveDown(bool extend)
         {
             return MoveTo(new MatrixAddress(Address.X, Address.Y + 1), extend);
         }
 
-        public MatrixAddress TryMoveLeft()
+        public bool TryMoveLeft()
         {
             return MoveLeft(false);
         }
 
-        public MatrixAddress MoveLeft()
+        public bool MoveLeft()
         {
             return MoveLeft(true);
         }
 
-        private MatrixAddress MoveLeft(bool extend)
+        private bool MoveLeft(bool extend)
         {
             return MoveTo(new MatrixAddress(Address.X - 1, Address.Y), extend);
         }
@@ -177,7 +177,7 @@ namespace Core.Tools
             return direction;
         }
 
-        public string Print(bool markCurrentAddress, bool markStartAddress, T currentAddressMarker = default, T startAddressMarker = default)
+        public string Print(bool markCurrentAddress = false, bool markStartAddress = false, T currentAddressMarker = default, T startAddressMarker = default)
         {
             var sb = new StringBuilder();
             var y = 0;
@@ -315,7 +315,7 @@ namespace Core.Tools
             }
         }
 
-        private IList<IList<T>> BuildMatrix(int width, int height)
+        private IList<IList<T>> BuildMatrix(int width, int height, T defaultValue)
         {
             var matrix = new List<IList<T>>();
             for (var y = 0; y < height; y++)
@@ -323,7 +323,7 @@ namespace Core.Tools
                 var row = new List<T>();
                 for (var x = 0; x < width; x++)
                 {
-                    row.Add(default);
+                    row.Add(defaultValue);
                 }
                 matrix.Add(row);
             }

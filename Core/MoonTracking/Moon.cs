@@ -72,12 +72,12 @@ namespace Core.MoonTracking
         private bool IsBackToStart(string state)
         {
             return _states.Contains(state);
-            return X == _firstX &&
-                   Y == _firstY &&
-                   Z == _firstZ &&
-                   VX == _firstVX &&
-                   VY == _firstVY &&
-                   VZ == _firstVZ;
+            //return X == _firstX &&
+            //       Y == _firstY &&
+            //       Z == _firstZ &&
+            //       VX == _firstVX &&
+            //       VY == _firstVY &&
+            //       VZ == _firstVZ;
         }
     }
 }

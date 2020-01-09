@@ -66,13 +66,6 @@ namespace Core.OxygenSystem
                 _matrix.WriteValue('X');
             }
 
-            else
-            {
-                var x = 0;
-            }
-
-            //Thread.Sleep(50);
-
             Console.SetCursorPosition(0, 0);
             Console.WriteLine(_matrix.Print(true, true, 'D', 'S'));
         }

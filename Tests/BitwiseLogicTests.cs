@@ -19,6 +19,7 @@ NOT x -> h
 NOT y -> i";
 
             var circuit = new Circuit(input);
+            circuit.RunOne();
 
             Assert.That(circuit.Wires["d"].Signal, Is.EqualTo(72));
             Assert.That(circuit.Wires["e"].Signal, Is.EqualTo(507));

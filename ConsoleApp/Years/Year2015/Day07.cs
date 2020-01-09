@@ -13,9 +13,14 @@ namespace ConsoleApp.Years.Year2015
         {
             WritePartTitle();
             var circuit = new Circuit(Input);
-            var signalA = circuit.Wires["a"].Signal;
+            var runOne = circuit.RunOne();
 
-            Console.WriteLine($"Signal A: {signalA}");
+            Console.WriteLine($"Signal A after run one: {runOne}");
+
+            WritePartTitle();
+            var runTwo = circuit.RunTwo();
+
+            Console.WriteLine($"Signal A after run two: {runTwo}");
         }
 
         private const string Input = @"af AND ah -> ai

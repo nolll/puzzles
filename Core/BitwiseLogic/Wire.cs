@@ -2,6 +2,13 @@ namespace Core.BitwiseLogic
 {
     public abstract class Wire
     {
+        protected ushort? _signal;
+
         public abstract ushort Signal { get; }
+
+        public void SetSignal(ushort signal)
+        {
+            _signal = signal;
+        }
     }
 }

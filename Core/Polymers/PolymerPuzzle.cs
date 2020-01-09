@@ -58,7 +58,7 @@ namespace Core.Polymers
 
         private string ReplaceLetters(string str)
         {
-            var returnVal = string.Copy(str);
+            var returnVal = str;
             foreach (var pair in _pairs)
             {
                 returnVal = returnVal.Replace(pair, "");

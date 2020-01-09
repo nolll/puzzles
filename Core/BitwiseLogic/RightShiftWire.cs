@@ -4,7 +4,6 @@ namespace Core.BitwiseLogic
 {
     public class RightShiftWire : Wire
     {
-        private ushort? _signal;
         private readonly IDictionary<string, Wire> _dictionary;
         private readonly string _a;
         private readonly ushort _distance;

@@ -1,16 +1,30 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace Core.BitwiseLogic
 {
     public class Circuit
     {
-        public IDictionary<string, Wire> Wires { get; }
+        private readonly string _input;
+        public IDictionary<string, Wire> Wires { get; private set; }
 
         public Circuit(string input)
         {
-            Wires = GetWires(input);
+            _input = input;
+        }
+
+        public ushort RunOne()
+        {
+            Wires = GetWires(_input);
+            return Wires["a"].Signal;
+        }
+
+        public ushort RunTwo()
+        {
+            var result1 = RunOne();
+            Wires = GetWires(_input);
+            Wires["b"].SetSignal(result1);
+            return Wires["a"].Signal;
         }
 
         private IDictionary<string, Wire> GetWires(string input)

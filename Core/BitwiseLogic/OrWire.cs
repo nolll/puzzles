@@ -4,7 +4,6 @@ namespace Core.BitwiseLogic
 {
     public class OrWire : Wire
     {
-        private ushort? _signal;
         private readonly IDictionary<string, Wire> _dictionary;
         private readonly string _a;
         private readonly string _b;

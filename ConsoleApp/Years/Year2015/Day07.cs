@@ -13,12 +13,12 @@ namespace ConsoleApp.Years.Year2015
         {
             WritePartTitle();
             var circuit = new Circuit(Input);
-            var runOne = circuit.RunOne();
+            var runOne = circuit.RunOne("a");
 
             Console.WriteLine($"Signal A after run one: {runOne}");
 
             WritePartTitle();
-            var runTwo = circuit.RunTwo();
+            var runTwo = circuit.RunTwo("a", "b");
 
             Console.WriteLine($"Signal A after run two: {runTwo}");
         }

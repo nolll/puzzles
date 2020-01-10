@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.IntersectionFinder;
+using Core.Tools;
 
 namespace ConsoleApp.Years.Year2019
 {
@@ -11,9 +12,9 @@ namespace ConsoleApp.Years.Year2019
 
         protected override void RunDay()
         {
-            var wirePaths = Input.Split('\n');
-            var wirePathA = wirePaths[0].Trim();
-            var wirePathB = wirePaths[1].Trim();
+            var wirePaths = PuzzleInputReader.Read(Input);
+            var wirePathA = wirePaths[0];
+            var wirePathB = wirePaths[1];
             
             WritePartTitle();
             var intersectionFinder = new IntersectionFinder(wirePathA, wirePathB);

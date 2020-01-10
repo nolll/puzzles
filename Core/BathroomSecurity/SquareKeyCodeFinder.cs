@@ -56,7 +56,7 @@ namespace Core.BathroomSecurity
 
         private IList<char[]> ParseCommands(string input)
         {
-            return input.Trim().Split('\n').Select(o => o.ToCharArray()).ToList();
+            return PuzzleInputReader.Read(input).Select(o => o.ToCharArray()).ToList();
         }
     }
 }

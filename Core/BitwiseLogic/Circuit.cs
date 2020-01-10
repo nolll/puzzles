@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
+using Core.Tools;
 
 namespace Core.BitwiseLogic
 {
@@ -13,23 +13,23 @@ namespace Core.BitwiseLogic
             _input = input;
         }
 
-        public ushort RunOne()
+        public ushort RunOne(string key)
         {
             Wires = GetWires(_input);
-            return Wires["a"].Signal;
+            return Wires[key].Signal;
         }
 
-        public ushort RunTwo()
+        public ushort RunTwo(string readKey, string writeKey)
         {
-            var result1 = RunOne();
+            var result1 = RunOne(readKey);
             Wires = GetWires(_input);
-            Wires["b"].SetSignal(result1);
-            return Wires["a"].Signal;
+            Wires[writeKey].SetSignal(result1);
+            return Wires[readKey].Signal;
         }
 
         private IDictionary<string, Wire> GetWires(string input)
         {
-            var strings = input.Trim().Split('\n').Select(o => o.Trim());
+            var strings = PuzzleInputReader.Read(input);
             var wires = new Dictionary<string, Wire>();
             foreach (var s in strings)
             {

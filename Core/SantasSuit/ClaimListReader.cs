@@ -9,7 +9,7 @@ namespace Core.SantasSuit
     {
         public static List<Claim> Read(string str)
         {
-            return StringListReader.Read(str).Select(ConvertToClaim).ToList();
+            return PuzzleInputReader.Read(str).Select(ConvertToClaim).ToList();
         }
 
         private static Claim ConvertToClaim(string str)

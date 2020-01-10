@@ -19,7 +19,7 @@ namespace Core.SpiralMemory
         public SpiralMemory(int targetSquare, SpiralMemoryMode mode)
         {
             _matrix = BuildMatrix(targetSquare, mode);
-            Distance = GetDistance(_matrix.Address, _matrix.StartAddress);
+            Distance = _matrix.Address.ManhattanDistanceTo(_matrix.StartAddress);
             Value = _matrix.ReadValue();
         }
 
@@ -52,19 +52,6 @@ namespace Core.SpiralMemory
             }
 
             return matrix;
-        }
-
-        private static int GetDistance(MatrixAddress a, MatrixAddress b)
-        {
-            var xMax = Math.Max(a.X, b.X);
-            var xMin = Math.Min(a.X, b.X);
-            var xDiff = xMax - xMin;
-
-            var yMax = Math.Max(a.Y, b.Y);
-            var yMin = Math.Min(a.Y, b.Y);
-            var yDiff = yMax - yMin;
-
-            return xDiff + yDiff;
         }
     }
 }

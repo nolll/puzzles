@@ -13,7 +13,7 @@ namespace Core.Tools
             Y = y;
         }
 
-        public int GetDistanceTo(MatrixAddress other)
+        public int ManhattanDistanceTo(MatrixAddress other)
         {
             var xMax = Math.Max(X, other.X);
             var xMin = Math.Min(X, other.X);

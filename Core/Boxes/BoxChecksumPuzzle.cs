@@ -9,7 +9,7 @@ namespace Core.Boxes
 
         public BoxChecksumPuzzle(string input)
         {
-            var ids = StringListReader.Read(input);
+            var ids = PuzzleInputReader.Read(input);
             var idCharacteristics = ids.Select(o => new IdCharacteristics(o.Trim())).ToList();
             var doubleCount = idCharacteristics.Count(o => o.HasDoubleChars);
             var tripleCount = idCharacteristics.Count(o => o.HasTripleChars);

@@ -32,27 +32,14 @@ namespace Core.EasterbunnyHq
                     _matrix.MoveForward();
                     if (_matrix.ReadValue() == 1 && _distanceToFirstRepeatedAddress == null)
                     {
-                        _distanceToFirstRepeatedAddress = GetDistance(_matrix.StartAddress, _matrix.Address);
+                        _distanceToFirstRepeatedAddress = _matrix.StartAddress.ManhattanDistanceTo(_matrix.Address);
                     }
                     _matrix.WriteValue(1);
                 }
             }
         }
 
-        public int DistanceToTarget => GetDistance(_matrix.StartAddress, _matrix.Address);
+        public int DistanceToTarget => _matrix.StartAddress.ManhattanDistanceTo(_matrix.Address);
         public int DistanceToFirstRepeat => _distanceToFirstRepeatedAddress ?? 0;
-
-        private static int GetDistance(MatrixAddress a, MatrixAddress b)
-        {
-            var xMax = Math.Max(a.X, b.X);
-            var xMin = Math.Min(a.X, b.X);
-            var xDiff = xMax - xMin;
-
-            var yMax = Math.Max(a.Y, b.Y);
-            var yMin = Math.Min(a.Y, b.Y);
-            var yDiff = yMax - yMin;
-
-            return xDiff + yDiff;
-        }
     }
 }

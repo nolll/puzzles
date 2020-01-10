@@ -11,7 +11,7 @@ namespace Core.Boxes
 
         public SimilarIdsPuzzle(string input)
         {
-            var ids = StringListReader.Read(input);
+            var ids = PuzzleInputReader.Read(input);
             var similarIds = GetSimilarIds(ids);
             if (similarIds.Count != 2)
                 throw new WrongNumberOfSimilarIdsException(similarIds);
@@ -19,7 +19,7 @@ namespace Core.Boxes
             CommonLetters = GetCommonLetters(similarIds[0], similarIds[1]);
         }
 
-        public static List<string> GetSimilarIds(List<string> ids)
+        public static IList<string> GetSimilarIds(IList<string> ids)
         {
             foreach (var id in ids)
             {

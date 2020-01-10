@@ -37,7 +37,7 @@ namespace Core.ChronalCoordinates
                 for (var x = 0; x < _matrix.Width; x++)
                 {
                     var address = new MatrixAddress(x, y);
-                    var sumOfdistances = _coords.Select(o => o.GetDistanceTo(address)).Sum();
+                    var sumOfdistances = _coords.Select(o => o.ManhattanDistanceTo(address)).Sum();
                     if (sumOfdistances < distanceLimit)
                         centralAreaCount += 1;
                 }
@@ -86,11 +86,11 @@ namespace Core.ChronalCoordinates
                     if(_matrix.ReadValue() != -1)
                         continue;
 
-                    var coordsOrderedByDistance = coords.OrderBy(o => _matrix.Address.GetDistanceTo(o)).ToList();
+                    var coordsOrderedByDistance = coords.OrderBy(o => _matrix.Address.ManhattanDistanceTo(o)).ToList();
                     var coord1 = coordsOrderedByDistance[0];
                     var coord2 = coordsOrderedByDistance[1];
-                    var distance1 = _matrix.Address.GetDistanceTo(coord1);
-                    var distance2 = _matrix.Address.GetDistanceTo(coord2);
+                    var distance1 = _matrix.Address.ManhattanDistanceTo(coord1);
+                    var distance2 = _matrix.Address.ManhattanDistanceTo(coord2);
                     var c = distance1 == distance2
                         ? 0
                         : _matrix.ReadValueAt(coord1) + 1000;

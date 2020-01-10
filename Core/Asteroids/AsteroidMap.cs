@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Core.Tools;
 
 namespace Core.Asteroids
 {
@@ -16,8 +17,8 @@ namespace Core.Asteroids
         private IList<IList<Asteroid>> GetAsteroidMatrix(string map)
         {
             var asteroids = new List<IList<Asteroid>>();
-            var rows = map.Trim().Split('\n');
-            for (var y = 0; y < rows.Length; y++)
+            var rows = PuzzleInputReader.Read(map);
+            for (var y = 0; y < rows.Count; y++)
             {
                 var asteroidRow = new List<Asteroid>();
                 var cols = rows[y].Trim().ToCharArray();

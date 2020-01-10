@@ -21,11 +21,14 @@ namespace Core.IpV7
             foreach (var part in parts)
             {
                 var hasAbba = HasAbba(part);
-                if (index % 2 == 0 && !hasAbba && !hasAbbaOutsideBrackets)
-                    hasAbbaOutsideBrackets = true;
+                if (hasAbba)
+                {
+                    if (!hasAbbaOutsideBrackets && index % 2 == 0)
+                        hasAbbaOutsideBrackets = true;
 
-                if (index % 2 != 0 && hasAbba && !hasAbbaInsideBrackets)
-                    hasAbbaInsideBrackets = true;
+                    if (!hasAbbaInsideBrackets && index % 2 != 0)
+                        hasAbbaInsideBrackets = true;
+                }
 
                 index += 1;
             }
@@ -35,7 +38,7 @@ namespace Core.IpV7
 
         private bool HasAbba(string s)
         {
-            for (var i = 0; i < s.Length - 4; i++)
+            for (var i = 0; i < s.Length - 3; i++)
             {
                 var test = s.Substring(i, 4);
                 if (test[0] == test[3] && test[1] == test[2] && test[0] != test[1])

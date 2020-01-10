@@ -15,11 +15,22 @@ namespace Core.IpV7
         public bool SupportsTls(string ip)
         {
             var parts = ip.Split(new[] { "[", "]" }, StringSplitOptions.None).ToList();
-            var part1HasAbba = HasAbba(parts[0]);
-            var part2HasAbba = HasAbba(parts[1]);
-            var part3HasAbba = HasAbba(parts[2]);
+            var index = 0;
+            var hasAbbaOutsideBrackets = false;
+            var hasAbbaInsideBrackets = false;
+            foreach (var part in parts)
+            {
+                var hasAbba = HasAbba(part);
+                if (index % 2 == 0 && !hasAbba && !hasAbbaOutsideBrackets)
+                    hasAbbaOutsideBrackets = true;
 
-            return part1HasAbba && part3HasAbba && !part2HasAbba;
+                if (index % 2 != 0 && hasAbba && !hasAbbaInsideBrackets)
+                    hasAbbaInsideBrackets = true;
+
+                index += 1;
+            }
+
+            return hasAbbaOutsideBrackets && !hasAbbaInsideBrackets;
         }
 
         private bool HasAbba(string s)

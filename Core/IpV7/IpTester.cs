@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
 
@@ -6,34 +7,55 @@ namespace Core.IpV7
 {
     public class IpTester
     {
-        public int SupportCount(string input)
+        public int TlsSupportCount(string input)
         {
             var ips = PuzzleInputReader.Read(input);
             return ips.Count(SupportsTls);
         }
 
+        public int SslSupportCount(string input)
+        {
+            var ips = PuzzleInputReader.Read(input);
+            return ips.Count(SupportsSsl);
+        }
+
         public bool SupportsTls(string ip)
         {
             var parts = ip.Split(new[] { "[", "]" }, StringSplitOptions.None).ToList();
-            var index = 0;
-            var hasAbbaOutsideBrackets = false;
-            var hasAbbaInsideBrackets = false;
-            foreach (var part in parts)
-            {
-                var hasAbba = HasAbba(part);
-                if (hasAbba)
-                {
-                    if (!hasAbbaOutsideBrackets && index % 2 == 0)
-                        hasAbbaOutsideBrackets = true;
-
-                    if (!hasAbbaInsideBrackets && index % 2 != 0)
-                        hasAbbaInsideBrackets = true;
-                }
-
-                index += 1;
-            }
+            var strOutsideBrackets = string.Join(' ', parts.Where((x, i) => i % 2 == 0));
+            var strInsideBrackets = string.Join(' ', parts.Where((x, i) => i % 2 != 0));
+            var hasAbbaOutsideBrackets = HasAbba(strOutsideBrackets);
+            var hasAbbaInsideBrackets = HasAbba(strInsideBrackets);
 
             return hasAbbaOutsideBrackets && !hasAbbaInsideBrackets;
+        }
+
+        public bool SupportsSsl(string ip)
+        {
+            var parts = ip.Split(new[] { "[", "]" }, StringSplitOptions.None).ToList();
+            var strOutsideBrackets = string.Join(' ', parts.Where((x, i) => i % 2 == 0));
+            var strInsideBrackets = string.Join(' ', parts.Where((x, i) => i % 2 != 0));
+            var outsideAbas = GetAbas(strOutsideBrackets);
+            var insideAbas = GetAbas(strInsideBrackets);
+
+            foreach (var aba in outsideAbas)
+            {
+                var bab = GetBab(aba);
+                if (insideAbas.Contains(bab))
+                    return true;
+            }
+
+            return false;
+        }
+
+        private string GetBab(string aba)
+        {
+            return string.Concat(new List<char>
+            {
+                aba[1],
+                aba[0],
+                aba[1]
+            });
         }
 
         private bool HasAbba(string s)
@@ -46,6 +68,19 @@ namespace Core.IpV7
             }
 
             return false;
+        }
+
+        private IList<string> GetAbas(string s)
+        {
+            var abas = new List<string>();
+            for (var i = 0; i < s.Length - 2; i++)
+            {
+                var test = s.Substring(i, 3);
+                if (test[0] == test[2] && test[0] != test[1])
+                    abas.Add(test);
+            }
+
+            return abas;
         }
     }
 }

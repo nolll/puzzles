@@ -16,5 +16,17 @@ namespace Tests
 
             Assert.That(result, Is.EqualTo(result));
         }
+
+        [TestCase("aba[bab]xyz", true)]
+        [TestCase("xyx[xyx]xyx", false)]
+        [TestCase("aaa[kek]eke", true)]
+        [TestCase("zazbz[bzb]cdb", true)]
+        public void SupportsSsl(string ip, bool expected)
+        {
+            var ipTester = new IpTester();
+            var result = ipTester.SupportsSsl(ip);
+
+            Assert.That(result, Is.EqualTo(result));
+        }
     }
 }

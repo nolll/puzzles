@@ -13,8 +13,12 @@ namespace ConsoleApp.Years.Year2016
         {
             WritePartTitle();
             var tester = new IpTester();
-            var count = tester.SupportCount(Input);
-            Console.WriteLine($"Valid ip addresses: {count}");
+            var tlsSupportCount = tester.TlsSupportCount(Input);
+            Console.WriteLine($"Valid tls ip addresses: {tlsSupportCount}");
+
+            WritePartTitle();
+            var sslSupportCount = tester.SslSupportCount(Input);
+            Console.WriteLine($"Valid ssl ip addresses: {sslSupportCount}");
         }
 
         private const string Input = @"dnwtsgywerfamfv[gwrhdujbiowtcirq]bjbhmuxdcasenlctwgh

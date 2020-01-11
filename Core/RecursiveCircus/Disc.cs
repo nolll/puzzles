@@ -7,7 +7,8 @@ namespace Core.RecursiveCircus
     {
         public string Id { get; }
         public int Weight { get; }
-        public int TotalWeight => Weight + Children.Sum(o => o.TotalWeight);
+        public int TotalWeight => Weight + ChildrensWeight;
+        public int ChildrensWeight => Children.Sum(o => o.TotalWeight);
         public IList<Disc> Children { get; }
         public IList<string> ChildrenIds { get; }
         public string ParentId { get; set; }
@@ -35,5 +36,6 @@ namespace Core.RecursiveCircus
         }
 
         public bool IsBalanced => WeightDiff == 0;
+        public bool HasBalancedChildren => Children.Count(o => !o.IsBalanced) == 0;
     }
 }

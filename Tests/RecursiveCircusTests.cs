@@ -48,9 +48,9 @@ gyxo (61)
 cntj (57)";
 
             var towers = new RecursiveTowers(input);
-            var diff = towers.WeightDiff;
+            var diff = towers.AdjustedWeight;
 
-            Assert.That(diff, Is.EqualTo(8));
+            Assert.That(diff, Is.EqualTo(60));
         }
     }
 }

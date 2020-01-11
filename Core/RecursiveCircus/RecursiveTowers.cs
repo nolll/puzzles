@@ -7,7 +7,7 @@ namespace Core.RecursiveCircus
     public class RecursiveTowers
     {
         public string BottomName { get; }
-        public int WeightDiff { get; }
+        public int AdjustedWeight { get; }
 
         public RecursiveTowers(string input)
         {
@@ -48,8 +48,20 @@ namespace Core.RecursiveCircus
                 }
             }
 
-            var unbalancedDiscs = discs.Values.Where(o => !o.IsBalanced).ToList();
-            WeightDiff = unbalancedDiscs.First()?.WeightDiff ?? 0;
+            var unbalanced = discs.Values.First(o => !o.IsBalanced && o.HasBalancedChildren);
+            var weightDiff = unbalanced.WeightDiff;
+            var groups = unbalanced.Children.GroupBy(n => n.TotalWeight).
+                Select(group =>
+                    new
+                    {
+                        Weight = group.Key,
+                        Discs = group.ToList(),
+                        Count = group.Count()
+                    }).ToList();
+
+            var failingDisc = groups.FirstOrDefault(o => o.Count == 1)?.Discs.First();
+
+            AdjustedWeight = failingDisc?.Weight - weightDiff ?? 0;
         }
     }
 }

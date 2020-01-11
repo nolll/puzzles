@@ -16,7 +16,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Name of bottom tower: {towers.BottomName}");
 
             WritePartTitle();
-            Console.WriteLine($"Weight diff: {towers.WeightDiff}");
+            Console.WriteLine($"Adjusted weight of disc with error: {towers.AdjustedWeight}");
         }
 
         private const string Input = @"uglvj (99) -> ymfjt, gkpgf

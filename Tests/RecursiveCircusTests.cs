@@ -1,12 +1,11 @@
-using System.Collections.Generic;
-using Core.Tools;
+using Core.RecursiveCircus;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Tests
 {
     public class RecursiveCircusTests
     {
+        [Test]
         public void FindsNameOfBottomProgram()
         {
             const string input = @"
@@ -29,25 +28,5 @@ cntj (57)";
 
             Assert.That(name, Is.EqualTo("tknk"));
         }
-    }
-
-    public class RecursiveTowers
-    {
-        public string BottomName { private set; get; }
-
-        public RecursiveTowers(string input)
-        {
-            var strings = PuzzleInputReader.Read(input);
-            var discs = new Dictionary<string, Disc>();
-            foreach (var disc in strings)
-            {
-                
-            }
-        }
-    }
-
-    public class Disc
-    {
-
     }
 }

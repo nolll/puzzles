@@ -14,6 +14,9 @@ namespace ConsoleApp.Years.Year2017
             WritePartTitle();
             var towers = new RecursiveTowers(Input);
             Console.WriteLine($"Name of bottom tower: {towers.BottomName}");
+
+            WritePartTitle();
+            Console.WriteLine($"Weight diff: {towers.WeightDiff}");
         }
 
         private const string Input = @"uglvj (99) -> ymfjt, gkpgf

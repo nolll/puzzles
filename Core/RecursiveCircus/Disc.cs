@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.RecursiveCircus
 {
@@ -6,6 +7,7 @@ namespace Core.RecursiveCircus
     {
         public string Id { get; }
         public int Weight { get; }
+        public int TotalWeight => Weight + Children.Sum(o => o.TotalWeight);
         public IList<Disc> Children { get; }
         public IList<string> ChildrenIds { get; }
         public string ParentId { get; set; }
@@ -17,5 +19,21 @@ namespace Core.RecursiveCircus
             ChildrenIds = childrenIds;
             Children = new List<Disc>();
         }
+
+        public int WeightDiff
+        {
+            get
+            {
+                var weights = Children.Select(o => o.TotalWeight).Distinct().ToList();
+                if (weights.Count > 1)
+                {
+                    return weights.Max() - weights.Min();
+                }
+
+                return 0;
+            }
+        }
+
+        public bool IsBalanced => WeightDiff == 0;
     }
 }

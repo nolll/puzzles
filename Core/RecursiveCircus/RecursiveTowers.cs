@@ -7,6 +7,7 @@ namespace Core.RecursiveCircus
     public class RecursiveTowers
     {
         public string BottomName { get; }
+        public int WeightDiff { get; }
 
         public RecursiveTowers(string input)
         {
@@ -46,6 +47,9 @@ namespace Core.RecursiveCircus
                     BottomName = key;
                 }
             }
+
+            var unbalancedDiscs = discs.Values.Where(o => !o.IsBalanced).ToList();
+            WeightDiff = unbalancedDiscs.First()?.WeightDiff ?? 0;
         }
     }
 }

@@ -12,9 +12,14 @@ namespace ConsoleApp.Years.Year2018
         protected override void RunDay()
         {
             WritePartTitle();
-            var assembler = new SleighAssembler();
-            var order = assembler.Assemble(Input);
-            Console.WriteLine($"Sleigh assembly order: {order}");
+            var assembler1 = new SleighAssembler(Input, 1, 0);
+            var result1 = assembler1.Assemble();
+            Console.WriteLine($"Sleigh assembly order: {result1.Order}");
+
+            WritePartTitle();
+            var assembler2 = new SleighAssembler(Input, 5, 60);
+            var result2 = assembler2.Assemble();
+            Console.WriteLine($"Time spent: {result2.Time}s");
         }
 
         private const string Input = @"Step Q must be finished before step O can begin.

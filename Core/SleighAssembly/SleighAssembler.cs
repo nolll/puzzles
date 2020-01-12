@@ -5,9 +5,105 @@ using Core.Tools;
 
 namespace Core.SleighAssembly
 {
+    public class SleighResult
+    {
+        public string Order { get; }
+        public int Time { get; }
+
+        public SleighResult(string order, int time)
+        {
+            Order = order;
+            Time = time;
+        }
+    }
+
+    public class SleighWorker
+    {
+        public SleighStep Task { get; set; }
+        public int TimeLeft { get; set; }
+        public bool IsIdle => TimeLeft == 0 && Task == null;
+        public bool IsFinished => TimeLeft == 0 && Task != null;
+        public bool IsWorking => Task != null;
+
+        public void DecreaseTime()
+        {
+            if (TimeLeft > 0)
+                TimeLeft -= 1;
+        }
+    }
+
     public class SleighAssembler
     {
-        public string Assemble(string input)
+        private readonly IDictionary<string, SleighStep> _steps;
+        private readonly IList<SleighWorker> _workers;
+        private readonly int _timeOffset;
+
+        public SleighAssembler(string input, int workerCount, int timeOffset)
+        {
+            _steps = GetSteps(input);
+            _workers = GetWorkers(workerCount);
+            _timeOffset = timeOffset;
+        }
+
+        private IList<SleighWorker> GetWorkers(int workerCount)
+        {
+            var workers = new List<SleighWorker>();
+            for (var i = 0; i < workerCount; i++)
+            {
+                workers.Add(new SleighWorker());
+            }
+
+            return workers;
+        }
+
+        public SleighResult Assemble()
+        {
+            var time = -1;
+
+            var order = new StringBuilder();
+            while (_steps.Values.Any() || _workers.Any(o => o.IsWorking))
+            {
+                var finishedWorkers = _workers.Where(o => o.IsFinished).ToList();
+                foreach (var worker in finishedWorkers)
+                {
+                    order.Append(worker.Task.Name);
+                    RemoveDep(worker.Task.Name);
+                    worker.Task = null;
+                }
+
+                var idleWorkers = _workers.Where(o => o.IsIdle).ToList();
+                if (idleWorkers.Any())
+                {
+                    foreach (var worker in idleWorkers)
+                    {
+                        var stepsReadyToRun = _steps.Values.Where(o => !o.Deps.Any()).OrderBy(o => o.Name).ToList();
+                        if (stepsReadyToRun.Any())
+                        {
+                            var step = stepsReadyToRun.First();
+                            worker.Task = step;
+                            worker.TimeLeft = GetRequiredTime(step);
+                            RemoveStep(step.Name);
+                        }
+                    }
+                }
+
+                foreach (var worker in _workers)
+                {
+                    worker.DecreaseTime();
+                }
+
+                time += 1;
+            }
+            return new SleighResult(order.ToString(), time);
+        }
+
+        private int GetRequiredTime(SleighStep step)
+        {
+            var c = step.Name[0];
+            return c - 'A' + 1 + _timeOffset;
+        }
+
+        private IDictionary<string, SleighStep> GetSteps(string input)
         {
             var instructions = PuzzleInputReader.Read(input);
             var steps = new Dictionary<string, SleighStep>();
@@ -34,24 +130,21 @@ namespace Core.SleighAssembly
                 }
             }
 
-            var order = new StringBuilder();
-            while (steps.Values.Any())
-            {
-                var availableSteps = steps.Values.Where(o => !o.Deps.Any());
-                var step = availableSteps.OrderBy(o => o.Name).FirstOrDefault();
-                order.Append(step.Name);
-                Remove(steps, step.Name);
-            }
-            return order.ToString();
+            return steps;
         }
 
-        private void Remove(IDictionary<string, SleighStep> steps, string name)
+        private void RemoveStep(string name)
         {
-            var dep = steps[name];
-            steps.Remove(name);
-            foreach (var step in steps.Values)
+            _steps.Remove(name);
+        }
+
+        private void RemoveDep(string name)
+        {
+            foreach (var step in _steps.Values)
             {
-                step.Deps.Remove(dep);
+                var dep = step.Deps.FirstOrDefault(o => o.Name == name);
+                if(dep != null)
+                    step.Deps.Remove(dep);
             }
         }
     }

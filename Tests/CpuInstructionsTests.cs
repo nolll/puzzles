@@ -16,7 +16,8 @@ c inc -20 if c == 10";
 
             var calculator = new CpuInstructionCalculator(input);
 
-            Assert.That(calculator.LargestValue, Is.EqualTo(1));
+            Assert.That(calculator.LargestValueAtEnd, Is.EqualTo(1));
+            Assert.That(calculator.LargestValueEver, Is.EqualTo(10));
         }
     }
 }

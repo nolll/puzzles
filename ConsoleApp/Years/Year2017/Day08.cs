@@ -13,7 +13,10 @@ namespace ConsoleApp.Years.Year2017
         {
             WritePartTitle();
             var calculator = new CpuInstructionCalculator(Input);
-            Console.WriteLine($"Largest value: {calculator.LargestValue}");
+            Console.WriteLine($"Largest value at end: {calculator.LargestValueAtEnd}");
+
+            WritePartTitle();
+            Console.WriteLine($"Largest value ever: {calculator.LargestValueEver}");
         }
 
         private const string Input = @"av inc 167 if f > -9

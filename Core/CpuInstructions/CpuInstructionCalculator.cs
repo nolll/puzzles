@@ -7,7 +7,8 @@ namespace Core.CpuInstructions
     public class CpuInstructionCalculator
     {
         private readonly Dictionary<string, int> _registers;
-        public int LargestValue { get; }
+        public int LargestValueAtEnd { get; }
+        public int LargestValueEver { get; }
 
         public CpuInstructionCalculator(string input)
         {
@@ -29,9 +30,13 @@ namespace Core.CpuInstructions
                 
                 if(IsConditionTrue(ReadValue(readRegister), condition, compareValue))
                     _registers[targetRegister] = targetValue;
+
+                var largestValue = _registers.Values.Max();
+                if (largestValue > LargestValueEver)
+                    LargestValueEver = largestValue;
             }
 
-            LargestValue = _registers.Values.Max();
+            LargestValueAtEnd = _registers.Values.Max();
         }
 
         private int ReadValue(string key)

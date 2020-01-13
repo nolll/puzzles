@@ -17,7 +17,8 @@ namespace ConsoleApp.Years.Year2015
             new Day05(),
             new Day06(),
             new Day07(),
-            new Day08()
+            new Day08(),
+            new Day09()
         };
     }
 }

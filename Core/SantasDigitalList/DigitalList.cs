@@ -6,14 +6,17 @@ namespace Core.SantasDigitalList
 {
     public class DigitalList
     {
-        public int CountDiff { get; }
+        public int CodeMinusMemoryDiff { get; }
+        public int EncodedMinusCodeDiff { get; }
 
         public DigitalList(string input)
         {
             var strings = PuzzleInputReader.Read(input);
             var codeCount = strings.Sum(CountCode);
             var memoryCount = strings.Sum(CountMemory);
-            CountDiff = codeCount - memoryCount;
+            var encodedCount = strings.Sum(CountEncoded);
+            CodeMinusMemoryDiff = codeCount - memoryCount;
+            EncodedMinusCodeDiff = encodedCount - codeCount;
         }
 
         private int CountCode(string s)
@@ -36,6 +39,13 @@ namespace Core.SantasDigitalList
             }
 
             return s.Length;
+        }
+
+        private int CountEncoded(string s)
+        {
+            s = s.Replace("\\", "\\\\");
+            s = s.Replace("\"", "\\\"");
+            return s.Length + 2;
         }
     }
 }

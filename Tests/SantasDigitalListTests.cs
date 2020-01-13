@@ -6,7 +6,7 @@ namespace Tests
     public class SantasDigitalListTests
     {
         [Test]
-        public void CharacterCountDifference()
+        public void CodeToMemoryDifference()
         {
             const string input = @"
 """"
@@ -17,7 +17,22 @@ namespace Tests
 
             var digitalList = new DigitalList(input);
 
-            Assert.That(digitalList.CountDiff, Is.EqualTo(12));
+            Assert.That(digitalList.CodeMinusMemoryDiff, Is.EqualTo(12));
+        }
+
+        [Test]
+        public void EncodedToCodeDifference()
+        {
+            const string input = @"
+""""
+""abc""
+""aaa\""aaa""
+""\x27""
+";
+
+            var digitalList = new DigitalList(input);
+
+            Assert.That(digitalList.EncodedMinusCodeDiff, Is.EqualTo(19));
         }
     }
 }

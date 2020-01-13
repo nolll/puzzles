@@ -13,8 +13,10 @@ namespace ConsoleApp.Years.Year2015
         {
             WritePartTitle();
             var digitalList = new DigitalList(Input);
-            
-            Console.WriteLine($"Difference: {digitalList.CountDiff}");
+            Console.WriteLine($"Difference: {digitalList.CodeMinusMemoryDiff}");
+
+            WritePartTitle();
+            Console.WriteLine($"Difference: {digitalList.EncodedMinusCodeDiff}");
         }
 
         private const string Input = @"""azlgxdbljwygyttzkfwuxv""

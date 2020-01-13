@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Core.Tools;
 
@@ -22,14 +23,16 @@ namespace Core.SantasDigitalList
 
         private int CountMemory(string s)
         {
-            s = s.Trim('"');
-            s = s.Replace("\\\"", "\"");
-            s = s.Replace("\\\\", "\\");
+            s = s.Remove(0, 1);
+            s = s.Remove(s.Length - 1);
 
-            while (s.Contains("\\x"))
+            while (s.Contains("\\"))
             {
-                var ascii = s.Substring(s.IndexOf("\\x"), 4);
-                s = s.Replace(ascii, "-");
+                var backslashIndex = s.IndexOf("\\", StringComparison.InvariantCulture);
+                var nextChar = s[backslashIndex + 1];
+                var charactersToRemove = nextChar == '\"' || nextChar == '\\' ? 2 : 4;
+                s = s.Remove(backslashIndex, charactersToRemove);
+                s = s.Insert(backslashIndex, "-");
             }
 
             return s.Length;

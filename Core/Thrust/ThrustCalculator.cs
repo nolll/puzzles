@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Core.Tools;
 
 namespace Core.Thrust
 {
@@ -37,7 +38,7 @@ namespace Core.Thrust
 
         public long GetMaxThrust(int[] phases)
         {
-            var sequences = new SequenceGenerator().GetSequences(phases);
+            var sequences = new PermutationGenerator().GetPermutations(phases);
             long highestThrust = 0;
             foreach (var sequence in sequences)
             {

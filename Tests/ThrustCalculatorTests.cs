@@ -1,4 +1,3 @@
-using System.Linq;
 using Core.Thrust;
 using NUnit.Framework;
 
@@ -30,18 +29,6 @@ namespace Tests
             var thrust = calculator.GetThrust(sequence);
 
             Assert.That(thrust, Is.EqualTo(expectedThrust));
-        }
-    }
-
-    public class SequenceGeneratorTests
-    {
-        [Test]
-        public void GeneratesAllCombinations()
-        {
-            var generator = new SequenceGenerator();
-            var sequences = generator.GetSequences(new[] {1, 2, 3}).ToList();
-
-            Assert.That(sequences.Count, Is.EqualTo(6));
         }
     }
 }

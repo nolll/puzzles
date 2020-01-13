@@ -13,6 +13,7 @@ namespace Tests
             var calculator = new LicenseNumberCalculator(input);
 
             Assert.That(calculator.MetadataSum, Is.EqualTo(138));
+            Assert.That(calculator.RootNodeValue, Is.EqualTo(66));
         }
     }
 }

@@ -6,8 +6,9 @@ namespace Core.NavigationSystemLicense
     public class LicenseNumberCalculator
     {
         private readonly List<int> _numbers;
-        
+
         public int MetadataSum { get; }
+        public int RootNodeValue { get; }
 
         public LicenseNumberCalculator(string input)
         {
@@ -15,6 +16,7 @@ namespace Core.NavigationSystemLicense
 
             var rootNode = ReadNode();
             MetadataSum = rootNode.MetadataSum;
+            RootNodeValue = rootNode.Value;
         }
 
         private LicenseNode ReadNode()

@@ -14,5 +14,24 @@ namespace Core.NavigationSystemLicense
             Children = children;
             Metadata = metadata;
         }
+
+        public int Value
+        {
+            get
+            {
+                if (Children.Count == 0)
+                    return Metadata.Sum();
+
+                return Metadata.Sum(ChildNodeValue);
+            }
+        }
+
+        private int ChildNodeValue(int nodeNumber)
+        {
+            var index = nodeNumber - 1;
+            if (Children.Count > index)
+                return Children[index].Value;
+            return 0;
+        }
     }
 }

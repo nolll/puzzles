@@ -7,8 +7,9 @@ namespace Core.SantasRoute
     public class RouteCalculator
     {
         private readonly IDictionary<string, int> _distanceDictionary;
-        
+
         public int ShortestDistance { get; }
+        public int LongestDistance { get; }
 
         public RouteCalculator(string input)
         {
@@ -17,6 +18,7 @@ namespace Core.SantasRoute
             var locations = GetLocations(distances);
             var routes = GetRoutes(locations);
             ShortestDistance = FindShortestDistance(routes);
+            LongestDistance = FindLongestDistance(routes);
         }
 
         private int FindShortestDistance(List<List<string>> routes)
@@ -29,6 +31,18 @@ namespace Core.SantasRoute
                     shortestRoute = routeLength;
             }
             return shortestRoute ?? 0;
+        }
+
+        private int FindLongestDistance(List<List<string>> routes)
+        {
+            int? longestRoute = null;
+            foreach (var route in routes)
+            {
+                var routeLength = CalculateRouteLength(route.ToList());
+                if (longestRoute == null || routeLength > longestRoute.Value)
+                    longestRoute = routeLength;
+            }
+            return longestRoute ?? 0;
         }
 
         private int CalculateRouteLength(IList<string> route)

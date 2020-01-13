@@ -14,6 +14,9 @@ namespace ConsoleApp.Years.Year2015
             WritePartTitle();
             var calculator = new RouteCalculator(Input);
             Console.WriteLine($"Shortest route: {calculator.ShortestDistance}");
+
+            WritePartTitle();
+            Console.WriteLine($"Shortest route: {calculator.LongestDistance}");
         }
 
         private const string Input = @"Faerun to Tristram = 65

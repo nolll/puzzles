@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,43 +6,63 @@ namespace Core.MarbleMania
 {
     public class MarbleGame
     {
-        public int WinnerScore { get; }
+        private readonly long[] _playerScores;
+        private readonly LinkedList<int> _circle;
+        private LinkedListNode<int> _currentMarble;
+        private readonly int _currentPlayer;
+        private readonly int _marbleValue;
+        public long WinnerScore { get; }
 
         public MarbleGame(int playerCount, int lastMarbleValue)
         {
-            var playerScores = new int[playerCount];
-            var circle = new List<int> {0};
-            var currentMarble = 0;
-            var currentPlayer = 0;
-            var marbleValue = 0;
-            while (marbleValue < lastMarbleValue)
+            _playerScores = new long[playerCount];
+            _circle = new LinkedList<int>();
+            _currentMarble = _circle.AddFirst(0);
+            _currentPlayer = 0;
+            _marbleValue = 0;
+            
+            while (_marbleValue < lastMarbleValue)
             {
-                marbleValue++;
-                if (marbleValue % 23 == 0)
+                _marbleValue++;
+                if (_marbleValue % 23 == 0)
                 {
-                    currentMarble -= 7;
-                    while (currentMarble < 0)
-                        currentMarble += circle.Count;
-                    var value = circle[currentMarble];
-                    playerScores[currentPlayer] += marbleValue + value;
-                    circle.RemoveAt(currentMarble);
-                    while (currentMarble > circle.Count - 1)
-                        currentMarble = 0;
+                    MoveBack(7);
+                    _playerScores[_currentPlayer] += _marbleValue + _currentMarble.Value;
+                    var removeThis = _currentMarble;
+                    Next();
+                    _circle.Remove(removeThis);
                 }
                 else
                 {
-                    currentMarble += 2;
-                    while (currentMarble > circle.Count - 1)
-                        currentMarble -= circle.Count;
-                    circle.Insert(currentMarble, marbleValue);
+                    Next();
+                    _currentMarble = _circle.AddAfter(_currentMarble, _marbleValue);
                 }
 
-                currentPlayer++;
-                if (currentPlayer >= playerScores.Length)
-                    currentPlayer = 0;
+                _currentPlayer++;
+                if (_currentPlayer >= _playerScores.Length)
+                    _currentPlayer = 0;
             }
 
-            WinnerScore = playerScores.Max();
+            WinnerScore = _playerScores.Max();
+        }
+
+        private void MoveBack(int distance)
+        {
+            while (distance > 0)
+            {
+                Previous();
+                distance--;
+            }
+        }
+
+        private void Previous()
+        {
+            _currentMarble = _currentMarble.Previous ?? _circle.Last;
+        }
+
+        private void Next()
+        {
+            _currentMarble = _currentMarble.Next ?? _circle.First;
         }
     }
 }

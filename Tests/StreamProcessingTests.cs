@@ -14,13 +14,27 @@ namespace Tests
         [TestCase("{{<a>},{<a>},{<a>},{<a>}}", "{{},{},{},{}}", 5, 9)]
         [TestCase("{{<!>},{<!>},{<!>},{<a>}}", "{{}}", 2, 3)]
         [TestCase("{{<!!>},{<!!>},{<!!>},{<!!>}}", "{{},{},{},{}}", 5, 9)]
-        public void GroupCountIsCorrect(string input, string expectedCleaned, int expectedCount, int expectedScore)
+        public void GroupCountAndScoreIsCorrect(string input, string expectedCleaned, int expectedCount, int expectedScore, int garbageCount)
         {
             var processor = new StreamProcessor(input);
-            
+
             Assert.That(processor.Cleaned, Is.EqualTo(expectedCleaned));
             Assert.That(processor.GroupCount, Is.EqualTo(expectedCount));
             Assert.That(processor.Score, Is.EqualTo(expectedScore));
+        }
+
+        [TestCase("{<>}", 0)]
+        [TestCase("{<random characters>}", 17)]
+        [TestCase("{<<<<>}", 3)]
+        [TestCase("{<{!>}>}", 2)]
+        [TestCase("{<!!>}", 0)]
+        [TestCase("{<!!!>>}", 0)]
+        [TestCase("{<{o\"i!a,<{i<a>}", 10)]
+        public void GarbageCountIsCorrect(string input, int expected)
+        {
+            var processor = new StreamProcessor(input);
+
+            Assert.That(processor.GarbageCount, Is.EqualTo(expected));
         }
     }
 }

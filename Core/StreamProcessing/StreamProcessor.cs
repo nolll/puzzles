@@ -8,12 +8,15 @@ namespace Core.StreamProcessing
         public int GroupCount { get; }
         public string Cleaned { get; }
         public int Score { get; }
+        public int GarbageCount { get; }
 
         public StreamProcessor(string input)
         {
-            Cleaned = RemoveGarbage(input);
-            GroupCount = Cleaned.Count(o => o == '}');
-            Score = GetScore(Cleaned);
+            var removeResult = RemoveGarbage(input);
+            Cleaned = removeResult.Cleaned;
+            GarbageCount = removeResult.Removed;
+            GroupCount = removeResult.Cleaned.Count(o => o == '}');
+            Score = GetScore(removeResult.Cleaned);
         }
 
         private int GetScore(string cleaned)
@@ -37,8 +40,9 @@ namespace Core.StreamProcessing
             return totalScore;
         }
 
-        private string RemoveGarbage(string input)
+        private RemoveResult RemoveGarbage(string input)
         {
+            var removeCount = 0;
             input = input.Replace("!!", "");
             var cleaned = new StringBuilder();
             var isInGarbage = false;
@@ -57,10 +61,26 @@ namespace Core.StreamProcessing
                 {
                     if (c == '>' && input[i - 1] != '!')
                         isInGarbage = false;
+                    else if (c == '!')
+                        removeCount -= 1;
+                    else     
+                        removeCount += 1;
                 }
             }
 
-            return cleaned.ToString();
+            return new RemoveResult(cleaned.ToString(), removeCount);
+        }
+
+        private class RemoveResult
+        {
+            public string Cleaned { get; }
+            public int Removed { get; }
+
+            public RemoveResult(string cleaned, int removed)
+            {
+                Cleaned = cleaned;
+                Removed = removed;
+            }
         }
     }
 }

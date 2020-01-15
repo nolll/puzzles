@@ -15,6 +15,10 @@ namespace ConsoleApp.Years.Year2016
             var simulator = new BotSimulator(Input);
             var botId = simulator.FindIdByChips(17, 61);
             Console.WriteLine($"Id of requested bot: {botId}");
+
+            WritePartTitle();
+            var multipliedOutput = simulator.GetMultipliedOutput();
+            Console.WriteLine($"Multiplied output: {multipliedOutput}");
         }
 
         private const string Input = @"bot 76 gives low to bot 191 and high to bot 21

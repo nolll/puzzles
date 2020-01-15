@@ -80,5 +80,10 @@ namespace Core.BalanceBots
         {
             return _bots.Values.FirstOrDefault(o => o.Low == low && o.High == high)?.Id ?? 0;
         }
+
+        public int GetMultipliedOutput()
+        {
+            return _outputs[0] * _outputs[1] * _outputs[2];
+        }
     }
 }

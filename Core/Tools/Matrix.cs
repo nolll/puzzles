@@ -6,6 +6,7 @@ namespace Core.Tools
 {
     public class Matrix<T>
     {
+        private readonly T _defaultValue;
         private readonly IList<IList<T>> _matrix;
         public MatrixDirection Direction { get; private set; }
         public MatrixAddress Address { get; private set; }
@@ -17,6 +18,7 @@ namespace Core.Tools
 
         public Matrix(int width = 1, int height = 1, T defaultValue = default)
         {
+            _defaultValue = defaultValue;
             _matrix = BuildMatrix(width, height, defaultValue);
             Address = new MatrixAddress(0, 0);
             StartAddress = new MatrixAddress(0, 0);
@@ -200,7 +202,7 @@ namespace Core.Tools
                 y += 1;
             }
 
-            return sb.ToString();
+            return sb.ToString().Trim();
         }
 
         public T ReadValue()
@@ -384,7 +386,7 @@ namespace Core.Tools
                 var row = new List<T>();
                 for (var x = 0; x < width; x++)
                 {
-                    row.Add(default);
+                    row.Add(_defaultValue);
                 }
                 _matrix.Insert(0, row);
             }
@@ -398,7 +400,7 @@ namespace Core.Tools
                 var row = new List<T>();
                 for (var x = 0; x < width; x++)
                 {
-                    row.Add(default);
+                    row.Add(_defaultValue);
                 }
                 _matrix.Add(row);
             }
@@ -412,7 +414,7 @@ namespace Core.Tools
                 var row = _matrix[y];
                 for (var x = 0; x < numberOfRows; x++)
                 {
-                    row.Add(default);
+                    row.Add(_defaultValue);
                 }
             }
         }
@@ -425,7 +427,7 @@ namespace Core.Tools
                 var row = _matrix[y];
                 for (var x = 0; x < numberOfRows; x++)
                 {
-                    row.Insert(0, default);
+                    row.Insert(0, _defaultValue);
                 }
             }
         }

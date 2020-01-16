@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2018
         {
             WritePartTitle();
             var boxChecksumPuzzle = new BoxChecksumPuzzle(Input);
-            Console.WriteLine($"Checksum: {boxChecksumPuzzle.Checksum}");
+            Console.WriteLine($"Hash: {boxChecksumPuzzle.Checksum}");
 
             WritePartTitle();
             var similarIdsPuzzle = new SimilarIdsPuzzle(Input);

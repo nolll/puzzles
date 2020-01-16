@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Core.KnotHash
 {
-    public class KnotHasher
+    public class AsciiKnotHasher
     {
         private readonly int[] _list;
         private int _listIndex;
@@ -11,25 +12,51 @@ namespace Core.KnotHash
         private int _lengthIndex;
         private readonly int[] _lengths;
 
-        public int Checksum { get; }
+        public string Hash { get; }
 
-        public KnotHasher(int size, string input)
+        public AsciiKnotHasher(string input)
         {
-            _lengths = input.Split(',').Select(int.Parse).ToArray();
-            _list = FillList(size);
+            var lengths = input.ToCharArray().Select(o => (int)o).ToList();
+            lengths.AddRange(new[] { 17, 31, 73, 47, 23 });
+            _lengths = lengths.ToArray();
+            _list = FillList(256);
             _listIndex = 0;
             _skip = 0;
 
-            for (var i = 0; i < _lengths.Length; i++)
+            for (var round = 0; round < 64; round++)
             {
-                _lengthIndex = i;
-                var values = ReadValues();
-                var reversed = values.Reverse().ToArray();
-                WriteValues(reversed);
-                MoveForward();
+                for (var i = 0; i < _lengths.Length; i++)
+                {
+                    _lengthIndex = i;
+                    var values = ReadValues();
+                    var reversed = values.Reverse().ToArray();
+                    WriteValues(reversed);
+                    MoveForward();
+                }
             }
 
-            Checksum = _list[0] * _list[1];
+            var denseHash = GetReducedHash().ToList();
+            Hash = GetHash(denseHash);
+        }
+
+        private string GetHash(IEnumerable<int> denseHash)
+        {
+            var hash = new StringBuilder();
+            foreach (var v in denseHash)
+            {
+                var str = v.ToString("X2").PadLeft(2);
+                hash.Append(str);
+            }
+            return hash.ToString().ToLower();
+        }
+
+        private IEnumerable<int> GetReducedHash()
+        {
+            for (var i = 0; i < _list.Length; i += 16)
+            {
+                yield return _list[i] ^ _list[i + 1] ^ _list[i + 2] ^ _list[i + 3] ^ _list[i + 4] ^ _list[i + 5] ^ _list[i + 6] ^ _list[i + 7] ^
+                             _list[i + 8] ^ _list[i + 9] ^ _list[i + 10] ^ _list[i + 11] ^ _list[i + 12] ^ _list[i + 13] ^ _list[i + 14] ^ _list[i + 15];
+            }
         }
 
         private int[] FillList(int size)

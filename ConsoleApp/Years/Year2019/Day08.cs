@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2019
             WritePartTitle();
             var image = new SpaceImage(Input);
             var checksum = image.Checksum;
-            Console.WriteLine($"Checksum: {checksum}");
+            Console.WriteLine($"Hash: {checksum}");
 
             WritePartTitle();
             Console.WriteLine(image.Print());

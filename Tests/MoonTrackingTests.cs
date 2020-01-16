@@ -123,6 +123,7 @@ namespace Tests
         }
 
         [Test]
+        [Ignore("Too slow")]
         public void CycleLengthIs4686774924()
         {
             const string map = @"

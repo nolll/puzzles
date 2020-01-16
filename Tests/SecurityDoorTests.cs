@@ -16,6 +16,7 @@ namespace Tests
         }
 
         [Test]
+        [Ignore("Too slow")]
         public void GeneratesPasswordWithSecondAlgorithm()
         {
             const string input = "abc";

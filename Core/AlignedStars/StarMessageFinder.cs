@@ -12,31 +12,23 @@ namespace Core.AlignedStars
         public StarMessageFinder(string input)
         {
             var positions = ParsePositions(input).ToList();
-            var iterations = 50;
-            var i = 0;
-            int? smallestDiff = null;
-            var smallestDiffMessage = "";
-            while (i < iterations)
+            while (true)
             {
                 foreach (var position in positions)
                 {
                     position.Move();
                 }
 
-                var xDiff = positions.Max(o => o.X) - positions.Min(o => o.X);
                 var yDiff = positions.Max(o => o.Y) - positions.Min(o => o.Y);
-                var diff = xDiff + yDiff;
-
-                if (smallestDiff == null || diff < smallestDiff)
-                {
-                    smallestDiff = diff;
-                    smallestDiffMessage = PrintMessage(positions);
-                }
                 
-                i++;
+                if (yDiff == 7)
+                {
+                    Message = PrintMessage(positions);
+                    break;
+                }
             }
 
-            Message = smallestDiffMessage;
+            Message = "Not enough iterations";
         }
 
         private string PrintMessage(List<StarPosition> positions)

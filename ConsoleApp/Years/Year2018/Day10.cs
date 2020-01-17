@@ -12,7 +12,7 @@ namespace ConsoleApp.Years.Year2018
         protected override void RunDay()
         {
             WritePartTitle();
-            var finder = new StarMessageFinder(Input);
+            var finder = new StarMessageFinder(Input, 9);
             Console.WriteLine("Message:");
             Console.WriteLine(finder.Message);
         }

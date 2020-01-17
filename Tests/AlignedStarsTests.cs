@@ -49,7 +49,7 @@ position=<-3,  6> velocity=< 2, -1>";
 #...#...#.
 #...#..###";
 
-            var finder = new StarMessageFinder(input);
+            var finder = new StarMessageFinder(input, 7);
 
             Assert.That(finder.Message, Is.EqualTo(expected));
         }

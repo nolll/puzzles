@@ -9,7 +9,7 @@ namespace Core.AlignedStars
     {
         public string Message { get; }
 
-        public StarMessageFinder(string input)
+        public StarMessageFinder(string input, int messageHeight)
         {
             var positions = ParsePositions(input).ToList();
             while (true)
@@ -20,23 +20,23 @@ namespace Core.AlignedStars
                 }
 
                 var yDiff = positions.Max(o => o.Y) - positions.Min(o => o.Y);
-                
-                if (yDiff == 7)
+
+                if (yDiff == messageHeight)
                 {
                     Message = PrintMessage(positions);
-                    break;
+                    return;
                 }
             }
-
-            Message = "Not enough iterations";
         }
 
         private string PrintMessage(List<StarPosition> positions)
         {
+            var yOffset = positions.Min(o => o.Y);
+            var xOffset = positions.Min(o => o.X);
             var matrix = new Matrix<char>(1, 1, '.');
             foreach (var position in positions)
             {
-                matrix.MoveTo(position.X, position.Y);
+                matrix.MoveTo(position.X - xOffset, position.Y - yOffset);
                 matrix.WriteValue('#');
             }
             return matrix.Print();

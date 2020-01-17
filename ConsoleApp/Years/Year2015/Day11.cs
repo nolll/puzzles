@@ -13,10 +13,14 @@ namespace ConsoleApp.Years.Year2015
         {
             WritePartTitle();
             var validator = new CorporatePasswordValidator();
-            var pwd = validator.FindNextPassword(Input);
-            Console.WriteLine($"Next password: {pwd}");
+            var pwd = validator.FindNextPassword(Input1);
+            Console.WriteLine($"Next password 1: {pwd}");
+
+            WritePartTitle();
+            var pwd2 = validator.FindNextPassword(pwd);
+            Console.WriteLine($"Next password 2: {pwd2}");
         }
 
-        private const string Input = "hxbxwxba";
+        private const string Input1 = "hxbxwxba";
     }
 }

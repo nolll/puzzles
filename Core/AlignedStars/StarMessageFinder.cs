@@ -8,12 +8,14 @@ namespace Core.AlignedStars
     public class StarMessageFinder
     {
         public string Message { get; }
+        public int IterationCount { get; }
 
         public StarMessageFinder(string input, int messageHeight)
         {
             var positions = ParsePositions(input).ToList();
             while (true)
             {
+                IterationCount++;
                 foreach (var position in positions)
                 {
                     position.Move();

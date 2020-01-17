@@ -15,6 +15,9 @@ namespace ConsoleApp.Years.Year2018
             var finder = new StarMessageFinder(Input, 9);
             Console.WriteLine("Message:");
             Console.WriteLine(finder.Message);
+            
+            WritePartTitle();
+            Console.WriteLine($"Number of seconds: {finder.IterationCount}");
         }
 
         private const string Input = @"position=<-41214, -10223> velocity=< 4,  1>

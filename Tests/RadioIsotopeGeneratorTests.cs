@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
@@ -25,44 +26,149 @@ The fourth floor contains nothing relevant.";
     public class RadioisotopeSimulator
     {
         public int StepCount { get; }
+        private int _currentFloor = 0;
+        private IList<RadioisotopeFloor> _floors;
 
         public RadioisotopeSimulator(string input)
         {
-            var floors = ParseFloors(input);
-            var x = 0;
+            var facility = ParseFacility(input);
+            var iterations = MoveElevator(facility);
         }
 
-        private IList<Floor> ParseFloors(string input)
+        private int? MoveElevator(RadioisotopeFacility facility)
+        {
+            return null;
+        }
+
+        private bool CanMoveUp()
+        {
+            return _currentFloor < _floors.Count - 1;
+        }
+
+        private bool CanMoveDown()
+        {
+            return _currentFloor > 0;
+        }
+
+        private IList<RadioisotopeFloor> ParseFloors(string input)
         {
             var strFloors = PuzzleInputReader.Read(input);
             return strFloors.Select(ParseFloor).ToList();
         }
 
-        private Floor ParseFloor(string s)
+        private RadioisotopeFacility ParseFacility(string input)
+        {
+            var strFloors = PuzzleInputReader.Read(input);
+            return new RadioisotopeFacility(strFloors.Select(ParseFloor).ToList());
+        }
+
+        private RadioisotopeFloor ParseFloor(string s)
         {
             s = s.Replace(" microchip", "-microchip").Replace(" generator", "-generator").Replace(",", "").Replace(".", "");
             var parts = s.Split(" ");
+            var items = parts
+                .Where(o => o.EndsWith("microchip") || o.EndsWith("generator"))
+                .Select(CreateItem)
+                .ToList();
+
             var microchips = parts
                 .Where(o => o.EndsWith("microchip"))
                 .Select(o => o.Split('-').First())
                 .ToList();
-            var generators = parts
-                .Where(o => o.EndsWith("generator"))
-                .Select(o => o.Split('-').First())
-                .ToList();
-            return new Floor(microchips, generators);
+            return new RadioisotopeFloor(items);
+        }
+
+        private RadioisotopeItem CreateItem(string s)
+        {
+            var parts = s.Split('-');
+            var name = parts.First();
+            var type = parts.Last();
+            if(type == "microchip")
+                return new Microchip(name);
+            return new Generator(name);
         }
     }
 
-    public class Floor
+    public class RadioisotopeFacility
     {
-        public IList<string> Microship { get; }
-        public IList<string> Generators { get; }
+        public IList<RadioisotopeFloor> Floors { get; }
+        public int ItemCount { get; }
+        public int TopFloorItemCount => Floors.Last().Items.Count;
+        public bool IsDone => TopFloorItemCount == ItemCount;
+        public int IterationCount { get; }
 
-        public Floor(IList<string> microship, IList<string> generators)
+        public RadioisotopeFacility(List<RadioisotopeFloor> floors)
         {
-            Microship = microship;
-            Generators = generators;
+            Floors = floors;
+            IterationCount = 0;
         }
+
+        public RadioisotopeFacility(RadioisotopeFacility facility, int iterationCount)
+        {
+            Floors = CopyFloors(facility);
+            IterationCount = iterationCount;
+        }
+
+        private IList<RadioisotopeFloor> CopyFloors(RadioisotopeFacility facility)
+        {
+            var floors = new List<RadioisotopeFloor>();
+            foreach (var floor in facility.Floors)
+            {
+                var items = new List<RadioisotopeItem>();
+                foreach (var item in floor.Items)
+                {
+                    items.Add(item);
+                }
+
+                var newFloor = new RadioisotopeFloor(items);
+            }
+
+            return floors;
+        }
+    }
+
+    public class RadioisotopeFloor
+    {
+        public IList<RadioisotopeItem> Items { get; }
+
+        public RadioisotopeFloor(IList<RadioisotopeItem> items)
+        {
+            Items = items;
+        }
+    }
+
+    public class Generator : RadioisotopeItem
+    {
+        public override RadioisotopeType Type => RadioisotopeType.Generator;
+
+        public Generator(string name) : base(name)
+        {
+        }
+    }
+
+    public class Microchip : RadioisotopeItem
+    {
+        public override RadioisotopeType Type => RadioisotopeType.Microchip;
+
+        public Microchip(string name) : base(name)
+        {
+        }
+    }
+
+    public abstract class RadioisotopeItem
+    {
+        public string Name { get; }
+        public abstract RadioisotopeType Type { get; }
+
+        protected RadioisotopeItem(string name)
+        {
+            Name = name;
+        }
+    }
+
+    public enum RadioisotopeType
+    {
+        Microchip,
+        Generator
     }
 }

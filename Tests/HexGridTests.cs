@@ -13,7 +13,7 @@ namespace Tests
         {
             var navigator = new HexGridNavigator(input);
 
-            Assert.That(navigator.Distance, Is.EqualTo(expected));
+            Assert.That(navigator.EndDistance, Is.EqualTo(expected));
         }
     }
 }

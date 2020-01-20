@@ -80,26 +80,26 @@ namespace Core.Radioisotope
                 {
                     var oldFloor = facility.ElevatorFloor;
                     var newFloor = oldFloor - 1;
-                    var movedTwo = false;
-                    foreach (var combination in combinationsToUse)
-                    {
-                        var f = new RadioisotopeFacility(facility, newFloor);
-                        foreach (var item in combination)
-                        {
-                            f.Floors[oldFloor].Items.Remove(item);
-                            f.Floors[newFloor].Items.Add(item);
-                        }
+                    //var movedTwo = false;
+                    //foreach (var combination in combinationsToUse)
+                    //{
+                    //    var f = new RadioisotopeFacility(facility, newFloor);
+                    //    foreach (var item in combination)
+                    //    {
+                    //        f.Floors[oldFloor].Items.Remove(item);
+                    //        f.Floors[newFloor].Items.Add(item);
+                    //    }
 
-                        if (!AlreadyVisited(f) && f.IsValid)
-                        {
-                            newFacilities.Add(f);
-                            TrackVisit(f);
-                            movedTwo = true;
-                        }
-                    }
+                    //    if (!AlreadyVisited(f) && f.IsValid)
+                    //    {
+                    //        newFacilities.Add(f);
+                    //        TrackVisit(f);
+                    //        movedTwo = true;
+                    //    }
+                    //}
 
-                    if (!movedTwo)
-                    {
+                    //if (!movedTwo)
+                    //{
                         foreach (var item in facility.Floors[facility.ElevatorFloor].Items)
                         {
                             var f = new RadioisotopeFacility(facility, newFloor);
@@ -112,7 +112,7 @@ namespace Core.Radioisotope
                                 TrackVisit(f);
                             }
                         }
-                    }
+                    //}
                 }
             }
 
@@ -123,7 +123,7 @@ namespace Core.Radioisotope
                 return finishedFacility;
             var iterationCount = newFacilities.First().IterationCount;
             var facilityCount = newFacilities.Count;  
-            //Console.WriteLine($"Iteration {iterationCount} complete. Item count: {facilityCount}");
+            Console.WriteLine($"Iteration {iterationCount} complete. Item count: {facilityCount}");
             return FindFinishedFacility(newFacilities);
         }
 
@@ -172,11 +172,6 @@ namespace Core.Radioisotope
             var items = parts
                 .Where(o => o.EndsWith("microchip") || o.EndsWith("generator"))
                 .Select(CreateItem)
-                .ToList();
-
-            var microchips = parts
-                .Where(o => o.EndsWith("microchip"))
-                .Select(o => o.Split('-').First())
                 .ToList();
             return new RadioisotopeFloor(items);
         }

@@ -8,7 +8,7 @@ namespace ConsoleApp
         {
             var parameters = new Parameters(args);
             
-            //parameters = new Parameters(day: 10, year: 2018);
+            parameters = new Parameters(day: 11, year: 2016);
             
             if (parameters.ShowHelp)
             {

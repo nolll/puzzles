@@ -7,7 +7,7 @@ namespace Core.Radioisotope
 {
     public class RadioisotopeSimulator
     {
-        private readonly IList<string> _previousFacilities = new List<string>();
+        private readonly IDictionary<string, RadioisotopeFacility> _previousFacilities = new Dictionary<string, RadioisotopeFacility>();
 
         public int StepCount { get; }
 
@@ -151,12 +151,12 @@ namespace Core.Radioisotope
 
         private bool AlreadyVisited(RadioisotopeFacility f)
         {
-            return _previousFacilities.Contains(f.AnonymizedId);
+            return _previousFacilities.ContainsKey(f.AnonymizedId);
         }
 
         private void TrackVisit(RadioisotopeFacility f)
         {
-            _previousFacilities.Add(f.AnonymizedId);
+            _previousFacilities.Add(f.AnonymizedId, f);
         }
 
         private RadioisotopeFacility ParseFacility(string input)

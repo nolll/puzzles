@@ -11,9 +11,9 @@ namespace ConsoleApp.Years.Year2016
 
         protected override void RunDay()
         {
-            //WritePartTitle();
-            //var simulator1 = new RadioisotopeSimulator(Input1);
-            //Console.WriteLine($"Required number of steps: {simulator1.StepCount}");
+            WritePartTitle();
+            var simulator1 = new RadioisotopeSimulator(Input1);
+            Console.WriteLine($"Required number of steps: {simulator1.StepCount}");
 
             WritePartTitle();
             var simulator2 = new RadioisotopeSimulator(Input2);

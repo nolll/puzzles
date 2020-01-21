@@ -63,8 +63,6 @@ namespace Core.BalanceBots
 
                 values = _bots.Values.Where(o => o.IsReadyToGive).ToList();
             }
-
-            var x = 0;
         }
 
         private Bot GetBot(int id)

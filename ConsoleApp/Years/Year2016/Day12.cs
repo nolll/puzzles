@@ -12,8 +12,12 @@ namespace ConsoleApp.Years.Year2016
         protected override void RunDay()
         {
             WritePartTitle();
-            var control = new MonorailControl(Input);
-            Console.WriteLine($"Value in register A: {control.ValueA}");
+            var control1 = new MonorailControl(Input);
+            Console.WriteLine($"Value in register A: {control1.ValueA}");
+
+            WritePartTitle();
+            var control2 = new MonorailControl(Input, 1);
+            Console.WriteLine($"Value in register A: {control2.ValueA}");
         }
 
         private const string Input = @"cpy 1 a

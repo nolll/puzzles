@@ -14,10 +14,10 @@ namespace Core.MonorailCode
 
         public int ValueA => _registers['a'];
 
-        public MonorailControl(string input)
+        public MonorailControl(string input, int cValue = 0)
         {
             _instructions = PuzzleInputReader.Read(input).Select(ParseInstruction).ToArray();
-            _registers = new Dictionary<char, int> {['a'] = 0, ['b'] = 0, ['c'] = 0, ['d'] = 0};
+            _registers = new Dictionary<char, int> {['a'] = 0, ['b'] = 0, ['c'] = cValue, ['d'] = 0};
             _index = 0;
             
             while(_index < _instructions.Length)

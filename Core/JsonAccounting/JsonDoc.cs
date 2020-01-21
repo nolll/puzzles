@@ -5,10 +5,12 @@ namespace Core.JsonAccounting
 {
     public class JsonDoc
     {
+        private readonly bool _includeRed;
         public int Sum { get; }
 
-        public JsonDoc(string input)
+        public JsonDoc(string input, bool includeRed)
         {
+            _includeRed = includeRed;
             var json = JsonDocument.Parse(input);
 
             Sum = GetRecursiveSum(json.RootElement);
@@ -32,7 +34,11 @@ namespace Core.JsonAccounting
                 return jsonElement.EnumerateArray().Sum(GetRecursiveSum);
 
             if (type == JsonValueKind.Object)
+            {
+                if (!_includeRed && jsonElement.EnumerateObject().Any(o => o.Value.ValueKind== JsonValueKind.String && o.Value.ToString() == "red"))
+                    return 0;
                 return jsonElement.EnumerateObject().Sum(o => GetRecursiveSum(o.Value));
+            }
 
             return 0;
         }

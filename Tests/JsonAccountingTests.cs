@@ -15,7 +15,7 @@ namespace Tests
         [TestCase("{}", 0)]
         public void CalculatesTheSumOfAllNumbers(string input, int expected)
         {
-            var doc = new JsonDoc(input);
+            var doc = new JsonDoc(input, true);
 
             Assert.That(doc.Sum, Is.EqualTo(expected));
         }

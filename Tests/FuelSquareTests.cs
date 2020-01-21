@@ -10,7 +10,7 @@ namespace Tests
         [TestCase(101, 153, 71, 4)]
         public void SinglePowerLevelIsCorrect(int x, int y, int serialNumber, int expected)
         {
-            var grid = new PowerGrid(serialNumber);
+            var grid = new PowerGrid(300, serialNumber);
             var level = grid.GetSinglePowerLevel(x, y);
 
             Assert.That(level, Is.EqualTo(expected));
@@ -20,8 +20,8 @@ namespace Tests
         [TestCase(42, "232,251,12")]
         public void AnySizePowerLevelIsCorrect(int serialNumber, string expected)
         {
-            var grid = new PowerGrid(serialNumber);
-            var (coords, size) = grid.GetMaxCoordsAnySize();
+            var grid = new PowerGrid(10, serialNumber);
+            var (coords, size) = grid.GetMaxCoordsAnySizeSlow();
             var str = $"{coords.X},{coords.Y},{size}";
 
             Assert.That(str, Is.EqualTo(expected));

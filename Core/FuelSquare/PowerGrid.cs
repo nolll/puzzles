@@ -19,6 +19,11 @@ namespace Core.FuelSquare
             FillMatrix();
         }
 
+        public void Print()
+        {
+            Console.WriteLine(_matrix.Print());
+        }
+
         public (MatrixAddress coords, int size) GetMaxCoordsAnySizeSlow()
         {
             var maxPowerLevel = int.MinValue;
@@ -26,7 +31,6 @@ namespace Core.FuelSquare
             var maxPowerLevelAddress = new MatrixAddress(0, 0);
             for (var y = 0; y < MatrixSize; y++)
             {
-                Console.WriteLine(y);
                 for (var x = 0; x < MatrixSize; x++)
                 {
                     _matrix.MoveTo(x, y);
@@ -34,6 +38,8 @@ namespace Core.FuelSquare
                     for (var size = 1; size < maxSquareSize; size++)
                     {
                         var powerLevel = GetSquarePowerLevel(x, y, size);
+                        Console.WriteLine(powerLevel);
+
                         if (powerLevel > maxPowerLevel)
                         {
                             maxPowerLevel = powerLevel;
@@ -47,35 +53,45 @@ namespace Core.FuelSquare
             return (maxPowerLevelAddress, maxPowerLevelSize);
         }
 
-        public (MatrixAddress coords, int size) GetMaxCoordsAnySizeFast()
+        public (MatrixAddress coords, int size) GetMaxCoordsAnySize()
         {
             var maxPowerLevel = int.MinValue;
             var maxPowerLevelSize = 0;
             var maxPowerLevelAddress = new MatrixAddress(0, 0);
-            for (var y = 0; y < MatrixSize; y++)
+            for (var ySquare = 0; ySquare < MatrixSize; ySquare++)
             {
-                Console.WriteLine(y);
-                for (var x = 0; x < MatrixSize; x++)
+                for (var xSquare = 0; xSquare < MatrixSize; xSquare++)
                 {
-                    _matrix.MoveTo(x, y);
-                    var maxSquareSize = MatrixSize - Math.Max(x, y);
-                    for (var size = 0; size < maxSquareSize; size++)
+                    _matrix.MoveTo(xSquare, ySquare);
+                    var maxSquareSize = MatrixSize - Math.Max(xSquare, ySquare);
+                    var powerLevel = 0;
+                    for (var size = 1; size < maxSquareSize; size++)
                     {
-                        var powerLevel = _matrix.ReadValueAt(x, y);
-                        for (var yy = 0; yy < size; yy++)
+                        if (size == 1)
                         {
-                            powerLevel += _matrix.ReadValueAt(x, y + yy);
+                            powerLevel += _matrix.ReadValueAt(0, 0);
                         }
-                        for (var xx = 0; xx < size - 1; xx++)
+                        else
                         {
-                            powerLevel += _matrix.ReadValueAt(x + xx, y);
+                            for (var yy = 0; yy <= size; yy++)
+                            {
+                                var x = xSquare + size;
+                                var y = ySquare + yy;
+                                powerLevel += _matrix.ReadValueAt(x, y);
+                            }
+                            for (var xx = 0; xx < size; xx++)
+                            {
+                                var x = xSquare + xx;
+                                var y = ySquare + size;
+                                powerLevel += _matrix.ReadValueAt(x, y);
+                            }
                         }
 
                         if (powerLevel > maxPowerLevel)
                         {
                             maxPowerLevel = powerLevel;
-                            maxPowerLevelSize = size;
-                            maxPowerLevelAddress = new MatrixAddress(_matrix.Address.X, _matrix.Address.Y);
+                            maxPowerLevelSize = size + 1;
+                            maxPowerLevelAddress = new MatrixAddress(xSquare, ySquare);
                         }
                     }
                 }

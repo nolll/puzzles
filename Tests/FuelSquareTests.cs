@@ -20,8 +20,8 @@ namespace Tests
         [TestCase(42, "232,251,12")]
         public void AnySizePowerLevelIsCorrect(int serialNumber, string expected)
         {
-            var grid = new PowerGrid(10, serialNumber);
-            var (coords, size) = grid.GetMaxCoordsAnySizeSlow();
+            var grid = new PowerGrid(300, serialNumber);
+            var (coords, size) = grid.GetMaxCoordsAnySize();
             var str = $"{coords.X},{coords.Y},{size}";
 
             Assert.That(str, Is.EqualTo(expected));

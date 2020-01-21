@@ -6,27 +6,31 @@ namespace Core.FuelSquare
 {
     public class PowerGrid
     {
-        private const int MatrixSize = 300;
-
+        private int MatrixSize { get; }
         private readonly int _serialNumber;
         private readonly Matrix<int> _matrix;
 
-        public PowerGrid(int serialNumber)
+        public PowerGrid(int matrixSize, int serialNumber)
         {
+            MatrixSize = matrixSize;
             _serialNumber = serialNumber;
             _matrix = new Matrix<int>(MatrixSize, MatrixSize);
 
             FillMatrix();
         }
 
-        public (MatrixAddress coords, int size) GetMaxCoordsAnySize()
+        public void Print()
+        {
+            Console.WriteLine(_matrix.Print());
+        }
+
+        public (MatrixAddress coords, int size) GetMaxCoordsAnySizeSlow()
         {
             var maxPowerLevel = int.MinValue;
             var maxPowerLevelSize = 0;
             var maxPowerLevelAddress = new MatrixAddress(0, 0);
             for (var y = 0; y < MatrixSize; y++)
             {
-                Console.WriteLine(y);
                 for (var x = 0; x < MatrixSize; x++)
                 {
                     _matrix.MoveTo(x, y);
@@ -34,11 +38,60 @@ namespace Core.FuelSquare
                     for (var size = 1; size < maxSquareSize; size++)
                     {
                         var powerLevel = GetSquarePowerLevel(x, y, size);
+                        Console.WriteLine(powerLevel);
+
                         if (powerLevel > maxPowerLevel)
                         {
                             maxPowerLevel = powerLevel;
                             maxPowerLevelSize = size;
                             maxPowerLevelAddress = new MatrixAddress(_matrix.Address.X, _matrix.Address.Y);
+                        }
+                    }
+                }
+            }
+
+            return (maxPowerLevelAddress, maxPowerLevelSize);
+        }
+
+        public (MatrixAddress coords, int size) GetMaxCoordsAnySize()
+        {
+            var maxPowerLevel = int.MinValue;
+            var maxPowerLevelSize = 0;
+            var maxPowerLevelAddress = new MatrixAddress(0, 0);
+            for (var ySquare = 0; ySquare < MatrixSize; ySquare++)
+            {
+                for (var xSquare = 0; xSquare < MatrixSize; xSquare++)
+                {
+                    _matrix.MoveTo(xSquare, ySquare);
+                    var maxSquareSize = MatrixSize - Math.Max(xSquare, ySquare);
+                    var powerLevel = 0;
+                    for (var size = 1; size < maxSquareSize; size++)
+                    {
+                        if (size == 1)
+                        {
+                            powerLevel += _matrix.ReadValueAt(0, 0);
+                        }
+                        else
+                        {
+                            for (var yy = 0; yy <= size; yy++)
+                            {
+                                var x = xSquare + size;
+                                var y = ySquare + yy;
+                                powerLevel += _matrix.ReadValueAt(x, y);
+                            }
+                            for (var xx = 0; xx < size; xx++)
+                            {
+                                var x = xSquare + xx;
+                                var y = ySquare + size;
+                                powerLevel += _matrix.ReadValueAt(x, y);
+                            }
+                        }
+
+                        if (powerLevel > maxPowerLevel)
+                        {
+                            maxPowerLevel = powerLevel;
+                            maxPowerLevelSize = size + 1;
+                            maxPowerLevelAddress = new MatrixAddress(xSquare, ySquare);
                         }
                     }
                 }

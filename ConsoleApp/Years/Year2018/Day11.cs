@@ -12,15 +12,16 @@ namespace ConsoleApp.Years.Year2018
         protected override void RunDay()
         {
             WritePartTitle();
-            var grid = new PowerGrid(Input);
-            var maxCoords = grid.GetMaxCoords();
+            var grid1 = new PowerGrid(300, Input);
+            var maxCoords = grid1.GetMaxCoords();
             var strCoords = $"{maxCoords.X},{maxCoords.Y}";
             Console.WriteLine($"Max power coords: {strCoords}");
 
             WritePartTitle();
-            var (coords, size) = grid.GetMaxCoordsAnySize();
-            var strCoordsAndSize = $"{coords.X},{coords.Y},{size}";
-            Console.WriteLine($"Max power coords and size: {strCoordsAndSize}");
+            var grid2 = new PowerGrid(300, Input);
+            var (coords2, size2) = grid2.GetMaxCoordsAnySize();
+            var strCoordsAndSize2 = $"{coords2.X},{coords2.Y},{size2}";
+            Console.WriteLine($"Max power coords and size fast: {strCoordsAndSize2}");
         }
 
         private const int Input = 1309;

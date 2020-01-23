@@ -6,7 +6,7 @@ namespace Tests
     public class DigitalPlumberTests
     {
         [Test]
-        public void CountsNumbersInGroupZero()
+        public void GroupCounts()
         {
             const string input = @"
 0 <-> 2
@@ -19,7 +19,8 @@ namespace Tests
 
             var pipes = new Pipes(input);
 
-            Assert.That(pipes.PipesLeadingToZero, Is.EqualTo(6));
+            Assert.That(pipes.PipesInGroupZero, Is.EqualTo(6));
+            Assert.That(pipes.GroupCount, Is.EqualTo(2));
         }
     }
 }

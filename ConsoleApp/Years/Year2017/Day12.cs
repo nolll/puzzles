@@ -13,7 +13,10 @@ namespace ConsoleApp.Years.Year2017
         {
             WritePartTitle();
             var pipes = new Pipes(Input);
-            Console.WriteLine($"Number of connections: {pipes.PipesLeadingToZero}");
+            Console.WriteLine($"Number of connections: {pipes.PipesInGroupZero}");
+
+            WritePartTitle();
+            Console.WriteLine($"Number of groups: {pipes.GroupCount}");
         }
 
         private const string Input = @"0 <-> 412, 480, 777, 1453

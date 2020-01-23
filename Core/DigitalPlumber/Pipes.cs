@@ -1,43 +1,56 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Core.Tools;
 
 namespace Core.DigitalPlumber
 {
     public class Pipes
     {
-        public int PipesLeadingToZero { get; }
+        public int PipesInGroupZero { get; }
+        public int GroupCount { get; }
 
         public Pipes(string input)
         {
             var strRows = PuzzleInputReader.Read(input);
-            var groups = new Dictionary<int, IList<int>>();
+            var dictionary = new Dictionary<int, IList<int>>();
+            var groups = new List<List<int>>();
 
             foreach (var r in strRows)
             {
                 var parts = r.Replace(" ", "").Split("<->");
                 var group = int.Parse(parts[0]);
                 var members = parts[1].Split(',').Select(int.Parse).ToList();
-                groups[group] = members;
+                dictionary[group] = members;
             }
 
-            const int start = 0;
-            var connections = new List<int> {start};
-            var lookup = new List<int>();
-            lookup.AddRange(groups[start]);
-            while (lookup.Any())
+            while (dictionary.Keys.Count > 0)
             {
-                var current = lookup.First();
-                lookup.RemoveAt(0);
-
-                if (!connections.Contains(current))
+                var start = dictionary.Keys.OrderBy(o => o).First();
+                var group = new List<int> { start };
+                var lookup = new List<int>();
+                lookup.AddRange(dictionary[start]);
+                dictionary.Remove(start);
+                while (lookup.Any())
                 {
-                    connections.Add(current);
-                    lookup.AddRange(groups[current]);
-                }
-            }
+                    var current = lookup.First();
+                    lookup.RemoveAt(0);
 
-            PipesLeadingToZero = connections.Count;
+                    if (!group.Contains(current))
+                    {
+                        group.Add(current);
+                        if(dictionary.TryGetValue(current, out var key))
+                            lookup.AddRange(dictionary[current]);
+
+                        dictionary.Remove(current);
+                    }
+                }
+
+                groups.Add(group);
+            }
+            
+            PipesInGroupZero = groups[0].Count;
+            GroupCount = groups.Count;
         }
     }
 }

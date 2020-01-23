@@ -10,6 +10,7 @@ namespace ConsoleApp
         public int? Day { get; }
         public int? Year { get; }
         public bool ShowHelp { get; }
+        public bool WasYearOrDaySpecified => Day != null || Year != null;
 
         public Parameters(IEnumerable<string> args)
         {

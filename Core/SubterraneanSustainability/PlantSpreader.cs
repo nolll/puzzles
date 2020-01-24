@@ -1,53 +1,119 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Core.Tools;
 
 namespace Core.SubterraneanSustainability
 {
     public class PlantSpreader
     {
-        public int PlantScore { get; }
+        private readonly List<bool> _pots;
+        private int _padding;
+        public int PlantScore20 { get; }
+        public long PlantScore50B { get; }
 
         public PlantSpreader(string input)
         {
             var rows = PuzzleInputReader.Read(input);
             var state = rows.First().Split(' ')[2];
-            const string padding = "..................................................";
-            state = $"{padding}{state}{padding}";
+            var paddingStr = "..............................................................................................................................................................................................................................................................................................................................................................";
+            state = $"{paddingStr}{state}{paddingStr}";
+            _pots = GetPots(state);
             var rules = rows.Skip(2).Select(o => new PlantRule(o)).ToList();
             const int patternLength = 5;
-            const int generations = 20;
             var generation = 0;
+            _padding = paddingStr.Length;
+            var lastScore = 0;
+            var scoreDiff = 0;
 
-            while (generation < generations)
+            while (generation < 200)
             {
-                var sb = new StringBuilder();
-                sb.Append("..");
-                for (var i = 0; i < state.Length - patternLength + 1; i++)
+                Pad(2);
+                var score = 0;
+                var x = Print(_pots);
+                var newPots = new List<bool>();
+                for (var i = 0; i < _pots.Count - patternLength + 1; i++)
                 {
-                    var subStr = state.Substring(i, patternLength);
-                    var matchingPattern = rules.FirstOrDefault(o => o.Pattern == subStr);
-                    var c = matchingPattern?.Result ?? '.';
-                    sb.Append(c);
+                    var current = _pots.GetRange(i, 5);
+                    var matchingPattern = rules.FirstOrDefault(o => o.IsMatch(current));
+                    var p = matchingPattern?.Result ?? false;
+                    newPots.Add(p);
                 }
 
-                sb.Append("..");
-                state = sb.ToString();
+                _pots = newPots;
+
+                if (generation == 19)
+                {
+                    var a = 0;
+                }
+
+                var index = -_padding;
+                foreach (var p in _pots)
+                {
+                    if (p)
+                        score += index;
+
+                    index++;
+                }
+
                 generation++;
+                scoreDiff = score - lastScore;
+                lastScore = score;
+
+                if(generation == 20)
+                    PlantScore20 = lastScore;
             }
 
-            var score = 0;
-            var index = -padding.Length;
-            foreach (var c in state)
+            var plantScore200 = lastScore;
+            var generationsLeft = 50000000000 - 200;
+
+            PlantScore50B = generationsLeft * scoreDiff + plantScore200;
+        }
+
+        private string Print(IList<bool> bools)
+        {
+            return string.Concat(bools.Select(o => o ? '#' : '.'));
+        }
+
+        private void Pad()
+        {
+            if (_pots[0])
             {
-                if (c == '#')
-                    score += index;
-
-                index++;
+                _pots.Insert(0, false);
+                _padding++;
             }
 
-            PlantScore = score;
+            if (_pots[1])
+            {
+                _pots.Insert(0, false);
+                _padding++;
+            }
+
+            if (_pots[^1])
+            {
+                _pots.Add(false);
+            }
+
+            if (_pots[^2])
+            {
+                _pots.Add(false);
+            }
+        }
+
+        private void Pad(int padding)
+        {
+            for (var i = 0; i < padding; i++)
+            {
+                _pots.Insert(0, false);
+                _pots.Add(false);
+            }
+        }
+
+        private List<bool> GetPots(string state)
+        {
+            return state.Select(c => c == '#').ToList();
         }
     }
 }

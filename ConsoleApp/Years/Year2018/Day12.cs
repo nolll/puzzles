@@ -13,7 +13,10 @@ namespace ConsoleApp.Years.Year2018
         {
             WritePartTitle();
             var spreader = new PlantSpreader(Input);
-            Console.WriteLine($"Plant score: {spreader.PlantScore}");
+            Console.WriteLine($"Plant score 20: {spreader.PlantScore20}");
+
+            WritePartTitle();
+            Console.WriteLine($"Plant score 50 billion generations: {spreader.PlantScore50B}");
         }
 
         private const string Input = @"initial state: ##.####..####...#.####..##.#..##..#####.##.#..#...#.###.###....####.###...##..#...##.#.#...##.##..

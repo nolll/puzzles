@@ -1,17 +1,28 @@
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Core.SubterraneanSustainability
 {
     public class PlantRule
     {
-        public string Pattern { get; }
-        public char Result { get; }
+        public bool[] Pattern { get; }
+        public bool Result { get; }
 
         public PlantRule(string s)
         {
             var parts = s.Split(" => ");
-            Pattern = parts[0];
-            Result = parts[1].First();
+            Pattern = parts[0].ToCharArray().Select(IsTrue).ToArray();
+            Result = IsTrue(parts[1].First());
+        }
+
+        private bool IsTrue(char c)
+        {
+            return c == '#';
+        }
+
+        public bool IsMatch(List<bool> current)
+        {
+            return !current.Where((t, i) => t != Pattern[i]).Any();
         }
     }
 }

@@ -20,9 +20,9 @@ namespace ConsoleApp.Years.Year2019
 
             WritePartTitle();
             var tracker2 = new MoonTracker(Input);
-            tracker2.Run(null);
+            tracker2.RunUntilRepeat();
 
-            Console.WriteLine($"Time units until repeat: {tracker2.TotalCycleLength}");
+            Console.WriteLine($"Time units until repeat: {tracker2.Iterations}");
         }
 
         private const string Input = @"<x=1, y=2, z=-9>

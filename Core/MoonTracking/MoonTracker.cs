@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Tools;
 
 namespace Core.MoonTracking
 {
     public class MoonTracker
     {
-        private int _iterations = 0;
-        private int? _maxIterations;
+        public long Iterations { get; private set; }
 
         public Moon Moon0 { get; }
         public Moon Moon1 { get; }
@@ -15,7 +15,6 @@ namespace Core.MoonTracking
         public Moon Moon3 { get; }
 
         public int TotalEnergy => Moon0.TotalEnergy + Moon1.TotalEnergy + Moon2.TotalEnergy + Moon3.TotalEnergy;
-        public int CurrentIteration => _iterations + 1;
 
         public MoonTracker(string map)
         {
@@ -42,101 +41,116 @@ namespace Core.MoonTracking
             return moons;
         }
 
-        public void Run(int? i)
+        public void Run(int maxIterations)
         {
-            _maxIterations = i;
-            Run();
-        }
-
-        private bool MaxIterationsReached => RunFixedNumberOfIterations && _iterations >= _maxIterations;
-        private bool RunFixedNumberOfIterations => _maxIterations != null;
-
-        private void Run()
-        {
-            while (!IsDone)
+            while (Iterations < maxIterations)
             {
                 UpdateVelocities();
                 Move();
-                Trace();
-                _iterations++;
+                Iterations++;
             }
         }
 
-        private bool IsDone => MaxIterationsReached || HasAllCycleLengths;
-        private bool HasAllCycleLengths => TotalCycleLength != null && !RunFixedNumberOfIterations;
-            
-        public long? TotalCycleLength
+        public void RunUntilRepeat()
         {
-            get
+            while (!IsXDone())
             {
-                if (Moon0.CycleLength == null ||
-                    Moon1.CycleLength == null ||
-                    Moon2.CycleLength == null ||
-                    Moon3.CycleLength == null)
-                    return null;
-
-                Console.WriteLine("Cycle lengths complete!");
-
-                var cycleLengths = new List<long>
-                {
-                    Moon0.CycleLength.Value,
-                    Moon1.CycleLength.Value,
-                    Moon2.CycleLength.Value,
-                    Moon3.CycleLength.Value
-                }.Distinct().OrderBy(o => o).ToList();
-
-                var cycleLengthsToUse = new List<long>();
-                while (cycleLengths.Any())
-                {
-                    var currentCycleLength = cycleLengths.First();
-                    
-                    if(!IsInSync(currentCycleLength, cycleLengths.Skip(1).ToList()))
-                        cycleLengthsToUse.Add(currentCycleLength);
-
-                    cycleLengths.RemoveAt(0);
-                }
-
-                var firstCycleLength = cycleLengthsToUse.First();
-                var otherLengths = cycleLengthsToUse.Skip(1).ToList();
-                long totalCycleLength = firstCycleLength;
-                foreach (var c in otherLengths)
-                {
-                    totalCycleLength *= c;
-                }
-
-                return totalCycleLength;
+                UpdateVelocitiesX();
+                MoveX();
             }
-        }
-
-        private bool IsInSync(long a, IList<long> list)
-        {
-            if (!list.Any())
-                return false;
             
-            return list.Any(o => IsInSync(a, o));
+            while (!IsYDone())
+            {
+                UpdateVelocitiesY();
+                MoveY();
+            }
+
+            while (!IsZDone())
+            {
+                UpdateVelocitiesZ();
+                MoveZ();
+            }
+
+            var moon0Period = MathTools.Lcm(Moon0.PeriodX, Moon0.PeriodY, Moon0.PeriodZ);
+            var moon1Period = MathTools.Lcm(Moon1.PeriodX, Moon1.PeriodY, Moon1.PeriodZ);
+            var moon2Period = MathTools.Lcm(Moon2.PeriodX, Moon2.PeriodY, Moon2.PeriodZ);
+            var moon3Period = MathTools.Lcm(Moon3.PeriodX, Moon3.PeriodY, Moon3.PeriodZ);
+
+            var xPeriod = MathTools.Lcm(Moon0.PeriodX, Moon1.PeriodX, Moon2.PeriodX, Moon3.PeriodX);
+            var yPeriod = MathTools.Lcm(Moon0.PeriodY, Moon1.PeriodY, Moon2.PeriodY, Moon3.PeriodY);
+            var zPeriod = MathTools.Lcm(Moon0.PeriodZ, Moon1.PeriodZ, Moon2.PeriodZ, Moon3.PeriodZ);
+
+            //Iterations = MathTools.Lcm(
+            //    moon0Period, moon1Period, moon2Period, moon3Period
+            //);
+
+            Iterations = MathTools.Lcm(
+                xPeriod, yPeriod, zPeriod
+            );
+
+            //Iterations = MathTools.Lcm(
+            //    Moon0.PeriodX, Moon0.PeriodY, Moon0.PeriodZ,
+            //    Moon1.PeriodX, Moon1.PeriodY, Moon1.PeriodZ,
+            //    Moon2.PeriodX, Moon2.PeriodY, Moon2.PeriodZ,
+            //    Moon3.PeriodX, Moon3.PeriodY, Moon3.PeriodZ
+            //);
         }
 
-        private bool IsInSync(long a, long b)
+        private bool IsXDone()
         {
-            return a % b == 0 || b % a == 0;
+            return Moon0.PeriodX > 0 &&
+                   Moon1.PeriodX > 0 &&
+                   Moon2.PeriodX > 0 &&
+                   Moon3.PeriodX > 0;
         }
 
-        private void Trace()
+        private bool IsYDone()
         {
-            const long traceAfter = 1000000;
-            if (_iterations % traceAfter == 0)
-                Console.WriteLine($"{_iterations / traceAfter}M");
+            return Moon0.PeriodY > 0 &&
+                   Moon1.PeriodY > 0 &&
+                   Moon2.PeriodY > 0 &&
+                   Moon3.PeriodY > 0;
+        }
+
+        private bool IsZDone()
+        {
+            return Moon0.PeriodZ > 0 &&
+                   Moon1.PeriodZ > 0 &&
+                   Moon2.PeriodZ > 0 &&
+                   Moon3.PeriodZ > 0;
         }
 
         private void Move()
         {
-            var iterationCounter = _iterations + 1;
-            Moon0.Move(iterationCounter);
-            Moon1.Move(iterationCounter);
-            Moon2.Move(iterationCounter);
-            Moon3.Move(iterationCounter);
+            Moon0.Move();
+            Moon1.Move();
+            Moon2.Move();
+            Moon3.Move();
         }
 
+        private void MoveX()
+        {
+            Moon0.MoveX();
+            Moon1.MoveX();
+            Moon2.MoveX();
+            Moon3.MoveX();
+        }
+
+        private void MoveY()
+        {
+            Moon0.MoveY();
+            Moon1.MoveY();
+            Moon2.MoveY();
+            Moon3.MoveY();
+        }
+
+        private void MoveZ()
+        {
+            Moon0.MoveZ();
+            Moon1.MoveZ();
+            Moon2.MoveZ();
+            Moon3.MoveZ();
+        }
         private void UpdateVelocities()
         {
             UpdateVelocity(Moon0, Moon1);
@@ -156,12 +170,87 @@ namespace Core.MoonTracking
             UpdateVelocity(Moon3, Moon2);
         }
 
+        private void UpdateVelocitiesX()
+        {
+            UpdateVelocityX(Moon0, Moon1);
+            UpdateVelocityX(Moon0, Moon2);
+            UpdateVelocityX(Moon0, Moon3);
+
+            UpdateVelocityX(Moon1, Moon0);
+            UpdateVelocityX(Moon1, Moon2);
+            UpdateVelocityX(Moon1, Moon3);
+
+            UpdateVelocityX(Moon2, Moon0);
+            UpdateVelocityX(Moon2, Moon1);
+            UpdateVelocityX(Moon2, Moon3);
+
+            UpdateVelocityX(Moon3, Moon0);
+            UpdateVelocityX(Moon3, Moon1);
+            UpdateVelocityX(Moon3, Moon2);
+        }
+
+        private void UpdateVelocitiesY()
+        {
+            UpdateVelocityY(Moon0, Moon1);
+            UpdateVelocityY(Moon0, Moon2);
+            UpdateVelocityY(Moon0, Moon3);
+                          
+            UpdateVelocityY(Moon1, Moon0);
+            UpdateVelocityY(Moon1, Moon2);
+            UpdateVelocityY(Moon1, Moon3);
+                          
+            UpdateVelocityY(Moon2, Moon0);
+            UpdateVelocityY(Moon2, Moon1);
+            UpdateVelocityY(Moon2, Moon3);
+                          
+            UpdateVelocityY(Moon3, Moon0);
+            UpdateVelocityY(Moon3, Moon1);
+            UpdateVelocityY(Moon3, Moon2);
+        }
+
+        private void UpdateVelocitiesZ()
+        {
+            UpdateVelocityZ(Moon0, Moon1);
+            UpdateVelocityZ(Moon0, Moon2);
+            UpdateVelocityZ(Moon0, Moon3);
+                          
+            UpdateVelocityZ(Moon1, Moon0);
+            UpdateVelocityZ(Moon1, Moon2);
+            UpdateVelocityZ(Moon1, Moon3);
+                          
+            UpdateVelocityZ(Moon2, Moon0);
+            UpdateVelocityZ(Moon2, Moon1);
+            UpdateVelocityZ(Moon2, Moon3);
+                          
+            UpdateVelocityZ(Moon3, Moon0);
+            UpdateVelocityZ(Moon3, Moon1);
+            UpdateVelocityZ(Moon3, Moon2);
+        }
+
         private void UpdateVelocity(Moon moon, Moon otherMoon)
         {
             var x = GetVelocityChange(moon.X, otherMoon.X);
             var y = GetVelocityChange(moon.Y, otherMoon.Y);
             var z = GetVelocityChange(moon.Z, otherMoon.Z);
-            moon.ChangeVelocity(moon.VX + x, moon.VY + y, moon.VZ + z);
+            moon.ChangeVelocity(moon.Vx + x, moon.Vy + y, moon.Vz + z);
+        }
+
+        private void UpdateVelocityX(Moon moon, Moon otherMoon)
+        {
+            var x = GetVelocityChange(moon.X, otherMoon.X);
+            moon.ChangeVelocityX(moon.Vx + x);
+        }
+
+        private void UpdateVelocityY(Moon moon, Moon otherMoon)
+        {
+            var y = GetVelocityChange(moon.Y, otherMoon.Y);
+            moon.ChangeVelocityY(moon.Vy + y);
+        }
+
+        private void UpdateVelocityZ(Moon moon, Moon otherMoon)
+        {
+            var z = GetVelocityChange(moon.Z, otherMoon.Z);
+            moon.ChangeVelocityZ(moon.Vz + z);
         }
 
         private int GetVelocityChange(int moonX, int otherMoonX)

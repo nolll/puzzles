@@ -1,83 +1,106 @@
 using System;
-using System.Collections.Generic;
 
 namespace Core.MoonTracking
 {
     public class Moon
     {
-        private readonly int _firstX;
-        private readonly int _firstY;
-        private readonly int _firstZ;
-        private readonly int _firstVX;
-        private readonly int _firstVY;
-        private readonly int _firstVZ;
+        private readonly int _startX;
+        private readonly int _startY;
+        private readonly int _startZ;
+
+        private int _iterationsX;
+        private int _iterationsY;
+        private int _iterationsZ;
 
         public int Id { get; }
         public int X { get; private set; }
         public int Y { get; private set; }
         public int Z { get; private set; }
-        public int VX { get; private set; }
-        public int VY { get; private set; }
-        public int VZ { get; private set; }
+        public int Vx { get; private set; }
+        public int Vy { get; private set; }
+        public int Vz { get; private set; }
+        public int PeriodX { get; private set; }
+        public int PeriodY { get; private set; }
+        public int PeriodZ { get; private set; }
 
         private int PotentialEnergy => Math.Abs(X) + Math.Abs(Y) + Math.Abs(Z);
-        private int KineticEnergy => Math.Abs(VX) + Math.Abs(VY) + Math.Abs(VZ);
+        private int KineticEnergy => Math.Abs(Vx) + Math.Abs(Vy) + Math.Abs(Vz);
         public int TotalEnergy => PotentialEnergy * KineticEnergy;
-        public long? CycleLength { get; private set; }
-        private readonly IList<string> _states;
-
+        
         public Moon(int id, int x, int y, int z, int vx = 0, int vy = 0, int vz = 0)
         {
             Id = id;
-            X = _firstX = x;
-            Y = _firstY = y;
-            Z = _firstZ = z;
-            VX = _firstVX = vx;
-            VY = _firstVY = vy;
-            VZ = _firstVZ = vz;
-            _states = new List<string>{GetState()};
-        }
-
-        private string GetState()
-        {
-            return $"{X},{Y},{Z},{VX},{VY},{VZ}";
+            X = _startX = x;
+            Y = _startY = y;
+            Z = _startZ = z;
+            Vx = vx;
+            Vy = vy;
+            Vz = vz;
+            PeriodX = 0;
+            PeriodY = 0;
+            PeriodZ = 0;
+            _iterationsX = 0;
+            _iterationsY = 0;
+            _iterationsZ = 0;
         }
 
         public void ChangeVelocity(int x, int y, int z)
         {
-            VX = x;
-            VY = y;
-            VZ = z;
+            ChangeVelocityX(x);
+            ChangeVelocityY(y);
+            ChangeVelocityZ(z);
         }
 
-        public void Move(int iteration)
+        public void ChangeVelocityX(int x)
         {
-            X += VX;
-            Y += VY;
-            Z += VZ;
+            Vx = x;
+        }
 
-            var state = GetState();
+        public void ChangeVelocityY(int y)
+        {
+            Vy = y;
+        }
 
-            if(Id == 1)
-                Console.WriteLine($"Iteration: {iteration}. Moon {Id}. Cycled: {IsBackToStart(state)}. State: {state}");
+        public void ChangeVelocityZ(int z)
+        {
+            Vz = z;
+        }
 
-            if (CycleLength == null && IsBackToStart(state))
+        public void Move()
+        {
+            MoveX();
+            MoveY(); 
+            MoveZ();
+        }
+
+        public void MoveX()
+        {
+            X += Vx;
+            _iterationsX++;
+            if (PeriodX == 0 && X == _startX && Vx == 0)
             {
-                CycleLength = iteration;
-                Console.WriteLine($"Moon {Id} cycle length: {CycleLength}");
+                PeriodX = _iterationsX;
             }
-            _states.Add(state);
         }
 
-        private bool IsBackToStart(string state)
+        public void MoveY()
         {
-            return _states.Contains(state);
-            //return X == _firstX &&
-            //       Y == _firstY &&
-            //       Z == _firstZ &&
-            //       VX == _firstVX &&
-            //       VY == _firstVY &&
-            //       VZ == _firstVZ;
+            Y += Vy;
+            _iterationsY++;
+            if (PeriodY == 0 && Y == _startY && Vy == 0)
+            {
+                PeriodY = _iterationsY;
+            }
+        }
+
+        public void MoveZ()
+        {
+            Z += Vz;
+            _iterationsZ++;
+            if (PeriodZ == 0 && Z == _startZ && Vz == 0)
+            {
+                PeriodZ = _iterationsZ;
+            }
         }
     }
 }

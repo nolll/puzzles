@@ -38,7 +38,7 @@ namespace Core.Thrust
 
         public long GetMaxThrust(int[] phases)
         {
-            var sequences = new PermutationGenerator().GetPermutations(phases);
+            var sequences = PermutationGenerator.GetPermutations(phases);
             long highestThrust = 0;
             foreach (var sequence in sequences)
             {

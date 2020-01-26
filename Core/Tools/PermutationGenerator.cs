@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace Core.Tools
 {
-    public class PermutationGenerator
+    public static class PermutationGenerator
     {
-        public IList<IEnumerable<int>> GetPermutations(IList<int> numbers)
+        public static IList<IEnumerable<int>> GetPermutations(IList<int> numbers)
         {
             return GetPermutations(numbers, numbers.Count).ToList();
         }
 
-        public IList<IEnumerable<string>> GetPermutations(IList<string> strings)
+        public static IList<IEnumerable<string>> GetPermutations(IList<string> strings)
         {
             return GetPermutations(strings, strings.Count).ToList();
         }

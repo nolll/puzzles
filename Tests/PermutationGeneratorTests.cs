@@ -9,8 +9,7 @@ namespace Tests
         [Test]
         public void GeneratesAllCombinations()
         {
-            var generator = new PermutationGenerator();
-            var sequences = generator.GetPermutations(new[] {1, 2, 3}).ToList();
+            var sequences = PermutationGenerator.GetPermutations(new[] {1, 2, 3}).ToList();
 
             Assert.That(sequences.Count, Is.EqualTo(6));
         }

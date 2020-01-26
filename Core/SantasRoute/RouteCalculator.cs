@@ -62,7 +62,7 @@ namespace Core.SantasRoute
 
         private List<List<string>> GetRoutes(IList<string> locations)
         {
-            return new PermutationGenerator().GetPermutations(locations).Select(o => o.ToList()).ToList();
+            return PermutationGenerator.GetPermutations(locations).Select(o => o.ToList()).ToList();
         }
 
         private IList<string> GetLocations(IList<Distance> distances)

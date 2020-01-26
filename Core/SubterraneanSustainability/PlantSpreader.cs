@@ -32,7 +32,6 @@ namespace Core.SubterraneanSustainability
             {
                 Pad(2);
                 var score = 0;
-                var x = Print(_pots);
                 var newPots = new List<bool>();
                 for (var i = 0; i < _pots.Count - patternLength + 1; i++)
                 {
@@ -43,11 +42,6 @@ namespace Core.SubterraneanSustainability
                 }
 
                 _pots = newPots;
-
-                if (generation == 19)
-                {
-                    var a = 0;
-                }
 
                 var index = -_padding;
                 foreach (var p in _pots)

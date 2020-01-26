@@ -9,9 +9,9 @@ namespace Core.KnightsOfTheDinnerTable
         private readonly IDictionary<string, DinnerGuest> _guests;
         public int HappinessChange { get; }
 
-        public DinnerTable(string input)
+        public DinnerTable(string input, bool includeMe = false)
         {
-            _guests = ParseGuests(input);
+            _guests = ParseGuests(input, includeMe);
             var names = _guests.Keys;
             var nameLists = PermutationGenerator.GetPermutations(names.ToList());
             var happiness = nameLists.Select(nl => CalculateHappiness(nl.Select(p => _guests[p]).ToList()));
@@ -36,10 +36,16 @@ namespace Core.KnightsOfTheDinnerTable
             return happiness;
         }
 
-        private IDictionary<string, DinnerGuest> ParseGuests(string input)
+        private IDictionary<string, DinnerGuest> ParseGuests(string input, bool includeMe)
         {
             var rules = PuzzleInputReader.Read(input);
             var guests = new Dictionary<string, DinnerGuest>();
+
+            if (includeMe)
+            {
+                const string name = "Me";
+                guests.Add(name, new DinnerGuest(name));
+            }
 
             foreach (var r in rules)
             {

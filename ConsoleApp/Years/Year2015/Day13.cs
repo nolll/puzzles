@@ -14,6 +14,10 @@ namespace ConsoleApp.Years.Year2015
             WritePartTitle();
             var table = new DinnerTable(Input);
             Console.WriteLine($"Happiness change: {table.HappinessChange}");
+
+            WritePartTitle();
+            var table2 = new DinnerTable(Input, true);
+            Console.WriteLine($"Happiness change including me: {table2.HappinessChange}");
         }
 
         private const string Input = @"Alice would lose 57 happiness units by sitting next to Bob.

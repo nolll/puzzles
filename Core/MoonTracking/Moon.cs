@@ -4,9 +4,9 @@ namespace Core.MoonTracking
 {
     public class Moon
     {
-        private readonly int _startX;
-        private readonly int _startY;
-        private readonly int _startZ;
+        public int StartX { get; }
+        public int StartY { get; }
+        public int StartZ { get; }
 
         private int _iterationsX;
         private int _iterationsY;
@@ -26,13 +26,13 @@ namespace Core.MoonTracking
         private int PotentialEnergy => Math.Abs(X) + Math.Abs(Y) + Math.Abs(Z);
         private int KineticEnergy => Math.Abs(Vx) + Math.Abs(Vy) + Math.Abs(Vz);
         public int TotalEnergy => PotentialEnergy * KineticEnergy;
-        
+
         public Moon(int id, int x, int y, int z, int vx = 0, int vy = 0, int vz = 0)
         {
             Id = id;
-            X = _startX = x;
-            Y = _startY = y;
-            Z = _startZ = z;
+            X = StartX = x;
+            Y = StartY = y;
+            Z = StartZ = z;
             Vx = vx;
             Vy = vy;
             Vz = vz;
@@ -69,7 +69,7 @@ namespace Core.MoonTracking
         public void Move()
         {
             MoveX();
-            MoveY(); 
+            MoveY();
             MoveZ();
         }
 
@@ -77,7 +77,7 @@ namespace Core.MoonTracking
         {
             X += Vx;
             _iterationsX++;
-            if (PeriodX == 0 && X == _startX && Vx == 0)
+            if (PeriodX == 0 && X == StartX && Vx == 0)
             {
                 PeriodX = _iterationsX;
             }
@@ -87,7 +87,7 @@ namespace Core.MoonTracking
         {
             Y += Vy;
             _iterationsY++;
-            if (PeriodY == 0 && Y == _startY && Vy == 0)
+            if (PeriodY == 0 && Y == StartY && Vy == 0)
             {
                 PeriodY = _iterationsY;
             }
@@ -97,7 +97,7 @@ namespace Core.MoonTracking
         {
             Z += Vz;
             _iterationsZ++;
-            if (PeriodZ == 0 && Z == _startZ && Vz == 0)
+            if (PeriodZ == 0 && Z == StartZ && Vz == 0)
             {
                 PeriodZ = _iterationsZ;
             }

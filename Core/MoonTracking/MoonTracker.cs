@@ -53,39 +53,51 @@ namespace Core.MoonTracking
 
         public void RunUntilRepeat()
         {
-            while (!IsXDone())
+            var xIterations = 0;
+            var xIsDone = false;
+            while (!xIsDone)
             {
                 UpdateVelocitiesX();
                 MoveX();
+                xIterations += 1;
+                xIsDone = IsXDone();
             }
-            
-            while (!IsYDone())
+
+            var yIterations = 0;
+            var yIsDone = false;
+            while (!yIsDone)
             {
                 UpdateVelocitiesY();
                 MoveY();
+                yIterations += 1;
+                yIsDone = IsYDone();
             }
 
-            while (!IsZDone())
+            var zIterations = 0;
+            var zIsDone = false;
+            while (!zIsDone)
             {
                 UpdateVelocitiesZ();
                 MoveZ();
+                zIterations += 1;
+                zIsDone = IsZDone();
             }
 
-            var moon0Period = MathTools.Lcm(Moon0.PeriodX, Moon0.PeriodY, Moon0.PeriodZ);
-            var moon1Period = MathTools.Lcm(Moon1.PeriodX, Moon1.PeriodY, Moon1.PeriodZ);
-            var moon2Period = MathTools.Lcm(Moon2.PeriodX, Moon2.PeriodY, Moon2.PeriodZ);
-            var moon3Period = MathTools.Lcm(Moon3.PeriodX, Moon3.PeriodY, Moon3.PeriodZ);
+            //var moon0Period = MathTools.Lcm(Moon0.PeriodX, Moon0.PeriodY, Moon0.PeriodZ);
+            //var moon1Period = MathTools.Lcm(Moon1.PeriodX, Moon1.PeriodY, Moon1.PeriodZ);
+            //var moon2Period = MathTools.Lcm(Moon2.PeriodX, Moon2.PeriodY, Moon2.PeriodZ);
+            //var moon3Period = MathTools.Lcm(Moon3.PeriodX, Moon3.PeriodY, Moon3.PeriodZ);
 
-            var xPeriod = MathTools.Lcm(Moon0.PeriodX, Moon1.PeriodX, Moon2.PeriodX, Moon3.PeriodX);
-            var yPeriod = MathTools.Lcm(Moon0.PeriodY, Moon1.PeriodY, Moon2.PeriodY, Moon3.PeriodY);
-            var zPeriod = MathTools.Lcm(Moon0.PeriodZ, Moon1.PeriodZ, Moon2.PeriodZ, Moon3.PeriodZ);
+            //var xPeriod = MathTools.Lcm(Moon0.PeriodX, Moon1.PeriodX, Moon2.PeriodX, Moon3.PeriodX);
+            //var yPeriod = MathTools.Lcm(Moon0.PeriodY, Moon1.PeriodY, Moon2.PeriodY, Moon3.PeriodY);
+            //var zPeriod = MathTools.Lcm(Moon0.PeriodZ, Moon1.PeriodZ, Moon2.PeriodZ, Moon3.PeriodZ);
 
             //Iterations = MathTools.Lcm(
             //    moon0Period, moon1Period, moon2Period, moon3Period
             //);
 
             Iterations = MathTools.Lcm(
-                xPeriod, yPeriod, zPeriod
+                xIterations, yIterations, zIterations
             );
 
             //Iterations = MathTools.Lcm(
@@ -98,26 +110,26 @@ namespace Core.MoonTracking
 
         private bool IsXDone()
         {
-            return Moon0.PeriodX > 0 &&
-                   Moon1.PeriodX > 0 &&
-                   Moon2.PeriodX > 0 &&
-                   Moon3.PeriodX > 0;
+            return Moon0.X == Moon0.StartX && Moon0.Vx == 0 &&
+                   Moon1.X == Moon1.StartX && Moon1.Vx == 0 &&
+                   Moon2.X == Moon2.StartX && Moon2.Vx == 0 &&
+                   Moon3.X == Moon3.StartX && Moon3.Vx == 0;
         }
 
         private bool IsYDone()
         {
-            return Moon0.PeriodY > 0 &&
-                   Moon1.PeriodY > 0 &&
-                   Moon2.PeriodY > 0 &&
-                   Moon3.PeriodY > 0;
+            return Moon0.Y == Moon0.StartY && Moon0.Vy == 0 &&
+                   Moon1.Y == Moon1.StartY && Moon1.Vy == 0 &&
+                   Moon2.Y == Moon2.StartY && Moon2.Vy == 0 &&
+                   Moon3.Y == Moon3.StartY && Moon3.Vy == 0;
         }
 
         private bool IsZDone()
         {
-            return Moon0.PeriodZ > 0 &&
-                   Moon1.PeriodZ > 0 &&
-                   Moon2.PeriodZ > 0 &&
-                   Moon3.PeriodZ > 0;
+            return Moon0.Z == Moon0.StartZ && Moon0.Vz == 0 &&
+                   Moon1.Z == Moon1.StartZ && Moon1.Vz == 0 &&
+                   Moon2.Z == Moon2.StartZ && Moon2.Vz == 0 &&
+                   Moon3.Z == Moon3.StartZ && Moon3.Vz == 0;
         }
 
         private void Move()

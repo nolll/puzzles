@@ -5,6 +5,7 @@ namespace Tests
 {
     public class StreamProcessingTests
     {
+        // todo: fix test
         [TestCase("{}", "{}", 1, 1)]
         [TestCase("{{{}}}", "{{{}}}", 3, 6)]
         [TestCase("{{},{}}", "{{},{}}", 3, 5)]

@@ -17,21 +17,21 @@ namespace Tests
             var moonTracker = new MoonTracker(map);
             moonTracker.Run(1);
 
-            Assert.That(moonTracker.Moon0.X, Is.EqualTo(2));
-            Assert.That(moonTracker.Moon0.Y, Is.EqualTo(-1));
-            Assert.That(moonTracker.Moon0.Z, Is.EqualTo(1));
+            Assert.That(moonTracker.Moons[0].X, Is.EqualTo(2));
+            Assert.That(moonTracker.Moons[0].Y, Is.EqualTo(-1));
+            Assert.That(moonTracker.Moons[0].Z, Is.EqualTo(1));
 
-            Assert.That(moonTracker.Moon1.X, Is.EqualTo(3));
-            Assert.That(moonTracker.Moon1.Y, Is.EqualTo(-7));
-            Assert.That(moonTracker.Moon1.Z, Is.EqualTo(-4));
+            Assert.That(moonTracker.Moons[1].X, Is.EqualTo(3));
+            Assert.That(moonTracker.Moons[1].Y, Is.EqualTo(-7));
+            Assert.That(moonTracker.Moons[1].Z, Is.EqualTo(-4));
 
-            Assert.That(moonTracker.Moon2.X, Is.EqualTo(1));
-            Assert.That(moonTracker.Moon2.Y, Is.EqualTo(-7));
-            Assert.That(moonTracker.Moon2.Z, Is.EqualTo(5));
+            Assert.That(moonTracker.Moons[2].X, Is.EqualTo(1));
+            Assert.That(moonTracker.Moons[2].Y, Is.EqualTo(-7));
+            Assert.That(moonTracker.Moons[2].Z, Is.EqualTo(5));
 
-            Assert.That(moonTracker.Moon3.X, Is.EqualTo(2));
-            Assert.That(moonTracker.Moon3.Y, Is.EqualTo(2));
-            Assert.That(moonTracker.Moon3.Z, Is.EqualTo(0));
+            Assert.That(moonTracker.Moons[3].X, Is.EqualTo(2));
+            Assert.That(moonTracker.Moons[3].Y, Is.EqualTo(2));
+            Assert.That(moonTracker.Moons[3].Z, Is.EqualTo(0));
         }
 
         [Test]
@@ -46,21 +46,21 @@ namespace Tests
             var moonTracker = new MoonTracker(map);
             moonTracker.Run(5);
 
-            Assert.That(moonTracker.Moon0.X, Is.EqualTo(-1));
-            Assert.That(moonTracker.Moon0.Y, Is.EqualTo(-9));
-            Assert.That(moonTracker.Moon0.Z, Is.EqualTo(2));
+            Assert.That(moonTracker.Moons[0].X, Is.EqualTo(-1));
+            Assert.That(moonTracker.Moons[0].Y, Is.EqualTo(-9));
+            Assert.That(moonTracker.Moons[0].Z, Is.EqualTo(2));
 
-            Assert.That(moonTracker.Moon1.X, Is.EqualTo(4));
-            Assert.That(moonTracker.Moon1.Y, Is.EqualTo(1));
-            Assert.That(moonTracker.Moon1.Z, Is.EqualTo(5));
+            Assert.That(moonTracker.Moons[1].X, Is.EqualTo(4));
+            Assert.That(moonTracker.Moons[1].Y, Is.EqualTo(1));
+            Assert.That(moonTracker.Moons[1].Z, Is.EqualTo(5));
 
-            Assert.That(moonTracker.Moon2.X, Is.EqualTo(2));
-            Assert.That(moonTracker.Moon2.Y, Is.EqualTo(2));
-            Assert.That(moonTracker.Moon2.Z, Is.EqualTo(-4));
+            Assert.That(moonTracker.Moons[2].X, Is.EqualTo(2));
+            Assert.That(moonTracker.Moons[2].Y, Is.EqualTo(2));
+            Assert.That(moonTracker.Moons[2].Z, Is.EqualTo(-4));
 
-            Assert.That(moonTracker.Moon3.X, Is.EqualTo(3));
-            Assert.That(moonTracker.Moon3.Y, Is.EqualTo(-7));
-            Assert.That(moonTracker.Moon3.Z, Is.EqualTo(-1));
+            Assert.That(moonTracker.Moons[3].X, Is.EqualTo(3));
+            Assert.That(moonTracker.Moons[3].Y, Is.EqualTo(-7));
+            Assert.That(moonTracker.Moons[3].Z, Is.EqualTo(-1));
         }
 
         [Test]
@@ -75,21 +75,21 @@ namespace Tests
             var moonTracker = new MoonTracker(map);
             moonTracker.Run(2770);
 
-            Assert.That(moonTracker.Moon0.X, Is.EqualTo(2));
-            Assert.That(moonTracker.Moon0.Y, Is.EqualTo(-1));
-            Assert.That(moonTracker.Moon0.Z, Is.EqualTo(1));
+            Assert.That(moonTracker.Moons[0].X, Is.EqualTo(2));
+            Assert.That(moonTracker.Moons[0].Y, Is.EqualTo(-1));
+            Assert.That(moonTracker.Moons[0].Z, Is.EqualTo(1));
 
-            Assert.That(moonTracker.Moon1.X, Is.EqualTo(3));
-            Assert.That(moonTracker.Moon1.Y, Is.EqualTo(-7));
-            Assert.That(moonTracker.Moon1.Z, Is.EqualTo(-4));
+            Assert.That(moonTracker.Moons[1].X, Is.EqualTo(3));
+            Assert.That(moonTracker.Moons[1].Y, Is.EqualTo(-7));
+            Assert.That(moonTracker.Moons[1].Z, Is.EqualTo(-4));
 
-            Assert.That(moonTracker.Moon2.X, Is.EqualTo(1));
-            Assert.That(moonTracker.Moon2.Y, Is.EqualTo(-7));
-            Assert.That(moonTracker.Moon2.Z, Is.EqualTo(5));
+            Assert.That(moonTracker.Moons[2].X, Is.EqualTo(1));
+            Assert.That(moonTracker.Moons[2].Y, Is.EqualTo(-7));
+            Assert.That(moonTracker.Moons[2].Z, Is.EqualTo(5));
 
-            Assert.That(moonTracker.Moon3.X, Is.EqualTo(2));
-            Assert.That(moonTracker.Moon3.Y, Is.EqualTo(2));
-            Assert.That(moonTracker.Moon3.Z, Is.EqualTo(0));
+            Assert.That(moonTracker.Moons[3].X, Is.EqualTo(2));
+            Assert.That(moonTracker.Moons[3].Y, Is.EqualTo(2));
+            Assert.That(moonTracker.Moons[3].Z, Is.EqualTo(0));
         }
 
         [Test]
@@ -120,30 +120,30 @@ namespace Tests
             moonTracker.Run(100);
 
             Assert.That(moonTracker.TotalEnergy, Is.EqualTo(1940));
-            Assert.That(moonTracker.Moon0.X, Is.EqualTo(8));
-            Assert.That(moonTracker.Moon0.Y, Is.EqualTo(-12));
-            Assert.That(moonTracker.Moon0.Z, Is.EqualTo(-9));
-            Assert.That(moonTracker.Moon1.X, Is.EqualTo(13));
-            Assert.That(moonTracker.Moon1.Y, Is.EqualTo(16));
-            Assert.That(moonTracker.Moon1.Z, Is.EqualTo(-3));
-            Assert.That(moonTracker.Moon2.X, Is.EqualTo(-29));
-            Assert.That(moonTracker.Moon2.Y, Is.EqualTo(-11));
-            Assert.That(moonTracker.Moon2.Z, Is.EqualTo(-1));
-            Assert.That(moonTracker.Moon3.X, Is.EqualTo(16));
-            Assert.That(moonTracker.Moon3.Y, Is.EqualTo(-13));
-            Assert.That(moonTracker.Moon3.Z, Is.EqualTo(23));
-            Assert.That(moonTracker.Moon0.Vx, Is.EqualTo(-7));
-            Assert.That(moonTracker.Moon0.Vy, Is.EqualTo(3));
-            Assert.That(moonTracker.Moon0.Vz, Is.EqualTo(0));
-            Assert.That(moonTracker.Moon1.Vx, Is.EqualTo(3));
-            Assert.That(moonTracker.Moon1.Vy, Is.EqualTo(-11));
-            Assert.That(moonTracker.Moon1.Vz, Is.EqualTo(-5));
-            Assert.That(moonTracker.Moon2.Vx, Is.EqualTo(-3));
-            Assert.That(moonTracker.Moon2.Vy, Is.EqualTo(7));
-            Assert.That(moonTracker.Moon2.Vz, Is.EqualTo(4));
-            Assert.That(moonTracker.Moon3.Vx, Is.EqualTo(7));
-            Assert.That(moonTracker.Moon3.Vy, Is.EqualTo(1));
-            Assert.That(moonTracker.Moon3.Vz, Is.EqualTo(1));
+            Assert.That(moonTracker.Moons[0].X, Is.EqualTo(8));
+            Assert.That(moonTracker.Moons[0].Y, Is.EqualTo(-12));
+            Assert.That(moonTracker.Moons[0].Z, Is.EqualTo(-9));
+            Assert.That(moonTracker.Moons[1].X, Is.EqualTo(13));
+            Assert.That(moonTracker.Moons[1].Y, Is.EqualTo(16));
+            Assert.That(moonTracker.Moons[1].Z, Is.EqualTo(-3));
+            Assert.That(moonTracker.Moons[2].X, Is.EqualTo(-29));
+            Assert.That(moonTracker.Moons[2].Y, Is.EqualTo(-11));
+            Assert.That(moonTracker.Moons[2].Z, Is.EqualTo(-1));
+            Assert.That(moonTracker.Moons[3].X, Is.EqualTo(16));
+            Assert.That(moonTracker.Moons[3].Y, Is.EqualTo(-13));
+            Assert.That(moonTracker.Moons[3].Z, Is.EqualTo(23));
+            Assert.That(moonTracker.Moons[0].Vx, Is.EqualTo(-7));
+            Assert.That(moonTracker.Moons[0].Vy, Is.EqualTo(3));
+            Assert.That(moonTracker.Moons[0].Vz, Is.EqualTo(0));
+            Assert.That(moonTracker.Moons[1].Vx, Is.EqualTo(3));
+            Assert.That(moonTracker.Moons[1].Vy, Is.EqualTo(-11));
+            Assert.That(moonTracker.Moons[1].Vz, Is.EqualTo(-5));
+            Assert.That(moonTracker.Moons[2].Vx, Is.EqualTo(-3));
+            Assert.That(moonTracker.Moons[2].Vy, Is.EqualTo(7));
+            Assert.That(moonTracker.Moons[2].Vz, Is.EqualTo(4));
+            Assert.That(moonTracker.Moons[3].Vx, Is.EqualTo(7));
+            Assert.That(moonTracker.Moons[3].Vy, Is.EqualTo(1));
+            Assert.That(moonTracker.Moons[3].Vz, Is.EqualTo(1));
         }
 
         [Test]

@@ -19,7 +19,7 @@ namespace Core.KnightsOfTheDinnerTable
             Rules.Add(rule);
         }
 
-        public int GetHappingess(string otherName)
+        public int GetHappiness(string otherName)
         {
             var rule = Rules.FirstOrDefault(o => o.Name == otherName);
             return rule?.Happiness ?? 0;

@@ -6,15 +6,14 @@ namespace Core.KnightsOfTheDinnerTable
 {
     public class DinnerTable
     {
-        private readonly IDictionary<string, DinnerGuest> _guests;
         public int HappinessChange { get; }
 
         public DinnerTable(string input, bool includeMe = false)
         {
-            _guests = ParseGuests(input, includeMe);
-            var names = _guests.Keys;
+            var guests = ParseGuests(input, includeMe);
+            var names = guests.Keys;
             var nameLists = PermutationGenerator.GetPermutations(names.ToList());
-            var happiness = nameLists.Select(nl => CalculateHappiness(nl.Select(p => _guests[p]).ToList()));
+            var happiness = nameLists.Select(nl => CalculateHappiness(nl.Select(p => guests[p]).ToList()));
             
             HappinessChange = happiness.Max();
         }
@@ -29,8 +28,8 @@ namespace Core.KnightsOfTheDinnerTable
                 var prevGuestIndex = i - 1 < 0 ? guests.Count - 1 : i - 1;
                 var nextGuest = guests[nextGuestIndex];
                 var prevGuest = guests[prevGuestIndex];
-                var nextGuestHappiness = guest.GetHappingess(nextGuest.Name);
-                var prevGuestHappiness = guest.GetHappingess(prevGuest.Name);
+                var nextGuestHappiness = guest.GetHappiness(nextGuest.Name);
+                var prevGuestHappiness = guest.GetHappiness(prevGuest.Name);
                 happiness += nextGuestHappiness + prevGuestHappiness;
             }
             return happiness;

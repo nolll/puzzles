@@ -276,6 +276,31 @@ namespace Core.Tools
             }
         }
 
+        public IList<MatrixAddress> Adjacent4Coords
+        {
+            get
+            {
+                var values = new List<MatrixAddress>();
+                var address = new MatrixAddress(Address.X, Address.Y - 1);
+                if (!IsOutOfRange(address))
+                    values.Add(address);
+
+                address = new MatrixAddress(Address.X + 1, Address.Y);
+                if (!IsOutOfRange(address))
+                    values.Add(address);
+
+                address = new MatrixAddress(Address.X, Address.Y + 1);
+                if (!IsOutOfRange(address))
+                    values.Add(address);
+
+                address = new MatrixAddress(Address.X - 1, Address.Y);
+                if (!IsOutOfRange(address))
+                    values.Add(address);
+
+                return values;
+            }
+        }
+
         public IList<T> Adjacent8
         {
             get

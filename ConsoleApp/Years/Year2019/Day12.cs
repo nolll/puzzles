@@ -29,6 +29,5 @@ namespace ConsoleApp.Years.Year2019
 <x=-1, y=-9, z=-4>
 <x=17, y=6, z=8>
 <x=12, y=4, z=2>";
-
     }
 }

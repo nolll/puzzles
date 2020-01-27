@@ -1,6 +1,4 @@
-using System;
-using System.Linq;
-using Core.Tools;
+using Core.CubicleMaze;
 using NUnit.Framework;
 
 namespace Tests
@@ -12,43 +10,9 @@ namespace Tests
         {
             const int input = 10;
 
-            var maze = new Maze(10, 7, input);
+            var maze = new Maze(10, 7, input, 7, 4);
 
             Assert.That(maze.RouteLength, Is.EqualTo(11));
-        }
-    }
-
-    public class Maze
-    {
-        public int RouteLength { get; }
-
-        public Maze(in int width, in int height, in int secretNumber)
-        {
-            var matrix = BuildMatrix(width, height, secretNumber);
-            matrix.MoveTo(1, 1);
-
-            RouteLength = 0;
-        }
-
-        private Matrix<char> BuildMatrix(in int width, in int height, in int secretNumber)
-        {
-            var matrix = new Matrix<char>();
-            for (var y = 0; y < height; y++)
-            {
-                for (var x = 0; x < width; x++)
-                {
-                    matrix.MoveTo(x, y);
-                    var value = x * x + 3 * x + 2 * x * y + y + y * y + secretNumber;
-                    var binary = Convert.ToString(value, 2);
-                    var binaryString = binary.ToString();
-                    var numberOfSetBits = binaryString.Count(o => o == '1');
-                    var isOpenSpace = numberOfSetBits % 2 == 0;
-                    var c = isOpenSpace ? '.' : '#';
-                    matrix.WriteValue(c);
-                }
-            }
-
-            return matrix;
         }
     }
 }

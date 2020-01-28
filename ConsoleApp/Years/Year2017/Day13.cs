@@ -12,8 +12,14 @@ namespace ConsoleApp.Years.Year2017
         protected override void RunDay()
         {
             WritePartTitle();
-            var scanner = new PackerScanner(Input);
-            Console.WriteLine($"Severity: {scanner.Severity}");
+            var scanner1 = new PacketScanner(Input);
+            var severity = scanner1.GetSeverity();
+            Console.WriteLine($"Severity: {severity}");
+
+            WritePartTitle();
+            var scanner2 = new PacketScanner(Input);
+            var delay = scanner2.DelayUntilPass();
+            Console.WriteLine($"Delay: {delay}");
         }
 
         private const string Input = @"0: 3

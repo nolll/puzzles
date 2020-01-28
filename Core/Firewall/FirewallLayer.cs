@@ -23,6 +23,9 @@ namespace Core.Firewall
 
         public void Move()
         {
+            if (_maxPos <= 0)
+                return;
+            
             if (_pos == _maxPos && _direction == DirectionPos || _pos == 0 && _direction == DirectionNeg)
                 _direction = -_direction;
             _pos += _direction;

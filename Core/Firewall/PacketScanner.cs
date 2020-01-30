@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
@@ -7,25 +6,16 @@ namespace Core.Firewall
 {
     public class PacketScanner
     {
-        private readonly string _input;
+        private IList<FirewallLayer> _layers;
 
         public PacketScanner(string input)
         {
-            _input = input;
+            _layers = ParseLayers(input);
         }
 
         public int GetSeverity()
         {
-            var layers = ParseLayers(_input);
-            return SendPacket1(layers);
-        }
-
-        private void MoveScanners(IList<FirewallLayer> layers)
-        {
-            foreach (var l in layers)
-            {
-                l.Move();
-            }
+            return SendPacket1();
         }
 
         public int DelayUntilPass()
@@ -34,43 +24,35 @@ namespace Core.Firewall
             var delay = 0;
             while(wasCaught)
             {
-                var layers = ParseLayers(_input);
-                for (var i = 0; i < delay; i++)
-                {
-                    MoveScanners(layers);
-                }
-                wasCaught = SendPacket2(layers);
+                wasCaught = SendPacket2(delay);
                 if(wasCaught)
                     delay += 1;
-                Console.WriteLine(delay);
             };
 
             return delay;
         }
 
-        private int SendPacket1(IList<FirewallLayer> layers)
+        private int SendPacket1()
         {
             var totalSeverity = 0;
-            for (var i = 0; i < layers.Count; i++)
+            for (var i = 0; i < _layers.Count; i++)
             {
-                var layer = layers[i];
-                totalSeverity += layer.IsCaught
-                    ? i * layer.Depth
+                var layer = _layers[i];
+                totalSeverity += layer.IsCaught(i)
+                    ? i * layer.Range
                     : 0;
-                MoveScanners(layers);
             }
 
             return totalSeverity;
         }
 
-        private bool SendPacket2(IList<FirewallLayer> layers)
+        private bool SendPacket2(in int delay)
         {
-            for (var i = 0; i < layers.Count; i++)
+            for (var i = 0; i < _layers.Count; i++)
             {
-                var layer = layers[i];
-                if (layer.IsCaught)
+                var layer = _layers[i];
+                if (layer.IsCaught(delay + i))
                     return true;
-                MoveScanners(layers);
             }
 
             return false;

@@ -14,8 +14,15 @@ namespace ConsoleApp.Years.Year2018
             WritePartTitle();
             var detector = new CollisionDetector(Input);
 
-            var location = detector.LocationOfFirstCollision;
-            Console.WriteLine($"Crash location: {location}");
+            var firstCollisionCoords = detector.LocationOfFirstCollision;
+            var firstCollition = $"{firstCollisionCoords.X},{firstCollisionCoords.Y}";
+            Console.WriteLine($"First crash location: {firstCollition}");
+
+            WritePartTitle();
+
+            var lastCartCoords = detector.LocationOfLastCart;
+            var lastCart = $"{lastCartCoords.X},{lastCartCoords.Y}";
+            Console.WriteLine($"Last cart location: {lastCart}");
         }
 
         private const string Input = @"

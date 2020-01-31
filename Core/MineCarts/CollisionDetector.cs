@@ -8,25 +8,28 @@ namespace Core.MineCarts
     public class CollisionDetector
     {
         private Matrix<char> _matrix;
-        private readonly IList<MineCart> _carts;
-        public string LocationOfFirstCollision { get; }
+        private IList<MineCart> _carts;
+        public MatrixAddress LocationOfFirstCollision { get; private set; }
+        public MatrixAddress LocationOfLastCart { get; private set; }
 
         public CollisionDetector(string input)
         {
-            _carts = new List<MineCart>();
+            LocationOfFirstCollision = null;
+            LocationOfLastCart = null;
             BuildMatrixAndCarts(input);
-            LocationOfFirstCollision = GetLocationOfFirstCollision();
+            RunCarts();
         }
 
-        private string GetLocationOfFirstCollision()
+        private void RunCarts()
         {
-            var crashed = false;
-            string crashLocation = null;
-            while (!crashed)
+            while (LocationOfLastCart == null)
             {
-                var orderedCarts = _carts.OrderBy(o => o.Coords.Y).ThenBy(o => o.Coords.X);
-                foreach (var cart in orderedCarts)
+                var cartsToMove = _carts.OrderBy(o => o.Coords.Y).ThenBy(o => o.Coords.X).ToList();
+                var movedCarts = new List<MineCart>();
+                while (cartsToMove.Any())
                 {
+                    var cart = cartsToMove.First();
+                    cartsToMove.RemoveAt(0);
                     _matrix.MoveTo(cart.Coords);
                     _matrix.TurnTo(cart.Direction);
                     _matrix.MoveForward();
@@ -34,29 +37,53 @@ namespace Core.MineCarts
                     var val = _matrix.ReadValue();
                     cart.Turn(val);
 
-                    crashLocation = GetCrashLocation();
-                    if (crashLocation != null)
+                    if (HasCrashed(cartsToMove, movedCarts, _matrix.Address))
                     {
-                        crashed = true;
-                        break;
+                        if(LocationOfFirstCollision == null) 
+                            LocationOfFirstCollision = _matrix.Address;
+
+                        RemoveCartAt(cartsToMove, _matrix.Address);
+                        RemoveCartAt(movedCarts, _matrix.Address);
+                    }
+                    else
+                    {
+                        movedCarts.Add(cart);
                     }
                 }
-            }
 
-            return crashLocation;
+                _carts = movedCarts.Select(o => o).ToList();
+                if (_carts.Count < 2)
+                {
+                    var lastCart = _carts.FirstOrDefault();
+                    LocationOfLastCart = lastCart?.Coords ?? new MatrixAddress(0, 0);
+                    break;
+                }
+            }
         }
 
-        private string GetCrashLocation()
+        private bool HasCrashed(IList<MineCart> carts1, IList<MineCart> carts2, MatrixAddress coords)
         {
-            return _carts
-                .GroupBy(o => $"{o.Coords.X},{o.Coords.Y}")
-                .Where(g => g.Count() > 1).Select(o => o.Key)
-                .FirstOrDefault();
+            return carts1.Any(cart => cart.Coords.X == coords.X && cart.Coords.Y == coords.Y)
+                   || carts2.Any(cart => cart.Coords.X == coords.X && cart.Coords.Y == coords.Y);
+        }
+
+        private void RemoveCartAt(IList<MineCart> carts, MatrixAddress coords)
+        {
+            for (var i = 0; i < carts.Count; i++)
+            {
+                var cart = carts[i];
+                if (cart.Coords.X == coords.X && cart.Coords.Y == coords.Y)
+                {
+                    carts.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         private void BuildMatrixAndCarts(in string input)
         {
             _matrix = new Matrix<char>();
+            _carts = new List<MineCart>(); 
             var rows = PuzzleInputReader.Read(input).Select(o => o.Trim('_')).ToList();
             for (var y = 0; y < rows.Count; y++)
             {
@@ -70,7 +97,7 @@ namespace Core.MineCarts
                     {
                         mapChar = GetMapChar(c);
                         var direction = GetDirection(c);
-                        var cart = new MineCart(coords, direction, _carts.Count);
+                        var cart = new MineCart(coords, direction);
                         _carts.Add(cart);
                     }
 

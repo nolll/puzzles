@@ -4,17 +4,22 @@ namespace Core.MineCarts
 {
     public class MineCart
     {
+        private MineCartTurn _nextTurn;
+        
         public MatrixAddress Coords { get; private set; }
         public MatrixDirection Direction { get; private set; }
-        public int Id { get; }
-        private MineCartTurn _nextTurn;
+        public bool HasCrashed { get; private set; }
 
-        public MineCart(MatrixAddress coords, MatrixDirection direction, int id)
+        public MineCart(MatrixAddress coords, MatrixDirection direction)
         {
             Coords = coords;
             Direction = direction;
-            Id = id;
             _nextTurn = MineCartTurn.Left;
+        }
+
+        public void Crash()
+        {
+            HasCrashed = true;
         }
 
         public void MoveTo(MatrixAddress coords)

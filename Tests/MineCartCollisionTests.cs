@@ -9,17 +9,37 @@ namespace Tests
         public void LocationOfFirstCollision()
         {
             const string input = @"
-/->-\        _
-|   |  /----\_
-| /-+--+-\  |_
-| | |  | v  |_
-\-+-/  \-+--/_
-  \------/   _";
+_/->-\        _
+_|   |  /----\_
+_| /-+--+-\  |_
+_| | |  | v  |_
+_\-+-/  \-+--/_
+_  \------/   _";
 
             var detector = new CollisionDetector(input);
             var coords = detector.LocationOfFirstCollision;
 
-            Assert.That(coords, Is.EqualTo("7,3"));
+            var str = $"{coords.X},{coords.Y}";
+            Assert.That(str, Is.EqualTo("7,3"));
+        }
+
+        [Test]
+        public void LocationOfLastCart()
+        {
+            const string input = @"
+_/>-<\  _
+_|   |  _
+_| /<+-\_
+_| | | v_
+_\>+</ |_
+_  |   ^_
+_  \<->/_";
+
+            var detector = new CollisionDetector(input);
+            var coords = detector.LocationOfLastCart;
+
+            var str = $"{coords.X},{coords.Y}";
+            Assert.That(str, Is.EqualTo("6,4"));
         }
     }
 }

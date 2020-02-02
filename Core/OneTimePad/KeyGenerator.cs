@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -9,14 +10,16 @@ namespace Core.OneTimePad
     {
         private readonly Hashfactory _hashFactory;
         private readonly string _salt;
+        private readonly bool _useStretching;
         private readonly IDictionary<int, string> _hashes;
 
         public int IndexOf64thKey { get; }
 
-        public KeyGenerator(string salt)
+        public KeyGenerator(string salt, bool useStretching = false)
         {
             _hashFactory = new Hashfactory();
             _salt = salt;
+            _useStretching = useStretching;
             _hashes = new Dictionary<int, string>();
             var keys = new List<string>();
 
@@ -25,8 +28,9 @@ namespace Core.OneTimePad
             {
                 var hash = GetHash(index);
                 var isKey = IsKey(index, hash);
-                if(isKey)
+                if (isKey)
                     keys.Add(hash);
+                    
                 index++;
             }
 
@@ -79,9 +83,34 @@ namespace Core.OneTimePad
         {
             if (_hashes.TryGetValue(index, out var hash))
                 return hash;
-            hash = _hashFactory.Create(string.Concat(_salt, index.ToString()));
+            hash = CreateHash(index);
             _hashes.Add(index, hash);
             return hash;
+        }
+
+        private string CreateHash(int index)
+        {
+            var str = string.Concat(_salt, index.ToString());
+            return _useStretching
+                ? CreateStretchedHash(str)
+                : CreateSimpleHash(str);
+        }
+
+        private string CreateSimpleHash(string str)
+        {
+            return _hashFactory.Create(str);
+        }
+
+        private string CreateStretchedHash(string str)
+        {
+            var count = 0;
+            while (count <= 2016)
+            {
+                str = CreateSimpleHash(str);
+                count++;
+            }
+
+            return str;
         }
     }
 }

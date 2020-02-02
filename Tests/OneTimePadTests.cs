@@ -11,8 +11,18 @@ namespace Tests
             const string input = "abc";
 
             var generator = new KeyGenerator(input);
-            
+
             Assert.That(generator.IndexOf64thKey, Is.EqualTo(22728));
+        }
+
+        [Test]
+        public void GeneratesCorrectStretchedKeys()
+        {
+            const string input = "abc";
+
+            var generator = new KeyGenerator(input, true);
+
+            Assert.That(generator.IndexOf64thKey, Is.EqualTo(22551));
         }
     }
 }

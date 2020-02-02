@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Core.Computer.Instructions;
 
 namespace Core.Computer

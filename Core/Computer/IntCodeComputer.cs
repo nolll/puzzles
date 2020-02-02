@@ -24,6 +24,11 @@ namespace Core.Computer
             _process.Run();
         }
 
+        public void SetMemory(int address, int value)
+        {
+            _startMemory[address] = value;
+        }
+
         public void Resume()
         {
             _process.Run();

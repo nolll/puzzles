@@ -6,11 +6,13 @@ namespace Core.Tools
     {
         public int X { get; }
         public int Y { get; }
+        public string Id { get; }
 
         public MatrixAddress(int x, int y)
         {
             X = x;
             Y = y;
+            Id = $"{x},{y}";
         }
 
         public int ManhattanDistanceTo(MatrixAddress other)

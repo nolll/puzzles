@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using Core.Tools;
 
 namespace Core.MarbleMania
 {
     public class MarbleGame
     {
-        private readonly long[] _playerScores;
-        private readonly LinkedList<int> _circle;
         private LinkedListNode<int> _currentMarble;
-        private readonly int _currentPlayer;
-        private readonly int _marbleValue;
+        private long[] _playerScores;
+        private LinkedList<int> _circle;
+        private int _currentPlayer;
+        private int _marbleValue;
         public long WinnerScore { get; }
 
         public MarbleGame(int playerCount, int lastMarbleValue)
@@ -28,12 +29,12 @@ namespace Core.MarbleMania
                     MoveBack(7);
                     _playerScores[_currentPlayer] += _marbleValue + _currentMarble.Value;
                     var removeThis = _currentMarble;
-                    Next();
+                    _currentMarble = _currentMarble.NextOrFirst();
                     _circle.Remove(removeThis);
                 }
                 else
                 {
-                    Next();
+                    _currentMarble = _currentMarble.NextOrFirst();
                     _currentMarble = _circle.AddAfter(_currentMarble, _marbleValue);
                 }
 
@@ -49,19 +50,9 @@ namespace Core.MarbleMania
         {
             while (distance > 0)
             {
-                Previous();
+                _currentMarble = _currentMarble.PreviousOrLast();
                 distance--;
             }
-        }
-
-        private void Previous()
-        {
-            _currentMarble = _currentMarble.Previous ?? _circle.Last;
-        }
-
-        private void Next()
-        {
-            _currentMarble = _currentMarble.Next ?? _circle.First;
         }
     }
 }

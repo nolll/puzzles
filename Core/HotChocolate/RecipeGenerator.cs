@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,6 +37,30 @@ namespace Core.HotChocolate
 
             var result = _scores.Skip(input).Take(10);
             return string.Concat(result.Select(o => o.ToString()));
+        }
+
+        public int RecipeCountBefore(in string input)
+        {
+            var lastEleven = "";
+            while (!lastEleven.Contains(input))
+            {
+                var val1 = _scores.ElementAt(_elf1Pos);
+                var val2 = _scores.ElementAt(_elf2Pos);
+                var score = val1 + val2;
+                var hasTwoDigits = score >= 10;
+                _scores.Add(hasTwoDigits ? 1 : score);
+                if (hasTwoDigits)
+                {
+                    _scores.Add(score - 10);
+                }
+
+                lastEleven = string.Concat(_scores.TakeLast(11));
+                _elf1Pos = GetElfPos(_elf1Pos, val1);
+                _elf2Pos = GetElfPos(_elf2Pos, val2);
+            }
+
+
+            return string.Concat(_scores).IndexOf(input, StringComparison.InvariantCulture);
         }
 
         private int GetElfPos(in int currentPos, in int steps)

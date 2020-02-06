@@ -15,6 +15,10 @@ namespace ConsoleApp.Years.Year2018
             var generator = new RecipeGenerator();
             var scores = generator.ScoresAfter(Input);
             Console.WriteLine($"Next ten scores: {scores}");
+
+            WritePartTitle();
+            var count = generator.RecipeCountBefore(Input.ToString());
+            Console.WriteLine($"Recipe count: {count}");
         }
 
         private const int Input = 306281;

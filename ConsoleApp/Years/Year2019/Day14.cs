@@ -13,15 +13,16 @@ namespace ConsoleApp.Years.Year2019
         {
             WritePartTitle();
             var reactor = new NanoReactor(Input);
-            var oreCount = reactor.GetRequiredOreForOneFuel();
+            reactor.Run();
+            var oreForOneFuel = reactor.RequiredOreForOneFuel;
 
-            Console.WriteLine($"Number of ores: {oreCount}");
+            Console.WriteLine($"Number of ores for one fuel: {oreForOneFuel}");
 
-            WritePartTitle();
-            var reactor2 = new NanoReactor(Input);
-            var fuelCount = reactor.GetUntilOutOfOre(1000000000000);
+            //WritePartTitle();
+            //var reactor2 = new NanoReactor(Input);
+            //var fuelCount = reactor.GetUntilOutOfOre(1000000000000);
 
-            Console.WriteLine($"Maximum fuel: {fuelCount}");
+            //Console.WriteLine($"Maximum fuel: {fuelCount}");
         }
 
         private const string Input = @"1 RNQHX, 1 LFKRJ, 1 JNGM => 8 DSRGV

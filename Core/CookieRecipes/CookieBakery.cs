@@ -7,18 +7,24 @@ namespace Core.CookieRecipes
     public class CookieBakery
     {
         public int HighestScore { get; }
+        public int HighestScoreWith500Calories { get; }
 
         public CookieBakery(string input)
         {
             var ingredients = ParseIngredients(input);
             var combinations = GetCombinations(ingredients.Count);
             HighestScore = 0;
+            HighestScoreWith500Calories = 0;
 
             foreach (var combination in combinations)
             {
                 var score = GetScore(ingredients, combination);
+                var calories = GetCalories(ingredients, combination);
                 if (score > HighestScore)
                     HighestScore = score;
+
+                if (calories == 500 && score > HighestScoreWith500Calories)
+                    HighestScoreWith500Calories = score;
             }
         }
 
@@ -28,7 +34,7 @@ namespace Core.CookieRecipes
             var durability = 0;
             var flavor = 0;
             var texture = 0;
-            
+
             for (var i = 0; i < ingredients.Count; i++)
             {
                 capacity += percentages[i] * ingredients[i].Capacity;
@@ -43,6 +49,18 @@ namespace Core.CookieRecipes
             texture = texture > 0 ? texture : 0;
 
             return capacity * durability * flavor * texture;
+        }
+
+        private int GetCalories(IList<CookieIngredient> ingredients, List<int> percentages)
+        {
+            var calories = 0;
+
+            for (var i = 0; i < ingredients.Count; i++)
+            {
+                calories += percentages[i] * ingredients[i].Calories;
+            }
+
+            return calories > 0 ? calories : 0;
         }
 
         private IList<List<int>> GetCombinations(int depth)

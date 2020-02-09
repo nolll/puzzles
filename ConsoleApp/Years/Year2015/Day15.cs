@@ -13,7 +13,10 @@ namespace ConsoleApp.Years.Year2015
         {
             WritePartTitle();
             var race = new CookieBakery(Input);
-            Console.WriteLine($"Highest cookie score: {race.HighestScore}");
+            Console.WriteLine($"Highest score: {race.HighestScore}");
+
+            WritePartTitle();
+            Console.WriteLine($"Highest score for cookies with 500 calories: {race.HighestScoreWith500Calories}");
         }
 
         private const string Input = @"

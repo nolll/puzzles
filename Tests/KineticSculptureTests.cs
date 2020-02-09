@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Core.KineticSculptureTiming;
 using NUnit.Framework;
 

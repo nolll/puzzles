@@ -12,8 +12,12 @@ namespace ConsoleApp.Years.Year2016
         protected override void RunDay()
         {
             WritePartTitle();
-            var sculpture = new KineticSculpture(Input);
-            Console.WriteLine($"Time to press button: {sculpture.TimeToPressButton}");
+            var sculpture1 = new KineticSculpture(Input);
+            Console.WriteLine($"Time to press button: {sculpture1.TimeToPressButton}");
+
+            WritePartTitle();
+            var sculpture2 = new KineticSculpture(Input, true);
+            Console.WriteLine($"Time to press button: {sculpture2.TimeToPressButton}");
         }
 
         private const string Input = @"Disc #1 has 17 positions; at time=0, it is at position 1.

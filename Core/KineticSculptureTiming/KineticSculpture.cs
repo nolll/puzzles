@@ -8,9 +8,11 @@ namespace Core.KineticSculptureTiming
     {
         public int TimeToPressButton { get; }
 
-        public KineticSculpture(string input)
+        public KineticSculpture(string input, bool addExtraDisc = false)
         {
             var discs = ParseDiscs(input);
+            if(addExtraDisc)
+                discs.Add(new KineticSculptureDisc(11, 0));
             var time = 0;
 
             while (true)

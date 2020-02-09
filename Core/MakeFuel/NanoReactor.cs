@@ -14,6 +14,7 @@ namespace Core.MakeFuel
         private long? _availableOre;
 
         public long RequiredOreForOneFuel { get; private set; }
+        public long FuelFromOneTrillionOre { get; private set; }
         public long OreCount { get; private set; }
 
         public NanoReactor(string input)
@@ -34,17 +35,26 @@ namespace Core.MakeFuel
 
         public void Run()
         {
-            var fuel = GetFuel(1);
+            MakeFuel(1);
             RequiredOreForOneFuel = OreCount;
-            var oreLimit = 1000000000000;
-            var nextFuelLevel = oreLimit / RequiredOreForOneFuel;
+            const long oreLimit = 1000000000000;
+            long lastOreLimit = 0;
+            var nextOreLimit = oreLimit;
+            while (lastOreLimit != nextOreLimit)
+            {
+                var batchSize = (int)Math.Floor((double)nextOreLimit / RequiredOreForOneFuel);
+                lastOreLimit = nextOreLimit;
+                MakeFuel(batchSize);
+                nextOreLimit = oreLimit - OreCount;
+            }
+
+            FuelFromOneTrillionOre = _fuelCount;
         }
 
-        private ChemicalQuantity GetFuel(long quantity)
+        private void MakeFuel(long quantity)
         {
             var fuel = Get("FUEL", quantity);
-            _fuelCount += quantity;
-            return fuel;
+            _fuelCount += fuel.Quantity;
         }
 
         private ChemicalQuantity Get(string name, long quantity)

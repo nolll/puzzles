@@ -7,7 +7,6 @@ namespace Core.MakeFuel
     public class NanoReactor
     {
         private readonly IList<Reaction> _reactions;
-        private readonly IDictionary<string, ChemicalQuantity> _waste;
         private readonly IDictionary<string, long> _storage;
         private readonly IDictionary<string, Reaction> _recipes;
         private long _fuelCount;
@@ -15,17 +14,14 @@ namespace Core.MakeFuel
 
         public long RequiredOreForOneFuel { get; private set; }
         public long FuelFromOneTrillionOre { get; private set; }
-        public long OreCount { get; private set; }
 
         public NanoReactor(string input)
         {
-            OreCount = 0;
             _reactions = new ReactionParser().Parse(input);
-            _waste = new Dictionary<string, ChemicalQuantity>();
             _storage = new Dictionary<string, long>();
             _recipes = new Dictionary<string, Reaction>();
 
-            _storage.Add("ORE", 0);
+            _storage.Add("ORE", 1_000_000_000_000);
             foreach (var reaction in _reactions)
             {
                 _recipes.Add(reaction.Output.Name, reaction);
@@ -36,16 +32,26 @@ namespace Core.MakeFuel
         public void Run()
         {
             MakeFuel(1);
-            RequiredOreForOneFuel = OreCount;
-            const long oreLimit = 1000000000000;
-            long lastOreLimit = 0;
-            var nextOreLimit = oreLimit;
-            while (lastOreLimit != nextOreLimit)
+            const long oreLimit = 1_000_000_000_000;
+            RequiredOreForOneFuel = oreLimit - _storage["ORE"];
+            long batchSize = 1;
+
+            while (_storage["ORE"] > 0 && batchSize > 0)
             {
-                var batchSize = (int)Math.Floor((double)nextOreLimit / RequiredOreForOneFuel);
-                lastOreLimit = nextOreLimit;
+                batchSize = (long)Math.Floor((double)_storage["ORE"] / RequiredOreForOneFuel);
                 MakeFuel(batchSize);
-                nextOreLimit = oreLimit - OreCount;
+            }
+
+            while (_storage["ORE"] > 0)
+            {
+                try
+                {
+                    MakeFuel(1);
+                }
+                catch
+                {
+                    break;
+                }
             }
 
             FuelFromOneTrillionOre = _fuelCount;
@@ -70,46 +76,14 @@ namespace Core.MakeFuel
             return new ChemicalQuantity(name, quantity);
         }
 
-        private void Make(string name)
-        {
-            if (name == "ORE")
-            {
-                var newOreCount = OreCount + 1;
-                if (_availableOre != null && newOreCount > _availableOre.Value)
-                {
-                    throw new OutOfOresException();
-                }
-                OreCount = newOreCount;
-                AddToStorage(name, 1);
-            }
-            else
-            {
-                var recipe = _recipes[name];
-                foreach (var input in recipe.Inputs)
-                {
-                    var cq = Get(input.Name, input.Quantity);
-                }
-                AddToStorage(name, recipe.Output.Quantity);
-            }
-        }
-
         private void Make(string name, long quantity)
         {
-            if (name == "ORE")
+            var recipe = _recipes[name];
+            foreach (var input in recipe.Inputs)
             {
-                var newOreCount = OreCount + quantity;
-                OreCount = newOreCount;
-                AddToStorage(name, quantity);
+                var cq = Get(input.Name, input.Quantity * (long)Math.Ceiling((double)quantity / recipe.Output.Quantity));
             }
-            else
-            {
-                var recipe = _recipes[name];
-                foreach (var input in recipe.Inputs)
-                {
-                    var cq = Get(input.Name, input.Quantity * (long)Math.Ceiling((double)quantity / recipe.Output.Quantity));
-                }
-                AddToStorage(name, recipe.Output.Quantity * (long)Math.Ceiling((double)quantity / recipe.Output.Quantity));
-            }
+            AddToStorage(name, recipe.Output.Quantity * (long)Math.Ceiling((double)quantity / recipe.Output.Quantity));
         }
 
         private void AddToStorage(string name, long quantity)
@@ -123,9 +97,5 @@ namespace Core.MakeFuel
             var inStorage = _storage[name];
             _storage[name] = inStorage - quantity;
         }
-    }
-
-    public class OutOfOresException : Exception
-    {
     }
 }

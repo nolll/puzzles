@@ -14,7 +14,12 @@ namespace ConsoleApp.Years.Year2017
             WritePartTitle();
             var duel = new GeneratorDuel(679, 771);
             duel.Run(40_000_000);
-            Console.WriteLine($"Final count: {duel.FinalCount}");
+            Console.WriteLine($"Final count part 1: {duel.FinalCount}");
+
+            WritePartTitle();
+            var duel2 = new GeneratorDuel(679, 771);
+            duel2.Run2(5_000_000);
+            Console.WriteLine($"Final count part 2: {duel2.FinalCount}");
         }
     }
 }

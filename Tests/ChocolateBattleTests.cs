@@ -78,13 +78,21 @@ namespace Tests
 
                         targets = targets.Distinct().ToList();
                         var paths = targets.Select(o => PathFinder.ShortestPathTo(_matrix, figure.Address, o)).ToList();
-                        var possibleMoves = paths.Select(o => o.First());
-                        var bestMove = possibleMoves.OrderBy(o => o.Y).ThenBy(o => o.X).ToList().First();
-                        _matrix.MoveTo(figure.Address);
-                        _matrix.WriteValue('.');
-                        figure.MoveTo(new MatrixAddress(bestMove.X, bestMove.Y));
-                        _matrix.MoveTo(figure.Address);
-                        _matrix.WriteValue(figure.Type);
+                        var possibleMoves = paths
+                            .Where(o => o.Any())
+                            .OrderBy(o => o.Count)
+                            .ThenBy(o => o.First().Y)
+                            .ThenBy(o => o.First().X)
+                            .Select(o => o.First());
+                        var bestMove = possibleMoves.FirstOrDefault();
+                        if (bestMove != null)
+                        {
+                            _matrix.MoveTo(figure.Address);
+                            _matrix.WriteValue('.');
+                            figure.MoveTo(new MatrixAddress(bestMove.X, bestMove.Y));
+                            _matrix.MoveTo(figure.Address);
+                            _matrix.WriteValue(figure.Type);
+                        }
                     }
                 }
 

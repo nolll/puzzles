@@ -33,7 +33,9 @@ namespace Core.Tools
                     .ThenBy(o => o.Y)
                     .ThenBy(o => o.X)
                     .ToList();
-                var bestAddress = adjacentCoords.First();
+                var bestAddress = adjacentCoords.FirstOrDefault();
+                if (bestAddress == null)
+                    break;
                 currentAddress = new MatrixAddress(bestAddress.X, bestAddress.Y);
                 path.Add(currentAddress);
             }

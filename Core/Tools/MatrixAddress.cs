@@ -2,12 +2,12 @@ using System;
 
 namespace Core.Tools
 {
-    public class MatrixAddress
+    public class MatrixAddress : IEquatable<MatrixAddress>
     {
         public int X { get; }
         public int Y { get; }
         public string Id { get; }
-
+        
         public MatrixAddress(int x, int y)
         {
             X = x;
@@ -26,6 +26,26 @@ namespace Core.Tools
             var yDiff = yMax - yMin;
 
             return xDiff + yDiff;
+        }
+
+        public bool Equals(MatrixAddress other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return X == other.X && Y == other.Y;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((MatrixAddress) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(X, Y);
         }
     }
 }

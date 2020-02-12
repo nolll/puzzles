@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using Core.Tools;
+using Core.BeverageBandits;
 using NUnit.Framework;
 
 namespace Tests
@@ -8,7 +6,7 @@ namespace Tests
     public class ChocolateBattleTests
     {
         [Test]
-        public void BattleResultsInCorrectOutcome()
+        public void BattleResultsInCorrectOutcome_Case1()
         {
             const string input = @"
 #######
@@ -20,142 +18,108 @@ namespace Tests
 #######";
 
             var battle = new ChocolateBattle(input);
-            battle.Run();
+            battle.Run(false);
 
             Assert.That(battle.Outcome, Is.EqualTo(27730));
         }
-    }
 
-    public class ChocolateBattle
-    {
-        private Matrix<char> _matrix;
-        private IList<BattleFigure> _figures;
-        public int Outcome { get; private set; }
-
-        public ChocolateBattle(string input)
+        [Test]
+        public void BattleResultsInCorrectOutcome_Case2()
         {
-            _figures = new List<BattleFigure>();
-            BuildMatrix(input);
+            const string input = @"
+#######
+#G..#E#
+#E#E.E#
+#G.##.#
+#...#E#
+#...E.#
+#######
+";
+
+            var battle = new ChocolateBattle(input);
+            battle.Run(false);
+
+            Assert.That(battle.Outcome, Is.EqualTo(36334));
         }
 
-        public void Run()
+        [Test]
+        public void BattleResultsInCorrectOutcome_Case3()
         {
-            var round = 0;
-            while (_figures.Any(o => o.Type == BattleFigureType.Elf) && _figures.Any(o => o.Type == BattleFigureType.Goblin))
-            {
-                foreach (var figure in _figures)
-                {
-                    _matrix.MoveTo(figure.Address);
-                    var enemyType = figure.Type == BattleFigureType.Elf ? BattleFigureType.Goblin : BattleFigureType.Elf;
-                    var adjacentEnemies = _matrix.Adjacent4Coords.Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
-                    if (adjacentEnemies.Any())
-                    {
-                        var bestEnemyAddress = adjacentEnemies.OrderBy(o => o.Y).ThenBy(o => o.X).ToList().First();
-                        var enemy = _figures.First(o => o.Address.Equals(bestEnemyAddress));
-                        enemy.Hit();
-                        if (enemy.HitPoints <= 0)
-                        {
-                            _matrix.MoveTo(enemy.Address);
-                            _matrix.WriteValue('.');
-                        }
-                    }
-                    else
-                    {
-                        var enemies = _figures.Where(o => o.Type != figure.Type).ToList();
-                        var targets = new List<MatrixAddress>();
-                        foreach (var enemy in enemies)
-                        {
-                            _matrix.MoveTo(enemy.Address);
-                            var adjacentAddresses = _matrix.Adjacent4Coords;
-                            foreach (var adjacentAddress in adjacentAddresses)
-                            {
-                                if (_matrix.ReadValueAt(adjacentAddress) == '.')
-                                {
-                                    targets.Add(adjacentAddress);
-                                }
-                            }
-                        }
+            const string input = @"
+#######
+#E..EG#
+#.#G.E#
+#E.##E#
+#G..#.#
+#..E#.#
+#######
+";
 
-                        targets = targets.Distinct().ToList();
-                        var paths = targets.Select(o => PathFinder.ShortestPathTo(_matrix, figure.Address, o)).ToList();
-                        var possibleMoves = paths
-                            .Where(o => o.Any())
-                            .OrderBy(o => o.Count)
-                            .ThenBy(o => o.First().Y)
-                            .ThenBy(o => o.First().X)
-                            .Select(o => o.First());
-                        var bestMove = possibleMoves.FirstOrDefault();
-                        if (bestMove != null)
-                        {
-                            _matrix.MoveTo(figure.Address);
-                            _matrix.WriteValue('.');
-                            figure.MoveTo(new MatrixAddress(bestMove.X, bestMove.Y));
-                            _matrix.MoveTo(figure.Address);
-                            _matrix.WriteValue(figure.Type);
-                        }
-                    }
-                }
+            var battle = new ChocolateBattle(input);
+            battle.Run(false);
 
-                _figures = _figures.Where(o => o.HitPoints > 0).OrderBy(o => o.Address.Y).ThenBy(o => o.Address.X).ToList();
-                round++;
-            }
-            Outcome = _figures.Sum(o => o.HitPoints) * round;
+            Assert.That(battle.Outcome, Is.EqualTo(39514));
         }
 
-        private void BuildMatrix(string input)
+        [Test]
+        public void BattleResultsInCorrectOutcome_Case4()
         {
-            _matrix = new Matrix<char>();
-            var rows = input.Trim().Split('\n');
-            var y = 0;
-            foreach (var row in rows)
-            {
-                var x = 0;
-                var chars = row.Trim().ToCharArray();
-                foreach (var c in chars)
-                {
-                    var address = new MatrixAddress(x, y);
-                    _matrix.MoveTo(address);
-                    _matrix.WriteValue(c);
-                    if (c == BattleFigureType.Elf || c == BattleFigureType.Goblin)
-                    {
-                        _figures.Add(new BattleFigure(c, address));
-                    }
+            const string input = @"
+#######
+#E.G#.#
+#.#G..#
+#G.#.G#
+#G..#.#
+#...E.#
+#######
+";
 
-                    x += 1;
-                }
+            var battle = new ChocolateBattle(input);
+            battle.Run(false);
 
-                y += 1;
-            }
-        }
-    }
-
-    public class BattleFigure
-    {
-        public int HitPoints { get; private set; }
-        public char Type { get; }
-        public MatrixAddress Address { get; private set; }
-
-        public BattleFigure(char type, MatrixAddress address)
-        {
-            HitPoints = 200;
-            Type = type;
-            Address = address;
+            Assert.That(battle.Outcome, Is.EqualTo(27755));
         }
 
-        public void Hit()
+
+        [Test]
+        public void BattleResultsInCorrectOutcome_Case5()
         {
-            HitPoints -= 3;
+            const string input = @"
+#######
+#.E...#
+#.#..G#
+#.###.#
+#E#G#G#
+#...#G#
+#######
+";
+
+            var battle = new ChocolateBattle(input);
+            battle.Run(false);
+
+            Assert.That(battle.Outcome, Is.EqualTo(28944));
         }
 
-        public void MoveTo(MatrixAddress address)
-        {
-            Address = address;
-        }
-    }
 
-    public static class BattleFigureType
-    {
-        public const char Elf = 'E';
-        public const char Goblin = 'G';
+        [Test]
+        public void BattleResultsInCorrectOutcome_Case6()
+        {
+            const string input = @"
+#########
+#G......#
+#.E.#...#
+#..##..G#
+#...##..#
+#...#...#
+#.G...G.#
+#.....G.#
+#########
+";
+
+            var battle = new ChocolateBattle(input);
+            battle.Run(false);
+
+            Assert.That(battle.Outcome, Is.EqualTo(18740));
+        }
     }
 }

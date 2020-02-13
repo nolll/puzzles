@@ -12,8 +12,11 @@ namespace ConsoleApp.Years.Year2015
         protected override void RunDay()
         {
             WritePartTitle();
-            var sue = new SueSelector(Input);
-            Console.WriteLine($"Highest score: {sue.Number}");
+            var sueSelector = new SueSelector(Input);
+            Console.WriteLine($"Sue number, part 1: {sueSelector.SueNumberPart1}");
+
+            WritePartTitle();
+            Console.WriteLine($"Sue number, part 2: {sueSelector.SueNumberPart2}");
         }
 
         private const string Input = @"

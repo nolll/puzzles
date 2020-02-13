@@ -15,7 +15,7 @@ Sue 3: vizslas: 7, pomeranians: 1, akitas: 10";
 
             var sueSelector = new SueSelector(input);
 
-            Assert.That(sueSelector.Number, Is.EqualTo(2));
+            Assert.That(sueSelector.SueNumberPart1, Is.EqualTo(2));
         }
     }
 }

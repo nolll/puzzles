@@ -6,14 +6,16 @@ namespace Core.AuntSue
 {
     public class SueSelector
     {
-        public int Number { get; }
+        public int SueNumberPart1 { get; }
+        public int SueNumberPart2 { get; }
 
         public SueSelector(string input)
         {
             var sues = ParseSues(input);
-            var correctSue = sues.FirstOrDefault(o => o.IsCorrectSue);
-
-            Number = correctSue?.Number ?? 0;
+            var correctSuePart1 = sues.FirstOrDefault(o => o.IsCorrectSuePart1);
+            SueNumberPart1 = correctSuePart1?.Number ?? 0;
+            var correctSuePart2 = sues.FirstOrDefault(o => o.IsCorrectSuePart2);
+            SueNumberPart2 = correctSuePart2?.Number ?? 0;
         }
 
         private IList<Sue> ParseSues(string input)

@@ -13,8 +13,12 @@ namespace ConsoleApp.Years.Year2016
         {
             WritePartTitle();
             var dragonCurve = new DragonCurve();
-            var checksum = dragonCurve.Run(Input, 272);
-            Console.WriteLine($"Checksum: {checksum}");
+            var checksum1 = dragonCurve.Run(Input, 272);
+            Console.WriteLine($"Checksum 1: {checksum1}");
+
+            WritePartTitle();
+            var checksum2 = dragonCurve.Run(Input, 35651584);
+            Console.WriteLine($"Checksum 2: {checksum2}");
         }
 
         private const string Input = "01000100010010111";

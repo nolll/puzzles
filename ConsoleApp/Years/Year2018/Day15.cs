@@ -11,10 +11,15 @@ namespace ConsoleApp.Years.Year2018
 
         protected override void RunDay()
         {
+            //WritePartTitle();
+            //var battle = new ChocolateBattle(Input);
+            //battle.RunOnce(false);
+            //Console.WriteLine($"Battle outcome: {battle.Outcome}");
+
             WritePartTitle();
-            var battle = new ChocolateBattle(Input);
-            battle.Run(false);
-            Console.WriteLine($"Battle outcome: {battle.Outcome}");
+            var battle2 = new ChocolateBattle(Input);
+            battle2.RunUntilElvesWins(false);
+            Console.WriteLine($"Battle outcome when the elves win: {battle2.Outcome}");
         }
 
         private const string Input = @"

@@ -1,24 +1,51 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Core.Tools;
 
 namespace Core.BeverageBandits
 {
     public class ChocolateBattle
     {
+        private readonly string _input;
         private Matrix<char> _matrix;
         private IList<BattleFigure> _figures;
         public int Outcome { get; private set; }
+        public string Winners = "";
+        public int ElfAttackPower { get; private set; }
 
         public ChocolateBattle(string input)
         {
-            _figures = new List<BattleFigure>();
-            BuildMatrix(input);
+            _input = input;
         }
 
-        public void Run(bool isPrinterEnabled)
+        public void RunUntilElvesWins(bool isPrinterEnabled)
+        {
+            var elfAttackPower = 4;
+            while (true)
+            {
+                Init(elfAttackPower);
+                var initialElfCount = _figures.Count(o => o.Type == BattleFigureType.Elf);
+                var finished = Run(isPrinterEnabled, true);
+                Console.WriteLine($"Attack power: {elfAttackPower}");
+                if (Winners == "Elves" && _figures.Count(o => o.Type == BattleFigureType.Elf) == initialElfCount)
+                    break;
+
+                elfAttackPower++;
+            }
+
+            ElfAttackPower = elfAttackPower;
+        }
+
+        public void RunOnce(bool isPrinterEnabled)
+        {
+            const int elfAttackPower = 3;
+            Init(elfAttackPower);
+            Run(isPrinterEnabled, false);
+            ElfAttackPower = elfAttackPower;
+        }
+
+        private bool Run(bool isPrinterEnabled, bool breakOnElfDeath)
         {
             var round = 0;
             while (IsBothTypesStillAlive)
@@ -69,8 +96,9 @@ namespace Core.BeverageBandits
                         {
                             _matrix.MoveTo(figure.Address);
                             _matrix.WriteValue('.');
-                            figure.MoveTo(new MatrixAddress(bestMove.X, bestMove.Y));
-                            _matrix.MoveTo(figure.Address);
+                            var newAddress = new MatrixAddress(bestMove.X, bestMove.Y);
+                            figure.MoveTo(newAddress);
+                            _matrix.MoveTo(newAddress);
                             _matrix.WriteValue(figure.Type);
                         }
                     }
@@ -81,14 +109,16 @@ namespace Core.BeverageBandits
                     if (adjacentEnemyAddresses.Any())
                     {
                         var bestEnemyAddress = adjacentEnemyAddresses
-                            .OrderBy(ea => _figures.Single(f => f.Address.Equals(ea)).HitPoints)
+                            .OrderBy(ea => _figures.Single(f => !f.IsDead && f.Address.Equals(ea)).HitPoints)
                             .ThenBy(o => o.Y)
                             .ThenBy(o => o.X)
                             .First();
                         var enemy = _figures.First(o => o.Address.Equals(bestEnemyAddress));
-                        enemy.Hit();
+                        enemy.Hit(figure.AttackPower);
                         if (enemy.IsDead)
                         {
+                            if (enemy.Type == BattleFigureType.Elf)
+                                return false;
                             _matrix.MoveTo(enemy.Address);
                             _matrix.WriteValue('.');
                         }
@@ -96,8 +126,11 @@ namespace Core.BeverageBandits
                 }
 
                 _figures = _figures.Where(o => o.HitPoints > 0).OrderBy(o => o.Address.Y).ThenBy(o => o.Address.X).ToList();
-                if(incrementRound)
+                if (incrementRound)
+                {
                     round++;
+                    Console.WriteLine($"Round {round}");
+                }
 
                 if (isPrinterEnabled)
                 {
@@ -107,16 +140,20 @@ namespace Core.BeverageBandits
                 }
             }
             Outcome = _figures.Sum(o => o.HitPoints) * round;
+            Winners = _figures.First().Type == BattleFigureType.Elf ? "Elves" : "Goblin";
+
+            return true;
         }
 
         private bool IsBothTypesStillAlive =>
             _figures.Any(o => o.Type == BattleFigureType.Elf) &&
             _figures.Any(o => o.Type == BattleFigureType.Goblin);
 
-        private void BuildMatrix(string input)
+        private void Init(int elfAttackPower)
         {
+            _figures = new List<BattleFigure>();
             _matrix = new Matrix<char>();
-            var rows = input.Trim().Split('\n');
+            var rows = _input.Trim().Split('\n');
             var y = 0;
             var figureId = 0;
             foreach (var row in rows)
@@ -130,7 +167,8 @@ namespace Core.BeverageBandits
                     _matrix.WriteValue(c);
                     if (c == BattleFigureType.Elf || c == BattleFigureType.Goblin)
                     {
-                        _figures.Add(new BattleFigure(figureId, c, address));
+                        var attackPower = c == BattleFigureType.Elf ? elfAttackPower : 3;
+                        _figures.Add(new BattleFigure(figureId, c, attackPower, address));
                         figureId++;
                     }
 

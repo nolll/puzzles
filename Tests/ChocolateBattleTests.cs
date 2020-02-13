@@ -18,7 +18,7 @@ namespace Tests
 #######";
 
             var battle = new ChocolateBattle(input);
-            battle.Run(false);
+            battle.RunOnce(false);
 
             Assert.That(battle.Outcome, Is.EqualTo(27730));
         }
@@ -37,7 +37,7 @@ namespace Tests
 ";
 
             var battle = new ChocolateBattle(input);
-            battle.Run(false);
+            battle.RunOnce(false);
 
             Assert.That(battle.Outcome, Is.EqualTo(36334));
         }
@@ -56,7 +56,7 @@ namespace Tests
 ";
 
             var battle = new ChocolateBattle(input);
-            battle.Run(false);
+            battle.RunOnce(false);
 
             Assert.That(battle.Outcome, Is.EqualTo(39514));
         }
@@ -75,7 +75,7 @@ namespace Tests
 ";
 
             var battle = new ChocolateBattle(input);
-            battle.Run(false);
+            battle.RunOnce(false);
 
             Assert.That(battle.Outcome, Is.EqualTo(27755));
         }
@@ -95,7 +95,7 @@ namespace Tests
 ";
 
             var battle = new ChocolateBattle(input);
-            battle.Run(false);
+            battle.RunOnce(false);
 
             Assert.That(battle.Outcome, Is.EqualTo(28944));
         }
@@ -117,9 +117,106 @@ namespace Tests
 ";
 
             var battle = new ChocolateBattle(input);
-            battle.Run(false);
+            battle.RunOnce(false);
 
             Assert.That(battle.Outcome, Is.EqualTo(18740));
+        }
+
+        [Test]
+        public void BattleResultsForElvesWinningWithoutLosses_Case1()
+        {
+            const string input = @"
+#######
+#.G...#
+#...EG#
+#.#.#G#
+#..G#E#
+#.....#
+#######
+";
+
+            var battle = new ChocolateBattle(input);
+            battle.RunUntilElvesWins(false);
+
+            Assert.That(battle.Outcome, Is.EqualTo(4988));
+        }
+
+        [Test]
+        public void BattleResultsForElvesWinningWithoutLosses_Case2()
+        {
+            const string input = @"
+#######
+#E..EG#
+#.#G.E#
+#E.##E#
+#G..#.#
+#..E#.#
+#######
+";
+
+            var battle = new ChocolateBattle(input);
+            battle.RunUntilElvesWins(false);
+
+            Assert.That(battle.Outcome, Is.EqualTo(31284));
+        }
+
+        [Test]
+        public void BattleResultsForElvesWinningWithoutLosses_Case3()
+        {
+            const string input = @"
+#######
+#E.G#.#
+#.#G..#
+#G.#.G#
+#G..#.#
+#...E.#
+#######
+";
+
+            var battle = new ChocolateBattle(input);
+            battle.RunUntilElvesWins(false);
+
+            Assert.That(battle.Outcome, Is.EqualTo(3478));
+        }
+
+        [Test]
+        public void BattleResultsForElvesWinningWithoutLosses_Case4()
+        {
+            const string input = @"
+#######
+#.E...#
+#.#..G#
+#.###.#
+#E#G#G#
+#...#G#
+#######
+";
+
+            var battle = new ChocolateBattle(input);
+            battle.RunUntilElvesWins(false);
+
+            Assert.That(battle.Outcome, Is.EqualTo(6474));
+        }
+
+        [Test]
+        public void BattleResultsForElvesWinningWithoutLosses_Case5()
+        {
+            const string input = @"
+#########
+#G......#
+#.E.#...#
+#..##..G#
+#...##..#
+#...#...#
+#.G...G.#
+#.....G.#
+#########
+";
+
+            var battle = new ChocolateBattle(input);
+            battle.RunUntilElvesWins(false);
+
+            Assert.That(battle.Outcome, Is.EqualTo(1140));
         }
     }
 }

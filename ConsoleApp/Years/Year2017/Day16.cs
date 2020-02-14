@@ -18,7 +18,7 @@ namespace ConsoleApp.Years.Year2017
 
             WritePartTitle();
             var dancingPrograms2 = new DancingPrograms();
-            dancingPrograms2.Dance(Input, 1_000_000);
+            dancingPrograms2.Dance(Input, 1_000_000_000);
             Console.WriteLine($"Programs after one billion dances: {dancingPrograms2.Programs}");
         }
 

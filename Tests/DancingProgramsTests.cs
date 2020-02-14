@@ -26,7 +26,7 @@ namespace Tests
             var dancingPrograms = new DancingPrograms(programs);
             dancingPrograms.Dance(input, 1_000_000_000);
 
-            Assert.That(dancingPrograms.Programs, Is.EqualTo("baedc"));
+            Assert.That(dancingPrograms.Programs, Is.EqualTo("abcde"));
         }
     }
 }

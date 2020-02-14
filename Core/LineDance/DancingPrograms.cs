@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,9 +6,15 @@ namespace Core.LineDance
 {
     public class DancingPrograms
     {
-        private readonly IDictionary<char, int> _positions;
-        
+        private IDictionary<char, int> _positions;
+        public int RepeatAfter { get; private set; }
+
         public DancingPrograms(string programs = "abcdefghijklmnop")
+        {
+            Init(programs);
+        }
+
+        private void Init(string programs)
         {
             _positions = new Dictionary<char, int>();
             var index = 0;
@@ -35,12 +42,26 @@ namespace Core.LineDance
         public void Dance(string input, int iterations)
         {
             var moves = ParseMoves(input);
-            for (var i = 0; i < iterations; i++)
+            var repeatPeriod = GetRepeatPeriod(moves);
+            for (var i = 0; i < iterations % repeatPeriod; i++)
             {
                 foreach (var move in moves)
-                {
                     move.Execute(_positions);
-                }
+            }
+        }
+
+        private int GetRepeatPeriod(IList<DanceMove> moves)
+        {
+            var i = 0;
+            var startPrograms = Programs;
+            while (true)
+            {
+                foreach (var move in moves)
+                    move.Execute(_positions);
+
+                i++;
+                if (Programs == startPrograms)
+                    return i;
             }
         }
 
@@ -107,7 +128,7 @@ namespace Core.LineDance
         {
             char? key1 = null;
             char? key2 = null;
-            foreach(var key in programs.Keys)
+            foreach (var key in programs.Keys)
             {
                 if (programs[key] == _index1)
                     key1 = key;

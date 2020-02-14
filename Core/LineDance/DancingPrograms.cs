@@ -5,47 +5,147 @@ namespace Core.LineDance
 {
     public class DancingPrograms
     {
-        private List<char> _programs;
-        public string Programs => string.Concat(_programs);
-
+        private readonly IDictionary<char, int> _positions;
+        
         public DancingPrograms(string programs = "abcdefghijklmnop")
         {
-            _programs = programs.ToList();
+            _positions = new Dictionary<char, int>();
+            var index = 0;
+            foreach (var c in programs)
+            {
+                _positions.Add(c, index);
+                index++;
+            }
         }
 
-        public void Dance(string input)
+        public string Programs
         {
-            var moves = input.Split(',');
-            foreach (var move in moves)
+            get
             {
-                var command = move.First();
-                if (command == 's')
+                var arr = new char[_positions.Count];
+                foreach (var key in _positions.Keys)
                 {
-                    var toMove = int.Parse(move.Substring(1));
-                    _programs = _programs.TakeLast(toMove).Concat(_programs.SkipLast(toMove)).ToList();
+                    arr[_positions[key]] = key;
+                }
 
-                }
-                else if (command == 'x')
+                return string.Concat(arr);
+            }
+        }
+
+        public void Dance(string input, int iterations)
+        {
+            var moves = ParseMoves(input);
+            for (var i = 0; i < iterations; i++)
+            {
+                foreach (var move in moves)
                 {
-                    var parts = move.Substring(1).Split('/');
-                    var index1 = int.Parse(parts[0]);
-                    var index2 = int.Parse(parts[1]);
-                    var val1 = _programs[index1];
-                    var val2 = _programs[index2];
-                    _programs[index1] = val2;
-                    _programs[index2] = val1;
-                }
-                else if (command == 'p')
-                {
-                    var parts = move.Substring(1).Split('/').Select(o => o.First()).ToList();
-                    var val1 = parts[0];
-                    var val2 = parts[1]; 
-                    var index1 = _programs.IndexOf(val1);
-                    var index2 = _programs.IndexOf(val2);
-                    _programs[index1] = val2;
-                    _programs[index2] = val1;
+                    move.Execute(_positions);
                 }
             }
+        }
+
+        private IList<DanceMove> ParseMoves(string input)
+        {
+            return input.Split(',').Select(ParseMove).ToList();
+        }
+
+        private DanceMove ParseMove(string s)
+        {
+            var command = s.First();
+            if (command == 's')
+                return new SpinMove(s);
+            if (command == 'x')
+                return new ExchangeMove(s);
+            if (command == 'p')
+                return new PartnerMove(s);
+            return new EmptyMove();
+        }
+    }
+
+    public abstract class DanceMove
+    {
+        public abstract void Execute(IDictionary<char, int> programs);
+    }
+
+    public class SpinMove : DanceMove
+    {
+        private readonly int _itemsToMove;
+
+        public SpinMove(string command)
+        {
+            _itemsToMove = int.Parse(command.Substring(1));
+        }
+
+        public override void Execute(IDictionary<char, int> programs)
+        {
+            var programCount = programs.Count;
+            var keys = programs.Keys.ToList();
+            foreach (var key in keys)
+            {
+                var pos = programs[key];
+                var newPos = pos + _itemsToMove;
+                if (newPos > programCount - 1)
+                    newPos -= programCount;
+                programs[key] = newPos;
+            }
+        }
+    }
+
+    public class ExchangeMove : DanceMove
+    {
+        private readonly int _index1;
+        private readonly int _index2;
+
+        public ExchangeMove(string command)
+        {
+            var parts = command.Substring(1).Split('/');
+            _index1 = int.Parse(parts[0]);
+            _index2 = int.Parse(parts[1]);
+        }
+
+        public override void Execute(IDictionary<char, int> programs)
+        {
+            char? key1 = null;
+            char? key2 = null;
+            foreach(var key in programs.Keys)
+            {
+                if (programs[key] == _index1)
+                    key1 = key;
+
+                if (programs[key] == _index2)
+                    key2 = key;
+            }
+
+            programs[key1.Value] = _index2;
+            programs[key2.Value] = _index1;
+        }
+    }
+
+    public class PartnerMove : DanceMove
+    {
+        private readonly char _val1;
+        private readonly char _val2;
+
+        public PartnerMove(string command)
+        {
+            var parts = command.Substring(1).Split('/').Select(o => o.First()).ToList();
+            _val1 = parts[0];
+            _val2 = parts[1];
+        }
+
+        public override void Execute(IDictionary<char, int> programs)
+        {
+            var index1 = programs[_val1];
+            var index2 = programs[_val2];
+            programs[_val1] = index2;
+            programs[_val2] = index1;
+        }
+    }
+
+    public class EmptyMove : DanceMove
+    {
+        public override void Execute(IDictionary<char, int> programs)
+        {
         }
     }
 }

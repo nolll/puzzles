@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using Core.Tools;
 
 namespace Core.ChronalClassification
@@ -31,13 +32,58 @@ namespace Core.ChronalClassification
             };
         }
 
+        public int RunTestProgram(string input1, string input2)
+        {
+            var operations = GetOperationsDictionary(input1);
+            var commands = PuzzleInputReader.Read(input2).Select(ParseCommand);
+            var registers = new[] {0, 0, 0, 0};
+            foreach (var command in commands)
+            {
+                var operation = operations[command[0]];
+                registers = operation.Execute(registers, command[1], command[2], command[3]);
+            }
+            return registers[0];
+        }
+
+        private IDictionary<int, Operation> GetOperationsDictionary(string input)
+        {
+            var operationMatches = MapMatchingOperations(input);
+            var operations = new Dictionary<int, Operation>();
+
+            while (operations.Count < _operations.Count)
+            {
+                var singles = operationMatches.Where(o => o.Operations.Count == 1);
+                foreach (var match in singles)
+                {
+                    if (!operations.ContainsKey(match.Opcode))
+                    {
+                        var operation = match.Operations.First();
+                        operations.Add(match.Opcode, operation);
+                        foreach (var m in operationMatches)
+                        {
+                            m.Operations.Remove(operation);
+                        }
+
+                        break;
+                    }
+                }
+            }
+
+            return operations;
+        }
+
         public int InputsMatchingThreeOrMore(string input)
         {
-            var count = 0;
+            var matchingOperations = MapMatchingOperations(input);
+            return matchingOperations.Count(o => o.Operations.Count >= 3);
+        }
+
+        private IList<OperationMatch> MapMatchingOperations(string input)
+        {
             var rows = PuzzleInputReader.Read(input.Replace(":", "").Replace("[", "").Replace("]", "").Replace(",", ""));
             var before = new int[0];
             var command = new int[0];
-            var after = new int[0];
+            var matchingOperations = new List<OperationMatch>();
             foreach (var row in rows)
             {
                 if (row.StartsWith("Before"))
@@ -46,19 +92,22 @@ namespace Core.ChronalClassification
                 }
                 else if (row.StartsWith("After"))
                 {
-                    after = row.Replace("After", "").Trim().Split(' ').Select(int.Parse).ToArray();
+                    var after = row.Replace("After", "").Trim().Split(' ').Select(int.Parse).ToArray();
                     var matches = GetMatchingOperations(before, after, command[1], command[2], command[3]);
-                    if (matches.Count >= 3)
-                        count++;
-                    continue;
+                    matchingOperations.Add(new OperationMatch(command[0], matches));
                 }
                 else if (!string.IsNullOrEmpty(row))
                 {
-                    command = row.Split(' ').Select(int.Parse).ToArray();
+                    command = ParseCommand(row);
                 }
             }
 
-            return count;
+            return matchingOperations;
+        }
+
+        private static int[] ParseCommand(string s)
+        {
+            return s.Split(' ').Select(int.Parse).ToArray();
         }
 
         public IList<Operation> GetMatchingOperations(int[] before, int[] after, int a, int b, int c)
@@ -90,6 +139,18 @@ namespace Core.ChronalClassification
             }
             return true;
 
+        }
+
+        public class OperationMatch
+        {
+            public int Opcode { get; }
+            public IList<Operation> Operations { get; }
+
+            public OperationMatch(int opcode, IList<Operation> operations)
+            {
+                Opcode = opcode;
+                Operations = operations;
+            }
         }
 
         public abstract class Operation

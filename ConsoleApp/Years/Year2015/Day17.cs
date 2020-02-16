@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Core.Eggnog;
 
 namespace ConsoleApp.Years.Year2015
@@ -13,8 +14,13 @@ namespace ConsoleApp.Years.Year2015
         {
             WritePartTitle();
             var container = new EggnogContainers(Input);
-            var combinations = container.GetCombinations(150);
-            Console.WriteLine($"Combination count: {combinations.Count}");
+            var combinations1 = container.GetCombinations(150);
+            Console.WriteLine($"Combinations: {combinations1.Count}");
+
+            WritePartTitle();
+            var combinations2 = container.GetCombinationsWithLeastContainers(150);
+            var containerCount = combinations2.First().Count;
+            Console.WriteLine($"Combinations with {containerCount} containers: {combinations2.Count}");
         }
 
         private const string Input = @"

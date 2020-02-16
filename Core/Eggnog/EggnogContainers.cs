@@ -18,5 +18,12 @@ namespace Core.Eggnog
             var combinations = CombinationGenerator.GetAllCombinations(_containers);
             return combinations.Where(o => o.Sum(c => c.Volume) == targetVolume).ToList();
         }
+
+        public IList<List<EggnogContainer>> GetCombinationsWithLeastContainers(int targetVolume)
+        {
+            var combinations = GetCombinations(targetVolume).OrderBy(o => o.Count).ToList();
+            var smallestCount = combinations.First().Count;
+            return combinations.Where(o => o.Count == smallestCount).ToList();
+        }
     }
 }

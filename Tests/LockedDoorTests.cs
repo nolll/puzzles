@@ -11,9 +11,9 @@ namespace Tests
         public void FindShortestPath(string passcode, string expectedPath)
         {
             var maze = new LockedDoorMaze();
-            var path = maze.FindShortestPath(passcode);
+            maze.FindPaths(passcode);
 
-            Assert.That(path, Is.EqualTo(expectedPath));
+            Assert.That(maze.ShortestPath, Is.EqualTo(expectedPath));
         }
     }
 }

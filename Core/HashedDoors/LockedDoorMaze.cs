@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
@@ -8,18 +9,21 @@ namespace Core.HashedDoors
     {
         private readonly Hashfactory _hashFactory;
         private readonly MatrixAddress _target;
-        
+
+        public string ShortestPath { get; private set; }
+        public string LongestPath { get; private set; }
+
         public LockedDoorMaze()
         {
             _hashFactory = new Hashfactory();
             _target = new MatrixAddress(3, 3);
         }
 
-        public string FindShortestPath(string passcode)
+        public void FindPaths(string passcode)
         {
             var finishedPaths = new List<MazeStep>();
             var openPaths = new List<MazeStep> { new MazeStep(new MatrixAddress(0, 0), "") };
-            while (openPaths.Any() && finishedPaths.Count < 50)
+            while (openPaths.Any())
             {
                 var current = openPaths.First();
                 openPaths.RemoveAt(0);
@@ -44,7 +48,8 @@ namespace Core.HashedDoors
                     openPaths.Add(new MazeStep(new MatrixAddress(x + 1, y), current.Path + 'R'));
             }
 
-            return finishedPaths.OrderBy(o => o.Path.Length).First().Path;
+            ShortestPath = finishedPaths.OrderBy(o => o.Path.Length).First().Path;
+            LongestPath = finishedPaths.OrderByDescending(o => o.Path.Length).First().Path;
         }
 
         private bool CanMoveUp(MatrixAddress currentAddress, string hash) => currentAddress.Y > 0 && CanMove(hash[0]);

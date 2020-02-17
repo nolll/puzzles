@@ -13,8 +13,12 @@ namespace ConsoleApp.Years.Year2016
         {
             WritePartTitle();
             var maze = new LockedDoorMaze();
-            var shortestPath = maze.FindShortestPath(Input);
-            Console.WriteLine($"Shortest path: {shortestPath}");
+            maze.FindPaths(Input);
+            Console.WriteLine($"Shortest path: {maze.ShortestPath}");
+
+            WritePartTitle();
+            Console.WriteLine($"Longest path length: {maze.LongestPath.Length}");
+
         }
 
         private const string Input = "yjjvjgan";

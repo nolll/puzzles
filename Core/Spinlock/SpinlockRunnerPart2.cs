@@ -20,10 +20,12 @@ namespace Core.Spinlock
             while (v <= target)
             {
                 pos += _steps;
-                pos = (pos - 1) % v;
+                while (pos > v - 1) 
+                    pos -= v;
+
                 if (pos == 0)
                     SecondValue = v;
-                Console.WriteLine($"pos {pos} == {v}. second == {SecondValue}");
+                pos++;
                 v++;
             }
         }

@@ -34,7 +34,6 @@ namespace Core.Spinlock
 
                 pos %= v;
                 _current = _list.AddAfter(_current, v);
-                Console.WriteLine($"pos {pos} == {v}. second == {_list.First.Next?.Value}");
                 v++;
             }
         }

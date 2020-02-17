@@ -1,17 +1,19 @@
+using System;
 using System.Collections.Generic;
 using Core.Tools;
 
 namespace Core.Spinlock
 {
-    public class SpinlockRunner
+    public class SpinlockRunnerPart1
     {
         private readonly int _steps;
         private readonly LinkedList<int> _list;
         private LinkedListNode<int> _current;
 
         public int NextValue => _current.Next?.Value ?? 0;
+        public int SecondValue => _list.First.Next?.Value ?? 0;
 
-        public SpinlockRunner(int steps)
+        public SpinlockRunnerPart1(int steps)
         {
             _steps = steps;
             _list = new LinkedList<int>();
@@ -21,13 +23,18 @@ namespace Core.Spinlock
         public void Run(int target)
         {
             var v = 1;
+            var pos = 0;
             while (v <= target)
             {
                 for (var i = 0; i < _steps; i++)
                 {
                     _current = _current.NextOrFirst();
+                    pos++;
                 }
+
+                pos %= v;
                 _current = _list.AddAfter(_current, v);
+                Console.WriteLine($"pos {pos} == {v}. second == {_list.First.Next?.Value}");
                 v++;
             }
         }

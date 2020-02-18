@@ -7,8 +7,6 @@ namespace Core.ReservoirResearch
     public class ReservoirFiller
     {
         private Matrix<char> _matrix;
-        private int _xMin = int.MaxValue;
-        private int _xMax = int.MinValue;
         private int _yMin = int.MaxValue;
         private int _yMax = int.MinValue;
         private readonly MatrixAddress _source = new MatrixAddress(500, 0);
@@ -27,6 +25,66 @@ namespace Core.ReservoirResearch
         public ReservoirFiller(string input)
         {
             BuildMatrix(input);
+        }
+
+        public void Fill()
+        {
+            _openAddresses = new List<MatrixAddress> { new MatrixAddress(_source.X, _source.Y) };
+            while (_openAddresses.Any())
+            {
+                var current = _openAddresses.First();
+                _matrix.MoveTo(current);
+                var valueBelow = _matrix.ReadValueAt(_matrix.Address.X, _matrix.Address.Y + 1);
+                if (valueBelow == WallTile || valueBelow == RestingWaterTile)
+                {
+                    _openAddresses.RemoveAt(0);
+                    AddToOpenAddresses(new MatrixAddress(_matrix.Address.X, _matrix.Address.Y - 1));
+                    continue;
+                }
+
+                while (true)
+                {
+                    _matrix.MoveDown();
+                    if (IsAtBottom)
+                    {
+                        _openAddresses.RemoveAt(0);
+                        break;
+                    }
+                    
+                    var value = _matrix.ReadValue();
+                    if (value == WallTile || value == RestingWaterTile)
+                    {
+                        _matrix.MoveUp();
+                        var canFlowRight = TryFlowRight();
+                        var canFlowLeft = TryFlowLeft();
+                        var isBlockedRight = !canFlowRight;
+                        var isBlockedLeft = !canFlowLeft;
+                        
+                        if (isBlockedLeft && isBlockedRight)
+                        {
+                            while (true)
+                            {
+                                _matrix.MoveRight();
+                                if (_matrix.ReadValue() == WallTile)
+                                    break;
+
+                                _matrix.WriteValue(RestingWaterTile);
+                            }
+
+                            break;
+                        }
+
+                        _openAddresses.RemoveAt(0);
+                        break;
+                    }
+
+                    if (value == EmptyTile || value == RunningWaterTile)
+                    {
+                        if(value == EmptyTile)
+                            _matrix.WriteValue(RunningWaterTile);
+                    }
+                }
+            }
         }
 
         private void BuildMatrix(string input)
@@ -70,15 +128,11 @@ namespace Core.ReservoirResearch
         {
             _matrix.MoveTo(x, y);
             _matrix.WriteValue(WallTile);
-            SetMinAndMax(x, y);
+            SetMinAndMax(y);
         }
 
-        private void SetMinAndMax(in int x, in int y)
+        private void SetMinAndMax(in int y)
         {
-            if (x < _xMin)
-                _xMin = x;
-            if (x > _xMax)
-                _xMax = x;
             if (y < _yMin)
                 _yMin = y;
             if (y > _yMax)
@@ -91,105 +145,54 @@ namespace Core.ReservoirResearch
                 _openAddresses.Add(address);
         }
 
-        public void Fill()
+        private bool TryFlowRight()
         {
-            _openAddresses = new List<MatrixAddress> { new MatrixAddress(_source.X, _source.Y) };
-            while (_openAddresses.Any())
+            while (true)
             {
-                var current = _openAddresses.First();
-                _matrix.MoveTo(current);
-                var valueBelow = _matrix.ReadValueAt(_matrix.Address.X, _matrix.Address.Y + 1);
-                if (valueBelow == WallTile || valueBelow == RestingWaterTile)
+                _matrix.MoveRight();
+                var value = _matrix.ReadValue();
+                if (value == EmptyTile || value == RunningWaterTile)
                 {
-                    _openAddresses.RemoveAt(0);
-                    AddToOpenAddresses(new MatrixAddress(_matrix.Address.X, _matrix.Address.Y - 1));
-                    continue;
+                    if (value == EmptyTile)
+                        _matrix.WriteValue(RunningWaterTile);
+                    var valueBelow = _matrix.ReadValueAt(_matrix.Address.X, _matrix.Address.Y + 1);
+                    if (valueBelow == EmptyTile || valueBelow == RunningWaterTile)
+                    {
+                        AddToOpenAddresses(_matrix.Address);
+                        return true;
+                    }
                 }
-
-                while (true)
+                else if (value == WallTile)
                 {
-                    _matrix.MoveDown();
-                    if (_matrix.Address.Y > _yMax)
-                    {
-                        _openAddresses.RemoveAt(0);
-                        break;
-                    }
-                    
-                    var value = _matrix.ReadValue();
-                    if (value == WallTile || value == RestingWaterTile)
-                    {
-                        _matrix.MoveUp();
-                        var isBlockedRight = false;
-                        var isBlockedLeft = false;
-                        while (true)
-                        {
-                            _matrix.MoveRight();
-                            value = _matrix.ReadValue();
-                            if (value == EmptyTile || value == RunningWaterTile)
-                            {
-                                if(value == EmptyTile)
-                                    _matrix.WriteValue(RunningWaterTile);
-                                valueBelow = _matrix.ReadValueAt(_matrix.Address.X, _matrix.Address.Y + 1);
-                                if (valueBelow == EmptyTile || valueBelow == RunningWaterTile)
-                                {
-                                    AddToOpenAddresses(_matrix.Address);
-                                    break;
-                                }
-                            }
-                            else if (value == WallTile)
-                            {
-                                isBlockedRight = true;
-                                break;
-                            }
-                        }
-
-                        var possiblyBlocked = new List<MatrixAddress>();
-                        while (true)
-                        {
-                            _matrix.MoveLeft();
-                            value = _matrix.ReadValue();
-                            if (value == EmptyTile || value == RunningWaterTile)
-                            {
-                                possiblyBlocked.Add(_matrix.Address);
-                                if(value == EmptyTile)
-                                    _matrix.WriteValue(RunningWaterTile);
-                                valueBelow = _matrix.ReadValueAt(_matrix.Address.X, _matrix.Address.Y + 1);
-                                if (valueBelow == EmptyTile || valueBelow == RunningWaterTile)
-                                {
-                                    AddToOpenAddresses(_matrix.Address);
-                                    break;
-                                }
-                            }
-                            else if (value == WallTile)
-                            {
-                                _matrix.MoveRight();
-                                isBlockedLeft = true;
-                                break;
-                            }
-                        }
-
-                        if (isBlockedLeft && isBlockedRight)
-                        {
-                            foreach (var address in possiblyBlocked)
-                            {
-                                _matrix.MoveTo(address);
-                                _matrix.WriteValue(RestingWaterTile);
-                            }
-
-                            break;
-                        }
-
-                        _openAddresses.RemoveAt(0);
-                        break;
-                    }
-
-                    if (value == EmptyTile || value == RunningWaterTile)
-                    {
-                        if(value == EmptyTile)
-                            _matrix.WriteValue(RunningWaterTile);
-                    }
+                    return false;
                 }
             }
         }
+
+        private bool TryFlowLeft()
+        {
+            while (true)
+            {
+                _matrix.MoveLeft();
+                var value = _matrix.ReadValue();
+                if (value == EmptyTile || value == RunningWaterTile)
+                {
+                    if (value == EmptyTile)
+                        _matrix.WriteValue(RunningWaterTile);
+                    var valueBelow = _matrix.ReadValueAt(_matrix.Address.X, _matrix.Address.Y + 1);
+                    if (valueBelow == EmptyTile || valueBelow == RunningWaterTile)
+                    {
+                        AddToOpenAddresses(_matrix.Address);
+                        return true;
+                    }
+                }
+                else if (value == WallTile)
+                {
+                    return false;
+                }
+            }
+        }
+
+        private bool IsAtBottom => _matrix.Address.Y > _yMax;
     }
 }

@@ -21,7 +21,8 @@ y=13, x=498..504";
             var filler = new ReservoirFiller(input);
             filler.Fill();
 
-            Assert.That(filler.WaterTileCount, Is.EqualTo(57));
+            Assert.That(filler.TotalWaterTileCount, Is.EqualTo(57));
+            Assert.That(filler.RetainedWaterTileCount, Is.EqualTo(29));
         }
     }
 }

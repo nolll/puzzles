@@ -20,7 +20,8 @@ namespace Core.ReservoirResearch
         private const char RunningWaterTile = '|';
         private const char RestingWaterTile = '~';
 
-        public int WaterTileCount => _matrix.Values.Count(o => o == RestingWaterTile || o == RunningWaterTile) - DistanceFromSourceToMinY;
+        public int TotalWaterTileCount => _matrix.Values.Count(o => o == RestingWaterTile || o == RunningWaterTile) - DistanceFromSourceToMinY;
+        public int RetainedWaterTileCount => _matrix.Values.Count(o => o == RestingWaterTile);
         private int DistanceFromSourceToMinY => _yMin - _source.Y - 1;
 
         public ReservoirFiller(string input)

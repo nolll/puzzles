@@ -14,7 +14,10 @@ namespace ConsoleApp.Years.Year2018
             WritePartTitle();
             var filler = new ReservoirFiller(Input);
             filler.Fill();
-            Console.WriteLine($"Water tile count: {filler.WaterTileCount}");
+            Console.WriteLine($"Total water tile count: {filler.TotalWaterTileCount}");
+
+            WritePartTitle();
+            Console.WriteLine($"Retained water tile count: {filler.RetainedWaterTileCount}");
         }
 
         private const string Input = @"

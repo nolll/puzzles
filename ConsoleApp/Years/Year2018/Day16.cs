@@ -1,6 +1,5 @@
 ﻿using System;
 using Core.ChronalClassification;
-using Core.Computer.Instructions;
 
 namespace ConsoleApp.Years.Year2018
 {

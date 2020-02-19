@@ -7,7 +7,58 @@ namespace Tests
     public class AnimatedGifTests
     {
         [Test]
-        public void FourLightsAfterFourSteps()
+        public void LightCountAfterOneStep()
+        {
+            const string input = @"
+.#.#.#
+...##.
+#....#
+..#...
+#.#..#
+####..";
+
+            var gif = new AnimatedGif(input);
+            gif.RunAnimation(1);
+
+            Assert.That(gif.LightCount, Is.EqualTo(11));
+        }
+
+        [Test]
+        public void LightCountAfterTwoSteps()
+        {
+            const string input = @"
+.#.#.#
+...##.
+#....#
+..#...
+#.#..#
+####..";
+
+            var gif = new AnimatedGif(input);
+            gif.RunAnimation(2);
+
+            Assert.That(gif.LightCount, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void LightCountAfterThreeSteps()
+        {
+            const string input = @"
+.#.#.#
+...##.
+#....#
+..#...
+#.#..#
+####..";
+
+            var gif = new AnimatedGif(input);
+            gif.RunAnimation(3);
+
+            Assert.That(gif.LightCount, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void LightCountAfterFourSteps()
         {
             const string input = @"
 .#.#.#
@@ -38,14 +89,17 @@ namespace Tests
         public void RunAnimation(in int steps)
         {
             var newMatrix = new Matrix<char>();
-            for (var y = 0; y < _matrix.Height; y++)
+            for (var i = 0; i < steps; i++)
             {
-                for (var x = 0; x < _matrix.Width; x++)
+                for (var y = 0; y < _matrix.Height; y++)
                 {
-                    _matrix.MoveTo(x, y);
-                    newMatrix.MoveTo(x, y);
-                    var adjacentValues = _matrix.Adjacent8;
-                    newMatrix.WriteValue(GetNewState(_matrix.ReadValue(), adjacentValues.Count(o => o == '#')));
+                    for (var x = 0; x < _matrix.Width; x++)
+                    {
+                        _matrix.MoveTo(x, y);
+                        newMatrix.MoveTo(x, y);
+                        var adjacentValues = _matrix.Adjacent8;
+                        newMatrix.WriteValue(GetNewState(_matrix.ReadValue(), adjacentValues.Count(o => o == '#')));
+                    }
                 }
 
                 _matrix = newMatrix;
@@ -56,14 +110,14 @@ namespace Tests
         {
             if (value == '#')
             {
-                if (adjacentOnCount == 2 || adjacentOnCount == 3)
-                    return '#';
-                return '.';
+                return adjacentOnCount == 2 || adjacentOnCount == 3 
+                    ? '#' 
+                    : '.';
             }
 
-            if (adjacentOnCount == 3)
-                return '#';
-            return '.';
+            return adjacentOnCount == 3 
+                ? '#' 
+                : '.';
         }
     }
 }

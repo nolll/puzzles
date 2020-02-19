@@ -1,15 +1,11 @@
-using System.Linq;
-using Core.Tools;
+using Core.AnimatedLights;
 using NUnit.Framework;
 
 namespace Tests
 {
     public class AnimatedGifTests
     {
-        [Test]
-        public void LightCountAfterOneStep()
-        {
-            const string input = @"
+        private const string Input = @"
 .#.#.#
 ...##.
 #....#
@@ -17,7 +13,10 @@ namespace Tests
 #.#..#
 ####..";
 
-            var gif = new AnimatedGif(input);
+        [Test]
+        public void LightCountAfterOneStep()
+        {
+            var gif = new AnimatedGif(Input);
             gif.RunAnimation(1);
 
             Assert.That(gif.LightCount, Is.EqualTo(11));
@@ -26,15 +25,7 @@ namespace Tests
         [Test]
         public void LightCountAfterTwoSteps()
         {
-            const string input = @"
-.#.#.#
-...##.
-#....#
-..#...
-#.#..#
-####..";
-
-            var gif = new AnimatedGif(input);
+            var gif = new AnimatedGif(Input);
             gif.RunAnimation(2);
 
             Assert.That(gif.LightCount, Is.EqualTo(8));
@@ -43,15 +34,7 @@ namespace Tests
         [Test]
         public void LightCountAfterThreeSteps()
         {
-            const string input = @"
-.#.#.#
-...##.
-#....#
-..#...
-#.#..#
-####..";
-
-            var gif = new AnimatedGif(input);
+            var gif = new AnimatedGif(Input);
             gif.RunAnimation(3);
 
             Assert.That(gif.LightCount, Is.EqualTo(4));
@@ -60,64 +43,55 @@ namespace Tests
         [Test]
         public void LightCountAfterFourSteps()
         {
-            const string input = @"
-.#.#.#
-...##.
-#....#
-..#...
-#.#..#
-####..";
-
-            var gif = new AnimatedGif(input);
+            var gif = new AnimatedGif(Input);
             gif.RunAnimation(4);
 
             Assert.That(gif.LightCount, Is.EqualTo(4));
         }
-    }
 
-    public class AnimatedGif
-    {
-        private Matrix<char> _matrix;
-
-        public int LightCount => _matrix.Values.Count(o => o == '#');
-
-        public AnimatedGif(in string input)
+        [Test]
+        public void LightCountAfterOneStepWithLitCorners()
         {
-            _matrix = MatrixBuilder.BuildCharMatrix(input);
+            var gif = new AnimatedGif(Input, true);
+            gif.RunAnimation(1);
+
+            Assert.That(gif.LightCount, Is.EqualTo(18));
         }
 
-        public void RunAnimation(in int steps)
+        [Test]
+        public void LightCountAfterTwoStepsWithLitCorners()
         {
-            var newMatrix = new Matrix<char>();
-            for (var i = 0; i < steps; i++)
-            {
-                for (var y = 0; y < _matrix.Height; y++)
-                {
-                    for (var x = 0; x < _matrix.Width; x++)
-                    {
-                        _matrix.MoveTo(x, y);
-                        newMatrix.MoveTo(x, y);
-                        var adjacentValues = _matrix.Adjacent8;
-                        newMatrix.WriteValue(GetNewState(_matrix.ReadValue(), adjacentValues.Count(o => o == '#')));
-                    }
-                }
+            var gif = new AnimatedGif(Input, true);
+            gif.RunAnimation(2);
 
-                _matrix = newMatrix;
-            }
+            Assert.That(gif.LightCount, Is.EqualTo(18));
         }
 
-        private char GetNewState(in char value, in int adjacentOnCount)
+        [Test]
+        public void LightCountAfterThreeStepsWithLitCorners()
         {
-            if (value == '#')
-            {
-                return adjacentOnCount == 2 || adjacentOnCount == 3 
-                    ? '#' 
-                    : '.';
-            }
+            var gif = new AnimatedGif(Input, true);
+            gif.RunAnimation(3);
 
-            return adjacentOnCount == 3 
-                ? '#' 
-                : '.';
+            Assert.That(gif.LightCount, Is.EqualTo(18));
+        }
+
+        [Test]
+        public void LightCountAfterFourStepsWithLitCorners()
+        {
+            var gif = new AnimatedGif(Input, true);
+            gif.RunAnimation(4);
+
+            Assert.That(gif.LightCount, Is.EqualTo(14));
+        }
+
+        [Test]
+        public void LightCountAfterFiveStepsWithLitCorners()
+        {
+            var gif = new AnimatedGif(Input, true);
+            gif.RunAnimation(5);
+
+            Assert.That(gif.LightCount, Is.EqualTo(17));
         }
     }
 }

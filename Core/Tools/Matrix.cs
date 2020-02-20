@@ -15,6 +15,10 @@ namespace Core.Tools
         public IList<T> Values => _matrix.SelectMany(x => x).ToList();
         public int Height => _matrix.Count;
         public int Width => _matrix.Any() ? _matrix[0].Count : 0;
+        public bool IsAtTop => Address.Y == 0;
+        public bool IsAtRightEdge => Address.X == Width - 1;
+        public bool IsAtBottom => Address.Y == Height - 1;
+        public bool IsAtLeftEdge => Address.X == 0;
 
         public Matrix(int width = 1, int height = 1, T defaultValue = default)
         {

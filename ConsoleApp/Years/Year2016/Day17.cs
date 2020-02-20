@@ -18,7 +18,6 @@ namespace ConsoleApp.Years.Year2016
 
             WritePartTitle();
             Console.WriteLine($"Longest path length: {maze.LongestPath.Length}");
-
         }
 
         private const string Input = "yjjvjgan";

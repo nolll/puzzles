@@ -12,9 +12,14 @@ namespace ConsoleApp.Years.Year2017
         protected override void RunDay()
         {
             WritePartTitle();
-            var duet = new DuetFrequencies(Input);
-            var frequency = duet.FindFrequency();
-            Console.WriteLine($"Recovered frequenct: {frequency}");
+            var single = new SingleRunner(Input);
+            single.Run();
+            Console.WriteLine($"Recovered frequency: {single.RecoveredFrequency}");
+
+            WritePartTitle();
+            var duet = new DuetRunner(Input);
+            duet.Run();
+            Console.WriteLine($"Program 1 send count: {duet.Program1SendCount}");
         }
 
         private const string Input = @"

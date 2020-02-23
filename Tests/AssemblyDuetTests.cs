@@ -6,7 +6,7 @@ namespace Tests
     public class AssemblyDuetTests
     {
         [Test]
-        public void CorrectFrequencyIsPlayed()
+        public void SingleRunnerFindsFrequency()
         {
             const string input = @"
 set a 1
@@ -19,10 +19,27 @@ rcv a
 jgz a -1
 set a 1
 jgz a -2";
-            var duet = new DuetFrequencies(input);
-            var frequency = duet.FindFrequency();
+            var single = new SingleRunner(input);
+            single.Run();
 
-            Assert.That(frequency, Is.EqualTo(4));
+            Assert.That(single.RecoveredFrequency, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void DuetRunnerSendCountIsCorrect()
+        {
+            const string input = @"
+snd 1
+snd 2
+snd p
+rcv a
+rcv b
+rcv c
+rcv d";
+            var duet = new DuetRunner(input);
+            duet.Run();
+
+            Assert.That(duet.Program1SendCount, Is.EqualTo(3));
         }
     }
 }

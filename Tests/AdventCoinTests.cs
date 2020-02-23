@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Core.AdventCoins;
 using NUnit.Framework;
 

@@ -15,6 +15,11 @@ namespace ConsoleApp.Years.Year2018
             var collection = new LumberCollection(Input);
             collection.Run(10);
             Console.WriteLine($"Resource value after 10 minutes: {collection.ResourceValue}");
+
+            WritePartTitle();
+            var collection2 = new LumberCollection(Input);
+            collection2.Run(1_000_000_000);
+            Console.WriteLine($"Resource value after 1 billion minutes: {collection2.ResourceValue}");
         }
 
         private const string Input = @"

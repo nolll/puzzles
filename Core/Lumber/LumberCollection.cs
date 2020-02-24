@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
 
@@ -21,9 +22,30 @@ namespace Core.Lumber
 
         public void Run(int minutes)
         {
+            var foundPeriod = false;
+            var earlierLayouts = new List<string> {_matrix.Print()};
             for (var i = 0; i < minutes; i++)
             {
                 _matrix = GetNextIteration();
+
+                if (!foundPeriod)
+                {
+                    var print = _matrix.Print();
+                    var earlierIndex = earlierLayouts.IndexOf(print);
+                    if (earlierIndex != -1)
+                    {
+                        foundPeriod = true;
+                        var period = i - earlierIndex + 1;
+                        while (i < minutes)
+                        {
+                            i += period;
+                        }
+
+                        i -= period;
+                    }
+
+                    earlierLayouts.Add(print);
+                }
             }
         }
 

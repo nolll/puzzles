@@ -8,7 +8,7 @@ namespace Tests
     public class UndergroundVaultTests
     {
         [Test]
-        public void ShortestPathIsFound()
+        public void ShortestPathIsFound1()
         {
             const string input = @"
 #########
@@ -42,7 +42,8 @@ namespace Tests
             var stepCount = 0;
             while (_keys.Any())
             {
-                var paths = _keys.Values.Select(o => PathFinder.ShortestPathTo(_matrix, new MatrixAddress(_matrix.Address.X, _matrix.Address.Y), o.Address));
+                var currentAddress = new MatrixAddress(_matrix.Address.X, _matrix.Address.Y);
+                var paths = _keys.Values.Select(o => PathFinder.ShortestPathTo(_matrix, currentAddress, o.Address));
                 var shortestPath = paths.Where(o => o.Any()).OrderBy(o => o.Count).First();
                 foreach(var address in shortestPath)
                 {
@@ -51,14 +52,18 @@ namespace Tests
                 }
 
                 var keyAddress = _matrix.Address;
-                var keyId = _matrix.ReadValue();
+                var key = _keys.Values.First(o => o.Address.X == keyAddress.X && o.Address.Y == keyAddress.Y);
+                var keyId = key.Id;
                 _matrix.WriteValue('.');
                 _keys.Remove(keyId);
                 var doorId = char.ToUpper(keyId);
-                _matrix.MoveTo(_doors[doorId].Address);
-                _doors.Remove(doorId);
-                _matrix.WriteValue('.');
-                _matrix.MoveTo(keyAddress);
+                if (_doors.ContainsKey(doorId))
+                {
+                    _matrix.MoveTo(_doors[doorId].Address);
+                    _doors.Remove(doorId);
+                    _matrix.WriteValue('.');
+                    _matrix.MoveTo(keyAddress);
+                }
             }
 
             ShortestPath = stepCount;

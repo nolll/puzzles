@@ -33,7 +33,8 @@ namespace Core.UndergroundVault
                 var path = PathFinder.ShortestPathTo(matrix, currentAddress, key.Address);
                 if (path.Any())
                 {
-                    var stepCount = FollowPath(matrix.Copy(), path, keys, doors);
+                    var newMatrix = matrix.Copy();
+                    var stepCount = FollowPath(newMatrix, path, keys, doors);
                     stepCounts.Add(stepCount);
                 }
             }

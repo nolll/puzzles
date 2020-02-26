@@ -346,6 +346,21 @@ namespace Core.Tools
             }
         }
 
+        public Matrix<T> Copy()
+        {
+            var matrix = new Matrix<T>();
+            for (var y = 0; y < Height; y++)
+            {
+                for (var x = 0; x < Width; x++)
+                {
+                    matrix.MoveTo(x, y);
+                    matrix.WriteValue(ReadValueAt(x, y));
+                }
+            }
+
+            return matrix;
+        }
+
         private IList<IList<T>> BuildMatrix(int width, int height, T defaultValue)
         {
             var matrix = new List<IList<T>>();

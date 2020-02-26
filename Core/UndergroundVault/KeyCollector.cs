@@ -6,8 +6,8 @@ namespace Core.UndergroundVault
 {
     public class KeyCollector
     {
-        private IDictionary<char, VaultKey> _keys;
-        private IDictionary<char, VaultDoor> _doors;
+        private IList<VaultKey> _keys;
+        private IList<VaultDoor> _doors;
         private Matrix<char> _matrix;
         private MatrixAddress _startAddress;
         public int ShortestPath { get; private set; }
@@ -21,41 +21,61 @@ namespace Core.UndergroundVault
         {
             _matrix.MoveTo(_startAddress);
             _matrix.WriteValue('.');
-            var stepCount = 0;
-            while (_keys.Any())
+            ShortestPath = FindShortestPathFrom(_matrix, _keys, _doors);
+        }
+
+        private static int FindShortestPathFrom(Matrix<char> matrix, IList<VaultKey> keys, IList<VaultDoor> doors)
+        {
+            var stepCounts = new List<int>();
+            var currentAddress = new MatrixAddress(matrix.Address.X, matrix.Address.Y);
+            foreach (var key in keys)
             {
-                var currentAddress = new MatrixAddress(_matrix.Address.X, _matrix.Address.Y);
-                var paths = _keys.Values.Select(o => PathFinder.ShortestPathTo(_matrix, currentAddress, o.Address));
-
-                var shortestPath = paths.Where(o => o.Any()).OrderBy(o => o.Count).First();
-                foreach(var address in shortestPath)
+                var path = PathFinder.ShortestPathTo(matrix, currentAddress, key.Address);
+                if (path.Any())
                 {
-                    _matrix.MoveTo(address);
-                    stepCount++;
-                }
-
-                var keyAddress = _matrix.Address;
-                var key = _keys.Values.First(o => o.Address.X == keyAddress.X && o.Address.Y == keyAddress.Y);
-                var keyId = key.Id;
-                _matrix.WriteValue('.');
-                _keys.Remove(keyId);
-                var doorId = char.ToUpper(keyId);
-                if (_doors.ContainsKey(doorId))
-                {
-                    _matrix.MoveTo(_doors[doorId].Address);
-                    _doors.Remove(doorId);
-                    _matrix.WriteValue('.');
-                    _matrix.MoveTo(keyAddress);
+                    var stepCount = FollowPath(matrix.Copy(), path, keys.Where(o => o.Id != key.Id).ToList(), doors);
+                    stepCounts.Add(stepCount);
                 }
             }
 
-            ShortestPath = stepCount;
+            return stepCounts.Min();
+        }
+
+        private static int FollowPath(Matrix<char> matrix, IList<MatrixAddress> path, IList<VaultKey> keys, IList<VaultDoor> doors)
+        {
+            var stepCount = 0;
+            foreach (var address in path)
+            {
+                matrix.MoveTo(address);
+                stepCount++;
+            }
+
+            var keyAddress = matrix.Address;
+            var key = keys.First(o => o.Address.X == keyAddress.X && o.Address.Y == keyAddress.Y);
+            var keyId = key.Id;
+            matrix.WriteValue('.');
+            var newKeys = keys.Where(o => o.Id != keyId).ToList();
+            var doorId = char.ToUpper(keyId);
+            if (doors.Any(o => o.Id == doorId))
+            {
+                matrix.MoveTo(doors.First(o => o.Id == doorId).Address);
+                matrix.WriteValue('.');
+                matrix.MoveTo(keyAddress);
+            }
+
+            if (newKeys.Any())
+            {
+                var newDoors = doors.Where(o => o.Id != doorId).ToList();
+                stepCount += FindShortestPathFrom(matrix.Copy(), newKeys, newDoors);
+            }
+
+            return stepCount;
         }
 
         private void Init(string input)
         {
-            _keys = new Dictionary<char, VaultKey>();
-            _doors = new Dictionary<char, VaultDoor>();
+            _keys = new List<VaultKey>();
+            _doors = new List<VaultDoor>();
             _matrix = new Matrix<char>();
             var rows = input.Trim().Split('\n');
             var y = 0;
@@ -71,12 +91,12 @@ namespace Core.UndergroundVault
 
                     if (char.IsLower(c))
                     {
-                        _keys.Add(c, new VaultKey(c, address));
+                        _keys.Add(new VaultKey(c, address));
                         charToWrite = '.';
                     }
                     else if (char.IsUpper(c))
                     {
-                        _doors.Add(c, new VaultDoor(c, address));
+                        _doors.Add(new VaultDoor(c, address));
                     } 
                     else if (c == '@')
                     {

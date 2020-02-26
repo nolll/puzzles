@@ -358,6 +358,7 @@ namespace Core.Tools
                 }
             }
 
+            matrix.MoveTo(Address);
             return matrix;
         }
 

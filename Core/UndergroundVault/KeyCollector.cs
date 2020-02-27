@@ -10,10 +10,13 @@ namespace Core.UndergroundVault
         private IList<VaultDoor> _doors;
         private Matrix<char> _matrix;
         private MatrixAddress _startAddress;
+        private int _iterations;
+        
         public int ShortestPath { get; private set; }
         
         public KeyCollector(string input)
         {
+            _iterations = 0;
             Init(input);
         }
 
@@ -24,8 +27,9 @@ namespace Core.UndergroundVault
             ShortestPath = FindShortestPathFrom(_matrix, _keys, _doors);
         }
 
-        private static int FindShortestPathFrom(Matrix<char> matrix, IList<VaultKey> keys, IList<VaultDoor> doors)
+        private int FindShortestPathFrom(Matrix<char> matrix, IList<VaultKey> keys, IList<VaultDoor> doors)
         {
+            _iterations++;
             var stepCounts = new List<int>();
             var currentAddress = new MatrixAddress(matrix.Address.X, matrix.Address.Y);
             foreach (var key in keys)
@@ -42,7 +46,7 @@ namespace Core.UndergroundVault
             return stepCounts.Any() ? stepCounts.Min() : 0;
         }
 
-        private static int FollowPath(Matrix<char> matrix, IList<MatrixAddress> path, IList<VaultKey> keys, IList<VaultDoor> doors)
+        private int FollowPath(Matrix<char> matrix, IList<MatrixAddress> path, IList<VaultKey> keys, IList<VaultDoor> doors)
         {
             var stepCount = 0;
             foreach (var address in path)

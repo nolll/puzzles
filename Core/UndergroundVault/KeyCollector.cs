@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using Core.Tools;
 
 namespace Core.UndergroundVault
@@ -13,8 +10,8 @@ namespace Core.UndergroundVault
         private IList<VaultDoor> _doors;
         private Matrix<char> _matrix;
         private MatrixAddress _startAddress;
-        private readonly IDictionary<string, int> _distanceCache;
         private readonly IDictionary<(char, char), VaultPath> _paths;
+        private readonly IDictionary<string, int> _cache;
         private int _iterations;
 
         public int ShortestPath { get; private set; }
@@ -22,16 +19,14 @@ namespace Core.UndergroundVault
         public KeyCollector(string input)
         {
             _iterations = 0;
-            _distanceCache = new Dictionary<string, int>();
             _paths = new Dictionary<(char, char), VaultPath>();
+            _cache = new Dictionary<string, int>();
             Init(input);
             MapPaths();
         }
 
         public void Run()
         {
-            _matrix.MoveTo(_startAddress);
-            _matrix.WriteValue('.');
             ShortestPath = FindShortestPath();
         }
 
@@ -56,6 +51,7 @@ namespace Core.UndergroundVault
             var stepCounts = new List<int>();
             var pathsToFollow = new List<VaultPath>();
             var remainingKeys = GetRemainingKeys(collectedKeys);
+            var isAllPathsOpen = true;
             foreach (var key in remainingKeys)
             {
                 if (key.Id != currentKey.Id)
@@ -65,7 +61,16 @@ namespace Core.UndergroundVault
                     {
                         pathsToFollow.Add(path);
                     }
+                    else
+                    {
+                        isAllPathsOpen = false;
+                    }
                 }
+            }
+
+            if (isAllPathsOpen)
+            {
+                pathsToFollow = pathsToFollow.OrderBy(o => o.StepCount).Take(1).ToList();
             }
             
             foreach (var path in pathsToFollow)
@@ -87,29 +92,24 @@ namespace Core.UndergroundVault
             var stepCount = path.StepCount;
             var newCollectedKeys = new List<VaultKey>{path.Target};
             newCollectedKeys.AddRange(collectedKeys);
-            if(newCollectedKeys.Count < _keys.Count) { 
-                stepCount += FindShortestPathFrom(path.Target, newCollectedKeys, depth + 1);
+            if(newCollectedKeys.Count < _keys.Count)
+            {
+                var cacheKey = GetCacheKey(path.Target.Id, collectedKeys);
+                if (!_cache.TryGetValue(cacheKey, out var cachedStepCount))
+                {
+                    cachedStepCount = FindShortestPathFrom(path.Target, newCollectedKeys, depth + 1);
+                    _cache.Add(cacheKey, cachedStepCount);
+                }
+
+                stepCount += cachedStepCount;
             }
             return stepCount;
         }
 
-        private int? GetDistanceFromCache(int x1, int y1, int x2, int y2)
+        private string GetCacheKey(char key, IList<VaultKey> collectedKeys)
         {
-            var key = GetCacheKey(x1, y1, x2, y2);
-            if (_distanceCache.TryGetValue(key, out var distance))
-                return distance;
-            return null;
-        }
-
-        private void AddToDistanceCache(int x1, int y1, int x2, int y2, int value)
-        {
-            var key = GetCacheKey(x1, y1, x2, y2);
-            _distanceCache.Add(key, value);
-        }
-
-        private string GetCacheKey(int x1, int y1, int x2, int y2)
-        {
-            return $"{x1}-{y1}-{x2}-{y2}";
+            var joinedKeys = string.Join('-', collectedKeys.OrderBy(o => o.Id).Select(o => o.Id));
+            return $"{key}.{joinedKeys}";
         }
 
         private void Init(string input)
@@ -198,22 +198,21 @@ namespace Core.UndergroundVault
 
     public class VaultPath
     {
-        public IList<MatrixAddress> Coords { get; }
+        private readonly IList<char> _keysNeeded;
+        
         public int StepCount { get; }
-        public IList<char> KeysNeeded { get; }
         public VaultKey Target { get; }
 
         public VaultPath(VaultKey target, IList<MatrixAddress> coords, IList<char> keysNeeded)
         {
             Target = target;
-            Coords = coords;
             StepCount = coords.Count;
-            KeysNeeded = keysNeeded;
+            _keysNeeded = keysNeeded;
         }
 
         public bool IsOpen(IList<VaultKey> collectedKeys)
         {
-            return KeysNeeded.All(key => collectedKeys.Any(o => o.Id == key));
+            return _keysNeeded.All(key => collectedKeys.Any(o => o.Id == key));
         }
     }
 }

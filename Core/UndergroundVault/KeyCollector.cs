@@ -32,55 +32,64 @@ namespace Core.UndergroundVault
         {
             _matrix.MoveTo(_startAddress);
             _matrix.WriteValue('.');
-            ShortestPath = FindShortestPathFrom(_matrix, _keys, _doors, 1);
+            ShortestPath = FindShortestPath();
         }
 
-        private int FindShortestPathFrom(Matrix<char> matrix, IList<VaultKey> keys, IList<VaultDoor> doors, int depth)
+        private int FindShortestPath()
         {
-            _iterations++;
+            var startPaths = GetStartPaths();
             var stepCounts = new List<int>();
-            var currentAddress = new MatrixAddress(matrix.Address.X, matrix.Address.Y);
-            var paths = keys
-                .Select(o => PathFinder.ShortestPathTo(matrix, currentAddress, o.Address))
-                .Where(o => o.Any());
-
-            if (!doors.Any())
+            var collectedKeys = new List<VaultKey>();
+            
+            foreach (var path in startPaths)
             {
-                paths = paths.OrderBy(o => o.Count).Take(1);
-            }
-            foreach (var path in paths)
-            {
-                var newMatrix = matrix.Copy();
-                var stepCount = FollowPath(newMatrix, path, keys, doors, depth);
+                var stepCount = FollowPath(path, collectedKeys, 1);
                 stepCounts.Add(stepCount);
             }
 
             return stepCounts.Any() ? stepCounts.Min() : 0;
         }
 
-        private int FollowPath(Matrix<char> matrix, IList<MatrixAddress> path, IList<VaultKey> keys, IList<VaultDoor> doors, int depth)
+        private int FindShortestPathFrom(VaultKey currentKey, IList<VaultKey> collectedKeys, int depth)
         {
-            var stepCount = path.Count;
-            matrix.MoveTo(path.Last());
-            var keyAddress = matrix.Address;
-            var key = keys.First(o => o.Address.X == keyAddress.X && o.Address.Y == keyAddress.Y);
-            var keyId = key.Id;
-            matrix.WriteValue('.');
-            var newKeys = keys.Where(o => o.Id != keyId).ToList();
-            var doorId = char.ToUpper(keyId);
-            if (doors.Any(o => o.Id == doorId))
+            _iterations++;
+            var stepCounts = new List<int>();
+            var pathsToFollow = new List<VaultPath>();
+            var remainingKeys = GetRemainingKeys(collectedKeys);
+            foreach (var key in remainingKeys)
             {
-                matrix.MoveTo(doors.First(o => o.Id == doorId).Address);
-                matrix.WriteValue('.');
-                matrix.MoveTo(keyAddress);
+                if (key.Id != currentKey.Id)
+                {
+                    var path = _paths[(currentKey.Id, key.Id)];
+                    if (path.IsOpen(collectedKeys))
+                    {
+                        pathsToFollow.Add(path);
+                    }
+                }
+            }
+            
+            foreach (var path in pathsToFollow)
+            {
+                var stepCount = FollowPath(path, collectedKeys, depth);
+                stepCounts.Add(stepCount);
             }
 
-            if (newKeys.Any())
-            {
-                var newDoors = doors.Where(o => o.Id != doorId).ToList();
-                stepCount += FindShortestPathFrom(matrix.Copy(), newKeys, newDoors, depth + 1);
-            }
+            return stepCounts.Any() ? stepCounts.Min() : 0;
+        }
 
+        private IEnumerable<VaultKey> GetRemainingKeys(IList<VaultKey> collectedKeys)
+        {
+            return _keys.Where(key => collectedKeys.All(o => o.Id != key.Id));
+        }
+
+        private int FollowPath(VaultPath path, IList<VaultKey> collectedKeys, int depth)
+        {
+            var stepCount = path.StepCount;
+            var newCollectedKeys = new List<VaultKey>{path.Target};
+            newCollectedKeys.AddRange(collectedKeys);
+            if(newCollectedKeys.Count < _keys.Count) { 
+                stepCount += FindShortestPathFrom(path.Target, newCollectedKeys, depth + 1);
+            }
             return stepCount;
         }
 
@@ -145,14 +154,14 @@ namespace Core.UndergroundVault
             }
         }
 
-        private IEnumerable<IList<MatrixAddress>> GetStartPaths()
+        private IEnumerable<VaultPath> GetStartPaths()
         {
             foreach (var key in _keys)
             {
                 var coords = PathFinder.ShortestPathTo(_matrix, _startAddress, key.Address);
                 var blockingDoors = FindBlockingDoors(coords);
                 if (!blockingDoors.Any())
-                    yield return coords;
+                    yield return new VaultPath(key, coords, new List<char>());
             }
         }
 
@@ -166,7 +175,7 @@ namespace Core.UndergroundVault
                     var coords = PathFinder.ShortestPathTo(_matrix, key.Address, otherKey.Address);
                     var blockingDoors = FindBlockingDoors(coords);
                     var keysNeeded = blockingDoors.Select(o => char.ToLower(o.Id)).ToList();
-                    var path = new VaultPath(coords, keysNeeded);
+                    var path = new VaultPath(otherKey, coords, keysNeeded);
                     _paths.Add((key.Id, otherKey.Id), path);
                 }
             }
@@ -190,12 +199,21 @@ namespace Core.UndergroundVault
     public class VaultPath
     {
         public IList<MatrixAddress> Coords { get; }
+        public int StepCount { get; }
         public IList<char> KeysNeeded { get; }
+        public VaultKey Target { get; }
 
-        public VaultPath(IList<MatrixAddress> coords, IList<char> keysNeeded)
+        public VaultPath(VaultKey target, IList<MatrixAddress> coords, IList<char> keysNeeded)
         {
+            Target = target;
             Coords = coords;
+            StepCount = coords.Count;
             KeysNeeded = keysNeeded;
+        }
+
+        public bool IsOpen(IList<VaultKey> collectedKeys)
+        {
+            return KeysNeeded.All(key => collectedKeys.Any(o => o.Id == key));
         }
     }
 }

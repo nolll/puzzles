@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2015
         {
             WritePartTitle();
             var machine = new MedicineMachine(Input);
-            var molecules = machine.GetMolecules(StartMolecule);
+            var molecules = machine.GetCalibrationMolecules(StartMolecule);
             Console.WriteLine($"Molecules: {molecules.Count}");
         }
 

@@ -15,7 +15,7 @@ H => OH
 O => HH";
 
             var machine = new MedicineMachine(input);
-            var molecules = machine.GetMolecules(startMolecule);
+            var molecules = machine.GetCalibrationMolecules(startMolecule);
 
             Assert.That(molecules.Count, Is.EqualTo(4));
         }

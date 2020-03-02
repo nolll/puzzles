@@ -13,7 +13,7 @@ namespace Core.MedicineNuclearPlant
             _replacements = PuzzleInputReader.Read(input).Select(ParseReplacement);
         }
 
-        public IList<string> GetMolecules(string startMolecule)
+        public IList<string> GetCalibrationMolecules(string startMolecule)
         {
             var molecules = new List<string>();
             foreach (var replacement in _replacements)

@@ -36,11 +36,11 @@ namespace Core.UndergroundVault
             foreach (var robot in _robots)
             {
                 var allPaths = GetAllPaths(robot.Address);
-                var startPaths = GetStartPaths(robot.Address);
-                var stepCounts = new List<int>();
                 var reachableKeys = allPaths.Select(o => o.Target).ToList();
                 var keysFoundByOtherRobots = GetKeysFoundByOtherRobots(reachableKeys);
-
+                var startPaths = GetStartPaths(allPaths, reachableKeys);
+                var stepCounts = new List<int>();
+                
                 foreach (var path in startPaths)
                 {
                     var stepCount = FollowPath(path, keysFoundByOtherRobots);
@@ -173,19 +173,29 @@ namespace Core.UndergroundVault
             }
         }
 
-        private IList<VaultPath> GetStartPaths(MatrixAddress startAddress)
+        private IList<VaultPath> GetStartPaths(IList<VaultPath> allPaths, List<VaultKey> reachableKeys)
         {
             var paths = new List<VaultPath>();
 
-            foreach (var key in _keys)
+            foreach (var path in allPaths)
             {
-                var coords = PathFinder.ShortestPathTo(_matrix, startAddress, key.Address);
-                var blockingDoors = FindBlockingDoors(coords);
+                var blockingDoors = FilterDoors(FindBlockingDoors(path.Coords), reachableKeys);
                 if (!blockingDoors.Any())
-                    paths.Add(new VaultPath(key, coords, new List<char>()));
+                    paths.Add(path);
             }
 
             return paths;
+        }
+
+        private IList<VaultDoor> FilterDoors(IEnumerable<VaultDoor> blockingDoors, IList<VaultKey> reachableKeys)
+        {
+            var foundByOthers = new List<VaultDoor>();
+            foreach (var door in blockingDoors)
+            {
+                if (reachableKeys.Any(o => o.Id == char.ToLower(door.Id)))
+                    foundByOthers.Add(door);
+            }
+            return foundByOthers;
         }
 
         private IList<VaultPath> GetAllPaths(MatrixAddress startAddress)
@@ -239,10 +249,12 @@ namespace Core.UndergroundVault
         
         public int StepCount { get; }
         public VaultKey Target { get; }
+        public IList<MatrixAddress> Coords { get; }
 
         public VaultPath(VaultKey target, IList<MatrixAddress> coords, IList<char> keysNeeded)
         {
             Target = target;
+            Coords = coords;
             StepCount = coords.Count;
             _keysNeeded = keysNeeded;
         }

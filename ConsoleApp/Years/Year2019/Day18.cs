@@ -12,10 +12,16 @@ namespace ConsoleApp.Years.Year2019
         protected override void RunDay()
         {
             WritePartTitle();
-            var keyCollector = new KeyCollector(Input1);
-            keyCollector.Run();
+            var keyCollector1 = new KeyCollector(Input1);
+            keyCollector1.Run();
 
-            Console.WriteLine($"Number of steps to collect all keys: {keyCollector.ShortestPath}");
+            Console.WriteLine($"Number of steps to collect all keys with one robot: {keyCollector1.ShortestPath}");
+
+            WritePartTitle();
+            var keyCollector2 = new KeyCollector(Input2);
+            keyCollector2.Run();
+
+            Console.WriteLine($"Number of steps to collect all keys with four robots: {keyCollector2.ShortestPath}");
         }
 
         private const string Input1 = @"

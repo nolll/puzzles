@@ -143,7 +143,7 @@ namespace Tests
         }
 
         [Test]
-        [Ignore("This completes in 70 steps, and the code works for the real data")]
+        [Ignore("This completes in 70 steps, and the code works for the real data. The real solution can't just be given other quadrants keys")]
         public void FourRobots_ShortestPathIsFound4()
         {
             const string input = @"

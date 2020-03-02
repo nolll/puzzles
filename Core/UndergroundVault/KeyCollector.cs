@@ -9,18 +9,17 @@ namespace Core.UndergroundVault
         private IList<VaultKey> _keys;
         private IList<VaultDoor> _doors;
         private Matrix<char> _matrix;
-        private MatrixAddress _startAddress;
         private readonly IDictionary<(char, char), VaultPath> _paths;
         private readonly IDictionary<string, int> _cache;
-        private int _iterations;
+        private readonly IList<VaultRobot> _robots;
 
         public int ShortestPath { get; private set; }
 
         public KeyCollector(string input)
         {
-            _iterations = 0;
             _paths = new Dictionary<(char, char), VaultPath>();
             _cache = new Dictionary<string, int>();
+            _robots = new List<VaultRobot>();
             Init(input);
             MapPaths();
         }
@@ -32,22 +31,41 @@ namespace Core.UndergroundVault
 
         private int FindShortestPath()
         {
-            var startPaths = GetStartPaths();
-            var stepCounts = new List<int>();
-            var collectedKeys = new List<VaultKey>();
-            
-            foreach (var path in startPaths)
+            var totalStepCount = 0;
+
+            foreach (var robot in _robots)
             {
-                var stepCount = FollowPath(path, collectedKeys, 1);
-                stepCounts.Add(stepCount);
+                var allPaths = GetAllPaths(robot.Address);
+                var startPaths = GetStartPaths(robot.Address);
+                var stepCounts = new List<int>();
+                var reachableKeys = allPaths.Select(o => o.Target).ToList();
+                var keysFoundByOtherRobots = GetKeysFoundByOtherRobots(reachableKeys);
+
+                foreach (var path in startPaths)
+                {
+                    var stepCount = FollowPath(path, keysFoundByOtherRobots);
+                    stepCounts.Add(stepCount);
+                }
+
+                totalStepCount += stepCounts.Any() ? stepCounts.Min() : 0;
             }
 
-            return stepCounts.Any() ? stepCounts.Min() : 0;
+            return totalStepCount;
         }
 
-        private int FindShortestPathFrom(VaultKey currentKey, IList<VaultKey> collectedKeys, int depth)
+        private IList<VaultKey> GetKeysFoundByOtherRobots(IList<VaultKey> reachableKeys)
         {
-            _iterations++;
+            var foundByOthers = new List<VaultKey>();
+            foreach (var key in _keys)
+            {
+                if (reachableKeys.All(o => o.Id != key.Id))
+                    foundByOthers.Add(key);
+            }
+            return foundByOthers;
+        }
+
+        private int FindShortestPathFrom(VaultKey currentKey, IList<VaultKey> collectedKeys)
+        {
             var stepCounts = new List<int>();
             var pathsToFollow = new List<VaultPath>();
             var remainingKeys = GetRemainingKeys(collectedKeys);
@@ -75,7 +93,7 @@ namespace Core.UndergroundVault
             
             foreach (var path in pathsToFollow)
             {
-                var stepCount = FollowPath(path, collectedKeys, depth);
+                var stepCount = FollowPath(path, collectedKeys);
                 stepCounts.Add(stepCount);
             }
 
@@ -87,7 +105,7 @@ namespace Core.UndergroundVault
             return _keys.Where(key => collectedKeys.All(o => o.Id != key.Id));
         }
 
-        private int FollowPath(VaultPath path, IList<VaultKey> collectedKeys, int depth)
+        private int FollowPath(VaultPath path, IList<VaultKey> collectedKeys)
         {
             var stepCount = path.StepCount;
             var newCollectedKeys = new List<VaultKey>{path.Target};
@@ -97,7 +115,7 @@ namespace Core.UndergroundVault
                 var cacheKey = GetCacheKey(path.Target.Id, collectedKeys);
                 if (!_cache.TryGetValue(cacheKey, out var cachedStepCount))
                 {
-                    cachedStepCount = FindShortestPathFrom(path.Target, newCollectedKeys, depth + 1);
+                    cachedStepCount = FindShortestPathFrom(path.Target, newCollectedKeys);
                     _cache.Add(cacheKey, cachedStepCount);
                 }
 
@@ -141,7 +159,8 @@ namespace Core.UndergroundVault
                     }
                     else if (c == '@')
                     {
-                        _startAddress = address;
+                        var robot = new VaultRobot(address);
+                        _robots.Add(robot);
                         charToWrite = '.';
                     }
 
@@ -154,15 +173,33 @@ namespace Core.UndergroundVault
             }
         }
 
-        private IEnumerable<VaultPath> GetStartPaths()
+        private IList<VaultPath> GetStartPaths(MatrixAddress startAddress)
         {
+            var paths = new List<VaultPath>();
+
             foreach (var key in _keys)
             {
-                var coords = PathFinder.ShortestPathTo(_matrix, _startAddress, key.Address);
+                var coords = PathFinder.ShortestPathTo(_matrix, startAddress, key.Address);
                 var blockingDoors = FindBlockingDoors(coords);
                 if (!blockingDoors.Any())
-                    yield return new VaultPath(key, coords, new List<char>());
+                    paths.Add(new VaultPath(key, coords, new List<char>()));
             }
+
+            return paths;
+        }
+
+        private IList<VaultPath> GetAllPaths(MatrixAddress startAddress)
+        {
+            var paths = new List<VaultPath>();
+
+            foreach (var key in _keys)
+            {
+                var coords = PathFinder.ShortestPathTo(_matrix, startAddress, key.Address);
+                if(coords.Count > 0)
+                    paths.Add(new VaultPath(key, coords, new List<char>()));
+            }
+
+            return paths;
         }
 
         private void MapPaths()
@@ -213,6 +250,16 @@ namespace Core.UndergroundVault
         public bool IsOpen(IList<VaultKey> collectedKeys)
         {
             return _keysNeeded.All(key => collectedKeys.Any(o => o.Id == key));
+        }
+    }
+
+    public class VaultRobot
+    {
+        public MatrixAddress Address { get; }
+
+        public VaultRobot(MatrixAddress address)
+        {
+            Address = address;
         }
     }
 }

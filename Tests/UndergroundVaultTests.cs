@@ -6,7 +6,7 @@ namespace Tests
     public class UndergroundVaultTests
     {
         [Test]
-        public void ShortestPathIsFound1()
+        public void OneRobot_ShortestPathIsFound1()
         {
             const string input = @"
 #########
@@ -20,7 +20,7 @@ namespace Tests
         }
         
         [Test]
-        public void ShortestPathIsFound2()
+        public void OneRobot_ShortestPathIsFound2()
         {
             const string input = @"
 ########################
@@ -36,7 +36,7 @@ namespace Tests
         }
 
         [Test]
-        public void ShortestPathIsFound3()
+        public void OneRobot_ShortestPathIsFound3()
         {
             const string input = @"
 ########################
@@ -52,7 +52,7 @@ namespace Tests
         }
 
         [Test]
-        public void ShortestPathIsFound4()
+        public void OneRobot_ShortestPathIsFound4()
         {
             const string input = @"
 #################
@@ -72,7 +72,7 @@ namespace Tests
         }
 
         [Test]
-        public void ShortestPathIsFound5()
+        public void OneRobot_ShortestPathIsFound5()
         {
             const string input = @"
 ########################
@@ -86,6 +86,24 @@ namespace Tests
             keyCollector.Run();
 
             Assert.That(keyCollector.ShortestPath, Is.EqualTo(81));
+        }
+
+        [Test]
+        public void FourRobot_ShortestPathIsFound1()
+        {
+            const string input = @"
+#######
+#a.#Cd#
+##@#@##
+#######
+##@#@##
+#cB#Ab#
+#######";
+
+            var keyCollector = new KeyCollector(input);
+            keyCollector.Run();
+
+            Assert.That(keyCollector.ShortestPath, Is.EqualTo(8));
         }
     }
 }

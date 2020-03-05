@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Core.MakeFuel
 {
@@ -10,7 +9,6 @@ namespace Core.MakeFuel
         private readonly IDictionary<string, long> _storage;
         private readonly IDictionary<string, Reaction> _recipes;
         private long _fuelCount;
-        private long? _availableOre;
 
         public long RequiredOreForOneFuel { get; private set; }
         public long FuelFromOneTrillionOre { get; private set; }

@@ -64,7 +64,7 @@ namespace Core.MedicineNuclearPlant
                 molecules.Add(sb.ToString());
             }
 
-            return molecules;
+            return molecules.Distinct().ToList();
         }
     }
 }

@@ -13,7 +13,8 @@ namespace ConsoleApp.Years.Year2016
         {
             WritePartTitle();
             var party = new WhiteElephantParty(Input);
-            Console.WriteLine($"Elf that gets all presents: {party.Winner}");
+            var winner = party.StealFromElfAcrossCircle();
+            Console.WriteLine($"Elf that gets all presents: {winner}");
         }
 
         private const int Input = 3001330;

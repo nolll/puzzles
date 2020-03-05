@@ -18,9 +18,31 @@ namespace Core.MedicineNuclearPlant
             var molecules = new List<string>();
             foreach (var replacement in _replacements)
             {
-                molecules.AddRange(replacement.FindMolecules(startMolecule));
+                molecules.AddRange(replacement.Expand(startMolecule));
             }
             return molecules.Distinct().ToList();
+        }
+
+        public int StepsToMake(string targetMolecule)
+        {
+            var molecules = new List<string> { targetMolecule };
+            var steps = 0;
+            while (molecules.All(o => o != "e"))
+            {
+                var newMolecules = new List<string>();
+                foreach (var molecule in molecules)
+                {
+                    foreach (var replacement in _replacements)
+                    {
+                        newMolecules.AddRange(replacement.Reduce(molecule));
+                    }
+                }
+
+                steps++;
+                molecules = newMolecules;
+            }
+
+            return steps;
         }
 
         private MoleculeReplacement ParseReplacement(string s)

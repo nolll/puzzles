@@ -6,19 +6,19 @@ namespace Core.MedicineNuclearPlant
 {
     internal class MoleculeReplacement
     {
-        public string Input { get; }
-        public string Output { get; }
+        public string Left { get; }
+        public string Right { get; }
 
-        public MoleculeReplacement(string input, string output)
+        public MoleculeReplacement(string left, string right)
         {
-            Input = input;
-            Output = output;
+            Left = left;
+            Right = right;
         }
 
-        public IList<string> FindMolecules(string inputMolecule)
+        public IList<string> Expand(string inputMolecule)
         {
             var molecules = new List<string>();
-            var staticParts = inputMolecule.Split(Input);
+            var staticParts = inputMolecule.Split(Left);
             if (staticParts.Length < 2)
                 return new List<string>();
 
@@ -29,7 +29,33 @@ namespace Core.MedicineNuclearPlant
                 for (var j = 0; j < numberOfReplacements; j++)
                 {
                     sb.Append(staticParts[j]);
-                    var replacement = i == j ? Output : Input;
+                    var replacement = i == j ? Right : Left;
+                    sb.Append(replacement);
+                }
+
+                sb.Append(staticParts.Last());
+
+                molecules.Add(sb.ToString());
+            }
+
+            return molecules;
+        }
+
+        public IList<string> Reduce(string inputMolecule)
+        {
+            var molecules = new List<string>();
+            var staticParts = inputMolecule.Split(Right);
+            if (staticParts.Length < 2)
+                return new List<string>();
+
+            var numberOfReplacements = staticParts.Length - 1;
+            for (var i = 0; i < numberOfReplacements; i++)
+            {
+                var sb = new StringBuilder();
+                for (var j = 0; j < numberOfReplacements; j++)
+                {
+                    sb.Append(staticParts[j]);
+                    var replacement = i == j ? Left : Right;
                     sb.Append(replacement);
                 }
 

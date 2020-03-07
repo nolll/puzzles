@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Core.Tools;
 
 namespace Core.WhiteElephants
@@ -16,13 +15,12 @@ namespace Core.WhiteElephants
 
         public int StealFromNextElf()
         {
-            var circle = BuildLinkedCircle();
+            var circle = BuildCircle();
             var current = circle.First;
 
             while (circle.Count > 1)
             {
                 var next = current.NextOrFirst();
-                current.Value.PresentCount += next.Value.PresentCount;
                 circle.Remove(next);
                 current = current.NextOrFirst();
             }
@@ -32,43 +30,32 @@ namespace Core.WhiteElephants
 
         public int StealFromElfAcrossCircle()
         {
-            var circle = BuildListCircle();
-            var current = 0;
+            var circle = BuildCircle();
+            var current = circle.First;
+            var victim = circle.First;
+            var halfWay = (int)Math.Floor((double)circle.Count / 2);
+            for (var i = 0; i < halfWay; i++)
+                victim = victim.NextOrFirst();
 
+            var elvesLeft = _elfCount;
             while (circle.Count > 1)
             {
-                var stepsToMove = (int)Math.Floor((double)circle.Count / 2);
-                var next = current + stepsToMove;
-                if (next > circle.Count - 1)
-                    next -= circle.Count;
-                
-                circle[current].PresentCount += circle[next].PresentCount;
-                circle.RemoveAt(next);
-                current++;
-                if (current > circle.Count - 1)
-                    current -= circle.Count;
+                var nextVictim = elvesLeft % 2 == 1 ? victim.NextOrFirst().NextOrFirst() : victim.NextOrFirst();
+                circle.Remove(victim);
+                current = current.NextOrFirst();
+                victim = nextVictim;
+                elvesLeft--;
             }
 
-            return circle.First().Id;
+            return current.Value.Id;
         }
 
-        private LinkedList<PartyElf> BuildLinkedCircle()
+        private LinkedList<PartyElf> BuildCircle()
         {
             var circle = new LinkedList<PartyElf>();
             for (var i = 1; i <= _elfCount; i++)
             {
                 circle.AddLast(new PartyElf(i));
-            }
-
-            return circle;
-        }
-
-        private IList<PartyElf> BuildListCircle()
-        {
-            var circle = new List<PartyElf>();
-            for (var i = 1; i <= _elfCount; i++)
-            {
-                circle.Add(new PartyElf(i));
             }
 
             return circle;

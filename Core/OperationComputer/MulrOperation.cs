@@ -2,9 +2,11 @@ namespace Core.OperationComputer
 {
     public class MulrOperation : Operation
     {
-        public override string Name => "mulr";
+        public MulrOperation() : base("mulr")
+        {
+        }
 
-        public override int[] Execute(int[] registers, int a, int b, int c)
+        public override long[] Execute(long[] registers, long a, long b, long c)
         {
             registers[c] = registers[a] * registers[b];
             return registers;

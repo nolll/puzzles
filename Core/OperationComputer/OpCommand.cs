@@ -3,11 +3,11 @@ namespace Core.OperationComputer
     public class OpCommand
     {
         public string Operation { get; }
-        public int A { get; }
-        public int B { get; }
-        public int C { get; }
+        public long A { get; }
+        public long B { get; }
+        public long C { get; }
 
-        public OpCommand(string operation, int a, int b, int c)
+        public OpCommand(string operation, long a, long b, long c)
         {
             Operation = operation;
             A = a;

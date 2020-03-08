@@ -2,9 +2,11 @@ namespace Core.OperationComputer
 {
     public class EqrrOperation : Operation
     {
-        public override string Name => "eqrr";
+        public EqrrOperation() : base("eqrr")
+        {
+        }
 
-        public override int[] Execute(int[] registers, int a, int b, int c)
+        public override long[] Execute(long[] registers, long a, long b, long c)
         {
             registers[c] = registers[a] == registers[b] ? 1 : 0;
             return registers;

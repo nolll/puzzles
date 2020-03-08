@@ -2,9 +2,11 @@ namespace Core.OperationComputer
 {
     public class AddiOperation : Operation
     {
-        public override string Name => "addi";
+        public AddiOperation() : base("addi")
+        {
+        }
 
-        public override int[] Execute(int[] registers, int a, int b, int c)
+        public override long[] Execute(long[] registers, long a, long b, long c)
         {
             registers[c] = registers[a] + b;
             return registers;

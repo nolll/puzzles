@@ -2,9 +2,11 @@ namespace Core.OperationComputer
 {
     public class SetiOperation : Operation
     {
-        public override string Name => "seti";
+        public SetiOperation() : base("seti")
+        {
+        }
 
-        public override int[] Execute(int[] registers, int a, int b, int c)
+        public override long[] Execute(long[] registers, long a, long b, long c)
         {
             registers[c] = a;
             return registers;

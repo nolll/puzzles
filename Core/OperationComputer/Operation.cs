@@ -2,7 +2,14 @@ namespace Core.OperationComputer
 {
     public abstract class Operation
     {
-        public abstract string Name { get; }
-        public abstract int[] Execute(int[] registers, int a, int b, int c);
+        public string Name { get; }
+        public string Description { get; }
+        public abstract long[] Execute(long[] registers, long a, long b, long c);
+
+        protected Operation(string name)
+        {
+            Name = name;
+            //Description = description;
+        }
     }
 }

@@ -2,9 +2,11 @@ namespace Core.OperationComputer
 {
     public class GtriOperation : Operation
     {
-        public override string Name => "gtri";
+        public GtriOperation() : base("gtri")
+        {
+        }
 
-        public override int[] Execute(int[] registers, int a, int b, int c)
+        public override long[] Execute(long[] registers, long a, long b, long c)
         {
             registers[c] = registers[a] > b ? 1 : 0;
             return registers;

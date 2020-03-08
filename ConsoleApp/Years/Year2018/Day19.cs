@@ -13,8 +13,13 @@ namespace ConsoleApp.Years.Year2018
         {
             WritePartTitle();
             var computer = new OpComputer();
-            var value = computer.RunInstructionPointerProgram(Input);
-            Console.WriteLine($"Value at register 0 when program halts: {value}");
+            var value1 = computer.RunInstructionPointerProgram(Input, 0);
+            Console.WriteLine($"Value at register 0 when program halts: {value1}");
+
+            WritePartTitle();
+            var computer2 = new OpComputer();
+            var value2 = computer2.RunInstructionPointerProgram(Input, 1);
+            Console.WriteLine($"Value at register 0 when program halts: {value2}");
         }
 
         private const string Input = @"

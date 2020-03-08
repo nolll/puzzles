@@ -8,8 +8,8 @@ namespace Tests
         [Test]
         public void FindThreeMathingOperations()
         {
-            var before = new[] { 3, 2, 1, 1 };
-            var after = new[] { 3, 2, 2, 1 };
+            var before = new long[] { 3, 2, 1, 1 };
+            var after = new long[] { 3, 2, 2, 1 };
 
             var computer = new OpComputer();
             var matchingOperations = computer.GetMatchingOperations(before, after, 2, 1, 2);
@@ -31,7 +31,7 @@ seti 8 0 4
 seti 9 0 5";
 
             var computer = new OpComputer();
-            var value = computer.RunInstructionPointerProgram(input);
+            var value = computer.RunInstructionPointerProgram(input, 0);
 
             Assert.That(value, Is.EqualTo(6));
         }

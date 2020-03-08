@@ -33,11 +33,11 @@ namespace Core.OperationComputer
             _operationsDictionary = operations.ToDictionary(o => o.Name);
         }
 
-        public int RunTestProgram(string operationsInput, string programInput)
+        public long RunTestProgram(string operationsInput, string programInput)
         {
             var operationNames = GetOperationNameDictionary(operationsInput);
             var commands = PuzzleInputReader.Read(programInput).Select(s => ParseIntCommand(s, operationNames));
-            var registers = new[] { 0, 0, 0, 0 };
+            var registers = new long[] { 0, 0, 0, 0 };
             foreach (var command in commands)
             {
                 var operation = _operationsDictionary[command.Operation];
@@ -46,20 +46,20 @@ namespace Core.OperationComputer
             return registers[0];
         }
 
-        public int RunInstructionPointerProgram(string programInput)
+        public long RunInstructionPointerProgram(string programInput, long register0Value)
         {
             var inputRows = PuzzleInputReader.Read(programInput);
             var pointerRegister = int.Parse(inputRows.First().Split(' ').Last());
             var commands = inputRows.Skip(1).Select(ParseStringCommand).ToList();
-            var registers = new[] { 0, 0, 0, 0, 0, 0 };
-            var pointer = registers[pointerRegister];
+            var registers = new[] { register0Value, 0, 0, 0, 0, 0 };
+            var pointer = (int)registers[pointerRegister];
             while (pointer >= 0 && pointer < commands.Count)
             {
                 registers[pointerRegister] = pointer;
                 var command = commands[pointer];
                 var operation = _operationsDictionary[command.Operation];
                 registers = operation.Execute(registers, command.A, command.B, command.C);
-                pointer = registers[pointerRegister];
+                pointer = (int)registers[pointerRegister];
                 pointer++;
             }
             return registers[0];
@@ -101,18 +101,18 @@ namespace Core.OperationComputer
         private IList<OperationMatch> MapMatchingOperations(string input)
         {
             var rows = PuzzleInputReader.Read(input.Replace(":", "").Replace("[", "").Replace("]", "").Replace(",", ""));
-            var before = new int[0];
+            var before = new long[0];
             var command = new int[0];
             var matchingOperations = new List<OperationMatch>();
             foreach (var row in rows)
             {
                 if (row.StartsWith("Before"))
                 {
-                    before = row.Replace("Before", "").Trim().Split(' ').Select(int.Parse).ToArray();
+                    before = row.Replace("Before", "").Trim().Split(' ').Select(long.Parse).ToArray();
                 }
                 else if (row.StartsWith("After"))
                 {
-                    var after = row.Replace("After", "").Trim().Split(' ').Select(int.Parse).ToArray();
+                    var after = row.Replace("After", "").Trim().Split(' ').Select(long.Parse).ToArray();
                     var matches = GetMatchingOperations(before, after, command[1], command[2], command[3]);
                     matchingOperations.Add(new OperationMatch(command[0], matches));
                 }
@@ -147,12 +147,12 @@ namespace Core.OperationComputer
             return new OpCommand(name, values[0], values[1], values[2]);
         }
 
-        public IList<Operation> GetMatchingOperations(int[] before, int[] after, int a, int b, int c)
+        public IList<Operation> GetMatchingOperations(long[] before, long[] after, long a, long b, long c)
         {
             var matchingOperations = new List<Operation>();
             foreach (var operation in _operationsDictionary.Values)
             {
-                var register = new int[4];
+                var register = new long[4];
                 before.CopyTo(register, 0);
                 var result = operation.Execute(register, a, b, c);
                 if (IsEqual(result, after))
@@ -162,7 +162,7 @@ namespace Core.OperationComputer
             return matchingOperations;
         }
 
-        private static bool IsEqual(IReadOnlyList<int> a, IReadOnlyList<int> b)
+        private static bool IsEqual(IReadOnlyList<long> a, IReadOnlyList<long> b)
         {
             if (a.Count != b.Count)
                 return false;

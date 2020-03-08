@@ -13,6 +13,9 @@ namespace Core.SeriesOfTubes
         private const char Horizontal = '-';
         private const char Plus = '+';
 
+        public string Route { get; private set; }
+        public int StepCount { get; private set; }
+
         public TubeRouteFinder(string input)
         {
             var adjustedInput = input.Replace(Space, Empty).Replace("_", "");
@@ -23,7 +26,7 @@ namespace Core.SeriesOfTubes
             _matrix.TurnTo(MatrixDirection.Down);
         }
 
-        public string FindRoute()
+        public void FindRoute()
         {
             var route = new StringBuilder();
             while (true)
@@ -33,6 +36,8 @@ namespace Core.SeriesOfTubes
                 if (val == Empty) { 
                     break;
                 }
+
+                StepCount++;
 
                 if (val == Vertical || val == Horizontal)
                 {
@@ -68,7 +73,7 @@ namespace Core.SeriesOfTubes
                 _matrix.MoveForward();
             }
 
-            return route.ToString();
+            Route = route.ToString();
         }
     }
 }

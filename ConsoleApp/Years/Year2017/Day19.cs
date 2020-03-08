@@ -14,8 +14,11 @@ namespace ConsoleApp.Years.Year2017
         {
             WritePartTitle();
             var finder = new TubeRouteFinder(Input);
-            var route = finder.FindRoute();
-            Console.WriteLine($"Letters found: {route}");
+            finder.FindRoute();
+            Console.WriteLine($"Letters found: {finder.Route}");
+
+            WritePartTitle();
+            Console.WriteLine($"Step count: {finder.StepCount}");
         }
 
         private const string Input = @"

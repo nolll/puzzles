@@ -17,9 +17,10 @@ _     |  |  |  D _
 _     +B-+  +--+ _";
 
             var finder = new TubeRouteFinder(input);
-            var route = finder.FindRoute();
+            finder.FindRoute();
 
-            Assert.That(route, Is.EqualTo("ABCDEF"));
+            Assert.That(finder.Route, Is.EqualTo("ABCDEF"));
+            Assert.That(finder.StepCount, Is.EqualTo(38));
         }
     }
 }

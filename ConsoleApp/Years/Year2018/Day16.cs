@@ -1,5 +1,5 @@
 ﻿using System;
-using Core.ChronalClassification;
+using Core.OperationComputer;
 
 namespace ConsoleApp.Years.Year2018
 {
@@ -12,7 +12,7 @@ namespace ConsoleApp.Years.Year2018
         protected override void RunDay()
         {
             WritePartTitle();
-            var finder = new OperationFinder();
+            var finder = new OpComputer();
             var count = finder.InputsMatchingThreeOrMore(Input1);
             Console.WriteLine($"Inputs matching three or more: {count}");
 

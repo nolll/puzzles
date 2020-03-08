@@ -1,5 +1,4 @@
 ﻿using System;
-using Core.Duet;
 using Core.SeriesOfTubes;
 
 namespace ConsoleApp.Years.Year2017

@@ -36,7 +36,7 @@ namespace Core.OperationComputer
         public int RunTestProgram(string operationsInput, string programInput)
         {
             var operationNames = GetOperationNameDictionary(operationsInput);
-            var commands = PuzzleInputReader.Read(programInput).Select(s => ParseCommand(s, operationNames));
+            var commands = PuzzleInputReader.Read(programInput).Select(s => ParseIntCommand(s, operationNames));
             var registers = new[] { 0, 0, 0, 0 };
             foreach (var command in commands)
             {
@@ -46,20 +46,23 @@ namespace Core.OperationComputer
             return registers[0];
         }
 
-        public class OpCommand
+        public int RunInstructionPointerProgram(string programInput)
         {
-            public string Operation { get; }
-            public int A { get; }
-            public int B { get; }
-            public int C { get; }
-
-            public OpCommand(string operation, int a, int b, int c)
+            var inputRows = PuzzleInputReader.Read(programInput);
+            var pointerRegister = int.Parse(inputRows.First().Split(' ').Last());
+            var commands = inputRows.Skip(1).Select(ParseStringCommand).ToList();
+            var registers = new[] { 0, 0, 0, 0, 0, 0 };
+            var pointer = registers[pointerRegister];
+            while (pointer >= 0 && pointer < commands.Count)
             {
-                Operation = operation;
-                A = a;
-                B = b;
-                C = c;
+                registers[pointerRegister] = pointer;
+                var command = commands[pointer];
+                var operation = _operationsDictionary[command.Operation];
+                registers = operation.Execute(registers, command.A, command.B, command.C);
+                pointer = registers[pointerRegister];
+                pointer++;
             }
+            return registers[0];
         }
 
         private IDictionary<int, string> GetOperationNameDictionary(string input)
@@ -122,7 +125,7 @@ namespace Core.OperationComputer
             return matchingOperations;
         }
 
-        private OpCommand ParseCommand(string s, IDictionary<int, string> operationNames)
+        private OpCommand ParseIntCommand(string s, IDictionary<int, string> operationNames)
         {
             var parts = s.Split(' ');
             var name = parts.First();
@@ -131,6 +134,15 @@ namespace Core.OperationComputer
             {
                 name = operationNames[id];
             }
+
+            return new OpCommand(name, values[0], values[1], values[2]);
+        }
+
+        private OpCommand ParseStringCommand(string s)
+        {
+            var parts = s.Split(' ');
+            var name = parts.First();
+            var values = parts.Skip(1).Select(int.Parse).ToList();
 
             return new OpCommand(name, values[0], values[1], values[2]);
         }
@@ -154,7 +166,7 @@ namespace Core.OperationComputer
         {
             if (a.Count != b.Count)
                 return false;
-            
+
             var index = 0;
             while (index < a.Count)
             {
@@ -163,7 +175,6 @@ namespace Core.OperationComputer
                 index++;
             }
             return true;
-
         }
     }
 }

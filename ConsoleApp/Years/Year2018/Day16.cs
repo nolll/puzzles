@@ -12,12 +12,12 @@ namespace ConsoleApp.Years.Year2018
         protected override void RunDay()
         {
             WritePartTitle();
-            var finder = new OpComputer();
-            var count = finder.InputsMatchingThreeOrMore(Input1);
+            var computer = new OpComputer();
+            var count = computer.InputsMatchingThreeOrMore(Input1);
             Console.WriteLine($"Inputs matching three or more: {count}");
 
             WritePartTitle();
-            var value = finder.RunTestProgram(Input1, Input2);
+            var value = computer.RunTestProgram(Input1, Input2);
             Console.WriteLine($"Value at register 0 after test program: {value}");
         }
 

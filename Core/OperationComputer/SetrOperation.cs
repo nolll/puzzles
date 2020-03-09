@@ -11,5 +11,15 @@ namespace Core.OperationComputer
             registers[c] = registers[a];
             return registers;
         }
+
+        public override string GetDescription(long[] registers, long a, long b, long c)
+        {
+            return $"Set register. Copies the contents of register {a} ({registers[a]}) into register {c}.";
+        }
+
+        public override string GetShortDescription(long[] registers, long a, long b, long c)
+        {
+            return $"reg[{c}] = {registers[a]}.";
+        }
     }
 }

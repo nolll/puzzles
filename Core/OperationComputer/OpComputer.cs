@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Core.Tools;
 
 namespace Core.OperationComputer
@@ -46,7 +48,7 @@ namespace Core.OperationComputer
             return registers[0];
         }
 
-        public long RunInstructionPointerProgram(string programInput, long register0Value)
+        public long RunInstructionPointerProgram(string programInput, long register0Value, bool useOptimization, bool debug)
         {
             var inputRows = PuzzleInputReader.Read(programInput);
             var pointerRegister = int.Parse(inputRows.First().Split(' ').Last());
@@ -55,14 +57,42 @@ namespace Core.OperationComputer
             var pointer = (int)registers[pointerRegister];
             while (pointer >= 0 && pointer < commands.Count)
             {
+                if (useOptimization && pointer == 2)
+                {
+                    var factors = FindIntFactors(registers[2]).ToList();
+                    registers[0] = factors.Sum();
+                    break;
+                }
+
                 registers[pointerRegister] = pointer;
                 var command = commands[pointer];
                 var operation = _operationsDictionary[command.Operation];
                 registers = operation.Execute(registers, command.A, command.B, command.C);
+                if (debug)
+                {
+                    var shortDescription = operation.GetShortDescription(registers, command.A, command.B, command.C);
+                    var description = operation.GetDescription(registers, command.A, command.B, command.C);
+                    Console.WriteLine($"{pointer}. {operation.Name}. {description}");
+                    Console.WriteLine(shortDescription);
+                    Console.WriteLine(string.Join(',', registers));
+                    Console.WriteLine();
+                    Thread.Sleep(500);
+                }
                 pointer = (int)registers[pointerRegister];
                 pointer++;
             }
             return registers[0];
+        }
+
+        private IEnumerable<long> FindIntFactors(long target)
+        {
+            var i = 1;
+            while (i <= target)
+            {
+                if(target % i == 0)
+                    yield return i;
+                i++;
+            }
         }
 
         private IDictionary<int, string> GetOperationNameDictionary(string input)

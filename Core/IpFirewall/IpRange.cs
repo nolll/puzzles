@@ -1,21 +1,42 @@
+using System;
+
 namespace Core.IpFirewall
 {
     public class IpRange
     {
         public long Start { get; }
         public long End { get; }
-        public long Length { get; }
-
+        public long Length => End - Start + 1;
+        
         public IpRange(long start, long end)
         {
             Start = start;
             End = end;
-            Length = End - Start + 1;
         }
 
         public bool IsInRange(long ip)
         {
             return ip >= Start && ip <= End;
+        }
+
+        public bool IsOverlapping(IpRange other)
+        {
+            return Start < other.End && other.Start < End;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
+
+        protected bool Equals(IpRange other)
+        {
+            return Start == other.Start && End == other.End;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Start, End);
         }
     }
 }

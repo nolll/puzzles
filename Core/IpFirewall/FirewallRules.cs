@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
@@ -13,7 +14,7 @@ namespace Core.IpFirewall
             _input = input;
         }
 
-        public long? GetLowestUnblockedIp(long upperbound)
+        public long? GetLowestUnblockedIp()
         {
             var blockedRanges = PuzzleInputReader.Read(_input).Select(ParseIpRange).OrderBy(o => o.Start).ToArray();
             long ip = 0;
@@ -26,6 +27,35 @@ namespace Core.IpFirewall
             }
 
             return ip;
+        }
+
+        public long GetAllowedIpCount(long upperbound)
+        {
+            var rangesWithoutOverlaps = new List<IpRange>();
+            var blockedRanges = PuzzleInputReader.Read(_input).Select(ParseIpRange).ToList();
+            while (blockedRanges.Any())
+            {
+                var range = blockedRanges.First();
+                var others = blockedRanges.Skip(1);
+
+                var overlapping = others.FirstOrDefault(o => o.IsOverlapping(range));
+                if (overlapping != null)
+                {
+                    var min = Math.Min(range.Start, overlapping.Start);
+                    var max = Math.Max(range.End, overlapping.End);
+                    var newRange = new IpRange(min, max);
+                    blockedRanges.Remove(overlapping);
+                    blockedRanges.Add(newRange);
+                }
+                else
+                {
+                    rangesWithoutOverlaps.Add(range);
+                }
+
+                blockedRanges.RemoveAt(0);
+            }
+
+            return upperbound + 1 - rangesWithoutOverlaps.Sum(o => o.Length);
         }
 
         private IpRange ParseIpRange(string s)

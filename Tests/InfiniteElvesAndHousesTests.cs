@@ -11,7 +11,7 @@ namespace Tests
             const int input = 150;
 
             var presentDelivery = new PresentDelivery();
-            var house = presentDelivery.Deliver(input);
+            var house = presentDelivery.Deliver1(input);
 
             Assert.That(house, Is.EqualTo(8));
         }

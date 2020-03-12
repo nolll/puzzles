@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2017
         {
             WritePartTitle();
             var tracker = new ParticleTracker(Input);
-            var particle = tracker.GetClosestParticleInTheLongRun();
+            var particle = tracker.GetClosestParticleInTheLongRunSimple();
             Console.WriteLine($"Closest particle: {particle}");
         }
 

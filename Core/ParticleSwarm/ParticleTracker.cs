@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
@@ -54,20 +55,27 @@ namespace Core.ParticleSwarm
         {
             var closest = new List<int>();
             var ids = "";
-            
+
             while (!IsDone(closest))
             {
                 UpdateVelocities();
                 Move();
 
-                if(closest.Count == DoneThreshold)
+                if (closest.Count == DoneThreshold)
                     closest.RemoveAt(0);
 
                 closest.Add(GetClosest());
                 ids = string.Join(',', closest);
             }
-        
+
             return closest.First();
+        }
+
+        public int GetClosestParticleInTheLongRunSimple()
+        {
+            return Particles
+                .OrderBy(o => Math.Abs(o.Ax) + Math.Abs(o.Ay) + Math.Abs(o.Az))
+                .First().Id;
         }
 
         private int GetClosest()

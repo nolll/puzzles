@@ -1,4 +1,4 @@
-namespace Core.MoonTracking
+namespace Core.Tools
 {
     public static class Dimension
     {
@@ -6,5 +6,5 @@ namespace Core.MoonTracking
         public const int Y = 1;
         public const int Z = 2;
         public static int[] Dimensions => new[] { X, Y, Z };
-}
+    }
 }

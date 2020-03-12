@@ -73,5 +73,10 @@ namespace Core.ParticleSwarm
             Position[dimension] += Velocity[dimension];
             _hasMoved[dimension] = true;
         }
+
+        public bool IsColliding(Particle other)
+        {
+            return X == other.X && Y == other.Y && Z == other.Z;
+        }
     }
 }

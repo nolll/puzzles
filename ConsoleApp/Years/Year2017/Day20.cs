@@ -13,9 +13,14 @@ namespace ConsoleApp.Years.Year2017
         protected override void RunDay()
         {
             WritePartTitle();
-            var tracker = new ParticleTracker(Input);
-            var particle = tracker.GetClosestParticleInTheLongRunSimple();
+            var tracker1 = new ParticleTracker(Input);
+            var particle = tracker1.GetClosestParticleInTheLongRunSimple();
             Console.WriteLine($"Closest particle: {particle}");
+
+            WritePartTitle();
+            var tracker2 = new ParticleTracker(Input);
+            var remainingParticleCount = tracker2.GetRemainingParticleCount();
+            Console.WriteLine($"Remaining particles: {remainingParticleCount}");
         }
 
         private const string Input = @"

@@ -7,9 +7,8 @@ namespace Core.ParticleSwarm
 {
     public class ParticleTracker
     {
-        private const int DoneThreshold = 200;
         private long _iterations;
-        public IList<Particle> Particles { get; }
+        public IList<Particle> Particles { get; private set; }
 
         public ParticleTracker(string map)
         {
@@ -51,24 +50,26 @@ namespace Core.ParticleSwarm
             }
         }
 
-        public int GetClosestParticleInTheLongRun()
+        public int GetRemainingParticleCount()
         {
-            var closest = new List<int>();
-            var ids = "";
-
-            while (!IsDone(closest))
+            const int maxIterations = 100;
+            while (_iterations < maxIterations)
             {
-                UpdateVelocities();
-                Move();
+                Run();
 
-                if (closest.Count == DoneThreshold)
-                    closest.RemoveAt(0);
+                var particles = new List<Particle>();
+                foreach (var particle in Particles)
+                {
+                    if (Particles.Count(o => o.IsColliding(particle)) == 1)
+                        particles.Add(particle);
+                }
 
-                closest.Add(GetClosest());
-                ids = string.Join(',', closest);
+                Particles = particles;
+
+                _iterations++;
             }
 
-            return closest.First();
+            return Particles.Count;
         }
 
         public int GetClosestParticleInTheLongRunSimple()
@@ -78,67 +79,10 @@ namespace Core.ParticleSwarm
                 .First().Id;
         }
 
-        private int GetClosest()
-        {
-            var byShortestX = Particles.OrderBy(o => o.ManhattanX);
-            var byShortestY = Particles.OrderBy(o => o.ManhattanY);
-            var byShortestZ = Particles.OrderBy(o => o.ManhattanZ);
-            var scores = new Dictionary<int, ParticleScore>();
-            foreach (var particle in Particles)
-            {
-                scores.Add(particle.Id, new ParticleScore(particle.Id));
-            }
-
-            var score = 0;
-            foreach (var particle in byShortestX)
-            {
-                scores[particle.Id].ScoreX = score;
-                score++;
-            }
-
-            score = 0;
-            foreach (var particle in byShortestY)
-            {
-                scores[particle.Id].ScoreY = score;
-                score++;
-            }
-            
-            score = 0;
-            foreach (var particle in byShortestZ)
-            {
-                scores[particle.Id].ScoreZ = score;
-                score++;
-            }
-            
-            return scores.Values.OrderBy(o => o.Score).First().Id;
-        }
-
         private void Run()
         {
             UpdateVelocities();
             Move();
-        }
-
-        private class ParticleScore
-        {
-            public int Id { get; }
-            public int ScoreX { get; set; }
-            public int ScoreY { get; set; }
-            public int ScoreZ { get; set; }
-            public int Score => ScoreX + ScoreY + ScoreZ;
-
-            public ParticleScore(int id)
-            {
-                Id = id;
-            }
-        }
-
-        private static bool IsDone(IList<int> lastClosestParticles)
-        {
-            if (lastClosestParticles.Count < DoneThreshold)
-                return false;
-
-            return lastClosestParticles.Distinct().Count() == 1;
         }
 
         private void Move()

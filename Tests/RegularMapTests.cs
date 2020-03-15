@@ -68,22 +68,12 @@ namespace Tests
         {
             input = input.TrimEnd(Chars.End).TrimStart(Chars.Start);
             var regexesToExplore = new List<RegexToExplore> { new RegexToExplore(_map.StartAddress, input) };
-            foreach (var c in input)
+            foreach (var regex in regexesToExplore)
             {
 
             }
-        }
 
-        private class RegexToExplore
-        {
-            public MatrixAddress StartAddress { get; }
-            public string Path { get; }
-
-            public RegexToExplore(MatrixAddress startAddress, string path)
-            {
-                StartAddress = startAddress;
-                Path = path;
-            }
+            return new List<string>();
         }
 
         private void Move(char c)
@@ -111,5 +101,34 @@ namespace Tests
         private void MoveEast() => _map.MoveRight();
         private void MoveSouth() => _map.MoveDown();
         private void MoveWest() => _map.MoveLeft();
+    }
+
+    public class RegexParser
+    {
+
+    }
+
+    public class PathTree
+    {
+        public string Path { get; }
+        public IList<PathTree> Children { get; }
+
+        public PathTree(string path)
+        {
+            Path = path;
+            Children = new List<PathTree>();
+        }
+    }
+
+    public class RegexToExplore
+    {
+        public MatrixAddress StartAddress { get; }
+        public string Path { get; }
+
+        public RegexToExplore(MatrixAddress startAddress, string path)
+        {
+            StartAddress = startAddress;
+            Path = path;
+        }
     }
 }

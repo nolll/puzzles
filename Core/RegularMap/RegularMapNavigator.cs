@@ -25,6 +25,7 @@ namespace Core.RegularMap
         }
 
         public int MostDoors { get; }
+        public int RoomsMoreThat1000DoorsAway { get; }
 
         public RegularMapNavigator(string input)
         {
@@ -37,6 +38,7 @@ namespace Core.RegularMap
             _map.MoveTo(startAddress);
             BuildMap(input);
             MostDoors = _distances.Values.OrderBy(o => o).Last();
+            RoomsMoreThat1000DoorsAway = _distances.Values.Count(o => o >= 1000);
         }
         
         private void BuildMap(string input)

@@ -64,6 +64,12 @@ namespace Tests
             }
         }
 
+        private void FollowPath(PathTree path)
+        {
+            var startAddress = _map.Address;
+
+        }
+
         private IList<string> ParseRegex(string input)
         {
             input = input.TrimEnd(Chars.End).TrimStart(Chars.Start);

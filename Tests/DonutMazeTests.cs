@@ -50,6 +50,19 @@ _                      _";
             BuildMap(input);
             var portals = FindPortals();
             var portalDistances = FindPortalDistances(portals);
+            var portalPaths = FindPortalPathsFromAaToZz(portals, portalDistances);
+        }
+
+        private IList<IList<DonutPortal>> FindPortalPathsFromAaToZz(IList<DonutPortal> portals, IDictionary<string, int> portalDistances)
+        {
+            var distancesFromAa = portalDistances.Keys.Where(o => o.Contains("AA"));
+            foreach (var distance in distancesFromAa)
+            {
+                foreach (var portal in portals)
+                {
+                    var id = 
+                }
+            }
         }
 
         private IDictionary<string, int> FindPortalDistances(IList<DonutPortal> portals)

@@ -68,46 +68,10 @@ namespace Core.DonutMaze
             }
         }
 
-        private IDictionary<string, int> FindPortalConnections(IList<DonutPortal> portals)
-        {
-            var connections = new Dictionary<string, int>();
-
-            foreach (var a in portals)
-            {
-                foreach (var b in portals)
-                {
-                    if (a.Name != b.Name)
-                    {
-                        var id = GetPortalDistanceId(a, b);
-                        if (!connections.ContainsKey(id))
-                        {
-                            var distance = PathFinder.StepCountTo(_map, a.Address, b.Address);
-                            if (distance > 0)
-                            {
-                                connections[id] = distance - 2;
-                            }
-                        }
-                    }
-                }
-            }
-
-            return connections;
-        }
-
-        private static string GetPortalDistanceId(DonutPortal a, DonutPortal b)
-        {
-            return GetPortalDistanceId(a.Name, b.Name);
-        }
-
-        public static string GetPortalDistanceId(string a, string b)
-        {
-            return string.Join('-', new[] { a, b }.OrderBy(o => o));
-        }
-
         private IList<DonutPortal> FindPortals(Matrix<char> matrix)
         {
             var portals = new List<DonutPortal>();
-            var letterCoords = FindLetterCoords().ToList();
+            var letterCoords = FindLetterCoords(matrix).ToList();
             while (letterCoords.Count > 0)
             {
                 var currentCoords = letterCoords.First();
@@ -124,30 +88,32 @@ namespace Core.DonutMaze
                 var secondLetterHasAdjacentCorridor = matrix.Adjacent4.Any(o => o == '.');
                 matrix.MoveTo(currentCoords);
                 var name = string.Concat(firstLetter, secondLetter);
-                var portalAddress = secondLetterHasAdjacentCorridor ? secondsLetterCoords : currentCoords;
+                var letterAddress = secondLetterHasAdjacentCorridor ? secondsLetterCoords : currentCoords;
+                matrix.MoveTo(letterAddress);
+                var portalAddress = matrix.Adjacent4Coords.First(o => matrix.ReadValueAt(o) == '.');
                 matrix.MoveTo(portalAddress);
-                matrix.WriteValue('.');
+                matrix.WriteValue('P');
                 var portal = new DonutPortal(name, portalAddress);
                 portals.Add(portal);
             }
             return portals;
         }
 
-        private IEnumerable<MatrixAddress> FindLetterCoords()
+        private IEnumerable<MatrixAddress> FindLetterCoords(Matrix<char> matrix)
         {
-            for (var y = 0; y < _map.Height; y++)
+            for (var y = 0; y < matrix.Height; y++)
             {
-                for (var x = 0; x < _map.Height; x++)
+                for (var x = 0; x < matrix.Width; x++)
                 {
-                    _map.MoveTo(x, y);
-                    var value = _map.ReadValue();
+                    matrix.MoveTo(x, y);
+                    var value = matrix.ReadValue();
                     if(IsLetter(value))
-                        yield return _map.Address;
+                        yield return matrix.Address;
                 }
             }
         }
 
-        private bool IsLetter(char c)
+        private static bool IsLetter(char c)
         {
             return c != '#' && c != '.';
         }

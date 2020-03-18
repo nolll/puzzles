@@ -137,7 +137,7 @@ namespace Core.DonutMaze
         {
             for (var y = 0; y < _map.Height; y++)
             {
-                for (var x = 0; x < _map.Height; x++)
+                for (var x = 0; x < _map.Width; x++)
                 {
                     _map.MoveTo(x, y);
                     var value = _map.ReadValue();

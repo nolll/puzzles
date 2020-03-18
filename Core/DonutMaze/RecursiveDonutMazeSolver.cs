@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Core.Tools;
 
 namespace Core.DonutMaze
@@ -10,64 +11,26 @@ namespace Core.DonutMaze
         public int ShortestStepCount { get; }
         private MatrixAddress _startAddress;
         private MatrixAddress _endAddress;
+        private Matrix<char> _matrix;
+        private IDictionary<MatrixAddress, DonutPortal> _portals;
+
+        private Matrix<char> GetMatrix(int depth)
+        {
+            if (_map.Count < depth + 1)
+                _map.Add(_matrix.Copy());
+            return _map[0];
+        }
 
         public RecursiveDonutMazeSolver(string input)
         {
             ShortestStepCount = 0;
-            BuildMap(input);
-            
+            _map = new List<Matrix<char>>();
+            _matrix = MatrixBuilder.BuildCharMatrix(input.Replace(' ', '#').Replace("_", ""));
+            _portals = FindPortalAddresses(_matrix);
+
             //var portalConnections = FindPortalConnections(portals);
             //var stepCounts = StepCountsTo(portalConnections, "AA", "ZZ").OrderBy(o => o.Distance).ToList();
-            //ShortestStepCount = stepCounts.First().Distance;
-        }
-
-        private IList<PortalPath> StepCountsTo(IDictionary<string, int> portalConnections, string startPortal, string targetPortal)
-        {
-            var completePaths = new List<PortalPath>();
-            var queue = new List<PortalPath> {new PortalPath(0, startPortal, new List<string> {"AA"})};
-            while (queue.Any())
-            {
-                var path = queue.First();
-                queue.RemoveAt(0);
-
-                var possibleConnections = portalConnections.Keys.Where(o => o.Contains(path.FromPortal));
-                foreach (var connection in possibleConnections)
-                {
-                    var otherId = connection.Replace(path.FromPortal, "").Replace("-", "");
-                    if (!path.PassedPortals.Contains(otherId))
-                    {
-                        if (otherId == targetPortal)
-                        {
-                            var distance = path.Distance + portalConnections[connection];
-                            var newPath = new PortalPath(distance, otherId, path.PassedPortals.Concat(new List<string> { otherId }).ToList());
-                            completePaths.Add(newPath);
-                        }
-                        else
-                        {
-                            var distance = path.Distance + portalConnections[connection] + 1;
-                            var newPath = new PortalPath(distance, otherId, path.PassedPortals.Concat(new List<string> { otherId }).ToList());
-                            queue.Add(newPath);
-                        }
-
-                    }
-                }
-            }
-
-            return completePaths;
-        }
-
-        private class PortalPath
-        {
-            public int Distance { get; }
-            public string FromPortal { get; }
-            public IList<string> PassedPortals { get; }
-
-            public PortalPath(int distance, string fromPortal, IList<string> passedPortals = null)
-            {
-                Distance = distance;
-                FromPortal = fromPortal;
-                PassedPortals = passedPortals ?? new List<string>();
-            }
+            ShortestStepCount = StepCountTo(_startAddress, _endAddress);
         }
 
         private IDictionary<MatrixAddress, DonutPortal> FindPortalAddresses(Matrix<char> matrix)
@@ -146,14 +109,54 @@ namespace Core.DonutMaze
             return c != '#' && c != '.';
         }
 
-        private void BuildMap(string input)
+        private int StepCountTo(MatrixAddress from, MatrixAddress to)
         {
-            _map = new List<Matrix<char>>();
-            var topMatrix = MatrixBuilder.BuildCharMatrix(input.Replace(' ', '#').Replace("_", ""));
-            var portals = FindPortalAddresses(topMatrix);
-            var subMatrix = topMatrix.Copy();
-            _map.Add(topMatrix);
-            _map.Add(subMatrix);
+            var coordCounts = GetCoordCounts(from, to);
+            var goal = coordCounts.FirstOrDefault(o => o.X == from.X && o.Y == from.Y);
+            return goal?.Count ?? 0;
+        }
+
+        private IList<CoordCount> GetCoordCounts(MatrixAddress from, MatrixAddress to)
+        {
+            var queue = new List<CoordCount> { new CoordCount(0, to.X, to.Y, 0) };
+            var index = 0;
+            while (index < queue.Count && !queue.Any(o => o.Depth == 0 && o.X == from.X && o.Y == from.Y))
+            {
+                var next = queue[index];
+                var depth = next.Depth;
+                var matrix = GetMatrix(next.Depth);
+                matrix.MoveTo(next.X, next.Y);
+                if (_portals.TryGetValue(matrix.Address, out var portal))
+                {
+                    depth = next.Depth + portal.DepthChange;
+                    matrix = GetMatrix(depth);
+                    matrix.MoveTo(portal.Target);
+                }
+                var adjacentCoords = matrix.Adjacent4Coords
+                    .Where(o => matrix.ReadValueAt(o) == '.' && !queue.Any(q => q.X == o.X && q.Y == o.Y))
+                    .ToList();
+                var newCoordCounts = adjacentCoords.Select(o => new CoordCount(depth, o.X, o.Y, next.Count + 1));
+                queue.AddRange(newCoordCounts);
+                index++;
+            }
+
+            return queue;
+        }
+
+        private class CoordCount
+        {
+            public int Depth { get; }
+            public int X { get; }
+            public int Y { get; }
+            public int Count { get; }
+
+            public CoordCount(int depth, int x, int y, int count)
+            {
+                Depth = depth;
+                X = x;
+                Y = y;
+                Count = count;
+            }
         }
     }
 }

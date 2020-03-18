@@ -68,7 +68,7 @@ namespace Core.DonutMaze
             }
         }
 
-        private IDictionary<string, int> FindPortalConnections(IList<DonutPortal> portals)
+        private IDictionary<string, int> FindPortalConnections(IList<DonutPortalAddress> portals)
         {
             var connections = new Dictionary<string, int>();
 
@@ -94,7 +94,7 @@ namespace Core.DonutMaze
             return connections;
         }
 
-        private static string GetPortalDistanceId(DonutPortal a, DonutPortal b)
+        private static string GetPortalDistanceId(DonutPortalAddress a, DonutPortalAddress b)
         {
             return GetPortalDistanceId(a.Name, b.Name);
         }
@@ -104,9 +104,9 @@ namespace Core.DonutMaze
             return string.Join('-', new[] { a, b }.OrderBy(o => o));
         }
 
-        private IList<DonutPortal> FindPortals()
+        private IList<DonutPortalAddress> FindPortals()
         {
-            var portals = new List<DonutPortal>();
+            var portals = new List<DonutPortalAddress>();
             var letterCoords = FindLetterCoords().ToList();
             while (letterCoords.Count > 0)
             {
@@ -127,7 +127,7 @@ namespace Core.DonutMaze
                 var portalAddress = secondLetterHasAdjacentCorridor ? secondsLetterCoords : currentCoords;
                 _map.MoveTo(portalAddress);
                 _map.WriteValue('.');
-                var portal = new DonutPortal(name, portalAddress);
+                var portal = new DonutPortalAddress(name, portalAddress);
                 portals.Add(portal);
             }
             return portals;

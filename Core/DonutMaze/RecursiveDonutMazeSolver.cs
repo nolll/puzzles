@@ -8,6 +8,8 @@ namespace Core.DonutMaze
     {
         private IList<Matrix<char>> _map;
         public int ShortestStepCount { get; }
+        private MatrixAddress _startAddress;
+        private MatrixAddress _endAddress;
 
         public RecursiveDonutMazeSolver(string input)
         {
@@ -68,9 +70,9 @@ namespace Core.DonutMaze
             }
         }
 
-        private IList<DonutPortal> FindPortals(Matrix<char> matrix)
+        private IDictionary<MatrixAddress, DonutPortal> FindPortalAddresses(Matrix<char> matrix)
         {
-            var portals = new List<DonutPortal>();
+            var portalAddresses = new List<DonutPortalAddress>();
             var letterCoords = FindLetterCoords(matrix).ToList();
             while (letterCoords.Count > 0)
             {
@@ -91,11 +93,37 @@ namespace Core.DonutMaze
                 var letterAddress = secondLetterHasAdjacentCorridor ? secondsLetterCoords : currentCoords;
                 matrix.MoveTo(letterAddress);
                 var portalAddress = matrix.Adjacent4Coords.First(o => matrix.ReadValueAt(o) == '.');
+                if (name == "AA")
+                {
+                    _startAddress = portalAddress;
+                    continue;
+                }
+                if (name == "ZZ")
+                {
+                    _endAddress = portalAddress;
+                    continue;
+                }
                 matrix.MoveTo(portalAddress);
-                matrix.WriteValue('P');
-                var portal = new DonutPortal(name, portalAddress);
-                portals.Add(portal);
+                matrix.WriteValue('.');
+                var portal = new DonutPortalAddress(name, portalAddress);
+                portalAddresses.Add(portal);
             }
+
+            var center = matrix.Center;
+            var portals = new Dictionary<MatrixAddress, DonutPortal>();
+            var orderedPortalAddresses = portalAddresses.OrderBy(o => o.Name).ThenBy(o => o.Address.ManhattanDistanceTo(center)).ToList();
+            while (orderedPortalAddresses.Any())
+            {
+                var inner = orderedPortalAddresses.First();
+                orderedPortalAddresses.RemoveAt(0);
+                var outer = orderedPortalAddresses.First();
+                orderedPortalAddresses.RemoveAt(0);
+                var innerPortal = new DonutPortal(inner.Name, outer.Address, 1);
+                portals.Add(inner.Address, innerPortal);
+                var outerPortal = new DonutPortal(outer.Name, inner.Address, -1);
+                portals.Add(outer.Address, outerPortal);
+            }
+
             return portals;
         }
 
@@ -122,7 +150,7 @@ namespace Core.DonutMaze
         {
             _map = new List<Matrix<char>>();
             var topMatrix = MatrixBuilder.BuildCharMatrix(input.Replace(' ', '#').Replace("_", ""));
-            var portals = FindPortals(topMatrix);
+            var portals = FindPortalAddresses(topMatrix);
             var subMatrix = topMatrix.Copy();
             _map.Add(topMatrix);
             _map.Add(subMatrix);

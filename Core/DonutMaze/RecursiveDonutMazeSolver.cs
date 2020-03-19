@@ -6,6 +6,13 @@ namespace Core.DonutMaze
 {
     public class RecursiveDonutMazeSolver
     {
+        private static class Chars
+        {
+            public const char Path = '.';
+            public const char Wall = '#';
+            public const char Space = ' ';
+        }
+
         private IList<Matrix<char>> _map;
         public int ShortestStepCount { get; }
         private MatrixAddress _startAddress;
@@ -29,7 +36,7 @@ namespace Core.DonutMaze
 
         private void Setup(string input)
         {
-            var matrix = MatrixBuilder.BuildCharMatrix(input.Replace(' ', '#').Replace("_", ""));
+            var matrix = MatrixBuilder.BuildCharMatrix(input.Replace(Chars.Space, Chars.Wall).Replace("_", ""));
             var portalAddresses = new List<DonutPortalAddress>();
             var letterCoords = FindLetterCoords(matrix).ToList();
             while (letterCoords.Count > 0)
@@ -42,15 +49,15 @@ namespace Core.DonutMaze
                 var secondLetter = matrix.ReadValueAt(secondsLetterCoords);
                 letterCoords.Remove(secondsLetterCoords);
                 matrix.MoveTo(currentCoords);
-                matrix.WriteValue('#');
+                matrix.WriteValue(Chars.Wall);
                 matrix.MoveTo(secondsLetterCoords);
-                matrix.WriteValue('#');
-                var secondLetterHasAdjacentCorridor = matrix.Adjacent4.Any(o => o == '.');
+                matrix.WriteValue(Chars.Wall);
+                var secondLetterHasAdjacentCorridor = matrix.Adjacent4.Any(o => o == Chars.Path);
                 matrix.MoveTo(currentCoords);
                 var name = string.Concat(firstLetter, secondLetter);
                 var letterAddress = secondLetterHasAdjacentCorridor ? secondsLetterCoords : currentCoords;
                 matrix.MoveTo(letterAddress);
-                var portalAddress = matrix.Adjacent4Coords.First(o => matrix.ReadValueAt(o) == '.');
+                var portalAddress = matrix.Adjacent4Coords.First(o => matrix.ReadValueAt(o) == Chars.Path);
                 if (name == "AA")
                 {
                     _startAddress = portalAddress;
@@ -62,7 +69,7 @@ namespace Core.DonutMaze
                     continue;
                 }
                 matrix.MoveTo(portalAddress);
-                matrix.WriteValue('.');
+                matrix.WriteValue(Chars.Path);
                 var portal = new DonutPortalAddress(name, portalAddress);
                 portalAddresses.Add(portal);
             }
@@ -87,7 +94,7 @@ namespace Core.DonutMaze
                 var outerPortal = new OuterDonutPortal(outer.Name, outer.Address, inner.Address);
                 portals.Add(outer.Address, outerPortal);
                 topMatrix.MoveTo(outer.Address);
-                topMatrix.WriteValue('#');
+                topMatrix.WriteValue(Chars.Wall);
             }
 
             _matrix = matrix;
@@ -119,7 +126,7 @@ namespace Core.DonutMaze
 
         private static bool IsLetter(char c)
         {
-            return c != '#' && c != '.';
+            return c != Chars.Wall && c != Chars.Path;
         }
 
         private int StepCountTo(MatrixAddress from, MatrixAddress to)
@@ -139,18 +146,18 @@ namespace Core.DonutMaze
                 var depth = next.Depth;
                 var matrix = GetMatrix(next.Depth);
                 matrix.MoveTo(next.X, next.Y);
-                var steps = 1;
+                var localDepth = depth;
+                var adjacentCoords = matrix.Adjacent4Coords
+                    .Where(o => matrix.ReadValueAt(o) == Chars.Path && !queue.Any(q => q.Depth == localDepth && q.X == o.X && q.Y == o.Y))
+                    .ToList();
+                var newCoordCounts = adjacentCoords.Select(o => new CoordCount(depth, o.X, o.Y, next.Count + 1)).ToList();
                 if (_portals.TryGetValue(matrix.Address, out var portal))
                 {
                     depth = next.Depth + portal.DepthChange;
-                    matrix = GetMatrix(depth);
-                    matrix.MoveTo(portal.Target);
-                    steps = 2;
+                    var portalCoordCount = new CoordCount(next.Depth + portal.DepthChange, portal.Target.X, portal.Target.Y, next.Count + 1);
+                    newCoordCounts.Add(portalCoordCount);
                 }
-                var adjacentCoords = matrix.Adjacent4Coords
-                    .Where(o => matrix.ReadValueAt(o) == '.' && !queue.Any(q => q.Depth == depth && q.X == o.X && q.Y == o.Y))
-                    .ToList();
-                var newCoordCounts = adjacentCoords.Select(o => new CoordCount(depth, o.X, o.Y, next.Count + steps));
+                
                 queue.AddRange(newCoordCounts);
                 index++;
             }

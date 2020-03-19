@@ -2,15 +2,25 @@ using Core.Tools;
 
 namespace Core.DonutMaze
 {
-    public class DonutPortal
+    public enum PortalType
+    {
+        Inner,
+        Outer
+    }
+
+    public abstract class DonutPortal
     {
         public string Name { get; }
-        public MatrixAddress Address { get; }
+        public MatrixAddress Location { get; }
+        public MatrixAddress Target { get; }
+        public abstract int DepthChange { get; }
+        public abstract PortalType Type { get; }
 
-        public DonutPortal(string name, MatrixAddress address)
+        protected DonutPortal(string name, MatrixAddress location, MatrixAddress target)
         {
             Name = name;
-            Address = address;
+            Location = location;
+            Target = target;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Core.Tools
         public bool IsAtRightEdge => Address.X == Width - 1;
         public bool IsAtBottom => Address.Y == Height - 1;
         public bool IsAtLeftEdge => Address.X == 0;
+        public MatrixAddress Center => new MatrixAddress(Width / 2, Height / 2);
 
         public Matrix(int width = 1, int height = 1, T defaultValue = default)
         {

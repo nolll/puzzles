@@ -3,6 +3,20 @@ using NUnit.Framework;
 
 namespace Tests
 {
+    public class ScrambledLettersTests
+    {
+        [Test]
+        public void CorrectScramble()
+        {
+            const string input = "abcde";
+
+            var scrambler = new StringScrambler();
+            var result = scrambler.Scramble(input);
+
+            Assert.That(result, Is.EqualTo("decab"));
+        }
+    }
+
     public class AdventCoinTests
     {
         [TestCase("abcdef", 609043)]

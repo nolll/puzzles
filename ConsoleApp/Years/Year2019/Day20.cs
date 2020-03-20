@@ -12,8 +12,8 @@ namespace ConsoleApp.Years.Year2019
         protected override void RunDay()
         {
             WritePartTitle();
-            //var mazeSolver = new DonutMazeSolver(Input);
-            //Console.WriteLine($"Shortest distance from AA to ZZ: {mazeSolver.ShortestStepCount}");
+            var mazeSolver = new DonutMazeSolver(Input);
+            Console.WriteLine($"Shortest distance from AA to ZZ: {mazeSolver.ShortestStepCount}");
 
             WritePartTitle();
             var recursiveDonutMazeSolver = new RecursiveDonutMazeSolver(Input);

@@ -7,7 +7,6 @@ namespace Core.RpgSimulation
     public class RpgSimulator
     {
         public int RoundsPlayed { get; private set; }
-        public RpgCharacter Winner { get; private set; }
 
         private readonly IList<RpgProperty> _weapons = new List<RpgProperty>
         {
@@ -42,9 +41,9 @@ namespace Core.RpgSimulation
             RoundsPlayed = 0;
         }
 
-        public int RunWithLeastCost(int bossPoints, int bossDamage, int bossArmor)
+        public int WinWithLowestCost(int bossPoints, int bossDamage, int bossArmor)
         {
-            var leastCost = int.MaxValue;
+            var lowest = int.MaxValue;
             var propertyCombinations = GetPropertyCombinations();
             while (propertyCombinations.Any())
             {
@@ -58,12 +57,36 @@ namespace Core.RpgSimulation
                 if (winner.Name == "player")
                 {
                     var cost = properties.Sum(o => o.Cost);
-                    if (cost < leastCost)
-                        leastCost = cost;
+                    if (cost < lowest)
+                        lowest = cost;
                 }
             }
 
-            return leastCost;
+            return lowest;
+        }
+
+        public int LoseWithHighestCost(int bossPoints, int bossDamage, int bossArmor)
+        {
+            var highestCost = int.MinValue;
+            var propertyCombinations = GetPropertyCombinations();
+            while (propertyCombinations.Any())
+            {
+                var properties = propertyCombinations.First();
+                propertyCombinations.RemoveAt(0);
+
+                var boss = new RpgBoss(bossPoints, bossDamage, bossArmor);
+                var player = new RpgPlayer(100, properties);
+
+                var winner = Run(boss, player);
+                if (winner.Name == "boss")
+                {
+                    var cost = properties.Sum(o => o.Cost);
+                    if (cost > highestCost)
+                        highestCost = cost;
+                }
+            }
+
+            return highestCost;
         }
 
         private IList<IList<RpgProperty>> GetPropertyCombinations()

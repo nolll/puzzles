@@ -13,8 +13,12 @@ namespace ConsoleApp.Years.Year2015
         {
             WritePartTitle();
             var simulator = new RpgSimulator();
-            var leastGoldRequiredToWin = simulator.RunWithLeastCost(104, 8, 1);
+            var leastGoldRequiredToWin = simulator.WinWithLowestCost(104, 8, 1);
             Console.WriteLine($"Least amount of gold to win: {leastGoldRequiredToWin}");
+
+            WritePartTitle();
+            var mostGoldThatLoses = simulator.LoseWithHighestCost(104, 8, 1);
+            Console.WriteLine($"Most amount of gold that loses: {mostGoldThatLoses}");
         }
     }
 }

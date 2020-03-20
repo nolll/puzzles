@@ -4,10 +4,11 @@ namespace Core.RpgSimulation
 {
     public abstract class RpgCharacter
     {
+        private readonly int _armor;
+
         public string Name { get; }
         public int Points { get; private set; }
         public int Damage { get; }
-        public int Armor { get; }
 
         public bool IsAlive => Points > 0;
 
@@ -16,12 +17,12 @@ namespace Core.RpgSimulation
             Name = name;
             Points = points;
             Damage = damage;
-            Armor = armor;
+            _armor = armor;
         }
 
         public bool Hurt(int attack)
         {
-            Points -= Math.Max(attack - Armor, 1);
+            Points -= Math.Max(attack - _armor, 1);
             return IsAlive;
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
@@ -6,124 +7,73 @@ namespace Core.ScrambledLetters
 {
     public class StringScrambler
     {
-        private readonly IList<string> _instructions;
+        private readonly IList<IScrambleInstruction> _instructions;
 
         public StringScrambler(string input)
         {
-            _instructions = PuzzleInputReader.Read(input);
+            _instructions = ParseInstructions(input);
         }
 
         public string Scramble(string str)
         {
-            IList<char> letters = str.ToList();
             foreach (var instruction in _instructions)
-            {
-                letters = RunInstruction(instruction, letters);
-            }
+                str = instruction.Run(str);
 
-            return string.Concat(letters);
+            return str;
         }
 
-        private IList<char> RunInstruction(string instruction, IList<char> letters)
-        {
-            var parts = instruction.Split(' ');
 
+        public string Unscramble(string str)
+        {
+            foreach (var instruction in _instructions.Reverse())
+                str = instruction.RunBackwards(str);
+
+            return str;
+        }
+
+        private IList<IScrambleInstruction> ParseInstructions(string input)
+        {
+            var instructions = new List<IScrambleInstruction>();
+            var rows = PuzzleInputReader.Read(input);
+            foreach (var row in rows)
+            {
+                instructions.Add(ParseInstruction(row));
+            }
+
+            return instructions;
+        }
+
+        private IScrambleInstruction ParseInstruction(string s)
+        {
+            var parts = s.Split(' ');
             var command = parts[0];
             if (command == "swap")
             {
                 if (parts[1] == "position")
-                {
-                    var posA = int.Parse(parts[2]);
-                    var posB = int.Parse(parts[5]);
-                    var letterA = letters[posA];
-                    var letterB = letters[posB];
-                    letters[posA] = letterB;
-                    letters[posB] = letterA;
-                    return letters;
-                }
-                else
-                {
-                    var letterA = parts[2].First();
-                    var letterB = parts[5].First();
-                    var letterAPos = letters.IndexOf(letterA);
-                    var letterBPos = letters.IndexOf(letterB);
-                    letters[letterAPos] = letterB;
-                    letters[letterBPos] = letterA;
-                    return letters;
-                }
+                    return new SwapPositionInstruction(int.Parse(parts[2]), int.Parse(parts[5]));
+                return new SwapLetterInstruction(parts[2].First(), parts[5].First());
             }
 
             if (command == "rotate")
             {
                 var type = parts[1];
                 if (type == "left")
-                {
-                    var count = int.Parse(parts[2]);
-                    while (count > 0)
-                    {
-                        var letterToMove = letters.First();
-                        letters.RemoveAt(0);
-                        letters.Add(letterToMove);
-                        count--;
-                    }
-
-                    return letters;
-                }
+                    return new RotateLeftInstruction(int.Parse(parts[2]));
 
                 if (type == "right")
-                {
-                    var count = int.Parse(parts[2]);
-                    while (count > 0)
-                    {
-                        var letterToMove = letters.Last();
-                        letters.RemoveAt(letters.Count - 1);
-                        letters.Insert(0, letterToMove);
-                        count--;
-                    }
+                    return new RotateRightInstruction(int.Parse(parts[2]));
 
-                    return letters;
-                }
-                
                 if (type == "based")
-                {
-                    var letter = parts[6].First();
-                    var count = letters.IndexOf(letter);
-                    if (count >= 4)
-                        count++;
-                    count++;
-                    while (count > 0)
-                    {
-                        var letterToMove = letters.Last();
-                        letters.RemoveAt(letters.Count - 1);
-                        letters.Insert(0, letterToMove);
-                        count--;
-                    }
-
-                    return letters;
-                }
+                    return new RotateBasedOnPositionInstruction(parts[6].First());
             }
 
             if (command == "reverse")
-            {
-                var a = int.Parse(parts[2]);
-                var b = int.Parse(parts[4]);
-                var startRange = letters.Take(a);
-                var endRange = letters.Skip(b + 1);
-                var range = letters.Skip(a).Take(b + 1 - a);
-                return startRange.Concat(range.Reverse()).Concat(endRange).ToList();
-            }
+                return new ReverseInstruction(int.Parse(parts[2]), int.Parse(parts[4]));
 
             if (command == "move")
-            {
-                var a = int.Parse(parts[2]);
-                var b = int.Parse(parts[5]);
-                var letterToMove = letters.Skip(a).Take(1).First();
-                letters.RemoveAt(a);
-                letters.Insert(b, letterToMove);
-                return letters;
-            }
+                return new MoveInstruction(int.Parse(parts[2]), int.Parse(parts[5]));
 
-            return letters;
+            throw new Exception($"Error parsing instruction: {s}");
         }
     }
 }

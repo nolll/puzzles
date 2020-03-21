@@ -13,8 +13,12 @@ namespace ConsoleApp.Years.Year2016
         {
             WritePartTitle();
             var scrambler = new StringScrambler(Input);
-            var result = scrambler.Scramble("abcdefgh");
-            Console.WriteLine($"Scrambled string: {result}");
+            var scrambled = scrambler.Scramble("abcdefgh");
+            Console.WriteLine($"Scrambled string: {scrambled}");
+
+            WritePartTitle();
+            var unscrambled = scrambler.Unscramble("fbgdceah");
+            Console.WriteLine($"Unscrambled string: {unscrambled}");
         }
 
         private const string Input = @"

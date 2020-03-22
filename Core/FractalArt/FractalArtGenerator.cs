@@ -106,24 +106,48 @@ namespace Core.FractalArt
                 if (rule.IsMatch(MatrixToString(matrix)))
                     return rule.Output;
 
+                var flippedMatrix = FlipMatrixHorizontally(matrix);
+                if (rule.IsMatch(MatrixToString(flippedMatrix)))
+                    return rule.Output;
+
+                flippedMatrix = FlipMatrixVertically(matrix);
+                if (rule.IsMatch(MatrixToString(flippedMatrix)))
+                    return rule.Output;
+
                 var rotatedMatrix = RotateMatrixRight(matrix);
                 if (rule.IsMatch(MatrixToString(rotatedMatrix)))
                     return rule.Output;
 
-                rotatedMatrix = RotateMatrixRight(rotatedMatrix);
-                if (rule.IsMatch(MatrixToString(rotatedMatrix)))
+                flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
+                if (rule.IsMatch(MatrixToString(flippedMatrix)))
+                    return rule.Output;
+
+                flippedMatrix = FlipMatrixVertically(rotatedMatrix);
+                if (rule.IsMatch(MatrixToString(flippedMatrix)))
                     return rule.Output;
 
                 rotatedMatrix = RotateMatrixRight(rotatedMatrix);
                 if (rule.IsMatch(MatrixToString(rotatedMatrix)))
                     return rule.Output;
 
-                var flippedMatrix1 = FlipMatrixHorizontally(matrix);
-                if (rule.IsMatch(MatrixToString(flippedMatrix1)))
+                flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
+                if (rule.IsMatch(MatrixToString(flippedMatrix)))
                     return rule.Output;
 
-                var flippedMatrix2 = FlipMatrixVertically(matrix);
-                if (rule.IsMatch(MatrixToString(flippedMatrix2)))
+                flippedMatrix = FlipMatrixVertically(rotatedMatrix);
+                if (rule.IsMatch(MatrixToString(flippedMatrix)))
+                    return rule.Output;
+
+                rotatedMatrix = RotateMatrixRight(rotatedMatrix);
+                if (rule.IsMatch(MatrixToString(rotatedMatrix)))
+                    return rule.Output;
+
+                flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
+                if (rule.IsMatch(MatrixToString(flippedMatrix)))
+                    return rule.Output;
+
+                flippedMatrix = FlipMatrixVertically(rotatedMatrix);
+                if (rule.IsMatch(MatrixToString(flippedMatrix)))
                     return rule.Output;
             }
 

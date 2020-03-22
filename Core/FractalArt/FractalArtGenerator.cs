@@ -14,17 +14,22 @@ namespace Core.FractalArt
 ###";
 
         private Matrix<char> _matrix;
-        private readonly IList<FractalRule> _transformationRules;
-        private IDictionary<string, IList<MatrixVariant>> _matrixVariants;
+        private readonly IList<FractalRule> _transformationRules2X2;
+        private readonly IList<FractalRule> _transformationRules3X3;
+        private readonly IDictionary<string, IList<MatrixVariant>> _variantCache;
+        private readonly IDictionary<string, Matrix<char>> _transformCache;
 
         public int PixelsOn => _matrix.Values.Count(o => o == '#');
 
         public FractalArtGenerator(string input)
         {
-            _transformationRules = ParseRules(input);
+            var rules = ParseRules(input);
+            _transformationRules2X2 = rules.Where(o => o.Input.Length == 5).ToList();
+            _transformationRules3X3 = rules.Where(o => o.Input.Length != 5).ToList();
 
             _matrix = MatrixBuilder.BuildCharMatrix(Inital);
-            _matrixVariants = new Dictionary<string, IList<MatrixVariant>>();
+            _variantCache = new Dictionary<string, IList<MatrixVariant>>();
+            _transformCache = new Dictionary<string, Matrix<char>>();
         }
 
         private IList<FractalRule> ParseRules(string input)
@@ -117,11 +122,11 @@ namespace Core.FractalArt
         private IList<MatrixVariant> GetVariants(Matrix<char> matrix)
         {
             var key = MatrixToString(matrix);
-            if (_matrixVariants.TryGetValue(key, out var variants))
+            if (_variantCache.TryGetValue(key, out var variants))
                 return variants;
             
             variants = CreateVariants(matrix).ToList();
-            _matrixVariants.Add(key, variants);
+            _variantCache.Add(key, variants);
             return variants;
         }
 
@@ -165,14 +170,25 @@ namespace Core.FractalArt
 
         private Matrix<char> Transform(Matrix<char> matrix)
         {
-            var variants = GetVariants(matrix);
+            var key = MatrixToString(matrix);
+            if (_transformCache.TryGetValue(key, out var transformedMatrix))
+                return transformedMatrix;
 
-            foreach (var rule in _transformationRules)
+            var variants = GetVariants(matrix);
+            var size = matrix.Width;
+            var rules = size == 2 ? _transformationRules2X2 : _transformationRules3X3;
+
+            foreach (var rule in rules)
             {
                 foreach (var variant in variants)
                 {
                     if (rule.IsMatch(variant.Key))
-                        return rule.Output;
+                    {
+                        transformedMatrix = rule.Output;
+                        _transformCache.Add(key, transformedMatrix);
+                        return transformedMatrix;
+                    }
+                        
                 }
             }
 

@@ -12,9 +12,14 @@ namespace ConsoleApp.Years.Year2017
         protected override void RunDay()
         {
             WritePartTitle();
-            var artGenerator = new FractalArtGenerator(Input);
-            artGenerator.Run(5);
-            Console.WriteLine($"Pixels turned on: {artGenerator.PixelsOn}");
+            var artGenerator1 = new FractalArtGenerator(Input);
+            artGenerator1.Run(5);
+            Console.WriteLine($"Pixels on after 5 iterations: {artGenerator1.PixelsOn}");
+
+            WritePartTitle();
+            var artGenerator2 = new FractalArtGenerator(Input);
+            artGenerator2.Run(18);
+            Console.WriteLine($"Pixels on after 18 iterations: {artGenerator2.PixelsOn}");
         }
 
         private const string Input = @"

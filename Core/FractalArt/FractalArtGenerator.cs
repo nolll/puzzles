@@ -15,6 +15,8 @@ namespace Core.FractalArt
 
         private Matrix<char> _matrix;
         private readonly IList<FractalRule> _transformationRules;
+        private IDictionary<string, IList<MatrixVariant>> _matrixVariants;
+
         public int PixelsOn => _matrix.Values.Count(o => o == '#');
 
         public FractalArtGenerator(string input)
@@ -22,6 +24,7 @@ namespace Core.FractalArt
             _transformationRules = ParseRules(input);
 
             _matrix = MatrixBuilder.BuildCharMatrix(Inital);
+            _matrixVariants = new Dictionary<string, IList<MatrixVariant>>();
         }
 
         private IList<FractalRule> ParseRules(string input)
@@ -99,56 +102,78 @@ namespace Core.FractalArt
             return newMatrix;
         }
 
+        private class MatrixVariant
+        {
+            private readonly Matrix<char> _matrix;
+            public string Key { get; }
+
+            public MatrixVariant(string key, Matrix<char> matrix)
+            {
+                _matrix = matrix;
+                Key = key;
+            }
+        }
+
+        private IList<MatrixVariant> GetVariants(Matrix<char> matrix)
+        {
+            var key = MatrixToString(matrix);
+            if (_matrixVariants.TryGetValue(key, out var variants))
+                return variants;
+            
+            variants = CreateVariants(matrix).ToList();
+            _matrixVariants.Add(key, variants);
+            return variants;
+        }
+
+        private IEnumerable<MatrixVariant> CreateVariants(Matrix<char> matrix)
+        {
+            yield return new MatrixVariant(MatrixToString(matrix), matrix);
+
+            var flippedMatrix = FlipMatrixHorizontally(matrix);
+            yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+
+            flippedMatrix = FlipMatrixVertically(matrix);
+            yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+
+            var rotatedMatrix = RotateMatrixRight(matrix);
+            yield return new MatrixVariant(MatrixToString(rotatedMatrix), rotatedMatrix);
+
+            flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
+            yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+
+            flippedMatrix = FlipMatrixVertically(rotatedMatrix);
+            yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+
+            rotatedMatrix = RotateMatrixRight(rotatedMatrix);
+            yield return new MatrixVariant(MatrixToString(rotatedMatrix), rotatedMatrix);
+
+            flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
+            yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+
+            flippedMatrix = FlipMatrixVertically(rotatedMatrix);
+            yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+
+            rotatedMatrix = RotateMatrixRight(rotatedMatrix);
+            yield return new MatrixVariant(MatrixToString(rotatedMatrix), rotatedMatrix);
+
+            flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
+            yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+
+            flippedMatrix = FlipMatrixVertically(rotatedMatrix);
+            yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+        }
+
         private Matrix<char> Transform(Matrix<char> matrix)
         {
+            var variants = GetVariants(matrix);
+
             foreach (var rule in _transformationRules)
             {
-                if (rule.IsMatch(MatrixToString(matrix)))
-                    return rule.Output;
-
-                var flippedMatrix = FlipMatrixHorizontally(matrix);
-                if (rule.IsMatch(MatrixToString(flippedMatrix)))
-                    return rule.Output;
-
-                flippedMatrix = FlipMatrixVertically(matrix);
-                if (rule.IsMatch(MatrixToString(flippedMatrix)))
-                    return rule.Output;
-
-                var rotatedMatrix = RotateMatrixRight(matrix);
-                if (rule.IsMatch(MatrixToString(rotatedMatrix)))
-                    return rule.Output;
-
-                flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
-                if (rule.IsMatch(MatrixToString(flippedMatrix)))
-                    return rule.Output;
-
-                flippedMatrix = FlipMatrixVertically(rotatedMatrix);
-                if (rule.IsMatch(MatrixToString(flippedMatrix)))
-                    return rule.Output;
-
-                rotatedMatrix = RotateMatrixRight(rotatedMatrix);
-                if (rule.IsMatch(MatrixToString(rotatedMatrix)))
-                    return rule.Output;
-
-                flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
-                if (rule.IsMatch(MatrixToString(flippedMatrix)))
-                    return rule.Output;
-
-                flippedMatrix = FlipMatrixVertically(rotatedMatrix);
-                if (rule.IsMatch(MatrixToString(flippedMatrix)))
-                    return rule.Output;
-
-                rotatedMatrix = RotateMatrixRight(rotatedMatrix);
-                if (rule.IsMatch(MatrixToString(rotatedMatrix)))
-                    return rule.Output;
-
-                flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
-                if (rule.IsMatch(MatrixToString(flippedMatrix)))
-                    return rule.Output;
-
-                flippedMatrix = FlipMatrixVertically(rotatedMatrix);
-                if (rule.IsMatch(MatrixToString(flippedMatrix)))
-                    return rule.Output;
+                foreach (var variant in variants)
+                {
+                    if (rule.IsMatch(variant.Key))
+                        return rule.Output;
+                }
             }
 
             throw new Exception("No transformation rule matched");

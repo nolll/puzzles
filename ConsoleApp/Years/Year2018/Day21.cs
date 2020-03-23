@@ -13,8 +13,11 @@ namespace ConsoleApp.Years.Year2018
         {
             WritePartTitle();
             var computer = new OpComputer();
-            var value = computer.RunInstructionPointerProgram(Input, 103548, false, false);
-            Console.WriteLine($"Lowest value for register zero: {value}");
+            var result = computer.RunSpecialForDay21(Input, 0);
+            Console.WriteLine($"Lowest value for register zero after fewest iterations: {result.first}");
+
+            WritePartTitle();
+            Console.WriteLine($"Lowest value for register zero after most iterations: {result.last}");
         }
 
         private const string Input = @"

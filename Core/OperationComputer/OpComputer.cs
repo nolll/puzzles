@@ -84,6 +84,38 @@ namespace Core.OperationComputer
             return registers[0];
         }
 
+        public (long first, long last) RunSpecialForDay21(string programInput, long register0Value)
+        {
+            long firstRegisterZeroValue = 0;
+            long lastRegisterZeroValue = 0;
+            var registerZeroValues = new List<long>();
+            var inputRows = PuzzleInputReader.Read(programInput);
+            var pointerRegister = int.Parse(inputRows.First().Split(' ').Last());
+            var commands = inputRows.Skip(1).Select(ParseStringCommand).ToList();
+            var registers = new[] { register0Value, 0, 0, 0, 0, 0 };
+            var pointer = (int)registers[pointerRegister];
+            while (pointer >= 0 && pointer < commands.Count)
+            {
+                registers[pointerRegister] = pointer;
+                var command = commands[pointer];
+                var operation = _operationsDictionary[command.Operation];
+                if (operation.Name == "eqrr")
+                {
+                    var v = registers[command.A];
+                    if (firstRegisterZeroValue == 0)
+                        firstRegisterZeroValue = v;
+                    if (registerZeroValues.Contains(v))
+                        return (firstRegisterZeroValue, lastRegisterZeroValue);
+                    lastRegisterZeroValue = v;
+                    registerZeroValues.Add(v);
+                }
+                registers = operation.Execute(registers, command.A, command.B, command.C);
+                pointer = (int)registers[pointerRegister];
+                pointer++;
+            }
+            return (0, 0);
+        }
+
         private IEnumerable<long> FindIntFactors(long target)
         {
             var i = 1;

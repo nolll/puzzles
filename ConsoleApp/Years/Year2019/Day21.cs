@@ -23,34 +23,22 @@ namespace ConsoleApp.Years.Year2019
         }
 
         private const string WalkProgram = @"
-NOT A J
-NOT B T
-OR T J
-NOT C T
-OR T J
+OR A T
+AND B T
+AND C T
+NOT T J
 AND D J
 WALK";
 
-        /*
-sätt J true om A är hål
-sätt T true om B är hål
-sätt J true om A eller B är hål
-sätt T true om C är hål
-sätt J true om A, B eller C är hål
-sätt J true om D OCH (A, B eller C) är hål
-         */
-
         private const string RunProgram = @"
-NOT A J
-NOT B T
-OR T J
-NOT C T
-OR T J
-
+OR A T
+AND B T
+AND C T
+NOT T J
+OR E T
+OR H T
+AND T J
 AND D J
-
-AND E J
-OR H J
 RUN";
     }
 }

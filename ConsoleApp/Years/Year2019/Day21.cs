@@ -12,18 +12,33 @@ namespace ConsoleApp.Years.Year2019
         protected override void RunDay()
         {
             WritePartTitle();
-            var droid = new SpringDroid(Input);
-            droid.Run();
-            Console.WriteLine($"Hull damage: {droid.HullDamage}");
+            var walkingDroid = new SpringDroid(WalkProgram);
+            walkingDroid.Run();
+            Console.WriteLine($"Hull damage: {walkingDroid.HullDamage}");
+
+            WritePartTitle();
+            var runningDroid = new SpringDroid(RunProgram);
+            runningDroid.Run();
+            Console.WriteLine($"Hull damage: {runningDroid.HullDamage}");
         }
 
-        private const string Input = @"
-NOT A J
-NOT B T
-OR T J
-NOT C T
-OR T J
+        private const string WalkProgram = @"
+OR A T
+AND B T
+AND C T
+NOT T J
 AND D J
 WALK";
+
+        private const string RunProgram = @"
+OR A T
+AND B T
+AND C T
+NOT T J
+OR E T
+OR H T
+AND T J
+AND D J
+RUN";
     }
 }

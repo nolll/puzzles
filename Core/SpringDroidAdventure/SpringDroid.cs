@@ -55,7 +55,8 @@ namespace Core.SpringDroidAdventure
         {
             if (output > 200)
                 HullDamage = output;
-            Console.Write((char)output);
+            else
+                Console.Write((char)output);
         }
     }
 }

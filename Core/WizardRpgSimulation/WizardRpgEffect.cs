@@ -7,7 +7,7 @@ namespace Core.WizardRpgSimulation
         public int Armor { get; }
         public int Healing { get; }
         public int Recharge { get; }
-        public int Timer { get; }
+        public int Timer { get; set; }
 
         public WizardRpgEffect(string name, int damage, int armor, int healing, int recharge, int timer)
         {

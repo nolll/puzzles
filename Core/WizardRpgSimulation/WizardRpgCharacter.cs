@@ -1,10 +1,8 @@
-using System;
-
 namespace Core.WizardRpgSimulation
 {
     public abstract class WizardRpgCharacter
     {
-        public int Points { get; private set; }
+        public int Points { get; set; }
         public int Damage { get; }
 
         public bool IsAlive => Points > 0;
@@ -13,12 +11,6 @@ namespace Core.WizardRpgSimulation
         {
             Points = points;
             Damage = damage;
-        }
-
-        public bool Hurt(int attack)
-        {
-            Points -= attack;
-            return IsAlive;
         }
     }
 }

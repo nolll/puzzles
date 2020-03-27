@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,9 +26,21 @@ namespace Core.WizardRpgSimulation
 
         private int Run(WizardRpgCharacter boss, WizardRpgPlayer player, List<WizardRpgEffect> effects, int cost)
         {
-            var isAlive = boss.Hurt(player.Damage);
-            if (isAlive)
-                player.Hurt(boss.Damage);
+            // player's turn
+            player.Mana += effects.Sum(o => o.Recharge);
+            player.Points += effects.Sum(o => o.Healing);
+            boss.Points -= effects.Sum(o => o.Damage);
+            foreach (var effect in effects)
+                effect.Timer--;
+            effects = effects.Where(o => o.Timer > 0).ToList();
+
+            //boss' turn
+            player.Mana += effects.Sum(o => o.Recharge);
+            player.Points += effects.Sum(o => o.Healing);
+            boss.Points -= effects.Sum(o => o.Damage);
+            foreach (var effect in effects)
+                effect.Timer--;
+            effects = effects.Where(o => o.Timer > 0).ToList();
 
             var costs = new List<int>();
             if (player.IsAlive && boss.IsAlive)

@@ -9,7 +9,7 @@ namespace ConsoleApp
             var parameters = new Parameters(args);
 
             if(!parameters.WasYearOrDaySpecified)
-                parameters = new Parameters(day: 21, year: 2018);
+                parameters = new Parameters(day: 22, year: 2015);
 
             if (parameters.ShowHelp)
             {

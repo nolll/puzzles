@@ -8,8 +8,8 @@ namespace Core.WizardRpgSimulation
     {
         private readonly IList<WizardRpgSpell> _spells = new List<WizardRpgSpell>
         {
-            new WizardRpgSpell("Magic Missile", 53, 4, 0, 0, 0, 1),
-            new WizardRpgSpell("Drain", 73, 2, 0, 0, 0, 1),
+            new WizardRpgSpell("Magic Missile", 53, 4, 0, 0, 0, 0),
+            new WizardRpgSpell("Drain", 73, 2, 0, 0, 0, 0),
             new WizardRpgSpell("Shield", 113, 0, 7, 0, 0, 6),
             new WizardRpgSpell("Poison", 173, 3, 0, 0, 0, 6),
             new WizardRpgSpell("Recharge", 229, 0, 0, 0, 101, 5)
@@ -26,22 +26,6 @@ namespace Core.WizardRpgSimulation
 
         private int Run(WizardRpgCharacter boss, WizardRpgPlayer player, List<WizardRpgEffect> effects, int cost)
         {
-            // player's turn
-            player.Mana += effects.Sum(o => o.Recharge);
-            player.Points += effects.Sum(o => o.Healing);
-            boss.Points -= effects.Sum(o => o.Damage);
-            foreach (var effect in effects)
-                effect.Timer--;
-            effects = effects.Where(o => o.Timer > 0).ToList();
-
-            //boss' turn
-            player.Mana += effects.Sum(o => o.Recharge);
-            player.Points += effects.Sum(o => o.Healing);
-            boss.Points -= effects.Sum(o => o.Damage);
-            foreach (var effect in effects)
-                effect.Timer--;
-            effects = effects.Where(o => o.Timer > 0).ToList();
-
             var costs = new List<int>();
             if (player.IsAlive && boss.IsAlive)
             {
@@ -49,6 +33,23 @@ namespace Core.WizardRpgSimulation
                 {
                     var newEffects = effects.Select(o => o).ToList();
                     newEffects.Add(spell.GetEffect());
+
+                    // player's turn
+                    player.Mana += effects.Sum(o => o.Recharge);
+                    player.Points += effects.Sum(o => o.Healing);
+                    boss.Points -= effects.Sum(o => o.Damage);
+                    foreach (var effect in effects)
+                        effect.Timer--;
+                    effects = effects.Where(o => o.Timer > 0).ToList();
+
+                    //boss' turn
+                    player.Mana += effects.Sum(o => o.Recharge);
+                    player.Points += effects.Sum(o => o.Healing);
+                    boss.Points -= effects.Sum(o => o.Damage);
+                    foreach (var effect in effects)
+                        effect.Timer--;
+                    effects = effects.Where(o => o.Timer > 0).ToList();
+
                     if (CanCastSpell(newEffects, player, spell))
                     {
                         var newBoss = new WizardRpgBoss(boss.Points, boss.Damage);
@@ -61,7 +62,10 @@ namespace Core.WizardRpgSimulation
                 }
             }
 
-            return costs.Any() ? costs.Min() : 0;
+            if (player.IsAlive)
+                return costs.Min();
+
+            return 0;
         }
 
         private bool CanCastSpell(IEnumerable<WizardRpgEffect> effects, WizardRpgPlayer player, WizardRpgSpell spell)

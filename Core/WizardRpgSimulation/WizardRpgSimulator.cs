@@ -4,15 +4,28 @@ using System.Linq;
 
 namespace Core.WizardRpgSimulation
 {
+    public enum WizardRpgGameMode
+    {
+        Easy,
+        Hard
+    }
+
     public class WizardRpgSimulator
     {
+        private readonly WizardRpgGameMode _gameMode;
+
+        public WizardRpgSimulator(WizardRpgGameMode gameMode)
+        {
+            _gameMode = gameMode;
+        }
+
         private readonly IList<WizardRpgSpell> _spells = new List<WizardRpgSpell>
         {
+            new WizardRpgSpell("Magic Missile", 53, 4, 0, 0, 0, 0),
+            new WizardRpgSpell("Drain", 73, 2, 0, 2, 0, 0),
             new WizardRpgSpell("Shield", 113, 0, 7, 0, 0, 6),
             new WizardRpgSpell("Poison", 173, 3, 0, 0, 0, 6),
             new WizardRpgSpell("Recharge", 229, 0, 0, 0, 101, 5),
-            new WizardRpgSpell("Drain", 73, 2, 0, 2, 0, 0),
-            new WizardRpgSpell("Magic Missile", 53, 4, 0, 0, 0, 0)
         };
 
         public int WinWithLowestCost(int bossPoints, int bossDamage)
@@ -32,6 +45,9 @@ namespace Core.WizardRpgSimulation
                 var newBoss = new WizardRpgBoss(boss.Points, boss.Damage);
                 var newPlayer = new WizardRpgPlayer(player.Mana, player.Points, player.Damage);
                 var newCost = cost + spell.Cost;
+
+                if (_gameMode == WizardRpgGameMode.Hard)
+                    newPlayer.Points--;
 
                 var newEffects = effects.Select(o => new WizardRpgEffect(o.Name, o.Damage, o.Armor, o.Healing, o.Recharge, o.Timer)).ToList();
                 var newEffect = spell.GetEffect();

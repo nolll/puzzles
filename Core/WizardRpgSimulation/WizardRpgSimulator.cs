@@ -8,11 +8,11 @@ namespace Core.WizardRpgSimulation
     {
         private readonly IList<WizardRpgSpell> _spells = new List<WizardRpgSpell>
         {
-            new WizardRpgSpell("Magic Missile", 53, 4, 0, 0, 0, 0),
-            new WizardRpgSpell("Drain", 73, 2, 0, 2, 0, 0),
             new WizardRpgSpell("Shield", 113, 0, 7, 0, 0, 6),
             new WizardRpgSpell("Poison", 173, 3, 0, 0, 0, 6),
-            new WizardRpgSpell("Recharge", 229, 0, 0, 0, 101, 5)
+            new WizardRpgSpell("Recharge", 229, 0, 0, 0, 101, 5),
+            new WizardRpgSpell("Drain", 73, 2, 0, 2, 0, 0),
+            new WizardRpgSpell("Magic Missile", 53, 4, 0, 0, 0, 0)
         };
 
         public int WinWithLowestCost(int bossPoints, int bossDamage)
@@ -30,27 +30,30 @@ namespace Core.WizardRpgSimulation
             foreach (var spell in _spells)
             {
                 var newBoss = new WizardRpgBoss(boss.Points, boss.Damage);
-                var newPlayer = new WizardRpgPlayer(player.Mana - spell.Cost, player.Points, player.Damage);
+                var newPlayer = new WizardRpgPlayer(player.Mana, player.Points, player.Damage);
                 var newCost = cost + spell.Cost;
 
-                // player's turn
-                var newEffects = effects.Select(o => o).ToList();
+                var newEffects = effects.Select(o => new WizardRpgEffect(o.Name, o.Damage, o.Armor, o.Healing, o.Recharge, o.Timer)).ToList();
                 var newEffect = spell.GetEffect();
 
+                var hasCastSpell = false;
                 if (newEffect.Timer == 0 && CanCastSpell(newEffects, player, spell))
                 {
                     newPlayer.Mana += newEffect.Recharge;
+                    newPlayer.Mana -= spell.Cost;
                     newPlayer.Points += newEffect.Healing;
                     newBoss.Points -= newEffect.Damage;
+                    hasCastSpell = true;
                 }
 
-                newPlayer.Mana += newEffects.Sum(o => o.Recharge);
+                var reshargeSum = newEffects.Sum(o => o.Recharge);
+                newPlayer.Mana += reshargeSum;
                 newPlayer.Points += newEffects.Sum(o => o.Healing);
-                newBoss.Points -= newEffects.Sum(o => o.Damage);
+                var bossDamage = newEffects.Sum(o => o.Damage);
+                newBoss.Points -= bossDamage;
                 foreach (var effect in newEffects)
                     effect.Timer--;
-
-
+                
                 if (!newBoss.IsAlive)
                 {
                     costs.Add(newCost);
@@ -60,10 +63,14 @@ namespace Core.WizardRpgSimulation
                 newEffects = newEffects.Where(o => o.Timer > 0).ToList();
                 if (newEffect.Timer > 0 && CanCastSpell(newEffects, player, spell))
                 {
+                    newPlayer.Mana -= spell.Cost;
                     newEffects.Add(newEffect);
+                    hasCastSpell = true;
                 }
+
+                if(!hasCastSpell)
+                    continue;
                 
-                //boss' turn
                 newPlayer.Mana += newEffects.Sum(o => o.Recharge);
                 newPlayer.Points += newEffects.Sum(o => o.Healing);
                 newBoss.Points -= newEffects.Sum(o => o.Damage);
@@ -96,7 +103,7 @@ namespace Core.WizardRpgSimulation
         private bool CanCastSpell(IEnumerable<WizardRpgEffect> effects, WizardRpgPlayer player, WizardRpgSpell spell)
         {
             var canAffordSpell = player.Mana >= spell.Cost;
-            var spellAlreadyCast = effects.Any(o => o.Name != spell.Name);
+            var spellAlreadyCast = effects.Any(o => o.Name == spell.Name);
             return canAffordSpell && !spellAlreadyCast;
         }
     }

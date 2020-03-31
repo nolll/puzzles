@@ -15,10 +15,10 @@ namespace Core.WizardRpgSimulation
         {
             Name = name;
             Cost = cost;
-            _healing = healing;
-            _recharge = recharge;
             _damage = damage;
             _armor = armor;
+            _healing = healing;
+            _recharge = recharge;
             _timer = timer;
         }
 

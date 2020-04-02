@@ -2,9 +2,9 @@ namespace Core.Tools
 {
     public static class MatrixBuilder
     {
-        public static Matrix<char> BuildCharMatrix(string input)
+        public static Matrix<char> BuildCharMatrix(string input, char defaultValue = default)
         {
-            var matrix = new Matrix<char>();
+            var matrix = new Matrix<char>(1, 1, defaultValue);
             var rows = input.Trim().Split('\n');
             var y = 0;
             foreach (var row in rows)

@@ -79,8 +79,8 @@ namespace Core.GridComputing
             var topRight = new MatrixAddress(matrix.Width - 1, 0);
             var goal = new MatrixAddress(topRight.X - 1, topRight.Y);
             var distance1 = PathFinder.StepCountTo(matrix, goal, startAddress);
-            var distance2 = PathFinder.StepCountTo(matrix, topLeft, topRight);
-            return distance1 + distance2 * 5;
+            var distance2 = PathFinder.StepCountTo(matrix, topLeft, goal);
+            return distance1 + distance2 * 5 + 1;
         }
 
         private Matrix<StorageNode> ParseGrid(string input)

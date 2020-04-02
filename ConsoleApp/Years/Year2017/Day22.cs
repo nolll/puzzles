@@ -12,9 +12,14 @@ namespace ConsoleApp.Years.Year2017
         protected override void RunDay()
         {
             WritePartTitle();
-            var infection = new VirusInfection(Input);
-            var infectionCount = infection.Run(10_000);
-            Console.WriteLine($"Infected nodes after 10000 iterations: {infectionCount}");
+            var infection1 = new VirusInfection(Input);
+            var infectionCount1 = infection1.RunPart1(10_000);
+            Console.WriteLine($"Infected nodes after 10 000 iterations: {infectionCount1}");
+
+            WritePartTitle();
+            var infection2 = new VirusInfection(Input);
+            var infectionCount2 = infection2.RunPart2(10_000_000);
+            Console.WriteLine($"Infected nodes after 10 000 000 iterations: {infectionCount2}");
         }
 
         private const string Input = @"

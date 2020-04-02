@@ -1,4 +1,3 @@
-using System;
 using Core.Tools;
 
 namespace Core.SporificaVirus
@@ -6,7 +5,9 @@ namespace Core.SporificaVirus
     public class VirusInfection
     {
         private const char Clean = '.';
+        private const char Weakened = 'W';
         private const char Infected = '#';
+        private const char Flagged = 'F';
 
         private readonly Matrix<char> _matrix;
 
@@ -20,7 +21,7 @@ namespace Core.SporificaVirus
             _matrix.TurnTo(MatrixDirection.Up);
         }
 
-        public int Run(int iterations)
+        public int RunPart1(int iterations)
         {
             var infectionCount = 0;
             for (var i = 0; i < iterations; i++)
@@ -36,6 +37,40 @@ namespace Core.SporificaVirus
                     _matrix.TurnLeft();
                     _matrix.WriteValue(Infected);
                     infectionCount++;
+                }
+
+                _matrix.MoveForward();
+            }
+
+            return infectionCount;
+        }
+
+        public int RunPart2(int iterations)
+        {
+            var infectionCount = 0;
+            for (var i = 0; i < iterations; i++)
+            {
+                var val = _matrix.ReadValue();
+                if (val == Clean)
+                {
+                    _matrix.TurnLeft();
+                    _matrix.WriteValue(Weakened);
+                }
+                else if(val == Weakened)
+                {
+                    _matrix.WriteValue(Infected);
+                    infectionCount++;
+                }
+                else if (val == Infected)
+                {
+                    _matrix.TurnRight();
+                    _matrix.WriteValue(Flagged);
+                }
+                else
+                {
+                    _matrix.TurnRight();
+                    _matrix.TurnRight();
+                    _matrix.WriteValue(Clean);
                 }
 
                 _matrix.MoveForward();

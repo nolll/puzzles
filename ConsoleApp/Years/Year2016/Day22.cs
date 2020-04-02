@@ -15,6 +15,10 @@ namespace ConsoleApp.Years.Year2016
             var storageGrid = new StorageGrid(Input);
             var pairCount = storageGrid.GetViablePairCount();
             Console.WriteLine($"Number of viable pairs: {pairCount}");
+
+            WritePartTitle();
+            var moveCount = storageGrid.MoveStorage();
+            Console.WriteLine($"Least number of moves: {moveCount}");
         }
 
         private const string Input = @"

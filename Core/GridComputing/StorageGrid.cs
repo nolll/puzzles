@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Core.Tools;
 
@@ -16,7 +18,12 @@ namespace Core.GridComputing
 
         public int GetViablePairCount()
         {
-            var pairCount = 0;
+            return GetNodesThatCanMove().Count;
+        }
+
+        private IList<MatrixAddress> GetNodesThatCanMove()
+        {
+            var nodes = new List<MatrixAddress>();
 
             for (var ya = 0; ya < _storage.Height; ya++)
             {
@@ -33,14 +40,47 @@ namespace Core.GridComputing
                                 var nodeAHasData = nodeA.Used > 0;
                                 var nodeACanFitOnNodeB = nodeA.Used <= nodeB.Avail;
                                 if (nodeAHasData && nodeACanFitOnNodeB)
-                                    pairCount++;
+                                {
+                                    nodes.Add(new MatrixAddress(xa, ya));
+                                }
                             }
                         }
                     }
                 }
             }
 
-            return pairCount;
+            return nodes;
+        }
+
+        public int MoveStorage()
+        {
+            var matrix = new Matrix<char>(_storage.Width, _storage.Height, '#');
+            var nodesThatCanMove = GetNodesThatCanMove();
+            foreach (var address in nodesThatCanMove)
+            {
+                matrix.MoveTo(address);
+                matrix.WriteValue('.');
+            }
+
+            Console.WriteLine(matrix.Print());
+
+            var startAddress = new MatrixAddress(0, 0);
+            for (var y = 0; y < _storage.Height; y++)
+            {
+                for (var x = 0; x < _storage.Width; x++)
+                {
+                    var node = _storage.ReadValueAt(x, y);
+                    if (node.Used == 0)
+                        startAddress = new MatrixAddress(x, y);
+                }
+            }
+
+            var topLeft = new MatrixAddress(0, 0);
+            var topRight = new MatrixAddress(matrix.Width - 1, 0);
+            var goal = new MatrixAddress(topRight.X - 1, topRight.Y);
+            var distance1 = PathFinder.StepCountTo(matrix, goal, startAddress);
+            var distance2 = PathFinder.StepCountTo(matrix, topLeft, goal);
+            return distance1 + distance2 * 5 + 1;
         }
 
         private Matrix<StorageNode> ParseGrid(string input)
@@ -56,17 +96,11 @@ namespace Core.GridComputing
                 var nodeName = parts[0];
                 var lastPartOfName = nodeName.Split('/').Last();
                 var coordParts = lastPartOfName.Split('-');
-                var xString = coordParts[1].Replace("x", "");
-                var yString = coordParts[2].Replace("y", "");
-                var x = int.Parse(xString);
-                var y = int.Parse(yString);
-
-                var sizeString = parts[1].Replace("T", "");
-                var usedString = parts[2].Replace("T", "");
-                var availString = parts[3].Replace("T", "");
-                var size = int.Parse(sizeString);
-                var used = int.Parse(usedString);
-                var avail = int.Parse(availString);
+                var x = int.Parse(coordParts[1].Replace("x", ""));
+                var y = int.Parse(coordParts[2].Replace("y", ""));
+                var size = int.Parse(parts[1].Replace("T", ""));
+                var used = int.Parse(parts[2].Replace("T", ""));
+                var avail = int.Parse(parts[3].Replace("T", ""));
 
                 matrix.MoveTo(x, y);
                 matrix.WriteValue(new StorageNode(size, used, avail));

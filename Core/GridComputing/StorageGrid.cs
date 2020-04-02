@@ -62,6 +62,8 @@ namespace Core.GridComputing
                 matrix.WriteValue('.');
             }
 
+            Console.WriteLine(matrix.Print());
+
             var startAddress = new MatrixAddress(0, 0);
             for (var y = 0; y < _storage.Height; y++)
             {
@@ -74,9 +76,10 @@ namespace Core.GridComputing
             }
 
             var topLeft = new MatrixAddress(0, 0);
-            var goal = new MatrixAddress(matrix.Width - 1, 0);
-            var distance1 = PathFinder.StepCountTo(matrix, startAddress, goal);
-            var distance2 = PathFinder.StepCountTo(matrix, goal, topLeft);
+            var topRight = new MatrixAddress(matrix.Width - 1, 0);
+            var goal = new MatrixAddress(topRight.X - 1, topRight.Y);
+            var distance1 = PathFinder.StepCountTo(matrix, goal, startAddress);
+            var distance2 = PathFinder.StepCountTo(matrix, topLeft, topRight);
             return distance1 + distance2 * 5;
         }
 

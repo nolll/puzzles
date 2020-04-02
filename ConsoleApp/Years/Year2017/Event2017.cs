@@ -2,8 +2,7 @@
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class 
-        Event2017 : Event
+    public class Event2017 : Event
     {
         public Event2017() : base(2017)
         {
@@ -31,7 +30,8 @@ namespace ConsoleApp.Years.Year2017
             new Day18(),
             new Day19(),
             new Day20(),
-            new Day21()
+            new Day21(),
+            new Day22()
         };
     }
 }

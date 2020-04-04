@@ -38,7 +38,7 @@ namespace Core.ModeMaze
         {
             _cave = new Matrix<CaveRegion>();
 
-            var xMax = target.X + 10;
+            var xMax = target.X;
             var yMax = target.Y + 10;
 
             for (var y = 0; y <= yMax; y++)

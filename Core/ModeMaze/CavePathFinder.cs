@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
@@ -17,31 +18,55 @@ namespace Core.ModeMaze
         {
             var coordCounts = GetCoordCounts(matrix, from, to);
             var goalCounts = coordCounts.Where(o => o.X == from.X && o.Y == from.Y).ToList();
-            return goalCounts.Any() ? goalCounts.Min(o => o.Count) : 0;
-        }
+            var torchGoals = goalCounts.Where(o => o.Tool == CaveTool.Torch).ToList();
+            if (torchGoals.Any())
+            {
+                Console.WriteLine("Torch");
+                return torchGoals.OrderBy(o => o.Count).First().Count;
+            }
+            var climbingGoals = goalCounts.Where(o => o.Tool == CaveTool.ClimbingGear).ToList();
+            if (climbingGoals.Any())
+            {
+                Console.WriteLine("Climbing Gear");
+                return climbingGoals.OrderBy(o => o.Count).First().Count + 7;
+            }
 
+            return 0;
+        } 
+        
         private static IList<CaveCoordCount> GetCoordCounts(Matrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
         {
-            var queue = new List<CaveCoordCount> { new CaveCoordCount(to.X, to.Y, CaveTool.Torch, 0) };
+            var seen = new Dictionary<(int x, int y, CaveTool tool), int>();
+            var queue = new List<CaveCoordCount>
+            {
+                new CaveCoordCount(to.X, to.Y, CaveTool.Torch, 0),
+                new CaveCoordCount(to.X, to.Y, CaveTool.ClimbingGear, 7)
+            };
             var index = 0;
             while (index < queue.Count)
             {
                 var current = queue[index];
                 matrix.MoveTo(current.X, current.Y);
-                var region = matrix.ReadValue();
-                var adjacentCoords = matrix.Adjacent4Coords;
+                var isStart = matrix.Address.Equals(from);
 
-                foreach (var next in adjacentCoords)
+                if (!isStart)
                 {
-                    var targetRegion = matrix.ReadValueAt(next);
-                    var targetTool = GetTool(region, targetRegion, current.Tool);
-                    var cost = current.Tool == targetTool ? 1 : 8;
+                    var region = matrix.ReadValue();
+                    var adjacentCoords = matrix.Adjacent4Coords;
+                    foreach (var next in adjacentCoords)
+                    {
+                        var targetRegion = matrix.ReadValueAt(next);
+                        var targetTool = GetTool(region, targetRegion, current.Tool);
+                        var cost = current.Tool == targetTool ? 1 : 8;
 
-                    var totalCount = current.Count + cost;
-                    var existing = queue.Where(q => q.X == next.X && q.Y == next.Y).OrderBy(o => o.Count).FirstOrDefault();
-                    var isLowerThanExisting = existing == null || existing.Count > totalCount;
-                    if (isLowerThanExisting)
-                        queue.Add(new CaveCoordCount(next.X, next.Y, targetTool, totalCount));
+                        var totalCount = current.Count + cost;
+                        var visited = seen.TryGetValue((next.X, next.Y, targetTool), out var existingCount);
+                        if (!visited || totalCount < existingCount)
+                        {
+                            seen[(next.X, next.Y, targetTool)] = totalCount;
+                            queue.Add(new CaveCoordCount(next.X, next.Y, targetTool, totalCount));
+                        }
+                    }
                 }
 
                 index++;

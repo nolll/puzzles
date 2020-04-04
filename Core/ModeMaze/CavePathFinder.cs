@@ -24,7 +24,7 @@ namespace Core.ModeMaze
         {
             var queue = new List<CaveCoordCount> { new CaveCoordCount(to.X, to.Y, CaveTool.Torch, 0) };
             var index = 0;
-            while (index < queue.Count && !queue.Any(o => o.X == from.X && o.Y == from.Y))
+            while (index < queue.Count)
             {
                 var current = queue[index];
                 matrix.MoveTo(current.X, current.Y);
@@ -38,8 +38,8 @@ namespace Core.ModeMaze
                     var cost = current.Tool == targetTool ? 1 : 8;
 
                     var totalCount = current.Count + cost;
-                    var existing = queue.FirstOrDefault(q => q.X == next.X && q.Y == next.Y);
-                    var isLowerThanExisting = existing != null;// && existing.Count > totalCount;
+                    var existing = queue.Where(q => q.X == next.X && q.Y == next.Y).OrderBy(o => o.Count).FirstOrDefault();
+                    var isLowerThanExisting = existing == null || existing.Count > totalCount;
                     if (isLowerThanExisting)
                         queue.Add(new CaveCoordCount(next.X, next.Y, targetTool, totalCount));
                 }
@@ -95,7 +95,7 @@ namespace Core.ModeMaze
         {
             X = x;
             Y = y;
-            Tool = Tool;
+            Tool = tool;
             Count = count;
         }
     }

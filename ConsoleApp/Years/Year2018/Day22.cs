@@ -18,6 +18,10 @@ namespace ConsoleApp.Years.Year2018
             WritePartTitle();
             var caveSystem = new CaveSystem(depth, targetX, targetY);
             Console.WriteLine($"Total risk level: {caveSystem.TotalRiskLevel}");
+
+            WritePartTitle();
+            var time = caveSystem.ResqueMan();
+            Console.WriteLine($"Time to resque: {time}");
         }
     }
 }

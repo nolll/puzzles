@@ -1,4 +1,3 @@
-using System.Linq;
 using Core.Tools;
 
 namespace Core.ModeMaze
@@ -18,7 +17,21 @@ namespace Core.ModeMaze
             _mouth = new MatrixAddress(0, 0);
             _target = new MatrixAddress(targetX, targetY);
             BuildCave(_target);
-            TotalRiskLevel = _cave.Values.Sum(o => o.RiskLevel);
+            TotalRiskLevel = GetTotalRiskLevel();
+        }
+
+        private long GetTotalRiskLevel()
+        {
+            long riskLevel = 0;
+            for (var y = 0; y <= _target.Y; y++)
+            {
+                for (var x = 0; x <= _target.X; x++)
+                {
+                    riskLevel += _cave.ReadValueAt(x, y).RiskLevel;
+                }
+            }
+
+            return riskLevel;
         }
 
         private void BuildCave(MatrixAddress target)
@@ -77,7 +90,7 @@ namespace Core.ModeMaze
 
         public int ResqueMan()
         {
-            return CavePathFinder.StepCountTo(_cave, _target, _mouth);
+            return CavePathFinder.StepCountTo(_cave, _mouth, _target);
         }
     }
 }

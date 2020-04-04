@@ -7,8 +7,8 @@ namespace Core.ModeMaze
     {
         private readonly long _depth;
         private Matrix<CaveRegion> _cave;
-        private MatrixAddress _mouth;
-        private MatrixAddress _target;
+        private readonly MatrixAddress _mouth;
+        private readonly MatrixAddress _target;
 
         public long TotalRiskLevel { get; }
 
@@ -25,9 +25,12 @@ namespace Core.ModeMaze
         {
             _cave = new Matrix<CaveRegion>();
 
-            for (var y = 0; y <= target.Y; y++)
+            var xMax = target.X + 10;
+            var yMax = target.Y + 10;
+
+            for (var y = 0; y <= yMax; y++)
             {
-                for (var x = 0; x <= target.X; x++)
+                for (var x = 0; x <= xMax; x++)
                 {
                     _cave.MoveTo(x, y);
                     var region = _cave.ReadValue() ?? new CaveRegion();
@@ -70,6 +73,11 @@ namespace Core.ModeMaze
         private CaveRegionType GetRegionType(long riskLevel)
         {
             return (CaveRegionType) riskLevel;
+        }
+
+        public int ResqueMan()
+        {
+            return CavePathFinder.StepCountTo(_cave, _target, _mouth);
         }
     }
 }

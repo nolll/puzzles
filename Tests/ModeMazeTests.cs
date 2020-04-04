@@ -5,16 +5,25 @@ namespace Tests
 {
     public class ModeMazeTests
     {
+        private const long Depth = 510;
+        private const int TargetX = 10;
+        private const int TargetY = 10;
+
         [Test]
         public void CaveRiskLevelIsCorrect()
         {
-            const long depth = 510;
-            const int targetX = 10;
-            const int targetY = 10;
-
-            var caveSystem = new CaveSystem(depth, targetX, targetY);
+            var caveSystem = new CaveSystem(Depth, TargetX, TargetY);
 
             Assert.That(caveSystem.TotalRiskLevel, Is.EqualTo(114));
+        }
+
+        [Test]
+        public void ShortestTimeToResque()
+        {
+            var caveSystem = new CaveSystem(Depth, TargetX, TargetY);
+            var time = caveSystem.ResqueMan();
+
+            Assert.That(time, Is.EqualTo(45));
         }
     }
 }

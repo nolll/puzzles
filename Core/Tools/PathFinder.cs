@@ -61,19 +61,19 @@ namespace Core.Tools
 
             return queue;
         }
-        
-        private class CoordCount
-        {
-            public int X { get; }
-            public int Y { get; }
-            public int Count { get; }
+    }
 
-            public CoordCount(int x, int y, int count)
-            {
-                X = x;
-                Y = y;
-                Count = count;
-            }
+    public class CoordCount
+    {
+        public int X { get; }
+        public int Y { get; }
+        public int Count { get; }
+
+        public CoordCount(int x, int y, int count)
+        {
+            X = x;
+            Y = y;
+            Count = count;
         }
     }
 }

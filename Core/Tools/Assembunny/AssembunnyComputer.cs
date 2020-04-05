@@ -1,23 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using Core.Tools;
 
-namespace Core.MonorailCode
+namespace Core.Tools.Assembunny
 {
-    public class MonorailControl
+    public class AssembunnyComputer
     {
-        private readonly MonorailInstruction[] _instructions;
         private readonly Dictionary<char, int> _registers;
         private int _index;
+        private readonly AssembunnyInstruction[] _instructions;
 
         public int ValueA => _registers['a'];
 
-        public MonorailControl(string input, int cValue = 0)
+        public AssembunnyComputer(string input, int c = 0)
         {
             _instructions = PuzzleInputReader.Read(input).Select(ParseInstruction).ToArray();
-            _registers = new Dictionary<char, int> {['a'] = 0, ['b'] = 0, ['c'] = cValue, ['d'] = 0};
+            _registers = new Dictionary<char, int>
+            {
+                ['a'] = 0, 
+                ['b'] = 0, 
+                ['c'] = c, 
+                ['d'] = 0
+            };
             _index = 0;
             
             while(_index < _instructions.Length)
@@ -67,7 +71,28 @@ namespace Core.MonorailCode
             IncrementIndex();
         }
 
-        private MonorailInstruction ParseInstruction(string s)
+        public void Toggle(char target)
+        {
+            var val = _registers[target];
+            var indexToToggle = _index + val;
+            if (indexToToggle >= 0 && indexToToggle < _instructions.Length)
+            {
+                var instructionToToggle = _instructions[indexToToggle];
+
+            }
+            IncrementIndex();
+        }
+
+/*
+For one-argument instructions, inc becomes dec, and all other one-argument instructions become inc.
+For two-argument instructions, jnz becomes cpy, and all other two-instructions become jnz.
+The arguments of a toggled instruction are not affected.
+If an attempt is made to toggle an instruction outside the program, nothing happens.
+If toggling produces an invalid instruction (like cpy 1 2) and an attempt is later made to execute that instruction, skip it instead.
+If tgl toggles itself (for example, if a is 0, tgl a would target itself and become inc a), the resulting instruction is not executed until the next time it is reached.
+*/
+
+        private AssembunnyInstruction ParseInstruction(string s)
         {
             var parts = s.Split(' ');
             var command = parts[0];
@@ -99,6 +124,12 @@ namespace Core.MonorailCode
                 if (int.TryParse(value, out var num))
                     return new JumpValueNotZeroInstruction(this, num, steps);
                 return new JumpSourceNotZeroInstruction(this, value.First(), steps);
+            }
+
+            if (command == "tgl")
+            {
+                var target = parts[1].First();
+                return new ToggleInstruction(this, target);
             }
 
             throw new Exception("Instruction parse error");

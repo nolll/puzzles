@@ -38,8 +38,9 @@ namespace Core.ModeMaze
         {
             _cave = new Matrix<CaveRegion>();
 
-            var xMax = target.X;
-            var yMax = target.Y + 10;
+            const int padding = 25;
+            var xMax = target.X + padding;
+            var yMax = target.Y + padding;
 
             for (var y = 0; y <= yMax; y++)
             {
@@ -90,7 +91,7 @@ namespace Core.ModeMaze
 
         public int ResqueMan()
         {
-            return CavePathFinder.StepCountTo(_cave, _mouth, _target);
+            return CavePathFinder.StepCountTo(_cave, _target, _mouth);
         }
     }
 }

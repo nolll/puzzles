@@ -12,12 +12,17 @@ namespace ConsoleApp.Years.Year2019
         protected override void RunDay()
         {
             WritePartTitle();
-            var shuffler = new CardShuffler(10007);
-            shuffler.Shuffle(Input);
+            var shuffler1 = new CardShuffler();
+            var deck = shuffler1.Shuffle(10_007, Input);
+            var positionOfCard2019 = deck.IndexOf(2019);
+            var CardAtPosition2020 = deck[2020];
+            Console.WriteLine($"Position of card 2019: {positionOfCard2019}");
+            Console.WriteLine($"Card at position 2020: {CardAtPosition2020}");
 
-            var position = shuffler.Deck.IndexOf(2019);
-
-            Console.WriteLine($"Position of card 2019: {position}");
+            WritePartTitle();
+            var shuffler2 = new CardShuffler();
+            var cardAtPosition2020 = shuffler2.ShuffleBig(Input);
+            Console.WriteLine($"Card at position 2020: {cardAtPosition2020}");
         }
 
         private const string Input = @"cut 1470

@@ -1,83 +1,127 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace Core.CardShuffling
 {
+    /*
+     * Most of part two was copied from https://github.com/sanraith/aoc2019/blob/master/aoc2019.Puzzles/Solutions/Day22.cs
+     * I understand parts of the solution, but the mathematics is just too hard. I might come back for another try later
+     * Here is an in-depth explanation: https://codeforces.com/blog/entry/72593
+     */
     public class CardShuffler
     {
-        public IList<int> Deck { get; private set; }
-
-        public CardShuffler(IList<int> deck)
+        public IList<int> Reverse(IList<int> deck)
         {
-            Deck = deck;
+            return deck.Reverse().ToList();
         }
 
-        public CardShuffler(int size)
-        {
-            Deck = new List<int>();
-            for (var i = 0; i < size; i++)
-            {
-                Deck.Add(i);
-            }
-        }
-
-        public void Reverse()
-        {
-            Deck = Deck.Reverse().ToList();
-        }
-
-        public void Cut(int count)
+        public IList<int> Cut(IList<int> deck, int count)
         {
             var offset = count < 0
-                ? Deck.Count + count
+                ? deck.Count + count
                 : count;
 
-            var itemsToMove = Deck.Take(offset);
-            var newDeck = Deck.Skip(offset).ToList();
+            var itemsToMove = deck.Take(offset);
+            var newDeck = deck.Skip(offset).ToList();
             newDeck.AddRange(itemsToMove);
-            Deck = newDeck;
+            return newDeck;
         }
 
-        public void Increment(int n)
+        public IList<int> Increment(IList<int> deck, int n)
         {
-            var newDeck = new int[Deck.Count];
+            var newDeck = new int[deck.Count];
             var position = 0;
-            for (var i = 0; i < Deck.Count; i++)
+            for (var i = 0; i < deck.Count; i++)
             {
-                var card = Deck[i];
+                var card = deck[i];
                 newDeck[position] = card;
                 position += n;
-                if (position > Deck.Count - 1)
-                    position -= Deck.Count;
+                if (position > deck.Count - 1)
+                    position -= deck.Count;
             }
 
-            Deck = newDeck;
+            return newDeck;
         }
 
-        public void Shuffle(string input)
+        public IList<int> Shuffle(int deckSize, string input)
         {
-            Shuffle(input.Trim().Split('\n').Select(o => o.Trim()).ToList());
+            var deck = new List<int>();
+            for (var i = 0; i < deckSize; i++)
+            {
+                deck.Add(i);
+            }
+
+            return Shuffle(deck, input.Trim().Split('\n').Select(o => o.Trim()).ToList());
         }
 
-        public void Shuffle(IList<string> shuffles)
+        public BigInteger ShuffleBig(string input)
+        {
+            return ShuffleBig(input.Trim().Split('\n').Select(o => o.Trim()).ToList());
+        }
+
+        private IList<int> Shuffle(IList<int> deck, IList<string> shuffles)
         {
             foreach (var shuffle in shuffles)
             {
                 if (shuffle == "deal into new stack")
                 {
-                    Reverse();
+                    deck = Reverse(deck);
                 }
                 else if (shuffle.StartsWith("deal with increment"))
                 {
                     var n = int.Parse(shuffle.Split(" ").Last());
-                    Increment(n);
+                    deck = Increment(deck, n);
                 }
                 else if (shuffle.StartsWith("cut"))
                 {
                     var n = int.Parse(shuffle.Split(" ").Last());
-                    Cut(n);
+                    deck = Cut(deck, n);
                 }
             }
+
+            return deck;
         }
+
+        private BigInteger ShuffleBig(IList<string> shuffles)
+        {
+            const long stackLength = 119_315_717_514_047;
+            const long iterationCount = 101_741_582_076_661;
+            const long targetPos = 2020;
+
+            BigInteger a = 1;
+            BigInteger b = 0;
+            foreach (var shuffle in shuffles)
+            {
+                if (shuffle.StartsWith("cut"))
+                {
+                    BigInteger n = long.Parse(shuffle.Split(" ").Last());
+                    b = stackLength + b - n;
+                }
+                else if (shuffle.StartsWith("deal with increment"))
+                {
+                    var n = long.Parse(shuffle.Split(" ").Last());
+                    a *= n;
+                    b *= n;
+
+                }
+                else if (shuffle == "deal into new stack")
+                {
+                    a *= -1;
+                    b = stackLength - b - 1;
+                }
+            }
+
+            var aGazillion = BigInteger.ModPow(a, iterationCount, stackLength);
+            var bGazillion = b * (BigInteger.ModPow(a, iterationCount, stackLength) - 1) * ModuloInverse(a - 1, stackLength) % stackLength;
+            var result = (((targetPos - bGazillion) % stackLength) * ModuloInverse(aGazillion, stackLength)) % stackLength;
+
+            if (result < 0)
+                result += stackLength;
+            
+            return result;
+        }
+
+        private static BigInteger ModuloInverse(BigInteger a, BigInteger n) => BigInteger.ModPow(a, n - 2, n);
     }
 }

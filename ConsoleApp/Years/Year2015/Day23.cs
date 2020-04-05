@@ -12,9 +12,14 @@ namespace ConsoleApp.Years.Year2015
         protected override void RunDay()
         {
             WritePartTitle();
-            var computer = new ChristmasComputer();
-            computer.Run(Input);
-            Console.WriteLine($"Value of register B: {computer.RegisterB}");
+            var computer1 = new ChristmasComputer();
+            computer1.Run(Input);
+            Console.WriteLine($"Value of register B: {computer1.RegisterB}");
+
+            WritePartTitle();
+            var computer2 = new ChristmasComputer();
+            computer2.Run(Input, 1);
+            Console.WriteLine($"Value of register B: {computer2.RegisterB}");
         }
 
         private const string Input = @"

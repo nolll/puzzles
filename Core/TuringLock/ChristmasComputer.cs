@@ -13,15 +13,14 @@ namespace Core.TuringLock
 
         public ChristmasComputer()
         {
-            _registers = new Dictionary<char, int>
-            {
-                ['a'] = 0,
-                ['b'] = 0
-            };
+            _registers = new Dictionary<char, int>();
         }
 
-        public void Run(string program)
+        public void Run(string program, int a = 0)
         {
+            _registers['a'] = a;
+            _registers['b'] = 0;
+
             var instructions = PuzzleInputReader.Read(program);
             var pointer = 0;
             while (pointer >= 0 && pointer < instructions.Count)

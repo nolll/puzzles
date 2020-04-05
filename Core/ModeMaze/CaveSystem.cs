@@ -1,4 +1,3 @@
-using System.Linq;
 using Core.Tools;
 
 namespace Core.ModeMaze
@@ -7,8 +6,8 @@ namespace Core.ModeMaze
     {
         private readonly long _depth;
         private Matrix<CaveRegion> _cave;
-        private MatrixAddress _mouth;
-        private MatrixAddress _target;
+        private readonly MatrixAddress _mouth;
+        private readonly MatrixAddress _target;
 
         public long TotalRiskLevel { get; }
 
@@ -18,16 +17,34 @@ namespace Core.ModeMaze
             _mouth = new MatrixAddress(0, 0);
             _target = new MatrixAddress(targetX, targetY);
             BuildCave(_target);
-            TotalRiskLevel = _cave.Values.Sum(o => o.RiskLevel);
+            TotalRiskLevel = GetTotalRiskLevel();
+        }
+
+        private long GetTotalRiskLevel()
+        {
+            long riskLevel = 0;
+            for (var y = 0; y <= _target.Y; y++)
+            {
+                for (var x = 0; x <= _target.X; x++)
+                {
+                    riskLevel += _cave.ReadValueAt(x, y).RiskLevel;
+                }
+            }
+
+            return riskLevel;
         }
 
         private void BuildCave(MatrixAddress target)
         {
             _cave = new Matrix<CaveRegion>();
 
-            for (var y = 0; y <= target.Y; y++)
+            const int padding = 25;
+            var xMax = target.X + padding;
+            var yMax = target.Y + padding;
+
+            for (var y = 0; y <= yMax; y++)
             {
-                for (var x = 0; x <= target.X; x++)
+                for (var x = 0; x <= xMax; x++)
                 {
                     _cave.MoveTo(x, y);
                     var region = _cave.ReadValue() ?? new CaveRegion();
@@ -70,6 +87,11 @@ namespace Core.ModeMaze
         private CaveRegionType GetRegionType(long riskLevel)
         {
             return (CaveRegionType) riskLevel;
+        }
+
+        public int ResqueMan()
+        {
+            return CavePathFinder.StepCountTo(_cave, _target, _mouth);
         }
     }
 }

@@ -17,22 +17,10 @@ namespace ConsoleApp.Years.Year2016
 
             WritePartTitle();
             // By inspecting output from the computer I realized that it is calculating the factorial of 12
-            var computer2 = new AssembunnyComputer(Input, 5, 0);
+            var computer2 = new AssembunnyComputer(Input, 12, 0);
             Console.WriteLine($"Value in register A: {computer2.ValueA}");
             //var factorial = Factorial(12);
             //Console.WriteLine($"Value in register A: {factorial}");
-        }
-
-        private long Factorial(long n)
-        {
-            var i = n;
-            while (i > 1)
-            {
-                i--;
-                n *= i;
-            }
-
-            return n;
         }
 
         private const string Input = @"

@@ -1,21 +1,32 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
 namespace Core.Tools
 {
+    public class AssembunnyInstruction
+    {
+        public string Name { get; set; }
+        public IList<string> Args { get; }
+
+        public AssembunnyInstruction(string s)
+        {
+            var parts = s.Split(' ');
+            Name = parts.First();
+            Args = parts.Skip(1).ToList();
+        }
+    }
+
     public class AssembunnyComputer
     {
         private readonly Dictionary<char, int> _registers;
         private int _index;
-        private readonly string[] _instructions;
+        private readonly AssembunnyInstruction[] _instructions;
 
         public int ValueA => _registers['a'];
 
         public AssembunnyComputer(string input, int a, int c)
         {
-            _instructions = PuzzleInputReader.Read(input).ToArray();
+            _instructions = PuzzleInputReader.Read(input).Select(o => new AssembunnyInstruction(o)).ToArray();
             _registers = new Dictionary<char, int>
             {
                 ['a'] = a, 
@@ -28,14 +39,13 @@ namespace Core.Tools
             while(_index < _instructions.Length)
             {
                 var s = _instructions[_index];
-                var parts = s.Split(' ');
-                var command = parts[0];
+                var command = s.Name;
                 try
                 {
                     if (command == "cpy")
                     {
-                        var value = parts[1];
-                        var target = parts[2].First();
+                        var value = s.Args[0];
+                        var target = s.Args[1].First();
                         if (int.TryParse(value, out var num))
                         {
                             _registers[target] = num;
@@ -43,17 +53,21 @@ namespace Core.Tools
                         else
                         {
                             var v = value.First();
-                            if (target == 'd' && v == 'a')
-                            {
-                                while (_registers['b'] > 1)
-                                {
-                                    var r = _registers['a'] * _registers['b'];
-                                    _registers['b']--;
-                                    _registers['a'] = r;
-                                    _registers['d'] = r;
-                                }
-                            }
-                            _registers[target] = _registers[value.First()];
+                            // Never got this optimization right, so the solution took 10 minutes
+                            //if (target == 'd' && v == 'a')
+                            //{
+                            //    while (_registers['b'] > 0)
+                            //    {
+                            //        var r = _registers['a'] * _registers['b'];
+                            //        _registers['b']--;
+                            //        _registers['a'] = r;
+                            //        _registers['d'] = r;
+                            //    }
+                            //}
+                            //else
+                            //{
+                                _registers[target] = _registers[value.First()];
+                            //}
                         }
 
                         IncrementIndex();
@@ -61,23 +75,23 @@ namespace Core.Tools
 
                     else if (command == "inc")
                     {
-                        var target = parts[1].First();
+                        var target = s.Args[0].First();
                         _registers[target]++;
                         IncrementIndex();
                     }
 
                     else if (command == "dec")
                     {
-                        var target = parts[1].First();
+                        var target = s.Args[0].First();
                         _registers[target]--;
                         IncrementIndex();
                     }
 
                     else if (command == "jnz")
                     {
-                        var value = parts[1];
-                        var isInt = int.TryParse(parts[2], out var steps);
-                        steps = isInt ? steps : _registers[parts[2].First()];
+                        var value = s.Args[0];
+                        var isInt = int.TryParse(s.Args[1], out var steps);
+                        steps = isInt ? steps : _registers[s.Args[1].First()];
 
                         if (int.TryParse(value, out var num))
                         {
@@ -91,43 +105,40 @@ namespace Core.Tools
 
                     else if (command == "tgl")
                     {
-                        var target = parts[1].First();
+                        var target = s.Args[0].First();
                         var val = _registers[target];
                         var indexToToggle = _index + val;
                         if (indexToToggle >= 0 && indexToToggle < _instructions.Length)
                         {
                             var instructionToToggle = _instructions[indexToToggle];
-                            var toggleParts = instructionToToggle.Split(" ");
-                            var name = toggleParts[0];
-                            if (toggleParts.Length == 2)
+                            var name = instructionToToggle.Name;
+                            if (instructionToToggle.Args.Count == 1)
                             {
                                 if (name == "inc")
-                                    toggleParts[0] = "dec";
+                                    instructionToToggle.Name = "dec";
                                 else
-                                    toggleParts[0] = "inc";
+                                    instructionToToggle.Name = "inc";
                             }
                             else
                             {
                                 if (name == "jnz")
-                                    toggleParts[0] = "cpy";
+                                    instructionToToggle.Name = "cpy";
                                 else
-                                    toggleParts[0] = "jnz";
+                                    instructionToToggle.Name = "jnz";
                             }
-
-                            _instructions[indexToToggle] = string.Join(' ', toggleParts);
                         }
 
                         IncrementIndex();
                     }
 
-                    Console.WriteLine($"a: {_registers['a']}, b: {_registers['b']}, c: {_registers['c']}, d: {_registers['d']}");
-                    if (_index == 3)
-                    {
-                        Console.WriteLine($"{_index}. {s}");
-                        Console.WriteLine($"a: {_registers['a']}, b: {_registers['b']}, c: {_registers['c']}, d: {_registers['d']}");
-                        Console.WriteLine();
-                        Thread.Sleep(500);
-                    }
+                    //Console.WriteLine($"a: {_registers['a']}, b: {_registers['b']}, c: {_registers['c']}, d: {_registers['d']}");
+                    //if (_index == 3)
+                    //{
+                    //    Console.WriteLine($"{_index}. {s}");
+                    //    Console.WriteLine($"a: {_registers['a']}, b: {_registers['b']}, c: {_registers['c']}, d: {_registers['d']}");
+                    //    Console.WriteLine();
+                    //    Thread.Sleep(500);
+                    //}
                 }
                 catch
                 {

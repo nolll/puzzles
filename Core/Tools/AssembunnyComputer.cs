@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Core.Tools
 {
@@ -27,7 +28,6 @@ namespace Core.Tools
             while(_index < _instructions.Length)
             {
                 var s = _instructions[_index];
-                //Console.WriteLine($"{_index}. {s}");
                 var parts = s.Split(' ');
                 var command = parts[0];
                 try
@@ -42,6 +42,17 @@ namespace Core.Tools
                         }
                         else
                         {
+                            var v = value.First();
+                            if (target == 'd' && v == 'a')
+                            {
+                                while (_registers['b'] > 1)
+                                {
+                                    var r = _registers['a'] * _registers['b'];
+                                    _registers['b']--;
+                                    _registers['a'] = r;
+                                    _registers['d'] = r;
+                                }
+                            }
                             _registers[target] = _registers[value.First()];
                         }
 
@@ -107,6 +118,15 @@ namespace Core.Tools
                         }
 
                         IncrementIndex();
+                    }
+
+                    Console.WriteLine($"a: {_registers['a']}, b: {_registers['b']}, c: {_registers['c']}, d: {_registers['d']}");
+                    if (_index == 3)
+                    {
+                        Console.WriteLine($"{_index}. {s}");
+                        Console.WriteLine($"a: {_registers['a']}, b: {_registers['b']}, c: {_registers['c']}, d: {_registers['d']}");
+                        Console.WriteLine();
+                        Thread.Sleep(500);
                     }
                 }
                 catch

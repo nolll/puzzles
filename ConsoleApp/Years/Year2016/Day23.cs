@@ -12,8 +12,15 @@ namespace ConsoleApp.Years.Year2016
         protected override void RunDay()
         {
             WritePartTitle();
-            var computer = new AssembunnyComputer(Input, 7, 0);
-            Console.WriteLine($"Value in register A: {computer.ValueA}");
+            //var computer1 = new AssembunnyComputer(Input, 7, 0);
+            //Console.WriteLine($"Value in register A: {computer1.ValueA}");
+
+            WritePartTitle();
+            // By inspecting output from the computer I realized that it is calculating the factorial of 12
+            var computer2 = new AssembunnyComputer(Input, 12, 0);
+            Console.WriteLine($"Value in register A: {computer2.ValueA}");
+            //var factorial = Factorial(12);
+            //Console.WriteLine($"Value in register A: {factorial}");
         }
 
         private const string Input = @"

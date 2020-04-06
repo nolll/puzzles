@@ -1,5 +1,4 @@
 using Core.Tools;
-using Core.Tools.Assembunny;
 using NUnit.Framework;
 
 namespace Tests
@@ -17,7 +16,7 @@ dec a
 jnz a 2
 dec a";
 
-            var control = new AssembunnyComputer(input);
+            var control = new AssembunnyComputer(input, 0, 0);
 
             Assert.That(control.ValueA, Is.EqualTo(42));
         }
@@ -34,7 +33,7 @@ cpy 1 a
 dec a
 dec a";
 
-            var control = new AssembunnyComputer(input);
+            var control = new AssembunnyComputer(input, 0, 0);
 
             Assert.That(control.ValueA, Is.EqualTo(3));
         }

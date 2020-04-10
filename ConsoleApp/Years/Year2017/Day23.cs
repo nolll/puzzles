@@ -19,8 +19,8 @@ namespace ConsoleApp.Years.Year2017
 
             WritePartTitle();
             var processor2 = new OptimizedCoProcessor();
-            processor2.Run(1);
-            Console.WriteLine($"Value left in register h: {processor2.RegisterH}.");
+            processor2.Run();
+            Console.WriteLine($"Value left in register h: {processor2.H}.");
 
             //WritePartTitle();
             //var processor2 = new CoProcessor(Input, 1);

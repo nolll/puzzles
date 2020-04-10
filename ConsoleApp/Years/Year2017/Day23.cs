@@ -13,9 +13,14 @@ namespace ConsoleApp.Years.Year2017
         protected override void RunDay()
         {
             WritePartTitle();
-            var processor = new CoProcessor(Input);
-            processor.Run();
-            Console.WriteLine($"The mul instruction was invoked {processor.MulCount} times.");
+            var processor1 = new CoProcessor(Input);
+            processor1.Run();
+            Console.WriteLine($"The mul instruction was invoked {processor1.MulCount} times.");
+
+            WritePartTitle();
+            var processor2 = new OptimizedCoProcessor();
+            processor2.Run();
+            Console.WriteLine($"Value left in register h: {processor2.H}.");
         }
 
         private const string Input = @"

@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using Core.Tools;
 
 namespace Core.CoprocessorConflagration
@@ -8,19 +11,23 @@ namespace Core.CoprocessorConflagration
         private readonly IList<string> _operations;
         private readonly IDictionary<string, long> _registers;
         private long _currentOperation;
+        private readonly bool _isPrinterEnabled;
 
         private bool IsRunning => _currentOperation < _operations.Count && _currentOperation >= 0;
         public int MulCount { get; private set; }
+        public long RegisterH => _registers["h"];
 
-        public CoProcessor(string input)
-            : this(PuzzleInputReader.Read(input))
+        public CoProcessor(string input, long registerA = 0)
+            : this(PuzzleInputReader.Read(input), registerA)
         {
         }
 
-        public CoProcessor(IList<string> operations)
+        private CoProcessor(IList<string> operations, long registerA = 0)
         {
             _operations = operations;
             _registers = new Dictionary<string, long>();
+            _registers["a"] = registerA;
+            _isPrinterEnabled = registerA != 0;
         }
 
         public void Run()
@@ -33,6 +40,7 @@ namespace Core.CoprocessorConflagration
                 var part1 = parts[1];
                 var val1IsNumeric = long.TryParse(part1, out var val1);
                 val1 = !val1IsNumeric && _registers.ContainsKey(part1) ? _registers[part1] : val1;
+                long operationIncrement = 1;
 
                 var part2 = parts.Length > 2 ? parts[2] : null;
                 long val2 = 0;
@@ -68,21 +76,33 @@ namespace Core.CoprocessorConflagration
                 {
                     if (val1 > 0)
                     {
-                        _currentOperation += val2;
-                        continue;
+                        operationIncrement = val2;
                     }
                 }
                 else if (command == "jnz")
                 {
                     if (val1 != 0)
                     {
-                        _currentOperation += val2;
-                        continue;
+                        operationIncrement = val2;
                     }
                 }
 
-                _currentOperation++;
+                if (_isPrinterEnabled)
+                {
+                    Console.WriteLine(operation);
+                    PrintRegisters();
+                    Console.WriteLine();
+                    Thread.Sleep(500);
+                }
+
+                _currentOperation += operationIncrement;
             }
+        }
+
+        private void PrintRegisters()
+        {
+            var r = string.Join(", ", _registers.Keys.Select(key => $"{key}: {_registers[key]}"));
+            Console.WriteLine($"{_currentOperation}. {r}");
         }
     }
 }

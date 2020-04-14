@@ -18,7 +18,7 @@ namespace Core.ExperimentalEmergencyTeleportation
         public int FindManhattanDistanceToBestCoords()
         {
             var maxRadius = _bots.Max(o => o.SignalRadius);
-            var padding = maxRadius + 100000;
+            var padding = maxRadius;
 
             var xMin = _bots.Min(o => o.Coords.X) - padding;
             var xMax = _bots.Max(o => o.Coords.X) + padding;
@@ -69,11 +69,12 @@ namespace Core.ExperimentalEmergencyTeleportation
         public class PriorityQueue
         {
             private readonly Dictionary<int, IList<PriorityQueueItem>> _dict;
-            public int Length => _dict.Count;
+            public int Length { get; private set; }
 
             public PriorityQueue()
             {
                 _dict = new Dictionary<int, IList<PriorityQueueItem>>();
+                Length = 0;
             }
 
             public void Enqueue(PriorityQueueItem item)
@@ -82,6 +83,7 @@ namespace Core.ExperimentalEmergencyTeleportation
                     list.Add(item);
                 else
                     _dict.Add(item.BotsInRange, new List<PriorityQueueItem>{item});
+                Length++;
             }
             
             public PriorityQueueItem Dequeue()
@@ -92,6 +94,7 @@ namespace Core.ExperimentalEmergencyTeleportation
                 list.Remove(item);
                 if (!list.Any())
                     _dict.Remove(maxBots);
+                Length--;
                 return item;
             }
         }
@@ -134,17 +137,17 @@ namespace Core.ExperimentalEmergencyTeleportation
             }
         }
 
-        private SpaceBox FindBestCoords(SpaceBox box)
+        private SpaceBox FindBestCoords(SpaceBox rootBox)
         {
             var queue = new PriorityQueue();
-            queue.Enqueue(new PriorityQueueItem(box, CountBotsInRange(box), ManhattanDistanceTo(_origo, box)));
+            queue.Enqueue(new PriorityQueueItem(rootBox, CountBotsInRange(rootBox), ManhattanDistanceTo(_origo, rootBox)));
             while (queue.Length > 0)
             {
                 var current = queue.Dequeue();
                 if (current.BoxSize == 1)
                     return current.Box;
 
-                var subBoxes = DivideBox(box).ToList();
+                var subBoxes = DivideBox(current.Box).ToList();
                 foreach (var subBox in subBoxes)
                 {
                     queue.Enqueue(new PriorityQueueItem(subBox, CountBotsInRange(subBox), ManhattanDistanceTo(_origo, subBox)));

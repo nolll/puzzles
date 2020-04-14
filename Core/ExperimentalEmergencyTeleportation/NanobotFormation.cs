@@ -66,23 +66,104 @@ namespace Core.ExperimentalEmergencyTeleportation
             return bestCoords;
         }
 
-        private SpaceBox FindBestCoords(SpaceBox box)
+        public class PriorityQueue
         {
-            //var priorityQueue
-            var subBoxes = DivideBox(box).ToList();
-            var subBoxesWithBotCounts = subBoxes.Select(CountBotsInRange).ToList();
-            var bestCount = subBoxesWithBotCounts.Max(o => o.count);
-            var bestBoxes = subBoxesWithBotCounts.Where(o => o.count == bestCount).Select(o => o.box).ToList();
-            var bestBoxesWithDistances = bestBoxes.Select(o => (o, ManhattanDistanceTo(_origo, o))).ToList();
-            var bestBox = bestBoxesWithDistances.OrderBy(o => o.Item2).First().o;
-            if (bestBox.SmallestSize <= 10)
-                return bestBox;
-            return FindBestCoords(bestBox);
+            private readonly Dictionary<int, IList<PriorityQueueItem>> _dict;
+            public int Length => _dict.Count;
+
+            public PriorityQueue()
+            {
+                _dict = new Dictionary<int, IList<PriorityQueueItem>>();
+            }
+
+            public void Enqueue(PriorityQueueItem item)
+            {
+                if(_dict.TryGetValue(item.BotsInRange, out var list))
+                    list.Add(item);
+                else
+                    _dict.Add(item.BotsInRange, new List<PriorityQueueItem>{item});
+            }
+            
+            public PriorityQueueItem Dequeue()
+            {
+                var maxBots = _dict.Keys.Max();
+                var list = _dict[maxBots];
+                var item = list.OrderByDescending(o => o.BoxSize).ThenBy(o => o.DistanceFromOrigo).First();
+                list.Remove(item);
+                return item;
+            }
         }
 
-        private (SpaceBox box, int count) CountBotsInRange(SpaceBox spaceBox)
+        public class PriorityQueueItem : IEquatable<PriorityQueueItem>
         {
-            return (spaceBox, _bots.Count(o => IsInRange(o, spaceBox)));
+            public string Id { get; }
+            public SpaceBox Box { get; }
+            public long BoxSize { get; }
+            public int BotsInRange { get; }
+            public int DistanceFromOrigo { get; }
+
+            public PriorityQueueItem(SpaceBox box, int botsInRange, int distanceFromOrigo)
+            {
+                Id = $"{box.Min.X},{box.Min.Y},{box.Min.Z}-{box.Max.X},{box.Max.Y},{box.Max.Z}:{box.Size}";
+                Box = box;
+                BoxSize = box.Size;
+                BotsInRange = botsInRange;
+                DistanceFromOrigo = distanceFromOrigo;
+            }
+
+            public bool Equals(PriorityQueueItem other)
+            {
+                if (ReferenceEquals(null, other)) return false;
+                if (ReferenceEquals(this, other)) return true;
+                return Id == other.Id;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+                if (obj.GetType() != this.GetType()) return false;
+                return Equals((PriorityQueueItem) obj);
+            }
+
+            public override int GetHashCode()
+            {
+                return (Id != null ? Id.GetHashCode() : 0);
+            }
+        }
+
+        private SpaceBox FindBestCoords(SpaceBox box)
+        {
+            var queue = new PriorityQueue();
+            queue.Enqueue(new PriorityQueueItem(box, CountBotsInRange(box), ManhattanDistanceTo(_origo, box)));
+            while (queue.Length > 0)
+            {
+                var current = queue.Dequeue();
+                if (current.BoxSize == 1)
+                    return current.Box;
+
+                var subBoxes = DivideBox(box).ToList();
+                foreach (var subBox in subBoxes)
+                {
+                    queue.Enqueue(new PriorityQueueItem(subBox, CountBotsInRange(subBox), ManhattanDistanceTo(_origo, subBox)));
+                }
+            }
+
+            return null;
+            
+            //var subBoxesWithBotCounts = subBoxes.Select(CountBotsInRange).ToList();
+            //var bestCount = subBoxesWithBotCounts.Max(o => o.count);
+            //var bestBoxes = subBoxesWithBotCounts.Where(o => o.count == bestCount).Select(o => o.box).ToList();
+            //var bestBoxesWithDistances = bestBoxes.Select(o => (o, ManhattanDistanceTo(_origo, o))).ToList();
+            //var bestBox = bestBoxesWithDistances.OrderBy(o => o.Item2).First().o;
+            //if (bestBox.Size == 1)
+            //    return bestBox;
+            //return FindBestCoords(bestBox);
+        }
+
+        private int CountBotsInRange(SpaceBox spaceBox)
+        {
+            return _bots.Count(o => IsInRange(o, spaceBox));
         }
 
         private int ManhattanDistanceTo(Point3d point, SpaceBox box)

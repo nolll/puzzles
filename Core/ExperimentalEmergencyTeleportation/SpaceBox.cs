@@ -12,6 +12,7 @@ namespace Core.ExperimentalEmergencyTeleportation
         public int SizeY => Max.Y - Min.Y;
         public int SizeZ => Max.Z - Min.Z;
         public int SmallestSize => Math.Min(SizeX, Math.Min(SizeY, SizeZ));
+        public long Size => SizeX * SizeY * SizeZ;
 
         public SpaceBox(Point3d min, Point3d max)
         {

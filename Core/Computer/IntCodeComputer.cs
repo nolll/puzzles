@@ -14,12 +14,12 @@ namespace Core.Computer
             _startMemory = MemoryParser.Parse(input);
         }
 
-        public void Start(int? noun = null, int? verb = null)
+        public void Start(bool haltAfterInput = false, int? noun = null, int? verb = null)
         {
             var memory = CopyMemory(_startMemory);
             if (noun != null) memory[1] = noun.Value;
             if(verb != null) memory[2] = verb.Value;
-            _process = new IntCodeProcess(memory, ReadInput, WriteOutput);
+            _process = new IntCodeProcess(memory, haltAfterInput, ReadInput, WriteOutput);
             _process.Run();
         }
 

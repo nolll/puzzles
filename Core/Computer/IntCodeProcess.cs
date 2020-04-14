@@ -8,6 +8,7 @@ namespace Core.Computer
     public class IntCodeProcess
     {
         private readonly IList<long> _memory;
+        private readonly bool _haltAfterInput;
         private int _pointer;
         private int _relativeBase;
 
@@ -18,9 +19,10 @@ namespace Core.Computer
 
         public long Result => ReadFromMemory(0); 
 
-        public IntCodeProcess(IList<long> memory, Func<long> readInputFunc, Action<long> writeOutputFunc)
+        public IntCodeProcess(IList<long> memory, bool haltAfterInput, Func<long> readInputFunc, Action<long> writeOutputFunc)
         {
             _memory = memory;
+            _haltAfterInput = haltAfterInput;
             _relativeBase = 0;
             _pointer = 0;
             _readInputFunc = readInputFunc;
@@ -48,7 +50,11 @@ namespace Core.Computer
                     PerformMultiplication(instruction);
 
                 if (instruction.Type == InstructionType.Input)
+                {
                     PerformInput(instruction);
+                    if (_haltAfterInput)
+                        break;
+                }
 
                 if (instruction.Type == InstructionType.Output)
                     PerformOutput(instruction);

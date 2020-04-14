@@ -90,6 +90,8 @@ namespace Core.ExperimentalEmergencyTeleportation
                 var list = _dict[maxBots];
                 var item = list.OrderByDescending(o => o.BoxSize).ThenBy(o => o.DistanceFromOrigo).First();
                 list.Remove(item);
+                if (!list.Any())
+                    _dict.Remove(maxBots);
                 return item;
             }
         }

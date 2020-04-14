@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Core.Tools;
 
@@ -17,13 +17,16 @@ namespace Core.ExperimentalEmergencyTeleportation
 
         public int FindManhattanDistanceToBestCoords()
         {
-            var xMin = _bots.Min(o => o.Coords.X);
-            var xMax = _bots.Max(o => o.Coords.X);
-            var yMin = _bots.Min(o => o.Coords.Y);
-            var yMax = _bots.Max(o => o.Coords.Y);
-            var zMin = _bots.Min(o => o.Coords.Z);
-            var zMax = _bots.Max(o => o.Coords.Z);
+            var maxRadius = _bots.Max(o => o.SignalRadius);
+            var padding = maxRadius + 100000;
 
+            var xMin = _bots.Min(o => o.Coords.X) - padding;
+            var xMax = _bots.Max(o => o.Coords.X) + padding;
+            var yMin = _bots.Min(o => o.Coords.Y) - padding;
+            var yMax = _bots.Max(o => o.Coords.Y) + padding;
+            var zMin = _bots.Min(o => o.Coords.Z) - padding;
+            var zMax = _bots.Max(o => o.Coords.Z) + padding;
+            
             var rootBox = new SpaceBox(new Point3d(xMin, yMin, zMin), new Point3d(xMax, yMax, zMax));
             var bestBox = FindBestCoords(rootBox);
 
@@ -65,12 +68,14 @@ namespace Core.ExperimentalEmergencyTeleportation
 
         private SpaceBox FindBestCoords(SpaceBox box)
         {
-            var subBoxes = DivideBox(box);
+            //var priorityQueue
+            var subBoxes = DivideBox(box).ToList();
             var subBoxesWithBotCounts = subBoxes.Select(CountBotsInRange).ToList();
             var bestCount = subBoxesWithBotCounts.Max(o => o.count);
             var bestBoxes = subBoxesWithBotCounts.Where(o => o.count == bestCount).Select(o => o.box).ToList();
-            var bestBox = bestBoxes.OrderBy(o => ManhattanDistanceTo(_origo, o)).First();
-            if (bestBox.SmallestSize <= 4)
+            var bestBoxesWithDistances = bestBoxes.Select(o => (o, ManhattanDistanceTo(_origo, o))).ToList();
+            var bestBox = bestBoxesWithDistances.OrderBy(o => o.Item2).First().o;
+            if (bestBox.SmallestSize <= 10)
                 return bestBox;
             return FindBestCoords(bestBox);
         }

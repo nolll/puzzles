@@ -222,6 +222,71 @@ pos=<1,3,1>, r=1";
         }
 
         [Test]
+        public void CubeDivision4X4X4Negative()
+        {
+            var cube = new SpaceBox(new Point3d(-3, -3, -3), new Point3d(0, 0, 0));
+            var subCubes = cube.Divide().ToList();
+
+            Assert.That(subCubes.Count, Is.EqualTo(8));
+
+            Assert.That(subCubes[0].Min.X, Is.EqualTo(-3));
+            Assert.That(subCubes[0].Min.Y, Is.EqualTo(-3));
+            Assert.That(subCubes[0].Min.Z, Is.EqualTo(-3));
+            Assert.That(subCubes[0].Max.X, Is.EqualTo(-2));
+            Assert.That(subCubes[0].Max.Y, Is.EqualTo(-2));
+            Assert.That(subCubes[0].Max.Z, Is.EqualTo(-2));
+
+            Assert.That(subCubes[1].Min.X, Is.EqualTo(-1));
+            Assert.That(subCubes[1].Min.Y, Is.EqualTo(-3));
+            Assert.That(subCubes[1].Min.Z, Is.EqualTo(-3));
+            Assert.That(subCubes[1].Max.X, Is.EqualTo(0));
+            Assert.That(subCubes[1].Max.Y, Is.EqualTo(-2));
+            Assert.That(subCubes[1].Max.Z, Is.EqualTo(-2));
+
+            Assert.That(subCubes[2].Min.X, Is.EqualTo(-3));
+            Assert.That(subCubes[2].Min.Y, Is.EqualTo(-1));
+            Assert.That(subCubes[2].Min.Z, Is.EqualTo(-3));
+            Assert.That(subCubes[2].Max.X, Is.EqualTo(-2));
+            Assert.That(subCubes[2].Max.Y, Is.EqualTo(0));
+            Assert.That(subCubes[2].Max.Z, Is.EqualTo(-2));
+
+            Assert.That(subCubes[3].Min.X, Is.EqualTo(-3));
+            Assert.That(subCubes[3].Min.Y, Is.EqualTo(-3));
+            Assert.That(subCubes[3].Min.Z, Is.EqualTo(-1));
+            Assert.That(subCubes[3].Max.X, Is.EqualTo(-2));
+            Assert.That(subCubes[3].Max.Y, Is.EqualTo(-2));
+            Assert.That(subCubes[3].Max.Z, Is.EqualTo(0));
+
+            Assert.That(subCubes[4].Min.X, Is.EqualTo(-1));
+            Assert.That(subCubes[4].Min.Y, Is.EqualTo(-1));
+            Assert.That(subCubes[4].Min.Z, Is.EqualTo(-3));
+            Assert.That(subCubes[4].Max.X, Is.EqualTo(0));
+            Assert.That(subCubes[4].Max.Y, Is.EqualTo(0));
+            Assert.That(subCubes[4].Max.Z, Is.EqualTo(-2));
+
+            Assert.That(subCubes[5].Min.X, Is.EqualTo(-1));
+            Assert.That(subCubes[5].Min.Y, Is.EqualTo(-3));
+            Assert.That(subCubes[5].Min.Z, Is.EqualTo(-1));
+            Assert.That(subCubes[5].Max.X, Is.EqualTo(0));
+            Assert.That(subCubes[5].Max.Y, Is.EqualTo(-2));
+            Assert.That(subCubes[5].Max.Z, Is.EqualTo(0));
+
+            Assert.That(subCubes[6].Min.X, Is.EqualTo(-3));
+            Assert.That(subCubes[6].Min.Y, Is.EqualTo(-1));
+            Assert.That(subCubes[6].Min.Z, Is.EqualTo(-1));
+            Assert.That(subCubes[6].Max.X, Is.EqualTo(-2));
+            Assert.That(subCubes[6].Max.Y, Is.EqualTo(0));
+            Assert.That(subCubes[6].Max.Z, Is.EqualTo(0));
+
+            Assert.That(subCubes[7].Min.X, Is.EqualTo(-1));
+            Assert.That(subCubes[7].Min.Y, Is.EqualTo(-1));
+            Assert.That(subCubes[7].Min.Z, Is.EqualTo(-1));
+            Assert.That(subCubes[7].Max.X, Is.EqualTo(0));
+            Assert.That(subCubes[7].Max.Y, Is.EqualTo(0));
+            Assert.That(subCubes[7].Max.Z, Is.EqualTo(0));
+        }
+
+        [Test]
         public void FindDistanceToBestCoords()
         {
             const string input = @"

@@ -7,16 +7,21 @@ namespace Core.CategorySix
     public class CategorySixNetwork
     {
         private readonly Dictionary<int, CategorySixComputer> _computers;
-
-        public long FirstYValueSentTo255 { get; private set; }
+        private bool _isIdle;
+        private CategorySixPacket _natPacket;
+        private CategorySixPacket _lastSentNatPacket;
+        
+        public CategorySixPacket FirstRepeatedNatPacket { get; private set; }
+        public CategorySixPacket FirstNatPacket { get; private set; }
 
         public CategorySixNetwork(string program)
         {
-            FirstYValueSentTo255 = 0;
             _computers = new Dictionary<int, CategorySixComputer>();
+            _isIdle = true;
+
             for (var i = 0; i < 50; i++)
             {
-                _computers[i] = new CategorySixComputer(program, i, SendPacket);
+                _computers[i] = new CategorySixComputer(program, i, SendPacket, HasReadInput);
             }
         }
 
@@ -27,21 +32,49 @@ namespace Core.CategorySix
                 computer.Run();
             }
 
-            while (FirstYValueSentTo255 == 0)
+            while (FirstRepeatedNatPacket == null)
             {
+                _isIdle = true;
+
                 foreach (var computer in _computers.Values)
                 {
                     computer.Resume();
+                }
+
+                if (_isIdle && _natPacket != null)
+                {
+                    var natPacketRepeated = _lastSentNatPacket != null && _natPacket.X == _lastSentNatPacket.X && _natPacket.Y == _lastSentNatPacket.Y;
+                    if (natPacketRepeated && FirstRepeatedNatPacket == null)
+                    {
+                        FirstRepeatedNatPacket = _natPacket;
+                    }
+
+                    _lastSentNatPacket = _natPacket;
+                    SendPacket(0, _natPacket);
+                    _natPacket = null;
                 }
             }
         }
 
         private void SendPacket(int address, CategorySixPacket packet)
         {
-            if (address == 255 && FirstYValueSentTo255 == 0)
-                FirstYValueSentTo255 = packet.Y;
+            if (address == 255)
+            {
+                if (FirstNatPacket == null)
+                    FirstNatPacket = packet;
+
+                _natPacket = packet;
+            }
             else
+            {
+                _isIdle = false;
                 _computers[address].ReceivePacket(packet);
+            }
+        }
+
+        private void HasReadInput()
+        {
+            _isIdle = false;
         }
     }
 
@@ -69,6 +102,7 @@ namespace Core.CategorySix
         private readonly ComputerInterface _computer;
         private readonly int _address;
         private readonly Action<int, CategorySixPacket> _sendPacketFunc;
+        private readonly Action _hasReadInputFunc;
         private CategorySixComputerMode _inputMode;
         private CategorySixComputerMode _outputMode;
         private CategorySixPacket _inputPacket;
@@ -79,10 +113,11 @@ namespace Core.CategorySix
 
         private Queue<CategorySixPacket> Queue { get; }
 
-        public CategorySixComputer(string program, int address, Action<int, CategorySixPacket> sendPacketFunc)
+        public CategorySixComputer(string program, int address, Action<int, CategorySixPacket> sendPacketFunc, Action hasReadInputFunc)
         {
             _address = address;
             _sendPacketFunc = sendPacketFunc;
+            _hasReadInputFunc = hasReadInputFunc;
             _inputMode = CategorySixComputerMode.Address;
             _outputMode = CategorySixComputerMode.Address;
             _computer = new ComputerInterface(program, ReadInput, WriteOutput);
@@ -105,6 +140,7 @@ namespace Core.CategorySix
             if (_inputMode == CategorySixComputerMode.Address)
             {
                 _inputMode = CategorySixComputerMode.X;
+                _hasReadInputFunc();
                 return _address;
             }
 
@@ -117,6 +153,7 @@ namespace Core.CategorySix
 
                 _inputPacket = Queue.Dequeue();
                 _inputMode = CategorySixComputerMode.Y;
+                _hasReadInputFunc();
                 return _inputPacket.X;
             }
 
@@ -125,6 +162,7 @@ namespace Core.CategorySix
                 var y = _inputPacket.Y;
                 _inputPacket = null;
                 _inputMode = CategorySixComputerMode.X;
+                _hasReadInputFunc();
                 return y;
             }
 

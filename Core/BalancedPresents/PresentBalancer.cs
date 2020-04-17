@@ -9,12 +9,12 @@ namespace Core.BalancedPresents
         private readonly int _partitionSum;
         public long QuantumEntanglementOfFirstGroup { get; }
 
-        public PresentBalancer(string input)
+        public PresentBalancer(string input, int groupCount)
         {
             var presents = PuzzleInputReader.Read(input).Select(int.Parse).ToList();
             presents.Reverse();
             var sum = presents.Sum();
-            _partitionSum = sum / 3;
+            _partitionSum = sum / groupCount;
             
             var groups = FindGroupsRecursive(new PresentGroup(), presents, 0).ToList();
             groups = groups.OrderBy(o => o.Count).ThenBy(o => o.QuantumEntanglement).ToList();

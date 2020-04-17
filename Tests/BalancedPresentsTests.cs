@@ -21,7 +21,7 @@ namespace Tests
 10
 11";
 
-            var balancer = new PresentBalancer(input);
+            var balancer = new PresentBalancer(input, 3);
 
             Assert.That(balancer.QuantumEntanglementOfFirstGroup, Is.EqualTo(99));
         }

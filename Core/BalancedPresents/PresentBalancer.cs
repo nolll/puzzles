@@ -7,7 +7,7 @@ namespace Core.BalancedPresents
     public class PresentBalancer
     {
         private readonly int _partitionSum;
-        public int QuantumEntanglementOfFirstGroup { get; }
+        public long QuantumEntanglementOfFirstGroup { get; }
 
         public PresentBalancer(string input)
         {
@@ -16,55 +16,42 @@ namespace Core.BalancedPresents
             var sum = presents.Sum();
             _partitionSum = sum / 3;
             
-            var solutions = FindSolutions(presents);
-            solutions = solutions.Select(o => o.OrderBy(g => g.Count).ThenBy(g => g.QuantumEntanglement).ToList()).ToList();
-            solutions = solutions.OrderBy(o => o.First().Count).ThenBy(o => o.First().QuantumEntanglement).ToList();
+            var groups = FindGroupsRecursive(new PresentGroup(), presents, 0).ToList();
+            groups = groups.OrderBy(o => o.Count).ThenBy(o => o.QuantumEntanglement).ToList();
 
-            QuantumEntanglementOfFirstGroup = solutions.First().First().QuantumEntanglement;
+            QuantumEntanglementOfFirstGroup = groups.First().QuantumEntanglement;
         }
 
-        private List<List<PresentGroup>> FindSolutions(List<int> allPresents)
+        private IEnumerable<PresentGroup> FindGroupsRecursive(PresentGroup group, List<int> remainingPresents, int level)
         {
-            var combinations = new List<List<PresentGroup>>();
-            var initialList = new List<PresentGroup> { new PresentGroup() };
-            var queue = new Queue<PresentQueueItem>();
-            queue.Enqueue(new PresentQueueItem(initialList, allPresents));
-
-            while (queue.Any())
+            if (level < 6)
             {
-                var currentItem = queue.Dequeue();
-                var currentGroup = currentItem.Groups.Last();
-                foreach (var present in currentItem.RemainingPresents)
+                foreach (var present in remainingPresents)
                 {
-                    var currentSum = currentGroup.Sum;
+                    var currentSum = group.Sum;
                     var newSum = currentSum + present;
                     if (newSum <= _partitionSum)
                     {
-                        var groupList = currentItem.Groups.Select(o => o.Clone()).ToList();
-                        var remainingPresents = currentItem.RemainingPresents.Where(o => o != present).ToList();
+                        var newGroup = group.Clone();
+                        var newRemainingPresents = remainingPresents.Where(o => o != present).ToList();
+                        newGroup.Add(present);
+
                         if (newSum == _partitionSum)
                         {
-                            groupList.Last().Add(present);
-                            if (remainingPresents.Any())
-                            {
-                                groupList.Add(new PresentGroup());
-                                queue.Enqueue(new PresentQueueItem(groupList, remainingPresents));
-                            }
-                            else
-                            {
-                                combinations.Add(groupList);
-                            }
+                            yield return newGroup;
                         }
-                        else if (newSum < _partitionSum)
+
+                        if (newSum < _partitionSum)
                         {
-                            groupList.Last().Add(present);
-                            queue.Enqueue(new PresentQueueItem(groupList, remainingPresents));
+                            var subResults = FindGroupsRecursive(newGroup, newRemainingPresents, level + 1);
+                            foreach (var result in subResults)
+                            {
+                                yield return result;
+                            }
                         }
                     }
                 }
             }
-
-            return combinations;
         }
     }
 }

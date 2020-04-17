@@ -31,13 +31,13 @@ namespace Core.BalancedPresents
     {
         public int Count { get; private set; }
         public int Sum { get; private set; }
-        public int QuantumEntanglement { get; private set; }
+        public long QuantumEntanglement { get; private set; }
 
         public PresentGroup() : this(0, 0, 1)
         {
         }
 
-        private PresentGroup(int count, int sum, int quantumEntanglement)
+        private PresentGroup(int count, int sum, long quantumEntanglement)
         {
             Count = count;
             Sum = sum;

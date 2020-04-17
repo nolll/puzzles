@@ -13,4 +13,16 @@ namespace Core.BalancedPresents
             RemainingPresents = remainingPresents;
         }
     }
+
+    public class PresentQueueItem2
+    {
+        public PresentGroup Group { get; }
+        public List<int> RemainingPresents { get; }
+
+        public PresentQueueItem2(PresentGroup group, List<int> remainingPresents)
+        {
+            Group = @group;
+            RemainingPresents = remainingPresents;
+        }
+    }
 }

@@ -1,25 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
+using Core.UndergroundVault;
 
-namespace Core.UndergroundVault
+namespace Core.AirDuct
 {
-    public class KeyCollector
+    public class AirDuctNavigator
     {
-        private IList<VaultKey> _keys;
-        private IList<VaultDoor> _doors;
+        private IList<AirDuctKey> _keys;
+        private IList<AirDuctDoor> _doors;
         private Matrix<char> _matrix;
-        private readonly IDictionary<(char, char), VaultPath> _paths;
+        private readonly IDictionary<(char, char), AirDuctPath> _paths;
         private readonly IDictionary<string, int> _cache;
-        private readonly IList<VaultRobot> _robots;
+        private readonly IList<AirDuctRobot> _robots;
 
         public int ShortestPath { get; private set; }
 
-        public KeyCollector(string input)
+        public AirDuctNavigator(string input)
         {
-            _paths = new Dictionary<(char, char), VaultPath>();
+            _paths = new Dictionary<(char, char), AirDuctPath>();
             _cache = new Dictionary<string, int>();
-            _robots = new List<VaultRobot>();
+            _robots = new List<AirDuctRobot>();
             Init(input);
             MapPaths();
         }
@@ -53,9 +54,9 @@ namespace Core.UndergroundVault
             return totalStepCount;
         }
 
-        private IList<VaultKey> GetKeysFoundByOtherRobots(IList<VaultKey> reachableKeys)
+        private IList<AirDuctKey> GetKeysFoundByOtherRobots(IList<AirDuctKey> reachableKeys)
         {
-            var foundByOthers = new List<VaultKey>();
+            var foundByOthers = new List<AirDuctKey>();
             foreach (var key in _keys)
             {
                 if (reachableKeys.All(o => o.Id != key.Id))
@@ -64,10 +65,10 @@ namespace Core.UndergroundVault
             return foundByOthers;
         }
 
-        private int FindShortestPathFrom(VaultKey currentKey, IList<VaultKey> collectedKeys)
+        private int FindShortestPathFrom(AirDuctKey currentKey, IList<AirDuctKey> collectedKeys)
         {
             var stepCounts = new List<int>();
-            var pathsToFollow = new List<VaultPath>();
+            var pathsToFollow = new List<AirDuctPath>();
             var remainingKeys = GetRemainingKeys(collectedKeys);
             var isAllPathsOpen = true;
             foreach (var key in remainingKeys)
@@ -100,15 +101,15 @@ namespace Core.UndergroundVault
             return stepCounts.Any() ? stepCounts.Min() : 0;
         }
 
-        private IEnumerable<VaultKey> GetRemainingKeys(IList<VaultKey> collectedKeys)
+        private IEnumerable<AirDuctKey> GetRemainingKeys(IList<AirDuctKey> collectedKeys)
         {
             return _keys.Where(key => collectedKeys.All(o => o.Id != key.Id));
         }
 
-        private int FollowPath(VaultPath path, IList<VaultKey> collectedKeys)
+        private int FollowPath(AirDuctPath path, IList<AirDuctKey> collectedKeys)
         {
             var stepCount = path.StepCount;
-            var newCollectedKeys = new List<VaultKey>{path.Target};
+            var newCollectedKeys = new List<AirDuctKey> {path.Target};
             newCollectedKeys.AddRange(collectedKeys);
             if(newCollectedKeys.Count < _keys.Count)
             {
@@ -124,7 +125,7 @@ namespace Core.UndergroundVault
             return stepCount;
         }
 
-        private string GetCacheKey(char key, IList<VaultKey> collectedKeys)
+        private string GetCacheKey(char key, IList<AirDuctKey> collectedKeys)
         {
             var joinedKeys = string.Join('-', collectedKeys.OrderBy(o => o.Id).Select(o => o.Id));
             return $"{key}.{joinedKeys}";
@@ -132,8 +133,8 @@ namespace Core.UndergroundVault
 
         private void Init(string input)
         {
-            _keys = new List<VaultKey>();
-            _doors = new List<VaultDoor>();
+            _keys = new List<AirDuctKey>();
+            _doors = new List<AirDuctDoor>();
             _matrix = new Matrix<char>();
             var rows = input.Trim().Split('\n');
             var y = 0;
@@ -150,16 +151,16 @@ namespace Core.UndergroundVault
                     if (char.IsLower(c))
                     {
                         charToWrite = '.';
-                        _keys.Add(new VaultKey(c, address));
+                        _keys.Add(new AirDuctKey(c, address));
                     }
                     else if (char.IsUpper(c))
                     {
                         charToWrite = '.';
-                        _doors.Add(new VaultDoor(c, address));
+                        _doors.Add(new AirDuctDoor(c, address));
                     }
                     else if (c == '@')
                     {
-                        var robot = new VaultRobot(address);
+                        var robot = new AirDuctRobot(address);
                         _robots.Add(robot);
                         charToWrite = '.';
                     }
@@ -173,9 +174,9 @@ namespace Core.UndergroundVault
             }
         }
 
-        private IList<VaultPath> GetStartPaths(IList<VaultPath> allPaths, List<VaultKey> reachableKeys)
+        private IList<AirDuctPath> GetStartPaths(IList<AirDuctPath> allPaths, List<AirDuctKey> reachableKeys)
         {
-            var paths = new List<VaultPath>();
+            var paths = new List<AirDuctPath>();
 
             foreach (var path in allPaths)
             {
@@ -187,9 +188,9 @@ namespace Core.UndergroundVault
             return paths;
         }
 
-        private IList<VaultDoor> FilterDoors(IEnumerable<VaultDoor> blockingDoors, IList<VaultKey> reachableKeys)
+        private IList<AirDuctDoor> FilterDoors(IEnumerable<AirDuctDoor> blockingDoors, IList<AirDuctKey> reachableKeys)
         {
-            var foundByOthers = new List<VaultDoor>();
+            var foundByOthers = new List<AirDuctDoor>();
             foreach (var door in blockingDoors)
             {
                 if (reachableKeys.Any(o => o.Id == char.ToLower(door.Id)))
@@ -198,15 +199,15 @@ namespace Core.UndergroundVault
             return foundByOthers;
         }
 
-        private IList<VaultPath> GetAllPaths(MatrixAddress startAddress)
+        private IList<AirDuctPath> GetAllPaths(MatrixAddress startAddress)
         {
-            var paths = new List<VaultPath>();
+            var paths = new List<AirDuctPath>();
 
             foreach (var key in _keys)
             {
                 var coords = PathFinder.ShortestPathTo(_matrix, startAddress, key.Address);
                 if(coords.Count > 0)
-                    paths.Add(new VaultPath(key, coords, new List<char>()));
+                    paths.Add(new AirDuctPath(key, coords, new List<char>()));
             }
 
             return paths;
@@ -222,13 +223,13 @@ namespace Core.UndergroundVault
                     var coords = PathFinder.ShortestPathTo(_matrix, key.Address, otherKey.Address);
                     var blockingDoors = FindBlockingDoors(coords);
                     var keysNeeded = blockingDoors.Select(o => char.ToLower(o.Id)).ToList();
-                    var path = new VaultPath(otherKey, coords, keysNeeded);
+                    var path = new AirDuctPath(otherKey, coords, keysNeeded);
                     _paths.Add((key.Id, otherKey.Id), path);
                 }
             }
         }
 
-        private IEnumerable<VaultDoor> FindBlockingDoors(IEnumerable<MatrixAddress> coords)
+        private IEnumerable<AirDuctDoor> FindBlockingDoors(IEnumerable<MatrixAddress> coords)
         {
             foreach (var coord in coords)
             {

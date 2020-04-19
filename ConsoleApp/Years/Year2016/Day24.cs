@@ -13,9 +13,14 @@ namespace ConsoleApp.Years.Year2016
         protected override void RunDay()
         {
             WritePartTitle();
-            var navigator = new AirDuctNavigator(Input);
-            navigator.Run();
-            Console.WriteLine($"Shortest path: {navigator.ShortestPath}");
+            var navigator1 = new AirDuctNavigator(Input, false);
+            navigator1.Run();
+            Console.WriteLine($"Shortest path: {navigator1.ShortestPath}");
+
+            WritePartTitle();
+            var navigator2 = new AirDuctNavigator(Input, true);
+            navigator2.Run();
+            Console.WriteLine($"Shortest path including going back to start: {navigator2.ShortestPath}");
         }
 
         private const string Input = @"

@@ -1,14 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
-using Core.UndergroundVault;
 
 namespace Core.AirDuct
 {
     public class AirDuctNavigator
     {
         private IList<AirDuctKey> _keys;
-        private IList<AirDuctDoor> _doors;
         private Matrix<char> _matrix;
         private readonly IDictionary<(char, char), AirDuctPath> _paths;
         private readonly IDictionary<string, int> _cache;
@@ -70,27 +68,16 @@ namespace Core.AirDuct
             var stepCounts = new List<int>();
             var pathsToFollow = new List<AirDuctPath>();
             var remainingKeys = GetRemainingKeys(collectedKeys);
-            var isAllPathsOpen = true;
             foreach (var key in remainingKeys)
             {
                 if (key.Id != currentKey.Id)
                 {
                     var path = _paths[(currentKey.Id, key.Id)];
-                    if (path.IsOpen(collectedKeys))
-                    {
-                        pathsToFollow.Add(path);
-                    }
-                    else
-                    {
-                        isAllPathsOpen = false;
-                    }
+                    pathsToFollow.Add(path);
                 }
             }
 
-            if (isAllPathsOpen)
-            {
-                pathsToFollow = pathsToFollow.OrderBy(o => o.StepCount).Take(1).ToList();
-            }
+            pathsToFollow = pathsToFollow.OrderBy(o => o.StepCount).Take(1).ToList();
             
             foreach (var path in pathsToFollow)
             {
@@ -134,9 +121,8 @@ namespace Core.AirDuct
         private void Init(string input)
         {
             _keys = new List<AirDuctKey>();
-            _doors = new List<AirDuctDoor>();
             _matrix = new Matrix<char>();
-            var rows = input.Trim().Split('\n');
+            var rows = PuzzleInputReader.Read(input);
             var y = 0;
             foreach (var row in rows)
             {
@@ -148,21 +134,13 @@ namespace Core.AirDuct
                     _matrix.MoveTo(address);
                     var charToWrite = c;
 
-                    if (char.IsLower(c))
+                    if (char.IsNumber(c))
                     {
                         charToWrite = '.';
-                        _keys.Add(new AirDuctKey(c, address));
-                    }
-                    else if (char.IsUpper(c))
-                    {
-                        charToWrite = '.';
-                        _doors.Add(new AirDuctDoor(c, address));
-                    }
-                    else if (c == '@')
-                    {
-                        var robot = new AirDuctRobot(address);
-                        _robots.Add(robot);
-                        charToWrite = '.';
+                        if(c == '0')
+                            _robots.Add(new AirDuctRobot(address));
+                        else
+                            _keys.Add(new AirDuctKey(c, address));
                     }
 
                     _matrix.WriteValue(charToWrite);
@@ -180,23 +158,10 @@ namespace Core.AirDuct
 
             foreach (var path in allPaths)
             {
-                var blockingDoors = FilterDoors(FindBlockingDoors(path.Coords), reachableKeys);
-                if (!blockingDoors.Any())
-                    paths.Add(path);
+                paths.Add(path);
             }
 
             return paths;
-        }
-
-        private IList<AirDuctDoor> FilterDoors(IEnumerable<AirDuctDoor> blockingDoors, IList<AirDuctKey> reachableKeys)
-        {
-            var foundByOthers = new List<AirDuctDoor>();
-            foreach (var door in blockingDoors)
-            {
-                if (reachableKeys.Any(o => o.Id == char.ToLower(door.Id)))
-                    foundByOthers.Add(door);
-            }
-            return foundByOthers;
         }
 
         private IList<AirDuctPath> GetAllPaths(MatrixAddress startAddress)
@@ -207,7 +172,7 @@ namespace Core.AirDuct
             {
                 var coords = PathFinder.ShortestPathTo(_matrix, startAddress, key.Address);
                 if(coords.Count > 0)
-                    paths.Add(new AirDuctPath(key, coords, new List<char>()));
+                    paths.Add(new AirDuctPath(key, coords));
             }
 
             return paths;
@@ -221,24 +186,8 @@ namespace Core.AirDuct
                 foreach (var otherKey in otherKeys)
                 {
                     var coords = PathFinder.ShortestPathTo(_matrix, key.Address, otherKey.Address);
-                    var blockingDoors = FindBlockingDoors(coords);
-                    var keysNeeded = blockingDoors.Select(o => char.ToLower(o.Id)).ToList();
-                    var path = new AirDuctPath(otherKey, coords, keysNeeded);
+                    var path = new AirDuctPath(otherKey, coords);
                     _paths.Add((key.Id, otherKey.Id), path);
-                }
-            }
-        }
-
-        private IEnumerable<AirDuctDoor> FindBlockingDoors(IEnumerable<MatrixAddress> coords)
-        {
-            foreach (var coord in coords)
-            {
-                foreach (var door in _doors)
-                {
-                    if (door.Address.Equals(coord))
-                    {
-                        yield return door;
-                    }
                 }
             }
         }

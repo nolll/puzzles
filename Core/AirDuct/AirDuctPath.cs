@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
-using Core.UndergroundVault;
 
 namespace Core.AirDuct
 {
@@ -13,12 +12,11 @@ namespace Core.AirDuct
         public AirDuctKey Target { get; }
         public IList<MatrixAddress> Coords { get; }
 
-        public AirDuctPath(AirDuctKey target, IList<MatrixAddress> coords, IList<char> keysNeeded)
+        public AirDuctPath(AirDuctKey target, IList<MatrixAddress> coords)
         {
             Target = target;
             Coords = coords;
             StepCount = coords.Count;
-            _keysNeeded = keysNeeded;
         }
 
         public bool IsOpen(IList<AirDuctKey> collectedKeys)

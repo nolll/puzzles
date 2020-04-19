@@ -15,7 +15,10 @@ namespace Tests
 #4.......3#
 ###########";
 
-            var robot = new AirDuctRobotTemp(input);
+            var navigator = new AirDuctNavigator(input);
+            navigator.Run();
+
+            Assert.That(navigator.ShortestPath, Is.EqualTo(14));
         }
     }
 }

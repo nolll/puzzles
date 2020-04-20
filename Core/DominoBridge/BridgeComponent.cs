@@ -5,18 +5,22 @@ namespace Core.DominoBridge
 {
     public class BridgeComponent : IEquatable<BridgeComponent>
     {
+        public string Id { get; }
         public int Port1 { get; }
         public int Port2 { get; }
         public int Strength { get; }
-        public bool IsStartComponent { get; }
+        public bool IsDouble { get; }
+        public bool HasZero { get; }
         public IList<BridgeComponent> PossibleConnections { get; set; }
 
-        public BridgeComponent(int port1, int port2)
+        public BridgeComponent(string id, int port1, int port2)
         {
+            Id = id;
             Port1 = port1;
             Port2 = port2;
             Strength = port1 + port2;
-            IsStartComponent = port1 == 0 || port2 == 0;
+            IsDouble = port1 == port2;
+            HasZero = port1 == 0 || port2 == 0;
         }
 
         public bool CanConnectTo(BridgeComponent other)

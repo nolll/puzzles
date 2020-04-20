@@ -1,6 +1,5 @@
 ﻿using System;
 using Core.CoprocessorConflagration;
-using Core.SporificaVirus;
 
 namespace ConsoleApp.Years.Year2017
 {

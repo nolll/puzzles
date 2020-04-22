@@ -12,9 +12,14 @@ namespace ConsoleApp.Years.Year2017
         protected override void RunDay()
         {
             WritePartTitle();
-            var builder = new BridgeBuilder(Input);
-            var strength = builder.Build();
-            Console.WriteLine($"Strongest bridge {strength}.");
+            var builder1 = new BridgeBuilder(Input, false);
+            var bridge1 = builder1.Build();
+            Console.WriteLine($"Strength of strongest bridge {bridge1.Strength}.");
+
+            WritePartTitle();
+            var builder2 = new BridgeBuilder(Input, true);
+            var bridge2 = builder2.Build();
+            Console.WriteLine($"Strength of longest bridge {bridge2.Strength}.");
         }
 
         private const string Input = @"

@@ -6,36 +6,39 @@ namespace Core.DominoBridge
 {
     public class BridgeBuilder
     {
+        private readonly bool _findLongestBridge;
         private IList<BridgeComponent> _components;
 
-        public BridgeBuilder(string input)
+        public BridgeBuilder(string input, bool findLongestBridge)
         {
+            _findLongestBridge = findLongestBridge;
             InitComponents(input);
         }
 
-        public int Build()
+        public Bridge Build()
         {
-            return BuildBridge(0, 0, _components);
+            return BuildBridge(new Bridge(0, 0), 0, _components);
         }
 
-        private int BuildBridge(int strength, int port, IList<BridgeComponent> availableComponents)
+        private Bridge BuildBridge(Bridge bridge, int port, IList<BridgeComponent> availableComponents)
         {
             var usable = availableComponents.Where(o => o.Port1 == port || o.Port2 == port).ToList();
             if (!usable.Any())
-                return strength;
+                return bridge;
 
-            var strengths = new List<int>();
+            var bridges = new List<Bridge>();
             foreach (var c in usable)
             {
                 var remainingComponents = availableComponents.ToList();
                 remainingComponents.Remove(c);
-                var nextStrength = strength + c.Strength;
+                var newBridge = new Bridge(bridge.Strength + c.Strength, bridge.Length + 1);
                 var nextPort = port == c.Port1 ? c.Port2 : c.Port1;
-                var s = BuildBridge(nextStrength, nextPort, remainingComponents);
-                strengths.Add(s);
+                bridges.Add(BuildBridge(newBridge, nextPort, remainingComponents));
             }
 
-            return strengths.Max();
+            return _findLongestBridge
+                ? bridges.OrderBy(o => o.Length).ThenBy(o => o.Strength).Last()
+                : bridges.OrderBy(o => o.Strength).Last();
         }
 
         private void InitComponents(string input)
@@ -47,7 +50,7 @@ namespace Core.DominoBridge
         private BridgeComponent ParseComponent(string s)
         {
             var parts = s.Split('/');
-            return new BridgeComponent(s, int.Parse(parts[0]), int.Parse(parts[1]));
+            return new BridgeComponent(int.Parse(parts[0]), int.Parse(parts[1]));
         }
     }
 }

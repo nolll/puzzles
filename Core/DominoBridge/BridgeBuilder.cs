@@ -15,114 +15,33 @@ namespace Core.DominoBridge
 
         public int Build()
         {
-            var startComponents = _components.Where(o => o.HasZero).ToList();
-            var rootComponent = new BridgeComponent("0/0", 0, 0);
-            rootComponent.PossibleConnections = startComponents;
-            return BuildBridge(rootComponent, _components);
+            return BuildBridge(0, 0, _components);
         }
 
-        private int BuildBridge(BridgeComponent component, IList<BridgeComponent> remainingComponents)
+        private int BuildBridge(int strength, int port, IList<BridgeComponent> availableComponents)
         {
-            var subStrength = 0;
-            var connections = component.PossibleConnections.Where(remainingComponents.Contains).ToList();
-            foreach (var c in connections)
+            var usable = availableComponents.Where(o => o.Port1 == port || o.Port2 == port).ToList();
+            if (!usable.Any())
+                return strength;
+
+            var strengths = new List<int>();
+            foreach (var c in usable)
             {
-                var s = BuildBridge(c, remainingComponents.Where(o => !o.Equals(c)).ToList());
-                if (s > subStrength)
-                    subStrength = s;
+                var remainingComponents = availableComponents.ToList();
+                remainingComponents.Remove(c);
+                var nextStrength = strength + c.Strength;
+                var nextPort = port == c.Port1 ? c.Port2 : c.Port1;
+                var s = BuildBridge(nextStrength, nextPort, remainingComponents);
+                strengths.Add(s);
             }
 
-            return component.Strength + subStrength;
-        }
-
-        private string GetCacheKey(BridgeComponent component, IList<BridgeComponent> remainingComponents)
-        {
-            var listId = string.Join('-', remainingComponents.Select(o => o.Id));
-            return $"{component.Id}:{listId}";
+            return strengths.Max();
         }
 
         private void InitComponents(string input)
         {
             var rows = PuzzleInputReader.Read(input);
             _components = rows.Select(ParseComponent).ToList();
-
-            MergeComponents();
-
-            foreach (var component in _components)
-            {
-                component.PossibleConnections = _components
-                    .Where(o => !o.HasZero && o.CanConnectTo(component))
-                    .ToList();
-            }
-        }
-
-        private void MergeComponents()
-        {
-            while (true)
-            {
-                var component = _components.FirstOrDefault(IsContained);
-                if (component == null)
-                    break;
-
-                var connections = GetConnections(component);
-                var connection1 = connections.First();
-                var connection2 = connections.Last();
-                var strength = component.Strength + connection1.Strength + connection2.Strength;
-
-                if (component.IsDouble)
-                {
-                    var portToRemove = component.Port1;
-                    var port1 = connection1.Port1 == portToRemove ? connection1.Port2 : connection1.Port1;
-                    var port2 = connection2.Port1 == portToRemove ? connection2.Port2 : connection2.Port1;
-                    var newComponent = new BridgeComponent($"{port1}/{port2}", port1, port2, strength);
-                    _components.Remove(component);
-                   
-                    _components.Add(newComponent);
-                }
-                else
-                {
-                    var port1ToRemove = component.Port1;
-                    var port2ToRemove = component.Port2;
-                    var port1 = connection1.Port1 == port1ToRemove || connection1.Port1 == port2ToRemove ? connection1.Port2 : connection1.Port1;
-                    var port2 = connection2.Port1 == port1ToRemove || connection2.Port1 == port2ToRemove ? connection2.Port2 : connection2.Port1;
-                    var newComponent = new BridgeComponent($"{port1}/{port2}", port1, port2, strength);
-                    _components.Remove(component);
-                    _components.Add(newComponent);
-                }
-                _components.Remove(connection1);
-                _components.Remove(connection2);
-            }
-        }
-
-        private bool IsContained(BridgeComponent component)
-        {
-            var connections = GetConnections(component);
-            return !component.HasZero && (IsDoubleWithTwoConnections(component, connections) || HasOneConnectionPerPort(component, connections));
-        }
-
-        private bool HasOneConnectionPerPort(BridgeComponent component, IList<BridgeComponent> connections)
-        {
-            return connections.Count == 2 && ConnectionCountPort1(component, connections) == 1 && ConnectionCountPort2(component, connections) == 1;
-        }
-
-        private bool IsDoubleWithTwoConnections(BridgeComponent component, IList<BridgeComponent> connections)
-        {
-            return component.IsDouble && connections.Count == 2;
-        }
-
-        private int ConnectionCountPort1(BridgeComponent component, IList<BridgeComponent> connections)
-        {
-            return connections.Count(o => o.CanConnectToPort(component.Port1));
-        }
-
-        private int ConnectionCountPort2(BridgeComponent component, IList<BridgeComponent> connections)
-        {
-            return connections.Count(o => o.CanConnectToPort(component.Port2));
-        }
-
-        private IList<BridgeComponent> GetConnections(BridgeComponent component)
-        {
-            return _components.Where(o => o.CanConnectTo(component)).ToList();
         }
 
         private BridgeComponent ParseComponent(string s)

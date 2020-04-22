@@ -14,12 +14,12 @@ namespace ConsoleApp.Years.Year2017
             WritePartTitle();
             var builder1 = new BridgeBuilder(Input, false);
             var bridge1 = builder1.Build();
-            Console.WriteLine($"Strength of strongest bridge {bridge1.Strength}.");
+            Console.WriteLine($"Strength of strongest bridge: {bridge1.Strength}.");
 
             WritePartTitle();
             var builder2 = new BridgeBuilder(Input, true);
             var bridge2 = builder2.Build();
-            Console.WriteLine($"Strength of longest bridge {bridge2.Strength}.");
+            Console.WriteLine($"Strength of longest bridge: {bridge2.Strength}.");
         }
 
         private const string Input = @"

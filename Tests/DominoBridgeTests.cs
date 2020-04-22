@@ -5,10 +5,7 @@ namespace Tests
 {
     public class DominoBridgeTests
     {
-        [Test]
-        public void FindsStrongestBridge()
-        {
-            const string input = @"
+        private const string Input = @"
 0/2
 2/2
 2/3
@@ -18,10 +15,22 @@ namespace Tests
 10/1
 9/10";
 
-            var builder = new BridgeBuilder(input);
-            var bridgeStrength = builder.Build();
+        [Test]
+        public void FindsStrongestBridge()
+        {
+            var builder = new BridgeBuilder(Input, false);
+            var bridge = builder.Build();
 
-            Assert.That(bridgeStrength, Is.EqualTo(31));
+            Assert.That(bridge.Strength, Is.EqualTo(31));
+        }
+    
+        [Test]
+        public void FindsLongestBridge()
+        {
+            var builder = new BridgeBuilder(Input, true);
+            var bridge = builder.Build();
+
+            Assert.That(bridge.Strength, Is.EqualTo(19));
         }
     }
 }

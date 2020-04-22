@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using Core.ImmuneSystemFight;
 using NUnit.Framework;
 
 namespace Tests
@@ -17,44 +17,13 @@ namespace Tests
 4485 units each with 2961 hit points (immune to radiation; weak to fire, cold) with an attack that does 12 slashing damage at initiative 4";
 
             var system = new ImmuneSystem(immuneInput, infectionInput);
+            system.Fight();
 
-            /*
-Immune System:
-No groups remain.
-Infection:
-Group 1 contains 782 units
-Group 2 contains 4434 units
-             */
-
-            Assert.That(system.ImmuneArmy.Groups.Count, Is.EqualTo(0));
-            Assert.That(system.InfectionArmy.Groups.Count, Is.EqualTo(2));
-            Assert.That(system.InfectionArmy.Groups[0].Units.Count, Is.EqualTo(782));
-            Assert.That(system.InfectionArmy.Groups[1].Units.Count, Is.EqualTo(4434));
+            Assert.That(system.ImmuneGroups.Count, Is.EqualTo(0));
+            Assert.That(system.InfectionGroups.Count, Is.EqualTo(2));
+            Assert.That(system.InfectionGroups[0].UnitCount, Is.EqualTo(782));
+            Assert.That(system.InfectionGroups[1].UnitCount, Is.EqualTo(4434));
+            Assert.That(system.WinningArmyUnitCount, Is.EqualTo(5216));
         }
-    }
-
-    public class ImmuneSystem
-    {
-        public ImmuneSystemArmy ImmuneArmy { get; }
-        public ImmuneSystemArmy InfectionArmy { get; }
-
-        public ImmuneSystem(string immuneInput, string infectionInput)
-        {
-        }
-    }
-
-    public class ImmuneSystemArmy
-    {
-        public IList<ImmuneSystemGroup> Groups { get; }
-    }
-
-    public class ImmuneSystemGroup
-    {
-        public IList<ImmuneSystemUnit> Units { get; }
-    }
-
-    public class ImmuneSystemUnit
-    {
-
     }
 }

@@ -4,24 +4,6 @@ using Core.Tools;
 
 namespace Core.BugLife
 {
-    public class BugLifeArea
-    {
-        public BugLifeArea()
-        {
-            var cells = new BugLifeCell[5, 5];
-        }
-    }
-
-    public class BugLifeCell
-    {
-        public bool HasBug { get; }
-
-        public BugLifeCell(bool hasBug)
-        {
-            HasBug = hasBug;
-        }
-    }
-
     public class BugLifeSimulator
     {
         private Matrix<char> _matrix;

@@ -12,9 +12,10 @@ namespace Core.ImmuneSystemFight
         private readonly IList<string> _weaknesses;
         private readonly int _damage;
         private readonly string _attackType;
+        private readonly int _boost;
         public int Initiative { get; }
 
-        public int EffectivePower => UnitCount * _damage;
+        public int EffectivePower => UnitCount * (_damage + _boost);
 
         public ImmuneSystemGroup(
             ImmuneSystemArmy army,
@@ -25,7 +26,8 @@ namespace Core.ImmuneSystemFight
             IList<string> weaknesses,
             int damage,
             string attackType,
-            int initiative)
+            int initiative,
+            int boost)
         {
             Army = army;
             Id = id;
@@ -35,6 +37,7 @@ namespace Core.ImmuneSystemFight
             _weaknesses = weaknesses;
             _damage = damage;
             _attackType = attackType;
+            _boost = boost;
             Initiative = initiative;
         }
 

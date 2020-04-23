@@ -7,9 +7,11 @@ namespace Core.ImmuneSystemFight
 {
     public class ImmuneSystem
     {
+        private readonly string _immuneInput;
+        private readonly string _infectionInput;
         private readonly Regex _regex = new Regex(@"^(\d+) units each with (\d+) hit points( \(.+\) | )with an attack that does (\d+) (.+) damage at initiative (\d+)$");
-        private readonly IDictionary<string, ImmuneSystemGroup> _groups;
-        private readonly IDictionary<string, string> _targets;
+        private IDictionary<string, ImmuneSystemGroup> _groups;
+        private IDictionary<string, string> _targets;
         private bool _fightIsActive;
 
         public IList<ImmuneSystemGroup> ImmuneGroups => _groups.Values.Where(o => o.Army == ImmuneSystemArmy.Immune).ToList();
@@ -18,19 +20,45 @@ namespace Core.ImmuneSystemFight
 
         public ImmuneSystem(string immuneInput, string infectionInput)
         {
-            _groups = new Dictionary<string, ImmuneSystemGroup>();
-            _targets = new Dictionary<string, string>();
-            ParseGroups(ImmuneSystemArmy.Immune, immuneInput);
-            ParseGroups(ImmuneSystemArmy.Infection, infectionInput);
+            _immuneInput = immuneInput;
+            _infectionInput = infectionInput;
         }
 
-        public void Fight()
+        private void Reset(int boost)
         {
+            _groups = new Dictionary<string, ImmuneSystemGroup>();
+            _targets = new Dictionary<string, string>();
+            ParseGroups(ImmuneSystemArmy.Immune, _immuneInput, boost);
+            ParseGroups(ImmuneSystemArmy.Infection, _infectionInput, 0);
+        }
+
+        public void Fight(int boost = 0)
+        {
+            Reset(boost);
             _fightIsActive = true;
             while (_fightIsActive)
             {
                 SelectTargets();
                 Attack();
+            }
+        }
+
+        public void FightUntilImmuneSystemWins()
+        {
+            var boost = 1;
+            while (true)
+            {
+                try
+                {
+                    Fight(boost);
+                    if (ImmuneGroups.Any())
+                        break;
+                }
+                catch (StalemateException)
+                {
+                }
+
+                boost++;
             }
         }
 
@@ -59,6 +87,7 @@ namespace Core.ImmuneSystemFight
 
         private void Attack()
         {
+            var unitCountBefore = _groups.Values.Sum(o => o.UnitCount);
             foreach (var attacker in _groups.Values.OrderByDescending(o => o.Initiative))
             {
                 if (_fightIsActive)
@@ -75,10 +104,14 @@ namespace Core.ImmuneSystemFight
                 _fightIsActive = ImmuneGroups.Any() && InfectionGroups.Any();
             }
 
+            var unitCount = _groups.Values.Sum(o => o.UnitCount);
+            if (unitCount == unitCountBefore)
+                throw new StalemateException();
+
             _targets.Clear();
         }
 
-        private void ParseGroups(ImmuneSystemArmy army, string s)
+        private void ParseGroups(ImmuneSystemArmy army, string s, int boost)
         {
             var rows = PuzzleInputReader.Read(s);
             var counter = 0;
@@ -86,12 +119,12 @@ namespace Core.ImmuneSystemFight
             {
                 counter++;
                 var id = $"{army}{counter}";
-                var g = ParseGroup(id, army, row);
+                var g = ParseGroup(id, army, row, boost);
                 _groups.Add(g.Id, g);
             }
         }
 
-        private ImmuneSystemGroup ParseGroup(string id, ImmuneSystemArmy army, string s)
+        private ImmuneSystemGroup ParseGroup(string id, ImmuneSystemArmy army, string s, int boost)
         {
             var match = _regex.Match(s);
             var unitCount = int.Parse(match.Groups[1].Value);
@@ -102,7 +135,7 @@ namespace Core.ImmuneSystemFight
             var damage = int.Parse(match.Groups[4].Value);
             var attackType = match.Groups[5].Value;
             var initiative = int.Parse(match.Groups[6].Value);
-            return new ImmuneSystemGroup(army, id, unitCount, hitPoints, immunities, weaknesses, damage, attackType, initiative);
+            return new ImmuneSystemGroup(army, id, unitCount, hitPoints, immunities, weaknesses, damage, attackType, initiative, boost);
         }
 
         private (IList<string> immunities, IList<string> weaknesses) ParseImmunitiesAndWeaknesses(string s)

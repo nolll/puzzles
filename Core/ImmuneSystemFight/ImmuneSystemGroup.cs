@@ -47,7 +47,7 @@ namespace Core.ImmuneSystemFight
                 return 0;
 
             var multiplier = _weaknesses.Contains(attacker._attackType) ? 2 : 1;
-            return (attacker.EffectivePower) * multiplier;
+            return attacker.EffectivePower * multiplier;
         }
 
         public void Attack(ImmuneSystemGroup attacker)

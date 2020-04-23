@@ -1,5 +1,4 @@
 ﻿using System;
-using Core.ExperimentalEmergencyTeleportation;
 using Core.ImmuneSystemFight;
 
 namespace ConsoleApp.Years.Year2018
@@ -16,6 +15,10 @@ namespace ConsoleApp.Years.Year2018
             var system = new ImmuneSystem(ImmuneInput, InfectionInput);
             system.Fight();
             Console.WriteLine($"Winning army unit count: {system.WinningArmyUnitCount}");
+
+            WritePartTitle();
+            system.FightUntilImmuneSystemWins();
+            Console.WriteLine($"Immune system unit count: {system.WinningArmyUnitCount}");
         }
 
         private const string ImmuneInput = @"

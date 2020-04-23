@@ -13,7 +13,6 @@ namespace Core.ImmuneSystemFight
         private IDictionary<string, ImmuneSystemGroup> _groups;
         private IDictionary<string, string> _targets;
         private bool _fightIsActive;
-        private int _boost;
 
         public IList<ImmuneSystemGroup> ImmuneGroups => _groups.Values.Where(o => o.Army == ImmuneSystemArmy.Immune).ToList();
         public IList<ImmuneSystemGroup> InfectionGroups => _groups.Values.Where(o => o.Army == ImmuneSystemArmy.Infection).ToList();
@@ -37,7 +36,6 @@ namespace Core.ImmuneSystemFight
         {
             Reset(boost);
             _fightIsActive = true;
-            _boost = boost;
             while (_fightIsActive)
             {
                 SelectTargets();
@@ -47,18 +45,21 @@ namespace Core.ImmuneSystemFight
 
         public void FightUntilImmuneSystemWins()
         {
-            var lo = 0;
-            var hi = int.MaxValue / 2;
-            while (hi - lo > 1)
+            var boost = 1;
+            while (true)
             {
-                var cur = (hi + lo) / 16;
-                Fight(cur);
-                if (ImmuneGroups.Any())
-                    hi = cur;
-                else
-                    lo = cur;
+                try
+                {
+                    Fight(boost);
+                    if (ImmuneGroups.Any())
+                        break;
+                }
+                catch (StalemateException)
+                {
+                }
+
+                boost++;
             }
-            Fight(hi);
         }
 
         private void SelectTargets()
@@ -86,6 +87,7 @@ namespace Core.ImmuneSystemFight
 
         private void Attack()
         {
+            var unitCountBefore = _groups.Values.Sum(o => o.UnitCount);
             foreach (var attacker in _groups.Values.OrderByDescending(o => o.Initiative))
             {
                 if (_fightIsActive)
@@ -101,6 +103,10 @@ namespace Core.ImmuneSystemFight
 
                 _fightIsActive = ImmuneGroups.Any() && InfectionGroups.Any();
             }
+
+            var unitCount = _groups.Values.Sum(o => o.UnitCount);
+            if (unitCount == unitCountBefore)
+                throw new StalemateException();
 
             _targets.Clear();
         }

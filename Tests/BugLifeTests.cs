@@ -116,5 +116,21 @@ namespace Tests
 
             Assert.That(simulator.BiodiversityRating, Is.EqualTo(2129920));
         }
+
+        [Test]
+        public void Recursive_BugCount()
+        {
+            const string input = @"
+....#
+#..#.
+#..##
+..#..
+#....";
+
+            var simulator = new RecursiveBugLifeSimulator(input);
+            simulator.Run(10);
+
+            Assert.That(simulator.BugCount, Is.EqualTo(99));
+        }
     }
 }

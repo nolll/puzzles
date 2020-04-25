@@ -1,22 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using Core.Tools;
 
-namespace Core.Tools
+namespace Core.SafeCracking
 {
-    public class AssembunnyInstruction
-    {
-        public string Name { get; set; }
-        public IList<string> Args { get; }
-
-        public AssembunnyInstruction(string s)
-        {
-            var parts = s.Split(' ');
-            Name = parts.First();
-            Args = parts.Skip(1).ToList();
-        }
-    }
-
-    public class AssembunnyComputer
+    public class SafeCrackingComputerPart2
     {
         private readonly Dictionary<char, int> _registers;
         private int _index;
@@ -24,19 +12,19 @@ namespace Core.Tools
 
         public int ValueA => _registers['a'];
 
-        public AssembunnyComputer(string input, int a, int c)
+        public SafeCrackingComputerPart2(string input, int a, int c)
         {
             _instructions = PuzzleInputReader.Read(input).Select(o => new AssembunnyInstruction(o)).ToArray();
             _registers = new Dictionary<char, int>
             {
-                ['a'] = a, 
-                ['b'] = 0, 
-                ['c'] = c, 
+                ['a'] = a,
+                ['b'] = 0,
+                ['c'] = c,
                 ['d'] = 0
             };
             _index = 0;
-            
-            while(_index < _instructions.Length)
+
+            while (_index < _instructions.Length)
             {
                 var s = _instructions[_index];
                 var command = s.Name;
@@ -66,7 +54,7 @@ namespace Core.Tools
                             //}
                             //else
                             //{
-                                _registers[target] = _registers[value.First()];
+                            _registers[target] = _registers[value.First()];
                             //}
                         }
 

@@ -9,9 +9,14 @@ namespace Core.TuringDiagnostics
         private readonly char _startState;
         private readonly int _steps;
         private readonly Dictionary<char, TuringState> _states;
+        private readonly LinkedList<int> _tape;
+        private LinkedListNode<int> _cursor;
 
         public TuringMachine(string input)
         {
+            _tape = new LinkedList<int>();
+            _cursor = _tape.AddFirst(0);
+
             var rows = PuzzleInputReader.Read(input.Replace("-", "").Replace(".", "").Replace(":", ""));
 
             var beginRow = rows[0];
@@ -56,51 +61,41 @@ namespace Core.TuringDiagnostics
 
         public int Run()
         {
-            var tape = new LinkedList<int>();
-            var cursor = tape.AddFirst(0);
             var currentState = _startState;
-            for (int i = 0; i < _steps; i++)
+            for (var i = 0; i < _steps; i++)
             {
                 var state = _states[currentState];
-                if (cursor.Value == 0)
-                {
-                    cursor.Value = state.ValueIfZero;
-                    if (state.DirectionIfZero == 1)
-                    {
-                        cursor = cursor.Next;
-                        if (cursor == null)
-                            cursor = tape.AddLast(0);
-                    }
-                    else
-                    {
-                        cursor = cursor.Previous;
-                        if (cursor == null)
-                            cursor = tape.AddFirst(0);
-                    }
-
-                    currentState = state.NextStateIfZero;
-                }
-                else
-                {
-                    cursor.Value = state.ValueIfOne;
-                    if (state.DirectionIfOne == 1)
-                    {
-                        cursor = cursor.Next;
-                        if (cursor == null)
-                            cursor = tape.AddLast(0);
-                    }
-                    else
-                    {
-                        cursor = cursor.Previous;
-                        if (cursor == null)
-                            cursor = tape.AddFirst(0);
-                    }
-
-                    currentState = state.NextStateIfOne;
-                }
+                currentState = ApplyState(state);
             }
 
-            return tape.Sum();
+            return _tape.Sum();
+        }
+
+        private char ApplyState(TuringState state)
+        {
+            return _cursor.Value == 0
+                ? ApplyForZero(state)
+                : ApplyForOne(state);
+        }
+
+        private char ApplyForZero(TuringState state)
+        {
+            return Apply(state.ValueIfZero, state.DirectionIfZero, state.NextStateIfZero);
+        }
+
+        private char ApplyForOne(TuringState state)
+        {
+            return Apply(state.ValueIfOne, state.DirectionIfOne, state.NextStateIfOne);
+        }
+
+        private char Apply(int value, int direction, char nextState)
+        {
+            _cursor.Value = value;
+            _cursor = direction == 1 
+                ? _cursor.Next ?? _tape.AddLast(0) 
+                : _cursor.Previous ?? _tape.AddFirst(0);
+
+            return nextState;
         }
     }
 }

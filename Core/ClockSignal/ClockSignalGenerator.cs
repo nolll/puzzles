@@ -15,34 +15,31 @@ namespace Core.ClockSignal
                 output = "";
                 var a = index;
                 var d = a + 633 * 4;
-
-                while (output.Length < targetOutputLength)
+                
+                a = d;
+                while (output.Length < targetOutputLength && a != 0)
                 {
-                    a = d;
-                    do
+                    var b = a;
+                    var c = 2;
+                    a = 0;
+                    while (b != 0)
                     {
-                        var b = a;
-                        var c = 2;
-                        a = 0;
-                        while (b != 0)
-                        {
-                            b--;
-                            c--;
-                            if (c != 0)
-                                continue;
-                            a++;
-                            c = 2;
-                        }
+                        b--;
+                        c--;
+                        if (c != 0)
+                            continue;
+                        a++;
+                        c = 2;
+                    }
 
-                        b = 2;
-                        while (c != 0)
-                        {
-                            b--;
-                            c--;
-                        }
+                    b = 2;
+                    while (c != 0)
+                    {
+                        b--;
+                        c--;
+                    }
 
-                        output += b;
-                    } while (output.Length < targetOutputLength && a != 0);
+                    output += b;
                 }
                 
                 LowestA = index;

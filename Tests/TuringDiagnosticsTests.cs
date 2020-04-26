@@ -42,6 +42,8 @@ In state B:
 
     public class TuringMachine
     {
+        public int Checksum { get; private set; }
+
         public TuringMachine(string input)
         {
             var rows = PuzzleInputReader.Read(input);
@@ -53,6 +55,11 @@ In state B:
             var steps = int.Parse(stepsRow.Split(' ')[5]);
 
             var stateRows = rows.Skip(2);
+        }
+
+        public void Run()
+        {
+            Checksum = 0;
         }
     }
 }

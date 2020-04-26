@@ -1,5 +1,4 @@
-using System.Linq;
-using Core.Tools;
+using Core.TuringDiagnostics;
 using NUnit.Framework;
 
 namespace Tests
@@ -34,32 +33,9 @@ In state B:
     - Continue with state A.";
 
             var turingMachine = new TuringMachine(input);
-            turingMachine.Run();
+            var checksum = turingMachine.Run();
 
-            Assert.That(turingMachine.Checksum, Is.EqualTo(3));
-        }
-    }
-
-    public class TuringMachine
-    {
-        public int Checksum { get; private set; }
-
-        public TuringMachine(string input)
-        {
-            var rows = PuzzleInputReader.Read(input);
-
-            var beginRow = rows[0];
-            var startState = beginRow.Split(' ')[3].First();
-
-            var stepsRow = rows[1];
-            var steps = int.Parse(stepsRow.Split(' ')[5]);
-
-            var stateRows = rows.Skip(2);
-        }
-
-        public void Run()
-        {
-            Checksum = 0;
+            Assert.That(checksum, Is.EqualTo(3));
         }
     }
 }

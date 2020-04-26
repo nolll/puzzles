@@ -1,4 +1,5 @@
-using Core.AdventCoins;
+using System.Linq;
+using Core.Tools;
 using NUnit.Framework;
 
 namespace Tests
@@ -39,16 +40,19 @@ In state B:
         }
     }
 
-    public class AdventCoinTests
+    public class TuringMachine
     {
-        [TestCase("abcdef", 609043)]
-        [TestCase("pqrstuv", 1048970)]
-        public void CoinMined(string secretKey, int expected)
+        public TuringMachine(string input)
         {
-            var miner = new AdventCoinMiner();
-            var coin = miner.Mine(secretKey, 5);
+            var rows = PuzzleInputReader.Read(input);
 
-            Assert.That(coin, Is.EqualTo(expected));
+            var beginRow = rows[0];
+            var startState = beginRow.Split(' ')[3].First();
+
+            var stepsRow = rows[1];
+            var steps = int.Parse(stepsRow.Split(' ')[5]);
+
+            var stateRows = rows.Skip(2);
         }
     }
 }

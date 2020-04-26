@@ -1,6 +1,5 @@
 ﻿using System;
 using Core.Monorail;
-using Core.Tools;
 
 namespace ConsoleApp.Years.Year2016
 {

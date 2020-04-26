@@ -8,13 +8,12 @@ namespace Core.Monorail
     {
         private readonly Dictionary<char, int> _registers;
         private int _index;
-        private readonly string[] _instructions;
 
         public int ValueA => _registers['a'];
 
         public MonorailComputer(string input, int a, int c)
         {
-            _instructions = PuzzleInputReader.Read(input).ToArray();
+            var instructions = PuzzleInputReader.Read(input).ToArray();
             _registers = new Dictionary<char, int>
             {
                 ['a'] = a,
@@ -24,10 +23,9 @@ namespace Core.Monorail
             };
             _index = 0;
 
-            while (_index < _instructions.Length)
+            while (_index < instructions.Length)
             {
-                var s = _instructions[_index];
-                //Console.WriteLine($"{_index}. {s}");
+                var s = instructions[_index];
                 var parts = s.Split(' ');
                 var command = parts[0];
                 try
@@ -83,9 +81,9 @@ namespace Core.Monorail
                         var target = parts[1].First();
                         var val = _registers[target];
                         var indexToToggle = _index + val;
-                        if (indexToToggle >= 0 && indexToToggle < _instructions.Length)
+                        if (indexToToggle >= 0 && indexToToggle < instructions.Length)
                         {
-                            var instructionToToggle = _instructions[indexToToggle];
+                            var instructionToToggle = instructions[indexToToggle];
                             var toggleParts = instructionToToggle.Split(" ");
                             var name = toggleParts[0];
                             if (toggleParts.Length == 2)
@@ -103,7 +101,7 @@ namespace Core.Monorail
                                     toggleParts[0] = "jnz";
                             }
 
-                            _instructions[indexToToggle] = string.Join(' ', toggleParts);
+                            instructions[indexToToggle] = string.Join(' ', toggleParts);
                         }
 
                         IncrementIndex();

@@ -1,9 +1,10 @@
-using Core.Tools;
+using Core.Monorail;
+using Core.SafeCracking;
 using NUnit.Framework;
 
 namespace Tests
 {
-    public class AssembunnyComputerTests
+    public class SafeCrackingTests
     {
         [Test]
         public void RegisterAIsCorrect()
@@ -16,7 +17,7 @@ dec a
 jnz a 2
 dec a";
 
-            var control = new AssembunnyComputer(input, 0, 0);
+            var control = new SafeCrackingComputerPart1(input, 0, 0);
 
             Assert.That(control.ValueA, Is.EqualTo(42));
         }
@@ -33,7 +34,7 @@ cpy 1 a
 dec a
 dec a";
 
-            var control = new AssembunnyComputer(input, 0, 0);
+            var control = new SafeCrackingComputerPart1(input, 0, 0);
 
             Assert.That(control.ValueA, Is.EqualTo(3));
         }

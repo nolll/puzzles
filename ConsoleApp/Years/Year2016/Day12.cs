@@ -1,5 +1,5 @@
 ﻿using System;
-using Core.Tools;
+using Core.Monorail;
 
 namespace ConsoleApp.Years.Year2016
 {
@@ -12,11 +12,11 @@ namespace ConsoleApp.Years.Year2016
         protected override void RunDay()
         {
             WritePartTitle();
-            var control1 = new AssembunnyComputer(Input, 0, 0);
+            var control1 = new MonorailComputer(Input, 0, 0);
             Console.WriteLine($"Value in register A: {control1.ValueA}");
 
             WritePartTitle();
-            var control2 = new AssembunnyComputer(Input, 0, 1);
+            var control2 = new MonorailComputer(Input, 0, 1);
             Console.WriteLine($"Value in register A: {control2.ValueA}");
         }
 

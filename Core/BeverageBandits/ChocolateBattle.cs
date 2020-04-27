@@ -26,7 +26,7 @@ namespace Core.BeverageBandits
             {
                 Init(elfAttackPower);
                 var initialElfCount = _figures.Count(o => o.Type == BattleFigureType.Elf);
-                Run(isPrinterEnabled);
+                Run(isPrinterEnabled, true);
                 Console.WriteLine($"Attack power: {elfAttackPower}");
                 if (Winners == "Elves" && _figures.Count(o => o.Type == BattleFigureType.Elf) == initialElfCount)
                     break;
@@ -41,11 +41,11 @@ namespace Core.BeverageBandits
         {
             const int elfAttackPower = 3;
             Init(elfAttackPower);
-            Run(isPrinterEnabled);
+            Run(isPrinterEnabled, false);
             ElfAttackPower = elfAttackPower;
         }
 
-        private bool Run(bool isPrinterEnabled)
+        private bool Run(bool isPrinterEnabled, bool breakOnElfDeath)
         {
             var round = 0;
             while (IsBothTypesStillAlive)
@@ -117,7 +117,7 @@ namespace Core.BeverageBandits
                         enemy.Hit(figure.AttackPower);
                         if (enemy.IsDead)
                         {
-                            if (enemy.Type == BattleFigureType.Elf)
+                            if (breakOnElfDeath && enemy.Type == BattleFigureType.Elf)
                                 return false;
                             _matrix.MoveTo(enemy.Address);
                             _matrix.WriteValue('.');

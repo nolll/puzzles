@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using Core.LineDance;
 
 namespace ConsoleApp.Years.Year2017

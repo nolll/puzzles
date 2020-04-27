@@ -1,6 +1,5 @@
 ﻿using System;
 using Core.AirDuct;
-using Core.Tools;
 
 namespace ConsoleApp.Years.Year2016
 {

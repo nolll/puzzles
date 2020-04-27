@@ -1,6 +1,5 @@
 ﻿using System;
 using Core.SafeCracking;
-using Core.Tools;
 
 namespace ConsoleApp.Years.Year2016
 {

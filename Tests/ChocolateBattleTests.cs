@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 namespace Tests
 {
+    // todo: fix test
     public class ChocolateBattleTests
     {
         [Test]

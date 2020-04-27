@@ -9,6 +9,7 @@ namespace Core.CardShuffling
      * I understand parts of the solution, but the mathematics is just too hard. I might come back for another try later
      * Here is an in-depth explanation: https://codeforces.com/blog/entry/72593
      */
+    // todo: Understand code and rewrite
     public class CardShuffler
     {
         public IList<int> Reverse(IList<int> deck)
@@ -114,7 +115,7 @@ namespace Core.CardShuffling
 
             var aGazillion = BigInteger.ModPow(a, iterationCount, stackLength);
             var bGazillion = b * (BigInteger.ModPow(a, iterationCount, stackLength) - 1) * ModuloInverse(a - 1, stackLength) % stackLength;
-            var result = (((targetPos - bGazillion) % stackLength) * ModuloInverse(aGazillion, stackLength)) % stackLength;
+            var result = (targetPos - bGazillion) % stackLength * ModuloInverse(aGazillion, stackLength) % stackLength;
 
             if (result < 0)
                 result += stackLength;

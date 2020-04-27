@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using System.Text;
 using Core.Tools;
 
@@ -11,11 +10,10 @@ namespace Core.AdventCoins
             var index = 1;
             int? coin = null;
             var hashFactory = new Hashfactory();
-            var md5 = MD5.Create();
             var compareString = GetCompareString(leadingZeros);
             while(coin == null)
             {
-                var hash = hashFactory.Create($"{key}{index.ToString()}");
+                var hash = hashFactory.Create($"{key}{index}");
                 if (hash.StartsWith(compareString))
                 {
                     coin = index;

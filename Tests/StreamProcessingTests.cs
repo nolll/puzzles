@@ -5,7 +5,6 @@ namespace Tests
 {
     public class StreamProcessingTests
     {
-        // todo: fix test
         [TestCase("{}", "{}", 1, 1)]
         [TestCase("{{{}}}", "{{{}}}", 3, 6)]
         [TestCase("{{},{}}", "{{},{}}", 3, 5)]
@@ -15,7 +14,7 @@ namespace Tests
         [TestCase("{{<a>},{<a>},{<a>},{<a>}}", "{{},{},{},{}}", 5, 9)]
         [TestCase("{{<!>},{<!>},{<!>},{<a>}}", "{{}}", 2, 3)]
         [TestCase("{{<!!>},{<!!>},{<!!>},{<!!>}}", "{{},{},{},{}}", 5, 9)]
-        public void GroupCountAndScoreIsCorrect(string input, string expectedCleaned, int expectedCount, int expectedScore, int garbageCount)
+        public void GroupCountAndScoreIsCorrect(string input, string expectedCleaned, int expectedCount, int expectedScore)
         {
             var processor = new StreamProcessor(input);
 

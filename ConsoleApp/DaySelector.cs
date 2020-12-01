@@ -6,6 +6,7 @@ using ConsoleApp.Years.Year2016;
 using ConsoleApp.Years.Year2017;
 using ConsoleApp.Years.Year2018;
 using ConsoleApp.Years.Year2019;
+using ConsoleApp.Years.Year2020;
 
 namespace ConsoleApp
 {
@@ -17,7 +18,8 @@ namespace ConsoleApp
             new Event2016(),
             new Event2017(),
             new Event2018(),
-            new Event2019()
+            new Event2019(),
+            new Event2020(),
         };
 
         public Day GetDay(int? selectedYear, int? selectedDay)

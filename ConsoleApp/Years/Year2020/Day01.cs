@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Core.ModuleMass;
 
 namespace ConsoleApp.Years.Year2020
@@ -11,14 +12,19 @@ namespace ConsoleApp.Years.Year2020
 
         protected override void RunDay()
         {
-            const int target = 2020;
             WritePartTitle();
             var sumFinder = new SumFinder(Input);
-            var (a, b) = sumFinder.FindNumbersThatAddUpTo(target);
-            var product = a * b;
-            Console.WriteLine($"Numbers that add up to {target}: {product}");
+            var numbers1 = sumFinder.FindNumbersThatAddUpTo(_target, 2);
+            var product1 = numbers1.Aggregate(1, (a, b) => a * b);
+            Console.WriteLine($"Product of numbers that add up to {_target}: {product1}");
+
+            WritePartTitle();
+            var numbers2 = sumFinder.FindNumbersThatAddUpTo(_target, 3);
+            var product2 = numbers2.Aggregate(1, (a, b) => a * b);
+            Console.WriteLine($"Product of numbers that add up to {_target}: {product2}");
         }
 
+        private const int _target = 2020;
         private const string Input = @"1786
 571
 1689

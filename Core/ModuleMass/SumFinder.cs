@@ -6,23 +6,18 @@ namespace Core.ModuleMass
 {
     public class SumFinder
     {
-        private readonly IEnumerable<int> _numbers;
+        private readonly IList<int> _numbers;
 
         public SumFinder(string input)
         {
-            _numbers = PuzzleInputReader.Read(input).Select(int.Parse);
+            _numbers = PuzzleInputReader.Read(input).Select(int.Parse).ToList();
         }
 
-        public (int a, int b) FindNumbersThatAddUpTo(int target)
+        public IList<int> FindNumbersThatAddUpTo(int target, int numbersToFind)
         {
-            foreach (var number in _numbers)
-            {
-                var found = _numbers.Where(o => o + number == target).ToList();
-                if (found.Any())
-                    return (number, found.First());
-            }
-
-            return (0, 0);
+            var permutations = PermutationGenerator.GetPermutations<int>(_numbers, numbersToFind);
+            var match = permutations.First(o => o.Sum() == target);
+            return match.ToList();
         }
     }
 }

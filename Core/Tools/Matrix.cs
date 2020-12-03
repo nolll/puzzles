@@ -96,64 +96,64 @@ namespace Core.Tools
             return MoveTo(new MatrixAddress(Address.X - Direction.X, Address.Y - Direction.Y), extend);
         }
 
-        public bool TryMoveUp()
+        public bool TryMoveUp(int steps = 1)
         {
-            return MoveUp(false);
+            return MoveUp(steps, false);
         }
 
-        public bool MoveUp()
+        public bool MoveUp(int steps = 1)
         {
-            return MoveUp(true);
+            return MoveUp(steps, true);
         }
 
-        private bool MoveUp(bool extend)
+        private bool MoveUp(int steps, bool extend)
         {
-            return MoveTo(new MatrixAddress(Address.X, Address.Y - 1), extend);
+            return MoveTo(new MatrixAddress(Address.X, Address.Y - steps), extend);
         }
 
-        public bool TryMoveRight()
+        public bool TryMoveRight(int steps = 1)
         {
-            return MoveRight(false);
+            return MoveRight(steps, false);
         }
 
-        public bool MoveRight()
+        public bool MoveRight(int steps = 1)
         {
-            return MoveRight(true);
+            return MoveRight(steps, true);
         }
 
-        private bool MoveRight(bool extend)
+        private bool MoveRight(int steps, bool extend)
         {
-            return MoveTo(new MatrixAddress(Address.X + 1, Address.Y), extend);
+            return MoveTo(new MatrixAddress(Address.X + steps, Address.Y), extend);
         }
 
-        public bool TryMoveDown()
+        public bool TryMoveDown(int steps = 1)
         {
-            return MoveDown(false);
+            return MoveDown(steps, false);
         }
 
-        public bool MoveDown()
+        public bool MoveDown(int steps = 1)
         {
-            return MoveDown(true);
+            return MoveDown(steps, true);
         }
 
-        private bool MoveDown(bool extend)
+        private bool MoveDown(int steps, bool extend)
         {
-            return MoveTo(new MatrixAddress(Address.X, Address.Y + 1), extend);
+            return MoveTo(new MatrixAddress(Address.X, Address.Y + steps), extend);
         }
 
-        public bool TryMoveLeft()
+        public bool TryMoveLeft(int steps = 1)
         {
-            return MoveLeft(false);
+            return MoveLeft(steps, false);
         }
 
-        public bool MoveLeft()
+        public bool MoveLeft(int steps = 1)
         {
-            return MoveLeft(true);
+            return MoveLeft(steps, true);
         }
 
-        private bool MoveLeft(bool extend)
+        private bool MoveLeft(int steps, bool extend)
         {
-            return MoveTo(new MatrixAddress(Address.X - 1, Address.Y), extend);
+            return MoveTo(new MatrixAddress(Address.X - steps, Address.Y), extend);
         }
 
         public MatrixDirection TurnLeft()

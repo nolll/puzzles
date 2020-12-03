@@ -38,6 +38,7 @@ namespace ConsoleApp.Years
                 var filePath = FilePath;
                 if(!File.Exists(filePath))
                     throw new FileNotFoundException("File not found", filePath);
+
                 return File.ReadAllText(filePath, Encoding.UTF8);
             }
         }

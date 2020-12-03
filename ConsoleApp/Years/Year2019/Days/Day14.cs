@@ -1,7 +1,7 @@
 ﻿using System;
 using Core.MakeFuel;
 
-namespace ConsoleApp.Years.Year2019
+namespace ConsoleApp.Years.Year2019.Days
 {
     public class Day14 : Day2019
     {

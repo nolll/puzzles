@@ -1,7 +1,7 @@
 ﻿using System;
 using Core.TuringDiagnostics;
 
-namespace ConsoleApp.Years.Year2017.day
+namespace ConsoleApp.Years.Year2017.Days
 {
     public class Day25 : Day2017
     {

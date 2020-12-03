@@ -1,7 +1,7 @@
 ﻿using System;
 using Core.CoprocessorConflagration;
 
-namespace ConsoleApp.Years.Year2017.day
+namespace ConsoleApp.Years.Year2017.Days
 {
     public class Day23 : Day2017
     {

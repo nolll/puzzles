@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2018.Days
         {
             WritePartTitle();
             var generator = new RecipeGenerator();
-            var scores = generator.ScoresAfter(Input);
+            var scores = generator.ScoresAfter(NumberInput);
             Console.WriteLine($"Next ten scores: {scores}");
 
             WritePartTitle();
-            var count = generator.RecipeCountBefore(Input.ToString());
+            var count = generator.RecipeCountBefore(NumberInput.ToString());
             Console.WriteLine($"Recipe count: {count}");
         }
 
-        private const int Input = 306281;
+        private const int NumberInput = 306281;
     }
 }

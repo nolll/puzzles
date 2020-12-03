@@ -13,6 +13,7 @@ namespace ConsoleApp.Years
         private int _part;
         protected abstract void RunDay();
         protected abstract int Year { get; }
+        protected virtual string LegacyInput { get; }
         private readonly Timer _timer;
         public int Id { get; }
 
@@ -31,7 +32,7 @@ namespace ConsoleApp.Years
             WriteDayEnd();
         }
 
-        protected virtual string Input
+        protected string FileInput
         {
             get
             {
@@ -47,8 +48,8 @@ namespace ConsoleApp.Years
                 Directory.GetCurrentDirectory(),
                 "Years",
                 $"Year{Year}",
-                "Days",
-                $"Day{PaddedDay}.txt");
+                "Inputs",
+                $"{PaddedDay}.txt");
 
         private string PaddedDay => Id.ToString().PadLeft(2, '0');
 

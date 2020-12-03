@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ConsoleApp.Years.Year2019.Days;
+using ConsoleApp.Years.Year2019.Puzzles;
 
 namespace ConsoleApp.Years.Year2019
 {

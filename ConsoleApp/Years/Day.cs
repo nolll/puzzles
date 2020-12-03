@@ -46,6 +46,7 @@ namespace ConsoleApp.Years
                 Directory.GetCurrentDirectory(),
                 "Years",
                 $"Year{Year}",
+                "Days",
                 $"Day{PaddedDay}.txt");
 
         private string PaddedDay => Id.ToString().PadLeft(2, '0');

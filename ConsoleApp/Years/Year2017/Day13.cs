@@ -3,7 +3,7 @@ using Core.Firewall;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day13 : Day
+    public class Day13 : Day2017
     {
         public Day13() : base(13)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Delay: {delay}");
         }
 
-        private const string Input = @"0: 3
+        protected override string Input => @"0: 3
 1: 2
 2: 4
 4: 6

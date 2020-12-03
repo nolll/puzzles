@@ -3,7 +3,7 @@ using Core.NaughtyOrNice;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day05 : Day
+    public class Day05 : Day2015
     {
         public Day05() : base(5)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Number of nice strings (algorithm 2): {nice2Count}");
         }
 
-        private const string Input = @"sszojmmrrkwuftyv
+        protected override string Input => @"sszojmmrrkwuftyv
 isaljhemltsdzlum
 fujcyucsrxgatisb
 qiqqlmcgnhzparyg

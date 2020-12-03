@@ -3,7 +3,7 @@ using Core.Monorail;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day12 : Day
+    public class Day12 : Day2016
     {
         public Day12() : base(12)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Value in register A: {control2.ValueA}");
         }
 
-        private const string Input = @"cpy 1 a
+        protected override string Input => @"cpy 1 a
 cpy 1 b
 cpy 26 d
 jnz c 2

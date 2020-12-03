@@ -3,7 +3,7 @@ using Core.SantasRoute;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day09 : Day
+    public class Day09 : Day2015
     {
         public Day09() : base(9)
         {
@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Shortest route: {calculator.LongestDistance}");
         }
 
-        private const string Input = @"Faerun to Tristram = 65
+        protected override string Input => @"Faerun to Tristram = 65
 Faerun to Tambi = 129
 Faerun to Norrath = 144
 Faerun to Snowdin = 71

@@ -3,7 +3,7 @@ using Core.HashedDoors;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day17 : Day
+    public class Day17 : Day2016
     {
         public Day17() : base(17)
         {
@@ -20,6 +20,6 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Longest path length: {maze.LongestPath.Length}");
         }
 
-        private const string Input = "yjjvjgan";
+        protected override string Input => "yjjvjgan";
     }
 }

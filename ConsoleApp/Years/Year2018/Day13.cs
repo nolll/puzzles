@@ -3,7 +3,7 @@ using Core.MineCarts;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day13 : Day
+    public class Day13 : Day2018
     {
         public Day13() : base(13)
         {
@@ -25,7 +25,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Last cart location: {lastCart}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 _                                             /---------------\                                                      /-------->----------\             _
 _                                   /---------+---------------+------------------------------------------------------+---------------\   |             _
 _                                   |   /-----+---------------+------------\                                         |               |   |             _

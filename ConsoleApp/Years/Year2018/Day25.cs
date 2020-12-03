@@ -4,7 +4,7 @@ using Core.OperationComputer;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day25 : Day
+    public class Day25 : Day2018
     {
         public Day25() : base(25)
         {
@@ -18,7 +18,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Constellation count: {constellationCount}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 -1,-1,-4,-1
 0,1,8,5
 -8,-5,2,-6

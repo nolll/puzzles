@@ -3,7 +3,7 @@ using Core.KineticSculptureTiming;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day15 : Day
+    public class Day15 : Day2016
     {
         public Day15() : base(15)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Time to press button: {sculpture2.TimeToPressButton}");
         }
 
-        private const string Input = @"Disc #1 has 17 positions; at time=0, it is at position 1.
+        protected override string Input => @"Disc #1 has 17 positions; at time=0, it is at position 1.
 Disc #2 has 7 positions; at time=0, it is at position 0.
 Disc #3 has 19 positions; at time=0, it is at position 2.
 Disc #4 has 5 positions; at time=0, it is at position 0.

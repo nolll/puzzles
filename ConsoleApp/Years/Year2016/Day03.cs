@@ -3,7 +3,7 @@ using Core.ImpossibleTriangles;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day03 : Day
+    public class Day03 : Day2016
     {
         public Day03() : base(3)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Valid vertical triangles: {verticalValidCount}");
         }
 
-        private const string Input = @"  883  357  185
+        protected override string Input => @"  883  357  185
   572  189  424
   842  206  272
    55  656   94

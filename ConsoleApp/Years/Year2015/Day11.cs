@@ -3,7 +3,7 @@ using Core.CorporatePolicy;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day11 : Day
+    public class Day11 : Day2015
     {
         public Day11() : base(11)
         {
@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2015
         {
             WritePartTitle();
             var validator = new CorporatePasswordValidator();
-            var pwd = validator.FindNextPassword(Input1);
+            var pwd = validator.FindNextPassword(Input);
             Console.WriteLine($"Next password 1: {pwd}");
 
             WritePartTitle();
@@ -21,6 +21,6 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Next password 2: {pwd2}");
         }
 
-        private const string Input1 = "hxbxwxba";
+        protected override string Input => "hxbxwxba";
     }
 }

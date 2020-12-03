@@ -3,7 +3,7 @@ using Core.BeverageBandits;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day15 : Day
+    public class Day15 : Day2018
     {
         public Day15() : base(15)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Battle outcome when the elves win: {battle2.Outcome}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 ################################
 ######..#######.################
 ######...######..#.#############

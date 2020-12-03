@@ -3,7 +3,7 @@ using Core.JumpInstructions;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day05 : Day
+    public class Day05 : Day2017
     {
         public Day05() : base(5)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Steps jumped, part 2: {jumper2.StepCount}");
         }
 
-        private const string Input = @"1
+        protected override string Input => @"1
 0
 0
 1

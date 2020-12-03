@@ -3,7 +3,7 @@ using Core.SecurityDoor;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day05 : Day
+    public class Day05 : Day2016
     {
         public Day05() : base(5)
         {
@@ -21,6 +21,6 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Password 2: {pwd2}");
         }
 
-        private const string Input = "wtnhxymk";
+        protected override string Input => "wtnhxymk";
     }
 }

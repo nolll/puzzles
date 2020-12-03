@@ -3,7 +3,7 @@ using Core.SpringDroidAdventure;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day21 : Day
+    public class Day21 : Day2019
     {
         public Day21() : base(21)
         {

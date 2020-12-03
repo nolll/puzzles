@@ -3,7 +3,7 @@ using Core.GiftWrapping;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day02 : Day
+    public class Day02 : Day2015
     {
         public Day02() : base(2)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Required ribbon: {ribbonResult} feet");
         }
 
-        private const string Input = @"20x3x11
+        protected override string Input => @"20x3x11
 15x27x5
 6x29x7
 30x15x9

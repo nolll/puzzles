@@ -4,7 +4,7 @@ using Core.Eggnog;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day17 : Day
+    public class Day17 : Day2015
     {
         public Day17() : base(17)
         {
@@ -23,7 +23,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Combinations with {containerCount} containers: {combinations2.Count}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 33
 14
 18

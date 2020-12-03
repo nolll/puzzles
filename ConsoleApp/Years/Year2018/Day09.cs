@@ -3,7 +3,7 @@ using Core.MarbleMania;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day09 : Day
+    public class Day09 : Day2018
     {
         public Day09() : base(9)
         {

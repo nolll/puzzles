@@ -3,7 +3,7 @@ using Core.UniqueWordPasswords;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day04 : Day
+    public class Day04 : Day2017
     {
         public Day04() : base(4)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Valid passphrases 2: {validCount2}");
         }
 
-        private const string Input = @"una bokpr ftz ryw nau yknf fguaczl anu
+        protected override string Input => @"una bokpr ftz ryw nau yknf fguaczl anu
 tvay wvco bcoblpt fwzg sfsys zvuqll mcbhwz ovcw fgdy
 ynsocz vid rfmsy essqt fpbjvvq sldje qfpvjvb
 yvh nxc kla vhy vkbq cxfzgr

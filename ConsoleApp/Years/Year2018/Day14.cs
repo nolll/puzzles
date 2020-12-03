@@ -3,7 +3,7 @@ using Core.HotChocolate;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day14 : Day
+    public class Day14 : Day2018
     {
         public Day14() : base(14)
         {

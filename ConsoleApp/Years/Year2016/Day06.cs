@@ -3,7 +3,7 @@ using Core.RepetitionCode;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day06 : Day
+    public class Day06 : Day2016
     {
         public Day06() : base(6)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Message least common: {messageLeastCommon}");
         }
 
-        private const string Input = @"iyeajeby
+        protected override string Input => @"iyeajeby
 qengiuoe
 wxzardgo
 jciguemn

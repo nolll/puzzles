@@ -3,7 +3,7 @@ using Core.Orbits;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day06 : Day
+    public class Day06 : Day2019
     {
         public Day06() : base(6)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2019
             Console.WriteLine($"Distance to Santa: {distance}");
         }
 
-        private const string Input = @"VZ3)KYR
+        protected override string Input => @"VZ3)KYR
 71B)KMC
 RST)B6X
 T9P)91Q

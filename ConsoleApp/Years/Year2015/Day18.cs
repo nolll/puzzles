@@ -3,7 +3,7 @@ using Core.AnimatedLights;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day18 : Day
+    public class Day18 : Day2015
     {
         public Day18() : base(18)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Lights switched on, when corners are always lit: {gif2.LightCount}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 ###.##..##.#..#.##...#..#.####..#.##.##.##..###...#....#...###..#..###..###.#.#.#..#.##..#...##.#..#
 .#...##.#####..##.......#..####.###.##.#..###.###.....#.#.####.##.###..##...###....#.##.....#.#.#.##
 .....#.#.....#..###..####..#.....##.#..###.####.#.######..##......#####.#.##.#########.###..#.##.#.#

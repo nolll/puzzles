@@ -3,7 +3,7 @@ using Core.Asteroids;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day10 : Day
+    public class Day10 : Day2019
     {
         public Day10() : base(10)
         {
@@ -26,7 +26,7 @@ namespace ConsoleApp.Years.Year2019
             Console.WriteLine($"X * 100 + Y = {result}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 .#....#.###.........#..##.###.#.....##...
 ...........##.......#.#...#...#..#....#..
 ...#....##..##.......#..........###..#...

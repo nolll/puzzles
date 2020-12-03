@@ -3,7 +3,7 @@ using Core.RecursiveCircus;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day07 : Day
+    public class Day07 : Day2017
     {
         public Day07() : base(7)
         {
@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Adjusted weight of disc with error: {towers.AdjustedWeight}");
         }
 
-        private const string Input = @"uglvj (99) -> ymfjt, gkpgf
+        protected override string Input => @"uglvj (99) -> ymfjt, gkpgf
 vvwrg (51)
 qrpgt (5)
 qhqbqj (55)

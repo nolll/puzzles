@@ -3,7 +3,7 @@ using Core.OperationComputer;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day19 : Day
+    public class Day19 : Day2018
     {
         public Day19() : base(19)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Value at register 0 when program halts: {value2}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 #ip 5
 addi 5 16 5
 seti 1 8 4

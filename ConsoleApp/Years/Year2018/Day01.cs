@@ -3,7 +3,7 @@ using Core.Frequencies;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day01 : Day
+    public class Day01 : Day2018
     {
         public Day01() : base(1)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"First repeat: {firstRepeatedFrequency}");
         }
 
-        private const string Input = @"-9
+        protected override string Input => @"-9
 +7
 +5
 -13

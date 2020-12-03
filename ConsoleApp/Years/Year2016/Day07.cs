@@ -3,7 +3,7 @@ using Core.IpV7;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day07 : Day
+    public class Day07 : Day2016
     {
         public Day07() : base(7)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Valid ssl ip addresses: {sslSupportCount}");
         }
 
-        private const string Input = @"dnwtsgywerfamfv[gwrhdujbiowtcirq]bjbhmuxdcasenlctwgh
+        protected override string Input => @"dnwtsgywerfamfv[gwrhdujbiowtcirq]bjbhmuxdcasenlctwgh
 rnqfzoisbqxbdlkgfh[lwlybvcsiupwnsyiljz]kmbgyaptjcsvwcltrdx[ntrpwgkrfeljpye]jxjdlgtntpljxaojufe
 jgltdnjfjsbrffzwbv[nclpjchuobdjfrpavcq]sbzanvbimpahadkk[yyoasqmddrzunoyyk]knfdltzlirrbypa
 vvrchszuidkhtwx[ebqaetowcthddea]cxgxbffcoudllbtxsa

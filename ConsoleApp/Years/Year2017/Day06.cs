@@ -3,7 +3,7 @@ using Core.MemoryReallocation;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day06 : Day
+    public class Day06 : Day2017
     {
         public Day06() : base(6)
         {
@@ -20,6 +20,6 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Loop size: {reallocator.LoopSize}");
         }
 
-        private const string Input = "4,1,15,12,0,9,9,5,5,8,7,3,14,5,12,3";
+        protected override string Input => "4,1,15,12,0,9,9,5,5,8,7,3,14,5,12,3";
     }
 }

@@ -3,7 +3,7 @@ using Core.DragonChecksum;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day16 : Day
+    public class Day16 : Day2016
     {
         public Day16() : base(16)
         {
@@ -21,6 +21,6 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Checksum 2: {checksum2}");
         }
 
-        private const string Input = "01000100010010111";
+        protected override string Input => "01000100010010111";
     }
 }

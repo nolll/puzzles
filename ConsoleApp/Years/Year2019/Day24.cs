@@ -3,7 +3,7 @@ using Core.BugLife;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day24 : Day
+    public class Day24 : Day2019
     {
         public Day24() : base(24)
         {
@@ -24,7 +24,7 @@ namespace ConsoleApp.Years.Year2019
             Console.WriteLine($"Bug count after 200 minutes: {recursiveSimulator.BugCount}");
         }
 
-        private const string Input = @".#..#
+        protected override string Input => @".#..#
 #..##
 ##..#
 ##.##

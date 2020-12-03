@@ -3,7 +3,7 @@ using Core.OxygenSystem;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day15 : Day
+    public class Day15 : Day2019
     {
         public Day15() : base(15)
         {

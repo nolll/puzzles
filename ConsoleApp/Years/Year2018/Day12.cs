@@ -3,7 +3,7 @@ using Core.SubterraneanSustainability;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day12 : Day
+    public class Day12 : Day2018
     {
         public Day12() : base(12)
         {
@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Plant score 50 billion generations: {spreader.PlantScore50B}");
         }
 
-        private const string Input = @"initial state: ##.####..####...#.####..##.#..##..#####.##.#..#...#.###.###....####.###...##..#...##.#.#...##.##..
+        protected override string Input => @"initial state: ##.####..####...#.####..##.#..##..#####.##.#..#...#.###.###....####.###...##..#...##.#.#...##.##..
 
 ##.## => #
 ....# => .

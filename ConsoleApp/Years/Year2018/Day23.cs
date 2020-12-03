@@ -3,7 +3,7 @@ using Core.ExperimentalEmergencyTeleportation;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day23 : Day
+    public class Day23 : Day2018
     {
         public Day23() : base(23)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Manhattan distance to best coords: {distanceToBestCoords}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 pos=<-10401751,8998791,-4822601>, r=53367159
 pos=<-24352762,-35398510,10623616>, r=96269458
 pos=<-45280045,8400590,-799390>, r=84820413

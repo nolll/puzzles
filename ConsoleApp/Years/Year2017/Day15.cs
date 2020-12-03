@@ -3,7 +3,7 @@ using Core.DuelingGenerators;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day15 : Day
+    public class Day15 : Day2017
     {
         public Day15() : base(15)
         {

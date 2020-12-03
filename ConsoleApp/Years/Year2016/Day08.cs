@@ -3,7 +3,7 @@ using Core.TwoFactorAuth;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day08 : Day
+    public class Day08 : Day2016
     {
         public Day08() : base(8)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine(simulatorResult.PrintOut);
         }
 
-        private const string Input = @"rect 1x1
+        protected override string Input => @"rect 1x1
 rotate row y=0 by 10
 rect 1x1
 rotate row y=0 by 10

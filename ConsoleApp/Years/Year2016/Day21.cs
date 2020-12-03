@@ -3,7 +3,7 @@ using Core.ScrambledLetters;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day21 : Day
+    public class Day21 : Day2016
     {
         public Day21() : base(21)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Unscrambled string: {unscrambled}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 rotate right 4 steps
 swap letter b with letter e
 swap position 1 with position 3

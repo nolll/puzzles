@@ -3,7 +3,7 @@ using Core.BalanceBots;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day10 : Day
+    public class Day10 : Day2016
     {
         public Day10() : base(10)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Multiplied output: {multipliedOutput}");
         }
 
-        private const string Input = @"bot 76 gives low to bot 191 and high to bot 21
+        protected override string Input => @"bot 76 gives low to bot 191 and high to bot 21
 bot 193 gives low to bot 118 and high to bot 145
 bot 173 gives low to bot 91 and high to bot 36
 value 23 goes to bot 68

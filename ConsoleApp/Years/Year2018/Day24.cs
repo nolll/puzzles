@@ -3,7 +3,7 @@ using Core.ImmuneSystemFight;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day24 : Day
+    public class Day24 : Day2018
     {
         public Day24() : base(24)
         {

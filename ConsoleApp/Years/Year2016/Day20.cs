@@ -3,7 +3,7 @@ using Core.IpFirewall;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day20 : Day
+    public class Day20 : Day2016
     {
         public Day20() : base(20)
         {
@@ -22,8 +22,8 @@ namespace ConsoleApp.Years.Year2016
         }
 
         private const long Upperbound = 4_294_967_295;
-        
-        private const string Input = @"
+
+        protected override string Input => @"
 2803551464-2812875810
 3863319608-3871068145
 881357481-892360003

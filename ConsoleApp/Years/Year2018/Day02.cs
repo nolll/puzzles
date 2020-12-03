@@ -3,7 +3,7 @@ using Core.Boxes;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day02 : Day
+    public class Day02 : Day2018
     {
         public Day02() : base(2)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Common letters: {similarIdsPuzzle.CommonLetters}");
         }
 
-        private const string Input = @"ayitmcjvlhedbsyoqfzukjpxwt
+        protected override string Input => @"ayitmcjvlhedbsyoqfzukjpxwt
 agirmcjvlheybsyogfzuknpxxt
 wgirmcjvlvedbsyoqfzujnpxwt
 agizmcjvlhedbsyoqfzuenlxwt

@@ -3,7 +3,7 @@ using Core.TuringLock;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day23 : Day
+    public class Day23 : Day2015
     {
         public Day23() : base(23)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Value of register B: {computer2.RegisterB}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 jio a, +18
 inc a
 tpl a

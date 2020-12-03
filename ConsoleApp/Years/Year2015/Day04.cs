@@ -3,7 +3,7 @@ using Core.AdventCoins;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day04 : Day
+    public class Day04 : Day2015
     {
         public Day04() : base(4)
         {
@@ -20,6 +20,6 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Coin 2: {coin2}");
         }
 
-        private const string Input = "iwrupvqb";
+        protected override string Input => "iwrupvqb";
     }
 }

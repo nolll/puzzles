@@ -3,7 +3,7 @@ using Core.WizardRpgSimulation;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day22 : Day
+    public class Day22 : Day2015
     {
         public Day22() : base(22)
         {

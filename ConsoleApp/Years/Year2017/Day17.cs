@@ -3,7 +3,7 @@ using Core.Spinlock;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day17 : Day
+    public class Day17 : Day2017
     {
         public Day17() : base(17)
         {

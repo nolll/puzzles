@@ -3,7 +3,7 @@ using Core.WeatherMachine;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day25 : Day
+    public class Day25 : Day2015
     {
         public Day25() : base(25)
         {

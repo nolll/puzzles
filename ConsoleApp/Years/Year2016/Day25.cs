@@ -3,7 +3,7 @@ using Core.ClockSignal;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day25 : Day
+    public class Day25 : Day2016
     {
         public Day25() : base(25)
         {

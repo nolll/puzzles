@@ -3,7 +3,7 @@ using Core.OperationComputer;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day21 : Day
+    public class Day21 : Day2018
     {
         public Day21() : base(21)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Lowest value for register zero after most iterations: {result.last}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 #ip 1
 seti 123 0 4
 bani 4 456 4

@@ -3,7 +3,7 @@ using Core.MakeFuel;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day14 : Day
+    public class Day14 : Day2019
     {
         public Day14() : base(14)
         {
@@ -24,7 +24,7 @@ namespace ConsoleApp.Years.Year2019
             Console.WriteLine($"Maximum fuel: {fuelCount}");
         }
 
-        private const string Input = @"1 RNQHX, 1 LFKRJ, 1 JNGM => 8 DSRGV
+        protected override string Input => @"1 RNQHX, 1 LFKRJ, 1 JNGM => 8 DSRGV
 2 HCQGN, 1 XLNC, 4 WRPWG => 7 ZGVZL
 172 ORE => 5 WRPWG
 7 MXMQ, 1 SLTF => 3 JTBLB

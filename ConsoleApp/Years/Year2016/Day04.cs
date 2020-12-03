@@ -3,7 +3,7 @@ using Core.RoomValidation;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day04 : Day
+    public class Day04 : Day2016
     {
         public Day04() : base(4)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Northpole object storage room: {validator.NorthpoleObjectStorageId}");
         }
 
-        private const string Input = @"aczupnetwp-dnlgpyrpc-sfye-dstaatyr-561[patyc]
+        protected override string Input => @"aczupnetwp-dnlgpyrpc-sfye-dstaatyr-561[patyc]
 jsehsyafy-vqw-ljsafafy-866[nymla]
 tyepcyletzylw-ncjzrpytn-prr-opawzjxpye-743[cnrdl]
 foadouwbu-qvcqczohs-obozmgwg-662[lamjh]

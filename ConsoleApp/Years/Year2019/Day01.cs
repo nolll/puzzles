@@ -3,7 +3,7 @@ using Core.ModuleMass;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day01 : Day
+    public class Day01 : Day2019
     {
         public Day01() : base(1)
         {
@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2019
             Console.WriteLine($"Required total fuel: {massCalculator.TotalFuel}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 130541
 69856
 104618

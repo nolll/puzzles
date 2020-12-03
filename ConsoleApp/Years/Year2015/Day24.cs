@@ -3,7 +3,7 @@ using Core.BalancedPresents;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day24 : Day
+    public class Day24 : Day2015
     {
         public Day24() : base(24)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Quantum entanglement of the first group of four: {balancer2.QuantumEntanglementOfFirstGroup}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 1
 3
 5

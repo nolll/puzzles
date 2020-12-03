@@ -3,7 +3,7 @@ using Core.DigitalPlumber;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day12 : Day
+    public class Day12 : Day2017
     {
         public Day12() : base(12)
         {
@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Number of groups: {pipes.GroupCount}");
         }
 
-        private const string Input = @"0 <-> 412, 480, 777, 1453
+        protected override string Input => @"0 <-> 412, 480, 777, 1453
 1 <-> 132, 1209
 2 <-> 1614
 3 <-> 3

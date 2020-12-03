@@ -3,7 +3,7 @@ using Core.AuntSue;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day16 : Day
+    public class Day16 : Day2015
     {
         public Day16() : base(16)
         {
@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Sue number, part 2: {sueSelector.SueNumberPart2}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 Sue 1: cars: 9, akitas: 3, goldfish: 0
 Sue 2: akitas: 9, children: 3, samoyeds: 9
 Sue 3: trees: 6, cars: 6, children: 4

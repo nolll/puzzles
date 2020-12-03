@@ -3,7 +3,7 @@ using Core.BitwiseLogic;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day07 : Day
+    public class Day07 : Day2015
     {
         public Day07() : base(7)
         {
@@ -23,7 +23,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Signal A after run two: {runTwo}");
         }
 
-        private const string Input = @"af AND ah -> ai
+        protected override string Input => @"af AND ah -> ai
 NOT lk -> ll
 hz RSHIFT 1 -> is
 NOT go -> gp

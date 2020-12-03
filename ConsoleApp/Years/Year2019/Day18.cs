@@ -3,7 +3,7 @@ using Core.UndergroundVault;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day18 : Day
+    public class Day18 : Day2019
     {
         public Day18() : base(18)
         {

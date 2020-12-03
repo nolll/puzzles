@@ -3,7 +3,7 @@ using Core.SantasSuit;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day03 : Day
+    public class Day03 : Day2018
     {
         public Day03() : base(3)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"No overlap id: {claimThatDoesNotOverlap.ClaimId}");
         }
 
-        private const string Input = @"#1 @ 669,271: 17x11
+        protected override string Input => @"#1 @ 669,271: 17x11
 #2 @ 153,186: 20x26
 #3 @ 186,838: 28x11
 #4 @ 119,248: 18x13

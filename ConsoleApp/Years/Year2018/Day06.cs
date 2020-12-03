@@ -3,7 +3,7 @@ using Core.ChronalCoordinates;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day06 : Day
+    public class Day06 : Day2018
     {
         public Day06() : base(6)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Size of central area: {size2}");
         }
 
-        private const string Input = @"342, 203
+        protected override string Input => @"342, 203
 79, 64
 268, 323
 239, 131

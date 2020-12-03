@@ -3,7 +3,7 @@ using Core.SeriesOfTubes;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day19 : Day
+    public class Day19 : Day2017
     {
         public Day19() : base(19)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Step count: {finder.StepCount}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 _                                                                                                                                                                   |                                     _
 _                       +---------------------------------------------------------------------------+             +---------------------+             +---+       +-------------------------------------+ _
 _                       |                                                                           |             |                     |             |   |       | |                                   | _

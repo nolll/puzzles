@@ -3,7 +3,7 @@ using Core.GridComputing;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day22 : Day
+    public class Day22 : Day2016
     {
         public Day22() : base(22)
         {
@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Least number of moves: {moveCount}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 root@ebhq-gridcenter# df -h
 Filesystem              Size  Used  Avail  Use%
 /dev/grid/node-x0-y0     94T   72T    22T   76%

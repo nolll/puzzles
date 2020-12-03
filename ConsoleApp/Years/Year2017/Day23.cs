@@ -3,7 +3,7 @@ using Core.CoprocessorConflagration;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day23 : Day
+    public class Day23 : Day2017
     {
         public Day23() : base(23)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Value left in register h: {processor2.H}.");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 set b 67
 set c b
 jnz a 2

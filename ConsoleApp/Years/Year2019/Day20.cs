@@ -3,7 +3,7 @@ using Core.DonutMaze;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day20 : Day
+    public class Day20 : Day2019
     {
         public Day20() : base(20)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2019
             Console.WriteLine($"Shortest distance from AA to ZZ: {recursiveDonutMazeSolver.ShortestStepCount}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 _                                                                                                           _
 _                                  T Z     P       J     A       Y           U                              _
 _                                  D Z     C       R     I       Q           D                              _

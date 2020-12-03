@@ -3,7 +3,7 @@ using Core.CookieRecipes;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day15 : Day
+    public class Day15 : Day2015
     {
         public Day15() : base(15)
         {
@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Highest score for cookies with 500 calories: {race.HighestScoreWith500Calories}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 Sprinkles: capacity 2, durability 0, flavor -2, texture 0, calories 3
 Butterscotch: capacity 0, durability 5, flavor -3, texture 0, calories 3
 Chocolate: capacity 0, durability 0, flavor 5, texture -1, calories 8

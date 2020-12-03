@@ -3,7 +3,7 @@ using Core.LookAndSay;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day10 : Day
+    public class Day10 : Day2015
     {
         public Day10() : base(10)
         {
@@ -20,6 +20,6 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Length of string 2: {game2.Result.Length}");
         }
 
-        private const string Input = "1113222113";
+        protected override string Input => "1113222113";
     }
 }

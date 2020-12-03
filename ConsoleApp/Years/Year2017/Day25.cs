@@ -3,7 +3,7 @@ using Core.TuringDiagnostics;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day25 : Day
+    public class Day25 : Day2017
     {
         public Day25() : base(25)
         {
@@ -17,7 +17,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Turing machine checksum: {checksum}.");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 Begin in state A.
 Perform a diagnostic checksum after 12208951 steps.
 

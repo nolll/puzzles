@@ -3,7 +3,7 @@ using Core.OneTimePad;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day14 : Day
+    public class Day14 : Day2016
     {
         public Day14() : base(14)
         {
@@ -20,6 +20,6 @@ namespace ConsoleApp.Years.Year2016
             Console.WriteLine($"Index of 64th stretched key: {generator2.IndexOf64thKey}");
         }
 
-        private const string Input = "zpqevtbw";
+        protected override string Input => "zpqevtbw";
     }
 }

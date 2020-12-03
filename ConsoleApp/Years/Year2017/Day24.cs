@@ -3,7 +3,7 @@ using Core.DominoBridge;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day24 : Day
+    public class Day24 : Day2017
     {
         public Day24() : base(24)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Strength of longest bridge: {bridge2.Strength}.");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 42/37
 28/28
 29/25

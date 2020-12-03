@@ -3,7 +3,7 @@ using Core.Lumber;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day18 : Day
+    public class Day18 : Day2018
     {
         public Day18() : base(18)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Resource value after 1 billion minutes: {collection2.ResourceValue}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 ..|.#...||..||.#|#..|...#.#..#.|#.|...|#|.#.|.||#.
 .|#....##.#||.......|..|...|..#.#...#...|.#.......
 ..#......||..|.#||####.#....#...#..#||..|#..|#.|.|

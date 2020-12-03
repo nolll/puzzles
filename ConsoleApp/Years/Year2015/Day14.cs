@@ -3,7 +3,7 @@ using Core.ReindeerOlympics;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day14 : Day
+    public class Day14 : Day2015
     {
         public Day14() : base(14)
         {
@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Winning score: {race.WinningScore}");
         }
 
-        private const string Input = @"Vixen can fly 8 km/s for 8 seconds, but then must rest for 53 seconds.
+        protected override string Input => @"Vixen can fly 8 km/s for 8 seconds, but then must rest for 53 seconds.
 Blitzen can fly 13 km/s for 4 seconds, but then must rest for 49 seconds.
 Rudolph can fly 20 km/s for 7 seconds, but then must rest for 132 seconds.
 Cupid can fly 12 km/s for 4 seconds, but then must rest for 43 seconds.

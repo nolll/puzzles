@@ -3,7 +3,7 @@ using Core.KnotHash;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day10 : Day
+    public class Day10 : Day2017
     {
         public Day10() : base(10)
         {
@@ -20,6 +20,6 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Ascii hash: {asciiHasher.Hash}");
         }
 
-        private const string Input = "230,1,2,221,97,252,168,169,57,99,0,254,181,255,235,167";
+        protected override string Input => "230,1,2,221,97,252,168,169,57,99,0,254,181,255,235,167";
     }
 }

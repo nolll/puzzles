@@ -4,7 +4,7 @@ using Core.TreeNavigation;
 
 namespace ConsoleApp.Years.Year2020
 {
-    public class Day03 : Day
+    public class Day03 : Day2020
     {
         public Day03() : base(3)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2020
             Console.WriteLine($"Number of trees for all trajectories: {product}");
         }
 
-        private const string Input = @"..#..#......#..#.......#...#.#.
+        protected override string Input => @"..#..#......#..#.......#...#.#.
 ...##.....##..#..#....#.##.##.#
 ...#...#.##...##.....#.....#.#.
 ..#....#.....#...##.##.###.#...

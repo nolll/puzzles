@@ -3,7 +3,7 @@ using Core.KnightsOfTheDinnerTable;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day13 : Day
+    public class Day13 : Day2015
     {
         public Day13() : base(13)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Happiness change including me: {table2.HappinessChange}");
         }
 
-        private const string Input = @"Alice would lose 57 happiness units by sitting next to Bob.
+        protected override string Input => @"Alice would lose 57 happiness units by sitting next to Bob.
 Alice would lose 62 happiness units by sitting next to Carol.
 Alice would lose 75 happiness units by sitting next to David.
 Alice would gain 71 happiness units by sitting next to Eric.

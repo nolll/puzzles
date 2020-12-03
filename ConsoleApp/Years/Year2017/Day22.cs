@@ -3,7 +3,7 @@ using Core.SporificaVirus;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day22 : Day
+    public class Day22 : Day2017
     {
         public Day22() : base(22)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Infected nodes after 10 000 000 iterations: {infectionCount2}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 .....###..#....#.#..##...
 ......##.##...........##.
 .#..#..#.#.##.##.........

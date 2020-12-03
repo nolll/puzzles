@@ -3,7 +3,7 @@ using Core.DiskFragmentation;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day14 : Day
+    public class Day14 : Day2017
     {
         public Day14() : base(14)
         {
@@ -19,6 +19,6 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Region count: {defragmenter.RegionCount}");
         }
 
-        private const string Input = "amgozmfv";
+        protected override string Input => "amgozmfv";
     }
 }

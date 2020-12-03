@@ -3,7 +3,7 @@ using Core.OperationComputer;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day16 : Day
+    public class Day16 : Day2018
     {
         public Day16() : base(16)
         {

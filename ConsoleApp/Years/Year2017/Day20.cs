@@ -4,7 +4,7 @@ using Core.ParticleSwarm;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day20 : Day
+    public class Day20 : Day2017
     {
         public Day20() : base(20)
         {
@@ -23,7 +23,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Remaining particles: {remainingParticleCount}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 p=<-1724,-1700,5620>, v=<44,-10,-107>, a=<2,6,-9>
 p=<551,3425,4570>, v=<-21,-7,-182>, a=<0,-10,0>
 p=<-524,-3400,2495>, v=<22,19,5>, a=<0,9,-8>

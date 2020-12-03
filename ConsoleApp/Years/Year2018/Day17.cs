@@ -3,7 +3,7 @@ using Core.ReservoirResearch;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day17 : Day
+    public class Day17 : Day2018
     {
         public Day17() : base(17)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Retained water tile count: {filler.RetainedWaterTileCount}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 x=332, y=1355..1367
 y=444, x=543..566
 x=343, y=1375..1386

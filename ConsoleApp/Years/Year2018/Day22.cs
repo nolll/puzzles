@@ -3,7 +3,7 @@ using Core.ModeMaze;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day22 : Day
+    public class Day22 : Day2018
     {
         public Day22() : base(22)
         {

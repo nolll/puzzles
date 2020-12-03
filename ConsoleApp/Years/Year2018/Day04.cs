@@ -3,7 +3,7 @@ using Core.SleepingGuards;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day04 : Day
+    public class Day04 : Day2018
     {
         public Day04() : base(4)
         {
@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Guard sleep strategy two score: {guardSleepPuzzle.StrategyTwoScore}");
         }
 
-        private const string Input = @"[1518-08-29 00:24] falls asleep
+        protected override string Input => @"[1518-08-29 00:24] falls asleep
 [1518-08-06 00:20] falls asleep
 [1518-03-12 00:21] falls asleep
 [1518-06-17 00:45] wakes up

@@ -3,7 +3,7 @@ using Core.MoonTracking;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day12 : Day
+    public class Day12 : Day2019
     {
         public Day12() : base(12)
         {
@@ -25,7 +25,7 @@ namespace ConsoleApp.Years.Year2019
             Console.WriteLine($"Time units until repeat: {tracker2.Iterations}");
         }
 
-        private const string Input = @"<x=1, y=2, z=-9>
+        protected override string Input => @"<x=1, y=2, z=-9>
 <x=-1, y=-9, z=-4>
 <x=17, y=6, z=8>
 <x=12, y=4, z=2>";

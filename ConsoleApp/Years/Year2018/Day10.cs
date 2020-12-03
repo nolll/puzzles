@@ -3,7 +3,7 @@ using Core.AlignedStars;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day10 : Day
+    public class Day10 : Day2018
     {
         public Day10() : base(10)
         {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Number of seconds: {finder.IterationCount}");
         }
 
-        private const string Input = @"position=<-41214, -10223> velocity=< 4,  1>
+        protected override string Input => @"position=<-41214, -10223> velocity=< 4,  1>
 position=< 41635, -10215> velocity=<-4,  1>
 position=<-51569,  20845> velocity=< 5, -2>
 position=<-30826,  20850> velocity=< 3, -2>

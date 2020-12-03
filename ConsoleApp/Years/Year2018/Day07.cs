@@ -3,7 +3,7 @@ using Core.SleighAssembly;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day07 : Day
+    public class Day07 : Day2018
     {
         public Day07() : base(7)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2018
             Console.WriteLine($"Time spent: {result2.Time}s");
         }
 
-        private const string Input = @"Step Q must be finished before step O can begin.
+        protected override string Input => @"Step Q must be finished before step O can begin.
 Step Z must be finished before step G can begin.
 Step W must be finished before step V can begin.
 Step C must be finished before step X can begin.

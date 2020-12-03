@@ -3,7 +3,7 @@ using Core.Radioisotope;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day11 : Day
+    public class Day11 : Day2016
     {
         public Day11() : base(11)
         {

@@ -3,7 +3,7 @@ using Core.Duet;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day18 : Day
+    public class Day18 : Day2017
     {
         public Day18() : base(18)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Program 1 send count: {duet.Program1SendCount}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 set i 31
 set a 1
 mul p 17

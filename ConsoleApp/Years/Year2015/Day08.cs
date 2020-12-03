@@ -3,7 +3,7 @@ using Core.SantasDigitalList;
 
 namespace ConsoleApp.Years.Year2015
 {
-    public class Day08 : Day
+    public class Day08 : Day2015
     {
         public Day08() : base(8)
         {
@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2015
             Console.WriteLine($"Difference: {digitalList.EncodedMinusCodeDiff}");
         }
 
-        private const string Input = @"""azlgxdbljwygyttzkfwuxv""
+        protected override string Input => @"""azlgxdbljwygyttzkfwuxv""
 ""v\xfb\""lgs\""kvjfywmut\x9cr""
 ""merxdhj""
 ""dwz""

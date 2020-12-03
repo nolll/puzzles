@@ -3,7 +3,7 @@ using Core.FuelSquare;
 
 namespace ConsoleApp.Years.Year2018
 {
-    public class Day11 : Day
+    public class Day11 : Day2018
     {
         public Day11() : base(11)
         {

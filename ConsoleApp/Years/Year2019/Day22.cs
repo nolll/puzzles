@@ -3,7 +3,7 @@ using Core.CardShuffling;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day22 : Day
+    public class Day22 : Day2019
     {
         public Day22() : base(22)
         {
@@ -25,7 +25,7 @@ namespace ConsoleApp.Years.Year2019
             Console.WriteLine($"Card at position 2020: {cardAtPosition2020}");
         }
 
-        private const string Input = @"cut 1470
+        protected override string Input => @"cut 1470
 deal with increment 46
 cut -6481
 deal with increment 70

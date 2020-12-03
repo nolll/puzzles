@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ConsoleApp.Years.Year2019
 {
-    public class Day04 : Day
+    public class Day04 : Day2019
     {
         public Day04() : base(4)
         {
@@ -21,6 +21,6 @@ namespace ConsoleApp.Years.Year2019
             Console.WriteLine($"Number of valid passwords: {passwordCount}");
         }
 
-        private const string Input = "357253-892942";
+        protected override string Input => "357253-892942";
     }
 }

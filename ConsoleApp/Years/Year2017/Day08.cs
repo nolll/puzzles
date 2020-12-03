@@ -3,7 +3,7 @@ using Core.CpuInstructions;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day08 : Day
+    public class Day08 : Day2017
     {
         public Day08() : base(8)
         {
@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Largest value ever: {calculator.LargestValueEver}");
         }
 
-        private const string Input = @"av inc 167 if f > -9
+        protected override string Input => @"av inc 167 if f > -9
 av inc 640 if uea == 0
 fk dec -960 if tn > -9
 tn dec 438 if fk == 960

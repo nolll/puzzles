@@ -3,7 +3,7 @@ using Core.FractalArt;
 
 namespace ConsoleApp.Years.Year2017
 {
-    public class Day21 : Day
+    public class Day21 : Day2017
     {
         public Day21() : base(21)
         {
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2017
             Console.WriteLine($"Pixels on after 18 iterations: {artGenerator2.PixelsOn}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 ../.. => .../.##/.##
 #./.. => .#./.#./##.
 ##/.. => ##./.../..#

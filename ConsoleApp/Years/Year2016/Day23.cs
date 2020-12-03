@@ -3,7 +3,7 @@ using Core.SafeCracking;
 
 namespace ConsoleApp.Years.Year2016
 {
-    public class Day23 : Day
+    public class Day23 : Day2016
     {
         public Day23() : base(23)
         {
@@ -23,7 +23,7 @@ namespace ConsoleApp.Years.Year2016
             //Console.WriteLine($"Value in register A: {factorial}");
         }
 
-        private const string Input = @"
+        protected override string Input => @"
 cpy a b
 dec b
 cpy a d

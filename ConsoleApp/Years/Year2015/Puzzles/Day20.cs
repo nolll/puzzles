@@ -13,15 +13,15 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
             WritePartTitle();
             var presentDelivery1 = new PresentDelivery();
-            var house1 = presentDelivery1.Deliver1(NumberInput);
+            var house1 = presentDelivery1.Deliver1(Input);
             Console.WriteLine($"First house to get {LegacyInput} presents: {house1}");
 
             WritePartTitle();
             var presentDelivery2 = new PresentDelivery();
-            var house2 = presentDelivery2.Deliver2(NumberInput);
+            var house2 = presentDelivery2.Deliver2(Input);
             Console.WriteLine($"First house to get {LegacyInput} presents: {house2}");
         }
 
-        private const int NumberInput = 34_000_000;
+        private const int Input = 34_000_000;
     }
 }

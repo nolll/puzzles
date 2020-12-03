@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var container = new EggnogContainers(LegacyInput);
+            var container = new EggnogContainers(FileInput);
             var combinations1 = container.GetCombinations(150);
             Console.WriteLine($"Combinations: {combinations1.Count}");
 
@@ -22,27 +22,5 @@ namespace ConsoleApp.Years.Year2015.Puzzles
             var containerCount = combinations2.First().Count;
             Console.WriteLine($"Combinations with {containerCount} containers: {combinations2.Count}");
         }
-
-        protected override string LegacyInput => @"
-33
-14
-18
-20
-45
-35
-16
-35
-1
-13
-18
-13
-50
-44
-48
-6
-24
-41
-30
-42";
     }
 }

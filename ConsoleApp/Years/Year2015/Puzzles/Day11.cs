@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
             WritePartTitle();
             var validator = new CorporatePasswordValidator();
-            var pwd = validator.FindNextPassword(LegacyInput);
+            var pwd = validator.FindNextPassword(Input);
             Console.WriteLine($"Next password 1: {pwd}");
 
             WritePartTitle();
@@ -21,6 +21,6 @@ namespace ConsoleApp.Years.Year2015.Puzzles
             Console.WriteLine($"Next password 2: {pwd2}");
         }
 
-        protected override string LegacyInput => "hxbxwxba";
+        private const string Input = "hxbxwxba";
     }
 }

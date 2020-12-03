@@ -34,22 +34,24 @@ namespace Core.TreeNavigation
 
         public long GetTreeCount(TreeTrajectory trajectory)
         {
-            var largeInput = ExpandInput(_input, trajectory);
-            var matrix = MatrixBuilder.BuildCharMatrix(largeInput);
+            var matrix = MatrixBuilder.BuildCharMatrix(_input);
             matrix.MoveTo(0, 0);
 
             var treeCount = 0;
             while (!matrix.IsAtBottom)
             {
-                var movedRight = matrix.TryMoveRight(trajectory.Right);
-                if (!movedRight)
-                    throw new Exception("Can't move right");
+                for (var i = 0; i < trajectory.Right; i++)
+                {
+                    var movedRight = matrix.TryMoveRight();
+                    if (!movedRight)
+                        matrix.MoveTo(0, matrix.Address.Y);
+                }
 
                 for (var i = 0; i < trajectory.Down; i++)
                     matrix.MoveDown();
 
-                treeCount += matrix.ReadValue() == '#' ? 1 : 0;
-                matrix.WriteValue('X');
+                var hasTree = matrix.ReadValue() == '#';
+                treeCount += hasTree ? 1 : 0;
             }
 
             return treeCount;

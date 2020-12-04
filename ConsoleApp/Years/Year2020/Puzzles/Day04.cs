@@ -12,9 +12,13 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var processor = new PassportProcessor();
-            var passportCount = processor.GetValidPassportCount(FileInput);
-            Console.WriteLine($"Number of valid passports: {passportCount}");
+            var processor = new PassportProcessor(FileInput);
+            var passportCount1 = processor.GetNumberOfPassportsThatHasAllFields();
+            Console.WriteLine($"Number of passports that has all fields: {passportCount1}");
+
+            WritePartTitle();
+            var passportCount2 = processor.GetNumberOfValidPassports();
+            Console.WriteLine($"Number of valid passports: {passportCount2}");
         }
     }
 }

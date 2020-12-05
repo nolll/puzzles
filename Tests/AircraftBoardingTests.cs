@@ -11,7 +11,7 @@ namespace Tests
         [TestCase("BBFFBBFRLL", 102, 4, 820)]
         public void ParseBoardingCard(string boardingCard, int row, int col, int id)
         {
-            var processor = new BoardingCard(boardingCard);
+            var processor = BoardingCard.Parse(boardingCard);
 
             Assert.That(processor.Row, Is.EqualTo(row));
             Assert.That(processor.Column, Is.EqualTo(col));

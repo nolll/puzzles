@@ -14,6 +14,10 @@ namespace ConsoleApp.Years.Year2020.Puzzles
             WritePartTitle();
             var processor = new BoardingCardProcessor(FileInput);
             Console.WriteLine($"The boarding card with the highest id is {processor.HighestId}");
+
+            WritePartTitle();
+            var mySeat = processor.FindMySeat();
+            Console.WriteLine($"The id of my seat is {mySeat.Id}");
         }
     }
 }

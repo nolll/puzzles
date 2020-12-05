@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using Core.Tools;
 
 namespace Core.AircraftBoarding
@@ -12,7 +13,27 @@ namespace Core.AircraftBoarding
 
         public BoardingCardProcessor(string input)
         {
-            _boardingCards = PuzzleInputReader.Read(input).Select(o => new BoardingCard(o));
+            _boardingCards = PuzzleInputReader.Read(input).Select(BoardingCard.Parse);
+        }
+
+        public BoardingCard FindMySeat()
+        {
+            var myRow = _boardingCards
+                .GroupBy(o => o.Row)
+                .Where(o => o.Count() == 7)
+                .OrderBy(o => o.Key)
+                .First()
+                .ToList();
+
+            for (var col = 0; col < 8; col++)
+            {
+                if (myRow.All(o => o.Column != col))
+                {
+                    return new BoardingCard(myRow[0].Row, col);
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -8,17 +8,24 @@ namespace Core.AircraftBoarding
         public int Column { get; }
         public int Id { get; }
 
-        public BoardingCard(string boardingCard)
+        public BoardingCard(int row, int col)
         {
-            var rowInstructions = boardingCard.Substring(0, 7);
-            var colInstructions = boardingCard.Substring(7);
-
-            Row = FindRow(rowInstructions);
-            Column = FindCol(colInstructions);
-            Id = Row * 8 + Column;
+            Row = row;
+            Column = col;
+            Id = row * 8 + col;
         }
-        
-        private int FindRow(string instructions)
+
+        public static BoardingCard Parse(string s)
+        {
+            var rowInstructions = s.Substring(0, 7);
+            var colInstructions = s.Substring(7);
+
+            var row = FindRow(rowInstructions);
+            var col = FindCol(colInstructions);
+            return new BoardingCard(row, col);
+        }
+
+        private static int FindRow(string instructions)
         {
             var rows = CreateList(128);
             foreach (var c in instructions)
@@ -37,7 +44,7 @@ namespace Core.AircraftBoarding
             return rows[0];
         }
 
-        private int FindCol(string instructions)
+        private static int FindCol(string instructions)
         {
             var cols = CreateList(8);
             foreach (var c in instructions)
@@ -56,7 +63,7 @@ namespace Core.AircraftBoarding
             return cols[0];
         }
 
-        private List<int> CreateList(int length)
+        private static List<int> CreateList(int length)
         {
             var list = new List<int>();
             for (var i = 0; i < length; i++)

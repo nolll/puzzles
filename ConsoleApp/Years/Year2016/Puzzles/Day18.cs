@@ -12,16 +12,14 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var detector1 = new FloorTrapDetector(LegacyInput);
+            var detector1 = new FloorTrapDetector(FileInput);
             detector1.FindTraps(40);
             Console.WriteLine($"Number of safe tiles after 40 rows: {detector1.SafeCount}");
 
             WritePartTitle();
-            var detector2 = new FloorTrapDetector(LegacyInput);
+            var detector2 = new FloorTrapDetector(FileInput);
             detector2.FindTraps(400_000);
             Console.WriteLine($"Number of safe tiles after 400000 rows: {detector2.SafeCount}");
         }
-
-        protected override string LegacyInput => ".^^^^^.^^.^^^.^...^..^^.^.^..^^^^^^^^^^..^...^^.^..^^^^..^^^^...^.^.^^^^^^^^....^..^^^^^^.^^^.^^^.^^";
     }
 }

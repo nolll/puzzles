@@ -12,7 +12,7 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var party = new WhiteElephantParty(NumberInput);
+            var party = new WhiteElephantParty(Input);
             var winner1 = party.StealFromNextElf();
             Console.WriteLine($"Elf that gets all presents: {winner1}");
 
@@ -21,6 +21,6 @@ namespace ConsoleApp.Years.Year2016.Puzzles
             Console.WriteLine($"Elf that gets all presents: {winner2}");
         }
 
-        private const int NumberInput = 3001330;
+        private const int Input = 3001330;
     }
 }

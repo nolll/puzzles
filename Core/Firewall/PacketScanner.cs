@@ -61,7 +61,7 @@ namespace Core.Firewall
         private IList<FirewallLayer> ParseLayers(string input)
         {
             var dictionary = new Dictionary<int, FirewallLayer>();
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
             foreach (var row in rows)
             {
                 var parts = row.Split(": ");

@@ -13,7 +13,7 @@ namespace Core.Monorail
 
         public MonorailComputer(string input, int a, int c)
         {
-            var instructions = PuzzleInputReader.Read(input).ToArray();
+            var instructions = PuzzleInputReader.ReadLines(input).ToArray();
             _registers = new Dictionary<char, int>
             {
                 ['a'] = a,

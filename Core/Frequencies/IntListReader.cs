@@ -8,7 +8,7 @@ namespace Core.Frequencies
     {
         public static List<int> Read(string str)
         {
-            return PuzzleInputReader.Read(str).Select(ConvertToInt).ToList();
+            return PuzzleInputReader.ReadLines(str).Select(ConvertToInt).ToList();
         }
 
         private static int ConvertToInt(string str)

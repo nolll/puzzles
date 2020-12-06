@@ -17,7 +17,7 @@ namespace Core.TuringDiagnostics
             _tape = new LinkedList<int>();
             _cursor = _tape.AddFirst(0);
 
-            var rows = PuzzleInputReader.Read(input.Replace("-", "").Replace(".", "").Replace(":", ""));
+            var rows = PuzzleInputReader.ReadLines(input.Replace("-", "").Replace(".", "").Replace(":", ""));
 
             var beginRow = rows[0];
             _startState = beginRow.Split(' ')[3].First();

@@ -18,7 +18,7 @@ namespace Core.CoprocessorConflagration
         public long RegisterH => _registers["h"];
 
         public CoProcessor(string input, long registerA = 0)
-            : this(PuzzleInputReader.Read(input), registerA)
+            : this(PuzzleInputReader.ReadLines(input), registerA)
         {
         }
 

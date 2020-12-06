@@ -14,7 +14,7 @@ namespace Core.SafeCracking
 
         public SafeCrackingComputerPart2(string input, int a, int c)
         {
-            _instructions = PuzzleInputReader.Read(input).Select(o => new AssembunnyInstruction(o)).ToArray();
+            _instructions = PuzzleInputReader.ReadLines(input).Select(o => new AssembunnyInstruction(o)).ToArray();
             _registers = new Dictionary<char, int>
             {
                 ['a'] = a,

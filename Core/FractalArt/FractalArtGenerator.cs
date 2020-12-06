@@ -34,7 +34,7 @@ namespace Core.FractalArt
 
         private IList<FractalRule> ParseRules(string input)
         {
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
             return rows.Select(ParseRule).ToList();
         }
 

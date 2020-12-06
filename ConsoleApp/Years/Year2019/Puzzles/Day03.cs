@@ -12,7 +12,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
 
         protected override void RunDay()
         {
-            var wirePaths = PuzzleInputReader.Read(LegacyInput);
+            var wirePaths = PuzzleInputReader.ReadLines(LegacyInput);
             var wirePathA = wirePaths[0];
             var wirePathB = wirePaths[1];
             

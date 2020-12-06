@@ -10,7 +10,7 @@ namespace Core.SleepingGuards
     {
         public static List<GuardEvent> Read(string str)
         {
-            return PuzzleInputReader.Read(str).Select(ConvertToGuardEvent).OrderBy(o => o.Timestamp).ToList();
+            return PuzzleInputReader.ReadLines(str).Select(ConvertToGuardEvent).OrderBy(o => o.Timestamp).ToList();
         }
 
         private static GuardEvent ConvertToGuardEvent(string str)

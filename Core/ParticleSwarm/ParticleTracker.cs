@@ -17,7 +17,7 @@ namespace Core.ParticleSwarm
 
         private IList<Particle> ReadData(string data)
         {
-            var rows = PuzzleInputReader.Read(data);
+            var rows = PuzzleInputReader.ReadLines(data);
             var particles = new List<Particle>();
             var id = 0;
             foreach (var row in rows)

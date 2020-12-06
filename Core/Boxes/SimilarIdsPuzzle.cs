@@ -11,7 +11,7 @@ namespace Core.Boxes
 
         public SimilarIdsPuzzle(string input)
         {
-            var ids = PuzzleInputReader.Read(input);
+            var ids = PuzzleInputReader.ReadLines(input);
             var similarIds = GetSimilarIds(ids);
             if (similarIds.Count != 2)
                 throw new WrongNumberOfSimilarIdsException(similarIds);

@@ -102,7 +102,7 @@ namespace Core.CookieRecipes
 
         private IList<CookieIngredient> ParseIngredients(string input)
         {
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
             return rows.Select(ParseIngredient).ToList();
         }
 

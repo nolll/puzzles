@@ -9,13 +9,13 @@ namespace Core.IpV7
     {
         public int TlsSupportCount(string input)
         {
-            var ips = PuzzleInputReader.Read(input);
+            var ips = PuzzleInputReader.ReadLines(input);
             return ips.Count(SupportsTls);
         }
 
         public int SslSupportCount(string input)
         {
-            var ips = PuzzleInputReader.Read(input);
+            var ips = PuzzleInputReader.ReadLines(input);
             return ips.Count(SupportsSsl);
         }
 

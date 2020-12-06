@@ -38,7 +38,7 @@ namespace Core.OperationComputer
         public long RunTestProgram(string operationsInput, string programInput)
         {
             var operationNames = GetOperationNameDictionary(operationsInput);
-            var commands = PuzzleInputReader.Read(programInput).Select(s => ParseIntCommand(s, operationNames));
+            var commands = PuzzleInputReader.ReadLines(programInput).Select(s => ParseIntCommand(s, operationNames));
             var registers = new long[] { 0, 0, 0, 0 };
             foreach (var command in commands)
             {
@@ -50,7 +50,7 @@ namespace Core.OperationComputer
 
         public long RunInstructionPointerProgram(string programInput, long register0Value, bool useOptimization, bool debug)
         {
-            var inputRows = PuzzleInputReader.Read(programInput);
+            var inputRows = PuzzleInputReader.ReadLines(programInput);
             var pointerRegister = int.Parse(inputRows.First().Split(' ').Last());
             var commands = inputRows.Skip(1).Select(ParseStringCommand).ToList();
             var registers = new[] { register0Value, 0, 0, 0, 0, 0 };
@@ -89,7 +89,7 @@ namespace Core.OperationComputer
             long firstRegisterZeroValue = 0;
             long lastRegisterZeroValue = 0;
             var registerZeroValues = new List<long>();
-            var inputRows = PuzzleInputReader.Read(programInput);
+            var inputRows = PuzzleInputReader.ReadLines(programInput);
             var pointerRegister = int.Parse(inputRows.First().Split(' ').Last());
             var commands = inputRows.Skip(1).Select(ParseStringCommand).ToList();
             var registers = new[] { register0Value, 0, 0, 0, 0, 0 };
@@ -162,7 +162,7 @@ namespace Core.OperationComputer
 
         private IList<OperationMatch> MapMatchingOperations(string input)
         {
-            var rows = PuzzleInputReader.Read(input.Replace(":", "").Replace("[", "").Replace("]", "").Replace(",", ""));
+            var rows = PuzzleInputReader.ReadLines(input.Replace(":", "").Replace("[", "").Replace("]", "").Replace(",", ""));
             var before = new long[0];
             var command = new int[0];
             var matchingOperations = new List<OperationMatch>();

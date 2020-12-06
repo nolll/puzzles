@@ -43,7 +43,7 @@ namespace Core.DominoBridge
 
         private void InitComponents(string input)
         {
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
             _components = rows.Select(ParseComponent).ToList();
         }
 

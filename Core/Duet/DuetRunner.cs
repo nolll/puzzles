@@ -13,7 +13,7 @@ namespace Core.Duet
 
         public DuetRunner(string input)
         {
-            _operations = PuzzleInputReader.Read(input);
+            _operations = PuzzleInputReader.ReadLines(input);
             _queues = new List<List<long>>
             {
                 new List<long>(),

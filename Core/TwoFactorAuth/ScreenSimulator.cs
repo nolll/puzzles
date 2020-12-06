@@ -14,7 +14,7 @@ namespace Core.TwoFactorAuth
 
         public ScreenSimulatorResult Run(string input)
         {
-            var instructions = PuzzleInputReader.Read(input).Select(CreateInstruction).ToList();
+            var instructions = PuzzleInputReader.ReadLines(input).Select(CreateInstruction).ToList();
             foreach (var instruction in instructions)
             {
                 instruction.Execute();

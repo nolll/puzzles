@@ -10,7 +10,7 @@ namespace Core.ModuleMass
 
         public SumFinder(string input)
         {
-            _numbers = PuzzleInputReader.Read(input).Select(int.Parse).ToList();
+            _numbers = PuzzleInputReader.ReadLines(input).Select(int.Parse).ToList();
         }
 
         public IList<int> FindNumbersThatAddUpTo(int target, int numbersToFind)

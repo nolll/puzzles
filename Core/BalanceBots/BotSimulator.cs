@@ -11,7 +11,7 @@ namespace Core.BalanceBots
 
         public BotSimulator(string input)
         {
-            var instructions = PuzzleInputReader.Read(input);
+            var instructions = PuzzleInputReader.ReadLines(input);
             var valueInstructions = new List<string>();
             var passInstructions = new List<string>();
             _bots = new Dictionary<int, Bot>();

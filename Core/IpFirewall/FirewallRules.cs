@@ -16,7 +16,7 @@ namespace Core.IpFirewall
 
         public long? GetLowestUnblockedIp()
         {
-            var blockedRanges = PuzzleInputReader.Read(_input).Select(ParseIpRange).OrderBy(o => o.Start).ToArray();
+            var blockedRanges = PuzzleInputReader.ReadLines(_input).Select(ParseIpRange).OrderBy(o => o.Start).ToArray();
             long ip = 0;
             while (true)
             {
@@ -32,7 +32,7 @@ namespace Core.IpFirewall
         public long GetAllowedIpCount(long upperbound)
         {
             var rangesWithoutOverlaps = new List<IpRange>();
-            var blockedRanges = PuzzleInputReader.Read(_input).Select(ParseIpRange).ToList();
+            var blockedRanges = PuzzleInputReader.ReadLines(_input).Select(ParseIpRange).ToList();
             while (blockedRanges.Any())
             {
                 var range = blockedRanges.First();

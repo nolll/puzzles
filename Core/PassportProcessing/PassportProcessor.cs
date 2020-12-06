@@ -10,7 +10,7 @@ namespace Core.PassportProcessing
 
         public PassportProcessor(string input)
         {
-            var rows = PuzzleInputReader.Read(input.Replace("\r\n\r\n", "--").Replace("\r\n", " ").Replace("--", "\r\n"));
+            var rows = PuzzleInputReader.ReadLines(input.Replace("\r\n\r\n", "--").Replace("\r\n", " ").Replace("--", "\r\n"));
             _passports = rows.Select(o => new Passport(o.Trim())).ToList();
         }
 

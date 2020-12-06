@@ -111,7 +111,7 @@ namespace Core.AirDuct
         {
             _locations = new List<AirDuctLocation>();
             _matrix = new Matrix<char>();
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
             var y = 0;
             foreach (var row in rows)
             {

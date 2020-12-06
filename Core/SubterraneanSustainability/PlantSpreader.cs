@@ -16,7 +16,7 @@ namespace Core.SubterraneanSustainability
 
         public PlantSpreader(string input)
         {
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
             var state = rows.First().Split(' ')[2];
             var paddingStr = "..............................................................................................................................................................................................................................................................................................................................................................";
             state = $"{paddingStr}{state}{paddingStr}";

@@ -15,7 +15,7 @@ namespace Core.FourDimensionalAdventure
 
         private IList<Point4d> ParsePoints(string input)
         {
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
             return rows.Select(ParsePoint).ToList();
         }
 

@@ -34,7 +34,7 @@ namespace Core.ScrambledLetters
         private IList<IScrambleInstruction> ParseInstructions(string input)
         {
             var instructions = new List<IScrambleInstruction>();
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
             foreach (var row in rows)
             {
                 instructions.Add(ParseInstruction(row));

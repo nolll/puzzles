@@ -12,7 +12,7 @@ namespace Core.DigitalPlumber
 
         public Pipes(string input)
         {
-            var strRows = PuzzleInputReader.Read(input);
+            var strRows = PuzzleInputReader.ReadLines(input);
             var dictionary = new Dictionary<int, IList<int>>();
             var groups = new List<List<int>>();
 

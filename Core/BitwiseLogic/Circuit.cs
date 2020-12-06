@@ -29,7 +29,7 @@ namespace Core.BitwiseLogic
 
         private IDictionary<string, Wire> GetWires(string input)
         {
-            var strings = PuzzleInputReader.Read(input);
+            var strings = PuzzleInputReader.ReadLines(input);
             var wires = new Dictionary<string, Wire>();
             foreach (var s in strings)
             {

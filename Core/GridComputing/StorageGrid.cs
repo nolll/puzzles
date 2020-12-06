@@ -85,7 +85,7 @@ namespace Core.GridComputing
 
         private Matrix<StorageNode> ParseGrid(string input)
         {
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
             var dataRows = rows.Skip(2);
             var matrix = new Matrix<StorageNode>();
 

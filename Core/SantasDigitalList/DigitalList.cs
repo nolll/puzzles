@@ -11,7 +11,7 @@ namespace Core.SantasDigitalList
 
         public DigitalList(string input)
         {
-            var strings = PuzzleInputReader.Read(input);
+            var strings = PuzzleInputReader.ReadLines(input);
             var codeCount = strings.Sum(CountCode);
             var memoryCount = strings.Sum(CountMemory);
             var encodedCount = strings.Sum(CountEncoded);

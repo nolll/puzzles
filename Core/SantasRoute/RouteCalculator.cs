@@ -98,7 +98,7 @@ namespace Core.SantasRoute
 
         private IList<Distance> GetDistances(string input)
         {
-            return PuzzleInputReader.Read(input).Select(CreateDistance).ToList();
+            return PuzzleInputReader.ReadLines(input).Select(CreateDistance).ToList();
         }
 
         private Distance CreateDistance(string s)

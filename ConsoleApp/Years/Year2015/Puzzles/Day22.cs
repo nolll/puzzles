@@ -27,7 +27,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
 
         private Params GetParams()
         {
-            var rows = PuzzleInputReader.Read(FileInput);
+            var rows = PuzzleInputReader.ReadLines(FileInput);
 
             return new Params
             {

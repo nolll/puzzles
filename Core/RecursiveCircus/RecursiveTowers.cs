@@ -11,7 +11,7 @@ namespace Core.RecursiveCircus
 
         public RecursiveTowers(string input)
         {
-            var strings = PuzzleInputReader.Read(input);
+            var strings = PuzzleInputReader.ReadLines(input);
             var discs = new Dictionary<string, Disc>();
             foreach (var strDisc in strings)
             {

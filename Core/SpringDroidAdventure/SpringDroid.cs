@@ -20,7 +20,7 @@ namespace Core.SpringDroidAdventure
         {
             _computer = new ComputerInterface(Program, ReadInput, WriteOutput);
             _currentCommand = new List<char>();
-            _commands = PuzzleInputReader.Read(script);
+            _commands = PuzzleInputReader.ReadLines(script);
         }
 
         public void Run()

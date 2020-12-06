@@ -10,7 +10,7 @@ namespace Core.Eggnog
 
         public EggnogContainers(string input)
         {
-            _containers = PuzzleInputReader.Read(input).Select((o, index) => new EggnogContainer(index, int.Parse((string) o))).ToList();
+            _containers = PuzzleInputReader.ReadLines(input).Select((o, index) => new EggnogContainer(index, int.Parse((string) o))).ToList();
         }
         
         public IList<List<EggnogContainer>> GetCombinations(int targetVolume)

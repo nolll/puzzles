@@ -37,7 +37,7 @@ namespace Core.KnightsOfTheDinnerTable
 
         private IDictionary<string, DinnerGuest> ParseGuests(string input, bool includeMe)
         {
-            var rules = PuzzleInputReader.Read(input);
+            var rules = PuzzleInputReader.ReadLines(input);
             var guests = new Dictionary<string, DinnerGuest>();
 
             if (includeMe)

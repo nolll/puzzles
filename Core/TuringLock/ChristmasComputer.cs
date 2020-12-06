@@ -21,7 +21,7 @@ namespace Core.TuringLock
             _registers['a'] = a;
             _registers['b'] = 0;
 
-            var instructions = PuzzleInputReader.Read(program);
+            var instructions = PuzzleInputReader.ReadLines(program);
             var pointer = 0;
             while (pointer >= 0 && pointer < instructions.Count)
             {

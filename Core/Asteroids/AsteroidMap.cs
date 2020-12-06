@@ -17,7 +17,7 @@ namespace Core.Asteroids
         private IList<IList<Asteroid>> GetAsteroidMatrix(string map)
         {
             var asteroids = new List<IList<Asteroid>>();
-            var rows = PuzzleInputReader.Read(map);
+            var rows = PuzzleInputReader.ReadLines(map);
             for (var y = 0; y < rows.Count; y++)
             {
                 var asteroidRow = new List<Asteroid>();

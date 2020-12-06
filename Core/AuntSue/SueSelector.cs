@@ -20,7 +20,7 @@ namespace Core.AuntSue
 
         private IList<Sue> ParseSues(string input)
         {
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
             return rows.Select(ParseSue).ToList();
         }
 

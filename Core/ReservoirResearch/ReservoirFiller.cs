@@ -93,7 +93,7 @@ namespace Core.ReservoirResearch
             _matrix.MoveTo(_source);
             _matrix.WriteValue(SourceTile);
 
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
 
             foreach (var row in rows)
             {

@@ -11,7 +11,7 @@ namespace Core.Duet
 
         public SingleRunner(string input)
         {
-            _operations = PuzzleInputReader.Read(input);
+            _operations = PuzzleInputReader.ReadLines(input);
         }
 
         public void Run()

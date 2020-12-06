@@ -161,7 +161,7 @@ namespace Core.Radioisotope
 
         private RadioisotopeFacility ParseFacility(string input)
         {
-            var strFloors = PuzzleInputReader.Read(input);
+            var strFloors = PuzzleInputReader.ReadLines(input);
             return new RadioisotopeFacility(strFloors.Select(ParseFloor).ToList(), 0);
         }
 

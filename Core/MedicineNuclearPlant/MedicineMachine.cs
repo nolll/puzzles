@@ -11,7 +11,7 @@ namespace Core.MedicineNuclearPlant
 
         public MedicineMachine(string input)
         {
-            _replacements = PuzzleInputReader.Read(input).Select(ParseReplacement).OrderByDescending(o => o.Right.Length).ThenBy(o => o.Right);
+            _replacements = PuzzleInputReader.ReadLines(input).Select(ParseReplacement).OrderByDescending(o => o.Right.Length).ThenBy(o => o.Right);
         }
 
         public IList<string> GetCalibrationMolecules(string startMolecule)

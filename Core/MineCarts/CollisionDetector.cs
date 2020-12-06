@@ -84,7 +84,7 @@ namespace Core.MineCarts
         {
             _matrix = new Matrix<char>();
             _carts = new List<MineCart>(); 
-            var rows = PuzzleInputReader.Read(input).Select(o => o.Trim('_')).ToList();
+            var rows = PuzzleInputReader.ReadLines(input).Select(o => o.Trim('_')).ToList();
             for (var y = 0; y < rows.Count; y++)
             {
                 var row = rows[y].ToCharArray();

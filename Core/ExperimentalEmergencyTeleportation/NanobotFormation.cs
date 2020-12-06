@@ -248,7 +248,7 @@ namespace Core.ExperimentalEmergencyTeleportation
 
         private IList<Nanobot> ParseBots(string input)
         {
-            return PuzzleInputReader.Read(input).Select(ParseBot).ToList();
+            return PuzzleInputReader.ReadLines(input).Select(ParseBot).ToList();
         }
 
         private Nanobot ParseBot(string s)

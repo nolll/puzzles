@@ -13,7 +13,7 @@ namespace Core.CpuInstructions
         public CpuInstructionCalculator(string input)
         {
             _registers = new Dictionary<string, int>();
-            var instructions = PuzzleInputReader.Read(input);
+            var instructions = PuzzleInputReader.ReadLines(input);
             
             foreach (var instruction in instructions)
             {

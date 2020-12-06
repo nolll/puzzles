@@ -40,7 +40,7 @@ namespace Core.KineticSculptureTiming
 
         private IList<KineticSculptureDisc> ParseDiscs(string input)
         {
-            var rows = PuzzleInputReader.Read(input);
+            var rows = PuzzleInputReader.ReadLines(input);
             return rows.Select(ParseDisc).ToList();
         }
 

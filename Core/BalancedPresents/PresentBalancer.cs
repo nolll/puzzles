@@ -11,7 +11,7 @@ namespace Core.BalancedPresents
 
         public PresentBalancer(string input, int groupCount)
         {
-            var presents = PuzzleInputReader.Read(input).Select(int.Parse).ToList();
+            var presents = PuzzleInputReader.ReadLines(input).Select(int.Parse).ToList();
             presents.Reverse();
             var sum = presents.Sum();
             _partitionSum = sum / groupCount;

@@ -14,7 +14,10 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             WritePartTitle();
             var reader = new DeclarationFormReader(FileInput);
-            Console.WriteLine($"Sum of 'yes' answers {reader.SumOfYesAnswers}");
+            Console.WriteLine($"Sum of at least one 'yes' answer: {reader.SumOfAtLeastOneYes}");
+
+            WritePartTitle();
+            Console.WriteLine($"Sum of all 'yes' answer: {reader.SumOfAllYes}");
         }
     }
 }

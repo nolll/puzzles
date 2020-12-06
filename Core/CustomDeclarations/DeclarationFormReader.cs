@@ -6,20 +6,47 @@ namespace Core.CustomDeclarations
 {
     public class DeclarationFormReader
     {
-        public int SumOfYesAnswers { get; }
+        private readonly IList<IList<string>> _groups;
 
         public DeclarationFormReader(string input)
         {
-            var groups = PuzzleInputReader.ReadGroups(input);
-            var lettersByGroup = groups.Select(GetGroupLetters);
-            var groupCounts = lettersByGroup.Select(o => o.Length);
-            SumOfYesAnswers = groupCounts.Sum();
+            _groups = PuzzleInputReader.ReadGroups(input);
         }
 
-        private static char[] GetGroupLetters(IList<string> group)
+        public int SumOfAtLeastOneYes
+        {
+            get
+            {
+                var lettersByGroup = _groups.Select(GetLettersWithAtLeastOneYes);
+                var groupCounts = lettersByGroup.Select(o => o.Length);
+                return groupCounts.Sum();
+            }
+        }
+
+        public int SumOfAllYes
+        {
+            get
+            {
+                var lettersByGroup = _groups.Select(GetLettersWithAllYes);
+                var groupCounts = lettersByGroup.Select(o => o.Length);
+                return groupCounts.Sum();
+            }
+        }
+
+        private static char[] GetLettersWithAtLeastOneYes(IList<string> group)
         {
             var allAnswers = string.Join("", group);
             return allAnswers.ToCharArray().Distinct().OrderBy(o => o).ToArray();
+        }
+
+        private static char[] GetLettersWithAllYes(IList<string> group)
+        {
+            var allAnswers = string.Join("", group);
+            var peopleInGroup = group.Count;
+            var distinctLetters = allAnswers.ToCharArray().Distinct().OrderBy(o => o);
+            var allLetters = allAnswers.ToCharArray().ToList();
+            var allYesAnswers = distinctLetters.Where(o => allLetters.Count(c => c == o) == peopleInGroup);
+            return allYesAnswers.ToArray();
         }
     }
 }

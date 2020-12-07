@@ -14,9 +14,11 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             WritePartTitle();
             var processor = new LuggageProcessor(FileInput);
-            var count = processor.GetBagCount();
-            Console.WriteLine($"Number of outermost bags that can contain shiny gold bags: {count}");
+            var count1 = processor.NumberOfBagsThatCanContainGoldBags();
+            Console.WriteLine($"Number of outermost bags that can contain shiny gold bags: {count1}");
 
+            var count2 = processor.NumberOfBagsThatAGoldBagContains();
+            Console.WriteLine($"Number of bags that shiny gold bag contains: {count2}");
         }
     }
 }

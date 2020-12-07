@@ -38,7 +38,6 @@ namespace Core.LuggageRules
                     var quantity = int.Parse(subBagParts.First());
                     var name = string.Join(" ", subBagParts.Skip(1));
                     var subBag = GetOrAdd(name);
-                    bag.AddParentBag(subBag);
                     bag.AddSubBag(subBag, quantity);
                 }
             }
@@ -54,7 +53,7 @@ namespace Core.LuggageRules
             return bag;
         }
 
-        public int GetBagCount()
+        public int NumberOfBagsThatCanContainGoldBags()
         {
             var count = 0;
             foreach (var bag in _bags.Values)
@@ -79,6 +78,23 @@ namespace Core.LuggageRules
             }
 
             return false;
+        }
+
+        public int NumberOfBagsThatAGoldBagContains()
+        {
+            var goldBag = _bags["shiny gold"];
+            return GetSubBagCount(goldBag);
+        }
+
+        private int GetSubBagCount(Bag bag)
+        {
+            var count = 0;
+            foreach (var subBag in bag.SubBags)
+            {
+                count += subBag.Quantity + subBag.Quantity * GetSubBagCount(subBag.Bag);
+            }
+
+            return count;
         }
     }
 }

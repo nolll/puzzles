@@ -12,7 +12,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var navigator = new FloorNavigator(LegacyInput);
+            var navigator = new FloorNavigator(FileInput);
             Console.WriteLine($"Final floor: {navigator.DestinationFloor}");
 
             WritePartTitle();

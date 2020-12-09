@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var navigator = new TreeNavigator(LegacyInput);
+            var navigator = new TreeNavigator(FileInput);
             var treeCount = navigator.GetSingleTreeCount();
             Console.WriteLine($"Number of trees: {treeCount}");
 

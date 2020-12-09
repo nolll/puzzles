@@ -13,11 +13,11 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
             WritePartTitle();
             var calc = new GiftWrappingCalculator();
-            var paperResult = calc.GetRequiredPaper(LegacyInput);
+            var paperResult = calc.GetRequiredPaper(FileInput);
             Console.WriteLine($"Required wrapping paper: {paperResult} square feet");
 
             WritePartTitle();
-            var ribbonResult = calc.GetRequiredRibbon(LegacyInput);
+            var ribbonResult = calc.GetRequiredRibbon(FileInput);
             Console.WriteLine($"Required ribbon: {ribbonResult} feet");
         }
     }

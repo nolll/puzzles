@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var sumFinder = new SumFinder(LegacyInput);
+            var sumFinder = new SumFinder(FileInput);
             var numbers1 = sumFinder.FindNumbersThatAddUpTo(Target, 2);
             var product1 = numbers1.Aggregate(1, (a, b) => a * b);
             Console.WriteLine($"Product of numbers that add up to {Target}: {product1}");

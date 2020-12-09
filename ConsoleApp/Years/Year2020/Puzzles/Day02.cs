@@ -15,7 +15,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             WritePartTitle();
             var validator = new PasswordPolicyValidator();
-            var policies = PuzzleInputReader.ReadLines(LegacyInput);
+            var policies = PuzzleInputReader.ReadLines(FileInput);
             var count1 = policies.Count(validator.IsValidAccordingToRuleOne);
             Console.WriteLine($"Number of valid passwords with rule 1: {count1}");
 

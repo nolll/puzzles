@@ -13,7 +13,6 @@ namespace ConsoleApp.Years
         private int _part;
         protected abstract void RunDay();
         protected abstract int Year { get; }
-        protected virtual string LegacyInput { get; }
         private readonly Timer _timer;
         public int Id { get; }
 

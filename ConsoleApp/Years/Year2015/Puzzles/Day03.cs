@@ -13,12 +13,12 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
             WritePartTitle();
             var grid1 = new DeliveryGrid();
-            grid1.DeliverBySanta(LegacyInput);
+            grid1.DeliverBySanta(FileInput);
             Console.WriteLine($"Presents delivered to {grid1.SantaDeliveryCount} houses by Santa");
 
             WritePartTitle();
             var grid2 = new DeliveryGrid();
-            grid2.DeliverBySantaAndRobot(LegacyInput);
+            grid2.DeliverBySantaAndRobot(FileInput);
             Console.WriteLine($"Presents delivered to {grid2.SantaDeliveryCount} houses by Santa and robot");
         }
     }

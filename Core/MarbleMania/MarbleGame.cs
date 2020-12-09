@@ -7,15 +7,23 @@ namespace Core.MarbleMania
     public class MarbleGame
     {
         private LinkedListNode<int> _currentMarble;
-        private long[] _playerScores;
-        private LinkedList<int> _circle;
-        private int _currentPlayer;
-        private int _marbleValue;
+        private readonly LinkedList<int> _circle;
+        private readonly int _currentPlayer;
+        private readonly int _marbleValue;
         public long WinnerScore { get; }
+
+        public static MarbleGame Parse(string input, int playerMultiplier = 1)
+        {
+            var words = input.Split(' ');
+            var playerCount = int.Parse(words.First()) * playerMultiplier;
+            var lastMarbleValue = int.Parse(words[6]);
+
+            return new MarbleGame(playerCount, lastMarbleValue);
+        }
 
         public MarbleGame(int playerCount, int lastMarbleValue)
         {
-            _playerScores = new long[playerCount];
+            var playerScores = new long[playerCount];
             _circle = new LinkedList<int>();
             _currentMarble = _circle.AddFirst(0);
             _currentPlayer = 0;
@@ -27,7 +35,7 @@ namespace Core.MarbleMania
                 if (_marbleValue % 23 == 0)
                 {
                     MoveBack(7);
-                    _playerScores[_currentPlayer] += _marbleValue + _currentMarble.Value;
+                    playerScores[_currentPlayer] += _marbleValue + _currentMarble.Value;
                     var removeThis = _currentMarble;
                     _currentMarble = _currentMarble.NextOrFirst();
                     _circle.Remove(removeThis);
@@ -39,11 +47,11 @@ namespace Core.MarbleMania
                 }
 
                 _currentPlayer++;
-                if (_currentPlayer >= _playerScores.Length)
+                if (_currentPlayer >= playerScores.Length)
                     _currentPlayer = 0;
             }
 
-            WinnerScore = _playerScores.Max();
+            WinnerScore = playerScores.Max();
         }
 
         private void MoveBack(int distance)

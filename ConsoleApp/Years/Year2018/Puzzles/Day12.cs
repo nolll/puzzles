@@ -12,46 +12,11 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var spreader = new PlantSpreader(LegacyInput);
+            var spreader = new PlantSpreader(FileInput);
             Console.WriteLine($"Plant score 20: {spreader.PlantScore20}");
 
             WritePartTitle();
             Console.WriteLine($"Plant score 50 billion generations: {spreader.PlantScore50B}");
         }
-
-        protected override string LegacyInput => @"initial state: ##.####..####...#.####..##.#..##..#####.##.#..#...#.###.###....####.###...##..#...##.#.#...##.##..
-
-##.## => #
-....# => .
-.#.#. => #
-..### => .
-##... => #
-##### => .
-###.# => #
-.##.. => .
-..##. => .
-...## => #
-####. => .
-###.. => .
-.#### => #
-#...# => #
-..... => .
-..#.. => .
-#..## => .
-#.#.# => #
-.#.## => #
-.###. => .
-##..# => .
-.#... => #
-.#..# => #
-...#. => .
-#.#.. => .
-#.... => .
-##.#. => .
-#.### => .
-.##.# => .
-#..#. => #
-..#.# => .
-#.##. => #";
     }
 }

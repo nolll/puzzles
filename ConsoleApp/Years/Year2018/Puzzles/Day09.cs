@@ -12,11 +12,11 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var game = new MarbleGame(404, 71852);
+            var game = MarbleGame.Parse(FileInput);
             Console.WriteLine($"Winner score 1: {game.WinnerScore}");
 
             WritePartTitle();
-            var game2 = new MarbleGame(404, 7185200);
+            var game2 = MarbleGame.Parse(FileInput, 100);
             Console.WriteLine($"Winner score 2: {game2.WinnerScore}");
         }
     }

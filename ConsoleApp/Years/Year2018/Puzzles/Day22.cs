@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Core.ModeMaze;
+using Core.Tools;
 
 namespace ConsoleApp.Years.Year2018.Puzzles
 {
@@ -11,10 +13,12 @@ namespace ConsoleApp.Years.Year2018.Puzzles
 
         protected override void RunDay()
         {
-            const long depth = 11541;
-            const int targetX = 14;
-            const int targetY = 778;
-
+            var rows = PuzzleInputReader.ReadLines(FileInput);
+            var depth = int.Parse(rows.First().Split(' ').Last());
+            var targetCoords = rows.Last().Split(' ').Last().Split(',').Select(int.Parse).ToList();
+            var targetX = targetCoords.First();
+            var targetY = targetCoords.Last(); 
+            
             WritePartTitle();
             var caveSystem = new CaveSystem(depth, targetX, targetY);
             Console.WriteLine($"Total risk level: {caveSystem.TotalRiskLevel}");

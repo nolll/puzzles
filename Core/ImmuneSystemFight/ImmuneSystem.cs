@@ -113,7 +113,7 @@ namespace Core.ImmuneSystemFight
 
         private void ParseGroups(ImmuneSystemArmy army, string s, int boost)
         {
-            var rows = PuzzleInputReader.ReadLines(s);
+            var rows = PuzzleInputReader.ReadLines(s).Skip(1);
             var counter = 0;
             foreach (var row in rows)
             {

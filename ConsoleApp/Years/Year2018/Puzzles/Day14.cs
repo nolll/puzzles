@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
             WritePartTitle();
             var generator = new RecipeGenerator();
-            var scores = generator.ScoresAfter(NumberInput);
+            var scores = generator.ScoresAfter(Input);
             Console.WriteLine($"Next ten scores: {scores}");
 
             WritePartTitle();
@@ -21,6 +21,6 @@ namespace ConsoleApp.Years.Year2018.Puzzles
             Console.WriteLine($"Recipe count: {count}");
         }
 
-        private const int NumberInput = 306281;
+        private const int Input = 306281;
     }
 }

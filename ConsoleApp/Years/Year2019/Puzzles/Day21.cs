@@ -12,12 +12,12 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var walkingDroid = new SpringDroid(WalkProgram);
+            var walkingDroid = new SpringDroid(FileInput, WalkProgram);
             walkingDroid.Run();
             Console.WriteLine($"Hull damage: {walkingDroid.HullDamage}");
 
             WritePartTitle();
-            var runningDroid = new SpringDroid(RunProgram);
+            var runningDroid = new SpringDroid(FileInput, RunProgram);
             runningDroid.Run();
             Console.WriteLine($"Hull damage: {runningDroid.HullDamage}");
         }

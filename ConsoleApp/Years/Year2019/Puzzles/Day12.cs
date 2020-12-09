@@ -12,22 +12,17 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var tracker1 = new MoonTracker(LegacyInput);
+            var tracker1 = new MoonTracker(FileInput);
             const int iterations = 1000;
             tracker1.Run(iterations);
 
             Console.WriteLine($"Total energy after {iterations} time units: {tracker1.TotalEnergy}");
 
             WritePartTitle();
-            var tracker2 = new MoonTracker(LegacyInput);
+            var tracker2 = new MoonTracker(FileInput);
             tracker2.RunUntilRepeat();
 
             Console.WriteLine($"Time units until repeat: {tracker2.Iterations}");
         }
-
-        protected override string LegacyInput => @"<x=1, y=2, z=-9>
-<x=-1, y=-9, z=-4>
-<x=17, y=6, z=8>
-<x=12, y=4, z=2>";
     }
 }

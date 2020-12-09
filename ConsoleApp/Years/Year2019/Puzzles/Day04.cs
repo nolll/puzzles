@@ -11,7 +11,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
 
         protected override void RunDay()
         {
-            var passwordBounds = LegacyInput.Split('-');
+            var passwordBounds = Input.Split('-');
             var passwordLowerbound = int.Parse(passwordBounds[0]);
             var passwordUpperbound = int.Parse(passwordBounds[1]);
             
@@ -21,6 +21,6 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             Console.WriteLine($"Number of valid passwords: {passwordCount}");
         }
 
-        protected override string LegacyInput => "357253-892942";
+        private const string Input = "357253-892942";
     }
 }

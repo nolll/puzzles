@@ -12,14 +12,14 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var memory1 = new SpiralMemory(NumberInput, SpiralMemoryMode.RunToTarget);
+            var memory1 = new SpiralMemory(Input, SpiralMemoryMode.RunToTarget);
             Console.WriteLine($"Steps from center: {memory1.Distance}");
 
             WritePartTitle();
-            var memory2 = new SpiralMemory(NumberInput, SpiralMemoryMode.RunToValue);
+            var memory2 = new SpiralMemory(Input, SpiralMemoryMode.RunToValue);
             Console.WriteLine($"First value above input: {memory2.Value}");
         }
 
-        private const int NumberInput = 265149;
+        private const int Input = 265149;
     }
 }

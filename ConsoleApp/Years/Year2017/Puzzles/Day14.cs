@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var defragmenter = new DiskDefragmenter(LegacyInput);
+            var defragmenter = new DiskDefragmenter(Input);
             Console.WriteLine($"Used squares: {defragmenter.UsedCount}");
 
             WritePartTitle();
             Console.WriteLine($"Region count: {defragmenter.RegionCount}");
         }
 
-        protected override string LegacyInput => "amgozmfv";
+        private const string Input = "amgozmfv";
     }
 }

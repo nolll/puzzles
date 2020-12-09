@@ -1,5 +1,4 @@
 ﻿using System;
-using Core.CustomDeclarations;
 using Core.LuggageRules;
 
 namespace ConsoleApp.Years.Year2020.Puzzles
@@ -17,6 +16,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
             var count1 = processor.NumberOfBagsThatCanContainGoldBags();
             Console.WriteLine($"Number of outermost bags that can contain shiny gold bags: {count1}");
 
+            WritePartTitle();
             var count2 = processor.NumberOfBagsThatAGoldBagContains();
             Console.WriteLine($"Number of bags that shiny gold bag contains: {count2}");
         }

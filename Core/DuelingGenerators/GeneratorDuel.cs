@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Core.Tools;
 
 namespace Core.DuelingGenerators
 {
@@ -15,6 +17,14 @@ namespace Core.DuelingGenerators
             _generatorA = new Generator(startValueA, 16807, 4);
             _generatorB = new Generator(startValueB, 48271, 8);
             FinalCount = 0;
+        }
+
+        public static GeneratorDuel Parse(string input)
+        {
+            var rows = PuzzleInputReader.ReadLines(input);
+            var startValues = rows.Select(o => long.Parse(o.Split(' ').Last())).ToList();
+
+            return new GeneratorDuel(startValues.First(), startValues.Last());
         }
 
         public void Run(int iterations)

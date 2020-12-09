@@ -12,12 +12,12 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var duel = new GeneratorDuel(679, 771);
+            var duel = GeneratorDuel.Parse(FileInput);
             duel.Run(40_000_000);
             Console.WriteLine($"Final count part 1: {duel.FinalCount}");
 
             WritePartTitle();
-            var duel2 = new GeneratorDuel(679, 771);
+            var duel2 = GeneratorDuel.Parse(FileInput);
             duel2.Run2(5_000_000);
             Console.WriteLine($"Final count part 2: {duel2.FinalCount}");
         }

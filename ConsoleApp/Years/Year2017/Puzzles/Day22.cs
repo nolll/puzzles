@@ -12,41 +12,14 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var infection1 = new VirusInfection(LegacyInput);
+            var infection1 = new VirusInfection(FileInput);
             var infectionCount1 = infection1.RunPart1(10_000);
             Console.WriteLine($"Infected nodes after 10 000 iterations: {infectionCount1}");
 
             WritePartTitle();
-            var infection2 = new VirusInfection(LegacyInput);
+            var infection2 = new VirusInfection(FileInput);
             var infectionCount2 = infection2.RunPart2(10_000_000);
             Console.WriteLine($"Infected nodes after 10 000 000 iterations: {infectionCount2}");
         }
-
-        protected override string LegacyInput => @"
-.....###..#....#.#..##...
-......##.##...........##.
-.#..#..#.#.##.##.........
-...#..###..##.#.###.#.#.#
-##....#.##.#..####.####..
-#..##...#.##.##.....##..#
-.#.#......#...####...#.##
-###....#######...#####.#.
-##..#.####...#.#.##......
-##.....###....#.#..#.##.#
-.#..##.....#########.##..
-##...##.###..#.#..#.#...#
-...####..#...#.##.#..####
-.#..##......#####..#.###.
-...#.#.#..##...#####.....
-#..###.###.#.....#.#.###.
-##.##.#.#.##.#..#..######
-####.##..#.###.#...#..###
-.........#####.##.###..##
-..#.##.#..#..#...##..#...
-###.###.#.#..##...###....
-##..#.#.#.#.#.#.#...###..
-#..#.#.....#..#..#..##...
-........#######.#...#.#..
-..##.###.#.##.#.#.###..##";
     }
 }

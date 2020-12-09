@@ -12,7 +12,7 @@ namespace Core.MemoryReallocation
 
         public MemoryReallocator(string input)
         {
-            _banks = input.Split(',').Select(int.Parse).ToList();
+            _banks = input.Replace('\t', ',').Split(',').Select(int.Parse).ToList();
         }
 
         public void Run()

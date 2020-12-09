@@ -12,14 +12,12 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         protected override void RunDay()
         {
             WritePartTitle();
-            var intHasher = new IntKnotHasher(LegacyInput);
+            var intHasher = new IntKnotHasher(FileInput);
             Console.WriteLine($"Int hash: {intHasher.Checksum}");
 
             WritePartTitle();
-            var asciiHasher = new AsciiKnotHasher(LegacyInput);
+            var asciiHasher = new AsciiKnotHasher(FileInput);
             Console.WriteLine($"Ascii hash: {asciiHasher.Hash}");
         }
-
-        protected override string LegacyInput => "230,1,2,221,97,252,168,169,57,99,0,254,181,255,235,167";
     }
 }

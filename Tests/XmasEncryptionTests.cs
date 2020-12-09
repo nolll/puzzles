@@ -5,10 +5,7 @@ namespace Tests
 {
     public class XmasEncryptionTests
     {
-        [Test]
-        public void FirstInvalidNumber()
-        {
-            const string input = @"
+        private const string Input = @"
 35
 20
 15
@@ -30,10 +27,22 @@ namespace Tests
 309
 576";
 
-            var port = new XmasPort(input, 5);
+        [Test]
+        public void FirstInvalidNumber()
+        {
+            var port = new XmasPort(Input, 5);
             var num = port.FindFirstInvalidNumber();
 
             Assert.That(num, Is.EqualTo(127));
+        }
+
+        [Test]
+        public void FirstWeakness()
+        {
+            var port = new XmasPort(Input, 5);
+            var num = port.FindWeakness();
+
+            Assert.That(num, Is.EqualTo(62));
         }
     }
 }

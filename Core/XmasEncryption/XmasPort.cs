@@ -28,9 +28,35 @@ namespace Core.XmasEncryption
             return 0;
         }
 
-        private bool IsSumOfTwoNumbers(long target, IList<long> numbers)
+        public long FindWeakness()
         {
-            var permutations = PermutationGenerator.GetPermutations<long>(numbers, 2);
+            var invalidNumber = FindFirstInvalidNumber();
+
+            for (var i = 0; i < _values.Count; i++)
+            {
+                var foundValues = new List<long>();
+                var pos = i;
+                long sum = 0;
+                while (sum < invalidNumber)
+                {
+                    var value = _values[pos];
+                    foundValues.Add(value);
+                    sum += value;
+                    pos += 1;
+                }
+
+                if (sum == invalidNumber)
+                {
+                    return foundValues.Min() + foundValues.Max();
+                }
+            }
+
+            return 0;
+        }
+
+        private static bool IsSumOfTwoNumbers(long target, IList<long> numbers)
+        {
+            var permutations = PermutationGenerator.GetPermutations(numbers, 2);
             return permutations.Any(o => o.Sum() == target);
         }
     }

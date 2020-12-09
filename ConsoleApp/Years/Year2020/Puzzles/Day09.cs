@@ -14,8 +14,12 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             WritePartTitle();
             var port = new XmasPort(FileInput, 25);
-            var number = port.FindFirstInvalidNumber();
-            Console.WriteLine($"First invalid number: {number}");
+            var invalidNumber = port.FindFirstInvalidNumber();
+            Console.WriteLine($"First invalid number: {invalidNumber}");
+
+            WritePartTitle();
+            var weakness = port.FindWeakness();
+            Console.WriteLine($"First invalid number: {weakness}");
         }
     }
 }

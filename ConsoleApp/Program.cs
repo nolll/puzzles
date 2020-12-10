@@ -13,11 +13,16 @@ namespace ConsoleApp
 
             if (parameters.ShowHelp)
             {
-                var helpPrinter = new HelpPrinter();
-                helpPrinter.Print();
-                return;
+                ShowHelp();
             }
+            else
+            {
+                RunDay(parameters);
+            }
+        }
 
+        private static void RunDay(Parameters parameters)
+        {
             var daySelector = new DaySelector();
             var day = daySelector.GetDay(parameters.Year, parameters.Day);
             if (day == null)
@@ -27,6 +32,12 @@ namespace ConsoleApp
             }
 
             day.Run();
+        }
+
+        private static void ShowHelp()
+        {
+            var helpPrinter = new HelpPrinter();
+            helpPrinter.Print();
         }
     }
 }

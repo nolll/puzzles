@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.IO;
 using System.Text;
 using Core.Tools;
@@ -8,11 +7,9 @@ namespace ConsoleApp.Years
 {
     public abstract class Day
     {
-        private const string Divider = "--------------------------------------------------";
-
         private int _part;
         protected abstract void RunDay();
-        protected abstract int Year { get; }
+        public abstract int Year { get; }
         private readonly Timer _timer;
         public int Id { get; }
 
@@ -63,29 +60,14 @@ namespace ConsoleApp.Years
         {
             Console.WriteLine();
             Console.WriteLine($"Day {Id} {Year}:");
-            WriteDivider();
+            Printer.PrintDivider();
         }
 
         private void WriteDayEnd()
         {
-            WriteDivider();
-            WriteTimer();
+            Printer.PrintDivider();
+            Printer.PrintTime(_timer);
         }
 
-        private void WriteDivider()
-        {
-            Console.WriteLine(Divider);
-        }
-
-        private void WriteTimer()
-        {
-            var timeTaken = _timer.FromStart;
-            var seconds = timeTaken.TotalMilliseconds / 1000;
-            var decimalSeconds = Convert.ToDecimal(seconds);
-            var roundedSeconds = Math.Round(decimalSeconds, 2);
-            var secondsString = roundedSeconds.ToString(CultureInfo.InvariantCulture);
-            var timeString = $"{secondsString}s";
-            Console.WriteLine(timeString.PadLeft(Divider.Length));
-        }
     }
 }

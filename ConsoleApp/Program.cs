@@ -1,13 +1,19 @@
 ﻿using System;
-using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using ConsoleApp.Years;
+using Core.Tools;
 
 namespace ConsoleApp
 {
     public class Program
     {
         private static DaySelector _daySelector;
-        private const int DayTimeout = 1;
+        private const int DayTimeout = 10;
+
+        private const int Year = 2018;
+        private const int Day = 24;
 
         static void Main(string[] args)
         {
@@ -17,18 +23,33 @@ namespace ConsoleApp
             if (parameters.ShowHelp)
             {
                 ShowHelp();
+                return;
             }
-            else if (parameters.RunAll)
+            
+            if (parameters.Year != null && parameters.Day != null)
+            {
+                RunDay(parameters);
+                return;
+            }
+            
+            if (parameters.Year != null)
+            {
+                RunYear(parameters.Year.Value);
+                return;
+            }
+            
+            if (parameters.RunAll)
             {
                 RunAll();
+                return;
             }
-            else
-            {
-                if (!parameters.WasYearOrDaySpecified)
-                    parameters = new Parameters(day: 24, year: 2018);
 
-                RunDay(parameters);
+            if (!parameters.WasYearOrDaySpecified)
+            {
+                parameters = new Parameters(day: Day, year: Year);
             }
+
+            RunDay(parameters);
         }
 
         private static void RunDay(Parameters parameters)
@@ -43,14 +64,47 @@ namespace ConsoleApp
             day.Run();
         }
 
+        private static void RunYear(int year)
+        {
+            var e = _daySelector.GetEvent(year);
+            if(e == null)
+                throw new Exception("Event not found!");
+
+            RunMany(e.Days);
+        }
+
         private static void RunAll()
         {
-            var days = _daySelector.GetAll();
+            RunMany(_daySelector.GetAll());
+        }
+
+        private static void RunMany(IEnumerable<Day> days)
+        {
+            var failedDays = new List<Day>();
+            var timer = new Timer();
+
             foreach (var day in days)
             {
                 var task = Task.Run(() => day.Run());
                 if (!task.Wait(TimeSpan.FromSeconds(DayTimeout)))
-                    Console.WriteLine("This day was too slow");
+                {
+                    failedDays.Add(day);
+                    Console.WriteLine($"Day {day.Id} {day.Year} failed to finish within {DayTimeout} seconds");
+                }
+            }
+
+            Printer.PrintDivider();
+            var time = Formatter.FormatTimer(timer); 
+            Console.WriteLine($"Finished in {time}.");
+            Printer.PrintDivider();
+
+            if (failedDays.Any())
+            {
+                Console.WriteLine("Failed days");
+                foreach (var day in failedDays)
+                {
+                    Console.WriteLine($"Day {day.Id} {day.Year}");
+                }
             }
         }
 

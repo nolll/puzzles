@@ -17,7 +17,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
             Console.WriteLine($"Next ten scores: {scores}");
 
             WritePartTitle();
-            var count = generator.RecipeCountBefore(FileInput.ToString());
+            var count = generator.RecipeCountBefore(Input.ToString());
             Console.WriteLine($"Recipe count: {count}");
         }
 

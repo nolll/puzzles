@@ -28,7 +28,7 @@ namespace ConsoleApp
             return year.GetDay(selectedDay);
         }
 
-        private Event GetEvent(int? selectedYear)
+        public Event GetEvent(int? selectedYear)
         {
             if (selectedYear != null)
             {

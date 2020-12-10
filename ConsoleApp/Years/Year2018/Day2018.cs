@@ -2,7 +2,7 @@
 {
     public abstract class Day2018 : Day
     {
-        protected override int Year => 2018;
+        public override int Year => 2018;
 
         protected Day2018(int day) : base(day)
         {

@@ -11,7 +11,8 @@ namespace ConsoleApp
     public class Program
     {
         private static DaySelector _daySelector;
-        private const int DayTimeout = 10;
+        private const int PuzzleTimeout = 10;
+        private const int DayTimeout = PuzzleTimeout * 2;
 
         private const int Year = 2018;
         private const int Day = 24;
@@ -62,20 +63,25 @@ namespace ConsoleApp
                 return;
             }
 
+            RunWithTimeout(day);
+        }
+
+        private static void RunDay(Day day)
+        {
             var timer = new Timer();
             var part1Result = day.RunPart1();
             if (part1Result != null)
             {
-                WriteDayTitle(day);
-                WritePartTitle(1);
+                PrintDayTitle(day);
+                PrintPuzzleTitle(1);
                 Console.WriteLine(part1Result.Message);
                 var part2Result = day.RunPart2();
                 if (part2Result != null)
                 {
-                    WritePartTitle(2);
+                    PrintPuzzleTitle(2);
                     Console.WriteLine(part2Result.Message);
                 }
-                WriteDayEnd(timer);
+                PrintDayEnd(timer);
             }
             else
             {
@@ -83,20 +89,73 @@ namespace ConsoleApp
             }
         }
 
-        private static void WritePartTitle(int part)
+        private static void RunWithTimeout(Day day)
+        {
+            var timer = new Timer();
+            PuzzleResult part1Result = null;
+            var task1 = Task.Run(() => part1Result = day.RunPart1());
+            if (task1.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
+            {
+                if (part1Result != null)
+                {
+                    PrintDayTitle(day);
+                    PrintPuzzleTitle(1);
+                    Console.WriteLine(part1Result.Message);
+                    PuzzleResult part2Result = null;
+                    var task2 = Task.Run(() => part2Result = day.RunPart2());
+                    if (task2.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
+                    {
+                        if (part2Result != null)
+                        {
+                            PrintPuzzleTitle(2);
+                            Console.WriteLine(part2Result.Message);
+                        }
+                        PrintDayEnd(timer);
+                    }
+                    else
+                    {
+                        PrintPuzzleError(day, 2);
+                    }
+                }
+                else
+                {
+                    var taskFullDay = Task.Run(day.Run);
+                    if (!taskFullDay.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
+                    {
+                        PrintDayError(day);
+                    }
+                }
+            }
+            else
+            {
+                PrintPuzzleError(day, 1);
+            }
+        }
+
+        private static void PrintDayError(Day day)
+        {
+            Console.WriteLine($"Day {day.Id} {day.Year} failed to finish within {DayTimeout} seconds");
+        }
+
+        private static void PrintPuzzleError(Day day, int puzzle)
+        {
+            Console.WriteLine($"Day {day.Id} {day.Year} part {puzzle} failed to finish within {PuzzleTimeout} seconds");
+        }
+
+        private static void PrintPuzzleTitle(int part)
         {
             Console.WriteLine();
             Console.WriteLine($"Part {part}:");
         }
 
-        private static void WriteDayTitle(Day day)
+        private static void PrintDayTitle(Day day)
         {
             Console.WriteLine();
             Console.WriteLine($"Day {day.Id} {day.Year}:");
             Printer.PrintDivider();
         }
 
-        private static void WriteDayEnd(Timer timer)
+        private static void PrintDayEnd(Timer timer)
         {
             Printer.PrintDivider();
             Printer.PrintTime(timer);
@@ -118,17 +177,11 @@ namespace ConsoleApp
 
         private static void RunMany(IEnumerable<Day> days)
         {
-            var failedDays = new List<Day>();
             var timer = new Timer();
 
             foreach (var day in days)
             {
-                var task = Task.Run(() => day.Run());
-                if (!task.Wait(TimeSpan.FromSeconds(DayTimeout)))
-                {
-                    failedDays.Add(day);
-                    Console.WriteLine($"Day {day.Id} {day.Year} failed to finish within {DayTimeout} seconds");
-                }
+                RunWithTimeout(day);
             }
 
             Printer.PrintDivider();
@@ -136,14 +189,14 @@ namespace ConsoleApp
             Console.WriteLine($"Finished in {time}.");
             Printer.PrintDivider();
 
-            if (failedDays.Any())
-            {
-                Console.WriteLine("Failed days");
-                foreach (var day in failedDays)
-                {
-                    Console.WriteLine($"Day {day.Id} {day.Year}");
-                }
-            }
+            //if (failedDays.Any())
+            //{
+            //    Console.WriteLine("Failed days");
+            //    foreach (var day in failedDays)
+            //    {
+            //        Console.WriteLine($"Day {day.Id} {day.Year}");
+            //    }
+            //}
         }
 
         private static void ShowHelp()

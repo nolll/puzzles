@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ConsoleApp.Years;
 using Core.Tools;
@@ -61,7 +62,44 @@ namespace ConsoleApp
                 return;
             }
 
-            day.Run();
+            var timer = new Timer();
+            var part1Result = day.RunPart1();
+            if (part1Result != null)
+            {
+                WriteDayTitle(day);
+                WritePartTitle(1);
+                Console.WriteLine(part1Result.Message);
+                var part2Result = day.RunPart2();
+                if (part2Result != null)
+                {
+                    WritePartTitle(2);
+                    Console.WriteLine(part2Result.Message);
+                }
+                WriteDayEnd(timer);
+            }
+            else
+            {
+                day.Run();
+            }
+        }
+
+        private static void WritePartTitle(int part)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Part {part}:");
+        }
+
+        private static void WriteDayTitle(Day day)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Day {day.Id} {day.Year}:");
+            Printer.PrintDivider();
+        }
+
+        private static void WriteDayEnd(Timer timer)
+        {
+            Printer.PrintDivider();
+            Printer.PrintTime(timer);
         }
 
         private static void RunYear(int year)

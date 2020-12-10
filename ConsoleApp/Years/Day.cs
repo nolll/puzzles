@@ -1,10 +1,21 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Core.Asteroids;
 using Core.Tools;
 
 namespace ConsoleApp.Years
 {
+    public class PuzzleResult
+    {
+        public string Message { get; }
+        
+        public PuzzleResult(string message)
+        {
+            Message = message;
+        }
+    }
+
     public abstract class Day
     {
         private int _part;
@@ -26,6 +37,16 @@ namespace ConsoleApp.Years
             WriteDayTitle();
             RunDay();
             WriteDayEnd();
+        }
+
+        public virtual PuzzleResult RunPart1()
+        {
+            return null;
+        }
+
+        public virtual PuzzleResult RunPart2()
+        {
+            return null;
         }
 
         protected string FileInput
@@ -68,6 +89,5 @@ namespace ConsoleApp.Years
             Printer.PrintDivider();
             Printer.PrintTime(_timer);
         }
-
     }
 }

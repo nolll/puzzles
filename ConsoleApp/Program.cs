@@ -66,70 +66,41 @@ namespace ConsoleApp
             RunWithTimeout(day);
         }
 
-        private static void RunDay(Day day)
-        {
-            var timer = new Timer();
-            var part1Result = day.RunPart1();
-            if (part1Result != null)
-            {
-                PrintDayTitle(day);
-                PrintPuzzleTitle(1);
-                Console.WriteLine(part1Result.Message);
-                var part2Result = day.RunPart2();
-                if (part2Result != null)
-                {
-                    PrintPuzzleTitle(2);
-                    Console.WriteLine(part2Result.Message);
-                }
-                PrintDayEnd(timer);
-            }
-            else
-            {
-                day.Run();
-            }
-        }
-
         private static void RunWithTimeout(Day day)
         {
             var timer = new Timer();
             PuzzleResult part1Result = null;
             var task1 = Task.Run(() => part1Result = day.RunPart1());
-            if (task1.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
+            if (!task1.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
             {
-                if (part1Result != null)
-                {
-                    PrintDayTitle(day);
-                    PrintPuzzleTitle(1);
-                    Console.WriteLine(part1Result.Message);
-                    PuzzleResult part2Result = null;
-                    var task2 = Task.Run(() => part2Result = day.RunPart2());
-                    if (task2.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
-                    {
-                        if (part2Result != null)
-                        {
-                            PrintPuzzleTitle(2);
-                            Console.WriteLine(part2Result.Message);
-                        }
-                        PrintDayEnd(timer);
-                    }
-                    else
-                    {
-                        PrintPuzzleError(day, 2);
-                    }
-                }
-                else
-                {
-                    var taskFullDay = Task.Run(day.Run);
-                    if (!taskFullDay.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
-                    {
-                        PrintDayError(day);
-                    }
-                }
+                part1Result = new PuzzleResult($"Puzzle failed to finish within {PuzzleTimeout} seconds");
             }
-            else
+
+            if (part1Result == null)
             {
-                PrintPuzzleError(day, 1);
+                PrintDayTitle(day);
+                var taskFullDay = Task.Run(day.Run);
+                if (!taskFullDay.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
+                {
+                    PrintDayError(day);
+                }
+                PrintDayEnd(timer);
+
+                return;
             }
+
+            PrintDayTitle(day);
+            PrintPuzzle(1, part1Result);
+
+            PuzzleResult part2Result = null;
+            var task2 = Task.Run(() => part2Result = day.RunPart2());
+            if (!task2.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
+            {
+                part2Result = new PuzzleResult($"Puzzle failed to finish within {PuzzleTimeout} seconds");
+            }
+
+            PrintPuzzle(2, part2Result);
+            PrintDayEnd(timer);
         }
 
         private static void PrintDayError(Day day)
@@ -137,15 +108,11 @@ namespace ConsoleApp
             Console.WriteLine($"Day {day.Id} {day.Year} failed to finish within {DayTimeout} seconds");
         }
 
-        private static void PrintPuzzleError(Day day, int puzzle)
-        {
-            Console.WriteLine($"Day {day.Id} {day.Year} part {puzzle} failed to finish within {PuzzleTimeout} seconds");
-        }
-
-        private static void PrintPuzzleTitle(int part)
+        private static void PrintPuzzle(int part, PuzzleResult puzzleResult)
         {
             Console.WriteLine();
             Console.WriteLine($"Part {part}:");
+            Console.WriteLine(puzzleResult.Message);
         }
 
         private static void PrintDayTitle(Day day)

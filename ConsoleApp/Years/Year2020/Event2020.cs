@@ -10,7 +10,7 @@ namespace ConsoleApp.Years.Year2020
         {
         }
 
-        protected override IList<Day> Days => new List<Day>
+        public override IList<Day> Days => new List<Day>
         {
             new Day01(),
             new Day02(),

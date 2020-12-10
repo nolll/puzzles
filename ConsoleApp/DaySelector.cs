@@ -38,5 +38,17 @@ namespace ConsoleApp
 
             return _events.Last();
         }
+
+        public IList<Day> GetAll()
+        {
+            var eventDays = _events.Select(o => o.Days);
+            var allDays = new List<Day>();
+            foreach (var days in eventDays)
+            {
+                allDays.AddRange(days);
+            }
+
+            return allDays;
+        }
     }
 }

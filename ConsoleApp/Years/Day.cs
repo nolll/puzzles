@@ -62,7 +62,7 @@ namespace ConsoleApp.Years
         private void WriteDayTitle()
         {
             Console.WriteLine();
-            Console.WriteLine($"Day {Id}:");
+            Console.WriteLine($"Day {Id} {Year}:");
             WriteDivider();
         }
 

@@ -9,15 +9,18 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var filler = new ReservoirFiller(FileInput);
             filler.Fill();
-            Console.WriteLine($"Total water tile count: {filler.TotalWaterTileCount}");
+            return new PuzzleResult($"Total water tile count: {filler.TotalWaterTileCount}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Retained water tile count: {filler.RetainedWaterTileCount}");
+        public override PuzzleResult RunPart2()
+        {
+            var filler = new ReservoirFiller(FileInput);
+            filler.Fill();
+            return new PuzzleResult($"Retained water tile count: {filler.RetainedWaterTileCount}");
         }
     }
 }

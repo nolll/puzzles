@@ -9,22 +9,22 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var robot1 = new PaintRobot(FileInput);
             var result1 = robot1.Paint(false);
 
-            Console.WriteLine($"Panels painted at least once: {result1.PaintedPanelCount}");
+            return new PuzzleResult($"Panels painted at least once: {result1.PaintedPanelCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var robot2 = new PaintRobot(FileInput);
             var result2 = robot2.Paint(true);
 
             var printout = result2.Printout.Replace('0', ' ').Replace('1', 'X');
 
-            Console.WriteLine("Painted spaceship:");
-            Console.WriteLine(printout);
+            return new PuzzleResult($"Painted spaceship:\r\n{printout}");
         }
     }
 }

@@ -9,19 +9,20 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var tbc = new TractorBeamComputer1(FileInput, 50, 50);
             var result = tbc.GetPullCount();
 
-            Console.WriteLine($"Number of pulled coordinates: {result}");
+            return new PuzzleResult($"Number of pulled coordinates: {result}");
+        }
 
-            WritePartTitle();
-            var tbc2 = new TractorBeamComputer2(FileInput, 100, 100);
-            var result2 = tbc2.Find100By100Square();
+        public override PuzzleResult RunPart2()
+        {
+            var tbc = new TractorBeamComputer1(FileInput, 50, 50);
+            var result = tbc.GetPullCount();
 
-            Console.WriteLine($"Hash size: {result2.Checksum}");
+            return new PuzzleResult($"Number of pulled coordinates: {result}");
         }
     }
 }

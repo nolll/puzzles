@@ -11,21 +11,29 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
             var rows = PuzzleInputReader.ReadLines(FileInput);
             var depth = int.Parse(rows.First().Split(' ').Last());
             var targetCoords = rows.Last().Split(' ').Last().Split(',').Select(int.Parse).ToList();
             var targetX = targetCoords.First();
-            var targetY = targetCoords.Last(); 
-            
-            WritePartTitle();
-            var caveSystem = new CaveSystem(depth, targetX, targetY);
-            Console.WriteLine($"Total risk level: {caveSystem.TotalRiskLevel}");
+            var targetY = targetCoords.Last();
 
-            WritePartTitle();
+            var caveSystem = new CaveSystem(depth, targetX, targetY);
+            return new PuzzleResult($"Total risk level: {caveSystem.TotalRiskLevel}");
+        }
+
+        public override PuzzleResult RunPart2()
+        {
+            var rows = PuzzleInputReader.ReadLines(FileInput);
+            var depth = int.Parse(rows.First().Split(' ').Last());
+            var targetCoords = rows.Last().Split(' ').Last().Split(',').Select(int.Parse).ToList();
+            var targetX = targetCoords.First();
+            var targetY = targetCoords.Last();
+            var caveSystem = new CaveSystem(depth, targetX, targetY);
+
             var time = caveSystem.ResqueMan();
-            Console.WriteLine($"Time to resque: {time}");
+            return new PuzzleResult($"Time to resque: {time}");
         }
     }
 }

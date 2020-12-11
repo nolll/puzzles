@@ -9,19 +9,22 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var reactor = new NanoReactor(FileInput);
             reactor.Run();
             var oreForOneFuel = reactor.RequiredOreForOneFuel;
 
-            Console.WriteLine($"Number of ores for one fuel: {oreForOneFuel}");
+            return new PuzzleResult($"Number of ores for one fuel: {oreForOneFuel}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var reactor = new NanoReactor(FileInput);
+            reactor.Run();
             var fuelCount = reactor.FuelFromOneTrillionOre;
 
-            Console.WriteLine($"Maximum fuel: {fuelCount}");
+            return new PuzzleResult($"Maximum fuel: {fuelCount}");
         }
     }
 }

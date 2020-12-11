@@ -9,15 +9,17 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var image = new SpaceImage(FileInput);
             var checksum = image.Checksum;
-            Console.WriteLine($"Hash: {checksum}");
+            return new PuzzleResult($"Hash: {checksum}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine(image.Print());
+        public override PuzzleResult RunPart2()
+        {
+            var image = new SpaceImage(FileInput);
+            return new PuzzleResult(image.Print());
         }
     }
 }

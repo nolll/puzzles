@@ -74,14 +74,9 @@ namespace ConsoleApp
             if (!task1.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
                 part1Result = new PuzzleResult($"Puzzle failed to finish within {PuzzleTimeout} seconds");
 
-            if (part1Result == null)
-            {
-                RunLegacyDay(day, timer);
-                return;
-            }
-
             PrintDayTitle(day);
-            PrintPuzzle(1, part1Result);
+            if (part1Result != null)
+                PrintPuzzle(1, part1Result);
 
             PuzzleResult part2Result = null;
             var task2 = Task.Run(() => part2Result = day.RunPart2());
@@ -94,21 +89,6 @@ namespace ConsoleApp
                 PrintPuzzle(2, part2Result);
             
             PrintDayEnd(timer);
-        }
-
-        private static void RunLegacyDay(Day day, Timer timer)
-        {
-            PrintDayTitle(day);
-            var taskFullDay = Task.Run(day.Run);
-            if (!taskFullDay.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
-                PrintDayError(day);
-
-            PrintDayEnd(timer);
-        }
-
-        private static void PrintDayError(Day day)
-        {
-            Console.WriteLine($"Day {day.Id} {day.Year} failed to finish within {DayTimeout} seconds");
         }
 
         private static void PrintPuzzle(int part, PuzzleResult puzzleResult)

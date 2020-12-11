@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var mazeSolver = new DonutMazeSolver(FileInput);
-            Console.WriteLine($"Shortest distance from AA to ZZ: {mazeSolver.ShortestStepCount}");
+            return new PuzzleResult($"Shortest distance from AA to ZZ: {mazeSolver.ShortestStepCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var recursiveDonutMazeSolver = new RecursiveDonutMazeSolver(FileInput);
-            Console.WriteLine($"Shortest distance from AA to ZZ: {recursiveDonutMazeSolver.ShortestStepCount}");
+            return new PuzzleResult($"Shortest distance from AA to ZZ: {recursiveDonutMazeSolver.ShortestStepCount}");
         }
     }
 }

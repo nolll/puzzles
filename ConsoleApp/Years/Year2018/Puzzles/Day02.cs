@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var boxChecksumPuzzle = new BoxChecksumPuzzle(FileInput);
-            Console.WriteLine($"Hash: {boxChecksumPuzzle.Checksum}");
+            return new PuzzleResult($"Hash: {boxChecksumPuzzle.Checksum}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var similarIdsPuzzle = new SimilarIdsPuzzle(FileInput);
-            Console.WriteLine($"Common letters: {similarIdsPuzzle.CommonLetters}");
+            return new PuzzleResult($"Common letters: {similarIdsPuzzle.CommonLetters}");
         }
     }
 }

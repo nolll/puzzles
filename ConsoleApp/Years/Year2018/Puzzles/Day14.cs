@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var generator = new RecipeGenerator();
             var scores = generator.ScoresAfter(Input);
-            Console.WriteLine($"Next ten scores: {scores}");
+            return new PuzzleResult($"Next ten scores: {scores}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var generator = new RecipeGenerator();
             var count = generator.RecipeCountBefore(Input.ToString());
-            Console.WriteLine($"Recipe count: {count}");
+            return new PuzzleResult($"Recipe count: {count}");
         }
 
         private const int Input = 306281;

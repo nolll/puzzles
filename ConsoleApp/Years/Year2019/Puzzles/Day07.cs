@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var calculator = new ThrustCalculator(FileInput);
             var maxThrust1 = calculator.GetMaxThrust(new[] { 0, 1, 2, 3, 4 });
-            Console.WriteLine($"Maximum thrust: {maxThrust1}");
+            return new PuzzleResult($"Maximum thrust: {maxThrust1}");
+        }
 
-            WritePartTitle();
-            calculator = new ThrustCalculator(FileInput);
+        public override PuzzleResult RunPart2()
+        {
+            var calculator = new ThrustCalculator(FileInput);
             var maxThrust2 = calculator.GetMaxThrust(new[] { 5, 6, 7, 8, 9 });
-            Console.WriteLine($"Maximum thrust: {maxThrust2}");
+            return new PuzzleResult($"Maximum thrust: {maxThrust2}");
         }
     }
 }

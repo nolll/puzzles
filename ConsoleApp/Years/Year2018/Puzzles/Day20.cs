@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var navigator = new RegularMapNavigator(FileInput);
-            Console.WriteLine($"Most doors required to reach a room: {navigator.MostDoors}");
+            return new PuzzleResult($"Most doors required to reach a room: {navigator.MostDoors}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Number of rooms that passes at least 1000 doors: {navigator.RoomsMoreThat1000DoorsAway}");
+        public override PuzzleResult RunPart2()
+        {
+            var navigator = new RegularMapNavigator(FileInput);
+            return new PuzzleResult($"Number of rooms that passes at least 1000 doors: {navigator.RoomsMoreThat1000DoorsAway}");
         }
     }
 }

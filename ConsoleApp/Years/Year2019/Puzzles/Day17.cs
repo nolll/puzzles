@@ -9,21 +9,22 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var sc = new ScaffoldingComputer1(FileInput);
             var input = sc.Run();
             var sif = new ScaffoldIntersectionFinder(input);
             var result1 = sif.GetSumOfAlignmentParameters();
 
-            Console.WriteLine($"Sum of alignment parameters: {result1}");
+            return new PuzzleResult($"Sum of alignment parameters: {result1}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var sc2 = new ScaffoldingComputer2(FileInput);
             var result2 = sc2.Run();
 
-            Console.WriteLine($"Dust amount: {result2}");
+            return new PuzzleResult($"Dust amount: {result2}");
         }
     }
 }

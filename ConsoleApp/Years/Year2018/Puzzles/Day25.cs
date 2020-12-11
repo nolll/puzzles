@@ -9,12 +9,11 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var finder = new ConstellationFinder(FileInput);
             var constellationCount = finder.Find();
-            Console.WriteLine($"Constellation count: {constellationCount}");
+            return new PuzzleResult($"Constellation count: {constellationCount}");
         }
     }
 }

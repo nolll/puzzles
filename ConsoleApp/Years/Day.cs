@@ -6,23 +6,12 @@ namespace ConsoleApp.Years
 {
     public abstract class Day
     {
-        private int _part;
         public abstract int Year { get; }
         public int Id { get; }
 
         protected Day(int day)
         {
             Id = day;
-            _part = 1;
-        }
-
-        public void Run()
-        {
-            RunDay();
-        }
-
-        protected virtual void RunDay()
-        {
         }
 
         public virtual PuzzleResult RunPart1()
@@ -55,12 +44,5 @@ namespace ConsoleApp.Years
                 $"{PaddedDay}.txt");
 
         private string PaddedDay => Id.ToString().PadLeft(2, '0');
-
-        protected void WritePartTitle()
-        {
-            Console.WriteLine();
-            Console.WriteLine($"Part {_part}:");
-            _part++;
-        }
     }
 }

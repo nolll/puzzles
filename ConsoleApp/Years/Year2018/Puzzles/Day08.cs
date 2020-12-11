@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var calculator = new LicenseNumberCalculator(FileInput);
-            Console.WriteLine($"Metadata sum: {calculator.MetadataSum}");
+            return new PuzzleResult($"Metadata sum: {calculator.MetadataSum}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Root node value: {calculator.RootNodeValue}");
+        public override PuzzleResult RunPart2()
+        {
+            var calculator = new LicenseNumberCalculator(FileInput);
+            return new PuzzleResult($"Root node value: {calculator.RootNodeValue}");
         }
     }
 }

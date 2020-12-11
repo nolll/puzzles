@@ -8,11 +8,12 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var investigationDroid = new InvestigationDroid(FileInput);
             investigationDroid.Run();
+
+            return new MissingPuzzleResult("No output");
         }
     }
 }

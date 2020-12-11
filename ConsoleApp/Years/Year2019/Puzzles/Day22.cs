@@ -9,20 +9,19 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var shuffler1 = new CardShuffler();
             var deck = shuffler1.Shuffle(10_007, FileInput);
             var positionOfCard2019 = deck.IndexOf(2019);
-            var CardAtPosition2020 = deck[2020];
-            Console.WriteLine($"Position of card 2019: {positionOfCard2019}");
-            Console.WriteLine($"Card at position 2020: {CardAtPosition2020}");
+            return new PuzzleResult($"Position of card 2019: {positionOfCard2019}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var shuffler2 = new CardShuffler();
             var cardAtPosition2020 = shuffler2.ShuffleBig(FileInput);
-            Console.WriteLine($"Card at position 2020: {cardAtPosition2020}");
+            return new PuzzleResult($"Card at position 2020: {cardAtPosition2020}");
         }
     }
 }

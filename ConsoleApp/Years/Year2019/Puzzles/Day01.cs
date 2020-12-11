@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var massCalculator = new MassCalculator(FileInput);
-            Console.WriteLine($"Required fuel: {massCalculator.MassFuel}");
+            return new PuzzleResult($"Required fuel: {massCalculator.MassFuel}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Required total fuel: {massCalculator.TotalFuel}");
+        public override PuzzleResult RunPart2()
+        {
+            var massCalculator = new MassCalculator(FileInput);
+            return new PuzzleResult($"Required total fuel: {massCalculator.TotalFuel}");
         }
     }
 }

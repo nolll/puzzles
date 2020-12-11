@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var calculator = new OrbitCalculator(FileInput);
             var orbitCount = calculator.GetOrbitCount();
-            Console.WriteLine($"Total number of orbits: {orbitCount}");
+            return new PuzzleResult($"Total number of orbits: {orbitCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var calculator = new OrbitCalculator(FileInput);
             var distance = calculator.GetSantaDistance();
-            Console.WriteLine($"Distance to Santa: {distance}");
+            return new PuzzleResult($"Distance to Santa: {distance}");
         }
     }
 }

@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var finder = new StarMessageFinder(FileInput, 9);
-            Console.WriteLine("Message:");
-            Console.WriteLine(finder.Message);
-            
-            WritePartTitle();
-            Console.WriteLine($"Number of seconds: {finder.IterationCount}");
+            return new PuzzleResult($"Message:\r\n{finder.Message}");
+        }
+
+        public override PuzzleResult RunPart2()
+        {
+            var finder = new StarMessageFinder(FileInput, 9);
+            return new PuzzleResult($"Number of seconds: {finder.IterationCount}");
         }
     }
 }

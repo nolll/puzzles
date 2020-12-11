@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var frequencyPuzzle = new FrequencyPuzzle(FileInput);
             var resultingFrequency = frequencyPuzzle.ResultingFrequency;
-            Console.WriteLine($"Resulting frequency: {resultingFrequency}");
+            return new PuzzleResult($"Resulting frequency: {resultingFrequency}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var frequencyRepeatPuzzle = new FrequencyRepeatPuzzle(FileInput);
             var firstRepeatedFrequency = frequencyRepeatPuzzle.FirstRepeatedFrequency;
-            Console.WriteLine($"First repeat: {firstRepeatedFrequency}");
+            return new PuzzleResult($"First repeat: {firstRepeatedFrequency}");
         }
     }
 }

@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var formation = new NanobotFormation(FileInput);
             var botCount = formation.GetBotsInRangeOfStrongestBot().Count;
-            Console.WriteLine($"Bots in range of strongest bot: {botCount}");
+            return new PuzzleResult($"Bots in range of strongest bot: {botCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var formation = new NanobotFormation(FileInput);
             var distanceToBestCoords = formation.FindManhattanDistanceToBestCoords();
-            Console.WriteLine($"Manhattan distance to best coords: {distanceToBestCoords}");
+            return new PuzzleResult($"Manhattan distance to best coords: {distanceToBestCoords}");
         }
     }
 }

@@ -9,20 +9,20 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var detector = new CollisionDetector(FileInput);
-
             var firstCollisionCoords = detector.LocationOfFirstCollision;
             var firstCollition = $"{firstCollisionCoords.X},{firstCollisionCoords.Y}";
-            Console.WriteLine($"First crash location: {firstCollition}");
+            return new PuzzleResult($"First crash location: {firstCollition}");
+        }
 
-            WritePartTitle();
-
+        public override PuzzleResult RunPart2()
+        {
+            var detector = new CollisionDetector(FileInput);
             var lastCartCoords = detector.LocationOfLastCart;
             var lastCart = $"{lastCartCoords.X},{lastCartCoords.Y}";
-            Console.WriteLine($"Last cart location: {lastCart}");
+            return new PuzzleResult($"Last cart location: {lastCart}");
         }
     }
 }

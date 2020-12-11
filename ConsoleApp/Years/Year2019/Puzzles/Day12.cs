@@ -9,20 +9,21 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var tracker1 = new MoonTracker(FileInput);
             const int iterations = 1000;
             tracker1.Run(iterations);
 
-            Console.WriteLine($"Total energy after {iterations} time units: {tracker1.TotalEnergy}");
+            return new PuzzleResult($"Total energy after {iterations} time units: {tracker1.TotalEnergy}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var tracker2 = new MoonTracker(FileInput);
             tracker2.RunUntilRepeat();
 
-            Console.WriteLine($"Time units until repeat: {tracker2.Iterations}");
+            return new PuzzleResult($"Time units until repeat: {tracker2.Iterations}");
         }
     }
 }

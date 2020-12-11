@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var spreader = new PlantSpreader(FileInput);
-            Console.WriteLine($"Plant score 20: {spreader.PlantScore20}");
+            return new PuzzleResult($"Plant score 20: {spreader.PlantScore20}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Plant score 50 billion generations: {spreader.PlantScore50B}");
+        public override PuzzleResult RunPart2()
+        {
+            var spreader = new PlantSpreader(FileInput);
+            return new PuzzleResult($"Plant score 50 billion generations: {spreader.PlantScore50B}");
         }
     }
 }

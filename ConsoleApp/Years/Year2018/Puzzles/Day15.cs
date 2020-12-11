@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            //WritePartTitle();
-            //var battle = new ChocolateBattle(FileInput);
-            //battle.RunOnce(false);
-            //Console.WriteLine($"Battle outcome: {battle.Outcome}");
+            var battle = new ChocolateBattle(FileInput);
+            battle.RunOnce(false);
+            return new PuzzleResult($"Battle outcome: {battle.Outcome}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var battle2 = new ChocolateBattle(FileInput);
             battle2.RunUntilElvesWins(false);
-            Console.WriteLine($"Battle outcome when the elves win: {battle2.Outcome}");
+            return new PuzzleResult($"Battle outcome when the elves win: {battle2.Outcome}");
         }
     }
 }

@@ -9,19 +9,20 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var algorithm1 = new FrequencyAlgorithmPart1(FileInput);
             var result1 = algorithm1.Run(100);
 
-            Console.WriteLine($"First eight after 100 phases: {result1}");
+            return new PuzzleResult($"First eight after 100 phases: {result1}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var algorithm2 = new FrequencyAlgorithmPart2(FileInput);
             var result2 = algorithm2.Run(100);
 
-            Console.WriteLine($"Message after 100 phases of long input: {result2}");
+            return new PuzzleResult($"Message after 100 phases of long input: {result2}");
         }
     }
 }

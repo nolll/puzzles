@@ -9,15 +9,18 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var computer = new OpComputer();
             var result = computer.RunSpecialForDay21(FileInput, 0);
-            Console.WriteLine($"Lowest value for register zero after fewest iterations: {result.first}");
+            return new PuzzleResult($"Lowest value for register zero after fewest iterations: {result.first}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Lowest value for register zero after most iterations: {result.last}");
+        public override PuzzleResult RunPart2()
+        {
+            var computer = new OpComputer();
+            var result = computer.RunSpecialForDay21(FileInput, 0);
+            return new PuzzleResult($"Lowest value for register zero after most iterations: {result.last}");
         }
     }
 }

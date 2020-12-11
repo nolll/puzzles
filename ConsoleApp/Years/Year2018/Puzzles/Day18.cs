@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var collection = new LumberCollection(FileInput);
             collection.Run(10);
-            Console.WriteLine($"Resource value after 10 minutes: {collection.ResourceValue}");
+            return new PuzzleResult($"Resource value after 10 minutes: {collection.ResourceValue}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var collection2 = new LumberCollection(FileInput);
             collection2.Run(1_000_000_000);
-            Console.WriteLine($"Resource value after 1 billion minutes: {collection2.ResourceValue}");
+            return new PuzzleResult($"Resource value after 1 billion minutes: {collection2.ResourceValue}");
         }
     }
 }

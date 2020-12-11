@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var guardSleepPuzzle = new GuardSleepPuzzle(FileInput);
-            Console.WriteLine($"Guard sleep strategy two score: {guardSleepPuzzle.StrategyOneScore}");
+            return new PuzzleResult($"Guard sleep strategy two score: {guardSleepPuzzle.StrategyOneScore}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Guard sleep strategy two score: {guardSleepPuzzle.StrategyTwoScore}");
+        public override PuzzleResult RunPart2()
+        {
+            var guardSleepPuzzle = new GuardSleepPuzzle(FileInput);
+            return new PuzzleResult($"Guard sleep strategy two score: {guardSleepPuzzle.StrategyTwoScore}");
         }
     }
 }

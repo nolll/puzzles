@@ -10,21 +10,21 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
-        { 
-
+        public override PuzzleResult RunPart1()
+        {
             // VERY SLOW
-            WritePartTitle();
             var droid = new RepairDroid(FileInput);
             var result1 = droid.Run();
 
-            Console.WriteLine($"Steps to find oxygen system: {result1}");
+            return new PuzzleResult($"Steps to find oxygen system: {result1}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var filler = new OxygenFiller(GeneratedMapFromStep1);
             var result = filler.Fill();
 
-            Console.WriteLine($"Number of minutes: {result}");
+            return new PuzzleResult($"Number of minutes: {result}");
         }
 
         private const string GeneratedMapFromStep1 = @"

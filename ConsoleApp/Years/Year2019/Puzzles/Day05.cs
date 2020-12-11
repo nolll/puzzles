@@ -12,19 +12,20 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             _output = 0;
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var ci1 = new ComputerInterface(FileInput, ReadInputPart1, WriteOutput);
             ci1.Start();
 
-            Console.WriteLine($"Diagnostic code for ID 1: {_output}");
+            return new PuzzleResult($"Diagnostic code for ID 1: {_output}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var ci2 = new ComputerInterface(FileInput, ReadInputPart2, WriteOutput);
             ci2.Start();
 
-            Console.WriteLine($"Diagnostic code for ID 5: {_output}");
+            return new PuzzleResult($"Diagnostic code for ID 5: {_output}");
         }
 
         private long ReadInputPart1() => 1;

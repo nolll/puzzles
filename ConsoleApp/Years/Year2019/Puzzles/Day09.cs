@@ -9,19 +9,20 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var boostTester = new BoostRunner(FileInput, 1);
             var testerResult = boostTester.Run();
 
-            Console.WriteLine($"BOOST keycode: {testerResult.LastOutput}");
+            return new PuzzleResult($"BOOST keycode: {testerResult.LastOutput}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var boostRunner = new BoostRunner(FileInput, 2);
             var runnerResult = boostRunner.Run();
 
-            Console.WriteLine($"Coordinates: {runnerResult.LastOutput}");
+            return new PuzzleResult($"Coordinates: {runnerResult.LastOutput}");
         }
     }
 }

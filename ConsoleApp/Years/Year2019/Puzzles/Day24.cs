@@ -9,19 +9,20 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var simulator = new BugLifeSimulator(FileInput);
             simulator.RunUntilRepeat();
 
-            Console.WriteLine($"Biodiversity rating: {simulator.BiodiversityRating}");
+            return new PuzzleResult($"Biodiversity rating: {simulator.BiodiversityRating}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var recursiveSimulator = new RecursiveBugLifeSimulator(FileInput);
             recursiveSimulator.Run(200);
 
-            Console.WriteLine($"Bug count after 200 minutes: {recursiveSimulator.BugCount}");
+            return new PuzzleResult($"Bug count after 200 minutes: {recursiveSimulator.BugCount}");
         }
     }
 }

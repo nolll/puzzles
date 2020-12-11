@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var claimsOverlapCountPuzzle = new ClaimsOverlapCountPuzzle(FileInput);
-            Console.WriteLine($"Overlap count: {claimsOverlapCountPuzzle.OverlapCount}");
+            return new PuzzleResult($"Overlap count: {claimsOverlapCountPuzzle.OverlapCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var claimThatDoesNotOverlap = new ClaimThatDoesNotOverlapPuzzle(FileInput);
-            Console.WriteLine($"No overlap id: {claimThatDoesNotOverlap.ClaimId}");
+            return new PuzzleResult($"No overlap id: {claimThatDoesNotOverlap.ClaimId}");
         }
     }
 }

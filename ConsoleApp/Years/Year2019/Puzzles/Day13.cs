@@ -9,17 +9,20 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var arcade1 = new Arcade(FileInput);
             arcade1.Play();
 
-            Console.WriteLine($"Number of block tiles: {arcade1.NumberOfBlockTiles}");
+            return new PuzzleResult($"Number of block tiles: {arcade1.NumberOfBlockTiles}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var arcade2 = new Arcade(FileInput);
             arcade2.Play(2);
+
+            return new MissingPuzzleResult("Investigate this! No message was returned");
         }
     }
 }

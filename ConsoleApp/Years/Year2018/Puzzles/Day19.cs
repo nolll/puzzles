@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var computer = new OpComputer();
             var value1 = computer.RunInstructionPointerProgram(FileInput, 0, true, false);
-            Console.WriteLine($"Value at register 0 when program halts: {value1}");
+            return new PuzzleResult($"Value at register 0 when program halts: {value1}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var computer2 = new OpComputer();
             var value2 = computer2.RunInstructionPointerProgram(FileInput, 1, true, false);
-            Console.WriteLine($"Value at register 0 when program halts: {value2}");
+            return new PuzzleResult($"Value at register 0 when program halts: {value2}");
         }
     }
 }

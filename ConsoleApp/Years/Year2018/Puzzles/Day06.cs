@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var finder = new LargestAreaFinder(FileInput);
-            var size1 = finder.GetSizeOfLargestArea();
-            Console.WriteLine($"Size of largest area: {size1}");
+            var size = finder.GetSizeOfLargestArea();
+            return new PuzzleResult($"Size of largest area: {size}");
+        }
 
-            WritePartTitle();
-            var size2 = finder.GetSizeOfCentralArea(10000);
-            Console.WriteLine($"Size of central area: {size2}");
+        public override PuzzleResult RunPart2()
+        {
+            var finder = new LargestAreaFinder(FileInput);
+            var size = finder.GetSizeOfCentralArea(10000);
+            return new PuzzleResult($"Size of central area: {size}");
         }
     }
 }

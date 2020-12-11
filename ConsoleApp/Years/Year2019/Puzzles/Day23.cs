@@ -9,16 +9,20 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var network = new CategorySixNetwork(FileInput);
             network.Run();
-            
-            Console.WriteLine($"First packet Y value sent to NAT: {network.FirstNatPacket.Y}");
 
-            WritePartTitle();
-            Console.WriteLine($"First repeated packet Y value sent from NAT: {network.FirstRepeatedNatPacket.Y}");
+            return new PuzzleResult($"First packet Y value sent to NAT: {network.FirstNatPacket.Y}");
+        }
+
+        public override PuzzleResult RunPart2()
+        {
+            var network = new CategorySixNetwork(FileInput);
+            network.Run();
+
+            return new PuzzleResult($"First repeated packet Y value sent from NAT: {network.FirstRepeatedNatPacket.Y}");
         }
     }
 }

@@ -9,21 +9,22 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var detector = new AsteroidDetector();
             var detectorResult = detector.Detect(FileInput);
 
-            Console.WriteLine($"Asteroid count: {detectorResult.RayCount}");
+            return new PuzzleResult($"Asteroid count: {detectorResult.RayCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var vaporizer = new AsteroidVaporizer();
             var vaporizeResult = vaporizer.Vaporize(FileInput);
             var asteroidNr200 = vaporizeResult.DestroyedAsteroids[199];
             var result = asteroidNr200.X * 100 + asteroidNr200.Y;
 
-            Console.WriteLine($"X * 100 + Y = {result}");
+            return new PuzzleResult($"X * 100 + Y = {result}");
         }
     }
 }

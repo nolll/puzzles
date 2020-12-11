@@ -11,20 +11,26 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
             var inputs = FileInput.Split("\r\n\r\n");
             var immuneInput = inputs.First();
             var infectionInput = inputs.Last();
 
-            WritePartTitle();
             var system = new ImmuneSystem(immuneInput, infectionInput);
             system.Fight();
-            Console.WriteLine($"Winning army unit count: {system.WinningArmyUnitCount}");
+            return new PuzzleResult($"Winning army unit count: {system.WinningArmyUnitCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var inputs = FileInput.Split("\r\n\r\n");
+            var immuneInput = inputs.First();
+            var infectionInput = inputs.Last();
+            
+            var system = new ImmuneSystem(immuneInput, infectionInput);
             system.FightUntilImmuneSystemWins();
-            Console.WriteLine($"Immune system unit count: {system.WinningArmyUnitCount}");
+            return new PuzzleResult($"Immune system unit count: {system.WinningArmyUnitCount}");
         }
     }
 }

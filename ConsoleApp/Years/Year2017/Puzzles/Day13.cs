@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var scanner1 = new PacketScanner(FileInput);
             var severity = scanner1.GetSeverity();
-            Console.WriteLine($"Severity: {severity}");
+            return new PuzzleResult($"Severity: {severity}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var scanner2 = new PacketScanner(FileInput);
             var delay = scanner2.DelayUntilPass();
-            Console.WriteLine($"Delay: {delay}");
+            return new PuzzleResult($"Delay: {delay}");
         }
     }
 }

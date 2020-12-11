@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var single = new SingleRunner(FileInput);
             single.Run();
-            Console.WriteLine($"Recovered frequency: {single.RecoveredFrequency}");
+            return new PuzzleResult($"Recovered frequency: {single.RecoveredFrequency}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var duet = new DuetRunner(FileInput);
             duet.Run();
-            Console.WriteLine($"Program 1 send count: {duet.Program1SendCount}");
+            return new PuzzleResult($"Program 1 send count: {duet.Program1SendCount}");
         }
     }
 }

@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var towers = new RecursiveTowers(FileInput);
-            Console.WriteLine($"Name of bottom tower: {towers.BottomName}");
+            return new PuzzleResult($"Name of bottom tower: {towers.BottomName}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Adjusted weight of disc with error: {towers.AdjustedWeight}");
+        public override PuzzleResult RunPart2()
+        {
+            var towers = new RecursiveTowers(FileInput);
+            return new PuzzleResult($"Adjusted weight of disc with error: {towers.AdjustedWeight}");
         }
     }
 }

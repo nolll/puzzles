@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var navigator = new HexGridNavigator(FileInput);
-            Console.WriteLine($"Last distance: {navigator.EndDistance}");
+            return new PuzzleResult($"Last distance: {navigator.EndDistance}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Max distance: {navigator.MaxDistance}");
+        public override PuzzleResult RunPart2()
+        {
+            var navigator = new HexGridNavigator(FileInput);
+            return new PuzzleResult($"Max distance: {navigator.MaxDistance}");
         }
     }
 }

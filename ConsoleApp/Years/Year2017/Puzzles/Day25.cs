@@ -9,12 +9,11 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var turingMachine = new TuringMachine(FileInput);
             var checksum = turingMachine.Run();
-            Console.WriteLine($"Turing machine checksum: {checksum}.");
+            return new PuzzleResult($"Turing machine checksum: {checksum}.");
         }
     }
 }

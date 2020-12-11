@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var pipes = new Pipes(FileInput);
-            Console.WriteLine($"Number of connections: {pipes.PipesInGroupZero}");
+            return new PuzzleResult($"Number of connections: {pipes.PipesInGroupZero}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Number of groups: {pipes.GroupCount}");
+        public override PuzzleResult RunPart2()
+        {
+            var pipes = new Pipes(FileInput);
+            return new PuzzleResult($"Number of groups: {pipes.GroupCount}");
         }
     }
 }

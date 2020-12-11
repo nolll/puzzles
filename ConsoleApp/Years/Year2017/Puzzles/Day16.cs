@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var dancingPrograms1 = new DancingPrograms();
             dancingPrograms1.Dance(FileInput, 1);
-            Console.WriteLine($"Programs after one dance: {dancingPrograms1.Programs}");
+            return new PuzzleResult($"Programs after one dance: {dancingPrograms1.Programs}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var dancingPrograms2 = new DancingPrograms();
             dancingPrograms2.Dance(FileInput, 1_000_000_000);
-            Console.WriteLine($"Programs after one billion dances: {dancingPrograms2.Programs}");
+            return new PuzzleResult($"Programs after one billion dances: {dancingPrograms2.Programs}");
         }
     }
 }

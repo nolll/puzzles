@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var defragmenter = new DiskDefragmenter(Input);
-            Console.WriteLine($"Used squares: {defragmenter.UsedCount}");
+            return new PuzzleResult($"Used squares: {defragmenter.UsedCount}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Region count: {defragmenter.RegionCount}");
+        public override PuzzleResult RunPart2()
+        {
+            var defragmenter = new DiskDefragmenter(Input);
+            return new PuzzleResult($"Region count: {defragmenter.RegionCount}");
         }
 
         private const string Input = "amgozmfv";

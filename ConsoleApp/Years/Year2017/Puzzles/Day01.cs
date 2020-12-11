@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var calc = new CaptchaCalculator(FileInput);
-            Console.WriteLine($"Captcha sum 1: {calc.Sum1}");
+            return new PuzzleResult($"Captcha sum 1: {calc.Sum1}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Captcha sum 2: {calc.Sum2}");
+        public override PuzzleResult RunPart2()
+        {
+            var calc = new CaptchaCalculator(FileInput);
+            return new PuzzleResult($"Captcha sum 2: {calc.Sum2}");
         }
     }
 }

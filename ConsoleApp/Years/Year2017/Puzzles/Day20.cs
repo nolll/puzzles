@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var tracker1 = new ParticleTracker(FileInput);
             var particle = tracker1.GetClosestParticleInTheLongRunSimple();
-            Console.WriteLine($"Closest particle: {particle}");
+            return new PuzzleResult($"Closest particle: {particle}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var tracker2 = new ParticleTracker(FileInput);
             var remainingParticleCount = tracker2.GetRemainingParticleCount();
-            Console.WriteLine($"Remaining particles: {remainingParticleCount}");
+            return new PuzzleResult($"Remaining particles: {remainingParticleCount}");
         }
     }
 }

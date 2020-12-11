@@ -9,15 +9,18 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var reallocator = new MemoryReallocator(FileInput);
             reallocator.Run();
-            Console.WriteLine($"Steps to repeat: {reallocator.Steps}");
+            return new PuzzleResult($"Steps to repeat: {reallocator.Steps}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Loop size: {reallocator.LoopSize}");
+        public override PuzzleResult RunPart2()
+        {
+            var reallocator = new MemoryReallocator(FileInput);
+            reallocator.Run();
+            return new PuzzleResult($"Loop size: {reallocator.LoopSize}");
         }
     }
 }

@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var jumper1 = new InstructionJumper(FileInput);
             jumper1.Start1();
-            Console.WriteLine($"Steps jumped, part 1: {jumper1.StepCount}");
+            return new PuzzleResult($"Steps jumped, part 1: {jumper1.StepCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var jumper2 = new InstructionJumper(FileInput);
             jumper2.Start2();
-            Console.WriteLine($"Steps jumped, part 2: {jumper2.StepCount}");
+            return new PuzzleResult($"Steps jumped, part 2: {jumper2.StepCount}");
         }
     }
 }

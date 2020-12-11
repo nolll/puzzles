@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var duel = GeneratorDuel.Parse(FileInput);
             duel.Run(40_000_000);
-            Console.WriteLine($"Final count part 1: {duel.FinalCount}");
+            return new PuzzleResult($"Final count part 1: {duel.FinalCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var duel2 = GeneratorDuel.Parse(FileInput);
             duel2.Run2(5_000_000);
-            Console.WriteLine($"Final count part 2: {duel2.FinalCount}");
+            return new PuzzleResult($"Final count part 2: {duel2.FinalCount}");
         }
     }
 }

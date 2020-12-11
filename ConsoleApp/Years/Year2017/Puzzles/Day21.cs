@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var artGenerator1 = new FractalArtGenerator(FileInput);
             artGenerator1.Run(5);
-            Console.WriteLine($"Pixels on after 5 iterations: {artGenerator1.PixelsOn}");
+            return new PuzzleResult($"Pixels on after 5 iterations: {artGenerator1.PixelsOn}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var artGenerator2 = new FractalArtGenerator(FileInput);
             artGenerator2.Run(18);
-            Console.WriteLine($"Pixels on after 18 iterations: {artGenerator2.PixelsOn}");
+            return new PuzzleResult($"Pixels on after 18 iterations: {artGenerator2.PixelsOn}");
         }
     }
 }

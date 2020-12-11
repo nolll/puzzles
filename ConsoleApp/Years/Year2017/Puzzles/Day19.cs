@@ -9,15 +9,18 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var finder = new TubeRouteFinder(FileInput);
             finder.FindRoute();
-            Console.WriteLine($"Letters found: {finder.Route}");
+            return new PuzzleResult($"Letters found: {finder.Route}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Step count: {finder.StepCount}");
+        public override PuzzleResult RunPart2()
+        {
+            var finder = new TubeRouteFinder(FileInput);
+            finder.FindRoute();
+            return new PuzzleResult($"Step count: {finder.StepCount}");
         }
     }
 }

@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var memory1 = new SpiralMemory(Input, SpiralMemoryMode.RunToTarget);
-            Console.WriteLine($"Steps from center: {memory1.Distance}");
+            return new PuzzleResult($"Steps from center: {memory1.Distance}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var memory2 = new SpiralMemory(Input, SpiralMemoryMode.RunToValue);
-            Console.WriteLine($"First value above input: {memory2.Value}");
+            return new PuzzleResult($"First value above input: {memory2.Value}");
         }
 
         private const int Input = 265149;

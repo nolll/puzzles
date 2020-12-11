@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var processor = new StreamProcessor(FileInput);
-            Console.WriteLine($"Total group score: {processor.Score}");
+            return new PuzzleResult($"Total group score: {processor.Score}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Removed garbage: {processor.GarbageCount}");
+        public override PuzzleResult RunPart2()
+        {
+            var processor = new StreamProcessor(FileInput);
+            return new PuzzleResult($"Removed garbage: {processor.GarbageCount}");
         }
     }
 }

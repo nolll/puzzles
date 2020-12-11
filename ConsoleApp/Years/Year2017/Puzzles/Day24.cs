@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var builder1 = new BridgeBuilder(FileInput, false);
             var bridge1 = builder1.Build();
-            Console.WriteLine($"Strength of strongest bridge: {bridge1.Strength}.");
+            return new PuzzleResult($"Strength of strongest bridge: {bridge1.Strength}.");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var builder2 = new BridgeBuilder(FileInput, true);
             var bridge2 = builder2.Build();
-            Console.WriteLine($"Strength of longest bridge: {bridge2.Strength}.");
+            return new PuzzleResult($"Strength of longest bridge: {bridge2.Strength}.");
         }
     }
 }

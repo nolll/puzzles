@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var calculator = new CpuInstructionCalculator(FileInput);
-            Console.WriteLine($"Largest value at end: {calculator.LargestValueAtEnd}");
+            return new PuzzleResult($"Largest value at end: {calculator.LargestValueAtEnd}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Largest value ever: {calculator.LargestValueEver}");
+        public override PuzzleResult RunPart2()
+        {
+            var calculator = new CpuInstructionCalculator(FileInput);
+            return new PuzzleResult($"Largest value ever: {calculator.LargestValueEver}");
         }
     }
 }

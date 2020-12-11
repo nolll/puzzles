@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var spreadsheet = new Spreadsheet(FileInput);
-            Console.WriteLine($"Spreadsheet max/min checksum: {spreadsheet.ChecksumMaxMin}");
+            return new PuzzleResult($"Spreadsheet max/min checksum: {spreadsheet.ChecksumMaxMin}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Spreadsheet division checksum: {spreadsheet.ChecksumDivision}");
+        public override PuzzleResult RunPart2()
+        {
+            var spreadsheet = new Spreadsheet(FileInput);
+            return new PuzzleResult($"Spreadsheet division checksum: {spreadsheet.ChecksumDivision}");
         }
     }
 }

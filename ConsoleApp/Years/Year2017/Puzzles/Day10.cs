@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var intHasher = new IntKnotHasher(FileInput);
-            Console.WriteLine($"Int hash: {intHasher.Checksum}");
+            return new PuzzleResult($"Int hash: {intHasher.Checksum}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var asciiHasher = new AsciiKnotHasher(FileInput);
-            Console.WriteLine($"Ascii hash: {asciiHasher.Hash}");
+            return new PuzzleResult($"Ascii hash: {asciiHasher.Hash}");
         }
     }
 }

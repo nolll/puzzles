@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var validator = new PassphraseValidator();
             var validCount1 = validator.GetValidCount1(FileInput);
-            Console.WriteLine($"Valid passphrases 1: {validCount1}");
+            return new PuzzleResult($"Valid passphrases 1: {validCount1}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var validator = new PassphraseValidator();
             var validCount2 = validator.GetValidCount2(FileInput);
-            Console.WriteLine($"Valid passphrases 2: {validCount2}");
+            return new PuzzleResult($"Valid passphrases 2: {validCount2}");
         }
     }
 }

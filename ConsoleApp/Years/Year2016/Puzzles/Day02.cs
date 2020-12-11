@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var squareCodeFinder = new SquareKeyCodeFinder();
             var squareCode = squareCodeFinder.Find(FileInput);
-            Console.WriteLine($"Square keycode: {squareCode}");
+            return new PuzzleResult($"Square keycode: {squareCode}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var diamondCodeFinder = new DiamondKeyCodeFinder();
             var diamonCode = diamondCodeFinder.Find(FileInput);
-            Console.WriteLine($"Diamond keycode: {diamonCode}");
+            return new PuzzleResult($"Diamond keycode: {diamonCode}");
         }
     }
 }

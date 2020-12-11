@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var scrambler = new StringScrambler(FileInput);
             var scrambled = scrambler.Scramble("abcdefgh");
-            Console.WriteLine($"Scrambled string: {scrambled}");
+            return new PuzzleResult($"Scrambled string: {scrambled}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var scrambler = new StringScrambler(FileInput);
             var unscrambled = scrambler.Unscramble("fbgdceah");
-            Console.WriteLine($"Unscrambled string: {unscrambled}");
+            return new PuzzleResult($"Unscrambled string: {unscrambled}");
         }
     }
 }

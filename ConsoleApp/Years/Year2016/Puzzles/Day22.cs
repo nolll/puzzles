@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var storageGrid = new StorageGrid(FileInput);
             var pairCount = storageGrid.GetViablePairCount();
-            Console.WriteLine($"Number of viable pairs: {pairCount}");
+            return new PuzzleResult($"Number of viable pairs: {pairCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var storageGrid = new StorageGrid(FileInput);
             var moveCount = storageGrid.MoveStorage();
-            Console.WriteLine($"Least number of moves: {moveCount}");
+            return new PuzzleResult($"Least number of moves: {moveCount}");
         }
     }
 }

@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var navigator1 = new AirDuctNavigator(FileInput, false);
             navigator1.Run();
-            Console.WriteLine($"Shortest path: {navigator1.ShortestPath}");
+            return new PuzzleResult($"Shortest path: {navigator1.ShortestPath}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var navigator2 = new AirDuctNavigator(FileInput, true);
             navigator2.Run();
-            Console.WriteLine($"Shortest path including going back to start: {navigator2.ShortestPath}");
+            return new PuzzleResult($"Shortest path including going back to start: {navigator2.ShortestPath}");
         }
     }
 }

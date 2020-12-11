@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
-            var detector1 = new FloorTrapDetector(FileInput);
-            detector1.FindTraps(40);
-            Console.WriteLine($"Number of safe tiles after 40 rows: {detector1.SafeCount}");
+            var detector = new FloorTrapDetector(FileInput);
+            detector.FindTraps(40);
+            return new PuzzleResult($"Number of safe tiles after 40 rows: {detector.SafeCount}");
+        }
 
-            WritePartTitle();
-            var detector2 = new FloorTrapDetector(FileInput);
-            detector2.FindTraps(400_000);
-            Console.WriteLine($"Number of safe tiles after 400000 rows: {detector2.SafeCount}");
+        public override PuzzleResult RunPart2()
+        {
+            var detector = new FloorTrapDetector(FileInput);
+            detector.FindTraps(400_000);
+            return new PuzzleResult($"Number of safe tiles after 400000 rows: {detector.SafeCount}");
         }
     }
 }

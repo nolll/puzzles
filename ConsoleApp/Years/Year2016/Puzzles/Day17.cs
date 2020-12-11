@@ -9,15 +9,17 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var maze = new LockedDoorMaze();
             maze.FindPaths(Input);
-            Console.WriteLine($"Shortest path: {maze.ShortestPath}");
+            return new PuzzleResult($"Shortest path: {maze.ShortestPath}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Longest path length: {maze.LongestPath.Length}");
+        public override PuzzleResult RunPart2()
+        {
+            var maze = new LockedDoorMaze();
+            return new PuzzleResult($"Longest path length: {maze.LongestPath.Length}");
         }
 
         private const string Input = "yjjvjgan";

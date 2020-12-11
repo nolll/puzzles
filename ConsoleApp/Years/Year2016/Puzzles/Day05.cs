@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var generator = new PasswordGenerator();
-            var pwd1 = generator.Generate1(Input);
-            Console.WriteLine($"Password 1: {pwd1}");
+            var pwd = generator.Generate1(Input);
+            return new PuzzleResult($"Password 1: {pwd}");
+        }
 
-            WritePartTitle();
-            var pwd2 = generator.Generate2(Input);
-            Console.WriteLine($"Password 2: {pwd2}");
+        public override PuzzleResult RunPart2()
+        {
+            var generator = new PasswordGenerator();
+            var pwd = generator.Generate2(Input);
+            return new PuzzleResult($"Password 2: {pwd}");
         }
 
         private static string Input => "wtnhxymk";

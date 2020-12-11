@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var dragonCurve = new DragonCurve();
-            var checksum1 = dragonCurve.Run(Input, 272);
-            Console.WriteLine($"Checksum 1: {checksum1}");
+            var checksum = dragonCurve.Run(Input, 272);
+            return new PuzzleResult($"Checksum 1: {checksum}");
+        }
 
-            WritePartTitle();
-            var checksum2 = dragonCurve.Run(Input, 35651584);
-            Console.WriteLine($"Checksum 2: {checksum2}");
+        public override PuzzleResult RunPart2()
+        {
+            var dragonCurve = new DragonCurve();
+            var checksum = dragonCurve.Run(Input, 35651584);
+            return new PuzzleResult($"Checksum 2: {checksum}");
         }
 
         private const string Input = "01000100010010111";

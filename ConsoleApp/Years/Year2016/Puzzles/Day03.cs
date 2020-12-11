@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var validator = new TriangleValidator();
             var horizontalValidCount = validator.GetHorizontalValidCount(FileInput);
-            Console.WriteLine($"Valid horizontal triangles: {horizontalValidCount}");
+            return new PuzzleResult($"Valid horizontal triangles: {horizontalValidCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var validator = new TriangleValidator();
             var verticalValidCount = validator.GetVerticalValidCount(FileInput);
-            Console.WriteLine($"Valid vertical triangles: {verticalValidCount}");
+            return new PuzzleResult($"Valid vertical triangles: {verticalValidCount}");
         }
     }
 }

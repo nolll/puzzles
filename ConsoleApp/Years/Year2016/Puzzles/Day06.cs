@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var reader = new RepetitionCodeReader();
             var messageMostCommon = reader.ReadMostCommon(FileInput);
-            Console.WriteLine($"Message most common: {messageMostCommon}");
+            return new PuzzleResult($"Message most common: {messageMostCommon}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var reader = new RepetitionCodeReader();
             var messageLeastCommon = reader.ReadLeastCommon(FileInput);
-            Console.WriteLine($"Message least common: {messageLeastCommon}");
+            return new PuzzleResult($"Message least common: {messageLeastCommon}");
         }
     }
 }

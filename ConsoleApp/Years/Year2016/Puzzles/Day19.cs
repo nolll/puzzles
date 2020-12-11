@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var party = new WhiteElephantParty(Input);
-            var winner1 = party.StealFromNextElf();
-            Console.WriteLine($"Elf that gets all presents: {winner1}");
+            var winner = party.StealFromNextElf();
+            return new PuzzleResult($"Elf that gets all presents: {winner}");
+        }
 
-            WritePartTitle();
-            var winner2 = party.StealFromElfAcrossCircle();
-            Console.WriteLine($"Elf that gets all presents: {winner2}");
+        public override PuzzleResult RunPart2()
+        {
+            var party = new WhiteElephantParty(Input);
+            var winner = party.StealFromElfAcrossCircle();
+            return new PuzzleResult($"Elf that gets all presents: {winner}");
         }
 
         private const int Input = 3001330;

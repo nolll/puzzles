@@ -9,11 +9,10 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var generator = new ClockSignalGenerator();
-            Console.WriteLine($"Lowest A: {generator.LowestA}");
+            return new PuzzleResult($"Lowest A: {generator.LowestA}");
         }
     }
 }

@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
-            var sculpture1 = new KineticSculpture(FileInput);
-            Console.WriteLine($"Time to press button: {sculpture1.TimeToPressButton}");
+            var sculpture = new KineticSculpture(FileInput);
+            return new PuzzleResult($"Time to press button: {sculpture.TimeToPressButton}");
+        }
 
-            WritePartTitle();
-            var sculpture2 = new KineticSculpture(FileInput, true);
-            Console.WriteLine($"Time to press button: {sculpture2.TimeToPressButton}");
+        public override PuzzleResult RunPart2()
+        {
+            var sculpture = new KineticSculpture(FileInput, true);
+            return new PuzzleResult($"Time to press button: {sculpture.TimeToPressButton}");
         }
     }
 }

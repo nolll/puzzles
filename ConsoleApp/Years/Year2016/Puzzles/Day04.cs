@@ -9,15 +9,17 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var validator = new RoomValidator(FileInput);
             var sum = validator.SumOfIds;
-            Console.WriteLine($"Sum of valid room ids: {sum}");
+            return new PuzzleResult($"Sum of valid room ids: {sum}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Northpole object storage room: {validator.NorthpoleObjectStorageId}");
+        public override PuzzleResult RunPart2()
+        {
+            var validator = new RoomValidator(FileInput);
+            return new PuzzleResult($"Northpole object storage room: {validator.NorthpoleObjectStorageId}");
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Core.EasterbunnyHq;
+﻿using Core.EasterbunnyHq;
 
 namespace ConsoleApp.Years.Year2016.Puzzles
 {
@@ -9,15 +8,17 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var calc = new EasterbunnyDistanceCalculator();
             calc.Go(FileInput);
-            Console.WriteLine($"Distance to target: {calc.DistanceToTarget}");
+            return new PuzzleResult($"Distance to target: {calc.DistanceToTarget}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Distance to first repeated address: {calc.DistanceToFirstRepeat}");
+        public override PuzzleResult RunPart2()
+        {
+            var calc = new EasterbunnyDistanceCalculator();
+            return new PuzzleResult($"Distance to first repeated address: {calc.DistanceToFirstRepeat}");
         }
     }
 }

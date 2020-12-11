@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
-            var maze1 = new Maze(50, 50, Input);
-            var stepCount = maze1.StepCountToTarget(31, 39);
-            Console.WriteLine($"Required number of steps: {stepCount}");
+            var maze = new Maze(50, 50, Input);
+            var stepCount = maze.StepCountToTarget(31, 39);
+            return new PuzzleResult($"Required number of steps: {stepCount}");
+        }
 
-            WritePartTitle();
-            var maze2 = new Maze(75, 75, Input);
-            var locationCount = maze2.LocationCountAfter(50);
-            Console.WriteLine($"Number of location: {locationCount}");
+        public override PuzzleResult RunPart2()
+        {
+            var maze = new Maze(75, 75, Input);
+            var locationCount = maze.LocationCountAfter(50);
+            return new PuzzleResult($"Number of location: {locationCount}");
         }
 
         private const int Input = 1362;

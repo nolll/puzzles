@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var simulator = new ScreenSimulator(50, 6);
             var simulatorResult = simulator.Run(FileInput);
-            Console.WriteLine($"Pixels on screen: {simulatorResult.PixelCount}");
+            return new PuzzleResult($"Pixels on screen: {simulatorResult.PixelCount}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine("Screen:");
-            Console.WriteLine(simulatorResult.PrintOut);
+        public override PuzzleResult RunPart2()
+        {
+            var simulator = new ScreenSimulator(50, 6);
+            var simulatorResult = simulator.Run(FileInput);
+            return new PuzzleResult($"Screen:\r\n{simulatorResult.PrintOut}");
         }
     }
 }

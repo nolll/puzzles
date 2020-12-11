@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
-            var simulator1 = new RadioisotopeSimulator(Input1);
-            Console.WriteLine($"Required number of steps: {simulator1.StepCount}");
+            var simulator = new RadioisotopeSimulator(Input1);
+            return new PuzzleResult($"Required number of steps: {simulator.StepCount}");
+        }
 
-            WritePartTitle();
-            var simulator2 = new RadioisotopeSimulator(Input2);
-            Console.WriteLine($"Required number of steps: {simulator2.StepCount}");
+        public override PuzzleResult RunPart2()
+        {
+            var simulator = new RadioisotopeSimulator(Input2);
+            return new PuzzleResult($"Required number of steps: {simulator.StepCount}");
         }
 
         private const string Input1 = @"The first floor contains a strontium generator, a strontium-compatible microchip, a plutonium generator, and a plutonium-compatible microchip.

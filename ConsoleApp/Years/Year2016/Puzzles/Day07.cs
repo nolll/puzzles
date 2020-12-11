@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var tester = new IpTester();
             var tlsSupportCount = tester.TlsSupportCount(FileInput);
-            Console.WriteLine($"Valid tls ip addresses: {tlsSupportCount}");
+            return new PuzzleResult($"Valid tls ip addresses: {tlsSupportCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var tester = new IpTester();
             var sslSupportCount = tester.SslSupportCount(FileInput);
-            Console.WriteLine($"Valid ssl ip addresses: {sslSupportCount}");
+            return new PuzzleResult($"Valid ssl ip addresses: {sslSupportCount}");
         }
     }
 }

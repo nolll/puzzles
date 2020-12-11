@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
-            var control1 = new MonorailComputer(FileInput, 0, 0);
-            Console.WriteLine($"Value in register A: {control1.ValueA}");
+            var computer = new MonorailComputer(FileInput, 0, 0);
+            return new PuzzleResult($"Value in register A: {computer.ValueA}");
+        }
 
-            WritePartTitle();
-            var control2 = new MonorailComputer(FileInput, 0, 1);
-            Console.WriteLine($"Value in register A: {control2.ValueA}");
+        public override PuzzleResult RunPart2()
+        {
+            var computer = new MonorailComputer(FileInput, 0, 1);
+            return new PuzzleResult($"Value in register A: {computer.ValueA}");
         }
     }
 }

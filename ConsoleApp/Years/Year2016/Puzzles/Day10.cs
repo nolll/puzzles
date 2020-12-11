@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var simulator = new BotSimulator(FileInput);
             var botId = simulator.FindIdByChips(17, 61);
-            Console.WriteLine($"Id of requested bot: {botId}");
+            return new PuzzleResult($"Id of requested bot: {botId}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var simulator = new BotSimulator(FileInput);
             var multipliedOutput = simulator.GetMultipliedOutput();
-            Console.WriteLine($"Multiplied output: {multipliedOutput}");
+            return new PuzzleResult($"Multiplied output: {multipliedOutput}");
         }
     }
 }

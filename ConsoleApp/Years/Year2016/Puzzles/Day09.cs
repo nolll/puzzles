@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var decompressor = new FileDecompressor(FileInput);
-            Console.WriteLine($"Decompressed length V1: {decompressor.DecompressedLengthV1}");
+            return new PuzzleResult($"Decompressed length V1: {decompressor.DecompressedLengthV1}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Decompressed length V2: {decompressor.DecompressedLengthV2}");
+        public override PuzzleResult RunPart2()
+        {
+            var decompressor = new FileDecompressor(FileInput);
+            return new PuzzleResult($"Decompressed length V2: {decompressor.DecompressedLengthV2}");
         }
     }
 }

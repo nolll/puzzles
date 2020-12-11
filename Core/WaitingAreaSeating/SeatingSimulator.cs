@@ -1,69 +1,58 @@
+using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
 
 namespace Core.WaitingAreaSeating
 {
-    public class SeatingSimulator
+    public abstract class SeatingSimulator
     {
-        private Matrix<char> _matrix;
+        protected const char Floor = '.';
+        protected const char OccupiedChair = '#';
+        protected const char EmptyChair = 'L';
+
+        protected Matrix<char> Matrix;
         public int OccupiedSeatCount { get; private set; }
 
-        public SeatingSimulator(string input)
+        protected SeatingSimulator(string input)
         {
-            _matrix = MatrixBuilder.BuildCharMatrix(input);
+            Matrix = MatrixBuilder.BuildCharMatrix(input);
         }
 
-        public void Run(int iterations)
-        {
-            for (var i = 0; i < iterations; i++)
-            {
-                Run();
-            }
-        }
-
-        public void RunUntilStable()
+        public void Run()
         {
             var prevCount = 0;
             var currentCount = -1;
             while (prevCount != currentCount)
             {
                 prevCount = currentCount;
-                Run();
-                currentCount = _matrix.Values.Count(o => o == '#');
+                RunOnce();
+                currentCount = Matrix.Values.Count(o => o == OccupiedChair);
             }
 
             OccupiedSeatCount = currentCount;
         }
 
-        public void Run()
+        private void RunOnce()
         {
-            var newMatrix = _matrix.Copy();
-            for (var y = 0; y < _matrix.Height; y++)
+            var newMatrix = Matrix.Copy();
+            for (var y = 0; y < Matrix.Height; y++)
             {
-                for (var x = 0; x < _matrix.Width; x++)
+                for (var x = 0; x < Matrix.Width; x++)
                 {
-                    _matrix.MoveTo(x, y);
-                    var currentValue = _matrix.ReadValue();
-                    var adjacentValues = _matrix.Adjacent8;
-                    var neighborCount = adjacentValues.Count(o => o == '#');
-                    var newValue = GetNewValue(currentValue, neighborCount);
+                    Matrix.MoveTo(x, y);
+                    var currentValue = Matrix.ReadValue();
+                    var adjacentValues = GetAdjacentSeats();
+                    var neighborCount = adjacentValues.Count(o => o == OccupiedChair);
+                    var newValue = GetSeatStatus(currentValue, neighborCount);
 
                     newMatrix.MoveTo(x, y);
                     newMatrix.WriteValue(newValue);
                 }
             }
-            _matrix = newMatrix;
+            Matrix = newMatrix;
         }
 
-        private char GetNewValue(char currentValue, int neighborCount)
-        {
-            if (currentValue == 'L' && neighborCount == 0)
-                return '#';
-
-            if (currentValue == '#' && neighborCount >= 4)
-                return 'L';
-
-            return currentValue;
-        }
+        protected abstract IList<char> GetAdjacentSeats();
+        protected abstract char GetSeatStatus(char currentValue, int neighborCount);
     }
 }

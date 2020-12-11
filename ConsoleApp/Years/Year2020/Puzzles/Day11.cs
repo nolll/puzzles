@@ -11,9 +11,16 @@ namespace ConsoleApp.Years.Year2020.Puzzles
 
         public override PuzzleResult RunPart1()
         {
-            var simulator = new SeatingSimulator(FileInput);
-            simulator.RunUntilStable();
-            return new PuzzleResult($"Occupied seats: {simulator.OccupiedSeatCount}");
+            var simulator = new SeatingSimulatorAdjacentSeats(FileInput);
+            simulator.Run();
+            return new PuzzleResult($"Occupied seats with algorithm 1: {simulator.OccupiedSeatCount}");
+        }
+
+        public override PuzzleResult RunPart2()
+        {
+            var simulator = new SeatingSimulatorVisibleSeats(FileInput);
+            simulator.Run();
+            return new PuzzleResult($"Occupied seats with algorithm 2: {simulator.OccupiedSeatCount}");
         }
 
         protected override void RunDay()

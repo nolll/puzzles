@@ -1,5 +1,4 @@
-﻿using System;
-using Core.GiftWrapping;
+﻿using Core.GiftWrapping;
 
 namespace ConsoleApp.Years.Year2015.Puzzles
 {
@@ -9,16 +8,18 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var calc = new GiftWrappingCalculator();
             var paperResult = calc.GetRequiredPaper(FileInput);
-            Console.WriteLine($"Required wrapping paper: {paperResult} square feet");
+            return new PuzzleResult($"Required wrapping paper: {paperResult} square feet");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var calc = new GiftWrappingCalculator();
             var ribbonResult = calc.GetRequiredRibbon(FileInput);
-            Console.WriteLine($"Required ribbon: {ribbonResult} feet");
+            return new PuzzleResult($"Required ribbon: {ribbonResult} feet");
         }
     }
 }

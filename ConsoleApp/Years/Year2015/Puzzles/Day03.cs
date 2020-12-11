@@ -1,5 +1,4 @@
-﻿using System;
-using Core.PresentDelivery;
+﻿using Core.PresentDelivery;
 
 namespace ConsoleApp.Years.Year2015.Puzzles
 {
@@ -9,17 +8,18 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var grid1 = new DeliveryGrid();
             grid1.DeliverBySanta(FileInput);
-            Console.WriteLine($"Presents delivered to {grid1.SantaDeliveryCount} houses by Santa");
+            return new PuzzleResult($"Presents delivered to {grid1.SantaDeliveryCount} houses by Santa");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var grid2 = new DeliveryGrid();
             grid2.DeliverBySantaAndRobot(FileInput);
-            Console.WriteLine($"Presents delivered to {grid2.SantaDeliveryCount} houses by Santa and robot");
+            return new PuzzleResult($"Presents delivered to {grid2.SantaDeliveryCount} houses by Santa and robot");
         }
     }
 }

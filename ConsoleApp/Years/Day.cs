@@ -1,25 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Core.Asteroids;
-using Core.Tools;
 
 namespace ConsoleApp.Years
 {
-    public class PuzzleResult
-    {
-        public string Message { get; }
-        
-        public PuzzleResult(string message)
-        {
-            Message = message;
-        }
-    }
-
     public abstract class Day
     {
         private int _part;
-        protected abstract void RunDay();
         public abstract int Year { get; }
         public int Id { get; }
 
@@ -32,6 +19,10 @@ namespace ConsoleApp.Years
         public void Run()
         {
             RunDay();
+        }
+
+        protected virtual void RunDay()
+        {
         }
 
         public virtual PuzzleResult RunPart1()

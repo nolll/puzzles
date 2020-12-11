@@ -1,5 +1,4 @@
-﻿using System;
-using Core.NaughtyOrNice;
+﻿using Core.NaughtyOrNice;
 
 namespace ConsoleApp.Years.Year2015.Puzzles
 {
@@ -9,16 +8,18 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var evaluator = new NaughtyOrNiceEvaluator();
             var nice1Count = evaluator.GetNiceCount1(FileInput);
-            Console.WriteLine($"Number of nice strings (algorithm 1): {nice1Count}");
+            return new PuzzleResult($"Number of nice strings (algorithm 1): {nice1Count}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var evaluator = new NaughtyOrNiceEvaluator();
             var nice2Count = evaluator.GetNiceCount2(FileInput);
-            Console.WriteLine($"Number of nice strings (algorithm 2): {nice2Count}");
+            return new PuzzleResult($"Number of nice strings (algorithm 2): {nice2Count}");
         }
     }
 }

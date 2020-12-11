@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var processor = new PassportProcessor(FileInput);
-            var passportCount1 = processor.GetNumberOfPassportsThatHasAllFields();
-            Console.WriteLine($"Number of passports that has all fields: {passportCount1}");
+            var passportCount = processor.GetNumberOfPassportsThatHasAllFields();
+            return new PuzzleResult($"Number of passports that has all fields: {passportCount}");
+        }
 
-            WritePartTitle();
-            var passportCount2 = processor.GetNumberOfValidPassports();
-            Console.WriteLine($"Number of valid passports: {passportCount2}");
+        public override PuzzleResult RunPart2()
+        {
+            var processor = new PassportProcessor(FileInput);
+            var passportCount = processor.GetNumberOfValidPassports();
+            return new PuzzleResult($"Number of valid passports: {passportCount}");
         }
     }
 }

@@ -10,18 +10,20 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var sumFinder = new SumFinder(FileInput);
             var numbers1 = sumFinder.FindNumbersThatAddUpTo(Target, 2);
             var product1 = numbers1.Aggregate(1, (a, b) => a * b);
-            Console.WriteLine($"Product of numbers that add up to {Target}: {product1}");
+            return new PuzzleResult($"Product of numbers that add up to {Target}: {product1}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var sumFinder = new SumFinder(FileInput);
             var numbers2 = sumFinder.FindNumbersThatAddUpTo(Target, 3);
             var product2 = numbers2.Aggregate(1, (a, b) => a * b);
-            Console.WriteLine($"Product of numbers that add up to {Target}: {product2}");
+            return new PuzzleResult($"Product of numbers that add up to {Target}: {product2}");
         }
 
         private const int Target = 2020;

@@ -10,17 +10,19 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var navigator = new TreeNavigator(FileInput);
             var treeCount = navigator.GetSingleTreeCount();
-            Console.WriteLine($"Number of trees: {treeCount}");
+            return new PuzzleResult($"Number of trees: {treeCount}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var navigator = new TreeNavigator(FileInput);
             var treeCounts = navigator.GetAllTreeCounts().ToList();
             var product = treeCounts.Aggregate((long)1, (a, b) => a * b);
-            Console.WriteLine($"Number of trees for all trajectories: {product}");
+            return new PuzzleResult($"Number of trees for all trajectories: {product}");
         }
     }
 }

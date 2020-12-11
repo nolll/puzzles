@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var processor = new LuggageProcessor(FileInput);
             var count1 = processor.NumberOfBagsThatCanContainGoldBags();
-            Console.WriteLine($"Number of outermost bags that can contain shiny gold bags: {count1}");
+            return new PuzzleResult($"Number of outermost bags that can contain shiny gold bags: {count1}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var processor = new LuggageProcessor(FileInput);
             var count2 = processor.NumberOfBagsThatAGoldBagContains();
-            Console.WriteLine($"Number of bags that shiny gold bag contains: {count2}");
+            return new PuzzleResult($"Number of bags that shiny gold bag contains: {count2}");
         }
     }
 }

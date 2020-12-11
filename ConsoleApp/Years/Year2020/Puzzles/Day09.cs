@@ -10,16 +10,18 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var port = new XmasPort(FileInput, 25);
             var invalidNumber = port.FindFirstInvalidNumber();
-            Console.WriteLine($"First invalid number: {invalidNumber}");
+            return new PuzzleResult($"First invalid number: {invalidNumber}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var port = new XmasPort(FileInput, 25);
             var weakness = port.FindWeakness();
-            Console.WriteLine($"First invalid number: {weakness}");
+            return new PuzzleResult($"First invalid number: {weakness}");
         }
     }
 }

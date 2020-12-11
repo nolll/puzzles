@@ -11,17 +11,20 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var validator = new PasswordPolicyValidator();
             var policies = PuzzleInputReader.ReadLines(FileInput);
-            var count1 = policies.Count(validator.IsValidAccordingToRuleOne);
-            Console.WriteLine($"Number of valid passwords with rule 1: {count1}");
+            var count = policies.Count(validator.IsValidAccordingToRuleOne);
+            return new PuzzleResult($"Number of valid passwords with rule 1: {count}");
+        }
 
-            WritePartTitle();
-            var count2 = policies.Count(validator.IsValidAccordingToRuleTwo);
-            Console.WriteLine($"Number of valid passwords with rule 2: {count2}");
+        public override PuzzleResult RunPart2()
+        {
+            var validator = new PasswordPolicyValidator();
+            var policies = PuzzleInputReader.ReadLines(FileInput);
+            var count = policies.Count(validator.IsValidAccordingToRuleTwo);
+            return new PuzzleResult($"Number of valid passwords with rule 2: {count}");
         }
     }
 }

@@ -10,15 +10,17 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var chain = new PowerAdapterChain(FileInput);
-            Console.WriteLine($"The product is: {chain.DifferenceProduct}");
+            return new PuzzleResult($"The product is: {chain.DifferenceProduct}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var chain = new PowerAdapterChain(FileInput);
             var combinations = chain.GetTotalNumberOfCombinations();
-            Console.WriteLine($"Total number of combinations: {combinations}");
+            return new PuzzleResult($"Total number of combinations: {combinations}");
         }
     }
 }

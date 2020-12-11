@@ -9,15 +9,17 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var processor = new BoardingCardProcessor(FileInput);
-            Console.WriteLine($"The boarding card with the highest id is {processor.HighestId}");
+            return new PuzzleResult($"The boarding card with the highest id is {processor.HighestId}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var processor = new BoardingCardProcessor(FileInput);
             var mySeat = processor.FindMySeat();
-            Console.WriteLine($"The id of my seat is {mySeat.Id}");
+            return new PuzzleResult($"The id of my seat is {mySeat.Id}");
         }
     }
 }

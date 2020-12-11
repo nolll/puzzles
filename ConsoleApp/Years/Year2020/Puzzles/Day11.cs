@@ -22,10 +22,5 @@ namespace ConsoleApp.Years.Year2020.Puzzles
             simulator.Run();
             return new PuzzleResult($"Occupied seats with algorithm 2: {simulator.OccupiedSeatCount}");
         }
-
-        protected override void RunDay()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

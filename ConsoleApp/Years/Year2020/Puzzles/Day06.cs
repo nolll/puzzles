@@ -10,14 +10,16 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var reader = new DeclarationFormReader(FileInput);
-            Console.WriteLine($"Sum of at least one 'yes' answer: {reader.SumOfAtLeastOneYes}");
+            return new PuzzleResult($"Sum of at least one 'yes' answer: {reader.SumOfAtLeastOneYes}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Sum of all 'yes' answer: {reader.SumOfAllYes}");
+        public override PuzzleResult RunPart2()
+        {
+            var reader = new DeclarationFormReader(FileInput);
+            return new PuzzleResult($"Sum of all 'yes' answer: {reader.SumOfAllYes}");
         }
     }
 }

@@ -9,16 +9,18 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var console = new GameConsoleRunner(FileInput);
-            var acc1 = console.RunUntilLoop();
-            Console.WriteLine($"Value of acc after loop: {acc1}");
+            var acc = console.RunUntilLoop();
+            return new PuzzleResult($"Value of acc after loop: {acc}");
+        }
 
-            WritePartTitle();
-            var acc2 = console.RunUntilTermination();
-            Console.WriteLine($"Value of acc after loop: {acc2}");
+        public override PuzzleResult RunPart2()
+        {
+            var console = new GameConsoleRunner(FileInput);
+            var acc = console.RunUntilTermination();
+            return new PuzzleResult($"Value of acc after loop: {acc}");
         }
     }
 }

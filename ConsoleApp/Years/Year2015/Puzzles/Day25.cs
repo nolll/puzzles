@@ -9,14 +9,12 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
             var p = GetParams();
-
-            WritePartTitle();
             var codeFinder = new WeatherMachineCodeFinder();
             var code = codeFinder.FindCodeAt(p.TargetX, p.TargetY);
-            Console.WriteLine($"Weather Machine code: {code}");
+            return new PuzzleResult($"Weather Machine code: {code}");
         }
 
         private Params GetParams()

@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var computer1 = new ChristmasComputer();
             computer1.Run(FileInput);
-            Console.WriteLine($"Value of register B: {computer1.RegisterB}");
+            return new PuzzleResult($"Value of register B: {computer1.RegisterB}");
+        }
 
-            WritePartTitle();
-            var computer2 = new ChristmasComputer();
-            computer2.Run(FileInput, 1);
-            Console.WriteLine($"Value of register B: {computer2.RegisterB}");
+        public override PuzzleResult RunPart2()
+        {
+            var computer = new ChristmasComputer();
+            computer.Run(FileInput, 1);
+            return new PuzzleResult($"Value of register B: {computer.RegisterB}");
         }
     }
 }

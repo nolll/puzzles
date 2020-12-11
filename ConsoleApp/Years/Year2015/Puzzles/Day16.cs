@@ -1,5 +1,4 @@
-﻿using System;
-using Core.AuntSue;
+﻿using Core.AuntSue;
 
 namespace ConsoleApp.Years.Year2015.Puzzles
 {
@@ -9,14 +8,16 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var sueSelector = new SueSelector(FileInput);
-            Console.WriteLine($"Sue number, part 1: {sueSelector.SueNumberPart1}");
+            return new PuzzleResult($"Sue number, part 1: {sueSelector.SueNumberPart1}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Sue number, part 2: {sueSelector.SueNumberPart2}");
+        public override PuzzleResult RunPart2()
+        {
+            var sueSelector = new SueSelector(FileInput);
+            return new PuzzleResult($"Sue number, part 2: {sueSelector.SueNumberPart2}");
         }
     }
 }

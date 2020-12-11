@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var calculator = new RouteCalculator(FileInput);
-            Console.WriteLine($"Shortest route: {calculator.ShortestDistance}");
+            return new PuzzleResult($"Shortest route: {calculator.ShortestDistance}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Shortest route: {calculator.LongestDistance}");
+        public override PuzzleResult RunPart2()
+        {
+            var calculator = new RouteCalculator(FileInput);
+            return new PuzzleResult($"Shortest route: {calculator.LongestDistance}");
         }
     }
 }

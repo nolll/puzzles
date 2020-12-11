@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var digitalList = new DigitalList(FileInput);
-            Console.WriteLine($"Difference: {digitalList.CodeMinusMemoryDiff}");
-
-            WritePartTitle();
-            Console.WriteLine($"Difference: {digitalList.EncodedMinusCodeDiff}");
+            return new PuzzleResult($"Difference: {digitalList.CodeMinusMemoryDiff}");
         }
-   }
+
+        public override PuzzleResult RunPart2()
+        {
+            var digitalList = new DigitalList(FileInput);
+            return new PuzzleResult($"Difference: {digitalList.EncodedMinusCodeDiff}");
+        }
+    }
 }

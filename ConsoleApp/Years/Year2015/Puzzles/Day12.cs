@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
-            var doc1 = new JsonDoc(FileInput, true);
-            Console.WriteLine($"Document sum: {doc1.Sum}");
+            var doc = new JsonDoc(FileInput, true);
+            return new PuzzleResult($"Document sum: {doc.Sum}");
+        }
 
-            WritePartTitle();
-            var doc2 = new JsonDoc(FileInput, false);
-            Console.WriteLine($"Document sum without red: {doc2.Sum}");
+        public override PuzzleResult RunPart2()
+        {
+            var doc = new JsonDoc(FileInput, false);
+            return new PuzzleResult($"Document sum without red: {doc.Sum}");
         }
     }
 }

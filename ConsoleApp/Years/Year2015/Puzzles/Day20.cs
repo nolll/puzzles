@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var presentDelivery1 = new PresentDelivery();
             var house1 = presentDelivery1.Deliver1(Input);
-            Console.WriteLine($"First house to get {FileInput} presents: {house1}");
+            return new PuzzleResult($"First house to get {FileInput} presents: {house1}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var presentDelivery2 = new PresentDelivery();
             var house2 = presentDelivery2.Deliver2(Input);
-            Console.WriteLine($"First house to get {FileInput} presents: {house2}");
+            return new PuzzleResult($"First house to get {FileInput} presents: {house2}");
         }
 
         private const int Input = 34_000_000;

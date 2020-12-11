@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Core.Eggnog;
 
 namespace ConsoleApp.Years.Year2015.Puzzles
@@ -10,17 +9,19 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var container = new EggnogContainers(FileInput);
-            var combinations1 = container.GetCombinations(150);
-            Console.WriteLine($"Combinations: {combinations1.Count}");
+            var combinations = container.GetCombinations(150);
+            return new PuzzleResult($"Combinations: {combinations.Count}");
+        }
 
-            WritePartTitle();
-            var combinations2 = container.GetCombinationsWithLeastContainers(150);
-            var containerCount = combinations2.First().Count;
-            Console.WriteLine($"Combinations with {containerCount} containers: {combinations2.Count}");
+        public override PuzzleResult RunPart2()
+        {
+            var container = new EggnogContainers(FileInput);
+            var combinations = container.GetCombinationsWithLeastContainers(150);
+            var containerCount = combinations.First().Count;
+            return new PuzzleResult($"Combinations with {containerCount} containers: {combinations.Count}");
         }
     }
 }

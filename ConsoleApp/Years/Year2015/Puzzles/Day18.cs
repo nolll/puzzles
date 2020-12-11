@@ -9,17 +9,18 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var gif = new AnimatedGif(FileInput);
             gif.RunAnimation(100);
-            Console.WriteLine($"Lights switched on: {gif.LightCount}");
+            return new PuzzleResult($"Lights switched on: {gif.LightCount}");
+        }
 
-            WritePartTitle();
-            var gif2 = new AnimatedGif(FileInput, true);
-            gif2.RunAnimation(100);
-            Console.WriteLine($"Lights switched on, when corners are always lit: {gif2.LightCount}");
+        public override PuzzleResult RunPart2()
+        {
+            var gif = new AnimatedGif(FileInput, true);
+            gif.RunAnimation(100);
+            return new PuzzleResult($"Lights switched on, when corners are always lit: {gif.LightCount}");
         }
     }
 }

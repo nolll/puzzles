@@ -1,5 +1,4 @@
-﻿using System;
-using Core.ChristmasLights;
+﻿using Core.ChristmasLights;
 
 namespace ConsoleApp.Years.Year2015.Puzzles
 {
@@ -9,17 +8,18 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
-            var controller1 = new ChristmasLightsController();
-            controller1.RunCommands(FileInput, false);
-            Console.WriteLine($"Lit lights: {controller1.LitCount}");
+            var controller = new ChristmasLightsController();
+            controller.RunCommands(FileInput, false);
+            return new PuzzleResult($"Lit lights: {controller.LitCount}");
+        }
 
-            WritePartTitle();
-            var controller2 = new ChristmasLightsController();
-            controller2.RunCommands(FileInput, true);
-            Console.WriteLine($"Total brightness: {controller2.TotalBrightness}");
+        public override PuzzleResult RunPart2()
+        {
+            var controller = new ChristmasLightsController();
+            controller.RunCommands(FileInput, true);
+            return new PuzzleResult($"Total brightness: {controller.TotalBrightness}");
         }
     }
 }

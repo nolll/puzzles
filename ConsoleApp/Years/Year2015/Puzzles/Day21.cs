@@ -10,18 +10,20 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
             var p = GetParams();
-
-            WritePartTitle();
             var simulator = new RpgSimulator();
             var leastGoldRequiredToWin = simulator.WinWithLowestCost(p.HitPoints, p.Damage, p.Armor);
-            Console.WriteLine($"Least amount of gold to win: {leastGoldRequiredToWin}");
+            return new PuzzleResult($"Least amount of gold to win: {leastGoldRequiredToWin}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var p = GetParams();
+            var simulator = new RpgSimulator();
             var mostGoldThatLoses = simulator.LoseWithHighestCost(p.HitPoints, p.Damage, p.Armor);
-            Console.WriteLine($"Most amount of gold that loses: {mostGoldThatLoses}");
+            return new PuzzleResult($"Most amount of gold that loses: {mostGoldThatLoses}");
         }
 
         private Params GetParams()

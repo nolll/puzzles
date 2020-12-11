@@ -10,19 +10,20 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
             var p = GetParams();
-
-            WritePartTitle();
             var simulator1 = new WizardRpgSimulator(WizardRpgGameMode.Easy);
             var leastManaRequiredToWinEasy = simulator1.WinWithLowestCost(p.HitPoints, p.Damage);
-            Console.WriteLine($"Least amount of mana to win in easy mode: {leastManaRequiredToWinEasy}");
+            return new PuzzleResult($"Least amount of mana to win in easy mode: {leastManaRequiredToWinEasy}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var p = GetParams();
             var simulator2 = new WizardRpgSimulator(WizardRpgGameMode.Hard);
             var leastManaRequiredToWinHard = simulator2.WinWithLowestCost(p.HitPoints, p.Damage);
-            Console.WriteLine($"Least amount of mana to win in hard mode: {leastManaRequiredToWinHard}");
+            return new PuzzleResult($"Least amount of mana to win in hard mode: {leastManaRequiredToWinHard}");
         }
 
         private Params GetParams()

@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var balancer1 = new PresentBalancer(FileInput, 3);
-            Console.WriteLine($"Quantum entanglement of the first group of three: {balancer1.QuantumEntanglementOfFirstGroup}");
+            return new PuzzleResult($"Quantum entanglement of the first group of three: {balancer1.QuantumEntanglementOfFirstGroup}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var balancer2 = new PresentBalancer(FileInput, 4);
-            Console.WriteLine($"Quantum entanglement of the first group of four: {balancer2.QuantumEntanglementOfFirstGroup}");
+            return new PuzzleResult($"Quantum entanglement of the first group of four: {balancer2.QuantumEntanglementOfFirstGroup}");
         }
     }
 }

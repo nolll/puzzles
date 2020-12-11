@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var race = new ReindeerRace(FileInput, 2503);
-            Console.WriteLine($"Winning distance: {race.WinningDistance}");
+            return new PuzzleResult($"Winning distance: {race.WinningDistance}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Winning score: {race.WinningScore}");
+        public override PuzzleResult RunPart2()
+        {
+            var race = new ReindeerRace(FileInput, 2503);
+            return new PuzzleResult($"Winning score: {race.WinningScore}");
         }
     }
 }

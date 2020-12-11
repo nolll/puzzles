@@ -1,5 +1,4 @@
-﻿using System;
-using Core.BitwiseLogic;
+﻿using Core.BitwiseLogic;
 
 namespace ConsoleApp.Years.Year2015.Puzzles
 {
@@ -9,18 +8,18 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var circuit = new Circuit(FileInput);
             var runOne = circuit.RunOne("a");
+            return new PuzzleResult($"Signal A after run one: {runOne}");
+        }
 
-            Console.WriteLine($"Signal A after run one: {runOne}");
-
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
+            var circuit = new Circuit(FileInput);
             var runTwo = circuit.RunTwo("a", "b");
-
-            Console.WriteLine($"Signal A after run two: {runTwo}");
+            return new PuzzleResult($"Signal A after run two: {runTwo}");
         }
     }
 }

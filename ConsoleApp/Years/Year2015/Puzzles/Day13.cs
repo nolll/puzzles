@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var table = new DinnerTable(FileInput);
-            Console.WriteLine($"Happiness change: {table.HappinessChange}");
+            return new PuzzleResult($"Happiness change: {table.HappinessChange}");
+        }
 
-            WritePartTitle();
-            var table2 = new DinnerTable(FileInput, true);
-            Console.WriteLine($"Happiness change including me: {table2.HappinessChange}");
+        public override PuzzleResult RunPart2()
+        {
+            var table = new DinnerTable(FileInput, true);
+            return new PuzzleResult($"Happiness change including me: {table.HappinessChange}");
         }
     }
 }

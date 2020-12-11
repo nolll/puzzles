@@ -9,15 +9,16 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
             var game = new LookAndSayGame(Input, 40);
-            Console.WriteLine($"Length of string 1: {game.Result.Length}");
+            return new PuzzleResult($"Length of string 1: {game.Result.Length}");
+        }
 
-            WritePartTitle();
+        public override PuzzleResult RunPart2()
+        {
             var game2 = new LookAndSayGame(Input, 50);
-            Console.WriteLine($"Length of string 2: {game2.Result.Length}");
+            return new PuzzleResult($"Length of string 2: {game2.Result.Length}");
         }
 
         private const string Input = "1113222113";

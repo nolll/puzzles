@@ -9,14 +9,16 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
         }
 
-        protected override void RunDay()
+        public override PuzzleResult RunPart1()
         {
-            WritePartTitle();
-            var race = new CookieBakery(FileInput);
-            Console.WriteLine($"Highest score: {race.HighestScore}");
+            var bakery = new CookieBakery(FileInput);
+            return new PuzzleResult($"Highest score: {bakery.HighestScore}");
+        }
 
-            WritePartTitle();
-            Console.WriteLine($"Highest score for cookies with 500 calories: {race.HighestScoreWith500Calories}");
+        public override PuzzleResult RunPart2()
+        {
+            var bakery = new CookieBakery(FileInput);
+            return new PuzzleResult($"Highest score for cookies with 500 calories: {bakery.HighestScoreWith500Calories}");
         }
     }
 }

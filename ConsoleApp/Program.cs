@@ -14,8 +14,8 @@ namespace ConsoleApp
         private const int PuzzleTimeout = 10;
         private const int DayTimeout = PuzzleTimeout * 2;
 
-        private const int Year = 2018;
-        private const int Day = 24;
+        private const int Year = 2020;
+        private const int Day = 11;
 
         static void Main(string[] args)
         {
@@ -72,20 +72,11 @@ namespace ConsoleApp
             PuzzleResult part1Result = null;
             var task1 = Task.Run(() => part1Result = day.RunPart1());
             if (!task1.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
-            {
                 part1Result = new PuzzleResult($"Puzzle failed to finish within {PuzzleTimeout} seconds");
-            }
 
             if (part1Result == null)
             {
-                PrintDayTitle(day);
-                var taskFullDay = Task.Run(day.Run);
-                if (!taskFullDay.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
-                {
-                    PrintDayError(day);
-                }
-                PrintDayEnd(timer);
-
+                RunLegacyDay(day, timer);
                 return;
             }
 
@@ -99,7 +90,19 @@ namespace ConsoleApp
                 part2Result = new PuzzleResult($"Puzzle failed to finish within {PuzzleTimeout} seconds");
             }
 
-            PrintPuzzle(2, part2Result);
+            if(part2Result != null)
+                PrintPuzzle(2, part2Result);
+            
+            PrintDayEnd(timer);
+        }
+
+        private static void RunLegacyDay(Day day, Timer timer)
+        {
+            PrintDayTitle(day);
+            var taskFullDay = Task.Run(day.Run);
+            if (!taskFullDay.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
+                PrintDayError(day);
+
             PrintDayEnd(timer);
         }
 

@@ -2,7 +2,8 @@
 {
     public enum PuzzleResultStatus
     {
-        Success,
+        Correct,
+        Completed,
         Missing,
         Empty,
         Failed,

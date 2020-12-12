@@ -12,15 +12,21 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         public override PuzzleResult RunPart1()
         {
             var navigator = new FloorNavigator(FileInput);
-            var message = $"Final floor: {navigator.DestinationFloor}";
-            return new PuzzleResult(message);
+
+            return new PuzzleResult(
+                $"Final floor: {navigator.DestinationFloor}", 
+                navigator.DestinationFloor, 
+                138);
         }
 
         public override PuzzleResult RunPart2()
         {
             var navigator = new FloorNavigator(FileInput);
-            var message = $"First basement instruction: {navigator.FirstBasementInstruction}";
-            return new PuzzleResult(message);
+            
+            return new PuzzleResult(
+                $"First basement instruction: {navigator.FirstBasementInstruction}", 
+                navigator.FirstBasementInstruction, 
+                1771);
         }
     }
 }

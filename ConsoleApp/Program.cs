@@ -10,10 +10,9 @@ namespace ConsoleApp
     {
         private static DaySelector _daySelector;
         private const int PuzzleTimeout = 10;
-        private const int DayTimeout = PuzzleTimeout * 2;
 
-        private const int Year = 2019;
-        private const int Day = 2;
+        private const int Year = 2015;
+        private const int Day = 1;
 
         static void Main(string[] args)
         {
@@ -99,9 +98,9 @@ namespace ConsoleApp
             var day = dayResult.Day.Id.ToString().PadLeft(2, '0');
             var dayAndYear = $"Day {day} {dayResult.Day.Year}";
             var p1 = GetTableResult(dayResult.Result1).PadRight(10, ' ');
-            var p1Color = GetColor(dayResult.Result1.Status);
+            var p1Color = GetColor(dayResult.Result1);
             var p2 = GetTableResult(dayResult.Result2).PadRight(10, ' ');
-            var p2Color = GetColor(dayResult.Result2.Status);
+            var p2Color = GetColor(dayResult.Result2);
 
             var defaultColor = Console.ForegroundColor;
 
@@ -119,11 +118,15 @@ namespace ConsoleApp
             Console.WriteLine();
         }
 
-        private static ConsoleColor GetColor(PuzzleResultStatus status)
+        private static ConsoleColor GetColor(PuzzleResult result)
         {
-            return status == PuzzleResultStatus.Failed || status == PuzzleResultStatus.Missing || status == PuzzleResultStatus.Timeout
-                ? ConsoleColor.Red
-                : ConsoleColor.Green;
+            var status = result.Status;
+            if(status == PuzzleResultStatus.Failed || status == PuzzleResultStatus.Missing || status == PuzzleResultStatus.Timeout)
+                return ConsoleColor.Red;
+
+            return status == PuzzleResultStatus.Correct 
+                ? ConsoleColor.Green
+                : ConsoleColor.Yellow;
         }
 
         private static string GetTableResult(TimedPuzzleResult result)

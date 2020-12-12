@@ -10,16 +10,24 @@ namespace ConsoleApp.Years.Year2015.Puzzles
 
         public override PuzzleResult RunPart1()
         {
-            var grid1 = new DeliveryGrid();
-            grid1.DeliverBySanta(FileInput);
-            return new PuzzleResult($"Presents delivered to {grid1.SantaDeliveryCount} houses by Santa");
+            var grid = new DeliveryGrid();
+            grid.DeliverBySanta(FileInput);
+            
+            return new PuzzleResult(
+                $"Presents delivered to {grid.SantaDeliveryCount} houses by Santa", 
+                grid.SantaDeliveryCount, 
+                2592);
         }
 
         public override PuzzleResult RunPart2()
         {
-            var grid2 = new DeliveryGrid();
-            grid2.DeliverBySantaAndRobot(FileInput);
-            return new PuzzleResult($"Presents delivered to {grid2.SantaDeliveryCount} houses by Santa and robot");
+            var grid = new DeliveryGrid();
+            grid.DeliverBySantaAndRobot(FileInput);
+            
+            return new PuzzleResult(
+                $"Presents delivered to {grid.SantaDeliveryCount} houses by Santa and robot", 
+                grid.SantaDeliveryCount, 
+                2360);
         }
     }
 }

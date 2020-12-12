@@ -5,6 +5,7 @@
         Success,
         Missing,
         Empty,
-        Failed
+        Failed,
+        Timeout
     }
 }

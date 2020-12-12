@@ -21,13 +21,13 @@ namespace Core.ModeMaze
             var torchGoals = goalCounts.Where(o => o.Tool == CaveTool.Torch).ToList();
             if (torchGoals.Any())
             {
-                Console.WriteLine("Torch");
+                //Console.WriteLine("Torch");
                 return torchGoals.OrderBy(o => o.Count).First().Count;
             }
             var climbingGoals = goalCounts.Where(o => o.Tool == CaveTool.ClimbingGear).ToList();
             if (climbingGoals.Any())
             {
-                Console.WriteLine("Climbing Gear");
+                //Console.WriteLine("Climbing Gear");
                 return climbingGoals.OrderBy(o => o.Count).First().Count + 7;
             }
 

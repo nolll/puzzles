@@ -7,9 +7,9 @@ namespace ConsoleApp.Years
     {
         private const string Divider = "--------------------------------------------------";
 
-        public static void PrintTime(Timer timer)
+        public static void PrintTime(TimeSpan timeTaken)
         {
-            var time = Formatter.FormatTimer(timer);
+            var time = Formatter.FormatTime(timeTaken);
             Console.WriteLine(time.PadLeft(Divider.Length));
         }
 

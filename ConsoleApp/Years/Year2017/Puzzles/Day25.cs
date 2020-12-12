@@ -15,5 +15,10 @@ namespace ConsoleApp.Years.Year2017.Puzzles
             var checksum = turingMachine.Run();
             return new PuzzleResult($"Turing machine checksum: {checksum}.");
         }
+
+        public override PuzzleResult RunPart2()
+        {
+            return new EmptyPuzzleResult();
+        }
     }
 }

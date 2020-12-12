@@ -11,9 +11,14 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         public override PuzzleResult RunPart1()
         {
             var investigationDroid = new InvestigationDroid(FileInput);
-            investigationDroid.Run();
+            var password = investigationDroid.Run();
 
-            return new MissingPuzzleResult("No output");
+            return new PuzzleResult($"Password: {password}");
+        }
+
+        public override PuzzleResult RunPart2()
+        {
+            return new EmptyPuzzleResult();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Core.OxygenSystem
 
         public int Run()
         {
-            Console.Clear();
+            //Console.Clear();
             _steps = 0;
             _computer.Start();
             return _steps;
@@ -66,8 +66,8 @@ namespace Core.OxygenSystem
                 _matrix.WriteValue('X');
             }
 
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine(_matrix.Print(true, true, 'D', 'S'));
+            //Console.SetCursorPosition(0, 0);
+            //Console.WriteLine(_matrix.Print(true, true, 'D', 'S'));
         }
 
         private void TurnToUnvisitedDirection()

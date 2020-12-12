@@ -123,7 +123,6 @@ namespace Core.Radioisotope
                 return finishedFacility;
             var iterationCount = newFacilities.First().IterationCount;
             var facilityCount = newFacilities.Count;  
-            Console.WriteLine($"Iteration {iterationCount} complete. Item count: {facilityCount}");
             return FindFinishedFacility(newFacilities);
         }
 

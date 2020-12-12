@@ -27,7 +27,6 @@ namespace Core.BeverageBandits
                 Init(elfAttackPower);
                 var initialElfCount = _figures.Count(o => o.Type == BattleFigureType.Elf);
                 Run(isPrinterEnabled, true);
-                Console.WriteLine($"Attack power: {elfAttackPower}");
                 if (Winners == "Elves" && _figures.Count(o => o.Type == BattleFigureType.Elf) == initialElfCount)
                     break;
 
@@ -129,7 +128,6 @@ namespace Core.BeverageBandits
                 if (incrementRound)
                 {
                     round++;
-                    Console.WriteLine($"Round {round}");
                 }
 
                 if (isPrinterEnabled)

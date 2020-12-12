@@ -4,8 +4,8 @@
     {
         public override PuzzleResultStatus Status => PuzzleResultStatus.Empty;
 
-        public EmptyPuzzleResult(string message)
-            : base(message)
+        public EmptyPuzzleResult()
+            : base("No puzzle here")
         {
         }
     }

@@ -56,27 +56,5 @@ namespace Core.BalancedPresents
                 }
             }
         }
-
-        //private IList<IEnumerable<int>> FindGroups(List<int> presents)
-        //{
-        //    var groupSize = 2;
-        //    while (true)
-        //    {
-        //        Console.WriteLine($"Group size: {groupSize}");
-        //        var groups = PermutationGenerator.GetPermutations(presents, groupSize).ToList();
-        //        if (groups.Any())
-        //        {
-        //            var matchingGroups = groups.Where(o => o.Sum() == _partitionSum).ToList();
-        //            if (matchingGroups.Any())
-        //                return matchingGroups;
-        //        }
-        //        groupSize++;
-        //    }
-        //}
-
-        //private long GetQuantumEntanglement(IEnumerable<int> presents)
-        //{
-        //    return presents.Aggregate<int, long>(1, (current, present) => current * present);
-        //}
     }
 }

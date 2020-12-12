@@ -4,7 +4,21 @@ namespace Core.Passwords
 {
     public class PasswordValidator
     {
-        public bool IsValid(int pwd)
+        public bool IsValidPart1(int pwd)
+        {
+            var chars = pwd.ToString().ToCharArray();
+            var hasPair = PasswordAnalyzer.HasGroup(chars);
+            if (!hasPair)
+                return false;
+
+            var hasCorrectOrder = HasCorrectOrder(chars);
+            if (!hasCorrectOrder)
+                return false;
+
+            return true;
+        }
+
+        public bool IsValidPart2(int pwd)
         {
             var chars = pwd.ToString().ToCharArray();
             var hasPair = PasswordAnalyzer.HasGroupOfTwo(chars);

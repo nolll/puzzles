@@ -64,9 +64,9 @@ namespace Core.ArcadeCabinet
             if (_x == -1 && _y == 0)
             {
                 _score = value;
-                PrintScreen();
-                PrintScore();
-                Thread.Sleep(50);
+                //PrintScreen();
+                //PrintScore();
+                //Thread.Sleep(50);
             }
             else
             {

@@ -17,6 +17,11 @@ namespace ConsoleApp.Years.Year2015.Puzzles
             return new PuzzleResult($"Weather Machine code: {code}");
         }
 
+        public override PuzzleResult RunPart2()
+        {
+            return new EmptyPuzzleResult();
+        }
+
         private Params GetParams()
         {
             var words = FileInput.Replace(".", "").Replace(",", "").Split(' ');

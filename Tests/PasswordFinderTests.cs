@@ -10,7 +10,7 @@ namespace Tests
         public void PasswordIsValid(int pwd)
         {
             var passwordValidator = new PasswordValidator();
-            var result = passwordValidator.IsValid(pwd);
+            var result = passwordValidator.IsValidPart2(pwd);
 
             Assert.That(result, Is.True);
         }
@@ -22,7 +22,7 @@ namespace Tests
         public void PasswordIsInvalid(int pwd)
         {
             var passwordValidator = new PasswordValidator();
-            var result = passwordValidator.IsValid(pwd);
+            var result = passwordValidator.IsValidPart2(pwd);
 
             Assert.That(result, Is.False);
         }

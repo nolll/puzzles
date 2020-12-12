@@ -16,7 +16,19 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var passwordUpperbound = int.Parse(passwordBounds[1]);
 
             var passwordFinder = new Core.Passwords.PasswordFinder();
-            var passwords = passwordFinder.Find(passwordLowerbound, passwordUpperbound);
+            var passwords = passwordFinder.FindPart1(passwordLowerbound, passwordUpperbound);
+            var passwordCount = passwords.Count();
+            return new PuzzleResult($"Number of valid passwords: {passwordCount}");
+        }
+
+        public override PuzzleResult RunPart2()
+        {
+            var passwordBounds = Input.Split('-');
+            var passwordLowerbound = int.Parse(passwordBounds[0]);
+            var passwordUpperbound = int.Parse(passwordBounds[1]);
+
+            var passwordFinder = new Core.Passwords.PasswordFinder();
+            var passwords = passwordFinder.FindPart2(passwordLowerbound, passwordUpperbound);
             var passwordCount = passwords.Count();
             return new PuzzleResult($"Number of valid passwords: {passwordCount}");
         }

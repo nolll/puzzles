@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Core.Computer;
 
 namespace Core.SantasShip
@@ -8,8 +9,9 @@ namespace Core.SantasShip
     public class InvestigationDroid
     {
         private readonly ComputerInterface _computer;
-        private List<string> _commands;
+        private readonly List<string> _commands;
         private List<char> _currentCommand;
+        private StringBuilder _output = new StringBuilder();
 
         public InvestigationDroid(string program)
         {
@@ -104,9 +106,12 @@ namespace Core.SantasShip
                     .ToArray());
         }
 
-        public void Run()
+        public string Run()
         {
             _computer.Start();
+
+            var lastSentence = _output.ToString().Trim().Split('\n').Last().Trim();
+            return lastSentence.Split(' ')[11];
         }
 
         private long ReadInput()
@@ -134,7 +139,8 @@ namespace Core.SantasShip
 
         private void WriteOutput(long output)
         {
-            Console.Write((char)output);
+            _output.Append((char)output);
+            //Console.Write((char)output);
         }
     }
 }

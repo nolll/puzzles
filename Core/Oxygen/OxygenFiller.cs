@@ -17,7 +17,7 @@ namespace Core.Oxygen
 
         public int Fill()
         {
-            Console.Clear();
+            //Console.Clear();
             var iterations = 0;
             var recentlyFilledAddresses = _matrix.FindAddresses('X');
             while (_matrix.Values.Any(o => o == '.'))
@@ -39,9 +39,9 @@ namespace Core.Oxygen
 
                 iterations += 1;
 
-                Thread.Sleep(80);
-                Console.SetCursorPosition(0, 0);
-                Console.WriteLine(_matrix.Print(false, false));
+                //Thread.Sleep(80);
+                //Console.SetCursorPosition(0, 0);
+                //Console.WriteLine(_matrix.Print(false, false));
             }
             return iterations;
         }
@@ -99,7 +99,7 @@ namespace Core.Oxygen
                 y += 1;
             }
 
-            Console.WriteLine(matrix.Print(false, false));
+            //Console.WriteLine(matrix.Print(false, false));
             return matrix;
         }
     }

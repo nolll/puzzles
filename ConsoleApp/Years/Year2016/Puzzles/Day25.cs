@@ -14,5 +14,10 @@ namespace ConsoleApp.Years.Year2016.Puzzles
             var generator = new ClockSignalGenerator();
             return new PuzzleResult($"Lowest A: {generator.LowestA}");
         }
+
+        public override PuzzleResult RunPart2()
+        {
+            return new EmptyPuzzleResult();
+        }
     }
 }

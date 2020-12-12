@@ -11,6 +11,12 @@ namespace Core.Passwords
             return groups.Any(o => o == 2);
         }
 
+        public static bool HasGroup(IEnumerable<char> chars)
+        {
+            var groups = GetGroups(chars).Select(o => o.Count());
+            return groups.Any(o => o >= 2);
+        }
+
         private static IEnumerable<IEnumerable<char>> GetGroups(IEnumerable<char> chars)
         {
             var lastChar = ' ';

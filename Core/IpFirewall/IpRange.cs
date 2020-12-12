@@ -24,11 +24,6 @@ namespace Core.IpFirewall
             return Start < other.End && other.Start < End;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return base.Equals(obj);
-        }
-
         protected bool Equals(IpRange other)
         {
             return Start == other.Start && End == other.End;

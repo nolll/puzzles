@@ -13,7 +13,7 @@ namespace ConsoleApp
         private const int DayTimeout = PuzzleTimeout * 2;
 
         private const int Year = 2019;
-        private const int Day = 25;
+        private const int Day = 2;
 
         static void Main(string[] args)
         {
@@ -204,6 +204,8 @@ namespace ConsoleApp
         {
             var results = new List<DayResult>();
 
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("| day         | part 1     | part 2     | time   |");
             Console.WriteLine("--------------------------------------------------");
             foreach (var day in days)
             {

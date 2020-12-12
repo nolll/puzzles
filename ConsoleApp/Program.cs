@@ -61,26 +61,23 @@ namespace ConsoleApp
         public class DayResult
         {
             public Day Day { get; }
-            public PuzzleResult Result1 { get; }
-            public PuzzleResult Result2 { get; }
-            public TimeSpan TimeTaken { get; }
+            public TimedPuzzleResult Result1 { get; }
+            public TimedPuzzleResult Result2 { get; }
 
-            public DayResult(Day day, PuzzleResult result1, PuzzleResult result2, TimeSpan timeTaken)
+            public DayResult(Day day, TimedPuzzleResult result1, TimedPuzzleResult result2)
             {
                 Day = day;
                 Result1 = result1;
                 Result2 = result2;
-                TimeTaken = timeTaken;
             }
         }
 
         private static DayResult RunWithTimeout(Day day)
         {
-            var timer = new Timer();
-            var p1 = RunPuzzle(day.RunPart1);
-            var p2 = RunPuzzle(day.RunPart2);
+            var p1 = RunPuzzleWithTimer(day.RunPart1);
+            var p2 = RunPuzzleWithTimer(day.RunPart2);
             
-            return new DayResult(day, p1, p2, timer.FromStart);
+            return new DayResult(day, p1, p2);
         }
 
         private static void PrintDay(DayResult dayResult)
@@ -92,7 +89,9 @@ namespace ConsoleApp
                 Console.WriteLine();
                 PrintPuzzle(2, dayResult.Result2);
             }
-            PrintDayEnd(dayResult.TimeTaken);
+
+            var totalTimeTaken = dayResult.Result1.TimeTaken + dayResult.Result2.TimeTaken;
+            PrintDayEnd(totalTimeTaken);
         }
 
         private static void PrintDayAsTableRow(DayResult dayResult)
@@ -103,7 +102,6 @@ namespace ConsoleApp
             var p1Color = GetColor(dayResult.Result1.Status);
             var p2 = GetTableResult(dayResult.Result2).PadRight(10, ' ');
             var p2Color = GetColor(dayResult.Result2.Status);
-            var time = Formatter.FormatTime(dayResult.TimeTaken).PadLeft(6, ' ');
 
             var defaultColor = Console.ForegroundColor;
 
@@ -118,8 +116,6 @@ namespace ConsoleApp
             Console.Write(p2);
             Console.ForegroundColor = defaultColor;
             Console.Write(" | ");
-            Console.Write(time);
-            Console.Write(" |");
             Console.WriteLine();
         }
 
@@ -130,7 +126,7 @@ namespace ConsoleApp
                 : ConsoleColor.Green;
         }
 
-        private static string GetTableResult(PuzzleResult result)
+        private static string GetTableResult(TimedPuzzleResult result)
         {
             if (result.Status == PuzzleResultStatus.Empty)
                 return "";
@@ -141,10 +137,22 @@ namespace ConsoleApp
             if (result.Status == PuzzleResultStatus.Missing)
                 return "missing";
 
-            if (result.Status == PuzzleResultStatus.Timeout)
-                return "timeout";
+            var timeTaken = result.Status == PuzzleResultStatus.Timeout
+                ? TimeSpan.FromSeconds(PuzzleTimeout)
+                : result.TimeTaken;
 
-            return "ok";
+            var formattedTime = Formatter.FormatTime(timeTaken);
+
+            return result.Status == PuzzleResultStatus.Timeout
+                ? $">{formattedTime}"
+                : formattedTime;
+        }
+
+        private static TimedPuzzleResult RunPuzzleWithTimer(Func<PuzzleResult> func)
+        {
+            var timer = new Timer();
+            var result = RunPuzzle(func);
+            return new TimedPuzzleResult(result, timer.FromStart);
         }
 
         private static PuzzleResult RunPuzzle(Func<PuzzleResult> func)
@@ -154,12 +162,9 @@ namespace ConsoleApp
             {
                 var task1 = Task.Run(() => result = func());
                 if (!task1.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
-                    result = new TimeoutPuzzleResult($"Puzzle failed to finish within {PuzzleTimeout} seconds");
+                    return new TimeoutPuzzleResult($"Puzzle failed to finish within {PuzzleTimeout} seconds");
 
-                if(result == null)
-                    return new MissingPuzzleResult("Puzzle returned null");
-
-                return result;
+                return result ?? new MissingPuzzleResult("Puzzle returned null");
             }
             catch (Exception)
             {
@@ -202,27 +207,15 @@ namespace ConsoleApp
 
         private static void RunMany(IEnumerable<Day> days)
         {
-            var results = new List<DayResult>();
-
-            Console.WriteLine("--------------------------------------------------");
-            Console.WriteLine("| day         | part 1     | part 2     | time   |");
-            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("-----------------------------------------");
+            Console.WriteLine("| day         | part 1     | part 2     |");
+            Console.WriteLine("-----------------------------------------");
             foreach (var day in days)
             {
                 var result = RunWithTimeout(day);
-                results.Add(result);
                 PrintDayAsTableRow(result);
             }
-            Console.WriteLine("--------------------------------------------------");
-
-            //if (failedDays.Any())
-            //{
-            //    Console.WriteLine("Failed days");
-            //    foreach (var day in failedDays)
-            //    {
-            //        Console.WriteLine($"Day {day.Id} {day.Year}");
-            //    }
-            //}
+            Console.WriteLine("-----------------------------------------");
         }
 
         private static void ShowHelp()

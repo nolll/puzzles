@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         public override PuzzleResult RunPart1()
         {
             var calculator = new RouteCalculator(FileInput);
-            return new PuzzleResult($"Shortest route: {calculator.ShortestDistance}");
+            return new PuzzleResult(calculator.ShortestDistance, 117);
         }
 
         public override PuzzleResult RunPart2()
         {
             var calculator = new RouteCalculator(FileInput);
-            return new PuzzleResult($"Shortest route: {calculator.LongestDistance}");
+            return new PuzzleResult(calculator.LongestDistance, 909);
         }
     }
 }

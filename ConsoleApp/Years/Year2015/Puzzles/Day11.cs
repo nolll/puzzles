@@ -17,13 +17,13 @@ namespace ConsoleApp.Years.Year2015.Puzzles
 
         public override PuzzleResult RunPart1()
         {
-            return new PuzzleResult($"Next password 1: {FirstPassword}");
+            return new PuzzleResult(FirstPassword, "hxbxxyzz");
         }
 
         public override PuzzleResult RunPart2()
         {
             var pwd2 = Validator.FindNextPassword(FirstPassword);
-            return new PuzzleResult($"Next password 2: {pwd2}");
+            return new PuzzleResult(pwd2, "hxcaabcc");
         }
 
         private const string Input = "hxbxwxba";

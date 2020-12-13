@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         public override PuzzleResult RunPart1()
         {
             var digitalList = new DigitalList(FileInput);
-            return new PuzzleResult($"Difference: {digitalList.CodeMinusMemoryDiff}");
+            return new PuzzleResult(digitalList.CodeMinusMemoryDiff, 1342);
         }
 
         public override PuzzleResult RunPart2()
         {
             var digitalList = new DigitalList(FileInput);
-            return new PuzzleResult($"Difference: {digitalList.EncodedMinusCodeDiff}");
+            return new PuzzleResult(digitalList.EncodedMinusCodeDiff, 2074);
         }
     }
 }

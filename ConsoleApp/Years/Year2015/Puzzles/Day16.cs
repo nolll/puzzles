@@ -11,13 +11,13 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         public override PuzzleResult RunPart1()
         {
             var sueSelector = new SueSelector(FileInput);
-            return new PuzzleResult($"Sue number, part 1: {sueSelector.SueNumberPart1}");
+            return new PuzzleResult(sueSelector.SueNumberPart1, 373);
         }
 
         public override PuzzleResult RunPart2()
         {
             var sueSelector = new SueSelector(FileInput);
-            return new PuzzleResult($"Sue number, part 2: {sueSelector.SueNumberPart2}");
+            return new PuzzleResult(sueSelector.SueNumberPart2, 260);
         }
     }
 }

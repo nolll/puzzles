@@ -12,14 +12,14 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
             var controller = new ChristmasLightsController();
             controller.RunCommands(FileInput, false);
-            return new PuzzleResult($"Lit lights: {controller.LitCount}");
+            return new PuzzleResult(controller.LitCount, 377_891);
         }
 
         public override PuzzleResult RunPart2()
         {
             var controller = new ChristmasLightsController();
             controller.RunCommands(FileInput, true);
-            return new PuzzleResult($"Total brightness: {controller.TotalBrightness}");
+            return new PuzzleResult(controller.TotalBrightness, 14_110_788);
         }
     }
 }

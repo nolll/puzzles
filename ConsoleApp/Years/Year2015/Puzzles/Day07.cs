@@ -12,14 +12,14 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
             var circuit = new Circuit(FileInput);
             var runOne = circuit.RunOne("a");
-            return new PuzzleResult($"Signal A after run one: {runOne}");
+            return new PuzzleResult(runOne, 956);
         }
 
         public override PuzzleResult RunPart2()
         {
             var circuit = new Circuit(FileInput);
             var runTwo = circuit.RunTwo("a", "b");
-            return new PuzzleResult($"Signal A after run two: {runTwo}");
+            return new PuzzleResult(runTwo, 40_149);
         }
     }
 }

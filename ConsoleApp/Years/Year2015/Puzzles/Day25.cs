@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
             var p = GetParams();
             var codeFinder = new WeatherMachineCodeFinder();
             var code = codeFinder.FindCodeAt(p.TargetX, p.TargetY);
-            return new PuzzleResult($"Weather Machine code: {code}");
+            return new PuzzleResult(code, 2_650_453);
         }
 
         public override PuzzleResult RunPart2()

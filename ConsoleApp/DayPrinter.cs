@@ -25,7 +25,7 @@ namespace ConsoleApp
         protected static ConsoleColor GetColor(PuzzleResult result)
         {
             var status = result.Status;
-            if (status == PuzzleResultStatus.Failed || status == PuzzleResultStatus.Missing || status == PuzzleResultStatus.Timeout)
+            if (status == PuzzleResultStatus.Failed || status == PuzzleResultStatus.Missing || status == PuzzleResultStatus.Timeout || status == PuzzleResultStatus.Wrong)
                 return ConsoleColor.Red;
 
             return status == PuzzleResultStatus.Correct

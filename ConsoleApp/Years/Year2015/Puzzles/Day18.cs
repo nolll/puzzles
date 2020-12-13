@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
             var gif = new AnimatedGif(FileInput);
             gif.RunAnimation(100);
-            return new PuzzleResult($"Lights switched on: {gif.LightCount}");
+            return new PuzzleResult(gif.LightCount, 821);
         }
 
         public override PuzzleResult RunPart2()
         {
             var gif = new AnimatedGif(FileInput, true);
             gif.RunAnimation(100);
-            return new PuzzleResult($"Lights switched on, when corners are always lit: {gif.LightCount}");
+            return new PuzzleResult(gif.LightCount, 886);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Core.Eggnog;
+﻿using Core.Eggnog;
 
 namespace ConsoleApp.Years.Year2015.Puzzles
 {
@@ -13,15 +12,14 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
             var container = new EggnogContainers(FileInput);
             var combinations = container.GetCombinations(150);
-            return new PuzzleResult($"Combinations: {combinations.Count}");
+            return new PuzzleResult(combinations.Count, 1304);
         }
 
         public override PuzzleResult RunPart2()
         {
             var container = new EggnogContainers(FileInput);
             var combinations = container.GetCombinationsWithLeastContainers(150);
-            var containerCount = combinations.First().Count;
-            return new PuzzleResult($"Combinations with {containerCount} containers: {combinations.Count}");
+            return new PuzzleResult(combinations.Count, 18);
         }
     }
 }

@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         public override PuzzleResult RunPart1()
         {
             var table = new DinnerTable(FileInput);
-            return new PuzzleResult($"Happiness change: {table.HappinessChange}");
+            return new PuzzleResult(table.HappinessChange, 618);
         }
 
         public override PuzzleResult RunPart2()
         {
             var table = new DinnerTable(FileInput, true);
-            return new PuzzleResult($"Happiness change including me: {table.HappinessChange}");
+            return new PuzzleResult(table.HappinessChange, 601);
         }
     }
 }

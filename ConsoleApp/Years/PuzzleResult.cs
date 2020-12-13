@@ -15,13 +15,13 @@
         {
         }
 
-        public PuzzleResult(int? computedAnswer, int correctAnswer)
-            : this(computedAnswer?.ToString(), correctAnswer.ToString())
+        public PuzzleResult(int? answer, int correctAnswer)
+            : this(answer?.ToString(), correctAnswer.ToString())
         {
         }
 
-        public PuzzleResult(long? computedAnswer, long correctAnswer)
-            : this(computedAnswer?.ToString(), correctAnswer.ToString())
+        public PuzzleResult(long? answer, long correctAnswer)
+            : this(answer?.ToString(), correctAnswer.ToString())
         {
         }
 
@@ -31,11 +31,17 @@
             Status = status;
         }
 
-        private static PuzzleResultStatus VerifyResult(string a, string b)
+        private static PuzzleResultStatus VerifyResult(string answer, string correctAnswer)
         {
-            return a != null && b != null && a == b
+            if (answer == null)
+                return PuzzleResultStatus.Wrong;
+
+            if (correctAnswer == null)
+                return PuzzleResultStatus.Completed;
+
+            return answer == correctAnswer
                 ? PuzzleResultStatus.Correct
-                : PuzzleResultStatus.Completed;
+                : PuzzleResultStatus.Wrong;
         }
     }
 }

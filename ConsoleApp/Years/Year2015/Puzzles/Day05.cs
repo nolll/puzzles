@@ -11,15 +11,15 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         public override PuzzleResult RunPart1()
         {
             var evaluator = new NaughtyOrNiceEvaluator();
-            var nice1Count = evaluator.GetNiceCount1(FileInput);
-            return new PuzzleResult($"Number of nice strings (algorithm 1): {nice1Count}");
+            var niceCount = evaluator.GetNiceCount1(FileInput);
+            return new PuzzleResult(niceCount, 255);
         }
 
         public override PuzzleResult RunPart2()
         {
             var evaluator = new NaughtyOrNiceEvaluator();
-            var nice2Count = evaluator.GetNiceCount2(FileInput);
-            return new PuzzleResult($"Number of nice strings (algorithm 2): {nice2Count}");
+            var niceCount = evaluator.GetNiceCount2(FileInput);
+            return new PuzzleResult(niceCount, 55);
         }
     }
 }

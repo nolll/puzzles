@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         public override PuzzleResult RunPart1()
         {
             var bakery = new CookieBakery(FileInput);
-            return new PuzzleResult($"Highest score: {bakery.HighestScore}");
+            return new PuzzleResult(bakery.HighestScore, 21_367_368);
         }
 
         public override PuzzleResult RunPart2()
         {
             var bakery = new CookieBakery(FileInput);
-            return new PuzzleResult($"Highest score for cookies with 500 calories: {bakery.HighestScoreWith500Calories}");
+            return new PuzzleResult(bakery.HighestScoreWith500Calories, 1_766_400);
         }
     }
 }

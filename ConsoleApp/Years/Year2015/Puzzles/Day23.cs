@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         {
             var computer1 = new ChristmasComputer();
             computer1.Run(FileInput);
-            return new PuzzleResult($"Value of register B: {computer1.RegisterB}");
+            return new PuzzleResult(computer1.RegisterB, 307);
         }
 
         public override PuzzleResult RunPart2()
         {
             var computer = new ChristmasComputer();
             computer.Run(FileInput, 1);
-            return new PuzzleResult($"Value of register B: {computer.RegisterB}");
+            return new PuzzleResult(computer.RegisterB, 160);
         }
     }
 }

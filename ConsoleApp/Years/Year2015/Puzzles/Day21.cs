@@ -15,7 +15,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
             var p = GetParams();
             var simulator = new RpgSimulator();
             var leastGoldRequiredToWin = simulator.WinWithLowestCost(p.HitPoints, p.Damage, p.Armor);
-            return new PuzzleResult($"Least amount of gold to win: {leastGoldRequiredToWin}");
+            return new PuzzleResult(leastGoldRequiredToWin, 78);
         }
 
         public override PuzzleResult RunPart2()
@@ -23,7 +23,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
             var p = GetParams();
             var simulator = new RpgSimulator();
             var mostGoldThatLoses = simulator.LoseWithHighestCost(p.HitPoints, p.Damage, p.Armor);
-            return new PuzzleResult($"Most amount of gold that loses: {mostGoldThatLoses}");
+            return new PuzzleResult(mostGoldThatLoses, 148);
         }
 
         private Params GetParams()

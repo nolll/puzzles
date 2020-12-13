@@ -4,6 +4,7 @@
     {
         Correct,
         Completed,
+        Wrong,
         Missing,
         Empty,
         Failed,

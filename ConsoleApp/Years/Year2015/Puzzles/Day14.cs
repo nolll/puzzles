@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         public override PuzzleResult RunPart1()
         {
             var race = new ReindeerRace(FileInput, 2503);
-            return new PuzzleResult($"Winning distance: {race.WinningDistance}");
+            return new PuzzleResult(race.WinningDistance, 2655);
         }
 
         public override PuzzleResult RunPart2()
         {
             var race = new ReindeerRace(FileInput, 2503);
-            return new PuzzleResult($"Winning score: {race.WinningScore}");
+            return new PuzzleResult(race.WinningScore, 1059);
         }
     }
 }

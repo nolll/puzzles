@@ -11,16 +11,16 @@ namespace ConsoleApp.Years.Year2015.Puzzles
 
         public override PuzzleResult RunPart1()
         {
-            var presentDelivery1 = new PresentDelivery();
-            var house1 = presentDelivery1.Deliver1(Input);
-            return new PuzzleResult($"First house to get {FileInput} presents: {house1}");
+            var presentDelivery = new PresentDelivery();
+            var house = presentDelivery.Deliver1(Input);
+            return new PuzzleResult(house, 786_240);
         }
 
         public override PuzzleResult RunPart2()
         {
-            var presentDelivery2 = new PresentDelivery();
-            var house2 = presentDelivery2.Deliver2(Input);
-            return new PuzzleResult($"First house to get {FileInput} presents: {house2}");
+            var presentDelivery = new PresentDelivery();
+            var house = presentDelivery.Deliver2(Input);
+            return new PuzzleResult(house, 831_600);
         }
 
         private const int Input = 34_000_000;

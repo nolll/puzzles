@@ -16,7 +16,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
             var validator = new PasswordPolicyValidator();
             var policies = PuzzleInputReader.ReadLines(FileInput);
             var count = policies.Count(validator.IsValidAccordingToRuleOne);
-            return new PuzzleResult($"Number of valid passwords with rule 1: {count}");
+            return new PuzzleResult(count, 556);
         }
 
         public override PuzzleResult RunPart2()
@@ -24,7 +24,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
             var validator = new PasswordPolicyValidator();
             var policies = PuzzleInputReader.ReadLines(FileInput);
             var count = policies.Count(validator.IsValidAccordingToRuleTwo);
-            return new PuzzleResult($"Number of valid passwords with rule 2: {count}");
+            return new PuzzleResult(count, 605);
         }
     }
 }

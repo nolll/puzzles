@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var console = new GameConsoleRunner(FileInput);
             var acc = console.RunUntilLoop();
-            return new PuzzleResult($"Value of acc after loop: {acc}");
+            return new PuzzleResult(acc, 1446);
         }
 
         public override PuzzleResult RunPart2()
         {
             var console = new GameConsoleRunner(FileInput);
             var acc = console.RunUntilTermination();
-            return new PuzzleResult($"Value of acc after loop: {acc}");
+            return new PuzzleResult(acc, 1403);
         }
     }
 }

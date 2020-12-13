@@ -13,13 +13,13 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         public override PuzzleResult RunPart1()
         {
             var reader = new DeclarationFormReader(FileInput);
-            return new PuzzleResult($"Sum of at least one 'yes' answer: {reader.SumOfAtLeastOneYes}");
+            return new PuzzleResult(reader.SumOfAtLeastOneYes, 6778);
         }
 
         public override PuzzleResult RunPart2()
         {
             var reader = new DeclarationFormReader(FileInput);
-            return new PuzzleResult($"Sum of all 'yes' answer: {reader.SumOfAllYes}");
+            return new PuzzleResult(reader.SumOfAllYes, 3406);
         }
     }
 }

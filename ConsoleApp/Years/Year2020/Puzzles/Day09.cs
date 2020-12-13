@@ -14,14 +14,14 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var port = new XmasPort(FileInput, 25);
             var invalidNumber = port.FindFirstInvalidNumber();
-            return new PuzzleResult($"First invalid number: {invalidNumber}");
+            return new PuzzleResult(invalidNumber, 32321523);
         }
 
         public override PuzzleResult RunPart2()
         {
             var port = new XmasPort(FileInput, 25);
             var weakness = port.FindWeakness();
-            return new PuzzleResult($"First invalid number: {weakness}");
+            return new PuzzleResult(weakness, 4794981);
         }
     }
 }

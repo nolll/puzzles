@@ -22,10 +22,9 @@ namespace ConsoleApp
         private void PrintPuzzle(int part, PuzzleResult puzzleResult)
         {
             Console.WriteLine($"Part {part}:");
-            var output = puzzleResult.Answer ?? puzzleResult.Message;
             var color = GetColor(puzzleResult);
             SetColor(color);
-            Console.Write(output);
+            Console.Write(puzzleResult.Answer);
             ResetColor();
             Console.WriteLine();
         }

@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         public override PuzzleResult RunPart1()
         {
             var chain = new PowerAdapterChain(FileInput);
-            return new PuzzleResult($"The product is: {chain.DifferenceProduct}");
+            return new PuzzleResult(chain.DifferenceProduct, 2590);
         }
 
         public override PuzzleResult RunPart2()
         {
             var chain = new PowerAdapterChain(FileInput);
             var combinations = chain.GetTotalNumberOfCombinations();
-            return new PuzzleResult($"Total number of combinations: {combinations}");
+            return new PuzzleResult(combinations, 226_775_649_501_184);
         }
     }
 }

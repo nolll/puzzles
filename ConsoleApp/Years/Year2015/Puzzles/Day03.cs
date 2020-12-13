@@ -13,10 +13,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
             var grid = new DeliveryGrid();
             grid.DeliverBySanta(FileInput);
             
-            return new PuzzleResult(
-                $"Presents delivered to {grid.SantaDeliveryCount} houses by Santa", 
-                grid.SantaDeliveryCount, 
-                2592);
+            return new PuzzleResult(grid.SantaDeliveryCount, 2592);
         }
 
         public override PuzzleResult RunPart2()
@@ -24,10 +21,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
             var grid = new DeliveryGrid();
             grid.DeliverBySantaAndRobot(FileInput);
             
-            return new PuzzleResult(
-                $"Presents delivered to {grid.SantaDeliveryCount} houses by Santa and robot", 
-                grid.SantaDeliveryCount, 
-                2360);
+            return new PuzzleResult(grid.SantaDeliveryCount, 2360);
         }
     }
 }

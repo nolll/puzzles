@@ -12,14 +12,14 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var system = new SimpleFerryNavigationSystem(FileInput);
             system.Run();
-            return new PuzzleResult($"Manhattan Distance: {system.DistanceTravelled}");
+            return new PuzzleResult(system.DistanceTravelled, 1424);
         }
 
         public override PuzzleResult RunPart2()
         {
             var system = new WaypointFerryNavigationSystem(FileInput);
             system.Run();
-            return new PuzzleResult($"Manhattan Distance: {system.DistanceTravelled}");
+            return new PuzzleResult(system.DistanceTravelled, 63447);
         }
     }
 }

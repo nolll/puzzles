@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var simulator = new SeatingSimulatorAdjacentSeats(FileInput);
             simulator.Run();
-            return new PuzzleResult($"Occupied seats with algorithm 1: {simulator.OccupiedSeatCount}");
+            return new PuzzleResult(simulator.OccupiedSeatCount, 2359);
         }
 
         public override PuzzleResult RunPart2()
         {
             var simulator = new SeatingSimulatorVisibleSeats(FileInput);
             simulator.Run();
-            return new PuzzleResult($"Occupied seats with algorithm 2: {simulator.OccupiedSeatCount}");
+            return new PuzzleResult(simulator.OccupiedSeatCount, 2131);
         }
     }
 }

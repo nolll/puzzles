@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var system = new BusScheduler1(FileInput);
             var value = system.GetBusValue();
-            return new PuzzleResult("", value, 2298);
+            return new PuzzleResult(value, 2298);
         }
 
         public override PuzzleResult RunPart2()
         {
             var system = new BusScheduler2(FileInput);
             var value = system.GetContestMinute();
-            return new PuzzleResult(null, value, 783_685_719_679_632);
+            return new PuzzleResult(value, 783_685_719_679_632);
         }
     }
 }

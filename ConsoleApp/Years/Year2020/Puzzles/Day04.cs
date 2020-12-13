@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var processor = new PassportProcessor(FileInput);
             var passportCount = processor.GetNumberOfPassportsThatHasAllFields();
-            return new PuzzleResult($"Number of passports that has all fields: {passportCount}");
+            return new PuzzleResult(passportCount, 210);
         }
 
         public override PuzzleResult RunPart2()
         {
             var processor = new PassportProcessor(FileInput);
             var passportCount = processor.GetNumberOfValidPassports();
-            return new PuzzleResult($"Number of valid passports: {passportCount}");
+            return new PuzzleResult(passportCount, 131);
         }
     }
 }

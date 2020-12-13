@@ -13,10 +13,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
             var calc = new GiftWrappingCalculator();
             var paperResult = calc.GetRequiredPaper(FileInput);
 
-            return new PuzzleResult(
-                $"Required wrapping paper: {paperResult} square feet", 
-                paperResult, 
-                1606483);
+            return new PuzzleResult(paperResult, 1606483);
         }
 
         public override PuzzleResult RunPart2()
@@ -24,10 +21,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
             var calc = new GiftWrappingCalculator();
             var ribbonResult = calc.GetRequiredRibbon(FileInput);
             
-            return new PuzzleResult(
-                $"Required ribbon: {ribbonResult} feet", 
-                ribbonResult, 
-                3842356);
+            return new PuzzleResult(ribbonResult, 3842356);
         }
     }
 }

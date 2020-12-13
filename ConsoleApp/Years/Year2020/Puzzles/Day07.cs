@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var processor = new LuggageProcessor(FileInput);
             var count1 = processor.NumberOfBagsThatCanContainGoldBags();
-            return new PuzzleResult($"Number of outermost bags that can contain shiny gold bags: {count1}");
+            return new PuzzleResult(count1, 272);
         }
 
         public override PuzzleResult RunPart2()
         {
             var processor = new LuggageProcessor(FileInput);
             var count2 = processor.NumberOfBagsThatAGoldBagContains();
-            return new PuzzleResult($"Number of bags that shiny gold bag contains: {count2}");
+            return new PuzzleResult(count2, 172246);
         }
     }
 }

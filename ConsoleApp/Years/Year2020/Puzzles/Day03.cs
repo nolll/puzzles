@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var navigator = new TreeNavigator(FileInput);
             var treeCount = navigator.GetSingleTreeCount();
-            return new PuzzleResult($"Number of trees: {treeCount}");
+            return new PuzzleResult(treeCount, 198);
         }
 
         public override PuzzleResult RunPart2()
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
             var navigator = new TreeNavigator(FileInput);
             var treeCounts = navigator.GetAllTreeCounts().ToList();
             var product = treeCounts.Aggregate((long)1, (a, b) => a * b);
-            return new PuzzleResult($"Number of trees for all trajectories: {product}");
+            return new PuzzleResult(product, 5_140_884_672);
         }
     }
 }

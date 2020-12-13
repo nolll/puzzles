@@ -18,20 +18,20 @@ namespace Core.BusSchedule
 
         public int GetBusValue()
         {
-            var buses = _busDepartureMinutes.Select(o => new BusMinute(o, o - _earliestMinute % o)).ToList();
-            var bestBus = buses.OrderBy(o => o.WaitMinutes).First();
-            return bestBus.Bus * bestBus.WaitMinutes;
+            var buses = _busDepartureMinutes.Select(o => new Bus(o, o - _earliestMinute % o)).ToList();
+            var bestBus = buses.OrderBy(o => o.Delay).First();
+            return bestBus.Id * bestBus.Delay;
         }
 
-        private class BusMinute
+        private class Bus
         {
-            public int Bus { get; }
-            public int WaitMinutes { get; }
+            public int Id { get; }
+            public int Delay { get; }
 
-            public BusMinute(int bus, int waitMinutes)
+            public Bus(int id, int delay)
             {
-                Bus = bus;
-                WaitMinutes = waitMinutes;
+                Id = id;
+                Delay = delay;
             }
         }
     }

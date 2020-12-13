@@ -20,6 +20,11 @@
         {
         }
 
+        public PuzzleResult(string message, long? computedAnswer, long correctAnswer)
+            : this(message, computedAnswer?.ToString(), correctAnswer.ToString())
+        {
+        }
+
         protected PuzzleResult(string message, PuzzleResultStatus status)
         {
             Message = message;

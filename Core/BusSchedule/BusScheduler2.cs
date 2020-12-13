@@ -19,48 +19,53 @@ namespace Core.BusSchedule
 
         public long GetContestMinute()
         {
-            var buses = new List<BusMinute>();
+            var buses = new List<Bus>();
             for (var i = 0; i < _busDepartureMinutes.Count; i++)
             {
                 var busStr = _busDepartureMinutes[i];
                 if (busStr != "x")
                 {
-                    buses.Add(new BusMinute(long.Parse(busStr), i));
+                    buses.Add(new Bus(long.Parse(busStr), i));
                 }
             }
 
-            buses = buses.OrderByDescending(o => o.Bus).ToList();
+            buses = buses.OrderByDescending(o => o.Id).ToList();
             var startBus = buses.First();
-            var increment = startBus.Bus;
+            var increment = startBus.Id;
             var time = increment - startBus.Delay;
             var busCount = 1;
 
             while (busCount <= buses.Count)
             {
                 var currentBuses = buses.Take(busCount).ToList();
-                while (!FoundAllMatches(currentBuses, time))
+                while (!IsMatching(currentBuses, time))
                     time += increment;
 
-                increment = currentBuses.Select(t => t.Bus).Aggregate(MathTools.Lcm);
+                increment = currentBuses.Select(t => t.Id).Aggregate(MathTools.Lcm);
                 busCount++;
             }
 
             return time;
         }
 
-        private bool FoundAllMatches(List<BusMinute> currentBuses, long time)
+        private static bool IsMatching(IEnumerable<Bus> currentBuses, long time)
         {
-            return currentBuses.All(t => (time + t.Delay) % t.Bus == 0);
+            return currentBuses.All(o => IsMatching(o, time));
         }
 
-        private class BusMinute
+        private static bool IsMatching(Bus bus, long time)
         {
-            public long Bus { get; }
+            return (time + bus.Delay) % bus.Id == 0;
+        }
+
+        private class Bus
+        {
+            public long Id { get; }
             public long Delay { get; }
 
-            public BusMinute(long bus, long delay)
+            public Bus(long id, long delay)
             {
-                Bus = bus;
+                Id = id;
                 Delay = delay;
             }
         }

@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var squareCodeFinder = new SquareKeyCodeFinder();
             var squareCode = squareCodeFinder.Find(FileInput);
-            return new PuzzleResult($"Square keycode: {squareCode}");
+            return new PuzzleResult(squareCode, "61529");
         }
 
         public override PuzzleResult RunPart2()
         {
             var diamondCodeFinder = new DiamondKeyCodeFinder();
-            var diamonCode = diamondCodeFinder.Find(FileInput);
-            return new PuzzleResult($"Diamond keycode: {diamonCode}");
+            var diamondCode = diamondCodeFinder.Find(FileInput);
+            return new PuzzleResult(diamondCode, "C2C28");
         }
     }
 }

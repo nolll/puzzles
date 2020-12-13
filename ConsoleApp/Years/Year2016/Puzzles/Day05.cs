@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var generator = new PasswordGenerator();
             var pwd = generator.Generate1(Input);
-            return new PuzzleResult($"Password 1: {pwd}");
+            return new PuzzleResult(pwd, "2414bc77");
         }
 
         public override PuzzleResult RunPart2()
         {
             var generator = new PasswordGenerator();
             var pwd = generator.Generate2(Input);
-            return new PuzzleResult($"Password 2: {pwd}");
+            return new PuzzleResult(pwd, "437e60fc");
         }
 
         private static string Input => "wtnhxymk";

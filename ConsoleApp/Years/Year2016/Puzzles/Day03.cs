@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var validator = new TriangleValidator();
             var horizontalValidCount = validator.GetHorizontalValidCount(FileInput);
-            return new PuzzleResult($"Valid horizontal triangles: {horizontalValidCount}");
+            return new PuzzleResult(horizontalValidCount, 982);
         }
 
         public override PuzzleResult RunPart2()
         {
             var validator = new TriangleValidator();
             var verticalValidCount = validator.GetVerticalValidCount(FileInput);
-            return new PuzzleResult($"Valid vertical triangles: {verticalValidCount}");
+            return new PuzzleResult(verticalValidCount, 1826);
         }
     }
 }

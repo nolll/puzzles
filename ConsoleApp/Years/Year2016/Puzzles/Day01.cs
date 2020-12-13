@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var calc = new EasterbunnyDistanceCalculator();
             calc.Go(FileInput);
-            return new PuzzleResult($"Distance to target: {calc.DistanceToTarget}");
+            return new PuzzleResult(calc.DistanceToTarget, 262);
         }
 
         public override PuzzleResult RunPart2()
         {
             var calc = new EasterbunnyDistanceCalculator();
-            return new PuzzleResult($"Distance to first repeated address: {calc.DistanceToFirstRepeat}");
+            return new PuzzleResult(calc.DistanceToFirstRepeat, 131);
         }
     }
 }

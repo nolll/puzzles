@@ -13,13 +13,13 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var validator = new RoomValidator(FileInput);
             var sum = validator.SumOfIds;
-            return new PuzzleResult($"Sum of valid room ids: {sum}");
+            return new PuzzleResult(sum, 278_221);
         }
 
         public override PuzzleResult RunPart2()
         {
             var validator = new RoomValidator(FileInput);
-            return new PuzzleResult($"Northpole object storage room: {validator.NorthpoleObjectStorageId}");
+            return new PuzzleResult(validator.NorthpoleObjectStorageId, 267);
         }
     }
 }

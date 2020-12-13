@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var dragonCurve = new DragonCurve();
             var checksum = dragonCurve.Run(Input, 272);
-            return new PuzzleResult($"Checksum 1: {checksum}");
+            return new PuzzleResult(checksum, "10010010110011010");
         }
 
         public override PuzzleResult RunPart2()
         {
             var dragonCurve = new DragonCurve();
             var checksum = dragonCurve.Run(Input, 35651584);
-            return new PuzzleResult($"Checksum 2: {checksum}");
+            return new PuzzleResult(checksum, "01010100101011100");
         }
 
         private const string Input = "01000100010010111";

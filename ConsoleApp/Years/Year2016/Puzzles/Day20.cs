@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var rules = new FirewallRules(FileInput);
             var ip = rules.GetLowestUnblockedIp();
-            return new PuzzleResult($"Lowest unblocked ip: {ip}");
+            return new PuzzleResult(ip, 14_975_795);
         }
 
         public override PuzzleResult RunPart2()
         {
             var rules = new FirewallRules(FileInput);
             var ipCount = rules.GetAllowedIpCount(Upperbound);
-            return new PuzzleResult($"Number of allowed ips: {ipCount}");
+            return new PuzzleResult(ipCount, 101);
         }
 
         private const long Upperbound = 4_294_967_295;

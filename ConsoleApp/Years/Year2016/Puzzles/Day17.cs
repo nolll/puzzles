@@ -13,13 +13,13 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var maze = new LockedDoorMaze();
             maze.FindPaths(Input);
-            return new PuzzleResult($"Shortest path: {maze.ShortestPath}");
+            return new PuzzleResult(maze.ShortestPath, "RLDRUDRDDR");
         }
 
         public override PuzzleResult RunPart2()
         {
             var maze = new LockedDoorMaze();
-            return new PuzzleResult($"Longest path length: {maze.LongestPath.Length}");
+            return new PuzzleResult(maze.LongestPath.Length, 498);
         }
 
         private const string Input = "yjjvjgan";

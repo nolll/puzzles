@@ -11,15 +11,15 @@ namespace ConsoleApp.Years.Year2016.Puzzles
 
         public override PuzzleResult RunPart1()
         {
-            var computer1 = new SafeCrackingComputerPart1(FileInput, 7, 0);
-            return new PuzzleResult($"Value in register A: {computer1.ValueA}");
+            var computer = new SafeCrackingComputerPart1(FileInput, 7, 0);
+            return new PuzzleResult(computer.ValueA, 12_748);
         }
 
         public override PuzzleResult RunPart2()
         {
             // By inspecting output from the computer I realized that it is calculating the factorial of 12
-            var computer2 = new SafeCrackingComputerPart2(FileInput, 12, 0);
-            return new PuzzleResult($"Value in register A: {computer2.ValueA}");
+            var computer = new SafeCrackingComputerPart2(FileInput, 12, 0);
+            return new PuzzleResult(computer.ValueA, 479_009_308);
         }
     }
 }

@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var scrambler = new StringScrambler(FileInput);
             var scrambled = scrambler.Scramble("abcdefgh");
-            return new PuzzleResult($"Scrambled string: {scrambled}");
+            return new PuzzleResult(scrambled, "dbfgaehc");
         }
 
         public override PuzzleResult RunPart2()
         {
             var scrambler = new StringScrambler(FileInput);
             var unscrambled = scrambler.Unscramble("fbgdceah");
-            return new PuzzleResult($"Unscrambled string: {unscrambled}");
+            return new PuzzleResult(unscrambled, "aghfcdeb");
         }
     }
 }

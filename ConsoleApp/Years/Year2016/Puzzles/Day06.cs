@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var reader = new RepetitionCodeReader();
             var messageMostCommon = reader.ReadMostCommon(FileInput);
-            return new PuzzleResult($"Message most common: {messageMostCommon}");
+            return new PuzzleResult(messageMostCommon, "ygjzvzib");
         }
 
         public override PuzzleResult RunPart2()
         {
             var reader = new RepetitionCodeReader();
             var messageLeastCommon = reader.ReadLeastCommon(FileInput);
-            return new PuzzleResult($"Message least common: {messageLeastCommon}");
+            return new PuzzleResult(messageLeastCommon, "pdesmnoz");
         }
     }
 }

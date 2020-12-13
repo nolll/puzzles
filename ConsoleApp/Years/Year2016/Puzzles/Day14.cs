@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         public override PuzzleResult RunPart1()
         {
             var generator = new KeyGenerator(Input);
-            return new PuzzleResult($"Index of 64th key: {generator.IndexOf64thKey}");
+            return new PuzzleResult(generator.IndexOf64thKey, 16_106);
         }
 
         public override PuzzleResult RunPart2()
         {
             var generator = new KeyGenerator(Input, true);
-            return new PuzzleResult($"Index of 64th stretched key: {generator.IndexOf64thKey}");
+            return new PuzzleResult(generator.IndexOf64thKey, 22_423);
         }
 
         private static string Input => "zpqevtbw";

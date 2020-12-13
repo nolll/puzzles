@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var tester = new IpTester();
             var tlsSupportCount = tester.TlsSupportCount(FileInput);
-            return new PuzzleResult($"Valid tls ip addresses: {tlsSupportCount}");
+            return new PuzzleResult(tlsSupportCount, 105);
         }
 
         public override PuzzleResult RunPart2()
         {
             var tester = new IpTester();
             var sslSupportCount = tester.SslSupportCount(FileInput);
-            return new PuzzleResult($"Valid ssl ip addresses: {sslSupportCount}");
+            return new PuzzleResult(sslSupportCount, 258);
         }
     }
 }

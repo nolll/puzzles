@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var detector = new FloorTrapDetector(FileInput);
             detector.FindTraps(40);
-            return new PuzzleResult($"Number of safe tiles after 40 rows: {detector.SafeCount}");
+            return new PuzzleResult(detector.SafeCount, 1989);
         }
 
         public override PuzzleResult RunPart2()
         {
             var detector = new FloorTrapDetector(FileInput);
             detector.FindTraps(400_000);
-            return new PuzzleResult($"Number of safe tiles after 400000 rows: {detector.SafeCount}");
+            return new PuzzleResult(detector.SafeCount, 19_999_894);
         }
     }
 }

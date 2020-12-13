@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         public override PuzzleResult RunPart1()
         {
             var decompressor = new FileDecompressor(FileInput);
-            return new PuzzleResult($"Decompressed length V1: {decompressor.DecompressedLengthV1}");
+            return new PuzzleResult(decompressor.DecompressedLengthV1, 107_035);
         }
 
         public override PuzzleResult RunPart2()
         {
             var decompressor = new FileDecompressor(FileInput);
-            return new PuzzleResult($"Decompressed length V2: {decompressor.DecompressedLengthV2}");
+            return new PuzzleResult(decompressor.DecompressedLengthV2, 11_451_628_995);
         }
     }
 }

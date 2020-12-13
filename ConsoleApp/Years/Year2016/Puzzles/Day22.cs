@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var storageGrid = new StorageGrid(FileInput);
             var pairCount = storageGrid.GetViablePairCount();
-            return new PuzzleResult($"Number of viable pairs: {pairCount}");
+            return new PuzzleResult(pairCount, 950);
         }
 
         public override PuzzleResult RunPart2()
         {
             var storageGrid = new StorageGrid(FileInput);
             var moveCount = storageGrid.MoveStorage();
-            return new PuzzleResult($"Least number of moves: {moveCount}");
+            return new PuzzleResult(moveCount, 256);
         }
     }
 }

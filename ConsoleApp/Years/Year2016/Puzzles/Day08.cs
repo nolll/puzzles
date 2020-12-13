@@ -13,14 +13,22 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         {
             var simulator = new ScreenSimulator(50, 6);
             var simulatorResult = simulator.Run(FileInput);
-            return new PuzzleResult($"Pixels on screen: {simulatorResult.PixelCount}");
+            return new PuzzleResult(simulatorResult.PixelCount, 121);
         }
 
         public override PuzzleResult RunPart2()
         {
             var simulator = new ScreenSimulator(50, 6);
             var simulatorResult = simulator.Run(FileInput);
-            return new PuzzleResult($"Screen:\r\n{simulatorResult.PrintOut}");
+            return new PuzzleResult(simulatorResult.PrintOut, CorrectPrintout.Trim());
         }
+
+        private const string CorrectPrintout = @"
+###  #  # ###  #  #  ##  ####  ##  ####  ### #    
+#  # #  # #  # #  # #  # #    #  # #      #  #    
+#  # #  # #  # #  # #    ###  #  # ###    #  #    
+###  #  # ###  #  # #    #    #  # #      #  #    
+# #  #  # # #  #  # #  # #    #  # #      #  #    
+#  #  ##  #  #  ##   ##  ####  ##  ####  ### ####";
     }
 }

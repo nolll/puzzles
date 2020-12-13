@@ -3,7 +3,7 @@ using ConsoleApp.Years;
 
 namespace ConsoleApp
 {
-    public class MultiDayPrinter
+    public class MultiDayPrinter : DayPrinter
     {
         private readonly int _timeout;
 
@@ -28,31 +28,18 @@ namespace ConsoleApp
             var p2 = GetTableResult(dayResult.Result2).PadRight(10, ' ');
             var p2Color = GetColor(dayResult.Result2);
 
-            var defaultColor = Console.ForegroundColor;
-
             Console.Write("| ");
             Console.Write(dayAndYear);
             Console.Write(" | ");
-            Console.ForegroundColor = p1Color;
+            SetColor(p1Color);
             Console.Write(p1);
-            Console.ForegroundColor = defaultColor;
+            ResetColor();
             Console.Write(" | ");
-            Console.ForegroundColor = p2Color;
+            SetColor(p2Color);
             Console.Write(p2);
-            Console.ForegroundColor = defaultColor;
-            Console.Write(" | ");
+            ResetColor();
+            Console.Write(" |");
             Console.WriteLine();
-        }
-
-        private static ConsoleColor GetColor(PuzzleResult result)
-        {
-            var status = result.Status;
-            if (status == PuzzleResultStatus.Failed || status == PuzzleResultStatus.Missing || status == PuzzleResultStatus.Timeout)
-                return ConsoleColor.Red;
-
-            return status == PuzzleResultStatus.Correct
-                ? ConsoleColor.Green
-                : ConsoleColor.Yellow;
         }
 
         private string GetTableResult(TimedPuzzleResult result)

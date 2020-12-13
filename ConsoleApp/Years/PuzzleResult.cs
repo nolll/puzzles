@@ -3,15 +3,21 @@
     public class PuzzleResult
     {
         public string Message { get; }
+        public string Answer { get; }
         public virtual PuzzleResultStatus Status { get; }
 
         public PuzzleResult(string message)
-            : this(message, PuzzleResultStatus.Completed)
+            : this(message, null, PuzzleResultStatus.Completed)
         {
         }
 
-        public PuzzleResult(string message, string computedAnswer, string correctAnswer)
-            : this(message, VerifyResult(computedAnswer, correctAnswer))
+        public PuzzleResult(string message, string answer)
+            : this(message, answer, PuzzleResultStatus.Completed)
+        {
+        }
+
+        public PuzzleResult(string message, string answer, string correctAnswer)
+            : this(message, answer, VerifyResult(answer, correctAnswer))
         {
         }
 
@@ -25,15 +31,16 @@
         {
         }
 
-        protected PuzzleResult(string message, PuzzleResultStatus status)
+        protected PuzzleResult(string message, string answer, PuzzleResultStatus status)
         {
             Message = message;
+            Answer = answer;
             Status = status;
         }
 
         private static PuzzleResultStatus VerifyResult(string a, string b)
         {
-            return a == b
+            return a != null && b != null && a == b
                 ? PuzzleResultStatus.Correct
                 : PuzzleResultStatus.Completed;
         }

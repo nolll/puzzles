@@ -3,7 +3,7 @@ using ConsoleApp.Years;
 
 namespace ConsoleApp
 {
-    public class SingleDayPrinter
+    public class SingleDayPrinter : DayPrinter
     {
         public void PrintDay(DayResult dayResult)
         {
@@ -19,10 +19,15 @@ namespace ConsoleApp
             PrintDayEnd(totalTimeTaken);
         }
 
-        private static void PrintPuzzle(int part, PuzzleResult puzzleResult)
+        private void PrintPuzzle(int part, PuzzleResult puzzleResult)
         {
             Console.WriteLine($"Part {part}:");
-            Console.WriteLine(puzzleResult.Message);
+            var output = puzzleResult.Answer ?? puzzleResult.Message;
+            var color = GetColor(puzzleResult);
+            SetColor(color);
+            Console.Write(output);
+            ResetColor();
+            Console.WriteLine();
         }
 
         private static void PrintDayTitle(Day day)

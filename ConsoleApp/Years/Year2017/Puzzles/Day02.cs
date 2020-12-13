@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         public override PuzzleResult RunPart1()
         {
             var spreadsheet = new Spreadsheet(FileInput);
-            return new PuzzleResult($"Spreadsheet max/min checksum: {spreadsheet.ChecksumMaxMin}");
+            return new PuzzleResult(spreadsheet.ChecksumMaxMin, 42_378);
         }
 
         public override PuzzleResult RunPart2()
         {
             var spreadsheet = new Spreadsheet(FileInput);
-            return new PuzzleResult($"Spreadsheet division checksum: {spreadsheet.ChecksumDivision}");
+            return new PuzzleResult(spreadsheet.ChecksumDivision, 246);
         }
     }
 }

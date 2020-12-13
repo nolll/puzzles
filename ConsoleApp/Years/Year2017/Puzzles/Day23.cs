@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
             var processor1 = new CoProcessor(FileInput);
             processor1.Run();
-            return new PuzzleResult($"The mul instruction was invoked {processor1.MulCount} times.");
+            return new PuzzleResult(processor1.MulCount, 4225);
         }
 
         public override PuzzleResult RunPart2()
         {
             var processor2 = new OptimizedCoProcessor();
             processor2.Run();
-            return new PuzzleResult($"Value left in register h: {processor2.H}.");
+            return new PuzzleResult(processor2.H, 905);
         }
     }
 }

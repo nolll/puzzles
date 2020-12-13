@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
             var duel = GeneratorDuel.Parse(FileInput);
             duel.Run(40_000_000);
-            return new PuzzleResult($"Final count part 1: {duel.FinalCount}");
+            return new PuzzleResult(duel.FinalCount, 626);
         }
 
         public override PuzzleResult RunPart2()
         {
             var duel2 = GeneratorDuel.Parse(FileInput);
             duel2.Run2(5_000_000);
-            return new PuzzleResult($"Final count part 2: {duel2.FinalCount}");
+            return new PuzzleResult(duel2.FinalCount, 306);
         }
     }
 }

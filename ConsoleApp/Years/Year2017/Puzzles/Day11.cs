@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         public override PuzzleResult RunPart1()
         {
             var navigator = new HexGridNavigator(FileInput);
-            return new PuzzleResult($"Last distance: {navigator.EndDistance}");
+            return new PuzzleResult(navigator.EndDistance, 808);
         }
 
         public override PuzzleResult RunPart2()
         {
             var navigator = new HexGridNavigator(FileInput);
-            return new PuzzleResult($"Max distance: {navigator.MaxDistance}");
+            return new PuzzleResult(navigator.MaxDistance, 1556);
         }
     }
 }

@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         public override PuzzleResult RunPart1()
         {
             var calculator = new CpuInstructionCalculator(FileInput);
-            return new PuzzleResult($"Largest value at end: {calculator.LargestValueAtEnd}");
+            return new PuzzleResult(calculator.LargestValueAtEnd, 6012);
         }
 
         public override PuzzleResult RunPart2()
         {
             var calculator = new CpuInstructionCalculator(FileInput);
-            return new PuzzleResult($"Largest value ever: {calculator.LargestValueEver}");
+            return new PuzzleResult(calculator.LargestValueEver, 6369);
         }
     }
 }

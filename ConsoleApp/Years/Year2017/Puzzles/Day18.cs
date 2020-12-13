@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
             var single = new SingleRunner(FileInput);
             single.Run();
-            return new PuzzleResult($"Recovered frequency: {single.RecoveredFrequency}");
+            return new PuzzleResult(single.RecoveredFrequency, 4601);
         }
 
         public override PuzzleResult RunPart2()
         {
             var duet = new DuetRunner(FileInput);
             duet.Run();
-            return new PuzzleResult($"Program 1 send count: {duet.Program1SendCount}");
+            return new PuzzleResult(duet.Program1SendCount, 6858);
         }
     }
 }

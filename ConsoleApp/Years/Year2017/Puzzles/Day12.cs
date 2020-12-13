@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         public override PuzzleResult RunPart1()
         {
             var pipes = new Pipes(FileInput);
-            return new PuzzleResult($"Number of connections: {pipes.PipesInGroupZero}");
+            return new PuzzleResult(pipes.PipesInGroupZero, 145);
         }
 
         public override PuzzleResult RunPart2()
         {
             var pipes = new Pipes(FileInput);
-            return new PuzzleResult($"Number of groups: {pipes.GroupCount}");
+            return new PuzzleResult(pipes.GroupCount, 207);
         }
     }
 }

@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         public override PuzzleResult RunPart1()
         {
             var defragmenter = new DiskDefragmenter(Input);
-            return new PuzzleResult($"Used squares: {defragmenter.UsedCount}");
+            return new PuzzleResult(defragmenter.UsedCount, 8222);
         }
 
         public override PuzzleResult RunPart2()
         {
             var defragmenter = new DiskDefragmenter(Input);
-            return new PuzzleResult($"Region count: {defragmenter.RegionCount}");
+            return new PuzzleResult(defragmenter.RegionCount, 1086);
         }
 
         private const string Input = "amgozmfv";

@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
             var reallocator = new MemoryReallocator(FileInput);
             reallocator.Run();
-            return new PuzzleResult($"Steps to repeat: {reallocator.Steps}");
+            return new PuzzleResult(reallocator.Steps, 6681);
         }
 
         public override PuzzleResult RunPart2()
         {
             var reallocator = new MemoryReallocator(FileInput);
             reallocator.Run();
-            return new PuzzleResult($"Loop size: {reallocator.LoopSize}");
+            return new PuzzleResult(reallocator.LoopSize, 2392);
         }
     }
 }

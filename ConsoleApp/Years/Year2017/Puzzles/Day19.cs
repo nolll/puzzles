@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
             var finder = new TubeRouteFinder(FileInput);
             finder.FindRoute();
-            return new PuzzleResult($"Letters found: {finder.Route}");
+            return new PuzzleResult(finder.Route, "PVBSCMEQHY");
         }
 
         public override PuzzleResult RunPart2()
         {
             var finder = new TubeRouteFinder(FileInput);
             finder.FindRoute();
-            return new PuzzleResult($"Step count: {finder.StepCount}");
+            return new PuzzleResult(finder.StepCount, 17_736);
         }
     }
 }

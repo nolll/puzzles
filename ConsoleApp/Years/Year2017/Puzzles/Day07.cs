@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         public override PuzzleResult RunPart1()
         {
             var towers = new RecursiveTowers(FileInput);
-            return new PuzzleResult($"Name of bottom tower: {towers.BottomName}");
+            return new PuzzleResult(towers.BottomName, "dgoocsw");
         }
 
         public override PuzzleResult RunPart2()
         {
             var towers = new RecursiveTowers(FileInput);
-            return new PuzzleResult($"Adjusted weight of disc with error: {towers.AdjustedWeight}");
+            return new PuzzleResult(towers.AdjustedWeight, 1275);
         }
     }
 }

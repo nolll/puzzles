@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
             var dancingPrograms1 = new DancingPrograms();
             dancingPrograms1.Dance(FileInput, 1);
-            return new PuzzleResult($"Programs after one dance: {dancingPrograms1.Programs}");
+            return new PuzzleResult(dancingPrograms1.Programs, "ehdpincaogkblmfj");
         }
 
         public override PuzzleResult RunPart2()
         {
             var dancingPrograms2 = new DancingPrograms();
             dancingPrograms2.Dance(FileInput, 1_000_000_000);
-            return new PuzzleResult($"Programs after one billion dances: {dancingPrograms2.Programs}");
+            return new PuzzleResult(dancingPrograms2.Programs, "bpcekomfgjdlinha");
         }
     }
 }

@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         public override PuzzleResult RunPart1()
         {
             var memory1 = new SpiralMemory(Input, SpiralMemoryMode.RunToTarget);
-            return new PuzzleResult($"Steps from center: {memory1.Distance}");
+            return new PuzzleResult(memory1.Distance, 438);
         }
 
         public override PuzzleResult RunPart2()
         {
             var memory2 = new SpiralMemory(Input, SpiralMemoryMode.RunToValue);
-            return new PuzzleResult($"First value above input: {memory2.Value}");
+            return new PuzzleResult(memory2.Value, 266_330);
         }
 
         private const int Input = 265149;

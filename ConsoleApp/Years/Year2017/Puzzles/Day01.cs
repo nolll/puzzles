@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         public override PuzzleResult RunPart1()
         {
             var calc = new CaptchaCalculator(FileInput);
-            return new PuzzleResult($"Captcha sum 1: {calc.Sum1}");
+            return new PuzzleResult(calc.Sum1, 1177);
         }
 
         public override PuzzleResult RunPart2()
         {
             var calc = new CaptchaCalculator(FileInput);
-            return new PuzzleResult($"Captcha sum 2: {calc.Sum2}");
+            return new PuzzleResult(calc.Sum2, 1060);
         }
     }
 }

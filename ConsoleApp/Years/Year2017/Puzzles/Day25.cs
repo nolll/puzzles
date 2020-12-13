@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
             var turingMachine = new TuringMachine(FileInput);
             var checksum = turingMachine.Run();
-            return new PuzzleResult($"Turing machine checksum: {checksum}.");
+            return new PuzzleResult(checksum, 4387);
         }
 
         public override PuzzleResult RunPart2()

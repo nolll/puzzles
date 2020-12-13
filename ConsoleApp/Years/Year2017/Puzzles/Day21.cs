@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2017.Puzzles
         {
             var artGenerator1 = new FractalArtGenerator(FileInput);
             artGenerator1.Run(5);
-            return new PuzzleResult($"Pixels on after 5 iterations: {artGenerator1.PixelsOn}");
+            return new PuzzleResult(artGenerator1.PixelsOn, 123);
         }
 
         public override PuzzleResult RunPart2()
         {
             var artGenerator2 = new FractalArtGenerator(FileInput);
             artGenerator2.Run(18);
-            return new PuzzleResult($"Pixels on after 18 iterations: {artGenerator2.PixelsOn}");
+            return new PuzzleResult(artGenerator2.PixelsOn, 1984683);
         }
     }
 }

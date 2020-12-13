@@ -11,8 +11,8 @@ namespace ConsoleApp
         private static DaySelector _daySelector;
         private const int PuzzleTimeout = 10;
 
-        private const int Year = 2015;
-        private const int Day = 1;
+        private const int Year = 2020;
+        private const int Day = 13;
 
         static void Main(string[] args)
         {
@@ -42,39 +42,20 @@ namespace ConsoleApp
                 parameters = new Parameters(day: Day, year: Year);
             }
 
-            var result = RunDay(parameters);
-            PrintDay(result);
-        }
-
-        private static DayResult RunDay(Parameters parameters)
-        {
             var day = _daySelector.GetDay(parameters.Year, parameters.Day);
             if (day == null)
             {
                 throw new Exception("The specified day could not be found.");
             }
 
-            return RunWithTimeout(day);
+            var result = Run(day);
+            PrintDay(result);
         }
 
-        public class DayResult
+        private static DayResult Run(Day day, int? timeout = null)
         {
-            public Day Day { get; }
-            public TimedPuzzleResult Result1 { get; }
-            public TimedPuzzleResult Result2 { get; }
-
-            public DayResult(Day day, TimedPuzzleResult result1, TimedPuzzleResult result2)
-            {
-                Day = day;
-                Result1 = result1;
-                Result2 = result2;
-            }
-        }
-
-        private static DayResult RunWithTimeout(Day day)
-        {
-            var p1 = RunPuzzleWithTimer(day.RunPart1);
-            var p2 = RunPuzzleWithTimer(day.RunPart2);
+            var p1 = RunPuzzleWithTimer(day.RunPart1, timeout);
+            var p2 = RunPuzzleWithTimer(day.RunPart2, timeout);
             
             return new DayResult(day, p1, p2);
         }
@@ -151,22 +132,29 @@ namespace ConsoleApp
                 : formattedTime;
         }
 
-        private static TimedPuzzleResult RunPuzzleWithTimer(Func<PuzzleResult> func)
+        private static TimedPuzzleResult RunPuzzleWithTimer(Func<PuzzleResult> func, int? timeout)
         {
             var timer = new Timer();
-            var result = RunPuzzle(func);
+            var result = RunPuzzle(func, timeout);
             return new TimedPuzzleResult(result, timer.FromStart);
         }
 
-        private static PuzzleResult RunPuzzle(Func<PuzzleResult> func)
+        private static PuzzleResult RunPuzzle(Func<PuzzleResult> func, int? timeout)
         {
             PuzzleResult result = null;
             try
             {
-                var task1 = Task.Run(() => result = func());
-                if (!task1.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
-                    return new TimeoutPuzzleResult($"Puzzle failed to finish within {PuzzleTimeout} seconds");
-
+                if (timeout != null)
+                {
+                    var task1 = Task.Run(() => result = func());
+                    if (!task1.Wait(TimeSpan.FromSeconds(PuzzleTimeout)))
+                        return new TimeoutPuzzleResult($"Puzzle failed to finish within {PuzzleTimeout} seconds");
+                }
+                else
+                {
+                    result = func();
+                }
+                
                 return result ?? new MissingPuzzleResult("Puzzle returned null");
             }
             catch (Exception)
@@ -215,7 +203,7 @@ namespace ConsoleApp
             Console.WriteLine("-----------------------------------------");
             foreach (var day in days)
             {
-                var result = RunWithTimeout(day);
+                var result = Run(day, PuzzleTimeout);
                 PrintDayAsTableRow(result);
             }
             Console.WriteLine("-----------------------------------------");

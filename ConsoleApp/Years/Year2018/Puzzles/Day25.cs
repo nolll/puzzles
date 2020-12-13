@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
             var finder = new ConstellationFinder(FileInput);
             var constellationCount = finder.Find();
-            return new PuzzleResult($"Constellation count: {constellationCount}");
+            return new PuzzleResult(constellationCount, 375);
         }
 
         public override PuzzleResult RunPart2()

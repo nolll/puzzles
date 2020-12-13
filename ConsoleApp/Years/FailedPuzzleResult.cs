@@ -2,10 +2,8 @@
 {
     public class FailedPuzzleResult : PuzzleResult
     {
-        public override PuzzleResultStatus Status => PuzzleResultStatus.Failed;
-
         public FailedPuzzleResult(string message)
-            : base(message)
+            : base(message, PuzzleResultStatus.Failed)
         {
         }
     }

@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
             var formation = new NanobotFormation(FileInput);
             var botCount = formation.GetBotsInRangeOfStrongestBot().Count;
-            return new PuzzleResult($"Bots in range of strongest bot: {botCount}");
+            return new PuzzleResult(botCount, 481);
         }
 
         public override PuzzleResult RunPart2()
         {
             var formation = new NanobotFormation(FileInput);
             var distanceToBestCoords = formation.FindManhattanDistanceToBestCoords();
-            return new PuzzleResult($"Manhattan distance to best coords: {distanceToBestCoords}");
+            return new PuzzleResult(distanceToBestCoords, 47_141_479);
         }
     }
 }

@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         public override PuzzleResult RunPart1()
         {
             var guardSleepPuzzle = new GuardSleepPuzzle(FileInput);
-            return new PuzzleResult($"Guard sleep strategy two score: {guardSleepPuzzle.StrategyOneScore}");
+            return new PuzzleResult(guardSleepPuzzle.StrategyOneScore, 87_681);
         }
 
         public override PuzzleResult RunPart2()
         {
             var guardSleepPuzzle = new GuardSleepPuzzle(FileInput);
-            return new PuzzleResult($"Guard sleep strategy two score: {guardSleepPuzzle.StrategyTwoScore}");
+            return new PuzzleResult(guardSleepPuzzle.StrategyTwoScore, 136_461);
         }
     }
 }

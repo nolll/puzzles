@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
             var assembler1 = new SleighAssembler(FileInput, 1, 0);
             var result1 = assembler1.Assemble();
-            return new PuzzleResult($"Sleigh assembly order: {result1.Order}");
+            return new PuzzleResult(result1.Order, "CQSWKZFJONPBEUMXADLYIGVRHT");
         }
 
         public override PuzzleResult RunPart2()
         {
             var assembler2 = new SleighAssembler(FileInput, 5, 60);
             var result2 = assembler2.Assemble();
-            return new PuzzleResult($"Time spent: {result2.Time}s");
+            return new PuzzleResult(result2.Time, 914);
         }
     }
 }

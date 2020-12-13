@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         public override PuzzleResult RunPart1()
         {
             var calculator = new LicenseNumberCalculator(FileInput);
-            return new PuzzleResult($"Metadata sum: {calculator.MetadataSum}");
+            return new PuzzleResult(calculator.MetadataSum, 48_496);
         }
 
         public override PuzzleResult RunPart2()
         {
             var calculator = new LicenseNumberCalculator(FileInput);
-            return new PuzzleResult($"Root node value: {calculator.RootNodeValue}");
+            return new PuzzleResult(calculator.RootNodeValue, 32_850);
         }
     }
 }

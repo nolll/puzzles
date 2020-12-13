@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
             var filler = new ReservoirFiller(FileInput);
             filler.Fill();
-            return new PuzzleResult($"Total water tile count: {filler.TotalWaterTileCount}");
+            return new PuzzleResult(filler.TotalWaterTileCount, 29_802);
         }
 
         public override PuzzleResult RunPart2()
         {
             var filler = new ReservoirFiller(FileInput);
             filler.Fill();
-            return new PuzzleResult($"Retained water tile count: {filler.RetainedWaterTileCount}");
+            return new PuzzleResult(filler.RetainedWaterTileCount, 24_660);
         }
     }
 }

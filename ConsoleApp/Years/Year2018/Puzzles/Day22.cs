@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
             var targetY = targetCoords.Last();
 
             var caveSystem = new CaveSystem(depth, targetX, targetY);
-            return new PuzzleResult($"Total risk level: {caveSystem.TotalRiskLevel}");
+            return new PuzzleResult(caveSystem.TotalRiskLevel, 11_575);
         }
 
         public override PuzzleResult RunPart2()
@@ -33,7 +33,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
             var caveSystem = new CaveSystem(depth, targetX, targetY);
 
             var time = caveSystem.ResqueMan();
-            return new PuzzleResult($"Time to resque: {time}");
+            return new PuzzleResult(time, 1068);
         }
     }
 }

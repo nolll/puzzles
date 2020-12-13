@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
             
             var computer = new OpComputer();
             var count = computer.InputsMatchingThreeOrMore(input1);
-            return new PuzzleResult($"Inputs matching three or more: {count}");
+            return new PuzzleResult(count, 567);
         }
 
         public override PuzzleResult RunPart2()
@@ -30,7 +30,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
 
             var computer = new OpComputer();
             var value = computer.RunTestProgram(input1, input2);
-            return new PuzzleResult($"Value at register 0 after test program: {value}");
+            return new PuzzleResult(value, 610);
         }
     }
 }

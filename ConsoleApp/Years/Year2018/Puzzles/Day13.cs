@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
             var detector = new CollisionDetector(FileInput);
             var firstCollisionCoords = detector.LocationOfFirstCollision;
             var firstCollition = $"{firstCollisionCoords.X},{firstCollisionCoords.Y}";
-            return new PuzzleResult($"First crash location: {firstCollition}");
+            return new PuzzleResult(firstCollition, "118,112");
         }
 
         public override PuzzleResult RunPart2()
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
             var detector = new CollisionDetector(FileInput);
             var lastCartCoords = detector.LocationOfLastCart;
             var lastCart = $"{lastCartCoords.X},{lastCartCoords.Y}";
-            return new PuzzleResult($"Last cart location: {lastCart}");
+            return new PuzzleResult(lastCart, "50,21");
         }
     }
 }

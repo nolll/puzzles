@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         public override PuzzleResult RunPart1()
         {
             var navigator = new RegularMapNavigator(FileInput);
-            return new PuzzleResult($"Most doors required to reach a room: {navigator.MostDoors}");
+            return new PuzzleResult(navigator.MostDoors, 4050);
         }
 
         public override PuzzleResult RunPart2()
         {
             var navigator = new RegularMapNavigator(FileInput);
-            return new PuzzleResult($"Number of rooms that passes at least 1000 doors: {navigator.RoomsMoreThat1000DoorsAway}");
+            return new PuzzleResult(navigator.RoomsMoreThat1000DoorsAway, 8564);
         }
     }
 }

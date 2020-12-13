@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         public override PuzzleResult RunPart1()
         {
             var claimsOverlapCountPuzzle = new ClaimsOverlapCountPuzzle(FileInput);
-            return new PuzzleResult($"Overlap count: {claimsOverlapCountPuzzle.OverlapCount}");
+            return new PuzzleResult(claimsOverlapCountPuzzle.OverlapCount, 118_223);
         }
 
         public override PuzzleResult RunPart2()
         {
             var claimThatDoesNotOverlap = new ClaimThatDoesNotOverlapPuzzle(FileInput);
-            return new PuzzleResult($"No overlap id: {claimThatDoesNotOverlap.ClaimId}");
+            return new PuzzleResult(claimThatDoesNotOverlap.ClaimId, 412);
         }
     }
 }

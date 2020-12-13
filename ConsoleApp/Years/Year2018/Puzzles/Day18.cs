@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
             var collection = new LumberCollection(FileInput);
             collection.Run(10);
-            return new PuzzleResult($"Resource value after 10 minutes: {collection.ResourceValue}");
+            return new PuzzleResult(collection.ResourceValue, 763_804);
         }
 
         public override PuzzleResult RunPart2()
         {
             var collection2 = new LumberCollection(FileInput);
             collection2.Run(1_000_000_000);
-            return new PuzzleResult($"Resource value after 1 billion minutes: {collection2.ResourceValue}");
+            return new PuzzleResult(collection2.ResourceValue, 188_400);
         }
     }
 }

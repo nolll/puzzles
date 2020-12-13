@@ -2,10 +2,8 @@
 {
     public class TimeoutPuzzleResult : PuzzleResult
     {
-        public override PuzzleResultStatus Status => PuzzleResultStatus.Timeout;
-
         public TimeoutPuzzleResult(string message)
-            : base(message)
+            : base(message, PuzzleResultStatus.Timeout)
         {
         }
     }

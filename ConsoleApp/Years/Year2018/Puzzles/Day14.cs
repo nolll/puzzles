@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
             var generator = new RecipeGenerator();
             var scores = generator.ScoresAfter(Input);
-            return new PuzzleResult($"Next ten scores: {scores}");
+            return new PuzzleResult(scores, "3718110721");
         }
 
         public override PuzzleResult RunPart2()
         {
             var generator = new RecipeGenerator();
             var count = generator.RecipeCountBefore(Input.ToString());
-            return new PuzzleResult($"Recipe count: {count}");
+            return new PuzzleResult(count, 20_298_300);
         }
 
         private const int Input = 306281;

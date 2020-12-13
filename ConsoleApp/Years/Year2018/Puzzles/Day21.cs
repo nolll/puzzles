@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
             var computer = new OpComputer();
             var result = computer.RunSpecialForDay21(FileInput, 0);
-            return new PuzzleResult($"Lowest value for register zero after fewest iterations: {result.first}");
+            return new PuzzleResult(result.first, 103_548);
         }
 
         public override PuzzleResult RunPart2()
         {
             var computer = new OpComputer();
             var result = computer.RunSpecialForDay21(FileInput, 0);
-            return new PuzzleResult($"Lowest value for register zero after most iterations: {result.last}");
+            return new PuzzleResult(result.last, 14_256_686);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
 
             var system = new ImmuneSystem(immuneInput, infectionInput);
             system.Fight();
-            return new PuzzleResult($"Winning army unit count: {system.WinningArmyUnitCount}");
+            return new PuzzleResult(system.WinningArmyUnitCount, 9328);
         }
 
         public override PuzzleResult RunPart2()
@@ -30,7 +30,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
             
             var system = new ImmuneSystem(immuneInput, infectionInput);
             system.FightUntilImmuneSystemWins();
-            return new PuzzleResult($"Immune system unit count: {system.WinningArmyUnitCount}");
+            return new PuzzleResult(system.WinningArmyUnitCount, 2172);
         }
     }
 }

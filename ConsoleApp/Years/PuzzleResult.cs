@@ -3,7 +3,7 @@
     public class PuzzleResult
     {
         public string Answer { get; }
-        public virtual PuzzleResultStatus Status { get; }
+        public PuzzleResultStatus Status { get; }
 
         public PuzzleResult(string answer)
             : this(answer, PuzzleResultStatus.Completed)

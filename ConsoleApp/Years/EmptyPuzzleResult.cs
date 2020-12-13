@@ -2,10 +2,8 @@
 {
     public class EmptyPuzzleResult : PuzzleResult
     {
-        public override PuzzleResultStatus Status => PuzzleResultStatus.Empty;
-
         public EmptyPuzzleResult()
-            : base("No puzzle here")
+            : base("No puzzle here", PuzzleResultStatus.Empty)
         {
         }
     }

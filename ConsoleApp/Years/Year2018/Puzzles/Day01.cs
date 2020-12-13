@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         {
             var frequencyPuzzle = new FrequencyPuzzle(FileInput);
             var resultingFrequency = frequencyPuzzle.ResultingFrequency;
-            return new PuzzleResult($"Resulting frequency: {resultingFrequency}");
+            return new PuzzleResult(resultingFrequency, 525);
         }
 
         public override PuzzleResult RunPart2()
         {
             var frequencyRepeatPuzzle = new FrequencyRepeatPuzzle(FileInput);
             var firstRepeatedFrequency = frequencyRepeatPuzzle.FirstRepeatedFrequency;
-            return new PuzzleResult($"First repeat: {firstRepeatedFrequency}");
+            return new PuzzleResult(firstRepeatedFrequency, 75_749);
         }
     }
 }

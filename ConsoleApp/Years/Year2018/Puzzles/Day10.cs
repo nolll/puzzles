@@ -12,13 +12,25 @@ namespace ConsoleApp.Years.Year2018.Puzzles
         public override PuzzleResult RunPart1()
         {
             var finder = new StarMessageFinder(FileInput, 9);
-            return new PuzzleResult($"Message:\r\n{finder.Message}");
+            return new PuzzleResult(finder.Message, CorrectAnswer.Trim());
         }
 
         public override PuzzleResult RunPart2()
         {
             var finder = new StarMessageFinder(FileInput, 9);
-            return new PuzzleResult($"Number of seconds: {finder.IterationCount}");
+            return new PuzzleResult(finder.IterationCount, 10355);
         }
+
+        private const string CorrectAnswer = @"
+#....#..#####...#####...#....#..#####...#####...#....#...####.
+#....#..#....#..#....#..#....#..#....#..#....#..#...#...#....#
+#....#..#....#..#....#..#....#..#....#..#....#..#..#....#.....
+#....#..#....#..#....#..#....#..#....#..#....#..#.#.....#.....
+######..#####...#####...######..#####...#####...##......#.....
+#....#..#..#....#.......#....#..#....#..#..#....##......#..###
+#....#..#...#...#.......#....#..#....#..#...#...#.#.....#....#
+#....#..#...#...#.......#....#..#....#..#...#...#..#....#....#
+#....#..#....#..#.......#....#..#....#..#....#..#...#...#...##
+#....#..#....#..#.......#....#..#####...#....#..#....#...###.#";
     }
 }

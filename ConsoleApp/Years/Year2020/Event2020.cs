@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using ConsoleApp.Years.Year2020.Puzzles;
 
-
 namespace ConsoleApp.Years.Year2020
 {
     public class Event2020 : Event
@@ -25,6 +24,7 @@ namespace ConsoleApp.Years.Year2020
             new Day11(),
             new Day12(),
             new Day13(),
+            new Day14()
         };
     }
 }

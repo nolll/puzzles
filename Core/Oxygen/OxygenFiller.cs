@@ -12,7 +12,7 @@ namespace Core.Oxygen
 
         public OxygenFiller(string map)
         {
-            _matrix = BuildMatrix(map);
+            _matrix = BuildMatrix(map.Replace(' ', '#'));
         }
 
         public int Fill()

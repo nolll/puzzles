@@ -3,17 +3,16 @@ using NUnit.Framework;
 
 namespace Tests
 {
-    // todo: fix test
     public class OxygenFillerTests
     {
         [Test]
         public void Returns4Minutes()
         {
-            var map = @"
+            const string map = @"
 _ ##   _
 _#..## _
 _#.#..#_
-_#.O.# _
+_#.X.# _
 _ ###  _";
             var filler = new OxygenFiller(map);
             var result = filler.Fill();

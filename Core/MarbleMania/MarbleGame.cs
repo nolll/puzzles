@@ -12,11 +12,11 @@ namespace Core.MarbleMania
         private readonly int _marbleValue;
         public long WinnerScore { get; }
 
-        public static MarbleGame Parse(string input, int playerMultiplier = 1)
+        public static MarbleGame Parse(string input, int marbleValueMultiplier = 1)
         {
             var words = input.Split(' ');
-            var playerCount = int.Parse(words.First()) * playerMultiplier;
-            var lastMarbleValue = int.Parse(words[6]);
+            var playerCount = int.Parse(words.First());
+            var lastMarbleValue = int.Parse(words[6]) * marbleValueMultiplier;
 
             return new MarbleGame(playerCount, lastMarbleValue);
         }

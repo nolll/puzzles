@@ -18,6 +18,7 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         public override PuzzleResult RunPart2()
         {
             var calc = new EasterbunnyDistanceCalculator();
+            calc.Go(FileInput);
             return new PuzzleResult(calc.DistanceToFirstRepeat, 131);
         }
     }

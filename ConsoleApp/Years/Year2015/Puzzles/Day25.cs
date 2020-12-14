@@ -28,8 +28,8 @@ namespace ConsoleApp.Years.Year2015.Puzzles
 
             return new Params
             {
-                TargetX = int.Parse(words[16]),
-                TargetY = int.Parse(words[18])
+                TargetX = int.Parse(words[18]),
+                TargetY = int.Parse(words[16])
             };
         }
 

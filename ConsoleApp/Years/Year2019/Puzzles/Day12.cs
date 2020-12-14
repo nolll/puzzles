@@ -15,7 +15,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             const int iterations = 1000;
             tracker1.Run(iterations);
 
-            return new PuzzleResult($"Total energy after {iterations} time units: {tracker1.TotalEnergy}");
+            return new PuzzleResult(tracker1.TotalEnergy, 7471);
         }
 
         public override PuzzleResult RunPart2()
@@ -23,7 +23,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var tracker2 = new MoonTracker(FileInput);
             tracker2.RunUntilRepeat();
 
-            return new PuzzleResult($"Time units until repeat: {tracker2.Iterations}");
+            return new PuzzleResult(tracker2.Iterations, 376_243_355_967_784);
         }
     }
 }

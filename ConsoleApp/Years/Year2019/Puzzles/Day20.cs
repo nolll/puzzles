@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         public override PuzzleResult RunPart1()
         {
             var mazeSolver = new DonutMazeSolver(FileInput);
-            return new PuzzleResult($"Shortest distance from AA to ZZ: {mazeSolver.ShortestStepCount}");
+            return new PuzzleResult(mazeSolver.ShortestStepCount, 462);
         }
 
         public override PuzzleResult RunPart2()
         {
             var recursiveDonutMazeSolver = new RecursiveDonutMazeSolver(FileInput);
-            return new PuzzleResult($"Shortest distance from AA to ZZ: {recursiveDonutMazeSolver.ShortestStepCount}");
+            return new PuzzleResult(recursiveDonutMazeSolver.ShortestStepCount, 5288);
         }
     }
 }

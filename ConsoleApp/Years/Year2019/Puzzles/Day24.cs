@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var simulator = new BugLifeSimulator(FileInput);
             simulator.RunUntilRepeat();
 
-            return new PuzzleResult($"Biodiversity rating: {simulator.BiodiversityRating}");
+            return new PuzzleResult(simulator.BiodiversityRating, 12_129_040);
         }
 
         public override PuzzleResult RunPart2()
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var recursiveSimulator = new RecursiveBugLifeSimulator(FileInput);
             recursiveSimulator.Run(200);
 
-            return new PuzzleResult($"Bug count after 200 minutes: {recursiveSimulator.BugCount}");
+            return new PuzzleResult(recursiveSimulator.BugCount, 2109);
         }
     }
 }

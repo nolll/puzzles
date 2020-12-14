@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var boostTester = new BoostRunner(FileInput, 1);
             var testerResult = boostTester.Run();
 
-            return new PuzzleResult($"BOOST keycode: {testerResult.LastOutput}");
+            return new PuzzleResult(testerResult.LastOutput, 3_380_552_333);
         }
 
         public override PuzzleResult RunPart2()
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var boostRunner = new BoostRunner(FileInput, 2);
             var runnerResult = boostRunner.Run();
 
-            return new PuzzleResult($"Coordinates: {runnerResult.LastOutput}");
+            return new PuzzleResult(runnerResult.LastOutput, 78_831);
         }
     }
 }

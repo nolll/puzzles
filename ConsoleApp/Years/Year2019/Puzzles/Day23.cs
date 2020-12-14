@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var network = new CategorySixNetwork(FileInput);
             network.Run();
 
-            return new PuzzleResult($"First packet Y value sent to NAT: {network.FirstNatPacket.Y}");
+            return new PuzzleResult(network.FirstNatPacket.Y, 17_541);
         }
 
         public override PuzzleResult RunPart2()
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var network = new CategorySixNetwork(FileInput);
             network.Run();
 
-            return new PuzzleResult($"First repeated packet Y value sent from NAT: {network.FirstRepeatedNatPacket.Y}");
+            return new PuzzleResult(network.FirstRepeatedNatPacket.Y, 12_415);
         }
     }
 }

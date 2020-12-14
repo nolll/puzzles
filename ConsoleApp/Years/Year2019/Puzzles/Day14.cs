@@ -15,7 +15,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             reactor.Run();
             var oreForOneFuel = reactor.RequiredOreForOneFuel;
 
-            return new PuzzleResult($"Number of ores for one fuel: {oreForOneFuel}");
+            return new PuzzleResult(oreForOneFuel, 469_536);
         }
 
         public override PuzzleResult RunPart2()
@@ -24,7 +24,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             reactor.Run();
             var fuelCount = reactor.FuelFromOneTrillionOre;
 
-            return new PuzzleResult($"Maximum fuel: {fuelCount}");
+            return new PuzzleResult(fuelCount, 3_343_477);
         }
     }
 }

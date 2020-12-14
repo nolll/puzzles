@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
             var walkingDroid = new SpringDroid(FileInput, WalkProgram);
             walkingDroid.Run();
-            return new PuzzleResult($"Hull damage: {walkingDroid.HullDamage}");
+            return new PuzzleResult(walkingDroid.HullDamage, 19_362_822);
         }
 
         public override PuzzleResult RunPart2()
         {
             var runningDroid = new SpringDroid(FileInput, RunProgram);
             runningDroid.Run();
-            return new PuzzleResult($"Hull damage: {runningDroid.HullDamage}");
+            return new PuzzleResult(runningDroid.HullDamage, 1_143_625_214);
         }
 
         private const string WalkProgram = @"

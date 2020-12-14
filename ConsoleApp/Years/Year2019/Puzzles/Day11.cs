@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var robot1 = new PaintRobot(FileInput);
             var result1 = robot1.Paint(false);
 
-            return new PuzzleResult($"Panels painted at least once: {result1.PaintedPanelCount}");
+            return new PuzzleResult(result1.PaintedPanelCount, 1732);
         }
 
         public override PuzzleResult RunPart2()
@@ -24,7 +24,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
 
             var printout = result2.Printout.Replace('0', ' ').Replace('1', 'X');
 
-            return new PuzzleResult($"Painted spaceship:\r\n{printout}");
+            return new PuzzleResult(printout, "ABCLFUHJ");
         }
     }
 }

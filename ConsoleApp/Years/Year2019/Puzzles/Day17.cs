@@ -16,7 +16,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var sif = new ScaffoldIntersectionFinder(input);
             var result1 = sif.GetSumOfAlignmentParameters();
 
-            return new PuzzleResult($"Sum of alignment parameters: {result1}");
+            return new PuzzleResult(result1, 8408);
         }
 
         public override PuzzleResult RunPart2()
@@ -24,7 +24,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var sc2 = new ScaffoldingComputer2(FileInput);
             var result2 = sc2.Run();
 
-            return new PuzzleResult($"Dust amount: {result2}");
+            return new PuzzleResult(result2, 1_168_948);
         }
     }
 }

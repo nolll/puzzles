@@ -5,11 +5,6 @@
         public string Answer { get; }
         public PuzzleResultStatus Status { get; }
 
-        public PuzzleResult(string answer)
-            : this(answer, PuzzleResultStatus.Completed)
-        {
-        }
-
         public PuzzleResult(string answer, string correctAnswer)
             : this(answer, VerifyResult(answer, correctAnswer))
         {

@@ -7,8 +7,8 @@ namespace ConsoleApp
         private static DaySelector _daySelector;
         private const int PuzzleTimeout = 10;
 
-        private const int Year = 2018;
-        private const int Day = 10;
+        private const int Year = 2019;
+        private const int Day = 13;
 
         static void Main(string[] args)
         {

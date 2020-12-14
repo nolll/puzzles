@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var algorithm1 = new FrequencyAlgorithmPart1(FileInput);
             var result1 = algorithm1.Run(100);
 
-            return new PuzzleResult($"First eight after 100 phases: {result1}");
+            return new PuzzleResult(result1, "19944447");
         }
 
         public override PuzzleResult RunPart2()
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var algorithm2 = new FrequencyAlgorithmPart2(FileInput);
             var result2 = algorithm2.Run(100);
 
-            return new PuzzleResult($"Message after 100 phases of long input: {result2}");
+            return new PuzzleResult(result2, "81207421");
         }
     }
 }

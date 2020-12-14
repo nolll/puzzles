@@ -17,7 +17,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var ci1 = new ComputerInterface(FileInput, ReadInputPart1, WriteOutput);
             ci1.Start();
 
-            return new PuzzleResult($"Diagnostic code for ID 1: {_output}");
+            return new PuzzleResult(_output, 5_346_030);
         }
 
         public override PuzzleResult RunPart2()
@@ -25,7 +25,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var ci2 = new ComputerInterface(FileInput, ReadInputPart2, WriteOutput);
             ci2.Start();
 
-            return new PuzzleResult($"Diagnostic code for ID 5: {_output}");
+            return new PuzzleResult(_output, 513_116);
         }
 
         private long ReadInputPart1() => 1;

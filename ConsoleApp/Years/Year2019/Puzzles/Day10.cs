@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var detector = new AsteroidDetector();
             var detectorResult = detector.Detect(FileInput);
 
-            return new PuzzleResult($"Asteroid count: {detectorResult.RayCount}");
+            return new PuzzleResult(detectorResult.RayCount, 340);
         }
 
         public override PuzzleResult RunPart2()
@@ -24,7 +24,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var asteroidNr200 = vaporizeResult.DestroyedAsteroids[199];
             var result = asteroidNr200.X * 100 + asteroidNr200.Y;
 
-            return new PuzzleResult($"X * 100 + Y = {result}");
+            return new PuzzleResult(result, 2628);
         }
     }
 }

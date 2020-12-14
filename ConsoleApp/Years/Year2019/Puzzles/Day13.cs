@@ -11,18 +11,18 @@ namespace ConsoleApp.Years.Year2019.Puzzles
 
         public override PuzzleResult RunPart1()
         {
-            var arcade1 = new Arcade(FileInput);
-            arcade1.Play();
+            var arcade = new Arcade(FileInput);
+            arcade.Play();
 
-            return new PuzzleResult($"Number of block tiles: {arcade1.NumberOfBlockTiles}");
+            return new PuzzleResult(arcade.NumberOfBlockTiles, 226);
         }
 
         public override PuzzleResult RunPart2()
         {
-            var arcade2 = new Arcade(FileInput);
-            arcade2.Play(2);
+            var arcade = new Arcade(FileInput);
+            arcade.Play(2);
 
-            return new MissingPuzzleResult("Investigate this! No message was returned");
+            return new PuzzleResult(arcade.Score, 10800);
         }
     }
 }

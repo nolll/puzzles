@@ -18,7 +18,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var passwordFinder = new Core.Passwords.PasswordFinder();
             var passwords = passwordFinder.FindPart1(passwordLowerbound, passwordUpperbound);
             var passwordCount = passwords.Count();
-            return new PuzzleResult($"Number of valid passwords: {passwordCount}");
+            return new PuzzleResult(passwordCount, 530);
         }
 
         public override PuzzleResult RunPart2()
@@ -30,7 +30,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var passwordFinder = new Core.Passwords.PasswordFinder();
             var passwords = passwordFinder.FindPart2(passwordLowerbound, passwordUpperbound);
             var passwordCount = passwords.Count();
-            return new PuzzleResult($"Number of valid passwords: {passwordCount}");
+            return new PuzzleResult(passwordCount, 324);
         }
 
         private const string Input = "357253-892942";

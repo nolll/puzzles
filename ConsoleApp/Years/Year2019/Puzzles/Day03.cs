@@ -18,7 +18,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
 
             var intersectionFinder = new IntersectionFinder(wirePathA, wirePathB);
             var distance = intersectionFinder.ClosestIntersection.Distance;
-            return new PuzzleResult($"The distance of the closest intersection is: {distance}");
+            return new PuzzleResult(distance, 865);
         }
 
         public override PuzzleResult RunPart2()
@@ -29,7 +29,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
 
             var intersectionFinder = new IntersectionFinder(wirePathA, wirePathB);
             var steps = intersectionFinder.FewestSteps.Steps;
-            return new PuzzleResult($"The fewest combined steps to the closest intersection is: {steps}");
+            return new PuzzleResult(steps, 35_038);
         }
     }
 }

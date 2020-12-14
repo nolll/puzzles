@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var keyCollector1 = new KeyCollector(FileInput);
             keyCollector1.Run();
 
-            return new PuzzleResult($"Number of steps to collect all keys with one robot: {keyCollector1.ShortestPath}");
+            return new PuzzleResult(keyCollector1.ShortestPath, 4420);
         }
 
         public override PuzzleResult RunPart2()
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var keyCollector2 = new KeyCollector(GeneratedMapFromStep1);
             keyCollector2.Run();
 
-            return new PuzzleResult($"Number of steps to collect all keys with four robots: {keyCollector2.ShortestPath}");
+            return new PuzzleResult(keyCollector2.ShortestPath, 2128);
         }
 
         private const string GeneratedMapFromStep1 = @"

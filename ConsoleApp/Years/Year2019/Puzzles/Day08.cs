@@ -13,13 +13,13 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
             var image = new SpaceImage(FileInput);
             var checksum = image.Checksum;
-            return new PuzzleResult($"Hash: {checksum}");
+            return new PuzzleResult(checksum, 1716);
         }
 
         public override PuzzleResult RunPart2()
         {
             var image = new SpaceImage(FileInput);
-            return new PuzzleResult(image.Print());
+            return new PuzzleResult(image.Print(), "KFABY");
         }
     }
 }

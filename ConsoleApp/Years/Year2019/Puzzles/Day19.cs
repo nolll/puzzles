@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var tbc = new TractorBeamComputer1(FileInput, 50, 50);
             var result = tbc.GetPullCount();
 
-            return new PuzzleResult($"Number of pulled coordinates: {result}");
+            return new PuzzleResult(result, 141);
         }
 
         public override PuzzleResult RunPart2()
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var tbc = new TractorBeamComputer1(FileInput, 50, 50);
             var result = tbc.GetPullCount();
 
-            return new PuzzleResult($"Number of pulled coordinates: {result}");
+            return new PuzzleResult(result, 15_641_348);
         }
     }
 }

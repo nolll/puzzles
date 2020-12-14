@@ -14,7 +14,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var computer = new ConsoleComputer(FileInput);
             computer.Start();
             var value = computer.Output;
-            return new PuzzleResult($"Value at position 0: {value}");
+            return new PuzzleResult(value, 3_101_844);
         }
 
         public override PuzzleResult RunPart2()
@@ -22,7 +22,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var solutionFinder = new ComputerSolutionFinder(FileInput);
             var result = solutionFinder.FindSolution(19690720);
             var answer = 100 * result.Noun + result.Verb;
-            return new PuzzleResult($"The answer is: {answer}");
+            return new PuzzleResult(answer, 8478);
         }
     }
 }

@@ -13,14 +13,14 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         {
             var calculator = new OrbitCalculator(FileInput);
             var orbitCount = calculator.GetOrbitCount();
-            return new PuzzleResult($"Total number of orbits: {orbitCount}");
+            return new PuzzleResult(orbitCount, 278_744);
         }
 
         public override PuzzleResult RunPart2()
         {
             var calculator = new OrbitCalculator(FileInput);
             var distance = calculator.GetSantaDistance();
-            return new PuzzleResult($"Distance to Santa: {distance}");
+            return new PuzzleResult(distance, 475);
         }
     }
 }

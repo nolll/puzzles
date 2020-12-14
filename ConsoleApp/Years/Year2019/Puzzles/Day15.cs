@@ -16,7 +16,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var droid = new RepairDroid(FileInput);
             var result1 = droid.Run();
 
-            return new PuzzleResult($"Steps to find oxygen system: {result1}");
+            return new PuzzleResult(result1, 424);
         }
 
         public override PuzzleResult RunPart2()
@@ -24,7 +24,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var filler = new OxygenFiller(GeneratedMapFromStep1);
             var result = filler.Fill();
 
-            return new PuzzleResult($"Number of minutes: {result}");
+            return new PuzzleResult(result, 446);
         }
 
         private const string GeneratedMapFromStep1 = @"

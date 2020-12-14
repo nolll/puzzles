@@ -14,9 +14,10 @@ namespace Core.ArcadeCabinet
         private int _x = 0;
         private int _y = 0;
         private int _joystickDirection = 0;
-        private int _score = 0;
         private int _ballX = 0;
         private int _paddleX = 0;
+
+        public int Score { get; private set; } = 0;
 
         public Arcade(string program)
         {
@@ -63,7 +64,7 @@ namespace Core.ArcadeCabinet
 
             if (_x == -1 && _y == 0)
             {
-                _score = value;
+                Score = value;
                 //PrintScreen();
                 //PrintScore();
                 //Thread.Sleep(50);
@@ -100,7 +101,7 @@ namespace Core.ArcadeCabinet
         private void PrintScore()
         {
             Console.WriteLine();
-            Console.WriteLine($"Score: {_score}");
+            Console.WriteLine($"Score: {Score}");
         }
 
         private void WriteToScreen(int x, int y, int tile)

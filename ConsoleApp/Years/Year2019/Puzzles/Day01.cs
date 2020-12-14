@@ -12,13 +12,13 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         public override PuzzleResult RunPart1()
         {
             var massCalculator = new MassCalculator(FileInput);
-            return new PuzzleResult($"Required fuel: {massCalculator.MassFuel}");
+            return new PuzzleResult(massCalculator.MassFuel, 3_382_284);
         }
 
         public override PuzzleResult RunPart2()
         {
             var massCalculator = new MassCalculator(FileInput);
-            return new PuzzleResult($"Required total fuel: {massCalculator.TotalFuel}");
+            return new PuzzleResult(massCalculator.TotalFuel, 5_070_541);
         }
     }
 }

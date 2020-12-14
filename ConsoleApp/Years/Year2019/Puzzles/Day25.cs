@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
             var investigationDroid = new InvestigationDroid(FileInput);
             var password = investigationDroid.Run();
 
-            return new PuzzleResult($"Password: {password}");
+            return new PuzzleResult(password, "285213704");
         }
 
         public override PuzzleResult RunPart2()

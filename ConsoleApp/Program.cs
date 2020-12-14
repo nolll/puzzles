@@ -8,7 +8,7 @@ namespace ConsoleApp
         private const int PuzzleTimeout = 10;
 
         private const int Year = 2019;
-        private const int Day = 19;
+        private const int Day = 8;
 
         static void Main(string[] args)
         {

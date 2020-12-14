@@ -19,10 +19,10 @@ namespace ConsoleApp.Years.Year2019.Puzzles
 
         public override PuzzleResult RunPart2()
         {
-            var tbc = new TractorBeamComputer1(FileInput, 50, 50);
-            var result = tbc.GetPullCount();
+            var tbc = new TractorBeamComputer2(FileInput, 50, 50);
+            var result = tbc.Find100By100Square();
 
-            return new PuzzleResult(result, 15_641_348);
+            return new PuzzleResult(result.Checksum, 15_641_348);
         }
     }
 }

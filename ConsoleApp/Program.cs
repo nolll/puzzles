@@ -7,8 +7,8 @@ namespace ConsoleApp
         private static DaySelector _daySelector;
         private const int PuzzleTimeout = 10;
 
-        private const int Year = 2015;
-        private const int Day = 25;
+        private const int Year = 2016;
+        private const int Day = 17;
 
         static void Main(string[] args)
         {
@@ -25,7 +25,7 @@ namespace ConsoleApp
             if (parameters.RunAll)
             {
                 var allDays = _daySelector.GetAll();
-                var allRunner = new PuzzleRunner(PuzzleTimeout);
+                var allRunner = new PuzzleRunner(timeout: PuzzleTimeout);
                 allRunner.Run(allDays);
                 return;
             }
@@ -37,7 +37,7 @@ namespace ConsoleApp
                     throw new Exception("Event not found!");
 
                 var yearDays = year.Days;
-                var yearRunner = new PuzzleRunner(PuzzleTimeout);
+                var yearRunner = new PuzzleRunner(timeout: PuzzleTimeout);
                 yearRunner.Run(yearDays);
                 return;
             }
@@ -53,7 +53,7 @@ namespace ConsoleApp
                 throw new Exception("The specified day could not be found.");
             }
 
-            var dayRunner = new PuzzleRunner();
+            var dayRunner = new PuzzleRunner(throwExceptions: true);
             dayRunner.Run(day);
         }
     }

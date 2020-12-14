@@ -19,6 +19,7 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         public override PuzzleResult RunPart2()
         {
             var maze = new LockedDoorMaze();
+            maze.FindPaths(Input);
             return new PuzzleResult(maze.LongestPath.Length, 498);
         }
 

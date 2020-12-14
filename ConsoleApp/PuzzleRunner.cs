@@ -8,10 +8,12 @@ namespace ConsoleApp
 {
     public class PuzzleRunner
     {
+        private readonly bool _throwExceptions;
         private readonly int? _timeout;
 
-        public PuzzleRunner(int? timeout = null)
+        public PuzzleRunner(bool throwExceptions = false, int? timeout = null)
         {
+            _throwExceptions = throwExceptions;
             _timeout = timeout;
         }
 
@@ -69,6 +71,8 @@ namespace ConsoleApp
             }
             catch (Exception)
             {
+                if (_throwExceptions)
+                    throw;
                 return new FailedPuzzleResult("Puzzle failed");
             }
         }

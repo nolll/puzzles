@@ -12,14 +12,14 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var system = new BitmaskSystem1();
             var sum = system.Run(FileInput);
-            return new PuzzleResult(sum, 0);
+            return new PuzzleResult(sum);
         }
 
         public override PuzzleResult RunPart2()
         {
             var system = new BitmaskSystem2();
             var sum = system.Run(FileInput);
-            return new PuzzleResult(sum, 0);
+            return new PuzzleResult(sum);
         }
     }
 }

@@ -5,18 +5,18 @@
         public string Answer { get; }
         public PuzzleResultStatus Status { get; }
 
-        public PuzzleResult(string answer, string correctAnswer)
+        public PuzzleResult(string answer, string correctAnswer = null)
             : this(answer, VerifyResult(answer, correctAnswer))
         {
         }
 
-        public PuzzleResult(int? answer, int correctAnswer)
-            : this(answer?.ToString(), correctAnswer.ToString())
+        public PuzzleResult(int? answer, int? correctAnswer = null)
+            : this(answer?.ToString(), correctAnswer?.ToString())
         {
         }
 
-        public PuzzleResult(long? answer, long correctAnswer)
-            : this(answer?.ToString(), correctAnswer.ToString())
+        public PuzzleResult(long? answer, long? correctAnswer = null)
+            : this(answer?.ToString(), correctAnswer?.ToString())
         {
         }
 

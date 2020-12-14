@@ -43,28 +43,30 @@ namespace Core.StreamProcessing
         private RemoveResult RemoveGarbage(string input)
         {
             var removeCount = 0;
-            input = input.Replace("!!", "");
             var cleaned = new StringBuilder();
             var isInGarbage = false;
+            var isInIgnored = false;
             for (var i = 0; i < input.Length; i++)
             {
                 var c = input[i];
                 
-                if (!isInGarbage)
+                if (isInGarbage)
                 {
-                    if (c == '<')  
-                        isInGarbage = true;
-                    else 
-                        cleaned.Append(c);
+                    if (isInIgnored)
+                        isInIgnored = false;
+                    else if (c == '!')
+                        isInIgnored = true;
+                    else if (c == '>')
+                        isInGarbage = false;
+                    else
+                        removeCount += 1;
                 }
                 else
                 {
-                    if (c == '>' && input[i - 1] != '!')
-                        isInGarbage = false;
-                    else if (c == '!')
-                        removeCount -= 1;
-                    else     
-                        removeCount += 1;
+                    if (c == '<')
+                        isInGarbage = true;
+                    else
+                        cleaned.Append(c);
                 }
             }
 

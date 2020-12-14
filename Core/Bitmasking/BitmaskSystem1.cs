@@ -5,7 +5,7 @@ using Core.Tools;
 
 namespace Core.Bitmasking
 {
-    public class BitmaskSystem
+    public class BitmaskSystem1
     {
         public long Run(string input)
         {

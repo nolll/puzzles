@@ -98,7 +98,7 @@ namespace Core.OneTimePad
 
         private string CreateSimpleHash(string str)
         {
-            return _hashFactory.Create(str);
+            return _hashFactory.StringHashFromString(str);
         }
 
         private string CreateStretchedHash(string str)

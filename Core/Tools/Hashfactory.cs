@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -12,15 +13,25 @@ namespace Core.Tools
             _md5 = MD5.Create();
         }
 
-        public string Create(string str)
+        public string StringHashFromString(string str)
         {
-            var hash = _md5.ComputeHash(Encoding.ASCII.GetBytes(str));
-            var sb = new StringBuilder();
-            foreach (var b in hash)
-            {
-                sb.Append(b.ToString("X2"));
-            }
-            return sb.ToString().ToLower();
+            return StringHashFromBytes(Encoding.ASCII.GetBytes(str));
+        }
+
+        public string StringHashFromBytes(byte[] bytes)
+        {
+            var hashedBytes = ByteHashFromBytes(bytes);
+            return ByteConverter.ConvertToString(hashedBytes);
+        }
+
+        public byte[] ByteHashFromString(string str)
+        {
+            return ByteHashFromBytes(Encoding.ASCII.GetBytes(str));
+        }
+
+        public byte[] ByteHashFromBytes(byte[] bytes)
+        {
+            return _md5.ComputeHash(bytes);
         }
     }
 }

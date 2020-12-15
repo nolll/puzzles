@@ -14,7 +14,7 @@ namespace Core.SecurityDoor
             var pwd = new StringBuilder();
             while (pwd.Length < 8)
             {
-                var hash = hashFactory.Create($"{key}{index.ToString()}");
+                var hash = hashFactory.StringHashFromString($"{key}{index}");
                 if (hash.StartsWith(compareString))
                 {
                     pwd.Append(hash.Substring(5, 1));
@@ -35,7 +35,7 @@ namespace Core.SecurityDoor
             var pwdArray = new char?[pwdLength];
             while (pwdArray.Count(o => o == null) > 0)
             {
-                var hash = hashFactory.Create($"{key}{index.ToString()}");
+                var hash = hashFactory.StringHashFromString($"{key}{index.ToString()}");
                 if (hash.StartsWith(compareString))
                 {
                     var result = hash.Substring(5, 2);

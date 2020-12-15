@@ -5,6 +5,8 @@ namespace ConsoleApp
 {
     public class SingleDayPrinter : DayPrinter
     {
+        private const string Divider = "--------------------------------------------------";
+
         public void PrintDay(DayResult dayResult)
         {
             PrintDayTitle(dayResult.Day);
@@ -19,9 +21,10 @@ namespace ConsoleApp
             PrintDayEnd(totalTimeTaken);
         }
 
-        private void PrintPuzzle(int part, PuzzleResult puzzleResult)
+        private void PrintPuzzle(int part, TimedPuzzleResult puzzleResult)
         {
-            Console.WriteLine($"Part {part}:");
+            var time = Formatter.FormatTime(puzzleResult.TimeTaken);
+            Console.WriteLine($"Part {part}: {time}");
             var color = GetColor(puzzleResult);
             SetColor(color);
             Console.Write(puzzleResult.Answer);
@@ -39,13 +42,19 @@ namespace ConsoleApp
         {
             Console.WriteLine();
             Console.WriteLine($"Day {day.Id} {day.Year}:");
-            Printer.PrintDivider();
+            PrintDivider();
         }
 
         private static void PrintDayEnd(TimeSpan timeTaken)
         {
-            Printer.PrintDivider();
-            Printer.PrintTime(timeTaken);
+            PrintDivider();
+            var time = Formatter.FormatTime(timeTaken);
+            Console.WriteLine(time.PadLeft(Divider.Length));
+        }
+
+        private static void PrintDivider()
+        {
+            Console.WriteLine(Divider);
         }
     }
 }

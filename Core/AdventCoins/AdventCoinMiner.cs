@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Core.Tools;
 
@@ -5,35 +6,37 @@ namespace Core.AdventCoins
 {
     public class AdventCoinMiner
     {
-        public int Mine(string key, int leadingZeros)
+        public int Mine(string key, int leadingZeros, int startIndex = 1)
         {
-            var index = 1;
-            int? coin = null;
+            var index = startIndex;
             var hashFactory = new Hashfactory();
-            var compareString = GetCompareString(leadingZeros);
-            while(coin == null)
+            var isCoinFound = GetCompareFunc(leadingZeros);
+            while (true)
             {
-                var hash = hashFactory.Create($"{key}{index}");
-                if (hash.StartsWith(compareString))
-                {
-                    coin = index;
-                }
+                var hashedBytes = hashFactory.ByteHashFromString($"{key}{index}");
+
+                if (isCoinFound(hashedBytes))
+                    return index;
 
                 index++;
             }
-
-            return coin ?? 0;
         }
 
-        private string GetCompareString(int leadingZeros)
+        private Func<byte[], bool> GetCompareFunc(int leadingZeros)
         {
-            var sb = new StringBuilder();
-            for (var i = 0; i < leadingZeros; i++)
-            {
-                sb.Append(0);
-            }
+            if (leadingZeros == 5)
+                return StartsWithFiveZeros;
+            return StartsWithSixZeros;
+        }
 
-            return sb.ToString();
+        private static bool StartsWithFiveZeros(byte[] bytes)
+        {
+            return bytes[0] == 0 && bytes[1] == 0 && bytes[2] < 10;
+        }
+
+        private static bool StartsWithSixZeros(byte[] bytes)
+        {
+            return bytes[0] == 0 && bytes[1] == 0 && bytes[2] == 0;
         }
     }
 }

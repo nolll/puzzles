@@ -3,11 +3,13 @@
     public class PuzzleResult
     {
         public string Answer { get; }
+        public string CorrectAnswer { get; }
         public PuzzleResultStatus Status { get; }
 
         public PuzzleResult(string answer, string correctAnswer = null)
             : this(answer, VerifyResult(answer, correctAnswer))
         {
+            CorrectAnswer = correctAnswer;
         }
 
         public PuzzleResult(int? answer, int? correctAnswer = null)

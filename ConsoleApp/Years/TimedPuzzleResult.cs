@@ -7,7 +7,7 @@ namespace ConsoleApp.Years
         public TimeSpan TimeTaken { get; }
 
         public TimedPuzzleResult(PuzzleResult result, TimeSpan timeTaken)
-            : base(result.Answer, result.Status)
+            : base(result.Answer, result.CorrectAnswer)
         {
             TimeTaken = timeTaken;
         }

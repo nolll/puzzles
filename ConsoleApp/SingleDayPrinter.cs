@@ -25,6 +25,12 @@ namespace ConsoleApp
             var color = GetColor(puzzleResult);
             SetColor(color);
             Console.Write(puzzleResult.Answer);
+            //if (puzzleResult.Status == PuzzleResultStatus.Wrong)
+            //{
+            //    Console.WriteLine();
+            //    SetColor(ConsoleColor.DarkRed);
+            //    Console.Write(puzzleResult.CorrectAnswer);
+            //}
             ResetColor();
             Console.WriteLine();
         }

@@ -11,7 +11,14 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         public override PuzzleResult RunPart1()
         {
             var system = new MemoryGame(Input);
-            var result = system.Play();
+            var result = system.Play(2020);
+            return new PuzzleResult(result);
+        }
+
+        public override PuzzleResult RunPart2()
+        {
+            var system = new MemoryGame(Input);
+            var result = system.Play(30000000);
             return new PuzzleResult(result);
         }
 

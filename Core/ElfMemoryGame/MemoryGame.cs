@@ -6,16 +6,16 @@ namespace Core.ElfMemoryGame
 {
     public class MemoryGame
     {
-        private readonly List<int> _inputNumbers;
-        private Dictionary<int, GameNumber> _numbers;
+        private readonly List<long> _inputNumbers;
+        private Dictionary<long, GameNumber> _numbers;
 
         public MemoryGame(string input)
         {
-            _inputNumbers = input.Split(',').Select(int.Parse).ToList();
-            _numbers = new Dictionary<int, GameNumber>();
+            _inputNumbers = input.Split(',').Select(long.Parse).ToList();
+            _numbers = new Dictionary<long, GameNumber>();
         }
 
-        public int Play()
+        public long Play(int until)
         {
             var turn = 0;
             GameNumber lastSpokenNumber = null;
@@ -28,7 +28,7 @@ namespace Core.ElfMemoryGame
             if(lastSpokenNumber == null)
                 throw new Exception("No number spoken");
 
-            while (turn < 2020)
+            while (turn < until)
             {
                 if (lastSpokenNumber.SpeakCount == 1)
                 {
@@ -44,7 +44,7 @@ namespace Core.ElfMemoryGame
             return lastSpokenNumber.Num;
         }
 
-        private GameNumber Speak(int num, int turn)
+        private GameNumber Speak(long num, int turn)
         {
             if (!_numbers.TryGetValue(num, out var gameNum))
             {
@@ -58,12 +58,12 @@ namespace Core.ElfMemoryGame
 
         private class GameNumber
         {
-            public int Num { get; }
-            public int PrevSpoken { get; private set; }
-            public int LastSpoken { get; private set; }
-            public int SpeakCount { get; private set; }
+            public long Num { get; }
+            public long PrevSpoken { get; private set; }
+            public long LastSpoken { get; private set; }
+            public long SpeakCount { get; private set; }
 
-            public GameNumber(int num)
+            public GameNumber(long num)
             {
                 Num = num;
                 PrevSpoken = 0;
@@ -71,7 +71,7 @@ namespace Core.ElfMemoryGame
                 SpeakCount = 0;
             }
 
-            public int Age => LastSpoken - PrevSpoken;
+            public long Age => LastSpoken - PrevSpoken;
 
             public void Speak(int time)
             {

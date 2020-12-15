@@ -7,9 +7,9 @@
         public PuzzleResultStatus Status { get; }
 
         public PuzzleResult(string answer, string correctAnswer = null)
-            : this(answer, VerifyResult(answer, correctAnswer))
+            : this(answer, correctAnswer, VerifyResult(answer, correctAnswer))
         {
-            CorrectAnswer = correctAnswer;
+            
         }
 
         public PuzzleResult(int? answer, int? correctAnswer = null)
@@ -23,8 +23,14 @@
         }
 
         protected PuzzleResult(string answer, PuzzleResultStatus status)
+            : this(answer, null, status)
+        {
+        }
+
+        protected PuzzleResult(string answer, string correctAnswer, PuzzleResultStatus status)
         {
             Answer = answer;
+            CorrectAnswer = correctAnswer;
             Status = status;
         }
 

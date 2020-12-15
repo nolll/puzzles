@@ -7,7 +7,7 @@ namespace Core.ElfMemoryGame
     public class MemoryGame
     {
         private readonly List<long> _inputNumbers;
-        private Dictionary<long, GameNumber> _numbers;
+        private readonly Dictionary<long, GameNumber> _numbers;
 
         public MemoryGame(string input)
         {
@@ -30,14 +30,10 @@ namespace Core.ElfMemoryGame
 
             while (turn < until)
             {
-                if (lastSpokenNumber.SpeakCount == 1)
-                {
-                    lastSpokenNumber = Speak(0, turn);
-                }
-                else
-                {
-                    lastSpokenNumber = Speak(lastSpokenNumber.Age, turn);
-                }
+                var numberToSpeak = lastSpokenNumber.SpeakCount == 1
+                    ? 0
+                    : lastSpokenNumber.Age;
+                lastSpokenNumber = Speak(numberToSpeak, turn);
                 turn++;
             }
 
@@ -58,25 +54,26 @@ namespace Core.ElfMemoryGame
 
         private class GameNumber
         {
+            private long _prevSpoken;
+            private long _lastSpoken;
+            
             public long Num { get; }
-            public long PrevSpoken { get; private set; }
-            public long LastSpoken { get; private set; }
             public long SpeakCount { get; private set; }
 
             public GameNumber(long num)
             {
+                _prevSpoken = 0;
+                _lastSpoken = 0;
                 Num = num;
-                PrevSpoken = 0;
-                LastSpoken = 0;
                 SpeakCount = 0;
             }
 
-            public long Age => LastSpoken - PrevSpoken;
+            public long Age => _lastSpoken - _prevSpoken;
 
             public void Speak(int time)
             {
-                PrevSpoken = LastSpoken;
-                LastSpoken = time;
+                _prevSpoken = _lastSpoken;
+                _lastSpoken = time;
                 SpeakCount++;
             }
         }

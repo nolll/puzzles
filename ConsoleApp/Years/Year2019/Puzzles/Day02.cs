@@ -12,8 +12,8 @@ namespace ConsoleApp.Years.Year2019.Puzzles
         public override PuzzleResult RunPart1()
         {
             var computer = new ConsoleComputer(FileInput);
-            computer.Start();
-            var value = computer.Output;
+            computer.Start(false, 12, 2);
+            var value = computer.Result;
             return new PuzzleResult(value, 3_101_844);
         }
 

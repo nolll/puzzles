@@ -6,34 +6,9 @@ namespace Core.TicketValidation
 {
     public class TicketValidator
     {
-        private class Data
-        {
-            public Dictionary<string, Rule> Rules { get; }
-            public Ticket MyTicket { get; }
-            public List<Ticket> OtherTickets { get; }
-
-            public Data(Dictionary<string, Rule> rules, Ticket myTicket, List<Ticket> otherTickets)
-            {
-                Rules = rules;
-                MyTicket = myTicket;
-                OtherTickets = otherTickets;
-            }
-        }
-
-        private Data ParseAll(string input)
-        {
-            var groups = PuzzleInputReader.ReadLineGroups(input);
-            var ruleRows = groups[0];
-            var rules = ruleRows.Select(Rule.Parse).ToDictionary(rule => rule.Name);
-            var myTicket = ParseTicket(groups[1][1]);
-            var otherTickets = groups[2].Skip(1).Select(ParseTicket).Where(o => IsValid(o, rules)).ToList();
-
-            return new Data(rules, myTicket, otherTickets);
-        }
-        
         public long GetErrorRate(string input)
         {
-            var data = ParseAll(input);
+            var data = ParseData(input);
             var invalidValues = FindInvalidValues(data);
 
             return invalidValues.Sum();
@@ -57,19 +32,6 @@ namespace Core.TicketValidation
             return invalidValues;
         }
 
-        private bool IsValid(Ticket ticket, Dictionary<string, Rule> rules)
-        {
-            foreach (var rule in rules.Values)
-            {
-                if (!ticket.Numbers.Any(rule.IsValid))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
         public long CalculateAnswer(string input)
         {
             var ticket = FindFields(input);
@@ -87,7 +49,7 @@ namespace Core.TicketValidation
 
         public Ticket FindFields(string input)
         {
-            var data = ParseAll(input);
+            var data = ParseData(input);
             var otherTickets = FilterValidTickets(data.OtherTickets, FindInvalidValues(data)).ToList();
 
             var possiblePositions = new Dictionary<string, List<int>>();
@@ -100,14 +62,13 @@ namespace Core.TicketValidation
                     var ticketValuesAtThisPosition = otherTickets.Select(o => o.Numbers[currentPos]);
                     var isPossibleAtThisPosition = ticketValuesAtThisPosition.All(o => rule.IsValid(o));
 
-                    if (isPossibleAtThisPosition)
-                    {
-                        if (!possiblePositions.ContainsKey(rule.Name))
-                        {
-                            possiblePositions.Add(rule.Name, new List<int>());
-                        }
-                        possiblePositions[rule.Name].Add(pos);
-                    }
+                    if (!isPossibleAtThisPosition)
+                        continue;
+
+                    if (!possiblePositions.ContainsKey(rule.Name))
+                        possiblePositions.Add(rule.Name, new List<int>());
+
+                    possiblePositions[rule.Name].Add(pos);
                 }
             }
 
@@ -152,9 +113,29 @@ namespace Core.TicketValidation
             return validTickets;
         }
 
-        private Ticket ParseTicket(string s)
+        private Data ParseData(string input)
         {
-            return new Ticket(s.Split(',').Select(int.Parse).ToList());
+            var groups = PuzzleInputReader.ReadLineGroups(input);
+            var ruleRows = groups[0];
+            var rules = ruleRows.Select(Rule.Parse).ToDictionary(rule => rule.Name);
+            var myTicket = Ticket.Parse(groups[1][1]);
+            var otherTickets = groups[2].Skip(1).Select(Ticket.Parse).Where(o => o.IsValid(rules)).ToList();
+
+            return new Data(rules, myTicket, otherTickets);
+        }
+
+        private class Data
+        {
+            public Dictionary<string, Rule> Rules { get; }
+            public Ticket MyTicket { get; }
+            public List<Ticket> OtherTickets { get; }
+
+            public Data(Dictionary<string, Rule> rules, Ticket myTicket, List<Ticket> otherTickets)
+            {
+                Rules = rules;
+                MyTicket = myTicket;
+                OtherTickets = otherTickets;
+            }
         }
 
         public class Range
@@ -217,7 +198,7 @@ namespace Core.TicketValidation
             public Dictionary<string, int> Fields { get; }
             public List<int> Numbers { get; }
 
-            public Ticket(List<int> numbers)
+            private Ticket(List<int> numbers)
             {
                 Numbers = numbers;
                 Fields = new Dictionary<string, int>();
@@ -229,6 +210,24 @@ namespace Core.TicketValidation
                 {
                     Fields[field.Key] = Numbers[field.Value];
                 }
+            }
+
+            public bool IsValid(Dictionary<string, Rule> rules)
+            {
+                foreach (var rule in rules.Values)
+                {
+                    if (!Numbers.Any(rule.IsValid))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            public static Ticket Parse(string s)
+            {
+                return new Ticket(s.Split(',').Select(int.Parse).ToList());
             }
         }
     }

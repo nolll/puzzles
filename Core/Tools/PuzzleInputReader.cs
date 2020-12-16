@@ -11,7 +11,7 @@ namespace Core.Tools
             return str.Trim().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).ToList();
         }
 
-        public static IList<IList<string>> ReadGroups(string str)
+        public static IList<IList<string>> ReadLineGroups(string str)
         {
             return str.Trim().Split("\r\n\r\n").Select(ReadLines).ToList();
         }

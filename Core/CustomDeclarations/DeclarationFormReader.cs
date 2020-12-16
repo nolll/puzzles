@@ -10,7 +10,7 @@ namespace Core.CustomDeclarations
 
         public DeclarationFormReader(string input)
         {
-            _groups = PuzzleInputReader.ReadGroups(input);
+            _groups = PuzzleInputReader.ReadLineGroups(input);
         }
 
         public int SumOfAtLeastOneYes

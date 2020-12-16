@@ -19,7 +19,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var validator = new TicketValidator();
             var result = validator.CalculateAnswer(FileInput);
-            return new PuzzleResult(result);
+            return new PuzzleResult(result, 362_974_212_989);
         }
     }
 }

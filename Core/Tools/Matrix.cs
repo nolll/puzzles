@@ -256,94 +256,43 @@ namespace Core.Tools
                    address.X < 0;
         }
 
-        public IList<T> Adjacent4
-        {
-            get
-            {
-                var values = new List<T>();
-                var address = new MatrixAddress(Address.X, Address.Y - 1);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
-                
-                address = new MatrixAddress(Address.X + 1, Address.Y);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
-                
-                address = new MatrixAddress(Address.X, Address.Y + 1);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
-                
-                address = new MatrixAddress(Address.X - 1, Address.Y);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
-
-                return values;
-            }
-        }
+        public IList<T> Adjacent4 => Adjacent4Coords.Select(ReadValueAt).ToList();
 
         public IList<MatrixAddress> Adjacent4Coords
         {
             get
             {
-                var values = new List<MatrixAddress>();
-                var address = new MatrixAddress(Address.X, Address.Y - 1);
-                if (!IsOutOfRange(address))
-                    values.Add(address);
+                var coords = new List<MatrixAddress>
+                {
+                    new MatrixAddress(Address.X, Address.Y - 1),
+                    new MatrixAddress(Address.X + 1, Address.Y),
+                    new MatrixAddress(Address.X, Address.Y + 1),
+                    new MatrixAddress(Address.X - 1, Address.Y)
+                };
 
-                address = new MatrixAddress(Address.X + 1, Address.Y);
-                if (!IsOutOfRange(address))
-                    values.Add(address);
-
-                address = new MatrixAddress(Address.X, Address.Y + 1);
-                if (!IsOutOfRange(address))
-                    values.Add(address);
-
-                address = new MatrixAddress(Address.X - 1, Address.Y);
-                if (!IsOutOfRange(address))
-                    values.Add(address);
-
-                return values;
+                return coords.Where(o => !IsOutOfRange(o)).ToList();
             }
         }
 
-        public IList<T> Adjacent8
+        public IList<T> Adjacent8 => Adjacent8Coords.Select(ReadValueAt).ToList();
+
+        public IList<MatrixAddress> Adjacent8Coords
         {
             get
             {
-                var values = new List<T>();
-                var address = new MatrixAddress(Address.X, Address.Y - 1);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
+                var coords = new List<MatrixAddress>
+                {
+                    new MatrixAddress(Address.X, Address.Y - 1),
+                    new MatrixAddress(Address.X + 1, Address.Y - 1),
+                    new MatrixAddress(Address.X + 1, Address.Y),
+                    new MatrixAddress(Address.X + 1, Address.Y + 1),
+                    new MatrixAddress(Address.X, Address.Y + 1),
+                    new MatrixAddress(Address.X - 1, Address.Y + 1),
+                    new MatrixAddress(Address.X - 1, Address.Y),
+                    new MatrixAddress(Address.X - 1, Address.Y - 1)
+                };
 
-                address = new MatrixAddress(Address.X + 1, Address.Y - 1);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
-
-                address = new MatrixAddress(Address.X + 1, Address.Y);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
-
-                address = new MatrixAddress(Address.X + 1, Address.Y + 1);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
-
-                address = new MatrixAddress(Address.X, Address.Y + 1);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
-
-                address = new MatrixAddress(Address.X - 1, Address.Y + 1);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
-
-                address = new MatrixAddress(Address.X - 1, Address.Y);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
-
-                address = new MatrixAddress(Address.X - 1, Address.Y - 1);
-                if (!IsOutOfRange(address))
-                    values.Add(ReadValueAt(address));
-
-                return values;
+                return coords.Where(o => !IsOutOfRange(o)).ToList();
             }
         }
 

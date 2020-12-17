@@ -9,7 +9,7 @@ namespace Core.Tools
         private readonly T _defaultValue;
         private readonly IList<IList<IList<T>>> _matrix;
         public Matrix3DAddress Address { get; private set; }
-        public Matrix3DAddress StartAddress { get; private set; }
+        public Matrix3DAddress StartAddress { get; set; }
 
         public IList<T> Values => _matrix.SelectMany(x => x).SelectMany(x => x).ToList();
         public int Depth => _matrix.Count;
@@ -162,32 +162,17 @@ namespace Core.Tools
         {
             get
             {
-                var coords = new List<Matrix3DAddress>();
-                var address = new Matrix3DAddress(Address.X + 1, Address.Y, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
+                var coords = new List<Matrix3DAddress>
+                {
+                    new Matrix3DAddress(Address.X + 1, Address.Y, Address.Z),
+                    new Matrix3DAddress(Address.X - 1, Address.Y, Address.Z),
+                    new Matrix3DAddress(Address.X, Address.Y + 1, Address.Z),
+                    new Matrix3DAddress(Address.X, Address.Y - 1, Address.Z),
+                    new Matrix3DAddress(Address.X, Address.Y, Address.Z + 1),
+                    new Matrix3DAddress(Address.X, Address.Y, Address.Z - 1)
+                };
 
-                address = new Matrix3DAddress(Address.X - 1, Address.Y, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X, Address.Y + 1, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X, Address.Y - 1, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X, Address.Y, Address.Z + 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X, Address.Y, Address.Z - 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                return coords;
+                return coords.Where(o => !IsOutOfRange(o)).ToList();
             }
         }
 
@@ -198,119 +183,22 @@ namespace Core.Tools
             get
             {
                 var coords = new List<Matrix3DAddress>();
+                var d = new[] {-1, 0, 1};
+                foreach (var dz in d)
+                {
+                    foreach (var dy in d)
+                    {
+                        foreach (var dx in d)
+                        {
+                            coords.Add(new Matrix3DAddress(Address.X + dx, Address.Y - dy, Address.Z - dz));
+                        }
+                    }
+                }
 
-                // closer
-                var address = new Matrix3DAddress(Address.X, Address.Y - 1, Address.Z - 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X + 1, Address.Y - 1, Address.Z - 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X + 1, Address.Y, Address.Z - 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X + 1, Address.Y + 1, Address.Z - 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X, Address.Y + 1, Address.Z - 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X - 1, Address.Y + 1, Address.Z - 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X - 1, Address.Y, Address.Z - 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X - 1, Address.Y - 1, Address.Z - 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X, Address.Y, Address.Z - 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                // same level
-                address = new Matrix3DAddress(Address.X, Address.Y - 1, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X + 1, Address.Y - 1, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X + 1, Address.Y, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X + 1, Address.Y + 1, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X, Address.Y + 1, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X - 1, Address.Y + 1, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X - 1, Address.Y, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X - 1, Address.Y - 1, Address.Z);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                // farther
-                address = new Matrix3DAddress(Address.X, Address.Y - 1, Address.Z + 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X + 1, Address.Y - 1, Address.Z + 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X + 1, Address.Y, Address.Z + 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X + 1, Address.Y + 1, Address.Z + 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X, Address.Y + 1, Address.Z + 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X - 1, Address.Y + 1, Address.Z + 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X - 1, Address.Y, Address.Z + 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X - 1, Address.Y - 1, Address.Z + 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-                address = new Matrix3DAddress(Address.X, Address.Y, Address.Z + 1);
-                if (!IsOutOfRange(address))
-                    coords.Add(address);
-
-
-                return coords;
+                return coords.Where(o => !o.Equals(Address) && !IsOutOfRange(o)).ToList();
             }
         }
-
+        
         public Matrix3D<T> Copy()
         {
             var matrix = new Matrix3D<T>();

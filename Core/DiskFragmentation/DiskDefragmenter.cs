@@ -46,7 +46,7 @@ namespace Core.DiskFragmentation
                                 disk.MoveTo(atp);
                                 processed.Add(atp.Id, currentRegion);
                                 addressesToProcess.RemoveAt(0);
-                                var adjacent = disk.Adjacent4Coords;
+                                var adjacent = disk.PerpendicularAdjacentCoords;
                                 var coordsToAdd = adjacent.Where(o =>
                                     disk.ReadValueAt(o) == '#' &&
                                     !processed.ContainsKey(o.Id) &&

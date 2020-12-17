@@ -47,7 +47,7 @@ namespace Core.BugLife
                 {
                     _matrix.MoveTo(x, y);
                     var currentValue = _matrix.ReadValue();
-                    var adjacentValues = _matrix.Adjacent4;
+                    var adjacentValues = _matrix.PerpendicularAdjacentValues;
                     var neighborCount = adjacentValues.Count(o => o == '#');
                     var newValue = GetNewValue(currentValue, neighborCount);
                     newMatrix.MoveTo(x, y);

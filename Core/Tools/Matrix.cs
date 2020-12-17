@@ -256,23 +256,17 @@ namespace Core.Tools
                    address.X < 0;
         }
 
-        public IList<T> Adjacent4 => Adjacent4Coords.Select(ReadValueAt).ToList();
+        public IList<T> PerpendicularAdjacentValues => PossiblePerpendicularAdjacentCoords.Select(ReadValueAt).ToList();
+        public IList<MatrixAddress> PerpendicularAdjacentCoords => PossiblePerpendicularAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-        public IList<MatrixAddress> Adjacent4Coords
-        {
-            get
+        private IEnumerable<MatrixAddress> PossiblePerpendicularAdjacentCoords =>
+            new List<MatrixAddress>
             {
-                var coords = new List<MatrixAddress>
-                {
-                    new MatrixAddress(Address.X, Address.Y - 1),
-                    new MatrixAddress(Address.X + 1, Address.Y),
-                    new MatrixAddress(Address.X, Address.Y + 1),
-                    new MatrixAddress(Address.X - 1, Address.Y)
-                };
-
-                return coords.Where(o => !IsOutOfRange(o)).ToList();
-            }
-        }
+                new MatrixAddress(Address.X, Address.Y - 1),
+                new MatrixAddress(Address.X + 1, Address.Y),
+                new MatrixAddress(Address.X, Address.Y + 1),
+                new MatrixAddress(Address.X - 1, Address.Y)
+            };
 
         public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
         public IList<MatrixAddress> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();

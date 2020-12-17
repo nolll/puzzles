@@ -160,27 +160,21 @@ namespace Core.Tools
                    address.X < 0;
         }
 
-        public IList<T> Adjacent8 => Adjacent8Coords.Select(ReadValueAt).ToList();
-
-        public IList<Matrix4DAddress> Adjacent8Coords
-        {
-            get
+        public IList<T> PerpendicularAdjacentValues => PerpendicularAdjacentCoords.Select(ReadValueAt).ToList();
+        public IList<Matrix4DAddress> PerpendicularAdjacentCoords => PossiblePerpendicularAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
+        
+        private IList<Matrix4DAddress> PossiblePerpendicularAdjacentCoords =>
+            new List<Matrix4DAddress>
             {
-                var coords = new List<Matrix4DAddress>
-                {
-                    new Matrix4DAddress(Address.X + 1, Address.Y, Address.Z, Address.W),
-                    new Matrix4DAddress(Address.X - 1, Address.Y, Address.Z, Address.W),
-                    new Matrix4DAddress(Address.X, Address.Y + 1, Address.Z, Address.W),
-                    new Matrix4DAddress(Address.X, Address.Y - 1, Address.Z, Address.W),
-                    new Matrix4DAddress(Address.X, Address.Y, Address.Z + 1, Address.W),
-                    new Matrix4DAddress(Address.X, Address.Y, Address.Z - 1, Address.W),
-                    new Matrix4DAddress(Address.X, Address.Y, Address.Z, Address.W + 1),
-                    new Matrix4DAddress(Address.X, Address.Y, Address.Z, Address.W - 1)
-                };
-
-                return coords.Where(o => !IsOutOfRange(o)).ToList();
-            }
-        }
+                new Matrix4DAddress(Address.X + 1, Address.Y, Address.Z, Address.W),
+                new Matrix4DAddress(Address.X - 1, Address.Y, Address.Z, Address.W),
+                new Matrix4DAddress(Address.X, Address.Y + 1, Address.Z, Address.W),
+                new Matrix4DAddress(Address.X, Address.Y - 1, Address.Z, Address.W),
+                new Matrix4DAddress(Address.X, Address.Y, Address.Z + 1, Address.W),
+                new Matrix4DAddress(Address.X, Address.Y, Address.Z - 1, Address.W),
+                new Matrix4DAddress(Address.X, Address.Y, Address.Z, Address.W + 1),
+                new Matrix4DAddress(Address.X, Address.Y, Address.Z, Address.W - 1)
+            };
 
         public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
         public IList<Matrix4DAddress> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();

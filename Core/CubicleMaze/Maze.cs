@@ -29,7 +29,7 @@ namespace Core.CubicleMaze
                 {
                     _matrix.MoveTo(coord);
                     _matrix.WriteValue('O');
-                    var adjacentCoords = _matrix.Adjacent4Coords.Where(o => _matrix.ReadValueAt(o) == '.').ToList();
+                    var adjacentCoords = _matrix.PerpendicularAdjacentCoords.Where(o => _matrix.ReadValueAt(o) == '.').ToList();
                     newQueue.AddRange(adjacentCoords);
                 }
 

@@ -44,7 +44,7 @@ namespace Core.DonutMaze
                 var currentCoords = letterCoords.First();
                 letterCoords.RemoveAt(0);
                 matrix.MoveTo(currentCoords);
-                var secondsLetterCoords = matrix.Adjacent4Coords.First(o => IsLetter(matrix.ReadValueAt(o)));
+                var secondsLetterCoords = matrix.PerpendicularAdjacentCoords.First(o => IsLetter(matrix.ReadValueAt(o)));
                 var firstLetter = matrix.ReadValueAt(currentCoords);
                 var secondLetter = matrix.ReadValueAt(secondsLetterCoords);
                 letterCoords.Remove(secondsLetterCoords);
@@ -52,12 +52,12 @@ namespace Core.DonutMaze
                 matrix.WriteValue(Chars.Wall);
                 matrix.MoveTo(secondsLetterCoords);
                 matrix.WriteValue(Chars.Wall);
-                var secondLetterHasAdjacentCorridor = matrix.Adjacent4.Any(o => o == Chars.Path);
+                var secondLetterHasAdjacentCorridor = matrix.PerpendicularAdjacentValues.Any(o => o == Chars.Path);
                 matrix.MoveTo(currentCoords);
                 var name = string.Concat(firstLetter, secondLetter);
                 var letterAddress = secondLetterHasAdjacentCorridor ? secondsLetterCoords : currentCoords;
                 matrix.MoveTo(letterAddress);
-                var portalAddress = matrix.Adjacent4Coords.First(o => matrix.ReadValueAt(o) == Chars.Path);
+                var portalAddress = matrix.PerpendicularAdjacentCoords.First(o => matrix.ReadValueAt(o) == Chars.Path);
                 if (name == "AA")
                 {
                     _startAddress = portalAddress;
@@ -147,7 +147,7 @@ namespace Core.DonutMaze
                 var matrix = GetMatrix(next.Depth);
                 matrix.MoveTo(next.X, next.Y);
                 var localDepth = depth;
-                var adjacentCoords = matrix.Adjacent4Coords
+                var adjacentCoords = matrix.PerpendicularAdjacentCoords
                     .Where(o => matrix.ReadValueAt(o) == Chars.Path && !queue.Any(q => q.Depth == localDepth && q.X == o.X && q.Y == o.Y))
                     .ToList();
                 var newCoordCounts = adjacentCoords.Select(o => new CoordCount(depth, o.X, o.Y, next.Count + 1)).ToList();

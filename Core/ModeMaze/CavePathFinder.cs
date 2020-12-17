@@ -52,7 +52,7 @@ namespace Core.ModeMaze
                 if (!isStart)
                 {
                     var region = matrix.ReadValue();
-                    var adjacentCoords = matrix.Adjacent4Coords;
+                    var adjacentCoords = matrix.PerpendicularAdjacentCoords;
                     foreach (var next in adjacentCoords)
                     {
                         var targetRegion = matrix.ReadValueAt(next);

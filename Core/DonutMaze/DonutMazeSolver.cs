@@ -113,7 +113,7 @@ namespace Core.DonutMaze
                 var currentCoords = letterCoords.First();
                 letterCoords.RemoveAt(0);
                 _map.MoveTo(currentCoords);
-                var secondsLetterCoords = _map.Adjacent4Coords.First(o => IsLetter(_map.ReadValueAt(o)));
+                var secondsLetterCoords = _map.PerpendicularAdjacentCoords.First(o => IsLetter(_map.ReadValueAt(o)));
                 var firstLetter = _map.ReadValueAt(currentCoords);
                 var secondLetter = _map.ReadValueAt(secondsLetterCoords);
                 letterCoords.Remove(secondsLetterCoords);
@@ -121,7 +121,7 @@ namespace Core.DonutMaze
                 _map.WriteValue('#');
                 _map.MoveTo(secondsLetterCoords);
                 _map.WriteValue('#');
-                var secondLetterHasAdjacentCorridor = _map.Adjacent4.Any(o => o == '.');
+                var secondLetterHasAdjacentCorridor = _map.PerpendicularAdjacentValues.Any(o => o == '.');
                 _map.MoveTo(currentCoords);
                 var name = string.Concat(firstLetter, secondLetter);
                 var portalAddress = secondLetterHasAdjacentCorridor ? secondsLetterCoords : currentCoords;

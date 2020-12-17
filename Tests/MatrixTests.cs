@@ -74,7 +74,7 @@ namespace Tests
         }
 
         [Test]
-        public void AllAdjacent6Exists()
+        public void PerpendicularAdjacentCoordsExist()
         {
             var matrix = new Matrix<char>(1, 1, DefaultValue);
             matrix.WriteValue(WriteValue);
@@ -82,9 +82,9 @@ namespace Tests
 
             matrix.MoveTo(1, 1);
 
-            Assert.That(matrix.Adjacent4Coords.Count, Is.EqualTo(6));
+            Assert.That(matrix.PerpendicularAdjacentCoords.Count, Is.EqualTo(4));
 
-            var adjacentCoords = matrix.Adjacent4Coords;
+            var adjacentCoords = matrix.PerpendicularAdjacentCoords;
             var squaresAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
             var squaresAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
             Assert.That(squaresAtXZero.Count, Is.EqualTo(1));
@@ -92,7 +92,7 @@ namespace Tests
         }
 
         [Test]
-        public void AllAdjacent26Exists()
+        public void AllAdjacentCoordsExists()
         {
             var matrix = new Matrix<char>(1, 1, DefaultValue);
             matrix.WriteValue(WriteValue);
@@ -100,13 +100,13 @@ namespace Tests
 
             matrix.MoveTo(1, 1);
 
-            Assert.That(matrix.AllAdjacentCoords.Count, Is.EqualTo(26));
+            Assert.That(matrix.AllAdjacentCoords.Count, Is.EqualTo(8));
 
             var adjacentCoords = matrix.AllAdjacentCoords;
             var squaresAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
             var squaresAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
-            Assert.That(squaresAtXZero.Count, Is.EqualTo(9));
-            Assert.That(squaresAtYZero.Count, Is.EqualTo(9));
+            Assert.That(squaresAtXZero.Count, Is.EqualTo(3));
+            Assert.That(squaresAtYZero.Count, Is.EqualTo(3));
         }
     }
 }

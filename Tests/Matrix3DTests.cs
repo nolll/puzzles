@@ -50,9 +50,9 @@ namespace Tests
 
             matrix.MoveTo(1, 1, 1);
 
-            Assert.That(matrix.Adjacent6Coords.Count, Is.EqualTo(6));
+            Assert.That(matrix.PerpendicularAdjacentCoords.Count, Is.EqualTo(6));
 
-            var adjacentCoords = matrix.Adjacent6Coords;
+            var adjacentCoords = matrix.PerpendicularAdjacentCoords;
             var cubesAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
             var cubesAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
             var cubesAtZZero = adjacentCoords.Where(o => o.Z == 0).ToList();

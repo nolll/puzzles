@@ -27,7 +27,7 @@ namespace Core.Tools
             while (!currentAddress.Equals(to))
             {
                 pathMatrix.MoveTo(currentAddress);
-                var adjacentCoords = pathMatrix.Adjacent4Coords
+                var adjacentCoords = pathMatrix.PerpendicularAdjacentCoords
                     .Where(o => pathMatrix.ReadValueAt(o) > -1)
                     .OrderBy(o => pathMatrix.ReadValueAt(o))
                     .ThenBy(o => o.Y)
@@ -51,7 +51,7 @@ namespace Core.Tools
             {
                 var next = queue[index];
                 matrix.MoveTo(next.X, next.Y);
-                var adjacentCoords = matrix.Adjacent4Coords
+                var adjacentCoords = matrix.PerpendicularAdjacentCoords
                     .Where(o => matrix.ReadValueAt(o) == '.' && !queue.Any(q => q.X == o.X && q.Y == o.Y))
                     .ToList();
                 var newCoordCounts = adjacentCoords.Select(o => new CoordCount(o.X, o.Y, next.Count + 1));

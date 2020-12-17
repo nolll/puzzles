@@ -64,7 +64,7 @@ namespace Core.BeverageBandits
                     }
 
                     var enemyType = figure.Type == BattleFigureType.Elf ? BattleFigureType.Goblin : BattleFigureType.Elf;
-                    var adjacentEnemyAddresses = _matrix.Adjacent4Coords.Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
+                    var adjacentEnemyAddresses = _matrix.PerpendicularAdjacentCoords.Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
 
                     if (!adjacentEnemyAddresses.Any())
                     {
@@ -72,7 +72,7 @@ namespace Core.BeverageBandits
                         foreach (var enemy in enemies)
                         {
                             _matrix.MoveTo(enemy.Address);
-                            var adjacentAddresses = _matrix.Adjacent4Coords;
+                            var adjacentAddresses = _matrix.PerpendicularAdjacentCoords;
                             foreach (var adjacentAddress in adjacentAddresses)
                             {
                                 if (_matrix.ReadValueAt(adjacentAddress) == '.')
@@ -103,7 +103,7 @@ namespace Core.BeverageBandits
                     }
 
                     _matrix.MoveTo(figure.Address);
-                    adjacentEnemyAddresses = _matrix.Adjacent4Coords.Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
+                    adjacentEnemyAddresses = _matrix.PerpendicularAdjacentCoords.Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
 
                     if (adjacentEnemyAddresses.Any())
                     {

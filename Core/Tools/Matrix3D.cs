@@ -156,25 +156,19 @@ namespace Core.Tools
                    address.X < 0;
         }
 
-        public IList<T> Adjacent6 => Adjacent6Coords.Select(ReadValueAt).ToList();
+        public IList<T> PerpendicularAdjacentValues => PerpendicularAdjacentCoords.Select(ReadValueAt).ToList();
+        public IList<Matrix3DAddress> PerpendicularAdjacentCoords => PossiblePerpendicularAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-        public IList<Matrix3DAddress> Adjacent6Coords
-        {
-            get
+        private IList<Matrix3DAddress> PossiblePerpendicularAdjacentCoords =>
+            new List<Matrix3DAddress>
             {
-                var coords = new List<Matrix3DAddress>
-                {
-                    new Matrix3DAddress(Address.X + 1, Address.Y, Address.Z),
-                    new Matrix3DAddress(Address.X - 1, Address.Y, Address.Z),
-                    new Matrix3DAddress(Address.X, Address.Y + 1, Address.Z),
-                    new Matrix3DAddress(Address.X, Address.Y - 1, Address.Z),
-                    new Matrix3DAddress(Address.X, Address.Y, Address.Z + 1),
-                    new Matrix3DAddress(Address.X, Address.Y, Address.Z - 1)
-                };
-
-                return coords.Where(o => !IsOutOfRange(o)).ToList();
-            }
-        }
+                new Matrix3DAddress(Address.X + 1, Address.Y, Address.Z),
+                new Matrix3DAddress(Address.X - 1, Address.Y, Address.Z),
+                new Matrix3DAddress(Address.X, Address.Y + 1, Address.Z),
+                new Matrix3DAddress(Address.X, Address.Y - 1, Address.Z),
+                new Matrix3DAddress(Address.X, Address.Y, Address.Z + 1),
+                new Matrix3DAddress(Address.X, Address.Y, Address.Z - 1)
+            };
 
         public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
         public IList<Matrix3DAddress> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();

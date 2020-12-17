@@ -6,13 +6,20 @@ namespace Core.InfiniteElvesAndHouses
 {
     public class PresentDelivery
     {
+        private Dictionary<int, IList<int>> _factors;
+
+        public PresentDelivery()
+        {
+            _factors = new Dictionary<int, IList<int>>();
+        }
+
         public int Deliver1(in int target)
         {
             var house = 1;
 
             while (true)
             {
-                var factors = FindIntFactors1(house);
+                var factors = FindIntFactors(house);
                 var presentCount = factors.Sum(o => o * 10);
                 if (presentCount >= target)
                 {
@@ -23,17 +30,23 @@ namespace Core.InfiniteElvesAndHouses
             }
         }
 
-        private IEnumerable<int> FindIntFactors1(int target)
+        public IList<int> FindIntFactors(int target)
         {
+            if (_factors.ContainsKey(target))
+                return _factors[target];
+
+            var factors = new List<int>();
             var i = 1;
             while (i <= target / 2)
             {
                 if (target % i == 0)
-                    yield return i;
+                    factors.Add(i);
                 i++;
             }
 
-            yield return target;
+            factors.Add(target);
+            _factors.Add(target, factors);
+            return factors;
         }
 
         public int Deliver2(in int target)

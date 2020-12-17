@@ -2,20 +2,22 @@ using System;
 
 namespace Core.Tools
 {
-    public class MatrixAddress : IEquatable<MatrixAddress>
+    public class Matrix3DAddress : IEquatable<Matrix3DAddress>
     {
         public int X { get; }
         public int Y { get; }
+        public int Z { get; }
         public string Id { get; }
 
-        public MatrixAddress(int x, int y)
+        public Matrix3DAddress(int x, int y, int z)
         {
             X = x;
             Y = y;
-            Id = $"{x},{y}";
+            Z = z;
+            Id = $"{x},{y},{z}";
         }
 
-        public int ManhattanDistanceTo(MatrixAddress other)
+        public int ManhattanDistanceTo(Matrix3DAddress other)
         {
             var xMax = Math.Max(X, other.X);
             var xMin = Math.Min(X, other.X);
@@ -25,14 +27,18 @@ namespace Core.Tools
             var yMin = Math.Min(Y, other.Y);
             var yDiff = yMax - yMin;
 
-            return xDiff + yDiff;
+            var zMax = Math.Max(Z, other.Z);
+            var zMin = Math.Min(Z, other.Z);
+            var zDiff = zMax - zMin;
+
+            return xDiff + yDiff + zDiff;
         }
 
-        public bool Equals(MatrixAddress other)
+        public bool Equals(Matrix3DAddress other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return X == other.X && Y == other.Y;
+            return X == other.X && Y == other.Y && Z == other.Z;
         }
 
         public override bool Equals(object obj)
@@ -45,7 +51,7 @@ namespace Core.Tools
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(X, Y);
+            return HashCode.Combine(X, Y, Z);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Core.Tools
             X = x;
             Y = y;
         }
-        
+
         public static readonly MatrixDirection Up = new MatrixDirection("up", 0, -1);
         public static readonly MatrixDirection Right = new MatrixDirection("right", 1, 0);
         public static readonly MatrixDirection Down = new MatrixDirection("down", 0, 1);
@@ -32,7 +32,7 @@ namespace Core.Tools
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((MatrixDirection) obj);
+            return Equals((MatrixDirection)obj);
         }
 
         public override int GetHashCode()

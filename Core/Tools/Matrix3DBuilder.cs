@@ -1,13 +1,12 @@
-using System.IO.Compression;
-
 namespace Core.Tools
 {
-    public static class MatrixBuilder
+    public static class Matrix3DBuilder
     {
-        public static Matrix<char> BuildCharMatrix(string input, char defaultValue = default)
+        public static Matrix3D<char> BuildCharMatrix(string input, char defaultValue = default)
         {
-            var matrix = new Matrix<char>(1, 1, defaultValue);
+            var matrix = new Matrix3D<char>(1, 1, 1, defaultValue);
             var rows = input.Trim().Split('\n');
+            const int z = 0;
             var y = 0;
             foreach (var row in rows)
             {
@@ -15,7 +14,7 @@ namespace Core.Tools
                 var chars = row.Trim().ToCharArray();
                 foreach (var c in chars)
                 {
-                    matrix.MoveTo(x, y);
+                    matrix.MoveTo(x, y, z);
                     matrix.WriteValue(c);
                     x += 1;
                 }

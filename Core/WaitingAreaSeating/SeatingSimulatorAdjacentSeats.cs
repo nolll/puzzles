@@ -11,7 +11,7 @@ namespace Core.WaitingAreaSeating
 
         protected override IList<char> GetAdjacentSeats()
         {
-            return Matrix.Adjacent8;
+            return Matrix.AllAdjacentValues;
         }
 
         protected override char GetSeatStatus(char currentValue, int neighborCount)

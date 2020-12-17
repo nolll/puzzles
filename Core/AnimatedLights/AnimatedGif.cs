@@ -32,7 +32,7 @@ namespace Core.AnimatedLights
                     {
                         _matrix.MoveTo(x, y);
                         newMatrix.MoveTo(x, y);
-                        var adjacentValues = _matrix.Adjacent8;
+                        var adjacentValues = _matrix.AllAdjacentValues;
                         newMatrix.WriteValue(GetNewState(_matrix.ReadValue(), adjacentValues.Count(o => o == LightOn)));
                     }
                 }

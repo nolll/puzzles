@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Tools
 {
-    public class Matrix4D<T>
+    public class Matrix4D<T> : BaseMatrix
     {
         private readonly T _defaultValue;
         private readonly IList<IList<IList<IList<T>>>> _matrix;
@@ -182,29 +182,28 @@ namespace Core.Tools
             }
         }
 
-        public IList<T> Adjacent80 => Adjacent80Coords.Select(ReadValueAt).ToList();
+        public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
+        public IList<Matrix4DAddress> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-        public IList<Matrix4DAddress> Adjacent80Coords
+        private IEnumerable<Matrix4DAddress> AllPossibleAdjacentCoords
         {
             get
             {
-                var coords = new List<Matrix4DAddress>();
-                var d = new[] { -1, 0, 1 };
-                foreach (var dw in d)
+                foreach (var dw in AdjacentDeltas)
                 {
-                    foreach (var dz in d)
+                    foreach (var dz in AdjacentDeltas)
                     {
-                        foreach (var dy in d)
+                        foreach (var dy in AdjacentDeltas)
                         {
-                            foreach (var dx in d)
+                            foreach (var dx in AdjacentDeltas)
                             {
-                                coords.Add(new Matrix4DAddress(Address.X + dx, Address.Y + dy, Address.Z + dz, Address.W + dw));
+                                var coord = new Matrix4DAddress(Address.X + dx, Address.Y + dy, Address.Z + dz, Address.W + dw);
+                                if(!coord.Equals(Address))
+                                    yield return coord;
                             }
                         }
                     }
                 }
-
-                return coords.Where(o => !o.Equals(Address) && !IsOutOfRange(o)).ToList();
             }
         }
 
@@ -276,7 +275,7 @@ namespace Core.Tools
 
         private void ExtendLeft(Matrix4DAddress address)
         {
-            AddColsLeft(-address.X);
+            AddCols(-address.X, MatrixAddMode.Prepend);
             StartAddress = new Matrix4DAddress(StartAddress.X - address.X, StartAddress.Y, StartAddress.Z, StartAddress.W);
         }
 
@@ -284,7 +283,7 @@ namespace Core.Tools
         {
             var extendBy = address.X - (Width - 1);
             if (extendBy > 0)
-                AddColsRight(extendBy);
+                AddCols(extendBy, MatrixAddMode.Append);
         }
 
         private void ExtendY(Matrix4DAddress address)
@@ -296,7 +295,7 @@ namespace Core.Tools
 
         private void ExtendTop(Matrix4DAddress address)
         {
-            AddRowsTop(-address.Y);
+            AddRows(-address.Y, MatrixAddMode.Prepend);
             StartAddress = new Matrix4DAddress(StartAddress.X, StartAddress.Y - address.Y, StartAddress.Z, StartAddress.W);
         }
 
@@ -304,7 +303,7 @@ namespace Core.Tools
         {
             var extendBy = address.Y - (Height - 1);
             if (extendBy > 0)
-                AddRowsBottom(extendBy);
+                AddRows(extendBy, MatrixAddMode.Append);
         }
 
         private void ExtendZ(Matrix4DAddress address)
@@ -316,7 +315,7 @@ namespace Core.Tools
 
         private void ExtendClose(Matrix4DAddress address)
         {
-            AddLevelsClose(-address.Z);
+            AddLevels(-address.Z, MatrixAddMode.Prepend);
             StartAddress = new Matrix4DAddress(StartAddress.X, StartAddress.Y, StartAddress.Z - address.Z, StartAddress.W);
         }
 
@@ -324,7 +323,7 @@ namespace Core.Tools
         {
             var extendBy = address.Z - (Depth - 1);
             if (extendBy > 0)
-                AddLevelsFar(extendBy);
+                AddLevels(extendBy, MatrixAddMode.Append);
         }
 
         private void ExtendW(Matrix4DAddress address)
@@ -336,7 +335,7 @@ namespace Core.Tools
 
         private void ExtendNow(Matrix4DAddress address)
         {
-            AddTimeNow(-address.W);
+            AddTime(-address.W, MatrixAddMode.Prepend);
             StartAddress = new Matrix4DAddress(StartAddress.X, StartAddress.Y, StartAddress.Z, StartAddress.W - address.W);
         }
 
@@ -344,22 +343,22 @@ namespace Core.Tools
         {
             var extendBy = address.W - (Duration - 1);
             if (extendBy > 0)
-                AddTimeThen(extendBy);
+                AddTime(extendBy, MatrixAddMode.Append);
         }
 
         public void ExtendAllDirections(int steps = 1)
         {
-            AddRowsTop(steps);
-            AddRowsBottom(steps);
-            AddColsLeft(steps);
-            AddColsRight(steps);
-            AddLevelsClose(steps);
-            AddLevelsFar(steps);
-            AddTimeNow(steps);
-            AddTimeThen(steps);
+            AddCols(steps, MatrixAddMode.Prepend);
+            AddCols(steps, MatrixAddMode.Append);
+            AddRows(steps, MatrixAddMode.Prepend);
+            AddRows(steps, MatrixAddMode.Append);
+            AddLevels(steps, MatrixAddMode.Prepend);
+            AddLevels(steps, MatrixAddMode.Append);
+            AddTime(steps, MatrixAddMode.Prepend);
+            AddTime(steps, MatrixAddMode.Append);
         }
 
-        private void AddRowsTop(int count)
+        private void AddRows(int count, MatrixAddMode addMode)
         {
             var width = Width;
             var depth = Depth;
@@ -378,38 +377,17 @@ namespace Core.Tools
                             row.Add(_defaultValue);
                         }
 
-                        level.Insert(0, row);
+                        if (addMode == MatrixAddMode.Prepend)
+                            level.Insert(0, row);
+                        else
+                            level.Add(row);
+
                     }
                 }
             }
         }
 
-        private void AddRowsBottom(int count)
-        {
-            var width = Width;
-            var depth = Depth;
-            var duration = Duration;
-            for (var w = 0; w < duration; w++)
-            {
-                var time = _matrix[w];
-                for (var z = 0; z < depth; z++)
-                {
-                    var level = time[z];
-                    for (var y = 0; y < count; y++)
-                    {
-                        var row = new List<T>();
-                        for (var x = 0; x < width; x++)
-                        {
-                            row.Add(_defaultValue);
-                        }
-
-                        level.Add(row);
-                    }
-                }
-            }
-        }
-
-        private void AddColsRight(int count)
+        private void AddCols(int count, MatrixAddMode addMode)
         {
             var height = Height;
             var depth = Depth;
@@ -425,37 +403,17 @@ namespace Core.Tools
                         var row = level[y];
                         for (var x = 0; x < count; x++)
                         {
-                            row.Add(_defaultValue);
+                            if (addMode == MatrixAddMode.Prepend)
+                                row.Insert(0, _defaultValue);
+                            else
+                                row.Add(_defaultValue);
                         }
                     }
                 }
             }
         }
 
-        private void AddColsLeft(int count)
-        {
-            var height = Height;
-            var depth = Depth;
-            var duration = Duration;
-            for (var w = 0; w < duration; w++)
-            {
-                var time = _matrix[w];
-                for (var z = 0; z < depth; z++)
-                {
-                    var level = time[z];
-                    for (var y = 0; y < height; y++)
-                    {
-                        var row = level[y];
-                        for (var x = 0; x < count; x++)
-                        {
-                            row.Insert(0, _defaultValue);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void AddLevelsFar(int count)
+        private void AddLevels(int count, MatrixAddMode addMode)
         {
             var height = Height;
             var width = Width;
@@ -477,39 +435,16 @@ namespace Core.Tools
                         level.Add(row);
                     }
 
-                    time.Add(level);
+                    if (addMode == MatrixAddMode.Prepend)
+                        time.Insert(0, level);
+                    else
+                        time.Add(level);
+                    
                 }
             }
         }
 
-        private void AddLevelsClose(int count)
-        {
-            var height = Height;
-            var width = Width;
-            var duration = Duration;
-            for (var w = 0; w < duration; w++)
-            {
-                var time = _matrix[w];
-                for (var z = 0; z < count; z++)
-                {
-                    var level = new List<IList<T>>();
-                    for (var y = 0; y < height; y++)
-                    {
-                        var row = new List<T>();
-                        for (var x = 0; x < width; x++)
-                        {
-                            row.Add(_defaultValue);
-                        }
-
-                        level.Add(row);
-                    }
-
-                    time.Insert(0, level);
-                }
-            }
-        }
-
-        private void AddTimeNow(int count)
+        private void AddTime(int count, MatrixAddMode addMode)
         {
             var height = Height;
             var width = Width;
@@ -532,58 +467,24 @@ namespace Core.Tools
                     time.Add(level);
                 }
 
-                _matrix.Insert(0, time);
+                if(addMode == MatrixAddMode.Prepend)
+                    _matrix.Insert(0, time);
+                else
+                    _matrix.Add(time);
             }
         }
 
-        private void AddTimeThen(int count)
-        {
-            var height = Height;
-            var width = Width;
-            var depth = Depth;
-            for (var w = 0; w < count; w++)
-            {
-                var time = new List<IList<IList<T>>>();
-                for (var z = 0; z < depth; z++)
-                {
-                    var level = new List<IList<T>>();
-                    for (var y = 0; y < height; y++)
-                    {
-                        var row = new List<T>();
-                        for (var x = 0; x < width; x++)
-                        {
-                            row.Add(_defaultValue);
-                        }
-                        level.Add(row);
-                    }
-                    time.Add(level);
-                }
-
-                _matrix.Add(time);
-            }
-        }
-
-        public string PrintLevel(int time, int level, bool markCurrentAddress = false, bool markStartAddress = false, T currentAddressMarker = default, T startAddressMarker = default)
+        public string PrintLevel(int time, int level)
         {
             var sb = new StringBuilder();
-            var y = 0;
             foreach (var row in _matrix[time][level])
             {
-                var x = 0;
                 foreach (var o in row)
                 {
-                    if (markCurrentAddress && x == Address.X && y == Address.Y)
-                        sb.Append('D');
-                    else if (markStartAddress && x == StartAddress.X && y == StartAddress.Y)
-                        sb.Append('S');
-                    else
-                        sb.Append(o);
-
-                    x += 1;
+                    sb.Append(o);
                 }
 
                 sb.AppendLine();
-                y += 1;
             }
 
             return sb.ToString().Trim();

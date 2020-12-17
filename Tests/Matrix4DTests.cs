@@ -54,9 +54,9 @@ namespace Tests
 
             matrix.MoveTo(1, 1, 1, 1);
             
-            Assert.That(matrix.Adjacent80Coords.Count, Is.EqualTo(80));
+            Assert.That(matrix.AllAdjacentCoords.Count, Is.EqualTo(80));
 
-            var adjacentCoords = matrix.Adjacent80Coords;
+            var adjacentCoords = matrix.AllAdjacentCoords;
             var cubesAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
             var cubesAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
             var cubesAtZZero = adjacentCoords.Where(o => o.Z == 0).ToList();

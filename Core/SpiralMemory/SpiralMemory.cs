@@ -41,7 +41,7 @@ namespace Core.SpiralMemory
                     matrix.MoveForward();
                 }
                 var valueToWrite = mode == SpiralMemoryMode.RunToValue
-                    ? matrix.Adjacent8.Sum() 
+                    ? matrix.AllAdjacentValues.Sum() 
                     : currentSquare;
 
                 matrix.WriteValue(valueToWrite);

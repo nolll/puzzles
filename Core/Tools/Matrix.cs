@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Tools
 {
-    public class Matrix<T>
+    public class Matrix<T> : BaseMatrix
     {
         private readonly T _defaultValue;
         private readonly IList<IList<T>> _matrix;
@@ -274,25 +274,22 @@ namespace Core.Tools
             }
         }
 
-        public IList<T> Adjacent8 => Adjacent8Coords.Select(ReadValueAt).ToList();
+        public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
+        public IList<MatrixAddress> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-        public IList<MatrixAddress> Adjacent8Coords
+        private IEnumerable<MatrixAddress> AllPossibleAdjacentCoords
         {
             get
             {
-                var coords = new List<MatrixAddress>
+                foreach (var dy in AdjacentDeltas)
                 {
-                    new MatrixAddress(Address.X, Address.Y - 1),
-                    new MatrixAddress(Address.X + 1, Address.Y - 1),
-                    new MatrixAddress(Address.X + 1, Address.Y),
-                    new MatrixAddress(Address.X + 1, Address.Y + 1),
-                    new MatrixAddress(Address.X, Address.Y + 1),
-                    new MatrixAddress(Address.X - 1, Address.Y + 1),
-                    new MatrixAddress(Address.X - 1, Address.Y),
-                    new MatrixAddress(Address.X - 1, Address.Y - 1)
-                };
-
-                return coords.Where(o => !IsOutOfRange(o)).ToList();
+                    foreach (var dx in AdjacentDeltas)
+                    {
+                        var coord = new MatrixAddress(Address.X + dx, Address.Y - dy);
+                        if (!coord.Equals(Address))
+                            yield return coord;
+                    }
+                }
             }
         }
 
@@ -342,7 +339,7 @@ namespace Core.Tools
 
         private void ExtendLeft(MatrixAddress address)
         {
-            AddColsLeft(-address.X);
+            AddCols(-address.X, MatrixAddMode.Prepend);
             StartAddress = new MatrixAddress(StartAddress.X - address.X, StartAddress.Y);
         }
 
@@ -350,7 +347,7 @@ namespace Core.Tools
         {
             var extendBy = address.X - (Width - 1);
             if (extendBy > 0)
-                AddColsRight(extendBy);
+                AddCols(extendBy, MatrixAddMode.Append);
         }
 
         private void ExtendY(MatrixAddress address)
@@ -362,7 +359,7 @@ namespace Core.Tools
 
         private void ExtendTop(MatrixAddress address)
         {
-            AddRowsTop(-address.Y);
+            AddRows(-address.Y, MatrixAddMode.Prepend);
             StartAddress = new MatrixAddress(StartAddress.X, StartAddress.Y - address.Y);
         }
 
@@ -370,10 +367,10 @@ namespace Core.Tools
         {
             var extendBy = address.Y - (Height - 1);
             if (extendBy > 0)
-                AddRowsBottom(extendBy);
+                AddRows(extendBy, MatrixAddMode.Append);
         }
 
-        private void AddRowsTop(int numberOfRows)
+        private void AddRows(int numberOfRows, MatrixAddMode addMode)
         {
             var width = Width;
             for (var y = 0; y < numberOfRows; y++)
@@ -383,25 +380,15 @@ namespace Core.Tools
                 {
                     row.Add(_defaultValue);
                 }
-                _matrix.Insert(0, row);
+
+                if (addMode == MatrixAddMode.Prepend)
+                    _matrix.Insert(0, row);
+                else 
+                    _matrix.Add(row);
             }
         }
 
-        private void AddRowsBottom(int numberOfRows)
-        {
-            var width = Width;
-            for (var y = 0; y < numberOfRows; y++)
-            {
-                var row = new List<T>();
-                for (var x = 0; x < width; x++)
-                {
-                    row.Add(_defaultValue);
-                }
-                _matrix.Add(row);
-            }
-        }
-
-        private void AddColsRight(int numberOfRows)
+        private void AddCols(int numberOfRows, MatrixAddMode addMode)
         {
             var height = Height;
             for (var y = 0; y < height; y++)
@@ -409,22 +396,20 @@ namespace Core.Tools
                 var row = _matrix[y];
                 for (var x = 0; x < numberOfRows; x++)
                 {
-                    row.Add(_defaultValue);
+                    if(addMode == MatrixAddMode.Prepend)
+                        row.Insert(0, _defaultValue);
+                    else
+                        row.Add(_defaultValue);
                 }
             }
         }
 
-        private void AddColsLeft(int numberOfRows)
+        public void ExtendAllDirections(int steps = 1)
         {
-            var height = Height;
-            for (var y = 0; y < height; y++)
-            {
-                var row = _matrix[y];
-                for (var x = 0; x < numberOfRows; x++)
-                {
-                    row.Insert(0, _defaultValue);
-                }
-            }
+            AddCols(steps, MatrixAddMode.Prepend);
+            AddCols(steps, MatrixAddMode.Append);
+            AddRows(steps, MatrixAddMode.Prepend);
+            AddRows(steps, MatrixAddMode.Append);
         }
     }
 }

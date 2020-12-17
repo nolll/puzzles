@@ -23,7 +23,7 @@ namespace Core.ExperimentalEnergySource
                         {
                             matrix.MoveTo(x, y, z);
                             var currentValue = matrix.ReadValue();
-                            var adjacentValues = matrix.Adjacent26;
+                            var adjacentValues = matrix.AllAdjacentValues;
                             var neighborCount = adjacentValues.Count(o => o == '#');
                             var newValue = GetNewValue(currentValue, neighborCount);
                             newMatrix.MoveTo(x, y, z);
@@ -56,7 +56,7 @@ namespace Core.ExperimentalEnergySource
                             {
                                 matrix.MoveTo(x, y, z, w);
                                 var currentValue = matrix.ReadValue();
-                                var adjacentValues = matrix.Adjacent80;
+                                var adjacentValues = matrix.AllAdjacentValues;
                                 var neighborCount = adjacentValues.Count(o => o == '#');
                                 var newValue = GetNewValue(currentValue, neighborCount);
                                 newMatrix.MoveTo(x, y, z, w);
@@ -71,22 +71,6 @@ namespace Core.ExperimentalEnergySource
 
             }
             return matrix.Values.Count(o => o == '#');
-        }
-
-        private string Print(Matrix4D<char> matrix)
-        {
-            var s = new StringBuilder();
-            for (var w = 0; w < matrix.Duration; w++)
-            {
-                for (var z = 0; z < matrix.Depth; z++)
-                {
-                    s.AppendLine($"z={z - matrix.StartAddress.Z} w={w - matrix.StartAddress.W}");
-                    s.AppendLine(matrix.PrintLevel(w, z));
-                    s.AppendLine();
-                }
-            }
-
-            return s.ToString();
         }
 
         private char GetNewValue(char currentValue, int neighborCount)

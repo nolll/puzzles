@@ -66,7 +66,7 @@ namespace Core.Lumber
 
         private char GetNewValue()
         {
-            var adjacent = _matrix.Adjacent8;
+            var adjacent = _matrix.AllAdjacentValues;
             var currentValue = _matrix.ReadValue();
             if (currentValue == Open)
             {

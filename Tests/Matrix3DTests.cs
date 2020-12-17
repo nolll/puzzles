@@ -42,7 +42,7 @@ namespace Tests
         }
 
         [Test]
-        public void AllAdjacentExists()
+        public void AllAdjacent6Exists()
         {
             var matrix = new Matrix3D<char>(1, 1, 1, DefaultValue);
             matrix.WriteValue(WriteValue);
@@ -50,9 +50,29 @@ namespace Tests
 
             matrix.MoveTo(1, 1, 1);
 
-            Assert.That(matrix.Adjacent26Coords.Count, Is.EqualTo(26));
+            Assert.That(matrix.Adjacent6Coords.Count, Is.EqualTo(6));
 
-            var adjacentCoords = matrix.Adjacent26Coords;
+            var adjacentCoords = matrix.Adjacent6Coords;
+            var cubesAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
+            var cubesAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
+            var cubesAtZZero = adjacentCoords.Where(o => o.Z == 0).ToList();
+            Assert.That(cubesAtXZero.Count, Is.EqualTo(1));
+            Assert.That(cubesAtYZero.Count, Is.EqualTo(1));
+            Assert.That(cubesAtZZero.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void AllAdjacent26Exists()
+        {
+            var matrix = new Matrix3D<char>(1, 1, 1, DefaultValue);
+            matrix.WriteValue(WriteValue);
+            matrix.ExtendAllDirections();
+
+            matrix.MoveTo(1, 1, 1);
+
+            Assert.That(matrix.AllAdjacentCoords.Count, Is.EqualTo(26));
+
+            var adjacentCoords = matrix.AllAdjacentCoords;
             var cubesAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
             var cubesAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
             var cubesAtZZero = adjacentCoords.Where(o => o.Z == 0).ToList();

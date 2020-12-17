@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Tools
 {
-    public class Matrix3D<T>
+    public class Matrix3D<T> : BaseMatrix
     {
         private readonly T _defaultValue;
         private readonly IList<IList<IList<T>>> _matrix;
@@ -176,29 +176,28 @@ namespace Core.Tools
             }
         }
 
-        public IList<T> Adjacent26 => Adjacent26Coords.Select(ReadValueAt).ToList();
+        public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
+        public IList<Matrix3DAddress> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-        public IList<Matrix3DAddress> Adjacent26Coords
+        private IEnumerable<Matrix3DAddress> AllPossibleAdjacentCoords
         {
             get
             {
-                var coords = new List<Matrix3DAddress>();
-                var d = new[] {-1, 0, 1};
-                foreach (var dz in d)
+                foreach (var dz in AdjacentDeltas)
                 {
-                    foreach (var dy in d)
+                    foreach (var dy in AdjacentDeltas)
                     {
-                        foreach (var dx in d)
+                        foreach (var dx in AdjacentDeltas)
                         {
-                            coords.Add(new Matrix3DAddress(Address.X + dx, Address.Y - dy, Address.Z - dz));
+                            var coord = new Matrix3DAddress(Address.X + dx, Address.Y - dy, Address.Z - dz);
+                            if (!coord.Equals(Address))
+                                yield return coord;
                         }
                     }
                 }
-
-                return coords.Where(o => !o.Equals(Address) && !IsOutOfRange(o)).ToList();
             }
         }
-        
+
         public Matrix3D<T> Copy()
         {
             var matrix = new Matrix3D<T>();
@@ -257,7 +256,7 @@ namespace Core.Tools
 
         private void ExtendLeft(Matrix3DAddress address)
         {
-            AddColsLeft(-address.X);
+            AddCols(-address.X, MatrixAddMode.Prepend);
             StartAddress = new Matrix3DAddress(StartAddress.X - address.X, StartAddress.Y, StartAddress.Z);
         }
 
@@ -265,7 +264,7 @@ namespace Core.Tools
         {
             var extendBy = address.X - (Width - 1);
             if (extendBy > 0)
-                AddColsRight(extendBy);
+                AddCols(extendBy, MatrixAddMode.Append);
         }
 
         private void ExtendY(Matrix3DAddress address)
@@ -277,7 +276,7 @@ namespace Core.Tools
 
         private void ExtendTop(Matrix3DAddress address)
         {
-            AddRowsTop(-address.Y);
+            AddRows(-address.Y, MatrixAddMode.Prepend);
             StartAddress = new Matrix3DAddress(StartAddress.X, StartAddress.Y - address.Y, StartAddress.Z);
         }
 
@@ -285,7 +284,7 @@ namespace Core.Tools
         {
             var extendBy = address.Y - (Height - 1);
             if (extendBy > 0)
-                AddRowsBottom(extendBy);
+                AddRows(extendBy, MatrixAddMode.Append);
         }
 
         private void ExtendZ(Matrix3DAddress address)
@@ -297,7 +296,7 @@ namespace Core.Tools
 
         private void ExtendClose(Matrix3DAddress address)
         {
-            AddLevelsClose(-address.Z);
+            AddLevels(-address.Z, MatrixAddMode.Prepend);
             StartAddress = new Matrix3DAddress(StartAddress.X, StartAddress.Y, StartAddress.Z - address.Z);
         }
 
@@ -305,20 +304,20 @@ namespace Core.Tools
         {
             var extendBy = address.Z - (Depth - 1);
             if (extendBy > 0)
-                AddLevelsFar(extendBy);
+                AddLevels(extendBy, MatrixAddMode.Append);
         }
 
         public void ExtendAllDirections(int steps = 1)
         {
-            AddRowsTop(steps);
-            AddRowsBottom(steps);
-            AddColsLeft(steps);
-            AddColsRight(steps);
-            AddLevelsClose(steps);
-            AddLevelsFar(steps);
+            AddCols(steps, MatrixAddMode.Prepend);
+            AddCols(steps, MatrixAddMode.Append);
+            AddRows(steps, MatrixAddMode.Prepend);
+            AddRows(steps, MatrixAddMode.Append);
+            AddLevels(steps, MatrixAddMode.Prepend);
+            AddLevels(steps, MatrixAddMode.Append);
         }
 
-        private void AddRowsTop(int numberOfRows)
+        private void AddRows(int numberOfRows, MatrixAddMode addMode)
         {
             var width = Width;
             var depth = Depth;
@@ -333,32 +332,15 @@ namespace Core.Tools
                         row.Add(_defaultValue);
                     }
 
-                    level.Insert(0, row);
+                    if (addMode == MatrixAddMode.Prepend)
+                        level.Insert(0, row);
+                    else
+                        level.Add(row);
                 }
             }
         }
 
-        private void AddRowsBottom(int numberOfRows)
-        {
-            var width = Width;
-            var depth = Depth;
-            for (var z = 0; z < depth; z++)
-            {
-                var level = _matrix[z];
-                for (var y = 0; y < numberOfRows; y++)
-                {
-                    var row = new List<T>();
-                    for (var x = 0; x < width; x++)
-                    {
-                        row.Add(_defaultValue);
-                    }
-
-                    level.Add(row);
-                }
-            }
-        }
-
-        private void AddColsRight(int numberOfCols)
+        private void AddCols(int numberOfCols, MatrixAddMode addMode)
         {
             var height = Height;
             var depth = Depth;
@@ -370,31 +352,16 @@ namespace Core.Tools
                     var row = level[y];
                     for (var x = 0; x < numberOfCols; x++)
                     {
-                        row.Add(_defaultValue);
+                        if(addMode == MatrixAddMode.Prepend)
+                            row.Insert(0, _defaultValue);
+                        else 
+                            row.Add(_defaultValue);
                     }
                 }
             }
         }
 
-        private void AddColsLeft(int numberOfCols)
-        {
-            var height = Height;
-            var depth = Depth;
-            for (var z = 0; z < depth; z++)
-            {
-                var level = _matrix[z];
-                for (var y = 0; y < height; y++)
-                {
-                    var row = level[y];
-                    for (var x = 0; x < numberOfCols; x++)
-                    {
-                        row.Insert(0, _defaultValue);
-                    }
-                }
-            }
-        }
-
-        private void AddLevelsFar(int numberOfLevels)
+        private void AddLevels(int numberOfLevels, MatrixAddMode addMode)
         {
             var height = Height;
             var width = Width;
@@ -411,52 +378,24 @@ namespace Core.Tools
                     level.Add(row);
                 }
 
-                _matrix.Add(level);
+                if(addMode == MatrixAddMode.Prepend)
+                    _matrix.Insert(0, level);
+                else
+                    _matrix.Add(level);
             }
         }
 
-        private void AddLevelsClose(int numberOfLevels)
-        {
-            var height = Height;
-            var width = Width;
-            for (var z = 0; z < numberOfLevels; z++)
-            {
-                var level = new List<IList<T>>();
-                for (var y = 0; y < height; y++)
-                {
-                    var row = new List<T>();
-                    for (var x = 0; x < width; x++)
-                    {
-                        row.Add(_defaultValue);
-                    }
-                    level.Add(row);
-                }
-
-                _matrix.Insert(0, level);
-            }
-        }
-
-        public string PrintLevel(int level, bool markCurrentAddress = false, bool markStartAddress = false, T currentAddressMarker = default, T startAddressMarker = default)
+        public string PrintLevel(int level)
         {
             var sb = new StringBuilder();
-            var y = 0;
             foreach (var row in _matrix[level])
             {
-                var x = 0;
                 foreach (var o in row)
                 {
-                    if (markCurrentAddress && x == Address.X && y == Address.Y)
-                        sb.Append('D');
-                    else if (markStartAddress && x == StartAddress.X && y == StartAddress.Y)
-                        sb.Append('S');
-                    else
-                        sb.Append(o);
-
-                    x += 1;
+                    sb.Append(o);
                 }
 
                 sb.AppendLine();
-                y += 1;
             }
 
             return sb.ToString().Trim();

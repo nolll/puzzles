@@ -256,7 +256,7 @@ namespace Core.Tools
                    address.X < 0;
         }
 
-        public IList<T> PerpendicularAdjacentValues => PossiblePerpendicularAdjacentCoords.Select(ReadValueAt).ToList();
+        public IList<T> PerpendicularAdjacentValues => PerpendicularAdjacentCoords.Select(ReadValueAt).ToList();
         public IList<MatrixAddress> PerpendicularAdjacentCoords => PossiblePerpendicularAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
         private IEnumerable<MatrixAddress> PossiblePerpendicularAdjacentCoords =>

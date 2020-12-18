@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var calculator = new HomeworkCalculator();
             var result = calculator.SumOfAll(FileInput, MathPrecedence.Addition);
-            return new PuzzleResult(result);
+            return new PuzzleResult(result, 93_000_656_194_428);
         }
     }
 }

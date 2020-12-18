@@ -1,10 +1,16 @@
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.ExceptionServices;
+using System.Text.RegularExpressions;
 using Core.Tools;
 
 namespace Core.MathHomework
 {
+    public enum MathPrecedence
+    {
+        Order,
+        Addition,
+        Multiplication
+    }
+
     public class HomeworkCalculator
     {
         private const string Addition = "+";
@@ -12,165 +18,58 @@ namespace Core.MathHomework
         private const char GroupStart = '(';
         private const char GroupEnd = ')';
 
-        public long SumOfAll(string input)
+        public long SumOfAll(string input, MathPrecedence precedence)
         {
             var rows = PuzzleInputReader.ReadLines(input);
-            return rows.Sum(Sum);
+            return rows.Sum(o => Sum(o, precedence));
         }
 
-        public long Sum(string input)
+        public long Sum(string input, MathPrecedence precedence)
         {
-            var parts = input.Split(' ');
-
-            var mode = Addition;
-            CompositeExpression currentExpression = new CompositeAdditionExpression(null);
-            var rootExpression = currentExpression;
-            foreach (var p in parts)
-            {
-                var endGroupCount = 0;
-                var s = p;
-                if (s == Addition || s == Multiplication)
-                {
-                    mode = s;
-                    continue;
-                }
-
-                while (s.StartsWith(GroupStart))
-                {
-                    s = s.Substring(1);
-                    var innerExpression = mode == Addition
-                        ? (CompositeExpression)new CompositeAdditionExpression(currentExpression)
-                        : new CompositeMultiplicationExpression(currentExpression);
-                    currentExpression.Add(innerExpression);
-                    currentExpression = innerExpression;
-                    mode = Addition;
-                }
-
-                if (s.EndsWith(GroupEnd))
-                {
-                    endGroupCount = s.ToCharArray().Count(o => o == GroupEnd);
-                    s = s.TrimEnd(GroupEnd);
-                }
-
-                var n = long.Parse(s);
-
-                var newExpression = mode == Addition
-                    ? (Expression)new AdditionExpression(n, currentExpression)
-                    : new MultiplicationExpression(n, currentExpression);
-
-                currentExpression.Add(newExpression);
-
-                while (endGroupCount > 0)
-                {
-                    currentExpression = currentExpression.ParentExpression;
-                    mode = currentExpression.LastOperator == Operator.Multiplication
-                        ? Multiplication
-                        : Addition;
-                    endGroupCount -= 1;
-                }
-            }
-
-            return rootExpression.Result;
+            var rootGroup = new Group(input, precedence);
+            var result = rootGroup.Result;
+            return result;
         }
 
-        public enum Operator
+        private class Group
         {
-            Addition,
-            Multiplication
-        }
+            public long Result { get; }
 
-        public abstract class Expression
-        {
-            public CompositeExpression ParentExpression { get; }
-
-            protected Expression(CompositeExpression parentExpression)
+            public Group(string s, MathPrecedence precedence)
             {
-                ParentExpression = parentExpression;
-            }
-
-            public abstract Operator Operator { get; }
-            public abstract long Result { get; }
-        }
-
-        public abstract class CompositeExpression : Expression
-        {
-            private readonly List<Expression> _expressions;
-            public Operator LastOperator => _expressions.LastOrDefault()?.Operator ?? Operator.Addition;
-
-            protected CompositeExpression(CompositeExpression parentExpression)
-                : base(parentExpression)
-            {
-                _expressions = new List<Expression>();
-            }
-
-            public void Add(Expression e)
-            {
-                _expressions.Add(e);
-            }
-
-            public override long Result => DefaultResult;
-
-            private long DefaultResult
-            {
-                get
+                var regex = new Regex(@"\([0-9 \*\+]+\)");
+                while (s.Contains('('))
                 {
-                    long result = 0;
-                    foreach (var expression in Expressions)
+                    var matches = regex.Matches(s);
+                    foreach (Match match in matches)
                     {
-                        if (expression.Operator == Operator.Multiplication)
-                            result *= expression.Result;
-                        else
-                            result += expression.Result;
+                        var hit = match.ToString();
+                        var result = Calc(hit.TrimStart(GroupStart).TrimEnd(GroupEnd));
+                        s = s.Replace(hit, result.ToString());
                     }
-
-                    return result;
                 }
+                
+                Result = Calc(s);
             }
 
-            private List<Expression> Expressions => _expressions;
-        }
-
-        public class AdditionExpression : Expression
-        {
-            public override long Result { get; }
-            public override Operator Operator => Operator.Addition;
-
-            public AdditionExpression(long num, CompositeExpression parentExpression)
-                : base(parentExpression)
+            private long Calc(string s)
             {
-                Result = num;
-            }
-        }
+                var parts = s.Split(' ').ToList();
+                while (parts.Count > 1)
+                {
+                    var current = long.Parse(parts[0]);
+                    var next = long.Parse(parts[2]);
+                    var operation = parts[1];
+                    var result = operation == Multiplication
+                        ? current * next
+                        : current + next;
 
-        public class MultiplicationExpression : Expression
-        {
-            public override long Result { get; }
-            public override Operator Operator => Operator.Multiplication;
+                    parts[0] = result.ToString();
+                    parts.RemoveAt(1);
+                    parts.RemoveAt(1);
+                }
 
-            public MultiplicationExpression(long num, CompositeExpression parentExpression)
-                : base(parentExpression)
-            {
-                Result = num;
-            }
-        }
-
-        public class CompositeAdditionExpression : CompositeExpression
-        {
-            public override Operator Operator => Operator.Addition;
-
-            public CompositeAdditionExpression(CompositeExpression parentExpression)
-                : base(parentExpression)
-            {
-            }
-        }
-
-        public class CompositeMultiplicationExpression : CompositeExpression
-        {
-            public override Operator Operator => Operator.Multiplication;
-
-            public CompositeMultiplicationExpression(CompositeExpression parentExpression)
-                : base(parentExpression)
-            {
+                return long.Parse(parts[0]);
             }
         }
     }

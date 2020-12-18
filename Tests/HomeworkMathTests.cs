@@ -16,7 +16,7 @@ namespace Tests
         public void SumIsCorrect(string input, long expected)
         {
             var calculator = new HomeworkCalculator();
-            var sum = calculator.Sum(input);
+            var sum = calculator.Sum(input, MathPrecedence.Order);
 
             Assert.That(sum, Is.EqualTo(expected));
         }
@@ -35,7 +35,7 @@ namespace Tests
             const int expected = 26_457;
 
             var calculator = new HomeworkCalculator();
-            var sum = calculator.SumOfAll(input);
+            var sum = calculator.SumOfAll(input, MathPrecedence.Order);
 
             Assert.That(sum, Is.EqualTo(expected));
         }

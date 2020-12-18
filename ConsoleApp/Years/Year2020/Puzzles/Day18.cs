@@ -15,5 +15,12 @@ namespace ConsoleApp.Years.Year2020.Puzzles
             var result = calculator.SumOfAll(FileInput, MathPrecedence.Order);
             return new PuzzleResult(result, 4_297_397_455_886);
         }
+
+        public override PuzzleResult RunPart2()
+        {
+            var calculator = new HomeworkCalculator();
+            var result = calculator.SumOfAll(FileInput, MathPrecedence.Addition);
+            return new PuzzleResult(result);
+        }
     }
 }

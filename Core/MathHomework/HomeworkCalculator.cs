@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Core.Tools;
@@ -7,8 +8,7 @@ namespace Core.MathHomework
     public enum MathPrecedence
     {
         Order,
-        Addition,
-        Multiplication
+        Addition
     }
 
     public class HomeworkCalculator
@@ -37,6 +37,7 @@ namespace Core.MathHomework
 
             public Group(string s, MathPrecedence precedence)
             {
+                var calc = GetCalcFunc(precedence);
                 var regex = new Regex(@"\([0-9 \*\+]+\)");
                 while (s.Contains('('))
                 {
@@ -44,15 +45,15 @@ namespace Core.MathHomework
                     foreach (Match match in matches)
                     {
                         var hit = match.ToString();
-                        var result = Calc(hit.TrimStart(GroupStart).TrimEnd(GroupEnd));
+                        var result = calc(hit.TrimStart(GroupStart).TrimEnd(GroupEnd));
                         s = s.Replace(hit, result.ToString());
                     }
                 }
                 
-                Result = Calc(s);
+                Result = calc(s);
             }
 
-            private long Calc(string s)
+            private long CalcWithOrderPrecedence(string s)
             {
                 var parts = s.Split(' ').ToList();
                 while (parts.Count > 1)
@@ -70,6 +71,41 @@ namespace Core.MathHomework
                 }
 
                 return long.Parse(parts[0]);
+            }
+
+            private long CalcWithAdditionPrecedence(string s)
+            {
+                var parts = s.Split(' ').ToList();
+
+                while (parts.Contains(Addition))
+                {
+                    var nextAdditionOperator = parts.IndexOf(Addition);
+                    var first = long.Parse(parts[nextAdditionOperator - 1]);
+                    var second = long.Parse(parts[nextAdditionOperator + 1]);
+                    parts[nextAdditionOperator - 1] = (first + second).ToString();
+                    parts.RemoveAt(nextAdditionOperator);
+                    parts.RemoveAt(nextAdditionOperator);
+                }
+
+                while (parts.Count() > 1)
+                {
+                    var current = long.Parse(parts[0]);
+                    var next = long.Parse(parts[2]);
+                    var result = current * next;
+
+                    parts[0] = result.ToString();
+                    parts.RemoveAt(1);
+                    parts.RemoveAt(1);
+                }
+                
+                return long.Parse(parts[0]);
+            }
+
+            private Func<string, long> GetCalcFunc(MathPrecedence precedence)
+            {
+                if (precedence == MathPrecedence.Addition)
+                    return CalcWithAdditionPrecedence;
+                return CalcWithOrderPrecedence;
             }
         }
     }

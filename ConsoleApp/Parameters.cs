@@ -8,7 +8,6 @@ namespace ConsoleApp
         public int? Year { get; }
         public bool RunAll { get; }
         public bool ShowHelp { get; }
-        public bool WasYearOrDaySpecified => Day != null || Year != null;
 
         public Parameters(int? day = null, int? year = null, bool runAll = false, bool showHelp = false)
         {

@@ -28,7 +28,8 @@ namespace ConsoleApp.Years.Year2020
             new Day15(),
             new Day16(),
             new Day17(),
-            new Day18()
+            new Day18(),
+            new Day19()
         };
     }
 }

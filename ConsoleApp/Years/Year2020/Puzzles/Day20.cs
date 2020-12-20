@@ -11,13 +11,13 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         public override PuzzleResult RunPart1()
         {
             var puzzle = new ImageJigsawPuzzle(FileInput);
-            return new PuzzleResult(puzzle.ProductOfCornerTileIds, 8425574315321);
+            return new PuzzleResult(puzzle.ProductOfCornerTileIds, 8_425_574_315_321);
         }
 
         public override PuzzleResult RunPart2()
         {
             var puzzle = new ImageJigsawPuzzle(FileInput);
-            return new PuzzleResult(puzzle.NumberOfHashesThatAreNotPartOfASeaMonster);
+            return new PuzzleResult(puzzle.NumberOfHashesThatAreNotPartOfASeaMonster, 1841);
         }
     }
 }

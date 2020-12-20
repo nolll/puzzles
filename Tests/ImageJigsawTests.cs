@@ -87,15 +87,6 @@ Tile 2311:
         }
 
         [Test]
-        public void NumberOfSeaMonstersIsCorrect()
-        {
-            var puzzle = new ImageJigsawPuzzle(Input);
-            var numberOfSeaMonsters = puzzle.NumberOfSeaMonsters;
-
-            Assert.That(numberOfSeaMonsters, Is.EqualTo(2));
-        }
-
-        [Test]
         public void NumberOfHashesNotPartOfSeaMonsters()
         {
             var puzzle = new ImageJigsawPuzzle(Input);

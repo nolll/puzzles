@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var validator = new MonsterImageValidator(FileInput);
             var result = validator.ValidCount();
-            return new PuzzleResult(result);
+            return new PuzzleResult(result, 122);
         }
 
         public override PuzzleResult RunPart2()

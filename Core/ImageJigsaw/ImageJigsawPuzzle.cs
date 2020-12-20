@@ -19,9 +19,7 @@ namespace Core.ImageJigsaw
         private readonly List<MatrixAddress> _seaMonsterHashAddresses;
 
         public long ProductOfCornerTileIds { get; }
-        public long NumberOfSeaMonsters { get; }
-        public long NumberOfHashesThatAreNotPartOfASeaMonster { get; }
-
+        
         public ImageJigsawPuzzle(string input)
         {
             _seaMonsterMatrix = MatrixBuilder.BuildCharMatrix(SeaMonsterPattern);
@@ -38,13 +36,19 @@ namespace Core.ImageJigsaw
 
             ProductOfCornerTileIds = CornerTiles.Aggregate<JigsawTile, long>(1, (current, tile) => current * tile.Id);
 
-            var image = ArrangeTilesAndPaintImage();
+            
+        }
 
-            NumberOfSeaMonsters = SearchForSeaMonsters(image);
-
-            var numberOfHashes = image.Values.Count(o => o == '#');
-            var numberOfHashesInSeaMonster = 15;
-            NumberOfHashesThatAreNotPartOfASeaMonster = (long)numberOfHashes - NumberOfSeaMonsters * numberOfHashesInSeaMonster;
+        public long NumberOfHashesThatAreNotPartOfASeaMonster
+        {
+            get
+            {
+                var image = ArrangeTilesAndPaintImage();
+                var numberOfSeaMonsters = SearchForSeaMonsters(image);
+                var numberOfHashes = image.Values.Count(o => o == '#');
+                var numberOfHashesInSeaMonster = 15;
+                return numberOfHashes - numberOfSeaMonsters * numberOfHashesInSeaMonster;
+            }
         }
 
         private int GetNumberOfSeaMonsters(Matrix<char> matrix)

@@ -120,7 +120,7 @@ namespace Core.MonsterImages
                     foreach (var ruleId in ruleSet)
                     {
                         var stringToSearch = s.Substring(matchingLetters);
-                        Console.WriteLine(stringToSearch);
+                        //Console.WriteLine(stringToSearch);
                         if (stringToSearch.Length == 0)
                             return matchingLetters;
 

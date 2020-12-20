@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using Core.Tools;
+using Core.MonsterImages;
 using NUnit.Framework;
 
 namespace Tests
@@ -8,188 +6,150 @@ namespace Tests
     public class MonsterImageTests
     {
         [Test]
-        public void NumberOfValidMessagesIs8()
+        public void NumberOfValidMessagesIs2()
         {
-            const string input = @"
-0: 4 1 5
-1: 2 3 | 3 2
-2: 4 4 | 5 5
-3: 4 5 | 5 4
-4: ""a""
-5: ""b""
-
-aaaabb
-aaabab
-abbabb
-abbbab
-aabaab
-aabbbb
-abaaab
-ababbb";
-
-            var validator = new MonsterImageValidator(input);
+            var validator = new MonsterImageValidator(RulesAndMessages1);
             var result = validator.ValidCount();
 
-            Assert.That(result, Is.EqualTo(8));
+            Assert.That(result, Is.EqualTo(2));
         }
 
         [Test]
-        public void NumberOfValidMessagesIs2()
+        public void NumberOfValidMessagesIs3()
         {
-            const string input = @"
+            var validator = new MonsterImageValidator(RulesAndMessages2);
+            var result = validator.ValidCount();
+
+            Assert.That(result, Is.EqualTo(3));
+        }
+
+        [TestCase("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
+        [TestCase("bbabbbbaabaabba", true)]
+        [TestCase("babbbbaabbbbbabbbbbbaabaaabaaa", false)]
+        [TestCase("aaabbbbbbaaaabaababaabababbabaaabbababababaaa", false)]
+        [TestCase("bbbbbbbaaaabbbbaaabbabaaa", false)]
+        [TestCase("bbbababbbbaaaaaaaabbababaaababaabab", false)]
+        [TestCase("ababaaaaaabaaab", true)]
+        [TestCase("ababaaaaabbbaba", true)]
+        [TestCase("baabbaaaabbaaaababbaababb", false)]
+        [TestCase("abbbbabbbbaaaababbbbbbaaaababb", false)]
+        [TestCase("aaaaabbaabaaaaababaa", false)]
+        [TestCase("aaaabbaaaabbaaa", false)]
+        [TestCase("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", false)]
+        [TestCase("babaaabbbaaabaababbaabababaaab", false)]
+        [TestCase("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", false)]
+        public void SpecificMessagesIsValid_UnmodifiedRules(string message, bool expected)
+        {
+            var validator = new MonsterImageValidator(Rules2);
+            var matchingLetters = validator.MatchingLetters(message);
+            var isValid = matchingLetters != null;
+
+            Assert.That(isValid, Is.EqualTo(expected));
+        }
+
+        [TestCase("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
+        [TestCase("bbabbbbaabaabba", true)]
+        [TestCase("babbbbaabbbbbabbbbbbaabaaabaaa", true)]
+        [TestCase("aaabbbbbbaaaabaababaabababbabaaabbababababaaa", true)]
+        [TestCase("bbbbbbbaaaabbbbaaabbabaaa", true)]
+        [TestCase("bbbababbbbaaaaaaaabbababaaababaabab", true)]
+        [TestCase("ababaaaaaabaaab", true)]
+        [TestCase("ababaaaaabbbaba", true)]
+        [TestCase("baabbaaaabbaaaababbaababb", true)]
+        [TestCase("abbbbabbbbaaaababbbbbbaaaababb", true)]
+        [TestCase("aaaaabbaabaaaaababaa", true)]
+        [TestCase("aaaabbaaaabbaaa", false)]
+        [TestCase("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", true)]
+        [TestCase("babaaabbbaaabaababbaabababaaab", false)]
+        [TestCase("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", true)]
+        public void SpecificMessageIsValid_ModifiedRules(string message, bool expected)
+        {
+            var validator = new MonsterImageValidator(ModifiedRules2);
+                var matchingLetters = validator.MatchingLetters(message);
+            var isValid = matchingLetters != null;
+
+            Assert.That(isValid, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void NumberOfValidMessagesIs12()
+        {
+            var validator = new MonsterImageValidator(ModifiedRulesAndMessages2);
+            var result = validator.ValidCount();
+
+            Assert.That(result, Is.EqualTo(12));
+        }
+
+        private const string Rules1 = @"
 0: 4 1 5
 1: 2 3 | 3 2
 2: 4 4 | 5 5
 3: 4 5 | 5 4
 4: ""a""
-5: ""b""
+5: ""b""";
 
+        private const string Messages1 = @"
 ababbb
 bababa
 abbbab
 aaabbb
 aaaabbb";
 
-            var validator = new MonsterImageValidator(input);
-            var result = validator.ValidCount();
+        private const string Rules2 = @"
+42: 9 14 | 10 1
+9: 14 27 | 1 26
+10: 23 14 | 28 1
+1: ""a""
+11: 42 31
+5: 1 14 | 15 1
+19: 14 1 | 14 14
+12: 24 14 | 19 1
+16: 15 1 | 14 14
+31: 14 17 | 1 13
+6: 14 14 | 1 14
+2: 1 24 | 14 4
+0: 8 11
+13: 14 3 | 1 12
+15: 1 | 14
+17: 14 2 | 1 7
+23: 25 1 | 22 14
+28: 16 1
+4: 1 1
+20: 14 14 | 1 15
+3: 5 14 | 16 1
+27: 1 6 | 14 18
+14: ""b""
+21: 14 1 | 1 14
+25: 1 1 | 1 14
+22: 14 14
+8: 42
+26: 14 22 | 1 20
+18: 15 15
+7: 14 5 | 1 21
+24: 14 1";
 
-            Assert.That(result, Is.EqualTo(2));
-        }
-    }
+        private const string Messages2 = @"
+abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa
+bbabbbbaabaabba
+babbbbaabbbbbabbbbbbaabaaabaaa
+aaabbbbbbaaaabaababaabababbabaaabbababababaaa
+bbbbbbbaaaabbbbaaabbabaaa
+bbbababbbbaaaaaaaabbababaaababaabab
+ababaaaaaabaaab
+ababaaaaabbbaba
+baabbaaaabbaaaababbaababb
+abbbbabbbbaaaababbbbbbaaaababb
+aaaaabbaabaaaaababaa
+aaaabbaaaabbaaa
+aaaabbaabbaaaaaaabbbabbbaaabbaabaaa
+babaaabbbaaabaababbaabababaaab
+aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba";
 
-    public class MonsterImageValidator
-    {
-        private readonly IList<string> _messages;
-        private readonly Dictionary<int, Rule> _rules;
-
-        public MonsterImageValidator(string input)
-        {
-            var groups = PuzzleInputReader.ReadLineGroups(input);
-            var ruleStrings = groups[0];
-            _messages = groups[1];
-            _rules = ParseRules(ruleStrings);
-        }
-
-        private Dictionary<int, Rule> ParseRules(IList<string> ruleStrings)
-        {
-            var rules = new Dictionary<int, Rule>();
-
-            while (ruleStrings.Any())
-            {
-                var s = ruleStrings.First();
-                var parts = s.Split(':');
-                var number = int.Parse(parts[0]);
-                var rule = parts[1].Trim();
-                if (rule.StartsWith('"'))
-                {
-                    var c = rule.Replace("\"", "").ToCharArray().First();
-                    rules.Add(number, new BasicRule(c));
-                }
-                else
-                {
-                    var a = rule.Split('|').ToList();
-                    var b = a.Select(o => o.Trim().Split(' ')).ToList();
-                    var ints = b.Select(o => o.Select(int.Parse)).ToList();
-                    var ruleList = new List<IList<Rule>>();
-                    foreach (var i in ints)
-                    {
-                        var innerList = new List<Rule>();
-                        foreach (var inner in i)
-                        {
-                            if (rules.TryGetValue(inner, out var r))
-                                innerList.Add(r);
-                            else
-                                innerList.Add(null);
-                        }
-                        ruleList.Add(innerList);
-                    }
-
-                    if (ruleList.All(o => o.All(p => p != null)))
-                    {
-                        var compositeRule = new CompositeRule(ruleList);
-                        rules.Add(number, compositeRule);
-                    }
-                    else
-                    {
-                        ruleStrings.Add(s);
-                    }
-                }
-
-                ruleStrings.RemoveAt(0);
-            }
-
-            return rules;
-        }
-
-        public int ValidCount()
-        {
-            var rule = _rules[0];
-            var validCount = 0;
-            foreach (var message in _messages)
-            {
-                var v = rule.MatchingLetters(message);
-                if(v != null && v.Value == message.Length)
-                    validCount++;
-            }
-
-            return validCount;
-        }
-
-        public abstract class Rule
-        {
-            public abstract int? MatchingLetters(string s);
-        }
-
-        public class CompositeRule : Rule
-        {
-            private readonly IList<IList<Rule>> _rules;
-
-            public CompositeRule(IList<IList<Rule>> rules)
-            {
-                _rules = rules;
-            }
-
-            public override int? MatchingLetters(string s)
-            {
-                foreach (var ruleList in _rules)
-                {
-                    var matchingLetters = 0;
-                    var ruleCount = ruleList.Count;
-                    var validRules = 0;
-                    foreach (var rule in ruleList)
-                    {
-                        var stringToSearch = s.Substring(matchingLetters);
-                        var m = rule.MatchingLetters(stringToSearch);
-                        if (m == null)
-                            continue;
-
-                        validRules++;
-                        matchingLetters += m.Value;
-                    }
-
-                    if (validRules == ruleCount)
-                        return matchingLetters;
-                }
-
-                return null;
-            }
-        }
-
-        public class BasicRule : Rule
-        {
-            private readonly char _c;
-
-            public BasicRule(char c)
-            {
-                _c = c;
-            }
-
-            public override int? MatchingLetters(string s)
-            {
-                if (s.First() == _c)
-                    return 1;
-                return null;
-            }
-        }
+        private string RulesAndMessages1 => $"{Rules1}\r\n{Messages1}";
+        private string RulesAndMessages2 => $"{Rules2}\r\n{Messages2}";
+        private string ModifiedRules2 => RulesAndMessages2
+            .Replace("8: 42", "8: 42 | 42 8")
+            .Replace("11: 42 31", "11: 42 31 | 42 11 31");
+        private string ModifiedRulesAndMessages2 => $"{ModifiedRules2}\r\n{Messages2}";
     }
 }

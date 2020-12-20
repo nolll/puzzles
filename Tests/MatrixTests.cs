@@ -108,5 +108,89 @@ namespace Tests
             Assert.That(squaresAtXZero.Count, Is.EqualTo(3));
             Assert.That(squaresAtYZero.Count, Is.EqualTo(3));
         }
+
+        [Test]
+        public void RotateRight()
+        {
+            const string input = @"
+#..
+#..
+...";
+
+            const string expected = @"
+.##
+...
+...";
+
+            var matrix = MatrixBuilder.BuildCharMatrix(input);
+            var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+
+            matrix = matrix.RotateRight();
+
+            Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        }
+
+        [Test]
+        public void RotateLeft()
+        {
+            const string input = @"
+#..
+#..
+...";
+
+            const string expected = @"
+...
+...
+##.";
+
+            var matrix = MatrixBuilder.BuildCharMatrix(input);
+            var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+
+            matrix = matrix.RotateLeft();
+
+            Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        }
+
+        [Test]
+        public void FlipVertical()
+        {
+            const string input = @"
+#..
+#..
+...";
+
+            const string expected = @"
+...
+#..
+#..";
+
+            var matrix = MatrixBuilder.BuildCharMatrix(input);
+            var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+
+            matrix = matrix.FlipVertical();
+
+            Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        }
+
+        [Test]
+        public void FlipHorizontal()
+        {
+            const string input = @"
+#..
+#..
+...";
+
+            const string expected = @"
+..#
+..#
+...";
+
+            var matrix = MatrixBuilder.BuildCharMatrix(input);
+            var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+
+            matrix = matrix.FlipHorizontal();
+
+            Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        }
     }
 }

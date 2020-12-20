@@ -33,8 +33,8 @@ Tile 2311:
         public void TilesHasMatchingEdge(long tileId1, long tileId2)
         {
             var puzzle = new ImageJigsawPuzzle(Input);
-            var tile1 = puzzle._tiles[tileId1];
-            var tile2 = puzzle._tiles[tileId2];
+            var tile1 = puzzle.TilesById[tileId1];
+            var tile2 = puzzle.TilesById[tileId2];
 
             var hasMatchingEdge = tile1.HasMatchingEdge(tile2);
 
@@ -52,6 +52,30 @@ Tile 2311:
             Assert.That(cornerTiles[1].Id, Is.EqualTo(1951));
             Assert.That(cornerTiles[2].Id, Is.EqualTo(2971));
             Assert.That(cornerTiles[3].Id, Is.EqualTo(3079));
+        }
+
+        [Test]
+        public void EdgeTilesAreCorrect()
+        {
+            var puzzle = new ImageJigsawPuzzle(Input);
+            var cornerTiles = puzzle.EdgeTiles;
+
+            Assert.That(cornerTiles.Count, Is.EqualTo(4));
+            Assert.That(cornerTiles[0].Id, Is.EqualTo(1489));
+            Assert.That(cornerTiles[1].Id, Is.EqualTo(2311));
+            Assert.That(cornerTiles[2].Id, Is.EqualTo(2473));
+            Assert.That(cornerTiles[3].Id, Is.EqualTo(2729));
+        }
+
+        [Test]
+        public void CenterTilesAreCorrect()
+        {
+            var puzzle = new ImageJigsawPuzzle(Input);
+            var cornerTiles = puzzle.CenterTiles;
+
+            Assert.That(cornerTiles.Count, Is.EqualTo(1));
+            Assert.That(cornerTiles[0].Id, Is.EqualTo(1427));
+
         }
 
         [Test]

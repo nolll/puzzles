@@ -303,6 +303,64 @@ namespace Core.Tools
             return matrix;
         }
 
+        public Matrix<T> RotateLeft()
+        {
+            var newMatrix = new Matrix<T>(Height, Width, _defaultValue);
+            var oy = 0;
+            for (var ox = Width - 1; ox >= 0; ox--)
+            {
+                var nx = 0;
+                for (var ny = 0; ny < Height; ny++)
+                {
+                    MoveTo(ox, ny);
+                    newMatrix.MoveTo(nx, oy);
+                    newMatrix.WriteValue(ReadValue());
+                    nx++;
+                }
+                oy++;
+            }
+            return newMatrix;
+        }
+
+        public Matrix<T> RotateRight()
+        {
+            return RotateLeft().RotateLeft().RotateLeft();
+        }
+
+        public Matrix<T> FlipVertical()
+        {
+            var width = Width;
+            var height = Height;
+            var newMatrix = new Matrix<T>(width, height, _defaultValue);
+            for (var y = 0; y < height; y++)
+            {
+                for (var x = 0; x < width; x++)
+                {
+                    var ny = height - y - 1;
+                    newMatrix.MoveTo(x, ny);
+                    newMatrix.WriteValue(ReadValueAt(x, y));
+                }
+            }
+            return newMatrix;
+        }
+
+        public Matrix<T> FlipHorizontal()
+        {
+            var width = Width;
+            var height = Height;
+            var newMatrix = new Matrix<T>(width, height, _defaultValue);
+            for (var y = 0; y < height; y++)
+            {
+                for (var x = 0; x < width; x++)
+                {
+                    var nx = width - x - 1;
+                    newMatrix.MoveTo(nx, y);
+                    newMatrix.WriteValue(ReadValueAt(x, y));
+                }
+            }
+            return newMatrix;
+        }
+
         private IList<IList<T>> BuildMatrix(int width, int height, T defaultValue)
         {
             var matrix = new List<IList<T>>();

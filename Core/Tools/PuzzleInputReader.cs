@@ -13,7 +13,12 @@ namespace Core.Tools
 
         public static IList<IList<string>> ReadLineGroups(string str)
         {
-            return str.Trim().Split("\r\n\r\n").Select(ReadLines).ToList();
+            return ReadStringGroups(str).Select(ReadLines).ToList();
+        }
+
+        public static IList<string> ReadStringGroups(string str)
+        {
+            return str.Trim().Split("\r\n\r\n").ToList();
         }
     }
 }

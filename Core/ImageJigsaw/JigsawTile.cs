@@ -8,14 +8,14 @@ namespace Core.ImageJigsaw
     public class JigsawTile
     {
         public long Id { get; }
-        private Matrix<char> _matrix;
+        public Matrix<char> Matrix;
         public bool Done { get; set; }
 
         public JigsawTile(long id, Matrix<char> matrix)
         {
             Done = false;
             Id = id;
-            _matrix = matrix;
+            Matrix = matrix;
         }
 
         public bool HasMatchingEdge(JigsawTile otherTile)
@@ -40,17 +40,17 @@ namespace Core.ImageJigsaw
 
         public void RotateRight()
         {
-            _matrix = _matrix.RotateRight();
+            Matrix = Matrix.RotateRight();
         }
 
         public void FlipVertical()
         {
-            _matrix = _matrix.FlipVertical();
+            Matrix = Matrix.FlipVertical();
         }
 
         public void FlipHorizontal()
         {
-            _matrix = _matrix.FlipHorizontal();
+            Matrix = Matrix.FlipHorizontal();
         }
 
         public Dictionary<string, string> Edges
@@ -62,27 +62,23 @@ namespace Core.ImageJigsaw
                 var bottom = new StringBuilder();
                 var left = new StringBuilder();
 
-                var width = _matrix.Width;
-                var height = _matrix.Height;
+                var width = Matrix.Width;
+                var height = Matrix.Height;
 
                 const int yTop = 0;
                 var yBottom = height - 1;
                 for (var x = 0; x < width; x++)
                 {
-                    var xTop = x;
-                    var xBottom = x;// width - 1 - x;
-                    top.Append(_matrix.ReadValueAt(xTop, yTop));
-                    bottom.Append(_matrix.ReadValueAt(xBottom, yBottom));
+                    top.Append(Matrix.ReadValueAt(x, yTop));
+                    bottom.Append(Matrix.ReadValueAt(x, yBottom));
                 }
 
                 var xRight = width - 1;
                 const int xLeft = 0;
                 for (var y = 0; y < height; y++)
                 {
-                    var yRight = y;
-                    var yLeft = y;//height - 1 - y;
-                    right.Append(_matrix.ReadValueAt(xRight, yRight));
-                    left.Append(_matrix.ReadValueAt(xLeft, yLeft));
+                    right.Append(Matrix.ReadValueAt(xRight, y));
+                    left.Append(Matrix.ReadValueAt(xLeft, y));
                 }
 
                 return new Dictionary<string, string>
@@ -97,7 +93,7 @@ namespace Core.ImageJigsaw
 
         public string Print()
         {
-            return _matrix.Print();
+            return Matrix.Print();
         }
 
         public static JigsawTile Parse(string s)
@@ -106,6 +102,25 @@ namespace Core.ImageJigsaw
             var id = long.Parse(parts[0].Split(' ')[1]);
             var matrix = MatrixBuilder.BuildCharMatrix(parts[1].Trim());
             return new JigsawTile(id, matrix);
+        }
+
+        public void RemoveBorder()
+        {
+            var width = Matrix.Width;
+            var height = Matrix.Height;
+            var newMatrix = new Matrix<char>();
+            for (var y = 1; y < height - 1; y++)
+            {
+                for (var x = 1; x < width - 1; x++)
+                {
+                    var newX = x - 1;
+                    var newY = y - 1;
+                    newMatrix.MoveTo(newX, newY);
+                    newMatrix.WriteValue(Matrix.ReadValueAt(x, y));
+                }
+            }
+
+            Matrix = newMatrix;
         }
     }
 }

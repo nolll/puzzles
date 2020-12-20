@@ -30,6 +30,22 @@ namespace Core.Tools
             Direction = MatrixDirection.Up;
         }
 
+        public IList<MatrixAddress> Coords
+        {
+            get
+            {
+                var coords = new List<MatrixAddress>();
+                for (var y = 0; y < Height; y++)
+                {
+                    for (var x = 0; x < Width; x++)
+                    {
+                        coords.Add(new MatrixAddress(x, y));
+                    }
+                }
+                return coords;
+            }
+        }
+
         public bool TryMoveTo(MatrixAddress address)
         {
             return MoveTo(address, false);

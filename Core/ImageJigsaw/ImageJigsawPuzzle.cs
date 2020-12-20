@@ -1,17 +1,31 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Core.Tools;
 
 namespace Core.ImageJigsaw
 {
     public class ImageJigsawPuzzle
     {
+        private const string SeaMonsterPattern = @"
+..................#.
+#....##....##....###
+.#..#..#..#..#..#...";
+
         public readonly Dictionary<long, JigsawTile> TilesById;
         private readonly Dictionary<string, List<JigsawTile>> _matchesByEdge;
         private readonly Dictionary<long, List<JigsawTile>> _matchesById;
-        
+        private readonly Matrix<char> _seaMonsterMatrix;
+        private readonly List<MatrixAddress> _seaMonsterHashAddresses;
+
+        public long ProductOfCornerTileIds { get; }
+        public long NumberOfSeaMonsters { get; }
+        public long NumberOfHashesThatAreNotPartOfASeaMonster { get; }
+
         public ImageJigsawPuzzle(string input)
         {
+            _seaMonsterMatrix = MatrixBuilder.BuildCharMatrix(SeaMonsterPattern);
+            _seaMonsterHashAddresses = _seaMonsterMatrix.Coords.Where(o => _seaMonsterMatrix.ReadValueAt(o) == '#').ToList();
             var groups = PuzzleInputReader.ReadStringGroups(input);
             TilesById = new Dictionary<long, JigsawTile>();
             foreach (var group in groups)
@@ -22,18 +36,106 @@ namespace Core.ImageJigsaw
             _matchesById = FindMatchingTiles(TilesById.Values.ToList());
             _matchesByEdge = FindMatchingEdges(TilesById.Values.ToList());
 
-            var fullPuzzle = ArrangeTiles();
+            ProductOfCornerTileIds = CornerTiles.Aggregate<JigsawTile, long>(1, (current, tile) => current * tile.Id);
+
+            var image = ArrangeTilesAndPaintImage();
+
+            NumberOfSeaMonsters = SearchForSeaMonsters(image);
+
+            var numberOfHashes = image.Values.Count(o => o == '#');
+            var numberOfHashesInSeaMonster = 15;
+            NumberOfHashesThatAreNotPartOfASeaMonster = (long)numberOfHashes - NumberOfSeaMonsters * numberOfHashesInSeaMonster;
         }
 
-        private Matrix<char> ArrangeTiles()
+        private int GetNumberOfSeaMonsters(Matrix<char> matrix)
+        {
+            var seaMonsterCount = 0;
+            for (var y = 0; y < matrix.Height - _seaMonsterMatrix.Height; y++)
+            {
+                for (var x = 0; x < matrix.Width - _seaMonsterMatrix.Width; x++)
+                {
+                    var foundSeaMonster = _seaMonsterHashAddresses.All(address => matrix.ReadValueAt(x + address.X, y + address.Y) == '#');
+                    seaMonsterCount += foundSeaMonster ? 1 : 0;
+                }
+            }
+
+            return seaMonsterCount;
+        }
+
+        private int SearchForSeaMonsters(Matrix<char> matrix)
+        {
+            var numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
+
+            var rotationCount = 0;
+            while (rotationCount < 4 && numberOfSeaMonsters == 0)
+            {
+                matrix = matrix.RotateRight();
+                rotationCount++;
+                numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
+            }
+
+            rotationCount = 0;
+            
+            if (numberOfSeaMonsters == 0)
+            {
+                matrix = matrix.FlipVertical();
+                numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
+                while (rotationCount < 4 && numberOfSeaMonsters == 0)
+                {
+                    matrix = matrix.RotateRight();
+                    rotationCount++;
+                    numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
+                }
+            }
+
+            rotationCount = 0;
+            numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
+            if (numberOfSeaMonsters == 0)
+            {
+                matrix = matrix.FlipHorizontal();
+                numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
+                while (rotationCount < 4 && numberOfSeaMonsters == 0)
+                {
+                    matrix = matrix.RotateRight();
+                    rotationCount++;
+                    numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
+                }
+            }
+
+            rotationCount = 0;
+            if (numberOfSeaMonsters == 0)
+            {
+                matrix = matrix.FlipVertical();
+                numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
+                while (rotationCount < 4 && numberOfSeaMonsters == 0)
+                {
+                    matrix = matrix.RotateRight();
+                    rotationCount++;
+                    numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
+                }
+            }
+
+            return numberOfSeaMonsters;
+        }
+
+        private string GetPrintout(Matrix<char> matrix)
+        {
+            return matrix.Print().Replace("\r\n", "");
+        }
+
+        public IList<JigsawTile> CornerTiles => _matchesById.Where(o => o.Value.Count == 2).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
+        public IList<JigsawTile> EdgeTiles => _matchesById.Where(o => o.Value.Count == 3).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
+        public IList<JigsawTile> CenterTiles => _matchesById.Where(o => o.Value.Count == 4).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
+
+        private Matrix<char> ArrangeTilesAndPaintImage()
         {
             var cornerTilesLeft = CornerTiles.ToList();
             var tileMatrix = new Matrix<long>();
             
-            //var currentTile = cornerTilesLeft.First();
+            var currentTile = cornerTilesLeft.First();
 
-            var currentTile = TilesById[1951];
-            currentTile.FlipVertical();
+            //var currentTile = TilesById[1951];
+            //currentTile.FlipVertical();
 
             tileMatrix.MoveTo(0, 0);
             tileMatrix.WriteValue(currentTile.Id);
@@ -68,12 +170,35 @@ namespace Core.ImageJigsaw
                 }
             }
 
+            foreach (var tile in TilesById.Values)
+            {
+                tile.RemoveBorder();
+            }
 
-            var puzzleMatrix = new Matrix<char>();
+            var imageMatrix = new Matrix<char>();
+            for (var tileY = 0; tileY < tileMatrix.Height; tileY++)
+            {
+                for (var tileX = 0; tileX < tileMatrix.Width; tileX++)
+                {
+                    var tile = TilesById[tileMatrix.ReadValueAt(tileX, tileY)];
+                    var tileOffsetX = tileX * tile.Matrix.Width;
+                    var tileOffsetY = tileY * tile.Matrix.Height;
+                    for (var localY = 0; localY < tile.Matrix.Height; localY++)
+                    {
+                        for (var localX = 0; localX < tile.Matrix.Width; localX++)
+                        {
+                            var x = localX + tileOffsetX;
+                            var y = localY + tileOffsetY;
 
-            return puzzleMatrix;
+                            imageMatrix.MoveTo(x, y);
+                            imageMatrix.WriteValue(tile.Matrix.ReadValueAt(localX, localY));
+                        }
+                    }
+                }
+            }
+            return imageMatrix;
         }
-
+        
         private void RotateUntilLeftEdgeMatches(JigsawTile currentTile, string edgeToFit)
         {
             var rotationCount = 0;
@@ -210,12 +335,6 @@ namespace Core.ImageJigsaw
 
             return matchingTilesEdge1.Count == 1 && matchingTilesEdge2.Count == 1;
         }
-
-        public IList<JigsawTile> CornerTiles => _matchesById.Where(o => o.Value.Count == 2).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
-        public IList<JigsawTile> EdgeTiles => _matchesById.Where(o => o.Value.Count == 3).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
-        public IList<JigsawTile> CenterTiles => _matchesById.Where(o => o.Value.Count == 4).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
-
-        public long ProductOfCornerTileIds => CornerTiles.Aggregate<JigsawTile, long>(1, (current, tile) => current * tile.Id);
 
         private Dictionary<long, List<JigsawTile>> FindMatchingTiles(IList<JigsawTile> tiles)
         {

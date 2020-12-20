@@ -75,7 +75,6 @@ Tile 2311:
 
             Assert.That(cornerTiles.Count, Is.EqualTo(1));
             Assert.That(cornerTiles[0].Id, Is.EqualTo(1427));
-
         }
 
         [Test]
@@ -85,6 +84,24 @@ Tile 2311:
             var product = puzzle.ProductOfCornerTileIds;
 
             Assert.That(product, Is.EqualTo(20899048083289));
+        }
+
+        [Test]
+        public void NumberOfSeaMonstersIsCorrect()
+        {
+            var puzzle = new ImageJigsawPuzzle(Input);
+            var numberOfSeaMonsters = puzzle.NumberOfSeaMonsters;
+
+            Assert.That(numberOfSeaMonsters, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void NumberOfHashesNotPartOfSeaMonsters()
+        {
+            var puzzle = new ImageJigsawPuzzle(Input);
+            var hashes = puzzle.NumberOfHashesThatAreNotPartOfASeaMonster;
+
+            Assert.That(hashes, Is.EqualTo(273));
         }
 
         private const string Input = @"

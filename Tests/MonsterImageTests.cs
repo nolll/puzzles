@@ -41,8 +41,7 @@ namespace Tests
         public void SpecificMessagesIsValid_UnmodifiedRules(string message, bool expected)
         {
             var validator = new MonsterImageValidator(Rules2);
-            var matchingLetters = validator.MatchingLetters(message);
-            var isValid = matchingLetters != null;
+            var isValid = validator.IsValid(message);
 
             Assert.That(isValid, Is.EqualTo(expected));
         }
@@ -65,8 +64,16 @@ namespace Tests
         public void SpecificMessageIsValid_ModifiedRules(string message, bool expected)
         {
             var validator = new MonsterImageValidator(ModifiedRules2);
-                var matchingLetters = validator.MatchingLetters(message);
-            var isValid = matchingLetters != null;
+            var isValid = validator.IsValid(message);
+
+            Assert.That(isValid, Is.EqualTo(expected));
+        }
+
+        [TestCase("aaaabbaaaabbaaa", false)]
+        public void EvilTest(string message, bool expected)
+        {
+            var validator = new MonsterImageValidator(ModifiedRules2);
+            var isValid = validator.IsValid(message);
 
             Assert.That(isValid, Is.EqualTo(expected));
         }
@@ -148,7 +155,7 @@ aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba";
         private string RulesAndMessages1 => $"{Rules1}\r\n{Messages1}";
         private string RulesAndMessages2 => $"{Rules2}\r\n{Messages2}";
         private string ModifiedRules2 => RulesAndMessages2
-            .Replace("8: 42", "8: 42 | 42 8")
+            .Replace("8: 42", "8: 42 | 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42")
             .Replace("11: 42 31", "11: 42 31 | 42 11 31");
         private string ModifiedRulesAndMessages2 => $"{ModifiedRules2}\r\n{Messages2}";
     }

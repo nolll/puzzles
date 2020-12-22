@@ -1,5 +1,4 @@
-﻿using Core.ImageJigsaw;
-using Core.IslandFood;
+﻿using Core.IslandFood;
 
 namespace ConsoleApp.Years.Year2020.Puzzles
 {

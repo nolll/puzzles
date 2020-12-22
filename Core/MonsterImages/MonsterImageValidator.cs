@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using Core.Tools;
 
 namespace Core.MonsterImages
 {
     public class MonsterImageValidator
     {
+        private const int MaxDepth = 100;
+
         private readonly IList<string> _messages;
         private readonly Dictionary<int, Rule> _rules;
 
@@ -63,22 +67,16 @@ namespace Core.MonsterImages
 
         public int ValidCount()
         {
-            var rule = _rules[0];
-            var validCount = 0;
-            foreach (var message in _messages)
-            {
-                var v = rule.MatchingLetters(message, 0);
-                if(v != null && v.Value == message.Length)
-                    validCount++;
-            }
-
-            return validCount;
+            return _messages.Count(IsValid);
         }
 
-        public int? MatchingLetters(string message)
+        public bool IsValid(string message)
         {
             var rule = _rules[0];
-            return rule.MatchingLetters(message, 0);
+            var fullPattern = $"^{rule.GetRegexPattern()}$";
+            var regex = new Regex(fullPattern);
+            var match = regex.Match(message);
+            return match.Success;
         }
 
         public abstract class Rule
@@ -91,27 +89,24 @@ namespace Core.MonsterImages
             }
 
             public abstract int? MatchingLetters(string s, int level);
+            public abstract string GetRegexPattern();
+            public int UseCount { get; set; }
         }
 
         public class CompositeRule : Rule
         {
             private readonly IList<IList<int>> _ruleSets;
             private readonly Dictionary<int, Rule> _allRules;
-            //private readonly Dictionary<string, int?> _cache;
 
             public CompositeRule(int id, IList<IList<int>> ruleSets, Dictionary<int, Rule> allRules)
                 : base(id)
             {
                 _ruleSets = ruleSets;
                 _allRules = allRules;
-                //_cache = new Dictionary<string, int?>();
             }
 
             public override int? MatchingLetters(string s, int level)
             {
-                //if (_cache.TryGetValue(s, out var cached))
-                //    return cached;
-
                 foreach (var ruleSet in _ruleSets)
                 {
                     var matchingLetters = 0;
@@ -120,9 +115,8 @@ namespace Core.MonsterImages
                     foreach (var ruleId in ruleSet)
                     {
                         var stringToSearch = s.Substring(matchingLetters);
-                        //Console.WriteLine(stringToSearch);
                         if (stringToSearch.Length == 0)
-                            return matchingLetters;
+                            return 0;
 
                         var rule = _allRules[ruleId];
                         var m = rule.MatchingLetters(stringToSearch, level + 1);
@@ -135,13 +129,37 @@ namespace Core.MonsterImages
 
                     if (validRules == ruleCount)
                     {
-                        //_cache.Add(s, matchingLetters);
                         return matchingLetters;
                     }
                 }
 
-                //_cache.Add(s, null);
                 return null;
+            }
+
+            public override string GetRegexPattern()
+            {
+                var patterns = _ruleSets.Select(GetRuleSetPattern);
+
+                if (_ruleSets.Count > 1)
+                {
+                    var joinedPatterns = string.Join("|", patterns);
+                    return $"({joinedPatterns})";
+                }
+
+                return patterns.First();
+            }
+
+            private string GetRuleSetPattern(IList<int> ruleSet)
+            {
+                var pattern = new StringBuilder();
+                foreach (var ruleId in ruleSet)
+                {
+                    var rule = _allRules[ruleId];
+                    rule.UseCount++;
+
+                    pattern.Append(rule.GetRegexPattern());
+                }
+                return pattern.ToString();
             }
         }
 
@@ -163,6 +181,8 @@ namespace Core.MonsterImages
                     return 1;
                 return null;
             }
+
+            public override string GetRegexPattern() => _c.ToString();
         }
     }
 }

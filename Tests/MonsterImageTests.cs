@@ -8,7 +8,7 @@ namespace Tests
         [Test]
         public void NumberOfValidMessagesIs2()
         {
-            var validator = new MonsterImageValidator(RulesAndMessages1);
+            var validator = new MonsterImageValidator(RulesAndMessages1, false);
             var result = validator.ValidCount();
 
             Assert.That(result, Is.EqualTo(2));
@@ -17,7 +17,7 @@ namespace Tests
         [Test]
         public void NumberOfValidMessagesIs3()
         {
-            var validator = new MonsterImageValidator(RulesAndMessages2);
+            var validator = new MonsterImageValidator(RulesAndMessages2, false);
             var result = validator.ValidCount();
 
             Assert.That(result, Is.EqualTo(3));
@@ -40,7 +40,7 @@ namespace Tests
         [TestCase("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", false)]
         public void SpecificMessagesIsValid_UnmodifiedRules(string message, bool expected)
         {
-            var validator = new MonsterImageValidator(Rules2);
+            var validator = new MonsterImageValidator(Rules2, false);
             var isValid = validator.IsValid(message);
 
             Assert.That(isValid, Is.EqualTo(expected));
@@ -63,7 +63,7 @@ namespace Tests
         [TestCase("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", true)]
         public void SpecificMessageIsValid_ModifiedRules(string message, bool expected)
         {
-            var validator = new MonsterImageValidator(ModifiedRules2);
+            var validator = new MonsterImageValidator(Rules2, true);
             var isValid = validator.IsValid(message);
 
             Assert.That(isValid, Is.EqualTo(expected));
@@ -72,7 +72,7 @@ namespace Tests
         [TestCase("aaaabbaaaabbaaa", false)]
         public void EvilTest(string message, bool expected)
         {
-            var validator = new MonsterImageValidator(ModifiedRules2);
+            var validator = new MonsterImageValidator(Rules2, true);
             var isValid = validator.IsValid(message);
 
             Assert.That(isValid, Is.EqualTo(expected));
@@ -81,7 +81,7 @@ namespace Tests
         [Test]
         public void NumberOfValidMessagesIs12()
         {
-            var validator = new MonsterImageValidator(ModifiedRulesAndMessages2);
+            var validator = new MonsterImageValidator(RulesAndMessages2, true);
             var result = validator.ValidCount();
 
             Assert.That(result, Is.EqualTo(12));
@@ -154,9 +154,5 @@ aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba";
 
         private string RulesAndMessages1 => $"{Rules1}\r\n{Messages1}";
         private string RulesAndMessages2 => $"{Rules2}\r\n{Messages2}";
-        private string ModifiedRules2 => RulesAndMessages2
-            .Replace("8: 42", "8: 42 | 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42")
-            .Replace("11: 42 31", "11: 42 31 | 42 11 31");
-        private string ModifiedRulesAndMessages2 => $"{ModifiedRules2}\r\n{Messages2}";
     }
 }

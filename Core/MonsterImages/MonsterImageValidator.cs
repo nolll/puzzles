@@ -78,7 +78,7 @@ namespace Core.MonsterImages
             while (ruleStrings.Any())
             {
                 var s = ruleStrings.First();
-                var rule = Rule.Parse(s, _rules);
+                var rule = Rule.Parse(s, rules);
                 rules.Add(rule.Id, rule);
                 ruleStrings.RemoveAt(0);
             }
@@ -88,16 +88,33 @@ namespace Core.MonsterImages
 
         public int ValidCount()
         {
-            return _messages.Count(IsValid);
+            var regex = BuildRegex();
+            return _messages.Count(o => IsValid(o, regex));
         }
 
         public bool IsValid(string message)
         {
-            var rule = _rules[0];
-            var fullPattern = $"^{rule.GetRegexPattern()}$";
-            var regex = new Regex(fullPattern);
+            var regex = BuildRegex();
             var match = regex.Match(message);
             return match.Success;
+        }
+
+        private bool IsValid(string message, Regex regex)
+        {
+            var match = regex.Match(message);
+            return match.Success;
+        }
+
+        private Regex BuildRegex()
+        {
+            var rule = _rules[0];
+            return BuildRegex(rule);
+        }
+
+        private Regex BuildRegex(Rule rule)
+        {
+            var fullPattern = $"^{rule.GetRegexPattern()}$";
+            return new Regex(fullPattern);
         }
 
         public abstract class Rule

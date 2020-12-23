@@ -69,15 +69,6 @@ namespace Tests
             Assert.That(isValid, Is.EqualTo(expected));
         }
 
-        [TestCase("aaaabbaaaabbaaa", false)]
-        public void EvilTest(string message, bool expected)
-        {
-            var validator = new MonsterImageValidator(Rules2, true);
-            var isValid = validator.IsValid(message);
-
-            Assert.That(isValid, Is.EqualTo(expected));
-        }
-
         [Test]
         public void NumberOfValidMessagesIs12()
         {

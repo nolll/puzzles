@@ -29,20 +29,34 @@ namespace Core.DuelingGenerators
 
         public void Run(int iterations)
         {
+            var binaryCache = new Dictionary<long, string>();
+
             var result = new List<string>();
             var i = 0;
             while (i < iterations)
             {
                 _generatorA.Process();
                 _generatorB.Process();
-                var a = _generatorA.BinaryLast16;
-                var b = _generatorB.BinaryLast16;
+                var a = GetBinary(binaryCache, _generatorA);
+                var b = GetBinary(binaryCache, _generatorB);
                 if (a == b)
                     result.Add(a);
                 i++;
             }
 
             FinalCount = result.Count;
+        }
+
+        private string GetBinary(Dictionary<long, string> binaryCache, Generator generator)
+        {
+            var shortValue = generator.ShortLastValue;
+            if (!binaryCache.TryGetValue(shortValue, out var binary))
+            {
+                binary = generator.BinaryLast16;
+                binaryCache.Add(shortValue, binary);
+            }
+
+            return binary;
         }
 
         public void Run2(int pairCount)

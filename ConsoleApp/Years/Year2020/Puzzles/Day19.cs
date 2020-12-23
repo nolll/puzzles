@@ -20,7 +20,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var validator = new MonsterImageValidator(FileInput, true);
             var result = validator.ValidCount();
-            return new PuzzleResult(result);
+            return new PuzzleResult(result, 287);
         }
     }
 }

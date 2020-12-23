@@ -7,107 +7,111 @@ namespace Core.CrabCups
 {
     public class CrabCupsGame
     {
-        private LinkedList<int> _circle;
-        private LinkedListNode<int> _currentCup;
-        private List<int> _numbers;
-        private int _minNumber;
-        private int _maxNumber;
+        private const int ExtendedMaxNumber = 1_000_000;
 
-        public CrabCupsGame(int input)
+        private readonly LinkedList<int> _circle;
+        private LinkedListNode<int> _currentCup;
+        private readonly int _minNumber;
+        private readonly int _maxNumber;
+        private readonly Dictionary<int, LinkedListNode<int>> _dictionary;
+
+        public CrabCupsGame(int input, bool isExtended = false)
         {
-            _numbers = input.ToString().ToCharArray().Select(o => int.Parse((string) o.ToString())).ToList();
-            _minNumber = _numbers.Min();
-            _maxNumber = _numbers.Max();
+            var numbers = input.ToString().ToCharArray().Select(o => int.Parse(o.ToString())).ToList();
+            _minNumber = numbers.Min();
+            _maxNumber = numbers.Max();
             _circle = new LinkedList<int>();
+            _dictionary = new Dictionary<int, LinkedListNode<int>>();
 
             do
             {
-                var num = _numbers.First();
+                var num = numbers.First();
                 _currentCup = _circle.AddLast(num);
-                _numbers.RemoveAt(0);
-            } while (_numbers.Any());
+                _dictionary.Add(num, _currentCup);
+                numbers.RemoveAt(0);
+            } while (numbers.Any());
+
+            if (isExtended)
+            {
+                for (var num = _maxNumber + 1; num <= ExtendedMaxNumber; num++)
+                {
+                    _currentCup = _circle.AddLast(num);
+                    _dictionary.Add(num, _currentCup);
+                }
+
+                _maxNumber = ExtendedMaxNumber;
+            }
 
             _currentCup = _circle.First;
         }
 
-        public string Play(int moves)
+        public void Play(int moves)
         {
+            var cupsToMove = new LinkedListNode<int>[3];
             for (var i = 0; i < moves; i++)
             {
                 var currentCupBeforeMove = _currentCup;
                 var currentCupLabel = _currentCup.Value;
-                var firstCupToMove = _currentCup.NextOrFirst();
-                var cupsToMove = new List<int>();
+                var nodeToMove = _currentCup.NextOrFirst();
                 for (var j = 0; j < 3; j++)
                 {
-                    cupsToMove.Add(firstCupToMove.Value);
-                    var nextCupToMove = firstCupToMove.NextOrFirst();
-                    _circle.Remove(firstCupToMove);
-                    firstCupToMove = nextCupToMove;
+                    cupsToMove[j] = nodeToMove;
+                    var nodeToRemove = nodeToMove;
+                    nodeToMove = nodeToMove.NextOrFirst();
+                    _circle.Remove(nodeToRemove);
                 }
 
                 var destinationCup = currentCupLabel - 1;
-                while (destinationCup < _minNumber || cupsToMove.Contains(destinationCup))
+                while (destinationCup < _minNumber || cupsToMove.Any(o => o.Value == destinationCup))
                 {
                     destinationCup--;
                     if (destinationCup < _minNumber)
                         destinationCup = _maxNumber;
                 }
 
-                while (_currentCup.Value != destinationCup)
-                {
-                    MoveForward();
-                }
+                _currentCup = _dictionary[destinationCup];
 
                 foreach (var cup in cupsToMove)
                 {
                     _circle.AddAfter(_currentCup, cup);
-                    MoveForward();
+                    _currentCup = _currentCup.NextOrFirst();
                 }
 
                 _currentCup = currentCupBeforeMove;
-                MoveForward();
-            }
-
-            while (_currentCup.Value != 1)
-            {
-                MoveForward();
-            }
-
-            var resultNumbers = new List<int>();
-            MoveForward();
-            while (_currentCup.Value != 1)
-            {
-                resultNumbers.Add(_currentCup.Value);
-                MoveForward();
-            }
-
-            return string.Join("", resultNumbers.Select(o => o.ToString()));
-        }
-
-        private void Move(int distance)
-        {
-            if (distance < 0)
-                MoveBack(Math.Abs(distance));
-
-            MoveForward(distance);
-        }
-
-        private void MoveBack(int distance = 1)
-        {
-            while (distance > 0)
-            {
-                _currentCup = _currentCup.PreviousOrLast();
-                distance--;
-            }
-        }
-
-        private void MoveForward(int distance = 1)
-        {
-            while (distance > 0)
-            {
                 _currentCup = _currentCup.NextOrFirst();
-                distance--;
+            }
+        }
+
+        public string ResultString
+        {
+            get
+            {
+                _currentCup = _dictionary[1];
+
+                var resultNumbers = new List<int>();
+                _currentCup = _currentCup.NextOrFirst();
+                while (_currentCup.Value != 1)
+                {
+                    resultNumbers.Add(_currentCup.Value);
+                    _currentCup = _currentCup.NextOrFirst();
+                }
+
+                return string.Join("", resultNumbers.Select(o => o.ToString()));
+            }
+        }
+
+        public long ResultProduct
+        {
+            get
+            {
+                _currentCup = _dictionary[1];
+
+                _currentCup = _currentCup.NextOrFirst();
+                long val1 = _currentCup.Value;
+                _currentCup = _currentCup.NextOrFirst();
+                long val2 = _currentCup.Value;
+
+                return val1 * val2;
             }
         }
     }

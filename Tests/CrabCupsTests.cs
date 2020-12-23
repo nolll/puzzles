@@ -1,21 +1,28 @@
 using Core.CrabCups;
-using Core.MakeFuel;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Tests
 {
     public class CrabCupsTests
     {
+        private const int Input = 389_125_467;
+
         [Test]
         public void ResultAfter10MovesIsCorrect()
         {
-            const int input = 389125467;
+            var game = new CrabCupsGame(Input);
+            game.Play(10);
 
-            var game = new CrabCupsGame(input);
-            var result = game.Play(10);
+            Assert.That(game.ResultString, Is.EqualTo("92658374"));
+        }
 
-            Assert.That(result, Is.EqualTo("92658374"));
+        [Test]
+        public void ExtendedResultAfter10MillionMovesIsCorrect()
+        {
+            var game = new CrabCupsGame(Input, true);
+            game.Play(10_000_000);
+
+            Assert.That(game.ResultProduct, Is.EqualTo(149_245_887_792));
         }
     }
 }

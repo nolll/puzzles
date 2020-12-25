@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Core.Tools;
 
 namespace Core.HexagonalFlooring
@@ -18,7 +19,8 @@ namespace Core.HexagonalFlooring
         private const string NorthWest = "nw";
 
         private readonly IEnumerable<List<string>> _instructions;
-        private Matrix<char> _matrix;
+        private readonly Matrix<char> _matrix;
+        private readonly Dictionary<string, List<MatrixAddress>> _adjacentCoordsCache;
         public int BlackTileCount => _matrix.Values.Count(o => o == Black);
 
         public HexagonalFloor(string input)
@@ -26,6 +28,7 @@ namespace Core.HexagonalFlooring
             var rows = PuzzleInputReader.ReadLines(input);
             _instructions = rows.Select(ParseInstruction);
             _matrix = new Matrix<char>(defaultValue: Nothing);
+            _adjacentCoordsCache = new Dictionary<string, List<MatrixAddress>>();
         }
 
         private List<string> ParseInstruction(string s)
@@ -119,8 +122,7 @@ namespace Core.HexagonalFlooring
             {
                 for (var x = 0; x < _matrix.Width; x++)
                 {
-                    _matrix.MoveTo(x, y);
-                    var thisValue = _matrix.ReadValue();
+                    var thisValue = _matrix.ReadValueAt(x, y);
 
                     if (thisValue != Nothing)
                     {
@@ -131,7 +133,7 @@ namespace Core.HexagonalFlooring
                             // Any black tile with zero or more than 2 black tiles immediately adjacent to it is flipped to white.
                             if (blackAdjacentCount == 0 || blackAdjacentCount > 2)
                             {
-                                tilesToFlipToWhite.Add(_matrix.Address);
+                                tilesToFlipToWhite.Add(new MatrixAddress(x, y));
                             }
                         }
                         else
@@ -139,7 +141,7 @@ namespace Core.HexagonalFlooring
                             // Any white tile with exactly 2 black tiles immediately adjacent to it is flipped to black.
                             if (blackAdjacentCount == 2)
                             {
-                                tilesToFlipToBlack.Add(_matrix.Address);
+                                tilesToFlipToBlack.Add(new MatrixAddress(x, y));
                             }
                         }
                     }
@@ -172,7 +174,7 @@ namespace Core.HexagonalFlooring
                     {
                         var adjacentAddresses = GetAdjacent6Coords(x, y);
                         var adjacentValues = GetAdjacent6Values(x, y);
-                        if (adjacentAddresses.Count == 6 && adjacentValues.Any(o => o != Nothing))
+                        if (adjacentValues.Any(o => o != Nothing))
                         {
                             foreach (var address in adjacentAddresses)
                             {
@@ -213,22 +215,22 @@ namespace Core.HexagonalFlooring
 
         private List<MatrixAddress> GetAdjacent6Coords(int x, int y)
         {
-            var northEast = new MatrixAddress(x + 1, y - 1);
-            var east = new MatrixAddress(x + 2, y);
-            var southEast = new MatrixAddress(x + 1, y + 1);
-            var southWest = new MatrixAddress(x - 1, y + 1);
-            var west = new MatrixAddress(x - 2, y);
-            var northWest = new MatrixAddress(x - 1, y - 1);
-
-            return new List<MatrixAddress>
+            var key = $"{x},{y}";
+            if (_adjacentCoordsCache.TryGetValue(key, out var coords))
+                return coords;
+            
+            coords = new List<MatrixAddress>
             {
-                northEast,
-                east,
-                southEast,
-                southWest,
-                west,
-                northWest
+                new(x + 1, y - 1),
+                new(x + 2, y),
+                new(x + 1, y + 1),
+                new(x - 1, y + 1),
+                new(x - 2, y),
+                new(x - 1, y - 1)
             };
+            
+            _adjacentCoordsCache.Add(key, coords);
+            return coords;
         }
     }
 }

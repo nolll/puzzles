@@ -474,10 +474,30 @@ namespace Core.Tools
 
         public void ExtendAllDirections(int steps = 1)
         {
-            AddCols(steps, MatrixAddMode.Prepend);
-            AddCols(steps, MatrixAddMode.Append);
+            ExtendUp(steps);
+            ExtendRight(steps);
+            ExtendDown(steps);
+            ExtendLeft(steps);
+        }
+
+        public void ExtendUp(int steps = 1)
+        {
             AddRows(steps, MatrixAddMode.Prepend);
+        }
+        
+        public void ExtendRight(int steps = 1)
+        {
+            AddCols(steps, MatrixAddMode.Append);
+        }
+
+        public void ExtendDown(int steps = 1)
+        {
             AddRows(steps, MatrixAddMode.Append);
+        }
+
+        public void ExtendLeft(int steps = 1)
+        {
+            AddCols(steps, MatrixAddMode.Prepend);
         }
     }
 }

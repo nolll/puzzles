@@ -13,7 +13,17 @@ namespace ConsoleApp.Years.Year2020.Puzzles
         {
             var floor = new HexagonalFloor(FileInput);
             floor.Arrange();
+            return new PuzzleResult(floor.BlackTileCount, 388);
+        }
+
+        public override PuzzleResult RunPart2()
+        {
+            var floor = new HexagonalFloor(FileInput);
+            floor.Arrange();
+            floor.Modify(100);
             return new PuzzleResult(floor.BlackTileCount);
+
+            // guessed 3951
         }
     }
 }

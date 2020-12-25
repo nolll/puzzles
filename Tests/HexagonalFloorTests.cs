@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using Core.HexagonalFlooring;
 using Core.MakeFuel;
-using Core.Tools;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
@@ -10,21 +8,7 @@ namespace Tests
 {
     public class HexagonalFlooringTests
     {
-        [TestCase("esew")]
-        [TestCase("nwwswee")]
-        public void OneTileIsBlack(string input)
-        {
-            var floor = new HexagonalFloor(input);
-            floor.Arrange();
-            var result = floor.BlackTileCount;
-
-            Assert.That(result, Is.EqualTo(1));
-        }
-        
-        [Test]
-        public void FiveTilesAreBlack()
-        {
-            const string input = @"
+        private const string Input = @"
 sesenwnenenewseeswwswswwnenewsewsw
 neeenesenwnwwswnenewnwwsewnenwseswesw
 seswneswswsenwwnwse
@@ -46,106 +30,99 @@ eneswnwswnwsenenwnwnwwseeswneewsenese
 neswnwewnwnwseenwseesewsenwsweewe
 wseweeenwnesenwwwswnew";
 
+        [TestCase("esew")]
+        [TestCase("nwwswee")]
+        public void OneTileIsBlackAfterArrange(string input)
+        {
             var floor = new HexagonalFloor(input);
+            floor.Arrange();
+            var result = floor.BlackTileCount;
+
+            Assert.That(result, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FiveTilesAreBlackAfterArrange()
+        {
+            var floor = new HexagonalFloor(Input);
             floor.Arrange();
             var result = floor.BlackTileCount;
 
             Assert.That(result, Is.EqualTo(10));
         }
-    }
 
-    public class HexagonalFloor
-    {
-        private const char Nothing = ' ';
-        private const char White = 'w';
-        private const char Black = 'b';
-
-        private const string NorthEast = "ne";
-        private const string East = "e";
-        private const string SouthEast = "se";
-        private const string SouthWest = "sw";
-        private const string West = "w";
-        private const string NorthWest = "nw";
-
-        private readonly IEnumerable<List<string>> _instructions;
-        private readonly Matrix<char> _matrix;
-        public int BlackTileCount => _matrix.Values.Count(o => o == Black);
-
-        public HexagonalFloor(string input)
+        [Test]
+        public void FiveTilesAreBlack()
         {
-            var rows = PuzzleInputReader.ReadLines(input);
-            _instructions = rows.Select(ParseInstruction);
-            _matrix = new Matrix<char>(defaultValue: ' ');
+            var floor = new HexagonalFloor(Input);
+            floor.Arrange();
+            var result = floor.BlackTileCount;
+
+            Assert.That(result, Is.EqualTo(10));
         }
 
-        private List<string> ParseInstruction(string s)
+        [Test]
+        public void BlackTilesCorrectAfterEachRun()
         {
-            var instructions = new List<string>();
-            var array = s.ToCharArray();
-            for (var i = 0; i < array.Length; i++)
-            {
-                var c = array[i];
-                if (c == 'w' || c == 'e')
-                {
-                    instructions.Add(c.ToString());
-                }
-                else
-                {
-                    var nextChar = array[i + 1];
-                    instructions.Add($"{c}{nextChar}");
-                    i++;
-                }
-            }
+            var floor = new HexagonalFloor(Input);
+            floor.Arrange();
 
-            return instructions;
-        }
+            floor.Modify(1); // 1
+            Assert.That(floor.BlackTileCount, Is.EqualTo(15));
 
-        public void Arrange()
-        {
-            _matrix.WriteValue(White);
-            foreach (var instruction in _instructions)
-            {
-                _matrix.MoveTo(_matrix.StartAddress);
-                foreach (var step in instruction)
-                {
-                    if (step == NorthEast)
-                    {
-                        _matrix.MoveUp();
-                        _matrix.MoveRight();
-                    }
-                    else if (step == East)
-                    {
-                        _matrix.MoveRight();
-                        _matrix.MoveRight();
-                    }
-                    if (step == SouthEast)
-                    {
-                        _matrix.MoveDown();
-                        _matrix.MoveRight();
-                    }
-                    if (step == SouthWest)
-                    {
-                        _matrix.MoveDown();
-                        _matrix.MoveLeft();
-                    }
-                    else if (step == West)
-                    {
-                        _matrix.MoveLeft();
-                        _matrix.MoveLeft();
-                    }
-                    if (step == NorthWest)
-                    {
-                        _matrix.MoveUp();
-                        _matrix.MoveLeft();
-                    }
+            floor.Modify(1); // 2
+            Assert.That(floor.BlackTileCount, Is.EqualTo(12));
 
-                    if (_matrix.ReadValue() == Nothing)
-                        _matrix.WriteValue(White);
-                }
+            floor.Modify(1); // 3
+            Assert.That(floor.BlackTileCount, Is.EqualTo(25));
 
-                var tile = _matrix.ReadValue() == Black ? White : Black;
-                _matrix.WriteValue(tile);
-            }
+            floor.Modify(1); // 4
+            Assert.That(floor.BlackTileCount, Is.EqualTo(14));
+
+            floor.Modify(1); // 5
+            Assert.That(floor.BlackTileCount, Is.EqualTo(23));
+
+            floor.Modify(1); // 6
+            Assert.That(floor.BlackTileCount, Is.EqualTo(28));
+
+            floor.Modify(1); // 7
+            Assert.That(floor.BlackTileCount, Is.EqualTo(41));
+
+            floor.Modify(1); // 8
+            Assert.That(floor.BlackTileCount, Is.EqualTo(37));
+
+            floor.Modify(1); // 9
+            Assert.That(floor.BlackTileCount, Is.EqualTo(49));
+
+            floor.Modify(1); // 10
+            Assert.That(floor.BlackTileCount, Is.EqualTo(37));
+
+            floor.Modify(10); // 20
+            Assert.That(floor.BlackTileCount, Is.EqualTo(132));
+
+            floor.Modify(10); // 30
+            Assert.That(floor.BlackTileCount, Is.EqualTo(259));
+
+            floor.Modify(10); // 40
+            Assert.That(floor.BlackTileCount, Is.EqualTo(406));
+
+            floor.Modify(10); // 50
+            Assert.That(floor.BlackTileCount, Is.EqualTo(566));
+
+            floor.Modify(10); // 60
+            Assert.That(floor.BlackTileCount, Is.EqualTo(788));
+
+            floor.Modify(10); // 70
+            Assert.That(floor.BlackTileCount, Is.EqualTo(1106));
+
+            floor.Modify(10); // 80
+            Assert.That(floor.BlackTileCount, Is.EqualTo(1373));
+
+            floor.Modify(10); // 90
+            Assert.That(floor.BlackTileCount, Is.EqualTo(1844));
+
+            floor.Modify(10); // 100
+            Assert.That(floor.BlackTileCount, Is.EqualTo(2208));
         }
     }
 }

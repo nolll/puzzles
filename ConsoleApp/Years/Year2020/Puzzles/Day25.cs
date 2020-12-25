@@ -13,7 +13,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
             var finder = new EncryptionKeyFinder(FileInput);
             var key = finder.FindKey();
 
-            return new PuzzleResult(key);
+            return new PuzzleResult(key, 7269858);
         }
 
         public override PuzzleResult RunPart2()

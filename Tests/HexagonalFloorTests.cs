@@ -1,8 +1,5 @@
-using System.Text;
 using Core.HexagonalFlooring;
-using Core.MakeFuel;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Tests
 {

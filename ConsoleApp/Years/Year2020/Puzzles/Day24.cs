@@ -1,5 +1,4 @@
-﻿using Core.CrabCups;
-using Core.HexagonalFlooring;
+﻿using Core.HexagonalFlooring;
 
 namespace ConsoleApp.Years.Year2020.Puzzles
 {
@@ -21,9 +20,7 @@ namespace ConsoleApp.Years.Year2020.Puzzles
             var floor = new HexagonalFloor(FileInput);
             floor.Arrange();
             floor.Modify(100);
-            return new PuzzleResult(floor.BlackTileCount);
-
-            // guessed 3951
+            return new PuzzleResult(floor.BlackTileCount, 4002);
         }
     }
 }

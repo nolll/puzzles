@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Core.Tools;
@@ -6,49 +8,70 @@ namespace Core.SecurityDoor
 {
     public class PasswordGenerator
     {
+        private readonly List<byte[]> _hashCache;
+        private int _index;
+
+        public PasswordGenerator()
+        {
+            _hashCache = new List<byte[]>();
+            _index = 1;
+        }
+
         public string Generate1(string key)
         {
-            var index = 1;
             var hashFactory = new Hashfactory();
-            var compareString = GetCompareString(5);
             var pwd = new StringBuilder();
             while (pwd.Length < 8)
             {
-                var hash = hashFactory.StringHashFromString($"{key}{index}");
-                if (hash.StartsWith(compareString))
+                var strToHash = $"{key}{_index}";
+                var byteHash = hashFactory.ByteHashFromString(strToHash);
+                if (HasFiveLeadingZeros(byteHash))
                 {
+                    _hashCache.Add(byteHash);
+                    var hash = hashFactory.StringHashFromString(strToHash);
                     pwd.Append(hash.Substring(5, 1));
                 }
 
-                index++;
+                _index++;
             }
 
             return pwd.ToString().ToLower();
         }
-
+        
         public string Generate2(string key)
         {
-            var index = 1;
             var hashFactory = new Hashfactory();
-            var compareString = GetCompareString(5);
             const int pwdLength = 8;
             var pwdArray = new char?[pwdLength];
+
+            while (_hashCache.Any())
+            {
+                var byteHash = _hashCache.First();
+                _hashCache.RemoveAt(0);
+                var position = byteHash[2];
+                if (position < 8 && pwdArray[position] == null)
+                {
+                    var hash = ByteConverter.ConvertToString(byteHash);
+                    var result = hash.Substring(6, 1);
+                    pwdArray[position] = result[0];
+                }
+            }
+            
             while (pwdArray.Count(o => o == null) > 0)
             {
-                var hash = hashFactory.StringHashFromString($"{key}{index.ToString()}");
-                if (hash.StartsWith(compareString))
+                var byteHash = hashFactory.ByteHashFromString($"{key}{_index}");
+                if (HasFiveLeadingZeros(byteHash))
                 {
-                    var result = hash.Substring(5, 2);
-                    if (int.TryParse(result[0].ToString(), out var position))
+                    var position = byteHash[2];
+                    if (position < 8 && pwdArray[position] == null)
                     {
-                        if (position < pwdLength && pwdArray[position] == null)
-                        {
-                            pwdArray[position] = result[1];
-                        }
+                        var hash = ByteConverter.ConvertToString(byteHash);
+                        var result = hash.Substring(6, 1);
+                        pwdArray[position] = result[0];
                     }
                 }
 
-                index++;
+                _index++;
             }
 
             var pwd = new StringBuilder();
@@ -59,15 +82,9 @@ namespace Core.SecurityDoor
             return pwd.ToString().ToLower();
         }
 
-        private string GetCompareString(int leadingZeros)
+        private bool HasFiveLeadingZeros(IReadOnlyList<byte> bytes)
         {
-            var sb = new StringBuilder();
-            for (var i = 0; i < leadingZeros; i++)
-            {
-                sb.Append(0);
-            }
-
-            return sb.ToString();
+            return bytes[0] == 0 && bytes[1] == 0 && bytes[2] < 16;
         }
     }
 }

@@ -5,6 +5,8 @@ namespace ConsoleApp.Years.Year2015.Puzzles
 {
     public class Day20 : Day2015
     {
+        public override string Comment => "Int factors";
+
         public Day20() : base(20)
         {
         }

@@ -12,15 +12,15 @@ namespace ConsoleApp.Years.Year2016.Puzzles
         public override PuzzleResult RunPart1()
         {
             var detector = new FloorTrapDetector(FileInput);
-            detector.FindTraps(40);
-            return new PuzzleResult(detector.SafeCount, 1989);
+            var safeCount = detector.CountSafeTiles(40);
+            return new PuzzleResult(safeCount, 1989);
         }
 
         public override PuzzleResult RunPart2()
         {
             var detector = new FloorTrapDetector(FileInput);
-            detector.FindTraps(400_000);
-            return new PuzzleResult(detector.SafeCount, 19_999_894);
+            var safeCount = detector.CountSafeTiles(400_000);
+            return new PuzzleResult(safeCount, 19_999_894);
         }
     }
 }

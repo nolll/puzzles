@@ -11,9 +11,9 @@ namespace Tests
             const string input = ".^^.^.^^^^";
 
             var detector = new FloorTrapDetector(input);
-            detector.FindTraps(10);
+            var safeCount = detector.CountSafeTiles(10);
 
-            Assert.That(detector.SafeCount, Is.EqualTo(38));
+            Assert.That(safeCount, Is.EqualTo(38));
         }
     }
 }

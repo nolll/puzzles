@@ -7,13 +7,14 @@ namespace Core.Polymers
         private const string Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private readonly List<string> _pairs = GetPairs();
 
-        public string ReducedPolymer { get; }
-        public string ImprovedPolymer { get; }
-
-        public PolymerPuzzle(string polymer)
+        public string GetReducedPolymer(string polymer)
         {
-            ReducedPolymer = Reduce(polymer);
-            ImprovedPolymer = ImproveAndReduce(polymer);
+            return Reduce(polymer);
+        }
+
+        public string GetImprovedPolymer(string polymer)
+        {
+            return ImproveAndReduce(polymer);
         }
 
         private static List<string> GetPairs()
@@ -26,7 +27,7 @@ namespace Core.Polymers
                 pairs.Add(pair);
                 pairs.Add(reverse);
             }
-
+            
             return pairs;
         }
 

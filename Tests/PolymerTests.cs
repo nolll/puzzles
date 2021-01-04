@@ -10,8 +10,9 @@ namespace Tests
         {
             const string input = "dabAcCaCBAcCcaDA";
 
-            var puzzle = new PolymerPuzzle(input);
-            Assert.AreEqual("dabCBAcaDA", puzzle.ReducedPolymer);
+            var puzzle = new PolymerPuzzle();
+            var reducedPolymer = puzzle.GetReducedPolymer(input);
+            Assert.AreEqual("dabCBAcaDA", reducedPolymer);
         }
 
         [Test]
@@ -19,8 +20,9 @@ namespace Tests
         {
             const string input = "dabAcCaCBAcCcaDA";
 
-            var puzzle = new PolymerPuzzle(input);
-            Assert.AreEqual("daDA", puzzle.ImprovedPolymer);
+            var puzzle = new PolymerPuzzle();
+            var improvedPolymer = puzzle.GetImprovedPolymer(input);
+            Assert.AreEqual("daDA", improvedPolymer);
         }
     }
 }

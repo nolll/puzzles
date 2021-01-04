@@ -13,14 +13,16 @@ namespace ConsoleApp.Years.Year2018.Puzzles
 
         public override PuzzleResult RunPart1()
         {
-            var polymerPuzzle = new PolymerPuzzle(FileInput);
-            return new PuzzleResult(polymerPuzzle.ReducedPolymer.Length, 9172);
+            var polymerPuzzle = new PolymerPuzzle();
+            var reducedPolymer = polymerPuzzle.GetReducedPolymer(FileInput);
+            return new PuzzleResult(reducedPolymer.Length, 9172);
         }
 
         public override PuzzleResult RunPart2()
         {
-            var polymerPuzzle = new PolymerPuzzle(FileInput);
-            return new PuzzleResult(polymerPuzzle.ImprovedPolymer.Length, 6550);
+            var polymerPuzzle = new PolymerPuzzle();
+            var improvedPolymer = polymerPuzzle.GetImprovedPolymer(FileInput);
+            return new PuzzleResult(improvedPolymer.Length, 6550);
         }
     }
 }

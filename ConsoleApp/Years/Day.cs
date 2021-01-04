@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 
 namespace ConsoleApp.Years
@@ -8,6 +7,7 @@ namespace ConsoleApp.Years
     {
         public abstract int Year { get; }
         public int Id { get; }
+        public virtual string Comment => "";
 
         protected Day(int day)
         {

@@ -41,7 +41,7 @@ namespace ConsoleApp
             var p1 = RunPuzzleWithTimer(day.RunPart1);
             var p2 = RunPuzzleWithTimer(day.RunPart2);
 
-            return new DayResult(day, p1, p2);
+            return new DayResult(day, p1, p2, day.Comment);
         }
 
         private TimedPuzzleResult RunPuzzleWithTimer(Func<PuzzleResult> func)

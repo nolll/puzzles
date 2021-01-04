@@ -6,6 +6,7 @@ namespace ConsoleApp
     public class MultiDayPrinter : DayPrinter
     {
         private readonly int _timeout;
+        private const int CommentLength = 24;
 
         public MultiDayPrinter(int timeout)
         {
@@ -14,9 +15,9 @@ namespace ConsoleApp
 
         public void PrintHeader()
         {
-            Console.WriteLine("-----------------------------------------");
-            Console.WriteLine("| day         | part 1     | part 2     |");
-            Console.WriteLine("-----------------------------------------");
+            Console.WriteLine("--------------------------------------------------------------------");
+            Console.WriteLine("| day         | part 1     | part 2     | comment                  |");
+            Console.WriteLine("--------------------------------------------------------------------");
         }
 
         public void PrintDay(DayResult dayResult)
@@ -27,6 +28,10 @@ namespace ConsoleApp
             var p1Color = GetColor(dayResult.Result1);
             var p2 = GetTableResult(dayResult.Result2).PadRight(10, ' ');
             var p2Color = GetColor(dayResult.Result2);
+            var comment = dayResult.Comment.Length > (CommentLength - 3)
+                ? dayResult.Comment.Substring(0, CommentLength - 3) + "..."
+                : dayResult.Comment;
+            var paddedComment = comment.PadRight(CommentLength, ' ');
 
             Console.Write("| ");
             Console.Write(dayAndYear);
@@ -38,7 +43,11 @@ namespace ConsoleApp
             SetColor(p2Color);
             Console.Write(p2);
             ResetColor();
-            Console.Write(" |");
+            Console.Write(" | ");
+            SetColor(ConsoleColor.Yellow);
+            Console.Write(paddedComment);
+            ResetColor();
+            Console.Write(" |"); 
             Console.WriteLine();
         }
 
@@ -66,7 +75,7 @@ namespace ConsoleApp
 
         public void PrintFooter()
         {
-            Console.WriteLine("-----------------------------------------");
+            Console.WriteLine("--------------------------------------------------------------------");
         }
     }
 }

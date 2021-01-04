@@ -18,7 +18,7 @@ namespace ConsoleApp
             }
 
             var totalTimeTaken = dayResult.Result1.TimeTaken + dayResult.Result2.TimeTaken;
-            PrintDayEnd(totalTimeTaken);
+            PrintDayEnd(dayResult, totalTimeTaken);
         }
 
         private void PrintPuzzle(int part, TimedPuzzleResult puzzleResult)
@@ -45,9 +45,16 @@ namespace ConsoleApp
             PrintDivider();
         }
 
-        private static void PrintDayEnd(TimeSpan timeTaken)
+        private void PrintDayEnd(DayResult dayResult, TimeSpan timeTaken)
         {
             PrintDivider();
+            if (!string.IsNullOrEmpty(dayResult.Comment))
+            {
+                SetColor(ConsoleColor.Yellow);
+                Console.WriteLine(dayResult.Comment);
+                ResetColor();
+                PrintDivider();
+            }
             var time = Formatter.FormatTime(timeTaken);
             Console.WriteLine(time.PadLeft(Divider.Length));
         }

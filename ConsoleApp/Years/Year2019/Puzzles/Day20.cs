@@ -5,6 +5,8 @@ namespace ConsoleApp.Years.Year2019.Puzzles
 {
     public class Day20 : Day2019
     {
+        public override string Comment => "Donut Maze";
+
         public Day20() : base(20)
         {
         }

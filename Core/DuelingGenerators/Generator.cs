@@ -1,5 +1,3 @@
-using System;
-
 namespace Core.DuelingGenerators
 {
     public class Generator
@@ -7,9 +5,6 @@ namespace Core.DuelingGenerators
         private readonly int _validationMultiple;
         private const long Divisor = 2147483647;
         private readonly long _factor;
-        
-        public string BinaryLast16 => Convert.ToString(ShortLastValue, 2);
-
         private long _lastValue;
         public short ShortLastValue => (short) _lastValue;
         public bool IsValid => _lastValue % _validationMultiple == 0;

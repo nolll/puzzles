@@ -5,6 +5,8 @@ namespace ConsoleApp.Years.Year2018.Puzzles
 {
     public class Day21 : Day2018
     {
+        public override string Comment => "OpComputer";
+
         public Day21() : base(21)
         {
         }

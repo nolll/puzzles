@@ -7,6 +7,8 @@ namespace ConsoleApp.Years.Year2018.Puzzles
 {
     public class Day22 : Day2018
     {
+        public override string Comment => "Cave System Risk";
+
         public Day22() : base(22)
         {
         }

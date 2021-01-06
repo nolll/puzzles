@@ -5,6 +5,8 @@ namespace ConsoleApp.Years.Year2018.Puzzles
 {
     public class Day11 : Day2018
     {
+        public override string Comment => "Power Grid Matrix";
+
         public Day11() : base(11)
         {
         }

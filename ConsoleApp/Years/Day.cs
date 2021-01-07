@@ -8,6 +8,8 @@ namespace ConsoleApp.Years
         public abstract int Year { get; }
         public int Id { get; }
         public virtual string Comment => "";
+        public virtual bool IsSlow => false;
+        public virtual bool NeedsRewrite => false;
 
         protected Day(int day)
         {

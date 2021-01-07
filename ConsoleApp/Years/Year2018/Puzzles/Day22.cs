@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Core.ModeMaze;
 using Core.Tools;
 
@@ -8,7 +7,8 @@ namespace ConsoleApp.Years.Year2018.Puzzles
     public class Day22 : Day2018
     {
         public override string Comment => "Cave System Risk";
-
+        public override bool IsSlow => true;
+        
         public Day22() : base(22)
         {
         }

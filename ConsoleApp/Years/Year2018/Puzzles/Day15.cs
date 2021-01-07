@@ -6,6 +6,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
     public class Day15 : Day2018
     {
         public override string Comment => "Battle Simulator";
+        public override bool IsSlow => true;
 
         public Day15() : base(15)
         {

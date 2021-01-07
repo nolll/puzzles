@@ -6,6 +6,7 @@ namespace ConsoleApp.Years.Year2016.Puzzles
     public class Day14 : Day2016
     {
         public override string Comment => "Slow hashing";
+        public override bool IsSlow => true;
 
         public Day14() : base(14)
         {

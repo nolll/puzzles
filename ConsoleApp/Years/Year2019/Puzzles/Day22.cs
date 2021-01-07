@@ -7,6 +7,7 @@ namespace ConsoleApp.Years.Year2019.Puzzles
     public class Day22 : Day2019
     {
         public override string Comment => "Learn more math";
+        public override bool NeedsRewrite => true;
 
         public Day22() : base(22)
         {

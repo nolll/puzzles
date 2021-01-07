@@ -6,6 +6,7 @@ namespace ConsoleApp.Years.Year2016.Puzzles
     public class Day24 : Day2016
     {
         public override string Comment => "Path finding (~10s)";
+        public override bool IsSlow => true;
 
         public Day24() : base(24)
         {

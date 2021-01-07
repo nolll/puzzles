@@ -6,6 +6,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
     public class Day24 : Day2015
     {
         public override string Comment => "Present balancing";
+        public override bool IsSlow => true;
 
         public Day24() : base(24)
         {

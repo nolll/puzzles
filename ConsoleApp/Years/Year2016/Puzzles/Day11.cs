@@ -6,6 +6,7 @@ namespace ConsoleApp.Years.Year2016.Puzzles
     public class Day11 : Day2016
     {
         public override string Comment => "Floor permutations";
+        public override bool IsSlow => true;
 
         public Day11() : base(11)
         {

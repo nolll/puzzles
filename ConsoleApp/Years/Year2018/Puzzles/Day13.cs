@@ -6,6 +6,7 @@ namespace ConsoleApp.Years.Year2018.Puzzles
     public class Day13 : Day2018
     {
         public override string Comment => "Collision Matrix";
+        public override bool IsSlow => true;
 
         public Day13() : base(13)
         {

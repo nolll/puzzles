@@ -38,7 +38,7 @@ namespace ConsoleApp
 
             return _events.Last();
         }
-
+        
         public IList<Day> GetAll()
         {
             var eventDays = _events.Select(o => o.Days);

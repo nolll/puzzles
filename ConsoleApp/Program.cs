@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using ConsoleApp.Years;
 
 namespace ConsoleApp
 {
@@ -7,8 +10,8 @@ namespace ConsoleApp
         private static DaySelector _daySelector;
         private const int PuzzleTimeout = 10;
 
-        private const int Year = 2018;
-        private const int Day = 5;
+        private const int DebugYear = 2018;
+        private const int DebugDay = 5;
 
         static void Main(string[] args)
         {
@@ -22,11 +25,12 @@ namespace ConsoleApp
                 return;
             }
 
-            if (parameters.RunAll)
+            if (parameters.Year == null && parameters.Day == null)
             {
                 var allDays = _daySelector.GetAll();
+                var filteredDays = FilterDays(allDays, parameters);
                 var allRunner = new PuzzleRunner(timeout: PuzzleTimeout);
-                allRunner.Run(allDays);
+                allRunner.Run(filteredDays);
                 return;
             }
 
@@ -37,15 +41,18 @@ namespace ConsoleApp
                     throw new Exception("Event not found!");
 
                 var yearDays = year.Days;
+                var filteredDays = FilterDays(yearDays, parameters);
                 var yearRunner = new PuzzleRunner(timeout: PuzzleTimeout);
-                yearRunner.Run(yearDays);
+                yearRunner.Run(filteredDays);
                 return;
             }
 
+#if SINGLE
             if (parameters.Year == null && parameters.Day == null)
             {
-                parameters = new Parameters(day: Day, year: Year);
+                parameters = new Parameters(day: DebugDay, year: DebugYear);
             }
+#endif
 
             var day = _daySelector.GetDay(parameters.Year, parameters.Day);
             if (day == null)
@@ -55,6 +62,14 @@ namespace ConsoleApp
 
             var dayRunner = new PuzzleRunner(throwExceptions: true);
             dayRunner.Run(day);
+        }
+
+        private static IList<Day> FilterDays(IList<Day> days, Parameters parameters)
+        {
+            if (parameters.RunSlowOnly)
+                return days.Where(o => o.IsSlow).ToList();
+
+            return days;
         }
     }
 }

@@ -6,14 +6,14 @@ namespace ConsoleApp
     {
         public int? Day { get; }
         public int? Year { get; }
-        public bool RunAll { get; }
+        public bool RunSlowOnly { get; }
         public bool ShowHelp { get; }
 
-        public Parameters(int? day = null, int? year = null, bool runAll = false, bool showHelp = false)
+        public Parameters(int? day = null, int? year = null, bool runSlowOnly = false, bool showHelp = false)
         {
             Day = day;
             Year = year;
-            RunAll = runAll;
+            RunSlowOnly = runSlowOnly;
             ShowHelp = showHelp;
         }
 
@@ -22,7 +22,7 @@ namespace ConsoleApp
             var parser = new ParameterParser(args);
             var day = parser.GetIntValue("-d", "--day");
             var year = parser.GetIntValue("-y", "--year");
-            var runAll = parser.GetBoolValue("-a", "--all") ?? false;
+            var runAll = parser.GetBoolValue("-s", "--slow") ?? false;
             var showHelp = parser.GetBoolValue("-h", "--help") ?? false;
 
             return new Parameters(day, year, runAll, showHelp);

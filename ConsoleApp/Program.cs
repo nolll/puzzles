@@ -66,6 +66,9 @@ namespace ConsoleApp
             if (parameters.RunSlowOnly)
                 return days.Where(o => o.IsSlow).ToList();
 
+            if (parameters.RunCommentedOnly)
+                return days.Where(o => !string.IsNullOrEmpty(o.Comment)).ToList();
+
             return days;
         }
     }

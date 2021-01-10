@@ -4,15 +4,16 @@ namespace Core.Tools
 {
     public class MatrixAddress : IEquatable<MatrixAddress>
     {
+        private string _id;
+        
         public int X { get; }
         public int Y { get; }
-        public string Id { get; }
+        public string Id => _id ??= $"{X},{Y}";
 
         public MatrixAddress(int x, int y)
         {
             X = x;
             Y = y;
-            Id = $"{x},{y}";
         }
 
         public int ManhattanDistanceTo(MatrixAddress other)

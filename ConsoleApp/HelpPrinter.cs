@@ -14,6 +14,7 @@ namespace ConsoleApp
             Console.WriteLine("-d    --day       the day to run. This will be ignored if no year is specified");
             Console.WriteLine("-y    --year      the year to run. All puzzles for the event will run");
             Console.WriteLine("-s    --slow      just run days marked as slow. Can be used on all lists");
+            Console.WriteLine("-c    --comment   just run days that has a comment. Can be used on all lists");
             Console.WriteLine();
             Console.WriteLine("-h    --help      display this help text");
             Console.WriteLine("");

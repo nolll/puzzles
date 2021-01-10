@@ -17,10 +17,9 @@ namespace Core.MineCarts
             LocationOfFirstCollision = null;
             LocationOfLastCart = null;
             BuildMatrixAndCarts(input);
-            RunCarts();
         }
 
-        private void RunCarts()
+        public void RunCarts()
         {
             while (LocationOfLastCart == null)
             {
@@ -83,7 +82,7 @@ namespace Core.MineCarts
         private void BuildMatrixAndCarts(in string input)
         {
             _matrix = new Matrix<char>();
-            _carts = new List<MineCart>(); 
+            _carts = new List<MineCart>();
             var rows = PuzzleInputReader.ReadLines(input).Select(o => o.Trim('_')).ToList();
             for (var y = 0; y < rows.Count; y++)
             {

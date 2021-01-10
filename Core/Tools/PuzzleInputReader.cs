@@ -8,7 +8,7 @@ namespace Core.Tools
     {
         public static IList<string> ReadLines(string str)
         {
-            return str.Trim().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).ToList();
+            return str.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Where(o => o.Length > 0).ToList();
         }
 
         public static IList<IList<string>> ReadLineGroups(string str)

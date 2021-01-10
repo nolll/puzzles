@@ -17,6 +17,7 @@ _\-+-/  \-+--/_
 _  \------/   _";
 
             var detector = new CollisionDetector(input);
+            detector.RunCarts();
             var coords = detector.LocationOfFirstCollision;
 
             var str = $"{coords.X},{coords.Y}";
@@ -36,6 +37,7 @@ _  |   ^_
 _  \<->/_";
 
             var detector = new CollisionDetector(input);
+            detector.RunCarts();
             var coords = detector.LocationOfLastCart;
 
             var str = $"{coords.X},{coords.Y}";

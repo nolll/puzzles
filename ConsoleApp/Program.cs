@@ -11,7 +11,7 @@ namespace ConsoleApp
         private const int PuzzleTimeout = 10;
 
         private const int DebugYear = 2018;
-        private const int DebugDay = 5;
+        private const int DebugDay = 13;
 
         static void Main(string[] args)
         {
@@ -22,15 +22,6 @@ namespace ConsoleApp
             {
                 var helpPrinter = new HelpPrinter();
                 helpPrinter.Print();
-                return;
-            }
-
-            if (parameters.Year == null && parameters.Day == null)
-            {
-                var allDays = _daySelector.GetAll();
-                var filteredDays = FilterDays(allDays, parameters);
-                var allRunner = new PuzzleRunner(timeout: PuzzleTimeout);
-                allRunner.Run(filteredDays);
                 return;
             }
 
@@ -47,12 +38,18 @@ namespace ConsoleApp
                 return;
             }
 
-#if SINGLE
             if (parameters.Year == null && parameters.Day == null)
             {
+#if SINGLE
                 parameters = new Parameters(day: DebugDay, year: DebugYear);
-            }
+#else
+                var allDays = _daySelector.GetAll();
+                var filteredDays = FilterDays(allDays, parameters);
+                var allRunner = new PuzzleRunner(timeout: PuzzleTimeout);
+                allRunner.Run(filteredDays);
+                return;
 #endif
+            }
 
             var day = _daySelector.GetDay(parameters.Year, parameters.Day);
             if (day == null)

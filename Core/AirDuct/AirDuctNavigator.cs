@@ -7,30 +7,26 @@ namespace Core.AirDuct
 {
     public class AirDuctNavigator
     {
-        private readonly bool _goBackToStartWhenDone;
         private IList<AirDuctLocation> _locations;
         private Matrix<char> _matrix;
         private readonly IDictionary<(char, char), AirDuctPath> _paths;
         private readonly IDictionary<string, int> _cache;
         private AirDuctRobot _robot;
 
-        public int ShortestPath { get; private set; }
-
-        public AirDuctNavigator(string input, bool goBackToStartWhenDone)
+        public AirDuctNavigator(string input)
         {
-            _goBackToStartWhenDone = goBackToStartWhenDone;
             _paths = new Dictionary<(char, char), AirDuctPath>();
             _cache = new Dictionary<string, int>();
             Init(input);
             MapPaths();
         }
 
-        public void Run()
+        public int Run(bool goBackToStartWhenDone)
         {
-            FindShortestPath();
+            return FindShortestPath(goBackToStartWhenDone);
         }
 
-        private void FindShortestPath()
+        private int FindShortestPath(bool goBackToStartWhenDone)
         {
             var allPaths = GetAllPaths(_robot.Address);
             var startPaths = GetStartPaths(allPaths);
@@ -38,16 +34,14 @@ namespace Core.AirDuct
             
             foreach (var path in startPaths)
             {
-                var stepCount = FollowPath(path, new List<AirDuctLocation>());
+                var stepCount = FollowPath(path, new List<AirDuctLocation>(), goBackToStartWhenDone);
                 stepCounts.Add(stepCount);
             }
 
-            var totalStepCount = stepCounts.Any() ? stepCounts.Min() : 0;
-
-            ShortestPath = totalStepCount;
+            return stepCounts.Any() ? stepCounts.Min() : 0;
         }
 
-        private int FindShortestPathFrom(AirDuctLocation currentLocation, IList<AirDuctLocation> visitedLocations)
+        private int FindShortestPathFrom(AirDuctLocation currentLocation, IList<AirDuctLocation> visitedLocations, bool goBackToStartWhenDone)
         {
             var stepCounts = new List<int>();
             var pathsToFollow = new List<AirDuctPath>();
@@ -63,7 +57,7 @@ namespace Core.AirDuct
 
             foreach (var path in pathsToFollow)
             {
-                var stepCount = FollowPath(path, visitedLocations);
+                var stepCount = FollowPath(path, visitedLocations, goBackToStartWhenDone);
                 stepCounts.Add(stepCount);
             }
 
@@ -75,7 +69,7 @@ namespace Core.AirDuct
             return _locations.Where(location => visitedLocations.All(o => o.Id != location.Id));
         }
 
-        private int FollowPath(AirDuctPath path, IList<AirDuctLocation> visitedLocations)
+        private int FollowPath(AirDuctPath path, IList<AirDuctLocation> visitedLocations, bool goBackToStartWhenDone)
         {
             var stepCount = path.StepCount;
             var newVisitedLocations = visitedLocations.Select(o => o).ToList();
@@ -86,13 +80,13 @@ namespace Core.AirDuct
                 var cacheKey = GetCacheKey(path.Target.Id, visitedLocations);
                 if (!_cache.TryGetValue(cacheKey, out var cachedStepCount))
                 {
-                    cachedStepCount = FindShortestPathFrom(path.Target, newVisitedLocations);
+                    cachedStepCount = FindShortestPathFrom(path.Target, newVisitedLocations, goBackToStartWhenDone);
                     _cache.Add(cacheKey, cachedStepCount);
                 }
 
                 stepCount += cachedStepCount;
             }
-            else if(_goBackToStartWhenDone)
+            else if(goBackToStartWhenDone)
             {
                 var stepCountBackToStart = _paths[(path.Target.Id, '0')].StepCount;
                 stepCount += stepCountBackToStart;
@@ -179,9 +173,14 @@ namespace Core.AirDuct
                 var otherKeys = locationIncludingHomeLocation.Where(o => o.Id != location.Id);
                 foreach (var otherLocation in otherKeys)
                 {
+                    if(_paths.ContainsKey((location.Id, otherLocation.Id)) || _paths.ContainsKey((otherLocation.Id, location.Id)))
+                        continue;
+                    
                     var stepCountToLocation = PathFinder.StepCountTo(_matrix, location.Address, otherLocation.Address);
                     var pathToLocation = new AirDuctPath(otherLocation, stepCountToLocation);
+                    var pathBack = new AirDuctPath(location, stepCountToLocation);
                     _paths.Add((location.Id, otherLocation.Id), pathToLocation);
+                    _paths.Add((otherLocation.Id, location.Id), pathBack);
                 }
             }
         }

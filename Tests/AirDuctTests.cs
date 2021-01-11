@@ -15,10 +15,10 @@ namespace Tests
 #4.......3#
 ###########";
 
-            var navigator = new AirDuctNavigator(input, false);
-            navigator.Run();
+            var navigator = new AirDuctNavigator(input);
+            var shortestPath = navigator.Run(false);
 
-            Assert.That(navigator.ShortestPath, Is.EqualTo(14));
+            Assert.That(shortestPath, Is.EqualTo(14));
         }
 
         [Test]
@@ -31,10 +31,10 @@ namespace Tests
 #4.......3#
 ###########";
 
-            var navigator = new AirDuctNavigator(input, true);
-            navigator.Run();
+            var navigator = new AirDuctNavigator(input);
+            var shortestPath = navigator.Run(true);
 
-            Assert.That(navigator.ShortestPath, Is.EqualTo(20));
+            Assert.That(shortestPath, Is.EqualTo(20));
         }
     }
 }

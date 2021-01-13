@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Core.Tools;
 
@@ -9,40 +9,39 @@ namespace Core.OneTimePad
     public class KeyGenerator
     {
         private readonly Hashfactory _hashFactory;
-        private readonly string _salt;
-        private readonly bool _useStretching;
         private readonly IDictionary<int, string> _hashes;
+        private Dictionary<byte, byte[]> _byteCache;
 
-        public int IndexOf64thKey { get; }
-
-        public KeyGenerator(string salt, bool useStretching = false)
+        public KeyGenerator()
         {
             _hashFactory = new Hashfactory();
-            _salt = salt;
-            _useStretching = useStretching;
             _hashes = new Dictionary<int, string>();
-            var keys = new List<string>();
+            _byteCache = BuildByteCache();
+        }
 
+        public int GetIndexOf64ThKey(string salt, int stretchCount = 0)
+        {
+            var keys = new List<string>();
             var index = 0;
             while (keys.Count < 64)
             {
-                var hash = GetHash(index);
-                var isKey = IsKey(index, hash);
+                var hash = GetHash(salt, index, stretchCount);
+                var isKey = IsKey(salt, index, hash, stretchCount);
                 if (isKey)
                     keys.Add(hash);
-                    
+
                 index++;
             }
 
-            IndexOf64thKey = index - 1;
+            return index - 1;
         }
 
-        private bool IsKey(in int index, string hash)
+        private bool IsKey(string salt, int index, string hash, int stretchCount)
         {
             var repeatingChar = GetRepeatingChar(hash);
             if (repeatingChar != null)
             {
-                if (Next1000HashesHasFiveInARowOf(index + 1, repeatingChar.Value))
+                if (Next1000HashesHasFiveInARowOf(salt, index + 1, repeatingChar.Value, stretchCount))
                 {
                     return true;
                 }
@@ -63,14 +62,14 @@ namespace Core.OneTimePad
             return null;
         }
 
-        private bool Next1000HashesHasFiveInARowOf(in int fromIndex, char searchFor)
+        private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, char searchFor, int stretchCount)
         {
             var count = 0;
             var stringToSearchFor = new string(searchFor, 5);
             while (count < 1000)
             {
                 var index = fromIndex + count;
-                var hash = GetHash(index);
+                var hash = GetHash(salt, index, stretchCount);
                 if (hash.Contains(stringToSearchFor))
                     return true;
                 count++;
@@ -79,38 +78,63 @@ namespace Core.OneTimePad
             return false;
         }
 
-        private string GetHash(int index)
+        private string GetHash(string salt, int index, int stretchCount)
         {
             if (_hashes.TryGetValue(index, out var hash))
                 return hash;
-            hash = CreateHash(index);
+            hash = CreateHash(salt, index, stretchCount);
             _hashes.Add(index, hash);
             return hash;
         }
 
-        private string CreateHash(int index)
+        private string CreateHash(string salt, int index, int stretchCount)
         {
-            var str = string.Concat(_salt, index.ToString());
-            return _useStretching
-                ? CreateStretchedHash(str)
-                : CreateSimpleHash(str);
+            var str = string.Concat(salt, index.ToString());
+            return CreateStretchedHash(str, stretchCount);
         }
 
-        private string CreateSimpleHash(string str)
+        private byte[] CreateSimpleHash(byte[] bytes)
         {
-            return _hashFactory.StringHashFromString(str);
+            return _hashFactory.ByteHashFromBytes(bytes);
         }
 
-        private string CreateStretchedHash(string str)
+        public string CreateStretchedHash(string str, int iterations)
         {
+            var bytes = Encoding.ASCII.GetBytes(str);
+            var hashedBytes = new byte[16];
+
             var count = 0;
-            while (count <= 2016)
+            while (count <= iterations)
             {
-                str = CreateSimpleHash(str);
+                hashedBytes = CreateSimpleHash(bytes);
+                bytes = new byte[32];
+                var index = 0;
+                foreach (var hashedByte in hashedBytes)
+                {
+                    var hexBytes = _byteCache[hashedByte];
+                    bytes[index] = hexBytes[0];
+                    bytes[index + 1] = hexBytes[1];
+                    index += 2;
+                }
+                
                 count++;
             }
 
-            return str;
+            return ByteConverter.ConvertToString(hashedBytes);
+        }
+
+        private Dictionary<byte, byte[]> BuildByteCache()
+        {
+            var cache = new Dictionary<byte, byte[]>();
+            for (int i = byte.MinValue; i <= byte.MaxValue; i++)
+            {
+                var b = (byte) i;
+                var str = ByteConverter.ConvertToString(b);
+                var bytes = Encoding.ASCII.GetBytes(str);
+                cache.Add(b, bytes);
+            }
+
+            return cache;
         }
     }
 }

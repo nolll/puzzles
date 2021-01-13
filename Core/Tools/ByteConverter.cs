@@ -10,9 +10,15 @@ namespace Core.Tools
             var sb = new StringBuilder();
             foreach (var b in bytes)
             {
-                sb.Append(b.ToString("X2"));
+                sb.Append(ConvertToString(b));
             }
-            return sb.ToString().ToLower();
+            
+            return sb.ToString();
+        }
+
+        public static string ConvertToString(byte b)
+        {
+            return b.ToString("X2").ToLower();
         }
     }
 }

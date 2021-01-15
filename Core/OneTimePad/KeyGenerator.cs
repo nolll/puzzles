@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Core.OneTimePad
     {
         private readonly Hashfactory _hashFactory;
         private readonly IDictionary<int, string> _hashes;
-        private Dictionary<byte, byte[]> _byteCache;
+        private readonly Dictionary<byte, byte[]> _byteCache;
 
         public KeyGenerator()
         {
@@ -100,27 +101,28 @@ namespace Core.OneTimePad
 
         public string CreateStretchedHash(string str, int iterations)
         {
-            var bytes = Encoding.ASCII.GetBytes(str);
-            var hashedBytes = new byte[16];
+            var hashedBytes = CreateSimpleHash(Encoding.ASCII.GetBytes(str));
+            var bytes = new byte[32];
 
             var count = 0;
-            while (count <= iterations)
+            while (count < iterations)
             {
+                ConvertToHexBytes(ref bytes, hashedBytes);
                 hashedBytes = CreateSimpleHash(bytes);
-                bytes = new byte[32];
-                var index = 0;
-                foreach (var hashedByte in hashedBytes)
-                {
-                    var hexBytes = _byteCache[hashedByte];
-                    bytes[index] = hexBytes[0];
-                    bytes[index + 1] = hexBytes[1];
-                    index += 2;
-                }
-                
                 count++;
             }
 
             return ByteConverter.ConvertToString(hashedBytes);
+        }
+
+        private void ConvertToHexBytes(ref byte[] workingBytes, byte[] hashedBytes)
+        {
+            var index = 0;
+            foreach (var hashedByte in hashedBytes)
+            {
+                Buffer.BlockCopy(_byteCache[hashedByte], 0, workingBytes, index, 2);
+                index += 2;
+            }
         }
 
         private Dictionary<byte, byte[]> BuildByteCache()

@@ -1,4 +1,6 @@
+using System.Text;
 using Core.OneTimePad;
+using Core.Tools;
 using NUnit.Framework;
 
 namespace Tests
@@ -30,9 +32,24 @@ namespace Tests
         public void StretchedHash(int iterations, string expected)
         {
             var generator = new KeyGenerator();
-            var hash = generator.CreateStretchedHash("abc0", iterations);
-            
+            var hashedBytes = generator.CreateStretchedHash("abc0", iterations);
+            var hash = ByteConverter.ConvertToString(hashedBytes);
+
+
             Assert.That(hash, Is.EqualTo(expected));
+        }
+
+        [TestCase("aaa", 'a')]
+        [TestCase("bbaaab", 'a')]
+        [TestCase("bbaaabbbb", 'a')]
+        [TestCase("bbaab", null)]
+        public void RepeatedChars(string str, char? expected)
+        {
+            var generator = new KeyGenerator();
+            var b = generator.GetRepeatingChar(Encoding.ASCII.GetBytes(str));
+            char? s = b != null ? (char)b.Value : null;
+            
+            Assert.That(s, Is.EqualTo(expected));
         }
     }
 }

@@ -26,10 +26,12 @@ namespace Core.OneTimePad
             var index = 0;
             while (keys.Count < 64)
             {
-                var hash = GetHash(salt, index, stretchCount);
-                var isKey = IsKey(salt, index, hash, stretchCount);
+                var hashedBytes = GetHash(salt, index, stretchCount);
+                var hexBytes = new byte[32];
+                ConvertToHexBytes(ref hexBytes, hashedBytes);
+                var isKey = IsKey(salt, index, hexBytes, stretchCount);
                 if (isKey)
-                    keys.Add(hash);
+                    keys.Add(hashedBytes);
 
                 index++;
             }
@@ -37,7 +39,7 @@ namespace Core.OneTimePad
             return index - 1;
         }
 
-        private bool IsKey(string salt, int index, byte[] hashedBytes, int stretchCount)
+        public bool IsKey(string salt, int index, byte[] hashedBytes, int stretchCount)
         {
             var repeatingByte = GetRepeatingChar(hashedBytes);
             if (repeatingByte != null)
@@ -69,8 +71,10 @@ namespace Core.OneTimePad
             while (count < 1000)
             {
                 var index = fromIndex + count;
-                var hash = GetHash(salt, index, stretchCount);
-                if (HashHasFiveInARowOf(hash, searchFor))
+                var hashedBytes = GetHash(salt, index, stretchCount);
+                var hexBytes = new byte[32];
+                ConvertToHexBytes(ref hexBytes, hashedBytes);
+                if (HashHasFiveInARowOf(hexBytes, searchFor))
                     return true;
                 count++;
             }
@@ -78,7 +82,7 @@ namespace Core.OneTimePad
             return false;
         }
 
-        private bool HashHasFiveInARowOf(byte[] bytes, byte b)
+        public bool HashHasFiveInARowOf(byte[] bytes, byte b)
         {
             for (var i = 0; i < bytes.Length - 4; i++)
             {
@@ -89,7 +93,7 @@ namespace Core.OneTimePad
             return false;
         }
 
-        private byte[] GetHash(string salt, int index, int stretchCount)
+        public byte[] GetHash(string salt, int index, int stretchCount)
         {
             if (_hashes.TryGetValue(index, out var hash))
                 return hash;
@@ -125,7 +129,7 @@ namespace Core.OneTimePad
             return hashedBytes;
         }
 
-        private void ConvertToHexBytes(ref byte[] workingBytes, byte[] hashedBytes)
+        public void ConvertToHexBytes(ref byte[] workingBytes, byte[] hashedBytes)
         {
             var index = 0;
             foreach (var hashedByte in hashedBytes)

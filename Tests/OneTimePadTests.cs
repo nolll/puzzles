@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text;
 using Core.OneTimePad;
 using Core.Tools;
@@ -39,17 +40,44 @@ namespace Tests
             Assert.That(hash, Is.EqualTo(expected));
         }
 
-        [TestCase("aaa", 'a')]
-        [TestCase("bbaaab", 'a')]
-        [TestCase("bbaaabbbb", 'a')]
-        [TestCase("bbaab", null)]
+        [TestCase("aaa01010101010101010", 'a')]
+        [TestCase("bbaaab10101010101010", 'a')]
+        [TestCase("bbaaabbbb01010101010", 'a')]
+        [TestCase("bbaab010101010101010", null)]
         public void RepeatedChars(string str, char? expected)
         {
             var generator = new KeyGenerator();
             var b = generator.GetRepeatingChar(Encoding.ASCII.GetBytes(str));
             char? s = b != null ? (char)b.Value : null;
-            
+
             Assert.That(s, Is.EqualTo(expected));
+        }
+
+        [TestCase("10101aaaaa1010101010", true)]
+        [TestCase("aaaaa010101010101010", true)]
+        [TestCase("bbaaaaaa101010101010", true)]
+        [TestCase("bbaab010101010101010", false)]
+        public void FiveInARow(string str, bool expected)
+        {
+            var generator = new KeyGenerator();
+            var searchFor = Encoding.ASCII.GetBytes("a").First();
+            var hasFiveInARow = generator.HashHasFiveInARowOf(Encoding.ASCII.GetBytes(str), searchFor);
+
+            Assert.That(hasFiveInARow, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Index39IsAKey()
+        {
+            var generator = new KeyGenerator();
+            const string salt = "abc";
+            const int index = 39;
+            var hashedBytes = generator.GetHash(salt, index, 0);
+            var hexBytes = new byte[32];
+            generator.ConvertToHexBytes(ref hexBytes, hashedBytes);
+            var isKey = generator.IsKey(salt, index, hexBytes, 0);
+
+            Assert.That(isKey, Is.True);
         }
     }
 }

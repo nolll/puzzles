@@ -56,7 +56,7 @@ namespace Tests
         public void FiveInARow(string str, bool expected)
         {
             var generator = new KeyGenerator();
-            const char searchFor = 'a';
+            var searchFor = new string('a', 5);
             var hasFiveInARow = generator.HashHasFiveInARowOf(str, searchFor);
 
             Assert.That(hasFiveInARow, Is.EqualTo(expected));

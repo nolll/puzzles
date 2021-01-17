@@ -44,7 +44,8 @@ namespace Core.OneTimePad
             var repeatingChar = GetRepeatingChar(hash);
             if (repeatingChar != null)
             {
-                if (Next1000HashesHasFiveInARowOf(salt, index + 1, repeatingChar.Value, stretchCount))
+                var searchFor = new string(repeatingChar.Value, 5);
+                if (Next1000HashesHasFiveInARowOf(salt, index + 1, searchFor, stretchCount))
                 {
                     return true;
                 }
@@ -63,7 +64,7 @@ namespace Core.OneTimePad
             return null;
         }
 
-        private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, char searchFor, int stretchCount)
+        private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, string searchFor, int stretchCount)
         {
             var count = 0;
             while (count < 1000)
@@ -96,10 +97,9 @@ namespace Core.OneTimePad
             return match.Success;
         }
 
-        public bool HashHasFiveInARowOf(string hash, char c)
+        public bool HashHasFiveInARowOf(string hash, string searchFor)
         {
-            var s = $"{c}{c}{c}{c}";
-            return hash.Contains(s);
+            return hash.Contains(searchFor);
         }
 
         public string GetHash(string salt, int index, int stretchCount)

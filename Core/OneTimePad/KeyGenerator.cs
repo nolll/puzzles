@@ -27,9 +27,7 @@ namespace Core.OneTimePad
             while (keys.Count < 64)
             {
                 var hashedBytes = GetHash(salt, index, stretchCount);
-                var hexBytes = new byte[32];
-                ConvertToHexBytes(ref hexBytes, hashedBytes);
-                var isKey = IsKey(salt, index, hexBytes, stretchCount);
+                var isKey = IsKey(salt, index, hashedBytes, stretchCount);
                 if (isKey)
                     keys.Add(hashedBytes);
 
@@ -72,9 +70,7 @@ namespace Core.OneTimePad
             {
                 var index = fromIndex + count;
                 var hashedBytes = GetHash(salt, index, stretchCount);
-                var hexBytes = new byte[32];
-                ConvertToHexBytes(ref hexBytes, hashedBytes);
-                if (HashHasFiveInARowOf(hexBytes, searchFor))
+                if (HashHasFiveInARowOf(hashedBytes, searchFor))
                     return true;
                 count++;
             }
@@ -110,33 +106,34 @@ namespace Core.OneTimePad
 
         private byte[] CreateSimpleHash(byte[] bytes)
         {
-            return _hashFactory.ByteHashFromBytes(bytes);
+            return ConvertToHexBytes(_hashFactory.ByteHashFromBytes(bytes));
         }
 
         public byte[] CreateStretchedHash(string str, int iterations)
         {
             var hashedBytes = CreateSimpleHash(Encoding.ASCII.GetBytes(str));
-            var bytes = new byte[32];
 
             var count = 0;
             while (count < iterations)
             {
-                ConvertToHexBytes(ref bytes, hashedBytes);
-                hashedBytes = CreateSimpleHash(bytes);
+                hashedBytes = CreateSimpleHash(hashedBytes);
                 count++;
             }
 
             return hashedBytes;
         }
 
-        public void ConvertToHexBytes(ref byte[] workingBytes, byte[] hashedBytes)
+        private byte[] ConvertToHexBytes(byte[] hashedBytes)
         {
+            var hexBytes = new byte[32];
             var index = 0;
             foreach (var hashedByte in hashedBytes)
             {
-                Buffer.BlockCopy(_byteCache[hashedByte], 0, workingBytes, index, 2);
+                Buffer.BlockCopy(_byteCache[hashedByte], 0, hexBytes, index, 2);
                 index += 2;
             }
+
+            return hexBytes;
         }
 
         private Dictionary<byte, byte[]> BuildByteCache()
@@ -145,7 +142,7 @@ namespace Core.OneTimePad
             for (int i = byte.MinValue; i <= byte.MaxValue; i++)
             {
                 var b = (byte) i;
-                var str = ByteConverter.ConvertToString(b);
+                var str = ByteConverter.ConvertToHexString(b);
                 var bytes = Encoding.ASCII.GetBytes(str);
                 cache.Add(b, bytes);
             }

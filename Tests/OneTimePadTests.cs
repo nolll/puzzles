@@ -35,8 +35,7 @@ namespace Tests
             var generator = new KeyGenerator();
             var hashedBytes = generator.CreateStretchedHash("abc0", iterations);
             var hash = ByteConverter.ConvertToString(hashedBytes);
-
-
+            
             Assert.That(hash, Is.EqualTo(expected));
         }
 
@@ -73,9 +72,7 @@ namespace Tests
             const string salt = "abc";
             const int index = 39;
             var hashedBytes = generator.GetHash(salt, index, 0);
-            var hexBytes = new byte[32];
-            generator.ConvertToHexBytes(ref hexBytes, hashedBytes);
-            var isKey = generator.IsKey(salt, index, hexBytes, 0);
+            var isKey = generator.IsKey(salt, index, hashedBytes, 0);
 
             Assert.That(isKey, Is.True);
         }

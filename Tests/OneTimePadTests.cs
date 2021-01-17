@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Text;
 using Core.OneTimePad;
 using Core.Tools;
 using NUnit.Framework;
@@ -46,10 +44,9 @@ namespace Tests
         public void RepeatedChars(string str, char? expected)
         {
             var generator = new KeyGenerator();
-            var b = generator.GetRepeatingChar(Encoding.ASCII.GetBytes(str));
-            char? s = b != null ? (char)b.Value : null;
+            var c = generator.GetRepeatingChar(str);
 
-            Assert.That(s, Is.EqualTo(expected));
+            Assert.That(c, Is.EqualTo(expected));
         }
 
         [TestCase("10101aaaaa1010101010", true)]
@@ -59,8 +56,8 @@ namespace Tests
         public void FiveInARow(string str, bool expected)
         {
             var generator = new KeyGenerator();
-            var searchFor = Encoding.ASCII.GetBytes("a").First();
-            var hasFiveInARow = generator.HashHasFiveInARowOf(Encoding.ASCII.GetBytes(str), searchFor);
+            const char searchFor = 'a';
+            var hasFiveInARow = generator.HashHasFiveInARowOf(str, searchFor);
 
             Assert.That(hasFiveInARow, Is.EqualTo(expected));
         }
@@ -71,8 +68,8 @@ namespace Tests
             var generator = new KeyGenerator();
             const string salt = "abc";
             const int index = 39;
-            var hashedBytes = generator.GetHash(salt, index, 0);
-            var isKey = generator.IsKey(salt, index, hashedBytes, 0);
+            var hash = generator.GetHash(salt, index, 0);
+            var isKey = generator.IsKey(salt, index, hash, 0);
 
             Assert.That(isKey, Is.True);
         }

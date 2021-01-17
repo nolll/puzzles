@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Core.Tools;
 
 namespace Core.OneTimePad
@@ -9,28 +10,28 @@ namespace Core.OneTimePad
     public class KeyGenerator
     {
         private readonly Hashfactory _hashFactory;
-        private readonly IDictionary<int, byte[]> _hashes;
+        private readonly IDictionary<int, string> _hashes;
         private readonly Dictionary<byte, byte[]> _byteCache;
         private readonly Dictionary<int, bool> _fiveInARowCache;
 
         public KeyGenerator()
         {
             _hashFactory = new Hashfactory();
-            _hashes = new Dictionary<int, byte[]>();
+            _hashes = new Dictionary<int, string>();
             _byteCache = BuildByteCache();
             _fiveInARowCache = new Dictionary<int, bool>();
         }
 
         public int GetIndexOf64ThKey(string salt, int stretchCount = 0)
         {
-            var keys = new List<byte[]>();
+            var keyCount = 0;
             var index = 0;
-            while (keys.Count < 64)
+            while (keyCount < 64)
             {
-                var hashedBytes = GetHash(salt, index, stretchCount);
-                var isKey = IsKey(salt, index, hashedBytes, stretchCount);
+                var hash = GetHash(salt, index, stretchCount);
+                var isKey = IsKey(salt, index, hash, stretchCount);
                 if (isKey)
-                    keys.Add(hashedBytes);
+                    keyCount++;
 
                 index++;
             }
@@ -38,12 +39,12 @@ namespace Core.OneTimePad
             return index - 1;
         }
 
-        public bool IsKey(string salt, int index, byte[] hashedBytes, int stretchCount)
+        public bool IsKey(string salt, int index, string hash, int stretchCount)
         {
-            var repeatingByte = GetRepeatingChar(hashedBytes);
-            if (repeatingByte != null)
+            var repeatingChar = GetRepeatingChar(hash);
+            if (repeatingChar != null)
             {
-                if (Next1000HashesHasFiveInARowOf(salt, index + 1, repeatingByte.Value, stretchCount))
+                if (Next1000HashesHasFiveInARowOf(salt, index + 1, repeatingChar.Value, stretchCount))
                 {
                     return true;
                 }
@@ -52,19 +53,17 @@ namespace Core.OneTimePad
             return false;
         }
 
-        public byte? GetRepeatingChar(byte[] bytes)
+        public char? GetRepeatingChar(string hash)
         {
-            for (var i = 0; i < bytes.Length - 2; i++)
-            {
-                var v = bytes[i];
-                if (bytes[i + 1] == v && bytes[i + 2] == v)
-                    return v;
-            }
+            var regex = new Regex("(.)\\1{2,}");
+            var match = regex.Match(hash);
+            if (match.Success)
+                return match.Value.First();
 
             return null;
         }
-        
-        private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, byte searchFor, int stretchCount)
+
+        private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, char searchFor, int stretchCount)
         {
             var count = 0;
             while (count < 1000)
@@ -90,30 +89,20 @@ namespace Core.OneTimePad
             return false;
         }
 
-        private bool HashHasFiveInARow(byte[] bytes)
+        private bool HashHasFiveInARow(string hash)
         {
-            for (var i = 0; i < bytes.Length - 4; i++)
-            {
-                var b = bytes[i];
-                if (bytes[i + 1] == b && bytes[i + 2] == b && bytes[i + 3] == b && bytes[i + 4] == b)
-                    return true;
-            }
-
-            return false;
+            var regex = new Regex("(.)\\1{4,}");
+            var match = regex.Match(hash);
+            return match.Success;
         }
 
-        public bool HashHasFiveInARowOf(byte[] bytes, byte b)
+        public bool HashHasFiveInARowOf(string hash, char c)
         {
-            for (var i = 0; i < bytes.Length - 4; i++)
-            {
-                if (bytes[i] == b && bytes[i + 1] == b && bytes[i + 2] == b && bytes[i + 3] == b && bytes[i + 4] == b)
-                    return true;
-            }
-
-            return false;
+            var s = $"{c}{c}{c}{c}";
+            return hash.Contains(s);
         }
 
-        public byte[] GetHash(string salt, int index, int stretchCount)
+        public string GetHash(string salt, int index, int stretchCount)
         {
             if (_hashes.TryGetValue(index, out var hash))
                 return hash;
@@ -122,10 +111,11 @@ namespace Core.OneTimePad
             return hash;
         }
 
-        private byte[] CreateHash(string salt, int index, int stretchCount)
+        private string CreateHash(string salt, int index, int stretchCount)
         {
             var str = string.Concat(salt, index.ToString());
-            return CreateStretchedHash(str, stretchCount);
+            var hashedBytes = CreateStretchedHash(str, stretchCount);
+            return ByteConverter.ConvertToString(hashedBytes);
         }
 
         private byte[] CreateSimpleHash(byte[] bytes)

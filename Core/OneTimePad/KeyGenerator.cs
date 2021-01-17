@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using Core.Tools;
 
 namespace Core.OneTimePad
@@ -12,12 +11,14 @@ namespace Core.OneTimePad
         private readonly Hashfactory _hashFactory;
         private readonly IDictionary<int, byte[]> _hashes;
         private readonly Dictionary<byte, byte[]> _byteCache;
+        private readonly Dictionary<int, bool> _fiveInARowCache;
 
         public KeyGenerator()
         {
             _hashFactory = new Hashfactory();
             _hashes = new Dictionary<int, byte[]>();
             _byteCache = BuildByteCache();
+            _fiveInARowCache = new Dictionary<int, bool>();
         }
 
         public int GetIndexOf64ThKey(string salt, int stretchCount = 0)
@@ -70,9 +71,32 @@ namespace Core.OneTimePad
             {
                 var index = fromIndex + count;
                 var hashedBytes = GetHash(salt, index, stretchCount);
-                if (HashHasFiveInARowOf(hashedBytes, searchFor))
-                    return true;
+                
+                if (!_fiveInARowCache.TryGetValue(index, out var hasFiveInARow))
+                {
+                    hasFiveInARow = HashHasFiveInARow(hashedBytes);
+                    _fiveInARowCache.Add(index, hasFiveInARow);
+                }
+                
+                if (hasFiveInARow)
+                {
+                    if (HashHasFiveInARowOf(hashedBytes, searchFor))
+                        return true;
+                }
+
                 count++;
+            }
+
+            return false;
+        }
+
+        private bool HashHasFiveInARow(byte[] bytes)
+        {
+            for (var i = 0; i < bytes.Length - 4; i++)
+            {
+                var b = bytes[i];
+                if (bytes[i + 1] == b && bytes[i + 2] == b && bytes[i + 3] == b && bytes[i + 4] == b)
+                    return true;
             }
 
             return false;
@@ -123,7 +147,7 @@ namespace Core.OneTimePad
             return hashedBytes;
         }
 
-        private byte[] ConvertToHexBytes(byte[] hashedBytes)
+        private byte[] ConvertToHexBytes(IEnumerable<byte> hashedBytes)
         {
             var hexBytes = new byte[32];
             var index = 0;

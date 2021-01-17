@@ -21,7 +21,7 @@ namespace Core.Tools
         public string StringHashFromBytes(byte[] bytes)
         {
             var hashedBytes = ByteHashFromBytes(bytes);
-            return ByteConverter.ConvertToString(hashedBytes);
+            return ByteConverter.ConvertToHexString(hashedBytes);
         }
 
         public byte[] ByteHashFromString(string str)
@@ -31,7 +31,7 @@ namespace Core.Tools
 
         public byte[] ByteHashFromBytes(byte[] bytes)
         {
-            return _md5.ComputeHash(bytes);
+            return _md5.ComputeHash(bytes.ToArray());
         }
     }
 }

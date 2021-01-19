@@ -19,12 +19,12 @@ namespace ConsoleApp.Years.Year2015.Puzzles
             return new PuzzleResult(house, 786_240);
         }
 
-        public override PuzzleResult RunPart2()
-        {
-            var presentDelivery = new PresentDelivery();
-            var house = presentDelivery.Deliver2(Input);
-            return new PuzzleResult(house, 831_600);
-        }
+        //public override PuzzleResult RunPart2()
+        //{
+        //    var presentDelivery = new PresentDelivery();
+        //    var house = presentDelivery.Deliver2(Input);
+        //    return new PuzzleResult(house, 831_600);
+        //}
 
         private const int Input = 34_000_000;
     }

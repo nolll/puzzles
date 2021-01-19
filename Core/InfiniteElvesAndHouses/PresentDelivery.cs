@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +5,7 @@ namespace Core.InfiniteElvesAndHouses
 {
     public class PresentDelivery
     {
-        private Dictionary<int, IList<int>> _factors;
+        private readonly Dictionary<int, IList<int>> _factors;
 
         public PresentDelivery()
         {
@@ -16,7 +15,7 @@ namespace Core.InfiniteElvesAndHouses
         public int Deliver1(in int target)
         {
             var house = 1;
-
+            
             while (true)
             {
                 var factors = FindIntFactors(house);
@@ -36,17 +35,22 @@ namespace Core.InfiniteElvesAndHouses
                 return _factors[target];
 
             var factors = new List<int>();
-            var i = 1;
-            while (i <= target / 2)
+            var i = target / 2;
+            while (i > 0)
             {
+                if (_factors.TryGetValue(i, out var cachedFactors))
+                {
+                    factors.AddRange(cachedFactors);
+                    continue;
+                }
                 if (target % i == 0)
                     factors.Add(i);
-                i++;
+                i--;
             }
 
             factors.Add(target);
             _factors.Add(target, factors);
-            return factors;
+            return factors.OrderBy(o => o).ToList();
         }
 
         public int Deliver2(in int target)

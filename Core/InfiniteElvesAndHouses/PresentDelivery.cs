@@ -31,9 +31,6 @@ namespace Core.InfiniteElvesAndHouses
 
         public IList<int> FindIntFactors(int target)
         {
-            if (_factors.ContainsKey(target))
-                return _factors[target];
-
             var factors = new List<int>();
             var i = target / 2;
             while (i > 0)
@@ -41,10 +38,12 @@ namespace Core.InfiniteElvesAndHouses
                 if (_factors.TryGetValue(i, out var cachedFactors))
                 {
                     factors.AddRange(cachedFactors);
-                    continue;
-                }
-                if (target % i == 0)
+                    break;
+                } 
+                
+                if (target % i == 0) 
                     factors.Add(i);
+
                 i--;
             }
 

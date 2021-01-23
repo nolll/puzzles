@@ -21,7 +21,7 @@ namespace Tests
         public void FindIntFactors8()
         {
             var delivery = new PresentDelivery();
-            var result = delivery.FindIntFactors(8).ToList();
+            var result = delivery.FindIntFactors(8).OrderBy(o => o).ToList();
 
             Assert.That(result.Count, Is.EqualTo(4));
             Assert.That(result[0], Is.EqualTo(1));
@@ -34,7 +34,7 @@ namespace Tests
         public void FindIntFactors81()
         {
             var delivery = new PresentDelivery();
-            var result = delivery.FindIntFactors(81).ToList();
+            var result = delivery.FindIntFactors(81).OrderBy(o => o).ToList();
 
             Assert.That(result.Count, Is.EqualTo(5));
             Assert.That(result[0], Is.EqualTo(1));
@@ -48,7 +48,7 @@ namespace Tests
         public void FindIntFactors2354()
         {
             var delivery = new PresentDelivery();
-            var result = delivery.FindIntFactors(2354).ToList();
+            var result = delivery.FindIntFactors(2354).OrderBy(o => o).ToList();
 
             Assert.That(result.Count, Is.EqualTo(8));
             Assert.That(result[0], Is.EqualTo(1));

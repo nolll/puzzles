@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Core.InfiniteElvesAndHouses
                 {
                     var x = 0;
                 }
-                
+
                 var factors = FindIntFactors(house);
                 var presentCount = factors.Sum(o => o * 10);
                 if (presentCount >= target)
@@ -38,24 +39,26 @@ namespace Core.InfiniteElvesAndHouses
         public IList<int> FindIntFactors(int target)
         {
             var factors = new List<int>();
-            var i = target;
+            var i = target / 2;
             while (i > 0)
             {
-                if (_factors.TryGetValue(i, out var cachedFactors))
+                if (target % i == 0)
                 {
-                    factors.AddRange(cachedFactors);
-                    break;
-                } 
-                
-                if (target % i == 0) 
+                    if (_factors.TryGetValue(i, out var cachedFactors))
+                    {
+                        factors.AddRange(cachedFactors);
+                        break;
+                    }
+                    
                     factors.Add(i);
+                }
 
                 i--;
             }
 
-            //factors.Add(target);
+            factors.Add(target);
             _factors.Add(target, factors);
-            return factors.OrderBy(o => o).ToList();
+            return factors;
         }
 
         public int Deliver2(in int target)

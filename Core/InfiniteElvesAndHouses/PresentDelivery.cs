@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Core.InfiniteElvesAndHouses
@@ -18,6 +19,11 @@ namespace Core.InfiniteElvesAndHouses
             
             while (true)
             {
+                if (house == 786_240)
+                {
+                    var x = 0;
+                }
+                
                 var factors = FindIntFactors(house);
                 var presentCount = factors.Sum(o => o * 10);
                 if (presentCount >= target)

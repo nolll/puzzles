@@ -7,32 +7,41 @@ namespace Core.InfiniteElvesAndHouses
 {
     public class PresentDelivery
     {
-        private readonly Dictionary<int, IList<int>> _factors;
-
-        public PresentDelivery()
+        public int Deliver1(in int target, bool useOptimization = false)
         {
-            _factors = new Dictionary<int, IList<int>>();
-        }
-
-        public int Deliver1(in int target)
-        {
-            var house = 1;
+            var house = FindLowerbound(target);
             
             while (true)
             {
-                if (house == 786_240)
+                var hasAllLowFactors = !useOptimization || HasAllLowFactors(house);
+                if (hasAllLowFactors)
                 {
-                    var x = 0;
+                    var factors = FindIntFactors(house);
+                    var presentCount = factors.Sum(o => o * 10);
+                    if (presentCount >= target)
+                    {
+                        return house;
+                    }
                 }
-
-                var factors = FindIntFactors(house);
-                var presentCount = factors.Sum(o => o * 10);
-                if (presentCount >= target)
-                {
-                    return house;
-                }
-
+                
                 house++;
+            }
+        }
+
+        private int FindLowerbound(in int target)
+        {
+            var result = 0;
+            var i = 1;
+            while (true)
+            {
+                var nextResult = result + i * 10;
+
+                if (nextResult > target)
+                    return i;
+
+                result = nextResult;
+                
+                i++;
             }
         }
 
@@ -44,12 +53,6 @@ namespace Core.InfiniteElvesAndHouses
             {
                 if (target % i == 0)
                 {
-                    if (_factors.TryGetValue(i, out var cachedFactors))
-                    {
-                        factors.AddRange(cachedFactors);
-                        break;
-                    }
-                    
                     factors.Add(i);
                 }
 
@@ -57,8 +60,20 @@ namespace Core.InfiniteElvesAndHouses
             }
 
             factors.Add(target);
-            _factors.Add(target, factors);
             return factors;
+        }
+
+        private bool HasAllLowFactors(int target)
+        {
+            if (target % 2 != 0)
+                return false;
+            if (target % 3 != 0)
+                return false;
+            if (target % 5 != 0)
+                return false;
+            if (target % 7 != 0)
+                return false;
+            return true;
         }
 
         public int Deliver2(in int target)

@@ -10,8 +10,8 @@ namespace ConsoleApp
         private static DaySelector _daySelector;
         private const int PuzzleTimeout = 10;
 
-        private const int DebugYear = 2016;
-        private const int DebugDay = 14;
+        private const int DebugYear = 2015;
+        private const int DebugDay = 20;
 
         static void Main(string[] args)
         {

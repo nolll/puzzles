@@ -1,5 +1,4 @@
-﻿using System;
-using Core.InfiniteElvesAndHouses;
+﻿using Core.InfiniteElvesAndHouses;
 
 namespace ConsoleApp.Years.Year2015.Puzzles
 {
@@ -15,7 +14,7 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         public override PuzzleResult RunPart1()
         {
             var presentDelivery = new PresentDelivery();
-            var house = presentDelivery.Deliver1(Input);
+            var house = presentDelivery.Deliver1(Input, true);
             return new PuzzleResult(house, 786_240);
         }
 

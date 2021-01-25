@@ -51,7 +51,7 @@ namespace Core.SecurityDoor
                 var position = byteHash[2];
                 if (position < 8 && pwdArray[position] == null)
                 {
-                    var hash = ByteConverter.ConvertToString(byteHash);
+                    var hash = ByteConverter.ConvertToHexString(byteHash);
                     var result = hash.Substring(6, 1);
                     pwdArray[position] = result[0];
                 }
@@ -65,7 +65,7 @@ namespace Core.SecurityDoor
                     var position = byteHash[2];
                     if (position < 8 && pwdArray[position] == null)
                     {
-                        var hash = ByteConverter.ConvertToString(byteHash);
+                        var hash = ByteConverter.ConvertToHexString(byteHash);
                         var result = hash.Substring(6, 1);
                         pwdArray[position] = result[0];
                     }

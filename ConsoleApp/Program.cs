@@ -10,8 +10,8 @@ namespace ConsoleApp
         private static DaySelector _daySelector;
         private const int PuzzleTimeout = 10;
 
-        private const int DebugYear = 2015;
-        private const int DebugDay = 20;
+        private const int DebugYear = 2021;
+        private const int DebugDay = 1;
 
         static void Main(string[] args)
         {
@@ -27,14 +27,14 @@ namespace ConsoleApp
 
             if (parameters.Year != null && parameters.Day == null)
             {
-                var year = _daySelector.GetEvent(parameters.Year);
-                if (year == null)
+                var @event = _daySelector.GetEvent(parameters.Year);
+                if (@event == null)
                     throw new Exception("Event not found!");
 
-                var yearDays = year.Days;
-                var filteredDays = FilterDays(yearDays, parameters);
-                var yearRunner = new PuzzleRunner(timeout: PuzzleTimeout);
-                yearRunner.Run(filteredDays);
+                var eventDays = @event.Days;
+                var filteredDays = FilterDays(eventDays, parameters);
+                var runner = new PuzzleRunner(timeout: PuzzleTimeout);
+                runner.Run(filteredDays);
                 return;
             }
 

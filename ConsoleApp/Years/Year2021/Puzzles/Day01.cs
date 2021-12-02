@@ -1,4 +1,4 @@
-﻿using Core.SeaDepth;
+﻿using Core.SubmarineNavigation;
 
 namespace ConsoleApp.Years.Year2021.Puzzles
 {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Core.Tools;
 
-namespace Core.SeaDepth
+namespace Core.SubmarineNavigation
 {
     public class DepthMeasurement
     {

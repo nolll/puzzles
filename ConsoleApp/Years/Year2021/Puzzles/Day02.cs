@@ -1,4 +1,4 @@
-﻿using Core.SeaDepth;
+﻿using Core.SubmarineNavigation;
 
 namespace ConsoleApp.Years.Year2021.Puzzles
 {
@@ -10,18 +10,18 @@ namespace ConsoleApp.Years.Year2021.Puzzles
 
         public override PuzzleResult RunPart1()
         {
-            var calculator = new SubmarineNavigation(false);
-            var result = calculator.Move(FileInput);
+            var control = new SubmarineControl(FileInput, false);
+            control.Move();
             
-            return new PuzzleResult(result, 1580000);
+            return new PuzzleResult(control.Result, 1580000);
         }
 
         public override PuzzleResult RunPart2()
         {
-            var calculator = new SubmarineNavigation(true);
-            var result = calculator.Move(FileInput);
+            var control = new SubmarineControl(FileInput, true);
+            control.Move();
 
-            return new PuzzleResult(result);
+            return new PuzzleResult(control.Result);
         }
     }
 }

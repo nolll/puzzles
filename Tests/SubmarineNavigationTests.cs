@@ -1,4 +1,4 @@
-using Core.SeaDepth;
+using Core.SubmarineNavigation;
 using NUnit.Framework;
 
 namespace Tests
@@ -8,19 +8,19 @@ namespace Tests
         [Test]
         public void Part1()
         {
-            var validator = new SubmarineNavigation(false);
-            var result = validator.Move(Input);
+            var validator = new SubmarineControl(Input, false);
+            validator.Move();
 
-            Assert.That(result, Is.EqualTo(150));
+            Assert.That(validator.Result, Is.EqualTo(150));
         }
 
         [Test]
         public void Part2()
         {
-            var validator = new SubmarineNavigation(true);
-            var result = validator.Move(Input);
+            var validator = new SubmarineControl(Input, true);
+            validator.Move();
 
-            Assert.That(result, Is.EqualTo(900));
+            Assert.That(validator.Result, Is.EqualTo(900));
         }
 
         private const string Input = @"

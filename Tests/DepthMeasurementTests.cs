@@ -1,4 +1,4 @@
-using Core.SeaDepth;
+using Core.SubmarineNavigation;
 using NUnit.Framework;
 
 namespace Tests

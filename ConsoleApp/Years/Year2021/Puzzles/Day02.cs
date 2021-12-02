@@ -21,7 +21,7 @@ namespace ConsoleApp.Years.Year2021.Puzzles
             var control = new SubmarineControl(FileInput, true);
             control.Move();
 
-            return new PuzzleResult(control.Result);
+            return new PuzzleResult(control.Result, 1251263225);
         }
     }
 }

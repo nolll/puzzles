@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Folder Include="HexagonalFlooring\" />
-    <Folder Include="SeaDepth\" />
   </ItemGroup>
 
 </Project>

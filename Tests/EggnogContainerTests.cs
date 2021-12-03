@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Core.Eggnog;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using NUnit.Framework;
 
 namespace Tests

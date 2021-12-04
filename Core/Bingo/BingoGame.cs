@@ -7,30 +7,39 @@ namespace Core.Bingo
     public class BingoGame
     {
         private readonly IList<int> _numbers;
-        private readonly IList<BingoBoard> _boards;
+        private readonly IDictionary<int, BingoBoard> _boards;
 
         public BingoGame(string input)
         {
             var groups = PuzzleInputReader.ReadStringGroups(input);
             _numbers = groups.First().Split(',').Select(int.Parse).ToList();
-            _boards = ParseBoards(groups.Skip(1)).ToList();
+            _boards = ParseBoards(groups.Skip(1));
         }
 
-        public int Play()
+        public int Play(bool findLastWinner)
         {
-            var score = 0;
             foreach (var number in _numbers)
             {
                 MarkNumber(number);
-                var boardWithBingo = _boards.FirstOrDefault(o => o.HasBingo);
-                if (boardWithBingo != null)
+                var boardsWithBingo = _boards.Values.Where(o => o.HasBingo).ToList();
+                    if (boardsWithBingo.Any())
                 {
-                    score = CalculateScore(boardWithBingo, number);
-                    break;
+                    var currentBoard = boardsWithBingo.First();
+                    
+                    if (!findLastWinner)
+                        return CalculateScore(currentBoard, number);
+
+                    foreach (var board in boardsWithBingo)
+                    {
+                        _boards.Remove(board.Id);
+                    }
+
+                    if (!_boards.Any())
+                        return CalculateScore(currentBoard, number);
                 }
             }
 
-            return score;
+            return 0;
         }
 
         private int CalculateScore(BingoBoard board, in int number)
@@ -40,38 +49,49 @@ namespace Core.Bingo
         
         private void MarkNumber(in int number)
         {
-            foreach (var board in _boards)
+            foreach (var board in _boards.Values)
             {
                 board.MarkNumber(number);
             }
         }
 
-        private IEnumerable<BingoBoard> ParseBoards(IEnumerable<string> inputs)
+        private Dictionary<int, BingoBoard> ParseBoards(IEnumerable<string> inputs)
         {
-            return inputs.Select(input => new BingoBoard(MatrixBuilder.BuildIntMatrix(input), new Matrix<bool>(5, 5)));
+            var d = new Dictionary<int, BingoBoard>();
+            var i = 0;
+            foreach (var input in inputs)
+            {
+                d.Add(i, new BingoBoard(i, MatrixBuilder.BuildIntMatrix(input), new Matrix<bool>(5, 5)));
+                i++;
+            }
+
+            return d;
         }
     }
 
     public class BingoBoard
     {
-        public Matrix<int> Numbers { get; }
-        public Matrix<bool> Marks { get; }
+        public int Id { get; }
+        private readonly Matrix<int> _numbers;
+        private readonly Matrix<bool> _marks;
+        private IList<MatrixAddress> _coords;
 
-        public BingoBoard(Matrix<int> numbers, Matrix<bool> marks)
+        public BingoBoard(int id, Matrix<int> numbers, Matrix<bool> marks)
         {
-            Numbers = numbers;
-            Marks = marks;
+            Id = id;
+            _numbers = numbers;
+            _marks = marks;
+            _coords = _numbers.Coords;
         }
 
         public void MarkNumber(in int number)
         {
-            var coords = Numbers.Coords;
-            foreach (var coord in coords)
+            foreach (var coord in _coords)
             {
-                if (Numbers.ReadValueAt(coord) == number)
+                if (_numbers.ReadValueAt(coord) == number)
                 {
-                    Marks.MoveTo(coord);
-                    Marks.WriteValue(true);
+                    _marks.MoveTo(coord);
+                    _marks.WriteValue(true);
                 }
             }
         }
@@ -82,12 +102,12 @@ namespace Core.Bingo
         {
             get
             {
-                for (var x = 0; x < Marks.Width; x++)
+                for (var x = 0; x < _marks.Width; x++)
                 {
                     var hasBingo = true;
-                    for (var y = 0; y < Marks.Height; y++)
+                    for (var y = 0; y < _marks.Height; y++)
                     {
-                        if (!Marks.ReadValueAt(x, y))
+                        if (!_marks.ReadValueAt(x, y))
                         {
                             hasBingo = false;
                             break;
@@ -106,12 +126,12 @@ namespace Core.Bingo
         {
             get
             {
-                for (var y = 0; y < Marks.Height; y++)
+                for (var y = 0; y < _marks.Height; y++)
                 {
                     var hasBingo = true;
-                    for (var x = 0; x < Marks.Width; x++)
+                    for (var x = 0; x < _marks.Width; x++)
                     {
-                        if (!Marks.ReadValueAt(x, y))
+                        if (!_marks.ReadValueAt(x, y))
                         {
                             hasBingo = false;
                             break;
@@ -130,12 +150,11 @@ namespace Core.Bingo
         {
             get
             {
-                var coords = Marks.Coords;
                 var score = 0;
-                foreach (var coord in coords)
+                foreach (var coord in _coords)
                 {
-                    if (!Marks.ReadValueAt(coord))
-                        score += Numbers.ReadValueAt(coord);
+                    if (!_marks.ReadValueAt(coord))
+                        score += _numbers.ReadValueAt(coord);
                 }
 
                 return score;

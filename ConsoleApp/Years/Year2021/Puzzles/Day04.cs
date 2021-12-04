@@ -11,9 +11,17 @@ namespace ConsoleApp.Years.Year2021.Puzzles
         public override PuzzleResult RunPart1()
         {
             var diagnostics = new BingoGame(FileInput);
-            var result = diagnostics.Play();
-            
+            var result = diagnostics.Play(false);
+
             return new PuzzleResult(result, 45031);
+        }
+
+        public override PuzzleResult RunPart2()
+        {
+            var diagnostics = new BingoGame(FileInput);
+            var result = diagnostics.Play(true);
+
+            return new PuzzleResult(result, 2568);
         }
     }
 }

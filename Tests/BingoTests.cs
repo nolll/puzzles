@@ -9,9 +9,18 @@ namespace Tests
         public void Part1()
         {
             var game = new BingoGame(Input);
-            var result = game.Play();
-            
+            var result = game.Play(false);
+
             Assert.That(result, Is.EqualTo(4512));
+        }
+
+        [Test]
+        public void Part2()
+        {
+            var game = new BingoGame(Input);
+            var result = game.Play(true);
+
+            Assert.That(result, Is.EqualTo(1924));
         }
 
         private const string Input = @"

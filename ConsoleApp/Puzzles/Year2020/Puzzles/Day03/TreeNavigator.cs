@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
-using Core.TreeNavigation;
 
 namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day03
 {

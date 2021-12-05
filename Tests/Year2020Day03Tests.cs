@@ -1,6 +1,5 @@
 using System.Linq;
 using ConsoleApp.Puzzles.Year2020.Puzzles.Day03;
-using Core.TreeNavigation;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
-using Core.TuringDiagnostics;
 
 namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day25
 {

@@ -1,6 +1,4 @@
-﻿using Core.LineDance;
-
-namespace ConsoleApp.Puzzles.Year2017.Day16
+﻿namespace ConsoleApp.Puzzles.Year2017.Day16
 {
     public class Year2017Day16 : Year2017Day
     {

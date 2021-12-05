@@ -1,6 +1,4 @@
-﻿using Core.Duet;
-
-namespace ConsoleApp.Puzzles.Year2017.Day18
+﻿namespace ConsoleApp.Puzzles.Year2017.Day18
 {
     public class Year2017Day18 : Year2017Day
     {

@@ -1,4 +1,4 @@
-using Core.DominoBridge;
+using ConsoleApp.Puzzles.Year2017.Day24;
 using NUnit.Framework;
 
 namespace Tests

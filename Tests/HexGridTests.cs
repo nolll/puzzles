@@ -1,4 +1,4 @@
-using Core.HexGrid;
+using ConsoleApp.Puzzles.Year2017.Day11;
 using NUnit.Framework;
 
 namespace Tests

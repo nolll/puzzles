@@ -1,4 +1,4 @@
-using Core.Firewall;
+using ConsoleApp.Puzzles.Year2017.Day13;
 using NUnit.Framework;
 
 namespace Tests

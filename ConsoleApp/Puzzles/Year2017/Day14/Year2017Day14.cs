@@ -1,6 +1,4 @@
-﻿using Core.DiskFragmentation;
-
-namespace ConsoleApp.Puzzles.Year2017.Day14
+﻿namespace ConsoleApp.Puzzles.Year2017.Day14
 {
     public class Year2017Day14 : Year2017Day
     {

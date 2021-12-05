@@ -1,6 +1,4 @@
-﻿using Core.Firewall;
-
-namespace ConsoleApp.Puzzles.Year2017.Day13
+﻿namespace ConsoleApp.Puzzles.Year2017.Day13
 {
     public class Year2017Day13 : Year2017Day
     {

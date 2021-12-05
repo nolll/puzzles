@@ -1,6 +1,4 @@
-﻿using Core.JumpInstructions;
-
-namespace ConsoleApp.Puzzles.Year2017.Day05
+﻿namespace ConsoleApp.Puzzles.Year2017.Day05
 {
     public class Year2017Day05 : Year2017Day
     {

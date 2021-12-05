@@ -1,4 +1,4 @@
-﻿using Core.KnotHash;
+﻿using Core.Tools;
 
 namespace ConsoleApp.Puzzles.Year2017.Day10
 {

@@ -1,4 +1,4 @@
-using Core.DigitalPlumber;
+using ConsoleApp.Puzzles.Year2017.Day12;
 using NUnit.Framework;
 
 namespace Tests

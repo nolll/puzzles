@@ -1,4 +1,5 @@
-using Core.KnotHash;
+using ConsoleApp.Puzzles.Year2017.Day10;
+using Core.Tools;
 using NUnit.Framework;
 
 namespace Tests

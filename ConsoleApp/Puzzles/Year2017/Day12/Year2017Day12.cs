@@ -1,6 +1,4 @@
-﻿using Core.DigitalPlumber;
-
-namespace ConsoleApp.Puzzles.Year2017.Day12
+﻿namespace ConsoleApp.Puzzles.Year2017.Day12
 {
     public class Year2017Day12 : Year2017Day
     {

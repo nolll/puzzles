@@ -1,6 +1,4 @@
-﻿using Core.CoprocessorConflagration;
-
-namespace ConsoleApp.Puzzles.Year2017.Day23
+﻿namespace ConsoleApp.Puzzles.Year2017.Day23
 {
     public class Year2017Day23 : Year2017Day
     {

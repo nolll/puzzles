@@ -1,4 +1,4 @@
-using Core.Captcha;
+using ConsoleApp.Puzzles.Year2017.Day01;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,3 +1,4 @@
+using ConsoleApp.Puzzles.Year2017.Day21;
 using Core.FractalArt;
 using NUnit.Framework;
 

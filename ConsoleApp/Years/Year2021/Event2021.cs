@@ -14,7 +14,8 @@ namespace ConsoleApp.Years.Year2021
             new Day01(),
             new Day02(),
             new Day03(),
-            new Day04()
+            new Day04(),
+            new Day05()
         };
     }
 }

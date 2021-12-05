@@ -11,7 +11,7 @@ namespace ConsoleApp
         private const int PuzzleTimeout = 10;
 
         private const int DebugYear = 2021;
-        private const int DebugDay = 1;
+        private const int DebugDay = 5;
 
         static void Main(string[] args)
         {

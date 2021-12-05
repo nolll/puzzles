@@ -484,4 +484,40 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Years\Year2015\Puzzles\Day23\" />
+    <Folder Include="Years\Year2015\Puzzles\Day25\" />
+    <Folder Include="Years\Year2016\Puzzles\Day08\" />
+    <Folder Include="Years\Year2017\Puzzles\Day04\" />
+    <Folder Include="Years\Year2017\Puzzles\Day25\" />
+    <Folder Include="Years\Year2019\Puzzles\Day18\" />
+    <Folder Include="Years\Year2020\Puzzles\Day03\" />
+    <Folder Include="Years\Year2020\Puzzles\Day11\" />
+    <Folder Include="Years\Year2021\Puzzles\Day06\" />
+    <Folder Include="Years\Year2021\Puzzles\Day07\" />
+    <Folder Include="Years\Year2021\Puzzles\Day01\" />
+    <Folder Include="Years\Year2021\Puzzles\Day02\" />
+    <Folder Include="Years\Year2021\Puzzles\Day03\" />
+    <Folder Include="Years\Year2021\Puzzles\Day04\" />
+    <Folder Include="Years\Year2021\Puzzles\Day05\" />
+    <Folder Include="Years\Year2021\Puzzles\Day08\" />
+    <Folder Include="Years\Year2021\Puzzles\Day09\" />
+    <Folder Include="Years\Year2021\Puzzles\Day10\" />
+    <Folder Include="Years\Year2021\Puzzles\Day11\" />
+    <Folder Include="Years\Year2021\Puzzles\Day12\" />
+    <Folder Include="Years\Year2021\Puzzles\Day13\" />
+    <Folder Include="Years\Year2021\Puzzles\Day14\" />
+    <Folder Include="Years\Year2021\Puzzles\Day15\" />
+    <Folder Include="Years\Year2021\Puzzles\Day16\" />
+    <Folder Include="Years\Year2021\Puzzles\Day17\" />
+    <Folder Include="Years\Year2021\Puzzles\Day18\" />
+    <Folder Include="Years\Year2021\Puzzles\Day19\" />
+    <Folder Include="Years\Year2021\Puzzles\Day20\" />
+    <Folder Include="Years\Year2021\Puzzles\Day21\" />
+    <Folder Include="Years\Year2021\Puzzles\Day22\" />
+    <Folder Include="Years\Year2021\Puzzles\Day23\" />
+    <Folder Include="Years\Year2021\Puzzles\Day24\" />
+    <Folder Include="Years\Year2021\Puzzles\Day25\" />
+  </ItemGroup>
+
 </Project>

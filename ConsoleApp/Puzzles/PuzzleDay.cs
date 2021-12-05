@@ -37,7 +37,7 @@ namespace ConsoleApp.Puzzles
 
         private string FilePath => Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,
-                "Years",
+                "Puzzles",
                 $"Year{Year}",
                 "Inputs",
                 $"{PaddedDay}.txt");

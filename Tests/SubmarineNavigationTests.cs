@@ -1,4 +1,4 @@
-using Core.SubmarineNavigation;
+using ConsoleApp.Puzzles.Year2021.Puzzles.Day02;
 using NUnit.Framework;
 
 namespace Tests

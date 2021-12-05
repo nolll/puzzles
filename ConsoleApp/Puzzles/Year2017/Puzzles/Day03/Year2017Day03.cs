@@ -1,6 +1,4 @@
-﻿using Core.SpiralMemory;
-
-namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day03
+﻿namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day03
 {
     public class Year2017Day03 : Year2017Day
     {

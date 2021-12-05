@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Core.ShipPainting;
 
 namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day11
 {

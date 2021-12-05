@@ -1,4 +1,4 @@
-using Core.SleighAssembly;
+using ConsoleApp.Puzzles.Year2018.Puzzles.Day07;
 using NUnit.Framework;
 
 namespace Tests

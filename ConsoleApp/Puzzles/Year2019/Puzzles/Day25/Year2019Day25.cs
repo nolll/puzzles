@@ -1,6 +1,4 @@
-﻿using Core.SantasShip;
-
-namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day25
+﻿namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day25
 {
     public class Year2019Day25 : Year2019Day
     {

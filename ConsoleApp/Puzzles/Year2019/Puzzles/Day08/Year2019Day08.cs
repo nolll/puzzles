@@ -1,6 +1,4 @@
-﻿using Core.SpaceImages;
-
-namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day08
+﻿namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day08
 {
     public class Year2019Day08 : Year2019Day
     {

@@ -1,6 +1,4 @@
-﻿using Core.RoomValidation;
-
-namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day04
+﻿namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day04
 {
     public class Year2016Day04 : Year2016Day
     {

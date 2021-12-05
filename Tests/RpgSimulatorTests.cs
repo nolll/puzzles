@@ -1,4 +1,4 @@
-using Core.RpgSimulation;
+using ConsoleApp.Puzzles.Year2015.Puzzles.Day21;
 using NUnit.Framework;
 
 namespace Tests

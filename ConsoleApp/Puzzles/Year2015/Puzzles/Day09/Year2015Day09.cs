@@ -1,6 +1,4 @@
-﻿using Core.SantasRoute;
-
-namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day09
+﻿namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day09
 {
     public class Year2015Day09 : Year2015Day
     {

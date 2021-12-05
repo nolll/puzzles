@@ -1,4 +1,4 @@
-using Core.SantasDigitalList;
+using ConsoleApp.Puzzles.Year2015.Puzzles.Day08;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,6 +1,4 @@
-﻿using Core.SeriesOfTubes;
-
-namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day19
+﻿namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day19
 {
     public class Year2017Day19 : Year2017Day
     {

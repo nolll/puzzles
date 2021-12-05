@@ -1,6 +1,4 @@
-﻿using Core.StreamProcessing;
-
-namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day09
+﻿namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day09
 {
     public class Year2017Day09 : Year2017Day
     {

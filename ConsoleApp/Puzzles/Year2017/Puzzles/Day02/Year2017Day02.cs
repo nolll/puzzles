@@ -1,6 +1,4 @@
-﻿using Core.Spreadsheets;
-
-namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day02
+﻿namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day02
 {
     public class Year2017Day02 : Year2017Day
     {

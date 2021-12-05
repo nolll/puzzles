@@ -1,4 +1,4 @@
-using Core.RegularMap;
+using ConsoleApp.Puzzles.Year2018.Puzzles.Day20;
 using NUnit.Framework;
 
 namespace Tests

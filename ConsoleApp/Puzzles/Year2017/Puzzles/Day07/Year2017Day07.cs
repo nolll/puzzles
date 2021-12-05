@@ -1,6 +1,4 @@
-﻿using Core.RecursiveCircus;
-
-namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day07
+﻿namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day07
 {
     public class Year2017Day07 : Year2017Day
     {

@@ -1,6 +1,4 @@
-﻿using Core.Spinlock;
-
-namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day17
+﻿namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day17
 {
     public class Year2017Day17 : Year2017Day
     {

@@ -1,4 +1,4 @@
-using Core.RecursiveCircus;
+using ConsoleApp.Puzzles.Year2017.Puzzles.Day07;
 using NUnit.Framework;
 
 namespace Tests

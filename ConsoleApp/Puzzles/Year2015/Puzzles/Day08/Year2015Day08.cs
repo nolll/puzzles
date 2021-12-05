@@ -1,6 +1,4 @@
-﻿using Core.SantasDigitalList;
-
-namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day08
+﻿namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day08
 {
     public class Year2015Day08 : Year2015Day
     {

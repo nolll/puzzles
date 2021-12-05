@@ -1,6 +1,4 @@
-﻿using Core.Radioisotope;
-
-namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day11
+﻿namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day11
 {
     public class Year2016Day11 : Year2016Day
     {

@@ -1,6 +1,4 @@
-﻿using Core.SpringDroidAdventure;
-
-namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day21
+﻿namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day21
 {
     public class Year2019Day21 : Year2019Day
     {

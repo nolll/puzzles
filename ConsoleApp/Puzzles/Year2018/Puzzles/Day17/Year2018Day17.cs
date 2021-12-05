@@ -1,6 +1,4 @@
-﻿using Core.ReservoirResearch;
-
-namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day17
+﻿namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day17
 {
     public class Year2018Day17 : Year2018Day
     {

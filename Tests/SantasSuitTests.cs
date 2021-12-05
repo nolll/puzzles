@@ -1,4 +1,4 @@
-using Core.SantasSuit;
+using ConsoleApp.Puzzles.Year2018.Puzzles.Day03;
 using NUnit.Framework;
 
 namespace Tests

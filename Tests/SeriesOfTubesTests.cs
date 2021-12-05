@@ -1,4 +1,4 @@
-using Core.SeriesOfTubes;
+using ConsoleApp.Puzzles.Year2017.Puzzles.Day19;
 using NUnit.Framework;
 
 namespace Tests

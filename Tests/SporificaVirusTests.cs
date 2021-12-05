@@ -1,4 +1,4 @@
-using Core.SporificaVirus;
+using ConsoleApp.Puzzles.Year2017.Puzzles.Day22;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,6 +1,4 @@
-﻿using Core.Scaffolding;
-
-namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day17
+﻿namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day17
 {
     public class Year2019Day17 : Year2019Day
     {

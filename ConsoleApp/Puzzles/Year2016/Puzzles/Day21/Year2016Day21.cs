@@ -1,6 +1,4 @@
-﻿using Core.ScrambledLetters;
-
-namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day21
+﻿namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day21
 {
     public class Year2016Day21 : Year2016Day
     {

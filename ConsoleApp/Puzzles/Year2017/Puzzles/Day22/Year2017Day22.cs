@@ -1,6 +1,4 @@
-﻿using Core.SporificaVirus;
-
-namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day22
+﻿namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day22
 {
     public class Year2017Day22 : Year2017Day
     {

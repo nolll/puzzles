@@ -1,0 +1,16 @@
+using System;
+
+namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day04
+{
+    public class GuardEvent
+    {
+        public DateTime Timestamp { get; }
+        public string Action { get; }
+
+        public GuardEvent(DateTime timestamp, string action)
+        {
+            Timestamp = timestamp;
+            Action = action;
+        }
+    }
+}

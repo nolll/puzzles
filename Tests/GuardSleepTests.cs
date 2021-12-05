@@ -1,4 +1,4 @@
-using Core.SleepingGuards;
+using ConsoleApp.Puzzles.Year2018.Puzzles.Day04;
 using NUnit.Framework;
 
 namespace Tests

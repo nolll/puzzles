@@ -1,5 +1,4 @@
-﻿using Core.RpgSimulation;
-using Core.Tools;
+﻿using Core.Tools;
 
 namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day21
 {

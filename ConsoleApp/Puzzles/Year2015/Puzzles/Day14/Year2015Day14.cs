@@ -1,6 +1,4 @@
-﻿using Core.ReindeerOlympics;
-
-namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day14
+﻿namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day14
 {
     public class Year2015Day14 : Year2015Day
     {

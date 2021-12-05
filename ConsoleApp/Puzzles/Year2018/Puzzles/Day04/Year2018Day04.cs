@@ -1,6 +1,4 @@
-﻿using Core.SleepingGuards;
-
-namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day04
+﻿namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day04
 {
     public class Year2018Day04 : Year2018Day
     {

@@ -1,6 +1,4 @@
-﻿using Core.SubmarineNavigation;
-
-namespace ConsoleApp.Puzzles.Year2021.Puzzles.Day02
+﻿namespace ConsoleApp.Puzzles.Year2021.Puzzles.Day02
 {
     public class Year2021Day02 : Year2021Day
     {

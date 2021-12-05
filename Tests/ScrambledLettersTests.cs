@@ -1,4 +1,4 @@
-using Core.ScrambledLetters;
+using ConsoleApp.Puzzles.Year2016.Puzzles.Day21;
 using NUnit.Framework;
 
 namespace Tests

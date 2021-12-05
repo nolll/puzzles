@@ -1,6 +1,4 @@
-﻿using Core.SafeCracking;
-
-namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day23
+﻿namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day23
 {
     public class Year2016Day23 : Year2016Day
     {

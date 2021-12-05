@@ -1,4 +1,4 @@
-using Core.ReservoirResearch;
+using ConsoleApp.Puzzles.Year2018.Puzzles.Day17;
 using NUnit.Framework;
 
 namespace Tests

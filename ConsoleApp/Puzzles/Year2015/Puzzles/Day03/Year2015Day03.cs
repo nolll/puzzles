@@ -1,6 +1,4 @@
-﻿using Core.PresentDelivery;
-
-namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day03
+﻿namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day03
 {
     public class Year2015Day03 : Year2015Day
     {

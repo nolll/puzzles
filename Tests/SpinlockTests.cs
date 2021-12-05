@@ -1,4 +1,4 @@
-using Core.Spinlock;
+using ConsoleApp.Puzzles.Year2017.Puzzles.Day17;
 using NUnit.Framework;
 
 namespace Tests

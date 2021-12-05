@@ -1,6 +1,4 @@
-﻿using Core.RegularMap;
-
-namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day20
+﻿namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day20
 {
     public class Year2018Day20 : Year2018Day
     {

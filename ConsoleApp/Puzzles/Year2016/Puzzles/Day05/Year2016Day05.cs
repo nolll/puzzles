@@ -1,6 +1,4 @@
-﻿using Core.SecurityDoor;
-
-namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day05
+﻿namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day05
 {
     public class Year2016Day05 : Year2016Day
     {

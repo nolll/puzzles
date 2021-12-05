@@ -1,4 +1,4 @@
-using Core.ReindeerOlympics;
+using ConsoleApp.Puzzles.Year2015.Puzzles.Day14;
 using NUnit.Framework;
 
 namespace Tests

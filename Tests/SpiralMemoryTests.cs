@@ -1,4 +1,4 @@
-using Core.SpiralMemory;
+using ConsoleApp.Puzzles.Year2017.Puzzles.Day03;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,4 +1,4 @@
-using Core.RepetitionCode;
+using ConsoleApp.Puzzles.Year2016.Puzzles.Day06;
 using NUnit.Framework;
 
 namespace Tests

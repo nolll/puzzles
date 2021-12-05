@@ -1,6 +1,4 @@
-﻿using Core.SubterraneanSustainability;
-
-namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day12
+﻿namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day12
 {
     public class Year2018Day12 : Year2018Day
     {

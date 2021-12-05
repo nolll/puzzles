@@ -1,6 +1,4 @@
-﻿using Core.RepetitionCode;
-
-namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day06
+﻿namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day06
 {
     public class Year2016Day06 : Year2016Day
     {

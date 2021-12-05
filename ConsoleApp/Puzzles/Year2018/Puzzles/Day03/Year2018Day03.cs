@@ -1,6 +1,4 @@
-﻿using Core.SantasSuit;
-
-namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day03
+﻿namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day03
 {
     public class Year2018Day03 : Year2018Day
     {

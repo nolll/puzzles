@@ -1,4 +1,4 @@
-using Core.StreamProcessing;
+using ConsoleApp.Puzzles.Year2017.Puzzles.Day09;
 using NUnit.Framework;
 
 namespace Tests

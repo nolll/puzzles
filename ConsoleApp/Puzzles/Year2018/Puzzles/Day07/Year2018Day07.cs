@@ -1,6 +1,4 @@
-﻿using Core.SleighAssembly;
-
-namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day07
+﻿namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day07
 {
     public class Year2018Day07 : Year2018Day
     {

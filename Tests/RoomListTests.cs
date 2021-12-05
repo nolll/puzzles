@@ -1,4 +1,4 @@
-using Core.RoomValidation;
+using ConsoleApp.Puzzles.Year2016.Puzzles.Day04;
 using NUnit.Framework;
 
 namespace Tests

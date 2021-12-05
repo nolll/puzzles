@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.CorporatePolicy
+namespace ConsoleApp.Puzzles.Year2015.Day11
 {
     public class CorporatePasswordValidator
     {

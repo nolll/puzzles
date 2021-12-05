@@ -1,6 +1,4 @@
-﻿using Core.CookieRecipes;
-
-namespace ConsoleApp.Puzzles.Year2015.Day15
+﻿namespace ConsoleApp.Puzzles.Year2015.Day15
 {
     public class Year2015Day15 : Year2015Day
     {

@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
-namespace Core.InfiniteElvesAndHouses
+namespace ConsoleApp.Puzzles.Year2015.Day20
 {
     public class PresentDelivery
     {

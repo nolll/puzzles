@@ -1,4 +1,4 @@
-namespace Core.BitwiseLogic
+namespace ConsoleApp.Puzzles.Year2015.Day07
 {
     public abstract class Wire
     {

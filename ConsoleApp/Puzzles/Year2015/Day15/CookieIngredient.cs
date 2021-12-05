@@ -1,4 +1,4 @@
-namespace Core.CookieRecipes
+namespace ConsoleApp.Puzzles.Year2015.Day15
 {
     public class CookieIngredient
     {

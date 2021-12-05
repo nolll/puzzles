@@ -1,4 +1,5 @@
 using System.Linq;
+using ConsoleApp.Puzzles.Year2015.Day24;
 using Core.BalancedPresents;
 using NUnit.Framework;
 

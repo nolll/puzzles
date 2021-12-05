@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.KnightsOfTheDinnerTable
+namespace ConsoleApp.Puzzles.Year2015.Day13
 {
     public class DinnerGuest
     {

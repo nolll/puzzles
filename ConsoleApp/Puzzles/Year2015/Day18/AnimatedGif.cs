@@ -1,7 +1,7 @@
 using System.Linq;
 using Core.Tools;
 
-namespace Core.AnimatedLights
+namespace ConsoleApp.Puzzles.Year2015.Day18
 {
     public class AnimatedGif
     {

@@ -1,4 +1,4 @@
-using Core.BitwiseLogic;
+using ConsoleApp.Puzzles.Year2015.Day07;
 using NUnit.Framework;
 
 namespace Tests

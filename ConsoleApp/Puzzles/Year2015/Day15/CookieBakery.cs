@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
 
-namespace Core.CookieRecipes
+namespace ConsoleApp.Puzzles.Year2015.Day15
 {
     public class CookieBakery
     {

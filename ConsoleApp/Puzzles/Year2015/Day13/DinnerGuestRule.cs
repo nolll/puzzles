@@ -1,4 +1,4 @@
-namespace Core.KnightsOfTheDinnerTable
+namespace ConsoleApp.Puzzles.Year2015.Day13
 {
     public class DinnerGuestRule
     {

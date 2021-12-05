@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Core.Eggnog;
+using ConsoleApp.Puzzles.Year2015.Day17;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using NUnit.Framework;
 

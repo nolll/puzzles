@@ -1,6 +1,4 @@
-﻿using Core.Eggnog;
-
-namespace ConsoleApp.Puzzles.Year2015.Day17
+﻿namespace ConsoleApp.Puzzles.Year2015.Day17
 {
     public class Year2015Day17 : Year2015Day
     {

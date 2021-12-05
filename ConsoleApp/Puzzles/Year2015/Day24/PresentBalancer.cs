@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Core.BalancedPresents;
 using Core.Tools;
 
-namespace Core.BalancedPresents
+namespace ConsoleApp.Puzzles.Year2015.Day24
 {
     public class PresentBalancer
     {
@@ -19,10 +20,6 @@ namespace Core.BalancedPresents
             var groups = FindGroupsRecursive(new PresentGroup(), presents, 0).ToList();
             groups = groups.OrderBy(o => o.Count).ThenBy(o => o.QuantumEntanglement).ToList();
             QuantumEntanglementOfFirstGroup = groups.First().QuantumEntanglement;
-
-            //var groups = FindGroups(presents);
-            //groups = groups.OrderBy(o => o.Count()).ThenBy(GetQuantumEntanglement).ToList();
-            //QuantumEntanglementOfFirstGroup = GetQuantumEntanglement(groups.First());
         }
 
         private IEnumerable<PresentGroup> FindGroupsRecursive(PresentGroup group, List<int> remainingPresents, int level)

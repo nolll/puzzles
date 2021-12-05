@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 
-namespace Core.BitwiseLogic
+namespace ConsoleApp.Puzzles.Year2015.Day07
 {
-    public class NotWire : Wire
+    public class RightShiftWire : Wire
     {
         private readonly IDictionary<string, Wire> _dictionary;
         private readonly string _a;
+        private readonly ushort _distance;
 
         private ushort WireASignal => _dictionary[_a].Signal;
         
@@ -14,15 +15,16 @@ namespace Core.BitwiseLogic
             get
             {
                 if (_signal == null)
-                    _signal = (ushort)~WireASignal;
+                    _signal = (ushort)(WireASignal >> _distance);
                 return _signal.Value;
             }
         }
 
-        public NotWire(IDictionary<string, Wire> dictionary, string a)
+        public RightShiftWire(IDictionary<string, Wire> dictionary, string a, ushort distance)
         {
             _dictionary = dictionary;
             _a = a;
+            _distance = distance;
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
 
-namespace Core.AuntSue
+namespace ConsoleApp.Puzzles.Year2015.Day16
 {
     public class SueSelector
     {

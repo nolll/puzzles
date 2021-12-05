@@ -1,6 +1,4 @@
-﻿using Core.BitwiseLogic;
-
-namespace ConsoleApp.Puzzles.Year2015.Day07
+﻿namespace ConsoleApp.Puzzles.Year2015.Day07
 {
     public class Year2015Day07 : Year2015Day
     {

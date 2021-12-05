@@ -1,4 +1,4 @@
-using Core.KnightsOfTheDinnerTable;
+using ConsoleApp.Puzzles.Year2015.Day13;
 using NUnit.Framework;
 
 namespace Tests

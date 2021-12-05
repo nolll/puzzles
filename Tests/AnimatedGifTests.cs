@@ -1,4 +1,4 @@
-using Core.AnimatedLights;
+using ConsoleApp.Puzzles.Year2015.Day18;
 using NUnit.Framework;
 
 namespace Tests

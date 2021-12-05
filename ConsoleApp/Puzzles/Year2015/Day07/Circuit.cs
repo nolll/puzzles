@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Core.Tools;
 
-namespace Core.BitwiseLogic
+namespace ConsoleApp.Puzzles.Year2015.Day07
 {
     public class Circuit
     {

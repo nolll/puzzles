@@ -1,6 +1,4 @@
-﻿using Core.KnightsOfTheDinnerTable;
-
-namespace ConsoleApp.Puzzles.Year2015.Day13
+﻿namespace ConsoleApp.Puzzles.Year2015.Day13
 {
     public class Year2015Day13 : Year2015Day
     {

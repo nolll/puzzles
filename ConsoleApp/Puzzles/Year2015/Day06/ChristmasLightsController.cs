@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
 
-namespace Core.ChristmasLights
+namespace ConsoleApp.Puzzles.Year2015.Day06
 {
     public class ChristmasLightsController
     {

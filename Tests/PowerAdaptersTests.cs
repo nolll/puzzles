@@ -1,5 +1,5 @@
 using System;
-using ConsoleApp.Puzzles.Year2020.Puzzles.Day10;
+using ConsoleApp.Puzzles.Year2020.Day10;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 

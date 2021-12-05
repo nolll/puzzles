@@ -39,12 +39,8 @@ namespace ConsoleApp.Puzzles
                 AppDomain.CurrentDomain.BaseDirectory,
                 "Puzzles",
                 $"Year{Year}",
-                "Puzzles",
                 $"Day{PaddedDay}",
                 $"Year{Year}Day{PaddedDay}.txt");
-
-        // \Puzzles\Year2021\Puzzles\Day01\Year2021Day01.txt
-        // 
 
         private string PaddedDay => Id.ToString().PadLeft(2, '0');
     }

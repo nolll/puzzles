@@ -1,4 +1,4 @@
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day07;
+using ConsoleApp.Puzzles.Year2019.Day07;
 using NUnit.Framework;
 
 namespace Tests

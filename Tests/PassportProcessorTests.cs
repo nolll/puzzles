@@ -1,4 +1,4 @@
-using ConsoleApp.Puzzles.Year2020.Puzzles.Day04;
+using ConsoleApp.Puzzles.Year2020.Day04;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 

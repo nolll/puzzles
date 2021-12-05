@@ -1,5 +1,5 @@
 using System.Text.RegularExpressions;
-using ConsoleApp.Puzzles.Year2020.Puzzles.Day02;
+using ConsoleApp.Puzzles.Year2020.Day02;
 using NUnit.Framework;
 
 namespace Tests

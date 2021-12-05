@@ -1,38 +1,35 @@
 ﻿using System.Collections.Generic;
-using ConsoleApp.Puzzles.Year2019.Puzzles;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day01;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day02;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day03;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day04;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day05;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day06;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day07;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day08;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day09;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day10;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day11;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day12;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day13;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day14;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day15;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day16;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day17;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day18;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day19;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day20;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day21;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day22;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day23;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day24;
-using ConsoleApp.Puzzles.Year2019.Puzzles.Day25;
+using ConsoleApp.Puzzles.Year2019.Day01;
+using ConsoleApp.Puzzles.Year2019.Day02;
+using ConsoleApp.Puzzles.Year2019.Day03;
+using ConsoleApp.Puzzles.Year2019.Day04;
+using ConsoleApp.Puzzles.Year2019.Day05;
+using ConsoleApp.Puzzles.Year2019.Day06;
+using ConsoleApp.Puzzles.Year2019.Day07;
+using ConsoleApp.Puzzles.Year2019.Day08;
+using ConsoleApp.Puzzles.Year2019.Day09;
+using ConsoleApp.Puzzles.Year2019.Day10;
+using ConsoleApp.Puzzles.Year2019.Day11;
+using ConsoleApp.Puzzles.Year2019.Day12;
+using ConsoleApp.Puzzles.Year2019.Day13;
+using ConsoleApp.Puzzles.Year2019.Day14;
+using ConsoleApp.Puzzles.Year2019.Day15;
+using ConsoleApp.Puzzles.Year2019.Day16;
+using ConsoleApp.Puzzles.Year2019.Day17;
+using ConsoleApp.Puzzles.Year2019.Day18;
+using ConsoleApp.Puzzles.Year2019.Day19;
+using ConsoleApp.Puzzles.Year2019.Day20;
+using ConsoleApp.Puzzles.Year2019.Day21;
+using ConsoleApp.Puzzles.Year2019.Day22;
+using ConsoleApp.Puzzles.Year2019.Day23;
+using ConsoleApp.Puzzles.Year2019.Day24;
+using ConsoleApp.Puzzles.Year2019.Day25;
 
 namespace ConsoleApp.Puzzles.Year2019
 {
     public class Event2019 : Event
     {
-        public Event2019() : base(2019)
-        {
-        }
+        public override int Year => 2019;
 
         public override IList<PuzzleDay> Days => new List<PuzzleDay>
         {

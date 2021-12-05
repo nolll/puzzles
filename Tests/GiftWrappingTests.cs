@@ -1,4 +1,4 @@
-using Core.GiftWrapping;
+using ConsoleApp.Puzzles.Year2015.Day02;
 using NUnit.Framework;
 
 namespace Tests

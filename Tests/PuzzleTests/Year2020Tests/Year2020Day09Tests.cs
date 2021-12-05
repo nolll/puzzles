@@ -1,7 +1,7 @@
 using ConsoleApp.Years.Year2020.Puzzles;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.PuzzleTests.Year2020Tests
 {
     public class Year2020Day09Tests
     {

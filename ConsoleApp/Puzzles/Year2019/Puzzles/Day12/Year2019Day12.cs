@@ -1,6 +1,4 @@
-﻿using Core.MoonTracking;
-
-namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day12
+﻿namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day12
 {
     public class Year2019Day12 : Year2019Day
     {

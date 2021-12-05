@@ -1,4 +1,4 @@
-using Core.MonsterImages;
+using ConsoleApp.Puzzles.Year2020.Puzzles.Day19;
 using NUnit.Framework;
 
 namespace Tests

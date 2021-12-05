@@ -1,4 +1,4 @@
-using Core.Oxygen;
+using ConsoleApp.Puzzles.Year2019.Puzzles.Day15;
 using NUnit.Framework;
 
 namespace Tests

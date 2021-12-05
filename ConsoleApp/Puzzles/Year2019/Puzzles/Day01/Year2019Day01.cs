@@ -1,6 +1,4 @@
-﻿using Core.ModuleMass;
-
-namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day01
+﻿namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day01
 {
     public class Year2019Day01 : Year2019Day
     {

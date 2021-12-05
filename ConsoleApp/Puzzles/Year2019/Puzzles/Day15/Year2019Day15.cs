@@ -1,7 +1,4 @@
-﻿using Core.Oxygen;
-using Core.OxygenSystem;
-
-namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day15
+﻿namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day15
 {
     public class Year2019Day15 : Year2019Day
     {

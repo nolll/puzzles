@@ -1,5 +1,4 @@
 using ConsoleApp.Puzzles.Year2016.Puzzles.Day23;
-using Core.Monorail;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Core.ModeMaze;
 using Core.Tools;
 
 namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day22

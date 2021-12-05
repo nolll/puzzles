@@ -1,6 +1,4 @@
-﻿using Core.Lumber;
-
-namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day18
+﻿namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day18
 {
     public class Year2018Day18 : Year2018Day
     {

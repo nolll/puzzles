@@ -1,6 +1,4 @@
-﻿using Core.ParticleSwarm;
-
-namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day20
+﻿namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day20
 {
     public class Year2017Day20 : Year2017Day
     {

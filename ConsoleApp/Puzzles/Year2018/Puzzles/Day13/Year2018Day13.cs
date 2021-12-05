@@ -1,6 +1,4 @@
-﻿using Core.MineCarts;
-
-namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day13
+﻿namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day13
 {
     public class Year2018Day13 : Year2018Day
     {

@@ -1,4 +1,4 @@
-using Core.MathHomework;
+using ConsoleApp.Puzzles.Year2020.Puzzles.Day18;
 using NUnit.Framework;
 
 namespace Tests

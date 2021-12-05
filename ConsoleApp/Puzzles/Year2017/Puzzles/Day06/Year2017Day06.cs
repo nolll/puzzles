@@ -1,6 +1,4 @@
-﻿using Core.MemoryReallocation;
-
-namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day06
+﻿namespace ConsoleApp.Puzzles.Year2017.Puzzles.Day06
 {
     public class Year2017Day06 : Year2017Day
     {

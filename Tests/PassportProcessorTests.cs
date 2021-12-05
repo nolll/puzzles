@@ -1,4 +1,4 @@
-using Core.PassportProcessing;
+using ConsoleApp.Puzzles.Year2020.Puzzles.Day04;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 

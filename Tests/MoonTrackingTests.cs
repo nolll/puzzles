@@ -1,4 +1,4 @@
-using Core.MoonTracking;
+using ConsoleApp.Puzzles.Year2019.Puzzles.Day12;
 using NUnit.Framework;
 
 namespace Tests

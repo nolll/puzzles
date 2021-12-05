@@ -1,6 +1,4 @@
-﻿using Core.MathHomework;
-
-namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day18
+﻿namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day18
 {
     public class Year2020Day18 : Year2020Day
     {

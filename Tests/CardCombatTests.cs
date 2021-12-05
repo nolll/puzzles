@@ -1,5 +1,4 @@
 using Core.CardCombat;
-using Core.MakeFuel;
 using NUnit.Framework;
 
 namespace Tests

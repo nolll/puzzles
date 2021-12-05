@@ -1,6 +1,4 @@
-﻿using Core.MarbleMania;
-
-namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day09
+﻿namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day09
 {
     public class Year2018Day09 : Year2018Day
     {

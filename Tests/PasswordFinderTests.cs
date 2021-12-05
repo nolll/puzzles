@@ -1,4 +1,4 @@
-using Core.Passwords;
+using ConsoleApp.Puzzles.Year2019.Puzzles.Day04;
 using NUnit.Framework;
 
 namespace Tests

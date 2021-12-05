@@ -1,6 +1,4 @@
-﻿using Core.LookAndSay;
-
-namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day10
+﻿namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day10
 {
     public class Year2015Day10 : Year2015Day
     {

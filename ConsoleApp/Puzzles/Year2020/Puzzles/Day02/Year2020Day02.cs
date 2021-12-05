@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Core.PasswordPolicy;
 using Core.Tools;
 
 namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day02

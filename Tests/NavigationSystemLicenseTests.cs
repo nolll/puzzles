@@ -1,4 +1,4 @@
-using Core.NavigationSystemLicense;
+using ConsoleApp.Puzzles.Year2018.Puzzles.Day08;
 using NUnit.Framework;
 
 namespace Tests

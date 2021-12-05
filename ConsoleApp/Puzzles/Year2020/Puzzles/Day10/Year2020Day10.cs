@@ -1,6 +1,4 @@
-﻿using Core.PowerAdapters;
-
-namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day10
+﻿namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day10
 {
     public class Year2020Day10 : Year2020Day
     {

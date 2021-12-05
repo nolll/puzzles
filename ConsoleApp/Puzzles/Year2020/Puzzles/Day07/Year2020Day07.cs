@@ -1,6 +1,4 @@
-﻿using Core.LuggageRules;
-
-namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day07
+﻿namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day07
 {
     public class Year2020Day07 : Year2020Day
     {

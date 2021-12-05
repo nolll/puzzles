@@ -1,6 +1,4 @@
-﻿using Core.OneTimePad;
-
-namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day14
+﻿namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day14
 {
     public class Year2016Day14 : Year2016Day
     {

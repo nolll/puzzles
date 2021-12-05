@@ -1,6 +1,4 @@
-﻿using Core.MedicineNuclearPlant;
-
-namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day19
+﻿namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day19
 {
     public class Year2015Day19 : Year2015Day
     {

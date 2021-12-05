@@ -1,6 +1,4 @@
-﻿using Core.JsonAccounting;
-
-namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day12
+﻿namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day12
 {
     public class Year2015Day12 : Year2015Day
     {

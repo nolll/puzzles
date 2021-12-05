@@ -1,6 +1,4 @@
-﻿using Core.Monorail;
-
-namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day12
+﻿namespace ConsoleApp.Puzzles.Year2016.Puzzles.Day12
 {
     public class Year2016Day12 : Year2016Day
     {

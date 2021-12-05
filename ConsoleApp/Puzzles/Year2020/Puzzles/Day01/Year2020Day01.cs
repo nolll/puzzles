@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Core.ModuleMass;
+using ConsoleApp.Puzzles.Year2019.Puzzles.Day01;
 
 namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day01
 {

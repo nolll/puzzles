@@ -1,4 +1,4 @@
-using Core.OneTimePad;
+using ConsoleApp.Puzzles.Year2016.Puzzles.Day14;
 using Core.Tools;
 using NUnit.Framework;
 

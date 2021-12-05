@@ -1,6 +1,4 @@
-﻿using Core.NaughtyOrNice;
-
-namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day05
+﻿namespace ConsoleApp.Puzzles.Year2015.Puzzles.Day05
 {
     public class Year2015Day05 : Year2015Day
     {

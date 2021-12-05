@@ -1,6 +1,4 @@
-﻿using Core.MakeFuel;
-
-namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day14
+﻿namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day14
 {
     public class Year2019Day14 : Year2019Day
     {

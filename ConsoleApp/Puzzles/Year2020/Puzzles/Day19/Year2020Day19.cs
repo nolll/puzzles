@@ -1,6 +1,4 @@
-﻿using Core.MonsterImages;
-
-namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day19
+﻿namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day19
 {
     public class Year2020Day19 : Year2020Day
     {

@@ -12,7 +12,7 @@ namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day04
             var passwordLowerbound = int.Parse(passwordBounds[0]);
             var passwordUpperbound = int.Parse(passwordBounds[1]);
 
-            var passwordFinder = new Core.Passwords.PasswordFinder();
+            var passwordFinder = new PasswordFinder();
             var passwords = passwordFinder.FindPart1(passwordLowerbound, passwordUpperbound);
             var passwordCount = passwords.Count();
             return new PuzzleResult(passwordCount, 530);
@@ -24,7 +24,7 @@ namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day04
             var passwordLowerbound = int.Parse(passwordBounds[0]);
             var passwordUpperbound = int.Parse(passwordBounds[1]);
 
-            var passwordFinder = new Core.Passwords.PasswordFinder();
+            var passwordFinder = new PasswordFinder();
             var passwords = passwordFinder.FindPart2(passwordLowerbound, passwordUpperbound);
             var passwordCount = passwords.Count();
             return new PuzzleResult(passwordCount, 324);

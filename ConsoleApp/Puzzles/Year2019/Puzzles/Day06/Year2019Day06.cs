@@ -1,6 +1,4 @@
-﻿using Core.Orbits;
-
-namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day06
+﻿namespace ConsoleApp.Puzzles.Year2019.Puzzles.Day06
 {
     public class Year2019Day06 : Year2019Day
     {

@@ -1,6 +1,4 @@
-﻿using Core.Polymers;
-
-namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day05
+﻿namespace ConsoleApp.Puzzles.Year2018.Puzzles.Day05
 {
     public class Year2018Day05 : Year2018Day
     {

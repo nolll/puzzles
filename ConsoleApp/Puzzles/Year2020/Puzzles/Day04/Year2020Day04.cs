@@ -1,6 +1,4 @@
-﻿using Core.PassportProcessing;
-
-namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day04
+﻿namespace ConsoleApp.Puzzles.Year2020.Puzzles.Day04
 {
     public class Year2020Day04 : Year2020Day
     {

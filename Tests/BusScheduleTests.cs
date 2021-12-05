@@ -1,5 +1,4 @@
 using Core.BusSchedule;
-using Core.MakeFuel;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 

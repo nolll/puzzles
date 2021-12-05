@@ -1,4 +1,4 @@
-using Core.JsonAccounting;
+using ConsoleApp.Puzzles.Year2015.Puzzles.Day12;
 using NUnit.Framework;
 
 namespace Tests

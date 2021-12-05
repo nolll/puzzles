@@ -1,4 +1,4 @@
-using Core.ModeMaze;
+using ConsoleApp.Puzzles.Year2018.Puzzles.Day22;
 using NUnit.Framework;
 
 namespace Tests

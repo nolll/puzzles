@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 
 namespace ConsoleApp.Years
@@ -39,7 +40,7 @@ namespace ConsoleApp.Years
         }
 
         private string FilePath => Path.Combine(
-                Directory.GetCurrentDirectory(),
+                AppDomain.CurrentDomain.BaseDirectory,
                 "Years",
                 $"Year{Year}",
                 "Inputs",

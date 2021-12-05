@@ -61,7 +61,7 @@ namespace ConsoleApp
             dayRunner.Run(day);
         }
 
-        private static IList<Day> FilterDays(IList<Day> days, Parameters parameters)
+        private static IList<PuzzleDay> FilterDays(IList<PuzzleDay> days, Parameters parameters)
         {
             if (parameters.RunSlowOnly)
                 return days.Where(o => o.IsSlow).ToList();

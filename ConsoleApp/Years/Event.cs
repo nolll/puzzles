@@ -6,14 +6,14 @@ namespace ConsoleApp.Years
     public abstract class Event
     {
         public int Year { get; }
-        public abstract IList<Day> Days { get; }
+        public abstract IList<PuzzleDay> Days { get; }
 
         protected Event(int year)
         {
             Year = year;
         }
 
-        public Day GetDay(int? selectedDay)
+        public PuzzleDay GetDay(int? selectedDay)
         {
             return selectedDay != null 
                 ? Days.FirstOrDefault(o => o.Id == selectedDay.Value) 

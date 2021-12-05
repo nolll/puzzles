@@ -9,13 +9,13 @@ namespace ConsoleApp.Years.Year2021
         {
         }
 
-        public override IList<Day> Days => new List<Day>
+        public override IList<PuzzleDay> Days => new List<PuzzleDay>
         {
-            new Day01(),
-            new Day02(),
-            new Day03(),
-            new Day04(),
-            new Day05()
+            new Year2021Day01(),
+            new Year2021Day02(),
+            new Year2021Day03(),
+            new Year2021Day04(),
+            new Year2021Day05()
         };
     }
 }

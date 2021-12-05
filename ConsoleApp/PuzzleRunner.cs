@@ -17,7 +17,7 @@ namespace ConsoleApp
             _timeout = timeout;
         }
 
-        public void Run(IList<Day> days)
+        public void Run(IList<PuzzleDay> days)
         {
             var printer = new MultiDayPrinter(_timeout ?? 0);
             printer.PrintHeader();
@@ -29,14 +29,14 @@ namespace ConsoleApp
             printer.PrintFooter();
         }
 
-        public void Run(Day day)
+        public void Run(PuzzleDay day)
         {
             var result = RunDay(day);
             var printer = new SingleDayPrinter();
             printer.PrintDay(result);
         }
 
-        private DayResult RunDay(Day day)
+        private DayResult RunDay(PuzzleDay day)
         {
             var p1 = RunPuzzleWithTimer(day.RunPart1, day.IsSlow);
             var p2 = RunPuzzleWithTimer(day.RunPart2, day.IsSlow);

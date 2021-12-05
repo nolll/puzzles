@@ -9,33 +9,33 @@ namespace ConsoleApp.Years.Year2018
         {
         }
 
-        public override IList<Day> Days => new List<Day>
+        public override IList<PuzzleDay> Days => new List<PuzzleDay>
         {
-            new Day01(),
-            new Day02(),
-            new Day03(),
-            new Day04(),
-            new Day05(),
-            new Day06(),
-            new Day07(),
-            new Day08(),
-            new Day09(),
-            new Day10(),
-            new Day11(),
-            new Day12(),
-            new Day13(),
-            new Day14(),
-            new Day15(),
-            new Day16(),
-            new Day17(),
-            new Day18(),
-            new Day19(),
-            new Day20(),
-            new Day21(),
-            new Day22(),
-            new Day23(),
-            new Day24(),
-            new Day25()
+            new Year2018Day01(),
+            new Year2018Day02(),
+            new Year2018Day03(),
+            new Year2018Day04(),
+            new Year2018Day05(),
+            new Year2018Day06(),
+            new Year2018Day07(),
+            new Year2018Day08(),
+            new Year2018Day09(),
+            new Year2018Day10(),
+            new Year2018Day11(),
+            new Year2018Day12(),
+            new Year2018Day13(),
+            new Year2018Day14(),
+            new Year2018Day15(),
+            new Year2018Day16(),
+            new Year2018Day17(),
+            new Year2018Day18(),
+            new Year2018Day19(),
+            new Year2018Day20(),
+            new Year2018Day21(),
+            new Year2018Day22(),
+            new Year2018Day23(),
+            new Year2018Day24(),
+            new Year2018Day25()
         };
     }
 }

@@ -9,33 +9,33 @@ namespace ConsoleApp.Years.Year2020
         {
         }
 
-        public override IList<Day> Days => new List<Day>
+        public override IList<PuzzleDay> Days => new List<PuzzleDay>
         {
-            new Day01(),
-            new Day02(),
-            new Day03(),
-            new Day04(),
-            new Day05(),
-            new Day06(),
-            new Day07(),
-            new Day08(),
-            new Day09(),
-            new Day10(),
-            new Day11(),
-            new Day12(),
-            new Day13(),
-            new Day14(),
-            new Day15(),
-            new Day16(),
-            new Day17(),
-            new Day18(),
-            new Day19(),
-            new Day20(),
-            new Day21(),
-            new Day22(),
-            new Day23(),
-            new Day24(),
-            new Day25()
+            new Year2020Day01(),
+            new Year2020Day02(),
+            new Year2020Day03(),
+            new Year2020Day04(),
+            new Year2020Day05(),
+            new Year2020Day06(),
+            new Year2020Day07(),
+            new Year2020Day08(),
+            new Year2020Day09(),
+            new Year2020Day10(),
+            new Year2020Day11(),
+            new Year2020Day12(),
+            new Year2020Day13(),
+            new Year2020Day14(),
+            new Year2020Day15(),
+            new Year2020Day16(),
+            new Year2020Day17(),
+            new Year2020Day18(),
+            new Year2020Day19(),
+            new Year2020Day20(),
+            new Year2020Day21(),
+            new Year2020Day22(),
+            new Year2020Day23(),
+            new Year2020Day24(),
+            new Year2020Day25()
         };
     }
 }

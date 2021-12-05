@@ -24,7 +24,7 @@ namespace ConsoleApp
             new Event2021()
         };
 
-        public Day GetDay(int? selectedYear, int? selectedDay)
+        public PuzzleDay GetDay(int? selectedYear, int? selectedDay)
         {
             var year = GetEvent(selectedYear);
             return year.GetDay(selectedDay);
@@ -41,10 +41,10 @@ namespace ConsoleApp
             return _events.Last();
         }
         
-        public IList<Day> GetAll()
+        public IList<PuzzleDay> GetAll()
         {
             var eventDays = _events.Select(o => o.Days);
-            var allDays = new List<Day>();
+            var allDays = new List<PuzzleDay>();
             foreach (var days in eventDays)
             {
                 allDays.AddRange(days);

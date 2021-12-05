@@ -38,7 +38,7 @@ namespace ConsoleApp
             Console.WriteLine();
         }
 
-        private static void PrintDayTitle(Day day)
+        private static void PrintDayTitle(PuzzleDay day)
         {
             Console.WriteLine();
             Console.WriteLine($"Day {day.Id} {day.Year}:");

@@ -1,4 +1,5 @@
-﻿using Core.AdventCoins;
+﻿using System;
+using Core.Tools;
 
 namespace ConsoleApp.Years.Year2015.Puzzles
 {
@@ -23,5 +24,41 @@ namespace ConsoleApp.Years.Year2015.Puzzles
         }
 
         private const string Input = "iwrupvqb";
+    }
+
+    public class AdventCoinMiner
+    {
+        public int Mine(string key, int leadingZeros, int startIndex = 1)
+        {
+            var index = startIndex;
+            var hashFactory = new Hashfactory();
+            var isCoinFound = GetCompareFunc(leadingZeros);
+            while (true)
+            {
+                var hashedBytes = hashFactory.ByteHashFromString($"{key}{index}");
+
+                if (isCoinFound(hashedBytes))
+                    return index;
+
+                index++;
+            }
+        }
+
+        private Func<byte[], bool> GetCompareFunc(int leadingZeros)
+        {
+            if (leadingZeros == 5)
+                return StartsWithFiveZeros;
+            return StartsWithSixZeros;
+        }
+
+        private static bool StartsWithFiveZeros(byte[] bytes)
+        {
+            return bytes[0] == 0 && bytes[1] == 0 && bytes[2] < 10;
+        }
+
+        private static bool StartsWithSixZeros(byte[] bytes)
+        {
+            return bytes[0] == 0 && bytes[1] == 0 && bytes[2] == 0;
+        }
     }
 }

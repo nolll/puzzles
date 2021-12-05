@@ -1,9 +1,9 @@
-using Core.WhiteElephants;
+using ConsoleApp.Years.Year2016.Puzzles;
 using NUnit.Framework;
 
 namespace Tests
 {
-    public class WhiteElephantPartyTests
+    public class Year2016Day19Tests
     {
         [Test]
         public void StealFromNextElf_ThirdElfGetsAllPresents()

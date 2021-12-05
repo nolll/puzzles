@@ -1,9 +1,9 @@
-using Core.XmasEncryption;
+using ConsoleApp.Years.Year2020.Puzzles;
 using NUnit.Framework;
 
 namespace Tests
 {
-    public class XmasEncryptionTests
+    public class Year2020Day09Tests
     {
         private const string Input = @"
 35

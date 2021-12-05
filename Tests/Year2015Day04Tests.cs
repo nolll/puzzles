@@ -1,9 +1,9 @@
-using Core.AdventCoins;
+using ConsoleApp.Years.Year2015.Puzzles;
 using NUnit.Framework;
 
 namespace Tests
 {
-    public class AdventCoinTests
+    public class Year2015Day04Tests
     {
         [TestCase("abcdef", 609043)]
         [TestCase("pqrstuv", 1048970)]

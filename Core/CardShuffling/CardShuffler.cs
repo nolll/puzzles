@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -86,8 +87,8 @@ namespace Core.CardShuffling
 
         private BigInteger ShuffleBig(IList<string> shuffles)
         {
-            const long stackLength = 119_315_717_514_047;
-            const long iterationCount = 101_741_582_076_661;
+            const long deckSize = 119_315_717_514_047;
+            const long shuffleCount = 101_741_582_076_661;
             const long targetPos = 2020;
 
             BigInteger a = 1;
@@ -97,7 +98,7 @@ namespace Core.CardShuffling
                 if (shuffle.StartsWith("cut"))
                 {
                     BigInteger n = long.Parse(shuffle.Split(" ").Last());
-                    b = stackLength + b - n;
+                    b = deckSize + b - n;
                 }
                 else if (shuffle.StartsWith("deal with increment"))
                 {
@@ -109,16 +110,16 @@ namespace Core.CardShuffling
                 else if (shuffle == "deal into new stack")
                 {
                     a *= -1;
-                    b = stackLength - b - 1;
+                    b = deckSize - b - 1;
                 }
             }
 
-            var aGazillion = BigInteger.ModPow(a, iterationCount, stackLength);
-            var bGazillion = b * (BigInteger.ModPow(a, iterationCount, stackLength) - 1) * ModuloInverse(a - 1, stackLength) % stackLength;
-            var result = (targetPos - bGazillion) % stackLength * ModuloInverse(aGazillion, stackLength) % stackLength;
+            var aBig = BigInteger.ModPow(a, shuffleCount, deckSize);
+            var bBig = b * (aBig - 1) * ModuloInverse(a - 1, deckSize) % deckSize;
+            var result = (targetPos - bBig) % deckSize * ModuloInverse(aBig, deckSize) % deckSize;
 
             if (result < 0)
-                result += stackLength;
+                result += deckSize;
             
             return result;
         }

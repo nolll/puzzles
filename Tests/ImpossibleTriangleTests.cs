@@ -1,4 +1,4 @@
-using Core.ImpossibleTriangles;
+using ConsoleApp.Puzzles.Year2016.Day03;
 using NUnit.Framework;
 
 namespace Tests

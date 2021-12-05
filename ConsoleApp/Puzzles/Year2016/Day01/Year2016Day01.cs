@@ -1,6 +1,4 @@
-﻿using Core.EasterbunnyHq;
-
-namespace ConsoleApp.Puzzles.Year2016.Day01
+﻿namespace ConsoleApp.Puzzles.Year2016.Day01
 {
     public class Year2016Day01 : Year2016Day
     {

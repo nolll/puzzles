@@ -1,6 +1,4 @@
-﻿using Core.FloorTraps;
-
-namespace ConsoleApp.Puzzles.Year2016.Day18
+﻿namespace ConsoleApp.Puzzles.Year2016.Day18
 {
     public class Year2016Day18 : Year2016Day
     {

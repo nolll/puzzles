@@ -1,6 +1,4 @@
-﻿using Core.AirDuct;
-
-namespace ConsoleApp.Puzzles.Year2016.Day24
+﻿namespace ConsoleApp.Puzzles.Year2016.Day24
 {
     public class Year2016Day24 : Year2016Day
     {

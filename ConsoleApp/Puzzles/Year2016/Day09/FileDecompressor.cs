@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Core.ExperimentalCompression
+namespace ConsoleApp.Puzzles.Year2016.Day09
 {
     public class FileDecompressor
     {

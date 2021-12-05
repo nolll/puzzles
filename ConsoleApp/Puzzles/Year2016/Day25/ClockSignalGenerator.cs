@@ -1,4 +1,4 @@
-namespace Core.ClockSignal
+namespace ConsoleApp.Puzzles.Year2016.Day25
 {
     public class ClockSignalGenerator
     {

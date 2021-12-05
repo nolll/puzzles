@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.IpFirewall;
 using Core.Tools;
 
-namespace Core.IpFirewall
+namespace ConsoleApp.Puzzles.Year2016.Day20
 {
     public class FirewallRules
     {

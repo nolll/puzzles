@@ -1,7 +1,6 @@
 using System.Linq;
-using Core.Tools;
 
-namespace Core.FloorTraps
+namespace ConsoleApp.Puzzles.Year2016.Day18
 {
     public class FloorTrapDetector
     {

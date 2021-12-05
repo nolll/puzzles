@@ -1,4 +1,4 @@
-using Core.BathroomSecurity;
+using ConsoleApp.Puzzles.Year2016.Day02;
 using NUnit.Framework;
 
 namespace Tests

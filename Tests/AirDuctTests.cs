@@ -1,4 +1,4 @@
-using Core.AirDuct;
+using ConsoleApp.Puzzles.Year2016.Day24;
 using NUnit.Framework;
 
 namespace Tests

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
 
-namespace Core.IpV7
+namespace ConsoleApp.Puzzles.Year2016.Day07
 {
     public class IpTester
     {

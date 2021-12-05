@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
 
-namespace Core.BalanceBots
+namespace ConsoleApp.Puzzles.Year2016.Day10
 {
     public class BotSimulator
     {

@@ -1,6 +1,4 @@
-﻿using Core.BathroomSecurity;
-
-namespace ConsoleApp.Puzzles.Year2016.Day02
+﻿namespace ConsoleApp.Puzzles.Year2016.Day02
 {
     public class Year2016Day02 : Year2016Day
     {

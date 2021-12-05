@@ -1,4 +1,4 @@
-using Core.EasterbunnyHq;
+using ConsoleApp.Puzzles.Year2016.Day01;
 using NUnit.Framework;
 
 namespace Tests

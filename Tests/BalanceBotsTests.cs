@@ -1,4 +1,4 @@
-using Core.BalanceBots;
+using ConsoleApp.Puzzles.Year2016.Day10;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,4 +1,4 @@
-using Core.FloorTraps;
+using ConsoleApp.Puzzles.Year2016.Day18;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,6 +1,4 @@
-﻿using Core.IpV7;
-
-namespace ConsoleApp.Puzzles.Year2016.Day07
+﻿namespace ConsoleApp.Puzzles.Year2016.Day07
 {
     public class Year2016Day07 : Year2016Day
     {

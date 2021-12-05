@@ -1,4 +1,4 @@
-using Core.ExperimentalCompression;
+using ConsoleApp.Puzzles.Year2016.Day09;
 using NUnit.Framework;
 
 namespace Tests

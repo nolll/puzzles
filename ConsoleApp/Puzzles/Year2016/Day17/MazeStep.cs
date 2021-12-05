@@ -1,6 +1,6 @@
 using Core.Tools;
 
-namespace Core.HashedDoors
+namespace ConsoleApp.Puzzles.Year2016.Day17
 {
     public class MazeStep
     {

@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools;
 
-namespace Core.AirDuct
+namespace ConsoleApp.Puzzles.Year2016.Day24
 {
     public class AirDuctNavigator
     {

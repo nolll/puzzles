@@ -1,6 +1,4 @@
-﻿using Core.DragonChecksum;
-
-namespace ConsoleApp.Puzzles.Year2016.Day16
+﻿namespace ConsoleApp.Puzzles.Year2016.Day16
 {
     public class Year2016Day16 : Year2016Day
     {

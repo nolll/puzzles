@@ -1,4 +1,4 @@
-using Core.DragonChecksum;
+using ConsoleApp.Puzzles.Year2016.Day16;
 using NUnit.Framework;
 
 namespace Tests

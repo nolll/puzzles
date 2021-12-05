@@ -1,6 +1,4 @@
-﻿using Core.CubicleMaze;
-
-namespace ConsoleApp.Puzzles.Year2016.Day13
+﻿namespace ConsoleApp.Puzzles.Year2016.Day13
 {
     public class Year2016Day13 : Year2016Day
     {

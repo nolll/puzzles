@@ -3,13 +3,13 @@ using System.Linq;
 using System.Text;
 using Core.Tools;
 
-namespace Core.BathroomSecurity
+namespace ConsoleApp.Puzzles.Year2016.Day02
 {
-    public class SquareKeyCodeFinder
+    public class DiamondKeyCodeFinder
     {
         private readonly Matrix<char> _buttons;
 
-        public SquareKeyCodeFinder()
+        public DiamondKeyCodeFinder()
         {
             _buttons = BuildButtonMatrix();
         }
@@ -33,24 +33,45 @@ namespace Core.BathroomSecurity
         private void Move(char direction)
         {
             if (direction == 'U')
+            {
                 _buttons.TryMoveUp();
+                if (_buttons.ReadValue() == '.')
+                    _buttons.MoveDown();
+            }
+
             if (direction == 'R')
+            {
                 _buttons.TryMoveRight();
+                if (_buttons.ReadValue() == '.')
+                    _buttons.MoveLeft();
+            }
+
             if (direction == 'D')
+            {
                 _buttons.TryMoveDown();
+                if (_buttons.ReadValue() == '.')
+                    _buttons.MoveUp();
+            }
+
             if (direction == 'L')
+            {
                 _buttons.TryMoveLeft();
+                if (_buttons.ReadValue() == '.')
+                    _buttons.MoveRight();
+            }
         }
 
         private Matrix<char> BuildButtonMatrix()
         {
             const string input = @"
-123
-456
-789";
+..1..
+.234.
+56789
+.ABC.
+..D..";
 
             var matrix = MatrixBuilder.BuildCharMatrix(input);
-            matrix.MoveTo(1, 1);
+            matrix.MoveTo(0, 2);
             return matrix;
         }
 

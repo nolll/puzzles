@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Core.KineticSculptureTiming;
 using Core.Tools;
 
-namespace Core.KineticSculptureTiming
+namespace ConsoleApp.Puzzles.Year2016.Day15
 {
     public class KineticSculpture
     {

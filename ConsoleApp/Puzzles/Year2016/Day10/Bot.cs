@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.BalanceBots
+namespace ConsoleApp.Puzzles.Year2016.Day10
 {
     public class Bot
     {

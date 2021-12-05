@@ -1,4 +1,4 @@
-namespace Core.BalanceBots
+namespace ConsoleApp.Puzzles.Year2016.Day10
 {
     public interface IGiver
     {

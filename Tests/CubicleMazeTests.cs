@@ -1,4 +1,4 @@
-using Core.CubicleMaze;
+using ConsoleApp.Puzzles.Year2016.Day13;
 using NUnit.Framework;
 
 namespace Tests

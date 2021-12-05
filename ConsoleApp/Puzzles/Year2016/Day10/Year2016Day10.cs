@@ -1,6 +1,4 @@
-﻿using Core.BalanceBots;
-
-namespace ConsoleApp.Puzzles.Year2016.Day10
+﻿namespace ConsoleApp.Puzzles.Year2016.Day10
 {
     public class Year2016Day10 : Year2016Day
     {

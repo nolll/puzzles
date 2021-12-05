@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="ClockSignal\" />
+    <Folder Include="CubicleMaze\" />
+    <Folder Include="ExperimentalCompression\" />
+    <Folder Include="FloorTraps\" />
     <Folder Include="HexagonalFlooring\" />
   </ItemGroup>
 

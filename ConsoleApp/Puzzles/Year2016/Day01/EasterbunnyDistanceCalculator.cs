@@ -1,8 +1,7 @@
-using System;
 using System.Linq;
 using Core.Tools;
 
-namespace Core.EasterbunnyHq
+namespace ConsoleApp.Puzzles.Year2016.Day01
 {
     public class EasterbunnyDistanceCalculator
     {

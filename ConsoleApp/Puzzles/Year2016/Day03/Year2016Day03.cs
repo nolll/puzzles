@@ -1,6 +1,4 @@
-﻿using Core.ImpossibleTriangles;
-
-namespace ConsoleApp.Puzzles.Year2016.Day03
+﻿namespace ConsoleApp.Puzzles.Year2016.Day03
 {
     public class Year2016Day03 : Year2016Day
     {

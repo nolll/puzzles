@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.ImpossibleTriangles
+namespace ConsoleApp.Puzzles.Year2016.Day03
 {
     public class TriangleValidator
     {

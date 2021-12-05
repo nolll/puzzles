@@ -1,6 +1,4 @@
-﻿using Core.ClockSignal;
-
-namespace ConsoleApp.Puzzles.Year2016.Day25
+﻿namespace ConsoleApp.Puzzles.Year2016.Day25
 {
     public class Year2016Day25 : Year2016Day
     {

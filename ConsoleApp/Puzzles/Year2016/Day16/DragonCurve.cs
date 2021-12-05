@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Text;
 
-namespace Core.DragonChecksum
+namespace ConsoleApp.Puzzles.Year2016.Day16
 {
     public class DragonCurve
     {

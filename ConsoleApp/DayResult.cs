@@ -1,4 +1,4 @@
-﻿using ConsoleApp.Years;
+﻿using ConsoleApp.Puzzles;
 
 namespace ConsoleApp
 {

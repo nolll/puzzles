@@ -1,0 +1,23 @@
+﻿using Core.AnimatedLights;
+
+namespace ConsoleApp.Puzzles.Year2015.Puzzles
+{
+    public class Year2015Day18 : Year2015Day
+    {
+        public override int Day => 18;
+
+        public override PuzzleResult RunPart1()
+        {
+            var gif = new AnimatedGif(FileInput);
+            gif.RunAnimation(100);
+            return new PuzzleResult(gif.LightCount, 821);
+        }
+
+        public override PuzzleResult RunPart2()
+        {
+            var gif = new AnimatedGif(FileInput, true);
+            gif.RunAnimation(100);
+            return new PuzzleResult(gif.LightCount, 886);
+        }
+    }
+}

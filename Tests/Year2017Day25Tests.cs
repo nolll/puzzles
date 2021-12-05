@@ -1,4 +1,4 @@
-using ConsoleApp.Years.Year2017.Puzzles.Day25;
+using ConsoleApp.Puzzles.Year2017.Puzzles.Day25;
 using Core.TuringDiagnostics;
 using NUnit.Framework;
 

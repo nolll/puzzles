@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ConsoleApp.Years;
+using ConsoleApp.Puzzles;
 using Core.Tools;
 
 namespace ConsoleApp

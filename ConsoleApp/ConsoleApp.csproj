@@ -17,507 +17,471 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Years\Year2015\Inputs\01.txt">
+    <None Update="Puzzles\Year2015\Inputs\01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\02.txt">
+    <None Update="Puzzles\Year2015\Inputs\02.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\03.txt">
+    <None Update="Puzzles\Year2015\Inputs\03.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\05.txt">
+    <None Update="Puzzles\Year2015\Inputs\05.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\06.txt">
+    <None Update="Puzzles\Year2015\Inputs\06.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\07.txt">
+    <None Update="Puzzles\Year2015\Inputs\07.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\08.txt">
+    <None Update="Puzzles\Year2015\Inputs\08.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\09.txt">
+    <None Update="Puzzles\Year2015\Inputs\09.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\12.txt">
+    <None Update="Puzzles\Year2015\Inputs\12.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\13.txt">
+    <None Update="Puzzles\Year2015\Inputs\13.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\14.txt">
+    <None Update="Puzzles\Year2015\Inputs\14.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\15.txt">
+    <None Update="Puzzles\Year2015\Inputs\15.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\16.txt">
+    <None Update="Puzzles\Year2015\Inputs\16.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\17.txt">
+    <None Update="Puzzles\Year2015\Inputs\17.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\18.txt">
+    <None Update="Puzzles\Year2015\Inputs\18.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\19.txt">
+    <None Update="Puzzles\Year2015\Inputs\19.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\21.txt">
+    <None Update="Puzzles\Year2015\Inputs\21.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\22.txt">
+    <None Update="Puzzles\Year2015\Inputs\22.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\23.txt">
+    <None Update="Puzzles\Year2015\Inputs\23.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\24.txt">
+    <None Update="Puzzles\Year2015\Inputs\24.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2015\Inputs\25.txt">
+    <None Update="Puzzles\Year2015\Inputs\25.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\01.txt">
+    <None Update="Puzzles\Year2016\Inputs\01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\02.txt">
+    <None Update="Puzzles\Year2016\Inputs\02.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\03.txt">
+    <None Update="Puzzles\Year2016\Inputs\03.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\04.txt">
+    <None Update="Puzzles\Year2016\Inputs\04.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\06.txt">
+    <None Update="Puzzles\Year2016\Inputs\06.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\07.txt">
+    <None Update="Puzzles\Year2016\Inputs\07.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\08.txt">
+    <None Update="Puzzles\Year2016\Inputs\08.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\09.txt">
+    <None Update="Puzzles\Year2016\Inputs\09.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\10.txt">
+    <None Update="Puzzles\Year2016\Inputs\10.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\12.txt">
+    <None Update="Puzzles\Year2016\Inputs\12.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\15.txt">
+    <None Update="Puzzles\Year2016\Inputs\15.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\18.txt">
+    <None Update="Puzzles\Year2016\Inputs\18.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\20.txt">
+    <None Update="Puzzles\Year2016\Inputs\20.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\21.txt">
+    <None Update="Puzzles\Year2016\Inputs\21.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\22.txt">
+    <None Update="Puzzles\Year2016\Inputs\22.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\23.txt">
+    <None Update="Puzzles\Year2016\Inputs\23.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2016\Inputs\24.txt">
+    <None Update="Puzzles\Year2016\Inputs\24.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\01.txt">
+    <None Update="Puzzles\Year2017\Inputs\01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\02.txt">
+    <None Update="Puzzles\Year2017\Inputs\02.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\04.txt">
+    <None Update="Puzzles\Year2017\Inputs\04.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\05.txt">
+    <None Update="Puzzles\Year2017\Inputs\05.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\06.txt">
+    <None Update="Puzzles\Year2017\Inputs\06.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\07.txt">
+    <None Update="Puzzles\Year2017\Inputs\07.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\08.txt">
+    <None Update="Puzzles\Year2017\Inputs\08.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\09.txt">
+    <None Update="Puzzles\Year2017\Inputs\09.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\10.txt">
+    <None Update="Puzzles\Year2017\Inputs\10.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\11.txt">
+    <None Update="Puzzles\Year2017\Inputs\11.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\12.txt">
+    <None Update="Puzzles\Year2017\Inputs\12.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\13.txt">
+    <None Update="Puzzles\Year2017\Inputs\13.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\15.txt">
+    <None Update="Puzzles\Year2017\Inputs\15.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\16.txt">
+    <None Update="Puzzles\Year2017\Inputs\16.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\18.txt">
+    <None Update="Puzzles\Year2017\Inputs\18.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\19.txt">
+    <None Update="Puzzles\Year2017\Inputs\19.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\20.txt">
+    <None Update="Puzzles\Year2017\Inputs\20.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\21.txt">
+    <None Update="Puzzles\Year2017\Inputs\21.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\22.txt">
+    <None Update="Puzzles\Year2017\Inputs\22.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\23.txt">
+    <None Update="Puzzles\Year2017\Inputs\23.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\24.txt">
+    <None Update="Puzzles\Year2017\Inputs\24.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2017\Inputs\25.txt">
+    <None Update="Puzzles\Year2017\Inputs\25.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\01.txt">
+    <None Update="Puzzles\Year2018\Inputs\01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\02.txt">
+    <None Update="Puzzles\Year2018\Inputs\02.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\03.txt">
+    <None Update="Puzzles\Year2018\Inputs\03.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\04.txt">
+    <None Update="Puzzles\Year2018\Inputs\04.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\05.txt">
+    <None Update="Puzzles\Year2018\Inputs\05.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\06.txt">
+    <None Update="Puzzles\Year2018\Inputs\06.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\07.txt">
+    <None Update="Puzzles\Year2018\Inputs\07.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\08.txt">
+    <None Update="Puzzles\Year2018\Inputs\08.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\09.txt">
+    <None Update="Puzzles\Year2018\Inputs\09.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\10.txt">
+    <None Update="Puzzles\Year2018\Inputs\10.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\12.txt">
+    <None Update="Puzzles\Year2018\Inputs\12.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\13.txt">
+    <None Update="Puzzles\Year2018\Inputs\13.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\15.txt">
+    <None Update="Puzzles\Year2018\Inputs\15.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\16.txt">
+    <None Update="Puzzles\Year2018\Inputs\16.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\17.txt">
+    <None Update="Puzzles\Year2018\Inputs\17.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\18.txt">
+    <None Update="Puzzles\Year2018\Inputs\18.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\19.txt">
+    <None Update="Puzzles\Year2018\Inputs\19.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\20.txt">
+    <None Update="Puzzles\Year2018\Inputs\20.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\21.txt">
+    <None Update="Puzzles\Year2018\Inputs\21.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\22.txt">
+    <None Update="Puzzles\Year2018\Inputs\22.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\23.txt">
+    <None Update="Puzzles\Year2018\Inputs\23.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\25.txt">
+    <None Update="Puzzles\Year2018\Inputs\25.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2018\Inputs\24.txt">
+    <None Update="Puzzles\Year2018\Inputs\24.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\25.txt">
+    <None Update="Puzzles\Year2019\Inputs\25.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\24.txt">
+    <None Update="Puzzles\Year2019\Inputs\24.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\23.txt">
+    <None Update="Puzzles\Year2019\Inputs\23.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\22.txt">
+    <None Update="Puzzles\Year2019\Inputs\22.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\21.txt">
+    <None Update="Puzzles\Year2019\Inputs\21.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\20.txt">
+    <None Update="Puzzles\Year2019\Inputs\20.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\19.txt">
+    <None Update="Puzzles\Year2019\Inputs\19.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\18.txt">
+    <None Update="Puzzles\Year2019\Inputs\18.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\17.txt">
+    <None Update="Puzzles\Year2019\Inputs\17.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\16.txt">
+    <None Update="Puzzles\Year2019\Inputs\16.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\15.txt">
+    <None Update="Puzzles\Year2019\Inputs\15.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\14.txt">
+    <None Update="Puzzles\Year2019\Inputs\14.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\13.txt">
+    <None Update="Puzzles\Year2019\Inputs\13.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\12.txt">
+    <None Update="Puzzles\Year2019\Inputs\12.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\11.txt">
+    <None Update="Puzzles\Year2019\Inputs\11.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\10.txt">
+    <None Update="Puzzles\Year2019\Inputs\10.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\09.txt">
+    <None Update="Puzzles\Year2019\Inputs\09.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\08.txt">
+    <None Update="Puzzles\Year2019\Inputs\08.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\07.txt">
+    <None Update="Puzzles\Year2019\Inputs\07.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\06.txt">
+    <None Update="Puzzles\Year2019\Inputs\06.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\05.txt">
+    <None Update="Puzzles\Year2019\Inputs\05.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\03.txt">
+    <None Update="Puzzles\Year2019\Inputs\03.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\02.txt">
+    <None Update="Puzzles\Year2019\Inputs\02.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2019\Inputs\01.txt">
+    <None Update="Puzzles\Year2019\Inputs\01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\01.txt">
+    <None Update="Puzzles\Year2020\Inputs\01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\02.txt">
+    <None Update="Puzzles\Year2020\Inputs\02.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\25.txt">
+    <None Update="Puzzles\Year2020\Inputs\25.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\24.txt">
+    <None Update="Puzzles\Year2020\Inputs\24.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\22.txt">
+    <None Update="Puzzles\Year2020\Inputs\22.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\21.txt">
+    <None Update="Puzzles\Year2020\Inputs\21.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\20.txt">
+    <None Update="Puzzles\Year2020\Inputs\20.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\19.txt">
+    <None Update="Puzzles\Year2020\Inputs\19.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\18.txt">
+    <None Update="Puzzles\Year2020\Inputs\18.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\17.txt">
+    <None Update="Puzzles\Year2020\Inputs\17.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\16.txt">
+    <None Update="Puzzles\Year2020\Inputs\16.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\14.txt">
+    <None Update="Puzzles\Year2020\Inputs\14.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\13.txt">
+    <None Update="Puzzles\Year2020\Inputs\13.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\12.txt">
+    <None Update="Puzzles\Year2020\Inputs\12.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\11.txt">
+    <None Update="Puzzles\Year2020\Inputs\11.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\10.txt">
+    <None Update="Puzzles\Year2020\Inputs\10.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\09.txt">
+    <None Update="Puzzles\Year2020\Inputs\09.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\08.txt">
+    <None Update="Puzzles\Year2020\Inputs\08.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\07.txt">
+    <None Update="Puzzles\Year2020\Inputs\07.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\06.txt">
+    <None Update="Puzzles\Year2020\Inputs\06.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\05.txt">
+    <None Update="Puzzles\Year2020\Inputs\05.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\04.txt">
+    <None Update="Puzzles\Year2020\Inputs\04.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2020\Inputs\03.txt">
+    <None Update="Puzzles\Year2020\Inputs\03.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\07.txt">
+    <None Update="Puzzles\Year2021\Inputs\07.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\14.txt">
+    <None Update="Puzzles\Year2021\Inputs\14.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\15.txt">
+    <None Update="Puzzles\Year2021\Inputs\15.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\16.txt">
+    <None Update="Puzzles\Year2021\Inputs\16.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\17.txt">
+    <None Update="Puzzles\Year2021\Inputs\17.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\18.txt">
+    <None Update="Puzzles\Year2021\Inputs\18.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\19.txt">
+    <None Update="Puzzles\Year2021\Inputs\19.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\20.txt">
+    <None Update="Puzzles\Year2021\Inputs\20.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\21.txt">
+    <None Update="Puzzles\Year2021\Inputs\21.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\22.txt">
+    <None Update="Puzzles\Year2021\Inputs\22.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\23.txt">
+    <None Update="Puzzles\Year2021\Inputs\23.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\24.txt">
+    <None Update="Puzzles\Year2021\Inputs\24.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\25.txt">
+    <None Update="Puzzles\Year2021\Inputs\25.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\13.txt">
+    <None Update="Puzzles\Year2021\Inputs\13.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\12.txt">
+    <None Update="Puzzles\Year2021\Inputs\12.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\11.txt">
+    <None Update="Puzzles\Year2021\Inputs\11.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\10.txt">
+    <None Update="Puzzles\Year2021\Inputs\10.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\09.txt">
+    <None Update="Puzzles\Year2021\Inputs\09.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\08.txt">
+    <None Update="Puzzles\Year2021\Inputs\08.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\06.txt">
+    <None Update="Puzzles\Year2021\Inputs\06.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\05.txt">
+    <None Update="Puzzles\Year2021\Inputs\05.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\04.txt">
+    <None Update="Puzzles\Year2021\Inputs\04.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\03.txt">
+    <None Update="Puzzles\Year2021\Inputs\03.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\02.txt">
+    <None Update="Puzzles\Year2021\Inputs\02.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Years\Year2021\Inputs\01.txt">
+    <None Update="Puzzles\Year2021\Inputs\01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Years\Year2015\Puzzles\Day23\" />
-    <Folder Include="Years\Year2015\Puzzles\Day25\" />
-    <Folder Include="Years\Year2016\Puzzles\Day08\" />
-    <Folder Include="Years\Year2017\Puzzles\Day04\" />
-    <Folder Include="Years\Year2017\Puzzles\Day25\" />
-    <Folder Include="Years\Year2019\Puzzles\Day18\" />
-    <Folder Include="Years\Year2020\Puzzles\Day03\" />
-    <Folder Include="Years\Year2020\Puzzles\Day11\" />
-    <Folder Include="Years\Year2021\Puzzles\Day06\" />
-    <Folder Include="Years\Year2021\Puzzles\Day07\" />
-    <Folder Include="Years\Year2021\Puzzles\Day01\" />
-    <Folder Include="Years\Year2021\Puzzles\Day02\" />
-    <Folder Include="Years\Year2021\Puzzles\Day03\" />
-    <Folder Include="Years\Year2021\Puzzles\Day04\" />
-    <Folder Include="Years\Year2021\Puzzles\Day05\" />
-    <Folder Include="Years\Year2021\Puzzles\Day08\" />
-    <Folder Include="Years\Year2021\Puzzles\Day09\" />
-    <Folder Include="Years\Year2021\Puzzles\Day10\" />
-    <Folder Include="Years\Year2021\Puzzles\Day11\" />
-    <Folder Include="Years\Year2021\Puzzles\Day12\" />
-    <Folder Include="Years\Year2021\Puzzles\Day13\" />
-    <Folder Include="Years\Year2021\Puzzles\Day14\" />
-    <Folder Include="Years\Year2021\Puzzles\Day15\" />
-    <Folder Include="Years\Year2021\Puzzles\Day16\" />
-    <Folder Include="Years\Year2021\Puzzles\Day17\" />
-    <Folder Include="Years\Year2021\Puzzles\Day18\" />
-    <Folder Include="Years\Year2021\Puzzles\Day19\" />
-    <Folder Include="Years\Year2021\Puzzles\Day20\" />
-    <Folder Include="Years\Year2021\Puzzles\Day21\" />
-    <Folder Include="Years\Year2021\Puzzles\Day22\" />
-    <Folder Include="Years\Year2021\Puzzles\Day23\" />
-    <Folder Include="Years\Year2021\Puzzles\Day24\" />
-    <Folder Include="Years\Year2021\Puzzles\Day25\" />
   </ItemGroup>
 
 </Project>

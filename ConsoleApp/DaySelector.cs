@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ConsoleApp.Years;
-using ConsoleApp.Years.Year2015;
-using ConsoleApp.Years.Year2016;
-using ConsoleApp.Years.Year2017;
-using ConsoleApp.Years.Year2018;
-using ConsoleApp.Years.Year2019;
-using ConsoleApp.Years.Year2020;
-using ConsoleApp.Years.Year2021;
+using ConsoleApp.Puzzles;
+using ConsoleApp.Puzzles.Year2015;
+using ConsoleApp.Puzzles.Year2016;
+using ConsoleApp.Puzzles.Year2017;
+using ConsoleApp.Puzzles.Year2018;
+using ConsoleApp.Puzzles.Year2019;
+using ConsoleApp.Puzzles.Year2020;
+using ConsoleApp.Puzzles.Year2021;
 
 namespace ConsoleApp
 {

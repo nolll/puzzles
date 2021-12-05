@@ -1,5 +1,5 @@
 using System.Linq;
-using ConsoleApp.Years.Year2020.Puzzles.Day03;
+using ConsoleApp.Puzzles.Year2020.Puzzles.Day03;
 using Core.TreeNavigation;
 using NUnit.Framework;
 

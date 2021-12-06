@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Core.PuzzleClasses;
+using Core.Platform;
 
 namespace Core.Puzzles.Year2019.Day11
 {

@@ -1,5 +1,5 @@
 ﻿using Core.Common.Strings;
-using Core.PuzzleClasses;
+using Core.Platform;
 
 namespace Core.Puzzles.Year2015.Day22
 {

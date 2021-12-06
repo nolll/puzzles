@@ -1,4 +1,4 @@
-﻿using Core.PuzzleClasses;
+﻿using Core.Platform;
 
 namespace Core.Puzzles.Year2020.Day16
 {

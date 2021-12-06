@@ -1,5 +1,5 @@
 ﻿using Core.Common.Hashing;
-using Core.PuzzleClasses;
+using Core.Platform;
 
 namespace Core.Puzzles.Year2017.Day10
 {

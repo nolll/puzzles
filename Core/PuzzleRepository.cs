@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Core.PuzzleClasses;
+using Core.Platform;
 using Core.Puzzles.Year2015;
 using Core.Puzzles.Year2016;
 using Core.Puzzles.Year2017;

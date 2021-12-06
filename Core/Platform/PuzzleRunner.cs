@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Common.Timing;
 
-namespace Core.PuzzleClasses
+namespace Core.Platform
 {
     public class PuzzleRunner
     {

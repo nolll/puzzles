@@ -1,4 +1,4 @@
-﻿namespace Core.PuzzleClasses
+﻿namespace Core.Platform
 {
     public interface IMultiDayPrinter
     {

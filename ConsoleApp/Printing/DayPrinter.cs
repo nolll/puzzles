@@ -1,5 +1,5 @@
 ﻿using System;
-using Core.PuzzleClasses;
+using Core.Platform;
 
 namespace ConsoleApp.Printing
 {

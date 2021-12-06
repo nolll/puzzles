@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Core.PuzzleClasses;
+using Core.Platform;
 using Core.Puzzles.Year2015.Day01;
 using Core.Puzzles.Year2015.Day02;
 using Core.Puzzles.Year2015.Day03;

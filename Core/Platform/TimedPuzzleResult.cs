@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.PuzzleClasses
+namespace Core.Platform
 {
     public class TimedPuzzleResult : PuzzleResult
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.PuzzleClasses
+namespace Core.Platform
 {
     public abstract class Event
     {

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Core.PuzzleClasses
+namespace Core.Platform
 {
     public abstract class PuzzleDay
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Tools;
+using Core.CoordinateSystems;
 
 namespace ConsoleApp.Puzzles.Year2020.Day11
 {

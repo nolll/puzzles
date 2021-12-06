@@ -1,4 +1,4 @@
-namespace Core.Tools
+namespace Core.CoordinateSystems
 {
     public abstract class BaseMatrix
     {

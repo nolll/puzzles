@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.KineticSculptureTiming;
-using Core.Tools;
+using Core.Strings;
 
 namespace ConsoleApp.Puzzles.Year2016.Day15
 {

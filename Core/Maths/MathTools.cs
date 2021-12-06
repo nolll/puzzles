@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.Tools
+namespace Core.Maths
 {
     public static class MathTools
     {
@@ -23,7 +22,7 @@ namespace Core.Tools
 
         public static long Lcm(long a, long b)
         {
-            return Math.Abs(a * b) / Gcd(a, b);
+            return System.Math.Abs(a * b) / Gcd(a, b);
         }
     }
 }

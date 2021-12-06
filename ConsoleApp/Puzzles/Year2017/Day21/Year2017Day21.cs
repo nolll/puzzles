@@ -1,6 +1,4 @@
-﻿using Core.FractalArt;
-
-namespace ConsoleApp.Puzzles.Year2017.Day21
+﻿namespace ConsoleApp.Puzzles.Year2017.Day21
 {
     public class Year2017Day21 : Year2017Day
     {

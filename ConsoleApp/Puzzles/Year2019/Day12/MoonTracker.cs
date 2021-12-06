@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Tools;
+using Core.CoordinateSystems;
+using Core.Maths;
 
 namespace ConsoleApp.Puzzles.Year2019.Day12
 {

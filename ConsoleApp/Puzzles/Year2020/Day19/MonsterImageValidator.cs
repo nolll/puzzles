@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Core.Tools;
+using Core.Strings;
 
 namespace ConsoleApp.Puzzles.Year2020.Day19
 {

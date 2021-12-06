@@ -1,8 +1,9 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Core.Strings;
 
-namespace Core.Tools
+namespace Core.Hashing
 {
     public class Hashfactory
     {

@@ -1,6 +1,4 @@
-﻿using Core.CategorySix;
-
-namespace ConsoleApp.Puzzles.Year2019.Day23
+﻿namespace ConsoleApp.Puzzles.Year2019.Day23
 {
     public class Year2019Day23 : Year2019Day
     {

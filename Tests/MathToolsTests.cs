@@ -1,4 +1,4 @@
-using Core.Tools;
+using Core.Maths;
 using NUnit.Framework;
 
 namespace Tests

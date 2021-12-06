@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Tools
+namespace Core.Strings
 {
     public static class LevenshteinDistance
     {

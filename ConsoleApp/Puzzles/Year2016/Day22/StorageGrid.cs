@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Core.GridComputing;
-using Core.Tools;
+using Core.CoordinateSystems;
+using Core.Strings;
 
 namespace ConsoleApp.Puzzles.Year2016.Day22
 {

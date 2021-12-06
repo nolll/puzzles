@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Tools;
+using Core.Lists;
 
 namespace ConsoleApp.Puzzles.Year2018.Day09
 {

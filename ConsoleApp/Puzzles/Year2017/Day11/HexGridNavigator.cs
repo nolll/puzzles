@@ -1,5 +1,5 @@
 using System;
-using Core.Tools;
+using Core.CoordinateSystems;
 
 namespace ConsoleApp.Puzzles.Year2017.Day11
 {

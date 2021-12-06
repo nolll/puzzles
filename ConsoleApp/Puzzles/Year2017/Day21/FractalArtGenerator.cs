@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Core.FractalArt;
-using Core.Tools;
+using Core.CoordinateSystems;
+using Core.Strings;
 
 namespace ConsoleApp.Puzzles.Year2017.Day21
 {

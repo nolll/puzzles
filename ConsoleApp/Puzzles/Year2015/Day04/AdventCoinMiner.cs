@@ -1,5 +1,5 @@
 ﻿using System;
-using Core.Tools;
+using Core.Hashing;
 
 namespace ConsoleApp.Puzzles.Year2015.Day04
 {

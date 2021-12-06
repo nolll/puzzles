@@ -1,4 +1,4 @@
-using Core.Tools;
+using Core.CoordinateSystems;
 
 namespace ConsoleApp.Puzzles.Year2016.Day24
 {

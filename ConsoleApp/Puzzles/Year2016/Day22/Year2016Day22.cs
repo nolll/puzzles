@@ -1,6 +1,4 @@
-﻿using Core.GridComputing;
-
-namespace ConsoleApp.Puzzles.Year2016.Day22
+﻿namespace ConsoleApp.Puzzles.Year2016.Day22
 {
     public class Year2016Day22 : Year2016Day
     {

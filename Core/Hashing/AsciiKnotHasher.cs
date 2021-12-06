@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Core.Tools
+namespace Core.Hashing
 {
     public class AsciiKnotHasher
     {
         private readonly int[] _list;
         private int _listIndex;
         private int _skip;
-        private int _lengthIndex;
+        private readonly int _lengthIndex;
         private readonly int[] _lengths;
 
         public string Hash { get; }
@@ -54,18 +54,30 @@ namespace Core.Tools
         {
             for (var i = 0; i < _list.Length; i += 16)
             {
-                yield return _list[i] ^ _list[i + 1] ^ _list[i + 2] ^ _list[i + 3] ^ _list[i + 4] ^ _list[i + 5] ^ _list[i + 6] ^ _list[i + 7] ^
-                             _list[i + 8] ^ _list[i + 9] ^ _list[i + 10] ^ _list[i + 11] ^ _list[i + 12] ^ _list[i + 13] ^ _list[i + 14] ^ _list[i + 15];
+                yield return _list[i] ^ 
+                             _list[i + 1] ^ 
+                             _list[i + 2] ^ 
+                             _list[i + 3] ^ 
+                             _list[i + 4] ^ 
+                             _list[i + 5] ^ 
+                             _list[i + 6] ^ 
+                             _list[i + 7] ^
+                             _list[i + 8] ^ 
+                             _list[i + 9] ^ 
+                             _list[i + 10] ^ 
+                             _list[i + 11] ^ 
+                             _list[i + 12] ^ 
+                             _list[i + 13] ^ 
+                             _list[i + 14] ^ 
+                             _list[i + 15];
             }
         }
 
         private int[] FillList(int size)
         {
             var list = new int[size];
-            for (var i = 0; i < size; i++)
-            {
+            for (var i = 0; i < size; i++) 
                 list[i] = i;
-            }
 
             return list;
         }

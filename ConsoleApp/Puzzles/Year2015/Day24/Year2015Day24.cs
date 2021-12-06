@@ -1,6 +1,4 @@
-﻿using Core.BalancedPresents;
-
-namespace ConsoleApp.Puzzles.Year2015.Day24
+﻿namespace ConsoleApp.Puzzles.Year2015.Day24
 {
     public class Year2015Day24 : Year2015Day
     {

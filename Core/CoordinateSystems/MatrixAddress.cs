@@ -1,6 +1,6 @@
 using System;
 
-namespace Core.Tools
+namespace Core.CoordinateSystems
 {
     public class MatrixAddress : IEquatable<MatrixAddress>
     {

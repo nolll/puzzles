@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Tools;
+using Core.CoordinateSystems;
+using Core.Hashing;
 
 namespace ConsoleApp.Puzzles.Year2016.Day17
 {

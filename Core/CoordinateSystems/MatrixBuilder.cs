@@ -1,7 +1,6 @@
-using System.IO.Compression;
 using System.Linq;
 
-namespace Core.Tools
+namespace Core.CoordinateSystems
 {
     public static class MatrixBuilder
     {

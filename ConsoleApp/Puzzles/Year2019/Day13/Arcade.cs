@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Core.Computer;
-using Core.Tools;
+using Core.CoordinateSystems;
 
 namespace ConsoleApp.Puzzles.Year2019.Day13
 {

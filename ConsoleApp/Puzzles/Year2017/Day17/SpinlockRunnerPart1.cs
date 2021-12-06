@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Core.Tools;
+using Core.Lists;
 
 namespace ConsoleApp.Puzzles.Year2017.Day17
 {

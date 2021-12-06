@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Core.Tools;
+using Core.CoordinateSystems;
+using Core.Hashing;
 
 namespace ConsoleApp.Puzzles.Year2017.Day14
 {

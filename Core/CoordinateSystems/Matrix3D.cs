@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Core.Tools
+namespace Core.CoordinateSystems
 {
     public class Matrix3D<T> : BaseMatrix
     {

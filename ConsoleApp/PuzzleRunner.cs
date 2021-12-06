@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ConsoleApp.Puzzles;
-using Core.Tools;
+using Core.Timing;
 
 namespace ConsoleApp
 {

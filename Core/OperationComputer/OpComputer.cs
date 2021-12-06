@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Core.Tools;
+using Core.Strings;
 
 namespace Core.OperationComputer
 {

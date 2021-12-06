@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Core.CategorySix;
 
 namespace ConsoleApp.Puzzles.Year2019.Day23
 {

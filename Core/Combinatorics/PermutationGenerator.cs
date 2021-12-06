@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.Tools
+namespace Core.Combinatorics
 {
     public static class PermutationGenerator
     {

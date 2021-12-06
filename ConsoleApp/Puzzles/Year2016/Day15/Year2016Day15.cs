@@ -1,6 +1,4 @@
-﻿using Core.KineticSculptureTiming;
-
-namespace ConsoleApp.Puzzles.Year2016.Day15
+﻿namespace ConsoleApp.Puzzles.Year2016.Day15
 {
     public class Year2016Day15 : Year2016Day
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.Tools
+namespace Core.Strings
 {
     public static class PuzzleInputReader
     {

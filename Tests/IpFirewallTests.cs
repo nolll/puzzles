@@ -1,5 +1,4 @@
 using ConsoleApp.Puzzles.Year2016.Day20;
-using Core.IpFirewall;
 using NUnit.Framework;
 
 namespace Tests

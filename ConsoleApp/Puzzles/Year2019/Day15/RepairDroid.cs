@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Computer;
-using Core.CoordinateSystems;
+using Core.Common.Computers.IntCode;
+using Core.Common.CoordinateSystems;
 
 namespace ConsoleApp.Puzzles.Year2019.Day15
 {

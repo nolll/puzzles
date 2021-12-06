@@ -1,4 +1,4 @@
-using Core.Computer;
+using Core.Common.Computers.IntCode;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Core.Strings;
+using Core.Common.Strings;
 
 namespace ConsoleApp.Puzzles.Year2020.Day18
 {

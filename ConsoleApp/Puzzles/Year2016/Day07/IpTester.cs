@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Strings;
+using Core.Common.Strings;
 
 namespace ConsoleApp.Puzzles.Year2016.Day07
 {

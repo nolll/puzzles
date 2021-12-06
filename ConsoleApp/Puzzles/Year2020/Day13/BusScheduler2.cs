@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Maths;
-using Core.Strings;
+using Core.Common.Maths;
+using Core.Common.Strings;
 
 namespace ConsoleApp.Puzzles.Year2020.Day13
 {

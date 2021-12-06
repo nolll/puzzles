@@ -1,5 +1,5 @@
 using ConsoleApp.Puzzles.Year2016.Day14;
-using Core.Strings;
+using Core.Common.Strings;
 using NUnit.Framework;
 
 namespace Tests

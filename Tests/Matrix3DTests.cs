@@ -1,5 +1,5 @@
 using System.Linq;
-using Core.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 using NUnit.Framework;
 
 namespace Tests

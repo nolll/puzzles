@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Core.CoordinateSystems;
-using Core.Strings;
+using Core.Common.CoordinateSystems;
+using Core.Common.Strings;
 
 namespace ConsoleApp.Puzzles.Year2017.Day21
 {

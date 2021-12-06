@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Computer;
+using Core.Common.Computers.IntCode;
 
 namespace ConsoleApp.Puzzles.Year2019.Day23
 {

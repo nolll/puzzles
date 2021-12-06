@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Core.Strings;
+using Core.Common.Strings;
 
 namespace ConsoleApp.Puzzles.Year2021.Day02
 {

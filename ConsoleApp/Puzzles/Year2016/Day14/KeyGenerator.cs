@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Core.Hashing;
-using Core.Strings;
+using Core.Common.Hashing;
+using Core.Common.Strings;
 
 namespace ConsoleApp.Puzzles.Year2016.Day14
 {

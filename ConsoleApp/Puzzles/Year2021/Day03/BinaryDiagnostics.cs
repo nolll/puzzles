@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Core.Strings;
+using Core.Common.Strings;
 
 namespace ConsoleApp.Puzzles.Year2021.Day03
 {

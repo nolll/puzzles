@@ -1,4 +1,4 @@
-﻿using Core.Strings;
+﻿using Core.Common.Strings;
 
 namespace ConsoleApp.Puzzles.Year2019.Day03
 {

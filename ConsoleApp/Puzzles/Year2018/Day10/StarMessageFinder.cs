@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.CoordinateSystems;
-using Core.Strings;
+using Core.Common.CoordinateSystems;
+using Core.Common.Strings;
 
 namespace ConsoleApp.Puzzles.Year2018.Day10
 {

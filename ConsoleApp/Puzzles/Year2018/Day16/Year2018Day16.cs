@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Core.OperationComputer;
+using Core.Common.Computers.Operation;
 
 namespace ConsoleApp.Puzzles.Year2018.Day16
 {

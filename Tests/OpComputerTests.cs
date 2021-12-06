@@ -1,4 +1,4 @@
-using Core.OperationComputer;
+using Core.Common.Computers.Operation;
 using NUnit.Framework;
 
 namespace Tests

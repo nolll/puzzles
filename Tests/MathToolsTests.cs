@@ -1,4 +1,4 @@
-using Core.Maths;
+using Core.Common.Maths;
 using NUnit.Framework;
 
 namespace Tests

@@ -31,7 +31,7 @@ namespace ConsoleApp.Puzzles.Year2017
     {
         public override int Year => 2017;
 
-        public override IList<PuzzleDay> Days => new List<PuzzleDay>
+        public override List<PuzzleDay> Days => new()
         {
             new Year2017Day01(),
             new Year2017Day02(),

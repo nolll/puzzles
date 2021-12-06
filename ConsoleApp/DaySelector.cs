@@ -41,7 +41,7 @@ namespace ConsoleApp
             return _events.Last();
         }
         
-        public IList<PuzzleDay> GetAll()
+        public List<PuzzleDay> GetAll()
         {
             var eventDays = _events.Select(o => o.Days);
             var allDays = new List<PuzzleDay>();

@@ -4,7 +4,7 @@ using Core.PuzzleClasses;
 
 namespace ConsoleApp.Printing
 {
-    public class SingleDayPrinter : DayPrinter
+    public class SingleDayPrinter : DayPrinter, ISingleDayPrinter
     {
         private const string Divider = "--------------------------------------------------";
 

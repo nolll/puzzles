@@ -3,14 +3,14 @@ using Core.PuzzleClasses;
 
 namespace ConsoleApp.Printing
 {
-    public class MultiDayPrinter : DayPrinter
+    public class MultiDayPrinter : DayPrinter, IMultiDayPrinter
     {
         private readonly int _timeout;
         private const int CommentLength = 24;
 
-        public MultiDayPrinter(int timeout)
+        public MultiDayPrinter(int? timeout = null)
         {
-            _timeout = timeout;
+            _timeout = timeout ?? 0;
         }
 
         public void PrintHeader()

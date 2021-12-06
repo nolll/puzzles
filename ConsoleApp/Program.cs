@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using ConsoleApp.ConsoleTools;
+using ConsoleApp.Printing;
 using ConsoleApp.Puzzles;
 
 namespace ConsoleApp
 {
     public class Program
     {
-        private static DaySelector _daySelector;
         private const int PuzzleTimeout = 10;
 
         private const int DebugYear = 2019;
@@ -16,53 +16,84 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-            _daySelector = new DaySelector();
-            var parameters = Parameters.Parse(args);
+            var parameters = ParseParameters(args);
 
             if (parameters.ShowHelp)
-            {
-                var helpPrinter = new HelpPrinter();
-                helpPrinter.Print();
-                return;
-            }
-
-            if (parameters.Year != null && parameters.Day == null)
-            {
-                var @event = _daySelector.GetEvent(parameters.Year);
-                if (@event == null)
-                    throw new Exception("Event not found!");
-
-                var eventDays = @event.Days;
-                var filteredDays = FilterDays(eventDays, parameters);
-                var runner = new PuzzleRunner(timeout: PuzzleTimeout);
-                runner.Run(filteredDays);
-                return;
-            }
-
-            if (parameters.Year == null && parameters.Day == null)
-            {
-#if SINGLE
-                parameters = new Parameters(day: DebugDay, year: DebugYear);
-#else
-                var allDays = _daySelector.GetAll();
-                var filteredDays = FilterDays(allDays, parameters);
-                var allRunner = new PuzzleRunner(timeout: PuzzleTimeout);
-                allRunner.Run(filteredDays);
-                return;
-#endif
-            }
-
-            var day = _daySelector.GetDay(parameters.Year, parameters.Day);
-            if (day == null)
-            {
-                throw new Exception("The specified day could not be found.");
-            }
-
-            var dayRunner = new PuzzleRunner(throwExceptions: true);
-            dayRunner.Run(day);
+                ShowHelp();
+            else
+                RunPuzzles(parameters);
         }
 
-        private static IList<PuzzleDay> FilterDays(IList<PuzzleDay> days, Parameters parameters)
+        private static void RunPuzzles(Parameters parameters)
+        {
+            if (parameters.Year != null && parameters.Day != null)
+                RunSingle(parameters);
+            else if (parameters.Year != null)
+                RunEvent(parameters);
+            else
+                RunAll(parameters);
+        }
+
+        private static void RunSingle(Parameters parameters)
+        {
+            var daySelector = new DaySelector();
+            var foundDay = daySelector.GetDay(parameters.Year, parameters.Day);
+            if (foundDay == null)
+                throw new Exception("The specified day could not be found.");
+            
+            RunDays(new List<PuzzleDay>{foundDay}, null, true);
+        }
+
+        private static void RunEvent(Parameters parameters)
+        {
+            var daySelector = new DaySelector();
+            var @event = daySelector.GetEvent(parameters.Year);
+            if (@event == null)
+                throw new Exception("Event not found!");
+
+            var filteredDays = FilterDays(@event.Days, parameters);
+            RunDays(filteredDays, PuzzleTimeout, false);
+        }
+
+        private static void RunAll(Parameters parameters)
+        {
+            var daySelector = new DaySelector();
+            var allDays = daySelector.GetAll();
+            var filteredDays = FilterDays(allDays, parameters);
+            RunDays(filteredDays, PuzzleTimeout, false);
+        }
+
+        private static void RunDays(List<PuzzleDay> days, int? timeout, bool throwExceptions)
+        {
+            var runner = GetPuzzleRunner(timeout, throwExceptions);
+            
+            if (days.Count == 1)
+                runner.Run(days.First());
+            else
+                runner.Run(days);
+        }
+
+        private static PuzzleRunner GetPuzzleRunner(int? timeout, bool throwExceptions)
+        {
+            return new(new SingleDayPrinter(), new MultiDayPrinter(timeout), throwExceptions, timeout);
+        }
+
+        private static void ShowHelp()
+        {
+            var helpPrinter = new HelpPrinter();
+            helpPrinter.Print();
+        }
+
+        private static Parameters ParseParameters(string[] args)
+        {
+#if SINGLE
+            return new Parameters(day: DebugDay, year: DebugYear);
+#else
+            return Parameters.Parse(args);
+#endif
+        }
+
+        private static List<PuzzleDay> FilterDays(List<PuzzleDay> days, Parameters parameters)
         {
             if (parameters.RunSlowOnly)
                 return days.Where(o => o.IsSlow).ToList();

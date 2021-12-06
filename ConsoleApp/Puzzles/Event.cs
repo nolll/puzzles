@@ -6,7 +6,7 @@ namespace ConsoleApp.Puzzles
     public abstract class Event
     {
         public abstract int Year { get; }
-        public abstract IList<PuzzleDay> Days { get; }
+        public abstract List<PuzzleDay> Days { get; }
         
         public PuzzleDay GetDay(int? selectedDay)
         {

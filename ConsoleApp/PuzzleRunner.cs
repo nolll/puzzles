@@ -8,34 +8,48 @@ using Core.PuzzleClasses;
 
 namespace ConsoleApp
 {
+    public interface IMultiDayPrinter
+    {
+        void PrintHeader();
+        void PrintDay(DayResult dayResult);
+        void PrintFooter();
+    }
+
+    public interface ISingleDayPrinter
+    {
+        void PrintDay(DayResult dayResult);
+    }
+    
     public class PuzzleRunner
     {
+        private readonly ISingleDayPrinter _singleDayPrinter;
+        private readonly IMultiDayPrinter _multiDayPrinter;
         private readonly bool _throwExceptions;
         private readonly int? _timeout;
 
-        public PuzzleRunner(bool throwExceptions = false, int? timeout = null)
+        public PuzzleRunner(ISingleDayPrinter singleDayPrinter, IMultiDayPrinter multiDayPrinter, bool throwExceptions = false, int? timeout = null)
         {
+            _singleDayPrinter = singleDayPrinter;
+            _multiDayPrinter = multiDayPrinter;
             _throwExceptions = throwExceptions;
             _timeout = timeout;
         }
 
         public void Run(IList<PuzzleDay> days)
         {
-            var printer = new MultiDayPrinter(_timeout ?? 0);
-            printer.PrintHeader();
+            _multiDayPrinter.PrintHeader();
             foreach (var day in days)
             {
                 var result = RunDay(day);
-                printer.PrintDay(result);
+                _multiDayPrinter.PrintDay(result);
             }
-            printer.PrintFooter();
+            _multiDayPrinter.PrintFooter();
         }
 
         public void Run(PuzzleDay day)
         {
             var result = RunDay(day);
-            var printer = new SingleDayPrinter();
-            printer.PrintDay(result);
+            _singleDayPrinter.PrintDay(result);
         }
 
         private DayResult RunDay(PuzzleDay day)

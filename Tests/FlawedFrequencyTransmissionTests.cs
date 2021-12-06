@@ -1,4 +1,4 @@
-using Core.FlawedFrequencyTransmission;
+using ConsoleApp.Puzzles.Year2019.Day16;
 using NUnit.Framework;
 
 namespace Tests

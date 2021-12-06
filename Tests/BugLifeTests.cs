@@ -1,4 +1,4 @@
-using Core.BugLife;
+using ConsoleApp.Puzzles.Year2019.Day24;
 using NUnit.Framework;
 
 namespace Tests

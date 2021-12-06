@@ -1,4 +1,4 @@
-using Core.Asteroids;
+using ConsoleApp.Puzzles.Year2019.Day10;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,5 +1,4 @@
-﻿using Core.IntersectionFinder;
-using Core.Tools;
+﻿using Core.Tools;
 
 namespace ConsoleApp.Puzzles.Year2019.Day03
 {

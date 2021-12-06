@@ -1,6 +1,4 @@
-﻿using Core.FlawedFrequencyTransmission;
-
-namespace ConsoleApp.Puzzles.Year2019.Day16
+﻿namespace ConsoleApp.Puzzles.Year2019.Day16
 {
     public class Year2019Day16 : Year2019Day
     {

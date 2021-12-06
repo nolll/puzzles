@@ -1,6 +1,4 @@
-﻿using Core.Asteroids;
-
-namespace ConsoleApp.Puzzles.Year2019.Day10
+﻿namespace ConsoleApp.Puzzles.Year2019.Day10
 {
     public class Year2019Day10 : Year2019Day
     {

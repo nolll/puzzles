@@ -1,4 +1,4 @@
-using Core.IntersectionFinder;
+using ConsoleApp.Puzzles.Year2019.Day03;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,6 +1,4 @@
-﻿using Core.BugLife;
-
-namespace ConsoleApp.Puzzles.Year2019.Day24
+﻿namespace ConsoleApp.Puzzles.Year2019.Day24
 {
     public class Year2019Day24 : Year2019Day
     {

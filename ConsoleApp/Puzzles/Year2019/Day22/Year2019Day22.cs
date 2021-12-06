@@ -1,6 +1,4 @@
-﻿using Core.CardShuffling;
-
-namespace ConsoleApp.Puzzles.Year2019.Day22
+﻿namespace ConsoleApp.Puzzles.Year2019.Day22
 {
     public class Year2019Day22 : Year2019Day
     {

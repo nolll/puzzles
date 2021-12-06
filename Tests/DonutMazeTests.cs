@@ -1,4 +1,4 @@
-using Core.DonutMaze;
+using ConsoleApp.Puzzles.Year2019.Day20;
 using NUnit.Framework;
 
 namespace Tests

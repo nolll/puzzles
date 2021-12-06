@@ -1,5 +1,5 @@
 using System.Linq;
-using Core.ExperimentalEmergencyTeleportation;
+using ConsoleApp.Puzzles.Year2018.Day23;
 using NUnit.Framework;
 
 namespace Tests

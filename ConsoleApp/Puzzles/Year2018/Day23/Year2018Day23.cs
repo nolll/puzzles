@@ -1,6 +1,4 @@
-﻿using Core.ExperimentalEmergencyTeleportation;
-
-namespace ConsoleApp.Puzzles.Year2018.Day23
+﻿namespace ConsoleApp.Puzzles.Year2018.Day23
 {
     public class Year2018Day23 : Year2018Day
     {

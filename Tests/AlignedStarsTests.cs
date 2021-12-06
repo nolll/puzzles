@@ -1,4 +1,4 @@
-using Core.AlignedStars;
+using ConsoleApp.Puzzles.Year2018.Day10;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,6 +1,4 @@
-﻿using Core.ChronalCoordinates;
-
-namespace ConsoleApp.Puzzles.Year2018.Day06
+﻿namespace ConsoleApp.Puzzles.Year2018.Day06
 {
     public class Year2018Day06 : Year2018Day
     {

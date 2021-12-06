@@ -1,4 +1,4 @@
-using Core.ChronalCoordinates;
+using ConsoleApp.Puzzles.Year2018.Day06;
 using NUnit.Framework;
 
 namespace Tests

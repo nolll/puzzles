@@ -1,4 +1,4 @@
-using Core.FuelSquare;
+using ConsoleApp.Puzzles.Year2018.Day11;
 using NUnit.Framework;
 
 namespace Tests

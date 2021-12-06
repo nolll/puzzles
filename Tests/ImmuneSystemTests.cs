@@ -1,4 +1,4 @@
-using Core.ImmuneSystemFight;
+using ConsoleApp.Puzzles.Year2018.Day24;
 using NUnit.Framework;
 
 namespace Tests

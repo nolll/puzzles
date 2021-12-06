@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Core.ImmuneSystemFight;
 
 namespace ConsoleApp.Puzzles.Year2018.Day24
 {

@@ -6,13 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="AlignedStars\" />
+    <Folder Include="BeverageBandits\" />
+    <Folder Include="Boxes\" />
     <Folder Include="Captcha\" />
+    <Folder Include="ChronalCoordinates\" />
     <Folder Include="ClockSignal\" />
     <Folder Include="CpuInstructions\" />
     <Folder Include="CubicleMaze\" />
     <Folder Include="ExperimentalCompression\" />
+    <Folder Include="ExperimentalEmergencyTeleportation\" />
     <Folder Include="FloorTraps\" />
+    <Folder Include="FourDimensionalAdventure\" />
+    <Folder Include="Frequencies\" />
+    <Folder Include="FuelSquare\" />
     <Folder Include="HexagonalFlooring\" />
+    <Folder Include="HotChocolate\" />
+    <Folder Include="ImmuneSystemFight\" />
   </ItemGroup>
 
 </Project>

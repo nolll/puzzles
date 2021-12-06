@@ -1,6 +1,4 @@
-﻿using Core.HotChocolate;
-
-namespace ConsoleApp.Puzzles.Year2018.Day14
+﻿namespace ConsoleApp.Puzzles.Year2018.Day14
 {
     public class Year2018Day14 : Year2018Day
     {

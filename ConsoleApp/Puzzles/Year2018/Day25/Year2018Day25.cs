@@ -1,6 +1,4 @@
-﻿using Core.FourDimensionalAdventure;
-
-namespace ConsoleApp.Puzzles.Year2018.Day25
+﻿namespace ConsoleApp.Puzzles.Year2018.Day25
 {
     public class Year2018Day25 : Year2018Day
     {

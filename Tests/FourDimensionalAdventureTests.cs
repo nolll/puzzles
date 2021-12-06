@@ -1,4 +1,4 @@
-using Core.FourDimensionalAdventure;
+using ConsoleApp.Puzzles.Year2018.Day25;
 using NUnit.Framework;
 
 namespace Tests

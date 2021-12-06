@@ -1,4 +1,4 @@
-using Core.Frequencies;
+using ConsoleApp.Puzzles.Year2018.Day01;
 using NUnit.Framework;
 
 namespace Tests

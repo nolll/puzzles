@@ -1,6 +1,4 @@
-﻿using Core.AlignedStars;
-
-namespace ConsoleApp.Puzzles.Year2018.Day10
+﻿namespace ConsoleApp.Puzzles.Year2018.Day10
 {
     public class Year2018Day10 : Year2018Day
     {

@@ -1,6 +1,4 @@
-﻿using Core.Boxes;
-
-namespace ConsoleApp.Puzzles.Year2018.Day02
+﻿namespace ConsoleApp.Puzzles.Year2018.Day02
 {
     public class Year2018Day02 : Year2018Day
     {

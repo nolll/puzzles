@@ -1,4 +1,5 @@
-using Core.Boxes;
+using ConsoleApp.Puzzles.Year2018.Day02;
+using Core.Tools;
 using NUnit.Framework;
 
 namespace Tests

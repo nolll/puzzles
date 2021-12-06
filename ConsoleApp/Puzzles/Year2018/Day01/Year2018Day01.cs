@@ -1,6 +1,4 @@
-﻿using Core.Frequencies;
-
-namespace ConsoleApp.Puzzles.Year2018.Day01
+﻿namespace ConsoleApp.Puzzles.Year2018.Day01
 {
     public class Year2018Day01 : Year2018Day
     {

@@ -1,4 +1,4 @@
-using Core.ExperimentalEnergySource;
+using ConsoleApp.Puzzles.Year2020.Day17;
 using NUnit.Framework;
 
 namespace Tests

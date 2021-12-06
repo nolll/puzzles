@@ -1,6 +1,4 @@
-﻿using Core.Bingo;
-
-namespace ConsoleApp.Puzzles.Year2021.Day04
+﻿namespace ConsoleApp.Puzzles.Year2021.Day04
 {
     public class Year2021Day04 : Year2021Day
     {

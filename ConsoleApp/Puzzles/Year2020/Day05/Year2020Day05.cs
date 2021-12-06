@@ -1,6 +1,4 @@
-﻿using Core.AircraftBoarding;
-
-namespace ConsoleApp.Puzzles.Year2020.Day05
+﻿namespace ConsoleApp.Puzzles.Year2020.Day05
 {
     public class Year2020Day05 : Year2020Day
     {

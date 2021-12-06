@@ -1,4 +1,4 @@
-using Core.AircraftBoarding;
+using ConsoleApp.Puzzles.Year2020.Day05;
 using NUnit.Framework;
 
 namespace Tests

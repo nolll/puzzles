@@ -1,6 +1,4 @@
-﻿using Core.ExperimentalEnergySource;
-
-namespace ConsoleApp.Puzzles.Year2020.Day17
+﻿namespace ConsoleApp.Puzzles.Year2020.Day17
 {
     public class Year2020Day17 : Year2020Day
     {

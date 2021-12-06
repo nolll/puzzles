@@ -1,4 +1,4 @@
-using Core.Bitmasking;
+using ConsoleApp.Puzzles.Year2020.Day14;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using Core.HotelDoor;
+using ConsoleApp.Puzzles.Year2020.Day25;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 

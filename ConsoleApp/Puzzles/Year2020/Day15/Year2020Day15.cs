@@ -1,6 +1,4 @@
-﻿using Core.ElfMemoryGame;
-
-namespace ConsoleApp.Puzzles.Year2020.Day15
+﻿namespace ConsoleApp.Puzzles.Year2020.Day15
 {
     public class Year2020Day15 : Year2020Day
     {

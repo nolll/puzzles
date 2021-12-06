@@ -1,4 +1,4 @@
-using Core.IslandFood;
+using ConsoleApp.Puzzles.Year2020.Day21;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 

@@ -1,6 +1,4 @@
-﻿using Core.CrabCups;
-
-namespace ConsoleApp.Puzzles.Year2020.Day23
+﻿namespace ConsoleApp.Puzzles.Year2020.Day23
 {
     public class Year2020Day23 : Year2020Day
     {

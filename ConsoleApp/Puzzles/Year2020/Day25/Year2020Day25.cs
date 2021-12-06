@@ -1,6 +1,4 @@
-﻿using Core.HotelDoor;
-
-namespace ConsoleApp.Puzzles.Year2020.Day25
+﻿namespace ConsoleApp.Puzzles.Year2020.Day25
 {
     public class Year2020Day25 : Year2020Day
     {

@@ -1,6 +1,4 @@
-﻿using Core.ImageJigsaw;
-
-namespace ConsoleApp.Puzzles.Year2020.Day20
+﻿namespace ConsoleApp.Puzzles.Year2020.Day20
 {
     public class Year2020Day20 : Year2020Day
     {

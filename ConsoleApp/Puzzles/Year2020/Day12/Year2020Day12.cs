@@ -1,6 +1,4 @@
-﻿using Core.FerryNavigation;
-
-namespace ConsoleApp.Puzzles.Year2020.Day12
+﻿namespace ConsoleApp.Puzzles.Year2020.Day12
 {
     public class Year2020Day12 : Year2020Day
     {

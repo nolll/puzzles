@@ -1,6 +1,4 @@
-﻿using Core.BusSchedule;
-
-namespace ConsoleApp.Puzzles.Year2020.Day13
+﻿namespace ConsoleApp.Puzzles.Year2020.Day13
 {
     public class Year2020Day13 : Year2020Day
     {

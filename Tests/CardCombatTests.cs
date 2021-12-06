@@ -1,4 +1,4 @@
-using Core.CardCombat;
+using ConsoleApp.Puzzles.Year2020.Day22;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,4 +1,4 @@
-using Core.FerryNavigation;
+using ConsoleApp.Puzzles.Year2020.Day12;
 using NUnit.Framework;
 
 namespace Tests

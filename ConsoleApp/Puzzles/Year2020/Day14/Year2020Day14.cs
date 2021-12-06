@@ -1,6 +1,4 @@
-﻿using Core.Bitmasking;
-
-namespace ConsoleApp.Puzzles.Year2020.Day14
+﻿namespace ConsoleApp.Puzzles.Year2020.Day14
 {
     public class Year2020Day14 : Year2020Day
     {

@@ -1,4 +1,4 @@
-using Core.Bingo;
+using ConsoleApp.Puzzles.Year2021.Day04;
 using NUnit.Framework;
 
 namespace Tests

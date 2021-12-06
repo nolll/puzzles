@@ -1,6 +1,4 @@
-﻿using Core.CustomDeclarations;
-
-namespace ConsoleApp.Puzzles.Year2020.Day06
+﻿namespace ConsoleApp.Puzzles.Year2020.Day06
 {
     public class Year2020Day06 : Year2020Day
     {

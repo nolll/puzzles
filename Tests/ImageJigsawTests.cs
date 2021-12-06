@@ -1,4 +1,4 @@
-using Core.ImageJigsaw;
+using ConsoleApp.Puzzles.Year2020.Day20;
 using NUnit.Framework;
 
 namespace Tests

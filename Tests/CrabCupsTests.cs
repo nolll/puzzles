@@ -1,4 +1,4 @@
-using Core.CrabCups;
+using ConsoleApp.Puzzles.Year2020.Day23;
 using NUnit.Framework;
 
 namespace Tests

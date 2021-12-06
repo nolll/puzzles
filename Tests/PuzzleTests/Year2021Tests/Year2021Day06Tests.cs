@@ -10,8 +10,8 @@ namespace Tests.PuzzleTests.Year2021Tests
         [TestCase(256, 26_984_457_539)]
         public void Test(int days, long expected)
         {
-            var puzzle = new Year2021Day06();
-            var result = puzzle.FishCount(Input, days);
+            var fishCounter = new FishCounter(Input);
+            var result = fishCounter.FishCountAfter(days);
 
             Assert.That(result, Is.EqualTo(expected));
         }

@@ -1,6 +1,4 @@
-﻿using Core.CardCombat;
-
-namespace ConsoleApp.Puzzles.Year2020.Day22
+﻿namespace ConsoleApp.Puzzles.Year2020.Day22
 {
     public class Year2020Day22 : Year2020Day
     {

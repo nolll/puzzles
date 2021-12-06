@@ -1,4 +1,4 @@
-using Core.BusSchedule;
+using ConsoleApp.Puzzles.Year2020.Day13;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 

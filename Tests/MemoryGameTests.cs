@@ -1,4 +1,4 @@
-using Core.ElfMemoryGame;
+using ConsoleApp.Puzzles.Year2020.Day15;
 using NUnit.Framework;
 
 namespace Tests

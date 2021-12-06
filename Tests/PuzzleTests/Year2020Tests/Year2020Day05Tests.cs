@@ -1,9 +1,9 @@
 using Core.Puzzles.Year2020.Day05;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.PuzzleTests.Year2020Tests
 {
-    public class AircraftBoardingTests
+    public class Year2020Day05Tests
     {
         [TestCase("FBFBBFFRLR", 44, 5, 357)]
         [TestCase("BFFFBBFRRR", 70, 7, 567)]

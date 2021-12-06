@@ -1,9 +1,9 @@
 using Core.Puzzles.Year2020.Day01;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.PuzzleTests.Year2020Tests
 {
-    public class SumFinderTests
+    public class Year2020Day01Tests
     {
         [Test]
         public void FindTwoNumbers()

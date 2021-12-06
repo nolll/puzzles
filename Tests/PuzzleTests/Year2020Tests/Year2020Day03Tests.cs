@@ -2,7 +2,7 @@ using System.Linq;
 using Core.Puzzles.Year2020.Day03;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.PuzzleTests.Year2020Tests
 {
     public class Year2020Day03Tests
     {

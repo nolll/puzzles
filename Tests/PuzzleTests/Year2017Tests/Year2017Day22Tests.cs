@@ -1,9 +1,9 @@
 using Core.Puzzles.Year2017.Day22;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.PuzzleTests.Year2017Tests
 {
-    public class SporificaVirusTests
+    public class Year2017Day22Tests
     {
         private const string Input = @"
 ..#

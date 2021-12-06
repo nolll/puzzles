@@ -1,9 +1,9 @@
 using Core.Puzzles.Year2018.Day12;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.PuzzleTests.Year2018Tests
 {
-    public class SubterraneanSustainabilityTests
+    public class Year2018Day12Tests
     {
         [Test]
         public void PlantScoreIsCorrect()

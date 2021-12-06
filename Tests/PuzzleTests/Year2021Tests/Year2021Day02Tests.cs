@@ -1,9 +1,9 @@
 using Core.Puzzles.Year2021.Day02;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.PuzzleTests.Year2021Tests
 {
-    public class SubmarineNavigationTests
+    public class Year2021Day02Tests
     {
         [Test]
         public void Part1()

@@ -1,9 +1,9 @@
 using Core.Puzzles.Year2017.Day09;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.PuzzleTests.Year2017Tests
 {
-    public class StreamProcessingTests
+    public class Year2017Day09Tests
     {
         [TestCase("{}", "{}", 1, 1)]
         [TestCase("{{{}}}", "{{{}}}", 3, 6)]

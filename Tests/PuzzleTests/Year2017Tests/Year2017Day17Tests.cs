@@ -1,9 +1,9 @@
 using Core.Puzzles.Year2017.Day17;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.PuzzleTests.Year2017Tests
 {
-    public class SpinlockTests
+    public class Year2017Day17Tests
     {
         [Test]
         public void NextValueIsCorrect()

@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp.Puzzles.Year2017.Day03
+﻿using Core.PuzzleClasses;
+
+namespace ConsoleApp.Puzzles.Year2017.Day03
 {
     public class Year2017Day03 : Year2017Day
     {

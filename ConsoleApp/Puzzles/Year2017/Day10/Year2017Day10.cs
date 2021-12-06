@@ -1,4 +1,5 @@
 ﻿using Core.Common.Hashing;
+using Core.PuzzleClasses;
 
 namespace ConsoleApp.Puzzles.Year2017.Day10
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp
+namespace ConsoleApp.ConsoleTools
 {
     public class HelpPrinter
     {

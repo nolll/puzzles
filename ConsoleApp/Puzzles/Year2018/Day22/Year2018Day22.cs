@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Core.Common.Strings;
+using Core.PuzzleClasses;
 
 namespace ConsoleApp.Puzzles.Year2018.Day22
 {

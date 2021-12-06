@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp.Puzzles
+namespace Core.PuzzleClasses
 {
     public class TimedPuzzleResult : PuzzleResult
     {

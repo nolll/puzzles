@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace ConsoleApp.Puzzles
+namespace ConsoleApp.Printing
 {
     public static class Formatter
     {

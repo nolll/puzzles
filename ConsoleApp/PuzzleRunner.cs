@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ConsoleApp.Printing;
 using ConsoleApp.Puzzles;
 using Core.Common.Timing;
+using Core.PuzzleClasses;
 
 namespace ConsoleApp
 {

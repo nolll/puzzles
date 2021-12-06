@@ -1,7 +1,7 @@
 ﻿using System;
-using ConsoleApp.Puzzles;
+using Core.PuzzleClasses;
 
-namespace ConsoleApp
+namespace ConsoleApp.Printing
 {
     public class MultiDayPrinter : DayPrinter
     {

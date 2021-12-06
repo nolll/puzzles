@@ -1,4 +1,5 @@
 ﻿using Core.Common.Computers.IntCode;
+using Core.PuzzleClasses;
 
 namespace ConsoleApp.Puzzles.Year2019.Day09
 {

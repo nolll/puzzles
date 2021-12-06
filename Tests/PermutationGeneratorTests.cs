@@ -1,5 +1,5 @@
 using System.Linq;
-using Core.Combinatorics;
+using Core.Common.Combinatorics;
 using NUnit.Framework;
 
 namespace Tests

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Combinatorics;
+using Core.Common.Combinatorics;
 
 namespace ConsoleApp.Puzzles.Year2019.Day07
 {

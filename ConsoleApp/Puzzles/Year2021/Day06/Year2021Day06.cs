@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Core.Tools;
 
 namespace ConsoleApp.Puzzles.Year2021.Day06
 {
@@ -10,41 +9,43 @@ namespace ConsoleApp.Puzzles.Year2021.Day06
         public override PuzzleResult RunPart1()
         {
             var result = FishCount(FileInput, 80);
-            return new PuzzleResult(result);
+            return new PuzzleResult(result, 383_160);
         }
 
         public override PuzzleResult RunPart2()
         {
-            return new PuzzleResult(0);
+            var result = FishCount(FileInput, 256);
+            return new PuzzleResult(result, 1_721_148_811_504);
         }
 
-        public int FishCount(string input, int days)
+        public long FishCount(string input, int days)
         {
-            var fishList = input.Split(',').Select(int.Parse).ToList();
+            var ages = new long[9];
 
+            var fishList = input.Split(',').Select(int.Parse).ToList();
+            foreach (var fishAge in fishList)
+            {
+                ages[fishAge]++;
+            }
+            
             var day = 0;
             while (day < days)
             {
-                var newFishCount = 0;
-                for (var i = 0; i < fishList.Count; i++)
-                {
-                    fishList[i]--;
-                    if (fishList[i] < 0)
-                    {
-                        fishList[i] = 6;
-                        newFishCount++;
-                    }
-                }
+                var zeros = ages[0];
+                ages[0] = ages[1];
+                ages[1] = ages[2];
+                ages[2] = ages[3];
+                ages[3] = ages[4];
+                ages[4] = ages[5];
+                ages[5] = ages[6];
+                ages[6] = ages[7] + zeros;
+                ages[7] = ages[8];
+                ages[8] = zeros;
 
-                for (var j = 0; j < newFishCount; j++)
-                {
-                    fishList.Add(8);
-                }
-                
                 day++;
             }
-            
-            return fishList.Count;
+
+            return ages.Sum();
         }
     }
 }

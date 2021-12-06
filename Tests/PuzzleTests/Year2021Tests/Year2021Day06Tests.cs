@@ -5,33 +5,17 @@ namespace Tests.PuzzleTests.Year2021Tests
 {
     public class Year2021Day06Tests
     {
-        [Test]
-        public void Part1()
+        [TestCase(18, 26)]
+        [TestCase(80, 5934)]
+        [TestCase(256, 26_984_457_539)]
+        public void Test(int days, long expected)
         {
             var puzzle = new Year2021Day06();
-            var result = puzzle.FishCount(Input, 18);
+            var result = puzzle.FishCount(Input, days);
 
-            Assert.That(result, Is.EqualTo(26));
+            Assert.That(result, Is.EqualTo(expected));
         }
-
-        [Test]
-        public void Part1_2()
-        {
-            var puzzle = new Year2021Day06();
-            var result = puzzle.FishCount(Input, 80);
-
-            Assert.That(result, Is.EqualTo(5934));
-        }
-
-        [Test]
-        public void Part2()
-        {
-            var puzzle = new Year2021Day06();
-            var result = 0;
-
-            Assert.That(0, Is.EqualTo(0));
-        }
-
+        
         private const string Input = "3,4,3,1,2";
     }
 }

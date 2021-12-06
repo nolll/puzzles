@@ -1,7 +1,4 @@
-﻿using ConsoleApp.Puzzles;
-using Core.PuzzleClasses;
-
-namespace ConsoleApp
+﻿namespace Core.PuzzleClasses
 {
     public class DayResult
     {

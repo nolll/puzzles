@@ -1,25 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ConsoleApp.Printing;
-using ConsoleApp.Puzzles;
 using Core.Common.Timing;
-using Core.PuzzleClasses;
 
-namespace ConsoleApp
+namespace Core.PuzzleClasses
 {
-    public interface IMultiDayPrinter
-    {
-        void PrintHeader();
-        void PrintDay(DayResult dayResult);
-        void PrintFooter();
-    }
-
-    public interface ISingleDayPrinter
-    {
-        void PrintDay(DayResult dayResult);
-    }
-    
     public class PuzzleRunner
     {
         private readonly ISingleDayPrinter _singleDayPrinter;

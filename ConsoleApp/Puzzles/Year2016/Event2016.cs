@@ -24,6 +24,7 @@ using ConsoleApp.Puzzles.Year2016.Day22;
 using ConsoleApp.Puzzles.Year2016.Day23;
 using ConsoleApp.Puzzles.Year2016.Day24;
 using ConsoleApp.Puzzles.Year2016.Day25;
+using Core.PuzzleClasses;
 
 namespace ConsoleApp.Puzzles.Year2016
 {

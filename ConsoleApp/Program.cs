@@ -4,6 +4,7 @@ using System.Linq;
 using ConsoleApp.ConsoleTools;
 using ConsoleApp.Printing;
 using ConsoleApp.Puzzles;
+using Core.PuzzleClasses;
 
 namespace ConsoleApp
 {

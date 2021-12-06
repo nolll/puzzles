@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Core.PuzzleClasses;
 
-namespace ConsoleApp.Puzzles
+namespace Core.PuzzleClasses
 {
     public abstract class PuzzleDay
     {

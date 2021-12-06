@@ -8,6 +8,7 @@ using ConsoleApp.Puzzles.Year2018;
 using ConsoleApp.Puzzles.Year2019;
 using ConsoleApp.Puzzles.Year2020;
 using ConsoleApp.Puzzles.Year2021;
+using Core.PuzzleClasses;
 
 namespace ConsoleApp
 {

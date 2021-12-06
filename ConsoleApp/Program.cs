@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ConsoleApp.ConsoleTools;
 using ConsoleApp.Printing;
-using ConsoleApp.Puzzles;
+using Core;
 using Core.PuzzleClasses;
 
 namespace ConsoleApp
@@ -37,8 +37,8 @@ namespace ConsoleApp
 
         private static void RunSingle(Parameters parameters)
         {
-            var daySelector = new DaySelector();
-            var foundDay = daySelector.GetDay(parameters.Year, parameters.Day);
+            var puzzleRepository = new PuzzleRepository();
+            var foundDay = puzzleRepository.GetDay(parameters.Year, parameters.Day);
             if (foundDay == null)
                 throw new Exception("The specified day could not be found.");
             
@@ -47,8 +47,8 @@ namespace ConsoleApp
 
         private static void RunEvent(Parameters parameters)
         {
-            var daySelector = new DaySelector();
-            var @event = daySelector.GetEvent(parameters.Year);
+            var puzzleRepository = new PuzzleRepository();
+            var @event = puzzleRepository.GetEvent(parameters.Year);
             if (@event == null)
                 throw new Exception("Event not found!");
 
@@ -58,8 +58,8 @@ namespace ConsoleApp
 
         private static void RunAll(Parameters parameters)
         {
-            var daySelector = new DaySelector();
-            var allDays = daySelector.GetAll();
+            var puzzleRepository = new PuzzleRepository();
+            var allDays = puzzleRepository.GetAll();
             var filteredDays = FilterDays(allDays, parameters);
             RunDays(filteredDays, PuzzleTimeout, false);
         }

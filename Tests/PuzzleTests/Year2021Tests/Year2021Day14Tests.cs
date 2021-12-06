@@ -1,4 +1,4 @@
-using ConsoleApp.Puzzles.Year2021.Day14;
+using Core.Puzzles.Year2021.Day14;
 using NUnit.Framework;
 
 namespace Tests.PuzzleTests.Year2021Tests

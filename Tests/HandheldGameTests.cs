@@ -1,5 +1,5 @@
 using System.Reflection.PortableExecutable;
-using ConsoleApp.Puzzles.Year2020.Day08;
+using Core.Puzzles.Year2020.Day08;
 using NUnit.Framework;
 
 namespace Tests

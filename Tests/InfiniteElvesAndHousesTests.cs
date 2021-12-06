@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using ConsoleApp.Puzzles.Year2015.Day20;
+using Core.Puzzles.Year2015.Day20;
 using NUnit.Framework;
 
 namespace Tests

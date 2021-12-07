@@ -37,5 +37,39 @@ namespace Tests
             var similarIds = SimilarIdsPuzzle.GetSimilarIds(ids);
             Assert.AreEqual(2, similarIds.Count);
         }
+
+        [Test]
+        public void HandleProvidedExample()
+        {
+            const string ids = "abcdef\nbababc\nabbcde\nabcccd\naabcdd\nabcdee\nababab";
+            var puzzle = new BoxChecksumPuzzle(ids);
+            Assert.AreEqual(12, puzzle.Checksum);
+        }
+
+        [Test]
+        public void AllLettersCommon()
+        {
+            const string str = "abcde";
+            var commonLetters = SimilarIdsPuzzle.GetCommonLetters(str, str);
+            Assert.AreEqual("abcde", commonLetters);
+        }
+
+        [Test]
+        public void NoLettersCommon()
+        {
+            const string str1 = "abcde";
+            const string str2 = "fghij";
+            var commonLetters = SimilarIdsPuzzle.GetCommonLetters(str1, str2);
+            Assert.AreEqual("", commonLetters);
+        }
+
+        [Test]
+        public void ThreeLettersCommon()
+        {
+            const string str1 = "abcde";
+            const string str2 = "aXcYe";
+            var commonLetters = SimilarIdsPuzzle.GetCommonLetters(str1, str2);
+            Assert.AreEqual("ace", commonLetters);
+        }
     }
 }

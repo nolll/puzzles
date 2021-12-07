@@ -11,13 +11,13 @@ namespace Core.Puzzles.Year2021.Day07
         public override PuzzleResult RunPart1()
         {
             var result = GetFuel1(FileInput);
-            return new PuzzleResult(result);
+            return new PuzzleResult(result, 344535);
         }
 
         public override PuzzleResult RunPart2()
         {
             var result = GetFuel2(FileInput);
-            return new PuzzleResult(result);
+            return new PuzzleResult(result, 95581659);
         }
 
         public int GetFuel1(string input)

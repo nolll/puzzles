@@ -10,76 +10,50 @@ namespace Core.Puzzles.Year2021.Day07
 
         public override PuzzleResult RunPart1()
         {
-            var result = GetFuel1(FileInput);
+            var result = GetFuel1(FileInput, false);
             return new PuzzleResult(result, 344535);
         }
 
         public override PuzzleResult RunPart2()
         {
-            var result = GetFuel2(FileInput);
+            var result = GetFuel1(FileInput, true);
             return new PuzzleResult(result, 95581659);
         }
-
-        public int GetFuel1(string input)
+        
+        public int GetFuel1(string input, bool useCrabEngineering)
         {
-            var minDiff = int.MaxValue;
-            var minDiffPos = 0;
-            var positions = input.Split(',').Select(int.Parse).ToArray();
-            for (int i = 0; i < positions.Length; i++)
-            {
-                var diff = 0;
-                for (int j = 0; j < positions.Length; j++)
-                {
-                    var large = Math.Max(positions[i], positions[j]);
-                    var small = Math.Min(positions[i], positions[j]);
-                    diff += large - small;
-                }
+            Func<int, int, int> getCost = useCrabEngineering
+                ? GetCrabEnginerringCost
+                : GetCost;
 
-                if (diff < minDiff)
-                {
-                    minDiff = diff;
-                }
-            }
-
-            return minDiff;
-        }
-
-        public int GetFuel2(string input)
-        {
             var minCost = int.MaxValue;
-            var minCostPos = 0;
             var positions = input.Split(',').Select(int.Parse).ToArray();
             var maxPos = positions.Max();
-            for (int i = 0; i < maxPos; i++)
+            for (var i = 0; i < maxPos; i++)
             {
-                var cost = 0;
-                for (int j = 0; j < positions.Length; j++)
-                {
-                    cost += GetCost(i, positions[j]);
-                }
+                var cost = positions.Sum(o => getCost(i, o));
 
-                if (cost < minCost)
-                {
+                if (cost < minCost) 
                     minCost = cost;
-                    //minCostPos = positions[i];
-                }
             }
 
             return minCost;
         }
 
-        public int GetCost(int a, int b)
+        public static int GetCost(int a, int b)
         {
-            var large = Math.Max(a, b);
-            var small = Math.Min(a, b);
-            var diff = large - small;
-            var d = 0;
-            for (int k = 1; k <= diff; k++)
-            {
-                d += k;
-            }
+            return GetDiff(a, b);
+        }
 
-            return d;
+        public int GetCrabEnginerringCost(int a, int b)
+        {
+            var diff = GetDiff(a, b);
+            return diff * (diff + 1) / 2;
+        }
+
+        private static int GetDiff(int a, int b)
+        {
+            return Math.Max(a, b) - Math.Min(a, b);
         }
     }
 }

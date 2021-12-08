@@ -13,11 +13,30 @@ namespace Core.Puzzles.Year2021.Day08
             Assert.That(result, Is.EqualTo(26));
         }
 
+        [TestCase("abc", "abcd", true)]
+        [TestCase("abc", "abde", false)]
+        public void Contained(string sShort, string sLong, bool expected)
+        {
+            var decoder = new DigitDecoder(SingleInput);
+            var result = decoder.IsContainedIn(sShort, sLong);
+            
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [TestCase("abc", "abcd", "d")]
+        [TestCase("abc", "abde", null)]
+        public void Diff(string sShort, string sLong, string expected)
+        {
+            var decoder = new DigitDecoder(SingleInput);
+            var result = decoder.Reduce(sShort, sLong);
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
         [Test]
         public void Part2Single()
         {
-            const string input = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
-            var decoder = new DigitDecoder(input);
+            var decoder = new DigitDecoder(SingleInput);
             Assert.That(decoder.DecodedNumber, Is.EqualTo(5353));
         }
         
@@ -27,9 +46,11 @@ namespace Core.Puzzles.Year2021.Day08
             var puzzle = new SevenSegmentDisplayDecoder(Input);
             var result = puzzle.GetDecodedSum();
 
-            Assert.That(result, Is.EqualTo(0));
+            Assert.That(result, Is.EqualTo(61229));
         }
 
+        private const string SingleInput = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
+        
         private const string Input = @"
 be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
 edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc

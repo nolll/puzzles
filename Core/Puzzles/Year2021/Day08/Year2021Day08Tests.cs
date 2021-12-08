@@ -15,21 +15,11 @@ namespace Core.Puzzles.Year2021.Day08
 
         [TestCase("abc", "abcd", true)]
         [TestCase("abc", "abde", false)]
-        public void Contained(string sShort, string sLong, bool expected)
+        public void IsSubsetOf(string sShort, string sLong, bool expected)
         {
             var decoder = new DigitDecoder(SingleInput);
-            var result = decoder.IsContainedIn(sShort, sLong);
+            var result = decoder.IsSubsetOf(sShort, sLong);
             
-            Assert.That(result, Is.EqualTo(expected));
-        }
-
-        [TestCase("abc", "abcd", "d")]
-        [TestCase("abc", "abde", null)]
-        public void Diff(string sShort, string sLong, string expected)
-        {
-            var decoder = new DigitDecoder(SingleInput);
-            var result = decoder.Reduce(sShort, sLong);
-
             Assert.That(result, Is.EqualTo(expected));
         }
 

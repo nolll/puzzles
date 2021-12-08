@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Core.Puzzles.Year2018.Day02;
 using NUnit.Framework;
 
-namespace Tests.PuzzleTests.Year2018Tests
+namespace Core.Puzzles.Year2018.Day02
 {
     public class Year2018Day02Tests
     {

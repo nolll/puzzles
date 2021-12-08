@@ -1,8 +1,7 @@
 using System.Linq;
-using Core.Puzzles.Year2019.Day22;
 using NUnit.Framework;
 
-namespace Tests.PuzzleTests.Year2019Tests
+namespace Core.Puzzles.Year2019.Day22
 {
     public class Year2019Day22Tests
     {

@@ -1,7 +1,6 @@
-using Core.Puzzles.Year2019.Day06;
 using NUnit.Framework;
 
-namespace Tests.PuzzleTests.Year2019Tests
+namespace Core.Puzzles.Year2019.Day06
 {
     public class Year2019Day06Tests
     {

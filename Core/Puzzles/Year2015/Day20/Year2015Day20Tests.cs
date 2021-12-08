@@ -3,7 +3,7 @@ using System.Linq;
 using Core.Puzzles.Year2015.Day20;
 using NUnit.Framework;
 
-namespace Tests.PuzzleTests.Year2015Tests
+namespace Core.Puzzles.Year2015
 {
     public class Year2015Day20Tests
     {

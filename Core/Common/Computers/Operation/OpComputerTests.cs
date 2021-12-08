@@ -1,7 +1,7 @@
 using Core.Common.Computers.Operation;
 using NUnit.Framework;
 
-namespace Tests.CommonTests.ComputerTests
+namespace Core.CommonTests.ComputerTests
 {
     public class OpComputerTests
     {

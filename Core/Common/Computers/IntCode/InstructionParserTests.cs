@@ -3,7 +3,7 @@ using Core.Common.Computers.IntCode;
 using Core.Common.Computers.IntCode.Instructions;
 using NUnit.Framework;
 
-namespace Tests.CommonTests.ComputerTests
+namespace Core.CommonTests.ComputerTests
 {
     public class InstructionParserTests
     {

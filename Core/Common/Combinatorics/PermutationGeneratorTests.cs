@@ -2,7 +2,7 @@ using System.Linq;
 using Core.Common.Combinatorics;
 using NUnit.Framework;
 
-namespace Tests.CommonTests
+namespace Core.CommonTests
 {
     public class PermutationGeneratorTests
     {

@@ -1,7 +1,7 @@
 using Core.Common.Maths;
 using NUnit.Framework;
 
-namespace Tests.CommonTests
+namespace Core.CommonTests
 {
     public class MathToolsTests
     {

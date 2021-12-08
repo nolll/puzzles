@@ -1,7 +1,7 @@
 using Core.Common.Computers.IntCode;
 using NUnit.Framework;
 
-namespace Tests.CommonTests.ComputerTests
+namespace Core.CommonTests.ComputerTests
 {
     public class IntCodeComputerTests
     {

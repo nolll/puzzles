@@ -2,7 +2,7 @@ using System.Linq;
 using Core.Common.CoordinateSystems;
 using NUnit.Framework;
 
-namespace Tests.CommonTests
+namespace Core.CommonTests
 {
     public class Matrix3DTests
     {

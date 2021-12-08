@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2015.Day08
 {
-    public class Year2015Day08 : Year2015Day
+    public class Year2015Day08 : PuzzleDay
     {
-        public override int Day => 8;
-
         public override PuzzleResult RunPart1()
         {
             var digitalList = new DigitalList(FileInput);

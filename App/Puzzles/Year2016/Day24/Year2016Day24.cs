@@ -2,11 +2,9 @@
 
 namespace App.Puzzles.Year2016.Day24
 {
-    public class Year2016Day24 : Year2016Day
+    public class Year2016Day24 : PuzzleDay
     {
         private AirDuctNavigator Navigator => new(FileInput);
-
-        public override int Day => 24;
 
         public override PuzzleResult RunPart1()
         {

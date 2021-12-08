@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2018.Day06
 {
-    public class Year2018Day06 : Year2018Day
+    public class Year2018Day06 : PuzzleDay
     {
-        public override int Day => 6;
-
         public override PuzzleResult RunPart1()
         {
             var finder = new LargestAreaFinder(FileInput);

@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day06
 {
-    public class Year2016Day06 : Year2016Day
+    public class Year2016Day06 : PuzzleDay
     {
-        public override int Day => 6;
-
         public override PuzzleResult RunPart1()
         {
             var reader = new RepetitionCodeReader();

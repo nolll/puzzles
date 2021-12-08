@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day15
 {
-    public class Year2020Day15 : Year2020Day
+    public class Year2020Day15 : PuzzleDay
     {
-        public override int Day => 15;
-
         public override PuzzleResult RunPart1()
         {
             var system = new MemoryGame(Input);

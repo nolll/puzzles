@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2019.Day14
 {
-    public class Year2019Day14 : Year2019Day
+    public class Year2019Day14 : PuzzleDay
     {
-        public override int Day => 14;
-
         public override PuzzleResult RunPart1()
         {
             var reactor = new NanoReactor(FileInput);

@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2018.Day10
 {
-    public class Year2018Day10 : Year2018Day
+    public class Year2018Day10 : PuzzleDay
     {
-        public override int Day => 10;
-
         public override PuzzleResult RunPart1()
         {
             var finder = new StarMessageFinder(FileInput, 9);

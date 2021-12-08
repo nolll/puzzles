@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day24
 {
-    public class Year2020Day24 : Year2020Day
+    public class Year2020Day24 : PuzzleDay
     {
-        public override int Day => 24;
-
         public override PuzzleResult RunPart1()
         {
             var floor = new HexagonalFloor(FileInput);

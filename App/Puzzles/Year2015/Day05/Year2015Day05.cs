@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2015.Day05
 {
-    public class Year2015Day05 : Year2015Day
+    public class Year2015Day05 : PuzzleDay
     {
-        public override int Day => 5;
-
         public override PuzzleResult RunPart1()
         {
             var evaluator = new NaughtyOrNiceEvaluator();

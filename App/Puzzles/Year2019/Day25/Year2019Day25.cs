@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2019.Day25
 {
-    public class Year2019Day25 : Year2019Day
+    public class Year2019Day25 : PuzzleDay
     {
-        public override int Day => 25;
-
         public override PuzzleResult RunPart1()
         {
             var investigationDroid = new InvestigationDroid(FileInput);

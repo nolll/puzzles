@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day17
 {
-    public class Year2016Day17 : Year2016Day
+    public class Year2016Day17 : PuzzleDay
     {
-        public override int Day => 17;
-
         public override PuzzleResult RunPart1()
         {
             var maze = new LockedDoorMaze();

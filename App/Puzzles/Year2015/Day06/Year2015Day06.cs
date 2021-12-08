@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2015.Day06
 {
-    public class Year2015Day06 : Year2015Day
+    public class Year2015Day06 : PuzzleDay
     {
-        public override int Day => 6;
-
         public override PuzzleResult RunPart1()
         {
             var controller = new ChristmasLightsController();

@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day17
 {
-    public class Year2017Day17 : Year2017Day
+    public class Year2017Day17 : PuzzleDay
     {
-        public override int Day => 17;
-
         public override PuzzleResult RunPart1()
         {
             var runner1 = new SpinlockRunnerPart1(Input);

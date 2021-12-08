@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day08
 {
-    public class Year2016Day08 : Year2016Day
+    public class Year2016Day08 : PuzzleDay
     {
-        public override int Day => 8;
-
         public override PuzzleResult RunPart1()
         {
             var simulator = new ScreenSimulator(50, 6);

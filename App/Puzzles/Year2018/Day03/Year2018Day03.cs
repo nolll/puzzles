@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2018.Day03
 {
-    public class Year2018Day03 : Year2018Day
+    public class Year2018Day03 : PuzzleDay
     {
-        public override int Day => 3;
-
         public override PuzzleResult RunPart1()
         {
             var claimsOverlapCountPuzzle = new ClaimsOverlapCountPuzzle(FileInput);

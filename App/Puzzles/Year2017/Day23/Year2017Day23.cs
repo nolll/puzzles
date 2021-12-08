@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day23
 {
-    public class Year2017Day23 : Year2017Day
+    public class Year2017Day23 : PuzzleDay
     {
-        public override int Day => 23;
-
         public override PuzzleResult RunPart1()
         {
             var processor1 = new CoProcessor(FileInput);

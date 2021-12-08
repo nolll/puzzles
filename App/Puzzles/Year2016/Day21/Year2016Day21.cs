@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day21
 {
-    public class Year2016Day21 : Year2016Day
+    public class Year2016Day21 : PuzzleDay
     {
-        public override int Day => 21;
-
         public override PuzzleResult RunPart1()
         {
             var scrambler = new StringScrambler(FileInput);

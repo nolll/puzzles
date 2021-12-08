@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2018.Day08
 {
-    public class Year2018Day08 : Year2018Day
+    public class Year2018Day08 : PuzzleDay
     {
-        public override int Day => 8;
-
         public override PuzzleResult RunPart1()
         {
             var calculator = new LicenseNumberCalculator(FileInput);

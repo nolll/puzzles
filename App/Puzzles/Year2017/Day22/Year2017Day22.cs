@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day22
 {
-    public class Year2017Day22 : Year2017Day
+    public class Year2017Day22 : PuzzleDay
     {
-        public override int Day => 22;
-
         public override PuzzleResult RunPart1()
         {
             var infection1 = new VirusInfection(FileInput);

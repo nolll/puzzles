@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day03
 {
-    public class Year2016Day03 : Year2016Day
+    public class Year2016Day03 : PuzzleDay
     {
-        public override int Day => 3;
-
         public override PuzzleResult RunPart1()
         {
             var validator = new TriangleValidator();

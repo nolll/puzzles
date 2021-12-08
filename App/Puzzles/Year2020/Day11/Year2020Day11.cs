@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day11
 {
-    public class Year2020Day11 : Year2020Day
+    public class Year2020Day11 : PuzzleDay
     {
-        public override int Day => 11;
-
         public override PuzzleResult RunPart1()
         {
             var simulator = new SeatingSimulatorAdjacentSeats(FileInput);

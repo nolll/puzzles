@@ -2,12 +2,10 @@
 
 namespace App.Puzzles.Year2019.Day22
 {
-    public class Year2019Day22 : Year2019Day
+    public class Year2019Day22 : PuzzleDay
     {
         public override string Comment => "Learn more math";
         public override bool NeedsRewrite => true;
-
-        public override int Day => 22;
 
         public override PuzzleResult RunPart1()
         {

@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2015.Day09
 {
-    public class Year2015Day09 : Year2015Day
+    public class Year2015Day09 : PuzzleDay
     {
-        public override int Day => 9;
-
         public override PuzzleResult RunPart1()
         {
             var calculator = new RouteCalculator(FileInput);

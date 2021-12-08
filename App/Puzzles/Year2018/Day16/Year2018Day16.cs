@@ -4,10 +4,8 @@ using App.Platform;
 
 namespace App.Puzzles.Year2018.Day16
 {
-    public class Year2018Day16 : Year2018Day
+    public class Year2018Day16 : PuzzleDay
     {
-        public override int Day => 16;
-
         public override PuzzleResult RunPart1()
         {
             var inputs = FileInput.Split("\r\n\r\n\r\n");

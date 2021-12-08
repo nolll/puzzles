@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2021.Day05
 {
-    public class Year2021Day05 : Year2021Day
+    public class Year2021Day05 : PuzzleDay
     {
-        public override int Day => 5;
-
         public override PuzzleResult RunPart1()
         {
             var ventsMap = new VentsMap();

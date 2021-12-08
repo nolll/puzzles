@@ -3,10 +3,8 @@ using App.Platform;
 
 namespace App.Puzzles.Year2019.Day09
 {
-    public class Year2019Day09 : Year2019Day
+    public class Year2019Day09 : PuzzleDay
     {
-        public override int Day => 9;
-
         public override PuzzleResult RunPart1()
         {
             var boostTester = new BoostRunner(FileInput, 1);

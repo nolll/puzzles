@@ -2,12 +2,10 @@
 
 namespace App.Puzzles.Year2019.Day18
 {
-    public class Year2019Day18 : Year2019Day
+    public class Year2019Day18 : PuzzleDay
     {
         public override string Comment => "Key Collector";
         public override bool IsSlow => true;
-
-        public override int Day => 18;
 
         public override PuzzleResult RunPart1()
         {

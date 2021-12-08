@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day22
 {
-    public class Year2020Day22 : Year2020Day
+    public class Year2020Day22 : PuzzleDay
     {
-        public override int Day => 22;
-
         public override PuzzleResult RunPart1()
         {
             var game = new CardCombatGame(FileInput);

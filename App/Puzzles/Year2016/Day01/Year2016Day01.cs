@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day01
 {
-    public class Year2016Day01 : Year2016Day
+    public class Year2016Day01 : PuzzleDay
     {
-        public override int Day => 1;
-
         public override PuzzleResult RunPart1()
         {
             var calc = new EasterbunnyDistanceCalculator();

@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2018.Day07
 {
-    public class Year2018Day07 : Year2018Day
+    public class Year2018Day07 : PuzzleDay
     {
-        public override int Day => 7;
-
         public override PuzzleResult RunPart1()
         {
             var assembler1 = new SleighAssembler(FileInput, 1, 0);

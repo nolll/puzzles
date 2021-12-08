@@ -1,18 +1,19 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using NUnit.Framework.Internal;
 
 namespace App.Platform
 {
     public abstract class PuzzleDay
     {
-        public abstract int Year { get; }
-        public abstract int Day { get; }
+        public int Year { get; set; }
+        public int Day { get; set; }
         public int Id => Day;
         public virtual string Comment => "";
         public virtual bool IsSlow => false;
         public virtual bool NeedsRewrite => false;
-        
+
         public virtual PuzzleResult RunPart1()
         {
             return null;

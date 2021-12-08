@@ -48,11 +48,11 @@ namespace Cli
         private static void RunEvent(Parameters parameters)
         {
             var puzzleRepository = new PuzzleRepository();
-            var @event = puzzleRepository.GetEvent(parameters.Year);
-            if (@event == null)
+            var eventDays = puzzleRepository.GetEventDays(parameters.Year);
+            if (!eventDays.Any())
                 throw new Exception("Event not found!");
 
-            var filteredDays = FilterDays(@event.Days, parameters);
+            var filteredDays = FilterDays(eventDays, parameters);
             RunDays(filteredDays, PuzzleTimeout, false);
         }
 

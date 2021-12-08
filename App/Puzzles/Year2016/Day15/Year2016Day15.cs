@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day15
 {
-    public class Year2016Day15 : Year2016Day
+    public class Year2016Day15 : PuzzleDay
     {
-        public override int Day => 15;
-
         public override PuzzleResult RunPart1()
         {
             var sculpture = new KineticSculpture(FileInput);

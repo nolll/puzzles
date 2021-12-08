@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day06
 {
-    public class Year2017Day06 : Year2017Day
+    public class Year2017Day06 : PuzzleDay
     {
-        public override int Day => 6;
-
         public override PuzzleResult RunPart1()
         {
             var reallocator = new MemoryReallocator(FileInput);

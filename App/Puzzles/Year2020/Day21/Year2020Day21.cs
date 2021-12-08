@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day21
 {
-    public class Year2020Day21 : Year2020Day
+    public class Year2020Day21 : PuzzleDay
     {
-        public override int Day => 21;
-
         public override PuzzleResult RunPart1()
         {
             var detector = new AllergenDetector(FileInput);

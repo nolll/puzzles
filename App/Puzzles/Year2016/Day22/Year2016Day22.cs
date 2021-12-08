@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day22
 {
-    public class Year2016Day22 : Year2016Day
+    public class Year2016Day22 : PuzzleDay
     {
-        public override int Day => 22;
-
         public override PuzzleResult RunPart1()
         {
             var storageGrid = new StorageGrid(FileInput);

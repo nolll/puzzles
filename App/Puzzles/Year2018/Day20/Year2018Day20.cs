@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2018.Day20
 {
-    public class Year2018Day20 : Year2018Day
+    public class Year2018Day20 : PuzzleDay
     {
-        public override int Day => 20;
-
         public override PuzzleResult RunPart1()
         {
             var navigator = new RegularMapNavigator(FileInput);

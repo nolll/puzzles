@@ -2,12 +2,10 @@
 
 namespace App.Puzzles.Year2016.Day05
 {
-    public class Year2016Day05 : Year2016Day
+    public class Year2016Day05 : PuzzleDay
     {
         private readonly PasswordGenerator _generator = new();
 
-        public override int Day => 5;
-        
         public override PuzzleResult RunPart1()
         {
             var pwd = _generator.Generate1(Input);

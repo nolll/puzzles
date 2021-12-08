@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day02
 {
-    public class Year2017Day02 : Year2017Day
+    public class Year2017Day02 : PuzzleDay
     {
-        public override int Day => 2;
-
         public override PuzzleResult RunPart1()
         {
             var spreadsheet = new Spreadsheet(FileInput);

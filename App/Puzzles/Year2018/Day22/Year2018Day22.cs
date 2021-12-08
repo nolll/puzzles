@@ -4,12 +4,10 @@ using App.Platform;
 
 namespace App.Puzzles.Year2018.Day22
 {
-    public class Year2018Day22 : Year2018Day
+    public class Year2018Day22 : PuzzleDay
     {
         public override string Comment => "Cave System Risk";
         public override bool IsSlow => true;
-
-        public override int Day => 22;
 
         public override PuzzleResult RunPart1()
         {

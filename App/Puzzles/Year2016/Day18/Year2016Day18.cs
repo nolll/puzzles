@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day18
 {
-    public class Year2016Day18 : Year2016Day
+    public class Year2016Day18 : PuzzleDay
     {
-        public override int Day => 18;
-
         public override PuzzleResult RunPart1()
         {
             var detector = new FloorTrapDetector(FileInput);

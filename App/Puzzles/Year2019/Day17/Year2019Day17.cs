@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2019.Day17
 {
-    public class Year2019Day17 : Year2019Day
+    public class Year2019Day17 : PuzzleDay
     {
-        public override int Day => 17;
-
         public override PuzzleResult RunPart1()
         {
             var sc = new ScaffoldingComputer1(FileInput);

@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2015.Day16
 {
-    public class Year2015Day16 : Year2015Day
+    public class Year2015Day16 : PuzzleDay
     {
-        public override int Day => 16;
-
         public override PuzzleResult RunPart1()
         {
             var sueSelector = new SueSelector(FileInput);

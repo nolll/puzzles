@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day03
 {
-    public class Year2017Day03 : Year2017Day
+    public class Year2017Day03 : PuzzleDay
     {
-        public override int Day => 3;
-
         public override PuzzleResult RunPart1()
         {
             var memory1 = new SpiralMemory(Input, SpiralMemoryMode.RunToTarget);

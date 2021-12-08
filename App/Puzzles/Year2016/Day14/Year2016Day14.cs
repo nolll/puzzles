@@ -2,12 +2,10 @@
 
 namespace App.Puzzles.Year2016.Day14
 {
-    public class Year2016Day14 : Year2016Day
+    public class Year2016Day14 : PuzzleDay
     {
         public override string Comment => "Slow hashing";
         public override bool IsSlow => true;
-
-        public override int Day => 14;
 
         public override PuzzleResult RunPart1()
         {

@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day20
 {
-    public class Year2016Day20 : Year2016Day
+    public class Year2016Day20 : PuzzleDay
     {
-        public override int Day => 20;
-
         public override PuzzleResult RunPart1()
         {
             var rules = new FirewallRules(FileInput);

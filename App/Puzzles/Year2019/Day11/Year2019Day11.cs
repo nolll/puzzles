@@ -4,10 +4,8 @@ using App.Platform;
 
 namespace App.Puzzles.Year2019.Day11
 {
-    public class Year2019Day11 : Year2019Day
+    public class Year2019Day11 : PuzzleDay
     {
-        public override int Day => 11;
-
         public override PuzzleResult RunPart1()
         {
             var robot1 = new PaintRobot(FileInput);

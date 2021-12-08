@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day14
 {
-    public class Year2017Day14 : Year2017Day
+    public class Year2017Day14 : PuzzleDay
     {
-        public override int Day => 14;
-
         public override PuzzleResult RunPart1()
         {
             var defragmenter = new DiskDefragmenter(Input);

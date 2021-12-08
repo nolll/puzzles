@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2018.Day12
 {
-    public class Year2018Day12 : Year2018Day
+    public class Year2018Day12 : PuzzleDay
     {
-        public override int Day => 12;
-
         public override PuzzleResult RunPart1()
         {
             var spreader = new PlantSpreader(FileInput);

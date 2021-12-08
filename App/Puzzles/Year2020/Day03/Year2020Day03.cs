@@ -3,10 +3,8 @@ using App.Platform;
 
 namespace App.Puzzles.Year2020.Day03
 {
-    public class Year2020Day03 : Year2020Day
+    public class Year2020Day03 : PuzzleDay
     {
-        public override int Day => 3;
-
         public override PuzzleResult RunPart1()
         {
             var navigator = new TreeNavigator(FileInput);

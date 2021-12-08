@@ -2,28 +2,31 @@
 
 namespace App.Puzzles.Year2018.Day13
 {
-    public class Year2018Day13 : Year2018Day
+    public class Year2018Day13 : PuzzleDay
     {
-        private readonly CollisionDetector _detector;
+        private CollisionDetector _detector;
 
-        public override int Day => 13;
-
-        public Year2018Day13()
+        private CollisionDetector Detector
         {
-            _detector = new CollisionDetector(FileInput);
+            get
+            {
+                if(_detector == null)
+                    _detector = new CollisionDetector(FileInput);
+                return _detector;
+            }
         }
-
+        
         public override PuzzleResult RunPart1()
         {
-            _detector.RunCarts();
-            var firstCollisionCoords = _detector.LocationOfFirstCollision;
+            Detector.RunCarts();
+            var firstCollisionCoords = Detector.LocationOfFirstCollision;
             var firstCollition = $"{firstCollisionCoords.X},{firstCollisionCoords.Y}";
             return new PuzzleResult(firstCollition, "118,112");
         }
 
         public override PuzzleResult RunPart2()
         {
-            var lastCartCoords = _detector.LocationOfLastCart;
+            var lastCartCoords = Detector.LocationOfLastCart;
             var lastCart = $"{lastCartCoords.X},{lastCartCoords.Y}";
             return new PuzzleResult(lastCart, "50,21");
         }

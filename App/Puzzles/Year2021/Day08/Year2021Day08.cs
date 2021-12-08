@@ -2,11 +2,8 @@
 
 namespace App.Puzzles.Year2021.Day08
 {
-    public class Year2021Day08 : Year2021Day
+    public class Year2021Day08 : PuzzleDay
     {
-        
-        public override int Day => 8;
-
         public override PuzzleResult RunPart1()
         {
             var decoder = new SevenSegmentDisplayDecoder(FileInput);

@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day24
 {
-    public class Year2017Day24 : Year2017Day
+    public class Year2017Day24 : PuzzleDay
     {
-        public override int Day => 24;
-
         public override PuzzleResult RunPart1()
         {
             var builder1 = new BridgeBuilder(FileInput, false);

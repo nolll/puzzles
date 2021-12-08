@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day25
 {
-    public class Year2016Day25 : Year2016Day
+    public class Year2016Day25 : PuzzleDay
     {
-        public override int Day => 25;
-
         public override PuzzleResult RunPart1()
         {
             var generator = new ClockSignalGenerator();

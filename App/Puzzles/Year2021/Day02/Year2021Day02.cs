@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2021.Day02
 {
-    public class Year2021Day02 : Year2021Day
+    public class Year2021Day02 : PuzzleDay
     {
-        public override int Day => 2;
-
         public override PuzzleResult RunPart1()
         {
             var control = new SubmarineControl(FileInput, false);

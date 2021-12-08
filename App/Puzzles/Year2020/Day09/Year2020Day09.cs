@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day09
 {
-    public class Year2020Day09 : Year2020Day
+    public class Year2020Day09 : PuzzleDay
     {
-        public override int Day => 9;
-
         public override PuzzleResult RunPart1()
         {
             var port = new XmasPort(FileInput, 25);

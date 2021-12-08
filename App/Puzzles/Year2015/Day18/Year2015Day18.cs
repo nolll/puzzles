@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2015.Day18
 {
-    public class Year2015Day18 : Year2015Day
+    public class Year2015Day18 : PuzzleDay
     {
-        public override int Day => 18;
-
         public override PuzzleResult RunPart1()
         {
             var gif = new AnimatedGif(FileInput);

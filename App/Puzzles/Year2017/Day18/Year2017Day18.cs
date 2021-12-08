@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day18
 {
-    public class Year2017Day18 : Year2017Day
+    public class Year2017Day18 : PuzzleDay
     {
-        public override int Day => 18;
-
         public override PuzzleResult RunPart1()
         {
             var single = new SingleRunner(FileInput);

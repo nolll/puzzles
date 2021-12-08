@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day16
 {
-    public class Year2020Day16 : Year2020Day
+    public class Year2020Day16 : PuzzleDay
     {
-        public override int Day => 16;
-
         public override PuzzleResult RunPart1()
         {
             var validator = new TicketValidator();

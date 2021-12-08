@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2018.Day18
 {
-    public class Year2018Day18 : Year2018Day
+    public class Year2018Day18 : PuzzleDay
     {
-        public override int Day => 18;
-
         public override PuzzleResult RunPart1()
         {
             var collection = new LumberCollection(FileInput);

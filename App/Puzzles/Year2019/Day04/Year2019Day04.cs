@@ -3,10 +3,8 @@ using App.Platform;
 
 namespace App.Puzzles.Year2019.Day04
 {
-    public class Year2019Day04 : Year2019Day
+    public class Year2019Day04 : PuzzleDay
     {
-        public override int Day => 4;
-
         public override PuzzleResult RunPart1()
         {
             var passwordBounds = Input.Split('-');

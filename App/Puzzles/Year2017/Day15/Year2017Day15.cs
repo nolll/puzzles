@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day15
 {
-    public class Year2017Day15 : Year2017Day
+    public class Year2017Day15 : PuzzleDay
     {
-        public override int Day => 15;
-
         public override PuzzleResult RunPart1()
         {
             var duel = GeneratorDuel.Parse(FileInput);

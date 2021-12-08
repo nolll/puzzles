@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day14
 {
-    public class Year2020Day14 : Year2020Day
+    public class Year2020Day14 : PuzzleDay
     {
-        public override int Day => 14;
-
         public override PuzzleResult RunPart1()
         {
             var system = new BitmaskSystem1();

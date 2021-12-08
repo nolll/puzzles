@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day07
 {
-    public class Year2017Day07 : Year2017Day
+    public class Year2017Day07 : PuzzleDay
     {
-        public override int Day => 7;
-
         public override PuzzleResult RunPart1()
         {
             var towers = new RecursiveTowers(FileInput);

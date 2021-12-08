@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day06
 {
-    public class Year2020Day06 : Year2020Day
+    public class Year2020Day06 : PuzzleDay
     {
-        public override int Day => 6;
-
         public override PuzzleResult RunPart1()
         {
             var reader = new DeclarationFormReader(FileInput);

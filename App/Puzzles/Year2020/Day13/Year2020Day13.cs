@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day13
 {
-    public class Year2020Day13 : Year2020Day
+    public class Year2020Day13 : PuzzleDay
     {
-        public override int Day => 13;
-
         public override PuzzleResult RunPart1()
         {
             var system = new BusScheduler1(FileInput);

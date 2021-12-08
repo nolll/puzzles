@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2015.Day25
 {
-    public class Year2015Day25 : Year2015Day
+    public class Year2015Day25 : PuzzleDay
     {
-        public override int Day => 25;
-
         public override PuzzleResult RunPart1()
         {
             var p = GetParams();

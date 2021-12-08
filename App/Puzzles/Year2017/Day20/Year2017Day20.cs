@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2017.Day20
 {
-    public class Year2017Day20 : Year2017Day
+    public class Year2017Day20 : PuzzleDay
     {
-        public override int Day => 20;
-
         public override PuzzleResult RunPart1()
         {
             var tracker1 = new ParticleTracker(FileInput);

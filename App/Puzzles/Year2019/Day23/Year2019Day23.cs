@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2019.Day23
 {
-    public class Year2019Day23 : Year2019Day
+    public class Year2019Day23 : PuzzleDay
     {
-        public override int Day => 23;
-
         public override PuzzleResult RunPart1()
         {
             var network = new CategorySixNetwork(FileInput);

@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day19
 {
-    public class Year2020Day19 : Year2020Day
+    public class Year2020Day19 : PuzzleDay
     {
-        public override int Day => 19;
-
         public override PuzzleResult RunPart1()
         {
             var validator = new MonsterImageValidator(FileInput);

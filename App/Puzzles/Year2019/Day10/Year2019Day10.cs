@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2019.Day10
 {
-    public class Year2019Day10 : Year2019Day
+    public class Year2019Day10 : PuzzleDay
     {
-        public override int Day => 10;
-
         public override PuzzleResult RunPart1()
         {
             var detector = new AsteroidDetector();

@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2021.Day09
 {
-    public class Year2021Day09 : Year2021Day
+    public class Year2021Day09 : PuzzleDay
     {
-        public override int Day => 9;
-
         public override PuzzleResult RunPart1()
         {
             return new PuzzleResult(0);

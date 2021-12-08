@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2021.Day01
 {
-    public class Year2021Day01 : Year2021Day
+    public class Year2021Day01 : PuzzleDay
     {
-        public override int Day => 1;
-
         public override PuzzleResult RunPart1()
         {
             var calculator = new DepthMeasurement();

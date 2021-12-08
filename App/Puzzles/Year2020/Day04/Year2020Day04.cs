@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2020.Day04
 {
-    public class Year2020Day04 : Year2020Day
+    public class Year2020Day04 : PuzzleDay
     {
-        public override int Day => 4;
-
         public override PuzzleResult RunPart1()
         {
             var processor = new PassportProcessor(FileInput);

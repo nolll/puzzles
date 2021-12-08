@@ -4,10 +4,8 @@ using App.Platform;
 
 namespace App.Puzzles.Year2021.Day07
 {
-    public class Year2021Day07 : Year2021Day
+    public class Year2021Day07 : PuzzleDay
     {
-        public override int Day => 7;
-
         public override PuzzleResult RunPart1()
         {
             var result = GetFuel1(FileInput, false);

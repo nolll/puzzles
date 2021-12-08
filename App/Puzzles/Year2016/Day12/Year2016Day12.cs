@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day12
 {
-    public class Year2016Day12 : Year2016Day
+    public class Year2016Day12 : PuzzleDay
     {
-        public override int Day => 12;
-
         public override PuzzleResult RunPart1()
         {
             var computer = new MonorailComputer(FileInput, 0, 0);

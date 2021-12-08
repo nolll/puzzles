@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2018.Day04
 {
-    public class Year2018Day04 : Year2018Day
+    public class Year2018Day04 : PuzzleDay
     {
-        public override int Day => 4;
-
         public override PuzzleResult RunPart1()
         {
             var guardSleepPuzzle = new GuardSleepPuzzle(FileInput);

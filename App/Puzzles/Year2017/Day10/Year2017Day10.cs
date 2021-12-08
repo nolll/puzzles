@@ -3,10 +3,8 @@ using App.Platform;
 
 namespace App.Puzzles.Year2017.Day10
 {
-    public class Year2017Day10 : Year2017Day
+    public class Year2017Day10 : PuzzleDay
     {
-        public override int Day => 10;
-
         public override PuzzleResult RunPart1()
         {
             var intHasher = new IntKnotHasher(FileInput);

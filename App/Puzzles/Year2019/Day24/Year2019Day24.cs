@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2019.Day24
 {
-    public class Year2019Day24 : Year2019Day
+    public class Year2019Day24 : PuzzleDay
     {
-        public override int Day => 124;
-
         public override PuzzleResult RunPart1()
         {
             var simulator = new BugLifeSimulator(FileInput);

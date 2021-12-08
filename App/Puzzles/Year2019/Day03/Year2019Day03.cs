@@ -3,10 +3,8 @@ using App.Platform;
 
 namespace App.Puzzles.Year2019.Day03
 {
-    public class Year2019Day03 : Year2019Day
+    public class Year2019Day03 : PuzzleDay
     {
-        public override int Day => 3;
-
         public override PuzzleResult RunPart1()
         {
             var wirePaths = PuzzleInputReader.ReadLines(FileInput);

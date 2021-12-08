@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2021.Day06
 {
-    public class Year2021Day06 : Year2021Day
+    public class Year2021Day06 : PuzzleDay
     {
-        public override int Day => 6;
-
         public override PuzzleResult RunPart1()
         {
             var fishCounter = new FishCounter(FileInput);

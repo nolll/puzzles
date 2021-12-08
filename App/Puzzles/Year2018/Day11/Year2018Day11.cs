@@ -2,12 +2,10 @@
 
 namespace App.Puzzles.Year2018.Day11
 {
-    public class Year2018Day11 : Year2018Day
+    public class Year2018Day11 : PuzzleDay
     {
         public override string Comment => "Power Grid Matrix";
         public override bool IsSlow => true;
-
-        public override int Day => 11;
 
         public override PuzzleResult RunPart1()
         {

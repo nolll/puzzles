@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2019.Day16
 {
-    public class Year2019Day16 : Year2019Day
+    public class Year2019Day16 : PuzzleDay
     {
-        public override int Day => 16;
-
         public override PuzzleResult RunPart1()
         {
             var algorithm1 = new FrequencyAlgorithmPart1(FileInput);

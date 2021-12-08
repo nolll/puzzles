@@ -2,12 +2,10 @@
 
 namespace App.Puzzles.Year2015.Day20
 {
-    public class Year2015Day20 : Year2015Day
+    public class Year2015Day20 : PuzzleDay
     {
         public override string Comment => "Int factors";
         public override bool IsSlow => true;
-
-        public override int Day => 20;
 
         public override PuzzleResult RunPart1()
         {

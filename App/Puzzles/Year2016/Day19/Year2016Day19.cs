@@ -2,10 +2,8 @@
 
 namespace App.Puzzles.Year2016.Day19
 {
-    public class Year2016Day19 : Year2016Day
+    public class Year2016Day19 : PuzzleDay
     {
-        public override int Day => 19;
-
         public override PuzzleResult RunPart1()
         {
             var party = new WhiteElephantParty(Input);

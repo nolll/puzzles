@@ -6,12 +6,16 @@ namespace App.Puzzles.Year2021.Day09
     {
         public override PuzzleResult RunPart1()
         {
-            return new PuzzleResult(0);
+            var heightMap = new HeightMap();
+            var result = heightMap.FindLowPointSum(FileInput);
+            return new PuzzleResult(result, 591);
         }
 
         public override PuzzleResult RunPart2()
         {
-            return new PuzzleResult(0);
+            var heightMap = new HeightMap();
+            var result = heightMap.FindBasinSizes(FileInput);
+            return new PuzzleResult(result, 1113424);
         }
     }
 }

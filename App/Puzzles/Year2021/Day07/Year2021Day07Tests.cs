@@ -7,8 +7,8 @@ namespace App.Puzzles.Year2021.Day07
         [Test]
         public void Part1()
         {
-            var puzzle = new Year2021Day07();
-            var result = puzzle.GetFuel1(Input, false);
+            var crabSubmarines = new CrabSubmarines();
+            var result = crabSubmarines.GetFuel1(Input, false);
 
             Assert.That(result, Is.EqualTo(37));
         }
@@ -16,8 +16,8 @@ namespace App.Puzzles.Year2021.Day07
         [Test]
         public void Part2()
         {
-            var puzzle = new Year2021Day07();
-            var result = puzzle.GetFuel1(Input, true);
+            var crabSubmarines = new CrabSubmarines();
+            var result = crabSubmarines.GetFuel1(Input, true);
 
             Assert.That(result, Is.EqualTo(168));
         }
@@ -27,8 +27,7 @@ namespace App.Puzzles.Year2021.Day07
         [TestCase(2, 2, 0)]
         public void CostPart1(int a, int b, int expected)
         {
-            var puzzle = new Year2021Day07();
-            var result = Year2021Day07.GetCost(a, b);
+            var result = CrabSubmarines.GetCost(a, b);
 
             Assert.That(result, Is.EqualTo(expected));
         }
@@ -47,8 +46,8 @@ namespace App.Puzzles.Year2021.Day07
         [TestCase(5, 5, 0)]
         public void CostPart2(int a, int b, int expected)
         {
-            var puzzle = new Year2021Day07();
-            var result = puzzle.GetCrabEnginerringCost(a, b);
+            var crabSubmarines = new CrabSubmarines();
+            var result = crabSubmarines.GetCrabEnginerringCost(a, b);
 
             Assert.That(result, Is.EqualTo(expected));
         }

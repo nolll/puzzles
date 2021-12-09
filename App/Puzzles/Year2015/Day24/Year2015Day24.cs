@@ -2,7 +2,7 @@
 
 namespace App.Puzzles.Year2015.Day24
 {
-    public class Year2015Day24 : PuzzleDay
+    public class Year2015Day24 : Puzzle
     {
         public override string Comment => "Present balancing";
         public override bool IsSlow => true;

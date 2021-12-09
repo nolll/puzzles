@@ -2,7 +2,7 @@
 
 namespace App.Puzzles.Year2015.Day04
 {
-    public class Year2015Day04 : PuzzleDay
+    public class Year2015Day04 : Puzzle
     {
         private int _index;
 

@@ -2,7 +2,7 @@
 
 namespace App.Puzzles.Year2018.Day13
 {
-    public class Year2018Day13 : PuzzleDay
+    public class Year2018Day13 : Puzzle
     {
         private CollisionDetector _detector;
 

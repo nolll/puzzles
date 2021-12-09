@@ -2,12 +2,12 @@
 {
     public class DayResult
     {
-        public PuzzleWrapper Day { get; }
+        public PuzzleDay Day { get; }
         public TimedPuzzleResult Result1 { get; }
         public TimedPuzzleResult Result2 { get; }
         public string Comment { get; }
 
-        public DayResult(PuzzleWrapper day, TimedPuzzleResult result1, TimedPuzzleResult result2)
+        public DayResult(PuzzleDay day, TimedPuzzleResult result1, TimedPuzzleResult result2)
         {
             Day = day;
             Result1 = result1;

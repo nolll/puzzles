@@ -4,7 +4,7 @@ using App.Platform;
 
 namespace App.Puzzles.Year2021.Day07
 {
-    public class Year2021Day07 : PuzzleDay
+    public class Year2021Day07 : Puzzle
     {
         public override PuzzleResult RunPart1()
         {

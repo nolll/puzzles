@@ -32,7 +32,7 @@ namespace Cli.Printing
             Console.WriteLine();
         }
 
-        private static void PrintDayTitle(PuzzleWrapper day)
+        private static void PrintDayTitle(PuzzleDay day)
         {
             Console.WriteLine();
             Console.WriteLine($"Day {day.Day} {day.Year}:");

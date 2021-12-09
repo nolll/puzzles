@@ -3,7 +3,7 @@ using App.Platform;
 
 namespace App.Puzzles.Year2019.Day05
 {
-    public class Year2019Day05 : PuzzleDay
+    public class Year2019Day05 : Puzzle
     {
         private long _output;
 

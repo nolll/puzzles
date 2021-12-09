@@ -2,7 +2,7 @@
 
 namespace App.Puzzles.Year2019.Day15
 {
-    public class Year2019Day15 : PuzzleDay
+    public class Year2019Day15 : Puzzle
     {
         public override string Comment => "Repair droid";
         public override bool IsSlow => true;

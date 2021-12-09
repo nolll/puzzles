@@ -2,7 +2,7 @@
 
 namespace App.Puzzles.Year2016.Day24
 {
-    public class Year2016Day24 : PuzzleDay
+    public class Year2016Day24 : Puzzle
     {
         private AirDuctNavigator Navigator => new(FileInput);
 

@@ -2,7 +2,7 @@
 
 namespace App.Puzzles.Year2016.Day05
 {
-    public class Year2016Day05 : PuzzleDay
+    public class Year2016Day05 : Puzzle
     {
         private readonly PasswordGenerator _generator = new();
 

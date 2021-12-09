@@ -2,7 +2,7 @@
 
 namespace App.Puzzles.Year2015.Day11
 {
-    public class Year2015Day11: PuzzleDay
+    public class Year2015Day11: Puzzle
     {
         private CorporatePasswordValidator _validator;
         private string _firstPassword;

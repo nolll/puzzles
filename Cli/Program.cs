@@ -42,7 +42,7 @@ namespace Cli
             if (foundDay == null)
                 throw new Exception("The specified day could not be found.");
             
-            RunDays(new List<PuzzleWrapper> {foundDay}, null, true);
+            RunDays(new List<PuzzleDay> {foundDay}, null, true);
         }
 
         private static void RunEvent(Parameters parameters)
@@ -64,7 +64,7 @@ namespace Cli
             RunDays(filteredDays, PuzzleTimeout, false);
         }
 
-        private static void RunDays(List<PuzzleWrapper> days, int? timeout, bool throwExceptions)
+        private static void RunDays(List<PuzzleDay> days, int? timeout, bool throwExceptions)
         {
             var runner = GetPuzzleRunner(timeout, throwExceptions);
             
@@ -94,7 +94,7 @@ namespace Cli
 #endif
         }
 
-        private static List<PuzzleWrapper> FilterDays(List<PuzzleWrapper> days, Parameters parameters)
+        private static List<PuzzleDay> FilterDays(List<PuzzleDay> days, Parameters parameters)
         {
             if (parameters.RunSlowOnly)
                 return days.Where(o => o.Puzzle.IsSlow).ToList();

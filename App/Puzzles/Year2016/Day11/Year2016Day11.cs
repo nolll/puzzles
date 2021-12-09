@@ -2,7 +2,7 @@
 
 namespace App.Puzzles.Year2016.Day11
 {
-    public class Year2016Day11 : PuzzleDay
+    public class Year2016Day11 : Puzzle
     {
         public override string Comment => "Floor permutations";
         public override bool IsSlow => true;

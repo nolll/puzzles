@@ -20,7 +20,7 @@ namespace App.Platform
             _timeout = timeout;
         }
 
-        public void Run(IList<PuzzleWrapper> days)
+        public void Run(IList<PuzzleDay> days)
         {
             _multiDayPrinter.PrintHeader();
             foreach (var day in days)
@@ -31,13 +31,13 @@ namespace App.Platform
             _multiDayPrinter.PrintFooter();
         }
 
-        public void Run(PuzzleWrapper day)
+        public void Run(PuzzleDay day)
         {
             var result = RunDay(day);
             _singleDayPrinter.PrintDay(result);
         }
 
-        private DayResult RunDay(PuzzleWrapper day)
+        private DayResult RunDay(PuzzleDay day)
         {
             var p1 = RunPuzzleWithTimer(day.Puzzle.RunPart1, day.Puzzle.IsSlow);
             var p2 = RunPuzzleWithTimer(day.Puzzle.RunPart2, day.Puzzle.IsSlow);

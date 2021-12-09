@@ -9,21 +9,21 @@ namespace App
 {
     public class PuzzleRepository
     {
-        private readonly List<PuzzleWrapper> _allDays;
+        private readonly List<PuzzleDay> _allDays;
         
         public PuzzleRepository()
         {
             _allDays = CreateDays();
         }
 
-        public PuzzleWrapper GetDay(int? selectedYear, int? selectedDay)
+        public PuzzleDay GetDay(int? selectedYear, int? selectedDay)
         {
             return selectedYear != null && selectedDay != null
                 ? _allDays.FirstOrDefault(o => o.Year == selectedYear.Value &&  o.Day == selectedDay.Value)
                 : _allDays.Last();
         }
 
-        public List<PuzzleWrapper> GetEventDays(int? selectedYear)
+        public List<PuzzleDay> GetEventDays(int? selectedYear)
         {
             if (selectedYear != null)
             {
@@ -34,25 +34,25 @@ namespace App
             return _allDays.Where(o => o.Year == maxYear).ToList();
         }
         
-        public List<PuzzleWrapper> GetAll()
+        public List<PuzzleDay> GetAll()
         {
             return _allDays;
         }
 
-        private List<PuzzleWrapper> CreateDays()
+        private List<PuzzleDay> CreateDays()
         {
-            var types = GetConcreteSubclassesOf<PuzzleDay>();
+            var types = GetConcreteSubclassesOf<Puzzle>();
             return types.Select(CreateDay).OrderBy(o => o.Year).ThenBy(o => o.Day).ToList();
         }
 
-        private PuzzleWrapper CreateDay(Type t)
+        private PuzzleDay CreateDay(Type t)
         {
             var (year, day) = PuzzleParser.ParseType(t);
-            var puzzleDay = (PuzzleDay)Activator.CreateInstance(t);
+            var puzzleDay = (Puzzle)Activator.CreateInstance(t);
             if (puzzleDay == null)
                 throw new Exception($"Could not create Puzzle for day {day} {year} ");
             
-            return new PuzzleWrapper(year, day, puzzleDay);
+            return new PuzzleDay(year, day, puzzleDay);
         }
 
         private static IEnumerable<Type> GetConcreteSubclassesOf<T>() where T : class

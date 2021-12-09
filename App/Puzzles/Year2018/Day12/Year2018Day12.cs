@@ -2,7 +2,7 @@
 
 namespace App.Puzzles.Year2018.Day12
 {
-    public class Year2018Day12 : PuzzleDay
+    public class Year2018Day12 : Puzzle
     {
         public override PuzzleResult RunPart1()
         {

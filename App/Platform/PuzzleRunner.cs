@@ -20,7 +20,7 @@ namespace App.Platform
             _timeout = timeout;
         }
 
-        public void Run(IList<PuzzleDay> days)
+        public void Run(IList<PuzzleWrapper> days)
         {
             _multiDayPrinter.PrintHeader();
             foreach (var day in days)
@@ -31,18 +31,18 @@ namespace App.Platform
             _multiDayPrinter.PrintFooter();
         }
 
-        public void Run(PuzzleDay day)
+        public void Run(PuzzleWrapper day)
         {
             var result = RunDay(day);
             _singleDayPrinter.PrintDay(result);
         }
 
-        private DayResult RunDay(PuzzleDay day)
+        private DayResult RunDay(PuzzleWrapper day)
         {
-            var p1 = RunPuzzleWithTimer(day.RunPart1, day.IsSlow);
-            var p2 = RunPuzzleWithTimer(day.RunPart2, day.IsSlow);
+            var p1 = RunPuzzleWithTimer(day.Puzzle.RunPart1, day.Puzzle.IsSlow);
+            var p2 = RunPuzzleWithTimer(day.Puzzle.RunPart2, day.Puzzle.IsSlow);
 
-            return new DayResult(day, p1, p2, day.Comment);
+            return new DayResult(day, p1, p2);
         }
 
         private TimedPuzzleResult RunPuzzleWithTimer(Func<PuzzleResult> func, bool isSlow)

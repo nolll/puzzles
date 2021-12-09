@@ -22,7 +22,7 @@ namespace Cli.Printing
 
         public void PrintDay(DayResult dayResult)
         {
-            var day = dayResult.Day.Id.ToString().PadLeft(2, '0');
+            var day = dayResult.Day.Day.ToString().PadLeft(2, '0');
             var dayAndYear = $"Day {day} {dayResult.Day.Year}";
             var p1 = GetTableResult(dayResult.Result1).PadRight(10, ' ');
             var p1Color = GetColor(dayResult.Result1);

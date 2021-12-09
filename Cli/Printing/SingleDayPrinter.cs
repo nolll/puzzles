@@ -28,20 +28,14 @@ namespace Cli.Printing
             var color = GetColor(puzzleResult);
             SetColor(color);
             Console.Write(puzzleResult.Answer);
-            //if (puzzleResult.Status == PuzzleResultStatus.Wrong)
-            //{
-            //    Console.WriteLine();
-            //    SetColor(ConsoleColor.DarkRed);
-            //    Console.Write(puzzleResult.CorrectAnswer);
-            //}
             ResetColor();
             Console.WriteLine();
         }
 
-        private static void PrintDayTitle(PuzzleDay day)
+        private static void PrintDayTitle(PuzzleWrapper day)
         {
             Console.WriteLine();
-            Console.WriteLine($"Day {day.Id} {day.Year}:");
+            Console.WriteLine($"Day {day.Day} {day.Year}:");
             PrintDivider();
         }
 

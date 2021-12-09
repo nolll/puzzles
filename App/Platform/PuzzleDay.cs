@@ -1,15 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using NUnit.Framework.Internal;
 
 namespace App.Platform
 {
     public abstract class PuzzleDay
     {
-        public int Year { get; set; }
-        public int Day { get; set; }
-        public int Id => Day;
         public virtual string Comment => "";
         public virtual bool IsSlow => false;
         public virtual bool NeedsRewrite => false;
@@ -36,13 +32,20 @@ namespace App.Platform
             }
         }
 
-        private string FilePath => Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "Puzzles",
-                $"Year{Year}",
-                $"Day{PaddedDay}",
-                $"Year{Year}Day{PaddedDay}.txt");
-
-        private string PaddedDay => Id.ToString().PadLeft(2, '0');
+        private string FilePath
+        {
+            get
+            {
+                var type = GetType();
+                var (year, day) = PuzzleParser.ParseType(type);
+                var paddedDay = day.ToString().PadLeft(2, '0');
+                return Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "Puzzles",
+                    $"Year{year}",
+                    $"Day{paddedDay}",
+                    $"Year{year}Day{paddedDay}.txt");
+            }
+        }
     }
 }

@@ -6,12 +6,16 @@ namespace App.Puzzles.Year2021.Day10
     {
         public override PuzzleResult RunPart1()
         {
-            return new PuzzleResult(0);
+            var syntaxChecker = new SyntaxChecker();
+            var result = syntaxChecker.GetTotalErrorScore(FileInput);
+            return new PuzzleResult(result, 399153);
         }
 
         public override PuzzleResult RunPart2()
         {
-            return new PuzzleResult(0);
+            var syntaxChecker = new SyntaxChecker();
+            var result = syntaxChecker.FindMiddleScore(FileInput);
+            return new PuzzleResult(result, 2995077699);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace App.Common.CoordinateSystems
             return matrix;
         }
 
-        public static Matrix<int> BuildIntMatrix(string input, int defaultValue = default)
+        public static Matrix<int> BuildIntMatrixFromSpaceSeparated(string input, int defaultValue = default)
         {
             var matrix = new Matrix<int>(1, 1, defaultValue);
             var rows = input.Trim().Split('\n');
@@ -35,6 +35,28 @@ namespace App.Common.CoordinateSystems
             {
                 var x = 0;
                 var numbers = row.Trim().Split(' ').Where(o => o.Length > 0).Select(int.Parse);
+                foreach (var n in numbers)
+                {
+                    matrix.MoveTo(x, y);
+                    matrix.WriteValue(n);
+                    x += 1;
+                }
+
+                y += 1;
+            }
+
+            return matrix;
+        }
+
+        public static Matrix<int> BuildIntMatrixFromNonSeparated(string input, int defaultValue = default)
+        {
+            var matrix = new Matrix<int>(1, 1, defaultValue);
+            var rows = input.Trim().Split('\n');
+            var y = 0;
+            foreach (var row in rows)
+            {
+                var x = 0;
+                var numbers = row.Trim().ToCharArray().Select(o => o.ToString()).Select(int.Parse);
                 foreach (var n in numbers)
                 {
                     matrix.MoveTo(x, y);

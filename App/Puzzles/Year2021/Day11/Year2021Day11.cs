@@ -6,12 +6,16 @@ namespace App.Puzzles.Year2021.Day11
     {
         public override PuzzleResult RunPart1()
         {
-            return new PuzzleResult(0);
+            var flasher = new OctopusFlasher(FileInput);
+            var result = flasher.Run(100);
+            return new PuzzleResult(result, 1591);
         }
 
         public override PuzzleResult RunPart2()
         {
-            return new PuzzleResult(0);
+            var flasher = new OctopusFlasher(FileInput);
+            var result = flasher.Run();
+            return new PuzzleResult(result, 314);
         }
     }
 }

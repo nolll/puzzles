@@ -6,12 +6,18 @@ namespace App.Puzzles.Year2021.Day12
     {
         public override PuzzleResult RunPart1()
         {
-            return new PuzzleResult(0);
+            var caveSystem = new CaveSystem(FileInput, false);
+            var result = caveSystem.CountPaths();
+            
+            return new PuzzleResult(result, 5254);
         }
 
         public override PuzzleResult RunPart2()
         {
-            return new PuzzleResult(0);
+            var caveSystem = new CaveSystem(FileInput, true);
+            var result = caveSystem.CountPaths();
+            
+            return new PuzzleResult(result, 149385);
         }
     }
 }

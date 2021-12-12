@@ -7,20 +7,28 @@ namespace App.Puzzles.Year2021.Day12
         [Test]
         public void Part1()
         {
-            var result = 0;
+            var caveSystem = new CaveSystem(Input, false);
+            var result = caveSystem.CountPaths();
 
-            Assert.That(result, Is.EqualTo(0));
+            Assert.That(result, Is.EqualTo(10));
         }
 
         [Test]
         public void Part2()
         {
-            var result = 0;
+            var caveSystem = new CaveSystem(Input, true);
+            var result = caveSystem.CountPaths();
 
-            Assert.That(result, Is.EqualTo(0));
+            Assert.That(result, Is.EqualTo(36));
         }
 
         private const string Input = @"
-";
+start-A
+start-b
+A-c
+A-b
+b-d
+A-end
+b-end";
     }
 }

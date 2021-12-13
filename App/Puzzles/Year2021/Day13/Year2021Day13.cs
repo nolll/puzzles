@@ -6,7 +6,10 @@ namespace App.Puzzles.Year2021.Day13
     {
         public override PuzzleResult RunPart1()
         {
-            return new PuzzleResult(0);
+            var paper = new TransparentPaper(FileInput);
+            var result = paper.DotCountAfterFold(1);
+
+            return new PuzzleResult(result);
         }
 
         public override PuzzleResult RunPart2()

@@ -344,6 +344,29 @@ namespace App.Common.CoordinateSystems
             return RotateLeft().RotateLeft().RotateLeft();
         }
 
+        public Matrix<T> Slice(MatrixAddress from, MatrixAddress to)
+        {
+            var width = Width;
+            var height = Height;
+            var xNew = 0;
+            var yNew = 0;
+            var newMatrix = new Matrix<T>(defaultValue: _defaultValue);
+            for (var y = from.Y; y <= to.Y; y++)
+            {
+                for (var x = from.X; x <= to.X; x++)
+                {
+                    newMatrix.MoveTo(xNew, yNew);
+                    newMatrix.WriteValue(ReadValueAt(x, y));
+
+                    xNew++;
+                }
+
+                xNew = 0;
+                yNew++;
+            }
+            return newMatrix;
+        }
+
         public Matrix<T> FlipVertical()
         {
             var width = Width;

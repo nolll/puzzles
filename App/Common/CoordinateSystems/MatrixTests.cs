@@ -150,6 +150,26 @@ namespace App.Common.CoordinateSystems
             Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
         }
 
+//        [Test]
+//        public void Slice()
+//        {
+//            const string input = @"
+//123
+//456
+//789";
+
+//            const string expected = @"
+//56
+//89";
+
+//            var matrix = MatrixBuilder.BuildiMatrix(input);
+//            var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+
+//            matrix = matrix.FlipVertical();
+
+//            Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+//        }
+
         [Test]
         public void FlipVertical()
         {

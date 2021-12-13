@@ -18,7 +18,7 @@ namespace App.Puzzles.Year2021.Day13
             _folds = groups[1];
         }
 
-        private Matrix<char> BuildMatrix(IList<string> rows)
+        private static Matrix<char> BuildMatrix(IEnumerable<string> rows)
         {
             var matrix = new Matrix<char>(defaultValue: '.');
 
@@ -37,37 +37,32 @@ namespace App.Puzzles.Year2021.Day13
             return matrix;
         }
 
-        public int DotCountAfterFold(int maxFolds)
+        public int DotCountAfterFirstFold()
         {
-            var foldCount = 0;
-            foreach (var fold in _folds)
-            {
-                var parts = fold.Split(' ');
-                var dimension = parts[2][0];
-                var value = int.Parse(parts[2][2..]);
-
-                Fold(dimension, value);
-
-                foldCount++;
-                if (foldCount >= maxFolds)
-                    break;
-            }
-
+            Fold(_folds.First());
             return _matrix.Values.Count(o => o == '#');
         }
 
         public string MessageAfterFold()
         {
-            foreach (var fold in _folds)
-            {
-                var parts = fold.Split(' ');
-                var dimension = parts[2][0];
-                var value = int.Parse(parts[2][2..]);
-
-                Fold(dimension, value);
-            }
+            foreach (var fold in _folds) 
+                Fold(fold);
 
             return _matrix.Print();
+        }
+
+        private void Fold(string fold)
+        {
+            var (dimension, value) = ParseFoldInstruction(fold);
+            Fold(dimension, value);
+        }
+
+        private (char dimension, int value) ParseFoldInstruction(string s)
+        {
+            var parts = s.Split(' ');
+            var dimension = parts[2][0];
+            var value = int.Parse(parts[2][2..]);
+            return (dimension, value);
         }
 
         private void Fold(char dimension, int value)
@@ -80,13 +75,11 @@ namespace App.Puzzles.Year2021.Day13
 
         private void FoldHorizontal(int foldCol)
         {
-            var leftFrom = new MatrixAddress(0, 0);
-            var leftTo = new MatrixAddress(foldCol - 1, _matrix.Height - 1);
-            var rightFrom = new MatrixAddress(foldCol + 1, 0);
-            var rightTo = new MatrixAddress(_matrix.Width - 1, _matrix.Height - 1);
+            var keepTo = new MatrixAddress(foldCol - 1, _matrix.Height - 1);
+            var foldFrom = new MatrixAddress(foldCol + 1, 0);
 
-            var newMatrix = _matrix.Copy().Slice(leftFrom, leftTo);
-            var foldMatrix = _matrix.Copy().Slice(rightFrom, rightTo);
+            var newMatrix = _matrix.Copy().Slice(to: keepTo);
+            var foldMatrix = _matrix.Copy().Slice(foldFrom);
             foldMatrix = foldMatrix.FlipHorizontal();
             var widthDiff = newMatrix.Width - foldMatrix.Width;
 
@@ -108,13 +101,11 @@ namespace App.Puzzles.Year2021.Day13
 
         private void FoldVertical(int foldRow)
         {
-            var topFrom = new MatrixAddress(0, 0);
-            var topTo = new MatrixAddress(_matrix.Width - 1, foldRow - 1);
-            var bottomFrom = new MatrixAddress(0, foldRow + 1);
-            var bottomTo = new MatrixAddress(_matrix.Width - 1, _matrix.Height - 1);
+            var keepTo = new MatrixAddress(_matrix.Width - 1, foldRow - 1);
+            var foldFrom = new MatrixAddress(0, foldRow + 1);
 
-            var newMatrix = _matrix.Copy().Slice(topFrom, topTo);
-            var foldMatrix = _matrix.Copy().Slice(bottomFrom, bottomTo);
+            var newMatrix = _matrix.Copy().Slice(to: keepTo);
+            var foldMatrix = _matrix.Copy().Slice(foldFrom);
             foldMatrix = foldMatrix.FlipVertical();
             var heightDiff = newMatrix.Height - foldMatrix.Height;
 

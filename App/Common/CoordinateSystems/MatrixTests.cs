@@ -8,6 +8,12 @@ namespace App.Common.CoordinateSystems
         private const char DefaultValue = '.';
         private const char WriteValue = '#';
 
+        private const string SliceInput = @"
+ABCD
+EFGH
+IJKL
+MNOP";
+
         [Test]
         public void MoveToWorks()
         {
@@ -150,25 +156,68 @@ namespace App.Common.CoordinateSystems
             Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
         }
 
-//        [Test]
-//        public void Slice()
-//        {
-//            const string input = @"
-//123
-//456
-//789";
+        [Test]
+        public void Slice()
+        {
+            const string expected = @"
+FG
+JK";
 
-//            const string expected = @"
-//56
-//89";
+            var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
+            var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
-//            var matrix = MatrixBuilder.BuildiMatrix(input);
-//            var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+            matrix = matrix.Slice(new MatrixAddress(1, 1), new MatrixAddress(2, 2));
 
-//            matrix = matrix.FlipVertical();
+            Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        }
 
-//            Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
-//        }
+        [Test]
+        public void SliceFrom()
+        {
+            const string expected = @"
+FGH
+JKL
+NOP";
+
+            var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
+            var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+
+            matrix = matrix.Slice(new MatrixAddress(1, 1));
+
+            Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        }
+
+        [Test]
+        public void SliceTo()
+        {
+            const string expected = @"
+ABC
+EFG
+IJK";
+
+            var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
+            var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+
+            matrix = matrix.Slice(to: new MatrixAddress(2, 2));
+
+            Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        }
+
+        [Test]
+        public void SliceSize()
+        {
+            const string expected = @"
+FGH
+JKL
+NOP";
+
+            var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
+            var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+
+            matrix = matrix.Slice(new MatrixAddress(1, 1), 2, 2);
+
+            Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        }
 
         [Test]
         public void FlipVertical()

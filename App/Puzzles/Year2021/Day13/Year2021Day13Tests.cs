@@ -8,7 +8,7 @@ namespace App.Puzzles.Year2021.Day13
         public void Part1()
         {
             var paper = new TransparentPaper(Input);
-            var result = paper.DotCountAfterFold(1);
+            var result = paper.DotCountAfterFirstFold();
 
             Assert.That(result, Is.EqualTo(17));
         }

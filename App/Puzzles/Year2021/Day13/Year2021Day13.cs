@@ -7,7 +7,7 @@ namespace App.Puzzles.Year2021.Day13
         public override PuzzleResult RunPart1()
         {
             var paper = new TransparentPaper(FileInput);
-            var result = paper.DotCountAfterFold(1);
+            var result = paper.DotCountAfterFirstFold();
 
             return new PuzzleResult(result, 695);
         }

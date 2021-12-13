@@ -344,10 +344,10 @@ namespace App.Common.CoordinateSystems
             return RotateLeft().RotateLeft().RotateLeft();
         }
 
-        public Matrix<T> Slice(MatrixAddress from, MatrixAddress to)
+        public Matrix<T> Slice(MatrixAddress from = null, MatrixAddress to = null)
         {
-            var width = Width;
-            var height = Height;
+            from ??= new MatrixAddress(0, 0);
+            to ??= new MatrixAddress(Width - 1, Height - 1);
             var xNew = 0;
             var yNew = 0;
             var newMatrix = new Matrix<T>(defaultValue: _defaultValue);
@@ -365,6 +365,12 @@ namespace App.Common.CoordinateSystems
                 yNew++;
             }
             return newMatrix;
+        }
+
+        public Matrix<T> Slice(MatrixAddress from, int width, int height)
+        {
+            var to = new MatrixAddress(from.X + width, from.Y + height);
+            return Slice(from, to);
         }
 
         public Matrix<T> FlipVertical()

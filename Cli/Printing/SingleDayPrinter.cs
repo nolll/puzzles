@@ -36,6 +36,8 @@ namespace Cli.Printing
         {
             Console.WriteLine();
             Console.WriteLine($"Day {day.Day} {day.Year}:");
+            if(day.Puzzle.Title != null)
+                Console.WriteLine(day.Puzzle.Title);
             PrintDivider();
         }
 

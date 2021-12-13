@@ -4,6 +4,8 @@ namespace App.Puzzles.Year2021.Day09
 {
     public class Year2021Day09 : Puzzle
     {
+        public override string Title => "Smoke Basin";
+
         public override PuzzleResult RunPart1()
         {
             var heightMap = new HeightMap();

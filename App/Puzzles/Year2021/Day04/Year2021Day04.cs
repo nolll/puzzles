@@ -4,6 +4,8 @@ namespace App.Puzzles.Year2021.Day04
 {
     public class Year2021Day04 : Puzzle
     {
+        public override string Title => "Giant Squid";
+
         public override PuzzleResult RunPart1()
         {
             var diagnostics = new BingoGame(FileInput);

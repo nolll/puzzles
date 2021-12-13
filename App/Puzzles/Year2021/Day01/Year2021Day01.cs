@@ -4,6 +4,8 @@ namespace App.Puzzles.Year2021.Day01
 {
     public class Year2021Day01 : Puzzle
     {
+        public override string Title => "Sonar Sweep";
+
         public override PuzzleResult RunPart1()
         {
             var calculator = new DepthMeasurement();

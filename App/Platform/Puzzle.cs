@@ -6,6 +6,7 @@ namespace App.Platform
 {
     public abstract class Puzzle
     {
+        public virtual string Title => null;
         public virtual string Comment => "";
         public virtual bool IsSlow => false;
         public virtual bool NeedsRewrite => false;

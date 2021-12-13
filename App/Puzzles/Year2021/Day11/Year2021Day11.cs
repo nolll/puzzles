@@ -4,6 +4,8 @@ namespace App.Puzzles.Year2021.Day11
 {
     public class Year2021Day11 : Puzzle
     {
+        public override string Title => "Dumbo Octopus";
+
         public override PuzzleResult RunPart1()
         {
             var flasher = new OctopusFlasher(FileInput);

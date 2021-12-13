@@ -4,6 +4,8 @@ namespace App.Puzzles.Year2021.Day06
 {
     public class Year2021Day06 : Puzzle
     {
+        public override string Title => "Lanternfish";
+
         public override PuzzleResult RunPart1()
         {
             var fishCounter = new FishCounter(FileInput);

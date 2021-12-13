@@ -4,6 +4,8 @@ namespace App.Puzzles.Year2021.Day05
 {
     public class Year2021Day05 : Puzzle
     {
+        public override string Title => "Hydrothermal Venture";
+
         public override PuzzleResult RunPart1()
         {
             var ventsMap = new VentsMap();

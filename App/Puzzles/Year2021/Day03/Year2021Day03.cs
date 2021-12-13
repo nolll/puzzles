@@ -4,6 +4,8 @@ namespace App.Puzzles.Year2021.Day03
 {
     public class Year2021Day03 : Puzzle
     {
+        public override string Title => "Binary Diagnostic";
+
         public override PuzzleResult RunPart1()
         {
             var diagnostics = new BinaryDiagnostics();

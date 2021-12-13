@@ -4,6 +4,8 @@ namespace App.Puzzles.Year2021.Day13
 {
     public class Year2021Day13 : Puzzle
     {
+        public override string Title => "Transparent Origami";
+
         public override PuzzleResult RunPart1()
         {
             var paper = new TransparentPaper(FileInput);

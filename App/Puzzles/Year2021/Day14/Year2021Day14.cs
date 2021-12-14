@@ -6,7 +6,10 @@ namespace App.Puzzles.Year2021.Day14
     {
         public override PuzzleResult RunPart1()
         {
-            return new PuzzleResult(0);
+            var polymerization = new Polymerization();
+            var result = polymerization.Run(FileInput, 40);
+
+            return new PuzzleResult(result);
         }
 
         public override PuzzleResult RunPart2()

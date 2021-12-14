@@ -55,7 +55,7 @@ CN -> C";
         {
             var groups = PuzzleInputReader.ReadLineGroups(input);
 
-            var rules = new Dictionary<(char, char), PolymerRule>();
+            var rules = new Dictionary<(char, char), IPolymerRule>();
             foreach (var strRule in groups[1])
             {
                 var parts = strRule.Split(" -> ");
@@ -68,7 +68,7 @@ CN -> C";
             {
                 var a = chars[i - 1];
                 var b = chars[i];
-                var combination = new RecursivePolymerCombination(a, b, 0, stepCount);
+                var combination = new RecursivePolymerCombination(rules, a, b, 0, stepCount);
             }
 
             return 0;
@@ -137,14 +137,16 @@ CN -> C";
         }
     }
 
-    public class RecursivePolymerCombination
+    public class RecursivePolymerCombination : IPolymerRule
     {
+        private readonly Dictionary<(char, char), IPolymerRule> _rules;
         private readonly char _a;
         private readonly char _b;
         private Dictionary<char, int> _dictionary;
 
-        public RecursivePolymerCombination(char a, char b)
+        public RecursivePolymerCombination(Dictionary<(char, char), IPolymerRule> rules, char a, char b, int level, int maxLevels)
         {
+            _rules = rules;
             _a = a;
             _b = b;
         }
@@ -168,7 +170,12 @@ CN -> C";
         }
     }
 
-    public class PolymerRule
+    public interface IPolymerRule
+    {
+        Dictionary<char, int> GetCounts();
+    }
+
+    public class PolymerRule : IPolymerRule
     {
         private readonly Dictionary<char, int> _dictionary;
 
@@ -180,8 +187,8 @@ CN -> C";
             Increment(c);
         }
 
-        public Dictionary<char, int> Counts => _dictionary;
-
+        public Dictionary<char, int> GetCounts() => _dictionary;
+        
         private void Increment(char c)
         {
             if (_dictionary.ContainsKey(c))

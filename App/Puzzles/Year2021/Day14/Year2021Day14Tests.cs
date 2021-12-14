@@ -51,6 +51,29 @@ CN -> C";
 
     public class Polymerization
     {
+        public long Run2(string input, int stepCount)
+        {
+            var groups = PuzzleInputReader.ReadLineGroups(input);
+
+            var rules = new Dictionary<(char, char), PolymerRule>();
+            foreach (var strRule in groups[1])
+            {
+                var parts = strRule.Split(" -> ");
+                var arr = parts[0].ToCharArray();
+                rules.Add((arr[0], arr[1]), new PolymerRule(arr[0], arr[1], parts[1].ToCharArray().First()));
+            }
+
+            var chars = groups[0].First().ToCharArray();
+            for (var i = 1; i < chars.Length; i++)
+            {
+                var a = chars[i - 1];
+                var b = chars[i];
+                var combination = new RecursivePolymerCombination(a, b, 0, stepCount);
+            }
+
+            return 0;
+        }
+
         public long Run(string input, int stepCount)
         {
             var groups = PuzzleInputReader.ReadLineGroups(input);
@@ -111,6 +134,60 @@ CN -> C";
             }
 
             return counts.Values.Max(o => o) - counts.Values.Min(o => o);
+        }
+    }
+
+    public class RecursivePolymerCombination
+    {
+        private readonly char _a;
+        private readonly char _b;
+        private Dictionary<char, int> _dictionary;
+
+        public RecursivePolymerCombination(char a, char b)
+        {
+            _a = a;
+            _b = b;
+        }
+
+        public Dictionary<char, int> GetCounts()
+        {
+            if (_dictionary == null)
+            {
+                _dictionary = new Dictionary<char, int>();
+            }
+
+            return _dictionary;
+        }
+
+        private void Increment(char c)
+        {
+            if (_dictionary.ContainsKey(c))
+                _dictionary[c]++;
+
+            _dictionary[c] = 1;
+        }
+    }
+
+    public class PolymerRule
+    {
+        private readonly Dictionary<char, int> _dictionary;
+
+        public PolymerRule(char a, char b, char c)
+        {
+            _dictionary = new Dictionary<char, int>();
+            Increment(a);
+            Increment(b);
+            Increment(c);
+        }
+
+        public Dictionary<char, int> Counts => _dictionary;
+
+        private void Increment(char c)
+        {
+            if (_dictionary.ContainsKey(c))
+                _dictionary[c]++;
+
+            _dictionary[c] = 1;
         }
     }
 }

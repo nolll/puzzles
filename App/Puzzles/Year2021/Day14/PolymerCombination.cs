@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace App.Puzzles.Year2021.Day14;
 
-public class RecursivePolymerCombination
+public class PolymerCombination
 {
     private readonly char _a;
     private readonly char _b;
@@ -10,7 +10,7 @@ public class RecursivePolymerCombination
     private readonly int _maxLevel;
     private readonly Dictionary<(char, char), char> _rules;
 
-    public RecursivePolymerCombination(Dictionary<(char, char), char> rules, char a, char b, int level, int maxLevel)
+    public PolymerCombination(Dictionary<(char, char), char> rules, char a, char b, int level, int maxLevel)
     {
         _rules = rules;
         _a = a;
@@ -30,8 +30,8 @@ public class RecursivePolymerCombination
         if (_level < _maxLevel)
         {
             var insert = _rules[(_a, _b)];
-            var left = new RecursivePolymerCombination(_rules, _a, insert, _level + 1, _maxLevel);
-            var right = new RecursivePolymerCombination(_rules, insert, _b, _level + 1, _maxLevel);
+            var left = new PolymerCombination(_rules, _a, insert, _level + 1, _maxLevel);
+            var right = new PolymerCombination(_rules, insert, _b, _level + 1, _maxLevel);
             var leftCounts = left.CountsChars(cache);
             var rightCounts = right.CountsChars(cache);
             counts = CountMerger.MergeCounts(counts, leftCounts, rightCounts);
@@ -45,7 +45,7 @@ public class RecursivePolymerCombination
         return counts;
     }
 
-    private void Increment(Dictionary<char, long> counts, char c)
+    private static void Increment(IDictionary<char, long> counts, char c)
     {
         if (!counts.ContainsKey(c))
             counts[c] = 0;

@@ -11,7 +11,7 @@ namespace App.Puzzles.Year2021.Day14
         public void OneStep()
         {
             var polymerization = new Polymerization();
-            var result = polymerization.Run2(Input, 1);
+            var result = polymerization.Run(Input, 1);
 
             Assert.That(result, Is.EqualTo(1));
         }
@@ -20,7 +20,7 @@ namespace App.Puzzles.Year2021.Day14
         public void TwoSteps()
         {
             var polymerization = new Polymerization();
-            var result = polymerization.Run2(Input, 2);
+            var result = polymerization.Run(Input, 2);
 
             Assert.That(result, Is.EqualTo(5));
         }
@@ -29,7 +29,7 @@ namespace App.Puzzles.Year2021.Day14
         public void TenSteps()
         {
             var polymerization = new Polymerization();
-            var result = polymerization.Run2(Input, 10);
+            var result = polymerization.Run(Input, 10);
 
             Assert.That(result, Is.EqualTo(1588));
         }
@@ -38,7 +38,7 @@ namespace App.Puzzles.Year2021.Day14
         public void Part2()
         {
             var polymerization = new Polymerization();
-            var result = polymerization.Run2(Input, 40);
+            var result = polymerization.Run(Input, 40);
 
             Assert.That(result, Is.EqualTo(2188189693529));
         }

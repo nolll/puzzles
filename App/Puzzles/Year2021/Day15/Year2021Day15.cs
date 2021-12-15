@@ -6,7 +6,10 @@ namespace App.Puzzles.Year2021.Day15
     {
         public override PuzzleResult RunPart1()
         {
-            return new PuzzleResult(0);
+            var chitonRisk = new ChitonRisk(FileInput);
+            var result = chitonRisk.FindRiskLevel();
+
+            return new PuzzleResult(result, 423);
         }
 
         public override PuzzleResult RunPart2()

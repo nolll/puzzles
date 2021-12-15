@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using App.Common.CoordinateSystems;
@@ -6,33 +7,87 @@ namespace App.Puzzles.Year2021.Day15
 {
     public class ChitonRisk
     {
-        private readonly Matrix<int> _matrix;
-
-        public ChitonRisk(string input)
+        public int FindRiskLevelForSmallCave(string input)
         {
-            _matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
+            var matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
+            return FindRiskLevel(matrix);
         }
 
-        public int FindRiskLevel()
+        public int FindRiskLevelForLargeCave(string input)
+        {
+            var smallMatrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
+            var largeMatrix = BuildLargeMatrix(smallMatrix);
+            return FindRiskLevel(largeMatrix);
+        }
+
+        private Matrix<int> BuildLargeMatrix(Matrix<int> smallMatrix)
+        {
+            var largeMatrix = new Matrix<int>();
+            const int multiplier = 5;
+            var width = smallMatrix.Width;
+            var height = smallMatrix.Height;
+            for (var Y = 0; Y < multiplier; Y++) 
+            {
+                for (var X = 0; X < multiplier; X++)
+                {
+                    for (var y = 0; y < height; y++)
+                    {
+                        for (var x = 0; x < width; x++)
+                        {
+                            var vSmall = smallMatrix.ReadValueAt(x, y);
+                            var vLarge = X + Y + vSmall;
+                            while (vLarge > 9)
+                                vLarge -= 9;
+                            var xLarge = X * width + x;
+                            var yLarge = Y * height + y;
+                            largeMatrix.MoveTo(xLarge, yLarge);
+                            largeMatrix.WriteValue(vLarge);
+                        }
+                    }
+                }
+            }
+
+            return largeMatrix;
+        }
+
+        private int FindRiskLevel(Matrix<int> matrix)
         {
             var from = new MatrixAddress(0, 0);
-            var to = new MatrixAddress(_matrix.Width - 1, _matrix.Height - 1);
-            var path = GetBestPathTo(_matrix, from, to);
+            var to = new MatrixAddress(matrix.Width - 1, matrix.Height - 1);
+            var path = GetBestPathTo(matrix, from, to);
 
             var sum = 0;
             foreach (var coord in path)
             {
-                sum += _matrix.ReadValueAt(coord);
+                sum += matrix.ReadValueAt(coord);
             }
 
+            //PrintPath(matrix, path);
+
             return sum;
+        }
+
+        private void PrintPath(Matrix<int> matrix, IList<MatrixAddress> path)
+        {
+            var pathMatrix = new Matrix<char>(defaultValue: '.');
+            foreach (var coord in path)
+            {
+                pathMatrix.MoveTo(coord);
+                pathMatrix.WriteValue('#');
+            }
+
+            Console.WriteLine(pathMatrix.Print());
         }
 
         private static IList<CoordCount> GetCoordCounts(Matrix<int> matrix, MatrixAddress from, MatrixAddress to)
         {
             var queue = new Queue<CoordCount>();
-            queue.Enqueue(new CoordCount(to.X, to.Y, matrix.ReadValueAt(to)));
-            var seen = new Dictionary<MatrixAddress, CoordCount>();
+            var startCoordCount = new CoordCount(to.X, to.Y, matrix.ReadValueAt(to));
+            queue.Enqueue(startCoordCount);
+            var seen = new Dictionary<MatrixAddress, CoordCount>
+            {
+                [to] = startCoordCount
+            };
             while (queue.Any() && !seen.ContainsKey(from))
             {
                 var next = queue.Dequeue();

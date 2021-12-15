@@ -9,8 +9,8 @@ namespace App.Puzzles.Year2021.Day15
         [Test]
         public void Part1()
         {
-            var chitonRisk = new ChitonRisk(Input);
-            var result = chitonRisk.FindRiskLevel();
+            var chitonRisk = new ChitonRisk();
+            var result = chitonRisk.FindRiskLevelForSmallCave(Input);
 
             Assert.That(result, Is.EqualTo(40));
         }
@@ -18,9 +18,10 @@ namespace App.Puzzles.Year2021.Day15
         [Test]
         public void Part2()
         {
-            var result = 0;
+            var chitonRisk = new ChitonRisk();
+            var result = chitonRisk.FindRiskLevelForLargeCave(Input);
 
-            Assert.That(result, Is.EqualTo(0));
+            Assert.That(result, Is.EqualTo(315));
         }
 
         private const string Input = @"

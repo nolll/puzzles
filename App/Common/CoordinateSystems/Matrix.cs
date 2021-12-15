@@ -201,7 +201,7 @@ namespace App.Common.CoordinateSystems
             return direction;
         }
 
-        public string Print(bool markCurrentAddress = false, bool markStartAddress = false, T currentAddressMarker = default, T startAddressMarker = default)
+        public string Print(bool markCurrentAddress = false, bool markStartAddress = false, T currentAddressMarker = default, T startAddressMarker = default, bool spacing = false)
         {
             var sb = new StringBuilder();
             var y = 0;
@@ -216,6 +216,9 @@ namespace App.Common.CoordinateSystems
                         sb.Append('S');
                     else
                         sb.Append(o);
+
+                    if (spacing)
+                        sb.Append(' ');
 
                     x += 1;
                 }

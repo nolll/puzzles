@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace App.Common.CoordinateSystems
@@ -63,6 +64,7 @@ namespace App.Common.CoordinateSystems
         }
     }
 
+    [DebuggerDisplay("{X},{Y},{Count}")]
     public class CoordCount
     {
         public int X { get; }

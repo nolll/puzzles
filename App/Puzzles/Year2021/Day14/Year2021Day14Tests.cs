@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Text;
 using App.Common.Strings;
@@ -14,7 +15,7 @@ namespace App.Puzzles.Year2021.Day14
         public void Part1()
         {
             var polymerization = new Polymerization();
-            var result = polymerization.Run(Input, 10);
+            var result = polymerization.Run2(Input, 1);
 
             Assert.That(result, Is.EqualTo(1588));
         }
@@ -49,29 +50,57 @@ CC -> N
 CN -> C";
     }
 
+    public static class CountMerger
+    {
+        public static Dictionary<char, long> MergeCounts(params Dictionary<char, long>[] dictionaries)
+        {
+            var merged = new Dictionary<char, long>();
+            foreach (var dictionary in dictionaries)
+            {
+                foreach (var key in dictionary.Keys)
+                {
+                    if (!merged.ContainsKey(key))
+                        merged[key] = 0;
+
+                    merged[key] += dictionary[key];
+                }
+            }
+
+            return merged;
+        }
+    }
+
     public class Polymerization
     {
         public long Run2(string input, int stepCount)
         {
             var groups = PuzzleInputReader.ReadLineGroups(input);
 
-            var rules = new Dictionary<(char, char), IPolymerRule>();
+            var rules = new Dictionary<(char, char), char>();
             foreach (var strRule in groups[1])
             {
                 var parts = strRule.Split(" -> ");
                 var arr = parts[0].ToCharArray();
-                rules.Add((arr[0], arr[1]), new PolymerRule(arr[0], arr[1], parts[1].ToCharArray().First()));
+                rules.Add((arr[0], arr[1]), parts[1].ToCharArray().First());
             }
 
+            var cache = new Dictionary<(char, char, int), Dictionary<char, long>>();
             var chars = groups[0].First().ToCharArray();
+            var countList = new List<Dictionary<char, long>>();
             for (var i = 1; i < chars.Length; i++)
             {
                 var a = chars[i - 1];
                 var b = chars[i];
                 var combination = new RecursivePolymerCombination(rules, a, b, 0, stepCount);
+                countList.Add(combination.CountsChars(cache));
             }
 
-            return 0;
+            var counts = CountMerger.MergeCounts(countList.ToArray());
+
+            var min = counts.Values.Min();
+            var max = counts.Values.Max();
+
+            return max - min;
         }
 
         public long Run(string input, int stepCount)
@@ -84,7 +113,7 @@ CN -> C";
             }
             var strRules = groups[1];
             var rules = new Dictionary<(char, char), char>();
-            
+
             foreach (var strRule in strRules)
             {
                 var parts = strRule.Split(" -> ");
@@ -137,64 +166,57 @@ CN -> C";
         }
     }
 
-    public class RecursivePolymerCombination : IPolymerRule
+    public class RecursivePolymerCombination
     {
-        private readonly Dictionary<(char, char), IPolymerRule> _rules;
         private readonly char _a;
         private readonly char _b;
-        private Dictionary<char, int> _dictionary;
+        private readonly int _level;
+        private readonly int _maxLevel;
+        private readonly Dictionary<(char, char), char> _rules;
 
-        public RecursivePolymerCombination(Dictionary<(char, char), IPolymerRule> rules, char a, char b, int level, int maxLevels)
+        public RecursivePolymerCombination(Dictionary<(char, char), char> rules, char a, char b, int level, int maxLevel)
         {
             _rules = rules;
             _a = a;
             _b = b;
+            _level = level;
+            _maxLevel = maxLevel;
         }
 
-        public Dictionary<char, int> GetCounts()
+        public Dictionary<char, long> CountsChars(Dictionary<(char, char, int), Dictionary<char, long>> cache)
         {
-            if (_dictionary == null)
+            var cacheKey = (_a, _b, _level);
+            if (cache.ContainsKey(cacheKey))
+                return cache[cacheKey];
+
+            if (_level == _maxLevel)
             {
-                _dictionary = new Dictionary<char, int>();
+                var counts = new Dictionary<char, long>();
+                //Increment(counts, _a);
+                var insert = _rules[(_a, _b)];
+                Increment(counts, insert);
+                cache.Add(cacheKey, counts);
+                return counts;
             }
-
-            return _dictionary;
+            else
+            {
+                var insert = _rules[(_a, _b)];
+                var left = new RecursivePolymerCombination(_rules, _a, insert, _level + 1, _maxLevel);
+                var right = new RecursivePolymerCombination(_rules, insert, _b, _level + 1, _maxLevel);
+                var leftCounts = left.CountsChars(cache);
+                var rightCounts = right.CountsChars(cache);
+                var counts = CountMerger.MergeCounts(leftCounts, rightCounts);
+                cache.Add(cacheKey, counts);
+                return counts;
+            }
         }
 
-        private void Increment(char c)
+        private void Increment(Dictionary<char, long> counts, char c)
         {
-            if (_dictionary.ContainsKey(c))
-                _dictionary[c]++;
+            if (!counts.ContainsKey(c))
+                counts[c] = 0;
 
-            _dictionary[c] = 1;
-        }
-    }
-
-    public interface IPolymerRule
-    {
-        Dictionary<char, int> GetCounts();
-    }
-
-    public class PolymerRule : IPolymerRule
-    {
-        private readonly Dictionary<char, int> _dictionary;
-
-        public PolymerRule(char a, char b, char c)
-        {
-            _dictionary = new Dictionary<char, int>();
-            Increment(a);
-            Increment(b);
-            Increment(c);
-        }
-
-        public Dictionary<char, int> GetCounts() => _dictionary;
-        
-        private void Increment(char c)
-        {
-            if (_dictionary.ContainsKey(c))
-                _dictionary[c]++;
-
-            _dictionary[c] = 1;
+            counts[c]++;
         }
     }
 }

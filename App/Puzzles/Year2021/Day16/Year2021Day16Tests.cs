@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace App.Puzzles.Year2021.Day16
 {
@@ -36,18 +35,17 @@ namespace App.Puzzles.Year2021.Day16
         [Test]
         public void PacketType()
         {
-            var result = BitsPacket.FromBinary("100101111111000101000");
+            var result = BitsPacket.FromBinary("110100101111111000101000");
 
             Assert.That(result.Type, Is.EqualTo(4));
         }
 
         [Test]
-        public void DecodeLiteralValue()
+        public void LiteralValue()
         {
-            var decoder = new BitsDecoder();
-            var result = decoder.GetLiteralValue("101111111000101");
+            var result = BitsPacket.FromBinary("110100101111111000101000");
 
-            Assert.That(result, Is.EqualTo(2021));
+            Assert.That(result.LiteralValue, Is.EqualTo(2021));
         }
 
         [Test]
@@ -69,35 +67,99 @@ namespace App.Puzzles.Year2021.Day16
 
             return 0;
         }
-        
-        public int GetLiteralValue(string binary)
-        {
-            var part1 = binary.Substring(1, 4);
-            var part2 = binary.Substring(6, 4);
-            var part3 = binary.Substring(11, 4);
-            var s = $"{part1}{part2}{part3}";
-            return Convert.ToInt32(s, 2);
-        }
-
-        public BitsPacket GetPacket(string hexString)
-        {
-            return BitsPacket.FromHex(hexString);
-        }
     }
 
     public class BitsPacket
     {
+        private int _consumedBits = 0;
+
         public string Binary { get; }
         public int Version { get; }
         public int Type { get; }
+        public int LiteralValue { get; }
+        public List<BitsPacket> SubPackets { get; }
+        public int BinaryLength => _consumedBits;
+
+        private string ConsumeBinary(string binary, int count)
+        {
+            _consumedBits += count;
+            return binary[count..];
+        }
 
         private BitsPacket(string binary)
         {
             Binary = binary;
             Version = GetPacketVersion(binary);
-            var binaryWithoutVersion = binary[3..];
-            Type = GetPacketType(binaryWithoutVersion);
-            var binaryWithoutType = binaryWithoutVersion[3..];
+            binary = ConsumeBinary(binary, 3);
+            Type = GetPacketType(binary);
+            binary = ConsumeBinary(binary, 3);
+
+            if (Type == 4)
+            {
+                LiteralValue = GetLiteralValue(binary);
+            }
+            else
+            {
+                SubPackets = new List<BitsPacket>();
+                var lengthTypeId = binary[..1];
+                binary = ConsumeBinary(binary, 1);
+
+                if (lengthTypeId == "0")
+                {
+                    var subPacketLength = GetSubPacketLength(binary);
+                    binary = ConsumeBinary(binary, 15);
+                    var totalSubPacketBits = 0;
+
+                    while (totalSubPacketBits < subPacketLength)
+                    {
+                        var subPacket = FromBinary(binary);
+                        var binaryLength = subPacket.BinaryLength;
+                        totalSubPacketBits += binaryLength;
+                        ConsumeBinary(binary, binaryLength);
+                        SubPackets.Add(subPacket);
+                    }
+                    
+                }
+                else
+                {
+                    var subPacketCount = GetSubPacketCount(binary);
+                    binary = ConsumeBinary(binary, 11);
+                    var totalSubPacketBits = 0;
+                    var i = 0;
+
+                    while (i < subPacketCount)
+                    {
+                        var subPacket = FromBinary(binary);
+                        var binaryLength = subPacket.BinaryLength;
+                        totalSubPacketBits += binaryLength;
+                        ConsumeBinary(binary, binaryLength);
+                        SubPackets.Add(subPacket);
+                        i++;
+                    }
+                }
+            }
+        }
+
+        private int GetSubPacketCount(string binary)
+        {
+            var s = binary[..11];
+            return Convert.ToInt32(s, 2);
+        }
+
+        private int GetSubPacketLength(string binary)
+        {
+            var s = binary[..15];
+            return Convert.ToInt32(s, 2);
+        }
+
+        private int GetLiteralValue(string binary)
+        {
+            ConsumeBinary(binary, 15);
+            var part1 = binary.Substring(1, 4);
+            var part2 = binary.Substring(6, 4);
+            var part3 = binary.Substring(11, 4);
+            var s = $"{part1}{part2}{part3}";
+            return Convert.ToInt32(s, 2);
         }
 
         private int GetPacketVersion(string bitString)

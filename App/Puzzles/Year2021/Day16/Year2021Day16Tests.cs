@@ -6,7 +6,7 @@ using NUnit.Framework.Constraints;
 
 namespace App.Puzzles.Year2021.Day16
 {
-    public class Year2021Day16Tests
+        public class Year2021Day16Tests
     {
         [Test]
         public void Part1()
@@ -18,30 +18,27 @@ namespace App.Puzzles.Year2021.Day16
         }
 
         [Test]
-        public void GetBinaryString()
+        public void BinaryString()
         {
-            var decoder = new BitsDecoder();
-            var result = decoder.GetBinaryString("D2FE28");
+            var result = BitsPacket.FromHex("D2FE28");
 
-            Assert.That(result, Is.EqualTo("110100101111111000101"));
+            Assert.That(result.Binary, Is.EqualTo("110100101111111000101"));
         }
 
         [Test]
-        public void DecodePacketVersion()
+        public void PacketVersion()
         {
-            var decoder = new BitsDecoder();
-            var result = decoder.GetPacketVersion("110100101111111000101000");
+            var result = BitsPacket.FromBinary("110100101111111000101000");
 
-            Assert.That(result, Is.EqualTo(6));
+            Assert.That(result.Version, Is.EqualTo(6));
         }
 
         [Test]
-        public void DecodePAcketType()
+        public void PacketType()
         {
-            var decoder = new BitsDecoder();
-            var result = decoder.GetPacketType("110100101111111000101000");
+            var result = BitsPacket.FromBinary("100101111111000101000");
 
-            Assert.That(result, Is.EqualTo(4));
+            Assert.That(result.Type, Is.EqualTo(4));
         }
 
         [Test]
@@ -68,43 +65,63 @@ namespace App.Puzzles.Year2021.Day16
     {
         public int CountTypes(string input)
         {
-            var outerBinary = GetBinaryString(input);
-            var version = GetPacketVersion(outerBinary);
-            var type = GetPacketType(outerBinary);
+            var outerBinary = BitsPacket.FromHex(input);
 
-            if (type == 4)
-            {
-                var literal = GetLiteralValue(outerBinary.Substring(6, 15));
-            }
-            
             return 0;
         }
-
+        
         public int GetLiteralValue(string binary)
         {
             var part1 = binary.Substring(1, 4);
-            var part2 = binary.Substring(5, 4);
-            var part3 = binary.Substring(9, 4);
-            var s = string.Join(part1, part2, part3);
+            var part2 = binary.Substring(6, 4);
+            var part3 = binary.Substring(11, 4);
+            var s = $"{part1}{part2}{part3}";
             return Convert.ToInt32(s, 2);
         }
 
-        public string GetBinaryString(string hexString)
+        public BitsPacket GetPacket(string hexString)
         {
-            var bitStrings = hexString.ToCharArray().Select(o => CharToBitString[o]);
-            return string.Join("", bitStrings).TrimEnd('0');
+            return BitsPacket.FromHex(hexString);
+        }
+    }
+
+    public class BitsPacket
+    {
+        public string Binary { get; }
+        public int Version { get; }
+        public int Type { get; }
+
+        private BitsPacket(string binary)
+        {
+            Binary = binary;
+            Version = GetPacketVersion(binary);
+            var binaryWithoutVersion = binary[3..];
+            Type = GetPacketType(binaryWithoutVersion);
+            var binaryWithoutType = binaryWithoutVersion[3..];
         }
 
-        public int GetPacketVersion(string bitString)
+        private int GetPacketVersion(string bitString)
         {
             var s = bitString[..3];
             return Convert.ToInt32(s, 2);
         }
 
-        public int GetPacketType(string bitString)
+        private int GetPacketType(string bitString)
         {
-            var s = bitString.Substring(3, 3);
+            var s = bitString[..3];
             return Convert.ToInt32(s, 2);
+        }
+
+        public static BitsPacket FromHex(string hexString)
+        {
+            var binaryStrings = hexString.ToCharArray().Select(o => CharToBitString[o]);
+            var binaryString = string.Join("", binaryStrings).TrimEnd('0');
+            return new BitsPacket(binaryString);
+        }
+
+        public static BitsPacket FromBinary(string binaryString)
+        {
+             return new(binaryString);
         }
 
         private static readonly Dictionary<char, string> CharToBitString = new()

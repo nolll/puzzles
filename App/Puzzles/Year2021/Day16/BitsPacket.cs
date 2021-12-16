@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace App.Puzzles.Year2021.Day16;
 
@@ -8,36 +9,11 @@ public class BitsPacket
 {
     public int Version { get; }
     public int Type { get; }
-    public long? LiteralValue { get; }
+    public BigInteger? LiteralValue { get; }
     public List<BitsPacket> SubPackets { get; }
     private int BinaryLength { get; set; }
 
     public int VersionSum => Version + SubPackets.Sum(o => o.VersionSum);
-
-    private string ConsumeBinary(string binary, int count)
-    {
-        BinaryLength += count;
-        return binary[count..];
-    }
-
-    public long Value
-    {
-        get
-        {
-            return Type switch
-            {
-                (int)PacketType.Sum => SubPackets.Sum(o => o.Value),
-                (int)PacketType.Product => SubPackets.Aggregate((long)1, (a, b) => a * b.Value),
-                (int)PacketType.Minimum => Math.Min(SubPackets.First().Value, SubPackets.Last().Value),
-                (int)PacketType.Maximum => Math.Max(SubPackets.First().Value, SubPackets.Last().Value),
-                (int)PacketType.LiteralValue => LiteralValue ?? 0,
-                (int)PacketType.GreaterThan => SubPackets.First().Value > SubPackets.Last().Value ? 1 : 0,
-                (int)PacketType.LessThan => SubPackets.First().Value < SubPackets.Last().Value ? 1 : 0,
-                (int)PacketType.Equal => SubPackets.First().Value == SubPackets.Last().Value ? 1 : 0,
-                _ => 0
-            };
-        }
-    }
 
     private BitsPacket(string binary)
     {
@@ -86,6 +62,31 @@ public class BitsPacket
                     i++;
                 }
             }
+        }
+    }
+
+    private string ConsumeBinary(string binary, int count)
+    {
+        BinaryLength += count;
+        return binary[count..];
+    }
+
+    public BigInteger Value
+    {
+        get
+        {
+            return Type switch
+            {
+                (int)PacketType.Sum => SubPackets.Aggregate((BigInteger)0, (a, b) => a + b.Value),
+                (int)PacketType.Product => SubPackets.Aggregate((BigInteger)1, (a, b) => a * b.Value),
+                (int)PacketType.Minimum => SubPackets.Min(o => o.Value),
+                (int)PacketType.Maximum => SubPackets.Max(o => o.Value),
+                (int)PacketType.LiteralValue => LiteralValue ?? 0,
+                (int)PacketType.GreaterThan => SubPackets.First().Value > SubPackets.Last().Value ? 1 : 0,
+                (int)PacketType.LessThan => SubPackets.First().Value < SubPackets.Last().Value ? 1 : 0,
+                (int)PacketType.Equal => SubPackets.First().Value == SubPackets.Last().Value ? 1 : 0,
+                _ => 0
+            };
         }
     }
 

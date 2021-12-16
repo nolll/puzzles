@@ -17,7 +17,7 @@ namespace App.Puzzles.Year2021.Day16
             var packet = BitsPacket.FromHex(FileInput);
             var result = packet.Value;
 
-            return new PuzzleResult(result);
+            return new PuzzleResult(result, 539051801941);
         }
     }
 }

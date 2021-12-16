@@ -17,35 +17,40 @@ namespace App.Puzzles.Year2021.Day16
         }
 
         [Test]
-        public void BinaryString()
+        public void Test1()
         {
             var result = BitsPacket.FromHex("D2FE28");
 
-            Assert.That(result.Binary, Is.EqualTo("110100101111111000101"));
-        }
-
-        [Test]
-        public void PacketVersion()
-        {
-            var result = BitsPacket.FromBinary("110100101111111000101000");
-
             Assert.That(result.Version, Is.EqualTo(6));
-        }
-
-        [Test]
-        public void PacketType()
-        {
-            var result = BitsPacket.FromBinary("110100101111111000101000");
-
             Assert.That(result.Type, Is.EqualTo(4));
+            Assert.That(result.LiteralValue, Is.EqualTo(2021));
+            Assert.That(result.VersionSum, Is.EqualTo(6));
+            Assert.That(result.SubPackets.Count, Is.EqualTo(0));
         }
 
         [Test]
-        public void LiteralValue()
+        public void Test2()
         {
-            var result = BitsPacket.FromBinary("110100101111111000101000");
+            var result = BitsPacket.FromHex("38006F45291200");
 
-            Assert.That(result.LiteralValue, Is.EqualTo(2021));
+            Assert.That(result.Version, Is.EqualTo(1));
+            Assert.That(result.Type, Is.EqualTo(6));
+            Assert.That(result.LiteralValue, Is.EqualTo(null));
+            //Assert.That(result.VersionSum, Is.EqualTo(6));
+            Assert.That(result.SubPackets.Count, Is.EqualTo(2));
+            Assert.That(result.SubPackets[0].LiteralValue, Is.EqualTo(10));
+            Assert.That(result.SubPackets[1].LiteralValue, Is.EqualTo(20));
+        }
+
+        [TestCase("8A004A801A8002F478", 16)]
+        [TestCase("620080001611562C8802118E34", 12)]
+        [TestCase("C0015000016115A2E0802F182340", 23)]
+        [TestCase("A0016C880162017C3686B18A3D4780", 31)]
+        public void VersionSum(string hex, int expected)
+        {
+            var result = BitsPacket.FromHex(hex);
+
+            
         }
 
         [Test]
@@ -76,9 +81,11 @@ namespace App.Puzzles.Year2021.Day16
         public string Binary { get; }
         public int Version { get; }
         public int Type { get; }
-        public int LiteralValue { get; }
+        public int? LiteralValue { get; }
         public List<BitsPacket> SubPackets { get; }
         public int BinaryLength => _consumedBits;
+
+        public int VersionSum => Version + SubPackets.Sum(o => o.VersionSum);
 
         private string ConsumeBinary(string binary, int count)
         {
@@ -88,6 +95,7 @@ namespace App.Puzzles.Year2021.Day16
 
         private BitsPacket(string binary)
         {
+            SubPackets = new List<BitsPacket>();
             Binary = binary;
             Version = GetPacketVersion(binary);
             binary = ConsumeBinary(binary, 3);
@@ -100,7 +108,6 @@ namespace App.Puzzles.Year2021.Day16
             }
             else
             {
-                SubPackets = new List<BitsPacket>();
                 var lengthTypeId = binary[..1];
                 binary = ConsumeBinary(binary, 1);
 
@@ -124,14 +131,12 @@ namespace App.Puzzles.Year2021.Day16
                 {
                     var subPacketCount = GetSubPacketCount(binary);
                     binary = ConsumeBinary(binary, 11);
-                    var totalSubPacketBits = 0;
                     var i = 0;
 
                     while (i < subPacketCount)
                     {
                         var subPacket = FromBinary(binary);
                         var binaryLength = subPacket.BinaryLength;
-                        totalSubPacketBits += binaryLength;
                         ConsumeBinary(binary, binaryLength);
                         SubPackets.Add(subPacket);
                         i++;
@@ -154,12 +159,20 @@ namespace App.Puzzles.Year2021.Day16
 
         private int GetLiteralValue(string binary)
         {
-            ConsumeBinary(binary, 15);
-            var part1 = binary.Substring(1, 4);
-            var part2 = binary.Substring(6, 4);
-            var part3 = binary.Substring(11, 4);
-            var s = $"{part1}{part2}{part3}";
-            return Convert.ToInt32(s, 2);
+            var literalBinary = "";
+            while (true)
+            {
+                literalBinary += binary.Substring(1, 4);
+                ConsumeBinary(binary, 5);
+
+                if (binary.StartsWith('0'))
+                    break;
+            }
+
+            if (literalBinary.Length == 0)
+                return 0;
+
+            return Convert.ToInt32(literalBinary, 2);
         }
 
         private int GetPacketVersion(string bitString)

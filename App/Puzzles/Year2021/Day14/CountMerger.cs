@@ -1,23 +1,24 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2021.Day14;
-
-public static class CountMerger
+namespace App.Puzzles.Year2021.Day14
 {
-    public static Dictionary<char, long> MergeCounts(params Dictionary<char, long>[] dictionaries)
+    public static class CountMerger
     {
-        var merged = new Dictionary<char, long>();
-        foreach (var dictionary in dictionaries)
+        public static Dictionary<char, long> MergeCounts(params Dictionary<char, long>[] dictionaries)
         {
-            foreach (var key in dictionary.Keys)
+            var merged = new Dictionary<char, long>();
+            foreach (var dictionary in dictionaries)
             {
-                if (!merged.ContainsKey(key))
-                    merged[key] = 0;
+                foreach (var key in dictionary.Keys)
+                {
+                    if (!merged.ContainsKey(key))
+                        merged[key] = 0;
 
-                merged[key] += dictionary[key];
+                    merged[key] += dictionary[key];
+                }
             }
-        }
 
-        return merged;
+            return merged;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace App.Platform
+﻿using System.Numerics;
+
+namespace App.Platform
 {
     public class PuzzleResult
     {
@@ -18,6 +20,11 @@
         }
 
         public PuzzleResult(long? answer, long? correctAnswer = null)
+            : this(answer?.ToString(), correctAnswer?.ToString())
+        {
+        }
+
+        public PuzzleResult(BigInteger? answer, BigInteger? correctAnswer = null)
             : this(answer?.ToString(), correctAnswer?.ToString())
         {
         }

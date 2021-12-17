@@ -75,7 +75,7 @@ namespace App.Puzzles.Year2021.Day17
         public int GetMaxHeight(TrickshotTarget target)
         {
             var heights = new HashSet<int>();
-            for (var vyStart = 1; vyStart < 100; vyStart++)
+            for (var vyStart = 1; vyStart < 300; vyStart++)
             {
                 for (var vxStart = 0; vxStart < 100; vxStart++)
                 {

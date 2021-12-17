@@ -9,7 +9,7 @@ namespace App.Puzzles.Year2021.Day17
             var trickshot = new TrickShot();
             var result = trickshot.GetMaxHeight(new TrickshotTarget(81, 129, -150, -108));
 
-            return new PuzzleResult(result);
+            return new PuzzleResult(result, 11175);
         }
 
         public override PuzzleResult RunPart2()

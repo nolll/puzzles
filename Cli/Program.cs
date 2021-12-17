@@ -13,7 +13,7 @@ namespace Cli
         private const int PuzzleTimeout = 10;
 
         private const int DebugYear = 2021;
-        private const int DebugDay = 16;
+        private const int DebugDay = 17;
 
         static void Main(string[] args)
         {

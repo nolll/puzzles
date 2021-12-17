@@ -5,64 +5,63 @@ using System.Reflection;
 using App.Platform;
 using App.Puzzles.Year2015.Day01;
 
-namespace App
+namespace App;
+
+public class PuzzleRepository
 {
-    public class PuzzleRepository
+    private readonly List<PuzzleDay> _allDays;
+        
+    public PuzzleRepository()
     {
-        private readonly List<PuzzleDay> _allDays;
+        _allDays = CreateDays();
+    }
+
+    public PuzzleDay GetDay(int? selectedYear, int? selectedDay)
+    {
+        return selectedYear != null && selectedDay != null
+            ? _allDays.FirstOrDefault(o => o.Year == selectedYear.Value &&  o.Day == selectedDay.Value)
+            : _allDays.Last();
+    }
+
+    public List<PuzzleDay> GetEventDays(int? selectedYear)
+    {
+        if (selectedYear != null)
+        {
+            return _allDays.Where(o => o.Year == selectedYear).ToList();
+        }
+
+        var maxYear = _allDays.Select(o => o.Year).Max();
+        return _allDays.Where(o => o.Year == maxYear).ToList();
+    }
         
-        public PuzzleRepository()
-        {
-            _allDays = CreateDays();
-        }
+    public List<PuzzleDay> GetAll()
+    {
+        return _allDays;
+    }
 
-        public PuzzleDay GetDay(int? selectedYear, int? selectedDay)
-        {
-            return selectedYear != null && selectedDay != null
-                ? _allDays.FirstOrDefault(o => o.Year == selectedYear.Value &&  o.Day == selectedDay.Value)
-                : _allDays.Last();
-        }
+    private List<PuzzleDay> CreateDays()
+    {
+        var types = GetConcreteSubclassesOf<Puzzle>();
+        return types.Select(CreateDay).OrderBy(o => o.Year).ThenBy(o => o.Day).ToList();
+    }
 
-        public List<PuzzleDay> GetEventDays(int? selectedYear)
-        {
-            if (selectedYear != null)
-            {
-                return _allDays.Where(o => o.Year == selectedYear).ToList();
-            }
-
-            var maxYear = _allDays.Select(o => o.Year).Max();
-            return _allDays.Where(o => o.Year == maxYear).ToList();
-        }
-        
-        public List<PuzzleDay> GetAll()
-        {
-            return _allDays;
-        }
-
-        private List<PuzzleDay> CreateDays()
-        {
-            var types = GetConcreteSubclassesOf<Puzzle>();
-            return types.Select(CreateDay).OrderBy(o => o.Year).ThenBy(o => o.Day).ToList();
-        }
-
-        private PuzzleDay CreateDay(Type t)
-        {
-            var (year, day) = PuzzleParser.ParseType(t);
-            var puzzleDay = (Puzzle)Activator.CreateInstance(t);
-            if (puzzleDay == null)
-                throw new Exception($"Could not create Puzzle for day {day} {year} ");
+    private PuzzleDay CreateDay(Type t)
+    {
+        var (year, day) = PuzzleParser.ParseType(t);
+        var puzzleDay = (Puzzle)Activator.CreateInstance(t);
+        if (puzzleDay == null)
+            throw new Exception($"Could not create Puzzle for day {day} {year} ");
             
-            return new PuzzleDay(year, day, puzzleDay);
-        }
+        return new PuzzleDay(year, day, puzzleDay);
+    }
 
-        private static IEnumerable<Type> GetConcreteSubclassesOf<T>() where T : class
-        {
-            var assembly = Assembly.GetAssembly(typeof(T));
+    private static IEnumerable<Type> GetConcreteSubclassesOf<T>() where T : class
+    {
+        var assembly = Assembly.GetAssembly(typeof(T));
 
-            if (assembly == null)
-                return new List<Type>();
+        if (assembly == null)
+            return new List<Type>();
             
-            return assembly.GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T)));
-        }
+        return assembly.GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T)));
     }
 }

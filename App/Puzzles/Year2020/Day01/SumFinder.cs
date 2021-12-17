@@ -3,22 +3,21 @@ using System.Linq;
 using App.Common.Combinatorics;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2020.Day01
+namespace App.Puzzles.Year2020.Day01;
+
+public class SumFinder
 {
-    public class SumFinder
+    private readonly IList<int> _numbers;
+
+    public SumFinder(string input)
     {
-        private readonly IList<int> _numbers;
+        _numbers = PuzzleInputReader.ReadLines(input).Select(int.Parse).ToList();
+    }
 
-        public SumFinder(string input)
-        {
-            _numbers = PuzzleInputReader.ReadLines(input).Select(int.Parse).ToList();
-        }
-
-        public IList<int> FindNumbersThatAddUpTo(int target, int numbersToFind)
-        {
-            var permutations = PermutationGenerator.GetPermutations<int>(_numbers, numbersToFind);
-            var match = permutations.First(o => o.Sum() == target);
-            return match.ToList();
-        }
+    public IList<int> FindNumbersThatAddUpTo(int target, int numbersToFind)
+    {
+        var permutations = PermutationGenerator.GetPermutations<int>(_numbers, numbersToFind);
+        var match = permutations.First(o => o.Sum() == target);
+        return match.ToList();
     }
 }

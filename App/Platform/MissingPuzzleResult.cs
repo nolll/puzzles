@@ -1,10 +1,9 @@
-﻿namespace App.Platform
+﻿namespace App.Platform;
+
+public class MissingPuzzleResult : PuzzleResult
 {
-    public class MissingPuzzleResult : PuzzleResult
+    public MissingPuzzleResult(string message)
+        : base(message, PuzzleResultStatus.Missing)
     {
-        public MissingPuzzleResult(string message)
-            : base(message, PuzzleResultStatus.Missing)
-        {
-        }
     }
 }

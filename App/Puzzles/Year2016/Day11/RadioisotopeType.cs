@@ -1,8 +1,7 @@
-namespace App.Puzzles.Year2016.Day11
+namespace App.Puzzles.Year2016.Day11;
+
+public enum RadioisotopeType
 {
-    public enum RadioisotopeType
-    {
-        Microchip,
-        Generator
-    }
+    Microchip,
+    Generator
 }

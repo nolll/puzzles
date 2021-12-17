@@ -1,31 +1,30 @@
 ﻿using System.Linq;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2021.Day01
+namespace App.Puzzles.Year2021.Day01;
+
+public class DepthMeasurement
 {
-    public class DepthMeasurement
+    public int GetNumberOfIncreasingMeasurements(string input, bool useSlidingWindow)
     {
-        public int GetNumberOfIncreasingMeasurements(string input, bool useSlidingWindow)
-        {
-            var depths = PuzzleInputReader.ReadLines(input).Select(int.Parse).ToList();
+        var depths = PuzzleInputReader.ReadLines(input).Select(int.Parse).ToList();
 
-            var count = 0;
-            var prev = 0;
-            var start = useSlidingWindow ? 3 : 1;
+        var count = 0;
+        var prev = 0;
+        var start = useSlidingWindow ? 3 : 1;
             
-            for (var i = start; i < depths.Count; i++)
-            {
-                var current = useSlidingWindow
-                    ? depths[i - 2] + depths[i - 1] + depths[i]
-                    : depths[i];
+        for (var i = start; i < depths.Count; i++)
+        {
+            var current = useSlidingWindow
+                ? depths[i - 2] + depths[i - 1] + depths[i]
+                : depths[i];
 
-                if (current > prev)
-                    count++;
+            if (current > prev)
+                count++;
 
-                prev = current;
-            }
-
-            return count;
+            prev = current;
         }
+
+        return count;
     }
 }

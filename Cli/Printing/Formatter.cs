@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Cli.Printing
+namespace Cli.Printing;
+
+public static class Formatter
 {
-    public static class Formatter
+    public static string FormatTime(TimeSpan timeTaken)
     {
-        public static string FormatTime(TimeSpan timeTaken)
-        {
-            var seconds = timeTaken.TotalMilliseconds / 1000;
-            var decimalSeconds = Convert.ToDecimal(seconds);
-            var roundedSeconds = Math.Round(decimalSeconds, 2);
-            var secondsString = roundedSeconds.ToString(CultureInfo.InvariantCulture);
-            return $"{secondsString}s";
-        }
+        var seconds = timeTaken.TotalMilliseconds / 1000;
+        var decimalSeconds = Convert.ToDecimal(seconds);
+        var roundedSeconds = Math.Round(decimalSeconds, 2);
+        var secondsString = roundedSeconds.ToString(CultureInfo.InvariantCulture);
+        return $"{secondsString}s";
     }
 }

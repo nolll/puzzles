@@ -1,28 +1,27 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2015.Day07
+namespace App.Puzzles.Year2015.Day07;
+
+public class NotWire : Wire
 {
-    public class NotWire : Wire
-    {
-        private readonly IDictionary<string, Wire> _dictionary;
-        private readonly string _a;
+    private readonly IDictionary<string, Wire> _dictionary;
+    private readonly string _a;
 
-        private ushort WireASignal => _dictionary[_a].Signal;
+    private ushort WireASignal => _dictionary[_a].Signal;
         
-        public override ushort Signal
+    public override ushort Signal
+    {
+        get
         {
-            get
-            {
-                if (_signal == null)
-                    _signal = (ushort)~WireASignal;
-                return _signal.Value;
-            }
+            if (_signal == null)
+                _signal = (ushort)~WireASignal;
+            return _signal.Value;
         }
+    }
 
-        public NotWire(IDictionary<string, Wire> dictionary, string a)
-        {
-            _dictionary = dictionary;
-            _a = a;
-        }
+    public NotWire(IDictionary<string, Wire> dictionary, string a)
+    {
+        _dictionary = dictionary;
+        _a = a;
     }
 }

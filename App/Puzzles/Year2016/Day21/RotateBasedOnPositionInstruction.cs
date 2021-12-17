@@ -1,40 +1,39 @@
-namespace App.Puzzles.Year2016.Day21
+namespace App.Puzzles.Year2016.Day21;
+
+public class RotateBasedOnPositionInstruction : RotateInstruction
 {
-    public class RotateBasedOnPositionInstruction : RotateInstruction
+    private readonly char _letter;
+
+    public RotateBasedOnPositionInstruction(char letter)
     {
-        private readonly char _letter;
+        _letter = letter;
+    }
 
-        public RotateBasedOnPositionInstruction(char letter)
+    public override string Run(string s)
+    {
+        var steps = GetSteps(s);
+        return RotateRight(s, steps);
+    }
+
+    public override string RunBackwards(string s)
+    {
+        for (var i = 1; i <= s.Length; i++)
         {
-            _letter = letter;
+            var rotated = RotateLeft(s, i);
+            var steps = GetSteps(rotated);
+            var rotatedBack = RotateRight(rotated, steps);
+            if (rotatedBack == s)
+                return rotated;
         }
 
-        public override string Run(string s)
-        {
-            var steps = GetSteps(s);
-            return RotateRight(s, steps);
-        }
+        return s;
+    }
 
-        public override string RunBackwards(string s)
-        {
-            for (var i = 1; i <= s.Length; i++)
-            {
-                var rotated = RotateLeft(s, i);
-                var steps = GetSteps(rotated);
-                var rotatedBack = RotateRight(rotated, steps);
-                if (rotatedBack == s)
-                    return rotated;
-            }
-
-            return s;
-        }
-
-        private int GetSteps(string s)
-        {
-            var steps = s.IndexOf(_letter);
-            if (steps >= 4)
-                steps++;
-            return steps + 1;
-        }
+    private int GetSteps(string s)
+    {
+        var steps = s.IndexOf(_letter);
+        if (steps >= 4)
+            steps++;
+        return steps + 1;
     }
 }

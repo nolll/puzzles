@@ -4,95 +4,94 @@ using System.Linq;
 using App.Common.CoordinateSystems;
 using App.Common.Maths;
 
-namespace App.Puzzles.Year2019.Day12
+namespace App.Puzzles.Year2019.Day12;
+
+public class MoonTracker
 {
-    public class MoonTracker
+    public IList<Moon> Moons { get; }
+    public long Iterations { get; private set; }
+    public int TotalEnergy => Moons.Sum(o => o.TotalEnergy);
+
+    public MoonTracker(string map)
     {
-        public IList<Moon> Moons { get; }
-        public long Iterations { get; private set; }
-        public int TotalEnergy => Moons.Sum(o => o.TotalEnergy);
+        Moons = ReadMap(map);
+    }
 
-        public MoonTracker(string map)
+    private IList<Moon> ReadMap(string map)
+    {
+        var rows = map.Trim().Split('\n');
+        var moons = new List<Moon>();
+        foreach (var row in rows)
         {
-            Moons = ReadMap(map);
+            var items = row.Trim().TrimStart('<').TrimEnd('>').Replace(" ", "").Split(',');
+            var coords = items.Select(o => int.Parse(o.Split('=')[1])).ToArray();
+            var moon = new Moon(coords[0], coords[1], coords[2]);
+            moons.Add(moon);
         }
+        return moons;
+    }
 
-        private IList<Moon> ReadMap(string map)
+    public void Run(int maxIterations)
+    {
+        while (Iterations < maxIterations)
         {
-            var rows = map.Trim().Split('\n');
-            var moons = new List<Moon>();
-            foreach (var row in rows)
-            {
-                var items = row.Trim().TrimStart('<').TrimEnd('>').Replace(" ", "").Split(',');
-                var coords = items.Select(o => int.Parse(o.Split('=')[1])).ToArray();
-                var moon = new Moon(coords[0], coords[1], coords[2]);
-                moons.Add(moon);
-            }
-            return moons;
-        }
-
-        public void Run(int maxIterations)
-        {
-            while (Iterations < maxIterations)
-            {
-                foreach (var dimension in Dimension.Dimensions)
-                {
-                    UpdateVelocities(dimension);
-                    Move(dimension);
-                }
-                Iterations++;
-            }
-        }
-
-        public void RunUntilRepeat()
-        {
-            var iterations = Dimension.Dimensions.Select(o => (long)0).ToArray();
             foreach (var dimension in Dimension.Dimensions)
             {
-                while (!IsDone(dimension))
-                {
-                    UpdateVelocities(dimension);
-                    Move(dimension);
-                    iterations[dimension] += 1;
-                }
+                UpdateVelocities(dimension);
+                Move(dimension);
             }
-
-            Iterations = MathTools.Lcm(iterations);
+            Iterations++;
         }
+    }
 
-        private bool IsDone(int dimension) => Moons.All(o => o.IsBackAtStart(dimension));
-
-        private void Move(int dimension)
+    public void RunUntilRepeat()
+    {
+        var iterations = Dimension.Dimensions.Select(o => (long)0).ToArray();
+        foreach (var dimension in Dimension.Dimensions)
         {
-            foreach (var moon in Moons)
-                moon.Move(dimension);
-        }
-
-        private void UpdateVelocities(int dimension)
-        {
-            for (var i = 0; i < Moons.Count; i++)
+            while (!IsDone(dimension))
             {
-                for (var j = 0; j < Moons.Count; j++)
-                {
-                    if (i != j)
-                        UpdateVelocity(dimension, Moons[i], Moons[j]);
-                }
+                UpdateVelocities(dimension);
+                Move(dimension);
+                iterations[dimension] += 1;
             }
         }
 
-        private void UpdateVelocity(int dimension, Moon moon, Moon otherMoon)
-        {
-            var change = GetVelocityChange(moon.Position[dimension], otherMoon.Position[dimension]);
-            moon.ChangeVelocity(dimension, moon.Velocity[dimension] + change);
-        }
+        Iterations = MathTools.Lcm(iterations);
+    }
 
-        private int GetVelocityChange(int moonX, int otherMoonX)
-        {
-            var diff = otherMoonX - moonX;
-            if (diff == 0)
-                return 0;
+    private bool IsDone(int dimension) => Moons.All(o => o.IsBackAtStart(dimension));
 
-            return diff / Math.Abs(diff);
+    private void Move(int dimension)
+    {
+        foreach (var moon in Moons)
+            moon.Move(dimension);
+    }
+
+    private void UpdateVelocities(int dimension)
+    {
+        for (var i = 0; i < Moons.Count; i++)
+        {
+            for (var j = 0; j < Moons.Count; j++)
+            {
+                if (i != j)
+                    UpdateVelocity(dimension, Moons[i], Moons[j]);
+            }
         }
+    }
+
+    private void UpdateVelocity(int dimension, Moon moon, Moon otherMoon)
+    {
+        var change = GetVelocityChange(moon.Position[dimension], otherMoon.Position[dimension]);
+        moon.ChangeVelocity(dimension, moon.Velocity[dimension] + change);
+    }
+
+    private int GetVelocityChange(int moonX, int otherMoonX)
+    {
+        var diff = otherMoonX - moonX;
+        if (diff == 0)
+            return 0;
+
+        return diff / Math.Abs(diff);
     }
 }

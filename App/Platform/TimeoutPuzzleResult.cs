@@ -1,10 +1,9 @@
-﻿namespace App.Platform
+﻿namespace App.Platform;
+
+public class TimeoutPuzzleResult : PuzzleResult
 {
-    public class TimeoutPuzzleResult : PuzzleResult
+    public TimeoutPuzzleResult(string message)
+        : base(message, PuzzleResultStatus.Timeout)
     {
-        public TimeoutPuzzleResult(string message)
-            : base(message, PuzzleResultStatus.Timeout)
-        {
-        }
     }
 }

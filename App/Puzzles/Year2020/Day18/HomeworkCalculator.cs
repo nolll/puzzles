@@ -3,104 +3,103 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2020.Day18
+namespace App.Puzzles.Year2020.Day18;
+
+public class HomeworkCalculator
 {
-    public class HomeworkCalculator
+    private const string Addition = "+";
+    private const string Multiplication = "*";
+    private const char GroupStart = '(';
+    private const char GroupEnd = ')';
+
+    public long SumOfAll(string input, MathPrecedence precedence)
     {
-        private const string Addition = "+";
-        private const string Multiplication = "*";
-        private const char GroupStart = '(';
-        private const char GroupEnd = ')';
+        var rows = PuzzleInputReader.ReadLines(input);
+        return rows.Sum(o => Sum(o, precedence));
+    }
 
-        public long SumOfAll(string input, MathPrecedence precedence)
+    public long Sum(string input, MathPrecedence precedence)
+    {
+        var rootGroup = new Group(input, precedence);
+        var result = rootGroup.Result;
+        return result;
+    }
+
+    private class Group
+    {
+        public long Result { get; }
+
+        public Group(string s, MathPrecedence precedence)
         {
-            var rows = PuzzleInputReader.ReadLines(input);
-            return rows.Sum(o => Sum(o, precedence));
+            var calc = GetCalcFunc(precedence);
+            var regex = new Regex(@"\([0-9 \*\+]+\)");
+            while (s.Contains('('))
+            {
+                var matches = regex.Matches(s);
+                foreach (Match match in matches)
+                {
+                    var hit = match.ToString();
+                    var result = calc(hit.TrimStart(GroupStart).TrimEnd(GroupEnd));
+                    s = s.Replace(hit, result.ToString());
+                }
+            }
+                
+            Result = calc(s);
         }
 
-        public long Sum(string input, MathPrecedence precedence)
+        private long CalcWithOrderPrecedence(string s)
         {
-            var rootGroup = new Group(input, precedence);
-            var result = rootGroup.Result;
-            return result;
+            var parts = s.Split(' ').ToList();
+            while (parts.Count > 1)
+            {
+                var current = long.Parse(parts[0]);
+                var next = long.Parse(parts[2]);
+                var operation = parts[1];
+                var result = operation == Multiplication
+                    ? current * next
+                    : current + next;
+
+                parts[0] = result.ToString();
+                parts.RemoveAt(1);
+                parts.RemoveAt(1);
+            }
+
+            return long.Parse(parts[0]);
         }
 
-        private class Group
+        private long CalcWithAdditionPrecedence(string s)
         {
-            public long Result { get; }
+            var parts = s.Split(' ').ToList();
 
-            public Group(string s, MathPrecedence precedence)
+            while (parts.Contains(Addition))
             {
-                var calc = GetCalcFunc(precedence);
-                var regex = new Regex(@"\([0-9 \*\+]+\)");
-                while (s.Contains('('))
-                {
-                    var matches = regex.Matches(s);
-                    foreach (Match match in matches)
-                    {
-                        var hit = match.ToString();
-                        var result = calc(hit.TrimStart(GroupStart).TrimEnd(GroupEnd));
-                        s = s.Replace(hit, result.ToString());
-                    }
-                }
+                var nextAdditionOperator = parts.IndexOf(Addition);
+                var first = long.Parse(parts[nextAdditionOperator - 1]);
+                var second = long.Parse(parts[nextAdditionOperator + 1]);
+                parts[nextAdditionOperator - 1] = (first + second).ToString();
+                parts.RemoveAt(nextAdditionOperator);
+                parts.RemoveAt(nextAdditionOperator);
+            }
+
+            while (parts.Count() > 1)
+            {
+                var current = long.Parse(parts[0]);
+                var next = long.Parse(parts[2]);
+                var result = current * next;
+
+                parts[0] = result.ToString();
+                parts.RemoveAt(1);
+                parts.RemoveAt(1);
+            }
                 
-                Result = calc(s);
-            }
+            return long.Parse(parts[0]);
+        }
 
-            private long CalcWithOrderPrecedence(string s)
-            {
-                var parts = s.Split(' ').ToList();
-                while (parts.Count > 1)
-                {
-                    var current = long.Parse(parts[0]);
-                    var next = long.Parse(parts[2]);
-                    var operation = parts[1];
-                    var result = operation == Multiplication
-                        ? current * next
-                        : current + next;
-
-                    parts[0] = result.ToString();
-                    parts.RemoveAt(1);
-                    parts.RemoveAt(1);
-                }
-
-                return long.Parse(parts[0]);
-            }
-
-            private long CalcWithAdditionPrecedence(string s)
-            {
-                var parts = s.Split(' ').ToList();
-
-                while (parts.Contains(Addition))
-                {
-                    var nextAdditionOperator = parts.IndexOf(Addition);
-                    var first = long.Parse(parts[nextAdditionOperator - 1]);
-                    var second = long.Parse(parts[nextAdditionOperator + 1]);
-                    parts[nextAdditionOperator - 1] = (first + second).ToString();
-                    parts.RemoveAt(nextAdditionOperator);
-                    parts.RemoveAt(nextAdditionOperator);
-                }
-
-                while (parts.Count() > 1)
-                {
-                    var current = long.Parse(parts[0]);
-                    var next = long.Parse(parts[2]);
-                    var result = current * next;
-
-                    parts[0] = result.ToString();
-                    parts.RemoveAt(1);
-                    parts.RemoveAt(1);
-                }
-                
-                return long.Parse(parts[0]);
-            }
-
-            private Func<string, long> GetCalcFunc(MathPrecedence precedence)
-            {
-                if (precedence == MathPrecedence.Addition)
-                    return CalcWithAdditionPrecedence;
-                return CalcWithOrderPrecedence;
-            }
+        private Func<string, long> GetCalcFunc(MathPrecedence precedence)
+        {
+            if (precedence == MathPrecedence.Addition)
+                return CalcWithAdditionPrecedence;
+            return CalcWithOrderPrecedence;
         }
     }
 }

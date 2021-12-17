@@ -4,76 +4,75 @@ using System.Linq;
 using App.Common.CoordinateSystems;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2018.Day10
+namespace App.Puzzles.Year2018.Day10;
+
+public class StarMessageFinder
 {
-    public class StarMessageFinder
+    public string Message { get; }
+    public int IterationCount { get; }
+
+    public StarMessageFinder(string input, int messageHeight)
     {
-        public string Message { get; }
-        public int IterationCount { get; }
-
-        public StarMessageFinder(string input, int messageHeight)
+        var positions = ParsePositions(input).ToList();
+        while (true)
         {
-            var positions = ParsePositions(input).ToList();
-            while (true)
-            {
-                IterationCount++;
-                foreach (var position in positions)
-                {
-                    position.Move();
-                }
-
-                var yDiff = positions.Max(o => o.Y) - positions.Min(o => o.Y);
-
-                if (yDiff == messageHeight)
-                {
-                    Message = PrintMessage(positions);
-                    return;
-                }
-            }
-        }
-
-        private string PrintMessage(List<StarPosition> positions)
-        {
-            var yOffset = positions.Min(o => o.Y);
-            var xOffset = positions.Min(o => o.X);
-            var matrix = new Matrix<char>(1, 1, '.');
+            IterationCount++;
             foreach (var position in positions)
             {
-                matrix.MoveTo(position.X - xOffset, position.Y - yOffset);
-                matrix.WriteValue('#');
+                position.Move();
             }
-            return matrix.Print();
-        }
 
-        private IEnumerable<StarPosition> ParsePositions(string input)
-        {
-            var strings = PuzzleInputReader.ReadLines(input);
-            foreach (var s in strings)
+            var yDiff = positions.Max(o => o.Y) - positions.Min(o => o.Y);
+
+            if (yDiff == messageHeight)
             {
-                yield return ParsePosition(s);
+                Message = PrintMessage(positions);
+                return;
             }
         }
+    }
 
-        private StarPosition ParsePosition(string s)
+    private string PrintMessage(List<StarPosition> positions)
+    {
+        var yOffset = positions.Min(o => o.Y);
+        var xOffset = positions.Min(o => o.X);
+        var matrix = new Matrix<char>(1, 1, '.');
+        foreach (var position in positions)
         {
-            var positionEndsAt = s.IndexOf(">", StringComparison.InvariantCulture) + 1;
-            var strPos = s.Substring(0, positionEndsAt);
-            var strVel = s.Replace(strPos, "");
-
-            var tPos = ParseXy(strPos);
-            var tVel = ParseXy(strVel);
-
-            return new StarPosition(tPos.x, tPos.y, tVel.x, tVel.y);
+            matrix.MoveTo(position.X - xOffset, position.Y - yOffset);
+            matrix.WriteValue('#');
         }
+        return matrix.Print();
+    }
 
-        private (int x, int y) ParseXy(string s)
+    private IEnumerable<StarPosition> ParsePositions(string input)
+    {
+        var strings = PuzzleInputReader.ReadLines(input);
+        foreach (var s in strings)
         {
-            var angle1 = s.IndexOf("<", StringComparison.InvariantCulture);
-            var comma = s.IndexOf(",", StringComparison.InvariantCulture);
-            var angle2 = s.IndexOf(">", StringComparison.InvariantCulture);
-            var x = int.Parse(s.Substring(angle1 + 1, comma - angle1 - 1).Trim());
-            var y = int.Parse(s.Substring(comma + 1, angle2 - comma - 1).Trim());
-            return (x, y);
+            yield return ParsePosition(s);
         }
+    }
+
+    private StarPosition ParsePosition(string s)
+    {
+        var positionEndsAt = s.IndexOf(">", StringComparison.InvariantCulture) + 1;
+        var strPos = s.Substring(0, positionEndsAt);
+        var strVel = s.Replace(strPos, "");
+
+        var tPos = ParseXy(strPos);
+        var tVel = ParseXy(strVel);
+
+        return new StarPosition(tPos.x, tPos.y, tVel.x, tVel.y);
+    }
+
+    private (int x, int y) ParseXy(string s)
+    {
+        var angle1 = s.IndexOf("<", StringComparison.InvariantCulture);
+        var comma = s.IndexOf(",", StringComparison.InvariantCulture);
+        var angle2 = s.IndexOf(">", StringComparison.InvariantCulture);
+        var x = int.Parse(s.Substring(angle1 + 1, comma - angle1 - 1).Trim());
+        var y = int.Parse(s.Substring(comma + 1, angle2 - comma - 1).Trim());
+        return (x, y);
     }
 }

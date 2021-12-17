@@ -2,54 +2,53 @@ using System.Collections.Generic;
 using System.Linq;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2017.Day12
+namespace App.Puzzles.Year2017.Day12;
+
+public class Pipes
 {
-    public class Pipes
+    public int PipesInGroupZero { get; }
+    public int GroupCount { get; }
+
+    public Pipes(string input)
     {
-        public int PipesInGroupZero { get; }
-        public int GroupCount { get; }
+        var strRows = PuzzleInputReader.ReadLines(input);
+        var dictionary = new Dictionary<int, IList<int>>();
+        var groups = new List<List<int>>();
 
-        public Pipes(string input)
+        foreach (var r in strRows)
         {
-            var strRows = PuzzleInputReader.ReadLines(input);
-            var dictionary = new Dictionary<int, IList<int>>();
-            var groups = new List<List<int>>();
-
-            foreach (var r in strRows)
-            {
-                var parts = r.Replace(" ", "").Split("<->");
-                var group = int.Parse(parts[0]);
-                var members = parts[1].Split(',').Select(int.Parse).ToList();
-                dictionary[group] = members;
-            }
-
-            while (dictionary.Keys.Count > 0)
-            {
-                var start = dictionary.Keys.OrderBy(o => o).First();
-                var group = new List<int> { start };
-                var lookup = new List<int>();
-                lookup.AddRange(dictionary[start]);
-                dictionary.Remove(start);
-                while (lookup.Any())
-                {
-                    var current = lookup.First();
-                    lookup.RemoveAt(0);
-
-                    if (!group.Contains(current))
-                    {
-                        group.Add(current);
-                        if(dictionary.TryGetValue(current, out var key))
-                            lookup.AddRange(dictionary[current]);
-
-                        dictionary.Remove(current);
-                    }
-                }
-
-                groups.Add(group);
-            }
-            
-            PipesInGroupZero = groups[0].Count;
-            GroupCount = groups.Count;
+            var parts = r.Replace(" ", "").Split("<->");
+            var group = int.Parse(parts[0]);
+            var members = parts[1].Split(',').Select(int.Parse).ToList();
+            dictionary[group] = members;
         }
+
+        while (dictionary.Keys.Count > 0)
+        {
+            var start = dictionary.Keys.OrderBy(o => o).First();
+            var group = new List<int> { start };
+            var lookup = new List<int>();
+            lookup.AddRange(dictionary[start]);
+            dictionary.Remove(start);
+            while (lookup.Any())
+            {
+                var current = lookup.First();
+                lookup.RemoveAt(0);
+
+                if (!group.Contains(current))
+                {
+                    group.Add(current);
+                    if(dictionary.TryGetValue(current, out var key))
+                        lookup.AddRange(dictionary[current]);
+
+                    dictionary.Remove(current);
+                }
+            }
+
+            groups.Add(group);
+        }
+            
+        PipesInGroupZero = groups[0].Count;
+        GroupCount = groups.Count;
     }
 }

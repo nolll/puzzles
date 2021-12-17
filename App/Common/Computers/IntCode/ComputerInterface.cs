@@ -1,27 +1,26 @@
 ﻿using System;
 
-namespace App.Common.Computers.IntCode
+namespace App.Common.Computers.IntCode;
+
+public class ComputerInterface : IntCodeComputer
 {
-    public class ComputerInterface : IntCodeComputer
+    private readonly Func<long> _readInputFunc;
+    private readonly Action<long> _writeOutputFunc;
+
+    public ComputerInterface(string input, Func<long> readInputFunc, Action<long> writeOutputFunc)
+        : base(input)
     {
-        private readonly Func<long> _readInputFunc;
-        private readonly Action<long> _writeOutputFunc;
+        _readInputFunc = readInputFunc;
+        _writeOutputFunc = writeOutputFunc;
+    }
 
-        public ComputerInterface(string input, Func<long> readInputFunc, Action<long> writeOutputFunc)
-            : base(input)
-        {
-            _readInputFunc = readInputFunc;
-            _writeOutputFunc = writeOutputFunc;
-        }
+    protected override long ReadInput()
+    {
+        return _readInputFunc();
+    }
 
-        protected override long ReadInput()
-        {
-            return _readInputFunc();
-        }
-
-        protected override void WriteOutput(long output)
-        {
-            _writeOutputFunc(output);
-        }
+    protected override void WriteOutput(long output)
+    {
+        _writeOutputFunc(output);
     }
 }

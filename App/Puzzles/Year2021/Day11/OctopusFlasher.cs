@@ -2,78 +2,77 @@ using System.Collections.Generic;
 using System.Linq;
 using App.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2021.Day11
+namespace App.Puzzles.Year2021.Day11;
+
+public class OctopusFlasher
 {
-    public class OctopusFlasher
+    private readonly Matrix<int> _matrix;
+    private readonly IList<MatrixAddress> _coords;
+
+    public OctopusFlasher(string input)
     {
-        private readonly Matrix<int> _matrix;
-        private readonly IList<MatrixAddress> _coords;
+        _matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
+        _coords = _matrix.Coords;
+    }
 
-        public OctopusFlasher(string input)
+    public int Run(int? maxSteps = null)
+    {
+        var flashCount = 0;
+
+        var i = 0;
+        while(true)
         {
-            _matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
-            _coords = _matrix.Coords;
-        }
+            var flashed = new HashSet<MatrixAddress>();
 
-        public int Run(int? maxSteps = null)
-        {
-            var flashCount = 0;
+            IncrementAll();
+            var coordsToFlash = GetCoordsToFlash();
 
-            var i = 0;
-            while(true)
+            while (coordsToFlash.Any())
             {
-                var flashed = new HashSet<MatrixAddress>();
+                var flashCoord = coordsToFlash.First();
+                _matrix.MoveTo(flashCoord);
+                _matrix.WriteValue(0);
+                flashed.Add(flashCoord);
 
-                IncrementAll();
-                var coordsToFlash = GetCoordsToFlash();
-
-                while (coordsToFlash.Any())
+                foreach (var adjacentCoord in _matrix.AllAdjacentCoords)
                 {
-                    var flashCoord = coordsToFlash.First();
-                    _matrix.MoveTo(flashCoord);
-                    _matrix.WriteValue(0);
-                    flashed.Add(flashCoord);
+                    if (flashed.Contains(adjacentCoord))
+                        continue;
 
-                    foreach (var adjacentCoord in _matrix.AllAdjacentCoords)
-                    {
-                        if (flashed.Contains(adjacentCoord))
-                            continue;
-
-                        _matrix.MoveTo(adjacentCoord);
-                        var adjacentValue = _matrix.ReadValue();
-                        var newAdjacentValue = adjacentValue + 1;
-                        _matrix.WriteValue(newAdjacentValue);
-                    }
-
-                    coordsToFlash = GetCoordsToFlash();
+                    _matrix.MoveTo(adjacentCoord);
+                    var adjacentValue = _matrix.ReadValue();
+                    var newAdjacentValue = adjacentValue + 1;
+                    _matrix.WriteValue(newAdjacentValue);
                 }
+
+                coordsToFlash = GetCoordsToFlash();
+            }
                 
-                flashCount += flashed.Count;
+            flashCount += flashed.Count;
 
-                if (i >= maxSteps - 1)
-                    return flashCount;
+            if (i >= maxSteps - 1)
+                return flashCount;
 
-                i++;
+            i++;
 
-                if (flashed.Count == _coords.Count)
-                    return i;
-            }
+            if (flashed.Count == _coords.Count)
+                return i;
         }
+    }
 
-        private IList<MatrixAddress> GetCoordsToFlash()
-        {
-            return _coords.Where(o => _matrix.ReadValueAt(o) > 9).ToList();
-        }
+    private IList<MatrixAddress> GetCoordsToFlash()
+    {
+        return _coords.Where(o => _matrix.ReadValueAt(o) > 9).ToList();
+    }
 
-        private void IncrementAll()
+    private void IncrementAll()
+    {
+        foreach (var coord in _coords)
         {
-            foreach (var coord in _coords)
-            {
-                _matrix.MoveTo(coord);
-                var v = _matrix.ReadValue();
-                var newValue = v + 1;
-                _matrix.WriteValue(newValue);
-            }
+            _matrix.MoveTo(coord);
+            var v = _matrix.ReadValue();
+            var newValue = v + 1;
+            _matrix.WriteValue(newValue);
         }
     }
 }

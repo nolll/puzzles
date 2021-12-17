@@ -1,33 +1,32 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2017.Day02
+namespace App.Puzzles.Year2017.Day02;
+
+public class Year2017Day02Tests
 {
-    public class Year2017Day02Tests
+    [Test]
+    public void ChecksumMaxMinIsCorrect()
     {
-        [Test]
-        public void ChecksumMaxMinIsCorrect()
-        {
-            const string input = @"
+        const string input = @"
 5 1 9 5
 7 5 3
 2 4 6 8";
 
-            var spreadsheet = new Spreadsheet(input);
+        var spreadsheet = new Spreadsheet(input);
 
-            Assert.That(spreadsheet.ChecksumMaxMin, Is.EqualTo(18));
-        }
+        Assert.That(spreadsheet.ChecksumMaxMin, Is.EqualTo(18));
+    }
 
-        [Test]
-        public void ChecksumDivisionIsCorrect()
-        {
-            const string input = @"
+    [Test]
+    public void ChecksumDivisionIsCorrect()
+    {
+        const string input = @"
 5 9 2 8
 9 4 7 3
 3 8 6 5";
 
-            var spreadsheet = new Spreadsheet(input);
+        var spreadsheet = new Spreadsheet(input);
 
-            Assert.That(spreadsheet.ChecksumDivision, Is.EqualTo(9));
-        }
+        Assert.That(spreadsheet.ChecksumDivision, Is.EqualTo(9));
     }
 }

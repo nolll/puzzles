@@ -1,21 +1,20 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2016.Day10
+namespace App.Puzzles.Year2016.Day10;
+
+public class BotGiver : IGiver
 {
-    public class BotGiver : IGiver
+    private readonly Dictionary<int, Bot> _bots;
+    private readonly int _id;
+
+    public BotGiver(Dictionary<int, Bot> bots, int id)
     {
-        private readonly Dictionary<int, Bot> _bots;
-        private readonly int _id;
+        _bots = bots;
+        _id = id;
+    }
 
-        public BotGiver(Dictionary<int, Bot> bots, int id)
-        {
-            _bots = bots;
-            _id = id;
-        }
-
-        public void Give(int v)
-        {
-            _bots[_id].AddValue(v);
-        }
+    public void Give(int v)
+    {
+        _bots[_id].AddValue(v);
     }
 }

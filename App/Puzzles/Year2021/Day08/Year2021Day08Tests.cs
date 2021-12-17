@@ -1,47 +1,47 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2021.Day08
+namespace App.Puzzles.Year2021.Day08;
+
+public class Year2021Day08Tests
 {
-    public class Year2021Day08Tests
+    [Test]
+    public void Part1()
     {
-        [Test]
-        public void Part1()
-        {
-            var puzzle = new SevenSegmentDisplayDecoder(Input);
-            var result = puzzle.GetEasyNumbers();
+        var puzzle = new SevenSegmentDisplayDecoder(Input);
+        var result = puzzle.GetEasyNumbers();
 
-            Assert.That(result, Is.EqualTo(26));
-        }
+        Assert.That(result, Is.EqualTo(26));
+    }
 
-        [TestCase("abc", "abcd", true)]
-        [TestCase("abc", "abde", false)]
-        public void IsSubsetOf(string sShort, string sLong, bool expected)
-        {
-            var decoder = new DigitDecoder(SingleInput);
-            var result = decoder.IsSubsetOf(sShort, sLong);
+    [TestCase("abc", "abcd", true)]
+    [TestCase("abc", "abde", false)]
+    public void IsSubsetOf(string sShort, string sLong, bool expected)
+    {
+        var decoder = new DigitDecoder(SingleInput);
+        var result = decoder.IsSubsetOf(sShort, sLong);
             
-            Assert.That(result, Is.EqualTo(expected));
-        }
+        Assert.That(result, Is.EqualTo(expected));
+    }
 
-        [Test]
-        public void Part2Single()
-        {
-            var decoder = new DigitDecoder(SingleInput);
-            Assert.That(decoder.DecodedNumber, Is.EqualTo(5353));
-        }
+    [Test]
+    public void Part2Single()
+    {
+        var decoder = new DigitDecoder(SingleInput);
+        Assert.That(decoder.DecodedNumber, Is.EqualTo(5353));
+    }
         
-        [Test]
-        public void Part2()
-        {
-            var puzzle = new SevenSegmentDisplayDecoder(Input);
-            var result = puzzle.GetDecodedSum();
+    [Test]
+    public void Part2()
+    {
+        var puzzle = new SevenSegmentDisplayDecoder(Input);
+        var result = puzzle.GetDecodedSum();
 
-            Assert.That(result, Is.EqualTo(61229));
-        }
+        Assert.That(result, Is.EqualTo(61229));
+    }
 
-        private const string SingleInput = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
+    private const string SingleInput = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
         
-        private const string Input = @"
+    private const string Input = @"
 be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
 edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc
 fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg
@@ -52,5 +52,4 @@ dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbc
 bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef
 egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
 gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce";
-    }
 }

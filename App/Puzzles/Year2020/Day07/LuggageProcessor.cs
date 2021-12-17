@@ -2,99 +2,98 @@ using System.Collections.Generic;
 using System.Linq;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2020.Day07
+namespace App.Puzzles.Year2020.Day07;
+
+public class LuggageProcessor
 {
-    public class LuggageProcessor
+    private readonly Dictionary<string, Bag> _bags;
+
+    public LuggageProcessor(string input)
     {
-        private readonly Dictionary<string, Bag> _bags;
+        _bags = new Dictionary<string, Bag>();
+        ParseBags(input);
+    }
 
-        public LuggageProcessor(string input)
+    private void ParseBags(string input)
+    {
+        var rows = PuzzleInputReader.ReadLines(input);
+        foreach (var row in rows)
         {
-            _bags = new Dictionary<string, Bag>();
-            ParseBags(input);
+            ParseBag(row);
         }
+    }
 
-        private void ParseBags(string input)
+    private void ParseBag(string row)
+    {
+        var parts = row.Split("contain").Select(o => o.Trim()).ToList();
+        var bagName = parts[0].Replace("bags", "").Trim();
+        var bag = GetOrAdd(bagName);
+        var allSubBagsString = parts[1].Replace(".", "");
+        if (allSubBagsString != "no other bags")
         {
-            var rows = PuzzleInputReader.ReadLines(input);
-            foreach (var row in rows)
+            var subBagsStrings = allSubBagsString.Split(",");
+            foreach (var subBagString in subBagsStrings)
             {
-                ParseBag(row);
+                var subBagParts = subBagString.Trim().Split(" ").SkipLast(1).ToList();
+                var quantity = int.Parse(subBagParts.First());
+                var name = string.Join(" ", subBagParts.Skip(1));
+                var subBag = GetOrAdd(name);
+                bag.AddSubBag(subBag, quantity);
             }
         }
+    }
 
-        private void ParseBag(string row)
-        {
-            var parts = row.Split("contain").Select(o => o.Trim()).ToList();
-            var bagName = parts[0].Replace("bags", "").Trim();
-            var bag = GetOrAdd(bagName);
-            var allSubBagsString = parts[1].Replace(".", "");
-            if (allSubBagsString != "no other bags")
-            {
-                var subBagsStrings = allSubBagsString.Split(",");
-                foreach (var subBagString in subBagsStrings)
-                {
-                    var subBagParts = subBagString.Trim().Split(" ").SkipLast(1).ToList();
-                    var quantity = int.Parse(subBagParts.First());
-                    var name = string.Join(" ", subBagParts.Skip(1));
-                    var subBag = GetOrAdd(name);
-                    bag.AddSubBag(subBag, quantity);
-                }
-            }
-        }
-
-        private Bag GetOrAdd(string bagName)
-        {
-            if (_bags.TryGetValue(bagName, out var bag))
-                return bag;
-
-            bag = new Bag(bagName);
-            _bags.Add(bagName, bag);
+    private Bag GetOrAdd(string bagName)
+    {
+        if (_bags.TryGetValue(bagName, out var bag))
             return bag;
-        }
 
-        public int NumberOfBagsThatCanContainGoldBags()
+        bag = new Bag(bagName);
+        _bags.Add(bagName, bag);
+        return bag;
+    }
+
+    public int NumberOfBagsThatCanContainGoldBags()
+    {
+        var count = 0;
+        foreach (var bag in _bags.Values)
         {
-            var count = 0;
-            foreach (var bag in _bags.Values)
-            {
-                count += CanContainGoldenBag(bag)
-                    ? 1
-                    : 0;
-            }
-
-            return count;
+            count += CanContainGoldenBag(bag)
+                ? 1
+                : 0;
         }
 
-        private bool CanContainGoldenBag(Bag bag)
+        return count;
+    }
+
+    private bool CanContainGoldenBag(Bag bag)
+    {
+        foreach (var subBag in bag.SubBags)
         {
-            foreach (var subBag in bag.SubBags)
-            {
-                if (subBag.Bag.Name == "shiny gold")
-                    return true;
+            if (subBag.Bag.Name == "shiny gold")
+                return true;
 
-                if (CanContainGoldenBag(subBag.Bag))
-                    return true;
-            }
-
-            return false;
+            if (CanContainGoldenBag(subBag.Bag))
+                return true;
         }
 
-        public int NumberOfBagsThatAGoldBagContains()
+        return false;
+    }
+
+    public int NumberOfBagsThatAGoldBagContains()
+    {
+        var goldBag = _bags["shiny gold"];
+        return GetSubBagCount(goldBag);
+    }
+
+    private int GetSubBagCount(Bag bag)
+    {
+        var count = 0;
+        foreach (var subBag in bag.SubBags)
         {
-            var goldBag = _bags["shiny gold"];
-            return GetSubBagCount(goldBag);
+            count += subBag.Quantity + subBag.Quantity * GetSubBagCount(subBag.Bag);
         }
 
-        private int GetSubBagCount(Bag bag)
-        {
-            var count = 0;
-            foreach (var subBag in bag.SubBags)
-            {
-                count += subBag.Quantity + subBag.Quantity * GetSubBagCount(subBag.Bag);
-            }
-
-            return count;
-        }
+        return count;
     }
 }

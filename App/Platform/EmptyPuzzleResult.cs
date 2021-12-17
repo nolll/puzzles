@@ -1,10 +1,9 @@
-﻿namespace App.Platform
+﻿namespace App.Platform;
+
+public class EmptyPuzzleResult : PuzzleResult
 {
-    public class EmptyPuzzleResult : PuzzleResult
+    public EmptyPuzzleResult()
+        : base("No puzzle here", PuzzleResultStatus.Empty)
     {
-        public EmptyPuzzleResult()
-            : base("No puzzle here", PuzzleResultStatus.Empty)
-        {
-        }
     }
 }

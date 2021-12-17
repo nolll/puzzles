@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2020.Day07
+namespace App.Puzzles.Year2020.Day07;
+
+public class Year2020Day07Tests
 {
-    public class Year2020Day07Tests
+    [Test]
+    public void NumberOfBagsThatCanCarryGoldBags()
     {
-        [Test]
-        public void NumberOfBagsThatCanCarryGoldBags()
-        {
-            const string input = @"
+        const string input = @"
 light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
 bright white bags contain 1 shiny gold bag.
@@ -18,16 +18,16 @@ vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.";
 
-            var processor = new LuggageProcessor(input);
-            var count = processor.NumberOfBagsThatCanContainGoldBags();
+        var processor = new LuggageProcessor(input);
+        var count = processor.NumberOfBagsThatCanContainGoldBags();
 
-            Assert.That(count, Is.EqualTo(4));
-        }
+        Assert.That(count, Is.EqualTo(4));
+    }
 
-        [Test]
-        public void NumberOfBagsThatAGoldBagsContains()
-        {
-            const string input = @"
+    [Test]
+    public void NumberOfBagsThatAGoldBagsContains()
+    {
+        const string input = @"
 light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
 bright white bags contain 1 shiny gold bag.
@@ -38,10 +38,9 @@ vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.";
 
-            var processor = new LuggageProcessor(input);
-            var count = processor.NumberOfBagsThatAGoldBagContains();
+        var processor = new LuggageProcessor(input);
+        var count = processor.NumberOfBagsThatAGoldBagContains();
 
-            Assert.That(count, Is.EqualTo(32));
-        }
+        Assert.That(count, Is.EqualTo(32));
     }
 }

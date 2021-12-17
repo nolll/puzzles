@@ -1,19 +1,18 @@
-namespace App.Puzzles.Year2016.Day04
+namespace App.Puzzles.Year2016.Day04;
+
+public class CharacterCount
 {
-    public class CharacterCount
+    public char C { get; }
+    public int Count { get; private set; }
+
+    public CharacterCount(char c)
     {
-        public char C { get; }
-        public int Count { get; private set; }
+        C = c;
+        Count = 0;
+    }
 
-        public CharacterCount(char c)
-        {
-            C = c;
-            Count = 0;
-        }
-
-        public void Increment()
-        {
-            Count += 1;
-        }
+    public void Increment()
+    {
+        Count += 1;
     }
 }

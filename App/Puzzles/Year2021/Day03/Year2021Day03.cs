@@ -1,25 +1,24 @@
 ﻿using App.Platform;
 
-namespace App.Puzzles.Year2021.Day03
+namespace App.Puzzles.Year2021.Day03;
+
+public class Year2021Day03 : Puzzle
 {
-    public class Year2021Day03 : Puzzle
+    public override string Title => "Binary Diagnostic";
+
+    public override PuzzleResult RunPart1()
     {
-        public override string Title => "Binary Diagnostic";
-
-        public override PuzzleResult RunPart1()
-        {
-            var diagnostics = new BinaryDiagnostics();
-            var result = diagnostics.GetFuelConsumption(FileInput);
+        var diagnostics = new BinaryDiagnostics();
+        var result = diagnostics.GetFuelConsumption(FileInput);
             
-            return new PuzzleResult(result, 845186);
-        }
+        return new PuzzleResult(result, 845186);
+    }
 
-        public override PuzzleResult RunPart2()
-        {
-            var diagnostics = new BinaryDiagnostics();
-            var result = diagnostics.GetLifeSupportRating(FileInput);
+    public override PuzzleResult RunPart2()
+    {
+        var diagnostics = new BinaryDiagnostics();
+        var result = diagnostics.GetLifeSupportRating(FileInput);
 
-            return new PuzzleResult(result, 4636702);
-        }
+        return new PuzzleResult(result, 4636702);
     }
 }

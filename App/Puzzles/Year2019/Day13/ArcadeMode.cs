@@ -1,9 +1,8 @@
-﻿namespace App.Puzzles.Year2019.Day13
+﻿namespace App.Puzzles.Year2019.Day13;
+
+public enum ArcadeMode
 {
-    public enum ArcadeMode
-    {
-        X,
-        Y,
-        Type
-    }
+    X,
+    Y,
+    Type
 }

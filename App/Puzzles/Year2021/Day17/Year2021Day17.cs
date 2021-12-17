@@ -1,34 +1,33 @@
 ﻿using App.Platform;
 
-namespace App.Puzzles.Year2021.Day17
+namespace App.Puzzles.Year2021.Day17;
+
+public class Year2021Day17 : Puzzle
 {
-    public class Year2021Day17 : Puzzle
+    private TrickshotResult _result;
+
+    public override PuzzleResult RunPart1()
     {
-        private TrickshotResult _result;
+        var result = Shoot();
 
-        public override PuzzleResult RunPart1()
+        return new PuzzleResult(result.MaxHeight, 11175);
+    }
+
+    public override PuzzleResult RunPart2()
+    {
+        var result = Shoot();
+
+        return new PuzzleResult(result.HitCount, 3540);
+    }
+
+    private TrickshotResult Shoot()
+    {
+        if (_result == null)
         {
-            var result = Shoot();
-
-            return new PuzzleResult(result.MaxHeight, 11175);
+            var trickshot = new TrickShot();
+            _result = trickshot.Shoot(new TrickshotTarget(81, 129, -150, -108));
         }
 
-        public override PuzzleResult RunPart2()
-        {
-            var result = Shoot();
-
-            return new PuzzleResult(result.HitCount, 3540);
-        }
-
-        private TrickshotResult Shoot()
-        {
-            if (_result == null)
-            {
-                var trickshot = new TrickShot();
-                _result = trickshot.Shoot(new TrickshotTarget(81, 129, -150, -108));
-            }
-
-            return _result;
-        }
+        return _result;
     }
 }

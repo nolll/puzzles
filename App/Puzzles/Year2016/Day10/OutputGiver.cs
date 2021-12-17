@@ -1,21 +1,20 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2016.Day10
+namespace App.Puzzles.Year2016.Day10;
+
+public class OutputGiver : IGiver
 {
-    public class OutputGiver : IGiver
+    private readonly Dictionary<int, int> _outputs;
+    private readonly int _id;
+
+    public OutputGiver(Dictionary<int, int> outputs, int id)
     {
-        private readonly Dictionary<int, int> _outputs;
-        private readonly int _id;
+        _outputs = outputs;
+        _id = id;
+    }
 
-        public OutputGiver(Dictionary<int, int> outputs, int id)
-        {
-            _outputs = outputs;
-            _id = id;
-        }
-
-        public void Give(int v)
-        {
-            _outputs[_id] = v;
-        }
+    public void Give(int v)
+    {
+        _outputs[_id] = v;
     }
 }

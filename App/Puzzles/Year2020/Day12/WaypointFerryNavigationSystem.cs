@@ -3,89 +3,88 @@ using System.Linq;
 using App.Common.CoordinateSystems;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2020.Day12
+namespace App.Puzzles.Year2020.Day12;
+
+public class WaypointFerryNavigationSystem
 {
-    public class WaypointFerryNavigationSystem
+    private MatrixAddress _address;
+    private MatrixAddress _waypoint;
+    private readonly IEnumerable<FerryNavigationInstruction> _intructions;
+    public int DistanceTravelled => _address.ManhattanDistanceTo(new MatrixAddress(0, 0));
+
+    public WaypointFerryNavigationSystem(string input)
     {
-        private MatrixAddress _address;
-        private MatrixAddress _waypoint;
-        private readonly IEnumerable<FerryNavigationInstruction> _intructions;
-        public int DistanceTravelled => _address.ManhattanDistanceTo(new MatrixAddress(0, 0));
+        var rows = PuzzleInputReader.ReadLines(input);
+        _intructions = rows.Select(FerryNavigationInstruction.Parse);
 
-        public WaypointFerryNavigationSystem(string input)
+        _address = new MatrixAddress(0, 0);
+        _waypoint = new MatrixAddress(10, 1);
+    }
+
+    public void Run()
+    {
+        foreach (var instruction in _intructions)
         {
-            var rows = PuzzleInputReader.ReadLines(input);
-            _intructions = rows.Select(FerryNavigationInstruction.Parse);
-
-            _address = new MatrixAddress(0, 0);
-            _waypoint = new MatrixAddress(10, 1);
+            Move(instruction);
         }
+    }
 
-        public void Run()
+    private void Move(FerryNavigationInstruction instruction)
+    {
+        switch (instruction.Direction)
         {
-            foreach (var instruction in _intructions)
-            {
-                Move(instruction);
-            }
+            case 'N':
+                _waypoint = new MatrixAddress(_waypoint.X, _waypoint.Y + instruction.Value);
+                break;
+            case 'E':
+                _waypoint = new MatrixAddress(_waypoint.X + instruction.Value, _waypoint.Y);
+                break;
+            case 'S':
+                _waypoint = new MatrixAddress(_waypoint.X, _waypoint.Y - instruction.Value);
+                break;
+            case 'W':
+                _waypoint = new MatrixAddress(_waypoint.X - instruction.Value, _waypoint.Y);
+                break;
+            case 'L':
+                RotateLeft(instruction.Value);
+                break;
+            case 'R':
+                RotateRight(instruction.Value);
+                break;
+            default:
+                MoveForward(instruction.Value);
+                break;
         }
+    }
 
-        private void Move(FerryNavigationInstruction instruction)
-        {
-            switch (instruction.Direction)
-            {
-                case 'N':
-                    _waypoint = new MatrixAddress(_waypoint.X, _waypoint.Y + instruction.Value);
-                    break;
-                case 'E':
-                    _waypoint = new MatrixAddress(_waypoint.X + instruction.Value, _waypoint.Y);
-                    break;
-                case 'S':
-                    _waypoint = new MatrixAddress(_waypoint.X, _waypoint.Y - instruction.Value);
-                    break;
-                case 'W':
-                    _waypoint = new MatrixAddress(_waypoint.X - instruction.Value, _waypoint.Y);
-                    break;
-                case 'L':
-                    RotateLeft(instruction.Value);
-                    break;
-                case 'R':
-                    RotateRight(instruction.Value);
-                    break;
-                default:
-                    MoveForward(instruction.Value);
-                    break;
-            }
-        }
+    private void MoveForward(int steps)
+    {
+        _address = new MatrixAddress(_address.X + _waypoint.X * steps, _address.Y + _waypoint.Y * steps);
+    }
 
-        private void MoveForward(int steps)
+    private void RotateLeft(int degrees)
+    {
+        for (var i = 0; i < degrees; i += 90)
         {
-            _address = new MatrixAddress(_address.X + _waypoint.X * steps, _address.Y + _waypoint.Y * steps);
+            RotateLeft();
         }
+    }
 
-        private void RotateLeft(int degrees)
+    private void RotateRight(int degrees)
+    {
+        for (var i = 0; i < degrees; i += 90)
         {
-            for (var i = 0; i < degrees; i += 90)
-            {
-                RotateLeft();
-            }
+            RotateRight();
         }
+    }
 
-        private void RotateRight(int degrees)
-        {
-            for (var i = 0; i < degrees; i += 90)
-            {
-                RotateRight();
-            }
-        }
+    private void RotateLeft()
+    {
+        _waypoint = new MatrixAddress(-_waypoint.Y, _waypoint.X);
+    }
 
-        private void RotateLeft()
-        {
-            _waypoint = new MatrixAddress(-_waypoint.Y, _waypoint.X);
-        }
-
-        private void RotateRight()
-        {
-            _waypoint = new MatrixAddress(_waypoint.Y, -_waypoint.X);
-        }
+    private void RotateRight()
+    {
+        _waypoint = new MatrixAddress(_waypoint.Y, -_waypoint.X);
     }
 }

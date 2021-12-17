@@ -1,8 +1,7 @@
-namespace App.Puzzles.Year2016.Day21
+namespace App.Puzzles.Year2016.Day21;
+
+public interface IScrambleInstruction
 {
-    public interface IScrambleInstruction
-    {
-        string Run(string s);
-        string RunBackwards(string s);
-    }
+    string Run(string s);
+    string RunBackwards(string s);
 }

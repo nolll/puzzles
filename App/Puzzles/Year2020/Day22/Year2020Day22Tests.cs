@@ -1,22 +1,22 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2020.Day22
+namespace App.Puzzles.Year2020.Day22;
+
+public class Year2020Day22Tests
 {
-    public class Year2020Day22Tests
+    [Test]
+    public void NormalGame_WinningScoreIs306()
     {
-        [Test]
-        public void NormalGame_WinningScoreIs306()
-        {
-            var game = new CardCombatGame(Input);
-            var score = game.Play();
+        var game = new CardCombatGame(Input);
+        var score = game.Play();
 
-            Assert.That(score, Is.EqualTo(306));
-        }
+        Assert.That(score, Is.EqualTo(306));
+    }
 
-        [Test]
-        public void InfiniteGame_Ends()
-        {
-            const string input = @"
+    [Test]
+    public void InfiniteGame_Ends()
+    {
+        const string input = @"
 Player 1:
 43
 19
@@ -26,23 +26,23 @@ Player 2:
 29
 14";
 
-            var game = new CardCombatGame(input);
-            game.PlayRecursive();
-            const bool ended = true;
+        var game = new CardCombatGame(input);
+        game.PlayRecursive();
+        const bool ended = true;
 
-            Assert.That(ended, Is.True);
-        }
+        Assert.That(ended, Is.True);
+    }
 
-        [Test]
-        public void RecursiveGame_WinningScoreIs306()
-        {
-            var game = new CardCombatGame(Input);
-            var score = game.PlayRecursive();
+    [Test]
+    public void RecursiveGame_WinningScoreIs306()
+    {
+        var game = new CardCombatGame(Input);
+        var score = game.PlayRecursive();
 
-            Assert.That(score, Is.EqualTo(291));
-        }
+        Assert.That(score, Is.EqualTo(291));
+    }
 
-        private const string Input = @"
+    private const string Input = @"
 Player 1:
 9
 2
@@ -56,5 +56,4 @@ Player 2:
 4
 7
 10";
-    }
 }

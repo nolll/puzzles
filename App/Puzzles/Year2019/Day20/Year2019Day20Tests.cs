@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2019.Day20
+namespace App.Puzzles.Year2019.Day20;
+
+public class Year2019Day20Tests
 {
-    public class Year2019Day20Tests
+    [Test]
+    public void FindsShortestRoute1()
     {
-        [Test]
-        public void FindsShortestRoute1()
-        {
-            const string input = @"
+        const string input = @"
 _                      _
 _          A           _
 _          A           _
@@ -30,15 +30,15 @@ _              Z       _
 _              Z       _
 _                      _";
 
-            var solver = new DonutMazeSolver(input);
+        var solver = new DonutMazeSolver(input);
 
-            Assert.That(solver.ShortestStepCount, Is.EqualTo(23));
-        }
+        Assert.That(solver.ShortestStepCount, Is.EqualTo(23));
+    }
 
-        [Test]
-        public void FindsShortestRoute2()
-        {
-            const string input = @"
+    [Test]
+    public void FindsShortestRoute2()
+    {
+        const string input = @"
 _                                     _
 _                    A                _
 _                    A                _
@@ -79,15 +79,15 @@ _            B   J   C                _
 _            U   P   P                _
 _                                     _";
 
-            var solver = new DonutMazeSolver(input);
+        var solver = new DonutMazeSolver(input);
 
-            Assert.That(solver.ShortestStepCount, Is.EqualTo(58));
-        }
+        Assert.That(solver.ShortestStepCount, Is.EqualTo(58));
+    }
 
-        [Test]
-        public void FindsShortestRouteRecursive()
-        {
-            const string input = @"
+    [Test]
+    public void FindsShortestRouteRecursive()
+    {
+        const string input = @"
 _                                               _
 _              Z L X W       C                  _
 _              Z P Q B       K                  _
@@ -128,9 +128,8 @@ _                A O F   N                      _
 _                A A D   M                      _
 _                                               _";
 
-            var solver = new RecursiveDonutMazeSolver(input);
+        var solver = new RecursiveDonutMazeSolver(input);
 
-            Assert.That(solver.ShortestStepCount, Is.EqualTo(396));
-        }
+        Assert.That(solver.ShortestStepCount, Is.EqualTo(396));
     }
 }

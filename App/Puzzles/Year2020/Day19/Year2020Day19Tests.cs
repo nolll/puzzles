@@ -1,83 +1,83 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2020.Day19
+namespace App.Puzzles.Year2020.Day19;
+
+public class Year2020Day19Tests
 {
-    public class Year2020Day19Tests
+    [Test]
+    public void NumberOfValidMessagesIs2()
     {
-        [Test]
-        public void NumberOfValidMessagesIs2()
-        {
-            var validator = new MonsterImageValidator(RulesAndMessages1, false);
-            var result = validator.ValidCount();
+        var validator = new MonsterImageValidator(RulesAndMessages1, false);
+        var result = validator.ValidCount();
 
-            Assert.That(result, Is.EqualTo(2));
-        }
+        Assert.That(result, Is.EqualTo(2));
+    }
 
-        [Test]
-        public void NumberOfValidMessagesIs3()
-        {
-            var validator = new MonsterImageValidator(RulesAndMessages2, false);
-            var result = validator.ValidCount();
+    [Test]
+    public void NumberOfValidMessagesIs3()
+    {
+        var validator = new MonsterImageValidator(RulesAndMessages2, false);
+        var result = validator.ValidCount();
 
-            Assert.That(result, Is.EqualTo(3));
-        }
+        Assert.That(result, Is.EqualTo(3));
+    }
 
-        [TestCase("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
-        [TestCase("bbabbbbaabaabba", true)]
-        [TestCase("babbbbaabbbbbabbbbbbaabaaabaaa", false)]
-        [TestCase("aaabbbbbbaaaabaababaabababbabaaabbababababaaa", false)]
-        [TestCase("bbbbbbbaaaabbbbaaabbabaaa", false)]
-        [TestCase("bbbababbbbaaaaaaaabbababaaababaabab", false)]
-        [TestCase("ababaaaaaabaaab", true)]
-        [TestCase("ababaaaaabbbaba", true)]
-        [TestCase("baabbaaaabbaaaababbaababb", false)]
-        [TestCase("abbbbabbbbaaaababbbbbbaaaababb", false)]
-        [TestCase("aaaaabbaabaaaaababaa", false)]
-        [TestCase("aaaabbaaaabbaaa", false)]
-        [TestCase("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", false)]
-        [TestCase("babaaabbbaaabaababbaabababaaab", false)]
-        [TestCase("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", false)]
-        public void SpecificMessagesIsValid_UnmodifiedRules(string message, bool expected)
-        {
-            var validator = new MonsterImageValidator(Rules2, false);
-            var isValid = validator.IsValid(message);
+    [TestCase("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
+    [TestCase("bbabbbbaabaabba", true)]
+    [TestCase("babbbbaabbbbbabbbbbbaabaaabaaa", false)]
+    [TestCase("aaabbbbbbaaaabaababaabababbabaaabbababababaaa", false)]
+    [TestCase("bbbbbbbaaaabbbbaaabbabaaa", false)]
+    [TestCase("bbbababbbbaaaaaaaabbababaaababaabab", false)]
+    [TestCase("ababaaaaaabaaab", true)]
+    [TestCase("ababaaaaabbbaba", true)]
+    [TestCase("baabbaaaabbaaaababbaababb", false)]
+    [TestCase("abbbbabbbbaaaababbbbbbaaaababb", false)]
+    [TestCase("aaaaabbaabaaaaababaa", false)]
+    [TestCase("aaaabbaaaabbaaa", false)]
+    [TestCase("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", false)]
+    [TestCase("babaaabbbaaabaababbaabababaaab", false)]
+    [TestCase("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", false)]
+    public void SpecificMessagesIsValid_UnmodifiedRules(string message, bool expected)
+    {
+        var validator = new MonsterImageValidator(Rules2, false);
+        var isValid = validator.IsValid(message);
 
-            Assert.That(isValid, Is.EqualTo(expected));
-        }
+        Assert.That(isValid, Is.EqualTo(expected));
+    }
 
-        [TestCase("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
-        [TestCase("bbabbbbaabaabba", true)]
-        [TestCase("babbbbaabbbbbabbbbbbaabaaabaaa", true)]
-        [TestCase("aaabbbbbbaaaabaababaabababbabaaabbababababaaa", true)]
-        [TestCase("bbbbbbbaaaabbbbaaabbabaaa", true)]
-        [TestCase("bbbababbbbaaaaaaaabbababaaababaabab", true)]
-        [TestCase("ababaaaaaabaaab", true)]
-        [TestCase("ababaaaaabbbaba", true)]
-        [TestCase("baabbaaaabbaaaababbaababb", true)]
-        [TestCase("abbbbabbbbaaaababbbbbbaaaababb", true)]
-        [TestCase("aaaaabbaabaaaaababaa", true)]
-        [TestCase("aaaabbaaaabbaaa", false)]
-        [TestCase("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", true)]
-        [TestCase("babaaabbbaaabaababbaabababaaab", false)]
-        [TestCase("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", true)]
-        public void SpecificMessageIsValid_ModifiedRules(string message, bool expected)
-        {
-            var validator = new MonsterImageValidator(Rules2, true);
-            var isValid = validator.IsValid(message);
+    [TestCase("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
+    [TestCase("bbabbbbaabaabba", true)]
+    [TestCase("babbbbaabbbbbabbbbbbaabaaabaaa", true)]
+    [TestCase("aaabbbbbbaaaabaababaabababbabaaabbababababaaa", true)]
+    [TestCase("bbbbbbbaaaabbbbaaabbabaaa", true)]
+    [TestCase("bbbababbbbaaaaaaaabbababaaababaabab", true)]
+    [TestCase("ababaaaaaabaaab", true)]
+    [TestCase("ababaaaaabbbaba", true)]
+    [TestCase("baabbaaaabbaaaababbaababb", true)]
+    [TestCase("abbbbabbbbaaaababbbbbbaaaababb", true)]
+    [TestCase("aaaaabbaabaaaaababaa", true)]
+    [TestCase("aaaabbaaaabbaaa", false)]
+    [TestCase("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", true)]
+    [TestCase("babaaabbbaaabaababbaabababaaab", false)]
+    [TestCase("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", true)]
+    public void SpecificMessageIsValid_ModifiedRules(string message, bool expected)
+    {
+        var validator = new MonsterImageValidator(Rules2, true);
+        var isValid = validator.IsValid(message);
 
-            Assert.That(isValid, Is.EqualTo(expected));
-        }
+        Assert.That(isValid, Is.EqualTo(expected));
+    }
 
-        [Test]
-        public void NumberOfValidMessagesIs12()
-        {
-            var validator = new MonsterImageValidator(RulesAndMessages2, true);
-            var result = validator.ValidCount();
+    [Test]
+    public void NumberOfValidMessagesIs12()
+    {
+        var validator = new MonsterImageValidator(RulesAndMessages2, true);
+        var result = validator.ValidCount();
 
-            Assert.That(result, Is.EqualTo(12));
-        }
+        Assert.That(result, Is.EqualTo(12));
+    }
 
-        private const string Rules1 = @"
+    private const string Rules1 = @"
 0: 4 1 5
 1: 2 3 | 3 2
 2: 4 4 | 5 5
@@ -85,14 +85,14 @@ namespace App.Puzzles.Year2020.Day19
 4: ""a""
 5: ""b""";
 
-        private const string Messages1 = @"
+    private const string Messages1 = @"
 ababbb
 bababa
 abbbab
 aaabbb
 aaaabbb";
 
-        private const string Rules2 = @"
+    private const string Rules2 = @"
 42: 9 14 | 10 1
 9: 14 27 | 1 26
 10: 23 14 | 28 1
@@ -125,7 +125,7 @@ aaaabbb";
 7: 14 5 | 1 21
 24: 14 1";
 
-        private const string Messages2 = @"
+    private const string Messages2 = @"
 abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa
 bbabbbbaabaabba
 babbbbaabbbbbabbbbbbaabaaabaaa
@@ -142,7 +142,6 @@ aaaabbaabbaaaaaaabbbabbbaaabbaabaaa
 babaaabbbaaabaababbaabababaaab
 aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba";
 
-        private string RulesAndMessages1 => $"{Rules1}\r\n{Messages1}";
-        private string RulesAndMessages2 => $"{Rules2}\r\n{Messages2}";
-    }
+    private string RulesAndMessages1 => $"{Rules1}\r\n{Messages1}";
+    private string RulesAndMessages2 => $"{Rules2}\r\n{Messages2}";
 }

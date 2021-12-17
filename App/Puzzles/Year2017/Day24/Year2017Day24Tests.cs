@@ -1,28 +1,28 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2017.Day24
+namespace App.Puzzles.Year2017.Day24;
+
+public class Year2017Day24Tests
 {
-    public class Year2017Day24Tests
+    [Test]
+    public void FindsStrongestBridge()
     {
-        [Test]
-        public void FindsStrongestBridge()
-        {
-            var builder = new BridgeBuilder(Input, false);
-            var bridge = builder.Build();
+        var builder = new BridgeBuilder(Input, false);
+        var bridge = builder.Build();
 
-            Assert.That(bridge.Strength, Is.EqualTo(31));
-        }
+        Assert.That(bridge.Strength, Is.EqualTo(31));
+    }
 
-        [Test]
-        public void FindsLongestBridge()
-        {
-            var builder = new BridgeBuilder(Input, true);
-            var bridge = builder.Build();
+    [Test]
+    public void FindsLongestBridge()
+    {
+        var builder = new BridgeBuilder(Input, true);
+        var bridge = builder.Build();
 
-            Assert.That(bridge.Strength, Is.EqualTo(19));
-        }
+        Assert.That(bridge.Strength, Is.EqualTo(19));
+    }
 
-        private const string Input = @"
+    private const string Input = @"
 0/2
 2/2
 2/3
@@ -31,5 +31,4 @@ namespace App.Puzzles.Year2017.Day24
 0/1
 10/1
 9/10";
-    }
 }

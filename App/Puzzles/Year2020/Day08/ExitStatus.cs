@@ -1,8 +1,7 @@
-namespace App.Puzzles.Year2020.Day08
+namespace App.Puzzles.Year2020.Day08;
+
+public enum ExitStatus
 {
-    public enum ExitStatus
-    {
-        End,
-        Loop
-    }
+    End,
+    Loop
 }

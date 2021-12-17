@@ -1,34 +1,33 @@
 ﻿using App.Common.Computers.IntCode;
 using App.Platform;
 
-namespace App.Puzzles.Year2019.Day05
+namespace App.Puzzles.Year2019.Day05;
+
+public class Year2019Day05 : Puzzle
 {
-    public class Year2019Day05 : Puzzle
+    private long _output;
+
+    public override PuzzleResult RunPart1()
     {
-        private long _output;
+        var ci1 = new ComputerInterface(FileInput, ReadInputPart1, WriteOutput);
+        ci1.Start();
 
-        public override PuzzleResult RunPart1()
-        {
-            var ci1 = new ComputerInterface(FileInput, ReadInputPart1, WriteOutput);
-            ci1.Start();
+        return new PuzzleResult(_output, 5_346_030);
+    }
 
-            return new PuzzleResult(_output, 5_346_030);
-        }
+    public override PuzzleResult RunPart2()
+    {
+        var ci2 = new ComputerInterface(FileInput, ReadInputPart2, WriteOutput);
+        ci2.Start();
 
-        public override PuzzleResult RunPart2()
-        {
-            var ci2 = new ComputerInterface(FileInput, ReadInputPart2, WriteOutput);
-            ci2.Start();
+        return new PuzzleResult(_output, 513_116);
+    }
 
-            return new PuzzleResult(_output, 513_116);
-        }
+    private long ReadInputPart1() => 1;
+    private long ReadInputPart2() => 5;
 
-        private long ReadInputPart1() => 1;
-        private long ReadInputPart2() => 5;
-
-        private void WriteOutput(long output)
-        {
-            _output = output;
-        }
+    private void WriteOutput(long output)
+    {
+        _output = output;
     }
 }

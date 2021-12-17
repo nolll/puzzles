@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2019.Day17
+namespace App.Puzzles.Year2019.Day17;
+
+public class Year2019Day17Tests
 {
-    public class Year2019Day17Tests
+    [Test]
+    public void IntersectionsFound()
     {
-        [Test]
-        public void IntersectionsFound()
-        {
-            const string input = @"
+        const string input = @"
 ..#..........
 ..#..........
 #######...###
@@ -16,10 +16,9 @@ namespace App.Puzzles.Year2019.Day17
 ..#...#...#..
 ..#####...^..";
 
-            var intersectionFinder = new ScaffoldIntersectionFinder(input);
-            var result = intersectionFinder.GetSumOfAlignmentParameters();
+        var intersectionFinder = new ScaffoldIntersectionFinder(input);
+        var result = intersectionFinder.GetSumOfAlignmentParameters();
 
-            Assert.That(result, Is.EqualTo(76));
-        }
+        Assert.That(result, Is.EqualTo(76));
     }
 }

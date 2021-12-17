@@ -3,62 +3,61 @@ using System.Linq;
 using App.Common.Combinatorics;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2020.Day09
+namespace App.Puzzles.Year2020.Day09;
+
+public class XmasPort
 {
-    public class XmasPort
+    private readonly IList<long> _values;
+    private readonly int _preambleLength;
+
+    public XmasPort(string input, int preambleLength)
     {
-        private readonly IList<long> _values;
-        private readonly int _preambleLength;
+        _values = PuzzleInputReader.ReadLines(input).Select(long.Parse).ToList();
+        _preambleLength = preambleLength;
+    }
 
-        public XmasPort(string input, int preambleLength)
+    public long FindFirstInvalidNumber()
+    {
+        for (var i = _preambleLength; i < _values.Count; i++)
         {
-            _values = PuzzleInputReader.ReadLines(input).Select(long.Parse).ToList();
-            _preambleLength = preambleLength;
+            var valuesToSkip = i - _preambleLength;
+            var previousNumbers = _values.Skip(valuesToSkip).Take(_preambleLength).ToList();
+            if (!IsSumOfTwoNumbers(_values[i], previousNumbers))
+                return _values[i];
         }
 
-        public long FindFirstInvalidNumber()
+        return 0;
+    }
+
+    public long FindWeakness()
+    {
+        var invalidNumber = FindFirstInvalidNumber();
+
+        for (var i = 0; i < _values.Count; i++)
         {
-            for (var i = _preambleLength; i < _values.Count; i++)
+            var foundValues = new List<long>();
+            var pos = i;
+            long sum = 0;
+            while (sum < invalidNumber)
             {
-                var valuesToSkip = i - _preambleLength;
-                var previousNumbers = _values.Skip(valuesToSkip).Take(_preambleLength).ToList();
-                if (!IsSumOfTwoNumbers(_values[i], previousNumbers))
-                    return _values[i];
+                var value = _values[pos];
+                foundValues.Add(value);
+                sum += value;
+                pos += 1;
             }
 
-            return 0;
-        }
-
-        public long FindWeakness()
-        {
-            var invalidNumber = FindFirstInvalidNumber();
-
-            for (var i = 0; i < _values.Count; i++)
+            if (sum == invalidNumber)
             {
-                var foundValues = new List<long>();
-                var pos = i;
-                long sum = 0;
-                while (sum < invalidNumber)
-                {
-                    var value = _values[pos];
-                    foundValues.Add(value);
-                    sum += value;
-                    pos += 1;
-                }
-
-                if (sum == invalidNumber)
-                {
-                    return foundValues.Min() + foundValues.Max();
-                }
+                return foundValues.Min() + foundValues.Max();
             }
-
-            return 0;
         }
 
-        private static bool IsSumOfTwoNumbers(long target, IList<long> numbers)
-        {
-            var permutations = PermutationGenerator.GetPermutations(numbers, 2);
-            return permutations.Any(o => o.Sum() == target);
-        }
+        return 0;
+    }
+
+    private static bool IsSumOfTwoNumbers(long target, IList<long> numbers)
+    {
+        var permutations = PermutationGenerator.GetPermutations(numbers, 2);
+        return permutations.Any(o => o.Sum() == target);
     }
 }

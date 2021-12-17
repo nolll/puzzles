@@ -1,8 +1,7 @@
-namespace App.Puzzles.Year2018.Day24
+namespace App.Puzzles.Year2018.Day24;
+
+public enum ImmuneSystemArmy
 {
-    public enum ImmuneSystemArmy
-    {
-        Immune,
-        Infection
-    }
+    Immune,
+    Infection
 }

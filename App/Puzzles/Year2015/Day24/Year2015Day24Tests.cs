@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2015.Day24
+namespace App.Puzzles.Year2015.Day24;
+
+public class Year2015Day24Tests
 {
-    public class Year2015Day24Tests
+    [Test]
+    public void QuantumEntanglementOfFirstGroupIsCorrect()
     {
-        [Test]
-        public void QuantumEntanglementOfFirstGroupIsCorrect()
-        {
-            const string input = @"
+        const string input = @"
 1
 2
 3
@@ -19,9 +19,8 @@ namespace App.Puzzles.Year2015.Day24
 10
 11";
 
-            var balancer = new PresentBalancer(input, 3);
+        var balancer = new PresentBalancer(input, 3);
 
-            Assert.That(balancer.QuantumEntanglementOfFirstGroup, Is.EqualTo(99));
-        }
+        Assert.That(balancer.QuantumEntanglementOfFirstGroup, Is.EqualTo(99));
     }
 }

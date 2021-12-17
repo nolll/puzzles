@@ -3,79 +3,78 @@ using System.Collections.Generic;
 using System.Linq;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2020.Day14
+namespace App.Puzzles.Year2020.Day14;
+
+public class BitmaskSystem2
 {
-    public class BitmaskSystem2
+    public long Run(string input)
     {
-        public long Run(string input)
+        var bitmask = "";
+        var mem = new Dictionary<long, long>();
+        var rows = PuzzleInputReader.ReadLines(input);
+        foreach (var row in rows)
         {
-            var bitmask = "";
-            var mem = new Dictionary<long, long>();
-            var rows = PuzzleInputReader.ReadLines(input);
-            foreach (var row in rows)
+            if (row.StartsWith("mask"))
             {
-                if (row.StartsWith("mask"))
+                bitmask = row.Split("=")[1].Trim();
+            }
+            else
+            {
+                var parts = row.Split("=");
+                var val = long.Parse(parts[1].Trim());
+                var memPos = int.Parse(parts[0].Substring(4).Replace("]", ""));
+
+                var memPositions = ApplyBitmask(bitmask, memPos);
+
+                foreach (var pos in memPositions)
                 {
-                    bitmask = row.Split("=")[1].Trim();
+                    mem[pos] = val;
                 }
-                else
+            }
+        }
+
+        return mem.Values.Sum();
+    }
+
+    private List<long> ApplyBitmask(string bitmask, in long address)
+    {
+        var addresses = new List<string> {""};
+        var binary = Convert.ToString(address, 2).PadLeft(36, '0').ToCharArray();
+        var mask = bitmask.ToCharArray();
+        for (var i = 0; i < bitmask.Length; i++)
+        {
+            var maskChar = mask[i];
+
+            if (maskChar == '1')
+            {
+                for (var j = 0; j < addresses.Count; j++)
                 {
-                    var parts = row.Split("=");
-                    var val = long.Parse(parts[1].Trim());
-                    var memPos = int.Parse(parts[0].Substring(4).Replace("]", ""));
-
-                    var memPositions = ApplyBitmask(bitmask, memPos);
-
-                    foreach (var pos in memPositions)
-                    {
-                        mem[pos] = val;
-                    }
+                    addresses[j] += "1";
                 }
             }
 
-            return mem.Values.Sum();
-        }
-
-        private List<long> ApplyBitmask(string bitmask, in long address)
-        {
-            var addresses = new List<string> {""};
-            var binary = Convert.ToString(address, 2).PadLeft(36, '0').ToCharArray();
-            var mask = bitmask.ToCharArray();
-            for (var i = 0; i < bitmask.Length; i++)
+            else if (maskChar == '0')
             {
-                var maskChar = mask[i];
-
-                if (maskChar == '1')
+                for (var j = 0; j < addresses.Count; j++)
                 {
-                    for (var j = 0; j < addresses.Count; j++)
-                    {
-                        addresses[j] += "1";
-                    }
+                    addresses[j] += binary[i];
                 }
-
-                else if (maskChar == '0')
-                {
-                    for (var j = 0; j < addresses.Count; j++)
-                    {
-                        addresses[j] += binary[i];
-                    }
-                }
-
-                else if (maskChar == 'X')
-                {
-                    var newAddresses = new List<string>();
-                    for (var j = 0; j < addresses.Count; j++)
-                    {
-                        newAddresses.Add(addresses[j] + "1");
-                        addresses[j] += "0";
-                    }
-
-                    addresses = addresses.Concat(newAddresses).ToList();
-                }
-
             }
 
-            return addresses.Select(o => Convert.ToInt64(o, 2)).ToList();
+            else if (maskChar == 'X')
+            {
+                var newAddresses = new List<string>();
+                for (var j = 0; j < addresses.Count; j++)
+                {
+                    newAddresses.Add(addresses[j] + "1");
+                    addresses[j] += "0";
+                }
+
+                addresses = addresses.Concat(newAddresses).ToList();
+            }
+
         }
+
+        return addresses.Select(o => Convert.ToInt64(o, 2)).ToList();
     }
 }

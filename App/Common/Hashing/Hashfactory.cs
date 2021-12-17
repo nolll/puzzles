@@ -3,36 +3,35 @@ using System.Security.Cryptography;
 using System.Text;
 using App.Common.Strings;
 
-namespace App.Common.Hashing
+namespace App.Common.Hashing;
+
+public class Hashfactory
 {
-    public class Hashfactory
+    private readonly MD5 _md5;
+
+    public Hashfactory()
     {
-        private readonly MD5 _md5;
+        _md5 = MD5.Create();
+    }
 
-        public Hashfactory()
-        {
-            _md5 = MD5.Create();
-        }
+    public string StringHashFromString(string str)
+    {
+        return StringHashFromBytes(Encoding.ASCII.GetBytes(str));
+    }
 
-        public string StringHashFromString(string str)
-        {
-            return StringHashFromBytes(Encoding.ASCII.GetBytes(str));
-        }
+    public string StringHashFromBytes(byte[] bytes)
+    {
+        var hashedBytes = ByteHashFromBytes(bytes);
+        return ByteConverter.ConvertToHexString(hashedBytes);
+    }
 
-        public string StringHashFromBytes(byte[] bytes)
-        {
-            var hashedBytes = ByteHashFromBytes(bytes);
-            return ByteConverter.ConvertToHexString(hashedBytes);
-        }
+    public byte[] ByteHashFromString(string str)
+    {
+        return ByteHashFromBytes(Encoding.ASCII.GetBytes(str));
+    }
 
-        public byte[] ByteHashFromString(string str)
-        {
-            return ByteHashFromBytes(Encoding.ASCII.GetBytes(str));
-        }
-
-        public byte[] ByteHashFromBytes(byte[] bytes)
-        {
-            return _md5.ComputeHash(bytes.ToArray());
-        }
+    public byte[] ByteHashFromBytes(byte[] bytes)
+    {
+        return _md5.ComputeHash(bytes.ToArray());
     }
 }

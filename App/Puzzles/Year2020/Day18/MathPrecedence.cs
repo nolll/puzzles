@@ -1,8 +1,7 @@
-namespace App.Puzzles.Year2020.Day18
+namespace App.Puzzles.Year2020.Day18;
+
+public enum MathPrecedence
 {
-    public enum MathPrecedence
-    {
-        Order,
-        Addition
-    }
+    Order,
+    Addition
 }

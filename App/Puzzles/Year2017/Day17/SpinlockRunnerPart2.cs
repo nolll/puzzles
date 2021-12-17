@@ -1,31 +1,30 @@
-namespace App.Puzzles.Year2017.Day17
+namespace App.Puzzles.Year2017.Day17;
+
+public class SpinlockRunnerPart2
 {
-    public class SpinlockRunnerPart2
+    private readonly int _steps;
+    public int SecondValue { get; private set; }
+
+    public SpinlockRunnerPart2(int steps)
     {
-        private readonly int _steps;
-        public int SecondValue { get; private set; }
+        _steps = steps;
+        SecondValue = 0;
+    }
 
-        public SpinlockRunnerPart2(int steps)
+    public void Run(int target)
+    {
+        var v = 1;
+        var pos = 0;
+        while (v <= target)
         {
-            _steps = steps;
-            SecondValue = 0;
-        }
+            pos += _steps;
+            while (pos > v - 1) 
+                pos -= v;
 
-        public void Run(int target)
-        {
-            var v = 1;
-            var pos = 0;
-            while (v <= target)
-            {
-                pos += _steps;
-                while (pos > v - 1) 
-                    pos -= v;
-
-                if (pos == 0)
-                    SecondValue = v;
-                pos++;
-                v++;
-            }
+            if (pos == 0)
+                SecondValue = v;
+            pos++;
+            v++;
         }
     }
 }

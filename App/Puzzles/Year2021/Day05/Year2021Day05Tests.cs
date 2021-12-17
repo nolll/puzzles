@@ -1,28 +1,28 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2021.Day05
+namespace App.Puzzles.Year2021.Day05;
+
+public class Year2021Day05Tests
 {
-    public class Year2021Day05Tests
+    [Test]
+    public void Part1()
     {
-        [Test]
-        public void Part1()
-        {
-            var game = new VentsMap();
-            var result = game.Run(Input, true);
+        var game = new VentsMap();
+        var result = game.Run(Input, true);
 
-            Assert.That(result, Is.EqualTo(5));
-        }
+        Assert.That(result, Is.EqualTo(5));
+    }
 
-        [Test]
-        public void Part2()
-        {
-            var game = new VentsMap();
-            var result = game.Run(Input, false);
+    [Test]
+    public void Part2()
+    {
+        var game = new VentsMap();
+        var result = game.Run(Input, false);
 
-            Assert.That(result, Is.EqualTo(12));
-        }
+        Assert.That(result, Is.EqualTo(12));
+    }
 
-        private const string Input = @"
+    private const string Input = @"
 0,9 -> 5,9
 8,0 -> 0,8
 9,4 -> 3,4
@@ -33,5 +33,4 @@ namespace App.Puzzles.Year2021.Day05
 3,4 -> 1,4
 0,0 -> 8,8
 5,5 -> 8,2";
-    }
 }

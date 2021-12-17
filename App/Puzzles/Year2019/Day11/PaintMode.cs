@@ -1,8 +1,7 @@
-namespace App.Puzzles.Year2019.Day11
+namespace App.Puzzles.Year2019.Day11;
+
+public enum PaintMode
 {
-    public enum PaintMode
-    {
-        Paint,
-        Move
-    }
+    Paint,
+    Move
 }

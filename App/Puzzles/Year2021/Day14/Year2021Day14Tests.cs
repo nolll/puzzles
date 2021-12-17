@@ -3,47 +3,47 @@ using NuGet.Frameworks;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace App.Puzzles.Year2021.Day14
+namespace App.Puzzles.Year2021.Day14;
+
+public class Year2021Day14Tests
 {
-    public class Year2021Day14Tests
+    [Test]
+    public void OneStep()
     {
-        [Test]
-        public void OneStep()
-        {
-            var polymerization = new Polymerization();
-            var result = polymerization.Run(Input, 1);
+        var polymerization = new Polymerization();
+        var result = polymerization.Run(Input, 1);
 
-            Assert.That(result, Is.EqualTo(1));
-        }
+        Assert.That(result, Is.EqualTo(1));
+    }
 
-        [Test]
-        public void TwoSteps()
-        {
-            var polymerization = new Polymerization();
-            var result = polymerization.Run(Input, 2);
+    [Test]
+    public void TwoSteps()
+    {
+        var polymerization = new Polymerization();
+        var result = polymerization.Run(Input, 2);
 
-            Assert.That(result, Is.EqualTo(5));
-        }
+        Assert.That(result, Is.EqualTo(5));
+    }
 
-        [Test]
-        public void TenSteps()
-        {
-            var polymerization = new Polymerization();
-            var result = polymerization.Run(Input, 10);
+    [Test]
+    public void TenSteps()
+    {
+        var polymerization = new Polymerization();
+        var result = polymerization.Run(Input, 10);
 
-            Assert.That(result, Is.EqualTo(1588));
-        }
+        Assert.That(result, Is.EqualTo(1588));
+    }
 
-        [Test]
-        public void Part2()
-        {
-            var polymerization = new Polymerization();
-            var result = polymerization.Run(Input, 40);
+    [Test]
+    public void Part2()
+    {
+        var polymerization = new Polymerization();
+        var result = polymerization.Run(Input, 40);
 
-            Assert.That(result, Is.EqualTo(2188189693529));
-        }
+        Assert.That(result, Is.EqualTo(2188189693529));
+    }
 
-        private const string Input = @"
+    private const string Input = @"
 NNCB
 
 CH -> B
@@ -62,5 +62,4 @@ BB -> N
 BC -> B
 CC -> N
 CN -> C";
-    }
 }

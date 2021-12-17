@@ -1,57 +1,56 @@
 ﻿using System.Collections.Generic;
 
-namespace App.Common.Computers.IntCode
+namespace App.Common.Computers.IntCode;
+
+public abstract class IntCodeComputer
 {
-    public abstract class IntCodeComputer
+    private readonly IList<long> _startMemory;
+    private IntCodeProcess _process;
+
+    public long Result => _process.Result;
+
+    protected IntCodeComputer(string input)
     {
-        private readonly IList<long> _startMemory;
-        private IntCodeProcess _process;
+        _startMemory = MemoryParser.Parse(input);
+    }
 
-        public long Result => _process.Result;
+    public void Start(bool haltAfterInput = false, int? noun = null, int? verb = null)
+    {
+        var memory = CopyMemory(_startMemory);
+        if (noun != null) memory[1] = noun.Value;
+        if(verb != null) memory[2] = verb.Value;
+        _process = new IntCodeProcess(memory, haltAfterInput, ReadInput, WriteOutput);
+        _process.Run();
+    }
 
-        protected IntCodeComputer(string input)
+    public void SetMemory(int address, int value)
+    {
+        _startMemory[address] = value;
+    }
+
+    public void Resume()
+    {
+        _process.Run();
+    }
+
+    public void Stop()
+    {
+        _process.Stop();
+    }
+
+    public IList<long> Memory => _process.Memory;
+
+    protected abstract long ReadInput();
+    protected abstract void WriteOutput(long output);
+
+    private static IList<long> CopyMemory(IList<long> memory)
+    {
+        var copy = new List<long>();
+        for (var i = 0; i < memory.Count; i++)
         {
-            _startMemory = MemoryParser.Parse(input);
+            copy.Add(memory[i]);
         }
 
-        public void Start(bool haltAfterInput = false, int? noun = null, int? verb = null)
-        {
-            var memory = CopyMemory(_startMemory);
-            if (noun != null) memory[1] = noun.Value;
-            if(verb != null) memory[2] = verb.Value;
-            _process = new IntCodeProcess(memory, haltAfterInput, ReadInput, WriteOutput);
-            _process.Run();
-        }
-
-        public void SetMemory(int address, int value)
-        {
-            _startMemory[address] = value;
-        }
-
-        public void Resume()
-        {
-            _process.Run();
-        }
-
-        public void Stop()
-        {
-            _process.Stop();
-        }
-
-        public IList<long> Memory => _process.Memory;
-
-        protected abstract long ReadInput();
-        protected abstract void WriteOutput(long output);
-
-        private static IList<long> CopyMemory(IList<long> memory)
-        {
-            var copy = new List<long>();
-            for (var i = 0; i < memory.Count; i++)
-            {
-                copy.Add(memory[i]);
-            }
-
-            return copy;
-        }
+        return copy;
     }
 }

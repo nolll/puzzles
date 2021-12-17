@@ -1,46 +1,45 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2018.Day04
+namespace App.Puzzles.Year2018.Day04;
+
+public class Guard
 {
-    public class Guard
+    public int GuardId { get; }
+    public int[] MinuteSleepCounts { get; }
+
+    public Guard(int guardId, List<GuardNight> nights)
     {
-        public int GuardId { get; }
-        public int[] MinuteSleepCounts { get; }
+        GuardId = guardId;
+        MinuteSleepCounts = new int[60];
 
-        public Guard(int guardId, List<GuardNight> nights)
+        foreach (var night in nights)
         {
-            GuardId = guardId;
-            MinuteSleepCounts = new int[60];
-
-            foreach (var night in nights)
+            for (var i = 0; i < night.MinuteStates.Length; i++)
             {
-                for (var i = 0; i < night.MinuteStates.Length; i++)
-                {
-                    if (night.MinuteStates[i] == GuardState.Asleep)
-                        MinuteSleepCounts[i]++;
-                }
+                if (night.MinuteStates[i] == GuardState.Asleep)
+                    MinuteSleepCounts[i]++;
             }
         }
+    }
 
-        public int MostSleptMinuteCount => MinuteSleepCounts[MostSleptMinute];
+    public int MostSleptMinuteCount => MinuteSleepCounts[MostSleptMinute];
 
-        public int MostSleptMinute
+    public int MostSleptMinute
+    {
+        get
         {
-            get
+            var mostSleptMinuteCount = 0;
+            var mostSleptMinute = 0;
+            for (var i = 0; i < MinuteSleepCounts.Length; i++)
             {
-                var mostSleptMinuteCount = 0;
-                var mostSleptMinute = 0;
-                for (var i = 0; i < MinuteSleepCounts.Length; i++)
+                if (MinuteSleepCounts[i] > mostSleptMinuteCount)
                 {
-                    if (MinuteSleepCounts[i] > mostSleptMinuteCount)
-                    {
-                        mostSleptMinuteCount = MinuteSleepCounts[i];
-                        mostSleptMinute = i;
-                    }
+                    mostSleptMinuteCount = MinuteSleepCounts[i];
+                    mostSleptMinute = i;
                 }
-
-                return mostSleptMinute;
             }
+
+            return mostSleptMinute;
         }
     }
 }

@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2017.Day07
+namespace App.Puzzles.Year2017.Day07;
+
+public class Year2017Day07Tests
 {
-    public class Year2017Day07Tests
+    [Test]
+    public void FindsNameOfBottomProgram()
     {
-        [Test]
-        public void FindsNameOfBottomProgram()
-        {
-            const string input = @"
+        const string input = @"
 pbga (66)
 xhth (57)
 ebii (61)
@@ -22,16 +22,16 @@ ugml (68) -> gyxo, ebii, jptl
 gyxo (61)
 cntj (57)";
 
-            var towers = new RecursiveTowers(input);
-            var name = towers.BottomName;
+        var towers = new RecursiveTowers(input);
+        var name = towers.BottomName;
 
-            Assert.That(name, Is.EqualTo("tknk"));
-        }
+        Assert.That(name, Is.EqualTo("tknk"));
+    }
 
-        [Test]
-        public void FindsWeightDiff()
-        {
-            const string input = @"
+    [Test]
+    public void FindsWeightDiff()
+    {
+        const string input = @"
 pbga (66)
 xhth (57)
 ebii (61)
@@ -46,10 +46,9 @@ ugml (68) -> gyxo, ebii, jptl
 gyxo (61)
 cntj (57)";
 
-            var towers = new RecursiveTowers(input);
-            var diff = towers.AdjustedWeight;
+        var towers = new RecursiveTowers(input);
+        var diff = towers.AdjustedWeight;
 
-            Assert.That(diff, Is.EqualTo(60));
-        }
+        Assert.That(diff, Is.EqualTo(60));
     }
 }

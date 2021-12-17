@@ -1,29 +1,28 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2015.Day11
+namespace App.Puzzles.Year2015.Day11;
+
+public class Year2015Day11Tests
 {
-    public class Year2015Day11Tests
+    [TestCase("hijklmmn", false)]
+    [TestCase("abbceffg", false)]
+    [TestCase("abbcegjk", false)]
+    [TestCase("abckkmmn", true)]
+    public void ValidatePasswords(string pwd, bool expected)
     {
-        [TestCase("hijklmmn", false)]
-        [TestCase("abbceffg", false)]
-        [TestCase("abbcegjk", false)]
-        [TestCase("abckkmmn", true)]
-        public void ValidatePasswords(string pwd, bool expected)
-        {
-            var validator = new CorporatePasswordValidator();
-            var isValid = validator.IsValid(pwd);
+        var validator = new CorporatePasswordValidator();
+        var isValid = validator.IsValid(pwd);
 
-            Assert.That(isValid, Is.EqualTo(expected));
-        }
+        Assert.That(isValid, Is.EqualTo(expected));
+    }
 
-        [TestCase("abcdefgh", "abcdffaa")]
-        [TestCase("ghijklmn", "ghjaabcc")]
-        public void FindsNextPassword(string pwd, string expected)
-        {
-            var validator = new CorporatePasswordValidator();
-            var next = validator.FindNextPassword(pwd);
+    [TestCase("abcdefgh", "abcdffaa")]
+    [TestCase("ghijklmn", "ghjaabcc")]
+    public void FindsNextPassword(string pwd, string expected)
+    {
+        var validator = new CorporatePasswordValidator();
+        var next = validator.FindNextPassword(pwd);
 
-            Assert.That(next, Is.EqualTo(expected));
-        }
+        Assert.That(next, Is.EqualTo(expected));
     }
 }

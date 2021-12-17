@@ -1,79 +1,78 @@
 using System.Text;
 using App.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2017.Day19
+namespace App.Puzzles.Year2017.Day19;
+
+public class TubeRouteFinder
 {
-    public class TubeRouteFinder
+    private readonly Matrix<char> _matrix;
+
+    private const char Space = ' ';
+    private const char Empty = '.';
+    private const char Vertical = '|';
+    private const char Horizontal = '-';
+    private const char Plus = '+';
+
+    public string Route { get; private set; }
+    public int StepCount { get; private set; }
+
+    public TubeRouteFinder(string input)
     {
-        private readonly Matrix<char> _matrix;
+        var adjustedInput = input.Replace(Space, Empty).Replace("_", "");
+        _matrix = MatrixBuilder.BuildCharMatrix(adjustedInput);
+        var y = 0;
+        var x = _matrix.Values.IndexOf(Vertical);
+        _matrix.MoveTo(x, y);
+        _matrix.TurnTo(MatrixDirection.Down);
+    }
 
-        private const char Space = ' ';
-        private const char Empty = '.';
-        private const char Vertical = '|';
-        private const char Horizontal = '-';
-        private const char Plus = '+';
-
-        public string Route { get; private set; }
-        public int StepCount { get; private set; }
-
-        public TubeRouteFinder(string input)
+    public void FindRoute()
+    {
+        var route = new StringBuilder();
+        while (true)
         {
-            var adjustedInput = input.Replace(Space, Empty).Replace("_", "");
-            _matrix = MatrixBuilder.BuildCharMatrix(adjustedInput);
-            var y = 0;
-            var x = _matrix.Values.IndexOf(Vertical);
-            _matrix.MoveTo(x, y);
-            _matrix.TurnTo(MatrixDirection.Down);
-        }
+            var val = _matrix.ReadValue();
 
-        public void FindRoute()
-        {
-            var route = new StringBuilder();
-            while (true)
-            {
-                var val = _matrix.ReadValue();
-
-                if (val == Empty) { 
-                    break;
-                }
-
-                StepCount++;
-
-                if (val == Vertical || val == Horizontal)
-                {
-                    _matrix.MoveForward();
-                    continue;
-                }
-
-                if (val == Plus)
-                {
-                    _matrix.TurnLeft();
-                    _matrix.MoveForward();
-                    var invalidChar = _matrix.Direction.Equals(MatrixDirection.Left) || _matrix.Direction.Equals(MatrixDirection.Right)
-                        ? Vertical
-                        : Horizontal;
-
-                    var tempVal = _matrix.ReadValue();
-                    if (tempVal == invalidChar || tempVal == Empty)
-                    {
-                        _matrix.MoveBackward();
-                        _matrix.TurnLeft();
-                        _matrix.TurnLeft();
-                    }
-                    else
-                    {
-                        _matrix.MoveBackward();
-                    }
-
-                    _matrix.MoveForward();
-                    continue;
-                }
-
-                route.Append(val);
-                _matrix.MoveForward();
+            if (val == Empty) { 
+                break;
             }
 
-            Route = route.ToString();
+            StepCount++;
+
+            if (val == Vertical || val == Horizontal)
+            {
+                _matrix.MoveForward();
+                continue;
+            }
+
+            if (val == Plus)
+            {
+                _matrix.TurnLeft();
+                _matrix.MoveForward();
+                var invalidChar = _matrix.Direction.Equals(MatrixDirection.Left) || _matrix.Direction.Equals(MatrixDirection.Right)
+                    ? Vertical
+                    : Horizontal;
+
+                var tempVal = _matrix.ReadValue();
+                if (tempVal == invalidChar || tempVal == Empty)
+                {
+                    _matrix.MoveBackward();
+                    _matrix.TurnLeft();
+                    _matrix.TurnLeft();
+                }
+                else
+                {
+                    _matrix.MoveBackward();
+                }
+
+                _matrix.MoveForward();
+                continue;
+            }
+
+            route.Append(val);
+            _matrix.MoveForward();
         }
+
+        Route = route.ToString();
     }
 }

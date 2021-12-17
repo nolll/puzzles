@@ -1,10 +1,10 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2020.Day09
+namespace App.Puzzles.Year2020.Day09;
+
+public class Year2020Day09Tests
 {
-    public class Year2020Day09Tests
-    {
-        private const string Input = @"
+    private const string Input = @"
 35
 20
 15
@@ -26,22 +26,21 @@ namespace App.Puzzles.Year2020.Day09
 309
 576";
 
-        [Test]
-        public void FirstInvalidNumber()
-        {
-            var port = new XmasPort(Input, 5);
-            var num = port.FindFirstInvalidNumber();
+    [Test]
+    public void FirstInvalidNumber()
+    {
+        var port = new XmasPort(Input, 5);
+        var num = port.FindFirstInvalidNumber();
 
-            Assert.That(num, Is.EqualTo(127));
-        }
+        Assert.That(num, Is.EqualTo(127));
+    }
 
-        [Test]
-        public void FirstWeakness()
-        {
-            var port = new XmasPort(Input, 5);
-            var num = port.FindWeakness();
+    [Test]
+    public void FirstWeakness()
+    {
+        var port = new XmasPort(Input, 5);
+        var num = port.FindWeakness();
 
-            Assert.That(num, Is.EqualTo(62));
-        }
+        Assert.That(num, Is.EqualTo(62));
     }
 }

@@ -1,253 +1,252 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2016.Day11
+namespace App.Puzzles.Year2016.Day11;
+
+public class Year2016Day11Tests
 {
-    public class Year2016Day11Tests
+    [Test]
+    public void StepCountIsCorrect()
     {
-        [Test]
-        public void StepCountIsCorrect()
-        {
-            const string input = @"
+        const string input = @"
 The first floor contains a hydrogen-compatible microchip and a lithium-compatible microchip.
 The second floor contains a hydrogen generator.
 The third floor contains a lithium generator.
 The fourth floor contains nothing relevant.";
 
-            var simulator = new RadioisotopeSimulator(input);
+        var simulator = new RadioisotopeSimulator(input);
 
-            Assert.That(simulator.StepCount, Is.EqualTo(11));
-        }
+        Assert.That(simulator.StepCount, Is.EqualTo(11));
+    }
 
-        [Test]
-        public void IdIsCorrect1()
+    [Test]
+    public void IdIsCorrect1()
+    {
+        var items = new List<RadioisotopeItem>
         {
-            var items = new List<RadioisotopeItem>
-            {
-                new Microchip("lithium"),
-                new Microchip("hydrogen"),
-                new Generator("hydrogen")
-            };
+            new Microchip("lithium"),
+            new Microchip("hydrogen"),
+            new Generator("hydrogen")
+        };
 
-            var floor = new RadioisotopeFloor(items);
-            Assert.That(floor.Id, Is.EqualTo("HG-HM-LM"));
-        }
+        var floor = new RadioisotopeFloor(items);
+        Assert.That(floor.Id, Is.EqualTo("HG-HM-LM"));
+    }
 
-        [Test]
-        public void EmptyFloorIsValid()
+    [Test]
+    public void EmptyFloorIsValid()
+    {
+        var items = new List<RadioisotopeItem>();
+
+        var floor = new RadioisotopeFloor(items);
+        Assert.That(floor.IsValid, Is.True);
+    }
+
+    [Test]
+    public void OnlyGeneratorsIsValid()
+    {
+        var items = new List<RadioisotopeItem>
         {
-            var items = new List<RadioisotopeItem>();
+            new Generator("lithium")
+        };
 
-            var floor = new RadioisotopeFloor(items);
-            Assert.That(floor.IsValid, Is.True);
-        }
+        var floor = new RadioisotopeFloor(items);
+        Assert.That(floor.IsValid, Is.True);
+    }
 
-        [Test]
-        public void OnlyGeneratorsIsValid()
+    [Test]
+    public void OnlyMicrochipsIsValid()
+    {
+        var items = new List<RadioisotopeItem>
         {
-            var items = new List<RadioisotopeItem>
-            {
-                new Generator("lithium")
-            };
+            new Microchip("lithium")
+        };
 
-            var floor = new RadioisotopeFloor(items);
-            Assert.That(floor.IsValid, Is.True);
-        }
+        var floor = new RadioisotopeFloor(items);
+        Assert.That(floor.IsValid, Is.True);
+    }
 
-        [Test]
-        public void OnlyMicrochipsIsValid()
+    [Test]
+    public void MatchingItemsIsValid()
+    {
+        var items = new List<RadioisotopeItem>
         {
-            var items = new List<RadioisotopeItem>
-            {
-                new Microchip("lithium")
-            };
+            new Microchip("lithium"),
+            new Generator("lithium")
+        };
 
-            var floor = new RadioisotopeFloor(items);
-            Assert.That(floor.IsValid, Is.True);
-        }
+        var floor = new RadioisotopeFloor(items);
+        Assert.That(floor.IsValid, Is.True);
+    }
 
-        [Test]
-        public void MatchingItemsIsValid()
+    [Test]
+    public void NonMatchingItemsIsInvalid()
+    {
+        var items = new List<RadioisotopeItem>
         {
-            var items = new List<RadioisotopeItem>
-            {
-                new Microchip("lithium"),
-                new Generator("lithium")
-            };
+            new Microchip("hydrogen"),
+            new Generator("lithium")
+        };
 
-            var floor = new RadioisotopeFloor(items);
-            Assert.That(floor.IsValid, Is.True);
-        }
+        var floor = new RadioisotopeFloor(items);
+        Assert.That(floor.IsValid, Is.False);
+    }
 
-        [Test]
-        public void NonMatchingItemsIsInvalid()
+    [Test]
+    public void ExtraChipIsInvalid()
+    {
+        var items = new List<RadioisotopeItem>
         {
-            var items = new List<RadioisotopeItem>
-            {
-                new Microchip("hydrogen"),
-                new Generator("lithium")
-            };
+            new Microchip("hydrogen"),
+            new Microchip("lithium"),
+            new Generator("lithium")
+        };
 
-            var floor = new RadioisotopeFloor(items);
-            Assert.That(floor.IsValid, Is.False);
-        }
+        var floor = new RadioisotopeFloor(items);
+        Assert.That(floor.IsValid, Is.False);
+    }
 
-        [Test]
-        public void ExtraChipIsInvalid()
+    [Test]
+    public void ExtraGeneratorIsValid()
+    {
+        var items = new List<RadioisotopeItem>
         {
-            var items = new List<RadioisotopeItem>
-            {
-                new Microchip("hydrogen"),
-                new Microchip("lithium"),
-                new Generator("lithium")
-            };
+            new Generator("hydrogen"),
+            new Microchip("lithium"),
+            new Generator("lithium")
+        };
 
-            var floor = new RadioisotopeFloor(items);
-            Assert.That(floor.IsValid, Is.False);
-        }
+        var floor = new RadioisotopeFloor(items);
+        Assert.That(floor.IsValid, Is.True);
+    }
 
-        [Test]
-        public void ExtraGeneratorIsValid()
+    [Test]
+    public void IdIsCorrect2()
+    {
+        var floors = new List<RadioisotopeFloor>
         {
-            var items = new List<RadioisotopeItem>
-            {
-                new Generator("hydrogen"),
-                new Microchip("lithium"),
-                new Generator("lithium")
-            };
+            new RadioisotopeFloor(
+                new List<RadioisotopeItem>
+                {
+                    new Microchip("lithium"),
+                    new Microchip("hydrogen"),
+                    new Generator("hydrogen")
+                }),
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(
+                new List<RadioisotopeItem>
+                {
+                    new Generator("lithium")
+                }),
+            new RadioisotopeFloor(new List<RadioisotopeItem>())
+        };
 
-            var floor = new RadioisotopeFloor(items);
-            Assert.That(floor.IsValid, Is.True);
-        }
+        var facility = new RadioisotopeFacility(floors, 0);
+        Assert.That(facility.Id, Is.EqualTo("0:HG-HM-LM||LG|"));
+    }
 
-        [Test]
-        public void IdIsCorrect2()
+    [Test]
+    public void AnonymizedIdIsCorrect()
+    {
+        var floors = new List<RadioisotopeFloor>
         {
-            var floors = new List<RadioisotopeFloor>
-            {
-                new RadioisotopeFloor(
-                    new List<RadioisotopeItem>
-                    {
-                        new Microchip("lithium"),
-                        new Microchip("hydrogen"),
-                        new Generator("hydrogen")
-                    }),
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(
-                    new List<RadioisotopeItem>
-                    {
-                        new Generator("lithium")
-                    }),
-                new RadioisotopeFloor(new List<RadioisotopeItem>())
-            };
+            new RadioisotopeFloor(
+                new List<RadioisotopeItem>
+                {
+                    new Microchip("lithium"),
+                    new Microchip("hydrogen"),
+                    new Generator("hydrogen")
+                }),
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(
+                new List<RadioisotopeItem>
+                {
+                    new Generator("lithium")
+                }),
+            new RadioisotopeFloor(new List<RadioisotopeItem>())
+        };
 
-            var facility = new RadioisotopeFacility(floors, 0);
-            Assert.That(facility.Id, Is.EqualTo("0:HG-HM-LM||LG|"));
-        }
+        var facility = new RadioisotopeFacility(floors, 0);
+        Assert.That(facility.AnonymizedId, Is.EqualTo("0:1X-1Y-2Y||2X|"));
+    }
 
-        [Test]
-        public void AnonymizedIdIsCorrect()
+    [Test]
+    public void FacilityIsValid()
+    {
+        var floors = new List<RadioisotopeFloor>
         {
-            var floors = new List<RadioisotopeFloor>
-            {
-                new RadioisotopeFloor(
-                    new List<RadioisotopeItem>
-                    {
-                        new Microchip("lithium"),
-                        new Microchip("hydrogen"),
-                        new Generator("hydrogen")
-                    }),
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(
-                    new List<RadioisotopeItem>
-                    {
-                        new Generator("lithium")
-                    }),
-                new RadioisotopeFloor(new List<RadioisotopeItem>())
-            };
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(new List<RadioisotopeItem>())
+        };
 
-            var facility = new RadioisotopeFacility(floors, 0);
-            Assert.That(facility.AnonymizedId, Is.EqualTo("0:1X-1Y-2Y||2X|"));
-        }
+        var facility = new RadioisotopeFacility(floors, 0);
+        Assert.That(facility.IsValid, Is.True);
+    }
 
-        [Test]
-        public void FacilityIsValid()
+    [Test]
+    public void FacilityIsInvalid()
+    {
+        var floors = new List<RadioisotopeFloor>
         {
-            var floors = new List<RadioisotopeFloor>
-            {
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(new List<RadioisotopeItem>())
-            };
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(
+                new List<RadioisotopeItem>
+                {
+                    new Microchip("hydrogen"),
+                    new Generator("lithium")
+                }),
+            new RadioisotopeFloor(new List<RadioisotopeItem>())
+        };
 
-            var facility = new RadioisotopeFacility(floors, 0);
-            Assert.That(facility.IsValid, Is.True);
-        }
+        var facility = new RadioisotopeFacility(floors, 0);
+        Assert.That(facility.IsValid, Is.False);
+    }
 
-        [Test]
-        public void FacilityIsInvalid()
+    [Test]
+    public void IsFinished()
+    {
+        var floors = new List<RadioisotopeFloor>
         {
-            var floors = new List<RadioisotopeFloor>
-            {
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(
-                    new List<RadioisotopeItem>
-                    {
-                        new Microchip("hydrogen"),
-                        new Generator("lithium")
-                    }),
-                new RadioisotopeFloor(new List<RadioisotopeItem>())
-            };
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(
+                new List<RadioisotopeItem>
+                {
+                    new Microchip("hydrogen"),
+                    new Generator("lithium")
+                })
+        };
 
-            var facility = new RadioisotopeFacility(floors, 0);
-            Assert.That(facility.IsValid, Is.False);
-        }
+        var facility = new RadioisotopeFacility(floors, 0);
+        Assert.That(facility.IsDone, Is.True);
+    }
 
-        [Test]
-        public void IsFinished()
+    [Test]
+    public void IsNotFinished()
+    {
+        var floors = new List<RadioisotopeFloor>
         {
-            var floors = new List<RadioisotopeFloor>
-            {
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(
-                    new List<RadioisotopeItem>
-                    {
-                        new Microchip("hydrogen"),
-                        new Generator("lithium")
-                    })
-            };
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(
+                new List<RadioisotopeItem>
+                {
+                    new Microchip("hydrogen"),
+                    new Generator("lithium")
+                }),
+            new RadioisotopeFloor(new List<RadioisotopeItem>()),
+            new RadioisotopeFloor(
+                new List<RadioisotopeItem>
+                {
+                    new Microchip("hydrogen"),
+                    new Generator("lithium")
+                })
+        };
 
-            var facility = new RadioisotopeFacility(floors, 0);
-            Assert.That(facility.IsDone, Is.True);
-        }
-
-        [Test]
-        public void IsNotFinished()
-        {
-            var floors = new List<RadioisotopeFloor>
-            {
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(
-                    new List<RadioisotopeItem>
-                    {
-                        new Microchip("hydrogen"),
-                        new Generator("lithium")
-                    }),
-                new RadioisotopeFloor(new List<RadioisotopeItem>()),
-                new RadioisotopeFloor(
-                    new List<RadioisotopeItem>
-                    {
-                        new Microchip("hydrogen"),
-                        new Generator("lithium")
-                    })
-            };
-
-            var facility = new RadioisotopeFacility(floors, 0);
-            Assert.That(facility.IsDone, Is.False);
-        }
+        var facility = new RadioisotopeFacility(floors, 0);
+        Assert.That(facility.IsDone, Is.False);
     }
 }

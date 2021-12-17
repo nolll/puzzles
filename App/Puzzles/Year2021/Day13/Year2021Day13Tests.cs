@@ -1,28 +1,28 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2021.Day13
+namespace App.Puzzles.Year2021.Day13;
+
+public class Year2021Day13Tests
 {
-    public class Year2021Day13Tests
+    [Test]
+    public void Part1()
     {
-        [Test]
-        public void Part1()
-        {
-            var paper = new TransparentPaper(Input);
-            var result = paper.DotCountAfterFirstFold();
+        var paper = new TransparentPaper(Input);
+        var result = paper.DotCountAfterFirstFold();
 
-            Assert.That(result, Is.EqualTo(17));
-        }
+        Assert.That(result, Is.EqualTo(17));
+    }
 
-        [Test]
-        public void Part2()
-        {
-            var paper = new TransparentPaper(Input);
-            var result = paper.MessageAfterFold();
+    [Test]
+    public void Part2()
+    {
+        var paper = new TransparentPaper(Input);
+        var result = paper.MessageAfterFold();
 
-            Assert.That(result, Is.EqualTo(Result.Trim()));
-        }
+        Assert.That(result, Is.EqualTo(Result.Trim()));
+    }
 
-        private const string Input = @"
+    private const string Input = @"
 6,10
 0,14
 9,10
@@ -45,7 +45,7 @@ namespace App.Puzzles.Year2021.Day13
 fold along y=7
 fold along x=5";
 
-        private const string Result = @"
+    private const string Result = @"
 #####
 #...#
 #...#
@@ -53,5 +53,4 @@ fold along x=5";
 #####
 .....
 .....";
-    }
 }

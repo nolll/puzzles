@@ -1,8 +1,7 @@
-namespace App.Puzzles.Year2018.Day04
+namespace App.Puzzles.Year2018.Day04;
+
+public enum ActionType
 {
-    public enum ActionType
-    {
-        FallAsleep,
-        WakeUp
-    }
+    FallAsleep,
+    WakeUp
 }

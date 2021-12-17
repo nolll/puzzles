@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2018.Day18
+namespace App.Puzzles.Year2018.Day18;
+
+public class Year2018Day18Tests
 {
-    public class Year2018Day18Tests
+    [Test]
+    public void ResourceValueIsCorrect()
     {
-        [Test]
-        public void ResourceValueIsCorrect()
-        {
-            const string input = @"
+        const string input = @"
 .#.#...|#.
 .....#|##|
 .|..|...#.
@@ -19,9 +19,8 @@ namespace App.Puzzles.Year2018.Day18
 |.||||..|.
 ...#.|..|.";
 
-            var collection = new LumberCollection(input);
-            collection.Run(10);
-            Assert.That(collection.ResourceValue, Is.EqualTo(1147));
-        }
+        var collection = new LumberCollection(input);
+        collection.Run(10);
+        Assert.That(collection.ResourceValue, Is.EqualTo(1147));
     }
 }

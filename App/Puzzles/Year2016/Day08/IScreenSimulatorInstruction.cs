@@ -1,7 +1,6 @@
-﻿namespace App.Puzzles.Year2016.Day08
+﻿namespace App.Puzzles.Year2016.Day08;
+
+public interface IScreenSimulatorInstruction
 {
-    public interface IScreenSimulatorInstruction
-    {
-        void Execute();
-    }
+    void Execute();
 }

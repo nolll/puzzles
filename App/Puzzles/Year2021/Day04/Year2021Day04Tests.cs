@@ -1,28 +1,28 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2021.Day04
+namespace App.Puzzles.Year2021.Day04;
+
+public class Year2021Day04Tests
 {
-    public class Year2021Day04Tests
+    [Test]
+    public void Part1()
     {
-        [Test]
-        public void Part1()
-        {
-            var game = new BingoGame(Input);
-            var result = game.Play(false);
+        var game = new BingoGame(Input);
+        var result = game.Play(false);
 
-            Assert.That(result, Is.EqualTo(4512));
-        }
+        Assert.That(result, Is.EqualTo(4512));
+    }
 
-        [Test]
-        public void Part2()
-        {
-            var game = new BingoGame(Input);
-            var result = game.Play(true);
+    [Test]
+    public void Part2()
+    {
+        var game = new BingoGame(Input);
+        var result = game.Play(true);
 
-            Assert.That(result, Is.EqualTo(1924));
-        }
+        Assert.That(result, Is.EqualTo(1924));
+    }
 
-        private const string Input = @"
+    private const string Input = @"
 7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
 
 22 13 17 11  0
@@ -42,5 +42,4 @@ namespace App.Puzzles.Year2021.Day04
 18  8 23 26 20
 22 11 13  6  5
  2  0 12  3  7";
-    }
 }

@@ -1,82 +1,81 @@
 using App.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2017.Day22
+namespace App.Puzzles.Year2017.Day22;
+
+public class VirusInfection
 {
-    public class VirusInfection
+    private const char Clean = '.';
+    private const char Weakened = 'W';
+    private const char Infected = '#';
+    private const char Flagged = 'F';
+
+    private readonly Matrix<char> _matrix;
+
+    public VirusInfection(string input)
     {
-        private const char Clean = '.';
-        private const char Weakened = 'W';
-        private const char Infected = '#';
-        private const char Flagged = 'F';
+        _matrix = MatrixBuilder.BuildCharMatrix(input, '.');
 
-        private readonly Matrix<char> _matrix;
+        var x = (_matrix.Width - 1) / 2;
+        var y = (_matrix.Height - 1) / 2;
+        _matrix.MoveTo(x, y);
+        _matrix.TurnTo(MatrixDirection.Up);
+    }
 
-        public VirusInfection(string input)
+    public int RunPart1(int iterations)
+    {
+        var infectionCount = 0;
+        for (var i = 0; i < iterations; i++)
         {
-            _matrix = MatrixBuilder.BuildCharMatrix(input, '.');
-
-            var x = (_matrix.Width - 1) / 2;
-            var y = (_matrix.Height - 1) / 2;
-            _matrix.MoveTo(x, y);
-            _matrix.TurnTo(MatrixDirection.Up);
-        }
-
-        public int RunPart1(int iterations)
-        {
-            var infectionCount = 0;
-            for (var i = 0; i < iterations; i++)
+            var val = _matrix.ReadValue();
+            if (val == Infected)
             {
-                var val = _matrix.ReadValue();
-                if (val == Infected)
-                {
-                    _matrix.TurnRight();
-                    _matrix.WriteValue(Clean);
-                }
-                else
-                {
-                    _matrix.TurnLeft();
-                    _matrix.WriteValue(Infected);
-                    infectionCount++;
-                }
-
-                _matrix.MoveForward();
+                _matrix.TurnRight();
+                _matrix.WriteValue(Clean);
+            }
+            else
+            {
+                _matrix.TurnLeft();
+                _matrix.WriteValue(Infected);
+                infectionCount++;
             }
 
-            return infectionCount;
+            _matrix.MoveForward();
         }
 
-        public int RunPart2(int iterations)
-        {
-            var infectionCount = 0;
-            for (var i = 0; i < iterations; i++)
-            {
-                var val = _matrix.ReadValue();
-                if (val == Clean)
-                {
-                    _matrix.TurnLeft();
-                    _matrix.WriteValue(Weakened);
-                }
-                else if(val == Weakened)
-                {
-                    _matrix.WriteValue(Infected);
-                    infectionCount++;
-                }
-                else if (val == Infected)
-                {
-                    _matrix.TurnRight();
-                    _matrix.WriteValue(Flagged);
-                }
-                else
-                {
-                    _matrix.TurnRight();
-                    _matrix.TurnRight();
-                    _matrix.WriteValue(Clean);
-                }
+        return infectionCount;
+    }
 
-                _matrix.MoveForward();
+    public int RunPart2(int iterations)
+    {
+        var infectionCount = 0;
+        for (var i = 0; i < iterations; i++)
+        {
+            var val = _matrix.ReadValue();
+            if (val == Clean)
+            {
+                _matrix.TurnLeft();
+                _matrix.WriteValue(Weakened);
+            }
+            else if(val == Weakened)
+            {
+                _matrix.WriteValue(Infected);
+                infectionCount++;
+            }
+            else if (val == Infected)
+            {
+                _matrix.TurnRight();
+                _matrix.WriteValue(Flagged);
+            }
+            else
+            {
+                _matrix.TurnRight();
+                _matrix.TurnRight();
+                _matrix.WriteValue(Clean);
             }
 
-            return infectionCount;
+            _matrix.MoveForward();
         }
+
+        return infectionCount;
     }
 }

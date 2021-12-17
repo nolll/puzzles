@@ -1,73 +1,72 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2019.Day08
+namespace App.Puzzles.Year2019.Day08;
+
+public class SpaceImage
 {
-    public class SpaceImage
+    private readonly IList<SpaceImageLayer> _layers;
+    private readonly IList<IList<char>> _matrix;
+
+    public SpaceImage(string imageData)
     {
-        private readonly IList<SpaceImageLayer> _layers;
-        private readonly IList<IList<char>> _matrix;
+        _layers = GetLayers(imageData).ToList();
+        _matrix = ComposeImage();
+    }
 
-        public SpaceImage(string imageData)
+    private IEnumerable<SpaceImageLayer> GetLayers(string imageData)
+    {
+        const int layerLength = SpaceImageDimensions.Width * SpaceImageDimensions.Height;
+        for (var i = 0; i < imageData.Length; i += layerLength)
         {
-            _layers = GetLayers(imageData).ToList();
-            _matrix = ComposeImage();
+            yield return new SpaceImageLayer(imageData.Substring(i, layerLength));
         }
+    }
 
-        private IEnumerable<SpaceImageLayer> GetLayers(string imageData)
+    private IList<IList<char>> ComposeImage()
+    {
+        var rows = new List<IList<char>>();
+        for (var y = 0; y < SpaceImageDimensions.Height; y++)
         {
-            const int layerLength = SpaceImageDimensions.Width * SpaceImageDimensions.Height;
-            for (var i = 0; i < imageData.Length; i += layerLength)
+            var pixels = new List<char>();
+            for (var x = 0; x < SpaceImageDimensions.Width; x++)
             {
-                yield return new SpaceImageLayer(imageData.Substring(i, layerLength));
+                pixels.Add(GetCharForPixel(x, y));
             }
+            rows.Add(pixels);
         }
+        return new List<IList<char>>(rows);
+    }
 
-        private IList<IList<char>> ComposeImage()
+    private char GetCharForPixel(int x, int y)
+    {
+        foreach (var layer in _layers)
         {
-            var rows = new List<IList<char>>();
-            for (var y = 0; y < SpaceImageDimensions.Height; y++)
-            {
-                var pixels = new List<char>();
-                for (var x = 0; x < SpaceImageDimensions.Width; x++)
-                {
-                    pixels.Add(GetCharForPixel(x, y));
-                }
-                rows.Add(pixels);
-            }
-            return new List<IList<char>>(rows);
+            var c = layer.GetChar(x, y);
+            if (c != '2')
+                return c;
         }
 
-        private char GetCharForPixel(int x, int y)
+        return '2';
+    }
+
+    public string Print()
+    {
+        var printer = new SpaceImagePrinter();
+        return printer.Print(_matrix);
+    }
+
+    public int Checksum
+    {
+        get
         {
-            foreach (var layer in _layers)
-            {
-                var c = layer.GetChar(x, y);
-                if (c != '2')
-                    return c;
-            }
-
-            return '2';
+            var layer = LayerWithFewestZeros;
+            return layer.NumberOfOnes * layer.NumberOfTwos;
         }
+    }
 
-        public string Print()
-        {
-            var printer = new SpaceImagePrinter();
-            return printer.Print(_matrix);
-        }
-
-        public int Checksum
-        {
-            get
-            {
-                var layer = LayerWithFewestZeros;
-                return layer.NumberOfOnes * layer.NumberOfTwos;
-            }
-        }
-
-        private SpaceImageLayer LayerWithFewestZeros
-        {
-            get { return _layers.OrderBy(o => o.NumberOfZeros).First(); }
-        }
+    private SpaceImageLayer LayerWithFewestZeros
+    {
+        get { return _layers.OrderBy(o => o.NumberOfZeros).First(); }
     }
 }

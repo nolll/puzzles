@@ -1,10 +1,10 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2020.Day10
+namespace App.Puzzles.Year2020.Day10;
+
+public class Year2020Day10Tests
 {
-    public class Year2020Day10Tests
-    {
-        private const string Input1 = @"
+    private const string Input1 = @"
 16
 10
 15
@@ -17,7 +17,7 @@ namespace App.Puzzles.Year2020.Day10
 12
 4";
 
-        private const string Input2 = @"
+    private const string Input2 = @"
 28
 33
 18
@@ -50,24 +50,23 @@ namespace App.Puzzles.Year2020.Day10
 10
 3";
 
-        [TestCase(Input1, 35)]
-        [TestCase(Input2, 220)]
-        public void PowerAdapterChainIsCorrect(string input, int expected)
-        {
-            var chain = new PowerAdapterChain(input);
-            var product = chain.DifferenceProduct;
+    [TestCase(Input1, 35)]
+    [TestCase(Input2, 220)]
+    public void PowerAdapterChainIsCorrect(string input, int expected)
+    {
+        var chain = new PowerAdapterChain(input);
+        var product = chain.DifferenceProduct;
 
-            Assert.That(product, Is.EqualTo(expected));
-        }
+        Assert.That(product, Is.EqualTo(expected));
+    }
 
-        [TestCase(Input1, 8)]
-        [TestCase(Input2, 19208)]
-        public void PowerAdapterChainTotalCombinations(string input, int expected)
-        {
-            var chain = new PowerAdapterChain(input);
-            var combinations = chain.GetTotalNumberOfCombinations();
+    [TestCase(Input1, 8)]
+    [TestCase(Input2, 19208)]
+    public void PowerAdapterChainTotalCombinations(string input, int expected)
+    {
+        var chain = new PowerAdapterChain(input);
+        var combinations = chain.GetTotalNumberOfCombinations();
 
-            Assert.That(combinations, Is.EqualTo(expected));
-        }
+        Assert.That(combinations, Is.EqualTo(expected));
     }
 }

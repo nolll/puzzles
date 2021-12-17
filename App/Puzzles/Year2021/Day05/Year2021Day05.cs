@@ -1,25 +1,24 @@
 ﻿using App.Platform;
 
-namespace App.Puzzles.Year2021.Day05
+namespace App.Puzzles.Year2021.Day05;
+
+public class Year2021Day05 : Puzzle
 {
-    public class Year2021Day05 : Puzzle
+    public override string Title => "Hydrothermal Venture";
+
+    public override PuzzleResult RunPart1()
     {
-        public override string Title => "Hydrothermal Venture";
+        var ventsMap = new VentsMap();
+        var result = ventsMap.Run(FileInput, true);
 
-        public override PuzzleResult RunPart1()
-        {
-            var ventsMap = new VentsMap();
-            var result = ventsMap.Run(FileInput, true);
+        return new PuzzleResult(result, 4728);
+    }
 
-            return new PuzzleResult(result, 4728);
-        }
+    public override PuzzleResult RunPart2()
+    {
+        var ventsMap = new VentsMap();
+        var result = ventsMap.Run(FileInput, false);
 
-        public override PuzzleResult RunPart2()
-        {
-            var ventsMap = new VentsMap();
-            var result = ventsMap.Run(FileInput, false);
-
-            return new PuzzleResult(result, 17717);
-        }
+        return new PuzzleResult(result, 17717);
     }
 }

@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2018.Day10
+namespace App.Puzzles.Year2018.Day10;
+
+public class Year2018Day10Tests
 {
-    public class Year2018Day10Tests
+    [Test]
+    public void FindsMessage()
     {
-        [Test]
-        public void FindsMessage()
-        {
-            const string input = @"position=< 9,  1> velocity=< 0,  2>
+        const string input = @"position=< 9,  1> velocity=< 0,  2>
 position=< 7,  0> velocity=<-1,  0>
 position=< 3, -2> velocity=<-1,  1>
 position=< 6, 10> velocity=<-2, -1>
@@ -39,7 +39,7 @@ position=< 5,  9> velocity=< 1, -2>
 position=<14,  7> velocity=<-2,  0>
 position=<-3,  6> velocity=< 2, -1>";
 
-            const string expected = @"#...#..###
+        const string expected = @"#...#..###
 #...#...#.
 #...#...#.
 #####...#.
@@ -48,10 +48,9 @@ position=<-3,  6> velocity=< 2, -1>";
 #...#...#.
 #...#..###";
 
-            var finder = new StarMessageFinder(input, 7);
+        var finder = new StarMessageFinder(input, 7);
 
-            Assert.That(finder.Message, Is.EqualTo(expected));
-            Assert.That(finder.IterationCount, Is.EqualTo(3));
-        }
+        Assert.That(finder.Message, Is.EqualTo(expected));
+        Assert.That(finder.IterationCount, Is.EqualTo(3));
     }
 }

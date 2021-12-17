@@ -1,44 +1,43 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2021.Day06
+namespace App.Puzzles.Year2021.Day06;
+
+public class FishCounter
 {
-    public class FishCounter
+    private readonly List<int> _fishList;
+
+    public FishCounter(string input)
     {
-        private readonly List<int> _fishList;
+        _fishList = input.Split(',').Select(int.Parse).ToList();
+    }
 
-        public FishCounter(string input)
+    public long FishCountAfter(int days)
+    {
+        var ages = new long[9];
+
+        foreach (var fishAge in _fishList)
         {
-            _fishList = input.Split(',').Select(int.Parse).ToList();
+            ages[fishAge]++;
         }
 
-        public long FishCountAfter(int days)
+        var day = 0;
+        while (day < days)
         {
-            var ages = new long[9];
+            var zeros = ages[0];
+            ages[0] = ages[1];
+            ages[1] = ages[2];
+            ages[2] = ages[3];
+            ages[3] = ages[4];
+            ages[4] = ages[5];
+            ages[5] = ages[6];
+            ages[6] = ages[7] + zeros;
+            ages[7] = ages[8];
+            ages[8] = zeros;
 
-            foreach (var fishAge in _fishList)
-            {
-                ages[fishAge]++;
-            }
-
-            var day = 0;
-            while (day < days)
-            {
-                var zeros = ages[0];
-                ages[0] = ages[1];
-                ages[1] = ages[2];
-                ages[2] = ages[3];
-                ages[3] = ages[4];
-                ages[4] = ages[5];
-                ages[5] = ages[6];
-                ages[6] = ages[7] + zeros;
-                ages[7] = ages[8];
-                ages[8] = zeros;
-
-                day++;
-            }
-
-            return ages.Sum();
+            day++;
         }
+
+        return ages.Sum();
     }
 }

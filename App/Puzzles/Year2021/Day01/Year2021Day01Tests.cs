@@ -1,28 +1,28 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2021.Day01
+namespace App.Puzzles.Year2021.Day01;
+
+public class Year2021Day01Tests
 {
-    public class Year2021Day01Tests
+    [Test]
+    public void Part1()
     {
-        [Test]
-        public void Part1()
-        {
-            var validator = new DepthMeasurement();
-            var result = validator.GetNumberOfIncreasingMeasurements(Input, false);
+        var validator = new DepthMeasurement();
+        var result = validator.GetNumberOfIncreasingMeasurements(Input, false);
 
-            Assert.That(result, Is.EqualTo(7));
-        }
+        Assert.That(result, Is.EqualTo(7));
+    }
 
-        [Test]
-        public void Part2()
-        {
-            var validator = new DepthMeasurement();
-            var result = validator.GetNumberOfIncreasingMeasurements(Input, true);
+    [Test]
+    public void Part2()
+    {
+        var validator = new DepthMeasurement();
+        var result = validator.GetNumberOfIncreasingMeasurements(Input, true);
 
-            Assert.That(result, Is.EqualTo(5));
-        }
+        Assert.That(result, Is.EqualTo(5));
+    }
 
-        private const string Input = @"
+    private const string Input = @"
 199
 200
 208
@@ -33,5 +33,4 @@ namespace App.Puzzles.Year2021.Day01
 269
 260
 263";
-    }
 }

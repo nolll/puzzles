@@ -1,35 +1,34 @@
 ﻿using System;
 
-namespace App.Puzzles.Year2019.Day01
+namespace App.Puzzles.Year2019.Day01;
+
+public class Module
 {
-    public class Module
+    public int MassFuel { get; }
+    public int TotalFuel { get; }
+
+    public Module(int mass)
     {
-        public int MassFuel { get; }
-        public int TotalFuel { get; }
+        MassFuel = GetFuel(mass);
+        TotalFuel = GetTotalFuel(mass);
+    }
 
-        public Module(int mass)
-        {
-            MassFuel = GetFuel(mass);
-            TotalFuel = GetTotalFuel(mass);
-        }
+    private static int GetFuel(int mass)
+    {
+        return (int)Math.Floor((double)mass / 3) - 2;
+    }
 
-        private static int GetFuel(int mass)
-        {
-            return (int)Math.Floor((double)mass / 3) - 2;
-        }
-
-        private static int GetTotalFuel(int mass)
-        {
-            var totalFuel = 0;
-            var fuel = GetFuel(mass);
+    private static int GetTotalFuel(int mass)
+    {
+        var totalFuel = 0;
+        var fuel = GetFuel(mass);
             
-            while (fuel > 0)
-            {
-                totalFuel += fuel;
-                fuel = GetFuel(fuel);
-            }
-
-            return totalFuel;
+        while (fuel > 0)
+        {
+            totalFuel += fuel;
+            fuel = GetFuel(fuel);
         }
+
+        return totalFuel;
     }
 }

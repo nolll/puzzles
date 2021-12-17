@@ -1,29 +1,28 @@
 using System;
 
-namespace App.Puzzles.Year2015.Day21
+namespace App.Puzzles.Year2015.Day21;
+
+public abstract class RpgCharacter
 {
-    public abstract class RpgCharacter
+    private readonly int _armor;
+
+    public string Name { get; }
+    public int Points { get; private set; }
+    public int Damage { get; }
+
+    public bool IsAlive => Points > 0;
+
+    protected RpgCharacter(string name, in int points, in int damage, in int armor)
     {
-        private readonly int _armor;
+        Name = name;
+        Points = points;
+        Damage = damage;
+        _armor = armor;
+    }
 
-        public string Name { get; }
-        public int Points { get; private set; }
-        public int Damage { get; }
-
-        public bool IsAlive => Points > 0;
-
-        protected RpgCharacter(string name, in int points, in int damage, in int armor)
-        {
-            Name = name;
-            Points = points;
-            Damage = damage;
-            _armor = armor;
-        }
-
-        public bool Hurt(int attack)
-        {
-            Points -= Math.Max(attack - _armor, 1);
-            return IsAlive;
-        }
+    public bool Hurt(int attack)
+    {
+        Points -= Math.Max(attack - _armor, 1);
+        return IsAlive;
     }
 }

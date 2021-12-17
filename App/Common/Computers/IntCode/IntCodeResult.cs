@@ -1,17 +1,16 @@
 ﻿using System.Linq;
 
-namespace App.Common.Computers.IntCode
+namespace App.Common.Computers.IntCode;
+
+public class IntCodeResult
 {
-    public class IntCodeResult
+    private readonly int[] _memory;
+
+    public string Output => string.Join(',', _memory.Select(o => o.ToString()));
+    public int Integer => _memory[0];
+
+    public IntCodeResult(int[] memory)
     {
-        private readonly int[] _memory;
-
-        public string Output => string.Join(',', _memory.Select(o => o.ToString()));
-        public int Integer => _memory[0];
-
-        public IntCodeResult(int[] memory)
-        {
-            _memory = memory;
-        }
+        _memory = memory;
     }
 }

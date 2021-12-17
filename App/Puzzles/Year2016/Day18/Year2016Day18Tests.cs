@@ -1,18 +1,17 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2016.Day18
+namespace App.Puzzles.Year2016.Day18;
+
+public class Year2016Day18Tests
 {
-    public class Year2016Day18Tests
+    [Test]
+    public void SafeCountIsCorrect()
     {
-        [Test]
-        public void SafeCountIsCorrect()
-        {
-            const string input = ".^^.^.^^^^";
+        const string input = ".^^.^.^^^^";
 
-            var detector = new FloorTrapDetector(input);
-            var safeCount = detector.CountSafeTiles(10);
+        var detector = new FloorTrapDetector(input);
+        var safeCount = detector.CountSafeTiles(10);
 
-            Assert.That(safeCount, Is.EqualTo(38));
-        }
+        Assert.That(safeCount, Is.EqualTo(38));
     }
 }

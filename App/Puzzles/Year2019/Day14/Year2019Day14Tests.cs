@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2019.Day14
+namespace App.Puzzles.Year2019.Day14;
+
+public class Year2019Day14Tests
 {
-    public class Year2019Day14Tests
+    [Test]
+    public void NumberOfOresIs31()
     {
-        [Test]
-        public void NumberOfOresIs31()
-        {
-            const string input = @"
+        const string input = @"
 10 ORE => 10 A
 1 ORE => 1 B
 7 A, 1 B => 1 C
@@ -15,17 +15,17 @@ namespace App.Puzzles.Year2019.Day14
 7 A, 1 D => 1 E
 7 A, 1 E => 1 FUEL";
 
-            var reactor = new NanoReactor(input);
-            reactor.Run();
-            var result = reactor.RequiredOreForOneFuel;
+        var reactor = new NanoReactor(input);
+        reactor.Run();
+        var result = reactor.RequiredOreForOneFuel;
 
-            Assert.That(result, Is.EqualTo(31));
-        }
+        Assert.That(result, Is.EqualTo(31));
+    }
 
-        [Test]
-        public void NumberOfOresIs165()
-        {
-            const string input = @"
+    [Test]
+    public void NumberOfOresIs165()
+    {
+        const string input = @"
 9 ORE => 2 A
 8 ORE => 3 B
 7 ORE => 5 C
@@ -34,17 +34,17 @@ namespace App.Puzzles.Year2019.Day14
 4 C, 1 A => 1 CA
 2 AB, 3 BC, 4 CA => 1 FUEL";
 
-            var reactor = new NanoReactor(input);
-            reactor.Run();
-            var result = reactor.RequiredOreForOneFuel;
+        var reactor = new NanoReactor(input);
+        reactor.Run();
+        var result = reactor.RequiredOreForOneFuel;
 
-            Assert.That(result, Is.EqualTo(165));
-        }
+        Assert.That(result, Is.EqualTo(165));
+    }
 
-        [Test]
-        public void NumberOfOresIs13312()
-        {
-            const string input = @"
+    [Test]
+    public void NumberOfOresIs13312()
+    {
+        const string input = @"
 157 ORE => 5 NZVS
 165 ORE => 6 DCFZ
 44 XJWVT, 5 KHKGT, 1 QDVJ, 29 NZVS, 9 GPVTF, 48 HKGWZ => 1 FUEL
@@ -55,17 +55,17 @@ namespace App.Puzzles.Year2019.Day14
 165 ORE => 2 GPVTF
 3 DCFZ, 7 NZVS, 5 HKGWZ, 10 PSHF => 8 KHKGT";
 
-            var reactor = new NanoReactor(input);
-            reactor.Run();
-            var result = reactor.RequiredOreForOneFuel;
+        var reactor = new NanoReactor(input);
+        reactor.Run();
+        var result = reactor.RequiredOreForOneFuel;
 
-            Assert.That(result, Is.EqualTo(13312));
-        }
+        Assert.That(result, Is.EqualTo(13312));
+    }
 
-        [Test]
-        public void NumberOfOresIs180697()
-        {
-            const string input = @"
+    [Test]
+    public void NumberOfOresIs180697()
+    {
+        const string input = @"
 2 VPVL, 7 FWMGM, 2 CXFTF, 11 MNCFX => 1 STKFG
 17 NVRVD, 3 JNWZP => 8 VPVL
 53 STKFG, 6 MNCFX, 46 VJHF, 81 HVMC, 68 CXFTF, 25 GNMV => 1 FUEL
@@ -79,17 +79,17 @@ namespace App.Puzzles.Year2019.Day14
 1 VJHF, 6 MNCFX => 4 RFSQX
 176 ORE => 6 VJHF";
 
-            var reactor = new NanoReactor(input);
-            reactor.Run();
-            var result = reactor.RequiredOreForOneFuel;
+        var reactor = new NanoReactor(input);
+        reactor.Run();
+        var result = reactor.RequiredOreForOneFuel;
 
-            Assert.That(result, Is.EqualTo(180697));
-        }
+        Assert.That(result, Is.EqualTo(180697));
+    }
 
-        [Test]
-        public void NumberOfOresIs2210736()
-        {
-            const string input = @"
+    [Test]
+    public void NumberOfOresIs2210736()
+    {
+        const string input = @"
 171 ORE => 8 CNZTR
 7 ZLQW, 3 BMBT, 9 XCVML, 26 XMNCP, 1 WPTQ, 2 MZWV, 1 RJRHP => 4 PLWSL
 114 ORE => 4 BHXH
@@ -108,17 +108,17 @@ namespace App.Puzzles.Year2019.Day14
 7 XCVML => 6 RJRHP
 5 BHXH, 4 VRPVC => 5 LTCX";
 
-            var reactor = new NanoReactor(input);
-            reactor.Run();
-            var result = reactor.RequiredOreForOneFuel;
+        var reactor = new NanoReactor(input);
+        reactor.Run();
+        var result = reactor.RequiredOreForOneFuel;
 
-            Assert.That(result, Is.EqualTo(2210736));
-        }
+        Assert.That(result, Is.EqualTo(2210736));
+    }
 
-        [Test]
-        public void FuelsForOneTrillionOresIs82892753()
-        {
-            const string input = @"
+    [Test]
+    public void FuelsForOneTrillionOresIs82892753()
+    {
+        const string input = @"
 157 ORE => 5 NZVS
 165 ORE => 6 DCFZ
 44 XJWVT, 5 KHKGT, 1 QDVJ, 29 NZVS, 9 GPVTF, 48 HKGWZ => 1 FUEL
@@ -129,17 +129,17 @@ namespace App.Puzzles.Year2019.Day14
 165 ORE => 2 GPVTF
 3 DCFZ, 7 NZVS, 5 HKGWZ, 10 PSHF => 8 KHKGT";
 
-            var reactor = new NanoReactor(input);
-            reactor.Run();
-            var fuel = reactor.FuelFromOneTrillionOre;
+        var reactor = new NanoReactor(input);
+        reactor.Run();
+        var fuel = reactor.FuelFromOneTrillionOre;
 
-            Assert.That(fuel, Is.EqualTo(82892753));
-        }
+        Assert.That(fuel, Is.EqualTo(82892753));
+    }
 
-        [Test]
-        public void FuelsForOneTrillionOresIsCorrect5586022()
-        {
-            const string input = @"
+    [Test]
+    public void FuelsForOneTrillionOresIsCorrect5586022()
+    {
+        const string input = @"
 2 VPVL, 7 FWMGM, 2 CXFTF, 11 MNCFX => 1 STKFG
 17 NVRVD, 3 JNWZP => 8 VPVL
 53 STKFG, 6 MNCFX, 46 VJHF, 81 HVMC, 68 CXFTF, 25 GNMV => 1 FUEL
@@ -153,17 +153,17 @@ namespace App.Puzzles.Year2019.Day14
 1 VJHF, 6 MNCFX => 4 RFSQX
 176 ORE => 6 VJHF";
 
-            var reactor = new NanoReactor(input);
-            reactor.Run();
-            var fuel = reactor.FuelFromOneTrillionOre;
+        var reactor = new NanoReactor(input);
+        reactor.Run();
+        var fuel = reactor.FuelFromOneTrillionOre;
 
-            Assert.That(fuel, Is.EqualTo(5586022));
-        }
+        Assert.That(fuel, Is.EqualTo(5586022));
+    }
 
-        [Test]
-        public void FuelsForOneTrillionOresIsCorrect460664()
-        {
-            const string input = @"
+    [Test]
+    public void FuelsForOneTrillionOresIsCorrect460664()
+    {
+        const string input = @"
 171 ORE => 8 CNZTR
 7 ZLQW, 3 BMBT, 9 XCVML, 26 XMNCP, 1 WPTQ, 2 MZWV, 1 RJRHP => 4 PLWSL
 114 ORE => 4 BHXH
@@ -182,11 +182,10 @@ namespace App.Puzzles.Year2019.Day14
 7 XCVML => 6 RJRHP
 5 BHXH, 4 VRPVC => 5 LTCX";
 
-            var reactor = new NanoReactor(input);
-            reactor.Run();
-            var fuel = reactor.FuelFromOneTrillionOre;
+        var reactor = new NanoReactor(input);
+        reactor.Run();
+        var fuel = reactor.FuelFromOneTrillionOre;
 
-            Assert.That(fuel, Is.EqualTo(460664));
-        }
+        Assert.That(fuel, Is.EqualTo(460664));
     }
 }

@@ -1,33 +1,32 @@
 ﻿using System.Text;
 using App.Common.Computers.IntCode;
 
-namespace App.Puzzles.Year2019.Day17
+namespace App.Puzzles.Year2019.Day17;
+
+public class ScaffoldingComputer1
 {
-    public class ScaffoldingComputer1
+    private readonly ComputerInterface _computer;
+    private readonly StringBuilder _sb;
+
+    public ScaffoldingComputer1(string program)
     {
-        private readonly ComputerInterface _computer;
-        private readonly StringBuilder _sb;
+        _sb = new StringBuilder();
+        _computer = new ComputerInterface(program, ReadInput, WriteOutput);
+    }
 
-        public ScaffoldingComputer1(string program)
-        {
-            _sb = new StringBuilder();
-            _computer = new ComputerInterface(program, ReadInput, WriteOutput);
-        }
+    public string Run()
+    {
+        _computer.Start();
+        return _sb.ToString();
+    }
 
-        public string Run()
-        {
-            _computer.Start();
-            return _sb.ToString();
-        }
+    private long ReadInput()
+    {
+        return 0;
+    }
 
-        private long ReadInput()
-        {
-            return 0;
-        }
-
-        private void WriteOutput(long output)
-        {
-            _sb.Append((char)output);
-        }
+    private void WriteOutput(long output)
+    {
+        _sb.Append((char)output);
     }
 }

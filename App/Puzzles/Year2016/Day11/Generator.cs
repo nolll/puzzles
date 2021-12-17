@@ -1,11 +1,10 @@
-namespace App.Puzzles.Year2016.Day11
-{
-    public class Generator : RadioisotopeItem
-    {
-        public override RadioisotopeType Type => RadioisotopeType.Generator;
+namespace App.Puzzles.Year2016.Day11;
 
-        public Generator(string name) : base(name)
-        {
-        }
+public class Generator : RadioisotopeItem
+{
+    public override RadioisotopeType Type => RadioisotopeType.Generator;
+
+    public Generator(string name) : base(name)
+    {
     }
 }

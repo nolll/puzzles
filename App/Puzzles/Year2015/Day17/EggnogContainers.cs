@@ -3,28 +3,27 @@ using System.Linq;
 using App.Common.Combinatorics;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2015.Day17
+namespace App.Puzzles.Year2015.Day17;
+
+public class EggnogContainers
 {
-    public class EggnogContainers
+    private readonly List<EggnogContainer> _containers;
+
+    public EggnogContainers(string input)
     {
-        private readonly List<EggnogContainer> _containers;
-
-        public EggnogContainers(string input)
-        {
-            _containers = PuzzleInputReader.ReadLines(input).Select((o, index) => new EggnogContainer(index, int.Parse((string) o))).ToList();
-        }
+        _containers = PuzzleInputReader.ReadLines(input).Select((o, index) => new EggnogContainer(index, int.Parse((string) o))).ToList();
+    }
         
-        public IList<List<EggnogContainer>> GetCombinations(int targetVolume)
-        {
-            var combinations = CombinationGenerator.GetAllCombinations(_containers);
-            return combinations.Where(o => o.Sum(c => c.Volume) == targetVolume).ToList();
-        }
+    public IList<List<EggnogContainer>> GetCombinations(int targetVolume)
+    {
+        var combinations = CombinationGenerator.GetAllCombinations(_containers);
+        return combinations.Where(o => o.Sum(c => c.Volume) == targetVolume).ToList();
+    }
 
-        public IList<List<EggnogContainer>> GetCombinationsWithLeastContainers(int targetVolume)
-        {
-            var combinations = GetCombinations(targetVolume).OrderBy(o => o.Count).ToList();
-            var smallestCount = combinations.First().Count;
-            return combinations.Where(o => o.Count == smallestCount).ToList();
-        }
+    public IList<List<EggnogContainer>> GetCombinationsWithLeastContainers(int targetVolume)
+    {
+        var combinations = GetCombinations(targetVolume).OrderBy(o => o.Count).ToList();
+        var smallestCount = combinations.First().Count;
+        return combinations.Where(o => o.Count == smallestCount).ToList();
     }
 }

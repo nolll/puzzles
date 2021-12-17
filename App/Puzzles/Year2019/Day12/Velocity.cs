@@ -1,20 +1,19 @@
 using System;
 
-namespace App.Puzzles.Year2019.Day12
+namespace App.Puzzles.Year2019.Day12;
+
+public class Velocity
 {
-    public class Velocity
+    public int X { get; }
+    public int Y { get; }
+    public int Z { get; }
+
+    public int KineticEnergy => Math.Abs(X) + Math.Abs(Y) + Math.Abs(Z);
+
+    public Velocity(int x, int y, int z)
     {
-        public int X { get; }
-        public int Y { get; }
-        public int Z { get; }
-
-        public int KineticEnergy => Math.Abs(X) + Math.Abs(Y) + Math.Abs(Z);
-
-        public Velocity(int x, int y, int z)
-        {
-            X = x;
-            Y = y;
-            Z = z;
-        }
+        X = x;
+        Y = y;
+        Z = z;
     }
 }

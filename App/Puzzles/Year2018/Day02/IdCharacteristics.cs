@@ -1,34 +1,33 @@
 ﻿using System.Collections.Generic;
 
-namespace App.Puzzles.Year2018.Day02
-{
-    public class IdCharacteristics
-    {
-        public bool HasDoubleChars { get; }
-        public bool HasTripleChars { get; }
+namespace App.Puzzles.Year2018.Day02;
 
-        public IdCharacteristics(string id)
+public class IdCharacteristics
+{
+    public bool HasDoubleChars { get; }
+    public bool HasTripleChars { get; }
+
+    public IdCharacteristics(string id)
+    {
+        var charCounts = new Dictionary<char, int>();
+        foreach (var c in id)
         {
-            var charCounts = new Dictionary<char, int>();
-            foreach (var c in id)
+            if (!charCounts.TryAdd(c, 1))
             {
-                if (!charCounts.TryAdd(c, 1))
-                {
-                    charCounts[c]++;
-                }
+                charCounts[c]++;
+            }
+        }
+
+        foreach (var val in charCounts.Values)
+        {
+            if (val == 2)
+            {
+                HasDoubleChars = true;
             }
 
-            foreach (var val in charCounts.Values)
+            if (val == 3)
             {
-                if (val == 2)
-                {
-                    HasDoubleChars = true;
-                }
-
-                if (val == 3)
-                {
-                    HasTripleChars = true;
-                }
+                HasTripleChars = true;
             }
         }
     }

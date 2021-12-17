@@ -1,25 +1,24 @@
 ﻿using App.Platform;
 
-namespace App.Puzzles.Year2021.Day04
+namespace App.Puzzles.Year2021.Day04;
+
+public class Year2021Day04 : Puzzle
 {
-    public class Year2021Day04 : Puzzle
+    public override string Title => "Giant Squid";
+
+    public override PuzzleResult RunPart1()
     {
-        public override string Title => "Giant Squid";
+        var diagnostics = new BingoGame(FileInput);
+        var result = diagnostics.Play(false);
 
-        public override PuzzleResult RunPart1()
-        {
-            var diagnostics = new BingoGame(FileInput);
-            var result = diagnostics.Play(false);
+        return new PuzzleResult(result, 45031);
+    }
 
-            return new PuzzleResult(result, 45031);
-        }
+    public override PuzzleResult RunPart2()
+    {
+        var diagnostics = new BingoGame(FileInput);
+        var result = diagnostics.Play(true);
 
-        public override PuzzleResult RunPart2()
-        {
-            var diagnostics = new BingoGame(FileInput);
-            var result = diagnostics.Play(true);
-
-            return new PuzzleResult(result, 2568);
-        }
+        return new PuzzleResult(result, 2568);
     }
 }

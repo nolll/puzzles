@@ -2,69 +2,68 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace App.Puzzles.Year2015.Day19
+namespace App.Puzzles.Year2015.Day19;
+
+internal class MoleculeReplacement
 {
-    internal class MoleculeReplacement
+    public string Left { get; }
+    public string Right { get; }
+
+    public MoleculeReplacement(string left, string right)
     {
-        public string Left { get; }
-        public string Right { get; }
+        Left = left;
+        Right = right;
+    }
 
-        public MoleculeReplacement(string left, string right)
+    public IList<string> Expand(string inputMolecule)
+    {
+        var molecules = new List<string>();
+        var staticParts = inputMolecule.Split(Left);
+        if (staticParts.Length < 2)
+            return new List<string>();
+
+        var numberOfReplacements = staticParts.Length - 1;
+        for (var i = 0; i < numberOfReplacements; i++)
         {
-            Left = left;
-            Right = right;
-        }
-
-        public IList<string> Expand(string inputMolecule)
-        {
-            var molecules = new List<string>();
-            var staticParts = inputMolecule.Split(Left);
-            if (staticParts.Length < 2)
-                return new List<string>();
-
-            var numberOfReplacements = staticParts.Length - 1;
-            for (var i = 0; i < numberOfReplacements; i++)
+            var sb = new StringBuilder();
+            for (var j = 0; j < numberOfReplacements; j++)
             {
-                var sb = new StringBuilder();
-                for (var j = 0; j < numberOfReplacements; j++)
-                {
-                    sb.Append(staticParts[j]);
-                    var replacement = i == j ? Right : Left;
-                    sb.Append(replacement);
-                }
-
-                sb.Append(staticParts.Last());
-
-                molecules.Add(sb.ToString());
+                sb.Append(staticParts[j]);
+                var replacement = i == j ? Right : Left;
+                sb.Append(replacement);
             }
 
-            return molecules;
+            sb.Append(staticParts.Last());
+
+            molecules.Add(sb.ToString());
         }
 
-        public IList<string> Reduce(string inputMolecule)
+        return molecules;
+    }
+
+    public IList<string> Reduce(string inputMolecule)
+    {
+        var molecules = new List<string>();
+        var staticParts = inputMolecule.Split(Right);
+        if (staticParts.Length < 2)
+            return new List<string>();
+
+        var numberOfReplacements = staticParts.Length - 1;
+        for (var i = 0; i < numberOfReplacements; i++)
         {
-            var molecules = new List<string>();
-            var staticParts = inputMolecule.Split(Right);
-            if (staticParts.Length < 2)
-                return new List<string>();
-
-            var numberOfReplacements = staticParts.Length - 1;
-            for (var i = 0; i < numberOfReplacements; i++)
+            var sb = new StringBuilder();
+            for (var j = 0; j < numberOfReplacements; j++)
             {
-                var sb = new StringBuilder();
-                for (var j = 0; j < numberOfReplacements; j++)
-                {
-                    sb.Append(staticParts[j]);
-                    var replacement = i == j ? Left : Right;
-                    sb.Append(replacement);
-                }
-
-                sb.Append(staticParts.Last());
-
-                molecules.Add(sb.ToString());
+                sb.Append(staticParts[j]);
+                var replacement = i == j ? Left : Right;
+                sb.Append(replacement);
             }
 
-            return molecules.Distinct().ToList();
+            sb.Append(staticParts.Last());
+
+            molecules.Add(sb.ToString());
         }
+
+        return molecules.Distinct().ToList();
     }
 }

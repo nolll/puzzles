@@ -1,28 +1,28 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2021.Day03
+namespace App.Puzzles.Year2021.Day03;
+
+public class Year2021Day03Tests
 {
-    public class Year2021Day03Tests
+    [Test]
+    public void Part1()
     {
-        [Test]
-        public void Part1()
-        {
-            var diagnostics = new BinaryDiagnostics();
-            var result = diagnostics.GetFuelConsumption(Input);
+        var diagnostics = new BinaryDiagnostics();
+        var result = diagnostics.GetFuelConsumption(Input);
 
-            Assert.That(result, Is.EqualTo(198));
-        }
+        Assert.That(result, Is.EqualTo(198));
+    }
 
-        [Test]
-        public void Part2()
-        {
-            var diagnostics = new BinaryDiagnostics();
-            var result = diagnostics.GetLifeSupportRating(Input);
+    [Test]
+    public void Part2()
+    {
+        var diagnostics = new BinaryDiagnostics();
+        var result = diagnostics.GetLifeSupportRating(Input);
 
-            Assert.That(result, Is.EqualTo(230));
-        }
+        Assert.That(result, Is.EqualTo(230));
+    }
 
-        private const string Input = @"
+    private const string Input = @"
 00100
 11110
 10110
@@ -35,5 +35,4 @@ namespace App.Puzzles.Year2021.Day03
 11001
 00010
 01010";
-    }
 }

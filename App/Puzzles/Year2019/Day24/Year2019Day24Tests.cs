@@ -1,135 +1,134 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2019.Day24
+namespace App.Puzzles.Year2019.Day24;
+
+public class Year2019Day24Tests
 {
-    public class Year2019Day24Tests
+    [Test]
+    public void AfterZeroMinutes()
     {
-        [Test]
-        public void AfterZeroMinutes()
-        {
-            const string input = @"
+        const string input = @"
 ....#
 #..#.
 #..##
 ..#..
 #....";
 
-            var simulator = new BugLifeSimulator(input);
-            simulator.Run(0);
+        var simulator = new BugLifeSimulator(input);
+        simulator.Run(0);
 
-            Assert.That(simulator.String, Is.EqualTo("....##..#.#..##..#..#...."));
-        }
+        Assert.That(simulator.String, Is.EqualTo("....##..#.#..##..#..#...."));
+    }
 
-        [Test]
-        public void AfterOneMinute()
-        {
-            const string input = @"
+    [Test]
+    public void AfterOneMinute()
+    {
+        const string input = @"
 ....#
 #..#.
 #..##
 ..#..
 #....";
 
-            var simulator = new BugLifeSimulator(input);
-            simulator.Run(1);
+        var simulator = new BugLifeSimulator(input);
+        simulator.Run(1);
 
-            Assert.That(simulator.String, Is.EqualTo("#..#.####.###.###.##.##.."));
-        }
+        Assert.That(simulator.String, Is.EqualTo("#..#.####.###.###.##.##.."));
+    }
 
-        [Test]
-        public void AfterTwoMinutes()
-        {
-            const string input = @"
+    [Test]
+    public void AfterTwoMinutes()
+    {
+        const string input = @"
 ....#
 #..#.
 #..##
 ..#..
 #....";
 
-            var simulator = new BugLifeSimulator(input);
-            simulator.Run(2);
+        var simulator = new BugLifeSimulator(input);
+        simulator.Run(2);
 
-            Assert.That(simulator.String, Is.EqualTo("#####....#....#...#.#.###"));
-        }
+        Assert.That(simulator.String, Is.EqualTo("#####....#....#...#.#.###"));
+    }
 
-        [Test]
-        public void AfterThreeMinutes()
-        {
-            const string input = @"
+    [Test]
+    public void AfterThreeMinutes()
+    {
+        const string input = @"
 ....#
 #..#.
 #..##
 ..#..
 #....";
 
-            var simulator = new BugLifeSimulator(input);
-            simulator.Run(3);
+        var simulator = new BugLifeSimulator(input);
+        simulator.Run(3);
 
-            Assert.That(simulator.String, Is.EqualTo("#....####....###.##..##.#"));
-        }
+        Assert.That(simulator.String, Is.EqualTo("#....####....###.##..##.#"));
+    }
 
-        [Test]
-        public void AfterFourMinutes()
-        {
-            const string input = @"
+    [Test]
+    public void AfterFourMinutes()
+    {
+        const string input = @"
 ....#
 #..#.
 #..##
 ..#..
 #....";
 
-            var simulator = new BugLifeSimulator(input);
-            simulator.Run(4);
+        var simulator = new BugLifeSimulator(input);
+        simulator.Run(4);
 
-            Assert.That(simulator.String, Is.EqualTo("####.....###..#.....##..."));
-        }
+        Assert.That(simulator.String, Is.EqualTo("####.....###..#.....##..."));
+    }
 
-        [Test]
-        public void UntilRepeat_String()
-        {
-            const string input = @"
+    [Test]
+    public void UntilRepeat_String()
+    {
+        const string input = @"
 ....#
 #..#.
 #..##
 ..#..
 #....";
 
-            var simulator = new BugLifeSimulator(input);
-            simulator.RunUntilRepeat();
+        var simulator = new BugLifeSimulator(input);
+        simulator.RunUntilRepeat();
 
-            Assert.That(simulator.String, Is.EqualTo("...............#.....#..."));
-        }
+        Assert.That(simulator.String, Is.EqualTo("...............#.....#..."));
+    }
 
-        [Test]
-        public void UntilRepeat_BiodiversityRating()
-        {
-            const string input = @"
+    [Test]
+    public void UntilRepeat_BiodiversityRating()
+    {
+        const string input = @"
 ....#
 #..#.
 #..##
 ..#..
 #....";
 
-            var simulator = new BugLifeSimulator(input);
-            simulator.RunUntilRepeat();
+        var simulator = new BugLifeSimulator(input);
+        simulator.RunUntilRepeat();
 
-            Assert.That(simulator.BiodiversityRating, Is.EqualTo(2129920));
-        }
+        Assert.That(simulator.BiodiversityRating, Is.EqualTo(2129920));
+    }
 
-        [Test]
-        public void Recursive_BugCount()
-        {
-            const string input = @"
+    [Test]
+    public void Recursive_BugCount()
+    {
+        const string input = @"
 ....#
 #..#.
 #..##
 ..#..
 #....";
 
-            var simulator = new RecursiveBugLifeSimulator(input);
-            simulator.Run(10);
+        var simulator = new RecursiveBugLifeSimulator(input);
+        simulator.Run(10);
 
-            Assert.That(simulator.BugCount, Is.EqualTo(99));
-        }
+        Assert.That(simulator.BugCount, Is.EqualTo(99));
     }
 }

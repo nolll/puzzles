@@ -2,80 +2,79 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2020.Day15
+namespace App.Puzzles.Year2020.Day15;
+
+public class MemoryGame
 {
-    public class MemoryGame
+    private readonly List<long> _inputNumbers;
+    private readonly Dictionary<long, GameNumber> _numbers;
+
+    public MemoryGame(string input)
     {
-        private readonly List<long> _inputNumbers;
-        private readonly Dictionary<long, GameNumber> _numbers;
+        _inputNumbers = input.Split(',').Select(long.Parse).ToList();
+        _numbers = new Dictionary<long, GameNumber>();
+    }
 
-        public MemoryGame(string input)
+    public long Play(int until)
+    {
+        var turn = 0;
+        GameNumber lastSpokenNumber = null;
+        foreach (var num in _inputNumbers)
         {
-            _inputNumbers = input.Split(',').Select(long.Parse).ToList();
-            _numbers = new Dictionary<long, GameNumber>();
+            lastSpokenNumber = Speak(num, turn);
+            turn++;
         }
 
-        public long Play(int until)
+        if(lastSpokenNumber == null)
+            throw new Exception("No number spoken");
+
+        while (turn < until)
         {
-            var turn = 0;
-            GameNumber lastSpokenNumber = null;
-            foreach (var num in _inputNumbers)
-            {
-                lastSpokenNumber = Speak(num, turn);
-                turn++;
-            }
-
-            if(lastSpokenNumber == null)
-                throw new Exception("No number spoken");
-
-            while (turn < until)
-            {
-                var numberToSpeak = lastSpokenNumber.SpeakCount == 1
-                    ? 0
-                    : lastSpokenNumber.Age;
-                lastSpokenNumber = Speak(numberToSpeak, turn);
-                turn++;
-            }
-
-            return lastSpokenNumber.Num;
+            var numberToSpeak = lastSpokenNumber.SpeakCount == 1
+                ? 0
+                : lastSpokenNumber.Age;
+            lastSpokenNumber = Speak(numberToSpeak, turn);
+            turn++;
         }
 
-        private GameNumber Speak(long num, int turn)
-        {
-            if (!_numbers.TryGetValue(num, out var gameNum))
-            {
-                gameNum = new GameNumber(num);
-                _numbers.Add(num, gameNum);
-            }
+        return lastSpokenNumber.Num;
+    }
 
-            gameNum.Speak(turn);
-            return gameNum;
+    private GameNumber Speak(long num, int turn)
+    {
+        if (!_numbers.TryGetValue(num, out var gameNum))
+        {
+            gameNum = new GameNumber(num);
+            _numbers.Add(num, gameNum);
         }
 
-        private class GameNumber
-        {
-            private long _prevSpoken;
-            private long _lastSpoken;
+        gameNum.Speak(turn);
+        return gameNum;
+    }
+
+    private class GameNumber
+    {
+        private long _prevSpoken;
+        private long _lastSpoken;
             
-            public long Num { get; }
-            public long SpeakCount { get; private set; }
+        public long Num { get; }
+        public long SpeakCount { get; private set; }
 
-            public GameNumber(long num)
-            {
-                _prevSpoken = 0;
-                _lastSpoken = 0;
-                Num = num;
-                SpeakCount = 0;
-            }
+        public GameNumber(long num)
+        {
+            _prevSpoken = 0;
+            _lastSpoken = 0;
+            Num = num;
+            SpeakCount = 0;
+        }
 
-            public long Age => _lastSpoken - _prevSpoken;
+        public long Age => _lastSpoken - _prevSpoken;
 
-            public void Speak(int time)
-            {
-                _prevSpoken = _lastSpoken;
-                _lastSpoken = time;
-                SpeakCount++;
-            }
+        public void Speak(int time)
+        {
+            _prevSpoken = _lastSpoken;
+            _lastSpoken = time;
+            SpeakCount++;
         }
     }
 }

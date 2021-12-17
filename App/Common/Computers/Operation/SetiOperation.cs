@@ -1,25 +1,24 @@
-namespace App.Common.Computers.Operation
+namespace App.Common.Computers.Operation;
+
+public class SetiOperation : Operation
 {
-    public class SetiOperation : Operation
+    public SetiOperation() : base("seti")
     {
-        public SetiOperation() : base("seti")
-        {
-        }
+    }
 
-        public override long[] Execute(long[] registers, long a, long b, long c)
-        {
-            registers[c] = a;
-            return registers;
-        }
+    public override long[] Execute(long[] registers, long a, long b, long c)
+    {
+        registers[c] = a;
+        return registers;
+    }
 
-        public override string GetDescription(long[] registers, long a, long b, long c)
-        {
-            return $"Set immediate. Stores value {a} into register {c}.";
-        }
+    public override string GetDescription(long[] registers, long a, long b, long c)
+    {
+        return $"Set immediate. Stores value {a} into register {c}.";
+    }
 
-        public override string GetShortDescription(long[] registers, long a, long b, long c)
-        {
-            return $"reg[{c}] = {a}.";
-        }
+    public override string GetShortDescription(long[] registers, long a, long b, long c)
+    {
+        return $"reg[{c}] = {a}.";
     }
 }

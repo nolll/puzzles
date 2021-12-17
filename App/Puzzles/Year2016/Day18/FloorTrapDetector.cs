@@ -1,46 +1,45 @@
 using System.Linq;
 
-namespace App.Puzzles.Year2016.Day18
+namespace App.Puzzles.Year2016.Day18;
+
+public class FloorTrapDetector
 {
-    public class FloorTrapDetector
+    private readonly string _input;
+    private const char Safe = '.';
+    private const char Trap = '^'; 
+
+    public FloorTrapDetector(string input)
     {
-        private readonly string _input;
-        private const char Safe = '.';
-        private const char Trap = '^'; 
+        _input = input;
+    }
 
-        public FloorTrapDetector(string input)
+    public int CountSafeTiles(int rows)
+    {
+        var y = 1;
+        var lastRow = _input.ToCharArray();
+        var safeCount = lastRow.Count(o => o == Safe);
+        while (y < rows)
         {
-            _input = input;
-        }
-
-        public int CountSafeTiles(int rows)
-        {
-            var y = 1;
-            var lastRow = _input.ToCharArray();
-            var safeCount = lastRow.Count(o => o == Safe);
-            while (y < rows)
+            var nextRow = new char[lastRow.Length];
+            for (var x = 0; x < lastRow.Length; x++)
             {
-                var nextRow = new char[lastRow.Length];
-                for (var x = 0; x < lastRow.Length; x++)
-                {
-                    var c = IsCurrentTileATrap(lastRow, x) ? Trap : Safe;
-                    nextRow[x] = c;
-                }
-
-                safeCount += nextRow.Count(o => o == Safe);
-                lastRow = nextRow;
-                y++;
+                var c = IsCurrentTileATrap(lastRow, x) ? Trap : Safe;
+                nextRow[x] = c;
             }
 
-            return safeCount;
+            safeCount += nextRow.Count(o => o == Safe);
+            lastRow = nextRow;
+            y++;
         }
 
-        private static bool IsCurrentTileATrap(char[] lastRow, int pos)
-        {
-            var leftIsTrap = pos > 0 && lastRow[pos - 1] == Trap;
-            var rightIsTrap = pos < (lastRow.Length - 1) && lastRow[pos + 1] == Trap;
+        return safeCount;
+    }
 
-            return leftIsTrap && !rightIsTrap || rightIsTrap && !leftIsTrap;
-        }
+    private static bool IsCurrentTileATrap(char[] lastRow, int pos)
+    {
+        var leftIsTrap = pos > 0 && lastRow[pos - 1] == Trap;
+        var rightIsTrap = pos < (lastRow.Length - 1) && lastRow[pos + 1] == Trap;
+
+        return leftIsTrap && !rightIsTrap || rightIsTrap && !leftIsTrap;
     }
 }

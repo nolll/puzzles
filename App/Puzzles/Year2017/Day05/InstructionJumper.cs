@@ -1,43 +1,42 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2017.Day05
+namespace App.Puzzles.Year2017.Day05;
+
+public class InstructionJumper
 {
-    public class InstructionJumper
+    private int _index;
+    private readonly List<int> _numbers;
+    private bool IsInRange => _index >= 0 && _index < _numbers.Count;
+
+    public int StepCount { get; private set; }
+
+    public InstructionJumper(string input)
     {
-        private int _index;
-        private readonly List<int> _numbers;
-        private bool IsInRange => _index >= 0 && _index < _numbers.Count;
+        StepCount = 0;
+        _numbers = input.Trim().Split('\n').Select(o => int.Parse((string) o.Trim())).ToList();
+    }
 
-        public int StepCount { get; private set; }
-
-        public InstructionJumper(string input)
+    public void Start1()
+    {
+        while (IsInRange)
         {
-            StepCount = 0;
-            _numbers = input.Trim().Split('\n').Select(o => int.Parse((string) o.Trim())).ToList();
+            var val = _numbers[_index];
+            _numbers[_index] = val + 1;
+            _index += val;
+            StepCount += 1;
         }
+    }
 
-        public void Start1()
+    public void Start2()
+    {
+        while (IsInRange)
         {
-            while (IsInRange)
-            {
-                var val = _numbers[_index];
-                _numbers[_index] = val + 1;
-                _index += val;
-                StepCount += 1;
-            }
-        }
-
-        public void Start2()
-        {
-            while (IsInRange)
-            {
-                var val = _numbers[_index];
-                var change = val >= 3 ? -1 : 1;
-                _numbers[_index] = val + change;
-                _index += val;
-                StepCount += 1;
-            }
+            var val = _numbers[_index];
+            var change = val >= 3 ? -1 : 1;
+            _numbers[_index] = val + change;
+            _index += val;
+            StepCount += 1;
         }
     }
 }

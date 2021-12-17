@@ -1,9 +1,8 @@
-namespace App.Puzzles.Year2018.Day22
+namespace App.Puzzles.Year2018.Day22;
+
+public enum CaveRegionType
 {
-    public enum CaveRegionType
-    {
-        Rocky = 0,
-        Wet = 1,
-        Narrow = 2
-    }
+    Rocky = 0,
+    Wet = 1,
+    Narrow = 2
 }

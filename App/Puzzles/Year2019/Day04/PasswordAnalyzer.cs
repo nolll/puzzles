@@ -1,43 +1,42 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2019.Day04
+namespace App.Puzzles.Year2019.Day04;
+
+public static class PasswordAnalyzer
 {
-    public static class PasswordAnalyzer
+    public static bool HasGroupOfTwo(IEnumerable<char> chars)
     {
-        public static bool HasGroupOfTwo(IEnumerable<char> chars)
-        {
-            var groups = GetGroups(chars).Select(o => o.Count());
-            return groups.Any(o => o == 2);
-        }
+        var groups = GetGroups(chars).Select(o => o.Count());
+        return groups.Any(o => o == 2);
+    }
 
-        public static bool HasGroup(IEnumerable<char> chars)
-        {
-            var groups = GetGroups(chars).Select(o => o.Count());
-            return groups.Any(o => o >= 2);
-        }
+    public static bool HasGroup(IEnumerable<char> chars)
+    {
+        var groups = GetGroups(chars).Select(o => o.Count());
+        return groups.Any(o => o >= 2);
+    }
 
-        private static IEnumerable<IEnumerable<char>> GetGroups(IEnumerable<char> chars)
+    private static IEnumerable<IEnumerable<char>> GetGroups(IEnumerable<char> chars)
+    {
+        var lastChar = ' ';
+        var groups = new List<IEnumerable<char>>();
+        IList<char> currentGroup = new List<char>();
+        foreach (var c in chars)
         {
-            var lastChar = ' ';
-            var groups = new List<IEnumerable<char>>();
-            IList<char> currentGroup = new List<char>();
-            foreach (var c in chars)
+            if (c == lastChar)
             {
-                if (c == lastChar)
-                {
-                    currentGroup.Add(c);
-                }
-                else
-                {
-                    currentGroup = new List<char> { c };
-                    groups.Add(currentGroup);
-                }
-
-                lastChar = c;
+                currentGroup.Add(c);
+            }
+            else
+            {
+                currentGroup = new List<char> { c };
+                groups.Add(currentGroup);
             }
 
-            return groups;
+            lastChar = c;
         }
+
+        return groups;
     }
 }

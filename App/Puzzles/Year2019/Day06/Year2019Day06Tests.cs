@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2019.Day06
+namespace App.Puzzles.Year2019.Day06;
+
+public class Year2019Day06Tests
 {
-    public class Year2019Day06Tests
+    [Test]
+    public void ReturnsCorrectNumberOfOrbits()
     {
-        [Test]
-        public void ReturnsCorrectNumberOfOrbits()
-        {
-            const string input = @"COM)B
+        const string input = @"COM)B
 B)C
 C)D
 D)E
@@ -20,15 +20,15 @@ J)K
 K)L";
 
         var calculator = new OrbitCalculator(input);
-            var result = calculator.GetOrbitCount();
+        var result = calculator.GetOrbitCount();
 
-            Assert.That(result, Is.EqualTo(42));
-        }
+        Assert.That(result, Is.EqualTo(42));
+    }
 
-        [Test]
-        public void ReturnsDistanceFromMeToSanta()
-        {
-            const string input = @"COM)B
+    [Test]
+    public void ReturnsDistanceFromMeToSanta()
+    {
+        const string input = @"COM)B
 B)C
 C)D
 D)E
@@ -42,10 +42,9 @@ K)L
 K)YOU
 I)SAN";
 
-            var calculator = new OrbitCalculator(input);
-            var result = calculator.GetSantaDistance();
+        var calculator = new OrbitCalculator(input);
+        var result = calculator.GetSantaDistance();
 
-            Assert.That(result, Is.EqualTo(4));
-        }
+        Assert.That(result, Is.EqualTo(4));
     }
 }

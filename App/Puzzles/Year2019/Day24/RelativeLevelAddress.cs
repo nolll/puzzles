@@ -1,16 +1,15 @@
 using App.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2019.Day24
-{
-    public class RelativeLevelAddress
-    {
-        public int RelativeLevel { get; }
-        public MatrixAddress Address { get; }
+namespace App.Puzzles.Year2019.Day24;
 
-        public RelativeLevelAddress(int relativeLevel, MatrixAddress address)
-        {
-            RelativeLevel = relativeLevel;
-            Address = address;
-        }
+public class RelativeLevelAddress
+{
+    public int RelativeLevel { get; }
+    public MatrixAddress Address { get; }
+
+    public RelativeLevelAddress(int relativeLevel, MatrixAddress address)
+    {
+        RelativeLevel = relativeLevel;
+        Address = address;
     }
 }

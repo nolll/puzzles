@@ -1,8 +1,7 @@
-namespace App.Puzzles.Year2018.Day15
+namespace App.Puzzles.Year2018.Day15;
+
+public static class BattleFigureType
 {
-    public static class BattleFigureType
-    {
-        public const char Elf = 'E';
-        public const char Goblin = 'G';
-    }
+    public const char Elf = 'E';
+    public const char Goblin = 'G';
 }

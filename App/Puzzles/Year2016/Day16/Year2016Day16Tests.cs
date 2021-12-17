@@ -1,45 +1,44 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2016.Day16
+namespace App.Puzzles.Year2016.Day16;
+
+public class Year2016Day16Tests
 {
-    public class Year2016Day16Tests
+    [TestCase("1", "100")]
+    [TestCase("0", "001")]
+    [TestCase("11111", "11111000000")]
+    [TestCase("111100001010", "1111000010100101011110000")]
+    public void DataIsCorrect(string input, string expected)
     {
-        [TestCase("1", "100")]
-        [TestCase("0", "001")]
-        [TestCase("11111", "11111000000")]
-        [TestCase("111100001010", "1111000010100101011110000")]
-        public void DataIsCorrect(string input, string expected)
-        {
-            var dragonCurve = new DragonCurve();
-            var data = dragonCurve.ApplyAlgorithm(input);
+        var dragonCurve = new DragonCurve();
+        var data = dragonCurve.ApplyAlgorithm(input);
 
-            Assert.That(data, Is.EqualTo(expected));
-        }
+        Assert.That(data, Is.EqualTo(expected));
+    }
 
-        [Test]
-        public void DataAndLengthIsCorrect()
-        {
-            const string input = "111100001010";
-            const string expected = "11110000101001010111";
-            const int expectedLength = 20;
+    [Test]
+    public void DataAndLengthIsCorrect()
+    {
+        const string input = "111100001010";
+        const string expected = "11110000101001010111";
+        const int expectedLength = 20;
 
-            var dragonCurve = new DragonCurve();
-            var data = dragonCurve.FillDisk(input, expectedLength);
+        var dragonCurve = new DragonCurve();
+        var data = dragonCurve.FillDisk(input, expectedLength);
 
-            Assert.That(data, Is.EqualTo(expected));
-            Assert.That(data.Length, Is.EqualTo(expectedLength));
-        }
+        Assert.That(data, Is.EqualTo(expected));
+        Assert.That(data.Length, Is.EqualTo(expectedLength));
+    }
 
-        [Test]
-        public void ChecksumIsCorrect()
-        {
-            const string input = "110010110100";
-            const string expected = "100";
+    [Test]
+    public void ChecksumIsCorrect()
+    {
+        const string input = "110010110100";
+        const string expected = "100";
 
-            var dragonCurve = new DragonCurve();
-            var checksum = dragonCurve.Checksum(input);
+        var dragonCurve = new DragonCurve();
+        var checksum = dragonCurve.Checksum(input);
 
-            Assert.That(checksum, Is.EqualTo(expected));
-        }
+        Assert.That(checksum, Is.EqualTo(expected));
     }
 }

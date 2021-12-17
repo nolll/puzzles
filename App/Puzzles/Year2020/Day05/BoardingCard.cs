@@ -1,77 +1,76 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2020.Day05
+namespace App.Puzzles.Year2020.Day05;
+
+public class BoardingCard
 {
-    public class BoardingCard
+    public int Row { get; }
+    public int Column { get; }
+    public int Id { get; }
+
+    public BoardingCard(int row, int col)
     {
-        public int Row { get; }
-        public int Column { get; }
-        public int Id { get; }
+        Row = row;
+        Column = col;
+        Id = row * 8 + col;
+    }
 
-        public BoardingCard(int row, int col)
+    public static BoardingCard Parse(string s)
+    {
+        var rowInstructions = s.Substring(0, 7);
+        var colInstructions = s.Substring(7);
+
+        var row = FindRow(rowInstructions);
+        var col = FindCol(colInstructions);
+        return new BoardingCard(row, col);
+    }
+
+    private static int FindRow(string instructions)
+    {
+        var rows = CreateList(128);
+        foreach (var c in instructions)
         {
-            Row = row;
-            Column = col;
-            Id = row * 8 + col;
-        }
-
-        public static BoardingCard Parse(string s)
-        {
-            var rowInstructions = s.Substring(0, 7);
-            var colInstructions = s.Substring(7);
-
-            var row = FindRow(rowInstructions);
-            var col = FindCol(colInstructions);
-            return new BoardingCard(row, col);
-        }
-
-        private static int FindRow(string instructions)
-        {
-            var rows = CreateList(128);
-            foreach (var c in instructions)
+            var length = rows.Count;
+            if (c == 'F')
             {
-                var length = rows.Count;
-                if (c == 'F')
-                {
-                    rows.RemoveRange(length / 2, length / 2);
-                }
-                else
-                {
-                    rows.RemoveRange(0, length / 2);
-                }
+                rows.RemoveRange(length / 2, length / 2);
             }
-
-            return rows[0];
-        }
-
-        private static int FindCol(string instructions)
-        {
-            var cols = CreateList(8);
-            foreach (var c in instructions)
+            else
             {
-                var length = cols.Count;
-                if (c == 'L')
-                {
-                    cols.RemoveRange(length / 2, length / 2);
-                }
-                else
-                {
-                    cols.RemoveRange(0, length / 2);
-                }
+                rows.RemoveRange(0, length / 2);
             }
-
-            return cols[0];
         }
 
-        private static List<int> CreateList(int length)
+        return rows[0];
+    }
+
+    private static int FindCol(string instructions)
+    {
+        var cols = CreateList(8);
+        foreach (var c in instructions)
         {
-            var list = new List<int>();
-            for (var i = 0; i < length; i++)
+            var length = cols.Count;
+            if (c == 'L')
             {
-                list.Add(i);
+                cols.RemoveRange(length / 2, length / 2);
             }
-
-            return list;
+            else
+            {
+                cols.RemoveRange(0, length / 2);
+            }
         }
+
+        return cols[0];
+    }
+
+    private static List<int> CreateList(int length)
+    {
+        var list = new List<int>();
+        for (var i = 0; i < length; i++)
+        {
+            list.Add(i);
+        }
+
+        return list;
     }
 }

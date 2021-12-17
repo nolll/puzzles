@@ -1,46 +1,45 @@
 using System.Linq;
 using System.Text.Json;
 
-namespace App.Puzzles.Year2015.Day12
+namespace App.Puzzles.Year2015.Day12;
+
+public class JsonDoc
 {
-    public class JsonDoc
+    private readonly bool _includeRed;
+    public int Sum { get; }
+
+    public JsonDoc(string input, bool includeRed)
     {
-        private readonly bool _includeRed;
-        public int Sum { get; }
+        _includeRed = includeRed;
+        var json = JsonDocument.Parse(input);
 
-        public JsonDoc(string input, bool includeRed)
+        Sum = GetRecursiveSum(json.RootElement);
+    }
+
+    private int GetRecursiveSum(JsonElement jsonElement)
+    {
+        var type = jsonElement.ValueKind;
+
+        if (type == JsonValueKind.String)
+            return 0;
+
+        if (type == JsonValueKind.Number)
         {
-            _includeRed = includeRed;
-            var json = JsonDocument.Parse(input);
-
-            Sum = GetRecursiveSum(json.RootElement);
-        }
-
-        private int GetRecursiveSum(JsonElement jsonElement)
-        {
-            var type = jsonElement.ValueKind;
-
-            if (type == JsonValueKind.String)
-                return 0;
-
-            if (type == JsonValueKind.Number)
-            {
-                if (jsonElement.TryGetInt32(out var num))
-                    return num;
-                return 0;
-            }
-
-            if (type == JsonValueKind.Array)
-                return jsonElement.EnumerateArray().Sum(GetRecursiveSum);
-
-            if (type == JsonValueKind.Object)
-            {
-                if (!_includeRed && jsonElement.EnumerateObject().Any(o => o.Value.ValueKind== JsonValueKind.String && o.Value.ToString() == "red"))
-                    return 0;
-                return jsonElement.EnumerateObject().Sum(o => GetRecursiveSum(o.Value));
-            }
-
+            if (jsonElement.TryGetInt32(out var num))
+                return num;
             return 0;
         }
+
+        if (type == JsonValueKind.Array)
+            return jsonElement.EnumerateArray().Sum(GetRecursiveSum);
+
+        if (type == JsonValueKind.Object)
+        {
+            if (!_includeRed && jsonElement.EnumerateObject().Any(o => o.Value.ValueKind== JsonValueKind.String && o.Value.ToString() == "red"))
+                return 0;
+            return jsonElement.EnumerateObject().Sum(o => GetRecursiveSum(o.Value));
+        }
+
+        return 0;
     }
 }

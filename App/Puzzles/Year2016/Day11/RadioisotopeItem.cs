@@ -1,25 +1,24 @@
 using System.Linq;
 
-namespace App.Puzzles.Year2016.Day11
+namespace App.Puzzles.Year2016.Day11;
+
+public abstract class RadioisotopeItem
 {
-    public abstract class RadioisotopeItem
+    public string Name { get; }
+    public abstract RadioisotopeType Type { get; }
+
+    protected RadioisotopeItem(string name)
     {
-        public string Name { get; }
-        public abstract RadioisotopeType Type { get; }
+        Name = name;
+    }
 
-        protected RadioisotopeItem(string name)
+    public string Id
+    {
+        get
         {
-            Name = name;
-        }
-
-        public string Id
-        {
-            get
-            {
-                var n = Name.ToUpper().First();
-                var t = Type.ToString().ToUpper().First();
-                return string.Concat(n, t);
-            }
+            var n = Name.ToUpper().First();
+            var t = Type.ToString().ToUpper().First();
+            return string.Concat(n, t);
         }
     }
 }

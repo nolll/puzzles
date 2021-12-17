@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2017.Day25
+namespace App.Puzzles.Year2017.Day25;
+
+public class Year2017Day25Tests
 {
-    public class Year2017Day25Tests
+    [Test]
+    public void ChecksumIsCorrect()
     {
-        [Test]
-        public void ChecksumIsCorrect()
-        {
-            const string input = @"
+        const string input = @"
 Begin in state A.
 Perform a diagnostic checksum after 6 steps.
 
@@ -31,10 +31,9 @@ In state B:
     - Move one slot to the right.
     - Continue with state A.";
 
-            var turingMachine = new TuringMachine(input);
-            var checksum = turingMachine.Run();
+        var turingMachine = new TuringMachine(input);
+        var checksum = turingMachine.Run();
 
-            Assert.That(checksum, Is.EqualTo(3));
-        }
+        Assert.That(checksum, Is.EqualTo(3));
     }
 }

@@ -1,18 +1,17 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2018.Day08
+namespace App.Puzzles.Year2018.Day08;
+
+public class Year2018Day08Tests
 {
-    public class Year2018Day08Tests
+    [Test]
+    public void MetaDataEntrySum()
     {
-        [Test]
-        public void MetaDataEntrySum()
-        {
-            const string input = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2";
+        const string input = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2";
 
-            var calculator = new LicenseNumberCalculator(input);
+        var calculator = new LicenseNumberCalculator(input);
 
-            Assert.That(calculator.MetadataSum, Is.EqualTo(138));
-            Assert.That(calculator.RootNodeValue, Is.EqualTo(66));
-        }
+        Assert.That(calculator.MetadataSum, Is.EqualTo(138));
+        Assert.That(calculator.RootNodeValue, Is.EqualTo(66));
     }
 }

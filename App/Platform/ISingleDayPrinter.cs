@@ -1,7 +1,6 @@
-﻿namespace App.Platform
+﻿namespace App.Platform;
+
+public interface ISingleDayPrinter
 {
-    public interface ISingleDayPrinter
-    {
-        void PrintDay(DayResult dayResult);
-    }
+    void PrintDay(DayResult dayResult);
 }

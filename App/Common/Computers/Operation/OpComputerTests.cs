@@ -1,25 +1,25 @@
 using NUnit.Framework;
 
-namespace App.Common.Computers.Operation
+namespace App.Common.Computers.Operation;
+
+public class OpComputerTests
 {
-    public class OpComputerTests
+    [Test]
+    public void FindThreeMathingOperations()
     {
-        [Test]
-        public void FindThreeMathingOperations()
-        {
-            var before = new long[] { 3, 2, 1, 1 };
-            var after = new long[] { 3, 2, 2, 1 };
+        var before = new long[] { 3, 2, 1, 1 };
+        var after = new long[] { 3, 2, 2, 1 };
 
-            var computer = new OpComputer();
-            var matchingOperations = computer.GetMatchingOperations(before, after, 2, 1, 2);
+        var computer = new OpComputer();
+        var matchingOperations = computer.GetMatchingOperations(before, after, 2, 1, 2);
 
-            Assert.That(matchingOperations.Count, Is.EqualTo(3));
-        }
+        Assert.That(matchingOperations.Count, Is.EqualTo(3));
+    }
 
-        [Test]
-        public void CorrectValueInRegister0AfterProgramHalts()
-        {
-            const string input = @"
+    [Test]
+    public void CorrectValueInRegister0AfterProgramHalts()
+    {
+        const string input = @"
 #ip 0
 seti 5 0 1
 seti 6 0 2
@@ -29,10 +29,9 @@ setr 1 0 0
 seti 8 0 4
 seti 9 0 5";
 
-            var computer = new OpComputer();
-            var value = computer.RunInstructionPointerProgram(input, 0, false, false);
+        var computer = new OpComputer();
+        var value = computer.RunInstructionPointerProgram(input, 0, false, false);
 
-            Assert.That(value, Is.EqualTo(6));
-        }
+        Assert.That(value, Is.EqualTo(6));
     }
 }

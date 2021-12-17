@@ -1,42 +1,41 @@
-namespace App.Puzzles.Year2018.Day04
+namespace App.Puzzles.Year2018.Day04;
+
+public class GuardNight
 {
-    public class GuardNight
+    private int _currentMinute;
+    private GuardState _currentState = GuardState.Awake;
+    public GuardState[] MinuteStates { get; }
+    public int GuardId { get; }
+
+    public GuardNight(int guardId)
     {
-        private int _currentMinute;
-        private GuardState _currentState = GuardState.Awake;
-        public GuardState[] MinuteStates { get; }
-        public int GuardId { get; }
+        GuardId = guardId;
+        MinuteStates = new GuardState[60];
+    }
 
-        public GuardNight(int guardId)
+    public void AddAction(Action action)
+    {
+        var actionMinute = action.Timestamp.Minute;
+        for (; _currentMinute < actionMinute; _currentMinute++)
         {
-            GuardId = guardId;
-            MinuteStates = new GuardState[60];
+            MinuteStates[_currentMinute] = _currentState;
         }
 
-        public void AddAction(Action action)
+        _currentState = action.EventType == ActionType.FallAsleep ? GuardState.Asleep : GuardState.Awake;
+    }
+
+    public int TimeAsleep
+    {
+        get
         {
-            var actionMinute = action.Timestamp.Minute;
-            for (; _currentMinute < actionMinute; _currentMinute++)
+            var asleepCount = 0;
+            for (var i = 0; i < MinuteStates.Length; i++)
             {
-                MinuteStates[_currentMinute] = _currentState;
+                if (MinuteStates[i] == GuardState.Asleep)
+                    asleepCount++;
             }
 
-            _currentState = action.EventType == ActionType.FallAsleep ? GuardState.Asleep : GuardState.Awake;
-        }
-
-        public int TimeAsleep
-        {
-            get
-            {
-                var asleepCount = 0;
-                for (var i = 0; i < MinuteStates.Length; i++)
-                {
-                    if (MinuteStates[i] == GuardState.Asleep)
-                        asleepCount++;
-                }
-
-                return asleepCount;
-            }
+            return asleepCount;
         }
     }
 }

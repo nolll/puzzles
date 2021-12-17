@@ -1,29 +1,28 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2016.Day19
+namespace App.Puzzles.Year2016.Day19;
+
+public class Year2016Day19Tests
 {
-    public class Year2016Day19Tests
+    [Test]
+    public void StealFromNextElf_ThirdElfGetsAllPresents()
     {
-        [Test]
-        public void StealFromNextElf_ThirdElfGetsAllPresents()
-        {
-            const int input = 5;
+        const int input = 5;
 
-            var party = new WhiteElephantParty(input);
-            var winner = party.StealFromNextElf();
+        var party = new WhiteElephantParty(input);
+        var winner = party.StealFromNextElf();
 
-            Assert.That(winner, Is.EqualTo(3));
-        }
+        Assert.That(winner, Is.EqualTo(3));
+    }
 
-        [Test]
-        public void StealFromAcrossTheCircle_SecondElfGetsAllPresents()
-        {
-            const int input = 5;
+    [Test]
+    public void StealFromAcrossTheCircle_SecondElfGetsAllPresents()
+    {
+        const int input = 5;
 
-            var party = new WhiteElephantParty(input);
-            var winner = party.StealFromElfAcrossCircle();
+        var party = new WhiteElephantParty(input);
+        var winner = party.StealFromElfAcrossCircle();
 
-            Assert.That(winner, Is.EqualTo(2));
-        }
+        Assert.That(winner, Is.EqualTo(2));
     }
 }

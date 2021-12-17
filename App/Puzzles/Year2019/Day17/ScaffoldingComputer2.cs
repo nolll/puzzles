@@ -2,64 +2,63 @@
 using System.Linq;
 using App.Common.Computers.IntCode;
 
-namespace App.Puzzles.Year2019.Day17
+namespace App.Puzzles.Year2019.Day17;
+
+public class ScaffoldingComputer2
 {
-    public class ScaffoldingComputer2
+    private readonly ComputerInterface _computer;
+    private long _output;
+
+    private const string MainRoutine = "A,B,A,C,B,C,A,B,A,C";
+    private const string FunctionA = "R,6,L,10,R,8,R,8";
+    private const string FunctionB = "R,12,L,8,L,10";
+    private const string FunctionC = "R,12,L,10,R,6,L,10";
+
+    private readonly IList<int> _inputSequence;
+
+    public ScaffoldingComputer2(string program)
     {
-        private readonly ComputerInterface _computer;
-        private long _output;
+        _computer = new ComputerInterface($"2{program.Substring(1)}", ReadInput, WriteOutput);
+        _inputSequence = BuildInputSequence();
+    }
 
-        private const string MainRoutine = "A,B,A,C,B,C,A,B,A,C";
-        private const string FunctionA = "R,6,L,10,R,8,R,8";
-        private const string FunctionB = "R,12,L,8,L,10";
-        private const string FunctionC = "R,12,L,10,R,6,L,10";
+    private IList<int> BuildInputSequence()
+    {
+        var inputSequence = new List<int>();
+        inputSequence.AddRange(MainRoutine.ToCharArray().Select(o => (int)o));
+        inputSequence.Add(10);
+        inputSequence.AddRange(FunctionA.ToCharArray().Select(o => (int)o));
+        inputSequence.Add(10);
+        inputSequence.AddRange(FunctionB.ToCharArray().Select(o => (int)o));
+        inputSequence.Add(10);
+        inputSequence.AddRange(FunctionC.ToCharArray().Select(o => (int)o));
+        inputSequence.Add(10);
+        inputSequence.Add('n');
+        inputSequence.Add(10);
 
-        private readonly IList<int> _inputSequence;
+        return inputSequence;
+    }
 
-        public ScaffoldingComputer2(string program)
+    public long Run()
+    {
+        _computer.Start();
+        return _output;
+    }
+
+    private long ReadInput()
+    {
+        if (_inputSequence.Any())
         {
-            _computer = new ComputerInterface($"2{program.Substring(1)}", ReadInput, WriteOutput);
-            _inputSequence = BuildInputSequence();
+            var val = _inputSequence.First();
+            _inputSequence.RemoveAt(0);
+            return val;
         }
 
-        private IList<int> BuildInputSequence()
-        {
-            var inputSequence = new List<int>();
-            inputSequence.AddRange(MainRoutine.ToCharArray().Select(o => (int)o));
-            inputSequence.Add(10);
-            inputSequence.AddRange(FunctionA.ToCharArray().Select(o => (int)o));
-            inputSequence.Add(10);
-            inputSequence.AddRange(FunctionB.ToCharArray().Select(o => (int)o));
-            inputSequence.Add(10);
-            inputSequence.AddRange(FunctionC.ToCharArray().Select(o => (int)o));
-            inputSequence.Add(10);
-            inputSequence.Add('n');
-            inputSequence.Add(10);
+        return 0;
+    }
 
-            return inputSequence;
-        }
-
-        public long Run()
-        {
-            _computer.Start();
-            return _output;
-        }
-
-        private long ReadInput()
-        {
-            if (_inputSequence.Any())
-            {
-                var val = _inputSequence.First();
-                _inputSequence.RemoveAt(0);
-                return val;
-            }
-
-            return 0;
-        }
-
-        private void WriteOutput(long output)
-        {
-            _output = output;
-        }
+    private void WriteOutput(long output)
+    {
+        _output = output;
     }
 }

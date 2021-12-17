@@ -1,21 +1,20 @@
 using App.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2017.Day21
+namespace App.Puzzles.Year2017.Day21;
+
+public class FractalRule
 {
-    public class FractalRule
+    public string Input { get; }
+    public Matrix<char> Output { get; }
+
+    public FractalRule(string input, string output)
     {
-        public string Input { get; }
-        public Matrix<char> Output { get; }
+        Input = input;
+        Output = MatrixBuilder.BuildCharMatrix(output.Replace("/", "\n"));
+    }
 
-        public FractalRule(string input, string output)
-        {
-            Input = input;
-            Output = MatrixBuilder.BuildCharMatrix(output.Replace("/", "\n"));
-        }
-
-        public bool IsMatch(string compare)
-        {
-            return compare == Input;
-        }
+    public bool IsMatch(string compare)
+    {
+        return compare == Input;
     }
 }

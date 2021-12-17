@@ -1,8 +1,7 @@
-namespace App.Common.CoordinateSystems
+namespace App.Common.CoordinateSystems;
+
+public enum MatrixAddMode
 {
-    public enum MatrixAddMode
-    {
-        Prepend,
-        Append
-    }
+    Prepend,
+    Append
 }

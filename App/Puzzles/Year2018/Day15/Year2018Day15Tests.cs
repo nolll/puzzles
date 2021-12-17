@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2018.Day15
+namespace App.Puzzles.Year2018.Day15;
+
+public class Year2018Day15Tests
 {
-    public class Year2018Day15Tests
+    [Test]
+    public void BattleResultsInCorrectOutcome_Case1()
     {
-        [Test]
-        public void BattleResultsInCorrectOutcome_Case1()
-        {
-            const string input = @"
+        const string input = @"
 #######
 #.G...#
 #...EG#
@@ -16,16 +16,16 @@ namespace App.Puzzles.Year2018.Day15
 #.....#
 #######";
 
-            var battle = new ChocolateBattle(input);
-            battle.RunOnce(false);
+        var battle = new ChocolateBattle(input);
+        battle.RunOnce(false);
 
-            Assert.That(battle.Outcome, Is.EqualTo(27730));
-        }
+        Assert.That(battle.Outcome, Is.EqualTo(27730));
+    }
 
-        [Test]
-        public void BattleResultsInCorrectOutcome_Case2()
-        {
-            const string input = @"
+    [Test]
+    public void BattleResultsInCorrectOutcome_Case2()
+    {
+        const string input = @"
 #######
 #G..#E#
 #E#E.E#
@@ -35,16 +35,16 @@ namespace App.Puzzles.Year2018.Day15
 #######
 ";
 
-            var battle = new ChocolateBattle(input);
-            battle.RunOnce(false);
+        var battle = new ChocolateBattle(input);
+        battle.RunOnce(false);
 
-            Assert.That(battle.Outcome, Is.EqualTo(36334));
-        }
+        Assert.That(battle.Outcome, Is.EqualTo(36334));
+    }
 
-        [Test]
-        public void BattleResultsInCorrectOutcome_Case3()
-        {
-            const string input = @"
+    [Test]
+    public void BattleResultsInCorrectOutcome_Case3()
+    {
+        const string input = @"
 #######
 #E..EG#
 #.#G.E#
@@ -54,16 +54,16 @@ namespace App.Puzzles.Year2018.Day15
 #######
 ";
 
-            var battle = new ChocolateBattle(input);
-            battle.RunOnce(false);
+        var battle = new ChocolateBattle(input);
+        battle.RunOnce(false);
 
-            Assert.That(battle.Outcome, Is.EqualTo(39514));
-        }
+        Assert.That(battle.Outcome, Is.EqualTo(39514));
+    }
 
-        [Test]
-        public void BattleResultsInCorrectOutcome_Case4()
-        {
-            const string input = @"
+    [Test]
+    public void BattleResultsInCorrectOutcome_Case4()
+    {
+        const string input = @"
 #######
 #E.G#.#
 #.#G..#
@@ -73,17 +73,17 @@ namespace App.Puzzles.Year2018.Day15
 #######
 ";
 
-            var battle = new ChocolateBattle(input);
-            battle.RunOnce(false);
+        var battle = new ChocolateBattle(input);
+        battle.RunOnce(false);
 
-            Assert.That(battle.Outcome, Is.EqualTo(27755));
-        }
+        Assert.That(battle.Outcome, Is.EqualTo(27755));
+    }
 
 
-        [Test]
-        public void BattleResultsInCorrectOutcome_Case5()
-        {
-            const string input = @"
+    [Test]
+    public void BattleResultsInCorrectOutcome_Case5()
+    {
+        const string input = @"
 #######
 #.E...#
 #.#..G#
@@ -93,17 +93,17 @@ namespace App.Puzzles.Year2018.Day15
 #######
 ";
 
-            var battle = new ChocolateBattle(input);
-            battle.RunOnce(false);
+        var battle = new ChocolateBattle(input);
+        battle.RunOnce(false);
 
-            Assert.That(battle.Outcome, Is.EqualTo(28944));
-        }
+        Assert.That(battle.Outcome, Is.EqualTo(28944));
+    }
 
 
-        [Test]
-        public void BattleResultsInCorrectOutcome_Case6()
-        {
-            const string input = @"
+    [Test]
+    public void BattleResultsInCorrectOutcome_Case6()
+    {
+        const string input = @"
 #########
 #G......#
 #.E.#...#
@@ -115,16 +115,16 @@ namespace App.Puzzles.Year2018.Day15
 #########
 ";
 
-            var battle = new ChocolateBattle(input);
-            battle.RunOnce(false);
+        var battle = new ChocolateBattle(input);
+        battle.RunOnce(false);
 
-            Assert.That(battle.Outcome, Is.EqualTo(18740));
-        }
+        Assert.That(battle.Outcome, Is.EqualTo(18740));
+    }
 
-        [Test]
-        public void BattleResultsForElvesWinningWithoutLosses_Case1()
-        {
-            const string input = @"
+    [Test]
+    public void BattleResultsForElvesWinningWithoutLosses_Case1()
+    {
+        const string input = @"
 #######
 #.G...#
 #...EG#
@@ -134,16 +134,16 @@ namespace App.Puzzles.Year2018.Day15
 #######
 ";
 
-            var battle = new ChocolateBattle(input);
-            battle.RunUntilElvesWins(false);
+        var battle = new ChocolateBattle(input);
+        battle.RunUntilElvesWins(false);
 
-            Assert.That(battle.Outcome, Is.EqualTo(4988));
-        }
+        Assert.That(battle.Outcome, Is.EqualTo(4988));
+    }
 
-        [Test]
-        public void BattleResultsForElvesWinningWithoutLosses_Case2()
-        {
-            const string input = @"
+    [Test]
+    public void BattleResultsForElvesWinningWithoutLosses_Case2()
+    {
+        const string input = @"
 #######
 #E..EG#
 #.#G.E#
@@ -153,16 +153,16 @@ namespace App.Puzzles.Year2018.Day15
 #######
 ";
 
-            var battle = new ChocolateBattle(input);
-            battle.RunUntilElvesWins(false);
+        var battle = new ChocolateBattle(input);
+        battle.RunUntilElvesWins(false);
 
-            Assert.That(battle.Outcome, Is.EqualTo(31284));
-        }
+        Assert.That(battle.Outcome, Is.EqualTo(31284));
+    }
 
-        [Test]
-        public void BattleResultsForElvesWinningWithoutLosses_Case3()
-        {
-            const string input = @"
+    [Test]
+    public void BattleResultsForElvesWinningWithoutLosses_Case3()
+    {
+        const string input = @"
 #######
 #E.G#.#
 #.#G..#
@@ -172,16 +172,16 @@ namespace App.Puzzles.Year2018.Day15
 #######
 ";
 
-            var battle = new ChocolateBattle(input);
-            battle.RunUntilElvesWins(false);
+        var battle = new ChocolateBattle(input);
+        battle.RunUntilElvesWins(false);
 
-            Assert.That(battle.Outcome, Is.EqualTo(3478));
-        }
+        Assert.That(battle.Outcome, Is.EqualTo(3478));
+    }
 
-        [Test]
-        public void BattleResultsForElvesWinningWithoutLosses_Case4()
-        {
-            const string input = @"
+    [Test]
+    public void BattleResultsForElvesWinningWithoutLosses_Case4()
+    {
+        const string input = @"
 #######
 #.E...#
 #.#..G#
@@ -191,16 +191,16 @@ namespace App.Puzzles.Year2018.Day15
 #######
 ";
 
-            var battle = new ChocolateBattle(input);
-            battle.RunUntilElvesWins(false);
+        var battle = new ChocolateBattle(input);
+        battle.RunUntilElvesWins(false);
 
-            Assert.That(battle.Outcome, Is.EqualTo(6474));
-        }
+        Assert.That(battle.Outcome, Is.EqualTo(6474));
+    }
 
-        [Test]
-        public void BattleResultsForElvesWinningWithoutLosses_Case5()
-        {
-            const string input = @"
+    [Test]
+    public void BattleResultsForElvesWinningWithoutLosses_Case5()
+    {
+        const string input = @"
 #########
 #G......#
 #.E.#...#
@@ -212,10 +212,9 @@ namespace App.Puzzles.Year2018.Day15
 #########
 ";
 
-            var battle = new ChocolateBattle(input);
-            battle.RunUntilElvesWins(false);
+        var battle = new ChocolateBattle(input);
+        battle.RunUntilElvesWins(false);
 
-            Assert.That(battle.Outcome, Is.EqualTo(1140));
-        }
+        Assert.That(battle.Outcome, Is.EqualTo(1140));
     }
 }

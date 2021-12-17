@@ -1,16 +1,15 @@
 using App.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2019.Day20
-{
-    public class DonutPortalAddress
-    {
-        public string Name { get; }
-        public MatrixAddress Address { get; }
+namespace App.Puzzles.Year2019.Day20;
 
-        public DonutPortalAddress(string name, MatrixAddress address)
-        {
-            Name = name;
-            Address = address;
-        }
+public class DonutPortalAddress
+{
+    public string Name { get; }
+    public MatrixAddress Address { get; }
+
+    public DonutPortalAddress(string name, MatrixAddress address)
+    {
+        Name = name;
+        Address = address;
     }
 }

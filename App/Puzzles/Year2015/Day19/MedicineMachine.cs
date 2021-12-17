@@ -3,61 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2015.Day19
+namespace App.Puzzles.Year2015.Day19;
+
+public class MedicineMachine
 {
-    public class MedicineMachine
+    private readonly IEnumerable<MoleculeReplacement> _replacements;
+
+    public MedicineMachine(string input)
     {
-        private readonly IEnumerable<MoleculeReplacement> _replacements;
+        _replacements = PuzzleInputReader.ReadLines(input).Select(ParseReplacement).OrderByDescending(o => o.Right.Length).ThenBy(o => o.Right);
+    }
 
-        public MedicineMachine(string input)
+    public IList<string> GetCalibrationMolecules(string startMolecule)
+    {
+        var molecules = new List<string>();
+        foreach (var replacement in _replacements)
         {
-            _replacements = PuzzleInputReader.ReadLines(input).Select(ParseReplacement).OrderByDescending(o => o.Right.Length).ThenBy(o => o.Right);
+            molecules.AddRange(replacement.Expand(startMolecule));
         }
+        return molecules.Distinct().ToList();
+    }
 
-        public IList<string> GetCalibrationMolecules(string startMolecule)
+    public int StepsToMake(string molecule)
+    {
+        var steps = 0;
+        while (molecule != "e")
         {
-            var molecules = new List<string>();
             foreach (var replacement in _replacements)
             {
-                molecules.AddRange(replacement.Expand(startMolecule));
-            }
-            return molecules.Distinct().ToList();
-        }
-
-        public int StepsToMake(string molecule)
-        {
-            var steps = 0;
-            while (molecule != "e")
-            {
-                foreach (var replacement in _replacements)
+                var pos = molecule.IndexOf(replacement.Right, StringComparison.InvariantCulture);
+                if (pos >= 0)
                 {
-                    var pos = molecule.IndexOf(replacement.Right, StringComparison.InvariantCulture);
-                    if (pos >= 0)
-                    {
-                        molecule = ReplaceFirst(molecule, replacement.Right, replacement.Left);
-                        steps++;
-                        break;
-                    }
+                    molecule = ReplaceFirst(molecule, replacement.Right, replacement.Left);
+                    steps++;
+                    break;
                 }
             }
-
-            return steps;
         }
 
-        private string ReplaceFirst(string text, string search, string replace)
-        {
-            var pos = text.IndexOf(search, StringComparison.InvariantCulture);
-            if (pos < 0)
-                return text;
-            return string.Concat(text.Substring(0, pos), replace, text.Substring(pos + search.Length));
-        }
+        return steps;
+    }
 
-        private MoleculeReplacement ParseReplacement(string s)
-        {
-            var parts = s.Split(" => ");
-            var input = parts[0];
-            var output = parts[1];
-            return new MoleculeReplacement(input, output);
-        }
+    private string ReplaceFirst(string text, string search, string replace)
+    {
+        var pos = text.IndexOf(search, StringComparison.InvariantCulture);
+        if (pos < 0)
+            return text;
+        return string.Concat(text.Substring(0, pos), replace, text.Substring(pos + search.Length));
+    }
+
+    private MoleculeReplacement ParseReplacement(string s)
+    {
+        var parts = s.Split(" => ");
+        var input = parts[0];
+        var output = parts[1];
+        return new MoleculeReplacement(input, output);
     }
 }

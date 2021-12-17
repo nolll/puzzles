@@ -1,9 +1,8 @@
-namespace App.Puzzles.Year2018.Day13
+namespace App.Puzzles.Year2018.Day13;
+
+public enum MineCartTurn
 {
-    public enum MineCartTurn
-    {
-        Left,
-        Right,
-        Straight
-    }
+    Left,
+    Right,
+    Straight
 }

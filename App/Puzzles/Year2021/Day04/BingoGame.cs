@@ -3,163 +3,162 @@ using System.Linq;
 using App.Common.CoordinateSystems;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2021.Day04
+namespace App.Puzzles.Year2021.Day04;
+
+public class BingoGame
 {
-    public class BingoGame
+    private readonly IList<int> _numbers;
+    private readonly IDictionary<int, BingoBoard> _boards;
+
+    public BingoGame(string input)
     {
-        private readonly IList<int> _numbers;
-        private readonly IDictionary<int, BingoBoard> _boards;
+        var groups = PuzzleInputReader.ReadStringGroups(input);
+        _numbers = groups.First().Split(',').Select(int.Parse).ToList();
+        _boards = ParseBoards(groups.Skip(1));
+    }
 
-        public BingoGame(string input)
+    public int Play(bool findLastWinner)
+    {
+        foreach (var number in _numbers)
         {
-            var groups = PuzzleInputReader.ReadStringGroups(input);
-            _numbers = groups.First().Split(',').Select(int.Parse).ToList();
-            _boards = ParseBoards(groups.Skip(1));
-        }
-
-        public int Play(bool findLastWinner)
-        {
-            foreach (var number in _numbers)
+            MarkNumber(number);
+            var boardsWithBingo = _boards.Values.Where(o => o.HasBingo).ToList();
+            if (boardsWithBingo.Any())
             {
-                MarkNumber(number);
-                var boardsWithBingo = _boards.Values.Where(o => o.HasBingo).ToList();
-                    if (boardsWithBingo.Any())
-                {
-                    var currentBoard = boardsWithBingo.First();
+                var currentBoard = boardsWithBingo.First();
                     
-                    if (!findLastWinner)
-                        return CalculateScore(currentBoard, number);
+                if (!findLastWinner)
+                    return CalculateScore(currentBoard, number);
 
-                    foreach (var board in boardsWithBingo)
-                    {
-                        _boards.Remove(board.Id);
-                    }
-
-                    if (!_boards.Any())
-                        return CalculateScore(currentBoard, number);
+                foreach (var board in boardsWithBingo)
+                {
+                    _boards.Remove(board.Id);
                 }
+
+                if (!_boards.Any())
+                    return CalculateScore(currentBoard, number);
             }
-
-            return 0;
         }
 
-        private int CalculateScore(BingoBoard board, in int number)
-        {
-            return board.Score * number;
-        }
+        return 0;
+    }
+
+    private int CalculateScore(BingoBoard board, in int number)
+    {
+        return board.Score * number;
+    }
         
-        private void MarkNumber(in int number)
+    private void MarkNumber(in int number)
+    {
+        foreach (var board in _boards.Values)
         {
-            foreach (var board in _boards.Values)
-            {
-                board.MarkNumber(number);
-            }
-        }
-
-        private Dictionary<int, BingoBoard> ParseBoards(IEnumerable<string> inputs)
-        {
-            var d = new Dictionary<int, BingoBoard>();
-            var i = 0;
-            foreach (var input in inputs)
-            {
-                d.Add(i, new BingoBoard(i, MatrixBuilder.BuildIntMatrixFromSpaceSeparated(input), new Matrix<bool>(5, 5)));
-                i++;
-            }
-
-            return d;
+            board.MarkNumber(number);
         }
     }
 
-    public class BingoBoard
+    private Dictionary<int, BingoBoard> ParseBoards(IEnumerable<string> inputs)
     {
-        public int Id { get; }
-        private readonly Matrix<int> _numbers;
-        private readonly Matrix<bool> _marks;
-        private IList<MatrixAddress> _coords;
-
-        public BingoBoard(int id, Matrix<int> numbers, Matrix<bool> marks)
+        var d = new Dictionary<int, BingoBoard>();
+        var i = 0;
+        foreach (var input in inputs)
         {
-            Id = id;
-            _numbers = numbers;
-            _marks = marks;
-            _coords = _numbers.Coords;
+            d.Add(i, new BingoBoard(i, MatrixBuilder.BuildIntMatrixFromSpaceSeparated(input), new Matrix<bool>(5, 5)));
+            i++;
         }
 
-        public void MarkNumber(in int number)
+        return d;
+    }
+}
+
+public class BingoBoard
+{
+    public int Id { get; }
+    private readonly Matrix<int> _numbers;
+    private readonly Matrix<bool> _marks;
+    private IList<MatrixAddress> _coords;
+
+    public BingoBoard(int id, Matrix<int> numbers, Matrix<bool> marks)
+    {
+        Id = id;
+        _numbers = numbers;
+        _marks = marks;
+        _coords = _numbers.Coords;
+    }
+
+    public void MarkNumber(in int number)
+    {
+        foreach (var coord in _coords)
         {
-            foreach (var coord in _coords)
+            if (_numbers.ReadValueAt(coord) == number)
             {
-                if (_numbers.ReadValueAt(coord) == number)
-                {
-                    _marks.MoveTo(coord);
-                    _marks.WriteValue(true);
-                }
+                _marks.MoveTo(coord);
+                _marks.WriteValue(true);
             }
         }
+    }
 
-        public bool HasBingo => HasHorizontalBingo || HasVerticalBingo;
+    public bool HasBingo => HasHorizontalBingo || HasVerticalBingo;
 
-        private bool HasHorizontalBingo
+    private bool HasHorizontalBingo
+    {
+        get
         {
-            get
+            for (var x = 0; x < _marks.Width; x++)
             {
-                for (var x = 0; x < _marks.Width; x++)
-                {
-                    var hasBingo = true;
-                    for (var y = 0; y < _marks.Height; y++)
-                    {
-                        if (!_marks.ReadValueAt(x, y))
-                        {
-                            hasBingo = false;
-                            break;
-                        }
-                    }
-
-                    if (hasBingo)
-                        return true;
-                }
-
-                return false;
-            }
-        }
-
-        private bool HasVerticalBingo
-        {
-            get
-            {
+                var hasBingo = true;
                 for (var y = 0; y < _marks.Height; y++)
                 {
-                    var hasBingo = true;
-                    for (var x = 0; x < _marks.Width; x++)
+                    if (!_marks.ReadValueAt(x, y))
                     {
-                        if (!_marks.ReadValueAt(x, y))
-                        {
-                            hasBingo = false;
-                            break;
-                        }
+                        hasBingo = false;
+                        break;
                     }
-
-                    if (hasBingo)
-                        return true;
                 }
 
-                return false;
+                if (hasBingo)
+                    return true;
             }
+
+            return false;
         }
+    }
 
-        public int Score
+    private bool HasVerticalBingo
+    {
+        get
         {
-            get
+            for (var y = 0; y < _marks.Height; y++)
             {
-                var score = 0;
-                foreach (var coord in _coords)
+                var hasBingo = true;
+                for (var x = 0; x < _marks.Width; x++)
                 {
-                    if (!_marks.ReadValueAt(coord))
-                        score += _numbers.ReadValueAt(coord);
+                    if (!_marks.ReadValueAt(x, y))
+                    {
+                        hasBingo = false;
+                        break;
+                    }
                 }
 
-                return score;
+                if (hasBingo)
+                    return true;
             }
+
+            return false;
+        }
+    }
+
+    public int Score
+    {
+        get
+        {
+            var score = 0;
+            foreach (var coord in _coords)
+            {
+                if (!_marks.ReadValueAt(coord))
+                    score += _numbers.ReadValueAt(coord);
+            }
+
+            return score;
         }
     }
 }

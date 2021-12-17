@@ -1,21 +1,20 @@
 ﻿using App.Platform;
 
-namespace App.Puzzles.Year2015.Day01
+namespace App.Puzzles.Year2015.Day01;
+
+public class Year2015Day01 : Puzzle
 {
-    public class Year2015Day01 : Puzzle
+    public override PuzzleResult RunPart1()
     {
-        public override PuzzleResult RunPart1()
-        {
-            var navigator = new FloorNavigator(FileInput);
+        var navigator = new FloorNavigator(FileInput);
 
-            return new PuzzleResult(navigator.DestinationFloor, 138);
-        }
+        return new PuzzleResult(navigator.DestinationFloor, 138);
+    }
 
-        public override PuzzleResult RunPart2()
-        {
-            var navigator = new FloorNavigator(FileInput);
+    public override PuzzleResult RunPart2()
+    {
+        var navigator = new FloorNavigator(FileInput);
             
-            return new PuzzleResult(navigator.FirstBasementInstruction, 1771);
-        }
+        return new PuzzleResult(navigator.FirstBasementInstruction, 1771);
     }
 }

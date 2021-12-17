@@ -1,9 +1,8 @@
-﻿namespace App.Platform
+﻿namespace App.Platform;
+
+public interface IMultiDayPrinter
 {
-    public interface IMultiDayPrinter
-    {
-        void PrintHeader();
-        void PrintDay(DayResult dayResult);
-        void PrintFooter();
-    }
+    void PrintHeader();
+    void PrintDay(DayResult dayResult);
+    void PrintFooter();
 }

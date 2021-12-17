@@ -1,29 +1,28 @@
 ﻿using System.Collections.Generic;
 
-namespace App.Puzzles.Year2019.Day04
+namespace App.Puzzles.Year2019.Day04;
+
+public class PasswordFinder
 {
-    public class PasswordFinder
+    public IEnumerable<int> FindPart1(int lowerBound, int upperBound)
     {
-        public IEnumerable<int> FindPart1(int lowerBound, int upperBound)
-        {
-            var passwordValidator = new PasswordValidator();
+        var passwordValidator = new PasswordValidator();
 
-            for (var pwd = lowerBound; pwd <= upperBound; pwd++)
-            {
-                if (passwordValidator.IsValidPart1(pwd))
-                    yield return pwd;
-            }
+        for (var pwd = lowerBound; pwd <= upperBound; pwd++)
+        {
+            if (passwordValidator.IsValidPart1(pwd))
+                yield return pwd;
         }
+    }
 
-        public IEnumerable<int> FindPart2(int lowerBound, int upperBound)
+    public IEnumerable<int> FindPart2(int lowerBound, int upperBound)
+    {
+        var passwordValidator = new PasswordValidator();
+
+        for (var pwd = lowerBound; pwd <= upperBound; pwd++)
         {
-            var passwordValidator = new PasswordValidator();
-
-            for (var pwd = lowerBound; pwd <= upperBound; pwd++)
-            {
-                if (passwordValidator.IsValidPart2(pwd))
-                    yield return pwd;
-            }
+            if (passwordValidator.IsValidPart2(pwd))
+                yield return pwd;
         }
     }
 }

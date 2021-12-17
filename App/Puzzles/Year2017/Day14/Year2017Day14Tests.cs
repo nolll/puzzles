@@ -1,27 +1,26 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2017.Day14
+namespace App.Puzzles.Year2017.Day14;
+
+public class Year2017Day14Tests
 {
-    public class Year2017Day14Tests
+    [Test]
+    public void UsedSquaresAreCorrect()
     {
-        [Test]
-        public void UsedSquaresAreCorrect()
-        {
-            const string input = "flqrgnkx";
+        const string input = "flqrgnkx";
 
-            var defragmenter = new DiskDefragmenter(input);
+        var defragmenter = new DiskDefragmenter(input);
 
-            Assert.That(defragmenter.UsedCount, Is.EqualTo(8108));
-        }
+        Assert.That(defragmenter.UsedCount, Is.EqualTo(8108));
+    }
 
-        [Test]
-        public void FindsRegions()
-        {
-            const string input = "flqrgnkx";
+    [Test]
+    public void FindsRegions()
+    {
+        const string input = "flqrgnkx";
 
-            var defragmenter = new DiskDefragmenter(input);
+        var defragmenter = new DiskDefragmenter(input);
 
-            Assert.That(defragmenter.RegionCount, Is.EqualTo(1242));
-        }
+        Assert.That(defragmenter.RegionCount, Is.EqualTo(1242));
     }
 }

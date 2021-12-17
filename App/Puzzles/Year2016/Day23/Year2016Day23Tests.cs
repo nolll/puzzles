@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2016.Day23
+namespace App.Puzzles.Year2016.Day23;
+
+public class Year2016Day23Tests
 {
-    public class Year2016Day23Tests
+    [Test]
+    public void RegisterAIsCorrect()
     {
-        [Test]
-        public void RegisterAIsCorrect()
-        {
-            const string input = @"
+        const string input = @"
 cpy 41 a
 inc a
 inc a
@@ -15,15 +15,15 @@ dec a
 jnz a 2
 dec a";
 
-            var control = new SafeCrackingComputerPart1(input, 0, 0);
+        var control = new SafeCrackingComputerPart1(input, 0, 0);
 
-            Assert.That(control.ValueA, Is.EqualTo(42));
-        }
+        Assert.That(control.ValueA, Is.EqualTo(42));
+    }
 
-        [Test]
-        public void RegisterAIsCorrectWithToggleInstruction()
-        {
-            const string input = @"
+    [Test]
+    public void RegisterAIsCorrectWithToggleInstruction()
+    {
+        const string input = @"
 cpy 2 a
 tgl a
 tgl a
@@ -32,9 +32,8 @@ cpy 1 a
 dec a
 dec a";
 
-            var control = new SafeCrackingComputerPart1(input, 0, 0);
+        var control = new SafeCrackingComputerPart1(input, 0, 0);
 
-            Assert.That(control.ValueA, Is.EqualTo(3));
-        }
+        Assert.That(control.ValueA, Is.EqualTo(3));
     }
 }

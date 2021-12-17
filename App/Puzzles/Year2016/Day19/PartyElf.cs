@@ -1,12 +1,11 @@
-﻿namespace App.Puzzles.Year2016.Day19
-{
-    public class PartyElf
-    {
-        public int Id { get; }
+﻿namespace App.Puzzles.Year2016.Day19;
 
-        public PartyElf(int id)
-        {
-            Id = id;
-        }
+public class PartyElf
+{
+    public int Id { get; }
+
+    public PartyElf(int id)
+    {
+        Id = id;
     }
 }

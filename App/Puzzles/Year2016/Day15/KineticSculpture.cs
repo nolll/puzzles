@@ -2,54 +2,53 @@ using System.Collections.Generic;
 using System.Linq;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2016.Day15
+namespace App.Puzzles.Year2016.Day15;
+
+public class KineticSculpture
 {
-    public class KineticSculpture
+    public int TimeToPressButton { get; }
+
+    public KineticSculpture(string input, bool addExtraDisc = false)
     {
-        public int TimeToPressButton { get; }
+        var discs = ParseDiscs(input);
+        if(addExtraDisc)
+            discs.Add(new KineticSculptureDisc(11, 0));
+        var time = 0;
 
-        public KineticSculpture(string input, bool addExtraDisc = false)
+        while (true)
         {
-            var discs = ParseDiscs(input);
-            if(addExtraDisc)
-                discs.Add(new KineticSculptureDisc(11, 0));
-            var time = 0;
-
-            while (true)
+            var passed = true;
+            var discCount = 0;
+            foreach (var disc in discs)
             {
-                var passed = true;
-                var discCount = 0;
-                foreach (var disc in discs)
+                if (!disc.Passed(time + discCount))
                 {
-                    if (!disc.Passed(time + discCount))
-                    {
-                        passed = false;
-                        break;
-                    }
-                    discCount++;
-                }
-
-                if (passed)
+                    passed = false;
                     break;
-
-                time++;
+                }
+                discCount++;
             }
 
-            TimeToPressButton = time - 1;
+            if (passed)
+                break;
+
+            time++;
         }
 
-        private IList<KineticSculptureDisc> ParseDiscs(string input)
-        {
-            var rows = PuzzleInputReader.ReadLines(input);
-            return rows.Select(ParseDisc).ToList();
-        }
+        TimeToPressButton = time - 1;
+    }
 
-        private KineticSculptureDisc ParseDisc(string s)
-        {
-            var parts = s.Replace(".", "").Split(' ');
-            var position = int.Parse(parts[3]);
-            var startPos = int.Parse(parts[11]);
-            return new KineticSculptureDisc(position, startPos);
-        }
+    private IList<KineticSculptureDisc> ParseDiscs(string input)
+    {
+        var rows = PuzzleInputReader.ReadLines(input);
+        return rows.Select(ParseDisc).ToList();
+    }
+
+    private KineticSculptureDisc ParseDisc(string s)
+    {
+        var parts = s.Replace(".", "").Split(' ');
+        var position = int.Parse(parts[3]);
+        var startPos = int.Parse(parts[11]);
+        return new KineticSculptureDisc(position, startPos);
     }
 }

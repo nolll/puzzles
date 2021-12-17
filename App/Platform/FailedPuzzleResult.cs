@@ -1,10 +1,9 @@
-﻿namespace App.Platform
+﻿namespace App.Platform;
+
+public class FailedPuzzleResult : PuzzleResult
 {
-    public class FailedPuzzleResult : PuzzleResult
+    public FailedPuzzleResult(string message)
+        : base(message, PuzzleResultStatus.Failed)
     {
-        public FailedPuzzleResult(string message)
-            : base(message, PuzzleResultStatus.Failed)
-        {
-        }
     }
 }

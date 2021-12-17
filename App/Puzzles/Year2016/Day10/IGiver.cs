@@ -1,7 +1,6 @@
-namespace App.Puzzles.Year2016.Day10
+namespace App.Puzzles.Year2016.Day10;
+
+public interface IGiver
 {
-    public interface IGiver
-    {
-        void Give(int v);
-    }
+    void Give(int v);
 }

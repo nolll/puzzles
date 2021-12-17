@@ -3,49 +3,48 @@ using System.Linq;
 using System.Text;
 using App.Common.Strings;
 
-namespace App.Puzzles.Year2018.Day02
+namespace App.Puzzles.Year2018.Day02;
+
+public class SimilarIdsPuzzle
 {
-    public class SimilarIdsPuzzle
+    public string CommonLetters { get; }
+
+    public SimilarIdsPuzzle(string input)
     {
-        public string CommonLetters { get; }
+        var ids = PuzzleInputReader.ReadLines(input);
+        var similarIds = GetSimilarIds(ids);
+        if (similarIds.Count != 2)
+            throw new WrongNumberOfSimilarIdsException(similarIds);
 
-        public SimilarIdsPuzzle(string input)
+        CommonLetters = GetCommonLetters(similarIds[0], similarIds[1]);
+    }
+
+    public static IList<string> GetSimilarIds(IList<string> ids)
+    {
+        foreach (var id in ids)
         {
-            var ids = PuzzleInputReader.ReadLines(input);
-            var similarIds = GetSimilarIds(ids);
-            if (similarIds.Count != 2)
-                throw new WrongNumberOfSimilarIdsException(similarIds);
-
-            CommonLetters = GetCommonLetters(similarIds[0], similarIds[1]);
+            var similarId = ids.FirstOrDefault(o => LevenshteinDistance.Compute(id, o) == 1);
+            if (similarId != null)
+                return new List<string> { id, similarId };
         }
+        return new List<string>();
+    }
 
-        public static IList<string> GetSimilarIds(IList<string> ids)
+    public static string GetCommonLetters(string str1, string str2)
+    {
+        if (str1.Length != str2.Length)
+            throw new StringsAreDifferentLengthsException(str1, str2);
+
+        var sb = new StringBuilder();
+        for (var i = 0; i < str1.Length; i++)
         {
-            foreach (var id in ids)
+            var c = str1[i];
+            if (c == str2[i])
             {
-                var similarId = ids.FirstOrDefault(o => LevenshteinDistance.Compute(id, o) == 1);
-                if (similarId != null)
-                    return new List<string> { id, similarId };
+                sb.Append(c);
             }
-            return new List<string>();
         }
 
-        public static string GetCommonLetters(string str1, string str2)
-        {
-            if (str1.Length != str2.Length)
-                throw new StringsAreDifferentLengthsException(str1, str2);
-
-            var sb = new StringBuilder();
-            for (var i = 0; i < str1.Length; i++)
-            {
-                var c = str1[i];
-                if (c == str2[i])
-                {
-                    sb.Append(c);
-                }
-            }
-
-            return sb.ToString();
-        }
+        return sb.ToString();
     }
 }

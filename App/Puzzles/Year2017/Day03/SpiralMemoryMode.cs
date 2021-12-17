@@ -1,8 +1,7 @@
-namespace App.Puzzles.Year2017.Day03
+namespace App.Puzzles.Year2017.Day03;
+
+public enum SpiralMemoryMode
 {
-    public enum SpiralMemoryMode
-    {
-        RunToTarget,
-        RunToValue
-    }
+    RunToTarget,
+    RunToValue
 }

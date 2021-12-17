@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace App.Puzzles.Year2021.Day17
 {
@@ -7,17 +8,34 @@ namespace App.Puzzles.Year2021.Day17
         [Test]
         public void Part1()
         {
-            var result = 0;
+            var target = new TrickshotTarget(20, 30, -10, -5);
 
-            Assert.That(result, Is.EqualTo(0));
+            var trickshot = new TrickShot();
+            var result = trickshot.Shoot(target);
+
+            Assert.That(result.MaxHeight, Is.EqualTo(45));
         }
 
         [Test]
-        public void Part2()
+        public void SingleMaxHeight()
         {
-            var result = 0;
+            var target = new TrickshotTarget(20, 30, -10, -5);
 
-            Assert.That(result, Is.EqualTo(0));
+            var trickshot = new TrickShot();
+            var result = trickshot.GetMaxHeight(target, 6, 9);
+
+            Assert.That(result, Is.EqualTo(45));
+        }
+
+        [Test]
+        public void SingleVelocityCount()
+        {
+            var target = new TrickshotTarget(20, 30, -10, -5);
+
+            var trickshot = new TrickShot();
+            var result = trickshot.Shoot(target);
+
+            Assert.That(result.HitCount, Is.EqualTo(112));
         }
 
         private const string Input = @"

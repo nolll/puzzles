@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using App.Common.CoordinateSystems;
@@ -22,19 +23,19 @@ public class BeaconSystem
                 var found = baseScanner.FindMatchingRotation(otherScanner.BeaconCoords);
                 if (found != null)
                 {
-                    foreach (var otherCoord in otherScanner.BeaconCoords)
+                    foreach (var relCoord in found.Value.beaconCoords)
                     {
-                        var xNew = otherCoord.X - found.Value.scannerCoord.X;
-                        var yNew = otherCoord.Y - found.Value.scannerCoord.Y;
-                        var zNew = otherCoord.Z - found.Value.scannerCoord.Z;
+                        var xNew = found.Value.scannerCoord.X - relCoord.X;
+                        var yNew = found.Value.scannerCoord.Y - relCoord.Y;
+                        var zNew = found.Value.scannerCoord.Z - relCoord.Z;
                         var newCoord = new Matrix3DAddress(xNew, yNew, zNew);
                         baseScanner.AddCoord(newCoord);
                     }
-                }
 
-                otherScanners = otherScanners.Where(o => o.Id != otherScanner.Id).ToList();
+                    otherScanners = otherScanners.Where(o => o.Id != otherScanner.Id).ToList();
+                    break;
+                }
             }
-            
         }
 
         return baseScanner.BeaconCoords.Count;
@@ -67,14 +68,14 @@ internal class BeaconScanner
 
     public (Matrix3DAddress scannerCoord, List<Matrix3DAddress> beaconCoords)? FindMatchingRotation(List<Matrix3DAddress> otherCoords)
     {
-        var directions = new List<(int x, int y, int z)>
+        var transforms = new List<Func<Matrix3DAddress, Matrix3DAddress>>
         {
-            (1, 1, 1),
-            (1, 1, -1),
-            (1, -1, -1),
-            (-1, -1, -1),
-            (-1, -1, 1),
-            (-1, 1, 1)
+            coord => new Matrix3DAddress(coord.X, coord.Y, coord.Z),
+            coord => new Matrix3DAddress(coord.Z, coord.X, coord.Y),
+            coord => new Matrix3DAddress(coord.Y, coord.Z, coord.X),
+            coord => new Matrix3DAddress(coord.X, coord.Z, coord.Y),
+            coord => new Matrix3DAddress(coord.Z, coord.Y, coord.X),
+            coord => new Matrix3DAddress(coord.Y, coord.X, coord.Z),
         };
 
         var rotations = new List<(int x, int y)>
@@ -85,16 +86,17 @@ internal class BeaconScanner
             (-1, 1),
         };
 
-        foreach (var direction in directions)
+        foreach (var transform in transforms)
         {
             foreach (var rotation in rotations)
             {
                 var compareCoords = new List<Matrix3DAddress>();
                 foreach (var otherCoord in otherCoords)
                 {
-                    var x = otherCoord.X * direction.x * rotation.x;
-                    var y = otherCoord.Y * direction.y * rotation.y;
-                    var z = otherCoord.Z * direction.z;
+                    var transformedCoord = transform(otherCoord);
+                    var x = transformedCoord.X * rotation.x;
+                    var y = transformedCoord.Y * rotation.y;
+                    var z = transformedCoord.Z;
                     compareCoords.Add(new Matrix3DAddress(x, y, z));
                 }
 
@@ -103,9 +105,13 @@ internal class BeaconScanner
                 {
                     foreach (var compareCoord in compareCoords)
                     {
-                        var xRel = coord.X - compareCoord.X;
-                        var yRel = coord.Y - compareCoord.Y;
-                        var zRel = coord.Z - compareCoord.Z;
+                        var xRel = coord.X + compareCoord.X;
+                        var yRel = coord.Y + compareCoord.Y;
+                        var zRel = coord.Z + compareCoord.Z;
+
+                        //if (Math.Abs(xRel) > 1000 || Math.Abs(yRel) > 1000 || Math.Abs(zRel) > 1000)
+                        //    continue;
+
                         var scannerPosition = new Matrix3DAddress(xRel, yRel, zRel);
                         if (!scannerPositions.ContainsKey(scannerPosition))
                             scannerPositions[scannerPosition] = 0;
@@ -113,20 +119,21 @@ internal class BeaconScanner
                     }
                 }
 
-                if (scannerPositions.Values.Max() >= 12)
+                var maxFound = scannerPositions.Values.Max();
+                if (maxFound >= 12)
                 {
-                    var max = scannerPositions.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
-                    return new(max, compareCoords);
+                    var sPos = scannerPositions.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+                    return new(sPos, compareCoords);
                 }
             }
         }
-        
+
         return null;
     }
 
     public void AddCoord(Matrix3DAddress newCoord)
     {
-        if(!BeaconCoords.Contains(newCoord))
+        if (!BeaconCoords.Contains(newCoord))
             BeaconCoords.Add(newCoord);
     }
 }

@@ -6,11 +6,17 @@ public class Year2021Day18 : Puzzle
 {
     public override PuzzleResult RunPart1()
     {
-        return new PuzzleResult(0);
+        var math = new SnailfishMath();
+        var result = math.Sum(FileInput);
+
+        return new PuzzleResult(result.Magnitude, 4417);
     }
 
     public override PuzzleResult RunPart2()
     {
-        return new PuzzleResult(0);
+        var math = new SnailfishMath();
+        var result = math.LargestMagnitude(FileInput);
+
+        return new PuzzleResult(result, 4796);
     }
 }

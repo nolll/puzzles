@@ -31,13 +31,13 @@ public class BeaconSystem
                         baseScanner.AddCoord(newCoord);
                     }
                 }
+
+                otherScanners = otherScanners.Where(o => o.Id != otherScanner.Id).ToList();
             }
             
         }
 
-        var matrix = new Matrix3D<char>();
-
-        return 0;
+        return baseScanner.BeaconCoords.Count;
     }
 
     private BeaconScanner ParseScanner(IList<string> lines)

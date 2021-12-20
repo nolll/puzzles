@@ -107,7 +107,15 @@ internal class BeaconScanner
             coord => new Matrix3DAddress(coord.Z, coord.Y, coord.X),
             coord => new Matrix3DAddress(coord.Y, coord.X, coord.Z),
         };
-        
+
+        //var rotations = new List<(int x, int y)>
+        //{
+        //    (1, 1),
+        //    (1, -1),
+        //    (-1, -1),
+        //    (-1, 1),
+        //};
+
         var rotations = new List<(int x, int y, int z)>
         {
             (1, 1, 1),
@@ -142,6 +150,9 @@ internal class BeaconScanner
                         var xRel = coord.X + compareCoord.X;
                         var yRel = coord.Y + compareCoord.Y;
                         var zRel = coord.Z + compareCoord.Z;
+
+                        //if (Math.Abs(xRel) > 1000 || Math.Abs(yRel) > 1000 || Math.Abs(zRel) > 1000)
+                        //    continue;
 
                         var scannerPosition = new Matrix3DAddress(xRel, yRel, zRel);
                         if (!scannerPositions.ContainsKey(scannerPosition))

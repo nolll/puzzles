@@ -13,7 +13,7 @@ public class Program
     private const int PuzzleTimeout = 10;
 
     private const int DebugYear = 2021;
-    private const int DebugDay = 17;
+    private const int DebugDay = 20;
 
     static void Main(string[] args)
     {
@@ -87,10 +87,11 @@ public class Program
 
     private static Parameters ParseParameters(string[] args)
     {
+        return new Parameters(day: DebugDay, year: DebugYear);
 #if SINGLE
         return new Parameters(day: DebugDay, year: DebugYear);
 #else
-            return Parameters.Parse(args);
+        return Parameters.Parse(args);
 #endif
     }
 

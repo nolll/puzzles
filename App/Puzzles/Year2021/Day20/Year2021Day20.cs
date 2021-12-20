@@ -8,7 +8,7 @@ public class Year2021Day20 : Puzzle
     public override PuzzleResult RunPart1()
     {
         var trenchMap = new TrenchMap();
-        var result = trenchMap.GetLitPixelCount(FileInput);
+        var result = trenchMap.GetLitPixelCount(FileInput, 2);
 
         return new PuzzleResult(result);
     }

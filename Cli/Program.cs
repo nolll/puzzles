@@ -87,7 +87,6 @@ public class Program
 
     private static Parameters ParseParameters(string[] args)
     {
-        return new Parameters(day: DebugDay, year: DebugYear);
 #if SINGLE
         return new Parameters(day: DebugDay, year: DebugYear);
 #else

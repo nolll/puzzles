@@ -10,11 +10,14 @@ public class Year2021Day20 : Puzzle
         var trenchMap = new TrenchMap();
         var result = trenchMap.GetLitPixelCount(FileInput, 2);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 5765);
     }
 
     public override PuzzleResult RunPart2()
     {
-        return new PuzzleResult(0);
+        var trenchMap = new TrenchMap();
+        var result = trenchMap.GetLitPixelCount(FileInput, 50);
+
+        return new PuzzleResult(result, 18509);
     }
 }

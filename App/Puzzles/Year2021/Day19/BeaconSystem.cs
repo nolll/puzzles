@@ -8,13 +8,15 @@ namespace App.Puzzles.Year2021.Day19;
 
 public class BeaconSystem
 {
-    public int GetBeaconCount(string input)
+    public BeaconSystemResult GetResult(string input)
     {
         var groups = PuzzleInputReader.ReadLineGroups(input);
         var scanners = groups.Select(ParseScanner).ToList();
 
         var baseScanner = scanners.First();
         var otherScanners = scanners.Skip(1).ToList();
+
+        var scannerLocations = new List<Matrix3DAddress>();
 
         while (otherScanners.Any())
         {
@@ -23,6 +25,8 @@ public class BeaconSystem
                 var found = baseScanner.FindMatchingRotation(otherScanner.BeaconCoords);
                 if (found != null)
                 {
+                    scannerLocations.Add(found.Value.scannerCoord);
+
                     foreach (var relCoord in found.Value.beaconCoords)
                     {
                         var xNew = found.Value.scannerCoord.X - relCoord.X;
@@ -38,7 +42,21 @@ public class BeaconSystem
             }
         }
 
-        return baseScanner.BeaconCoords.Count;
+        var maxDistance = 0;
+        foreach (var a in scannerLocations)
+        {
+            foreach (var b in scannerLocations)
+            {
+                if (a.Id != b.Id)
+                {
+                    var distance = a.ManhattanDistanceTo(b);
+                    if (distance > maxDistance)
+                        maxDistance = distance;
+                }
+            }
+        }
+
+        return new BeaconSystemResult(baseScanner.BeaconCoords.Count, maxDistance);
     }
 
     private BeaconScanner ParseScanner(IList<string> lines)
@@ -52,6 +70,18 @@ public class BeaconSystem
     {
         var numbers = s.Split(',').Select(int.Parse).ToArray();
         return new Matrix3DAddress(numbers[0], numbers[1], numbers[2]);
+    }
+}
+
+public class BeaconSystemResult
+{
+    public int BeaconCount { get; }
+    public int MaxDistance { get; }
+
+    public BeaconSystemResult(int beaconCount, int maxDistance)
+    {
+        BeaconCount = beaconCount;
+        MaxDistance = maxDistance;
     }
 }
 
@@ -78,12 +108,24 @@ internal class BeaconScanner
             coord => new Matrix3DAddress(coord.Y, coord.X, coord.Z),
         };
 
-        var rotations = new List<(int x, int y)>
+        //var rotations = new List<(int x, int y)>
+        //{
+        //    (1, 1),
+        //    (1, -1),
+        //    (-1, -1),
+        //    (-1, 1),
+        //};
+
+        var rotations = new List<(int x, int y, int z)>
         {
-            (1, 1),
-            (1, -1),
-            (-1, -1),
-            (-1, 1),
+            (1, 1, 1),
+            (1, 1, -1),
+            (1, -1, 1),
+            (-1, 1, 1),
+            (1, -1, -1),
+            (-1, -1, 1),
+            (-1, 1, -1),
+            (-1, -1, -1),
         };
 
         foreach (var transform in transforms)
@@ -96,7 +138,7 @@ internal class BeaconScanner
                     var transformedCoord = transform(otherCoord);
                     var x = transformedCoord.X * rotation.x;
                     var y = transformedCoord.Y * rotation.y;
-                    var z = transformedCoord.Z;
+                    var z = transformedCoord.Z * rotation.z;
                     compareCoords.Add(new Matrix3DAddress(x, y, z));
                 }
 

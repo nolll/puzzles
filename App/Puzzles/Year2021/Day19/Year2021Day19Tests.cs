@@ -8,17 +8,18 @@ public class Year2021Day19Tests
     public void Part1()
     {
         var system = new BeaconSystem();
-        var result = system.GetBeaconCount(Input);
+        var result = system.GetResult(Input);
 
-        Assert.That(result, Is.EqualTo(79));
+        Assert.That(result.BeaconCount, Is.EqualTo(79));
     }
 
     [Test]
     public void Part2()
     {
-        var result = 0;
+        var system = new BeaconSystem();
+        var result = system.GetResult(Input);
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(result.MaxDistance, Is.EqualTo(3621));
     }
 
     private const string Input = @"

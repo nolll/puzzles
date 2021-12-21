@@ -1,7 +1,5 @@
 using System;
-using App.Common.Computers.IntCode;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace App.Puzzles.Year2021.Day21;
 
@@ -24,51 +22,61 @@ public class Year2021Day21Tests
 
         Assert.That(result, Is.EqualTo(0));
     }
-
-    private const string Input = @"
-";
 }
 
 public class DiracDiceGame
 {
+    private int _dice;
+
     public DiracDiceResult Play(int pos1, int pos2)
     {
-        var s1 = 0;
-        var s2 = 0;
-        var p1 = pos1;
-        var p2 = pos2;
-        var dice = 0;
+        _dice = 0;
+
+        var p1 = new DiracDicePlayer(pos1 - 1);
+        var p2 = new DiracDicePlayer(pos2 - 1);
 
         for (var i = 0; i < 1000; i++)
         {
-            for (var j = 0; j < 3; j++)
-            {
-                dice++;
-                p1 += dice;
-                while (p1 > 10)
-                    p1 -= 10;
-            }
-
-            s1 += p1;
-
-            if (s1 >= 1000)
+            var won = Move(p1);
+            if (won)
                 break;
 
-            for (var j = 0; j < 3; j++)
-            {
-                dice++;
-                p2 += dice;
-                while (p2 > 10)
-                    p2 -= 10;
-            }
-
-            s2 += p2;
-
-            if (s2 >= 1000)
+            won = Move(p2);
+            if (won)
                 break;
         }
 
-        return new DiracDiceResult(Math.Min(s1, s2), dice);
+        return new DiracDiceResult(Math.Min(p1.Score, p2.Score), _dice);
+    }
+
+    private bool Move(DiracDicePlayer player)
+    {
+        _dice = player.Move(_dice);
+        return player.Score >= 1000;
+    }
+}
+
+public class DiracDicePlayer
+{
+    public int Score { get; private set; }
+    public int Pos { get; private set; }
+
+    public DiracDicePlayer(int pos)
+    {
+        Pos = pos;
+    }
+
+    public int Move(int dice)
+    {
+        for (var i = 0; i < 3; i++)
+        {
+            dice++;
+            Pos = (Pos + dice) % 10;
+        }
+
+        Score += Pos + 1;
+
+        return dice;
     }
 }
 

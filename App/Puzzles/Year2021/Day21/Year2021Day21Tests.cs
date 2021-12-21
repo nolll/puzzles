@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace App.Puzzles.Year2021.Day21;
@@ -21,6 +22,37 @@ public class Year2021Day21Tests
         var result = 0;
 
         Assert.That(result, Is.EqualTo(0));
+    }
+}
+
+public class RealDiracDiceGame
+{
+    private Dictionary<(int, int), int> _cache = new();
+
+    public long Play(int pos1, int pos2)
+    {
+
+        return 0;
+    }
+
+    private Dictionary<(int, int), int> FillCache()
+    {
+        var d = new Dictionary<(int, int), int>();
+        for (var i = 0; i < 10; i++)
+        {
+            for (var j = 1; j < 4; j++)
+            {
+                for (var k = 1; k < 4; k++)
+                {
+                    for (var l = 1; l < 4; l++)
+                    {
+                        d.Add();
+                    }
+                }
+            }
+        }
+
+        return d;
     }
 }
 
@@ -92,3 +124,31 @@ public class DiracDiceResult
         Rolls = rolls;
     }
 }
+
+//111 = 3
+//112 = 4
+//121 = 4
+//211 = 4
+//113 = 5
+//122 = 5
+//131 = 5
+//212 = 5
+//221 = 5
+//311 = 5
+//123 = 6
+//132 = 6
+//213 = 6
+//222 = 6
+//231 = 6
+//312 = 6
+//321 = 6
+//133 = 7
+//223 = 7
+//232 = 7
+//313 = 7
+//322 = 7
+//331 = 7
+//233 = 8
+//323 = 8
+//332 = 8
+//333 = 9

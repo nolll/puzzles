@@ -96,31 +96,20 @@ public class SubmarineReactor
         return matrix2.Values.Count(o => o);
     }
 
-    public int Reboot2(string input)
+    public long Reboot2(string input)
     {
         var lines = PuzzleInputReader.ReadLines(input);
         var instructions = lines.Select(ParseInstruction).ToList();
 
-        var matrix = new Matrix3D<char>(50, 50, 50, '.');
         var areas = new List<RebootArea>();
 
-        //foreach (var instruction in instructions.Where(o => Math.Abs(o.To.X) <= 50 && Math.Abs(o.To.Z) <= 50 && Math.Abs(o.To.Z) <= 50))
-        //{
-        //    var isOn = instruction.Mode == "on";
+        foreach (var instruction in instructions.Where(o => Math.Abs(o.To.X) <= 50 && Math.Abs(o.To.Z) <= 50 && Math.Abs(o.To.Z) <= 50))
+        {
+            var newArea = new RebootArea(instruction.From, instruction.To);
+            areas.Add(newArea);
+        }
 
-        //    for (var z = instruction.From.Z; z <= instruction.To.Z; z++)
-        //    {
-        //        for (var y = instruction.From.Y; y <= instruction.To.Y; y++)
-        //        {
-        //            for (var x = instruction.From.X; x <= instruction.To.X; x++)
-        //            {
-        //                matrix2[(x, y, z)] = isOn;
-        //            }
-        //        }
-        //    }
-        //}
-
-        return 0;
+        return areas.Sum(o => o.GetSize());
     }
 
     private RebootInstruction ParseInstruction(string s)
@@ -149,13 +138,51 @@ public class SubmarineReactor
 
 public class RebootArea
 {
+    private List<RebootArea> _subtractions = new();
+
     public Matrix3DAddress From { get; }
     public Matrix3DAddress To { get; }
 
     public RebootArea(Matrix3DAddress from, Matrix3DAddress to)
     {
-        From = @from;
+        From = from;
         To = to;
+    }
+
+    public long GetSize()
+    {
+        var width = To.X - From.X;
+        var height = To.Y - From.Y;
+        var depth = To.Z - From.Z;
+        
+        return width * height * depth;
+    }
+
+    public void Subtract(RebootArea otherArea)
+    {
+        if (otherArea.IsContaining(this))
+        {
+            _subtractions.Add(new RebootArea(From, To));
+        }
+        else if (otherArea.IsOverlapping(this))
+        {
+            _subtractions.Add(GetOverlappingArea());
+        }
+    }
+
+    private RebootArea GetOverlappingArea()
+    {
+        return null;
+    }
+
+    public bool IsOverlapping(RebootArea rebootArea)
+    {
+        return false;
+    }
+
+    public bool IsContaining(RebootArea rebootArea)
+    {
+        return false;
     }
 }
 

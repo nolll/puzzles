@@ -16,7 +16,6 @@ public class Year2021Day21Tests
         Assert.That(result.Result, Is.EqualTo(739785));
     }
     
-
     [Test]
     public void Part2()
     {
@@ -32,98 +31,90 @@ public class RealDiracDiceGame
     private (int pos, int score) NextPosAndScore(int pos, int score, int dice)
     {
         var newPos = (pos + dice) % 10;
-        var newScore = score + pos;
+        var newScore = score + newPos + 1;
         return (newPos, newScore);
     }
 
     public long Play(int pos1, int pos2)
     {
         var games = BuildGamesDictionary();
-        games[(pos1, pos2, 0, 0)] = 1;
+        games[(pos1 - 1, pos2 - 1, 0, 0)] = 1;
         (long p1, long p2) wins = (0, 0);
 
         while (games.Values.Sum() > 0)
         {
-            var sum = games.Values.Sum();
-            var p1Games = BuildGamesDictionary();
-            foreach (var kv in games)
+            var newGames = BuildGamesDictionary();
+            foreach (var (key, gameCount) in games)
             {
-                var value = kv.Value;
-                var key = kv.Key;
-
-                if (value == 0)
+                if (gameCount == 0)
                     continue;
 
                 var s = NextPosAndScore(key.p1pos, key.p1score, 9);
-                p1Games[(s.pos, key.p2pos, s.score, key.p2score)] += games[key] + 1;
+                newGames[(s.pos, key.p2pos, s.score, key.p2score)] += gameCount;
 
                 s = NextPosAndScore(key.p1pos, key.p1score, 8);
-                p1Games[(s.pos, key.p2pos, s.score, key.p2score)] += games[key] + 2;
+                newGames[(s.pos, key.p2pos, s.score, key.p2score)] += gameCount * 3;
 
                 s = NextPosAndScore(key.p1pos, key.p1score, 7);
-                p1Games[(s.pos, key.p2pos, s.score, key.p2score)] += games[key] + 5;
+                newGames[(s.pos, key.p2pos, s.score, key.p2score)] += gameCount * 6;
 
                 s = NextPosAndScore(key.p1pos, key.p1score, 6);
-                p1Games[(s.pos, key.p2pos, s.score, key.p2score)] += games[key] + 6;
+                newGames[(s.pos, key.p2pos, s.score, key.p2score)] += gameCount * 7;
 
                 s = NextPosAndScore(key.p1pos, key.p1score, 5);
-                p1Games[(s.pos, key.p2pos, s.score, key.p2score)] += games[key] + 5;
+                newGames[(s.pos, key.p2pos, s.score, key.p2score)] += gameCount * 6;
 
                 s = NextPosAndScore(key.p1pos, key.p1score, 4);
-                p1Games[(s.pos, key.p2pos, s.score, key.p2score)] += games[key] + 2;
+                newGames[(s.pos, key.p2pos, s.score, key.p2score)] += gameCount * 3;
 
                 s = NextPosAndScore(key.p1pos, key.p1score, 3);
-                p1Games[(s.pos, key.p2pos, s.score, key.p2score)] += games[key];
+                newGames[(s.pos, key.p2pos, s.score, key.p2score)] += gameCount;
             }
 
-            games = p1Games;
-            foreach (var key in games.Keys)
+            games = newGames;
+            foreach (var (key, value) in games)
             {
-                if (key.p1score >= 21 && games[key] > 0)
+                if (key.p1score >= 21 && value > 0)
                 {
-                    wins.p1 += games[key];
+                    wins.p1 += value;
                     games[key] = 0;
                 }
             }
 
-
-            var p2Games = BuildGamesDictionary();
-            foreach (var kv in games)
+            newGames = BuildGamesDictionary();
+            foreach (var (key, gameCount) in games)
             {
-                var value = kv.Value;
-                var key = kv.Key;
-
-                if (value == 0)
+                if (gameCount == 0)
                     continue;
 
                 var s = NextPosAndScore(key.p2pos, key.p2score, 9);
-                p2Games[(key.p1pos, s.pos, key.p1score, s.score)] += games[key];
+                newGames[(key.p1pos, s.pos, key.p1score, s.score)] += gameCount;
 
                 s = NextPosAndScore(key.p2pos, key.p2score, 8);
-                p2Games[(key.p1pos, s.pos, key.p1score, s.score)] += games[key];
+                newGames[(key.p1pos, s.pos, key.p1score, s.score)] += gameCount;
 
                 s = NextPosAndScore(key.p2pos, key.p2score, 7);
-                p2Games[(key.p1pos, s.pos, key.p1score, s.score)] += games[key];
+                newGames[(key.p1pos, s.pos, key.p1score, s.score)] += gameCount;
 
                 s = NextPosAndScore(key.p2pos, key.p2score, 6);
-                p2Games[(key.p1pos, s.pos, key.p1score, s.score)] += games[key];
+                newGames[(key.p1pos, s.pos, key.p1score, s.score)] += gameCount;
 
                 s = NextPosAndScore(key.p2pos, key.p2score, 5);
-                p2Games[(key.p1pos, s.pos, key.p1score, s.score)] += games[key];
+                newGames[(key.p1pos, s.pos, key.p1score, s.score)] += gameCount;
 
                 s = NextPosAndScore(key.p2pos, key.p2score, 4);
-                p2Games[(key.p1pos, s.pos, key.p1score, s.score)] += games[key];
+                newGames[(key.p1pos, s.pos, key.p1score, s.score)] += gameCount;
 
                 s = NextPosAndScore(key.p2pos, key.p2score, 3);
-                p2Games[(key.p1pos, s.pos, key.p1score, s.score)] += games[key];
+                newGames[(key.p1pos, s.pos, key.p1score, s.score)] += gameCount;
             }
 
-            games = p2Games; 
-            foreach (var key in games.Keys)
+            games = newGames; 
+            foreach (var (key, value) in games)
             {
-                if (key.p2score >= 21 && games[key] > 0)
+                if (key.p2score >= 21 && value > 0)
                 {
-                    wins.p2 += games[key];
+                    wins.p2 += value;
                     games[key] = 0;
                 }
             }
@@ -147,9 +138,9 @@ public class RealDiracDiceGame
         {
             for (var j = 0; j < 10; j++)
             {
-                for (var k = 0; k < 30; k++)
+                for (var k = 0; k < 31; k++)
                 {
-                    for (var l = 0; l < 30; l++)
+                    for (var l = 0; l < 31; l++)
                     {
                         games.Add((i, j, k, l), 0);
                     }

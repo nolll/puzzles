@@ -9,11 +9,14 @@ public class Year2021Day21 : Puzzle
         var game = new DiracDiceGame();
         var result = game.Play(8, 2);
 
-        return new PuzzleResult(result.Result);
+        return new PuzzleResult(result.Result, 513936);
     }
 
     public override PuzzleResult RunPart2()
     {
-        return new PuzzleResult(0);
+        var game = new RealDiracDiceGame();
+        var result = game.Play(8, 2);
+
+        return new PuzzleResult(result, 105619718613031);
     }
 }

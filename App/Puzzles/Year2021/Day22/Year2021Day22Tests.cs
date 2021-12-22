@@ -96,6 +96,33 @@ public class SubmarineReactor
         return matrix2.Values.Count(o => o);
     }
 
+    public int Reboot2(string input)
+    {
+        var lines = PuzzleInputReader.ReadLines(input);
+        var instructions = lines.Select(ParseInstruction).ToList();
+
+        var matrix = new Matrix3D<char>(50, 50, 50, '.');
+        var areas = new List<RebootArea>();
+
+        //foreach (var instruction in instructions.Where(o => Math.Abs(o.To.X) <= 50 && Math.Abs(o.To.Z) <= 50 && Math.Abs(o.To.Z) <= 50))
+        //{
+        //    var isOn = instruction.Mode == "on";
+
+        //    for (var z = instruction.From.Z; z <= instruction.To.Z; z++)
+        //    {
+        //        for (var y = instruction.From.Y; y <= instruction.To.Y; y++)
+        //        {
+        //            for (var x = instruction.From.X; x <= instruction.To.X; x++)
+        //            {
+        //                matrix2[(x, y, z)] = isOn;
+        //            }
+        //        }
+        //    }
+        //}
+
+        return 0;
+    }
+
     private RebootInstruction ParseInstruction(string s)
     {
         var parts = s.Split(' ');
@@ -117,6 +144,18 @@ public class SubmarineReactor
     {
         var parts = s[2..].Split("..").Select(int.Parse).ToList();
         return (parts.First(), parts.Last());
+    }
+}
+
+public class RebootArea
+{
+    public Matrix3DAddress From { get; }
+    public Matrix3DAddress To { get; }
+
+    public RebootArea(Matrix3DAddress from, Matrix3DAddress to)
+    {
+        From = @from;
+        To = to;
     }
 }
 

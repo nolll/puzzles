@@ -59,6 +59,22 @@ public class RebootArea : IEquatable<RebootArea>
         return width * height * depth;
     }
 
+    public void Subtract(RebootArea other)
+    {
+
+    }
+
+    public List<RebootArea> GetSortedRemainingParts(RebootArea other)
+    {
+        return GetRemainingParts(other)
+            .OrderBy(o => o.From.X)
+            .ThenBy(o => o.From.Y)
+            .ThenBy(o => o.From.Z)
+            .ThenBy(o => o.To.X)
+            .ThenBy(o => o.To.Y)
+            .ThenBy(o => o.To.Z).ToList();
+    }
+
     public List<RebootArea> GetRemainingParts(RebootArea other)
     {
         var remaining = new List<RebootArea>();
@@ -79,13 +95,15 @@ public class RebootArea : IEquatable<RebootArea>
                 remaining.Add(new RebootArea(LeftBottomFar, new Matrix3DAddress(overlapCorner.X, overlapCorner.Y, To.Z)));
             }
         }
-        return remaining
-            .OrderBy(o => o.From.X)
-            .ThenBy(o => o.From.Y)
-            .ThenBy(o => o.From.Z)
-            .ThenBy(o => o.To.X)
-            .ThenBy(o => o.To.Y)
-            .ThenBy(o => o.To.Z).ToList();
+
+        return remaining;
+    }
+
+    public bool Overlaps(RebootArea other)
+    {
+        return (From.X <= other.To.X && To.X >= other.From.X) &&
+               (From.Y <= other.To.Y && To.Y >= other.From.Y) &&
+               (From.Z <= other.To.Z && To.Z >= other.From.Z);
     }
 
     public List<Matrix3DAddress> GetOverlapCorners(RebootArea other)

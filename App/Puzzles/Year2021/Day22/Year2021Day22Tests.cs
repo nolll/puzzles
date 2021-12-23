@@ -46,11 +46,11 @@ public class Year2021Day22Tests
     }
 
     [Test]
-    public void GetRemainingParts_WithBottomLeftCloseOverlapping()
+    public void GetRemainingParts_CornerOverlap_BottomLeftCloseOverlapping()
     {
         var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(2, 2, 2));
         var area2 = new RebootArea(new Matrix3DAddress(1, 1, 1), new Matrix3DAddress(3, 3, 3));
-        var result = area1.GetRemainingParts(area2);
+        var result = area1.GetSortedRemainingParts(area2);
 
         Assert.That(result.Count, Is.EqualTo(3));
         Assert.That(result[0].From, Is.EqualTo(new Matrix3DAddress(0, 0, 0)));
@@ -62,11 +62,11 @@ public class Year2021Day22Tests
     }
 
     [Test]
-    public void GetRemainingParts_WithTopLeftCloseOverlapping()
+    public void GetRemainingParts_CornerOverlap_TopLeftCloseOverlapping()
     {
         var area1 = new RebootArea(new Matrix3DAddress(1, 1, 1), new Matrix3DAddress(3, 3, 3));
         var area2 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(2, 2, 2));
-        var result = area1.GetRemainingParts(area2);
+        var result = area1.GetSortedRemainingParts(area2);
 
         Assert.That(result.Count, Is.EqualTo(3));
         Assert.That(result[0].From, Is.EqualTo(new Matrix3DAddress(1, 1, 3)));
@@ -75,6 +75,24 @@ public class Year2021Day22Tests
         Assert.That(result[1].To, Is.EqualTo(new Matrix3DAddress(2, 3, 3)));
         Assert.That(result[2].From, Is.EqualTo(new Matrix3DAddress(3, 1, 1)));
         Assert.That(result[2].To, Is.EqualTo(new Matrix3DAddress(3, 3, 3)));
+    }
+
+    [Test]
+    public void GetRemainingParts_EdgeOverlap_TopCloseOverlapping()
+    {
+        var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(3, 3, 3));
+        var area2 = new RebootArea(new Matrix3DAddress(2, 2, 1), new Matrix3DAddress(4, 4, 2));
+        var result = area1.GetSortedRemainingParts(area2);
+
+        Assert.That(result.Count, Is.EqualTo(3));
+        Assert.That(result[0].From, Is.EqualTo(new Matrix3DAddress(0, 0, 0)));
+        Assert.That(result[0].To, Is.EqualTo(new Matrix3DAddress(1, 3, 3)));
+        Assert.That(result[0].From, Is.EqualTo(new Matrix3DAddress(2, 0, 0)));
+        Assert.That(result[0].To, Is.EqualTo(new Matrix3DAddress(3, 1, 3)));
+        Assert.That(result[0].From, Is.EqualTo(new Matrix3DAddress(2, 2, 0)));
+        Assert.That(result[0].To, Is.EqualTo(new Matrix3DAddress(3, 3, 0)));
+        Assert.That(result[0].From, Is.EqualTo(new Matrix3DAddress(2, 2, 3)));
+        Assert.That(result[0].To, Is.EqualTo(new Matrix3DAddress(3, 3, 3)));
     }
 
     [Test]

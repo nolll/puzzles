@@ -28,7 +28,27 @@ public class Year2021Day22Tests
 
         Assert.That(result, Is.EqualTo(1));
     }
-    
+
+    [Test]
+    public void GetOverlapCornerCount2()
+    {
+        var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(10, 10, 10));
+        var area2 = new RebootArea(new Matrix3DAddress(2, 2, 2), new Matrix3DAddress(8, 12, 12));
+        var result = area1.GetOverlapCornerCount(area2);
+
+        Assert.That(result, Is.EqualTo(2));
+    }
+
+    [Test]
+    public void GetOverlapCornerCount3()
+    {
+        var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(10, 10, 10));
+        var area2 = new RebootArea(new Matrix3DAddress(2, 2, 2), new Matrix3DAddress(8, 8, 12));
+        var result = area1.GetOverlapCornerCount(area2);
+
+        Assert.That(result, Is.EqualTo(4));
+    }
+
     [Test]
     public void Part1()
     {

@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using App.Common.CoordinateSystems;
-using App.Common.Strings;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
@@ -11,22 +7,22 @@ namespace App.Puzzles.Year2021.Day22;
 public class Year2021Day22Tests
 {
     [Test]
-    public void IsWithin()
+    public void IsCoordWithin()
     {
         var area = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(10, 10, 10));
         var result = area.IsCoordWithin(new Matrix3DAddress(5, 5, 5));
 
         Assert.That(result, Is.True);
     }
-
+    
     [Test]
     public void GetOverlapCornerCount1()
     {
         var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(10, 10, 10));
         var area2 = new RebootArea(new Matrix3DAddress(5, 5, 5), new Matrix3DAddress(15, 15, 15));
-        var result = area1.GetOverlapCornerCount(area2);
+        var result = area1.GetOverlapCorners(area2);
 
-        Assert.That(result, Is.EqualTo(1));
+        Assert.That(result.Count, Is.EqualTo(1));
     }
 
     [Test]
@@ -34,9 +30,9 @@ public class Year2021Day22Tests
     {
         var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(10, 10, 10));
         var area2 = new RebootArea(new Matrix3DAddress(2, 2, 2), new Matrix3DAddress(8, 12, 12));
-        var result = area1.GetOverlapCornerCount(area2);
+        var result = area1.GetOverlapCorners(area2);
 
-        Assert.That(result, Is.EqualTo(2));
+        Assert.That(result.Count, Is.EqualTo(2));
     }
 
     [Test]
@@ -44,9 +40,39 @@ public class Year2021Day22Tests
     {
         var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(10, 10, 10));
         var area2 = new RebootArea(new Matrix3DAddress(2, 2, 2), new Matrix3DAddress(8, 8, 12));
-        var result = area1.GetOverlapCornerCount(area2);
+        var result = area1.GetOverlapCorners(area2);
 
-        Assert.That(result, Is.EqualTo(4));
+        Assert.That(result.Count, Is.EqualTo(4));
+    }
+
+    [Test]
+    public void GetRemainingParts_WithOneOverlappingCorner1()
+    {
+        var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(2, 2, 2));
+        var area2 = new RebootArea(new Matrix3DAddress(1, 1, 1), new Matrix3DAddress(3, 3, 3));
+        var result = area1.GetRemainingParts(area2);
+
+        Assert.That(result.Count, Is.EqualTo(4));
+        Assert.That(result[0].From, Is.EqualTo(new Matrix3DAddress(0, 0, 0)));
+        Assert.That(result[0].To, Is.EqualTo(new Matrix3DAddress(0, 2, 2)));
+        Assert.That(result[1].From, Is.EqualTo(new Matrix3DAddress(1, 0, 0)));
+        Assert.That(result[1].To, Is.EqualTo(new Matrix3DAddress(2, 0, 2)));
+        Assert.That(result[2].From, Is.EqualTo(new Matrix3DAddress(1, 1, 0)));
+        Assert.That(result[2].To, Is.EqualTo(new Matrix3DAddress(2, 2, 0)));
+    }
+
+    [Test]
+    public void GetRemainingParts_WithOneOverlappingCorner2()
+    {
+        var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(10, 10, 10));
+        var area2 = new RebootArea(new Matrix3DAddress(5, 5, 5), new Matrix3DAddress(15, 15, 15));
+        var result = area1.GetRemainingParts(area2);
+
+        Assert.That(result.Count, Is.EqualTo(4));
+        Assert.That(result[0].From, Is.EqualTo(new Matrix3DAddress(0, 0, 0)));
+        Assert.That(result[0].To, Is.EqualTo(new Matrix3DAddress(4, 4, 4)));
+        Assert.That(result[1].From, Is.EqualTo(new Matrix3DAddress(0, 0, 0)));
+        Assert.That(result[1].To, Is.EqualTo(new Matrix3DAddress(4, 4, 4)));
     }
 
     [Test]
@@ -59,30 +85,39 @@ public class Year2021Day22Tests
     }
 
     [Test]
-    public void Part1_2()
+    public void Part1Advanced_WithInput1()
     {
         var reactor = new SubmarineReactor();
-        var result = reactor.Reboot2(Input2);
+        var result = reactor.Reboot2(Input1, 50);
 
-        Assert.That(result, Is.EqualTo(590784));
+        Assert.That(result, Is.EqualTo(39));
     }
 
-    [Test]
-    public void Part1_3()
-    {
-        var reactor = new SubmarineReactor();
-        var result = reactor.Reboot2(Input3);
+    //[Test]
+    //public void Part1Advanced_WithInput2()
+    //{
+    //    var reactor = new SubmarineReactor();
+    //    var result = reactor.Reboot2(Input2);
 
-        Assert.That(result, Is.EqualTo(0));
-    }
+    //    Assert.That(result, Is.EqualTo(590784));
+    //}
 
-    [Test]
-    public void Part2()
-    {
-        var result = 0;
+    //[Test]
+    //public void Part1Advanced_WithInpu3()
+    //{
+    //    var reactor = new SubmarineReactor();
+    //    var result = reactor.Reboot2(Input3);
 
-        Assert.That(result, Is.EqualTo(0));
-    }
+    //    Assert.That(result, Is.EqualTo(0));
+    //}
+
+    //[Test]
+    //public void Part2()
+    //{
+    //    var result = 0;
+
+    //    Assert.That(result, Is.EqualTo(0));
+    //}
 
     private const string Input1 = @"
 on x=10..12,y=10..12,z=10..12
@@ -535,239 +570,4 @@ on x=-11759..9957,y=6506..27819,z=70712..94866
 off x=-86705..-61424,y=-26069..594,z=21267..36321
 off x=-73433..-52379,y=-46684..-33106,z=-51920..-32215
 off x=-55321..-48322,y=13236..27338,z=-64006..-44521";
-}
-
-public class SubmarineReactor
-{
-    public int Reboot(string input)
-    {
-        var lines = PuzzleInputReader.ReadLines(input);
-        var instructions = lines.Select(ParseInstruction).ToList();
-
-        var matrix = new Matrix3D<char>(50, 50, 50, '.');
-        var matrix2 = new Dictionary<(int, int, int), bool>();
-
-        foreach (var instruction in instructions.Where(o => Math.Abs(o.To.X) <= 50 && Math.Abs(o.To.Z) <= 50 && Math.Abs(o.To.Z) <= 50))
-        {
-            var isOn = instruction.Mode == "on";
-
-            for (var z = instruction.From.Z; z <= instruction.To.Z; z++)
-            {
-                for (var y = instruction.From.Y; y <= instruction.To.Y; y++)
-                {
-                    for (var x = instruction.From.X; x <= instruction.To.X; x++)
-                    {
-                        matrix2[(x, y, z)] = isOn;
-                    }
-                }
-            }
-        }
-
-        return matrix2.Values.Count(o => o);
-    }
-
-    public long Reboot2(string input, int? maxSize = null)
-    {
-        var lines = PuzzleInputReader.ReadLines(input);
-        var instructions = lines.Select(ParseInstruction).ToList();
-
-        var areas = new List<RebootArea>();
-
-        if(maxSize != null)
-            instructions = instructions.Where(o => Math.Abs(o.To.X) <= 50 && Math.Abs(o.To.Z) <= 50 && Math.Abs(o.To.Z) <= 50).ToList();
-
-        foreach (var instruction in instructions)
-        {
-            var newArea = new RebootArea(instruction.From, instruction.To);
-            var areasToAdd = new List<RebootArea>();
-            if (instruction.Mode == "on")
-                areasToAdd.Add(newArea);
-
-            foreach (var area in areas)
-            {
-                var isContaining = newArea.IsContaining(area);
-                if(isContaining)
-                {
-                    Console.WriteLine($"({newArea.From.X},{newArea.From.Y},{newArea.From.Z}..{newArea.To.X},{newArea.To.Y},{newArea.To.Z}) is containing ({area.From.X},{area.From.Y},{area.From.Z}..{area.To.X},{area.To.Y},{area.To.Z})");
-                    continue;
-                }
-
-                var isOverlapping = newArea.IsOverlapping(area);
-                if(isOverlapping)
-                {
-                    var overlapCount = area.GetOverlapCornerCount(newArea);
-                    Console.WriteLine($"COUNT: {overlapCount}. ({newArea.From.X},{newArea.From.Y},{newArea.From.Z}..{newArea.To.X},{newArea.To.Y},{newArea.To.Z}) is overlapping ({area.From.X},{area.From.Y},{area.From.Z}..{area.To.X},{area.To.Y},{area.To.Z})");
-                }
-            }
-
-            //var areasToRemove = new List<RebootArea>();
-
-            //foreach (var area in areas)
-            //{
-            //    if (newArea.IsContaining(area))
-            //    {
-            //        areasToRemove.Add(area);
-            //    }
-            //    else if (newArea.IsOverlapping(area))
-            //    {
-            //        var remainingParts = area.GetRemainingParts(newArea);
-            //        areasToRemove.Add(area);
-            //        areasToAdd.AddRange(remainingParts);
-            //    }
-            //}
-
-            //foreach (var area in areasToRemove)
-            //{
-            //    areas.Remove(area);
-            //}
-
-            foreach (var area in areasToAdd)
-            {
-                areas.Add(area);
-            }
-        }
-        
-        return areas.Sum(o => o.GetSize());
-    }
-
-    private RebootInstruction ParseInstruction(string s)
-    {
-        var parts = s.Split(' ');
-        var mode = parts[0];
-        var coords = ParseCoords(parts[1]);
-
-        return new RebootInstruction(mode, coords.from, coords.to);
-    }
-
-    private (Matrix3DAddress from, Matrix3DAddress to) ParseCoords(string s)
-    {
-        var parts = s.Split(',').Select(ParseFromTo).ToList();
-        var from = new Matrix3DAddress(parts[0].from, parts[1].from, parts[2].from);
-        var to = new Matrix3DAddress(parts[0].to, parts[1].to, parts[2].to);
-        return (from, to);
-    }
-
-    private (int from, int to) ParseFromTo(string s)
-    {
-        var parts = s[2..].Split("..").Select(int.Parse).ToList();
-        return (parts.First(), parts.Last());
-    }
-}
-
-public class RebootArea : IEquatable<RebootArea>
-{
-    public Matrix3DAddress From { get; }
-    public Matrix3DAddress To { get; }
-
-    public RebootArea(Matrix3DAddress from, Matrix3DAddress to)
-    {
-        From = from;
-        To = to;
-    }
-
-    public long GetSize()
-    {
-        var width = To.X - From.X;
-        var height = To.Y - From.Y;
-        var depth = To.Z - From.Z;
-        
-        return width * height * depth;
-    }
-
-    public List<RebootArea> GetRemainingParts(RebootArea area)
-    {
-        return new List<RebootArea>();
-    }
-
-    public bool IsOverlapping(RebootArea area)
-    {
-        var isToTheRight = To.X < area.From.X;
-        var isToTheLeft = area.To.X < From.X;
-        var isBelow = To.Y < area.From.Y;
-        var isAbove = area.To.Y < From.Y;
-        var isBehind = To.Z < area.From.Z;
-        var isInFront = area.To.Z < From.Z;
-
-        return !isToTheRight && !isToTheLeft && !isBelow && !isAbove && isBehind && !isInFront;
-    }
-
-    public int GetOverlapCornerCount(RebootArea area)
-    {
-        var cornerA = new Matrix3DAddress(area.From.X, area.From.Y, area.From.Z);
-        var cornerB = new Matrix3DAddress(area.From.X, area.To.Y, area.From.Z);
-        var cornerC = new Matrix3DAddress(area.To.X, area.To.Y, area.From.Z);
-        var cornerD = new Matrix3DAddress(area.To.X, area.From.Y, area.From.Z);
-        var cornerE = new Matrix3DAddress(area.From.X, area.From.Y, area.To.Z);
-        var cornerF = new Matrix3DAddress(area.From.X, area.To.Y, area.To.Z);
-        var cornerG = new Matrix3DAddress(area.To.X, area.To.Y, area.To.Z);
-        var cornerH = new Matrix3DAddress(area.To.X, area.From.Y, area.To.Z);
-
-        var count = 0;
-        if (IsCoordWithin(cornerA))
-            count++;
-        if (IsCoordWithin(cornerB))
-            count++;
-        if (IsCoordWithin(cornerC))
-            count++;
-        if (IsCoordWithin(cornerD))
-            count++;
-        if (IsCoordWithin(cornerE))
-            count++;
-        if (IsCoordWithin(cornerF))
-            count++;
-        if (IsCoordWithin(cornerG))
-            count++;
-        if (IsCoordWithin(cornerH))
-            count++;
-
-        return count;
-    }
-
-    public bool IsCoordWithin(Matrix3DAddress coord)
-    {
-        return coord.X >= From.X && coord.X <= To.X &&
-               coord.Y >= From.Y && coord.Y <= To.Y &&
-               coord.Z >= From.Z && coord.Z <= To.Z;
-    }
-
-    public bool IsContaining(RebootArea area)
-    {
-        return From.X < area.From.X && To.X > area.To.X &&
-               From.Y < area.From.Y && To.Y > area.To.Y &&
-               From.Z < area.From.Z && To.Z > area.To.Z;
-    }
-
-    public bool Equals(RebootArea other)
-    {
-        if (ReferenceEquals(null, other)) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Equals(From, other.From) && Equals(To, other.To);
-    }
-
-    public override bool Equals(object obj)
-    {
-        if (ReferenceEquals(null, obj)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != this.GetType()) return false;
-        return Equals((RebootArea)obj);
-    }
-
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(From, To);
-    }
-}
-
-public class RebootInstruction
-{
-    public string Mode { get; }
-    public Matrix3DAddress From { get; }
-    public Matrix3DAddress To { get; }
-
-    public RebootInstruction(string mode, Matrix3DAddress from, Matrix3DAddress to)
-    {
-        Mode = mode;
-        From = @from;
-        To = to;
-    }
 }

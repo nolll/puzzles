@@ -59,26 +59,38 @@ public class RebootArea : IEquatable<RebootArea>
         return width * height * depth;
     }
 
-    public List<RebootArea> GetRemainingParts(RebootArea area)
+    public List<RebootArea> GetRemainingParts(RebootArea other)
     {
         var remaining = new List<RebootArea>();
-        var overlapCorners = GetOverlapCorners(area);
+        var overlapCorners = GetOverlapCorners(other);
         if (overlapCorners.Count == 1)
         {
             var overlapCorner = overlapCorners.First();
-            if (overlapCorner.Equals(LeftBottomClose))
+            if (overlapCorner.Equals(other.LeftBottomClose))
             {
                 remaining.Add(new RebootArea(LeftBottomClose, new Matrix3DAddress(overlapCorner.X - 1, To.Y, To.Z)));
                 remaining.Add(new RebootArea(new Matrix3DAddress(overlapCorner.X, From.Y, From.Z), RightBottomFar));
                 remaining.Add(new RebootArea(new Matrix3DAddress(overlapCorner.X, overlapCorner.Y, From.Z), RightTopClose));
             }
+            else if (overlapCorner.Equals(other.RightTopFar))
+            {
+                remaining.Add(new RebootArea(new Matrix3DAddress(overlapCorner.X + 1, From.Y, From.Z), RightTopFar));
+                remaining.Add(new RebootArea(LeftTopClose, new Matrix3DAddress(overlapCorner.X, To.Y, To.Z)));
+                remaining.Add(new RebootArea(LeftBottomFar, new Matrix3DAddress(overlapCorner.X, overlapCorner.Y, To.Z)));
+            }
         }
-        return remaining;
+        return remaining
+            .OrderBy(o => o.From.X)
+            .ThenBy(o => o.From.Y)
+            .ThenBy(o => o.From.Z)
+            .ThenBy(o => o.To.X)
+            .ThenBy(o => o.To.Y)
+            .ThenBy(o => o.To.Z).ToList();
     }
 
     public List<Matrix3DAddress> GetOverlapCorners(RebootArea other)
     {
-        return Corners.Where(o => o.IsCoordWithin()).ToList();
+        return other.Corners.Where(IsCoordWithin).ToList();
     }
 
     public bool IsCoordWithin(Matrix3DAddress other)

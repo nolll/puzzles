@@ -55,4 +55,9 @@ public class Matrix3DAddress : IEquatable<Matrix3DAddress>
     {
         return HashCode.Combine(X, Y, Z);
     }
+
+    public override string ToString()
+    {
+        return $"{X},{Y},{Z}";
+    }
 }

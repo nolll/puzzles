@@ -7,9 +7,10 @@ public class Year2021Day23Tests
     [Test]
     public void Part1()
     {
-        var result = 0;
+        var burrow = new AmphipodBurrow(Input);
+        var result = burrow.Arrange();
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(result, Is.EqualTo(12521));
     }
 
     [Test]
@@ -21,5 +22,9 @@ public class Year2021Day23Tests
     }
 
     private const string Input = @"
-";
+#############
+#...........#
+###B#C#B#D###
+###A#D#C#A###
+#############";
 }

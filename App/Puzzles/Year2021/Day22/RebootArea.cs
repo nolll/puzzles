@@ -55,7 +55,7 @@ public class RebootArea : IEquatable<RebootArea>
         var width = To.X - From.X;
         var height = To.Y - From.Y;
         var depth = To.Z - From.Z;
-        
+
         return width * height * depth;
     }
 
@@ -79,7 +79,12 @@ public class RebootArea : IEquatable<RebootArea>
     {
         var remaining = new List<RebootArea>();
         var overlapCorners = GetOverlapCorners(other);
-        if (overlapCorners.Count == 1)
+        var cornerCount = overlapCorners.Count;
+        if (cornerCount == 0)
+        {
+            
+        }
+        else if (cornerCount == 1)
         {
             var overlapCorner = overlapCorners.First();
             if (overlapCorner.Equals(other.LeftBottomClose))
@@ -95,35 +100,44 @@ public class RebootArea : IEquatable<RebootArea>
                 remaining.Add(new RebootArea(LeftBottomFar, new Matrix3DAddress(overlapCorner.X, overlapCorner.Y, To.Z)));
             }
         }
+        else if (cornerCount == 2)
+        {
+            if (overlapCorners.Contains(other.LeftBottomClose) && overlapCorners.Contains(other.LeftBottomFar))
+            {
+                var closeCorner = other.LeftBottomClose;
+                var farCorner = other.LeftBottomFar;
+                remaining.Add(new RebootArea(LeftBottomClose, new Matrix3DAddress(closeCorner.X - 1, To.Y, To.Z)));
+                remaining.Add(new RebootArea(new Matrix3DAddress(closeCorner.X, From.Y, From.Z), new Matrix3DAddress(To.X, closeCorner.Y - 1, To.Z)));
+                remaining.Add(new RebootArea(new Matrix3DAddress(closeCorner.X, closeCorner.Y, From.Z), new Matrix3DAddress(To.X, To.Y, closeCorner.Z - 1)));
+                remaining.Add(new RebootArea(new Matrix3DAddress(closeCorner.X, closeCorner.Y, farCorner.Z + 1), RightTopFar));
+            }
+        }
+        else if (cornerCount == 4)
+        {
+
+        }
 
         return remaining;
     }
 
-    public bool Overlaps(RebootArea other)
-    {
-        return (From.X <= other.To.X && To.X >= other.From.X) &&
-               (From.Y <= other.To.Y && To.Y >= other.From.Y) &&
-               (From.Z <= other.To.Z && To.Z >= other.From.Z);
-    }
+    private bool IsOverlapping(RebootArea other) =>
+        (From.X <= other.To.X && To.X >= other.From.X) &&
+        (From.Y <= other.To.Y && To.Y >= other.From.Y) &&
+        (From.Z <= other.To.Z && To.Z >= other.From.Z);
 
-    public List<Matrix3DAddress> GetOverlapCorners(RebootArea other)
-    {
-        return other.Corners.Where(IsCoordWithin).ToList();
-    }
+    public List<Matrix3DAddress> GetOverlapCorners(RebootArea other) => IsOverlapping(other)
+        ? other.Corners.Where(IsCoordWithin).ToList()
+        : new List<Matrix3DAddress>();
 
-    public bool IsCoordWithin(Matrix3DAddress other)
-    {
-        return other.X >= From.X && other.X <= To.X &&
-               other.Y >= From.Y && other.Y <= To.Y &&
-               other.Z >= From.Z && other.Z <= To.Z;
-    }
+    public bool IsCoordWithin(Matrix3DAddress other) =>
+        other.X >= From.X && other.X <= To.X &&
+        other.Y >= From.Y && other.Y <= To.Y &&
+        other.Z >= From.Z && other.Z <= To.Z;
 
-    public bool IsContaining(RebootArea other)
-    {
-        return From.X < other.From.X && To.X > other.To.X &&
-               From.Y < other.From.Y && To.Y > other.To.Y &&
-               From.Z < other.From.Z && To.Z > other.To.Z;
-    }
+    public bool IsContaining(RebootArea other) =>
+        From.X < other.From.X && To.X > other.To.X &&
+        From.Y < other.From.Y && To.Y > other.To.Y &&
+        From.Z < other.From.Z && To.Z > other.To.Z;
 
     public bool Equals(RebootArea other)
     {

@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace App.Puzzles.Year2021.Day24;
@@ -80,12 +81,45 @@ mod w 2";
         Assert.That(result, Is.EqualTo(expected));
     }
 
-    [Test]
-    public void Part2()
+    [TestCase(1, 0, 0, 0, 0)]
+    [TestCase(2, 0, 0, 0, 0)]
+    [TestCase(3, 0, 0, 0, 0)]
+    [TestCase(4, 0, 0, 0, 0)]
+    [TestCase(5, 0, 0, 0, 0)]
+    [TestCase(6, 0, 0, 0, 0)]
+    [TestCase(7, 0, 0, 0, 0)]
+    [TestCase(8, 0, 0, 0, 0)]
+    [TestCase(9, 0, 0, 0, 0)]
+    public void TestReal1(long p, long expW, long expX, long expY, long expZ)
     {
-        var result = 0;
+        const string input = @"
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1
+add x 12
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 4
+mul y x
+add z y";
 
-        Assert.That(result, Is.EqualTo(0));
+        var alu = new Alu(input);
+        var result = alu.Process(p);
+        Console.WriteLine(result.ToString());
+
+        //Assert.That(result.Memory['w'], Is.EqualTo(expW));
+        //Assert.That(result.Memory['x'], Is.EqualTo(expX));
+        //Assert.That(result.Memory['y'], Is.EqualTo(expY));
+        //Assert.That(result.Memory['z'], Is.EqualTo(expZ));
     }
 
     private const string FullInput = @"

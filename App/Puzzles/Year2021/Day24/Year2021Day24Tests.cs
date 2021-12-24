@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using App.Common.Strings;
 using NUnit.Framework;
 
 namespace App.Puzzles.Year2021.Day24;
@@ -76,15 +72,12 @@ mod w 2";
     }
 
     [TestCase(13579246899999, 0)]
-    public void TestMonad(long p, int expected)
+    public void TestMonad(long modelNumber, int expected)
     {
-        var alu = new Alu(FullInput);
-        var result = alu.Process(p);
+        var monad = new Monad(FullInput);
+        var result = monad.Validate(modelNumber);
 
-        Assert.That(result.Memory['w'], Is.EqualTo(0));
-        Assert.That(result.Memory['x'], Is.EqualTo(0));
-        Assert.That(result.Memory['y'], Is.EqualTo(0));
-        Assert.That(result.Memory['z'], Is.EqualTo(0));
+        Assert.That(result, Is.EqualTo(expected));
     }
 
     [Test]
@@ -348,137 +341,4 @@ add y w
 add y 8
 mul y x
 add z y";
-}
-
-public class Alu
-{
-    private IEnumerable<AluInstruction> _instructions;
-
-    public Alu(string input)
-    {
-        var lines = PuzzleInputReader.ReadLines(input);
-        _instructions = lines.Select(ParseInstruction);
-    }
-
-    private AluInstruction ParseInstruction(string s)
-    {
-        var parts = s.Split(' ');
-        var operation = parts[0];
-        var a = parts[1][..1].ToCharArray().First();
-        var b = parts.Length > 2 ? parts[2] : null;
-
-        return new AluInstruction(operation, a, b);
-    }
-
-    public AluState Process(long input)
-    {
-        var inputs = input.ToString().Select(o => int.Parse(o.ToString())).ToList();
-        var state = new AluState(inputs);
-
-        foreach (var instruction in _instructions)
-        {
-            instruction.Execute(state);
-        }
-
-        return state;
-    }
-}
-
-public class AluInstruction
-{
-    private readonly char _address;
-    private readonly string _b;
-    public string Operation { get; }
-
-    public AluInstruction(string operation, char address, string b)
-    {
-        _address = address;
-        _b = b;
-        Operation = operation;
-    }
-
-    public AluState Execute(AluState state)
-    {
-        //inp a - Read an input value and write it to variable a.
-        //add a b - Add the value of a to the value of b, then store the result in variable a.
-        //mul a b - Multiply the value of a by the value of b, then store the result in variable a.
-        //div a b - Divide the value of a by the value of b, truncate the result to an integer, then store the result in variable a. (Here, "truncate" means to round the value toward zero.)
-        //mod a b - Divide the value of a by the value of b, then store the remainder in variable a. (This is also called the modulo operation.)
-        //eql a b - If the value of a and b are equal, then store the value 1 in variable a. Otherwise, store the value 0 in variable a.
-        if (Operation == "inp")
-        {
-            var input = state.ReadInput();
-            state.Memory[_address] = input;
-            return state;
-        }
-
-        var value = GetValue(state, _b);
-        if (Operation == "add")
-        {
-            state.Memory[_address] += value;
-        }
-
-        if (Operation == "mul")
-        {
-            state.Memory[_address] *= value;
-        }
-
-        if (Operation == "div")
-        {
-            state.Memory[_address] = (int)Math.Floor((double)state.Memory[_address] / value);
-        }
-
-        if (Operation == "mod")
-        {
-            state.Memory[_address] = state.Memory[_address] % value;
-        }
-
-        if (Operation == "eql")
-        {
-            state.Memory[_address] = state.Memory[_address] == value ? 1 : 0;
-        }
-
-        return state;
-    }
-
-    private int GetValue(AluState state, string s)
-    {
-        var isAddress = IsAddress(s);
-        if (isAddress)
-        {
-            var address = s[..1].ToCharArray().First();
-            return state.Memory[address];
-        }
-        else
-        {
-            return int.Parse(s);
-        }
-    }
-
-    private static bool IsAddress(string s) => s is "w" or "x" or "y" or "z";
-}
-
-public class AluState
-{
-    public Dictionary<char, int> Memory { get; }
-    public List<int> Inputs { get; private set; }
-
-    public AluState(List<int> inputs)
-    {
-        Inputs = inputs;
-        Memory = new Dictionary<char, int>
-        {
-            { 'w', 0 },
-            { 'x', 0 },
-            { 'y', 0 },
-            { 'z', 0 }
-        };
-    }
-
-    public int ReadInput()
-    {
-        var nextInput = Inputs.First();
-        Inputs = Inputs.Skip(1).ToList();
-        return nextInput;
-    }
 }

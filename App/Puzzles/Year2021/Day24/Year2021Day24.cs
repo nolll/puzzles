@@ -6,7 +6,10 @@ public class Year2021Day24 : Puzzle
 {
     public override PuzzleResult RunPart1()
     {
-        return new PuzzleResult(0);
+        var monad = new Monad(FileInput);
+        var result = monad.FindLargestValidNumber();
+
+        return new PuzzleResult(result);
     }
 
     public override PuzzleResult RunPart2()

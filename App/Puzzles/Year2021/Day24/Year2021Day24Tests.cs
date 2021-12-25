@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace App.Puzzles.Year2021.Day24;
@@ -79,6 +80,41 @@ mod w 2";
         var result = monad.Validate(modelNumber);
 
         Assert.That(result, Is.EqualTo(expected));
+    }
+
+    public void TestLast()
+    {
+        var input = @"
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -7
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 8
+mul y x
+add z y";
+
+        var memory = new Dictionary<char, long>
+        {
+            { 'w', 0 },
+            { 'x', 0 },
+            { 'y', 0 },
+            { 'z', 0 }
+        };
+
+        var alu = new Alu(input);
+        var result = alu.Process(1, memory);
+        Console.WriteLine(result.ToString());
     }
 
     [TestCase(1, 0, 0, 0, 0)]

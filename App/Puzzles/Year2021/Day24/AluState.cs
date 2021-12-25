@@ -15,10 +15,10 @@ public class AluState
     private long Y => Memory['y'];
     private long Z => Memory['z'];
 
-    public AluState(List<int> inputs)
+    public AluState(List<int> inputs, Dictionary<char, long> memory = null)
     {
         Inputs = inputs;
-        Memory = new Dictionary<char, long>
+        Memory = memory ?? new Dictionary<char, long>
         {
             { 'w', 0 },
             { 'x', 0 },

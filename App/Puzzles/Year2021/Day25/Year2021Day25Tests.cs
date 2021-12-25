@@ -7,9 +7,10 @@ public class Year2021Day25Tests
     [Test]
     public void Part1()
     {
-        var result = 0;
+        var herd = new HerdOfSeaCucumbers(Input);
+        var result = herd.MoveUntilStop();
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(result, Is.EqualTo(58));
     }
 
     [Test]
@@ -21,5 +22,13 @@ public class Year2021Day25Tests
     }
 
     private const string Input = @"
-";
+v...>>.vv>
+.vv>>.vv..
+>>.>v>...v
+>>v>>.>.v.
+v>v.vv.v..
+>.>>..v...
+.vv..>.>v.
+v.v..>>v.v
+....v..v.>";
 }

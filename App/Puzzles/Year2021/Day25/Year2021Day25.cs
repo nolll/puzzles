@@ -6,11 +6,14 @@ public class Year2021Day25 : Puzzle
 {
     public override PuzzleResult RunPart1()
     {
-        return new PuzzleResult(0);
+        var herd = new HerdOfSeaCucumbers(FileInput);
+        var result = herd.MoveUntilStop();
+
+        return new PuzzleResult(result, 518);
     }
 
     public override PuzzleResult RunPart2()
     {
-        return new PuzzleResult(0);
+        return new EmptyPuzzleResult();
     }
 }

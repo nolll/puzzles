@@ -23,11 +23,11 @@ public class Monad
 
         while (modelNumber > 0)
         {
-            Console.WriteLine(modelNumber);
+            if(modelNumber % 1_000_000 == 0)
+                Console.WriteLine(modelNumber);
             if (modelNumber.ToString().Contains('0'))
             {
-                var state = _alu.Process(modelNumber);
-                var result = state.Memory['z'];
+                var result = _alu.Process2(modelNumber);
                 if (result == 0)
                     return modelNumber;
 
@@ -38,4 +38,5 @@ public class Monad
 
         return modelNumber;
     }
+    
 }

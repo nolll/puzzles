@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using App;
 using App.Platform;
+using App.Puzzles.Year2021.Day24;
 using Cli.ConsoleTools;
 using Cli.Printing;
 
@@ -13,7 +14,7 @@ public class Program
     private const int PuzzleTimeout = 10;
 
     private const int DebugYear = 2021;
-    private const int DebugDay = 20;
+    private const int DebugDay = 24;
 
     static void Main(string[] args)
     {

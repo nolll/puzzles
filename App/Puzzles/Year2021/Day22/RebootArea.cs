@@ -11,59 +11,22 @@ public class RebootArea : IEquatable<RebootArea>
 {
     public Matrix3DAddress From { get; }
     public Matrix3DAddress To { get; }
-
-    public Matrix3DAddress LeftBottomClose { get; }
-    public Matrix3DAddress LeftTopClose { get; }
-    public Matrix3DAddress RightTopClose { get; }
-    public Matrix3DAddress RightBottomClose { get; }
-    public Matrix3DAddress LeftBottomFar { get; }
-    public Matrix3DAddress LeftTopFar { get; }
-    public Matrix3DAddress RightTopFar { get; }
-    public Matrix3DAddress RightBottomFar { get; }
-
-    public List<Matrix3DAddress> Corners;
-
+    
     public RebootArea(Matrix3DAddress from, Matrix3DAddress to)
     {
         From = from;
         To = to;
-
-        LeftBottomClose = new Matrix3DAddress(From.X, From.Y, From.Z);
-        LeftTopClose = new Matrix3DAddress(From.X, To.Y, From.Z);
-        RightTopClose = new Matrix3DAddress(To.X, To.Y, From.Z);
-        RightBottomClose = new Matrix3DAddress(To.X, From.Y, From.Z);
-        LeftBottomFar = new Matrix3DAddress(From.X, From.Y, To.Z);
-        LeftTopFar = new Matrix3DAddress(From.X, To.Y, To.Z);
-        RightTopFar = new Matrix3DAddress(To.X, To.Y, To.Z);
-        RightBottomFar = new Matrix3DAddress(To.X, From.Y, To.Z);
-
-        Corners = new List<Matrix3DAddress>
-        {
-            LeftBottomClose,
-            LeftTopClose,
-            RightTopClose,
-            RightBottomClose,
-            LeftBottomFar,
-            LeftTopFar,
-            RightTopFar,
-            RightBottomFar
-        };
     }
 
     public long GetSize()
     {
-        var width = To.X - From.X;
-        var height = To.Y - From.Y;
-        var depth = To.Z - From.Z;
+        long width = To.X - From.X + 1;
+        long height = To.Y - From.Y + 1;
+        long depth = To.Z - From.Z + 1;
 
         return width * height * depth;
     }
-
-    public void Subtract(RebootArea other)
-    {
-
-    }
-
+    
     public List<RebootArea> GetSortedRemainingParts(RebootArea other)
     {
         return GetRemainingParts(other)
@@ -77,63 +40,58 @@ public class RebootArea : IEquatable<RebootArea>
 
     public List<RebootArea> GetRemainingParts(RebootArea other)
     {
-        var remaining = new List<RebootArea>();
-        var overlapCorners = GetOverlapCorners(other);
-        var cornerCount = overlapCorners.Count;
-        if (cornerCount == 0)
-        {
-            
-        }
-        else if (cornerCount == 1)
-        {
-            var overlapCorner = overlapCorners.First();
-            if (overlapCorner.Equals(other.LeftBottomClose))
-            {
-                remaining.Add(new RebootArea(LeftBottomClose, new Matrix3DAddress(overlapCorner.X - 1, To.Y, To.Z)));
-                remaining.Add(new RebootArea(new Matrix3DAddress(overlapCorner.X, From.Y, From.Z), RightBottomFar));
-                remaining.Add(new RebootArea(new Matrix3DAddress(overlapCorner.X, overlapCorner.Y, From.Z), RightTopClose));
-            }
-            else if (overlapCorner.Equals(other.RightTopFar))
-            {
-                remaining.Add(new RebootArea(new Matrix3DAddress(overlapCorner.X + 1, From.Y, From.Z), RightTopFar));
-                remaining.Add(new RebootArea(LeftTopClose, new Matrix3DAddress(overlapCorner.X, To.Y, To.Z)));
-                remaining.Add(new RebootArea(LeftBottomFar, new Matrix3DAddress(overlapCorner.X, overlapCorner.Y, To.Z)));
-            }
-        }
-        else if (cornerCount == 2)
-        {
-            if (overlapCorners.Contains(other.LeftBottomClose) && overlapCorners.Contains(other.LeftBottomFar))
-            {
-                var closeCorner = other.LeftBottomClose;
-                var farCorner = other.LeftBottomFar;
-                remaining.Add(new RebootArea(LeftBottomClose, new Matrix3DAddress(closeCorner.X - 1, To.Y, To.Z)));
-                remaining.Add(new RebootArea(new Matrix3DAddress(closeCorner.X, From.Y, From.Z), new Matrix3DAddress(To.X, closeCorner.Y - 1, To.Z)));
-                remaining.Add(new RebootArea(new Matrix3DAddress(closeCorner.X, closeCorner.Y, From.Z), new Matrix3DAddress(To.X, To.Y, closeCorner.Z - 1)));
-                remaining.Add(new RebootArea(new Matrix3DAddress(closeCorner.X, closeCorner.Y, farCorner.Z + 1), RightTopFar));
-            }
-        }
-        else if (cornerCount == 4)
-        {
+        var parts = new List<RebootArea>();
+        var cropped = new RebootArea(new Matrix3DAddress(From.X, From.Y, From.Z), new Matrix3DAddress(To.X, To.Y, To.Z));
 
+        // x-axis pos
+        if (cropped.From.X <= other.To.X && other.To.X <= cropped.To.X)
+        {
+            parts.Add(new RebootArea(new Matrix3DAddress(other.To.X + 1, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, cropped.To.Z)));
+            cropped = new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(other.To.X, cropped.To.Y, cropped.To.Z));
         }
 
-        return remaining;
+        // x-axis neg
+        if (cropped.From.X <= other.From.X && other.From.X <= cropped.To.X)
+        {
+            parts.Add(new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(other.From.X - 1, cropped.To.Y, cropped.To.Z)));
+            cropped = new RebootArea(new Matrix3DAddress(other.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, cropped.To.Z)); 
+        }
+
+        // y-axis pos
+        if (cropped.From.Y <= other.To.Y && other.To.Y <= cropped.To.Y)
+        {
+            parts.Add(new RebootArea(new Matrix3DAddress(cropped.From.X, other.To.Y + 1, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, cropped.To.Z)));
+            cropped = new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, other.To.Y, cropped.To.Z)); 
+        }
+
+        // y-axis neg
+        if (cropped.From.Y <= other.From.Y && other.From.Y <= cropped.To.Y)
+        {
+            parts.Add(new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, other.From.Y - 1, cropped.To.Z)));
+            cropped = new RebootArea(new Matrix3DAddress(cropped.From.X, other.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, cropped.To.Z)); 
+        }
+
+        // z-axis pos
+        if (cropped.From.Z <= other.To.Z && other.To.Z <= cropped.To.Z)
+        {
+            parts.Add(new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, other.To.Z + 1), new Matrix3DAddress(cropped.To.X, cropped.To.Y, cropped.To.Z)));
+            cropped = new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, other.To.Z)); 
+        }
+
+        // z-axis neg
+        if (cropped.From.Z <= other.From.Z && other.From.Z <= cropped.To.Z)
+        {
+            parts.Add(new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, other.From.Z - 1)));
+        }
+
+        return parts;
     }
 
-    private bool IsOverlapping(RebootArea other) =>
+    public bool IsOverlapping(RebootArea other) =>
         (From.X <= other.To.X && To.X >= other.From.X) &&
         (From.Y <= other.To.Y && To.Y >= other.From.Y) &&
         (From.Z <= other.To.Z && To.Z >= other.From.Z);
-
-    public List<Matrix3DAddress> GetOverlapCorners(RebootArea other) => IsOverlapping(other)
-        ? other.Corners.Where(IsCoordWithin).ToList()
-        : new List<Matrix3DAddress>();
-
-    public bool IsCoordWithin(Matrix3DAddress other) =>
-        other.X >= From.X && other.X <= To.X &&
-        other.Y >= From.Y && other.Y <= To.Y &&
-        other.Z >= From.Z && other.Z <= To.Z;
-
+    
     public bool IsContaining(RebootArea other) =>
         From.X < other.From.X && To.X > other.To.X &&
         From.Y < other.From.Y && To.Y > other.To.Y &&

@@ -49,47 +49,29 @@ public class SubmarineReactor
         {
             var newArea = new RebootArea(instruction.From, instruction.To);
             var areasToAdd = new List<RebootArea>();
+            var areasToRemove = new List<RebootArea>();
             if (instruction.Mode == "on")
                 areasToAdd.Add(newArea);
 
             foreach (var area in areas)
             {
-                var overlappingCorners = area.GetOverlapCorners(newArea);
-                var isContaining = overlappingCorners.Count == 8;
-                if(isContaining)
+                if (newArea.IsOverlapping(area))
                 {
-                    Console.WriteLine($"({area.From.X},{area.From.Y},{area.From.Z}..{area.To.X},{area.To.Y},{area.To.Z}) contains ({newArea.From.X},{newArea.From.Y},{newArea.From.Z}..{newArea.To.X},{newArea.To.Y},{newArea.To.Z})");
-                    continue;
-                }
+                    if (!newArea.IsContaining(area))
+                    {
+                        var remainingParts = area.GetRemainingParts(newArea);
+                        areasToAdd.AddRange(remainingParts);
+                    }
 
-                var isOverlapping = overlappingCorners.Count > 0;
-                if(isOverlapping)
-                {
-                    Console.WriteLine($"COUNT: {overlappingCorners.Count}");
-                    //Console.WriteLine($"COUNT: {overlapCount}. ({newArea.From.X},{newArea.From.Y},{newArea.From.Z}..{newArea.To.X},{newArea.To.Y},{newArea.To.Z}) is overlapping ({area.From.X},{area.From.Y},{area.From.Z}..{area.To.X},{area.To.Y},{area.To.Z})");
+                    areasToRemove.Add(area);
+
                 }
             }
-
-            //var areasToRemove = new List<RebootArea>();
-
-            //foreach (var area in areas)
-            //{
-            //    if (newArea.IsContaining(area))
-            //    {
-            //        areasToRemove.Add(area);
-            //    }
-            //    else if (newArea.IsOverlapping(area))
-            //    {
-            //        var remainingParts = area.GetRemainingParts(newArea);
-            //        areasToRemove.Add(area);
-            //        areasToAdd.AddRange(remainingParts);
-            //    }
-            //}
-
-            //foreach (var area in areasToRemove)
-            //{
-            //    areas.Remove(area);
-            //}
+            
+            foreach (var area in areasToRemove)
+            {
+                areas.Remove(area);
+            }
 
             foreach (var area in areasToAdd)
             {

@@ -6,7 +6,10 @@ public class Year2021Day23 : Puzzle
 {
     public override PuzzleResult RunPart1()
     {
-        return new PuzzleResult(0);
+        var amphipods = new AmphipodsPart1();
+        var result = amphipods.GetResult();
+
+        return new PuzzleResult(result, 11120);
     }
 
     public override PuzzleResult RunPart2()

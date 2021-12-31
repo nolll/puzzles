@@ -36,11 +36,16 @@ public class Matrix3DAddress : IEquatable<Matrix3DAddress>
         return xDiff + yDiff + zDiff;
     }
 
+    public override string ToString()
+    {
+        return $"{X},{Y},{Z}";
+    }
+
     public bool Equals(Matrix3DAddress other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return X == other.X && Y == other.Y && Z == other.Z;
+        return X == other.X && Y == other.Y && Z == other.Z && Id == other.Id;
     }
 
     public override bool Equals(object obj)
@@ -48,11 +53,11 @@ public class Matrix3DAddress : IEquatable<Matrix3DAddress>
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != this.GetType()) return false;
-        return Equals((MatrixAddress)obj);
+        return Equals((Matrix3DAddress)obj);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(X, Y, Z);
+        return HashCode.Combine(X, Y, Z, Id);
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using App.Common.CoordinateSystems;
 
 namespace App.Puzzles.Year2021.Day23;
 
 public class Amphipods
 {
+    private readonly bool _isPrinterEnabled;
     private readonly Matrix<char> _matrix;
     private readonly Dictionary<char, int> _stepCosts;
 
@@ -38,9 +38,12 @@ public class Amphipods
     private readonly MatrixAddress _roomD3 = new(9, 4);
     private readonly MatrixAddress _roomD4 = new(9, 5);
 
-    public Amphipods(string input)
+    public int Energy { get; private set; }
+
+    public Amphipods(string input, bool isPrinterEnabled)
     {
-        _matrix = MatrixBuilder.BuildCharMatrix(input);
+        _isPrinterEnabled = isPrinterEnabled;
+        _matrix = MatrixBuilder.BuildCharMatrix(input.Replace('.', ' ').Replace('#', '.'));
         _stepCosts = new Dictionary<char, int>
         {
             { 'A', 1 },
@@ -50,64 +53,142 @@ public class Amphipods
         };
     }
 
-    public int GetResult()
+    public void ArrangePart1()
     {
-        // solved this by hand
-        var energy = 0;
-
         // Move right D to hallway
-        energy += Move(_roomD1, _hallwayCd);
+        Move(_roomD1, _hallwayCd);
 
         // Move right A to hallway
-        energy += Move(_roomD2, _hallwayD);
+        Move(_roomD2, _hallwayD);
 
         // Move D to room
-        energy += Move(_hallwayCd, _roomD2);
+        Move(_hallwayCd, _roomD2);
 
         // Move other A to hallway
-        energy += Move(_roomC1, _hallwayA);
+        Move(_roomC1, _hallwayA);
 
         // Move other D to room
-        energy += Move(_roomC2, _roomD1);
+        Move(_roomC2, _roomD1);
 
         // Move both Cs to room
-        energy += Move(_roomB1, _roomC2);
-        energy += Move(_roomB2, _roomC1);
+        Move(_roomB1, _roomC2);
+        Move(_roomB2, _roomC1);
 
         // Move both Bs to room
-        energy += Move(_roomA1, _roomB2);
-        energy += Move(_roomA2, _roomB1);
+        Move(_roomA1, _roomB2);
+        Move(_roomA2, _roomB1);
 
         // move both As to room
-        energy += Move(_hallwayA, _roomA2);
-        energy += Move(_hallwayD, _roomA1);
-        
-        return energy;
+        Move(_hallwayA, _roomA2);
+        Move(_hallwayD, _roomA1);
     }
 
-    public int GetResult2()
+    public void ArrangePart2()
     {
-        return 0;
+        Print();
+
+        // Clear room C
+        Move(_roomC1, _hallwayLeft);
+        Move(_roomC2, _hallwayD);
+        Move(_roomC3, _hallwayA);
+        Move(_roomC4, _hallwayAb);
+
+        // Move two Cs to room
+        Move(_roomB1, _roomC4);
+        Move(_roomB2, _roomC3);
+
+        // Move B to hallway
+        Move(_roomB3, _hallwayCd);
+
+        // Move C to room
+        Move(_roomB4, _roomC2);
+
+        // Move two Bs to room
+        Move(_hallwayCd, _roomB4);
+        Move(_hallwayD, _roomB3);
+
+        // Clear room D
+        Move(_roomD1, _hallwayBc);
+        Move(_roomD2, _hallwayRight);
+        Move(_roomD3, _roomC1);
+        Move(_roomD4, _hallwayD);
+
+        // Move Ds and Bs to rooms
+        Move(_hallwayBc, _roomD4);
+        Move(_hallwayAb, _roomD3);
+        Move(_roomA1, _roomB2);
+        Move(_roomA2, _roomD2);
+        Move(_roomA3, _roomD1);
+        Move(_roomA4, _roomB1);
+
+        // Move As to room
+        Move(_hallwayA, _roomA4);
+        Move(_hallwayLeft, _roomA3);
+        Move(_hallwayD, _roomA2);
+        Move(_hallwayRight, _roomA1);
     }
 
-    private int Move(MatrixAddress from, MatrixAddress to)
+    public void TestArrange()
+    {
+        Move(_roomD1, _hallwayRight);
+        Move(_roomD2, _hallwayLeft);
+        Move(_roomC1, _hallwayD);
+        Move(_roomC2, _hallwayCd);
+        Move(_roomC3, _hallwayA);
+        Move(_roomB1, _roomC3);
+        Move(_roomB2, _roomC2);
+        Move(_roomB3, _hallwayBc);
+        Move(_roomB4, _hallwayAb);
+        Move(_hallwayBc, _roomB4);
+        Move(_hallwayCd, _roomB3);
+        Move(_hallwayD, _roomB2);
+        Move(_roomD3, _roomC1);
+        Move(_roomD4, _hallwayD);
+        Move(_hallwayAb, _roomD4);
+        Move(_roomA1, _roomB1);
+        Move(_roomA2, _roomD3);
+        Move(_roomA3, _roomD2);
+        Move(_hallwayA, _roomA3);
+        Move(_hallwayLeft, _roomA2);
+        Move(_hallwayD, _roomA1);
+        Move(_hallwayRight, _roomD1);
+    }
+
+    private void Move(MatrixAddress from, MatrixAddress to)
     {
         _matrix.MoveTo(from);
         var c = _matrix.ReadValue();
 
-        if (c == '#' || c == '.')
-            throw new Exception($"Read character was '{c}'");
+        if (c == '.' || c == ' ')
+            throw new Exception($"Read character was '{c}'. Must be a letter");
 
-        _matrix.WriteValue('.');
+        if (_matrix.ReadValueAt(to) != ' ')
+            throw new Exception($"Target character was '{c}'. Must be ' '");
+        
+        _matrix.WriteValue(' ');
         _matrix.MoveTo(to);
         _matrix.WriteValue(c);
 
         var stepCost = _stepCosts[c];
-        var stepCount = from.ManhattanDistanceTo(to);
+        var stepCount = 0;
         if (from.Y > 1 && to.Y > 1)
-            stepCount += Math.Min(from.Y, to.Y);
+            stepCount += from.Y - 1 + new MatrixAddress(from.X, 1).ManhattanDistanceTo(to);
+        else
+            stepCount = from.ManhattanDistanceTo(to);
 
         var cost = stepCost * stepCount;
-        return cost;
+        Energy += cost;
+        
+        Print();
+    }
+
+    private void Print()
+    {
+        if (!_isPrinterEnabled)
+            return;
+
+        Console.WriteLine(_matrix.Print());
+        Console.WriteLine($"Energy: {Energy}");
+        Console.WriteLine();
     }
 }

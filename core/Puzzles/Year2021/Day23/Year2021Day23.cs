@@ -8,7 +8,7 @@ public class Year2021Day23 : Puzzle
 
     public override PuzzleResult RunPart1()
     {
-        var amphipods = new Amphipods(Input1, false);
+        var amphipods = new Amphipods(Input1);
         amphipods.ArrangePart1();
         var result = amphipods.Energy;
 
@@ -17,7 +17,7 @@ public class Year2021Day23 : Puzzle
 
     public override PuzzleResult RunPart2()
     {
-        var amphipods = new Amphipods(Input2, false);
+        var amphipods = new Amphipods(Input2);
         amphipods.ArrangePart2();
         var result = amphipods.Energy;
 

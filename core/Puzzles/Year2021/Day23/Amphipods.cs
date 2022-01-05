@@ -40,7 +40,7 @@ public class Amphipods
 
     public int Energy { get; private set; }
 
-    public Amphipods(string input, bool isPrinterEnabled)
+    public Amphipods(string input, bool isPrinterEnabled = false)
     {
         _isPrinterEnabled = isPrinterEnabled;
         _matrix = MatrixBuilder.BuildCharMatrix(input.Replace('.', ' ').Replace('#', '.'));

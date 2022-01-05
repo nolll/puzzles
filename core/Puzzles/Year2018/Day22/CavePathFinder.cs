@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2018.Day22;
+namespace Core.Puzzles.Year2018.Day22;
 
 public enum CaveTool
 {

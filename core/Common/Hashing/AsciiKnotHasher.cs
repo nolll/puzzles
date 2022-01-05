@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace App.Common.Hashing;
+namespace Core.Common.Hashing;
 
 public class AsciiKnotHasher
 {

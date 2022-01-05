@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using App.Common.Strings;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2018.Day02;
+namespace Core.Puzzles.Year2018.Day02;
 
 public class SimilarIdsPuzzle
 {

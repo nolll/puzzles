@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2016.Day04;
+namespace Core.Puzzles.Year2016.Day04;
 
 public class RoomValidator
 {

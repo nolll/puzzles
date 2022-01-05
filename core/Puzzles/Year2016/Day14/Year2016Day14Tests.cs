@@ -1,7 +1,7 @@
-using App.Common.Strings;
+using Core.Common.Strings;
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2016.Day14;
+namespace Core.Puzzles.Year2016.Day14;
 
 public class Year2016Day14Tests
 {

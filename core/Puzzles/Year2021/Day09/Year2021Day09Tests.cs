@@ -1,7 +1,6 @@
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
-namespace App.Puzzles.Year2021.Day09;
+namespace Core.Puzzles.Year2021.Day09;
 
 public class Year2021Day09Tests
 {

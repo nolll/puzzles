@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using App.Common.Strings;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2021.Day01;
+namespace Core.Puzzles.Year2021.Day01;
 
 public class DepthMeasurement
 {

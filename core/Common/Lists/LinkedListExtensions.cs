@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace App.Common.Lists;
+namespace Core.Common.Lists;
 
 public static class LinkedListExtensions
 {

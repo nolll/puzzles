@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using App.Common.Strings;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2020.Day18;
+namespace Core.Puzzles.Year2020.Day18;
 
 public class HomeworkCalculator
 {

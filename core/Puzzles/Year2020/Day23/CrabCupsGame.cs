@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.Lists;
+using Core.Common.Lists;
 
-namespace App.Puzzles.Year2020.Day23;
+namespace Core.Puzzles.Year2020.Day23;
 
 public class CrabCupsGame
 {

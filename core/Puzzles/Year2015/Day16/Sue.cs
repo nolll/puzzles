@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2015.Day16;
+namespace Core.Puzzles.Year2015.Day16;
 
 public class Sue
 {

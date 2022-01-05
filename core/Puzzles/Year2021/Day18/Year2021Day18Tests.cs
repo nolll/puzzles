@@ -1,11 +1,6 @@
-using System.Collections;
-using System.ComponentModel.DataAnnotations;
-using System.Xml.Serialization;
-using NuGet.Frameworks;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
-namespace App.Puzzles.Year2021.Day18;
+namespace Core.Puzzles.Year2021.Day18;
 
 public class Year2021Day18Tests
 {

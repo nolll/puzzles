@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2017.Day18;
+namespace Core.Puzzles.Year2017.Day18;
 
 public class DuetProgramPart1
 {

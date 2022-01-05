@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems;
 
 public class Matrix4DAddress : IEquatable<Matrix4DAddress>
 {

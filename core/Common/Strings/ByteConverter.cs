@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace App.Common.Strings;
+namespace Core.Common.Strings;
 
 public static class ByteConverter
 {

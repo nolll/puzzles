@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2015.Day22;
+namespace Core.Puzzles.Year2015.Day22;
 
 public enum WizardRpgGameMode
 {

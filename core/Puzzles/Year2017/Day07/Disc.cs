@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2017.Day07;
+namespace Core.Puzzles.Year2017.Day07;
 
 public class Disc
 {

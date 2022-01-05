@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using App.Common.Computers.IntCode;
+using Core.Common.Computers.IntCode;
 
-namespace App.Puzzles.Year2019.Day23;
+namespace Core.Puzzles.Year2019.Day23;
 
 public class CategorySixComputer
 {

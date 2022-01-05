@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2018.Day25;
+namespace Core.Puzzles.Year2018.Day25;
 
 public class Year2018Day25Tests
 {

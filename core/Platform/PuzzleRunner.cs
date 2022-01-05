@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using App.Common.Timing;
+using Core.Common.Timing;
 
-namespace App.Platform;
+namespace Core.Platform;
 
 public class PuzzleRunner
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2019.Day14;
+namespace Core.Puzzles.Year2019.Day14;
 
 public class NanoReactor
 {

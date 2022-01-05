@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Text;
 
-namespace App.Puzzles.Year2016.Day06;
+namespace Core.Puzzles.Year2016.Day06;
 
 public class RepetitionCodeReader
 {

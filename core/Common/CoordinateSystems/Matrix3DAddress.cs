@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace App.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems;
 
 [DebuggerDisplay("{X},{Y},{Z}")]
 public class Matrix3DAddress : IEquatable<Matrix3DAddress>

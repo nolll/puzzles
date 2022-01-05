@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2016.Day25;
+namespace Core.Puzzles.Year2016.Day25;
 
 public class ClockSignalGenerator
 {

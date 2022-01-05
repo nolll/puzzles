@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using App.Platform;
+using Core.Platform;
 
-namespace App.Puzzles.Year2018.Day24;
+namespace Core.Puzzles.Year2018.Day24;
 
 public class Year2018Day24 : Puzzle
 {

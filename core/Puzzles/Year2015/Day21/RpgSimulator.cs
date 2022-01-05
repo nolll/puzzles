@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.Combinatorics;
+using Core.Common.Combinatorics;
 
-namespace App.Puzzles.Year2015.Day21;
+namespace Core.Puzzles.Year2015.Day21;
 
 public class RpgSimulator
 {

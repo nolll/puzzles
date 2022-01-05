@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace App.Common.Maths;
+namespace Core.Common.Maths;
 
 public class MathToolsTests
 {

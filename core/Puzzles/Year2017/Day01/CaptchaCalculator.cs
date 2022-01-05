@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2017.Day01;
+namespace Core.Puzzles.Year2017.Day01;
 
 public class CaptchaCalculator
 {

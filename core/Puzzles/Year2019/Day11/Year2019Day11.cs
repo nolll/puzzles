@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using App.Platform;
+using Core.Platform;
 
-namespace App.Puzzles.Year2019.Day11;
+namespace Core.Puzzles.Year2019.Day11;
 
 public class Year2019Day11 : Puzzle
 {

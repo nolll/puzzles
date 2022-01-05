@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace App.Puzzles.Year2019.Day23;
+namespace Core.Puzzles.Year2019.Day23;
 
 public class CategorySixNetwork
 {

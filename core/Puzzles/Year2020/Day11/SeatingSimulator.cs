@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2020.Day11;
+namespace Core.Puzzles.Year2020.Day11;
 
 public abstract class SeatingSimulator
 {

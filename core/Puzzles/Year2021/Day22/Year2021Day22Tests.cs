@@ -1,7 +1,7 @@
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2021.Day22;
+namespace Core.Puzzles.Year2021.Day22;
 
 public class Year2021Day22Tests
 {

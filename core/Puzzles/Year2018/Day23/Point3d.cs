@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Puzzles.Year2018.Day23;
+namespace Core.Puzzles.Year2018.Day23;
 
 public class Point3d
 {

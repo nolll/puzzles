@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace App.Common.Computers.IntCode;
+namespace Core.Common.Computers.IntCode;
 
 public class BoostRunner
 {

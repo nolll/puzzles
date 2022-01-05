@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2017.Day06;
+namespace Core.Puzzles.Year2017.Day06;
 
 public class MemoryReallocator
 {

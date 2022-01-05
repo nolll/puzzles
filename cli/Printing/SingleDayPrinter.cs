@@ -1,5 +1,5 @@
 ﻿using System;
-using App.Platform;
+using Core.Platform;
 
 namespace Cli.Printing;
 

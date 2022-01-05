@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2020.Day20;
+namespace Core.Puzzles.Year2020.Day20;
 
 public class JigsawTile
 {

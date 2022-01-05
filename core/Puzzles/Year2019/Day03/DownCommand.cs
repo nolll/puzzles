@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2019.Day03;
+namespace Core.Puzzles.Year2019.Day03;
 
 public class DownCommand : Command
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2021.Day20;
+namespace Core.Puzzles.Year2021.Day20;
 
 public class TrenchMap
 {

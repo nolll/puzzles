@@ -1,4 +1,4 @@
-﻿namespace App.Puzzles.Year2016.Day08;
+﻿namespace Core.Puzzles.Year2016.Day08;
 
 public interface IScreenSimulatorInstruction
 {

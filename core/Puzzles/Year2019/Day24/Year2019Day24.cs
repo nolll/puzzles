@@ -1,6 +1,6 @@
-﻿using App.Platform;
+﻿using Core.Platform;
 
-namespace App.Puzzles.Year2019.Day24;
+namespace Core.Puzzles.Year2019.Day24;
 
 public class Year2019Day24 : Puzzle
 {

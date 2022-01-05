@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2021.Day16;
+namespace Core.Puzzles.Year2021.Day16;
 
 public enum PacketType
 {

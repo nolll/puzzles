@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace App.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems;
 
 public class Matrix<T> : BaseMatrix
 {

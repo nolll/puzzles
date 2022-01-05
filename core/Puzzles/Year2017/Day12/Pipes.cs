@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.Strings;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2017.Day12;
+namespace Core.Puzzles.Year2017.Day12;
 
 public class Pipes
 {

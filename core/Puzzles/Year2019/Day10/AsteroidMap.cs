@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.Strings;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2019.Day10;
+namespace Core.Puzzles.Year2019.Day10;
 
 public class AsteroidMap
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems;
 
 public class MatrixDirection : IEquatable<MatrixDirection>
 {

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using App.Common.Hashing;
-using App.Common.Strings;
+using Core.Common.Hashing;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2016.Day14;
+namespace Core.Puzzles.Year2016.Day14;
 
 public class KeyGenerator
 {

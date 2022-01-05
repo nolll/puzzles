@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-namespace App.Puzzles.Year2019.Day22;
+namespace Core.Puzzles.Year2019.Day22;
 
 /*
  * Most of part two was copied from https://github.com/sanraith/aoc2019/blob/master/aoc2019.Puzzles/Solutions/Day22.cs

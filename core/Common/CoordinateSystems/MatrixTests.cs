@@ -1,7 +1,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace App.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems;
 
 public class MatrixTests
 {

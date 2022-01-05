@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Puzzles.Year2016.Day20;
+namespace Core.Puzzles.Year2016.Day20;
 
 public class IpRange
 {

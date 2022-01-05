@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using App.Common.Strings;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2018.Day04;
+namespace Core.Puzzles.Year2018.Day04;
 
 public static class GuardEventReader
 {

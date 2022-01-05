@@ -1,4 +1,4 @@
-﻿namespace App.Platform;
+﻿namespace Core.Platform;
 
 public class TimeoutPuzzleResult : PuzzleResult
 {

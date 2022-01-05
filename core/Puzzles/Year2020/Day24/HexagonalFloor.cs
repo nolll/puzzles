@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.CoordinateSystems;
-using App.Common.Strings;
+using Core.Common.CoordinateSystems;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2020.Day24;
+namespace Core.Puzzles.Year2020.Day24;
 
 public class HexagonalFloor
 {

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace App.Puzzles.Year2017.Day04;
+namespace Core.Puzzles.Year2017.Day04;
 
 public class PassphraseValidator
 {

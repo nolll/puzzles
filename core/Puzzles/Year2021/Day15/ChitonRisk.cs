@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2021.Day15;
+namespace Core.Puzzles.Year2021.Day15;
 
 public class ChitonRisk
 {

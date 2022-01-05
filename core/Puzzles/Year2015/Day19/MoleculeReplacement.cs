@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace App.Puzzles.Year2015.Day19;
+namespace Core.Puzzles.Year2015.Day19;
 
 internal class MoleculeReplacement
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Puzzles.Year2018.Day02;
+namespace Core.Puzzles.Year2018.Day02;
 
 public class StringsAreDifferentLengthsException : Exception
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace App.Puzzles.Year2020.Day11;
+namespace Core.Puzzles.Year2020.Day11;
 
 public class SeatingSimulatorAdjacentSeats : SeatingSimulator
 {

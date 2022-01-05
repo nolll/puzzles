@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2015.Day22;
+namespace Core.Puzzles.Year2015.Day22;
 
 public class WizardRpgSpell
 {

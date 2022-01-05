@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Text.Json;
 
-namespace App.Puzzles.Year2015.Day12;
+namespace Core.Puzzles.Year2015.Day12;
 
 public class JsonDoc
 {

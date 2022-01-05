@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace App.Puzzles.Year2020.Day02;
+namespace Core.Puzzles.Year2020.Day02;
 
 public class PasswordPolicyValidator
 {

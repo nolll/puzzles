@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.Computers.IntCode;
-using App.Common.Strings;
+using Core.Common.Computers.IntCode;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2019.Day21;
+namespace Core.Puzzles.Year2019.Day21;
 
 public class SpringDroid
 {

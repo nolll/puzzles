@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Puzzles.Year2019.Day10;
+namespace Core.Puzzles.Year2019.Day10;
 
 public class Asteroid : IEquatable<Asteroid>
 {

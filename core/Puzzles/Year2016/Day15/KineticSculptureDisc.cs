@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2016.Day15;
+namespace Core.Puzzles.Year2016.Day15;
 
 public class KineticSculptureDisc
 {

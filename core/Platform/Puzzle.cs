@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace App.Platform;
+namespace Core.Platform;
 
 public abstract class Puzzle
 {

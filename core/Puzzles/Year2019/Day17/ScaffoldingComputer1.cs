@@ -1,7 +1,7 @@
 ﻿using System.Text;
-using App.Common.Computers.IntCode;
+using Core.Common.Computers.IntCode;
 
-namespace App.Puzzles.Year2019.Day17;
+namespace Core.Puzzles.Year2019.Day17;
 
 public class ScaffoldingComputer1
 {

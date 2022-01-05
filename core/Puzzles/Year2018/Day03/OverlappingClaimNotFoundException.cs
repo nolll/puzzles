@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Puzzles.Year2018.Day03;
+namespace Core.Puzzles.Year2018.Day03;
 
 public class OverlappingClaimNotFoundException : Exception
 {

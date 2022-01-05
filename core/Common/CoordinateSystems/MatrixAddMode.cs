@@ -1,4 +1,4 @@
-namespace App.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems;
 
 public enum MatrixAddMode
 {

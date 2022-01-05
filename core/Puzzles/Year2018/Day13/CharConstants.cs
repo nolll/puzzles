@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2018.Day13;
+namespace Core.Puzzles.Year2018.Day13;
 
 public static class CharConstants
 {

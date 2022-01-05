@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Puzzles.Year2015.Day21;
+namespace Core.Puzzles.Year2015.Day21;
 
 public abstract class RpgCharacter
 {

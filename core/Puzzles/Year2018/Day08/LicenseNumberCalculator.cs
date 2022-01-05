@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2018.Day08;
+namespace Core.Puzzles.Year2018.Day08;
 
 public class LicenseNumberCalculator
 {

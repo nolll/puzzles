@@ -1,4 +1,4 @@
-﻿namespace App.Puzzles.Year2015.Day01;
+﻿namespace Core.Puzzles.Year2015.Day01;
 
 public class FloorNavigator
 {

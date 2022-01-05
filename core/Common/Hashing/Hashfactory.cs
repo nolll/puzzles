@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using App.Common.Strings;
+using Core.Common.Strings;
 
-namespace App.Common.Hashing;
+namespace Core.Common.Hashing;
 
 public class Hashfactory
 {

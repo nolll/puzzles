@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2020.Day12;
+namespace Core.Puzzles.Year2020.Day12;
 
 public class FerryNavigationInstruction
 {

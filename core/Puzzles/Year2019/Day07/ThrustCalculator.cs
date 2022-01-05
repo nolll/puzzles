@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.Combinatorics;
+using Core.Common.Combinatorics;
 
-namespace App.Puzzles.Year2019.Day07;
+namespace Core.Puzzles.Year2019.Day07;
 
 public class ThrustCalculator
 {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Common.Maths;
+namespace Core.Common.Maths;
 
 public static class MathTools
 {

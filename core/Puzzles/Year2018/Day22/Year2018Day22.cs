@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using App.Common.Strings;
-using App.Platform;
+using Core.Common.Strings;
+using Core.Platform;
 
-namespace App.Puzzles.Year2018.Day22;
+namespace Core.Puzzles.Year2018.Day22;
 
 public class Year2018Day22 : Puzzle
 {

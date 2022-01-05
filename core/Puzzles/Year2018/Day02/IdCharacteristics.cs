@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace App.Puzzles.Year2018.Day02;
+namespace Core.Puzzles.Year2018.Day02;
 
 public class IdCharacteristics
 {

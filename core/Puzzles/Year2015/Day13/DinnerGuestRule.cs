@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2015.Day13;
+namespace Core.Puzzles.Year2015.Day13;
 
 public class DinnerGuestRule
 {

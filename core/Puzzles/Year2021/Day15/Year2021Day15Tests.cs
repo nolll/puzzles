@@ -1,8 +1,6 @@
-using App.Common.Computers.IntCode.Instructions;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
-namespace App.Puzzles.Year2021.Day15;
+namespace Core.Puzzles.Year2021.Day15;
 
 public class Year2021Day15Tests
 {

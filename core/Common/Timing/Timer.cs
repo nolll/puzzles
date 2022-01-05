@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Common.Timing;
+namespace Core.Common.Timing;
 
 public class Timer
 {

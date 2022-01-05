@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2018.Day14;
+namespace Core.Puzzles.Year2018.Day14;
 
 public class RecipeGenerator
 {

@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2017.Day17;
+namespace Core.Puzzles.Year2017.Day17;
 
 public class SpinlockRunnerPart2
 {

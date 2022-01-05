@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2016.Day21;
+namespace Core.Puzzles.Year2016.Day21;
 
 public class RotateLeftInstruction : RotateInstruction
 {

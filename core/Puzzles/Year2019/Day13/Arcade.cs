@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using App.Common.Computers.IntCode;
-using App.Common.CoordinateSystems;
+using Core.Common.Computers.IntCode;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2019.Day13;
+namespace Core.Puzzles.Year2019.Day13;
 
 public class Arcade
 {

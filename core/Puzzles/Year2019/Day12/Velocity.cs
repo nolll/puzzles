@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Puzzles.Year2019.Day12;
+namespace Core.Puzzles.Year2019.Day12;
 
 public class Velocity
 {

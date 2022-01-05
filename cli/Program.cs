@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using App;
-using App.Platform;
-using App.Puzzles.Year2021.Day24;
 using Cli.ConsoleTools;
 using Cli.Printing;
+using Core;
+using Core.Platform;
 
 namespace Cli;
 

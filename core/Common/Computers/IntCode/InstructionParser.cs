@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using App.Common.Computers.IntCode.Instructions;
+using Core.Common.Computers.IntCode.Instructions;
 
-namespace App.Common.Computers.IntCode;
+namespace Core.Common.Computers.IntCode;
 
 public static class InstructionParser
 {

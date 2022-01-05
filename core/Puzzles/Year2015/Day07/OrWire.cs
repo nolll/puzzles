@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2015.Day07;
+namespace Core.Puzzles.Year2015.Day07;
 
 public class OrWire : Wire
 {

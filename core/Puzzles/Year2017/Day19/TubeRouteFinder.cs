@@ -1,7 +1,7 @@
 using System.Text;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2017.Day19;
+namespace Core.Puzzles.Year2017.Day19;
 
 public class TubeRouteFinder
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Puzzles.Year2018.Day04;
+namespace Core.Puzzles.Year2018.Day04;
 
 public class GuardEvent
 {

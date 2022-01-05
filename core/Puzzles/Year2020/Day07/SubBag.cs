@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2020.Day07;
+namespace Core.Puzzles.Year2020.Day07;
 
 public class SubBag
 {

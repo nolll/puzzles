@@ -1,7 +1,7 @@
 using System.Linq;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2020.Day17;
+namespace Core.Puzzles.Year2020.Day17;
 
 public class ConwayCube
 {

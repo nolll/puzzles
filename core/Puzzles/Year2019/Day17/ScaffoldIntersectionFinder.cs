@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2019.Day17;
+namespace Core.Puzzles.Year2019.Day17;
 
 public class ScaffoldIntersectionFinder
 {

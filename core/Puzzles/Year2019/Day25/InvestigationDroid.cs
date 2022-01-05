@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using App.Common.Computers.IntCode;
+using Core.Common.Computers.IntCode;
 
-namespace App.Puzzles.Year2019.Day25;
+namespace Core.Puzzles.Year2019.Day25;
 
 public class InvestigationDroid
 {

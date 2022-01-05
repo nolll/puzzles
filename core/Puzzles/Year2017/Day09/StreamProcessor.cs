@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Text;
 
-namespace App.Puzzles.Year2017.Day09;
+namespace Core.Puzzles.Year2017.Day09;
 
 public class StreamProcessor
 {

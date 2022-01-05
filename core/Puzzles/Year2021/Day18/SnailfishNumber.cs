@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2021.Day18;
+namespace Core.Puzzles.Year2021.Day18;
 
 public class SnailfishNumber
 {

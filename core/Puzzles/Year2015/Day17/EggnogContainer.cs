@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Puzzles.Year2015.Day17;
+namespace Core.Puzzles.Year2015.Day17;
 
 public class EggnogContainer : IEquatable<EggnogContainer>
 {

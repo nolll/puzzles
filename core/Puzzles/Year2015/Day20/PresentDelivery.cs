@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2015.Day20;
+namespace Core.Puzzles.Year2015.Day20;
 
 public class PresentDelivery
 {

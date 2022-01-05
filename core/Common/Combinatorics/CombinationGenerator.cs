@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Common.Combinatorics;
+namespace Core.Common.Combinatorics;
 
 public static class CombinationGenerator
 {

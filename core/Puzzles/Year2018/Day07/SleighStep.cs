@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2018.Day07;
+namespace Core.Puzzles.Year2018.Day07;
 
 public class SleighStep
 {

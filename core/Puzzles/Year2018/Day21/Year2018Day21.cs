@@ -1,7 +1,7 @@
-﻿using App.Common.Computers.Operation;
-using App.Platform;
+﻿using Core.Common.Computers.Operation;
+using Core.Platform;
 
-namespace App.Puzzles.Year2018.Day21;
+namespace Core.Puzzles.Year2018.Day21;
 
 public class Year2018Day21 : Puzzle
 {

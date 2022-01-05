@@ -1,7 +1,7 @@
-﻿using App.Common.Hashing;
-using App.Platform;
+﻿using Core.Common.Hashing;
+using Core.Platform;
 
-namespace App.Puzzles.Year2017.Day10;
+namespace Core.Puzzles.Year2017.Day10;
 
 public class Year2017Day10 : Puzzle
 {

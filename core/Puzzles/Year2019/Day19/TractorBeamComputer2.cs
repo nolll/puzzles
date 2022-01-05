@@ -1,6 +1,6 @@
-﻿using App.Common.Computers.IntCode;
+﻿using Core.Common.Computers.IntCode;
 
-namespace App.Puzzles.Year2019.Day19;
+namespace Core.Puzzles.Year2019.Day19;
 
 public class TractorBeamComputer2
 {

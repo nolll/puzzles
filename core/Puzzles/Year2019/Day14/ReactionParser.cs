@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2019.Day14;
+namespace Core.Puzzles.Year2019.Day14;
 
 public class ReactionParser
 {

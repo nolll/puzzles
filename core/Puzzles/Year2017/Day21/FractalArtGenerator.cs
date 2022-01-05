@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using App.Common.CoordinateSystems;
-using App.Common.Strings;
+using Core.Common.CoordinateSystems;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2017.Day21;
+namespace Core.Puzzles.Year2017.Day21;
 
 public class FractalArtGenerator
 {

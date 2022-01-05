@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2018.Day23;
+namespace Core.Puzzles.Year2018.Day23;
 
 public class Nanobot
 {

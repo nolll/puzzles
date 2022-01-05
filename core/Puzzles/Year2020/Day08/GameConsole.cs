@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2020.Day08;
+namespace Core.Puzzles.Year2020.Day08;
 
 public class GameConsole
 {

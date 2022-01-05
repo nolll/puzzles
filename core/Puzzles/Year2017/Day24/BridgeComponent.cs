@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Puzzles.Year2017.Day24;
+namespace Core.Puzzles.Year2017.Day24;
 
 public class BridgeComponent : IEquatable<BridgeComponent>
 {

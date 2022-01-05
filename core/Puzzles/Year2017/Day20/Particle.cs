@@ -1,7 +1,7 @@
 using System;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2017.Day20;
+namespace Core.Puzzles.Year2017.Day20;
 
 public class Particle
 {

@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2017.Day15;
+namespace Core.Puzzles.Year2017.Day15;
 
 public class Generator
 {

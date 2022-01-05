@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using App.Common.Computers.IntCode.Parameters;
+using Core.Common.Computers.IntCode.Parameters;
 
-namespace App.Common.Computers.IntCode.Instructions;
+namespace Core.Common.Computers.IntCode.Instructions;
 
 public abstract class Instruction
 {

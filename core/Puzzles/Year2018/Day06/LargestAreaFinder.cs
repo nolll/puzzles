@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2018.Day06;
+namespace Core.Puzzles.Year2018.Day06;
 
 public class LargestAreaFinder
 {

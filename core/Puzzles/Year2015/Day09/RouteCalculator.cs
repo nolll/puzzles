@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.Combinatorics;
-using App.Common.Strings;
+using Core.Common.Combinatorics;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2015.Day09;
+namespace Core.Puzzles.Year2015.Day09;
 
 public class RouteCalculator
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Puzzles.Year2015.Day14;
+namespace Core.Puzzles.Year2015.Day14;
 
 public class Reindeer
 {

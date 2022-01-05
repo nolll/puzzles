@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using App.Common.Strings;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2017.Day18;
+namespace Core.Puzzles.Year2017.Day18;
 
 public class SingleRunner
 {

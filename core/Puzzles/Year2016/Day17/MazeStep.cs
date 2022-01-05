@@ -1,6 +1,6 @@
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2016.Day17;
+namespace Core.Puzzles.Year2016.Day17;
 
 public class MazeStep
 {

@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using App.Common.CoordinateSystems;
-using App.Common.Hashing;
+using Core.Common.CoordinateSystems;
+using Core.Common.Hashing;
 
-namespace App.Puzzles.Year2017.Day14;
+namespace Core.Puzzles.Year2017.Day14;
 
 public class DiskDefragmenter
 {

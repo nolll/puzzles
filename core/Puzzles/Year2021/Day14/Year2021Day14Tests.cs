@@ -1,9 +1,6 @@
-using System.Formats.Asn1;
-using NuGet.Frameworks;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
-namespace App.Puzzles.Year2021.Day14;
+namespace Core.Puzzles.Year2021.Day14;
 
 public class Year2021Day14Tests
 {

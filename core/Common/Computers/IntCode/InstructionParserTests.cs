@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using App.Common.Computers.IntCode.Instructions;
+using Core.Common.Computers.IntCode.Instructions;
 using NUnit.Framework;
 
-namespace App.Common.Computers.IntCode;
+namespace Core.Common.Computers.IntCode;
 
 public class InstructionParserTests
 {

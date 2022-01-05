@@ -1,7 +1,7 @@
-﻿using App.Common.Computers.IntCode;
-using App.Platform;
+﻿using Core.Common.Computers.IntCode;
+using Core.Platform;
 
-namespace App.Puzzles.Year2019.Day09;
+namespace Core.Puzzles.Year2019.Day09;
 
 public class Year2019Day09 : Puzzle
 {

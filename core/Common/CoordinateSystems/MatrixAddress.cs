@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace App.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems;
 
 [DebuggerDisplay("{X},{Y}")]
 public class MatrixAddress : IEquatable<MatrixAddress>

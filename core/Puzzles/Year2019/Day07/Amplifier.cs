@@ -1,6 +1,6 @@
-using App.Common.Computers.IntCode;
+using Core.Common.Computers.IntCode;
 
-namespace App.Puzzles.Year2019.Day07;
+namespace Core.Puzzles.Year2019.Day07;
 
 public class Amplifier
 {

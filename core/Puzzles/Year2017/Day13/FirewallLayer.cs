@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2017.Day13;
+namespace Core.Puzzles.Year2017.Day13;
 
 public class FirewallLayer
 {

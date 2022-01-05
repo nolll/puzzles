@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace App.Puzzles.Year2019.Day16;
+namespace Core.Puzzles.Year2019.Day16;
 
 public class FrequencyAlgorithmPart1
 {

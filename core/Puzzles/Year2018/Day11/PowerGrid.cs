@@ -1,7 +1,7 @@
 using System;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2018.Day11;
+namespace Core.Puzzles.Year2018.Day11;
 
 public class PowerGrid
 {

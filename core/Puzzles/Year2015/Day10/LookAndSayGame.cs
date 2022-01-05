@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace App.Puzzles.Year2015.Day10;
+namespace Core.Puzzles.Year2015.Day10;
 
 public class LookAndSayGame
 {

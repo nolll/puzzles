@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.Strings;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2017.Day15;
+namespace Core.Puzzles.Year2017.Day15;
 
 public class GeneratorDuel
 {

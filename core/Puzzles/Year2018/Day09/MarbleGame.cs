@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.Lists;
+using Core.Common.Lists;
 
-namespace App.Puzzles.Year2018.Day09;
+namespace Core.Puzzles.Year2018.Day09;
 
 public class MarbleGame
 {

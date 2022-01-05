@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2021.Day17;
+namespace Core.Puzzles.Year2021.Day17;
 
 public class TrickShot
 {

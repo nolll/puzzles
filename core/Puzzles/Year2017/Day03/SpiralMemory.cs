@@ -1,7 +1,7 @@
 using System.Linq;
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2017.Day03;
+namespace Core.Puzzles.Year2017.Day03;
 
 public class SpiralMemory
 {

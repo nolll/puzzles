@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2021.Day24;
+namespace Core.Puzzles.Year2021.Day24;
 
 public class Monad
 {

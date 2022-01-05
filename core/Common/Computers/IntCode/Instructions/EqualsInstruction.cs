@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace App.Common.Computers.IntCode.Instructions;
+namespace Core.Common.Computers.IntCode.Instructions;
 
 public class EqualsInstruction : Instruction
 {

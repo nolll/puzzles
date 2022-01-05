@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2015.Day09;
+namespace Core.Puzzles.Year2015.Day09;
 
 public class Distance
 {

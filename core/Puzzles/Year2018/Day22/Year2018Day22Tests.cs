@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace App.Puzzles.Year2018.Day22;
+namespace Core.Puzzles.Year2018.Day22;
 
 // todo: fix test
 public class Year2018Day22Tests

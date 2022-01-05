@@ -1,4 +1,4 @@
-﻿namespace App.Puzzles.Year2019.Day08;
+﻿namespace Core.Puzzles.Year2019.Day08;
 
 public class SpaceImageDimensions
 {

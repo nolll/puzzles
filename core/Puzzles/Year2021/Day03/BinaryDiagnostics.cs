@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using App.Common.Strings;
+using Core.Common.Strings;
 
-namespace App.Puzzles.Year2021.Day03;
+namespace Core.Puzzles.Year2021.Day03;
 
 public class BinaryDiagnostics
 {

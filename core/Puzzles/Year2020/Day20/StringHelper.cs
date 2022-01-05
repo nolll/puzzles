@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Puzzles.Year2020.Day20;
+namespace Core.Puzzles.Year2020.Day20;
 
 public static class StringHelper
 {

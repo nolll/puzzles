@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using App.Platform;
-using App.Puzzles.Year2015.Day01;
+using Core.Platform;
 
-namespace App;
+namespace Core;
 
 public class PuzzleRepository
 {

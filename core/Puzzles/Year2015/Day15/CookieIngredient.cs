@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2015.Day15;
+namespace Core.Puzzles.Year2015.Day15;
 
 public class CookieIngredient
 {

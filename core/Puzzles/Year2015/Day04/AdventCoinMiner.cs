@@ -1,7 +1,7 @@
 ﻿using System;
-using App.Common.Hashing;
+using Core.Common.Hashing;
 
-namespace App.Puzzles.Year2015.Day04;
+namespace Core.Puzzles.Year2015.Day04;
 
 public class AdventCoinMiner
 {

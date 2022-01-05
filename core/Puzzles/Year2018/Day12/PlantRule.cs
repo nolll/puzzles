@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace App.Puzzles.Year2018.Day12;
+namespace Core.Puzzles.Year2018.Day12;
 
 public class PlantRule
 {

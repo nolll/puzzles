@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace App.Puzzles.Year2020.Day05;
+namespace Core.Puzzles.Year2020.Day05;
 
 public class BoardingCard
 {

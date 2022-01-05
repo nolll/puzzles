@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace App.Common.Computers.Operation;
+namespace Core.Common.Computers.Operation;
 
 public class OperationMatch
 {

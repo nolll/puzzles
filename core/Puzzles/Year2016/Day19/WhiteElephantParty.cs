@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using App.Common.Lists;
+using Core.Common.Lists;
 
-namespace App.Puzzles.Year2016.Day19;
+namespace Core.Puzzles.Year2016.Day19;
 
 public class WhiteElephantParty
 {

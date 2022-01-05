@@ -1,7 +1,7 @@
-﻿using App.Common.Strings;
-using App.Platform;
+﻿using Core.Common.Strings;
+using Core.Platform;
 
-namespace App.Puzzles.Year2015.Day22;
+namespace Core.Puzzles.Year2015.Day22;
 
 public class Year2015Day22 : Puzzle
 {

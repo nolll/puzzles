@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using App.Common.CoordinateSystems;
-using App.Common.Maths;
+using Core.Common.CoordinateSystems;
+using Core.Common.Maths;
 
-namespace App.Puzzles.Year2019.Day12;
+namespace Core.Puzzles.Year2019.Day12;
 
 public class MoonTracker
 {

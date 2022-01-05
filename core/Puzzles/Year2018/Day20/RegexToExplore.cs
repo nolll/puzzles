@@ -1,6 +1,6 @@
-using App.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems;
 
-namespace App.Puzzles.Year2018.Day20;
+namespace Core.Puzzles.Year2018.Day20;
 
 public class RegexToExplore
 {

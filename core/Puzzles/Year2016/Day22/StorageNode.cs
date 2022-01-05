@@ -1,4 +1,4 @@
-﻿namespace App.Puzzles.Year2016.Day22;
+﻿namespace Core.Puzzles.Year2016.Day22;
 
 public class StorageNode
 {

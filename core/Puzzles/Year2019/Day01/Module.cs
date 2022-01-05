@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Puzzles.Year2019.Day01;
+namespace Core.Puzzles.Year2019.Day01;
 
 public class Module
 {

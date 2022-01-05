@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2018.Day15;
+namespace Core.Puzzles.Year2018.Day15;
 
 public static class BattleFigureType
 {

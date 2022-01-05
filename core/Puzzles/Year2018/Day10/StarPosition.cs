@@ -1,4 +1,4 @@
-namespace App.Puzzles.Year2018.Day10;
+namespace Core.Puzzles.Year2018.Day10;
 
 public class StarPosition
 {

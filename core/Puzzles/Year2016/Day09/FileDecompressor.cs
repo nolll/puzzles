@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace App.Puzzles.Year2016.Day09;
+namespace Core.Puzzles.Year2016.Day09;
 
 public class FileDecompressor
 {

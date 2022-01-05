@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using App.Common.Strings;
+using Core.Common.Strings;
 
-namespace App.Common.Computers.Operation;
+namespace Core.Common.Computers.Operation;
 
 public class OpComputer
 {

@@ -58,7 +58,7 @@ public class NaughtyOrNiceEvaluator
 
     private bool ContainsRepeatingPair(string input)
     {
-        for (var i = 0; i < input.Length - 1; i++)
+        for (var i = 0; i < input.Length - 2; i++)
         {
             var str = input.Substring(i, 2);
             var firstOccurence = input.IndexOf(str, StringComparison.InvariantCulture);

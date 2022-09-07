@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Core.Puzzles.Year2015.Day10;
 
@@ -18,7 +19,7 @@ public class LookAndSayGame
     {
         if (iteration >= _iterations)
             return s;
-        var parts = GetParts(s);
+        var parts = GetPartsWithLoop(s);
         var str = GenerateString(parts);
         return NextString(str, iteration + 1);
     }
@@ -39,7 +40,7 @@ public class LookAndSayGame
         return $"{part.Count}{part.Character}";
     }
 
-    private IList<Part> GetParts(string s)
+    private IList<Part> GetPartsWithLoop(string s)
     {
         var parts = new List<Part>();
         Part currentPart = null;
@@ -57,6 +58,22 @@ public class LookAndSayGame
         return parts;
     }
 
+    private IList<Part> GetPartsWithRegex(string s)
+    {
+        var regex = new Regex("(.)\\1*");
+        var matches = regex.Matches(s);
+
+        var parts = new List<Part>();
+        foreach (var match in matches)
+        {
+            var v = match.ToString();
+            var part = new Part(v[0], v.Length);
+            parts.Add(part);
+        }
+
+        return parts;
+    }
+
     private class Part
     {
         public char Character { get; }
@@ -66,6 +83,12 @@ public class LookAndSayGame
         {
             Character = character;
             Count = 0;
+        }
+
+        public Part(char character, int count)
+        {
+            Character = character;
+            Count = count;
         }
     }
 }

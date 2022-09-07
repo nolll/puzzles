@@ -37,21 +37,21 @@ public class ChristmasLightsController
         if (s.StartsWith("turn on"))
         {
             return useBrightness
-                ? (Command)new IncreaseCommand(paramString, 1)
+                ? new IncreaseCommand(paramString, 1)
                 : new TurnOnCommand(paramString);
         }
 
         if (s.StartsWith("turn off"))
         {
             return useBrightness
-                ? (Command)new IncreaseCommand(paramString, -1)
+                ? new IncreaseCommand(paramString, -1)
                 : new TurnOffCommand(s);
         }
 
         if (s.StartsWith("toggle"))
         {
             return useBrightness
-                ? (Command)new IncreaseCommand(paramString, 2)
+                ? new IncreaseCommand(paramString, 2)
                 : new ToggleCommand(s);
         }
 

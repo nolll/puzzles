@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System;
 
 namespace Core.Puzzles.Year2015.Day20;
 
@@ -82,17 +84,19 @@ public class PresentDelivery
         while (elf <= target / 11)
         {
             var val = elf * 11;
-            for (var house = elf; house <= elf * 50; house += elf)
+            var house = elf;
+            while(house <= elf * 50) 
             {
                 houses.TryGetValue(house, out var oldVal);
                 var totalVal = oldVal + val;
                 houses[house] = totalVal;
+                house += elf;
             }
 
             elf++;
         }
 
-        foreach (var key in houses.Keys)
+        for(var key = 1; key < target; key++)
         {
             var value = houses[key];
             if (value >= target)

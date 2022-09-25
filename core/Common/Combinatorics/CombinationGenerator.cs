@@ -20,4 +20,30 @@ public static class CombinationGenerator
         });
         return result;
     }
+
+    public static IEnumerable<List<T>> GetAllCombinations<T>(List<T> list, int size)
+    {
+        var n = list.Count;
+        var result = new int[size];
+        var stack = new Stack<int>();
+        stack.Push(0);
+
+        while (stack.Count > 0)
+        {
+            int index = stack.Count - 1;
+            int value = stack.Pop();
+
+            while (value < n)
+            {
+                result[index++] = value++;
+                stack.Push(value);
+
+                if (index == size)
+                {
+                    yield return result.Select(o => list[o]).ToList();
+                    break;
+                }
+            }
+        }
+    }
 }

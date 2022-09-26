@@ -69,9 +69,19 @@ public class PresentDelivery
             return false;
         if (target % 3 != 0)
             return false;
+        if (target % 4 != 0)
+            return false;
         if (target % 5 != 0)
             return false;
+        if (target % 6 != 0)
+            return false;
         if (target % 7 != 0)
+            return false;
+        if (target % 8 != 0)
+            return false;
+        if (target % 9 != 0)
+            return false;
+        if (target % 10 != 0)
             return false;
         return true;
     }

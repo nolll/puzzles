@@ -4,13 +4,10 @@ namespace Core.Puzzles.Year2015.Day20;
 
 public class Year2015Day20 : Puzzle
 {
-    public override string Comment => "Int factors";
-    public override bool IsSlow => true;
-
     public override PuzzleResult RunPart1()
     {
         var presentDelivery = new PresentDelivery();
-        var house = presentDelivery.Deliver1(Input, true);
+        var house = presentDelivery.Deliver1(Input);
         return new PuzzleResult(house, 786_240);
     }
 

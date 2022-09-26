@@ -7,13 +7,13 @@ namespace Core.Puzzles.Year2015.Day20;
 
 public class PresentDelivery
 {
-    public int Deliver1(in int target, bool useOptimization = false)
+    public int Deliver1(in int target)
     {
         var house = FindLowerbound(target);
-            
+        
         while (true)
         {
-            var hasAllLowFactors = !useOptimization || HasAllLowFactors(house);
+            var hasAllLowFactors = HasAllLowFactors(house);
             if (hasAllLowFactors)
             {
                 var factors = FindIntFactors(house);
@@ -78,7 +78,7 @@ public class PresentDelivery
 
     public int Deliver2(in int target)
     {
-        var houses = new Dictionary<int, int>();
+        var houses = new int[target * 11];
         var elf = 1;
 
         while (elf <= target / 11)
@@ -87,20 +87,17 @@ public class PresentDelivery
             var house = elf;
             while(house <= elf * 50) 
             {
-                houses.TryGetValue(house, out var oldVal);
-                var totalVal = oldVal + val;
-                houses[house] = totalVal;
+                houses[house] += val;
                 house += elf;
             }
 
             elf++;
         }
 
-        for(var key = 1; key < target; key++)
+        for(var house = 1; house < target; house++)
         {
-            var value = houses[key];
-            if (value >= target)
-                return key;
+            if (houses[house] >= target)
+                return house;
         }
 
         return 0;

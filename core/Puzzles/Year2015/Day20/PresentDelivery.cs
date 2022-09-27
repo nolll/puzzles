@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System;
 
 namespace Core.Puzzles.Year2015.Day20;
 

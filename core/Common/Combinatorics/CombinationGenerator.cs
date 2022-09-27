@@ -5,7 +5,7 @@ namespace Core.Common.Combinatorics;
 
 public static class CombinationGenerator
 {
-    public static List<List<T>> GetAllCombinations<T>(List<T> list)
+    public static List<List<T>> GetAllCombinations<T>(IList<T> list)
     {
         var result = new List<List<T>> { new List<T>() };
         result.Last().Add(list[0]);
@@ -21,7 +21,7 @@ public static class CombinationGenerator
         return result;
     }
 
-    public static IEnumerable<List<T>> GetAllCombinations<T>(List<T> list, int size)
+    public static IEnumerable<List<T>> GetAllCombinations<T>(IList<T> list, int size)
     {
         var n = list.Count;
         var result = new int[size];

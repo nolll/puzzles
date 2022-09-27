@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,19 +36,13 @@ public class RadioisotopeFacility
 
     private IList<RadioisotopeFloor> CopyFloors(RadioisotopeFacility facility)
     {
-        var floors = new List<RadioisotopeFloor>();
-        foreach (var floor in facility.Floors)
-        {
-            var items = new List<RadioisotopeItem>();
-            foreach (var item in floor.Items)
-            {
-                items.Add(item);
-            }
+        return facility.Floors.Select(o => CopyFloor(o)).ToList();
+    }
 
-            floors.Add(new RadioisotopeFloor(items));
-        }
-
-        return floors;
+    private RadioisotopeFloor CopyFloor(RadioisotopeFloor floor)
+    {
+        var items = floor.Items.Select(o => o).ToList();
+        return new RadioisotopeFloor(items);
     }
 
     public bool NeedToMoveDown

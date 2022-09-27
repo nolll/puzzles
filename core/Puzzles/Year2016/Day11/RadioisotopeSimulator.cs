@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2016.Day11;
 
 public class RadioisotopeSimulator
 {
-    private readonly IDictionary<string, RadioisotopeFacility> _previousFacilities = new Dictionary<string, RadioisotopeFacility>();
+    private readonly HashSet<string> _previousFacilities = new HashSet<string>();
 
     public int StepCount { get; }
 
@@ -24,24 +24,12 @@ public class RadioisotopeSimulator
         var newFacilities = new List<RadioisotopeFacility>();
         foreach (var facility in facilities)
         {
-            var distinctCombinations = new Dictionary<string, IList<RadioisotopeItem>>();
-            var itemCombinations = PermutationGenerator.GetPermutations(facility.Floors[facility.ElevatorFloor].Items, 2).ToList();
-            foreach (var c in itemCombinations)
-            {
-                var sorted = c.OrderBy(o => o.Id).ToList();
-                var id = string.Join('-', sorted.Select(o => o.Id));
-                if(!distinctCombinations.ContainsKey(id))
-                    distinctCombinations.Add(id, sorted.ToList());
-            }
-
-            var combinationsToUse = RemoveRedundantPairs(distinctCombinations.Values).ToList();
-
             if (facility.ShouldMoveUp)
             {
+                var itemCombinations = CombinationGenerator.GetAllCombinations(facility.Floors[facility.ElevatorFloor].Items, 2);
                 var oldFloor = facility.ElevatorFloor;
                 var newFloor = oldFloor + 1;
-                var movedTwo = false;
-                foreach (var combination in combinationsToUse)
+                foreach (var combination in itemCombinations)
                 {
                     var f = new RadioisotopeFacility(facility, newFloor);
                     foreach (var item in combination)
@@ -54,24 +42,6 @@ public class RadioisotopeSimulator
                     {
                         newFacilities.Add(f);
                         TrackVisit(f);
-                        movedTwo = true;
-                    }
-                }
-
-                if (!movedTwo)
-                {
-                    foreach (var item in facility.Floors[facility.ElevatorFloor].Items)
-                    {
-
-                        var f = new RadioisotopeFacility(facility, newFloor);
-                        f.Floors[oldFloor].Items.Remove(item);
-                        f.Floors[newFloor].Items.Add(item);
-
-                        if (!AlreadyVisited(f) && f.IsValid)
-                        {
-                            newFacilities.Add(f);
-                            TrackVisit(f);
-                        }
                     }
                 }
             }
@@ -80,26 +50,7 @@ public class RadioisotopeSimulator
             {
                 var oldFloor = facility.ElevatorFloor;
                 var newFloor = oldFloor - 1;
-                //var movedTwo = false;
-                //foreach (var combination in combinationsToUse)
-                //{
-                //    var f = new RadioisotopeFacility(facility, newFloor);
-                //    foreach (var item in combination)
-                //    {
-                //        f.Floors[oldFloor].Items.Remove(item);
-                //        f.Floors[newFloor].Items.Add(item);
-                //    }
 
-                //    if (!AlreadyVisited(f) && f.IsValid)
-                //    {
-                //        newFacilities.Add(f);
-                //        TrackVisit(f);
-                //        movedTwo = true;
-                //    }
-                //}
-
-                //if (!movedTwo)
-                //{
                 foreach (var item in facility.Floors[facility.ElevatorFloor].Items)
                 {
                     var f = new RadioisotopeFacility(facility, newFloor);
@@ -112,7 +63,6 @@ public class RadioisotopeSimulator
                         TrackVisit(f);
                     }
                 }
-                //}
             }
         }
 
@@ -126,36 +76,14 @@ public class RadioisotopeSimulator
         return FindFinishedFacility(newFacilities);
     }
 
-    private IEnumerable<IEnumerable<RadioisotopeItem>> RemoveRedundantPairs(IEnumerable<IList<RadioisotopeItem>> combinations)
-    {
-        var pairCount = 0;
-        foreach (var combination in combinations)
-        {
-            var first = combination.First();
-            var last = combination.Last();
-            if (first.Type != last.Type && first.Name == last.Name)
-            {
-                if (pairCount == 0)
-                {
-                    pairCount++;
-                    yield return combination;
-                }
-            }
-            else
-            {
-                yield return combination;
-            }
-        }
-    }
-
     private bool AlreadyVisited(RadioisotopeFacility f)
     {
-        return _previousFacilities.ContainsKey(f.AnonymizedId);
+        return _previousFacilities.Contains(f.AnonymizedId);
     }
 
     private void TrackVisit(RadioisotopeFacility f)
     {
-        _previousFacilities.Add(f.AnonymizedId, f);
+        _previousFacilities.Add(f.AnonymizedId);
     }
 
     private RadioisotopeFacility ParseFacility(string input)

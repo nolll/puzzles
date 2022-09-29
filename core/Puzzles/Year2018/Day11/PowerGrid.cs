@@ -7,20 +7,15 @@ public class PowerGrid
 {
     private int MatrixSize { get; }
     private readonly int _serialNumber;
-    private readonly Matrix<int> _matrix;
+    private readonly int[,] _matrix;
 
     public PowerGrid(int matrixSize, int serialNumber)
     {
         MatrixSize = matrixSize;
         _serialNumber = serialNumber;
-        _matrix = new Matrix<int>(MatrixSize, MatrixSize);
+        _matrix = new int[MatrixSize, MatrixSize];
 
         FillMatrix();
-    }
-
-    public void Print()
-    {
-        Console.WriteLine(_matrix.Print());
     }
 
     public (MatrixAddress coords, int size) GetMaxCoordsAnySizeSlow()
@@ -32,18 +27,16 @@ public class PowerGrid
         {
             for (var x = 0; x < MatrixSize; x++)
             {
-                _matrix.MoveTo(x, y);
                 var maxSquareSize = MatrixSize - Math.Max(x, y);
                 for (var size = 1; size < maxSquareSize; size++)
                 {
                     var powerLevel = GetSquarePowerLevel(x, y, size);
-                    Console.WriteLine(powerLevel);
 
                     if (powerLevel > maxPowerLevel)
                     {
                         maxPowerLevel = powerLevel;
                         maxPowerLevelSize = size;
-                        maxPowerLevelAddress = new MatrixAddress(_matrix.Address.X, _matrix.Address.Y);
+                        maxPowerLevelAddress = new MatrixAddress(x, y);
                     }
                 }
             }
@@ -61,14 +54,13 @@ public class PowerGrid
         {
             for (var xSquare = 0; xSquare < MatrixSize; xSquare++)
             {
-                _matrix.MoveTo(xSquare, ySquare);
                 var maxSquareSize = MatrixSize - Math.Max(xSquare, ySquare);
                 var powerLevel = 0;
                 for (var size = 1; size < maxSquareSize; size++)
                 {
                     if (size == 1)
                     {
-                        powerLevel += _matrix.ReadValueAt(0, 0);
+                        powerLevel += _matrix[0, 0];
                     }
                     else
                     {
@@ -76,13 +68,13 @@ public class PowerGrid
                         {
                             var x = xSquare + size;
                             var y = ySquare + yy;
-                            powerLevel += _matrix.ReadValueAt(x, y);
+                            powerLevel += _matrix[x, y];
                         }
                         for (var xx = 0; xx < size; xx++)
                         {
                             var x = xSquare + xx;
                             var y = ySquare + size;
-                            powerLevel += _matrix.ReadValueAt(x, y);
+                            powerLevel += _matrix[x, y];
                         }
                     }
 
@@ -106,8 +98,7 @@ public class PowerGrid
             for (var x = 0; x < MatrixSize - 2; x++)
             {
                 var powerLevel = GetSinglePowerLevel(x, y);
-                _matrix.MoveTo(x, y);
-                _matrix.WriteValue(powerLevel);
+                _matrix[x, y] = powerLevel;
             }
         }
     }
@@ -120,12 +111,11 @@ public class PowerGrid
         {
             for (var x = 0; x < MatrixSize - 2; x++)
             {
-                _matrix.MoveTo(x, y);
                 var powerLevel = GetSquarePowerLevel(x, y, 3);
                 if (powerLevel > maxPowerLevel)
                 {
                     maxPowerLevel = powerLevel;
-                    maxPowerLevelAddress = new MatrixAddress(_matrix.Address.X, _matrix.Address.Y);
+                    maxPowerLevelAddress = new MatrixAddress(x, y);
                 }
             }
         }
@@ -140,7 +130,7 @@ public class PowerGrid
         {
             for (var xx = 0; xx < size; xx++)
             {
-                total += _matrix.ReadValueAt(x + xx, y + yy);
+                total += _matrix[x + xx, y + yy];
             }
         }
 
@@ -152,7 +142,6 @@ public class PowerGrid
         var rackId = x + 10;
         var i = (rackId * y + _serialNumber) * rackId;
         var str = i.ToString();
-        var c = str.Substring(str.Length - 3, 1);
         return int.Parse(str.Substring(str.Length - 3, 1)) - 5;
     }
 }

@@ -5,7 +5,7 @@ namespace Core.Puzzles.Year2017.Day21;
 public class FractalRule
 {
     public string Input { get; }
-    public Matrix<char> Output { get; }
+    public IMatrix<char> Output { get; }
 
     public FractalRule(string input, string output)
     {

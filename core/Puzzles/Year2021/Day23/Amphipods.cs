@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2021.Day23;
 public class Amphipods
 {
     private readonly bool _isPrinterEnabled;
-    private readonly Matrix<char> _matrix;
+    private readonly IMatrix<char> _matrix;
     private readonly Dictionary<char, int> _stepCosts;
 
     private readonly MatrixAddress _hallwayLeft = new(1, 1);

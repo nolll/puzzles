@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Common.CoordinateSystems;
 
-public class Matrix<T> : BaseMatrix
+public class Matrix<T> : BaseMatrix, IMatrix<T>
 {
     private readonly T _defaultValue;
     private readonly IList<IList<T>> _matrix;
@@ -12,7 +12,7 @@ public class Matrix<T> : BaseMatrix
     public MatrixAddress Address { get; private set; }
     public MatrixAddress StartAddress { get; private set; }
 
-    public IList<T> Values => _matrix.SelectMany(x => x).ToList();
+    public IEnumerable<T> Values => _matrix.SelectMany(x => x).ToList();
     public int Height => _matrix.Count;
     public int Width => _matrix.Any() ? _matrix[0].Count : 0;
     public bool IsAtTop => Address.Y == 0;
@@ -30,7 +30,7 @@ public class Matrix<T> : BaseMatrix
         Direction = MatrixDirection.Up;
     }
 
-    public IList<MatrixAddress> Coords
+    public IEnumerable<MatrixAddress> Coords
     {
         get
         {
@@ -60,7 +60,7 @@ public class Matrix<T> : BaseMatrix
     {
         if (IsOutOfRange(address))
         {
-            if(extend)
+            if (extend)
                 ExtendMatrix(address);
             else
                 return false;
@@ -259,7 +259,7 @@ public class Matrix<T> : BaseMatrix
                 var address = new MatrixAddress(x, y);
                 MoveTo(address);
                 var val = ReadValue();
-                if(val.Equals(value))
+                if (val.Equals(value))
                     addresses.Add(address);
             }
         }
@@ -306,7 +306,7 @@ public class Matrix<T> : BaseMatrix
         }
     }
 
-    public Matrix<T> Copy()
+    public IMatrix<T> Copy()
     {
         var matrix = new Matrix<T>();
         for (var y = 0; y < Height; y++)
@@ -322,7 +322,7 @@ public class Matrix<T> : BaseMatrix
         return matrix;
     }
 
-    public Matrix<T> RotateLeft()
+    public IMatrix<T> RotateLeft()
     {
         var newMatrix = new Matrix<T>(Height, Width, _defaultValue);
         var oy = 0;
@@ -341,12 +341,12 @@ public class Matrix<T> : BaseMatrix
         return newMatrix;
     }
 
-    public Matrix<T> RotateRight()
+    public IMatrix<T> RotateRight()
     {
         return RotateLeft().RotateLeft().RotateLeft();
     }
 
-    public Matrix<T> Slice(MatrixAddress from = null, MatrixAddress to = null)
+    public IMatrix<T> Slice(MatrixAddress from = null, MatrixAddress to = null)
     {
         from ??= new MatrixAddress(0, 0);
         to ??= new MatrixAddress(Width - 1, Height - 1);
@@ -369,13 +369,13 @@ public class Matrix<T> : BaseMatrix
         return newMatrix;
     }
 
-    public Matrix<T> Slice(MatrixAddress from, int width, int height)
+    public IMatrix<T> Slice(MatrixAddress from, int width, int height)
     {
         var to = new MatrixAddress(from.X + width, from.Y + height);
         return Slice(from, to);
     }
 
-    public Matrix<T> FlipVertical()
+    public IMatrix<T> FlipVertical()
     {
         var width = Width;
         var height = Height;
@@ -392,7 +392,7 @@ public class Matrix<T> : BaseMatrix
         return newMatrix;
     }
 
-    public Matrix<T> FlipHorizontal()
+    public IMatrix<T> FlipHorizontal()
     {
         var width = Width;
         var height = Height;
@@ -483,7 +483,7 @@ public class Matrix<T> : BaseMatrix
 
             if (addMode == MatrixAddMode.Prepend)
                 _matrix.Insert(0, row);
-            else 
+            else
                 _matrix.Add(row);
         }
     }
@@ -496,7 +496,7 @@ public class Matrix<T> : BaseMatrix
             var row = _matrix[y];
             for (var x = 0; x < numberOfRows; x++)
             {
-                if(addMode == MatrixAddMode.Prepend)
+                if (addMode == MatrixAddMode.Prepend)
                     row.Insert(0, _defaultValue);
                 else
                     row.Add(_defaultValue);
@@ -516,7 +516,7 @@ public class Matrix<T> : BaseMatrix
     {
         AddRows(steps, MatrixAddMode.Prepend);
     }
-        
+
     public void ExtendRight(int steps = 1)
     {
         AddCols(steps, MatrixAddMode.Append);

@@ -10,7 +10,7 @@ public class LumberCollection
     private const char Wood = '|';
     private const char Lumber = '#';
 
-    private Matrix<char> _matrix;
+    private IMatrix<char> _matrix;
     private int LumberCount => _matrix.Values.Count(o => o == Lumber);
     private int WoodCount => _matrix.Values.Count(o => o == Wood);
     public int ResourceValue => LumberCount * WoodCount;

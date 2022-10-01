@@ -6,13 +6,13 @@ namespace Core.Puzzles.Year2021.Day11;
 
 public class OctopusFlasher
 {
-    private readonly Matrix<int> _matrix;
+    private readonly IMatrix<int> _matrix;
     private readonly IList<MatrixAddress> _coords;
 
     public OctopusFlasher(string input)
     {
         _matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
-        _coords = _matrix.Coords;
+        _coords = _matrix.Coords.ToList();
     }
 
     public int Run(int? maxSteps = null)

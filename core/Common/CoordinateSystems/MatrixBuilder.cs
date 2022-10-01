@@ -4,9 +4,18 @@ namespace Core.Common.CoordinateSystems;
 
 public static class MatrixBuilder
 {
-    public static Matrix<char> BuildCharMatrix(string input, char defaultValue = default)
+    public static IMatrix<char> BuildStaticCharMatrix(string input, char defaultValue = default)
     {
-        var matrix = new Matrix<char>(1, 1, defaultValue);
+        return BuildCharMatrix(new StaticMatrix<char>(1, 1, defaultValue), input);
+    }
+
+    public static IMatrix<char> BuildCharMatrix(string input, char defaultValue = default)
+    {
+        return BuildCharMatrix(new Matrix<char>(1, 1, defaultValue), input);
+    }
+
+    private static IMatrix<char> BuildCharMatrix(IMatrix<char> matrix, string input)
+    {
         var rows = input.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

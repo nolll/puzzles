@@ -15,7 +15,7 @@ public class ImageJigsawPuzzle
     public readonly Dictionary<long, JigsawTile> TilesById;
     private readonly Dictionary<string, List<JigsawTile>> _matchesByEdge;
     private readonly Dictionary<long, List<JigsawTile>> _matchesById;
-    private readonly Matrix<char> _seaMonsterMatrix;
+    private readonly IMatrix<char> _seaMonsterMatrix;
     private readonly List<MatrixAddress> _seaMonsterHashAddresses;
 
     public long ProductOfCornerTileIds { get; }
@@ -51,7 +51,7 @@ public class ImageJigsawPuzzle
         }
     }
 
-    private int GetNumberOfSeaMonsters(Matrix<char> matrix)
+    private int GetNumberOfSeaMonsters(IMatrix<char> matrix)
     {
         var seaMonsterCount = 0;
         for (var y = 0; y < matrix.Height - _seaMonsterMatrix.Height; y++)
@@ -66,7 +66,7 @@ public class ImageJigsawPuzzle
         return seaMonsterCount;
     }
 
-    private int SearchForSeaMonsters(Matrix<char> matrix)
+    private int SearchForSeaMonsters(IMatrix<char> matrix)
     {
         var numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
 

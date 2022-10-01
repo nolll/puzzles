@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Common.CoordinateSystems;
 
-public class StaticMatrix<T> : BaseMatrix
+public class StaticMatrix<T> : BaseMatrix, IMatrix<T>
 {
     private readonly T _defaultValue;
     private readonly T[,] _matrix;
@@ -30,7 +30,7 @@ public class StaticMatrix<T> : BaseMatrix
         Direction = MatrixDirection.Up;
     }
 
-    public MatrixAddress[] Coords
+    public IEnumerable<MatrixAddress> Coords
     {
         get
         {
@@ -46,7 +46,7 @@ public class StaticMatrix<T> : BaseMatrix
         }
     }
 
-    public T[] Values
+    public IEnumerable<T> Values
     {
         get
         {
@@ -314,7 +314,7 @@ public class StaticMatrix<T> : BaseMatrix
         }
     }
 
-    public StaticMatrix<T> Copy()
+    public IMatrix<T> Copy()
     {
         var matrix = new StaticMatrix<T>();
         for (var y = 0; y < Height; y++)
@@ -330,7 +330,7 @@ public class StaticMatrix<T> : BaseMatrix
         return matrix;
     }
 
-    public StaticMatrix<T> RotateLeft()
+    public IMatrix<T> RotateLeft()
     {
         var newMatrix = new StaticMatrix<T>(Height, Width, _defaultValue);
         var oy = 0;
@@ -349,12 +349,12 @@ public class StaticMatrix<T> : BaseMatrix
         return newMatrix;
     }
 
-    public StaticMatrix<T> RotateRight()
+    public IMatrix<T> RotateRight()
     {
         return RotateLeft().RotateLeft().RotateLeft();
     }
 
-    public StaticMatrix<T> Slice(MatrixAddress from = null, MatrixAddress to = null)
+    public IMatrix<T> Slice(MatrixAddress from = null, MatrixAddress to = null)
     {
         from ??= new MatrixAddress(0, 0);
         to ??= new MatrixAddress(Width - 1, Height - 1);
@@ -377,13 +377,13 @@ public class StaticMatrix<T> : BaseMatrix
         return newMatrix;
     }
 
-    public StaticMatrix<T> Slice(MatrixAddress from, int width, int height)
+    public IMatrix<T> Slice(MatrixAddress from, int width, int height)
     {
         var to = new MatrixAddress(from.X + width, from.Y + height);
         return Slice(from, to);
     }
 
-    public StaticMatrix<T> FlipVertical()
+    public IMatrix<T> FlipVertical()
     {
         var width = Width;
         var height = Height;
@@ -400,7 +400,7 @@ public class StaticMatrix<T> : BaseMatrix
         return newMatrix;
     }
 
-    public StaticMatrix<T> FlipHorizontal()
+    public IMatrix<T> FlipHorizontal()
     {
         var width = Width;
         var height = Height;

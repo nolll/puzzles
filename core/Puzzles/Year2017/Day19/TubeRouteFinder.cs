@@ -1,11 +1,12 @@
 using System.Text;
 using Core.Common.CoordinateSystems;
+using System.Linq;
 
 namespace Core.Puzzles.Year2017.Day19;
 
 public class TubeRouteFinder
 {
-    private readonly Matrix<char> _matrix;
+    private readonly IMatrix<char> _matrix;
 
     private const char Space = ' ';
     private const char Empty = '.';
@@ -21,7 +22,7 @@ public class TubeRouteFinder
         var adjustedInput = input.Replace(Space, Empty).Replace("_", "");
         _matrix = MatrixBuilder.BuildCharMatrix(adjustedInput);
         var y = 0;
-        var x = _matrix.Values.IndexOf(Vertical);
+        var x = _matrix.Values.ToList().IndexOf(Vertical);
         _matrix.MoveTo(x, y);
         _matrix.TurnTo(MatrixDirection.Down);
     }

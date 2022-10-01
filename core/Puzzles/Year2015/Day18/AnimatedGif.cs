@@ -9,7 +9,7 @@ public class AnimatedGif
     private const char LightOff = '.';
 
     private readonly bool _isCornersLit;
-    private Matrix<char> _matrix;
+    private IMatrix<char> _matrix;
 
     public int LightCount => _matrix.Values.Count(o => o == LightOn);
 

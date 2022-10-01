@@ -8,7 +8,7 @@ namespace Core.Puzzles.Year2016.Day02;
 
 public class SquareKeyCodeFinder
 {
-    private readonly Matrix<char> _buttons;
+    private readonly IMatrix<char> _buttons;
 
     public SquareKeyCodeFinder()
     {
@@ -43,7 +43,7 @@ public class SquareKeyCodeFinder
             _buttons.TryMoveLeft();
     }
 
-    private Matrix<char> BuildButtonMatrix()
+    private IMatrix<char> BuildButtonMatrix()
     {
         const string input = @"
 123

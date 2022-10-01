@@ -14,10 +14,10 @@ public class Year2018Day15 : Puzzle
         return new PuzzleResult(battle.Outcome, 246_176);
     }
 
-    //public override PuzzleResult RunPart2()
-    //{
-    //    var battle2 = new ChocolateBattle(FileInput);
-    //    battle2.RunUntilElvesWins(false);
-    //    return new PuzzleResult(battle2.Outcome, 58_128);
-    //}
+    public override PuzzleResult RunPart2()
+    {
+        var battle2 = new ChocolateBattle(FileInput);
+        battle2.RunUntilElvesWins(false);
+        return new PuzzleResult(battle2.Outcome, 58_128);
+    }
 }

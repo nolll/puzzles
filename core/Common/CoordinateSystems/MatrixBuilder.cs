@@ -57,9 +57,20 @@ public static class MatrixBuilder
         return matrix;
     }
 
-    public static Matrix<int> BuildIntMatrixFromNonSeparated(string input, int defaultValue = default)
+    public static IMatrix<int> BuildStaticIntMatrixFromNonSeparated(string input, int defaultValue = default)
     {
-        var matrix = new Matrix<int>(1, 1, defaultValue);
+        var (w, h) = GetNonSeparatedSize(input);
+        return BuildIntMatrixFromNonSeparated(new StaticMatrix<int>(w, h, defaultValue), input);
+    }
+
+    public static IMatrix<int> BuildIntMatrixFromNonSeparated(string input, int defaultValue = default)
+    {
+        var (w, h) = GetNonSeparatedSize(input);
+        return BuildIntMatrixFromNonSeparated(new Matrix<int>(w, h, defaultValue), input);
+    }
+
+    private static IMatrix<int> BuildIntMatrixFromNonSeparated(IMatrix<int> matrix, string input)
+    {
         var rows = input.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)
@@ -77,5 +88,13 @@ public static class MatrixBuilder
         }
 
         return matrix;
+    }
+
+    private static (int w, int h) GetNonSeparatedSize(string input)
+    {
+        var rows = input.Trim().Split('\n');
+        var w = rows.First().Trim().Length;
+        var h = rows.Count();
+        return (w, h);
     }
 }

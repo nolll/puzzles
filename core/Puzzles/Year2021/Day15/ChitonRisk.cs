@@ -7,23 +7,25 @@ namespace Core.Puzzles.Year2021.Day15;
 
 public class ChitonRisk
 {
+    private IDictionary<MatrixAddress, IList<MatrixAddress>> _adjacentCoordsCache = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
+
     public int FindRiskLevelForSmallCave(string input)
     {
-        var matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
+        var matrix = MatrixBuilder.BuildStaticIntMatrixFromNonSeparated(input);
         return FindRiskLevel(matrix);
     }
 
     public int FindRiskLevelForLargeCave(string input)
     {
-        var smallMatrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
+        var smallMatrix = MatrixBuilder.BuildStaticIntMatrixFromNonSeparated(input);
         var largeMatrix = BuildLargeMatrix(smallMatrix);
         return FindRiskLevel(largeMatrix);
     }
 
-    private Matrix<int> BuildLargeMatrix(Matrix<int> smallMatrix)
+    private IMatrix<int> BuildLargeMatrix(IMatrix<int> smallMatrix)
     {
-        var largeMatrix = new Matrix<int>();
         const int multiplier = 5;
+        var largeMatrix = new StaticMatrix<int>(smallMatrix.Width * multiplier, smallMatrix.Height * multiplier);
         var width = smallMatrix.Width;
         var height = smallMatrix.Height;
         for (var Y = 0; Y < multiplier; Y++) 
@@ -50,7 +52,7 @@ public class ChitonRisk
         return largeMatrix;
     }
 
-    private int FindRiskLevel(Matrix<int> matrix)
+    private int FindRiskLevel(IMatrix<int> matrix)
     {
         var from = new MatrixAddress(0, 0);
         var to = new MatrixAddress(matrix.Width - 1, matrix.Height - 1);
@@ -79,7 +81,7 @@ public class ChitonRisk
         Console.WriteLine(pathMatrix.Print());
     }
 
-    private static IList<CoordCount> GetCoordCounts(Matrix<int> matrix, MatrixAddress from, MatrixAddress to)
+    private static IList<CoordCount> GetCoordCounts(IMatrix<int> matrix, MatrixAddress from, MatrixAddress to)
     {
         var queue = new Queue<CoordCount>();
         var startCoordCount = new CoordCount(to.X, to.Y, matrix.ReadValueAt(to));
@@ -117,7 +119,7 @@ public class ChitonRisk
         return seen.Values.ToList();
     }
 
-    private static IList<MatrixAddress> GetBestPathTo(Matrix<int> matrix, MatrixAddress from, MatrixAddress to)
+    private IList<MatrixAddress> GetBestPathTo(IMatrix<int> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
         var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
@@ -132,13 +134,14 @@ public class ChitonRisk
         while (!currentAddress.Equals(to))
         {
             pathMatrix.MoveTo(currentAddress);
-            var adjacentCoords = pathMatrix.PerpendicularAdjacentCoords
+            var adjacentCoords = GetAdjacentCoords(pathMatrix, currentAddress);
+            var filteredCoords = adjacentCoords
                 .Where(o => pathMatrix.ReadValueAt(o) > -1 && !path.Contains(o))
                 .OrderBy(o => pathMatrix.ReadValueAt(o))
                 .ThenBy(o => o.Y)
                 .ThenBy(o => o.X)
                 .ToList();
-            var bestAddress = adjacentCoords.FirstOrDefault();
+            var bestAddress = filteredCoords.FirstOrDefault();
             if (bestAddress == null)
                 break;
             currentAddress = new MatrixAddress(bestAddress.X, bestAddress.Y);
@@ -146,5 +149,16 @@ public class ChitonRisk
         }
 
         return path;
+    }
+
+    private IList<MatrixAddress> GetAdjacentCoords(IMatrix<int> matrix, MatrixAddress address)
+    {
+        if(_adjacentCoordsCache.TryGetValue(address, out var coords))
+            return coords;
+
+        matrix.MoveTo(address);
+        coords = matrix.PerpendicularAdjacentCoords;
+        _adjacentCoordsCache.Add(address, coords);
+        return coords;
     }
 }

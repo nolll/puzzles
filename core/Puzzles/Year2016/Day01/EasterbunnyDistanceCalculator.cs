@@ -5,12 +5,12 @@ namespace Core.Puzzles.Year2016.Day01;
 
 public class EasterbunnyDistanceCalculator
 {
-    private readonly Matrix<int> _matrix;
+    private readonly DynamicMatrix<int> _matrix;
     private int? _distanceToFirstRepeatedAddress;
 
     public EasterbunnyDistanceCalculator()
     {
-        _matrix = new Matrix<int>();
+        _matrix = new DynamicMatrix<int>();
     }
         
     public void Go(string input)

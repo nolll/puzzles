@@ -18,9 +18,9 @@ public class TransparentPaper
         _folds = groups[1];
     }
 
-    private static Matrix<char> BuildMatrix(IEnumerable<string> rows)
+    private static DynamicMatrix<char> BuildMatrix(IEnumerable<string> rows)
     {
-        var matrix = new Matrix<char>(defaultValue: '.');
+        var matrix = new DynamicMatrix<char>(defaultValue: '.');
 
         foreach (var row in rows)
         {

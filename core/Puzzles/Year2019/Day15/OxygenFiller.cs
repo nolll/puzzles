@@ -6,7 +6,7 @@ namespace Core.Puzzles.Year2019.Day15;
 
 public class OxygenFiller
 {
-    private readonly Matrix<char> _matrix; 
+    private readonly DynamicMatrix<char> _matrix; 
 
     public OxygenFiller(string map)
     {
@@ -77,9 +77,9 @@ public class OxygenFiller
         return unfilled;
     }
 
-    private Matrix<char> BuildMatrix(string map)
+    private DynamicMatrix<char> BuildMatrix(string map)
     {
-        var matrix = new Matrix<char>(1, 1);
+        var matrix = new DynamicMatrix<char>(1, 1);
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

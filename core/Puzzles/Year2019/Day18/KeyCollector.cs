@@ -8,7 +8,7 @@ public class KeyCollector
 {
     private IList<VaultKey> _keys;
     private IList<VaultDoor> _doors;
-    private Matrix<char> _matrix;
+    private DynamicMatrix<char> _matrix;
     private readonly IDictionary<(char, char), VaultPath> _paths;
     private readonly IDictionary<string, int> _cache;
     private readonly IList<VaultRobot> _robots;
@@ -134,7 +134,7 @@ public class KeyCollector
     {
         _keys = new List<VaultKey>();
         _doors = new List<VaultDoor>();
-        _matrix = new Matrix<char>();
+        _matrix = new DynamicMatrix<char>();
         var rows = input.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

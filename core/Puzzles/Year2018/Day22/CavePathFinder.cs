@@ -13,7 +13,7 @@ public enum CaveTool
 
 public static class CavePathFinder
 {
-    public static int StepCountTo(Matrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
+    public static int StepCountTo(DynamicMatrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
         var goalCounts = coordCounts.Where(o => o.X == from.X && o.Y == from.Y).ToList();
@@ -33,7 +33,7 @@ public static class CavePathFinder
         return 0;
     } 
         
-    private static IList<CaveCoordCount> GetCoordCounts(Matrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
+    private static IList<CaveCoordCount> GetCoordCounts(DynamicMatrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
     {
         var seen = new Dictionary<(int x, int y, CaveTool tool), int>();
         var queue = new List<CaveCoordCount>

@@ -6,7 +6,7 @@ namespace Core.Puzzles.Year2018.Day06;
 
 public class LargestAreaFinder
 {
-    private Matrix<int> _matrix;
+    private DynamicMatrix<int> _matrix;
 
     private IList<MatrixAddress> _coords;
     private readonly IList<int> _ids;
@@ -106,7 +106,7 @@ public class LargestAreaFinder
         var width = coords.Max(o => o.X) + 1;
         var height = coords.Max(o => o.Y) + 1;
 
-        _matrix = new Matrix<int>(width, height, -1);
+        _matrix = new DynamicMatrix<int>(width, height, -1);
 
         var c = 1;
         foreach (var coord in coords)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Common.CoordinateSystems;
 
-public class Matrix<T> : BaseMatrix, IMatrix<T>
+public class DynamicMatrix<T> : BaseMatrix, IMatrix<T>
 {
     private readonly T _defaultValue;
     private readonly IList<IList<T>> _matrix;
@@ -21,7 +21,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
     public bool IsAtLeftEdge => Address.X == 0;
     public MatrixAddress Center => new(Width / 2, Height / 2);
 
-    public Matrix(int width = 1, int height = 1, T defaultValue = default)
+    public DynamicMatrix(int width = 1, int height = 1, T defaultValue = default)
     {
         _defaultValue = defaultValue;
         _matrix = BuildMatrix(width, height, defaultValue);
@@ -318,7 +318,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public IMatrix<T> Copy()
     {
-        var matrix = new Matrix<T>();
+        var matrix = new DynamicMatrix<T>();
         for (var y = 0; y < Height; y++)
         {
             for (var x = 0; x < Width; x++)
@@ -334,7 +334,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public IMatrix<T> RotateLeft()
     {
-        var newMatrix = new Matrix<T>(Height, Width, _defaultValue);
+        var newMatrix = new DynamicMatrix<T>(Height, Width, _defaultValue);
         var oy = 0;
         for (var ox = Width - 1; ox >= 0; ox--)
         {
@@ -362,7 +362,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         to ??= new MatrixAddress(Width - 1, Height - 1);
         var xNew = 0;
         var yNew = 0;
-        var newMatrix = new Matrix<T>(defaultValue: _defaultValue);
+        var newMatrix = new DynamicMatrix<T>(defaultValue: _defaultValue);
         for (var y = from.Y; y <= to.Y; y++)
         {
             for (var x = from.X; x <= to.X; x++)
@@ -389,7 +389,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
     {
         var width = Width;
         var height = Height;
-        var newMatrix = new Matrix<T>(width, height, _defaultValue);
+        var newMatrix = new DynamicMatrix<T>(width, height, _defaultValue);
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < width; x++)
@@ -406,7 +406,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
     {
         var width = Width;
         var height = Height;
-        var newMatrix = new Matrix<T>(width, height, _defaultValue);
+        var newMatrix = new DynamicMatrix<T>(width, height, _defaultValue);
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < width; x++)

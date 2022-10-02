@@ -6,12 +6,12 @@ namespace Core.Puzzles.Year2015.Day03;
 
 public class DeliveryGrid
 {
-    private readonly Matrix<int> _matrix;
+    private readonly DynamicMatrix<int> _matrix;
     public int SantaDeliveryCount => _matrix.Values.Count(o => o > 0);
 
     public DeliveryGrid()
     {
-        _matrix = new Matrix<int>();
+        _matrix = new DynamicMatrix<int>();
     }
 
     public void DeliverBySanta(string input)

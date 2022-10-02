@@ -8,7 +8,7 @@ namespace Core.Puzzles.Year2019.Day13;
 public class Arcade
 {
     private readonly ComputerInterface _computer;
-    private readonly Matrix<char> _screen;
+    private readonly DynamicMatrix<char> _screen;
     private ArcadeMode _mode;
     private int _x = 0;
     private int _y = 0;
@@ -22,7 +22,7 @@ public class Arcade
     {
         _mode = ArcadeMode.X;
 
-        _screen = new Matrix<char>();
+        _screen = new DynamicMatrix<char>();
         _computer = new ComputerInterface(program, ReadInput, WriteOutput);
     }
 

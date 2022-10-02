@@ -49,9 +49,9 @@ public class LumberCollection
         }
     }
 
-    private Matrix<char> GetNextIteration()
+    private DynamicMatrix<char> GetNextIteration()
     {
-        var newMatrix = new Matrix<char>();
+        var newMatrix = new DynamicMatrix<char>();
         for (var y = 0; y < _matrix.Height; y++)
         {
             for (var x = 0; x < _matrix.Width; x++)

@@ -19,12 +19,12 @@ public class DiskDefragmenter
         RegionCount = GetRegionCount(disk);
     }
 
-    public static int GetUsedCount(Matrix<char> disk)
+    public static int GetUsedCount(DynamicMatrix<char> disk)
     {
         return disk.Values.Count(o => o == '#');
     }
 
-    public static int GetRegionCount(Matrix<char> disk)
+    public static int GetRegionCount(DynamicMatrix<char> disk)
     {
         var processed = new Dictionary<string, int>();
         var currentRegion = 0;
@@ -61,9 +61,9 @@ public class DiskDefragmenter
         return processed.Values.Distinct().Count();
     }
 
-    private Matrix<char> FillDisk(string key)
+    private DynamicMatrix<char> FillDisk(string key)
     {
-        var disk = new Matrix<char>();
+        var disk = new DynamicMatrix<char>();
         for (var y = 0; y < 128; y++)
         {
             var hash = GetHash($"{key}-{y}");

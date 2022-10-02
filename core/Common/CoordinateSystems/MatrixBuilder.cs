@@ -11,7 +11,7 @@ public static class MatrixBuilder
 
     public static IMatrix<char> BuildCharMatrix(string input, char defaultValue = default)
     {
-        return BuildCharMatrix(new Matrix<char>(1, 1, defaultValue), input);
+        return BuildCharMatrix(new DynamicMatrix<char>(1, 1, defaultValue), input);
     }
 
     private static IMatrix<char> BuildCharMatrix(IMatrix<char> matrix, string input)
@@ -35,9 +35,9 @@ public static class MatrixBuilder
         return matrix;
     }
 
-    public static Matrix<int> BuildIntMatrixFromSpaceSeparated(string input, int defaultValue = default)
+    public static DynamicMatrix<int> BuildIntMatrixFromSpaceSeparated(string input, int defaultValue = default)
     {
-        var matrix = new Matrix<int>(1, 1, defaultValue);
+        var matrix = new DynamicMatrix<int>(1, 1, defaultValue);
         var rows = input.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)
@@ -66,7 +66,7 @@ public static class MatrixBuilder
     public static IMatrix<int> BuildIntMatrixFromNonSeparated(string input, int defaultValue = default)
     {
         var (w, h) = GetNonSeparatedSize(input);
-        return BuildIntMatrixFromNonSeparated(new Matrix<int>(w, h, defaultValue), input);
+        return BuildIntMatrixFromNonSeparated(new DynamicMatrix<int>(w, h, defaultValue), input);
     }
 
     private static IMatrix<int> BuildIntMatrixFromNonSeparated(IMatrix<int> matrix, string input)

@@ -77,9 +77,9 @@ public class FractalArtGenerator
         _matrix = Join(transformed);
     }
 
-    private Matrix<char> Join(List<IMatrix<char>> matrices)
+    private DynamicMatrix<char> Join(List<IMatrix<char>> matrices)
     {
-        var newMatrix = new Matrix<char>();
+        var newMatrix = new DynamicMatrix<char>();
         var size = matrices.First().Width;
         var matricesPerRow = (int)Math.Sqrt(matrices.Count);
         var col = 0;
@@ -196,10 +196,10 @@ public class FractalArtGenerator
         throw new Exception("No transformation rule matched");
     }
 
-    private Matrix<char> FlipMatrixHorizontally(IMatrix<char> matrix)
+    private DynamicMatrix<char> FlipMatrixHorizontally(IMatrix<char> matrix)
     {
         var width = matrix.Width;
-        var flipped = new Matrix<char>();
+        var flipped = new DynamicMatrix<char>();
         for (var y = 0; y < matrix.Height; y++)
         {
             for (var x = 0; x < width; x++)
@@ -212,10 +212,10 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private Matrix<char> FlipMatrixVertically(IMatrix<char> matrix)
+    private DynamicMatrix<char> FlipMatrixVertically(IMatrix<char> matrix)
     {
         var height = matrix.Height;
-        var flipped = new Matrix<char>();
+        var flipped = new DynamicMatrix<char>();
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < matrix.Width; x++)
@@ -228,10 +228,10 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private Matrix<char> RotateMatrixRight(IMatrix<char> matrix)
+    private DynamicMatrix<char> RotateMatrixRight(IMatrix<char> matrix)
     {
         var height = matrix.Height;
-        var flipped = new Matrix<char>(1, 1, ' ');
+        var flipped = new DynamicMatrix<char>(1, 1, ' ');
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < matrix.Width; x++)
@@ -261,7 +261,7 @@ public class FractalArtGenerator
         return sb.ToString().TrimEnd('/');
     }
 
-    private IEnumerable<Matrix<char>> GetSubmatrices(int subSize)
+    private IEnumerable<DynamicMatrix<char>> GetSubmatrices(int subSize)
     {
         var size = _matrix.Width;
         var x = 0;
@@ -270,7 +270,7 @@ public class FractalArtGenerator
         {
             while (x < size)
             {
-                var matrix = new Matrix<char>();
+                var matrix = new DynamicMatrix<char>();
                 for (var localY = 0; localY < subSize; localY++)
                 {
                     for (var localX = 0; localX < subSize; localX++)

@@ -10,14 +10,14 @@ public class TrenchMap
     {
         var groups = input.Split("\r\n\r\n");
         var algorithm = groups[0].Trim();
-        var inputImage = (Matrix<char>)MatrixBuilder.BuildCharMatrix(groups[1].Trim(), '.');
+        var inputImage = (DynamicMatrix<char>)MatrixBuilder.BuildCharMatrix(groups[1].Trim(), '.');
         inputImage.ExtendAllDirections(5);
-        var outputImage = new Matrix<char>('.');
+        var outputImage = new DynamicMatrix<char>('.');
         
         for (var i = 0; i < steps; i++)
         {
             var defaultValue = inputImage.ReadValueAt(0, 0);
-            var newInputImage = new Matrix<char>(inputImage.Width, inputImage.Height, defaultValue);
+            var newInputImage = new DynamicMatrix<char>(inputImage.Width, inputImage.Height, defaultValue);
             for (var y = 0; y < inputImage.Height; y++)
             {
                 for (var x = 0; x < inputImage.Width; x++)
@@ -29,7 +29,7 @@ public class TrenchMap
 
             inputImage = newInputImage;
             inputImage.ExtendAllDirections(2);
-            outputImage = new Matrix<char>(inputImage.Width, inputImage.Height, defaultValue);
+            outputImage = new DynamicMatrix<char>(inputImage.Width, inputImage.Height, defaultValue);
 
             var height = inputImage.Height;
             var width = inputImage.Width;
@@ -58,7 +58,7 @@ public class TrenchMap
                 }
             }
             
-            outputImage = (Matrix<char>)outputImage.Slice(new MatrixAddress(1, 1), new MatrixAddress(outputImage.Width - 2, outputImage.Height - 2));
+            outputImage = (DynamicMatrix<char>)outputImage.Slice(new MatrixAddress(1, 1), new MatrixAddress(outputImage.Width - 2, outputImage.Height - 2));
             inputImage = outputImage;
         }
 

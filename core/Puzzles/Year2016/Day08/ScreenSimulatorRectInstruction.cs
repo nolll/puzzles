@@ -4,11 +4,11 @@ namespace Core.Puzzles.Year2016.Day08;
 
 public class ScreenSimulatorRectInstruction : IScreenSimulatorInstruction
 {
-    private readonly Matrix<char> _matrix;
+    private readonly DynamicMatrix<char> _matrix;
     private readonly int _width;
     private readonly int _height;
 
-    public ScreenSimulatorRectInstruction(Matrix<char> matrix, int width, int height)
+    public ScreenSimulatorRectInstruction(DynamicMatrix<char> matrix, int width, int height)
     {
         _matrix = matrix;
         _width = width;

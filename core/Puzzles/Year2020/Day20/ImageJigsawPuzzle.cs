@@ -122,7 +122,7 @@ public class ImageJigsawPuzzle
         return numberOfSeaMonsters;
     }
 
-    private string GetPrintout(Matrix<char> matrix)
+    private string GetPrintout(DynamicMatrix<char> matrix)
     {
         return matrix.Print().Replace("\r\n", "");
     }
@@ -131,10 +131,10 @@ public class ImageJigsawPuzzle
     public IList<JigsawTile> EdgeTiles => _matchesById.Where(o => o.Value.Count == 3).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
     public IList<JigsawTile> CenterTiles => _matchesById.Where(o => o.Value.Count == 4).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
 
-    private Matrix<char> ArrangeTilesAndPaintImage()
+    private DynamicMatrix<char> ArrangeTilesAndPaintImage()
     {
         var cornerTilesLeft = CornerTiles.ToList();
-        var tileMatrix = new Matrix<long>();
+        var tileMatrix = new DynamicMatrix<long>();
             
         var currentTile = cornerTilesLeft.First();
 
@@ -179,7 +179,7 @@ public class ImageJigsawPuzzle
             tile.RemoveBorder();
         }
 
-        var imageMatrix = new Matrix<char>();
+        var imageMatrix = new DynamicMatrix<char>();
         for (var tileY = 0; tileY < tileMatrix.Height; tileY++)
         {
             for (var tileX = 0; tileX < tileMatrix.Width; tileX++)

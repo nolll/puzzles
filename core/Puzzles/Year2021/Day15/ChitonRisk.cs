@@ -81,26 +81,24 @@ public class ChitonRisk
 
     private IMatrix<int> GetCoordCounts(IMatrix<int> matrix, MatrixAddress from, MatrixAddress to)
     {
-        var queue = new Queue<CoordCount>();
-        var startCoordCount = new CoordCount(to.X, to.Y, matrix.ReadValueAt(to));
-        queue.Enqueue(startCoordCount);
+        var queue = new Queue<MatrixAddress>();
+        queue.Enqueue(to);
         var seenMatrix = new StaticMatrix<int>(matrix.Width, matrix.Height, int.MaxValue);
+        seenMatrix.WriteValueAt(to, matrix.ReadValueAt(to));
         while (queue.Any() && seenMatrix.ReadValueAt(from) == int.MaxValue)
         {
             var next = queue.Dequeue();
-            matrix.MoveTo(next.X, next.Y);
+            var currentScore = seenMatrix.ReadValueAt(next.X, next.Y);
             var adjacentCoords = GetAdjacentCoords(matrix, new MatrixAddress(next.X, next.Y))
-                .OrderBy(matrix.ReadValueAt)
-                .ToList();
+                .OrderBy(matrix.ReadValueAt);
 
             foreach (var adjacentCoord in adjacentCoords)
             {
-                var newScore = next.Count + matrix.ReadValueAt(adjacentCoord);
+                var newScore = currentScore + matrix.ReadValueAt(adjacentCoord);
                 var existing = seenMatrix.ReadValueAt(adjacentCoord);
-                if(newScore < existing)
+                if (newScore < existing)
                 {
-                    var coordCount = new CoordCount(adjacentCoord.X, adjacentCoord.Y, newScore);
-                    queue.Enqueue(coordCount);
+                    queue.Enqueue(adjacentCoord);
                     seenMatrix.WriteValueAt(adjacentCoord, newScore);
                 }
             }
@@ -118,7 +116,6 @@ public class ChitonRisk
         var currentAddress = from;
         while (!currentAddress.Equals(to))
         {
-            pathMatrix.MoveTo(currentAddress);
             var adjacentCoords = GetAdjacentCoords(pathMatrix, currentAddress)
                 .Where(o => pathMatrix.ReadValueAt(o) > -1 && !pathSet.Contains(o))
                 .OrderBy(o => pathMatrix.ReadValueAt(o))

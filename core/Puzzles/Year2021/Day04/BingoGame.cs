@@ -62,7 +62,7 @@ public class BingoGame
         var i = 0;
         foreach (var input in inputs)
         {
-            d.Add(i, new BingoBoard(i, MatrixBuilder.BuildIntMatrixFromSpaceSeparated(input), new Matrix<bool>(5, 5)));
+            d.Add(i, new BingoBoard(i, MatrixBuilder.BuildIntMatrixFromSpaceSeparated(input), new DynamicMatrix<bool>(5, 5)));
             i++;
         }
 

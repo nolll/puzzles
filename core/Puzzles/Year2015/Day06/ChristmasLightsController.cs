@@ -6,14 +6,14 @@ namespace Core.Puzzles.Year2015.Day06;
 
 public class ChristmasLightsController
 {
-    private readonly Matrix<int> _matrix;
+    private readonly DynamicMatrix<int> _matrix;
 
     public int LitCount => _matrix.Values.Count(o => o > 0);
     public int TotalBrightness => _matrix.Values.Sum();
 
     public ChristmasLightsController(int size = 1000)
     {
-        _matrix = new Matrix<int>(size, size);
+        _matrix = new DynamicMatrix<int>(size, size);
     }
 
     public void RunCommands(string input, bool useBrightness)
@@ -84,7 +84,7 @@ public class ChristmasLightsController
             _yb = yb;
         }
 
-        public void Move(Matrix<int> matrix)
+        public void Move(DynamicMatrix<int> matrix)
         {
             for (var x = _xa; x <= _xb; x++)
             {
@@ -95,7 +95,7 @@ public class ChristmasLightsController
             }
         }
 
-        protected abstract void Change(Matrix<int> matrix, int x, int y);
+        protected abstract void Change(DynamicMatrix<int> matrix, int x, int y);
     }
 
     private class TurnOnCommand : Command
@@ -110,7 +110,7 @@ public class ChristmasLightsController
         {
         }
 
-        protected override void Change(Matrix<int> matrix, int x, int y)
+        protected override void Change(DynamicMatrix<int> matrix, int x, int y)
         {
             matrix.MoveTo(x, y);
             matrix.WriteValue(1);
@@ -129,7 +129,7 @@ public class ChristmasLightsController
         {
         }
 
-        protected override void Change(Matrix<int> matrix, int x, int y)
+        protected override void Change(DynamicMatrix<int> matrix, int x, int y)
         {
             matrix.MoveTo(x, y);
             matrix.WriteValue(0);
@@ -148,7 +148,7 @@ public class ChristmasLightsController
         {
         }
 
-        protected override void Change(Matrix<int> matrix, int x, int y)
+        protected override void Change(DynamicMatrix<int> matrix, int x, int y)
         {
             matrix.MoveTo(x, y);
             var currentValue = matrix.ReadValue();
@@ -173,7 +173,7 @@ public class ChristmasLightsController
             _increment = increment;
         }
 
-        protected override void Change(Matrix<int> matrix, int x, int y)
+        protected override void Change(DynamicMatrix<int> matrix, int x, int y)
         {
             matrix.MoveTo(x, y);
             var currentValue = matrix.ReadValue();
@@ -191,7 +191,7 @@ public class ChristmasLightsController
         {
         }
 
-        protected override void Change(Matrix<int> matrix, int x, int y)
+        protected override void Change(DynamicMatrix<int> matrix, int x, int y)
         {
         }
     }

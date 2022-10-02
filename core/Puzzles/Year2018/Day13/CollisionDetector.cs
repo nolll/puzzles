@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2018.Day13;
 
 public class CollisionDetector
 {
-    private Matrix<char> _matrix;
+    private DynamicMatrix<char> _matrix;
     private IList<MineCart> _carts;
     public MatrixAddress LocationOfFirstCollision { get; private set; }
     public MatrixAddress LocationOfLastCart { get; private set; }
@@ -81,7 +81,7 @@ public class CollisionDetector
 
     private void BuildMatrixAndCarts(in string input)
     {
-        _matrix = new Matrix<char>();
+        _matrix = new DynamicMatrix<char>();
         _carts = new List<MineCart>();
         var rows = PuzzleInputReader.ReadLines(input).Select(o => o.Trim('_')).ToList();
         for (var y = 0; y < rows.Count; y++)

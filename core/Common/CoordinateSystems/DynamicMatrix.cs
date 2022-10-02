@@ -17,22 +17,6 @@ public class DynamicMatrix<T> : BaseMatrix<T>, IMatrix<T>
         _matrix = BuildDynamicMatrix(width, height, defaultValue);
     }
 
-    protected override bool MoveTo(MatrixAddress address, bool extend)
-    {
-        if (IsOutOfRange(address))
-        {
-            if (extend)
-                ExtendMatrix(address);
-            else
-                return false;
-        }
-
-        var x = address.X > 0 ? address.X : 0;
-        var y = address.Y > 0 ? address.Y : 0;
-        Address = new MatrixAddress(x, y);
-        return true;
-    }
-
     public override T ReadValueAt(int x, int y)
     {
         return _matrix[y][x];
@@ -61,6 +45,11 @@ public class DynamicMatrix<T> : BaseMatrix<T>, IMatrix<T>
     protected override IMatrix<T> Create(int width, int height, T defaultValue)
     {
         return new DynamicMatrix<T>(width, height, _defaultValue);
+    }
+
+    protected override void HandleExtend(MatrixAddress address)
+    {
+        ExtendMatrix(address);
     }
 
     private void ExtendMatrix(MatrixAddress address)

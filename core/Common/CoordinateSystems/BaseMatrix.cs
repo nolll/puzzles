@@ -53,11 +53,14 @@ public abstract class BaseMatrix<T> : BaseMatrix2
         return MoveTo(address, true);
     }
 
-    protected virtual bool MoveTo(MatrixAddress address, bool extend)
+    private bool MoveTo(MatrixAddress address, bool extend)
     {
         if (IsOutOfRange(address))
         {
-            return false;
+            if (extend)
+                HandleExtend(address);
+            else
+                return false;
         }
 
         var x = address.X > 0 ? address.X : 0;
@@ -65,6 +68,8 @@ public abstract class BaseMatrix<T> : BaseMatrix2
         Address = new MatrixAddress(x, y);
         return true;
     }
+
+    protected abstract void HandleExtend(MatrixAddress address);
 
     public bool TryMoveTo(int x, int y)
     {

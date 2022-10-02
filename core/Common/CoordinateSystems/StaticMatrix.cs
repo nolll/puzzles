@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Core.Common.CoordinateSystems;
@@ -58,5 +59,10 @@ public class StaticMatrix<T> : BaseMatrix<T>, IMatrix<T>
     protected override IMatrix<T> Create(int width, int height, T defaultValue)
     {
         return new StaticMatrix<T>(width, height, _defaultValue);
+    }
+
+    protected override void HandleExtend(MatrixAddress address)
+    {
+        throw new Exception("Static matrix can't be extended");
     }
 }

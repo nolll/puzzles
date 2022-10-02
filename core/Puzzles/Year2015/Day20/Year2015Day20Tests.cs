@@ -12,7 +12,7 @@ public class Year2015Day20Tests
         const int input = 150;
 
         var presentDelivery = new PresentDelivery();
-        var house = presentDelivery.Deliver1(input);
+        var house = presentDelivery.Deliver1(input, false);
 
         Assert.That(house, Is.EqualTo(8));
     }

@@ -5,14 +5,14 @@ namespace Core.Puzzles.Year2015.Day20;
 
 public class PresentDelivery
 {
-    public int Deliver1(in int target)
+    public int Deliver1(in int target, bool useOptimization)
     {
         var house = FindLowerbound(target);
         
         while (true)
         {
             var hasAllLowFactors = HasAllLowFactors(house);
-            if (hasAllLowFactors)
+            if (!useOptimization || hasAllLowFactors)
             {
                 var factors = FindIntFactors(house);
                 var presentCount = factors.Sum(o => o * 10);

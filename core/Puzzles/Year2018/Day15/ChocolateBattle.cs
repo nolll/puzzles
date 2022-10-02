@@ -13,6 +13,7 @@ public class ChocolateBattle
     public int Outcome { get; private set; }
     public string Winners = "";
     public int ElfAttackPower { get; private set; }
+    private Dictionary<string, IList<MatrixAddress>> _pathCache = new Dictionary<string, IList<MatrixAddress>>();
 
     public ChocolateBattle(string input)
     {
@@ -83,7 +84,11 @@ public class ChocolateBattle
                     }
 
                     targets = targets.Distinct().ToList();
-                    var paths = targets.Select(o => PathFinder.ShortestPathTo(_matrix, figure.Address, o)).ToList();
+                    var paths = targets.Select(o =>
+                    {
+                        //Console.WriteLine($"from: {figure.Address.Id}, to: {o.Id}");
+                        return GetPaths(figure.Address, o);
+                    }).ToList();
                     var possibleMoves = paths
                         .Where(o => o.Any())
                         .OrderBy(o => o.Count)
@@ -142,6 +147,17 @@ public class ChocolateBattle
         Winners = _figures.First().Type == BattleFigureType.Elf ? "Elves" : "Goblin";
 
         return true;
+    }
+
+    private IList<MatrixAddress> GetPaths(MatrixAddress from, MatrixAddress to)
+    {
+        var id = $"{from.Id}-{to.Id}";
+        if (_pathCache.TryGetValue(id, out var paths))
+            return paths;
+
+        paths = PathFinder.ShortestPathTo(_matrix, from, to);
+        _pathCache.Add(id, paths);
+        return paths;
     }
 
     private bool IsBothTypesStillAlive =>

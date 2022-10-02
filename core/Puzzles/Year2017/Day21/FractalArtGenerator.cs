@@ -14,11 +14,11 @@ public class FractalArtGenerator
 ..#
 ###";
 
-    private Matrix<char> _matrix;
+    private IMatrix<char> _matrix;
     private readonly IList<FractalRule> _transformationRules2X2;
     private readonly IList<FractalRule> _transformationRules3X3;
     private readonly IDictionary<string, IList<MatrixVariant>> _variantCache;
-    private readonly IDictionary<string, Matrix<char>> _transformCache;
+    private readonly IDictionary<string, IMatrix<char>> _transformCache;
 
     public int PixelsOn => _matrix.Values.Count(o => o == '#');
 
@@ -30,7 +30,7 @@ public class FractalArtGenerator
 
         _matrix = MatrixBuilder.BuildCharMatrix(Inital);
         _variantCache = new Dictionary<string, IList<MatrixVariant>>();
-        _transformCache = new Dictionary<string, Matrix<char>>();
+        _transformCache = new Dictionary<string, IMatrix<char>>();
     }
 
     private IList<FractalRule> ParseRules(string input)
@@ -68,7 +68,7 @@ public class FractalArtGenerator
     private void Modify(int subSize)
     {
         var matrices = GetSubmatrices(subSize);
-        var transformed = new List<Matrix<char>>();
+        var transformed = new List<IMatrix<char>>();
         foreach (var matrix in matrices)
         {
             transformed.Add(Transform(matrix));
@@ -77,7 +77,7 @@ public class FractalArtGenerator
         _matrix = Join(transformed);
     }
 
-    private Matrix<char> Join(List<Matrix<char>> matrices)
+    private Matrix<char> Join(List<IMatrix<char>> matrices)
     {
         var newMatrix = new Matrix<char>();
         var size = matrices.First().Width;
@@ -110,17 +110,17 @@ public class FractalArtGenerator
 
     private class MatrixVariant
     {
-        private readonly Matrix<char> _matrix;
+        private readonly IMatrix<char> _matrix;
         public string Key { get; }
 
-        public MatrixVariant(string key, Matrix<char> matrix)
+        public MatrixVariant(string key, IMatrix<char> matrix)
         {
             _matrix = matrix;
             Key = key;
         }
     }
 
-    private IList<MatrixVariant> GetVariants(Matrix<char> matrix)
+    private IList<MatrixVariant> GetVariants(IMatrix<char> matrix)
     {
         var key = MatrixToString(matrix);
         if (_variantCache.TryGetValue(key, out var variants))
@@ -131,7 +131,7 @@ public class FractalArtGenerator
         return variants;
     }
 
-    private IEnumerable<MatrixVariant> CreateVariants(Matrix<char> matrix)
+    private IEnumerable<MatrixVariant> CreateVariants(IMatrix<char> matrix)
     {
         yield return new MatrixVariant(MatrixToString(matrix), matrix);
 
@@ -169,7 +169,7 @@ public class FractalArtGenerator
         yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
     }
 
-    private Matrix<char> Transform(Matrix<char> matrix)
+    private IMatrix<char> Transform(IMatrix<char> matrix)
     {
         var key = MatrixToString(matrix);
         if (_transformCache.TryGetValue(key, out var transformedMatrix))
@@ -196,7 +196,7 @@ public class FractalArtGenerator
         throw new Exception("No transformation rule matched");
     }
 
-    private Matrix<char> FlipMatrixHorizontally(Matrix<char> matrix)
+    private Matrix<char> FlipMatrixHorizontally(IMatrix<char> matrix)
     {
         var width = matrix.Width;
         var flipped = new Matrix<char>();
@@ -212,7 +212,7 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private Matrix<char> FlipMatrixVertically(Matrix<char> matrix)
+    private Matrix<char> FlipMatrixVertically(IMatrix<char> matrix)
     {
         var height = matrix.Height;
         var flipped = new Matrix<char>();
@@ -228,7 +228,7 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private Matrix<char> RotateMatrixRight(Matrix<char> matrix)
+    private Matrix<char> RotateMatrixRight(IMatrix<char> matrix)
     {
         var height = matrix.Height;
         var flipped = new Matrix<char>(1, 1, ' ');
@@ -245,7 +245,7 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private string MatrixToString(Matrix<char> matrix)
+    private string MatrixToString(IMatrix<char> matrix)
     {
         var sb = new StringBuilder();
         for (var y = 0; y < matrix.Height; y++)

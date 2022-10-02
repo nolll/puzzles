@@ -10,7 +10,7 @@ public class TrenchMap
     {
         var groups = input.Split("\r\n\r\n");
         var algorithm = groups[0].Trim();
-        var inputImage = MatrixBuilder.BuildCharMatrix(groups[1].Trim(), '.');
+        var inputImage = (Matrix<char>)MatrixBuilder.BuildCharMatrix(groups[1].Trim(), '.');
         inputImage.ExtendAllDirections(5);
         var outputImage = new Matrix<char>('.');
         
@@ -58,7 +58,7 @@ public class TrenchMap
                 }
             }
             
-            outputImage = outputImage.Slice(new MatrixAddress(1, 1), new MatrixAddress(outputImage.Width - 2, outputImage.Height - 2));
+            outputImage = (Matrix<char>)outputImage.Slice(new MatrixAddress(1, 1), new MatrixAddress(outputImage.Width - 2, outputImage.Height - 2));
             inputImage = outputImage;
         }
 

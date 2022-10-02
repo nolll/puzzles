@@ -6,14 +6,14 @@ namespace Core.Common.CoordinateSystems;
 
 public static class PathFinder
 {
-    public static int StepCountTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    public static int StepCountTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
         var goal = coordCounts.FirstOrDefault(o => o.X == from.X && o.Y == from.Y);
         return goal?.Count ?? 0;
     }
 
-    public static IList<MatrixAddress> ShortestPathTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    public static IList<MatrixAddress> ShortestPathTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
         var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
@@ -44,7 +44,7 @@ public static class PathFinder
         return path;
     }
 
-    private static IList<CoordCount> GetCoordCounts(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    private static IList<CoordCount> GetCoordCounts(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         var queue = new List<CoordCount> { new CoordCount(to.X, to.Y, 0) };
         var index = 0;

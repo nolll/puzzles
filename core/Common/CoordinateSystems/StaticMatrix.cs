@@ -4,26 +4,26 @@ using System.Text;
 
 namespace Core.Common.CoordinateSystems;
 
-public class Matrix<T> : BaseMatrix, IMatrix<T>
+public class StaticMatrix<T> : BaseMatrix, IMatrix<T>
 {
     private readonly T _defaultValue;
-    private readonly IList<IList<T>> _matrix;
+    private readonly T[,] _matrix;
     public MatrixDirection Direction { get; private set; }
     public MatrixAddress Address { get; private set; }
     public MatrixAddress StartAddress { get; private set; }
 
-    public IEnumerable<T> Values => _matrix.SelectMany(x => x).ToList();
-    public int Height => _matrix.Count;
-    public int Width => _matrix.Any() ? _matrix[0].Count : 0;
+    public int Height => _matrix.GetLength(1);
+    public int Width => _matrix.GetLength(0);
     public bool IsAtTop => Address.Y == 0;
     public bool IsAtRightEdge => Address.X == Width - 1;
     public bool IsAtBottom => Address.Y == Height - 1;
     public bool IsAtLeftEdge => Address.X == 0;
     public MatrixAddress Center => new(Width / 2, Height / 2);
 
-    public Matrix(int width = 1, int height = 1, T defaultValue = default)
+    public StaticMatrix(int width = 1, int height = 1, T defaultValue = default)
     {
         _defaultValue = defaultValue;
+        _matrix = new T[width, height];
         _matrix = BuildMatrix(width, height, defaultValue);
         Address = new MatrixAddress(0, 0);
         StartAddress = new MatrixAddress(0, 0);
@@ -34,15 +34,31 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
     {
         get
         {
-            var coords = new List<MatrixAddress>();
+            var coords = new MatrixAddress[Width * Height];
             for (var y = 0; y < Height; y++)
             {
                 for (var x = 0; x < Width; x++)
                 {
-                    coords.Add(new MatrixAddress(x, y));
+                    coords[x * y + x] = new MatrixAddress(x, y);
                 }
             }
             return coords;
+        }
+    }
+
+    public IEnumerable<T> Values
+    {
+        get
+        {
+            var values = new T[Width * Height];
+            for (var y = 0; y < Height; y++)
+            {
+                for (var x = 0; x < Width; x++)
+                {
+                    values[x * y + x] = _matrix[x, y];
+                }
+            }
+            return values;
         }
     }
 
@@ -60,10 +76,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
     {
         if (IsOutOfRange(address))
         {
-            if (extend)
-                ExtendMatrix(address);
-            else
-                return false;
+            return false;
         }
 
         var x = address.X > 0 ? address.X : 0;
@@ -203,27 +216,22 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
     public string Print(bool markCurrentAddress = false, bool markStartAddress = false, T currentAddressMarker = default, T startAddressMarker = default, bool spacing = false)
     {
         var sb = new StringBuilder();
-        var y = 0;
-        foreach (var row in _matrix)
+        for (var x = 0; x < Width; x++)
         {
-            var x = 0;
-            foreach (var o in row)
+            for (var y = 0; y < Height; y++)
             {
                 if (markCurrentAddress && x == Address.X && y == Address.Y)
                     sb.Append('D');
                 else if (markStartAddress && x == StartAddress.X && y == StartAddress.Y)
                     sb.Append('S');
                 else
-                    sb.Append(o);
+                    sb.Append(_matrix[x, y]);
 
                 if (spacing)
                     sb.Append(' ');
-
-                x += 1;
             }
 
             sb.AppendLine();
-            y += 1;
         }
 
         return sb.ToString().Trim();
@@ -241,7 +249,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public T ReadValueAt(int x, int y)
     {
-        return _matrix[y][x];
+        return _matrix[x, y];
     }
 
     public void WriteValue(T value)
@@ -256,20 +264,20 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public void WriteValueAt(int x, int y, T value)
     {
-        _matrix[y][x] = value;
+        _matrix[x, y] = value;
     }
 
     public IList<MatrixAddress> FindAddresses(T value)
     {
         var addresses = new List<MatrixAddress>();
-        for (var y = 0; y < _matrix.Count; y++)
+        for (var y = 0; y < Height; y++)
         {
-            for (var x = 0; x < _matrix.Count; x++)
+            for (var x = 0; x < Width; x++)
             {
                 var address = new MatrixAddress(x, y);
                 MoveTo(address);
                 var val = ReadValue();
-                if (val.Equals(value))
+                if(val.Equals(value))
                     addresses.Add(address);
             }
         }
@@ -318,7 +326,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public IMatrix<T> Copy()
     {
-        var matrix = new Matrix<T>();
+        var matrix = new StaticMatrix<T>();
         for (var y = 0; y < Height; y++)
         {
             for (var x = 0; x < Width; x++)
@@ -334,7 +342,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public IMatrix<T> RotateLeft()
     {
-        var newMatrix = new Matrix<T>(Height, Width, _defaultValue);
+        var newMatrix = new StaticMatrix<T>(Height, Width, _defaultValue);
         var oy = 0;
         for (var ox = Width - 1; ox >= 0; ox--)
         {
@@ -362,7 +370,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         to ??= new MatrixAddress(Width - 1, Height - 1);
         var xNew = 0;
         var yNew = 0;
-        var newMatrix = new Matrix<T>(defaultValue: _defaultValue);
+        var newMatrix = new StaticMatrix<T>(defaultValue: _defaultValue);
         for (var y = from.Y; y <= to.Y; y++)
         {
             for (var x = from.X; x <= to.X; x++)
@@ -389,7 +397,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
     {
         var width = Width;
         var height = Height;
-        var newMatrix = new Matrix<T>(width, height, _defaultValue);
+        var newMatrix = new StaticMatrix<T>(width, height, _defaultValue);
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < width; x++)
@@ -406,7 +414,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
     {
         var width = Width;
         var height = Height;
-        var newMatrix = new Matrix<T>(width, height, _defaultValue);
+        var newMatrix = new StaticMatrix<T>(width, height, _defaultValue);
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < width; x++)
@@ -419,126 +427,16 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         return newMatrix;
     }
 
-    private IList<IList<T>> BuildMatrix(int width, int height, T defaultValue)
+    private T[,] BuildMatrix(int width, int height, T defaultValue)
     {
-        var matrix = new List<IList<T>>();
-        for (var y = 0; y < height; y++)
+        var matrix = new T[Width, height];
+        for (var y = 0; y < Height; y++)
         {
-            var row = new List<T>();
             for (var x = 0; x < width; x++)
             {
-                row.Add(defaultValue);
+                matrix[x, y] = defaultValue;
             }
-            matrix.Add(row);
         }
         return matrix;
-    }
-
-    private void ExtendMatrix(MatrixAddress address)
-    {
-        ExtendX(address);
-        ExtendY(address);
-    }
-
-    private void ExtendX(MatrixAddress address)
-    {
-        if (address.X < 0)
-            ExtendLeft(address);
-        ExtendRight(address);
-    }
-
-    private void ExtendLeft(MatrixAddress address)
-    {
-        AddCols(-address.X, MatrixAddMode.Prepend);
-        StartAddress = new MatrixAddress(StartAddress.X - address.X, StartAddress.Y);
-    }
-
-    private void ExtendRight(MatrixAddress address)
-    {
-        var extendBy = address.X - (Width - 1);
-        if (extendBy > 0)
-            AddCols(extendBy, MatrixAddMode.Append);
-    }
-
-    private void ExtendY(MatrixAddress address)
-    {
-        if (address.Y < 0)
-            ExtendTop(address);
-        ExtendBottom(address);
-    }
-
-    private void ExtendTop(MatrixAddress address)
-    {
-        AddRows(-address.Y, MatrixAddMode.Prepend);
-        StartAddress = new MatrixAddress(StartAddress.X, StartAddress.Y - address.Y);
-    }
-
-    private void ExtendBottom(MatrixAddress address)
-    {
-        var extendBy = address.Y - (Height - 1);
-        if (extendBy > 0)
-            AddRows(extendBy, MatrixAddMode.Append);
-    }
-
-    private void AddRows(int numberOfRows, MatrixAddMode addMode)
-    {
-        var width = Width;
-        for (var y = 0; y < numberOfRows; y++)
-        {
-            var row = new List<T>();
-            for (var x = 0; x < width; x++)
-            {
-                row.Add(_defaultValue);
-            }
-
-            if (addMode == MatrixAddMode.Prepend)
-                _matrix.Insert(0, row);
-            else
-                _matrix.Add(row);
-        }
-    }
-
-    private void AddCols(int numberOfRows, MatrixAddMode addMode)
-    {
-        var height = Height;
-        for (var y = 0; y < height; y++)
-        {
-            var row = _matrix[y];
-            for (var x = 0; x < numberOfRows; x++)
-            {
-                if (addMode == MatrixAddMode.Prepend)
-                    row.Insert(0, _defaultValue);
-                else
-                    row.Add(_defaultValue);
-            }
-        }
-    }
-
-    public void ExtendAllDirections(int steps = 1)
-    {
-        ExtendUp(steps);
-        ExtendRight(steps);
-        ExtendDown(steps);
-        ExtendLeft(steps);
-    }
-
-    public void ExtendUp(int steps = 1)
-    {
-        AddRows(steps, MatrixAddMode.Prepend);
-    }
-
-    public void ExtendRight(int steps = 1)
-    {
-        AddCols(steps, MatrixAddMode.Append);
-    }
-
-    public void ExtendDown(int steps = 1)
-    {
-        AddRows(steps, MatrixAddMode.Append);
-    }
-
-    public void ExtendLeft(int steps = 1)
-    {
-        AddCols(steps, MatrixAddMode.Prepend);
     }
 }

@@ -8,10 +8,10 @@ namespace Core.Puzzles.Year2020.Day20;
 public class JigsawTile
 {
     public long Id { get; }
-    public Matrix<char> Matrix;
+    public IMatrix<char> Matrix;
     public bool Done { get; set; }
 
-    public JigsawTile(long id, Matrix<char> matrix)
+    public JigsawTile(long id, IMatrix<char> matrix)
     {
         Done = false;
         Id = id;

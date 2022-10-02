@@ -9,7 +9,7 @@ public class VirusInfection
     private const char Infected = '#';
     private const char Flagged = 'F';
 
-    private readonly Matrix<char> _matrix;
+    private readonly IMatrix<char> _matrix;
 
     public VirusInfection(string input)
     {

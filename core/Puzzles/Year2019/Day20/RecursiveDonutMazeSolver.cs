@@ -13,14 +13,14 @@ public class RecursiveDonutMazeSolver
         public const char Space = ' ';
     }
 
-    private IList<Matrix<char>> _map;
+    private IList<IMatrix<char>> _map;
     public int ShortestStepCount { get; }
     private MatrixAddress _startAddress;
     private MatrixAddress _endAddress;
-    private Matrix<char> _matrix;
+    private IMatrix<char> _matrix;
     private IDictionary<MatrixAddress, DonutPortal> _portals;
 
-    private Matrix<char> GetMatrix(int depth)
+    private IMatrix<char> GetMatrix(int depth)
     {
         if (_map.Count <= depth)
             _map.Add(_matrix.Copy());
@@ -99,7 +99,7 @@ public class RecursiveDonutMazeSolver
 
         _matrix = matrix;
         _portals = portals;
-        _map = new List<Matrix<char>> { topMatrix };
+        _map = new List<IMatrix<char>> { topMatrix };
     }
 
     private bool IsOuterPortal(int width, int height, MatrixAddress address)
@@ -110,7 +110,7 @@ public class RecursiveDonutMazeSolver
         return xIsOnEdge || yIsOnEdge;
     }
 
-    private IEnumerable<MatrixAddress> FindLetterCoords(Matrix<char> matrix)
+    private IEnumerable<MatrixAddress> FindLetterCoords(IMatrix<char> matrix)
     {
         for (var y = 0; y < matrix.Height; y++)
         {

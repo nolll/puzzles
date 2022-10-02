@@ -79,13 +79,13 @@ public class ChitonRisk
         Console.WriteLine(pathMatrix.Print());
     }
 
-    private IMatrix<int?> GetCoordCounts(IMatrix<int> matrix, MatrixAddress from, MatrixAddress to)
+    private IMatrix<int> GetCoordCounts(IMatrix<int> matrix, MatrixAddress from, MatrixAddress to)
     {
         var queue = new Queue<CoordCount>();
         var startCoordCount = new CoordCount(to.X, to.Y, matrix.ReadValueAt(to));
         queue.Enqueue(startCoordCount);
-        var seenMatrix = new StaticMatrix<int?>(matrix.Width, matrix.Height, null);
-        while (queue.Any() && seenMatrix.ReadValueAt(from) == null)
+        var seenMatrix = new StaticMatrix<int>(matrix.Width, matrix.Height, int.MaxValue);
+        while (queue.Any() && seenMatrix.ReadValueAt(from) == int.MaxValue)
         {
             var next = queue.Dequeue();
             matrix.MoveTo(next.X, next.Y);
@@ -97,7 +97,7 @@ public class ChitonRisk
             {
                 var newScore = next.Count + matrix.ReadValueAt(adjacentCoord);
                 var existing = seenMatrix.ReadValueAt(adjacentCoord);
-                if(existing == null || newScore < existing)
+                if(newScore < existing)
                 {
                     var coordCount = new CoordCount(adjacentCoord.X, adjacentCoord.Y, newScore);
                     queue.Enqueue(coordCount);

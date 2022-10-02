@@ -19,7 +19,7 @@ public class HexagonalFloor
     private const string NorthWest = "nw";
 
     private readonly IEnumerable<List<string>> _instructions;
-    private readonly Matrix<char> _matrix;
+    private readonly DynamicMatrix<char> _matrix;
     private readonly Dictionary<string, List<MatrixAddress>> _adjacentCoordsCache;
     public int BlackTileCount => _matrix.Values.Count(o => o == Black);
 
@@ -27,7 +27,7 @@ public class HexagonalFloor
     {
         var rows = PuzzleInputReader.ReadLines(input);
         _instructions = rows.Select(ParseInstruction);
-        _matrix = new Matrix<char>(defaultValue: Nothing);
+        _matrix = new DynamicMatrix<char>(defaultValue: Nothing);
         _adjacentCoordsCache = new Dictionary<string, List<MatrixAddress>>();
     }
 

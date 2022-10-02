@@ -10,8 +10,8 @@ public class PaintRobot
     private readonly string _program;
     private readonly int _shipWidth;
     private readonly int _shipHeight;
-    private readonly Matrix<int> _panels;
-    private readonly Matrix<int> _paintCounts;
+    private readonly DynamicMatrix<int> _panels;
+    private readonly DynamicMatrix<int> _paintCounts;
     private PaintMode _mode;
     private ComputerInterface _computer;
 
@@ -20,8 +20,8 @@ public class PaintRobot
         _program = program;
         _shipWidth = shipWidth;
         _shipHeight = shipHeight;
-        _panels = new Matrix<int>(shipWidth, shipHeight);
-        _paintCounts = new Matrix<int>(shipWidth, shipHeight);
+        _panels = new DynamicMatrix<int>(shipWidth, shipHeight);
+        _paintCounts = new DynamicMatrix<int>(shipWidth, shipHeight);
     }
 
     public Result Paint(bool startOnWhitePanel)

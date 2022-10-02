@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2018.Day17;
 
 public class ReservoirFiller
 {
-    private Matrix<char> _matrix;
+    private DynamicMatrix<char> _matrix;
     private int _yMin = int.MaxValue;
     private int _yMax = int.MinValue;
     private readonly MatrixAddress _source = new MatrixAddress(500, 0);
@@ -90,7 +90,7 @@ public class ReservoirFiller
 
     private void BuildMatrix(string input)
     {
-        _matrix = new Matrix<char>(1, 1, EmptyTile);
+        _matrix = new DynamicMatrix<char>(1, 1, EmptyTile);
         _matrix.MoveTo(_source);
         _matrix.WriteValue(SourceTile);
 

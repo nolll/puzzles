@@ -8,7 +8,7 @@ namespace Core.Puzzles.Year2018.Day15;
 public class ChocolateBattle
 {
     private readonly string _input;
-    private Matrix<char> _matrix;
+    private DynamicMatrix<char> _matrix;
     private IList<BattleFigure> _figures;
     public int Outcome { get; private set; }
     public string Winners = "";
@@ -167,7 +167,7 @@ public class ChocolateBattle
     private void Init(int elfAttackPower)
     {
         _figures = new List<BattleFigure>();
-        _matrix = new Matrix<char>();
+        _matrix = new DynamicMatrix<char>();
         var rows = _input.Trim().Split('\n');
         var y = 0;
         var figureId = 0;

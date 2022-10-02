@@ -6,11 +6,11 @@ namespace Core.Puzzles.Year2016.Day08;
 
 public class ScreenSimulator
 {
-    private readonly Matrix<char> _screen;
+    private readonly DynamicMatrix<char> _screen;
 
     public ScreenSimulator(int width, int height)
     {
-        _screen = new Matrix<char>(width, height, ' ');
+        _screen = new DynamicMatrix<char>(width, height, ' ');
     }
 
     public ScreenSimulatorResult Run(string input)

@@ -89,8 +89,7 @@ public class ChitonRisk
         {
             var next = queue.Dequeue();
             var adjacentCoords = GetAdjacentCoords(matrix, new MatrixAddress(next.X, next.Y))
-                .OrderBy(matrix.ReadValueAt)
-                .ToList();
+                .OrderBy(matrix.ReadValueAt);
 
             foreach (var adjacentCoord in adjacentCoords)
             {

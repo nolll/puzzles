@@ -16,7 +16,7 @@ public static class PathFinder
     public static IList<MatrixAddress> ShortestPathTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
-        var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
+        var pathMatrix = new DynamicMatrix<int>(matrix.Width, matrix.Height, -1);
         foreach (var coordCount in coordCounts)
         {
             pathMatrix.MoveTo(coordCount.X, coordCount.Y);

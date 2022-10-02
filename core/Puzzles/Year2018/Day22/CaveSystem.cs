@@ -5,7 +5,7 @@ namespace Core.Puzzles.Year2018.Day22;
 public class CaveSystem
 {
     private readonly long _depth;
-    private Matrix<CaveRegion> _cave;
+    private DynamicMatrix<CaveRegion> _cave;
     private readonly MatrixAddress _mouth;
     private readonly MatrixAddress _target;
 
@@ -36,7 +36,7 @@ public class CaveSystem
 
     private void BuildCave(MatrixAddress target)
     {
-        _cave = new Matrix<CaveRegion>();
+        _cave = new DynamicMatrix<CaveRegion>();
 
         const int padding = 25;
         var xMax = target.X + padding;

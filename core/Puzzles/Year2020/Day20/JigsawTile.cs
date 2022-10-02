@@ -108,7 +108,7 @@ public class JigsawTile
     {
         var width = Matrix.Width;
         var height = Matrix.Height;
-        var newMatrix = new Matrix<char>();
+        var newMatrix = new DynamicMatrix<char>();
         for (var y = 1; y < height - 1; y++)
         {
             for (var x = 1; x < width - 1; x++)

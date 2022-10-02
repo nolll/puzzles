@@ -5,7 +5,7 @@ namespace Core.Puzzles.Year2017.Day03;
 
 public class SpiralMemory
 {
-    private readonly Matrix<long> _matrix;
+    private readonly DynamicMatrix<long> _matrix;
     public int Distance { get; }
     public long Value { get; }
 
@@ -16,9 +16,9 @@ public class SpiralMemory
         Value = _matrix.ReadValue();
     }
 
-    private Matrix<long> BuildMatrix(int targetSquare, SpiralMemoryMode mode)
+    private DynamicMatrix<long> BuildMatrix(int targetSquare, SpiralMemoryMode mode)
     {
-        var matrix = new Matrix<long>();
+        var matrix = new DynamicMatrix<long>();
         matrix.TurnTo(MatrixDirection.Down);
         var currentSquare = 1;
         matrix.WriteValue(currentSquare);

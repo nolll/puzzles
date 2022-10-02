@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2020.Day12;
 
 public class SimpleFerryNavigationSystem
 {
-    private readonly Matrix<int> _matrix;
+    private readonly DynamicMatrix<int> _matrix;
     private readonly IEnumerable<FerryNavigationInstruction> _intructions;
     private readonly MatrixAddress _startPoint;
     public int DistanceTravelled => _matrix.Address.ManhattanDistanceTo(_matrix.StartAddress);
@@ -17,7 +17,7 @@ public class SimpleFerryNavigationSystem
         var rows = PuzzleInputReader.ReadLines(input);
         _intructions = rows.Select(FerryNavigationInstruction.Parse);
 
-        _matrix = new Matrix<int>();
+        _matrix = new DynamicMatrix<int>();
         _startPoint = _matrix.Address;
         _matrix.TurnRight();
     }

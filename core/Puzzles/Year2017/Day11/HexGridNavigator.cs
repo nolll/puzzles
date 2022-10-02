@@ -5,13 +5,13 @@ namespace Core.Puzzles.Year2017.Day11;
 
 public class HexGridNavigator
 {
-    private readonly Matrix<int> _matrix;
+    private readonly DynamicMatrix<int> _matrix;
     public int EndDistance { get; }
     public int MaxDistance { get; }
 
     public HexGridNavigator(string input)
     {
-        _matrix = new Matrix<int>();
+        _matrix = new DynamicMatrix<int>();
         _matrix.TurnTo(MatrixDirection.Up);
 
         var directions = input.Split(',');

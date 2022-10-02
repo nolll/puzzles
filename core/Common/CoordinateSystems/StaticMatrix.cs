@@ -254,7 +254,17 @@ public class StaticMatrix<T> : BaseMatrix, IMatrix<T>
 
     public void WriteValue(T value)
     {
-        _matrix[Address.X, Address.Y] = value;
+        WriteValueAt(Address.X, Address.Y, value);
+    }
+
+    public void WriteValueAt(MatrixAddress address, T value)
+    {
+        WriteValueAt(address.X, address.Y, value);
+    }
+
+    public void WriteValueAt(int x, int y, T value)
+    {
+        _matrix[x, y] = value;
     }
 
     public IList<MatrixAddress> FindAddresses(T value)

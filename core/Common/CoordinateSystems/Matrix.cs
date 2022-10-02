@@ -246,7 +246,17 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public void WriteValue(T value)
     {
-        _matrix[Address.Y][Address.X] = value;
+        WriteValueAt(Address.X, Address.Y, value);
+    }
+
+    public void WriteValueAt(MatrixAddress address, T value)
+    {
+        WriteValueAt(address.X, address.Y, value);
+    }
+
+    public void WriteValueAt(int x, int y, T value)
+    {
+        _matrix[y][x] = value;
     }
 
     public IList<MatrixAddress> FindAddresses(T value)

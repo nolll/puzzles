@@ -42,8 +42,7 @@ public class ChitonRisk
                             vLarge -= 9;
                         var xLarge = X * width + x;
                         var yLarge = Y * height + y;
-                        largeMatrix.MoveTo(xLarge, yLarge);
-                        largeMatrix.WriteValue(vLarge);
+                        largeMatrix.WriteValueAt(xLarge, yLarge, vLarge);
                     }
                 }
             }
@@ -69,91 +68,78 @@ public class ChitonRisk
         return sum;
     }
 
-    private void PrintPath(Matrix<int> matrix, IList<MatrixAddress> path)
+    private void PrintPath(IMatrix<int> matrix, IList<MatrixAddress> path)
     {
-        var pathMatrix = new Matrix<char>(defaultValue: '.');
+        var pathMatrix = new StaticMatrix<char>(matrix.Width, matrix.Height, defaultValue: '.');
         foreach (var coord in path)
         {
-            pathMatrix.MoveTo(coord);
-            pathMatrix.WriteValue('#');
+            pathMatrix.WriteValueAt(coord, '#');
         }
 
         Console.WriteLine(pathMatrix.Print());
     }
 
-    private static IList<CoordCount> GetCoordCounts(IMatrix<int> matrix, MatrixAddress from, MatrixAddress to)
+    private IMatrix<int?> GetCoordCounts(IMatrix<int> matrix, MatrixAddress from, MatrixAddress to)
     {
         var queue = new Queue<CoordCount>();
         var startCoordCount = new CoordCount(to.X, to.Y, matrix.ReadValueAt(to));
         queue.Enqueue(startCoordCount);
-        var seen = new Dictionary<MatrixAddress, CoordCount>
-        {
-            [to] = startCoordCount
-        };
-        while (queue.Any() && !seen.ContainsKey(from))
+        var seenMatrix = new StaticMatrix<int?>(matrix.Width, matrix.Height, null);
+        while (queue.Any() && seenMatrix.ReadValueAt(from) == null)
         {
             var next = queue.Dequeue();
             matrix.MoveTo(next.X, next.Y);
-            var adjacentCoords = matrix.PerpendicularAdjacentCoords
+            var adjacentCoords = GetAdjacentCoords(matrix, new MatrixAddress(next.X, next.Y))
                 .OrderBy(matrix.ReadValueAt)
                 .ToList();
 
             foreach (var adjacentCoord in adjacentCoords)
             {
                 var newScore = next.Count + matrix.ReadValueAt(adjacentCoord);
-                if (seen.TryGetValue(adjacentCoord, out var existing) && newScore < existing.Count)
+                var existing = seenMatrix.ReadValueAt(adjacentCoord);
+                if(existing == null || newScore < existing)
                 {
                     var coordCount = new CoordCount(adjacentCoord.X, adjacentCoord.Y, newScore);
                     queue.Enqueue(coordCount);
-                    seen[adjacentCoord] = coordCount;
-                }
-                else if (existing == null)
-                {
-                    var coordCount = new CoordCount(adjacentCoord.X, adjacentCoord.Y, newScore);
-                    queue.Enqueue(coordCount);
-                    seen[adjacentCoord] = coordCount;
+                    seenMatrix.WriteValueAt(adjacentCoord, newScore);
                 }
             }
         }
 
-        return seen.Values.ToList();
+        return seenMatrix;
     }
 
     private IList<MatrixAddress> GetBestPathTo(IMatrix<int> matrix, MatrixAddress from, MatrixAddress to)
     {
-        var coordCounts = GetCoordCounts(matrix, from, to);
-        var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
-        foreach (var coordCount in coordCounts)
-        {
-            pathMatrix.MoveTo(coordCount.X, coordCount.Y);
-            pathMatrix.WriteValue(coordCount.Count);
-        }
-
+        var pathMatrix = GetCoordCounts(matrix, from, to);
+        
         var path = new List<MatrixAddress>();
+        var pathSet = new HashSet<MatrixAddress>();
         var currentAddress = from;
         while (!currentAddress.Equals(to))
         {
             pathMatrix.MoveTo(currentAddress);
-            var adjacentCoords = GetAdjacentCoords(pathMatrix, currentAddress);
-            var filteredCoords = adjacentCoords
-                .Where(o => pathMatrix.ReadValueAt(o) > -1 && !path.Contains(o))
+            var adjacentCoords = GetAdjacentCoords(pathMatrix, currentAddress)
+                .Where(o => pathMatrix.ReadValueAt(o) > -1 && !pathSet.Contains(o))
                 .OrderBy(o => pathMatrix.ReadValueAt(o))
                 .ThenBy(o => o.Y)
                 .ThenBy(o => o.X)
                 .ToList();
-            var bestAddress = filteredCoords.FirstOrDefault();
-            if (bestAddress == null)
-                break;
-            currentAddress = new MatrixAddress(bestAddress.X, bestAddress.Y);
-            path.Add(currentAddress);
+            if (adjacentCoords.Any())
+            {
+                var bestAddress = adjacentCoords.First();
+                currentAddress = new MatrixAddress(bestAddress.X, bestAddress.Y);
+                path.Add(currentAddress);
+                pathSet.Add(currentAddress);
+            }
         }
 
         return path;
     }
 
-    private IList<MatrixAddress> GetAdjacentCoords(IMatrix<int> matrix, MatrixAddress address)
+    private IList<MatrixAddress> GetAdjacentCoords<T>(IMatrix<T> matrix, MatrixAddress address)
     {
-        if(_adjacentCoordsCache.TryGetValue(address, out var coords))
+        if (_adjacentCoordsCache.TryGetValue(address, out var coords))
             return coords;
 
         matrix.MoveTo(address);

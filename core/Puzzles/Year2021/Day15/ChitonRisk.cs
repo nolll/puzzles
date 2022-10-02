@@ -88,7 +88,6 @@ public class ChitonRisk
         while (queue.Any() && seenMatrix.ReadValueAt(from) == int.MaxValue)
         {
             var next = queue.Dequeue();
-            matrix.MoveTo(next.X, next.Y);
             var adjacentCoords = GetAdjacentCoords(matrix, new MatrixAddress(next.X, next.Y))
                 .OrderBy(matrix.ReadValueAt)
                 .ToList();
@@ -118,7 +117,6 @@ public class ChitonRisk
         var currentAddress = from;
         while (!currentAddress.Equals(to))
         {
-            pathMatrix.MoveTo(currentAddress);
             var adjacentCoords = GetAdjacentCoords(pathMatrix, currentAddress)
                 .Where(o => pathMatrix.ReadValueAt(o) > -1 && !pathSet.Contains(o))
                 .OrderBy(o => pathMatrix.ReadValueAt(o))

@@ -17,7 +17,7 @@ public class TuringMachine
         _tape = new LinkedList<int>();
         _cursor = _tape.AddFirst(0);
 
-        var rows = PuzzleInputReader.ReadLines(input.Replace("-", "").Replace(".", "").Replace(":", ""));
+        var rows = PuzzleInputReader.ReadLines(input.Replace("-", "").Replace(".", "").Replace(":", ""), true);
 
         var beginRow = rows[0];
         _startState = beginRow.Split(' ')[3].First();

@@ -8,7 +8,16 @@ public static class PuzzleInputReader
 {
     public static IList<string> ReadLines(string str)
     {
-        return str.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Where(o => o.Length > 0).ToList();
+        return ReadLines(str, true);
+    }
+
+    public static IList<string> ReadLines(string str, bool includeEmptyLines)
+    {
+        var lines = str.Trim().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+        if (!includeEmptyLines)
+            return lines.Where(o => o.Length > 0).ToList();
+
+        return lines.ToList();
     }
 
     public static IList<IList<string>> ReadLineGroups(string str)

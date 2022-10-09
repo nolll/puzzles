@@ -80,9 +80,9 @@ public class Year2021Day18Tests
     [Test]
     public void Parsing8()
     {
-        var number = new SnailfishNumber("[[[[0,7],4],[15,[0,13]]],[1,1]]");
+        var number = new SnailfishNumber("[[[[0,7],4],[5,[0,3]]],[1,1]]");
 
-        Assert.That(number.ToString(), Is.EqualTo("[[[[0,7],4],[15,[0,13]]],[1,1]]"));
+        Assert.That(number.ToString(), Is.EqualTo("[[[[0,7],4],[5,[0,3]]],[1,1]]"));
     }
 
     [Test]

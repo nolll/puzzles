@@ -24,22 +24,25 @@ public class SnailfishNumber
         var currentInput = input[1..];
         if (currentInput.First() == '[')
         {
-            Children.Add(new SnailfishNumber(currentInput, this));
+            var child = new SnailfishNumber(currentInput, this);
+            Children.Add(child);
         }
         else
         {
             var child = new SnailfishNumber(int.Parse(currentInput[..1]), this);
             Children.Add(child);
         }
-        currentInput = currentInput[Left.ParsedLength..];
+            currentInput = currentInput[Left.ParsedLength..];
         currentInput = currentInput[1..];
         if (currentInput.First() == '[')
         {
-            Children.Add(new SnailfishNumber(currentInput, this));
+            var child = new SnailfishNumber(currentInput, this);
+            Children.Add(child);
         }
         else
         {
-            Children.Add(new SnailfishNumber(int.Parse(currentInput[..1]), this));
+            var child = new SnailfishNumber(int.Parse(currentInput[..1]), this);
+            Children.Add(child);
         }
 
         ParsedLength = Left.ParsedLength + Right.ParsedLength + 3;

@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Numerics;
 
 namespace Core.Puzzles.Year2021.Day16;
 
@@ -11,7 +12,7 @@ public class Year2021Day16Tests
 
         Assert.That(result.Version, Is.EqualTo(6));
         Assert.That(result.Type, Is.EqualTo(4));
-        Assert.That(result.LiteralValue, Is.EqualTo(2021));
+        Assert.That(result.LiteralValue, Is.EqualTo(new BigInteger(2021)));
         Assert.That(result.VersionSum, Is.EqualTo(6));
         Assert.That(result.SubPackets.Count, Is.EqualTo(0));
     }
@@ -25,8 +26,8 @@ public class Year2021Day16Tests
         Assert.That(result.Type, Is.EqualTo(6));
         Assert.That(result.LiteralValue, Is.EqualTo(null));
         Assert.That(result.SubPackets.Count, Is.EqualTo(2));
-        Assert.That(result.SubPackets[0].LiteralValue, Is.EqualTo(10));
-        Assert.That(result.SubPackets[1].LiteralValue, Is.EqualTo(20));
+        Assert.That(result.SubPackets[0].LiteralValue, Is.EqualTo(new BigInteger(10)));
+        Assert.That(result.SubPackets[1].LiteralValue, Is.EqualTo(new BigInteger(20)));
     }
 
     [Test]
@@ -38,9 +39,9 @@ public class Year2021Day16Tests
         Assert.That(result.Type, Is.EqualTo(3));
         Assert.That(result.LiteralValue, Is.EqualTo(null));
         Assert.That(result.SubPackets.Count, Is.EqualTo(3));
-        Assert.That(result.SubPackets[0].LiteralValue, Is.EqualTo(1));
-        Assert.That(result.SubPackets[1].LiteralValue, Is.EqualTo(2));
-        Assert.That(result.SubPackets[2].LiteralValue, Is.EqualTo(3));
+        Assert.That(result.SubPackets[0].LiteralValue, Is.EqualTo(new BigInteger(1)));
+        Assert.That(result.SubPackets[1].LiteralValue, Is.EqualTo(new BigInteger(2)));
+        Assert.That(result.SubPackets[2].LiteralValue, Is.EqualTo(new BigInteger(3)));
     }
 
     [TestCase("8A004A801A8002F478", 16)]
@@ -66,6 +67,6 @@ public class Year2021Day16Tests
     {
         var result = BitsPacket.FromHex(hex);
 
-        Assert.That(result.Value, Is.EqualTo(expected));
+        Assert.That(result.Value, Is.EqualTo(new BigInteger(expected)));
     }
 }

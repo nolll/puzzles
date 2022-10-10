@@ -45,8 +45,8 @@ public class StaticMatrix<T> : BaseMatrix<T>, IMatrix<T>
 
     private T[,] BuildStaticMatrix(int width, int height, T defaultValue)
     {
-        var matrix = new T[Width, height];
-        for (var y = 0; y < Height; y++)
+        var matrix = new T[width, height];
+        for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < width; x++)
             {

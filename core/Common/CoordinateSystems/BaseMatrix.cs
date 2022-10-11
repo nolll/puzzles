@@ -276,32 +276,32 @@ public abstract class BaseMatrix<T> : BaseMatrix2
     }
 
     public IList<T> PerpendicularAdjacentValues => PerpendicularAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<MatrixAddress> PerpendicularAdjacentCoords => PossiblePerpendicularAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
+    public IList<T> PerpendicularAdjacentValuesTo(MatrixAddress address) => PerpendicularAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
+    public IList<MatrixAddress> PerpendicularAdjacentCoords => PerpendicularAdjacentCoordsTo(Address);
+    public IList<MatrixAddress> PerpendicularAdjacentCoordsTo(MatrixAddress address) => PossiblePerpendicularAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
 
-    private IEnumerable<MatrixAddress> PossiblePerpendicularAdjacentCoords =>
-        new List<MatrixAddress>
-        {
-            new MatrixAddress(Address.X, Address.Y - 1),
-            new MatrixAddress(Address.X + 1, Address.Y),
-            new MatrixAddress(Address.X, Address.Y + 1),
-            new MatrixAddress(Address.X - 1, Address.Y)
-        };
-
-    public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<MatrixAddress> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
-
-    private IEnumerable<MatrixAddress> AllPossibleAdjacentCoords
+    private IEnumerable<MatrixAddress> PossiblePerpendicularAdjacentCoordsTo(MatrixAddress address) => new List<MatrixAddress>
     {
-        get
+        new MatrixAddress(address.X, address.Y - 1),
+        new MatrixAddress(address.X + 1, address.Y),
+        new MatrixAddress(address.X, address.Y + 1),
+        new MatrixAddress(address.X - 1, address.Y)
+    };
+
+    public IList<T> AllAdjacentValues => AllAdjacentCoordsTo(Address).Select(ReadValueAt).ToList();
+    public IList<T> AllAdjacentValuesTo(MatrixAddress address) => AllAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
+    public IList<MatrixAddress> AllAdjacentCoords => AllAdjacentCoordsTo(Address);
+    public IList<MatrixAddress> AllAdjacentCoordsTo(MatrixAddress address) => AllPossibleAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
+
+    private IEnumerable<MatrixAddress> AllPossibleAdjacentCoordsTo(MatrixAddress address)
+    {
+        foreach (var dy in AdjacentDeltas)
         {
-            foreach (var dy in AdjacentDeltas)
+            foreach (var dx in AdjacentDeltas)
             {
-                foreach (var dx in AdjacentDeltas)
-                {
-                    var coord = new MatrixAddress(Address.X + dx, Address.Y - dy);
-                    if (!coord.Equals(Address))
-                        yield return coord;
-                }
+                var coord = new MatrixAddress(address.X + dx, address.Y - dy);
+                if (!coord.Equals(address))
+                    yield return coord;
             }
         }
     }

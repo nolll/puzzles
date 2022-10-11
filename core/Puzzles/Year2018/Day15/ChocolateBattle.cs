@@ -8,19 +8,18 @@ namespace Core.Puzzles.Year2018.Day15;
 public class ChocolateBattle
 {
     private readonly string _input;
-    private DynamicMatrix<char> _matrix;
+    private StaticMatrix<char> _matrix;
     private IList<BattleFigure> _figures;
     public int Outcome { get; private set; }
     public string Winners = "";
     public int ElfAttackPower { get; private set; }
-    private Dictionary<string, IList<MatrixAddress>> _pathCache = new Dictionary<string, IList<MatrixAddress>>();
 
     public ChocolateBattle(string input)
     {
         _input = input;
     }
 
-    public void RunUntilElvesWins(bool isPrinterEnabled)
+    public void RunUntilElvesWins(bool isPrinterEnabled = false)
     {
         var elfAttackPower = 4;
         while (true)
@@ -37,7 +36,7 @@ public class ChocolateBattle
         ElfAttackPower = elfAttackPower;
     }
 
-    public void RunOnce(bool isPrinterEnabled)
+    public void RunOnce(bool isPrinterEnabled = false)
     {
         const int elfAttackPower = 3;
         Init(elfAttackPower);
@@ -56,24 +55,22 @@ public class ChocolateBattle
                 if (figure.IsDead)
                     continue;
 
-                _matrix.MoveTo(figure.Address);
-                var enemies = _figures.Where(o => o.Type != figure.Type).ToList();
+                var enemyType = figure.Type == BattleFigureType.Elf ? BattleFigureType.Goblin : BattleFigureType.Elf;
+                var enemies = _figures.Where(o => o.Type == enemyType).ToList();
                 if (enemies.All(o => o.IsDead))
                 {
                     incrementRound = false;
                     break;
                 }
 
-                var enemyType = figure.Type == BattleFigureType.Elf ? BattleFigureType.Goblin : BattleFigureType.Elf;
-                var adjacentEnemyAddresses = _matrix.PerpendicularAdjacentCoords.Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
+                var adjacentEnemyAddresses = _matrix.PerpendicularAdjacentCoordsTo(figure.Address).Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
 
                 if (!adjacentEnemyAddresses.Any())
                 {
                     var targets = new List<MatrixAddress>();
                     foreach (var enemy in enemies)
                     {
-                        _matrix.MoveTo(enemy.Address);
-                        var adjacentAddresses = _matrix.PerpendicularAdjacentCoords;
+                        var adjacentAddresses = _matrix.PerpendicularAdjacentCoordsTo(enemy.Address);
                         foreach (var adjacentAddress in adjacentAddresses)
                         {
                             if (_matrix.ReadValueAt(adjacentAddress) == '.')
@@ -84,11 +81,7 @@ public class ChocolateBattle
                     }
 
                     targets = targets.Distinct().ToList();
-                    var paths = targets.Select(o =>
-                    {
-                        //Console.WriteLine($"from: {figure.Address.Id}, to: {o.Id}");
-                        return GetPaths(figure.Address, o);
-                    }).ToList();
+                    var paths = targets.Select(o => PathFinder.ShortestPathTo(_matrix, figure.Address, o)).ToList();
                     var possibleMoves = paths
                         .Where(o => o.Any())
                         .OrderBy(o => o.Count)
@@ -98,17 +91,14 @@ public class ChocolateBattle
                     var bestMove = possibleMoves.FirstOrDefault();
                     if (bestMove != null)
                     {
-                        _matrix.MoveTo(figure.Address);
-                        _matrix.WriteValue('.');
+                        _matrix.WriteValueAt(figure.Address, '.');
                         var newAddress = new MatrixAddress(bestMove.X, bestMove.Y);
                         figure.MoveTo(newAddress);
-                        _matrix.MoveTo(newAddress);
-                        _matrix.WriteValue(figure.Type);
+                        _matrix.WriteValueAt(newAddress, figure.Type);
                     }
                 }
 
-                _matrix.MoveTo(figure.Address);
-                adjacentEnemyAddresses = _matrix.PerpendicularAdjacentCoords.Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
+                adjacentEnemyAddresses = _matrix.PerpendicularAdjacentCoordsTo(figure.Address).Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
 
                 if (adjacentEnemyAddresses.Any())
                 {
@@ -123,13 +113,12 @@ public class ChocolateBattle
                     {
                         if (breakOnElfDeath && enemy.Type == BattleFigureType.Elf)
                             return false;
-                        _matrix.MoveTo(enemy.Address);
-                        _matrix.WriteValue('.');
+                        _matrix.WriteValueAt(enemy.Address, '.');
                     }
                 }
             }
 
-            _figures = _figures.Where(o => o.HitPoints > 0).OrderBy(o => o.Address.Y).ThenBy(o => o.Address.X).ToList();
+            _figures = _figures.Where(o => !o.IsDead).OrderBy(o => o.Address.Y).ThenBy(o => o.Address.X).ToList();
             if (incrementRound)
             {
                 round++;
@@ -149,17 +138,6 @@ public class ChocolateBattle
         return true;
     }
 
-    private IList<MatrixAddress> GetPaths(MatrixAddress from, MatrixAddress to)
-    {
-        var id = $"{from.Id}-{to.Id}";
-        if (_pathCache.TryGetValue(id, out var paths))
-            return paths;
-
-        paths = PathFinder.ShortestPathTo(_matrix, from, to);
-        _pathCache.Add(id, paths);
-        return paths;
-    }
-
     private bool IsBothTypesStillAlive =>
         _figures.Any(o => o.Type == BattleFigureType.Elf) &&
         _figures.Any(o => o.Type == BattleFigureType.Goblin);
@@ -167,10 +145,14 @@ public class ChocolateBattle
     private void Init(int elfAttackPower)
     {
         _figures = new List<BattleFigure>();
-        _matrix = new DynamicMatrix<char>();
         var rows = _input.Trim().Split('\n');
         var y = 0;
         var figureId = 0;
+
+        var width = rows.First().Length;
+        var height = rows.Count();
+        _matrix = new StaticMatrix<char>(width, height);
+
         foreach (var row in rows)
         {
             var x = 0;
@@ -178,8 +160,7 @@ public class ChocolateBattle
             foreach (var c in chars)
             {
                 var address = new MatrixAddress(x, y);
-                _matrix.MoveTo(address);
-                _matrix.WriteValue(c);
+                _matrix.WriteValueAt(address, c);
                 if (c == BattleFigureType.Elf || c == BattleFigureType.Goblin)
                 {
                     var attackPower = c == BattleFigureType.Elf ? elfAttackPower : 3;

@@ -13,7 +13,7 @@ public static class PuzzleInputReader
 
     public static IList<string> ReadLines(string str, bool includeEmptyLines)
     {
-        var lines = str.Trim().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+        var lines = str.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
         if (!includeEmptyLines)
             return lines.Where(o => o.Length > 0).ToList();
 

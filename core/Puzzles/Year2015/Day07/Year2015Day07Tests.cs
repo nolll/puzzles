@@ -17,7 +17,7 @@ y RSHIFT 2 -> g
 NOT x -> h
 NOT y -> i";
 
-        var circuit = new Circuit(input);
+        var circuit = new Circuit(input.Trim());
         circuit.RunOne("i");
 
         Assert.That(circuit.Wires["d"].Signal, Is.EqualTo(72));

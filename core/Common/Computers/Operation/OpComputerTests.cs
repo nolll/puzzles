@@ -30,7 +30,7 @@ seti 8 0 4
 seti 9 0 5";
 
         var computer = new OpComputer();
-        var value = computer.RunInstructionPointerProgram(input, 0, false, false);
+        var value = computer.RunInstructionPointerProgram(input.Trim(), 0, false, false);
 
         Assert.That(value, Is.EqualTo(6));
     }

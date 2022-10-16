@@ -21,7 +21,7 @@ David would gain 46 happiness units by sitting next to Alice.
 David would lose 7 happiness units by sitting next to Bob.
 David would gain 41 happiness units by sitting next to Carol.";
 
-        var table = new DinnerTable(input);
+        var table = new DinnerTable(input.Trim());
 
         Assert.That(table.HappinessChange, Is.EqualTo(330));
     }

@@ -13,7 +13,7 @@ H => HO
 H => OH
 O => HH";
 
-        var machine = new MedicineMachine(input);
+        var machine = new MedicineMachine(input.Trim());
         var molecules = machine.GetCalibrationMolecules(startMolecule);
 
         Assert.That(molecules.Count, Is.EqualTo(4));
@@ -30,7 +30,7 @@ H => HO
 H => OH
 O => HH";
 
-        var machine = new MedicineMachine(input);
+        var machine = new MedicineMachine(input.Trim());
         var stepCount = machine.StepsToMake(molecule);
 
         Assert.That(stepCount, Is.EqualTo(steps));

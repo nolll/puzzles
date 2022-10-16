@@ -14,7 +14,7 @@ public class Year2015Day08Tests
 ""\x27""
 ";
 
-        var digitalList = new DigitalList(input);
+        var digitalList = new DigitalList(input.Trim());
 
         Assert.That(digitalList.CodeMinusMemoryDiff, Is.EqualTo(12));
     }
@@ -29,7 +29,7 @@ public class Year2015Day08Tests
 ""\x27""
 ";
 
-        var digitalList = new DigitalList(input);
+        var digitalList = new DigitalList(input.Trim());
 
         Assert.That(digitalList.EncodedMinusCodeDiff, Is.EqualTo(19));
     }

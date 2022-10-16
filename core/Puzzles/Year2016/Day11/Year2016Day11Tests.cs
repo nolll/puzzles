@@ -14,7 +14,7 @@ The second floor contains a hydrogen generator.
 The third floor contains a lithium generator.
 The fourth floor contains nothing relevant.";
 
-        var simulator = new RadioisotopeSimulator(input);
+        var simulator = new RadioisotopeSimulator(input.Trim());
 
         Assert.That(simulator.StepCount, Is.EqualTo(11));
     }

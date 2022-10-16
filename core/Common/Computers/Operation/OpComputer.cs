@@ -38,7 +38,7 @@ public class OpComputer
     public long RunTestProgram(string operationsInput, string programInput)
     {
         var operationNames = GetOperationNameDictionary(operationsInput);
-        var commands = PuzzleInputReader.ReadLines(programInput).Select(s => ParseIntCommand(s, operationNames));
+        var commands = PuzzleInputReader.ReadLines(programInput, false).Select(s => ParseIntCommand(s, operationNames));
         var registers = new long[] { 0, 0, 0, 0 };
         foreach (var command in commands)
         {

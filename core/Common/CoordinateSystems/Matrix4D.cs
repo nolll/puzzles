@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Common.CoordinateSystems;
 
-public class Matrix4D<T> : BaseMatrix
+public class Matrix4D<T> : BaseMatrix2
 {
     private readonly T _defaultValue;
     private readonly IList<IList<IList<IList<T>>>> _matrix;

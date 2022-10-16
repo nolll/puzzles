@@ -7,7 +7,7 @@ public class Year2015Day20 : Puzzle
     public override PuzzleResult RunPart1()
     {
         var presentDelivery = new PresentDelivery();
-        var house = presentDelivery.Deliver1(Input);
+        var house = presentDelivery.Deliver1(Input, true);
         return new PuzzleResult(house, 786_240);
     }
 

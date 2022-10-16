@@ -119,7 +119,7 @@ public class TicketValidator
         var ruleRows = groups[0];
         var rules = ruleRows.Select(Rule.Parse).ToDictionary(rule => rule.Name);
         var myTicket = Ticket.Parse(groups[1][1]);
-        var otherTickets = groups[2].Skip(1).Select(Ticket.Parse).Where(o => o.IsValid(rules)).ToList();
+        var otherTickets = groups[2].Skip(1).Select(Ticket.Parse).ToList();
 
         return new Data(rules, myTicket, otherTickets);
     }

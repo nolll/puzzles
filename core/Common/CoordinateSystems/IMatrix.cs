@@ -54,5 +54,7 @@ namespace Core.Common.CoordinateSystems
         MatrixDirection TurnRight();
         MatrixDirection TurnTo(MatrixDirection direction);
         void WriteValue(T value);
+        void WriteValueAt(int x, int y, T value);
+        void WriteValueAt(MatrixAddress address, T value);
     }
 }

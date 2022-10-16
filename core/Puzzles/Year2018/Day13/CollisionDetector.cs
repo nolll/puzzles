@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.CoordinateSystems;
@@ -8,7 +7,7 @@ namespace Core.Puzzles.Year2018.Day13;
 
 public class CollisionDetector
 {
-    private DynamicMatrix<char> _matrix;
+    private StaticMatrix<char> _matrix;
     private IList<MineCart> _carts;
     public MatrixAddress LocationOfFirstCollision { get; private set; }
     public MatrixAddress LocationOfLastCart { get; private set; }
@@ -80,15 +79,17 @@ public class CollisionDetector
         }
     }
 
-    private void BuildMatrixAndCarts(in string input)
+    private void BuildMatrixAndCarts(string input)
     {
-        _matrix = new DynamicMatrix<char>();
-        _carts = new List<MineCart>();
         var rows = PuzzleInputReader.ReadLines(input).Select(o => o.Trim('_')).ToList();
-        for (var y = 0; y < rows.Count; y++)
+        var width = rows.First().Length;
+        var height = rows.Count();
+        _matrix = new StaticMatrix<char>(width, height);
+        _carts = new List<MineCart>();
+        for (var y = 0; y < height; y++)
         {
             var row = rows[y].ToCharArray();
-            for (var x = 0; x < row.Length; x++)
+            for (var x = 0; x < width; x++)
             {
                 var c = row[x];
                 var mapChar = c;
@@ -101,23 +102,22 @@ public class CollisionDetector
                     _carts.Add(cart);
                 }
 
-                _matrix.MoveTo(x, y);
-                _matrix.WriteValue(mapChar);
+                _matrix.WriteValueAt(x, y, mapChar);
             }
         }
     }
 
-    private bool IsCartChar(in char c)
+    private bool IsCartChar(char c)
     {
         return c == CharConstants.Up || c == CharConstants.Right || c == CharConstants.Down || c == CharConstants.Left;
     }
 
-    private char GetMapChar(in char c)
+    private char GetMapChar(char c)
     {
         return c == CharConstants.Up || c == CharConstants.Down ? CharConstants.Vertical : CharConstants.Horizontal;
     }
 
-    private MatrixDirection GetDirection(in char c)
+    private MatrixDirection GetDirection(char c)
     {
         if (c == CharConstants.Up)
             return MatrixDirection.Up;

@@ -4,29 +4,20 @@ namespace Core.Puzzles.Year2018.Day13;
 
 public class Year2018Day13 : Puzzle
 {
-    private CollisionDetector _detector;
-
-    private CollisionDetector Detector
-    {
-        get
-        {
-            if(_detector == null)
-                _detector = new CollisionDetector(FileInput);
-            return _detector;
-        }
-    }
-        
     public override PuzzleResult RunPart1()
     {
-        Detector.RunCarts();
-        var firstCollisionCoords = Detector.LocationOfFirstCollision;
+        var detector = new CollisionDetector(FileInput);
+        detector.RunCarts();
+        var firstCollisionCoords = detector.LocationOfFirstCollision;
         var firstCollition = $"{firstCollisionCoords.X},{firstCollisionCoords.Y}";
         return new PuzzleResult(firstCollition, "118,112");
     }
 
     public override PuzzleResult RunPart2()
     {
-        var lastCartCoords = Detector.LocationOfLastCart;
+        var detector = new CollisionDetector(FileInput);
+        detector.RunCarts();
+        var lastCartCoords = detector.LocationOfLastCart;
         var lastCart = $"{lastCartCoords.X},{lastCartCoords.Y}";
         return new PuzzleResult(lastCart, "50,21");
     }

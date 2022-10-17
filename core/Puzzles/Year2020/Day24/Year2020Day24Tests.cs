@@ -18,7 +18,7 @@ public class Year2020Day24Tests
     [Test]
     public void FiveTilesAreBlackAfterArrange()
     {
-        var floor = new HexagonalFloor(Input);
+        var floor = new HexagonalFloor(Input.Trim());
         floor.Arrange();
         var result = floor.BlackTileCount;
 
@@ -28,7 +28,7 @@ public class Year2020Day24Tests
     [Test]
     public void FiveTilesAreBlack()
     {
-        var floor = new HexagonalFloor(Input);
+        var floor = new HexagonalFloor(Input.Trim());
         floor.Arrange();
         var result = floor.BlackTileCount;
 
@@ -38,7 +38,7 @@ public class Year2020Day24Tests
     [Test]
     public void BlackTilesCorrectAfterEachRun()
     {
-        var floor = new HexagonalFloor(Input);
+        var floor = new HexagonalFloor(Input.Trim());
         floor.Arrange();
 
         floor.Modify(1); // 1

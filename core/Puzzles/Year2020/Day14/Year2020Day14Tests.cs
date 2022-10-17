@@ -14,7 +14,7 @@ mem[7] = 101
 mem[8] = 0";
 
         var system = new BitmaskSystem1();
-        var sum = system.Run(input);
+        var sum = system.Run(input.Trim());
 
         Assert.That(sum, Is.EqualTo(165));
     }
@@ -29,7 +29,7 @@ mask = 00000000000000000000000000000000X0XX
 mem[26] = 1";
 
         var system = new BitmaskSystem2();
-        var sum = system.Run(input);
+        var sum = system.Run(input.Trim());
 
         Assert.That(sum, Is.EqualTo(208));
     }

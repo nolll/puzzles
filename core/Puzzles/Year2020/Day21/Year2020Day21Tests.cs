@@ -13,7 +13,7 @@ sqjhc mxmxvkd sbzzf (contains fish)";
     [Test]
     public void IngredientsWithoutAllergens()
     {
-        var detector = new AllergenDetector(Input);
+        var detector = new AllergenDetector(Input.Trim());
         var ingredientCount = detector.FindIngredientsWithoutAllergens();
 
         Assert.That(ingredientCount, Is.EqualTo(5));
@@ -22,7 +22,7 @@ sqjhc mxmxvkd sbzzf (contains fish)";
     [Test]
     public void CanonicalIngredientList()
     {
-        var detector = new AllergenDetector(Input);
+        var detector = new AllergenDetector(Input.Trim());
         var ingredientList = detector.GetIngredientList();
 
         Assert.That(ingredientList, Is.EqualTo("mxmxvkd,sqjhc,fvjkl"));

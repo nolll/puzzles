@@ -19,7 +19,7 @@ rotate based on position of letter d";
 
         const string pwd = "abcde";
 
-        var scrambler = new StringScrambler(input);
+        var scrambler = new StringScrambler(input.Trim());
         var result = scrambler.Scramble(pwd);
 
         Assert.That(result, Is.EqualTo("decab"));
@@ -40,7 +40,7 @@ rotate based on position of letter d";
 
         const string pwd = "decab";
 
-        var scrambler = new StringScrambler(input);
+        var scrambler = new StringScrambler(input.Trim());
         var result = scrambler.Unscramble(pwd);
 
         Assert.That(result, Is.EqualTo("abcde"));

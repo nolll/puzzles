@@ -17,7 +17,7 @@ x=498, y=10..13
 x=504, y=10..13
 y=13, x=498..504";
 
-        var filler = new ReservoirFiller(input);
+        var filler = new ReservoirFiller(input.Trim());
         filler.Fill();
 
         Assert.That(filler.TotalWaterTileCount, Is.EqualTo(57));

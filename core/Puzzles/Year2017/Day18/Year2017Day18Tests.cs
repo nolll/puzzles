@@ -18,7 +18,7 @@ rcv a
 jgz a -1
 set a 1
 jgz a -2";
-        var single = new SingleRunner(input);
+        var single = new SingleRunner(input.Trim());
         single.Run();
 
         Assert.That(single.RecoveredFrequency, Is.EqualTo(4));
@@ -35,7 +35,7 @@ rcv a
 rcv b
 rcv c
 rcv d";
-        var duet = new DuetRunner(input);
+        var duet = new DuetRunner(input.Trim());
         duet.Run();
 
         Assert.That(duet.Program1SendCount, Is.EqualTo(3));

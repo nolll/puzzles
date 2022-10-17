@@ -31,7 +31,7 @@ In state B:
     - Move one slot to the right.
     - Continue with state A.";
 
-        var turingMachine = new TuringMachine(input);
+        var turingMachine = new TuringMachine(input.Trim());
         var checksum = turingMachine.Run();
 
         Assert.That(checksum, Is.EqualTo(3));

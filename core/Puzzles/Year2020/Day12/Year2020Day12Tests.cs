@@ -14,7 +14,7 @@ F7
 R90
 F11";
 
-        var system = new SimpleFerryNavigationSystem(input);
+        var system = new SimpleFerryNavigationSystem(input.Trim());
         system.Run();
         var result = system.DistanceTravelled;
 
@@ -31,7 +31,7 @@ F7
 R90
 F11";
 
-        var system = new WaypointFerryNavigationSystem(input);
+        var system = new WaypointFerryNavigationSystem(input.Trim());
         system.Run();
         var result = system.DistanceTravelled;
 

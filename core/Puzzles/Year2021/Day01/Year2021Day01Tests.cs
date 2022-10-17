@@ -8,7 +8,7 @@ public class Year2021Day01Tests
     public void Part1()
     {
         var validator = new DepthMeasurement();
-        var result = validator.GetNumberOfIncreasingMeasurements(Input, false);
+        var result = validator.GetNumberOfIncreasingMeasurements(Input.Trim(), false);
 
         Assert.That(result, Is.EqualTo(7));
     }
@@ -17,7 +17,7 @@ public class Year2021Day01Tests
     public void Part2()
     {
         var validator = new DepthMeasurement();
-        var result = validator.GetNumberOfIncreasingMeasurements(Input, true);
+        var result = validator.GetNumberOfIncreasingMeasurements(Input.Trim(), true);
 
         Assert.That(result, Is.EqualTo(5));
     }

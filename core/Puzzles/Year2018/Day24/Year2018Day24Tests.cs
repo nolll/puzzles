@@ -17,7 +17,7 @@ Infection:
     [Test]
     public void FightIsCorrect()
     {
-        var system = new ImmuneSystem(ImmuneInput, InfectionInput);
+        var system = new ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());
         system.Fight();
 
         Assert.That(system.ImmuneGroups.Count, Is.EqualTo(0));
@@ -30,7 +30,7 @@ Infection:
     [Test]
     public void FightWithBoostIsCorrect()
     {
-        var system = new ImmuneSystem(ImmuneInput, InfectionInput);
+        var system = new ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());
         system.Fight(1570);
 
         Assert.That(system.WinningArmyUnitCount, Is.EqualTo(51));
@@ -39,7 +39,7 @@ Infection:
     [Test]
     public void FightUntilImmuneSystemWinsIsCorrect()
     {
-        var system = new ImmuneSystem(ImmuneInput, InfectionInput);
+        var system = new ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());
         system.FightUntilImmuneSystemWins();
 
         Assert.That(system.WinningArmyUnitCount, Is.EqualTo(51));

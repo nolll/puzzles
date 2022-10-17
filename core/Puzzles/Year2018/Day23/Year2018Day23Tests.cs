@@ -19,7 +19,7 @@ pos=<1,1,1>, r=1
 pos=<1,1,2>, r=1
 pos=<1,3,1>, r=1";
 
-        var formation = new NanobotFormation(input);
+        var formation = new NanobotFormation(input.Trim());
         var botCount = formation.GetBotsInRangeOfStrongestBot().Count;
 
         Assert.That(botCount, Is.EqualTo(7));
@@ -333,7 +333,7 @@ pos=<14,14,14>, r=6
 pos=<50,50,50>, r=200
 pos=<10,10,10>, r=5";
 
-        var formation = new NanobotFormation(input);
+        var formation = new NanobotFormation(input.Trim());
         var distance = formation.FindManhattanDistanceToBestCoords();
 
         Assert.That(distance, Is.EqualTo(36));

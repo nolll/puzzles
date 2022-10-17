@@ -7,7 +7,7 @@ public class Year2021Day12Tests
     [Test]
     public void Part1()
     {
-        var caveSystem = new CaveSystem(Input, false);
+        var caveSystem = new CaveSystem(Input.Trim(), false);
         var result = caveSystem.CountPaths();
 
         Assert.That(result, Is.EqualTo(10));
@@ -16,7 +16,7 @@ public class Year2021Day12Tests
     [Test]
     public void Part2()
     {
-        var caveSystem = new CaveSystem(Input, true);
+        var caveSystem = new CaveSystem(Input.Trim(), true);
         var result = caveSystem.CountPaths();
 
         Assert.That(result, Is.EqualTo(36));

@@ -26,7 +26,7 @@ public class Year2021Day10Tests
     public void Part2()
     {
         var syntaxChecker = new SyntaxChecker();
-        var result = syntaxChecker.FindMiddleScore(Input);
+        var result = syntaxChecker.FindMiddleScore(Input.Trim());
 
         Assert.That(result, Is.EqualTo(288957));
     }

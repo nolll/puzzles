@@ -34,7 +34,7 @@ public class Year2020Day18Tests
         const int expected = 26_457;
 
         var calculator = new HomeworkCalculator();
-        var sum = calculator.SumOfAll(input, MathPrecedence.Order);
+        var sum = calculator.SumOfAll(input.Trim(), MathPrecedence.Order);
 
         Assert.That(sum, Is.EqualTo(expected));
     }

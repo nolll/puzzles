@@ -13,7 +13,7 @@ public class Year2021Day24Tests
 inp x
 mul x -1";
 
-        var alu = new Alu(input);
+        var alu = new Alu(input.Trim());
         var result = alu.Process(p);
 
         Assert.That(result.Memory['x'], Is.EqualTo(expected));
@@ -32,7 +32,7 @@ inp x
 mul z 3
 eql z x";
 
-        var alu = new Alu(input);
+        var alu = new Alu(input.Trim());
         var result = alu.Process(p);
 
         Assert.That(result.Memory['z'], Is.EqualTo(expected));
@@ -62,7 +62,7 @@ mod x 2
 div w 2
 mod w 2";
 
-        var alu = new Alu(input);
+        var alu = new Alu(input.Trim());
         var result = alu.Process(p);
 
         Assert.That(result.Memory['w'], Is.EqualTo(expW));

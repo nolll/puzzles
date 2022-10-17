@@ -7,7 +7,7 @@ public class Year2020Day08Tests
     [Test]
     public void AccIsCorrectBeforeInfiniteLoop()
     {
-        var console = new GameConsoleRunner(Input);
+        var console = new GameConsoleRunner(Input.Trim());
         var accBeforeRepeat = console.RunUntilLoop();
 
         Assert.That(accBeforeRepeat, Is.EqualTo(5));
@@ -16,7 +16,7 @@ public class Year2020Day08Tests
     [Test]
     public void AccIsCorrectAfterTerminateInModifiedProgram()
     {
-        var console = new GameConsoleRunner(Input);
+        var console = new GameConsoleRunner(Input.Trim());
         var accAtTermination = console.RunUntilTermination();
 
         Assert.That(accAtTermination, Is.EqualTo(8));
@@ -36,7 +36,7 @@ acc +1
 nop -4
 acc +6";
 
-        var instructions = GameConsoleRunner.ParseInstructions(input);
+        var instructions = GameConsoleRunner.ParseInstructions(input.Trim());
         var console = new GameConsole(instructions);
         var exit = console.Run();
 

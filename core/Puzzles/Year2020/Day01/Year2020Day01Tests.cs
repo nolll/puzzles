@@ -15,7 +15,7 @@ public class Year2020Day01Tests
 675
 1456";
 
-        var sumFinder = new SumFinder(input);
+        var sumFinder = new SumFinder(input.Trim());
         var numbers = sumFinder.FindNumbersThatAddUpTo(2020, 2);
 
         Assert.That(numbers[0], Is.EqualTo(1721));
@@ -33,7 +33,7 @@ public class Year2020Day01Tests
 675
 1456";
 
-        var sumFinder = new SumFinder(input);
+        var sumFinder = new SumFinder(input.Trim());
         var numbers = sumFinder.FindNumbersThatAddUpTo(2020, 3);
 
         Assert.That(numbers[0], Is.EqualTo(979));

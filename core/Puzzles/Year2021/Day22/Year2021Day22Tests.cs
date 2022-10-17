@@ -68,7 +68,7 @@ public class Year2021Day22Tests
     public void Part1()
     {
         var reactor = new SubmarineReactor();
-        var result = reactor.Reboot(Input1);
+        var result = reactor.Reboot(Input1.Trim());
 
         Assert.That(result, Is.EqualTo(39));
     }
@@ -77,7 +77,7 @@ public class Year2021Day22Tests
     public void Part1Advanced_WithInput1()
     {
         var reactor = new SubmarineReactor();
-        var result = reactor.Reboot2(Input1, 50);
+        var result = reactor.Reboot2(Input1.Trim(), 50);
 
         Assert.That(result, Is.EqualTo(39));
     }
@@ -86,7 +86,7 @@ public class Year2021Day22Tests
     public void Part1Advanced_WithInput2()
     {
         var reactor = new SubmarineReactor();
-        var result = reactor.Reboot2(Input2, 50);
+        var result = reactor.Reboot2(Input2.Trim(), 50);
 
         Assert.That(result, Is.EqualTo(590784));
     }
@@ -95,7 +95,7 @@ public class Year2021Day22Tests
     public void Part1Advanced_WithInput3()
     {
         var reactor = new SubmarineReactor();
-        var result = reactor.Reboot2(Input3);
+        var result = reactor.Reboot2(Input3.Trim());
 
         Assert.That(result, Is.EqualTo(2758514936282235));
     }

@@ -19,7 +19,7 @@ public class Year2015Day24Tests
 10
 11";
 
-        var balancer = new PresentBalancer(input, 3);
+        var balancer = new PresentBalancer(input.Trim(), 3);
 
         Assert.That(balancer.QuantumEntanglementOfFirstGroup, Is.EqualTo(99));
     }

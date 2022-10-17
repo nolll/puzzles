@@ -8,7 +8,7 @@ public class Year2021Day03Tests
     public void Part1()
     {
         var diagnostics = new BinaryDiagnostics();
-        var result = diagnostics.GetFuelConsumption(Input);
+        var result = diagnostics.GetFuelConsumption(Input.Trim());
 
         Assert.That(result, Is.EqualTo(198));
     }
@@ -17,7 +17,7 @@ public class Year2021Day03Tests
     public void Part2()
     {
         var diagnostics = new BinaryDiagnostics();
-        var result = diagnostics.GetLifeSupportRating(Input);
+        var result = diagnostics.GetLifeSupportRating(Input.Trim());
 
         Assert.That(result, Is.EqualTo(230));
     }

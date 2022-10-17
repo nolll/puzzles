@@ -7,7 +7,7 @@ public class Year2017Day24Tests
     [Test]
     public void FindsStrongestBridge()
     {
-        var builder = new BridgeBuilder(Input, false);
+        var builder = new BridgeBuilder(Input.Trim(), false);
         var bridge = builder.Build();
 
         Assert.That(bridge.Strength, Is.EqualTo(31));
@@ -16,7 +16,7 @@ public class Year2017Day24Tests
     [Test]
     public void FindsLongestBridge()
     {
-        var builder = new BridgeBuilder(Input, true);
+        var builder = new BridgeBuilder(Input.Trim(), true);
         var bridge = builder.Build();
 
         Assert.That(bridge.Strength, Is.EqualTo(19));

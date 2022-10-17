@@ -7,7 +7,7 @@ public class Year2021Day08Tests
     [Test]
     public void Part1()
     {
-        var puzzle = new SevenSegmentDisplayDecoder(Input);
+        var puzzle = new SevenSegmentDisplayDecoder(Input.Trim());
         var result = puzzle.GetEasyNumbers();
 
         Assert.That(result, Is.EqualTo(26));
@@ -33,7 +33,7 @@ public class Year2021Day08Tests
     [Test]
     public void Part2()
     {
-        var puzzle = new SevenSegmentDisplayDecoder(Input);
+        var puzzle = new SevenSegmentDisplayDecoder(Input.Trim());
         var result = puzzle.GetDecodedSum();
 
         Assert.That(result, Is.EqualTo(61229));

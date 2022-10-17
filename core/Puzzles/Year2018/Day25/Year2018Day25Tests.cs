@@ -17,7 +17,7 @@ public class Year2018Day25Tests
  9,0,0,0
 12,0,0,0";
 
-        var finder = new ConstellationFinder(input);
+        var finder = new ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
         Assert.That(constellationCount, Is.EqualTo(2));
@@ -38,7 +38,7 @@ public class Year2018Day25Tests
 0,2,1,-2
 3,0,0,0";
 
-        var finder = new ConstellationFinder(input);
+        var finder = new ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
         Assert.That(constellationCount, Is.EqualTo(4));
@@ -59,7 +59,7 @@ public class Year2018Day25Tests
 1,-1,0,-1
 3,2,0,2";
 
-        var finder = new ConstellationFinder(input);
+        var finder = new ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
         Assert.That(constellationCount, Is.EqualTo(3));
@@ -80,7 +80,7 @@ public class Year2018Day25Tests
 1,2,2,0
 -1,-2,0,-2";
 
-        var finder = new ConstellationFinder(input);
+        var finder = new ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
         Assert.That(constellationCount, Is.EqualTo(8));

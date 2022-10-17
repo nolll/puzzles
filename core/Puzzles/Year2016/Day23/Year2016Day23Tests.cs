@@ -15,7 +15,7 @@ dec a
 jnz a 2
 dec a";
 
-        var control = new SafeCrackingComputerPart1(input, 0, 0);
+        var control = new SafeCrackingComputerPart1(input.Trim(), 0, 0);
 
         Assert.That(control.ValueA, Is.EqualTo(42));
     }
@@ -32,7 +32,7 @@ cpy 1 a
 dec a
 dec a";
 
-        var control = new SafeCrackingComputerPart1(input, 0, 0);
+        var control = new SafeCrackingComputerPart1(input.Trim(), 0, 0);
 
         Assert.That(control.ValueA, Is.EqualTo(3));
     }

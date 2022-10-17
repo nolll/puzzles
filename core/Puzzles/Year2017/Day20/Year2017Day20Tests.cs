@@ -17,7 +17,7 @@ p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>";
     [Test]
     public void After1Step()
     {
-        var particleTracker = new ParticleTracker(Input1);
+        var particleTracker = new ParticleTracker(Input1.Trim());
         particleTracker.Run(1);
 
         Assert.That(particleTracker.Particles[0].X, Is.EqualTo(4));
@@ -27,7 +27,7 @@ p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>";
     [Test]
     public void After2Steps()
     {
-        var particleTracker = new ParticleTracker(Input1);
+        var particleTracker = new ParticleTracker(Input1.Trim());
         particleTracker.Run(2);
 
         Assert.That(particleTracker.Particles[0].X, Is.EqualTo(4));
@@ -37,7 +37,7 @@ p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>";
     [Test]
     public void After3Steps()
     {
-        var particleTracker = new ParticleTracker(Input1);
+        var particleTracker = new ParticleTracker(Input1.Trim());
         particleTracker.Run(3);
 
         Assert.That(particleTracker.Particles[0].X, Is.EqualTo(3));
@@ -47,7 +47,7 @@ p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>";
     [Test]
     public void ClosestParticleInTheLongRun()
     {
-        var particleTracker = new ParticleTracker(Input1);
+        var particleTracker = new ParticleTracker(Input1.Trim());
         var particle = particleTracker.GetClosestParticleInTheLongRunSimple();
 
         Assert.That(particle, Is.EqualTo(0));
@@ -56,7 +56,7 @@ p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>";
     [Test]
     public void Collisions()
     {
-        var particleTracker = new ParticleTracker(Input2);
+        var particleTracker = new ParticleTracker(Input2.Trim());
         var count = particleTracker.GetRemainingParticleCount();
 
         Assert.That(count, Is.EqualTo(1));

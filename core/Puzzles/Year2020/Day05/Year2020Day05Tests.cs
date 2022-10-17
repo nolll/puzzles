@@ -26,7 +26,7 @@ BFFFBBFRRR
 FFFBBBFRRR
 BBFFBBFRLL";
 
-        var processor = new BoardingCardProcessor(input);
+        var processor = new BoardingCardProcessor(input.Trim());
 
         Assert.That(processor.HighestId, Is.EqualTo(820));
     }

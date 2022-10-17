@@ -13,7 +13,7 @@ public class Year2017Day13Tests
 4: 4
 6: 4";
 
-        var scanner = new PacketScanner(input);
+        var scanner = new PacketScanner(input.Trim());
         var severity = scanner.GetSeverity();
         Assert.That(severity, Is.EqualTo(24));
     }
@@ -45,7 +45,7 @@ public class Year2017Day13Tests
 4: 4
 6: 4";
 
-        var scanner = new PacketScanner(input);
+        var scanner = new PacketScanner(input.Trim());
         var delay = scanner.DelayUntilPass();
         Assert.That(delay, Is.EqualTo(10));
     }

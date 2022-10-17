@@ -29,7 +29,7 @@ public class Year2020Day09Tests
     [Test]
     public void FirstInvalidNumber()
     {
-        var port = new XmasPort(Input, 5);
+        var port = new XmasPort(Input.Trim(), 5);
         var num = port.FindFirstInvalidNumber();
 
         Assert.That(num, Is.EqualTo(127));
@@ -38,7 +38,7 @@ public class Year2020Day09Tests
     [Test]
     public void FirstWeakness()
     {
-        var port = new XmasPort(Input, 5);
+        var port = new XmasPort(Input.Trim(), 5);
         var num = port.FindWeakness();
 
         Assert.That(num, Is.EqualTo(62));

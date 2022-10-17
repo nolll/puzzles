@@ -9,7 +9,7 @@ public class Year2021Day09Tests
     {
         var heightMap = new HeightMap();
 
-        var result = heightMap.FindLowPointSum(Input);
+        var result = heightMap.FindLowPointSum(Input.Trim());
 
         Assert.That(result, Is.EqualTo(15));
     }
@@ -18,7 +18,7 @@ public class Year2021Day09Tests
     public void Part2()
     {
         var heightMap = new HeightMap();
-        var result = heightMap.FindBasinSizes(Input);
+        var result = heightMap.FindBasinSizes(Input.Trim());
 
         Assert.That(result, Is.EqualTo(1134));
     }

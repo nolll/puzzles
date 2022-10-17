@@ -11,7 +11,7 @@ public class Year2017Day21Tests
 ../.# => ##./#../...
 .#./..#/### => #..#/..../..../#..#";
 
-        var generator = new FractalArtGenerator(input);
+        var generator = new FractalArtGenerator(input.Trim());
         generator.Run(2);
 
         Assert.That(generator.PixelsOn, Is.EqualTo(12));

@@ -8,7 +8,7 @@ public class Year2021Day05Tests
     public void Part1()
     {
         var game = new VentsMap();
-        var result = game.Run(Input, true);
+        var result = game.Run(Input.Trim(), true);
 
         Assert.That(result, Is.EqualTo(5));
     }
@@ -17,7 +17,7 @@ public class Year2021Day05Tests
     public void Part2()
     {
         var game = new VentsMap();
-        var result = game.Run(Input, false);
+        var result = game.Run(Input.Trim(), false);
 
         Assert.That(result, Is.EqualTo(12));
     }

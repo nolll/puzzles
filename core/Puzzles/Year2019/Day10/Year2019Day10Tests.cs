@@ -15,7 +15,7 @@ public class Year2019Day10Tests
 ...##";
 
         var detector = new AsteroidDetector();
-        var result = detector.Detect(map);
+        var result = detector.Detect(map.Trim());
 
         Assert.That(result.BestAsteroid.X, Is.EqualTo(3));
         Assert.That(result.BestAsteroid.Y, Is.EqualTo(4));
@@ -38,7 +38,7 @@ public class Year2019Day10Tests
 .#....####";
 
         var detector = new AsteroidDetector();
-        var result = detector.Detect(map);
+        var result = detector.Detect(map.Trim());
 
         Assert.That(result.BestAsteroid.X, Is.EqualTo(5));
         Assert.That(result.BestAsteroid.Y, Is.EqualTo(8));
@@ -61,7 +61,7 @@ public class Year2019Day10Tests
 .####.###.";
 
         var detector = new AsteroidDetector();
-        var result = detector.Detect(map);
+        var result = detector.Detect(map.Trim());
 
         Assert.That(result.BestAsteroid.X, Is.EqualTo(1));
         Assert.That(result.BestAsteroid.Y, Is.EqualTo(2));
@@ -84,7 +84,7 @@ public class Year2019Day10Tests
 .....#.#..";
 
         var detector = new AsteroidDetector();
-        var result = detector.Detect(map);
+        var result = detector.Detect(map.Trim());
 
         Assert.That(result.BestAsteroid.X, Is.EqualTo(6));
         Assert.That(result.BestAsteroid.Y, Is.EqualTo(3));
@@ -117,7 +117,7 @@ public class Year2019Day10Tests
 ###.##.####.##.#..##";
 
         var detector = new AsteroidDetector();
-        var result = detector.Detect(map);
+        var result = detector.Detect(map.Trim());
 
         Assert.That(result.BestAsteroid.X, Is.EqualTo(11));
         Assert.That(result.BestAsteroid.Y, Is.EqualTo(13));
@@ -135,7 +135,7 @@ public class Year2019Day10Tests
 ..#.#.....#....##";
 
         var detector = new AsteroidDetector();
-        var result = detector.Detect(map);
+        var result = detector.Detect(map.Trim());
 
         Assert.That(result.BestAsteroid.X, Is.EqualTo(8));
         Assert.That(result.BestAsteroid.Y, Is.EqualTo(3));
@@ -152,7 +152,7 @@ ST...U...V.WXYZ1.
 ..6.7.....8....90";
 
         var detector = new AsteroidVaporizer();
-        var result = detector.Vaporize(map);
+        var result = detector.Vaporize(map.Trim());
 
         Assert.That(result.DestroyedAsteroids[0].Name, Is.EqualTo('L'));
         Assert.That(result.DestroyedAsteroids[1].Name, Is.EqualTo('E'));

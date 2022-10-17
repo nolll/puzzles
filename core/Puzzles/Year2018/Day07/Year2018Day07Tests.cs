@@ -16,7 +16,7 @@ Step B must be finished before step E can begin.
 Step D must be finished before step E can begin.
 Step F must be finished before step E can begin.";
 
-        var assembler = new SleighAssembler(input, 1, 0);
+        var assembler = new SleighAssembler(input.Trim(), 1, 0);
         var result = assembler.Assemble();
 
         Assert.That(result.Order, Is.EqualTo("CABDFE"));
@@ -34,7 +34,7 @@ Step B must be finished before step E can begin.
 Step D must be finished before step E can begin.
 Step F must be finished before step E can begin.";
 
-        var assembler = new SleighAssembler(input, 2, 0);
+        var assembler = new SleighAssembler(input.Trim(), 2, 0);
         var result = assembler.Assemble();
 
         Assert.That(result.Order, Is.EqualTo("CABFDE"));

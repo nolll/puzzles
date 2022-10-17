@@ -7,7 +7,7 @@ public class Year2021Day02Tests
     [Test]
     public void Part1()
     {
-        var validator = new SubmarineControl(Input, false);
+        var validator = new SubmarineControl(Input.Trim(), false);
         validator.Move();
 
         Assert.That(validator.Result, Is.EqualTo(150));
@@ -16,7 +16,7 @@ public class Year2021Day02Tests
     [Test]
     public void Part2()
     {
-        var validator = new SubmarineControl(Input, true);
+        var validator = new SubmarineControl(Input.Trim(), true);
         validator.Move();
 
         Assert.That(validator.Result, Is.EqualTo(900));

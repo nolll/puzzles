@@ -138,7 +138,7 @@ public class Year2021Day18Tests
 [6,6]";
 
         var math = new SnailfishMath();
-        var result = math.Sum(input);
+        var result = math.Sum(input.Trim());
 
         Assert.That(result.ToString(), Is.EqualTo("[[[[5,0],[7,4]],[5,5]],[6,6]]"));
     }
@@ -159,7 +159,7 @@ public class Year2021Day18Tests
 [[[[4,2],2],6],[8,7]]";
 
         var math = new SnailfishMath();
-        var result = math.Sum(input);
+        var result = math.Sum(input.Trim());
 
         Assert.That(result.ToString(), Is.EqualTo("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]"));
     }
@@ -198,7 +198,7 @@ public class Year2021Day18Tests
 [[[[5,2],5],[8,[3,7]]],[[5,[7,5]],[4,4]]]";
 
         var math = new SnailfishMath();
-        var result = math.Sum(input);
+        var result = math.Sum(input.Trim());
 
         Assert.That(result.ToString(), Is.EqualTo("[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]"));
         Assert.That(result.Magnitude, Is.EqualTo(4140));
@@ -220,7 +220,7 @@ public class Year2021Day18Tests
 [[[[5,2],5],[8,[3,7]]],[[5,[7,5]],[4,4]]]";
 
         var math = new SnailfishMath();
-        var result = math.LargestMagnitude(input);
+        var result = math.LargestMagnitude(input.Trim());
 
         Assert.That(result, Is.EqualTo(3993));
     }

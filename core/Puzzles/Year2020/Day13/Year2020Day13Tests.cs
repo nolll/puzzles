@@ -11,7 +11,7 @@ public class Year2020Day13Tests
 939
 7,13,x,x,59,x,31,19";
 
-        var scheduler = new BusScheduler1(input);
+        var scheduler = new BusScheduler1(input.Trim());
         var value = scheduler.GetBusValue();
 
         Assert.That(value, Is.EqualTo(295));

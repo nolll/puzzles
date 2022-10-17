@@ -18,7 +18,7 @@ vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.";
 
-        var processor = new LuggageProcessor(input);
+        var processor = new LuggageProcessor(input.Trim());
         var count = processor.NumberOfBagsThatCanContainGoldBags();
 
         Assert.That(count, Is.EqualTo(4));
@@ -38,7 +38,7 @@ vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.";
 
-        var processor = new LuggageProcessor(input);
+        var processor = new LuggageProcessor(input.Trim());
         var count = processor.NumberOfBagsThatAGoldBagContains();
 
         Assert.That(count, Is.EqualTo(32));

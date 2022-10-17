@@ -11,7 +11,7 @@ public class Year2020Day25Tests
     [Test]
     public void FindEncryptionKey()
     {
-        var finder = new EncryptionKeyFinder(Input);
+        var finder = new EncryptionKeyFinder(Input.Trim());
         var key = finder.FindKey();
 
         Assert.That(key, Is.EqualTo(14897079));

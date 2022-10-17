@@ -14,7 +14,7 @@ tpl a
 inc a";
 
         var computer = new ChristmasComputer();
-        computer.Run(input);
+        computer.Run(input.Trim());
 
         Assert.That(computer.RegisterA, Is.EqualTo(2));
     }

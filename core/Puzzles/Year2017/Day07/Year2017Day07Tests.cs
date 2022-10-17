@@ -22,7 +22,7 @@ ugml (68) -> gyxo, ebii, jptl
 gyxo (61)
 cntj (57)";
 
-        var towers = new RecursiveTowers(input);
+        var towers = new RecursiveTowers(input.Trim());
         var name = towers.BottomName;
 
         Assert.That(name, Is.EqualTo("tknk"));
@@ -46,7 +46,7 @@ ugml (68) -> gyxo, ebii, jptl
 gyxo (61)
 cntj (57)";
 
-        var towers = new RecursiveTowers(input);
+        var towers = new RecursiveTowers(input.Trim());
         var diff = towers.AdjustedWeight;
 
         Assert.That(diff, Is.EqualTo(60));

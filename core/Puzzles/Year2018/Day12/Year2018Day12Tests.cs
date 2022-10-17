@@ -25,7 +25,7 @@ initial state: #..#.#..##......###...###
 ###.# => #
 ####. => #";
 
-        var spreader = new PlantSpreader(input);
+        var spreader = new PlantSpreader(input.Trim());
 
         Assert.That(spreader.PlantScore20, Is.EqualTo(325));
     }

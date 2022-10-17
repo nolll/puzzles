@@ -54,7 +54,7 @@ public class Year2020Day10Tests
     [TestCase(Input2, 220)]
     public void PowerAdapterChainIsCorrect(string input, int expected)
     {
-        var chain = new PowerAdapterChain(input);
+        var chain = new PowerAdapterChain(input.Trim());
         var product = chain.DifferenceProduct;
 
         Assert.That(product, Is.EqualTo(expected));
@@ -64,7 +64,7 @@ public class Year2020Day10Tests
     [TestCase(Input2, 19208)]
     public void PowerAdapterChainTotalCombinations(string input, int expected)
     {
-        var chain = new PowerAdapterChain(input);
+        var chain = new PowerAdapterChain(input.Trim());
         var combinations = chain.GetTotalNumberOfCombinations();
 
         Assert.That(combinations, Is.EqualTo(expected));

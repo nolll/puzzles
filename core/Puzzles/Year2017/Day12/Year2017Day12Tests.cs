@@ -16,7 +16,7 @@ public class Year2017Day12Tests
 5 <-> 6
 6 <-> 4, 5";
 
-        var pipes = new Pipes(input);
+        var pipes = new Pipes(input.Trim());
 
         Assert.That(pipes.PipesInGroupZero, Is.EqualTo(6));
         Assert.That(pipes.GroupCount, Is.EqualTo(2));

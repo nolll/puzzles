@@ -13,27 +13,25 @@ public enum CaveTool
 
 public static class CavePathFinder
 {
-    public static int StepCountTo(DynamicMatrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
+    public static int StepCountTo(IMatrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
         var goalCounts = coordCounts.Where(o => o.X == from.X && o.Y == from.Y).ToList();
         var torchGoals = goalCounts.Where(o => o.Tool == CaveTool.Torch).ToList();
         if (torchGoals.Any())
         {
-            //Console.WriteLine("Torch");
             return torchGoals.OrderBy(o => o.Count).First().Count;
         }
         var climbingGoals = goalCounts.Where(o => o.Tool == CaveTool.ClimbingGear).ToList();
         if (climbingGoals.Any())
         {
-            //Console.WriteLine("Climbing Gear");
             return climbingGoals.OrderBy(o => o.Count).First().Count + 7;
         }
 
         return 0;
     } 
         
-    private static IList<CaveCoordCount> GetCoordCounts(DynamicMatrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
+    private static IList<CaveCoordCount> GetCoordCounts(IMatrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
     {
         var seen = new Dictionary<(int x, int y, CaveTool tool), int>();
         var queue = new List<CaveCoordCount>
@@ -45,13 +43,13 @@ public static class CavePathFinder
         while (index < queue.Count)
         {
             var current = queue[index];
-            matrix.MoveTo(current.X, current.Y);
-            var isStart = matrix.Address.Equals(from);
+            var currentAddress = new MatrixAddress(current.X, current.Y);
+            var isStart = currentAddress.Equals(from);
 
             if (!isStart)
             {
-                var region = matrix.ReadValue();
-                var adjacentCoords = matrix.PerpendicularAdjacentCoords;
+                var region = matrix.ReadValueAt(currentAddress);
+                var adjacentCoords = matrix.PerpendicularAdjacentCoordsTo(currentAddress);
                 foreach (var next in adjacentCoords)
                 {
                     var targetRegion = matrix.ReadValueAt(next);

@@ -16,7 +16,9 @@ namespace Core.Common.CoordinateSystems
         bool IsAtRightEdge { get; }
         bool IsAtTop { get; }
         IList<MatrixAddress> PerpendicularAdjacentCoords { get; }
+        IList<MatrixAddress> PerpendicularAdjacentCoordsTo(MatrixAddress address); 
         IList<T> PerpendicularAdjacentValues { get; }
+        IList<T> PerpendicularAdjacentValuesTo(MatrixAddress address);
         MatrixAddress StartAddress { get; }
         IEnumerable<T> Values { get; }
         int Width { get; }

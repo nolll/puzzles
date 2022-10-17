@@ -8,7 +8,7 @@ public class KeyCollector
 {
     private IList<VaultKey> _keys;
     private IList<VaultDoor> _doors;
-    private DynamicMatrix<char> _matrix;
+    private StaticMatrix<char> _matrix;
     private readonly IDictionary<(char, char), VaultPath> _paths;
     private readonly IDictionary<string, int> _cache;
     private readonly IList<VaultRobot> _robots;
@@ -132,10 +132,12 @@ public class KeyCollector
 
     private void Init(string input)
     {
+        var rows = input.Trim().Split('\n');
+        var width = rows.First().Length;
+        var height = rows.Length;
         _keys = new List<VaultKey>();
         _doors = new List<VaultDoor>();
-        _matrix = new DynamicMatrix<char>();
-        var rows = input.Trim().Split('\n');
+        _matrix = new StaticMatrix<char>(width, height);
         var y = 0;
         foreach (var row in rows)
         {
@@ -144,7 +146,6 @@ public class KeyCollector
             foreach (var c in chars)
             {
                 var address = new MatrixAddress(x, y);
-                _matrix.MoveTo(address);
                 var charToWrite = c;
 
                 if (char.IsLower(c))
@@ -164,7 +165,7 @@ public class KeyCollector
                     charToWrite = '.';
                 }
 
-                _matrix.WriteValue(charToWrite);
+                _matrix.WriteValueAt(address, charToWrite);
 
                 x += 1;
             }

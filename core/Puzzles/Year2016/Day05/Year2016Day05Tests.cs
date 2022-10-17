@@ -15,7 +15,6 @@ public class Year2016Day05Tests
     }
 
     [Test]
-    [Ignore("Too slow")]
     public void GeneratesPasswordWithSecondAlgorithm()
     {
         const string input = "abc";

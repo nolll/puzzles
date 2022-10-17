@@ -142,7 +142,8 @@ public class Year2019Day18Tests
     }
 
     [Test]
-    [Ignore("This completes in 70 steps, and the code works for the real data. The real solution can't just be given other quadrants keys")]
+    // This completes in 70 steps, and the code works for the real data. 
+    // The solution probably needs to be more clever regarding quadrants.
     public void FourRobots_ShortestPathIsFound4()
     {
         const string input = @"
@@ -156,7 +157,7 @@ public class Year2019Day18Tests
 #o#m..#i#jk.#
 #############";
 
-        var keyCollector = new KeyCollector(input);
+        var keyCollector = new KeyCollector(input.Trim());
         keyCollector.Run();
 
         Assert.That(keyCollector.ShortestPath, Is.EqualTo(72));

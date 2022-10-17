@@ -10,7 +10,7 @@ public class StaticMatrix<T> : BaseMatrix<T>, IMatrix<T>
     public override int Width { get; }
     public override int Height { get; }
 
-    public StaticMatrix(int width = 1, int height = 1, T defaultValue = default)
+    public StaticMatrix(int width, int height, T defaultValue = default)
         : base(defaultValue)
     {
         _matrix = new T[width, height];

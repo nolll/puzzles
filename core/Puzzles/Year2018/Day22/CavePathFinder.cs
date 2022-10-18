@@ -16,28 +16,21 @@ public static class CavePathFinder
     public static int StepCountTo(IMatrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
-        var goalCounts = coordCounts.Where(o => o.X == from.X && o.Y == from.Y).ToList();
-        var torchGoals = goalCounts.Where(o => o.Tool == CaveTool.Torch).ToList();
-        if (torchGoals.Any())
-        {
-            return torchGoals.OrderBy(o => o.Count).First().Count;
-        }
-        var climbingGoals = goalCounts.Where(o => o.Tool == CaveTool.ClimbingGear).ToList();
-        if (climbingGoals.Any())
-        {
-            return climbingGoals.OrderBy(o => o.Count).First().Count + 7;
-        }
+        return coordCounts
+            .Where(o => o.X == from.X && o.Y == from.Y)
+            .Select(o => o.CountWhenSwitchedToTorch)
+            .OrderBy(o => o)
+            .First();
+    }
 
-        return 0;
-    } 
-        
     private static IList<CaveCoordCount> GetCoordCounts(IMatrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
     {
         var seen = new Dictionary<(int x, int y, CaveTool tool), int>();
         var queue = new List<CaveCoordCount>
         {
             new CaveCoordCount(to.X, to.Y, CaveTool.Torch, 0),
-            new CaveCoordCount(to.X, to.Y, CaveTool.ClimbingGear, 7)
+            new CaveCoordCount(to.X, to.Y, CaveTool.ClimbingGear, 7),
+            new CaveCoordCount(to.X, to.Y, CaveTool.Neither, 7)
         };
         var index = 0;
         while (index < queue.Count)
@@ -55,7 +48,6 @@ public static class CavePathFinder
                     var targetRegion = matrix.ReadValueAt(next);
                     var targetTool = GetTool(region, targetRegion, current.Tool);
                     var cost = current.Tool == targetTool ? 1 : 8;
-
                     var totalCount = current.Count + cost;
                     var visited = seen.TryGetValue((next.X, next.Y, targetTool), out var existingCount);
                     if (!visited || totalCount < existingCount)
@@ -119,5 +111,16 @@ public class CaveCoordCount
         Y = y;
         Tool = tool;
         Count = count;
+    }
+
+    public int CountWhenSwitchedToTorch
+    {
+        get
+        {
+            if (Tool == CaveTool.Torch)
+                return Count;
+
+            return Count + 7;
+        }
     }
 }

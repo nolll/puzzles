@@ -6,15 +6,13 @@ public class Year2022Day03 : Puzzle
 {
     public override PuzzleResult RunPart1()
     {
-        var rucksacks = new Rucksacks();
-        var result = rucksacks.GetPriority1(FileInput);
+        var result = Rucksacks.GetPriority1(FileInput);
         return new PuzzleResult(result, 8349);
     }
 
     public override PuzzleResult RunPart2()
     {
-        var rucksacks = new Rucksacks();
-        var result = rucksacks.GetPriority2(FileInput);
+        var result = Rucksacks.GetPriority2(FileInput);
         return new PuzzleResult(result, 2681);
     }
 }

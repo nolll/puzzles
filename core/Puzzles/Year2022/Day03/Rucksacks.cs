@@ -1,69 +1,81 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2022.Day03;
 
-// todo: Cleanup
-public class Rucksacks
+public static class Rucksacks
 {
-    public int GetPriority2(string input)
+    public static int GetPriority1(string input)
     {
         var lines = PuzzleInputReader.ReadLines(input, false);
-        var totalSum = 0;
-
-        for (var i = 0; i < lines.Count; i+=3)
-        {
-            var s1 = lines[i];
-            var s2 = lines[i + 1];
-            var s3 = lines[i + 2];
-            var a1 = s1.ToCharArray();
-            var a2 = s2.ToCharArray();
-            var a3 = s3.ToCharArray();
-
-            foreach (var c in a1)
-            {
-                if (a2.Contains(c) && a3.Contains(c))
-                {
-                    var priority = char.IsUpper(c)
-                        ? (int)c - 38
-                        : (int)c - 96;
-                    totalSum += priority;
-                    break;
-                }
-            }
-        }
-
-        return totalSum;
+        return GetPrioritySumForLines(lines);
     }
 
-    public int GetPriority1(string input)
+    public static int GetPriority2(string input)
     {
         var lines = PuzzleInputReader.ReadLines(input, false);
+        return GetPrioritySumForGroups(lines);
+    }
+
+    private static int GetPrioritySumForLines(IList<string> lines)
+    {
         var partsList = lines.Select(SplitInTwo);
-        var totalSum = 0;
-        foreach (var parts in partsList)
+        return partsList.Sum(parts => GetPriorityForLine(parts[0], parts[1]));
+    }
+
+    private static int GetPriorityForLine(string s1, string s2)
+    {
+        var a1 = s1.ToCharArray();
+        var a2 = s2.ToCharArray();
+        foreach (var c in a1)
         {
-            var s1 = parts[0];
-            var s2 = parts[1];
-            var a1 = s1.ToCharArray();
-            var a2 = s2.ToCharArray();
-            foreach (var c in a1)
+            if (a2.Contains(c))
             {
-                if (a2.Contains(c))
-                {
-                    var priority = char.IsUpper(c)
-                        ? (int)c - 38
-                        : (int)c - 96;
-                    totalSum += priority;
-                    break;
-                }
+                return GetPriority(c);
             }
+        }
+
+        return 0;
+    }
+
+    private static int GetPrioritySumForGroups(IList<string> lines)
+    {
+        var totalSum = 0;
+
+        for (var i = 0; i < lines.Count(); i += 3)
+        {
+            totalSum += GetPriorityForGroup(lines[i], lines[i + 1], lines[i + 2]);
         }
 
         return totalSum;
     }
 
-    private string[] SplitInTwo(string s)
+    private static int GetPriorityForGroup(string s1, string s2, string s3)
+    {
+        var a1 = s1.ToCharArray();
+        var a2 = s2.ToCharArray();
+        var a3 = s3.ToCharArray();
+
+        foreach (var c in a1)
+        {
+            if (a2.Contains(c) && a3.Contains(c))
+            {
+                return GetPriority(c);
+            }
+        }
+
+        return 0;
+    }
+
+    private static int GetPriority(char c)
+    {
+        return char.IsUpper(c)
+            ? c - 38
+            : c - 96;
+    }
+
+    private static string[] SplitInTwo(string s)
     {
         return new[]
         {

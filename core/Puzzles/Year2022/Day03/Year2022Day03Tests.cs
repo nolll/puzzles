@@ -7,8 +7,7 @@ public class Year2022Day03Tests
     [Test]
     public void Part1()
     {
-        var rucksacks = new Rucksacks();
-        var result = rucksacks.GetPriority1(Input);
+        var result = Rucksacks.GetPriority1(Input);
 
         Assert.That(result, Is.EqualTo(157));
     }
@@ -16,8 +15,7 @@ public class Year2022Day03Tests
     [Test]
     public void Part2()
     {
-        var rucksacks = new Rucksacks();
-        var result = rucksacks.GetPriority2(Input);
+        var result = Rucksacks.GetPriority2(Input);
 
         Assert.That(result, Is.EqualTo(70));
     }

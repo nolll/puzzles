@@ -1,23 +1,7 @@
 ﻿using System.Linq;
 using Core.Common.Strings;
-using Core.Platform;
 
 namespace Core.Puzzles.Year2022.Day03;
-
-public class Year2022Day03 : Puzzle
-{
-    public override PuzzleResult RunPart1()
-    {
-        var rucksacks = new Rucksacks();
-        var result = rucksacks.GetPriority(FileInput);
-        return new PuzzleResult(result);
-    }
-
-    public override PuzzleResult RunPart2()
-    {
-        return new EmptyPuzzleResult();
-    }
-}
 
 public class Rucksacks
 {

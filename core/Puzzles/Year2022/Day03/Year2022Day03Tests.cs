@@ -7,9 +7,10 @@ public class Year2022Day03Tests
     [Test]
     public void Part1()
     {
-        var result = 0;
+        var rucksacks = new Rucksacks();
+        var result = rucksacks.GetPriority(Input);
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(result, Is.EqualTo(157));
     }
 
     [Test]
@@ -21,5 +22,10 @@ public class Year2022Day03Tests
     }
 
     private const string Input = @"
-";
+vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw";
 }

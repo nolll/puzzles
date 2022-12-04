@@ -7,7 +7,7 @@ public class Year2015Day07Tests
     [Test]
     public void SignalsAreCorrect()
     {
-        const string input = @"
+        const string input = """
 123 -> x
 456 -> y
 x AND y -> d
@@ -15,7 +15,8 @@ x OR y -> e
 x LSHIFT 2 -> f
 y RSHIFT 2 -> g
 NOT x -> h
-NOT y -> i";
+NOT y -> i
+""";
 
         var circuit = new Circuit(input.Trim());
         circuit.RunOne("i");

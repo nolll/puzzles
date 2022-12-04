@@ -17,9 +17,10 @@ public class Year2015Day02Tests
     [Test]
     public void CorrectSquareFeetForMultipleGifts()
     {
-        const string input = @"
+        const string input = """
 2x3x4
-1x1x10";
+1x1x10
+""";
         const int expected = 101;
 
         var calc = new GiftWrappingCalculator();
@@ -41,9 +42,10 @@ public class Year2015Day02Tests
     [Test]
     public void CorrectRibbonLengthForMultipleGifts()
     {
-        const string input = @"
+        const string input = """
 2x3x4
-1x1x10";
+1x1x10
+""";
         const int expected = 48;
 
         var calc = new GiftWrappingCalculator();

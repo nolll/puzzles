@@ -117,15 +117,17 @@ MNOP";
     [Test]
     public void RotateRight()
     {
-        const string input = @"
+        const string input = """
 #..
 #..
-...";
+...
+""";
 
-        const string expected = @"
+        const string expected = """
 .##
 ...
-...";
+...
+""";
 
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
@@ -138,15 +140,17 @@ MNOP";
     [Test]
     public void RotateLeft()
     {
-        const string input = @"
+        const string input = """
 #..
 #..
-...";
+...
+""";
 
-        const string expected = @"
+        const string expected = """
 ...
 ...
-##.";
+##.
+""";
 
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
@@ -159,9 +163,10 @@ MNOP";
     [Test]
     public void Slice()
     {
-        const string expected = @"
+        const string expected = """
 FG
-JK";
+JK
+""";
 
         var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
@@ -174,10 +179,11 @@ JK";
     [Test]
     public void SliceFrom()
     {
-        const string expected = @"
+        const string expected = """
 FGH
 JKL
-NOP";
+NOP
+""";
 
         var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
@@ -190,10 +196,11 @@ NOP";
     [Test]
     public void SliceTo()
     {
-        const string expected = @"
+        const string expected = """
 ABC
 EFG
-IJK";
+IJK
+""";
 
         var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
@@ -206,10 +213,11 @@ IJK";
     [Test]
     public void SliceSize()
     {
-        const string expected = @"
+        const string expected = """
 FGH
 JKL
-NOP";
+NOP
+""";
 
         var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
@@ -222,15 +230,17 @@ NOP";
     [Test]
     public void FlipVertical()
     {
-        const string input = @"
+        const string input = """
 #..
 #..
-...";
+...
+""";
 
-        const string expected = @"
+        const string expected = """
 ...
 #..
-#..";
+#..
+""";
 
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
@@ -243,15 +253,17 @@ NOP";
     [Test]
     public void FlipHorizontal()
     {
-        const string input = @"
+        const string input = """
 #..
 #..
-...";
+...
+""";
 
-        const string expected = @"
+        const string expected = """
 ..#
 ..#
-...";
+...
+""";
 
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);

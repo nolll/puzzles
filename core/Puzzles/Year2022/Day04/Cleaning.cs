@@ -23,13 +23,9 @@ public class Cleaning
 
     private (CleaningRange a, CleaningRange b) ParseRanges(string s)
     {
-        var parts = s.Split(",");
-        return (ParseRange(parts[0]), ParseRange(parts[1]));
-    }
-        
-    private CleaningRange ParseRange(string s)
-    {
-        var parts = s.Split("-");
-        return new CleaningRange(int.Parse(parts[0]), int.Parse(parts[1]));
+        var parts = s.Split(',', '-');
+        var r1 = new CleaningRange(int.Parse(parts[0]), int.Parse(parts[1]));
+        var r2 = new CleaningRange(int.Parse(parts[2]), int.Parse(parts[3]));
+        return (r1, r2);
     }
 }

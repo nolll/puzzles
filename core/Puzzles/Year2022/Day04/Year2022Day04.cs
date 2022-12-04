@@ -9,7 +9,7 @@ public class Year2022Day04 : Puzzle
         var cleaning = new Cleaning();
         var result = cleaning.Part1(FileInput);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 571);
     }
 
     public override PuzzleResult RunPart2()
@@ -17,6 +17,6 @@ public class Year2022Day04 : Puzzle
         var cleaning = new Cleaning();
         var result = cleaning.Part2(FileInput);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 917);
     }
 }

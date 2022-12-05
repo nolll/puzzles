@@ -25,8 +25,18 @@ public static class PuzzleInputReader
         return ReadStringGroups(str).Select(ReadLines).ToList();
     }
 
+    public static IList<IList<string>> ReadLineGroupsWithWhiteSpace(string str)
+    {
+        return ReadStringGroupsWithWhitespace(str).Select(ReadLines).ToList();
+    }
+
     public static IList<string> ReadStringGroups(string str)
     {
         return str.Trim().Split("\r\n\r\n").ToList();
+    }
+
+    public static IList<string> ReadStringGroupsWithWhitespace(string str)
+    {
+        return str.Split("\r\n\r\n").ToList();
     }
 }

@@ -6,11 +6,15 @@ public class Year2022Day05 : Puzzle
 {
     public override PuzzleResult RunPart1()
     {
-        return new EmptyPuzzleResult();
+        var crane = new CargoCrane(FileInput);
+        crane.Run1();
+        return new PuzzleResult(crane.Message);
     }
 
     public override PuzzleResult RunPart2()
     {
-        return new EmptyPuzzleResult();
+        var crane = new CargoCrane(FileInput);
+        crane.Run2();
+        return new PuzzleResult(crane.Message);
     }
 }

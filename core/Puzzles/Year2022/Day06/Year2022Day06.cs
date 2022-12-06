@@ -6,11 +6,13 @@ public class Year2022Day06 : Puzzle
 {
     public override PuzzleResult RunPart1()
     {
-        return new EmptyPuzzleResult();
+        var result = TuningTrouble.FindMarker(FileInput);
+        return new PuzzleResult(result, 1542);
     }
 
     public override PuzzleResult RunPart2()
     {
-        return new EmptyPuzzleResult();
+        var result = TuningTrouble.FindMessage(FileInput);
+        return new PuzzleResult(result, 3153);
     }
 }

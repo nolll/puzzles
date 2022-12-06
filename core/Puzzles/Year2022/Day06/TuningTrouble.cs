@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Core.Puzzles.Year2022.Day06;
 
@@ -18,15 +18,16 @@ internal static class TuningTrouble
     {
         for (var i = searchLength; i < input.Length; i++)
         {
-            var s = input[(i - searchLength)..i];
-            var a = s.ToCharArray();
-            var d = a.Distinct();
-            if (d.Count() == searchLength)
-            {
+            if (IsAllUnique(input[(i - searchLength)..i]))
                 return i;
-            }
         }
 
         return 0;
+    }
+
+    private static bool IsAllUnique(string s)
+    {
+        var set = new HashSet<char>(s.ToCharArray());
+        return set.Count == s.Length;
     }
 }

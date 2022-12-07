@@ -1,25 +1,190 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Core.Common.Strings;
 using NUnit.Framework;
 
 namespace Core.Puzzles.Year2022.Day07;
+
+public class ElfDirectory
+{
+    public ElfDirectory Parent;
+    public readonly IDictionary<string, ElfDirectory> Directories = new Dictionary<string, ElfDirectory>();
+    public readonly IDictionary<string, long> Files = new Dictionary<string, long>();
+
+    public long Size
+    {
+        get
+        {
+            return Directories.Values.ToList().Sum(o => o.Size) + Files.Values.Sum();
+        }
+    }
+}
+
+public class FileSystem
+{
+    public long Part1(string input)
+    {
+        var lines = PuzzleInputReader.ReadLines(input, false).Skip(1);
+
+        var fileSystem = new ElfDirectory();
+        var currentDir = fileSystem;
+        foreach (var line in lines)
+        {
+            var parts = line.Split(' ');
+            if (parts[0] == "$" && parts[1] == "ls")
+            {
+            }
+            else if (parts[0] == "$" && parts[1] == "cd")
+            {
+                if (parts[2] == "..")
+                {
+                    currentDir = currentDir.Parent;
+                }
+                else
+                {
+                    currentDir = currentDir.Directories[parts[2]];
+                }
+            }
+            else if (parts[0] == "dir")
+            {
+                var newDir = new ElfDirectory
+                {
+                    Parent = currentDir
+                };
+                currentDir.Directories.Add(parts[1], newDir);
+            }
+            else
+            {
+                currentDir.Files.Add(parts[1], long.Parse(parts[0]));
+            }
+        }
+
+        var smallDirs = new List<ElfDirectory>();
+        FindSmallDirectories(fileSystem, smallDirs);
+        return smallDirs.Sum(o => o.Size);
+    }
+
+    public long Part2(string input)
+    {
+        var lines = PuzzleInputReader.ReadLines(input, false).Skip(1);
+
+        var fileSystem = new ElfDirectory();
+        var currentDir = fileSystem;
+        foreach (var line in lines)
+        {
+            var parts = line.Split(' ');
+            if (parts[0] == "$" && parts[1] == "ls")
+            {
+            }
+            else if (parts[0] == "$" && parts[1] == "cd")
+            {
+                if (parts[2] == "..")
+                {
+                    currentDir = currentDir.Parent;
+                }
+                else
+                {
+                    currentDir = currentDir.Directories[parts[2]];
+                }
+            }
+            else if (parts[0] == "dir")
+            {
+                var newDir = new ElfDirectory
+                {
+                    Parent = currentDir
+                };
+                currentDir.Directories.Add(parts[1], newDir);
+            }
+            else
+            {
+                currentDir.Files.Add(parts[1], long.Parse(parts[0]));
+            }
+        }
+
+        var fileSystemSize = 70_000_000;
+        var spaceNeededForUpdate = 30_000_000;
+        var spaceUsed = fileSystem.Size;
+        var freeSpace = fileSystemSize - spaceUsed;
+        var spaceToDelete = spaceNeededForUpdate - freeSpace;
+
+        var allDirs = new List<ElfDirectory>();
+        FindAllDirectories(fileSystem, allDirs);
+        var sizes = allDirs.Select(o => o.Size).OrderByDescending(o => o).ToArray();
+
+        for (var i = 0; i < sizes.Length; i++)
+        {
+            if(sizes[i] < spaceToDelete)
+                return sizes[i - 1];
+        }
+
+        return 0;
+    }
+
+    private void FindAllDirectories(ElfDirectory currentDir, IList<ElfDirectory> allDirs)
+    {
+        allDirs.Add(currentDir);
+
+        foreach (var child in currentDir.Directories.Values)
+        {
+            FindAllDirectories(child, allDirs);
+        }
+    }
+
+    private void FindSmallDirectories(ElfDirectory currentDir, IList<ElfDirectory> smallDirs)
+    {
+        if(currentDir.Size <= 100000)
+            smallDirs.Add(currentDir);
+
+        foreach (var child in currentDir.Directories.Values)
+        {
+            FindSmallDirectories(child, smallDirs);
+        }
+    }
+}
 
 public class Year2022Day07Tests
 {
     [Test]
     public void Part1()
     {
-        var result = 0;
+        var fileSystem = new FileSystem();
+        var result = fileSystem.Part1(Input);
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(result, Is.EqualTo(95437));
     }
 
     [Test]
     public void Part2()
     {
-        var result = 0;
+        var fileSystem = new FileSystem();
+        var result = fileSystem.Part2(Input);
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(result, Is.EqualTo(24933642));
     }
 
     private const string Input = @"
-";
+$ cd /
+$ ls
+dir a
+14848514 b.txt
+8504156 c.dat
+dir d
+$ cd a
+$ ls
+dir e
+29116 f
+2557 g
+62596 h.lst
+$ cd e
+$ ls
+584 i
+$ cd ..
+$ cd ..
+$ cd d
+$ ls
+4060174 j
+8033020 d.log
+5626152 d.ext
+7214296 k";
 }

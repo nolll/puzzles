@@ -4,13 +4,22 @@ namespace Core.Puzzles.Year2022.Day08;
 
 public class Year2022Day08 : Puzzle
 {
+    private TreeHouse _treeHouse;
+
     public override PuzzleResult RunPart1()
     {
-        return new EmptyPuzzleResult();
+        _treeHouse = new TreeHouse(FileInput);
+        _treeHouse.Calc();
+        var result = _treeHouse.VisibleTreesCount;
+
+        return new PuzzleResult(result, 1538);
     }
 
     public override PuzzleResult RunPart2()
     {
-        return new EmptyPuzzleResult();
+        _treeHouse.Calc();
+        var result = _treeHouse.HighestScenicScore;
+
+        return new PuzzleResult(result, 496125);
     }
 }

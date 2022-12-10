@@ -5,13 +5,13 @@ namespace Core.Common.Combinatorics;
 
 public static class CombinationGenerator
 {
-    public static List<List<T>> GetAllCombinations<T>(IList<T> list)
+    public static List<List<T>> GetAllCombinationsAnySize<T>(IList<T> list)
     {
-        var result = new List<List<T>> { new List<T>() };
+        var result = new List<List<T>> { new() };
         result.Last().Add(list[0]);
         if (list.Count == 1)
             return result;
-        var tailCombos = GetAllCombinations(list.Skip(1).ToList());
+        var tailCombos = GetAllCombinationsAnySize(list.Skip(1).ToList());
         tailCombos.ForEach(combo =>
         {
             result.Add(new List<T>(combo));
@@ -21,7 +21,7 @@ public static class CombinationGenerator
         return result;
     }
 
-    public static IEnumerable<List<T>> GetAllCombinations<T>(IList<T> list, int size)
+    public static IEnumerable<List<T>> GetAllCombinationsFixedSize<T>(IList<T> list, int size)
     {
         var n = list.Count;
         var result = new int[size];
@@ -30,8 +30,8 @@ public static class CombinationGenerator
 
         while (stack.Count > 0)
         {
-            int index = stack.Count - 1;
-            int value = stack.Pop();
+            var index = stack.Count - 1;
+            var value = stack.Pop();
 
             while (value < n)
             {
@@ -45,5 +45,21 @@ public static class CombinationGenerator
                 }
             }
         }
+    }
+
+    public static IEnumerable<List<T>> GetAllCombinationsMaxSize<T>(IList<T> list, int size)
+    {
+        var result = new List<List<T>> { new() };
+        result.Last().Add(list[0]);
+        if (list.Count == 1)
+            return result;
+        var tailCombos = GetAllCombinationsAnySize(list.Skip(1).ToList());
+        tailCombos.ForEach(combo =>
+        {
+            result.Add(new List<T>(combo));
+            combo.Add(list[0]);
+            result.Add(new List<T>(combo));
+        });
+        return result.Where(o => o.Count <= size);
     }
 }

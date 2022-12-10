@@ -36,13 +36,33 @@ public class RadioisotopeFacility
 
     private IList<RadioisotopeFloor> CopyFloors(RadioisotopeFacility facility)
     {
-        return facility.Floors.Select(o => CopyFloor(o)).ToList();
+        return facility.Floors.Select(CopyFloor).ToList();
     }
 
-    private RadioisotopeFloor CopyFloor(RadioisotopeFloor floor)
+    private static RadioisotopeFloor CopyFloor(RadioisotopeFloor floor)
     {
         var items = floor.Items.Select(o => o).ToList();
         return new RadioisotopeFloor(items);
+    }
+
+    public string Print()
+    {
+        var strings = new List<string>();
+        for (var i = Floors.Count - 1; i >= 0; i--)
+        {
+            var floorNumber = i + 1;
+            var isElevetorOnThisFloor = i == ElevatorFloor;
+            var elevator = isElevetorOnThisFloor ? 'E' : '.';
+            var floor = Floors[i];
+            var hg = floor.Items.Any(o => o.Id == "HG") ? "HG" : ". ";
+            var hm = floor.Items.Any(o => o.Id == "HM") ? "HM" : ". ";
+            var lg = floor.Items.Any(o => o.Id == "LG") ? "LG" : ". ";
+            var lm = floor.Items.Any(o => o.Id == "LM") ? "LM" : ". ";
+            var s = $"F{floorNumber} {elevator}  {hg} {hm} {lg} {lm}";
+            strings.Add(s);
+        }
+
+        return string.Join(Environment.NewLine, strings);
     }
 
     public bool NeedToMoveDown

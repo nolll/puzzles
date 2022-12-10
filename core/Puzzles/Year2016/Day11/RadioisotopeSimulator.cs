@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.Combinatorics;
@@ -24,9 +25,11 @@ public class RadioisotopeSimulator
         var newFacilities = new List<RadioisotopeFacility>();
         foreach (var facility in facilities)
         {
+            //Console.WriteLine(facility.Print());
+
             if (facility.ShouldMoveUp)
             {
-                var itemCombinations = CombinationGenerator.GetAllCombinations(facility.Floors[facility.ElevatorFloor].Items, 2);
+                var itemCombinations = CombinationGenerator.GetAllCombinationsMaxSize(facility.Floors[facility.ElevatorFloor].Items, 2);
                 var oldFloor = facility.ElevatorFloor;
                 var newFloor = oldFloor + 1;
                 foreach (var combination in itemCombinations)
@@ -71,8 +74,6 @@ public class RadioisotopeSimulator
         var finishedFacility = newFacilities.FirstOrDefault(o => o.IsDone);
         if (finishedFacility != null)
             return finishedFacility;
-        var iterationCount = newFacilities.First().IterationCount;
-        var facilityCount = newFacilities.Count;  
         return FindFinishedFacility(newFacilities);
     }
 

@@ -7,7 +7,7 @@ public class Year2022Day10 : Puzzle
     public override PuzzleResult RunPart1()
     {
         var tube = new CathodeRayTube();
-        var result = tube.Part1(FileInput);
+        var (result, _, _) = tube.Run(FileInput);
 
         return new PuzzleResult(result, 14360);
     }
@@ -15,7 +15,7 @@ public class Year2022Day10 : Puzzle
     public override PuzzleResult RunPart2()
     {
         var tube = new CathodeRayTube();
-        var result = tube.Part2(FileInput);
+        var (_, result, _) = tube.Run(FileInput);
 
         return new PuzzleResult(result, "BGKAEREZ");
     }

@@ -7,64 +7,10 @@ namespace Core.Puzzles.Year2022.Day10;
 
 public class CathodeRayTube
 {
-    public int Part1(string input)
-    {
-        var values = new List<int>();
-        var lines = PuzzleInputReader.ReadLines(input, false);
-        var cycle = 0;
-        var x = 1;
-        var command = "";
-        var value = 0;
-        var commandCyclesLeft = 0;
-        var currentLine = 0;
+    private const string NoopOperation = "noop";
+    private const string AddXOperation = "addx";
 
-        while (currentLine < lines.Count)
-        {
-            cycle++;
-            var line = lines[currentLine];
-            if (commandCyclesLeft > 0)
-            {
-                commandCyclesLeft--;
-            }
-
-            if ((cycle + 20) % 40 == 0 && cycle is > 0 and < 221)
-                values.Add(x * cycle);
-
-            if (command == "")
-            {
-                var parts = line.Split(' ');
-                command = parts[0];
-                if (command == "noop")
-                {
-                    commandCyclesLeft = 0;
-                }
-                else if (command == "addx")
-                {
-                    value = int.Parse(parts[1]);
-                    commandCyclesLeft = 1;
-                }
-            }
-
-            if (commandCyclesLeft == 0)
-            {
-                if (command == "noop")
-                {
-                    currentLine++;
-                }
-                else if (command == "addx")
-                {
-                    x += value;
-                    currentLine++;
-                }
-
-                command = "";
-            }
-        }
-
-        return values.Sum();
-    }
-
-    public string Part2Image(string input)
+    public (int sum, string letters, string image) Run(string input)
     {
         var values = new List<int>();
         var lines = PuzzleInputReader.ReadLines(input, false);
@@ -81,11 +27,8 @@ public class CathodeRayTube
             cycle++;
             var drawPosition = cycle - 1;
 
-            var line = lines[currentLine];
-            if (commandCyclesLeft > 0)
-            {
+            if (commandCyclesLeft > 0) 
                 commandCyclesLeft--;
-            }
 
             if ((cycle + 20) % 40 == 0 && cycle is > 0 and < 221)
                 values.Add(x * cycle);
@@ -98,13 +41,10 @@ public class CathodeRayTube
 
             if (command == "")
             {
+                var line = lines[currentLine];
                 var parts = line.Split(' ');
                 command = parts[0];
-                if (command == "noop")
-                {
-                    commandCyclesLeft = 0;
-                }
-                else if (command == "addx")
+                if (command == AddXOperation)
                 {
                     value = int.Parse(parts[1]);
                     commandCyclesLeft = 1;
@@ -113,27 +53,20 @@ public class CathodeRayTube
 
             if (commandCyclesLeft == 0)
             {
-                if (command == "noop")
-                {
-                    currentLine++;
-                }
-                else if (command == "addx")
-                {
+                if (command == AddXOperation)
                     x += value;
+                
+                if (command.Length > 0)
                     currentLine++;
-                }
 
                 command = "";
             }
         }
 
-        return CreateImage(crt);
-    }
-
-    public string Part2(string input)
-    {
-        var image = Part2Image(input);
-        return ReadCrtImage(image);
+        var sum = values.Sum();
+        var image = CreateImage(crt);
+        var letters = ReadCrtImage(image);
+        return (sum, letters, image);
     }
 
     private string CreateImage(char[] chars)

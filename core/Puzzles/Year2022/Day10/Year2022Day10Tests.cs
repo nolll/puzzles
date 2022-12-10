@@ -8,7 +8,7 @@ public class Year2022Day10Tests
     public void Part1Short()
     {
         var tube = new CathodeRayTube();
-        var result = tube.Part1(ShortInput);
+        var (result, _, _) = tube.Run(ShortInput);
 
         Assert.That(result, Is.EqualTo(0));
     }
@@ -17,7 +17,7 @@ public class Year2022Day10Tests
     public void Part1Long()
     {
         var tube = new CathodeRayTube();
-        var result = tube.Part1(LongInput);
+        var (result, _, _) = tube.Run(LongInput);
 
         Assert.That(result, Is.EqualTo(13140));
     }
@@ -26,9 +26,9 @@ public class Year2022Day10Tests
     public void Part2()
     {
         var tube = new CathodeRayTube();
-        var result = tube.Part2Image(LongInput);
+        var (_, _, result) = tube.Run(LongInput);
 
-        var expected = """
+        const string expected = """
 ##..##..##..##..##..##..##..##..##..##..
 ###...###...###...###...###...###...###.
 ####....####....####....####....####....
@@ -40,12 +40,13 @@ public class Year2022Day10Tests
         Assert.That(result, Is.EqualTo(expected));
     }
 
-    private const string ShortInput = @"
+    private const string ShortInput = """
 noop
 addx 3
-addx -5";
+addx -5
+""";
 
-    private const string LongInput = @"
+    private const string LongInput = """
 addx 15
 addx -11
 addx 6
@@ -191,5 +192,6 @@ addx -6
 addx -11
 noop
 noop
-noop";
+noop
+""";
 }

@@ -15,14 +15,6 @@ public class Year2016Day08 : Puzzle
     {
         var simulator = new ScreenSimulator(50, 6);
         var simulatorResult = simulator.Run(FileInput);
-        return new PuzzleResult(simulatorResult.PrintOut, CorrectPrintout.Trim());
+        return new PuzzleResult(simulatorResult.Letters, "RURUCEOEIL");
     }
-
-    private const string CorrectPrintout = @"
-###  #  # ###  #  #  ##  ####  ##  ####  ### #    
-#  # #  # #  # #  # #  # #    #  # #      #  #    
-#  # #  # #  # #  # #    ###  #  # ###    #  #    
-###  #  # ###  #  # #    #    #  # #      #  #    
-# #  #  # # #  #  # #  # #    #  # #      #  #    
-#  #  ##  #  #  ##   ##  ####  ##  ####  ### ####";
 }

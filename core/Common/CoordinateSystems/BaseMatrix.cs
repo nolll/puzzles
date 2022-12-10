@@ -215,7 +215,7 @@ public abstract class BaseMatrix<T> : BaseMatrix2
                     sb.Append(ReadValueAt(x, y));
 
                 if (spacing)
-                    sb.Append(' ');
+                    sb.Append('.');
             }
 
             sb.AppendLine();

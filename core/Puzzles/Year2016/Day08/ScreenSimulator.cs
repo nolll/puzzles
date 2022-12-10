@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Core.Common.CoordinateSystems;
+using Core.Common.Ocr;
 using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2016.Day08;
@@ -10,7 +11,7 @@ public class ScreenSimulator
 
     public ScreenSimulator(int width, int height)
     {
-        _screen = new DynamicMatrix<char>(width, height, ' ');
+        _screen = new DynamicMatrix<char>(width, height, '.');
     }
 
     public ScreenSimulatorResult Run(string input)
@@ -23,7 +24,8 @@ public class ScreenSimulator
 
         var pixelCount = _screen.Values.Count(o => o == '#');
         var printOut = _screen.Print();
-        return new ScreenSimulatorResult(pixelCount, printOut);
+        var letters = OcrReader.ReadString(printOut);
+        return new ScreenSimulatorResult(pixelCount, printOut, letters);
     }
 
     private IScreenSimulatorInstruction CreateInstruction(string s)

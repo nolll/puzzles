@@ -15,4 +15,8 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Ocr\" />
+  </ItemGroup>
+
 </Project>

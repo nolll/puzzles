@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Common.Ocr;
 using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2022.Day10;
@@ -65,7 +66,7 @@ public class CathodeRayTube
 
         var sum = values.Sum();
         var image = CreateImage(crt);
-        var letters = ReadCrtImage(image);
+        var letters = OcrReader.ReadString(image);
         return (sum, letters, image);
     }
 
@@ -83,55 +84,5 @@ public class CathodeRayTube
         }
 
         return s.Trim();
-    }
-
-    private string ReadCrtImage(string crtImage)
-    {
-        const int charWidth = 5;
-        var rows = crtImage.Split("\n").Select(o => o.Trim()).ToList();
-        var stringLength = rows.First().Length / charWidth;
-        var s = "";
-
-        for (var i = 0; i < stringLength; i++)
-        {
-            var start = i * charWidth;
-            var letter = string.Join(Environment.NewLine, rows.Select(o => o.Substring(start, charWidth)));
-            s += ReadCrtLetter(letter);
-        }
-
-        return s;
-    }
-
-    private char ReadCrtLetter(string crtLetter)
-    {
-        var rows = crtLetter.Split("\n").Select(o => o.Trim()).ToList();
-        if (rows[0] == "###..")
-        {
-            if (rows[5] == "###..")
-                return 'B';
-
-            return 'R';
-        }
-
-        if (rows[0] == ".##..")
-        {
-            if (rows[5] == ".###.")
-                return 'G';
-
-            return 'A';
-        }
-
-        if (rows[0] == "####.")
-        {
-            if (rows[2] == "###..")
-                return 'E';
-
-            return 'Z';
-        }
-
-        if (rows[0] == "#..#.")
-            return 'K';
-
-        return ' ';
     }
 }

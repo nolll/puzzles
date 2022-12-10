@@ -8,8 +8,9 @@ public static class OcrReader
     public static string ReadString(string crtImage)
     {
         const int charWidth = 5;
-        var rows = crtImage.Replace(" ", ".").Split("\n").Select(o => o.Trim()).ToList();
-        var stringLength = rows.First().Length / charWidth;
+        var rows = crtImage.Split("\n").Select(o => o.Trim()).ToList();
+        var stringLength = (int)Math.Ceiling((double)rows.First().Length / charWidth);
+        rows = rows.Select(o => o.PadRight(stringLength * charWidth, '.')).ToList();
         var s = "";
 
         for (var i = 0; i < stringLength; i++)
@@ -28,7 +29,10 @@ public static class OcrReader
         if (rows[0] == "###..")
         {
             if (rows[5] == "###..")
-                return 'B'; 
+                return 'B';
+
+            if (rows[5] == "#....")
+                return 'P';
 
             return 'R';
         }
@@ -49,6 +53,9 @@ public static class OcrReader
         
         if (rows[0] == "####.")
         {
+            if (rows[5] == "#....")
+                return 'F';
+
             if (rows[2] == "###..")
                 return 'E';
 
@@ -60,7 +67,10 @@ public static class OcrReader
             if (rows[5] == ".##..")
                 return 'U';
 
-            return 'K';
+            if (rows[2] == "##...")
+                return 'K';
+
+            return 'H';
         }
 
         if (rows[0] == "#....")
@@ -68,9 +78,19 @@ public static class OcrReader
             return 'L';
         }
 
+        if (rows[0] == "#...#")
+        {
+            return 'Y';
+        }
+
         if (rows[0] == ".###.")
         {
             return 'I';
+        }
+
+        if (rows[0] == "..##.")
+        {
+            return 'J';
         }
 
         return ' ';

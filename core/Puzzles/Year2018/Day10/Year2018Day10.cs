@@ -4,6 +4,9 @@ namespace Core.Puzzles.Year2018.Day10;
 
 public class Year2018Day10 : Puzzle
 {
+    public override bool NeedsRewrite { get; }
+    public override string Comment => "Letters should be read with OCR";
+
     public override PuzzleResult RunPart1()
     {
         var finder = new StarMessageFinder(FileInput, 9);

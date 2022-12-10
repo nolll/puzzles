@@ -1,4 +1,5 @@
-﻿using Core.Platform;
+﻿using Core.Common.Ocr;
+using Core.Platform;
 
 namespace Core.Puzzles.Year2021.Day13;
 
@@ -18,15 +19,8 @@ public class Year2021Day13 : Puzzle
     {
         var paper = new TransparentPaper(FileInput);
         var result = paper.MessageAfterFold();
+        var letters = OcrReader.ReadString(result);
 
-        return new PuzzleResult(result, Answer.Trim());
+        return new PuzzleResult(letters, "GJZGLUPJ");
     }
-
-    private const string Answer = @"
-.##....##.####..##..#....#..#.###....##.
-#..#....#....#.#..#.#....#..#.#..#....#.
-#.......#...#..#....#....#..#.#..#....#.
-#.##....#..#...#.##.#....#..#.###.....#.
-#..#.#..#.#....#..#.#....#..#.#....#..#.
-.###..##..####..###.####..##..#.....##..";
 }

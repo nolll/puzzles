@@ -12,13 +12,13 @@ public class SpaceImagePrinter
         {
             foreach (var pixel in row)
             {
-                var output = pixel == '1' ? 'X' : ' ';
+                var output = pixel == '1' ? '#' : '.';
                 sb.Append(output);
             }
 
             sb.AppendLine();
         }
 
-        return sb.ToString();
+        return sb.ToString().Trim();
     }
 }

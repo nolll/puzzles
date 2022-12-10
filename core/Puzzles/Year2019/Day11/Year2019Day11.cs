@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Core.Common.Ocr;
 using Core.Platform;
 
 namespace Core.Puzzles.Year2019.Day11;
@@ -19,8 +20,9 @@ public class Year2019Day11 : Puzzle
         var robot2 = new PaintRobot(FileInput);
         var result2 = robot2.Paint(true);
         var printout = CleanPrintout(result2.Printout);
+        var letters = OcrReader.ReadString(printout);
 
-        return new PuzzleResult(printout, CorrectAnswer);
+        return new PuzzleResult(letters, "ABCLFUHJ");
     }
 
     private string CleanPrintout(string s)
@@ -31,7 +33,7 @@ public class Year2019Day11 : Puzzle
         foreach(var row in rows)
         {
             var chars = row.Trim().ToCharArray();
-            if(!chars.All(o => o == '0'))
+            if(chars.Any(o => o != '0'))
             {
                 rowsWithOutput.Add(row);
             }
@@ -41,13 +43,6 @@ public class Year2019Day11 : Puzzle
         var lastCharPos = rowsWithOutput.Max(o => o.LastIndexOf('1'));
         var length = lastCharPos - firstCharPos + 1;
         var printoutRows = rowsWithOutput.Select(o => o.Substring(firstCharPos, length));
-        return string.Join("\r\n", printoutRows).Replace('0', ' ').Replace('1', 'X'); ;
+        return string.Join("\r\n", printoutRows).Replace('0', '.').Replace('1', '#');
     }
-
-    private const string CorrectAnswer = @" XX  XXX   XX  X    XXXX X  X X  X   XX
-X  X X  X X  X X    X    X  X X  X    X
-X  X XXX  X    X    XXX  X  X XXXX    X
-XXXX X  X X    X    X    X  X X  X    X
-X  X X  X X  X X    X    X  X X  X X  X
-X  X XXX   XX  XXXX X     XX  X  X  XX ";
 }

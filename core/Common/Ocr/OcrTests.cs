@@ -8,14 +8,18 @@ public class OcrTests
     [TestCase(InputB, 'B')]
     [TestCase(InputC, 'C')]
     [TestCase(InputE, 'E')]
+    [TestCase(InputF, 'F')]
     [TestCase(InputG, 'G')]
+    [TestCase(InputH, 'H')]
     [TestCase(InputI, 'I')]
-    [TestCase(InputK, 'K')]
+    [TestCase(InputJ, 'J')]
     [TestCase(InputK, 'K')]
     [TestCase(InputL, 'L')]
     [TestCase(InputO, 'O')]
+    [TestCase(InputP, 'P')]
     [TestCase(InputR, 'R')]
     [TestCase(InputU, 'U')]
+    [TestCase(InputY, 'Y')]
     [TestCase(InputZ, 'Z')]
     public void TestReadLetter(string input, char expected)
     {
@@ -29,16 +33,16 @@ public class OcrTests
     {
         var result = OcrReader.ReadString(Input);
 
-        Assert.That(result, Is.EqualTo("AB"));
+        Assert.That(result, Is.EqualTo("ABC"));
     }
 
     private const string Input = """
-.##..###..
-#..#.#..#.
-#..#.###..
-####.#..#.
-#..#.#..#.
-#..#.###..
+.##..###...##..
+#..#.#..#.#..#.
+#..#.###..#....
+####.#..#.#....
+#..#.#..#.#..#.
+#..#.###...##..
 """;
 
     private const string InputA = """
@@ -77,6 +81,15 @@ public class OcrTests
 ####.
 """;
 
+    private const string InputF = """
+####.
+#....
+###..
+#....
+#....
+#....
+""";
+
     private const string InputG = """
 .##..
 #..#.
@@ -86,6 +99,15 @@ public class OcrTests
 .###.
 """;
 
+    private const string InputH = """
+#..#.
+#..#.
+####.
+#..#.
+#..#.
+#..#.
+""";
+
     private const string InputI = """
 .###.
 ..#..
@@ -93,6 +115,16 @@ public class OcrTests
 ..#..
 ..#..
 .###.
+""";
+
+
+    private const string InputJ = """
+..##.
+...#.
+...#.
+...#.
+#..#.
+.##..
 """;
 
     private const string InputK = """
@@ -122,6 +154,15 @@ public class OcrTests
 .##..
 """;
 
+    private const string InputP = """
+###..
+#..#.
+#..#.
+###..
+#....
+#....
+""";
+
     private const string InputR = """
 ###..
 #..#.
@@ -138,6 +179,15 @@ public class OcrTests
 #..#.
 #..#.
 .##..
+""";
+
+    private const string InputY = """
+#...#
+#...#
+.#.#.
+..#..
+..#..
+..#.."
 """;
 
     private const string InputZ = """

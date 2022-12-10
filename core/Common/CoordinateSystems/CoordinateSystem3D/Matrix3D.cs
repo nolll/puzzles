@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Core.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems.CoordinateSystem3D;
 
-public class Matrix3D<T> : BaseMatrix2
+public class Matrix3D<T> : BaseMatrix
 {
     private readonly T _defaultValue;
     private readonly IList<IList<IList<T>>> _matrix;
@@ -19,7 +19,7 @@ public class Matrix3D<T> : BaseMatrix2
     public bool IsAtRightEdge => Address.X == Width - 1;
     public bool IsAtBottom => Address.Y == Height - 1;
     public bool IsAtLeftEdge => Address.X == 0;
-    public Matrix3DAddress Center => new Matrix3DAddress(Width / 2, Height / 2, Depth / 2);
+    public Matrix3DAddress Center => new(Width / 2, Height / 2, Depth / 2);
 
     public Matrix3D(int width = 1, int height = 1, int depth = 1, T defaultValue = default)
     {

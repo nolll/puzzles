@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class DynamicMatrix<T> : BaseMatrix<T>, IMatrix<T>
+public class DynamicMatrix<T> : Base2DMatrix<T>, IMatrix<T>
 {
     private readonly IList<IList<T>> _matrix;
 
@@ -44,7 +44,7 @@ public class DynamicMatrix<T> : BaseMatrix<T>, IMatrix<T>
 
     protected override IMatrix<T> Create(int width, int height, T defaultValue)
     {
-        return new DynamicMatrix<T>(width, height, _defaultValue);
+        return new DynamicMatrix<T>(width, height, DefaultValue);
     }
 
     protected override void HandleExtend(MatrixAddress address)
@@ -106,7 +106,7 @@ public class DynamicMatrix<T> : BaseMatrix<T>, IMatrix<T>
             var row = new List<T>();
             for (var x = 0; x < width; x++)
             {
-                row.Add(_defaultValue);
+                row.Add(DefaultValue);
             }
 
             if (addMode == MatrixAddMode.Prepend)
@@ -125,9 +125,9 @@ public class DynamicMatrix<T> : BaseMatrix<T>, IMatrix<T>
             for (var x = 0; x < numberOfRows; x++)
             {
                 if (addMode == MatrixAddMode.Prepend)
-                    row.Insert(0, _defaultValue);
+                    row.Insert(0, DefaultValue);
                 else
-                    row.Add(_defaultValue);
+                    row.Add(DefaultValue);
             }
         }
     }

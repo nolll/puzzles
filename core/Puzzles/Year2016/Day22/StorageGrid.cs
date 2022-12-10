@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Core.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2016.Day22;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems.CoordinateSystem3D;
 using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2021.Day22;

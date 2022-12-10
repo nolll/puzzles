@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Core.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems.CoordinateSystem3D;
 
 namespace Core.Puzzles.Year2021.Day22;
 

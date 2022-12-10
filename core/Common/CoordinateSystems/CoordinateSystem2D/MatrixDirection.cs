@@ -1,6 +1,6 @@
 using System;
 
-namespace Core.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 public class MatrixDirection : IEquatable<MatrixDirection>
 {
@@ -15,10 +15,10 @@ public class MatrixDirection : IEquatable<MatrixDirection>
         Y = y;
     }
 
-    public static readonly MatrixDirection Up = new MatrixDirection("up", 0, -1);
-    public static readonly MatrixDirection Right = new MatrixDirection("right", 1, 0);
-    public static readonly MatrixDirection Down = new MatrixDirection("down", 0, 1);
-    public static readonly MatrixDirection Left = new MatrixDirection("left", -1, 0);
+    public static readonly MatrixDirection Up = new("up", 0, -1);
+    public static readonly MatrixDirection Right = new("right", 1, 0);
+    public static readonly MatrixDirection Down = new("down", 0, 1);
+    public static readonly MatrixDirection Left = new("left", -1, 0);
 
     public bool Equals(MatrixDirection other)
     {

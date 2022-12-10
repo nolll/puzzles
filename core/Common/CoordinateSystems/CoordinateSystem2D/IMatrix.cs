@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Core.Common.CoordinateSystems
+namespace Core.Common.CoordinateSystems.CoordinateSystem2D
 {
     public interface IMatrix<T>
     {

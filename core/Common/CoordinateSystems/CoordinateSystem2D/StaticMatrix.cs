@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class StaticMatrix<T> : BaseMatrix<T>, IMatrix<T>
+public class StaticMatrix<T> : Base2DMatrix<T>, IMatrix<T>
 {
     private readonly T[,] _matrix;
 
@@ -58,7 +58,7 @@ public class StaticMatrix<T> : BaseMatrix<T>, IMatrix<T>
 
     protected override IMatrix<T> Create(int width, int height, T defaultValue)
     {
-        return new StaticMatrix<T>(width, height, _defaultValue);
+        return new StaticMatrix<T>(width, height, DefaultValue);
     }
 
     protected override void HandleExtend(MatrixAddress address)

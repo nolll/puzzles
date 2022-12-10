@@ -1,5 +1,7 @@
 using System.Linq;
 using Core.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems.CoordinateSystem3D;
+using Core.Common.CoordinateSystems.CoordinateSystem4D;
 
 namespace Core.Puzzles.Year2020.Day17;
 

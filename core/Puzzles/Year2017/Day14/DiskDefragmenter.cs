@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Core.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Hashing;
 
 namespace Core.Puzzles.Year2017.Day14;

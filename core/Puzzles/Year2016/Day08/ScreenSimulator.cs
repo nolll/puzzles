@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Core.Common.CoordinateSystems;
+using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Ocr;
 using Core.Common.Strings;
 

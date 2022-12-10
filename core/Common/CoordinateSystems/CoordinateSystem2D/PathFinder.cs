@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Core.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 public static class PathFinder
 {
@@ -46,7 +46,7 @@ public static class PathFinder
 
     private static IList<CoordCount> GetCoordCounts(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
-        var queue = new List<CoordCount> { new CoordCount(to.X, to.Y, 0) };
+        var queue = new List<CoordCount> { new(to.X, to.Y, 0) };
         var index = 0;
         while (index < queue.Count && !queue.Any(o => o.X == from.X && o.Y == from.Y))
         {

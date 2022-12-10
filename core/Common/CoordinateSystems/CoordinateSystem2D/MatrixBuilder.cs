@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Core.Common.CoordinateSystems;
+namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 public static class MatrixBuilder
 {

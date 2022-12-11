@@ -46,26 +46,22 @@ public class FileSystem
         foreach (var line in lines)
         {
             var parts = line.Split(' ');
-            if (parts[0] == "$" && parts[1] == "ls")
+            var isCommand = parts[0] == "$";
+            var isDirectory = parts[0] == "dir";
+            var isFile = !isCommand && !isDirectory;
+            if (isCommand && parts[1] == "cd")
             {
+                var directory = parts[2];
+                currentDir = directory == ".."
+                    ? currentDir.Parent
+                    : currentDir.Directories[directory];
             }
-            else if (parts[0] == "$" && parts[1] == "cd")
+            else if (isDirectory)
             {
-                if (parts[2] == "..")
-                {
-                    currentDir = currentDir.Parent;
-                }
-                else
-                {
-                    currentDir = currentDir.Directories[parts[2]];
-                }
+                var directory = parts[1];
+                currentDir.Directories.Add(directory, new ElfDirectory(currentDir));
             }
-            else if (parts[0] == "dir")
-            {
-                var newDir = new ElfDirectory(currentDir);
-                currentDir.Directories.Add(parts[1], newDir);
-            }
-            else
+            else if (isFile)
             {
                 currentDir.Files.Add(parts[1], long.Parse(parts[0]));
             }

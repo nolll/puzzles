@@ -9,7 +9,7 @@ public static class Formatter
     {
         var seconds = timeTaken.TotalMilliseconds / 1000;
         var decimalSeconds = Convert.ToDecimal(seconds);
-        var roundedSeconds = Math.Round(decimalSeconds, 2);
+        var roundedSeconds = Math.Round(decimalSeconds, 3);
         var secondsString = roundedSeconds.ToString(CultureInfo.InvariantCulture);
         return $"{secondsString}s";
     }

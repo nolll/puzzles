@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.Strings;
@@ -19,44 +18,15 @@ public class MonkeyBusiness
 
     private long Run(string input, bool isReallyWorried)
     {
-        var groups = PuzzleInputReader.ReadLineGroups(input);
-        var monkeys = new Dictionary<int, Monkey>();
-
-        foreach (var group in groups)
-        {
-            var line1Parts = group[0].Trim().Replace(":", "").Split(' ');
-            var id = int.Parse(line1Parts[1]);
-
-            var line2Parts = group[1].Trim().Split(':');
-            var items = line2Parts[1].Trim().Split(',').Select(o => long.Parse(o.Trim())).ToList();
-
-            var line3Parts = group[2].Trim().Split('=');
-            var operationParts = line3Parts[1].Trim().Split();
-            var op = operationParts[1];
-            var right = operationParts[2];
-            var operation = new MonkeyOperation(op, right);
-
-            var line4Parts = group[3].Trim().Split(' ');
-            var divisor = long.Parse(line4Parts[3]);
-
-            var line5Parts = group[4].Trim().Split(' ');
-            var trueTarget = int.Parse(line5Parts[5]);
-
-            var line6Parts = group[5].Trim().Split(' ');
-            var falseTarget = int.Parse(line6Parts[5]);
-
-            monkeys.Add(id, new Monkey(id, items, operation, divisor, trueTarget, falseTarget));
-        }
-
+        var monkeys = ParseMonkeys(input);
         var rounds = isReallyWorried ? 10_000 : 20;
-        var divisors = monkeys.Values.Select(o => o.Divisor);
+        var divisors = monkeys.Select(o => o.Divisor);
         var commonDivisor = divisors.Aggregate<long, long>(1, (c, d) => c * d);
 
         for (var i = 0; i < rounds; i++)
         {
-            for (var m = 0; m < monkeys.Count; m++)
+            foreach (var monkey in monkeys)
             {
-                var monkey = monkeys[m];
                 var items = monkey.Items.ToList();
                 monkey.Items.Clear();
 
@@ -74,8 +44,51 @@ public class MonkeyBusiness
             }
         }
 
-        var itemLevels = monkeys.Values.Select(o => o.Level);
+        var itemLevels = monkeys.Select(o => o.Level);
         var topLevels = itemLevels.OrderDescending().Take(2).ToList();
         return topLevels[0] * topLevels[1];
+    }
+
+    private static Monkey[] ParseMonkeys(string input)
+    {
+        return PuzzleInputReader.ReadLineGroups(input)
+            .Select(ParseMonkey)
+            .ToArray();
+    }
+
+    private static Monkey ParseMonkey(IList<string> group)
+    {
+        var items = ParseItems(group[1]);
+        var operation = ParseOperation(group[2]);
+        var divisor = ParseDivisor(group[3]);
+        var trueTarget = ParseTarget(group[4]);
+        var falseTarget = ParseTarget(group[5]);
+
+        return new Monkey(items, operation, divisor, trueTarget, falseTarget);
+    }
+
+    private static List<long> ParseItems(string line)
+    {
+        return line.Trim().Split(':').Last().Trim().Split(',').Select(o => long.Parse(o.Trim())).ToList();
+    }
+
+    private static MonkeyOperation ParseOperation(string line)
+    {
+        var parts = line.Trim().Split('=').Last().Trim().Split();
+        var op = parts[1];
+        var right = parts[2];
+        return new MonkeyOperation(op, right);
+    }
+
+    private static long ParseDivisor(string line)
+    {
+        var parts = line.Trim().Split(' ');
+        return long.Parse(parts.Last());
+    }
+
+    private static int ParseTarget(string line)
+    {
+        var parts = line.Trim().Split(' ');
+        return int.Parse(parts.Last());
     }
 }

@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using System.Numerics;
 
 namespace Core.Puzzles.Year2022.Day11;
 
 public class Monkey
 {
-    public int Id { get; }
     public IList<long> Items { get; }
     public MonkeyOperation Operation { get; }
     public long Divisor { get; }
@@ -13,9 +11,8 @@ public class Monkey
     public int FalseTarget { get; }
     public long Level { get; set; }
 
-    public Monkey(int id, IList<long> items, MonkeyOperation operation, long divisor, int trueTarget, int falseTarget)
+    public Monkey(IList<long> items, MonkeyOperation operation, long divisor, int trueTarget, int falseTarget)
     {
-        Id = id;
         Items = items;
         Operation = operation;
         Divisor = divisor;

@@ -6,11 +6,17 @@ public class Year2022Day11 : Puzzle
 {
     public override PuzzleResult RunPart1()
     {
-        return new EmptyPuzzleResult();
+        var monkeyBusiness = new MonkeyBusiness();
+        var result = monkeyBusiness.Run(FileInput, true, 20);
+
+        return new PuzzleResult(result);
     }
 
     public override PuzzleResult RunPart2()
     {
-        return new EmptyPuzzleResult();
+        var monkeyBusiness = new MonkeyBusiness();
+        var result = monkeyBusiness.Run(FileInput, false, 10_000);
+
+        return new PuzzleResult(result);
     }
 }

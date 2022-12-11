@@ -24,6 +24,14 @@ public class Monkey
         Level = 0;
     }
 
+    public long Calc(long val)
+    {
+        var right = Operation.Right == "old" ? val : long.Parse(Operation.Right);
+        if (Operation.Op == "+")
+            return val + right;
+        return val * right;
+    }
+
     public void AddItemPart1(long item)
     {
         Items.Add(item);

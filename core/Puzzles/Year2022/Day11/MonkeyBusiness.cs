@@ -48,7 +48,7 @@ public class MonkeyBusiness
 
                 foreach (var item in items)
                 {
-                    var worryLevel = monkey.Operation.Calc(item);
+                    var worryLevel = monkey.Calc(item);
                     monkey.Level++;
                     var adjustedWorryLevel = adjustWorryLevel
                         ? worryLevel / 3

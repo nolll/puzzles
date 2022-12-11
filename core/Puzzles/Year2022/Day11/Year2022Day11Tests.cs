@@ -8,7 +8,7 @@ public class Year2022Day11Tests
     public void Part1()
     {
         var monkeyBusiness = new MonkeyBusiness();
-        var result = monkeyBusiness.Run(Input, true, 20);
+        var result = monkeyBusiness.Part1(Input);
 
         Assert.That(result, Is.EqualTo(10605));
     }
@@ -17,7 +17,7 @@ public class Year2022Day11Tests
     public void Part2()
     {
         var monkeyBusiness = new MonkeyBusiness();
-        var result = monkeyBusiness.Run(Input, false, 10_000);
+        var result = monkeyBusiness.Part2(Input);
 
         Assert.That(result, Is.EqualTo(2_713_310_158));
     }

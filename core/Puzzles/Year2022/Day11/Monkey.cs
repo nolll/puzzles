@@ -31,14 +31,4 @@ public class Monkey
             return val + right;
         return val * right;
     }
-
-    public void AddItemPart1(long item)
-    {
-        Items.Add(item);
-    }
-
-    public void AddItemPart2(long item)
-    {
-        Items.Add(item % Divisor);
-    }
 }

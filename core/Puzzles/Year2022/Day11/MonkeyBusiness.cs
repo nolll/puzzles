@@ -7,7 +7,17 @@ namespace Core.Puzzles.Year2022.Day11;
 
 public class MonkeyBusiness
 {
-    public long Run(string input, bool adjustWorryLevel, int rounds)
+    public long Part1(string input)
+    {
+        return Run(input, false);
+    }
+
+    public long Part2(string input)
+    {
+        return Run(input, true);
+    }
+
+    private long Run(string input, bool isReallyWorried)
     {
         var groups = PuzzleInputReader.ReadLineGroups(input);
         var monkeys = new Dictionary<int, Monkey>();
@@ -38,6 +48,10 @@ public class MonkeyBusiness
             monkeys.Add(id, new Monkey(id, items, operation, divisor, trueTarget, falseTarget));
         }
 
+        var rounds = isReallyWorried ? 10_000 : 20;
+        var divisors = monkeys.Values.Select(o => o.Divisor);
+        var commonDivisor = divisors.Aggregate<long, long>(1, (c, d) => c * d);
+
         for (var i = 0; i < rounds; i++)
         {
             for (var m = 0; m < monkeys.Count; m++)
@@ -48,19 +62,14 @@ public class MonkeyBusiness
 
                 foreach (var item in items)
                 {
-                    var worryLevel = monkey.Calc(item);
                     monkey.Level++;
-                    var adjustedWorryLevel = adjustWorryLevel
-                        ? worryLevel / 3
-                        : worryLevel;
-                    var result = adjustedWorryLevel % monkey.Divisor == 0;
+                    var worryLevel = isReallyWorried
+                        ? monkey.Calc(item) % commonDivisor
+                        : monkey.Calc(item) / 3;
+                    var result = worryLevel % monkey.Divisor == 0;
                     var target = result ? monkey.TrueTarget : monkey.FalseTarget;
                     var targetMonkey = monkeys[target];
-
-                    if(adjustWorryLevel)
-                        targetMonkey.AddItemPart1(adjustedWorryLevel);
-                    else
-                        targetMonkey.AddItemPart2(adjustedWorryLevel);
+                    targetMonkey.Items.Add(worryLevel);
                 }
             }
         }

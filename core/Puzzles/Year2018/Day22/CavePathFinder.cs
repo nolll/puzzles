@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2018.Day22;
@@ -20,8 +19,7 @@ public static class CavePathFinder
         return coordCounts
             .Where(o => o.X == from.X && o.Y == from.Y)
             .Select(o => o.CountWhenSwitchedToTorch)
-            .OrderBy(o => o)
-            .First();
+            .MinBy(o => o);
     }
 
     private static IList<CaveCoordCount> GetCoordCounts(IMatrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
@@ -48,9 +46,9 @@ public static class CavePathFinder
                 {
                     var targetRegion = matrix.ReadValueAt(next);
                     var targetTool = GetTool(region, targetRegion, current.Tool);
+                    var visited = seen.TryGetValue((next.X, next.Y, targetTool), out var existingCount);
                     var cost = current.Tool == targetTool ? 1 : 8;
                     var totalCount = current.Count + cost;
-                    var visited = seen.TryGetValue((next.X, next.Y, targetTool), out var existingCount);
                     if (!visited || totalCount < existingCount)
                     {
                         seen[(next.X, next.Y, targetTool)] = totalCount;

@@ -12,7 +12,7 @@ public class Year2022Day12 : Puzzle
         var hillClimbing = new HillClimbing();
         var result = hillClimbing.Part1(FileInput);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 352);
     }
 
     public override PuzzleResult RunPart2()
@@ -20,6 +20,6 @@ public class Year2022Day12 : Puzzle
         var hillClimbing = new HillClimbing();
         var result = hillClimbing.Part2(FileInput);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 345);
     }
 }

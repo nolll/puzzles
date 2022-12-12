@@ -6,17 +6,20 @@ public static class MatrixBuilder
 {
     public static IMatrix<char> BuildStaticCharMatrix(string input, char defaultValue = default)
     {
-        return BuildCharMatrix(new StaticMatrix<char>(1, 1, defaultValue), input);
+        var rows = input.Trim().Split('\n');
+        var w = rows.First().Length;
+        var h = rows.Length;
+        return BuildCharMatrix(new StaticMatrix<char>(w, h, defaultValue), rows);
     }
 
     public static IMatrix<char> BuildCharMatrix(string input, char defaultValue = default)
     {
-        return BuildCharMatrix(new DynamicMatrix<char>(1, 1, defaultValue), input);
+        var rows = input.Trim().Split('\n');
+        return BuildCharMatrix(new DynamicMatrix<char>(1, 1, defaultValue), rows);
     }
 
-    private static IMatrix<char> BuildCharMatrix(IMatrix<char> matrix, string input)
+    private static IMatrix<char> BuildCharMatrix(IMatrix<char> matrix, string[] rows)
     {
-        var rows = input.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)
         {

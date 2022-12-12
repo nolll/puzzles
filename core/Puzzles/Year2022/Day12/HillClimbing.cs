@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
-using NUnit.Framework;
 
 namespace Core.Puzzles.Year2022.Day12;
 
@@ -12,7 +10,7 @@ public class HillClimbing
     {
         var matrix = MatrixBuilder.BuildStaticCharMatrix(input);
         var (from, to) = FindFromAndTo(matrix);
-        var steps = HillClimbingPathFinder.StepCountTo(matrix, from, to);
+        var steps = StepCountTo(matrix, from, to);
 
         return steps;
     }
@@ -22,15 +20,7 @@ public class HillClimbing
         var matrix = MatrixBuilder.BuildStaticCharMatrix(input);
         var (_, to) = FindFromAndTo(matrix);
         var startingPoints = FindStartingPoints(matrix);
-
-        var stepCounts = new List<int>();
-        foreach (var from in startingPoints)
-        {
-            var steps = HillClimbingPathFinder.StepCountTo(matrix, from, to);
-            stepCounts.Add(steps);
-        }
-        
-
+        var stepCounts = startingPoints.Select(from => StepCountTo(matrix, from, to)).ToList();
         return stepCounts.Where(o => o > 0).Min();
     }
 
@@ -68,32 +58,31 @@ public class HillClimbing
 
         return (from, to);
     }
-}
 
-public class Year2022Day12Tests
-{
-    [Test]
-    public void Part1()
+    public static int StepCountTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
-        var hillClimbing = new HillClimbing();
-        var result = hillClimbing.Part1(Input);
-
-        Assert.That(result, Is.EqualTo(31));
+        var coordCounts = GetCoordCounts(matrix, from, to);
+        var goal = coordCounts.FirstOrDefault(o => o.X == from.X && o.Y == from.Y);
+        return goal?.Count ?? 0;
     }
 
-    [Test]
-    public void Part2()
+    private static IList<CoordCount> GetCoordCounts(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
-        var hillClimbing = new HillClimbing();
-        var result = hillClimbing.Part2(Input);
+        var queue = new List<CoordCount> { new(to.X, to.Y, 0) };
+        var index = 0;
+        while (index < queue.Count && !queue.Any(o => o.X == from.X && o.Y == from.Y))
+        {
+            var next = queue[index];
+            matrix.MoveTo(next.X, next.Y);
+            var currentValue = matrix.ReadValue();
+            var adjacentCoords = matrix.PerpendicularAdjacentCoords
+                .Where(o => currentValue - matrix.ReadValueAt(o) <= 1 && !queue.Any(q => q.X == o.X && q.Y == o.Y))
+                .ToList();
+            var newCoordCounts = adjacentCoords.Select(o => new CoordCount(o.X, o.Y, next.Count + 1));
+            queue.AddRange(newCoordCounts);
+            index++;
+        }
 
-        Assert.That(result, Is.EqualTo(29));
+        return queue;
     }
-
-    private const string Input = @"
-Sabqponm
-abcryxxl
-accszExk
-acctuvwj
-abdefghi";
 }

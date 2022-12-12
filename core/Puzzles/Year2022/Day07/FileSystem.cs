@@ -58,8 +58,7 @@ public class FileSystem
             }
             else if (isDirectory)
             {
-                var directory = parts[1];
-                currentDir.Directories.Add(directory, new ElfDirectory(currentDir));
+                currentDir.Directories.Add(parts[1], new ElfDirectory(currentDir));
             }
             else if (isFile)
             {

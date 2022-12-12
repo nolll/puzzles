@@ -9,7 +9,10 @@ public class HillClimbing
     public int Part1(string input)
     {
         var matrix = MatrixBuilder.BuildStaticCharMatrix(input);
-        var (from, to) = FindFromAndTo(matrix);
+        var from = FindFromCoord(matrix);
+        var to = FindToCoord(matrix);
+        matrix.WriteValueAt(from, 'a');
+        matrix.WriteValueAt(to, 'z');
         var steps = StepCountTo(matrix, from, to);
 
         return steps;
@@ -18,71 +21,47 @@ public class HillClimbing
     public int Part2(string input)
     {
         var matrix = MatrixBuilder.BuildStaticCharMatrix(input);
-        var (_, to) = FindFromAndTo(matrix);
-        var startingPoints = FindStartingPoints(matrix);
-        var stepCounts = startingPoints.Select(from => StepCountTo(matrix, from, to)).ToList();
-        return stepCounts.Where(o => o > 0).Min();
+        var from = FindFromCoord(matrix); 
+        var to = FindToCoord(matrix);
+        matrix.WriteValueAt(from, 'a');
+        matrix.WriteValueAt(to, 'z');
+        var startingPoints = matrix.Coords.Where(coord => matrix.ReadValueAt(coord) == 'a').ToList();
+        var stepCount = StepCountTo(matrix, startingPoints, to);
+        return stepCount;
     }
 
-    private List<MatrixAddress> FindStartingPoints(IMatrix<char> matrix)
-    {
-        var startingPositions = new List<MatrixAddress>();
-        foreach (var coord in matrix.Coords)
-        {
-            if (matrix.ReadValueAt(coord) == 'a')
-            {
-                startingPositions.Add(coord);
-            }
-        }
+    private MatrixAddress FindFromCoord(IMatrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
+    private MatrixAddress FindToCoord(IMatrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'E');
 
-        return startingPositions;
-    }
+    private static int StepCountTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to) =>
+        StepCountTo(matrix, new List<MatrixAddress> { from }, to);
 
-    private (MatrixAddress from, MatrixAddress to) FindFromAndTo(IMatrix<char> matrix)
-    {
-        var from = new MatrixAddress(0, 0);
-        var to = new MatrixAddress(0, 0);
-        foreach (var coord in matrix.Coords)
-        {
-            if (matrix.ReadValueAt(coord) == 'S')
-            {
-                matrix.WriteValueAt(coord, 'a');
-                from = coord;
-            }
-            if (matrix.ReadValueAt(coord) == 'E')
-            {
-                matrix.WriteValueAt(coord, 'z');
-                to = coord;
-            }
-        }
-
-        return (from, to);
-    }
-
-    public static int StepCountTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    private static int StepCountTo(IMatrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
-        var goal = coordCounts.FirstOrDefault(o => o.X == from.X && o.Y == from.Y);
+        var goal = coordCounts.FirstOrDefault(o => o.X == to.X && o.Y == to.Y);
         return goal?.Count ?? 0;
     }
-
-    private static IList<CoordCount> GetCoordCounts(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    
+    private static IList<CoordCount> GetCoordCounts(IMatrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
     {
-        var queue = new List<CoordCount> { new(to.X, to.Y, 0) };
+        var seen = from.ToDictionary(k => k, v => 0);
+        var queue = from.ToList();
         var index = 0;
-        while (index < queue.Count && !queue.Any(o => o.X == from.X && o.Y == from.Y))
+        while (index < queue.Count && !seen.ContainsKey(to))
         {
             var next = queue[index];
-            matrix.MoveTo(next.X, next.Y);
-            var currentValue = matrix.ReadValue();
-            var adjacentCoords = matrix.PerpendicularAdjacentCoords
-                .Where(o => currentValue - matrix.ReadValueAt(o) <= 1 && !queue.Any(q => q.X == o.X && q.Y == o.Y))
+            var count = seen[next];
+            var currentValue = matrix.ReadValueAt(next);
+            var adjacentCoords = matrix.PerpendicularAdjacentCoordsTo(next)
+                .Where(o => matrix.ReadValueAt(o) - currentValue <= 1 && !seen.ContainsKey(o))
                 .ToList();
-            var newCoordCounts = adjacentCoords.Select(o => new CoordCount(o.X, o.Y, next.Count + 1));
-            queue.AddRange(newCoordCounts);
+            queue.AddRange(adjacentCoords);
+            foreach (var adjacentCoord in adjacentCoords) 
+                seen[adjacentCoord] = count + 1;
             index++;
         }
 
-        return queue;
+        return queue.Select(o => new CoordCount(o, seen[o])).ToList();
     }
 }

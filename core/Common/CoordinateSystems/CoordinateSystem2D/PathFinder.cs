@@ -67,14 +67,20 @@ public static class PathFinder
 [DebuggerDisplay("{X},{Y},{Count}")]
 public class CoordCount
 {
-    public int X { get; }
-    public int Y { get; }
+    public MatrixAddress Coord { get; }
+    public int X => Coord.X;
+    public int Y => Coord.Y;
     public int Count { get; }
 
     public CoordCount(int x, int y, int count)
     {
-        X = x;
-        Y = y;
+        Coord = new MatrixAddress(x, y);
+        Count = count;
+    }
+
+    public CoordCount(MatrixAddress coord, int count)
+    {
+        Coord = coord;
         Count = count;
     }
 }

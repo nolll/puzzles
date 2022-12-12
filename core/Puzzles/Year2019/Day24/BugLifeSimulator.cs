@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2019.Day24;
 
 public class BugLifeSimulator
 {
-    private DynamicMatrix<char> _matrix;
+    private QuickDynamicMatrix<char> _matrix;
 
     public string String => string.Join("", _matrix.Values);
     private readonly IList<string> _previousStrings;
@@ -41,7 +40,7 @@ public class BugLifeSimulator
 
     private void NextIteration()
     {
-        var newMatrix = new DynamicMatrix<char>(1, 1);
+        var newMatrix = new QuickDynamicMatrix<char>(1, 1);
         for (var y = 0; y < _matrix.Height; y++)
         {
             for (var x = 0; x < _matrix.Width; x++)
@@ -87,9 +86,9 @@ public class BugLifeSimulator
         }
     }
 
-    private DynamicMatrix<char> BuildMatrix(string map)
+    private QuickDynamicMatrix<char> BuildMatrix(string map)
     {
-        var matrix = new DynamicMatrix<char>(1, 1);
+        var matrix = new QuickDynamicMatrix<char>(1, 1);
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

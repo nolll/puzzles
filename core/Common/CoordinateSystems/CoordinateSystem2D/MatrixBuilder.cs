@@ -18,6 +18,12 @@ public static class MatrixBuilder
         return BuildCharMatrix(new DynamicMatrix<char>(1, 1, defaultValue), rows);
     }
 
+    public static IMatrix<char> BuildQuickCharMatrix(string input, char defaultValue = default)
+    {
+        var rows = input.Trim().Split('\n');
+        return BuildCharMatrix(new QuickDynamicMatrix<char>(1, 1, defaultValue), rows);
+    }
+
     private static IMatrix<char> BuildCharMatrix(IMatrix<char> matrix, string[] rows)
     {
         var y = 0;

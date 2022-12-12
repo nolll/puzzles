@@ -3,48 +3,39 @@ using System.Linq;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class DynamicMatrix<T> : Base2DMatrix<T>, IMatrix<T>
+public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IMatrix<T>
 {
-    private readonly IList<IList<T>> _matrix;
+    private readonly IDictionary<MatrixAddress, T> _matrix;
+    private int _width;
+    private int _height;
 
-    public override IEnumerable<T> Values => _matrix.SelectMany(x => x).ToList();
-    public override int Height => _matrix.Count;
-    public override int Width => _matrix.Any() ? _matrix[0].Count : 0;
+    public override IEnumerable<T> Values => _matrix.Values;
+    public override int Width => _width;
+    public override int Height => _height;
 
-    public DynamicMatrix(int width = 1, int height = 1, T defaultValue = default)
+    public QuickDynamicMatrix(int width = 1, int height = 1, T defaultValue = default)
         : base(defaultValue)
     {
-        _matrix = BuildDynamicMatrix(width, height, defaultValue);
+        _width = 1;
+        _height = 1;
+        _matrix = new Dictionary<MatrixAddress, T>();
     }
 
     public override T ReadValueAt(int x, int y)
     {
-        return _matrix[y][x];
+        return _matrix.TryGetValue(new MatrixAddress(x, y), out var v)
+            ? v
+            : DefaultValue;
     }
 
     public override void WriteValueAt(int x, int y, T value)
     {
-        _matrix[y][x] = value;
+        _matrix[new MatrixAddress(x, y)] = value;
     }
-
-    private IList<IList<T>> BuildDynamicMatrix(int width, int height, T defaultValue)
+    
+    protected override IMatrix<T> Create(int width, int height, T defaultValue = default)
     {
-        var matrix = new List<IList<T>>();
-        for (var y = 0; y < height; y++)
-        {
-            var row = new List<T>();
-            for (var x = 0; x < width; x++)
-            {
-                row.Add(defaultValue);
-            }
-            matrix.Add(row);
-        }
-        return matrix;
-    }
-
-    protected override IMatrix<T> Create(int width, int height, T defaultValue)
-    {
-        return new DynamicMatrix<T>(width, height, DefaultValue);
+        return new QuickDynamicMatrix<T>(width, height, DefaultValue);
     }
 
     protected override void HandleExtend(MatrixAddress address)
@@ -100,36 +91,12 @@ public class DynamicMatrix<T> : Base2DMatrix<T>, IMatrix<T>
 
     private void AddRows(int numberOfRows, MatrixAddMode addMode)
     {
-        var width = Width;
-        for (var y = 0; y < numberOfRows; y++)
-        {
-            var row = new List<T>();
-            for (var x = 0; x < width; x++)
-            {
-                row.Add(DefaultValue);
-            }
-
-            if (addMode == MatrixAddMode.Prepend)
-                _matrix.Insert(0, row);
-            else
-                _matrix.Add(row);
-        }
+        _height += numberOfRows;
     }
 
     private void AddCols(int numberOfCols, MatrixAddMode addMode)
     {
-        var height = Height;
-        for (var y = 0; y < height; y++)
-        {
-            var row = _matrix[y];
-            for (var x = 0; x < numberOfCols; x++)
-            {
-                if (addMode == MatrixAddMode.Prepend)
-                    row.Insert(0, DefaultValue);
-                else
-                    row.Add(DefaultValue);
-            }
-        }
+        _width += numberOfCols;
     }
 
     public void ExtendAllDirections(int steps = 1)

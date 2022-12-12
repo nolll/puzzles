@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2016.Day13;
@@ -15,7 +14,7 @@ public class Maze
         _matrix = BuildMatrix(width, height, secretNumber);
     }
 
-    public int StepCountToTarget(int targetX, int targetY) => PathFinder.StepCountTo(_matrix, new MatrixAddress(1, 1), new MatrixAddress(targetX, targetY));
+    public int StepCountToTarget(int targetX, int targetY) => PathFinder.CachedStepCountTo(_matrix, new MatrixAddress(1, 1), new MatrixAddress(targetX, targetY));
     public int LocationCountAfter(int steps) => LocationCountAfter(new MatrixAddress(1, 1), steps);
     public string Print() => _matrix.Print();
 

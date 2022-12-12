@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
@@ -46,22 +47,20 @@ public class HillClimbing
     private static IList<CoordCount> GetCoordCounts(IMatrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
     {
         var seen = from.ToDictionary(k => k, v => 0);
-        var queue = from.ToList();
-        var index = 0;
-        while (index < queue.Count && !seen.ContainsKey(to))
+        var queue = new Queue<MatrixAddress>(from);
+        while (queue.Count > 0 && !seen.ContainsKey(to))
         {
-            var next = queue[index];
+            var next = queue.Dequeue();
             var count = seen[next];
-            var currentValue = matrix.ReadValueAt(next);
             var adjacentCoords = matrix.PerpendicularAdjacentCoordsTo(next)
-                .Where(o => matrix.ReadValueAt(o) - currentValue <= 1 && !seen.ContainsKey(o))
-                .ToList();
-            queue.AddRange(adjacentCoords);
-            foreach (var adjacentCoord in adjacentCoords) 
+                .Where(o => !seen.ContainsKey(o) && matrix.ReadValueAt(o) - matrix.ReadValueAt(next) <= 1);
+            foreach (var adjacentCoord in adjacentCoords)
+            {
+                queue.Enqueue(adjacentCoord);
                 seen[adjacentCoord] = count + 1;
-            index++;
+            }
         }
 
-        return queue.Select(o => new CoordCount(o, seen[o])).ToList();
+        return seen.Select(o => new CoordCount(o.Key, o.Value)).ToList();
     }
 }

@@ -82,7 +82,7 @@ public class DonutMazeSolver
                     var id = GetPortalDistanceId(a, b);
                     if (!connections.ContainsKey(id))
                     {
-                        var distance = PathFinder.StepCountTo(_map, a.Address, b.Address);
+                        var distance = PathFinder.CachedStepCountTo(_map, a.Address, b.Address);
                         if (distance > 0)
                         {
                             connections[id] = distance - 2;

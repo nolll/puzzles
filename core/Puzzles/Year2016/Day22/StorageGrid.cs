@@ -77,8 +77,8 @@ public class StorageGrid
         var topLeft = new MatrixAddress(0, 0);
         var topRight = new MatrixAddress(matrix.Width - 1, 0);
         var goal = new MatrixAddress(topRight.X - 1, topRight.Y);
-        var distance1 = PathFinder.StepCountTo(matrix, goal, startAddress);
-        var distance2 = PathFinder.StepCountTo(matrix, topLeft, goal);
+        var distance1 = PathFinder.CachedStepCountTo(matrix, startAddress, goal);
+        var distance2 = PathFinder.CachedStepCountTo(matrix, goal, topLeft);
         return distance1 + distance2 * 5 + 1;
     }
 

@@ -177,7 +177,7 @@ public class AirDuctNavigator
                 if(_paths.ContainsKey((location.Id, otherLocation.Id)) || _paths.ContainsKey((otherLocation.Id, location.Id)))
                     continue;
                     
-                var stepCountToLocation = PathFinder.QuickStepCountTo(_matrix, location.Address, otherLocation.Address);
+                var stepCountToLocation = PathFinder.CachedStepCountTo(_matrix, location.Address, otherLocation.Address);
                 var pathToLocation = new AirDuctPath(otherLocation, stepCountToLocation);
                 var pathBack = new AirDuctPath(location, stepCountToLocation);
                 _paths.Add((location.Id, otherLocation.Id), pathToLocation);

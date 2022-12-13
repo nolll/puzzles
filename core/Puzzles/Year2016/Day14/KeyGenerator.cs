@@ -14,6 +14,8 @@ public class KeyGenerator
     private readonly IDictionary<int, string> _hashes;
     private readonly Dictionary<byte, byte[]> _byteCache;
     private readonly Dictionary<int, bool> _fiveInARowCache;
+    private static readonly Regex RepeatingCharsRegex = new("(.)\\1{2,}");
+    private static readonly Regex FiveInARowRegex = new("(.)\\1{4,}");
 
     public KeyGenerator()
     {
@@ -55,10 +57,9 @@ public class KeyGenerator
         return false;
     }
 
-    public char? GetRepeatingChar(string hash)
+    public static char? GetRepeatingChar(string hash)
     {
-        var regex = new Regex("(.)\\1{2,}");
-        var match = regex.Match(hash);
+        var match = RepeatingCharsRegex.Match(hash);
         if (match.Success)
             return match.Value.First();
 
@@ -71,16 +72,17 @@ public class KeyGenerator
         while (count < 1000)
         {
             var index = fromIndex + count;
-            var hashedBytes = GetHash(salt, index, stretchCount);
                 
             if (!_fiveInARowCache.TryGetValue(index, out var hasFiveInARow))
             {
+                var hashedBytes = GetHash(salt, index, stretchCount);
                 hasFiveInARow = HashHasFiveInARow(hashedBytes);
                 _fiveInARowCache.Add(index, hasFiveInARow);
             }
                 
             if (hasFiveInARow)
             {
+                var hashedBytes = GetHash(salt, index, stretchCount);
                 if (HashHasFiveInARowOf(hashedBytes, searchFor))
                     return true;
             }
@@ -91,14 +93,13 @@ public class KeyGenerator
         return false;
     }
 
-    private bool HashHasFiveInARow(string hash)
+    private static bool HashHasFiveInARow(string hash)
     {
-        var regex = new Regex("(.)\\1{4,}");
-        var match = regex.Match(hash);
+        var match = FiveInARowRegex.Match(hash);
         return match.Success;
     }
 
-    public bool HashHasFiveInARowOf(string hash, string searchFor)
+    public static bool HashHasFiveInARowOf(string hash, string searchFor)
     {
         return hash.Contains(searchFor);
     }
@@ -151,15 +152,13 @@ public class KeyGenerator
         return hexBytes;
     }
 
-    private Dictionary<byte, byte[]> BuildByteCache()
+    private static Dictionary<byte, byte[]> BuildByteCache()
     {
         var cache = new Dictionary<byte, byte[]>();
         for (int i = byte.MinValue; i <= byte.MaxValue; i++)
         {
             var b = (byte) i;
-            var str = ByteConverter.ConvertToHexString(b);
-            var bytes = Encoding.ASCII.GetBytes(str);
-            cache.Add(b, bytes);
+            cache.Add(b, Encoding.ASCII.GetBytes(ByteConverter.ConvertToHexString(b)));
         }
 
         return cache;

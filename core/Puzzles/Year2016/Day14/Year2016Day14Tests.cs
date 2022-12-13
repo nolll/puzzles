@@ -43,7 +43,7 @@ public class Year2016Day14Tests
     public void RepeatedChars(string str, char? expected)
     {
         var generator = new KeyGenerator();
-        var c = generator.GetRepeatingChar(str);
+        var c = KeyGenerator.GetRepeatingChar(str);
 
         Assert.That(c, Is.EqualTo(expected));
     }
@@ -56,7 +56,7 @@ public class Year2016Day14Tests
     {
         var generator = new KeyGenerator();
         var searchFor = new string('a', 5);
-        var hasFiveInARow = generator.HashHasFiveInARowOf(str, searchFor);
+        var hasFiveInARow = KeyGenerator.HashHasFiveInARowOf(str, searchFor);
 
         Assert.That(hasFiveInARow, Is.EqualTo(expected));
     }

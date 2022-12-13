@@ -87,14 +87,9 @@ public class RadioisotopeFacility
             var counter = 1;
             while (id.Contains('G'))
             {
-                var gPos = id.IndexOf('G');
-                var n = id[gPos - 1];
-                var generatorId = string.Concat(n, 'G');
-                var newGeneratorId = string.Concat(counter, 'X');
-                id = id.Replace(generatorId, newGeneratorId);
-                var microchipId = string.Concat(n, 'M');
-                var newMicrochipId = string.Concat(counter, 'Y');
-                id = id.Replace(microchipId, newMicrochipId);
+                var n = id[id.IndexOf('G') - 1];
+                id = id.Replace(string.Concat(n, 'G'), string.Concat(counter, 'X'))
+                    .Replace(string.Concat(n, 'M'), string.Concat(counter, 'Y'));
                 counter++;
             }
 

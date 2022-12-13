@@ -5,20 +5,20 @@ namespace Core.Puzzles.Year2016.Day11;
 public abstract class RadioisotopeItem
 {
     public string Name { get; }
-    public abstract RadioisotopeType Type { get; }
+    public RadioisotopeType Type { get; }
+    public string Id { get; }
 
-    protected RadioisotopeItem(string name)
+    protected RadioisotopeItem(string name, RadioisotopeType type)
     {
         Name = name;
+        Type = type;
+        Id = BuildId();
     }
-
-    public string Id
+    
+    private string BuildId()
     {
-        get
-        {
-            var n = Name.ToUpper().First();
-            var t = Type.ToString().ToUpper().First();
-            return string.Concat(n, t);
-        }
+        var n = Name.ToUpper().First();
+        var t = Type.ToString().ToUpper().First();
+        return string.Concat(n, t);
     }
 }

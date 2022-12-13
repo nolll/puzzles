@@ -8,7 +8,7 @@ namespace Core.Puzzles.Year2016.Day11;
 
 public class RadioisotopeSimulator
 {
-    private readonly HashSet<string> _previousFacilities = new HashSet<string>();
+    private readonly HashSet<string> _previousFacilities = new();
 
     public int StepCount { get; }
 
@@ -25,8 +25,6 @@ public class RadioisotopeSimulator
         var newFacilities = new List<RadioisotopeFacility>();
         foreach (var facility in facilities)
         {
-            //Console.WriteLine(facility.Print());
-
             if (facility.ShouldMoveUp)
             {
                 var itemCombinations = CombinationGenerator.GetAllCombinationsMaxSize(facility.Floors[facility.ElevatorFloor].Items, 2);
@@ -41,10 +39,13 @@ public class RadioisotopeSimulator
                         f.Floors[newFloor].Items.Add(item);
                     }
 
-                    if (!AlreadyVisited(f) && f.IsValid)
+                    if (!AlreadyVisited(f))
                     {
-                        newFacilities.Add(f);
                         TrackVisit(f);
+                        if (f.IsValid)
+                        {
+                            newFacilities.Add(f);
+                        }
                     }
                 }
             }
@@ -60,10 +61,13 @@ public class RadioisotopeSimulator
                     f.Floors[oldFloor].Items.Remove(item);
                     f.Floors[newFloor].Items.Add(item);
 
-                    if (!AlreadyVisited(f) && f.IsValid)
+                    if (!AlreadyVisited(f))
                     {
-                        newFacilities.Add(f);
                         TrackVisit(f);
+                        if (f.IsValid)
+                        {
+                            newFacilities.Add(f);
+                        }
                     }
                 }
             }

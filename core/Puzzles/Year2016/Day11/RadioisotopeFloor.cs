@@ -6,7 +6,7 @@ namespace Core.Puzzles.Year2016.Day11;
 public class RadioisotopeFloor
 {
     public IList<RadioisotopeItem> Items { get; }
-    public string Id => string.Join('-', Items.Select(o => o.Id).OrderBy(o => o));
+    public string Id => string.Concat(Items.Select(o => o.Id).OrderBy(o => o));
 
     public RadioisotopeFloor(IList<RadioisotopeItem> items)
     {
@@ -21,14 +21,8 @@ public class RadioisotopeFloor
             var generators = Items.Where(o => o.Type == RadioisotopeType.Generator).ToList();
             if (!generators.Any())
                 return true;
-            foreach (var microchip in microchips)
-            {
-                var matchingGenerator = generators.FirstOrDefault(o => o.Name == microchip.Name);
-                if (matchingGenerator == null)
-                    return false;
-            }
 
-            return true;
+            return microchips.All(microchip => generators.Any(o => o.Name == microchip.Name));
         }
     }
 }

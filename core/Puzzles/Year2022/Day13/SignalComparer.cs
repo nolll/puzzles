@@ -1,21 +1,7 @@
 namespace Core.Puzzles.Year2022.Day13;
 
-public class SignalPair
+public static class SignalComparer
 {
-    public SignalItem Left { get; }
-    public SignalItem Right { get; }
-
-    public SignalPair(SignalItem left, SignalItem right)
-    {
-        Left = left;
-        Right = right;
-    }
-
-    public int Compare()
-    {
-        return Compare(Left, Right);
-    }
-
     public static int Compare(SignalItem left, SignalItem right)
     {
         if (left.IsValueItem && right.IsValueItem)

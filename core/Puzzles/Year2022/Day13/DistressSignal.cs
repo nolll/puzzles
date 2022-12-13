@@ -10,17 +10,16 @@ public class DistressSignal
     public int Part1(string input)
     {
         var lineGroups = PuzzleInputReader.ReadLineGroups(input);
-        var pairs = lineGroups.Select(o => ParsePair(o[0], o[1])).ToList();
-
-        var compares = pairs.Select(o => o.Compare()).ToList();
-
         var indexSum = 0;
-        for (var i = 0; i < pairs.Count; i++)
+        
+        for (var i = 0; i < lineGroups.Count; i++)
         {
-            var result = pairs[i].Compare();
-            //Console.WriteLine($"{pairs[i].Left.Print()} {pairs[i].Right.Print()} {result}");
+            var group = lineGroups[i];
+            var left = ParseSignalItem(group.First());
+            var right = ParseSignalItem(group.Last());
+            var result = SignalComparer.Compare(left, right);
 
-            if (compares[i] < 0)
+            if (result < 0)
                 indexSum += i + 1;
         }
 
@@ -31,14 +30,9 @@ public class DistressSignal
     {
         var lines = PuzzleInputReader.ReadLines(input, false);
         var items = lines.Select(ParseSignalItem).ToList();
-        var dividerItem1 = ParseSignalItem("[[2]]");
-        dividerItem1.IsDivider = true;
-        var dividerItem2 = ParseSignalItem("[[6]]");
-        dividerItem2.IsDivider = true;
-        items.Add(dividerItem1);
-        items.Add(dividerItem2);
-
-        items.Sort(SignalPair.Compare);
+        var dividerItems = CreateDividerItems();
+        items.AddRange(dividerItems);
+        items.Sort(SignalComparer.Compare);
 
         var indexProduct = 1;
         for (var i = 0; i < items.Count; i++)
@@ -50,40 +44,49 @@ public class DistressSignal
         return indexProduct;
     }
 
-    private SignalPair ParsePair(string first, string second)
+    private IEnumerable<SignalItem> CreateDividerItems()
     {
-        var a = ParseSignalItem(first);
-        var b = ParseSignalItem(second);
-        return new SignalPair(a, b);
+        yield return CreateDividerItem(2);
+        yield return CreateDividerItem(6);
     }
 
-    public SignalItem ParseSignalItem(string input)
+    private SignalItem CreateDividerItem(int id)
+    {
+        var dividerItem2 = ParseSignalItem($"[[{id}]]");
+        dividerItem2.IsDivider = true;
+        return dividerItem2;
+    }
+
+    public static SignalItem ParseSignalItem(string input)
     {
         var rootItem = new SignalItem(null);
         var item = rootItem;
-        var s = input.Substring(1, input.Length - 2).Replace("10", "A");
+        var s = input.Substring(1, input.Length - 2).Replace("10", "A"); // Replace double digit number with A to make parsing easier
 
-        for (var i = 0; i < s.Length; i++)
+        foreach (var c in s)
         {
-            if (s[i] == '[')
+            switch (c)
             {
-                var newItem = new SignalItem(item);
-                item.List.Add(newItem);
-                item = newItem;
-            }
-            else if (s[i] == ',')
-            {
-            }
-            else if (s[i] == ']')
-            {
-                item = item.Parent;
-            }
-            else
-            {
-                var newItem = new SignalItem(item);
-                var v = s[i] == 'A' ? 10 : int.Parse(s[i].ToString()); 
-                newItem.Value = v;
-                item.List.Add(newItem);
+                case '[':
+                {
+                    var newItem = new SignalItem(item);
+                    item.List.Add(newItem);
+                    item = newItem;
+                    break;
+                }
+                case ',':
+                    break;
+                case ']':
+                    item = item.Parent;
+                    break;
+                default:
+                {
+                    var newItem = new SignalItem(item);
+                    var v = c == 'A' ? 10 : int.Parse(c.ToString()); 
+                    newItem.Value = v;
+                    item.List.Add(newItem);
+                    break;
+                }
             }
         }
 

@@ -17,6 +17,6 @@ public class Year2022Day13 : Puzzle
         var signal = new DistressSignal();
         var result = signal.Part2(FileInput);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 19493);
     }
 }

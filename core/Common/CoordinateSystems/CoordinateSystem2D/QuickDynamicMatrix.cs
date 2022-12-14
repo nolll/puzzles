@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IMatrix<T>
+public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
 {
     private readonly IDictionary<MatrixAddress, T> _matrix;
     private int _width;

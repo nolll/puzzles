@@ -9,7 +9,7 @@ public class Year2022Day14 : Puzzle
         var fallingSand = new FallingSand();
         var result = fallingSand.Part1(FileInput);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 745);
     }
 
     public override PuzzleResult RunPart2()
@@ -17,6 +17,6 @@ public class Year2022Day14 : Puzzle
         var fallingSand = new FallingSand();
         var result = fallingSand.Part2(FileInput);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 27_551);
     }
 }

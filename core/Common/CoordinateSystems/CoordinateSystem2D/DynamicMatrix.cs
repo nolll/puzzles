@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class DynamicMatrix<T> : Base2DMatrix<T>, IMatrix<T>
+public class DynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
 {
     private readonly IList<IList<T>> _matrix;
 

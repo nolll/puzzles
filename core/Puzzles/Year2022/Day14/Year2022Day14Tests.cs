@@ -35,10 +35,7 @@ public class FallingSand
                 var minY = Math.Min(a.Y, b.Y);
                 var maxX = Math.Max(a.X, b.X);
                 var maxY = Math.Max(a.Y, b.Y);
-
-                var dx = a.X - b.X;
-                var dy = a.Y - b.Y;
-
+                
                 if (a.X == b.X)
                 {
                     var x = a.X;
@@ -66,7 +63,6 @@ public class FallingSand
         while (matrix.ReadValueAt(sandSource) == '.')
         {
             var currentSand = new MatrixAddress(500, 0);
-            var section = matrix.Slice(new MatrixAddress(480, 0));
 
             while (TryMove(matrix, currentSand, out var newSand))
             {
@@ -154,7 +150,6 @@ public class FallingSand
         while (matrix.ReadValueAt(sandSource) == '.')
         {
             var currentSand = new MatrixAddress(500, 0);
-            var section = matrix.Slice(new MatrixAddress(480, 0));
 
             while (TryMove(matrix, currentSand, out var newSand))
             {

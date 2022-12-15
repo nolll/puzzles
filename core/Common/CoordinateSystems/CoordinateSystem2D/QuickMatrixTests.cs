@@ -112,6 +112,29 @@ MNOP
     }
 
     [Test]
+    public void Copy()
+    {
+        const string input = """
+#..
+#..
+.#.
+""";
+
+        const string expected = """
+#..
+#..
+.#.
+""";
+
+        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
+        var expectedMatrix = MatrixBuilder.BuildQuickCharMatrix(expected);
+
+        matrix = matrix.Copy();
+
+        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+    }
+
+    [Test]
     public void RotateRight()
     {
         const string input = """

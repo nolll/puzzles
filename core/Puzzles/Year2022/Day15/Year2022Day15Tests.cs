@@ -8,7 +8,7 @@ public class Year2022Day15Tests
     public void Part1()
     {
         var zone = new BeaconZone();
-        var result = zone.Part1(Input, 10, true);
+        var result = zone.Part1(Input, 10, false);
 
         Assert.That(result, Is.EqualTo(26));
     }
@@ -17,7 +17,7 @@ public class Year2022Day15Tests
     public void Part2()
     {
         var zone = new BeaconZone();
-        var result = zone.Part2(Input, 20, true);
+        var result = zone.Part2(Input, 20);
 
         Assert.That(result, Is.EqualTo(56_000_011));
     }

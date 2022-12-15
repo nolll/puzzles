@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Strings;
@@ -24,8 +25,7 @@ public class BeaconZone
         var minx = pairs.Select(o => Math.Min(o.sensor.X, o.beacon.X) - beaconDistances[o.sensor]).Min();
         var maxx = pairs.Select(o => Math.Max(o.sensor.X, o.beacon.X) + beaconDistances[o.sensor]).Max();
 
-        if (print)
-            Print(pairs);
+        // todo: Use the same solution as for day 2. Get intervals for y here
 
         var count = 0;
         for (var x = minx; x <= maxx; x++)
@@ -52,12 +52,11 @@ public class BeaconZone
         return count;
     }
 
-    public int Part2(string input, int size, bool print)
+    public long Part2(string input, int size)
     {
         var lines = PuzzleInputReader.ReadLines(input, false);
         var pairs = lines.Select(ParsePair).ToList();
 
-        var beacons = pairs.Select(o => o.beacon).ToList();
         var beaconDistances = new Dictionary<MatrixAddress, int>();
         foreach (var (sensor, beacon) in pairs)
         {
@@ -65,51 +64,38 @@ public class BeaconZone
             beaconDistances.Add(sensor, distance);
         }
 
-        var minx = pairs.Select(o => Math.Min(o.sensor.X, o.beacon.X) - beaconDistances[o.sensor]).Min();
-        var maxx = pairs.Select(o => Math.Max(o.sensor.X, o.beacon.X) + beaconDistances[o.sensor]).Max();
-
-        if (print)
-            Print(pairs);
-
-        var count = 0;
-        const int y = 0;
-        for (var x = minx; x <= maxx; x++)
+        for (var y = 0; y < size; y++)
         {
-            var current = new MatrixAddress(x, y);
-
-            if (beacons.Contains(current))
+            var intervals = GetIntervalsForRow(y, 0, size, beaconDistances);
+            if (intervals.Count > 1)
             {
-                continue;
+                var x = intervals.First().End + 1;
+                return (long)x * 4_000_000 + y;
             }
-
-            var canContainBeacon = true;
-            foreach (var kv in beaconDistances)
-            {
-                var distanceToSensor = current.ManhattanDistanceTo(kv.Key);
-                if (distanceToSensor <= kv.Value)
-                    canContainBeacon = false;
-            }
-
-            if (!canContainBeacon)
-                count++;
         }
 
-        return count;
+        return 0;
     }
 
-    private void Print(List<(MatrixAddress sensor, MatrixAddress beacon)> pairs)
+    private List<Interval> GetIntervalsForRow(int row, int minX, int maxX, Dictionary<MatrixAddress, int> beaconDistances)
     {
-        var matrix = new QuickDynamicMatrix<char>(defaultValue: '.');
+        var intervals = new List<Interval>();
 
-        foreach (var (signal, beacon) in pairs)
+        foreach (var bd in beaconDistances)
         {
-            matrix.MoveTo(signal);
-            matrix.WriteValueAt(signal, 'S');
-            matrix.MoveTo(beacon);
-            matrix.WriteValueAt(beacon, 'B');
+            var beaconDistance = bd.Value;
+            var sensorY = bd.Key.Y;
+            var overlap = beaconDistance - Math.Abs(sensorY - row);
+            if (overlap > 0)
+            {
+                var sensorX = bd.Key.X;
+                var start = Math.Max(sensorX - overlap, minX);
+                var end = Math.Min(sensorX + overlap, maxX);
+                intervals.Add(new Interval(start, end));
+            }
         }
 
-        Console.WriteLine(matrix.Print());
+        return IntervalMerger.MergeIntervals(intervals);
     }
 
     private (MatrixAddress sensor, MatrixAddress beacon) ParsePair(string input)

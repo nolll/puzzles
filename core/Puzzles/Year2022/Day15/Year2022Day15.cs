@@ -6,7 +6,13 @@ public class Year2022Day15 : Puzzle
 {
     public override PuzzleResult RunPart1()
     {
-        return new EmptyPuzzleResult();
+        var zone = new BeaconZone();
+        var result = zone.Part1(FileInput, 2_000_000, false);
+
+        // guess 4580782, too low
+        // guess 4055737, too low
+
+        return new PuzzleResult(result);
     }
 
     public override PuzzleResult RunPart2()

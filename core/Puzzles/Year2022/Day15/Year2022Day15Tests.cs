@@ -7,9 +7,10 @@ public class Year2022Day15Tests
     [Test]
     public void Part1()
     {
-        var result = 0;
+        var zone = new BeaconZone();
+        var result = zone.Part1(Input, 10, true);
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(result, Is.EqualTo(26));
     }
 
     [Test]
@@ -20,6 +21,20 @@ public class Year2022Day15Tests
         Assert.That(result, Is.EqualTo(0));
     }
 
-    private const string Input = @"
-";
+    private const string Input = """
+Sensor at x=2, y=18: closest beacon is at x=-2, y=15
+Sensor at x=9, y=16: closest beacon is at x=10, y=16
+Sensor at x=13, y=2: closest beacon is at x=15, y=3
+Sensor at x=12, y=14: closest beacon is at x=10, y=16
+Sensor at x=10, y=20: closest beacon is at x=10, y=16
+Sensor at x=14, y=17: closest beacon is at x=10, y=16
+Sensor at x=8, y=7: closest beacon is at x=2, y=10
+Sensor at x=2, y=0: closest beacon is at x=2, y=10
+Sensor at x=0, y=11: closest beacon is at x=2, y=10
+Sensor at x=20, y=14: closest beacon is at x=25, y=17
+Sensor at x=17, y=20: closest beacon is at x=21, y=22
+Sensor at x=16, y=7: closest beacon is at x=15, y=3
+Sensor at x=14, y=3: closest beacon is at x=15, y=3
+Sensor at x=20, y=1: closest beacon is at x=15, y=3
+""";
 }

@@ -10,6 +10,11 @@ namespace Core.Common.CoordinateSystems.CoordinateSystem2D
         MatrixAddress Center { get; }
         IEnumerable<MatrixAddress> Coords { get; }
         MatrixDirection Direction { get; }
+        int XMin { get; }
+        int XMax { get; }
+        int YMin { get; }
+        int YMax { get; }
+        int Width { get; }
         int Height { get; }
         bool IsAtBottom { get; }
         bool IsAtLeftEdge { get; }
@@ -21,7 +26,6 @@ namespace Core.Common.CoordinateSystems.CoordinateSystem2D
         IList<T> PerpendicularAdjacentValuesTo(MatrixAddress address);
         MatrixAddress StartAddress { get; }
         IEnumerable<T> Values { get; }
-        int Width { get; }
 
         IMatrix<T> Copy();
         IList<MatrixAddress> FindAddresses(T value);

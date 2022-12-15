@@ -3,10 +3,14 @@ using System.Collections.Generic;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class StaticMatrix<T> : Base2DMatrix<T>, IMatrix<T>
+public class StaticMatrix<T> : Physical2DMatrix<T>, IMatrix<T>
 {
     private readonly T[,] _matrix;
 
+    public override int XMin { get; }
+    public override int XMax => XMin + Width - 1;
+    public override int YMin { get; }
+    public override int YMax => YMin + Height - 1;
     public override int Width { get; }
     public override int Height { get; }
 
@@ -17,6 +21,8 @@ public class StaticMatrix<T> : Base2DMatrix<T>, IMatrix<T>
         _matrix = BuildStaticMatrix(width, height, defaultValue);
         Width = width;
         Height = height;
+        XMin = 0;
+        YMin = 0;
     }
 
     public override IEnumerable<T> Values

@@ -16,9 +16,10 @@ public class Year2022Day15Tests
     [Test]
     public void Part2()
     {
-        var result = 0;
+        var zone = new BeaconZone();
+        var result = zone.Part2(Input, 20, true);
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(result, Is.EqualTo(56_000_011));
     }
 
     private const string Input = """

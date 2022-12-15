@@ -52,6 +52,51 @@ public class BeaconZone
         return count;
     }
 
+    public int Part2(string input, int size, bool print)
+    {
+        var lines = PuzzleInputReader.ReadLines(input, false);
+        var pairs = lines.Select(ParsePair).ToList();
+
+        var beacons = pairs.Select(o => o.beacon).ToList();
+        var beaconDistances = new Dictionary<MatrixAddress, int>();
+        foreach (var (sensor, beacon) in pairs)
+        {
+            var distance = sensor.ManhattanDistanceTo(beacon);
+            beaconDistances.Add(sensor, distance);
+        }
+
+        var minx = pairs.Select(o => Math.Min(o.sensor.X, o.beacon.X) - beaconDistances[o.sensor]).Min();
+        var maxx = pairs.Select(o => Math.Max(o.sensor.X, o.beacon.X) + beaconDistances[o.sensor]).Max();
+
+        if (print)
+            Print(pairs);
+
+        var count = 0;
+        const int y = 0;
+        for (var x = minx; x <= maxx; x++)
+        {
+            var current = new MatrixAddress(x, y);
+
+            if (beacons.Contains(current))
+            {
+                continue;
+            }
+
+            var canContainBeacon = true;
+            foreach (var kv in beaconDistances)
+            {
+                var distanceToSensor = current.ManhattanDistanceTo(kv.Key);
+                if (distanceToSensor <= kv.Value)
+                    canContainBeacon = false;
+            }
+
+            if (!canContainBeacon)
+                count++;
+        }
+
+        return count;
+    }
+
     private void Print(List<(MatrixAddress sensor, MatrixAddress beacon)> pairs)
     {
         var matrix = new QuickDynamicMatrix<char>(defaultValue: '.');

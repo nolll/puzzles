@@ -8,15 +8,15 @@ public class Year2022Day15 : Puzzle
     {
         var zone = new BeaconZone();
         var result = zone.Part1(FileInput, 2_000_000, false);
-
-        // guess 4580782, too low
-        // guess 4055737, too low
-
-        return new PuzzleResult(result);
+        
+        return new PuzzleResult(result, 5_108_096);
     }
 
     public override PuzzleResult RunPart2()
     {
-        return new EmptyPuzzleResult();
+        var zone = new BeaconZone();
+        var result = zone.Part2(FileInput, 4_000_000, false);
+
+        return new PuzzleResult(result);
     }
 }

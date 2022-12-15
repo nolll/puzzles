@@ -14,13 +14,13 @@ public static class MatrixBuilder
 
     public static IMatrix<char> BuildCharMatrix(string input, char defaultValue = default)
     {
-        var rows = input.Trim().Split('\n');
+        var rows = input.Trim().Split('\n').Select(o => o.Trim()).ToArray();
         return BuildCharMatrix(new DynamicMatrix<char>(1, 1, defaultValue), rows);
     }
 
     public static IMatrix<char> BuildQuickCharMatrix(string input, char defaultValue = default)
     {
-        var rows = input.Trim().Split('\n');
+        var rows = input.Trim().Split('\n').Select(o => o.Trim()).ToArray();
         return BuildCharMatrix(new QuickDynamicMatrix<char>(1, 1, defaultValue), rows);
     }
 

@@ -3,18 +3,24 @@ using System.Linq;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class DynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
+public class DynamicMatrix<T> : Physical2DMatrix<T>, IDynamicMatrix<T>
 {
     private readonly IList<IList<T>> _matrix;
 
     public override IEnumerable<T> Values => _matrix.SelectMany(x => x).ToList();
     public override int Height => _matrix.Count;
+    public override int XMin { get; }
+    public override int XMax => XMin + Width - 1;
+    public override int YMin { get; }
+    public override int YMax => YMin + Height - 1;
     public override int Width => _matrix.Any() ? _matrix[0].Count : 0;
 
     public DynamicMatrix(int width = 1, int height = 1, T defaultValue = default)
         : base(defaultValue)
     {
         _matrix = BuildDynamicMatrix(width, height, defaultValue);
+        XMin = 0;
+        YMin = 0;
     }
 
     public override T ReadValueAt(int x, int y)

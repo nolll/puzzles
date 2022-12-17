@@ -196,6 +196,8 @@ JK
         Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
     }
 
+    // todo: Fix slice tests. Something wrong with the constructor
+
     [Test]
     public void SliceFrom()
     {

@@ -75,7 +75,7 @@ public class Tetris
             matrix.MoveUp(shape.Height);
             var movedDown = true;
             var heightBefore = highestTop;
-
+            // here?
             while (movedDown)
             {
                 var move = moves[moveIndex % moves.Length];
@@ -109,14 +109,9 @@ public class Tetris
             }
 
             highestTop = Math.Min(highestTop, lastTopPos);
-
-            var heightAdded = highestTop - heightBefore;
-            heightsAdded.Add(heightAdded);
-
-            shape.Paint(matrix, shapeBottomLeft);
-
+            // or here
             var cacheKey = GetCacheKey(shape.GetType(), moveIndex % moves.Length, shapeBottomLeft.X);
-            if (seen.TryGetValue(cacheKey, out var tuple) && multiplier == 0)
+            if (seen.TryGetValue(cacheKey, out var tuple))
             {
                 var repeatLength = rockIndex - tuple.repeatIndex;
                 long added = 0;
@@ -126,25 +121,29 @@ public class Tetris
                     ii = i;
                     added += Math.Abs(heightsAdded[i]);
                 }
-                
-                repeatHeight = added;//matrix.YMax - highestTop - tuple.repeatHeight;
+
                 multiplier = rockCount / repeatLength;
                 rockIndex = multiplier * repeatLength;
 
-                var offset = rockCount - rockIndex;
+                var offset = rockCount - rockIndex + 2;
+
                 long theRest = 0;
-                for (var i = ii; i < ii + offset + 2; i++)
+                var s = ii - 1;
+                var e = s + offset;
+                for (var i = s; i < e; i++)
                 {
-                    theRest += Math.Abs(heightsAdded[i % heightsAdded.Count]);
+                    var index = i % heightsAdded.Count;
+                    theRest += Math.Abs(heightsAdded[index]);
                 }
 
-                return added * multiplier + theRest - 1;
+                return added * multiplier + theRest;
             }
-            else
-            {
-                seen.TryAdd(cacheKey, (rockIndex, matrix.YMax - highestTop));
-            }
-
+            var heightAdded = highestTop - heightBefore;
+            heightsAdded.Add(heightAdded);
+            // or here
+            shape.Paint(matrix, shapeBottomLeft);
+            // or here
+            seen.TryAdd(cacheKey, (rockIndex, matrix.YMax - highestTop));
             rockIndex++;
         }
 

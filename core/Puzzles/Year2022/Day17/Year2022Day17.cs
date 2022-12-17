@@ -17,6 +17,9 @@ public class Year2022Day17 : Puzzle
         var tetris = new Tetris();
         var result = tetris.Run(FileInput, 1_000_000_000_000);
 
+        // guess, too low:  1_568_513_119_532
+        // guess, too high: 1_587_931_034_478
+
         return new PuzzleResult(result);
     }
-}
+}   

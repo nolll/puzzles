@@ -2,14 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
-using Core.Puzzles.Year2022.Day02;
 
 namespace Core.Puzzles.Year2022.Day17;
 
 public class Tetris
 {
+    private static readonly TetrisShape[] Shapes = {
+        TetrisShape.HorizontalLine,
+        TetrisShape.Plus,
+        TetrisShape.ReversedL,
+        TetrisShape.VerticalLine,
+        TetrisShape.Square
+    };
+
     private const char Left = '<';
     private const char Right = '>';
+
+    // todo: Parse this instead of hardcoding the rules
     private const string ShapeData = """
 ####
 
@@ -29,138 +38,84 @@ public class Tetris
 ##
 ##
 """;
-
-    //private TetrisShape ParseShape(IList<string> lines)
-    //{
-    //    if (lines.Count == 1)
-    //        return TetrisShape.HorizontalLine;
-    //    if (lines.Count == 2)
-    //        return TetrisShape.Plus;
-    //    if (lines.Count == 4)
-    //        return TetrisShape.VerticalLine;
-    //    if (lines.Count == 3 && lines[1] == "###")
-    //        return TetrisShape.Plus;
-    //    return TetrisShape.ReversedL;
-    //}
+    
+    public long Part1(string input, long rockCount)
+    {
+        var heightDiffs = GetHeightDiffs(input, rockCount);
+        return heightDiffs.Sum();
+    }
 
     public long Run(string input, long rockCount)
     {
-        var shapes = new[]
-        {
-            TetrisShape.HorizontalLine,
-            TetrisShape.Plus,
-            TetrisShape.ReversedL,
-            TetrisShape.VerticalLine,
-            TetrisShape.Square
-        };
+        var inputLength = input.Length;
+        var heightDiffs = GetHeightDiffs(input, inputLength * 2).ToArray();
+        var cycle = CycleFinder.FindRepeatCycle(heightDiffs, 50, inputLength / 2);
 
+        var startCount = cycle.Index;
+        var middleCount = cycle.Length;
+        var startItems = heightDiffs.Take(startCount);
+        var middleItems = heightDiffs.Skip(startCount).Take(middleCount);
+        
+        var multiplier = rockCount / cycle.Length-1;
+        
+        var endCount = Math.Abs(rockCount - startCount - middleCount * multiplier);
+        var totalCount = startCount + middleCount * multiplier + endCount;
+        if (totalCount > rockCount)
+            endCount -= cycle.Length;
+        var endItems = heightDiffs.Skip(startCount + middleCount).Take((int)endCount);
+
+        var startSum = startItems.Sum();
+        var middleSum = middleItems.Sum();
+        var endSum = endItems.Sum();
+
+        return startSum + multiplier * middleSum + endSum;
+    }
+
+    private static List<int> GetHeightDiffs(string input, long rockCount)
+    {
         var moves = input.ToCharArray();
         var matrix = new QuickDynamicMatrix<char>(7, 1, '.');
         long rockIndex = 0;
         var moveIndex = 0;
-        var lastTopPos = 0;
+        var lastShapeTop = 0;
         var highestTop = 0;
-
-        long multiplier = 0;
-        long repeatHeight = 0;
-        var seen = new Dictionary<string, (long repeatIndex, int repeatHeight)>();
-        var heightsAdded = new List<long>();
+        var heightDiffs = new List<int>();
 
         while (rockIndex < rockCount)
         {
             var shapeBottomLeft = new MatrixAddress(2, highestTop - 3);
-            var shapeIndex = rockIndex % shapes.Length;
-            var shape = shapes[shapeIndex];
+            var shapeIndex = rockIndex % Shapes.Length;
+            var shape = Shapes[shapeIndex];
             matrix.MoveTo(shapeBottomLeft);
             matrix.MoveUp(shape.Height);
             var movedDown = true;
             var heightBefore = highestTop;
-            // here?
+
             while (movedDown)
             {
                 var move = moves[moveIndex % moves.Length];
 
-                if (move == Left)
-                {
-                    if (shape.CanMoveLeft(matrix, shapeBottomLeft))
-                    {
-                        shapeBottomLeft = new MatrixAddress(shapeBottomLeft.X - 1, shapeBottomLeft.Y);
-                    }
-                }
-                else
-                {
-                    if (shape.CanMoveRight(matrix, shapeBottomLeft))
-                    {
-                        shapeBottomLeft = new MatrixAddress(shapeBottomLeft.X + 1, shapeBottomLeft.Y);
-                    }
-                }
+                if (move == Left && shape.CanMoveLeft(matrix, shapeBottomLeft))
+                    shapeBottomLeft = new MatrixAddress(shapeBottomLeft.X - 1, shapeBottomLeft.Y);
+                else if (move == Right && shape.CanMoveRight(matrix, shapeBottomLeft))
+                    shapeBottomLeft = new MatrixAddress(shapeBottomLeft.X + 1, shapeBottomLeft.Y);
 
                 if (shape.CanMoveDown(matrix, shapeBottomLeft))
-                {
                     shapeBottomLeft = new MatrixAddress(shapeBottomLeft.X, shapeBottomLeft.Y + 1);
-                }
                 else
-                {
                     movedDown = false;
-                }
                 
-                lastTopPos = shapeBottomLeft.Y - shape.Height;
+                lastShapeTop = shapeBottomLeft.Y - shape.Height;
                 moveIndex++;
             }
 
-            highestTop = Math.Min(highestTop, lastTopPos);
-            // or here
-            var cacheKey = GetCacheKey(shape.GetType(), moveIndex % moves.Length, shapeBottomLeft.X);
-            if (seen.TryGetValue(cacheKey, out var tuple))
-            {
-                var repeatLength = rockIndex - tuple.repeatIndex;
-                long added = 0;
-                var ii = 0;
-                for (var i = (int)tuple.repeatIndex; i < rockIndex; i++)
-                {
-                    ii = i;
-                    added += Math.Abs(heightsAdded[i]);
-                }
-
-                multiplier = rockCount / repeatLength;
-                rockIndex = multiplier * repeatLength;
-
-                var offset = rockCount - rockIndex + 2;
-
-                long theRest = 0;
-                var s = ii - 1;
-                var e = s + offset;
-                for (var i = s; i < e; i++)
-                {
-                    var index = i % heightsAdded.Count;
-                    theRest += Math.Abs(heightsAdded[index]);
-                }
-
-                return added * multiplier + theRest;
-            }
+            highestTop = Math.Min(highestTop, lastShapeTop);
             var heightAdded = highestTop - heightBefore;
-            heightsAdded.Add(heightAdded);
-            // or here
+            heightDiffs.Add(Math.Abs(heightAdded));
             shape.Paint(matrix, shapeBottomLeft);
-            // or here
-            seen.TryAdd(cacheKey, (rockIndex, matrix.YMax - highestTop));
             rockIndex++;
         }
 
-        var result = matrix.YMax - highestTop;
-        
-        return result + multiplier * repeatHeight;
-    }
-
-    private string PrintTempMatrix(IMatrix<char> matrix, TetrisShape shape, MatrixAddress bottomLeft)
-    {
-        var copy = matrix.Copy();
-        shape.Paint(copy, bottomLeft);
-        return copy.Print();
-    }
-
-    private string GetCacheKey(Type type, int moveIndex, int x)
-    {
-        return $"{type.Name}|{moveIndex}|{x}";
+        return heightDiffs;
     }
 }

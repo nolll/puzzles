@@ -77,7 +77,6 @@ public class Year2022Day16Tests
         }
     }
 
-
     [Test]
     public void Part1()
     {

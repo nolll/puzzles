@@ -6,11 +6,17 @@ public class Year2022Day18 : Puzzle
 {
     public override PuzzleResult RunPart1()
     {
-        return new EmptyPuzzleResult();
+        var lavaCubes = new LavaCubes();
+        var result = lavaCubes.Part1(FileInput);
+
+        return new PuzzleResult(result, 4444);
     }
 
     public override PuzzleResult RunPart2()
     {
-        return new EmptyPuzzleResult();
+        var lavaCubes = new LavaCubes();
+        var result = lavaCubes.Part2(FileInput);
+
+        return new PuzzleResult(result, 2530);
     }
 }

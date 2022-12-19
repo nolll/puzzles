@@ -14,6 +14,15 @@ public class Year2022Day16Tests
         Assert.That(result, Is.EqualTo(1651));
     }
 
+    [Test]
+    public void Part1Try2()
+    {
+        var pipes = new VolcanicPipes();
+        var result = pipes.Part1Try2(Input);
+
+        Assert.That(result, Is.EqualTo(1651));
+    }
+
     //[Test]
     //public void Part2()
     //{

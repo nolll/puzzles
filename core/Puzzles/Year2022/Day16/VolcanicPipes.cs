@@ -4,10 +4,87 @@ using System.Linq;
 
 namespace Core.Puzzles.Year2022.Day16;
 
+public class ValveState
+{
+    public string Valve { get; }
+    public List<string> OpenValves { get; }
+    public List<string> ClosedValves { get; }
+    public int Time { get; }
+    public int Pressure { get; }
+    public string Id { get; }
+    public string Moves { get; }
+
+    public ValveState(string valve, List<string> openValves, List<string> closedValves, int time, int pressure, string moves)
+    {
+        Valve = valve;
+        OpenValves = openValves;
+        ClosedValves = closedValves;
+        Time = time;
+        Pressure = pressure;
+        Moves = moves;
+        Id = $"{valve}--{string.Join(',', closedValves)}";
+    }
+
+    public bool IsOpen => !IsClosed;
+    public bool IsClosed => ClosedValves.Contains(Valve);
+}
+
 public class VolcanicPipes
 {
     private const int TotalTime = 30;
     private readonly Dictionary<string, int> _seen = new();
+
+    public long Part1Try2(string input)
+    {
+        var data = new ValveData(input);
+        var valves = data.Valves;
+        var rates = data.Rates;
+        var connections = data.Connections;
+
+        var queue = new Queue<ValveState>();
+        var initial = new ValveState("AA", new List<string>(), data.Valves.Where(o => data.Rates[o] > 0).ToList(), 30, 0, "AA");
+        queue.Enqueue(initial);
+        var seen = new Dictionary<string, ValveState>();
+        var best = initial;
+
+        while (queue.Count > 0)
+        {
+            var state = queue.Dequeue();
+            if (state.Time == 0)
+                continue;
+
+            if (seen.TryGetValue(state.Id, out var seenState) && seenState.Time > state.Time)
+                continue;
+
+            seen[state.Id] = state;
+
+            if (state.Pressure > best.Pressure)
+                best = state;
+
+            if (state.IsClosed)
+            {
+                var newOpenValves = state.OpenValves.ToList();
+                newOpenValves.Add(state.Valve);
+                var newClosedValves = state.ClosedValves.Where(o => o != state.Valve).ToList();
+                newClosedValves.Add(state.Valve);
+                var newPressure = state.Pressure + state.OpenValves.Select(o => rates[o]).Sum();
+                var nextState = new ValveState(state.Valve, newOpenValves, newClosedValves, state.Time - 1, newPressure, $"state.Moves,{state.Valve}.open");
+                queue.Enqueue(nextState);
+            }
+
+            foreach (var connection in connections[state.Valve])
+            {
+                var newOpenValves = state.OpenValves.ToList();
+                var newClosedValves = state.ClosedValves.ToList();
+                var newPressure = state.Pressure + newOpenValves.Select(o => rates[o]).Sum();
+                var nextState = new ValveState(connection.Valve, newOpenValves, newClosedValves, state.Time - 1, newPressure, $"state.Moves,{connection.Valve}");
+                queue.Enqueue(nextState);
+            }
+        }
+
+        Console.WriteLine(best.Moves);
+        return best.Pressure;
+    }
 
     public long Part1(string input)
     {
@@ -19,7 +96,7 @@ public class VolcanicPipes
         return maxPressure;
     }
 
-    private (long,string) GetMaxPressure(
+    private (long, string) GetMaxPressure(
         List<string> allValves,
         Dictionary<string, int> rates,
         Dictionary<string, List<ValveConnection>> connections)

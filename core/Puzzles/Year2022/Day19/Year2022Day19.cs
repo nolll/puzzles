@@ -6,7 +6,10 @@ public class Year2022Day19 : Puzzle
 {
     public override PuzzleResult RunPart1()
     {
-        return new EmptyPuzzleResult();
+        var factory = new RobotFactory();
+        var result = factory.Part1(FileInput);
+
+        return new PuzzleResult(result);
     }
 
     public override PuzzleResult RunPart2()

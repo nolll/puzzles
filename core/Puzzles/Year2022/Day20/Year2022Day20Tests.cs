@@ -8,7 +8,7 @@ public class Year2022Day20Tests
     public void Part1()
     {
         var puzzle = new Year2022Day20();
-        var result = puzzle.Run(Input, 1, 1);
+        var result = Year2022Day20.Run(Input, 1, 1);
 
         Assert.That(result, Is.EqualTo(3));
     }
@@ -17,7 +17,7 @@ public class Year2022Day20Tests
     public void Part2()
     {
         var puzzle = new Year2022Day20();
-        var result = puzzle.Run(Input, 811_589_153, 10);
+        var result = Year2022Day20.Run(Input, 811_589_153, 10);
 
         Assert.That(result, Is.EqualTo(1623178306));
     }

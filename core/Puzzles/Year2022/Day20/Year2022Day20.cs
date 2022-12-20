@@ -23,7 +23,7 @@ public class Year2022Day20 : Puzzle
         return new PuzzleResult(result, 4_148_032_160_983);
     }
 
-    public long Run(string input, long multiplier, int iterationCount)
+    public static long Run(string input, long multiplier, int iterationCount)
     {
         var numbers = PuzzleInputReader.ReadLines(input, false).Select(s => long.Parse(s) * multiplier).ToList();
 
@@ -45,49 +45,21 @@ public class Year2022Day20 : Puzzle
                 var currentNode = set[i];
                 var steps = currentNode.Value % (numbers.Count - 1);
 
-                if (steps == 0)
-                    continue;
-
-                if (steps > 0)
+                for (var j = 0; j < Math.Abs(steps); j++)
                 {
-                    for (var j = 0; j < steps; j++)
-                    {
-                        var value = currentNode.Value;
-                        var nextNode = currentNode.NextOrFirst();
-                        list.Remove(currentNode);
-                        currentNode = list.AddAfter(nextNode, value);
-                    }
-                }
-                else
-                {
-                    for (var j = 0; j < Math.Abs(steps); j++)
-                    {
-                        var value = currentNode.Value;
-                        var nextNode = currentNode.PreviousOrLast();
-                        list.Remove(currentNode);
-                        currentNode = list.AddBefore(nextNode, value);
-                    }
+                    var value = currentNode.Value;
+                    var nextNode = steps > 0 ? currentNode.NextOrFirst() : currentNode.PreviousOrLast();
+                    list.Remove(currentNode);
+                    currentNode = steps > 0 ? list.AddAfter(nextNode, value) : list.AddBefore(nextNode, value);
                 }
 
                 set[i] = currentNode;
             }
         }
 
-        var z = list.Find(0);
-        var listFromZero = new long[list.Count];
-        var c = z;
-        for (var i = 0; i < list.Count; i++)
-        {
-            listFromZero[i] = c?.Value ?? 0;
-            c = c.NextOrFirst();
-        }
+        var array = list.ToList();
+        var offset = array.IndexOf(0);
 
-        long sum = 0;
-        for (var i = 1; i <= 3; i += 1)
-        {
-            sum += listFromZero[i * 1000 % listFromZero.Length];
-        }
-        
-        return sum;
+        return new[] { 1, 2, 3 }.Select(o => array[offset + o * 1000 % array.Count]).Sum();
     }
 }

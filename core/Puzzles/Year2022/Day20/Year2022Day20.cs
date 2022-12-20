@@ -43,10 +43,8 @@ public class Year2022Day20 : Puzzle
             for (var i = 0; i < numbers.Count; i++)
             {
                 var currentNode = set[i];
-                var steps = Math.Abs(currentNode.Value) >= numbers.Count
-                    ? currentNode.Value % (numbers.Count - 1)
-                    : currentNode.Value;
-                
+                var steps = currentNode.Value % (numbers.Count - 1);
+
                 if (steps == 0)
                     continue;
 

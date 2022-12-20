@@ -11,5 +11,6 @@ public record FactoryState(
     int ObsidianCount,
     int GeodeCount)
 {
+    public int RobotCount => OreRobotCount + ClayRobotCount + ObsidianRobotCount + GeodeRobotCount;
     public string CacheKey => $"{OreRobotCount},{ClayRobotCount},{ObsidianRobotCount},{GeodeRobotCount},{OreCount},{ClayCount},{ObsidianCount},{GeodeCount}";
 }

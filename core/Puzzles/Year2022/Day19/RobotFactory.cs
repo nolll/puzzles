@@ -12,7 +12,7 @@ public class RobotFactory
     {
         var lines = PuzzleInputReader.ReadLines(input, false);
         var blueprints = lines.Select(ParseBlueprint);
-        var qualityLevels = blueprints.Select(GetQualityLevel);
+        var qualityLevels = blueprints.Select(GetQualityLevel).ToList();
 
         return qualityLevels.Sum();
     }
@@ -103,7 +103,9 @@ public class RobotFactory
                 queue.Enqueue(newState);
             }
 
-            queue.Enqueue(state);
+            var robotsWereMade = canMakeOreRobot || canMakeClayRobot || canMakeObsidianRobot || canMakeGeodeRobot;
+            if(!robotsWereMade)
+                queue.Enqueue(state);
         }
 
         return best;

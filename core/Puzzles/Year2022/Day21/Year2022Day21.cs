@@ -61,7 +61,7 @@ public class Year2022Day21 : Puzzle
             }
             else if (actionParts[1] == "/")
             {
-                monkeys.Add(name, new Part1DivisionMonkey(monkeys, actionParts[0], actionParts[2]));
+                monkeys.Add(name, new DivisionMonkey(monkeys, actionParts[0], actionParts[2]));
             }
         }
 

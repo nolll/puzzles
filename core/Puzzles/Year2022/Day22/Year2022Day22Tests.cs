@@ -16,9 +16,10 @@ public class Year2022Day22Tests
     [Test]
     public void Part2()
     {
-        var result = 0;
+        var puzzle = new Year2022Day22();
+        var result = puzzle.Part2(Input);
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(result, Is.EqualTo(5031));
     }
 
     private const string Input = """

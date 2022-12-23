@@ -16,6 +16,40 @@ public class Year2022Day23 : Puzzle
     private readonly (int x, int y) _southWest = (-1, 1);
     private readonly (int x, int y) _west = (-1, 0);
     private readonly (int x, int y) _northWest = (-1, -1);
+    private readonly List<List<(int x, int y)>> _searchDeltas;
+    private readonly List<(int x, int y)> _searchResults;
+    private readonly List<(int x, int y)> _deltas;
+
+    public Year2022Day23()
+    {
+        _searchDeltas = new List<List<(int x, int y)>>
+        {
+            new() { _north, _northWest, _northEast },
+            new() { _south, _southWest, _southEast },
+            new() { _west, _northWest, _southWest },
+            new() { _east, _northEast, _southEast }
+        };
+
+        _searchResults = new List<(int x, int y)>
+        {
+            _north,
+            _south,
+            _west,
+            _east
+        };
+
+        _deltas = new List<(int x, int y)>
+        {
+            _north,
+            _northEast,
+            _east,
+            _southEast,
+            _south,
+            _southWest,
+            _west,
+            _northWest,
+        };
+    }
 
     public override PuzzleResult RunPart1()
     {
@@ -24,33 +58,19 @@ public class Year2022Day23 : Puzzle
         return new PuzzleResult(emptyCount, 4181);
     }
 
-    public override PuzzleResult RunPart2()
-    {
-        var (_, endRound) = Run(FileInput);
+    //public override PuzzleResult RunPart2()
+    //{
+    //    var (_, endRound) = Run(FileInput);
 
-        return new PuzzleResult(endRound, 973);
-    }
+    //    return new PuzzleResult(endRound, 973);
+    //}
 
     public (int emptyCount, int endRound) Run(string input, int rounds = int.MaxValue)
     {
         var matrix = (IDynamicMatrix<char>)MatrixBuilder.BuildCharMatrix(input, '.');
         matrix.ExtendAllDirections(100);
         var elfs = matrix.Coords.Where(o => matrix.ReadValueAt(o) == '#').ToArray();
-        var searchDeltas = new List<List<(int x, int y)>>
-        {
-            new() { _north, _northWest, _northEast },
-            new() { _south, _southWest, _southEast },
-            new() { _west, _northWest, _southWest },
-            new() { _east, _northEast, _southEast }
-        };
-
-        var searchResults = new List<(int x, int y)>
-        {
-            _north,
-            _south,
-            _west,
-            _east
-        };
+        var elfSet = matrix.Coords.Where(o => matrix.ReadValueAt(o) == '#').ToHashSet();
 
         var startDeltaIndex = 0;
         var round = 0;
@@ -58,29 +78,35 @@ public class Year2022Day23 : Puzzle
         while(round < rounds)
         {
             var targets = new MatrixAddress[elfs.Length];
+            var targetDictionary = new Dictionary<MatrixAddress, MatrixAddress>();
             for (var j = 0; j < elfs.Length; j++)
             {
-                var needsToMove = matrix.AllAdjacentValuesTo(elfs[j]).Any(o => o == '#');
+                var elf = elfs[j];
+                var needsToMove = HasNeighbors(elfSet, elf);
+                //var needsToMove = matrix.AllAdjacentValuesTo(elfs[j]).Any(o => o == '#');
                 if (!needsToMove)
                     continue;
 
-                for (var m = startDeltaIndex; m < searchDeltas.Count + startDeltaIndex; m++)
+                for (var m = startDeltaIndex; m < _searchDeltas.Count + startDeltaIndex; m++)
                 {
-                    var deltaIndex = m % searchDeltas.Count;
+                    var deltaIndex = m % _searchDeltas.Count;
                     var foundElf = false;
-                    for (var k = 0; k < searchDeltas[deltaIndex].Count; k++)
+                    for (var k = 0; k < _searchDeltas[deltaIndex].Count; k++)
                     {
-                        var delta = searchDeltas[deltaIndex][k];
-                        var searchAddress = new MatrixAddress(elfs[j].X + delta.x, elfs[j].Y + delta.y);
-                        if (!matrix.IsOutOfRange(searchAddress) && matrix.ReadValueAt(searchAddress) == '#')
+                        var delta = _searchDeltas[deltaIndex][k];
+                        var searchAddress = new MatrixAddress(elf.X + delta.x, elf.Y + delta.y);
+                        if (elfSet.Contains(searchAddress))
                             foundElf = true;
+                        //if (!matrix.IsOutOfRange(searchAddress) && matrix.ReadValueAt(searchAddress) == '#')
+                        //    foundElf = true;
                     }
 
                     if (!foundElf)
                     {
-                        var selectedDelta = searchResults[deltaIndex];
-                        var target = new MatrixAddress(elfs[j].X + selectedDelta.x, elfs[j].Y + selectedDelta.y);
+                        var selectedDelta = _searchResults[deltaIndex];
+                        var target = new MatrixAddress(elf.X + selectedDelta.x, elf.Y + selectedDelta.y);
                         targets[j] = target;
+                        targetDictionary[elf] = target;
                         break;
                     }
                 }
@@ -100,15 +126,13 @@ public class Year2022Day23 : Puzzle
                 if (same.Count() == 1)
                 {
                     var from = elfs[j];
-                    matrix.MoveTo(from);
-                    matrix.WriteValueAt(from, '.');
                     elfs[j] = to;
-                    matrix.MoveTo(to);
-                    matrix.WriteValue('#');
+                    elfSet.Remove(from);
+                    elfSet.Add(to);
                 }
             }
 
-            startDeltaIndex = (startDeltaIndex + 1) % searchDeltas.Count;
+            startDeltaIndex = (startDeltaIndex + 1) % _searchDeltas.Count;
             round++;
         }
 
@@ -123,5 +147,29 @@ public class Year2022Day23 : Puzzle
         var emptyCount = area - elfs.Length;
 
         return (emptyCount, round);
+    }
+
+    private bool HasNeighbors(HashSet<MatrixAddress> elfs, MatrixAddress elf)
+    {
+        foreach (var delta in _deltas)
+        {
+            var neighbor = new MatrixAddress(elf.X + delta.x, elf.Y + delta.y);
+            if (elfs.Contains(neighbor))
+                return true;
+        }
+
+        return false;
+    }
+
+    private string Print(HashSet<MatrixAddress> coords)
+    {
+        var matrix = new QuickDynamicMatrix<char>(1, 1, '.');
+        foreach (var coord in coords)
+        {
+            matrix.MoveTo(coord);
+            matrix.WriteValue('#');
+        }
+
+        return matrix.Print();
     }
 }

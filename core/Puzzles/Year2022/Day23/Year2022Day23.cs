@@ -8,6 +8,20 @@ namespace Core.Puzzles.Year2022.Day23;
 
 public class Year2022Day23 : Puzzle
 {
+    public override PuzzleResult RunPart1()
+    {
+        var (emptyCount, _) = Run(FileInput, 10);
+
+        return new PuzzleResult(emptyCount, 4181);
+    }
+
+    public override PuzzleResult RunPart2()
+    {
+        var (_, endRound) = Run(FileInput);
+
+        return new PuzzleResult(endRound, 973);
+    }
+
     private readonly (int x, int y) _north = (0, -1);
     private readonly (int x, int y) _northEast = (1, -1);
     private readonly (int x, int y) _east = (1, 0);
@@ -51,39 +65,22 @@ public class Year2022Day23 : Puzzle
         };
     }
 
-    public override PuzzleResult RunPart1()
-    {
-        var (emptyCount, _) = Run(FileInput, 10);
-
-        return new PuzzleResult(emptyCount, 4181);
-    }
-
-    //public override PuzzleResult RunPart2()
-    //{
-    //    var (_, endRound) = Run(FileInput);
-
-    //    return new PuzzleResult(endRound, 973);
-    //}
-
     public (int emptyCount, int endRound) Run(string input, int rounds = int.MaxValue)
     {
         var matrix = (IDynamicMatrix<char>)MatrixBuilder.BuildCharMatrix(input, '.');
-        matrix.ExtendAllDirections(100);
-        var elfs = matrix.Coords.Where(o => matrix.ReadValueAt(o) == '#').ToArray();
-        var elfSet = matrix.Coords.Where(o => matrix.ReadValueAt(o) == '#').ToHashSet();
+        matrix.ExtendAllDirections();
+        var elves = matrix.Coords.Where(o => matrix.ReadValueAt(o) == '#').ToHashSet();
 
         var startDeltaIndex = 0;
         var round = 0;
 
         while(round < rounds)
         {
-            var targets = new MatrixAddress[elfs.Length];
-            var targetDictionary = new Dictionary<MatrixAddress, MatrixAddress>();
-            for (var j = 0; j < elfs.Length; j++)
+            var targets = new Dictionary<MatrixAddress, MatrixAddress>();
+
+            foreach (var elf in elves)
             {
-                var elf = elfs[j];
-                var needsToMove = HasNeighbors(elfSet, elf);
-                //var needsToMove = matrix.AllAdjacentValuesTo(elfs[j]).Any(o => o == '#');
+                var needsToMove = HasNeighbors(elves, elf);
                 if (!needsToMove)
                     continue;
 
@@ -95,40 +92,37 @@ public class Year2022Day23 : Puzzle
                     {
                         var delta = _searchDeltas[deltaIndex][k];
                         var searchAddress = new MatrixAddress(elf.X + delta.x, elf.Y + delta.y);
-                        if (elfSet.Contains(searchAddress))
+                        if (elves.Contains(searchAddress))
                             foundElf = true;
-                        //if (!matrix.IsOutOfRange(searchAddress) && matrix.ReadValueAt(searchAddress) == '#')
-                        //    foundElf = true;
                     }
 
                     if (!foundElf)
                     {
                         var selectedDelta = _searchResults[deltaIndex];
                         var target = new MatrixAddress(elf.X + selectedDelta.x, elf.Y + selectedDelta.y);
-                        targets[j] = target;
-                        targetDictionary[elf] = target;
+                        targets[elf] = target;
                         break;
                     }
                 }
             }
 
-            if (targets.All(o => o == null))
+            if (!targets.Any())
             {
                 round++;
                 break;
             }
 
-            for (var j = 0; j < elfs.Length; j++)
+            foreach (var elf in elves.ToList())
             {
-                var to = targets[j];
-                var same = targets.Where(o => o != null).Where(o => o.Equals(to));
+                if (!targets.TryGetValue(elf, out var to))
+                    continue;
 
-                if (same.Count() == 1)
+                var moreThanOneMovingToSameTarget = targets.Values.Count(o => o.Equals(to)) > 1;
+
+                if (!moreThanOneMovingToSameTarget)
                 {
-                    var from = elfs[j];
-                    elfs[j] = to;
-                    elfSet.Remove(from);
-                    elfSet.Add(to);
+                    elves.Remove(elf);
+                    elves.Add(to);
                 }
             }
 
@@ -136,15 +130,16 @@ public class Year2022Day23 : Puzzle
             round++;
         }
 
-        var minX = elfs.Select(o => o.X).Min();
-        var minY = elfs.Select(o => o.Y).Min();
-        var maxX = elfs.Select(o => o.X).Max();
-        var maxY = elfs.Select(o => o.Y).Max();
+        var minX = elves.Select(o => o.X).Min();
+        var minY = elves.Select(o => o.Y).Min();
+        var maxX = elves.Select(o => o.X).Max();
+        var maxY = elves.Select(o => o.Y).Max();
+        var elfCount = elves.Count;
 
         var width = maxX - minX + 1;
         var height = maxY - minY + 1;
         var area = width * height;
-        var emptyCount = area - elfs.Length;
+        var emptyCount = area - elfCount;
 
         return (emptyCount, round);
     }

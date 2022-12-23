@@ -25,21 +25,13 @@ public class Year2022Day23Tests
     }
 
     [Test]
-    public void Part1LargeWithoutRoundCount()
+    public void Part2()
     {
         var puzzle = new Year2022Day23();
         var (emptyCount, endRound) = puzzle.Run(LargeInput);
 
         Assert.That(emptyCount, Is.EqualTo(146));
         Assert.That(endRound, Is.EqualTo(20));
-    }
-
-    [Test]
-    public void Part2()
-    {
-        var result = 0;
-
-        Assert.That(result, Is.EqualTo(0));
     }
 
     private const string SmallInput = """

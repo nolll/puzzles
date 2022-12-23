@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
+using Core.Common.Strings;
 using Core.Platform;
 
 namespace Core.Puzzles.Year2022.Day23;
@@ -67,9 +67,7 @@ public class Year2022Day23 : Puzzle
 
     public (int emptyCount, int endRound) Run(string input, int rounds = int.MaxValue)
     {
-        var matrix = (IDynamicMatrix<char>)MatrixBuilder.BuildCharMatrix(input, '.');
-        matrix.ExtendAllDirections();
-        var elves = matrix.Coords.Where(o => matrix.ReadValueAt(o) == '#').ToHashSet();
+        var elves = ParseElves(input);
 
         var startDeltaIndex = 0;
         var round = 0;
@@ -77,6 +75,7 @@ public class Year2022Day23 : Puzzle
         while(round < rounds)
         {
             var targets = new Dictionary<MatrixAddress, MatrixAddress>();
+            var targetCount = new Dictionary<MatrixAddress, int>();
 
             foreach (var elf in elves)
             {
@@ -90,17 +89,19 @@ public class Year2022Day23 : Puzzle
                     var foundElf = false;
                     for (var k = 0; k < _searchDeltas[deltaIndex].Count; k++)
                     {
-                        var delta = _searchDeltas[deltaIndex][k];
-                        var searchAddress = new MatrixAddress(elf.X + delta.x, elf.Y + delta.y);
+                        var (dx, dy) = _searchDeltas[deltaIndex][k];
+                        var searchAddress = new MatrixAddress(elf.X + dx, elf.Y + dy);
                         if (elves.Contains(searchAddress))
                             foundElf = true;
                     }
 
                     if (!foundElf)
                     {
-                        var selectedDelta = _searchResults[deltaIndex];
-                        var target = new MatrixAddress(elf.X + selectedDelta.x, elf.Y + selectedDelta.y);
+                        var (dx, dy) = _searchResults[deltaIndex];
+                        var target = new MatrixAddress(elf.X + dx, elf.Y + dy);
                         targets[elf] = target;
+                        if (!targetCount.TryAdd(target, 1))
+                            targetCount[target]++;
                         break;
                     }
                 }
@@ -117,9 +118,7 @@ public class Year2022Day23 : Puzzle
                 if (!targets.TryGetValue(elf, out var to))
                     continue;
 
-                var moreThanOneMovingToSameTarget = targets.Values.Count(o => o.Equals(to)) > 1;
-
-                if (!moreThanOneMovingToSameTarget)
+                if (targetCount[to] == 1)
                 {
                     elves.Remove(elf);
                     elves.Add(to);
@@ -142,6 +141,23 @@ public class Year2022Day23 : Puzzle
         var emptyCount = area - elfCount;
 
         return (emptyCount, round);
+    }
+
+    private HashSet<MatrixAddress> ParseElves(string input)
+    {
+        var elves = new HashSet<MatrixAddress>();
+        var lines = PuzzleInputReader.ReadLines(input);
+        for (var y = 0; y < lines.Count; y++)
+        {
+            var line = lines[y];
+            for (var x = 0; x < line.Length; x++)
+            {
+                if (line[x] == '#')
+                    elves.Add(new MatrixAddress(x, y));
+            }
+        }
+
+        return elves;
     }
 
     private bool HasNeighbors(HashSet<MatrixAddress> elfs, MatrixAddress elf)

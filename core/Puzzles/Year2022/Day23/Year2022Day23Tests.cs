@@ -5,11 +5,33 @@ namespace Core.Puzzles.Year2022.Day23;
 public class Year2022Day23Tests
 {
     [Test]
-    public void Part1()
+    public void Part1Small()
     {
-        var result = 0;
+        var puzzle = new Year2022Day23();
+        var (emptyCount, endRound) = puzzle.Run(SmallInput);
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(emptyCount, Is.EqualTo(25));
+        Assert.That(endRound, Is.EqualTo(4));
+    }
+
+    [Test]
+    public void Part1Large()
+    {
+        var puzzle = new Year2022Day23();
+        var (emptyCount, endRound) = puzzle.Run(LargeInput, 10);
+
+        Assert.That(emptyCount, Is.EqualTo(110));
+        Assert.That(endRound, Is.EqualTo(10));
+    }
+
+    [Test]
+    public void Part1LargeWithoutRoundCount()
+    {
+        var puzzle = new Year2022Day23();
+        var (emptyCount, endRound) = puzzle.Run(LargeInput);
+
+        Assert.That(emptyCount, Is.EqualTo(146));
+        Assert.That(endRound, Is.EqualTo(20));
     }
 
     [Test]
@@ -20,6 +42,27 @@ public class Year2022Day23Tests
         Assert.That(result, Is.EqualTo(0));
     }
 
-    private const string Input = @"
-";
+    private const string SmallInput = """
+.....
+..##.
+..#..
+.....
+..##.
+.....
+""";
+
+    private const string LargeInput = """
+..............
+..............
+.......#......
+.....###.#....
+...#...#.#....
+....#...##....
+...#.###......
+...##.#.##....
+....#..#......
+..............
+..............
+..............
+""";
 }

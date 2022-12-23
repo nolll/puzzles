@@ -6,7 +6,9 @@ namespace Core.Common.CoordinateSystems.CoordinateSystem2D
     {
         MatrixAddress Address { get; }
         IList<MatrixAddress> AllAdjacentCoords { get; }
+        IList<MatrixAddress> AllAdjacentCoordsTo(MatrixAddress address);
         IList<T> AllAdjacentValues { get; }
+        IList<T> AllAdjacentValuesTo(MatrixAddress address);
         MatrixAddress Center { get; }
         IEnumerable<MatrixAddress> Coords { get; }
         MatrixDirection Direction { get; }

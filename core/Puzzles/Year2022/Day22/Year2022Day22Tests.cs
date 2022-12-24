@@ -15,6 +15,8 @@ public class Year2022Day22Tests
         Assert.That(result, Is.EqualTo(6032));
     }
 
+    // todo: write tests for part 2 test data (separate mapping, or sort out general mapping). There are tests for the mapping of the real data though
+    
     //[Test]
     //public void Part2()
     //{
@@ -76,7 +78,7 @@ public class Year2022Day22Tests
     {
         var fromDirection = MatrixDirection.Create(fromDir);
         var toDirection = MatrixDirection.Create(toDir);
-        var (c, d) = Year2022Day22.MapExitPosition(new MatrixAddress(fromX, fromY), fromDirection);
+        var (c, d) = Year2022Day22.MapExitPosition(new MatrixAddress(fromX, fromY), fromDirection, 50);
 
         Assert.That(c.X, Is.EqualTo(toX));
         Assert.That(c.Y, Is.EqualTo(toY));
@@ -103,35 +105,33 @@ public class Year2022Day22Tests
 
 
 /*
-
-                         X
-                   X     1
-            X      5     0              
-            0      0     0
-                   
-          Y0       ..A.. ..B..
-                   ..... .....
-                   H.T.L L.R.J
-                   ..... .....
-                   ..C.. ..I..
-                   
-         Y50       ..C..
-                   .....
-                   G.F.I
-                   .....
-                   ..D..
-              
-        Y100 ..G.. ..D..
-             ..... .....
-             H.L.E E.B.J
-             ..... .....
-             ..F.. ..K..
-             
-        Y150 ..F..
-             .....
-             A.B.K
-             .....
-             ..B..
-
-
+Mapping
+                  X
+            X     1
+     X      5     0              
+     0      0     0
+            
+   Y0       ..A.. ..B..
+            ..... .....
+            H.T.L L.R.J
+            ..... .....
+            ..C.. ..I..
+            
+  Y50       ..C..
+            .....
+            G.F.I
+            .....
+            ..D..
+       
+ Y100 ..G.. ..D..
+      ..... .....
+      H.L.E E.B.J
+      ..... .....
+      ..F.. ..K..
+      
+ Y150 ..F..
+      .....
+      A.B.K
+      .....
+      ..B..
 */

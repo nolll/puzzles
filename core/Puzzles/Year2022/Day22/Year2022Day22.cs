@@ -141,7 +141,7 @@ public class Year2022Day22 : Puzzle
 
                     if (!moveSucceeded)
                     {
-                        var (newCoord, newDirection) = MapExitPosition(matrix.Address, matrix.Direction);
+                        var (newCoord, newDirection) = MapExitPosition(matrix.Address, matrix.Direction, 50);
                         if (matrix.TryMoveTo(newCoord))
                         {
                             matrix.TurnTo(newDirection);
@@ -176,61 +176,50 @@ public class Year2022Day22 : Puzzle
         return password;
     }
 
-    public static (MatrixAddress newCoord, MatrixDirection newDirection) MapExitPosition(MatrixAddress c, MatrixDirection d)
+    public static (MatrixAddress newCoord, MatrixDirection newDirection) MapExitPosition(MatrixAddress c, MatrixDirection d, int size)
     {
         var x = c.X;
         var y = c.Y;
+
         if (d.Equals(MatrixDirection.Up))
         {
-            switch (c.X)
-            {
-                case < 50: // from left to front
-                    return (new MatrixAddress(y - 50, x + 50), MatrixDirection.Right);
-                case < 100: // from top to back
-                    return (new MatrixAddress(y, x + 100), MatrixDirection.Right);
-                case < 150: // from right to back
-                    return (new MatrixAddress(x - 100, y + 200 - 1), MatrixDirection.Up);
-            }
+            if (c.X < size) // from left to front
+                return (new MatrixAddress(y - size, x + size), MatrixDirection.Right);
+            if (c.X < size * 2) // from top to back
+                return (new MatrixAddress(y, x + size * 2), MatrixDirection.Right);
+            if (c.X < size * 3) // from right to back
+                return (new MatrixAddress(x - size * 2, y + size * 4 - 1), MatrixDirection.Up);
         }
         else if (d.Equals(MatrixDirection.Right))
         {
-            switch (c.Y)
-            {
-                case < 50: // from right to bottom
-                    return (new MatrixAddress(x - 50, 150 - y - 1), MatrixDirection.Left);
-                case < 100: // from front to right
-                    return (new MatrixAddress(y + 50, x - 50), MatrixDirection.Up);
-                case < 150: // from bottom to right
-                    return (new MatrixAddress(x + 50, 150 - y - 1), MatrixDirection.Left);
-                case < 200: // from back to bottom
-                    return (new MatrixAddress(y - 100, x + 100), MatrixDirection.Up);
-            }
+            if (c.Y < size) // from right to bottom
+                return (new MatrixAddress(x - size, size * 3 - y - 1), MatrixDirection.Left);
+            if (c.Y < size * 2) // from front to right
+                return (new MatrixAddress(y + size, x - size), MatrixDirection.Up);
+            if (c.Y < size * 3) // from bottom to right
+                return (new MatrixAddress(x + size, size * 3 - y - 1), MatrixDirection.Left);
+            if (c.Y < size * 4) // from back to bottom
+                return (new MatrixAddress(y - size * 2, x + size * 2), MatrixDirection.Up);
         }
         else if (d.Equals(MatrixDirection.Down))
         {
-            switch (c.X)
-            {
-                case < 50: // from back to right
-                    return (new MatrixAddress(x + 100, y - 200 + 1), MatrixDirection.Down);
-                case < 100: // from bottom to back
-                    return (new MatrixAddress(y - 100, x + 100), MatrixDirection.Left);
-                case < 150: // from right to front
-                    return (new MatrixAddress(y + 50, x - 50), MatrixDirection.Left);
-            }
+            if (c.X < size) // from back to right
+                return (new MatrixAddress(x + size * 2, y - size * 4 + 1), MatrixDirection.Down);
+            if (c.X < size * 2) // from bottom to back
+                return (new MatrixAddress(y - size * 2, x + size * 2), MatrixDirection.Left);
+            if (c.X < size * 3) // from right to front
+                return (new MatrixAddress(y + size, x - size), MatrixDirection.Left);
         }
         else
         {
-            switch (c.Y)
-            {
-                case < 50: // from top to left
-                    return (new MatrixAddress(x - 50, 150 - y - 1), MatrixDirection.Right);
-                case < 100: // from front to left
-                    return (new MatrixAddress(y - 50, x + 50), MatrixDirection.Down);
-                case < 150: // from left to top
-                    return (new MatrixAddress(x + 50, 150 - y - 1), MatrixDirection.Right);
-                case < 200: // from back to top
-                    return (new MatrixAddress(y - 100, x), MatrixDirection.Down);
-            }
+            if (c.Y < size) // from top to left
+                return (new MatrixAddress(x - size, size * 3 - y - 1), MatrixDirection.Right);
+            if (c.Y < size * 2) // from front to left
+                return (new MatrixAddress(y - size, x + size), MatrixDirection.Down);
+            if (c.Y < size * 3) // from left to top
+                return (new MatrixAddress(x + size, size * 3 - y - 1), MatrixDirection.Right);
+            if (c.Y < size * 4) // from back to top
+                return (new MatrixAddress(y - size * 2, x), MatrixDirection.Down);
         }
 
         return (new MatrixAddress(0, 0), MatrixDirection.Up);

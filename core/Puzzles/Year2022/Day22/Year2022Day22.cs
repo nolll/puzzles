@@ -11,16 +11,16 @@ public class Year2022Day22 : Puzzle
     public override PuzzleResult RunPart1()
     {
         var result = Part1(FileInput);
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 47462);
     }
 
     public override PuzzleResult RunPart2()
     {
         var result = Part2(FileInput);
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 137045);
     }
 
-    public int Part1(string input)
+    public static int Part1(string input)
     {
         var groups = PuzzleInputReader.ReadStringGroupsWithWhitespace(input);
         var matrix = MatrixBuilder.BuildQuickCharMatrixWithoutTrim(groups[0], ' ');
@@ -98,14 +98,12 @@ public class Year2022Day22 : Puzzle
         return password;
     }
 
-    public int Part2(string input)
+    public static int Part2(string input)
     {
         var groups = PuzzleInputReader.ReadStringGroupsWithWhitespace(input);
         var matrix = MatrixBuilder.BuildQuickCharMatrixWithoutTrim(groups[0], ' ');
         matrix.MoveTo(0, 0);
         matrix.TurnTo(MatrixDirection.Right);
-
-        //var sides = MapSides(matrix);
 
         while (matrix.ReadValue() == ' ')
             matrix.MoveForward();
@@ -131,7 +129,10 @@ public class Year2022Day22 : Puzzle
                         }
 
                         if (matrix.ReadValue() == ' ')
+                        {
+                            matrix.MoveTo(lastPos);
                             moveSucceeded = false;
+                        }
                     }
                     else
                     {
@@ -140,87 +141,10 @@ public class Year2022Day22 : Puzzle
 
                     if (!moveSucceeded)
                     {
-                        if (matrix.Direction.Equals(MatrixDirection.Up))
+                        var (newCoord, newDirection) = MapExitPosition(matrix.Address, matrix.Direction);
+                        if (matrix.TryMoveTo(newCoord))
                         {
-                            if (matrix.Address.X < 50) // from left to front
-                            {
-                                // todo: map x and y
-                                matrix.TurnTo(MatrixDirection.Right);
-                            }
-                            else if (matrix.Address.X < 100) // from top to back
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                            else if (matrix.Address.X < 150) // from right
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                        }
-                        else if (matrix.Direction.Equals(MatrixDirection.Right))
-                        {
-                            if (matrix.Address.Y < 50) // from right
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                            else if (matrix.Address.Y < 100) // from front
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                            else if (matrix.Address.Y < 150) // from bottom
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                            else if (matrix.Address.Y < 200) // from back
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                        }
-                        else if (matrix.Direction.Equals(MatrixDirection.Down))
-                        {
-                            if (matrix.Address.X < 50) // from back
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                            else if (matrix.Address.X < 100) // from bottom
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                            else if (matrix.Address.X < 150) // from right
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                        }
-                        else
-                        {
-                            if (matrix.Address.Y < 50) // from top
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                            else if (matrix.Address.Y < 100) // from front
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                            else if (matrix.Address.Y < 150) // from left
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
-                            else if (matrix.Address.Y < 200) // from back
-                            {
-                                // todo: map x and y
-                                // todo: map direction
-                            }
+                            matrix.TurnTo(newDirection);
                         }
                     }
 
@@ -252,107 +176,73 @@ public class Year2022Day22 : Puzzle
         return password;
     }
 
-    //private Dictionary<Side, CubeSide> MapSides(IMatrix<char> matrix)
-    //{
-    //    var totalWidth = matrix.Width;
-    //    var totalHeight = matrix.Height;
-    //    var mapType = totalWidth > totalHeight
-    //        ? MapType.FourByThree
-    //        : MapType.ThreeByFour;
-    //    var size = mapType == MapType.FourByThree
-    //        ? totalWidth / 4
-    //        : totalHeight / 4;
+    public static (MatrixAddress newCoord, MatrixDirection newDirection) MapExitPosition(MatrixAddress c, MatrixDirection d)
+    {
+        var x = c.X;
+        var y = c.Y;
+        if (d.Equals(MatrixDirection.Up))
+        {
+            switch (c.X)
+            {
+                case < 50: // from left to front
+                    return (new MatrixAddress(y - 50, x + 50), MatrixDirection.Right);
+                case < 100: // from top to back
+                    return (new MatrixAddress(y, x + 100), MatrixDirection.Right);
+                case < 150: // from right to back
+                    return (new MatrixAddress(x - 100, y + 200 - 1), MatrixDirection.Up);
+            }
+        }
+        else if (d.Equals(MatrixDirection.Right))
+        {
+            switch (c.Y)
+            {
+                case < 50: // from right to bottom
+                    return (new MatrixAddress(x - 50, 150 - y - 1), MatrixDirection.Left);
+                case < 100: // from front to right
+                    return (new MatrixAddress(y + 50, x - 50), MatrixDirection.Up);
+                case < 150: // from bottom to right
+                    return (new MatrixAddress(x + 50, 150 - y - 1), MatrixDirection.Left);
+                case < 200: // from back to bottom
+                    return (new MatrixAddress(y - 100, x + 100), MatrixDirection.Up);
+            }
+        }
+        else if (d.Equals(MatrixDirection.Down))
+        {
+            switch (c.X)
+            {
+                case < 50: // from back to right
+                    return (new MatrixAddress(x + 100, y - 200 + 1), MatrixDirection.Down);
+                case < 100: // from bottom to back
+                    return (new MatrixAddress(y - 100, x + 100), MatrixDirection.Left);
+                case < 150: // from right to front
+                    return (new MatrixAddress(y + 50, x - 50), MatrixDirection.Left);
+            }
+        }
+        else
+        {
+            switch (c.Y)
+            {
+                case < 50: // from top to left
+                    return (new MatrixAddress(x - 50, 150 - y - 1), MatrixDirection.Right);
+                case < 100: // from front to left
+                    return (new MatrixAddress(y - 50, x + 50), MatrixDirection.Down);
+                case < 150: // from left to top
+                    return (new MatrixAddress(x + 50, 150 - y - 1), MatrixDirection.Right);
+                case < 200: // from back to top
+                    return (new MatrixAddress(y - 100, x), MatrixDirection.Down);
+            }
+        }
 
-    //    var blueprint = mapType == MapType.FourByThree
-    //        ? GetBluePrintForFourByThree()
-    //        : GetBluePrintForThreeByFour();
+        return (new MatrixAddress(0, 0), MatrixDirection.Up);
+    }
 
-    //    var sides = BuildSides(blueprint, size);
-
-    //    return sides;
-    //}
-
-    //private Dictionary<Side, CubeSide> BuildSides(Dictionary<Side, SideBlueprint> bluePrint, int size)
-    //{
-    //    var sides = new Dictionary<Side, CubeSide>
-    //    {
-    //        { Side.Top, new CubeSide(bluePrint[Side.Top], size) },
-    //        { Side.Bottom, new CubeSide(bluePrint[Side.Bottom], size) },
-    //        { Side.Front, new CubeSide(bluePrint[Side.Front], size) },
-    //        { Side.Back, new CubeSide(bluePrint[Side.Back], size) },
-    //        { Side.Left, new CubeSide(bluePrint[Side.Left], size) },
-    //        { Side.Right, new CubeSide(bluePrint[Side.Right], size) }
-    //    };
-
-    //    return sides;
-    //}
-
-    //private Dictionary<Side, SideBlueprint> GetBluePrintForFourByThree()
-    //{
-    //    var bluePrint = new Dictionary<Side, SideBlueprint>
-    //    {
-    //        { Side.Top, new SideBlueprint(new MatrixAddress(2, 0), new Dictionary<MatrixDirection, NavigationRule>
-    //        {
-    //            { MatrixDirection.Up, new NavigationRule(MatrixDirection.Up, Side.Back, )}
-    //        }) },
-    //        { Side.Bottom, new SideBlueprint(new MatrixAddress(2, 2), new Dictionary<Side, NavigationRule>()) },
-    //        { Side.Front, new SideBlueprint(new MatrixAddress(2, 1), new Dictionary<Side, NavigationRule>()) },
-    //        { Side.Back, new SideBlueprint(new MatrixAddress(0, 1), new Dictionary<Side, NavigationRule>()) },
-    //        { Side.Left, new SideBlueprint(new MatrixAddress(1, 1), new Dictionary<Side, NavigationRule>()) },
-    //        { Side.Right, new SideBlueprint(new MatrixAddress(3, 2), new Dictionary<Side, NavigationRule>()) }
-    //    };
-
-    //    return bluePrint;
-    //}
-
-    //private Dictionary<Side, SideBlueprint> GetBluePrintForThreeByFour()
-    //{
-    //    var bluePrint = new Dictionary<Side, SideBlueprint>
-    //    {
-    //        { Side.Top, new SideBlueprint(new MatrixAddress(1, 0), new Dictionary<Side, NavigationRule>()) },
-    //        { Side.Bottom, new SideBlueprint(new MatrixAddress(1, 2), new Dictionary<Side, NavigationRule>()) },
-    //        { Side.Front, new SideBlueprint(new MatrixAddress(1, 1), new Dictionary<Side, NavigationRule>()) },
-    //        { Side.Back, new SideBlueprint(new MatrixAddress(0, 3), new Dictionary<Side, NavigationRule>()) },
-    //        { Side.Left, new SideBlueprint(new MatrixAddress(0, 2), new Dictionary<Side, NavigationRule>()) },
-    //        { Side.Right, new SideBlueprint(new MatrixAddress(2, 0), new Dictionary<Side, NavigationRule>()) }
-    //    };
-
-    //    return bluePrint;
-    //}
-
-    //public class SideBlueprint
-    //{
-    //    public MatrixAddress MapLocation { get; }
-    //    public Dictionary<MatrixDirection, NavigationRule> NavigationRules { get; }
-
-    //    public SideBlueprint(MatrixAddress mapLocation, Dictionary<MatrixDirection, NavigationRule> navigationRules)
-    //    {
-    //        MapLocation = mapLocation;
-    //        NavigationRules = navigationRules;
-    //    }
-    //}
-
-    //public class NavigationRule
-    //{
-    //    public MatrixDirection ExitDirection { get; }
-    //    public Side TargetSide { get; }
-    //    public MatrixDirection TargetDirection { get; }
-
-    //    public NavigationRule(MatrixDirection exitDirection, Side targetSide, MatrixDirection targetDirection)
-    //    {
-    //        ExitDirection = exitDirection;
-    //        TargetSide = targetSide;
-    //        TargetDirection = targetDirection;
-    //    }
-    //}
-
-    private string[] ParsePath(string s)
+    private static IEnumerable<string> ParsePath(string s)
     {
         var css = s.Replace("R", ",R,").Replace("L", ",L,");
         return css.Split(',').ToArray();
     }
 
-    private int GetFacingScore(MatrixDirection d)
+    private static int GetFacingScore(MatrixDirection d)
     {
         if (d.Equals(MatrixDirection.Up))
             return 3;
@@ -363,31 +253,3 @@ public class Year2022Day22 : Puzzle
         return 2;
     }
 }
-
-//public enum Side
-//{
-//    Top,
-//    Bottom,
-//    Front,
-//    Back,
-//    Left,
-//    Right
-//}
-
-//public enum MapType
-//{
-//    FourByThree,
-//    ThreeByFour
-//}
-
-//public class CubeSide
-//{
-//    public MatrixAddress TopLeft { get; }
-//    public MatrixAddress BottomRight { get; }
-
-//    public CubeSide(Year2022Day22.SideBlueprint blueprint, int size)
-//    {
-//        TopLeft = blueprint.MapLocation;
-//        BottomRight = new MatrixAddress(blueprint.MapLocation.X + size - 1, blueprint.MapLocation.Y + size - 1);
-//    }
-//}

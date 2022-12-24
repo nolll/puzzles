@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
+// todo: Extending still has bugs. Write tests for it!
 public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
 {
     private readonly IDictionary<MatrixAddress, T> _matrix;

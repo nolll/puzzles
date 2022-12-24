@@ -1,7 +1,9 @@
 using System;
+using System.Diagnostics;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
+[DebuggerDisplay("{Name}")]
 public class MatrixDirection : IEquatable<MatrixDirection>
 {
     public string Name { get; }
@@ -19,6 +21,17 @@ public class MatrixDirection : IEquatable<MatrixDirection>
     public static readonly MatrixDirection Right = new("right", 1, 0);
     public static readonly MatrixDirection Down = new("down", 0, 1);
     public static readonly MatrixDirection Left = new("left", -1, 0);
+
+    public static MatrixDirection Create(string name)
+    {
+        if (name == "up")
+            return Up;
+        if (name == "right")
+            return Right;
+        if (name == "down")
+            return Down;
+        return Left;
+    }
 
     public bool Equals(MatrixDirection other)
     {

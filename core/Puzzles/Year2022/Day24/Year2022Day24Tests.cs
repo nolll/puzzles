@@ -7,9 +7,10 @@ public class Year2022Day24Tests
     [Test]
     public void Part1()
     {
-        var result = 0;
+        var puzzle = new Year2022Day24();
+        var result = puzzle.Part1(Input);
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(result, Is.EqualTo(18));
     }
 
     [Test]
@@ -20,6 +21,12 @@ public class Year2022Day24Tests
         Assert.That(result, Is.EqualTo(0));
     }
 
-    private const string Input = @"
-";
+    private const string Input = """
+#E######
+#>>.<^<#
+#.<..<<#
+#>v.><>#
+#<^v^^>#
+######.#
+""";
 }

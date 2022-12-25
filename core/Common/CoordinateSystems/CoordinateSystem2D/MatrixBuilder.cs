@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
@@ -6,7 +7,7 @@ public static class MatrixBuilder
 {
     public static IMatrix<char> BuildStaticCharMatrix(string input, char defaultValue = default)
     {
-        var rows = input.Trim().Split('\n');
+        var rows = input.Trim().Split(Environment.NewLine);
         var w = rows.First().Length;
         var h = rows.Length;
         return BuildCharMatrix(new StaticMatrix<char>(w, h, defaultValue), rows);
@@ -14,19 +15,19 @@ public static class MatrixBuilder
 
     public static IMatrix<char> BuildCharMatrix(string input, char defaultValue = default)
     {
-        var rows = input.Trim().Split('\n').Select(o => o.Trim()).ToArray();
+        var rows = input.Trim().Split(Environment.NewLine).Select(o => o.Trim()).ToArray();
         return BuildCharMatrix(new DynamicMatrix<char>(1, 1, defaultValue), rows);
     }
 
     public static IMatrix<char> BuildQuickCharMatrix(string input, char defaultValue = default)
     {
-        var rows = input.Trim().Split('\n').Select(o => o.Trim()).ToArray();
+        var rows = input.Trim().Split(Environment.NewLine).Select(o => o.Trim()).ToArray();
         return BuildCharMatrix(new QuickDynamicMatrix<char>(1, 1, defaultValue), rows);
     }
 
     public static IMatrix<char> BuildQuickCharMatrixWithoutTrim(string input, char defaultValue = default)
     {
-        var rows = input.Split("\r\n").ToArray();
+        var rows = input.Split(Environment.NewLine).ToArray();
         return BuildCharMatrixWithoutTrim(new QuickDynamicMatrix<char>(1, 1, defaultValue), rows);
     }
 
@@ -73,7 +74,7 @@ public static class MatrixBuilder
     public static DynamicMatrix<int> BuildIntMatrixFromSpaceSeparated(string input, int defaultValue = default)
     {
         var matrix = new DynamicMatrix<int>(1, 1, defaultValue);
-        var rows = input.Trim().Split('\n');
+        var rows = input.Trim().Split(Environment.NewLine);
         var y = 0;
         foreach (var row in rows)
         {
@@ -106,7 +107,7 @@ public static class MatrixBuilder
 
     private static IMatrix<int> BuildIntMatrixFromNonSeparated(IMatrix<int> matrix, string input)
     {
-        var rows = input.Trim().Split('\n');
+        var rows = input.Trim().Split(Environment.NewLine);
         var y = 0;
         foreach (var row in rows)
         {
@@ -127,7 +128,7 @@ public static class MatrixBuilder
 
     private static (int w, int h) GetNonSeparatedSize(string input)
     {
-        var rows = input.Trim().Split('\n');
+        var rows = input.Trim().Split(Environment.NewLine);
         var w = rows.First().Trim().Length;
         var h = rows.Count();
         return (w, h);

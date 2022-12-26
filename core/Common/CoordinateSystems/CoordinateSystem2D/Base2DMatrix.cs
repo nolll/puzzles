@@ -37,7 +37,7 @@ public abstract class Base2DMatrix<T> : BaseMatrix, IMatrix<T>
         {
             for (var y = YMin; y <= YMax; y++)
             {
-                for (var x = XMin; x < XMax; x++)
+                for (var x = XMin; x <= XMax; x++)
                 {
                     yield return new MatrixAddress(x, y);
                 }

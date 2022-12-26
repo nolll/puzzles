@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
@@ -17,6 +18,9 @@ public class Year2022Day24 : Puzzle
     public override PuzzleResult RunPart1()
     {
         var result = Part1(FileInput);
+
+        // guess 210, too low
+
         return new PuzzleResult(result);
     }
 
@@ -26,6 +30,8 @@ public class Year2022Day24 : Puzzle
         var blizzards = new List<Blizzard>();
         MatrixAddress enter = null;
         MatrixAddress exit = null;
+        var walls = new List<MatrixAddress>();
+        var neighborCache = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
         foreach (var coord in matrix.Coords)
         {
             matrix.MoveTo(coord);
@@ -34,6 +40,7 @@ public class Year2022Day24 : Puzzle
             {
                 enter = coord;
                 matrix.WriteValue('#');
+                walls.Add(coord);
             }
             else if (coord.Y == matrix.YMax && value == '.')
             {
@@ -44,94 +51,139 @@ public class Year2022Day24 : Puzzle
                 blizzards.Add(new Blizzard(value, coord));
                 matrix.WriteValue('.');
             }
+            else if (value == '#')
+            {
+                walls.Add(coord);
+            }
+
+            neighborCache.Add(matrix.Address, matrix.PerpendicularAdjacentCoords);
         }
 
         if (enter == null || exit == null)
             throw new Exception("Enter or Exit not found");
 
-        var queue = new List<BlizzardCoordCount> { new(enter.X, enter.Y, 0, blizzards, "") };
+        var prints = new HashSet<string>();
+        var uniqueBlizzards = new List<ImmutableHashSet<MatrixAddress>>();
+        while (true)
+        {
+            var print = PrintMatrix(matrix, blizzards);
+            if (prints.Contains(print))
+            {
+                break;
+            }
+
+            prints.Add(print);
+            var addresses = blizzards.Distinct().Select(o => o.Address).Union(walls);
+            var blizzardSet = addresses.ToImmutableHashSet();
+            uniqueBlizzards.Add(blizzardSet);
+            blizzards = MoveBlizzards(matrix, blizzards);
+        }
+
+        var uniqueCount = uniqueBlizzards.Count;
+
+        var seen = new HashSet<(MatrixAddress, int)> { (enter, 0) };
+        var queue = new List<BlizzardCoordCount> { new(enter, 0, 0) };
         var index = 0;
-        while (index < queue.Count && !queue.Any(o => o.X == exit.X && o.Y == exit.Y))
+
+        while (index < queue.Count)
         {
             var next = queue[index];
-            matrix.MoveTo(next.X, next.Y);
-
-            var movedBlizzards = new List<Blizzard>();
-            foreach (var blizzard in next.Blizzards)
-            {
-                var x = blizzard.Address.X;
-                var y = blizzard.Address.Y;
-                if (blizzard.Direction == Up)
-                {
-                    var newCoord = new MatrixAddress(x, y - 1);
-                    if (newCoord.Y == matrix.YMin)
-                    {
-                        newCoord = new MatrixAddress(x, matrix.YMax - 1);
-                    }
-                    movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
-                }
-                else if (blizzard.Direction == Right)
-                {
-                    var newCoord = new MatrixAddress(x + 1, y);
-                    if (newCoord.X == matrix.XMax)
-                    {
-                        newCoord = new MatrixAddress(1, y);
-                    }
-                    movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
-                }
-                else if (blizzard.Direction == Down)
-                {
-                    var newCoord = new MatrixAddress(x, y + 1);
-                    if (newCoord.Y == matrix.YMax)
-                    {
-                        newCoord = new MatrixAddress(x, 1);
-                    }
-                    movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
-                }
-                else
-                {
-                    var newCoord = new MatrixAddress(x - 1, y);
-                    if (newCoord.X == matrix.XMin)
-                    {
-                        newCoord = new MatrixAddress(matrix.XMax - 1, y);
-                    }
-                    movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
-                }
-            }
-            var newMatrix = matrix.Copy();
-            foreach (var blizzard in movedBlizzards)
-            {
-                //newMatrix.WriteValueAt(blizzard.Address, blizzard.Direction);
-                var v = newMatrix.ReadValueAt(blizzard.Address);
-                if (v == '.')
-                    newMatrix.WriteValueAt(blizzard.Address, blizzard.Direction);
-                else if (int.TryParse(v.ToString(), out var i))
-                    newMatrix.WriteValueAt(blizzard.Address, (i + 1).ToString().First());
-                else
-                    newMatrix.WriteValueAt(blizzard.Address, '2');
-            }
-            newMatrix.WriteValueAt(next.X, next.Y, 'E');
-            //Console.WriteLine(next.Count);
-            //Console.WriteLine(newMatrix.Print());
-            //Console.WriteLine();
-
-            var print = newMatrix.Print();
-
-            var adjacentCoords = newMatrix.PerpendicularAdjacentCoords
-                .Where(o => newMatrix.ReadValueAt(o) == '.' && !queue.Any(q => q.X == o.X && q.Y == o.Y && q.Print == print))
+            var nextCount = next.Count + 1;
+            var nextState = nextCount % uniqueCount;
+            var blizzardSet = uniqueBlizzards[nextState];
+            
+            var adjacentCoords = neighborCache[next.Coord]
+                .Where(o => !blizzardSet.Contains(o) && !seen.Contains((o, nextState)))
                 .ToList();
-            var newCoordCounts = adjacentCoords.Select(o => new BlizzardCoordCount(o.X, o.Y, next.Count + 1, movedBlizzards, print));
-            queue.AddRange(newCoordCounts);
-            if (!adjacentCoords.Any())
+            var newCoordCounts = adjacentCoords.Select(o => new BlizzardCoordCount(o, nextCount, nextState)).ToList();
+            if (!adjacentCoords.Any() && !seen.Contains((next.Coord, nextState)))
             {
-                queue.Add(new BlizzardCoordCount(next.X, next.Y, next.Count + 1, movedBlizzards, print));
+                newCoordCounts.Add(new BlizzardCoordCount(next.Coord, nextCount, nextState));
             }
+
+            foreach (var coordCount in newCoordCounts)
+            {
+                queue.Add(coordCount);
+                seen.Add((coordCount.Coord, nextState));
+            }
+
             index++;
+
+            if (newCoordCounts.Any(o => o.Coord.X == exit.X && o.Coord.Y == exit.Y))
+            {
+                break;
+            }
         }
         
-        return queue.FirstOrDefault(o => o.X == exit.X && o.Y == exit.Y)?.Count ?? 0;
+        return queue.FirstOrDefault(o => o.Coord.X == exit.X && o.Coord.Y == exit.Y)?.Count ?? 0;
     }
-    
+
+    private List<Blizzard> MoveBlizzards(IMatrix<char> matrix, List<Blizzard> blizzards)
+    {
+        var movedBlizzards = new List<Blizzard>();
+        foreach (var blizzard in blizzards)
+        {
+            var x = blizzard.Address.X;
+            var y = blizzard.Address.Y;
+            if (blizzard.Direction == Up)
+            {
+                var newCoord = new MatrixAddress(x, y - 1);
+                if (newCoord.Y == matrix.YMin)
+                {
+                    newCoord = new MatrixAddress(x, matrix.YMax - 1);
+                }
+                movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
+            }
+            else if (blizzard.Direction == Right)
+            {
+                var newCoord = new MatrixAddress(x + 1, y);
+                if (newCoord.X == matrix.XMax)
+                {
+                    newCoord = new MatrixAddress(1, y);
+                }
+                movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
+            }
+            else if (blizzard.Direction == Down)
+            {
+                var newCoord = new MatrixAddress(x, y + 1);
+                if (newCoord.Y == matrix.YMax)
+                {
+                    newCoord = new MatrixAddress(x, 1);
+                }
+                movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
+            }
+            else
+            {
+                var newCoord = new MatrixAddress(x - 1, y);
+                if (newCoord.X == matrix.XMin)
+                {
+                    newCoord = new MatrixAddress(matrix.XMax - 1, y);
+                }
+                movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
+            }
+        }
+
+        return movedBlizzards;
+    }
+
+    private string PrintMatrix(IMatrix<char> matrix, List<Blizzard> blizzards)
+    {
+        var newMatrix = matrix.Copy();
+        foreach (var blizzard in blizzards)
+        {
+            //newMatrix.WriteValueAt(blizzard.Address, blizzard.Direction);
+            var v = newMatrix.ReadValueAt(blizzard.Address);
+            if (v == '.')
+                newMatrix.WriteValueAt(blizzard.Address, blizzard.Direction);
+            else if (int.TryParse(v.ToString(), out var i))
+                newMatrix.WriteValueAt(blizzard.Address, (i + 1).ToString().First());
+            else
+                newMatrix.WriteValueAt(blizzard.Address, '2');
+        }
+
+        return newMatrix.Print();
+    }
+
     public class Blizzard
     {
         public char Direction { get; }
@@ -147,26 +199,18 @@ public class Year2022Day24 : Puzzle
     [DebuggerDisplay("{X},{Y},{Count}")]
     public class BlizzardCoordCount
     {
-        public int X { get; }
-        public int Y { get; }
+        public MatrixAddress Coord { get; }
         public int Count { get; }
-        public List<Blizzard> Blizzards { get; }
-        public string Print { get; }
+        public int State { get; }
 
-        public BlizzardCoordCount(int x, int y, int count, List<Blizzard> blizzards, string print)
-        {
-            X = x;
-            Y = y;
-            Count = count;
-            Blizzards = blizzards;
-            Print = print;
-        }
+        public int X => Coord.X;
+        public int Y => Coord.Y;
 
-        public BlizzardCoordCount(MatrixAddress coord, int count)
+        public BlizzardCoordCount(MatrixAddress coord, int count, int state)
         {
-            X = coord.X;
-            Y = coord.Y;
+            Coord = coord;
             Count = count;
+            State = state;
         }
     }
 

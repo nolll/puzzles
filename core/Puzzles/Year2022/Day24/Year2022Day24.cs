@@ -4,12 +4,16 @@ using System.Diagnostics;
 using System.Linq;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Platform;
-using Core.Puzzles.Year2021.Day09;
 
 namespace Core.Puzzles.Year2022.Day24;
 
 public class Year2022Day24 : Puzzle
 {
+    private const char Up = '^';
+    private const char Right = '>';
+    private const char Down = 'v';
+    private const char Left = '<';
+
     public override PuzzleResult RunPart1()
     {
         var result = Part1(FileInput);
@@ -26,7 +30,7 @@ public class Year2022Day24 : Puzzle
         {
             matrix.MoveTo(coord);
             var value = matrix.ReadValue();
-            if (value == 'E')
+            if (value == 'E' || coord.Y == matrix.YMin && value == '.')
             {
                 enter = coord;
                 matrix.WriteValue('#');
@@ -35,24 +39,9 @@ public class Year2022Day24 : Puzzle
             {
                 exit = coord;
             }
-            else if (value == '^')
+            else if (value != '#' && value != '.')
             {
-                blizzards.Add(new Blizzard(MatrixDirection.Up, coord));
-                matrix.WriteValue('.');
-            }
-            else if (value == '>')
-            {
-                blizzards.Add(new Blizzard(MatrixDirection.Right, coord));
-                matrix.WriteValue('.');
-            }
-            else if (value == 'v')
-            {
-                blizzards.Add(new Blizzard(MatrixDirection.Down, coord));
-                matrix.WriteValue('.');
-            }
-            else if (value == '<')
-            {
-                blizzards.Add(new Blizzard(MatrixDirection.Left, coord));
+                blizzards.Add(new Blizzard(value, coord));
                 matrix.WriteValue('.');
             }
         }
@@ -72,28 +61,28 @@ public class Year2022Day24 : Puzzle
             {
                 var x = blizzard.Address.X;
                 var y = blizzard.Address.Y;
-                if (blizzard.Direction.Equals(MatrixDirection.Up))
+                if (blizzard.Direction == Up)
                 {
                     var newCoord = new MatrixAddress(x, y - 1);
-                    if (matrix.ReadValueAt(newCoord) == '#')
+                    if (newCoord.Y == matrix.YMin)
                     {
-                        newCoord = new MatrixAddress(x, matrix.Height - 1);
+                        newCoord = new MatrixAddress(x, matrix.YMax - 1);
                     }
                     movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
                 }
-                else if (blizzard.Direction.Equals(MatrixDirection.Right))
+                else if (blizzard.Direction == Right)
                 {
                     var newCoord = new MatrixAddress(x + 1, y);
-                    if (matrix.ReadValueAt(newCoord) == '#')
+                    if (newCoord.X == matrix.XMax)
                     {
                         newCoord = new MatrixAddress(1, y);
                     }
                     movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
                 }
-                else if (blizzard.Direction.Equals(MatrixDirection.Down))
+                else if (blizzard.Direction == Down)
                 {
                     var newCoord = new MatrixAddress(x, y + 1);
-                    if (matrix.ReadValueAt(newCoord) == '#')
+                    if (newCoord.Y == matrix.YMax)
                     {
                         newCoord = new MatrixAddress(x, 1);
                     }
@@ -102,9 +91,9 @@ public class Year2022Day24 : Puzzle
                 else
                 {
                     var newCoord = new MatrixAddress(x - 1, y);
-                    if (matrix.ReadValueAt(newCoord) == '#')
+                    if (newCoord.X == matrix.XMin)
                     {
-                        newCoord = new MatrixAddress(matrix.Width - 1, y);
+                        newCoord = new MatrixAddress(matrix.XMax - 1, y);
                     }
                     movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
                 }
@@ -112,17 +101,28 @@ public class Year2022Day24 : Puzzle
             var newMatrix = matrix.Copy();
             foreach (var blizzard in movedBlizzards)
             {
-                newMatrix.WriteValueAt(blizzard.Address, '#');
+                //newMatrix.WriteValueAt(blizzard.Address, blizzard.Direction);
+                var v = newMatrix.ReadValueAt(blizzard.Address);
+                if (v == '.')
+                    newMatrix.WriteValueAt(blizzard.Address, blizzard.Direction);
+                else if (int.TryParse(v.ToString(), out var i))
+                    newMatrix.WriteValueAt(blizzard.Address, (i + 1).ToString().First());
+                else
+                    newMatrix.WriteValueAt(blizzard.Address, '2');
             }
+            newMatrix.WriteValueAt(next.X, next.Y, 'E');
+            //Console.WriteLine(next.Count);
+            //Console.WriteLine(newMatrix.Print());
+            //Console.WriteLine();
 
             var print = newMatrix.Print();
 
-            var adjacentCoords = matrix.PerpendicularAdjacentCoords
-                .Where(o => matrix.ReadValueAt(o) == '.' && !queue.Any(q => q.X == o.X && q.Y == o.Y && q.Print == print))
+            var adjacentCoords = newMatrix.PerpendicularAdjacentCoords
+                .Where(o => newMatrix.ReadValueAt(o) == '.' && !queue.Any(q => q.X == o.X && q.Y == o.Y && q.Print == print))
                 .ToList();
             var newCoordCounts = adjacentCoords.Select(o => new BlizzardCoordCount(o.X, o.Y, next.Count + 1, movedBlizzards, print));
             queue.AddRange(newCoordCounts);
-            if (!adjacentCoords.Any() && matrix.ReadValueAt(next.X, next.Y) == '.')
+            if (!adjacentCoords.Any())
             {
                 queue.Add(new BlizzardCoordCount(next.X, next.Y, next.Count + 1, movedBlizzards, print));
             }
@@ -134,27 +134,13 @@ public class Year2022Day24 : Puzzle
     
     public class Blizzard
     {
-        public MatrixDirection Direction { get; }
+        public char Direction { get; }
         public MatrixAddress Address { get; }
 
-        public Blizzard(MatrixDirection direction, MatrixAddress address)
+        public Blizzard(char direction, MatrixAddress address)
         {
             Direction = direction;
             Address = address;
-        }
-
-        public char Display
-        {
-            get
-            {
-                if (Direction.Equals(MatrixDirection.Up))
-                    return '^';
-                if (Direction.Equals(MatrixDirection.Right))
-                    return '>';
-                if (Direction.Equals(MatrixDirection.Down))
-                    return 'v';
-                return '<';
-            }
         }
     }
 

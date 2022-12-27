@@ -81,6 +81,20 @@ public class Year2022Day24 : Puzzle
 
         var uniqueCount = uniqueBlizzards.Count;
 
+        // Tried to use the full blizzard cycle, without looking for existing prints. Same result, only slower
+        //var uniqueCount = (matrix.Width - 2) * (matrix.Height - 2);
+        //var uniqueCounter = 0;
+        //while (uniqueCounter < uniqueCount)
+        //{
+        //    var print = PrintMatrix(matrix, blizzards);
+        //    prints.Add(print);
+        //    var addresses = blizzards.Distinct().Select(o => o.Address).Union(walls);
+        //    var blizzardSet = addresses.ToImmutableHashSet();
+        //    uniqueBlizzards.Add(blizzardSet);
+        //    blizzards = MoveBlizzards(matrix, blizzards);
+        //    uniqueCounter++;
+        //}
+
         var seen = new HashSet<(MatrixAddress, int)> { (enter, 0) };
         var queue = new List<BlizzardCoordCount> { new(enter, 0, 0) };
         var index = 0;
@@ -111,6 +125,7 @@ public class Year2022Day24 : Puzzle
 
             if (newCoordCounts.Any(o => o.Coord.X == exit.X && o.Coord.Y == exit.Y))
             {
+                var print = PrintMatrix(matrix, blizzardSet.ToList());
                 break;
             }
         }
@@ -179,6 +194,17 @@ public class Year2022Day24 : Puzzle
                 newMatrix.WriteValueAt(blizzard.Address, (i + 1).ToString().First());
             else
                 newMatrix.WriteValueAt(blizzard.Address, '2');
+        }
+
+        return newMatrix.Print();
+    }
+
+    private string PrintMatrix(IMatrix<char> matrix, List<MatrixAddress> coords)
+    {
+        var newMatrix = matrix.Copy();
+        foreach (var coord in coords)
+        {
+            newMatrix.WriteValueAt(coord, 'o');
         }
 
         return newMatrix.Print();

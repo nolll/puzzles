@@ -56,7 +56,7 @@ public class Year2022Day24 : Puzzle
                 walls.Add(coord);
             }
 
-            neighborCache.Add(matrix.Address, matrix.PerpendicularAdjacentCoords);
+            neighborCache.Add(matrix.Address, matrix.PerpendicularAdjacentCoords.Where(o => !o.Equals(enter)).ToList());
         }
 
         if (enter == null || exit == null)
@@ -95,8 +95,8 @@ public class Year2022Day24 : Puzzle
         //    uniqueCounter++;
         //}
 
-        var seen = new HashSet<(MatrixAddress, int)> { (enter, 0) };
-        var queue = new List<BlizzardCoordCount> { new(enter, 0, 0) };
+        var seen = new HashSet<(MatrixAddress, int)>();
+        var queue = new List<BlizzardCoordCount> { new(enter, 0) };
         var index = 0;
 
         while (index < queue.Count)
@@ -109,10 +109,10 @@ public class Year2022Day24 : Puzzle
             var adjacentCoords = neighborCache[next.Coord]
                 .Where(o => !blizzardSet.Contains(o) && !seen.Contains((o, nextState)))
                 .ToList();
-            var newCoordCounts = adjacentCoords.Select(o => new BlizzardCoordCount(o, nextCount, nextState)).ToList();
+            var newCoordCounts = adjacentCoords.Select(o => new BlizzardCoordCount(o, nextCount)).ToList();
             if (!adjacentCoords.Any() && !seen.Contains((next.Coord, nextState)))
             {
-                newCoordCounts.Add(new BlizzardCoordCount(next.Coord, nextCount, nextState));
+                newCoordCounts.Add(new BlizzardCoordCount(next.Coord, nextCount));
             }
 
             foreach (var coordCount in newCoordCounts)
@@ -121,13 +121,12 @@ public class Year2022Day24 : Puzzle
                 seen.Add((coordCount.Coord, nextState));
             }
 
-            index++;
-
             if (newCoordCounts.Any(o => o.Coord.X == exit.X && o.Coord.Y == exit.Y))
             {
-                var print = PrintMatrix(matrix, blizzardSet.ToList());
                 break;
             }
+
+            index++;
         }
         
         return queue.FirstOrDefault(o => o.Coord.X == exit.X && o.Coord.Y == exit.Y)?.Count ?? 0;
@@ -227,16 +226,14 @@ public class Year2022Day24 : Puzzle
     {
         public MatrixAddress Coord { get; }
         public int Count { get; }
-        public int State { get; }
 
         public int X => Coord.X;
         public int Y => Coord.Y;
 
-        public BlizzardCoordCount(MatrixAddress coord, int count, int state)
+        public BlizzardCoordCount(MatrixAddress coord, int count)
         {
             Coord = coord;
             Count = count;
-            State = state;
         }
     }
 

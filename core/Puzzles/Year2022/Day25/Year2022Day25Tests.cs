@@ -36,7 +36,27 @@ public class Year2022Day25Tests
     [TestCase("122", 37)]
     public void ToDecimal(string input, int expected)
     {
-        var result = SnafuConverter.ToInt(input);
+        var result = SnafuConverter.ToNumber(input);
+
+        Assert.That(result, Is.EqualTo(expected));
+    }
+
+    [TestCase(1747, "1=-0-2")]
+    [TestCase(906, "12111")]
+    [TestCase(198, "2=0=")]
+    [TestCase(11, "21")]
+    [TestCase(201, "2=01")]
+    [TestCase(31, "111")]
+    [TestCase(1257, "20012")]
+    [TestCase(32, "112")]
+    [TestCase(353, "1=-1=")]
+    [TestCase(107, "1-12")]
+    [TestCase(7, "12")]
+    [TestCase(3, "1=")]
+    [TestCase(37, "122")]
+    public void ToSnafu(int input, string expected)
+    {
+        var result = SnafuConverter.ToSnafu(input);
 
         Assert.That(result, Is.EqualTo(expected));
     }
@@ -56,37 +76,4 @@ public class Year2022Day25Tests
 1=
 122
 """;
-}
-
-public static class SnafuConverter
-{
-    public static int ToInt(string input)
-    {
-        var sum = 0;
-        var multiplier = 1;
-        for (var i = input.Length - 1; i >= 0; i--)
-        {
-            sum += multiplier * ToInt(input[i]);
-            multiplier *= 5;
-        }
-
-        return sum;
-    }
-
-    private static int ToInt(char input)
-    {
-        return input switch
-        {
-            '2' => 2,
-            '1' => 1,
-            '-' => -1,
-            '=' => -2,
-            _ => 0
-        };
-    }
-
-    public static string ToSnafu(int input)
-    {
-        return "";
-    }
 }

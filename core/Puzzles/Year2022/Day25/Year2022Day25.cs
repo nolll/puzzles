@@ -9,6 +9,11 @@ public class Year2022Day25 : Puzzle
         return new EmptyPuzzleResult();
     }
 
+    public string Part1(string input)
+    {
+        return "";
+    }
+
     public override PuzzleResult RunPart2()
     {
         return new EmptyPuzzleResult();

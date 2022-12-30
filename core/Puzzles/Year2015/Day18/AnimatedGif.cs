@@ -1,5 +1,4 @@
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2015.Day18;
@@ -17,7 +16,7 @@ public class AnimatedGif
     public AnimatedGif(in string input, in bool isCornersLit = false)
     {
         _isCornersLit = isCornersLit;
-        _matrix = MatrixBuilder.BuildCharMatrix(input);
+        _matrix = MatrixBuilder.BuildQuickCharMatrix(input);
         if (_isCornersLit)
             TurnOnCornerLights();
     }
@@ -26,18 +25,14 @@ public class AnimatedGif
     {
         for (var i = 0; i < steps; i++)
         {
-            var newMatrix = new DynamicMatrix<char>();
-            for (var y = 0; y < _matrix.Height; y++)
-            {
-                for (var x = 0; x < _matrix.Width; x++)
-                {
-                    _matrix.MoveTo(x, y);
-                    newMatrix.MoveTo(x, y);
-                    var adjacentValues = _matrix.AllAdjacentValues;
-                    newMatrix.WriteValue(GetNewState(_matrix.ReadValue(), adjacentValues.Count(o => o == LightOn)));
-                }
-            }
+            var newMatrix = new QuickDynamicMatrix<char>();
 
+            foreach (var coord in _matrix.Coords)
+            {
+                var adjacentValues = _matrix.AllAdjacentValuesTo(coord);
+                newMatrix.WriteValueAt(coord, GetNewState(_matrix.ReadValueAt(coord), adjacentValues.Count(o => o == LightOn)));
+            }
+            
             _matrix = newMatrix;
             if (_isCornersLit)
                 TurnOnCornerLights();
@@ -46,25 +41,22 @@ public class AnimatedGif
 
     private void TurnOnCornerLights()
     {
-        var xMax = _matrix.Width - 1;
-        var yMax = _matrix.Height - 1;
-        TurnOnLight(0, 0);
-        TurnOnLight(xMax, 0);
-        TurnOnLight(xMax, yMax);
-        TurnOnLight(0, yMax);
+        TurnOnLight(_matrix.XMin, _matrix.YMin);
+        TurnOnLight(_matrix.XMax, _matrix.YMin);
+        TurnOnLight(_matrix.XMax, _matrix.YMax);
+        TurnOnLight(_matrix.XMin, _matrix.YMax);
     }
 
     private void TurnOnLight(int x, int y)
     {
-        _matrix.MoveTo(x, y);
-        _matrix.WriteValue(LightOn);
+        _matrix.WriteValueAt(x, y, LightOn);
     }
 
-    private char GetNewState(in char value, in int adjacentOnCount)
+    private static char GetNewState(in char value, in int adjacentOnCount)
     {
         if (value == LightOn)
         {
-            return adjacentOnCount == 2 || adjacentOnCount == 3 
+            return adjacentOnCount is 2 or 3 
                 ? LightOn 
                 : LightOff;
         }

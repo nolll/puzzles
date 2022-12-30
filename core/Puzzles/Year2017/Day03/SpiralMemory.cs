@@ -1,25 +1,23 @@
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2017.Day03;
 
 public class SpiralMemory
 {
-    private readonly DynamicMatrix<long> _matrix;
     public int Distance { get; }
     public long Value { get; }
 
     public SpiralMemory(int targetSquare, SpiralMemoryMode mode)
     {
-        _matrix = BuildMatrix(targetSquare, mode);
-        Distance = _matrix.Address.ManhattanDistanceTo(_matrix.StartAddress);
-        Value = _matrix.ReadValue();
+        var matrix = BuildMatrix(targetSquare, mode);
+        Distance = matrix.Address.ManhattanDistanceTo(matrix.StartAddress);
+        Value = matrix.ReadValue();
     }
 
-    private DynamicMatrix<long> BuildMatrix(int targetSquare, SpiralMemoryMode mode)
+    private static IMatrix<long> BuildMatrix(int targetSquare, SpiralMemoryMode mode)
     {
-        var matrix = new DynamicMatrix<long>();
+        var matrix = new QuickMatrix<long>();
         matrix.TurnTo(MatrixDirection.Down);
         var currentSquare = 1;
         matrix.WriteValue(currentSquare);

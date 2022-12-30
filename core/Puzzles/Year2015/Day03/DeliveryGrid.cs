@@ -12,7 +12,7 @@ public class DeliveryGrid
 
     public DeliveryGrid()
     {
-        _matrix = new QuickDynamicMatrix<int>();
+        _matrix = new QuickMatrix<int>();
     }
 
     public void DeliverBySanta(string input)

@@ -85,7 +85,7 @@ public class CollisionDetector
         var rows = PuzzleInputReader.ReadLines(input).Select(o => o.Trim('_')).ToList();
         var width = rows.First().Length;
         var height = rows.Count();
-        _matrix = new QuickDynamicMatrix<char>(width, height);
+        _matrix = new QuickMatrix<char>(width, height);
         _carts = new List<MineCart>();
         for (var y = 0; y < height; y++)
         {

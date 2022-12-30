@@ -22,13 +22,13 @@ public static class MatrixBuilder
     public static IMatrix<char> BuildQuickCharMatrix(string input, char defaultValue = default)
     {
         var rows = input.Trim().Split(Environment.NewLine).Select(o => o.Trim()).ToArray();
-        return BuildCharMatrix(new QuickDynamicMatrix<char>(1, 1, defaultValue), rows);
+        return BuildCharMatrix(new QuickMatrix<char>(1, 1, defaultValue), rows);
     }
 
     public static IMatrix<char> BuildQuickCharMatrixWithoutTrim(string input, char defaultValue = default)
     {
         var rows = input.Split(Environment.NewLine).ToArray();
-        return BuildCharMatrixWithoutTrim(new QuickDynamicMatrix<char>(1, 1, defaultValue), rows);
+        return BuildCharMatrixWithoutTrim(new QuickMatrix<char>(1, 1, defaultValue), rows);
     }
 
     private static IMatrix<char> BuildCharMatrix(IMatrix<char> matrix, string[] rows)

@@ -25,7 +25,7 @@ public class AnimatedGif
     {
         for (var i = 0; i < steps; i++)
         {
-            var newMatrix = new QuickDynamicMatrix<char>();
+            var newMatrix = new QuickMatrix<char>();
 
             foreach (var coord in _matrix.Coords)
             {

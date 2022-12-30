@@ -11,7 +11,7 @@ public class EasterbunnyDistanceCalculator
 
     public EasterbunnyDistanceCalculator()
     {
-        _matrix = new QuickDynamicMatrix<int>();
+        _matrix = new QuickMatrix<int>();
     }
         
     public void Go(string input)

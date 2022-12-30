@@ -9,7 +9,7 @@ public class PlusTests
     [Test]
     public void CanMoveRight()
     {
-        var matrix = new QuickDynamicMatrix<char>(5, 5, '.');
+        var matrix = new QuickMatrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(1, 3);
         var shape = new PlusShape();
         shape.Paint(matrix, bottomLeft);
@@ -23,7 +23,7 @@ public class PlusTests
     [Test]
     public void CanNotMoveRight()
     {
-        var matrix = new QuickDynamicMatrix<char>(5, 5, '.');
+        var matrix = new QuickMatrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(2, 3);
         var shape = new PlusShape();
         shape.Paint(matrix, bottomLeft);
@@ -37,7 +37,7 @@ public class PlusTests
     [Test]
     public void CanNotMoveRightBlocked()
     {
-        var matrix = new QuickDynamicMatrix<char>(5, 5, '.');
+        var matrix = new QuickMatrix<char>(5, 5, '.');
         matrix.WriteValueAt(3, 1, 'o');
         var bottomLeft = new MatrixAddress(1, 3);
         var shape = new PlusShape();
@@ -52,7 +52,7 @@ public class PlusTests
     [Test]
     public void CanMoveLeft()
     {
-        var matrix = new QuickDynamicMatrix<char>(5, 5, '.');
+        var matrix = new QuickMatrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(1, 3);
         var shape = new PlusShape();
         shape.Paint(matrix, bottomLeft);
@@ -66,7 +66,7 @@ public class PlusTests
     [Test]
     public void CanNotMoveLeft()
     {
-        var matrix = new QuickDynamicMatrix<char>(5, 5, '.');
+        var matrix = new QuickMatrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(0, 3);
         var shape = new PlusShape();
         shape.Paint(matrix, bottomLeft);
@@ -80,7 +80,7 @@ public class PlusTests
     [Test]
     public void CanNotMoveLeftBlocked()
     {
-        var matrix = new QuickDynamicMatrix<char>(5, 5, '.');
+        var matrix = new QuickMatrix<char>(5, 5, '.');
         matrix.WriteValueAt(1, 1, 'o');
         var bottomLeft = new MatrixAddress(1, 3);
         var shape = new PlusShape();
@@ -95,7 +95,7 @@ public class PlusTests
     [Test]
     public void CanMoveDown()
     {
-        var matrix = new QuickDynamicMatrix<char>(5, 5, '.');
+        var matrix = new QuickMatrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(1, 3);
         var shape = new PlusShape();
         shape.Paint(matrix, bottomLeft);
@@ -109,7 +109,7 @@ public class PlusTests
     [Test]
     public void CanNotMoveDown()
     {
-        var matrix = new QuickDynamicMatrix<char>(5, 5, '.');
+        var matrix = new QuickMatrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(1, 4);
         var shape = new PlusShape();
         shape.Paint(matrix, bottomLeft);
@@ -123,7 +123,7 @@ public class PlusTests
     [Test]
     public void CanNotMoveDownBlocked()
     {
-        var matrix = new QuickDynamicMatrix<char>(5, 5, '.');
+        var matrix = new QuickMatrix<char>(5, 5, '.');
         matrix.WriteValueAt(1, 3, 'o');
         var bottomLeft = new MatrixAddress(1, 3);
         var shape = new PlusShape();

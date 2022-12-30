@@ -14,7 +14,7 @@ public class ChristmasLightsController
 
     public ChristmasLightsController(int size = 1000)
     {
-        _matrix = new QuickDynamicMatrix<int>(size, size);
+        _matrix = new QuickMatrix<int>(size, size);
     }
 
     public void RunCommands(string input, bool useBrightness)

@@ -174,7 +174,7 @@ public class Year2022Day23 : Puzzle
 
     private string Print(HashSet<MatrixAddress> coords)
     {
-        var matrix = new QuickDynamicMatrix<char>(1, 1, '.');
+        var matrix = new QuickMatrix<char>(1, 1, '.');
         foreach (var coord in coords)
         {
             matrix.MoveTo(coord);

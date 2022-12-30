@@ -18,7 +18,7 @@ MNOP
     [Test]
     public void MoveToWorks()
     {
-        var matrix = new QuickDynamicMatrix<int>(5, 5);
+        var matrix = new QuickMatrix<int>(5, 5);
         matrix.MoveTo(1, 2);
 
         Assert.That(matrix.Address.X, Is.EqualTo(1));
@@ -28,7 +28,7 @@ MNOP
     [Test]
     public void MoveForwardWorks()
     {
-        var matrix = new QuickDynamicMatrix<int>(5, 5);
+        var matrix = new QuickMatrix<int>(5, 5);
         matrix.MoveTo(1, 3);
         matrix.MoveForward();
 
@@ -39,7 +39,7 @@ MNOP
     [Test]
     public void TurnAndMoveForwardWorks()
     {
-        var matrix = new QuickDynamicMatrix<int>(5, 5);
+        var matrix = new QuickMatrix<int>(5, 5);
         matrix.TurnRight();
         matrix.MoveForward();
         matrix.TurnRight();
@@ -52,7 +52,7 @@ MNOP
     [Test]
     public void ExtendAllTo3()
     {
-        var matrix = new QuickDynamicMatrix<char>(1, 1, DefaultValue);
+        var matrix = new QuickMatrix<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
@@ -67,7 +67,7 @@ MNOP
     [Test]
     public void ExtendAllTo5()
     {
-        var matrix = new QuickDynamicMatrix<char>(1, 1, DefaultValue);
+        var matrix = new QuickMatrix<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections(2);
 
@@ -82,7 +82,7 @@ MNOP
     [Test]
     public void PerpendicularAdjacentCoordsExist()
     {
-        var matrix = new QuickDynamicMatrix<char>(1, 1, DefaultValue);
+        var matrix = new QuickMatrix<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
@@ -98,7 +98,7 @@ MNOP
     [Test]
     public void AllAdjacentCoordsExists()
     {
-        var matrix = new QuickDynamicMatrix<char>(1, 1, DefaultValue);
+        var matrix = new QuickMatrix<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 

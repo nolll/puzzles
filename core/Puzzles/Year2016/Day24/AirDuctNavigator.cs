@@ -9,7 +9,7 @@ namespace Core.Puzzles.Year2016.Day24;
 public class AirDuctNavigator
 {
     private IList<AirDuctLocation> _locations;
-    private QuickDynamicMatrix<char> _matrix;
+    private QuickMatrix<char> _matrix;
     private readonly IDictionary<(char, char), AirDuctPath> _paths;
     private readonly IDictionary<string, int> _cache;
     private AirDuctRobot _robot;
@@ -105,7 +105,7 @@ public class AirDuctNavigator
     private void Init(string input)
     {
         _locations = new List<AirDuctLocation>();
-        _matrix = new QuickDynamicMatrix<char>();
+        _matrix = new QuickMatrix<char>();
         var rows = PuzzleInputReader.ReadLines(input);
         var y = 0;
         foreach (var row in rows)

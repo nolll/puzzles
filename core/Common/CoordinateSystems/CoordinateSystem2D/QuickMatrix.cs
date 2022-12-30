@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
+public class QuickMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
 {
     private readonly IDictionary<(int x, int y), T> _matrix;
     private int _minx;
@@ -32,7 +32,7 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
     public override int YMin => _miny;
     public override int YMax => _maxy;
 
-    public QuickDynamicMatrix(int width = 1, int height = 1, T defaultValue = default)
+    public QuickMatrix(int width = 1, int height = 1, T defaultValue = default)
         : base(defaultValue)
     {
         _minx = 0;
@@ -42,7 +42,7 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
         _matrix = new Dictionary<(int x, int y), T>();
     }
 
-    private QuickDynamicMatrix(MatrixAddress min, MatrixAddress max, IDictionary<(int x, int y), T> values, T defaultValue = default)
+    private QuickMatrix(MatrixAddress min, MatrixAddress max, IDictionary<(int x, int y), T> values, T defaultValue = default)
         : base(defaultValue)
     {
         _matrix = values;
@@ -76,7 +76,7 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
     
     protected override IMatrix<T> Create(int width, int height, T defaultValue = default)
     {
-        return new QuickDynamicMatrix<T>(width, height, DefaultValue);
+        return new QuickMatrix<T>(width, height, DefaultValue);
     }
 
     protected override void HandleExtend(MatrixAddress address)
@@ -177,7 +177,7 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
         var values = _matrix.ToDictionary(item => (item.Key.x, item.Key.y), item => item.Value);
         var min = new MatrixAddress(XMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        return new QuickDynamicMatrix<T>(min, max, values, DefaultValue);
+        return new QuickMatrix<T>(min, max, values, DefaultValue);
     }
 
     public override IMatrix<T> RotateLeft()
@@ -185,7 +185,7 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
         var values = _matrix.ToDictionary(item => (item.Key.y, YMax - item.Key.x), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        var newMatrix = new QuickDynamicMatrix<T>(min, max, values, DefaultValue);
+        var newMatrix = new QuickMatrix<T>(min, max, values, DefaultValue);
         return newMatrix;
     }
 
@@ -194,7 +194,7 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
         var values = _matrix.ToDictionary(item => (XMax - item.Key.y, item.Key.x), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        var newMatrix = new QuickDynamicMatrix<T>(min, max, values, DefaultValue);
+        var newMatrix = new QuickMatrix<T>(min, max, values, DefaultValue);
         return newMatrix;
     }
 
@@ -209,7 +209,7 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
             .ToDictionary(item => (item.Key.x - dx, item.Key.y - dy), item => item.Value);
         var slicedFrom = new MatrixAddress(from.X - dx, from.Y - dy);
         var slicedTo = new MatrixAddress(to.X - dx, to.Y - dy);
-        var newMatrix = new QuickDynamicMatrix<T>(slicedFrom, slicedTo, values, DefaultValue);
+        var newMatrix = new QuickMatrix<T>(slicedFrom, slicedTo, values, DefaultValue);
         return newMatrix;
     }
 
@@ -224,7 +224,7 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
         var values = _matrix.ToDictionary(item => (item.Key.x, YMax - item.Key.y), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        return new QuickDynamicMatrix<T>(min, max, values, DefaultValue);
+        return new QuickMatrix<T>(min, max, values, DefaultValue);
     }
 
     public override IMatrix<T> FlipHorizontal()
@@ -232,6 +232,6 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
         var values = _matrix.ToDictionary(item => (XMax - item.Key.x, item.Key.y), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        return new QuickDynamicMatrix<T>(min, max, values, DefaultValue);
+        return new QuickMatrix<T>(min, max, values, DefaultValue);
     }
 }

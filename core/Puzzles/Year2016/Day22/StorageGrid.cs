@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Strings;
 
@@ -9,8 +8,8 @@ namespace Core.Puzzles.Year2016.Day22;
 
 public class StorageGrid
 {
-    private readonly Regex _whiteSpaceRegex = new Regex("[ ]{2,}", RegexOptions.None);
-    private readonly DynamicMatrix<StorageNode> _storage;
+    private readonly Regex _whiteSpaceRegex = new("[ ]{2,}", RegexOptions.None);
+    private readonly IMatrix<StorageNode> _storage;
 
     public StorageGrid(string input)
     {
@@ -55,7 +54,7 @@ public class StorageGrid
 
     public int MoveStorage()
     {
-        var matrix = new DynamicMatrix<char>(_storage.Width, _storage.Height, '#');
+        var matrix = new QuickMatrix<char>(_storage.Width, _storage.Height, '#');
         var nodesThatCanMove = GetNodesThatCanMove();
         foreach (var address in nodesThatCanMove)
         {
@@ -82,11 +81,11 @@ public class StorageGrid
         return distance1 + distance2 * 5 + 1;
     }
 
-    private DynamicMatrix<StorageNode> ParseGrid(string input)
+    private IMatrix<StorageNode> ParseGrid(string input)
     {
         var rows = PuzzleInputReader.ReadLines(input);
         var dataRows = rows.Skip(2);
-        var matrix = new DynamicMatrix<StorageNode>();
+        var matrix = new QuickMatrix<StorageNode>();
 
         foreach (var row in dataRows)
         {

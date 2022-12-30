@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2016.Day13;
 
 public class Maze
 {
-    private readonly DynamicMatrix<char> _matrix;
+    private readonly IMatrix<char> _matrix;
 
     public Maze(in int width, in int height, in int secretNumber)
     {
@@ -16,7 +16,6 @@ public class Maze
 
     public int StepCountToTarget(int targetX, int targetY) => PathFinder.CachedStepCountTo(_matrix, new MatrixAddress(1, 1), new MatrixAddress(targetX, targetY));
     public int LocationCountAfter(int steps) => LocationCountAfter(new MatrixAddress(1, 1), steps);
-    public string Print() => _matrix.Print();
 
     private int LocationCountAfter(MatrixAddress from, int steps)
     {
@@ -40,21 +39,19 @@ public class Maze
         return _matrix.Values.Count(o => o == 'O');
     }
 
-    private DynamicMatrix<char> BuildMatrix(in int width, in int height, in int secretNumber)
+    private static IMatrix<char> BuildMatrix(in int width, in int height, in int secretNumber)
     {
-        var matrix = new DynamicMatrix<char>();
+        var matrix = new QuickMatrix<char>();
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < width; x++)
             {
-                matrix.MoveTo(x, y);
                 var value = x * x + 3 * x + 2 * x * y + y + y * y + secretNumber;
                 var binary = Convert.ToString(value, 2);
-                var binaryString = binary.ToString();
-                var numberOfSetBits = binaryString.Count(o => o == '1');
+                var numberOfSetBits = binary.Count(o => o == '1');
                 var isOpenSpace = numberOfSetBits % 2 == 0;
                 var c = isOpenSpace ? '.' : '#';
-                matrix.WriteValue(c);
+                matrix.WriteValueAt(x, y, c);
             }
         }
 

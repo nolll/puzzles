@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2017.Day21;
 
+// todo: This puzzle does not run. Index out of range
 public class FractalArtGenerator
 {
     private const string Inital = @"

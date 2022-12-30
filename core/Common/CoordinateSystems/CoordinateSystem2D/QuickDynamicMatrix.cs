@@ -3,7 +3,6 @@ using System.Linq;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-// todo: Extending still has bugs. Write tests for it!
 public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
 {
     private readonly IDictionary<MatrixAddress, T> _matrix;
@@ -12,7 +11,20 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
     private int _miny;
     private int _maxy;
 
-    public override IEnumerable<T> Values => _matrix.Values;
+    public override IEnumerable<T> Values
+    {
+        get
+        {
+            foreach (var coord in Coords)
+            {
+                if (_matrix.TryGetValue(coord, out var v))
+                    yield return v;
+                else
+                    yield return DefaultValue;
+            }
+        }
+    }
+
     public override int Width => _maxx - _minx + 1;
     public override int Height => _maxy - _miny + 1;
     public override int XMin => _minx;
@@ -78,7 +90,6 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
     private void ExtendLeft(MatrixAddress address)
     {
         AddCols(-address.X, MatrixAddMode.Prepend);
-        StartAddress = new MatrixAddress(StartAddress.X - address.X, StartAddress.Y);
     }
 
     private void ExtendRight(MatrixAddress address)
@@ -98,7 +109,6 @@ public class QuickDynamicMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
     private void ExtendTop(MatrixAddress address)
     {
         AddRows(-address.Y, MatrixAddMode.Prepend);
-        StartAddress = new MatrixAddress(StartAddress.X, StartAddress.Y - address.Y);
     }
 
     private void ExtendBottom(MatrixAddress address)

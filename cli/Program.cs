@@ -12,8 +12,8 @@ public class Program
 {
     private const int PuzzleTimeout = 10;
 
-    private const int DebugYear = 2022;
-    private const int DebugDay = 25;
+    private const int DebugYear = 2015;
+    private const int DebugDay = 3;
 
     static void Main(string[] args)
     {

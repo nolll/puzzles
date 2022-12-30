@@ -8,7 +8,7 @@ namespace Core.Puzzles.Year2018.Day13;
 
 public class CollisionDetector
 {
-    private StaticMatrix<char> _matrix;
+    private IMatrix<char> _matrix;
     private IList<MineCart> _carts;
     public MatrixAddress LocationOfFirstCollision { get; private set; }
     public MatrixAddress LocationOfLastCart { get; private set; }
@@ -61,13 +61,13 @@ public class CollisionDetector
         }
     }
 
-    private bool HasCrashed(IList<MineCart> carts1, IList<MineCart> carts2, MatrixAddress coords)
+    private static bool HasCrashed(IEnumerable<MineCart> carts1, IEnumerable<MineCart> carts2, MatrixAddress coords)
     {
         return carts1.Any(cart => cart.Coords.X == coords.X && cart.Coords.Y == coords.Y)
                || carts2.Any(cart => cart.Coords.X == coords.X && cart.Coords.Y == coords.Y);
     }
 
-    private void RemoveCartAt(IList<MineCart> carts, MatrixAddress coords)
+    private static void RemoveCartAt(IList<MineCart> carts, MatrixAddress coords)
     {
         for (var i = 0; i < carts.Count; i++)
         {
@@ -85,7 +85,7 @@ public class CollisionDetector
         var rows = PuzzleInputReader.ReadLines(input).Select(o => o.Trim('_')).ToList();
         var width = rows.First().Length;
         var height = rows.Count();
-        _matrix = new StaticMatrix<char>(width, height);
+        _matrix = new QuickDynamicMatrix<char>(width, height);
         _carts = new List<MineCart>();
         for (var y = 0; y < height; y++)
         {
@@ -108,24 +108,24 @@ public class CollisionDetector
         }
     }
 
-    private bool IsCartChar(char c)
+    private static bool IsCartChar(char c)
     {
-        return c == CharConstants.Up || c == CharConstants.Right || c == CharConstants.Down || c == CharConstants.Left;
+        return c is CharConstants.Up or CharConstants.Right or CharConstants.Down or CharConstants.Left;
     }
 
-    private char GetMapChar(char c)
+    private static char GetMapChar(char c)
     {
-        return c == CharConstants.Up || c == CharConstants.Down ? CharConstants.Vertical : CharConstants.Horizontal;
+        return c is CharConstants.Up or CharConstants.Down ? CharConstants.Vertical : CharConstants.Horizontal;
     }
 
     private MatrixDirection GetDirection(char c)
     {
-        if (c == CharConstants.Up)
-            return MatrixDirection.Up;
-        if (c == CharConstants.Right)
-            return MatrixDirection.Right;
-        if (c == CharConstants.Down)
-            return MatrixDirection.Down;
-        return MatrixDirection.Left;
+        return c switch
+        {
+            CharConstants.Up => MatrixDirection.Up,
+            CharConstants.Right => MatrixDirection.Right,
+            CharConstants.Down => MatrixDirection.Down,
+            _ => MatrixDirection.Left
+        };
     }
 }

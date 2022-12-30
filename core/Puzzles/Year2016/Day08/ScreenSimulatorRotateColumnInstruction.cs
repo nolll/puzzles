@@ -5,11 +5,11 @@ namespace Core.Puzzles.Year2016.Day08;
 
 public class ScreenSimulatorRotateColumnInstruction : IScreenSimulatorInstruction
 {
-    private readonly DynamicMatrix<char> _matrix;
+    private readonly IMatrix<char> _matrix;
     private readonly int _column;
     private readonly int _steps;
 
-    public ScreenSimulatorRotateColumnInstruction(DynamicMatrix<char> matrix, int column, int steps)
+    public ScreenSimulatorRotateColumnInstruction(IMatrix<char> matrix, int column, int steps)
     {
         _matrix = matrix;
         _column = column;
@@ -29,14 +29,12 @@ public class ScreenSimulatorRotateColumnInstruction : IScreenSimulatorInstructio
             if (newy >= _matrix.Height)
                 newy -= _matrix.Height;
 
-            _matrix.MoveTo(x, y);
-            newCol[newy] = _matrix.ReadValue();
+            newCol[newy] = _matrix.ReadValueAt(x, y);
         }
 
         for (var y = 0; y < _matrix.Height; y++)
         {
-            _matrix.MoveTo(x, y);
-            _matrix.WriteValue(newCol[y]);
+            _matrix.WriteValueAt(x, y, newCol[y]);
         }
     }
 }

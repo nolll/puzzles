@@ -20,12 +20,12 @@ public class DiskDefragmenter
         RegionCount = GetRegionCount(disk);
     }
 
-    public static int GetUsedCount(DynamicMatrix<char> disk)
+    private static int GetUsedCount(IMatrix<char> disk)
     {
         return disk.Values.Count(o => o == '#');
     }
 
-    public static int GetRegionCount(DynamicMatrix<char> disk)
+    private static int GetRegionCount(IMatrix<char> disk)
     {
         var processed = new Dictionary<string, int>();
         var currentRegion = 0;
@@ -44,10 +44,9 @@ public class DiskDefragmenter
                         while (addressesToProcess.Any())
                         {
                             var atp = addressesToProcess.First();
-                            disk.MoveTo(atp);
                             processed.Add(atp.Id, currentRegion);
                             addressesToProcess.RemoveAt(0);
-                            var adjacent = disk.PerpendicularAdjacentCoords;
+                            var adjacent = disk.PerpendicularAdjacentCoordsTo(atp);
                             var coordsToAdd = adjacent.Where(o =>
                                 disk.ReadValueAt(o) == '#' &&
                                 !processed.ContainsKey(o.Id) &&
@@ -62,9 +61,9 @@ public class DiskDefragmenter
         return processed.Values.Distinct().Count();
     }
 
-    private DynamicMatrix<char> FillDisk(string key)
+    private static IMatrix<char> FillDisk(string key)
     {
-        var disk = new DynamicMatrix<char>();
+        var disk = new QuickMatrix<char>();
         for (var y = 0; y < 128; y++)
         {
             var hash = GetHash($"{key}-{y}");
@@ -90,12 +89,12 @@ public class DiskDefragmenter
         return disk;
     }
         
-    private string Hex2Binary(string hex)
+    private static string Hex2Binary(string hex)
     {
         return Convert.ToString(Convert.ToInt32(hex, 16), 2).PadLeft(4, '0');
     }
 
-    private string GetHash(string key)
+    private static string GetHash(string key)
     {
         var hasher = new AsciiKnotHasher(key);
         return hasher.Hash;

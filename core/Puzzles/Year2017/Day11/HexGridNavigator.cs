@@ -1,18 +1,17 @@
 using System;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2017.Day11;
 
 public class HexGridNavigator
 {
-    private readonly DynamicMatrix<int> _matrix;
+    private readonly IMatrix<int> _matrix;
     public int EndDistance { get; }
     public int MaxDistance { get; }
 
     public HexGridNavigator(string input)
     {
-        _matrix = new DynamicMatrix<int>();
+        _matrix = new QuickMatrix<int>();
         _matrix.TurnTo(MatrixDirection.Up);
 
         var directions = input.Split(',');

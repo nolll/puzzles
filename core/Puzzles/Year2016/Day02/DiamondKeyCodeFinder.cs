@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Strings;
 
@@ -63,7 +62,7 @@ public class DiamondKeyCodeFinder
         }
     }
 
-    private IMatrix<char> BuildButtonMatrix()
+    private static IMatrix<char> BuildButtonMatrix()
     {
         const string input = @"
 ..1..
@@ -72,12 +71,12 @@ public class DiamondKeyCodeFinder
 .ABC.
 ..D..";
 
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
         matrix.MoveTo(0, 2);
         return matrix;
     }
 
-    private IList<char[]> ParseCommands(string input)
+    private static IList<char[]> ParseCommands(string input)
     {
         return PuzzleInputReader.ReadLines(input).Select(o => o.ToCharArray()).ToList();
     }

@@ -55,9 +55,9 @@ public class FallingSand
         return matrix.Values.Count(o => o == 'o');
     }
 
-    private IDynamicMatrix<char> BuildMatrix(string input, int part)
+    private static IDynamicMatrix<char> BuildMatrix(string input, int part)
     {
-        var matrix = new DynamicMatrix<char>(1, 1, '.');
+        var matrix = new QuickMatrix<char>(1, 1, '.');
         var lines = PuzzleInputReader.ReadLines(input, false);
 
         var coordLists = lines.Select(o => o.Split(" -> "));
@@ -122,7 +122,7 @@ public class FallingSand
         return matrix;
     }
 
-    private bool TryMove(IMatrix<char> matrix, MatrixAddress currentSand, out MatrixAddress newSand)
+    private static bool TryMove(IMatrix<char> matrix, MatrixAddress currentSand, out MatrixAddress newSand)
     {
         var down = new MatrixAddress(currentSand.X, currentSand.Y + 1);
         matrix.MoveTo(down);

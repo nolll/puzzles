@@ -18,7 +18,7 @@ public class LumberCollection
 
     public LumberCollection(string input)
     {
-        _matrix = MatrixBuilder.BuildCharMatrix(input);
+        _matrix = MatrixBuilder.BuildQuickCharMatrix(input);
     }
 
     public void Run(int minutes)
@@ -50,9 +50,9 @@ public class LumberCollection
         }
     }
 
-    private DynamicMatrix<char> GetNextIteration()
+    private IMatrix<char> GetNextIteration()
     {
-        var newMatrix = new DynamicMatrix<char>();
+        var newMatrix = new QuickMatrix<char>();
         for (var y = 0; y < _matrix.Height; y++)
         {
             for (var x = 0; x < _matrix.Width; x++)
@@ -70,17 +70,11 @@ public class LumberCollection
         var adjacent = _matrix.AllAdjacentValues;
         var currentValue = _matrix.ReadValue();
         if (currentValue == Open)
-        {
             return adjacent.Count(o => o == Wood) >= 3 ? Wood : currentValue;
-        }
         if (currentValue == Wood)
-        {
             return adjacent.Count(o => o == Lumber) >= 3 ? Lumber : currentValue;
-        }
         if (currentValue == Lumber)
-        {
             return adjacent.Count(o => o == Lumber) >= 1 && adjacent.Count(o => o == Wood) >= 1 ? Lumber : Open;
-        }
 
         return Open;
     }

@@ -1,4 +1,3 @@
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2017.Day22;
@@ -14,7 +13,7 @@ public class VirusInfection
 
     public VirusInfection(string input)
     {
-        _matrix = MatrixBuilder.BuildCharMatrix(input, '.');
+        _matrix = MatrixBuilder.BuildQuickCharMatrix(input, '.');
 
         var x = (_matrix.Width - 1) / 2;
         var y = (_matrix.Height - 1) / 2;

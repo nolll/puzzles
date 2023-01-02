@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2019.Day17;
 
 public class ScaffoldIntersectionFinder
 {
-    private readonly DynamicMatrix<char> _matrix;
+    private readonly IMatrix<char> _matrix;
 
     public ScaffoldIntersectionFinder(string input)
     {
@@ -23,55 +22,44 @@ public class ScaffoldIntersectionFinder
 
     private IEnumerable<MatrixAddress> GetIntersections()
     {
-        var intersections = new List<MatrixAddress>();
-
-        for (var x = 0; x < _matrix.Width; x++)
-        {
-            for (var y = 0; y < _matrix.Height; y++)
-            {
-                if (IsIntersection(x, y))
-                    intersections.Add(new MatrixAddress(x, y));
-            }
-        }
-
-        return intersections;
+        return _matrix.Coords.Where(coord => IsIntersection(coord.X, coord.Y)).ToList();
     }
 
-    private char? GetValueAt(int x, int y)
+    private char? GetValueAt(MatrixAddress coord)
     {
-        if (_matrix.IsOutOfRange(new MatrixAddress(x, y)))
+        if (_matrix.IsOutOfRange(coord))
             return null;
-        return _matrix.ReadValueAt(x, y);
+        return _matrix.ReadValueAt(coord);
     }
 
     private bool IsIntersection(int x, int y)
     {
-        var v = GetValueAt(x, y);
+        var v = GetValueAt(new MatrixAddress(x, y));
         if (v == '.')
             return false;
 
-        v = GetValueAt(x, y - 1);
+        v = GetValueAt(new MatrixAddress(x, y - 1));
         if (v == '.')
             return false;
 
-        v = GetValueAt(x + 1, y);
+        v = GetValueAt(new MatrixAddress(x + 1, y));
         if (v == '.')
             return false;
 
-        v = GetValueAt(x, y + 1);
+        v = GetValueAt(new MatrixAddress(x, y + 1));
         if (v == '.')
             return false;
 
-        v = GetValueAt(x - 1, y);
+        v = GetValueAt(new MatrixAddress(x - 1, y));
         if (v == '.')
             return false;
 
         return true;
     }
 
-    private DynamicMatrix<char> BuildMatrix(string map)
+    private IMatrix<char> BuildMatrix(string map)
     {
-        var matrix = new DynamicMatrix<char>();
+        var matrix = new QuickMatrix<char>();
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

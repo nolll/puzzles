@@ -7,6 +7,7 @@ public class Year2019Day15 : Puzzle
     public override string Comment => "Repair droid";
     public override bool IsSlow => true;
 
+    // todo: speed up the matrix exploration code
     public override PuzzleResult RunPart1()
     {
         // VERY SLOW

@@ -10,7 +10,7 @@ namespace Core.Puzzles.Year2019.Day15;
 public class RepairDroid
 {
     private readonly ComputerInterface _computer;
-    private readonly DynamicMatrix<char> _matrix;
+    private readonly IMatrix<char> _matrix;
     private int _steps;
     private DroidDirection NextDirection => GetDroidDirection();
     private readonly Random _random;
@@ -18,13 +18,12 @@ public class RepairDroid
     public RepairDroid(string program)
     {
         _computer = new ComputerInterface(program, ReadInput, WriteOutput);
-        _matrix = new DynamicMatrix<char>();
+        _matrix = new QuickMatrix<char>();
         _random = new Random();
     }
 
     public int Run()
     {
-        //Console.Clear();
         _steps = 0;
         _computer.Start();
         return _steps;
@@ -37,29 +36,24 @@ public class RepairDroid
 
     private void WriteOutput(long output)
     {
-        if (output == 0)
+        switch (output)
         {
-            _matrix.MoveForward();
-            _matrix.WriteValue('#');
-            _matrix.MoveBackward();
-            TurnToUnvisitedDirection();
+            case 0:
+                _matrix.MoveForward();
+                _matrix.WriteValue('#');
+                _matrix.MoveBackward();
+                TurnToUnvisitedDirection();
+                break;
+            case 1:
+                _matrix.MoveForward();
+                _matrix.WriteValue('.');
+                TurnToUnvisitedDirection();
+                break;
+            case 2:
+                _matrix.MoveForward();
+                _matrix.WriteValue('X');
+                break;
         }
-
-        else if (output == 1)
-        {
-            _matrix.MoveForward();
-            _matrix.WriteValue('.');
-            TurnToUnvisitedDirection();
-        }
-
-        else if (output == 2)
-        {
-            _matrix.MoveForward();
-            _matrix.WriteValue('X');
-        }
-
-        //Console.SetCursorPosition(0, 0);
-        //Console.WriteLine(_matrix.Print(true, true, 'D', 'S'));
     }
 
     private void TurnToUnvisitedDirection()

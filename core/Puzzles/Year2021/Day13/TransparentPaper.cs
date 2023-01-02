@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Strings;
 
@@ -19,9 +18,9 @@ public class TransparentPaper
         _folds = groups[1];
     }
 
-    private static DynamicMatrix<char> BuildMatrix(IEnumerable<string> rows)
+    private static IMatrix<char> BuildMatrix(IEnumerable<string> rows)
     {
-        var matrix = new DynamicMatrix<char>(defaultValue: '.');
+        var matrix = new QuickMatrix<char>(defaultValue: '.');
 
         foreach (var row in rows)
         {
@@ -29,11 +28,8 @@ public class TransparentPaper
             var x = parts[0];
             var y = parts[1];
 
-            matrix.MoveTo(x, y);
-            matrix.WriteValue('#');
+            matrix.WriteValueAt(x, y, '#');
         }
-
-        matrix.MoveTo(0, 0);
 
         return matrix;
     }
@@ -58,7 +54,7 @@ public class TransparentPaper
         Fold(dimension, value);
     }
 
-    private (char dimension, int value) ParseFoldInstruction(string s)
+    private static (char dimension, int value) ParseFoldInstruction(string s)
     {
         var parts = s.Split(' ');
         var dimension = parts[2][0];
@@ -91,8 +87,7 @@ public class TransparentPaper
                 var v = foldMatrix.ReadValueAt(x - widthDiff, y);
                 if (v == '#')
                 {
-                    newMatrix.MoveTo(x, y);
-                    newMatrix.WriteValue(v);
+                    newMatrix.WriteValueAt(x, y, v);
                 }
             }
         }
@@ -117,8 +112,7 @@ public class TransparentPaper
                 var v = foldMatrix.ReadValueAt(x, y - heightDiff);
                 if (v == '#')
                 {
-                    newMatrix.MoveTo(x, y);
-                    newMatrix.WriteValue(v);
+                    newMatrix.WriteValueAt(x, y, v);
                 }
             }
         }

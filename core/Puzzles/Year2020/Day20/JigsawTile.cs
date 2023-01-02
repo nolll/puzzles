@@ -10,11 +10,9 @@ public class JigsawTile
 {
     public long Id { get; }
     public IMatrix<char> Matrix;
-    public bool Done { get; set; }
 
     public JigsawTile(long id, IMatrix<char> matrix)
     {
-        Done = false;
         Id = id;
         Matrix = matrix;
     }
@@ -101,26 +99,12 @@ public class JigsawTile
     {
         var parts = s.Split(':');
         var id = long.Parse(parts[0].Split(' ')[1]);
-        var matrix = MatrixBuilder.BuildCharMatrix(parts[1].Trim());
+        var matrix = MatrixBuilder.BuildQuickCharMatrix(parts[1].Trim());
         return new JigsawTile(id, matrix);
     }
 
     public void RemoveBorder()
     {
-        var width = Matrix.Width;
-        var height = Matrix.Height;
-        var newMatrix = new DynamicMatrix<char>();
-        for (var y = 1; y < height - 1; y++)
-        {
-            for (var x = 1; x < width - 1; x++)
-            {
-                var newX = x - 1;
-                var newY = y - 1;
-                newMatrix.MoveTo(newX, newY);
-                newMatrix.WriteValue(Matrix.ReadValueAt(x, y));
-            }
-        }
-
-        Matrix = newMatrix;
+        Matrix = Matrix.Slice(new MatrixAddress(Matrix.XMin + 1, Matrix.YMin + 1), new MatrixAddress(Matrix.XMax - 1, Matrix.YMax - 1));
     }
 }

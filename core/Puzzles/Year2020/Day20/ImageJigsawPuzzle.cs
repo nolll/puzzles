@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Strings;
 
@@ -23,7 +22,7 @@ public class ImageJigsawPuzzle
         
     public ImageJigsawPuzzle(string input)
     {
-        _seaMonsterMatrix = MatrixBuilder.BuildCharMatrix(SeaMonsterPattern);
+        _seaMonsterMatrix = MatrixBuilder.BuildQuickCharMatrix(SeaMonsterPattern);
         _seaMonsterHashAddresses = _seaMonsterMatrix.Coords.Where(o => _seaMonsterMatrix.ReadValueAt(o) == '#').ToList();
         var groups = PuzzleInputReader.ReadStringGroups(input);
         TilesById = new Dictionary<long, JigsawTile>();
@@ -123,7 +122,7 @@ public class ImageJigsawPuzzle
         return numberOfSeaMonsters;
     }
 
-    private string GetPrintout(DynamicMatrix<char> matrix)
+    private string GetPrintout(IMatrix<char> matrix)
     {
         return matrix.Print().Replace("\r\n", "");
     }
@@ -132,22 +131,16 @@ public class ImageJigsawPuzzle
     public IList<JigsawTile> EdgeTiles => _matchesById.Where(o => o.Value.Count == 3).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
     public IList<JigsawTile> CenterTiles => _matchesById.Where(o => o.Value.Count == 4).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
 
-    private DynamicMatrix<char> ArrangeTilesAndPaintImage()
+    private IMatrix<char> ArrangeTilesAndPaintImage()
     {
         var cornerTilesLeft = CornerTiles.ToList();
-        var tileMatrix = new DynamicMatrix<long>();
-            
+        var tileMatrix = new QuickMatrix<long>();
         var currentTile = cornerTilesLeft.First();
-
-        //var currentTile = TilesById[1951];
-        //currentTile.FlipVertical();
 
         tileMatrix.MoveTo(0, 0);
         tileMatrix.WriteValue(currentTile.Id);
 
         RotateUntilCornerTileIsCorrect(currentTile);
-
-        currentTile.Done = true;
 
         while (tileMatrix.Values.Count(o => o != 0) < TilesById.Values.Count)
         {
@@ -158,7 +151,6 @@ public class ImageJigsawPuzzle
             {
                 tileMatrix.MoveRight();
                 RotateUntilLeftEdgeMatches(currentTile, edgeToFit);
-                currentTile.Done = true;
                 tileMatrix.WriteValue(currentTile.Id);
             }
             else
@@ -170,7 +162,6 @@ public class ImageJigsawPuzzle
                 matches = _matchesByEdge[edgeToFit];
                 currentTile = matches.First(o => o.Id != currentTile.Id);
                 RotateUntilTopEdgeMatches(currentTile, edgeToFit);
-                currentTile.Done = true;
                 tileMatrix.WriteValue(currentTile.Id);
             }
         }
@@ -180,7 +171,7 @@ public class ImageJigsawPuzzle
             tile.RemoveBorder();
         }
 
-        var imageMatrix = new DynamicMatrix<char>();
+        var imageMatrix = new QuickMatrix<char>();
         for (var tileY = 0; tileY < tileMatrix.Height; tileY++)
         {
             for (var tileX = 0; tileX < tileMatrix.Width; tileX++)
@@ -195,8 +186,7 @@ public class ImageJigsawPuzzle
                         var x = localX + tileOffsetX;
                         var y = localY + tileOffsetY;
 
-                        imageMatrix.MoveTo(x, y);
-                        imageMatrix.WriteValue(tile.Matrix.ReadValueAt(localX, localY));
+                        imageMatrix.WriteValueAt(x, y, tile.Matrix.ReadValueAt(localX, localY));
                     }
                 }
             }
@@ -341,7 +331,7 @@ public class ImageJigsawPuzzle
         return matchingTilesEdge1.Count == 1 && matchingTilesEdge2.Count == 1;
     }
 
-    private Dictionary<long, List<JigsawTile>> FindMatchingTiles(IList<JigsawTile> tiles)
+    private static Dictionary<long, List<JigsawTile>> FindMatchingTiles(IList<JigsawTile> tiles)
     {
         var matches = new Dictionary<long, List<JigsawTile>>();
         foreach (var tile in tiles)

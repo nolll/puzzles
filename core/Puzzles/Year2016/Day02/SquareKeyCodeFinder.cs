@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Strings;
 
@@ -44,19 +43,19 @@ public class SquareKeyCodeFinder
             _buttons.TryMoveLeft();
     }
 
-    private IMatrix<char> BuildButtonMatrix()
+    private static IMatrix<char> BuildButtonMatrix()
     {
         const string input = @"
 123
 456
 789";
 
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
         matrix.MoveTo(1, 1);
         return matrix;
     }
 
-    private IList<char[]> ParseCommands(string input)
+    private static IList<char[]> ParseCommands(string input)
     {
         return PuzzleInputReader.ReadLines(input).Select(o => o.ToCharArray()).ToList();
     }

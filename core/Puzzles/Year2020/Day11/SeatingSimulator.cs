@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2020.Day11;
@@ -16,7 +15,7 @@ public abstract class SeatingSimulator
 
     protected SeatingSimulator(string input)
     {
-        Matrix = MatrixBuilder.BuildCharMatrix(input);
+        Matrix = MatrixBuilder.BuildQuickCharMatrix(input);
     }
 
     public void Run()
@@ -36,20 +35,19 @@ public abstract class SeatingSimulator
     private void RunOnce()
     {
         var newMatrix = Matrix.Copy();
-        for (var y = 0; y < Matrix.Height; y++)
-        {
-            for (var x = 0; x < Matrix.Width; x++)
-            {
-                Matrix.MoveTo(x, y);
-                var currentValue = Matrix.ReadValue();
-                var adjacentValues = GetAdjacentSeats();
-                var neighborCount = adjacentValues.Count(o => o == OccupiedChair);
-                var newValue = GetSeatStatus(currentValue, neighborCount);
 
-                newMatrix.MoveTo(x, y);
-                newMatrix.WriteValue(newValue);
-            }
+        foreach (var coord in Matrix.Coords)
+        {
+            Matrix.MoveTo(coord);
+            var currentValue = Matrix.ReadValue();
+            var adjacentValues = GetAdjacentSeats();
+            var neighborCount = adjacentValues.Count(o => o == OccupiedChair);
+            var newValue = GetSeatStatus(currentValue, neighborCount);
+
+            newMatrix.MoveTo(coord);
+            newMatrix.WriteValue(newValue);
         }
+        
         Matrix = newMatrix;
     }
 

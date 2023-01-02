@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2018.Day20;
 
 public class RegularMapNavigator
 {
-    private readonly DynamicMatrix<char> _map;
+    private readonly IMatrix<char> _map;
     private readonly IDictionary<MatrixAddress, int> _distances;
 
     private static class Chars
@@ -33,12 +32,12 @@ public class RegularMapNavigator
         MostDoors = 0;
         const int size = 220;
         const int start = size / 2;
-        _map = new DynamicMatrix<char>(size, size, Chars.Wall);
+        _map = new QuickMatrix<char>(size, size, Chars.Wall);
         _distances = new Dictionary<MatrixAddress, int>();
         var startAddress = new MatrixAddress(start, start);
         _map.MoveTo(startAddress);
         BuildMap(input);
-        MostDoors = _distances.Values.OrderBy(o => o).Last();
+        MostDoors = _distances.Values.MaxBy(o => o);
         RoomsMoreThat1000DoorsAway = _distances.Values.Count(o => o >= 1000);
     }
         
@@ -81,13 +80,13 @@ public class RegularMapNavigator
 
     private Action GetMoveFunc(char c)
     {
-        if (c == Chars.North)
-            return MoveNorth;
-        if (c == Chars.East)
-            return MoveEast;
-        if (c == Chars.South)
-            return MoveSouth;
-        return MoveWest;
+        return c switch
+        {
+            Chars.North => MoveNorth,
+            Chars.East => MoveEast,
+            Chars.South => MoveSouth,
+            _ => MoveWest
+        };
     }
 
     private void MoveNorth() => _map.MoveUp();

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Strings;
 
@@ -8,10 +7,10 @@ namespace Core.Puzzles.Year2018.Day17;
 
 public class ReservoirFiller
 {
-    private DynamicMatrix<char> _matrix;
+    private IMatrix<char> _matrix;
     private int _yMin = int.MaxValue;
     private int _yMax = int.MinValue;
-    private readonly MatrixAddress _source = new MatrixAddress(500, 0);
+    private readonly MatrixAddress _source = new(500, 0);
     private List<MatrixAddress> _openAddresses;
 
     private const char SourceTile = '+';
@@ -31,7 +30,7 @@ public class ReservoirFiller
 
     public void Fill()
     {
-        _openAddresses = new List<MatrixAddress> { new MatrixAddress(_source.X, _source.Y) };
+        _openAddresses = new List<MatrixAddress> { new(_source.X, _source.Y) };
         while (_openAddresses.Any())
         {
             var current = _openAddresses.First();
@@ -54,7 +53,7 @@ public class ReservoirFiller
                 }
                     
                 var value = _matrix.ReadValue();
-                if (value == WallTile || value == RestingWaterTile)
+                if (value is WallTile or RestingWaterTile)
                 {
                     _matrix.MoveUp();
                     var canFlowRight = TryFlowRight();
@@ -80,7 +79,7 @@ public class ReservoirFiller
                     break;
                 }
 
-                if (value == EmptyTile || value == RunningWaterTile)
+                if (value is EmptyTile or RunningWaterTile)
                 {
                     if(value == EmptyTile)
                         _matrix.WriteValue(RunningWaterTile);
@@ -91,7 +90,7 @@ public class ReservoirFiller
 
     private void BuildMatrix(string input)
     {
-        _matrix = new DynamicMatrix<char>(1, 1, EmptyTile);
+        _matrix = new QuickMatrix<char>(1, 1, EmptyTile);
         _matrix.MoveTo(_source);
         _matrix.WriteValue(SourceTile);
 

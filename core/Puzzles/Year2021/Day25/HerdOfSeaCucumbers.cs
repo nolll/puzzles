@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2021.Day25;
@@ -11,7 +10,7 @@ public class HerdOfSeaCucumbers
 
     public HerdOfSeaCucumbers(string input)
     {
-        _matrix = MatrixBuilder.BuildCharMatrix(input);
+        _matrix = MatrixBuilder.BuildQuickCharMatrix(input);
     }
 
     public int MoveUntilStop()
@@ -80,21 +79,19 @@ public class HerdOfSeaCucumbers
     private List<MatrixAddress> FindCucumbersToMoveSouth()
     {
         var cucumbersToMoveSouth = new List<MatrixAddress>();
-        for (var y = 0; y < _matrix.Height; y++)
+
+        foreach (var coord in _matrix.Coords)
         {
-            for (var x = 0; x < _matrix.Width; x++)
+            _matrix.MoveTo(coord);
+            var current = _matrix.ReadValue();
+            if (current == 'v')
             {
-                _matrix.MoveTo(x, y);
-                var current = _matrix.ReadValue();
-                if (current == 'v')
-                {
-                    var next = _matrix.TryMoveDown() ? _matrix.ReadValue() : _matrix.ReadValueAt(_matrix.Address.X, 0);
-                    if (next == '.')
-                        cucumbersToMoveSouth.Add(new MatrixAddress(x, y));
-                }
+                var next = _matrix.TryMoveDown() ? _matrix.ReadValue() : _matrix.ReadValueAt(_matrix.Address.X, 0);
+                if (next == '.')
+                    cucumbersToMoveSouth.Add(coord);
             }
         }
-
+        
         return cucumbersToMoveSouth;
     }
 

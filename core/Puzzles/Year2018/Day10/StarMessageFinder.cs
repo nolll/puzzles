@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Strings;
 
@@ -37,7 +36,7 @@ public class StarMessageFinder
     {
         var yOffset = positions.Min(o => o.Y);
         var xOffset = positions.Min(o => o.X);
-        var matrix = new DynamicMatrix<char>(1, 1, '.');
+        var matrix = new QuickMatrix<char>(1, 1, '.');
         foreach (var position in positions)
         {
             matrix.MoveTo(position.X - xOffset, position.Y - yOffset);

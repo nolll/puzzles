@@ -9,27 +9,20 @@ namespace Core.Puzzles.Year2019.Day11;
 public class PaintRobot
 {
     private readonly string _program;
-    private readonly int _shipWidth;
-    private readonly int _shipHeight;
-    private readonly DynamicMatrix<int> _panels;
-    private readonly DynamicMatrix<int> _paintCounts;
+    private readonly IMatrix<int> _panels;
+    private readonly IMatrix<int> _paintCounts;
     private PaintMode _mode;
     private ComputerInterface _computer;
 
     public PaintRobot(string program, int shipWidth = 100, int shipHeight = 100)
     {
         _program = program;
-        _shipWidth = shipWidth;
-        _shipHeight = shipHeight;
-        _panels = new DynamicMatrix<int>(shipWidth, shipHeight);
-        _paintCounts = new DynamicMatrix<int>(shipWidth, shipHeight);
+        _panels = new QuickMatrix<int>(shipWidth, shipHeight);
+        _paintCounts = new QuickMatrix<int>(shipWidth, shipHeight);
     }
 
     public Result Paint(bool startOnWhitePanel)
     {
-        var startX = _shipWidth / 2;
-        var startY = _shipHeight / 2;
-        _panels.MoveTo(startX, startY);
         _mode = PaintMode.Paint;
 
         if (startOnWhitePanel)
@@ -38,7 +31,7 @@ public class PaintRobot
         _computer = new ComputerInterface(_program, ReadInput, WriteOutput);
         _computer.Start();
 
-        return new Result(PaintedPanelsCount, _panels.Address.X, _panels.Address.Y, _panels.Print(false, false));
+        return new Result(PaintedPanelsCount, _panels.Print());
     }
 
     private IList<int> PaintedPanels => _paintCounts.Values.Where(o => o > 0).ToList();
@@ -65,8 +58,7 @@ public class PaintRobot
         if (_mode == PaintMode.Paint)
         {
             Paint((int)output);
-            _paintCounts.MoveTo(_panels.Address);
-            _paintCounts.WriteValue(_paintCounts.ReadValue() + 1);
+            _paintCounts.WriteValueAt(_panels.Address, _paintCounts.ReadValue() + 1);
             _mode = PaintMode.Move;
         }
         else
@@ -83,15 +75,11 @@ public class PaintRobot
     public class Result
     {
         public int PaintedPanelCount { get; }
-        public int X { get; }
-        public int Y { get; }
         public string Printout { get; }
 
-        public Result(int paintedPanelCount, int x, int y, string printout)
+        public Result(int paintedPanelCount, string printout)
         {
             PaintedPanelCount = paintedPanelCount;
-            X = x;
-            Y = y;
             Printout = printout;
         }
     }

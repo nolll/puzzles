@@ -20,7 +20,7 @@ public class HexagonalFloor
     private const string NorthWest = "nw";
 
     private readonly IEnumerable<List<string>> _instructions;
-    private readonly DynamicMatrix<char> _matrix;
+    private readonly IDynamicMatrix<char> _matrix;
     private readonly Dictionary<string, List<MatrixAddress>> _adjacentCoordsCache;
     public int BlackTileCount => _matrix.Values.Count(o => o == Black);
 
@@ -28,18 +28,18 @@ public class HexagonalFloor
     {
         var rows = PuzzleInputReader.ReadLines(input);
         _instructions = rows.Select(ParseInstruction);
-        _matrix = new DynamicMatrix<char>(defaultValue: Nothing);
+        _matrix = new QuickMatrix<char>(defaultValue: Nothing);
         _adjacentCoordsCache = new Dictionary<string, List<MatrixAddress>>();
     }
 
-    private List<string> ParseInstruction(string s)
+    private static List<string> ParseInstruction(string s)
     {
         var instructions = new List<string>();
         var array = s.ToCharArray();
         for (var i = 0; i < array.Length; i++)
         {
             var c = array[i];
-            if (c == 'w' || c == 'e')
+            if (c is 'w' or 'e')
             {
                 instructions.Add(c.ToString());
             }
@@ -62,35 +62,32 @@ public class HexagonalFloor
             _matrix.MoveTo(_matrix.StartAddress);
             foreach (var step in instruction)
             {
-                if (step == NorthEast)
+                switch (step)
                 {
-                    _matrix.MoveUp();
-                    _matrix.MoveRight();
-                }
-                else if (step == East)
-                {
-                    _matrix.MoveRight();
-                    _matrix.MoveRight();
-                }
-                if (step == SouthEast)
-                {
-                    _matrix.MoveDown();
-                    _matrix.MoveRight();
-                }
-                if (step == SouthWest)
-                {
-                    _matrix.MoveDown();
-                    _matrix.MoveLeft();
-                }
-                else if (step == West)
-                {
-                    _matrix.MoveLeft();
-                    _matrix.MoveLeft();
-                }
-                if (step == NorthWest)
-                {
-                    _matrix.MoveUp();
-                    _matrix.MoveLeft();
+                    case NorthEast:
+                        _matrix.MoveUp();
+                        _matrix.MoveRight();
+                        break;
+                    case East:
+                        _matrix.MoveRight();
+                        _matrix.MoveRight();
+                        break;
+                    case SouthEast:
+                        _matrix.MoveDown();
+                        _matrix.MoveRight();
+                        break;
+                    case SouthWest:
+                        _matrix.MoveDown();
+                        _matrix.MoveLeft();
+                        break;
+                    case West:
+                        _matrix.MoveLeft();
+                        _matrix.MoveLeft();
+                        break;
+                    case NorthWest:
+                        _matrix.MoveUp();
+                        _matrix.MoveLeft();
+                        break;
                 }
 
                 if (_matrix.ReadValue() == Nothing)
@@ -119,31 +116,29 @@ public class HexagonalFloor
     {
         var tilesToFlipToBlack = new List<MatrixAddress>();
         var tilesToFlipToWhite = new List<MatrixAddress>();
-        for (var y = 0; y < _matrix.Height; y++)
-        {
-            for (var x = 0; x < _matrix.Width; x++)
-            {
-                var thisValue = _matrix.ReadValueAt(x, y);
 
-                if (thisValue != Nothing)
+        foreach (var coord in _matrix.Coords)
+        {
+            var thisValue = _matrix.ReadValueAt(coord);
+
+            if (thisValue != Nothing)
+            {
+                var adjacentValues = GetAdjacent6Values(coord);
+                var blackAdjacentCount = adjacentValues.Count(o => o == Black);
+                if (thisValue == Black)
                 {
-                    var adjacentValues = GetAdjacent6Values(x, y);
-                    var blackAdjacentCount = adjacentValues.Count(o => o == Black);
-                    if (thisValue == Black)
+                    // Any black tile with zero or more than 2 black tiles immediately adjacent to it is flipped to white.
+                    if (blackAdjacentCount is 0 or > 2)
                     {
-                        // Any black tile with zero or more than 2 black tiles immediately adjacent to it is flipped to white.
-                        if (blackAdjacentCount == 0 || blackAdjacentCount > 2)
-                        {
-                            tilesToFlipToWhite.Add(new MatrixAddress(x, y));
-                        }
+                        tilesToFlipToWhite.Add(coord);
                     }
-                    else
+                }
+                else
+                {
+                    // Any white tile with exactly 2 black tiles immediately adjacent to it is flipped to black.
+                    if (blackAdjacentCount == 2)
                     {
-                        // Any white tile with exactly 2 black tiles immediately adjacent to it is flipped to black.
-                        if (blackAdjacentCount == 2)
-                        {
-                            tilesToFlipToBlack.Add(new MatrixAddress(x, y));
-                        }
+                        tilesToFlipToBlack.Add(coord);
                     }
                 }
             }
@@ -151,56 +146,48 @@ public class HexagonalFloor
 
         foreach (var address in tilesToFlipToBlack)
         {
-            _matrix.MoveTo(address);
-            _matrix.WriteValue(Black);
+            _matrix.WriteValueAt(address, Black);
         }
 
         foreach (var address in tilesToFlipToWhite)
         {
-            _matrix.MoveTo(address);
-            _matrix.WriteValue(White);
+            _matrix.WriteValueAt(address, White);
         }
     }
 
     private void FillEmptyTilesWithWhite()
     {
         var tilesToFill = new List<MatrixAddress>();
-        for (var y = 0; y < _matrix.Height; y++)
+
+        foreach (var coord in _matrix.Coords)
         {
-            for (var x = 0; x < _matrix.Width; x++)
+            if (_matrix.ReadValueAt(coord) != Nothing)
             {
-                _matrix.MoveTo(x, y);
-                var thisValue = _matrix.ReadValue();
-                if (thisValue != Nothing)
+                var adjacentAddresses = GetAdjacent6Coords(coord);
+                var adjacentValues = GetAdjacent6Values(coord);
+                if (adjacentValues.Any(o => o != Nothing))
                 {
-                    var adjacentAddresses = GetAdjacent6Coords(x, y);
-                    var adjacentValues = GetAdjacent6Values(x, y);
-                    if (adjacentValues.Any(o => o != Nothing))
+                    foreach (var address in adjacentAddresses)
                     {
-                        foreach (var address in adjacentAddresses)
+                        if (_matrix.TryMoveTo(address) && _matrix.ReadValueAt(address) == Nothing)
                         {
-                            if (_matrix.TryMoveTo(address))
-                            {
-                                if (_matrix.ReadValue() == Nothing)
-                                    tilesToFill.Add(_matrix.Address);
-                            }
+                            tilesToFill.Add(_matrix.Address);
                         }
                     }
                 }
             }
         }
-
+        
         foreach (var address in tilesToFill)
         {
-            _matrix.MoveTo(address);
-            _matrix.WriteValue(White);
+            _matrix.WriteValueAt(address, White);
         }
     }
 
-    private List<char> GetAdjacent6Values(int x, int y)
+    private List<char> GetAdjacent6Values(MatrixAddress coord)
     {
         var currentAddress = _matrix.Address;
-        var addresses = GetAdjacent6Coords(x, y);
+        var addresses = GetAdjacent6Coords(coord);
         var values = new List<char>();
         foreach (var address in addresses)
         {
@@ -214,20 +201,20 @@ public class HexagonalFloor
         return values;
     }
 
-    private List<MatrixAddress> GetAdjacent6Coords(int x, int y)
+    private List<MatrixAddress> GetAdjacent6Coords(MatrixAddress coord)
     {
-        var key = $"{x},{y}";
+        var key = coord.Id;
         if (_adjacentCoordsCache.TryGetValue(key, out var coords))
             return coords;
             
         coords = new List<MatrixAddress>
         {
-            new(x + 1, y - 1),
-            new(x + 2, y),
-            new(x + 1, y + 1),
-            new(x - 1, y + 1),
-            new(x - 2, y),
-            new(x - 1, y - 1)
+            new(coord.X + 1, coord.Y - 1),
+            new(coord.X + 2, coord.Y),
+            new(coord.X + 1, coord.Y + 1),
+            new(coord.X - 1, coord.Y + 1),
+            new(coord.X - 2, coord.Y),
+            new(coord.X - 1, coord.Y - 1)
         };
             
         _adjacentCoordsCache.Add(key, coords);

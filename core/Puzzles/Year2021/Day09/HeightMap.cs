@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 using Core.Common.Strings;
 
@@ -16,10 +15,8 @@ public class HeightMap
         var coords = matrix.Coords;
         foreach (var coord in coords)
         {
-            matrix.MoveTo(coord);
-            var v = matrix.ReadValue();
-
-            var adjacentValues = matrix.PerpendicularAdjacentValues;
+            var v = matrix.ReadValueAt(coord);
+            var adjacentValues = matrix.PerpendicularAdjacentValuesTo(coord);
             var isLowPoint = !adjacentValues.Any(o => o <= v);
 
             if (isLowPoint)
@@ -55,13 +52,12 @@ public class HeightMap
             {
                 var c = coordsToCheck.First();
                 coordsToCheck.Remove(c);
-                matrix.MoveTo(c);
                 checkedCoords.Add(c);
                     
-                if (matrix.ReadValue() < 9)
+                if (matrix.ReadValueAt(c) < 9)
                 {
                     basinSize++;
-                    var adjacentCoords = matrix.PerpendicularAdjacentCoords;
+                    var adjacentCoords = matrix.PerpendicularAdjacentCoordsTo(c);
                     foreach (var a in adjacentCoords)
                     {
                         if (!checkedCoords.Contains(a) && !coordsToCheck.Contains(a))
@@ -83,9 +79,9 @@ public class HeightMap
             .Aggregate(1, (product, basin) => product * basin);
     }
 
-    private static DynamicMatrix<int> CreateMatrix(string input)
+    private static IMatrix<int> CreateMatrix(string input)
     {
-        var matrix = new DynamicMatrix<int>();
+        var matrix = new QuickMatrix<int>();
         var lines = PuzzleInputReader.ReadLines(input);
 
         var y = 0;

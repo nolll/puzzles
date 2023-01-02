@@ -10,17 +10,17 @@ public class TrenchMap
     {
         var groups = input.Split("\r\n\r\n");
         var algorithm = groups[0].Trim();
-        var inputImage = (DynamicMatrix<char>)MatrixBuilder.BuildCharMatrix(groups[1].Trim(), '.');
+        var inputImage = (IDynamicMatrix<char>)MatrixBuilder.BuildQuickCharMatrix(groups[1].Trim(), '.');
         inputImage.ExtendAllDirections(5);
-        var outputImage = new DynamicMatrix<char>('.');
+        IDynamicMatrix<char> outputImage = new QuickMatrix<char>('.');
         
         for (var i = 0; i < steps; i++)
         {
             var defaultValue = inputImage.ReadValueAt(0, 0);
-            var newInputImage = new DynamicMatrix<char>(inputImage.Width, inputImage.Height, defaultValue);
-            for (var y = 0; y < inputImage.Height; y++)
+            var newInputImage = new QuickMatrix<char>(inputImage.Width, inputImage.Height, defaultValue);
+            for (var y = inputImage.YMin; y <= inputImage.YMax; y++)
             {
-                for (var x = 0; x < inputImage.Width; x++)
+                for (var x = inputImage.XMin; x <= inputImage.XMax; x++)
                 {
                     newInputImage.MoveTo(x, y);
                     newInputImage.WriteValue(inputImage.ReadValueAt(x, y));
@@ -28,17 +28,13 @@ public class TrenchMap
             }
 
             inputImage = newInputImage;
-            inputImage.ExtendAllDirections(2);
-            outputImage = new DynamicMatrix<char>(inputImage.Width, inputImage.Height, defaultValue);
-
-            var height = inputImage.Height;
-            var width = inputImage.Width;
-
-            for (var y = 1; y < height - 1; y++)
+            inputImage.ExtendAllDirections(3);
+            outputImage = new QuickMatrix<char>(1, 1, defaultValue);
+            
+            for (var y = inputImage.YMin + 1; y <= inputImage.YMax - 1; y++)
             {
-                for (var x = 1; x < width - 1; x++)
+                for (var x = inputImage.XMin + 1; x <= inputImage.XMax - 1; x++)
                 {
-                    inputImage.MoveTo(x, y);
                     var binary = "";
                     binary += inputImage.ReadValueAt(x - 1, y - 1) == '#' ? '1' : '0';
                     binary += inputImage.ReadValueAt(x, y - 1) == '#' ? '1' : '0';
@@ -57,8 +53,10 @@ public class TrenchMap
                     outputImage.WriteValue(c);
                 }
             }
-            
-            outputImage = (DynamicMatrix<char>)outputImage.Slice(new MatrixAddress(1, 1), new MatrixAddress(outputImage.Width - 2, outputImage.Height - 2));
+
+            var sliceFrom = new MatrixAddress(outputImage.XMin + 1, outputImage.YMin + 1);
+            var sliceTo = new MatrixAddress(outputImage.XMax - 1, outputImage.YMax - 1);
+            outputImage = (IDynamicMatrix<char>)outputImage.Slice(sliceFrom, sliceTo);
             inputImage = outputImage;
         }
 

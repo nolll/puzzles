@@ -63,7 +63,7 @@ public class BingoGame
         var i = 0;
         foreach (var input in inputs)
         {
-            d.Add(i, new BingoBoard(i, MatrixBuilder.BuildIntMatrixFromSpaceSeparated(input), new DynamicMatrix<bool>(5, 5)));
+            d.Add(i, new BingoBoard(i, MatrixBuilder.BuildIntMatrixFromSpaceSeparated(input), new QuickMatrix<bool>(5, 5)));
             i++;
         }
 
@@ -76,7 +76,7 @@ public class BingoBoard
     public int Id { get; }
     private readonly IMatrix<int> _numbers;
     private readonly IMatrix<bool> _marks;
-    private IList<MatrixAddress> _coords;
+    private readonly IList<MatrixAddress> _coords;
 
     public BingoBoard(int id, IMatrix<int> numbers, IMatrix<bool> marks)
     {
@@ -92,8 +92,7 @@ public class BingoBoard
         {
             if (_numbers.ReadValueAt(coord) == number)
             {
-                _marks.MoveTo(coord);
-                _marks.WriteValue(true);
+                _marks.WriteValueAt(coord, true);
             }
         }
     }

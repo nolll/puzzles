@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2020.Day03;
@@ -14,26 +13,9 @@ public class TreeNavigator
         _input = input;
     }
 
-    private string ExpandInput(string input, TreeTrajectory trajectory)
-    {
-        var rows = input.Trim().Split('\n').Select(o => o.Trim()).ToList();
-        var height = rows.Count;
-        var requiredWidth = height / trajectory.Down * trajectory.Right;
-        for (var r = 0; r < rows.Count; r++)
-        {
-            var row = rows[r];
-            while (rows[r].Length < requiredWidth)
-            {
-                rows[r] += row;
-            }
-        }
-
-        return string.Join("\n\r", rows);
-    }
-
     public long GetTreeCount(TreeTrajectory trajectory)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(_input);
+        var matrix = MatrixBuilder.BuildQuickCharMatrix(_input);
         matrix.MoveTo(0, 0);
 
         var treeCount = 0;
@@ -65,11 +47,11 @@ public class TreeNavigator
     {
         var trajectories = new List<TreeTrajectory>
         {
-            new TreeTrajectory(1, 1),
-            new TreeTrajectory(3, 1),
-            new TreeTrajectory(5, 1),
-            new TreeTrajectory(7, 1),
-            new TreeTrajectory(1, 2)
+            new(1, 1),
+            new(3, 1),
+            new(5, 1),
+            new(7, 1),
+            new(1, 2)
         };
 
         return trajectories.Select(GetTreeCount);

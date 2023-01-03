@@ -1,4 +1,4 @@
-using Core.Common.CoordinateSystems;
+using System;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2017.Day21;
@@ -11,7 +11,7 @@ public class FractalRule
     public FractalRule(string input, string output)
     {
         Input = input;
-        Output = MatrixBuilder.BuildCharMatrix(output.Replace("/", "\n"));
+        Output = MatrixBuilder.BuildQuickCharMatrix(output.Replace("/", Environment.NewLine));
     }
 
     public bool IsMatch(string compare)

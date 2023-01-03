@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class MatrixTests
+public class DynamicMatrixTests
 {
     private const char DefaultValue = '.';
     private const char WriteValue = '#';

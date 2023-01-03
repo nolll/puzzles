@@ -7,7 +7,6 @@ using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2017.Day21;
 
-// todo: This puzzle does not run. Index out of range
 public class FractalArtGenerator
 {
     private const string Inital = @"
@@ -29,18 +28,18 @@ public class FractalArtGenerator
         _transformationRules2X2 = rules.Where(o => o.Input.Length == 5).ToList();
         _transformationRules3X3 = rules.Where(o => o.Input.Length != 5).ToList();
 
-        _matrix = MatrixBuilder.BuildCharMatrix(Inital);
+        _matrix = MatrixBuilder.BuildQuickCharMatrix(Inital);
         _variantCache = new Dictionary<string, IList<MatrixVariant>>();
         _transformCache = new Dictionary<string, IMatrix<char>>();
     }
 
-    private IList<FractalRule> ParseRules(string input)
+    private static IList<FractalRule> ParseRules(string input)
     {
         var rows = PuzzleInputReader.ReadLines(input);
         return rows.Select(ParseRule).ToList();
     }
 
-    private FractalRule ParseRule(string s)
+    private static FractalRule ParseRule(string s)
     {
         var parts = s.Split(" => ");
         var input = parts[0];
@@ -78,9 +77,9 @@ public class FractalArtGenerator
         _matrix = Join(transformed);
     }
 
-    private DynamicMatrix<char> Join(List<IMatrix<char>> matrices)
+    private static QuickMatrix<char> Join(List<IMatrix<char>> matrices)
     {
-        var newMatrix = new DynamicMatrix<char>();
+        var newMatrix = new QuickMatrix<char>();
         var size = matrices.First().Width;
         var matricesPerRow = (int)Math.Sqrt(matrices.Count);
         var col = 0;
@@ -111,12 +110,10 @@ public class FractalArtGenerator
 
     private class MatrixVariant
     {
-        private readonly IMatrix<char> _matrix;
         public string Key { get; }
 
-        public MatrixVariant(string key, IMatrix<char> matrix)
+        public MatrixVariant(string key)
         {
-            _matrix = matrix;
             Key = key;
         }
     }
@@ -132,42 +129,42 @@ public class FractalArtGenerator
         return variants;
     }
 
-    private IEnumerable<MatrixVariant> CreateVariants(IMatrix<char> matrix)
+    private static IEnumerable<MatrixVariant> CreateVariants(IMatrix<char> matrix)
     {
-        yield return new MatrixVariant(MatrixToString(matrix), matrix);
+        yield return new MatrixVariant(MatrixToString(matrix));
 
         var flippedMatrix = FlipMatrixHorizontally(matrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+        yield return new MatrixVariant(MatrixToString(flippedMatrix));
 
         flippedMatrix = FlipMatrixVertically(matrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+        yield return new MatrixVariant(MatrixToString(flippedMatrix));
 
         var rotatedMatrix = RotateMatrixRight(matrix);
-        yield return new MatrixVariant(MatrixToString(rotatedMatrix), rotatedMatrix);
+        yield return new MatrixVariant(MatrixToString(rotatedMatrix));
 
         flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+        yield return new MatrixVariant(MatrixToString(flippedMatrix));
 
         flippedMatrix = FlipMatrixVertically(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+        yield return new MatrixVariant(MatrixToString(flippedMatrix));
 
         rotatedMatrix = RotateMatrixRight(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(rotatedMatrix), rotatedMatrix);
+        yield return new MatrixVariant(MatrixToString(rotatedMatrix));
 
         flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+        yield return new MatrixVariant(MatrixToString(flippedMatrix));
 
         flippedMatrix = FlipMatrixVertically(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+        yield return new MatrixVariant(MatrixToString(flippedMatrix));
 
         rotatedMatrix = RotateMatrixRight(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(rotatedMatrix), rotatedMatrix);
+        yield return new MatrixVariant(MatrixToString(rotatedMatrix));
 
         flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+        yield return new MatrixVariant(MatrixToString(flippedMatrix));
 
         flippedMatrix = FlipMatrixVertically(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix), flippedMatrix);
+        yield return new MatrixVariant(MatrixToString(flippedMatrix));
     }
 
     private IMatrix<char> Transform(IMatrix<char> matrix)
@@ -197,10 +194,10 @@ public class FractalArtGenerator
         throw new Exception("No transformation rule matched");
     }
 
-    private DynamicMatrix<char> FlipMatrixHorizontally(IMatrix<char> matrix)
+    private static QuickMatrix<char> FlipMatrixHorizontally(IMatrix<char> matrix)
     {
         var width = matrix.Width;
-        var flipped = new DynamicMatrix<char>();
+        var flipped = new QuickMatrix<char>();
         for (var y = 0; y < matrix.Height; y++)
         {
             for (var x = 0; x < width; x++)
@@ -213,10 +210,10 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private DynamicMatrix<char> FlipMatrixVertically(IMatrix<char> matrix)
+    private static QuickMatrix<char> FlipMatrixVertically(IMatrix<char> matrix)
     {
         var height = matrix.Height;
-        var flipped = new DynamicMatrix<char>();
+        var flipped = new QuickMatrix<char>();
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < matrix.Width; x++)
@@ -229,10 +226,10 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private DynamicMatrix<char> RotateMatrixRight(IMatrix<char> matrix)
+    private static QuickMatrix<char> RotateMatrixRight(IMatrix<char> matrix)
     {
         var height = matrix.Height;
-        var flipped = new DynamicMatrix<char>(1, 1, ' ');
+        var flipped = new QuickMatrix<char>(1, 1, ' ');
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < matrix.Width; x++)
@@ -246,7 +243,7 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private string MatrixToString(IMatrix<char> matrix)
+    private static string MatrixToString(IMatrix<char> matrix)
     {
         var sb = new StringBuilder();
         for (var y = 0; y < matrix.Height; y++)
@@ -262,7 +259,7 @@ public class FractalArtGenerator
         return sb.ToString().TrimEnd('/');
     }
 
-    private IEnumerable<DynamicMatrix<char>> GetSubmatrices(int subSize)
+    private IEnumerable<QuickMatrix<char>> GetSubmatrices(int subSize)
     {
         var size = _matrix.Width;
         var x = 0;
@@ -271,7 +268,7 @@ public class FractalArtGenerator
         {
             while (x < size)
             {
-                var matrix = new DynamicMatrix<char>();
+                var matrix = new QuickMatrix<char>();
                 for (var localY = 0; localY < subSize; localY++)
                 {
                     for (var localX = 0; localX < subSize; localX++)

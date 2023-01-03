@@ -43,7 +43,7 @@ public class OpComputer
         foreach (var command in commands)
         {
             var operation = _operationsDictionary[command.Operation];
-            registers = operation.Execute(registers, command.A, command.B, command.C);
+            operation.Execute(registers, command.A, command.B, command.C);
         }
         return registers[0];
     }
@@ -67,7 +67,7 @@ public class OpComputer
             registers[pointerRegister] = pointer;
             var command = commands[pointer];
             var operation = _operationsDictionary[command.Operation];
-            registers = operation.Execute(registers, command.A, command.B, command.C);
+            operation.Execute(registers, command.A, command.B, command.C);
             if (debug)
             {
                 var shortDescription = operation.GetShortDescription(registers, command.A, command.B, command.C);
@@ -84,11 +84,10 @@ public class OpComputer
         return registers[0];
     }
 
-    public (long first, long last) RunSpecialForDay21(string programInput, long register0Value)
+    public long RunSpecialForDay21(string programInput, long register0Value, bool findFirst)
     {
-        long firstRegisterZeroValue = 0;
         long lastRegisterZeroValue = 0;
-        var registerZeroValues = new List<long>();
+        var registerZeroValues = new HashSet<long>();
         var inputRows = PuzzleInputReader.ReadLines(programInput);
         var pointerRegister = int.Parse(inputRows.First().Split(' ').Last());
         var commands = inputRows.Skip(1).Select(ParseStringCommand).ToList();
@@ -102,18 +101,18 @@ public class OpComputer
             if (operation.Name == "eqrr")
             {
                 var v = registers[command.A];
-                if (firstRegisterZeroValue == 0)
-                    firstRegisterZeroValue = v;
+                if (findFirst && !registerZeroValues.Any())
+                    return v;
                 if (registerZeroValues.Contains(v))
-                    return (firstRegisterZeroValue, lastRegisterZeroValue);
+                    return lastRegisterZeroValue;
                 lastRegisterZeroValue = v;
                 registerZeroValues.Add(v);
             }
-            registers = operation.Execute(registers, command.A, command.B, command.C);
+            operation.Execute(registers, command.A, command.B, command.C);
             pointer = (int)registers[pointerRegister];
             pointer++;
         }
-        return (0, 0);
+        return 0;
     }
 
     private IEnumerable<long> FindIntFactors(long target)
@@ -216,8 +215,8 @@ public class OpComputer
         {
             var register = new long[4];
             before.CopyTo(register, 0);
-            var result = operation.Execute(register, a, b, c);
-            if (IsEqual(result, after))
+            operation.Execute(register, a, b, c);
+            if (IsEqual(register, after))
                 matchingOperations.Add(operation);
         }
 

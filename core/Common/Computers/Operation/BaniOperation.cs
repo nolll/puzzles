@@ -6,12 +6,11 @@ public class BaniOperation : Operation
     {
     }
 
-    public override long[] Execute(long[] registers, long a, long b, long c)
+    public override void Execute(long[] registers, long a, long b, long c)
     {
         registers[c] = registers[a] & b;
-        return registers;
     }
-
+    
     public override string GetDescription(long[] registers, long a, long b, long c)
     {
         return $"Bitwise AND immediate. Stores into register {c} the result of the bitwise AND of register {a} ({registers[a]}) and value {b}.";

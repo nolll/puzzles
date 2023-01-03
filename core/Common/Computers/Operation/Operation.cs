@@ -3,7 +3,7 @@ namespace Core.Common.Computers.Operation;
 public abstract class Operation
 {
     public string Name { get; }
-    public abstract long[] Execute(long[] registers, long a, long b, long c);
+    public abstract void Execute(long[] registers, long a, long b, long c);
 
     protected Operation(string name)
     {

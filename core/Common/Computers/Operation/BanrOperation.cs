@@ -6,10 +6,9 @@ public class BanrOperation : Operation
     {
     }
 
-    public override long[] Execute(long[] registers, long a, long b, long c)
+    public override void Execute(long[] registers, long a, long b, long c)
     {
         registers[c] = registers[a] & registers[b];
-        return registers;
     }
 
     public override string GetDescription(long[] registers, long a, long b, long c)

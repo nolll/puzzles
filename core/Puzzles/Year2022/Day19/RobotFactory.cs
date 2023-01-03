@@ -39,7 +39,7 @@ public class RobotFactory
 
             seen[current.CacheKey] = current;
 
-            Console.WriteLine(current.CacheKey);
+            //Console.WriteLine(current.CacheKey);
 
             if (current.Time == 0)
             {

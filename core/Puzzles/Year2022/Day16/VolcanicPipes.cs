@@ -82,7 +82,7 @@ public class VolcanicPipes
             }
         }
 
-        Console.WriteLine(best.Moves);
+        //Console.WriteLine(best.Moves);
         return best.Pressure;
     }
 
@@ -91,7 +91,7 @@ public class VolcanicPipes
         var data = new ValveData(input);
         var (maxPressure, path) = GetMaxPressure(data.Valves, data.Rates, data.Connections);
 
-        Console.WriteLine(path);
+        //Console.WriteLine(path);
 
         return maxPressure;
     }

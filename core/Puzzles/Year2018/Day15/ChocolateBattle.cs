@@ -8,8 +8,10 @@ namespace Core.Puzzles.Year2018.Day15;
 public class ChocolateBattle
 {
     private readonly string _input;
-    private StaticMatrix<char> _matrix;
+    private QuickMatrix<char> _matrix;
     private IList<BattleFigure> _figures;
+    private IDictionary<(int x, int y), IList<MatrixAddress>> _neighborCache;
+
     public int Outcome { get; private set; }
     public string Winners = "";
     public int ElfAttackPower { get; private set; }
@@ -19,14 +21,14 @@ public class ChocolateBattle
         _input = input;
     }
 
-    public void RunUntilElvesWins(bool isPrinterEnabled = false)
+    public void RunUntilElvesWins()
     {
-        var elfAttackPower = 4;
+        var elfAttackPower = 14; // Initially ran from 4
         while (true)
         {
             Init(elfAttackPower);
             var initialElfCount = _figures.Count(o => o.Type == BattleFigureType.Elf);
-            Run(isPrinterEnabled, true);
+            Run(true);
             if (Winners == "Elves" && _figures.Count(o => o.Type == BattleFigureType.Elf) == initialElfCount)
                 break;
 
@@ -36,15 +38,15 @@ public class ChocolateBattle
         ElfAttackPower = elfAttackPower;
     }
 
-    public void RunOnce(bool isPrinterEnabled = false)
+    public void RunOnce()
     {
         const int elfAttackPower = 3;
         Init(elfAttackPower);
-        Run(isPrinterEnabled, false);
+        Run(false);
         ElfAttackPower = elfAttackPower;
     }
 
-    private bool Run(bool isPrinterEnabled, bool breakOnElfDeath)
+    private bool Run(bool breakOnElfDeath)
     {
         var round = 0;
         while (IsBothTypesStillAlive)
@@ -63,14 +65,14 @@ public class ChocolateBattle
                     break;
                 }
 
-                var adjacentEnemyAddresses = _matrix.PerpendicularAdjacentCoordsTo(figure.Address).Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
+                var adjacentEnemyAddresses = NeighborCache(figure.Address).Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
 
                 if (!adjacentEnemyAddresses.Any())
                 {
                     var targets = new List<MatrixAddress>();
                     foreach (var enemy in enemies)
                     {
-                        var adjacentAddresses = _matrix.PerpendicularAdjacentCoordsTo(enemy.Address);
+                        var adjacentAddresses = NeighborCache(enemy.Address);
                         foreach (var adjacentAddress in adjacentAddresses)
                         {
                             if (_matrix.ReadValueAt(adjacentAddress) == '.')
@@ -98,16 +100,16 @@ public class ChocolateBattle
                     }
                 }
 
-                adjacentEnemyAddresses = _matrix.PerpendicularAdjacentCoordsTo(figure.Address).Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
+                adjacentEnemyAddresses = NeighborCache(figure.Address).Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
 
                 if (adjacentEnemyAddresses.Any())
                 {
                     var bestEnemyAddress = adjacentEnemyAddresses
-                        .OrderBy(ea => _figures.Single(f => !f.IsDead && f.Address.Equals(ea)).HitPoints)
+                        .OrderBy(ea => enemies.Single(f => !f.IsDead && f.Address.Equals(ea)).HitPoints)
                         .ThenBy(o => o.Y)
                         .ThenBy(o => o.X)
                         .First();
-                    var enemy = _figures.First(o => o.Address.Equals(bestEnemyAddress));
+                    var enemy = enemies.First(o => o.Address.Equals(bestEnemyAddress));
                     enemy.Hit(figure.AttackPower);
                     if (enemy.IsDead)
                     {
@@ -123,19 +125,17 @@ public class ChocolateBattle
             {
                 round++;
             }
-
-            if (isPrinterEnabled)
-            {
-                Console.Clear();
-                Console.SetCursorPosition(0, 0);
-                Console.WriteLine(_matrix.Print());
-            }
         }
 
         Outcome = _figures.Sum(o => o.HitPoints) * round;
         Winners = _figures.First().Type == BattleFigureType.Elf ? "Elves" : "Goblin";
 
         return true;
+    }
+
+    private IList<MatrixAddress> NeighborCache(MatrixAddress coord)
+    {
+        return _neighborCache[(coord.X, coord.Y)];
     }
 
     private bool IsBothTypesStillAlive =>
@@ -151,7 +151,7 @@ public class ChocolateBattle
 
         var width = rows.First().Length;
         var height = rows.Count();
-        _matrix = new StaticMatrix<char>(width, height);
+        _matrix = new QuickMatrix<char>(width, height);
 
         foreach (var row in rows)
         {
@@ -161,7 +161,7 @@ public class ChocolateBattle
             {
                 var address = new MatrixAddress(x, y);
                 _matrix.WriteValueAt(address, c);
-                if (c == BattleFigureType.Elf || c == BattleFigureType.Goblin)
+                if (c is BattleFigureType.Elf or BattleFigureType.Goblin)
                 {
                     var attackPower = c == BattleFigureType.Elf ? elfAttackPower : 3;
                     _figures.Add(new BattleFigure(figureId, c, attackPower, address));
@@ -172,6 +172,18 @@ public class ChocolateBattle
             }
 
             y += 1;
+        }
+
+        _neighborCache = new Dictionary<(int x, int y), IList<MatrixAddress>>();
+        foreach (var coord in _matrix.Coords)
+        {
+            if (_matrix.ReadValueAt(coord) != '#')
+            {
+                var neighbors = _matrix.PerpendicularAdjacentCoordsTo(coord)
+                    .Where(o => _matrix.ReadValueAt(o) != '#')
+                    .ToList();
+                _neighborCache.Add((coord.X, coord.Y), neighbors);
+            }
         }
     }
 }

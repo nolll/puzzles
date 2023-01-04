@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Core.Common.CoordinateSystems.CoordinateSystem2D;
-using Core.Platform;
+﻿using Core.Platform;
 
 namespace Core.Puzzles.Year2022.Day12;
 

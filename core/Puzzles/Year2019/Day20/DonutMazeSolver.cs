@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Core.Puzzles.Year2019.Day20;
@@ -20,7 +19,7 @@ public class DonutMazeSolver
         ShortestStepCount = stepCounts.First().Distance;
     }
 
-    private IList<PortalPath> StepCountsTo(IDictionary<string, int> portalConnections, string startPortal, string targetPortal)
+    private static IList<PortalPath> StepCountsTo(IDictionary<string, int> portalConnections, string startPortal, string targetPortal)
     {
         var completePaths = new List<PortalPath>();
         var queue = new List<PortalPath> {new PortalPath(0, startPortal, new List<string> {"AA"})};
@@ -100,7 +99,7 @@ public class DonutMazeSolver
         return GetPortalDistanceId(a.Name, b.Name);
     }
 
-    public static string GetPortalDistanceId(string a, string b)
+    private static string GetPortalDistanceId(string a, string b)
     {
         return string.Join('-', new[] { a, b }.OrderBy(o => o));
     }
@@ -148,7 +147,7 @@ public class DonutMazeSolver
         }
     }
 
-    private bool IsLetter(char c)
+    private static bool IsLetter(char c)
     {
         return c != '#' && c != '.';
     }

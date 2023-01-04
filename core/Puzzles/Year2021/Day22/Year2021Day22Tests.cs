@@ -1,4 +1,3 @@
-using Core.Common.CoordinateSystems;
 using Core.Common.CoordinateSystems.CoordinateSystem3D;
 using NUnit.Framework;
 

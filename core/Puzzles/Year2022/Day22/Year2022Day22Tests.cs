@@ -1,5 +1,4 @@
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
-using Core.Puzzles.Year2020.Day01;
 using NUnit.Framework;
 
 namespace Core.Puzzles.Year2022.Day22;

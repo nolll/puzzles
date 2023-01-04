@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using NUnit.Framework;
 
 namespace Core.Puzzles.Year2022.Day18;

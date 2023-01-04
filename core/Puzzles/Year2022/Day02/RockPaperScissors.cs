@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2022.Day02;

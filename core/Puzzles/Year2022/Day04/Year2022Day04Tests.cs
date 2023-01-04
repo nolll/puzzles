@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using NUnit.Framework;
 
 namespace Core.Puzzles.Year2022.Day04;

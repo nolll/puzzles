@@ -12,13 +12,7 @@ public static class MatrixBuilder
         var h = rows.Length;
         return BuildCharMatrix(new StaticMatrix<char>(w, h, defaultValue), rows);
     }
-
-    public static IMatrix<char> BuildCharMatrix(string input, char defaultValue = default)
-    {
-        var rows = input.Trim().Split(Environment.NewLine).Select(o => o.Trim()).ToArray();
-        return BuildCharMatrix(new DynamicMatrix<char>(1, 1, defaultValue), rows);
-    }
-
+    
     public static IMatrix<char> BuildQuickCharMatrix(string input, char defaultValue = default)
     {
         var rows = input.Trim().Split(Environment.NewLine).Select(o => o.Trim()).ToArray();
@@ -71,9 +65,9 @@ public static class MatrixBuilder
         return matrix;
     }
 
-    public static DynamicMatrix<int> BuildIntMatrixFromSpaceSeparated(string input, int defaultValue = default)
+    public static IMatrix<int> BuildIntMatrixFromSpaceSeparated(string input, int defaultValue = default)
     {
-        var matrix = new DynamicMatrix<int>(1, 1, defaultValue);
+        var matrix = new QuickMatrix<int>(1, 1, defaultValue);
         var rows = input.Trim().Split(Environment.NewLine);
         var y = 0;
         foreach (var row in rows)
@@ -102,7 +96,7 @@ public static class MatrixBuilder
     public static IMatrix<int> BuildIntMatrixFromNonSeparated(string input, int defaultValue = default)
     {
         var (w, h) = GetNonSeparatedSize(input);
-        return BuildIntMatrixFromNonSeparated(new DynamicMatrix<int>(w, h, defaultValue), input);
+        return BuildIntMatrixFromNonSeparated(new QuickMatrix<int>(w, h, defaultValue), input);
     }
 
     private static IMatrix<int> BuildIntMatrixFromNonSeparated(IMatrix<int> matrix, string input)

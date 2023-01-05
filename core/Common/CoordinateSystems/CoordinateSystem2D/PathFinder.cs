@@ -21,7 +21,7 @@ public static class PathFinder
     public static IList<MatrixAddress> ShortestPathTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
-        var pathMatrix = new DynamicMatrix<int>(matrix.Width, matrix.Height, -1);
+        var pathMatrix = new QuickMatrix<int>(matrix.Width, matrix.Height, -1);
         foreach (var coordCount in coordCounts)
         {
             pathMatrix.MoveTo(coordCount.X, coordCount.Y);
@@ -52,7 +52,7 @@ public static class PathFinder
     public static IList<MatrixAddress> CachedShortestPathTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = CachedGetCoordCounts(matrix, new List<MatrixAddress>{ from }, to);
-        var pathMatrix = new DynamicMatrix<int>(matrix.Width, matrix.Height, -1);
+        var pathMatrix = new QuickMatrix<int>(matrix.Width, matrix.Height, -1);
         foreach (var coordCount in coordCounts)
         {
             pathMatrix.MoveTo(coordCount.X, coordCount.Y);

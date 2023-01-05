@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
@@ -36,7 +37,7 @@ public class RecursiveDonutMazeSolver
 
     private void Setup(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input.Replace(Chars.Space, Chars.Wall).Replace("_", ""));
+        var matrix = MatrixBuilder.BuildQuickCharMatrix(input.Replace(Chars.Space, Chars.Wall).Replace("_", ""));
         var portalAddresses = new List<DonutPortalAddress>();
         var letterCoords = FindLetterCoords(matrix).ToList();
         while (letterCoords.Count > 0)
@@ -138,7 +139,7 @@ public class RecursiveDonutMazeSolver
 
     private IList<CoordCount> GetCoordCounts(MatrixAddress from, MatrixAddress to)
     {
-        var queue = new List<CoordCount> { new CoordCount(0, to.X, to.Y, 0) };
+        var queue = new List<CoordCount> { new(0, to.X, to.Y, 0) };
         var index = 0;
         while (index < queue.Count && !queue.Any(o => o.Depth == 0 && o.X == from.X && o.Y == from.Y))
         {
@@ -154,14 +155,15 @@ public class RecursiveDonutMazeSolver
             if (_portals.TryGetValue(matrix.Address, out var portal))
             {
                 depth = next.Depth + portal.DepthChange;
-                var portalCoordCount = new CoordCount(next.Depth + portal.DepthChange, portal.Target.X, portal.Target.Y, next.Count + 1);
+                var portalCoordCount = new CoordCount(depth, portal.Target.X, portal.Target.Y, next.Count + 1);
                 newCoordCounts.Add(portalCoordCount);
             }
                 
             queue.AddRange(newCoordCounts);
+            
             index++;
         }
-
+        
         return queue;
     }
 

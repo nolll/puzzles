@@ -19,7 +19,7 @@ public class HexagonalFloor
     private const string NorthWest = "nw";
 
     private readonly IEnumerable<List<string>> _instructions;
-    private readonly IDynamicMatrix<char> _matrix;
+    private readonly IMatrix<char> _matrix;
     private readonly Dictionary<string, List<MatrixAddress>> _adjacentCoordsCache;
     public int BlackTileCount => _matrix.Values.Count(o => o == Black);
 

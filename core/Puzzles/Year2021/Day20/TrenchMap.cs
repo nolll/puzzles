@@ -10,9 +10,9 @@ public class TrenchMap
     {
         var groups = input.Split("\r\n\r\n");
         var algorithm = groups[0].Trim();
-        var inputImage = (IDynamicMatrix<char>)MatrixBuilder.BuildQuickCharMatrix(groups[1].Trim(), '.');
+        var inputImage = MatrixBuilder.BuildQuickCharMatrix(groups[1].Trim(), '.');
         inputImage.ExtendAllDirections(5);
-        IDynamicMatrix<char> outputImage = new QuickMatrix<char>('.');
+        IMatrix<char> outputImage = new QuickMatrix<char>('.');
         
         for (var i = 0; i < steps; i++)
         {
@@ -56,7 +56,7 @@ public class TrenchMap
 
             var sliceFrom = new MatrixAddress(outputImage.XMin + 1, outputImage.YMin + 1);
             var sliceTo = new MatrixAddress(outputImage.XMax - 1, outputImage.YMax - 1);
-            outputImage = (IDynamicMatrix<char>)outputImage.Slice(sliceFrom, sliceTo);
+            outputImage = outputImage.Slice(sliceFrom, sliceTo);
             inputImage = outputImage;
         }
 

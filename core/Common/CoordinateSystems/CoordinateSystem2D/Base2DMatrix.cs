@@ -281,6 +281,11 @@ public abstract class Base2DMatrix<T> : BaseMatrix, IMatrix<T>
 
     public abstract IMatrix<T> FlipHorizontal();
     public abstract IMatrix<T> FlipVertical();
+    public abstract void ExtendAllDirections(int steps = 1);
+    public abstract void ExtendUp(int steps = 1);
+    public abstract void ExtendRight(int steps = 1);
+    public abstract void ExtendDown(int steps = 1);
+    public abstract void ExtendLeft(int steps = 1);
 
     public bool IsOutOfRange(MatrixAddress address)
     {

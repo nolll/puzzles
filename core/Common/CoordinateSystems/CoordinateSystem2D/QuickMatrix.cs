@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class QuickMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
+public class QuickMatrix<T> : Base2DMatrix<T>, IMatrix<T>
 {
     private readonly IDictionary<(int x, int y), T> _matrix;
     private int _minx;
@@ -144,7 +144,7 @@ public class QuickMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
             _maxx += numberOfCols;
     }
 
-    public void ExtendAllDirections(int steps = 1)
+    public override void ExtendAllDirections(int steps = 1)
     {
         ExtendUp(steps);
         ExtendRight(steps);
@@ -152,22 +152,22 @@ public class QuickMatrix<T> : Base2DMatrix<T>, IDynamicMatrix<T>
         ExtendLeft(steps);
     }
 
-    public void ExtendUp(int steps = 1)
+    public override void ExtendUp(int steps = 1)
     {
         AddRows(steps, MatrixAddMode.Prepend);
     }
 
-    public void ExtendRight(int steps = 1)
+    public override void ExtendRight(int steps = 1)
     {
         AddCols(steps, MatrixAddMode.Append);
     }
 
-    public void ExtendDown(int steps = 1)
+    public override void ExtendDown(int steps = 1)
     {
         AddRows(steps, MatrixAddMode.Append);
     }
 
-    public void ExtendLeft(int steps = 1)
+    public override void ExtendLeft(int steps = 1)
     {
         AddCols(steps, MatrixAddMode.Prepend);
     }

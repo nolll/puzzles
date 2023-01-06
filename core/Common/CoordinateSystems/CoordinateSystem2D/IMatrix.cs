@@ -33,6 +33,11 @@ namespace Core.Common.CoordinateSystems.CoordinateSystem2D
         IList<MatrixAddress> FindAddresses(T value);
         IMatrix<T> FlipHorizontal();
         IMatrix<T> FlipVertical();
+        void ExtendAllDirections(int steps = 1);
+        void ExtendUp(int steps = 1);
+        void ExtendRight(int steps = 1);
+        void ExtendDown(int steps = 1);
+        void ExtendLeft(int steps = 1);
         bool IsOutOfRange(MatrixAddress address);
         bool MoveBackward();
         bool MoveDown(int steps = 1);

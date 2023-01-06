@@ -55,7 +55,7 @@ public class FallingSand
         return matrix.Values.Count(o => o == 'o');
     }
 
-    private static IDynamicMatrix<char> BuildMatrix(string input, int part)
+    private static IMatrix<char> BuildMatrix(string input, int part)
     {
         var matrix = new QuickMatrix<char>(1, 1, '.');
         var lines = PuzzleInputReader.ReadLines(input, false);

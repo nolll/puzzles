@@ -21,8 +21,8 @@ public class TreeHouse
         var patchWidth = lines[0].Length;
         var patchHeight = lines.Count;
         _treeMatrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
-        _part1Matrix = new StaticMatrix<bool>(patchWidth, patchHeight);
-        _part2Matrix = new StaticMatrix<int>(patchWidth, patchHeight);
+        _part1Matrix = new QuickMatrix<bool>(patchWidth, patchHeight);
+        _part2Matrix = new QuickMatrix<int>(patchWidth, patchHeight);
         _directions = new [] {MatrixDirection.Up, MatrixDirection.Right, MatrixDirection.Down, MatrixDirection.Left };
     }
 

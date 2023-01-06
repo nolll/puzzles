@@ -84,15 +84,8 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         }
     }
 
-    public T ReadValue()
-    {
-        return ReadValueAt(Address.X, Address.Y);
-    }
-
-    public T ReadValueAt(MatrixAddress address)
-    {
-        return ReadValueAt(address.X, address.Y);
-    }
+    public T ReadValue() => ReadValueAt(Address.X, Address.Y);
+    public T ReadValueAt(MatrixAddress address) => ReadValueAt(address.X, address.Y);
 
     public T ReadValueAt(int x, int y)
     {
@@ -101,15 +94,8 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
             : _defaultValue;
     }
 
-    public void WriteValue(T value)
-    {
-        WriteValueAt(Address.X, Address.Y, value);
-    }
-
-    public void WriteValueAt(MatrixAddress address, T value)
-    {
-        WriteValueAt(address.X, address.Y, value);
-    }
+    public void WriteValue(T value) => WriteValueAt(Address.X, Address.Y, value);
+    public void WriteValueAt(MatrixAddress address, T value) => WriteValueAt(address.X, address.Y, value);
 
     public void WriteValueAt(int x, int y, T value)
     {
@@ -157,28 +143,28 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         }
     }
 
-    public bool TryMoveTo(MatrixAddress address) => MoveTo(address, false);
     public bool MoveTo(MatrixAddress address) => MoveTo(address, true);
-    public bool TryMoveTo(int x, int y) => MoveTo(new MatrixAddress(x, y), false);
     public bool MoveTo(int x, int y) => MoveTo(new MatrixAddress(x, y), true);
-    public bool TryMoveForward() => MoveForward(false);
+    public bool TryMoveTo(MatrixAddress address) => MoveTo(address, false);
+    public bool TryMoveTo(int x, int y) => MoveTo(new MatrixAddress(x, y), false);
     public bool MoveForward() => MoveForward(true);
     private bool MoveForward(bool extend) => MoveTo(new MatrixAddress(Address.X + Direction.X, Address.Y + Direction.Y), extend);
-    public bool TryMoveBackward() => MoveBackward(false);
+    public bool TryMoveForward() => MoveForward(false);
     public bool MoveBackward() => MoveBackward(true);
     private bool MoveBackward(bool extend) => MoveTo(new MatrixAddress(Address.X - Direction.X, Address.Y - Direction.Y), extend);
-    public bool TryMoveUp(int steps = 1) => MoveUp(steps, false);
+    public bool TryMoveBackward() => MoveBackward(false);
     public bool MoveUp(int steps = 1) => MoveUp(steps, true);
     private bool MoveUp(int steps, bool extend) => MoveTo(new MatrixAddress(Address.X, Address.Y - steps), extend);
-    public bool TryMoveRight(int steps = 1) => MoveRight(steps, false);
+    public bool TryMoveUp(int steps = 1) => MoveUp(steps, false);
     public bool MoveRight(int steps = 1) => MoveRight(steps, true);
     private bool MoveRight(int steps, bool extend) => MoveTo(new MatrixAddress(Address.X + steps, Address.Y), extend);
-    public bool TryMoveDown(int steps = 1) => MoveDown(steps, false);
+    public bool TryMoveRight(int steps = 1) => MoveRight(steps, false);
     public bool MoveDown(int steps = 1) => MoveDown(steps, true);
     private bool MoveDown(int steps, bool extend) => MoveTo(new MatrixAddress(Address.X, Address.Y + steps), extend);
-    public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
+    public bool TryMoveDown(int steps = 1) => MoveDown(steps, false);
     public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
     private bool MoveLeft(int steps, bool extend) => MoveTo(new MatrixAddress(Address.X - steps, Address.Y), extend);
+    public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
 
     private bool MoveTo(MatrixAddress address, bool extend)
     {
@@ -354,8 +340,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         var values = _matrix.ToDictionary(item => (item.Key.y, YMax - item.Key.x), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        var newMatrix = new Matrix<T>(min, max, values, _defaultValue);
-        return newMatrix;
+        return new Matrix<T>(min, max, values, _defaultValue);
     }
 
     public IMatrix<T> RotateRight()
@@ -363,8 +348,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         var values = _matrix.ToDictionary(item => (XMax - item.Key.y, item.Key.x), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        var newMatrix = new Matrix<T>(min, max, values, _defaultValue);
-        return newMatrix;
+        return new Matrix<T>(min, max, values, _defaultValue);
     }
 
     public IMatrix<T> Slice(MatrixAddress from = null, MatrixAddress to = null)
@@ -378,8 +362,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
             .ToDictionary(item => (item.Key.x - dx, item.Key.y - dy), item => item.Value);
         var slicedFrom = new MatrixAddress(from.X - dx, from.Y - dy);
         var slicedTo = new MatrixAddress(to.X - dx, to.Y - dy);
-        var newMatrix = new Matrix<T>(slicedFrom, slicedTo, values, _defaultValue);
-        return newMatrix;
+        return new Matrix<T>(slicedFrom, slicedTo, values, _defaultValue);
     }
 
     public IMatrix<T> Slice(MatrixAddress from, int width, int height)

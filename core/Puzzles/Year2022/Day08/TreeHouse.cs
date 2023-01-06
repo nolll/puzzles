@@ -20,7 +20,7 @@ public class TreeHouse
         var lines = PuzzleInputReader.ReadLines(input, false);
         var patchWidth = lines[0].Length;
         var patchHeight = lines.Count;
-        _treeMatrix = MatrixBuilder.BuildStaticIntMatrixFromNonSeparated(input);
+        _treeMatrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
         _part1Matrix = new StaticMatrix<bool>(patchWidth, patchHeight);
         _part2Matrix = new StaticMatrix<int>(patchWidth, patchHeight);
         _directions = new [] {MatrixDirection.Up, MatrixDirection.Right, MatrixDirection.Down, MatrixDirection.Left };

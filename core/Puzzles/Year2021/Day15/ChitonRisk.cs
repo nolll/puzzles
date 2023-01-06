@@ -7,17 +7,17 @@ namespace Core.Puzzles.Year2021.Day15;
 
 public class ChitonRisk
 {
-    private IDictionary<MatrixAddress, IList<MatrixAddress>> _adjacentCoordsCache = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
+    private readonly IDictionary<MatrixAddress, IList<MatrixAddress>> _neighborCache = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
 
     public int FindRiskLevelForSmallCave(string input)
     {
-        var matrix = MatrixBuilder.BuildStaticIntMatrixFromNonSeparated(input);
+        var matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
         return FindRiskLevel(matrix);
     }
 
     public int FindRiskLevelForLargeCave(string input)
     {
-        var smallMatrix = MatrixBuilder.BuildStaticIntMatrixFromNonSeparated(input);
+        var smallMatrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
         var largeMatrix = BuildLargeMatrix(smallMatrix);
         return FindRiskLevel(largeMatrix);
     }
@@ -25,7 +25,7 @@ public class ChitonRisk
     private IMatrix<int> BuildLargeMatrix(IMatrix<int> smallMatrix)
     {
         const int multiplier = 5;
-        var largeMatrix = new StaticMatrix<int>(smallMatrix.Width * multiplier, smallMatrix.Height * multiplier);
+        var largeMatrix = new QuickMatrix<int>(smallMatrix.Width * multiplier, smallMatrix.Height * multiplier);
         var width = smallMatrix.Width;
         var height = smallMatrix.Height;
         for (var Y = 0; Y < multiplier; Y++) 
@@ -70,7 +70,7 @@ public class ChitonRisk
 
     private void PrintPath(IMatrix<int> matrix, IList<MatrixAddress> path)
     {
-        var pathMatrix = new StaticMatrix<char>(matrix.Width, matrix.Height, defaultValue: '.');
+        var pathMatrix = new QuickMatrix<char>(matrix.Width, matrix.Height, defaultValue: '.');
         foreach (var coord in path)
         {
             pathMatrix.WriteValueAt(coord, '#');
@@ -83,7 +83,7 @@ public class ChitonRisk
     {
         var queue = new Queue<MatrixAddress>();
         queue.Enqueue(to);
-        var seenMatrix = new StaticMatrix<int>(matrix.Width, matrix.Height, int.MaxValue);
+        var seenMatrix = new QuickMatrix<int>(matrix.Width, matrix.Height, int.MaxValue);
         seenMatrix.WriteValueAt(to, matrix.ReadValueAt(to));
         while (queue.Any() && seenMatrix.ReadValueAt(from) == int.MaxValue)
         {
@@ -136,12 +136,12 @@ public class ChitonRisk
 
     private IList<MatrixAddress> GetAdjacentCoords<T>(IMatrix<T> matrix, MatrixAddress address)
     {
-        if (_adjacentCoordsCache.TryGetValue(address, out var coords))
+        if (_neighborCache.TryGetValue(address, out var coords))
             return coords;
 
         matrix.MoveTo(address);
         coords = matrix.PerpendicularAdjacentCoords;
-        _adjacentCoordsCache.Add(address, coords);
+        _neighborCache.Add(address, coords);
         return coords;
     }
 }

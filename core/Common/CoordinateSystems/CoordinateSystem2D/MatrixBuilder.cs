@@ -5,14 +5,6 @@ namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 public static class MatrixBuilder
 {
-    public static IMatrix<char> BuildStaticCharMatrix(string input, char defaultValue = default)
-    {
-        var rows = input.Trim().Split(Environment.NewLine);
-        var w = rows.First().Length;
-        var h = rows.Length;
-        return BuildCharMatrix(new StaticMatrix<char>(w, h, defaultValue), rows);
-    }
-    
     public static IMatrix<char> BuildQuickCharMatrix(string input, char defaultValue = default)
     {
         var rows = input.Trim().Split(Environment.NewLine).Select(o => o.Trim()).ToArray();
@@ -85,12 +77,6 @@ public static class MatrixBuilder
         }
 
         return matrix;
-    }
-
-    public static IMatrix<int> BuildStaticIntMatrixFromNonSeparated(string input, int defaultValue = default)
-    {
-        var (w, h) = GetNonSeparatedSize(input);
-        return BuildIntMatrixFromNonSeparated(new StaticMatrix<int>(w, h, defaultValue), input);
     }
 
     public static IMatrix<int> BuildIntMatrixFromNonSeparated(string input, int defaultValue = default)

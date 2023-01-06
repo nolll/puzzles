@@ -8,7 +8,7 @@ public class HillClimbing
 {
     public int Part1(string input)
     {
-        var matrix = MatrixBuilder.BuildStaticCharMatrix(input);
+        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
         var from = FindFromCoord(matrix);
         var to = FindToCoord(matrix);
         matrix.WriteValueAt(from, 'a');
@@ -20,7 +20,7 @@ public class HillClimbing
 
     public int Part2(string input)
     {
-        var matrix = MatrixBuilder.BuildStaticCharMatrix(input);
+        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
         var from = FindFromCoord(matrix); 
         var to = FindToCoord(matrix);
         matrix.WriteValueAt(from, 'a');
@@ -30,8 +30,8 @@ public class HillClimbing
         return stepCount;
     }
 
-    private MatrixAddress FindFromCoord(IMatrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
-    private MatrixAddress FindToCoord(IMatrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'E');
+    private static MatrixAddress FindFromCoord(IMatrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
+    private static MatrixAddress FindToCoord(IMatrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'E');
 
     private static int StepCountTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to) =>
         StepCountTo(matrix, new List<MatrixAddress> { from }, to);

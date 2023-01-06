@@ -81,7 +81,7 @@ public class HeightMap
 
     private static IMatrix<int> CreateMatrix(string input)
     {
-        var matrix = new QuickMatrix<int>();
+        var matrix = new Matrix<int>();
         var lines = PuzzleInputReader.ReadLines(input);
 
         var y = 0;

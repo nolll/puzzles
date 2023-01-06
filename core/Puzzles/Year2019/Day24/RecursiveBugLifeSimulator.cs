@@ -13,7 +13,7 @@ public class RecursiveBugLifeSimulator
     private IDictionary<int, IMatrix<char>> _matrixes;
     private readonly IDictionary<MatrixAddress, IList<RelativeLevelAddress>> _relativeAddresses;
     private readonly Dictionary<int, MatrixAddress> _cells;
-    private readonly IMatrix<char> _emptyMatrix = new QuickMatrix<char>(Size, Size, '.');
+    private readonly IMatrix<char> _emptyMatrix = new Matrix<char>(Size, Size, '.');
 
     public int BugCount => _matrixes.Values.Sum(o => o.Values.Count(m => m == '#'));
 
@@ -105,7 +105,7 @@ public class RecursiveBugLifeSimulator
 
     private static IMatrix<char> BuildMatrix(string map)
     {
-        var matrix = new QuickMatrix<char>(1, 1);
+        var matrix = new Matrix<char>(1, 1);
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

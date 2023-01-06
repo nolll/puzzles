@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2018.Day15;
 public class ChocolateBattle
 {
     private readonly string _input;
-    private QuickMatrix<char> _matrix;
+    private Matrix<char> _matrix;
     private IList<BattleFigure> _figures;
     private IDictionary<(int x, int y), IList<MatrixAddress>> _neighborCache;
 
@@ -150,7 +150,7 @@ public class ChocolateBattle
 
         var width = rows.First().Length;
         var height = rows.Count();
-        _matrix = new QuickMatrix<char>(width, height);
+        _matrix = new Matrix<char>(width, height);
 
         foreach (var row in rows)
         {

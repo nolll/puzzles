@@ -154,6 +154,6 @@ public class DonutMazeSolver
 
     private void BuildMap(string input)
     {
-        _map = MatrixBuilder.BuildQuickCharMatrix(input.Replace(' ', '#').Replace("_", ""));
+        _map = MatrixBuilder.BuildCharMatrix(input.Replace(' ', '#').Replace("_", ""));
     }
 }

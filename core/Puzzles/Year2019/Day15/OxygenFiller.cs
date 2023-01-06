@@ -79,7 +79,7 @@ public class OxygenFiller
 
     private static IMatrix<char> BuildMatrix(string map)
     {
-        var matrix = new QuickMatrix<char>(1, 1);
+        var matrix = new Matrix<char>(1, 1);
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

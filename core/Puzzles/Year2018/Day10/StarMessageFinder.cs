@@ -36,7 +36,7 @@ public class StarMessageFinder
     {
         var yOffset = positions.Min(o => o.Y);
         var xOffset = positions.Min(o => o.X);
-        var matrix = new QuickMatrix<char>(1, 1, '.');
+        var matrix = new Matrix<char>(1, 1, '.');
         foreach (var position in positions)
         {
             matrix.MoveTo(position.X - xOffset, position.Y - yOffset);

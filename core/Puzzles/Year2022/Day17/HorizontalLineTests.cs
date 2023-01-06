@@ -9,7 +9,7 @@ public class HorizontalLineTests
     [Test]
     public void CanMoveRight()
     {
-        var matrix = new QuickMatrix<char>(6, 3, '.');
+        var matrix = new Matrix<char>(6, 3, '.');
         var bottomLeft = new MatrixAddress(1, 1);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -23,7 +23,7 @@ public class HorizontalLineTests
     [Test]
     public void CanNotMoveRight()
     {
-        var matrix = new QuickMatrix<char>(6, 3, '.');
+        var matrix = new Matrix<char>(6, 3, '.');
         var bottomLeft = new MatrixAddress(2, 1);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -37,7 +37,7 @@ public class HorizontalLineTests
     [Test]
     public void CanMoveLeft()
     {
-        var matrix = new QuickMatrix<char>(6, 3, '.');
+        var matrix = new Matrix<char>(6, 3, '.');
         var bottomLeft = new MatrixAddress(1, 1);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -51,7 +51,7 @@ public class HorizontalLineTests
     [Test]
     public void CanNotMoveLeft()
     {
-        var matrix = new QuickMatrix<char>(6, 3, '.');
+        var matrix = new Matrix<char>(6, 3, '.');
         var bottomLeft = new MatrixAddress(0, 1);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -65,7 +65,7 @@ public class HorizontalLineTests
     [Test]
     public void CanMoveDown()
     {
-        var matrix = new QuickMatrix<char>(6, 3, '.');
+        var matrix = new Matrix<char>(6, 3, '.');
         var bottomLeft = new MatrixAddress(1, 1);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -79,7 +79,7 @@ public class HorizontalLineTests
     [Test]
     public void CanNotMoveDown()
     {
-        var matrix = new QuickMatrix<char>(6, 3, '.');
+        var matrix = new Matrix<char>(6, 3, '.');
         var bottomLeft = new MatrixAddress(1, 2);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);

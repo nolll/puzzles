@@ -10,7 +10,7 @@ public class HerdOfSeaCucumbers
 
     public HerdOfSeaCucumbers(string input)
     {
-        _matrix = MatrixBuilder.BuildQuickCharMatrix(input);
+        _matrix = MatrixBuilder.BuildCharMatrix(input);
     }
 
     public int MoveUntilStop()

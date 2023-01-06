@@ -6,7 +6,7 @@ namespace Core.Puzzles.Year2019.Day24;
 
 public class BugLifeSimulator
 {
-    private QuickMatrix<char> _matrix;
+    private Matrix<char> _matrix;
 
     public string String => string.Join("", _matrix.Values);
     private readonly IList<string> _previousStrings;
@@ -40,7 +40,7 @@ public class BugLifeSimulator
 
     private void NextIteration()
     {
-        var newMatrix = new QuickMatrix<char>(1, 1);
+        var newMatrix = new Matrix<char>(1, 1);
         for (var y = 0; y < _matrix.Height; y++)
         {
             for (var x = 0; x < _matrix.Width; x++)
@@ -86,9 +86,9 @@ public class BugLifeSimulator
         }
     }
 
-    private QuickMatrix<char> BuildMatrix(string map)
+    private Matrix<char> BuildMatrix(string map)
     {
-        var matrix = new QuickMatrix<char>(1, 1);
+        var matrix = new Matrix<char>(1, 1);
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

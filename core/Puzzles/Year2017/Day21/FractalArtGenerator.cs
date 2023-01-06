@@ -28,7 +28,7 @@ public class FractalArtGenerator
         _transformationRules2X2 = rules.Where(o => o.Input.Length == 5).ToList();
         _transformationRules3X3 = rules.Where(o => o.Input.Length != 5).ToList();
 
-        _matrix = MatrixBuilder.BuildQuickCharMatrix(Inital);
+        _matrix = MatrixBuilder.BuildCharMatrix(Inital);
         _variantCache = new Dictionary<string, IList<MatrixVariant>>();
         _transformCache = new Dictionary<string, IMatrix<char>>();
     }
@@ -77,9 +77,9 @@ public class FractalArtGenerator
         _matrix = Join(transformed);
     }
 
-    private static QuickMatrix<char> Join(List<IMatrix<char>> matrices)
+    private static Matrix<char> Join(List<IMatrix<char>> matrices)
     {
-        var newMatrix = new QuickMatrix<char>();
+        var newMatrix = new Matrix<char>();
         var size = matrices.First().Width;
         var matricesPerRow = (int)Math.Sqrt(matrices.Count);
         var col = 0;
@@ -194,10 +194,10 @@ public class FractalArtGenerator
         throw new Exception("No transformation rule matched");
     }
 
-    private static QuickMatrix<char> FlipMatrixHorizontally(IMatrix<char> matrix)
+    private static Matrix<char> FlipMatrixHorizontally(IMatrix<char> matrix)
     {
         var width = matrix.Width;
-        var flipped = new QuickMatrix<char>();
+        var flipped = new Matrix<char>();
         for (var y = 0; y < matrix.Height; y++)
         {
             for (var x = 0; x < width; x++)
@@ -210,10 +210,10 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private static QuickMatrix<char> FlipMatrixVertically(IMatrix<char> matrix)
+    private static Matrix<char> FlipMatrixVertically(IMatrix<char> matrix)
     {
         var height = matrix.Height;
-        var flipped = new QuickMatrix<char>();
+        var flipped = new Matrix<char>();
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < matrix.Width; x++)
@@ -226,10 +226,10 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private static QuickMatrix<char> RotateMatrixRight(IMatrix<char> matrix)
+    private static Matrix<char> RotateMatrixRight(IMatrix<char> matrix)
     {
         var height = matrix.Height;
-        var flipped = new QuickMatrix<char>(1, 1, ' ');
+        var flipped = new Matrix<char>(1, 1, ' ');
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < matrix.Width; x++)
@@ -259,7 +259,7 @@ public class FractalArtGenerator
         return sb.ToString().TrimEnd('/');
     }
 
-    private IEnumerable<QuickMatrix<char>> GetSubmatrices(int subSize)
+    private IEnumerable<Matrix<char>> GetSubmatrices(int subSize)
     {
         var size = _matrix.Width;
         var x = 0;
@@ -268,7 +268,7 @@ public class FractalArtGenerator
         {
             while (x < size)
             {
-                var matrix = new QuickMatrix<char>();
+                var matrix = new Matrix<char>();
                 for (var localY = 0; localY < subSize; localY++)
                 {
                     for (var localX = 0; localX < subSize; localX++)

@@ -16,8 +16,8 @@ public class PaintRobot
     public PaintRobot(string program, int shipWidth = 100, int shipHeight = 100)
     {
         _program = program;
-        _panels = new QuickMatrix<int>(shipWidth, shipHeight);
-        _paintCounts = new QuickMatrix<int>(shipWidth, shipHeight);
+        _panels = new Matrix<int>(shipWidth, shipHeight);
+        _paintCounts = new Matrix<int>(shipWidth, shipHeight);
     }
 
     public Result Paint(bool startOnWhitePanel)

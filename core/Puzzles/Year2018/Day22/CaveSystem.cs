@@ -41,7 +41,7 @@ public class CaveSystem
         var yMax = target.Y + padding;
         var width = xMax - 1;
         var height = yMax - 1;
-        _cave = new QuickMatrix<CaveRegion>(width, height);
+        _cave = new Matrix<CaveRegion>(width, height);
 
         for (var y = 0; y < height; y++)
         {

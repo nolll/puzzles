@@ -16,7 +16,7 @@ public class AnimatedGif
     public AnimatedGif(in string input, in bool isCornersLit = false)
     {
         _isCornersLit = isCornersLit;
-        _matrix = MatrixBuilder.BuildQuickCharMatrix(input);
+        _matrix = MatrixBuilder.BuildCharMatrix(input);
         if (_isCornersLit)
             TurnOnCornerLights();
     }
@@ -25,7 +25,7 @@ public class AnimatedGif
     {
         for (var i = 0; i < steps; i++)
         {
-            var newMatrix = new QuickMatrix<char>();
+            var newMatrix = new Matrix<char>();
 
             foreach (var coord in _matrix.Coords)
             {

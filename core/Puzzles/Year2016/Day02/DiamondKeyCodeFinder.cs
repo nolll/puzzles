@@ -71,7 +71,7 @@ public class DiamondKeyCodeFinder
 .ABC.
 ..D..";
 
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
         matrix.MoveTo(0, 2);
         return matrix;
     }

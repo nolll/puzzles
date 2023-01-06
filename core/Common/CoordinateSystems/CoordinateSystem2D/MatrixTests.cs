@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class QuickMatrixTests
+public class MatrixTests
 {
     private const char DefaultValue = '.';
     private const char WriteValue = '#';
@@ -18,7 +18,7 @@ MNOP
     [Test]
     public void MoveToWorks()
     {
-        var matrix = new QuickMatrix<int>(5, 5);
+        var matrix = new Matrix<int>(5, 5);
         matrix.MoveTo(1, 2);
 
         Assert.That(matrix.Address.X, Is.EqualTo(1));
@@ -28,7 +28,7 @@ MNOP
     [Test]
     public void MoveForwardWorks()
     {
-        var matrix = new QuickMatrix<int>(5, 5);
+        var matrix = new Matrix<int>(5, 5);
         matrix.MoveTo(1, 3);
         matrix.MoveForward();
 
@@ -39,7 +39,7 @@ MNOP
     [Test]
     public void TurnAndMoveForwardWorks()
     {
-        var matrix = new QuickMatrix<int>(5, 5);
+        var matrix = new Matrix<int>(5, 5);
         matrix.TurnRight();
         matrix.MoveForward();
         matrix.TurnRight();
@@ -52,7 +52,7 @@ MNOP
     [Test]
     public void ExtendAllTo3()
     {
-        var matrix = new QuickMatrix<char>(1, 1, DefaultValue);
+        var matrix = new Matrix<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
@@ -67,7 +67,7 @@ MNOP
     [Test]
     public void ExtendAllTo5()
     {
-        var matrix = new QuickMatrix<char>(1, 1, DefaultValue);
+        var matrix = new Matrix<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections(2);
 
@@ -82,7 +82,7 @@ MNOP
     [Test]
     public void PerpendicularAdjacentCoordsExist()
     {
-        var matrix = new QuickMatrix<char>(1, 1, DefaultValue);
+        var matrix = new Matrix<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
@@ -98,7 +98,7 @@ MNOP
     [Test]
     public void AllAdjacentCoordsExists()
     {
-        var matrix = new QuickMatrix<char>(1, 1, DefaultValue);
+        var matrix = new Matrix<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
@@ -126,8 +126,8 @@ MNOP
 .#.
 """;
 
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildQuickCharMatrix(expected);
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
         matrix = matrix.Copy();
 
@@ -149,8 +149,8 @@ MNOP
 ...
 """;
 
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildQuickCharMatrix(expected);
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
         matrix = matrix.RotateRight();
 
@@ -172,8 +172,8 @@ MNOP
 ##.
 """;
 
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildQuickCharMatrix(expected);
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
         matrix = matrix.RotateLeft();
 
@@ -188,8 +188,8 @@ FG
 JK
 """;
 
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(SliceInput);
-        var expectedMatrix = MatrixBuilder.BuildQuickCharMatrix(expected);
+        var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
+        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
         matrix = matrix.Slice(new MatrixAddress(1, 1), new MatrixAddress(2, 2));
 
@@ -205,8 +205,8 @@ JKL
 NOP
 """;
 
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(SliceInput);
-        var expectedMatrix = MatrixBuilder.BuildQuickCharMatrix(expected);
+        var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
+        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
         matrix = matrix.Slice(new MatrixAddress(1, 1));
 
@@ -222,8 +222,8 @@ EFG
 IJK
 """;
 
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(SliceInput);
-        var expectedMatrix = MatrixBuilder.BuildQuickCharMatrix(expected);
+        var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
+        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
         matrix = matrix.Slice(to: new MatrixAddress(2, 2));
 
@@ -239,8 +239,8 @@ JKL
 NOP
 """;
 
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(SliceInput);
-        var expectedMatrix = MatrixBuilder.BuildQuickCharMatrix(expected);
+        var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
+        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
         matrix = matrix.Slice(new MatrixAddress(1, 1), 2, 2);
 
@@ -262,8 +262,8 @@ NOP
 #..
 """;
 
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildQuickCharMatrix(expected);
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
         matrix = matrix.FlipVertical();
 
@@ -285,8 +285,8 @@ NOP
 ...
 """;
 
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildQuickCharMatrix(expected);
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
         matrix = matrix.FlipHorizontal();
 

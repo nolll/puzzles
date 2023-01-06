@@ -90,7 +90,7 @@ public class ReservoirFiller
 
     private void BuildMatrix(string input)
     {
-        _matrix = new QuickMatrix<char>(1, 1, EmptyTile);
+        _matrix = new Matrix<char>(1, 1, EmptyTile);
         _matrix.MoveTo(_source);
         _matrix.WriteValue(SourceTile);
 

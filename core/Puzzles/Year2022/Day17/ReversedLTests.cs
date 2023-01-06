@@ -9,7 +9,7 @@ public class ReversedLTests
     [Test]
     public void CanMoveRight()
     {
-        var matrix = new QuickMatrix<char>(5, 5, '.');
+        var matrix = new Matrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(1, 3);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);
@@ -23,7 +23,7 @@ public class ReversedLTests
     [Test]
     public void CanNotMoveRight()
     {
-        var matrix = new QuickMatrix<char>(5, 5, '.');
+        var matrix = new Matrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(2, 3);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);
@@ -37,7 +37,7 @@ public class ReversedLTests
     [Test]
     public void CanMoveLeft()
     {
-        var matrix = new QuickMatrix<char>(5, 5, '.');
+        var matrix = new Matrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(1, 3);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);
@@ -51,7 +51,7 @@ public class ReversedLTests
     [Test]
     public void CanNotMoveLeft()
     {
-        var matrix = new QuickMatrix<char>(5, 5, '.');
+        var matrix = new Matrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(0, 3);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);
@@ -65,7 +65,7 @@ public class ReversedLTests
     [Test]
     public void CanNotMoveLeftBlocked()
     {
-        var matrix = new QuickMatrix<char>(5, 5, '.');
+        var matrix = new Matrix<char>(5, 5, '.');
         matrix.WriteValueAt(2, 1, 'o');
         var bottomLeft = new MatrixAddress(1, 3);
         var shape = new ReversedLShape();
@@ -80,7 +80,7 @@ public class ReversedLTests
     [Test]
     public void CanMoveDown()
     {
-        var matrix = new QuickMatrix<char>(5, 5, '.');
+        var matrix = new Matrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(1, 3);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);
@@ -94,7 +94,7 @@ public class ReversedLTests
     [Test]
     public void CanNotMoveDown()
     {
-        var matrix = new QuickMatrix<char>(5, 5, '.');
+        var matrix = new Matrix<char>(5, 5, '.');
         var bottomLeft = new MatrixAddress(1, 4);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);

@@ -57,7 +57,7 @@ public class FallingSand
 
     private static IMatrix<char> BuildMatrix(string input, int part)
     {
-        var matrix = new QuickMatrix<char>(1, 1, '.');
+        var matrix = new Matrix<char>(1, 1, '.');
         var lines = PuzzleInputReader.ReadLines(input, false);
 
         var coordLists = lines.Select(o => o.Split(" -> "));

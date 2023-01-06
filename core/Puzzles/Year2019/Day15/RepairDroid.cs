@@ -17,7 +17,7 @@ public class RepairDroid
     public RepairDroid(string program)
     {
         _computer = new ComputerInterface(program, ReadInput, WriteOutput);
-        _matrix = new QuickMatrix<char>();
+        _matrix = new Matrix<char>();
         _random = new Random();
     }
 

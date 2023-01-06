@@ -54,7 +54,7 @@ public class StorageGrid
 
     public int MoveStorage()
     {
-        var matrix = new QuickMatrix<char>(_storage.Width, _storage.Height, '#');
+        var matrix = new Matrix<char>(_storage.Width, _storage.Height, '#');
         var nodesThatCanMove = GetNodesThatCanMove();
         foreach (var address in nodesThatCanMove)
         {
@@ -85,7 +85,7 @@ public class StorageGrid
     {
         var rows = PuzzleInputReader.ReadLines(input);
         var dataRows = rows.Skip(2);
-        var matrix = new QuickMatrix<StorageNode>();
+        var matrix = new Matrix<StorageNode>();
 
         foreach (var row in dataRows)
         {

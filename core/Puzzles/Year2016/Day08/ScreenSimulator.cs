@@ -11,7 +11,7 @@ public class ScreenSimulator
 
     public ScreenSimulator(int width, int height)
     {
-        _screen = new QuickMatrix<char>(width, height, '.');
+        _screen = new Matrix<char>(width, height, '.');
     }
 
     public ScreenSimulatorResult Run(string input)

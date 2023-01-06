@@ -62,7 +62,7 @@ public class DiskDefragmenter
 
     private static IMatrix<char> FillDisk(string key)
     {
-        var disk = new QuickMatrix<char>();
+        var disk = new Matrix<char>();
         for (var y = 0; y < 128; y++)
         {
             var hash = GetHash($"{key}-{y}");

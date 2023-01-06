@@ -17,7 +17,7 @@ public class SpiralMemory
 
     private static IMatrix<long> BuildMatrix(int targetSquare, SpiralMemoryMode mode)
     {
-        var matrix = new QuickMatrix<long>();
+        var matrix = new Matrix<long>();
         matrix.TurnTo(MatrixDirection.Down);
         var currentSquare = 1;
         matrix.WriteValue(currentSquare);

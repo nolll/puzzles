@@ -137,7 +137,7 @@ public class KeyCollector
         var height = rows.Length;
         _keys = new List<VaultKey>();
         _doors = new List<VaultDoor>();
-        _matrix = new QuickMatrix<char>(width, height);
+        _matrix = new Matrix<char>(width, height);
         var y = 0;
         foreach (var row in rows)
         {

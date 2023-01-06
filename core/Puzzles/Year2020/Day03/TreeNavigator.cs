@@ -15,7 +15,7 @@ public class TreeNavigator
 
     public long GetTreeCount(TreeTrajectory trajectory)
     {
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(_input);
+        var matrix = MatrixBuilder.BuildCharMatrix(_input);
         matrix.MoveTo(0, 0);
 
         var treeCount = 0;

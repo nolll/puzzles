@@ -22,7 +22,7 @@ public class ImageJigsawPuzzle
         
     public ImageJigsawPuzzle(string input)
     {
-        _seaMonsterMatrix = MatrixBuilder.BuildQuickCharMatrix(SeaMonsterPattern);
+        _seaMonsterMatrix = MatrixBuilder.BuildCharMatrix(SeaMonsterPattern);
         _seaMonsterHashAddresses = _seaMonsterMatrix.Coords.Where(o => _seaMonsterMatrix.ReadValueAt(o) == '#').ToList();
         var groups = PuzzleInputReader.ReadStringGroups(input);
         TilesById = new Dictionary<long, JigsawTile>();
@@ -134,7 +134,7 @@ public class ImageJigsawPuzzle
     private IMatrix<char> ArrangeTilesAndPaintImage()
     {
         var cornerTilesLeft = CornerTiles.ToList();
-        var tileMatrix = new QuickMatrix<long>();
+        var tileMatrix = new Matrix<long>();
         var currentTile = cornerTilesLeft.First();
 
         tileMatrix.MoveTo(0, 0);
@@ -171,7 +171,7 @@ public class ImageJigsawPuzzle
             tile.RemoveBorder();
         }
 
-        var imageMatrix = new QuickMatrix<char>();
+        var imageMatrix = new Matrix<char>();
         for (var tileY = 0; tileY < tileMatrix.Height; tileY++)
         {
             for (var tileX = 0; tileX < tileMatrix.Width; tileX++)

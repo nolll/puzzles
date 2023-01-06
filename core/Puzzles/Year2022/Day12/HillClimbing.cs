@@ -8,7 +8,7 @@ public class HillClimbing
 {
     public int Part1(string input)
     {
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
         var from = FindFromCoord(matrix);
         var to = FindToCoord(matrix);
         matrix.WriteValueAt(from, 'a');
@@ -20,7 +20,7 @@ public class HillClimbing
 
     public int Part2(string input)
     {
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
         var from = FindFromCoord(matrix); 
         var to = FindToCoord(matrix);
         matrix.WriteValueAt(from, 'a');

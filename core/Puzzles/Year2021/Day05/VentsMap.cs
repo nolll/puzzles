@@ -16,7 +16,7 @@ public class VentsMap
             lines = lines.Where(o => o.IsPerpendicular).ToList();
         var width = lines.Max(o => Math.Max(o.Start.X, o.End.X));
         var height = lines.Max(o => Math.Max(o.Start.Y, o.End.Y));
-        var matrix = new QuickMatrix<int>(width, height);
+        var matrix = new Matrix<int>(width, height);
 
         matrix = MapLines(matrix, lines);
         var c = matrix.Values.Count(o => o >= 2);
@@ -24,7 +24,7 @@ public class VentsMap
         return c;
     }
 
-    private static QuickMatrix<int> MapLines(QuickMatrix<int> matrix, List<Line2d> lines)
+    private static Matrix<int> MapLines(Matrix<int> matrix, List<Line2d> lines)
     {
         foreach (var line in lines)
         {

@@ -15,7 +15,7 @@ public abstract class SeatingSimulator
 
     protected SeatingSimulator(string input)
     {
-        Matrix = MatrixBuilder.BuildQuickCharMatrix(input);
+        Matrix = MatrixBuilder.BuildCharMatrix(input);
     }
 
     public void Run()

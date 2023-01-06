@@ -59,7 +59,7 @@ public class ScaffoldIntersectionFinder
 
     private IMatrix<char> BuildMatrix(string map)
     {
-        var matrix = new QuickMatrix<char>();
+        var matrix = new Matrix<char>();
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

@@ -32,7 +32,7 @@ public class RegularMapNavigator
         MostDoors = 0;
         const int size = 220;
         const int start = size / 2;
-        _map = new QuickMatrix<char>(size, size, Chars.Wall);
+        _map = new Matrix<char>(size, size, Chars.Wall);
         _distances = new Dictionary<MatrixAddress, int>();
         var startAddress = new MatrixAddress(start, start);
         _map.MoveTo(startAddress);

@@ -41,7 +41,7 @@ public class Maze
 
     private static IMatrix<char> BuildMatrix(in int width, in int height, in int secretNumber)
     {
-        var matrix = new QuickMatrix<char>();
+        var matrix = new Matrix<char>();
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < width; x++)

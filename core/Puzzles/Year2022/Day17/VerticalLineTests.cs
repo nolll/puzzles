@@ -9,7 +9,7 @@ public class VerticalLineTests
     [Test]
     public void CanMoveRight()
     {
-        var matrix = new QuickMatrix<char>(3, 6, '.');
+        var matrix = new Matrix<char>(3, 6, '.');
         var bottomLeft = new MatrixAddress(1, 4);
         var shape = new VerticalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -23,7 +23,7 @@ public class VerticalLineTests
     [Test]
     public void CanNotMoveRight()
     {
-        var matrix = new QuickMatrix<char>(3, 6, '.');
+        var matrix = new Matrix<char>(3, 6, '.');
         var bottomLeft = new MatrixAddress(2, 4);
         var shape = new VerticalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -37,7 +37,7 @@ public class VerticalLineTests
     [Test]
     public void CanMoveLeft()
     {
-        var matrix = new QuickMatrix<char>(3, 6, '.');
+        var matrix = new Matrix<char>(3, 6, '.');
         var bottomLeft = new MatrixAddress(1, 4);
         var shape = new VerticalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -51,7 +51,7 @@ public class VerticalLineTests
     [Test]
     public void CanNotMoveLeft()
     {
-        var matrix = new QuickMatrix<char>(3, 6, '.');
+        var matrix = new Matrix<char>(3, 6, '.');
         var bottomLeft = new MatrixAddress(0, 4);
         var shape = new VerticalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -65,7 +65,7 @@ public class VerticalLineTests
     [Test]
     public void CanMoveDown()
     {
-        var matrix = new QuickMatrix<char>(3, 6, '.');
+        var matrix = new Matrix<char>(3, 6, '.');
         var bottomLeft = new MatrixAddress(1, 4);
         var shape = new VerticalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -79,7 +79,7 @@ public class VerticalLineTests
     [Test]
     public void CanNotMoveDown()
     {
-        var matrix = new QuickMatrix<char>(3, 6, '.');
+        var matrix = new Matrix<char>(3, 6, '.');
         var bottomLeft = new MatrixAddress(1, 5);
         var shape = new VerticalLineShape();
         shape.Paint(matrix, bottomLeft);

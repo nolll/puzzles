@@ -50,7 +50,7 @@ public class SquareKeyCodeFinder
 456
 789";
 
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
         matrix.MoveTo(1, 1);
         return matrix;
     }

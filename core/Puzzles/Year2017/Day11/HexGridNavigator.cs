@@ -11,7 +11,7 @@ public class HexGridNavigator
 
     public HexGridNavigator(string input)
     {
-        _matrix = new QuickMatrix<int>();
+        _matrix = new Matrix<int>();
         _matrix.TurnTo(MatrixDirection.Up);
 
         var directions = input.Split(',');

@@ -17,7 +17,7 @@ public class LumberCollection
 
     public LumberCollection(string input)
     {
-        _matrix = MatrixBuilder.BuildQuickCharMatrix(input);
+        _matrix = MatrixBuilder.BuildCharMatrix(input);
     }
 
     public void Run(int minutes)
@@ -51,7 +51,7 @@ public class LumberCollection
 
     private IMatrix<char> GetNextIteration()
     {
-        var newMatrix = new QuickMatrix<char>();
+        var newMatrix = new Matrix<char>();
         for (var y = 0; y < _matrix.Height; y++)
         {
             for (var x = 0; x < _matrix.Width; x++)

@@ -21,7 +21,7 @@ public class Arcade
     {
         _mode = ArcadeMode.X;
 
-        _screen = new QuickMatrix<char>();
+        _screen = new Matrix<char>();
         _computer = new ComputerInterface(program, ReadInput, WriteOutput);
     }
 

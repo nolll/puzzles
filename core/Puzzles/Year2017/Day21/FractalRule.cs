@@ -11,7 +11,7 @@ public class FractalRule
     public FractalRule(string input, string output)
     {
         Input = input;
-        Output = MatrixBuilder.BuildQuickCharMatrix(output.Replace("/", Environment.NewLine));
+        Output = MatrixBuilder.BuildCharMatrix(output.Replace("/", Environment.NewLine));
     }
 
     public bool IsMatch(string compare)

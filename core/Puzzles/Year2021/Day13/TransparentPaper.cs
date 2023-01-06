@@ -20,7 +20,7 @@ public class TransparentPaper
 
     private static IMatrix<char> BuildMatrix(IEnumerable<string> rows)
     {
-        var matrix = new QuickMatrix<char>(defaultValue: '.');
+        var matrix = new Matrix<char>(defaultValue: '.');
 
         foreach (var row in rows)
         {

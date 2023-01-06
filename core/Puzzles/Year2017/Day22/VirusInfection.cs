@@ -13,7 +13,7 @@ public class VirusInfection
 
     public VirusInfection(string input)
     {
-        _matrix = MatrixBuilder.BuildQuickCharMatrix(input, '.');
+        _matrix = MatrixBuilder.BuildCharMatrix(input, '.');
 
         var x = (_matrix.Width - 1) / 2;
         var y = (_matrix.Height - 1) / 2;

@@ -26,7 +26,7 @@ public class Year2022Day24 : Puzzle
 
     public int Part1(string input)
     {
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(input);
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
         var blizzards = new List<Blizzard>();
         MatrixAddress enter = null;
         MatrixAddress exit = null;

@@ -95,7 +95,7 @@ public class LargestAreaFinder
         var width = coords.Max(o => o.X) + 1;
         var height = coords.Max(o => o.Y) + 1;
 
-        _matrix = new QuickMatrix<int>(width, height, -1);
+        _matrix = new Matrix<int>(width, height, -1);
 
         var c = 1;
         foreach (var coord in coords)

@@ -98,7 +98,7 @@ public class JigsawTile
     {
         var parts = s.Split(':');
         var id = long.Parse(parts[0].Split(' ')[1]);
-        var matrix = MatrixBuilder.BuildQuickCharMatrix(parts[1].Trim());
+        var matrix = MatrixBuilder.BuildCharMatrix(parts[1].Trim());
         return new JigsawTile(id, matrix);
     }
 

@@ -11,7 +11,7 @@ public class DeliveryGrid
 
     public DeliveryGrid()
     {
-        _matrix = new QuickMatrix<int>();
+        _matrix = new Matrix<int>();
     }
 
     public void DeliverBySanta(string input)

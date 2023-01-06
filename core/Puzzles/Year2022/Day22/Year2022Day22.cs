@@ -23,7 +23,7 @@ public class Year2022Day22 : Puzzle
     public static int Part1(string input)
     {
         var groups = PuzzleInputReader.ReadStringGroupsWithWhitespace(input);
-        var matrix = MatrixBuilder.BuildQuickCharMatrixWithoutTrim(groups[0], ' ');
+        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(groups[0], ' ');
         matrix.MoveTo(0, 0);
         matrix.TurnTo(MatrixDirection.Right);
         while (matrix.ReadValue() == ' ')
@@ -101,7 +101,7 @@ public class Year2022Day22 : Puzzle
     public static int Part2(string input)
     {
         var groups = PuzzleInputReader.ReadStringGroupsWithWhitespace(input);
-        var matrix = MatrixBuilder.BuildQuickCharMatrixWithoutTrim(groups[0], ' ');
+        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(groups[0], ' ');
         matrix.MoveTo(0, 0);
         matrix.TurnTo(MatrixDirection.Right);
 

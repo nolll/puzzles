@@ -27,7 +27,7 @@ public class HexagonalFloor
     {
         var rows = PuzzleInputReader.ReadLines(input);
         _instructions = rows.Select(ParseInstruction);
-        _matrix = new QuickMatrix<char>(defaultValue: Nothing);
+        _matrix = new Matrix<char>(defaultValue: Nothing);
         _adjacentCoordsCache = new Dictionary<string, List<MatrixAddress>>();
     }
 

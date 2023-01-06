@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class QuickMatrix<T> : BaseMatrix, IMatrix<T>
+public class Matrix<T> : BaseMatrix, IMatrix<T>
 {
     private readonly T _defaultValue;
     private readonly IDictionary<(int x, int y), T> _matrix;
@@ -29,7 +29,7 @@ public class QuickMatrix<T> : BaseMatrix, IMatrix<T>
     public bool IsAtLeftEdge => Address.X == 0;
     public MatrixAddress Center => new(Width / 2, Height / 2);
 
-    private QuickMatrix(T defaultValue)
+    private Matrix(T defaultValue)
     {
         _defaultValue = defaultValue;
         Address = new MatrixAddress(0, 0);
@@ -37,7 +37,7 @@ public class QuickMatrix<T> : BaseMatrix, IMatrix<T>
         Direction = MatrixDirection.Up;
     }
 
-    public QuickMatrix(int width = 1, int height = 1, T defaultValue = default)
+    public Matrix(int width = 1, int height = 1, T defaultValue = default)
         : this(defaultValue)
     {
         _minx = 0;
@@ -47,7 +47,7 @@ public class QuickMatrix<T> : BaseMatrix, IMatrix<T>
         _matrix = new Dictionary<(int x, int y), T>();
     }
 
-    private QuickMatrix(MatrixAddress min, MatrixAddress max, IDictionary<(int x, int y), T> values, T defaultValue = default)
+    private Matrix(MatrixAddress min, MatrixAddress max, IDictionary<(int x, int y), T> values, T defaultValue = default)
         : this(defaultValue)
     {
         _matrix = values;
@@ -205,7 +205,7 @@ public class QuickMatrix<T> : BaseMatrix, IMatrix<T>
         var values = _matrix.ToDictionary(item => (item.Key.x, item.Key.y), item => item.Value);
         var min = new MatrixAddress(XMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        return new QuickMatrix<T>(min, max, values, _defaultValue);
+        return new Matrix<T>(min, max, values, _defaultValue);
     }
 
     public IMatrix<T> RotateLeft()
@@ -213,7 +213,7 @@ public class QuickMatrix<T> : BaseMatrix, IMatrix<T>
         var values = _matrix.ToDictionary(item => (item.Key.y, YMax - item.Key.x), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        var newMatrix = new QuickMatrix<T>(min, max, values, _defaultValue);
+        var newMatrix = new Matrix<T>(min, max, values, _defaultValue);
         return newMatrix;
     }
 
@@ -222,7 +222,7 @@ public class QuickMatrix<T> : BaseMatrix, IMatrix<T>
         var values = _matrix.ToDictionary(item => (XMax - item.Key.y, item.Key.x), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        var newMatrix = new QuickMatrix<T>(min, max, values, _defaultValue);
+        var newMatrix = new Matrix<T>(min, max, values, _defaultValue);
         return newMatrix;
     }
 
@@ -237,7 +237,7 @@ public class QuickMatrix<T> : BaseMatrix, IMatrix<T>
             .ToDictionary(item => (item.Key.x - dx, item.Key.y - dy), item => item.Value);
         var slicedFrom = new MatrixAddress(from.X - dx, from.Y - dy);
         var slicedTo = new MatrixAddress(to.X - dx, to.Y - dy);
-        var newMatrix = new QuickMatrix<T>(slicedFrom, slicedTo, values, _defaultValue);
+        var newMatrix = new Matrix<T>(slicedFrom, slicedTo, values, _defaultValue);
         return newMatrix;
     }
 
@@ -252,7 +252,7 @@ public class QuickMatrix<T> : BaseMatrix, IMatrix<T>
         var values = _matrix.ToDictionary(item => (item.Key.x, YMax - item.Key.y), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        return new QuickMatrix<T>(min, max, values, _defaultValue);
+        return new Matrix<T>(min, max, values, _defaultValue);
     }
 
     public IMatrix<T> FlipHorizontal()
@@ -260,7 +260,7 @@ public class QuickMatrix<T> : BaseMatrix, IMatrix<T>
         var values = _matrix.ToDictionary(item => (XMax - item.Key.x, item.Key.y), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        return new QuickMatrix<T>(min, max, values, _defaultValue);
+        return new Matrix<T>(min, max, values, _defaultValue);
     }
 
     public bool TryMoveTo(MatrixAddress address)

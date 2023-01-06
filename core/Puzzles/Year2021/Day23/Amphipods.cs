@@ -43,7 +43,7 @@ public class Amphipods
     public Amphipods(string input, bool isPrinterEnabled = false)
     {
         _isPrinterEnabled = isPrinterEnabled;
-        _matrix = MatrixBuilder.BuildQuickCharMatrix(input.Replace('.', ' ').Replace('#', '.'));
+        _matrix = MatrixBuilder.BuildCharMatrix(input.Replace('.', ' ').Replace('#', '.'));
         _stepCosts = new Dictionary<char, int>
         {
             { 'A', 1 },

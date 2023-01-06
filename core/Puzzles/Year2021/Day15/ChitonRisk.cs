@@ -25,7 +25,7 @@ public class ChitonRisk
     private IMatrix<int> BuildLargeMatrix(IMatrix<int> smallMatrix)
     {
         const int multiplier = 5;
-        var largeMatrix = new QuickMatrix<int>(smallMatrix.Width * multiplier, smallMatrix.Height * multiplier);
+        var largeMatrix = new Matrix<int>(smallMatrix.Width * multiplier, smallMatrix.Height * multiplier);
         var width = smallMatrix.Width;
         var height = smallMatrix.Height;
         for (var Y = 0; Y < multiplier; Y++) 
@@ -70,7 +70,7 @@ public class ChitonRisk
 
     private void PrintPath(IMatrix<int> matrix, IList<MatrixAddress> path)
     {
-        var pathMatrix = new QuickMatrix<char>(matrix.Width, matrix.Height, defaultValue: '.');
+        var pathMatrix = new Matrix<char>(matrix.Width, matrix.Height, defaultValue: '.');
         foreach (var coord in path)
         {
             pathMatrix.WriteValueAt(coord, '#');
@@ -83,7 +83,7 @@ public class ChitonRisk
     {
         var queue = new Queue<MatrixAddress>();
         queue.Enqueue(to);
-        var seenMatrix = new QuickMatrix<int>(matrix.Width, matrix.Height, int.MaxValue);
+        var seenMatrix = new Matrix<int>(matrix.Width, matrix.Height, int.MaxValue);
         seenMatrix.WriteValueAt(to, matrix.ReadValueAt(to));
         while (queue.Any() && seenMatrix.ReadValueAt(from) == int.MaxValue)
         {

@@ -24,13 +24,13 @@ public class MatrixDirection : IEquatable<MatrixDirection>
 
     public static MatrixDirection Create(string name)
     {
-        if (name == "up")
-            return Up;
-        if (name == "right")
-            return Right;
-        if (name == "down")
-            return Down;
-        return Left;
+        return name switch
+        {
+            "up" => Up,
+            "right" => Right,
+            "down" => Down,
+            _ => Left
+        };
     }
 
     public bool Equals(MatrixDirection other)

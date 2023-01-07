@@ -6,7 +6,7 @@ namespace Core.Puzzles.Year2015.Day03;
 
 public class DeliveryGrid
 {
-    private readonly IMatrix<int> _matrix;
+    private readonly Matrix<int> _matrix;
     public int SantaDeliveryCount => _matrix.Values.Count(o => o > 0);
 
     public DeliveryGrid()

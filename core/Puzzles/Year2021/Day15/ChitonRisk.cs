@@ -22,7 +22,7 @@ public class ChitonRisk
         return FindRiskLevel(largeMatrix);
     }
 
-    private IMatrix<int> BuildLargeMatrix(IMatrix<int> smallMatrix)
+    private Matrix<int> BuildLargeMatrix(Matrix<int> smallMatrix)
     {
         const int multiplier = 5;
         var largeMatrix = new Matrix<int>(smallMatrix.Width * multiplier, smallMatrix.Height * multiplier);
@@ -51,7 +51,7 @@ public class ChitonRisk
         return largeMatrix;
     }
 
-    private int FindRiskLevel(IMatrix<int> matrix)
+    private int FindRiskLevel(Matrix<int> matrix)
     {
         var from = new MatrixAddress(0, 0);
         var to = new MatrixAddress(matrix.Width - 1, matrix.Height - 1);
@@ -68,7 +68,7 @@ public class ChitonRisk
         return sum;
     }
 
-    private void PrintPath(IMatrix<int> matrix, IList<MatrixAddress> path)
+    private void PrintPath(Matrix<int> matrix, IList<MatrixAddress> path)
     {
         var pathMatrix = new Matrix<char>(matrix.Width, matrix.Height, defaultValue: '.');
         foreach (var coord in path)
@@ -79,7 +79,7 @@ public class ChitonRisk
         Console.WriteLine(pathMatrix.Print());
     }
 
-    private IMatrix<int> GetCoordCounts(IMatrix<int> matrix, MatrixAddress from, MatrixAddress to)
+    private Matrix<int> GetCoordCounts(Matrix<int> matrix, MatrixAddress from, MatrixAddress to)
     {
         var queue = new Queue<MatrixAddress>();
         queue.Enqueue(to);
@@ -107,7 +107,7 @@ public class ChitonRisk
         return seenMatrix;
     }
 
-    private IList<MatrixAddress> GetBestPathTo(IMatrix<int> matrix, MatrixAddress from, MatrixAddress to)
+    private IList<MatrixAddress> GetBestPathTo(Matrix<int> matrix, MatrixAddress from, MatrixAddress to)
     {
         var pathMatrix = GetCoordCounts(matrix, from, to);
         
@@ -134,7 +134,7 @@ public class ChitonRisk
         return path;
     }
 
-    private IList<MatrixAddress> GetAdjacentCoords<T>(IMatrix<T> matrix, MatrixAddress address)
+    private IList<MatrixAddress> GetAdjacentCoords<T>(Matrix<T> matrix, MatrixAddress address)
     {
         if (_neighborCache.TryGetValue(address, out var coords))
             return coords;

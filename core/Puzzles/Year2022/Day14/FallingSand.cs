@@ -55,7 +55,7 @@ public class FallingSand
         return matrix.Values.Count(o => o == 'o');
     }
 
-    private static IMatrix<char> BuildMatrix(string input, int part)
+    private static Matrix<char> BuildMatrix(string input, int part)
     {
         var matrix = new Matrix<char>(1, 1, '.');
         var lines = PuzzleInputReader.ReadLines(input, false);
@@ -122,7 +122,7 @@ public class FallingSand
         return matrix;
     }
 
-    private static bool TryMove(IMatrix<char> matrix, MatrixAddress currentSand, out MatrixAddress newSand)
+    private static bool TryMove(Matrix<char> matrix, MatrixAddress currentSand, out MatrixAddress newSand)
     {
         var down = new MatrixAddress(currentSand.X, currentSand.Y + 1);
         matrix.MoveTo(down);

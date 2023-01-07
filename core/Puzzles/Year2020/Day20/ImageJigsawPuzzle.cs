@@ -15,7 +15,7 @@ public class ImageJigsawPuzzle
     public readonly Dictionary<long, JigsawTile> TilesById;
     private readonly Dictionary<string, List<JigsawTile>> _matchesByEdge;
     private readonly Dictionary<long, List<JigsawTile>> _matchesById;
-    private readonly IMatrix<char> _seaMonsterMatrix;
+    private readonly Matrix<char> _seaMonsterMatrix;
     private readonly List<MatrixAddress> _seaMonsterHashAddresses;
 
     public long ProductOfCornerTileIds { get; }
@@ -51,7 +51,7 @@ public class ImageJigsawPuzzle
         }
     }
 
-    private int GetNumberOfSeaMonsters(IMatrix<char> matrix)
+    private int GetNumberOfSeaMonsters(Matrix<char> matrix)
     {
         var seaMonsterCount = 0;
         for (var y = 0; y < matrix.Height - _seaMonsterMatrix.Height; y++)
@@ -66,7 +66,7 @@ public class ImageJigsawPuzzle
         return seaMonsterCount;
     }
 
-    private int SearchForSeaMonsters(IMatrix<char> matrix)
+    private int SearchForSeaMonsters(Matrix<char> matrix)
     {
         var numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
 
@@ -122,7 +122,7 @@ public class ImageJigsawPuzzle
         return numberOfSeaMonsters;
     }
 
-    private string GetPrintout(IMatrix<char> matrix)
+    private string GetPrintout(Matrix<char> matrix)
     {
         return matrix.Print().Replace("\r\n", "");
     }
@@ -131,7 +131,7 @@ public class ImageJigsawPuzzle
     public IList<JigsawTile> EdgeTiles => _matchesById.Where(o => o.Value.Count == 3).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
     public IList<JigsawTile> CenterTiles => _matchesById.Where(o => o.Value.Count == 4).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
 
-    private IMatrix<char> ArrangeTilesAndPaintImage()
+    private Matrix<char> ArrangeTilesAndPaintImage()
     {
         var cornerTilesLeft = CornerTiles.ToList();
         var tileMatrix = new Matrix<long>();

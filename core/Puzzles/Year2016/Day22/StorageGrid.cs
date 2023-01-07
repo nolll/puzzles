@@ -9,7 +9,7 @@ namespace Core.Puzzles.Year2016.Day22;
 public class StorageGrid
 {
     private readonly Regex _whiteSpaceRegex = new("[ ]{2,}", RegexOptions.None);
-    private readonly IMatrix<StorageNode> _storage;
+    private readonly Matrix<StorageNode> _storage;
 
     public StorageGrid(string input)
     {
@@ -81,7 +81,7 @@ public class StorageGrid
         return distance1 + distance2 * 5 + 1;
     }
 
-    private IMatrix<StorageNode> ParseGrid(string input)
+    private Matrix<StorageNode> ParseGrid(string input)
     {
         var rows = PuzzleInputReader.ReadLines(input);
         var dataRows = rows.Skip(2);

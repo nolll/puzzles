@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2018.Day17;
 
 public class ReservoirFiller
 {
-    private IMatrix<char> _matrix;
+    private Matrix<char> _matrix;
     private int _yMin = int.MaxValue;
     private int _yMax = int.MinValue;
     private readonly MatrixAddress _source = new(500, 0);

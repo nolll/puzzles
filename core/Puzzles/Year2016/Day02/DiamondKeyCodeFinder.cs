@@ -8,7 +8,7 @@ namespace Core.Puzzles.Year2016.Day02;
 
 public class DiamondKeyCodeFinder
 {
-    private readonly IMatrix<char> _buttons;
+    private readonly Matrix<char> _buttons;
 
     public DiamondKeyCodeFinder()
     {
@@ -62,7 +62,7 @@ public class DiamondKeyCodeFinder
         }
     }
 
-    private static IMatrix<char> BuildButtonMatrix()
+    private static Matrix<char> BuildButtonMatrix()
     {
         const string input = @"
 ..1..

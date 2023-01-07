@@ -8,7 +8,7 @@ namespace Core.Puzzles.Year2019.Day13;
 public class Arcade
 {
     private readonly ComputerInterface _computer;
-    private readonly IMatrix<char> _screen;
+    private readonly Matrix<char> _screen;
     private ArcadeMode _mode;
     private int _x = 0;
     private int _y = 0;

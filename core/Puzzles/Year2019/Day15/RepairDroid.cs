@@ -9,7 +9,7 @@ namespace Core.Puzzles.Year2019.Day15;
 public class RepairDroid
 {
     private readonly ComputerInterface _computer;
-    private readonly IMatrix<char> _matrix;
+    private readonly Matrix<char> _matrix;
     private int _steps;
     private DroidDirection NextDirection => GetDroidDirection();
     private readonly Random _random;

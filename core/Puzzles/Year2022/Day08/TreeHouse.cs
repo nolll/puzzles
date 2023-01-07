@@ -7,9 +7,9 @@ namespace Core.Puzzles.Year2022.Day08;
 
 public class TreeHouse
 {
-    private readonly IMatrix<int> _treeMatrix;
-    private readonly IMatrix<bool> _part1Matrix;
-    private readonly IMatrix<int> _part2Matrix;
+    private readonly Matrix<int> _treeMatrix;
+    private readonly Matrix<bool> _part1Matrix;
+    private readonly Matrix<int> _part2Matrix;
     private readonly MatrixDirection[] _directions;
 
     public int VisibleTreesCount { get; private set; }

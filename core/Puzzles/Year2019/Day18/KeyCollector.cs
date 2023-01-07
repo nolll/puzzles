@@ -8,7 +8,7 @@ public class KeyCollector
 {
     private IList<VaultKey> _keys;
     private IList<VaultDoor> _doors;
-    private IMatrix<char> _matrix;
+    private Matrix<char> _matrix;
     private readonly IDictionary<(char, char), VaultPath> _paths;
     private readonly IDictionary<string, int> _cache;
     private readonly IList<VaultRobot> _robots;

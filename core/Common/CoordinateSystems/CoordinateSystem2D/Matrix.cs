@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
-public class Matrix<T> : BaseMatrix, IMatrix<T>
+public class Matrix<T> : BaseMatrix
 {
     private readonly T _defaultValue;
     private readonly IDictionary<MatrixAddress, T> _matrix;
@@ -327,7 +327,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
                address.X < XMin;
     }
 
-    public IMatrix<T> Copy()
+    public Matrix<T> Copy()
     {
         var values = _matrix.ToDictionary(item => item.Key, item => item.Value);
         var min = new MatrixAddress(XMin, YMin);
@@ -335,7 +335,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         return new Matrix<T>(min, max, values, _defaultValue);
     }
 
-    public IMatrix<T> RotateLeft()
+    public Matrix<T> RotateLeft()
     {
         var values = _matrix.ToDictionary(item => new MatrixAddress(item.Key.Y, YMax - item.Key.X), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
@@ -343,7 +343,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         return new Matrix<T>(min, max, values, _defaultValue);
     }
 
-    public IMatrix<T> RotateRight()
+    public Matrix<T> RotateRight()
     {
         var values = _matrix.ToDictionary(item => new MatrixAddress(XMax - item.Key.Y, item.Key.X), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
@@ -351,7 +351,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         return new Matrix<T>(min, max, values, _defaultValue);
     }
 
-    public IMatrix<T> Slice(MatrixAddress from = null, MatrixAddress to = null)
+    public Matrix<T> Slice(MatrixAddress from = null, MatrixAddress to = null)
     {
         from ??= new MatrixAddress(XMin, YMin);
         to ??= new MatrixAddress(XMax, YMax);
@@ -365,13 +365,13 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         return new Matrix<T>(slicedFrom, slicedTo, values, _defaultValue);
     }
 
-    public IMatrix<T> Slice(MatrixAddress from, int width, int height)
+    public Matrix<T> Slice(MatrixAddress from, int width, int height)
     {
         var to = new MatrixAddress(from.X + width, from.Y + height);
         return Slice(from, to);
     }
 
-    public IMatrix<T> FlipVertical()
+    public Matrix<T> FlipVertical()
     {
         var values = _matrix.ToDictionary(item => new MatrixAddress(item.Key.X, YMax - item.Key.Y), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
@@ -379,7 +379,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         return new Matrix<T>(min, max, values, _defaultValue);
     }
 
-    public IMatrix<T> FlipHorizontal()
+    public Matrix<T> FlipHorizontal()
     {
         var values = _matrix.ToDictionary(item => new MatrixAddress(XMax - item.Key.X, item.Key.Y), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);

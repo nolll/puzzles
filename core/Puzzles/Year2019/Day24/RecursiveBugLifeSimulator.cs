@@ -10,16 +10,16 @@ public class RecursiveBugLifeSimulator
     private const int InnerLevel = 1;
     private const int SameLevel = 0;
     private const int OuterLevel = -1;
-    private IDictionary<int, IMatrix<char>> _matrixes;
+    private IDictionary<int, Matrix<char>> _matrixes;
     private readonly IDictionary<MatrixAddress, IList<RelativeLevelAddress>> _relativeAddresses;
     private readonly Dictionary<int, MatrixAddress> _cells;
-    private readonly IMatrix<char> _emptyMatrix = new Matrix<char>(Size, Size, '.');
+    private readonly Matrix<char> _emptyMatrix = new Matrix<char>(Size, Size, '.');
 
     public int BugCount => _matrixes.Values.Sum(o => o.Values.Count(m => m == '#'));
 
     public RecursiveBugLifeSimulator(string input)
     {
-        _matrixes = new Dictionary<int, IMatrix<char>>();
+        _matrixes = new Dictionary<int, Matrix<char>>();
         _matrixes[-1] = _emptyMatrix.Copy();
         _matrixes[0] = BuildMatrix(input);
         _matrixes[1] = _emptyMatrix.Copy();
@@ -36,7 +36,7 @@ public class RecursiveBugLifeSimulator
         }
     }
 
-    private IMatrix<char> GetMatrix(int level)
+    private Matrix<char> GetMatrix(int level)
     {
         if (_matrixes.TryGetValue(level, out var matrix))
             return matrix;
@@ -48,7 +48,7 @@ public class RecursiveBugLifeSimulator
 
     private void NextIteration()
     {
-        var newMatrixes = new Dictionary<int, IMatrix<char>>();
+        var newMatrixes = new Dictionary<int, Matrix<char>>();
         var levels = _matrixes.Keys.OrderBy(o => o).ToList();
         foreach (var level in levels)
         {
@@ -103,7 +103,7 @@ public class RecursiveBugLifeSimulator
         return currentValue;
     }
 
-    private static IMatrix<char> BuildMatrix(string map)
+    private static Matrix<char> BuildMatrix(string map)
     {
         var matrix = new Matrix<char>(1, 1);
         var rows = map.Trim().Split('\n');

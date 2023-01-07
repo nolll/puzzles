@@ -5,7 +5,7 @@ namespace Core.Puzzles.Year2016.Day01;
 
 public class EasterbunnyDistanceCalculator
 {
-    private readonly IMatrix<int> _matrix;
+    private readonly Matrix<int> _matrix;
     private int? _distanceToFirstRepeatedAddress;
 
     public EasterbunnyDistanceCalculator()

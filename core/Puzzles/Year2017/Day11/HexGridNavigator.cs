@@ -5,7 +5,7 @@ namespace Core.Puzzles.Year2017.Day11;
 
 public class HexGridNavigator
 {
-    private readonly IMatrix<int> _matrix;
+    private readonly Matrix<int> _matrix;
     public int EndDistance { get; }
     public int MaxDistance { get; }
 

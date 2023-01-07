@@ -14,11 +14,11 @@ public class FractalArtGenerator
 ..#
 ###";
 
-    private IMatrix<char> _matrix;
+    private Matrix<char> _matrix;
     private readonly IList<FractalRule> _transformationRules2X2;
     private readonly IList<FractalRule> _transformationRules3X3;
     private readonly IDictionary<string, IList<MatrixVariant>> _variantCache;
-    private readonly IDictionary<string, IMatrix<char>> _transformCache;
+    private readonly IDictionary<string, Matrix<char>> _transformCache;
 
     public int PixelsOn => _matrix.Values.Count(o => o == '#');
 
@@ -30,7 +30,7 @@ public class FractalArtGenerator
 
         _matrix = MatrixBuilder.BuildCharMatrix(Inital);
         _variantCache = new Dictionary<string, IList<MatrixVariant>>();
-        _transformCache = new Dictionary<string, IMatrix<char>>();
+        _transformCache = new Dictionary<string, Matrix<char>>();
     }
 
     private static IList<FractalRule> ParseRules(string input)
@@ -68,7 +68,7 @@ public class FractalArtGenerator
     private void Modify(int subSize)
     {
         var matrices = GetSubmatrices(subSize);
-        var transformed = new List<IMatrix<char>>();
+        var transformed = new List<Matrix<char>>();
         foreach (var matrix in matrices)
         {
             transformed.Add(Transform(matrix));
@@ -77,7 +77,7 @@ public class FractalArtGenerator
         _matrix = Join(transformed);
     }
 
-    private static Matrix<char> Join(List<IMatrix<char>> matrices)
+    private static Matrix<char> Join(List<Matrix<char>> matrices)
     {
         var newMatrix = new Matrix<char>();
         var size = matrices.First().Width;
@@ -118,7 +118,7 @@ public class FractalArtGenerator
         }
     }
 
-    private IList<MatrixVariant> GetVariants(IMatrix<char> matrix)
+    private IList<MatrixVariant> GetVariants(Matrix<char> matrix)
     {
         var key = MatrixToString(matrix);
         if (_variantCache.TryGetValue(key, out var variants))
@@ -129,7 +129,7 @@ public class FractalArtGenerator
         return variants;
     }
 
-    private static IEnumerable<MatrixVariant> CreateVariants(IMatrix<char> matrix)
+    private static IEnumerable<MatrixVariant> CreateVariants(Matrix<char> matrix)
     {
         yield return new MatrixVariant(MatrixToString(matrix));
 
@@ -167,7 +167,7 @@ public class FractalArtGenerator
         yield return new MatrixVariant(MatrixToString(flippedMatrix));
     }
 
-    private IMatrix<char> Transform(IMatrix<char> matrix)
+    private Matrix<char> Transform(Matrix<char> matrix)
     {
         var key = MatrixToString(matrix);
         if (_transformCache.TryGetValue(key, out var transformedMatrix))
@@ -194,7 +194,7 @@ public class FractalArtGenerator
         throw new Exception("No transformation rule matched");
     }
 
-    private static Matrix<char> FlipMatrixHorizontally(IMatrix<char> matrix)
+    private static Matrix<char> FlipMatrixHorizontally(Matrix<char> matrix)
     {
         var width = matrix.Width;
         var flipped = new Matrix<char>();
@@ -210,7 +210,7 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private static Matrix<char> FlipMatrixVertically(IMatrix<char> matrix)
+    private static Matrix<char> FlipMatrixVertically(Matrix<char> matrix)
     {
         var height = matrix.Height;
         var flipped = new Matrix<char>();
@@ -226,7 +226,7 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private static Matrix<char> RotateMatrixRight(IMatrix<char> matrix)
+    private static Matrix<char> RotateMatrixRight(Matrix<char> matrix)
     {
         var height = matrix.Height;
         var flipped = new Matrix<char>(1, 1, ' ');
@@ -243,7 +243,7 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private static string MatrixToString(IMatrix<char> matrix)
+    private static string MatrixToString(Matrix<char> matrix)
     {
         var sb = new StringBuilder();
         for (var y = 0; y < matrix.Height; y++)

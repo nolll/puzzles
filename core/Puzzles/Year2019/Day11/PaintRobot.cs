@@ -8,8 +8,8 @@ namespace Core.Puzzles.Year2019.Day11;
 public class PaintRobot
 {
     private readonly string _program;
-    private readonly IMatrix<int> _panels;
-    private readonly IMatrix<int> _paintCounts;
+    private readonly Matrix<int> _panels;
+    private readonly Matrix<int> _paintCounts;
     private PaintMode _mode;
     private ComputerInterface _computer;
 

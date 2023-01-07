@@ -4,11 +4,11 @@ namespace Core.Puzzles.Year2016.Day08;
 
 public class ScreenSimulatorRotateColumnInstruction : IScreenSimulatorInstruction
 {
-    private readonly IMatrix<char> _matrix;
+    private readonly Matrix<char> _matrix;
     private readonly int _column;
     private readonly int _steps;
 
-    public ScreenSimulatorRotateColumnInstruction(IMatrix<char> matrix, int column, int steps)
+    public ScreenSimulatorRotateColumnInstruction(Matrix<char> matrix, int column, int steps)
     {
         _matrix = matrix;
         _column = column;

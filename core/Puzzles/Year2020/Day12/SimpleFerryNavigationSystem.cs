@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2020.Day12;
 
 public class SimpleFerryNavigationSystem
 {
-    private readonly IMatrix<int> _matrix;
+    private readonly Matrix<int> _matrix;
     private readonly IEnumerable<FerryNavigationInstruction> _intructions;
     public int DistanceTravelled => _matrix.Address.ManhattanDistanceTo(_matrix.StartAddress);
         

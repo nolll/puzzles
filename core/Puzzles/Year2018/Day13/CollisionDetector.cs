@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2018.Day13;
 
 public class CollisionDetector
 {
-    private IMatrix<char> _matrix;
+    private Matrix<char> _matrix;
     private IList<MineCart> _carts;
     public MatrixAddress LocationOfFirstCollision { get; private set; }
     public MatrixAddress LocationOfLastCart { get; private set; }

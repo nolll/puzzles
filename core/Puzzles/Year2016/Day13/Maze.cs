@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2016.Day13;
 
 public class Maze
 {
-    private readonly IMatrix<char> _matrix;
+    private readonly Matrix<char> _matrix;
 
     public Maze(in int width, in int height, in int secretNumber)
     {
@@ -39,7 +39,7 @@ public class Maze
         return _matrix.Values.Count(o => o == 'O');
     }
 
-    private static IMatrix<char> BuildMatrix(in int width, in int height, in int secretNumber)
+    private static Matrix<char> BuildMatrix(in int width, in int height, in int secretNumber)
     {
         var matrix = new Matrix<char>();
         for (var y = 0; y < height; y++)

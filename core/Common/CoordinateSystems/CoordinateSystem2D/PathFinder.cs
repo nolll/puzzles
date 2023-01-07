@@ -6,19 +6,19 @@ namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 public static class PathFinder
 {
-    public static int CachedStepCountTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    public static int CachedStepCountTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         return CachedStepCountTo(matrix, new List<MatrixAddress>{ from }, to);
     }
 
-    public static int CachedStepCountTo(IMatrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
+    public static int CachedStepCountTo(Matrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
     {
         var coordCounts = CachedGetCoordCounts(matrix, from, to);
         var goal = coordCounts.FirstOrDefault(o => o.X == to.X && o.Y == to.Y);
         return goal?.Count ?? 0;
     }
 
-    public static IList<MatrixAddress> ShortestPathTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    public static IList<MatrixAddress> ShortestPathTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
         var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
@@ -49,7 +49,7 @@ public static class PathFinder
         return path;
     }
 
-    public static IList<MatrixAddress> CachedShortestPathTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    public static IList<MatrixAddress> CachedShortestPathTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = CachedGetCoordCounts(matrix, new List<MatrixAddress>{ from }, to);
         var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
@@ -80,7 +80,7 @@ public static class PathFinder
         return path;
     }
 
-    private static IList<CoordCount> GetCoordCounts(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    private static IList<CoordCount> GetCoordCounts(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         var queue = new List<CoordCount> { new(to.X, to.Y, 0) };
         var index = 0;
@@ -99,7 +99,7 @@ public static class PathFinder
         return queue;
     }
 
-    private static IList<CoordCount> CachedGetCoordCounts(IMatrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
+    private static IList<CoordCount> CachedGetCoordCounts(Matrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
     {
         var seen = from.ToDictionary(k => k, v => 0);
         var queue = from.ToList();

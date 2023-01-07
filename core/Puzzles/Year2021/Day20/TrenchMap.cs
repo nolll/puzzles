@@ -12,7 +12,7 @@ public class TrenchMap
         var algorithm = groups[0].Trim();
         var inputImage = MatrixBuilder.BuildCharMatrix(groups[1].Trim(), '.');
         inputImage.ExtendAllDirections(5);
-        IMatrix<char> outputImage = new Matrix<char>('.');
+        Matrix<char> outputImage = new Matrix<char>('.');
         
         for (var i = 0; i < steps; i++)
         {

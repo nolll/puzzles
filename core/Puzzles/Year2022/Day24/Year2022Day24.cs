@@ -132,7 +132,7 @@ public class Year2022Day24 : Puzzle
         return queue.FirstOrDefault(o => o.Coord.X == exit.X && o.Coord.Y == exit.Y)?.Count ?? 0;
     }
 
-    private List<Blizzard> MoveBlizzards(IMatrix<char> matrix, List<Blizzard> blizzards)
+    private List<Blizzard> MoveBlizzards(Matrix<char> matrix, List<Blizzard> blizzards)
     {
         var movedBlizzards = new List<Blizzard>();
         foreach (var blizzard in blizzards)
@@ -180,7 +180,7 @@ public class Year2022Day24 : Puzzle
         return movedBlizzards;
     }
 
-    private string PrintMatrix(IMatrix<char> matrix, List<Blizzard> blizzards)
+    private string PrintMatrix(Matrix<char> matrix, List<Blizzard> blizzards)
     {
         var newMatrix = matrix.Copy();
         foreach (var blizzard in blizzards)
@@ -198,7 +198,7 @@ public class Year2022Day24 : Puzzle
         return newMatrix.Print();
     }
 
-    private string PrintMatrix(IMatrix<char> matrix, List<MatrixAddress> coords)
+    private string PrintMatrix(Matrix<char> matrix, List<MatrixAddress> coords)
     {
         var newMatrix = matrix.Copy();
         foreach (var coord in coords)

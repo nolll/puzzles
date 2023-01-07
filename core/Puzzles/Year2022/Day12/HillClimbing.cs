@@ -30,20 +30,20 @@ public class HillClimbing
         return stepCount;
     }
 
-    private static MatrixAddress FindFromCoord(IMatrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
-    private static MatrixAddress FindToCoord(IMatrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'E');
+    private static MatrixAddress FindFromCoord(Matrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
+    private static MatrixAddress FindToCoord(Matrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'E');
 
-    private static int StepCountTo(IMatrix<char> matrix, MatrixAddress from, MatrixAddress to) =>
+    private static int StepCountTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to) =>
         StepCountTo(matrix, new List<MatrixAddress> { from }, to);
 
-    private static int StepCountTo(IMatrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
+    private static int StepCountTo(Matrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
         var goal = coordCounts.FirstOrDefault(o => o.X == to.X && o.Y == to.Y);
         return goal?.Count ?? 0;
     }
     
-    private static IList<CoordCount> GetCoordCounts(IMatrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
+    private static IList<CoordCount> GetCoordCounts(Matrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
     {
         var seen = from.ToDictionary(k => k, v => 0);
         var queue = new Queue<MatrixAddress>(from);

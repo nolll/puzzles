@@ -6,7 +6,7 @@ namespace Core.Puzzles.Year2019.Day17;
 
 public class ScaffoldIntersectionFinder
 {
-    private readonly IMatrix<char> _matrix;
+    private readonly Matrix<char> _matrix;
 
     public ScaffoldIntersectionFinder(string input)
     {
@@ -57,7 +57,7 @@ public class ScaffoldIntersectionFinder
         return true;
     }
 
-    private IMatrix<char> BuildMatrix(string map)
+    private Matrix<char> BuildMatrix(string map)
     {
         var matrix = new Matrix<char>();
         var rows = map.Trim().Split('\n');

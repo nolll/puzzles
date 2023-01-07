@@ -19,12 +19,12 @@ public class DiskDefragmenter
         RegionCount = GetRegionCount(disk);
     }
 
-    private static int GetUsedCount(IMatrix<char> disk)
+    private static int GetUsedCount(Matrix<char> disk)
     {
         return disk.Values.Count(o => o == '#');
     }
 
-    private static int GetRegionCount(IMatrix<char> disk)
+    private static int GetRegionCount(Matrix<char> disk)
     {
         var processed = new Dictionary<string, int>();
         var currentRegion = 0;
@@ -60,7 +60,7 @@ public class DiskDefragmenter
         return processed.Values.Distinct().Count();
     }
 
-    private static IMatrix<char> FillDisk(string key)
+    private static Matrix<char> FillDisk(string key)
     {
         var disk = new Matrix<char>();
         for (var y = 0; y < 128; y++)

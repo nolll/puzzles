@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2021.Day13;
 
 public class TransparentPaper
 {
-    private IMatrix<char> _matrix;
+    private Matrix<char> _matrix;
     private readonly IList<string> _folds;
 
     public TransparentPaper(string input)
@@ -18,7 +18,7 @@ public class TransparentPaper
         _folds = groups[1];
     }
 
-    private static IMatrix<char> BuildMatrix(IEnumerable<string> rows)
+    private static Matrix<char> BuildMatrix(IEnumerable<string> rows)
     {
         var matrix = new Matrix<char>(defaultValue: '.');
 

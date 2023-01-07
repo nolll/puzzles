@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2016.Day08;
 
 public class ScreenSimulator
 {
-    private readonly IMatrix<char> _screen;
+    private readonly Matrix<char> _screen;
 
     public ScreenSimulator(int width, int height)
     {

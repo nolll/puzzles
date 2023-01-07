@@ -6,7 +6,7 @@ namespace Core.Puzzles.Year2017.Day19;
 
 public class TubeRouteFinder
 {
-    private readonly IMatrix<char> _matrix;
+    private readonly Matrix<char> _matrix;
 
     private const char Space = ' ';
     private const char Empty = '.';

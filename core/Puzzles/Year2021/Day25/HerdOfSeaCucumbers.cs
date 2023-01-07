@@ -6,7 +6,7 @@ namespace Core.Puzzles.Year2021.Day25;
 
 public class HerdOfSeaCucumbers
 {
-    private readonly IMatrix<char> _matrix;
+    private readonly Matrix<char> _matrix;
 
     public HerdOfSeaCucumbers(string input)
     {

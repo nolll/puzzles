@@ -6,7 +6,7 @@ namespace Core.Puzzles.Year2019.Day20;
 
 public class DonutMazeSolver
 {
-    private IMatrix<char> _map;
+    private Matrix<char> _map;
     public int ShortestStepCount { get; }
 
     public DonutMazeSolver(string input)

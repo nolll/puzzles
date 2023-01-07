@@ -10,7 +10,7 @@ public abstract class SeatingSimulator
     protected const char OccupiedChair = '#';
     protected const char EmptyChair = 'L';
 
-    protected IMatrix<char> Matrix;
+    protected Matrix<char> Matrix;
     public int OccupiedSeatCount { get; private set; }
 
     protected SeatingSimulator(string input)

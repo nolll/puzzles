@@ -36,22 +36,22 @@ public class ReversedLShape : TetrisShape
     {
     }
 
-    public override bool CanMoveLeft(IMatrix<char> matrix, MatrixAddress bottomLeft)
+    public override bool CanMoveLeft(Matrix<char> matrix, MatrixAddress bottomLeft)
     {
         return CheckCoords(matrix, bottomLeft, _left);
     }
 
-    public override bool CanMoveRight(IMatrix<char> matrix, MatrixAddress bottomLeft)
+    public override bool CanMoveRight(Matrix<char> matrix, MatrixAddress bottomLeft)
     {
         return CheckCoords(matrix, bottomLeft, _right);
     }
 
-    public override bool CanMoveDown(IMatrix<char> matrix, MatrixAddress bottomLeft)
+    public override bool CanMoveDown(Matrix<char> matrix, MatrixAddress bottomLeft)
     {
         return CheckCoords(matrix, bottomLeft, _down);
     }
 
-    public override void Paint(IMatrix<char> matrix, MatrixAddress bottomLeft)
+    public override void Paint(Matrix<char> matrix, MatrixAddress bottomLeft)
     {
         Paint(matrix, bottomLeft, _shape);
     }

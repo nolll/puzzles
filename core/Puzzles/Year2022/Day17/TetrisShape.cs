@@ -20,18 +20,18 @@ public abstract class TetrisShape
         return deltas.Select(o => new MatrixAddress(baseCoord.X + o.X, baseCoord.Y + o.Y));
     }
 
-    protected static bool CheckCoords(IMatrix<char> matrix, MatrixAddress bottomLeft, IEnumerable<MatrixAddress> deltas)
+    protected static bool CheckCoords(Matrix<char> matrix, MatrixAddress bottomLeft, IEnumerable<MatrixAddress> deltas)
     {
         var coords = deltas.Select(o => new MatrixAddress(bottomLeft.X + o.X, bottomLeft.Y + o.Y));
         return coords.All(o => !matrix.IsOutOfRange(o) && matrix.ReadValueAt(o) == '.');
     }
 
-    public abstract bool CanMoveLeft(IMatrix<char> matrix, MatrixAddress bottomLeft);
-    public abstract bool CanMoveRight(IMatrix<char> matrix, MatrixAddress bottomLeft);
-    public abstract bool CanMoveDown(IMatrix<char> matrix, MatrixAddress bottomLeft);
-    public abstract void Paint(IMatrix<char> matrix, MatrixAddress bottomLeft);
+    public abstract bool CanMoveLeft(Matrix<char> matrix, MatrixAddress bottomLeft);
+    public abstract bool CanMoveRight(Matrix<char> matrix, MatrixAddress bottomLeft);
+    public abstract bool CanMoveDown(Matrix<char> matrix, MatrixAddress bottomLeft);
+    public abstract void Paint(Matrix<char> matrix, MatrixAddress bottomLeft);
 
-    protected void Paint(IMatrix<char> matrix, MatrixAddress bottomLeft, IEnumerable<MatrixAddress> deltas)
+    protected void Paint(Matrix<char> matrix, MatrixAddress bottomLeft, IEnumerable<MatrixAddress> deltas)
     {
         var coords = TranslateCoords(bottomLeft, deltas);
         foreach (var coord in coords)

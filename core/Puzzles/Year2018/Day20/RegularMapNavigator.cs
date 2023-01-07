@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2018.Day20;
 
 public class RegularMapNavigator
 {
-    private readonly IMatrix<char> _map;
+    private readonly Matrix<char> _map;
     private readonly IDictionary<MatrixAddress, int> _distances;
 
     private static class Chars

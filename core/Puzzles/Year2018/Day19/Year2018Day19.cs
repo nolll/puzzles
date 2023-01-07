@@ -5,6 +5,8 @@ namespace Core.Puzzles.Year2018.Day19;
 
 public class Year2018Day19 : Puzzle
 {
+    public override string Title => "Go With The Flow";
+
     public override PuzzleResult RunPart1()
     {
         var computer = new OpComputer();

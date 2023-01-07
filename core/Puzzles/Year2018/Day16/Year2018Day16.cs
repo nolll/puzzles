@@ -6,6 +6,8 @@ namespace Core.Puzzles.Year2018.Day16;
 
 public class Year2018Day16 : Puzzle
 {
+    public override string Title => "Chronal Classification";
+
     public override PuzzleResult RunPart1()
     {
         var inputs = FileInput.Split("\r\n\r\n\r\n");

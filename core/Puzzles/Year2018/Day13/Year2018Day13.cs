@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day13;
 
 public class Year2018Day13 : Puzzle
 {
+    public override string Title => "Mine Cart Madness";
+
     public override PuzzleResult RunPart1()
     {
         var detector = new CollisionDetector(FileInput);

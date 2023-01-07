@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day11;
 
 public class Year2018Day11 : Puzzle
 {
+    public override string Title => "Chronal Charge";
+
     public override PuzzleResult RunPart1()
     {
         var grid1 = new PowerGrid(300, Input);

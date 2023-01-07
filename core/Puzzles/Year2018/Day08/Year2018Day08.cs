@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day08;
 
 public class Year2018Day08 : Puzzle
 {
+    public override string Title => "Memory Maneuver";
+
     public override PuzzleResult RunPart1()
     {
         var calculator = new LicenseNumberCalculator(FileInput);

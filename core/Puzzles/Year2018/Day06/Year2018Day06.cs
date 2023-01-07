@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day06;
 
 public class Year2018Day06 : Puzzle
 {
+    public override string Title => "Chronal Coordinates";
+
     public override PuzzleResult RunPart1()
     {
         var finder = new LargestAreaFinder(FileInput);

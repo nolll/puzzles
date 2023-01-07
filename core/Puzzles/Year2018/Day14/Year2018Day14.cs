@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day14;
 
 public class Year2018Day14 : Puzzle
 {
+    public override string Title => "Chocolate Charts";
+
     public override PuzzleResult RunPart1()
     {
         var generator = new RecipeGenerator();

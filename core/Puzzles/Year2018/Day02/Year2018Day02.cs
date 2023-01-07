@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day02;
 
 public class Year2018Day02 : Puzzle
 {
+    public override string Title => "Inventory Management System";
+
     public override PuzzleResult RunPart1()
     {
         var boxChecksumPuzzle = new BoxChecksumPuzzle(FileInput);

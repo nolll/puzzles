@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day03;
 
 public class Year2018Day03 : Puzzle
 {
+    public override string Title => "No Matter How You Slice It";
+
     public override PuzzleResult RunPart1()
     {
         var claimsOverlapCountPuzzle = new ClaimsOverlapCountPuzzle(FileInput);

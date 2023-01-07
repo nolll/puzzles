@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day12;
 
 public class Year2018Day12 : Puzzle
 {
+    public override string Title => "Subterranean Sustainability";
+
     public override PuzzleResult RunPart1()
     {
         var spreader = new PlantSpreader(FileInput);

@@ -5,6 +5,7 @@ namespace Core.Puzzles.Year2018.Day21;
 
 public class Year2018Day21 : Puzzle
 {
+    public override string Title => "Chronal Conversion";
     public override string Comment => "OpComputer";
     public override bool IsSlow => true;
 

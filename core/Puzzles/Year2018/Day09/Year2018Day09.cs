@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day09;
 
 public class Year2018Day09 : Puzzle
 {
+    public override string Title => "Marble Mania";
+
     public override PuzzleResult RunPart1()
     {
         var game = MarbleGame.Parse(FileInput);

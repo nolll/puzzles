@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day20;
 
 public class Year2018Day20 : Puzzle
 {
+    public override string Title => "A Regular Map";
+
     public override PuzzleResult RunPart1()
     {
         var navigator = new RegularMapNavigator(FileInput);

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day17;
 
 public class Year2018Day17 : Puzzle
 {
+    public override string Title => "Reservoir Research";
+
     public override PuzzleResult RunPart1()
     {
         var filler = new ReservoirFiller(FileInput);

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day04;
 
 public class Year2018Day04 : Puzzle
 {
+    public override string Title => "Repose Record";
+
     public override PuzzleResult RunPart1()
     {
         var guardSleepPuzzle = new GuardSleepPuzzle(FileInput);

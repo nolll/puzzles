@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day23;
 
 public class Year2018Day23 : Puzzle
 {
+    public override string Title => "Experimental Emergency Teleportation";
+
     public override PuzzleResult RunPart1()
     {
         var formation = new NanobotFormation(FileInput);

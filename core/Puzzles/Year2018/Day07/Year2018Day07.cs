@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2018.Day07;
 
 public class Year2018Day07 : Puzzle
 {
+    public override string Title => "The Sum of Its Parts";
+
     public override PuzzleResult RunPart1()
     {
         var assembler1 = new SleighAssembler(FileInput, 1, 0);

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2019.Day10;
 
 public class Year2019Day10 : Puzzle
 {
+    public override string Title => "Monitoring Station";
+
     public override PuzzleResult RunPart1()
     {
         var detector = new AsteroidDetector();

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2019.Day14;
 
 public class Year2019Day14 : Puzzle
 {
+    public override string Title => "Space Stoichiometry";
+
     public override PuzzleResult RunPart1()
     {
         var reactor = new NanoReactor(FileInput);

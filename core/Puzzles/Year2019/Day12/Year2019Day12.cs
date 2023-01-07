@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2019.Day12;
 
 public class Year2019Day12 : Puzzle
 {
+    public override string Title => "The N-Body Problem";
+
     public override PuzzleResult RunPart1()
     {
         var tracker1 = new MoonTracker(FileInput);

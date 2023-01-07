@@ -5,6 +5,8 @@ namespace Core.Puzzles.Year2019.Day02;
 
 public class Year2019Day02 : Puzzle
 {
+    public override string Title => "1202 Program Alarm";
+
     public override PuzzleResult RunPart1()
     {
         var computer = new ConsoleComputer(FileInput);

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2019.Day21;
 
 public class Year2019Day21 : Puzzle
 {
+    public override string Title => "Springdroid Adventure";
+
     public override PuzzleResult RunPart1()
     {
         var walkingDroid = new SpringDroid(FileInput, WalkProgram);

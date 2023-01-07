@@ -4,6 +4,7 @@ namespace Core.Puzzles.Year2019.Day22;
 
 public class Year2019Day22 : Puzzle
 {
+    public override string Title => "Slam Shuffle";
     public override string Comment => "Learn more math";
     public override bool NeedsRewrite => true;
 

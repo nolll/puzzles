@@ -7,6 +7,8 @@ public class Year2019Day05 : Puzzle
 {
     private long _output;
 
+    public override string Title => "Sunny with a Chance of Asteroids";
+
     public override PuzzleResult RunPart1()
     {
         var ci1 = new ComputerInterface(FileInput, ReadInputPart1, WriteOutput);

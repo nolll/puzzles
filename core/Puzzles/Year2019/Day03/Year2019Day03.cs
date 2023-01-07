@@ -5,6 +5,8 @@ namespace Core.Puzzles.Year2019.Day03;
 
 public class Year2019Day03 : Puzzle
 {
+    public override string Title => "Crossed Wires";
+
     public override PuzzleResult RunPart1()
     {
         var wirePaths = PuzzleInputReader.ReadLines(FileInput);

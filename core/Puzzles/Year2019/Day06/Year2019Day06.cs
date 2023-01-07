@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2019.Day06;
 
 public class Year2019Day06 : Puzzle
 {
+    public override string Title => "Universal Orbit Map";
+
     public override PuzzleResult RunPart1()
     {
         var calculator = new OrbitCalculator(FileInput);

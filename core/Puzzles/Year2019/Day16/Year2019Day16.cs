@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2019.Day16;
 
 public class Year2019Day16 : Puzzle
 {
+    public override string Title => "Flawed Frequency Transmission";
+
     public override PuzzleResult RunPart1()
     {
         var algorithm1 = new FrequencyAlgorithmPart1(FileInput);

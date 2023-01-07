@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2019.Day24;
 
 public class Year2019Day24 : Puzzle
 {
+    public override string Title => "Planet of Discord";
+
     public override PuzzleResult RunPart1()
     {
         var simulator = new BugLifeSimulator(FileInput);

@@ -4,6 +4,7 @@ namespace Core.Puzzles.Year2019.Day18;
 
 public class Year2019Day18 : Puzzle
 {
+    public override string Title => "Many-Worlds Interpretation";
     public override string Comment => "Key Collector";
     public override bool IsSlow => true;
 

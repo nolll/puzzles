@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2019.Day17;
 
 public class Year2019Day17 : Puzzle
 {
+    public override string Title => "Set and Forget";
+
     public override PuzzleResult RunPart1()
     {
         var sc = new ScaffoldingComputer1(FileInput);

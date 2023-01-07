@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2019.Day07;
 
 public class Year2019Day07 : Puzzle
 {
+    public override string Title => "Amplification Circuit";
+
     public override PuzzleResult RunPart1()
     {
         var calculator = new ThrustCalculator(FileInput);

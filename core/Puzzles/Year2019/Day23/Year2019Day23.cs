@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2019.Day23;
 
 public class Year2019Day23 : Puzzle
 {
+    public override string Title => "Category Six";
+
     public override PuzzleResult RunPart1()
     {
         var network = new CategorySixNetwork(FileInput);

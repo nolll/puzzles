@@ -10,6 +10,8 @@ public class Year2015Day11: Puzzle
     private CorporatePasswordValidator Validator => _validator ??= new CorporatePasswordValidator();
     private string FirstPassword => _firstPassword ??= Validator.FindNextPassword(Input);
 
+    public override string Title => "Corporate Policy";
+
     public override PuzzleResult RunPart1()
     {
         return new PuzzleResult(FirstPassword, "hxbxxyzz");

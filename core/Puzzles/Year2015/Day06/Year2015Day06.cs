@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day06;
 
 public class Year2015Day06 : Puzzle
 {
+    public override string Title => "Probably a Fire Hazard";
+
     public override PuzzleResult RunPart1()
     {
         var controller = new ChristmasLightsController();

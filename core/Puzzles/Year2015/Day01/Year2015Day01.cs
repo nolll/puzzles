@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day01;
 
 public class Year2015Day01 : Puzzle
 {
+    public override string Title => "Not Quite Lisp";
+
     public override PuzzleResult RunPart1()
     {
         var navigator = new FloorNavigator(FileInput);

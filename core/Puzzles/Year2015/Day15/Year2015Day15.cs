@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day15;
 
 public class Year2015Day15 : Puzzle
 {
+    public override string Title => "Science for Hungry People";
+
     public override PuzzleResult RunPart1()
     {
         var bakery = new CookieBakery(FileInput);

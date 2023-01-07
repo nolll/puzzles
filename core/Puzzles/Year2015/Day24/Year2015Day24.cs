@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day24;
 
 public class Year2015Day24 : Puzzle
 {
+    public override string Title => "It Hangs in the Balance";
+
     public override PuzzleResult RunPart1()
     {
         var balancer1 = new PresentBalancer(FileInput, 3);

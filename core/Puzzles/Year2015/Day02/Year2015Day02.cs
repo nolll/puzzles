@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day02;
 
 public class Year2015Day02 : Puzzle
 {
+    public override string Title => "I Was Told There Would Be No Math";
+
     public override PuzzleResult RunPart1()
     {
         var calc = new GiftWrappingCalculator();

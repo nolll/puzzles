@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day08;
 
 public class Year2015Day08 : Puzzle
 {
+    public override string Title => "Matchsticks";
+
     public override PuzzleResult RunPart1()
     {
         var digitalList = new DigitalList(FileInput);

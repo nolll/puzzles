@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day23;
 
 public class Year2015Day23 : Puzzle
 {
+    public override string Title => "Opening the Turing Lock";
+
     public override PuzzleResult RunPart1()
     {
         var computer1 = new ChristmasComputer();

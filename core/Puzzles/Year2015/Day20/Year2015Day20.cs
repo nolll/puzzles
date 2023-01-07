@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day20;
 
 public class Year2015Day20 : Puzzle
 {
+    public override string Title => "Infinite Elves and Infinite Houses";
+
     public override PuzzleResult RunPart1()
     {
         var presentDelivery = new PresentDelivery();

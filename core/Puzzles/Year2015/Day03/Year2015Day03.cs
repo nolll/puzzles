@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day03;
 
 public class Year2015Day03 : Puzzle
 {
+    public override string Title => "Perfectly Spherical Houses in a Vacuum";
+
     public override PuzzleResult RunPart1()
     {
         var grid = new DeliveryGrid();

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day25;
 
 public class Year2015Day25 : Puzzle
 {
+    public override string Title => "Let It Snow";
+
     public override PuzzleResult RunPart1()
     {
         var p = GetParams();

@@ -5,6 +5,8 @@ namespace Core.Puzzles.Year2015.Day22;
 
 public class Year2015Day22 : Puzzle
 {
+    public override string Title => "Wizard Simulator 20XX";
+
     public override PuzzleResult RunPart1()
     {
         var p = GetParams();

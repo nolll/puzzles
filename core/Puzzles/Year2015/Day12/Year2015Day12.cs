@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day12;
 
 public class Year2015Day12 : Puzzle
 {
+    public override string Title => "JSAbacusFramework.io";
+
     public override PuzzleResult RunPart1()
     {
         var doc = new JsonDoc(FileInput, true);

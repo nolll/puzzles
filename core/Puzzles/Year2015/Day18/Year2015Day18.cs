@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day18;
 
 public class Year2015Day18 : Puzzle
 {
+    public override string Title => "Like a GIF For Your Yard";
+
     public override PuzzleResult RunPart1()
     {
         var gif = new AnimatedGif(FileInput);

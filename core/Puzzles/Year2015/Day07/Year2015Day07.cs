@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day07;
 
 public class Year2015Day07 : Puzzle
 {
+    public override string Title => "Some Assembly Required";
+
     public override PuzzleResult RunPart1()
     {
         var circuit = new Circuit(FileInput);

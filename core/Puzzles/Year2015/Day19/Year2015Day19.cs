@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day19;
 
 public class Year2015Day19 : Puzzle
 {
+    public override string Title => "Medicine for Rudolph";
+
     public override PuzzleResult RunPart1()
     {
         var machine = new MedicineMachine(FileInput);

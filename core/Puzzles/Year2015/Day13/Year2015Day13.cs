@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day13;
 
 public class Year2015Day13 : Puzzle
 {
+    public override string Title => "Knights of the Dinner Table";
+
     public override PuzzleResult RunPart1()
     {
         var table = new DinnerTable(FileInput);

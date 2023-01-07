@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2015.Day10;
 
 public class Year2015Day10 : Puzzle
 {
+    public override string Title => "Elves Look, Elves Say";
+
     public override PuzzleResult RunPart1()
     {
         var game = new LookAndSayGame(Input, 40);

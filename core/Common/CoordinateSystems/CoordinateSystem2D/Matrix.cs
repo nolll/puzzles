@@ -7,7 +7,7 @@ namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 public class Matrix<T> : BaseMatrix, IMatrix<T>
 {
     private readonly T _defaultValue;
-    private readonly IDictionary<(int x, int y), T> _matrix;
+    private readonly IDictionary<MatrixAddress, T> _matrix;
 
     public int Width => XMax - XMin + 1;
     public int Height => YMax - YMin + 1;
@@ -29,7 +29,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         : this(
             new MatrixAddress(0, 0), 
             new MatrixAddress(width - 1, height - 1),
-            new Dictionary<(int x, int y), T>(), 
+            new Dictionary<MatrixAddress, T>(), 
             defaultValue)
     {
     }
@@ -45,7 +45,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
     private Matrix(
         MatrixAddress min, 
         MatrixAddress max, 
-        IDictionary<(int x, int y), T> values, 
+        IDictionary<MatrixAddress, T> values, 
         T defaultValue = default)
         : this(defaultValue)
     {
@@ -62,7 +62,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         {
             foreach (var coord in Coords)
             {
-                if (_matrix.TryGetValue((coord.X, coord.Y), out var v))
+                if (_matrix.TryGetValue(coord, out var v))
                     yield return v;
                 else
                     yield return _defaultValue;
@@ -84,32 +84,32 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         }
     }
 
-    public T ReadValue() => ReadValueAt(Address.X, Address.Y);
-    public T ReadValueAt(MatrixAddress address) => ReadValueAt(address.X, address.Y);
+    public T ReadValue() => ReadValueAt(Address);
+    public T ReadValueAt(int x, int y) => ReadValueAt(new MatrixAddress(x, y));
 
-    public T ReadValueAt(int x, int y)
+    public T ReadValueAt(MatrixAddress coord)
     {
-        return _matrix.TryGetValue((x, y), out var v)
+        return _matrix.TryGetValue(coord, out var v)
             ? v
             : _defaultValue;
     }
 
-    public void WriteValue(T value) => WriteValueAt(Address.X, Address.Y, value);
-    public void WriteValueAt(MatrixAddress address, T value) => WriteValueAt(address.X, address.Y, value);
+    public void WriteValue(T value) => WriteValueAt(Address, value);
+    public void WriteValueAt(int x, int y, T value) => WriteValueAt(new MatrixAddress(x, y), value);
 
-    public void WriteValueAt(int x, int y, T value)
+    public void WriteValueAt(MatrixAddress coord, T value)
     {
-        if (x < XMin)
-            XMin = x;
-        else if (x > XMax)
-            XMax = x;
-        
-        if (y < YMin)
-            YMin = y;
-        else if (y > YMax)
-            YMax = y;
+        if (coord.X < XMin)
+            XMin = coord.X;
+        else if (coord.X > XMax)
+            XMax = coord.X;
 
-        _matrix[(x, y)] = value;
+        if (coord.Y < YMin)
+            YMin = coord.Y;
+        else if (coord.Y > YMax)
+            YMax = coord.Y;
+
+        _matrix[coord] = value;
     }
 
     public IList<T> PerpendicularAdjacentValues => PerpendicularAdjacentCoords.Select(ReadValueAt).ToList();
@@ -329,7 +329,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public IMatrix<T> Copy()
     {
-        var values = _matrix.ToDictionary(item => (item.Key.x, item.Key.y), item => item.Value);
+        var values = _matrix.ToDictionary(item => item.Key, item => item.Value);
         var min = new MatrixAddress(XMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
         return new Matrix<T>(min, max, values, _defaultValue);
@@ -337,7 +337,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public IMatrix<T> RotateLeft()
     {
-        var values = _matrix.ToDictionary(item => (item.Key.y, YMax - item.Key.x), item => item.Value);
+        var values = _matrix.ToDictionary(item => new MatrixAddress(item.Key.Y, YMax - item.Key.X), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
         return new Matrix<T>(min, max, values, _defaultValue);
@@ -345,7 +345,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public IMatrix<T> RotateRight()
     {
-        var values = _matrix.ToDictionary(item => (XMax - item.Key.y, item.Key.x), item => item.Value);
+        var values = _matrix.ToDictionary(item => new MatrixAddress(XMax - item.Key.Y, item.Key.X), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
         return new Matrix<T>(min, max, values, _defaultValue);
@@ -358,8 +358,8 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
         var dx = from.X;
         var dy = from.Y;
         var values = _matrix
-            .Where(item => item.Key.x >= from.X && item.Key.y >= from.Y && item.Key.x <= to.X && item.Key.y <= to.Y)
-            .ToDictionary(item => (item.Key.x - dx, item.Key.y - dy), item => item.Value);
+            .Where(item => item.Key.Y >= from.X && item.Key.Y >= from.Y && item.Key.X <= to.X && item.Key.Y <= to.Y)
+            .ToDictionary(item => new MatrixAddress(item.Key.X - dx, item.Key.Y - dy), item => item.Value);
         var slicedFrom = new MatrixAddress(from.X - dx, from.Y - dy);
         var slicedTo = new MatrixAddress(to.X - dx, to.Y - dy);
         return new Matrix<T>(slicedFrom, slicedTo, values, _defaultValue);
@@ -373,7 +373,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public IMatrix<T> FlipVertical()
     {
-        var values = _matrix.ToDictionary(item => (item.Key.x, YMax - item.Key.y), item => item.Value);
+        var values = _matrix.ToDictionary(item => new MatrixAddress(item.Key.X, YMax - item.Key.Y), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
         return new Matrix<T>(min, max, values, _defaultValue);
@@ -381,7 +381,7 @@ public class Matrix<T> : BaseMatrix, IMatrix<T>
 
     public IMatrix<T> FlipHorizontal()
     {
-        var values = _matrix.ToDictionary(item => (XMax - item.Key.x, item.Key.y), item => item.Value);
+        var values = _matrix.ToDictionary(item => new MatrixAddress(XMax - item.Key.X, item.Key.Y), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
         return new Matrix<T>(min, max, values, _defaultValue);

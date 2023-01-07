@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day07;
 
 public class Year2020Day07 : Puzzle
 {
+    public override string Title => "Handy Haversacks";
+
     public override PuzzleResult RunPart1()
     {
         var processor = new LuggageProcessor(FileInput);

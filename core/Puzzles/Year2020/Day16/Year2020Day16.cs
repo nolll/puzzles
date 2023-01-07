@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day16;
 
 public class Year2020Day16 : Puzzle
 {
+    public override string Title => "Ticket Translation";
+
     public override PuzzleResult RunPart1()
     {
         var validator = new TicketValidator();

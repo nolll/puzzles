@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day09;
 
 public class Year2020Day09 : Puzzle
 {
+    public override string Title => "Encoding Error";
+
     public override PuzzleResult RunPart1()
     {
         var port = new XmasPort(FileInput, 25);

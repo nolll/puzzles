@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day22;
 
 public class Year2020Day22 : Puzzle
 {
+    public override string Title => "Crab Combat";
+
     public override PuzzleResult RunPart1()
     {
         var game = new CardCombatGame(FileInput);

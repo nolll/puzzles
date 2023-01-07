@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day08;
 
 public class Year2020Day08 : Puzzle
 {
+    public override string Title => "Handheld Halting";
+
     public override PuzzleResult RunPart1()
     {
         var console = new GameConsoleRunner(FileInput);

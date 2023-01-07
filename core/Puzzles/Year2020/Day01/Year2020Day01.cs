@@ -5,6 +5,8 @@ namespace Core.Puzzles.Year2020.Day01;
 
 public class Year2020Day01 : Puzzle
 {
+    public override string Title => "Report Repair";
+
     public override PuzzleResult RunPart1()
     {
         var sumFinder = new SumFinder(FileInput);

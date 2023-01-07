@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day20;
 
 public class Year2020Day20 : Puzzle
 {
+    public override string Title => "Jurassic Jigsaw";
+
     public override PuzzleResult RunPart1()
     {
         var puzzle = new ImageJigsawPuzzle(FileInput);

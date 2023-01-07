@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day10;
 
 public class Year2020Day10 : Puzzle
 {
+    public override string Title => "Adapter Array";
+
     public override PuzzleResult RunPart1()
     {
         var chain = new PowerAdapterChain(FileInput);

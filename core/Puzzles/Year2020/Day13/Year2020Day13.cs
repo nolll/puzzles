@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day13;
 
 public class Year2020Day13 : Puzzle
 {
+    public override string Title => "Shuttle Search";
+
     public override PuzzleResult RunPart1()
     {
         var system = new BusScheduler1(FileInput);

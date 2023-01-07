@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day15;
 
 public class Year2020Day15 : Puzzle
 {
+    public override string Title => "Rambunctious Recitation";
+
     public override PuzzleResult RunPart1()
     {
         var system = new MemoryGame(Input);

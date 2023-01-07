@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day24;
 
 public class Year2020Day24 : Puzzle
 {
+    public override string Title => "Lobby Layout";
+
     public override PuzzleResult RunPart1()
     {
         var floor = new HexagonalFloor(FileInput);

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day18;
 
 public class Year2020Day18 : Puzzle
 {
+    public override string Title => "Operation Order";
+
     public override PuzzleResult RunPart1()
     {
         var calculator = new HomeworkCalculator();

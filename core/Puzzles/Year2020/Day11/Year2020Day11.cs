@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day11;
 
 public class Year2020Day11 : Puzzle
 {
+    public override string Title => "Seating System";
+
     public override PuzzleResult RunPart1()
     {
         var simulator = new SeatingSimulatorAdjacentSeats(FileInput);

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day12;
 
 public class Year2020Day12 : Puzzle
 {
+    public override string Title => "Rain Risk";
+
     public override PuzzleResult RunPart1()
     {
         var system = new SimpleFerryNavigationSystem(FileInput);

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day21;
 
 public class Year2020Day21 : Puzzle
 {
+    public override string Title => "Allergen Assessment";
+
     public override PuzzleResult RunPart1()
     {
         var detector = new AllergenDetector(FileInput);

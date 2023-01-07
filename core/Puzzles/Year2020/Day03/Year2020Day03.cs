@@ -5,6 +5,8 @@ namespace Core.Puzzles.Year2020.Day03;
 
 public class Year2020Day03 : Puzzle
 {
+    public override string Title => "Toboggan Trajectory";
+
     public override PuzzleResult RunPart1()
     {
         var navigator = new TreeNavigator(FileInput);

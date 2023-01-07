@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day04;
 
 public class Year2020Day04 : Puzzle
 {
+    public override string Title => "Passport Processing";
+
     public override PuzzleResult RunPart1()
     {
         var processor = new PassportProcessor(FileInput);

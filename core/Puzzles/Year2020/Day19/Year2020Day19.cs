@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2020.Day19;
 
 public class Year2020Day19 : Puzzle
 {
+    public override string Title => "Monster Messages";
+
     public override PuzzleResult RunPart1()
     {
         var validator = new MonsterImageValidator(FileInput);

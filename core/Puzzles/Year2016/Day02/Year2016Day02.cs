@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day02;
 
 public class Year2016Day02 : Puzzle
 {
+    public override string Title => "Bathroom Security";
+
     public override PuzzleResult RunPart1()
     {
         var squareCodeFinder = new SquareKeyCodeFinder();

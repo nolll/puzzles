@@ -6,6 +6,8 @@ public class Year2016Day24 : Puzzle
 {
     private AirDuctNavigator Navigator => new(FileInput);
 
+    public override string Title => "Air Duct Spelunking";
+
     public override PuzzleResult RunPart1()
     {
         var shortestPath = Navigator.Run(false);

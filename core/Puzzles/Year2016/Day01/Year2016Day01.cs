@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day01;
 
 public class Year2016Day01 : Puzzle
 {
+    public override string Title => "No Time for a Taxicab";
+
     public override PuzzleResult RunPart1()
     {
         var calc = new EasterbunnyDistanceCalculator();

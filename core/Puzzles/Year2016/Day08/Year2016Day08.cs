@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day08;
 
 public class Year2016Day08 : Puzzle
 {
+    public override string Title => "Two-Factor Authentication";
+
     public override PuzzleResult RunPart1()
     {
         var simulator = new ScreenSimulator(50, 6);

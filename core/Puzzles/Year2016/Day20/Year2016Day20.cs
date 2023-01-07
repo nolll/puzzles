@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day20;
 
 public class Year2016Day20 : Puzzle
 {
+    public override string Title => "Firewall Rules";
+
     public override PuzzleResult RunPart1()
     {
         var rules = new FirewallRules(FileInput);

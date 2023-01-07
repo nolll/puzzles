@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day21;
 
 public class Year2016Day21 : Puzzle
 {
+    public override string Title => "Scrambled Letters and Hash";
+
     public override PuzzleResult RunPart1()
     {
         var scrambler = new StringScrambler(FileInput);

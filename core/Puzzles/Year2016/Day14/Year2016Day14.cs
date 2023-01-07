@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day14;
 
 public class Year2016Day14 : Puzzle
 {
+    public override string Title => "One-Time Pad";
+
     public override string Comment => "Slow hashing";
     public override bool IsSlow => true;
 

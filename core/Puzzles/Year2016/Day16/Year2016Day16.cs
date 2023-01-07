@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day16;
 
 public class Year2016Day16 : Puzzle
 {
+    public override string Title => "Dragon Checksum";
+
     public override PuzzleResult RunPart1()
     {
         var dragonCurve = new DragonCurve();

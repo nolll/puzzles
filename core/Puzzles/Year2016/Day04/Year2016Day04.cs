@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day04;
 
 public class Year2016Day04 : Puzzle
 {
+    public override string Title => "Security Through Obscurity";
+
     public override PuzzleResult RunPart1()
     {
         var validator = new RoomValidator(FileInput);

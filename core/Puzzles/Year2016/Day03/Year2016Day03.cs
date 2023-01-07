@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day03;
 
 public class Year2016Day03 : Puzzle
 {
+    public override string Title => "Squares With Three Sides";
+
     public override PuzzleResult RunPart1()
     {
         var validator = new TriangleValidator();

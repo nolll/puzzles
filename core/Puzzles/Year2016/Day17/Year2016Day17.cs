@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day17;
 
 public class Year2016Day17 : Puzzle
 {
+    public override string Title => "Two Steps Forward";
+
     public override PuzzleResult RunPart1()
     {
         var maze = new LockedDoorMaze();

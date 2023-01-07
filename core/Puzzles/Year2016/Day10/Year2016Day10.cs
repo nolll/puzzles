@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day10;
 
 public class Year2016Day10 : Puzzle
 {
+    public override string Title => "Balance Bots";
+
     public override PuzzleResult RunPart1()
     {
         var simulator = new BotSimulator(FileInput);

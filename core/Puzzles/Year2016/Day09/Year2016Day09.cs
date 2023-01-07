@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day09;
 
 public class Year2016Day09 : Puzzle
 {
+    public override string Title => "Explosives in Cyberspace";
+
     public override PuzzleResult RunPart1()
     {
         var decompressor = new FileDecompressor(FileInput);

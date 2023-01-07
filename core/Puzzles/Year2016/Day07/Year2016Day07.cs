@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day07;
 
 public class Year2016Day07 : Puzzle
 {
+    public override string Title => "Internet Protocol Version 7";
+
     public override PuzzleResult RunPart1()
     {
         var tester = new IpTester();

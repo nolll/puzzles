@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day15;
 
 public class Year2016Day15 : Puzzle
 {
+    public override string Title => "Timing is Everything";
+
     public override PuzzleResult RunPart1()
     {
         var sculpture = new KineticSculpture(FileInput);

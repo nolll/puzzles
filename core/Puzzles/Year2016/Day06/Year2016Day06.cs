@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day06;
 
 public class Year2016Day06 : Puzzle
 {
+    public override string Title => "Signals and Noise";
+
     public override PuzzleResult RunPart1()
     {
         var reader = new RepetitionCodeReader();

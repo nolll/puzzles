@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day11;
 
 public class Year2016Day11 : Puzzle
 {
+    public override string Title => "Radioisotope Thermoelectric Generators";
+
     public override string Comment => "Floor permutations";
     public override bool IsSlow => true;
 

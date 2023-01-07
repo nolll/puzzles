@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day12;
 
 public class Year2016Day12 : Puzzle
 {
+    public override string Title => "Leonardo's Monorail";
+
     public override PuzzleResult RunPart1()
     {
         var computer = new MonorailComputer(FileInput, 0, 0);

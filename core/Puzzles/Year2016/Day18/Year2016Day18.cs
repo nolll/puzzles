@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2016.Day18;
 
 public class Year2016Day18 : Puzzle
 {
+    public override string Title => "Like a Rogue";
+
     public override PuzzleResult RunPart1()
     {
         var detector = new FloorTrapDetector(FileInput);

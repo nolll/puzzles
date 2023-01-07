@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2022.Day17;
 
 public class Year2022Day17 : Puzzle
 {
+    public override string Title => "Pyroclastic Flow";
+
     public override PuzzleResult RunPart1()
     {
         var tetris = new Tetris();

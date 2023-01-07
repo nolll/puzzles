@@ -6,6 +6,8 @@ namespace Core.Puzzles.Year2022.Day25;
 
 public class Year2022Day25 : Puzzle
 {
+    public override string Title => "Full of Hot Air";
+
     public override PuzzleResult RunPart1()
     {
         var result = Part1(FileInput);

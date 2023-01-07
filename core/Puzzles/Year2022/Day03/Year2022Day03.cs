@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2022.Day03;
 
 public class Year2022Day03 : Puzzle
 {
+    public override string Title => "Rucksack Reorganization";
+
     public override PuzzleResult RunPart1()
     {
         var result = Rucksacks.GetPriority1(FileInput);

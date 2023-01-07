@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2022.Day01;
 
 public class Year2022Day01 : Puzzle
 {
+    public override string Title => "Calorie Counting";
+
     public override PuzzleResult RunPart1()
     {
         var calorieCounts = new CalorieCounts(FileInput);

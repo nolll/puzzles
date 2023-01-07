@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2022.Day04;
 
 public class Year2022Day04 : Puzzle
 {
+    public override string Title => "Camp Cleanup";
+
     public override PuzzleResult RunPart1()
     {
         var cleaning = new Cleaning();

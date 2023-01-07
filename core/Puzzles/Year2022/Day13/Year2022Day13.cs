@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2022.Day13;
 
 public class Year2022Day13 : Puzzle
 {
+    public override string Title => "Distress Signal";
+
     public override PuzzleResult RunPart1()
     {
         var signal = new DistressSignal();

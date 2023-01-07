@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2022.Day18;
 
 public class Year2022Day18 : Puzzle
 {
+    public override string Title => "Boiling Boulders";
+
     public override PuzzleResult RunPart1()
     {
         var lavaCubes = new LavaCubes();

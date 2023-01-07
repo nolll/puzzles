@@ -9,6 +9,8 @@ namespace Core.Puzzles.Year2022.Day20;
 
 public class Year2022Day20 : Puzzle
 {
+    public override string Title => "Grove Positioning System";
+
     public override PuzzleResult RunPart1()
     {
         var result = Run(FileInput, 1, 1);

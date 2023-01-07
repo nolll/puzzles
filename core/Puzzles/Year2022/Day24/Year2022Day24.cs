@@ -15,6 +15,8 @@ public class Year2022Day24 : Puzzle
     private const char Down = 'v';
     private const char Left = '<';
 
+    public override string Title => "Blizzard Basin";
+
     public override PuzzleResult RunPart1()
     {
         var result = Part1(FileInput);

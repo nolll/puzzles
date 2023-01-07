@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2022.Day11;
 
 public class Year2022Day11 : Puzzle
 {
+    public override string Title => "Monkey in the Middle";
+
     public override PuzzleResult RunPart1()
     {
         var monkeyBusiness = new MonkeyBusiness();

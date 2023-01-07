@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2022.Day05;
 
 public class Year2022Day05 : Puzzle
 {
+    public override string Title => "Supply Stacks";
+
     public override PuzzleResult RunPart1()
     {
         var crane = new CargoCrane(FileInput);

@@ -8,6 +8,8 @@ namespace Core.Puzzles.Year2022.Day22;
 
 public class Year2022Day22 : Puzzle
 {
+    public override string Title => "Monkey Map";
+
     public override PuzzleResult RunPart1()
     {
         var result = Part1(FileInput);

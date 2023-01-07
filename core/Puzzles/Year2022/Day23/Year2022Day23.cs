@@ -8,6 +8,8 @@ namespace Core.Puzzles.Year2022.Day23;
 
 public class Year2022Day23 : Puzzle
 {
+    public override string Title => "Unstable Diffusion";
+
     public override PuzzleResult RunPart1()
     {
         var (emptyCount, _) = Run(FileInput, 10);

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2022.Day10;
 
 public class Year2022Day10 : Puzzle
 {
+    public override string Title => "Cathode-Ray Tube";
+
     public override PuzzleResult RunPart1()
     {
         var tube = new CathodeRayTube();

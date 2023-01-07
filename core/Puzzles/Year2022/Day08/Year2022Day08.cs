@@ -6,6 +6,8 @@ public class Year2022Day08 : Puzzle
 {
     private TreeHouse _treeHouse;
 
+    public override string Title => "Treetop Tree House";
+
     public override PuzzleResult RunPart1()
     {
         _treeHouse = new TreeHouse(FileInput);

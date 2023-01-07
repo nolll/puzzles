@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2022.Day09;
 
 public class Year2022Day09 : Puzzle
 {
+    public override string Title => "Rope Bridge";
+
     public override PuzzleResult RunPart1()
     {
         var ropeBridge = new RopeBridge();

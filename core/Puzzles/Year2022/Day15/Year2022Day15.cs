@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2022.Day15;
 
 public class Year2022Day15 : Puzzle
 {
+    public override string Title => "Beacon Exclusion Zone";
+
     public override PuzzleResult RunPart1()
     {
         var zone = new BeaconZone();

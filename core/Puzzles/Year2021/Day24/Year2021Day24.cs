@@ -7,7 +7,7 @@ namespace Core.Puzzles.Year2021.Day24;
 public class Year2021Day24 : Puzzle
 {
     private List<string> _validNumbers;
-
+    
     private List<string> ValidNumbers
     {
         get
@@ -26,6 +26,8 @@ public class Year2021Day24 : Puzzle
 
     private long SmallestValidNumber => long.Parse(ValidNumbers.First());
     private long LargestValidNumber => long.Parse(ValidNumbers.Last());
+
+    public override string Title => "Arithmetic Logic Unit";
 
     public override PuzzleResult RunPart1()
     {

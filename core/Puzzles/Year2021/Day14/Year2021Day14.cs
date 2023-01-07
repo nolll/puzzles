@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2021.Day14;
 
 public class Year2021Day14 : Puzzle
 {
+    public override string Title => "Extended Polymerization";
+
     public override PuzzleResult RunPart1()
     {
         var polymerization = new Polymerization();

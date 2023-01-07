@@ -4,6 +4,7 @@ namespace Core.Puzzles.Year2021.Day23;
 
 public class Year2021Day23 : Puzzle
 {
+    public override string Title => "Amphipod";
     public override string Comment => "Solved manually";
 
     public override PuzzleResult RunPart1()

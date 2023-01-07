@@ -6,6 +6,8 @@ public class Year2021Day17 : Puzzle
 {
     private TrickshotResult _result;
 
+    public override string Title => "Trick Shot";
+
     public override PuzzleResult RunPart1()
     {
         var result = Shoot();

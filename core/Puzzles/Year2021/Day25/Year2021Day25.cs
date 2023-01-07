@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2021.Day25;
 
 public class Year2021Day25 : Puzzle
 {
+    public override string Title => "Sea Cucumber";
+
     public override PuzzleResult RunPart1()
     {
         var herd = new HerdOfSeaCucumbers(FileInput);

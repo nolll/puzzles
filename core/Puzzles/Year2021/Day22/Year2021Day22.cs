@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2021.Day22;
 
 public class Year2021Day22 : Puzzle
 {
+    public override string Title => "Reactor Reboot";
+
     public override PuzzleResult RunPart1()
     {
         var reactor = new SubmarineReactor();

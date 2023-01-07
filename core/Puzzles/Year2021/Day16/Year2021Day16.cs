@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2021.Day16;
 
 public class Year2021Day16 : Puzzle
 {
+    public override string Title => "Packet Decoder";
+
     public override PuzzleResult RunPart1()
     {
         var packet = BitsPacket.FromHex(FileInput);

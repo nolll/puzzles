@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2021.Day21;
 
 public class Year2021Day21 : Puzzle
 {
+    public override string Title => "Dirac Dice";
+
     public override PuzzleResult RunPart1()
     {
         var game = new DiracDiceGame();

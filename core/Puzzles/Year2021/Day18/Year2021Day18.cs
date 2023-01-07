@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2021.Day18;
 
 public class Year2021Day18 : Puzzle
 {
+    public override string Title => "Snailfish";
+
     public override PuzzleResult RunPart1()
     {
         var math = new SnailfishMath();

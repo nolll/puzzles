@@ -6,6 +6,8 @@ public class Year2021Day19 : Puzzle
 {
     private BeaconSystemResult _result;
 
+    public override string Title => "Beacon Scanner";
+
     public override PuzzleResult RunPart1()
     {
         var result = GetResult();

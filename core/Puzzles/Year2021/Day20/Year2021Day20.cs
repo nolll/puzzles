@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2021.Day20;
 
 public class Year2021Day20 : Puzzle
 {
+    public override string Title => "Trench Map";
+
     public override PuzzleResult RunPart1()
     {
         var trenchMap = new TrenchMap();

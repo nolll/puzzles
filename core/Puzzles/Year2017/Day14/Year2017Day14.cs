@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day14;
 
 public class Year2017Day14 : Puzzle
 {
+    public override string Title => "Disk Defragmentation";
+
     public override PuzzleResult RunPart1()
     {
         var defragmenter = new DiskDefragmenter(Input);

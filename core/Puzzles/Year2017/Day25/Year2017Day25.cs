@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day25;
 
 public class Year2017Day25 : Puzzle
 {
+    public override string Title => "The Halting Problem";
+
     public override PuzzleResult RunPart1()
     {
         var turingMachine = new TuringMachine(FileInput);

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day03;
 
 public class Year2017Day03 : Puzzle
 {
+    public override string Title => "Spiral Memory";
+
     public override PuzzleResult RunPart1()
     {
         var memory1 = new SpiralMemory(Input, SpiralMemoryMode.RunToTarget);

@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day21;
 
 public class Year2017Day21 : Puzzle
 {
+    public override string Title => "Fractal Art";
+
     public override PuzzleResult RunPart1()
     {
         var artGenerator1 = new FractalArtGenerator(FileInput);

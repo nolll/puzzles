@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day13;
 
 public class Year2017Day13 : Puzzle
 {
+    public override string Title => "Packet Scanners";
+
     public override PuzzleResult RunPart1()
     {
         var scanner1 = new PacketScanner(FileInput);

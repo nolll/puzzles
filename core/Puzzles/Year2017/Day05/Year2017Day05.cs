@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day05;
 
 public class Year2017Day05 : Puzzle
 {
+    public override string Title => "A Maze of Twisty Trampolines, All Alike";
+
     public override PuzzleResult RunPart1()
     {
         var jumper1 = new InstructionJumper(FileInput);

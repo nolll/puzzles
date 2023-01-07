@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day24;
 
 public class Year2017Day24 : Puzzle
 {
+    public override string Title => "Electromagnetic Moat";
+
     public override PuzzleResult RunPart1()
     {
         var builder1 = new BridgeBuilder(FileInput, false);

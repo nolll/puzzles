@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day17;
 
 public class Year2017Day17 : Puzzle
 {
+    public override string Title => "Spinlock";
+
     public override PuzzleResult RunPart1()
     {
         var runner1 = new SpinlockRunnerPart1(Input);

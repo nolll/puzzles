@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day22;
 
 public class Year2017Day22 : Puzzle
 {
+    public override string Title => "Sporifica Virus";
+
     public override PuzzleResult RunPart1()
     {
         var infection1 = new VirusInfection(FileInput);

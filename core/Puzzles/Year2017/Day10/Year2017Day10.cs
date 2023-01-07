@@ -5,6 +5,8 @@ namespace Core.Puzzles.Year2017.Day10;
 
 public class Year2017Day10 : Puzzle
 {
+    public override string Title => "Knot Hash";
+
     public override PuzzleResult RunPart1()
     {
         var intHasher = new IntKnotHasher(FileInput);

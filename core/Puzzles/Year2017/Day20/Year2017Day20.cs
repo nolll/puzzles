@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day20;
 
 public class Year2017Day20 : Puzzle
 {
+    public override string Title => "Particle Swarm";
+
     public override PuzzleResult RunPart1()
     {
         var tracker1 = new ParticleTracker(FileInput);

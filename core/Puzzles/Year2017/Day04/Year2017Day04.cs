@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day04;
 
 public class Year2017Day04 : Puzzle
 {
+    public override string Title => "High-Entropy Passphrases";
+
     public override PuzzleResult RunPart1()
     {
         var validator = new PassphraseValidator();

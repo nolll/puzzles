@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day18;
 
 public class Year2017Day18 : Puzzle
 {
+    public override string Title => "Duet";
+
     public override PuzzleResult RunPart1()
     {
         var single = new SingleRunner(FileInput);

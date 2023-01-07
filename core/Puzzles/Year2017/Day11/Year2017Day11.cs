@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day11;
 
 public class Year2017Day11 : Puzzle
 {
+    public override string Title => "Hex Ed";
+
     public override PuzzleResult RunPart1()
     {
         var navigator = new HexGridNavigator(FileInput);

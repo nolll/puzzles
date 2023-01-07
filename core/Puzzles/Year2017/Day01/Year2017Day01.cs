@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day01;
 
 public class Year2017Day01 : Puzzle
 {
+    public override string Title => "Inverse Captcha";
+
     public override PuzzleResult RunPart1()
     {
         var calc = new CaptchaCalculator(FileInput);

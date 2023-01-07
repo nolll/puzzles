@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day06;
 
 public class Year2017Day06 : Puzzle
 {
+    public override string Title => "Memory Reallocation";
+
     public override PuzzleResult RunPart1()
     {
         var reallocator = new MemoryReallocator(FileInput);

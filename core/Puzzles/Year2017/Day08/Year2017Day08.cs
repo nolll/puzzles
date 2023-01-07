@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day08;
 
 public class Year2017Day08 : Puzzle
 {
+    public override string Title => "I Heard You Like Registers";
+
     public override PuzzleResult RunPart1()
     {
         var calculator = new CpuInstructionCalculator(FileInput);

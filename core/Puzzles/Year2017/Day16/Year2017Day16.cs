@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day16;
 
 public class Year2017Day16 : Puzzle
 {
+    public override string Title => "Permutation Promenade";
+
     public override PuzzleResult RunPart1()
     {
         var dancingPrograms1 = new DancingPrograms();

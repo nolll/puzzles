@@ -4,6 +4,8 @@ namespace Core.Puzzles.Year2017.Day19;
 
 public class Year2017Day19 : Puzzle
 {
+    public override string Title => "A Series of Tubes";
+
     public override PuzzleResult RunPart1()
     {
         var finder = new TubeRouteFinder(FileInput);

@@ -7,8 +7,8 @@ public class Year2022Day24Tests
     [Test]
     public void Part1()
     {
-        var puzzle = new Year2022Day24();
-        var result = puzzle.Part1(Input);
+        var blizzardNavigation = new BlizzardNavigation(Input);
+        var result = blizzardNavigation.Part1();
 
         Assert.That(result, Is.EqualTo(18));
     }
@@ -16,13 +16,14 @@ public class Year2022Day24Tests
     [Test]
     public void Part2()
     {
-        var result = 0;
+        var blizzardNavigation = new BlizzardNavigation(Input);
+        var result = blizzardNavigation.Part2();
 
-        Assert.That(result, Is.EqualTo(0));
+        Assert.That(result, Is.EqualTo(54));
     }
 
     private const string Input = """
-#E######
+#.######
 #>>.<^<#
 #.<..<<#
 #>v.><>#

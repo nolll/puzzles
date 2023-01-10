@@ -10,32 +10,69 @@ public class RobotFactory
     {
         var lines = PuzzleInputReader.ReadLines(input, false);
         var blueprints = lines.Select(ParseBlueprint);
-        var qualityLevels = blueprints.Select(GetQualityLevel).ToList();
+        var qualityLevels = blueprints.Select(GetQualityLevel);
 
         return qualityLevels.Sum();
     }
 
-    private int GetQualityLevel(FactoryBlueprint blueprint)
+    public int Part2(string input)
     {
-        var best = FindBestConfiguration(blueprint);
+        var lines = PuzzleInputReader.ReadLines(input, false).Take(3);
+        var blueprints = lines.Select(ParseBlueprint);
+        var qualityLevels = blueprints.Select(o => FindBestConfiguration(o, 32).GeodeCount);
+
+        return qualityLevels.Aggregate(1, (x, y) => x * y);
+    }
+
+    private static int GetQualityLevel(FactoryBlueprint blueprint)
+    {
+        var best = FindBestConfiguration(blueprint, 24);
         return blueprint.Id * best.GeodeCount;
     }
 
-    private FactoryState FindBestConfiguration(FactoryBlueprint blueprint)
+    public static FactoryState FindBestConfiguration(FactoryBlueprint blueprint, int time)
     {
         var queue = new Queue<FactoryState>();
-        var seen = new Dictionary<string, FactoryState>();
-        var initial = new FactoryState(24, 1, 0, 0, 0, 0, 0, 0, 0);
+        var seen = new HashSet<(int, int, int, int, int, int, int, int, int)>();
+        var initial = new FactoryState(time, 1, 0, 0, 0, 0, 0, 0, 0);
         var best = initial;
+
+        var maxOreCost = new List<int>
+        {
+            blueprint.OreRobotBlueprint.Ore,
+            blueprint.ClayRobotBlueprint.Ore,
+            blueprint.ObsidianRobotBlueprint.Ore,
+            blueprint.GeodeRobotBlueprint.Ore
+        }.Max();
+
+        var maxClayCost = new List<int>
+        {
+            blueprint.OreRobotBlueprint.Clay,
+            blueprint.ClayRobotBlueprint.Clay,
+            blueprint.ObsidianRobotBlueprint.Clay,
+            blueprint.GeodeRobotBlueprint.Clay
+        }.Max();
+
+        var maxObsidianCost = new List<int>
+        {
+            blueprint.OreRobotBlueprint.Obsidian,
+            blueprint.ClayRobotBlueprint.Obsidian,
+            blueprint.ObsidianRobotBlueprint.Obsidian,
+            blueprint.GeodeRobotBlueprint.Obsidian
+        }.Max();
+
         queue.Enqueue(initial);
 
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
-            if (seen.TryGetValue(current.CacheKey, out var seenState) && seenState.Time >= current.Time)
+
+            current = OptimizeState(current, maxOreCost, maxClayCost, maxObsidianCost);
+
+            if (seen.Contains(current.CacheKey2))
                 continue;
 
-            seen[current.CacheKey] = current;
+            seen.Add(current.CacheKey2);
 
             if (current.Time == 0)
             {
@@ -67,6 +104,7 @@ public class RobotFactory
                     ObsidianCount = state.ObsidianCount - blueprint.GeodeRobotBlueprint.Obsidian
                 };
                 queue.Enqueue(newState);
+                continue;
             }
 
             if (canMakeObsidianRobot)
@@ -100,16 +138,31 @@ public class RobotFactory
                 queue.Enqueue(newState);
             }
 
-            var robotsWereMade = canMakeOreRobot || canMakeClayRobot || canMakeObsidianRobot || canMakeGeodeRobot;
-            if (!robotsWereMade)
-                queue.Enqueue(state);
+            queue.Enqueue(state);
         }
 
         return best;
-        //return seen.Values.MaxBy(o => o.GeodeCount);
     }
 
-    private FactoryBlueprint ParseBlueprint(string line)
+    private static FactoryState OptimizeState(FactoryState state, int maxOreCost, int maxClayCost, int maxObsidianCost)
+    {
+        var timeLeft = state.Time - 1;
+        var oreThatCanBeSpent = state.Time * maxOreCost - state.OreRobotCount * timeLeft;
+        var clayThatCanBeSpent = state.Time * maxClayCost - state.ClayRobotCount * timeLeft;
+        var obsidianThatCanBeSpent = state.Time * maxObsidianCost - state.ObsidianRobotCount * timeLeft;
+
+        return state with
+        {
+            OreRobotCount = state.OreRobotCount > maxOreCost ? maxOreCost : state.OreRobotCount,
+            ClayRobotCount = state.ClayRobotCount > maxClayCost ? maxClayCost : state.ClayRobotCount,
+            ObsidianRobotCount = state.ObsidianRobotCount > maxObsidianCost ? maxObsidianCost : state.ObsidianRobotCount,
+            OreCount = state.OreCount > oreThatCanBeSpent ? oreThatCanBeSpent : state.OreCount,
+            ClayCount = state.ClayCount > clayThatCanBeSpent ? clayThatCanBeSpent : state.ClayCount,
+            ObsidianCount = state.ObsidianCount > obsidianThatCanBeSpent ? obsidianThatCanBeSpent : state.ObsidianCount
+        };
+    }
+
+    public static FactoryBlueprint ParseBlueprint(string line)
     {
         var parts = line.Split(": ");
 

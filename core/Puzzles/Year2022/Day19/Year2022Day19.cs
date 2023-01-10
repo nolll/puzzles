@@ -11,11 +11,14 @@ public class Year2022Day19 : Puzzle
         var factory = new RobotFactory();
         var result = factory.Part1(FileInput);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 2193);
     }
 
     public override PuzzleResult RunPart2()
     {
-        return new EmptyPuzzleResult();
+        var factory = new RobotFactory();
+        var result = factory.Part2(FileInput);
+
+        return new PuzzleResult(result, 7200);
     }
 }

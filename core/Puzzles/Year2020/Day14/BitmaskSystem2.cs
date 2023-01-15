@@ -22,7 +22,7 @@ public class BitmaskSystem2
             {
                 var parts = row.Split("=");
                 var val = long.Parse(parts[1].Trim());
-                var memPos = int.Parse(parts[0].Substring(4).Replace("]", ""));
+                var memPos = int.Parse(parts[0][4..].Replace("]", ""));
 
                 var memPositions = ApplyBitmask(bitmask, memPos);
 
@@ -36,7 +36,7 @@ public class BitmaskSystem2
         return mem.Values.Sum();
     }
 
-    private List<long> ApplyBitmask(string bitmask, in long address)
+    private static List<long> ApplyBitmask(string bitmask, in long address)
     {
         var addresses = new List<string> {""};
         var binary = Convert.ToString(address, 2).PadLeft(36, '0').ToCharArray();
@@ -72,7 +72,6 @@ public class BitmaskSystem2
 
                 addresses = addresses.Concat(newAddresses).ToList();
             }
-
         }
 
         return addresses.Select(o => Convert.ToInt64(o, 2)).ToList();

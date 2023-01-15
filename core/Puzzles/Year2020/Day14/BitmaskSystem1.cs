@@ -22,7 +22,7 @@ public class BitmaskSystem1
             {
                 var parts = row.Split("=");
                 var val = long.Parse(parts[1].Trim());
-                var memPos = int.Parse(parts[0].Substring(4).Replace("]", ""));
+                var memPos = int.Parse(parts[0][4..].Replace("]", ""));
 
                 var valAfterBitmask = ApplyBitmask(bitmask, val);
 
@@ -33,7 +33,7 @@ public class BitmaskSystem1
         return mem.Values.Sum();
     }
 
-    private long ApplyBitmask(string bitmask, in long val)
+    private static long ApplyBitmask(string bitmask, in long val)
     {
         var binary = Convert.ToString(val, 2).PadLeft(36, '0').ToCharArray();
         var mask = bitmask.ToCharArray();

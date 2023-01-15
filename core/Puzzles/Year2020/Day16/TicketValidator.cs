@@ -14,7 +14,7 @@ public class TicketValidator
         return invalidValues.Sum();
     }
 
-    private List<int> FindInvalidValues(Data data)
+    private static List<int> FindInvalidValues(Data data)
     {
         var invalidValues = new List<int>();
 
@@ -47,7 +47,7 @@ public class TicketValidator
         return product;
     }
 
-    public Ticket FindFields(string input)
+    public static Ticket FindFields(string input)
     {
         var data = ParseData(input);
         var otherTickets = FilterValidTickets(data.OtherTickets, FindInvalidValues(data)).ToList();
@@ -92,28 +92,12 @@ public class TicketValidator
         return data.MyTicket;
     }
 
-    private IEnumerable<Ticket> FilterValidTickets(List<Ticket> tickets, List<int> invalidValues)
+    private static IEnumerable<Ticket> FilterValidTickets(IEnumerable<Ticket> tickets, ICollection<int> invalidValues)
     {
-        var validTickets = new List<Ticket>();
-        foreach (var ticket in tickets)
-        {
-            var hasInvalidNumber = false;
-            foreach (var num in ticket.Numbers)
-            {
-                if (invalidValues.Contains(num))
-                {
-                    hasInvalidNumber = true;
-                    break;
-                }
-            }
-            if(!hasInvalidNumber)
-                validTickets.Add(ticket);
-        }
-
-        return validTickets;
+        return tickets.Where(ticket => !ticket.Numbers.Any(invalidValues.Contains)).ToList();
     }
 
-    private Data ParseData(string input)
+    private static Data ParseData(string input)
     {
         var groups = PuzzleInputReader.ReadLineGroups(input);
         var ruleRows = groups[0];
@@ -151,9 +135,7 @@ public class TicketValidator
 
         public bool IsInRange(int num)
         {
-            if (num >= _from && num <= _to)
-                return true;
-            return false;
+            return num >= _from && num <= _to;
         }
 
         public static Range Parse(string s)
@@ -210,19 +192,6 @@ public class TicketValidator
             {
                 Fields[field.Key] = Numbers[field.Value];
             }
-        }
-
-        public bool IsValid(Dictionary<string, Rule> rules)
-        {
-            foreach (var rule in rules.Values)
-            {
-                if (!Numbers.Any(rule.IsValid))
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         public static Ticket Parse(string s)

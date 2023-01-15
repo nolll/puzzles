@@ -44,7 +44,7 @@ nearby tickets:
 5,14,9";
 
         var validator = new TicketValidator();
-        var ticket = validator.FindFields(input);
+        var ticket = TicketValidator.FindFields(input);
 
         Assert.That(ticket.Fields["class"], Is.EqualTo(12));
         Assert.That(ticket.Fields["row"], Is.EqualTo(11));

@@ -72,7 +72,7 @@ public class ConwayCube
         return matrix.Values.Count(o => o == '#');
     }
 
-    private char GetNewValue(char currentValue, int neighborCount)
+    private static char GetNewValue(char currentValue, int neighborCount)
     {
         if (currentValue == '#' && neighborCount != 2 && neighborCount != 3)
             return '.';

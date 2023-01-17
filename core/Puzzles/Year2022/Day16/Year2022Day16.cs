@@ -8,17 +8,10 @@ public class Year2022Day16 : Puzzle
 
     public override PuzzleResult RunPart1()
     {
-        var pipes = new VolcanicPipes();
-        var result = pipes.Part1(FileInput);
+        var pipes = new VolcanicPipes(FileInput);
+        var result = pipes.Part1();
 
-        // Max if all is open all the time is 6930
-        // Guess 673, too low
-        // Guess 1209, too low
-        // Guess 2059, too low
-        // Guess 2186, wrong
-        // Guess 4244, wrong
-
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 2059);
     }
 
     public override PuzzleResult RunPart2()

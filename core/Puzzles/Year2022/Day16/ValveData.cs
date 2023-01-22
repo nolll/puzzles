@@ -13,13 +13,14 @@ public class ValveData
     public ValveData(string input)
     {
         (Valves, Connections, Rates) = ParseData(input);
-        //(Valves, Connections, Rates) = OptimizeData(Valves, Connections, Rates);
+        (Valves, Connections, Rates) = OptimizeData(Valves, Connections, Rates);
     }
 
     public static (
         List<string> Valves, 
         Dictionary<string, List<ValveConnection>> Connections, 
-        Dictionary<string, int> Rates) OptimizeData(
+        Dictionary<string, int> Rates)
+        OptimizeData(
             List<string> valves, 
             Dictionary<string, List<ValveConnection>> connections, 
             Dictionary<string, int> rates)
@@ -59,7 +60,8 @@ public class ValveData
     public static (
         List<string> valves, 
         Dictionary<string, List<ValveConnection>> Connections, 
-        Dictionary<string, int> Rates) ParseData(string input)
+        Dictionary<string, int> Rates)
+        ParseData(string input)
     {
         var rates = new Dictionary<string, int>();
         var connections = new Dictionary<string, List<ValveConnection>>();

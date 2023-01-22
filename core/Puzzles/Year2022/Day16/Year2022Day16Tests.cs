@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 
 namespace Core.Puzzles.Year2022.Day16;
@@ -61,35 +62,6 @@ public class Year2022Day16Tests
     //    Assert.That(result, Is.EqualTo(0));
     //}
 
-    //[Test]
-    //public void CreateMoveCosts()
-    //{
-    //    var (valves, connections, _) = ValveData.ParseData(Input);
-    //    var result = ValveData.BuildMoveCosts(valves, connections);
-
-    //    Assert.That(result.Count, Is.EqualTo(20));
-    //    Assert.That(result[("AA", "DD")], Is.EqualTo(1));
-    //    Assert.That(result[("AA", "II")], Is.EqualTo(1));
-    //    Assert.That(result[("AA", "BB")], Is.EqualTo(1));
-    //    Assert.That(result[("BB", "CC")], Is.EqualTo(1));
-    //    Assert.That(result[("BB", "AA")], Is.EqualTo(1));
-    //    Assert.That(result[("CC", "DD")], Is.EqualTo(1));
-    //    Assert.That(result[("CC", "BB")], Is.EqualTo(1));
-    //    Assert.That(result[("DD", "CC")], Is.EqualTo(1));
-    //    Assert.That(result[("DD", "AA")], Is.EqualTo(1));
-    //    Assert.That(result[("DD", "EE")], Is.EqualTo(1));
-    //    Assert.That(result[("EE", "FF")], Is.EqualTo(1));
-    //    Assert.That(result[("EE", "DD")], Is.EqualTo(1));
-    //    Assert.That(result[("FF", "EE")], Is.EqualTo(1));
-    //    Assert.That(result[("FF", "GG")], Is.EqualTo(1));
-    //    Assert.That(result[("GG", "FF")], Is.EqualTo(1));
-    //    Assert.That(result[("GG", "HH")], Is.EqualTo(1));
-    //    Assert.That(result[("HH", "GG")], Is.EqualTo(1));
-    //    Assert.That(result[("II", "AA")], Is.EqualTo(1));
-    //    Assert.That(result[("II", "JJ")], Is.EqualTo(1));
-    //    Assert.That(result[("JJ", "II")], Is.EqualTo(1));
-    //}
-
     [Test]
     public void OptimizedValves()
     {
@@ -107,22 +79,22 @@ public class Year2022Day16Tests
         Assert.That(valves[6], Is.EqualTo("JJ"));
     }
 
-    //[Test]
-    //public void OptimizedConnections()
-    //{
-    //    var (origValves, origConnections, origRates) = ValveData.ParseData(Input);
+    [Test]
+    public void OptimizedConnections()
+    {
+        var (origValves, origConnections, origRates) = ValveData.ParseData(Input);
 
-    //    var (_, connections, _) = ValveData.OptimizeData(origValves, origConnections, origRates);
+        var (_, connections, _) = ValveData.OptimizeData(origValves, origConnections, origRates);
 
-    //    Assert.That(connections.Count, Is.EqualTo(7));
-    //    Assert.That(string.Join(',', connections["AA"].Select(o => o.Valve)), Is.EqualTo("DD,BB,JJ"));
-    //    Assert.That(string.Join(',', connections["BB"].Select(o => o.Valve)), Is.EqualTo("CC,AA"));
-    //    Assert.That(string.Join(',', connections["CC"].Select(o => o.Valve)), Is.EqualTo("DD,BB"));
-    //    Assert.That(string.Join(',', connections["DD"].Select(o => o.Valve)), Is.EqualTo("CC,AA,EE"));
-    //    Assert.That(string.Join(',', connections["EE"].Select(o => o.Valve)), Is.EqualTo("DD,HH"));
-    //    Assert.That(string.Join(',', connections["HH"].Select(o => o.Valve)), Is.EqualTo("EE"));
-    //    Assert.That(string.Join(',', connections["JJ"].Select(o => o.Valve)), Is.EqualTo("AA"));
-    //}
+        Assert.That(connections.Count, Is.EqualTo(7));
+        Assert.That(string.Join(',', connections["AA"].Select(o => o.Valve)), Is.EqualTo("DD,BB,JJ"));
+        Assert.That(string.Join(',', connections["BB"].Select(o => o.Valve)), Is.EqualTo("CC,AA"));
+        Assert.That(string.Join(',', connections["CC"].Select(o => o.Valve)), Is.EqualTo("DD,BB"));
+        Assert.That(string.Join(',', connections["DD"].Select(o => o.Valve)), Is.EqualTo("CC,AA,EE"));
+        Assert.That(string.Join(',', connections["EE"].Select(o => o.Valve)), Is.EqualTo("DD,HH"));
+        Assert.That(string.Join(',', connections["HH"].Select(o => o.Valve)), Is.EqualTo("EE"));
+        Assert.That(string.Join(',', connections["JJ"].Select(o => o.Valve)), Is.EqualTo("AA"));
+    }
 
     [Test]
     public void OptimizedRates()

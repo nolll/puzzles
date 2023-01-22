@@ -19,7 +19,7 @@ public class VolcanicPipes
         _connections = data.Connections;
 
     }
-
+    
     public int Part1()
     {
         var maxPressure = GetMaxPressure();

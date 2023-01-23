@@ -85,15 +85,15 @@ public class Year2022Day16Tests
         var (origValves, origConnections, origRates) = ValveData.ParseData(Input);
 
         var (_, connections, _) = ValveData.OptimizeData(origValves, origConnections, origRates);
-
+        
         Assert.That(connections.Count, Is.EqualTo(7));
-        Assert.That(string.Join(',', connections["AA"].Select(o => o.Valve)), Is.EqualTo("DD,BB,JJ"));
-        Assert.That(string.Join(',', connections["BB"].Select(o => o.Valve)), Is.EqualTo("CC,AA"));
-        Assert.That(string.Join(',', connections["CC"].Select(o => o.Valve)), Is.EqualTo("DD,BB"));
-        Assert.That(string.Join(',', connections["DD"].Select(o => o.Valve)), Is.EqualTo("CC,AA,EE"));
+        Assert.That(string.Join(',', connections["AA"].Select(o => o.Valve)), Is.EqualTo("BB,DD,JJ"));
+        Assert.That(string.Join(',', connections["BB"].Select(o => o.Valve)), Is.EqualTo("CC,DD,JJ"));
+        Assert.That(string.Join(',', connections["CC"].Select(o => o.Valve)), Is.EqualTo("BB,DD"));
+        Assert.That(string.Join(',', connections["DD"].Select(o => o.Valve)), Is.EqualTo("BB,CC,EE,JJ"));
         Assert.That(string.Join(',', connections["EE"].Select(o => o.Valve)), Is.EqualTo("DD,HH"));
         Assert.That(string.Join(',', connections["HH"].Select(o => o.Valve)), Is.EqualTo("EE"));
-        Assert.That(string.Join(',', connections["JJ"].Select(o => o.Valve)), Is.EqualTo("AA"));
+        Assert.That(string.Join(',', connections["JJ"].Select(o => o.Valve)), Is.EqualTo("BB,DD"));
     }
 
     [Test]
@@ -112,28 +112,62 @@ public class Year2022Day16Tests
         Assert.That(rates["JJ"], Is.EqualTo(21));
     }
 
-    //[Test]
-    //public void OptimizedMoveCosts()
-    //{
-    //    var (origValves, origConnections, origRates) = ValveData.ParseData(Input);
-    //    var (_, _, _) = ValveData.OptimizeData(origValves, origConnections, origRates);
+    [Test]
+    public void OptimizedMoveCosts()
+    {
+        var (origValves, origConnections, origRates) = ValveData.ParseData(Input);
+        var (_, connections, _) = ValveData.OptimizeData(origValves, origConnections, origRates);
+        
+        Assert.That(connections.Count, Is.EqualTo(7));
 
-    //    //Assert.That(moveCosts.Count, Is.EqualTo(14));
-    //    Assert.That(moveCosts[("AA", "DD")], Is.EqualTo(1));
-    //    Assert.That(moveCosts[("AA", "JJ")], Is.EqualTo(2));
-    //    Assert.That(moveCosts[("AA", "BB")], Is.EqualTo(1));
-    //    Assert.That(moveCosts[("BB", "CC")], Is.EqualTo(1));
-    //    Assert.That(moveCosts[("BB", "AA")], Is.EqualTo(1));
-    //    Assert.That(moveCosts[("CC", "DD")], Is.EqualTo(1));
-    //    Assert.That(moveCosts[("CC", "BB")], Is.EqualTo(1));
-    //    Assert.That(moveCosts[("DD", "CC")], Is.EqualTo(1));
-    //    Assert.That(moveCosts[("DD", "AA")], Is.EqualTo(1));
-    //    Assert.That(moveCosts[("DD", "EE")], Is.EqualTo(1));
-    //    Assert.That(moveCosts[("EE", "GG")], Is.EqualTo(2));
-    //    Assert.That(moveCosts[("EE", "DD")], Is.EqualTo(1));
-    //    Assert.That(moveCosts[("HH", "EE")], Is.EqualTo(3));
-    //    Assert.That(moveCosts[("JJ", "AA")], Is.EqualTo(2));
-    //}
+        Assert.That(connections["AA"].Count, Is.EqualTo(3));
+        Assert.That(connections["AA"][0].Valve, Is.EqualTo("BB"));
+        Assert.That(connections["AA"][0].Cost, Is.EqualTo(1));
+        Assert.That(connections["AA"][1].Valve, Is.EqualTo("DD"));
+        Assert.That(connections["AA"][1].Cost, Is.EqualTo(1));
+        Assert.That(connections["AA"][2].Valve, Is.EqualTo("JJ"));
+        Assert.That(connections["AA"][2].Cost, Is.EqualTo(2));
+        
+        Assert.That(connections["BB"].Count, Is.EqualTo(3));
+        Assert.That(connections["BB"][0].Valve, Is.EqualTo("CC"));
+        Assert.That(connections["BB"][0].Cost, Is.EqualTo(1));
+        Assert.That(connections["BB"][1].Valve, Is.EqualTo("DD"));
+        Assert.That(connections["BB"][1].Cost, Is.EqualTo(2));
+        Assert.That(connections["BB"][2].Valve, Is.EqualTo("JJ"));
+        Assert.That(connections["BB"][2].Cost, Is.EqualTo(3));
+        
+        Assert.That(connections["CC"].Count, Is.EqualTo(2));
+        Assert.That(connections["CC"][0].Valve, Is.EqualTo("BB"));
+        Assert.That(connections["CC"][0].Cost, Is.EqualTo(1));
+        Assert.That(connections["CC"][1].Valve, Is.EqualTo("DD"));
+        Assert.That(connections["CC"][1].Cost, Is.EqualTo(1));
+        
+        Assert.That(connections["DD"].Count, Is.EqualTo(4));
+        Assert.That(connections["DD"][0].Valve, Is.EqualTo("BB"));
+        Assert.That(connections["DD"][0].Cost, Is.EqualTo(2));
+        Assert.That(connections["DD"][1].Valve, Is.EqualTo("CC"));
+        Assert.That(connections["DD"][1].Cost, Is.EqualTo(1));
+        Assert.That(connections["DD"][2].Valve, Is.EqualTo("EE"));
+        Assert.That(connections["DD"][2].Cost, Is.EqualTo(1));
+        Assert.That(connections["DD"][3].Valve, Is.EqualTo("JJ"));
+        Assert.That(connections["DD"][3].Cost, Is.EqualTo(3));
+
+        Assert.That(connections["EE"].Count, Is.EqualTo(2));
+        Assert.That(connections["EE"][0].Valve, Is.EqualTo("DD"));
+        Assert.That(connections["EE"][0].Cost, Is.EqualTo(1));
+        Assert.That(connections["EE"][1].Valve, Is.EqualTo("HH"));
+        Assert.That(connections["EE"][1].Cost, Is.EqualTo(3));
+
+        Assert.That(connections["HH"].Count, Is.EqualTo(1));
+        Assert.That(connections["HH"][0].Valve, Is.EqualTo("EE"));
+        Assert.That(connections["HH"][0].Cost, Is.EqualTo(3));
+
+        Assert.That(connections["JJ"].Count, Is.EqualTo(2));
+        Assert.That(connections["JJ"][0].Valve, Is.EqualTo("BB"));
+        Assert.That(connections["JJ"][0].Cost, Is.EqualTo(3));
+        Assert.That(connections["JJ"][1].Valve, Is.EqualTo("DD"));
+        Assert.That(connections["JJ"][1].Cost, Is.EqualTo(3));
+    }
 
     private const string Input = """ 
 Valve AA has flow rate=0; tunnels lead to valves DD, II, BB

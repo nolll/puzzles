@@ -13,7 +13,7 @@ public class ValveData
     public ValveData(string input)
     {
         (Valves, Connections, Rates) = ParseData(input);
-        (Valves, Connections, Rates) = OptimizeData(Valves, Connections, Rates);
+        //(Valves, Connections, Rates) = OptimizeData(Valves, Connections, Rates);
     }
 
     public static (
@@ -25,23 +25,35 @@ public class ValveData
             Dictionary<string, List<ValveConnection>> connections, 
             Dictionary<string, int> rates)
     {
-        var valvesToRemove = valves.Where(o => rates[o] == 0 && o != "AA").ToList();
-        var allValves = valves.ToList();
-        foreach (var vtr in valvesToRemove)
+        var changed = true;
+        while (changed)
         {
-            foreach (var valve in allValves)
+            changed = false;
+
+            foreach (var valve in connections.Keys)
             {
-                if (valve == vtr)
-                    continue;
+                var targets = connections[valve];
+                var newTargets = targets.Where(o => rates[o.Valve] > 0).ToList();
+                var zeroTargets = targets.Where(o => rates[o.Valve] == 0).ToList();
+                foreach (var target in zeroTargets)
+                {
+                    var targetsToMove = connections[target.Valve];
+                    foreach (var targetToMove in targetsToMove)
+                    {
+                        if(targetToMove.Valve != valve && newTargets.All(o => o.Valve != targetToMove.Valve))
+                        {
+                            newTargets.Add(new ValveConnection(targetToMove.Valve, targetToMove.Cost + target.Cost));
+                            changed = true;
+                        }
+                    }
+                }
 
-                if (connections[valve].All(o => o.Valve != vtr))
-                    continue;
-
-                connections[valve] = connections[valve].Where(o => o.Valve != vtr).ToList();
-                connections[valve].AddRange(connections[vtr].Select(o => new ValveConnection(o.Valve, o.Cost + 1)));
+                connections[valve] = newTargets.OrderBy(o => o.Valve).ToList();
             }
         }
 
+        var valvesToRemove = valves.Where(o => rates[o] == 0 && o != "AA").ToList();
+        var allValves = valves.ToList();
         foreach (var vtr in valvesToRemove)
         {
             allValves.Remove(vtr);

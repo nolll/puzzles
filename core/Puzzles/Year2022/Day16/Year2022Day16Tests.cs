@@ -54,13 +54,14 @@ public class Year2022Day16Tests
         Assert.That(result, Is.EqualTo(2400));
     }
 
-    //[Test]
-    //public void Part2()
-    //{
-    //    var result = 0;
+    [Test]
+    public void Part2()
+    {
+        var pipes = new VolcanicPipes(Input);
+        var result = pipes.Part2();
 
-    //    Assert.That(result, Is.EqualTo(0));
-    //}
+        Assert.That(result, Is.EqualTo(1707));
+    }
 
     private const string Input = """ 
 Valve AA has flow rate=0; tunnels lead to valves DD, II, BB

@@ -16,6 +16,9 @@ public class Year2022Day16 : Puzzle
 
     public override PuzzleResult RunPart2()
     {
-        return new EmptyPuzzleResult();
+        var pipes = new VolcanicPipes(FileInput);
+        var result = pipes.Part2();
+
+        return new PuzzleResult(result, 2790);
     }
 }

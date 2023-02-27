@@ -1,84 +1,114 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2022.Day16;
 
+// Very inspired by hyper-neutrino
+// https://www.youtube.com/watch?v=bLMj50cpOug&t=657s
+// https://github.com/hyper-neutrino/advent-of-code/blob/main/2022/day16p1.py
 public class VolcanicPipes
 {
-    private readonly Dictionary<string, int> _seen = new();
-    private readonly List<string> _valves;
-    private readonly Dictionary<string, int> _rates;
-    private readonly Dictionary<string, List<ValveConnection>> _connections;
+    private readonly Dictionary<string, int> _flows;
+    private readonly Dictionary<string, int> _indices;
+    private readonly Dictionary<string, Dictionary<string, int>> _dists;
+    private readonly Dictionary<(int, string, int), int> _cache;
 
     public VolcanicPipes(string input)
     {
-        var data = new ValveData(input);
-        _valves = data.Valves;
-        _rates = data.Rates;
-        _connections = data.Connections;
+        _flows = new Dictionary<string, int>();
+        _indices = new Dictionary<string, int>();
+        _dists = new Dictionary<string, Dictionary<string, int>>();
+        _cache = new Dictionary<(int, string, int), int>();
+        
+        var valves = new List<string>();
+        var tunnels = new Dictionary<string, List<string>>();
+        var nonEmpty = new List<string>();
+        var lines = PuzzleInputReader.ReadLines(input);
 
+        foreach (var line in lines)
+        {
+            var parts = line.Split(';');
+            var name = parts[0].Split(' ')[1];
+            var rate = int.Parse(parts[0].Split(' ')[4].Split('=')[1]);
+            var conn = parts[1].Split(' ').Skip(5).Select(o => o.Trim(',', ' ')).ToList();
+            _flows.Add(name, rate);
+            tunnels.Add(name, conn);
+            valves.Add(name);
+        }
+
+        foreach (var valve in valves)
+        {
+            if (valve != "AA" && _flows[valve] == 0)
+                continue;
+
+            _dists[valve] = new Dictionary<string, int>
+            {
+                [valve] = 0
+            };
+
+            if(valve != "AA")
+            {
+                nonEmpty.Add(valve);
+                _dists[valve]["AA"] = 0;
+            }
+
+            var visited = new HashSet<string> { valve };
+
+            var queue = new Queue<(int, string)>();
+            queue.Enqueue((0, valve));
+
+            while (queue.Any())
+            {
+                var (distance, position) = queue.Dequeue();
+                foreach (var neighbor in tunnels[position])
+                {
+                    if (visited.Contains(neighbor))
+                        continue;
+
+                    visited.Add(neighbor);
+
+                    if (_flows[neighbor] > 0)
+                        _dists[valve][neighbor] = distance + 1;
+
+                    queue.Enqueue((distance + 1, neighbor));
+                }
+            }
+
+            _dists[valve].Remove(valve);
+            if (valve != "AA")
+                _dists[valve].Remove("AA");
+        }
+
+        for (var i = 0; i < nonEmpty.Count; i++)
+        {
+            _indices[nonEmpty[i]] = i;
+        }
     }
-    
+
     public int Part1()
     {
-        var maxPressure = GetMaxPressure();
-
-        return maxPressure;
+        return Dfs(30, "AA", 0);
     }
 
-    private int GetMaxPressure()
+    private int Dfs(int time, string valve, int bitmask)
     {
-        var openValves = _valves.Where(o => _rates[o] == 0).ToList();
-        var closedValves = _valves.Where(o => _rates[o] > 0).ToList();
-        return GetBestPressure("AA", 30, openValves, closedValves);
-    }
+        if (_cache.TryGetValue((time, valve, bitmask), out var maxVal))
+            return maxVal;
 
-    private int GetBestPressure(
-        string current,
-        int time,
-        List<string> openValves,
-        List<string> closedValves)
-    {
-        if (time <= 0)
-            return 0;
-
-        var id = BuildId(time, current, closedValves);
-        if (_seen.TryGetValue(id, out var seenPressure))
+        foreach (var neighbor in _dists[valve])
         {
-            return seenPressure;
+            var bit = 1 << _indices[neighbor.Key];
+            if ((bit & bitmask) == bit)
+                continue;
+            var remTime = time - neighbor.Value - 1;
+            if (remTime <= 0)
+                continue;
+            maxVal = Math.Max(maxVal, Dfs(remTime, neighbor.Key, bitmask | bit) + _flows[neighbor.Key] * remTime);
         }
 
-        if (!closedValves.Any())
-        {
-            return openValves.Select(o => _rates[o]).Sum() * time;
-        }
-
-        var newPressure = openValves.Select(o => _rates[o]).Sum();
-        var isOpen = openValves.Contains(current);
-        var best = 0;
-
-        if (!isOpen)
-        {
-            var newOpen = openValves.ToList();
-            newOpen.Add(current);
-            var newClosed = closedValves.Where(o => o != current).Order().ToList();
-            var oc = newPressure + GetBestPressure(current, time - 1, newOpen, newClosed);
-            best = Math.Max(best, oc);
-        }
-
-        foreach (var c in _connections[current])
-        {
-            var oc = newPressure + GetBestPressure(c.Valve, time - c.Cost, openValves, closedValves);
-            best = Math.Max(best, oc);
-        }
-
-        _seen[id] = best;
-        return best;
-    }
-    
-    private static string BuildId(int time, string current, IEnumerable<string> closedValves)
-    {
-        return $"{time}--{current}--{string.Join(',', closedValves)}";
+        _cache[(time, valve, bitmask)] = maxVal;
+        return maxVal;
     }
 }

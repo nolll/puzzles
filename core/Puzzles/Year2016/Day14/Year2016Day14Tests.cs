@@ -23,6 +23,15 @@ public class Year2016Day14Tests
         Assert.That(index, Is.EqualTo(22551));
     }
 
+    [Test]
+    public void TimeStretchedKeys()
+    {
+        var generator = new KeyGenerator();
+        var index = generator.GetIndexOf64ThKey("abc", 100);
+
+        Assert.That(index, Is.EqualTo(29087));
+    }
+
     [TestCase(0, "577571be4de9dcce85a041ba0410f29f")]
     [TestCase(1, "eec80a0c92dc8a0777c619d9bb51e910")]
     [TestCase(2, "16062ce768787384c81fe17a7a60c7e3")]
@@ -42,7 +51,6 @@ public class Year2016Day14Tests
     [TestCase("bbaab010101010101010", null)]
     public void RepeatedChars(string str, char? expected)
     {
-        var generator = new KeyGenerator();
         var c = KeyGenerator.GetRepeatingChar(str);
 
         Assert.That(c, Is.EqualTo(expected));
@@ -54,7 +62,6 @@ public class Year2016Day14Tests
     [TestCase("bbaab010101010101010", false)]
     public void FiveInARow(string str, bool expected)
     {
-        var generator = new KeyGenerator();
         var searchFor = new string('a', 5);
         var hasFiveInARow = KeyGenerator.HashHasFiveInARowOf(str, searchFor);
 

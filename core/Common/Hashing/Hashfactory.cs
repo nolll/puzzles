@@ -8,7 +8,7 @@ namespace Core.Common.Hashing;
 public class Hashfactory
 {
     private readonly MD5 _md5;
-
+    
     public Hashfactory()
     {
         _md5 = MD5.Create();

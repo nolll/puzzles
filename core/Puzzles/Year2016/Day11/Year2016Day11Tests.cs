@@ -126,20 +126,20 @@ The fourth floor contains nothing relevant.
     {
         var floors = new List<RadioisotopeFloor>
         {
-            new RadioisotopeFloor(
+            new(
                 new List<RadioisotopeItem>
                 {
                     new Microchip("lithium"),
                     new Microchip("hydrogen"),
                     new Generator("hydrogen")
                 }),
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(
+            new(new List<RadioisotopeItem>()),
+            new(
                 new List<RadioisotopeItem>
                 {
                     new Generator("lithium")
                 }),
-            new RadioisotopeFloor(new List<RadioisotopeItem>())
+            new(new List<RadioisotopeItem>())
         };
 
         var facility = new RadioisotopeFacility(floors, 0);
@@ -151,20 +151,20 @@ The fourth floor contains nothing relevant.
     {
         var floors = new List<RadioisotopeFloor>
         {
-            new RadioisotopeFloor(
+            new(
                 new List<RadioisotopeItem>
                 {
                     new Microchip("lithium"),
                     new Microchip("hydrogen"),
                     new Generator("hydrogen")
                 }),
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(
+            new(new List<RadioisotopeItem>()),
+            new(
                 new List<RadioisotopeItem>
                 {
                     new Generator("lithium")
                 }),
-            new RadioisotopeFloor(new List<RadioisotopeItem>())
+            new(new List<RadioisotopeItem>())
         };
 
         var facility = new RadioisotopeFacility(floors, 0);
@@ -176,10 +176,10 @@ The fourth floor contains nothing relevant.
     {
         var floors = new List<RadioisotopeFloor>
         {
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(new List<RadioisotopeItem>())
+            new(new List<RadioisotopeItem>()),
+            new(new List<RadioisotopeItem>()),
+            new(new List<RadioisotopeItem>()),
+            new(new List<RadioisotopeItem>())
         };
 
         var facility = new RadioisotopeFacility(floors, 0);
@@ -191,15 +191,15 @@ The fourth floor contains nothing relevant.
     {
         var floors = new List<RadioisotopeFloor>
         {
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(
+            new(new List<RadioisotopeItem>()),
+            new(new List<RadioisotopeItem>()),
+            new(
                 new List<RadioisotopeItem>
                 {
                     new Microchip("hydrogen"),
                     new Generator("lithium")
                 }),
-            new RadioisotopeFloor(new List<RadioisotopeItem>())
+            new(new List<RadioisotopeItem>())
         };
 
         var facility = new RadioisotopeFacility(floors, 0);
@@ -211,10 +211,10 @@ The fourth floor contains nothing relevant.
     {
         var floors = new List<RadioisotopeFloor>
         {
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(
+            new(new List<RadioisotopeItem>()),
+            new(new List<RadioisotopeItem>()),
+            new(new List<RadioisotopeItem>()),
+            new(
                 new List<RadioisotopeItem>
                 {
                     new Microchip("hydrogen"),
@@ -231,15 +231,15 @@ The fourth floor contains nothing relevant.
     {
         var floors = new List<RadioisotopeFloor>
         {
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(
+            new(new List<RadioisotopeItem>()),
+            new(
                 new List<RadioisotopeItem>
                 {
                     new Microchip("hydrogen"),
                     new Generator("lithium")
                 }),
-            new RadioisotopeFloor(new List<RadioisotopeItem>()),
-            new RadioisotopeFloor(
+            new(new List<RadioisotopeItem>()),
+            new(
                 new List<RadioisotopeItem>
                 {
                     new Microchip("hydrogen"),

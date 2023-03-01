@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2015.Day05;
 
@@ -7,19 +8,19 @@ public class NaughtyOrNiceEvaluator
 {
     private const string Vowels = "aeiou";
 
-    public int GetNiceCount1(string input)
+    public static int GetNiceCount1(string input)
     {
-        var strings = input.Split('\n').Select(o => o.Trim());
+        var strings = PuzzleInputReader.ReadLines(input);
         return strings.Count(IsNice1);
     }
 
-    public int GetNiceCount2(string input)
+    public static int GetNiceCount2(string input)
     {
-        var strings = input.Split('\n').Select(o => o.Trim());
+        var strings = PuzzleInputReader.ReadLines(input);
         return strings.Count(IsNice2);
     }
 
-    public bool IsNice1(string input)
+    public static bool IsNice1(string input)
     {
         if (ContainsForbiddenSubstrings(input))
             return false;
@@ -33,18 +34,11 @@ public class NaughtyOrNiceEvaluator
         return true;
     }
 
-    public bool IsNice2(string input)
-    {
-        if (!ContainsRepeatingPair(input))
-            return false;
+    public static bool IsNice2(string input) =>
+        ContainsRepeatingPair(input) && 
+        ContainsRepeatedCharacterWithOneCharacterBetween(input);
 
-        if (!ContainsRepeatedCharacterWithOneCharacterBetween(input))
-            return false;
-
-        return true;
-    }
-
-    private bool ContainsRepeatedCharacterWithOneCharacterBetween(string input)
+    private static bool ContainsRepeatedCharacterWithOneCharacterBetween(string input)
     {
         for (var i = 0; i < input.Length - 2; i++)
         {
@@ -56,7 +50,7 @@ public class NaughtyOrNiceEvaluator
         return false;
     }
 
-    private bool ContainsRepeatingPair(string input)
+    private static bool ContainsRepeatingPair(string input)
     {
         for (var i = 0; i < input.Length - 2; i++)
         {
@@ -72,20 +66,13 @@ public class NaughtyOrNiceEvaluator
         return false;
     }
 
-    private bool ContainsForbiddenSubstrings(string input)
-    {
-        if (input.Contains("ab"))
-            return true;
-        if (input.Contains("cd"))
-            return true;
-        if (input.Contains("pq"))
-            return true;
-        if (input.Contains("xy"))
-            return true;
-        return false;
-    }
+    private static bool ContainsForbiddenSubstrings(string input) =>
+        input.Contains("ab") || 
+        input.Contains("cd") || 
+        input.Contains("pq") || 
+        input.Contains("xy");
 
-    private bool ContainsRepeatedCharacter(string input)
+    private static bool ContainsRepeatedCharacter(string input)
     {
         var lastChar = '-';
         foreach (var c in input)
@@ -99,13 +86,6 @@ public class NaughtyOrNiceEvaluator
         return false;
     }
 
-    private int GetVowelCount(string input)
-    {
-        return input.Count(IsVowel);
-    }
-
-    private bool IsVowel(char c)
-    {
-        return Vowels.Contains(c);
-    }
+    private static int GetVowelCount(string input) => input.Count(IsVowel);
+    private static bool IsVowel(char c) => Vowels.Contains(c);
 }

@@ -11,8 +11,7 @@ public class Year2015Day05Tests
     [TestCase("dvszwmarrgswjxmb", false)]
     public void NaughtyOrNice_AlgorithmOne(string input, bool expected)
     {
-        var evaluator = new NaughtyOrNiceEvaluator();
-        var isNice = evaluator.IsNice1(input);
+        var isNice = NaughtyOrNiceEvaluator.IsNice1(input);
 
         Assert.That(isNice, Is.EqualTo(expected));
     }
@@ -23,8 +22,7 @@ public class Year2015Day05Tests
     [TestCase("ieodomkazucvgmuy", false)]
     public void NaughtyOrNice_AlgorithmTwo(string input, bool expected)
     {
-        var evaluator = new NaughtyOrNiceEvaluator();
-        var isNice = evaluator.IsNice2(input);
+        var isNice = NaughtyOrNiceEvaluator.IsNice2(input);
 
         Assert.That(isNice, Is.EqualTo(expected));
     }

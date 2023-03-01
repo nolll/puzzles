@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
+using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2015.Day06;
 
@@ -25,13 +26,13 @@ public class ChristmasLightsController
         }
     }
 
-    private IList<Command> ParseCommands(string input, bool useBrightness)
+    private static IEnumerable<Command> ParseCommands(string input, bool useBrightness)
     {
-        var strings = input.Split('\n').Select(o => o.Trim());
+        var strings = PuzzleInputReader.ReadLines(input);
         return strings.Select(o => CreateCommand(o, useBrightness)).ToList();
     }
 
-    private Command CreateCommand(string s, bool useBrightness)
+    private static Command CreateCommand(string s, bool useBrightness)
     {
         var paramString = s.Replace("turn on", "").Replace("turn off", "").Replace("toggle", "");
         if (s.StartsWith("turn on"))
@@ -163,13 +164,7 @@ public class ChristmasLightsController
         {
             _increment = increment;
         }
-
-        public IncreaseCommand(int xa, int ya, int xb, int yb, int increment)
-            : base(xa, ya, xb, yb)
-        {
-            _increment = increment;
-        }
-
+        
         protected override void Change(Matrix<int> matrix, int x, int y)
         {
             var currentValue = matrix.ReadValueAt(x, y);

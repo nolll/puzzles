@@ -8,8 +8,7 @@ public class Year2015Day04Tests
     [TestCase("pqrstuv", 1048970)]
     public void CoinMined(string secretKey, int expected)
     {
-        var miner = new AdventCoinMiner();
-        var coin = miner.Mine(secretKey, 5);
+        var coin = AdventCoinMiner.Mine(secretKey, 5);
 
         Assert.That(coin, Is.EqualTo(expected));
     }

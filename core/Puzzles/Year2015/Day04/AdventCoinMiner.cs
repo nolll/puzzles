@@ -5,7 +5,7 @@ namespace Core.Puzzles.Year2015.Day04;
 
 public class AdventCoinMiner
 {
-    public int Mine(string key, int leadingZeros, int startIndex = 1)
+    public static int Mine(string key, int leadingZeros, int startIndex = 1)
     {
         var index = startIndex;
         var hashFactory = new Hashfactory();
@@ -21,20 +21,12 @@ public class AdventCoinMiner
         }
     }
 
-    private Func<byte[], bool> GetCompareFunc(int leadingZeros)
-    {
-        if (leadingZeros == 5)
-            return StartsWithFiveZeros;
-        return StartsWithSixZeros;
-    }
+    private static Func<byte[], bool> GetCompareFunc(int leadingZeros)
+        => leadingZeros == 5 ? StartsWithFiveZeros : StartsWithSixZeros;
 
-    private static bool StartsWithFiveZeros(byte[] bytes)
-    {
-        return bytes[0] == 0 && bytes[1] == 0 && bytes[2] < 10;
-    }
+    private static bool StartsWithFiveZeros(byte[] bytes) 
+        => bytes[0] == 0 && bytes[1] == 0 && bytes[2] < 10;
 
-    private static bool StartsWithSixZeros(byte[] bytes)
-    {
-        return bytes[0] == 0 && bytes[1] == 0 && bytes[2] == 0;
-    }
+    private static bool StartsWithSixZeros(byte[] bytes) 
+        => bytes[0] == 0 && bytes[1] == 0 && bytes[2] == 0;
 }

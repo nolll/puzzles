@@ -115,7 +115,7 @@ public class OpComputer
         return 0;
     }
 
-    private IEnumerable<long> FindIntFactors(long target)
+    private static IEnumerable<long> FindIntFactors(long target)
     {
         var i = 1;
         while (i <= target)

@@ -10,16 +10,14 @@ public class Year2015Day04 : Puzzle
 
     public override PuzzleResult RunPart1()
     {
-        var miner = new AdventCoinMiner();
-        var coin = miner.Mine(Input, 5);
+        var coin = AdventCoinMiner.Mine(Input, 5);
         _index = coin;
         return new PuzzleResult(coin, 346_386);
     }
 
     public override PuzzleResult RunPart2()
     {
-        var miner = new AdventCoinMiner();
-        var coin = miner.Mine(Input, 6, _index);
+        var coin = AdventCoinMiner.Mine(Input, 6, _index);
         return new PuzzleResult(coin, 9_958_218);
     }
 

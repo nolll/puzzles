@@ -8,8 +8,7 @@ public class Year2015Day02Tests
     [TestCase("1x1x10", 43)]
     public void CorrectSquareFeetForSingleGift(string input, int expected)
     {
-        var calc = new GiftWrappingCalculator();
-        var result = calc.GetRequiredPaperForOneBox(input);
+        var result = GiftWrappingCalculator.GetRequiredPaperForOneBox(input);
 
         Assert.That(result, Is.EqualTo(expected));
     }
@@ -23,8 +22,7 @@ public class Year2015Day02Tests
 """;
         const int expected = 101;
 
-        var calc = new GiftWrappingCalculator();
-        var result = calc.GetRequiredPaper(input);
+        var result = GiftWrappingCalculator.GetRequiredPaper(input);
 
         Assert.That(result, Is.EqualTo(expected));
     }
@@ -33,8 +31,7 @@ public class Year2015Day02Tests
     [TestCase("1x1x10", 14)]
     public void CorrectRibbonLength(string input, int expected)
     {
-        var calc = new GiftWrappingCalculator();
-        var result = calc.GetRequiredRibbonForOneBox(input);
+        var result = GiftWrappingCalculator.GetRequiredRibbonForOneBox(input);
 
         Assert.That(result, Is.EqualTo(expected));
     }
@@ -48,8 +45,7 @@ public class Year2015Day02Tests
 """;
         const int expected = 48;
 
-        var calc = new GiftWrappingCalculator();
-        var result = calc.GetRequiredRibbon(input);
+        var result = GiftWrappingCalculator.GetRequiredRibbon(input);
 
         Assert.That(result, Is.EqualTo(expected));
     }

@@ -7,7 +7,7 @@ public class Year2018Day21 : Puzzle
 {
     public override string Title => "Chronal Conversion";
     public override string Comment => "OpComputer";
-    public override bool IsSlow => true;
+    public override bool IsSlow => true; // 143s for part 2
 
     public override PuzzleResult RunPart1()
     {

@@ -20,9 +20,9 @@ public class ChocolateBattle
         _input = input;
     }
 
-    public void RunUntilElvesWins()
+    public void RunUntilElvesWins(int initalAttackPower)
     {
-        var elfAttackPower = 14; // Initially ran from 4
+        var elfAttackPower = initalAttackPower;
         while (true)
         {
             Init(elfAttackPower);
@@ -45,7 +45,7 @@ public class ChocolateBattle
         ElfAttackPower = elfAttackPower;
     }
 
-    private bool Run(bool breakOnElfDeath)
+    private void Run(bool breakOnElfDeath)
     {
         var round = 0;
         while (IsBothTypesStillAlive)
@@ -113,7 +113,7 @@ public class ChocolateBattle
                     if (enemy.IsDead)
                     {
                         if (breakOnElfDeath && enemy.Type == BattleFigureType.Elf)
-                            return false;
+                            return;
                         _matrix.WriteValueAt(enemy.Address, '.');
                     }
                 }
@@ -128,13 +128,11 @@ public class ChocolateBattle
 
         Outcome = _figures.Sum(o => o.HitPoints) * round;
         Winners = _figures.First().Type == BattleFigureType.Elf ? "Elves" : "Goblin";
-
-        return true;
     }
 
     private IList<MatrixAddress> NeighborCache(MatrixAddress coord)
     {
-        return _neighborCache[(coord.X, coord.Y)];
+        return _neighborCache[coord.Tuple];
     }
 
     private bool IsBothTypesStillAlive =>
@@ -149,7 +147,7 @@ public class ChocolateBattle
         var figureId = 0;
 
         var width = rows.First().Length;
-        var height = rows.Count();
+        var height = rows.Length;
         _matrix = new Matrix<char>(width, height);
 
         foreach (var row in rows)

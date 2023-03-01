@@ -7,10 +7,12 @@ namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 public class MatrixAddress : IEquatable<MatrixAddress>
 {
     private string _id;
+    private (int, int)? _tuple;
         
     public int X { get; }
     public int Y { get; }
     public string Id => _id ??= $"{X},{Y}";
+    public (int x, int y) Tuple => _tuple ??= (X, Y);
 
     public MatrixAddress(int x, int y)
     {

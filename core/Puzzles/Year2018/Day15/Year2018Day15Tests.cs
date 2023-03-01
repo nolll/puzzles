@@ -135,7 +135,7 @@ public class Year2018Day15Tests
 ";
 
         var battle = new ChocolateBattle(input);
-        battle.RunUntilElvesWins();
+        battle.RunUntilElvesWins(4);
 
         Assert.That(battle.Outcome, Is.EqualTo(4988));
     }
@@ -154,7 +154,7 @@ public class Year2018Day15Tests
 ";
 
         var battle = new ChocolateBattle(input);
-        battle.RunUntilElvesWins();
+        battle.RunUntilElvesWins(4);
 
         Assert.That(battle.Outcome, Is.EqualTo(31284));
     }
@@ -173,7 +173,7 @@ public class Year2018Day15Tests
 ";
 
         var battle = new ChocolateBattle(input);
-        battle.RunUntilElvesWins();
+        battle.RunUntilElvesWins(4);
 
         Assert.That(battle.Outcome, Is.EqualTo(3478));
     }
@@ -192,7 +192,7 @@ public class Year2018Day15Tests
 ";
 
         var battle = new ChocolateBattle(input);
-        battle.RunUntilElvesWins();
+        battle.RunUntilElvesWins(4);
 
         Assert.That(battle.Outcome, Is.EqualTo(6474));
     }
@@ -213,7 +213,7 @@ public class Year2018Day15Tests
 ";
 
         var battle = new ChocolateBattle(input);
-        battle.RunUntilElvesWins();
+        battle.RunUntilElvesWins(4);
 
         Assert.That(battle.Outcome, Is.EqualTo(1140));
     }

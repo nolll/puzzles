@@ -16,7 +16,7 @@ public class TrenchMap
         
         for (var i = 0; i < steps; i++)
         {
-            var defaultValue = inputImage.ReadValueAt(0, 0);
+            var defaultValue = inputImage.ReadValueAt(inputImage.XMin, inputImage.YMin);
             var newInputImage = new Matrix<char>(inputImage.Width, inputImage.Height, defaultValue);
             for (var y = inputImage.YMin; y <= inputImage.YMax; y++)
             {

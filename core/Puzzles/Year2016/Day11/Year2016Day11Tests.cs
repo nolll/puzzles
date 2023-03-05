@@ -31,7 +31,7 @@ The fourth floor contains nothing relevant.
         };
 
         var floor = new RadioisotopeFloor(items);
-        Assert.That(floor.Id, Is.EqualTo("HG-HM-LM"));
+        Assert.That(floor.Id, Is.EqualTo("HGHMLM"));
     }
 
     [Test]
@@ -143,7 +143,7 @@ The fourth floor contains nothing relevant.
         };
 
         var facility = new RadioisotopeFacility(floors, 0);
-        Assert.That(facility.Id, Is.EqualTo("0:HG-HM-LM||LG|"));
+        Assert.That(facility.Id, Is.EqualTo("0:HGHMLM||LG|"));
     }
 
     [Test]
@@ -168,7 +168,7 @@ The fourth floor contains nothing relevant.
         };
 
         var facility = new RadioisotopeFacility(floors, 0);
-        Assert.That(facility.AnonymizedId, Is.EqualTo("0:1X-1Y-2Y||2X|"));
+        Assert.That(facility.AnonymizedId, Is.EqualTo("0:1X1Y2Y||2X|"));
     }
 
     [Test]

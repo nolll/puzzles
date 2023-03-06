@@ -7,12 +7,12 @@ public class Year2015Day08Tests
     [Test]
     public void CodeToMemoryDifference()
     {
-        const string input = @"
-""""
-""abc""
-""aaa\""aaa""
-""\x27""
-";
+        const string input = """
+""
+"abc"
+"aaa\"aaa"
+"\x27"
+""";
 
         var digitalList = new DigitalList(input.Trim());
 
@@ -22,12 +22,12 @@ public class Year2015Day08Tests
     [Test]
     public void EncodedToCodeDifference()
     {
-        const string input = @"
-""""
-""abc""
-""aaa\""aaa""
-""\x27""
-";
+        const string input = """
+""
+"abc"
+"aaa\"aaa"
+"\x27"
+""";
 
         var digitalList = new DigitalList(input.Trim());
 

@@ -8,10 +8,11 @@ public class Year2015Day19Tests
     public void FindsDistinctMolecules()
     {
         const string startMolecule = "HOH";
-        const string input = @"
+        const string input = """
 H => HO
 H => OH
-O => HH";
+O => HH
+""";
 
         var machine = new MedicineMachine(input.Trim());
         var molecules = machine.GetCalibrationMolecules(startMolecule);
@@ -23,12 +24,13 @@ O => HH";
     [TestCase("HOHOHO", 6)]
     public void TimeToMakeMolecule(string molecule, int steps)
     {
-        const string input = @"
+        const string input = """
 e => H
 e => O
 H => HO
 H => OH
-O => HH";
+O => HH
+""";
 
         var machine = new MedicineMachine(input.Trim());
         var stepCount = machine.StepsToMake(molecule);

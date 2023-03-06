@@ -7,12 +7,13 @@ public class Year2015Day17Tests
     [Test]
     public void NumberOfCombinationsIsCorrect()
     {
-        const string input = @"
+        const string input = """
 20
 15
 10
 5
-5";
+5
+""";
 
         var containers = new EggnogContainers(input.Trim());
         var combinations = containers.GetCombinations(25);

@@ -62,6 +62,6 @@ public class Year2022Day20 : Puzzle
         var array = list.ToList();
         var offset = array.IndexOf(0);
 
-        return new[] { 1, 2, 3 }.Select(o => array[offset + o * 1000 % array.Count]).Sum();
+        return new[] { 1, 2, 3 }.Select(o => array[(offset + o * 1000) % array.Count]).Sum();
     }
 }

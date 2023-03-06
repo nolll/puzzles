@@ -4,13 +4,14 @@ namespace Core.Puzzles.Year2015.Day18;
 
 public class Year2015Day18Tests
 {
-    private const string Input = @"
+    private const string Input = """
 .#.#.#
 ...##.
 #....#
 ..#...
 #.#..#
-####..";
+####..
+""";
 
     [Test]
     public void LightCountAfterOneStep()

@@ -7,9 +7,10 @@ public class Year2015Day15Tests
     [Test]
     public void FindsHighestCookieScore()
     {
-        const string input = @"
+        const string input = """
 Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8
-Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3";
+Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3
+""";
 
         var baker = new CookieBakery(input.Trim());
         var score = baker.HighestScore;
@@ -20,9 +21,10 @@ Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3";
     [Test]
     public void FindsHighestCookieScoreWith500Calories()
     {
-        const string input = @"
+        const string input = """
 Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8
-Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3";
+Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3
+""";
 
         var baker = new CookieBakery(input.Trim());
         var score = baker.HighestScoreWith500Calories;

@@ -7,7 +7,7 @@ public class Year2015Day24Tests
     [Test]
     public void QuantumEntanglementOfFirstGroupIsCorrect()
     {
-        const string input = @"
+        const string input = """
 1
 2
 3
@@ -17,7 +17,8 @@ public class Year2015Day24Tests
 8
 9
 10
-11";
+11
+""";
 
         var balancer = new PresentBalancer(input.Trim(), 3);
 

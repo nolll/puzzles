@@ -7,10 +7,11 @@ public class Year2015Day09Tests
     [Test]
     public void CalculateShortestAndLongestRoute()
     {
-        const string input = @"
+        const string input = """
 London to Dublin = 464
 London to Belfast = 518
-Dublin to Belfast = 141";
+Dublin to Belfast = 141
+""";
 
         var calculator = new RouteCalculator(input.Trim());
 

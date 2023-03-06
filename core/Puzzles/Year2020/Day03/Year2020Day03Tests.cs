@@ -5,7 +5,7 @@ namespace Core.Puzzles.Year2020.Day03;
 
 public class Year2020Day03Tests
 {
-    private const string Input = @"
+    private const string Input = """
 ..##.......
 #...#...#..
 .#....#..#.
@@ -16,7 +16,8 @@ public class Year2020Day03Tests
 .#........#
 #.##...#...
 #...##....#
-.#..#...#.#";
+.#..#...#.#
+""";
 
     [Test]
     public void TreeCount_3_1_IsCorrect()

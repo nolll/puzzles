@@ -7,10 +7,11 @@ public class Year2017Day02Tests
     [Test]
     public void ChecksumMaxMinIsCorrect()
     {
-        const string input = @"
+        const string input = """
 5 1 9 5
 7 5 3
-2 4 6 8";
+2 4 6 8
+""";
 
         var spreadsheet = new Spreadsheet(input);
 
@@ -20,10 +21,11 @@ public class Year2017Day02Tests
     [Test]
     public void ChecksumDivisionIsCorrect()
     {
-        const string input = @"
+        const string input = """
 5 9 2 8
 9 4 7 3
-3 8 6 5";
+3 8 6 5
+""";
 
         var spreadsheet = new Spreadsheet(input);
 

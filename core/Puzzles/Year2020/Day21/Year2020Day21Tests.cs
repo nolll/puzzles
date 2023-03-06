@@ -4,11 +4,12 @@ namespace Core.Puzzles.Year2020.Day21;
 
 public class Year2020Day21Tests
 {
-    private const string Input = @"
+    private const string Input = """
 mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
 trh fvjkl sbzzf mxmxvkd (contains dairy)
 sqjhc fvjkl (contains soy)
-sqjhc mxmxvkd sbzzf (contains fish)";
+sqjhc mxmxvkd sbzzf (contains fish)
+""";
 
     [Test]
     public void IngredientsWithoutAllergens()

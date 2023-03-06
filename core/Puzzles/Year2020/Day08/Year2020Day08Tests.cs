@@ -25,7 +25,7 @@ public class Year2020Day08Tests
     [Test]
     public void ModifiedProgramReturnsCorrectExitStatus()
     {
-        const string input = @"
+        const string input = """
 nop +0
 acc +1
 jmp +4
@@ -34,7 +34,8 @@ jmp -3
 acc -99
 acc +1
 nop -4
-acc +6";
+acc +6
+""";
 
         var instructions = GameConsoleRunner.ParseInstructions(input.Trim());
         var console = new GameConsole(instructions);
@@ -44,7 +45,7 @@ acc +6";
         Assert.That(exit.ExitValue, Is.EqualTo(8));
     }
 
-    private const string Input = @"
+    private const string Input = """
 nop +0
 acc +1
 jmp +4
@@ -53,5 +54,6 @@ jmp -3
 acc -99
 acc +1
 jmp -4
-acc +6";
+acc +6
+""";
 }

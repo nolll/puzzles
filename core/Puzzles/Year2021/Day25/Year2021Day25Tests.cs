@@ -21,7 +21,7 @@ public class Year2021Day25Tests
         Assert.That(result, Is.EqualTo(0));
     }
 
-    private const string Input = @"
+    private const string Input = """
 v...>>.vv>
 .vv>>.vv..
 >>.>v>...v
@@ -30,5 +30,6 @@ v>v.vv.v..
 >.>>..v...
 .vv..>.>v.
 v.v..>>v.v
-....v..v.>";
+....v..v.>
+""";
 }

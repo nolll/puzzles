@@ -99,7 +99,7 @@ public class Year2020Day24Tests
         Assert.That(floor.BlackTileCount, Is.EqualTo(2208));
     }
 
-    private const string Input = @"
+    private const string Input = """
 sesenwnenenewseeswwswswwnenewsewsw
 neeenesenwnwwswnenewnwwsewnenwseswesw
 seswneswswsenwwnwse
@@ -119,5 +119,6 @@ wnwnesenesenenwwnenwsewesewsesesew
 nenewswnwewswnenesenwnesewesw
 eneswnwswnwsenenwnwnwwseeswneewsenese
 neswnwewnwnwseenwseesewsenwsweewe
-wseweeenwnesenwwwswnew";
+wseweeenwnesenwwwswnew
+""";
 }

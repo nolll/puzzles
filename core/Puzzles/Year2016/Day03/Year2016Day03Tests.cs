@@ -17,8 +17,10 @@ public class Year2016Day03Tests
     [Test]
     public void ValidHorizontalCount()
     {
-        const string input = @"12 13 14
-1 2 5";
+        const string input = """
+12 13 14
+1 2 5
+""";
 
         var validator = new TriangleValidator();
         var validCount = validator.GetHorizontalValidCount(input);
@@ -29,12 +31,14 @@ public class Year2016Day03Tests
     [Test]
     public void ValidVerticalCount()
     {
-        const string input = @"101 301 501
+        const string input = """
+101 301 501
 102 302 502
 103 303 503
 201 401 601
 202 402 602
-203 403 603";
+203 403 603
+""";
 
         var validator = new TriangleValidator();
         var validCount = validator.GetVerticalValidCount(input);

@@ -81,7 +81,7 @@ public class CollisionDetector
 
     private void BuildMatrixAndCarts(string input)
     {
-        var rows = PuzzleInputReader.ReadLines(input).Select(o => o.Trim('_')).ToList();
+        var rows = PuzzleInputReader.ReadLines(input).ToList();
         var width = rows.First().Length;
         var height = rows.Count();
         _matrix = new Matrix<char>(width, height);

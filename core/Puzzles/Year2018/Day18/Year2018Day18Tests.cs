@@ -7,7 +7,7 @@ public class Year2018Day18Tests
     [Test]
     public void ResourceValueIsCorrect()
     {
-        const string input = @"
+        const string input = """
 .#.#...|#.
 .....#|##|
 .|..|...#.
@@ -17,7 +17,8 @@ public class Year2018Day18Tests
 .|....|...
 ||...#|.#|
 |.||||..|.
-...#.|..|.";
+...#.|..|.
+""";
 
         var collection = new LumberCollection(input);
         collection.Run(10);

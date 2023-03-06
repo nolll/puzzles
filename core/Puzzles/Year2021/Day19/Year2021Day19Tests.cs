@@ -22,7 +22,7 @@ public class Year2021Day19Tests
         Assert.That(result.MaxDistance, Is.EqualTo(3621));
     }
 
-    private const string Input = @"
+    private const string Input = """
 --- scanner 0 ---
 404,-588,-901
 528,-643,409
@@ -158,5 +158,6 @@ public class Year2021Day19Tests
 839,-516,451
 891,-625,532
 -652,-548,-490
-30,-46,-14";
+30,-46,-14
+""";
 }

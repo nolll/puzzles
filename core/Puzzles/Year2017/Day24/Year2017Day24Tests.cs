@@ -22,7 +22,7 @@ public class Year2017Day24Tests
         Assert.That(bridge.Strength, Is.EqualTo(19));
     }
 
-    private const string Input = @"
+    private const string Input = """
 0/2
 2/2
 2/3
@@ -30,5 +30,6 @@ public class Year2017Day24Tests
 3/5
 0/1
 10/1
-9/10";
+9/10
+""";
 }

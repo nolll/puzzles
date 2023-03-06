@@ -22,7 +22,7 @@ public class Year2021Day01Tests
         Assert.That(result, Is.EqualTo(5));
     }
 
-    private const string Input = @"
+    private const string Input = """
 199
 200
 208
@@ -32,5 +32,6 @@ public class Year2021Day01Tests
 240
 269
 260
-263";
+263
+""";
 }

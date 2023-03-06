@@ -49,7 +49,7 @@ public class Year2021Day10Tests
         Assert.That(result, Is.EqualTo(1197));
     }
 
-    private const string Input = @"
+    private const string Input = """
 [({(<(())[]>[[{[]{<()<>>
 [(()[<>])]({[<{<<[]>>(
 {([(<{}[<>[]}>{[]{[(<()>
@@ -59,5 +59,6 @@ public class Year2021Day10Tests
 {<[[]]>}<{[{[{[]{()[[[]
 [<(<(<(<{}))><([]([]()
 <{([([[(<>()){}]>(<<{{
-<{([{{}}[<[[[<>{}]]]>[]]";
+<{([{{}}[<[[[<>{}]]]>[]]
+""";
 }

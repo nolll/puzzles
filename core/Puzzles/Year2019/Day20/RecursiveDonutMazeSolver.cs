@@ -37,7 +37,7 @@ public class RecursiveDonutMazeSolver
 
     private void Setup(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input.Replace(Chars.Space, Chars.Wall).Replace("_", ""));
+        var matrix = MatrixBuilder.BuildCharMatrix(input.Replace(Chars.Space, Chars.Wall));
         var portalAddresses = new List<DonutPortalAddress>();
         var letterCoords = FindLetterCoords(matrix).ToList();
         while (letterCoords.Count > 0)

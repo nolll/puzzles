@@ -7,10 +7,11 @@ public class Year2016Day20Tests
     [Test]
     public void FindsUnblockedIps()
     {
-        const string input = @"
+        const string input = """
 5-8
 0-2
-4-7";
+4-7
+""";
 
         var rules = new FirewallRules(input.Trim());
         var lowestIp = rules.GetLowestUnblockedIp();
@@ -21,10 +22,11 @@ public class Year2016Day20Tests
     [Test]
     public void AllowedIpCountIsCorrect()
     {
-        const string input = @"
+        const string input = """
 5-8
 0-2
-4-7";
+4-7
+""";
 
         var rules = new FirewallRules(input.Trim());
         var lowestIp = rules.GetAllowedIpCount(9);

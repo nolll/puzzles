@@ -4,7 +4,7 @@ namespace Core.Puzzles.Year2020.Day10;
 
 public class Year2020Day10Tests
 {
-    private const string Input1 = @"
+    private const string Input1 = """
 16
 10
 15
@@ -15,9 +15,10 @@ public class Year2020Day10Tests
 19
 6
 12
-4";
+4
+""";
 
-    private const string Input2 = @"
+    private const string Input2 = """
 28
 33
 18
@@ -48,7 +49,8 @@ public class Year2020Day10Tests
 2
 34
 10
-3";
+3
+""";
 
     [TestCase(Input1, 35)]
     [TestCase(Input2, 220)]

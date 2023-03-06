@@ -45,10 +45,11 @@ public class SquareKeyCodeFinder
 
     private static Matrix<char> BuildButtonMatrix()
     {
-        const string input = @"
+        const string input = """
 123
 456
-789";
+789
+""";
 
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         matrix.MoveTo(1, 1);

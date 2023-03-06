@@ -22,7 +22,7 @@ public class Year2021Day15Tests
         Assert.That(result, Is.EqualTo(315));
     }
 
-    private const string Input = @"
+    private const string Input = """
 1163751742
 1381373672
 2136511328
@@ -32,5 +32,6 @@ public class Year2021Day15Tests
 1359912421
 3125421639
 1293138521
-2311944581";
+2311944581
+""";
 }

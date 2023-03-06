@@ -20,11 +20,12 @@ public class Year2022Day03Tests
         Assert.That(result, Is.EqualTo(70));
     }
 
-    private const string Input = @"
+    private const string Input = """
 vJrwpWtwJgWrhcsFMMfFFhFp
 jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
 PmmdzqPrVvPwwTWBwg
 wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
-CrZsJsPPZsGzwwsLwLmpwMDw";
+CrZsJsPPZsGzwwsLwLmpwMDw
+""";
 }

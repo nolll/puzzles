@@ -23,10 +23,11 @@ public class Year2021Day09Tests
         Assert.That(result, Is.EqualTo(1134));
     }
 
-    private const string Input = @"
+    private const string Input = """
 2199943210
 3987894921
 9856789892
 8767896789
-9899965678";
+9899965678
+""";
 }

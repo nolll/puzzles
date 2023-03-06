@@ -22,8 +22,9 @@ public class Year2022Day02Tests
         Assert.That(result, Is.EqualTo(12));
     }
 
-    private const string Input = @"
+    private const string Input = """
 A Y
 B X
-C Z";
+C Z
+""";
 }

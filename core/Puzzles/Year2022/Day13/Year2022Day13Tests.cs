@@ -142,7 +142,7 @@ public class Year2022Day13Tests
         Assert.That(result, Is.EqualTo(140));
     }
 
-    private const string Input = @"
+    private const string Input = """
 [1,1,3,1,1]
 [1,1,5,1,1]
 
@@ -165,5 +165,6 @@ public class Year2022Day13Tests
 [[]]
 
 [1,[2,[3,[4,[5,6,7]]]],8,9]
-[1,[2,[3,[4,[5,6,0]]]],8,9]";
+[1,[2,[3,[4,[5,6,0]]]],8,9]
+""";
 }

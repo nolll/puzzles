@@ -14,12 +14,13 @@ public class Year2021Day23Tests
         Assert.That(result, Is.EqualTo(44169));
     }
 
-    private const string Input2 = @"
+    private const string Input2 = """
 #############
 #...........#
 ###B#C#B#D###
 ###D#C#B#A###
 ###D#B#A#C###
 ###A#D#C#A###
-#############";
+#############
+""";
 }

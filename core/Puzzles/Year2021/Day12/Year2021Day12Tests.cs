@@ -22,12 +22,13 @@ public class Year2021Day12Tests
         Assert.That(result, Is.EqualTo(36));
     }
 
-    private const string Input = @"
+    private const string Input = """
 start-A
 start-b
 A-c
 A-b
 b-d
 A-end
-b-end";
+b-end
+""";
 }

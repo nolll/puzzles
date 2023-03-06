@@ -7,12 +7,13 @@ public class Year2019Day24Tests
     [Test]
     public void AfterZeroMinutes()
     {
-        const string input = @"
+        const string input = """
 ....#
 #..#.
 #..##
 ..#..
-#....";
+#....
+""";
 
         var simulator = new BugLifeSimulator(input);
         simulator.Run(0);
@@ -23,12 +24,13 @@ public class Year2019Day24Tests
     [Test]
     public void AfterOneMinute()
     {
-        const string input = @"
+        const string input = """
 ....#
 #..#.
 #..##
 ..#..
-#....";
+#....
+""";
 
         var simulator = new BugLifeSimulator(input);
         simulator.Run(1);
@@ -39,12 +41,13 @@ public class Year2019Day24Tests
     [Test]
     public void AfterTwoMinutes()
     {
-        const string input = @"
+        const string input = """
 ....#
 #..#.
 #..##
 ..#..
-#....";
+#....
+""";
 
         var simulator = new BugLifeSimulator(input);
         simulator.Run(2);
@@ -55,12 +58,13 @@ public class Year2019Day24Tests
     [Test]
     public void AfterThreeMinutes()
     {
-        const string input = @"
+        const string input = """
 ....#
 #..#.
 #..##
 ..#..
-#....";
+#....
+""";
 
         var simulator = new BugLifeSimulator(input);
         simulator.Run(3);
@@ -71,12 +75,13 @@ public class Year2019Day24Tests
     [Test]
     public void AfterFourMinutes()
     {
-        const string input = @"
+        const string input = """
 ....#
 #..#.
 #..##
 ..#..
-#....";
+#....
+""";
 
         var simulator = new BugLifeSimulator(input);
         simulator.Run(4);
@@ -87,12 +92,13 @@ public class Year2019Day24Tests
     [Test]
     public void UntilRepeat_String()
     {
-        const string input = @"
+        const string input = """
 ....#
 #..#.
 #..##
 ..#..
-#....";
+#....
+""";
 
         var simulator = new BugLifeSimulator(input);
         simulator.RunUntilRepeat();
@@ -103,12 +109,13 @@ public class Year2019Day24Tests
     [Test]
     public void UntilRepeat_BiodiversityRating()
     {
-        const string input = @"
+        const string input = """
 ....#
 #..#.
 #..##
 ..#..
-#....";
+#....
+""";
 
         var simulator = new BugLifeSimulator(input);
         simulator.RunUntilRepeat();
@@ -119,12 +126,13 @@ public class Year2019Day24Tests
     [Test]
     public void Recursive_BugCount()
     {
-        const string input = @"
+        const string input = """
 ....#
 #..#.
 #..##
 ..#..
-#....";
+#....
+""";
 
         var simulator = new RecursiveBugLifeSimulator(input);
         simulator.Run(10);

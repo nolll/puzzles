@@ -20,15 +20,16 @@ public class Year2019Day21 : Puzzle
         return new PuzzleResult(runningDroid.HullDamage, 1_143_625_214);
     }
 
-    private const string WalkProgram = @"
+    private const string WalkProgram = """
 OR A T
 AND B T
 AND C T
 NOT T J
 AND D J
-WALK";
+WALK
+""";
 
-    private const string RunProgram = @"
+    private const string RunProgram = """
 OR A T
 AND B T
 AND C T
@@ -37,5 +38,6 @@ OR E T
 OR H T
 AND T J
 AND D J
-RUN";
+RUN
+""";
 }

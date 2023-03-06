@@ -54,7 +54,7 @@ public class Year2019Day22Tests
     {
         var shuffler = new CardShuffler();
 
-        const string input = @"
+        const string input = """
 deal into new stack
 cut -2
 deal with increment 7
@@ -64,7 +64,9 @@ deal with increment 7
 cut 3
 deal with increment 9
 deal with increment 3
-cut -1";
+cut -1
+""";
+
         var deck = shuffler.Shuffle(10, input);
 
         var expectedDeck = new[] { 9, 2, 5, 8, 1, 4, 7, 0, 3, 6 };

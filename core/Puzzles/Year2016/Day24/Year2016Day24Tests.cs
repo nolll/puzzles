@@ -7,12 +7,13 @@ public class Year2016Day24Tests
     [Test]
     public void FindsClosestRoute()
     {
-        const string input = @"
+        const string input = """
 ###########
 #0.1.....2#
 #.#######.#
 #4.......3#
-###########";
+###########
+""";
 
         var navigator = new AirDuctNavigator(input);
         var shortestPath = navigator.Run(false);
@@ -23,12 +24,13 @@ public class Year2016Day24Tests
     [Test]
     public void FindsClosestRouteAndGoesBackToStart()
     {
-        const string input = @"
+        const string input = """
 ###########
 #0.1.....2#
 #.#######.#
 #4.......3#
-###########";
+###########
+""";
 
         var navigator = new AirDuctNavigator(input);
         var shortestPath = navigator.Run(true);

@@ -7,15 +7,16 @@ public class Year2018Day13Tests
     [Test]
     public void LocationOfFirstCollision()
     {
-        const string input = @"
-_/->-\        _
-_|   |  /----\_
-_| /-+--+-\  |_
-_| | |  | v  |_
-_\-+-/  \-+--/_
-_  \------/   _";
+        const string input = """
+/->-\        
+|   |  /----\
+| /-+--+-\  |
+| | |  | v  |
+\-+-/  \-+--/
+  \------/   
+""";
 
-        var detector = new CollisionDetector(input.Trim());
+        var detector = new CollisionDetector(input);
         detector.RunCarts();
         var coords = detector.LocationOfFirstCollision;
 
@@ -26,16 +27,17 @@ _  \------/   _";
     [Test]
     public void LocationOfLastCart()
     {
-        const string input = @"
-_/>-<\  _
-_|   |  _
-_| /<+-\_
-_| | | v_
-_\>+</ |_
-_  |   ^_
-_  \<->/_";
+        const string input = """
+/>-<\  
+|   |  
+| /<+-\
+| | | v
+\>+</ |
+  |   ^
+  \<->/
+""";
 
-        var detector = new CollisionDetector(input.Trim());
+        var detector = new CollisionDetector(input);
         detector.RunCarts();
         var coords = detector.LocationOfLastCart;
 

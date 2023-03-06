@@ -4,10 +4,11 @@ namespace Core.Puzzles.Year2017.Day22;
 
 public class Year2017Day22Tests
 {
-    private const string Input = @"
+    private const string Input = """
 ..#
 #..
-...";
+...
+""";
 
     [TestCase(7, 5)]
     [TestCase(70, 41)]

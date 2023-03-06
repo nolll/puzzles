@@ -7,7 +7,7 @@ public class Year2020Day11Tests
     [Test]
     public void NumberOfOccupiedSeatsIsCorrect_FirstAlgorithm()
     {
-        const string input = @"
+        const string input = """
 L.LL.LL.LL
 LLLLLLL.LL
 L.L.L..L..
@@ -17,7 +17,8 @@ L.LLLLL.LL
 ..L.L.....
 LLLLLLLLLL
 L.LLLLLL.L
-L.LLLLL.LL";
+L.LLLLL.LL
+""";
 
         var simulator = new SeatingSimulatorAdjacentSeats(input);
         simulator.Run();
@@ -29,7 +30,7 @@ L.LLLLL.LL";
     [Test]
     public void NumberOfOccupiedSeatsIsCorrect_SecondAlgorithm()
     {
-        const string input = @"
+        const string input = """
 L.LL.LL.LL
 LLLLLLL.LL
 L.L.L..L..
@@ -39,7 +40,8 @@ L.LLLLL.LL
 ..L.L.....
 LLLLLLLLLL
 L.LLLLLL.L
-L.LLLLL.LL";
+L.LLLLL.LL
+""";
 
         var simulator = new SeatingSimulatorVisibleSeats(input);
         simulator.Run();

@@ -7,13 +7,14 @@ public class Year2018Day06Tests
     [Test]
     public void FindsLargestArea()
     {
-        const string input = @"
+        const string input = """
 1, 1
 1, 6
 8, 3
 3, 4
 5, 5
-8, 9";
+8, 9
+""";
 
         var finder = new LargestAreaFinder(input);
         var area = finder.GetSizeOfLargestArea();
@@ -24,13 +25,14 @@ public class Year2018Day06Tests
     [Test]
     public void FindsAreaOfCentralArea()
     {
-        const string input = @"
+        const string input = """
 1, 1
 1, 6
 8, 3
 3, 4
 5, 5
-8, 9";
+8, 9
+""";
 
         var finder = new LargestAreaFinder(input);
         var area = finder.GetSizeOfCentralArea(32);

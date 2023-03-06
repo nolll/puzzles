@@ -7,9 +7,10 @@ public class Year2017Day21Tests
     [Test]
     public void TwelvePixelsOnAfterTwoIterations()
     {
-        const string input = @"
+        const string input = """
 ../.# => ##./#../...
-.#./..#/### => #..#/..../..../#..#";
+.#./..#/### => #..#/..../..../#..#
+""";
 
         var generator = new FractalArtGenerator(input.Trim());
         generator.Run(2);

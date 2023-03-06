@@ -7,10 +7,11 @@ public class Year2020Day17Tests
     [Test]
     public void AfterSixIterations_3D()
     {
-        const string input = @"
+        const string input = """
 .#.
 ..#
-###";
+###
+""";
 
         var cube = new ConwayCube();
         var activeCubes = cube.Boot3D(input, 6);
@@ -21,10 +22,11 @@ public class Year2020Day17Tests
     [Test]
     public void AfterSixIterations_4D()
     {
-        const string input = @"
+        const string input = """
 .#.
 ..#
-###";
+###
+""";
 
         var cube = new ConwayCube();
         var activeCubes = cube.Boot4D(input, 6);

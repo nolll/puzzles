@@ -22,7 +22,7 @@ public class Year2020Day06Tests
         Assert.That(sum, Is.EqualTo(6));
     }
 
-    private const string Input = @"
+    private const string Input = """
 abc
 
 a
@@ -37,5 +37,6 @@ a
 a
 a
 
-b";
+b
+""";
 }

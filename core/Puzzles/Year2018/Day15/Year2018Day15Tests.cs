@@ -7,14 +7,15 @@ public class Year2018Day15Tests
     [Test]
     public void BattleResultsInCorrectOutcome_Case1()
     {
-        const string input = @"
+        const string input = """
 #######
 #.G...#
 #...EG#
 #.#.#G#
 #..G#E#
 #.....#
-#######";
+#######
+""";
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -25,7 +26,7 @@ public class Year2018Day15Tests
     [Test]
     public void BattleResultsInCorrectOutcome_Case2()
     {
-        const string input = @"
+        const string input = """
 #######
 #G..#E#
 #E#E.E#
@@ -33,7 +34,7 @@ public class Year2018Day15Tests
 #...#E#
 #...E.#
 #######
-";
+""";
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -44,7 +45,7 @@ public class Year2018Day15Tests
     [Test]
     public void BattleResultsInCorrectOutcome_Case3()
     {
-        const string input = @"
+        const string input = """
 #######
 #E..EG#
 #.#G.E#
@@ -52,7 +53,7 @@ public class Year2018Day15Tests
 #G..#.#
 #..E#.#
 #######
-";
+""";
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -63,7 +64,7 @@ public class Year2018Day15Tests
     [Test]
     public void BattleResultsInCorrectOutcome_Case4()
     {
-        const string input = @"
+        const string input = """
 #######
 #E.G#.#
 #.#G..#
@@ -71,7 +72,7 @@ public class Year2018Day15Tests
 #G..#.#
 #...E.#
 #######
-";
+""";
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -83,7 +84,7 @@ public class Year2018Day15Tests
     [Test]
     public void BattleResultsInCorrectOutcome_Case5()
     {
-        const string input = @"
+        const string input = """
 #######
 #.E...#
 #.#..G#
@@ -91,7 +92,7 @@ public class Year2018Day15Tests
 #E#G#G#
 #...#G#
 #######
-";
+""";
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -103,7 +104,7 @@ public class Year2018Day15Tests
     [Test]
     public void BattleResultsInCorrectOutcome_Case6()
     {
-        const string input = @"
+        const string input = """
 #########
 #G......#
 #.E.#...#
@@ -113,7 +114,7 @@ public class Year2018Day15Tests
 #.G...G.#
 #.....G.#
 #########
-";
+""";
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -124,7 +125,7 @@ public class Year2018Day15Tests
     [Test]
     public void BattleResultsForElvesWinningWithoutLosses_Case1()
     {
-        const string input = @"
+        const string input = """
 #######
 #.G...#
 #...EG#
@@ -132,7 +133,7 @@ public class Year2018Day15Tests
 #..G#E#
 #.....#
 #######
-";
+""";
 
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
@@ -143,7 +144,7 @@ public class Year2018Day15Tests
     [Test]
     public void BattleResultsForElvesWinningWithoutLosses_Case2()
     {
-        const string input = @"
+        const string input = """
 #######
 #E..EG#
 #.#G.E#
@@ -151,7 +152,7 @@ public class Year2018Day15Tests
 #G..#.#
 #..E#.#
 #######
-";
+""";
 
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
@@ -162,7 +163,7 @@ public class Year2018Day15Tests
     [Test]
     public void BattleResultsForElvesWinningWithoutLosses_Case3()
     {
-        const string input = @"
+        const string input = """
 #######
 #E.G#.#
 #.#G..#
@@ -170,7 +171,7 @@ public class Year2018Day15Tests
 #G..#.#
 #...E.#
 #######
-";
+""";
 
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
@@ -181,7 +182,7 @@ public class Year2018Day15Tests
     [Test]
     public void BattleResultsForElvesWinningWithoutLosses_Case4()
     {
-        const string input = @"
+        const string input = """
 #######
 #.E...#
 #.#..G#
@@ -189,7 +190,7 @@ public class Year2018Day15Tests
 #E#G#G#
 #...#G#
 #######
-";
+""";
 
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
@@ -200,7 +201,7 @@ public class Year2018Day15Tests
     [Test]
     public void BattleResultsForElvesWinningWithoutLosses_Case5()
     {
-        const string input = @"
+        const string input = """
 #########
 #G......#
 #.E.#...#
@@ -210,7 +211,7 @@ public class Year2018Day15Tests
 #.G...G.#
 #.....G.#
 #########
-";
+""";
 
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);

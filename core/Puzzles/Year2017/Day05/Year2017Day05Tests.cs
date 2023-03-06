@@ -7,12 +7,13 @@ public class Year2017Day05Tests
     [Test]
     public void Part1_StepsUntilExit()
     {
-        const string input = @"
+        const string input = """
 0
 3
 0
 1
--3";
+-3
+""";
 
         var jumper = new InstructionJumper(input);
         jumper.Start1();
@@ -23,12 +24,13 @@ public class Year2017Day05Tests
     [Test]
     public void Part2_StepsUntilExit()
     {
-        const string input = @"
+        const string input = """
 0
 3
 0
 1
--3";
+-3
+""";
 
         var jumper = new InstructionJumper(input);
         jumper.Start2();

@@ -7,7 +7,7 @@ public class Year2017Day25Tests
     [Test]
     public void ChecksumIsCorrect()
     {
-        const string input = @"
+        const string input = """
 Begin in state A.
 Perform a diagnostic checksum after 6 steps.
 
@@ -29,7 +29,8 @@ In state B:
   If the current value is 1:
     - Write the value 1.
     - Move one slot to the right.
-    - Continue with state A.";
+    - Continue with state A.
+""";
 
         var turingMachine = new TuringMachine(input.Trim());
         var checksum = turingMachine.Run();

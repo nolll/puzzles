@@ -4,15 +4,17 @@ namespace Core.Puzzles.Year2017.Day20;
 
 public class Year2017Day20Tests
 {
-    private const string Input1 = @"
+    private const string Input1 = """
 p=<3,0,0>, v=<2,0,0>, a=<-1,0,0>
-p=<4,0,0>, v=<0,0,0>, a=<-2,0,0>";
+p=<4,0,0>, v=<0,0,0>, a=<-2,0,0>
+""";
 
-    private const string Input2 = @"
+    private const string Input2 = """
 p=<-6,0,0>, v=<3,0,0>, a=<0,0,0>
 p=<-4,0,0>, v=<2,0,0>, a=<0,0,0>
 p=<-2,0,0>, v=<1,0,0>, a=<0,0,0>
-p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>";
+p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>
+""";
 
     [Test]
     public void After1Step()

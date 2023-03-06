@@ -7,14 +7,15 @@ public class Year2019Day17Tests
     [Test]
     public void IntersectionsFound()
     {
-        const string input = @"
+        const string input = """
 ..#..........
 ..#..........
 #######...###
 #.#...#...#.#
 #############
 ..#...#...#..
-..#####...^..";
+..#####...^..
+""";
 
         var intersectionFinder = new ScaffoldIntersectionFinder(input);
         var result = intersectionFinder.GetSumOfAlignmentParameters();

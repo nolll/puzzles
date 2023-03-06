@@ -7,7 +7,7 @@ public class Year2020Day20Tests
     [TestCase(2311)]
     public void EdgesAreCorrect(long tileId)
     {
-        const string input = @"
+        const string input = """
 Tile 2311:
 ..##.#..#.
 ##..#.....
@@ -18,7 +18,8 @@ Tile 2311:
 .#.#.#..##
 ..#....#..
 ###...#.#.
-..###..###";
+..###..###
+""";
 
         var tile = JigsawTile.Parse(input);
 
@@ -94,7 +95,7 @@ Tile 2311:
         Assert.That(hashes, Is.EqualTo(273));
     }
 
-    private const string Input = @"
+    private const string Input = """
 Tile 2311:
 ..##.#..#.
 ##..#.....
@@ -201,5 +202,6 @@ Tile 3079:
 #.#####.##
 ..#.###...
 ..#.......
-..#.###...";
+..#.###...
+""";
 }

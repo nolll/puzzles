@@ -36,7 +36,4 @@ public class Year2021Day17Tests
 
         Assert.That(result.HitCount, Is.EqualTo(112));
     }
-
-    private const string Input = @"
-";
 }

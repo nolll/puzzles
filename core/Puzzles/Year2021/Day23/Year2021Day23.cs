@@ -25,19 +25,21 @@ public class Year2021Day23 : Puzzle
         return new PuzzleResult(result, 49232);
     }
 
-    private const string Input1 = @"
+    private const string Input1 = """
 #############
 #...........#
 ###B#C#A#D###
 ###B#C#D#A###
-#############";
+#############
+""";
 
-    private const string Input2 = @"
+    private const string Input2 = """
 #############
 #...........#
 ###B#C#A#D###
 ###D#C#B#A###
 ###D#B#A#C###
 ###B#C#D#A###
-#############";
+#############
+""";
 }

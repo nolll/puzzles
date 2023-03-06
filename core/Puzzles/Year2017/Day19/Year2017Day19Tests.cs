@@ -7,13 +7,14 @@ public class Year2017Day19Tests
     [Test]
     public void FindsAllCharacters()
     {
-        const string input = @"
-_     |          _
-_     |  +--+    _
-_     A  |  C    _
-_ F---|----E|--+ _
-_     |  |  |  D _
-_     +B-+  +--+ _";
+        const string input = """
+     |          
+     |  +--+    
+     A  |  C    
+ F---|----E|--+ 
+     |  |  |  D 
+     +B-+  +--+ 
+""";
 
         var finder = new TubeRouteFinder(input);
         finder.FindRoute();

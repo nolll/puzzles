@@ -16,7 +16,7 @@ public class Year2020Day22Tests
     [Test]
     public void InfiniteGame_Ends()
     {
-        const string input = @"
+        const string input = """
 Player 1:
 43
 19
@@ -24,7 +24,8 @@ Player 1:
 Player 2:
 2
 29
-14";
+14
+""";
 
         var game = new CardCombatGame(input);
         game.PlayRecursive();
@@ -42,7 +43,7 @@ Player 2:
         Assert.That(score, Is.EqualTo(291));
     }
 
-    private const string Input = @"
+    private const string Input = """
 Player 1:
 9
 2
@@ -55,5 +56,6 @@ Player 2:
 8
 4
 7
-10";
+10
+""";
 }

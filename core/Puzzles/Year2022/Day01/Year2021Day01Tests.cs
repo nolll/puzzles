@@ -22,7 +22,7 @@ public class Year2022Day01Tests
         Assert.That(result, Is.EqualTo(45000));
     }
 
-    private const string Input = @"
+    private const string Input = """
 1000
 2000
 3000
@@ -36,5 +36,6 @@ public class Year2022Day01Tests
 8000
 9000
 
-10000";
+10000
+""";
 }

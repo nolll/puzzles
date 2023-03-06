@@ -17,27 +17,6 @@ public class Tetris
 
     private const char Left = '<';
     private const char Right = '>';
-
-    // todo: Parse this instead of hardcoding the rules
-    private const string ShapeData = """
-####
-
-.#.
-###
-.#.
-
-..#
-..#
-###
-
-#
-#
-#
-#
-
-##
-##
-""";
     
     public long Part1(string input, long rockCount)
     {

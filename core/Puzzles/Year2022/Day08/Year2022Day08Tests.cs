@@ -24,10 +24,11 @@ public class Year2022Day08Tests
         Assert.That(result, Is.EqualTo(8));
     }
 
-    private const string Input = @"
+    private const string Input = """
 30373
 25512
 65332
 33549
-35390";
+35390
+""";
 }

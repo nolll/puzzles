@@ -22,11 +22,12 @@ public class Year2022Day04Tests
         Assert.That(result, Is.EqualTo(4));
     }
 
-    private const string Input = @"
+    private const string Input = """
 2-4,6-8
 2-3,4-5
 5-7,7-9
 2-8,3-7
 6-6,4-6
-2-6,4-8";
+2-6,4-8
+""";
 }

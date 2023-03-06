@@ -19,7 +19,7 @@ public class TubeRouteFinder
 
     public TubeRouteFinder(string input)
     {
-        var adjustedInput = input.Replace(Space, Empty).Replace("_", "");
+        var adjustedInput = input.Replace(Space, Empty);
         _matrix = MatrixBuilder.BuildCharMatrix(adjustedInput);
         var y = 0;
         var x = _matrix.Values.ToList().IndexOf(Vertical);

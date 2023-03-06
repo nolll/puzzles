@@ -77,26 +77,28 @@ public class Year2020Day19Tests
         Assert.That(result, Is.EqualTo(12));
     }
 
-    private const string Rules1 = @"
+    private const string Rules1 = """
 0: 4 1 5
 1: 2 3 | 3 2
 2: 4 4 | 5 5
 3: 4 5 | 5 4
-4: ""a""
-5: ""b""";
+4: "a"
+5: "b"
+""";
 
-    private const string Messages1 = @"
+    private const string Messages1 = """
 ababbb
 bababa
 abbbab
 aaabbb
-aaaabbb";
+aaaabbb
+""";
 
-    private const string Rules2 = @"
+    private const string Rules2 = """
 42: 9 14 | 10 1
 9: 14 27 | 1 26
 10: 23 14 | 28 1
-1: ""a""
+1: "a"
 11: 42 31
 5: 1 14 | 15 1
 19: 14 1 | 14 14
@@ -115,7 +117,7 @@ aaaabbb";
 20: 14 14 | 1 15
 3: 5 14 | 16 1
 27: 1 6 | 14 18
-14: ""b""
+14: "b"
 21: 14 1 | 1 14
 25: 1 1 | 1 14
 22: 14 14
@@ -123,9 +125,10 @@ aaaabbb";
 26: 14 22 | 1 20
 18: 15 15
 7: 14 5 | 1 21
-24: 14 1";
+24: 14 1
+""";
 
-    private const string Messages2 = @"
+    private const string Messages2 = """
 abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa
 bbabbbbaabaabba
 babbbbaabbbbbabbbbbbaabaaabaaa
@@ -140,8 +143,9 @@ aaaaabbaabaaaaababaa
 aaaabbaaaabbaaa
 aaaabbaabbaaaaaaabbbabbbaaabbaabaaa
 babaaabbbaaabaababbaabababaaab
-aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba";
+aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba
+""";
 
-    private string RulesAndMessages1 => $"{Rules1}\r\n{Messages1}";
-    private string RulesAndMessages2 => $"{Rules2}\r\n{Messages2}";
+    private static string RulesAndMessages1 => $"{Rules1}\r\n\r\n{Messages1}";
+    private static string RulesAndMessages2 => $"{Rules2}\r\n\r\n{Messages2}";
 }

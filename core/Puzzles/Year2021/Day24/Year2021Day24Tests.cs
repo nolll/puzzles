@@ -9,9 +9,10 @@ public class Year2021Day24Tests
     [TestCase(3, -3)]
     public void TestAlu1(long p, int expected)
     {
-        const string input = @"
+        const string input = """
 inp x
-mul x -1";
+mul x -1
+""";
 
         var alu = new Alu(input.Trim());
         var result = alu.Process(p);
@@ -26,11 +27,12 @@ mul x -1";
     [TestCase(39, 1)]
     public void TestAlu2(long p, int expected)
     {
-        const string input = @"
+        const string input = """
 inp z
 inp x
 mul z 3
-eql z x";
+eql z x
+""";
 
         var alu = new Alu(input.Trim());
         var result = alu.Process(p);
@@ -49,7 +51,7 @@ eql z x";
     [TestCase(9, 1, 0, 0, 1)]
     public void TestAlu2(long p, int expW, int expX, int expY, int expZ)
     {
-        const string input = @"
+        const string input = """
 inp w
 add z w
 mod z 2
@@ -60,7 +62,8 @@ div w 2
 add x w
 mod x 2
 div w 2
-mod w 2";
+mod w 2
+""";
 
         var alu = new Alu(input.Trim());
         var result = alu.Process(p);

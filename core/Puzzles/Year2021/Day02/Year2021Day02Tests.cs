@@ -22,11 +22,12 @@ public class Year2021Day02Tests
         Assert.That(validator.Result, Is.EqualTo(900));
     }
 
-    private const string Input = @"
+    private const string Input = """
 forward 5
 down 5
 forward 8
 up 3
 down 8
-forward 2";
+forward 2
+""";
 }

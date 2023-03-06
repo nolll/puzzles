@@ -7,7 +7,8 @@ public class Year2019Day06Tests
     [Test]
     public void ReturnsCorrectNumberOfOrbits()
     {
-        const string input = @"COM)B
+        const string input = """
+COM)B
 B)C
 C)D
 D)E
@@ -17,7 +18,8 @@ G)H
 D)I
 E)J
 J)K
-K)L";
+K)L
+""";
 
         var calculator = new OrbitCalculator(input);
         var result = calculator.GetOrbitCount();
@@ -28,7 +30,8 @@ K)L";
     [Test]
     public void ReturnsDistanceFromMeToSanta()
     {
-        const string input = @"COM)B
+        const string input = """
+COM)B
 B)C
 C)D
 D)E
@@ -40,7 +43,8 @@ E)J
 J)K
 K)L
 K)YOU
-I)SAN";
+I)SAN
+""";
 
         var calculator = new OrbitCalculator(input);
         var result = calculator.GetSantaDistance();

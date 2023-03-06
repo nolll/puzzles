@@ -7,11 +7,12 @@ public class Year2016Day02Tests
     [Test]
     public void FindsSquareKeycode()
     {
-        const string input = @"
+        const string input = """
 ULL
 RRDDD
 LURDL
-UUUUD";
+UUUUD
+""";
 
         var finder = new SquareKeyCodeFinder();
         var code = finder.Find(input.Trim());
@@ -22,11 +23,12 @@ UUUUD";
     [Test]
     public void FindsDiamondKeycode()
     {
-        const string input = @"
+        const string input = """
 ULL
 RRDDD
 LURDL
-UUUUD";
+UUUUD
+""";
 
         var finder = new DiamondKeyCodeFinder();
         var code = finder.Find(input.Trim());

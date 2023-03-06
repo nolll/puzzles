@@ -7,10 +7,11 @@ namespace Core.Puzzles.Year2020.Day20;
 
 public class ImageJigsawPuzzle
 {
-    private const string SeaMonsterPattern = @"
+    private const string SeaMonsterPattern = """
 ..................#.
 #....##....##....###
-.#..#..#..#..#..#...";
+.#..#..#..#..#..#...
+""";
 
     public readonly Dictionary<long, JigsawTile> TilesById;
     private readonly Dictionary<string, List<JigsawTile>> _matchesByEdge;

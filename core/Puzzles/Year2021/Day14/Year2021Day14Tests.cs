@@ -40,7 +40,7 @@ public class Year2021Day14Tests
         Assert.That(result, Is.EqualTo(2188189693529));
     }
 
-    private const string Input = @"
+    private const string Input = """
 NNCB
 
 CH -> B
@@ -58,5 +58,6 @@ BN -> B
 BB -> N
 BC -> B
 CC -> N
-CN -> C";
+CN -> C
+""";
 }

@@ -22,7 +22,7 @@ public class Year2021Day13Tests
         Assert.That(result, Is.EqualTo(Result.Trim()));
     }
 
-    private const string Input = @"
+    private const string Input = """
 6,10
 0,14
 9,10
@@ -43,14 +43,16 @@ public class Year2021Day13Tests
 9,0
 
 fold along y=7
-fold along x=5";
+fold along x=5
+""";
 
-    private const string Result = @"
+    private const string Result = """
 #####
 #...#
 #...#
 #...#
 #####
 .....
-.....";
+.....
+""";
 }

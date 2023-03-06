@@ -22,7 +22,7 @@ public class Year2022Day07Tests
         Assert.That(result, Is.EqualTo(24933642));
     }
 
-    private const string Input = @"
+    private const string Input = """
 $ cd /
 $ ls
 dir a
@@ -45,5 +45,6 @@ $ ls
 4060174 j
 8033020 d.log
 5626152 d.ext
-7214296 k";
+7214296 k
+""";
 }

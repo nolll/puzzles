@@ -79,13 +79,13 @@ public class OxygenFiller
 
     private static Matrix<char> BuildMatrix(string map)
     {
-        var matrix = new Matrix<char>(1, 1);
-        var rows = map.Trim().Split('\n');
+        var matrix = new Matrix<char>();
+        var rows = map.Split("\r\n");
         var y = 0;
         foreach (var row in rows)
         {
             var x = 0;
-            var chars = row.Trim().Trim('_').ToCharArray();
+            var chars = row.ToCharArray();
             foreach (var c in chars)
             {
                 matrix.MoveTo(x, y);

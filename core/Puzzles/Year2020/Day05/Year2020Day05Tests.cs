@@ -20,11 +20,12 @@ public class Year2020Day05Tests
     [Test]
     public void FindBoardingCardWithHighestId()
     {
-        const string input = @"
+        const string input = """
 FBFBBFFRLR
 BFFFBBFRRR
 FFFBBBFRRR
-BBFFBBFRLL";
+BBFFBBFRLL
+""";
 
         var processor = new BoardingCardProcessor(input.Trim());
 

@@ -22,7 +22,8 @@ public class Year2018Day04Tests
         Assert.AreEqual(4455, puzzle.StrategyTwoScore);
     }
 
-    private const string Input = @"[1518-11-01 00:00] Guard #10 begins shift
+    private const string Input = """
+[1518-11-01 00:00] Guard #10 begins shift
 [1518-11-01 00:05] falls asleep
 [1518-11-01 00:25] wakes up
 [1518-11-01 00:30] falls asleep
@@ -38,5 +39,6 @@ public class Year2018Day04Tests
 [1518-11-04 00:46] wakes up
 [1518-11-05 00:03] Guard #99 begins shift
 [1518-11-05 00:45] falls asleep
-[1518-11-05 00:55] wakes up";
+[1518-11-05 00:55] wakes up
+""";
 }

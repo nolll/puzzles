@@ -11,7 +11,7 @@ public class Year2019Day05 : Puzzle
 
     public override PuzzleResult RunPart1()
     {
-        var ci1 = new ComputerInterface(FileInput, ReadInputPart1, WriteOutput);
+        var ci1 = new IntCodeComputer(FileInput, ReadInputPart1, WriteOutput);
         ci1.Start();
 
         return new PuzzleResult(_output, 5_346_030);
@@ -19,7 +19,7 @@ public class Year2019Day05 : Puzzle
 
     public override PuzzleResult RunPart2()
     {
-        var ci2 = new ComputerInterface(FileInput, ReadInputPart2, WriteOutput);
+        var ci2 = new IntCodeComputer(FileInput, ReadInputPart2, WriteOutput);
         ci2.Start();
 
         return new PuzzleResult(_output, 513_116);

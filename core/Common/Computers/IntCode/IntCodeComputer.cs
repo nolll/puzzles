@@ -1,56 +1,47 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Common.Computers.IntCode;
 
-public abstract class IntCodeComputer
+public class IntCodeComputer
 {
-    private readonly IList<long> _startMemory;
+    private readonly Func<long> _readInput;
+    private readonly Action<long> _writeOutput;
+    private readonly IList<long> _memory;
     private IntCodeProcess _process;
 
     public long Result => _process.Result;
 
-    protected IntCodeComputer(string input)
+    public IntCodeComputer(IList<long> memory, Func<long> readInput, Action<long> writeOutput)
     {
-        _startMemory = MemoryParser.Parse(input);
+        _readInput = readInput;
+        _writeOutput = writeOutput;
+        _memory = memory;
+    }
+
+    public IntCodeComputer(string program, Func<long> readInput, Action<long> writeOutput)
+        : this(MemoryParser.Parse(program), readInput, writeOutput)
+    {
     }
 
     public void Start(bool haltAfterInput = false, int? noun = null, int? verb = null)
     {
-        var memory = CopyMemory(_startMemory);
+        var memory = CopyMemory(_memory);
         if (noun != null) memory[1] = noun.Value;
-        if(verb != null) memory[2] = verb.Value;
-        _process = new IntCodeProcess(memory, haltAfterInput, ReadInput, WriteOutput);
+        if (verb != null) memory[2] = verb.Value;
+        _process = new IntCodeProcess(memory, haltAfterInput, _readInput, _writeOutput);
         _process.Run();
     }
 
-    public void SetMemory(int address, int value)
-    {
-        _startMemory[address] = value;
-    }
-
-    public void Resume()
-    {
-        _process.Run();
-    }
-
-    public void Stop()
-    {
-        _process.Stop();
-    }
-
+    public void SetMemory(int address, int value) => _memory[address] = value;
+    public void Resume() => _process.Run();
+    public void Stop() => _process.Stop();
     public IList<long> Memory => _process.Memory;
+    private static IList<long> CopyMemory(IEnumerable<long> memory) => memory.ToList();
 
-    protected abstract long ReadInput();
-    protected abstract void WriteOutput(long output);
-
-    private static IList<long> CopyMemory(IList<long> memory)
+    public IntCodeComputer Clone()
     {
-        var copy = new List<long>();
-        for (var i = 0; i < memory.Count; i++)
-        {
-            copy.Add(memory[i]);
-        }
-
-        return copy;
+        return new IntCodeComputer(Memory, _readInput, _writeOutput);
     }
 }

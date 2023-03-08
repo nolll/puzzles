@@ -12,7 +12,7 @@ public class TractorBeamComputer1
 {
     private readonly int _width;
     private readonly int _height;
-    private readonly ComputerInterface _computer;
+    private readonly IntCodeComputer _computer;
     private int _x = 0;
     private int _y = 0;
     private int _count = 0;
@@ -22,7 +22,7 @@ public class TractorBeamComputer1
     {
         _width = width;
         _height = height;
-        _computer = new ComputerInterface(program, ReadInput, WriteOutput);
+        _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
     }
 
     public int GetPullCount()

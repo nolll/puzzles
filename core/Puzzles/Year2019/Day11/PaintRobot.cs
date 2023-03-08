@@ -11,7 +11,7 @@ public class PaintRobot
     private readonly Matrix<int> _panels;
     private readonly Matrix<int> _paintCounts;
     private PaintMode _mode;
-    private ComputerInterface _computer;
+    private IntCodeComputer _computer;
 
     public PaintRobot(string program, int shipWidth = 100, int shipHeight = 100)
     {
@@ -27,7 +27,7 @@ public class PaintRobot
         if (startOnWhitePanel)
             PaintWhite();
 
-        _computer = new ComputerInterface(_program, ReadInput, WriteOutput);
+        _computer = new IntCodeComputer(_program, ReadInput, WriteOutput);
         _computer.Start();
 
         return new Result(PaintedPanelsCount, _panels.Print());

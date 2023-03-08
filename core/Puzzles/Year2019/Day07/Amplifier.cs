@@ -16,7 +16,7 @@ public class Amplifier
     public Amplifier(string name, string memory)
     {
         Name = name;
-        _computer = new ComputerInterface(memory, ComputerInput, ComputerOutput);
+        _computer = new IntCodeComputer(memory, ComputerInput, ComputerOutput);
     }
 
     private long ComputerInput()

@@ -8,14 +8,14 @@ namespace Core.Puzzles.Year2019.Day25;
 
 public class InvestigationDroid
 {
-    private readonly ComputerInterface _computer;
+    private readonly IntCodeComputer _computer;
     private readonly List<string> _commands;
     private List<char> _currentCommand;
-    private StringBuilder _output = new StringBuilder();
+    private readonly StringBuilder _output = new();
 
     public InvestigationDroid(string program)
     {
-        _computer = new ComputerInterface(program, ReadInput, WriteOutput);
+        _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
         _currentCommand = new List<char>();
         _commands = new List<string>
         {

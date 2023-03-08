@@ -12,7 +12,7 @@ public class RepairDroid
     private const int Moved = 1;
     private const int Found = 2;
 
-    private readonly ComputerInterface _computer;
+    private readonly IntCodeComputer _computer;
     private readonly Matrix<char> _matrix;
     private int _steps;
     private DroidDirection NextDirection => GetDroidDirection();
@@ -20,7 +20,8 @@ public class RepairDroid
 
     public RepairDroid(string program)
     {
-        _computer = new ComputerInterface(program, ReadInput, WriteOutput);
+        //Console.Clear();
+        _computer = new IntCodeComputer(MemoryParser.Parse(program), ReadInput, WriteOutput);
         _matrix = new Matrix<char>();
         _random = new Random();
     }
@@ -57,6 +58,9 @@ public class RepairDroid
                 _matrix.WriteValue('X');
                 break;
         }
+
+        //Console.WriteLine(_matrix.Print());
+        //Console.SetCursorPosition(0, 0);
     }
 
     private void TurnToUnvisitedDirection()
@@ -79,7 +83,7 @@ public class RepairDroid
     private IList<MatrixDirection> FindUnvisitedDirections()
     {
         var directions = new List<MatrixDirection>();
-
+        
         _matrix.MoveForward();
         if (_matrix.ReadValue() == '\0')
             directions.Add(_matrix.Direction);

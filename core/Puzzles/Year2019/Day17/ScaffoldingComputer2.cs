@@ -6,7 +6,7 @@ namespace Core.Puzzles.Year2019.Day17;
 
 public class ScaffoldingComputer2
 {
-    private readonly ComputerInterface _computer;
+    private readonly IntCodeComputer _computer;
     private long _output;
 
     private const string MainRoutine = "A,B,A,C,B,C,A,B,A,C";
@@ -18,7 +18,7 @@ public class ScaffoldingComputer2
 
     public ScaffoldingComputer2(string program)
     {
-        _computer = new ComputerInterface($"2{program.Substring(1)}", ReadInput, WriteOutput);
+        _computer = new IntCodeComputer($"2{program[1..]}", ReadInput, WriteOutput);
         _inputSequence = BuildInputSequence();
     }
 

@@ -4,9 +4,7 @@ namespace Core.Puzzles.Year2019.Day19;
 
 public class TractorBeamComputer2
 {
-    private readonly int _width;
-    private readonly int _height;
-    private readonly ComputerInterface _computer;
+    private readonly IntCodeComputer _computer;
     private int _x = 0;
     private int _y = 0;
     private int _tempX = 0;
@@ -16,9 +14,7 @@ public class TractorBeamComputer2
 
     public TractorBeamComputer2(string program, int width, int height)
     {
-        _width = width;
-        _height = height;
-        _computer = new ComputerInterface(program, ReadInput, WriteOutput);
+        _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
     }
 
     public Result Find100By100Square()

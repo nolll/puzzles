@@ -6,7 +6,7 @@ namespace Core.Puzzles.Year2019.Day23;
 
 public class CategorySixComputer
 {
-    private readonly ComputerInterface _computer;
+    private readonly IntCodeComputer _computer;
     private readonly int _address;
     private readonly Action<int, CategorySixPacket> _sendPacketFunc;
     private readonly Action _hasReadInputFunc;
@@ -27,7 +27,7 @@ public class CategorySixComputer
         _hasReadInputFunc = hasReadInputFunc;
         _inputMode = CategorySixComputerMode.Address;
         _outputMode = CategorySixComputerMode.Address;
-        _computer = new ComputerInterface(program, ReadInput, WriteOutput);
+        _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
         _inputPacket = null;
         Queue = new Queue<CategorySixPacket>();
     }

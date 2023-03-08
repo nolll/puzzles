@@ -117,7 +117,8 @@ public class Matrix<T> : BaseMatrix
     public IList<MatrixAddress> PerpendicularAdjacentCoords => PerpendicularAdjacentCoordsTo(Address);
     public IList<MatrixAddress> PerpendicularAdjacentCoordsTo(MatrixAddress address) => PossiblePerpendicularAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
 
-    private static IEnumerable<MatrixAddress> PossiblePerpendicularAdjacentCoordsTo(MatrixAddress address) => new List<MatrixAddress>
+    public IEnumerable<MatrixAddress> PossiblePerpendicularAdjacentCoords => PossiblePerpendicularAdjacentCoordsTo(Address);
+    public IEnumerable<MatrixAddress> PossiblePerpendicularAdjacentCoordsTo(MatrixAddress address) => new List<MatrixAddress>
     {
         new(address.X, address.Y - 1),
         new(address.X + 1, address.Y),
@@ -166,7 +167,7 @@ public class Matrix<T> : BaseMatrix
     private bool MoveLeft(int steps, bool extend) => MoveTo(new MatrixAddress(Address.X - steps, Address.Y), extend);
     public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
 
-    private bool MoveTo(MatrixAddress address, bool extend)
+    public bool MoveTo(MatrixAddress address, bool extend)
     {
         if (IsOutOfRange(address))
         {

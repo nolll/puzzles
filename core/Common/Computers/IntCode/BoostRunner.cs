@@ -19,7 +19,7 @@ public class BoostRunner
     {
         _outputs = new List<long>();
 
-        var computer = new ComputerInterface(_program, ReadInput, WriteOutput);
+        var computer = new IntCodeComputer(_program, ReadInput, WriteOutput);
         computer.Start();
 
         return new Result(_lastOutput, _outputs);

@@ -5,13 +5,13 @@ namespace Core.Puzzles.Year2019.Day17;
 
 public class ScaffoldingComputer1
 {
-    private readonly ComputerInterface _computer;
+    private readonly IntCodeComputer _computer;
     private readonly StringBuilder _sb;
 
     public ScaffoldingComputer1(string program)
     {
         _sb = new StringBuilder();
-        _computer = new ComputerInterface(program, ReadInput, WriteOutput);
+        _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
     }
 
     public string Run()

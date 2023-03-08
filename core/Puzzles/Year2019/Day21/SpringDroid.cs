@@ -8,7 +8,7 @@ namespace Core.Puzzles.Year2019.Day21;
 
 public class SpringDroid
 {
-    private readonly ComputerInterface _computer;
+    private readonly IntCodeComputer _computer;
     private readonly IList<string> _commands;
     private List<char> _currentCommand;
 
@@ -16,7 +16,7 @@ public class SpringDroid
 
     public SpringDroid(string program, string script)
     {
-        _computer = new ComputerInterface(program, ReadInput, WriteOutput);
+        _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
         _currentCommand = new List<char>();
         _commands = PuzzleInputReader.ReadLines(script.Trim());
     }

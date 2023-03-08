@@ -27,7 +27,8 @@ public class Tetris
     public long Run(string input, long rockCount)
     {
         var inputLength = input.Length;
-        var heightDiffs = GetHeightDiffs(input, inputLength * 8).ToArray();
+        var rockCountUntilRepeat = inputLength * Shapes.Length;
+        var heightDiffs = GetHeightDiffs(input, rockCountUntilRepeat).ToArray();
         var cycle = CycleFinder.FindRepeatCycle(heightDiffs, 50, inputLength / 2);
 
         var startCount = cycle.Index;

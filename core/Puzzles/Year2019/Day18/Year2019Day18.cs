@@ -6,7 +6,7 @@ public class Year2019Day18 : Puzzle
 {
     public override string Title => "Many-Worlds Interpretation";
     public override string Comment => "Key Collector";
-    public override bool IsSlow => true;
+    public override bool IsSlow => true; // part 1: 58s, part 2: 9s
 
     public override PuzzleResult RunPart1()
     {

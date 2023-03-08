@@ -35,15 +35,11 @@ public class OxygenFiller
             }
 
             iterations += 1;
-
-            //Thread.Sleep(80);
-            //Console.SetCursorPosition(0, 0);
-            //Console.WriteLine(_matrix.Print(false, false));
         }
         return iterations;
     }
 
-    private IList<MatrixAddress> GetAddressesToFill()
+    private IEnumerable<MatrixAddress> GetAddressesToFill()
     {
         var unfilled = new List<MatrixAddress>();
         _matrix.MoveForward();

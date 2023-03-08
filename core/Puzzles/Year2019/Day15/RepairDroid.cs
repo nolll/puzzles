@@ -8,6 +8,10 @@ namespace Core.Puzzles.Year2019.Day15;
 
 public class RepairDroid
 {
+    private const int HitWall = 0;
+    private const int Moved = 1;
+    private const int Found = 2;
+
     private readonly ComputerInterface _computer;
     private readonly Matrix<char> _matrix;
     private int _steps;
@@ -37,18 +41,18 @@ public class RepairDroid
     {
         switch (output)
         {
-            case 0:
+            case HitWall:
                 _matrix.MoveForward();
                 _matrix.WriteValue('#');
                 _matrix.MoveBackward();
                 TurnToUnvisitedDirection();
                 break;
-            case 1:
+            case Moved:
                 _matrix.MoveForward();
                 _matrix.WriteValue('.');
                 TurnToUnvisitedDirection();
                 break;
-            case 2:
+            case Found:
                 _matrix.MoveForward();
                 _matrix.WriteValue('X');
                 break;

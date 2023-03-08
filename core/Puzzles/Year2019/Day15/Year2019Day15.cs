@@ -6,7 +6,7 @@ public class Year2019Day15 : Puzzle
 {
     public override string Title => "Oxygen System";
     public override string Comment => "Repair droid";
-    public override bool IsSlow => true;
+    public override bool IsSlow => true; // Time varies because of random. Can be more than 20 minutes
 
     // todo: speed up the matrix exploration code
     public override PuzzleResult RunPart1()

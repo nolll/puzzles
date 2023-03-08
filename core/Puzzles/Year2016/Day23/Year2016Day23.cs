@@ -7,7 +7,7 @@ public class Year2016Day23 : Puzzle
     public override string Title => "Safe Cracking";
 
     public override string Comment => "Factorial of 12";
-    public override bool IsSlow => true;
+    public override bool IsSlow => true; // 196s for part 2
 
     public override PuzzleResult RunPart1()
     {

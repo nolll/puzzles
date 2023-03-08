@@ -6,7 +6,7 @@ public class Year2019Day20 : Puzzle
 {
     public override string Title => "Donut Maze";
     public override string Comment => "Donut Maze";
-    public override bool IsSlow => true;
+    public override bool IsSlow => true; // More than 7 minutes
 
     public override PuzzleResult RunPart1()
     {

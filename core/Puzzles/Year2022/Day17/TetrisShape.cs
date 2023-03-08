@@ -31,7 +31,7 @@ public abstract class TetrisShape
     public abstract bool CanMoveDown(Matrix<char> matrix, MatrixAddress bottomLeft);
     public abstract void Paint(Matrix<char> matrix, MatrixAddress bottomLeft);
 
-    protected void Paint(Matrix<char> matrix, MatrixAddress bottomLeft, IEnumerable<MatrixAddress> deltas)
+    protected static void Paint(Matrix<char> matrix, MatrixAddress bottomLeft, IEnumerable<MatrixAddress> deltas)
     {
         var coords = TranslateCoords(bottomLeft, deltas);
         foreach (var coord in coords)

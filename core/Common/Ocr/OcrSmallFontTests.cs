@@ -1,8 +1,9 @@
 using NUnit.Framework;
+using System;
 
 namespace Core.Common.Ocr;
 
-public class OcrTests
+public class OcrSmallFontTests
 {
     [TestCase(InputA, 'A')]
     [TestCase(InputB, 'B')]
@@ -23,7 +24,7 @@ public class OcrTests
     [TestCase(InputZ, 'Z')]
     public void TestReadLetter(string input, char expected)
     {
-        var result = OcrReader.ReadLetter(input);
+        var result = OcrSmallFont.ReadLetter(input);
 
         Assert.That(result, Is.EqualTo(expected));
     }
@@ -31,7 +32,7 @@ public class OcrTests
     [Test]
     public void TestReadString()
     {
-        var result = OcrReader.ReadString(Input);
+        var result = OcrSmallFont.ReadString(Input);
 
         Assert.That(result, Is.EqualTo("ABC"));
     }

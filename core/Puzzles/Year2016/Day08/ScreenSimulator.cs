@@ -24,7 +24,7 @@ public class ScreenSimulator
 
         var pixelCount = _screen.Values.Count(o => o == '#');
         var printOut = _screen.Print();
-        var letters = OcrReader.ReadString(printOut);
+        var letters = OcrSmallFont.ReadString(printOut);
         return new ScreenSimulatorResult(pixelCount, printOut, letters);
     }
 

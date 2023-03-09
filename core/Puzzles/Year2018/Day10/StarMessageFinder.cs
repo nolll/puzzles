@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
+using Core.Common.Ocr;
 using Core.Common.Strings;
 
 namespace Core.Puzzles.Year2018.Day10;
 
 public class StarMessageFinder
 {
+    public string StarMessage { get; }
     public string Message { get; }
     public int IterationCount { get; }
 
@@ -26,13 +28,14 @@ public class StarMessageFinder
 
             if (yDiff == messageHeight)
             {
-                Message = PrintMessage(positions);
+                StarMessage = PrintMessage(positions);
+                Message = OcrLargeFont.ReadString(StarMessage);
                 return;
             }
         }
     }
 
-    private string PrintMessage(List<StarPosition> positions)
+    private static string PrintMessage(List<StarPosition> positions)
     {
         var yOffset = positions.Min(o => o.Y);
         var xOffset = positions.Min(o => o.X);
@@ -57,7 +60,7 @@ public class StarMessageFinder
     private StarPosition ParsePosition(string s)
     {
         var positionEndsAt = s.IndexOf(">", StringComparison.InvariantCulture) + 1;
-        var strPos = s.Substring(0, positionEndsAt);
+        var strPos = s[..positionEndsAt];
         var strVel = s.Replace(strPos, "");
 
         var tPos = ParseXy(strPos);

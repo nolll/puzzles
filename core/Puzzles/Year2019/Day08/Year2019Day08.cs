@@ -18,7 +18,7 @@ public class Year2019Day08 : Puzzle
     {
         var image = new SpaceImage(FileInput);
         var printedImage = image.Print();
-        var letters = OcrReader.ReadString(printedImage);
+        var letters = OcrSmallFont.ReadString(printedImage);
         return new PuzzleResult(letters, "KFABY");
     }
 }

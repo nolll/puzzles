@@ -66,7 +66,7 @@ public class CathodeRayTube
 
         var sum = values.Sum();
         var image = CreateImage(crt);
-        var letters = OcrReader.ReadString(image);
+        var letters = OcrSmallFont.ReadString(image);
         return (sum, letters, image);
     }
 

@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace Core.Common.Ocr;
 
-public static class OcrReader
+public static class OcrSmallFont
 {
     public static string ReadString(string crtImage)
     {
         const int charWidth = 5;
-        var rows = crtImage.Split("\n").Select(o => o.Trim()).ToList();
+        var rows = crtImage.Split(Environment.NewLine).Select(o => o.Trim()).ToList();
         var stringLength = (int)Math.Ceiling((double)rows.First().Length / charWidth);
         rows = rows.Select(o => o.PadRight(stringLength * charWidth, '.')).ToList();
         var s = "";
@@ -25,7 +25,7 @@ public static class OcrReader
 
     public static char ReadLetter(string crtLetter)
     {
-        var rows = crtLetter.Split("\n").Select(o => o.Trim().Replace(" ", ".")).ToList();
+        var rows = crtLetter.Split(Environment.NewLine).Select(o => o.Trim().Replace(" ", ".")).ToList();
         if (rows[0] == "###..")
         {
             if (rows[5] == "###..")
@@ -50,7 +50,7 @@ public static class OcrReader
 
             return 'A';
         }
-        
+
         if (rows[0] == "####.")
         {
             if (rows[5] == "#....")
@@ -74,24 +74,16 @@ public static class OcrReader
         }
 
         if (rows[0] == "#....")
-        {
             return 'L';
-        }
 
         if (rows[0] == "#...#")
-        {
             return 'Y';
-        }
 
         if (rows[0] == ".###.")
-        {
             return 'I';
-        }
 
         if (rows[0] == "..##.")
-        {
             return 'J';
-        }
 
         return ' ';
     }

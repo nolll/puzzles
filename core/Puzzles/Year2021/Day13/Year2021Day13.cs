@@ -19,7 +19,7 @@ public class Year2021Day13 : Puzzle
     {
         var paper = new TransparentPaper(FileInput);
         var result = paper.MessageAfterFold();
-        var letters = OcrReader.ReadString(result);
+        var letters = OcrSmallFont.ReadString(result);
 
         return new PuzzleResult(letters, "GJZGLUPJ");
     }

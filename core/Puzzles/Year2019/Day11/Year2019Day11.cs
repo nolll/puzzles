@@ -22,7 +22,7 @@ public class Year2019Day11 : Puzzle
         var robot2 = new PaintRobot(FileInput);
         var result2 = robot2.Paint(true);
         var printout = CleanPrintout(result2.Printout);
-        var letters = OcrReader.ReadString(printout);
+        var letters = OcrSmallFont.ReadString(printout);
 
         return new PuzzleResult(letters, "ABCLFUHJ");
     }

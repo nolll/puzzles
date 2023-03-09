@@ -28,8 +28,9 @@ public class Year2019Day05 : Puzzle
     private long ReadInputPart1() => 1;
     private long ReadInputPart2() => 5;
 
-    private void WriteOutput(long output)
+    private bool WriteOutput(long output)
     {
         _output = output;
+        return true;
     }
 }

@@ -137,9 +137,10 @@ public class InvestigationDroid
         return Console.Read();
     }
 
-    private void WriteOutput(long output)
+    private bool WriteOutput(long output)
     {
         _output.Append((char)output);
         //Console.Write((char)output);
+        return true;
     }
 }

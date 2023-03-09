@@ -57,8 +57,9 @@ public class ScaffoldingComputer2
         return 0;
     }
 
-    private void WriteOutput(long output)
+    private bool WriteOutput(long output)
     {
         _output = output;
+        return true;
     }
 }

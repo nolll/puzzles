@@ -12,14 +12,14 @@ public class IntCodeProcess
     private int _pointer;
     private int _relativeBase;
 
-    private readonly Action<long> _writeOutputFunc;
+    private readonly Func<long, bool> _writeOutputFunc;
     private readonly Func<long> _readInputFunc;
     public IList<long> Memory => _memory;
     private bool _stop = false;
 
     public long Result => ReadFromMemory(0); 
 
-    public IntCodeProcess(IList<long> memory, bool haltAfterInput, Func<long> readInputFunc, Action<long> writeOutputFunc)
+    public IntCodeProcess(IList<long> memory, bool haltAfterInput, Func<long> readInputFunc, Func<long, bool> writeOutputFunc)
     {
         _memory = memory;
         _haltAfterInput = haltAfterInput;
@@ -57,7 +57,11 @@ public class IntCodeProcess
             }
 
             if (instruction.Type == InstructionType.Output)
-                PerformOutput(instruction);
+            {
+                var shouldContinue = PerformOutput(instruction);
+                if (!shouldContinue)
+                    break;
+            }
 
             if (instruction.Type == InstructionType.JumpIfTrue)
                 PerformJumpIfTrue(instruction);
@@ -130,12 +134,12 @@ public class IntCodeProcess
         IncrementPointer(instruction);
     }
 
-    private void PerformOutput(Instruction instruction)
+    private bool PerformOutput(Instruction instruction)
     {
         var a = ReadParam(instruction.Parameters[0]);
 
         IncrementPointer(instruction);
-        _writeOutputFunc(a);
+        return _writeOutputFunc(a);
     }
 
     private void PerformJumpIfTrue(Instruction instruction)

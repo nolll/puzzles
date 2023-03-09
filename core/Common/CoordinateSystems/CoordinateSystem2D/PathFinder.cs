@@ -6,6 +6,13 @@ namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 public static class PathFinder
 {
+    public static int StepCountTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    {
+        var coordCounts = GetCoordCounts(matrix, from, to);
+        var goal = coordCounts.FirstOrDefault(o => o.X == to.X && o.Y == to.Y);
+        return goal?.Count ?? 0;
+    }
+
     public static int CachedStepCountTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         return CachedStepCountTo(matrix, new List<MatrixAddress>{ from }, to);

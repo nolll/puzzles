@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Core.Common.Computers.IntCode;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
@@ -12,33 +11,43 @@ public class RepairDroid
     private const int Moved = 1;
     private const int Found = 2;
 
-    private readonly IntCodeComputer _computer;
+    private IntCodeComputer _computer;
     private readonly Matrix<char> _matrix;
-    private int _steps;
-    private DroidDirection NextDirection => GetDroidDirection();
-    private readonly Random _random;
+    private readonly Queue<(MatrixAddress, MatrixDirection, IntCodeComputer)> _queue;
+    private MatrixAddress _target;
 
     public RepairDroid(string program)
     {
-        //Console.Clear();
         _computer = new IntCodeComputer(MemoryParser.Parse(program), ReadInput, WriteOutput);
-        _matrix = new Matrix<char>();
-        _random = new Random();
+        _matrix = new Matrix<char>(defaultValue: ' ');
+        _queue = new Queue<(MatrixAddress, MatrixDirection, IntCodeComputer)>();
     }
 
-    public int Run()
+    public (int, Matrix<char>) Run()
     {
-        _steps = 0;
         _computer.Start();
-        return _steps;
+
+        while (_queue.Any())
+        {
+            var (address, direction, computer) = _queue.Dequeue();
+            _matrix.MoveTo(address);
+            _matrix.TurnTo(direction);
+            _computer = computer;
+            computer.Start();
+        }
+
+        _matrix.MoveTo(_matrix.StartAddress);
+
+        var path = PathFinder.ShortestPathTo(_matrix, _matrix.StartAddress, _target);
+        return (path.Count, _matrix);
     }
 
     private long ReadInput()
     {
-        return (int)NextDirection;
+        return (int)GetDroidDirection();
     }
 
-    private void WriteOutput(long output)
+    private bool WriteOutput(long output)
     {
         switch (output)
         {
@@ -46,64 +55,52 @@ public class RepairDroid
                 _matrix.MoveForward();
                 _matrix.WriteValue('#');
                 _matrix.MoveBackward();
-                TurnToUnvisitedDirection();
                 break;
             case Moved:
                 _matrix.MoveForward();
                 _matrix.WriteValue('.');
-                TurnToUnvisitedDirection();
                 break;
             case Found:
                 _matrix.MoveForward();
                 _matrix.WriteValue('X');
+                _target = _matrix.Address;
                 break;
         }
 
-        //Console.WriteLine(_matrix.Print());
-        //Console.SetCursorPosition(0, 0);
-    }
-
-    private void TurnToUnvisitedDirection()
-    {
         var directions = FindUnvisitedDirections();
-        if (!directions.Any())
+        _computer.Stop();
+        foreach (var direction in directions)
         {
-            directions = new List<MatrixDirection>
-            {
-                MatrixDirection.Up,
-                MatrixDirection.Right,
-                MatrixDirection.Down,
-                MatrixDirection.Left
-            };
+            _queue.Enqueue((_matrix.Address, direction, _computer.Clone()));
         }
-        var rnd = _random.Next(directions.Count);
-        _matrix.TurnTo(directions[rnd]);
+        
+        return false;
     }
 
-    private IList<MatrixDirection> FindUnvisitedDirections()
+    private IEnumerable<MatrixDirection> FindUnvisitedDirections()
     {
         var directions = new List<MatrixDirection>();
         
         _matrix.MoveForward();
-        if (_matrix.ReadValue() == '\0')
+        if (_matrix.ReadValue() == ' ')
             directions.Add(_matrix.Direction);
         _matrix.MoveBackward();
         _matrix.TurnRight();
 
         _matrix.MoveForward();
-        if (_matrix.ReadValue() == '\0')
+        if (_matrix.ReadValue() == ' ')
             directions.Add(_matrix.Direction);
         _matrix.MoveBackward();
         _matrix.TurnRight();
 
         _matrix.MoveForward();
-        if (_matrix.ReadValue() == '\0')
+        if (_matrix.ReadValue() == ' ')
             directions.Add(_matrix.Direction);
         _matrix.MoveBackward();
         _matrix.TurnRight();
 
         _matrix.MoveForward();
-        if (_matrix.ReadValue() == '\0')
+        if (_matrix.ReadValue() == ' ')
             directions.Add(_matrix.Direction);
         _matrix.MoveBackward();
         _matrix.TurnRight();

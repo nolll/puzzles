@@ -300,7 +300,7 @@ public class Matrix<T> : BaseMatrix
             sb.AppendLine();
         }
 
-        return sb.ToString().Trim();
+        return sb.ToString();
     }
 
     public IList<MatrixAddress> FindAddresses(T value)

@@ -58,9 +58,11 @@ public class TractorBeamComputer1
         }
     }
 
-    private void WriteOutput(long output)
+    private bool WriteOutput(long output)
     {
         if (output == 1)
             _count += 1;
+
+        return true;
     }
 }

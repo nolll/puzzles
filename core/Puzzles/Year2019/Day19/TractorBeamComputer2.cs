@@ -68,8 +68,9 @@ public class TractorBeamComputer2
         }
     }
 
-    private void WriteOutput(long output)
+    private bool WriteOutput(long output)
     {
         _output = (int)output;
+        return true;
     }
 }

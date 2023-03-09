@@ -43,21 +43,21 @@ public class Arcade
         return 0;
     }
 
-    private void WriteOutput(long output)
+    private bool WriteOutput(long output)
     {
         var value = (int) output;
         if (_mode == ArcadeMode.X)
         {
             _x = value;
             _mode = ArcadeMode.Y;
-            return;
+            return true;
         }
 
         if (_mode == ArcadeMode.Y)
         {
             _y = value;
             _mode = ArcadeMode.Type;
-            return;
+            return true;
         }
 
         if (_x == -1 && _y == 0)
@@ -78,7 +78,10 @@ public class Arcade
                 _paddleX = _x;
             }
         }
+
         _mode = ArcadeMode.X;
+
+        return true;
     }
 
     private void PrintScreen()

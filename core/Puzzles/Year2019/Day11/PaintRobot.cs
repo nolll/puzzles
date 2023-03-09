@@ -52,7 +52,7 @@ public class PaintRobot
         _panels.WriteValue(1);
     }
 
-    private void WriteOutput(long output)
+    private bool WriteOutput(long output)
     {
         if (_mode == PaintMode.Paint)
         {
@@ -69,6 +69,8 @@ public class PaintRobot
             _panels.MoveForward();
             _mode = PaintMode.Paint;
         }
+
+        return true;
     }
 
     public class Result

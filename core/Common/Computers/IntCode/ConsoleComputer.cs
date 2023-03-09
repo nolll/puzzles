@@ -15,8 +15,9 @@ public class ConsoleComputer : IntCodeComputer
         return int.Parse(str);
     }
 
-    private static void WriteOutput(long output)
+    private static bool WriteOutput(long output)
     {
         Console.WriteLine(output);
+        return true;
     }
 }

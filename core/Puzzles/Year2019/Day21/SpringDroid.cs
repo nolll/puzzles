@@ -49,11 +49,13 @@ public class SpringDroid
         return Console.Read();
     }
 
-    private void WriteOutput(long output)
+    private bool WriteOutput(long output)
     {
         if (output > 200)
             HullDamage = output;
         //else
         //    Console.Write((char)output);
+
+        return true;
     }
 }

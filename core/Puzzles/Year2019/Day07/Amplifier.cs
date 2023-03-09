@@ -27,10 +27,11 @@ public class Amplifier
         return Phase;
     }
 
-    private void ComputerOutput(long output)
+    private bool ComputerOutput(long output)
     {
         Output = output;
         NextAmp?.Start(output);
+        return true;
     }
 
     public void Start(long input)

@@ -1,26 +1,25 @@
-﻿using Core.Platform;
+﻿using Core.Common.CoordinateSystems.CoordinateSystem2D;
+using Core.Platform;
 
 namespace Core.Puzzles.Year2019.Day15;
 
 public class Year2019Day15 : Puzzle
 {
+    private Matrix<char> _map;
     public override string Title => "Oxygen System";
-    public override string Comment => "Repair droid";
-    public override bool IsSlow => true; // Time varies because of random. Can be more than 20 minutes
 
-    // todo: speed up the matrix exploration code
     public override PuzzleResult RunPart1()
     {
-        // VERY SLOW
         var droid = new RepairDroid(FileInput);
-        var result1 = droid.Run();
+        var (result, map) = droid.Run();
+        _map = map;
 
-        return new PuzzleResult(result1, 424);
+        return new PuzzleResult(result, 424);
     }
 
     public override PuzzleResult RunPart2()
     {
-        var filler = new OxygenFiller(GeneratedMapFromStep1);
+        var filler = new OxygenFiller(_map);
         var result = filler.Fill();
 
         return new PuzzleResult(result, 446);

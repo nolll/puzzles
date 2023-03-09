@@ -25,8 +25,9 @@ public class ScaffoldingComputer1
         return 0;
     }
 
-    private void WriteOutput(long output)
+    private bool WriteOutput(long output)
     {
         _sb.Append((char)output);
+        return true;
     }
 }

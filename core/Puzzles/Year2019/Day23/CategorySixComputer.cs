@@ -76,7 +76,7 @@ public class CategorySixComputer
         return 0;
     }
 
-    private void WriteOutput(long output)
+    private bool WriteOutput(long output)
     {
         if (_outputMode == CategorySixComputerMode.Address)
         {
@@ -94,6 +94,8 @@ public class CategorySixComputer
             _outputMode = CategorySixComputerMode.Address;
             _sendPacketFunc(_outputAddress, new CategorySixPacket(_outputX, _outputY));
         }
+
+        return true;
     }
 
     public void ReceivePacket(CategorySixPacket packet)

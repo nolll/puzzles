@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.CoordinateSystems.CoordinateSystem2D;
@@ -6,11 +7,18 @@ namespace Core.Puzzles.Year2019.Day15;
 
 public class OxygenFiller
 {
-    private readonly Matrix<char> _matrix; 
+    private readonly Matrix<char> _matrix;
+
+    public OxygenFiller(Matrix<char> matrix)
+    {
+        matrix.MoveTo(matrix.StartAddress);
+        matrix.TurnTo(MatrixDirection.Up);
+        _matrix = matrix;
+    }
 
     public OxygenFiller(string map)
+        : this(MatrixBuilder.BuildCharMatrix(map.Replace(' ', '#'), ' '))
     {
-        _matrix = BuildMatrix(map.Replace(' ', '#'));
     }
 
     public int Fill()
@@ -22,76 +30,20 @@ public class OxygenFiller
             var addressesToFill = new List<MatrixAddress>();
             foreach (var a in recentlyFilledAddresses)
             {
-                _matrix.MoveTo(a);
-                addressesToFill.AddRange(GetAddressesToFill());
+                var validAddresses = _matrix.PerpendicularAdjacentCoordsTo(a).Where(o => _matrix.ReadValueAt(o) == '.');
+                addressesToFill.AddRange(validAddresses);
             }
 
             recentlyFilledAddresses.Clear();
             foreach (var atf in addressesToFill)
             {
-                _matrix.MoveTo(atf);
-                _matrix.WriteValue('O');
+                _matrix.WriteValueAt(atf, 'O');
                 recentlyFilledAddresses.Add(atf);
             }
 
             iterations += 1;
         }
+
         return iterations;
-    }
-
-    private IEnumerable<MatrixAddress> GetAddressesToFill()
-    {
-        var unfilled = new List<MatrixAddress>();
-        _matrix.MoveForward();
-        var v = _matrix.ReadValue();
-        if (v == '.')
-            unfilled.Add(_matrix.Address);
-        _matrix.MoveBackward();
-
-        _matrix.TurnTo(MatrixDirection.Right);
-        _matrix.MoveForward();
-        v = _matrix.ReadValue();
-        if (v == '.')
-            unfilled.Add(_matrix.Address);
-        _matrix.MoveBackward();
-
-        _matrix.TurnTo(MatrixDirection.Down);
-        _matrix.MoveForward();
-        v = _matrix.ReadValue();
-        if (v == '.')
-            unfilled.Add(_matrix.Address);
-        _matrix.MoveBackward();
-
-        _matrix.TurnTo(MatrixDirection.Left);
-        _matrix.MoveForward();
-        v = _matrix.ReadValue();
-        if (v == '.')
-            unfilled.Add(_matrix.Address);
-        _matrix.MoveBackward();
-
-        _matrix.TurnTo(MatrixDirection.Up);
-        return unfilled;
-    }
-
-    private static Matrix<char> BuildMatrix(string map)
-    {
-        var matrix = new Matrix<char>();
-        var rows = map.Split("\r\n");
-        var y = 0;
-        foreach (var row in rows)
-        {
-            var x = 0;
-            var chars = row.ToCharArray();
-            foreach (var c in chars)
-            {
-                matrix.MoveTo(x, y);
-                matrix.WriteValue(c);
-                x += 1;
-            }
-
-            y += 1;
-        }
-
-        return matrix;
     }
 }

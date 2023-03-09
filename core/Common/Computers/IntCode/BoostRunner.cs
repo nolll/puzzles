@@ -30,10 +30,11 @@ public class BoostRunner
         return _mode;
     }
 
-    public void WriteOutput(long output)
+    public bool WriteOutput(long output)
     {
         _lastOutput = output;
         _outputs.Add(output);
+        return true;
     }
 
     public class Result

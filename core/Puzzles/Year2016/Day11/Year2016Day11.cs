@@ -7,7 +7,7 @@ public class Year2016Day11 : Puzzle
     public override string Title => "Radioisotope Thermoelectric Generators";
 
     public override string Comment => "Floor permutations";
-    public override bool IsSlow => true; // 47s for part 2
+    public override bool IsSlow => true; // 17s for part 2
 
     public override PuzzleResult RunPart1()
     {

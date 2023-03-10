@@ -19,10 +19,10 @@ public class DonutMazeSolver
         ShortestStepCount = stepCounts.First().Distance;
     }
 
-    private static IList<PortalPath> StepCountsTo(IDictionary<string, int> portalConnections, string startPortal, string targetPortal)
+    private static IEnumerable<PortalPath> StepCountsTo(IDictionary<string, int> portalConnections, string startPortal, string targetPortal)
     {
         var completePaths = new List<PortalPath>();
-        var queue = new List<PortalPath> {new PortalPath(0, startPortal, new List<string> {"AA"})};
+        var queue = new List<PortalPath> {new(0, startPortal, new List<string> {"AA"})};
         while (queue.Any())
         {
             var path = queue.First();
@@ -46,7 +46,6 @@ public class DonutMazeSolver
                         var newPath = new PortalPath(distance, otherId, path.PassedPortals.Concat(new List<string> { otherId }).ToList());
                         queue.Add(newPath);
                     }
-
                 }
             }
         }
@@ -94,15 +93,11 @@ public class DonutMazeSolver
         return connections;
     }
 
-    private static string GetPortalDistanceId(DonutPortalAddress a, DonutPortalAddress b)
-    {
-        return GetPortalDistanceId(a.Name, b.Name);
-    }
+    private static string GetPortalDistanceId(DonutPortalAddress a, DonutPortalAddress b) 
+        => GetPortalDistanceId(a.Name, b.Name);
 
-    private static string GetPortalDistanceId(string a, string b)
-    {
-        return string.Join('-', new[] { a, b }.OrderBy(o => o));
-    }
+    private static string GetPortalDistanceId(string a, string b) 
+        => string.Join('-', new[] { a, b }.OrderBy(o => o));
 
     private IList<DonutPortalAddress> FindPortals()
     {
@@ -112,48 +107,27 @@ public class DonutMazeSolver
         {
             var currentCoords = letterCoords.First();
             letterCoords.RemoveAt(0);
-            _map.MoveTo(currentCoords);
-            var secondsLetterCoords = _map.PerpendicularAdjacentCoords.First(o => IsLetter(_map.ReadValueAt(o)));
+            var secondsLetterCoords = _map.PerpendicularAdjacentCoordsTo(currentCoords).First(o => IsLetter(_map.ReadValueAt(o)));
             var firstLetter = _map.ReadValueAt(currentCoords);
             var secondLetter = _map.ReadValueAt(secondsLetterCoords);
             letterCoords.Remove(secondsLetterCoords);
-            _map.MoveTo(currentCoords);
-            _map.WriteValue('#');
-            _map.MoveTo(secondsLetterCoords);
-            _map.WriteValue('#');
-            var secondLetterHasAdjacentCorridor = _map.PerpendicularAdjacentValues.Any(o => o == '.');
-            _map.MoveTo(currentCoords);
+            _map.WriteValueAt(currentCoords, '#');
+            _map.WriteValueAt(secondsLetterCoords, '#');
+            var secondLetterHasAdjacentCorridor = _map.PerpendicularAdjacentValuesTo(secondsLetterCoords).Any(o => o == '.');
             var name = string.Concat(firstLetter, secondLetter);
             var portalAddress = secondLetterHasAdjacentCorridor ? secondsLetterCoords : currentCoords;
-            _map.MoveTo(portalAddress);
-            _map.WriteValue('.');
+            _map.WriteValueAt(portalAddress, '.');
             var portal = new DonutPortalAddress(name, portalAddress);
             portals.Add(portal);
         }
         return portals;
     }
 
-    private IEnumerable<MatrixAddress> FindLetterCoords()
-    {
-        for (var y = 0; y < _map.Height; y++)
-        {
-            for (var x = 0; x < _map.Width; x++)
-            {
-                _map.MoveTo(x, y);
-                var value = _map.ReadValue();
-                if(IsLetter(value))
-                    yield return _map.Address;
-            }
-        }
-    }
-
-    private static bool IsLetter(char c)
-    {
-        return c != '#' && c != '.';
-    }
-
-    private void BuildMap(string input)
-    {
-        _map = MatrixBuilder.BuildCharMatrix(input.Replace(' ', '#'));
-    }
+    private IEnumerable<MatrixAddress> FindLetterCoords() 
+        => _map.Coords.Where(coord => IsLetter(_map.ReadValueAt(coord)));
+    
+    private static bool IsLetter(char c) => c != '#' && c != '.';
+    
+    private void BuildMap(string input) 
+        => _map = MatrixBuilder.BuildCharMatrix(input.Replace(' ', '#'));
 }

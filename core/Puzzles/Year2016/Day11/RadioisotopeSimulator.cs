@@ -19,7 +19,7 @@ public class RadioisotopeSimulator
         StepCount = finishedFacility?.IterationCount ?? 0;
     }
 
-    private RadioisotopeFacility FindFinishedFacility(IList<RadioisotopeFacility> facilities)
+    private RadioisotopeFacility FindFinishedFacility(IEnumerable<RadioisotopeFacility> facilities)
     {
         var newFacilities = new List<RadioisotopeFacility>();
         foreach (var facility in facilities)
@@ -41,10 +41,8 @@ public class RadioisotopeSimulator
                     if (!AlreadyVisited(f))
                     {
                         TrackVisit(f);
-                        if (f.IsValid)
-                        {
+                        if (f.IsValid) 
                             newFacilities.Add(f);
-                        }
                     }
                 }
             }
@@ -74,20 +72,19 @@ public class RadioisotopeSimulator
 
         if (!newFacilities.Any())
             return null;
+
         var finishedFacility = newFacilities.FirstOrDefault(o => o.IsDone);
-        if (finishedFacility != null)
-            return finishedFacility;
-        return FindFinishedFacility(newFacilities);
+        return finishedFacility ?? FindFinishedFacility(newFacilities);
     }
 
     private bool AlreadyVisited(RadioisotopeFacility f)
     {
-        return _previousFacilities.Contains(f.AnonymizedId);
+        return _previousFacilities.Contains(f.AnonymizedAnonymizedId);
     }
 
     private void TrackVisit(RadioisotopeFacility f)
     {
-        _previousFacilities.Add(f.AnonymizedId);
+        _previousFacilities.Add(f.AnonymizedAnonymizedId);
     }
 
     private RadioisotopeFacility ParseFacility(string input)
@@ -96,7 +93,7 @@ public class RadioisotopeSimulator
         return new RadioisotopeFacility(strFloors.Select(ParseFloor).ToList(), 0);
     }
 
-    private RadioisotopeFloor ParseFloor(string s)
+    private static RadioisotopeFloor ParseFloor(string s)
     {
         s = s.Replace(" microchip", "-microchip").Replace(" generator", "-generator").Replace(",", "").Replace(".", "");
         var parts = s.Split(" ");
@@ -107,7 +104,7 @@ public class RadioisotopeSimulator
         return new RadioisotopeFloor(items);
     }
 
-    private RadioisotopeItem CreateItem(string s)
+    private static RadioisotopeItem CreateItem(string s)
     {
         var parts = s.Split('-');
         var name = parts.First();

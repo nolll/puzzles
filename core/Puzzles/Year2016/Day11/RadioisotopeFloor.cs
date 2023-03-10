@@ -19,10 +19,7 @@ public class RadioisotopeFloor
         {
             var microchips = Items.Where(o => o.Type == RadioisotopeType.Microchip).ToList();
             var generators = Items.Where(o => o.Type == RadioisotopeType.Generator).ToList();
-            if (!generators.Any())
-                return true;
-
-            return microchips.All(microchip => generators.Any(o => o.Name == microchip.Name));
+            return !generators.Any() || microchips.All(microchip => generators.Any(o => o.Name == microchip.Name));
         }
     }
 }

@@ -168,7 +168,7 @@ The fourth floor contains nothing relevant.
         };
 
         var facility = new RadioisotopeFacility(floors, 0);
-        Assert.That(facility.AnonymizedId, Is.EqualTo("0:1X1Y2Y||2X|"));
+        Assert.That(facility.AnonymizedAnonymizedId, Is.EqualTo("0:1X1Y2Y||2X|"));
     }
 
     [Test]

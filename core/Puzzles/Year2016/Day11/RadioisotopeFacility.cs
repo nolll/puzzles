@@ -6,21 +6,23 @@ namespace Core.Puzzles.Year2016.Day11;
 
 public class RadioisotopeFacility
 {
+    private string _id;
+    private string _anonymizedId;
+
     public IList<RadioisotopeFloor> Floors { get; }
-    public int ItemCount => Floors.Sum(o => o.Items.Count);
-    public int TopFloorItemCount => Floors.Last().Items.Count;
+    private int ItemCount => Floors.Sum(o => o.Items.Count);
+    private int TopFloorItemCount => Floors.Last().Items.Count;
     public bool IsDone => TopFloorItemCount == ItemCount;
     public int IterationCount { get; }
     public int ElevatorFloor { get; }
-    public bool CanMoveUp => ElevatorFloor < 3;
-    public bool CanMoveDown => ElevatorFloor > 0;
+    private bool CanMoveUp => ElevatorFloor < 3;
+    private bool CanMoveDown => ElevatorFloor > 0;
     public bool ShouldMoveUp => CanMoveUp;
     public bool ShouldMoveDown => CanMoveDown && NeedToMoveDown;
     public bool IsValid => Floors.All(o => o.IsValid);
-    public string Id => $"{ElevatorFloor}:{FloorIds}";
     private string FloorIds => string.Join('|', Floors.Select(o => o.Id));
 
-    public RadioisotopeFacility(List<RadioisotopeFloor> floors, int elevatorFloor)
+    public RadioisotopeFacility(IList<RadioisotopeFloor> floors, int elevatorFloor)
     {
         Floors = floors;
         IterationCount = 0;
@@ -34,7 +36,7 @@ public class RadioisotopeFacility
         ElevatorFloor = elevatorFloor;
     }
 
-    private IList<RadioisotopeFloor> CopyFloors(RadioisotopeFacility facility)
+    private static IList<RadioisotopeFloor> CopyFloors(RadioisotopeFacility facility)
     {
         return facility.Floors.Select(CopyFloor).ToList();
     }
@@ -65,7 +67,7 @@ public class RadioisotopeFacility
         return string.Join(Environment.NewLine, strings);
     }
 
-    public bool NeedToMoveDown
+    private bool NeedToMoveDown
     {
         get
         {
@@ -79,21 +81,36 @@ public class RadioisotopeFacility
         }
     }
 
-    public string AnonymizedId
+    public string Id
     {
         get
         {
-            var id = Id;
+            if (_id != null)
+                return _id;
+
+            _id = $"{ElevatorFloor}:{FloorIds}";
+            return _id;
+        }
+    }
+
+    public string AnonymizedAnonymizedId
+    {
+        get
+        {
+            if (_anonymizedId != null)
+                return _anonymizedId;
+
+            _anonymizedId = Id;
             var counter = 1;
-            while (id.Contains('G'))
+            while (_anonymizedId.Contains('G'))
             {
-                var n = id[id.IndexOf('G') - 1];
-                id = id.Replace(string.Concat(n, 'G'), string.Concat(counter, 'X'))
+                var n = _anonymizedId[_anonymizedId.IndexOf('G') - 1];
+                _anonymizedId = _anonymizedId.Replace(string.Concat(n, 'G'), string.Concat(counter, 'X'))
                     .Replace(string.Concat(n, 'M'), string.Concat(counter, 'Y'));
                 counter++;
             }
 
-            return id;
+            return _anonymizedId;
         }
     }
 }

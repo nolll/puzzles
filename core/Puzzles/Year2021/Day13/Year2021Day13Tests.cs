@@ -17,7 +17,7 @@ public class Year2021Day13Tests
     public void Part2()
     {
         var paper = new TransparentPaper(Input);
-        var result = paper.MessageAfterFold();
+        var result = paper.MessageAfterFold().Trim();
 
         Assert.That(result, Is.EqualTo(Result.Trim()));
     }

@@ -6,21 +6,9 @@ namespace Core.Common.CoordinateSystems.CoordinateSystem2D;
 
 public static class PathFinder
 {
-    public static int StepCountTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
-    {
-        var coordCounts = GetCoordCounts(matrix, from, to);
-        var goal = coordCounts.FirstOrDefault(o => o.X == to.X && o.Y == to.Y);
-        return goal?.Count ?? 0;
-    }
-
     public static int CachedStepCountTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
-        return CachedStepCountTo(matrix, new List<MatrixAddress>{ from }, to);
-    }
-
-    public static int CachedStepCountTo(Matrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
-    {
-        var coordCounts = CachedGetCoordCounts(matrix, from, to);
+        var coordCounts = CachedGetCoordCounts(matrix, new List<MatrixAddress> { from }, to);
         var goal = coordCounts.FirstOrDefault(o => o.X == to.X && o.Y == to.Y);
         return goal?.Count ?? 0;
     }
@@ -28,37 +16,6 @@ public static class PathFinder
     public static IList<MatrixAddress> ShortestPathTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
-        var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
-        foreach (var coordCount in coordCounts)
-        {
-            pathMatrix.MoveTo(coordCount.X, coordCount.Y);
-            pathMatrix.WriteValue(coordCount.Count);
-        }
-
-        var path = new List<MatrixAddress>();
-        var currentAddress = from;
-        while (!currentAddress.Equals(to))
-        {
-            pathMatrix.MoveTo(currentAddress);
-            var adjacentCoords = pathMatrix.PerpendicularAdjacentCoords
-                .Where(o => pathMatrix.ReadValueAt(o) > -1)
-                .OrderBy(o => pathMatrix.ReadValueAt(o))
-                .ThenBy(o => o.Y)
-                .ThenBy(o => o.X)
-                .ToList();
-            var bestAddress = adjacentCoords.FirstOrDefault();
-            if (bestAddress == null)
-                break;
-            currentAddress = new MatrixAddress(bestAddress.X, bestAddress.Y);
-            path.Add(currentAddress);
-        }
-
-        return path;
-    }
-
-    public static IList<MatrixAddress> CachedShortestPathTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
-    {
-        var coordCounts = CachedGetCoordCounts(matrix, new List<MatrixAddress>{ from }, to);
         var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
         foreach (var coordCount in coordCounts)
         {

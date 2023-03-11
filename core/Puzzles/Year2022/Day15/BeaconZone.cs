@@ -76,7 +76,7 @@ public class BeaconZone
         return 0;
     }
 
-    private List<Interval> GetIntervalsForRow(int row, int minX, int maxX, Dictionary<MatrixAddress, int> beaconDistances)
+    private static List<Interval> GetIntervalsForRow(int row, int minX, int maxX, Dictionary<MatrixAddress, int> beaconDistances)
     {
         var intervals = new List<Interval>();
 

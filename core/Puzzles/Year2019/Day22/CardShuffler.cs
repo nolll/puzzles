@@ -47,11 +47,7 @@ public class CardShuffler
 
     public IList<int> Shuffle(int deckSize, string input)
     {
-        var deck = new List<int>();
-        for (var i = 0; i < deckSize; i++)
-        {
-            deck.Add(i);
-        }
+        var deck = Enumerable.Range(0, deckSize).ToList();
 
         return Shuffle(deck, input.Trim().Split('\n').Select(o => o.Trim()).ToList());
     }

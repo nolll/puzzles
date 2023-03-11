@@ -2,7 +2,6 @@ using NUnit.Framework;
 
 namespace Core.Puzzles.Year2018.Day22;
 
-// todo: fix test
 public class Year2018Day22Tests
 {
     private const long Depth = 510;

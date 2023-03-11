@@ -8,13 +8,13 @@ public class Year2022Day22Tests
     [Test]
     public void Part1()
     {
-        var puzzle = new Year2022Day22();
         var result = Year2022Day22.Part1(Input);
 
         Assert.That(result, Is.EqualTo(6032));
     }
 
-    // todo: write tests for part 2 test data (separate mapping, or sort out general mapping). There are tests for the mapping of the real data though
+    // todo: write tests for part 2 test data (separate mapping, or sort out general mapping).
+    // There are tests for the mapping of the real data though
     
     //[Test]
     //public void Part2()

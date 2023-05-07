@@ -14,6 +14,7 @@ public class KeyGenerator
     private readonly IDictionary<int, string> _hashes;
     private readonly Dictionary<byte, byte[]> _byteCache;
     private readonly Dictionary<int, bool> _fiveInARowCache;
+    private readonly Dictionary<char, string> _repeatedCharCache;
     private static readonly Regex RepeatingCharsRegex = new("(.)\\1{2,}");
     private static readonly Regex FiveInARowRegex = new("(.)\\1{4,}");
 
@@ -23,6 +24,7 @@ public class KeyGenerator
         _hashes = new Dictionary<int, string>();
         _byteCache = BuildByteCache();
         _fiveInARowCache = new Dictionary<int, bool>();
+        _repeatedCharCache = new Dictionary<char, string>();
     }
 
     public int GetIndexOf64ThKey(string salt, int stretchCount = 0)
@@ -47,8 +49,7 @@ public class KeyGenerator
         var repeatingChar = GetRepeatingChar(hash);
         if (repeatingChar != null)
         {
-            var searchFor = new string(repeatingChar.Value, 5);
-            if (Next1000HashesHasFiveInARowOf(salt, index + 1, searchFor, stretchCount))
+            if (Next1000HashesHasFiveInARowOf(salt, index + 1, repeatingChar.Value, stretchCount))
             {
                 return true;
             }
@@ -66,7 +67,7 @@ public class KeyGenerator
         return null;
     }
 
-    private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, string searchFor, int stretchCount)
+    private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, char searchFor, int stretchCount)
     {
         var count = 0;
         while (count < 1000)
@@ -99,9 +100,19 @@ public class KeyGenerator
         return match.Success;
     }
 
-    public static bool HashHasFiveInARowOf(string hash, string searchFor)
+    public bool HashHasFiveInARowOf(string hash, char searchFor)
     {
-        return hash.Contains(searchFor);
+        return hash.Contains(GetSearchString(searchFor));
+    }
+
+    private string GetSearchString(char searchFor)
+    {
+        if (_repeatedCharCache.TryGetValue(searchFor, out var s))
+            return s;
+
+        s = new string(searchFor, 5);
+        _repeatedCharCache.Add(searchFor, s);
+        return s;
     }
 
     public string GetHash(string salt, int index, int stretchCount)

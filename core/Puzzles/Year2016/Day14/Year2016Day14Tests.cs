@@ -62,8 +62,7 @@ public class Year2016Day14Tests
     [TestCase("bbaab010101010101010", false)]
     public void FiveInARow(string str, bool expected)
     {
-        var searchFor = new string('a', 5);
-        var hasFiveInARow = KeyGenerator.HashHasFiveInARowOf(str, searchFor);
+        var hasFiveInARow = new KeyGenerator().HashHasFiveInARowOf(str, 'a');
 
         Assert.That(hasFiveInARow, Is.EqualTo(expected));
     }

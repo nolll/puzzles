@@ -1,0 +1,18 @@
+namespace Aoc.Puzzles.Year2016.Day15;
+
+public class KineticSculptureDisc
+{
+    private readonly int _positions;
+    private readonly int _startPos;
+
+    public KineticSculptureDisc(in int positions, int startPos)
+    {
+        _positions = positions;
+        _startPos = startPos;
+    }
+
+    public bool Passed(in int time)
+    {
+        return (time + _startPos) % _positions == 0;
+    }
+}

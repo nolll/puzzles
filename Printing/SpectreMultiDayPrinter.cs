@@ -3,12 +3,12 @@ using Aoc.Platform;
 
 namespace Aoc.Printing;
 
-public class MultiDayPrinter : DayPrinter, IMultiDayPrinter
+public class SpectreMultiDayPrinter : ConsoleDayPrinter, IMultiDayPrinter
 {
     private readonly int _timeout;
     private const int CommentLength = 24;
 
-    public MultiDayPrinter(int? timeout = null)
+    public SpectreMultiDayPrinter(int? timeout = null)
     {
         _timeout = timeout ?? 0;
     }

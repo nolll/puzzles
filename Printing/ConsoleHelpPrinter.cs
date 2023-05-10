@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Aoc.ConsoleTools;
+namespace Aoc.Printing;
 
-public class HelpPrinter
+public class ConsoleHelpPrinter : IHelpPrinter
 {
     public void Print()
     {

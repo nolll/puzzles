@@ -3,7 +3,7 @@ using Aoc.Platform;
 
 namespace Aoc.Printing;
 
-public class SingleDayPrinter : DayPrinter, ISingleDayPrinter
+public class ConsoleSingleDayPrinter : ConsoleDayPrinter, ISingleDayPrinter
 {
     private const string Divider = "--------------------------------------------------";
 

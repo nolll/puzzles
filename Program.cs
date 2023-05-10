@@ -76,13 +76,12 @@ public class Program
 
     private static PuzzleRunner GetPuzzleRunner(int? timeout, bool throwExceptions)
     {
-        return new(new SingleDayPrinter(), new MultiDayPrinter(timeout), throwExceptions, timeout);
+        return new(SingleDayPrinter, MultiDayPrinter(timeout), throwExceptions, timeout);
     }
 
     private static void ShowHelp()
     {
-        var helpPrinter = new HelpPrinter();
-        helpPrinter.Print();
+        HelpPrinter.Print();
     }
 
     private static Parameters ParseParameters(string[] args)
@@ -104,4 +103,8 @@ public class Program
 
         return days;
     }
+
+    private static IHelpPrinter HelpPrinter => new SpectreHelpPrinter();
+    private static ISingleDayPrinter SingleDayPrinter => new ConsoleSingleDayPrinter();
+    private static IMultiDayPrinter MultiDayPrinter(int? timeout) => new ConsoleMultiDayPrinter(timeout);
 }

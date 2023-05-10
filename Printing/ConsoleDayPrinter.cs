@@ -3,11 +3,11 @@ using Aoc.Platform;
 
 namespace Aoc.Printing;
 
-public abstract class DayPrinter
+public abstract class ConsoleDayPrinter
 {
     private readonly ConsoleColor _defaultColor;
 
-    protected DayPrinter()
+    protected ConsoleDayPrinter()
     {
         _defaultColor = Console.ForegroundColor;
     }
@@ -24,12 +24,12 @@ public abstract class DayPrinter
 
     protected static ConsoleColor GetColor(PuzzleResult result)
     {
-        var status = result.Status;
-        if (status == PuzzleResultStatus.Failed || status == PuzzleResultStatus.Missing || status == PuzzleResultStatus.Timeout || status == PuzzleResultStatus.Wrong)
-            return ConsoleColor.Red;
-
-        return status == PuzzleResultStatus.Correct
-            ? ConsoleColor.Green
-            : ConsoleColor.Yellow;
+        return result.Status switch
+        {
+            PuzzleResultStatus.Failed or PuzzleResultStatus.Missing or PuzzleResultStatus.Timeout
+                or PuzzleResultStatus.Wrong => ConsoleColor.Red,
+            PuzzleResultStatus.Correct => ConsoleColor.Green,
+            _ => ConsoleColor.Yellow
+        };
     }
 }

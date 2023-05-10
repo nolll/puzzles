@@ -1,4 +1,6 @@
-﻿namespace Aoc.Platform;
+﻿using Aoc.Platform;
+
+namespace Aoc.Printing;
 
 public interface ISingleDayPrinter
 {

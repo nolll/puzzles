@@ -1,9 +1,10 @@
 ﻿using System;
 using Aoc.Platform;
+using Spectre.Console;
 
 namespace Aoc.Printing;
 
-public class SpectreMultiDayPrinter : ConsoleDayPrinter, IMultiDayPrinter
+public class SpectreMultiDayPrinter : SpectreDayPrinter, IMultiDayPrinter
 {
     private readonly int _timeout;
     private const int CommentLength = 24;
@@ -15,9 +16,9 @@ public class SpectreMultiDayPrinter : ConsoleDayPrinter, IMultiDayPrinter
 
     public void PrintHeader()
     {
-        Console.WriteLine("--------------------------------------------------------------------");
-        Console.WriteLine("| day         | part 1     | part 2     | comment                  |");
-        Console.WriteLine("--------------------------------------------------------------------");
+        AnsiConsole.WriteLine("--------------------------------------------------------------------");
+        AnsiConsole.WriteLine("| day         | part 1     | part 2     | comment                  |");
+        AnsiConsole.WriteLine("--------------------------------------------------------------------");
     }
 
     public void PrintDay(DayResult dayResult)
@@ -33,22 +34,7 @@ public class SpectreMultiDayPrinter : ConsoleDayPrinter, IMultiDayPrinter
             : dayResult.Comment;
         var paddedComment = comment.PadRight(CommentLength, ' ');
 
-        Console.Write("| ");
-        Console.Write(dayAndYear);
-        Console.Write(" | ");
-        SetColor(p1Color);
-        Console.Write(p1);
-        ResetColor();
-        Console.Write(" | ");
-        SetColor(p2Color);
-        Console.Write(p2);
-        ResetColor();
-        Console.Write(" | ");
-        SetColor(ConsoleColor.Yellow);
-        Console.Write(paddedComment);
-        ResetColor();
-        Console.Write(" |"); 
-        Console.WriteLine();
+        AnsiConsole.MarkupLine($"| {dayAndYear} | [{p1Color}]{p1}[/] | [{p2Color}]{p2}[/] | [yellow]{paddedComment}[/] |");
     }
 
     private string GetTableResult(TimedPuzzleResult result)
@@ -75,6 +61,6 @@ public class SpectreMultiDayPrinter : ConsoleDayPrinter, IMultiDayPrinter
 
     public void PrintFooter()
     {
-        Console.WriteLine("--------------------------------------------------------------------");
+        AnsiConsole.WriteLine("--------------------------------------------------------------------");
     }
 }

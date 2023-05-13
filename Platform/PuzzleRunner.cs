@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Aoc.Common.Timing;
 using Aoc.Printing;
+using Spectre.Console;
 
 namespace Aoc.Platform;
 
@@ -30,6 +31,25 @@ public class PuzzleRunner
             _multiDayPrinter.PrintDay(result);
         }
         _multiDayPrinter.PrintFooter();
+    }
+
+    public void RunWithLiveTable(IList<PuzzleDay> days)
+    {
+        var table = new Table();
+        AnsiConsole.Live(table).Start(ctx =>
+        {
+            table.AddColumn("day");
+            table.AddColumn("part 1");
+            table.AddColumn("part 2");
+            table.AddColumn("comment");
+            ctx.Refresh();
+            foreach (var day in days)
+            {
+                var result = RunDay(day);
+                table.AddRow(result.Day.Day.ToString(), "1", "2", "");
+                ctx.Refresh();
+            }
+        });
     }
 
     public void Run(PuzzleDay day)

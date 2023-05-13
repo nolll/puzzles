@@ -1,9 +1,10 @@
 ﻿using System;
 using Aoc.Platform;
+using Spectre.Console;
 
 namespace Aoc.Printing;
 
-public class SpectreSingleDayPrinter : ConsoleDayPrinter, ISingleDayPrinter
+public class SpectreSingleDayPrinter : SpectreDayPrinter, ISingleDayPrinter
 {
     private const string Divider = "--------------------------------------------------";
 
@@ -13,7 +14,7 @@ public class SpectreSingleDayPrinter : ConsoleDayPrinter, ISingleDayPrinter
         PrintPuzzle(1, dayResult.Result1);
         if (dayResult.Result2.Status != PuzzleResultStatus.Empty)
         {
-            Console.WriteLine();
+            AnsiConsole.WriteLine();
             PrintPuzzle(2, dayResult.Result2);
         }
 
@@ -24,20 +25,18 @@ public class SpectreSingleDayPrinter : ConsoleDayPrinter, ISingleDayPrinter
     private void PrintPuzzle(int part, TimedPuzzleResult puzzleResult)
     {
         var time = Formatter.FormatTime(puzzleResult.TimeTaken);
-        Console.WriteLine($"Part {part}: {time}");
+        AnsiConsole.WriteLine($"Part {part}: {time}");
         var color = GetColor(puzzleResult);
-        SetColor(color);
-        Console.Write(puzzleResult.Answer);
-        ResetColor();
-        Console.WriteLine();
+        AnsiConsole.Markup($"[{color}]{puzzleResult.Answer}[/]");
+        AnsiConsole.WriteLine();
     }
 
     private static void PrintDayTitle(PuzzleDay day)
     {
-        Console.WriteLine();
-        Console.WriteLine($"Day {day.Day} {day.Year}:");
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine($"Day {day.Day} {day.Year}:");
         if(day.Puzzle.Title != null)
-            Console.WriteLine(day.Puzzle.Title);
+            AnsiConsole.WriteLine(day.Puzzle.Title);
         PrintDivider();
     }
 
@@ -46,17 +45,15 @@ public class SpectreSingleDayPrinter : ConsoleDayPrinter, ISingleDayPrinter
         PrintDivider();
         if (!string.IsNullOrEmpty(dayResult.Comment))
         {
-            SetColor(ConsoleColor.Yellow);
-            Console.WriteLine(dayResult.Comment);
-            ResetColor();
+            AnsiConsole.MarkupLine($"[yellow]{dayResult.Comment}[/]");
             PrintDivider();
         }
         var time = Formatter.FormatTime(timeTaken);
-        Console.WriteLine(time.PadLeft(Divider.Length));
+        AnsiConsole.WriteLine(time.PadLeft(Divider.Length));
     }
 
     private static void PrintDivider()
     {
-        Console.WriteLine(Divider);
+        AnsiConsole.WriteLine(Divider);
     }
 }

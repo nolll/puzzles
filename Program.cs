@@ -105,6 +105,6 @@ public class Program
     }
 
     private static IHelpPrinter HelpPrinter => new SpectreHelpPrinter();
-    private static ISingleDayPrinter SingleDayPrinter => new ConsoleSingleDayPrinter();
-    private static IMultiDayPrinter MultiDayPrinter(int? timeout) => new ConsoleMultiDayPrinter(timeout);
+    private static ISingleDayPrinter SingleDayPrinter => new SpectreSingleDayPrinter();
+    private static IMultiDayPrinter MultiDayPrinter(int? timeout) => new SpectreMultiDayPrinter(timeout);
 }

@@ -71,7 +71,7 @@ public class Program
         if (days.Count == 1)
             runner.Run(days.First());
         else
-            runner.Run(days);
+            runner.RunWithLiveTable(days);
     }
 
     private static PuzzleRunner GetPuzzleRunner(int? timeout, bool throwExceptions)

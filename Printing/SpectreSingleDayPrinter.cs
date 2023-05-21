@@ -11,6 +11,8 @@ public class SpectreSingleDayPrinter : SpectreDayPrinter, ISingleDayPrinter
     public void PrintDay(DayResult dayResult)
     {
         PrintDayTitle(dayResult.Day);
+        PrintDayComment(dayResult.Comment);
+        PrintDivider();
         PrintPuzzle(1, dayResult.Result1);
         if (dayResult.Result2.Status != PuzzleResultStatus.Empty)
         {
@@ -19,7 +21,7 @@ public class SpectreSingleDayPrinter : SpectreDayPrinter, ISingleDayPrinter
         }
 
         var totalTimeTaken = dayResult.Result1.TimeTaken + dayResult.Result2.TimeTaken;
-        PrintDayEnd(dayResult, totalTimeTaken);
+        PrintDayEnd(totalTimeTaken);
     }
 
     private void PrintPuzzle(int part, TimedPuzzleResult puzzleResult)
@@ -37,17 +39,19 @@ public class SpectreSingleDayPrinter : SpectreDayPrinter, ISingleDayPrinter
         AnsiConsole.WriteLine($"Day {day.Day} {day.Year}:");
         if(day.Puzzle.Title != null)
             AnsiConsole.WriteLine(day.Puzzle.Title);
-        PrintDivider();
     }
 
-    private void PrintDayEnd(DayResult dayResult, TimeSpan timeTaken)
+    private static void PrintDayComment(string comment)
+    {
+        if (!string.IsNullOrEmpty(comment))
+        {
+            AnsiConsole.MarkupLine($"[yellow]{comment}[/]");
+        }
+    }
+
+    private void PrintDayEnd(TimeSpan timeTaken)
     {
         PrintDivider();
-        if (!string.IsNullOrEmpty(dayResult.Comment))
-        {
-            AnsiConsole.MarkupLine($"[yellow]{dayResult.Comment}[/]");
-            PrintDivider();
-        }
         var time = Formatter.FormatTime(timeTaken);
         AnsiConsole.WriteLine(time.PadLeft(Divider.Length));
     }

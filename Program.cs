@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Aoc.ConsoleTools;
 using Aoc.Platform;
 using Aoc.Printing;
@@ -42,7 +43,8 @@ public class Program
         if (foundDay == null)
             throw new Exception("The specified day could not be found.");
             
-        RunDays(new List<PuzzleDay> {foundDay}, null, true);
+        var runner = new SinglePuzzleRunner(SingleDayPrinter);
+        runner.Run(foundDay);
     }
 
     private static void RunEvent(Parameters parameters)
@@ -53,7 +55,8 @@ public class Program
             throw new Exception("Event not found!");
 
         var filteredDays = FilterDays(eventDays, parameters);
-        RunDays(filteredDays, PuzzleTimeout, false);
+        var runner = new MultiPuzzleRunner(PuzzleTimeout);
+        runner.Run(filteredDays);
     }
 
     private static void RunAll(Parameters parameters)
@@ -61,22 +64,8 @@ public class Program
         var puzzleRepository = new PuzzleRepository();
         var allDays = puzzleRepository.GetAll();
         var filteredDays = FilterDays(allDays, parameters);
-        RunDays(filteredDays, PuzzleTimeout, false);
-    }
-
-    private static void RunDays(List<PuzzleDay> days, int? timeout, bool throwExceptions)
-    {
-        var runner = GetPuzzleRunner(timeout, throwExceptions);
-            
-        if (days.Count == 1)
-            runner.Run(days.First());
-        else
-            runner.RunWithLiveTable(days);
-    }
-
-    private static PuzzleRunner GetPuzzleRunner(int? timeout, bool throwExceptions)
-    {
-        return new(SingleDayPrinter, MultiDayPrinter(timeout), throwExceptions, timeout);
+        var runner = new MultiPuzzleRunner(PuzzleTimeout);
+        runner.Run(filteredDays);
     }
 
     private static void ShowHelp()
@@ -106,5 +95,4 @@ public class Program
 
     private static IHelpPrinter HelpPrinter => new SpectreHelpPrinter();
     private static ISingleDayPrinter SingleDayPrinter => new SpectreSingleDayPrinter();
-    private static IMultiDayPrinter MultiDayPrinter(int? timeout) => new SpectreMultiDayPrinter(timeout);
 }

@@ -29,7 +29,6 @@ public class MultiPuzzleRunner
             table.AddColumn("part 1");
             table.AddColumn("part 2");
             table.AddColumn("comment");
-            ctx.Refresh();
             foreach (var day in days)
             {
                 RunAndPrintRow(day, ctx, table, row);

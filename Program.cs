@@ -44,7 +44,7 @@ public class Program
             throw new Exception("The specified day could not be found.");
             
         var runner = new SinglePuzzleRunner(SingleDayPrinter);
-        runner.Run(foundDay);
+        runner.RunLive(foundDay);
     }
 
     private static void RunEvent(Parameters parameters)

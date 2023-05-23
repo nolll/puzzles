@@ -29,7 +29,7 @@ public class PasswordGenerator
             {
                 _hashCache.Add(byteHash);
                 var hash = hashFactory.StringHashFromString(strToHash);
-                pwd.Append(hash.Substring(5, 1));
+                pwd.Append(hash[5..6]);
             }
 
             _index++;
@@ -52,12 +52,12 @@ public class PasswordGenerator
             if (position < 8 && pwdArray[position] == null)
             {
                 var hash = ByteConverter.ConvertToHexString(byteHash);
-                var result = hash.Substring(6, 1);
+                var result = hash[6..7];
                 pwdArray[position] = result[0];
             }
         }
             
-        while (pwdArray.Count(o => o == null) > 0)
+        while (pwdArray.Any(o => o == null))
         {
             var byteHash = hashFactory.ByteHashFromString($"{key}{_index}");
             if (HasFiveLeadingZeros(byteHash))
@@ -82,7 +82,7 @@ public class PasswordGenerator
         return pwd.ToString().ToLower();
     }
 
-    private bool HasFiveLeadingZeros(IReadOnlyList<byte> bytes)
+    private static bool HasFiveLeadingZeros(IReadOnlyList<byte> bytes)
     {
         return bytes[0] == 0 && bytes[1] == 0 && bytes[2] < 16;
     }

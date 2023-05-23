@@ -8,6 +8,9 @@ public class Year2016Day05 : Puzzle
 
     public override string Title => "How About a Nice Game of Chess?";
 
+    public override bool IsSlow => true;
+    public override string Comment => "Slow hashing";
+
     public override PuzzleResult RunPart1()
     {
         var pwd = _generator.Generate1(Input);

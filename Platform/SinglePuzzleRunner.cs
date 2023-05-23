@@ -9,63 +9,71 @@ namespace Aoc.Platform;
 public class SinglePuzzleRunner
 {
     private const string Divider = "--------------------------------------------------";
+    private const int StatusPadding = 15;
 
     public void Run(PuzzleDay day)
     {
         AnsiConsole.Cursor.Show(false);
+        WriteHeader(day);
+        AnsiConsole.WriteLine(Divider);
+        var part1Time = RunAndPrintPuzzleResult(1, day.Puzzle.RunPart1);
         AnsiConsole.WriteLine();
+        var part2Time = RunAndPrintPuzzleResult(2, day.Puzzle.RunPart2);
+        AnsiConsole.WriteLine(Divider);
+        WriteFooter(part1Time + part2Time);
+        AnsiConsole.Cursor.Show(true);
+    }
+
+    private static void WriteHeader(PuzzleDay day)
+    {
         AnsiConsole.WriteLine($"Day {day.Day} {day.Year}:");
         if (day.Puzzle.Title is not null)
             AnsiConsole.WriteLine(day.Puzzle.Title);
         if (day.Puzzle.Comment is not null)
             AnsiConsole.MarkupLine($"[yellow]{day.Puzzle.Comment}[/]");
+    }
 
-        AnsiConsole.WriteLine(Divider);
+    private TimeSpan RunAndPrintPuzzleResult(int puzzleNumber, Func<PuzzleResult> puzzleFunc)
+    {
+        var timer = new Timer();
+        var result = RunPuzzle(puzzleNumber, puzzleFunc, timer);
+        var time = timer.FromStart;
+        AnsiConsole.WriteLine();
+        WriteAnswer(result);
 
-        PuzzleResult result1 = null;
-        var task1 = Task.Run(() => result1 = day.Puzzle.RunPart1());
-        var timer1 = new Timer();
-        AnsiConsole.Write("               ");
-        while (!task1.IsCompleted)
+        return time;
+    }
+
+    private PuzzleResult RunPuzzle(int puzzleNumber, Func<PuzzleResult> puzzleFunc, Timer timer)
+    {
+        PuzzleResult result = null;
+        var task = Task.Run(() => result = puzzleFunc());
+        AnsiConsole.Write($"\rPart {puzzleNumber}:".PadRight(StatusPadding));
+        while (!task.IsCompleted)
         {
-            AnsiConsole.Write($"\rPart 1: {Formatter.FormatTime(timer1.FromStart)}".PadRight(15));
+            AnsiConsole.Write($"\rPart {puzzleNumber}: {Formatter.FormatTime(timer.FromStart)}".PadRight(StatusPadding));
         }
 
-        var part1Time = timer1.FromStart;
-        AnsiConsole.WriteLine();
+        return result;
+    }
 
-        if (result1.Status is PuzzleResultStatus.Correct)
-            AnsiConsole.MarkupLine($"[green]{result1.Answer}[/]");
-        else if (result1.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)
-            AnsiConsole.MarkupLine($"[red]{result1.Answer}[/]");
-        else
-            AnsiConsole.WriteLine();
-
-        AnsiConsole.WriteLine();
-
-        PuzzleResult result2 = null;
-        var task2 = Task.Run(() => result2 = day.Puzzle.RunPart2());
-        var timer2 = new Timer();
-        while (!task2.IsCompleted)
-        {
-            AnsiConsole.Write($"\rPart 2: {Formatter.FormatTime(timer2.FromStart)}".PadRight(15));
-        }
-
-        var part2Time = timer2.FromStart;
-        AnsiConsole.WriteLine();
-        
-        if (result2.Status is PuzzleResultStatus.Correct)
-            AnsiConsole.MarkupLine($"[green]{result2.Answer}[/]");
-        else if (result2.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)
-            AnsiConsole.MarkupLine($"[red]{result2.Answer}[/]");
-        else
-            AnsiConsole.WriteLine();
-        
-        AnsiConsole.WriteLine(Divider);
-
-        var totalTime = part1Time + part2Time;
+    private static void WriteFooter(TimeSpan totalTime)
+    {
         var time = Formatter.FormatTime(totalTime);
         AnsiConsole.WriteLine(time.PadLeft(Divider.Length));
-        AnsiConsole.Cursor.Show(true);
+    }
+
+    private void WriteAnswer(PuzzleResult result)
+    {
+        if (result is null)
+            AnsiConsole.MarkupLine("[red]Missing[/]");
+        else if (result.Status is PuzzleResultStatus.Empty)
+            AnsiConsole.WriteLine("No puzzle");
+        else if (result.Status is PuzzleResultStatus.Correct)
+            AnsiConsole.MarkupLine($"[green]{result.Answer}[/]");
+        else if (result.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)
+            AnsiConsole.MarkupLine($"[red]{result.Answer}[/]");
+        else
+            AnsiConsole.WriteLine();
     }
 }

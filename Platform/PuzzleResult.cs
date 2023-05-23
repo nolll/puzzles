@@ -5,11 +5,10 @@ namespace Aoc.Platform;
 public class PuzzleResult
 {
     public string Answer { get; }
-    public string CorrectAnswer { get; }
     public PuzzleResultStatus Status { get; }
 
     public PuzzleResult(string answer, string correctAnswer = null)
-        : this(answer, correctAnswer, VerifyResult(answer, correctAnswer))
+        : this(answer, VerifyResult(answer, correctAnswer))
     {
             
     }
@@ -30,14 +29,8 @@ public class PuzzleResult
     }
 
     protected PuzzleResult(string answer, PuzzleResultStatus status)
-        : this(answer, null, status)
-    {
-    }
-
-    protected PuzzleResult(string answer, string correctAnswer, PuzzleResultStatus status)
     {
         Answer = answer;
-        CorrectAnswer = correctAnswer;
         Status = status;
     }
 

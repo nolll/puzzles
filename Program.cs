@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Aoc.ConsoleTools;
 using Aoc.Platform;
 using Aoc.Printing;
@@ -43,8 +42,8 @@ public class Program
         if (foundDay == null)
             throw new Exception("The specified day could not be found.");
             
-        var runner = new SinglePuzzleRunner(SingleDayPrinter);
-        runner.RunLive(foundDay);
+        var runner = new SinglePuzzleRunner();
+        runner.Run(foundDay);
     }
 
     private static void RunEvent(Parameters parameters)
@@ -94,5 +93,4 @@ public class Program
     }
 
     private static IHelpPrinter HelpPrinter => new SpectreHelpPrinter();
-    private static ISingleDayPrinter SingleDayPrinter => new SpectreSingleDayPrinter();
 }

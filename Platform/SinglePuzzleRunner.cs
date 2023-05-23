@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Threading;
 using Aoc.Printing;
 using Spectre.Console;
-using Spectre.Console.Rendering;
 using Timer = Aoc.Common.Timing.Timer;
 
 namespace Aoc.Platform;
@@ -12,101 +9,63 @@ namespace Aoc.Platform;
 public class SinglePuzzleRunner
 {
     private const string Divider = "--------------------------------------------------";
-    private readonly ISingleDayPrinter _singleDayPrinter;
 
-    public SinglePuzzleRunner(ISingleDayPrinter singleDayPrinter)
-    {
-        _singleDayPrinter = singleDayPrinter;
-    }
-    
     public void Run(PuzzleDay day)
     {
-        var result = RunDay(day);
-        _singleDayPrinter.PrintDay(result);
-    }
-
-    public void RunLive(PuzzleDay day)
-    {
-        TimeSpan part1Time = TimeSpan.MinValue;
-        TimeSpan part2Time = TimeSpan.MinValue;
-
+        AnsiConsole.Cursor.Show(false);
         AnsiConsole.WriteLine();
         AnsiConsole.WriteLine($"Day {day.Day} {day.Year}:");
-        if (day.Puzzle.Title != null)
+        if (day.Puzzle.Title is not null)
             AnsiConsole.WriteLine(day.Puzzle.Title);
+        if (day.Puzzle.Comment is not null)
+            AnsiConsole.MarkupLine($"[yellow]{day.Puzzle.Comment}[/]");
 
         AnsiConsole.WriteLine(Divider);
 
-        AnsiConsole.Status().Start("Part 1: 0s", ctx =>
+        PuzzleResult result1 = null;
+        var task1 = Task.Run(() => result1 = day.Puzzle.RunPart1());
+        var timer1 = new Timer();
+        AnsiConsole.Write("               ");
+        while (!task1.IsCompleted)
         {
-            PuzzleResult result = null;
-            var task = Task.Run(() => result = day.Puzzle.RunPart1());
-            var timer = new Timer();
-            while (!task.IsCompleted)
-            {
-                ctx.Status($"Part 1: {Formatter.FormatTime(timer.FromStart)}");
-                ctx.Refresh();
-            }
+            AnsiConsole.Write($"\rPart 1: {Formatter.FormatTime(timer1.FromStart)}".PadRight(15));
+        }
 
-            part1Time = timer.FromStart;
+        var part1Time = timer1.FromStart;
+        AnsiConsole.WriteLine();
+
+        if (result1.Status is PuzzleResultStatus.Correct)
+            AnsiConsole.MarkupLine($"[green]{result1.Answer}[/]");
+        else if (result1.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)
+            AnsiConsole.MarkupLine($"[red]{result1.Answer}[/]");
+        else
             AnsiConsole.WriteLine();
-            AnsiConsole.WriteLine($"Part 1: {Formatter.FormatTime(part1Time)}");
-            if (result.Status is PuzzleResultStatus.Correct)
-                AnsiConsole.MarkupLine($"[green]{result.Answer}[/]");
-            else if (result.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)
-                AnsiConsole.MarkupLine($"[red]{result.Answer}[/]");
-            else
-                AnsiConsole.WriteLine();
-            ctx.Refresh();
-        });
 
-        AnsiConsole.Status().Start("Part 2: 0s", ctx =>
+        AnsiConsole.WriteLine();
+
+        PuzzleResult result2 = null;
+        var task2 = Task.Run(() => result2 = day.Puzzle.RunPart2());
+        var timer2 = new Timer();
+        while (!task2.IsCompleted)
         {
-            PuzzleResult result = null;
-            var task = Task.Run(() => result = day.Puzzle.RunPart2());
-            var timer = new Timer();
-            while (!task.IsCompleted)
-            {
-                ctx.Status($"Part 2: {Formatter.FormatTime(timer.FromStart)}");
-                ctx.Refresh();
-            }
+            AnsiConsole.Write($"\rPart 2: {Formatter.FormatTime(timer2.FromStart)}".PadRight(15));
+        }
 
-            part2Time = timer.FromStart;
+        var part2Time = timer2.FromStart;
+        AnsiConsole.WriteLine();
+        
+        if (result2.Status is PuzzleResultStatus.Correct)
+            AnsiConsole.MarkupLine($"[green]{result2.Answer}[/]");
+        else if (result2.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)
+            AnsiConsole.MarkupLine($"[red]{result2.Answer}[/]");
+        else
             AnsiConsole.WriteLine();
-            AnsiConsole.WriteLine($"Part 2: {Formatter.FormatTime(part2Time)}");
-            if (result.Status is PuzzleResultStatus.Correct)
-                AnsiConsole.MarkupLine($"[green]{result.Answer}[/]");
-            else if (result.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)
-                AnsiConsole.MarkupLine($"[red]{result.Answer}[/]");
-            else
-                AnsiConsole.WriteLine();
-            ctx.Refresh();
-        });
-
+        
         AnsiConsole.WriteLine(Divider);
 
         var totalTime = part1Time + part2Time;
         var time = Formatter.FormatTime(totalTime);
         AnsiConsole.WriteLine(time.PadLeft(Divider.Length));
-    }
-
-    private DayResult RunDay(PuzzleDay day)
-    {
-        var p1 = RunPuzzleWithTimer(day.Puzzle.RunPart1);
-        var p2 = RunPuzzleWithTimer(day.Puzzle.RunPart2);
-
-        return new DayResult(day, p1, p2);
-    }
-
-    private TimedPuzzleResult RunPuzzleWithTimer(Func<PuzzleResult> func)
-    {
-        var timer = new Timer();
-        var result = RunPuzzle(func);
-        return new TimedPuzzleResult(result, timer.FromStart);
-    }
-    
-    private PuzzleResult RunPuzzle(Func<PuzzleResult> func)
-    {
-        return func() ?? new MissingPuzzleResult("Puzzle returned null");
+        AnsiConsole.Cursor.Show(true);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,8 +29,8 @@ public class PasswordGenerator
             if (HasFiveLeadingZeros(byteHash))
             {
                 _hashCache.Add(byteHash);
-                var hash = hashFactory.StringHashFromString(strToHash);
-                pwd.Append(hash[5..6]);
+                var hash = ByteConverter.ConvertToHexString(byteHash[2]);
+                pwd.Append(hash[1]);
             }
 
             _index++;
@@ -42,47 +43,42 @@ public class PasswordGenerator
     {
         var hashFactory = new Hashfactory();
         const int pwdLength = 8;
-        var pwdArray = new char?[pwdLength];
+        var pwdArray = new char[pwdLength];
 
-        while (_hashCache.Any())
+        var filledPositions = 0;
+        const int allPositionsFilled = 36;
+        foreach (var cashedHash in _hashCache)
         {
-            var byteHash = _hashCache.First();
-            _hashCache.RemoveAt(0);
-            var position = byteHash[2];
-            if (position < 8 && pwdArray[position] == null)
+            var position = cashedHash[2];
+            if (position < pwdLength && pwdArray[position] == default)
             {
-                var hash = ByteConverter.ConvertToHexString(byteHash);
-                var result = hash[6..7];
-                pwdArray[position] = result[0];
+                var hash = ByteConverter.ConvertToHexString(cashedHash[3]);
+                pwdArray[position] = hash[0];
+                filledPositions += position + 1;
             }
         }
-            
-        while (pwdArray.Any(o => o == null))
+
+        while (filledPositions < allPositionsFilled)
         {
             var byteHash = hashFactory.ByteHashFromString($"{key}{_index}");
             if (HasFiveLeadingZeros(byteHash))
             {
                 var position = byteHash[2];
-                if (position < 8 && pwdArray[position] == null)
+                if (position < pwdLength && pwdArray[position] == default)
                 {
-                    var hash = ByteConverter.ConvertToHexString(byteHash);
-                    var result = hash.Substring(6, 1);
-                    pwdArray[position] = result[0];
+                    var hash = ByteConverter.ConvertToHexString(byteHash[3]);
+                    pwdArray[position] = hash[0];
+                    filledPositions += position + 1;
                 }
             }
 
             _index++;
         }
 
-        var pwd = new StringBuilder();
-        foreach (var c in pwdArray)
-        {
-            pwd.Append(c);
-        }
-        return pwd.ToString().ToLower();
+        return string.Join("", pwdArray);
     }
 
-    private static bool HasFiveLeadingZeros(IReadOnlyList<byte> bytes)
+    private static bool HasFiveLeadingZeros(byte[] bytes)
     {
         return bytes[0] == 0 && bytes[1] == 0 && bytes[2] < 16;
     }

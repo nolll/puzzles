@@ -11,6 +11,9 @@ namespace Aoc.Platform;
 
 public class MultiPuzzleRunner
 {
+    private const int CommentLength = 24;
+    private const int TruncatedCommentLength = CommentLength - 3;
+
     private readonly TimeSpan _timeoutTimespan;
     private readonly bool _useTimeout;
 
@@ -23,19 +26,59 @@ public class MultiPuzzleRunner
     public void Run(IList<PuzzleDay> days)
     {
         var table = new Table();
-        AnsiConsole.Live(table).Start(ctx =>
+
+        AnsiConsole.Cursor.Show(false);
+        AnsiConsole.WriteLine("--------------------------------------------------------------------");
+        AnsiConsole.WriteLine("| day         | part 1     | part 2     | comment                  |");
+        AnsiConsole.WriteLine("--------------------------------------------------------------------");
+
+        foreach (var day in days)
         {
-            var row = 0;
-            table.AddColumn("day");
-            table.AddColumn("part 1");
-            table.AddColumn("part 2");
-            table.AddColumn("comment");
-            foreach (var day in days)
+            var dayStr = day.Day.ToString().PadLeft(2, '0');
+            var dayAndYear = $"Day {dayStr} {day.Year}";
+            var fullComment = day.Puzzle.Comment ?? "";
+            var comment = fullComment.Length > TruncatedCommentLength
+                ? fullComment[..TruncatedCommentLength] + "..."
+                : fullComment;
+            var paddedComment = comment.PadRight(CommentLength);
+            PrintRow(dayAndYear, "", "", paddedComment);
+            PuzzleResult part1Result = null;
+            var part1Timer = new Timer();
+            var part1Time = TimeSpan.Zero;
+            var part1Task = Task.Run(() => part1Result = day.Puzzle.RunPart1());
+            while (!part1Task.IsCompleted)
             {
-                RunAndPrintRow(day, ctx, table, row);
-                row++;
+                AnsiConsole.Write("\r");
+                part1Time = part1Timer.FromStart;
+                PrintRow(dayAndYear, Formatter.FormatTime(part1Time), "", paddedComment);
+                Thread.Sleep(20);
             }
-        });
+
+            var formattedPart1Time = Formatter.FormatTime(part1Time);
+
+            PuzzleResult part2Result = null;
+            var part2Timer = new Timer();
+            var part2Time = TimeSpan.Zero;
+            var part2Task = Task.Run(() => part2Result = day.Puzzle.RunPart2());
+            while (!part2Task.IsCompleted)
+            {
+                AnsiConsole.Write("\r");
+                part2Time = part2Timer.FromStart;
+                PrintRow(dayAndYear, formattedPart1Time, Formatter.FormatTime(part2Time), paddedComment);
+                Thread.Sleep(20);
+            }
+
+            var formattedPart2Time = Formatter.FormatTime(part2Time);
+            AnsiConsole.WriteLine();
+        }
+
+        AnsiConsole.WriteLine("--------------------------------------------------------------------");
+        AnsiConsole.Cursor.Show(true);
+    }
+
+    private void PrintRow(string dayAndYear, string part1Time, string part2Time, string comment)
+    {
+        AnsiConsole.Markup($"| {dayAndYear} | {part1Time,-10} | {part2Time,-10} | {comment} |");
     }
 
     private void RunAndPrintRow(PuzzleDay day, LiveDisplayContext ctx, Table table, int row)
@@ -58,6 +101,7 @@ public class MultiPuzzleRunner
         var cancellationTokenSource = new CancellationTokenSource();
         var cancellationToken = cancellationTokenSource.Token;
         var timer = new Timer();
+        var elapsed = TimeSpan.Zero;
         var task = Task.Run(() => result = func(), cancellationToken);
         while (!task.IsCompleted)
         {
@@ -66,17 +110,20 @@ public class MultiPuzzleRunner
                 cancellationTokenSource.Cancel();
                 break;
             }
+
+            elapsed = timer.FromStart;
             table.Rows.Update(row, col, new Text(Formatter.FormatTime(timer.FromStart)));
             ctx.Refresh();
+            Thread.Sleep(20);
         }
         if (cancellationToken.IsCancellationRequested)
             table.Rows.Update(row, col, new Markup($"[red]>{Formatter.FormatTime(_timeoutTimespan)}[/]"));
         else if(result is null)
             table.Rows.Update(row, col, new Text(""));
         else if (result.Status is PuzzleResultStatus.Correct)
-            table.Rows.Update(row, col, new Markup($"[green]{Formatter.FormatTime(timer.FromStart)}[/]"));
+            table.Rows.Update(row, col, new Markup($"[green]{Formatter.FormatTime(elapsed)}[/]"));
         else if (result.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)
-            table.Rows.Update(row, col, new Markup($"[red]{Formatter.FormatTime(timer.FromStart)}[/]"));
+            table.Rows.Update(row, col, new Markup($"[red]{Formatter.FormatTime(elapsed)}[/]"));
         else
             table.Rows.Update(row, col, Text.Empty);
         ctx.Refresh();

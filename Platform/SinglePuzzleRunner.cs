@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Aoc.Printing;
 using Spectre.Console;
@@ -52,6 +53,7 @@ public class SinglePuzzleRunner
         while (!task.IsCompleted)
         {
             AnsiConsole.Write($"\rPart {puzzleNumber}: {Formatter.FormatTime(timer.FromStart)}".PadRight(StatusPadding));
+            Thread.Sleep(20);
         }
 
         return result;

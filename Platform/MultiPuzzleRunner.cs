@@ -23,7 +23,7 @@ public class MultiPuzzleRunner
         _timeoutTimespan = TimeSpan.FromSeconds(timeout ?? 0);
     }
 
-    public void Run(IList<PuzzleDay> days)
+    public void Run(IEnumerable<PuzzleDay> days)
     {
         var table = new Table();
 
@@ -40,35 +40,63 @@ public class MultiPuzzleRunner
             var comment = fullComment.Length > TruncatedCommentLength
                 ? fullComment[..TruncatedCommentLength] + "..."
                 : fullComment;
-            var paddedComment = comment.PadRight(CommentLength);
-            PrintRow(dayAndYear, "", "", paddedComment);
-            PuzzleResult part1Result = null;
+            var formattedComment = $"[yellow]{comment.PadRight(CommentLength)}[/]";
+            PrintRow(dayAndYear, "", "", formattedComment);
+            var part1Status = PuzzleResultStatus.Empty;
             var part1Timer = new Timer();
             var part1Time = TimeSpan.Zero;
-            var part1Task = Task.Run(() => part1Result = day.Puzzle.RunPart1());
+            var waitedPart1 = false;
+            var cancellationTokenSourcePart1 = new CancellationTokenSource();
+            var cancellationTokenPart1 = cancellationTokenSourcePart1.Token;
+            var part1Task = Task.Run(() => part1Status = day.Puzzle.RunPart1().Status, cancellationTokenPart1);
             while (!part1Task.IsCompleted)
             {
+                if (_useTimeout && part1Timer.FromStart >= _timeoutTimespan)
+                {
+                    cancellationTokenSourcePart1.Cancel();
+                    part1Status = PuzzleResultStatus.Timeout;
+                    break;
+                }
+
+                waitedPart1 = true;
                 AnsiConsole.Write("\r");
                 part1Time = part1Timer.FromStart;
-                PrintRow(dayAndYear, Formatter.FormatTime(part1Time), "", paddedComment);
+                PrintRow(dayAndYear, Formatter.FormatTime(part1Time).PadRight(10), "".PadRight(10), formattedComment);
                 Thread.Sleep(20);
             }
 
-            var formattedPart1Time = Formatter.FormatTime(part1Time);
+            part1Time = waitedPart1 ? part1Time : part1Timer.FromStart;
+            var formattedPart1Time = MarkupTime(part1Time, part1Status);
+            AnsiConsole.Write("\r");
+            PrintRow(dayAndYear, formattedPart1Time, "", formattedComment);
 
-            PuzzleResult part2Result = null;
+            var part2Status = PuzzleResultStatus.Empty;
             var part2Timer = new Timer();
             var part2Time = TimeSpan.Zero;
-            var part2Task = Task.Run(() => part2Result = day.Puzzle.RunPart2());
+            var waitedPart2 = false;
+            var cancellationTokenSourcePart2 = new CancellationTokenSource();
+            var cancellationTokenPart2 = cancellationTokenSourcePart2.Token;
+            var part2Task = Task.Run(() => part2Status = day.Puzzle.RunPart2().Status, cancellationTokenPart2);
             while (!part2Task.IsCompleted)
             {
+                if (_useTimeout && part2Timer.FromStart >= _timeoutTimespan)
+                {
+                    cancellationTokenSourcePart2.Cancel();
+                    part2Status = PuzzleResultStatus.Timeout;
+                    break;
+                }
+
+                waitedPart2 = true;
                 AnsiConsole.Write("\r");
                 part2Time = part2Timer.FromStart;
-                PrintRow(dayAndYear, formattedPart1Time, Formatter.FormatTime(part2Time), paddedComment);
+                PrintRow(dayAndYear, formattedPart1Time, Formatter.FormatTime(part2Time).PadRight(10), formattedComment);
                 Thread.Sleep(20);
             }
 
-            var formattedPart2Time = Formatter.FormatTime(part2Time);
+            part2Time = waitedPart2 ? part2Time : part2Timer.FromStart;
+            var formattedPart2Time = MarkupTime(part2Time, part2Status);
+            AnsiConsole.Write("\r");
+            PrintRow(dayAndYear, formattedPart1Time, formattedPart2Time, formattedComment);
             AnsiConsole.WriteLine();
         }
 
@@ -76,9 +104,20 @@ public class MultiPuzzleRunner
         AnsiConsole.Cursor.Show(true);
     }
 
+    private string MarkupTime(TimeSpan time, PuzzleResultStatus status)
+    {
+        if (status is PuzzleResultStatus.Correct)
+            return $"[green]{Formatter.FormatTime(time).PadRight(10)}[/]";
+        if (status is PuzzleResultStatus.Failed or PuzzleResultStatus.Wrong)
+            return $"[red]{Formatter.FormatTime(time).PadRight(10)}[/]";
+        if (status is PuzzleResultStatus.Timeout)
+            return $"[red]>{Formatter.FormatTime(_timeoutTimespan, 0).PadRight(9)}[/]";
+        return "".PadRight(10);
+    }
+
     private void PrintRow(string dayAndYear, string part1Time, string part2Time, string comment)
     {
-        AnsiConsole.Markup($"| {dayAndYear} | {part1Time,-10} | {part2Time,-10} | {comment} |");
+        AnsiConsole.Markup($"| {dayAndYear} | {part1Time} | {part2Time} | {comment} |");
     }
 
     private void RunAndPrintRow(PuzzleDay day, LiveDisplayContext ctx, Table table, int row)

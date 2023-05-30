@@ -13,7 +13,7 @@ public class Program
     private const int PuzzleTimeout = 10;
 
     private const int DebugYear = 2016;
-    private const int DebugDay = 5;
+    private const int DebugDay = 14;
 
     private static readonly PuzzleRunner Runner = new(PuzzleTimeout);
 

@@ -47,30 +47,20 @@ public class KeyGenerator
     public bool IsKey(string salt, int index, string hash, int stretchCount)
     {
         var repeatingChar = GetRepeatingChar(hash);
-        if (repeatingChar != null)
-        {
-            if (Next1000HashesHasFiveInARowOf(salt, index + 1, repeatingChar.Value, stretchCount))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return repeatingChar != null && Next1000HashesHasFiveInARowOf(salt, index + 1, repeatingChar.Value, stretchCount);
     }
 
     public static char? GetRepeatingChar(string hash)
     {
         var match = RepeatingCharsRegex.Match(hash);
-        if (match.Success)
-            return match.Value.First();
-
-        return null;
+        return match.Success 
+            ? match.Value.First() 
+            : null;
     }
 
     private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, char searchFor, int stretchCount)
     {
-        var count = 0;
-        while (count < 1000)
+        for (var count = 0; count < 1000; count++)
         {
             var index = fromIndex + count;
                 
@@ -87,8 +77,6 @@ public class KeyGenerator
                 if (HashHasFiveInARowOf(hashedBytes, searchFor))
                     return true;
             }
-
-            count++;
         }
 
         return false;
@@ -119,6 +107,7 @@ public class KeyGenerator
     {
         if (_hashes.TryGetValue(index, out var hash))
             return hash;
+
         hash = CreateHash(salt, index, stretchCount);
         _hashes.Add(index, hash);
         return hash;
@@ -140,11 +129,9 @@ public class KeyGenerator
     {
         var hashedBytes = CreateSimpleHash(Encoding.ASCII.GetBytes(str));
 
-        var count = 0;
-        while (count < iterations)
+        for (var count = 0; count < iterations; count++)
         {
             hashedBytes = CreateSimpleHash(hashedBytes);
-            count++;
         }
 
         return hashedBytes;

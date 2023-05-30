@@ -7,7 +7,7 @@ public class Year2016Day14 : Puzzle
     public override string Title => "One-Time Pad";
 
     public override string Comment => "Slow hashing";
-    public override bool IsSlow => true; // 58s for part 2
+    public override bool IsSlow => true; // 31s for part 2
 
     public override PuzzleResult RunPart1()
     {

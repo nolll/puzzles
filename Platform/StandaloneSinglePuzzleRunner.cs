@@ -22,9 +22,9 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         AnsiConsole.Cursor.Show(false);
         WriteHeader(_day);
         AnsiConsole.WriteLine();
-        RunAndPrintPuzzleResult(1, _day.Puzzle.RunPart1);
+        RunAndPrintPuzzleResult(1, () => _day.Puzzle.RunPart1());
         AnsiConsole.WriteLine();
-        RunAndPrintPuzzleResult(2, _day.Puzzle.RunPart2);
+        RunAndPrintPuzzleResult(2, () => _day.Puzzle.RunPart2());
         AnsiConsole.Cursor.Show(true);
     }
 

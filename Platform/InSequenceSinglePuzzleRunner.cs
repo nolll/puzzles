@@ -35,8 +35,8 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     public void Run()
     {
         PrintRow();
-        RunPart(_day.Puzzle.RunPart1, UpdatePart1Result);
-        RunPart(_day.Puzzle.RunPart2, UpdatePart2Result);
+        RunPart(() => _day.Puzzle.RunPart1(), UpdatePart1Result);
+        RunPart(() => _day.Puzzle.RunPart2(), UpdatePart2Result);
         AnsiConsole.WriteLine();
     }
 

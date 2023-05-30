@@ -7,19 +7,25 @@ using Timer = Aoc.Common.Timing.Timer;
 
 namespace Aoc.Platform;
 
-public class SinglePuzzleRunner
+public class StandaloneSinglePuzzleRunner
 {
+    private readonly PuzzleDay _day;
     private const string Divider = "--------------------------------------------------";
     private const int StatusPadding = 15;
 
-    public void Run(PuzzleDay day)
+    public StandaloneSinglePuzzleRunner(PuzzleDay day)
+    {
+        _day = day;
+    }
+
+    public void Run()
     {
         AnsiConsole.Cursor.Show(false);
-        WriteHeader(day);
+        WriteHeader(_day);
         AnsiConsole.WriteLine(Divider);
-        var part1Time = RunAndPrintPuzzleResult(1, day.Puzzle.RunPart1);
+        var part1Time = RunAndPrintPuzzleResult(1, _day.Puzzle.RunPart1);
         AnsiConsole.WriteLine();
-        var part2Time = RunAndPrintPuzzleResult(2, day.Puzzle.RunPart2);
+        var part2Time = RunAndPrintPuzzleResult(2, _day.Puzzle.RunPart2);
         AnsiConsole.WriteLine(Divider);
         WriteFooter(part1Time + part2Time);
         AnsiConsole.Cursor.Show(true);

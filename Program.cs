@@ -15,6 +15,8 @@ public class Program
     private const int DebugYear = 2016;
     private const int DebugDay = 5;
 
+    private static readonly PuzzleRunner Runner = new(PuzzleTimeout);
+
     static void Main(string[] args)
     {
         var parameters = ParseParameters(args);
@@ -42,8 +44,7 @@ public class Program
         if (foundDay == null)
             throw new Exception("The specified day could not be found.");
             
-        var runner = new SinglePuzzleRunner();
-        runner.Run(foundDay);
+        Runner.Run(foundDay);
     }
 
     private static void RunEvent(Parameters parameters)
@@ -54,8 +55,7 @@ public class Program
             throw new Exception("Event not found!");
 
         var filteredDays = FilterDays(eventDays, parameters);
-        var runner = new MultiPuzzleRunner(PuzzleTimeout);
-        runner.Run(filteredDays);
+        Runner.Run(filteredDays);
     }
 
     private static void RunAll(Parameters parameters)
@@ -63,13 +63,12 @@ public class Program
         var puzzleRepository = new PuzzleRepository();
         var allDays = puzzleRepository.GetAll();
         var filteredDays = FilterDays(allDays, parameters);
-        var runner = new MultiPuzzleRunner(PuzzleTimeout);
-        runner.Run(filteredDays);
+        Runner.Run(filteredDays);
     }
 
     private static void ShowHelp()
     {
-        HelpPrinter.Print();
+        new SpectreHelpPrinter().Print();
     }
 
     private static Parameters ParseParameters(string[] args)
@@ -91,6 +90,4 @@ public class Program
 
         return days;
     }
-
-    private static IHelpPrinter HelpPrinter => new SpectreHelpPrinter();
 }

@@ -7,7 +7,7 @@ using Timer = Aoc.Common.Timing.Timer;
 
 namespace Aoc.Platform;
 
-public class TableRowSinglePuzzleRunner
+public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 {
     private const int ResultColumnWidth = 10;
     private const int CommentColumnWidth = 24;
@@ -20,7 +20,7 @@ public class TableRowSinglePuzzleRunner
     private string _part1Markup;
     private string _part2Markup;
 
-    public TableRowSinglePuzzleRunner(PuzzleDay day, TimeSpan timeoutTimespan)
+    public InSequenceSinglePuzzleRunner(PuzzleDay day, TimeSpan timeoutTimespan)
     {
         _day = day;
         _timeoutTimespan = timeoutTimespan;
@@ -46,14 +46,13 @@ public class TableRowSinglePuzzleRunner
         var timer = new Timer();
         var time = TimeSpan.Zero;
         var waited = false;
-        var cancellationTokenSource = new CancellationTokenSource();
-        var cancellationToken = cancellationTokenSource.Token;
-        var task = Task.Run(() => status = runFunc().Status, cancellationToken);
+        var cancellation = new CancellationTokenSource();
+        var task = Task.Run(() => status = runFunc().Status, cancellation.Token);
         while (!task.IsCompleted)
         {
             if (timer.FromStart >= _timeoutTimespan)
             {
-                cancellationTokenSource.Cancel();
+                cancellation.Cancel();
                 status = PuzzleResultStatus.Timeout;
                 break;
             }
@@ -62,7 +61,7 @@ public class TableRowSinglePuzzleRunner
             time = timer.FromStart;
             updateResultFunc(PadResult(Formatter.FormatTime(time)));
             PrintRow();
-            Thread.Sleep(20);
+            Thread.Sleep(ProgressWaitTime);
         }
 
         time = waited ? time : timer.FromStart;
@@ -87,8 +86,7 @@ public class TableRowSinglePuzzleRunner
     private static string PadResult(string s) => Pad(s, ResultColumnWidth);
     private static string PadComment(string s) => Pad(s, CommentColumnWidth);
     private static string Pad(string s, int width) => s.PadRight(width);
-    private static string MarkupColor(string s, Color color) => $"[{color}]{s}[/]";
-    
+
     private void PrintRow()
     {
         AnsiConsole.Markup($"\r| {_dayAndYear} | {_part1Markup} | {_part2Markup} | {_commentMarkup} |");

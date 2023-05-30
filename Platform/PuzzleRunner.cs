@@ -24,7 +24,7 @@ public class PuzzleRunner
         if (count == 1)
             new StandaloneSinglePuzzleRunner(enumerable.First()).Run();
         else
-            new MultiPuzzleRunner(_puzzleTimeout).Run(enumerable);
+            new MultiDayPuzzleRunner(_puzzleTimeout).Run(enumerable);
     }
 
     public void Run(PuzzleDay puzzleDay)

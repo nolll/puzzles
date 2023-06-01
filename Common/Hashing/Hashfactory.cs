@@ -32,6 +32,6 @@ public class Hashfactory
 
     public byte[] ByteHashFromBytes(byte[] bytes)
     {
-        return _md5.ComputeHash(bytes.ToArray());
+        return _md5.ComputeHash(bytes);
     }
 }

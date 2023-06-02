@@ -31,8 +31,8 @@ public class Year2016Day14Tests
     public void StretchedHash(int iterations, string expected)
     {
         var generator = new KeyGenerator();
-        var hashedBytes = generator.CreateStretchedHash("abc0", iterations);
-        var hash = ByteConverter.ConvertToString(hashedBytes);
+        var hashedBytes = generator.CreateHash("abc0", iterations);
+        var hash = ByteConverter.ToString(hashedBytes);
             
         Assert.That(hash, Is.EqualTo(expected));
     }
@@ -49,23 +49,14 @@ public class Year2016Day14Tests
         Assert.That(c, Is.EqualTo(expected));
     }
     
-    [Test]
-    public void ByteHashFiveInARow()
-    {
-        var hash = new KeyGenerator().CreateHash("abc", 200);
-        var hasFiveInARow = new KeyGenerator().HashHasFiveInARow(hash);
-
-        Assert.That(hasFiveInARow, Is.True);
-    }
-
     [TestCase("aaaaa010101010101010", true)]
     [TestCase("bbaaaaaa101010101010", true)]
     [TestCase("101011010101010aaaaa", true)]
     [TestCase("bbaab010101010101010", false)]
-    public void ByteHashFiveInARow(string stringHash, bool expected)
+    public void ByteHashFiveInARowOf(string stringHash, bool expected)
     {
         var byteHash = stringHash.ToCharArray().Select(o => (byte)o).ToArray();
-        var hasFiveInARow = new KeyGenerator().HashHasFiveInARow(byteHash);
+        var hasFiveInARow = KeyGenerator.HasFiveInARowOf(byteHash, (byte)'a');
 
         Assert.That(hasFiveInARow, Is.EqualTo(expected));
     }
@@ -76,7 +67,7 @@ public class Year2016Day14Tests
         var generator = new KeyGenerator();
         const string salt = "abc";
         const int index = 39;
-        var hash = generator.GetHash(salt, index);
+        var hash = generator.GetHash(salt, index, 0);
         var isKey = generator.IsKey(salt, index, hash, 0);
 
         Assert.That(isKey, Is.True);

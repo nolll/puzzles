@@ -29,7 +29,7 @@ public class PasswordGenerator
             if (HasFiveLeadingZeros(byteHash))
             {
                 _hashCache.Add(byteHash);
-                var hash = ByteConverter.ConvertToHexString(byteHash[2]);
+                var hash = ByteConverter.ToHexString(byteHash[2]);
                 pwd.Append(hash[1]);
             }
 
@@ -52,7 +52,7 @@ public class PasswordGenerator
             var position = cashedHash[2];
             if (position < pwdLength && pwdArray[position] == default)
             {
-                var hash = ByteConverter.ConvertToHexString(cashedHash[3]);
+                var hash = ByteConverter.ToHexString(cashedHash[3]);
                 pwdArray[position] = hash[0];
                 filledPositions += position + 1;
             }
@@ -66,7 +66,7 @@ public class PasswordGenerator
                 var position = byteHash[2];
                 if (position < pwdLength && pwdArray[position] == default)
                 {
-                    var hash = ByteConverter.ConvertToHexString(byteHash[3]);
+                    var hash = ByteConverter.ToHexString(byteHash[3]);
                     pwdArray[position] = hash[0];
                     filledPositions += position + 1;
                 }

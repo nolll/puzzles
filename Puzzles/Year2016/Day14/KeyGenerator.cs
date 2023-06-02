@@ -12,7 +12,6 @@ public class KeyGenerator
     private readonly IDictionary<int, byte[]> _hashes;
     private readonly IDictionary<byte, byte[]> _byteCache;
     private readonly IDictionary<int, byte?> _repeatingByteCache;
-    private readonly IDictionary<int, bool> _fiveInARowCache;
     private readonly IDictionary<(int, byte), bool> _fiveInARowOfCache;
 
     public KeyGenerator()
@@ -21,7 +20,6 @@ public class KeyGenerator
         _hashes = new Dictionary<int, byte[]>();
         _byteCache = BuildByteCache();
         _repeatingByteCache = new Dictionary<int, byte?>();
-        _fiveInARowCache = new Dictionary<int, bool>();
         _fiveInARowOfCache = new Dictionary<(int, byte), bool>();
     }
 
@@ -38,7 +36,7 @@ public class KeyGenerator
 
             index++;
         }
-
+        
         return index - 1;
     }
 
@@ -72,93 +70,66 @@ public class KeyGenerator
         {
             var index = fromIndex + count;
 
-            if (!_fiveInARowCache.TryGetValue(index, out var hasFiveInARow))
+            if (!_fiveInARowOfCache.TryGetValue((index, searchFor), out var hasFiveInARowOf))
             {
                 var hashedBytes = GetHash(salt, index, stretchCount);
-                hasFiveInARow = HashHasFiveInARow(hashedBytes);
-                _fiveInARowCache.Add(index, hasFiveInARow);
+                hasFiveInARowOf = HasFiveInARowOf(hashedBytes, searchFor);
+                _fiveInARowOfCache.Add((index, searchFor), hasFiveInARowOf);
             }
 
-            if (hasFiveInARow)
-            {
-                if (!_fiveInARowOfCache.TryGetValue((index, searchFor), out var hasFiveInARowOf))
-                {
-                    var hashedBytes = GetHash(salt, index, stretchCount);
-                    hasFiveInARowOf = HashHasFiveInARowOf(hashedBytes, searchFor);
-                    _fiveInARowOfCache.Add((index, searchFor), hasFiveInARowOf);
-                }
-
-                if (hasFiveInARowOf)
-                    return true;
-            }
+            if (hasFiveInARowOf)
+                return true;
         }
         
         return false;
     }
     
-    public bool HashHasFiveInARow(byte[] hash)
+    public static bool HasFiveInARowOf(byte[] hash, byte searchFor)
     {
-        var limit = hash.Length - 4;
-        for (var i = 0; i < limit; i++)
+        for (var i = 0; i < hash.Length - 4; i++)
         {
-            var c = hash[i];
-            if (hash[i + 1] == c &&
-                hash[i + 2] == c &&
-                hash[i + 3] == c &&
-                hash[i + 4] == c)
-                return true;
-        }
 
-        return false;
-    }
-
-    public bool HashHasFiveInARowOf(byte[] hash, byte searchFor)
-    {
-        var limit = hash.Length - 4;
-        for (var i = 0; i < limit; i++)
-        {
             if (hash[i] == searchFor &&
                 hash[i + 1] == searchFor &&
                 hash[i + 2] == searchFor &&
                 hash[i + 3] == searchFor &&
                 hash[i + 4] == searchFor)
                 return true;
+
+            //if (hash[i] == searchFor &&
+            //    hash[i + 1] == searchFor &&
+            //    hash[i + 2] == searchFor &&
+            //    hash[i + 3] == searchFor &&
+            //    hash[i + 4] == searchFor)
+            //    return true;
         }
 
         return false;
     }
     
-    public byte[] GetHash(string salt, int index, int stretchCount = 0)
+    public byte[] GetHash(string salt, int index, int stretchCount)
     {
         if (_hashes.TryGetValue(index, out var hash))
             return hash;
 
-        hash = CreateHash(salt, index, stretchCount);
+        hash = CreateHash(salt + index, stretchCount);
         _hashes.Add(index, hash);
         return hash;
     }
     
-    public byte[] CreateHash(string salt, int index, int stretchCount = 0)
-    {
-        var str = string.Concat(salt, index.ToString());
-        return CreateStretchedHash(str, stretchCount);
-    }
+    private byte[] CreateSimpleHash(byte[] bytes) => 
+        ConvertToHexBytes(_hashFactory.ByteHashFromBytes(bytes));
 
-    private byte[] CreateSimpleHash(byte[] bytes)
+    public byte[] CreateHash(string str, int stretchCount)
     {
-        return ConvertToHexBytes(_hashFactory.ByteHashFromBytes(bytes));
-    }
+        var hash = CreateSimpleHash(Encoding.ASCII.GetBytes(str));
 
-    public byte[] CreateStretchedHash(string str, int iterations)
-    {
-        var hashedBytes = CreateSimpleHash(Encoding.ASCII.GetBytes(str));
-
-        for (var count = 0; count < iterations; count++)
+        for (var count = 0; count < stretchCount; count++)
         {
-            hashedBytes = CreateSimpleHash(hashedBytes);
+            hash = CreateSimpleHash(hash);
         }
 
-        return hashedBytes;
+        return hash;
     }
 
     private byte[] ConvertToHexBytes(IEnumerable<byte> hashedBytes)
@@ -180,7 +151,7 @@ public class KeyGenerator
         for (int i = byte.MinValue; i <= byte.MaxValue; i++)
         {
             var b = (byte) i;
-            cache.Add(b, Encoding.ASCII.GetBytes(ByteConverter.ConvertToHexString(b)));
+            cache.Add(b, Encoding.ASCII.GetBytes(ByteConverter.ToHexString(b)));
         }
 
         return cache;

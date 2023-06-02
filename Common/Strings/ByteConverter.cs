@@ -1,28 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Aoc.Common.Strings;
 
 public static class ByteConverter
 {
-    public static string ConvertToString(byte[] bytes)
-    {
-        return Encoding.ASCII.GetString(bytes);
-    }
-        
-    public static string ConvertToHexString(IEnumerable<byte> bytes)
-    {
-        var sb = new StringBuilder();
-        foreach (var b in bytes)
-        {
-            sb.Append(ConvertToHexString(b));
-        }
-            
-        return sb.ToString();
-    }
-
-    public static string ConvertToHexString(byte b)
-    {
-        return b.ToString("X2").ToLower();
-    }
+    public static string ToString(byte[] bytes) => Encoding.ASCII.GetString(bytes);
+    public static string ToHexString(IEnumerable<byte> bytes) => string.Concat(bytes.Select(ToHexString));
+    public static string ToHexString(byte b) => b.ToString("X2").ToLower();
 }

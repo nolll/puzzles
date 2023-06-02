@@ -22,7 +22,7 @@ public class Hashfactory
     public string StringHashFromBytes(byte[] bytes)
     {
         var hashedBytes = ByteHashFromBytes(bytes);
-        return ByteConverter.ConvertToHexString(hashedBytes);
+        return ByteConverter.ToHexString(hashedBytes);
     }
 
     public byte[] ByteHashFromString(string str)

@@ -25,11 +25,11 @@ public class KeyGenerator
         _fiveInARowOfCache = new Dictionary<(int, byte), bool>();
     }
 
-    public int GetIndexOf64ThKey(string salt, int stretchCount = 0)
+    public int GetIndexOfNThKey(string salt, int n, int stretchCount)
     {
         var keyCount = 0;
         var index = 0;
-        while (keyCount < 64)
+        while (keyCount < n)
         {
             var hash = GetHash(salt, index, stretchCount);
             var isKey = IsKey(salt, index, hash, stretchCount);

@@ -12,7 +12,7 @@ public class Year2016Day14 : Puzzle
     public override PuzzleResult RunPart1()
     {
         var generator = new KeyGenerator();
-        var index = generator.GetIndexOf64ThKey(Input);
+        var index = generator.GetIndexOfNThKey(Input, 64, 0);
             
         return new PuzzleResult(index, 16_106);
     }
@@ -20,7 +20,7 @@ public class Year2016Day14 : Puzzle
     public override PuzzleResult RunPart2()
     {
         var generator = new KeyGenerator();
-        var index = generator.GetIndexOf64ThKey(Input, 2016);
+        var index = generator.GetIndexOfNThKey(Input, 64, 2016);
             
         return new PuzzleResult(index, 22_423);
     }

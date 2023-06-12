@@ -142,7 +142,7 @@ The fourth floor contains nothing relevant.
             new(new List<RadioisotopeItem>())
         };
 
-        var facility = new RadioisotopeFacility(floors, 0);
+        var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
         Assert.That(facility.Id, Is.EqualTo("0:HGHMLM||LG|"));
     }
 
@@ -167,8 +167,8 @@ The fourth floor contains nothing relevant.
             new(new List<RadioisotopeItem>())
         };
 
-        var facility = new RadioisotopeFacility(floors, 0);
-        Assert.That(facility.AnonymizedAnonymizedId, Is.EqualTo("0:1X1Y2Y||2X|"));
+        var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
+        Assert.That(facility.AnonymizedId, Is.EqualTo("0:1X1Y2Y||2X|"));
     }
 
     [Test]
@@ -182,7 +182,7 @@ The fourth floor contains nothing relevant.
             new(new List<RadioisotopeItem>())
         };
 
-        var facility = new RadioisotopeFacility(floors, 0);
+        var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
         Assert.That(facility.IsValid, Is.True);
     }
 
@@ -202,7 +202,7 @@ The fourth floor contains nothing relevant.
             new(new List<RadioisotopeItem>())
         };
 
-        var facility = new RadioisotopeFacility(floors, 0);
+        var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
         Assert.That(facility.IsValid, Is.False);
     }
 
@@ -222,7 +222,7 @@ The fourth floor contains nothing relevant.
                 })
         };
 
-        var facility = new RadioisotopeFacility(floors, 0);
+        var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
         Assert.That(facility.IsDone, Is.True);
     }
 
@@ -247,7 +247,7 @@ The fourth floor contains nothing relevant.
                 })
         };
 
-        var facility = new RadioisotopeFacility(floors, 0);
+        var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
         Assert.That(facility.IsDone, Is.False);
     }
 }

@@ -6,7 +6,7 @@ namespace Aoc.Puzzles.Year2016.Day11;
 public class RadioisotopeFloor
 {
     public IList<RadioisotopeItem> Items { get; }
-    public string Id => string.Concat(Items.Select(o => o.Id).OrderBy(o => o));
+    public string Id => string.Join(null, Items.Select(o => o.Id).OrderBy(o => o));
 
     public RadioisotopeFloor(IList<RadioisotopeItem> items)
     {

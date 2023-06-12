@@ -8,6 +8,8 @@ namespace Aoc.Puzzles.Year2016.Day11;
 public class RadioisotopeSimulator
 {
     private readonly HashSet<string> _previousFacilities = new();
+    private readonly IsotopeNameProvider _isotopeNameProvider = new();
+    private readonly AnonymousNameProvider _anonymousNameProvider = new();
 
     public int StepCount { get; }
 
@@ -31,7 +33,7 @@ public class RadioisotopeSimulator
                 var newFloor = oldFloor + 1;
                 foreach (var combination in itemCombinations)
                 {
-                    var f = new RadioisotopeFacility(facility, newFloor);
+                    var f = new RadioisotopeFacility(facility, newFloor, _isotopeNameProvider, _anonymousNameProvider);
                     foreach (var item in combination)
                     {
                         f.Floors[oldFloor].Items.Remove(item);
@@ -54,7 +56,7 @@ public class RadioisotopeSimulator
 
                 foreach (var item in facility.Floors[facility.ElevatorFloor].Items)
                 {
-                    var f = new RadioisotopeFacility(facility, newFloor);
+                    var f = new RadioisotopeFacility(facility, newFloor, _isotopeNameProvider, _anonymousNameProvider);
                     f.Floors[oldFloor].Items.Remove(item);
                     f.Floors[newFloor].Items.Add(item);
 
@@ -79,18 +81,18 @@ public class RadioisotopeSimulator
 
     private bool AlreadyVisited(RadioisotopeFacility f)
     {
-        return _previousFacilities.Contains(f.AnonymizedAnonymizedId);
+        return _previousFacilities.Contains(f.AnonymizedId);
     }
 
     private void TrackVisit(RadioisotopeFacility f)
     {
-        _previousFacilities.Add(f.AnonymizedAnonymizedId);
+        _previousFacilities.Add(f.AnonymizedId);
     }
 
     private RadioisotopeFacility ParseFacility(string input)
     {
         var strFloors = PuzzleInputReader.ReadLines(input);
-        return new RadioisotopeFacility(strFloors.Select(ParseFloor).ToList(), 0);
+        return new RadioisotopeFacility(strFloors.Select(ParseFloor).ToList(), 0, _isotopeNameProvider, _anonymousNameProvider);
     }
 
     private static RadioisotopeFloor ParseFloor(string s)

@@ -6,6 +6,8 @@ namespace Aoc.Puzzles.Year2016.Day11;
 
 public class RadioisotopeFacility
 {
+    private readonly IsotopeNameProvider _isotopeNameProvider;
+    private readonly AnonymousNameProvider _anonymousNameProvider;
     private string _id;
     private string _anonymizedId;
 
@@ -22,17 +24,35 @@ public class RadioisotopeFacility
     public bool IsValid => Floors.All(o => o.IsValid);
     private string FloorIds => string.Join('|', Floors.Select(o => o.Id));
 
-    public RadioisotopeFacility(IList<RadioisotopeFloor> floors, int elevatorFloor)
+    public RadioisotopeFacility(
+        IList<RadioisotopeFloor> floors,
+        int elevatorFloor,
+        IsotopeNameProvider isotopeNameProvider,
+        AnonymousNameProvider anonymousNameProvider)
+        : this(floors, elevatorFloor, 0, isotopeNameProvider, anonymousNameProvider)
     {
-        Floors = floors;
-        IterationCount = 0;
-        ElevatorFloor = elevatorFloor;
     }
 
-    public RadioisotopeFacility(RadioisotopeFacility facility, int elevatorFloor)
+    public RadioisotopeFacility(
+        RadioisotopeFacility facility,
+        int elevatorFloor,
+        IsotopeNameProvider isotopeNameProvider,
+        AnonymousNameProvider anonymousNameProvider)
+        : this(CopyFloors(facility), elevatorFloor, facility.IterationCount + 1, isotopeNameProvider, anonymousNameProvider)
     {
-        Floors = CopyFloors(facility);
-        IterationCount = facility.IterationCount + 1;
+    }
+
+    private RadioisotopeFacility(
+        IList<RadioisotopeFloor> floors,
+        int elevatorFloor,
+        int iterationCount,
+        IsotopeNameProvider isotopeNameProvider,
+        AnonymousNameProvider anonymousNameProvider)
+    {
+        _isotopeNameProvider = isotopeNameProvider;
+        _anonymousNameProvider = anonymousNameProvider;
+        Floors = floors;
+        IterationCount = iterationCount;
         ElevatorFloor = elevatorFloor;
     }
 
@@ -93,7 +113,7 @@ public class RadioisotopeFacility
         }
     }
 
-    public string AnonymizedAnonymizedId
+    public string AnonymizedId
     {
         get
         {
@@ -102,12 +122,17 @@ public class RadioisotopeFacility
 
             _anonymizedId = Id;
             var counter = 1;
-            while (_anonymizedId.Contains('G'))
+            var i = _anonymizedId.IndexOf('G');
+            
+            while (i > -1)
             {
-                var n = _anonymizedId[_anonymizedId.IndexOf('G') - 1];
-                _anonymizedId = _anonymizedId.Replace(string.Concat(n, 'G'), string.Concat(counter, 'X'))
-                    .Replace(string.Concat(n, 'M'), string.Concat(counter, 'Y'));
+                var n = _anonymizedId[i - 1];
+
+                _anonymizedId = _anonymizedId
+                    .Replace(_isotopeNameProvider.GetGeneratorName(n), _anonymousNameProvider.GetGeneratorName(counter))
+                    .Replace(_isotopeNameProvider.GetMicrochipName(n), _anonymousNameProvider.GetMicrochipName(counter));
                 counter++;
+                i = _anonymizedId.IndexOf('G');
             }
 
             return _anonymizedId;

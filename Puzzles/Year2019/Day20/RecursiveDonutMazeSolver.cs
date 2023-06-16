@@ -74,7 +74,6 @@ public class RecursiveDonutMazeSolver
             portalAddresses.Add(portal);
         }
 
-        var center = matrix.Center;
         var portals = new Dictionary<MatrixAddress, DonutPortal>();
         var orderedPortalAddresses = portalAddresses.OrderBy(o => o.Name).ToList();
         var topMatrix = matrix.Copy();
@@ -102,7 +101,7 @@ public class RecursiveDonutMazeSolver
         _map = new List<Matrix<char>> { topMatrix };
     }
 
-    private bool IsOuterPortal(int width, int height, MatrixAddress address)
+    private static bool IsOuterPortal(int width, int height, MatrixAddress address)
     {
         const int distance = 3;
         var xIsOnEdge = address.X == distance || width - address.X - 1 == distance;
@@ -110,18 +109,9 @@ public class RecursiveDonutMazeSolver
         return xIsOnEdge || yIsOnEdge;
     }
 
-    private IEnumerable<MatrixAddress> FindLetterCoords(Matrix<char> matrix)
+    private static IEnumerable<MatrixAddress> FindLetterCoords(Matrix<char> matrix)
     {
-        for (var y = 0; y < matrix.Height; y++)
-        {
-            for (var x = 0; x < matrix.Width; x++)
-            {
-                matrix.MoveTo(x, y);
-                var value = matrix.ReadValue();
-                if (IsLetter(value))
-                    yield return matrix.Address;
-            }
-        }
+        return matrix.Coords.Where(o => IsLetter(matrix.ReadValueAt(o)));
     }
 
     private static bool IsLetter(char c)
@@ -132,29 +122,28 @@ public class RecursiveDonutMazeSolver
     private int StepCountTo(MatrixAddress from, MatrixAddress to)
     {
         var coordCounts = GetCoordCounts(from, to);
-        var goal = coordCounts.FirstOrDefault(o => o.Depth == 0 && o.X == from.X && o.Y == from.Y);
+        var goal = coordCounts.FirstOrDefault(o => o.Depth == 0 && o.Coord.X == from.X && o.Coord.Y == from.Y);
         return goal?.Count ?? 0;
     }
 
     private IList<CoordCount> GetCoordCounts(MatrixAddress from, MatrixAddress to)
     {
-        var queue = new List<CoordCount> { new(0, to.X, to.Y, 0) };
+        var queue = new List<CoordCount> { new(0, to, 0) };
         var index = 0;
-        while (index < queue.Count && !queue.Any(o => o.Depth == 0 && o.X == from.X && o.Y == from.Y))
+        while (index < queue.Count && !queue.Any(o => o.Depth == 0 && o.Coord.X == from.X && o.Coord.Y == from.Y))
         {
             var next = queue[index];
             var depth = next.Depth;
             var matrix = GetMatrix(next.Depth);
-            matrix.MoveTo(next.X, next.Y);
             var localDepth = depth;
-            var adjacentCoords = matrix.PerpendicularAdjacentCoords
-                .Where(o => matrix.ReadValueAt(o) == Chars.Path && !queue.Any(q => q.Depth == localDepth && q.X == o.X && q.Y == o.Y))
+            var adjacentCoords = matrix.PerpendicularAdjacentCoordsTo(next.Coord)
+                .Where(o => matrix.ReadValueAt(o) == Chars.Path && !queue.Any(q => q.Depth == localDepth && q.Coord.X == o.X && q.Coord.Y == o.Y))
                 .ToList();
-            var newCoordCounts = adjacentCoords.Select(o => new CoordCount(depth, o.X, o.Y, next.Count + 1)).ToList();
-            if (_portals.TryGetValue(matrix.Address, out var portal))
+            var newCoordCounts = adjacentCoords.Select(o => new CoordCount(depth, o, next.Count + 1)).ToList();
+            if (_portals.TryGetValue(next.Coord, out var portal))
             {
                 depth = next.Depth + portal.DepthChange;
-                var portalCoordCount = new CoordCount(depth, portal.Target.X, portal.Target.Y, next.Count + 1);
+                var portalCoordCount = new CoordCount(depth, portal.Target, next.Count + 1);
                 newCoordCounts.Add(portalCoordCount);
             }
                 
@@ -169,15 +158,13 @@ public class RecursiveDonutMazeSolver
     private class CoordCount
     {
         public int Depth { get; }
-        public int X { get; }
-        public int Y { get; }
+        public MatrixAddress Coord { get; }
         public int Count { get; }
 
-        public CoordCount(int depth, int x, int y, int count)
+        public CoordCount(int depth, MatrixAddress coord, int count)
         {
             Depth = depth;
-            X = x;
-            Y = y;
+            Coord = coord;
             Count = count;
         }
     }

@@ -47,16 +47,21 @@ public static class PathFinder
     private static IList<CoordCount> GetCoordCounts(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
     {
         var queue = new List<CoordCount> { new(to.X, to.Y, 0) };
+        var seen = new HashSet<(int, int)> { to.Tuple };
         var index = 0;
-        while (index < queue.Count && !queue.Any(o => o.X == from.X && o.Y == from.Y))
+        while (index < queue.Count && !seen.Contains(from.Tuple))
         {
             var next = queue[index];
             matrix.MoveTo(next.X, next.Y);
             var adjacentCoords = matrix.PerpendicularAdjacentCoords
-                .Where(o => matrix.ReadValueAt(o) == '.' && !queue.Any(q => q.X == o.X && q.Y == o.Y))
+                .Where(o => matrix.ReadValueAt(o) == '.' && !seen.Contains(o.Tuple))
                 .ToList();
-            var newCoordCounts = adjacentCoords.Select(o => new CoordCount(o.X, o.Y, next.Count + 1));
+            var newCoordCounts = adjacentCoords.Select(o => new CoordCount(o, next.Count + 1)).ToList();
             queue.AddRange(newCoordCounts);
+            foreach (var coordCount in newCoordCounts)
+            {
+                seen.Add(coordCount.Coord.Tuple);
+            }
             index++;
         }
 
@@ -92,6 +97,7 @@ public class CoordCount
     public int X { get; }
     public int Y { get; }
     public int Count { get; }
+    public MatrixAddress Coord { get; }
 
     public CoordCount(int x, int y, int count)
     {
@@ -104,6 +110,7 @@ public class CoordCount
     {
         X = coord.X;
         Y = coord.Y;
+        Coord = coord;
         Count = count;
     }
 }

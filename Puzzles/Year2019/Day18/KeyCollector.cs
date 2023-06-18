@@ -138,10 +138,10 @@ public class KeyCollector
         _keys = new List<VaultKey>();
         _doors = new List<VaultDoor>();
         _matrix = new Matrix<char>(width, height);
-        var y = 0;
+        var y = _matrix.YMin;
         foreach (var row in rows)
         {
-            var x = 0;
+            var x = _matrix.XMin;
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {

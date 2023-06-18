@@ -13,21 +13,12 @@ public class RecursiveDonutMazeSolver
         public const char Space = ' ';
     }
 
-    private IList<Matrix<char>> _map;
     public int ShortestStepCount { get; }
     private MatrixAddress _startAddress;
     private MatrixAddress _endAddress;
-    private Matrix<char> _matrix;
     private IDictionary<(int, int), DonutPortal> _portals;
     private IDictionary<(int, int), IList<MatrixAddress>> _outerAdjacentCache;
     private IDictionary<(int, int), IList<MatrixAddress>> _innerAdjacentCache;
-
-    private Matrix<char> GetMatrix(int depth)
-    {
-        if (_map.Count <= depth)
-            _map.Add(_matrix.Copy());
-        return _map[depth];
-    }
 
     public RecursiveDonutMazeSolver(string input)
     {
@@ -99,11 +90,9 @@ public class RecursiveDonutMazeSolver
             topMatrix.WriteValue(Chars.Wall);
         }
 
-        _matrix = matrix;
         _portals = portals;
         _outerAdjacentCache = BuildAdjacentCache(topMatrix);
         _innerAdjacentCache = BuildAdjacentCache(matrix);
-        _map = new List<Matrix<char>> { topMatrix };
     }
 
     private IDictionary<(int, int), IList<MatrixAddress>> BuildAdjacentCache(Matrix<char> matrix)

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Aoc.Common.CoordinateSystems.CoordinateSystem2D;
@@ -142,7 +141,7 @@ public class RecursiveDonutMazeSolver
 
     private int StepCountTo(MatrixAddress from, MatrixAddress to)
     {
-        var coordCounts = GetCoordCountsNew(from, to);
+        var coordCounts = GetCoordCounts(from, to);
         var goal = coordCounts.FirstOrDefault(o => o.Depth == 0 && o.Coord.X == from.X && o.Coord.Y == from.Y);
         return goal?.Count ?? 0;
     }
@@ -159,7 +158,7 @@ public class RecursiveDonutMazeSolver
             : _innerAdjacentCache;
     }
 
-    private IList<CoordCount> GetCoordCountsNew(MatrixAddress from, MatrixAddress to)
+    private IList<CoordCount> GetCoordCounts(MatrixAddress from, MatrixAddress to)
     {
         var queue = new List<CoordCount> { new(0, to, 0) };
         var seen = new HashSet<(int, int, int)>();

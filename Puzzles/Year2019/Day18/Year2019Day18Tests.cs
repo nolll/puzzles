@@ -98,14 +98,14 @@ public class Year2019Day18Tests
         const string input = """
 #######
 #a.#Cd#
-##@#@##
-#######
-##@#@##
+##...##
+##.@.##
+##...##
 #cB#Ab#
 #######
 """;
 
-        var keyCollector = new KeyCollector(input);
+        var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
 
         Assert.That(keyCollector.ShortestPath, Is.EqualTo(8));
@@ -117,14 +117,14 @@ public class Year2019Day18Tests
         const string input = """
 ###############
 #d.ABC.#.....a#
-######@#@######
-###############
-######@#@######
+######...######
+######.@.######
+######...######
 #b.....#.....c#
 ###############
 """;
 
-        var keyCollector = new KeyCollector(input);
+        var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
 
         Assert.That(keyCollector.ShortestPath, Is.EqualTo(24));
@@ -136,14 +136,14 @@ public class Year2019Day18Tests
         const string input = """
 #############
 #DcBa.#.GhKl#
-#.###@#@#I###
-#e#d#####j#k#
-###C#@#@###J#
+#.###...#I###
+#e#d#.@.#j#k#
+###C#...###J#
 #fEbA.#.FgHi#
 #############
 """;
 
-        var keyCollector = new KeyCollector(input);
+        var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
 
         Assert.That(keyCollector.ShortestPath, Is.EqualTo(32));
@@ -158,15 +158,15 @@ public class Year2019Day18Tests
 #############
 #g#f.D#..h#l#
 #F###e#E###.#
-#dCba@#@BcIJ#
-#############
-#nK.L@#@G...#
+#dCba...BcIJ#
+#####.@.#####
+#nK.L...G...#
 #M###N#H###.#
 #o#m..#i#jk.#
 #############
 """;
 
-        var keyCollector = new KeyCollector(input.Trim());
+        var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
 
         Assert.That(keyCollector.ShortestPath, Is.EqualTo(72));

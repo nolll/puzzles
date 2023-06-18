@@ -6,7 +6,7 @@ public class Year2018Day15 : Puzzle
 {
     public override string Title => "Beverage Bandits";
     public override string Comment => "Battle Simulator";
-    public override bool IsSlow => true; // part 1: 26s, part2: 28s
+    public override bool IsSlow => true; // Could still use optimization, the hard coded 14 is a little ugly
 
     public override PuzzleResult RunPart1()
     {

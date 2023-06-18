@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Aoc.Common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Aoc.Puzzles.Year2019.Day18;
@@ -15,12 +17,12 @@ public class KeyCollector
 
     public int ShortestPath { get; private set; }
 
-    public KeyCollector(string input)
+    public KeyCollector(string input, bool useFourRobots = false)
     {
         _paths = new Dictionary<(char, char), VaultPath>();
         _cache = new Dictionary<string, int>();
         _robots = new List<VaultRobot>();
-        Init(input);
+        Init(input, useFourRobots);
         MapPaths();
     }
 
@@ -130,7 +132,7 @@ public class KeyCollector
         return $"{key}.{joinedKeys}";
     }
 
-    private void Init(string input)
+    private void Init(string input, bool useFourRobots)
     {
         var rows = input.Trim().Split('\n');
         var width = rows.First().Length;
@@ -139,6 +141,7 @@ public class KeyCollector
         _doors = new List<VaultDoor>();
         _matrix = new Matrix<char>(width, height);
         var y = _matrix.YMin;
+        var robotLocation = _matrix.StartAddress;
         foreach (var row in rows)
         {
             var x = _matrix.XMin;
@@ -160,9 +163,8 @@ public class KeyCollector
                 }
                 else if (c == '@')
                 {
-                    var robot = new VaultRobot(address);
-                    _robots.Add(robot);
-                    charToWrite = '.';
+                    robotLocation = address;
+                    charToWrite = '@';
                 }
 
                 _matrix.WriteValueAt(address, charToWrite);
@@ -171,6 +173,41 @@ public class KeyCollector
             }
 
             y += 1;
+        }
+
+        if (useFourRobots)
+        {
+            _matrix.WriteValueAt(robotLocation.X, robotLocation.Y - 1, '#');
+            _matrix.WriteValueAt(robotLocation.X - 1, robotLocation.Y, '#');
+            _matrix.WriteValueAt(robotLocation, '#');
+            _matrix.WriteValueAt(robotLocation.X + 1, robotLocation.Y, '#');
+            _matrix.WriteValueAt(robotLocation.X, robotLocation.Y + 1, '#');
+
+            var robot1Location = new MatrixAddress(robotLocation.X - 1, robotLocation.Y - 1);
+            _matrix.WriteValueAt(robot1Location, '.'); 
+            var robot1 = new VaultRobot(robot1Location);
+            _robots.Add(robot1);
+
+            var robot2Location = new MatrixAddress(robotLocation.X + 1, robotLocation.Y - 1);
+            _matrix.WriteValueAt(robot2Location, '.');
+            var robot2 = new VaultRobot(robot2Location);
+            _robots.Add(robot2);
+
+            var robot3Location = new MatrixAddress(robotLocation.X - 1, robotLocation.Y + 1);
+            _matrix.WriteValueAt(robot3Location, '.'); 
+            var robot3 = new VaultRobot(robot3Location);
+            _robots.Add(robot3);
+
+            var robot4Location = new MatrixAddress(robotLocation.X + 1, robotLocation.Y + 1);
+            _matrix.WriteValueAt(robot4Location, '.'); 
+            var robot4 = new VaultRobot(robot4Location);
+            _robots.Add(robot4);
+        }
+        else
+        {
+            var robot = new VaultRobot(robotLocation);
+            _matrix.WriteValueAt(robotLocation, '.');
+            _robots.Add(robot);
         }
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Aoc.Common.CoordinateSystems.CoordinateSystem2D;
@@ -18,7 +19,9 @@ public class RecursiveDonutMazeSolver
     private MatrixAddress _startAddress;
     private MatrixAddress _endAddress;
     private Matrix<char> _matrix;
-    private IDictionary<MatrixAddress, DonutPortal> _portals;
+    private IDictionary<(int, int), DonutPortal> _portals;
+    private IDictionary<(int, int), IList<MatrixAddress>> _outerAdjacentCache;
+    private IDictionary<(int, int), IList<MatrixAddress>> _innerAdjacentCache;
 
     private Matrix<char> GetMatrix(int depth)
     {
@@ -44,18 +47,18 @@ public class RecursiveDonutMazeSolver
             var currentCoords = letterCoords.First();
             letterCoords.RemoveAt(0);
             matrix.MoveTo(currentCoords);
-            var secondsLetterCoords = matrix.PerpendicularAdjacentCoords.First(o => IsLetter(matrix.ReadValueAt(o)));
+            var secondLetterCoords = matrix.PerpendicularAdjacentCoords.First(o => IsLetter(matrix.ReadValueAt(o)));
             var firstLetter = matrix.ReadValueAt(currentCoords);
-            var secondLetter = matrix.ReadValueAt(secondsLetterCoords);
-            letterCoords.Remove(secondsLetterCoords);
+            var secondLetter = matrix.ReadValueAt(secondLetterCoords);
+            letterCoords.Remove(secondLetterCoords);
             matrix.MoveTo(currentCoords);
             matrix.WriteValue(Chars.Wall);
-            matrix.MoveTo(secondsLetterCoords);
+            matrix.MoveTo(secondLetterCoords);
             matrix.WriteValue(Chars.Wall);
             var secondLetterHasAdjacentCorridor = matrix.PerpendicularAdjacentValues.Any(o => o == Chars.Path);
             matrix.MoveTo(currentCoords);
             var name = string.Concat(firstLetter, secondLetter);
-            var letterAddress = secondLetterHasAdjacentCorridor ? secondsLetterCoords : currentCoords;
+            var letterAddress = secondLetterHasAdjacentCorridor ? secondLetterCoords : currentCoords;
             matrix.MoveTo(letterAddress);
             var portalAddress = matrix.PerpendicularAdjacentCoords.First(o => matrix.ReadValueAt(o) == Chars.Path);
             if (name == "AA")
@@ -74,9 +77,10 @@ public class RecursiveDonutMazeSolver
             portalAddresses.Add(portal);
         }
 
-        var portals = new Dictionary<MatrixAddress, DonutPortal>();
+        var portals = new Dictionary<(int, int), DonutPortal>();
         var orderedPortalAddresses = portalAddresses.OrderBy(o => o.Name).ToList();
         var topMatrix = matrix.Copy();
+
         while (orderedPortalAddresses.Any())
         {
             var a = orderedPortalAddresses.First();
@@ -84,28 +88,45 @@ public class RecursiveDonutMazeSolver
             var b = orderedPortalAddresses.First();
             orderedPortalAddresses.RemoveAt(0);
 
-            var aIsOuter = IsOuterPortal(matrix.Width, matrix.Height, a.Address);
+            var aIsOuter = IsOuterPortal(matrix, a.Address);
             var outer = aIsOuter ? a : b;
             var inner = aIsOuter ? b : a;
 
             var innerPortal = new InnerDonutPortal(inner.Name, inner.Address, outer.Address);
-            portals.Add(inner.Address, innerPortal);
+            portals.Add(inner.Address.Tuple, innerPortal);
             var outerPortal = new OuterDonutPortal(outer.Name, outer.Address, inner.Address);
-            portals.Add(outer.Address, outerPortal);
+            portals.Add(outer.Address.Tuple, outerPortal);
             topMatrix.MoveTo(outer.Address);
             topMatrix.WriteValue(Chars.Wall);
         }
 
         _matrix = matrix;
         _portals = portals;
+        _outerAdjacentCache = BuildAdjacentCache(topMatrix);
+        _innerAdjacentCache = BuildAdjacentCache(matrix);
         _map = new List<Matrix<char>> { topMatrix };
     }
 
-    private static bool IsOuterPortal(int width, int height, MatrixAddress address)
+    private IDictionary<(int, int), IList<MatrixAddress>> BuildAdjacentCache(Matrix<char> matrix)
     {
-        const int distance = 3;
-        var xIsOnEdge = address.X == distance || width - address.X - 1 == distance;
-        var yIsOnEdge = address.Y == distance || height - address.Y - 1 == distance;
+        var dictionary = new Dictionary<(int, int), IList<MatrixAddress>>();
+        foreach (var coord in matrix.Coords)
+        {
+            var coords = matrix
+                .PerpendicularAdjacentCoordsTo(coord)
+                .Where(o => matrix.ReadValueAt(o) == Chars.Path)
+                .ToList();
+            dictionary.Add(coord.Tuple, coords);
+        }
+
+        return dictionary;
+    }
+
+    private static bool IsOuterPortal(Matrix<char> matrix, MatrixAddress address)
+    {
+        const int distance = 2;
+        var xIsOnEdge = matrix.XMin + distance == address.X || matrix.XMax - distance == address.X;
+        var yIsOnEdge = matrix.YMin + distance == address.Y || matrix.YMax - distance == address.Y;
         return xIsOnEdge || yIsOnEdge;
     }
 
@@ -121,34 +142,49 @@ public class RecursiveDonutMazeSolver
 
     private int StepCountTo(MatrixAddress from, MatrixAddress to)
     {
-        var coordCounts = GetCoordCounts(from, to);
+        var coordCounts = GetCoordCountsNew(from, to);
         var goal = coordCounts.FirstOrDefault(o => o.Depth == 0 && o.Coord.X == from.X && o.Coord.Y == from.Y);
         return goal?.Count ?? 0;
     }
 
-    private IList<CoordCount> GetCoordCounts(MatrixAddress from, MatrixAddress to)
+    private IList<MatrixAddress> GetAdjacentCoords(MatrixAddress coord, int depth)
+    {
+        return GetAdjacentCache(depth)[coord.Tuple];
+    }
+
+    private IDictionary<(int, int), IList<MatrixAddress>> GetAdjacentCache(int depth)
+    {
+        return depth == 0
+            ? _outerAdjacentCache
+            : _innerAdjacentCache;
+    }
+
+    private IList<CoordCount> GetCoordCountsNew(MatrixAddress from, MatrixAddress to)
     {
         var queue = new List<CoordCount> { new(0, to, 0) };
+        var seen = new HashSet<(int, int, int)>();
         var index = 0;
-        while (index < queue.Count && !queue.Any(o => o.Depth == 0 && o.Coord.X == from.X && o.Coord.Y == from.Y))
+        while (index < queue.Count && !seen.Contains((0, from.X, from.Y)))
         {
             var next = queue[index];
-            var depth = next.Depth;
-            var matrix = GetMatrix(next.Depth);
-            var localDepth = depth;
-            var adjacentCoords = matrix.PerpendicularAdjacentCoordsTo(next.Coord)
-                .Where(o => matrix.ReadValueAt(o) == Chars.Path && !queue.Any(q => q.Depth == localDepth && q.Coord.X == o.X && q.Coord.Y == o.Y))
+            var adjacentCoords = GetAdjacentCoords(next.Coord, next.Depth)
+                .Where(o => !seen.Contains((next.Depth, o.X, o.Y)))
                 .ToList();
-            var newCoordCounts = adjacentCoords.Select(o => new CoordCount(depth, o, next.Count + 1)).ToList();
-            if (_portals.TryGetValue(next.Coord, out var portal))
+
+            foreach (var adjacentCoord in adjacentCoords)
             {
-                depth = next.Depth + portal.DepthChange;
-                var portalCoordCount = new CoordCount(depth, portal.Target, next.Count + 1);
-                newCoordCounts.Add(portalCoordCount);
+                var newCoordCount = new CoordCount(next.Depth, adjacentCoord, next.Count + 1);
+                queue.Add(newCoordCount);
+                seen.Add((newCoordCount.Depth, newCoordCount.Coord.X, newCoordCount.Coord.Y));
             }
-                
-            queue.AddRange(newCoordCounts);
-            
+
+            if (_portals.TryGetValue((next.Coord.X, next.Coord.Y), out var portal))
+            {
+                var portalCoordCount = new CoordCount(next.Depth + portal.DepthChange, portal.Target, next.Count + 1);
+                queue.Add(portalCoordCount);
+                seen.Add((portalCoordCount.Depth, portalCoordCount.Coord.X, portalCoordCount.Coord.Y));
+            }
+
             index++;
         }
         

@@ -2,13 +2,13 @@
 
 namespace Aoc.Printing;
 
-public class SpectreHelpPrinter : IHelpPrinter
+public static class SpectreHelpPrinter
 {
-    public void Print()
+    public static void Print()
     {
         AnsiConsole.WriteLine("My solutions to Advent of Code.");
         AnsiConsole.WriteLine("https://github.com/nolll/aoc");
-        AnsiConsole.WriteLine(); 
+        AnsiConsole.WriteLine();
         AnsiConsole.WriteLine("Usage dotnet run -- [-y [year]] [-d [day]]");
         AnsiConsole.WriteLine();
         AnsiConsole.WriteLine("If day is omitted, all days for the specified year will run.");

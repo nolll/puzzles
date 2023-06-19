@@ -68,7 +68,7 @@ public class Program
 
     private static void ShowHelp()
     {
-        new SpectreHelpPrinter().Print();
+        SpectreHelpPrinter.Print();
     }
 
     private static Parameters ParseParameters(string[] args)

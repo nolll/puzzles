@@ -1,3 +1,4 @@
+using NUnit.Framework.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,7 +13,7 @@ public static class MathTools
 
     public static long Lcm(params long[] numbers)
     {
-        return numbers.Aggregate(Lcm);
+        return Lcm((IEnumerable<long>)numbers);
     }
 
     public static long Lcm(IEnumerable<long> numbers)

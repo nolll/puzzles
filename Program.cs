@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Aoc.ConsoleTools;
 using Aoc.Platform;
@@ -54,7 +53,7 @@ public class Program
         if (!eventDays.Any())
             throw new Exception("Event not found!");
 
-        var filteredDays = FilterDays(eventDays, parameters);
+        var filteredDays = new DayFilter(parameters).Filter(eventDays);
         Runner.Run(filteredDays);
     }
 
@@ -62,7 +61,7 @@ public class Program
     {
         var puzzleRepository = new PuzzleRepository();
         var allDays = puzzleRepository.GetAll();
-        var filteredDays = FilterDays(allDays, parameters);
+        var filteredDays = new DayFilter(parameters).Filter(allDays);
         Runner.Run(filteredDays);
     }
 
@@ -78,16 +77,5 @@ public class Program
 #else
         return Parameters.Parse(args);
 #endif
-    }
-
-    private static List<PuzzleDay> FilterDays(List<PuzzleDay> days, Parameters parameters)
-    {
-        if (parameters.RunSlowOnly)
-            return days.Where(o => o.Puzzle.IsSlow).ToList();
-
-        if (parameters.RunCommentedOnly)
-            return days.Where(o => !string.IsNullOrEmpty(o.Puzzle.Comment)).ToList();
-
-        return days;
     }
 }

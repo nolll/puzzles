@@ -40,7 +40,7 @@ public class PuzzleRepository
 
     private List<PuzzleDay> CreateDays()
     {
-        var types = GetConcreteSubclassesOf<Puzzle>();
+        var types = GetPuzzleClasses();
         return types.Select(CreateDay).OrderBy(o => o.Year).ThenBy(o => o.Day).ToList();
     }
 
@@ -54,6 +54,17 @@ public class PuzzleRepository
         return new PuzzleDay(year, day, puzzleDay);
     }
 
+    private static IEnumerable<Type> GetPuzzleClasses()
+    {
+        return GetConcreteSubclassesOf<Puzzle>().Where(IsPuzzle);
+    }
+
+    private static bool IsPuzzle(Type type)
+    {
+        var ns = type.Namespace ?? string.Empty;
+        return ns.Contains("Aoc.Puzzles");
+    }
+
     private static IEnumerable<Type> GetConcreteSubclassesOf<T>() where T : class
     {
         var assembly = Assembly.GetAssembly(typeof(T));
@@ -61,6 +72,6 @@ public class PuzzleRepository
         if (assembly == null)
             return new List<Type>();
             
-        return assembly.GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T)));
+        return assembly.GetTypes().Where(o => o.IsClass && !o.IsAbstract && o.IsSubclassOf(typeof(T)));
     }
 }

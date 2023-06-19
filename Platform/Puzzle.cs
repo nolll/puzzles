@@ -10,6 +10,7 @@ public abstract class Puzzle
     public virtual string Comment => null;
     public virtual bool IsSlow => false;
     public virtual bool NeedsRewrite => false;
+    public virtual bool IsFunToOptimize => false;
 
     public virtual PuzzleResult RunPart1()
     {

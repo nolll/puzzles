@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Aoc.Common.Combinatorics;
@@ -10,6 +11,8 @@ public class RadioisotopeSimulator
     private readonly HashSet<string> _previousFacilities = new();
     private readonly IsotopeNameProvider _isotopeNameProvider = new();
     private readonly AnonymousNameProvider _anonymousNameProvider = new();
+
+    private int _itemCounter = 0;
 
     public int StepCount { get; }
 
@@ -95,7 +98,7 @@ public class RadioisotopeSimulator
         return new RadioisotopeFacility(strFloors.Select(ParseFloor).ToList(), 0, _isotopeNameProvider, _anonymousNameProvider);
     }
 
-    private static RadioisotopeFloor ParseFloor(string s)
+    private RadioisotopeFloor ParseFloor(string s)
     {
         s = s.Replace(" microchip", "-microchip").Replace(" generator", "-generator").Replace(",", "").Replace(".", "");
         var parts = s.Split(" ");
@@ -106,13 +109,15 @@ public class RadioisotopeSimulator
         return new RadioisotopeFloor(items);
     }
 
-    private static RadioisotopeItem CreateItem(string s)
+    private RadioisotopeItem CreateItem(string s, int index)
     {
+        var i = _itemCounter;
+        _itemCounter++;
         var parts = s.Split('-');
         var name = parts.First();
         var type = parts.Last();
         if (type == "microchip")
-            return new Microchip(name);
-        return new Generator(name);
+            return new Microchip(name, i);
+        return new Generator(name, i);
     }
 }

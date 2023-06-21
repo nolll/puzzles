@@ -170,7 +170,7 @@ The fourth floor contains nothing relevant.
         var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
         Assert.That(facility.AnonymizedId, Is.EqualTo("0:1X1Y2Y||2X|"));
     }
-
+    
     [Test]
     public void FacilityIsValid()
     {

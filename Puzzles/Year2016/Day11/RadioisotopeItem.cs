@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace Aoc.Puzzles.Year2016.Day11;
@@ -5,12 +6,14 @@ namespace Aoc.Puzzles.Year2016.Day11;
 public abstract class RadioisotopeItem
 {
     public string Name { get; }
+    public int Index { get; }
     public RadioisotopeType Type { get; }
     public string Id { get; }
 
-    protected RadioisotopeItem(string name, RadioisotopeType type)
+    protected RadioisotopeItem(string name, int index, RadioisotopeType type)
     {
         Name = name;
+        Index = index;
         Type = type;
         Id = BuildId();
     }

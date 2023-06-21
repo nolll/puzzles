@@ -15,36 +15,30 @@ public class PuzzleRepository
         _allDays = CreateDays();
     }
 
-    public PuzzleDay GetDay(int? selectedYear, int? selectedDay)
-    {
-        return selectedYear != null && selectedDay != null
+    public PuzzleDay GetDay(int? selectedYear, int? selectedDay) =>
+        selectedYear != null && selectedDay != null
             ? _allDays.FirstOrDefault(o => o.Year == selectedYear.Value &&  o.Day == selectedDay.Value)
             : _allDays.Last();
-    }
 
     public List<PuzzleDay> GetEventDays(int? selectedYear)
     {
         if (selectedYear != null)
-        {
             return _allDays.Where(o => o.Year == selectedYear).ToList();
-        }
 
         var maxYear = _allDays.Select(o => o.Year).Max();
         return _allDays.Where(o => o.Year == maxYear).ToList();
     }
         
-    public List<PuzzleDay> GetAll()
-    {
-        return _allDays;
-    }
+    public List<PuzzleDay> GetAll() => _allDays;
 
-    private List<PuzzleDay> CreateDays()
-    {
-        var types = GetPuzzleClasses();
-        return types.Select(CreateDay).OrderBy(o => o.Year).ThenBy(o => o.Day).ToList();
-    }
+    private List<PuzzleDay> CreateDays() => 
+        GetPuzzleClasses()
+            .Select(CreateDay)
+            .OrderBy(o => o.Year)
+            .ThenBy(o => o.Day)
+            .ToList();
 
-    private PuzzleDay CreateDay(Type t)
+    private static PuzzleDay CreateDay(Type t)
     {
         var (year, day) = PuzzleParser.ParseType(t);
         var puzzleDay = (Puzzle)Activator.CreateInstance(t);
@@ -54,10 +48,8 @@ public class PuzzleRepository
         return new PuzzleDay(year, day, puzzleDay);
     }
 
-    private static IEnumerable<Type> GetPuzzleClasses()
-    {
-        return GetConcreteSubclassesOf<Puzzle>().Where(IsPuzzle);
-    }
+    private static IEnumerable<Type> GetPuzzleClasses() => 
+        GetConcreteSubclassesOf<Puzzle>().Where(IsPuzzle);
 
     private static bool IsPuzzle(Type type)
     {
@@ -69,9 +61,8 @@ public class PuzzleRepository
     {
         var assembly = Assembly.GetAssembly(typeof(T));
 
-        if (assembly == null)
-            return new List<Type>();
-            
-        return assembly.GetTypes().Where(o => o.IsClass && !o.IsAbstract && o.IsSubclassOf(typeof(T)));
+        return assembly != null
+            ? assembly.GetTypes().Where(o => o.IsClass && !o.IsAbstract && o.IsSubclassOf(typeof(T))) 
+            : new List<Type>();
     }
 }

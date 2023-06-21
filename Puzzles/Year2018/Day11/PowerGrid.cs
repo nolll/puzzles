@@ -18,33 +18,6 @@ public class PowerGrid
         FillMatrix();
     }
 
-    public (MatrixAddress coords, int size) GetMaxCoordsAnySizeSlow()
-    {
-        var maxPowerLevel = int.MinValue;
-        var maxPowerLevelSize = 0;
-        var maxPowerLevelAddress = new MatrixAddress(0, 0);
-        for (var y = 0; y < MatrixSize; y++)
-        {
-            for (var x = 0; x < MatrixSize; x++)
-            {
-                var maxSquareSize = MatrixSize - Math.Max(x, y);
-                for (var size = 1; size < maxSquareSize; size++)
-                {
-                    var powerLevel = GetSquarePowerLevel(x, y, size);
-
-                    if (powerLevel > maxPowerLevel)
-                    {
-                        maxPowerLevel = powerLevel;
-                        maxPowerLevelSize = size;
-                        maxPowerLevelAddress = new MatrixAddress(x, y);
-                    }
-                }
-            }
-        }
-
-        return (maxPowerLevelAddress, maxPowerLevelSize);
-    }
-
     public (MatrixAddress coords, int size) GetMaxCoordsAnySize()
     {
         var maxPowerLevel = int.MinValue;
@@ -58,24 +31,18 @@ public class PowerGrid
                 var powerLevel = 0;
                 for (var size = 1; size < maxSquareSize; size++)
                 {
-                    if (size == 1)
+                    for (var yy = 0; yy <= size; yy++)
                     {
-                        powerLevel += _matrix[0, 0];
+                        var x = xSquare + size;
+                        var y = ySquare + yy;
+                        powerLevel += _matrix[x, y];
                     }
-                    else
+
+                    for (var xx = 0; xx <= size; xx++)
                     {
-                        for (var yy = 0; yy <= size; yy++)
-                        {
-                            var x = xSquare + size;
-                            var y = ySquare + yy;
-                            powerLevel += _matrix[x, y];
-                        }
-                        for (var xx = 0; xx < size; xx++)
-                        {
-                            var x = xSquare + xx;
-                            var y = ySquare + size;
-                            powerLevel += _matrix[x, y];
-                        }
+                        var x = xSquare + xx;
+                        var y = ySquare + size;
+                        powerLevel += _matrix[x, y];
                     }
 
                     if (powerLevel > maxPowerLevel)

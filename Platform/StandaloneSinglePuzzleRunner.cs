@@ -37,14 +37,14 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
             AnsiConsole.MarkupLine($"[yellow]{day.Puzzle.Comment}[/]");
     }
 
-    private void RunAndPrintPuzzleResult(int puzzleNumber, Func<PuzzleResult> puzzleFunc)
+    private static void RunAndPrintPuzzleResult(int puzzleNumber, Func<PuzzleResult> puzzleFunc)
     {
         var result = RunPuzzle(puzzleNumber, puzzleFunc);
         AnsiConsole.WriteLine();
         WriteAnswer(result);
     }
 
-    private PuzzleResult RunPuzzle(int puzzleNumber, Func<PuzzleResult> puzzleFunc)
+    private static PuzzleResult RunPuzzle(int puzzleNumber, Func<PuzzleResult> puzzleFunc)
     {
         PuzzleResult result = null;
         PrintTime(puzzleNumber); 
@@ -59,7 +59,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         return result;
     }
 
-    private void PrintTime(int puzzleNumber, TimeSpan? time = null)
+    private static void PrintTime(int puzzleNumber, TimeSpan? time = null)
     {
         var formattedTime = time is not null
             ? Formatter.FormatTime(time.Value)
@@ -68,7 +68,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         AnsiConsole.Write($"\rPart {puzzleNumber}: {formattedTime}".PadRight(StatusPadding));
     }
     
-    private void WriteAnswer(PuzzleResult result)
+    private static void WriteAnswer(PuzzleResult result)
     {
         if (result is null)
             AnsiConsole.MarkupLine(MarkupColor("Missing", Color.Red));

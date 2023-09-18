@@ -74,23 +74,24 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 
     private string MarkupTime(TimeSpan time, PuzzleResultStatus status)
     {
-        if (status is PuzzleResultStatus.Correct)
-            return MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Green);
-        if (status is PuzzleResultStatus.Failed or PuzzleResultStatus.Wrong)
-            return MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red);
-        if (status is PuzzleResultStatus.Timeout)
-            return MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red);
-        return PadResult("");
+        return status switch
+        {
+            PuzzleResultStatus.Correct =>
+                MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Green),
+            PuzzleResultStatus.Failed or PuzzleResultStatus.Wrong => 
+                MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red),
+            PuzzleResultStatus.Timeout => 
+                MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
+            _ => PadResult("")
+        };
     }
 
     private static string PadResult(string s) => Pad(s, ResultColumnWidth);
     private static string PadComment(string s) => Pad(s, CommentColumnWidth);
     private static string Pad(string s, int width) => s.PadRight(width);
 
-    private void PrintRow()
-    {
+    private void PrintRow() => 
         AnsiConsole.Markup($"\r| {_dayAndYear} | {_part1Markup} | {_part2Markup} | {_commentMarkup} |");
-    }
 
     private static string MarkupComment(string comment) =>
         comment is null

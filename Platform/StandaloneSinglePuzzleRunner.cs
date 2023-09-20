@@ -37,7 +37,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
             AnsiConsole.MarkupLine($"[yellow]{day.Puzzle.Comment}[/]");
     }
 
-    private static void RunAndPrintPuzzleResult(int puzzleNumber, Func<PuzzleResult> puzzleFunc)
+    private void RunAndPrintPuzzleResult(int puzzleNumber, Func<PuzzleResult> puzzleFunc)
     {
         var result = RunPuzzle(puzzleNumber, puzzleFunc);
         AnsiConsole.WriteLine();

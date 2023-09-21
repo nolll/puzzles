@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day16;
 
-public class Year2019Day16 : Puzzle
+public class Year2019Day16 : AocPuzzle
 {
     public override string Title => "Flawed Frequency Transmission";
 

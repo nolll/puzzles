@@ -2,11 +2,12 @@
 using System.Linq;
 using Aoc.Platform;
 using common.CoordinateSystems.CoordinateSystem2D;
+using common.Puzzles;
 using common.Strings;
 
 namespace Aoc.Puzzles.Year2022.Day23;
 
-public class Year2022Day23 : Puzzle
+public class Year2022Day23 : AocPuzzle
 {
     public override string Title => "Unstable Diffusion";
 

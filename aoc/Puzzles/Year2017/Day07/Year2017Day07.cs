@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day07;
 
-public class Year2017Day07 : Puzzle
+public class Year2017Day07 : AocPuzzle
 {
     public override string Title => "Recursive Circus";
 

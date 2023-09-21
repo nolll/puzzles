@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day24;
 
-public class Year2019Day24 : Puzzle
+public class Year2019Day24 : AocPuzzle
 {
     public override string Title => "Planet of Discord";
 

@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2018.Day13;
 
-public class Year2018Day13 : Puzzle
+public class Year2018Day13 : AocPuzzle
 {
     public override string Title => "Mine Cart Madness";
 

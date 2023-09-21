@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2015.Day04;
 
-public class Year2015Day04 : Puzzle
+public class Year2015Day04 : AocPuzzle
 {
     private int _index;
 

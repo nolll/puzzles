@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2016.Day07;
 
-public class Year2016Day07 : Puzzle
+public class Year2016Day07 : AocPuzzle
 {
     public override string Title => "Internet Protocol Version 7";
 

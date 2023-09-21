@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day14;
 
-public class Year2019Day14 : Puzzle
+public class Year2019Day14 : AocPuzzle
 {
     public override string Title => "Space Stoichiometry";
 

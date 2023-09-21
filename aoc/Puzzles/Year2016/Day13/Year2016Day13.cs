@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2016.Day13;
 
-public class Year2016Day13 : Puzzle
+public class Year2016Day13 : AocPuzzle
 {
     public override string Title => "A Maze of Twisty Little Cubicles";
 

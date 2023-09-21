@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using Aoc.Platform;
+using common.Puzzles;
 using common.Strings;
 
 namespace Aoc.Puzzles.Year2022.Day25;
 
-public class Year2022Day25 : Puzzle
+public class Year2022Day25 : AocPuzzle
 {
     public override string Title => "Full of Hot Air";
 
@@ -22,8 +23,5 @@ public class Year2022Day25 : Puzzle
         return SnafuConverter.ToSnafu(sum);
     }
 
-    public override PuzzleResult RunPart2()
-    {
-        return new EmptyPuzzleResult();
-    }
+    public override PuzzleResult RunPart2() => PuzzleResult.Empty();
 }

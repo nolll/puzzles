@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2015.Day11;
 
-public class Year2015Day11: Puzzle
+public class Year2015Day11: AocPuzzle
 {
     private CorporatePasswordValidator _validator;
     private string _firstPassword;

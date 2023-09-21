@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Text;
+using common.Puzzles;
 
 namespace Aoc.Platform;
 
-public abstract class Puzzle
+public abstract class AocPuzzle : Puzzle
 {
     public abstract string Title { get; }
     public virtual string Comment => null;
@@ -22,24 +22,12 @@ public abstract class Puzzle
         return null;
     }
 
-    protected string FileInput
-    {
-        get
-        {
-            var filePath = FilePath;
-            if(!File.Exists(filePath))
-                throw new FileNotFoundException("File not found", filePath);
-
-            return File.ReadAllText(filePath, Encoding.UTF8);
-        }
-    }
-
-    private string FilePath
+    protected sealed override string FilePath
     {
         get
         {
             var type = GetType();
-            var (year, day) = PuzzleParser.ParseType(type);
+            var (year, day) = PuzzleParser.GetYearAndDay(type);
             var paddedDay = day.ToString().PadLeft(2, '0');
             return Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,

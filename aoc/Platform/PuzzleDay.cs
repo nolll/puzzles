@@ -4,9 +4,9 @@ public class PuzzleDay
 {
     public int Year { get; }
     public int Day { get; }
-    public Puzzle Puzzle { get; }
+    public AocPuzzle Puzzle { get; }
 
-    public PuzzleDay(int year, int day, Puzzle puzzle)
+    public PuzzleDay(int year, int day, AocPuzzle puzzle)
     {
         Year = year;
         Day = day;

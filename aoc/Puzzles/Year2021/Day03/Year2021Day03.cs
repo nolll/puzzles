@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day03;
 
-public class Year2021Day03 : Puzzle
+public class Year2021Day03 : AocPuzzle
 {
     public override string Title => "Binary Diagnostic";
 

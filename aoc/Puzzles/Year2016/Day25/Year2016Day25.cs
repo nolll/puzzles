@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2016.Day25;
 
-public class Year2016Day25 : Puzzle
+public class Year2016Day25 : AocPuzzle
 {
     public override string Title => "Clock Signal";
 
@@ -12,8 +13,5 @@ public class Year2016Day25 : Puzzle
         return new PuzzleResult(generator.LowestA, 198);
     }
 
-    public override PuzzleResult RunPart2()
-    {
-        return new EmptyPuzzleResult();
-    }
+    public override PuzzleResult RunPart2() => PuzzleResult.Empty();
 }

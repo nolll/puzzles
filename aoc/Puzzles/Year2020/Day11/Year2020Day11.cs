@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2020.Day11;
 
-public class Year2020Day11 : Puzzle
+public class Year2020Day11 : AocPuzzle
 {
     public override string Title => "Seating System";
 

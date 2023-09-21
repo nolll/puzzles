@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2020.Day25;
 
-public class Year2020Day25 : Puzzle
+public class Year2020Day25 : AocPuzzle
 {
     public override string Title => "Combo Breaker";
 
@@ -14,8 +15,5 @@ public class Year2020Day25 : Puzzle
         return new PuzzleResult(key, 7269858);
     }
 
-    public override PuzzleResult RunPart2()
-    {
-        return new EmptyPuzzleResult();
-    }
+    public override PuzzleResult RunPart2() => PuzzleResult.Empty();
 }

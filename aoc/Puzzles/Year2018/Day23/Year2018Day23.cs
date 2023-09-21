@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2018.Day23;
 
-public class Year2018Day23 : Puzzle
+public class Year2018Day23 : AocPuzzle
 {
     public override string Title => "Experimental Emergency Teleportation";
 

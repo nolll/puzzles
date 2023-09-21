@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day13;
 
-public class Year2019Day13 : Puzzle
+public class Year2019Day13 : AocPuzzle
 {
     public override string Title => "Care Package";
 

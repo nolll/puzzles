@@ -1,9 +1,10 @@
 ﻿using Aoc.Platform;
 using common.CoordinateSystems.CoordinateSystem2D;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day15;
 
-public class Year2019Day15 : Puzzle
+public class Year2019Day15 : AocPuzzle
 {
     private Matrix<char> _map;
     public override string Title => "Oxygen System";

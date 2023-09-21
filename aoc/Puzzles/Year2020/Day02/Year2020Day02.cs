@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using Aoc.Platform;
+using common.Puzzles;
 using common.Strings;
 
 namespace Aoc.Puzzles.Year2020.Day02;
 
-public class Year2020Day02 : Puzzle
+public class Year2020Day02 : AocPuzzle
 {
     public override string Title => "Password Philosophy";
 

@@ -12,8 +12,8 @@ public class DayFilterTests
     {
         var days = new List<PuzzleDay>
         {
-            new(1, 1, new SlowPuzzle()),
-            new(1, 1, new PlainPuzzle())
+            new(1, 1, new SlowAocPuzzle()),
+            new(1, 1, new PlainAocPuzzle())
         };
 
         var parameters = new Parameters(runSlowOnly: true);
@@ -29,8 +29,8 @@ public class DayFilterTests
     {
         var days = new List<PuzzleDay>
         {
-            new(1, 1, new CommentedPuzzle()),
-            new(1, 1, new PlainPuzzle())
+            new(1, 1, new CommentedAocPuzzle()),
+            new(1, 1, new PlainAocPuzzle())
         };
 
         var parameters = new Parameters(runCommentedOnly: true);
@@ -46,8 +46,8 @@ public class DayFilterTests
     {
         var days = new List<PuzzleDay>
         {
-            new(1, 1, new FunPuzzle()),
-            new(1, 1, new PlainPuzzle())
+            new(1, 1, new FunAocPuzzle()),
+            new(1, 1, new PlainAocPuzzle())
         };
 
         var parameters = new Parameters(runFunOnly: true);
@@ -58,25 +58,25 @@ public class DayFilterTests
         Assert.That(result.First().Puzzle.IsFunToOptimize, Is.True);
     }
 
-    private class CommentedPuzzle : Puzzle
+    private class CommentedAocPuzzle : AocPuzzle
     {
         public override string Title => "Commented Puzzle";
         public override string Comment => "Comment";
     }
 
-    private class SlowPuzzle : Puzzle
+    private class SlowAocPuzzle : AocPuzzle
     {
         public override string Title => "Slow Puzzle";
         public override bool IsSlow => true;
     }
 
-    private class FunPuzzle : Puzzle
+    private class FunAocPuzzle : AocPuzzle
     {
         public override string Title => "Fun Puzzle";
         public override bool IsFunToOptimize => true;
     }
 
-    private class PlainPuzzle : Puzzle
+    private class PlainAocPuzzle : AocPuzzle
     {
         public override string Title => "Plain Puzzle";
     }

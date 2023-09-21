@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2020.Day13;
 
-public class Year2020Day13 : Puzzle
+public class Year2020Day13 : AocPuzzle
 {
     public override string Title => "Shuttle Search";
 

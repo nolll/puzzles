@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day20;
 
-public class Year2017Day20 : Puzzle
+public class Year2017Day20 : AocPuzzle
 {
     public override string Title => "Particle Swarm";
 

@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2016.Day05;
 
-public class Year2016Day05 : Puzzle
+public class Year2016Day05 : AocPuzzle
 {
     private readonly PasswordGenerator _generator = new();
 

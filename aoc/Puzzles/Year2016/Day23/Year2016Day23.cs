@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2016.Day23;
 
-public class Year2016Day23 : Puzzle
+public class Year2016Day23 : AocPuzzle
 {
     public override string Title => "Safe Cracking";
 

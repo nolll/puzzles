@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2016.Day14;
 
-public class Year2016Day14 : Puzzle
+public class Year2016Day14 : AocPuzzle
 {
     public override string Title => "One-Time Pad";
 

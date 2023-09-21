@@ -1,9 +1,10 @@
 ﻿using Aoc.Platform;
 using common.Computers.Operation;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2018.Day19;
 
-public class Year2018Day19 : Puzzle
+public class Year2018Day19 : AocPuzzle
 {
     public override string Title => "Go With The Flow";
 

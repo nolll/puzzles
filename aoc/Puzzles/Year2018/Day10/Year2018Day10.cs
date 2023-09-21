@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2018.Day10;
 
-public class Year2018Day10 : Puzzle
+public class Year2018Day10 : AocPuzzle
 {
     public override string Title => "The Stars Align";
 

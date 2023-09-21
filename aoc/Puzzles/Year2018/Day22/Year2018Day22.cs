@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using Aoc.Platform;
+using common.Puzzles;
 using common.Strings;
 
 namespace Aoc.Puzzles.Year2018.Day22;
 
-public class Year2018Day22 : Puzzle
+public class Year2018Day22 : AocPuzzle
 {
     public override string Title => "Mode Maze";
 

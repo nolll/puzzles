@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day13;
 
-public class Year2017Day13 : Puzzle
+public class Year2017Day13 : AocPuzzle
 {
     public override string Title => "Packet Scanners";
 

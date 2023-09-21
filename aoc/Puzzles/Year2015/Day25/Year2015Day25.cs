@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2015.Day25;
 
-public class Year2015Day25 : Puzzle
+public class Year2015Day25 : AocPuzzle
 {
     public override string Title => "Let It Snow";
 
@@ -14,10 +15,7 @@ public class Year2015Day25 : Puzzle
         return new PuzzleResult(code, 2_650_453);
     }
 
-    public override PuzzleResult RunPart2()
-    {
-        return new EmptyPuzzleResult();
-    }
+    public override PuzzleResult RunPart2() => PuzzleResult.Empty();
 
     private Params GetParams()
     {

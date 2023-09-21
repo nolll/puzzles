@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2022.Day16;
 
-public class Year2022Day16 : Puzzle
+public class Year2022Day16 : AocPuzzle
 {
     public override string Title => "Proboscidea Volcanium";
 

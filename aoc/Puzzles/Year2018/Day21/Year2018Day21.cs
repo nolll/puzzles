@@ -1,9 +1,10 @@
 ﻿using Aoc.Platform;
 using common.Computers.Operation;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2018.Day21;
 
-public class Year2018Day21 : Puzzle
+public class Year2018Day21 : AocPuzzle
 {
     public override string Title => "Chronal Conversion";
     public override string Comment => "OpComputer";

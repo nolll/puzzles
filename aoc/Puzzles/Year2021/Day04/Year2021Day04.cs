@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day04;
 
-public class Year2021Day04 : Puzzle
+public class Year2021Day04 : AocPuzzle
 {
     public override string Title => "Giant Squid";
 

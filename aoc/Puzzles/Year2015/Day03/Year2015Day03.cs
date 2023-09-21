@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2015.Day03;
 
-public class Year2015Day03 : Puzzle
+public class Year2015Day03 : AocPuzzle
 {
     public override string Title => "Perfectly Spherical Houses in a Vacuum";
 

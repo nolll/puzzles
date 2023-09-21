@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day12;
 
-public class Year2021Day12 : Puzzle
+public class Year2021Day12 : AocPuzzle
 {
     public override string Title => "Passage Pathing";
 

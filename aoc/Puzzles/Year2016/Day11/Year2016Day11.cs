@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2016.Day11;
 
-public class Year2016Day11 : Puzzle
+public class Year2016Day11 : AocPuzzle
 {
     public override string Title => "Radioisotope Thermoelectric Generators";
 

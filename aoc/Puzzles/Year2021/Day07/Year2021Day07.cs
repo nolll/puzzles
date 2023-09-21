@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day07;
 
-public class Year2021Day07 : Puzzle
+public class Year2021Day07 : AocPuzzle
 {
     public override string Title => "The Treachery of Whales";
 

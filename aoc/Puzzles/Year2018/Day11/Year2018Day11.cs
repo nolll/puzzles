@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2018.Day11;
 
-public class Year2018Day11 : Puzzle
+public class Year2018Day11 : AocPuzzle
 {
     public override string Title => "Chronal Charge";
 

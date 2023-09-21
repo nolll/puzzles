@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2016.Day03;
 
-public class Year2016Day03 : Puzzle
+public class Year2016Day03 : AocPuzzle
 {
     public override string Title => "Squares With Three Sides";
 

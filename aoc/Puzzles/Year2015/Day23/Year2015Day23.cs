@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2015.Day23;
 
-public class Year2015Day23 : Puzzle
+public class Year2015Day23 : AocPuzzle
 {
     public override string Title => "Opening the Turing Lock";
 

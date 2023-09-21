@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day19;
 
-public class Year2021Day19 : Puzzle
+public class Year2021Day19 : AocPuzzle
 {
     private BeaconSystemResult _result;
 

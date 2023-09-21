@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day12;
 
-public class Year2019Day12 : Puzzle
+public class Year2019Day12 : AocPuzzle
 {
     public override string Title => "The N-Body Problem";
 

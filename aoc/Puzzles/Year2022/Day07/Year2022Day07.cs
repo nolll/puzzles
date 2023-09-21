@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2022.Day07;
 
-public class Year2022Day07 : Puzzle
+public class Year2022Day07 : AocPuzzle
 {
     public override string Title => "No Space Left On Device";
 

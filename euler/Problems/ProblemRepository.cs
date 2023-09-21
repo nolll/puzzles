@@ -27,7 +27,7 @@ public class ProblemRepository
 
     private static ProblemWrapper CreateProblem(Type t)
     {
-        var id = ProblemParser.ParseType(t);
+        var id = ProblemParser.GetProblemId(t);
         if (Activator.CreateInstance(t) is Problem problem)
             return new ProblemWrapper(id, problem);
         

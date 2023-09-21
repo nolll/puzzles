@@ -2,10 +2,11 @@
 using System.Linq;
 using Aoc.Platform;
 using common.Ocr;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day11;
 
-public class Year2019Day11 : Puzzle
+public class Year2019Day11 : AocPuzzle
 {
     public override string Title => "Space Police";
 

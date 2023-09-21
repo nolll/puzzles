@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2020.Day18;
 
-public class Year2020Day18 : Puzzle
+public class Year2020Day18 : AocPuzzle
 {
     public override string Title => "Operation Order";
 

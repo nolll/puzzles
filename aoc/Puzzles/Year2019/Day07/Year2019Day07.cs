@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day07;
 
-public class Year2019Day07 : Puzzle
+public class Year2019Day07 : AocPuzzle
 {
     public override string Title => "Amplification Circuit";
 

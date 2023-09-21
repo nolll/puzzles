@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Aoc.Platform;
+using common.Puzzles;
 using common.Strings;
 
 namespace Aoc.Puzzles.Year2022.Day21;
 
-public class Year2022Day21 : Puzzle
+public class Year2022Day21 : AocPuzzle
 {
     public override string Title => "Monkey Math";
 

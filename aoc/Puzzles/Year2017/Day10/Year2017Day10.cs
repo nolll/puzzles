@@ -1,9 +1,10 @@
 ﻿using Aoc.Platform;
 using common.Hashing;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day10;
 
-public class Year2017Day10 : Puzzle
+public class Year2017Day10 : AocPuzzle
 {
     public override string Title => "Knot Hash";
 

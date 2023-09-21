@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day24;
 
-public class Year2017Day24 : Puzzle
+public class Year2017Day24 : AocPuzzle
 {
     public override string Title => "Electromagnetic Moat";
 

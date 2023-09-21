@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2015.Day20;
 
-public class Year2015Day20 : Puzzle
+public class Year2015Day20 : AocPuzzle
 {
     public override string Title => "Infinite Elves and Infinite Houses";
 

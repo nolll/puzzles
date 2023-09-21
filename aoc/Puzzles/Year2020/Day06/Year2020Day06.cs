@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2020.Day06;
 
-public class Year2020Day06 : Puzzle
+public class Year2020Day06 : AocPuzzle
 {
     public override string Title => "Custom Customs";
 

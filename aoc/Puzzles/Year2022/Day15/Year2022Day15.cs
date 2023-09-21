@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2022.Day15;
 
-public class Year2022Day15 : Puzzle
+public class Year2022Day15 : AocPuzzle
 {
     public override string Title => "Beacon Exclusion Zone";
 

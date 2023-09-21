@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2016.Day09;
 
-public class Year2016Day09 : Puzzle
+public class Year2016Day09 : AocPuzzle
 {
     public override string Title => "Explosives in Cyberspace";
 

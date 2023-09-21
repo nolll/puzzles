@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2020.Day01;
 
-public class Year2020Day01 : Puzzle
+public class Year2020Day01 : AocPuzzle
 {
     public override string Title => "Report Repair";
 

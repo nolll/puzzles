@@ -1,9 +1,10 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 using common.Strings;
 
 namespace Aoc.Puzzles.Year2019.Day03;
 
-public class Year2019Day03 : Puzzle
+public class Year2019Day03 : AocPuzzle
 {
     public override string Title => "Crossed Wires";
 

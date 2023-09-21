@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2016.Day22;
 
-public class Year2016Day22 : Puzzle
+public class Year2016Day22 : AocPuzzle
 {
     public override string Title => "Grid Computing";
 

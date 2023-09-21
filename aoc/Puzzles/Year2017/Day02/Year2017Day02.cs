@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day02;
 
-public class Year2017Day02 : Puzzle
+public class Year2017Day02 : AocPuzzle
 {
     public override string Title => "Corruption Checksum";
 

@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day06;
 
-public class Year2017Day06 : Puzzle
+public class Year2017Day06 : AocPuzzle
 {
     public override string Title => "Memory Reallocation";
 

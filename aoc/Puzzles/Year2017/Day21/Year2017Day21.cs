@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day21;
 
-public class Year2017Day21 : Puzzle
+public class Year2017Day21 : AocPuzzle
 {
     public override string Title => "Fractal Art";
 

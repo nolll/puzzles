@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2015.Day13;
 
-public class Year2015Day13 : Puzzle
+public class Year2015Day13 : AocPuzzle
 {
     public override string Title => "Knights of the Dinner Table";
 

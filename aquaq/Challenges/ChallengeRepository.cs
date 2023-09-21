@@ -27,7 +27,7 @@ public class ChallengeRepository
 
     private static ChallengeWrapper CreateProblem(Type t)
     {
-        var id = ChallengeParser.ParseType(t);
+        var id = ChallengeParser.GetChallengeId(t);
         if (Activator.CreateInstance(t) is Challenge challenge)
             return new ChallengeWrapper(id, challenge);
         

@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day03;
 
-public class Year2017Day03 : Puzzle
+public class Year2017Day03 : AocPuzzle
 {
     public override string Title => "Spiral Memory";
 

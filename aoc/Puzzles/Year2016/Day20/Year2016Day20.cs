@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2016.Day20;
 
-public class Year2016Day20 : Puzzle
+public class Year2016Day20 : AocPuzzle
 {
     public override string Title => "Firewall Rules";
 

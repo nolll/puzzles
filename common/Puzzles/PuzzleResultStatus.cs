@@ -1,4 +1,4 @@
-﻿namespace Aoc.Platform;
+﻿namespace common.Puzzles;
 
 public enum PuzzleResultStatus
 {

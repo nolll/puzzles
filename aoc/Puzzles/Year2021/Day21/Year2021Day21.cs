@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day21;
 
-public class Year2021Day21 : Puzzle
+public class Year2021Day21 : AocPuzzle
 {
     public override string Title => "Dirac Dice";
 

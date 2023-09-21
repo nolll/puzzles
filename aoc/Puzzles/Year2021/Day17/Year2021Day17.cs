@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day17;
 
-public class Year2021Day17 : Puzzle
+public class Year2021Day17 : AocPuzzle
 {
     private TrickshotResult _result;
 

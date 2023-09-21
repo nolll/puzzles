@@ -1,9 +1,10 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 using common.Strings;
 
 namespace Aoc.Puzzles.Year2015.Day21;
 
-public class Year2015Day21 : Puzzle
+public class Year2015Day21 : AocPuzzle
 {
     public override string Title => "RPG Simulator 20XX";
 

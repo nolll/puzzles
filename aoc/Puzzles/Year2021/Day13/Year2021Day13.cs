@@ -1,9 +1,10 @@
 ﻿using Aoc.Platform;
 using common.Ocr;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day13;
 
-public class Year2021Day13 : Puzzle
+public class Year2021Day13 : AocPuzzle
 {
     public override string Title => "Transparent Origami";
 

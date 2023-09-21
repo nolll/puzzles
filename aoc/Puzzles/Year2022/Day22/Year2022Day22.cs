@@ -2,11 +2,12 @@
 using System.Linq;
 using Aoc.Platform;
 using common.CoordinateSystems.CoordinateSystem2D;
+using common.Puzzles;
 using common.Strings;
 
 namespace Aoc.Puzzles.Year2022.Day22;
 
-public class Year2022Day22 : Puzzle
+public class Year2022Day22 : AocPuzzle
 {
     public override string Title => "Monkey Map";
 

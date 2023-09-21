@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day01;
 
-public class Year2019Day01 : Puzzle
+public class Year2019Day01 : AocPuzzle
 {
     public override string Title => "The Tyranny of the Rocket Equation";
 

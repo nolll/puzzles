@@ -40,8 +40,8 @@ public class PuzzleRepository
 
     private static PuzzleDay CreateDay(Type t)
     {
-        var (year, day) = PuzzleParser.ParseType(t);
-        var puzzleDay = (Puzzle)Activator.CreateInstance(t);
+        var (year, day) = PuzzleParser.GetYearAndDay(t);
+        var puzzleDay = (AocPuzzle)Activator.CreateInstance(t);
         if (puzzleDay == null)
             throw new Exception($"Could not create Puzzle for day {day} {year} ");
             
@@ -49,7 +49,7 @@ public class PuzzleRepository
     }
 
     private static IEnumerable<Type> GetPuzzleClasses() => 
-        GetConcreteSubclassesOf<Puzzle>().Where(IsPuzzle);
+        GetConcreteSubclassesOf<AocPuzzle>().Where(IsPuzzle);
 
     private static bool IsPuzzle(Type type)
     {

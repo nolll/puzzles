@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2020.Day21;
 
-public class Year2020Day21 : Puzzle
+public class Year2020Day21 : AocPuzzle
 {
     public override string Title => "Allergen Assessment";
 

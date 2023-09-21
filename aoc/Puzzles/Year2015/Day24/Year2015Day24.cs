@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2015.Day24;
 
-public class Year2015Day24 : Puzzle
+public class Year2015Day24 : AocPuzzle
 {
     public override string Title => "It Hangs in the Balance";
 

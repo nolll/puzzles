@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day04;
 
-public class Year2017Day04 : Puzzle
+public class Year2017Day04 : AocPuzzle
 {
     public override string Title => "High-Entropy Passphrases";
 

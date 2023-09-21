@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Aoc.Printing;
 using common.Formatting;
+using common.Puzzles;
 using Spectre.Console;
 using Timer = common.Timing.Timer;
 

@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2018.Day12;
 
-public class Year2018Day12 : Puzzle
+public class Year2018Day12 : AocPuzzle
 {
     public override string Title => "Subterranean Sustainability";
 

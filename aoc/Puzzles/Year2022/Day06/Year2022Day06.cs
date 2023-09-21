@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2022.Day06;
 
-public class Year2022Day06 : Puzzle
+public class Year2022Day06 : AocPuzzle
 {
     public override string Title => "Tuning Trouble";
 

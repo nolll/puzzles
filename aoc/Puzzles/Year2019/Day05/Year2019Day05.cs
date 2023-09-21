@@ -1,9 +1,10 @@
 ﻿using Aoc.Platform;
 using common.Computers.IntCode;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day05;
 
-public class Year2019Day05 : Puzzle
+public class Year2019Day05 : AocPuzzle
 {
     private long _output;
 

@@ -1,9 +1,10 @@
 ﻿using System.IO;
 using System.Text;
+using common.Puzzles;
 
 namespace AquaQ.Platform;
 
-public abstract class Challenge
+public abstract class Challenge : Puzzle
 {
     public abstract string Name { get; }
     public virtual string? Comment => null;
@@ -11,25 +12,13 @@ public abstract class Challenge
     public virtual bool NeedsRewrite => false;
 
     public abstract ChallengeResult Run();
-
-    protected string FileInput
-    {
-        get
-        {
-            var filePath = FilePath;
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException("File not found", filePath);
-
-            return File.ReadAllText(filePath, Encoding.UTF8);
-        }
-    }
-
-    private string FilePath
+    
+    protected sealed override string FilePath
     {
         get
         {
             var type = GetType();
-            var challengeId = ChallengeParser.ParseType(type);
+            var challengeId = ChallengeParser.GetChallengeId(type);
             var paddedChallengeId = challengeId.ToString().PadLeft(2, '0');
             return Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,

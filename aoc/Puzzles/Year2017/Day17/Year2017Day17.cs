@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day17;
 
-public class Year2017Day17 : Puzzle
+public class Year2017Day17 : AocPuzzle
 {
     public override string Title => "Spinlock";
 

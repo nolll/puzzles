@@ -1,9 +1,10 @@
 ﻿using Aoc.Platform;
 using common.Computers.IntCode;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day02;
 
-public class Year2019Day02 : Puzzle
+public class Year2019Day02 : AocPuzzle
 {
     public override string Title => "1202 Program Alarm";
 

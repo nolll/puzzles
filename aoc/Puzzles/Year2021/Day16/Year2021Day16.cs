@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day16;
 
-public class Year2021Day16 : Puzzle
+public class Year2021Day16 : AocPuzzle
 {
     public override string Title => "Packet Decoder";
 

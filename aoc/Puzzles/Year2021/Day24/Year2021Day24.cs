@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day24;
 
-public class Year2021Day24 : Puzzle
+public class Year2021Day24 : AocPuzzle
 {
     private List<string> _validNumbers;
     

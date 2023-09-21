@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2022.Day12;
 
-public class Year2022Day12 : Puzzle
+public class Year2022Day12 : AocPuzzle
 {
     public override string Title => "Hill Climbing Algorithm";
 

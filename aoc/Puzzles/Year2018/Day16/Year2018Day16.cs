@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using Aoc.Platform;
 using common.Computers.Operation;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2018.Day16;
 
-public class Year2018Day16 : Puzzle
+public class Year2018Day16 : AocPuzzle
 {
     public override string Title => "Chronal Classification";
 

@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day16;
 
-public class Year2017Day16 : Puzzle
+public class Year2017Day16 : AocPuzzle
 {
     public override string Title => "Permutation Promenade";
 

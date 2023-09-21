@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Aoc.Platform;
+namespace common.Puzzles;
 
 public class PuzzleResult
 {
@@ -10,7 +10,6 @@ public class PuzzleResult
     public PuzzleResult(string? answer, string? correctAnswer = null)
         : this(answer, VerifyResult(answer, correctAnswer))
     {
-            
     }
 
     public PuzzleResult(int? answer, int? correctAnswer = null)
@@ -32,6 +31,11 @@ public class PuzzleResult
     {
         Answer = answer ?? string.Empty;
         Status = status;
+    }
+
+    public static PuzzleResult Empty()
+    {
+        return new PuzzleResult("No puzzle here", PuzzleResultStatus.Empty);
     }
 
     private static PuzzleResultStatus VerifyResult(string? answer, string? correctAnswer)

@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2020.Day24;
 
-public class Year2020Day24 : Puzzle
+public class Year2020Day24 : AocPuzzle
 {
     public override string Title => "Lobby Layout";
 

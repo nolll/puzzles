@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2018.Day24;
 
-public class Year2018Day24 : Puzzle
+public class Year2018Day24 : AocPuzzle
 {
     public override string Title => "Immune System Simulator 20XX";
 

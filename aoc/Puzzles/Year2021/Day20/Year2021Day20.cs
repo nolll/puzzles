@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day20;
 
-public class Year2021Day20 : Puzzle
+public class Year2021Day20 : AocPuzzle
 {
     public override string Title => "Trench Map";
 

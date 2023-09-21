@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2022.Day10;
 
-public class Year2022Day10 : Puzzle
+public class Year2022Day10 : AocPuzzle
 {
     public override string Title => "Cathode-Ray Tube";
 

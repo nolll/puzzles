@@ -1,8 +1,9 @@
 ﻿using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day22;
 
-public class Year2021Day22 : Puzzle
+public class Year2021Day22 : AocPuzzle
 {
     public override string Title => "Reactor Reboot";
 

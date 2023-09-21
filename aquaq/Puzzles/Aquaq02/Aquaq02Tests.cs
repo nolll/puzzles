@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 
-namespace AquaQ.Challenges.Challenge03;
+namespace AquaQ.Puzzles.Aquaq02;
 
-public class Challenge03Tests
+public class Aquaq02Tests
 {
     [Test]
     public void UniqueNumbers()
@@ -12,7 +12,7 @@ public class Challenge03Tests
             1, 4, 3, 2, 4, 7, 2, 6, 3, 6
         };
 
-        var result = Challenge03.GetUniqueNumbers(input).ToArray();
+        var result = Aquaq02.GetUniqueNumbers(input).ToArray();
 
         Assert.That(result.Count, Is.EqualTo(5));
         Assert.That(result[0], Is.EqualTo(1));

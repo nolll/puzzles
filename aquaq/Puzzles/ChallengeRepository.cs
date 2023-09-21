@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using AquaQ.Platform;
 
-namespace AquaQ.Challenges;
+namespace AquaQ.Puzzles;
 
 public class ChallengeRepository
 {

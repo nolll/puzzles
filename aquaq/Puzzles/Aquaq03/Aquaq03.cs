@@ -1,9 +1,9 @@
 ﻿using AquaQ.Platform;
 using common.Puzzles;
 
-namespace AquaQ.Challenges.Challenge04;
+namespace AquaQ.Puzzles.Aquaq03;
 
-public class Challenge04 : AquaQPuzzle
+public class Aquaq03 : AquaQPuzzle
 {
     public override string Name => "Short walks";
 

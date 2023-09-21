@@ -1,8 +1,8 @@
 using NUnit.Framework;
 
-namespace AquaQ.Challenges.Challenge01;
+namespace AquaQ.Puzzles.Aquaq00;
 
-public class Challenge01Tests
+public class Aquaq00Tests
 {
     [Test]
     public void Numpad()
@@ -38,7 +38,7 @@ public class Challenge01Tests
             (9, 4)
         };
 
-        var result = Challenge01.HandleKeyPresses(keyPresses);
+        var result = Aquaq00.HandleKeyPresses(keyPresses);
 
         Assert.That(result, Is.EqualTo(" abcdefghijklmnopqrstuvwxyz"));
     }

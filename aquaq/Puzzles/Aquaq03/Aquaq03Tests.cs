@@ -1,9 +1,9 @@
 ﻿using common.CoordinateSystems.CoordinateSystem2D;
 using NUnit.Framework;
 
-namespace AquaQ.Challenges.Challenge04;
+namespace AquaQ.Puzzles.Aquaq03;
 
-public class Challenge04Tests
+public class Aquaq03Tests
 {
     [TestCase("UDRR", 4, 1, 14)]
     [TestCase("RR", 3, 0, 6)]

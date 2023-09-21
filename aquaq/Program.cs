@@ -1,6 +1,6 @@
-﻿using AquaQ.Challenges;
-using AquaQ.ConsoleTools;
+﻿using AquaQ.ConsoleTools;
 using AquaQ.Platform;
+using AquaQ.Puzzles;
 
 namespace AquaQ;
 

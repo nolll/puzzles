@@ -1,9 +1,9 @@
 ﻿using AquaQ.Platform;
 using common.Puzzles;
 
-namespace AquaQ.Challenges.Challenge03;
+namespace AquaQ.Puzzles.Aquaq02;
 
-public class Challenge03 : AquaQPuzzle
+public class Aquaq02 : AquaQPuzzle
 {
     public override string Name => "One is all you need";
 

@@ -19,8 +19,8 @@ public abstract class AquaQPuzzle : Puzzle
         var paddedChallengeId = challengeId.ToString().PadLeft(2, '0');
         return Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory,
-            "Challenges",
-            $"Challenge{paddedChallengeId}",
-            $"Challenge{paddedChallengeId}.txt");
+            "Puzzles",
+            $"Aquaq{paddedChallengeId}",
+            $"Aquaq{paddedChallengeId}.txt");
     }
 }

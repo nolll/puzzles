@@ -1,6 +1,6 @@
 ﻿using common.CoordinateSystems.CoordinateSystem2D;
 
-namespace AquaQ.Challenges.Challenge04;
+namespace AquaQ.Puzzles.Aquaq03;
 
 public class Walker
 {

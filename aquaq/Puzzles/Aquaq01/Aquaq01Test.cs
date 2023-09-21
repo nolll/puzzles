@@ -1,13 +1,13 @@
 ﻿using NUnit.Framework;
 
-namespace AquaQ.Challenges.Challenge02;
+namespace AquaQ.Puzzles.Aquaq01;
 
-public class Challenge02Test
+public class Aquaq01Test
 {
     [Test]
     public void HexString()
     {
-        var result = Challenge02.GetHexString("kdb4life");
+        var result = Aquaq01.GetHexString("kdb4life");
 
         Assert.That(result, Is.EqualTo("0d40fe"));
     }

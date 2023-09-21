@@ -1,9 +1,9 @@
 ﻿using AquaQ.Platform;
 using common.Puzzles;
 
-namespace AquaQ.Challenges.Challenge01;
+namespace AquaQ.Puzzles.Aquaq00;
 
-public class Challenge01 : AquaQPuzzle
+public class Aquaq00 : AquaQPuzzle
 {
     public override string Name => "What's a numpad?";
 

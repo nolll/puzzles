@@ -2,9 +2,9 @@
 using AquaQ.Platform;
 using common.Puzzles;
 
-namespace AquaQ.Challenges.Challenge02;
+namespace AquaQ.Puzzles.Aquaq01;
 
-public class Challenge02 : AquaQPuzzle
+public class Aquaq01 : AquaQPuzzle
 {
     private static readonly Regex HexRegex = new("[^0123456789abcdef]");
     public override string Name => "Rose by any other name";

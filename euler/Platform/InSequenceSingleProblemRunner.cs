@@ -62,6 +62,7 @@ public class InSequenceSingleProblemRunner : SingleProblemRunner
             Thread.Sleep(ProgressWaitTime);
         }
 
+        status = task.IsFaulted ? PuzzleResultStatus.Failed : status;
         time = waited ? time : timer.FromStart;
         updateResultFunc(MarkupTime(time, status));
         PrintRow();

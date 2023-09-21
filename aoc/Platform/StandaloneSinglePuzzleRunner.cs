@@ -58,7 +58,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
             Thread.Sleep(ProgressWaitTime);
         }
 
-        return result;
+        return task.IsFaulted ? PuzzleResult.Failed : result;
     }
 
     private static void PrintTime(int puzzleNumber, TimeSpan? time = null)

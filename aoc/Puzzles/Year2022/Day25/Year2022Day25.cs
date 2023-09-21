@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Aoc.Common.Strings;
 using Aoc.Platform;
+using common.Strings;
 
 namespace Aoc.Puzzles.Year2022.Day25;
 

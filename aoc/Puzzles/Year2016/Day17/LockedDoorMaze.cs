@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Aoc.Common.CoordinateSystems.CoordinateSystem2D;
-using Aoc.Common.Hashing;
+using common.CoordinateSystems.CoordinateSystem2D;
+using common.Hashing;
 
 namespace Aoc.Puzzles.Year2016.Day17;
 

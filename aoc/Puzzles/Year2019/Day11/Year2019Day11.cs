@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Aoc.Common.Ocr;
 using Aoc.Platform;
+using common.Ocr;
 
 namespace Aoc.Puzzles.Year2019.Day11;
 

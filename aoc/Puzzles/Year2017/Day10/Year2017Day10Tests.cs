@@ -1,4 +1,4 @@
-using Aoc.Common.Hashing;
+using common.Hashing;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Year2017.Day10;

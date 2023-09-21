@@ -1,5 +1,5 @@
 ﻿using System;
-using Aoc.Common.Hashing;
+using common.Hashing;
 
 namespace Aoc.Puzzles.Year2015.Day04;
 

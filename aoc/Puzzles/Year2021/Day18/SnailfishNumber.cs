@@ -8,18 +8,19 @@ public class SnailfishNumber
 {
     public Guid Id { get; }
 
-    public int ParsedLength { get; }
+    private readonly int _parsedLength;
+    private SnailfishNumber? _parent;
+    
     public int LiteralValue { get; set; }
     public bool IsComposite { get; private set; }
-    public SnailfishNumber Parent { get; set; }
-    public SnailfishNumber Left => Children.FirstOrDefault();
-    public SnailfishNumber Right => Children.LastOrDefault();
+    public SnailfishNumber Left => Children.First();
+    public SnailfishNumber Right => Children.Last();
     public List<SnailfishNumber> Children { get; private set; } = new();
 
-    public SnailfishNumber(string input, SnailfishNumber parent = null)
+    public SnailfishNumber(string input, SnailfishNumber? parent = null)
     {
         Id = Guid.NewGuid();
-        Parent = parent;
+        _parent = parent;
         IsComposite = true;
         var currentInput = input[1..];
         if (currentInput.First() == '[')
@@ -32,7 +33,8 @@ public class SnailfishNumber
             var child = new SnailfishNumber(int.Parse(currentInput[..1]), this);
             Children.Add(child);
         }
-            currentInput = currentInput[Left.ParsedLength..];
+        
+        currentInput = currentInput[Left._parsedLength..];
         currentInput = currentInput[1..];
         if (currentInput.First() == '[')
         {
@@ -45,24 +47,24 @@ public class SnailfishNumber
             Children.Add(child);
         }
 
-        ParsedLength = Left.ParsedLength + Right.ParsedLength + 3;
+        _parsedLength = Left._parsedLength + Right._parsedLength + 3;
     }
 
     public SnailfishNumber(int value, SnailfishNumber parent)
     {
         Id = Guid.NewGuid();
         IsComposite = false;
-        ParsedLength = 1;
+        _parsedLength = 1;
         LiteralValue = value;
-        Parent = parent;
+        _parent = parent;
     }
 
     public SnailfishNumber(SnailfishNumber number1, SnailfishNumber number2)
     {
         Id = Guid.NewGuid();
         IsComposite = true;
-        number1.Parent = this;
-        number2.Parent = this;
+        number1._parent = this;
+        number2._parent = this;
         Children.Add(number1);
         Children.Add(number2);
     }
@@ -91,10 +93,10 @@ public class SnailfishNumber
     {
         get
         {
-            if (Parent == null)
+            if (_parent == null)
                 return 0;
 
-            return Parent.Level + 1;
+            return _parent.Level + 1;
         }
     }
 

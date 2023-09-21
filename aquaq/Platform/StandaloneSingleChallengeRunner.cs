@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using AquaQ.Printing;
+using common.Formatting;
 using Spectre.Console;
 using Color = System.Drawing.Color;
-using Timer = AquaQ.Common.Timing.Timer;
+using Timer = common.Timing.Timer;
 
 namespace AquaQ.Platform;
 

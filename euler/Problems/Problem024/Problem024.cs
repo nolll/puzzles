@@ -1,4 +1,4 @@
-﻿using Euler.Common.Combinatorics;
+﻿using common.Combinatorics;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem024;

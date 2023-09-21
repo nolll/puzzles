@@ -1,5 +1,5 @@
 using System;
-using Aoc.Common.CoordinateSystems.CoordinateSystem3D;
+using common.CoordinateSystems.CoordinateSystem3D;
 
 namespace Aoc.Puzzles.Year2017.Day20;
 

@@ -1,5 +1,5 @@
 using System.Linq;
-using Aoc.Common.CoordinateSystems.CoordinateSystem2D;
+using common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Aoc.Puzzles.Year2017.Day03;
 

@@ -1,4 +1,4 @@
-﻿using Euler.Common.CoordinateSystems;
+﻿using common.CoordinateSystems.CoordinateSystem2D;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem028;

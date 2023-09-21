@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Aoc.Common.Strings;
+using common.Strings;
 
 namespace Aoc.Puzzles.Year2021.Day10;
 

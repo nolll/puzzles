@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Aoc.Common.Combinatorics;
-using Aoc.Common.Strings;
+using common.Combinatorics;
+using common.Strings;
 
 namespace Aoc.Puzzles.Year2016.Day11;
 

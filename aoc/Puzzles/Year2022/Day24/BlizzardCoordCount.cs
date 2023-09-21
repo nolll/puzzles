@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Aoc.Common.CoordinateSystems.CoordinateSystem2D;
+using common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Aoc.Puzzles.Year2022.Day24;
 

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Aoc.Common.Computers.IntCode;
-using Aoc.Common.CoordinateSystems.CoordinateSystem2D;
+using common.Computers.IntCode;
+using common.CoordinateSystems.CoordinateSystem2D;
 
 namespace Aoc.Puzzles.Year2019.Day11;
 

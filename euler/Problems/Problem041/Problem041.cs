@@ -1,5 +1,5 @@
-﻿using Euler.Common.Combinatorics;
-using Euler.Common.Numbers;
+﻿using common.Combinatorics;
+using common.Numbers;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem041;

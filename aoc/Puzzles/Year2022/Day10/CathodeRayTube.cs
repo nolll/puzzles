@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Aoc.Common.Ocr;
-using Aoc.Common.Strings;
+using common.Ocr;
+using common.Strings;
 
 namespace Aoc.Puzzles.Year2022.Day10;
 

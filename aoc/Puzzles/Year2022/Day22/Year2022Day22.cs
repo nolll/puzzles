@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Aoc.Common.CoordinateSystems.CoordinateSystem2D;
-using Aoc.Common.Strings;
 using Aoc.Platform;
+using common.CoordinateSystems.CoordinateSystem2D;
+using common.Strings;
 
 namespace Aoc.Puzzles.Year2022.Day22;
 

@@ -1,5 +1,5 @@
 ﻿using System.Numerics;
-using Euler.Common.Strings;
+using common.Strings;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem013;

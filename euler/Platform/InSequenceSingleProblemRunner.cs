@@ -1,9 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Euler.Printing;
+﻿using common.Formatting;
 using Spectre.Console;
 using Color = System.Drawing.Color;
-using Timer = Euler.Common.Timing.Timer;
+using Timer = common.Timing.Timer;
 
 namespace Euler.Platform;
 

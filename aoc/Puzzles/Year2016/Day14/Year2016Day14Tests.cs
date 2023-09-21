@@ -1,6 +1,6 @@
-using Aoc.Common.Strings;
 using NUnit.Framework;
 using System.Linq;
+using common.Strings;
 
 namespace Aoc.Puzzles.Year2016.Day14;
 

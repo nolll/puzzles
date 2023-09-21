@@ -1,4 +1,4 @@
-﻿using Euler.Common.Numbers;
+﻿using common.Numbers;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem010;

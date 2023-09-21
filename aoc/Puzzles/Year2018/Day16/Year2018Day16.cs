@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Aoc.Common.Computers.Operation;
 using Aoc.Platform;
+using common.Computers.Operation;
 
 namespace Aoc.Puzzles.Year2018.Day16;
 

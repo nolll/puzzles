@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Aoc.Common.CoordinateSystems.CoordinateSystem2D;
-using Aoc.Common.Ocr;
-using Aoc.Common.Strings;
+using common.CoordinateSystems.CoordinateSystem2D;
+using common.Ocr;
+using common.Strings;
 
 namespace Aoc.Puzzles.Year2018.Day10;
 

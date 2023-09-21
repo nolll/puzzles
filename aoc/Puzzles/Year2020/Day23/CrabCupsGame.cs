@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Aoc.Common.Lists;
+using common.Lists;
 
 namespace Aoc.Puzzles.Year2020.Day23;
 

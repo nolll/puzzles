@@ -2,8 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Aoc.Printing;
+using common.Formatting;
 using Spectre.Console;
-using Timer = Aoc.Common.Timing.Timer;
+using Timer = common.Timing.Timer;
 
 namespace Aoc.Platform;
 

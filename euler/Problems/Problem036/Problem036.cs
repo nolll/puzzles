@@ -1,5 +1,5 @@
-﻿using Euler.Common.Numbers;
-using Euler.Common.Strings;
+﻿using common.Numbers;
+using common.Strings;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem036;

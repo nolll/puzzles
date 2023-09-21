@@ -42,7 +42,7 @@ public class Alu
         return new AluInstruction(operation, a, b);
     }
 
-    public AluState Process(long input, Dictionary<char, long> memory = null)
+    public AluState Process(long input, Dictionary<char, long>? memory = null)
     {
         var inputs = input.ToString().Select(o => int.Parse(o.ToString())).ToList();
         var state = new AluState(inputs, memory);

@@ -37,7 +37,7 @@ public class FileSystem
             .MinBy(o => o);
     }
 
-    private ElfDirectory ParseFileSystem(string input)
+    private static ElfDirectory ParseFileSystem(string input)
     {
         var lines = PuzzleInputReader.ReadLines(input, false).Skip(1);
 
@@ -52,7 +52,7 @@ public class FileSystem
             if (isCommand && parts[1] == "cd")
             {
                 var directory = parts[2];
-                currentDir = directory == ".."
+                currentDir = directory == ".." && currentDir.Parent is not null
                     ? currentDir.Parent
                     : currentDir.Directories[directory];
             }
@@ -69,7 +69,7 @@ public class FileSystem
         return fileSystem;
     }
 
-    private void FindAllDirectories(ElfDirectory currentDir, IList<ElfDirectory> allDirs)
+    private static void FindAllDirectories(ElfDirectory currentDir, IList<ElfDirectory> allDirs)
     {
         allDirs.Add(currentDir);
 
@@ -79,7 +79,7 @@ public class FileSystem
         }
     }
 
-    private void FindSmallDirectories(ElfDirectory currentDir, IList<ElfDirectory> smallDirs)
+    private static void FindSmallDirectories(ElfDirectory currentDir, IList<ElfDirectory> smallDirs)
     {
         if(currentDir.Size <= 100000)
             smallDirs.Add(currentDir);

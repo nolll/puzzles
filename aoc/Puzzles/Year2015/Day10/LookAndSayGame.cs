@@ -24,7 +24,7 @@ public class LookAndSayGame
         return NextString(str, iteration + 1);
     }
 
-    private string GenerateString(IList<Part> parts)
+    private static string GenerateString(IEnumerable<Part> parts)
     {
         var sb = new StringBuilder();
         foreach (var part in parts)
@@ -35,15 +35,15 @@ public class LookAndSayGame
         return sb.ToString();
     }
 
-    private string GenerateString(Part part)
+    private static string GenerateString(Part part)
     {
         return $"{part.Count}{part.Character}";
     }
 
-    private IList<Part> GetPartsWithLoop(string s)
+    private static IList<Part> GetPartsWithLoop(string s)
     {
         var parts = new List<Part>();
-        Part currentPart = null;
+        Part? currentPart = null;
         foreach (var c in s)
         {
             if (currentPart == null || c != currentPart.Character)

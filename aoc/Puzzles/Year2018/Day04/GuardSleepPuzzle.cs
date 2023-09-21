@@ -43,7 +43,7 @@ public class GuardSleepPuzzle
     private List<GuardNight> GetNights(List<GuardEvent> events)
     {
         var nights = new List<GuardNight>();
-        GuardNight guardNight = null;
+        GuardNight? guardNight = null;
         foreach (var e in events)
         {
             var regex = new Regex(@"^Guard #(\d+).+$");
@@ -58,13 +58,13 @@ public class GuardSleepPuzzle
             {
                 var actionType = e.Action == "falls asleep" ? ActionType.FallAsleep : ActionType.WakeUp;
                 var action = new Action(e.Timestamp, actionType);
-                guardNight.AddAction(action);
+                guardNight!.AddAction(action);
             }
         }
         return nights;
     }
 
-    private int GetStrategyOneGuardId(List<GuardNight> nights)
+    private static int GetStrategyOneGuardId(List<GuardNight> nights)
     {
         var orderedNights = nights.OrderBy(o => o.GuardId);
         var guardIds = orderedNights.Select(o => o.GuardId).Distinct();
@@ -83,12 +83,12 @@ public class GuardSleepPuzzle
         return guardIdWithMostSleep;
     }
 
-    private int GetStrategyOneMinute(List<GuardNight> nights, int sleepiestGuardId)
+    private static int GetStrategyOneMinute(List<GuardNight> nights, int sleepiestGuardId)
     {
         var sleepiestMinute = 0;
         var highestSleepCount = 0;
         var guardNights = nights.Where(o => o.GuardId == sleepiestGuardId).ToList();
-        for (int i = 0; i < 60; i++)
+        for (var i = 0; i < 60; i++)
         {
             var minuteSleepCount = guardNights.Count(o => o.MinuteStates[i] == GuardState.Asleep);
 

@@ -9,8 +9,8 @@ public class CollisionDetector
 {
     private Matrix<char> _matrix;
     private IList<MineCart> _carts;
-    public MatrixAddress LocationOfFirstCollision { get; private set; }
-    public MatrixAddress LocationOfLastCart { get; private set; }
+    public MatrixAddress? LocationOfFirstCollision { get; private set; }
+    public MatrixAddress? LocationOfLastCart { get; private set; }
 
     public CollisionDetector(string input)
     {

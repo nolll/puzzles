@@ -15,10 +15,11 @@ public class DigitDecoder
         _output = ParseStringList(parts[1]);
     }
 
-    private List<string> ParseStringList(string input)
-    {
-        return input.Trim().Split(' ').Select(o => string.Concat(o.OrderBy(c => c))).ToList();
-    }
+    private static List<string> ParseStringList(string input) => input
+        .Trim()
+        .Split(' ')
+        .Select(o => string.Concat(o.OrderBy(c => c)))
+        .ToList();
 
     public int EasyNumberCount
     {
@@ -28,7 +29,7 @@ public class DigitDecoder
             foreach (var i in _output)
             {
                 var length = i.Length;
-                if (length == 2 || length == 3 || length == 4 || length == 7)
+                if (length is 2 or 3 or 4 or 7)
                     c++;
             }
 
@@ -40,7 +41,7 @@ public class DigitDecoder
     {
         get
         {
-            var s = new Dictionary<int, string>
+            var s = new Dictionary<int, string?>
             {
                 {0, null},
                 {1, _signals.Single(o => o.Length == 2)},
@@ -58,18 +59,18 @@ public class DigitDecoder
             var len5 = _signals.Where(o => o.Length == 5).ToList();
 
             s[3] = len5.Single(o => IsSubsetOf(s[1], o));
-            len5.Remove(s[3]);
+            len5.Remove(s[3]!);
 
             s[6] = len6.Single(o => !IsSubsetOf(s[1], o));
-            len6.Remove(s[6]);
+            len6.Remove(s[6]!);
 
             s[9] = len6.Single(o => IsSubsetOf(s[3], o));
-            len6.Remove(s[9]);
+            len6.Remove(s[9]!);
                 
             s[0] = len6.Single();
                 
             s[5] = len5.Single(o => IsSubsetOf(o, s[9]));
-            len5.Remove(s[5]);
+            len5.Remove(s[5]!);
                 
             s[2] = len5.Single();
                 
@@ -81,14 +82,8 @@ public class DigitDecoder
         }
     }
 
-    public bool IsSubsetOf(string sShort, string sLong)
-    {
-        foreach (var s in sShort)
-        {
-            if (sLong.IndexOf(s) == -1)
-                return false;
-        }
-
-        return true;
-    }
+    public static bool IsSubsetOf(string? sShort, string? sLong) =>
+        sShort is not null &&
+        sLong is not null &&
+        sShort.All(s => sLong.IndexOf(s) != -1);
 }

@@ -6,11 +6,11 @@ public class CategorySixNetwork
 {
     private readonly Dictionary<int, CategorySixComputer> _computers;
     private bool _isIdle;
-    private CategorySixPacket _natPacket;
-    private CategorySixPacket _lastSentNatPacket;
+    private CategorySixPacket? _natPacket;
+    private CategorySixPacket? _lastSentNatPacket;
         
-    public CategorySixPacket FirstRepeatedNatPacket { get; private set; }
-    public CategorySixPacket FirstNatPacket { get; private set; }
+    public CategorySixPacket? FirstRepeatedNatPacket { get; private set; }
+    public CategorySixPacket? FirstNatPacket { get; private set; }
 
     public CategorySixNetwork(string program)
     {

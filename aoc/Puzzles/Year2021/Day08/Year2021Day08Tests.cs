@@ -18,7 +18,7 @@ public class Year2021Day08Tests
     public void IsSubsetOf(string sShort, string sLong, bool expected)
     {
         var decoder = new DigitDecoder(SingleInput);
-        var result = decoder.IsSubsetOf(sShort, sLong);
+        var result = DigitDecoder.IsSubsetOf(sShort, sLong);
             
         Assert.That(result, Is.EqualTo(expected));
     }

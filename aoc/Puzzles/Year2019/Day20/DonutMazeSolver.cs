@@ -59,7 +59,7 @@ public class DonutMazeSolver
         public string FromPortal { get; }
         public IList<string> PassedPortals { get; }
 
-        public PortalPath(int distance, string fromPortal, IList<string> passedPortals = null)
+        public PortalPath(int distance, string fromPortal, IList<string>? passedPortals = null)
         {
             Distance = distance;
             FromPortal = fromPortal;

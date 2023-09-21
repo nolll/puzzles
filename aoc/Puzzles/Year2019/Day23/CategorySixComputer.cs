@@ -12,7 +12,7 @@ public class CategorySixComputer
     private readonly Action _hasReadInputFunc;
     private CategorySixComputerMode _inputMode;
     private CategorySixComputerMode _outputMode;
-    private CategorySixPacket _inputPacket;
+    private CategorySixPacket? _inputPacket;
 
     private int _outputAddress;
     private long _outputX;
@@ -66,7 +66,7 @@ public class CategorySixComputer
 
         if (_inputMode == CategorySixComputerMode.Y)
         {
-            var y = _inputPacket.Y;
+            var y = _inputPacket?.Y ?? 0;
             _inputPacket = null;
             _inputMode = CategorySixComputerMode.X;
             _hasReadInputFunc();

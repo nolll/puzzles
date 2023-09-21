@@ -5,11 +5,11 @@ namespace Aoc.Puzzles.Year2022.Day07;
 
 public class ElfDirectory
 {
-    public ElfDirectory Parent { get; }
+    public ElfDirectory? Parent { get; }
     public IDictionary<string, ElfDirectory> Directories { get; }
     public IDictionary<string, long> Files { get; }
 
-    public ElfDirectory(ElfDirectory parent = null)
+    public ElfDirectory(ElfDirectory? parent = null)
     {
         Parent = parent;
         Directories = new Dictionary<string, ElfDirectory>();

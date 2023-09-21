@@ -35,16 +35,12 @@ public class SnailfishMath
         return largestMagnitude;
     }
 
-    public SnailfishNumber Sum(List<SnailfishNumber> numbers)
+    private SnailfishNumber Sum(IReadOnlyCollection<SnailfishNumber> numbers)
     {
         var number = numbers.First();
         var numbersToAdd = numbers.Skip(1);
-        foreach (var n in numbersToAdd)
-        {
-            number = Sum(number, n);
-        }
 
-        return number;
+        return numbersToAdd.Aggregate(number, Sum);
     }
 
     public SnailfishNumber Explode(SnailfishNumber number)
@@ -92,16 +88,15 @@ public class SnailfishMath
         return number;
     }
 
-    public SnailfishNumber Split(SnailfishNumber number)
+    private SnailfishNumber Split(SnailfishNumber number)
     {
         var nodeToSplit = FindNodeToSplit(number);
-        if (nodeToSplit != null)
-            nodeToSplit.Split();
+        nodeToSplit?.Split();
 
         return number;
     }
 
-    private LinkedList<SnailfishNumber> BuildListOfLiteralNodes(SnailfishNumber snailfishNumber, LinkedList<SnailfishNumber> list = null)
+    private static LinkedList<SnailfishNumber> BuildListOfLiteralNodes(SnailfishNumber snailfishNumber, LinkedList<SnailfishNumber>? list = null)
     {
         list = list ?? new LinkedList<SnailfishNumber>();
 
@@ -118,7 +113,7 @@ public class SnailfishMath
         return list;
     }
     
-    private SnailfishNumber FindNodeToExplode(SnailfishNumber number)
+    private static SnailfishNumber? FindNodeToExplode(SnailfishNumber number)
     {
         var currentNode = number;
         while (true)
@@ -140,14 +135,13 @@ public class SnailfishMath
         }
     }
 
-    private SnailfishNumber FindNodeToSplit(SnailfishNumber number)
+    private static SnailfishNumber? FindNodeToSplit(SnailfishNumber number)
     {
-        var currentNode = number;
         while (true)
         {
-            if (currentNode.IsComposite)
+            if (number.IsComposite)
             {
-                foreach (var child in currentNode.Children)
+                foreach (var child in number.Children)
                 {
                     var found = FindNodeToSplit(child);
                     if (found != null)
@@ -156,15 +150,15 @@ public class SnailfishMath
             }
             else
             {
-                if (currentNode.LiteralValue > 9)
-                    return currentNode;
+                if (number.LiteralValue > 9)
+                    return number;
             }
 
             return null;
         }
     }
 
-    private List<SnailfishNumber> ParseNumbers(string input)
+    private static List<SnailfishNumber> ParseNumbers(string input)
     {
         var lines = PuzzleInputReader.ReadLines(input);
         var numbers = lines.Select(o => new SnailfishNumber(o)).ToList();

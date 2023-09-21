@@ -1,6 +1,7 @@
 ﻿using AquaQ.ConsoleTools;
 using AquaQ.Platform;
 using AquaQ.Puzzles;
+using common.Runners;
 
 namespace AquaQ;
 
@@ -9,8 +10,8 @@ public class Program
     private const int ChallengeTimeout = 10;
     private const int DebugChallenge = 4;
 
-    private static readonly ChallengeRunner Runner = new(ChallengeTimeout);
-    private static readonly ChallengeRepository ChallengeRepository = new();
+    private static readonly PuzzleRunner Runner = new(ChallengeTimeout);
+    private static readonly AquaqPuzzleRepository AquaqPuzzleRepository = new();
     
     static void Main(string[] args)
     {
@@ -32,7 +33,7 @@ public class Program
 
     private static void RunSingle(Parameters parameters)
     {
-        var challenge = ChallengeRepository.GetChallenge(parameters.ChallengeId);
+        var challenge = AquaqPuzzleRepository.GetChallenge(parameters.ChallengeId);
 
         if (challenge == null)
             throw new Exception($"The specified challenge could not be found ({parameters.ChallengeId})");
@@ -42,7 +43,7 @@ public class Program
     
     private static void RunAll(Parameters parameters)
     {
-        var allChallenges = ChallengeRepository.GetAll();
+        var allChallenges = AquaqPuzzleRepository.GetAll();
         var filteredChallenges = new ChallengeFilter(parameters).Filter(allChallenges);
         Runner.Run(filteredChallenges);
     }

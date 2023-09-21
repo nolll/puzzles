@@ -1,6 +1,6 @@
 ﻿namespace AquaQ.Platform;
 
-public static class ChallengeParser
+public static class AquaqPuzzleParser
 {
     public static int GetChallengeId(Type t)
     {

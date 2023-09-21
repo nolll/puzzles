@@ -4,16 +4,16 @@ using common.Puzzles;
 
 namespace AquaQ.Platform;
 
-public abstract class AquaQPuzzle : OnePartPuzzle
+public abstract class AquaqPuzzle : OnePartPuzzle
 {
     protected sealed override string GetFilePath(Type t)
     {
-        var challengeId = ChallengeParser.GetChallengeId(t);
-        var paddedChallengeId = challengeId.ToString().PadLeft(2, '0');
+        var id = AquaqPuzzleParser.GetChallengeId(t);
+        var paddedId = id.ToString().PadLeft(2, '0');
         return Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory,
             "Puzzles",
-            $"Aquaq{paddedChallengeId}",
-            $"Aquaq{paddedChallengeId}.txt");
+            $"Aquaq{paddedId}",
+            $"Aquaq{paddedId}.txt");
     }
 }

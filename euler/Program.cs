@@ -1,4 +1,5 @@
-﻿using Euler.ConsoleTools;
+﻿using common.Runners;
+using Euler.ConsoleTools;
 using Euler.Platform;
 using Euler.Problems;
 
@@ -9,8 +10,8 @@ public class Program
     private const int ProblemTimeout = 10;
     private const int DebugProblem = 42;
 
-    private static readonly ProblemRunner Runner = new(ProblemTimeout);
-    private static readonly ProblemRepository ProblemRepository = new();
+    private static readonly PuzzleRunner Runner = new(ProblemTimeout);
+    private static readonly EulerPuzzleRepository EulerPuzzleRepository = new();
 
     static void Main(string[] args)
     {
@@ -32,7 +33,7 @@ public class Program
 
     private static void RunSingle(Parameters parameters)
     {
-        var problem = ProblemRepository.GetProblem(parameters.ProblemId);
+        var problem = EulerPuzzleRepository.GetProblem(parameters.ProblemId);
 
         if (problem == null)
             throw new Exception($"The specified problem could not be found ({parameters.ProblemId})");
@@ -42,7 +43,7 @@ public class Program
     
     private static void RunAll(Parameters parameters)
     {
-        var allProblems = ProblemRepository.GetAll();
+        var allProblems = EulerPuzzleRepository.GetAll();
         var filteredProblems = new ProblemFilter(parameters).Filter(allProblems);
         Runner.Run(filteredProblems);
     }

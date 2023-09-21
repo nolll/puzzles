@@ -4,7 +4,7 @@ using common.Puzzles;
 
 namespace AquaQ.Puzzles.Aquaq04;
 
-public class Aquaq04 : AquaQPuzzle
+public class Aquaq04 : AquaqPuzzle
 {
     public override string Name => "This is good co-primen";
 

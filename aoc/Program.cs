@@ -16,7 +16,7 @@ public class Program
     private const int DebugDay = 4;
 
     private static readonly PuzzleRunner Runner = new(PuzzleTimeout);
-    private static readonly PuzzleRepository PuzzleRepository = new();
+    private static readonly AocPuzzleRepository AocPuzzleRepository = new();
 
     static void Main(string[] args)
     {
@@ -40,7 +40,7 @@ public class Program
 
     private static void RunSingle(Parameters parameters)
     {
-        var foundDay = PuzzleRepository.GetDay(parameters.Year, parameters.Day);
+        var foundDay = AocPuzzleRepository.GetDay(parameters.Year, parameters.Day);
         if (foundDay == null)
             throw new Exception("The specified day could not be found.");
             
@@ -49,7 +49,7 @@ public class Program
 
     private static void RunEvent(Parameters parameters)
     {
-        var eventDays = PuzzleRepository.GetEventDays(parameters.Year);
+        var eventDays = AocPuzzleRepository.GetEventDays(parameters.Year);
         if (!eventDays.Any())
             throw new Exception("Event not found!");
 
@@ -59,7 +59,7 @@ public class Program
 
     private static void RunAll(Parameters parameters)
     {
-        var allDays = PuzzleRepository.GetAll();
+        var allDays = AocPuzzleRepository.GetAll();
         var filteredDays = new DayFilter(parameters).Filter(allDays);
         Runner.Run(filteredDays);
     }

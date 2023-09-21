@@ -3,7 +3,7 @@ using common.Puzzles;
 
 namespace AquaQ.Puzzles.Aquaq00;
 
-public class Aquaq00 : AquaQPuzzle
+public class Aquaq00 : AquaqPuzzle
 {
     public override string Name => "What's a numpad?";
 

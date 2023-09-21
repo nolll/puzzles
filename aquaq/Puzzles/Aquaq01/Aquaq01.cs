@@ -4,7 +4,7 @@ using common.Puzzles;
 
 namespace AquaQ.Puzzles.Aquaq01;
 
-public class Aquaq01 : AquaQPuzzle
+public class Aquaq01 : AquaqPuzzle
 {
     private static readonly Regex HexRegex = new("[^0123456789abcdef]");
     public override string Name => "Rose by any other name";

@@ -3,7 +3,7 @@ using common.Puzzles;
 
 namespace AquaQ.Puzzles.Aquaq02;
 
-public class Aquaq02 : AquaQPuzzle
+public class Aquaq02 : AquaqPuzzle
 {
     public override string Name => "One is all you need";
 

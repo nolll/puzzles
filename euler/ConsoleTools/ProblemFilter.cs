@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.ConsoleTools;
 
@@ -11,13 +12,13 @@ public class ProblemFilter
         _parameters = parameters;
     }
 
-    public IList<ProblemWrapper> Filter(IList<ProblemWrapper> problems)
+    public IList<PuzzleWrapper> Filter(IList<PuzzleWrapper> problems)
     {
         if (_parameters.RunSlowOnly)
-            return problems.Where(o => o.Problem.IsSlow).ToList();
+            return problems.Where(o => o.Puzzle.IsSlow).ToList();
 
         if (_parameters.RunCommentedOnly)
-            return problems.Where(o => !string.IsNullOrEmpty(o.Problem.Comment)).ToList();
+            return problems.Where(o => !string.IsNullOrEmpty(o.Puzzle.Comment)).ToList();
 
         return problems;
     }

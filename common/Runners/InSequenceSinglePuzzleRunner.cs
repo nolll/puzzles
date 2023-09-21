@@ -14,7 +14,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 
     private readonly PuzzleWrapper _wrapper;
     private readonly TimeSpan _timeoutTimespan;
-    private readonly string _dayAndYear;
+    private readonly string _title;
     private readonly string _commentMarkup;
     private readonly string[] _markups;
 
@@ -23,7 +23,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
         _wrapper = wrapper;
         _timeoutTimespan = timeoutTimespan;
 
-        _dayAndYear = _wrapper.ListTitle;
+        _title = _wrapper.ListTitle.PadRight(11);
         _commentMarkup = MarkupComment(_wrapper.Puzzle.Comment);
         _markups = new string[_wrapper.Puzzle.RunFunctions.Count];
         for (var i = 0; i < _wrapper.Puzzle.RunFunctions.Count; i++)
@@ -96,10 +96,10 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     private void PrintRow()
     {
         var results = string.Join(" | ", _markups);
-        AnsiConsole.Markup($"\r| {_dayAndYear} | {results} | {_commentMarkup} |");
+        AnsiConsole.Markup($"\r| {_title} | {results} | {_commentMarkup} |");
     }
 
-    private static string MarkupComment(string comment) =>
+    private static string MarkupComment(string? comment) =>
         comment is null
             ? PadComment(string.Empty)
             : MarkupColor(PadComment(TruncateComment(comment)), Color.Yellow);

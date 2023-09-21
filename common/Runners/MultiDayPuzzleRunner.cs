@@ -15,18 +15,30 @@ public class MultiDayPuzzleRunner
     public void Run(IEnumerable<PuzzleWrapper> days)
     {
         var dayList = days.ToList();
+        var maxRunFuncCount = dayList.Max(o => o.Puzzle.RunFunctions.Count);
+        var partTitles = maxRunFuncCount > 1
+            ? Enumerable.Range(1, maxRunFuncCount).Select(o => $"part {o}    ")
+            : new List<string> { "result    " };
+        var variableParts = string.Join(" | ", partTitles);
+        
+        var partsDividers = maxRunFuncCount > 1
+            ? Enumerable.Range(1, maxRunFuncCount).Select(_ => "----------")
+            : new List<string> { "----------" };
+        var variableDividers = string.Join("---", partsDividers);
+        var divider = $"----------------{variableDividers}-----------------------------";
+
         AnsiConsole.Cursor.Show(false);
         AnsiConsole.WriteLine($"Running {dayList.Count} puzzles");
-        AnsiConsole.WriteLine("--------------------------------------------------------------------");
-        AnsiConsole.WriteLine("| puzzle      | part 1     | part 2     | comment                  |");
-        AnsiConsole.WriteLine("--------------------------------------------------------------------");
+        AnsiConsole.WriteLine(divider);
+        AnsiConsole.WriteLine($"| puzzle      | {variableParts} | comment                  |");
+        AnsiConsole.WriteLine(divider);
 
         foreach (var day in dayList)
         {
             new InSequenceSinglePuzzleRunner(day, _timeoutTimespan).Run();
         }
 
-        AnsiConsole.WriteLine("--------------------------------------------------------------------");
+        AnsiConsole.WriteLine(divider);
         AnsiConsole.Cursor.Show(true);
     }
 }

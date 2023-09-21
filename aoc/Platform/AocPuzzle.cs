@@ -4,27 +4,11 @@ using common.Puzzles;
 
 namespace Aoc.Platform;
 
-public abstract class AocPuzzle : Puzzle
+public abstract class AocPuzzle : TwoPartsPuzzle
 {
-    public abstract string Title { get; }
-    public virtual string Comment => null;
-    public virtual bool IsSlow => false;
-    public virtual bool NeedsRewrite => false;
-    public virtual bool IsFunToOptimize => false;
-
-    public virtual PuzzleResult RunPart1()
-    {
-        return null;
-    }
-
-    public virtual PuzzleResult RunPart2()
-    {
-        return null;
-    }
-
     protected sealed override string GetFilePath(Type t)
     {
-        var (year, day) = PuzzleParser.GetYearAndDay(t);
+        var (year, day) = AocPuzzleParser.GetYearAndDay(t);
         var paddedDay = day.ToString().PadLeft(2, '0');
         return Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory,

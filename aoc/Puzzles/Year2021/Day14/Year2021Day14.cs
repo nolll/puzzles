@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2021.Day14;
 
 public class Year2021Day14 : AocPuzzle
 {
-    public override string Title => "Extended Polymerization";
+    public override string Name => "Extended Polymerization";
 
     public override PuzzleResult RunPart1()
     {

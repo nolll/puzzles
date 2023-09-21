@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2020.Day16;
 
 public class Year2020Day16 : AocPuzzle
 {
-    public override string Title => "Ticket Translation";
+    public override string Name => "Ticket Translation";
 
     public override PuzzleResult RunPart1()
     {

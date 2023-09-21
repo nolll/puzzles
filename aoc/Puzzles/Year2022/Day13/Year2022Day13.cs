@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2022.Day13;
 
 public class Year2022Day13 : AocPuzzle
 {
-    public override string Title => "Distress Signal";
+    public override string Name => "Distress Signal";
 
     public override PuzzleResult RunPart1()
     {

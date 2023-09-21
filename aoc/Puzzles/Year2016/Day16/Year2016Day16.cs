@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2016.Day16;
 
 public class Year2016Day16 : AocPuzzle
 {
-    public override string Title => "Dragon Checksum";
+    public override string Name => "Dragon Checksum";
 
     public override PuzzleResult RunPart1()
     {

@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2015.Day17;
 
 public class Year2015Day17 : AocPuzzle
 {
-    public override string Title => "No Such Thing as Too Much";
+    public override string Name => "No Such Thing as Too Much";
 
     public override PuzzleResult RunPart1()
     {

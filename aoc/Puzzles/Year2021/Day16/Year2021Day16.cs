@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2021.Day16;
 
 public class Year2021Day16 : AocPuzzle
 {
-    public override string Title => "Packet Decoder";
+    public override string Name => "Packet Decoder";
 
     public override PuzzleResult RunPart1()
     {

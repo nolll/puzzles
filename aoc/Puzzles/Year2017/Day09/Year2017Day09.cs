@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2017.Day09;
 
 public class Year2017Day09 : AocPuzzle
 {
-    public override string Title => "Stream Processing";
+    public override string Name => "Stream Processing";
 
     public override PuzzleResult RunPart1()
     {

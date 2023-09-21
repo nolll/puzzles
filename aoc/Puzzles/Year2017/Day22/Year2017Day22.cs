@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2017.Day22;
 
 public class Year2017Day22 : AocPuzzle
 {
-    public override string Title => "Sporifica Virus";
+    public override string Name => "Sporifica Virus";
 
     public override PuzzleResult RunPart1()
     {

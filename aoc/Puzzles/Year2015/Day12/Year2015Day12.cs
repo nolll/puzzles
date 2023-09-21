@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2015.Day12;
 
 public class Year2015Day12 : AocPuzzle
 {
-    public override string Title => "JSAbacusFramework.io";
+    public override string Name => "JSAbacusFramework.io";
 
     public override PuzzleResult RunPart1()
     {

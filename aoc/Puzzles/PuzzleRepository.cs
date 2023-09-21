@@ -3,44 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.Puzzles;
 
 public class PuzzleRepository
 {
-    private readonly List<PuzzleDay> _allDays;
+    private readonly List<PuzzleWrapper> _allDays;
         
     public PuzzleRepository()
     {
         _allDays = CreateDays();
     }
 
-    public PuzzleDay GetDay(int? selectedYear, int? selectedDay) =>
+    public PuzzleWrapper GetDay(int? selectedYear, int? selectedDay) =>
         selectedYear != null && selectedDay != null
-            ? _allDays.First(o => o.Year == selectedYear.Value &&  o.Day == selectedDay.Value)
+            ? _allDays.First(o => o.Id == $"{selectedYear.Value}{selectedDay.Value}")
             : _allDays.Last();
 
-    public List<PuzzleDay> GetEventDays(int? selectedYear) =>
+    public List<PuzzleWrapper> GetEventDays(int? selectedYear) =>
         selectedYear != null 
-            ? _allDays.Where(o => o.Year == selectedYear).ToList() 
-            : new List<PuzzleDay>();
+            ? _allDays.Where(o => o.Id.StartsWith(selectedYear.Value.ToString())).ToList() 
+            : new List<PuzzleWrapper>();
 
-    public List<PuzzleDay> GetAll() => _allDays;
+    public List<PuzzleWrapper> GetAll() => _allDays;
 
-    private static List<PuzzleDay> CreateDays() => 
+    private static List<PuzzleWrapper> CreateDays() => 
         GetPuzzleClasses()
             .Select(CreateDay)
-            .OrderBy(o => o.Year)
-            .ThenBy(o => o.Day)
+            .OrderBy(o => o.Id)
             .ToList();
 
-    private static PuzzleDay CreateDay(Type t)
+    private static PuzzleWrapper CreateDay(Type t)
     {
-        var (year, day) = PuzzleParser.GetYearAndDay(t);
+        var (year, day) = AocPuzzleParser.GetYearAndDay(t);
         if (Activator.CreateInstance(t) is not AocPuzzle puzzleDay)
             throw new Exception($"Could not create Puzzle for day {day} {year} ");
-            
-        return new PuzzleDay(year, day, puzzleDay);
+
+        var id = $"{year}{day}";
+        var dayStr = day.ToString().PadLeft(2, '0');
+        var title = $"Day {day} {year}";
+        var listTitle = $"Day {dayStr} {year}";
+        return new PuzzleWrapper(id, title, listTitle, puzzleDay);
     }
 
     private static IEnumerable<Type> GetPuzzleClasses() => 

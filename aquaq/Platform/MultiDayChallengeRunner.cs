@@ -15,7 +15,7 @@ public class MultiDayChallengeRunner
     {
         var challengeList = challenges.ToList();
         AnsiConsole.Cursor.Show(false);
-        AnsiConsole.WriteLine($"Running {challengeList.Count} challenges");
+        AnsiConsole.WriteLine($"Running {challengeList.Count} puzzles");
         WriteDivider();
         AnsiConsole.WriteLine("| challenge    | result     | comment                  |");
         WriteDivider();

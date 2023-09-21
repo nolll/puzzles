@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2017.Day04;
 
 public class Year2017Day04 : AocPuzzle
 {
-    public override string Title => "High-Entropy Passphrases";
+    public override string Name => "High-Entropy Passphrases";
 
     public override PuzzleResult RunPart1()
     {

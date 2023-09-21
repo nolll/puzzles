@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2016.Day03;
 
 public class Year2016Day03 : AocPuzzle
 {
-    public override string Title => "Squares With Three Sides";
+    public override string Name => "Squares With Three Sides";
 
     public override PuzzleResult RunPart1()
     {

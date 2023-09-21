@@ -7,7 +7,7 @@ public class Year2022Day08 : AocPuzzle
 {
     private TreeHouse _treeHouse;
 
-    public override string Title => "Treetop Tree House";
+    public override string Name => "Treetop Tree House";
 
     public override PuzzleResult RunPart1()
     {

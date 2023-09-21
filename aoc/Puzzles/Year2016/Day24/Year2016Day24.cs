@@ -7,7 +7,7 @@ public class Year2016Day24 : AocPuzzle
 {
     private AirDuctNavigator Navigator => new(FileInput);
 
-    public override string Title => "Air Duct Spelunking";
+    public override string Name => "Air Duct Spelunking";
 
     public override PuzzleResult RunPart1()
     {

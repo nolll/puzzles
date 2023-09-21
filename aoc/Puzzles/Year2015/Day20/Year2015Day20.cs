@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2015.Day20;
 
 public class Year2015Day20 : AocPuzzle
 {
-    public override string Title => "Infinite Elves and Infinite Houses";
+    public override string Name => "Infinite Elves and Infinite Houses";
 
     public override PuzzleResult RunPart1()
     {

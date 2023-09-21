@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2019.Day01;
 
 public class Year2019Day01 : AocPuzzle
 {
-    public override string Title => "The Tyranny of the Rocket Equation";
+    public override string Name => "The Tyranny of the Rocket Equation";
 
     public override PuzzleResult RunPart1()
     {

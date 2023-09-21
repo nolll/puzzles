@@ -1,13 +1,10 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Aoc.Printing;
-using common.Formatting;
+﻿using common.Formatting;
 using common.Puzzles;
 using Spectre.Console;
+using Color = System.Drawing.Color;
 using Timer = common.Timing.Timer;
 
-namespace Aoc.Platform;
+namespace common.Runners;
 
 public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 {
@@ -15,34 +12,38 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     private const int CommentColumnWidth = 24;
     private const int TruncatedCommentLength = CommentColumnWidth - 3;
 
-    private readonly PuzzleDay _day;
+    private readonly PuzzleWrapper _wrapper;
     private readonly TimeSpan _timeoutTimespan;
     private readonly string _dayAndYear;
     private readonly string _commentMarkup;
-    private string _part1Markup;
-    private string _part2Markup;
+    private readonly string[] _markups;
 
-    public InSequenceSinglePuzzleRunner(PuzzleDay day, TimeSpan timeoutTimespan)
+    public InSequenceSinglePuzzleRunner(PuzzleWrapper wrapper, TimeSpan timeoutTimespan)
     {
-        _day = day;
+        _wrapper = wrapper;
         _timeoutTimespan = timeoutTimespan;
 
-        var dayStr = _day.Day.ToString().PadLeft(2, '0');
-        _dayAndYear = $"Day {dayStr} {_day.Year}";
-        _commentMarkup = MarkupComment(_day.Puzzle.Comment);
-        _part1Markup = PadResult(string.Empty);
-        _part2Markup = PadResult(string.Empty);
+        _dayAndYear = _wrapper.ListTitle;
+        _commentMarkup = MarkupComment(_wrapper.Puzzle.Comment);
+        _markups = new string[_wrapper.Puzzle.RunFunctions.Count];
+        for (var i = 0; i < _wrapper.Puzzle.RunFunctions.Count; i++)
+        {
+            _markups[i] = PadResult(string.Empty);
+        }
     }
 
     public void Run()
     {
         PrintRow();
-        RunPart(() => _day.Puzzle.RunPart1(), UpdatePart1Result);
-        RunPart(() => _day.Puzzle.RunPart2(), UpdatePart2Result);
+        for (var i = 0; i < _wrapper.Puzzle.RunFunctions.Count; i++)
+        {
+            var runFunc = _wrapper.Puzzle.RunFunctions[i];
+            RunPart(() => runFunc(), i);
+        }
         AnsiConsole.WriteLine();
     }
 
-    private void RunPart(Func<PuzzleResult> runFunc, Action<string> updateResultFunc)
+    private void RunPart(Func<PuzzleResult> runFunc, int index)
     {
         var status = PuzzleResultStatus.Empty;
         var timer = new Timer();
@@ -61,19 +62,18 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 
             waited = true;
             time = timer.FromStart;
-            updateResultFunc(PadResult(Formatter.FormatTime(time)));
+            UpdateResult(index, PadResult(Formatter.FormatTime(time)));
             PrintRow();
             Thread.Sleep(ProgressWaitTime);
         }
 
         status = task.IsFaulted ? PuzzleResultStatus.Failed : status;
         time = waited ? time : timer.FromStart;
-        updateResultFunc(MarkupTime(time, status));
+        UpdateResult(index, MarkupTime(time, status));
         PrintRow();
     }
 
-    private void UpdatePart1Result(string markup) => _part1Markup = markup;
-    private void UpdatePart2Result(string markup) => _part2Markup = markup;
+    private void UpdateResult(int index, string markup) => _markups[index] = markup;
 
     private string MarkupTime(TimeSpan time, PuzzleResultStatus status)
     {
@@ -93,8 +93,11 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     private static string PadComment(string s) => Pad(s, CommentColumnWidth);
     private static string Pad(string s, int width) => s.PadRight(width);
 
-    private void PrintRow() => 
-        AnsiConsole.Markup($"\r| {_dayAndYear} | {_part1Markup} | {_part2Markup} | {_commentMarkup} |");
+    private void PrintRow()
+    {
+        var results = string.Join(" | ", _markups);
+        AnsiConsole.Markup($"\r| {_dayAndYear} | {results} | {_commentMarkup} |");
+    }
 
     private static string MarkupComment(string comment) =>
         comment is null

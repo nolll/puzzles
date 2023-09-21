@@ -6,7 +6,7 @@ namespace Aoc.Puzzles.Year2019.Day02;
 
 public class Year2019Day02 : AocPuzzle
 {
-    public override string Title => "1202 Program Alarm";
+    public override string Name => "1202 Program Alarm";
 
     public override PuzzleResult RunPart1()
     {

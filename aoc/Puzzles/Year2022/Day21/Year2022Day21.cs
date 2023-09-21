@@ -8,7 +8,7 @@ namespace Aoc.Puzzles.Year2022.Day21;
 
 public class Year2022Day21 : AocPuzzle
 {
-    public override string Title => "Monkey Math";
+    public override string Name => "Monkey Math";
 
     public override PuzzleResult RunPart1()
     {

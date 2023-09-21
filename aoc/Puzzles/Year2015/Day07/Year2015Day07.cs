@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2015.Day07;
 
 public class Year2015Day07 : AocPuzzle
 {
-    public override string Title => "Some Assembly Required";
+    public override string Name => "Some Assembly Required";
 
     public override PuzzleResult RunPart1()
     {

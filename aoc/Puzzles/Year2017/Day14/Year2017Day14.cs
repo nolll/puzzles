@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2017.Day14;
 
 public class Year2017Day14 : AocPuzzle
 {
-    public override string Title => "Disk Defragmentation";
+    public override string Name => "Disk Defragmentation";
 
     public override PuzzleResult RunPart1()
     {

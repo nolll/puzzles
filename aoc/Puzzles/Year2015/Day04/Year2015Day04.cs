@@ -7,7 +7,7 @@ public class Year2015Day04 : AocPuzzle
 {
     private int _index;
 
-    public override string Title => "The Ideal Stocking Stuffer";
+    public override string Name => "The Ideal Stocking Stuffer";
 
     public override PuzzleResult RunPart1()
     {

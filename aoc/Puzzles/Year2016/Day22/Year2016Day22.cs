@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2016.Day22;
 
 public class Year2016Day22 : AocPuzzle
 {
-    public override string Title => "Grid Computing";
+    public override string Name => "Grid Computing";
 
     public override PuzzleResult RunPart1()
     {

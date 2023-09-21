@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2021.Day10;
 
 public class Year2021Day10 : AocPuzzle
 {
-    public override string Title => "Syntax Scoring";
+    public override string Name => "Syntax Scoring";
 
     public override PuzzleResult RunPart1()
     {

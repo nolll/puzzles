@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2018.Day18;
 
 public class Year2018Day18 : AocPuzzle
 {
-    public override string Title => "Settlers of The North Pole";
+    public override string Name => "Settlers of The North Pole";
 
     public override PuzzleResult RunPart1()
     {

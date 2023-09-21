@@ -4,15 +4,8 @@ using common.Puzzles;
 
 namespace AquaQ.Platform;
 
-public abstract class AquaQPuzzle : Puzzle
+public abstract class AquaQPuzzle : OnePartPuzzle
 {
-    public abstract string Name { get; }
-    public virtual string? Comment => null;
-    public virtual bool IsSlow => false;
-    public virtual bool NeedsRewrite => false;
-
-    public abstract PuzzleResult Run();
-    
     protected sealed override string GetFilePath(Type t)
     {
         var challengeId = ChallengeParser.GetChallengeId(t);

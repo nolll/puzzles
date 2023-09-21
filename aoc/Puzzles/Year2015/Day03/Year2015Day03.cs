@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2015.Day03;
 
 public class Year2015Day03 : AocPuzzle
 {
-    public override string Title => "Perfectly Spherical Houses in a Vacuum";
+    public override string Name => "Perfectly Spherical Houses in a Vacuum";
 
     public override PuzzleResult RunPart1()
     {

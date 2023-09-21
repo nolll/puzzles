@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2015.Day05;
 
 public class Year2015Day05 : AocPuzzle
 {
-    public override string Title => "Doesn't He Have Intern-Elves For This?";
+    public override string Name => "Doesn't He Have Intern-Elves For This?";
 
     public override PuzzleResult RunPart1()
     {

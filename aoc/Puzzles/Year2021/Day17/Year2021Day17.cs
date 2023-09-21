@@ -7,7 +7,7 @@ public class Year2021Day17 : AocPuzzle
 {
     private TrickshotResult _result;
 
-    public override string Title => "Trick Shot";
+    public override string Name => "Trick Shot";
 
     public override PuzzleResult RunPart1()
     {

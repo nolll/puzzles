@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2021.Day12;
 
 public class Year2021Day12 : AocPuzzle
 {
-    public override string Title => "Passage Pathing";
+    public override string Name => "Passage Pathing";
 
     public override PuzzleResult RunPart1()
     {

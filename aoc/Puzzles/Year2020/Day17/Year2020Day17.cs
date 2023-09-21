@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2020.Day17;
 
 public class Year2020Day17 : AocPuzzle
 {
-    public override string Title => "Conway Cubes";
+    public override string Name => "Conway Cubes";
 
     public override PuzzleResult RunPart1()
     {

@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2017.Day03;
 
 public class Year2017Day03 : AocPuzzle
 {
-    public override string Title => "Spiral Memory";
+    public override string Name => "Spiral Memory";
 
     public override PuzzleResult RunPart1()
     {

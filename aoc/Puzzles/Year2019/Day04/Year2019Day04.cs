@@ -6,7 +6,7 @@ namespace Aoc.Puzzles.Year2019.Day04;
 
 public class Year2019Day04 : AocPuzzle
 {
-    public override string Title => "Secure Container";
+    public override string Name => "Secure Container";
 
     public override PuzzleResult RunPart1()
     {

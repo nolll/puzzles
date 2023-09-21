@@ -7,7 +7,7 @@ public class Year2021Day19 : AocPuzzle
 {
     private BeaconSystemResult _result;
 
-    public override string Title => "Beacon Scanner";
+    public override string Name => "Beacon Scanner";
 
     public override PuzzleResult RunPart1()
     {

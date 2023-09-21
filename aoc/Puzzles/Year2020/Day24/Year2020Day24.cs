@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2020.Day24;
 
 public class Year2020Day24 : AocPuzzle
 {
-    public override string Title => "Lobby Layout";
+    public override string Name => "Lobby Layout";
 
     public override PuzzleResult RunPart1()
     {

@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2019.Day12;
 
 public class Year2019Day12 : AocPuzzle
 {
-    public override string Title => "The N-Body Problem";
+    public override string Name => "The N-Body Problem";
 
     public override PuzzleResult RunPart1()
     {

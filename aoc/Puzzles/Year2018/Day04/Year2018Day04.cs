@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2018.Day04;
 
 public class Year2018Day04 : AocPuzzle
 {
-    public override string Title => "Repose Record";
+    public override string Name => "Repose Record";
 
     public override PuzzleResult RunPart1()
     {

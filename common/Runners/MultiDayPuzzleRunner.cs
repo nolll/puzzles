@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using common.Puzzles;
 using Spectre.Console;
 
-namespace Aoc.Platform;
+namespace common.Runners;
 
 public class MultiDayPuzzleRunner
 {
@@ -14,13 +12,13 @@ public class MultiDayPuzzleRunner
         _timeoutTimespan = TimeSpan.FromSeconds(timeoutSeconds);
     }
 
-    public void Run(IEnumerable<PuzzleDay> days)
+    public void Run(IEnumerable<PuzzleWrapper> days)
     {
         var dayList = days.ToList();
         AnsiConsole.Cursor.Show(false);
-        AnsiConsole.WriteLine($"Running {dayList.Count} days");
+        AnsiConsole.WriteLine($"Running {dayList.Count} puzzles");
         AnsiConsole.WriteLine("--------------------------------------------------------------------");
-        AnsiConsole.WriteLine("| day         | part 1     | part 2     | comment                  |");
+        AnsiConsole.WriteLine("| puzzle      | part 1     | part 2     | comment                  |");
         AnsiConsole.WriteLine("--------------------------------------------------------------------");
 
         foreach (var day in dayList)

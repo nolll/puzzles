@@ -7,7 +7,7 @@ namespace Aoc.Puzzles.Year2020.Day02;
 
 public class Year2020Day02 : AocPuzzle
 {
-    public override string Title => "Password Philosophy";
+    public override string Name => "Password Philosophy";
 
     public override PuzzleResult RunPart1()
     {

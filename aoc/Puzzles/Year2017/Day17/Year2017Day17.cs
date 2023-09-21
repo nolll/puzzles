@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2017.Day17;
 
 public class Year2017Day17 : AocPuzzle
 {
-    public override string Title => "Spinlock";
+    public override string Name => "Spinlock";
 
     public override PuzzleResult RunPart1()
     {

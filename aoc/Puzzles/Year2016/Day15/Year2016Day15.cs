@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2016.Day15;
 
 public class Year2016Day15 : AocPuzzle
 {
-    public override string Title => "Timing is Everything";
+    public override string Name => "Timing is Everything";
 
     public override PuzzleResult RunPart1()
     {

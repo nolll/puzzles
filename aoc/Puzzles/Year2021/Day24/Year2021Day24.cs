@@ -28,7 +28,7 @@ public class Year2021Day24 : AocPuzzle
     private long SmallestValidNumber => long.Parse(ValidNumbers.First());
     private long LargestValidNumber => long.Parse(ValidNumbers.Last());
 
-    public override string Title => "Arithmetic Logic Unit";
+    public override string Name => "Arithmetic Logic Unit";
 
     public override PuzzleResult RunPart1()
     {

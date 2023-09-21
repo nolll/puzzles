@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2021.Day20;
 
 public class Year2021Day20 : AocPuzzle
 {
-    public override string Title => "Trench Map";
+    public override string Name => "Trench Map";
 
     public override PuzzleResult RunPart1()
     {

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using common.Puzzles;
 
-namespace Aoc.Platform;
+namespace common.Runners;
 
 public class PuzzleRunner
 {
@@ -13,9 +11,9 @@ public class PuzzleRunner
         _puzzleTimeout = puzzleTimeout;
     }
 
-    public void Run(IEnumerable<PuzzleDay> puzzleDays)
+    public void Run(IEnumerable<PuzzleWrapper> wrappers)
     {
-        var enumerable = puzzleDays as PuzzleDay[] ?? puzzleDays.ToArray();
+        var enumerable = wrappers as PuzzleWrapper[] ?? wrappers.ToArray();
         var count = enumerable.Length;
 
         if(count == 0)
@@ -27,8 +25,8 @@ public class PuzzleRunner
             new MultiDayPuzzleRunner(_puzzleTimeout).Run(enumerable);
     }
 
-    public void Run(PuzzleDay puzzleDay)
+    public void Run(PuzzleWrapper puzzleWrapper)
     {
-        Run(new List<PuzzleDay> { puzzleDay });
+        Run(new List<PuzzleWrapper> { puzzleWrapper });
     }
 }

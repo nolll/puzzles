@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Aoc.Platform;
+using common.Puzzles;
 
 namespace Aoc.ConsoleTools;
 
@@ -13,7 +14,7 @@ public class DayFilter
         _parameters = parameters;
     }
 
-    public List<PuzzleDay> Filter(List<PuzzleDay> days)
+    public List<PuzzleWrapper> Filter(List<PuzzleWrapper> days)
     {
         if (_parameters.RunSlowOnly)
             return days.Where(o => o.Puzzle.IsSlow).ToList();

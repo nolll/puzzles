@@ -8,7 +8,7 @@ public class Year2019Day05 : AocPuzzle
 {
     private long _output;
 
-    public override string Title => "Sunny with a Chance of Asteroids";
+    public override string Name => "Sunny with a Chance of Asteroids";
 
     public override PuzzleResult RunPart1()
     {

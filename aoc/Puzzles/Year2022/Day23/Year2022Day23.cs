@@ -9,7 +9,7 @@ namespace Aoc.Puzzles.Year2022.Day23;
 
 public class Year2022Day23 : AocPuzzle
 {
-    public override string Title => "Unstable Diffusion";
+    public override string Name => "Unstable Diffusion";
 
     public override PuzzleResult RunPart1()
     {

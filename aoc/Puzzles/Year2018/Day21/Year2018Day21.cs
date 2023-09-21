@@ -6,7 +6,7 @@ namespace Aoc.Puzzles.Year2018.Day21;
 
 public class Year2018Day21 : AocPuzzle
 {
-    public override string Title => "Chronal Conversion";
+    public override string Name => "Chronal Conversion";
     public override string Comment => "OpComputer";
     public override bool IsSlow => true; // 143s for part 2
 

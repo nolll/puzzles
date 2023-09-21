@@ -2,7 +2,7 @@
 
 namespace Aoc.Platform;
 
-public static class PuzzleParser
+public static class AocPuzzleParser
 {
     public static (int year, int day) GetYearAndDay(Type t)
     {

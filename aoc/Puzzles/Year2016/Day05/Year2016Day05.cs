@@ -7,7 +7,7 @@ public class Year2016Day05 : AocPuzzle
 {
     private readonly PasswordGenerator _generator = new();
 
-    public override string Title => "How About a Nice Game of Chess?";
+    public override string Name => "How About a Nice Game of Chess?";
 
     public override PuzzleResult RunPart1()
     {

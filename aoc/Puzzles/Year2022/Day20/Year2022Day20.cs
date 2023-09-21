@@ -10,7 +10,7 @@ namespace Aoc.Puzzles.Year2022.Day20;
 
 public class Year2022Day20 : AocPuzzle
 {
-    public override string Title => "Grove Positioning System";
+    public override string Name => "Grove Positioning System";
 
     public override PuzzleResult RunPart1()
     {

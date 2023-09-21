@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2022.Day12;
 
 public class Year2022Day12 : AocPuzzle
 {
-    public override string Title => "Hill Climbing Algorithm";
+    public override string Name => "Hill Climbing Algorithm";
 
     public override PuzzleResult RunPart1()
     {

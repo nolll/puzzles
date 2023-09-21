@@ -4,6 +4,7 @@ using Aoc.ConsoleTools;
 using Aoc.Platform;
 using Aoc.Printing;
 using Aoc.Puzzles;
+using common.Runners;
 
 namespace Aoc;
 

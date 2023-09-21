@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2016.Day21;
 
 public class Year2016Day21 : AocPuzzle
 {
-    public override string Title => "Scrambled Letters and Hash";
+    public override string Name => "Scrambled Letters and Hash";
 
     public override PuzzleResult RunPart1()
     {

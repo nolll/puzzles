@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2017.Day23;
 
 public class Year2017Day23 : AocPuzzle
 {
-    public override string Title => "Coprocessor Conflagration";
+    public override string Name => "Coprocessor Conflagration";
 
     public override PuzzleResult RunPart1()
     {

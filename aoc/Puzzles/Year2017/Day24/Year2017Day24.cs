@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2017.Day24;
 
 public class Year2017Day24 : AocPuzzle
 {
-    public override string Title => "Electromagnetic Moat";
+    public override string Name => "Electromagnetic Moat";
 
     public override PuzzleResult RunPart1()
     {

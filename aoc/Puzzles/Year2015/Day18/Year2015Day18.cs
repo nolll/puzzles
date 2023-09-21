@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2015.Day18;
 
 public class Year2015Day18 : AocPuzzle
 {
-    public override string Title => "Like a GIF For Your Yard";
+    public override string Name => "Like a GIF For Your Yard";
 
     public override PuzzleResult RunPart1()
     {

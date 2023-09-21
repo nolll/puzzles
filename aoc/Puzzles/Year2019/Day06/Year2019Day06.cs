@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2019.Day06;
 
 public class Year2019Day06 : AocPuzzle
 {
-    public override string Title => "Universal Orbit Map";
+    public override string Name => "Universal Orbit Map";
 
     public override PuzzleResult RunPart1()
     {

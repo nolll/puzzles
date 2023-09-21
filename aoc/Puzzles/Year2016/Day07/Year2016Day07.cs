@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2016.Day07;
 
 public class Year2016Day07 : AocPuzzle
 {
-    public override string Title => "Internet Protocol Version 7";
+    public override string Name => "Internet Protocol Version 7";
 
     public override PuzzleResult RunPart1()
     {

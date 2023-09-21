@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2018.Day06;
 
 public class Year2018Day06 : AocPuzzle
 {
-    public override string Title => "Chronal Coordinates";
+    public override string Name => "Chronal Coordinates";
 
     public override PuzzleResult RunPart1()
     {

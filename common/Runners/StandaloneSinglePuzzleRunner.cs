@@ -1,45 +1,45 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Aoc.Printing;
-using common.Formatting;
+﻿using common.Formatting;
 using common.Puzzles;
 using Spectre.Console;
 using Timer = common.Timing.Timer;
+using Color = System.Drawing.Color;
 
-namespace Aoc.Platform;
+namespace common.Runners;
 
 public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
 {
-    private readonly PuzzleDay _day;
+    private readonly PuzzleWrapper _wrapper;
     private const int StatusPadding = 15;
 
-    public StandaloneSinglePuzzleRunner(PuzzleDay day)
+    public StandaloneSinglePuzzleRunner(PuzzleWrapper wrapper)
     {
-        _day = day;
+        _wrapper = wrapper;
     }
 
     public void Run()
     {
         AnsiConsole.Cursor.Show(false);
-        WriteHeader(_day);
-        AnsiConsole.WriteLine();
-        RunAndPrintPuzzleResult(1, () => _day.Puzzle.RunPart1());
-        AnsiConsole.WriteLine();
-        RunAndPrintPuzzleResult(2, () => _day.Puzzle.RunPart2());
+        WriteHeader(_wrapper);
+
+        for (var i = 0; i < _wrapper.Puzzle.RunFunctions.Count; i++)
+        {
+            var runFunc = _wrapper.Puzzle.RunFunctions[i];
+            AnsiConsole.WriteLine();
+            RunAndPrintPuzzleResult(i + 1, runFunc);
+        }
+
         AnsiConsole.Cursor.Show(true);
     }
 
-    private static void WriteHeader(PuzzleDay day)
+    private static void WriteHeader(PuzzleWrapper wrapper)
     {
-        AnsiConsole.WriteLine($"Day {day.Day} {day.Year}:");
-        if (day.Puzzle.Title is not null)
-            AnsiConsole.WriteLine(day.Puzzle.Title);
-        if (day.Puzzle.Comment is not null)
-            AnsiConsole.MarkupLine($"[yellow]{day.Puzzle.Comment}[/]");
+        AnsiConsole.WriteLine($"{wrapper.Title}:");
+        AnsiConsole.WriteLine(wrapper.Puzzle.Name);
+        if (wrapper.Puzzle.Comment is not null)
+            AnsiConsole.MarkupLine($"[yellow]{wrapper.Puzzle.Comment}[/]");
     }
 
-    private void RunAndPrintPuzzleResult(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
+    private static void RunAndPrintPuzzleResult(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
     {
         var result = RunPuzzle(puzzleIndex, puzzleFunc);
         AnsiConsole.WriteLine();
@@ -48,7 +48,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
 
     private static PuzzleResult RunPuzzle(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
     {
-        PuzzleResult result = null;
+        PuzzleResult? result = null;
         PrintTime(puzzleIndex); 
         var timer = new Timer();
         var task = Task.Run(() => result = puzzleFunc());
@@ -58,7 +58,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
             Thread.Sleep(ProgressWaitTime);
         }
 
-        return task.IsFaulted ? PuzzleResult.Failed : result;
+        return task.IsFaulted ? PuzzleResult.Failed : result ?? PuzzleResult.Empty;
     }
 
     private static void PrintTime(int puzzleNumber, TimeSpan? time = null)
@@ -70,7 +70,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         AnsiConsole.Write($"\rPart {puzzleNumber}: {formattedTime}".PadRight(StatusPadding));
     }
     
-    private static void WriteAnswer(PuzzleResult result)
+    private static void WriteAnswer(PuzzleResult? result)
     {
         if (result is null)
             AnsiConsole.MarkupLine(MarkupColor("Missing", Color.Red));

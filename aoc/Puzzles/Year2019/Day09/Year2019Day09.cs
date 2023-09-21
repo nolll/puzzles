@@ -6,7 +6,7 @@ namespace Aoc.Puzzles.Year2019.Day09;
 
 public class Year2019Day09 : AocPuzzle
 {
-    public override string Title => "Sensor Boost";
+    public override string Name => "Sensor Boost";
 
     public override PuzzleResult RunPart1()
     {

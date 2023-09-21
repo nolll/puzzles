@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2018.Day15;
 
 public class Year2018Day15 : AocPuzzle
 {
-    public override string Title => "Beverage Bandits";
+    public override string Name => "Beverage Bandits";
     public override string Comment => "Battle Simulator";
     public override bool IsSlow => true; // Could still use optimization, the hard coded 14 is a little ugly
 

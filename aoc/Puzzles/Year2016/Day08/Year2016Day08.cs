@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2016.Day08;
 
 public class Year2016Day08 : AocPuzzle
 {
-    public override string Title => "Two-Factor Authentication";
+    public override string Name => "Two-Factor Authentication";
 
     public override PuzzleResult RunPart1()
     {

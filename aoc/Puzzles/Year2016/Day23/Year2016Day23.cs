@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2016.Day23;
 
 public class Year2016Day23 : AocPuzzle
 {
-    public override string Title => "Safe Cracking";
+    public override string Name => "Safe Cracking";
 
     public override string Comment => "Factorial of 12";
     public override bool IsSlow => true; // 196s for part 2

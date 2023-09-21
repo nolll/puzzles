@@ -11,7 +11,7 @@ public class Year2015Day11: AocPuzzle
     private CorporatePasswordValidator Validator => _validator ??= new CorporatePasswordValidator();
     private string FirstPassword => _firstPassword ??= Validator.FindNextPassword(Input);
 
-    public override string Title => "Corporate Policy";
+    public override string Name => "Corporate Policy";
 
     public override PuzzleResult RunPart1()
     {

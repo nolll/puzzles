@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2016.Day25;
 
 public class Year2016Day25 : AocPuzzle
 {
-    public override string Title => "Clock Signal";
+    public override string Name => "Clock Signal";
 
     public override PuzzleResult RunPart1()
     {

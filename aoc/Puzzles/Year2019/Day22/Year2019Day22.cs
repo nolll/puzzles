@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2019.Day22;
 
 public class Year2019Day22 : AocPuzzle
 {
-    public override string Title => "Slam Shuffle";
+    public override string Name => "Slam Shuffle";
     public override string Comment => "Learn more math";
     public override bool NeedsRewrite => true;
 

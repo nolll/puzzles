@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2016.Day17;
 
 public class Year2016Day17 : AocPuzzle
 {
-    public override string Title => "Two Steps Forward";
+    public override string Name => "Two Steps Forward";
 
     public override PuzzleResult RunPart1()
     {

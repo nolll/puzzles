@@ -6,7 +6,7 @@ namespace Aoc.Puzzles.Year2017.Day10;
 
 public class Year2017Day10 : AocPuzzle
 {
-    public override string Title => "Knot Hash";
+    public override string Name => "Knot Hash";
 
     public override PuzzleResult RunPart1()
     {

@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2018.Day02;
 
 public class Year2018Day02 : AocPuzzle
 {
-    public override string Title => "Inventory Management System";
+    public override string Name => "Inventory Management System";
 
     public override PuzzleResult RunPart1()
     {

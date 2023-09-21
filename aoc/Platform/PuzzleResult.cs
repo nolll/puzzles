@@ -7,7 +7,7 @@ public class PuzzleResult
     public string Answer { get; }
     public PuzzleResultStatus Status { get; }
 
-    public PuzzleResult(string answer, string correctAnswer = null)
+    public PuzzleResult(string? answer, string? correctAnswer = null)
         : this(answer, VerifyResult(answer, correctAnswer))
     {
             
@@ -28,13 +28,13 @@ public class PuzzleResult
     {
     }
 
-    protected PuzzleResult(string answer, PuzzleResultStatus status)
+    protected PuzzleResult(string? answer, PuzzleResultStatus status)
     {
-        Answer = answer;
+        Answer = answer ?? string.Empty;
         Status = status;
     }
 
-    private static PuzzleResultStatus VerifyResult(string answer, string correctAnswer)
+    private static PuzzleResultStatus VerifyResult(string? answer, string? correctAnswer)
     {
         if (answer == null)
             return PuzzleResultStatus.Wrong;

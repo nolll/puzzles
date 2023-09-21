@@ -350,7 +350,7 @@ public class Matrix<T> : BaseMatrix
         return new Matrix<T>(min, max, values, _defaultValue);
     }
 
-    public Matrix<T> Slice(MatrixAddress from = null, MatrixAddress to = null)
+    public Matrix<T> Slice(MatrixAddress? from = null, MatrixAddress? to = null)
     {
         from ??= new MatrixAddress(XMin, YMin);
         to ??= new MatrixAddress(XMax, YMax);

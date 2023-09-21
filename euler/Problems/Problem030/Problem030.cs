@@ -1,4 +1,5 @@
 ﻿using common;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem030;
@@ -7,11 +8,11 @@ public class Problem030 : EulerPuzzle
 {
     public override string Name => "Digit fifth powers";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(5);
 
-        return new ProblemResult(result, 443839);
+        return new PuzzleResult(result, 443839);
     }
 
     public int Run(int power)

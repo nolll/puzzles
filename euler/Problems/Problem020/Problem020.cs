@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem020;
@@ -7,11 +8,11 @@ public class Problem020 : EulerPuzzle
 {
     public override string Name => "Factorial digit sum";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         BigInteger factorial = 100;
         var result = Run(factorial);
-        return new ProblemResult(result, 648);
+        return new PuzzleResult(result, 648);
     }
 
     public int Run(BigInteger factorial)

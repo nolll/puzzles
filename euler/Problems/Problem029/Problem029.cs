@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem029;
@@ -7,11 +8,11 @@ public class Problem029 : EulerPuzzle
 {
     public override string Name => "Distinct powers";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(100);
 
-        return new ProblemResult(result, 9183);
+        return new PuzzleResult(result, 9183);
     }
 
     public int Run(int limit)

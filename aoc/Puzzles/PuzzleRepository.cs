@@ -17,18 +17,14 @@ public class PuzzleRepository
 
     public PuzzleDay GetDay(int? selectedYear, int? selectedDay) =>
         selectedYear != null && selectedDay != null
-            ? _allDays.FirstOrDefault(o => o.Year == selectedYear.Value &&  o.Day == selectedDay.Value)
+            ? _allDays.First(o => o.Year == selectedYear.Value &&  o.Day == selectedDay.Value)
             : _allDays.Last();
 
-    public List<PuzzleDay> GetEventDays(int? selectedYear)
-    {
-        if (selectedYear != null)
-            return _allDays.Where(o => o.Year == selectedYear).ToList();
+    public List<PuzzleDay> GetEventDays(int? selectedYear) =>
+        selectedYear != null 
+            ? _allDays.Where(o => o.Year == selectedYear).ToList() 
+            : new List<PuzzleDay>();
 
-        var maxYear = _allDays.Select(o => o.Year).Max();
-        return _allDays.Where(o => o.Year == maxYear).ToList();
-    }
-        
     public List<PuzzleDay> GetAll() => _allDays;
 
     private static List<PuzzleDay> CreateDays() => 
@@ -41,8 +37,7 @@ public class PuzzleRepository
     private static PuzzleDay CreateDay(Type t)
     {
         var (year, day) = PuzzleParser.GetYearAndDay(t);
-        var puzzleDay = (AocPuzzle)Activator.CreateInstance(t);
-        if (puzzleDay == null)
+        if (Activator.CreateInstance(t) is not AocPuzzle puzzleDay)
             throw new Exception($"Could not create Puzzle for day {day} {year} ");
             
         return new PuzzleDay(year, day, puzzleDay);
@@ -57,12 +52,13 @@ public class PuzzleRepository
         return ns.Contains("Aoc.Puzzles");
     }
 
-    private static IEnumerable<Type> GetConcreteSubclassesOf<T>() where T : class
-    {
-        return Assembly
+    private static IEnumerable<Type> GetConcreteSubclassesOf<T>() where T : class =>
+        Assembly
             .GetAssembly(typeof(T))?
             .GetTypes()
-            .Where(o => o.IsClass && !o.IsAbstract && o.IsSubclassOf(typeof(T))) 
-               ?? new List<Type>();
-    }
+            .Where(o => o.IsSubclassOf(typeof(T)) && o is
+            {
+                IsClass: true, IsAbstract: false
+            }) 
+        ?? new List<Type>();
 }

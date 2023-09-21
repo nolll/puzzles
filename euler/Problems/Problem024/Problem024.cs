@@ -1,4 +1,5 @@
 ﻿using common.Combinatorics;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem024;
@@ -11,7 +12,7 @@ public class Problem024 : EulerPuzzle
     public override bool IsSlow => true;
     public override bool NeedsRewrite => true;
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var numbers = Enumerable.Range(0, 10).ToList();
         var permutations = PermutationGenerator.GetPermutations(numbers);
@@ -19,6 +20,6 @@ public class Problem024 : EulerPuzzle
         strings = strings.OrderBy(o => o).ToList();
         var result = strings[999999];
             
-        return new ProblemResult(result, "2783915460");
+        return new PuzzleResult(result, "2783915460");
     }
 }

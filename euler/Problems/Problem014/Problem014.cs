@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem014;
 
@@ -6,10 +7,10 @@ public class Problem014 : EulerPuzzle
 {
     public override string Name => "Longest Collatz sequence";
         
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(1_000_000);
-        return new ProblemResult(result, 837799);
+        return new PuzzleResult(result, 837799);
     }
 
     private int Run(int limit)

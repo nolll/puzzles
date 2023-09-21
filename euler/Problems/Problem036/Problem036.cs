@@ -1,4 +1,5 @@
 ﻿using common.Numbers;
+using common.Puzzles;
 using common.Strings;
 using Euler.Platform;
 
@@ -8,7 +9,7 @@ public class Problem036 : EulerPuzzle
 {
     public override string Name => "Double-base Palindromes";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var sum = 0;
         for (var i = 0; i < 1_000_000; i++)
@@ -22,6 +23,6 @@ public class Problem036 : EulerPuzzle
             }
         }
 
-        return new ProblemResult(sum, 872187);
+        return new PuzzleResult(sum, 872187);
     }
 }

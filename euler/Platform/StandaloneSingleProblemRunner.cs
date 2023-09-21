@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using common.Formatting;
+using common.Puzzles;
 using Spectre.Console;
 using Color = System.Drawing.Color;
 using Timer = common.Timing.Timer;
@@ -34,16 +35,16 @@ public class StandaloneSingleProblemRunner : SingleProblemRunner
             AnsiConsole.MarkupLine($"[yellow]{problem.Problem.Comment}[/]");
     }
 
-    private static void RunAndPrintProblemResult(Func<ProblemResult> problemFunc)
+    private static void RunAndPrintProblemResult(Func<PuzzleResult> problemFunc)
     {
         var result = RunProblem(problemFunc);
         AnsiConsole.WriteLine();
         WriteAnswer(result);
     }
 
-    private static ProblemResult? RunProblem(Func<ProblemResult> problemFunc)
+    private static PuzzleResult? RunProblem(Func<PuzzleResult> problemFunc)
     {
-        ProblemResult? result = null;
+        PuzzleResult? result = null;
         PrintTime();
         var timer = new Timer();
         var task = Task.Run(() => result = problemFunc());
@@ -65,15 +66,15 @@ public class StandaloneSingleProblemRunner : SingleProblemRunner
         AnsiConsole.Write($"\r{formattedTime}".PadRight(StatusPadding));
     }
 
-    private static void WriteAnswer(ProblemResult? result)
+    private static void WriteAnswer(PuzzleResult? result)
     {
         if (result is null)
             AnsiConsole.MarkupLine(MarkupColor("Missing", Color.Red));
-        else if (result.Status is ProblemResultStatus.Empty)
+        else if (result.Status is PuzzleResultStatus.Empty)
             AnsiConsole.WriteLine("No problem implemented");
-        else if (result.Status is ProblemResultStatus.Correct)
+        else if (result.Status is PuzzleResultStatus.Correct)
             AnsiConsole.MarkupLine(MarkupColor(result.Answer, Color.Green));
-        else if (result.Status is ProblemResultStatus.Failed or ProblemResultStatus.Timeout or ProblemResultStatus.Wrong)
+        else if (result.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)
             AnsiConsole.MarkupLine(MarkupColor(result.Answer, Color.Red));
         else
             AnsiConsole.MarkupLine(MarkupColor(result.Answer ?? "", Color.Yellow));

@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using System.Text.RegularExpressions;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem026;
@@ -9,10 +10,10 @@ public class Problem026 : EulerPuzzle
     public override string Name => "Reciprocal cycles";
     public override string Comment => "My original solution involved regex and is left as the RunSlow method. At least I learned something!";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(999);
-        return new ProblemResult(result, 983);
+        return new PuzzleResult(result, 983);
     }
 
     public int Run(int maxDivisor)

@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem006;
 
@@ -6,11 +7,11 @@ public class Problem006 : EulerPuzzle
 {
     public override string Name => "Sum square difference";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var diff = Run(100);
 
-        return new ProblemResult(diff, 25164150);
+        return new PuzzleResult(diff, 25164150);
     }
         
     public int Run(int numCount)

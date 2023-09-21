@@ -11,20 +11,18 @@ public abstract class EulerPuzzle : Puzzle
     public virtual bool IsSlow => false;
     public virtual bool NeedsRewrite => false;
 
-    public abstract ProblemResult Run();
+    public abstract PuzzleResult Run();
 
-    protected sealed override string FilePath
+    protected sealed override string FilePath => GetFilePath(GetType());
+
+    protected sealed override string GetFilePath(Type t)
     {
-        get
-        {
-            var type = GetType();
-            var problemId = ProblemParser.GetProblemId(type);
-            var paddedProblemId = problemId.ToString().PadLeft(3, '0');
-            return Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "Problems",
-                $"Problem{paddedProblemId}",
-                $"Problem{paddedProblemId}.txt");
-        }
+        var problemId = ProblemParser.GetProblemId(t);
+        var paddedProblemId = problemId.ToString().PadLeft(3, '0');
+        return Path.Combine(
+            RootPath,
+            "Problems",
+            $"Problem{paddedProblemId}",
+            $"Problem{paddedProblemId}.txt");
     }
 }

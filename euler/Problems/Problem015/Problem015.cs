@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem015;
 
@@ -6,10 +7,10 @@ public class Problem015 : EulerPuzzle
 {
     public override string Name => "Lattice paths";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(20);
-        return new ProblemResult(result, 137846528820);
+        return new PuzzleResult(result, 137846528820);
     }
 
     public long Run(int gridSize)

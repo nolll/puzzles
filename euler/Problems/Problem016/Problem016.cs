@@ -1,4 +1,5 @@
 ﻿using common;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem016;
@@ -7,10 +8,10 @@ public class Problem016 : EulerPuzzle
 {
     public override string Name => "Power digit sum";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(1000);
-        return new ProblemResult(result, 1366);
+        return new PuzzleResult(result, 1366);
     }
 
     public int Run(int power)

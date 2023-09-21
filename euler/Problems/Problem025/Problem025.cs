@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem025;
@@ -7,10 +8,10 @@ public class Problem025 : EulerPuzzle
 {
     public override string Name => "1000-digit Fibonacci number";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(1000);
-        return new ProblemResult(result, 4782);
+        return new PuzzleResult(result, 4782);
     }
 
     public int Run(int digitCount)

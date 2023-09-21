@@ -13,18 +13,14 @@ public abstract class AquaQPuzzle : Puzzle
 
     public abstract PuzzleResult Run();
     
-    protected sealed override string FilePath
+    protected sealed override string GetFilePath(Type t)
     {
-        get
-        {
-            var type = GetType();
-            var challengeId = ChallengeParser.GetChallengeId(type);
-            var paddedChallengeId = challengeId.ToString().PadLeft(2, '0');
-            return Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "Challenges",
-                $"Challenge{paddedChallengeId}",
-                $"Challenge{paddedChallengeId}.txt");
-        }
+        var challengeId = ChallengeParser.GetChallengeId(t);
+        var paddedChallengeId = challengeId.ToString().PadLeft(2, '0');
+        return Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory,
+            "Challenges",
+            $"Challenge{paddedChallengeId}",
+            $"Challenge{paddedChallengeId}.txt");
     }
 }

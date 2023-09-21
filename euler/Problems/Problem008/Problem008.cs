@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem008;
 
@@ -6,10 +7,10 @@ public class Problem008 : EulerPuzzle
 {
     public override string Name => "Largest product in a series";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var largestProduct = Run(13);
-        return new ProblemResult(largestProduct, 23514624000);
+        return new PuzzleResult(largestProduct, 23514624000);
     }
         
     public long Run(long digitCount)

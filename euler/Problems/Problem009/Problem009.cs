@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem009;
 
@@ -6,10 +7,10 @@ public class Problem009 : EulerPuzzle
 {
     public override string Name => "Special Pythagorean triplet";
         
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var product = Run(1000);
-        return new ProblemResult(product, 31_875_000);
+        return new PuzzleResult(product, 31_875_000);
     }
 
     public int Run(int targetSum)

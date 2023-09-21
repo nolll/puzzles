@@ -1,4 +1,5 @@
 ﻿using common.Numbers;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem012;
@@ -7,10 +8,10 @@ public class Problem012 : EulerPuzzle
 {
     public override string Name => "Highly divisible triangular number";
         
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(501);
-        return new ProblemResult(result, 76576500);
+        return new PuzzleResult(result, 76576500);
     }
 
     public int Run(int maxFactorCount)

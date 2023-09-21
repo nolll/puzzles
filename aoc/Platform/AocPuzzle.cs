@@ -22,19 +22,15 @@ public abstract class AocPuzzle : Puzzle
         return null;
     }
 
-    protected sealed override string FilePath
+    protected sealed override string GetFilePath(Type t)
     {
-        get
-        {
-            var type = GetType();
-            var (year, day) = PuzzleParser.GetYearAndDay(type);
-            var paddedDay = day.ToString().PadLeft(2, '0');
-            return Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "Puzzles",
-                $"Year{year}",
-                $"Day{paddedDay}",
-                $"Year{year}Day{paddedDay}.txt");
-        }
+        var (year, day) = PuzzleParser.GetYearAndDay(t);
+        var paddedDay = day.ToString().PadLeft(2, '0');
+        return Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory,
+            "Puzzles",
+            $"Year{year}",
+            $"Day{paddedDay}",
+            $"Year{year}Day{paddedDay}.txt");
     }
 }

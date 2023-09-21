@@ -1,4 +1,5 @@
 ﻿using common.Numbers;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem037;
@@ -10,7 +11,7 @@ public class Problem037 : EulerPuzzle
 
     public override string Name => "Truncatable Primes";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var count = 0;
         var sum = 0;
@@ -26,7 +27,7 @@ public class Problem037 : EulerPuzzle
             i++;
         }
 
-        return new ProblemResult(sum, 748317);
+        return new PuzzleResult(sum, 748317);
     }
 
     public static bool IsTruncatable(int n)

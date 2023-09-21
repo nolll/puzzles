@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem022;
 
@@ -22,10 +23,10 @@ public class Problem022 : EulerPuzzle
         }
     }
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var sum = _nameScores.Values.Sum();
-        return new ProblemResult(sum, 871198282);
+        return new PuzzleResult(sum, 871198282);
     }
 
     private int GetNameScore(string name, int index)

@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem040;
@@ -11,7 +12,7 @@ public class Problem040 : EulerPuzzle
 
     public override string Name => "Champernowne's Constant";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var sb = new StringBuilder();
         var i = Initial;
@@ -31,6 +32,6 @@ public class Problem040 : EulerPuzzle
 
         var product = numbers.Aggregate(1, (a, b) => a * b);
 
-        return new ProblemResult(product, 210);
+        return new PuzzleResult(product, 210);
     }
 }

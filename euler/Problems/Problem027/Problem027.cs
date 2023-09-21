@@ -1,4 +1,5 @@
 ﻿using common.Numbers;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem027;
@@ -13,7 +14,7 @@ public class Problem027 : EulerPuzzle
         _primeCache = new Dictionary<int, bool>();
     }
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         const int limit = 1000;
         const int aLimit = limit - 1;
@@ -38,7 +39,7 @@ public class Problem027 : EulerPuzzle
             }
         }
             
-        return new ProblemResult(product, -59231);
+        return new PuzzleResult(product, -59231);
     }
 
     public int GetPrimeCount(int a, int b)

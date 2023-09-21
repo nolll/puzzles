@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using common.Puzzles;
 using common.Strings;
 using Euler.Platform;
 
@@ -8,10 +9,10 @@ public class Problem013 : EulerPuzzle
 {
     public override string Name => "Large sum";
         
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(Input);
-        return new ProblemResult(result, "5537376230");
+        return new PuzzleResult(result, "5537376230");
     }
 
     public string Run(string listOfNumbers)

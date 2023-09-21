@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem038;
 
@@ -9,7 +10,7 @@ public class Problem038 : EulerPuzzle
 
     public override string Name => "Pandigital Multiples";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var products = new List<long>();
         var n = 1;
@@ -21,7 +22,7 @@ public class Problem038 : EulerPuzzle
             n++;
         }
 
-        return new ProblemResult(products.Max(), 932718654);
+        return new PuzzleResult(products.Max(), 932718654);
     }
 
     public static long? GetConcatenatedProduct(int n)

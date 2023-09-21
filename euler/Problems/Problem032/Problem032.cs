@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem032;
 
@@ -8,7 +9,7 @@ public class Problem032 : EulerPuzzle
 
     private const string AllChars = "123456789";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         const int limit = 2000;
         var pandigitalProducts = new HashSet<int>();
@@ -27,7 +28,7 @@ public class Problem032 : EulerPuzzle
 
         var result = pandigitalProducts.Sum();
 
-        return new ProblemResult(result, 45228);
+        return new PuzzleResult(result, 45228);
     }
 
     public static bool IsPandigital(int a, int b)

@@ -1,4 +1,5 @@
 ﻿using common.Numbers;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem023;
@@ -9,7 +10,7 @@ public class Problem023 : EulerPuzzle
 
     public override string Name => "Non-abundant sums";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var abundantNumbers = FindAbundantNumbers(UpperLimit).ToList();
         var sumsOfAbundantNumbers = GetSums(abundantNumbers);
@@ -21,7 +22,7 @@ public class Problem023 : EulerPuzzle
                 sum += i;
         }
             
-        return new ProblemResult(sum, 4179871);
+        return new PuzzleResult(sum, 4179871);
     }
 
     private static HashSet<int> GetSums(List<int> abundantNumbers)

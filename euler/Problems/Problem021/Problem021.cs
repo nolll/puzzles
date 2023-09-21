@@ -1,4 +1,5 @@
 ﻿using common.Numbers;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem021;
@@ -7,7 +8,7 @@ public class Problem021 : EulerPuzzle
 {
     public override string Name => "Amicable numbers";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var sums = new Dictionary<int, int>();
         var amicableNumbers = new HashSet<int>();
@@ -43,7 +44,7 @@ public class Problem021 : EulerPuzzle
 
         var amicableSum = amicableNumbers.Sum();
             
-        return new ProblemResult(amicableSum, 31626);
+        return new PuzzleResult(amicableSum, 31626);
     }
 
     public static int GetFactorialSum(int n)

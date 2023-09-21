@@ -39,22 +39,22 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
             AnsiConsole.MarkupLine($"[yellow]{day.Puzzle.Comment}[/]");
     }
 
-    private void RunAndPrintPuzzleResult(int puzzleNumber, Func<PuzzleResult> puzzleFunc)
+    private void RunAndPrintPuzzleResult(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
     {
-        var result = RunPuzzle(puzzleNumber, puzzleFunc);
+        var result = RunPuzzle(puzzleIndex, puzzleFunc);
         AnsiConsole.WriteLine();
         WriteAnswer(result);
     }
 
-    private static PuzzleResult RunPuzzle(int puzzleNumber, Func<PuzzleResult> puzzleFunc)
+    private static PuzzleResult RunPuzzle(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
     {
         PuzzleResult result = null;
-        PrintTime(puzzleNumber); 
+        PrintTime(puzzleIndex); 
         var timer = new Timer();
         var task = Task.Run(() => result = puzzleFunc());
         while (!task.IsCompleted)
         {
-            PrintTime(puzzleNumber, timer.FromStart);
+            PrintTime(puzzleIndex, timer.FromStart);
             Thread.Sleep(ProgressWaitTime);
         }
 

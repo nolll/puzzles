@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem005;
 
@@ -6,10 +7,10 @@ public class Problem005 : EulerPuzzle
 {
     public override string Name => "Smallest multiple";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var smallestMultiple = Run(20);
-        return new ProblemResult(smallestMultiple, 232792560);
+        return new PuzzleResult(smallestMultiple, 232792560);
     }
     
     public int Run(int max)

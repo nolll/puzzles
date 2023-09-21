@@ -1,4 +1,5 @@
-﻿using common.Strings;
+﻿using common.Puzzles;
+using common.Strings;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem018;
@@ -7,10 +8,10 @@ public class Problem018 : EulerPuzzle
 {
     public override string Name => "Maximum path sum I";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(Triangle);
-        return new ProblemResult(result, 1074);
+        return new PuzzleResult(result, 1074);
     }
 
     public int Run(string triangleString)

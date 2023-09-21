@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem031;
 
@@ -6,14 +7,14 @@ public class Problem031 : EulerPuzzle
 {
     public override string Name => "Coin sums";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var denominations = new List<int> { 1, 2, 5, 10, 20, 50, 100, 200 };
         const int targetSum = 200;
 
         var result = Run(denominations, targetSum);
 
-        return new ProblemResult(result, 73682);
+        return new PuzzleResult(result, 73682);
     }
 
     public int Run(IEnumerable<int> denominations, int target, bool print = false)

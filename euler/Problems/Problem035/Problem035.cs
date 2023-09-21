@@ -1,4 +1,5 @@
 ﻿using common.Numbers;
+using common.Puzzles;
 using common.Strings;
 using Euler.Platform;
 
@@ -8,7 +9,7 @@ public class Problem035 : EulerPuzzle
 {
     public override string Name => "Circular Primes";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var count = 0;
         for (var i = 0; i < 1_000_000; i++)
@@ -19,7 +20,7 @@ public class Problem035 : EulerPuzzle
                 count++;
         }
 
-        return new ProblemResult(count, 55);
+        return new PuzzleResult(count, 55);
     }
 
     public static IEnumerable<int> GetRotations(int n)

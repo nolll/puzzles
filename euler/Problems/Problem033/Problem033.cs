@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem033;
 
@@ -6,7 +7,7 @@ public class Problem033 : EulerPuzzle
 {
     public override string Name => "Digit Cancelling Fraction";
     
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var fractions = new List<Fraction>();
 
@@ -28,6 +29,6 @@ public class Problem033 : EulerPuzzle
         // Found by inspecting the numbers. The denominator is the numerator * 100
         var resultDenominator = combinedDenominator / combinedNumerator;
 
-        return new ProblemResult(resultDenominator, 100);
+        return new PuzzleResult(resultDenominator, 100);
     }
 }

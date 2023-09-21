@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem002;
 
@@ -6,10 +7,10 @@ public class Problem002 : EulerPuzzle
 {
     public override string Name => "Even Fibonacci numbers";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var sum = Run(4_000_000);
-        return new ProblemResult(sum, 4613732);
+        return new PuzzleResult(sum, 4613732);
     }
 
     public int Run(int limit)

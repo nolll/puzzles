@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem039;
 
@@ -6,14 +7,14 @@ public class Problem039 : EulerPuzzle
 {
     public override string Name => "Integer Right Triangle";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var solutions = FindSolutions(1000);
         
         var groups = solutions.GroupBy(o => o.a + o.b + o.c);
         var perimeterWithMostSolutions = groups.OrderByDescending(o => o.Count()).First();
 
-        return new ProblemResult(perimeterWithMostSolutions.Key, 840);
+        return new PuzzleResult(perimeterWithMostSolutions.Key, 840);
     }
 
     private static IEnumerable<(int a, int b, int c)> FindSolutions(int n)

@@ -1,4 +1,5 @@
-﻿using common.Strings;
+﻿using common.Puzzles;
+using common.Strings;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem017;
@@ -7,10 +8,10 @@ public class Problem017 : EulerPuzzle
 {
     public override string Name => "Number letter counts";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(1000);
-        return new ProblemResult(result, 21124);
+        return new PuzzleResult(result, 21124);
     }
 
     public int Run(int target)

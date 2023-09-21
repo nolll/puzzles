@@ -1,4 +1,5 @@
 ﻿using common.CoordinateSystems.CoordinateSystem2D;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem011;
@@ -7,10 +8,10 @@ public class Problem011 : EulerPuzzle
 {
     public override string Name => "Largest product in a grid";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(Grid);
-        return new ProblemResult(result, 70600674);
+        return new PuzzleResult(result, 70600674);
     }
 
     public long Run(string grid)

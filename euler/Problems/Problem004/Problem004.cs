@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem004;
 
@@ -6,11 +7,11 @@ public class Problem004 : EulerPuzzle
 {
     public override string Name => "Largest palindrome product";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var largestPalindrome = Run(100, 999);
 
-        return new ProblemResult(largestPalindrome, 906609);
+        return new PuzzleResult(largestPalindrome, 906609);
     }
     
     public int Run(int minFactor, int maxFactor)

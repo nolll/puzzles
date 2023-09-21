@@ -1,4 +1,5 @@
-﻿using Euler.Platform;
+﻿using common.Puzzles;
+using Euler.Platform;
 
 namespace Euler.Problems.Problem034;
 
@@ -6,7 +7,7 @@ public class Problem034 : EulerPuzzle
 {
     public override string Name => "Digit Factorials";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var total = 0;
 
@@ -19,7 +20,7 @@ public class Problem034 : EulerPuzzle
                 total += i;
             }
         }
-        return new ProblemResult(total, 40730);
+        return new PuzzleResult(total, 40730);
     }
 
     public static int GetDigitFactorialSum(int n)

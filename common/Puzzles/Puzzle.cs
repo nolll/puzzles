@@ -16,6 +16,7 @@ public abstract class Puzzle
         }
     }
 
-    protected virtual string FilePath { get; }
-
+    protected virtual string FilePath => GetFilePath(GetType());
+    protected abstract string GetFilePath(Type t);
+    protected string RootPath => AppDomain.CurrentDomain.BaseDirectory;
 }

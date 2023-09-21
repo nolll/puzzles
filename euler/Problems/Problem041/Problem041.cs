@@ -1,5 +1,6 @@
 ﻿using common.Combinatorics;
 using common.Numbers;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem041;
@@ -8,7 +9,7 @@ public class Problem041 : EulerPuzzle
 {
     public override string Name => "Pandigital Prime";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var largest = 0L;
         for (var x = 9; x >= 1; x--)
@@ -27,6 +28,6 @@ public class Problem041 : EulerPuzzle
                 break;
         }
         
-        return new ProblemResult(largest, 7652413);
+        return new PuzzleResult(largest, 7652413);
     }
 }

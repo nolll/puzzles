@@ -1,4 +1,5 @@
 ﻿using common.CoordinateSystems.CoordinateSystem2D;
+using common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem028;
@@ -7,11 +8,11 @@ public class Problem028 : EulerPuzzle
 {
     public override string Name => "Number spiral diagonals";
 
-    public override ProblemResult Run()
+    public override PuzzleResult Run()
     {
         var result = Run(1001);
 
-        return new ProblemResult(result, 669_171_001);
+        return new PuzzleResult(result, 669_171_001);
     }
 
     public int Run(int size)

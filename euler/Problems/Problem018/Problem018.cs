@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem018;
 
-public class Problem018 : Problem
+public class Problem018 : EulerPuzzle
 {
     public override string Name => "Maximum path sum I";
 

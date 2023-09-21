@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem017;
 
-public class Problem017 : Problem
+public class Problem017 : EulerPuzzle
 {
     public override string Name => "Number letter counts";
 

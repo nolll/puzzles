@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem010;
 
-public class Problem010 : Problem
+public class Problem010 : EulerPuzzle
 {
     public override string Name => "Summation of primes";
         

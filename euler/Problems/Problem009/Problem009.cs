@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem009;
 
-public class Problem009 : Problem
+public class Problem009 : EulerPuzzle
 {
     public override string Name => "Special Pythagorean triplet";
         

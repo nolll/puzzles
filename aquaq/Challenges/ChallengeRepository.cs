@@ -20,7 +20,7 @@ public class ChallengeRepository
     public IList<ChallengeWrapper> GetAll() => _allProblems;
 
     private static List<ChallengeWrapper> CreateProblems() => 
-        GetConcreteSubclassesOf<Challenge>()
+        GetConcreteSubclassesOf<AquaQPuzzle>()
             .Select(CreateProblem)
             .OrderBy(o => o.Id)
             .ToList();
@@ -28,7 +28,7 @@ public class ChallengeRepository
     private static ChallengeWrapper CreateProblem(Type t)
     {
         var id = ChallengeParser.GetChallengeId(t);
-        if (Activator.CreateInstance(t) is Challenge challenge)
+        if (Activator.CreateInstance(t) is AquaQPuzzle challenge)
             return new ChallengeWrapper(id, challenge);
         
         throw new Exception($"Could not create Problem {id}");

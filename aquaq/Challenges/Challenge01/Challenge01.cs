@@ -1,12 +1,13 @@
 ﻿using AquaQ.Platform;
+using common.Puzzles;
 
 namespace AquaQ.Challenges.Challenge01;
 
-public class Challenge01 : Challenge
+public class Challenge01 : AquaQPuzzle
 {
     public override string Name => "What's a numpad?";
 
-    public override ChallengeResult Run()
+    public override PuzzleResult Run()
     {
         var keyPresses = FileInput
             .Split(Environment.NewLine)
@@ -15,7 +16,7 @@ public class Challenge01 : Challenge
 
         var result = HandleKeyPresses(keyPresses);
 
-        return new ChallengeResult(result, "oh so they have internet on computers now");
+        return new PuzzleResult(result, "oh so they have internet on computers now");
     }
 
     public static string HandleKeyPresses(IEnumerable<(int key, int count)> input)

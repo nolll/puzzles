@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem008;
 
-public class Problem008 : Problem
+public class Problem008 : EulerPuzzle
 {
     public override string Name => "Largest product in a series";
 

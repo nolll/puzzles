@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem042;
 
-public class Problem042 : Problem
+public class Problem042 : EulerPuzzle
 {
     public override string Name => "Coded Triangle Numbers";
 

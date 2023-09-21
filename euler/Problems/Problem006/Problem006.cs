@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem006;
 
-public class Problem006 : Problem
+public class Problem006 : EulerPuzzle
 {
     public override string Name => "Sum square difference";
 

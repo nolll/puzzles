@@ -4,7 +4,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem041;
 
-public class Problem041 : Problem
+public class Problem041 : EulerPuzzle
 {
     public override string Name => "Pandigital Prime";
 

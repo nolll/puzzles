@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem038;
 
-public class Problem038 : Problem
+public class Problem038 : EulerPuzzle
 {
     private const int Limit = 10_000;
     private const int MaxLength = 9;

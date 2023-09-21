@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem001;
 
-public class Problem001 : Problem
+public class Problem001 : EulerPuzzle
 {
     public override string Name => "Multiples of 3 or 5";
 

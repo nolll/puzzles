@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem016;
 
-public class Problem016 : Problem
+public class Problem016 : EulerPuzzle
 {
     public override string Name => "Power digit sum";
 

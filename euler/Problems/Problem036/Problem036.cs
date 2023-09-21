@@ -4,7 +4,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem036;
 
-public class Problem036 : Problem
+public class Problem036 : EulerPuzzle
 {
     public override string Name => "Double-base Palindromes";
 

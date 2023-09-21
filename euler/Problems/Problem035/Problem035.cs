@@ -4,7 +4,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem035;
 
-public class Problem035 : Problem
+public class Problem035 : EulerPuzzle
 {
     public override string Name => "Circular Primes";
 

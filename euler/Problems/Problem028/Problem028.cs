@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem028;
 
-public class Problem028 : Problem
+public class Problem028 : EulerPuzzle
 {
     public override string Name => "Number spiral diagonals";
 

@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem031;
 
-public class Problem031 : Problem
+public class Problem031 : EulerPuzzle
 {
     public override string Name => "Coin sums";
 

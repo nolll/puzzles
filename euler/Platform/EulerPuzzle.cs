@@ -2,29 +2,29 @@
 using System.Text;
 using common.Puzzles;
 
-namespace AquaQ.Platform;
+namespace Euler.Platform;
 
-public abstract class Challenge : Puzzle
+public abstract class EulerPuzzle : Puzzle
 {
     public abstract string Name { get; }
     public virtual string? Comment => null;
     public virtual bool IsSlow => false;
     public virtual bool NeedsRewrite => false;
 
-    public abstract ChallengeResult Run();
-    
+    public abstract ProblemResult Run();
+
     protected sealed override string FilePath
     {
         get
         {
             var type = GetType();
-            var challengeId = ChallengeParser.GetChallengeId(type);
-            var paddedChallengeId = challengeId.ToString().PadLeft(2, '0');
+            var problemId = ProblemParser.GetProblemId(type);
+            var paddedProblemId = problemId.ToString().PadLeft(3, '0');
             return Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,
-                "Challenges",
-                $"Challenge{paddedChallengeId}",
-                $"Challenge{paddedChallengeId}.txt");
+                "Problems",
+                $"Problem{paddedProblemId}",
+                $"Problem{paddedProblemId}.txt");
         }
     }
 }

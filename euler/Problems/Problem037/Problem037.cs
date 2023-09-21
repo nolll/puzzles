@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem037;
 
-public class Problem037 : Problem
+public class Problem037 : EulerPuzzle
 {
     private const int Target = 11;
     private const int Initial = 8;

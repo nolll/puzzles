@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem032;
 
-public class Problem032 : Problem
+public class Problem032 : EulerPuzzle
 {
     public override string Name => "Pandigital products";
 

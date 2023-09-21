@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem011;
 
-public class Problem011 : Problem
+public class Problem011 : EulerPuzzle
 {
     public override string Name => "Largest product in a grid";
 

@@ -3,9 +3,9 @@
 public class ProblemWrapper
 {
     public int Id { get; }
-    public Problem Problem { get; }
+    public EulerPuzzle Problem { get; }
 
-    public ProblemWrapper(int id, Problem problem)
+    public ProblemWrapper(int id, EulerPuzzle problem)
     {
         Id = id;
         Problem = problem;

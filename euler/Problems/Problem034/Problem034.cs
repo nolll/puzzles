@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem034;
 
-public class Problem034 : Problem
+public class Problem034 : EulerPuzzle
 {
     public override string Name => "Digit Factorials";
 

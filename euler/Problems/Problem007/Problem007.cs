@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem007;
 
-public class Problem007 : Problem
+public class Problem007 : EulerPuzzle
 {
     public override string Name => "10001st prime";
 

@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem021;
 
-public class Problem021 : Problem
+public class Problem021 : EulerPuzzle
 {
     public override string Name => "Amicable numbers";
 

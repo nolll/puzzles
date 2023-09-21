@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem033;
 
-public class Problem033 : Problem
+public class Problem033 : EulerPuzzle
 {
     public override string Name => "Digit Cancelling Fraction";
     

@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem020;
 
-public class Problem020 : Problem
+public class Problem020 : EulerPuzzle
 {
     public override string Name => "Factorial digit sum";
 

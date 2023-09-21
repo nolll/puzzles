@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem027;
 
-public class Problem027 : Problem
+public class Problem027 : EulerPuzzle
 {
     public override string Name => "Quadratic primes";
     private readonly Dictionary<int, bool> _primeCache;

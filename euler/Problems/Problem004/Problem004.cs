@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem004;
 
-public class Problem004 : Problem
+public class Problem004 : EulerPuzzle
 {
     public override string Name => "Largest palindrome product";
 

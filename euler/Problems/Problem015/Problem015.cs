@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem015;
 
-public class Problem015 : Problem
+public class Problem015 : EulerPuzzle
 {
     public override string Name => "Lattice paths";
 

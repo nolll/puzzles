@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem003;
 
-public class Problem003 : Problem
+public class Problem003 : EulerPuzzle
 {
     public override string Name => "Largest prime factor";
 

@@ -3,9 +3,9 @@
 public class ChallengeWrapper
 {
     public int Id { get; }
-    public Challenge Challenge { get; }
+    public AquaQPuzzle Challenge { get; }
 
-    public ChallengeWrapper(int id, Challenge challenge)
+    public ChallengeWrapper(int id, AquaQPuzzle challenge)
     {
         Id = id;
         Challenge = challenge;

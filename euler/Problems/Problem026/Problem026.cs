@@ -4,7 +4,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem026;
 
-public class Problem026 : Problem
+public class Problem026 : EulerPuzzle
 {
     public override string Name => "Reciprocal cycles";
     public override string Comment => "My original solution involved regex and is left as the RunSlow method. At least I learned something!";

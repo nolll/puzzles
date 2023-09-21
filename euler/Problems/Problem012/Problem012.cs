@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem012;
 
-public class Problem012 : Problem
+public class Problem012 : EulerPuzzle
 {
     public override string Name => "Highly divisible triangular number";
         

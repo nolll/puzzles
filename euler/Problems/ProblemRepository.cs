@@ -20,7 +20,7 @@ public class ProblemRepository
     public IList<ProblemWrapper> GetAll() => _allProblems;
 
     private static List<ProblemWrapper> CreateProblems() => 
-        GetConcreteSubclassesOf<Problem>()
+        GetConcreteSubclassesOf<EulerPuzzle>()
             .Select(CreateProblem)
             .OrderBy(o => o.Id)
             .ToList();
@@ -28,7 +28,7 @@ public class ProblemRepository
     private static ProblemWrapper CreateProblem(Type t)
     {
         var id = ProblemParser.GetProblemId(t);
-        if (Activator.CreateInstance(t) is Problem problem)
+        if (Activator.CreateInstance(t) is EulerPuzzle problem)
             return new ProblemWrapper(id, problem);
         
         throw new Exception($"Could not create Problem {id}");

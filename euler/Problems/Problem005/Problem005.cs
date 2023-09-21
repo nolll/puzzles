@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem005;
 
-public class Problem005 : Problem
+public class Problem005 : EulerPuzzle
 {
     public override string Name => "Smallest multiple";
 

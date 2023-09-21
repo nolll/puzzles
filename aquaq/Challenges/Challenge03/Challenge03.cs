@@ -1,17 +1,18 @@
 ﻿using AquaQ.Platform;
+using common.Puzzles;
 
 namespace AquaQ.Challenges.Challenge03;
 
-public class Challenge03 : Challenge
+public class Challenge03 : AquaQPuzzle
 {
     public override string Name => "One is all you need";
 
-    public override ChallengeResult Run()
+    public override PuzzleResult Run()
     {
         var input = FileInput.Split(' ').Select(int.Parse);
         var uniqueNumbers = GetUniqueNumbers(input);
 
-        return new ChallengeResult(uniqueNumbers.Sum(), 321);
+        return new PuzzleResult(uniqueNumbers.Sum(), 321);
     }
 
     public static IEnumerable<int> GetUniqueNumbers(IEnumerable<int> input)

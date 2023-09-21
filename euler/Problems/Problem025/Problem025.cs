@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem025;
 
-public class Problem025 : Problem
+public class Problem025 : EulerPuzzle
 {
     public override string Name => "1000-digit Fibonacci number";
 

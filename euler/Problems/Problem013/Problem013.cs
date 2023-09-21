@@ -4,7 +4,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem013;
 
-public class Problem013 : Problem
+public class Problem013 : EulerPuzzle
 {
     public override string Name => "Large sum";
         

@@ -1,20 +1,21 @@
 ﻿using System.Text.RegularExpressions;
 using AquaQ.Platform;
+using common.Puzzles;
 
 namespace AquaQ.Challenges.Challenge02;
 
-public class Challenge02 : Challenge
+public class Challenge02 : AquaQPuzzle
 {
     private static readonly Regex HexRegex = new("[^0123456789abcdef]");
     public override string Name => "Rose by any other name";
 
     private const string Input = "do you think that maybe like, 1 in 10 people could be actually robots?";
 
-    public override ChallengeResult Run()
+    public override PuzzleResult Run()
     {
         var result = GetHexString(Input);
 
-        return new ChallengeResult(result, "d0000d");
+        return new PuzzleResult(result, "d0000d");
     }
 
     public static string GetHexString(string input)

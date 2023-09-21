@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using common.Formatting;
+using common.Puzzles;
 using Spectre.Console;
 using Color = System.Drawing.Color;
 using Timer = common.Timing.Timer;
@@ -37,9 +38,9 @@ public class InSequenceSingleChallengeRunner : SingleChallengeRunner
         AnsiConsole.WriteLine();
     }
 
-    private void RunPart(Func<ChallengeResult> runFunc, Action<string> updateResultFunc)
+    private void RunPart(Func<PuzzleResult> runFunc, Action<string> updateResultFunc)
     {
-        var status = ChallengeResultStatus.Empty;
+        var status = PuzzleResultStatus.Empty;
         var timer = new Timer();
         var time = TimeSpan.Zero;
         var waited = false;
@@ -50,7 +51,7 @@ public class InSequenceSingleChallengeRunner : SingleChallengeRunner
             if (timer.FromStart >= _timeoutTimespan)
             {
                 cancellation.Cancel();
-                status = ChallengeResultStatus.Timeout;
+                status = PuzzleResultStatus.Timeout;
                 break;
             }
 
@@ -68,15 +69,15 @@ public class InSequenceSingleChallengeRunner : SingleChallengeRunner
 
     private void UpdatePart1Result(string markup) => _markup = markup;
 
-    private string MarkupTime(TimeSpan time, ChallengeResultStatus status)
+    private string MarkupTime(TimeSpan time, PuzzleResultStatus status)
     {
         return status switch
         {
-            ChallengeResultStatus.Correct =>
+            PuzzleResultStatus.Correct =>
                 MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Green),
-            ChallengeResultStatus.Failed or ChallengeResultStatus.Wrong =>
+            PuzzleResultStatus.Failed or PuzzleResultStatus.Wrong =>
                 MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red),
-            ChallengeResultStatus.Timeout =>
+            PuzzleResultStatus.Timeout =>
                 MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
             _ => PadResult("")
         };

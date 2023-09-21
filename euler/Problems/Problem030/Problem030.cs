@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem030;
 
-public class Problem030 : Problem
+public class Problem030 : EulerPuzzle
 {
     public override string Name => "Digit fifth powers";
 

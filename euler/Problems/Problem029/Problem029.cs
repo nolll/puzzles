@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem029;
 
-public class Problem029 : Problem
+public class Problem029 : EulerPuzzle
 {
     public override string Name => "Distinct powers";
 

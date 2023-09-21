@@ -3,7 +3,7 @@ using Euler.Platform;
 
 namespace Euler.Problems.Problem023;
 
-public class Problem023 : Problem
+public class Problem023 : EulerPuzzle
 {
     private const int UpperLimit = 28123;
 

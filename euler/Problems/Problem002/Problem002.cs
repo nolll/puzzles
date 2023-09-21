@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem002;
 
-public class Problem002 : Problem
+public class Problem002 : EulerPuzzle
 {
     public override string Name => "Even Fibonacci numbers";
 

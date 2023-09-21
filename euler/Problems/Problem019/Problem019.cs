@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem019;
 
-public class Problem019 : Problem
+public class Problem019 : EulerPuzzle
 {
     public override string Name => "Counting Sundays";
 

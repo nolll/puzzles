@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem022;
 
-public class Problem022 : Problem
+public class Problem022 : EulerPuzzle
 {
     private readonly Dictionary<string, int> _nameScores;
 

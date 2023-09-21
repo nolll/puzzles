@@ -2,7 +2,7 @@
 
 namespace Euler.Problems.Problem039;
 
-public class Problem039 : Problem
+public class Problem039 : EulerPuzzle
 {
     public override string Name => "Integer Right Triangle";
 

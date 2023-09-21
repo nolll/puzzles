@@ -15,5 +15,5 @@ public class Year2021Day25 : AocPuzzle
         return new PuzzleResult(result, 518);
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty();
+    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
 }

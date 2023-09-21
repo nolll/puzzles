@@ -23,5 +23,5 @@ public class Year2022Day25 : AocPuzzle
         return SnafuConverter.ToSnafu(sum);
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty();
+    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
 }

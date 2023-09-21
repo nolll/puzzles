@@ -15,7 +15,7 @@ public class Year2015Day25 : AocPuzzle
         return new PuzzleResult(code, 2_650_453);
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty();
+    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
 
     private Params GetParams()
     {

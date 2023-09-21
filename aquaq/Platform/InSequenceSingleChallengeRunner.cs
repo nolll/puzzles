@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using common.Formatting;
 using common.Puzzles;
+using common.Strings;
 using Spectre.Console;
 using Color = System.Drawing.Color;
 using Timer = common.Timing.Timer;
@@ -62,6 +63,7 @@ public class InSequenceSingleChallengeRunner : SingleChallengeRunner
             Thread.Sleep(ProgressWaitTime);
         }
 
+        status = task.IsFaulted ? PuzzleResultStatus.Failed : status;
         time = waited ? time : timer.FromStart;
         updateResultFunc(MarkupTime(time, status));
         PrintRow();

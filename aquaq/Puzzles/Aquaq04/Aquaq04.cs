@@ -12,11 +12,11 @@ public class Aquaq04 : AquaQPuzzle
 
     public override PuzzleResult Run()
     {
-        var sum = FindCoPrimes(Input).Sum();
+        var sum = FindCoPrimesFor(Input).Sum();
         return new PuzzleResult(sum, 195153719200);
     }
 
-    public static IEnumerable<long> FindCoPrimes(int n)
+    public static IEnumerable<long> FindCoPrimesFor(int n)
     {
         var nFactors = FindDivisors(n);
         for (var i = 1; i < n; i++)

@@ -14,5 +14,5 @@ public class Year2017Day25 : AocPuzzle
         return new PuzzleResult(checksum, 4387);
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty();
+    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
 }

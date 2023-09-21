@@ -7,7 +7,7 @@ public class Aquaq04Tests
     [Test]
     public void FindCoPrimes()
     {
-        var result = Aquaq04.FindCoPrimes(15).ToArray();
+        var result = Aquaq04.FindCoPrimesFor(15).ToArray();
 
         Assert.That(result.Length, Is.EqualTo(8));
         Assert.That(result[0], Is.EqualTo(1));

@@ -33,10 +33,8 @@ public class PuzzleResult
         Status = status;
     }
 
-    public static PuzzleResult Empty()
-    {
-        return new PuzzleResult("No puzzle here", PuzzleResultStatus.Empty);
-    }
+    public static PuzzleResult Empty => new PuzzleResult("No puzzle here", PuzzleResultStatus.Empty);
+    public static PuzzleResult Failed => new PuzzleResult("Failed", PuzzleResultStatus.Failed);
 
     private static PuzzleResultStatus VerifyResult(string? answer, string? correctAnswer)
     {

@@ -15,5 +15,5 @@ public class Year2020Day25 : AocPuzzle
         return new PuzzleResult(key, 7269858);
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty();
+    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
 }

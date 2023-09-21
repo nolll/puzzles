@@ -15,5 +15,5 @@ public class Year2019Day25 : AocPuzzle
         return new PuzzleResult(password, "285213704");
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty();
+    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
 }

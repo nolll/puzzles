@@ -14,5 +14,5 @@ public class Year2018Day25 : AocPuzzle
         return new PuzzleResult(constellationCount, 375);
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty();
+    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
 }

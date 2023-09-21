@@ -7,7 +7,7 @@ namespace AquaQ;
 public class Program
 {
     private const int ChallengeTimeout = 10;
-    private const int DebugChallenge = 2;
+    private const int DebugChallenge = 4;
 
     private static readonly ChallengeRunner Runner = new(ChallengeTimeout);
     private static readonly ChallengeRepository ChallengeRepository = new();

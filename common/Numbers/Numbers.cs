@@ -84,19 +84,19 @@ public static class Numbers
         return largest;
     }
 
-    public static IEnumerable<int> GetAllDivisors(int x)
+    public static IEnumerable<int> GetAllDivisors(int n)
     {
-        for (var i = 1; i * i <= x; i++)
+        for (var i = 1; i * i <= n; i++)
         {
-            if (x % i == 0)
+            if (n % i == 0)
             {
                 yield return i;
-                if (i != x / i)
-                    yield return x / i;
+                if (i != n / i)
+                    yield return n / i;
             }
         }
     }
-
+    
     public static IEnumerable<int> GetProperDivisors(int x)
     {
         return GetAllDivisors(x).OrderBy(o => o).SkipLast(1);

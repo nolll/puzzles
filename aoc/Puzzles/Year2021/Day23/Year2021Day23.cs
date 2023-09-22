@@ -8,7 +8,7 @@ public class Year2021Day23 : AocPuzzle
     public override string Name => "Amphipod";
     public override string Comment => "Solved manually";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var amphipods = new Amphipods(Input1);
         amphipods.ArrangePart1();
@@ -17,7 +17,7 @@ public class Year2021Day23 : AocPuzzle
         return new PuzzleResult(result, 11120);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var amphipods = new Amphipods(Input2);
         amphipods.ArrangePart2();

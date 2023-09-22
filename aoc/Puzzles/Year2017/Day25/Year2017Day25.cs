@@ -7,12 +7,12 @@ public class Year2017Day25 : AocPuzzle
 {
     public override string Name => "The Halting Problem";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var turingMachine = new TuringMachine(FileInput);
         var checksum = turingMachine.Run();
         return new PuzzleResult(checksum, 4387);
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
+    protected override PuzzleResult RunPart2() => PuzzleResult.Empty;
 }

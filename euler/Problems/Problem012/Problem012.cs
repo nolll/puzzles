@@ -7,7 +7,7 @@ namespace Euler.Problems.Problem012;
 public class Problem012 : EulerPuzzle
 {
     public override string Name => "Highly divisible triangular number";
-        
+
     public override PuzzleResult Run()
     {
         var result = Run(501);

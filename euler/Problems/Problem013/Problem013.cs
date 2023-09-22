@@ -8,7 +8,7 @@ namespace Euler.Problems.Problem013;
 public class Problem013 : EulerPuzzle
 {
     public override string Name => "Large sum";
-        
+
     public override PuzzleResult Run()
     {
         var result = Run(Input);

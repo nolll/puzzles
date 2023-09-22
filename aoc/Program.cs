@@ -4,6 +4,7 @@ using Aoc.ConsoleTools;
 using Aoc.Platform;
 using Aoc.Printing;
 using Aoc.Puzzles;
+using common.Puzzles;
 using common.Runners;
 
 namespace Aoc;
@@ -31,8 +32,6 @@ public class Program
     {
         if (parameters.Id != null)
             RunSingle(parameters.Id);
-        else if (parameters.Year != null)
-            RunEvent(parameters);
         else
             RunAll(parameters);
     }
@@ -45,21 +44,11 @@ public class Program
             
         Runner.Run(foundDay);
     }
-
-    private static void RunEvent(Parameters parameters)
-    {
-        var eventDays = AocPuzzleRepository.GetEventDays(parameters.Year);
-        if (!eventDays.Any())
-            throw new Exception("Event not found!");
-
-        var filteredDays = new DayFilter(parameters).Filter(eventDays);
-        Runner.Run(filteredDays);
-    }
-
+    
     private static void RunAll(Parameters parameters)
     {
         var allDays = AocPuzzleRepository.GetAll();
-        var filteredDays = new DayFilter(parameters).Filter(allDays);
+        var filteredDays = new PuzzleFilter(parameters).Filter(allDays);
         Runner.Run(filteredDays);
     }
 

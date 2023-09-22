@@ -7,14 +7,14 @@ public class Year2018Day14 : AocPuzzle
 {
     public override string Name => "Chocolate Charts";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var generator = new RecipeGenerator();
         var scores = generator.ScoresAfter(Input);
         return new PuzzleResult(scores, "3718110721");
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var generator = new RecipeGenerator();
         var count = generator.RecipeCountBefore(Input.ToString());

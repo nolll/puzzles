@@ -11,14 +11,14 @@ public class Year2022Day23 : AocPuzzle
 {
     public override string Name => "Unstable Diffusion";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var (emptyCount, _) = Run(FileInput, 10);
 
         return new PuzzleResult(emptyCount, 4181);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var (_, endRound) = Run(FileInput);
 

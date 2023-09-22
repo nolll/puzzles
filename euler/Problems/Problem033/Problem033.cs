@@ -6,7 +6,7 @@ namespace Euler.Problems.Problem033;
 public class Problem033 : EulerPuzzle
 {
     public override string Name => "Digit Cancelling Fraction";
-    
+
     public override PuzzleResult Run()
     {
         var fractions = new List<Fraction>();

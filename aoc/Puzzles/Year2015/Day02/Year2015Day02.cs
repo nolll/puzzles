@@ -7,14 +7,14 @@ public class Year2015Day02 : AocPuzzle
 {
     public override string Name => "I Was Told There Would Be No Math";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var paperResult = GiftWrappingCalculator.GetRequiredPaper(FileInput);
 
         return new PuzzleResult(paperResult, 1_606_483);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var ribbonResult = GiftWrappingCalculator.GetRequiredRibbon(FileInput);
             

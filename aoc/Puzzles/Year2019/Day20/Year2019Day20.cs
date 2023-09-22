@@ -7,13 +7,13 @@ public class Year2019Day20 : AocPuzzle
 {
     public override string Name => "Donut Maze";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var mazeSolver = new DonutMazeSolver(FileInput);
         return new PuzzleResult(mazeSolver.ShortestStepCount, 462);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var recursiveDonutMazeSolver = new RecursiveDonutMazeSolver(FileInput);
         return new PuzzleResult(recursiveDonutMazeSolver.ShortestStepCount, 5288);

@@ -7,13 +7,13 @@ public class Year2015Day08 : AocPuzzle
 {
     public override string Name => "Matchsticks";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var digitalList = new DigitalList(FileInput);
         return new PuzzleResult(digitalList.CodeMinusMemoryDiff, 1342);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var digitalList = new DigitalList(FileInput);
         return new PuzzleResult(digitalList.EncodedMinusCodeDiff, 2074);

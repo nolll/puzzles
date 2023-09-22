@@ -36,6 +36,15 @@ public class ParameterParser
         return target;
     }
 
+    public List<string> GetListValue(params string[] keys)
+    {
+        var val = GetValue(keys);
+        if (val == null)
+            return new List<string>();
+
+        return val.Split(',').ToList();
+    }
+
     public string? GetValue(params string[] keys)
     {
         foreach (var key in keys)

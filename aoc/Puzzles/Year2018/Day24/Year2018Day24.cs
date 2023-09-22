@@ -8,7 +8,7 @@ public class Year2018Day24 : AocPuzzle
 {
     public override string Name => "Immune System Simulator 20XX";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var inputs = FileInput.Split("\r\n\r\n");
         var immuneInput = inputs.First();
@@ -19,7 +19,7 @@ public class Year2018Day24 : AocPuzzle
         return new PuzzleResult(system.WinningArmyUnitCount, 9328);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var inputs = FileInput.Split("\r\n\r\n");
         var immuneInput = inputs.First();

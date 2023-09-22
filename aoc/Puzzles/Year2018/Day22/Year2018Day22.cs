@@ -9,7 +9,7 @@ public class Year2018Day22 : AocPuzzle
 {
     public override string Name => "Mode Maze";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var rows = PuzzleInputReader.ReadLines(FileInput);
         var depth = int.Parse(rows.First().Split(' ').Last());
@@ -21,7 +21,7 @@ public class Year2018Day22 : AocPuzzle
         return new PuzzleResult(caveSystem.TotalRiskLevel, 11_575);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var rows = PuzzleInputReader.ReadLines(FileInput);
         var depth = int.Parse(rows.First().Split(' ').Last());

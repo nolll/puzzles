@@ -9,14 +9,14 @@ public class Year2021Day17 : AocPuzzle
 
     public override string Name => "Trick Shot";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var result = Shoot();
 
         return new PuzzleResult(result.MaxHeight, 11175);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var result = Shoot();
 

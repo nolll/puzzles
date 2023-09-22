@@ -7,7 +7,7 @@ public class Year2019Day23 : AocPuzzle
 {
     public override string Name => "Category Six";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var network = new CategorySixNetwork(FileInput);
         network.Run();
@@ -15,7 +15,7 @@ public class Year2019Day23 : AocPuzzle
         return new PuzzleResult(network.FirstNatPacket.Y, 17_541);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var network = new CategorySixNetwork(FileInput);
         network.Run();

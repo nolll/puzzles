@@ -7,14 +7,14 @@ public class Year2020Day23 : AocPuzzle
 {
     public override string Name => "Crab Cups";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var game = new CrabCupsGame(Input);
         game.Play(100);
         return new PuzzleResult(game.ResultString, "25398647");
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var game = new CrabCupsGame(Input, true);
         game.Play(10_000_000);

@@ -26,8 +26,8 @@ public class Program
 
     private static void RunProblems(Parameters parameters)
     {
-        if (parameters.ProblemId != null)
-            RunSingle(parameters.ProblemId);
+        if (parameters.Id != null)
+            RunSingle(parameters.Id);
         else
             RunAll(parameters);
     }
@@ -45,19 +45,19 @@ public class Program
     private static void RunAll(Parameters parameters)
     {
         var allProblems = EulerPuzzleRepository.GetPuzzles();
-        var filteredProblems = new ProblemFilter(parameters).Filter(allProblems);
+        var filteredProblems = new PuzzleFilter(parameters).Filter(allProblems);
         Runner.Run(filteredProblems);
     }
 
     private static void ShowHelp()
     {
-        HelpPrinter.Print();
+        EulerHelpPrinter.Print();
     }
 
     private static Parameters ParseParameters(string[] args)
     {
 #if SINGLE
-        return new Parameters(problemId: DebugProblem);
+        return new Parameters(id: DebugProblem);
 #else
         return Parameters.Parse(args);
 #endif

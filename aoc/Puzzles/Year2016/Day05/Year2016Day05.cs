@@ -9,13 +9,13 @@ public class Year2016Day05 : AocPuzzle
 
     public override string Name => "How About a Nice Game of Chess?";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var pwd = _generator.Generate1(Input);
         return new PuzzleResult(pwd, "2414bc77");
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var pwd = _generator.Generate2(Input);
         return new PuzzleResult(pwd, "437e60fc");

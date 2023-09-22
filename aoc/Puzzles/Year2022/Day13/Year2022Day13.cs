@@ -7,7 +7,7 @@ public class Year2022Day13 : AocPuzzle
 {
     public override string Name => "Distress Signal";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var signal = new DistressSignal();
         var result = signal.Part1(FileInput);
@@ -15,7 +15,7 @@ public class Year2022Day13 : AocPuzzle
         return new PuzzleResult(result, 6568);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var signal = new DistressSignal();
         var result = signal.Part2(FileInput);

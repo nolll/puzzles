@@ -7,14 +7,14 @@ public class Year2020Day24 : AocPuzzle
 {
     public override string Name => "Lobby Layout";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var floor = new HexagonalFloor(FileInput);
         floor.Arrange();
         return new PuzzleResult(floor.BlackTileCount, 388);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var floor = new HexagonalFloor(FileInput);
         floor.Arrange();

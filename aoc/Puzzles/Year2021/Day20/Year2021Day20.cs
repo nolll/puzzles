@@ -7,7 +7,7 @@ public class Year2021Day20 : AocPuzzle
 {
     public override string Name => "Trench Map";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var trenchMap = new TrenchMap();
         var result = trenchMap.GetLitPixelCount(FileInput, 2);
@@ -15,7 +15,7 @@ public class Year2021Day20 : AocPuzzle
         return new PuzzleResult(result, 5765);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var trenchMap = new TrenchMap();
         var result = trenchMap.GetLitPixelCount(FileInput, 50);

@@ -2,12 +2,12 @@
 
 namespace Euler.ConsoleTools;
 
-public static class HelpPrinter
+public static class EulerHelpPrinter
 {
     public static void Print()
     {
         AnsiConsole.WriteLine("My solutions to Project Euler.");
-        AnsiConsole.WriteLine("https://github.com/nolll/euler");
+        AnsiConsole.WriteLine("https://github.com/nolll/puzzles/euler");
         AnsiConsole.WriteLine();
         AnsiConsole.WriteLine("Usage dotnet run -- [-p [problem]]");
         AnsiConsole.WriteLine("My Project Euler solutions.");

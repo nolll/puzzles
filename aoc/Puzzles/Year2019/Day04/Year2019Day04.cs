@@ -8,7 +8,7 @@ public class Year2019Day04 : AocPuzzle
 {
     public override string Name => "Secure Container";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var passwordBounds = Input.Split('-');
         var passwordLowerbound = int.Parse(passwordBounds[0]);
@@ -20,7 +20,7 @@ public class Year2019Day04 : AocPuzzle
         return new PuzzleResult(passwordCount, 530);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var passwordBounds = Input.Split('-');
         var passwordLowerbound = int.Parse(passwordBounds[0]);

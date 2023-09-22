@@ -7,13 +7,13 @@ public class Year2020Day06 : AocPuzzle
 {
     public override string Name => "Custom Customs";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var reader = new DeclarationFormReader(FileInput);
         return new PuzzleResult(reader.SumOfAtLeastOneYes, 6778);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var reader = new DeclarationFormReader(FileInput);
         return new PuzzleResult(reader.SumOfAllYes, 3406);

@@ -7,7 +7,7 @@ public class Year2015Day03 : AocPuzzle
 {
     public override string Name => "Perfectly Spherical Houses in a Vacuum";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var grid = new DeliveryGrid();
         grid.DeliverBySanta(FileInput);
@@ -15,7 +15,7 @@ public class Year2015Day03 : AocPuzzle
         return new PuzzleResult(grid.SantaDeliveryCount, 2592);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var grid = new DeliveryGrid();
         grid.DeliverBySantaAndRobot(FileInput);

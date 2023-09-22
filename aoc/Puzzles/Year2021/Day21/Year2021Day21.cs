@@ -7,7 +7,7 @@ public class Year2021Day21 : AocPuzzle
 {
     public override string Name => "Dirac Dice";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var game = new DiracDiceGame();
         var result = game.Play(8, 2);
@@ -15,7 +15,7 @@ public class Year2021Day21 : AocPuzzle
         return new PuzzleResult(result.Result, 513936);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var game = new RealDiracDiceGame();
         var result = game.Play(8, 2);

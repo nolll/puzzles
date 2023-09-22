@@ -9,7 +9,7 @@ public class Year2022Day08 : AocPuzzle
 
     public override string Name => "Treetop Tree House";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         _treeHouse = new TreeHouse(FileInput);
         _treeHouse.Calc();
@@ -18,7 +18,7 @@ public class Year2022Day08 : AocPuzzle
         return new PuzzleResult(result, 1538);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         _treeHouse.Calc();
         var result = _treeHouse.HighestScenicScore;

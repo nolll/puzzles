@@ -7,7 +7,7 @@ public class Year2018Day13 : AocPuzzle
 {
     public override string Name => "Mine Cart Madness";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var detector = new CollisionDetector(FileInput);
         detector.RunCarts();
@@ -16,7 +16,7 @@ public class Year2018Day13 : AocPuzzle
         return new PuzzleResult(firstCollition, "118,112");
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var detector = new CollisionDetector(FileInput);
         detector.RunCarts();

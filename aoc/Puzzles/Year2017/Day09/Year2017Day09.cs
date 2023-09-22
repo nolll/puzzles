@@ -7,13 +7,13 @@ public class Year2017Day09 : AocPuzzle
 {
     public override string Name => "Stream Processing";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var processor = new StreamProcessor(FileInput);
         return new PuzzleResult(processor.Score, 14_421);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var processor = new StreamProcessor(FileInput);
         return new PuzzleResult(processor.GarbageCount, 6817);

@@ -7,14 +7,14 @@ public class Year2017Day17 : AocPuzzle
 {
     public override string Name => "Spinlock";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var runner1 = new SpinlockRunnerPart1(Input);
         runner1.Run(2017);
         return new PuzzleResult(runner1.NextValue, 1244);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var runner2 = new SpinlockRunnerPart2(Input);
         runner2.Run(50_000_000);

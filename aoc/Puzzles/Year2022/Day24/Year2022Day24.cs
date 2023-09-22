@@ -6,8 +6,8 @@ namespace Aoc.Puzzles.Year2022.Day24;
 public class Year2022Day24 : AocPuzzle
 {
     public override string Name => "Blizzard Basin";
-    
-    public override PuzzleResult RunPart1()
+
+    protected override PuzzleResult RunPart1()
     {
         var blizzardNavigation = new BlizzardNavigation(FileInput);
         var result = blizzardNavigation.Part1();
@@ -15,7 +15,7 @@ public class Year2022Day24 : AocPuzzle
         return new PuzzleResult(result, 249);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var blizzardNavigation = new BlizzardNavigation(FileInput);
         var result = blizzardNavigation.Part2();

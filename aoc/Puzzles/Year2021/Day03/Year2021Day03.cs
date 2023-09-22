@@ -7,7 +7,7 @@ public class Year2021Day03 : AocPuzzle
 {
     public override string Name => "Binary Diagnostic";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var diagnostics = new BinaryDiagnostics();
         var result = diagnostics.GetFuelConsumption(FileInput);
@@ -15,7 +15,7 @@ public class Year2021Day03 : AocPuzzle
         return new PuzzleResult(result, 845186);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var diagnostics = new BinaryDiagnostics();
         var result = diagnostics.GetLifeSupportRating(FileInput);

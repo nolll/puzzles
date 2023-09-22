@@ -8,7 +8,7 @@ public class Year2019Day03 : AocPuzzle
 {
     public override string Name => "Crossed Wires";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var wirePaths = PuzzleInputReader.ReadLines(FileInput);
         var wirePathA = wirePaths[0];
@@ -19,7 +19,7 @@ public class Year2019Day03 : AocPuzzle
         return new PuzzleResult(distance, 865);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var wirePaths = PuzzleInputReader.ReadLines(FileInput);
         var wirePathA = wirePaths[0];

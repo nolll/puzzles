@@ -7,13 +7,13 @@ public class Year2016Day09 : AocPuzzle
 {
     public override string Name => "Explosives in Cyberspace";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var decompressor = new FileDecompressor(FileInput);
         return new PuzzleResult(decompressor.DecompressedLengthV1, 107_035);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var decompressor = new FileDecompressor(FileInput);
         return new PuzzleResult(decompressor.DecompressedLengthV2, 11_451_628_995);

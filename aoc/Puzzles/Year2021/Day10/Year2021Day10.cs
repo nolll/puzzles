@@ -7,14 +7,14 @@ public class Year2021Day10 : AocPuzzle
 {
     public override string Name => "Syntax Scoring";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var syntaxChecker = new SyntaxChecker();
         var result = syntaxChecker.GetTotalErrorScore(FileInput);
         return new PuzzleResult(result, 399153);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var syntaxChecker = new SyntaxChecker();
         var result = syntaxChecker.FindMiddleScore(FileInput);

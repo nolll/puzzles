@@ -9,7 +9,7 @@ public class Year2022Day25 : AocPuzzle
 {
     public override string Name => "Full of Hot Air";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var result = Part1(FileInput);
 
@@ -23,5 +23,5 @@ public class Year2022Day25 : AocPuzzle
         return SnafuConverter.ToSnafu(sum);
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
+    protected override PuzzleResult RunPart2() => PuzzleResult.Empty;
 }

@@ -7,7 +7,7 @@ public class Year2019Day25 : AocPuzzle
 {
     public override string Name => "Cryostasis";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var investigationDroid = new InvestigationDroid(FileInput);
         var password = investigationDroid.Run();
@@ -15,5 +15,5 @@ public class Year2019Day25 : AocPuzzle
         return new PuzzleResult(password, "285213704");
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
+    protected override PuzzleResult RunPart2() => PuzzleResult.Empty;
 }

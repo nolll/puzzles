@@ -7,7 +7,7 @@ public class Year2021Day16 : AocPuzzle
 {
     public override string Name => "Packet Decoder";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var packet = BitsPacket.FromHex(FileInput);
         var result = packet.VersionSum;
@@ -15,7 +15,7 @@ public class Year2021Day16 : AocPuzzle
         return new PuzzleResult(result, 879);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var packet = BitsPacket.FromHex(FileInput);
         var result = packet.Value;

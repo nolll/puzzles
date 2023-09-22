@@ -13,12 +13,12 @@ public class DayFilterTests
     {
         var days = new List<PuzzleWrapper>
         {
-            new("id", "title", "list-title", new SlowAocPuzzle()),
-            new("id", "title", "list-title", new PlainAocPuzzle())
+            AocPuzzleFactory.CreatePuzzle(2000, 1, new SlowAocPuzzle()),
+            AocPuzzleFactory.CreatePuzzle(2000, 1, new PlainAocPuzzle())
         };
 
-        var parameters = new Parameters(runSlowOnly: true);
-        var filter = new DayFilter(parameters);
+        var parameters = new Parameters(tags: new List<string> { PuzzleTag.Slow });
+        var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(days);
 
         Assert.That(result.Count, Is.EqualTo(1));
@@ -30,12 +30,12 @@ public class DayFilterTests
     {
         var days = new List<PuzzleWrapper>
         {
-            new("id", "title", "list-title", new CommentedAocPuzzle()),
-            new("id", "title", "list-title", new PlainAocPuzzle())
+            AocPuzzleFactory.CreatePuzzle(2000, 1, new CommentedAocPuzzle()),
+            AocPuzzleFactory.CreatePuzzle(2000, 1, new PlainAocPuzzle())
         };
-
-        var parameters = new Parameters(runCommentedOnly: true);
-        var filter = new DayFilter(parameters);
+        
+        var parameters = new Parameters(tags: new List<string> { PuzzleTag.Commented });
+        var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(days);
 
         Assert.That(result.Count, Is.EqualTo(1));
@@ -47,12 +47,12 @@ public class DayFilterTests
     {
         var days = new List<PuzzleWrapper>
         {
-            new("id", "title", "list-title", new FunAocPuzzle()),
-            new("id", "title", "list-title", new PlainAocPuzzle())
+            AocPuzzleFactory.CreatePuzzle(2000, 1, new FunAocPuzzle()),
+            AocPuzzleFactory.CreatePuzzle(2000, 1, new PlainAocPuzzle())
         };
 
-        var parameters = new Parameters(runFunOnly: true);
-        var filter = new DayFilter(parameters);
+        var parameters = new Parameters(tags: new List<string> { PuzzleTag.Fun });
+        var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(days);
 
         Assert.That(result.Count, Is.EqualTo(1));

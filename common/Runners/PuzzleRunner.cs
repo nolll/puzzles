@@ -1,4 +1,5 @@
 ﻿using common.Puzzles;
+using Spectre.Console;
 
 namespace common.Runners;
 
@@ -16,8 +17,11 @@ public class PuzzleRunner
         var enumerable = wrappers as PuzzleWrapper[] ?? wrappers.ToArray();
         var count = enumerable.Length;
 
-        if(count == 0)
-            throw new Exception("No puzzles found.");
+        if (count == 0)
+        {
+            AnsiConsole.WriteLine("No puzzles found.");
+            return;
+        }
 
         if (count == 1)
             new StandaloneSinglePuzzleRunner(enumerable.First()).Run();

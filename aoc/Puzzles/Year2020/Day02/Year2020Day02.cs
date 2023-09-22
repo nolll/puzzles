@@ -9,7 +9,7 @@ public class Year2020Day02 : AocPuzzle
 {
     public override string Name => "Password Philosophy";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var validator = new PasswordPolicyValidator();
         var policies = PuzzleInputReader.ReadLines(FileInput);
@@ -17,7 +17,7 @@ public class Year2020Day02 : AocPuzzle
         return new PuzzleResult(count, 556);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var validator = new PasswordPolicyValidator();
         var policies = PuzzleInputReader.ReadLines(FileInput);

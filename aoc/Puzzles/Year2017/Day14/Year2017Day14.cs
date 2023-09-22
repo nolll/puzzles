@@ -7,13 +7,13 @@ public class Year2017Day14 : AocPuzzle
 {
     public override string Name => "Disk Defragmentation";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var defragmenter = new DiskDefragmenter(Input);
         return new PuzzleResult(defragmenter.UsedCount, 8222);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var defragmenter = new DiskDefragmenter(Input);
         return new PuzzleResult(defragmenter.RegionCount, 1086);

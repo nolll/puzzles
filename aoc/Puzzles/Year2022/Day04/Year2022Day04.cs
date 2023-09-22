@@ -7,7 +7,7 @@ public class Year2022Day04 : AocPuzzle
 {
     public override string Name => "Camp Cleanup";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var cleaning = new Cleaning();
         var result = cleaning.Part1(FileInput);
@@ -15,7 +15,7 @@ public class Year2022Day04 : AocPuzzle
         return new PuzzleResult(result, 571);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var cleaning = new Cleaning();
         var result = cleaning.Part2(FileInput);

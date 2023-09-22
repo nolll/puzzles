@@ -7,14 +7,14 @@ public class Year2020Day18 : AocPuzzle
 {
     public override string Name => "Operation Order";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var calculator = new HomeworkCalculator();
         var result = calculator.SumOfAll(FileInput, MathPrecedence.Order);
         return new PuzzleResult(result, 4_297_397_455_886);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var calculator = new HomeworkCalculator();
         var result = calculator.SumOfAll(FileInput, MathPrecedence.Addition);

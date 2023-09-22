@@ -7,7 +7,7 @@ public class Year2022Day10 : AocPuzzle
 {
     public override string Name => "Cathode-Ray Tube";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var tube = new CathodeRayTube();
         var (result, _, _) = tube.Run(FileInput);
@@ -15,7 +15,7 @@ public class Year2022Day10 : AocPuzzle
         return new PuzzleResult(result, 14360);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var tube = new CathodeRayTube();
         var (_, result, _) = tube.Run(FileInput);

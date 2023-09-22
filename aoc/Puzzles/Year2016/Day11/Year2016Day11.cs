@@ -10,13 +10,13 @@ public class Year2016Day11 : AocPuzzle
     public override string Comment => "Floor permutations";
     public override bool IsSlow => true; // 16s for part 2
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var simulator = new RadioisotopeSimulator(Input1);
         return new PuzzleResult(simulator.StepCount, 37);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var simulator = new RadioisotopeSimulator(Input2);
         return new PuzzleResult(simulator.StepCount, 61);

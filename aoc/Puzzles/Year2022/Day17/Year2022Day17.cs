@@ -7,7 +7,7 @@ public class Year2022Day17 : AocPuzzle
 {
     public override string Name => "Pyroclastic Flow";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var tetris = new Tetris();
         var result = tetris.Run(FileInput, 2022);
@@ -15,7 +15,7 @@ public class Year2022Day17 : AocPuzzle
         return new PuzzleResult(result, 3197);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var tetris = new Tetris();
         var result = tetris.Run(FileInput, 1_000_000_000_000);

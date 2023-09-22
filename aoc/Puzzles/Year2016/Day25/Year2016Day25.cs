@@ -7,11 +7,11 @@ public class Year2016Day25 : AocPuzzle
 {
     public override string Name => "Clock Signal";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var generator = new ClockSignalGenerator();
         return new PuzzleResult(generator.LowestA, 198);
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
+    protected override PuzzleResult RunPart2() => PuzzleResult.Empty;
 }

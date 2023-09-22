@@ -8,7 +8,7 @@ public class Year2019Day02 : AocPuzzle
 {
     public override string Name => "1202 Program Alarm";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var computer = new ConsoleComputer(FileInput);
         computer.Start(false, 12, 2);
@@ -16,7 +16,7 @@ public class Year2019Day02 : AocPuzzle
         return new PuzzleResult(value, 3_101_844);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var solutionFinder = new ComputerSolutionFinder(FileInput);
         var result = solutionFinder.FindSolution(19690720);

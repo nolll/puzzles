@@ -6,7 +6,7 @@ namespace Euler.Problems.Problem014;
 public class Problem014 : EulerPuzzle
 {
     public override string Name => "Longest Collatz sequence";
-        
+
     public override PuzzleResult Run()
     {
         var result = Run(1_000_000);

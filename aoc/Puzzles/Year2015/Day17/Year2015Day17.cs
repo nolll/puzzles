@@ -7,14 +7,14 @@ public class Year2015Day17 : AocPuzzle
 {
     public override string Name => "No Such Thing as Too Much";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var container = new EggnogContainers(FileInput);
         var combinations = container.GetCombinations(150);
         return new PuzzleResult(combinations.Count, 1304);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var container = new EggnogContainers(FileInput);
         var combinations = container.GetCombinationsWithLeastContainers(150);

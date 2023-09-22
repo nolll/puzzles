@@ -7,7 +7,7 @@ public class Year2022Day16 : AocPuzzle
 {
     public override string Name => "Proboscidea Volcanium";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var pipes = new VolcanicPipes(FileInput);
         var result = pipes.Part1();
@@ -15,7 +15,7 @@ public class Year2022Day16 : AocPuzzle
         return new PuzzleResult(result, 2059);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var pipes = new VolcanicPipes(FileInput);
         var result = pipes.Part2();

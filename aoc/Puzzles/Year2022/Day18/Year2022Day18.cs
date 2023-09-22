@@ -7,7 +7,7 @@ public class Year2022Day18 : AocPuzzle
 {
     public override string Name => "Boiling Boulders";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var lavaCubes = new LavaCubes();
         var result = lavaCubes.Part1(FileInput);
@@ -15,7 +15,7 @@ public class Year2022Day18 : AocPuzzle
         return new PuzzleResult(result, 4444);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var lavaCubes = new LavaCubes();
         var result = lavaCubes.Part2(FileInput);

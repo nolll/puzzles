@@ -13,12 +13,12 @@ public class Year2015Day11: AocPuzzle
 
     public override string Name => "Corporate Policy";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         return new PuzzleResult(FirstPassword, "hxbxxyzz");
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var pwd2 = Validator.FindNextPassword(FirstPassword);
         return new PuzzleResult(pwd2, "hxcaabcc");

@@ -7,7 +7,7 @@ public class Year2018Day11 : AocPuzzle
 {
     public override string Name => "Chronal Charge";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var grid = new PowerGrid(300, Input);
         var maxCoords = grid.GetMaxCoords();
@@ -15,7 +15,7 @@ public class Year2018Day11 : AocPuzzle
         return new PuzzleResult(strCoords, "20,43");
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var grid = new PowerGrid(300, Input);
         var (coords, size) = grid.GetMaxCoordsAnySize();

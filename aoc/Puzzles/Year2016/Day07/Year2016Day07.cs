@@ -7,14 +7,14 @@ public class Year2016Day07 : AocPuzzle
 {
     public override string Name => "Internet Protocol Version 7";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var tester = new IpTester();
         var tlsSupportCount = tester.TlsSupportCount(FileInput);
         return new PuzzleResult(tlsSupportCount, 105);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var tester = new IpTester();
         var sslSupportCount = tester.SslSupportCount(FileInput);

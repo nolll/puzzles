@@ -7,7 +7,7 @@ public class Year2021Day04 : AocPuzzle
 {
     public override string Name => "Giant Squid";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var diagnostics = new BingoGame(FileInput);
         var result = diagnostics.Play(false);
@@ -15,7 +15,7 @@ public class Year2021Day04 : AocPuzzle
         return new PuzzleResult(result, 45031);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var diagnostics = new BingoGame(FileInput);
         var result = diagnostics.Play(true);

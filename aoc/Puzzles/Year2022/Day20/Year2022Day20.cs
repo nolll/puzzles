@@ -12,14 +12,14 @@ public class Year2022Day20 : AocPuzzle
 {
     public override string Name => "Grove Positioning System";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var result = Run(FileInput, 1, 1);
 
         return new PuzzleResult(result, 18257);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var result = Run(FileInput, 811_589_153, 10);
 

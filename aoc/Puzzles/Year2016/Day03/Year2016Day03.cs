@@ -7,14 +7,14 @@ public class Year2016Day03 : AocPuzzle
 {
     public override string Name => "Squares With Three Sides";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var validator = new TriangleValidator();
         var horizontalValidCount = validator.GetHorizontalValidCount(FileInput);
         return new PuzzleResult(horizontalValidCount, 982);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var validator = new TriangleValidator();
         var verticalValidCount = validator.GetVerticalValidCount(FileInput);

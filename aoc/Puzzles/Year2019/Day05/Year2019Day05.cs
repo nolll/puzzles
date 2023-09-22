@@ -10,7 +10,7 @@ public class Year2019Day05 : AocPuzzle
 
     public override string Name => "Sunny with a Chance of Asteroids";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var ci1 = new IntCodeComputer(FileInput, ReadInputPart1, WriteOutput);
         ci1.Start();
@@ -18,7 +18,7 @@ public class Year2019Day05 : AocPuzzle
         return new PuzzleResult(_output, 5_346_030);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var ci2 = new IntCodeComputer(FileInput, ReadInputPart2, WriteOutput);
         ci2.Start();

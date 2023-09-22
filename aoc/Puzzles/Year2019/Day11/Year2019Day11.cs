@@ -10,7 +10,7 @@ public class Year2019Day11 : AocPuzzle
 {
     public override string Name => "Space Police";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var robot1 = new PaintRobot(FileInput);
         var result1 = robot1.Paint(false);
@@ -18,7 +18,7 @@ public class Year2019Day11 : AocPuzzle
         return new PuzzleResult(result1.PaintedPanelCount, 1732);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var robot2 = new PaintRobot(FileInput);
         var result2 = robot2.Paint(true);

@@ -30,14 +30,14 @@ public class Year2021Day24 : AocPuzzle
 
     public override string Name => "Arithmetic Logic Unit";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var result = LargestValidNumber;
 
         return new PuzzleResult(result, 91398299697996);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var result = SmallestValidNumber;
 

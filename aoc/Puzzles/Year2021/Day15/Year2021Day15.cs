@@ -7,7 +7,7 @@ public class Year2021Day15 : AocPuzzle
 {
     public override string Name => "Chiton";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var chitonRisk = new ChitonRisk();
         var result = chitonRisk.FindRiskLevelForSmallCave(FileInput);
@@ -15,7 +15,7 @@ public class Year2021Day15 : AocPuzzle
         return new PuzzleResult(result, 423);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var chitonRisk = new ChitonRisk();
         var result = chitonRisk.FindRiskLevelForLargeCave(FileInput);

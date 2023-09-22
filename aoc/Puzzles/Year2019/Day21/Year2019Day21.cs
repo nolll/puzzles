@@ -7,14 +7,14 @@ public class Year2019Day21 : AocPuzzle
 {
     public override string Name => "Springdroid Adventure";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var walkingDroid = new SpringDroid(FileInput, WalkProgram);
         walkingDroid.Run();
         return new PuzzleResult(walkingDroid.HullDamage, 19_362_822);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var runningDroid = new SpringDroid(FileInput, RunProgram);
         runningDroid.Run();

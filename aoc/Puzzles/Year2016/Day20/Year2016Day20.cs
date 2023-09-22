@@ -7,14 +7,14 @@ public class Year2016Day20 : AocPuzzle
 {
     public override string Name => "Firewall Rules";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var rules = new FirewallRules(FileInput);
         var ip = rules.GetLowestUnblockedIp();
         return new PuzzleResult(ip, 14_975_795);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var rules = new FirewallRules(FileInput);
         var ipCount = rules.GetAllowedIpCount(Upperbound);

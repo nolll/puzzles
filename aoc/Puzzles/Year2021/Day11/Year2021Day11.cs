@@ -7,14 +7,14 @@ public class Year2021Day11 : AocPuzzle
 {
     public override string Name => "Dumbo Octopus";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var flasher = new OctopusFlasher(FileInput);
         var result = flasher.Run(100);
         return new PuzzleResult(result, 1591);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var flasher = new OctopusFlasher(FileInput);
         var result = flasher.Run();

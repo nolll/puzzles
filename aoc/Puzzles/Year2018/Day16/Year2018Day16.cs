@@ -9,7 +9,7 @@ public class Year2018Day16 : AocPuzzle
 {
     public override string Name => "Chronal Classification";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var inputs = FileInput.Split("\r\n\r\n\r\n");
         var input1 = inputs.First();
@@ -19,7 +19,7 @@ public class Year2018Day16 : AocPuzzle
         return new PuzzleResult(count, 567);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var inputs = FileInput.Split("\r\n\r\n\r\n");
         var input1 = inputs.First();

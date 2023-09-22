@@ -7,7 +7,7 @@ public class Year2022Day07 : AocPuzzle
 {
     public override string Name => "No Space Left On Device";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var fileSystem = new FileSystem(FileInput);
         var result = fileSystem.Part1();
@@ -15,7 +15,7 @@ public class Year2022Day07 : AocPuzzle
         return new PuzzleResult(result, 1989474);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var fileSystem = new FileSystem(FileInput);
         var result = fileSystem.Part2();

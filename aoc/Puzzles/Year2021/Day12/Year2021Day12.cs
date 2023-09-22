@@ -7,7 +7,7 @@ public class Year2021Day12 : AocPuzzle
 {
     public override string Name => "Passage Pathing";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var caveSystem = new CaveSystem(FileInput, false);
         var result = caveSystem.CountPaths();
@@ -15,7 +15,7 @@ public class Year2021Day12 : AocPuzzle
         return new PuzzleResult(result, 5254);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var caveSystem = new CaveSystem(FileInput, true);
         var result = caveSystem.CountPaths();

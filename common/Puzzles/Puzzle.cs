@@ -27,4 +27,19 @@ public abstract class Puzzle
     protected virtual string FilePath => GetFilePath(GetType());
     protected abstract string GetFilePath(Type t);
     protected string RootPath => AppDomain.CurrentDomain.BaseDirectory;
+
+    public IEnumerable<string> GetTags()
+    {
+        if (!string.IsNullOrEmpty(Comment))
+            yield return PuzzleTag.Commented;
+
+        if (IsSlow)
+            yield return PuzzleTag.Slow;
+
+        if (NeedsRewrite)
+            yield return PuzzleTag.Rewrite;
+
+        if (IsFunToOptimize)
+            yield return PuzzleTag.Fun;
+    }
 }

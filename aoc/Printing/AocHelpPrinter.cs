@@ -7,7 +7,7 @@ public static class AocHelpPrinter
     public static void Print()
     {
         AnsiConsole.WriteLine("My solutions to Advent of Code.");
-        AnsiConsole.WriteLine("https://github.com/nolll/aoc");
+        AnsiConsole.WriteLine("https://github.com/nolll/puzzles/aoc");
         AnsiConsole.WriteLine();
         AnsiConsole.WriteLine("Usage dotnet run -- [-i [id]] [-y [year]] [-d [day]]");
         AnsiConsole.WriteLine();

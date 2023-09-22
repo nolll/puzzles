@@ -7,7 +7,7 @@ public class Year2015Day25 : AocPuzzle
 {
     public override string Name => "Let It Snow";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var p = GetParams();
         var codeFinder = new WeatherMachineCodeFinder();
@@ -15,7 +15,7 @@ public class Year2015Day25 : AocPuzzle
         return new PuzzleResult(code, 2_650_453);
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
+    protected override PuzzleResult RunPart2() => PuzzleResult.Empty;
 
     private Params GetParams()
     {

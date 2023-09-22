@@ -7,7 +7,7 @@ public class Year2021Day25 : AocPuzzle
 {
     public override string Name => "Sea Cucumber";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var herd = new HerdOfSeaCucumbers(FileInput);
         var result = herd.MoveUntilStop();
@@ -15,5 +15,5 @@ public class Year2021Day25 : AocPuzzle
         return new PuzzleResult(result, 518);
     }
 
-    public override PuzzleResult RunPart2() => PuzzleResult.Empty;
+    protected override PuzzleResult RunPart2() => PuzzleResult.Empty;
 }

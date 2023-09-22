@@ -7,7 +7,7 @@ public class Year2019Day17 : AocPuzzle
 {
     public override string Name => "Set and Forget";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var sc = new ScaffoldingComputer1(FileInput);
         var input = sc.Run();
@@ -17,7 +17,7 @@ public class Year2019Day17 : AocPuzzle
         return new PuzzleResult(result1, 8408);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var sc2 = new ScaffoldingComputer2(FileInput);
         var result2 = sc2.Run();

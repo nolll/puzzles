@@ -7,14 +7,14 @@ public class Year2020Day07 : AocPuzzle
 {
     public override string Name => "Handy Haversacks";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var processor = new LuggageProcessor(FileInput);
         var count1 = processor.NumberOfBagsThatCanContainGoldBags();
         return new PuzzleResult(count1, 272);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var processor = new LuggageProcessor(FileInput);
         var count2 = processor.NumberOfBagsThatAGoldBagContains();

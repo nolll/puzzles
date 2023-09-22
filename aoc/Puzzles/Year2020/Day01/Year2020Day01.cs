@@ -8,7 +8,7 @@ public class Year2020Day01 : AocPuzzle
 {
     public override string Name => "Report Repair";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var sumFinder = new SumFinder(FileInput);
         var numbers1 = sumFinder.FindNumbersThatAddUpTo(Target, 2);
@@ -16,7 +16,7 @@ public class Year2020Day01 : AocPuzzle
         return new PuzzleResult(product, 365_619);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var sumFinder = new SumFinder(FileInput);
         var numbers = sumFinder.FindNumbersThatAddUpTo(Target, 3);

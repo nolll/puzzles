@@ -7,13 +7,13 @@ public class Year2018Day04 : AocPuzzle
 {
     public override string Name => "Repose Record";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var guardSleepPuzzle = new GuardSleepPuzzle(FileInput);
         return new PuzzleResult(guardSleepPuzzle.StrategyOneScore, 87_681);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var guardSleepPuzzle = new GuardSleepPuzzle(FileInput);
         return new PuzzleResult(guardSleepPuzzle.StrategyTwoScore, 136_461);

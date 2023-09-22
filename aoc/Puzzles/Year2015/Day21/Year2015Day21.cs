@@ -8,7 +8,7 @@ public class Year2015Day21 : AocPuzzle
 {
     public override string Name => "RPG Simulator 20XX";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var p = GetParams();
         var simulator = new RpgSimulator();
@@ -16,7 +16,7 @@ public class Year2015Day21 : AocPuzzle
         return new PuzzleResult(leastGoldRequiredToWin, 78);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var p = GetParams();
         var simulator = new RpgSimulator();

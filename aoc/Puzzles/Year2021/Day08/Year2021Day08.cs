@@ -7,14 +7,14 @@ public class Year2021Day08 : AocPuzzle
 {
     public override string Name => "Seven Segment Search";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var decoder = new SevenSegmentDisplayDecoder(FileInput);
         var result = decoder.GetEasyNumbers();
         return new PuzzleResult(result, 278);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var decoder = new SevenSegmentDisplayDecoder(FileInput);
         var result = decoder.GetDecodedSum();

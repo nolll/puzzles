@@ -8,14 +8,14 @@ public class Year2018Day19 : AocPuzzle
 {
     public override string Name => "Go With The Flow";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var computer = new OpComputer();
         var value1 = computer.RunInstructionPointerProgram(FileInput, 0, true, false);
         return new PuzzleResult(value1, 1872);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var computer2 = new OpComputer();
         var value2 = computer2.RunInstructionPointerProgram(FileInput, 1, true, false);

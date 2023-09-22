@@ -9,13 +9,13 @@ public class Year2016Day24 : AocPuzzle
 
     public override string Name => "Air Duct Spelunking";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var shortestPath = Navigator.Run(false);
         return new PuzzleResult(shortestPath, 502);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var shortestPath = Navigator.Run(true);
         return new PuzzleResult(shortestPath, 724);

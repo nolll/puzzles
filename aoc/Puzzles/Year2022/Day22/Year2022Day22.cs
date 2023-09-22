@@ -11,13 +11,13 @@ public class Year2022Day22 : AocPuzzle
 {
     public override string Name => "Monkey Map";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var result = Part1(FileInput);
         return new PuzzleResult(result, 47462);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var result = Part2(FileInput);
         return new PuzzleResult(result, 137045);

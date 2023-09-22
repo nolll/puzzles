@@ -7,14 +7,14 @@ public class Year2016Day17 : AocPuzzle
 {
     public override string Name => "Two Steps Forward";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var maze = new LockedDoorMaze();
         maze.FindPaths(Input);
         return new PuzzleResult(maze.ShortestPath, "RLDRUDRDDR");
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var maze = new LockedDoorMaze();
         maze.FindPaths(Input);

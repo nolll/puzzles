@@ -9,14 +9,14 @@ public class Year2015Day04 : AocPuzzle
 
     public override string Name => "The Ideal Stocking Stuffer";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var coin = AdventCoinMiner.Mine(Input, 5);
         _index = coin;
         return new PuzzleResult(coin, 346_386);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var coin = AdventCoinMiner.Mine(Input, 6, _index);
         return new PuzzleResult(coin, 9_958_218);

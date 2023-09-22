@@ -7,7 +7,7 @@ public class Year2021Day01 : AocPuzzle
 {
     public override string Name => "Sonar Sweep";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var calculator = new DepthMeasurement();
         var result = calculator.GetNumberOfIncreasingMeasurements(FileInput, false);
@@ -15,7 +15,7 @@ public class Year2021Day01 : AocPuzzle
         return new PuzzleResult(result, 1477);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var calculator = new DepthMeasurement();
         var result = calculator.GetNumberOfIncreasingMeasurements(FileInput, true);

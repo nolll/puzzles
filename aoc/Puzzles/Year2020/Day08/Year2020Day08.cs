@@ -7,14 +7,14 @@ public class Year2020Day08 : AocPuzzle
 {
     public override string Name => "Handheld Halting";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var console = new GameConsoleRunner(FileInput);
         var acc = console.RunUntilLoop();
         return new PuzzleResult(acc, 1446);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var console = new GameConsoleRunner(FileInput);
         var acc = console.RunUntilTermination();

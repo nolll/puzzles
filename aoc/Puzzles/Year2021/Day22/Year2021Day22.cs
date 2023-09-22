@@ -7,7 +7,7 @@ public class Year2021Day22 : AocPuzzle
 {
     public override string Name => "Reactor Reboot";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var reactor = new SubmarineReactor();
         var result = reactor.Reboot2(FileInput, 50);
@@ -15,7 +15,7 @@ public class Year2021Day22 : AocPuzzle
         return new PuzzleResult(result, 588200);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var reactor = new SubmarineReactor();
         var result = reactor.Reboot2(FileInput);

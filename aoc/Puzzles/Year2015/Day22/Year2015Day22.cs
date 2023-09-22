@@ -8,7 +8,7 @@ public class Year2015Day22 : AocPuzzle
 {
     public override string Name => "Wizard Simulator 20XX";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var p = GetParams();
         var simulator = new WizardRpgSimulator(WizardRpgGameMode.Easy);
@@ -16,7 +16,7 @@ public class Year2015Day22 : AocPuzzle
         return new PuzzleResult(leastManaRequiredToWinEasy, 1824);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var p = GetParams();
         var simulator = new WizardRpgSimulator(WizardRpgGameMode.Hard);

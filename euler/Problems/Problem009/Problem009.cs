@@ -6,7 +6,7 @@ namespace Euler.Problems.Problem009;
 public class Problem009 : EulerPuzzle
 {
     public override string Name => "Special Pythagorean triplet";
-        
+
     public override PuzzleResult Run()
     {
         var product = Run(1000);

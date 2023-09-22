@@ -6,19 +6,25 @@ public class EulerPuzzleFactory : PuzzleFactory
 {
     public override List<PuzzleWrapper> CreatePuzzles() =>
         GetConcreteSubclassesOf<EulerPuzzle>()
-            .Select(CreateProblem)
+            .Select(CreatePuzzle)
             .OrderBy(o => o.Id)
             .ToList();
 
-    private static PuzzleWrapper CreateProblem(Type t)
+    private static PuzzleWrapper CreatePuzzle(Type t)
     {
         var id = EulerPuzzleParser.GetProblemId(t).ToString();
-        if (Activator.CreateInstance(t) is not EulerPuzzle problem)
+        if (Activator.CreateInstance(t) is not EulerPuzzle puzzle)
             throw new Exception($"Could not create puzzle {id}");
 
+        return CreatePuzzle(id, puzzle);
+    }
+
+    private static PuzzleWrapper CreatePuzzle(string id, EulerPuzzle puzzle)
+    {
         var title = $"Puzzle {id}";
         var listId = id.PadLeft(3, '0');
         var listTitle = $"Puzzle {listId}";
-        return new PuzzleWrapper(id, title, listTitle, problem);
+        var tags = puzzle.GetTags().ToList();
+        return new PuzzleWrapper(id, title, listTitle, tags, puzzle);
     }
 }

@@ -7,14 +7,14 @@ public class Year2020Day12 : AocPuzzle
 {
     public override string Name => "Rain Risk";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var system = new SimpleFerryNavigationSystem(FileInput);
         system.Run();
         return new PuzzleResult(system.DistanceTravelled, 1424);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var system = new WaypointFerryNavigationSystem(FileInput);
         system.Run();

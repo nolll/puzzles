@@ -7,7 +7,7 @@ public class Year2019Day14 : AocPuzzle
 {
     public override string Name => "Space Stoichiometry";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var reactor = new NanoReactor(FileInput);
         reactor.Run();
@@ -16,7 +16,7 @@ public class Year2019Day14 : AocPuzzle
         return new PuzzleResult(oreForOneFuel, 469_536);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var reactor = new NanoReactor(FileInput);
         reactor.Run();

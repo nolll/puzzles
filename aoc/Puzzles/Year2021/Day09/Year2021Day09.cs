@@ -7,14 +7,14 @@ public class Year2021Day09 : AocPuzzle
 {
     public override string Name => "Smoke Basin";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var heightMap = new HeightMap();
         var result = heightMap.FindLowPointSum(FileInput);
         return new PuzzleResult(result, 591);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var heightMap = new HeightMap();
         var result = heightMap.FindBasinSizes(FileInput);

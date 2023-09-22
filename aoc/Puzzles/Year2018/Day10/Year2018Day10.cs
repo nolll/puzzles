@@ -7,13 +7,13 @@ public class Year2018Day10 : AocPuzzle
 {
     public override string Name => "The Stars Align";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var finder = new StarMessageFinder(FileInput, 9);
         return new PuzzleResult(finder.Message, "HRPHBRKG");
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var finder = new StarMessageFinder(FileInput, 9);
         return new PuzzleResult(finder.IterationCount, 10355);

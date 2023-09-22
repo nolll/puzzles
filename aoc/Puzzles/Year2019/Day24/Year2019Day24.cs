@@ -7,7 +7,7 @@ public class Year2019Day24 : AocPuzzle
 {
     public override string Name => "Planet of Discord";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var simulator = new BugLifeSimulator(FileInput);
         simulator.RunUntilRepeat();
@@ -15,7 +15,7 @@ public class Year2019Day24 : AocPuzzle
         return new PuzzleResult(simulator.BiodiversityRating, 12_129_040);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var recursiveSimulator = new RecursiveBugLifeSimulator(FileInput);
         recursiveSimulator.Run(200);

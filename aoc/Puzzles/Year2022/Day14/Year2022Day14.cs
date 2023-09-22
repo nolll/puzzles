@@ -7,7 +7,7 @@ public class Year2022Day14 : AocPuzzle
 {
     public override string Name => "Regolith Reservoir";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var fallingSand = new FallingSand();
         var result = fallingSand.Part1(FileInput);
@@ -15,7 +15,7 @@ public class Year2022Day14 : AocPuzzle
         return new PuzzleResult(result, 745);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var fallingSand = new FallingSand();
         var result = fallingSand.Part2(FileInput);

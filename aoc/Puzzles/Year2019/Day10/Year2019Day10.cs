@@ -7,7 +7,7 @@ public class Year2019Day10 : AocPuzzle
 {
     public override string Name => "Monitoring Station";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var detector = new AsteroidDetector();
         var detectorResult = detector.Detect(FileInput);
@@ -15,7 +15,7 @@ public class Year2019Day10 : AocPuzzle
         return new PuzzleResult(detectorResult.RayCount, 340);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var vaporizer = new AsteroidVaporizer();
         var vaporizeResult = vaporizer.Vaporize(FileInput);

@@ -9,7 +9,7 @@ public class Year2019Day15 : AocPuzzle
     private Matrix<char> _map;
     public override string Name => "Oxygen System";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var droid = new RepairDroid(FileInput);
         var (result, map) = droid.Run();
@@ -18,7 +18,7 @@ public class Year2019Day15 : AocPuzzle
         return new PuzzleResult(result, 424);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var filler = new OxygenFiller(_map);
         var result = filler.Fill();

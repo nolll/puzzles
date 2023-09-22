@@ -7,7 +7,7 @@ public class Year2019Day13 : AocPuzzle
 {
     public override string Name => "Care Package";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var arcade = new Arcade(FileInput);
         arcade.Play();
@@ -15,7 +15,7 @@ public class Year2019Day13 : AocPuzzle
         return new PuzzleResult(arcade.NumberOfBlockTiles, 226);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var arcade = new Arcade(FileInput);
         arcade.Play(2);

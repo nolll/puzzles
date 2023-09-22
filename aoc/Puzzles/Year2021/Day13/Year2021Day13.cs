@@ -8,7 +8,7 @@ public class Year2021Day13 : AocPuzzle
 {
     public override string Name => "Transparent Origami";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var paper = new TransparentPaper(FileInput);
         var result = paper.DotCountAfterFirstFold();
@@ -16,7 +16,7 @@ public class Year2021Day13 : AocPuzzle
         return new PuzzleResult(result, 695);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var paper = new TransparentPaper(FileInput);
         var result = paper.MessageAfterFold();

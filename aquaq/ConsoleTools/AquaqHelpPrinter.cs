@@ -2,12 +2,12 @@
 
 namespace AquaQ.ConsoleTools;
 
-public static class HelpPrinter
+public static class AquaqHelpPrinter
 {
     public static void Print()
     {
-        AnsiConsole.WriteLine("My solutions to Project Euler.");
-        AnsiConsole.WriteLine("https://github.com/nolll/euler");
+        AnsiConsole.WriteLine("My solutions to AquaQ Challenge.");
+        AnsiConsole.WriteLine("https://github.com/nolll/puzzles/aquaq");
         AnsiConsole.WriteLine();
         AnsiConsole.WriteLine("Usage dotnet run -- [-c [challenge]]");
         AnsiConsole.WriteLine("My AquaQ Challenge solutions.");

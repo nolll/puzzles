@@ -7,14 +7,14 @@ public class Year2019Day06 : AocPuzzle
 {
     public override string Name => "Universal Orbit Map";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var calculator = new OrbitCalculator(FileInput);
         var orbitCount = calculator.GetOrbitCount();
         return new PuzzleResult(orbitCount, 278_744);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var calculator = new OrbitCalculator(FileInput);
         var distance = calculator.GetSantaDistance();

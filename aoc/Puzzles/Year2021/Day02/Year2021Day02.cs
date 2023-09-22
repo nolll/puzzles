@@ -7,7 +7,7 @@ public class Year2021Day02 : AocPuzzle
 {
     public override string Name => "Dive!";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var control = new SubmarineControl(FileInput, false);
         control.Move();
@@ -15,7 +15,7 @@ public class Year2021Day02 : AocPuzzle
         return new PuzzleResult(control.Result, 1580000);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var control = new SubmarineControl(FileInput, true);
         control.Move();

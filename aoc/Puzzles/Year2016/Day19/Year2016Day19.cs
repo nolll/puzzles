@@ -7,14 +7,14 @@ public class Year2016Day19 : AocPuzzle
 {
     public override string Name => "An Elephant Named Joseph";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var party = new WhiteElephantParty(Input);
         var winner = party.StealFromNextElf();
         return new PuzzleResult(winner, 1_808_357);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var party = new WhiteElephantParty(Input);
         var winner = party.StealFromElfAcrossCircle();

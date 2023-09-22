@@ -8,7 +8,7 @@ public class Year2019Day09 : AocPuzzle
 {
     public override string Name => "Sensor Boost";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var boostTester = new BoostRunner(FileInput, 1);
         var testerResult = boostTester.Run();
@@ -16,7 +16,7 @@ public class Year2019Day09 : AocPuzzle
         return new PuzzleResult(testerResult.LastOutput, 3_380_552_333);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var boostRunner = new BoostRunner(FileInput, 2);
         var runnerResult = boostRunner.Run();

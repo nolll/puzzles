@@ -7,14 +7,14 @@ public class Year2016Day16 : AocPuzzle
 {
     public override string Name => "Dragon Checksum";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var dragonCurve = new DragonCurve();
         var checksum = dragonCurve.Run(Input, 272);
         return new PuzzleResult(checksum, "10010010110011010");
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var dragonCurve = new DragonCurve();
         var checksum = dragonCurve.Run(Input, 35651584);

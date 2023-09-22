@@ -9,14 +9,14 @@ public class Year2021Day19 : AocPuzzle
 
     public override string Name => "Beacon Scanner";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var result = GetResult();
 
         return new PuzzleResult(result.BeaconCount, 353);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var result = GetResult();
 

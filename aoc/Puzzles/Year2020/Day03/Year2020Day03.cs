@@ -8,14 +8,14 @@ public class Year2020Day03 : AocPuzzle
 {
     public override string Name => "Toboggan Trajectory";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var navigator = new TreeNavigator(FileInput);
         var treeCount = navigator.GetSingleTreeCount();
         return new PuzzleResult(treeCount, 198);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var navigator = new TreeNavigator(FileInput);
         var treeCounts = navigator.GetAllTreeCounts().ToList();

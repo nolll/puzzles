@@ -7,7 +7,7 @@ public class Year2021Day18 : AocPuzzle
 {
     public override string Name => "Snailfish";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var math = new SnailfishMath();
         var result = math.Sum(FileInput);
@@ -15,7 +15,7 @@ public class Year2021Day18 : AocPuzzle
         return new PuzzleResult(result.Magnitude, 4417);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var math = new SnailfishMath();
         var result = math.LargestMagnitude(FileInput);

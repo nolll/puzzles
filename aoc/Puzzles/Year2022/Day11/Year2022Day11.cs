@@ -7,7 +7,7 @@ public class Year2022Day11 : AocPuzzle
 {
     public override string Name => "Monkey in the Middle";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var monkeyBusiness = new MonkeyBusiness();
         var result = monkeyBusiness.Part1(FileInput);
@@ -15,7 +15,7 @@ public class Year2022Day11 : AocPuzzle
         return new PuzzleResult(result, 56350);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var monkeyBusiness = new MonkeyBusiness();
         var result = monkeyBusiness.Part2(FileInput);

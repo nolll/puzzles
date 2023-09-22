@@ -10,14 +10,14 @@ public class Year2018Day21 : AocPuzzle
     public override string Comment => "OpComputer";
     public override bool IsSlow => true; // 143s for part 2
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var computer = new OpComputer();
         var result = computer.RunSpecialForDay21(FileInput, 0, true);
         return new PuzzleResult(result, 103_548);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var computer = new OpComputer();
         var result = computer.RunSpecialForDay21(FileInput, 0, false);

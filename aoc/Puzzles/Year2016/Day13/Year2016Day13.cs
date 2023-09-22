@@ -7,14 +7,14 @@ public class Year2016Day13 : AocPuzzle
 {
     public override string Name => "A Maze of Twisty Little Cubicles";
 
-    public override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1()
     {
         var maze = new Maze(50, 50, Input);
         var stepCount = maze.StepCountToTarget(31, 39);
         return new PuzzleResult(stepCount, 82);
     }
 
-    public override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2()
     {
         var maze = new Maze(75, 75, Input);
         var locationCount = maze.LocationCountAfter(50);

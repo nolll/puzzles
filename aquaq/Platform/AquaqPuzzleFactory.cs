@@ -1,26 +1,6 @@
-﻿using System.Reflection;
-using AquaQ.Platform;
-using common.Puzzles;
+﻿using common.Puzzles;
 
-namespace AquaQ.Puzzles;
-
-public class AquaqPuzzleRepository
-{
-    private readonly List<PuzzleWrapper> _allProblems;
-    private readonly PuzzleFactory _puzzleFactory = new AquaqPuzzleFactory();
-
-    public AquaqPuzzleRepository()
-    {
-        _allProblems = _puzzleFactory.CreatePuzzles();
-    }
-
-    public PuzzleWrapper? GetChallenge(int? problemId) =>
-        problemId != null
-            ? _allProblems.FirstOrDefault(o => o.Id == problemId.Value.ToString())
-            : _allProblems.LastOrDefault();
-
-    public IList<PuzzleWrapper> GetAll() => _allProblems;
-}
+namespace AquaQ.Platform;
 
 public class AquaqPuzzleFactory : PuzzleFactory
 {

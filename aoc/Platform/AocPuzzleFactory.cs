@@ -20,10 +20,10 @@ public class AocPuzzleFactory : PuzzleFactory
         if (Activator.CreateInstance(t) is not AocPuzzle puzzleDay)
             throw new Exception($"Could not create Puzzle for day {day} {year} ");
 
-        var id = $"{year}{day}";
-        var dayStr = day.ToString().PadLeft(2, '0');
+        var paddedDay = day.ToString().PadLeft(2, '0');
+        var id = $"{year}{paddedDay}";
         var title = $"Day {day} {year}";
-        var listTitle = $"Day {dayStr} {year}";
+        var listTitle = $"Day {paddedDay} {year}";
         return new PuzzleWrapper(id, title, listTitle, puzzleDay);
     }
     

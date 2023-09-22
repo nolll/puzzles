@@ -12,8 +12,7 @@ public class Program
 {
     private const int PuzzleTimeout = 10;
 
-    private const int DebugYear = 2018;
-    private const int DebugDay = 4;
+    private const string DebugId = "201804";
 
     private static readonly PuzzleRunner Runner = new(PuzzleTimeout);
     private static readonly AocPuzzleRepository AocPuzzleRepository = new();
@@ -30,17 +29,17 @@ public class Program
 
     private static void RunPuzzles(Parameters parameters)
     {
-        if (parameters.Year != null && parameters.Day != null)
-            RunSingle(parameters);
+        if (parameters.Id != null)
+            RunSingle(parameters.Id);
         else if (parameters.Year != null)
             RunEvent(parameters);
         else
             RunAll(parameters);
     }
 
-    private static void RunSingle(Parameters parameters)
+    private static void RunSingle(string id)
     {
-        var foundDay = AocPuzzleRepository.GetDay(parameters.Year, parameters.Day);
+        var foundDay = AocPuzzleRepository.GetPuzzle(id);
         if (foundDay == null)
             throw new Exception("The specified day could not be found.");
             
@@ -64,12 +63,12 @@ public class Program
         Runner.Run(filteredDays);
     }
 
-    private static void ShowHelp() => SpectreHelpPrinter.Print();
+    private static void ShowHelp() => AocHelpPrinter.Print();
 
     private static Parameters ParseParameters(string[] args)
     {
 #if SINGLE
-        return new Parameters(day: DebugDay, year: DebugYear);
+        return new Parameters(id: DebugId);
 #else
         return Parameters.Parse(args);
 #endif

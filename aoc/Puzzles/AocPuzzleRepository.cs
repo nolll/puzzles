@@ -15,10 +15,8 @@ public class AocPuzzleRepository
         _allDays = _puzzleFactory.CreatePuzzles();
     }
 
-    public PuzzleWrapper GetDay(int? selectedYear, int? selectedDay) =>
-        selectedYear != null && selectedDay != null
-            ? _allDays.First(o => o.Id == $"{selectedYear.Value}{selectedDay.Value}")
-            : _allDays.Last();
+    public PuzzleWrapper? GetPuzzle(string id) =>
+        _allDays.FirstOrDefault(o => o.Id == id);
 
     public List<PuzzleWrapper> GetEventDays(int? selectedYear) =>
         selectedYear != null 

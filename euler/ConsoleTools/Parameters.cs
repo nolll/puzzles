@@ -1,13 +1,15 @@
-﻿namespace Euler.ConsoleTools;
+﻿using common.Parameters;
+
+namespace Euler.ConsoleTools;
 
 public class Parameters
 {
-    public int? ProblemId { get; }
+    public string? ProblemId { get; }
     public bool RunSlowOnly { get; }
     public bool RunCommentedOnly { get; }
     public bool ShowHelp { get; }
 
-    public Parameters(int? problemId = null, bool runSlowOnly = false, bool runCommentedOnly = false, bool showHelp = false)
+    public Parameters(string? problemId = null, bool runSlowOnly = false, bool runCommentedOnly = false, bool showHelp = false)
     {
         ProblemId = problemId;
         RunSlowOnly = runSlowOnly;
@@ -18,7 +20,7 @@ public class Parameters
     public static Parameters Parse(IEnumerable<string> args)
     {
         var parser = new ParameterParser(args);
-        var problem = parser.GetIntValue("-p", "--problem");
+        var problem = parser.GetValue("-p", "--problem");
         var runSlow = parser.GetBoolValue("-s", "--slow") ?? false;
         var runCommented = parser.GetBoolValue("-c", "--comment") ?? false;
         var showHelp = parser.GetBoolValue("-h", "--help") ?? false;

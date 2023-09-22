@@ -1,4 +1,4 @@
-﻿namespace Euler.ConsoleTools;
+﻿namespace common.Parameters;
 
 public class ParameterParser
 {
@@ -36,7 +36,7 @@ public class ParameterParser
         return target;
     }
 
-    private string? GetValue(params string[] keys)
+    public string? GetValue(params string[] keys)
     {
         foreach (var key in keys)
         {

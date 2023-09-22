@@ -8,7 +8,7 @@ namespace AquaQ;
 public class Program
 {
     private const int ChallengeTimeout = 10;
-    private const int DebugChallenge = 4;
+    private const string DebugChallenge = "4";
 
     private static readonly PuzzleRunner Runner = new(ChallengeTimeout);
     private static readonly AquaqPuzzleRepository AquaqPuzzleRepository = new();
@@ -33,7 +33,7 @@ public class Program
 
     private static void RunSingle(Parameters parameters)
     {
-        var challenge = AquaqPuzzleRepository.GetChallenge(parameters.ChallengeId);
+        var challenge = AquaqPuzzleRepository.GetPuzzle(parameters.ChallengeId);
 
         if (challenge == null)
             throw new Exception($"The specified challenge could not be found ({parameters.ChallengeId})");
@@ -43,7 +43,7 @@ public class Program
     
     private static void RunAll(Parameters parameters)
     {
-        var allChallenges = AquaqPuzzleRepository.GetAll();
+        var allChallenges = AquaqPuzzleRepository.GetPuzzles();
         var filteredChallenges = new ChallengeFilter(parameters).Filter(allChallenges);
         Runner.Run(filteredChallenges);
     }

@@ -9,20 +9,20 @@ public class ParameterTests
     {
         var result = Parameters.Parse("");
 
-        Assert.That(result.Day, Is.Null);
+        Assert.That(result.Id, Is.Null);
         Assert.That(result.Year, Is.Null);
         Assert.That(result.RunSlowOnly, Is.False);
         Assert.That(result.RunCommentedOnly, Is.False);
         Assert.That(result.ShowHelp, Is.False);
     }
 
-    [TestCase("--day 1")]
-    [TestCase("-d 1")]
+    [TestCase("--id 1")]
+    [TestCase("-i 1")]
     public void ParseDay(string input)
     {
         var result = Parameters.Parse(input);
 
-        Assert.That(result.Day, Is.EqualTo(1));
+        Assert.That(result.Id, Is.EqualTo(1));
     }
 
     [TestCase("--year 1")]

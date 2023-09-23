@@ -7,7 +7,7 @@ using common.Runners;
 
 namespace Aoc;
 
-public class Program
+public class AocProgram
 {
     private const int PuzzleTimeout = 10;
     private const string DebugPuzzle = "201804";

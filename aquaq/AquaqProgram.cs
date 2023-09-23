@@ -6,7 +6,7 @@ using common.Runners;
 
 namespace AquaQ;
 
-public class Program
+public class AquaqProgram
 {
     private const int PuzzleTimeout = 10;
     private const string DebugPuzzle = "4";

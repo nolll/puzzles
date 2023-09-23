@@ -6,7 +6,7 @@ using Euler.Platform;
 
 namespace Euler;
 
-public class Program
+public class EulerProgram
 {
     private const int ProblemTimeout = 10;
     private const string DebugPuzzle = "42";

@@ -21,10 +21,6 @@ public class AquaqPuzzleFactory : PuzzleFactory
 
     private static PuzzleWrapper CreatePuzzle(string id, AquaqPuzzle puzzle)
     {
-        var title = $"Puzzle {id}";
-        var listId = id.PadLeft(2, '0');
-        var listTitle = $"Puzzle {listId}";
-        var tags = puzzle.GetTags().ToList();
-        return new PuzzleWrapper(id, title, listTitle, tags, puzzle);
+        return new PuzzleWrapper(puzzle.Id, puzzle.Title, puzzle.ListTitle, puzzle.GetTags().ToList(), puzzle);
     }
 }

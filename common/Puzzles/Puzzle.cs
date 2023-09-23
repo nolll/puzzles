@@ -4,6 +4,9 @@ namespace Common.Puzzles;
 
 public abstract class Puzzle
 {
+    public abstract string Id { get; }
+    public abstract string Title { get; }
+    public abstract string ListTitle { get; }
     public abstract string Name { get; }
     public virtual string? Comment => null;
     public virtual bool IsSlow => false;
@@ -31,7 +34,7 @@ public abstract class Puzzle
 
     protected abstract string GetInputFilePath(Type t);
 
-    public IEnumerable<string> GetTags()
+    public virtual IEnumerable<string> GetTags()
     {
         if (!string.IsNullOrEmpty(Comment))
             yield return PuzzleTag.Commented;

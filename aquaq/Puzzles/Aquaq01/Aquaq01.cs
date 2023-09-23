@@ -10,7 +10,7 @@ public class Aquaq01 : AquaqPuzzle
 
     private const string Input = "do you think that maybe like, 1 in 10 people could be actually robots?";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = GetHexString(Input);
 

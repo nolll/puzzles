@@ -8,7 +8,7 @@ public class Euler041 : EulerPuzzle
 {
     public override string Name => "Pandigital Prime";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var largest = 0L;
         for (var x = 9; x >= 1; x--)

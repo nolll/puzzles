@@ -6,7 +6,7 @@ public class Euler034 : EulerPuzzle
 {
     public override string Name => "Digit Factorials";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var total = 0;
 

@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Common.Puzzles;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
-namespace Aoc.ConsoleTools;
+namespace Common.Puzzles;
 
-public class DayFilterTests
+public class PuzzleFilterTests
 {
     [Test]
     public void FilterSlow()

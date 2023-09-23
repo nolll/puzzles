@@ -6,7 +6,7 @@ public class Euler004 : EulerPuzzle
 {
     public override string Name => "Largest palindrome product";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var largestPalindrome = Run(100, 999);
 

@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Common.CoordinateSystems.CoordinateSystem3D;
 
-public class Matrix3D<T> : BaseMatrix
+public class Matrix3D<T>
 {
     private readonly T _defaultValue;
     private readonly IList<IList<IList<T>>> _matrix;
@@ -175,11 +175,11 @@ public class Matrix3D<T> : BaseMatrix
     {
         get
         {
-            foreach (var dz in AdjacentDeltas)
+            foreach (var dz in MatrixConstants.AdjacentDeltas)
             {
-                foreach (var dy in AdjacentDeltas)
+                foreach (var dy in MatrixConstants.AdjacentDeltas)
                 {
-                    foreach (var dx in AdjacentDeltas)
+                    foreach (var dx in MatrixConstants.AdjacentDeltas)
                     {
                         var coord = new Matrix3DAddress(Address.X + dx, Address.Y - dy, Address.Z - dz);
                         if (!coord.Equals(Address))

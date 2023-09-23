@@ -8,7 +8,7 @@ public class Euler013 : EulerPuzzle
 {
     public override string Name => "Large sum";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(Input);
         return new PuzzleResult(result, "5537376230");

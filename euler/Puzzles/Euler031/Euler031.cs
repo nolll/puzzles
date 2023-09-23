@@ -6,7 +6,7 @@ public class Euler031 : EulerPuzzle
 {
     public override string Name => "Coin sums";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var denominations = new List<int> { 1, 2, 5, 10, 20, 50, 100, 200 };
         const int targetSum = 200;

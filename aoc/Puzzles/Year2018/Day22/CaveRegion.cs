@@ -1,6 +1,6 @@
 namespace Aoc.Puzzles.Year2018.Day22;
 
-public class CaveRegion
+public struct CaveRegion
 {
     public CaveRegionType Type { get; set; }
     public long GeologicIndex { get; set; }

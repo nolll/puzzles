@@ -6,7 +6,7 @@ public class Euler006 : EulerPuzzle
 {
     public override string Name => "Sum square difference";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var diff = Run(100);
 

@@ -7,7 +7,7 @@ public class Euler025 : EulerPuzzle
 {
     public override string Name => "1000-digit Fibonacci number";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(1000);
         return new PuzzleResult(result, 4782);

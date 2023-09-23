@@ -7,7 +7,7 @@ public class Euler029 : EulerPuzzle
 {
     public override string Name => "Distinct powers";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(100);
 

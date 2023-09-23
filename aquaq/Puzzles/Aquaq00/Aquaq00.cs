@@ -6,7 +6,7 @@ public class Aquaq00 : AquaqPuzzle
 {
     public override string Name => "What's a numpad?";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var keyPresses = InputFile
             .Split(Environment.NewLine)

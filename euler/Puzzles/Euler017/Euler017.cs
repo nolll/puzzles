@@ -7,7 +7,7 @@ public class Euler017 : EulerPuzzle
 {
     public override string Name => "Number letter counts";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(1000);
         return new PuzzleResult(result, 21124);

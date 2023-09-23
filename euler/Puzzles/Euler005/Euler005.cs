@@ -6,7 +6,7 @@ public class Euler005 : EulerPuzzle
 {
     public override string Name => "Smallest multiple";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var smallestMultiple = Run(20);
         return new PuzzleResult(smallestMultiple, 232792560);

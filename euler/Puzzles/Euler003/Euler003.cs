@@ -7,7 +7,7 @@ public class Euler003 : EulerPuzzle
 {
     public override string Name => "Largest prime factor";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var largestPrime = Run(600_851_475_143);
             

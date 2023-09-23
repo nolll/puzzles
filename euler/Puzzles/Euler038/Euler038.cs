@@ -9,7 +9,7 @@ public class Euler038 : EulerPuzzle
 
     public override string Name => "Pandigital Multiples";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var products = new List<long>();
         var n = 1;

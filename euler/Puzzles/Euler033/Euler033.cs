@@ -6,7 +6,7 @@ public class Euler033 : EulerPuzzle
 {
     public override string Name => "Digit Cancelling Fraction";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var fractions = new List<Fraction>();
 

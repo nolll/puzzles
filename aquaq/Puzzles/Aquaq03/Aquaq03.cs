@@ -6,7 +6,7 @@ public class Aquaq03 : AquaqPuzzle
 {
     public override string Name => "Short walks";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var walker = new Walker();
         var result = walker.Walk(InputFile);

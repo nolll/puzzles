@@ -6,7 +6,7 @@ public class Euler019 : EulerPuzzle
 {
     public override string Name => "Counting Sundays";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var startDate = DateTime.Parse("1901-01-01");
         var endDate = DateTime.Parse("2000-12-31");

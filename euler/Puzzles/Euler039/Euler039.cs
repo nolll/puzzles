@@ -6,7 +6,7 @@ public class Euler039 : EulerPuzzle
 {
     public override string Name => "Integer Right Triangle";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var solutions = FindSolutions(1000);
         

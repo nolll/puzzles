@@ -1,6 +1,6 @@
 ﻿namespace Aoc.Puzzles.Year2016.Day22;
 
-public class StorageNode
+public struct StorageNode
 {
     public int Size { get; }
     public int Used { get; }

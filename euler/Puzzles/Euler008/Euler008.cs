@@ -6,7 +6,7 @@ public class Euler008 : EulerPuzzle
 {
     public override string Name => "Largest product in a series";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var largestProduct = Run(13);
         return new PuzzleResult(largestProduct, 23514624000);

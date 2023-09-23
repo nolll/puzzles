@@ -8,7 +8,7 @@ public class Euler035 : EulerPuzzle
 {
     public override string Name => "Circular Primes";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var count = 0;
         for (var i = 0; i < 1_000_000; i++)

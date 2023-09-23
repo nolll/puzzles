@@ -9,7 +9,7 @@ public class Euler023 : EulerPuzzle
 
     public override string Name => "Non-abundant sums";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var abundantNumbers = FindAbundantNumbers(UpperLimit).ToList();
         var sumsOfAbundantNumbers = GetSums(abundantNumbers);

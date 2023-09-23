@@ -6,7 +6,7 @@ public class Euler014 : EulerPuzzle
 {
     public override string Name => "Longest Collatz sequence";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(1_000_000);
         return new PuzzleResult(result, 837799);

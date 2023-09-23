@@ -6,7 +6,7 @@ public class Euler015 : EulerPuzzle
 {
     public override string Name => "Lattice paths";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(20);
         return new PuzzleResult(result, 137846528820);

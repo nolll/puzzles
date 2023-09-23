@@ -6,7 +6,7 @@ public class Euler001 : EulerPuzzle
 {
     public override string Name => "Multiples of 3 or 5";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var sum = Run(1000);
         return new PuzzleResult(sum, 233168);

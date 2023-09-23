@@ -7,7 +7,7 @@ public class Euler010 : EulerPuzzle
 {
     public override string Name => "Summation of primes";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(2_000_000);
         return new PuzzleResult(result, 142913828922);

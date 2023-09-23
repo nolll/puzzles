@@ -6,7 +6,7 @@ public class Aquaq02 : AquaqPuzzle
 {
     public override string Name => "One is all you need";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var input = InputFile.Split(' ').Select(int.Parse);
         var uniqueNumbers = GetUniqueNumbers(input);

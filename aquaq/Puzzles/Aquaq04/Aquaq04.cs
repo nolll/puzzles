@@ -9,7 +9,7 @@ public class Aquaq04 : AquaqPuzzle
 
     private const int Input = 987820;
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var sum = FindCoPrimesFor(Input).Sum();
         return new PuzzleResult(sum, 195153719200);

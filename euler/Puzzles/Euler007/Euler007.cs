@@ -7,7 +7,7 @@ public class Euler007 : EulerPuzzle
 {
     public override string Name => "10001st prime";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var nthPrime = Run(10001);
 

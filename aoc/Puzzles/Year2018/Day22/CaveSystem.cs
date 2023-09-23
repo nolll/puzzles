@@ -48,7 +48,7 @@ public class CaveSystem
             for (var x = 0; x < width; x++)
             {
                 var address = new MatrixAddress(x, y);
-                var region = _cave.ReadValueAt(address) ?? new CaveRegion();
+                var region = _cave.ReadValueAt(address);
                 region.GeologicIndex = GetGeologicIndex(address);
                 region.ErosionLevel = GetErosionLevel(region.GeologicIndex);
                 region.RiskLevel = GetRiskLevel(region.ErosionLevel);

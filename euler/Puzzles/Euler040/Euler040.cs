@@ -11,7 +11,7 @@ public class Euler040 : EulerPuzzle
 
     public override string Name => "Champernowne's Constant";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var sb = new StringBuilder();
         var i = Initial;

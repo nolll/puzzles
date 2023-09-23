@@ -7,7 +7,7 @@ public class Euler016 : EulerPuzzle
 {
     public override string Name => "Power digit sum";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(1000);
         return new PuzzleResult(result, 1366);

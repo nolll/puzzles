@@ -7,7 +7,7 @@ public class Euler030 : EulerPuzzle
 {
     public override string Name => "Digit fifth powers";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(5);
 

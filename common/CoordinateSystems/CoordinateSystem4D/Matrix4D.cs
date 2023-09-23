@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Common.CoordinateSystems.CoordinateSystem4D;
 
-public class Matrix4D<T> : BaseMatrix
+public class Matrix4D<T>
 {
     private readonly T _defaultValue;
     private readonly IList<IList<IList<IList<T>>>> _matrix;
@@ -181,13 +181,13 @@ public class Matrix4D<T> : BaseMatrix
     {
         get
         {
-            foreach (var dw in AdjacentDeltas)
+            foreach (var dw in MatrixConstants.AdjacentDeltas)
             {
-                foreach (var dz in AdjacentDeltas)
+                foreach (var dz in MatrixConstants.AdjacentDeltas)
                 {
-                    foreach (var dy in AdjacentDeltas)
+                    foreach (var dy in MatrixConstants.AdjacentDeltas)
                     {
-                        foreach (var dx in AdjacentDeltas)
+                        foreach (var dx in MatrixConstants.AdjacentDeltas)
                         {
                             var coord = new Matrix4DAddress(Address.X + dx, Address.Y + dy, Address.Z + dz, Address.W + dw);
                             if(!coord.Equals(Address))

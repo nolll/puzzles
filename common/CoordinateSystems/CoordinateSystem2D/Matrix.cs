@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Common.CoordinateSystems.CoordinateSystem2D;
 
-public class Matrix<T> : BaseMatrix
+public class Matrix<T> where T : struct
 {
     private readonly T _defaultValue;
     private readonly IDictionary<MatrixAddress, T> _matrix;
@@ -131,9 +131,9 @@ public class Matrix<T> : BaseMatrix
 
     private IEnumerable<MatrixAddress> AllPossibleAdjacentCoordsTo(MatrixAddress address)
     {
-        foreach (var dy in AdjacentDeltas)
+        foreach (var dy in MatrixConstants.AdjacentDeltas)
         {
-            foreach (var dx in AdjacentDeltas)
+            foreach (var dx in MatrixConstants.AdjacentDeltas)
             {
                 var coord = new MatrixAddress(address.X + dx, address.Y + dy);
                 if (!coord.Equals(address))

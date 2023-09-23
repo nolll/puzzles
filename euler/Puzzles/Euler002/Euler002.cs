@@ -6,7 +6,7 @@ public class Euler002 : EulerPuzzle
 {
     public override string Name => "Even Fibonacci numbers";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var sum = Run(4_000_000);
         return new PuzzleResult(sum, 4613732);

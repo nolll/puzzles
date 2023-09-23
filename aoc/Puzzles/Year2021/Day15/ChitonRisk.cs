@@ -134,7 +134,7 @@ public class ChitonRisk
         return path;
     }
 
-    private IList<MatrixAddress> GetAdjacentCoords<T>(Matrix<T> matrix, MatrixAddress address)
+    private IList<MatrixAddress> GetAdjacentCoords<T>(Matrix<T> matrix, MatrixAddress address) where T : struct
     {
         if (_neighborCache.TryGetValue(address, out var coords))
             return coords;

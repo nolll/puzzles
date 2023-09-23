@@ -7,7 +7,7 @@ public class Euler028 : EulerPuzzle
 {
     public override string Name => "Number spiral diagonals";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(1001);
 

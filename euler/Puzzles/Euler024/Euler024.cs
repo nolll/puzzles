@@ -11,7 +11,7 @@ public class Euler024 : EulerPuzzle
     public override bool IsSlow => true;
     public override bool NeedsRewrite => true;
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var numbers = Enumerable.Range(0, 10).ToList();
         var permutations = PermutationGenerator.GetPermutations(numbers);

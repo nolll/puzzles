@@ -7,7 +7,7 @@ public class Euler018 : EulerPuzzle
 {
     public override string Name => "Maximum path sum I";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(Triangle);
         return new PuzzleResult(result, 1074);

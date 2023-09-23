@@ -13,7 +13,7 @@ public class Euler027 : EulerPuzzle
         _primeCache = new Dictionary<int, bool>();
     }
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         const int limit = 1000;
         const int aLimit = limit - 1;

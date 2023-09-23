@@ -22,7 +22,7 @@ public class Euler022 : EulerPuzzle
         }
     }
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var sum = _nameScores.Values.Sum();
         return new PuzzleResult(sum, 871198282);

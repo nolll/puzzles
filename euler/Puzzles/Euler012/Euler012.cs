@@ -7,7 +7,7 @@ public class Euler012 : EulerPuzzle
 {
     public override string Name => "Highly divisible triangular number";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var result = Run(501);
         return new PuzzleResult(result, 76576500);

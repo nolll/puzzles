@@ -8,7 +8,7 @@ public class Euler036 : EulerPuzzle
 {
     public override string Name => "Double-base Palindromes";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var sum = 0;
         for (var i = 0; i < 1_000_000; i++)

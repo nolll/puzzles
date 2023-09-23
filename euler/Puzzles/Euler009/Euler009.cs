@@ -6,7 +6,7 @@ public class Euler009 : EulerPuzzle
 {
     public override string Name => "Special Pythagorean triplet";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var product = Run(1000);
         return new PuzzleResult(product, 31_875_000);

@@ -10,7 +10,7 @@ public class Euler037 : EulerPuzzle
 
     public override string Name => "Truncatable Primes";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var count = 0;
         var sum = 0;

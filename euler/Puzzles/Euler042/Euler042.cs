@@ -6,7 +6,7 @@ public class Euler042 : EulerPuzzle
 {
     public override string Name => "Coded Triangle Numbers";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var words = InputFile.Split(',').Select(o => o.Trim('\"'));
         var triangularNumbers = GetTriangularNumbers(1000).ToHashSet();

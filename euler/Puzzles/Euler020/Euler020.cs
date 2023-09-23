@@ -7,7 +7,7 @@ public class Euler020 : EulerPuzzle
 {
     public override string Name => "Factorial digit sum";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         BigInteger factorial = 100;
         var result = Run(factorial);

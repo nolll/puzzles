@@ -7,7 +7,7 @@ public class Euler021 : EulerPuzzle
 {
     public override string Name => "Amicable numbers";
 
-    public override PuzzleResult Run()
+    protected override PuzzleResult Run()
     {
         var sums = new Dictionary<int, int>();
         var amicableNumbers = new HashSet<int>();

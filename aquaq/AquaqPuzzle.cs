@@ -20,7 +20,7 @@ public abstract class AquaqPuzzle : OnePartPuzzle
         ListTitle = $"Puzzle {_paddedId}";
     }
 
-    protected sealed override string GetInputFilePath(Type t) =>
+    protected override string InputFilePath =>
         Path.Combine(
             "Puzzles",
             $"Aquaq{_paddedId}",

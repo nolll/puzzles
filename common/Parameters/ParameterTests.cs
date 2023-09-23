@@ -14,18 +14,18 @@ public class ParameterTests
         Assert.That(result.ShowHelp, Is.False);
     }
 
-    [TestCase("--id 1")]
-    [TestCase("-i 1")]
-    public void ParseDay(string input)
+    [TestCase("--puzzle 1")]
+    [TestCase("-p 1")]
+    public void ParsePuzzle(string input)
     {
         var result = Puzzles.Parameters.Parse(input);
 
-        Assert.That(result.Id, Is.EqualTo(1));
+        Assert.That(result.Id, Is.EqualTo("1"));
     }
 
     [TestCase("--tags 1,test,3")]
     [TestCase("-t 1,test,3")]
-    public void ParseYear(string input)
+    public void ParseTags(string input)
     {
         var result = Puzzles.Parameters.Parse(input);
 

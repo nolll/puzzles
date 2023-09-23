@@ -33,7 +33,7 @@ public abstract class AocPuzzle : TwoPartsPuzzle
         return tags;
     }
 
-    protected sealed override string GetInputFilePath(Type t) =>
+    protected override string InputFilePath =>
         Path.Combine(
             "Puzzles",
             $"Year{_year}",

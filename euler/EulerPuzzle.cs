@@ -21,7 +21,7 @@ public abstract class EulerPuzzle : OnePartPuzzle
         ListTitle = $"Puzzle {_paddedId}";
     }
 
-    protected sealed override string GetInputFilePath(Type t) =>
+    protected override string InputFilePath =>
         Path.Combine(
             "Problems",
             $"Problem{_paddedId}",

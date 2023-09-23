@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Maths;
 using Common.Puzzles;
 
 namespace Euler.Problems.Problem030;
@@ -27,7 +28,7 @@ public class Problem030 : EulerPuzzle
         for (var i = 2; i < upperBound; i++)
         {
             var digits = i.ToString().ToCharArray().Select(o => int.Parse(o.ToString()));
-            var sumOfPowers = digits.Select(o => Mathz.Pow(o, power)).Sum();
+            var sumOfPowers = digits.Select(o => MathTools.Pow(o, power)).Sum();
             if (sumOfPowers == i)
                 yield return i;
         }
@@ -35,9 +36,9 @@ public class Problem030 : EulerPuzzle
 
     private static int GetUpperBound(int power)
     {
-        var n = Mathz.Pow(9, power);
+        var n = MathTools.Pow(9, power);
         var s = n.ToString();
         var l = s.Length + 1;
-        return Mathz.Pow(10, l);
+        return MathTools.Pow(10, l);
     }
 }

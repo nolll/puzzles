@@ -17,7 +17,10 @@ public abstract class Puzzle
     {
         get
         {
-            var filePath = InputFilePath;
+            var filePath = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                InputFilePath);
+
             if (!File.Exists(filePath))
                 throw new FileNotFoundException("File not found", filePath);
 
@@ -27,12 +30,7 @@ public abstract class Puzzle
 
     public abstract IList<Func<PuzzleResult>> RunFunctions { get; }
 
-    protected virtual string InputFilePath =>
-        Path.Combine(
-            AppDomain.CurrentDomain.BaseDirectory,
-            GetInputFilePath(GetType()));
-
-    protected abstract string GetInputFilePath(Type t);
+    protected abstract string InputFilePath { get; }
 
     public virtual IEnumerable<string> GetTags()
     {

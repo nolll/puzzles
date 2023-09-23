@@ -20,10 +20,7 @@ public class PuzzleInTest : Puzzle
         Name = name ?? string.Empty;
     }
 
-    protected override string GetInputFilePath(Type t)
-    {
-        return null;
-    }
+    protected override string InputFilePath => null;
 }
 
 public class CommentedPuzzleInTest : PuzzleInTest

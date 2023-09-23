@@ -8,7 +8,7 @@ public class Year2019Day13 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var arcade = new Arcade(FileInput);
+        var arcade = new Arcade(InputFile);
         arcade.Play();
 
         return new PuzzleResult(arcade.NumberOfBlockTiles, 226);
@@ -16,7 +16,7 @@ public class Year2019Day13 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var arcade = new Arcade(FileInput);
+        var arcade = new Arcade(InputFile);
         arcade.Play(2);
 
         return new PuzzleResult(arcade.Score, 10800);

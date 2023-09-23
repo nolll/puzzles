@@ -8,14 +8,14 @@ public class Year2018Day23 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var formation = new NanobotFormation(FileInput);
+        var formation = new NanobotFormation(InputFile);
         var botCount = formation.GetBotsInRangeOfStrongestBot().Count;
         return new PuzzleResult(botCount, 481);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var formation = new NanobotFormation(FileInput);
+        var formation = new NanobotFormation(InputFile);
         var distanceToBestCoords = formation.FindManhattanDistanceToBestCoords();
         return new PuzzleResult(distanceToBestCoords, 47_141_479);
     }

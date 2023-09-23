@@ -8,14 +8,14 @@ public class Year2020Day11 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var simulator = new SeatingSimulatorAdjacentSeats(FileInput);
+        var simulator = new SeatingSimulatorAdjacentSeats(InputFile);
         simulator.Run();
         return new PuzzleResult(simulator.OccupiedSeatCount, 2359);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var simulator = new SeatingSimulatorVisibleSeats(FileInput);
+        var simulator = new SeatingSimulatorVisibleSeats(InputFile);
         simulator.Run();
         return new PuzzleResult(simulator.OccupiedSeatCount, 2131);
     }

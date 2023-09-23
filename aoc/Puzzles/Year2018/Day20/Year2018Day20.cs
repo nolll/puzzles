@@ -8,13 +8,13 @@ public class Year2018Day20 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var navigator = new RegularMapNavigator(FileInput);
+        var navigator = new RegularMapNavigator(InputFile);
         return new PuzzleResult(navigator.MostDoors, 4050);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var navigator = new RegularMapNavigator(FileInput);
+        var navigator = new RegularMapNavigator(InputFile);
         return new PuzzleResult(navigator.RoomsMoreThat1000DoorsAway, 8564);
     }
 }

@@ -8,14 +8,14 @@ public class Year2021Day11 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var flasher = new OctopusFlasher(FileInput);
+        var flasher = new OctopusFlasher(InputFile);
         var result = flasher.Run(100);
         return new PuzzleResult(result, 1591);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var flasher = new OctopusFlasher(FileInput);
+        var flasher = new OctopusFlasher(InputFile);
         var result = flasher.Run();
         return new PuzzleResult(result, 314);
     }

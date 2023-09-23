@@ -18,7 +18,7 @@ public class Year2015Day25 : AocPuzzle
 
     private Params GetParams()
     {
-        var words = FileInput.Replace(".", "").Replace(",", "").Split(' ');
+        var words = InputFile.Replace(".", "").Replace(",", "").Split(' ');
 
         return new Params
         {

@@ -9,7 +9,7 @@ public class Year2021Day15 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var chitonRisk = new ChitonRisk();
-        var result = chitonRisk.FindRiskLevelForSmallCave(FileInput);
+        var result = chitonRisk.FindRiskLevelForSmallCave(InputFile);
 
         return new PuzzleResult(result, 423);
     }
@@ -17,7 +17,7 @@ public class Year2021Day15 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var chitonRisk = new ChitonRisk();
-        var result = chitonRisk.FindRiskLevelForLargeCave(FileInput);
+        var result = chitonRisk.FindRiskLevelForLargeCave(InputFile);
 
         return new PuzzleResult(result, 2778);
     }

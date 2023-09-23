@@ -10,11 +10,11 @@ public abstract class Puzzle
     public virtual bool NeedsRewrite => false;
     public virtual bool IsFunToOptimize => false;
 
-    protected string FileInput
+    protected string InputFile
     {
         get
         {
-            var filePath = FilePath;
+            var filePath = InputFilePath;
             if (!File.Exists(filePath))
                 throw new FileNotFoundException("File not found", filePath);
 
@@ -24,12 +24,12 @@ public abstract class Puzzle
 
     public abstract IList<Func<PuzzleResult>> RunFunctions { get; }
 
-    protected virtual string FilePath =>
+    protected virtual string InputFilePath =>
         Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory,
-            GetRelativeFilePath(GetType()));
+            GetInputFilePath(GetType()));
 
-    protected abstract string GetRelativeFilePath(Type t);
+    protected abstract string GetInputFilePath(Type t);
 
     public IEnumerable<string> GetTags()
     {

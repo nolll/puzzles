@@ -8,13 +8,13 @@ public class Year2015Day13 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var table = new DinnerTable(FileInput);
+        var table = new DinnerTable(InputFile);
         return new PuzzleResult(table.HappinessChange, 618);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var table = new DinnerTable(FileInput, true);
+        var table = new DinnerTable(InputFile, true);
         return new PuzzleResult(table.HappinessChange, 601);
     }
 }

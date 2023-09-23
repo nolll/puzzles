@@ -8,13 +8,13 @@ public class Year2022Day06 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var result = TuningTrouble.FindMarker(FileInput);
+        var result = TuningTrouble.FindMarker(InputFile);
         return new PuzzleResult(result, 1542);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var result = TuningTrouble.FindMessage(FileInput);
+        var result = TuningTrouble.FindMessage(InputFile);
         return new PuzzleResult(result, 3153);
     }
 }

@@ -8,7 +8,7 @@ public class Year2022Day07 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var fileSystem = new FileSystem(FileInput);
+        var fileSystem = new FileSystem(InputFile);
         var result = fileSystem.Part1();
 
         return new PuzzleResult(result, 1989474);
@@ -16,7 +16,7 @@ public class Year2022Day07 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var fileSystem = new FileSystem(FileInput);
+        var fileSystem = new FileSystem(InputFile);
         var result = fileSystem.Part2();
 
         return new PuzzleResult(result, 1111607);

@@ -8,7 +8,7 @@ public class Year2021Day02 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var control = new SubmarineControl(FileInput, false);
+        var control = new SubmarineControl(InputFile, false);
         control.Move();
             
         return new PuzzleResult(control.Result, 1580000);
@@ -16,7 +16,7 @@ public class Year2021Day02 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var control = new SubmarineControl(FileInput, true);
+        var control = new SubmarineControl(InputFile, true);
         control.Move();
 
         return new PuzzleResult(control.Result, 1251263225);

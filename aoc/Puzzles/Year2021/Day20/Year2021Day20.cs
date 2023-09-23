@@ -9,7 +9,7 @@ public class Year2021Day20 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var trenchMap = new TrenchMap();
-        var result = trenchMap.GetLitPixelCount(FileInput, 2);
+        var result = trenchMap.GetLitPixelCount(InputFile, 2);
 
         return new PuzzleResult(result, 5765);
     }
@@ -17,7 +17,7 @@ public class Year2021Day20 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var trenchMap = new TrenchMap();
-        var result = trenchMap.GetLitPixelCount(FileInput, 50);
+        var result = trenchMap.GetLitPixelCount(InputFile, 50);
 
         return new PuzzleResult(result, 18509);
     }

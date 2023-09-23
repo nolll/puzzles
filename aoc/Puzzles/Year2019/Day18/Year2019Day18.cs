@@ -10,7 +10,7 @@ public class Year2019Day18 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var keyCollector = new KeyCollector(FileInput);
+        var keyCollector = new KeyCollector(InputFile);
         keyCollector.Run();
 
         return new PuzzleResult(keyCollector.ShortestPath, 4420);
@@ -18,7 +18,7 @@ public class Year2019Day18 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var keyCollector = new KeyCollector(FileInput, true);
+        var keyCollector = new KeyCollector(InputFile, true);
         keyCollector.Run();
 
         return new PuzzleResult(keyCollector.ShortestPath, 2128);

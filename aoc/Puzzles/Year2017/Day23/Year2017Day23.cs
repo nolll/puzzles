@@ -8,7 +8,7 @@ public class Year2017Day23 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var processor1 = new CoProcessor(FileInput);
+        var processor1 = new CoProcessor(InputFile);
         processor1.Run();
         return new PuzzleResult(processor1.MulCount, 4225);
     }

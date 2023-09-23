@@ -8,14 +8,14 @@ public class Year2016Day20 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var rules = new FirewallRules(FileInput);
+        var rules = new FirewallRules(InputFile);
         var ip = rules.GetLowestUnblockedIp();
         return new PuzzleResult(ip, 14_975_795);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var rules = new FirewallRules(FileInput);
+        var rules = new FirewallRules(InputFile);
         var ipCount = rules.GetAllowedIpCount(Upperbound);
         return new PuzzleResult(ipCount, 101);
     }

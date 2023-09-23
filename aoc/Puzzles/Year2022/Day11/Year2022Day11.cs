@@ -9,7 +9,7 @@ public class Year2022Day11 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var monkeyBusiness = new MonkeyBusiness();
-        var result = monkeyBusiness.Part1(FileInput);
+        var result = monkeyBusiness.Part1(InputFile);
 
         return new PuzzleResult(result, 56350);
     }
@@ -17,7 +17,7 @@ public class Year2022Day11 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var monkeyBusiness = new MonkeyBusiness();
-        var result = monkeyBusiness.Part2(FileInput);
+        var result = monkeyBusiness.Part2(InputFile);
 
         return new PuzzleResult(result, 13_954_061_248);
     }

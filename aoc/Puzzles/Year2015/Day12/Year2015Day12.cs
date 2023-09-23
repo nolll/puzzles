@@ -8,13 +8,13 @@ public class Year2015Day12 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var doc = new JsonDoc(FileInput, true);
+        var doc = new JsonDoc(InputFile, true);
         return new PuzzleResult(doc.Sum, 119_433);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var doc = new JsonDoc(FileInput, false);
+        var doc = new JsonDoc(InputFile, false);
         return new PuzzleResult(doc.Sum, 68_466);
     }
 }

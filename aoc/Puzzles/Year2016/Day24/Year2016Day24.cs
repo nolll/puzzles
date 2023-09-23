@@ -4,7 +4,7 @@ namespace Aoc.Puzzles.Year2016.Day24;
 
 public class Year2016Day24 : AocPuzzle
 {
-    private AirDuctNavigator Navigator => new(FileInput);
+    private AirDuctNavigator Navigator => new(InputFile);
 
     public override string Name => "Air Duct Spelunking";
 

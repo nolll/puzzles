@@ -8,14 +8,14 @@ public class Year2019Day06 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var calculator = new OrbitCalculator(FileInput);
+        var calculator = new OrbitCalculator(InputFile);
         var orbitCount = calculator.GetOrbitCount();
         return new PuzzleResult(orbitCount, 278_744);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var calculator = new OrbitCalculator(FileInput);
+        var calculator = new OrbitCalculator(InputFile);
         var distance = calculator.GetSantaDistance();
         return new PuzzleResult(distance, 475);
     }

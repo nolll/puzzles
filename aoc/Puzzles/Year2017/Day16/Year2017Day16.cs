@@ -9,14 +9,14 @@ public class Year2017Day16 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var dancingPrograms1 = new DancingPrograms();
-        dancingPrograms1.Dance(FileInput, 1);
+        dancingPrograms1.Dance(InputFile, 1);
         return new PuzzleResult(dancingPrograms1.Programs, "ehdpincaogkblmfj");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var dancingPrograms2 = new DancingPrograms();
-        dancingPrograms2.Dance(FileInput, 1_000_000_000);
+        dancingPrograms2.Dance(InputFile, 1_000_000_000);
         return new PuzzleResult(dancingPrograms2.Programs, "bpcekomfgjdlinha");
     }
 }

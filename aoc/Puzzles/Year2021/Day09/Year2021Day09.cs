@@ -9,14 +9,14 @@ public class Year2021Day09 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var heightMap = new HeightMap();
-        var result = heightMap.FindLowPointSum(FileInput);
+        var result = heightMap.FindLowPointSum(InputFile);
         return new PuzzleResult(result, 591);
     }
 
     protected override PuzzleResult RunPart2()
     {
         var heightMap = new HeightMap();
-        var result = heightMap.FindBasinSizes(FileInput);
+        var result = heightMap.FindBasinSizes(InputFile);
         return new PuzzleResult(result, 1113424);
     }
 }

@@ -11,7 +11,7 @@ public class Year2019Day11 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var robot1 = new PaintRobot(FileInput);
+        var robot1 = new PaintRobot(InputFile);
         var result1 = robot1.Paint(false);
 
         return new PuzzleResult(result1.PaintedPanelCount, 1732);
@@ -19,7 +19,7 @@ public class Year2019Day11 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var robot2 = new PaintRobot(FileInput);
+        var robot2 = new PaintRobot(InputFile);
         var result2 = robot2.Paint(true);
         var printout = CleanPrintout(result2.Printout);
         var letters = OcrSmallFont.ReadString(printout);

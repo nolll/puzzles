@@ -8,13 +8,13 @@ public class Year2018Day10 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var finder = new StarMessageFinder(FileInput, 9);
+        var finder = new StarMessageFinder(InputFile, 9);
         return new PuzzleResult(finder.Message, "HRPHBRKG");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var finder = new StarMessageFinder(FileInput, 9);
+        var finder = new StarMessageFinder(InputFile, 9);
         return new PuzzleResult(finder.IterationCount, 10355);
     }
 }

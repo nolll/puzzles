@@ -9,7 +9,7 @@ public class Year2022Day19 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var factory = new RobotFactory();
-        var result = factory.Part1(FileInput);
+        var result = factory.Part1(InputFile);
 
         return new PuzzleResult(result, 2193);
     }
@@ -17,7 +17,7 @@ public class Year2022Day19 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var factory = new RobotFactory();
-        var result = factory.Part2(FileInput);
+        var result = factory.Part2(InputFile);
 
         return new PuzzleResult(result, 7200);
     }

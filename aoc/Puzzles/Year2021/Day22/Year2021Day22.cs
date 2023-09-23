@@ -9,7 +9,7 @@ public class Year2021Day22 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var reactor = new SubmarineReactor();
-        var result = reactor.Reboot2(FileInput, 50);
+        var result = reactor.Reboot2(InputFile, 50);
 
         return new PuzzleResult(result, 588200);
     }
@@ -17,7 +17,7 @@ public class Year2021Day22 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var reactor = new SubmarineReactor();
-        var result = reactor.Reboot2(FileInput);
+        var result = reactor.Reboot2(InputFile);
 
         return new PuzzleResult(result, 1207167990362099);
     }

@@ -8,14 +8,14 @@ public class Year2016Day21 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var scrambler = new StringScrambler(FileInput);
+        var scrambler = new StringScrambler(InputFile);
         var scrambled = scrambler.Scramble("abcdefgh");
         return new PuzzleResult(scrambled, "dbfgaehc");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var scrambler = new StringScrambler(FileInput);
+        var scrambler = new StringScrambler(InputFile);
         var unscrambled = scrambler.Unscramble("fbgdceah");
         return new PuzzleResult(unscrambled, "aghfcdeb");
     }

@@ -9,7 +9,7 @@ public class Year2022Day09 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var ropeBridge = new RopeBridge();
-        var result = ropeBridge.Part1(FileInput);
+        var result = ropeBridge.Part1(InputFile);
 
         return new PuzzleResult(result, 6284);
     }
@@ -17,7 +17,7 @@ public class Year2022Day09 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var ropeBridge = new RopeBridge();
-        var result = ropeBridge.Part2(FileInput);
+        var result = ropeBridge.Part2(InputFile);
 
         return new PuzzleResult(result, 2661);
     }

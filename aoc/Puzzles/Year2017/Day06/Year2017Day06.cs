@@ -8,14 +8,14 @@ public class Year2017Day06 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var reallocator = new MemoryReallocator(FileInput);
+        var reallocator = new MemoryReallocator(InputFile);
         reallocator.Run();
         return new PuzzleResult(reallocator.Steps, 6681);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var reallocator = new MemoryReallocator(FileInput);
+        var reallocator = new MemoryReallocator(InputFile);
         reallocator.Run();
         return new PuzzleResult(reallocator.LoopSize, 2392);
     }

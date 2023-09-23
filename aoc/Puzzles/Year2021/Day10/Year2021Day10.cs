@@ -9,14 +9,14 @@ public class Year2021Day10 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var syntaxChecker = new SyntaxChecker();
-        var result = syntaxChecker.GetTotalErrorScore(FileInput);
+        var result = syntaxChecker.GetTotalErrorScore(InputFile);
         return new PuzzleResult(result, 399153);
     }
 
     protected override PuzzleResult RunPart2()
     {
         var syntaxChecker = new SyntaxChecker();
-        var result = syntaxChecker.FindMiddleScore(FileInput);
+        var result = syntaxChecker.FindMiddleScore(InputFile);
         return new PuzzleResult(result, 2995077699);
     }
 }

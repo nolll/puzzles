@@ -8,7 +8,7 @@ public class Problem042 : EulerPuzzle
 
     public override PuzzleResult Run()
     {
-        var words = FileInput.Split(',').Select(o => o.Trim('\"'));
+        var words = InputFile.Split(',').Select(o => o.Trim('\"'));
         var triangularNumbers = GetTriangularNumbers(1000).ToHashSet();
         var count = words.Select(GetWordValue).Count(o => triangularNumbers.Contains(o));
 

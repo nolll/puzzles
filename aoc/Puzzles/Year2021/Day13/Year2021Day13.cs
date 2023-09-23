@@ -9,7 +9,7 @@ public class Year2021Day13 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var paper = new TransparentPaper(FileInput);
+        var paper = new TransparentPaper(InputFile);
         var result = paper.DotCountAfterFirstFold();
 
         return new PuzzleResult(result, 695);
@@ -17,7 +17,7 @@ public class Year2021Day13 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var paper = new TransparentPaper(FileInput);
+        var paper = new TransparentPaper(InputFile);
         var result = paper.MessageAfterFold();
         var letters = OcrSmallFont.ReadString(result);
 

@@ -10,7 +10,7 @@ public class Year2022Day25 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var result = Part1(FileInput);
+        var result = Part1(InputFile);
 
         return new PuzzleResult(result, "2-=0-=-2=111=220=100");
     }

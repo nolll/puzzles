@@ -8,13 +8,13 @@ public class Year2015Day08 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var digitalList = new DigitalList(FileInput);
+        var digitalList = new DigitalList(InputFile);
         return new PuzzleResult(digitalList.CodeMinusMemoryDiff, 1342);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var digitalList = new DigitalList(FileInput);
+        var digitalList = new DigitalList(InputFile);
         return new PuzzleResult(digitalList.EncodedMinusCodeDiff, 2074);
     }
 }

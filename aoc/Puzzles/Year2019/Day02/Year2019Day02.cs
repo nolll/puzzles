@@ -9,7 +9,7 @@ public class Year2019Day02 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var computer = new ConsoleComputer(FileInput);
+        var computer = new ConsoleComputer(InputFile);
         computer.Start(false, 12, 2);
         var value = computer.Result;
         return new PuzzleResult(value, 3_101_844);
@@ -17,7 +17,7 @@ public class Year2019Day02 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var solutionFinder = new ComputerSolutionFinder(FileInput);
+        var solutionFinder = new ComputerSolutionFinder(InputFile);
         var result = solutionFinder.FindSolution(19690720);
         var answer = 100 * result.Noun + result.Verb;
         return new PuzzleResult(answer, 8478);

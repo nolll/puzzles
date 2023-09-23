@@ -8,13 +8,13 @@ public class Year2016Day15 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var sculpture = new KineticSculpture(FileInput);
+        var sculpture = new KineticSculpture(InputFile);
         return new PuzzleResult(sculpture.TimeToPressButton, 317_371);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var sculpture = new KineticSculpture(FileInput, true);
+        var sculpture = new KineticSculpture(InputFile, true);
         return new PuzzleResult(sculpture.TimeToPressButton, 2_080_951);
     }
 }

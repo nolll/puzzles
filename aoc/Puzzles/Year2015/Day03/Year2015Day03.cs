@@ -9,7 +9,7 @@ public class Year2015Day03 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var grid = new DeliveryGrid();
-        grid.DeliverBySanta(FileInput);
+        grid.DeliverBySanta(InputFile);
             
         return new PuzzleResult(grid.SantaDeliveryCount, 2592);
     }
@@ -17,7 +17,7 @@ public class Year2015Day03 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var grid = new DeliveryGrid();
-        grid.DeliverBySantaAndRobot(FileInput);
+        grid.DeliverBySantaAndRobot(InputFile);
             
         return new PuzzleResult(grid.SantaDeliveryCount, 2360);
     }

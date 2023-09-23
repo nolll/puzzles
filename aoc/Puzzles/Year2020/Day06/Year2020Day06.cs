@@ -8,13 +8,13 @@ public class Year2020Day06 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var reader = new DeclarationFormReader(FileInput);
+        var reader = new DeclarationFormReader(InputFile);
         return new PuzzleResult(reader.SumOfAtLeastOneYes, 6778);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var reader = new DeclarationFormReader(FileInput);
+        var reader = new DeclarationFormReader(InputFile);
         return new PuzzleResult(reader.SumOfAllYes, 3406);
     }
 }

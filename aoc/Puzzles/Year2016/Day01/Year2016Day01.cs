@@ -9,14 +9,14 @@ public class Year2016Day01 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var calc = new EasterbunnyDistanceCalculator();
-        calc.Go(FileInput);
+        calc.Go(InputFile);
         return new PuzzleResult(calc.DistanceToTarget, 262);
     }
 
     protected override PuzzleResult RunPart2()
     {
         var calc = new EasterbunnyDistanceCalculator();
-        calc.Go(FileInput);
+        calc.Go(InputFile);
         return new PuzzleResult(calc.DistanceToFirstRepeat, 131);
     }
 }

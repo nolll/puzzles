@@ -8,7 +8,7 @@ public class Year2019Day14 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var reactor = new NanoReactor(FileInput);
+        var reactor = new NanoReactor(InputFile);
         reactor.Run();
         var oreForOneFuel = reactor.RequiredOreForOneFuel;
 
@@ -17,7 +17,7 @@ public class Year2019Day14 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var reactor = new NanoReactor(FileInput);
+        var reactor = new NanoReactor(InputFile);
         reactor.Run();
         var fuelCount = reactor.FuelFromOneTrillionOre;
 

@@ -8,7 +8,7 @@ public class Year2018Day13 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var detector = new CollisionDetector(FileInput);
+        var detector = new CollisionDetector(InputFile);
         detector.RunCarts();
         var firstCollisionCoords = detector.LocationOfFirstCollision;
         var firstCollition = $"{firstCollisionCoords.X},{firstCollisionCoords.Y}";
@@ -17,7 +17,7 @@ public class Year2018Day13 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var detector = new CollisionDetector(FileInput);
+        var detector = new CollisionDetector(InputFile);
         detector.RunCarts();
         var lastCartCoords = detector.LocationOfLastCart;
         var lastCart = $"{lastCartCoords.X},{lastCartCoords.Y}";

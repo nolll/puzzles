@@ -8,13 +8,13 @@ public class Year2016Day12 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var computer = new MonorailComputer(FileInput, 0, 0);
+        var computer = new MonorailComputer(InputFile, 0, 0);
         return new PuzzleResult(computer.ValueA, 318_003);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var computer = new MonorailComputer(FileInput, 0, 1);
+        var computer = new MonorailComputer(InputFile, 0, 1);
         return new PuzzleResult(computer.ValueA, 9_227_657);
     }
 }

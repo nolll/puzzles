@@ -5,7 +5,7 @@ namespace Aquaq;
 
 public abstract class AquaqPuzzle : OnePartPuzzle
 {
-    protected sealed override string GetRelativeFilePath(Type t)
+    protected sealed override string GetInputFilePath(Type t)
     {
         var id = AquaqPuzzleParser.GetPuzzleId(t);
         var paddedId = id.ToString().PadLeft(2, '0');

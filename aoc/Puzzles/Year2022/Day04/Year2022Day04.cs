@@ -9,7 +9,7 @@ public class Year2022Day04 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var cleaning = new Cleaning();
-        var result = cleaning.Part1(FileInput);
+        var result = cleaning.Part1(InputFile);
 
         return new PuzzleResult(result, 571);
     }
@@ -17,7 +17,7 @@ public class Year2022Day04 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var cleaning = new Cleaning();
-        var result = cleaning.Part2(FileInput);
+        var result = cleaning.Part2(InputFile);
 
         return new PuzzleResult(result, 917);
     }

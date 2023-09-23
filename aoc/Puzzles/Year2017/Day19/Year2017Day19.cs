@@ -8,14 +8,14 @@ public class Year2017Day19 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var finder = new TubeRouteFinder(FileInput);
+        var finder = new TubeRouteFinder(InputFile);
         finder.FindRoute();
         return new PuzzleResult(finder.Route, "PVBSCMEQHY");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var finder = new TubeRouteFinder(FileInput);
+        var finder = new TubeRouteFinder(InputFile);
         finder.FindRoute();
         return new PuzzleResult(finder.StepCount, 17_736);
     }

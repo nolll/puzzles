@@ -11,7 +11,7 @@ public class Year2020Day02 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var validator = new PasswordPolicyValidator();
-        var policies = PuzzleInputReader.ReadLines(FileInput);
+        var policies = PuzzleInputReader.ReadLines(InputFile);
         var count = policies.Count(validator.IsValidAccordingToRuleOne);
         return new PuzzleResult(count, 556);
     }
@@ -19,7 +19,7 @@ public class Year2020Day02 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var validator = new PasswordPolicyValidator();
-        var policies = PuzzleInputReader.ReadLines(FileInput);
+        var policies = PuzzleInputReader.ReadLines(InputFile);
         var count = policies.Count(validator.IsValidAccordingToRuleTwo);
         return new PuzzleResult(count, 605);
     }

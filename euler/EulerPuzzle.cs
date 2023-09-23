@@ -6,7 +6,7 @@ namespace Euler;
 
 public abstract class EulerPuzzle : OnePartPuzzle
 {
-    protected sealed override string GetRelativeFilePath(Type t)
+    protected sealed override string GetInputFilePath(Type t)
     {
         var id = EulerPuzzleParser.GetPuzzleId(t);
         var paddedId = id.ToString().PadLeft(3, '0');

@@ -8,7 +8,7 @@ public class Year2017Day25 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var turingMachine = new TuringMachine(FileInput);
+        var turingMachine = new TuringMachine(InputFile);
         var checksum = turingMachine.Run();
         return new PuzzleResult(checksum, 4387);
     }

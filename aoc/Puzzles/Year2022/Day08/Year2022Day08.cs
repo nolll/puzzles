@@ -10,7 +10,7 @@ public class Year2022Day08 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        _treeHouse = new TreeHouse(FileInput);
+        _treeHouse = new TreeHouse(InputFile);
         _treeHouse.Calc();
         var result = _treeHouse.VisibleTreesCount;
 

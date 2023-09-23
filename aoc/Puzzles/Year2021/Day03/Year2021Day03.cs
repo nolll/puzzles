@@ -9,7 +9,7 @@ public class Year2021Day03 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var diagnostics = new BinaryDiagnostics();
-        var result = diagnostics.GetFuelConsumption(FileInput);
+        var result = diagnostics.GetFuelConsumption(InputFile);
             
         return new PuzzleResult(result, 845186);
     }
@@ -17,7 +17,7 @@ public class Year2021Day03 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var diagnostics = new BinaryDiagnostics();
-        var result = diagnostics.GetLifeSupportRating(FileInput);
+        var result = diagnostics.GetLifeSupportRating(InputFile);
 
         return new PuzzleResult(result, 4636702);
     }

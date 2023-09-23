@@ -9,14 +9,14 @@ public class Year2016Day02 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var squareCodeFinder = new SquareKeyCodeFinder();
-        var squareCode = squareCodeFinder.Find(FileInput);
+        var squareCode = squareCodeFinder.Find(InputFile);
         return new PuzzleResult(squareCode, "61529");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var diamondCodeFinder = new DiamondKeyCodeFinder();
-        var diamondCode = diamondCodeFinder.Find(FileInput);
+        var diamondCode = diamondCodeFinder.Find(InputFile);
         return new PuzzleResult(diamondCode, "C2C28");
     }
 }

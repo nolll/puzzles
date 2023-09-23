@@ -8,13 +8,13 @@ public class Year2018Day02 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var boxChecksumPuzzle = new BoxChecksumPuzzle(FileInput);
+        var boxChecksumPuzzle = new BoxChecksumPuzzle(InputFile);
         return new PuzzleResult(boxChecksumPuzzle.Checksum, 5434);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var similarIdsPuzzle = new SimilarIdsPuzzle(FileInput);
+        var similarIdsPuzzle = new SimilarIdsPuzzle(InputFile);
         return new PuzzleResult(similarIdsPuzzle.CommonLetters, "agimdjvlhedpsyoqfzuknpjwt");
     }
 }

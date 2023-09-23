@@ -8,13 +8,13 @@ public class Year2019Day20 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var mazeSolver = new DonutMazeSolver(FileInput);
+        var mazeSolver = new DonutMazeSolver(InputFile);
         return new PuzzleResult(mazeSolver.ShortestStepCount, 462);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var recursiveDonutMazeSolver = new RecursiveDonutMazeSolver(FileInput);
+        var recursiveDonutMazeSolver = new RecursiveDonutMazeSolver(InputFile);
         return new PuzzleResult(recursiveDonutMazeSolver.ShortestStepCount, 5288);
     }
 }

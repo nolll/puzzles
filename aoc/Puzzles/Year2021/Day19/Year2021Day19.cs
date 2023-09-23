@@ -27,7 +27,7 @@ public class Year2021Day19 : AocPuzzle
         if(_result == null)
         {
             var system = new BeaconSystem();
-            _result = system.GetResult(FileInput);
+            _result = system.GetResult(InputFile);
         }
 
         return _result;

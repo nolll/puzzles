@@ -9,7 +9,7 @@ public class Year2022Day17 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var tetris = new Tetris();
-        var result = tetris.Run(FileInput, 2022);
+        var result = tetris.Run(InputFile, 2022);
 
         return new PuzzleResult(result, 3197);
     }
@@ -17,7 +17,7 @@ public class Year2022Day17 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var tetris = new Tetris();
-        var result = tetris.Run(FileInput, 1_000_000_000_000);
+        var result = tetris.Run(InputFile, 1_000_000_000_000);
 
         return new PuzzleResult(result, 1_568_513_119_571);
     }

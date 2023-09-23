@@ -8,14 +8,14 @@ public class Year2015Day19 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var machine = new MedicineMachine(FileInput);
+        var machine = new MedicineMachine(InputFile);
         var molecules = machine.GetCalibrationMolecules(TargetMolecule);
         return new PuzzleResult(molecules.Count, 535);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var machine = new MedicineMachine(FileInput);
+        var machine = new MedicineMachine(InputFile);
         var steps = machine.StepsToMake(TargetMolecule);
         return new PuzzleResult(steps, 212);
     }

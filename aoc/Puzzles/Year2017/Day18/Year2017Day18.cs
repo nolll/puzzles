@@ -8,14 +8,14 @@ public class Year2017Day18 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var single = new SingleRunner(FileInput);
+        var single = new SingleRunner(InputFile);
         single.Run();
         return new PuzzleResult(single.RecoveredFrequency, 4601);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var duet = new DuetRunner(FileInput);
+        var duet = new DuetRunner(InputFile);
         duet.Run();
         return new PuzzleResult(duet.Program1SendCount, 6858);
     }

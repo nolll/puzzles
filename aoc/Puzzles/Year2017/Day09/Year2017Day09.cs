@@ -8,13 +8,13 @@ public class Year2017Day09 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var processor = new StreamProcessor(FileInput);
+        var processor = new StreamProcessor(InputFile);
         return new PuzzleResult(processor.Score, 14_421);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var processor = new StreamProcessor(FileInput);
+        var processor = new StreamProcessor(InputFile);
         return new PuzzleResult(processor.GarbageCount, 6817);
     }
 }

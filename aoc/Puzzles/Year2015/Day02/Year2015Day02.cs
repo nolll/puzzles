@@ -8,14 +8,14 @@ public class Year2015Day02 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var paperResult = GiftWrappingCalculator.GetRequiredPaper(FileInput);
+        var paperResult = GiftWrappingCalculator.GetRequiredPaper(InputFile);
 
         return new PuzzleResult(paperResult, 1_606_483);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var ribbonResult = GiftWrappingCalculator.GetRequiredRibbon(FileInput);
+        var ribbonResult = GiftWrappingCalculator.GetRequiredRibbon(InputFile);
             
         return new PuzzleResult(ribbonResult, 3_842_356);
     }

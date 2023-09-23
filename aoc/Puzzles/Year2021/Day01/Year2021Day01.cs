@@ -9,7 +9,7 @@ public class Year2021Day01 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var calculator = new DepthMeasurement();
-        var result = calculator.GetNumberOfIncreasingMeasurements(FileInput, false);
+        var result = calculator.GetNumberOfIncreasingMeasurements(InputFile, false);
             
         return new PuzzleResult(result, 1477);
     }
@@ -17,7 +17,7 @@ public class Year2021Day01 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var calculator = new DepthMeasurement();
-        var result = calculator.GetNumberOfIncreasingMeasurements(FileInput, true);
+        var result = calculator.GetNumberOfIncreasingMeasurements(InputFile, true);
 
         return new PuzzleResult(result, 1523);
     }

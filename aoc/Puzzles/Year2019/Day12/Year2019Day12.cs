@@ -8,7 +8,7 @@ public class Year2019Day12 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var tracker1 = new MoonTracker(FileInput);
+        var tracker1 = new MoonTracker(InputFile);
         const int iterations = 1000;
         tracker1.Run(iterations);
 
@@ -17,7 +17,7 @@ public class Year2019Day12 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var tracker2 = new MoonTracker(FileInput);
+        var tracker2 = new MoonTracker(InputFile);
         tracker2.RunUntilRepeat();
 
         return new PuzzleResult(tracker2.Iterations, 376_243_355_967_784);

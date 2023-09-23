@@ -9,14 +9,14 @@ public class Year2015Day23 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var computer1 = new ChristmasComputer();
-        computer1.Run(FileInput);
+        computer1.Run(InputFile);
         return new PuzzleResult(computer1.RegisterB, 307);
     }
 
     protected override PuzzleResult RunPart2()
     {
         var computer = new ChristmasComputer();
-        computer.Run(FileInput, 1);
+        computer.Run(InputFile, 1);
         return new PuzzleResult(computer.RegisterB, 160);
     }
 }

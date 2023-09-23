@@ -9,7 +9,7 @@ public class Year2021Day18 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var math = new SnailfishMath();
-        var result = math.Sum(FileInput);
+        var result = math.Sum(InputFile);
 
         return new PuzzleResult(result.Magnitude, 4417);
     }
@@ -17,7 +17,7 @@ public class Year2021Day18 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var math = new SnailfishMath();
-        var result = math.LargestMagnitude(FileInput);
+        var result = math.LargestMagnitude(InputFile);
 
         return new PuzzleResult(result, 4796);
     }

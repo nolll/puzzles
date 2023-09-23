@@ -9,7 +9,7 @@ public class Year2022Day14 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var fallingSand = new FallingSand();
-        var result = fallingSand.Part1(FileInput);
+        var result = fallingSand.Part1(InputFile);
 
         return new PuzzleResult(result, 745);
     }
@@ -17,7 +17,7 @@ public class Year2022Day14 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var fallingSand = new FallingSand();
-        var result = fallingSand.Part2(FileInput);
+        var result = fallingSand.Part2(InputFile);
 
         return new PuzzleResult(result, 27_551);
     }

@@ -9,14 +9,14 @@ public class Year2021Day07 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var crabSubmarines = new CrabSubmarines();
-        var result = crabSubmarines.GetFuel1(FileInput, false);
+        var result = crabSubmarines.GetFuel1(InputFile, false);
         return new PuzzleResult(result, 344535);
     }
 
     protected override PuzzleResult RunPart2()
     {
         var crabSubmarines = new CrabSubmarines();
-        var result = crabSubmarines.GetFuel1(FileInput, true);
+        var result = crabSubmarines.GetFuel1(InputFile, true);
         return new PuzzleResult(result, 95581659);
     }
 }

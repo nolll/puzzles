@@ -9,14 +9,14 @@ public class Year2016Day07 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var tester = new IpTester();
-        var tlsSupportCount = tester.TlsSupportCount(FileInput);
+        var tlsSupportCount = tester.TlsSupportCount(InputFile);
         return new PuzzleResult(tlsSupportCount, 105);
     }
 
     protected override PuzzleResult RunPart2()
     {
         var tester = new IpTester();
-        var sslSupportCount = tester.SslSupportCount(FileInput);
+        var sslSupportCount = tester.SslSupportCount(InputFile);
         return new PuzzleResult(sslSupportCount, 258);
     }
 }

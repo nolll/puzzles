@@ -9,14 +9,14 @@ public class Year2020Day17 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var cube = new ConwayCube();
-        var result = cube.Boot3D(FileInput, 6);
+        var result = cube.Boot3D(InputFile, 6);
         return new PuzzleResult(result, 382);
     }
 
     protected override PuzzleResult RunPart2()
     {
         var cube = new ConwayCube();
-        var result = cube.Boot4D(FileInput, 6);
+        var result = cube.Boot4D(InputFile, 6);
         return new PuzzleResult(result, 2552);
     }
 }

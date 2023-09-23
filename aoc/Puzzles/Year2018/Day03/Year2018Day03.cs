@@ -8,13 +8,13 @@ public class Year2018Day03 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var claimsOverlapCountPuzzle = new ClaimsOverlapCountPuzzle(FileInput);
+        var claimsOverlapCountPuzzle = new ClaimsOverlapCountPuzzle(InputFile);
         return new PuzzleResult(claimsOverlapCountPuzzle.OverlapCount, 118_223);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var claimThatDoesNotOverlap = new ClaimThatDoesNotOverlapPuzzle(FileInput);
+        var claimThatDoesNotOverlap = new ClaimThatDoesNotOverlapPuzzle(InputFile);
         return new PuzzleResult(claimThatDoesNotOverlap.ClaimId, 412);
     }
 }

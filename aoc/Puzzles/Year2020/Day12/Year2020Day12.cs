@@ -8,14 +8,14 @@ public class Year2020Day12 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var system = new SimpleFerryNavigationSystem(FileInput);
+        var system = new SimpleFerryNavigationSystem(InputFile);
         system.Run();
         return new PuzzleResult(system.DistanceTravelled, 1424);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var system = new WaypointFerryNavigationSystem(FileInput);
+        var system = new WaypointFerryNavigationSystem(InputFile);
         system.Run();
         return new PuzzleResult(system.DistanceTravelled, 63447);
     }

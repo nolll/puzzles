@@ -10,7 +10,7 @@ public class Year2018Day22 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var rows = PuzzleInputReader.ReadLines(FileInput);
+        var rows = PuzzleInputReader.ReadLines(InputFile);
         var depth = int.Parse(rows.First().Split(' ').Last());
         var targetCoords = rows.Last().Split(' ').Last().Split(',').Select(int.Parse).ToList();
         var targetX = targetCoords.First();
@@ -22,7 +22,7 @@ public class Year2018Day22 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var rows = PuzzleInputReader.ReadLines(FileInput);
+        var rows = PuzzleInputReader.ReadLines(InputFile);
         var depth = int.Parse(rows.First().Split(' ').Last());
         var targetCoords = rows.Last().Split(' ').Last().Split(',').Select(int.Parse).ToList();
         var targetX = targetCoords.First();

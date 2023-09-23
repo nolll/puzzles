@@ -9,7 +9,7 @@ public class Year2021Day05 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var ventsMap = new VentsMap();
-        var result = ventsMap.Run(FileInput, true);
+        var result = ventsMap.Run(InputFile, true);
 
         return new PuzzleResult(result, 4728);
     }
@@ -17,7 +17,7 @@ public class Year2021Day05 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var ventsMap = new VentsMap();
-        var result = ventsMap.Run(FileInput, false);
+        var result = ventsMap.Run(InputFile, false);
 
         return new PuzzleResult(result, 17717);
     }

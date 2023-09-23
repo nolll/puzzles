@@ -8,14 +8,14 @@ public class Year2015Day01 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var navigator = new FloorNavigator(FileInput);
+        var navigator = new FloorNavigator(InputFile);
 
         return new PuzzleResult(navigator.DestinationFloor, 138);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var navigator = new FloorNavigator(FileInput);
+        var navigator = new FloorNavigator(InputFile);
             
         return new PuzzleResult(navigator.FirstBasementInstruction, 1771);
     }

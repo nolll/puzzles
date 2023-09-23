@@ -10,7 +10,7 @@ public class Year2019Day15 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var droid = new RepairDroid(FileInput);
+        var droid = new RepairDroid(InputFile);
         var (result, map) = droid.Run();
         _map = map;
 

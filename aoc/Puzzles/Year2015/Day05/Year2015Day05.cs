@@ -8,13 +8,13 @@ public class Year2015Day05 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var niceCount = NaughtyOrNiceEvaluator.GetNiceCount1(FileInput);
+        var niceCount = NaughtyOrNiceEvaluator.GetNiceCount1(InputFile);
         return new PuzzleResult(niceCount, 255);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var niceCount = NaughtyOrNiceEvaluator.GetNiceCount2(FileInput);
+        var niceCount = NaughtyOrNiceEvaluator.GetNiceCount2(InputFile);
         return new PuzzleResult(niceCount, 55);
     }
 }

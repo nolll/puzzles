@@ -8,7 +8,7 @@ public class Year2021Day12 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var caveSystem = new CaveSystem(FileInput, false);
+        var caveSystem = new CaveSystem(InputFile, false);
         var result = caveSystem.CountPaths();
             
         return new PuzzleResult(result, 5254);
@@ -16,7 +16,7 @@ public class Year2021Day12 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var caveSystem = new CaveSystem(FileInput, true);
+        var caveSystem = new CaveSystem(InputFile, true);
         var result = caveSystem.CountPaths();
             
         return new PuzzleResult(result, 149385);

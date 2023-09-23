@@ -9,7 +9,7 @@ public class Aquaq03 : AquaqPuzzle
     public override PuzzleResult Run()
     {
         var walker = new Walker();
-        var result = walker.Walk(FileInput);
+        var result = walker.Walk(InputFile);
 
         return new PuzzleResult(result, 2543);
     }

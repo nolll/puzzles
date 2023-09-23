@@ -8,7 +8,7 @@ public class Aquaq00 : AquaqPuzzle
 
     public override PuzzleResult Run()
     {
-        var keyPresses = FileInput
+        var keyPresses = InputFile
             .Split(Environment.NewLine)
             .Select(o => o.Trim().Split(' ').ToArray())
             .Select(o => (int.Parse(o[0]), int.Parse(o[1])));

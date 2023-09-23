@@ -9,14 +9,14 @@ public class Year2015Day06 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var controller = new ChristmasLightsController();
-        controller.RunCommands(FileInput, false);
+        controller.RunCommands(InputFile, false);
         return new PuzzleResult(controller.LitCount, 377_891);
     }
 
     protected override PuzzleResult RunPart2()
     {
         var controller = new ChristmasLightsController();
-        controller.RunCommands(FileInput, true);
+        controller.RunCommands(InputFile, true);
         return new PuzzleResult(controller.TotalBrightness, 14_110_788);
     }
 }

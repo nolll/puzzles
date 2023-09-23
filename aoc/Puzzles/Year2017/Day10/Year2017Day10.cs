@@ -9,13 +9,13 @@ public class Year2017Day10 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var intHasher = new IntKnotHasher(FileInput);
+        var intHasher = new IntKnotHasher(InputFile);
         return new PuzzleResult(intHasher.Checksum, 2928);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var asciiHasher = new AsciiKnotHasher(FileInput);
+        var asciiHasher = new AsciiKnotHasher(InputFile);
         return new PuzzleResult(asciiHasher.Hash, "0c2f794b2eb555f7830766bf8fb65a16");
     }
 }

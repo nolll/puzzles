@@ -8,14 +8,14 @@ public class Year2015Day17 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var container = new EggnogContainers(FileInput);
+        var container = new EggnogContainers(InputFile);
         var combinations = container.GetCombinations(150);
         return new PuzzleResult(combinations.Count, 1304);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var container = new EggnogContainers(FileInput);
+        var container = new EggnogContainers(InputFile);
         var combinations = container.GetCombinationsWithLeastContainers(150);
         return new PuzzleResult(combinations.Count, 18);
     }

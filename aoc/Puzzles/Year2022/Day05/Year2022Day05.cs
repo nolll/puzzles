@@ -8,14 +8,14 @@ public class Year2022Day05 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var crane = new CargoCrane(FileInput);
+        var crane = new CargoCrane(InputFile);
         crane.Run1();
         return new PuzzleResult(crane.Message, "RTGWZTHLD");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var crane = new CargoCrane(FileInput);
+        var crane = new CargoCrane(InputFile);
         crane.Run2();
         return new PuzzleResult(crane.Message, "STHGRZZFR");
     }

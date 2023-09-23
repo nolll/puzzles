@@ -12,14 +12,14 @@ public class Year2018Day21 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var computer = new OpComputer();
-        var result = computer.RunSpecialForDay21(FileInput, 0, true);
+        var result = computer.RunSpecialForDay21(InputFile, 0, true);
         return new PuzzleResult(result, 103_548);
     }
 
     protected override PuzzleResult RunPart2()
     {
         var computer = new OpComputer();
-        var result = computer.RunSpecialForDay21(FileInput, 0, false);
+        var result = computer.RunSpecialForDay21(InputFile, 0, false);
         return new PuzzleResult(result, 14_256_686);
     }
 }

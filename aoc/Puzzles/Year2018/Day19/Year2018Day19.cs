@@ -10,14 +10,14 @@ public class Year2018Day19 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var computer = new OpComputer();
-        var value1 = computer.RunInstructionPointerProgram(FileInput, 0, true, false);
+        var value1 = computer.RunInstructionPointerProgram(InputFile, 0, true, false);
         return new PuzzleResult(value1, 1872);
     }
 
     protected override PuzzleResult RunPart2()
     {
         var computer2 = new OpComputer();
-        var value2 = computer2.RunInstructionPointerProgram(FileInput, 1, true, false);
+        var value2 = computer2.RunInstructionPointerProgram(InputFile, 1, true, false);
         return new PuzzleResult(value2, 18_992_592);
     }
 }

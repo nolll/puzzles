@@ -8,7 +8,7 @@ public class Year2019Day25 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var investigationDroid = new InvestigationDroid(FileInput);
+        var investigationDroid = new InvestigationDroid(InputFile);
         var password = investigationDroid.Run();
 
         return new PuzzleResult(password, "285213704");

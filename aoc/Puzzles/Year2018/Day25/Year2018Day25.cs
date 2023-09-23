@@ -8,7 +8,7 @@ public class Year2018Day25 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var finder = new ConstellationFinder(FileInput);
+        var finder = new ConstellationFinder(InputFile);
         var constellationCount = finder.Find();
         return new PuzzleResult(constellationCount, 375);
     }

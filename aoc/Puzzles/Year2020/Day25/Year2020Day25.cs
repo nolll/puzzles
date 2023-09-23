@@ -8,7 +8,7 @@ public class Year2020Day25 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var finder = new EncryptionKeyFinder(FileInput);
+        var finder = new EncryptionKeyFinder(InputFile);
         var key = finder.FindKey();
 
         return new PuzzleResult(key, 7269858);

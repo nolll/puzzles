@@ -8,13 +8,13 @@ public class Year2017Day07 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var towers = new RecursiveTowers(FileInput);
+        var towers = new RecursiveTowers(InputFile);
         return new PuzzleResult(towers.BottomName, "dgoocsw");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var towers = new RecursiveTowers(FileInput);
+        var towers = new RecursiveTowers(InputFile);
         return new PuzzleResult(towers.AdjustedWeight, 1275);
     }
 }

@@ -8,7 +8,7 @@ public class Year2021Day16 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var packet = BitsPacket.FromHex(FileInput);
+        var packet = BitsPacket.FromHex(InputFile);
         var result = packet.VersionSum;
 
         return new PuzzleResult(result, 879);
@@ -16,7 +16,7 @@ public class Year2021Day16 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var packet = BitsPacket.FromHex(FileInput);
+        var packet = BitsPacket.FromHex(InputFile);
         var result = packet.Value;
 
         return new PuzzleResult(result, 539051801941);

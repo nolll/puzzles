@@ -12,13 +12,13 @@ public class Year2022Day22 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var result = Part1(FileInput);
+        var result = Part1(InputFile);
         return new PuzzleResult(result, 47462);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var result = Part2(FileInput);
+        var result = Part2(InputFile);
         return new PuzzleResult(result, 137045);
     }
 

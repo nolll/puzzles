@@ -8,14 +8,14 @@ public class Year2017Day15 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var duel = GeneratorDuel.Parse(FileInput);
+        var duel = GeneratorDuel.Parse(InputFile);
         duel.Run(40_000_000);
         return new PuzzleResult(duel.FinalCount, 626);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var duel2 = GeneratorDuel.Parse(FileInput);
+        var duel2 = GeneratorDuel.Parse(InputFile);
         duel2.Run2(5_000_000);
         return new PuzzleResult(duel2.FinalCount, 306);
     }

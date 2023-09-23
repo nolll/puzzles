@@ -8,14 +8,14 @@ public class Year2016Day10 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var simulator = new BotSimulator(FileInput);
+        var simulator = new BotSimulator(InputFile);
         var botId = simulator.FindIdByChips(17, 61);
         return new PuzzleResult(botId, 118);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var simulator = new BotSimulator(FileInput);
+        var simulator = new BotSimulator(InputFile);
         var multipliedOutput = simulator.GetMultipliedOutput();
         return new PuzzleResult(multipliedOutput, 143153);
     }

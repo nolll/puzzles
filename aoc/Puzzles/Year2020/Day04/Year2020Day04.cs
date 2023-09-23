@@ -8,14 +8,14 @@ public class Year2020Day04 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var processor = new PassportProcessor(FileInput);
+        var processor = new PassportProcessor(InputFile);
         var passportCount = processor.GetNumberOfPassportsThatHasAllFields();
         return new PuzzleResult(passportCount, 210);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var processor = new PassportProcessor(FileInput);
+        var processor = new PassportProcessor(InputFile);
         var passportCount = processor.GetNumberOfValidPassports();
         return new PuzzleResult(passportCount, 131);
     }

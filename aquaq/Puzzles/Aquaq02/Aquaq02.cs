@@ -8,7 +8,7 @@ public class Aquaq02 : AquaqPuzzle
 
     public override PuzzleResult Run()
     {
-        var input = FileInput.Split(' ').Select(int.Parse);
+        var input = InputFile.Split(' ').Select(int.Parse);
         var uniqueNumbers = GetUniqueNumbers(input);
 
         return new PuzzleResult(uniqueNumbers.Sum(), 321);

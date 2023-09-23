@@ -25,7 +25,7 @@ public class Year2015Day22 : AocPuzzle
 
     private Params GetParams()
     {
-        var rows = PuzzleInputReader.ReadLines(FileInput);
+        var rows = PuzzleInputReader.ReadLines(InputFile);
 
         return new Params
         {

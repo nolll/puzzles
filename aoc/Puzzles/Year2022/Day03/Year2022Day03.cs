@@ -8,13 +8,13 @@ public class Year2022Day03 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var result = Rucksacks.GetPriority1(FileInput);
+        var result = Rucksacks.GetPriority1(InputFile);
         return new PuzzleResult(result, 8349);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var result = Rucksacks.GetPriority2(FileInput);
+        var result = Rucksacks.GetPriority2(InputFile);
         return new PuzzleResult(result, 2681);
     }
 }

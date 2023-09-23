@@ -9,14 +9,14 @@ public class Year2022Day02 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var game = new RockPaperScissors();
-        var result = game.Part1(FileInput);
+        var result = game.Part1(InputFile);
         return new PuzzleResult(result, 12586);
     }
 
     protected override PuzzleResult RunPart2()
     {
         var game = new RockPaperScissors();
-        var result = game.Part2(FileInput);
+        var result = game.Part2(InputFile);
         return new PuzzleResult(result, 13193);
     }
 }

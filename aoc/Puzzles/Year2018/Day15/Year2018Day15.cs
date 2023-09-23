@@ -10,14 +10,14 @@ public class Year2018Day15 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var battle = new ChocolateBattle(FileInput);
+        var battle = new ChocolateBattle(InputFile);
         battle.RunOnce();
         return new PuzzleResult(battle.Outcome, 246_176);
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var battle2 = new ChocolateBattle(FileInput);
+        var battle2 = new ChocolateBattle(InputFile);
         const int initialAttackPower = 14; // Was 4. Optimized after correct answer was found
         battle2.RunUntilElvesWins(initialAttackPower);
         return new PuzzleResult(battle2.Outcome, 58_128);

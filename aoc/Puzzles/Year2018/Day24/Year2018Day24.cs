@@ -9,7 +9,7 @@ public class Year2018Day24 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var inputs = FileInput.Split("\r\n\r\n");
+        var inputs = InputFile.Split("\r\n\r\n");
         var immuneInput = inputs.First();
         var infectionInput = inputs.Last();
 
@@ -20,7 +20,7 @@ public class Year2018Day24 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var inputs = FileInput.Split("\r\n\r\n");
+        var inputs = InputFile.Split("\r\n\r\n");
         var immuneInput = inputs.First();
         var infectionInput = inputs.Last();
             

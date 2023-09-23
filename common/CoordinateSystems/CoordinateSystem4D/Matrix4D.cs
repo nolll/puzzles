@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Common.CoordinateSystems.CoordinateSystem4D;
 
-public class Matrix4D<T>
+public class Matrix4D<T> where T : struct
 {
     private readonly T _defaultValue;
     private readonly IList<IList<IList<IList<T>>>> _matrix;

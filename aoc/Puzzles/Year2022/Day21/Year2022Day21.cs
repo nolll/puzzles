@@ -80,9 +80,9 @@ public class Year2022Day21 : AocPuzzle
 
         var rootLeft = tempMonkeys["root"].AName;
         var rootRight = tempMonkeys["root"].BName;
-        var rootRightYell = tempMonkeys[rootRight].Yell(0);
-        numbers[rootRight] = long.Parse(rootRightYell.ToString());
-        numbers[rootLeft] = long.Parse(rootRightYell.ToString());
+        var rootRightYell = tempMonkeys[rootRight!].Yell(0);
+        numbers[rootRight!] = long.Parse(rootRightYell.ToString());
+        numbers[rootLeft!] = long.Parse(rootRightYell.ToString());
         numbers.Remove("humn");
 
         var queue = new Queue<string>();

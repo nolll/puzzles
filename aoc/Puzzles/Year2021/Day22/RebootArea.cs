@@ -97,14 +97,14 @@ public class RebootArea : IEquatable<RebootArea>
         From.Y < other.From.Y && To.Y > other.To.Y &&
         From.Z < other.From.Z && To.Z > other.To.Z;
 
-    public bool Equals(RebootArea other)
+    public bool Equals(RebootArea? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return Equals(From, other.From) && Equals(To, other.To);
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

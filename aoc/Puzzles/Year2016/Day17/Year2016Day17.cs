@@ -17,7 +17,7 @@ public class Year2016Day17 : AocPuzzle
     {
         var maze = new LockedDoorMaze();
         maze.FindPaths(Input);
-        return new PuzzleResult(maze.LongestPath.Length, 498);
+        return new PuzzleResult(maze.LongestPath?.Length, 498);
     }
 
     private const string Input = "yjjvjgan";

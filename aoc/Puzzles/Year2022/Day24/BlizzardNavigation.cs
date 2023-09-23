@@ -12,8 +12,8 @@ public class BlizzardNavigation
     private const char Down = 'v';
     private const char Left = '<';
 
-    private readonly MatrixAddress _enter;
-    private readonly MatrixAddress _exit;
+    private readonly MatrixAddress _enter = new(0, 0);
+    private readonly MatrixAddress _exit = new(0, 0);
     private readonly Dictionary<MatrixAddress, IList<MatrixAddress>> _neighborCache = new();
     private readonly List<ImmutableHashSet<MatrixAddress>> _uniqueBlizzards = new();
     private readonly Matrix<char> _matrix;

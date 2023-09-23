@@ -6,7 +6,7 @@ namespace Aoc.Puzzles.Year2021.Day24;
 
 public class Year2021Day24 : AocPuzzle
 {
-    private List<string> _validNumbers;
+    private List<string>? _validNumbers;
     
     private List<string> ValidNumbers
     {

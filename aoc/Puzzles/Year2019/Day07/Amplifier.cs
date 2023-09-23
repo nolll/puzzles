@@ -8,14 +8,12 @@ public class Amplifier
     private bool _isStarted;
     private readonly IntCodeComputer _computer;
 
-    public Amplifier NextAmp { get; set; }
+    public Amplifier? NextAmp { get; set; }
     public int Phase { get; set; }
-    public string Name { get; }
     public long Output { get; private set; }
 
-    public Amplifier(string name, string memory)
+    public Amplifier(string memory)
     {
-        Name = name;
         _computer = new IntCodeComputer(memory, ComputerInput, ComputerOutput);
     }
 

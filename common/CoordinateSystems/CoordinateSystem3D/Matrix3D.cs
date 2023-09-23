@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Common.CoordinateSystems.CoordinateSystem3D;
 
-public class Matrix3D<T>
+public class Matrix3D<T> where T : struct
 {
     private readonly T _defaultValue;
     private readonly IList<IList<IList<T>>> _matrix;

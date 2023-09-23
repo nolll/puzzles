@@ -18,14 +18,14 @@ public class Ray : IEquatable<Ray>
         Distance = Math.Sqrt(yDiff * yDiff + xDiff * xDiff);
     }
 
-    public bool Equals(Ray other)
+    public bool Equals(Ray? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return Angle.Equals(other.Angle);
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

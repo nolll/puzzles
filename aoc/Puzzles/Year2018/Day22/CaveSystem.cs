@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2018.Day22;
 public class CaveSystem
 {
     private readonly long _depth;
-    private Matrix<CaveRegion> _cave;
+    private Matrix<CaveRegion> _cave = new();
     private readonly MatrixAddress _mouth;
     private readonly MatrixAddress _target;
 

@@ -6,9 +6,9 @@ namespace Aoc.Puzzles.Year2022.Day05;
 
 public class CargoCrane
 {
-    private IDictionary<int, Stack<char>> _stacks;
-    private IList<string> _moves;
-    public string Message { get; set; }
+    private readonly IDictionary<int, Stack<char>> _stacks;
+    private readonly IList<string> _moves;
+    public string? Message { get; private set; }
 
     public CargoCrane(string input)
     {

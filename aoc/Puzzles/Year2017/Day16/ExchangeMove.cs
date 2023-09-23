@@ -27,7 +27,7 @@ public class ExchangeMove : DanceMove
                 key2 = key;
         }
 
-        programs[key1.Value] = _index2;
-        programs[key2.Value] = _index1;
+        programs[key1!.Value] = _index2;
+        programs[key2!.Value] = _index1;
     }
 }

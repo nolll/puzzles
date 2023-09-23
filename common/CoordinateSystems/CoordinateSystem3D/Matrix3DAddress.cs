@@ -40,14 +40,14 @@ public class Matrix3DAddress : IEquatable<Matrix3DAddress>
         return $"{X},{Y},{Z}";
     }
 
-    public bool Equals(Matrix3DAddress other)
+    public bool Equals(Matrix3DAddress? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return X == other.X && Y == other.Y && Z == other.Z && Id == other.Id;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

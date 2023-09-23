@@ -5,7 +5,7 @@ public class BoostRunner
     private readonly string _program;
     private readonly int _mode;
     private long _lastOutput;
-    private IList<long> _outputs;
+    private IList<long> _outputs = new List<long>();
 
     public BoostRunner(string program, int mode)
     {

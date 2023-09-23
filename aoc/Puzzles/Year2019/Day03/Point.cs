@@ -19,14 +19,14 @@ public class Point : IEquatable<Point>
 
     public int Distance => Math.Abs(X) + Math.Abs(Y);
 
-    public bool Equals(Point other)
+    public bool Equals(Point? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return X == other.X && Y == other.Y;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

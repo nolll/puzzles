@@ -7,8 +7,8 @@ namespace Aoc.Puzzles.Year2018.Day13;
 
 public class CollisionDetector
 {
-    private Matrix<char> _matrix;
-    private IList<MineCart> _carts;
+    private Matrix<char> _matrix = new Matrix<char>(1, 1);
+    private IList<MineCart> _carts = new List<MineCart>();
     public MatrixAddress? LocationOfFirstCollision { get; private set; }
     public MatrixAddress? LocationOfLastCart { get; private set; }
 

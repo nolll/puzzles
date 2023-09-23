@@ -39,7 +39,7 @@ public class SleighAssembler
             var finishedWorkers = _workers.Where(o => o.IsFinished).ToList();
             foreach (var worker in finishedWorkers)
             {
-                order.Append(worker.Task.Name);
+                order.Append(worker.Task!.Name);
                 RemoveDep(worker.Task.Name);
                 worker.Task = null;
             }

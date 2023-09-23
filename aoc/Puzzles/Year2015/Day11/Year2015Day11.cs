@@ -4,8 +4,8 @@ namespace Aoc.Puzzles.Year2015.Day11;
 
 public class Year2015Day11: AocPuzzle
 {
-    private CorporatePasswordValidator _validator;
-    private string _firstPassword;
+    private CorporatePasswordValidator? _validator;
+    private string? _firstPassword;
 
     private CorporatePasswordValidator Validator => _validator ??= new CorporatePasswordValidator();
     private string FirstPassword => _firstPassword ??= Validator.FindNextPassword(Input);

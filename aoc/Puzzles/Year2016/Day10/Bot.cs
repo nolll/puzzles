@@ -6,8 +6,8 @@ namespace Aoc.Puzzles.Year2016.Day10;
 public class Bot
 {
     public int Id { get; }
-    public IGiver LowGiver { get; set; }
-    public IGiver HighGiver { get; set; }
+    public IGiver? LowGiver { get; set; }
+    public IGiver? HighGiver { get; set; }
     private readonly IList<int> _values;
     public int Low { get; private set; }
     public int High { get; private set; }
@@ -23,9 +23,9 @@ public class Bot
     public void Give()
     {
         Low = _values.Min();
-        LowGiver.Give(Low);
+        LowGiver?.Give(Low);
         High = _values.Max();
-        HighGiver.Give(High);
+        HighGiver?.Give(High);
         _values.Clear();
     }
 

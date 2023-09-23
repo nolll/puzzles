@@ -6,7 +6,7 @@ namespace Aoc.Puzzles.Year2019.Day20;
 
 public class DonutMazeSolver
 {
-    private Matrix<char> _map;
+    private Matrix<char> _map = new();
     public int ShortestStepCount { get; }
 
     public DonutMazeSolver(string input)

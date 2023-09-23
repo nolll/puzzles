@@ -95,7 +95,7 @@ public class CoordCount
     public int X { get; }
     public int Y { get; }
     public int Count { get; }
-    public MatrixAddress Coord { get; }
+    public MatrixAddress Coord { get; } = new(0, 0);
 
     public CoordCount(int x, int y, int count)
     {

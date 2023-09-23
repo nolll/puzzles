@@ -20,12 +20,12 @@ public class WhiteElephantParty
 
         while (circle.Count > 1)
         {
-            var next = current.NextOrFirst();
+            var next = current!.NextOrFirst();
             circle.Remove(next);
-            current = current.NextOrFirst();
+            current = current!.NextOrFirst();
         }
 
-        return current.Value.Id;
+        return current!.Value.Id;
     }
 
     public int StealFromElfAcrossCircle()
@@ -35,19 +35,19 @@ public class WhiteElephantParty
         var victim = circle.First;
         var halfWay = (int)Math.Floor((double)circle.Count / 2);
         for (var i = 0; i < halfWay; i++)
-            victim = victim.NextOrFirst();
+            victim = victim!.NextOrFirst();
 
         var elvesLeft = _elfCount;
         while (circle.Count > 1)
         {
-            var nextVictim = elvesLeft % 2 == 1 ? victim.NextOrFirst().NextOrFirst() : victim.NextOrFirst();
-            circle.Remove(victim);
-            current = current.NextOrFirst();
+            var nextVictim = elvesLeft % 2 == 1 ? victim!.NextOrFirst().NextOrFirst() : victim!.NextOrFirst();
+            circle.Remove(victim!);
+            current = current!.NextOrFirst();
             victim = nextVictim;
             elvesLeft--;
         }
 
-        return current.Value.Id;
+        return current!.Value.Id;
     }
 
     private LinkedList<PartyElf> BuildCircle()

@@ -14,7 +14,7 @@ public class RepairDroid
     private IntCodeComputer _computer;
     private readonly Matrix<char> _matrix;
     private readonly Queue<(MatrixAddress, MatrixDirection, IntCodeComputer)> _queue;
-    private MatrixAddress _target;
+    private MatrixAddress _target = new MatrixAddress(0, 0);
 
     public RepairDroid(string program)
     {

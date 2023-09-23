@@ -28,7 +28,7 @@ public class SeatingSimulatorVisibleSeats : SeatingSimulator
 
         Matrix.MoveTo(pos);
 
-        return values.Where(o => o != null).Select(o => o.Value).ToList();
+        return values.Where(o => o != null).Cast<char>().ToList();
     }
 
     protected override char GetSeatStatus(char currentValue, int neighborCount)

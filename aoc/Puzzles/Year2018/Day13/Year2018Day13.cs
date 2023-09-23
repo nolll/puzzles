@@ -11,7 +11,7 @@ public class Year2018Day13 : AocPuzzle
         var detector = new CollisionDetector(InputFile);
         detector.RunCarts();
         var firstCollisionCoords = detector.LocationOfFirstCollision;
-        var firstCollition = $"{firstCollisionCoords.X},{firstCollisionCoords.Y}";
+        var firstCollition = $"{firstCollisionCoords!.X},{firstCollisionCoords.Y}";
         return new PuzzleResult(firstCollition, "118,112");
     }
 
@@ -20,7 +20,7 @@ public class Year2018Day13 : AocPuzzle
         var detector = new CollisionDetector(InputFile);
         detector.RunCarts();
         var lastCartCoords = detector.LocationOfLastCart;
-        var lastCart = $"{lastCartCoords.X},{lastCartCoords.Y}";
+        var lastCart = $"{lastCartCoords!.X},{lastCartCoords.Y}";
         return new PuzzleResult(lastCart, "50,21");
     }
 }

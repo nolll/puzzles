@@ -11,6 +11,6 @@ public class SubtractionMonkey : MathMonkey
 
     public override long Yell(int level)
     {
-        return A.Yell(level + 1) - B.Yell(level + 1);
+        return A!.Yell(level + 1) - B!.Yell(level + 1);
     }
 }

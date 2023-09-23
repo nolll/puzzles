@@ -24,7 +24,7 @@ public class RadioisotopeSimulator
         StepCount = finishedFacility?.IterationCount ?? 0;
     }
 
-    private RadioisotopeFacility FindFinishedFacility(IEnumerable<RadioisotopeFacility> facilities)
+    private RadioisotopeFacility? FindFinishedFacility(IEnumerable<RadioisotopeFacility> facilities)
     {
         var newFacilities = new List<RadioisotopeFacility>();
         foreach (var facility in facilities)

@@ -19,7 +19,7 @@ public class Year2019Day02 : AocPuzzle
     {
         var solutionFinder = new ComputerSolutionFinder(InputFile);
         var result = solutionFinder.FindSolution(19690720);
-        var answer = 100 * result.Noun + result.Verb;
+        var answer = 100 * result!.Noun + result.Verb;
         return new PuzzleResult(answer, 8478);
     }
 }

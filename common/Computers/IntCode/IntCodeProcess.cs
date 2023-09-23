@@ -38,7 +38,7 @@ public class IntCodeProcess
         {
             var instruction = InstructionParser.Parse(_memory, _pointer, _relativeBase);
 
-            if (_stop || instruction.Type == InstructionType.Halt)
+            if (_stop || instruction is null || instruction.Type == InstructionType.Halt)
                 break;
 
             if (instruction.Type == InstructionType.Addition)

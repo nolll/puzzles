@@ -12,8 +12,8 @@ public class EqualityMonkey : MathMonkey
 
     public override long Yell(int level)
     {
-        var aYell = A.Yell(level + 1);
-        var bYell = B.Yell(level + 1);
+        var aYell = A!.Yell(level + 1);
+        var bYell = B!.Yell(level + 1);
         return Math.Abs(aYell) - Math.Abs(bYell);
     }
 }

@@ -41,10 +41,10 @@ public static class IntervalMerger
 
     private class IntervalSorter : IComparer
     {
-        int IComparer.Compare(object a, object b)
+        int IComparer.Compare(object? a, object? b)
         {
-            var first = (Interval)a ?? new Interval(0, 0);
-            var second = (Interval)b ?? new Interval(0, 0);
+            var first = a as Interval ?? new Interval(0, 0);
+            var second = b as Interval ?? new Interval(0, 0);
 
             return first.Start == second.Start
                 ? first.End - second.End

@@ -11,7 +11,7 @@ public class Disc
     public int ChildrensWeight => Children.Sum(o => o.TotalWeight);
     public IList<Disc> Children { get; }
     public IList<string> ChildrenIds { get; }
-    public string ParentId { get; set; }
+    public string? ParentId { get; set; }
 
     public Disc(string id, int weight, IList<string> childrenIds)
     {

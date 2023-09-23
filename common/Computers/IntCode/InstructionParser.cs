@@ -4,7 +4,7 @@ namespace Common.Computers.IntCode;
 
 public static class InstructionParser
 {
-    public static Instruction Parse(IList<long> memory, int position, int relativeBase)
+    public static Instruction? Parse(IList<long> memory, int position, int relativeBase)
     {
         if (memory.Count <= position)
             return null;

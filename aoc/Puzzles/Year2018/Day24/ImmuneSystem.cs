@@ -10,8 +10,8 @@ public class ImmuneSystem
     private readonly string _immuneInput;
     private readonly string _infectionInput;
     private readonly Regex _regex = new Regex(@"^(\d+) units each with (\d+) hit points( \(.+\) | )with an attack that does (\d+) (.+) damage at initiative (\d+)$");
-    private IDictionary<string, ImmuneSystemGroup> _groups;
-    private IDictionary<string, string> _targets;
+    private IDictionary<string, ImmuneSystemGroup> _groups = new Dictionary<string, ImmuneSystemGroup>();
+    private IDictionary<string, string> _targets = new Dictionary<string, string>();
     private bool _fightIsActive;
 
     public IList<ImmuneSystemGroup> ImmuneGroups => _groups.Values.Where(o => o.Army == ImmuneSystemArmy.Immune).ToList();

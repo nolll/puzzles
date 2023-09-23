@@ -9,7 +9,7 @@ public class CrabCupsGame
     private const int ExtendedMaxNumber = 1_000_000;
 
     private readonly LinkedList<int> _circle;
-    private LinkedListNode<int> _currentCup;
+    private LinkedListNode<int> _currentCup = new(0);
     private readonly int _minNumber;
     private readonly int _maxNumber;
     private readonly Dictionary<int, LinkedListNode<int>> _dictionary;
@@ -41,7 +41,7 @@ public class CrabCupsGame
             _maxNumber = ExtendedMaxNumber;
         }
 
-        _currentCup = _circle.First;
+        _currentCup = _circle.First!;
     }
 
     public void Play(int moves)

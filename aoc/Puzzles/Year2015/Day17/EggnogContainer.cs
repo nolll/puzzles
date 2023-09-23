@@ -13,14 +13,14 @@ public class EggnogContainer : IEquatable<EggnogContainer>
         Volume = volume;
     }
 
-    public bool Equals(EggnogContainer other)
+    public bool Equals(EggnogContainer? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return Id == other.Id;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

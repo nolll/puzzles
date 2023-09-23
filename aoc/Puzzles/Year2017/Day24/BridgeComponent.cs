@@ -15,14 +15,14 @@ public class BridgeComponent : IEquatable<BridgeComponent>
         Strength = strength ?? port1 + port2;
     }
 
-    public bool Equals(BridgeComponent other)
+    public bool Equals(BridgeComponent? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return Port1 == other.Port1 && Port2 == other.Port2;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

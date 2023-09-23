@@ -7,11 +7,11 @@ namespace Aoc.Puzzles.Year2016.Day24;
 
 public class AirDuctNavigator
 {
-    private IList<AirDuctLocation> _locations;
-    private Matrix<char> _matrix;
+    private IList<AirDuctLocation> _locations = new List<AirDuctLocation>();
+    private Matrix<char> _matrix = new();
     private readonly IDictionary<(char, char), AirDuctPath> _paths;
     private readonly IDictionary<string, int> _cache;
-    private AirDuctRobot _robot;
+    private AirDuctRobot _robot = new(new MatrixAddress(0, 0));
 
     public AirDuctNavigator(string input)
     {

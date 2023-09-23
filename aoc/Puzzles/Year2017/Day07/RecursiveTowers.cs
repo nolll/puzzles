@@ -6,7 +6,7 @@ namespace Aoc.Puzzles.Year2017.Day07;
 
 public class RecursiveTowers
 {
-    public string BottomName { get; }
+    public string? BottomName { get; }
     public int AdjustedWeight { get; }
 
     public RecursiveTowers(string input)

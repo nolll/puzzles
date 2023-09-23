@@ -5,7 +5,7 @@ namespace Common.CoordinateSystems.CoordinateSystem2D;
 [DebuggerDisplay("{X},{Y}")]
 public class MatrixAddress : IEquatable<MatrixAddress>
 {
-    private string _id;
+    private string? _id;
     private (int, int)? _tuple;
         
     public int X { get; }
@@ -32,14 +32,14 @@ public class MatrixAddress : IEquatable<MatrixAddress>
         return xDiff + yDiff;
     }
 
-    public bool Equals(MatrixAddress other)
+    public bool Equals(MatrixAddress? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return X == other.X && Y == other.Y;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

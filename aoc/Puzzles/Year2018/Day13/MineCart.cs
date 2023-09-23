@@ -8,7 +8,6 @@ public class MineCart
         
     public MatrixAddress Coords { get; private set; }
     public MatrixDirection Direction { get; private set; }
-    public bool HasCrashed { get; private set; }
 
     public MineCart(MatrixAddress coords, MatrixDirection direction)
     {
@@ -16,12 +15,7 @@ public class MineCart
         Direction = direction;
         _nextTurn = MineCartTurn.Left;
     }
-
-    public void Crash()
-    {
-        HasCrashed = true;
-    }
-
+    
     public void MoveTo(MatrixAddress coords)
     {
         Coords = coords;
@@ -63,10 +57,7 @@ public class MineCart
         if (c == CharConstants.Slash)
             return GetDirectionForSlash();
 
-        if (c == CharConstants.Plus)
-            return GetDirectionForPlus();
-
-        return null;
+        return GetDirectionForPlus();
     }
 
     private MatrixDirection GetDirectionForBackslash()

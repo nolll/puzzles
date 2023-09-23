@@ -37,7 +37,7 @@ public class GuardSleepPuzzle
             guards.Add(guard);
         }
 
-        return guards.OrderByDescending(o => o.MostSleptMinuteCount).FirstOrDefault();
+        return guards.OrderByDescending(o => o.MostSleptMinuteCount).First();
     }
 
     private List<GuardNight> GetNights(List<GuardEvent> events)

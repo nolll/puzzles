@@ -8,8 +8,8 @@ public class RadioisotopeFacility
 {
     private readonly IsotopeNameProvider _isotopeNameProvider;
     private readonly AnonymousNameProvider _anonymousNameProvider;
-    private string _id;
-    private string _anonymizedId;
+    private string? _id;
+    private string? _anonymizedId;
 
     public IList<RadioisotopeFloor> Floors { get; }
     private int ItemCount => Floors.Sum(o => o.Items.Count);

@@ -7,7 +7,7 @@ namespace Aoc.Puzzles.Year2018.Day23;
 
 public class NanobotFormation
 {
-    private readonly Point3d _origo = new Point3d(0, 0, 0);
+    private readonly Point3d _origo = new(0, 0, 0);
     private readonly IList<Nanobot> _bots;
 
     public NanobotFormation(string input)
@@ -35,9 +35,11 @@ public class NanobotFormation
         return bestCoords.Min(o => o.ManhattanDistanceTo(_origo));
     }
 
-    private IList<Point3d> FindBestCoordsInBestBox(SpaceBox box)
+    private IList<Point3d> FindBestCoordsInBestBox(SpaceBox? box)
     {
-        var iterations = 0;
+        if (box is null)
+            return new List<Point3d>();
+
         var mostBots = 0;
         var bestCoords = new List<Point3d>();
 
@@ -51,14 +53,12 @@ public class NanobotFormation
                     if (botCount > mostBots)
                     {
                         mostBots = botCount;
-                        bestCoords = new List<Point3d> { new Point3d(x, y, z) };
+                        bestCoords = new List<Point3d> { new(x, y, z) };
                     }
                     else if (botCount == mostBots)
                     {
                         bestCoords.Add(new Point3d(x, y, z));
                     }
-
-                    iterations++;
                 }
             }
         }
@@ -116,14 +116,14 @@ public class NanobotFormation
             DistanceFromOrigo = distanceFromOrigo;
         }
 
-        public bool Equals(PriorityQueueItem other)
+        public bool Equals(PriorityQueueItem? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             return Id == other.Id;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
@@ -137,7 +137,7 @@ public class NanobotFormation
         }
     }
 
-    private SpaceBox FindBestCoords(SpaceBox rootBox)
+    private SpaceBox? FindBestCoords(SpaceBox rootBox)
     {
         var queue = new PriorityQueue();
         queue.Enqueue(new PriorityQueueItem(rootBox, CountBotsInRange(rootBox), ManhattanDistanceTo(_origo, rootBox)));
@@ -155,15 +155,6 @@ public class NanobotFormation
         }
 
         return null;
-            
-        //var subBoxesWithBotCounts = subBoxes.Select(CountBotsInRange).ToList();
-        //var bestCount = subBoxesWithBotCounts.Max(o => o.count);
-        //var bestBoxes = subBoxesWithBotCounts.Where(o => o.count == bestCount).Select(o => o.box).ToList();
-        //var bestBoxesWithDistances = bestBoxes.Select(o => (o, ManhattanDistanceTo(_origo, o))).ToList();
-        //var bestBox = bestBoxesWithDistances.OrderBy(o => o.Item2).First().o;
-        //if (bestBox.Size == 1)
-        //    return bestBox;
-        //return FindBestCoords(bestBox);
     }
 
     private int CountBotsInRange(SpaceBox spaceBox)

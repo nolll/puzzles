@@ -14,7 +14,7 @@ public class TubeRouteFinder
     private const char Horizontal = '-';
     private const char Plus = '+';
 
-    public string Route { get; private set; }
+    public string? Route { get; private set; }
     public int StepCount { get; private set; }
 
     public TubeRouteFinder(string input)

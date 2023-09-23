@@ -38,14 +38,14 @@ public class Matrix4DAddress : IEquatable<Matrix4DAddress>
         return xDiff + yDiff + zDiff + wDiff;
     }
 
-    public bool Equals(Matrix4DAddress other)
+    public bool Equals(Matrix4DAddress? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return X == other.X && Y == other.Y && Z == other.Z && W == other.W && Id == other.Id;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

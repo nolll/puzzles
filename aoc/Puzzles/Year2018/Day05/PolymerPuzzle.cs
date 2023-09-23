@@ -77,7 +77,7 @@ public class PolymerPuzzle
         var nextItem = currentItem?.Next;
         while (nextItem != null)
         {
-            if (IsPair(currentItem.Value, nextItem.Value))
+            if (IsPair(currentItem!.Value, nextItem.Value))
             {
                 var newCurrent = nextItem.Next;
                 list.Remove(currentItem);

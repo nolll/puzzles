@@ -17,11 +17,11 @@ public class ThrustCalculator
 
     private IEnumerable<Amplifier> CreateAmplifiers()
     {
-        var amp1 = new Amplifier("Amp A", _computerMemory);
-        var amp2 = new Amplifier("Amp B", _computerMemory);
-        var amp3 = new Amplifier("Amp C", _computerMemory);
-        var amp4 = new Amplifier("Amp D", _computerMemory);
-        var amp5 = new Amplifier("Amp E", _computerMemory);
+        var amp1 = new Amplifier(_computerMemory);
+        var amp2 = new Amplifier(_computerMemory);
+        var amp3 = new Amplifier(_computerMemory);
+        var amp4 = new Amplifier(_computerMemory);
+        var amp5 = new Amplifier(_computerMemory);
 
         amp1.NextAmp = amp2;
         amp2.NextAmp = amp3;

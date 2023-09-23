@@ -10,8 +10,8 @@ public class LockedDoorMaze
     private readonly Hashfactory _hashFactory;
     private readonly MatrixAddress _target;
 
-    public string ShortestPath { get; private set; }
-    public string LongestPath { get; private set; }
+    public string? ShortestPath { get; private set; }
+    public string? LongestPath { get; private set; }
 
     public LockedDoorMaze()
     {

@@ -69,26 +69,26 @@ public class DistressSignal
                 case '[':
                 {
                     var newItem = new SignalItem(item);
-                    item.List.Add(newItem);
+                    item!.List.Add(newItem);
                     item = newItem;
                     break;
                 }
                 case ',':
                     break;
                 case ']':
-                    item = item.Parent;
+                    item = item!.Parent;
                     break;
                 default:
                 {
                     var newItem = new SignalItem(item);
                     var v = c == 'A' ? 10 : int.Parse(c.ToString()); 
                     newItem.Value = v;
-                    item.List.Add(newItem);
+                    item!.List.Add(newItem);
                     break;
                 }
             }
         }
 
-        return item;
+        return item!;
     }
 }

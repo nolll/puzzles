@@ -4,7 +4,7 @@ namespace Aoc.Puzzles.Year2021.Day17;
 
 public class Year2021Day17 : AocPuzzle
 {
-    private TrickshotResult _result;
+    private TrickshotResult? _result;
 
     public override string Name => "Trick Shot";
 

@@ -5,7 +5,7 @@ namespace Aoc.Puzzles.Year2019.Day15;
 
 public class Year2019Day15 : AocPuzzle
 {
-    private Matrix<char> _map;
+    private Matrix<char> _map = new();
     public override string Name => "Oxygen System";
 
     protected override PuzzleResult RunPart1()

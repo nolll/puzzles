@@ -4,7 +4,7 @@ namespace Aoc.Puzzles.Year2021.Day19;
 
 public class Year2021Day19 : AocPuzzle
 {
-    private BeaconSystemResult _result;
+    private BeaconSystemResult? _result;
 
     public override string Name => "Beacon Scanner";
 

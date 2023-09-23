@@ -10,7 +10,7 @@ public class SpinlockRunnerPart1
     private LinkedListNode<int> _current;
 
     public int NextValue => _current.Next?.Value ?? 0;
-    public int SecondValue => _list.First.Next?.Value ?? 0;
+    public int SecondValue => _list.First?.Next?.Value ?? 0;
 
     public SpinlockRunnerPart1(int steps)
     {
@@ -22,16 +22,13 @@ public class SpinlockRunnerPart1
     public void Run(int target)
     {
         var v = 1;
-        var pos = 0;
         while (v <= target)
         {
             for (var i = 0; i < _steps; i++)
             {
                 _current = _current.NextOrFirst();
-                pos++;
             }
 
-            pos %= v;
             _current = _list.AddAfter(_current, v);
             v++;
         }

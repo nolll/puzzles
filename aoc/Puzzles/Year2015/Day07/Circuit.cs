@@ -6,7 +6,7 @@ namespace Aoc.Puzzles.Year2015.Day07;
 public class Circuit
 {
     private readonly string _input;
-    public IDictionary<string, Wire> Wires { get; private set; }
+    public IDictionary<string, Wire> Wires { get; private set; } = new Dictionary<string, Wire>();
 
     public Circuit(string input)
     {

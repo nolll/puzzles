@@ -5,9 +5,9 @@ public class IntCodeComputer
     private readonly Func<long> _readInput;
     private readonly Func<long, bool> _writeOutput;
     private readonly IList<long> _memory;
-    private IntCodeProcess _process;
+    private IntCodeProcess? _process;
 
-    public long Result => _process.Result;
+    public long Result => _process?.Result ?? 0;
 
     public IntCodeComputer(IList<long> memory, Func<long> readInput, Func<long, bool> writeOutput)
     {
@@ -31,12 +31,12 @@ public class IntCodeComputer
     }
 
     public void SetMemory(int address, int value) => _memory[address] = value;
-    public void Resume() => _process.Run();
-    public void Stop() => _process.Stop();
+    public void Resume() => _process?.Run();
+    public void Stop() => _process?.Stop();
     private static IList<long> CopyMemory(IEnumerable<long> memory) => memory.ToList();
 
     public IntCodeComputer Clone()
     {
-        return new IntCodeComputer(_process.Memory, _readInput, _writeOutput);
+        return new IntCodeComputer(_process?.Memory ?? new List<long>(), _readInput, _writeOutput);
     }
 }

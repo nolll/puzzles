@@ -4,7 +4,7 @@ namespace Aoc.Puzzles.Year2022.Day08;
 
 public class Year2022Day08 : AocPuzzle
 {
-    private TreeHouse _treeHouse;
+    private TreeHouse? _treeHouse;
 
     public override string Name => "Treetop Tree House";
 
@@ -19,8 +19,8 @@ public class Year2022Day08 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        _treeHouse.Calc();
-        var result = _treeHouse.HighestScenicScore;
+        _treeHouse?.Calc();
+        var result = _treeHouse?.HighestScenicScore;
 
         return new PuzzleResult(result, 496125);
     }

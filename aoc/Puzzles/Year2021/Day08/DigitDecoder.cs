@@ -74,7 +74,7 @@ public class DigitDecoder
                 
             s[2] = len5.Single();
                 
-            var segmentToString = s.Keys.ToDictionary(key => s[key].ToString());
+            var segmentToString = s.Keys.ToDictionary(key => s[key]!.ToString());
             var digits = _output.Select(o => segmentToString[o]);
             var str = string.Join("", digits);
 

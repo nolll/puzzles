@@ -36,7 +36,7 @@ public class IntersectionFinder
             if (dictionary.ContainsKey(pointB.Id))
             {
                 var pointA = dictionary.GetValueOrDefault(pointB.Id);
-                var intersectionPoint = new Point(pointA.X, pointA.Y, pointA.Steps + pointB.Steps);
+                var intersectionPoint = new Point(pointA!.X, pointA.Y, pointA.Steps + pointB.Steps);
                 intersections.Add(intersectionPoint);
             }
         }

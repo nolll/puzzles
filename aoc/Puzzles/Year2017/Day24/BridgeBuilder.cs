@@ -7,7 +7,7 @@ namespace Aoc.Puzzles.Year2017.Day24;
 public class BridgeBuilder
 {
     private readonly bool _findLongestBridge;
-    private IList<BridgeComponent> _components;
+    private IList<BridgeComponent> _components = new List<BridgeComponent>();
 
     public BridgeBuilder(string input, bool findLongestBridge)
     {

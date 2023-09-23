@@ -7,11 +7,11 @@ namespace Aoc.Puzzles.Year2018.Day17;
 
 public class ReservoirFiller
 {
-    private Matrix<char> _matrix;
+    private Matrix<char> _matrix = new();
     private int _yMin = int.MaxValue;
     private int _yMax = int.MinValue;
     private readonly MatrixAddress _source = new(500, 0);
-    private List<MatrixAddress> _openAddresses;
+    private List<MatrixAddress> _openAddresses = new();
 
     private const char SourceTile = '+';
     private const char WallTile = '#';

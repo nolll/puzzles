@@ -360,7 +360,8 @@ public class ImageJigsawPuzzle
                 }
 
                 var matchedTile = TilesById.Values.FirstOrDefault(o => o.HasMatchingEdge(edge) && o.Id != tile.Id);
-                list.Add(matchedTile);
+                if(matchedTile is not null)
+                    list.Add(matchedTile);
             }
         }
 

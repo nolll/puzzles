@@ -8,9 +8,9 @@ namespace Aoc.Puzzles.Year2019.Day18;
 
 public class KeyCollector
 {
-    private IList<VaultKey> _keys;
-    private IList<VaultDoor> _doors;
-    private Matrix<char> _matrix;
+    private IList<VaultKey> _keys = new List<VaultKey>();
+    private IList<VaultDoor> _doors = new List<VaultDoor>();
+    private Matrix<char> _matrix = new();
     private readonly IDictionary<(char, char), VaultPath> _paths;
     private readonly IDictionary<string, int> _cache;
     private readonly IList<VaultRobot> _robots;

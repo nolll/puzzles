@@ -16,6 +16,6 @@ public class Year2020Day05 : AocPuzzle
     {
         var processor = new BoardingCardProcessor(InputFile);
         var mySeat = processor.FindMySeat();
-        return new PuzzleResult(mySeat.Id, 615);
+        return new PuzzleResult(mySeat?.Id, 615);
     }
 }

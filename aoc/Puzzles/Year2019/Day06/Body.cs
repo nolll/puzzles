@@ -2,12 +2,12 @@ namespace Aoc.Puzzles.Year2019.Day06;
 
 public class Body
 {
-    public string Name { get; }
-    public Body Parent { get; set; }
+    private readonly string _name;
+    public Body? Parent { get; set; }
 
     public Body(string name)
     {
-        Name = name;
+        _name = name;
     }
 
     public int OrbitCount
@@ -25,8 +25,9 @@ public class Body
         get
         {
             if (Parent == null)
-                return Name;
-            return $"{Parent.ParentPath}|{Name}";
+                return _name;
+
+            return $"{Parent.ParentPath}|{_name}";
         }
     }
 }

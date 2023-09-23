@@ -6,7 +6,7 @@ namespace Aoc.Puzzles.Year2018.Day06;
 
 public class LargestAreaFinder
 {
-    private Matrix<int> _matrix;
+    private Matrix<int> _matrix = new();
 
     private readonly IList<MatrixAddress> _coords;
     private readonly IList<int> _ids;

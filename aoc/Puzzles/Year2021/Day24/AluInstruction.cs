@@ -6,10 +6,10 @@ namespace Aoc.Puzzles.Year2021.Day24;
 public class AluInstruction
 {
     private readonly char _address;
-    private readonly string _b;
+    private readonly string? _b;
     public string Operation { get; }
 
-    public AluInstruction(string operation, char address, string b)
+    public AluInstruction(string operation, char address, string? b)
     {
         _address = address;
         _b = b;
@@ -60,19 +60,19 @@ public class AluInstruction
         return state;
     }
 
-    private long GetValue(AluState state, string s)
+    private long GetValue(AluState state, string? s)
     {
         var isAddress = IsAddress(s);
         if (isAddress)
         {
-            var address = s[..1].ToCharArray().First();
+            var address = s![..1].ToCharArray().First();
             return state.Memory[address];
         }
         else
         {
-            return int.Parse(s);
+            return int.Parse(s!);
         }
     }
 
-    private static bool IsAddress(string s) => s is "w" or "x" or "y" or "z";
+    private static bool IsAddress(string? s) => s is "w" or "x" or "y" or "z";
 }

@@ -7,9 +7,11 @@ namespace Aoc.Puzzles.Year2018.Day15;
 public class ChocolateBattle
 {
     private readonly string _input;
-    private Matrix<char> _matrix;
-    private IList<BattleFigure> _figures;
-    private IDictionary<(int x, int y), IList<MatrixAddress>> _neighborCache;
+    private Matrix<char> _matrix = new Matrix<char>();
+    private IList<BattleFigure> _figures = new List<BattleFigure>();
+
+    private IDictionary<(int x, int y), IList<MatrixAddress>> _neighborCache =
+        new Dictionary<(int x, int y), IList<MatrixAddress>>();
 
     public int Outcome { get; private set; }
     public string Winners = "";

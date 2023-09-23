@@ -14,11 +14,11 @@ public class RecursiveDonutMazeSolver
     }
 
     public int ShortestStepCount { get; }
-    private MatrixAddress _startAddress;
-    private MatrixAddress _endAddress;
-    private IDictionary<(int, int), DonutPortal> _portals;
-    private IDictionary<(int, int), IList<MatrixAddress>> _outerAdjacentCache;
-    private IDictionary<(int, int), IList<MatrixAddress>> _innerAdjacentCache;
+    private MatrixAddress _startAddress = new(0, 0);
+    private MatrixAddress _endAddress = new(0, 0);
+    private IDictionary<(int, int), DonutPortal> _portals = new Dictionary<(int, int), DonutPortal>();
+    private IDictionary<(int, int), IList<MatrixAddress>> _outerAdjacentCache = new Dictionary<(int, int), IList<MatrixAddress>>();
+    private IDictionary<(int, int), IList<MatrixAddress>> _innerAdjacentCache = new Dictionary<(int, int), IList<MatrixAddress>>();
 
     public RecursiveDonutMazeSolver(string input)
     {

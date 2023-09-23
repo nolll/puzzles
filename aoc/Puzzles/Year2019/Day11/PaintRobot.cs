@@ -11,7 +11,7 @@ public class PaintRobot
     private readonly Matrix<int> _panels;
     private readonly Matrix<int> _paintCounts;
     private PaintMode _mode;
-    private IntCodeComputer _computer;
+    private IntCodeComputer? _computer;
 
     public PaintRobot(string program, int shipWidth = 100, int shipHeight = 100)
     {

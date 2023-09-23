@@ -66,7 +66,7 @@ public class LookAndSayGame
         var parts = new List<Part>();
         foreach (var match in matches)
         {
-            var v = match.ToString();
+            var v = match.ToString()!;
             var part = new Part(v[0], v.Length);
             parts.Add(part);
         }

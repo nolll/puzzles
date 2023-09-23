@@ -5,8 +5,7 @@ namespace Aoc.Puzzles.Year2017.Day16;
 
 public class DancingPrograms
 {
-    private IDictionary<char, int> _positions;
-    public int RepeatAfter { get; private set; }
+    private IDictionary<char, int> _positions = new Dictionary<char, int>();
 
     public DancingPrograms(string programs = "abcdefghijklmnop")
     {

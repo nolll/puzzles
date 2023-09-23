@@ -11,7 +11,7 @@ public class Year2019Day23 : AocPuzzle
         var network = new CategorySixNetwork(InputFile);
         network.Run();
 
-        return new PuzzleResult(network.FirstNatPacket.Y, 17_541);
+        return new PuzzleResult(network.FirstNatPacket!.Y, 17_541);
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Year2019Day23 : AocPuzzle
         var network = new CategorySixNetwork(InputFile);
         network.Run();
 
-        return new PuzzleResult(network.FirstRepeatedNatPacket.Y, 12_415);
+        return new PuzzleResult(network.FirstRepeatedNatPacket!.Y, 12_415);
     }
 }

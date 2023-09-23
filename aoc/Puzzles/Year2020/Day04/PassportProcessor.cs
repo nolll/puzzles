@@ -49,7 +49,7 @@ public class PassportProcessor
             }
         }
 
-        private string GetValue(string key)
+        private string? GetValue(string key)
         {
             return _props.TryGetValue(key, out var value)
                 ? value
@@ -87,13 +87,7 @@ public class PassportProcessor
             get
             {
                 var v = GetValue(EyeColor);
-                return v == "amb" ||
-                       v == "blu" ||
-                       v == "brn" ||
-                       v == "gry" ||
-                       v == "grn" ||
-                       v == "hzl" ||
-                       v == "oth";
+                return v is "amb" or "blu" or "brn" or "gry" or "grn" or "hzl" or "oth";
             }
         }
 
@@ -153,7 +147,7 @@ public class PassportProcessor
             }
         }
             
-        private bool IsIntBetween(string s, int from, int to)
+        private bool IsIntBetween(string? s, int from, int to)
         {
             if (s == null)
                 return false;
@@ -165,7 +159,7 @@ public class PassportProcessor
             return v >= from && v <= to;
         }
 
-        private static bool IsDigitsOnly(string s)
+        private static bool IsDigitsOnly(string? s)
         {
             return s != null && s.All(IsDigit);
         }

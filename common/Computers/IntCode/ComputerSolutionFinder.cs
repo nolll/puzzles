@@ -12,7 +12,7 @@ public class ComputerSolutionFinder
     private const int LowerBound = 1;
     private const int UpperBound = 99;
 
-    public Result FindSolution(int target)
+    public Result? FindSolution(int target)
     {
         var computer = new ConsoleComputer(_input);
         for (var noun = LowerBound; noun <= UpperBound; noun++)

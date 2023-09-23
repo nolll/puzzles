@@ -5,7 +5,7 @@ namespace Common.CoordinateSystems.CoordinateSystem2D;
 public class Matrix<T> where T : struct
 {
     private readonly T _defaultValue;
-    private readonly IDictionary<MatrixAddress, T> _matrix;
+    private readonly IDictionary<MatrixAddress, T> _matrix = new Dictionary<MatrixAddress, T>();
 
     public int Width => XMax - XMin + 1;
     public int Height => YMax - YMin + 1;

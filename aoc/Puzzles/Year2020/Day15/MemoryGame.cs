@@ -18,7 +18,7 @@ public class MemoryGame
     public long Play(int until)
     {
         var turn = 0;
-        GameNumber lastSpokenNumber = null;
+        GameNumber? lastSpokenNumber = null;
         foreach (var num in _inputNumbers)
         {
             lastSpokenNumber = Speak(num, turn);

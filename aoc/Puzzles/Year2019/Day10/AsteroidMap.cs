@@ -14,13 +14,13 @@ public class AsteroidMap
         _list = GetAsteroidList(matrix);
     }
 
-    private IList<IList<Asteroid>> GetAsteroidMatrix(string map)
+    private IList<IList<Asteroid?>> GetAsteroidMatrix(string map)
     {
-        var asteroids = new List<IList<Asteroid>>();
+        var asteroids = new List<IList<Asteroid?>>();
         var rows = PuzzleInputReader.ReadLines(map);
         for (var y = 0; y < rows.Count; y++)
         {
-            var asteroidRow = new List<Asteroid>();
+            var asteroidRow = new List<Asteroid?>();
             var cols = rows[y].Trim().ToCharArray();
             for (var x = 0; x < cols.Length; x++)
             {
@@ -33,12 +33,12 @@ public class AsteroidMap
         return asteroids;
     }
 
-    private IList<Asteroid> GetAsteroidList(IList<IList<Asteroid>> matrix)
+    private IList<Asteroid> GetAsteroidList(IList<IList<Asteroid?>> matrix)
     {
         var list = new List<Asteroid>();
         foreach (var row in matrix)
         {
-            list.AddRange(row.Where(o => o != null));
+            list.AddRange(row.Where(o => o != null).Cast<Asteroid>());
         }
 
         return list;
@@ -48,7 +48,7 @@ public class AsteroidMap
     {
         var highestRayCount = 0;
         IList<Ray> mostRays = new List<Ray>();
-        Asteroid asteroidWithHighestRayCount = null;
+        Asteroid? asteroidWithHighestRayCount = null;
         foreach (var asteroid in _list)
         {
             var rays = GetRays(asteroid, _list);
@@ -61,7 +61,7 @@ public class AsteroidMap
             }
         }
 
-        return (asteroidWithHighestRayCount, highestRayCount, mostRays);
+        return (asteroidWithHighestRayCount!, highestRayCount, mostRays);
     }
 
     private IList<Ray> GetRays(Asteroid asteroid, IList<Asteroid> list)

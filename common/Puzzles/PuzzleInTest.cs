@@ -20,7 +20,7 @@ public class PuzzleInTest : Puzzle
         Name = name ?? string.Empty;
     }
 
-    protected override string InputFilePath => null;
+    protected override string InputFilePath => "";
 }
 
 public class CommentedPuzzleInTest : PuzzleInTest

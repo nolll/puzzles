@@ -15,7 +15,7 @@ public class BoardingCardProcessor
         _boardingCards = PuzzleInputReader.ReadLines(input).Select(BoardingCard.Parse);
     }
 
-    public BoardingCard FindMySeat()
+    public BoardingCard? FindMySeat()
     {
         var myRow = _boardingCards
             .GroupBy(o => o.Row)

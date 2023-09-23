@@ -9,14 +9,10 @@ public static class EulerHelpPrinter
         AnsiConsole.WriteLine("My solutions to Project Euler.");
         AnsiConsole.WriteLine("https://github.com/nolll/puzzles/euler");
         AnsiConsole.WriteLine();
-        AnsiConsole.WriteLine("Usage dotnet run -- [-p [problem]]");
-        AnsiConsole.WriteLine("My Project Euler solutions.");
-        AnsiConsole.WriteLine("If problem is omitted, all problems will run.");
+        AnsiConsole.WriteLine("Usage dotnet run -- [parameters]");
         AnsiConsole.WriteLine();
-        AnsiConsole.WriteLine("-p    --problem   the problem to run");
-        AnsiConsole.WriteLine("-s    --slow      just run problems marked as slow");
-        AnsiConsole.WriteLine("-c    --comment   just run problems that has a comment");
-        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine("-p    --puzzle    the puzzle to run");
+        AnsiConsole.WriteLine("-t    --tags      comma-separated list of tags to filter puzzles");
         AnsiConsole.WriteLine("-h    --help      display this help text");
         AnsiConsole.WriteLine("");
     }

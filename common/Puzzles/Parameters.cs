@@ -21,7 +21,7 @@ public class Parameters
     public static Parameters Parse(IEnumerable<string> args)
     {
         var parser = new ParameterParser(args);
-        var id = parser.GetValue("-i", "--id");
+        var id = parser.GetValue("-p", "--puzzle");
         var tags = parser.GetListValue("-t", "--tags"); 
         var showHelp = parser.GetBoolValue("-h", "--help") ?? false;
 

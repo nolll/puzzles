@@ -23,7 +23,7 @@ public abstract class EulerPuzzle : OnePartPuzzle
 
     protected override string InputFilePath =>
         Path.Combine(
-            "Problems",
-            $"Problem{_paddedId}",
-            $"Problem{_paddedId}.txt");
+            "Puzzles",
+            $"Euler{_paddedId}",
+            $"Euler{_paddedId}.txt");
 }

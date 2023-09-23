@@ -1,0 +1,15 @@
+using NUnit.Framework;
+
+namespace Euler.Puzzles.Euler012;
+
+public class Euler012Tests
+{
+    [Test]
+    public void Test()
+    {
+        var puzzle = new Euler012();
+        var result = puzzle.Run(5);
+
+        Assert.That(result, Is.EqualTo(28));
+    }
+}

@@ -5,11 +5,11 @@ namespace Common;
 
 public class Program
 {
-    private const int ProblemTimeout = 10;
+    private const int PuzzleTimeout = 10;
 
     private readonly IPuzzleRepository _puzzleRepository;
     private readonly IHelpPrinter _helpPrinter;
-    private readonly PuzzleRunner _runner = new(ProblemTimeout);
+    private readonly PuzzleRunner _runner = new(PuzzleTimeout);
 
     public Program(
         IPuzzleRepository puzzleRepository, 
@@ -26,10 +26,10 @@ public class Program
         if (parameters.ShowHelp)
             _helpPrinter.Print();
         else
-            RunProblems(parameters);
+            RunPuzzles(parameters);
     }
 
-    private void RunProblems(Puzzles.Parameters parameters)
+    private void RunPuzzles(Puzzles.Parameters parameters)
     {
         if (parameters.Id != null)
             RunSingle(parameters.Id);
@@ -49,9 +49,9 @@ public class Program
 
     private void RunAll(Puzzles.Parameters parameters)
     {
-        var allProblems = _puzzleRepository.GetPuzzles();
-        var filteredProblems = new PuzzleFilter(parameters).Filter(allProblems);
-        _runner.Run(filteredProblems);
+        var puzzles = _puzzleRepository.GetPuzzles();
+        var filteredPuzzles = new PuzzleFilter(parameters).Filter(puzzles);
+        _runner.Run(filteredPuzzles);
     }
 
     private static Puzzles.Parameters ParseParameters(string[] args, string debugPuzzle) =>

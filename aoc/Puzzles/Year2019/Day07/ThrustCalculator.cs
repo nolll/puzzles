@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using common.Combinatorics;
+using Common.Combinatorics;
 
 namespace Aoc.Puzzles.Year2019.Day07;
 

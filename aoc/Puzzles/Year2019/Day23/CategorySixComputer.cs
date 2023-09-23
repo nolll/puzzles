@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using common.Computers.IntCode;
+using Common.Computers.IntCode;
 
 namespace Aoc.Puzzles.Year2019.Day23;
 

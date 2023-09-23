@@ -1,6 +1,6 @@
 using System.Linq;
-using common.CoordinateSystems.CoordinateSystem3D;
-using common.CoordinateSystems.CoordinateSystem4D;
+using Common.CoordinateSystems.CoordinateSystem3D;
+using Common.CoordinateSystems.CoordinateSystem4D;
 
 namespace Aoc.Puzzles.Year2020.Day17;
 

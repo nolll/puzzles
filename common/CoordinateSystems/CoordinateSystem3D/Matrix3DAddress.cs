@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace common.CoordinateSystems.CoordinateSystem3D;
+namespace Common.CoordinateSystems.CoordinateSystem3D;
 
 [DebuggerDisplay("{X},{Y},{Z}")]
 public class Matrix3DAddress : IEquatable<Matrix3DAddress>

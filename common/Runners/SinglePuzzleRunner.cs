@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace common.Runners;
+namespace Common.Runners;
 
 public abstract class SinglePuzzleRunner
 {

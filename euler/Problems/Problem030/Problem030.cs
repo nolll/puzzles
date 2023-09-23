@@ -1,5 +1,5 @@
-﻿using common;
-using common.Puzzles;
+﻿using Common;
+using Common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem030;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using common.Combinatorics;
-using common.Strings;
+using Common.Combinatorics;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Year2015.Day13;
 

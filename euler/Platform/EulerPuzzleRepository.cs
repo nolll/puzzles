@@ -1,4 +1,4 @@
-﻿using common.Puzzles;
+﻿using Common.Puzzles;
 
 namespace Euler.Platform;
 

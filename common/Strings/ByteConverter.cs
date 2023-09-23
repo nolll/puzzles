@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace common.Strings;
+namespace Common.Strings;
 
 public static class ByteConverter
 {

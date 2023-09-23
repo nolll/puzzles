@@ -1,5 +1,5 @@
 ﻿using Aoc.Platform;
-using common.Puzzles;
+using Common.Puzzles;
 
 namespace Aoc.Puzzles.Year2018.Day06;
 

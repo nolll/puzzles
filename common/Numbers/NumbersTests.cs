@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace common.Numbers;
+namespace Common.Numbers;
 
 public class NumbersTests
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Aoc.Platform;
-using common.Puzzles;
+using Common.Puzzles;
 using NUnit.Framework;
 
 namespace Aoc.ConsoleTools;

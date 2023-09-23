@@ -1,4 +1,4 @@
-namespace common.Combinatorics;
+namespace Common.Combinatorics;
 
 public static class PermutationGenerator
 {

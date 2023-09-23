@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using common.Computers.IntCode;
+using Common.Computers.IntCode;
 
 namespace Aoc.Puzzles.Year2019.Day17;
 

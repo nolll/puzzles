@@ -1,4 +1,4 @@
-namespace common.Maths;
+namespace Common.Maths;
 
 public static class MathTools
 {

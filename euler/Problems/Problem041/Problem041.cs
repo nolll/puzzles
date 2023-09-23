@@ -1,6 +1,6 @@
-﻿using common.Combinatorics;
-using common.Numbers;
-using common.Puzzles;
+﻿using Common.Combinatorics;
+using Common.Numbers;
+using Common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem041;

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Aoc.Platform;
-using common.Lists;
-using common.Puzzles;
-using common.Strings;
+using Common.Lists;
+using Common.Puzzles;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Year2022.Day20;
 

@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace common.CoordinateSystems.CoordinateSystem2D;
+namespace Common.CoordinateSystems.CoordinateSystem2D;
 
 public class Matrix<T> : BaseMatrix
 {

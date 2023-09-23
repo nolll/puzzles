@@ -1,4 +1,4 @@
-﻿namespace common.Runners;
+﻿namespace Common.Runners;
 
 public static class DebugMode
 {

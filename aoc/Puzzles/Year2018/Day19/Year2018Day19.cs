@@ -1,6 +1,6 @@
 ﻿using Aoc.Platform;
-using common.Computers.Operation;
-using common.Puzzles;
+using Common.Computers.Operation;
+using Common.Puzzles;
 
 namespace Aoc.Puzzles.Year2018.Day19;
 

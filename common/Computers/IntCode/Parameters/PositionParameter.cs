@@ -1,4 +1,4 @@
-namespace common.Computers.IntCode.Parameters;
+namespace Common.Computers.IntCode.Parameters;
 
 public class PositionParameter : Parameter
 {

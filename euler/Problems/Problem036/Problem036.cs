@@ -1,6 +1,6 @@
-﻿using common.Numbers;
-using common.Puzzles;
-using common.Strings;
+﻿using Common.Numbers;
+using Common.Puzzles;
+using Common.Strings;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem036;

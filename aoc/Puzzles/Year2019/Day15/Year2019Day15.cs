@@ -1,6 +1,6 @@
 ﻿using Aoc.Platform;
-using common.CoordinateSystems.CoordinateSystem2D;
-using common.Puzzles;
+using Common.CoordinateSystems.CoordinateSystem2D;
+using Common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day15;
 

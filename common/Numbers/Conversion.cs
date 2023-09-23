@@ -1,4 +1,4 @@
-﻿namespace common.Numbers;
+﻿namespace Common.Numbers;
 
 public static class Conversion
 {

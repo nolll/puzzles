@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using common.Strings;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Year2018.Day04;
 

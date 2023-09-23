@@ -1,4 +1,4 @@
-﻿namespace common.Timing;
+﻿namespace Common.Timing;
 
 public class Timer
 {

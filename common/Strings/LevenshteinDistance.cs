@@ -1,4 +1,4 @@
-﻿namespace common.Strings;
+﻿namespace Common.Strings;
 
 public static class LevenshteinDistance
 {

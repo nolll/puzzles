@@ -1,4 +1,4 @@
-namespace common.CoordinateSystems.CoordinateSystem4D;
+namespace Common.CoordinateSystems.CoordinateSystem4D;
 
 public static class Matrix4DBuilder
 {

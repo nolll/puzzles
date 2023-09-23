@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace common.CoordinateSystems.CoordinateSystem2D;
+namespace Common.CoordinateSystems.CoordinateSystem2D;
 
 public class MatrixTests
 {

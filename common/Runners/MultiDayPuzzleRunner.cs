@@ -1,7 +1,7 @@
-﻿using common.Puzzles;
+﻿using Common.Puzzles;
 using Spectre.Console;
 
-namespace common.Runners;
+namespace Common.Runners;
 
 public class MultiDayPuzzleRunner
 {

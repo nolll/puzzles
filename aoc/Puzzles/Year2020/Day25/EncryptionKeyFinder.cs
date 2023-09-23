@@ -1,4 +1,4 @@
-using common.Strings;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Year2020.Day25;
 

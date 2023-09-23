@@ -1,7 +1,7 @@
-﻿using AquaQ.Platform;
-using common.Puzzles;
+﻿using Aquaq.Platform;
+using Common.Puzzles;
 
-namespace AquaQ.Puzzles.Aquaq02;
+namespace Aquaq.Puzzles.Aquaq02;
 
 public class Aquaq02 : AquaqPuzzle
 {

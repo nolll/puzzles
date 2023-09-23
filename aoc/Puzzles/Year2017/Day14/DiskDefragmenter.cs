@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using common.CoordinateSystems.CoordinateSystem2D;
-using common.Hashing;
+using Common.CoordinateSystems.CoordinateSystem2D;
+using Common.Hashing;
 
 namespace Aoc.Puzzles.Year2017.Day14;
 

@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace common.Ocr;
+namespace Common.Ocr;
 
 public class OcrLargeFontTests
 {

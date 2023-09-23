@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace common.CoordinateSystems.CoordinateSystem2D;
+namespace Common.CoordinateSystems.CoordinateSystem2D;
 
 public static class PathFinder
 {

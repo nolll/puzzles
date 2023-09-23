@@ -1,10 +1,10 @@
-﻿using common.Formatting;
-using common.Puzzles;
+﻿using Common.Formatting;
+using Common.Puzzles;
 using Spectre.Console;
 using Color = System.Drawing.Color;
-using Timer = common.Timing.Timer;
+using Timer = Common.Timing.Timer;
 
-namespace common.Runners;
+namespace Common.Runners;
 
 public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 {

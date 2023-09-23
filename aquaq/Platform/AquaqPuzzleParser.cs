@@ -1,4 +1,4 @@
-﻿namespace AquaQ.Platform;
+﻿namespace Aquaq.Platform;
 
 public static class AquaqPuzzleParser
 {

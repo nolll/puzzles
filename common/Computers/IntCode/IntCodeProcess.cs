@@ -1,7 +1,7 @@
-﻿using common.Computers.IntCode.Instructions;
-using common.Computers.IntCode.Parameters;
+﻿using Common.Computers.IntCode.Instructions;
+using Common.Computers.IntCode.Parameters;
 
-namespace common.Computers.IntCode;
+namespace Common.Computers.IntCode;
 
 public class IntCodeProcess
 {

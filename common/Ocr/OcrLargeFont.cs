@@ -1,4 +1,4 @@
-namespace common.Ocr;
+namespace Common.Ocr;
 
 public static class OcrLargeFont
 {

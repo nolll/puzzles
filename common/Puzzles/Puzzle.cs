@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace common.Puzzles;
+namespace Common.Puzzles;
 
 public abstract class Puzzle
 {

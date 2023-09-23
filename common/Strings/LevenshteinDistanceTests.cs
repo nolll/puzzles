@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace common.Strings;
+namespace Common.Strings;
 
 public class LevenshteinDistanceTests
 {

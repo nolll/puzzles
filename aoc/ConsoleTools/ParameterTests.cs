@@ -1,4 +1,4 @@
-﻿using common.Puzzles;
+﻿using Common.Puzzles;
 using NUnit.Framework;
 
 namespace Aoc.ConsoleTools;

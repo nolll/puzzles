@@ -1,6 +1,6 @@
-using common.Computers.IntCode.Instructions;
+using Common.Computers.IntCode.Instructions;
 
-namespace common.Computers.IntCode;
+namespace Common.Computers.IntCode;
 
 public static class InstructionParser
 {

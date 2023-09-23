@@ -1,7 +1,7 @@
 ﻿using Common.Puzzles;
 using Spectre.Console;
 
-namespace AquaQ.ConsoleTools;
+namespace Aquaq.ConsoleTools;
 
 public class AquaqHelpPrinter : IHelpPrinter
 {

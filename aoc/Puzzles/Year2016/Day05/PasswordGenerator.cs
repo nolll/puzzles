@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using common.Hashing;
-using common.Strings;
+using Common.Hashing;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Year2016.Day05;
 

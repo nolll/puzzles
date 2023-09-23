@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace common.Computers.Operation;
+namespace Common.Computers.Operation;
 
 public class OpComputerTests
 {

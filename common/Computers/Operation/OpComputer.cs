@@ -1,6 +1,6 @@
-using common.Strings;
+using Common.Strings;
 
-namespace common.Computers.Operation;
+namespace Common.Computers.Operation;
 
 public class OpComputer
 {

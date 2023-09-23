@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using common.Computers.IntCode;
-using common.Strings;
+using Common.Computers.IntCode;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Year2019.Day21;
 

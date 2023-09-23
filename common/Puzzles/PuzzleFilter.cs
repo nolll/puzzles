@@ -1,4 +1,4 @@
-﻿namespace common.Puzzles;
+﻿namespace Common.Puzzles;
 
 public class PuzzleFilter
 {

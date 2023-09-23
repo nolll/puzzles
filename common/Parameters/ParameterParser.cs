@@ -1,4 +1,4 @@
-﻿namespace common.Parameters;
+﻿namespace Common.Parameters;
 
 public class ParameterParser
 {

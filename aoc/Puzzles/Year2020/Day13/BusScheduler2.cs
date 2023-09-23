@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using common.Maths;
-using common.Strings;
+using Common.Maths;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Year2020.Day13;
 

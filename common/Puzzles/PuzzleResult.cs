@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace common.Puzzles;
+namespace Common.Puzzles;
 
 public class PuzzleResult
 {

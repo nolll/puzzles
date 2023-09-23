@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using common.CoordinateSystems.CoordinateSystem2D;
-using common.Ocr;
-using common.Strings;
+using Common.CoordinateSystems.CoordinateSystem2D;
+using Common.Ocr;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Year2016.Day08;
 

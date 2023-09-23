@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
-using AquaQ.Platform;
-using common.Puzzles;
+using Aquaq.Platform;
+using Common.Puzzles;
 
-namespace AquaQ.Puzzles.Aquaq01;
+namespace Aquaq.Puzzles.Aquaq01;
 
 public class Aquaq01 : AquaqPuzzle
 {

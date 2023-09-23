@@ -1,9 +1,8 @@
 ﻿using System;
 using Aoc.Printing;
 using Aoc.Puzzles;
-using common.Puzzles;
 using Common.Puzzles;
-using common.Runners;
+using Common.Runners;
 
 namespace Aoc;
 

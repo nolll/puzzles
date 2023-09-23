@@ -1,6 +1,6 @@
-using common.Computers.IntCode.Parameters;
+using Common.Computers.IntCode.Parameters;
 
-namespace common.Computers.IntCode.Instructions;
+namespace Common.Computers.IntCode.Instructions;
 
 public abstract class Instruction
 {

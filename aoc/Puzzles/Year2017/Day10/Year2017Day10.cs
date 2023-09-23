@@ -1,6 +1,6 @@
 ﻿using Aoc.Platform;
-using common.Hashing;
-using common.Puzzles;
+using Common.Hashing;
+using Common.Puzzles;
 
 namespace Aoc.Puzzles.Year2017.Day10;
 

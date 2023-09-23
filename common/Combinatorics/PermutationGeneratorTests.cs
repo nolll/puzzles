@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace common.Combinatorics;
+namespace Common.Combinatorics;
 
 public class PermutationGeneratorTests
 {

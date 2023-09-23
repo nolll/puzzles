@@ -1,10 +1,9 @@
-﻿using AquaQ.ConsoleTools;
-using AquaQ.Platform;
-using common.Puzzles;
+﻿using Aquaq.ConsoleTools;
+using Aquaq.Platform;
 using Common.Puzzles;
-using common.Runners;
+using Common.Runners;
 
-namespace AquaQ;
+namespace Aquaq;
 
 public class AquaqProgram
 {

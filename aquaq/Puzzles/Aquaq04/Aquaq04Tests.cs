@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace AquaQ.Puzzles.Aquaq04;
+namespace Aquaq.Puzzles.Aquaq04;
 
 public class Aquaq04Tests
 {

@@ -1,7 +1,7 @@
-using common.Computers.IntCode.Instructions;
+using Common.Computers.IntCode.Instructions;
 using NUnit.Framework;
 
-namespace common.Computers.IntCode;
+namespace Common.Computers.IntCode;
 
 public class InstructionParserTests
 {

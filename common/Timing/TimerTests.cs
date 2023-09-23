@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace common.Timing;
+namespace Common.Timing;
 
 public class TimerTests
 {

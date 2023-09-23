@@ -1,6 +1,6 @@
 ﻿using Aoc.Platform;
-using common.Computers.IntCode;
-using common.Puzzles;
+using Common.Computers.IntCode;
+using Common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day09;
 

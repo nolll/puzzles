@@ -1,6 +1,6 @@
-﻿using common.CoordinateSystems.CoordinateSystem2D;
+﻿using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace AquaQ.Puzzles.Aquaq03;
+namespace Aquaq.Puzzles.Aquaq03;
 
 public class Walker
 {

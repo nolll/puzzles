@@ -1,6 +1,5 @@
-﻿using common.Puzzles;
-using Common.Puzzles;
-using common.Runners;
+﻿using Common.Puzzles;
+using Common.Runners;
 using Euler.ConsoleTools;
 using Euler.Platform;
 

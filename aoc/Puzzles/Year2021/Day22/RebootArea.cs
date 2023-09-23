@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using common.CoordinateSystems.CoordinateSystem3D;
+using Common.CoordinateSystems.CoordinateSystem3D;
 
 namespace Aoc.Puzzles.Year2021.Day22;
 

@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace common;
+namespace Common;
 
 public static class Mathz
 {

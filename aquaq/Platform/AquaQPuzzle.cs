@@ -1,8 +1,7 @@
 ﻿using System.IO;
-using System.Text;
-using common.Puzzles;
+using Common.Puzzles;
 
-namespace AquaQ.Platform;
+namespace Aquaq.Platform;
 
 public abstract class AquaqPuzzle : OnePartPuzzle
 {

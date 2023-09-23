@@ -1,4 +1,4 @@
-namespace common.Computers.IntCode.Parameters;
+namespace Common.Computers.IntCode.Parameters;
 
 public abstract class Parameter
 {

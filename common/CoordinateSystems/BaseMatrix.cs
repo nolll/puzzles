@@ -1,4 +1,4 @@
-﻿namespace common.CoordinateSystems;
+﻿namespace Common.CoordinateSystems;
 
 public abstract class BaseMatrix
 {

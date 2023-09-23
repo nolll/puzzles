@@ -1,5 +1,5 @@
-﻿using common.CoordinateSystems.CoordinateSystem2D;
-using common.Puzzles;
+﻿using Common.CoordinateSystems.CoordinateSystem2D;
+using Common.Puzzles;
 using Euler.Platform;
 
 namespace Euler.Problems.Problem011;

@@ -1,4 +1,4 @@
-namespace common.Computers.IntCode.Instructions;
+namespace Common.Computers.IntCode.Instructions;
 
 public class HaltInstruction : Instruction
 {

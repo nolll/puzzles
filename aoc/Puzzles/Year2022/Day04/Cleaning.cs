@@ -1,5 +1,5 @@
 using System.Linq;
-using common.Strings;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Year2022.Day04;
 

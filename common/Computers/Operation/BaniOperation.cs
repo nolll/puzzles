@@ -1,4 +1,4 @@
-namespace common.Computers.Operation;
+namespace Common.Computers.Operation;
 
 public class BaniOperation : Operation
 {

@@ -1,4 +1,4 @@
-﻿namespace common.Computers.IntCode;
+﻿namespace Common.Computers.IntCode;
 
 public class ComputerSolutionFinder
 {

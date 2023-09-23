@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using common.CoordinateSystems.CoordinateSystem3D;
-using common.Maths;
+using Common.CoordinateSystems.CoordinateSystem3D;
+using Common.Maths;
 
 namespace Aoc.Puzzles.Year2019.Day12;
 

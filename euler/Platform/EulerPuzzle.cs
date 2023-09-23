@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Text;
-using common.Puzzles;
+using Common.Puzzles;
 
 namespace Euler.Platform;
 

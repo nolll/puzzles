@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using common.Lists;
+using Common.Lists;
 
 namespace Aoc.Puzzles.Year2016.Day19;
 

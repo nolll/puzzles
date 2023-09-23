@@ -1,4 +1,4 @@
-namespace common.Lists;
+namespace Common.Lists;
 
 public static class LinkedListExtensions
 {

@@ -1,8 +1,8 @@
-﻿using AquaQ.Platform;
-using common.Numbers;
-using common.Puzzles;
+﻿using Aquaq.Platform;
+using Common.Numbers;
+using Common.Puzzles;
 
-namespace AquaQ.Puzzles.Aquaq04;
+namespace Aquaq.Puzzles.Aquaq04;
 
 public class Aquaq04 : AquaqPuzzle
 {

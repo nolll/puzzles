@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace common.CoordinateSystems.CoordinateSystem2D;
+namespace Common.CoordinateSystems.CoordinateSystem2D;
 
 [DebuggerDisplay("{Name}")]
 public class MatrixDirection : IEquatable<MatrixDirection>

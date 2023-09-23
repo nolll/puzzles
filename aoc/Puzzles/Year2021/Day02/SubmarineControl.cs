@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using common.Strings;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Year2021.Day02;
 

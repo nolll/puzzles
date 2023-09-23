@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using common.Strings;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Year2020.Day18;
 

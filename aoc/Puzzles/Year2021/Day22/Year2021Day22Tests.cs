@@ -1,4 +1,4 @@
-using common.CoordinateSystems.CoordinateSystem3D;
+using Common.CoordinateSystems.CoordinateSystem3D;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Year2021.Day22;

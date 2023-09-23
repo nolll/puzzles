@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace common.Hashing;
+namespace Common.Hashing;
 
 public class AsciiKnotHasher
 {

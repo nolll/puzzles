@@ -12,9 +12,9 @@ public class PuzzleRunner
         _puzzleTimeout = puzzleTimeout;
     }
 
-    public void Run(IEnumerable<PuzzleWrapper> wrappers)
+    public void Run(IEnumerable<Puzzle> puzzles)
     {
-        var enumerable = wrappers as PuzzleWrapper[] ?? wrappers.ToArray();
+        var enumerable = puzzles as Puzzle[] ?? puzzles.ToArray();
         var count = enumerable.Length;
 
         if (count == 0)
@@ -29,8 +29,8 @@ public class PuzzleRunner
             new MultiDayPuzzleRunner(_puzzleTimeout).Run(enumerable);
     }
 
-    public void Run(PuzzleWrapper puzzleWrapper)
+    public void Run(Puzzle puzzle)
     {
-        Run(new List<PuzzleWrapper> { puzzleWrapper });
+        Run(new List<Puzzle> { puzzle });
     }
 }

@@ -12,10 +12,10 @@ public class MultiDayPuzzleRunner
         _timeoutTimespan = TimeSpan.FromSeconds(timeoutSeconds);
     }
 
-    public void Run(IEnumerable<PuzzleWrapper> days)
+    public void Run(IEnumerable<Puzzle> puzzles)
     {
-        var dayList = days.ToList();
-        var maxRunFuncCount = dayList.Max(o => o.Puzzle.RunFunctions.Count);
+        var puzzleList = puzzles.ToList();
+        var maxRunFuncCount = puzzleList.Max(o => o.RunFunctions.Count);
         var partTitles = maxRunFuncCount > 1
             ? Enumerable.Range(1, maxRunFuncCount).Select(o => $"part {o}    ")
             : new List<string> { "result    " };
@@ -28,14 +28,14 @@ public class MultiDayPuzzleRunner
         var divider = $"----------------{variableDividers}-----------------------------";
 
         AnsiConsole.Cursor.Show(false);
-        AnsiConsole.WriteLine($"Running {dayList.Count} puzzles");
+        AnsiConsole.WriteLine($"Running {puzzleList.Count} puzzles");
         AnsiConsole.WriteLine(divider);
         AnsiConsole.WriteLine($"| puzzle      | {variableParts} | comment                  |");
         AnsiConsole.WriteLine(divider);
 
-        foreach (var day in dayList)
+        foreach (var puzzle in puzzleList)
         {
-            new InSequenceSinglePuzzleRunner(day, _timeoutTimespan).Run();
+            new InSequenceSinglePuzzleRunner(puzzle, _timeoutTimespan).Run();
         }
 
         AnsiConsole.WriteLine(divider);

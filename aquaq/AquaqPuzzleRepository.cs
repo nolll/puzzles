@@ -4,16 +4,16 @@ namespace Aquaq;
 
 public class AquaqPuzzleRepository : IPuzzleRepository
 {
-    private readonly List<PuzzleWrapper> _allProblems;
+    private readonly List<Puzzle> _puzzles;
     private readonly PuzzleFactory _puzzleFactory = new AquaqPuzzleFactory();
 
     public AquaqPuzzleRepository()
     {
-        _allProblems = _puzzleFactory.CreatePuzzles();
+        _puzzles = _puzzleFactory.CreatePuzzles();
     }
 
-    public PuzzleWrapper? GetPuzzle(string id) =>
-        _allProblems.FirstOrDefault(o => o.Id == id);
+    public Puzzle? GetPuzzle(string id) =>
+        _puzzles.FirstOrDefault(o => o.Id == id);
 
-    public IList<PuzzleWrapper> GetPuzzles() => _allProblems;
+    public IList<Puzzle> GetPuzzles() => _puzzles;
 }

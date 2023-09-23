@@ -9,12 +9,12 @@ public class PuzzleFilter
         _parameters = parameters;
     }
 
-    public IEnumerable<PuzzleWrapper> Filter(IEnumerable<PuzzleWrapper> puzzles)
+    public IEnumerable<Puzzle> Filter(IEnumerable<Puzzle> puzzles)
     {
         var r = puzzles;
         foreach (var tag in _parameters.Tags)
         {
-            r = r.Where(o => o.Tags.Contains(tag));
+            r = r.Where(o => o.GetTags().Contains(tag));
         }
 
         return r;

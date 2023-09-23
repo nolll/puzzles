@@ -2,6 +2,6 @@
 
 public interface IPuzzleRepository
 {
-    PuzzleWrapper? GetPuzzle(string id);
-    IList<PuzzleWrapper> GetPuzzles();
+    Puzzle? GetPuzzle(string id);
+    IList<Puzzle> GetPuzzles();
 }

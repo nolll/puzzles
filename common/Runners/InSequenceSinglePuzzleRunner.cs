@@ -12,21 +12,21 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     private const int CommentColumnWidth = 24;
     private const int TruncatedCommentLength = CommentColumnWidth - 3;
 
-    private readonly PuzzleWrapper _wrapper;
+    private readonly Puzzle _puzzle;
     private readonly TimeSpan _timeoutTimespan;
     private readonly string _title;
     private readonly string _commentMarkup;
     private readonly string[] _markups;
 
-    public InSequenceSinglePuzzleRunner(PuzzleWrapper wrapper, TimeSpan timeoutTimespan)
+    public InSequenceSinglePuzzleRunner(Puzzle puzzle, TimeSpan timeoutTimespan)
     {
-        _wrapper = wrapper;
+        _puzzle = puzzle;
         _timeoutTimespan = timeoutTimespan;
 
-        _title = _wrapper.ListTitle.PadRight(11);
-        _commentMarkup = MarkupComment(_wrapper.Puzzle.Comment);
-        _markups = new string[_wrapper.Puzzle.RunFunctions.Count];
-        for (var i = 0; i < _wrapper.Puzzle.RunFunctions.Count; i++)
+        _title = _puzzle.ListTitle.PadRight(11);
+        _commentMarkup = MarkupComment(_puzzle.Comment);
+        _markups = new string[_puzzle.RunFunctions.Count];
+        for (var i = 0; i < _puzzle.RunFunctions.Count; i++)
         {
             _markups[i] = PadResult(string.Empty);
         }
@@ -35,9 +35,9 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     public void Run()
     {
         PrintRow();
-        for (var i = 0; i < _wrapper.Puzzle.RunFunctions.Count; i++)
+        for (var i = 0; i < _puzzle.RunFunctions.Count; i++)
         {
-            var runFunc = _wrapper.Puzzle.RunFunctions[i];
+            var runFunc = _puzzle.RunFunctions[i];
             RunPart(() => runFunc(), i);
         }
         AnsiConsole.WriteLine();

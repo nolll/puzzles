@@ -6,16 +6,16 @@ namespace Aoc.Puzzles;
 
 public class AocPuzzleRepository : IPuzzleRepository
 {
-    private readonly List<PuzzleWrapper> _allDays;
+    private readonly List<Puzzle> _puzzles;
     private readonly PuzzleFactory _puzzleFactory = new AocPuzzleFactory();
         
     public AocPuzzleRepository()
     {
-        _allDays = _puzzleFactory.CreatePuzzles();
+        _puzzles = _puzzleFactory.CreatePuzzles();
     }
 
-    public PuzzleWrapper? GetPuzzle(string id) =>
-        _allDays.FirstOrDefault(o => o.Id == id);
+    public Puzzle? GetPuzzle(string id) =>
+        _puzzles.FirstOrDefault(o => o.Id == id);
 
-    public IList<PuzzleWrapper> GetPuzzles() => _allDays;
+    public IList<Puzzle> GetPuzzles() => _puzzles;
 }

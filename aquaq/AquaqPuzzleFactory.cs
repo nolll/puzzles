@@ -4,23 +4,18 @@ namespace Aquaq;
 
 public class AquaqPuzzleFactory : PuzzleFactory
 {
-    public override List<PuzzleWrapper> CreatePuzzles() =>
+    public override List<Puzzle> CreatePuzzles() =>
         GetConcreteSubclassesOf<AquaqPuzzle>()
-            .Select(CreatePuzzleFromType)
+            .Select(CreatePuzzle)
             .OrderBy(o => o.Id)
             .ToList();
 
-    private static PuzzleWrapper CreatePuzzleFromType(Type t)
+    private static Puzzle CreatePuzzle(Type t)
     {
-        var id = AquaqPuzzleParser.GetPuzzleId(t).ToString();
         if (Activator.CreateInstance(t) is not AquaqPuzzle puzzle)
-            throw new Exception($"Could not create puzzle {id}");
+            throw new Exception($"Could not create puzzle: {t}");
 
-        return CreatePuzzle(id, puzzle);
+        return puzzle;
     }
 
-    private static PuzzleWrapper CreatePuzzle(string id, AquaqPuzzle puzzle)
-    {
-        return new PuzzleWrapper(puzzle.Id, puzzle.Title, puzzle.ListTitle, puzzle.GetTags().ToList(), puzzle);
-    }
 }

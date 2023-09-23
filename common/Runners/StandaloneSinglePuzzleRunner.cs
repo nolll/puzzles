@@ -8,22 +8,22 @@ namespace Common.Runners;
 
 public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
 {
-    private readonly PuzzleWrapper _wrapper;
+    private readonly Puzzle _puzzle;
     private const int StatusPadding = 15;
 
-    public StandaloneSinglePuzzleRunner(PuzzleWrapper wrapper)
+    public StandaloneSinglePuzzleRunner(Puzzle puzzle)
     {
-        _wrapper = wrapper;
+        _puzzle = puzzle;
     }
 
     public void Run()
     {
         AnsiConsole.Cursor.Show(false);
-        WriteHeader(_wrapper);
+        WriteHeader(_puzzle);
 
-        for (var i = 0; i < _wrapper.Puzzle.RunFunctions.Count; i++)
+        for (var i = 0; i < _puzzle.RunFunctions.Count; i++)
         {
-            var runFunc = _wrapper.Puzzle.RunFunctions[i];
+            var runFunc = _puzzle.RunFunctions[i];
             AnsiConsole.WriteLine();
             RunAndPrintPuzzleResult(i + 1, runFunc);
         }
@@ -31,12 +31,12 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         AnsiConsole.Cursor.Show(true);
     }
 
-    private static void WriteHeader(PuzzleWrapper wrapper)
+    private static void WriteHeader(Puzzle puzzle)
     {
-        AnsiConsole.WriteLine($"{wrapper.Title}:");
-        AnsiConsole.WriteLine(wrapper.Puzzle.Name);
-        if (wrapper.Puzzle.Comment is not null)
-            AnsiConsole.MarkupLine($"[yellow]{wrapper.Puzzle.Comment}[/]");
+        AnsiConsole.WriteLine($"{puzzle.Title}:");
+        AnsiConsole.WriteLine(puzzle.Name);
+        if (puzzle.Comment is not null)
+            AnsiConsole.MarkupLine($"[yellow]{puzzle.Comment}[/]");
     }
 
     private static void RunAndPrintPuzzleResult(int puzzleIndex, Func<PuzzleResult> puzzleFunc)

@@ -4,7 +4,7 @@ namespace Common.Puzzles;
 
 public abstract class PuzzleFactory
 {
-    public abstract List<PuzzleWrapper> CreatePuzzles();
+    public abstract List<Puzzle> CreatePuzzles();
 
     protected static IEnumerable<Type> GetConcreteSubclassesOf<T>() where T : class =>
         Assembly

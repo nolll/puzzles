@@ -39,12 +39,12 @@ public class Program
 
     private void RunSingle(string id)
     {
-        var problem = _puzzleRepository.GetPuzzle(id);
+        var puzzle = _puzzleRepository.GetPuzzle(id);
 
-        if (problem == null)
+        if (puzzle == null)
             throw new Exception($"The specified puzzle could not be found ({id})");
 
-        _runner.Run(problem);
+        _runner.Run(puzzle);
     }
 
     private void RunAll(Puzzles.Parameters parameters)

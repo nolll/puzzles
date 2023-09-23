@@ -1,14 +1,14 @@
 ﻿using Common.Puzzles;
 using Spectre.Console;
 
-namespace Aquaq.ConsoleTools;
+namespace Aoc;
 
-public class AquaqHelpPrinter : IHelpPrinter
+public class AocHelpPrinter : IHelpPrinter
 {
     public void Print()
     {
-        AnsiConsole.WriteLine("My solutions to AquaQ Challenge.");
-        AnsiConsole.WriteLine("https://github.com/nolll/puzzles/aquaq");
+        AnsiConsole.WriteLine("My solutions to Advent of Code.");
+        AnsiConsole.WriteLine("https://github.com/nolll/puzzles/aoc");
         AnsiConsole.WriteLine();
         AnsiConsole.WriteLine("Usage dotnet run -- [parameters]");
         AnsiConsole.WriteLine();

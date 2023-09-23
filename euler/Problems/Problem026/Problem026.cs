@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 using System.Text.RegularExpressions;
 using Common.Puzzles;
-using Euler.Platform;
 
 namespace Euler.Problems.Problem026;
 

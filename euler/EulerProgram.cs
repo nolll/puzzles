@@ -1,56 +1,17 @@
-﻿using Common.Puzzles;
-using Common.Runners;
-using Euler.ConsoleTools;
-using Euler.Platform;
+﻿using Common;
 
 namespace Euler;
 
 public class EulerProgram
 {
-    private const int ProblemTimeout = 10;
-    private const string DebugPuzzle = "42";
-
-    private static readonly PuzzleRunner Runner = new(ProblemTimeout);
-    private static readonly IPuzzleRepository PuzzleRepository = new EulerPuzzleRepository();
-    private static readonly IHelpPrinter HelpPrinter = new EulerHelpPrinter();
+    private const string DebugPuzzle = "1";
 
     static void Main(string[] args)
     {
-        var parameters = ParseParameters(args);
-
-        if (parameters.ShowHelp)
-            HelpPrinter.Print();
-        else
-            RunProblems(parameters);
+        var program = new Program(
+            new EulerPuzzleRepository(),
+            new EulerHelpPrinter());
+        
+        program.Run(args, DebugPuzzle);
     }
-
-    private static void RunProblems(Parameters parameters)
-    {
-        if (parameters.Id != null)
-            RunSingle(parameters.Id);
-        else
-            RunAll(parameters);
-    }
-
-    private static void RunSingle(string id)
-    {
-        var problem = PuzzleRepository.GetPuzzle(id);
-
-        if (problem == null)
-            throw new Exception($"The specified puzzle could not be found ({id})");
-
-        Runner.Run(problem);
-    }
-    
-    private static void RunAll(Parameters parameters)
-    {
-        var allProblems = PuzzleRepository.GetPuzzles();
-        var filteredProblems = new PuzzleFilter(parameters).Filter(allProblems);
-        Runner.Run(filteredProblems);
-    }
-    
-    private static Parameters ParseParameters(string[] args) =>
-        DebugMode.IsDebugMode
-            ? new Parameters(id: DebugPuzzle)
-            : Parameters.Parse(args);
 }

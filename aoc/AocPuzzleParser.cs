@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Aoc.Platform;
+namespace Aoc;
 
 public static class AocPuzzleParser
 {

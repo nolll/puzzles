@@ -1,8 +1,8 @@
-﻿using System.IO;
-using System.Text;
+﻿using System;
+using System.IO;
 using Common.Puzzles;
 
-namespace Euler.Platform;
+namespace Euler;
 
 public abstract class EulerPuzzle : OnePartPuzzle
 {

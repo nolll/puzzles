@@ -1,14 +1,14 @@
 ﻿using Common.Puzzles;
 using Spectre.Console;
 
-namespace Aoc.Printing;
+namespace Euler;
 
-public class AocHelpPrinter : IHelpPrinter
+public class EulerHelpPrinter : IHelpPrinter
 {
     public void Print()
     {
-        AnsiConsole.WriteLine("My solutions to Advent of Code.");
-        AnsiConsole.WriteLine("https://github.com/nolll/puzzles/aoc");
+        AnsiConsole.WriteLine("My solutions to Project Euler.");
+        AnsiConsole.WriteLine("https://github.com/nolll/puzzles/euler");
         AnsiConsole.WriteLine();
         AnsiConsole.WriteLine("Usage dotnet run -- [parameters]");
         AnsiConsole.WriteLine();

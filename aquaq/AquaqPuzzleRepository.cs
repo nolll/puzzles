@@ -1,6 +1,6 @@
 ﻿using Common.Puzzles;
 
-namespace Aquaq.Platform;
+namespace Aquaq;
 
 public class AquaqPuzzleRepository : IPuzzleRepository
 {

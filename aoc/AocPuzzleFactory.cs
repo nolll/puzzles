@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Puzzles;
 
-namespace Aoc.Platform;
+namespace Aoc;
 
 public class AocPuzzleFactory : PuzzleFactory
 {

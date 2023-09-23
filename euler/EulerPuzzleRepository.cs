@@ -1,6 +1,6 @@
 ﻿using Common.Puzzles;
 
-namespace Euler.Platform;
+namespace Euler;
 
 public class EulerPuzzleRepository : IPuzzleRepository
 {

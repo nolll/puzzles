@@ -2,7 +2,7 @@
 using System.IO;
 using Common.Puzzles;
 
-namespace Aoc.Platform;
+namespace Aoc;
 
 public abstract class AocPuzzle : TwoPartsPuzzle
 {

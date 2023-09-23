@@ -1,14 +1,14 @@
 ﻿using Common.Puzzles;
 using Spectre.Console;
 
-namespace Euler.ConsoleTools;
+namespace Aquaq;
 
-public class EulerHelpPrinter : IHelpPrinter
+public class AquaqHelpPrinter : IHelpPrinter
 {
     public void Print()
     {
-        AnsiConsole.WriteLine("My solutions to Project Euler.");
-        AnsiConsole.WriteLine("https://github.com/nolll/puzzles/euler");
+        AnsiConsole.WriteLine("My solutions to AquaQ Challenge.");
+        AnsiConsole.WriteLine("https://github.com/nolll/puzzles/aquaq");
         AnsiConsole.WriteLine();
         AnsiConsole.WriteLine("Usage dotnet run -- [parameters]");
         AnsiConsole.WriteLine();

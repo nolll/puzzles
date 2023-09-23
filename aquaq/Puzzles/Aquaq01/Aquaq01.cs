@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using Aquaq.Platform;
 using Common.Puzzles;
 
 namespace Aquaq.Puzzles.Aquaq01;

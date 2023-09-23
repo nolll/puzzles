@@ -1,5 +1,4 @@
-﻿using Aquaq.Platform;
-using Common.Puzzles;
+﻿using Common.Puzzles;
 
 namespace Aquaq.Puzzles.Aquaq02;
 

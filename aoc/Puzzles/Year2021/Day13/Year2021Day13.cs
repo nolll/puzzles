@@ -1,5 +1,4 @@
-﻿using Aoc.Platform;
-using Common.Ocr;
+﻿using Common.Ocr;
 using Common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day13;

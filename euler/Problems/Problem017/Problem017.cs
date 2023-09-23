@@ -1,6 +1,5 @@
 ﻿using Common.Puzzles;
 using Common.Strings;
-using Euler.Platform;
 
 namespace Euler.Problems.Problem017;
 

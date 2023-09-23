@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Aoc.Platform;
 using Common.Computers.Operation;
 using Common.Puzzles;
 

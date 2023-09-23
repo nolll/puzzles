@@ -1,5 +1,4 @@
-﻿using Aoc.Platform;
-using Common.CoordinateSystems.CoordinateSystem2D;
+﻿using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Puzzles;
 
 namespace Aoc.Puzzles.Year2019.Day15;

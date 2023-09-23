@@ -1,14 +1,13 @@
-﻿using Common.Puzzles;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
-namespace Aoc.ConsoleTools;
+namespace Common.Parameters;
 
 public class ParameterTests
 {
     [Test]
     public void NoParameters()
     {
-        var result = Parameters.Parse("");
+        var result = Puzzles.Parameters.Parse("");
 
         Assert.That(result.Id, Is.Null);
         Assert.That(result.Tags, Is.Empty);
@@ -19,7 +18,7 @@ public class ParameterTests
     [TestCase("-i 1")]
     public void ParseDay(string input)
     {
-        var result = Parameters.Parse(input);
+        var result = Puzzles.Parameters.Parse(input);
 
         Assert.That(result.Id, Is.EqualTo(1));
     }
@@ -28,7 +27,7 @@ public class ParameterTests
     [TestCase("-t 1,test,3")]
     public void ParseYear(string input)
     {
-        var result = Parameters.Parse(input);
+        var result = Puzzles.Parameters.Parse(input);
 
         Assert.That(result.Tags[0], Is.EqualTo("1"));
         Assert.That(result.Tags[1], Is.EqualTo("test"));
@@ -41,7 +40,7 @@ public class ParameterTests
     [TestCase("-h true")]
     public void ParseHelp(string input)
     {
-        var result = Parameters.Parse(input);
+        var result = Puzzles.Parameters.Parse(input);
 
         Assert.That(result.ShowHelp, Is.True);
     }

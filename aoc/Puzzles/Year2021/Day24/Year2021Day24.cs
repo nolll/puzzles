@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Aoc.Platform;
 using Common.Puzzles;
 
 namespace Aoc.Puzzles.Year2021.Day24;

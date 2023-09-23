@@ -1,4 +1,4 @@
-﻿namespace Euler.Platform;
+﻿namespace Euler;
 
 public static class EulerPuzzleParser
 {

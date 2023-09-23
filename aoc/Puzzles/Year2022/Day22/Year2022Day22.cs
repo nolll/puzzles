@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Aoc.Platform;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Puzzles;
 using Common.Strings;

@@ -1,25 +1,26 @@
 ﻿using common.Puzzles;
+using Common.Puzzles;
 using common.Runners;
 using Euler.ConsoleTools;
 using Euler.Platform;
-using Euler.Problems;
 
 namespace Euler;
 
 public class Program
 {
     private const int ProblemTimeout = 10;
-    private const string DebugProblem = "42";
+    private const string DebugPuzzle = "42";
 
     private static readonly PuzzleRunner Runner = new(ProblemTimeout);
-    private static readonly IPuzzleRepository EulerPuzzleRepository = new EulerPuzzleRepository();
+    private static readonly IPuzzleRepository PuzzleRepository = new EulerPuzzleRepository();
+    private static readonly IHelpPrinter HelpPrinter = new EulerHelpPrinter();
 
     static void Main(string[] args)
     {
         var parameters = ParseParameters(args);
 
         if (parameters.ShowHelp)
-            ShowHelp();
+            HelpPrinter.Print();
         else
             RunProblems(parameters);
     }
@@ -34,32 +35,23 @@ public class Program
 
     private static void RunSingle(string id)
     {
-        var problem = EulerPuzzleRepository.GetPuzzle(id);
+        var problem = PuzzleRepository.GetPuzzle(id);
 
         if (problem == null)
-            throw new Exception($"The specified problem could not be found ({id})");
+            throw new Exception($"The specified puzzle could not be found ({id})");
 
         Runner.Run(problem);
     }
     
     private static void RunAll(Parameters parameters)
     {
-        var allProblems = EulerPuzzleRepository.GetPuzzles();
+        var allProblems = PuzzleRepository.GetPuzzles();
         var filteredProblems = new PuzzleFilter(parameters).Filter(allProblems);
         Runner.Run(filteredProblems);
     }
-
-    private static void ShowHelp()
-    {
-        EulerHelpPrinter.Print();
-    }
-
-    private static Parameters ParseParameters(string[] args)
-    {
-#if SINGLE
-        return new Parameters(id: DebugProblem);
-#else
-        return Parameters.Parse(args);
-#endif
-    }
+    
+    private static Parameters ParseParameters(string[] args) =>
+        DebugMode.IsDebugMode
+            ? new Parameters(id: DebugPuzzle)
+            : Parameters.Parse(args);
 }

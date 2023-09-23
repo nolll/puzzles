@@ -1,10 +1,11 @@
-﻿using Spectre.Console;
+﻿using Common.Puzzles;
+using Spectre.Console;
 
 namespace AquaQ.ConsoleTools;
 
-public static class AquaqHelpPrinter
+public class AquaqHelpPrinter : IHelpPrinter
 {
-    public static void Print()
+    public void Print()
     {
         AnsiConsole.WriteLine("My solutions to AquaQ Challenge.");
         AnsiConsole.WriteLine("https://github.com/nolll/puzzles/aquaq");

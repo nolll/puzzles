@@ -1,10 +1,11 @@
-﻿using Spectre.Console;
+﻿using Common.Puzzles;
+using Spectre.Console;
 
 namespace Aoc.Printing;
 
-public static class AocHelpPrinter
+public class AocHelpPrinter : IHelpPrinter
 {
-    public static void Print()
+    public void Print()
     {
         AnsiConsole.WriteLine("My solutions to Advent of Code.");
         AnsiConsole.WriteLine("https://github.com/nolll/puzzles/aoc");

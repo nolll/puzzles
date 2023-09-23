@@ -1,10 +1,11 @@
-﻿using Spectre.Console;
+﻿using Common.Puzzles;
+using Spectre.Console;
 
 namespace Euler.ConsoleTools;
 
-public static class EulerHelpPrinter
+public class EulerHelpPrinter : IHelpPrinter
 {
-    public static void Print()
+    public void Print()
     {
         AnsiConsole.WriteLine("My solutions to Project Euler.");
         AnsiConsole.WriteLine("https://github.com/nolll/puzzles/euler");

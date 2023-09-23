@@ -5,7 +5,7 @@ using common.Puzzles;
 
 namespace Aoc.Puzzles;
 
-public class AocPuzzleRepository
+public class AocPuzzleRepository : IPuzzleRepository
 {
     private readonly List<PuzzleWrapper> _allDays;
     private readonly PuzzleFactory _puzzleFactory = new AocPuzzleFactory();
@@ -18,10 +18,5 @@ public class AocPuzzleRepository
     public PuzzleWrapper? GetPuzzle(string id) =>
         _allDays.FirstOrDefault(o => o.Id == id);
 
-    public List<PuzzleWrapper> GetEventDays(int? selectedYear) =>
-        selectedYear != null 
-            ? _allDays.Where(o => o.Id.StartsWith(selectedYear.Value.ToString())).ToList() 
-            : new List<PuzzleWrapper>();
-
-    public List<PuzzleWrapper> GetAll() => _allDays;
+    public IList<PuzzleWrapper> GetPuzzles() => _allDays;
 }

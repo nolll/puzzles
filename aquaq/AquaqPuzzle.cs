@@ -5,12 +5,11 @@ namespace Aquaq;
 
 public abstract class AquaqPuzzle : OnePartPuzzle
 {
-    protected sealed override string GetFilePath(Type t)
+    protected sealed override string GetRelativeFilePath(Type t)
     {
-        var id = AquaqPuzzleParser.GetChallengeId(t);
+        var id = AquaqPuzzleParser.GetPuzzleId(t);
         var paddedId = id.ToString().PadLeft(2, '0');
         return Path.Combine(
-            AppDomain.CurrentDomain.BaseDirectory,
             "Puzzles",
             $"Aquaq{paddedId}",
             $"Aquaq{paddedId}.txt");

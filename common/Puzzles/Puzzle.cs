@@ -24,9 +24,12 @@ public abstract class Puzzle
 
     public abstract IList<Func<PuzzleResult>> RunFunctions { get; }
 
-    protected virtual string FilePath => GetFilePath(GetType());
-    protected abstract string GetFilePath(Type t);
-    protected string RootPath => AppDomain.CurrentDomain.BaseDirectory;
+    protected virtual string FilePath =>
+        Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory,
+            GetRelativeFilePath(GetType()));
+
+    protected abstract string GetRelativeFilePath(Type t);
 
     public IEnumerable<string> GetTags()
     {

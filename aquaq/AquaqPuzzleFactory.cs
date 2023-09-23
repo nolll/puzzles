@@ -12,7 +12,7 @@ public class AquaqPuzzleFactory : PuzzleFactory
 
     private static PuzzleWrapper CreatePuzzleFromType(Type t)
     {
-        var id = AquaqPuzzleParser.GetChallengeId(t).ToString();
+        var id = AquaqPuzzleParser.GetPuzzleId(t).ToString();
         if (Activator.CreateInstance(t) is not AquaqPuzzle puzzle)
             throw new Exception($"Could not create puzzle {id}");
 

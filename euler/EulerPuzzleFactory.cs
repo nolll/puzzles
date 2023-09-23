@@ -12,7 +12,7 @@ public class EulerPuzzleFactory : PuzzleFactory
 
     private static PuzzleWrapper CreatePuzzle(Type t)
     {
-        var id = EulerPuzzleParser.GetProblemId(t).ToString();
+        var id = EulerPuzzleParser.GetPuzzleId(t).ToString();
         if (Activator.CreateInstance(t) is not EulerPuzzle puzzle)
             throw new Exception($"Could not create puzzle {id}");
 

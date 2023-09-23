@@ -6,12 +6,11 @@ namespace Euler;
 
 public abstract class EulerPuzzle : OnePartPuzzle
 {
-    protected sealed override string GetFilePath(Type t)
+    protected sealed override string GetRelativeFilePath(Type t)
     {
-        var id = EulerPuzzleParser.GetProblemId(t);
+        var id = EulerPuzzleParser.GetPuzzleId(t);
         var paddedId = id.ToString().PadLeft(3, '0');
         return Path.Combine(
-            RootPath,
             "Problems",
             $"Problem{paddedId}",
             $"Problem{paddedId}.txt");

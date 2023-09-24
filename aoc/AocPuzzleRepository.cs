@@ -2,7 +2,7 @@
 using System.Linq;
 using Common.Puzzles;
 
-namespace Aoc.Puzzles;
+namespace Aoc;
 
 public class AocPuzzleRepository : IPuzzleRepository
 {

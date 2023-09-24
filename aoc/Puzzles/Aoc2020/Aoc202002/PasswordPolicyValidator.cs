@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2020.Day02;
+namespace Aoc.Puzzles.Aoc2020.Aoc202002;
 
 public class PasswordPolicyValidator
 {

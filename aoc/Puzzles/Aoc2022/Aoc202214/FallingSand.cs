@@ -4,7 +4,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2022.Day14;
+namespace Aoc.Puzzles.Aoc2022.Aoc202214;
 
 public class FallingSand
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem3D;
 using Common.Maths;
 
-namespace Aoc.Puzzles.Aoc2019.Day12;
+namespace Aoc.Puzzles.Aoc2019.Aoc201912;
 
 public class MoonTracker
 {

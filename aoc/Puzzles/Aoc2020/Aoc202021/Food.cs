@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2020.Day21;
+namespace Aoc.Puzzles.Aoc2020.Aoc202021;
 
 public class Food
 {

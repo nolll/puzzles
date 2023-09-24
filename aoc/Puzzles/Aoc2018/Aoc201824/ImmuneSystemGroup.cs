@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2018.Day24;
+namespace Aoc.Puzzles.Aoc2018.Aoc201824;
 
 public class ImmuneSystemGroup
 {

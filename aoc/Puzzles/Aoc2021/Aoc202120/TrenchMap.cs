@@ -2,7 +2,7 @@
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2021.Day20;
+namespace Aoc.Puzzles.Aoc2021.Aoc202120;
 
 public class TrenchMap
 {

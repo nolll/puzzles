@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2020.Day08;
+namespace Aoc.Puzzles.Aoc2020.Aoc202008;
 
 public class GameConsoleExit
 {

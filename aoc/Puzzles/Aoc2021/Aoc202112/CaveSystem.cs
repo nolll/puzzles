@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2021.Day12;
+namespace Aoc.Puzzles.Aoc2021.Aoc202112;
 
 public class CaveSystem
 {

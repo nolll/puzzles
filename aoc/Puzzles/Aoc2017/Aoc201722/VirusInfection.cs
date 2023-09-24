@@ -1,6 +1,6 @@
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2017.Day22;
+namespace Aoc.Puzzles.Aoc2017.Aoc201722;
 
 public class VirusInfection
 {

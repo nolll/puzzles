@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2019.Day04;
+namespace Aoc.Puzzles.Aoc2019.Aoc201904;
 
 public static class PasswordAnalyzer
 {

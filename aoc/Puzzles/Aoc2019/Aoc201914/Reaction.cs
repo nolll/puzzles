@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2019.Day14;
+namespace Aoc.Puzzles.Aoc2019.Aoc201914;
 
 public class Reaction
 {

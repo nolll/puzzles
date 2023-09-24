@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2022.Day07;
+namespace Aoc.Puzzles.Aoc2022.Aoc202207;
 
 public class ElfDirectory
 {

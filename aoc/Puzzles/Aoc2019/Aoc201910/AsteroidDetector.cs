@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2019.Day10;
+namespace Aoc.Puzzles.Aoc2019.Aoc201910;
 
 public class AsteroidDetector
 {

@@ -1,7 +1,7 @@
 using System.Numerics;
 using NUnit.Framework;
 
-namespace Aoc.Puzzles.Aoc2021.Day16;
+namespace Aoc.Puzzles.Aoc2021.Aoc202116;
 
 public class Year2021Day16Tests
 {

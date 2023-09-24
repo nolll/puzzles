@@ -1,7 +1,7 @@
 ﻿using Common.Computers.IntCode;
 using Common.Puzzles;
 
-namespace Aoc.Puzzles.Aoc2019.Day02;
+namespace Aoc.Puzzles.Aoc2019.Aoc201902;
 
 public class Year2019Day02 : AocPuzzle
 {

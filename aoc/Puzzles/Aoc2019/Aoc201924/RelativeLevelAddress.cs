@@ -1,6 +1,6 @@
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2019.Day24;
+namespace Aoc.Puzzles.Aoc2019.Aoc201924;
 
 public class RelativeLevelAddress
 {

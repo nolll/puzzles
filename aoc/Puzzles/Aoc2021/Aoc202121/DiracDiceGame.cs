@@ -1,6 +1,6 @@
 using System;
 
-namespace Aoc.Puzzles.Aoc2021.Day21;
+namespace Aoc.Puzzles.Aoc2021.Aoc202121;
 
 public class DiracDiceGame
 {

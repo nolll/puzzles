@@ -1,6 +1,6 @@
 using System;
 
-namespace Aoc.Puzzles.Aoc2015.Day21;
+namespace Aoc.Puzzles.Aoc2015.Aoc201521;
 
 public abstract class RpgCharacter
 {

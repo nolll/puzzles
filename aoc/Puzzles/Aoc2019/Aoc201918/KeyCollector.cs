@@ -2,7 +2,7 @@
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2019.Day18;
+namespace Aoc.Puzzles.Aoc2019.Aoc201918;
 
 public class KeyCollector
 {

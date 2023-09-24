@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2020.Day04;
+namespace Aoc.Puzzles.Aoc2020.Aoc202004;
 
 public class PassportProcessor
 {

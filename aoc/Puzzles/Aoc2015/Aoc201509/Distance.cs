@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2015.Day09;
+namespace Aoc.Puzzles.Aoc2015.Aoc201509;
 
 public class Distance
 {

@@ -1,6 +1,6 @@
 ﻿using Common.Puzzles;
 
-namespace Aoc.Puzzles.Aoc2018.Day13;
+namespace Aoc.Puzzles.Aoc2018.Aoc201813;
 
 public class Year2018Day13 : AocPuzzle
 {

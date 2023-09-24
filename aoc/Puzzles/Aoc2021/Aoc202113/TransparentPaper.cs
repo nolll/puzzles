@@ -3,7 +3,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2021.Day13;
+namespace Aoc.Puzzles.Aoc2021.Aoc202113;
 
 public class TransparentPaper
 {

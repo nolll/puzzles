@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2022.Day11;
+namespace Aoc.Puzzles.Aoc2022.Aoc202211;
 
 public class Monkey
 {

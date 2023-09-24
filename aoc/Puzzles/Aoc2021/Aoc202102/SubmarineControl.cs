@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2021.Day02;
+namespace Aoc.Puzzles.Aoc2021.Aoc202102;
 
 public class SubmarineControl
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Aoc.Puzzles.Aoc2019.Day01;
+namespace Aoc.Puzzles.Aoc2019.Aoc201901;
 
 public class Module
 {

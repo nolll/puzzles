@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2015.Day07;
+namespace Aoc.Puzzles.Aoc2015.Aoc201507;
 
 public class Circuit
 {

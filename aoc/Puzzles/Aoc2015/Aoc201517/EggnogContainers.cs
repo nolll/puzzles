@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Combinatorics;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2015.Day17;
+namespace Aoc.Puzzles.Aoc2015.Aoc201517;
 
 public class EggnogContainers
 {

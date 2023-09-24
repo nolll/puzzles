@@ -1,6 +1,6 @@
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2018.Day15;
+namespace Aoc.Puzzles.Aoc2018.Aoc201815;
 
 public class BattleFigure
 {

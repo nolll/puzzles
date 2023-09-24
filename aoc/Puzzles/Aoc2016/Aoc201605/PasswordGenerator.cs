@@ -3,7 +3,7 @@ using System.Text;
 using Common.Hashing;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2016.Day05;
+namespace Aoc.Puzzles.Aoc2016.Aoc201605;
 
 public class PasswordGenerator
 {

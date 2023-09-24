@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2019.Day23;
+namespace Aoc.Puzzles.Aoc2019.Aoc201923;
 
 public class CategorySixNetwork
 {

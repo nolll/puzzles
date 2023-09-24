@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2017.Day24;
+namespace Aoc.Puzzles.Aoc2017.Aoc201724;
 
 public class Bridge
 {

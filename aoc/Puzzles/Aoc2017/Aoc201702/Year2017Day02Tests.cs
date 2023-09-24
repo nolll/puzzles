@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Aoc.Puzzles.Aoc2017.Day02;
+namespace Aoc.Puzzles.Aoc2017.Aoc201702;
 
 public class Year2017Day02Tests
 {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2017.Day08;
+namespace Aoc.Puzzles.Aoc2017.Aoc201708;
 
 public class CpuInstructionCalculator
 {

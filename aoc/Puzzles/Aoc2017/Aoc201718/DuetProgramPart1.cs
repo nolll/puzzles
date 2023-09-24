@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2017.Day18;
+namespace Aoc.Puzzles.Aoc2017.Aoc201718;
 
 public class DuetProgramPart1
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2021.Day15;
+namespace Aoc.Puzzles.Aoc2021.Aoc202115;
 
 public class ChitonRisk
 {

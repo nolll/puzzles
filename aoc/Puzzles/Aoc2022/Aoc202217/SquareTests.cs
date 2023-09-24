@@ -2,7 +2,7 @@ using System;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using NUnit.Framework;
 
-namespace Aoc.Puzzles.Aoc2022.Day17;
+namespace Aoc.Puzzles.Aoc2022.Aoc202217;
 
 public class SquareTests
 {

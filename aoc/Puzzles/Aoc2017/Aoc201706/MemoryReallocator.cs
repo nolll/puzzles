@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2017.Day06;
+namespace Aoc.Puzzles.Aoc2017.Aoc201706;
 
 public class MemoryReallocator
 {

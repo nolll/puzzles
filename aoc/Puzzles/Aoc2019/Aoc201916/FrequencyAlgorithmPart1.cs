@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2019.Day16;
+namespace Aoc.Puzzles.Aoc2019.Aoc201916;
 
 public class FrequencyAlgorithmPart1
 {

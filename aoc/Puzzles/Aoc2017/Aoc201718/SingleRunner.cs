@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2017.Day18;
+namespace Aoc.Puzzles.Aoc2017.Aoc201718;
 
 public class SingleRunner
 {

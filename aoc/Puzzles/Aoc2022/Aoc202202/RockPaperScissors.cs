@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2022.Day02;
+namespace Aoc.Puzzles.Aoc2022.Aoc202202;
 
 public class RockPaperScissors
 {

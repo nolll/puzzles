@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Combinatorics;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2020.Day09;
+namespace Aoc.Puzzles.Aoc2020.Aoc202009;
 
 public class XmasPort
 {

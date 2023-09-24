@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2016.Day15;
+namespace Aoc.Puzzles.Aoc2016.Aoc201615;
 
 public class KineticSculpture
 {

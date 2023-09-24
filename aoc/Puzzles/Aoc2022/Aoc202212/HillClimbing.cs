@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2022.Day12;
+namespace Aoc.Puzzles.Aoc2022.Aoc202212;
 
 public class HillClimbing
 {

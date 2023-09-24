@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2015.Day02;
+namespace Aoc.Puzzles.Aoc2015.Aoc201502;
 
 public class GiftWrappingCalculator
 {

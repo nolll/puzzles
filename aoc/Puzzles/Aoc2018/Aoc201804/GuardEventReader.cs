@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2018.Day04;
+namespace Aoc.Puzzles.Aoc2018.Aoc201804;
 
 public static class GuardEventReader
 {

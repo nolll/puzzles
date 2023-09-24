@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2017.Day16;
+namespace Aoc.Puzzles.Aoc2017.Aoc201716;
 
 public class EmptyMove : DanceMove
 {

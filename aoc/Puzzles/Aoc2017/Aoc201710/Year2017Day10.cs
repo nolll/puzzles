@@ -1,7 +1,7 @@
 ﻿using Common.Hashing;
 using Common.Puzzles;
 
-namespace Aoc.Puzzles.Aoc2017.Day10;
+namespace Aoc.Puzzles.Aoc2017.Aoc201710;
 
 public class Year2017Day10 : AocPuzzle
 {

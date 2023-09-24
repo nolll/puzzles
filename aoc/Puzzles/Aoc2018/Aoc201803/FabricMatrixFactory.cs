@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2018.Day03;
+namespace Aoc.Puzzles.Aoc2018.Aoc201803;
 
 public class FabricMatrixFactory
 {

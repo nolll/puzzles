@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2021.Day14;
+namespace Aoc.Puzzles.Aoc2021.Aoc202114;
 
 public class Polymerization
 {

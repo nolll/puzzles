@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2021.Day08;
+namespace Aoc.Puzzles.Aoc2021.Aoc202108;
 
 public class DigitDecoder
 {

@@ -5,7 +5,7 @@ using System.Text;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Hashing;
 
-namespace Aoc.Puzzles.Aoc2017.Day14;
+namespace Aoc.Puzzles.Aoc2017.Aoc201714;
 
 public class DiskDefragmenter
 {

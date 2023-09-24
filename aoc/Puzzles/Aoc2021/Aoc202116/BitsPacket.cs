@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-namespace Aoc.Puzzles.Aoc2021.Day16;
+namespace Aoc.Puzzles.Aoc2021.Aoc202116;
 
 public class BitsPacket
 {

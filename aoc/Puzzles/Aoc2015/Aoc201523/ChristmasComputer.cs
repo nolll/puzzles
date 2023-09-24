@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2015.Day23;
+namespace Aoc.Puzzles.Aoc2015.Aoc201523;
 
 public class ChristmasComputer
 {

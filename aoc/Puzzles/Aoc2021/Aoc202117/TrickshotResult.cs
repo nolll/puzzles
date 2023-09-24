@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2021.Day17;
+namespace Aoc.Puzzles.Aoc2021.Aoc202117;
 
 public class TrickshotResult
 {

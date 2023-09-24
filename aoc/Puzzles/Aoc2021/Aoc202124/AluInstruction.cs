@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2021.Day24;
+namespace Aoc.Puzzles.Aoc2021.Aoc202124;
 
 public class AluInstruction
 {

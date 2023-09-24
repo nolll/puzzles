@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2018.Day15;
+namespace Aoc.Puzzles.Aoc2018.Aoc201815;
 
 public static class BattleFigureType
 {

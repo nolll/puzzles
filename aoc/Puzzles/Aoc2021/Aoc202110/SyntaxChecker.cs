@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2021.Day10;
+namespace Aoc.Puzzles.Aoc2021.Aoc202110;
 
 public class SyntaxChecker
 {

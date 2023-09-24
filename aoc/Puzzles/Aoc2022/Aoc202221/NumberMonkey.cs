@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2022.Day21;
+namespace Aoc.Puzzles.Aoc2022.Aoc202221;
 
 public class NumberMonkey : YellMonkey
 {

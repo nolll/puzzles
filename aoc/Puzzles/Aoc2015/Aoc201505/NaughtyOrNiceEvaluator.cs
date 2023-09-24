@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2015.Day05;
+namespace Aoc.Puzzles.Aoc2015.Aoc201505;
 
 public class NaughtyOrNiceEvaluator
 {

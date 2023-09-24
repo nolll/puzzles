@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2018.Day04;
+namespace Aoc.Puzzles.Aoc2018.Aoc201804;
 
 public class GuardNight
 {

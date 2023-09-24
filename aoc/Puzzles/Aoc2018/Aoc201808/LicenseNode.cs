@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2018.Day08;
+namespace Aoc.Puzzles.Aoc2018.Aoc201808;
 
 public class LicenseNode
 {

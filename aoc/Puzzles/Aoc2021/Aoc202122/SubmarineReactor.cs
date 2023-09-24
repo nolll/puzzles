@@ -4,7 +4,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem3D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2021.Day22;
+namespace Aoc.Puzzles.Aoc2021.Aoc202122;
 
 public class SubmarineReactor
 {

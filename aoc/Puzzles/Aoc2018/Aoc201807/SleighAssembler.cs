@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2018.Day07;
+namespace Aoc.Puzzles.Aoc2018.Aoc201807;
 
 public class SleighAssembler
 {

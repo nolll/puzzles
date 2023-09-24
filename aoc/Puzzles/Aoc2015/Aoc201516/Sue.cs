@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2015.Day16;
+namespace Aoc.Puzzles.Aoc2015.Aoc201516;
 
 public class Sue
 {

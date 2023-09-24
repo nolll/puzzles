@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2019.Day03;
+namespace Aoc.Puzzles.Aoc2019.Aoc201903;
 
 public abstract class Command
 {

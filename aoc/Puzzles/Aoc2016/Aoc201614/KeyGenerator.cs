@@ -4,7 +4,7 @@ using System.Text;
 using Common.Hashing;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2016.Day14;
+namespace Aoc.Puzzles.Aoc2016.Aoc201614;
 
 public class KeyGenerator
 {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2015.Day20;
+namespace Aoc.Puzzles.Aoc2015.Aoc201520;
 
 public class PresentDelivery
 {

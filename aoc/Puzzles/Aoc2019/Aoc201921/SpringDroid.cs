@@ -4,7 +4,7 @@ using System.Linq;
 using Common.Computers.IntCode;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2019.Day21;
+namespace Aoc.Puzzles.Aoc2019.Aoc201921;
 
 public class SpringDroid
 {

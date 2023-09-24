@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2022.Day13;
+namespace Aoc.Puzzles.Aoc2022.Aoc202213;
 
 public static class SignalComparer
 {

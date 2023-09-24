@@ -4,7 +4,7 @@ using System.Linq;
 using Common.Ocr;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2022.Day10;
+namespace Aoc.Puzzles.Aoc2022.Aoc202210;
 
 public class CathodeRayTube
 {

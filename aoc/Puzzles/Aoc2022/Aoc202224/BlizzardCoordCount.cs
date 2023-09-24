@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2022.Day24;
+namespace Aoc.Puzzles.Aoc2022.Aoc202224;
 
 [DebuggerDisplay("{X},{Y},{Count}")]
 public class BlizzardCoordCount

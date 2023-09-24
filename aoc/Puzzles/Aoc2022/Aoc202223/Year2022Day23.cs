@@ -4,7 +4,7 @@ using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Puzzles;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2022.Day23;
+namespace Aoc.Puzzles.Aoc2022.Aoc202223;
 
 public class Year2022Day23 : AocPuzzle
 {

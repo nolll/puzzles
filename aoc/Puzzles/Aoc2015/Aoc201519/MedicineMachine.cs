@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2015.Day19;
+namespace Aoc.Puzzles.Aoc2015.Aoc201519;
 
 public class MedicineMachine
 {

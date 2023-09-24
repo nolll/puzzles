@@ -1,6 +1,6 @@
 using System;
 
-namespace Aoc.Puzzles.Aoc2020.Day20;
+namespace Aoc.Puzzles.Aoc2020.Aoc202020;
 
 public static class StringHelper
 {

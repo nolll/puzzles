@@ -1,6 +1,6 @@
 using System;
 
-namespace Aoc.Puzzles.Aoc2018.Day24;
+namespace Aoc.Puzzles.Aoc2018.Aoc201824;
 
 public class StalemateException : Exception
 {

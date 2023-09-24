@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2015.Day08;
+namespace Aoc.Puzzles.Aoc2015.Aoc201508;
 
 public class DigitalList
 {

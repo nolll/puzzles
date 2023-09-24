@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2015.Day03;
+namespace Aoc.Puzzles.Aoc2015.Aoc201503;
 
 public class DeliveryGrid
 {

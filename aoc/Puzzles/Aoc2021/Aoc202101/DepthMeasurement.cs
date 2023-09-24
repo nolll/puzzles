@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2021.Day01;
+namespace Aoc.Puzzles.Aoc2021.Aoc202101;
 
 public class DepthMeasurement
 {

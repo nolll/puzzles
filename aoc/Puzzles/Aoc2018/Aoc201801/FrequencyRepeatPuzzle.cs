@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2018.Day01;
+namespace Aoc.Puzzles.Aoc2018.Aoc201801;
 
 public class FrequencyRepeatPuzzle
 {

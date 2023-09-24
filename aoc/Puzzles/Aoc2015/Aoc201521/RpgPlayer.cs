@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2015.Day21;
+namespace Aoc.Puzzles.Aoc2015.Aoc201521;
 
 public class RpgPlayer : RpgCharacter
 {

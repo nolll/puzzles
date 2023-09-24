@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2017.Day23;
+namespace Aoc.Puzzles.Aoc2017.Aoc201723;
 
 public class CoProcessor
 {

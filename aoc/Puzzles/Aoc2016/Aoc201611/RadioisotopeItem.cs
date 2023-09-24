@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2016.Day11;
+namespace Aoc.Puzzles.Aoc2016.Aoc201611;
 
 public abstract class RadioisotopeItem
 {

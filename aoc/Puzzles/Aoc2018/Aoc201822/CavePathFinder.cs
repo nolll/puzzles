@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2018.Day22;
+namespace Aoc.Puzzles.Aoc2018.Aoc201822;
 
 public enum CaveTool
 {

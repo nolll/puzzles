@@ -1,7 +1,7 @@
 ﻿using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Puzzles;
 
-namespace Aoc.Puzzles.Aoc2019.Day15;
+namespace Aoc.Puzzles.Aoc2019.Aoc201915;
 
 public class Year2019Day15 : AocPuzzle
 {

@@ -1,6 +1,6 @@
 ﻿using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2022.Day24;
+namespace Aoc.Puzzles.Aoc2022.Aoc202224;
 
 public class Blizzard
 {

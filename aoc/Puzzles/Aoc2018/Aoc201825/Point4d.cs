@@ -1,6 +1,6 @@
 using System;
 
-namespace Aoc.Puzzles.Aoc2018.Day25;
+namespace Aoc.Puzzles.Aoc2018.Aoc201825;
 
 public class Point4d
 {

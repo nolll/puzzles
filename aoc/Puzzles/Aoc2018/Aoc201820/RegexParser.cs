@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2018.Day20;
+namespace Aoc.Puzzles.Aoc2018.Aoc201820;
 
 public class RegexParser
 {

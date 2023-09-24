@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2018.Day25;
+namespace Aoc.Puzzles.Aoc2018.Aoc201825;
 
 public class ConstellationFinder
 {

@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2016.Day22;
+namespace Aoc.Puzzles.Aoc2016.Aoc201622;
 
 public class StorageGrid
 {

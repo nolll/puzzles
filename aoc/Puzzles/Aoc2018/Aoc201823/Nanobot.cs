@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2018.Day23;
+namespace Aoc.Puzzles.Aoc2018.Aoc201823;
 
 public class Nanobot
 {

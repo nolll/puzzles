@@ -1,6 +1,6 @@
 ﻿using Common.Computers.IntCode;
 
-namespace Aoc.Puzzles.Aoc2019.Day19;
+namespace Aoc.Puzzles.Aoc2019.Aoc201919;
 
 public enum TractorBeamInputMode
 {

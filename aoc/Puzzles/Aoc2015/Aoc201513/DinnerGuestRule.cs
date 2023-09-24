@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2015.Day13;
+namespace Aoc.Puzzles.Aoc2015.Aoc201513;
 
 public class DinnerGuestRule
 {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2020.Day07;
+namespace Aoc.Puzzles.Aoc2020.Aoc202007;
 
 public class Bag
 {

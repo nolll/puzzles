@@ -1,6 +1,6 @@
 ﻿using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2016.Day08;
+namespace Aoc.Puzzles.Aoc2016.Aoc201608;
 
 public class ScreenSimulatorRotateColumnInstruction : IScreenSimulatorInstruction
 {

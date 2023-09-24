@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
-namespace Aoc.Puzzles.Aoc2015.Day20;
+namespace Aoc.Puzzles.Aoc2015.Aoc201520;
 
 public class Year2015Day20Tests
 {

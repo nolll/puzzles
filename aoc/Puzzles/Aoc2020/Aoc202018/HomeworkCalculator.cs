@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2020.Day18;
+namespace Aoc.Puzzles.Aoc2020.Aoc202018;
 
 public class HomeworkCalculator
 {

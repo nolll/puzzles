@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2016.Day21;
+namespace Aoc.Puzzles.Aoc2016.Aoc201621;
 
 public class MoveInstruction : IScrambleInstruction
 {

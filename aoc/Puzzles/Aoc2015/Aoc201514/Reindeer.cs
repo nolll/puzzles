@@ -1,6 +1,6 @@
 using System;
 
-namespace Aoc.Puzzles.Aoc2015.Day14;
+namespace Aoc.Puzzles.Aoc2015.Aoc201514;
 
 public class Reindeer
 {

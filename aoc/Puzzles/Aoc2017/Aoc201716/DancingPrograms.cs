@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2017.Day16;
+namespace Aoc.Puzzles.Aoc2017.Aoc201716;
 
 public class DancingPrograms
 {

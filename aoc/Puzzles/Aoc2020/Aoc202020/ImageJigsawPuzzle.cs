@@ -3,7 +3,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Aoc2020.Day20;
+namespace Aoc.Puzzles.Aoc2020.Aoc202020;
 
 public class ImageJigsawPuzzle
 {

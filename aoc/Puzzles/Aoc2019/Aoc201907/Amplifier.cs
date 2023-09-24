@@ -1,6 +1,6 @@
 using Common.Computers.IntCode;
 
-namespace Aoc.Puzzles.Aoc2019.Day07;
+namespace Aoc.Puzzles.Aoc2019.Aoc201907;
 
 public class Amplifier
 {

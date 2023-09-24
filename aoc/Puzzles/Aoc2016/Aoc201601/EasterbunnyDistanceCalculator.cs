@@ -1,7 +1,7 @@
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2016.Day01;
+namespace Aoc.Puzzles.Aoc2016.Aoc201601;
 
 public class EasterbunnyDistanceCalculator
 {

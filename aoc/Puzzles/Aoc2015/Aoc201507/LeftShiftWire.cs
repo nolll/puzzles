@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Aoc2015.Day07;
+namespace Aoc.Puzzles.Aoc2015.Aoc201507;
 
 public class LeftShiftWire : Wire
 {

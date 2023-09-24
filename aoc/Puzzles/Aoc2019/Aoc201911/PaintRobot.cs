@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Computers.IntCode;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2019.Day11;
+namespace Aoc.Puzzles.Aoc2019.Aoc201911;
 
 public class PaintRobot
 {

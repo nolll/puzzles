@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2019.Day11;
+namespace Aoc.Puzzles.Aoc2019.Day11;
 
 public enum PaintMode
 {

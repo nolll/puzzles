@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Aoc.Puzzles.Year2021.Day24;
+namespace Aoc.Puzzles.Aoc2021.Day24;
 
 [DebuggerDisplay("{W},{X},{Y},{Z}")]
 public class AluState

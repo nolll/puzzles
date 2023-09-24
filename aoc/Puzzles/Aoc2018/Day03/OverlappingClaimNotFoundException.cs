@@ -1,6 +1,6 @@
 using System;
 
-namespace Aoc.Puzzles.Year2018.Day03;
+namespace Aoc.Puzzles.Aoc2018.Day03;
 
 public class OverlappingClaimNotFoundException : Exception
 {

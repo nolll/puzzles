@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Maths;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2020.Day13;
+namespace Aoc.Puzzles.Aoc2020.Day13;
 
 public class BusScheduler2
 {

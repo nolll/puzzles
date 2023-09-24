@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2016.Day11;
+namespace Aoc.Puzzles.Aoc2016.Day11;
 
 public enum RadioisotopeType
 {

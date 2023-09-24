@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2020.Day03;
+namespace Aoc.Puzzles.Aoc2020.Day03;
 
 public class TreeTrajectory
 {

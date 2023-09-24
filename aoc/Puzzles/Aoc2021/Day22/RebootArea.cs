@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem3D;
 
-namespace Aoc.Puzzles.Year2021.Day22;
+namespace Aoc.Puzzles.Aoc2021.Day22;
 
 [DebuggerDisplay("{From.X},{From.Y},{From.Z}..{To.X},{To.Y},{To.Z}")]
 public class RebootArea : IEquatable<RebootArea>

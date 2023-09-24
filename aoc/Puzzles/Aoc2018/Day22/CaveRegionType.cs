@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2018.Day22;
+namespace Aoc.Puzzles.Aoc2018.Day22;
 
 public enum CaveRegionType
 {

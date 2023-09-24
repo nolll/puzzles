@@ -5,7 +5,7 @@ using Common.Lists;
 using Common.Puzzles;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2022.Day20;
+namespace Aoc.Puzzles.Aoc2022.Day20;
 
 public class Year2022Day20 : AocPuzzle
 {

@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2022.Day04;
+namespace Aoc.Puzzles.Aoc2022.Day04;
 
 public class CleaningRange
 {

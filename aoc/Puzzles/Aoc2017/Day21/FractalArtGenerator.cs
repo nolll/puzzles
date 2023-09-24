@@ -5,7 +5,7 @@ using System.Text;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2017.Day21;
+namespace Aoc.Puzzles.Aoc2017.Day21;
 
 public class FractalArtGenerator
 {

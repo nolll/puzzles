@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2020.Day16;
+namespace Aoc.Puzzles.Aoc2020.Day16;
 
 public class TicketValidator
 {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Year2020.Day05;
+namespace Aoc.Puzzles.Aoc2020.Day05;
 
 public class BoardingCard
 {

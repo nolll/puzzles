@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Aoc.Puzzles.Year2021.Day07;
+namespace Aoc.Puzzles.Aoc2021.Day07;
 
 public class CrabSubmarines
 {

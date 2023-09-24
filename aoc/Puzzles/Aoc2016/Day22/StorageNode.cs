@@ -1,4 +1,4 @@
-﻿namespace Aoc.Puzzles.Year2016.Day22;
+﻿namespace Aoc.Puzzles.Aoc2016.Day22;
 
 public struct StorageNode
 {

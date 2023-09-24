@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Year2015.Day11;
+namespace Aoc.Puzzles.Aoc2015.Day11;
 
 public class CorporatePasswordValidator
 {

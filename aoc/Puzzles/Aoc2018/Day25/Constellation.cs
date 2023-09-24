@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace Aoc.Puzzles.Year2018.Day25;
+namespace Aoc.Puzzles.Aoc2018.Day25;
 
 public class Constellation
 {

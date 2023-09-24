@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2021.Day23;
+namespace Aoc.Puzzles.Aoc2021.Day23;
 
 public class Amphipods
 {

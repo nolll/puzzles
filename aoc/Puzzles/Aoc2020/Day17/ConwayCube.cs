@@ -2,7 +2,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem3D;
 using Common.CoordinateSystems.CoordinateSystem4D;
 
-namespace Aoc.Puzzles.Year2020.Day17;
+namespace Aoc.Puzzles.Aoc2020.Day17;
 
 public class ConwayCube
 {

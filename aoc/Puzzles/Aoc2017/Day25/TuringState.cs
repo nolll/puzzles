@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2017.Day25;
+namespace Aoc.Puzzles.Aoc2017.Day25;
 
 public class TuringState
 {

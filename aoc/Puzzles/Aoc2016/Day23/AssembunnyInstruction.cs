@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Year2016.Day23;
+namespace Aoc.Puzzles.Aoc2016.Day23;
 
 public class AssembunnyInstruction
 {

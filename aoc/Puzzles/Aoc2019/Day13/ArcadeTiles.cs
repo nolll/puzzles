@@ -1,4 +1,4 @@
-﻿namespace Aoc.Puzzles.Year2019.Day13;
+﻿namespace Aoc.Puzzles.Aoc2019.Day13;
 
 public static class ArcadeTiles
 {

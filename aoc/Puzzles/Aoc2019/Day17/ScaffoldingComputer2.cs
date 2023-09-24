@@ -2,7 +2,7 @@
 using System.Linq;
 using Common.Computers.IntCode;
 
-namespace Aoc.Puzzles.Year2019.Day17;
+namespace Aoc.Puzzles.Aoc2019.Day17;
 
 public class ScaffoldingComputer2
 {

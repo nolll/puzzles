@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Aoc.Puzzles.Year2015.Day10;
+namespace Aoc.Puzzles.Aoc2015.Day10;
 
 public class LookAndSayGame
 {

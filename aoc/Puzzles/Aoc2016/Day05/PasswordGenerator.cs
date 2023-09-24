@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Common.Hashing;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2016.Day05;
+namespace Aoc.Puzzles.Aoc2016.Day05;
 
 public class PasswordGenerator
 {

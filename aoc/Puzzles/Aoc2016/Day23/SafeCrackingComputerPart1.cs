@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2016.Day23;
+namespace Aoc.Puzzles.Aoc2016.Day23;
 
 public class SafeCrackingComputerPart1
 {

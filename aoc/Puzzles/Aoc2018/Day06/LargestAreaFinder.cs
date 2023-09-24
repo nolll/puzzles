@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2018.Day06;
+namespace Aoc.Puzzles.Aoc2018.Day06;
 
 public class LargestAreaFinder
 {

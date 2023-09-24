@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2016.Day25;
+namespace Aoc.Puzzles.Aoc2016.Day25;
 
 public class ClockSignalGenerator
 {

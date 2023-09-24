@@ -2,7 +2,7 @@ using System.Linq;
 using System.Text;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2017.Day19;
+namespace Aoc.Puzzles.Aoc2017.Day19;
 
 public class TubeRouteFinder
 {

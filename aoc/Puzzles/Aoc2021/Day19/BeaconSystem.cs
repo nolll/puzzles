@@ -4,7 +4,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem3D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2021.Day19;
+namespace Aoc.Puzzles.Aoc2021.Day19;
 
 public class BeaconSystem
 {

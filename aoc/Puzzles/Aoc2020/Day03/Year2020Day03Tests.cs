@@ -1,7 +1,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace Aoc.Puzzles.Year2020.Day03;
+namespace Aoc.Puzzles.Aoc2020.Day03;
 
 public class Year2020Day03Tests
 {

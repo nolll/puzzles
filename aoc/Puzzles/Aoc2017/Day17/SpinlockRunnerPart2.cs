@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2017.Day17;
+namespace Aoc.Puzzles.Aoc2017.Day17;
 
 public class SpinlockRunnerPart2
 {

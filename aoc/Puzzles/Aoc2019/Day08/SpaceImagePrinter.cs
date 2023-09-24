@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace Aoc.Puzzles.Year2019.Day08;
+namespace Aoc.Puzzles.Aoc2019.Day08;
 
 public class SpaceImagePrinter
 {

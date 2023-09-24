@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2022.Day19;
+namespace Aoc.Puzzles.Aoc2022.Day19;
 
 public record FactoryState(
     int Time, 

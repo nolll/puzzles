@@ -1,7 +1,7 @@
 using System;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2017.Day21;
+namespace Aoc.Puzzles.Aoc2017.Day21;
 
 public class FractalRule
 {

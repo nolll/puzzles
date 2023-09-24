@@ -1,7 +1,7 @@
 ﻿using Common.Computers.Operation;
 using Common.Puzzles;
 
-namespace Aoc.Puzzles.Year2018.Day21;
+namespace Aoc.Puzzles.Aoc2018.Day21;
 
 public class Year2018Day21 : AocPuzzle
 {

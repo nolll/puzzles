@@ -1,6 +1,6 @@
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2018.Day22;
+namespace Aoc.Puzzles.Aoc2018.Day22;
 
 public class CaveSystem
 {

@@ -2,7 +2,7 @@
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2020.Day11;
+namespace Aoc.Puzzles.Aoc2020.Day11;
 
 public abstract class SeatingSimulator
 {

@@ -3,7 +3,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem3D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2022.Day18;
+namespace Aoc.Puzzles.Aoc2022.Day18;
 
 public class LavaCubes
 {

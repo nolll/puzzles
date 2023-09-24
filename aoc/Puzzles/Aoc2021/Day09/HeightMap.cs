@@ -3,7 +3,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2021.Day09;
+namespace Aoc.Puzzles.Aoc2021.Day09;
 
 public class HeightMap
 {

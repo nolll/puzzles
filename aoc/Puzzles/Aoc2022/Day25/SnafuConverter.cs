@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Aoc.Puzzles.Year2022.Day25;
+namespace Aoc.Puzzles.Aoc2022.Day25;
 
 public static class SnafuConverter
 {

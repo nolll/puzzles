@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Common.Puzzles;
 
-namespace Aoc.Puzzles.Year2018.Day24;
+namespace Aoc.Puzzles.Aoc2018.Day24;
 
 public class Year2018Day24 : AocPuzzle
 {

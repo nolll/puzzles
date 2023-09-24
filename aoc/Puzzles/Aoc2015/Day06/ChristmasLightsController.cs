@@ -3,7 +3,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2015.Day06;
+namespace Aoc.Puzzles.Aoc2015.Day06;
 
 public class ChristmasLightsController
 {

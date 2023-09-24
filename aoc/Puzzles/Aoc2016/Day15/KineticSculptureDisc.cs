@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2016.Day15;
+namespace Aoc.Puzzles.Aoc2016.Day15;
 
 public class KineticSculptureDisc
 {

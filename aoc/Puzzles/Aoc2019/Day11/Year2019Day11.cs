@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Ocr;
 using Common.Puzzles;
 
-namespace Aoc.Puzzles.Year2019.Day11;
+namespace Aoc.Puzzles.Aoc2019.Day11;
 
 public class Year2019Day11 : AocPuzzle
 {

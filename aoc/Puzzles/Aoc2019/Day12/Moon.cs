@@ -1,7 +1,7 @@
 using System;
 using Common.CoordinateSystems.CoordinateSystem3D;
 
-namespace Aoc.Puzzles.Year2019.Day12;
+namespace Aoc.Puzzles.Aoc2019.Day12;
 
 public class Moon
 {

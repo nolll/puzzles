@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2022.Day17;
+namespace Aoc.Puzzles.Aoc2022.Day17;
 
 public class RepeatCycle
 {

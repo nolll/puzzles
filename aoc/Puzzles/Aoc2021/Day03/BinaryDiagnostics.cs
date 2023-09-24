@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2021.Day03;
+namespace Aoc.Puzzles.Aoc2021.Day03;
 
 public class BinaryDiagnostics
 {

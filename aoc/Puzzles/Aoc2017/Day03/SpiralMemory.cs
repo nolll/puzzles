@@ -1,7 +1,7 @@
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2017.Day03;
+namespace Aoc.Puzzles.Aoc2017.Day03;
 
 public class SpiralMemory
 {

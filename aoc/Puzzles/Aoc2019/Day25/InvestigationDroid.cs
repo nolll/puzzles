@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Common.Computers.IntCode;
 
-namespace Aoc.Puzzles.Year2019.Day25;
+namespace Aoc.Puzzles.Aoc2019.Day25;
 
 public class InvestigationDroid
 {

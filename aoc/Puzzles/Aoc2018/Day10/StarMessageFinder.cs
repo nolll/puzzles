@@ -5,7 +5,7 @@ using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Ocr;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2018.Day10;
+namespace Aoc.Puzzles.Aoc2018.Day10;
 
 public class StarMessageFinder
 {

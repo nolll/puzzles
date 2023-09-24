@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2022.Day17;
+namespace Aoc.Puzzles.Aoc2022.Day17;
 
 public class Tetris
 {

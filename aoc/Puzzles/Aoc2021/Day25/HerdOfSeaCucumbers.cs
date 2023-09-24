@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2021.Day25;
+namespace Aoc.Puzzles.Aoc2021.Day25;
 
 public class HerdOfSeaCucumbers
 {

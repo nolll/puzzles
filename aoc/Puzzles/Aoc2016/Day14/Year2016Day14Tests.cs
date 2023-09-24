@@ -1,8 +1,8 @@
-using NUnit.Framework;
 using System.Linq;
 using Common.Strings;
+using NUnit.Framework;
 
-namespace Aoc.Puzzles.Year2016.Day14;
+namespace Aoc.Puzzles.Aoc2016.Day14;
 
 public class Year2016Day14Tests
 {

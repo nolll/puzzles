@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2017.Day15;
+namespace Aoc.Puzzles.Aoc2017.Day15;
 
 public class Generator
 {

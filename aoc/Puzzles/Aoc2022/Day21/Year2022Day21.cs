@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Puzzles;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2022.Day21;
+namespace Aoc.Puzzles.Aoc2022.Day21;
 
 public class Year2022Day21 : AocPuzzle
 {

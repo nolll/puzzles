@@ -2,7 +2,7 @@
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2022.Day03;
+namespace Aoc.Puzzles.Aoc2022.Day03;
 
 public static class Rucksacks
 {

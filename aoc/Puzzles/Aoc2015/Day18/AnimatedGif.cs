@@ -1,7 +1,7 @@
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2015.Day18;
+namespace Aoc.Puzzles.Aoc2015.Day18;
 
 public class AnimatedGif
 {

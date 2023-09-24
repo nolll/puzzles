@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Text;
 
-namespace Aoc.Puzzles.Year2016.Day16;
+namespace Aoc.Puzzles.Aoc2016.Day16;
 
 public class DragonCurve
 {

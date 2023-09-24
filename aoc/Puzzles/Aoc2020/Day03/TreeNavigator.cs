@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2020.Day03;
+namespace Aoc.Puzzles.Aoc2020.Day03;
 
 public class TreeNavigator
 {

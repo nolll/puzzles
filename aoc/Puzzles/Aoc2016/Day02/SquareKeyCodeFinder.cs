@@ -4,7 +4,7 @@ using System.Text;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2016.Day02;
+namespace Aoc.Puzzles.Aoc2016.Day02;
 
 public class SquareKeyCodeFinder
 {

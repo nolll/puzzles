@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Lists;
 
-namespace Aoc.Puzzles.Year2018.Day09;
+namespace Aoc.Puzzles.Aoc2018.Day09;
 
 public class MarbleGame
 {

@@ -1,7 +1,7 @@
 using System;
 using Common.CoordinateSystems.CoordinateSystem3D;
 
-namespace Aoc.Puzzles.Year2017.Day20;
+namespace Aoc.Puzzles.Aoc2017.Day20;
 
 public class Particle
 {

@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Common.Combinatorics;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2016.Day11;
+namespace Aoc.Puzzles.Aoc2016.Day11;
 
 public class RadioisotopeSimulator
 {

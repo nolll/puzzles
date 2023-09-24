@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Year2022.Day21;
+namespace Aoc.Puzzles.Aoc2022.Day21;
 
 public class EqualityMonkey : MathMonkey
 {

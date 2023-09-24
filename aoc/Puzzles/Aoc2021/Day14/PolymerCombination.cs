@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Year2021.Day14;
+namespace Aoc.Puzzles.Aoc2021.Day14;
 
 public class PolymerCombination
 {

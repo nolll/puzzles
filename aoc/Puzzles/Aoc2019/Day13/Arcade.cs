@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Computers.IntCode;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2019.Day13;
+namespace Aoc.Puzzles.Aoc2019.Day13;
 
 public class Arcade
 {

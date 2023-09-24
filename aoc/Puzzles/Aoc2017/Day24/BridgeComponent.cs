@@ -1,6 +1,6 @@
 using System;
 
-namespace Aoc.Puzzles.Year2017.Day24;
+namespace Aoc.Puzzles.Aoc2017.Day24;
 
 public class BridgeComponent : IEquatable<BridgeComponent>
 {

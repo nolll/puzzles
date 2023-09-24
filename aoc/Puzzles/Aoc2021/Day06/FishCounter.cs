@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Year2021.Day06;
+namespace Aoc.Puzzles.Aoc2021.Day06;
 
 public class FishCounter
 {

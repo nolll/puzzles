@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2019.Day20;
+namespace Aoc.Puzzles.Aoc2019.Day20;
 
 public class RecursiveDonutMazeSolver
 {

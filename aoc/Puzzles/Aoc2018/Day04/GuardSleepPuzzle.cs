@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Aoc.Puzzles.Year2018.Day04;
+namespace Aoc.Puzzles.Aoc2018.Day04;
 
 public class GuardSleepPuzzle
 {

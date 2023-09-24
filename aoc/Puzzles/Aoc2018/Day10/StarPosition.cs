@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2018.Day10;
+namespace Aoc.Puzzles.Aoc2018.Day10;
 
 public class StarPosition
 {

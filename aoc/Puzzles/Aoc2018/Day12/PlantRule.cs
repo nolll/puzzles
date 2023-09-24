@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aoc.Puzzles.Year2018.Day12;
+namespace Aoc.Puzzles.Aoc2018.Day12;
 
 public class PlantRule
 {

@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2020.Day19;
+namespace Aoc.Puzzles.Aoc2020.Day19;
 
 public class MonsterImageValidator
 {

@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Aoc.Puzzles.Year2016.Day21;
+namespace Aoc.Puzzles.Aoc2016.Day21;
 
 public abstract class RotateInstruction : IScrambleInstruction
 {

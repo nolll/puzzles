@@ -3,7 +3,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2022.Day08;
+namespace Aoc.Puzzles.Aoc2022.Day08;
 
 public class TreeHouse
 {

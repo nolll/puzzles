@@ -3,7 +3,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Hashing;
 
-namespace Aoc.Puzzles.Year2016.Day17;
+namespace Aoc.Puzzles.Aoc2016.Day17;
 
 public class LockedDoorMaze
 {

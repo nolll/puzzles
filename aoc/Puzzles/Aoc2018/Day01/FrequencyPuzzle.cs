@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Aoc.Puzzles.Year2018.Day01;
+namespace Aoc.Puzzles.Aoc2018.Day01;
 
 public class FrequencyPuzzle
 {

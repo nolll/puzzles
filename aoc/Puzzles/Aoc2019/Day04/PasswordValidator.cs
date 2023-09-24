@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Aoc.Puzzles.Year2019.Day04;
+namespace Aoc.Puzzles.Aoc2019.Day04;
 
 public class PasswordValidator
 {

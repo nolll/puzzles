@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Year2018.Day18;
+namespace Aoc.Puzzles.Aoc2018.Day18;
 
 public class LumberCollection
 {

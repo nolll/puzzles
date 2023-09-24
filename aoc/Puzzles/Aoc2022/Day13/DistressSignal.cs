@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2022.Day13;
+namespace Aoc.Puzzles.Aoc2022.Day13;
 
 public class DistressSignal
 {

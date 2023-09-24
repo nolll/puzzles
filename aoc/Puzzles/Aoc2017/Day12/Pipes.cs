@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2017.Day12;
+namespace Aoc.Puzzles.Aoc2017.Day12;
 
 public class Pipes
 {

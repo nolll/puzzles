@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2017.Day23;
+namespace Aoc.Puzzles.Aoc2017.Day23;
 
 public class OptimizedCoProcessor
 {

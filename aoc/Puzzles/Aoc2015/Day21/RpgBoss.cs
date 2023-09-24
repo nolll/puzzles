@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2015.Day21;
+namespace Aoc.Puzzles.Aoc2015.Day21;
 
 public class RpgBoss : RpgCharacter
 {

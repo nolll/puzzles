@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2021.Day21;
+namespace Aoc.Puzzles.Aoc2021.Day21;
 
 public class DiracDiceResult
 {

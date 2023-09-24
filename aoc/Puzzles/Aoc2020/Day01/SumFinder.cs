@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Combinatorics;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2020.Day01;
+namespace Aoc.Puzzles.Aoc2020.Day01;
 
 public class SumFinder
 {

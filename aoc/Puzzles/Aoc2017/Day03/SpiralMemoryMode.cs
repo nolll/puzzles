@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Year2017.Day03;
+namespace Aoc.Puzzles.Aoc2017.Day03;
 
 public enum SpiralMemoryMode
 {

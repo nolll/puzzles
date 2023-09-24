@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Lists;
 
-namespace Aoc.Puzzles.Year2020.Day23;
+namespace Aoc.Puzzles.Aoc2020.Day23;
 
 public class CrabCupsGame
 {

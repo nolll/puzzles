@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Combinatorics;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2015.Day13;
+namespace Aoc.Puzzles.Aoc2015.Day13;
 
 public class DinnerTable
 {

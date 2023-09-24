@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2018.Day02;
+namespace Aoc.Puzzles.Aoc2018.Day02;
 
 public class SimilarIdsPuzzle
 {

@@ -3,7 +3,7 @@ using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Strings;
 
-namespace Aoc.Puzzles.Year2018.Day17;
+namespace Aoc.Puzzles.Aoc2018.Day17;
 
 public class ReservoirFiller
 {

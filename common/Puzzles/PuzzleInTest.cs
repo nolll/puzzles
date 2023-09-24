@@ -3,6 +3,7 @@
 public class PuzzleInTest : Puzzle
 {
     public override string Id { get; }
+    public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
     public override string Name { get; }
@@ -10,17 +11,17 @@ public class PuzzleInTest : Puzzle
 
     public PuzzleInTest(
         string? id = null, 
+        string? sortId = null,
         string? title = null, 
         string? listTitle = null, 
         string? name = null)
     {
         Id = id ?? string.Empty;
+        SortId = sortId ?? string.Empty;
         Title = title ?? string.Empty;
         ListTitle = listTitle ?? string.Empty;
         Name = name ?? string.Empty;
     }
-
-    protected override string InputFilePath => "";
 }
 
 public class CommentedPuzzleInTest : PuzzleInTest

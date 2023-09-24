@@ -5,11 +5,10 @@ namespace Aquaq;
 public class AquaqPuzzleRepository : IPuzzleRepository
 {
     private readonly List<Puzzle> _puzzles;
-    private readonly PuzzleFactory _puzzleFactory = new AquaqPuzzleFactory();
 
     public AquaqPuzzleRepository()
     {
-        _puzzles = _puzzleFactory.CreatePuzzles();
+        _puzzles = new PuzzleFactory().CreatePuzzles<AquaqPuzzle>();
     }
 
     public Puzzle? GetPuzzle(string id) =>

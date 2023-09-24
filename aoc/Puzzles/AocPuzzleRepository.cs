@@ -7,11 +7,10 @@ namespace Aoc.Puzzles;
 public class AocPuzzleRepository : IPuzzleRepository
 {
     private readonly List<Puzzle> _puzzles;
-    private readonly PuzzleFactory _puzzleFactory = new AocPuzzleFactory();
         
     public AocPuzzleRepository()
     {
-        _puzzles = _puzzleFactory.CreatePuzzles();
+        _puzzles = new PuzzleFactory().CreatePuzzles<AocPuzzle>();
     }
 
     public Puzzle? GetPuzzle(string id) =>

@@ -1,0 +1,24 @@
+﻿using Common.Puzzles;
+
+namespace Aoc.Puzzles.Aoc2022.Aoc202211;
+
+public class Aoc202211 : AocPuzzle
+{
+    public override string Name => "Monkey in the Middle";
+
+    protected override PuzzleResult RunPart1()
+    {
+        var monkeyBusiness = new MonkeyBusiness();
+        var result = monkeyBusiness.Part1(InputFile);
+
+        return new PuzzleResult(result, 56350);
+    }
+
+    protected override PuzzleResult RunPart2()
+    {
+        var monkeyBusiness = new MonkeyBusiness();
+        var result = monkeyBusiness.Part2(InputFile);
+
+        return new PuzzleResult(result, 13_954_061_248);
+    }
+}

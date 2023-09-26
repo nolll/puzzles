@@ -81,6 +81,6 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         else if (result.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)
             AnsiConsole.MarkupLine(MarkupColor(result.Answer, Color.Red));
         else
-            AnsiConsole.WriteLine();
+            AnsiConsole.MarkupLine(MarkupColor(result.Answer, Color.Yellow));
     }
 }

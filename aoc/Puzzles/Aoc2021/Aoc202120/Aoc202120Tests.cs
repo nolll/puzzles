@@ -1,0 +1,34 @@
+using NUnit.Framework;
+
+namespace Aoc.Puzzles.Aoc2021.Aoc202120;
+
+public class Aoc202120Tests
+{
+    [Test]
+    public void Part1()
+    {
+        var trenchMap = new TrenchMap();
+        var result = trenchMap.GetLitPixelCount(Input, 2);
+
+        Assert.That(result, Is.EqualTo(35));
+    }
+
+    [Test]
+    public void Part2()
+    {
+        var trenchMap = new TrenchMap();
+        var result = trenchMap.GetLitPixelCount(Input, 50);
+
+        Assert.That(result, Is.EqualTo(3351));
+    }
+
+    private const string Input = """
+..#.#..#####.#.#.#.###.##.....###.##.#..###.####..#####..#....#..#..##..###..######.###...####..#..#####..##..#.#####...##.#.#..#.##..#.#......#.###.######.###.####...#.##.##..#..#..#####.....#.#....###..#.##......#.....#..#..#..##..#...##.######.####.####.#.#...#.......#..#.#.#...####.##.#......#..#...##.#.##..#...##.#.##..###.#......#.#.......#.#.#.####.###.##...#.....####.#..#..#.##.#....##..#.####....##...##..#...#......#.#.......#.......##..####..#...#.#.#...##..#.#..###..#####........#..####......#..#
+
+#..#.
+#....
+##..#
+..#..
+..###
+""";
+}

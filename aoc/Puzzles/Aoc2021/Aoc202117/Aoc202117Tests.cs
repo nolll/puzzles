@@ -1,0 +1,39 @@
+using NUnit.Framework;
+
+namespace Aoc.Puzzles.Aoc2021.Aoc202117;
+
+public class Aoc202117Tests
+{
+    [Test]
+    public void Part1()
+    {
+        var target = new TrickshotTarget(20, 30, -10, -5);
+
+        var trickshot = new TrickShot();
+        var result = trickshot.Shoot(target);
+
+        Assert.That(result.MaxHeight, Is.EqualTo(45));
+    }
+
+    [Test]
+    public void SingleMaxHeight()
+    {
+        var target = new TrickshotTarget(20, 30, -10, -5);
+
+        var trickshot = new TrickShot();
+        var result = trickshot.GetMaxHeight(target, 6, 9);
+
+        Assert.That(result, Is.EqualTo(45));
+    }
+
+    [Test]
+    public void SingleVelocityCount()
+    {
+        var target = new TrickshotTarget(20, 30, -10, -5);
+
+        var trickshot = new TrickShot();
+        var result = trickshot.Shoot(target);
+
+        Assert.That(result.HitCount, Is.EqualTo(112));
+    }
+}

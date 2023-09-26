@@ -1,0 +1,21 @@
+﻿using Common.Hashing;
+using Common.Puzzles;
+
+namespace Aoc.Puzzles.Aoc2017.Aoc201710;
+
+public class Aoc201710 : AocPuzzle
+{
+    public override string Name => "Knot Hash";
+
+    protected override PuzzleResult RunPart1()
+    {
+        var intHasher = new IntKnotHasher(InputFile);
+        return new PuzzleResult(intHasher.Checksum, 2928);
+    }
+
+    protected override PuzzleResult RunPart2()
+    {
+        var asciiHasher = new AsciiKnotHasher(InputFile);
+        return new PuzzleResult(asciiHasher.Hash, "0c2f794b2eb555f7830766bf8fb65a16");
+    }
+}

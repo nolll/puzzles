@@ -12,15 +12,7 @@ public class Aoc202225Tests
 
         Assert.That(result, Is.EqualTo("2=-1=0"));
     }
-
-    [Test]
-    public void Part2()
-    {
-        var result = 0;
-
-        Assert.That(result, Is.EqualTo(0));
-    }
-
+    
     [TestCase("1=-0-2", 1747)]
     [TestCase("12111", 906)]
     [TestCase("2=0=", 198)]

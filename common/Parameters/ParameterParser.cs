@@ -49,12 +49,12 @@ public class ParameterParser
     {
         foreach (var key in keys)
         {
-            if (_dictionary.ContainsKey(key))
-            {
-                return _dictionary.TryGetValue(key, out var val)
-                    ? val 
-                    : "";
-            }
+            if (!_dictionary.ContainsKey(key))
+                continue;
+
+            return _dictionary.TryGetValue(key, out var val)
+                ? val 
+                : "";
         }
 
         return null;

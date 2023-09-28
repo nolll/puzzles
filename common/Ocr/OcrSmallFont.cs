@@ -23,65 +23,44 @@ public static class OcrSmallFont
     public static char ReadLetter(string crtLetter)
     {
         var rows = crtLetter.Split(Environment.NewLine).Select(o => o.Trim().Replace(" ", ".")).ToList();
-        if (rows[0] == "###..")
+        switch (rows[0])
         {
-            if (rows[5] == "###..")
+            case "###.." when rows[5] == "###..":
                 return 'B';
-
-            if (rows[5] == "#....")
+            case "###.." when rows[5] == "#....":
                 return 'P';
-
-            return 'R';
-        }
-
-        if (rows[0] == ".##..")
-        {
-            if (rows[5] == ".###.")
+            case "###..":
+                return 'R';
+            case ".##.." when rows[5] == ".###.":
                 return 'G';
-
-            if (rows[3] == "#....")
+            case ".##.." when rows[3] == "#....":
                 return 'C';
-
-            if (rows[5] == ".##..")
+            case ".##.." when rows[5] == ".##..":
                 return 'O';
-
-            return 'A';
-        }
-
-        if (rows[0] == "####.")
-        {
-            if (rows[5] == "#....")
+            case ".##..":
+                return 'A';
+            case "####." when rows[5] == "#....":
                 return 'F';
-
-            if (rows[2] == "###..")
+            case "####." when rows[2] == "###..":
                 return 'E';
-
-            return 'Z';
-        }
-
-        if (rows[0] == "#..#.")
-        {
-            if (rows[5] == ".##..")
+            case "####.":
+                return 'Z';
+            case "#..#." when rows[5] == ".##..":
                 return 'U';
-
-            if (rows[2] == "##...")
+            case "#..#." when rows[2] == "##...":
                 return 'K';
-
-            return 'H';
+            case "#..#.":
+                return 'H';
+            case "#....":
+                return 'L';
+            case "#...#":
+                return 'Y';
+            case ".###.":
+                return 'I';
+            case "..##.":
+                return 'J';
+            default:
+                return ' ';
         }
-
-        if (rows[0] == "#....")
-            return 'L';
-
-        if (rows[0] == "#...#")
-            return 'Y';
-
-        if (rows[0] == ".###.")
-            return 'I';
-
-        if (rows[0] == "..##.")
-            return 'J';
-
-        return ' ';
     }
 }

@@ -35,9 +35,10 @@ public static class Graph
             foreach (var connection in node.Connections)
             {
                 var visitedConnection = visited[connection.Name];
-                if (steps + connection.Cost >= visitedConnection) 
+                var cost = steps + connection.Cost;
+                if (cost >= visitedConnection) 
                     continue;
-                visited[connection.Name] = steps + connection.Cost;
+                visited[connection.Name] = cost;
                 queue.Enqueue(nodes[connection.Name]);
             }
         }

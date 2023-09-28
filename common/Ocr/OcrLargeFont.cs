@@ -23,30 +23,22 @@ public static class OcrLargeFont
     public static char ReadLetter(string crtLetter)
     {
         var rows = crtLetter.Split(Environment.NewLine).Select(o => o.Trim().Replace(" ", ".")).ToList();
-        if (rows[0] == "#....#..")
+        switch (rows[0])
         {
-            if (rows[1] == "#...#...")
+            case "#....#.." when rows[1] == "#...#...":
                 return 'K';
-
-            return 'H';
-        }
-
-        if (rows[0] == "#####...")
-        {
-            if (rows[9] == "#.......")
+            case "#....#..":
+                return 'H';
+            case "#####..." when rows[9] == "#.......":
                 return 'P';
-
-            if (rows[9] == "#####...")
+            case "#####..." when rows[9] == "#####...":
                 return 'B';
-
-            return 'R';
+            case "#####...":
+                return 'R';
+            case ".####...":
+                return 'G';
+            default:
+                return ' ';
         }
-
-        if (rows[0] == ".####...")
-        {
-            return 'G';
-        }
-
-        return ' ';
     }
 }

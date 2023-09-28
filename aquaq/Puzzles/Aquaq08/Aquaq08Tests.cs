@@ -9,8 +9,8 @@ public class Aquaq08Tests
     {
         var result = Aquaq08.Run(Input);
 
-        Assert.That(result.milk, Is.EqualTo(1000));
-        Assert.That(result.cereal, Is.EqualTo(500));
+        Assert.That(result.milk, Is.EqualTo(1600));
+        Assert.That(result.cereal, Is.EqualTo(600));
     }
 
     private const string Input = """

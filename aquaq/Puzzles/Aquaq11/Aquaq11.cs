@@ -1,7 +1,6 @@
 ﻿using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Puzzles;
 
-
 namespace Aquaq.Puzzles.Aquaq11;
 
 public class Aquaq11 : AquaqPuzzle

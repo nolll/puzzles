@@ -9,45 +9,40 @@ public class Aquaq13 : AquaqPuzzle
     protected override PuzzleResult Run()
     {
         var lines = InputFile.Split(Environment.NewLine);
-        var sum = 0;
-        foreach (var line in lines)
-        {
-            sum += FindMaxRepeats(line);
-        }
+        var sum = lines.Sum(FindMaxRepeats);
 
-        return new PuzzleResult(sum);
+        return new PuzzleResult(sum, 1462);
     }
 
     public static int FindMaxRepeats(string s)
     {
         var tokens = FindTokens(s);
         var maxCount = 0;
-        var maxToken = "";
 
         foreach (var token in tokens)
         {
-            var length = s.Split(token).Length;
-            if (length > maxCount)
+            var count = 1;
+            var repeated = token;
+            while (true)
             {
-                maxCount = length;
-                maxToken = token;
+                repeated += token;
+                if (s.Contains(repeated))
+                    count++;
+                else
+                    break;
             }
+
+            maxCount = Math.Max(count, maxCount);
         }
 
-        var otherTokens = s.Replace(maxToken, "|").Split('|').Where(o => o != "");
-        foreach (var otherToken in otherTokens)
-        {
-            s = s.Replace(otherToken, "");
-        }
-
-        return s.Split(maxToken).Length - 1;
+        return maxCount;
     }
 
     private static IEnumerable<string> FindTokens(string s)
     {
         for (var i = 0; i < s.Length; i++)
         {
-            for (var j = i; j < s.Length - i; j++)
+            for (var j = 1; j < s.Length - i; j++)
             {
                 yield return s.Substring(i, j);
             }

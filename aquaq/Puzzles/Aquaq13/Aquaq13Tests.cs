@@ -6,8 +6,9 @@ public class Aquaq13Tests
 {
     [TestCase("ABCABCABCABCABC", 5)]
     [TestCase("AAAAAAB", 6)]
-    [TestCase("AAAAAABAAAAAAB", 12)]
-    [TestCase("buhtbuhtbuhtbuhtbuhtbuhtbuhtkbzowxgrfyvmltjp", 8)]
+    [TestCase("AAAAAABAAAAAB", 6)]
+    [TestCase("buhtbuhtbuhtbuhtbuhtbuhtbuhtA", 7)]
+    [TestCase("AbuhtbuhtBbuhtbuhtbuhtbuhtbuhtC", 5)]
     public void FindMaxRepeats(string input, int expected)
     {
         var result = Aquaq13.FindMaxRepeats(input);

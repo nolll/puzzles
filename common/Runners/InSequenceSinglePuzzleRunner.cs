@@ -85,7 +85,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
                 MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red),
             PuzzleResultStatus.Timeout => 
                 MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
-            _ => PadResult("")
+            _ => MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Yellow)
         };
     }
 

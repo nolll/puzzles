@@ -3,11 +3,11 @@ using Spectre.Console;
 
 namespace Common.Runners;
 
-public class MultiDayPuzzleRunner
+public class MultiPuzzleRunner
 {
     private readonly TimeSpan _timeoutTimespan;
 
-    public MultiDayPuzzleRunner(int timeoutSeconds)
+    public MultiPuzzleRunner(int timeoutSeconds)
     {
         _timeoutTimespan = TimeSpan.FromSeconds(timeoutSeconds);
     }

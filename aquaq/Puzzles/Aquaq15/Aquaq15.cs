@@ -52,11 +52,11 @@ public class Aquaq15 : AquaqPuzzle
             return stepCount;
         }
 
-        var requiredMatchingChars = transformation.From.Length - 1;
+        var requiredMatchingChars = CountMatchingChars(transformation.From, transformation.To) + 1;
 
         var similarWords = validWords
             .Where(o => !visited.Contains(o) &&
-                        CountMatchingChars(transformation.From, o) == requiredMatchingChars)
+                        CountMatchingChars(transformation.To, o) == requiredMatchingChars)
             .ToList();
 
         if (!similarWords.Any())

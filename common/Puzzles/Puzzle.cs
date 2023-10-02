@@ -1,4 +1,4 @@
-﻿using System.Text;
+﻿using Common.Files;
 
 namespace Common.Puzzles;
 
@@ -14,38 +14,28 @@ public abstract class Puzzle
     public virtual bool NeedsRewrite => false;
     public virtual bool IsFunToOptimize => false;
 
-    protected string InputFile
+    protected string InputFile => FileReader.ReadTextFile(InputFilePath);
+    protected string TextFile(string fileName) => ReadLocalFile(fileName);
+
+    protected string PuzzlePath => Path.Combine(PuzzlePathParts);
+
+    private string ReadLocalFile(string fileName)
     {
-        get
-        {
-            var filePath = Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                InputFilePath);
-
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException("File not found", filePath);
-
-            return File.ReadAllText(filePath, Encoding.UTF8);
-        }
+        var parts = PuzzlePathParts.SkipLast(1).ToList();
+        parts.Add(fileName);
+        var filePath = Path.Combine(parts.ToArray());
+        return FileReader.ReadTextFile(filePath);
     }
+
+    private string[] PuzzlePathParts => GetType()
+        .FullName!
+        .Split('.')
+        .Skip(1)
+        .ToArray();
 
     public abstract IList<Func<PuzzleResult>> RunFunctions { get; }
 
-    private string InputFilePath
-    {
-        get
-        {
-            var parts = GetType()
-                .FullName!
-                .Split('.')
-                .Skip(1)
-                .ToArray();
-
-            var path = Path.Combine(parts);
-
-            return $"{path}.txt";
-        }
-    }
+    private string InputFilePath => $"{PuzzlePath}.txt";
 
     public virtual IEnumerable<string> GetTags()
     {

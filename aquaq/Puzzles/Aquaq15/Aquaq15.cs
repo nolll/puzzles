@@ -1,4 +1,5 @@
-﻿using Common.Puzzles;
+﻿using Common.Graphs;
+using Common.Puzzles;
 using Common.Strings;
 
 namespace Aquaq.Puzzles.Aquaq15;
@@ -9,71 +10,69 @@ public class Aquaq15 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(InputFile));
+        return new PuzzleResult(Run(InputFile), 97920000);
     }
 
     public int Run(string input)
     {
-        var validWords = TextFile("ValidWords.txt").Split(Environment.NewLine);
         var transformations = input.Split(Environment.NewLine)
             .Select(o => o.Split(','))
             .Select(o => new WordTransformation(o[0], o[1]))
             .ToList();
 
+        var wordLengths = transformations.Select(o => o.WordLength).ToList();
+        var maxLength = wordLengths.Max();
+        var minLength = wordLengths.Min();
+
+        var validWords = TextFile("ValidWords.txt")
+            .Split(Environment.NewLine)
+            .Where(o => o.Length >= minLength && o.Length <= maxLength)
+            .GroupBy(o => o.Length)
+            .ToDictionary(k => k.Key, o => BuildInputs(o.ToList()).ToList());
+
         var product = 1;
         foreach (var transformation in transformations)
         {
-            var n = PerformTransformation(transformation, validWords);
-            //Console.WriteLine();
-            //Console.WriteLine($"{transformation.From}-{transformation.To}: {n}");
-
-            product *= n;
+            var inputs = validWords[transformation.WordLength];
+            product *= Graph.GetLowestCost(inputs, transformation.From, transformation.To) + 1;
         }
 
         return product;
     }
 
-    private static int PerformTransformation(WordTransformation transformation, IEnumerable<string> validWords)
+    private static IEnumerable<Graph.Input> BuildInputs(List<string> validWords)
     {
-        var visited = new List<string>();
-        var vw = validWords.Where(o => o.Length == transformation.From.Length).ToArray();
-
-        return FindShortestPath(transformation, vw, visited, 1);
+        var length = validWords.First().Length;
+        foreach (var validWord in validWords)
+        {
+            var similarWords = validWords.Where(o => IsSimilar(validWord, o));
+            foreach (var similarWord in similarWords)
+            {
+                yield return new Graph.Input(validWord, similarWord, 1);
+            }
+        }
     }
 
-    private static int FindShortestPath(
-        WordTransformation transformation,
-        string[] validWords,
-        List<string> visited,
-        int stepCount)
+    private static bool IsSimilar(string a, string b)
     {
-        if (transformation.To == transformation.From)
+        var diffCount = 0;
+        var length = a.Length;
+        for (var i = 0; i < length; i++)
         {
-            return stepCount;
+            if (a[i] == b[i])
+                continue;
+            
+            if (diffCount == 1)
+                return false;
+
+            diffCount++;
         }
 
-        var requiredMatchingChars = CountMatchingChars(transformation.From, transformation.To) + 1;
-
-        var similarWords = validWords
-            .Where(o => !visited.Contains(o) &&
-                        CountMatchingChars(transformation.To, o) == requiredMatchingChars)
-            .ToList();
-
-        if (!similarWords.Any())
-            return int.MaxValue;
-
-        var newVisited = visited.ToList();
-        newVisited.Add(transformation.From);
-        var results = new List<int>();
-        foreach (var similarWord in similarWords)
-        {
-            results.Add(FindShortestPath(transformation with { From = similarWord }, validWords, newVisited, stepCount + 1));
-        }
-
-        return results.Min();
+        return true;
     }
 
-    private static int CountMatchingChars(string a, string b) => a.Where((c, i) => c == b[i]).Count();
-
-    private record WordTransformation(string From, string To);
+    private record WordTransformation(string From, string To)
+    {
+        public int WordLength => From.Length;
+    }
 }

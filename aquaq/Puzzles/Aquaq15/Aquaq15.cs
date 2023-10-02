@@ -1,6 +1,5 @@
 ﻿using Common.Graphs;
 using Common.Puzzles;
-using Common.Strings;
 
 namespace Aquaq.Puzzles.Aquaq15;
 
@@ -48,11 +47,11 @@ public class Aquaq15 : AquaqPuzzle
             var similarWords = validWords.Where(o => IsSimilar(validWord, o));
             foreach (var similarWord in similarWords)
             {
-                yield return new Graph.Input(validWord, similarWord, 1);
+                yield return new Graph.Input(validWord, similarWord);
             }
         }
     }
-
+    
     private static bool IsSimilar(string a, string b)
     {
         var diffCount = 0;
@@ -68,7 +67,7 @@ public class Aquaq15 : AquaqPuzzle
             diffCount++;
         }
 
-        return true;
+        return a != b;
     }
 
     private record WordTransformation(string From, string To)

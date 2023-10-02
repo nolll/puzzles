@@ -46,7 +46,7 @@ public static class Graph
         return visited[target];
     }
 
-    public record Input(string From, string To, int Cost);
+    public record Input(string From, string To, int Cost = 1);
     private record Node(string Name, List<Connection> Connections);
     private record Connection(string Name, int Cost);
 }

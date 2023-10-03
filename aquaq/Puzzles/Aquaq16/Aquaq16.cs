@@ -33,7 +33,7 @@ public class Aquaq16 : AquaqPuzzle
         return spaceCount;
     }
 
-    private int Tighten(Letter left, Letter right)
+    private static int Tighten(Letter left, Letter right)
     {
         var commonSpaces = new List<int>();
         for (var i = 0; i < left.Rows.Count; i++)

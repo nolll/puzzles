@@ -8,14 +8,14 @@ public class Aquaq17 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(InputFile));
+        return new PuzzleResult(Run(InputFile), "Kyrgyzstan 19560803 19920926");
     }
 
     public static string Run(string input)
     {
-        var firstZero = new Dictionary<string, DateTime>();
-        var lastGoal = new Dictionary<string, DateTime>();
         var lines = input.Split(Environment.NewLine).Skip(1);
+
+        var scoreList = new List<TeamScore>();
 
         foreach (var line in lines)
         {
@@ -26,41 +26,59 @@ public class Aquaq17 : AquaqPuzzle
             var result1 = int.Parse(parts[3]);
             var result2 = int.Parse(parts[4]);
 
-            if (!firstZero.ContainsKey(team1) && result1 == 0)
-            {
-                firstZero.Add(team1, date);
-            }
-
-            if (!firstZero.ContainsKey(team2) && result2 > 0)
-            {
-                firstZero.Add(team2, date);
-            }
-
-            if(result1 > 0)
-                lastGoal[team1] = date;
-
-            if (result2 > 0)
-                lastGoal[team2] = date;
+            scoreList.Add(new TeamScore(date, team1, result1));
+            scoreList.Add(new TeamScore(date, team2, result2));
         }
 
-        var teams = firstZero.Keys.Where(o => lastGoal.ContainsKey(o));
-        var maxTimespan = TimeSpan.Zero;
-        var maxTeam = "";
+        var teamScores = scoreList.GroupBy(o => o.Team).ToDictionary(k => k.Key, o => o.ToList());
+        var longestShame = FindLongestShame(teamScores);
+        
+        const string dateFormat = "yyyyMMdd";
+        var firstGoalDate = longestShame.From.ToString(dateFormat);
+        var lastGoalDate = longestShame.To.ToString(dateFormat);
 
-        foreach (var team in teams)
-        {
-            var dateDiff = lastGoal[team] - firstZero[team];
-            if (dateDiff > maxTimespan)
-            {
-                maxTimespan = dateDiff;
-                maxTeam = team;
-            }
-        }
-
-        var dateFormat = "yyyyMMdd";
-        var firstGoalDate = firstZero[maxTeam].ToString(dateFormat);
-        var lastGoalDate = lastGoal[maxTeam].ToString(dateFormat);
-
-        return $"{maxTeam} {firstGoalDate} {lastGoalDate}";
+        return $"{longestShame.Team} {firstGoalDate} {lastGoalDate}";
     }
+
+    private static TeamShame FindLongestShame(Dictionary<string, List<TeamScore>> teamScores)
+    {
+        var teamShames = teamScores.Select(o => FindLongestShame(o.Value));
+        return teamShames.OrderByDescending(o => o.To - o.From).First();
+    }
+
+    private static TeamShame FindLongestShame(List<TeamScore> teamScores)
+    {
+        var isInStreak = false;
+        var streakStartTime = DateTime.MinValue;
+        var longestStreak = TimeSpan.Zero;
+        var longestStreakDates = (DateTime.MinValue, DateTime.MinValue);
+
+        foreach (var teamScore in teamScores)
+        {
+            if (isInStreak)
+            {
+                if (teamScore.Score == 0)
+                    continue;
+
+                isInStreak = false;
+                var streak = teamScore.Date - streakStartTime;
+                if (streak > longestStreak)
+                {
+                    longestStreak = streak;
+                    longestStreakDates = (streakStartTime, teamScore.Date);
+                }
+            }
+
+            if (!isInStreak && teamScore.Score == 0)
+            {
+                isInStreak = true;
+                streakStartTime = teamScore.Date;
+            }
+        }
+
+        return new TeamShame(teamScores.First().Team, longestStreakDates.Item1, longestStreakDates.Item2);
+    }
+
+    private record TeamScore(DateTime Date, string Team, int Score);
+    private record TeamShame(string Team, DateTime From, DateTime To);
 }

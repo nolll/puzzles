@@ -3,6 +3,12 @@
 public static class Graph
 {
     public static int GetLowestCost(List<Input> inputs, string source, string target)
+        => GetLowestCost(inputs, source, target, 1);
+
+    public static int GetHighestCost(List<Input> inputs, string source, string target)
+        => GetLowestCost(inputs, source, target, -1);
+
+    private static int GetLowestCost(List<Input> inputs, string source, string target, int costModifier)
     {
         var nodes = new Dictionary<string, Node>();
 
@@ -15,12 +21,12 @@ public static class Graph
             }
 
             if (input.To != source)
-                node.Connections.Add(new Connection(input.To, input.Cost));
+                node.Connections.Add(new Connection(input.To, input.Cost * costModifier));
         }
 
-        return GetLowestCost(nodes, source, target);
+        return GetLowestCost(nodes, source, target) * costModifier;
     }
-
+    
     private static int GetLowestCost(Dictionary<string, Node> nodes, string source, string target)
     {
         var start = nodes[source];

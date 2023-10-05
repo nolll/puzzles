@@ -15,11 +15,6 @@ public class Euler042 : EulerPuzzle
         return new PuzzleResult(count, 162);
     }
 
-    public static bool IsTriangular(string word)
-    {
-        return false;
-    }
-
     public static IEnumerable<int> GetTriangularNumbers(int n)
     {
         for (var i = 1; i <= n; i++)

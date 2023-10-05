@@ -4,15 +4,6 @@ namespace Euler.Puzzles.Euler042;
 
 public class Euler042Tests
 {
-    [TestCase("SKY", true)]
-    [TestCase("WHATEVER", false)]
-    public void IsTriangular(string word, bool expected)
-    {
-        var result = Euler042.IsTriangular(word);
-
-        Assert.That(result, Is.EqualTo(expected));
-    }
-
     [Test]
     public void GetWordValue()
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-using Common.Hashing;
+using Common.Cryptography;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201504;
 

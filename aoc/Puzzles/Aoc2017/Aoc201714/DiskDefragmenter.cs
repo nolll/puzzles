@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Common.CoordinateSystems.CoordinateSystem2D;
-using Common.Hashing;
+using Common.Cryptography;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201714;
 

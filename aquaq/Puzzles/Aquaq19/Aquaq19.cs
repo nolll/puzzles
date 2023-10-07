@@ -1,5 +1,4 @@
 ﻿using Common.CoordinateSystems.CoordinateSystem2D;
-using Common.Hashing;
 using Common.Puzzles;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;

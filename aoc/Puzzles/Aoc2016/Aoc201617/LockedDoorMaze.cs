@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.CoordinateSystems.CoordinateSystem2D;
-using Common.Hashing;
+using Common.Cryptography;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201617;
 

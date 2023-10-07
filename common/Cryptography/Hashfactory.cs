@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Common.Strings;
 
-namespace Common.Hashing;
+namespace Common.Cryptography;
 
 public class Hashfactory
 {

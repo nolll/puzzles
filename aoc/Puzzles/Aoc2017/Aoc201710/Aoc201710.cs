@@ -1,4 +1,4 @@
-﻿using Common.Hashing;
+﻿using Common.Cryptography;
 using Common.Puzzles;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201710;

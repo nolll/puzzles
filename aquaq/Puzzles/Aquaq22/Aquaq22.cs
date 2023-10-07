@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using Common.Puzzles;
-using NUnit.Framework.Constraints;
 
 namespace Aquaq.Puzzles.Aquaq22;
 

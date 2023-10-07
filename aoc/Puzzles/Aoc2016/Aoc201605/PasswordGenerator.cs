@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
-using Common.Hashing;
+using Common.Cryptography;
 using Common.Strings;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201605;

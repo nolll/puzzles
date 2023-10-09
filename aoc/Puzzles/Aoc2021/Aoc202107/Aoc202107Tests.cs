@@ -34,12 +34,9 @@ public class Aoc202107Tests
 
     [TestCase(16, 5, 66)]
     [TestCase(1, 5, 10)]
-    [TestCase(2, 5, 6)]
     [TestCase(0, 5, 15)]
     [TestCase(4, 5, 1)]
-    [TestCase(2, 5, 6)]
     [TestCase(7, 5, 3)]
-    [TestCase(1, 5, 10)]
     [TestCase(2, 5, 6)]
     [TestCase(14, 5, 45)]
     [TestCase(5, 16, 66)]

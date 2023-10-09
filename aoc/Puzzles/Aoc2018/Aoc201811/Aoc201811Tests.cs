@@ -1,3 +1,4 @@
+using Common.Tests;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201811;
@@ -17,6 +18,7 @@ public class Aoc201811Tests
 
     [TestCase(18, "90,269,16")]
     [TestCase(42, "232,251,12")]
+    [Ignore(TestHelper.NCrunchTimeout)]
     public void AnySizePowerLevelIsCorrect(int serialNumber, string expected)
     {
         var grid = new PowerGrid(300, serialNumber);

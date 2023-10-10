@@ -25,4 +25,8 @@
     <ProjectReference Include="..\common\common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Puzzles\Aquaq27\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
-﻿using Common.Combinatorics;
+﻿using System.Numerics;
+using Common.Combinatorics;
 using Common.Puzzles;
-using NUnit.Framework.Constraints;
 
 namespace Aquaq.Puzzles.Aquaq26;
 
@@ -10,30 +10,33 @@ public class Aquaq26 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        throw new NotImplementedException();
+        var inputNumbers = InputFile.Split(Environment.NewLine)
+            .Select(BigInteger.Parse);
+
+        var sum = inputNumbers.Aggregate(BigInteger.Zero, (current, n) => current + FindFirstLargerNumber(n) - n);
+
+        return new PuzzleResult(sum, 11923911);
     }
 
-    public static long FindFirstLargerNumber(long input)
+    public static BigInteger FindFirstLargerNumber(BigInteger input)
     {
-        var digits = input.ToString().ToCharArray().Select(o => int.Parse(o.ToString())).ToList();
-        var permutations = PermutationGenerator.GetPermutations(digits, digits.Count);
-        var minDiff = long.MaxValue;
-        var minDiffNum = input;
-
-        foreach (var permutation in permutations)
+        var digits = input.ToString();
+        
+        var numChars = 2;
+        while (numChars <= digits.Length)
         {
-            var num = int.Parse(string.Join("", permutation));
-            var diff = num - input;
-            if (diff > 0 && diff < minDiff)
-            {
-                minDiff = diff;
-                minDiffNum = num;
-            }
+            var untouchedChars = digits.Substring(0, digits.Length - numChars);
+            var charsToMove = digits.Substring(digits.Length - numChars, numChars);
+            var positions = Enumerable.Range(0, charsToMove.Length).ToArray();
+            var largerNumbers = PermutationGenerator.GetPermutations(positions, positions.Length)
+                .Select(o => o.Select(p => charsToMove[p]))
+                .Select(o => BigInteger.Parse($"{untouchedChars}{string.Join("", o)}"))
+                .Where(o => o > input).ToList();
+            if (largerNumbers.Any())
+                return largerNumbers.Min();
+            numChars++;
         }
 
-        if (minDiff == long.MaxValue)
-            minDiffNum = input;
-
-        return minDiffNum;
+        return input;
     }
 }

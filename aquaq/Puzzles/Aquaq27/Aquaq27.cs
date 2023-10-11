@@ -1,4 +1,5 @@
-﻿using Common.CoordinateSystems.CoordinateSystem2D;
+﻿using Common.CoordinateSystems;
+using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Puzzles;
 
 namespace Aquaq.Puzzles.Aquaq27;
@@ -11,29 +12,58 @@ public class Aquaq27 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        throw new NotImplementedException();
+        var result = CalculateSnakeScore(InputFile);
+
+        return new PuzzleResult(result, 500135);
     }
 
     public static int CalculateSnakeScore(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input, Empty);
-        var coordsWithChars = matrix.Coords.Where(o => matrix.ReadValueAt(o) != Empty);
-        var ends = coordsWithChars.Where(o => matrix.PerpendicularAdjacentCoordsTo(o).Count == 1);
-        
+        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(input, Empty);
+        var coordsWithChars = matrix.Coords.Where(o => matrix.ReadValueAt(o) != Empty).ToHashSet();
+        var adjacentDictionary = coordsWithChars
+            .ToDictionary(k => k, v => matrix.PerpendicularAdjacentCoordsTo(v).Where(coordsWithChars.Contains).ToList());
+        var ends = adjacentDictionary.Where(o => o.Value.Count == 1).Select(o => o.Key);
+        var visited = new HashSet<MatrixAddress>();
+        var words = new List<string>();
 
-        var sum = 0;
-        foreach (var coord in coordsWithChars)
+        foreach (var start in ends)
         {
-            var c = matrix.ReadValueAt(coord);
-            var adjacentLetterCount = matrix.PerpendicularAdjacentValuesTo(coord).Count(o => o != Empty);
-            sum += GetCharScore(c) * adjacentLetterCount;
+            if (visited.Contains(start))
+                continue;
+
+            var word = "";
+            var cur = start;
+            while (true)
+            {
+                visited.Add(cur);
+                var adjacent = adjacentDictionary[cur];
+                var isEndOfWord = word.Length > 0 &&
+                                  adjacent.Count == 2 &&
+                                  adjacent.First().X != adjacent.Last().X
+                                  && adjacent.First().Y != adjacent.Last().Y;
+                var isEndOfSnake = adjacent.All(visited.Contains);
+                word += matrix.ReadValueAt(cur);
+
+                if (isEndOfSnake || isEndOfWord)
+                {
+                    words.Add(word);
+                    word = "";
+                }
+
+                if (isEndOfSnake)
+                    break;
+
+                if (isEndOfWord)
+                    continue;
+
+                cur = adjacent.First(o => !visited.Contains(o));
+            }
         }
 
-        return sum;
+        return words.Sum(GetWordScore);
     }
 
-    private static int GetCharScore(char c)
-    {
-        return (int)(c - 'a') + 1;
-    }
+    private static int GetWordScore(string word) => word.Sum(GetCharScore) * word.Length;
+    private static int GetCharScore(char c) => (int)(c - 'a') + 1;
 }

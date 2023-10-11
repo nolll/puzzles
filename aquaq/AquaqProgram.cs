@@ -4,7 +4,7 @@ namespace Aquaq;
 
 public class AquaqProgram
 {
-    private const string DebugPuzzle = "25";
+    private const string DebugPuzzle = "27";
 
     static void Main(string[] args)
     {

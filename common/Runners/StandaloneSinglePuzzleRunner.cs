@@ -58,6 +58,9 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
             Thread.Sleep(ProgressWaitTime);
         }
 
+        if (task.IsFaulted && task.Exception is not null)
+            throw task.Exception;
+
         return task.IsFaulted ? PuzzleResult.Failed : result ?? PuzzleResult.Empty;
     }
 

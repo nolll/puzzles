@@ -209,6 +209,11 @@ public class Matrix<T> where T : struct
         return direction;
     }
 
+    public MatrixDirection FaceUp() => TurnTo(MatrixDirection.Up);
+    public MatrixDirection FaceRight() => TurnTo(MatrixDirection.Right);
+    public MatrixDirection FaceDown() => TurnTo(MatrixDirection.Down);
+    public MatrixDirection FaceLeft() => TurnTo(MatrixDirection.Left);
+
     private void ExtendMatrix(MatrixAddress address)
     {
         ExtendX(address);

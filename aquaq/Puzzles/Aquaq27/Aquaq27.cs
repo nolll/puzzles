@@ -1,5 +1,4 @@
-﻿using Common.CoordinateSystems;
-using Common.CoordinateSystems.CoordinateSystem2D;
+﻿using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Puzzles;
 
 namespace Aquaq.Puzzles.Aquaq27;

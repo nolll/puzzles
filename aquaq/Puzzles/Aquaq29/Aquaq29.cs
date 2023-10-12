@@ -5,6 +5,7 @@ namespace Aquaq.Puzzles.Aquaq29;
 public class Aquaq29 : AquaqPuzzle
 {
     public override string Name => "On the up and up";
+    public override bool IsSlow => true;
 
     protected override PuzzleResult Run()
     {

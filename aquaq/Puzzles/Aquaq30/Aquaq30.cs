@@ -8,29 +8,22 @@ public class Aquaq30 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var decks = InputFile.Split(Environment.NewLine);
-        var result = decks.Sum(CountValidStartingMoves);
+        // guessed: 10613
 
-        return new PuzzleResult(result);
-    }
-
-    public static int CountValidStartingMoves(string input)
-    {
-        Console.WriteLine();
-        Console.WriteLine(input);
-        var count = 0;
         var cardFlipper = new CardFlipper();
-        for (var i = 0; i < input.Length; i++)
+        var decks = InputFile.Split(Environment.NewLine);
+        var sum = 0;
+        var count = 1;
+        foreach (var deck in decks)
         {
-            if (input[i] == '1')
-            {
-                var flipped = cardFlipper.Flip(input, i);
-                var canBeSolved = cardFlipper.CanBeSolved(flipped.ToCharArray());
-                if (canBeSolved)
-                    count++;
-            }
+            var result = cardFlipper.CountValidStartingMoves(deck);
+            var possibleStartpoints = deck.Count(o => o == '1');
+            Console.WriteLine();
+            Console.WriteLine($"Deck {count}: {deck} {possibleStartpoints} {result}");
+            sum += result;
+            count++;
         }
 
-        return count;
+        return new PuzzleResult(sum);
     }
 }

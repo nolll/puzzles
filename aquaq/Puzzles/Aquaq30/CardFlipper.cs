@@ -1,35 +1,43 @@
-﻿namespace Aquaq.Puzzles.Aquaq30;
+﻿using System.Text;
+
+namespace Aquaq.Puzzles.Aquaq30;
 
 public class CardFlipper
 {
-    private Dictionary<char[], bool> _cache = new();
+    private readonly Dictionary<char[], bool> _cache = new();
 
-    public string Flip(string s, int index)
+    public int CountValidStartingMoves(string input)
     {
-        var modified = "";
+        var count = 0;
+        for (var i = 0; i < input.Length; i++)
+        {
+            if (input[i] == '1')
+            {
+                var flipped = Flip(input, i);
+                var canBeSolved = CanBeSolved(flipped.ToCharArray());
+                if (canBeSolved)
+                    count++;
+            }
+        }
+
+        return count;
+    }
+
+    public static string Flip(string s, int index)
+    {
+        var modified = new StringBuilder();
         for (var i = 0; i < s.Length; i++)
         {
             if (i == index)
-            {
-                modified += '.';
-            }
+                modified.Append('.');
             else if (i == index - 1 || i == index + 1)
-            {
-                if (s[i] == '1')
-                    modified += '0';
-                else if (s[i] == '0')
-                    modified += '1';
-                else
-                    modified += '.';
-            }
+                modified.Append(FlipCard(s[i]));
             else
-            {
-                modified += s[i];
-            }
+                modified.Append(s[i]);
 
         }
 
-        return modified;
+        return modified.ToString();
     }
 
     public bool CanBeSolved(char[] state)
@@ -37,52 +45,44 @@ public class CardFlipper
         if (_cache.TryGetValue(state, out var canBeSolved))
             return canBeSolved;
 
-        var foundZero = false;
-
         var subStates = new List<char[]>();
         for (var i = 0; i < state.Length; i++)
         {
             var c = state[i];
-            if (c == '0')
-                foundZero = true;
 
-            if (c == '1')
+            if (c != '1') 
+                continue;
+            
+            if (i > 0)
             {
                 var left = state.Take(i).ToArray();
-                if (left.Length > 0)
-                {
-                    var lastChar = left.Last();
-                    if (lastChar == '1')
-                        left[^1] = '0';
-                    else if (lastChar == '0')
-                        left[^1] = '1';
-                }
+                left[^1] = FlipCard(left.Last());
+                subStates.Add(left);
+            }
+                
+            if (i < state.Length - 1)
+            {
                 var right = state.Skip(i + 1).ToArray();
-                if (right.Length > 0)
-                {
-                    var firstChar = right.Last();
-                    if (firstChar == '1')
-                        right[0] = '0';
-                    else if (firstChar == '0')
-                        right[0] = '1';
-                }
-
-                if (left.Any())
-                    subStates.Add(left);
-
-                if (right.Any())
-                    subStates.Add(right);
-
-                if (subStates.All(CanBeSolved))
-                {
-                    _cache.Add(state, true);
-                    return true;
-                }
+                right[0] = FlipCard(right.First());
+                subStates.Add(right);
+            }
+                
+            if (subStates.All(CanBeSolved))
+            {
+                _cache.Add(state, true);
+                return true;
             }
         }
 
-        var result = !foundZero;
+        var result = !state.Contains('0');
         _cache.Add(state, result);
-        return !foundZero;
+        return result;
     }
+
+    private static char FlipCard(char c) => c switch
+    {
+        '1' => '0',
+        '0' => '1',
+        _ => '.'
+    };
 }

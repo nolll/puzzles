@@ -10,7 +10,7 @@ public class Aquaq30Tests
     [TestCase("00101011010", 3)]
     public void CountValidStartingMoves(string input, int expected)
     {
-        var result = Aquaq30.CountValidStartingMoves(input);
+        var result = new CardFlipper().CountValidStartingMoves(input);
 
         result.Should().Be(expected);
     }
@@ -21,7 +21,7 @@ public class Aquaq30Tests
     public void Flip(string input, int index, string expected)
     {
         var cardFlipper = new CardFlipper();
-        var result = cardFlipper.Flip(input, index);
+        var result = CardFlipper.Flip(input, index);
 
         result.Should().Be(expected);
     }

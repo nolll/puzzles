@@ -45,38 +45,47 @@ public class CardFlipper
         if (_cache.TryGetValue(state, out var canBeSolved))
             return canBeSolved;
 
-        var subStates = new List<char[]>();
-        for (var i = 0; i < state.Length; i++)
+        if (state.Contains('1'))
         {
-            var c = state[i];
+            for (var i = 0; i < state.Length; i++)
+            {
+                var subStates = new List<char[]>();
+                var c = state[i];
 
-            if (c != '1') 
-                continue;
-            
-            if (i > 0)
-            {
-                var left = state.Take(i).ToArray();
-                left[^1] = FlipCard(left.Last());
-                subStates.Add(left);
-            }
+                if (c != '1') 
+                    continue;
                 
-            if (i < state.Length - 1)
-            {
-                var right = state.Skip(i + 1).ToArray();
-                right[0] = FlipCard(right.First());
-                subStates.Add(right);
+                if (i > 0) 
+                    subStates.Add(TakeLeftAndFlipLast(state, i));
+
+                if (i < state.Length - 1) 
+                    subStates.Add(TakeRightAndFlipFirst(state, i));
+
+                var r = subStates.All(CanBeSolved);
+                _cache.Add(state, r);
+                return r;
             }
-                
-            if (subStates.All(CanBeSolved))
-            {
-                _cache.Add(state, true);
-                return true;
-            }
+
+            return false;
         }
 
         var result = !state.Contains('0');
         _cache.Add(state, result);
         return result;
+    }
+
+    private static char[] TakeLeftAndFlipLast(IEnumerable<char> state, int index)
+    {
+        var left = state.Take(index).ToArray();
+        left[^1] = FlipCard(left.Last());
+        return left;
+    }
+
+    private static char[] TakeRightAndFlipFirst(IEnumerable<char> state, int index)
+    {
+        var right = state.Skip(index + 1).ToArray();
+        right[0] = FlipCard(right.First());
+        return right;
     }
 
     private static char FlipCard(char c) => c switch

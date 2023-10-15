@@ -20,7 +20,6 @@ public class Aquaq30Tests
     [TestCase("11010", 3, "111.1")]
     public void Flip(string input, int index, string expected)
     {
-        var cardFlipper = new CardFlipper();
         var result = CardFlipper.Flip(input, index);
 
         result.Should().Be(expected);

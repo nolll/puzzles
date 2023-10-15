@@ -11,16 +11,40 @@ public class RubiksCube
 
     public void Rotate(string instruction)
     {
+        if (instruction == "F")
+            RotateFront();
+        if (instruction == "F'")
+            RotateFrontPrime();
         if (instruction == "U")
             RotateUp();
         if (instruction == "U'")
             RotateUpPrime();
         if (instruction == "L")
             RotateLeft();
-        if (instruction == "B")
-            RotateBack();
+        if (instruction == "L'")
+            RotateLeftPrime();
         if (instruction == "R")
             RotateRight();
+        if (instruction == "R'")
+            RotateRightPrime();
+        if (instruction == "D")
+            RotateDown();
+        if (instruction == "D'")
+            RotateDownPrime();
+        if (instruction == "B")
+            RotateBack();
+        if (instruction == "B'")
+            RotateBackPrime();
+    }
+
+    private void RotateFront()
+    {
+        Front.RotateRight();
+    }
+
+    private void RotateFrontPrime()
+    {
+        Front.RotateLeft();
     }
 
     private void RotateUp()
@@ -62,17 +86,9 @@ public class RubiksCube
         Back.WriteReverseColumn(2, fromDown);
     }
 
-    private void RotateBack()
+    private void RotateLeftPrime()
     {
-        Back.RotateRight();
-        var fromUp = Up.ReadRow(0);
-        var fromLeft = Left.ReadColumn(0);
-        var fromDown = Down.ReadRow(2);
-        var fromRight = Right.ReadColumn(2);
-        Left.WriteReverseColumn(0, fromUp);
-        Down.WriteRow(2, fromLeft);
-        Right.WriteReverseColumn(2, fromDown);
-        Up.WriteRow(0, fromRight);
+        Left.RotateLeft();
     }
 
     private void RotateRight()
@@ -86,6 +102,39 @@ public class RubiksCube
         Front.WriteColumn(2, fromDown);
         Down.WriteReverseColumn(2, fromBack);
         Back.WriteReverseColumn(0, fromUp);
+    }
+
+    private void RotateRightPrime()
+    {
+        Right.RotateLeft();
+    }
+
+    private void RotateDown()
+    {
+        Down.RotateRight();
+    }
+
+    private void RotateDownPrime()
+    {
+        Down.RotateLeft();
+    }
+
+    private void RotateBack()
+    {
+        Back.RotateRight();
+        var fromUp = Up.ReadRow(0);
+        var fromLeft = Left.ReadColumn(0);
+        var fromDown = Down.ReadRow(2);
+        var fromRight = Right.ReadColumn(2);
+        Left.WriteReverseColumn(0, fromUp);
+        Down.WriteRow(2, fromLeft);
+        Right.WriteReverseColumn(2, fromDown);
+        Up.WriteRow(0, fromRight);
+    }
+
+    private void RotateBackPrime()
+    {
+        Back.RotateLeft();
     }
 
     private static RubiksCubeFace CreateFace(char initial) => new(initial);

@@ -2,13 +2,13 @@ namespace Common.Combinatorics;
 
 public static class CombinationGenerator
 {
-    public static List<List<T>> GetAllCombinationsAnySize<T>(IList<T> list)
+    public static List<List<T>> GetUniqueCombinationsAnySize<T>(IList<T> list)
     {
         var result = new List<List<T>> { new() };
         result.Last().Add(list[0]);
         if (list.Count == 1)
             return result;
-        var tailCombos = GetAllCombinationsAnySize(list.Skip(1).ToList());
+        var tailCombos = GetUniqueCombinationsAnySize(list.Skip(1).ToList());
         tailCombos.ForEach(combo =>
         {
             result.Add(new List<T>(combo));
@@ -18,7 +18,7 @@ public static class CombinationGenerator
         return result;
     }
 
-    public static IEnumerable<List<T>> GetAllCombinationsFixedSize<T>(IList<T> list, int size)
+    public static IEnumerable<List<T>> GetUniqueCombinationsFixedSize<T>(IList<T> list, int size)
     {
         var n = list.Count;
         var result = new int[size];
@@ -44,13 +44,13 @@ public static class CombinationGenerator
         }
     }
 
-    public static IEnumerable<List<T>> GetAllCombinationsMaxSize<T>(IList<T> list, int size)
+    public static IEnumerable<List<T>> GetUniqueCombinationsMaxSize<T>(IList<T> list, int size)
     {
         var result = new List<List<T>> { new() };
         result.Last().Add(list[0]);
         if (list.Count == 1)
             return result;
-        var tailCombos = GetAllCombinationsAnySize(list.Skip(1).ToList());
+        var tailCombos = GetUniqueCombinationsAnySize(list.Skip(1).ToList());
         tailCombos.ForEach(combo =>
         {
             result.Add(new List<T>(combo));

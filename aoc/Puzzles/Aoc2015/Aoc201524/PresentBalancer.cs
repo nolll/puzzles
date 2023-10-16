@@ -25,7 +25,7 @@ public class PresentBalancer
         var count = 1;
         while(count < presents.Count)
         {
-            var combinations = CombinationGenerator.GetAllCombinationsFixedSize(presents, count);
+            var combinations = CombinationGenerator.GetUniqueCombinationsFixedSize(presents, count);
             var valid = combinations.Where(o => o.Sum() == partitionSum);
             if (valid.Any())
             {

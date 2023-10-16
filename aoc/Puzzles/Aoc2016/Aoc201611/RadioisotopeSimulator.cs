@@ -30,7 +30,7 @@ public class RadioisotopeSimulator
         {
             if (facility.ShouldMoveUp)
             {
-                var itemCombinations = CombinationGenerator.GetAllCombinationsMaxSize(facility.Floors[facility.ElevatorFloor].Items, 2);
+                var itemCombinations = CombinationGenerator.GetUniqueCombinationsMaxSize(facility.Floors[facility.ElevatorFloor].Items, 2);
                 var oldFloor = facility.ElevatorFloor;
                 var newFloor = oldFloor + 1;
                 foreach (var combination in itemCombinations)

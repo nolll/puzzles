@@ -10,7 +10,7 @@ public class Aquaq31 : AquaqPuzzle
     {
         var result = Rotate(InputFile);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, 7200);
     }
 
     public static int Rotate(string input)

@@ -2,13 +2,13 @@ namespace Common.Combinatorics;
 
 public static class CombinationGenerator
 {
-    public static List<List<T>> GetAllCombinationsAnySize<T>(IList<T> list)
+    public static List<List<T>> GetUniqueCombinationsAnySize<T>(IList<T> list)
     {
         var result = new List<List<T>> { new() };
         result.Last().Add(list[0]);
         if (list.Count == 1)
             return result;
-        var tailCombos = GetAllCombinationsAnySize(list.Skip(1).ToList());
+        var tailCombos = GetUniqueCombinationsAnySize(list.Skip(1).ToList());
         tailCombos.ForEach(combo =>
         {
             result.Add(new List<T>(combo));
@@ -18,7 +18,7 @@ public static class CombinationGenerator
         return result;
     }
 
-    public static IEnumerable<List<T>> GetAllCombinationsFixedSize<T>(IList<T> list, int size)
+    public static IEnumerable<List<T>> GetUniqueCombinationsFixedSize<T>(IList<T> list, int size)
     {
         var n = list.Count;
         var result = new int[size];
@@ -44,13 +44,13 @@ public static class CombinationGenerator
         }
     }
 
-    public static IEnumerable<List<T>> GetAllCombinationsMaxSize<T>(IList<T> list, int size)
+    public static IEnumerable<List<T>> GetUniqueCombinationsMaxSize<T>(IList<T> list, int size)
     {
         var result = new List<List<T>> { new() };
         result.Last().Add(list[0]);
         if (list.Count == 1)
             return result;
-        var tailCombos = GetAllCombinationsAnySize(list.Skip(1).ToList());
+        var tailCombos = GetUniqueCombinationsAnySize(list.Skip(1).ToList());
         tailCombos.ForEach(combo =>
         {
             result.Add(new List<T>(combo));
@@ -58,5 +58,31 @@ public static class CombinationGenerator
             result.Add(new List<T>(combo));
         });
         return result.Where(o => o.Count <= size);
+    }
+
+    public static IEnumerable<IList<T>> GetCombinationsFixedSize<T>(IList<T> list, int size)
+    {
+        var accList = new List<T>();
+        return GetCombinationsFixedSizeRecursive<T>(accList, list, size, 0);
+    }
+
+    private static IEnumerable<IList<T>> GetCombinationsFixedSizeRecursive<T>(IList<T> accList, IList<T> list, int size, int i)
+    {
+        var e = new List<IList<T>>();
+
+        if(i == size)
+        {
+            e.Add(accList);
+            return e;
+        }
+
+        foreach (var item in list)
+        {
+            e.AddRange(
+                GetCombinationsFixedSizeRecursive<T>(
+                    accList.Concat(new List<T> { item }).ToList(), list, size, i + 1));
+        }
+
+        return e;
     }
 }

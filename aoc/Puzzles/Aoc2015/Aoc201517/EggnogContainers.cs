@@ -16,7 +16,7 @@ public class EggnogContainers
         
     public IList<List<EggnogContainer>> GetCombinations(int targetVolume)
     {
-        var combinations = CombinationGenerator.GetAllCombinationsAnySize(_containers);
+        var combinations = CombinationGenerator.GetUniqueCombinationsAnySize(_containers);
         return combinations.Where(o => o.Sum(c => c.Volume) == targetVolume).ToList();
     }
 

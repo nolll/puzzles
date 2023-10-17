@@ -5,7 +5,7 @@ namespace Common.Combinatorics;
 public class PermutationGeneratorTests
 {
     [Test]
-    public void GeneratesAllCombinations()
+    public void GeneratesAllPermutations()
     {
         var sequences = PermutationGenerator.GetPermutations(new[] {1, 2, 3}).ToList();
 

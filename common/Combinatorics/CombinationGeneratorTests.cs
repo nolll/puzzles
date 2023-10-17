@@ -17,6 +17,6 @@ public class CombinationGeneratorTests
     {
         var sequences = CombinationGenerator.GetCombinationsFixedSize(new[] { 1, 2, 3 }, 2).ToList();
 
-        Assert.That(sequences.Count, Is.EqualTo(7));
+        Assert.That(sequences.Count, Is.EqualTo(9));
     }
 }

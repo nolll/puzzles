@@ -59,4 +59,30 @@ public static class CombinationGenerator
         });
         return result.Where(o => o.Count <= size);
     }
+
+    public static IEnumerable<IList<T>> GetCombinationsFixedSize<T>(IList<T> list, int size)
+    {
+        var accList = new List<T>();
+        return GetCombinationsFixedSizeRecursive<T>(accList, list, size, 0);
+    }
+
+    private static IEnumerable<IList<T>> GetCombinationsFixedSizeRecursive<T>(IList<T> accList, IList<T> list, int size, int i)
+    {
+        var e = new List<IList<T>>();
+
+        if(i == size)
+        {
+            e.Add(accList);
+            return e;
+        }
+
+        foreach (var item in list)
+        {
+            e.AddRange(
+                GetCombinationsFixedSizeRecursive<T>(
+                    accList.Concat(new List<T> { item }).ToList(), list, size, i + 1));
+        }
+
+        return e;
+    }
 }

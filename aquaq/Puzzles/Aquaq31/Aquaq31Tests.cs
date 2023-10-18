@@ -25,6 +25,12 @@ public class Aquaq31Tests
     [TestCase("D'", "bbbbbbooo", "wwwwwwwww", "rrrrrrbbb", "ooooooggg", "yyyyyyyyy", "ggggggrrr")]
     [TestCase("B", "bbbbbbbbb", "ooowwwwww", "wrrwrrwrr", "ooyooyooy", "yyyyyyrrr", "ggggggggg")]
     [TestCase("B'", "bbbbbbbbb", "rrrwwwwww", "yrryrryrr", "oowoowoow", "yyyyyyooo", "ggggggggg")]
+    [TestCase("X", "yyyyyyyyy", "bbbbbbbbb", "rrrrrrrrr", "ooooooooo", "ggggggggg", "wwwwwwwww")]
+    [TestCase("X'", "wwwwwwwww", "ggggggggg", "rrrrrrrrr", "ooooooooo", "bbbbbbbbb", "yyyyyyyyy")]
+    [TestCase("Y", "ooooooooo", "wwwwwwwww", "bbbbbbbbb", "ggggggggg", "yyyyyyyyy", "rrrrrrrrr")]
+    [TestCase("Y'", "rrrrrrrrr", "wwwwwwwww", "ggggggggg", "bbbbbbbbb", "yyyyyyyyy", "ooooooooo")]
+    [TestCase("Z", "bbbbbbbbb", "rrrrrrrrr", "yyyyyyyyy", "wwwwwwwww", "ooooooooo", "ggggggggg")]
+    [TestCase("Z'", "bbbbbbbbb", "ooooooooo", "wwwwwwwww", "yyyyyyyyy", "rrrrrrrrr", "ggggggggg")]
     public void RotateOne(
         string rotation, 
         string front, 

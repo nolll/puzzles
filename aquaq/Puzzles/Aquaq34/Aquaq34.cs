@@ -1,4 +1,5 @@
 ﻿using Common.Puzzles;
+using System.IO;
 
 namespace Aquaq.Puzzles.Aquaq34;
 
@@ -15,41 +16,26 @@ public class Aquaq34 : AquaqPuzzle
 
     public static int LongestRouteTime(string input)
     {
-        var lines = input.Split(Environment.NewLine);
-        var stations = new Dictionary<string, Station>();
-        var firstLineParts = lines.First().Split(',').Skip(1).ToList();
-        var routes = firstLineParts.Select(o => new Route(o)).ToArray();
-        var trains = firstLineParts.Select(o => new Train(o)).ToArray();
-        foreach (var line in lines.Skip(1))
-        {
-            var parts = line.Split(',');
-            var stationName = parts[0];
-            stations.Add(stationName, new Station(stationName));
+        var lines = input.Split(Environment.NewLine).ToArray();
+        var dataLines = lines.Skip(1).ToArray();
+        var trainNames = lines.First().Split(',').Skip(1).ToArray();
+        var stationNames = lines.Skip(1).Select(o => o[..1]).ToArray();
+        var stations = new List<Station>();
+        var routeTimestamps = trainNames.Select(o => new List<int?>()).ToList();
+        var trains = new Dictionary<int, Train>();
 
-            var times = parts.Skip(1).ToArray();
-            for (var i = 0; i < times.Length; i++)
+        for (var i = 0; i < dataLines.Length; i++)
+        {
+            var line = dataLines[i];
+            var station = new Station(stationNames[i]);
+            stations.Add(station);
+
+            var timeData = line.Split(',').Skip(1).ToArray();
+            for (var j = 0; j < timeData.Length; j++)
             {
-                var time = times[i];
-                if (time.Length == 0)
-                    continue;
-
-                var route = routes[i];
-                var timetableTime = ParseMinutes(time);
-                var minutesSinceLast = route.Stops.Any()
-                    ? timetableTime - route.Stops.Last().TimetableTime
-                    : timetableTime;
-
-                route.Stops.Add(new Stop(stationName, minutesSinceLast, timetableTime));
+                int? time = timeData[j].Length > 0 ? ParseMinutes(timeData[j]) : null;
+                routeTimestamps[j].Add(time);
             }
-        }
-
-        var elapsed = 0;
-        var travellingTrains = trains.ToList();
-        while (travellingTrains.Any())
-        {
-
-            travellingTrains = travellingTrains.Where(o => !o.Arrived).ToList();
-            elapsed++;
         }
 
         return 0;
@@ -67,48 +53,36 @@ public class Aquaq34 : AquaqPuzzle
     {
         public string Name { get; }
         public List<Train> Waiting { get; } = new();
+        public Train? CurrentTrain = null;
+        public int CurrentTrainTime = 0;
         
         public Station(string name)
         {
             Name = name;
         }
     }
-
-    private class Route
-    {
-        public string Name { get; }
-        public List<Stop> Stops { get; } = new();
-
-        public Route(string name)
-        {
-            Name = name;
-        }
-    }
-
-    private class Stop
-    {
-        public string StationName { get; }
-        public int TravelTime { get; }
-        public int TimetableTime { get; }
-
-        public Stop(string stationName, int travelTime, int timetableTime)
-        {
-            StationName = stationName;
-            TravelTime = travelTime;
-            TimetableTime = timetableTime;
-        }
-    }
-
+    
     private class Train
     {
-        public string Route { get; }
-        public Station? LastStation { get; set; }
-        public int TimeTravelled { get; set; } = 0;
-        public bool Arrived { get; set; }
+        public int StartTime { get; set; }
+        public Station? StartStation { get; set; }
+        public List<Leg> Legs { get; set; }
+        public int TimeTravelled { get; set; }
+        public int StationTimeLeft { get; set; }
+        public Station? CurrentStation { get; set; }
+        public bool ArrivedAtLastStation { get; set; }
+    }
 
-        public Train(string route)
-        {
-            Route = route;
-        }
+    private class Leg
+    {
+        public Station From { get; set; }
+        public Station To { get; set; }
+        public int Time { get; set; }
+    }
+
+    private class StationTimestamp
+    {
+        public string StationName { get; set; }
+        public int Time { get; set; }
     }
 }

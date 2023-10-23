@@ -1,4 +1,5 @@
 ﻿using Common.Puzzles;
+using System.Diagnostics;
 
 namespace Aquaq.Puzzles.Aquaq34;
 
@@ -111,7 +112,6 @@ public class Aquaq34 : AquaqPuzzle
             {
                 if (train.TimeLeftAtStation == 0)
                 {
-                    train.State = TrainState.Travelling;
                     train.CurrentStation = null;
                     if (!train.Legs.Any())
                     {
@@ -120,6 +120,7 @@ public class Aquaq34 : AquaqPuzzle
                     }
                     else
                     {
+                        train.State = TrainState.Travelling;
                         train.TimeLeftToDestination = train.Legs.First().TravelTime;
                     }
                 }
@@ -150,7 +151,7 @@ public class Aquaq34 : AquaqPuzzle
                     var currentLeg = train.Legs.First();
                     train.LastStation = currentLeg.From;
                     train.CurrentStation = currentLeg.To;
-                    train.Legs = train.Legs.Skip(1).ToList();
+                    train.Legs.RemoveAt(0);
                 }
                 else
                 {
@@ -159,21 +160,20 @@ public class Aquaq34 : AquaqPuzzle
             }
 
             // WAITING -> AT STATION
-            var waiting = notFinishedTrains.Where(o => o.State == TrainState.Waiting).ToList();
-            
-            var trainsInStation = notFinishedTrains.Where(o => o.State == TrainState.AtStation).ToList();
             foreach (var station in stations)
             {
-                var trainInStation = trainsInStation.FirstOrDefault(o => o.CurrentStation!.Name == station.Name);
-                if(trainInStation is not null)
+                var trainIsInStation = notFinishedTrains.Any(o => o.State == TrainState.AtStation && o.CurrentStation!.Name == station.Name);
+                if(trainIsInStation)
                     continue;
 
-                var firstInLine = waiting
-                    .Where(o => o.CurrentStation?.Name == station.Name)
+                var waiting = notFinishedTrains
+                    .Where(o => o.State == TrainState.Waiting && o.CurrentStation?.Name == station.Name).ToList()
                     .OrderBy(o => o.LastStation is null ? 0 : 1)
                     .ThenBy(o => o.LastStation?.Name ?? "")
                     .ThenBy(o => o.Name)
-                    .FirstOrDefault();
+                    .ToList();
+
+                var firstInLine = waiting.FirstOrDefault();
 
                 if (firstInLine is not null)
                 {
@@ -199,6 +199,7 @@ public class Aquaq34 : AquaqPuzzle
         return hours * 60 + minutes;
     }
 
+    [DebuggerDisplay("{Name}")]
     private class Station
     {
         public string Name { get; }

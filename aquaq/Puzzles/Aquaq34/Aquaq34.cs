@@ -97,17 +97,16 @@ public class Aquaq34 : AquaqPuzzle
                 }
             }
 
+            train.LegCount = train.Legs.Count;
             trains.Add(train);
             trainId++;
         }
-        
-        var notFinishedTrains = trains.ToList();
 
         var elapsed = 0;
-        while (notFinishedTrains.Any())
+        while (trains.Any(o => o.State != TrainState.Finished))
         {
             // AT STATION -> TRAVELLING OR FINISHED
-            var atStation = notFinishedTrains.Where(o => o.State == TrainState.AtStation);
+            var atStation = trains.Where(o => o.State == TrainState.AtStation);
             foreach (var train in atStation)
             {
                 if (train.TimeLeftAtStation == 0)
@@ -131,7 +130,7 @@ public class Aquaq34 : AquaqPuzzle
             }
 
             // NOT STARTED -> WAITING
-            var notStarted = notFinishedTrains.Where(o => o.State == TrainState.NotStarted);
+            var notStarted = trains.Where(o => o.State == TrainState.NotStarted);
             foreach (var train in notStarted)
             {
                 if (train.StartTime == elapsed)
@@ -142,7 +141,7 @@ public class Aquaq34 : AquaqPuzzle
             }
 
             // TRAVELLING -> WAITING
-            var travelling = notFinishedTrains.Where(o => o.State == TrainState.Travelling);
+            var travelling = trains.Where(o => o.State == TrainState.Travelling);
             foreach (var train in travelling)
             {
                 if (train.TimeLeftToDestination == 0)
@@ -162,17 +161,16 @@ public class Aquaq34 : AquaqPuzzle
             // WAITING -> AT STATION
             foreach (var station in stations)
             {
-                var trainIsInStation = notFinishedTrains.Any(o => o.State == TrainState.AtStation && o.CurrentStation!.Name == station.Name);
+                var trainIsInStation = trains.Any(o => o.State == TrainState.AtStation && o.CurrentStation!.Name == station.Name);
                 if(trainIsInStation)
                     continue;
 
-                var waiting = notFinishedTrains
-                    .Where(o => o.State == TrainState.Waiting && o.CurrentStation?.Name == station.Name).ToList()
-                    .OrderBy(o => o.LastStation is null ? 0 : 1)
-                    .ThenBy(o => o.LastStation?.Name ?? "")
+                var waiting = trains
+                    .Where(o => o.State == TrainState.Waiting && o.CurrentStation?.Name == station.Name)
+                    .OrderBy(o => o.LastStation?.Name ?? "")
                     .ThenBy(o => o.Name)
                     .ToList();
-
+                
                 var firstInLine = waiting.FirstOrDefault();
 
                 if (firstInLine is not null)
@@ -183,10 +181,10 @@ public class Aquaq34 : AquaqPuzzle
             }
 
             elapsed++;
-            notFinishedTrains = notFinishedTrains.Where(o => o.State != TrainState.Finished).ToList();
         }
-        
-        var longestTime = trains.Select(o => o.TimeTravelled).Max();
+
+        trains = trains.OrderByDescending(o => o.TimeTravelled).ToList();
+        var longestTime = trains.First().TimeTravelled;
 
         return longestTime;
     }
@@ -217,6 +215,7 @@ public class Aquaq34 : AquaqPuzzle
         public string StartTimeStr { get; set; }
         public Station? StartStation { get; set; }
         public List<Leg> Legs { get; set; } = new List<Leg>();
+        public int LegCount { get; set; }
         public int TimeTravelled => ArrivalTime - StartTime;
         public Station? CurrentStation { get; set; }
         public Station? LastStation { get; set; }

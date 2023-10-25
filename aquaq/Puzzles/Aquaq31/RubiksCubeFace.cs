@@ -12,6 +12,7 @@ public class RubiksCubeFace
         _matrix = new Matrix<char>(Size, Size, initial);
     }
 
+    public char[] ReadAll() => _matrix.Values.ToArray();
     public char[] ReadLeftColumn() => ReadColumn(0);
     public char[] ReadRightColumn() => ReadColumn(2);
     private char[] ReadColumn(int x) => Enumerable.Range(0, Size).Select(o => _matrix.ReadValueAt(x, o)).ToArray();
@@ -19,6 +20,16 @@ public class RubiksCubeFace
     public char[] ReadTopRow() => ReadRow(0);
     public char[] ReadBottomRow() => ReadRow(2);
     private char[] ReadRow(int y) => Enumerable.Range(0, Size).Select(o => _matrix.ReadValueAt(o, y)).ToArray();
+
+    public void WriteAll(IEnumerable<char> chars)
+    {
+        var charArray = chars.ToArray();
+        var coordsArray = _matrix.Coords.ToArray();
+        for (var i = 0; i < coordsArray.Length; i++)
+        {
+            _matrix.WriteValueAt(coordsArray[i], charArray[i]);
+        }
+    }
 
     public void WriteTopRow(IEnumerable<char> values) => WriteRow(0, values);
     public void WriteBottomRow(IEnumerable<char> values) => WriteRow(2, values);

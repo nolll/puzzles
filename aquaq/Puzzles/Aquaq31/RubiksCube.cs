@@ -31,6 +31,12 @@ public class RubiksCube
         "D'" => RotateDownPrime,
         "B" => RotateBack,
         "B'" => RotateBackPrime,
+        "X" => RotateCubeX,
+        "X'" => RotateCubeXPrime,
+        "Y" => RotateCubeY,
+        "Y'" => RotateCubeYPrime,
+        "Z" => RotateCubeZ,
+        "Z'" => RotateCubeZPrime,
         _ => throw new Exception("Unknown rotation")
     };
 
@@ -188,6 +194,106 @@ public class RubiksCube
         Down.WriteBottomRow(fromRight.Reverse());
         Right.WriteRightColumn(fromUp);
         Up.WriteTopRow(fromLeft.Reverse());
+    }
+
+    private void RotateCubeZ()
+    {
+        Back.RotateLeft();
+        Front.RotateRight();
+        var left = Left.ReadAll();
+        var up = Up.ReadAll();
+        var right = Right.ReadAll();
+        var down = Down.ReadAll();
+        Up.WriteAll(left);
+        Up.RotateLeft();
+        Left.WriteAll(down);
+        Left.RotateLeft();
+        Right.WriteAll(up);
+        Right.RotateLeft();
+        Down.WriteAll(right);
+        Down.RotateLeft();
+    }
+
+    private void RotateCubeZPrime()
+    {
+        Back.RotateRight();
+        Front.RotateLeft();
+        var left = Left.ReadAll();
+        var up = Up.ReadAll();
+        var right = Right.ReadAll();
+        var down = Down.ReadAll();
+        Up.WriteAll(right);
+        Up.RotateRight();
+        Left.WriteAll(up);
+        Left.RotateRight();
+        Right.WriteAll(down);
+        Right.RotateRight();
+        Down.WriteAll(left);
+        Down.RotateRight();
+    }
+
+    private void RotateCubeX()
+    {
+        Left.RotateLeft();
+        Right.RotateRight();
+        var front = Front.ReadAll();
+        var up = Up.ReadAll();
+        var back = Back.ReadAll();
+        var down = Down.ReadAll();
+        Front.WriteAll(down);
+        Up.WriteAll(front);
+        Down.WriteAll(back);
+        Down.RotateLeft();
+        Down.RotateLeft();
+        Back.WriteAll(up);
+        Back.RotateLeft();
+        Back.RotateLeft();
+    }
+
+    private void RotateCubeXPrime()
+    {
+        Left.RotateRight();
+        Right.RotateLeft();
+        var front = Front.ReadAll();
+        var up = Up.ReadAll();
+        var back = Back.ReadAll();
+        var down = Down.ReadAll();
+        Front.WriteAll(up);
+        Up.WriteAll(back);
+        Up.RotateLeft();
+        Up.RotateLeft();
+        Down.WriteAll(front);
+        Back.WriteAll(down);
+        Back.RotateLeft();
+        Back.RotateLeft();
+    }
+
+    private void RotateCubeY()
+    {
+        Up.RotateRight();
+        Down.RotateLeft();
+        var front = Front.ReadAll();
+        var left = Left.ReadAll();
+        var right = Right.ReadAll();
+        var back = Back.ReadAll();
+        Front.WriteAll(right);
+        Left.WriteAll(front);
+        Right.WriteAll(back);
+        Back.WriteAll(left);
+    }
+
+    private void RotateCubeYPrime()
+    {
+        Up.RotateRight();
+        Down.RotateLeft();
+        var front = Front.ReadAll();
+        var left = Left.ReadAll();
+        var right = Right.ReadAll();
+        var back = Back.ReadAll();
+        Front.WriteAll(left);
+        Left.WriteAll(back);
+        Right.WriteAll(front);
+        Back.WriteAll(right);
     }
 
     private static RubiksCubeFace CreateFace(char initial) => new(initial);

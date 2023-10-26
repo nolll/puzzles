@@ -291,4 +291,27 @@ NOP
 
         Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
     }
+
+    [Test]
+    public void Transpose()
+    {
+        const string input = """
+#..
+#..
+...
+""";
+
+        const string expected = """
+##.
+...
+...
+""";
+
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+
+        matrix = matrix.Transpose();
+
+        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+    }
 }

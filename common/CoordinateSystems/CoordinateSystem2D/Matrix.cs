@@ -378,7 +378,7 @@ public class Matrix<T> where T : struct
     public Matrix<T> FlipVertical()
     {
         var values = _matrix.ToDictionary(item => new MatrixAddress(item.Key.X, YMax - item.Key.Y), item => item.Value);
-        var min = new MatrixAddress(YMin, YMin);
+        var min = new MatrixAddress(XMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
         return new Matrix<T>(min, max, values, _defaultValue);
     }
@@ -386,8 +386,16 @@ public class Matrix<T> where T : struct
     public Matrix<T> FlipHorizontal()
     {
         var values = _matrix.ToDictionary(item => new MatrixAddress(XMax - item.Key.X, item.Key.Y), item => item.Value);
-        var min = new MatrixAddress(YMin, YMin);
+        var min = new MatrixAddress(XMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
+        return new Matrix<T>(min, max, values, _defaultValue);
+    }
+
+    public Matrix<T> Transpose()
+    {
+        var values = _matrix.ToDictionary(item => new MatrixAddress(item.Key.Y, item.Key.X), item => item.Value);
+        var min = new MatrixAddress(YMin, XMin);
+        var max = new MatrixAddress(YMax, XMax);
         return new Matrix<T>(min, max, values, _defaultValue);
     }
 }

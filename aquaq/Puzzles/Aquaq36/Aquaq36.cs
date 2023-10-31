@@ -15,30 +15,90 @@ public class Aquaq36 : AquaqPuzzle
 
     public static int Solve(int[] gridNumbers, int[] inputNumbers)
     {
-        var inputCombinations = CombinationGenerator.GetCombinationsFixedSize(inputNumbers, 2);
-        var candidates = inputCombinations.Select(o => new Candidate(o[0], o[1]));
+        var indexCombinations = CombinationGenerator.GetUniqueCombinationsFixedSize(Enumerable.Range(0, 16).ToList(), 2);
+        //var inputCombinations = CombinationGenerator.GetCombinationsFixedSize(inputNumbers, 2);
+        var candidates = indexCombinations.Select(o => new Candidate(o[0], o[1], inputNumbers[o[0]], inputNumbers[o[1]])).Distinct().ToList();
         var matchingCandidates = candidates
             .Where(o => gridNumbers.Contains(o.Sum) || gridNumbers.Contains(o.Product))
             .ToList();
-        var gridNumberCandidates =
-            gridNumbers.Select(v => matchingCandidates.Where(o => o.IsMatching(v)).ToList()).ToList();
-        return 0;
+        //var gridNumberCandidates =
+        //    gridNumbers.Select(v => matchingCandidates.Where(o => o.IsMatching(v)).ToList()).ToList();
+
+        var sortedInputNumbers = inputNumbers.OrderDescending().ToList();
+        var largestSum = sortedInputNumbers[0] + sortedInputNumbers[1];
+        var tooLargeToBeSum = gridNumbers.Where(o => o > largestSum);
+
+        var gridDivisors = gridNumbers.Distinct()
+            .Select((n, index) => (Number: n, Index: index))
+            .ToDictionary(k => k.Index, v => FindDivisors(v.Number)
+                .Where(inputNumbers.Contains)
+                .ToArray());
+        var sortedGridNumbers = gridNumbers.OrderDescending().ToList();
+
+        var sum = 0;
+
+        while (sortedGridNumbers.Any())
+        {
+            foreach (var gridNumber in sortedGridNumbers)
+            {
+                //var divisors = FindDivisors(gridNumber)
+                //    .Where(inputNumbers.Contains)
+                //    .ToArray();
+
+                var productCandidates = candidates
+                    .Where(o => o.Product == gridNumber)
+                    .ToList();
+
+                if (productCandidates.Count == 1)
+                {
+                    var candidate = productCandidates.First();
+                    sortedGridNumbers.Remove(candidate.Product);
+                    sortedGridNumbers.Remove(candidate.Sum);
+                    sortedInputNumbers.Remove(candidate.A);
+                    sortedInputNumbers.Remove(candidate.B);
+                    sum += candidate.Diff;
+                    break;
+                }
+            }
+        }
+
+        var usedGridNumbers = new HashSet<int>();
+        var usedInputNumbers = new HashSet<int>();
+
+        return sum;
     }
 
-    [DebuggerDisplay("{A},{B},{Sum},{Product}")]
+    private static int[] FindDivisors(int n)
+    {
+        var divisors = new List<int>();
+        for (var i = 1; i <= n; i++)
+        {
+            if(n % i == 0)
+                divisors.Add(i);
+        }
+        return divisors.ToArray();
+    }
+
+    [DebuggerDisplay("{IndexA},{IndexB},{A},{B},{Sum},{Product}")]
     private class Candidate : IEquatable<Candidate>
     {
+        public int IndexA { get; }
+        public int IndexB { get; }
         public int A { get; }
         public int B { get; }
         public int Sum { get; }
         public int Product { get; }
+        public int Diff { get; }
 
-        public Candidate(int a, int b)
+        public Candidate(int indexA, int indexB, int a, int b)
         {
+            IndexA = indexA;
+            IndexB = indexB;
             A = Math.Min(a, b);
             B = Math.Max(b, a);
             Sum = a + b;
             Product = a * b;
+            Diff = B - A;
         }
 
         public bool IsMatching(int gridNumber)

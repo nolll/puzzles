@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq07;
 
@@ -9,7 +10,7 @@ public class Aquaq07Tests
     {
         var result = Aquaq07.ExpectedWinrate(1400, 1200);
 
-        Assert.That(result, Is.EqualTo(0.75974692664795784d));
+        result.Should().Be(0.75974692664795784d);
     }
 
     [Test]
@@ -18,7 +19,7 @@ public class Aquaq07Tests
         var expectedWinrate = Aquaq07.ExpectedWinrate(1400, 1200);
         var result = Aquaq07.RatingChange(expectedWinrate);
 
-        Assert.That(result, Is.EqualTo(4.8050614670408436d));
+        result.Should().Be(4.8050614670408436d);
     }
 
     [Test]
@@ -27,6 +28,6 @@ public class Aquaq07Tests
         var expectedWinrate = Aquaq07.ExpectedWinrate(1200, 1400);
         var result = Aquaq07.RatingChange(expectedWinrate);
 
-        Assert.That(result, Is.EqualTo(15.19493853295916d));
+        result.Should().Be(15.19493853295916d);
     }
 }

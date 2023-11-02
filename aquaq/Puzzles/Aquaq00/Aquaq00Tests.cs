@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq00;
@@ -40,6 +41,6 @@ public class Aquaq00Tests
 
         var result = Aquaq00.HandleKeyPresses(keyPresses);
 
-        Assert.That(result, Is.EqualTo(" abcdefghijklmnopqrstuvwxyz"));
+        result.Should().Be(" abcdefghijklmnopqrstuvwxyz");
     }
 }

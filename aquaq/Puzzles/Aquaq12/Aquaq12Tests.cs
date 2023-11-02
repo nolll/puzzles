@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq12;
 
@@ -18,6 +19,6 @@ public class Aquaq12Tests
     {
         var result = Aquaq12.RideLift(Input);
 
-        Assert.That(result, Is.EqualTo(7));
+        result.Should().Be(7);
     }
 }

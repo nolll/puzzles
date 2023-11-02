@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq18;
 
@@ -11,7 +12,7 @@ public class Aquaq18Tests
         var dateTime = DateTime.Parse($"2020-02-02 {input}");
         var result = Aquaq18.IsPalindromeTime(dateTime);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [Test]
@@ -20,6 +21,6 @@ public class Aquaq18Tests
         var dateTime = DateTime.Parse("2020-02-02 13:41:00");
         var result = Aquaq18.StepsToPalindrome(dateTime);
 
-        Assert.That(result, Is.EqualTo(211));
+        result.Should().Be(211);
     }
 }

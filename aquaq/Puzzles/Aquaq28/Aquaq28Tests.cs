@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq28;
 
@@ -15,10 +16,6 @@ D/ / D
 """;
 
     [Test]
-    public void MirrorEncrypt()
-    {
-        var result = Aquaq28.Encrypt(Input, "DAD");
-
-        Assert.That(result, Is.EqualTo("CCC"));
-    }
+    public void MirrorEncrypt() => Aquaq28.Encrypt(Input, "DAD")
+        .Should().Be("CCC");
 }

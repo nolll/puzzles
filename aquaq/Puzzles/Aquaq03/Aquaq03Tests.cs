@@ -1,4 +1,5 @@
 ﻿using Common.CoordinateSystems.CoordinateSystem2D;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq03;
@@ -12,7 +13,7 @@ public class Aquaq03Tests
         var walker = new Walker();
         var result = walker.Walk(input);
 
-        Assert.That(walker.Pos, Is.EqualTo(new MatrixAddress(expectedX, expectedY)));
-        Assert.That(result, Is.EqualTo(expectedSum));
+        walker.Pos.Should().Be(new MatrixAddress(expectedX, expectedY));
+        result.Should().Be(expectedSum);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq09;
@@ -12,6 +13,6 @@ public class Aquaq09Tests
 
         var result = Aquaq09.MultiplyLargeNumbers(input);
 
-        Assert.That(result, Is.EqualTo(new BigInteger(64)));
+        result.Should().Be(new BigInteger(64));
     }
 }

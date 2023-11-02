@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq17;
 
@@ -23,6 +24,6 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
     {
         var result = Aquaq17.Run(Input);
 
-        Assert.That(result, Is.EqualTo("Somaliland 19000103 19020101"));
+        result.Should().Be("Somaliland 19000103 19020101");
     }
 }

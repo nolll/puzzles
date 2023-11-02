@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq01;
 
@@ -9,6 +10,6 @@ public class Aquaq01Test
     {
         var result = Aquaq01.GetHexString("kdb4life");
 
-        Assert.That(result, Is.EqualTo("0d40fe"));
+        result.Should().Be("0d40fe");
     }
 }

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq29;
 
@@ -18,8 +19,7 @@ public class Aquaq29Tests
             2099
         };
 
-        var result = Aquaq29.CountGoodNumbers(input);
-
-        Assert.That(result, Is.EqualTo(4));
+        Aquaq29.CountGoodNumbers(input)
+            .Should().Be(4);
     }
 }

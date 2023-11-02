@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq21;
 
@@ -17,6 +18,6 @@ public class Aquaq21Tests
     {
         var result = Aquaq21.Run(Input, 3);
 
-        Assert.That(result, Is.EqualTo(65));
+        result.Should().Be(65);
     }
 }

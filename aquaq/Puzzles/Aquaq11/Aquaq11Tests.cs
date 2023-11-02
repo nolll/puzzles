@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq11;
 
@@ -16,6 +17,6 @@ lx,ly,ux,uy
     {
         var result = Aquaq11.CountRequiredTiles(Input);
 
-        Assert.That(result, Is.EqualTo(14));
+        result.Should().Be(14);
     }
 }

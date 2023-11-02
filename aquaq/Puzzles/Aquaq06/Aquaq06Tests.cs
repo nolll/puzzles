@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq06;
 
@@ -9,6 +10,6 @@ public class Aquaq06Tests
     {
         var result = Aquaq06.FindOneCount(3);
 
-        Assert.That(result, Is.EqualTo(9));
+        result.Should().Be(9);
     }
 }

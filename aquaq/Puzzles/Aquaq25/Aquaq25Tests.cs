@@ -1,25 +1,18 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq25;
 
 public class Aquaq25Tests
 {
     [Test]
-    public void EncodeMorse()
-    {
-        var result = Aquaq25.EncodeMorse("jam donut");
-
-        Assert.That(result, Is.EqualTo(".--- .- --   -.. --- -. ..- -"));
-    }
+    public void EncodeMorse() => Aquaq25.EncodeMorse("jam donut")
+        .Should().Be(".--- .- --   -.. --- -. ..- -");
 
     [Test]
-    public void DecodeMorse()
-    {
-        var result = Aquaq25.DecodeMorse(".--- .- --   -.. --- -. ..- -");
+    public void DecodeMorse() => Aquaq25.DecodeMorse(".--- .- --   -.. --- -. ..- -")
+        .Should().Be("jam donut");
 
-        Assert.That(result, Is.EqualTo("jam donut"));
-    }
-    
     [Test]
     public void ClicksToMorse()
     {
@@ -48,8 +41,7 @@ public class Aquaq25Tests
 21:46:5.043
 """;
 
-        var result = Aquaq25.ClicksToMorse(input);
-
-        Assert.That(result, Is.EqualTo(".--- .- --   -."));
+        Aquaq25.ClicksToMorse(input)
+            .Should().Be(".--- .- --   -.");
     }
 }

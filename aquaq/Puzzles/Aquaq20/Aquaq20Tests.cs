@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq20;
 
@@ -10,6 +11,6 @@ public class Aquaq20Tests
     {
         var result = Aquaq20.PlayBlackjack(deck);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

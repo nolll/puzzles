@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq14;
 
@@ -12,6 +13,6 @@ public class Aquaq14Tests
     {
         var result = Aquaq14.PlayBingo(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

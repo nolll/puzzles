@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq13;
 
@@ -13,6 +14,6 @@ public class Aquaq13Tests
     {
         var result = Aquaq13.FindMaxRepeats(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

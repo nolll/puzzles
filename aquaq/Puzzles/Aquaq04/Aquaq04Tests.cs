@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq04;
 
@@ -9,14 +10,14 @@ public class Aquaq04Tests
     {
         var result = Aquaq04.FindCoPrimesFor(15).ToArray();
 
-        Assert.That(result.Length, Is.EqualTo(8));
-        Assert.That(result[0], Is.EqualTo(1));
-        Assert.That(result[1], Is.EqualTo(2));
-        Assert.That(result[2], Is.EqualTo(4));
-        Assert.That(result[3], Is.EqualTo(7));
-        Assert.That(result[4], Is.EqualTo(8));
-        Assert.That(result[5], Is.EqualTo(11));
-        Assert.That(result[6], Is.EqualTo(13));
-        Assert.That(result[7], Is.EqualTo(14));
+        result.Length.Should().Be(8);
+        result[0].Should().Be(1);
+        result[1].Should().Be(2);
+        result[2].Should().Be(4);
+        result[3].Should().Be(7);
+        result[4].Should().Be(8);
+        result[5].Should().Be(11);
+        result[6].Should().Be(13);
+        result[7].Should().Be(14);
     }
 }

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq27;
 
@@ -21,11 +22,7 @@ public class Aquaq27Tests
             grumpiness              
 """;
 
-    [Test]
-    public void SnakeScore()
-    {
-        var result = Aquaq27.CalculateSnakeScore(Input);
-
-        Assert.That(result, Is.EqualTo(7995));
-    }
+    [Test] 
+    public void SnakeScore() => Aquaq27.CalculateSnakeScore(Input)
+        .Should().Be(7995);
 }

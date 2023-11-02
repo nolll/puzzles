@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq08;
 
@@ -9,8 +10,8 @@ public class Aquaq08Tests
     {
         var result = Aquaq08.Run(Input);
 
-        Assert.That(result.milk, Is.EqualTo(1600));
-        Assert.That(result.cereal, Is.EqualTo(600));
+        result.milk.Should().Be(1600);
+        result.cereal.Should().Be(600);
     }
 
     private const string Input = """

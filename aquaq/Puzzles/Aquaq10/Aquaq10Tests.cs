@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq10;
 
@@ -22,6 +23,6 @@ E,C,6
     {
         var result = Aquaq10.Run(Input, "A", "C");
 
-        Assert.That(result, Is.EqualTo(29));
+        result.Should().Be(29);
     }
 }

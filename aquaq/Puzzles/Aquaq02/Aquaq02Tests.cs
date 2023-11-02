@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq02;
 
@@ -14,11 +15,11 @@ public class Aquaq02Tests
 
         var result = Aquaq02.GetUniqueNumbers(input).ToArray();
 
-        Assert.That(result.Count, Is.EqualTo(5));
-        Assert.That(result[0], Is.EqualTo(1));
-        Assert.That(result[1], Is.EqualTo(4));
-        Assert.That(result[2], Is.EqualTo(7));
-        Assert.That(result[3], Is.EqualTo(2));
-        Assert.That(result[4], Is.EqualTo(6));
+        result.Count().Should().Be(5);
+        result[0].Should().Be(1);
+        result[1].Should().Be(4);
+        result[2].Should().Be(7);
+        result[3].Should().Be(2);
+        result[4].Should().Be(6);
     }
 }

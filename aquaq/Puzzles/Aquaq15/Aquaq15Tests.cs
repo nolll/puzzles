@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Aquaq.Puzzles.Aquaq15;
 
@@ -11,7 +12,7 @@ public class Aquaq15Tests
 
         var result = new Aquaq15().Run(input);
 
-        Assert.That(result, Is.EqualTo(3));
+        result.Should().Be(3);
     }
 
     [Test]
@@ -26,6 +27,6 @@ word,maze
 
         var result = new Aquaq15().Run(input);
 
-        Assert.That(result, Is.EqualTo(45));
+        result.Should().Be(45);
     }
 }

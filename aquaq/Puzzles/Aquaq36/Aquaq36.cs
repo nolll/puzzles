@@ -36,6 +36,7 @@ public class Aquaq36 : AquaqPuzzle
         var sortedGridNumbers = gridNumbers.OrderDescending().ToList();
 
         var sum = 0;
+        var pairs = new List<Candidate>();
 
         while (sortedGridNumbers.Any())
         {
@@ -46,17 +47,19 @@ public class Aquaq36 : AquaqPuzzle
                 //    .ToArray();
 
                 var productCandidates = candidates
-                    .Where(o => o.Product == gridNumber)
+                    .Where(o => o.Product == gridNumber || o.Sum == gridNumber)
                     .ToList();
 
-                if (productCandidates.Count == 1)
+                if (productCandidates.Count > 0)
                 {
                     var candidate = productCandidates.First();
                     sortedGridNumbers.Remove(candidate.Product);
                     sortedGridNumbers.Remove(candidate.Sum);
                     sortedInputNumbers.Remove(candidate.A);
                     sortedInputNumbers.Remove(candidate.B);
+                    pairs.Add(candidate);
                     sum += candidate.Diff;
+                    candidates.Remove(candidate);
                     break;
                 }
             }
@@ -79,7 +82,7 @@ public class Aquaq36 : AquaqPuzzle
         return divisors.ToArray();
     }
 
-    [DebuggerDisplay("{IndexA},{IndexB},{A},{B},{Sum},{Product}")]
+    [DebuggerDisplay("{A},{B} -- Sum: {Sum} Product: {Product}")]
     private class Candidate : IEquatable<Candidate>
     {
         public int IndexA { get; }

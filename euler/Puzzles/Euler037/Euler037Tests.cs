@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler037;
 
@@ -10,6 +11,6 @@ public class Euler037Tests
     {
         var result = Euler037.IsTruncatable(n);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

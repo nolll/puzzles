@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler018;
@@ -16,6 +17,6 @@ public class Euler018Tests
         var puzzle = new Euler018();
         var result = puzzle.Run(triangle);
 
-        Assert.That(result, Is.EqualTo(23));
+        result.Should().Be(23);
     }
 }

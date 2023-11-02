@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler021;
@@ -13,7 +14,7 @@ public class Euler021Tests
         var sumA = Euler021.GetFactorialSum(a);
         var sumB = Euler021.GetFactorialSum(b);
 
-        Assert.That(sumA, Is.EqualTo(b));
-        Assert.That(sumB, Is.EqualTo(a));
+        sumA.Should().Be(b);
+        sumB.Should().Be(a);
     }
 }

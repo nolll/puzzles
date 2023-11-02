@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler034;
 
@@ -12,6 +13,6 @@ public class Euler034Tests
     {
         var result = Euler034.GetDigitFactorialSum(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

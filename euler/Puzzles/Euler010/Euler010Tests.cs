@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler010;
@@ -10,6 +11,6 @@ public class Euler010Tests
         var puzzle = new Euler010();
         var result = puzzle.Run(10);
 
-        Assert.That(result, Is.EqualTo(17));
+        result.Should().Be(17);
     }
 }

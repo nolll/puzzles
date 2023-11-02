@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler038;
 
@@ -10,6 +11,6 @@ public class Euler038Tests
     {
         var result = Euler038.GetConcatenatedProduct(n);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

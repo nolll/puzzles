@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler032;
 
@@ -10,7 +11,7 @@ public class Euler032Tests
         var puzzle = new Euler032();
         var result = Euler032.IsPandigital(39, 186);
 
-        Assert.That(result, Is.True);
+        result.Should().BeTrue();
     }
 
     [Test]
@@ -19,6 +20,6 @@ public class Euler032Tests
         var puzzle = new Euler032();
         var result = Euler032.IsPandigital(1, 2);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 }

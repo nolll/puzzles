@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler019;
@@ -14,6 +15,6 @@ public class Euler019Tests
         var puzzle = new Euler019();
         var result = puzzle.Run(startDate, endDate);
 
-        Assert.That(result, Is.EqualTo(2));
+        result.Should().Be(2);
     }
 }

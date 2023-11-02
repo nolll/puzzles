@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler015;
@@ -12,6 +13,6 @@ public class Euler015Tests
         var puzzle = new Euler015();
         var result = puzzle.Run(gridSize);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

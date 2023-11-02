@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler033;
 
@@ -10,7 +11,7 @@ public class Euler033Tests
     {
         var fraction = new Fraction(numerator, denominator);
 
-        Assert.That(fraction.CanBeReduced, Is.EqualTo(result));
+        fraction.CanBeReduced.Should().Be(result);
     }
 
     [TestCase(34, 43, 1)]
@@ -20,6 +21,6 @@ public class Euler033Tests
     {
         var fraction = new Fraction(numerator, denominator);
 
-        Assert.That(fraction.ReducedResult, Is.EqualTo(result));
+        fraction.ReducedResult.Should().Be(result);
     }
 }

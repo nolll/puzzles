@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler013;
@@ -15,6 +16,6 @@ public class Euler013Tests
         var puzzle = new Euler013();
         var result = puzzle.Run(numbers);
 
-        Assert.That(result, Is.EqualTo("6000000000"));
+        result.Should().Be("6000000000");
     }
 }

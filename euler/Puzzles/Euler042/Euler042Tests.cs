@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler042;
 
@@ -9,7 +10,7 @@ public class Euler042Tests
     {
         var result = Euler042.GetWordValue("SKY");
 
-        Assert.That(result, Is.EqualTo(55));
+        result.Should().Be(55);
     }
 
     [Test]
@@ -17,15 +18,15 @@ public class Euler042Tests
     {
         var result = Euler042.GetTriangularNumbers(10).ToArray();
 
-        Assert.That(result[0], Is.EqualTo(1));
-        Assert.That(result[1], Is.EqualTo(3));
-        Assert.That(result[2], Is.EqualTo(6));
-        Assert.That(result[3], Is.EqualTo(10));
-        Assert.That(result[4], Is.EqualTo(15));
-        Assert.That(result[5], Is.EqualTo(21));
-        Assert.That(result[6], Is.EqualTo(28));
-        Assert.That(result[7], Is.EqualTo(36));
-        Assert.That(result[8], Is.EqualTo(45));
-        Assert.That(result[9], Is.EqualTo(55));
+        result[0].Should().Be(1);
+        result[1].Should().Be(3);
+        result[2].Should().Be(6);
+        result[3].Should().Be(10);
+        result[4].Should().Be(15);
+        result[5].Should().Be(21);
+        result[6].Should().Be(28);
+        result[7].Should().Be(36);
+        result[8].Should().Be(45);
+        result[9].Should().Be(55);
     }
 }

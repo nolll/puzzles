@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler035;
 
@@ -9,11 +10,11 @@ public class Euler035Tests
     {
         var result = Euler035.GetRotations(12345).ToArray();
 
-        Assert.That(result.Length, Is.EqualTo(5));
-        Assert.That(result[0], Is.EqualTo(12345));
-        Assert.That(result[1], Is.EqualTo(23451));
-        Assert.That(result[2], Is.EqualTo(34512));
-        Assert.That(result[3], Is.EqualTo(45123));
-        Assert.That(result[4], Is.EqualTo(51234));
+        result.Length.Should().Be(5);
+        result[0].Should().Be(12345);
+        result[1].Should().Be(23451);
+        result[2].Should().Be(34512);
+        result[3].Should().Be(45123);
+        result[4].Should().Be(51234);
     }
 }

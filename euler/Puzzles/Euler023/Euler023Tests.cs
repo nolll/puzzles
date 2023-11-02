@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Euler.Puzzles.Euler023;
@@ -9,6 +10,6 @@ public class Euler023Tests
     {
         var result = Euler023.FindAbundantNumbers(13);
 
-        Assert.That(result.Count(), Is.EqualTo(1));
+        result.Count().Should().Be(1);
     }
 }

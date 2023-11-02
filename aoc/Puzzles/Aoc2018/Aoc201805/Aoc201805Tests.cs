@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201805;
@@ -11,7 +12,7 @@ public class Aoc201805Tests
 
         var puzzle = new PolymerPuzzle();
         var reducedPolymer = puzzle.GetReducedPolymer(input);
-        Assert.AreEqual("dabCBAcaDA", reducedPolymer);
+        reducedPolymer.Should().Be("dabCBAcaDA");
     }
 
     [Test]
@@ -21,6 +22,6 @@ public class Aoc201805Tests
 
         var puzzle = new PolymerPuzzle();
         var improvedPolymer = puzzle.GetImprovedPolymer(input);
-        Assert.AreEqual("daDA", improvedPolymer);
+        improvedPolymer.Should().Be("daDA");
     }
 }

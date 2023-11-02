@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201802;
@@ -10,7 +11,7 @@ public class Aoc201802Tests
     {
         var ids = new List<string> { "abcde", "fghij" };
         var similarIds = SimilarIdsPuzzle.GetSimilarIds(ids);
-        Assert.AreEqual(0, similarIds.Count);
+        similarIds.Count.Should().Be(0);
     }
 
     [Test]
@@ -18,7 +19,7 @@ public class Aoc201802Tests
     {
         var ids = new List<string> { "abcde", "abcde" };
         var similarIds = SimilarIdsPuzzle.GetSimilarIds(ids);
-        Assert.AreEqual(0, similarIds.Count);
+        similarIds.Count.Should().Be(0);
     }
 
     [Test]
@@ -26,7 +27,7 @@ public class Aoc201802Tests
     {
         var ids = new List<string> { "abcde", "abcdX" };
         var similarIds = SimilarIdsPuzzle.GetSimilarIds(ids);
-        Assert.AreEqual(2, similarIds.Count);
+        similarIds.Count.Should().Be(2);
     }
 
     [Test]
@@ -34,7 +35,7 @@ public class Aoc201802Tests
     {
         var ids = new List<string> { "abcde", "abcdX", "fghij", "fghiX" };
         var similarIds = SimilarIdsPuzzle.GetSimilarIds(ids);
-        Assert.AreEqual(2, similarIds.Count);
+        similarIds.Count.Should().Be(2);
     }
 
     [Test]
@@ -42,7 +43,7 @@ public class Aoc201802Tests
     {
         const string ids = "abcdef\nbababc\nabbcde\nabcccd\naabcdd\nabcdee\nababab";
         var puzzle = new BoxChecksumPuzzle(ids);
-        Assert.AreEqual(12, puzzle.Checksum);
+        puzzle.Checksum.Should().Be(12);
     }
 
     [Test]
@@ -50,7 +51,7 @@ public class Aoc201802Tests
     {
         const string str = "abcde";
         var commonLetters = SimilarIdsPuzzle.GetCommonLetters(str, str);
-        Assert.AreEqual("abcde", commonLetters);
+        commonLetters.Should().Be("abcde");
     }
 
     [Test]
@@ -59,7 +60,7 @@ public class Aoc201802Tests
         const string str1 = "abcde";
         const string str2 = "fghij";
         var commonLetters = SimilarIdsPuzzle.GetCommonLetters(str1, str2);
-        Assert.AreEqual("", commonLetters);
+        commonLetters.Should().Be("");
     }
 
     [Test]
@@ -68,6 +69,6 @@ public class Aoc201802Tests
         const string str1 = "abcde";
         const string str2 = "aXcYe";
         var commonLetters = SimilarIdsPuzzle.GetCommonLetters(str1, str2);
-        Assert.AreEqual("ace", commonLetters);
+        commonLetters.Should().Be("ace");
     }
 }

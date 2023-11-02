@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201801;
@@ -9,7 +10,7 @@ public class Aoc201801Tests
     {
         const string changes = "-1";
         var puzzle = new FrequencyPuzzle(changes);
-        Assert.AreEqual(-1, puzzle.ResultingFrequency);
+        puzzle.ResultingFrequency.Should().Be(-1);
     }
 
     [Test]
@@ -17,7 +18,7 @@ public class Aoc201801Tests
     {
         const string changes = "+1";
         var puzzle = new FrequencyPuzzle(changes);
-        Assert.AreEqual(1, puzzle.ResultingFrequency);
+        puzzle.ResultingFrequency.Should().Be(1);
     }
 
     [Test]
@@ -25,7 +26,7 @@ public class Aoc201801Tests
     {
         const string changes = "-1\n+2";
         var puzzle = new FrequencyPuzzle(changes);
-        Assert.AreEqual(1, puzzle.ResultingFrequency);
+        puzzle.ResultingFrequency.Should().Be(1);
     }
 
     [TestCase("+1\n+1\n+1", 3)]
@@ -34,7 +35,7 @@ public class Aoc201801Tests
     public void HandleProvidedPart1Examples(string changes, int expected)
     {
         var puzzle = new FrequencyPuzzle(changes);
-        Assert.AreEqual(expected, puzzle.ResultingFrequency);
+        puzzle.ResultingFrequency.Should().Be(expected);
     }
 
     [TestCase("+1\n-1", 0)]
@@ -44,6 +45,6 @@ public class Aoc201801Tests
     public void HandleProvidedPart2Examples(string changes, int expected)
     {
         var puzzle = new FrequencyRepeatPuzzle(changes);
-        Assert.AreEqual(expected, puzzle.FirstRepeatedFrequency);
+        puzzle.FirstRepeatedFrequency.Should().Be(expected);
     }
 }

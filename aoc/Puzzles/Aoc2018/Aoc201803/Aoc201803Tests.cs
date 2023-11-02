@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201803;
@@ -14,7 +15,7 @@ public class Aoc201803Tests
 """;
 
         var puzzle = new ClaimsOverlapCountPuzzle(claims);
-        Assert.AreEqual(0, puzzle.OverlapCount);
+        puzzle.OverlapCount.Should().Be(0);
     }
 
     [Test]
@@ -27,7 +28,7 @@ public class Aoc201803Tests
 """;
 
         var puzzle = new ClaimsOverlapCountPuzzle(claims);
-        Assert.AreEqual(4, puzzle.OverlapCount);
+        puzzle.OverlapCount.Should().Be(4);
     }
 
     [Test]
@@ -39,6 +40,6 @@ public class Aoc201803Tests
 #3 @ 5,5: 2x2
 """;
         var puzzle = new ClaimThatDoesNotOverlapPuzzle(claims);
-        Assert.AreEqual(3, puzzle.ClaimId);
+        puzzle.ClaimId.Should().Be(3);
     }
 }

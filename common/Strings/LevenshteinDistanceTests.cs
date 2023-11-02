@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.Strings;
@@ -9,7 +10,7 @@ public class LevenshteinDistanceTests
     {
         const string str = "abcde";
         var distance = LevenshteinDistance.Compute(str, str);
-        Assert.AreEqual(0, distance);
+        distance.Should().Be(0);
     }
 
     [Test]
@@ -18,7 +19,7 @@ public class LevenshteinDistanceTests
         const string str1 = "abcde";
         const string str2 = "abcdX";
         var distance = LevenshteinDistance.Compute(str1, str2);
-        Assert.AreEqual(1, distance);
+        distance.Should().Be(1);
     }
 
     [Test]
@@ -27,6 +28,6 @@ public class LevenshteinDistanceTests
         const string str1 = "abcde";
         const string str2 = "abcXY";
         var distance = LevenshteinDistance.Compute(str1, str2);
-        Assert.AreEqual(2, distance);
+        distance.Should().Be(2);
     }
 }

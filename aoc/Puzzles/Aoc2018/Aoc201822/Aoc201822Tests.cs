@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201822;
@@ -13,7 +14,7 @@ public class Aoc201822Tests
     {
         var caveSystem = new CaveSystem(Depth, TargetX, TargetY);
 
-        Assert.That(caveSystem.TotalRiskLevel, Is.EqualTo(114));
+        caveSystem.TotalRiskLevel.Should().Be(114);
     }
 
     [Test]
@@ -22,6 +23,6 @@ public class Aoc201822Tests
         var caveSystem = new CaveSystem(Depth, TargetX, TargetY);
         var time = caveSystem.ResqueMan();
 
-        Assert.That(time, Is.EqualTo(45));
+        time.Should().Be(45);
     }
 }

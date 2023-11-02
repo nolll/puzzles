@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202014;
@@ -17,7 +18,7 @@ mem[8] = 0
         var system = new BitmaskSystem1();
         var sum = system.Run(input.Trim());
 
-        Assert.That(sum, Is.EqualTo(165));
+        sum.Should().Be(165);
     }
 
     [Test]
@@ -33,6 +34,6 @@ mem[26] = 1
         var system = new BitmaskSystem2();
         var sum = system.Run(input.Trim());
 
-        Assert.That(sum, Is.EqualTo(208));
+        sum.Should().Be(208);
     }
 }

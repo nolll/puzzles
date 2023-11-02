@@ -1,4 +1,5 @@
 using Common.Tests;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201918;
@@ -17,7 +18,7 @@ public class Aoc201918Tests
         var keyCollector = new KeyCollector(input);
         keyCollector.Run();
 
-        Assert.That(keyCollector.ShortestPath, Is.EqualTo(8));
+        keyCollector.ShortestPath.Should().Be(8);
     }
         
     [Test]
@@ -34,7 +35,7 @@ public class Aoc201918Tests
         var keyCollector = new KeyCollector(input);
         keyCollector.Run();
 
-        Assert.That(keyCollector.ShortestPath, Is.EqualTo(86));
+        keyCollector.ShortestPath.Should().Be(86);
     }
 
     [Test]
@@ -51,7 +52,7 @@ public class Aoc201918Tests
         var keyCollector = new KeyCollector(input);
         keyCollector.Run();
 
-        Assert.That(keyCollector.ShortestPath, Is.EqualTo(132));
+        keyCollector.ShortestPath.Should().Be(132);
     }
 
     [Test]
@@ -72,7 +73,7 @@ public class Aoc201918Tests
         var keyCollector = new KeyCollector(input);
         keyCollector.Run();
 
-        Assert.That(keyCollector.ShortestPath, Is.EqualTo(136));
+        keyCollector.ShortestPath.Should().Be(136);
     }
 
     [Test]
@@ -90,7 +91,7 @@ public class Aoc201918Tests
         var keyCollector = new KeyCollector(input);
         keyCollector.Run();
 
-        Assert.That(keyCollector.ShortestPath, Is.EqualTo(81));
+        keyCollector.ShortestPath.Should().Be(81);
     }
 
     [Test]
@@ -109,7 +110,7 @@ public class Aoc201918Tests
         var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
 
-        Assert.That(keyCollector.ShortestPath, Is.EqualTo(8));
+        keyCollector.ShortestPath.Should().Be(8);
     }
 
     [Test]
@@ -128,7 +129,7 @@ public class Aoc201918Tests
         var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
 
-        Assert.That(keyCollector.ShortestPath, Is.EqualTo(24));
+        keyCollector.ShortestPath.Should().Be(24);
     }
 
     [Test]
@@ -147,7 +148,7 @@ public class Aoc201918Tests
         var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
 
-        Assert.That(keyCollector.ShortestPath, Is.EqualTo(32));
+        keyCollector.ShortestPath.Should().Be(32);
     }
 
     [Test]
@@ -171,6 +172,6 @@ public class Aoc201918Tests
         var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
 
-        Assert.That(keyCollector.ShortestPath, Is.EqualTo(72));
+        keyCollector.ShortestPath.Should().Be(72);
     }
 }

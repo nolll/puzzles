@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202011;
@@ -24,7 +25,7 @@ L.LLLLL.LL
         simulator.Run();
         var result = simulator.OccupiedSeatCount;
 
-        Assert.That(result, Is.EqualTo(37));
+        result.Should().Be(37);
     }
 
     [Test]
@@ -47,6 +48,6 @@ L.LLLLL.LL
         simulator.Run();
         var result = simulator.OccupiedSeatCount;
 
-        Assert.That(result, Is.EqualTo(26));
+        result.Should().Be(26);
     }
 }

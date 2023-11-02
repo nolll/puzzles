@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201912;
@@ -17,21 +18,21 @@ public class Aoc201912Tests
         var moonTracker = new MoonTracker(map);
         moonTracker.Run(1);
 
-        Assert.That(moonTracker.Moons[0].X, Is.EqualTo(2));
-        Assert.That(moonTracker.Moons[0].Y, Is.EqualTo(-1));
-        Assert.That(moonTracker.Moons[0].Z, Is.EqualTo(1));
+        moonTracker.Moons[0].X.Should().Be(2);
+        moonTracker.Moons[0].Y.Should().Be(-1);
+        moonTracker.Moons[0].Z.Should().Be(1);
 
-        Assert.That(moonTracker.Moons[1].X, Is.EqualTo(3));
-        Assert.That(moonTracker.Moons[1].Y, Is.EqualTo(-7));
-        Assert.That(moonTracker.Moons[1].Z, Is.EqualTo(-4));
+        moonTracker.Moons[1].X.Should().Be(3);
+        moonTracker.Moons[1].Y.Should().Be(-7);
+        moonTracker.Moons[1].Z.Should().Be(-4);
 
-        Assert.That(moonTracker.Moons[2].X, Is.EqualTo(1));
-        Assert.That(moonTracker.Moons[2].Y, Is.EqualTo(-7));
-        Assert.That(moonTracker.Moons[2].Z, Is.EqualTo(5));
+        moonTracker.Moons[2].X.Should().Be(1);
+        moonTracker.Moons[2].Y.Should().Be(-7);
+        moonTracker.Moons[2].Z.Should().Be(5);
 
-        Assert.That(moonTracker.Moons[3].X, Is.EqualTo(2));
-        Assert.That(moonTracker.Moons[3].Y, Is.EqualTo(2));
-        Assert.That(moonTracker.Moons[3].Z, Is.EqualTo(0));
+        moonTracker.Moons[3].X.Should().Be(2);
+        moonTracker.Moons[3].Y.Should().Be(2);
+        moonTracker.Moons[3].Z.Should().Be(0);
     }
 
     [Test]
@@ -47,21 +48,21 @@ public class Aoc201912Tests
         var moonTracker = new MoonTracker(map);
         moonTracker.Run(5);
 
-        Assert.That(moonTracker.Moons[0].X, Is.EqualTo(-1));
-        Assert.That(moonTracker.Moons[0].Y, Is.EqualTo(-9));
-        Assert.That(moonTracker.Moons[0].Z, Is.EqualTo(2));
+        moonTracker.Moons[0].X.Should().Be(-1);
+        moonTracker.Moons[0].Y.Should().Be(-9);
+        moonTracker.Moons[0].Z.Should().Be(2);
 
-        Assert.That(moonTracker.Moons[1].X, Is.EqualTo(4));
-        Assert.That(moonTracker.Moons[1].Y, Is.EqualTo(1));
-        Assert.That(moonTracker.Moons[1].Z, Is.EqualTo(5));
+        moonTracker.Moons[1].X.Should().Be(4);
+        moonTracker.Moons[1].Y.Should().Be(1);
+        moonTracker.Moons[1].Z.Should().Be(5);
 
-        Assert.That(moonTracker.Moons[2].X, Is.EqualTo(2));
-        Assert.That(moonTracker.Moons[2].Y, Is.EqualTo(2));
-        Assert.That(moonTracker.Moons[2].Z, Is.EqualTo(-4));
+        moonTracker.Moons[2].X.Should().Be(2);
+        moonTracker.Moons[2].Y.Should().Be(2);
+        moonTracker.Moons[2].Z.Should().Be(-4);
 
-        Assert.That(moonTracker.Moons[3].X, Is.EqualTo(3));
-        Assert.That(moonTracker.Moons[3].Y, Is.EqualTo(-7));
-        Assert.That(moonTracker.Moons[3].Z, Is.EqualTo(-1));
+        moonTracker.Moons[3].X.Should().Be(3);
+        moonTracker.Moons[3].Y.Should().Be(-7);
+        moonTracker.Moons[3].Z.Should().Be(-1);
     }
 
     [Test]
@@ -77,21 +78,21 @@ public class Aoc201912Tests
         var moonTracker = new MoonTracker(map);
         moonTracker.Run(2770);
 
-        Assert.That(moonTracker.Moons[0].X, Is.EqualTo(2));
-        Assert.That(moonTracker.Moons[0].Y, Is.EqualTo(-1));
-        Assert.That(moonTracker.Moons[0].Z, Is.EqualTo(1));
+        moonTracker.Moons[0].X.Should().Be(2);
+        moonTracker.Moons[0].Y.Should().Be(-1);
+        moonTracker.Moons[0].Z.Should().Be(1);
 
-        Assert.That(moonTracker.Moons[1].X, Is.EqualTo(3));
-        Assert.That(moonTracker.Moons[1].Y, Is.EqualTo(-7));
-        Assert.That(moonTracker.Moons[1].Z, Is.EqualTo(-4));
+        moonTracker.Moons[1].X.Should().Be(3);
+        moonTracker.Moons[1].Y.Should().Be(-7);
+        moonTracker.Moons[1].Z.Should().Be(-4);
 
-        Assert.That(moonTracker.Moons[2].X, Is.EqualTo(1));
-        Assert.That(moonTracker.Moons[2].Y, Is.EqualTo(-7));
-        Assert.That(moonTracker.Moons[2].Z, Is.EqualTo(5));
+        moonTracker.Moons[2].X.Should().Be(1);
+        moonTracker.Moons[2].Y.Should().Be(-7);
+        moonTracker.Moons[2].Z.Should().Be(5);
 
-        Assert.That(moonTracker.Moons[3].X, Is.EqualTo(2));
-        Assert.That(moonTracker.Moons[3].Y, Is.EqualTo(2));
-        Assert.That(moonTracker.Moons[3].Z, Is.EqualTo(0));
+        moonTracker.Moons[3].X.Should().Be(2);
+        moonTracker.Moons[3].Y.Should().Be(2);
+        moonTracker.Moons[3].Z.Should().Be(0);
     }
 
     [Test]
@@ -107,7 +108,7 @@ public class Aoc201912Tests
         var moonTracker = new MoonTracker(map);
         moonTracker.Run(10);
 
-        Assert.That(moonTracker.TotalEnergy, Is.EqualTo(179));
+        moonTracker.TotalEnergy.Should().Be(179);
     }
 
     [Test]
@@ -123,31 +124,31 @@ public class Aoc201912Tests
         var moonTracker = new MoonTracker(map);
         moonTracker.Run(100);
 
-        Assert.That(moonTracker.TotalEnergy, Is.EqualTo(1940));
-        Assert.That(moonTracker.Moons[0].X, Is.EqualTo(8));
-        Assert.That(moonTracker.Moons[0].Y, Is.EqualTo(-12));
-        Assert.That(moonTracker.Moons[0].Z, Is.EqualTo(-9));
-        Assert.That(moonTracker.Moons[1].X, Is.EqualTo(13));
-        Assert.That(moonTracker.Moons[1].Y, Is.EqualTo(16));
-        Assert.That(moonTracker.Moons[1].Z, Is.EqualTo(-3));
-        Assert.That(moonTracker.Moons[2].X, Is.EqualTo(-29));
-        Assert.That(moonTracker.Moons[2].Y, Is.EqualTo(-11));
-        Assert.That(moonTracker.Moons[2].Z, Is.EqualTo(-1));
-        Assert.That(moonTracker.Moons[3].X, Is.EqualTo(16));
-        Assert.That(moonTracker.Moons[3].Y, Is.EqualTo(-13));
-        Assert.That(moonTracker.Moons[3].Z, Is.EqualTo(23));
-        Assert.That(moonTracker.Moons[0].Vx, Is.EqualTo(-7));
-        Assert.That(moonTracker.Moons[0].Vy, Is.EqualTo(3));
-        Assert.That(moonTracker.Moons[0].Vz, Is.EqualTo(0));
-        Assert.That(moonTracker.Moons[1].Vx, Is.EqualTo(3));
-        Assert.That(moonTracker.Moons[1].Vy, Is.EqualTo(-11));
-        Assert.That(moonTracker.Moons[1].Vz, Is.EqualTo(-5));
-        Assert.That(moonTracker.Moons[2].Vx, Is.EqualTo(-3));
-        Assert.That(moonTracker.Moons[2].Vy, Is.EqualTo(7));
-        Assert.That(moonTracker.Moons[2].Vz, Is.EqualTo(4));
-        Assert.That(moonTracker.Moons[3].Vx, Is.EqualTo(7));
-        Assert.That(moonTracker.Moons[3].Vy, Is.EqualTo(1));
-        Assert.That(moonTracker.Moons[3].Vz, Is.EqualTo(1));
+        moonTracker.TotalEnergy.Should().Be(1940);
+        moonTracker.Moons[0].X.Should().Be(8);
+        moonTracker.Moons[0].Y.Should().Be(-12);
+        moonTracker.Moons[0].Z.Should().Be(-9);
+        moonTracker.Moons[1].X.Should().Be(13);
+        moonTracker.Moons[1].Y.Should().Be(16);
+        moonTracker.Moons[1].Z.Should().Be(-3);
+        moonTracker.Moons[2].X.Should().Be(-29);
+        moonTracker.Moons[2].Y.Should().Be(-11);
+        moonTracker.Moons[2].Z.Should().Be(-1);
+        moonTracker.Moons[3].X.Should().Be(16);
+        moonTracker.Moons[3].Y.Should().Be(-13);
+        moonTracker.Moons[3].Z.Should().Be(23);
+        moonTracker.Moons[0].Vx.Should().Be(-7);
+        moonTracker.Moons[0].Vy.Should().Be(3);
+        moonTracker.Moons[0].Vz.Should().Be(0);
+        moonTracker.Moons[1].Vx.Should().Be(3);
+        moonTracker.Moons[1].Vy.Should().Be(-11);
+        moonTracker.Moons[1].Vz.Should().Be(-5);
+        moonTracker.Moons[2].Vx.Should().Be(-3);
+        moonTracker.Moons[2].Vy.Should().Be(7);
+        moonTracker.Moons[2].Vz.Should().Be(4);
+        moonTracker.Moons[3].Vx.Should().Be(7);
+        moonTracker.Moons[3].Vy.Should().Be(1);
+        moonTracker.Moons[3].Vz.Should().Be(1);
     }
 
     [Test]
@@ -163,7 +164,7 @@ public class Aoc201912Tests
         var moonTracker = new MoonTracker(map);
         moonTracker.RunUntilRepeat();
 
-        Assert.That(moonTracker.Iterations, Is.EqualTo(2772));
+        moonTracker.Iterations.Should().Be(2772);
     }
 
     [Test]
@@ -179,6 +180,6 @@ public class Aoc201912Tests
         var moonTracker = new MoonTracker(map);
         moonTracker.RunUntilRepeat();
 
-        Assert.That(moonTracker.Iterations, Is.EqualTo(4686774924));
+        moonTracker.Iterations.Should().Be(4686774924);
     }
 }

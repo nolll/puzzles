@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201518;
@@ -19,7 +20,7 @@ public class Aoc201518Tests
         var gif = new AnimatedGif(Input);
         gif.RunAnimation(1);
 
-        Assert.That(gif.LightCount, Is.EqualTo(11));
+        gif.LightCount.Should().Be(11);
     }
 
     [Test]
@@ -28,7 +29,7 @@ public class Aoc201518Tests
         var gif = new AnimatedGif(Input);
         gif.RunAnimation(2);
 
-        Assert.That(gif.LightCount, Is.EqualTo(8));
+        gif.LightCount.Should().Be(8);
     }
 
     [Test]
@@ -37,7 +38,7 @@ public class Aoc201518Tests
         var gif = new AnimatedGif(Input);
         gif.RunAnimation(3);
 
-        Assert.That(gif.LightCount, Is.EqualTo(4));
+        gif.LightCount.Should().Be(4);
     }
 
     [Test]
@@ -46,7 +47,7 @@ public class Aoc201518Tests
         var gif = new AnimatedGif(Input);
         gif.RunAnimation(4);
 
-        Assert.That(gif.LightCount, Is.EqualTo(4));
+        gif.LightCount.Should().Be(4);
     }
 
     [Test]
@@ -55,7 +56,7 @@ public class Aoc201518Tests
         var gif = new AnimatedGif(Input, true);
         gif.RunAnimation(1);
 
-        Assert.That(gif.LightCount, Is.EqualTo(18));
+        gif.LightCount.Should().Be(18);
     }
 
     [Test]
@@ -64,7 +65,7 @@ public class Aoc201518Tests
         var gif = new AnimatedGif(Input, true);
         gif.RunAnimation(2);
 
-        Assert.That(gif.LightCount, Is.EqualTo(18));
+        gif.LightCount.Should().Be(18);
     }
 
     [Test]
@@ -73,7 +74,7 @@ public class Aoc201518Tests
         var gif = new AnimatedGif(Input, true);
         gif.RunAnimation(3);
 
-        Assert.That(gif.LightCount, Is.EqualTo(18));
+        gif.LightCount.Should().Be(18);
     }
 
     [Test]
@@ -82,7 +83,7 @@ public class Aoc201518Tests
         var gif = new AnimatedGif(Input, true);
         gif.RunAnimation(4);
 
-        Assert.That(gif.LightCount, Is.EqualTo(14));
+        gif.LightCount.Should().Be(14);
     }
 
     [Test]
@@ -91,6 +92,6 @@ public class Aoc201518Tests
         var gif = new AnimatedGif(Input, true);
         gif.RunAnimation(5);
 
-        Assert.That(gif.LightCount, Is.EqualTo(17));
+        gif.LightCount.Should().Be(17);
     }
 }

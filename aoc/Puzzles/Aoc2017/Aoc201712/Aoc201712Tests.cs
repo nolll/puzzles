@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201712;
@@ -19,7 +20,7 @@ public class Aoc201712Tests
 
         var pipes = new Pipes(input.Trim());
 
-        Assert.That(pipes.PipesInGroupZero, Is.EqualTo(6));
-        Assert.That(pipes.GroupCount, Is.EqualTo(2));
+        pipes.PipesInGroupZero.Should().Be(6);
+        pipes.GroupCount.Should().Be(2);
     }
 }

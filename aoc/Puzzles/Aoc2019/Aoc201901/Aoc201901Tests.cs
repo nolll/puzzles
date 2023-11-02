@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201901;
@@ -10,7 +11,7 @@ public class Aoc201901Tests
     public void RequiredFuelIsCorrect(int mass, int expectedFuel)
     {
         var module = new Module(mass);
-        Assert.That(module.MassFuel, Is.EqualTo(expectedFuel));
+        module.MassFuel.Should().Be(expectedFuel);
     }
 
     [TestCase(14, 2)]
@@ -19,6 +20,6 @@ public class Aoc201901Tests
     public void TotalFuelIsCorrect(int mass, int expectedFuel)
     {
         var module = new Module(mass);
-        Assert.That(module.TotalFuel, Is.EqualTo(expectedFuel));
+        module.TotalFuel.Should().Be(expectedFuel);
     }
 }

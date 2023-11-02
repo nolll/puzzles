@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201525;
@@ -13,7 +14,7 @@ public class Aoc201525Tests
         var codeFinder = new WeatherMachineCodeFinder();
         var code = codeFinder.FindCodeAt(targetX, targetY);
 
-        Assert.That(code, Is.EqualTo(1601130));
+        code.Should().Be(1601130);
     }
 
     [Test]
@@ -25,6 +26,6 @@ public class Aoc201525Tests
         var codeFinder = new WeatherMachineCodeFinder();
         var code = codeFinder.FindCodeAt(targetX, targetY);
 
-        Assert.That(code, Is.EqualTo(31527494));
+        code.Should().Be(31527494);
     }
 }

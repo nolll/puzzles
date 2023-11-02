@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202024;
@@ -12,7 +13,7 @@ public class Aoc202024Tests
         floor.Arrange();
         var result = floor.BlackTileCount;
 
-        Assert.That(result, Is.EqualTo(1));
+        result.Should().Be(1);
     }
 
     [Test]
@@ -22,7 +23,7 @@ public class Aoc202024Tests
         floor.Arrange();
         var result = floor.BlackTileCount;
 
-        Assert.That(result, Is.EqualTo(10));
+        result.Should().Be(10);
     }
 
     [Test]
@@ -32,7 +33,7 @@ public class Aoc202024Tests
         floor.Arrange();
         var result = floor.BlackTileCount;
 
-        Assert.That(result, Is.EqualTo(10));
+        result.Should().Be(10);
     }
 
     [Test]
@@ -42,61 +43,61 @@ public class Aoc202024Tests
         floor.Arrange();
 
         floor.Modify(1); // 1
-        Assert.That(floor.BlackTileCount, Is.EqualTo(15));
+        floor.BlackTileCount.Should().Be(15);
 
         floor.Modify(1); // 2
-        Assert.That(floor.BlackTileCount, Is.EqualTo(12));
+        floor.BlackTileCount.Should().Be(12);
 
         floor.Modify(1); // 3
-        Assert.That(floor.BlackTileCount, Is.EqualTo(25));
+        floor.BlackTileCount.Should().Be(25);
 
         floor.Modify(1); // 4
-        Assert.That(floor.BlackTileCount, Is.EqualTo(14));
+        floor.BlackTileCount.Should().Be(14);
 
         floor.Modify(1); // 5
-        Assert.That(floor.BlackTileCount, Is.EqualTo(23));
+        floor.BlackTileCount.Should().Be(23);
 
         floor.Modify(1); // 6
-        Assert.That(floor.BlackTileCount, Is.EqualTo(28));
+        floor.BlackTileCount.Should().Be(28);
 
         floor.Modify(1); // 7
-        Assert.That(floor.BlackTileCount, Is.EqualTo(41));
+        floor.BlackTileCount.Should().Be(41);
 
         floor.Modify(1); // 8
-        Assert.That(floor.BlackTileCount, Is.EqualTo(37));
+        floor.BlackTileCount.Should().Be(37);
 
         floor.Modify(1); // 9
-        Assert.That(floor.BlackTileCount, Is.EqualTo(49));
+        floor.BlackTileCount.Should().Be(49);
 
         floor.Modify(1); // 10
-        Assert.That(floor.BlackTileCount, Is.EqualTo(37));
+        floor.BlackTileCount.Should().Be(37);
 
         floor.Modify(10); // 20
-        Assert.That(floor.BlackTileCount, Is.EqualTo(132));
+        floor.BlackTileCount.Should().Be(132);
 
         floor.Modify(10); // 30
-        Assert.That(floor.BlackTileCount, Is.EqualTo(259));
+        floor.BlackTileCount.Should().Be(259);
 
         floor.Modify(10); // 40
-        Assert.That(floor.BlackTileCount, Is.EqualTo(406));
+        floor.BlackTileCount.Should().Be(406);
 
         floor.Modify(10); // 50
-        Assert.That(floor.BlackTileCount, Is.EqualTo(566));
+        floor.BlackTileCount.Should().Be(566);
 
         floor.Modify(10); // 60
-        Assert.That(floor.BlackTileCount, Is.EqualTo(788));
+        floor.BlackTileCount.Should().Be(788);
 
         floor.Modify(10); // 70
-        Assert.That(floor.BlackTileCount, Is.EqualTo(1106));
+        floor.BlackTileCount.Should().Be(1106);
 
         floor.Modify(10); // 80
-        Assert.That(floor.BlackTileCount, Is.EqualTo(1373));
+        floor.BlackTileCount.Should().Be(1373);
 
         floor.Modify(10); // 90
-        Assert.That(floor.BlackTileCount, Is.EqualTo(1844));
+        floor.BlackTileCount.Should().Be(1844);
 
         floor.Modify(10); // 100
-        Assert.That(floor.BlackTileCount, Is.EqualTo(2208));
+        floor.BlackTileCount.Should().Be(2208);
     }
 
     private const string Input = """

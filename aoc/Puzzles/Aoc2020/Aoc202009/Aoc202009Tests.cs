@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202009;
@@ -33,7 +34,7 @@ public class Aoc202009Tests
         var port = new XmasPort(Input.Trim(), 5);
         var num = port.FindFirstInvalidNumber();
 
-        Assert.That(num, Is.EqualTo(127));
+        num.Should().Be(127);
     }
 
     [Test]
@@ -42,6 +43,6 @@ public class Aoc202009Tests
         var port = new XmasPort(Input.Trim(), 5);
         var num = port.FindWeakness();
 
-        Assert.That(num, Is.EqualTo(62));
+        num.Should().Be(62);
     }
 }

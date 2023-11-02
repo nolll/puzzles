@@ -1,4 +1,5 @@
 using Common.CoordinateSystems.CoordinateSystem3D;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202122;
@@ -11,7 +12,7 @@ public class Aoc202122Tests
         var area = new RebootArea(new Matrix3DAddress(-54112, -85059, -27449), new Matrix3DAddress(-39298, -49293, 7877));
         var result = area.GetSize();
 
-        Assert.That(result, Is.EqualTo(18_719_357_085_335));
+        result.Should().Be(18_719_357_085_335);
     }
 
     [Test]
@@ -21,13 +22,13 @@ public class Aoc202122Tests
         var area2 = new RebootArea(new Matrix3DAddress(1, 1, 1), new Matrix3DAddress(3, 3, 3));
         var result = area1.GetSortedRemainingParts(area2);
 
-        Assert.That(result.Count, Is.EqualTo(3));
-        Assert.That(result[0].From, Is.EqualTo(new Matrix3DAddress(0, 0, 0)));
-        Assert.That(result[0].To, Is.EqualTo(new Matrix3DAddress(0, 2, 2)));
-        Assert.That(result[1].From, Is.EqualTo(new Matrix3DAddress(1, 0, 0)));
-        Assert.That(result[1].To, Is.EqualTo(new Matrix3DAddress(2, 0, 2)));
-        Assert.That(result[2].From, Is.EqualTo(new Matrix3DAddress(1, 1, 0)));
-        Assert.That(result[2].To, Is.EqualTo(new Matrix3DAddress(2, 2, 0)));
+        result.Count.Should().Be(3);
+        result[0].From.Should().Be(new Matrix3DAddress(0, 0, 0));
+        result[0].To.Should().Be(new Matrix3DAddress(0, 2, 2));
+        result[1].From.Should().Be(new Matrix3DAddress(1, 0, 0));
+        result[1].To.Should().Be(new Matrix3DAddress(2, 0, 2));
+        result[2].From.Should().Be(new Matrix3DAddress(1, 1, 0));
+        result[2].To.Should().Be(new Matrix3DAddress(2, 2, 0));
     }
 
     [Test]
@@ -37,13 +38,13 @@ public class Aoc202122Tests
         var area2 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(2, 2, 2));
         var result = area1.GetSortedRemainingParts(area2);
 
-        Assert.That(result.Count, Is.EqualTo(3));
-        Assert.That(result[0].From, Is.EqualTo(new Matrix3DAddress(1, 1, 3)));
-        Assert.That(result[0].To, Is.EqualTo(new Matrix3DAddress(2, 2, 3)));
-        Assert.That(result[1].From, Is.EqualTo(new Matrix3DAddress(1, 3, 1)));
-        Assert.That(result[1].To, Is.EqualTo(new Matrix3DAddress(2, 3, 3)));
-        Assert.That(result[2].From, Is.EqualTo(new Matrix3DAddress(3, 1, 1)));
-        Assert.That(result[2].To, Is.EqualTo(new Matrix3DAddress(3, 3, 3)));
+        result.Count.Should().Be(3);
+        result[0].From.Should().Be(new Matrix3DAddress(1, 1, 3));
+        result[0].To.Should().Be(new Matrix3DAddress(2, 2, 3));
+        result[1].From.Should().Be(new Matrix3DAddress(1, 3, 1));
+        result[1].To.Should().Be(new Matrix3DAddress(2, 3, 3));
+        result[2].From.Should().Be(new Matrix3DAddress(3, 1, 1));
+        result[2].To.Should().Be(new Matrix3DAddress(3, 3, 3));
     }
 
     [Test]
@@ -53,15 +54,15 @@ public class Aoc202122Tests
         var area2 = new RebootArea(new Matrix3DAddress(2, 2, 1), new Matrix3DAddress(4, 4, 2));
         var result = area1.GetSortedRemainingParts(area2);
 
-        Assert.That(result.Count, Is.EqualTo(4));
-        Assert.That(result[0].From, Is.EqualTo(new Matrix3DAddress(0, 0, 0)));
-        Assert.That(result[0].To, Is.EqualTo(new Matrix3DAddress(1, 3, 3)));
-        Assert.That(result[1].From, Is.EqualTo(new Matrix3DAddress(2, 0, 0)));
-        Assert.That(result[1].To, Is.EqualTo(new Matrix3DAddress(3, 1, 3)));
-        Assert.That(result[2].From, Is.EqualTo(new Matrix3DAddress(2, 2, 0)));
-        Assert.That(result[2].To, Is.EqualTo(new Matrix3DAddress(3, 3, 0)));
-        Assert.That(result[3].From, Is.EqualTo(new Matrix3DAddress(2, 2, 3)));
-        Assert.That(result[3].To, Is.EqualTo(new Matrix3DAddress(3, 3, 3)));
+        result.Count.Should().Be(4);
+        result[0].From.Should().Be(new Matrix3DAddress(0, 0, 0));
+        result[0].To.Should().Be(new Matrix3DAddress(1, 3, 3));
+        result[1].From.Should().Be(new Matrix3DAddress(2, 0, 0));
+        result[1].To.Should().Be(new Matrix3DAddress(3, 1, 3));
+        result[2].From.Should().Be(new Matrix3DAddress(2, 2, 0));
+        result[2].To.Should().Be(new Matrix3DAddress(3, 3, 0));
+        result[3].From.Should().Be(new Matrix3DAddress(2, 2, 3));
+        result[3].To.Should().Be(new Matrix3DAddress(3, 3, 3));
     }
 
     [Test]
@@ -70,7 +71,7 @@ public class Aoc202122Tests
         var reactor = new SubmarineReactor();
         var result = reactor.Reboot(Input1.Trim());
 
-        Assert.That(result, Is.EqualTo(39));
+        result.Should().Be(39);
     }
 
     [Test]
@@ -79,7 +80,7 @@ public class Aoc202122Tests
         var reactor = new SubmarineReactor();
         var result = reactor.Reboot2(Input1.Trim(), 50);
 
-        Assert.That(result, Is.EqualTo(39));
+        result.Should().Be(39);
     }
 
     [Test]
@@ -88,7 +89,7 @@ public class Aoc202122Tests
         var reactor = new SubmarineReactor();
         var result = reactor.Reboot2(Input2.Trim(), 50);
 
-        Assert.That(result, Is.EqualTo(590784));
+        result.Should().Be(590784);
     }
 
     [Test]
@@ -97,7 +98,7 @@ public class Aoc202122Tests
         var reactor = new SubmarineReactor();
         var result = reactor.Reboot2(Input3.Trim());
 
-        Assert.That(result, Is.EqualTo(2758514936282235));
+        result.Should().Be(2758514936282235);
     }
     
     private const string Input1 = """

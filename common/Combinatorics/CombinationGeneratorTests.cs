@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.Combinatorics;
@@ -9,7 +10,7 @@ public class CombinationGeneratorTests
     {
         var sequences = CombinationGenerator.GetUniqueCombinationsFixedSize(new[] { 1, 2, 3, 4, 5 }, 3).ToList();
 
-        Assert.That(sequences.Count, Is.EqualTo(10));
+        sequences.Count.Should().Be(10);
     }
 
     [Test]
@@ -17,6 +18,6 @@ public class CombinationGeneratorTests
     {
         var sequences = CombinationGenerator.GetCombinationsFixedSize(new[] { 1, 2, 3 }, 2).ToList();
 
-        Assert.That(sequences.Count, Is.EqualTo(9));
+        sequences.Count.Should().Be(9);
     }
 }

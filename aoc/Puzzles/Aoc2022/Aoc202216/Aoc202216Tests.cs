@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202216;
@@ -10,7 +11,7 @@ public class Aoc202216Tests
         var pipes = new VolcanicPipes(Input);
         var result = pipes.Part1();
 
-        Assert.That(result, Is.EqualTo(1651));
+        result.Should().Be(1651);
     }
 
     [Test]
@@ -20,7 +21,7 @@ public class Aoc202216Tests
         var pipes = new VolcanicPipes(LinearInput);
         var result = pipes.Part1();
 
-        Assert.That(result, Is.EqualTo(2640));
+        result.Should().Be(2640);
     }
 
     [Test]
@@ -30,7 +31,7 @@ public class Aoc202216Tests
         var pipes = new VolcanicPipes(QuadraticInput);
         var result = pipes.Part1();
 
-        Assert.That(result, Is.EqualTo(13468));
+        result.Should().Be(13468);
     }
 
     [Test]
@@ -40,7 +41,7 @@ public class Aoc202216Tests
         var pipes = new VolcanicPipes(CircularInput);
         var result = pipes.Part1();
 
-        Assert.That(result, Is.EqualTo(1288));
+        result.Should().Be(1288);
     }
 
     [Test]
@@ -50,7 +51,7 @@ public class Aoc202216Tests
         var pipes = new VolcanicPipes(ClusteredInput);
         var result = pipes.Part1();
 
-        Assert.That(result, Is.EqualTo(2400));
+        result.Should().Be(2400);
     }
 
     [Test]
@@ -59,7 +60,7 @@ public class Aoc202216Tests
         var pipes = new VolcanicPipes(Input);
         var result = pipes.Part2();
 
-        Assert.That(result, Is.EqualTo(1707));
+        result.Should().Be(1707);
     }
 
     private const string Input = """ 

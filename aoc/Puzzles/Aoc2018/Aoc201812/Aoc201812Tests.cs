@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201812;
@@ -28,6 +29,6 @@ initial state: #..#.#..##......###...###
 
         var spreader = new PlantSpreader(input);
 
-        Assert.That(spreader.PlantScore20, Is.EqualTo(325));
+        spreader.PlantScore20.Should().Be(325);
     }
 }

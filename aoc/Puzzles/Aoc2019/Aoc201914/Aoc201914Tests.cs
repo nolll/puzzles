@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201914;
@@ -20,7 +21,7 @@ public class Aoc201914Tests
         reactor.Run();
         var result = reactor.RequiredOreForOneFuel;
 
-        Assert.That(result, Is.EqualTo(31));
+        result.Should().Be(31);
     }
 
     [Test]
@@ -40,7 +41,7 @@ public class Aoc201914Tests
         reactor.Run();
         var result = reactor.RequiredOreForOneFuel;
 
-        Assert.That(result, Is.EqualTo(165));
+        result.Should().Be(165);
     }
 
     [Test]
@@ -62,7 +63,7 @@ public class Aoc201914Tests
         reactor.Run();
         var result = reactor.RequiredOreForOneFuel;
 
-        Assert.That(result, Is.EqualTo(13312));
+        result.Should().Be(13312);
     }
 
     [Test]
@@ -87,7 +88,7 @@ public class Aoc201914Tests
         reactor.Run();
         var result = reactor.RequiredOreForOneFuel;
 
-        Assert.That(result, Is.EqualTo(180697));
+        result.Should().Be(180697);
     }
 
     [Test]
@@ -117,7 +118,7 @@ public class Aoc201914Tests
         reactor.Run();
         var result = reactor.RequiredOreForOneFuel;
 
-        Assert.That(result, Is.EqualTo(2210736));
+        result.Should().Be(2210736);
     }
 
     [Test]
@@ -139,7 +140,7 @@ public class Aoc201914Tests
         reactor.Run();
         var fuel = reactor.FuelFromOneTrillionOre;
 
-        Assert.That(fuel, Is.EqualTo(82892753));
+        fuel.Should().Be(82892753);
     }
 
     [Test]
@@ -164,7 +165,7 @@ public class Aoc201914Tests
         reactor.Run();
         var fuel = reactor.FuelFromOneTrillionOre;
 
-        Assert.That(fuel, Is.EqualTo(5586022));
+        fuel.Should().Be(5586022);
     }
 
     [Test]
@@ -194,6 +195,6 @@ public class Aoc201914Tests
         reactor.Run();
         var fuel = reactor.FuelFromOneTrillionOre;
 
-        Assert.That(fuel, Is.EqualTo(460664));
+        fuel.Should().Be(460664);
     }
 }

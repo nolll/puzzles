@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201611;
@@ -17,7 +18,7 @@ The fourth floor contains nothing relevant.
 
         var simulator = new RadioisotopeSimulator(input);
 
-        Assert.That(simulator.StepCount, Is.EqualTo(11));
+        simulator.StepCount.Should().Be(11);
     }
 
     [Test]
@@ -31,7 +32,7 @@ The fourth floor contains nothing relevant.
         };
 
         var floor = new RadioisotopeFloor(items);
-        Assert.That(floor.Id, Is.EqualTo("HGHMLM"));
+        floor.Id.Should().Be("HGHMLM");
     }
 
     [Test]
@@ -40,7 +41,7 @@ The fourth floor contains nothing relevant.
         var items = new List<RadioisotopeItem>();
 
         var floor = new RadioisotopeFloor(items);
-        Assert.That(floor.IsValid, Is.True);
+        floor.IsValid.Should().BeTrue();
     }
 
     [Test]
@@ -52,7 +53,7 @@ The fourth floor contains nothing relevant.
         };
 
         var floor = new RadioisotopeFloor(items);
-        Assert.That(floor.IsValid, Is.True);
+        floor.IsValid.Should().BeTrue();
     }
 
     [Test]
@@ -64,7 +65,7 @@ The fourth floor contains nothing relevant.
         };
 
         var floor = new RadioisotopeFloor(items);
-        Assert.That(floor.IsValid, Is.True);
+        floor.IsValid.Should().BeTrue();
     }
 
     [Test]
@@ -77,7 +78,7 @@ The fourth floor contains nothing relevant.
         };
 
         var floor = new RadioisotopeFloor(items);
-        Assert.That(floor.IsValid, Is.True);
+        floor.IsValid.Should().BeTrue();
     }
 
     [Test]
@@ -90,7 +91,7 @@ The fourth floor contains nothing relevant.
         };
 
         var floor = new RadioisotopeFloor(items);
-        Assert.That(floor.IsValid, Is.False);
+        floor.IsValid.Should().BeFalse();
     }
 
     [Test]
@@ -104,7 +105,7 @@ The fourth floor contains nothing relevant.
         };
 
         var floor = new RadioisotopeFloor(items);
-        Assert.That(floor.IsValid, Is.False);
+        floor.IsValid.Should().BeFalse();
     }
 
     [Test]
@@ -118,7 +119,7 @@ The fourth floor contains nothing relevant.
         };
 
         var floor = new RadioisotopeFloor(items);
-        Assert.That(floor.IsValid, Is.True);
+        floor.IsValid.Should().BeTrue();
     }
 
     [Test]
@@ -143,7 +144,7 @@ The fourth floor contains nothing relevant.
         };
 
         var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
-        Assert.That(facility.Id, Is.EqualTo("0:HGHMLM||LG|"));
+        facility.Id.Should().Be("0:HGHMLM||LG|");
     }
 
     [Test]
@@ -168,7 +169,7 @@ The fourth floor contains nothing relevant.
         };
 
         var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
-        Assert.That(facility.AnonymizedId, Is.EqualTo("0:1X1Y2Y||2X|"));
+        facility.AnonymizedId.Should().Be("0:1X1Y2Y||2X|");
     }
     
     [Test]
@@ -183,7 +184,7 @@ The fourth floor contains nothing relevant.
         };
 
         var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
-        Assert.That(facility.IsValid, Is.True);
+        facility.IsValid.Should().BeTrue();
     }
 
     [Test]
@@ -203,7 +204,7 @@ The fourth floor contains nothing relevant.
         };
 
         var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
-        Assert.That(facility.IsValid, Is.False);
+        facility.IsValid.Should().BeFalse();
     }
 
     [Test]
@@ -223,7 +224,7 @@ The fourth floor contains nothing relevant.
         };
 
         var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
-        Assert.That(facility.IsDone, Is.True);
+        facility.IsDone.Should().BeTrue();
     }
 
     [Test]
@@ -248,6 +249,6 @@ The fourth floor contains nothing relevant.
         };
 
         var facility = new RadioisotopeFacility(floors, 0, new IsotopeNameProvider(), new AnonymousNameProvider());
-        Assert.That(facility.IsDone, Is.False);
+        facility.IsDone.Should().BeFalse();
     }
 }

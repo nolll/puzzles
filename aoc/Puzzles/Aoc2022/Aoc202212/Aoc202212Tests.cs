@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202212;
@@ -10,7 +11,7 @@ public class Aoc202212Tests
         var hillClimbing = new HillClimbing();
         var result = hillClimbing.Part1(Input);
 
-        Assert.That(result, Is.EqualTo(31));
+        result.Should().Be(31);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202212Tests
         var hillClimbing = new HillClimbing();
         var result = hillClimbing.Part2(Input);
 
-        Assert.That(result, Is.EqualTo(29));
+        result.Should().Be(29);
     }
 
     private const string Input = """

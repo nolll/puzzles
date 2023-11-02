@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201701;
@@ -12,7 +13,7 @@ public class Aoc201701Tests
     {
         var captcha = new CaptchaCalculator(input);
 
-        Assert.That(captcha.Sum1, Is.EqualTo(sum));
+        captcha.Sum1.Should().Be(sum);
     }
 
     [TestCase("1212", 6)]
@@ -24,6 +25,6 @@ public class Aoc201701Tests
     {
         var captcha = new CaptchaCalculator(input);
 
-        Assert.That(captcha.Sum2, Is.EqualTo(sum));
+        captcha.Sum2.Should().Be(sum);
     }
 }

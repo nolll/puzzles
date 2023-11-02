@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202119;
@@ -10,7 +11,7 @@ public class Aoc202119Tests
         var system = new BeaconSystem();
         var result = system.GetResult(Input);
 
-        Assert.That(result.BeaconCount, Is.EqualTo(79));
+        result.BeaconCount.Should().Be(79);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202119Tests
         var system = new BeaconSystem();
         var result = system.GetResult(Input);
 
-        Assert.That(result.MaxDistance, Is.EqualTo(3621));
+        result.MaxDistance.Should().Be(3621);
     }
 
     private const string Input = """

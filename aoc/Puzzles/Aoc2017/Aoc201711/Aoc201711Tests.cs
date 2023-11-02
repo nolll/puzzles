@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201711;
@@ -12,6 +13,6 @@ public class Aoc201711Tests
     {
         var navigator = new HexGridNavigator(input);
 
-        Assert.That(navigator.EndDistance, Is.EqualTo(expected));
+        navigator.EndDistance.Should().Be(expected);
     }
 }

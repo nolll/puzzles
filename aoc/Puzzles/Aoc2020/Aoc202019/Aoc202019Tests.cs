@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202019;
@@ -10,7 +11,7 @@ public class Aoc202019Tests
         var validator = new MonsterImageValidator(RulesAndMessages1, false);
         var result = validator.ValidCount();
 
-        Assert.That(result, Is.EqualTo(2));
+        result.Should().Be(2);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202019Tests
         var validator = new MonsterImageValidator(RulesAndMessages2, false);
         var result = validator.ValidCount();
 
-        Assert.That(result, Is.EqualTo(3));
+        result.Should().Be(3);
     }
 
     [TestCase("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
@@ -42,7 +43,7 @@ public class Aoc202019Tests
         var validator = new MonsterImageValidator(Rules2, false);
         var isValid = validator.IsValid(message);
 
-        Assert.That(isValid, Is.EqualTo(expected));
+        isValid.Should().Be(expected);
     }
 
     [TestCase("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
@@ -65,7 +66,7 @@ public class Aoc202019Tests
         var validator = new MonsterImageValidator(Rules2, true);
         var isValid = validator.IsValid(message);
 
-        Assert.That(isValid, Is.EqualTo(expected));
+        isValid.Should().Be(expected);
     }
 
     [Test]
@@ -74,7 +75,7 @@ public class Aoc202019Tests
         var validator = new MonsterImageValidator(RulesAndMessages2, true);
         var result = validator.ValidCount();
 
-        Assert.That(result, Is.EqualTo(12));
+        result.Should().Be(12);
     }
 
     private const string Rules1 = """

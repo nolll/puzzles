@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201516;
@@ -15,6 +16,6 @@ Sue 3: vizslas: 7, pomeranians: 1, akitas: 10
 
         var sueSelector = new SueSelector(input.Trim());
 
-        Assert.That(sueSelector.SueNumberPart1, Is.EqualTo(2));
+        sueSelector.SueNumberPart1.Should().Be(2);
     }
 }

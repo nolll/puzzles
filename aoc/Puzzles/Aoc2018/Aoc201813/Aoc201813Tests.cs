@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201813;
@@ -21,7 +22,7 @@ public class Aoc201813Tests
         var coords = detector.LocationOfFirstCollision;
 
         var str = $"{coords!.X},{coords.Y}";
-        Assert.That(str, Is.EqualTo("7,3"));
+        str.Should().Be("7,3");
     }
 
     [Test]
@@ -42,6 +43,6 @@ public class Aoc201813Tests
         var coords = detector.LocationOfLastCart;
 
         var str = $"{coords!.X},{coords.Y}";
-        Assert.That(str, Is.EqualTo("6,4"));
+        str.Should().Be("6,4");
     }
 }

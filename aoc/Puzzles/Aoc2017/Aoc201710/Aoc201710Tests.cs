@@ -1,4 +1,5 @@
 using Common.Cryptography;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201710;
@@ -11,7 +12,7 @@ public class Aoc201710Tests
         const string input = "3,4,1,5";
         var hasher = new IntKnotHasher(input, 5);
 
-        Assert.That(hasher.Checksum, Is.EqualTo(12));
+        hasher.Checksum.Should().Be(12);
     }
 
     [TestCase("", "a2582a3a0e66e6e86e3812dcb672a272")]
@@ -22,6 +23,6 @@ public class Aoc201710Tests
     {
         var hasher = new AsciiKnotHasher(input);
 
-        Assert.That(hasher.Hash, Is.EqualTo(expected));
+        hasher.Hash.Should().Be(expected);
     }
 }

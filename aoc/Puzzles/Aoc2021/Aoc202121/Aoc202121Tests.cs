@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202121;
@@ -10,7 +11,7 @@ public class Aoc202121Tests
         var game = new DiracDiceGame();
         var result = game.Play(4, 8);
 
-        Assert.That(result.Result, Is.EqualTo(739785));
+        result.Result.Should().Be(739785);
     }
     
     [Test]
@@ -19,6 +20,6 @@ public class Aoc202121Tests
         var game = new RealDiracDiceGame();
         var result = game.Play(4, 8);
 
-        Assert.That(result, Is.EqualTo(444356092776315));
+        result.Should().Be(444356092776315);
     }
 }

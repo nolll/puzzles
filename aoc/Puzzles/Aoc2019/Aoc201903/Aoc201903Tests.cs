@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201903;
@@ -11,7 +12,7 @@ public class Aoc201903Tests
     {
         var intersectionFinder = new IntersectionFinder(pathA, pathB);
         var result = intersectionFinder.ClosestIntersection;
-        Assert.That(result.Distance, Is.EqualTo(expectedDistance));
+        result.Distance.Should().Be(expectedDistance);
     }
 
     [TestCase("R8,U5,L5,D3", "U7,R6,D4,L4", 30)]
@@ -21,6 +22,6 @@ public class Aoc201903Tests
     {
         var intersectionFinder = new IntersectionFinder(pathA, pathB);
         var result = intersectionFinder.FewestSteps;
-        Assert.That(result.Steps, Is.EqualTo(expectedSteps));
+        result.Steps.Should().Be(expectedSteps);
     }
 }

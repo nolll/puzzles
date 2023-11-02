@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202225;
@@ -10,7 +11,7 @@ public class Aoc202225Tests
         var puzzle = new Aoc202225();
         var result = puzzle.Part1(Input);
 
-        Assert.That(result, Is.EqualTo("2=-1=0"));
+        result.Should().Be("2=-1=0");
     }
     
     [TestCase("1=-0-2", 1747)]
@@ -30,7 +31,7 @@ public class Aoc202225Tests
     {
         var result = SnafuConverter.ToNumber(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase(1747, "1=-0-2")]
@@ -50,7 +51,7 @@ public class Aoc202225Tests
     {
         var result = SnafuConverter.ToSnafu(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     private const string Input = """

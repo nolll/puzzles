@@ -1,4 +1,5 @@
 using Common.Computers.IntCode.Instructions;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.Computers.IntCode;
@@ -10,7 +11,7 @@ public class InstructionParserTests
     {
         var result = InstructionParser.Parse(new List<long>(), 0, 0);
 
-        Assert.That(result, Is.Null);
+        result.Should().BeNull();
     }
 
     [Test]
@@ -20,11 +21,11 @@ public class InstructionParserTests
         var memory = MemoryParser.Parse(input);
         var result = InstructionParser.Parse(memory, 0, 0);
 
-        Assert.That(result, Is.TypeOf<AdditionInstruction>());
-        Assert.That(result!.Parameters.Count, Is.EqualTo(3));
-        Assert.That(result.Parameters[0].Type, Is.EqualTo(ParameterType.Position));
-        Assert.That(result.Parameters[1].Type, Is.EqualTo(ParameterType.Position));
-        Assert.That(result.Parameters[2].Type, Is.EqualTo(ParameterType.Position));
+        result.Should().BeOfType<AdditionInstruction>();
+        result!.Parameters.Count.Should().Be(3);
+        result.Parameters[0].Type.Should().Be(ParameterType.Position);
+        result.Parameters[1].Type.Should().Be(ParameterType.Position);
+        result.Parameters[2].Type.Should().Be(ParameterType.Position);
     }
 
     [Test]
@@ -34,11 +35,11 @@ public class InstructionParserTests
         var memory = MemoryParser.Parse(input);
         var result = InstructionParser.Parse(memory, 0, 0);
 
-        Assert.That(result, Is.TypeOf<MultiplicationInstruction>());
-        Assert.That(result!.Parameters.Count, Is.EqualTo(3));
-        Assert.That(result.Parameters[0].Type, Is.EqualTo(ParameterType.Position));
-        Assert.That(result.Parameters[1].Type, Is.EqualTo(ParameterType.Position));
-        Assert.That(result.Parameters[2].Type, Is.EqualTo(ParameterType.Position));
+        result.Should().BeOfType<MultiplicationInstruction>();
+        result!.Parameters.Count.Should().Be(3);
+        result.Parameters[0].Type.Should().Be(ParameterType.Position);
+        result.Parameters[1].Type.Should().Be(ParameterType.Position);
+        result.Parameters[2].Type.Should().Be(ParameterType.Position);
     }
 
     [Test]
@@ -48,9 +49,9 @@ public class InstructionParserTests
         var memory = MemoryParser.Parse(input);
         var result = InstructionParser.Parse(memory, 0, 0);
 
-        Assert.That(result!.Type, Is.EqualTo(InstructionType.Input));
-        Assert.That(result.Parameters.Count, Is.EqualTo(1));
-        Assert.That(result.Parameters[0].Type, Is.EqualTo(ParameterType.Position));
+        result!.Type.Should().Be(InstructionType.Input);
+        result.Parameters.Count.Should().Be(1);
+        result.Parameters[0].Type.Should().Be(ParameterType.Position);
     }
 
     [Test]
@@ -60,9 +61,9 @@ public class InstructionParserTests
         var memory = MemoryParser.Parse(input);
         var result = InstructionParser.Parse(memory, 0, 0);
 
-        Assert.That(result, Is.TypeOf<OutputInstruction>());
-        Assert.That(result!.Parameters.Count, Is.EqualTo(1));
-        Assert.That(result.Parameters[0].Type, Is.EqualTo(ParameterType.Position));
+        result.Should().BeOfType<OutputInstruction>();
+        result!.Parameters.Count.Should().Be(1);
+        result.Parameters[0].Type.Should().Be(ParameterType.Position);
     }
 
     [Test]
@@ -72,8 +73,8 @@ public class InstructionParserTests
         var memory = MemoryParser.Parse(input);
         var result = InstructionParser.Parse(memory, 0, 0);
 
-        Assert.That(result, Is.TypeOf<HaltInstruction>());
-        Assert.That(result!.Parameters.Count, Is.EqualTo(0));
+        result.Should().BeOfType<HaltInstruction>();
+        result!.Parameters.Count.Should().Be(0);
     }
 
     [Test]
@@ -83,10 +84,10 @@ public class InstructionParserTests
         var memory = MemoryParser.Parse(input);
         var result = InstructionParser.Parse(memory, 0, 0);
 
-        Assert.That(result!.Type, Is.EqualTo(InstructionType.Addition));
-        Assert.That(result.Parameters.Count, Is.EqualTo(3));
-        Assert.That(result.Parameters[0].Type, Is.EqualTo(ParameterType.Immediate));
-        Assert.That(result.Parameters[1].Type, Is.EqualTo(ParameterType.Immediate));
-        Assert.That(result.Parameters[2].Type, Is.EqualTo(ParameterType.Position));
+        result!.Type.Should().Be(InstructionType.Addition);
+        result.Parameters.Count.Should().Be(3);
+        result.Parameters[0].Type.Should().Be(ParameterType.Immediate);
+        result.Parameters[1].Type.Should().Be(ParameterType.Immediate);
+        result.Parameters[2].Type.Should().Be(ParameterType.Position);
     }
 }

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202219;
@@ -12,7 +13,7 @@ public class Aoc202219Tests
         var best = RobotFactory.FindBestConfiguration(blueprint, 24);
         var result = best.GeodeCount;
 
-        Assert.That(result, Is.EqualTo(9));
+        result.Should().Be(9);
     }
 
     [Test]
@@ -23,7 +24,7 @@ public class Aoc202219Tests
         var best = RobotFactory.FindBestConfiguration(blueprint, 24);
         var result = best.GeodeCount;
 
-        Assert.That(result, Is.EqualTo(12));
+        result.Should().Be(12);
     }
 
     [Test]
@@ -32,7 +33,7 @@ public class Aoc202219Tests
         var factory = new RobotFactory();
         var result = factory.Part1(Input);
 
-        Assert.That(result, Is.EqualTo(33));
+        result.Should().Be(33);
     }
 
     [Test]
@@ -43,7 +44,7 @@ public class Aoc202219Tests
         var best = RobotFactory.FindBestConfiguration(blueprint, 32);
         var result = best.GeodeCount;
 
-        Assert.That(result, Is.EqualTo(56));
+        result.Should().Be(56);
     }
 
     [Test]
@@ -54,7 +55,7 @@ public class Aoc202219Tests
         var best = RobotFactory.FindBestConfiguration(blueprint, 32);
         var result = best.GeodeCount;
 
-        Assert.That(result, Is.EqualTo(62));
+        result.Should().Be(62);
     }
 
     [Test]
@@ -63,7 +64,7 @@ public class Aoc202219Tests
         var factory = new RobotFactory();
         var result = factory.Part2(Input);
 
-        Assert.That(result, Is.EqualTo(3472));
+        result.Should().Be(3472);
     }
 
     private const string Input = """

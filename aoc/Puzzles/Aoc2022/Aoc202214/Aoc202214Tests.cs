@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202214;
@@ -10,7 +11,7 @@ public class Aoc202214Tests
         var fallingSand = new FallingSand();
         var result = fallingSand.Part1(Input);
 
-        Assert.That(result, Is.EqualTo(24));
+        result.Should().Be(24);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202214Tests
         var fallingSand = new FallingSand();
         var result = fallingSand.Part2(Input);
 
-        Assert.That(result, Is.EqualTo(93));
+        result.Should().Be(93);
     }
 
     private const string Input = """

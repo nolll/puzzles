@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Common.Cryptography;
 
@@ -34,6 +35,6 @@ public class CaesarCipherTests
     {
         var result = CaesarCipher.Encrypt(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

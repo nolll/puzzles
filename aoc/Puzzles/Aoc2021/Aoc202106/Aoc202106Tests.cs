@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202106;
@@ -12,7 +13,7 @@ public class Aoc202106Tests
         var fishCounter = new FishCounter(Input);
         var result = fishCounter.FishCountAfter(days);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
         
     private const string Input = "3,4,3,1,2";

@@ -1,4 +1,5 @@
 using Common.Tests;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202020;
@@ -24,10 +25,10 @@ Tile 2311:
 
         var tile = JigsawTile.Parse(input);
 
-        Assert.That(tile.Edges["top"], Is.EqualTo("..##.#..#."));
-        Assert.That(tile.Edges["right"], Is.EqualTo("...#.##..#"));
-        Assert.That(tile.Edges["bottom"], Is.EqualTo("..###..###"));
-        Assert.That(tile.Edges["left"], Is.EqualTo(".#####..#."));
+        tile.Edges["top"].Should().Be("..##.#..#.");
+        tile.Edges["right"].Should().Be("...#.##..#");
+        tile.Edges["bottom"].Should().Be("..###..###");
+        tile.Edges["left"].Should().Be(".#####..#.");
     }
 
     [TestCase(2311, 3079)]
@@ -39,7 +40,7 @@ Tile 2311:
 
         var hasMatchingEdge = tile1.HasMatchingEdge(tile2);
 
-        Assert.That(hasMatchingEdge, Is.True);
+        hasMatchingEdge.Should().BeTrue();
     }
 
     [Test]
@@ -48,11 +49,11 @@ Tile 2311:
         var puzzle = new ImageJigsawPuzzle(Input);
         var cornerTiles = puzzle.CornerTiles;
 
-        Assert.That(cornerTiles.Count, Is.EqualTo(4));
-        Assert.That(cornerTiles[0].Id, Is.EqualTo(1171));
-        Assert.That(cornerTiles[1].Id, Is.EqualTo(1951));
-        Assert.That(cornerTiles[2].Id, Is.EqualTo(2971));
-        Assert.That(cornerTiles[3].Id, Is.EqualTo(3079));
+        cornerTiles.Count.Should().Be(4);
+        cornerTiles[0].Id.Should().Be(1171);
+        cornerTiles[1].Id.Should().Be(1951);
+        cornerTiles[2].Id.Should().Be(2971);
+        cornerTiles[3].Id.Should().Be(3079);
     }
 
     [Test]
@@ -61,11 +62,11 @@ Tile 2311:
         var puzzle = new ImageJigsawPuzzle(Input);
         var cornerTiles = puzzle.EdgeTiles;
 
-        Assert.That(cornerTiles.Count, Is.EqualTo(4));
-        Assert.That(cornerTiles[0].Id, Is.EqualTo(1489));
-        Assert.That(cornerTiles[1].Id, Is.EqualTo(2311));
-        Assert.That(cornerTiles[2].Id, Is.EqualTo(2473));
-        Assert.That(cornerTiles[3].Id, Is.EqualTo(2729));
+        cornerTiles.Count.Should().Be(4);
+        cornerTiles[0].Id.Should().Be(1489);
+        cornerTiles[1].Id.Should().Be(2311);
+        cornerTiles[2].Id.Should().Be(2473);
+        cornerTiles[3].Id.Should().Be(2729);
     }
 
     [Test]
@@ -74,8 +75,8 @@ Tile 2311:
         var puzzle = new ImageJigsawPuzzle(Input);
         var cornerTiles = puzzle.CenterTiles;
 
-        Assert.That(cornerTiles.Count, Is.EqualTo(1));
-        Assert.That(cornerTiles[0].Id, Is.EqualTo(1427));
+        cornerTiles.Count.Should().Be(1);
+        cornerTiles[0].Id.Should().Be(1427);
     }
 
     [Test]
@@ -84,7 +85,7 @@ Tile 2311:
         var puzzle = new ImageJigsawPuzzle(Input);
         var product = puzzle.ProductOfCornerTileIds;
 
-        Assert.That(product, Is.EqualTo(20899048083289));
+        product.Should().Be(20899048083289);
     }
 
     [Test]
@@ -94,7 +95,7 @@ Tile 2311:
         var puzzle = new ImageJigsawPuzzle(Input);
         var hashes = puzzle.NumberOfHashesThatAreNotPartOfASeaMonster;
 
-        Assert.That(hashes, Is.EqualTo(273));
+        hashes.Should().Be(273);
     }
 
     private const string Input = """

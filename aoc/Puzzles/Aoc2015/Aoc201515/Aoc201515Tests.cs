@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201515;
@@ -15,7 +16,7 @@ Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3
         var baker = new CookieBakery(input.Trim());
         var score = baker.HighestScore;
 
-        Assert.That(score, Is.EqualTo(62842880));
+        score.Should().Be(62842880);
     }
 
     [Test]
@@ -29,6 +30,6 @@ Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3
         var baker = new CookieBakery(input.Trim());
         var score = baker.HighestScoreWith500Calories;
 
-        Assert.That(score, Is.EqualTo(57600000));
+        score.Should().Be(57600000);
     }
 }

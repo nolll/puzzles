@@ -1,4 +1,5 @@
 using Common.Tests;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201811;
@@ -13,7 +14,7 @@ public class Aoc201811Tests
         var grid = new PowerGrid(300, serialNumber);
         var level = grid.GetSinglePowerLevel(x, y);
 
-        Assert.That(level, Is.EqualTo(expected));
+        level.Should().Be(expected);
     }
 
     [TestCase(18, "90,269,16")]
@@ -25,6 +26,6 @@ public class Aoc201811Tests
         var (coords, size) = grid.GetMaxCoordsAnySize();
         var str = $"{coords.X},{coords.Y},{size}";
 
-        Assert.That(str, Is.EqualTo(expected));
+        str.Should().Be(expected);
     }
 }

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.Strings;
@@ -42,6 +43,6 @@ public class NumberAsWordsTests
     {
         var result = new NumberAsString(n).ToString();
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201724;
@@ -10,7 +11,7 @@ public class Aoc201724Tests
         var builder = new BridgeBuilder(Input.Trim(), false);
         var bridge = builder.Build();
 
-        Assert.That(bridge.Strength, Is.EqualTo(31));
+        bridge.Strength.Should().Be(31);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc201724Tests
         var builder = new BridgeBuilder(Input.Trim(), true);
         var bridge = builder.Build();
 
-        Assert.That(bridge.Strength, Is.EqualTo(19));
+        bridge.Strength.Should().Be(19);
     }
 
     private const string Input = """

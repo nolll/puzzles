@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201721;
@@ -15,6 +16,6 @@ public class Aoc201721Tests
         var generator = new FractalArtGenerator(input.Trim());
         generator.Run(2);
 
-        Assert.That(generator.PixelsOn, Is.EqualTo(12));
+        generator.PixelsOn.Should().Be(12);
     }
 }

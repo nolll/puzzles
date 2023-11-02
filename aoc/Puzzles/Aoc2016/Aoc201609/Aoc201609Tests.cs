@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201609;
@@ -14,7 +15,7 @@ public class Aoc201609Tests
     {
         var decompressor = new FileDecompressor(input);
 
-        Assert.That(decompressor.DecompressedLengthV1, Is.EqualTo(expected));
+        decompressor.DecompressedLengthV1.Should().Be(expected);
     }
         
     [TestCase("(3x3)XYZ", 9)]
@@ -25,6 +26,6 @@ public class Aoc201609Tests
     {
         var decompressor = new FileDecompressor(input);
 
-        Assert.That(decompressor.DecompressedLengthV2, Is.EqualTo(expected));
+        decompressor.DecompressedLengthV2.Should().Be(expected);
     }
 }

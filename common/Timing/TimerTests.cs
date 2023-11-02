@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Common.Timing;
 
@@ -13,7 +14,7 @@ public class TimerTests
         var systemTime = new SystemTimeProviderForTest(endTime);
         var timer = new Timer(startTime, systemTime);
 
-        Assert.That(timer.FromStart.TotalMilliseconds, Is.EqualTo(1_000));
+        timer.FromStart.TotalMilliseconds.Should().Be(1_000);
     }
 
     private class SystemTimeProviderForTest : ISystemTimeProvider

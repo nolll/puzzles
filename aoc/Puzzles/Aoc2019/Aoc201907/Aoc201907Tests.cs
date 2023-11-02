@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201907;
@@ -13,7 +14,7 @@ public class Aoc201907Tests
         var calculator = new ThrustCalculator(program);
         var thrust = calculator.GetThrust(sequence);
 
-        Assert.That(thrust, Is.EqualTo(expectedThrust));
+        thrust.Should().Be(expectedThrust);
     }
 
     [TestCase("3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5", 9, 8, 7, 6, 5, 139629729)]
@@ -24,7 +25,7 @@ public class Aoc201907Tests
         var calculator = new ThrustCalculator(program);
         var thrust = calculator.GetThrust(sequence);
 
-        Assert.That(thrust, Is.EqualTo(expectedThrust));
+        thrust.Should().Be(expectedThrust);
     }
 
 }

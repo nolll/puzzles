@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201623;
@@ -18,7 +19,7 @@ dec a
 
         var control = new SafeCrackingComputerPart1(input.Trim(), 0, 0);
 
-        Assert.That(control.ValueA, Is.EqualTo(42));
+        control.ValueA.Should().Be(42);
     }
 
     [Test]
@@ -36,6 +37,6 @@ dec a
 
         var control = new SafeCrackingComputerPart1(input.Trim(), 0, 0);
 
-        Assert.That(control.ValueA, Is.EqualTo(3));
+        control.ValueA.Should().Be(3);
     }
 }

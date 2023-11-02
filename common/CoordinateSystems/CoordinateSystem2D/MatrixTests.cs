@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.CoordinateSystems.CoordinateSystem2D;
@@ -20,8 +21,8 @@ MNOP
         var matrix = new Matrix<int>(5, 5);
         matrix.MoveTo(1, 2);
 
-        Assert.That(matrix.Address.X, Is.EqualTo(1));
-        Assert.That(matrix.Address.Y, Is.EqualTo(2));
+        matrix.Address.X.Should().Be(1);
+        matrix.Address.Y.Should().Be(2);
     }
 
     [Test]
@@ -31,8 +32,8 @@ MNOP
         matrix.MoveTo(1, 3);
         matrix.MoveForward();
 
-        Assert.That(matrix.Address.X, Is.EqualTo(1));
-        Assert.That(matrix.Address.Y, Is.EqualTo(2));
+        matrix.Address.X.Should().Be(1);
+        matrix.Address.Y.Should().Be(2);
     }
 
     [Test]
@@ -44,8 +45,8 @@ MNOP
         matrix.TurnRight();
         matrix.MoveForward();
 
-        Assert.That(matrix.Address.X, Is.EqualTo(1));
-        Assert.That(matrix.Address.Y, Is.EqualTo(1));
+        matrix.Address.X.Should().Be(1);
+        matrix.Address.Y.Should().Be(1);
     }
 
     [Test]
@@ -57,10 +58,10 @@ MNOP
 
         var emptyRowsValue = matrix.ReadValueAt(-1, -1);
         var writtenValue = matrix.ReadValueAt(0, 0);
-        Assert.That(emptyRowsValue, Is.EqualTo(DefaultValue));
-        Assert.That(writtenValue, Is.EqualTo(WriteValue));
-        Assert.That(matrix.Width, Is.EqualTo(3));
-        Assert.That(matrix.Height, Is.EqualTo(3));
+        emptyRowsValue.Should().Be(DefaultValue);
+        writtenValue.Should().Be(WriteValue);
+        matrix.Width.Should().Be(3);
+        matrix.Height.Should().Be(3);
     }
 
     [Test]
@@ -72,10 +73,10 @@ MNOP
 
         var emptyRowsValue = matrix.ReadValueAt(-2, -2);
         var writtenValue = matrix.ReadValueAt(0, 0);
-        Assert.That(emptyRowsValue, Is.EqualTo(DefaultValue));
-        Assert.That(writtenValue, Is.EqualTo(WriteValue));
-        Assert.That(matrix.Width, Is.EqualTo(5));
-        Assert.That(matrix.Height, Is.EqualTo(5));
+        emptyRowsValue.Should().Be(DefaultValue);
+        writtenValue.Should().Be(WriteValue);
+        matrix.Width.Should().Be(5);
+        matrix.Height.Should().Be(5);
     }
 
     [Test]
@@ -85,13 +86,13 @@ MNOP
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
-        Assert.That(matrix.PerpendicularAdjacentCoords.Count, Is.EqualTo(4));
+        matrix.PerpendicularAdjacentCoords.Count.Should().Be(4);
 
         var adjacentCoords = matrix.PerpendicularAdjacentCoords;
         var squaresInFirstCol = adjacentCoords.Where(o => o.X == -1).ToList();
         var squaresInFirstRow = adjacentCoords.Where(o => o.Y == -1).ToList();
-        Assert.That(squaresInFirstCol.Count, Is.EqualTo(1));
-        Assert.That(squaresInFirstRow.Count, Is.EqualTo(1));
+        squaresInFirstCol.Count.Should().Be(1);
+        squaresInFirstRow.Count.Should().Be(1);
     }
 
     [Test]
@@ -101,13 +102,13 @@ MNOP
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
-        Assert.That(matrix.AllAdjacentCoords.Count, Is.EqualTo(8));
+        matrix.AllAdjacentCoords.Count.Should().Be(8);
 
         var adjacentCoords = matrix.AllAdjacentCoords;
         var squaresInFirstCol = adjacentCoords.Where(o => o.X == -1).ToList();
         var squaresInFirstRow = adjacentCoords.Where(o => o.Y == -1).ToList();
-        Assert.That(squaresInFirstCol.Count, Is.EqualTo(3));
-        Assert.That(squaresInFirstRow.Count, Is.EqualTo(3));
+        squaresInFirstCol.Count.Should().Be(3);
+        squaresInFirstRow.Count.Should().Be(3);
     }
 
     [Test]
@@ -130,7 +131,7 @@ MNOP
 
         matrix = matrix.Copy();
 
-        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
     [Test]
@@ -153,7 +154,7 @@ MNOP
 
         matrix = matrix.RotateRight();
 
-        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
     [Test]
@@ -176,7 +177,7 @@ MNOP
 
         matrix = matrix.RotateLeft();
 
-        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
     [Test]
@@ -192,7 +193,7 @@ JK
 
         matrix = matrix.Slice(new MatrixAddress(1, 1), new MatrixAddress(2, 2));
 
-        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
     [Test]
@@ -209,7 +210,7 @@ NOP
 
         matrix = matrix.Slice(new MatrixAddress(1, 1));
 
-        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
     [Test]
@@ -226,7 +227,7 @@ IJK
 
         matrix = matrix.Slice(to: new MatrixAddress(2, 2));
 
-        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
     [Test]
@@ -243,7 +244,7 @@ NOP
 
         matrix = matrix.Slice(new MatrixAddress(1, 1), 2, 2);
 
-        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
     [Test]
@@ -266,7 +267,7 @@ NOP
 
         matrix = matrix.FlipVertical();
 
-        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
     [Test]
@@ -289,7 +290,7 @@ NOP
 
         matrix = matrix.FlipHorizontal();
 
-        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
     [Test]
@@ -312,6 +313,6 @@ NOP
 
         matrix = matrix.Transpose();
 
-        Assert.That(matrix.Print(), Is.EqualTo(expectedMatrix.Print()));
+        matrix.Print().Should().Be(expectedMatrix.Print());
     }
 }

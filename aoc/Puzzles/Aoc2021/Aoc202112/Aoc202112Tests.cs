@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202112;
@@ -10,7 +11,7 @@ public class Aoc202112Tests
         var caveSystem = new CaveSystem(Input.Trim(), false);
         var result = caveSystem.CountPaths();
 
-        Assert.That(result, Is.EqualTo(10));
+        result.Should().Be(10);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202112Tests
         var caveSystem = new CaveSystem(Input.Trim(), true);
         var result = caveSystem.CountPaths();
 
-        Assert.That(result, Is.EqualTo(36));
+        result.Should().Be(36);
     }
 
     private const string Input = """

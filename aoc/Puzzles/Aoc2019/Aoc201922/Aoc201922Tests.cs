@@ -1,4 +1,5 @@
 using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201922;
@@ -13,7 +14,7 @@ public class Aoc201922Tests
         deck = shuffler.Reverse(deck).ToArray();
 
         var expectedDeck = new[] { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
-        Assert.That(deck, Is.EqualTo(expectedDeck));
+        deck.Should().BeEquivalentTo(expectedDeck);
     }
 
     [Test]
@@ -24,7 +25,7 @@ public class Aoc201922Tests
         deck = shuffler.Cut(deck, 3).ToArray();
 
         var expectedDeck = new[] { 3, 4, 5, 6, 7, 8, 9, 0, 1, 2 };
-        Assert.That(deck, Is.EqualTo(expectedDeck));
+        deck.Should().BeEquivalentTo(expectedDeck);
     }
 
     [Test]
@@ -35,7 +36,7 @@ public class Aoc201922Tests
         deck = shuffler.Cut(deck, -4).ToArray();
 
         var expectedDeck = new[] { 6, 7, 8, 9, 0, 1, 2, 3, 4, 5 };
-        Assert.That(deck, Is.EqualTo(expectedDeck));
+        deck.Should().BeEquivalentTo(expectedDeck);
     }
 
     [Test]
@@ -46,7 +47,7 @@ public class Aoc201922Tests
         deck = shuffler.Increment(deck, 3).ToArray();
 
         var expectedDeck = new[] { 0, 7, 4, 1, 8, 5, 2, 9, 6, 3 };
-        Assert.That(deck, Is.EqualTo(expectedDeck));
+        deck.Should().BeEquivalentTo(expectedDeck);
     }
 
     [Test]
@@ -70,6 +71,6 @@ cut -1
         var deck = shuffler.Shuffle(10, input);
 
         var expectedDeck = new[] { 9, 2, 5, 8, 1, 4, 7, 0, 3, 6 };
-        Assert.That(deck, Is.EqualTo(expectedDeck));
+        deck.Should().BeEquivalentTo(expectedDeck);
     }
 }

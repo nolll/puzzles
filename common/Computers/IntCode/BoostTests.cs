@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.Computers.IntCode;
@@ -12,7 +13,7 @@ public class BoostTests
         var boostTester = new BoostRunner(program, 0);
         var result = boostTester.Run();
 
-        Assert.That(string.Join(',', result.AllOutputs), Is.EqualTo(program));
+        string.Join(',', result.AllOutputs).Should().Be(program);
     }
 
     [Test]
@@ -23,7 +24,7 @@ public class BoostTests
         var boostTester = new BoostRunner(program, 0);
         var result = boostTester.Run();
 
-        Assert.That(result.LastOutput.ToString().Length, Is.EqualTo(16));
+        result.LastOutput.ToString().Length.Should().Be(16);
     }
 
     [Test]
@@ -35,6 +36,6 @@ public class BoostTests
         var boostTester = new BoostRunner(program, 0);
         var result = boostTester.Run();
 
-        Assert.That(result.LastOutput, Is.EqualTo(expectedNumber));
+        result.LastOutput.Should().Be(expectedNumber);
     }
 }

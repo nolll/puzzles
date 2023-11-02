@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201524;
@@ -22,6 +23,6 @@ public class Aoc201524Tests
 
         var balancer = new PresentBalancer(input.Trim(), 3);
 
-        Assert.That(balancer.QuantumEntanglementOfFirstGroup, Is.EqualTo(99));
+        balancer.QuantumEntanglementOfFirstGroup.Should().Be(99);
     }
 }

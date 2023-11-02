@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201619;
@@ -12,7 +13,7 @@ public class Aoc201619Tests
         var party = new WhiteElephantParty(input);
         var winner = party.StealFromNextElf();
 
-        Assert.That(winner, Is.EqualTo(3));
+        winner.Should().Be(3);
     }
 
     [Test]
@@ -23,6 +24,6 @@ public class Aoc201619Tests
         var party = new WhiteElephantParty(input);
         var winner = party.StealFromElfAcrossCircle();
 
-        Assert.That(winner, Is.EqualTo(2));
+        winner.Should().Be(2);
     }
 }

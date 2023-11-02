@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202115;
@@ -10,7 +11,7 @@ public class Aoc202115Tests
         var chitonRisk = new ChitonRisk();
         var result = chitonRisk.FindRiskLevelForSmallCave(Input);
 
-        Assert.That(result, Is.EqualTo(40));
+        result.Should().Be(40);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202115Tests
         var chitonRisk = new ChitonRisk();
         var result = chitonRisk.FindRiskLevelForLargeCave(Input);
 
-        Assert.That(result, Is.EqualTo(315));
+        result.Should().Be(315);
     }
 
     private const string Input = """

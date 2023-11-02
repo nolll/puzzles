@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202213;
@@ -10,7 +11,7 @@ public class Aoc202213Tests
         var signal = new DistressSignal();
         var result = signal.Part1(Input);
 
-        Assert.That(result, Is.EqualTo(13));
+        result.Should().Be(13);
     }
 
     [Test]
@@ -18,7 +19,7 @@ public class Aoc202213Tests
     {
         var result = DistressSignal.ParseSignalItem("[1,1,3,1,1]");
 
-        Assert.That(result.Print(), Is.EqualTo("[1,1,3,1,1]"));
+        result.Print().Should().Be("[1,1,3,1,1]");
     }
 
     [Test]
@@ -26,7 +27,7 @@ public class Aoc202213Tests
     {
         var result = DistressSignal.ParseSignalItem("[[1],4]");
 
-        Assert.That(result.Print(), Is.EqualTo("[[1],4]"));
+        result.Print().Should().Be("[[1],4]");
     }
 
     [Test]
@@ -34,7 +35,7 @@ public class Aoc202213Tests
     {
         var result = DistressSignal.ParseSignalItem("[[[]]]");
 
-        Assert.That(result.Print(), Is.EqualTo("[[[]]]"));
+        result.Print().Should().Be("[[[]]]");
     }
 
     [Test]
@@ -42,7 +43,7 @@ public class Aoc202213Tests
     {
         var result = DistressSignal.ParseSignalItem("[[8,7,6]]");
 
-        Assert.That(result.Print(), Is.EqualTo("[[8,7,6]]"));
+        result.Print().Should().Be("[[8,7,6]]");
     }
 
     [Test]
@@ -50,7 +51,7 @@ public class Aoc202213Tests
     {
         var result = DistressSignal.ParseSignalItem("[1,[2,[3,[4,[5,6,7]]]],8,9]");
 
-        Assert.That(result.Print(), Is.EqualTo("[1,[2,[3,[4,[5,6,7]]]],8,9]"));
+        result.Print().Should().Be("[1,[2,[3,[4,[5,6,7]]]],8,9]");
     }
 
     [Test]
@@ -60,7 +61,7 @@ public class Aoc202213Tests
         var right = DistressSignal.ParseSignalItem("[1,1,5,1,1]");
         var result = SignalComparer.Compare(left, right);
 
-        Assert.That(result, Is.EqualTo(-1));
+        result.Should().Be(-1);
     }
 
     [Test]
@@ -70,7 +71,7 @@ public class Aoc202213Tests
         var right = DistressSignal.ParseSignalItem("[[1],4]");
         var result = SignalComparer.Compare(left, right);
 
-        Assert.That(result, Is.EqualTo(-1));
+        result.Should().Be(-1);
     }
 
     [Test]
@@ -80,7 +81,7 @@ public class Aoc202213Tests
         var right = DistressSignal.ParseSignalItem("[[8,7,6]]");
         var result = SignalComparer.Compare(left, right);
 
-        Assert.That(result, Is.EqualTo(1));
+        result.Should().Be(1);
     }
 
     [Test]
@@ -90,7 +91,7 @@ public class Aoc202213Tests
         var right = DistressSignal.ParseSignalItem("[[4,4],4,4,4]");
         var result = SignalComparer.Compare(left, right);
 
-        Assert.That(result, Is.EqualTo(-1));
+        result.Should().Be(-1);
     }
 
     [Test]
@@ -100,7 +101,7 @@ public class Aoc202213Tests
         var right = DistressSignal.ParseSignalItem("[7,7,7]");
         var result = SignalComparer.Compare(left, right);
 
-        Assert.That(result, Is.EqualTo(1));
+        result.Should().Be(1);
     }
 
     [Test]
@@ -110,7 +111,7 @@ public class Aoc202213Tests
         var right = DistressSignal.ParseSignalItem("[3]");
         var result = SignalComparer.Compare(left, right);
 
-        Assert.That(result, Is.EqualTo(-1));
+        result.Should().Be(-1);
     }
 
     [Test]
@@ -120,7 +121,7 @@ public class Aoc202213Tests
         var right = DistressSignal.ParseSignalItem("[[]]");
         var result = SignalComparer.Compare(left, right);
 
-        Assert.That(result, Is.EqualTo(1));
+        result.Should().Be(1);
     }
 
     [Test]
@@ -130,7 +131,7 @@ public class Aoc202213Tests
         var right = DistressSignal.ParseSignalItem("[1,[2,[3,[4,[5,6,0]]]],8,9]");
         var result = SignalComparer.Compare(left, right);
 
-        Assert.That(result, Is.EqualTo(1));
+        result.Should().Be(1);
     }
 
     [Test]
@@ -139,7 +140,7 @@ public class Aoc202213Tests
         var signal = new DistressSignal();
         var result = signal.Part2(Input);
 
-        Assert.That(result, Is.EqualTo(140));
+        result.Should().Be(140);
     }
 
     private const string Input = """

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202006;
@@ -10,7 +11,7 @@ public class Aoc202006Tests
         var reader = new DeclarationFormReader(Input);
         var sum = reader.SumOfAtLeastOneYes;
 
-        Assert.That(sum, Is.EqualTo(11));
+        sum.Should().Be(11);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202006Tests
         var reader = new DeclarationFormReader(Input);
         var sum = reader.SumOfAllYes;
 
-        Assert.That(sum, Is.EqualTo(6));
+        sum.Should().Be(6);
     }
 
     private const string Input = """

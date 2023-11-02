@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202120;
@@ -10,7 +11,7 @@ public class Aoc202120Tests
         var trenchMap = new TrenchMap();
         var result = trenchMap.GetLitPixelCount(Input, 2);
 
-        Assert.That(result, Is.EqualTo(35));
+        result.Should().Be(35);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202120Tests
         var trenchMap = new TrenchMap();
         var result = trenchMap.GetLitPixelCount(Input, 50);
 
-        Assert.That(result, Is.EqualTo(3351));
+        result.Should().Be(3351);
     }
 
     private const string Input = """

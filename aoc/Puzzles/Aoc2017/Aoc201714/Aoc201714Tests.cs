@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201714;
@@ -11,7 +12,7 @@ public class Aoc201714Tests
 
         var defragmenter = new DiskDefragmenter(input);
 
-        Assert.That(defragmenter.UsedCount, Is.EqualTo(8108));
+        defragmenter.UsedCount.Should().Be(8108);
     }
 
     [Test]
@@ -21,6 +22,6 @@ public class Aoc201714Tests
 
         var defragmenter = new DiskDefragmenter(input);
 
-        Assert.That(defragmenter.RegionCount, Is.EqualTo(1242));
+        defragmenter.RegionCount.Should().Be(1242);
     }
 }

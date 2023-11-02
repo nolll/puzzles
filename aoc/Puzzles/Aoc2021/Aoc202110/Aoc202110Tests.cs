@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202110;
@@ -10,7 +11,7 @@ public class Aoc202110Tests
         var syntaxChecker = new SyntaxChecker();
         var result = syntaxChecker.GetTotalErrorScore(Input);
 
-        Assert.That(result, Is.EqualTo(26397));
+        result.Should().Be(26397);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202110Tests
         var syntaxChecker = new SyntaxChecker();
         var result = syntaxChecker.GetErrorScore("{([(<{}[<>[]}>{[]{[(<()>");
 
-        Assert.That(result, Is.EqualTo(1197));
+        result.Should().Be(1197);
     }
 
     [Test]
@@ -28,7 +29,7 @@ public class Aoc202110Tests
         var syntaxChecker = new SyntaxChecker();
         var result = syntaxChecker.FindMiddleScore(Input.Trim());
 
-        Assert.That(result, Is.EqualTo(288957));
+        result.Should().Be(288957);
     }
 
     [Test]
@@ -37,7 +38,7 @@ public class Aoc202110Tests
         var syntaxChecker = new SyntaxChecker();
         var result = syntaxChecker.GetCompletionString("[({(<(())[]>[[{[]{<()<>>");
 
-        Assert.That(result, Is.EqualTo("}}]])})]"));
+        result.Should().Be("}}]])})]");
     }
 
     [Test]
@@ -46,7 +47,7 @@ public class Aoc202110Tests
         var syntaxChecker = new SyntaxChecker();
         var result = syntaxChecker.GetErrorScore("{([(<{}[<>[]}>{[]{[(<()>");
 
-        Assert.That(result, Is.EqualTo(1197));
+        result.Should().Be(1197);
     }
 
     private const string Input = """

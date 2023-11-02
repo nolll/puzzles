@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202201;
@@ -10,7 +11,7 @@ public class Year2022Day01Tests
         var calorieCounts = new CalorieCounts(Input);
         var result = calorieCounts.TopSum;
 
-        Assert.That(result, Is.EqualTo(24000));
+        result.Should().Be(24000);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Year2022Day01Tests
         var calorieCounts = new CalorieCounts(Input);
         var result = calorieCounts.Top3Sum;
 
-        Assert.That(result, Is.EqualTo(45000));
+        result.Should().Be(45000);
     }
 
     private const string Input = """

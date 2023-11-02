@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201825;
@@ -21,7 +22,7 @@ public class Aoc201825Tests
         var finder = new ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
-        Assert.That(constellationCount, Is.EqualTo(2));
+        constellationCount.Should().Be(2);
     }
 
     [Test]
@@ -43,7 +44,7 @@ public class Aoc201825Tests
         var finder = new ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
-        Assert.That(constellationCount, Is.EqualTo(4));
+        constellationCount.Should().Be(4);
     }
 
     [Test]
@@ -65,7 +66,7 @@ public class Aoc201825Tests
         var finder = new ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
-        Assert.That(constellationCount, Is.EqualTo(3));
+        constellationCount.Should().Be(3);
     }
 
     [Test]
@@ -87,6 +88,6 @@ public class Aoc201825Tests
         var finder = new ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
-        Assert.That(constellationCount, Is.EqualTo(8));
+        constellationCount.Should().Be(8);
     }
 }

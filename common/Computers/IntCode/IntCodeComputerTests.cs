@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.Computers.IntCode;
@@ -13,6 +14,6 @@ public class IntCodeComputerTests
         var computer = new ConsoleComputer(input);
         computer.Start();
         var result = computer.Result;
-        Assert.That(result, Is.EqualTo(expectedResult));
+        result.Should().Be(expectedResult);
     }
 }

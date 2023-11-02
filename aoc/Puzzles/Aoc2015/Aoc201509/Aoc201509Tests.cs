@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201509;
@@ -15,7 +16,7 @@ Dublin to Belfast = 141
 
         var calculator = new RouteCalculator(input.Trim());
 
-        Assert.That(calculator.ShortestDistance, Is.EqualTo(605));
-        Assert.That(calculator.LongestDistance, Is.EqualTo(982));
+        calculator.ShortestDistance.Should().Be(605);
+        calculator.LongestDistance.Should().Be(982);
     }
 }

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202111;
@@ -10,7 +11,7 @@ public class Aoc202111Tests
         var flasher = new OctopusFlasher(Input);
         var result = flasher.Run(100);
 
-        Assert.That(result, Is.EqualTo(1656));
+        result.Should().Be(1656);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202111Tests
         var flasher = new OctopusFlasher(Input);
         var result = flasher.Run();
 
-        Assert.That(result, Is.EqualTo(195));
+        result.Should().Be(195);
     }
 
     private const string Input = """

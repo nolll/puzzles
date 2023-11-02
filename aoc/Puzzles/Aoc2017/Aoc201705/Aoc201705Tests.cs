@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201705;
@@ -18,7 +19,7 @@ public class Aoc201705Tests
         var jumper = new InstructionJumper(input);
         jumper.Start1();
 
-        Assert.That(jumper.StepCount, Is.EqualTo(5));
+        jumper.StepCount.Should().Be(5);
     }
 
     [Test]
@@ -35,6 +36,6 @@ public class Aoc201705Tests
         var jumper = new InstructionJumper(input);
         jumper.Start2();
 
-        Assert.That(jumper.StepCount, Is.EqualTo(10));
+        jumper.StepCount.Should().Be(10);
     }
 }

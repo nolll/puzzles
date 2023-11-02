@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202007;
@@ -22,7 +23,7 @@ dotted black bags contain no other bags.
         var processor = new LuggageProcessor(input.Trim());
         var count = processor.NumberOfBagsThatCanContainGoldBags();
 
-        Assert.That(count, Is.EqualTo(4));
+        count.Should().Be(4);
     }
 
     [Test]
@@ -43,6 +44,6 @@ dotted black bags contain no other bags.
         var processor = new LuggageProcessor(input.Trim());
         var count = processor.NumberOfBagsThatAGoldBagContains();
 
-        Assert.That(count, Is.EqualTo(32));
+        count.Should().Be(32);
     }
 }

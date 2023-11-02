@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201504;
@@ -10,6 +11,6 @@ public class Aoc201504Tests
     {
         var coin = AdventCoinMiner.Mine(secretKey, 5);
 
-        Assert.That(coin, Is.EqualTo(expected));
+        coin.Should().Be(expected);
     }
 }

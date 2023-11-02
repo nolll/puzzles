@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.CoordinateSystems.CoordinateSystem3D;
@@ -16,11 +17,11 @@ public class Matrix3DTests
 
         var emptyRowsValue = matrix.ReadValueAt(0, 0, 0);
         var writtenValue = matrix.ReadValueAt(1, 1, 1);
-        Assert.That(emptyRowsValue, Is.EqualTo(DefaultValue));
-        Assert.That(writtenValue, Is.EqualTo(WriteValue));
-        Assert.That(matrix.Width, Is.EqualTo(3));
-        Assert.That(matrix.Height, Is.EqualTo(3));
-        Assert.That(matrix.Depth, Is.EqualTo(3));
+        emptyRowsValue.Should().Be(DefaultValue);
+        writtenValue.Should().Be(WriteValue);
+        matrix.Width.Should().Be(3);
+        matrix.Height.Should().Be(3);
+        matrix.Depth.Should().Be(3);
     }
 
     [Test]
@@ -32,11 +33,11 @@ public class Matrix3DTests
 
         var emptyRowsValue = matrix.ReadValueAt(0, 0, 0);
         var writtenValue = matrix.ReadValueAt(2, 2, 2);
-        Assert.That(emptyRowsValue, Is.EqualTo(DefaultValue));
-        Assert.That(writtenValue, Is.EqualTo(WriteValue));
-        Assert.That(matrix.Width, Is.EqualTo(5));
-        Assert.That(matrix.Height, Is.EqualTo(5));
-        Assert.That(matrix.Depth, Is.EqualTo(5));
+        emptyRowsValue.Should().Be(DefaultValue);
+        writtenValue.Should().Be(WriteValue);
+        matrix.Width.Should().Be(5);
+        matrix.Height.Should().Be(5);
+        matrix.Depth.Should().Be(5);
     }
 
     [Test]
@@ -48,15 +49,15 @@ public class Matrix3DTests
 
         matrix.MoveTo(1, 1, 1);
 
-        Assert.That(matrix.PerpendicularAdjacentCoords.Count, Is.EqualTo(6));
+        matrix.PerpendicularAdjacentCoords.Count.Should().Be(6);
 
         var adjacentCoords = matrix.PerpendicularAdjacentCoords;
         var cubesAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
         var cubesAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
         var cubesAtZZero = adjacentCoords.Where(o => o.Z == 0).ToList();
-        Assert.That(cubesAtXZero.Count, Is.EqualTo(1));
-        Assert.That(cubesAtYZero.Count, Is.EqualTo(1));
-        Assert.That(cubesAtZZero.Count, Is.EqualTo(1));
+        cubesAtXZero.Count.Should().Be(1);
+        cubesAtYZero.Count.Should().Be(1);
+        cubesAtZZero.Count.Should().Be(1);
     }
 
     [Test]
@@ -68,14 +69,14 @@ public class Matrix3DTests
 
         matrix.MoveTo(1, 1, 1);
 
-        Assert.That(matrix.AllAdjacentCoords.Count, Is.EqualTo(26));
+        matrix.AllAdjacentCoords.Count.Should().Be(26);
 
         var adjacentCoords = matrix.AllAdjacentCoords;
         var cubesAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
         var cubesAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
         var cubesAtZZero = adjacentCoords.Where(o => o.Z == 0).ToList();
-        Assert.That(cubesAtXZero.Count, Is.EqualTo(9));
-        Assert.That(cubesAtYZero.Count, Is.EqualTo(9));
-        Assert.That(cubesAtZZero.Count, Is.EqualTo(9));
+        cubesAtXZero.Count.Should().Be(9);
+        cubesAtYZero.Count.Should().Be(9);
+        cubesAtZZero.Count.Should().Be(9);
     }
 }

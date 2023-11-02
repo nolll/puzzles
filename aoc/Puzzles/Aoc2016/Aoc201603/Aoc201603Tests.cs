@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201603;
@@ -11,7 +12,7 @@ public class Aoc201603Tests
         var validator = new TriangleValidator();
         var isValid = validator.IsValid(triangleSpec);
 
-        Assert.That(isValid, Is.EqualTo(expectedResult));
+        isValid.Should().Be(expectedResult);
     }
 
     [Test]
@@ -25,7 +26,7 @@ public class Aoc201603Tests
         var validator = new TriangleValidator();
         var validCount = validator.GetHorizontalValidCount(input);
 
-        Assert.That(validCount, Is.EqualTo(1));
+        validCount.Should().Be(1);
     }
 
     [Test]
@@ -43,6 +44,6 @@ public class Aoc201603Tests
         var validator = new TriangleValidator();
         var validCount = validator.GetVerticalValidCount(input);
 
-        Assert.That(validCount, Is.EqualTo(6));
+        validCount.Should().Be(6);
     }
 }

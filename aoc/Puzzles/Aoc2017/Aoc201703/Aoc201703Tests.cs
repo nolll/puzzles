@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201703;
@@ -12,6 +13,6 @@ public class Aoc201703Tests
     {
         var spiralMemory = new SpiralMemory(targetSquare, SpiralMemoryMode.RunToTarget);
 
-        Assert.That(spiralMemory.Distance, Is.EqualTo(expectedSteps));
+        spiralMemory.Distance.Should().Be(expectedSteps);
     }
 }

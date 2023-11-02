@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201809;
@@ -13,6 +14,6 @@ public class Aoc201809Tests
     {
         var game = new MarbleGame(playerCount, lastMarbleValue);
 
-        Assert.That(game.WinnerScore, Is.EqualTo(expectedScore));
+        game.WinnerScore.Should().Be(expectedScore);
     }
 }

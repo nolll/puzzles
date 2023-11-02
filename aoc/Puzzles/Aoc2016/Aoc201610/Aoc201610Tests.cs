@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201610;
@@ -19,6 +20,6 @@ value 2 goes to bot 2
         var botSimulator = new BotSimulator(input.Trim());
         var botId = botSimulator.FindIdByChips(2, 5);
 
-        Assert.That(botId, Is.EqualTo(2));
+        botId.Should().Be(2);
     }
 }

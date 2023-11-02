@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201704;
@@ -12,7 +13,7 @@ public class Aoc201704Tests
         var validator = new PassphraseValidator();
         var coin = validator.IsValid1(input);
 
-        Assert.That(coin, Is.EqualTo(expected));
+        coin.Should().Be(expected);
     }
 
     [TestCase("abcde fghij", true)]
@@ -25,6 +26,6 @@ public class Aoc201704Tests
         var validator = new PassphraseValidator();
         var coin = validator.IsValid2(input);
 
-        Assert.That(coin, Is.EqualTo(expected));
+        coin.Should().Be(expected);
     }
 }

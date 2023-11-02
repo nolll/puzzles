@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201716;
@@ -13,7 +14,7 @@ public class Aoc201716Tests
         var dancingPrograms = new DancingPrograms(programs);
         dancingPrograms.Dance(input, 1);
 
-        Assert.That(dancingPrograms.Programs, Is.EqualTo("baedc"));
+        dancingPrograms.Programs.Should().Be("baedc");
     }
 
     [Test]
@@ -25,6 +26,6 @@ public class Aoc201716Tests
         var dancingPrograms = new DancingPrograms(programs);
         dancingPrograms.Dance(input, 1_000_000_000);
 
-        Assert.That(dancingPrograms.Programs, Is.EqualTo("abcde"));
+        dancingPrograms.Programs.Should().Be("abcde");
     }
 }

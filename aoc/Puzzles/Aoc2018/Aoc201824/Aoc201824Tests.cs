@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201824;
@@ -22,11 +23,11 @@ Infection:
         var system = new ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());
         system.Fight();
 
-        Assert.That(system.ImmuneGroups.Count, Is.EqualTo(0));
-        Assert.That(system.InfectionGroups.Count, Is.EqualTo(2));
-        Assert.That(system.InfectionGroups[0].UnitCount, Is.EqualTo(782));
-        Assert.That(system.InfectionGroups[1].UnitCount, Is.EqualTo(4434));
-        Assert.That(system.WinningArmyUnitCount, Is.EqualTo(5216));
+        system.ImmuneGroups.Count.Should().Be(0);
+        system.InfectionGroups.Count.Should().Be(2);
+        system.InfectionGroups[0].UnitCount.Should().Be(782);
+        system.InfectionGroups[1].UnitCount.Should().Be(4434);
+        system.WinningArmyUnitCount.Should().Be(5216);
     }
 
     [Test]
@@ -35,7 +36,7 @@ Infection:
         var system = new ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());
         system.Fight(1570);
 
-        Assert.That(system.WinningArmyUnitCount, Is.EqualTo(51));
+        system.WinningArmyUnitCount.Should().Be(51);
     }
 
     [Test]
@@ -44,6 +45,6 @@ Infection:
         var system = new ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());
         system.FightUntilImmuneSystemWins();
 
-        Assert.That(system.WinningArmyUnitCount, Is.EqualTo(51));
+        system.WinningArmyUnitCount.Should().Be(51);
     }
 }

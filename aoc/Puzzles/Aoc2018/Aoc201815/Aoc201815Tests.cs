@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201815;
@@ -20,7 +21,7 @@ public class Aoc201815Tests
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
 
-        Assert.That(battle.Outcome, Is.EqualTo(27730));
+        battle.Outcome.Should().Be(27730);
     }
 
     [Test]
@@ -39,7 +40,7 @@ public class Aoc201815Tests
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
 
-        Assert.That(battle.Outcome, Is.EqualTo(36334));
+        battle.Outcome.Should().Be(36334);
     }
 
     [Test]
@@ -58,7 +59,7 @@ public class Aoc201815Tests
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
 
-        Assert.That(battle.Outcome, Is.EqualTo(39514));
+        battle.Outcome.Should().Be(39514);
     }
 
     [Test]
@@ -77,7 +78,7 @@ public class Aoc201815Tests
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
 
-        Assert.That(battle.Outcome, Is.EqualTo(27755));
+        battle.Outcome.Should().Be(27755);
     }
 
 
@@ -97,7 +98,7 @@ public class Aoc201815Tests
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
 
-        Assert.That(battle.Outcome, Is.EqualTo(28944));
+        battle.Outcome.Should().Be(28944);
     }
 
 
@@ -119,7 +120,7 @@ public class Aoc201815Tests
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
 
-        Assert.That(battle.Outcome, Is.EqualTo(18740));
+        battle.Outcome.Should().Be(18740);
     }
 
     [Test]
@@ -138,7 +139,7 @@ public class Aoc201815Tests
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
 
-        Assert.That(battle.Outcome, Is.EqualTo(4988));
+        battle.Outcome.Should().Be(4988);
     }
 
     [Test]
@@ -157,7 +158,7 @@ public class Aoc201815Tests
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
 
-        Assert.That(battle.Outcome, Is.EqualTo(31284));
+        battle.Outcome.Should().Be(31284);
     }
 
     [Test]
@@ -176,7 +177,7 @@ public class Aoc201815Tests
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
 
-        Assert.That(battle.Outcome, Is.EqualTo(3478));
+        battle.Outcome.Should().Be(3478);
     }
 
     [Test]
@@ -195,7 +196,7 @@ public class Aoc201815Tests
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
 
-        Assert.That(battle.Outcome, Is.EqualTo(6474));
+        battle.Outcome.Should().Be(6474);
     }
 
     [Test]
@@ -216,6 +217,6 @@ public class Aoc201815Tests
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
 
-        Assert.That(battle.Outcome, Is.EqualTo(1140));
+        battle.Outcome.Should().Be(1140);
     }
 }

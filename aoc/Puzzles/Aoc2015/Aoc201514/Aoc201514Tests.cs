@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201514;
@@ -16,7 +17,7 @@ Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.
 
         var race = new ReindeerRace(input.Trim(), time);
 
-        Assert.That(race.WinningDistance, Is.EqualTo(1120));
+        race.WinningDistance.Should().Be(1120);
     }
 
     [Test]
@@ -31,6 +32,6 @@ Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.
 
         var race = new ReindeerRace(input.Trim(), time);
 
-        Assert.That(race.WinningScore, Is.EqualTo(689));
+        race.WinningScore.Should().Be(689);
     }
 }

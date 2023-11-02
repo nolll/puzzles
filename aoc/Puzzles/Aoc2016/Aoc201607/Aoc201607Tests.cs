@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201607;
@@ -13,7 +14,7 @@ public class Aoc201607Tests
         var ipTester = new IpTester();
         var result = ipTester.SupportsTls(ip);
 
-        Assert.That(result, Is.EqualTo(result));
+        result.Should().Be(result);
     }
 
     [TestCase("aba[bab]xyz", true)]
@@ -25,6 +26,6 @@ public class Aoc201607Tests
         var ipTester = new IpTester();
         var result = ipTester.SupportsSsl(ip);
 
-        Assert.That(result, Is.EqualTo(result));
+        result.Should().Be(result);
     }
 }

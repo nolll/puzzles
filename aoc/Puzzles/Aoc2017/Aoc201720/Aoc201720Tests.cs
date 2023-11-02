@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201720;
@@ -22,8 +23,8 @@ p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>
         var particleTracker = new ParticleTracker(Input1.Trim());
         particleTracker.Run(1);
 
-        Assert.That(particleTracker.Particles[0].X, Is.EqualTo(4));
-        Assert.That(particleTracker.Particles[1].X, Is.EqualTo(2));
+        particleTracker.Particles[0].X.Should().Be(4);
+        particleTracker.Particles[1].X.Should().Be(2);
     }
 
     [Test]
@@ -32,8 +33,8 @@ p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>
         var particleTracker = new ParticleTracker(Input1.Trim());
         particleTracker.Run(2);
 
-        Assert.That(particleTracker.Particles[0].X, Is.EqualTo(4));
-        Assert.That(particleTracker.Particles[1].X, Is.EqualTo(-2));
+        particleTracker.Particles[0].X.Should().Be(4);
+        particleTracker.Particles[1].X.Should().Be(-2);
     }
 
     [Test]
@@ -42,8 +43,8 @@ p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>
         var particleTracker = new ParticleTracker(Input1.Trim());
         particleTracker.Run(3);
 
-        Assert.That(particleTracker.Particles[0].X, Is.EqualTo(3));
-        Assert.That(particleTracker.Particles[1].X, Is.EqualTo(-8));
+        particleTracker.Particles[0].X.Should().Be(3);
+        particleTracker.Particles[1].X.Should().Be(-8);
     }
 
     [Test]
@@ -52,7 +53,7 @@ p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>
         var particleTracker = new ParticleTracker(Input1.Trim());
         var particle = particleTracker.GetClosestParticleInTheLongRunSimple();
 
-        Assert.That(particle, Is.EqualTo(0));
+        particle.Should().Be(0);
     }
 
     [Test]
@@ -61,6 +62,6 @@ p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>
         var particleTracker = new ParticleTracker(Input2.Trim());
         var count = particleTracker.GetRemainingParticleCount();
 
-        Assert.That(count, Is.EqualTo(1));
+        count.Should().Be(1);
     }
 }

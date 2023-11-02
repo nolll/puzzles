@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202206;
@@ -12,7 +13,7 @@ public class Aoc202206Tests
     {
         var result = TuningTrouble.FindMarker(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19)]
@@ -24,6 +25,6 @@ public class Aoc202206Tests
     {
         var result = TuningTrouble.FindMessage(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

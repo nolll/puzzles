@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202203;
@@ -9,7 +10,7 @@ public class Aoc202203Tests
     {
         var result = Rucksacks.GetPriority1(Input);
 
-        Assert.That(result, Is.EqualTo(157));
+        result.Should().Be(157);
     }
 
     [Test]
@@ -17,7 +18,7 @@ public class Aoc202203Tests
     {
         var result = Rucksacks.GetPriority2(Input);
 
-        Assert.That(result, Is.EqualTo(70));
+        result.Should().Be(70);
     }
 
     private const string Input = """

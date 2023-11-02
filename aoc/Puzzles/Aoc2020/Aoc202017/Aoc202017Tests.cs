@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202017;
@@ -16,7 +17,7 @@ public class Aoc202017Tests
         var cube = new ConwayCube();
         var activeCubes = cube.Boot3D(input, 6);
 
-        Assert.That(activeCubes, Is.EqualTo(112));
+        activeCubes.Should().Be(112);
     }
 
     [Test]
@@ -31,6 +32,6 @@ public class Aoc202017Tests
         var cube = new ConwayCube();
         var activeCubes = cube.Boot4D(input, 6);
 
-        Assert.That(activeCubes, Is.EqualTo(848));
+        activeCubes.Should().Be(848);
     }
 }

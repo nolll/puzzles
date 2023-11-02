@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202022;
@@ -10,7 +11,7 @@ public class Aoc202022Tests
         var game = new CardCombatGame(Input);
         var score = game.Play();
 
-        Assert.That(score, Is.EqualTo(306));
+        score.Should().Be(306);
     }
 
     [Test]
@@ -31,7 +32,7 @@ Player 2:
         game.PlayRecursive();
         const bool ended = true;
 
-        Assert.That(ended, Is.True);
+        ended.Should().BeTrue();
     }
 
     [Test]
@@ -40,7 +41,7 @@ Player 2:
         var game = new CardCombatGame(Input);
         var score = game.PlayRecursive();
 
-        Assert.That(score, Is.EqualTo(291));
+        score.Should().Be(291);
     }
 
     private const string Input = """

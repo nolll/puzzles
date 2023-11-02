@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202118;
@@ -9,8 +10,8 @@ public class Aoc202118Tests
     {
         var number = new SnailfishNumber("[1,2]");
 
-        Assert.That(number.Left.LiteralValue, Is.EqualTo(1));
-        Assert.That(number.Right.LiteralValue, Is.EqualTo(2));
+        number.Left.LiteralValue.Should().Be(1);
+        number.Right.LiteralValue.Should().Be(2);
     }
 
     [Test]
@@ -18,9 +19,9 @@ public class Aoc202118Tests
     {
         var number = new SnailfishNumber("[[1,2],3]");
 
-        Assert.That(number.Left.Left.LiteralValue, Is.EqualTo(1));
-        Assert.That(number.Left.Right.LiteralValue, Is.EqualTo(2));
-        Assert.That(number.Right.LiteralValue, Is.EqualTo(3));
+        number.Left.Left.LiteralValue.Should().Be(1);
+        number.Left.Right.LiteralValue.Should().Be(2);
+        number.Right.LiteralValue.Should().Be(3);
     }
 
     [Test]
@@ -28,9 +29,9 @@ public class Aoc202118Tests
     {
         var number = new SnailfishNumber("[9,[8,7]]");
 
-        Assert.That(number.Left.LiteralValue, Is.EqualTo(9));
-        Assert.That(number.Right.Left.LiteralValue, Is.EqualTo(8));
-        Assert.That(number.Right.Right.LiteralValue, Is.EqualTo(7));
+        number.Left.LiteralValue.Should().Be(9);
+        number.Right.Left.LiteralValue.Should().Be(8);
+        number.Right.Right.LiteralValue.Should().Be(7);
     }
 
     [Test]
@@ -38,10 +39,10 @@ public class Aoc202118Tests
     {
         var number = new SnailfishNumber("[[1,9],[8,5]]");
 
-        Assert.That(number.Left.Left.LiteralValue, Is.EqualTo(1));
-        Assert.That(number.Left.Right.LiteralValue, Is.EqualTo(9));
-        Assert.That(number.Right.Left.LiteralValue, Is.EqualTo(8));
-        Assert.That(number.Right.Right.LiteralValue, Is.EqualTo(5));
+        number.Left.Left.LiteralValue.Should().Be(1);
+        number.Left.Right.LiteralValue.Should().Be(9);
+        number.Right.Left.LiteralValue.Should().Be(8);
+        number.Right.Right.LiteralValue.Should().Be(5);
     }
 
     [Test]
@@ -49,16 +50,16 @@ public class Aoc202118Tests
     {
         var number = new SnailfishNumber("[[[[1,2],[3,4]],[[5,6],[7,8]]],9]");
 
-        Assert.That(number.ToString(), Is.EqualTo("[[[[1,2],[3,4]],[[5,6],[7,8]]],9]"));
-        Assert.That(number.Left.Left.Left.Left.LiteralValue, Is.EqualTo(1));
-        Assert.That(number.Left.Left.Left.Right.LiteralValue, Is.EqualTo(2));
-        Assert.That(number.Left.Left.Right.Left.LiteralValue, Is.EqualTo(3));
-        Assert.That(number.Left.Left.Right.Right.LiteralValue, Is.EqualTo(4));
-        Assert.That(number.Left.Right.Left.Left.LiteralValue, Is.EqualTo(5));
-        Assert.That(number.Left.Right.Left.Right.LiteralValue, Is.EqualTo(6));
-        Assert.That(number.Left.Right.Right.Left.LiteralValue, Is.EqualTo(7));
-        Assert.That(number.Left.Right.Right.Right.LiteralValue, Is.EqualTo(8));
-        Assert.That(number.Right.LiteralValue, Is.EqualTo(9));
+        number.ToString().Should().Be("[[[[1,2],[3,4]],[[5,6],[7,8]]],9]");
+        number.Left.Left.Left.Left.LiteralValue.Should().Be(1);
+        number.Left.Left.Left.Right.LiteralValue.Should().Be(2);
+        number.Left.Left.Right.Left.LiteralValue.Should().Be(3);
+        number.Left.Left.Right.Right.LiteralValue.Should().Be(4);
+        number.Left.Right.Left.Left.LiteralValue.Should().Be(5);
+        number.Left.Right.Left.Right.LiteralValue.Should().Be(6);
+        number.Left.Right.Right.Left.LiteralValue.Should().Be(7);
+        number.Left.Right.Right.Right.LiteralValue.Should().Be(8);
+        number.Right.LiteralValue.Should().Be(9);
     }
 
     [Test]
@@ -66,7 +67,7 @@ public class Aoc202118Tests
     {
         var number = new SnailfishNumber("[[[9,[3,8]],[[0,9],6]],[[[3,7],[4,9]],3]]");
 
-        Assert.That(number.ToString(), Is.EqualTo("[[[9,[3,8]],[[0,9],6]],[[[3,7],[4,9]],3]]"));
+        number.ToString().Should().Be("[[[9,[3,8]],[[0,9],6]],[[[3,7],[4,9]],3]]");
     }
 
     [Test]
@@ -74,7 +75,7 @@ public class Aoc202118Tests
     {
         var number = new SnailfishNumber("[[[[1,3],[5,3]],[[1,3],[8,7]]],[[[4,9],[6,9]],[[8,2],[7,3]]]]");
 
-        Assert.That(number.ToString(), Is.EqualTo("[[[[1,3],[5,3]],[[1,3],[8,7]]],[[[4,9],[6,9]],[[8,2],[7,3]]]]"));
+        number.ToString().Should().Be("[[[[1,3],[5,3]],[[1,3],[8,7]]],[[[4,9],[6,9]],[[8,2],[7,3]]]]");
     }
 
     [Test]
@@ -82,7 +83,7 @@ public class Aoc202118Tests
     {
         var number = new SnailfishNumber("[[[[0,7],4],[5,[0,3]]],[1,1]]");
 
-        Assert.That(number.ToString(), Is.EqualTo("[[[[0,7],4],[5,[0,3]]],[1,1]]"));
+        number.ToString().Should().Be("[[[[0,7],4],[5,[0,3]]],[1,1]]");
     }
 
     [Test]
@@ -92,7 +93,7 @@ public class Aoc202118Tests
         var number = new SnailfishNumber("[[[[[9,8],1],2],3],4]");
         var result = math.Explode(number);
 
-        Assert.That(result.ToString(), Is.EqualTo("[[[[0,9],2],3],4]"));
+        result.ToString().Should().Be("[[[[0,9],2],3],4]");
     }
 
     [Test]
@@ -102,7 +103,7 @@ public class Aoc202118Tests
         var number = new SnailfishNumber("[7,[6,[5,[4,[3,2]]]]]");
         var result = math.Explode(number);
 
-        Assert.That(result.ToString(), Is.EqualTo("[7,[6,[5,[7,0]]]]"));
+        result.ToString().Should().Be("[7,[6,[5,[7,0]]]]");
     }
 
     [Test]
@@ -112,7 +113,7 @@ public class Aoc202118Tests
         var number = new SnailfishNumber("[[3,[2,[1,[7,3]]]],[6,[5,[4,[3,2]]]]]");
         var result = math.Explode(number);
 
-        Assert.That(result.ToString(), Is.EqualTo("[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]"));
+        result.ToString().Should().Be("[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]");
     }
 
     [Test]
@@ -123,7 +124,7 @@ public class Aoc202118Tests
         var number2 = new SnailfishNumber("[1,1]");
         var result = math.Sum(number1, number2);
 
-        Assert.That(result.ToString(), Is.EqualTo("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]"));
+        result.ToString().Should().Be("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]");
     }
 
     [Test]
@@ -141,7 +142,7 @@ public class Aoc202118Tests
         var math = new SnailfishMath();
         var result = math.Sum(input.Trim());
 
-        Assert.That(result.ToString(), Is.EqualTo("[[[[5,0],[7,4]],[5,5]],[6,6]]"));
+        result.ToString().Should().Be("[[[[5,0],[7,4]],[5,5]],[6,6]]");
     }
 
     [Test]
@@ -163,7 +164,7 @@ public class Aoc202118Tests
         var math = new SnailfishMath();
         var result = math.Sum(input.Trim());
 
-        Assert.That(result.ToString(), Is.EqualTo("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]"));
+        result.ToString().Should().Be("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]");
     }
 
     [Test]
@@ -172,7 +173,7 @@ public class Aoc202118Tests
         var math = new SnailfishMath();
         var number = new SnailfishNumber("[[1,2],[[3,4],5]]");
 
-        Assert.That(number.Magnitude, Is.EqualTo(143));
+        number.Magnitude.Should().Be(143);
     }
 
     [Test]
@@ -181,7 +182,7 @@ public class Aoc202118Tests
         var math = new SnailfishMath();
         var number = new SnailfishNumber("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]");
 
-        Assert.That(number.Magnitude, Is.EqualTo(3488));
+        number.Magnitude.Should().Be(3488);
     }
 
     [Test]
@@ -203,8 +204,8 @@ public class Aoc202118Tests
         var math = new SnailfishMath();
         var result = math.Sum(input.Trim());
 
-        Assert.That(result.ToString(), Is.EqualTo("[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]"));
-        Assert.That(result.Magnitude, Is.EqualTo(4140));
+        result.ToString().Should().Be("[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]");
+        result.Magnitude.Should().Be(4140);
     }
 
     [Test]
@@ -226,6 +227,6 @@ public class Aoc202118Tests
         var math = new SnailfishMath();
         var result = math.LargestMagnitude(input.Trim());
 
-        Assert.That(result, Is.EqualTo(3993));
+        result.Should().Be(3993);
     }
 }

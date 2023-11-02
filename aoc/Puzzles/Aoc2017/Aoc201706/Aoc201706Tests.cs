@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201706;
@@ -11,7 +12,7 @@ public class Aoc201706Tests
         var reallocator = new MemoryReallocator(input);
         reallocator.Run();
 
-        Assert.That(reallocator.Steps, Is.EqualTo(5));
-        Assert.That(reallocator.LoopSize, Is.EqualTo(4));
+        reallocator.Steps.Should().Be(5);
+        reallocator.LoopSize.Should().Be(4);
     }
 }

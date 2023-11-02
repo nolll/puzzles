@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201523;
@@ -17,6 +18,6 @@ inc a
         var computer = new ChristmasComputer();
         computer.Run(input.Trim());
 
-        Assert.That(computer.RegisterA, Is.EqualTo(2));
+        computer.RegisterA.Should().Be(2);
     }
 }

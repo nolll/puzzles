@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Common.Numbers;
 
@@ -12,7 +13,7 @@ public class ConversionTests
     {
         var result = Conversion.ToBinary(n);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase(1, "I")]
@@ -42,6 +43,6 @@ public class ConversionTests
     {
         var result = Conversion.ToRoman(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

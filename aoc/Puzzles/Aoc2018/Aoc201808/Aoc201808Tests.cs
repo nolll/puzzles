@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201808;
@@ -11,7 +12,7 @@ public class Aoc201808Tests
 
         var calculator = new LicenseNumberCalculator(input);
 
-        Assert.That(calculator.MetadataSum, Is.EqualTo(138));
-        Assert.That(calculator.RootNodeValue, Is.EqualTo(66));
+        calculator.MetadataSum.Should().Be(138);
+        calculator.RootNodeValue.Should().Be(66);
     }
 }

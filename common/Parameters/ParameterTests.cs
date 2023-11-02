@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Common.Parameters;
 
@@ -9,9 +10,9 @@ public class ParameterTests
     {
         var result = Puzzles.Parameters.Parse("");
 
-        Assert.That(result.Id, Is.Null);
-        Assert.That(result.Tags, Is.Empty);
-        Assert.That(result.ShowHelp, Is.False);
+        result.Id.Should().BeNull();
+        result.Tags.Should().BeEmpty();
+        result.ShowHelp.Should().BeFalse();
     }
 
     [TestCase("--puzzle 1")]
@@ -20,7 +21,7 @@ public class ParameterTests
     {
         var result = Puzzles.Parameters.Parse(input);
 
-        Assert.That(result.Id, Is.EqualTo("1"));
+        result.Id.Should().Be("1");
     }
 
     [TestCase("--tags 1,test,3")]
@@ -29,9 +30,9 @@ public class ParameterTests
     {
         var result = Puzzles.Parameters.Parse(input);
 
-        Assert.That(result.Tags[0], Is.EqualTo("1"));
-        Assert.That(result.Tags[1], Is.EqualTo("test"));
-        Assert.That(result.Tags[2], Is.EqualTo("3"));
+        result.Tags[0].Should().Be("1");
+        result.Tags[1].Should().Be("test");
+        result.Tags[2].Should().Be("3");
     }
     
     [TestCase("--help")]
@@ -42,7 +43,7 @@ public class ParameterTests
     {
         var result = Puzzles.Parameters.Parse(input);
 
-        Assert.That(result.ShowHelp, Is.True);
+        result.ShowHelp.Should().BeTrue();
     }
 
     [TestCase("--aaa", true)]
@@ -60,7 +61,7 @@ public class ParameterTests
         var parser = new ParameterParser(input.Split(' '));
         var result = parser.GetBoolValue("-a", "--aaa");
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase("--aaa", null)]
@@ -78,6 +79,6 @@ public class ParameterTests
         var parser = new ParameterParser(input.Split(' '));
         var result = parser.GetIntValue("-a", "--aaa");
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

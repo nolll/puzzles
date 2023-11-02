@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202012;
@@ -19,7 +20,7 @@ F11
         system.Run();
         var result = system.DistanceTravelled;
 
-        Assert.That(result, Is.EqualTo(25));
+        result.Should().Be(25);
     }
 
     [Test]
@@ -37,6 +38,6 @@ F11
         system.Run();
         var result = system.DistanceTravelled;
 
-        Assert.That(result, Is.EqualTo(286));
+        result.Should().Be(286);
     }
 }

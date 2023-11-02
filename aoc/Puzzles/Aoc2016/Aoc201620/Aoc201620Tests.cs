@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201620;
@@ -16,7 +17,7 @@ public class Aoc201620Tests
         var rules = new FirewallRules(input.Trim());
         var lowestIp = rules.GetLowestUnblockedIp();
 
-        Assert.That(lowestIp, Is.EqualTo(3));
+        lowestIp.Should().Be(3);
     }
 
     [Test]
@@ -31,6 +32,6 @@ public class Aoc201620Tests
         var rules = new FirewallRules(input.Trim());
         var lowestIp = rules.GetAllowedIpCount(9);
 
-        Assert.That(lowestIp, Is.EqualTo(2));
+        lowestIp.Should().Be(2);
     }
 }

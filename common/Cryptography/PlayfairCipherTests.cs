@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Common.Cryptography;
 
@@ -11,7 +12,7 @@ public class PlayfairCipherTests
 
         var result = new PlayfairCipher("play fair").CreateStringCipherBoard();
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class PlayfairCipherTests
     {
         var result = new PlayfairCipher("play fair").Encrypt("flawless");
 
-        Assert.That(result, Is.EqualTo("pabapgxyxy"));
+        result.Should().Be("pabapgxyxy");
     }
 
     [Test]
@@ -27,6 +28,6 @@ public class PlayfairCipherTests
     {
         var result = new PlayfairCipher("play fair").Decrypt("pabapgxyxy");
 
-        Assert.That(result, Is.EqualTo("flawlesxsx"));
+        result.Should().Be("flawlesxsx");
     }
 }

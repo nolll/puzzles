@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201602;
@@ -17,7 +18,7 @@ UUUUD
         var finder = new SquareKeyCodeFinder();
         var code = finder.Find(input.Trim());
 
-        Assert.That(code, Is.EqualTo("1985"));
+        code.Should().Be("1985");
     }
 
     [Test]
@@ -33,6 +34,6 @@ UUUUD
         var finder = new DiamondKeyCodeFinder();
         var code = finder.Find(input.Trim());
 
-        Assert.That(code, Is.EqualTo("5DB3"));
+        code.Should().Be("5DB3");
     }
 }

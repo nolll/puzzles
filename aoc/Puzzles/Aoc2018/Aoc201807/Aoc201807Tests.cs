@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201807;
@@ -20,7 +21,7 @@ Step F must be finished before step E can begin.
         var assembler = new SleighAssembler(input.Trim(), 1, 0);
         var result = assembler.Assemble();
 
-        Assert.That(result.Order, Is.EqualTo("CABDFE"));
+        result.Order.Should().Be("CABDFE");
     }
 
     [Test]
@@ -39,7 +40,7 @@ Step F must be finished before step E can begin.
         var assembler = new SleighAssembler(input.Trim(), 2, 0);
         var result = assembler.Assemble();
 
-        Assert.That(result.Order, Is.EqualTo("CABFDE"));
-        Assert.That(result.Time, Is.EqualTo(15));
+        result.Order.Should().Be("CABFDE");
+        result.Time.Should().Be(15);
     }
 }

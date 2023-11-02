@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201617;
@@ -12,6 +13,6 @@ public class Aoc201617Tests
         var maze = new LockedDoorMaze();
         maze.FindPaths(passcode);
 
-        Assert.That(maze.ShortestPath, Is.EqualTo(expectedPath));
+        maze.ShortestPath.Should().Be(expectedPath);
     }
 }

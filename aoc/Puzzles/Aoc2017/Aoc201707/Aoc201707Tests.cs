@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201707;
@@ -26,7 +27,7 @@ cntj (57)
         var towers = new RecursiveTowers(Input);
         var name = towers.BottomName;
 
-        Assert.That(name, Is.EqualTo("tknk"));
+        name.Should().Be("tknk");
     }
 
     [Test]
@@ -35,6 +36,6 @@ cntj (57)
         var towers = new RecursiveTowers(Input);
         var diff = towers.AdjustedWeight;
 
-        Assert.That(diff, Is.EqualTo(60));
+        diff.Should().Be(60);
     }
 }

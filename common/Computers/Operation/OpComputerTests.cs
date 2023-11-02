@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.Computers.Operation;
@@ -13,7 +14,7 @@ public class OpComputerTests
         var computer = new OpComputer();
         var matchingOperations = computer.GetMatchingOperations(before, after, 2, 1, 2);
 
-        Assert.That(matchingOperations.Count, Is.EqualTo(3));
+        matchingOperations.Count.Should().Be(3);
     }
 
     [Test]
@@ -33,6 +34,6 @@ seti 9 0 5
         var computer = new OpComputer();
         var value = computer.RunInstructionPointerProgram(input, 0, false, false);
 
-        Assert.That(value, Is.EqualTo(6));
+        value.Should().Be(6);
     }
 }

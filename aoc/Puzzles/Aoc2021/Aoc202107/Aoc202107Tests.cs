@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202107;
@@ -10,7 +11,7 @@ public class Aoc202107Tests
         var crabSubmarines = new CrabSubmarines();
         var result = crabSubmarines.GetFuel1(Input, false);
 
-        Assert.That(result, Is.EqualTo(37));
+        result.Should().Be(37);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202107Tests
         var crabSubmarines = new CrabSubmarines();
         var result = crabSubmarines.GetFuel1(Input, true);
 
-        Assert.That(result, Is.EqualTo(168));
+        result.Should().Be(168);
     }
 
     [TestCase(16, 5, 11)]
@@ -29,7 +30,7 @@ public class Aoc202107Tests
     {
         var result = CrabSubmarines.GetCost(a, b);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase(16, 5, 66)]
@@ -46,7 +47,7 @@ public class Aoc202107Tests
         var crabSubmarines = new CrabSubmarines();
         var result = crabSubmarines.GetCrabEnginerringCost(a, b);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     private const string Input = "16,1,2,0,4,2,7,1,2,14";

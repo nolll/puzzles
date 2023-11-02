@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202004;
@@ -11,7 +12,7 @@ public class Aoc202004Tests
         var passport = new PassportProcessor.Passport(input);
         var isValid = passport.HasAllFields();
 
-        Assert.That(isValid, Is.True);
+        isValid.Should().BeTrue();
     }
 
     [TestCase("iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884 hcl:#cfa07d byr:1929")]
@@ -21,7 +22,7 @@ public class Aoc202004Tests
         var passport = new PassportProcessor.Passport(input);
         var isValid = passport.HasAllFields();
 
-        Assert.That(isValid, Is.False);
+        isValid.Should().BeFalse();
     }
 
     [Test]
@@ -46,7 +47,7 @@ iyr:2011 ecl:brn hgt:59in
         var processor = new PassportProcessor(input);
         var count = processor.GetNumberOfPassportsThatHasAllFields();
 
-        Assert.That(count, Is.EqualTo(2));
+        count.Should().Be(2);
     }
 
     [Test]
@@ -70,7 +71,7 @@ iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719
         var processor = new PassportProcessor(input);
         var count = processor.GetNumberOfValidPassports();
 
-        Assert.That(count, Is.EqualTo(4));
+        count.Should().Be(4);
     }
 
     [Test]
@@ -95,6 +96,6 @@ pid:3556412378 byr:2007
         var processor = new PassportProcessor(input);
         var count = processor.GetNumberOfValidPassports();
 
-        Assert.That(count, Is.EqualTo(0));
+        count.Should().Be(0);
     }
 }

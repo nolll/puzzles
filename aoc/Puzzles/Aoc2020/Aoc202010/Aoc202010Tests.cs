@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202010;
@@ -59,7 +60,7 @@ public class Aoc202010Tests
         var chain = new PowerAdapterChain(input.Trim());
         var product = chain.DifferenceProduct;
 
-        Assert.That(product, Is.EqualTo(expected));
+        product.Should().Be(expected);
     }
 
     [TestCase(Input1, 8)]
@@ -69,6 +70,6 @@ public class Aoc202010Tests
         var chain = new PowerAdapterChain(input.Trim());
         var combinations = chain.GetTotalNumberOfCombinations();
 
-        Assert.That(combinations, Is.EqualTo(expected));
+        combinations.Should().Be(expected);
     }
 }

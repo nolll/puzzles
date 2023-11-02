@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201906;
@@ -24,7 +25,7 @@ K)L
         var calculator = new OrbitCalculator(input);
         var result = calculator.GetOrbitCount();
 
-        Assert.That(result, Is.EqualTo(42));
+        result.Should().Be(42);
     }
 
     [Test]
@@ -49,6 +50,6 @@ I)SAN
         var calculator = new OrbitCalculator(input);
         var result = calculator.GetSantaDistance();
 
-        Assert.That(result, Is.EqualTo(4));
+        result.Should().Be(4);
     }
 }

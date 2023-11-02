@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202224;
@@ -10,7 +11,7 @@ public class Aoc202224Tests
         var blizzardNavigation = new BlizzardNavigation(Input);
         var result = blizzardNavigation.Part1();
 
-        Assert.That(result, Is.EqualTo(18));
+        result.Should().Be(18);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202224Tests
         var blizzardNavigation = new BlizzardNavigation(Input);
         var result = blizzardNavigation.Part2();
 
-        Assert.That(result, Is.EqualTo(54));
+        result.Should().Be(54);
     }
 
     private const string Input = """

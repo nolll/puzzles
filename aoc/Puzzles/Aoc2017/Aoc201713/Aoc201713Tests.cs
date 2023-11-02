@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201713;
@@ -16,7 +17,7 @@ public class Aoc201713Tests
 
         var scanner = new PacketScanner(input.Trim());
         var severity = scanner.GetSeverity();
-        Assert.That(severity, Is.EqualTo(24));
+        severity.Should().Be(24);
     }
         
     [TestCase(0, 0, false)]
@@ -34,7 +35,7 @@ public class Aoc201713Tests
         var layer = new FirewallLayer(range);
         var pos = layer.IsCaught(iteration);
 
-        Assert.That(pos, Is.EqualTo(expected));
+        pos.Should().Be(expected);
     }
 
     [Test]
@@ -49,6 +50,6 @@ public class Aoc201713Tests
 
         var scanner = new PacketScanner(input.Trim());
         var delay = scanner.DelayUntilPass();
-        Assert.That(delay, Is.EqualTo(10));
+        delay.Should().Be(10);
     }
 }

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Common.Puzzles;
 
@@ -17,8 +18,8 @@ public class PuzzleFilterTests
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 
-        Assert.That(result.Count, Is.EqualTo(1));
-        Assert.That(result.First().IsSlow, Is.True);
+        result.Count.Should().Be(1);
+        result.First().IsSlow.Should().BeTrue();
     }
 
     [Test]
@@ -34,8 +35,8 @@ public class PuzzleFilterTests
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 
-        Assert.That(result.Count, Is.EqualTo(1));
-        Assert.That(result.First().Comment, Is.EqualTo("Comment"));
+        result.Count.Should().Be(1);
+        result.First().Comment.Should().Be("Comment");
     }
 
     [Test]
@@ -51,7 +52,7 @@ public class PuzzleFilterTests
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 
-        Assert.That(result.Count, Is.EqualTo(1));
-        Assert.That(result.First().IsFunToOptimize, Is.True);
+        result.Count.Should().Be(1);
+        result.First().IsFunToOptimize.Should().BeTrue();
     }
 }

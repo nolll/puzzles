@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Common.Strings;
 
@@ -11,7 +12,7 @@ public class StringExtensionTests
         const string s = "abcdef";
         var result = s.ShiftLeft(steps);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase(1, "fabcde")]
@@ -21,7 +22,7 @@ public class StringExtensionTests
         const string s = "abcdef";
         var result = s.ShiftRight(steps);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase(-2, "cdefab")]
@@ -34,7 +35,7 @@ public class StringExtensionTests
         const string s = "abcdef";
         var result = s.Shift(steps);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase("abcde", false)]
@@ -43,6 +44,6 @@ public class StringExtensionTests
     {
         var result = s.IsPalindrome();
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using Common.CoordinateSystems.CoordinateSystem2D;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202217;
@@ -17,7 +18,7 @@ public class PlusTests
 
         var result = shape.CanMoveRight(matrix, bottomLeft);
 
-        Assert.That(result, Is.True);
+        result.Should().BeTrue();
     }
 
     [Test]
@@ -31,7 +32,7 @@ public class PlusTests
 
         var result = shape.CanMoveRight(matrix, bottomLeft);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 
     [Test]
@@ -46,7 +47,7 @@ public class PlusTests
 
         var result = shape.CanMoveRight(matrix, bottomLeft);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 
     [Test]
@@ -60,7 +61,7 @@ public class PlusTests
 
         var result = shape.CanMoveLeft(matrix, bottomLeft);
 
-        Assert.That(result, Is.True);
+        result.Should().BeTrue();
     }
 
     [Test]
@@ -74,7 +75,7 @@ public class PlusTests
 
         var result = shape.CanMoveLeft(matrix, bottomLeft);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 
     [Test]
@@ -89,7 +90,7 @@ public class PlusTests
 
         var result = shape.CanMoveLeft(matrix, bottomLeft);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 
     [Test]
@@ -103,7 +104,7 @@ public class PlusTests
 
         var result = shape.CanMoveDown(matrix, bottomLeft);
 
-        Assert.That(result, Is.True);
+        result.Should().BeTrue();
     }
 
     [Test]
@@ -117,7 +118,7 @@ public class PlusTests
 
         var result = shape.CanMoveDown(matrix, bottomLeft);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 
     [Test]
@@ -132,6 +133,6 @@ public class PlusTests
 
         var result = shape.CanMoveDown(matrix, bottomLeft);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 }

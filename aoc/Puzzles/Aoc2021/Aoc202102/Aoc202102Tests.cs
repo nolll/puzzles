@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202102;
@@ -10,7 +11,7 @@ public class Aoc202102Tests
         var validator = new SubmarineControl(Input.Trim(), false);
         validator.Move();
 
-        Assert.That(validator.Result, Is.EqualTo(150));
+        validator.Result.Should().Be(150);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202102Tests
         var validator = new SubmarineControl(Input.Trim(), true);
         validator.Move();
 
-        Assert.That(validator.Result, Is.EqualTo(900));
+        validator.Result.Should().Be(900);
     }
 
     private const string Input = """

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202018;
@@ -17,7 +18,7 @@ public class Aoc202018Tests
         var calculator = new HomeworkCalculator();
         var sum = calculator.Sum(input, MathPrecedence.Order);
 
-        Assert.That(sum, Is.EqualTo(expected));
+        sum.Should().Be(expected);
     }
 
     [Test]
@@ -37,7 +38,7 @@ public class Aoc202018Tests
         var calculator = new HomeworkCalculator();
         var sum = calculator.SumOfAll(input.Trim(), MathPrecedence.Order);
 
-        Assert.That(sum, Is.EqualTo(expected));
+        sum.Should().Be(expected);
     }
 
     [TestCase("1 + 2 * 3 + 4 * 5 + 6", 231)]
@@ -51,6 +52,6 @@ public class Aoc202018Tests
         var calculator = new HomeworkCalculator();
         var sum = calculator.Sum(input, MathPrecedence.Addition);
 
-        Assert.That(sum, Is.EqualTo(expected));
+        sum.Should().Be(expected);
     }
 }

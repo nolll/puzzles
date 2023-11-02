@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202108;
@@ -10,7 +11,7 @@ public class Aoc202108Tests
         var puzzle = new SevenSegmentDisplayDecoder(Input.Trim());
         var result = puzzle.GetEasyNumbers();
 
-        Assert.That(result, Is.EqualTo(26));
+        result.Should().Be(26);
     }
 
     [TestCase("abc", "abcd", true)]
@@ -20,14 +21,14 @@ public class Aoc202108Tests
         var decoder = new DigitDecoder(SingleInput);
         var result = DigitDecoder.IsSubsetOf(sShort, sLong);
             
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [Test]
     public void Part2Single()
     {
         var decoder = new DigitDecoder(SingleInput);
-        Assert.That(decoder.DecodedNumber, Is.EqualTo(5353));
+        decoder.DecodedNumber.Should().Be(5353);
     }
         
     [Test]
@@ -36,7 +37,7 @@ public class Aoc202108Tests
         var puzzle = new SevenSegmentDisplayDecoder(Input.Trim());
         var result = puzzle.GetDecodedSum();
 
-        Assert.That(result, Is.EqualTo(61229));
+        result.Should().Be(61229);
     }
 
     private const string SingleInput = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";

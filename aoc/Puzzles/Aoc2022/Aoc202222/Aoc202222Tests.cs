@@ -1,4 +1,5 @@
 using Common.CoordinateSystems.CoordinateSystem2D;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202222;
@@ -10,7 +11,7 @@ public class Aoc202222Tests
     {
         var result = Aoc202222.Part1(Input);
 
-        Assert.That(result, Is.EqualTo(6032));
+        result.Should().Be(6032);
     }
 
     // todo: write tests for part 2 test data (separate mapping, or sort out general mapping).
@@ -18,11 +19,11 @@ public class Aoc202222Tests
     
     //[Test]
     //public void Part2()
-    //{
+    //{                            
     //    var puzzle = new Year2022Day22();
     //    var result = puzzle.Part2(Input);
 
-    //    Assert.That(result, Is.EqualTo(5031));
+    //    result.Should().Be(5031);
     //}
 
     [TestCase(0, 100, "up", 50, 50, "right")]
@@ -79,9 +80,9 @@ public class Aoc202222Tests
         var toDirection = MatrixDirection.Create(toDir);
         var (c, d) = Aoc202222.MapExitPosition(new MatrixAddress(fromX, fromY), fromDirection, 50);
 
-        Assert.That(c.X, Is.EqualTo(toX));
-        Assert.That(c.Y, Is.EqualTo(toY));
-        Assert.That(d, Is.EqualTo(toDirection));
+        c.X.Should().Be(toX);
+        c.Y.Should().Be(toY);
+        d.Should().Be(toDirection);
     }
 
     private const string Input = """

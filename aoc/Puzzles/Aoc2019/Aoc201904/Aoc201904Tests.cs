@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201904;
@@ -11,7 +12,7 @@ public class Aoc201904Tests
         var passwordValidator = new PasswordValidator();
         var result = passwordValidator.IsValidPart2(pwd);
 
-        Assert.That(result, Is.True);
+        result.Should().BeTrue();
     }
 
     [TestCase(111111)]
@@ -23,7 +24,7 @@ public class Aoc201904Tests
         var passwordValidator = new PasswordValidator();
         var result = passwordValidator.IsValidPart2(pwd);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 
     [Test]
@@ -33,7 +34,7 @@ public class Aoc201904Tests
         var str = pwd.ToString().ToCharArray();
         var result = PasswordAnalyzer.HasGroupOfTwo(str);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 
     [Test]
@@ -43,7 +44,7 @@ public class Aoc201904Tests
         var str = pwd.ToString().ToCharArray();
         var result = PasswordAnalyzer.HasGroupOfTwo(str);
 
-        Assert.That(result, Is.True);
+        result.Should().BeTrue();
     }
 
     [Test]
@@ -53,6 +54,6 @@ public class Aoc201904Tests
         var str = pwd.ToString().ToCharArray();
         var result = PasswordAnalyzer.HasGroupOfTwo(str);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 }

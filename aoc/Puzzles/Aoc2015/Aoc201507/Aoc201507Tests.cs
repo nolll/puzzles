@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201507;
@@ -21,13 +22,13 @@ NOT y -> i
         var circuit = new Circuit(input.Trim());
         circuit.RunOne("i");
 
-        Assert.That(circuit.Wires["d"].Signal, Is.EqualTo(72));
-        Assert.That(circuit.Wires["e"].Signal, Is.EqualTo(507));
-        Assert.That(circuit.Wires["f"].Signal, Is.EqualTo(492));
-        Assert.That(circuit.Wires["g"].Signal, Is.EqualTo(114));
-        Assert.That(circuit.Wires["h"].Signal, Is.EqualTo(65412));
-        Assert.That(circuit.Wires["i"].Signal, Is.EqualTo(65079));
-        Assert.That(circuit.Wires["x"].Signal, Is.EqualTo(123));
-        Assert.That(circuit.Wires["y"].Signal, Is.EqualTo(456));
+        circuit.Wires["d"].Signal.Should().Be(72);
+        circuit.Wires["e"].Signal.Should().Be(507);
+        circuit.Wires["f"].Signal.Should().Be(492);
+        circuit.Wires["g"].Signal.Should().Be(114);
+        circuit.Wires["h"].Signal.Should().Be(65412);
+        circuit.Wires["i"].Signal.Should().Be(65079);
+        circuit.Wires["x"].Signal.Should().Be(123);
+        circuit.Wires["y"].Signal.Should().Be(456);
     }
 }

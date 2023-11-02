@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202105;
@@ -10,7 +11,7 @@ public class Aoc202105Tests
         var game = new VentsMap();
         var result = game.Run(Input.Trim(), true);
 
-        Assert.That(result, Is.EqualTo(5));
+        result.Should().Be(5);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202105Tests
         var game = new VentsMap();
         var result = game.Run(Input.Trim(), false);
 
-        Assert.That(result, Is.EqualTo(12));
+        result.Should().Be(12);
     }
 
     private const string Input = """

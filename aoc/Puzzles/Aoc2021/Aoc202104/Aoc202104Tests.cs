@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202104;
@@ -10,7 +11,7 @@ public class Aoc202104Tests
         var game = new BingoGame(Input);
         var result = game.Play(false);
 
-        Assert.That(result, Is.EqualTo(4512));
+        result.Should().Be(4512);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202104Tests
         var game = new BingoGame(Input);
         var result = game.Play(true);
 
-        Assert.That(result, Is.EqualTo(1924));
+        result.Should().Be(1924);
     }
 
     private const string Input = """

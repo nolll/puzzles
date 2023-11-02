@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202209;
@@ -10,7 +11,7 @@ public class Aoc202209Tests
         var ropeBridge = new RopeBridge();
         var result = ropeBridge.Part1(Input1);
 
-        Assert.That(result, Is.EqualTo(13));
+        result.Should().Be(13);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202209Tests
         var ropeBridge = new RopeBridge();
         var result = ropeBridge.Part2(Input1);
 
-        Assert.That(result, Is.EqualTo(1));
+        result.Should().Be(1);
     }
 
     [Test]
@@ -28,7 +29,7 @@ public class Aoc202209Tests
         var ropeBridge = new RopeBridge();
         var result = ropeBridge.Part2(Input2);
 
-        Assert.That(result, Is.EqualTo(36));
+        result.Should().Be(36);
     }
 
     private const string Input1 = """

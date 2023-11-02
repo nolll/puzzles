@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202101;
@@ -10,7 +11,7 @@ public class Aoc202101Tests
         var validator = new DepthMeasurement();
         var result = validator.GetNumberOfIncreasingMeasurements(Input.Trim(), false);
 
-        Assert.That(result, Is.EqualTo(7));
+        result.Should().Be(7);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202101Tests
         var validator = new DepthMeasurement();
         var result = validator.GetNumberOfIncreasingMeasurements(Input.Trim(), true);
 
-        Assert.That(result, Is.EqualTo(5));
+        result.Should().Be(5);
     }
 
     private const string Input = """

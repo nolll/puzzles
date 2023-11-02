@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.Maths;
@@ -12,6 +13,6 @@ public class MathToolsTests
     {
         var result = MathTools.Lcm(numbers);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

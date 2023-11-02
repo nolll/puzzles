@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202125;
@@ -10,7 +11,7 @@ public class Aoc202125Tests
         var herd = new HerdOfSeaCucumbers(Input);
         var result = herd.MoveUntilStop();
 
-        Assert.That(result, Is.EqualTo(58));
+        result.Should().Be(58);
     }
 
     [Test]
@@ -18,7 +19,7 @@ public class Aoc202125Tests
     {
         var result = 0;
 
-        Assert.That(result, Is.EqualTo(0));
+        result.Should().Be(0);
     }
 
     private const string Input = """

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201506;
@@ -10,7 +11,7 @@ public class Aoc201506Tests
         var controller = new ChristmasLightsController(5);
         controller.TurnOn(0, 0, 4, 4);
 
-        Assert.That(controller.LitCount, Is.EqualTo(25));
+        controller.LitCount.Should().Be(25);
     }
 
     [Test]
@@ -20,7 +21,7 @@ public class Aoc201506Tests
         controller.TurnOn(0, 0, 4, 4);
         controller.TurnOff(0, 2, 4, 2);
 
-        Assert.That(controller.LitCount, Is.EqualTo(20));
+        controller.LitCount.Should().Be(20);
     }
 
     [Test]
@@ -31,6 +32,6 @@ public class Aoc201506Tests
         controller.TurnOff(0, 2, 4, 2);
         controller.Toggle(0, 0, 4, 4);
 
-        Assert.That(controller.LitCount, Is.EqualTo(5));
+        controller.LitCount.Should().Be(5);
     }
 }

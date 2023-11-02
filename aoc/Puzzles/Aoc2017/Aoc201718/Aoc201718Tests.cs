@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201718;
@@ -23,7 +24,7 @@ jgz a -2
         var single = new SingleRunner(input.Trim());
         single.Run();
 
-        Assert.That(single.RecoveredFrequency, Is.EqualTo(4));
+        single.RecoveredFrequency.Should().Be(4);
     }
 
     [Test]
@@ -42,6 +43,6 @@ rcv d
         var duet = new DuetRunner(input.Trim());
         duet.Run();
 
-        Assert.That(duet.Program1SendCount, Is.EqualTo(3));
+        duet.Program1SendCount.Should().Be(3);
     }
 }

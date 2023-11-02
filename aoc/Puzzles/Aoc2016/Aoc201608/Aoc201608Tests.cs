@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201608;
@@ -17,6 +18,6 @@ rotate column x=1 by 1
         var simulator = new ScreenSimulator(7, 3);
         var result = simulator.Run(input);
 
-        Assert.That(result.PixelCount, Is.EqualTo(6));
+        result.PixelCount.Should().Be(6);
     }
 }

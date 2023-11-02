@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201817;
@@ -21,7 +22,7 @@ y=13, x=498..504
         var filler = new ReservoirFiller(input.Trim());
         filler.Fill();
 
-        Assert.That(filler.TotalWaterTileCount, Is.EqualTo(57));
-        Assert.That(filler.RetainedWaterTileCount, Is.EqualTo(29));
+        filler.TotalWaterTileCount.Should().Be(57);
+        filler.RetainedWaterTileCount.Should().Be(29);
     }
 }

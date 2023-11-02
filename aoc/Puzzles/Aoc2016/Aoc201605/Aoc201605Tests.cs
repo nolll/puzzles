@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201605;
@@ -11,7 +12,7 @@ public class Aoc201605Tests
         var generator = new PasswordGenerator();
         var pwd = generator.Generate1(input);
 
-        Assert.That(pwd, Is.EqualTo("18f47a30"));
+        pwd.Should().Be("18f47a30");
     }
 
     [Test]
@@ -21,6 +22,6 @@ public class Aoc201605Tests
         var generator = new PasswordGenerator();
         var pwd = generator.Generate2(input);
 
-        Assert.That(pwd, Is.EqualTo("05ace8e3"));
+        pwd.Should().Be("05ace8e3");
     }
 }

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202016;
@@ -25,7 +26,7 @@ nearby tickets:
         var validator = new TicketValidator();
         var result = validator.GetErrorRate(input);
 
-        Assert.That(result, Is.EqualTo(71));
+        result.Should().Be(71);
     }
 
     [Test]
@@ -48,8 +49,8 @@ nearby tickets:
         var validator = new TicketValidator();
         var ticket = TicketValidator.FindFields(input);
 
-        Assert.That(ticket.Fields["class"], Is.EqualTo(12));
-        Assert.That(ticket.Fields["row"], Is.EqualTo(11));
-        Assert.That(ticket.Fields["seat"], Is.EqualTo(13));
+        ticket.Fields["class"].Should().Be(12);
+        ticket.Fields["row"].Should().Be(11);
+        ticket.Fields["seat"].Should().Be(13);
     }
 }

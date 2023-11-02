@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202117;
@@ -12,7 +13,7 @@ public class Aoc202117Tests
         var trickshot = new TrickShot();
         var result = trickshot.Shoot(target);
 
-        Assert.That(result.MaxHeight, Is.EqualTo(45));
+        result.MaxHeight.Should().Be(45);
     }
 
     [Test]
@@ -23,7 +24,7 @@ public class Aoc202117Tests
         var trickshot = new TrickShot();
         var result = trickshot.GetMaxHeight(target, 6, 9);
 
-        Assert.That(result, Is.EqualTo(45));
+        result.Should().Be(45);
     }
 
     [Test]
@@ -34,6 +35,6 @@ public class Aoc202117Tests
         var trickshot = new TrickShot();
         var result = trickshot.Shoot(target);
 
-        Assert.That(result.HitCount, Is.EqualTo(112));
+        result.HitCount.Should().Be(112);
     }
 }

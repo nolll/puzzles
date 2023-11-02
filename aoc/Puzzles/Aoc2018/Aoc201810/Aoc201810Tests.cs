@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201810;
@@ -54,7 +55,7 @@ position=<-3,  6> velocity=< 2, -1>
 
         var finder = new StarMessageFinder(input, 7);
 
-        Assert.That(finder.StarMessage.Trim(), Is.EqualTo(expected));
-        Assert.That(finder.IterationCount, Is.EqualTo(3));
+        finder.StarMessage.Trim().Should().Be(expected);
+        finder.IterationCount.Should().Be(3);
     }
 }

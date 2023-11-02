@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202015;
@@ -23,6 +24,6 @@ public class Aoc202015Tests
         var numbers = new MemoryGame(input);
         var result = numbers.Play(until);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

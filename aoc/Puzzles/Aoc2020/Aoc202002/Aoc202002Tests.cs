@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202002;
@@ -11,7 +12,7 @@ public class Aoc202002Tests
         var policyValidator = new PasswordPolicyValidator();
         var result = policyValidator.IsValidAccordingToRuleOne(policy);
 
-        Assert.That(result, Is.True);
+        result.Should().BeTrue();
     }
 
     [TestCase("1-3 b: cdefg")]
@@ -20,7 +21,7 @@ public class Aoc202002Tests
         var policyValidator = new PasswordPolicyValidator();
         var result = policyValidator.IsValidAccordingToRuleOne(policy);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 
     [TestCase("1-3 a: abcde")]
@@ -29,7 +30,7 @@ public class Aoc202002Tests
         var policyValidator = new PasswordPolicyValidator();
         var result = policyValidator.IsValidAccordingToRuleTwo(policy);
 
-        Assert.That(result, Is.True);
+        result.Should().BeTrue();
     }
 
     [TestCase("1-3 b: cdefg")]
@@ -39,7 +40,7 @@ public class Aoc202002Tests
         var policyValidator = new PasswordPolicyValidator();
         var result = policyValidator.IsValidAccordingToRuleTwo(policy);
 
-        Assert.That(result, Is.False);
+        result.Should().BeFalse();
     }
 
 }

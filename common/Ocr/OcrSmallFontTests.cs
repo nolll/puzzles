@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.Ocr;
@@ -26,7 +27,7 @@ public class OcrSmallFontTests
     {
         var result = OcrSmallFont.ReadLetter(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [Test]
@@ -34,7 +35,7 @@ public class OcrSmallFontTests
     {
         var result = OcrSmallFont.ReadString(Input);
 
-        Assert.That(result, Is.EqualTo("ABC"));
+        result.Should().Be("ABC");
     }
 
     private const string Input = """

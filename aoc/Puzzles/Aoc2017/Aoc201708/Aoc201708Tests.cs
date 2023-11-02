@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201708;
@@ -16,7 +17,7 @@ c inc -20 if c == 10
 
         var calculator = new CpuInstructionCalculator(input.Trim());
 
-        Assert.That(calculator.LargestValueAtEnd, Is.EqualTo(1));
-        Assert.That(calculator.LargestValueEver, Is.EqualTo(10));
+        calculator.LargestValueAtEnd.Should().Be(1);
+        calculator.LargestValueEver.Should().Be(10);
     }
 }

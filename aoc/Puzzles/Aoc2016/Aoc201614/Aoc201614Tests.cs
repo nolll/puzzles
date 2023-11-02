@@ -1,5 +1,6 @@
 using System.Linq;
 using Common.Strings;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201614;
@@ -12,7 +13,7 @@ public class Aoc201614Tests
         var generator = new KeyGenerator();
         var index = generator.GetIndexOfNThKey("abc", 64, 0);
 
-        Assert.That(index, Is.EqualTo(22728));
+        index.Should().Be(22728);
     }
 
     [Test]
@@ -21,7 +22,7 @@ public class Aoc201614Tests
         var generator = new KeyGenerator();
         var index = generator.GetIndexOfNThKey("abc", 64, 10);
 
-        Assert.That(index, Is.EqualTo(12665));
+        index.Should().Be(12665);
     }
     
     [TestCase(0, "577571be4de9dcce85a041ba0410f29f")]
@@ -34,7 +35,7 @@ public class Aoc201614Tests
         var hashedBytes = generator.CreateHash("abc0", iterations);
         var hash = ByteConverter.ToString(hashedBytes);
             
-        Assert.That(hash, Is.EqualTo(expected));
+        hash.Should().Be(expected);
     }
 
     [TestCase("aaa01010101010101010", 'a')]
@@ -46,7 +47,7 @@ public class Aoc201614Tests
         var byteHash = str.ToCharArray().Select(o => (byte)o).ToArray();
         var c = KeyGenerator.GetRepeatingByte(byteHash);
 
-        Assert.That(c, Is.EqualTo(expected));
+        c.Should().Be((byte?)expected);
     }
     
     [TestCase("aaaaa010101010101010", true)]
@@ -58,7 +59,7 @@ public class Aoc201614Tests
         var byteHash = stringHash.ToCharArray().Select(o => (byte)o).ToArray();
         var hasFiveInARow = KeyGenerator.HasFiveInARowOf(byteHash, (byte)'a');
 
-        Assert.That(hasFiveInARow, Is.EqualTo(expected));
+        hasFiveInARow.Should().Be(expected);
     }
 
     [Test]
@@ -70,6 +71,6 @@ public class Aoc201614Tests
         var hash = generator.GetHash(salt, index, 0);
         var isKey = generator.IsKey(salt, index, hash, 0);
 
-        Assert.That(isKey, Is.True);
+        isKey.Should().BeTrue();
     }
 }

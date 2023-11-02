@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202220;
@@ -9,7 +10,7 @@ public class Aoc202220Tests
     {
         var result = Aoc202220.Run(Input, 1, 1);
 
-        Assert.That(result, Is.EqualTo(3));
+        result.Should().Be(3);
     }
 
     [Test]
@@ -17,7 +18,7 @@ public class Aoc202220Tests
     {
         var result = Aoc202220.Run(Input, 811_589_153, 10);
 
-        Assert.That(result, Is.EqualTo(1623178306));
+        result.Should().Be(1623178306);
     }
 
     private const string Input = """

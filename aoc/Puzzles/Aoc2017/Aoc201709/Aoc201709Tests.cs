@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201709;
@@ -17,9 +18,9 @@ public class Aoc201709Tests
     {
         var processor = new StreamProcessor(input);
 
-        Assert.That(processor.Cleaned, Is.EqualTo(expectedCleaned));
-        Assert.That(processor.GroupCount, Is.EqualTo(expectedCount));
-        Assert.That(processor.Score, Is.EqualTo(expectedScore));
+        processor.Cleaned.Should().Be(expectedCleaned);
+        processor.GroupCount.Should().Be(expectedCount);
+        processor.Score.Should().Be(expectedScore);
     }
 
     [TestCase("{<>}", 0)]
@@ -33,6 +34,6 @@ public class Aoc201709Tests
     {
         var processor = new StreamProcessor(input);
 
-        Assert.That(processor.GarbageCount, Is.EqualTo(expected));
+        processor.GarbageCount.Should().Be(expected);
     }
 }

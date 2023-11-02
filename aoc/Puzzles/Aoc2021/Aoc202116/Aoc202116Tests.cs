@@ -1,4 +1,5 @@
 using System.Numerics;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202116;
@@ -10,11 +11,11 @@ public class Aoc202116Tests
     {
         var result = BitsPacket.FromHex("D2FE28");
 
-        Assert.That(result.Version, Is.EqualTo(6));
-        Assert.That(result.Type, Is.EqualTo(4));
-        Assert.That(result.LiteralValue, Is.EqualTo(new BigInteger(2021)));
-        Assert.That(result.VersionSum, Is.EqualTo(6));
-        Assert.That(result.SubPackets.Count, Is.EqualTo(0));
+        result.Version.Should().Be(6);
+        result.Type.Should().Be(4);
+        result.LiteralValue.Should().Be(new BigInteger(2021));
+        result.VersionSum.Should().Be(6);
+        result.SubPackets.Count.Should().Be(0);
     }
 
     [Test]
@@ -22,12 +23,12 @@ public class Aoc202116Tests
     {
         var result = BitsPacket.FromHex("38006F45291200");
 
-        Assert.That(result.Version, Is.EqualTo(1));
-        Assert.That(result.Type, Is.EqualTo(6));
-        Assert.That(result.LiteralValue, Is.EqualTo(null));
-        Assert.That(result.SubPackets.Count, Is.EqualTo(2));
-        Assert.That(result.SubPackets[0].LiteralValue, Is.EqualTo(new BigInteger(10)));
-        Assert.That(result.SubPackets[1].LiteralValue, Is.EqualTo(new BigInteger(20)));
+        result.Version.Should().Be(1);
+        result.Type.Should().Be(6);
+        result.LiteralValue.Should().Be(null);
+        result.SubPackets.Count.Should().Be(2);
+        result.SubPackets[0].LiteralValue.Should().Be(new BigInteger(10));
+        result.SubPackets[1].LiteralValue.Should().Be(new BigInteger(20));
     }
 
     [Test]
@@ -35,13 +36,13 @@ public class Aoc202116Tests
     {
         var result = BitsPacket.FromHex("EE00D40C823060");
 
-        Assert.That(result.Version, Is.EqualTo(7));
-        Assert.That(result.Type, Is.EqualTo(3));
-        Assert.That(result.LiteralValue, Is.EqualTo(null));
-        Assert.That(result.SubPackets.Count, Is.EqualTo(3));
-        Assert.That(result.SubPackets[0].LiteralValue, Is.EqualTo(new BigInteger(1)));
-        Assert.That(result.SubPackets[1].LiteralValue, Is.EqualTo(new BigInteger(2)));
-        Assert.That(result.SubPackets[2].LiteralValue, Is.EqualTo(new BigInteger(3)));
+        result.Version.Should().Be(7);
+        result.Type.Should().Be(3);
+        result.LiteralValue.Should().Be(null);
+        result.SubPackets.Count.Should().Be(3);
+        result.SubPackets[0].LiteralValue.Should().Be(new BigInteger(1));
+        result.SubPackets[1].LiteralValue.Should().Be(new BigInteger(2));
+        result.SubPackets[2].LiteralValue.Should().Be(new BigInteger(3));
     }
 
     [TestCase("8A004A801A8002F478", 16)]
@@ -52,7 +53,7 @@ public class Aoc202116Tests
     {
         var result = BitsPacket.FromHex(hex);
 
-        Assert.That(result.VersionSum, Is.EqualTo(expected));
+        result.VersionSum.Should().Be(expected);
     }
 
     [TestCase("C200B40A82", 3)]
@@ -67,6 +68,6 @@ public class Aoc202116Tests
     {
         var result = BitsPacket.FromHex(hex);
 
-        Assert.That(result.Value, Is.EqualTo(new BigInteger(expected)));
+        result.Value.Should().Be(new BigInteger(expected));
     }
 }

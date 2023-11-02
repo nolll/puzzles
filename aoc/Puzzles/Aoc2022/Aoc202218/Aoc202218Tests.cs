@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202218;
@@ -10,7 +11,7 @@ public class Aoc202218Tests
         var lavaCubes = new LavaCubes();
         var result = lavaCubes.Part1(SmallInput);
 
-        Assert.That(result, Is.EqualTo(10));
+        result.Should().Be(10);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202218Tests
         var lavaCubes = new LavaCubes();
         var result = lavaCubes.Part1(LargeInput);
 
-        Assert.That(result, Is.EqualTo(64));
+        result.Should().Be(64);
     }
 
     [Test]
@@ -28,7 +29,7 @@ public class Aoc202218Tests
         var lavaCubes = new LavaCubes();
         var result = lavaCubes.Part2(LargeInput);
 
-        Assert.That(result, Is.EqualTo(58));
+        result.Should().Be(58);
     }
 
     private const string SmallInput = """

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201722;
@@ -18,7 +19,7 @@ public class Aoc201722Tests
         var infection = new VirusInfection(Input);
         var infectionCount = infection.RunPart1(iterations);
 
-        Assert.That(infectionCount, Is.EqualTo(expected));
+        infectionCount.Should().Be(expected);
     }
 
     [TestCase(100, 26)]
@@ -28,6 +29,6 @@ public class Aoc201722Tests
         var infection = new VirusInfection(Input);
         var infectionCount = infection.RunPart2(iterations);
 
-        Assert.That(infectionCount, Is.EqualTo(expected));
+        infectionCount.Should().Be(expected);
     }
 }

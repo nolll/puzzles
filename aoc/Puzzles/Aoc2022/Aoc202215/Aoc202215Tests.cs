@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202215;
@@ -10,7 +11,7 @@ public class Aoc202215Tests
         var zone = new BeaconZone();
         var result = zone.Part1(Input, 10, false);
 
-        Assert.That(result, Is.EqualTo(26));
+        result.Should().Be(26);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202215Tests
         var zone = new BeaconZone();
         var result = zone.Part2(Input, 20);
 
-        Assert.That(result, Is.EqualTo(56_000_011));
+        result.Should().Be(56_000_011);
     }
 
     private const string Input = """

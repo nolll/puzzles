@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202221;
@@ -9,7 +10,7 @@ public class Aoc202221Tests
     {
         var result = new Aoc202221().Part1(Input);
 
-        Assert.That(result, Is.EqualTo(152));
+        result.Should().Be(152);
     }
 
     //[Test]
@@ -17,7 +18,7 @@ public class Aoc202221Tests
     //{
     //    var result = new Year2022Day21().Part2Naive(Input);
 
-    //    Assert.That(result, Is.EqualTo(301));
+    //    result.Should().Be(301);
     //}
 
     [Test]
@@ -25,7 +26,7 @@ public class Aoc202221Tests
     {
         var result = new Aoc202221().Part2(Input);
 
-        Assert.That(result, Is.EqualTo(301));
+        result.Should().Be(301);
     }
 
     private const string Input = """

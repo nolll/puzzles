@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202103;
@@ -10,7 +11,7 @@ public class Aoc202103Tests
         var diagnostics = new BinaryDiagnostics();
         var result = diagnostics.GetFuelConsumption(Input.Trim());
 
-        Assert.That(result, Is.EqualTo(198));
+        result.Should().Be(198);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202103Tests
         var diagnostics = new BinaryDiagnostics();
         var result = diagnostics.GetLifeSupportRating(Input.Trim());
 
-        Assert.That(result, Is.EqualTo(230));
+        result.Should().Be(230);
     }
 
     private const string Input = """

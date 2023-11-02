@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201725;
@@ -35,6 +36,6 @@ In state B:
         var turingMachine = new TuringMachine(input.Trim());
         var checksum = turingMachine.Run();
 
-        Assert.That(checksum, Is.EqualTo(3));
+        checksum.Should().Be(3);
     }
 }

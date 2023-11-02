@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202005;
@@ -12,9 +13,9 @@ public class Aoc202005Tests
     {
         var processor = BoardingCard.Parse(boardingCard);
 
-        Assert.That(processor.Row, Is.EqualTo(row));
-        Assert.That(processor.Column, Is.EqualTo(col));
-        Assert.That(processor.Id, Is.EqualTo(id));
+        processor.Row.Should().Be(row);
+        processor.Column.Should().Be(col);
+        processor.Id.Should().Be(id);
     }
 
     [Test]
@@ -29,6 +30,6 @@ BBFFBBFRLL
 
         var processor = new BoardingCardProcessor(input.Trim());
 
-        Assert.That(processor.HighestId, Is.EqualTo(820));
+        processor.HighestId.Should().Be(820);
     }
 }

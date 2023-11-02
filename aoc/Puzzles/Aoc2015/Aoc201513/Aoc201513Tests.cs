@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201513;
@@ -24,6 +25,6 @@ David would gain 41 happiness units by sitting next to Carol.
 
         var table = new DinnerTable(input);
 
-        Assert.That(table.HappinessChange, Is.EqualTo(330));
+        table.HappinessChange.Should().Be(330);
     }
 }

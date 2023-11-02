@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201920;
@@ -31,7 +32,7 @@ FG..#########.....#
 
         var solver = new DonutMazeSolver(input);
 
-        Assert.That(solver.ShortestStepCount, Is.EqualTo(23));
+        solver.ShortestStepCount.Should().Be(23);
     }
 
     [Test]
@@ -79,7 +80,7 @@ YN......#               VT..#....QG
 
         var solver = new DonutMazeSolver(input);
 
-        Assert.That(solver.ShortestStepCount, Is.EqualTo(58));
+        solver.ShortestStepCount.Should().Be(58);
     }
 
     [Test]
@@ -127,6 +128,6 @@ RE....#.#                           #......RF
 
         var solver = new RecursiveDonutMazeSolver(input);
 
-        Assert.That(solver.ShortestStepCount, Is.EqualTo(396));
+        solver.ShortestStepCount.Should().Be(396);
     }
 }

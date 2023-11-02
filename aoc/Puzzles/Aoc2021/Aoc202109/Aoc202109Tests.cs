@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202109;
@@ -11,7 +12,7 @@ public class Aoc202109Tests
 
         var result = heightMap.FindLowPointSum(Input.Trim());
 
-        Assert.That(result, Is.EqualTo(15));
+        result.Should().Be(15);
     }
 
     [Test]
@@ -20,7 +21,7 @@ public class Aoc202109Tests
         var heightMap = new HeightMap();
         var result = heightMap.FindBasinSizes(Input.Trim());
 
-        Assert.That(result, Is.EqualTo(1134));
+        result.Should().Be(1134);
     }
 
     private const string Input = """

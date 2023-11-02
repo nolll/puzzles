@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202001;
@@ -19,8 +20,8 @@ public class Aoc202001Tests
         var sumFinder = new SumFinder(input.Trim());
         var numbers = sumFinder.FindNumbersThatAddUpTo(2020, 2);
 
-        Assert.That(numbers[0], Is.EqualTo(1721));
-        Assert.That(numbers[1], Is.EqualTo(299));
+        numbers[0].Should().Be(1721);
+        numbers[1].Should().Be(299);
     }
 
     [Test]
@@ -38,8 +39,8 @@ public class Aoc202001Tests
         var sumFinder = new SumFinder(input.Trim());
         var numbers = sumFinder.FindNumbersThatAddUpTo(2020, 3);
 
-        Assert.That(numbers[0], Is.EqualTo(979));
-        Assert.That(numbers[1], Is.EqualTo(366));
-        Assert.That(numbers[2], Is.EqualTo(675));
+        numbers[0].Should().Be(979);
+        numbers[1].Should().Be(366);
+        numbers[2].Should().Be(675);
     }
 }

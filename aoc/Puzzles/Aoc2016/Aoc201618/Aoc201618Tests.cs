@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201618;
@@ -12,6 +13,6 @@ public class Aoc201618Tests
         var detector = new FloorTrapDetector(input);
         var safeCount = detector.CountSafeTiles(10);
 
-        Assert.That(safeCount, Is.EqualTo(38));
+        safeCount.Should().Be(38);
     }
 }

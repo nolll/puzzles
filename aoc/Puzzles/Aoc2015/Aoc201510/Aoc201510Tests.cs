@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201510;
@@ -13,6 +14,6 @@ public class Aoc201510Tests
     {
         var game = new LookAndSayGame(input, 1);
 
-        Assert.That(game.Result, Is.EqualTo(expected));
+        game.Result.Should().Be(expected);
     }
 }

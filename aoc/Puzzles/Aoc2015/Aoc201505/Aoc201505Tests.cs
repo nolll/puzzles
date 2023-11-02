@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201505;
@@ -13,7 +14,7 @@ public class Aoc201505Tests
     {
         var isNice = NaughtyOrNiceEvaluator.IsNice1(input);
 
-        Assert.That(isNice, Is.EqualTo(expected));
+        isNice.Should().Be(expected);
     }
 
     [TestCase("qjhvhtzxzqqjkmpb", true)]
@@ -24,6 +25,6 @@ public class Aoc201505Tests
     {
         var isNice = NaughtyOrNiceEvaluator.IsNice2(input);
 
-        Assert.That(isNice, Is.EqualTo(expected));
+        isNice.Should().Be(expected);
     }
 }

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201717;
@@ -11,8 +12,8 @@ public class Aoc201717Tests
         var runner = new SpinlockRunnerPart1(input);
         runner.Run(2017);
 
-        Assert.That(runner.NextValue, Is.EqualTo(638));
-        Assert.That(runner.SecondValue, Is.EqualTo(1226));
+        runner.NextValue.Should().Be(638);
+        runner.SecondValue.Should().Be(1226);
     }
 
     [Test]
@@ -22,6 +23,6 @@ public class Aoc201717Tests
         var runner = new SpinlockRunnerPart2(input);
         runner.Run(2017);
 
-        Assert.That(runner.SecondValue, Is.EqualTo(1226));
+        runner.SecondValue.Should().Be(1226);
     }
 }

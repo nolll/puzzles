@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202207;
@@ -10,7 +11,7 @@ public class Aoc202207Tests
         var fileSystem = new FileSystem(Input);
         var result = fileSystem.Part1();
 
-        Assert.That(result, Is.EqualTo(95437));
+        result.Should().Be(95437);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202207Tests
         var fileSystem = new FileSystem(Input);
         var result = fileSystem.Part2();
 
-        Assert.That(result, Is.EqualTo(24933642));
+        result.Should().Be(24933642);
     }
 
     private const string Input = """

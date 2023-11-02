@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2017.Aoc201702;
@@ -15,7 +16,7 @@ public class Aoc201702Tests
 
         var spreadsheet = new Spreadsheet(input);
 
-        Assert.That(spreadsheet.ChecksumMaxMin, Is.EqualTo(18));
+        spreadsheet.ChecksumMaxMin.Should().Be(18);
     }
 
     [Test]
@@ -29,6 +30,6 @@ public class Aoc201702Tests
 
         var spreadsheet = new Spreadsheet(input);
 
-        Assert.That(spreadsheet.ChecksumDivision, Is.EqualTo(9));
+        spreadsheet.ChecksumDivision.Should().Be(9);
     }
 }

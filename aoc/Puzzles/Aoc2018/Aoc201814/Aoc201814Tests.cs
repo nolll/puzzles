@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201814;
@@ -13,7 +14,7 @@ public class Aoc201814Tests
         var generator = new RecipeGenerator();
         var scores = generator.ScoresAfter(input);
 
-        Assert.That(scores, Is.EqualTo(expected));
+        scores.Should().Be(expected);
     }
 
     [TestCase("01245", 5)]
@@ -25,6 +26,6 @@ public class Aoc201814Tests
         var generator = new RecipeGenerator();
         var count = generator.RecipeCountBefore(input);
 
-        Assert.That(count, Is.EqualTo(expected));
+        count.Should().Be(expected);
     }
 }

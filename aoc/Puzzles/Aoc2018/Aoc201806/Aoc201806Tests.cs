@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2018.Aoc201806;
@@ -19,7 +20,7 @@ public class Aoc201806Tests
         var finder = new LargestAreaFinder(input);
         var area = finder.GetSizeOfLargestArea();
 
-        Assert.That(area, Is.EqualTo(17));
+        area.Should().Be(17);
     }
 
     [Test]
@@ -37,6 +38,6 @@ public class Aoc201806Tests
         var finder = new LargestAreaFinder(input);
         var area = finder.GetSizeOfCentralArea(32);
 
-        Assert.That(area, Is.EqualTo(16));
+        area.Should().Be(16);
     }
 }

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201621;
@@ -23,7 +24,7 @@ rotate based on position of letter d
         var scrambler = new StringScrambler(input.Trim());
         var result = scrambler.Scramble(pwd);
 
-        Assert.That(result, Is.EqualTo("decab"));
+        result.Should().Be("decab");
     }
 
     [Test]
@@ -45,6 +46,6 @@ rotate based on position of letter d
         var scrambler = new StringScrambler(input.Trim());
         var result = scrambler.Unscramble(pwd);
 
-        Assert.That(result, Is.EqualTo("abcde"));
+        result.Should().Be("abcde");
     }
 }

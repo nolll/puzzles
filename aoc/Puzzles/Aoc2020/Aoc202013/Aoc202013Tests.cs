@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202013;
@@ -15,7 +16,7 @@ public class Aoc202013Tests
         var scheduler = new BusScheduler1(input.Trim());
         var value = scheduler.GetBusValue();
 
-        Assert.That(value, Is.EqualTo(295));
+        value.Should().Be(295);
     }
 
     [TestCase("0\r\n7,13,x,x,59,x,31,19", 1_068_781)]
@@ -29,6 +30,6 @@ public class Aoc202013Tests
         var scheduler = new BusScheduler2(input);
         var value = scheduler.GetContestMinute();
 
-        Assert.That(value, Is.EqualTo(expected));
+        value.Should().Be(expected);
     }
 }

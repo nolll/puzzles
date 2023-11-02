@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.Numbers;
@@ -20,7 +21,7 @@ public class NumbersTests
     {
         var result = Numbers.IsPrime(n);
 
-        Assert.That(result, Is.EqualTo(result));
+        result.Should().Be(result);
     }
 
     [TestCase(1, 1)]
@@ -35,7 +36,7 @@ public class NumbersTests
         var factors = Numbers.GetAllDivisors(n);
         var result = factors.Count();
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase(1234567890, false)]
@@ -46,7 +47,7 @@ public class NumbersTests
     {
         var result = Numbers.IsPandigital1Through9(n);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase(1234567890, true)]
@@ -57,6 +58,6 @@ public class NumbersTests
     {
         var result = Numbers.IsPandigital0Through9(n);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

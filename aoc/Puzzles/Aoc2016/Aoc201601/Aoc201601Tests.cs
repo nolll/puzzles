@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201601;
@@ -12,6 +13,6 @@ public class Aoc201601Tests
         var calc = new EasterbunnyDistanceCalculator();
         calc.Go(input);
 
-        Assert.That(calc.DistanceToTarget, Is.EqualTo(expected));
+        calc.DistanceToTarget.Should().Be(expected);
     }
 }

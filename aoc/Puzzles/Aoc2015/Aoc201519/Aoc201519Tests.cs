@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201519;
@@ -17,7 +18,7 @@ O => HH
         var machine = new MedicineMachine(input.Trim());
         var molecules = machine.GetCalibrationMolecules(startMolecule);
 
-        Assert.That(molecules.Count, Is.EqualTo(4));
+        molecules.Count.Should().Be(4);
     }
 
     [TestCase("HOH", 3)]
@@ -35,6 +36,6 @@ O => HH
         var machine = new MedicineMachine(input.Trim());
         var stepCount = machine.StepsToMake(molecule);
 
-        Assert.That(stepCount, Is.EqualTo(steps));
+        stepCount.Should().Be(steps);
     }
 }

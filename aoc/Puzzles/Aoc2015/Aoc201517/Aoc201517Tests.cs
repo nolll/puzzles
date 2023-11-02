@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201517;
@@ -18,6 +19,6 @@ public class Aoc201517Tests
         var containers = new EggnogContainers(input.Trim());
         var combinations = containers.GetCombinations(25);
 
-        Assert.That(combinations.Count, Is.EqualTo(4));
+        combinations.Count.Should().Be(4);
     }
 }

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202208;
@@ -11,7 +12,7 @@ public class Aoc202208Tests
         treeHouse.Calc();
         var result = treeHouse.VisibleTreesCount;
 
-        Assert.That(result, Is.EqualTo(21));
+        result.Should().Be(21);
     }
 
     [Test]
@@ -21,7 +22,7 @@ public class Aoc202208Tests
         treeHouse.Calc();
         var result = treeHouse.HighestScenicScore;
 
-        Assert.That(result, Is.EqualTo(8));
+        result.Should().Be(8);
     }
 
     private const string Input = """

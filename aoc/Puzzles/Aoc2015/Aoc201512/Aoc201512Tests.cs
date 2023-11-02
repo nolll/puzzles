@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201512;
@@ -16,6 +17,6 @@ public class Aoc201512Tests
     {
         var doc = new JsonDoc(input, true);
 
-        Assert.That(doc.Sum, Is.EqualTo(expected));
+        doc.Sum.Should().Be(expected);
     }
 }

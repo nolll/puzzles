@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201915;
@@ -18,6 +19,6 @@ public class Aoc201915Tests
         var filler = new OxygenFiller(map);
         var result = filler.Fill();
 
-        Assert.That(result, Is.EqualTo(4));
+        result.Should().Be(4);
     }
 }

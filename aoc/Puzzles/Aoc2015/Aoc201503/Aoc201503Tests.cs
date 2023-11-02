@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201503;
@@ -12,7 +13,7 @@ public class Aoc201503Tests
         var grid = new DeliveryGrid();
         grid.DeliverBySanta(input);
 
-        Assert.That(grid.SantaDeliveryCount, Is.EqualTo(expected));
+        grid.SantaDeliveryCount.Should().Be(expected);
     }
 
     [TestCase("^v", 3)]
@@ -23,6 +24,6 @@ public class Aoc201503Tests
         var grid = new DeliveryGrid();
         grid.DeliverBySantaAndRobot(input);
 
-        Assert.That(grid.SantaDeliveryCount, Is.EqualTo(expected));
+        grid.SantaDeliveryCount.Should().Be(expected);
     }
 }

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202021;
@@ -17,7 +18,7 @@ sqjhc mxmxvkd sbzzf (contains fish)
         var detector = new AllergenDetector(Input.Trim());
         var ingredientCount = detector.FindIngredientsWithoutAllergens();
 
-        Assert.That(ingredientCount, Is.EqualTo(5));
+        ingredientCount.Should().Be(5);
     }
 
     [Test]
@@ -26,6 +27,6 @@ sqjhc mxmxvkd sbzzf (contains fish)
         var detector = new AllergenDetector(Input.Trim());
         var ingredientList = detector.GetIngredientList();
 
-        Assert.That(ingredientList, Is.EqualTo("mxmxvkd,sqjhc,fvjkl"));
+        ingredientList.Should().Be("mxmxvkd,sqjhc,fvjkl");
     }
 }

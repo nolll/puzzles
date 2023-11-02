@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201606;
@@ -29,7 +30,7 @@ enarar
         var reader = new RepetitionCodeReader();
         var coin = reader.ReadMostCommon(Input);
 
-        Assert.That(coin, Is.EqualTo("easter"));
+        coin.Should().Be("easter");
     }
 
     [Test]
@@ -38,6 +39,6 @@ enarar
         var reader = new RepetitionCodeReader();
         var coin = reader.ReadLeastCommon(Input);
 
-        Assert.That(coin, Is.EqualTo("advent"));
+        coin.Should().Be("advent");
     }
 }

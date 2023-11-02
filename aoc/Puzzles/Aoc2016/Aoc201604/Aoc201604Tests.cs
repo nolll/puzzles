@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201604;
@@ -12,6 +13,6 @@ public class Aoc201604Tests
     {
         var room = new Room(input);
 
-        Assert.That(room.IsValid, Is.EqualTo(expected));
+        room.IsValid.Should().Be(expected);
     }
 }

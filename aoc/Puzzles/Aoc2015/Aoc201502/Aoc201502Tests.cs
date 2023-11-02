@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201502;
@@ -10,7 +11,7 @@ public class Aoc201502Tests
     {
         var result = GiftWrappingCalculator.GetRequiredPaperForOneBox(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [Test]
@@ -24,7 +25,7 @@ public class Aoc201502Tests
 
         var result = GiftWrappingCalculator.GetRequiredPaper(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase("2x3x4", 34)]
@@ -33,7 +34,7 @@ public class Aoc201502Tests
     {
         var result = GiftWrappingCalculator.GetRequiredRibbonForOneBox(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [Test]
@@ -47,6 +48,6 @@ public class Aoc201502Tests
 
         var result = GiftWrappingCalculator.GetRequiredRibbon(input);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace Common.Graphs;
 
@@ -22,6 +23,6 @@ public class GraphTests
 
         var result = Graph.GetLowestCost(input, "A", "C");
 
-        Assert.That(result, Is.EqualTo(29));
+        result.Should().Be(29);
     }
 }

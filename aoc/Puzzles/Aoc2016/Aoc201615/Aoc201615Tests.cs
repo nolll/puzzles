@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201615;
@@ -15,7 +16,7 @@ public class Aoc201615Tests
         var disc = new KineticSculptureDisc(positions, startPos);
         var pos = disc.Passed(time);
 
-        Assert.That(pos, Is.EqualTo(expected));
+        pos.Should().Be(expected);
     }
 
     [Test]
@@ -28,6 +29,6 @@ Disc #2 has 2 positions; at time=0, it is at position 1.
 
         var sculpture = new KineticSculpture(input.Trim());
             
-        Assert.That(sculpture.TimeToPressButton, Is.EqualTo(5));
+        sculpture.TimeToPressButton.Should().Be(5);
     }
 }

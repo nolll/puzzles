@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201910;
@@ -18,9 +19,9 @@ public class Aoc201910Tests
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
-        Assert.That(result.BestAsteroid.X, Is.EqualTo(3));
-        Assert.That(result.BestAsteroid.Y, Is.EqualTo(4));
-        Assert.That(result.RayCount, Is.EqualTo(8));
+        result.BestAsteroid.X.Should().Be(3);
+        result.BestAsteroid.Y.Should().Be(4);
+        result.RayCount.Should().Be(8);
     }
 
     [Test]
@@ -42,9 +43,9 @@ public class Aoc201910Tests
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
-        Assert.That(result.BestAsteroid.X, Is.EqualTo(5));
-        Assert.That(result.BestAsteroid.Y, Is.EqualTo(8));
-        Assert.That(result.RayCount, Is.EqualTo(33));
+        result.BestAsteroid.X.Should().Be(5);
+        result.BestAsteroid.Y.Should().Be(8);
+        result.RayCount.Should().Be(33);
     }
 
     [Test]
@@ -66,9 +67,9 @@ public class Aoc201910Tests
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
-        Assert.That(result.BestAsteroid.X, Is.EqualTo(1));
-        Assert.That(result.BestAsteroid.Y, Is.EqualTo(2));
-        Assert.That(result.RayCount, Is.EqualTo(35));
+        result.BestAsteroid.X.Should().Be(1);
+        result.BestAsteroid.Y.Should().Be(2);
+        result.RayCount.Should().Be(35);
     }
 
     [Test]
@@ -90,9 +91,9 @@ public class Aoc201910Tests
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
-        Assert.That(result.BestAsteroid.X, Is.EqualTo(6));
-        Assert.That(result.BestAsteroid.Y, Is.EqualTo(3));
-        Assert.That(result.RayCount, Is.EqualTo(41));
+        result.BestAsteroid.X.Should().Be(6);
+        result.BestAsteroid.Y.Should().Be(3);
+        result.RayCount.Should().Be(41);
     }
 
     [Test]
@@ -124,9 +125,9 @@ public class Aoc201910Tests
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
-        Assert.That(result.BestAsteroid.X, Is.EqualTo(11));
-        Assert.That(result.BestAsteroid.Y, Is.EqualTo(13));
-        Assert.That(result.RayCount, Is.EqualTo(210));
+        result.BestAsteroid.X.Should().Be(11);
+        result.BestAsteroid.Y.Should().Be(13);
+        result.RayCount.Should().Be(210);
     }
 
     [Test]
@@ -143,8 +144,8 @@ public class Aoc201910Tests
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
-        Assert.That(result.BestAsteroid.X, Is.EqualTo(8));
-        Assert.That(result.BestAsteroid.Y, Is.EqualTo(3));
+        result.BestAsteroid.X.Should().Be(8);
+        result.BestAsteroid.Y.Should().Be(3);
     }
 
     [Test]
@@ -161,14 +162,14 @@ ST...U...V.WXYZ1.
         var detector = new AsteroidVaporizer();
         var result = detector.Vaporize(map.Trim());
 
-        Assert.That(result.DestroyedAsteroids[0].Name, Is.EqualTo('L'));
-        Assert.That(result.DestroyedAsteroids[1].Name, Is.EqualTo('E'));
-        Assert.That(result.DestroyedAsteroids[2].Name, Is.EqualTo('M'));
-        Assert.That(result.DestroyedAsteroids[3].Name, Is.EqualTo('F'));
-        Assert.That(result.DestroyedAsteroids[4].Name, Is.EqualTo('V'));
-        Assert.That(result.DestroyedAsteroids[5].Name, Is.EqualTo('O'));
-        Assert.That(result.DestroyedAsteroids[6].Name, Is.EqualTo('P'));
-        Assert.That(result.DestroyedAsteroids[7].Name, Is.EqualTo('W'));
-        Assert.That(result.DestroyedAsteroids[8].Name, Is.EqualTo('Q'));
+        result.DestroyedAsteroids[0].Name.Should().Be('L');
+        result.DestroyedAsteroids[1].Name.Should().Be('E');
+        result.DestroyedAsteroids[2].Name.Should().Be('M');
+        result.DestroyedAsteroids[3].Name.Should().Be('F');
+        result.DestroyedAsteroids[4].Name.Should().Be('V');
+        result.DestroyedAsteroids[5].Name.Should().Be('O');
+        result.DestroyedAsteroids[6].Name.Should().Be('P');
+        result.DestroyedAsteroids[7].Name.Should().Be('W');
+        result.DestroyedAsteroids[8].Name.Should().Be('Q');
     }
 }

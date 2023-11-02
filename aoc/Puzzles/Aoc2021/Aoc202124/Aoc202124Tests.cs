@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202124;
@@ -17,7 +18,7 @@ mul x -1
         var alu = new Alu(input.Trim());
         var result = alu.Process(p);
 
-        Assert.That(result.Memory['x'], Is.EqualTo(expected));
+        result.Memory['x'].Should().Be(expected);
     }
 
     [TestCase(23, 0)]
@@ -37,7 +38,7 @@ eql z x
         var alu = new Alu(input.Trim());
         var result = alu.Process(p);
 
-        Assert.That(result.Memory['z'], Is.EqualTo(expected));
+        result.Memory['z'].Should().Be(expected);
     }
 
     [TestCase(1, 0, 0, 0, 1)]
@@ -68,9 +69,9 @@ mod w 2
         var alu = new Alu(input.Trim());
         var result = alu.Process(p);
 
-        Assert.That(result.Memory['w'], Is.EqualTo(expW));
-        Assert.That(result.Memory['x'], Is.EqualTo(expX));
-        Assert.That(result.Memory['y'], Is.EqualTo(expY));
-        Assert.That(result.Memory['z'], Is.EqualTo(expZ));
+        result.Memory['w'].Should().Be(expW);
+        result.Memory['x'].Should().Be(expX);
+        result.Memory['y'].Should().Be(expY);
+        result.Memory['z'].Should().Be(expZ);
     }
 }

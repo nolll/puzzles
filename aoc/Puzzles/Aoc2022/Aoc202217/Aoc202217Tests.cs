@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202217;
@@ -10,7 +11,7 @@ public class Aoc202217Tests
         var tetris = new Tetris();
         var result = tetris.Part1(Input, 2022);
 
-        Assert.That(result, Is.EqualTo(3068));
+        result.Should().Be(3068);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202217Tests
         var tetris = new Tetris();
         var result = tetris.Run(Input, 1_000_000_000_000);
 
-        Assert.That(result, Is.EqualTo(1_514_285_714_288));
+        result.Should().Be(1_514_285_714_288);
     }
 
     [Test]
@@ -29,8 +30,8 @@ public class Aoc202217Tests
 
         var result = CycleFinder.FindRepeatCycle(input, 2);
 
-        Assert.That(result.Index, Is.EqualTo(0));
-        Assert.That(result.Length, Is.EqualTo(0));
+        result.Index.Should().Be(0);
+        result.Length.Should().Be(0);
     }
 
     [Test]
@@ -43,8 +44,8 @@ public class Aoc202217Tests
         // does not find the start of the sequence, but the first instance of the sequence found
         // the sequence starts at index 3 (value 1) but the search start is returned, index 6 (value 4)
         // the sequence found id 4, 5, 1, 2, 3
-        Assert.That(result.Index, Is.EqualTo(6));
-        Assert.That(result.Length, Is.EqualTo(5));
+        result.Index.Should().Be(6);
+        result.Length.Should().Be(5);
     }
 
     private const string Input = ">>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>";

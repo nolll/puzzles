@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201616;
@@ -13,7 +14,7 @@ public class Aoc201616Tests
         var dragonCurve = new DragonCurve();
         var data = dragonCurve.ApplyAlgorithm(input);
 
-        Assert.That(data, Is.EqualTo(expected));
+        data.Should().Be(expected);
     }
 
     [Test]
@@ -26,8 +27,8 @@ public class Aoc201616Tests
         var dragonCurve = new DragonCurve();
         var data = dragonCurve.FillDisk(input, expectedLength);
 
-        Assert.That(data, Is.EqualTo(expected));
-        Assert.That(data.Length, Is.EqualTo(expectedLength));
+        data.Should().Be(expected);
+        data.Length.Should().Be(expectedLength);
     }
 
     [Test]
@@ -39,6 +40,6 @@ public class Aoc201616Tests
         var dragonCurve = new DragonCurve();
         var checksum = dragonCurve.Checksum(input);
 
-        Assert.That(checksum, Is.EqualTo(expected));
+        checksum.Should().Be(expected);
     }
 }

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202210;
@@ -10,7 +11,7 @@ public class Aoc202210Tests
         var tube = new CathodeRayTube();
         var (result, _, _) = tube.Run(ShortInput);
 
-        Assert.That(result, Is.EqualTo(0));
+        result.Should().Be(0);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202210Tests
         var tube = new CathodeRayTube();
         var (result, _, _) = tube.Run(LongInput);
 
-        Assert.That(result, Is.EqualTo(13140));
+        result.Should().Be(13140);
     }
 
     [Test]
@@ -37,7 +38,7 @@ public class Aoc202210Tests
 #######.......#######.......#######.....
 """;
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     private const string ShortInput = """

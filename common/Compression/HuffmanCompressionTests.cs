@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Linq;
+using FluentAssertions;
 
 namespace Common.Compression;
 
@@ -12,7 +13,7 @@ public class HuffmanCompressionTests
     {
         var result = new HuffmanCompression(Charset).Encode("CEDED");
 
-        Assert.That(result, Is.EqualTo("11101100011000"));
+        result.Should().Be("11101100011000");
     }
 
     [Test]
@@ -20,7 +21,7 @@ public class HuffmanCompressionTests
     {
         var result = new HuffmanCompression(Charset).Decode("11101100011000");
 
-        Assert.That(result, Is.EqualTo("CEDED"));
+        result.Should().Be("CEDED");
     }
 
     [Test]
@@ -28,18 +29,18 @@ public class HuffmanCompressionTests
     {
         var result = new HuffmanCompression(Charset).Nodes;
 
-        Assert.That(result[0].Key, Is.EqualTo("C"));
-        Assert.That(result[0].Weight, Is.EqualTo(2));
-        Assert.That(result[1].Key, Is.EqualTo("B"));
-        Assert.That(result[1].Weight, Is.EqualTo(6));
-        Assert.That(result[2].Key, Is.EqualTo("E"));
-        Assert.That(result[2].Weight, Is.EqualTo(7));
-        Assert.That(result[3].Key, Is.EqualTo("D"));
-        Assert.That(result[3].Weight, Is.EqualTo(10));
-        Assert.That(result[4].Key, Is.EqualTo("_"));
-        Assert.That(result[4].Weight, Is.EqualTo(10));
-        Assert.That(result[5].Key, Is.EqualTo("A"));
-        Assert.That(result[5].Weight, Is.EqualTo(11));
+        result[0].Key.Should().Be("C");
+        result[0].Weight.Should().Be(2);
+        result[1].Key.Should().Be("B");
+        result[1].Weight.Should().Be(6);
+        result[2].Key.Should().Be("E");
+        result[2].Weight.Should().Be(7);
+        result[3].Key.Should().Be("D");
+        result[3].Weight.Should().Be(10);
+        result[4].Key.Should().Be("_");
+        result[4].Weight.Should().Be(10);
+        result[5].Key.Should().Be("A");
+        result[5].Weight.Should().Be(11);
     }
 
     [Test]
@@ -47,9 +48,9 @@ public class HuffmanCompressionTests
     {
         var result = new HuffmanCompression(Charset).Tree;
 
-        Assert.That(result.Count, Is.EqualTo(1));
-        Assert.That(result[0].Key, Is.EqualTo("D_AECB"));
-        Assert.That(result[0].Weight, Is.EqualTo(46));
+        result.Count.Should().Be(1);
+        result[0].Key.Should().Be("D_AECB");
+        result[0].Weight.Should().Be(46);
     }
 
     [Test]
@@ -57,11 +58,11 @@ public class HuffmanCompressionTests
     {
         var result = new HuffmanCompression(Charset).Encoding;
 
-        Assert.That(result["D"], Is.EqualTo("00"));
-        Assert.That(result["_"], Is.EqualTo("01"));
-        Assert.That(result["A"], Is.EqualTo("10"));
-        Assert.That(result["E"], Is.EqualTo("110"));
-        Assert.That(result["C"], Is.EqualTo("1110"));
-        Assert.That(result["B"], Is.EqualTo("1111"));
+        result["D"].Should().Be("00");
+        result["_"].Should().Be("01");
+        result["A"].Should().Be("10");
+        result["E"].Should().Be("110");
+        result["C"].Should().Be("1110");
+        result["B"].Should().Be("1111");
     }
 }

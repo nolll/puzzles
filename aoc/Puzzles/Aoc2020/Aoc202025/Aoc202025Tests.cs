@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202025;
@@ -15,6 +16,6 @@ public class Aoc202025Tests
         var finder = new EncryptionKeyFinder(Input.Trim());
         var key = finder.FindKey();
 
-        Assert.That(key, Is.EqualTo(14897079));
+        key.Should().Be(14897079);
     }
 }

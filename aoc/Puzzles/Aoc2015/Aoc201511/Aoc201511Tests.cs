@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2015.Aoc201511;
@@ -13,7 +14,7 @@ public class Aoc201511Tests
         var validator = new CorporatePasswordValidator();
         var isValid = validator.IsValid(pwd);
 
-        Assert.That(isValid, Is.EqualTo(expected));
+        isValid.Should().Be(expected);
     }
 
     [TestCase("abcdefgh", "abcdffaa")]
@@ -23,6 +24,6 @@ public class Aoc201511Tests
         var validator = new CorporatePasswordValidator();
         var next = validator.FindNextPassword(pwd);
 
-        Assert.That(next, Is.EqualTo(expected));
+        next.Should().Be(expected);
     }
 }

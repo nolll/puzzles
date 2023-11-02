@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202211;
@@ -10,7 +11,7 @@ public class Aoc202211Tests
         var monkeyBusiness = new MonkeyBusiness();
         var result = monkeyBusiness.Part1(Input);
 
-        Assert.That(result, Is.EqualTo(10605));
+        result.Should().Be(10605);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202211Tests
         var monkeyBusiness = new MonkeyBusiness();
         var result = monkeyBusiness.Part2(Input);
 
-        Assert.That(result, Is.EqualTo(2_713_310_158));
+        result.Should().Be(2_713_310_158);
     }
 
     private const string Input = """

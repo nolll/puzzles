@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202008;
@@ -10,7 +11,7 @@ public class Aoc202008Tests
         var console = new GameConsoleRunner(Input.Trim());
         var accBeforeRepeat = console.RunUntilLoop();
 
-        Assert.That(accBeforeRepeat, Is.EqualTo(5));
+        accBeforeRepeat.Should().Be(5);
     }
 
     [Test]
@@ -19,7 +20,7 @@ public class Aoc202008Tests
         var console = new GameConsoleRunner(Input.Trim());
         var accAtTermination = console.RunUntilTermination();
 
-        Assert.That(accAtTermination, Is.EqualTo(8));
+        accAtTermination.Should().Be(8);
     }
 
     [Test]
@@ -41,8 +42,8 @@ acc +6
         var console = new GameConsole(instructions);
         var exit = console.Run();
 
-        Assert.That(exit.Status, Is.EqualTo(ExitStatus.End));
-        Assert.That(exit.ExitValue, Is.EqualTo(8));
+        exit.Status.Should().Be(ExitStatus.End);
+        exit.ExitValue.Should().Be(8);
     }
 
     private const string Input = """

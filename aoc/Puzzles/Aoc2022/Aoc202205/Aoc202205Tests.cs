@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2022.Aoc202205;
@@ -11,7 +12,7 @@ public class Aoc202205Tests
         crane.Run1();
         var result = crane.Message;
 
-        Assert.That(result, Is.EqualTo("CMZ"));
+        result.Should().Be("CMZ");
     }
 
     [Test]
@@ -21,7 +22,7 @@ public class Aoc202205Tests
         crane.Run2();
         var result = crane.Message;
 
-        Assert.That(result, Is.EqualTo("MCD"));
+        result.Should().Be("MCD");
     }
 
     private const string Input = """

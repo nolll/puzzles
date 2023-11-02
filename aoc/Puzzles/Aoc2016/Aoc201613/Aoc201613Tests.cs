@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2016.Aoc201613;
@@ -11,7 +12,7 @@ public class Aoc201613Tests
 
         var maze = new Maze(10, 7, input);
         var stepCount = maze.StepCountToTarget(7, 4);
-        Assert.That(stepCount, Is.EqualTo(11));
+        stepCount.Should().Be(11);
     }
 
     [TestCase(0, 1)]
@@ -25,6 +26,6 @@ public class Aoc201613Tests
 
         var maze = new Maze(10, 7, input);
         var stepCount = maze.LocationCountAfter(steps);
-        Assert.That(stepCount, Is.EqualTo(expected));
+        stepCount.Should().Be(expected);
     }
 }

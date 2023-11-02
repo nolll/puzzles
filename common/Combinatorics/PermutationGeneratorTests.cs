@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Common.Combinatorics;
@@ -9,6 +10,6 @@ public class PermutationGeneratorTests
     {
         var sequences = PermutationGenerator.GetPermutations(new[] {1, 2, 3}).ToList();
 
-        Assert.That(sequences.Count, Is.EqualTo(6));
+        sequences.Count.Should().Be(6);
     }
 }

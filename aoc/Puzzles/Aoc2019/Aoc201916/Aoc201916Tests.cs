@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2019.Aoc201916;
@@ -11,7 +12,7 @@ public class Aoc201916Tests
         var algorithm = new FrequencyAlgorithmPart1(input);
         var result = algorithm.Run(1);
 
-        Assert.That(result, Is.EqualTo("48226158"));
+        result.Should().Be("48226158");
     }
 
     [Test]
@@ -21,7 +22,7 @@ public class Aoc201916Tests
         var algorithm = new FrequencyAlgorithmPart1(input);
         var result = algorithm.Run(2);
 
-        Assert.That(result, Is.EqualTo("34040438"));
+        result.Should().Be("34040438");
     }
 
     [Test]
@@ -31,7 +32,7 @@ public class Aoc201916Tests
         var algorithm = new FrequencyAlgorithmPart1(input);
         var result = algorithm.Run(3);
 
-        Assert.That(result, Is.EqualTo("03415518"));
+        result.Should().Be("03415518");
     }
 
     [Test]
@@ -41,7 +42,7 @@ public class Aoc201916Tests
         var algorithm = new FrequencyAlgorithmPart1(input);
         var result = algorithm.Run(4);
 
-        Assert.That(result, Is.EqualTo("01029498"));
+        result.Should().Be("01029498");
     }
 
     [TestCase("80871224585914546619083218645595", "24176176")]
@@ -52,7 +53,7 @@ public class Aoc201916Tests
         var algorithm = new FrequencyAlgorithmPart1(input);
         var result = algorithm.Run(100);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 
     [TestCase("03036732577212944063491565474664", "84462026")]
@@ -63,6 +64,6 @@ public class Aoc201916Tests
         var algorithm = new FrequencyAlgorithmPart2(input);
         var result = algorithm.Run(100);
 
-        Assert.That(result, Is.EqualTo(expected));
+        result.Should().Be(expected);
     }
 }

@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Aoc.Puzzles.Aoc2021.Aoc202123;
@@ -11,7 +12,7 @@ public class Aoc202123Tests
         amphipods.TestArrange();
         var result = amphipods.Energy;
 
-        Assert.That(result, Is.EqualTo(44169));
+        result.Should().Be(44169);
     }
 
     private const string Input2 = """

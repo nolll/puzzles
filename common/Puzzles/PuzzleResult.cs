@@ -8,7 +8,17 @@ public class PuzzleResult
     public string? CorrectAnswerHash { get; }
     public string Answer { get; }
 
-    public PuzzleResult(string? answer, string? correctAnswer = null, string? correctAnswerHash = null)
+    private PuzzleResult(string? answer)
+        : this(answer, null)
+    {
+    }
+
+    public PuzzleResult(string? answer, string? correctAnswer)
+        : this(answer, correctAnswer, null)
+    {
+    }
+
+    public PuzzleResult(string? answer, string? correctAnswer, string? correctAnswerHash)
     {
         CorrectAnswer = correctAnswer;
         CorrectAnswerHash = correctAnswerHash;
@@ -43,11 +53,6 @@ public class PuzzleResult
     public PuzzleResult(BigInteger? answer, string? correctAnswerHash = null)
         : this(answer?.ToString(), null, correctAnswerHash)
     {
-    }
-
-    private PuzzleResult(string? answer)
-    {
-        Answer = answer ?? string.Empty;
     }
 
     public static PuzzleResult Empty => new("No puzzle here");

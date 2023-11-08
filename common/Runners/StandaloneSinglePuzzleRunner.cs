@@ -1,6 +1,7 @@
 ﻿using Common.Formatting;
 using Common.Puzzles;
 using Spectre.Console;
+using System.Collections.Generic;
 using Timer = Common.Timing.Timer;
 
 namespace Common.Runners;
@@ -10,9 +11,12 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     private readonly Puzzle _puzzle;
     private const int StatusPadding = 15;
 
-    public StandaloneSinglePuzzleRunner(Puzzle puzzle)
+    private readonly PuzzleResultVerifier _resultVerifier;
+
+    public StandaloneSinglePuzzleRunner(Puzzle puzzle, string hashSeed)
     {
         _puzzle = puzzle;
+        _resultVerifier = new PuzzleResultVerifier(hashSeed);
     }
 
     public void Run()
@@ -38,14 +42,14 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
             AnsiConsole.MarkupLine($"[yellow]{puzzle.Comment}[/]");
     }
 
-    private static void RunAndPrintPuzzleResult(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
+    private void RunAndPrintPuzzleResult(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
     {
         var result = RunPuzzle(puzzleIndex, puzzleFunc);
         AnsiConsole.WriteLine();
         WriteAnswer(result);
     }
 
-    private static PuzzleResult RunPuzzle(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
+    private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
     {
         PuzzleResult? result = null;
         PrintTime(puzzleIndex); 
@@ -60,7 +64,12 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         if (task.IsFaulted && task.Exception is not null)
             throw task.Exception;
 
-        return task.IsFaulted ? PuzzleResult.Failed : result ?? PuzzleResult.Empty;
+        if (task.IsFaulted)
+            return VerifiedPuzzleResult.Failed;
+        if (result is not null)
+            return _resultVerifier.Verify(result);
+            
+        return VerifiedPuzzleResult.Empty;
     }
 
     private static void PrintTime(int puzzleNumber, TimeSpan? time = null)
@@ -72,7 +81,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         AnsiConsole.Write($"\rPart {puzzleNumber}: {formattedTime}".PadRight(StatusPadding));
     }
     
-    private static void WriteAnswer(PuzzleResult? result)
+    private static void WriteAnswer(VerifiedPuzzleResult? result)
     {
         if (result is null)
             AnsiConsole.MarkupLine(MarkupColor("Missing", Color.Red));
@@ -86,9 +95,9 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
             WriteAnswer(result, Color.Yellow);
     }
 
-    private static void WriteAnswer(PuzzleResult result, Color color)
+    private static void WriteAnswer(VerifiedPuzzleResult result, Color color)
     {
-        AnsiConsole.MarkupLine(MarkupColor(result.Answer, color));
-        AnsiConsole.MarkupLine(MarkupColor(result.Hash, Color.Grey));
+        AnsiConsole.MarkupLine(MarkupColor(result.Answer.Answer, color));
+        AnsiConsole.MarkupLine(MarkupColor(result.Answer.Hash, Color.Grey));
     }
 }

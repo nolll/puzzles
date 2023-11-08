@@ -13,14 +13,16 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 
     private readonly Puzzle _puzzle;
     private readonly TimeSpan _timeoutTimespan;
+    private readonly PuzzleResultVerifier _resultVerifier;
     private readonly string _title;
     private readonly string _commentMarkup;
     private readonly string[] _markups;
 
-    public InSequenceSinglePuzzleRunner(Puzzle puzzle, TimeSpan timeoutTimespan)
+    public InSequenceSinglePuzzleRunner(Puzzle puzzle, TimeSpan timeoutTimespan, PuzzleResultVerifier resultVerifier)
     {
         _puzzle = puzzle;
         _timeoutTimespan = timeoutTimespan;
+        _resultVerifier = resultVerifier;
 
         _title = _puzzle.ListTitle.PadRight(11);
         _commentMarkup = MarkupComment(_puzzle.Comment);
@@ -49,7 +51,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
         var time = TimeSpan.Zero;
         var waited = false;
         var cancellation = new CancellationTokenSource();
-        var task = Task.Run(() => status = runFunc().Status, cancellation.Token);
+        var task = Task.Run(() => status = _resultVerifier.Verify(runFunc()).Status, cancellation.Token);
         while (!task.IsCompleted)
         {
             if (timer.FromStart >= _timeoutTimespan)

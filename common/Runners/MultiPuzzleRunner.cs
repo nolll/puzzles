@@ -6,10 +6,12 @@ namespace Common.Runners;
 public class MultiPuzzleRunner
 {
     private readonly TimeSpan _timeoutTimespan;
+    private readonly PuzzleResultVerifier _resultVerifier;
 
-    public MultiPuzzleRunner(int timeoutSeconds)
+    public MultiPuzzleRunner(int timeoutSeconds, string hashSeed)
     {
         _timeoutTimespan = TimeSpan.FromSeconds(timeoutSeconds);
+        _resultVerifier = new PuzzleResultVerifier(hashSeed);
     }
 
     public void Run(IEnumerable<Puzzle> puzzles)
@@ -35,7 +37,7 @@ public class MultiPuzzleRunner
 
         foreach (var puzzle in puzzleList)
         {
-            new InSequenceSinglePuzzleRunner(puzzle, _timeoutTimespan).Run();
+            new InSequenceSinglePuzzleRunner(puzzle, _timeoutTimespan, _resultVerifier).Run();
         }
 
         AnsiConsole.WriteLine(divider);

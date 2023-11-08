@@ -9,7 +9,7 @@ public class Program
 
     private readonly IPuzzleRepository _puzzleRepository;
     private readonly IHelpPrinter _helpPrinter;
-    private readonly PuzzleRunner _runner = new(PuzzleTimeout);
+    private readonly PuzzleRunner _runner = new(PuzzleTimeout, "");
 
     public Program(
         IPuzzleRepository puzzleRepository, 

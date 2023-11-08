@@ -6,10 +6,12 @@ namespace Common.Runners;
 public class PuzzleRunner
 {
     private readonly int _puzzleTimeout;
+    private readonly string _hashSeed;
 
-    public PuzzleRunner(int puzzleTimeout)
+    public PuzzleRunner(int puzzleTimeout, string hashSeed)
     {
         _puzzleTimeout = puzzleTimeout;
+        _hashSeed = hashSeed;
     }
 
     public void Run(IEnumerable<Puzzle> puzzles)
@@ -24,9 +26,9 @@ public class PuzzleRunner
         }
 
         if (count == 1)
-            new StandaloneSinglePuzzleRunner(enumerable.First()).Run();
+            new StandaloneSinglePuzzleRunner(enumerable.First(), _hashSeed).Run();
         else
-            new MultiPuzzleRunner(_puzzleTimeout).Run(enumerable);
+            new MultiPuzzleRunner(_puzzleTimeout, _hashSeed).Run(enumerable);
     }
 
     public void Run(Puzzle puzzle)

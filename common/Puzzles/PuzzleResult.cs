@@ -5,15 +5,17 @@ namespace Common.Puzzles;
 
 public class PuzzleResult
 {
+    public string? CorrectAnswer { get; }
+    public string? CorrectAnswerHash { get; }
     public string Answer { get; }
     public string Hash { get; }
-    public PuzzleResultStatus Status { get; }
 
     public PuzzleResult(string? answer, string? correctAnswer = null, string? correctAnswerHash = null)
     {
+        CorrectAnswer = correctAnswer;
+        CorrectAnswerHash = correctAnswerHash;
         Answer = answer ?? string.Empty;
         Hash = new Hashfactory().StringHashFromString(Answer);
-        Status = VerifyResult(answer, Hash, correctAnswer, correctAnswerHash);
     }
 
     public PuzzleResult(int? answer, int? correctAnswer = null)
@@ -46,31 +48,12 @@ public class PuzzleResult
     {
     }
 
-    private PuzzleResult(string? answer, PuzzleResultStatus status)
+    private PuzzleResult(string? answer)
     {
         Answer = answer ?? string.Empty;
         Hash = string.Empty;
-        Status = status;
     }
 
-    public static PuzzleResult Empty => new("No puzzle here", PuzzleResultStatus.Empty);
-    public static PuzzleResult Failed => new("Failed", PuzzleResultStatus.Failed);
-
-    private static PuzzleResultStatus VerifyResult(string? answer, string answerHash, string? correctAnswer, string? correctAnswerHash)
-    {
-        if (answer is null)
-            return PuzzleResultStatus.Wrong;
-
-        if(correctAnswer is not null)
-            return answer == correctAnswer
-                ? PuzzleResultStatus.Correct
-                : PuzzleResultStatus.Wrong;
-
-        if(correctAnswerHash is not null)
-            return answerHash == correctAnswerHash
-                ? PuzzleResultStatus.Correct
-                : PuzzleResultStatus.Wrong;
-
-        return PuzzleResultStatus.Completed;
-    }
+    public static PuzzleResult Empty => new("No puzzle here");
+    public static PuzzleResult Failed => new("Failed");
 }

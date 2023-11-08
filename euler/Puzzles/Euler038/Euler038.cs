@@ -21,7 +21,7 @@ public class Euler038 : EulerPuzzle
             n++;
         }
 
-        return new PuzzleResult(products.Max(), "f2a29ede8dc9fae7926dc7a4357ac25e");
+        return new PuzzleResult(products.Max(), "257cb268ef4192a7317720ad9cdfe042");
     }
 
     public static long? GetConcatenatedProduct(int n)

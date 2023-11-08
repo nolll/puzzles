@@ -43,7 +43,7 @@ public class Euler021 : EulerPuzzle
 
         var amicableSum = amicableNumbers.Sum();
             
-        return new PuzzleResult(amicableSum, "51e04cd4e55e7e415bf24de9e1b0f3ff");
+        return new PuzzleResult(amicableSum, "bfa83952447e586ff82b1adaed0d53ea");
     }
 
     public static int GetFactorialSum(int n)

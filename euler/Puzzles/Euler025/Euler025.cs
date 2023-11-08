@@ -10,7 +10,7 @@ public class Euler025 : EulerPuzzle
     protected override PuzzleResult Run()
     {
         var result = Run(1000);
-        return new PuzzleResult(result, "a376802c0811f1b9088828288eb0d3f0");
+        return new PuzzleResult(result, "b0f9f78357a59417863c853ccb8cff75");
     }
 
     public int Run(int digitCount)

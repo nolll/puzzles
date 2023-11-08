@@ -11,7 +11,7 @@ public class Euler019 : EulerPuzzle
         var startDate = DateTime.Parse("1901-01-01");
         var endDate = DateTime.Parse("2000-12-31");
         var result = Run(startDate, endDate);
-        return new PuzzleResult(result, "a4a042cf4fd6bfb47701cbc8a1653ada");
+        return new PuzzleResult(result, "67c16f14538a051c5a6d1a2508e38851");
     }
 
     public int Run(DateTime startDate, DateTime endDate)

@@ -10,7 +10,7 @@ public class Euler018 : EulerPuzzle
     protected override PuzzleResult Run()
     {
         var result = Run(Triangle);
-        return new PuzzleResult(result, "708f3cf8100d5e71834b1db77dfa15d6");
+        return new PuzzleResult(result, "ac0ed37fe47b088e57246f49e0564317");
     }
 
     public int Run(string triangleString)

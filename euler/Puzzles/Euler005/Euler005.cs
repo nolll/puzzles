@@ -9,7 +9,7 @@ public class Euler005 : EulerPuzzle
     protected override PuzzleResult Run()
     {
         var smallestMultiple = Run(20);
-        return new PuzzleResult(smallestMultiple, "bc0d0a22a7a46212135ed0ba77d22f3a");
+        return new PuzzleResult(smallestMultiple, "6a929ec1d5586fac0506b20ad87b56e5");
     }
     
     public int Run(int max)

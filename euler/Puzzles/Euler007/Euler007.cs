@@ -11,7 +11,7 @@ public class Euler007 : EulerPuzzle
     {
         var nthPrime = Run(10001);
 
-        return new PuzzleResult(nthPrime, "8c32ab09ec0210af60d392e9b2009560");
+        return new PuzzleResult(nthPrime, "42330f784700c1eb6c8e5aab1559caa5");
     }
 
     public int Run(int index)

@@ -10,7 +10,7 @@ public class Euler012 : EulerPuzzle
     protected override PuzzleResult Run()
     {
         var result = Run(501);
-        return new PuzzleResult(result, "8091de7d285989bbfa9a2f9f3bdcc7c0");
+        return new PuzzleResult(result, "fea73831ed90d121b1b03e10004a2ead");
     }
 
     public int Run(int maxFactorCount)

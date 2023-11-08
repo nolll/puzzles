@@ -27,6 +27,6 @@ public class Euler041 : EulerPuzzle
                 break;
         }
         
-        return new PuzzleResult(largest, "d0a1bd6ab4229b2d0754be8923431404");
+        return new PuzzleResult(largest, "6aecd31e595c9172b15112c8ef913306");
     }
 }

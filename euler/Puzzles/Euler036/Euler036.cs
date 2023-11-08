@@ -22,6 +22,6 @@ public class Euler036 : EulerPuzzle
             }
         }
 
-        return new PuzzleResult(sum, "0e175dc2f28833885f62e7345addff03");
+        return new PuzzleResult(sum, "710d458ea3f1a020b4ad4198a1ec846f");
     }
 }

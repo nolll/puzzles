@@ -10,7 +10,7 @@ public class Euler006 : EulerPuzzle
     {
         var diff = Run(100);
 
-        return new PuzzleResult(diff, "867380888952c39a131fe1d832246ecc");
+        return new PuzzleResult(diff, "87e872f8edddae501e3813163ca22680");
     }
         
     public int Run(int numCount)

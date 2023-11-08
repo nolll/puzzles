@@ -9,7 +9,7 @@ public class Euler008 : EulerPuzzle
     protected override PuzzleResult Run()
     {
         var largestProduct = Run(13);
-        return new PuzzleResult(largestProduct, "0f53ea7949d32ef24f9186207600403c");
+        return new PuzzleResult(largestProduct, "aa2c16e42ce883b208743426f74df8df");
     }
         
     public long Run(long digitCount)

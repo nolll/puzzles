@@ -20,6 +20,6 @@ public class Aquaq24 : AquaqPuzzle
         // The answer is just a part of the string
         var result = decoded.Split(" ").Last().Trim();
 
-        return new PuzzleResult(result, "churlish");
+        return new PuzzleResult(result, null, "f4418bc083e5b5289193a44d0e795b47");
     }
 }

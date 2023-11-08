@@ -14,7 +14,7 @@ public class Aquaq22 : AquaqPuzzle
         var romanNumbers = numbers.Select(Conversion.ToRoman);
         var sum = ToCaesarCipherSum(string.Join("", romanNumbers));
 
-        return new PuzzleResult(sum, 43103);
+        return new PuzzleResult(sum, "f07ca4fff2262325714456751a804932");
     }
 
     public static int ToCaesarCipherSum(string input)

@@ -8,7 +8,7 @@ public class Aquaq20 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(PlayBlackjack(InputFile), 256);
+        return new PuzzleResult(PlayBlackjack(InputFile), "f718499c1c8cef6730f9fd03c8125cab");
     }
 
     public static int PlayBlackjack(string input)

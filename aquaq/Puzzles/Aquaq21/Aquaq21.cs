@@ -9,7 +9,7 @@ public class Aquaq21 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(InputFile, 5), 143487);
+        return new PuzzleResult(Run(InputFile, 5), "27d4a4798f735c26bfb917539965e5d0");
     }
 
     public static int Run(string input, int width)
@@ -22,7 +22,7 @@ public class Aquaq21 : AquaqPuzzle
         var firstRow = rows.First();
         for (var position = 0; position <= firstRow.Length - width; position++)
         {
-            var startId = "start";
+            const string startId = "start";
             var toId = $"0-{position}";
             var cost = firstRow.Skip(position).Take(width).Sum();
             inputs.Add(new Graph.Input(startId, toId, cost));
@@ -50,7 +50,7 @@ public class Aquaq21 : AquaqPuzzle
         for (var position = 0; position <= lastRow.Length - width; position++)
         {
             var startId = $"{rows.Count - 1}-{position}";
-            var toId = "end";
+            const string toId = "end";
             inputs.Add(new Graph.Input(startId, toId, 0));
         }
 

@@ -15,7 +15,7 @@ public class Aquaq18 : AquaqPuzzle
             .Select(StepsToPalindrome)
             .Sum();
 
-        return new PuzzleResult(sum, 719126);
+        return new PuzzleResult(sum, "5e6f797317fddc01e56314258597c24c");
     }
 
     public static bool IsPalindromeTime(DateTime dateTime)

@@ -11,7 +11,7 @@ public class Aquaq02 : AquaqPuzzle
         var input = InputFile.Split(' ').Select(int.Parse);
         var uniqueNumbers = GetUniqueNumbers(input);
 
-        return new PuzzleResult(uniqueNumbers.Sum(), 321);
+        return new PuzzleResult(uniqueNumbers.Sum(), "caf1a3dfb505ffed0d024130f58c5cfa");
     }
 
     public static IEnumerable<int> GetUniqueNumbers(IEnumerable<int> input)

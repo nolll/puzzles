@@ -14,7 +14,7 @@ public class Aquaq35 : AquaqPuzzle
 
         var keyword = FindKeyword(words, input);
 
-        return new PuzzleResult(keyword, "nonsense");
+        return new PuzzleResult(keyword, null, "352a507c78da1dea6dd42a5867d3c2cc");
     }
 
     private static string FindKeyword(IEnumerable<string> words, string input)

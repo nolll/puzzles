@@ -15,7 +15,7 @@ public class Aquaq00 : AquaqPuzzle
 
         var result = HandleKeyPresses(keyPresses);
 
-        return new PuzzleResult(result, "oh so they have internet on computers now");
+        return new PuzzleResult(result, null, "b30e48a5eb52e6721e5002928d5777e2");
     }
 
     public static string HandleKeyPresses(IEnumerable<(int key, int count)> input)

@@ -12,6 +12,6 @@ public class Aquaq30 : AquaqPuzzle
         var decks = InputFile.Split(Environment.NewLine);
         var sum = decks.Sum(cardFlipper.CountValidStartingMoves);
 
-        return new PuzzleResult(sum, 8069);
+        return new PuzzleResult(sum, "7cc5a75432e9a547200e3668c3761ae7");
     }
 }

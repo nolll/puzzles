@@ -13,7 +13,7 @@ public class Aquaq11 : AquaqPuzzle
     {
         var result = CountRequiredTiles(InputFile);
 
-        return new PuzzleResult(result, 216);
+        return new PuzzleResult(result, "45fbc6d3e05ebd93369ce542e8f2322d");
     }
 
     public static int CountRequiredTiles(string input)

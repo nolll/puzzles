@@ -1,7 +1,5 @@
 ﻿using Common.CoordinateSystems.CoordinateSystem2D;
 using Common.Puzzles;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Aquaq.Puzzles.Aquaq19;
 
@@ -17,7 +15,7 @@ public class Aquaq19 : AquaqPuzzle
         var result = InputFile.Split(Environment.NewLine)
             .Select(o => RunGame(o, true)).Sum();
 
-        return new PuzzleResult(result, 2481);
+        return new PuzzleResult(result, "6b5754d737784b51ec5075c0dc437bf0");
     }
 
     public static int RunGame(string s, bool optimized)

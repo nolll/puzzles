@@ -26,7 +26,7 @@ public class Aquaq14 : AquaqPuzzle
     protected override PuzzleResult Run()
     {
         var result = PlayBingo(InputFile);
-        return new PuzzleResult(result, 4327);
+        return new PuzzleResult(result, "ce016f59ecc2366a43e1c96a4774d167");
     }
 
     public static int PlayBingo(string input)

@@ -2,7 +2,6 @@
 using Common.Puzzles;
 using Spectre.Console;
 using Timer = Common.Timing.Timer;
-using Color = System.Drawing.Color;
 
 namespace Common.Runners;
 
@@ -80,10 +79,16 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         else if (result.Status is PuzzleResultStatus.Empty)
             AnsiConsole.WriteLine("No puzzle");
         else if (result.Status is PuzzleResultStatus.Correct)
-            AnsiConsole.MarkupLine(MarkupColor(result.Answer, Color.Green));
+            WriteAnswer(result, Color.Green);
         else if (result.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)
-            AnsiConsole.MarkupLine(MarkupColor(result.Answer, Color.Red));
+            WriteAnswer(result, Color.Red);
         else
-            AnsiConsole.MarkupLine(MarkupColor(result.Answer, Color.Yellow));
+            WriteAnswer(result, Color.Yellow);
+    }
+
+    private static void WriteAnswer(PuzzleResult result, Color color)
+    {
+        AnsiConsole.MarkupLine(MarkupColor(result.Answer, color));
+        AnsiConsole.MarkupLine(MarkupColor(result.Hash, Color.Grey));
     }
 }

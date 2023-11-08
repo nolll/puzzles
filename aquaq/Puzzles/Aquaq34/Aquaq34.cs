@@ -11,7 +11,7 @@ public class Aquaq34 : AquaqPuzzle
     {
         var result = LongestRouteTime(InputFile);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, (string?)null);
     }
 
     public static int LongestRouteTime(string input)

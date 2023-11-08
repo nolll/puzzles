@@ -13,7 +13,7 @@ public class Aquaq27 : AquaqPuzzle
     {
         var result = CalculateSnakeScore(InputFile);
 
-        return new PuzzleResult(result, 500135);
+        return new PuzzleResult(result, "e968fd18ade7512cd6b29f5d24835ac8");
     }
 
     public static int CalculateSnakeScore(string input)

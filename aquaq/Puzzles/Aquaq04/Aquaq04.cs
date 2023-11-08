@@ -12,7 +12,7 @@ public class Aquaq04 : AquaqPuzzle
     protected override PuzzleResult Run()
     {
         var sum = FindCoPrimesFor(Input).Sum();
-        return new PuzzleResult(sum, 195153719200);
+        return new PuzzleResult(sum, "5685346224793e2dfcb239f67bf4010f");
     }
 
     public static IEnumerable<long> FindCoPrimesFor(int n)

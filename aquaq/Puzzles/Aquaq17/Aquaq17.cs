@@ -8,7 +8,7 @@ public class Aquaq17 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(InputFile), "Kyrgyzstan 19560803 19920926");
+        return new PuzzleResult(Run(InputFile), null, "f4fd498a57bf082abeb138efa487060f");
     }
 
     public static string Run(string input)

@@ -1,7 +1,6 @@
 ﻿using Common.Formatting;
 using Common.Puzzles;
 using Spectre.Console;
-using Color = System.Drawing.Color;
 using Timer = Common.Timing.Timer;
 
 namespace Common.Runners;

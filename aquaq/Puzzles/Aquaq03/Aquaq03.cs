@@ -11,6 +11,6 @@ public class Aquaq03 : AquaqPuzzle
         var walker = new Walker();
         var result = walker.Walk(InputFile);
 
-        return new PuzzleResult(result, 2543);
+        return new PuzzleResult(result, "1b113258af3968aaf3969ca67e744ff8");
     }
 }

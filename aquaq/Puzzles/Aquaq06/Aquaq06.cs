@@ -11,7 +11,7 @@ public class Aquaq06 : AquaqPuzzle
         const int n = 123;
         var result = FindOneCount(n);
 
-        return new PuzzleResult(result, 6927);
+        return new PuzzleResult(result, "0ad5292c158f3924f8b480367fcbeb94");
     }
 
     public static int FindOneCount(int n)

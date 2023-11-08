@@ -9,7 +9,7 @@ public class Aquaq15 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(InputFile), 97920000);
+        return new PuzzleResult(Run(InputFile), "222ff477ee32679bed85de6400a1f799");
     }
 
     public int Run(string input) 

@@ -14,7 +14,7 @@ public class Aquaq01 : AquaqPuzzle
     {
         var result = GetHexString(Input);
 
-        return new PuzzleResult(result, "d0000d");
+        return new PuzzleResult(result, null, "9784442a0cb394dfee6d4d4e0be1c984");
     }
 
     public static string GetHexString(string input)

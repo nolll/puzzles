@@ -4,14 +4,13 @@ namespace Aquaq;
 
 public class AquaqProgram
 {
-    private const string DebugPuzzle = "35";
-
     static void Main(string[] args)
     {
         var program = new Program(
             new AquaqPuzzleRepository(),
-            new AquaqHelpPrinter());
+            new AquaqHelpPrinter(),
+            OptionsReader.Read());
 
-        program.Run(args, DebugPuzzle);
+        program.Run(args);
     }
 }

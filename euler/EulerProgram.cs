@@ -4,14 +4,13 @@ namespace Euler;
 
 public class EulerProgram
 {
-    private const string DebugPuzzle = "1";
-
     static void Main(string[] args)
     {
         var program = new Program(
             new EulerPuzzleRepository(),
-            new EulerHelpPrinter());
+            new EulerHelpPrinter(),
+            OptionsReader.Read());
         
-        program.Run(args, DebugPuzzle);
+        program.Run(args);
     }
 }

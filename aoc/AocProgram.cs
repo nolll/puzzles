@@ -1,18 +1,16 @@
-﻿using Aoc.Puzzles;
-using Common;
+﻿using Common;
 
 namespace Aoc;
 
 public class AocProgram
 {
-    private const string DebugPuzzle = "201501";
-
     static void Main(string[] args)
     {
         var program = new Program(
             new AocPuzzleRepository(),
-            new AocHelpPrinter());
+            new AocHelpPrinter(),
+            OptionsReader.Read());
 
-        program.Run(args, DebugPuzzle);
+        program.Run(args);
     }
 }

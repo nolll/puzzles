@@ -9,19 +9,21 @@ public class Program
 
     private readonly IPuzzleRepository _puzzleRepository;
     private readonly IHelpPrinter _helpPrinter;
-    private readonly PuzzleRunner _runner = new(PuzzleTimeout, "");
+    private readonly PuzzleRunner _runner;
+    private readonly string _debugPuzzle;
 
-    public Program(
-        IPuzzleRepository puzzleRepository, 
-        IHelpPrinter helpPrinter)
+    public Program(IPuzzleRepository puzzleRepository,
+        IHelpPrinter helpPrinter, Options options)
     {
         _puzzleRepository = puzzleRepository;
         _helpPrinter = helpPrinter;
+        _runner = new PuzzleRunner(options.TimeoutSeconds, options.HashSeed);
+        _debugPuzzle = options.DebugPuzzle;
     }
 
-    public void Run(string[] args, string debugPuzzle)
+    public void Run(string[] args)
     {
-        var parameters = ParseParameters(args, debugPuzzle);
+        var parameters = ParseParameters(args);
 
         if (parameters.ShowHelp)
             _helpPrinter.Print();
@@ -54,8 +56,8 @@ public class Program
         _runner.Run(filteredPuzzles);
     }
 
-    private static Puzzles.Parameters ParseParameters(string[] args, string debugPuzzle) =>
+    private Puzzles.Parameters ParseParameters(string[] args) =>
         DebugMode.IsDebugMode
-            ? new Puzzles.Parameters(id: debugPuzzle)
+            ? new Puzzles.Parameters(id: _debugPuzzle)
             : Puzzles.Parameters.Parse(args);
 }

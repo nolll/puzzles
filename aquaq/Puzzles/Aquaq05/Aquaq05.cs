@@ -10,7 +10,7 @@ public class Aquaq05 : AquaqPuzzle
     {
         var sum = FindSumOfIndexesWithMatchingDice(InputFile);
 
-        return new PuzzleResult(sum, "dacb283d1182b49af03528f6f02eccd7");
+        return new PuzzleResult(sum, "618a2293fcd6600e06eb2d002758bd97");
     }
 
     public static int FindSumOfIndexesWithMatchingDice(string input)

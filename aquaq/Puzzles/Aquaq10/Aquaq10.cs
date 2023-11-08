@@ -11,7 +11,7 @@ public class Aquaq10 : AquaqPuzzle
     {
         var result = Run(InputFile, "TUPAC", "DIDDY");
 
-        return new PuzzleResult(result, "b2eeb7362ef83deff5c7813a67e14f0a");
+        return new PuzzleResult(result, "970a7dc35bbbeae207c821cbc8bbb930");
     }
 
     public static int Run(string input, string source, string target)

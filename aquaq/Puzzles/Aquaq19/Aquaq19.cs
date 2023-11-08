@@ -15,7 +15,7 @@ public class Aquaq19 : AquaqPuzzle
         var result = InputFile.Split(Environment.NewLine)
             .Select(o => RunGame(o, true)).Sum();
 
-        return new PuzzleResult(result, "6b5754d737784b51ec5075c0dc437bf0");
+        return new PuzzleResult(result, "99a57b5b2a95e407216743a84d68c0e0");
     }
 
     public static int RunGame(string s, bool optimized)

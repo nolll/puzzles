@@ -16,7 +16,7 @@ public class Aquaq28 : AquaqPuzzle
     {
         var result = Encrypt(InputFile, "FISSION_MAILED");
 
-        return new PuzzleResult(result, null, "183fc0cd6a0737b2f8d3fae24de686c4");
+        return new PuzzleResult(result, null, "b2f9a54afc1e88e86671425bfc4e48b4");
     }
 
     public static string Encrypt(string input, string word)

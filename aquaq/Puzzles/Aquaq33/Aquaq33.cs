@@ -8,7 +8,7 @@ public class Aquaq33 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(245701), "ec010b488c836479c6d86af512a76ba5");
+        return new PuzzleResult(Run(245701), "3c08f90044660194d3d619fa4c14d736");
     }
 
     public static long Run(int maxTarget)

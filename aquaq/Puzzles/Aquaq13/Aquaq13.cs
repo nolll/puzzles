@@ -11,7 +11,7 @@ public class Aquaq13 : AquaqPuzzle
         var lines = InputFile.Split(Environment.NewLine);
         var sum = lines.Sum(FindMaxRepeats);
 
-        return new PuzzleResult(sum, "ad71c82b22f4f65b9398f76d8be4c615");
+        return new PuzzleResult(sum, "86680930d41e9acceb49215121585640");
     }
 
     public static int FindMaxRepeats(string s)

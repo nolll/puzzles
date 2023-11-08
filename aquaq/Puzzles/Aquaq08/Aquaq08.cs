@@ -11,7 +11,7 @@ public class Aquaq08 : AquaqPuzzle
         var (milk, cereal) = Run(InputFile);
         var sum = milk + cereal;
 
-        return new PuzzleResult(sum, "1e6e0a04d20f50967c64dac2d639a577");
+        return new PuzzleResult(sum, "dd27abc4b9d9ddead1ae574a69b3edbc");
     }
 
     public static (int milk, int cereal) Run(string input)

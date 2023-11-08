@@ -1,5 +1,4 @@
 ﻿using System.Numerics;
-using Common.Cryptography;
 
 namespace Common.Puzzles;
 
@@ -8,14 +7,12 @@ public class PuzzleResult
     public string? CorrectAnswer { get; }
     public string? CorrectAnswerHash { get; }
     public string Answer { get; }
-    public string Hash { get; }
 
     public PuzzleResult(string? answer, string? correctAnswer = null, string? correctAnswerHash = null)
     {
         CorrectAnswer = correctAnswer;
         CorrectAnswerHash = correctAnswerHash;
         Answer = answer ?? string.Empty;
-        Hash = new Hashfactory().StringHashFromString(Answer);
     }
 
     public PuzzleResult(int? answer, int? correctAnswer = null)
@@ -51,7 +48,6 @@ public class PuzzleResult
     private PuzzleResult(string? answer)
     {
         Answer = answer ?? string.Empty;
-        Hash = string.Empty;
     }
 
     public static PuzzleResult Empty => new("No puzzle here");

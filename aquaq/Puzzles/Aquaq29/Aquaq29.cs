@@ -16,7 +16,7 @@ public class Aquaq29 : AquaqPuzzle
                 count++;
         }
         
-        return new PuzzleResult(count, "c478e9df2470b2ed3fde4e7cabdfc697");
+        return new PuzzleResult(count, "f29bbf87cdece98ecf1360bce7e5a63e");
     }
 
     public static int CountGoodNumbers(IEnumerable<int> input) => input.Count(IsGoodNumber);

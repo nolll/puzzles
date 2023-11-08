@@ -14,7 +14,7 @@ public class Aquaq32 : AquaqPuzzle
         var lines = InputFile.Split(Environment.NewLine);
         var result = lines.Count(IsBalanced);
 
-        return new PuzzleResult(result, "7750ca3559e5b8e1f44210283368fc16");
+        return new PuzzleResult(result, "8b52d401a6c9cf4350dc85e2cebcec81");
     }
 
     public static bool IsBalanced(string input)

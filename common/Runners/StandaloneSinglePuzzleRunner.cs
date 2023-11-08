@@ -98,6 +98,6 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     private static void WriteAnswer(VerifiedPuzzleResult result, Color color)
     {
         AnsiConsole.MarkupLine(MarkupColor(result.Answer.Answer, color));
-        AnsiConsole.MarkupLine(MarkupColor(result.Answer.Hash, Color.Grey));
+        AnsiConsole.MarkupLine(MarkupColor(result.Hash, Color.Grey));
     }
 }

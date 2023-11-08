@@ -15,7 +15,7 @@ public class Aquaq26 : AquaqPuzzle
 
         var sum = inputNumbers.Aggregate(BigInteger.Zero, (current, n) => current + FindFirstLargerNumber(n) - n);
 
-        return new PuzzleResult(sum, "0c4de14d3fa14fe889667c42c64ee824");
+        return new PuzzleResult(sum, "36fec1139b2f97e4783a60a6d4756578");
     }
 
     public static BigInteger FindFirstLargerNumber(BigInteger input)

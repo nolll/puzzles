@@ -55,7 +55,7 @@ public class Aquaq25 : AquaqPuzzle
 
         var joinedResult = string.Join("", parsedResult);
 
-        return new PuzzleResult(joinedResult, null, "ccbee73cd81c7f42405e1920409247ec");
+        return new PuzzleResult(joinedResult, null, "f00ce886bf2534f2f98813743c48cb6e");
     }
 
     public static string EncodeMorse(string input)

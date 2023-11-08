@@ -11,6 +11,6 @@ public class Aquaq23 : AquaqPuzzle
     {
         var result = new PlayfairCipher("power plant").Decrypt("vepcundbyoaeirotivluxnotpstfnbwept");
 
-        return new PuzzleResult(result, null, "e4f41dc49cad58c30f23b591da055e2f");
+        return new PuzzleResult(result, null, "bf98b9864ec8815e9bfb28dcdba4c0d6");
     }
 }

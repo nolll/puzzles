@@ -14,8 +14,9 @@ public class PuzzleResultVerifier
 
     public VerifiedPuzzleResult Verify(PuzzleResult result)
     {
-        var status = GetStatus(result.Answer, _hashFactory.StringHashFromString(result.Answer), result.CorrectAnswer, result.CorrectAnswerHash);
-        return new VerifiedPuzzleResult(result, status);
+        var hash = GetHash(result.Answer);
+        var status = GetStatus(result.Answer, hash, result.CorrectAnswer, result.CorrectAnswerHash);
+        return new VerifiedPuzzleResult(result, hash, status);
     }
 
     private string GetHash(string answer)

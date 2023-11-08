@@ -8,7 +8,7 @@ public class Aquaq17 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(InputFile), null, "f4fd498a57bf082abeb138efa487060f");
+        return new PuzzleResult(Run(InputFile), null, "033640f1946bb06d49b637ee7b1c3a80");
     }
 
     public static string Run(string input)

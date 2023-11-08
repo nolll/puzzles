@@ -10,7 +10,7 @@ public class Aquaq16 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(InputFile), "de782698358a64397ebacec90287bad0");
+        return new PuzzleResult(Run(InputFile), "b900eb74f94c2243de65005bcc4ebd2c");
     }
 
     public int Run(string input)

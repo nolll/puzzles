@@ -13,7 +13,7 @@ public class Aquaq09 : AquaqPuzzle
             .Select(BigInteger.Parse);
         var result = MultiplyLargeNumbers(numbers);
 
-        return new PuzzleResult(result, "88483d350a085c8282b9f14aa24309c7");
+        return new PuzzleResult(result, "bcead4ceeb598db4924ff4939d43049f");
     }
 
     public static BigInteger MultiplyLargeNumbers(IEnumerable<BigInteger> numbers) 

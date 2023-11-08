@@ -40,7 +40,7 @@ public class Aquaq07 : AquaqPuzzle
         var max = (int)Math.Floor(values.Max());
         var result = max - min;
 
-        return new PuzzleResult(result, "28dd2c7955ce926456240b2ff0100bde");
+        return new PuzzleResult(result, "194aa6e361f7a234543335a05da32ec4");
     }
     
     public static double ExpectedWinrate(double a, double b) 

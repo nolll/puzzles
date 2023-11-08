@@ -10,7 +10,7 @@ public class Aquaq12 : AquaqPuzzle
     {
         var result = RideLift(InputFile);
 
-        return new PuzzleResult(result, "138bb0696595b338afbab333c555292a");
+        return new PuzzleResult(result, "a6668fd005e7ebda4e124253eea1e56e");
     }
 
     public static int RideLift(string input)

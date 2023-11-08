@@ -12,7 +12,7 @@ public class Aquaq15 : AquaqPuzzle
         return new PuzzleResult(Run(InputFile), 97920000);
     }
 
-    public int Run(string input)
+    public int Run(string input) 
     {
         var transformations = input.Split(Environment.NewLine)
             .Select(o => o.Split(','))
@@ -23,7 +23,7 @@ public class Aquaq15 : AquaqPuzzle
         var maxLength = wordLengths.Max();
         var minLength = wordLengths.Min();
 
-        var validWords = TextFile("ValidWords.txt")
+        var validWords = CommonTextFile("Words.txt")
             .Split(Environment.NewLine)
             .Where(o => o.Length >= minLength && o.Length <= maxLength)
             .GroupBy(o => o.Length)

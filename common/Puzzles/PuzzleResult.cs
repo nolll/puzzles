@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Common.Cryptography;
 
 namespace Common.Puzzles;
 
@@ -7,8 +8,8 @@ public class PuzzleResult
     public string Answer { get; }
     public PuzzleResultStatus Status { get; }
 
-    public PuzzleResult(string? answer, string? correctAnswer = null)
-        : this(answer, VerifyResult(answer, correctAnswer))
+    public PuzzleResult(string? answer, string? correctAnswer = null, string? correctAnswerHash = null)
+        : this(answer, VerifyResult(answer, correctAnswer, correctAnswerHash))
     {
     }
 
@@ -27,25 +28,30 @@ public class PuzzleResult
     {
     }
 
-    protected PuzzleResult(string? answer, PuzzleResultStatus status)
+    private PuzzleResult(string? answer, PuzzleResultStatus status)
     {
         Answer = answer ?? string.Empty;
         Status = status;
     }
 
-    public static PuzzleResult Empty => new PuzzleResult("No puzzle here", PuzzleResultStatus.Empty);
-    public static PuzzleResult Failed => new PuzzleResult("Failed", PuzzleResultStatus.Failed);
+    public static PuzzleResult Empty => new("No puzzle here", PuzzleResultStatus.Empty);
+    public static PuzzleResult Failed => new("Failed", PuzzleResultStatus.Failed);
 
-    private static PuzzleResultStatus VerifyResult(string? answer, string? correctAnswer)
+    private static PuzzleResultStatus VerifyResult(string? answer, string? correctAnswer, string? correctAnswerHash)
     {
-        if (answer == null)
+        if (answer is null)
             return PuzzleResultStatus.Wrong;
 
-        if (correctAnswer == null)
-            return PuzzleResultStatus.Completed;
+        if(correctAnswer is not null)
+            return answer == correctAnswer
+                ? PuzzleResultStatus.Correct
+                : PuzzleResultStatus.Wrong;
 
-        return answer == correctAnswer
-            ? PuzzleResultStatus.Correct
-            : PuzzleResultStatus.Wrong;
+        if(correctAnswerHash is not null)
+            return new Hashfactory().StringHashFromString(answer) == correctAnswerHash
+                ? PuzzleResultStatus.Correct
+                : PuzzleResultStatus.Wrong;
+
+        return PuzzleResultStatus.Completed;
     }
 }

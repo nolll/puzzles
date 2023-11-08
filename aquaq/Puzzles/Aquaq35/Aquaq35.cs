@@ -9,12 +9,12 @@ public class Aquaq35 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var words = TextFile("Words.txt").Split(Environment.NewLine);
+        var words = CommonTextFile("Words.txt").Split(Environment.NewLine);
         var input = InputFile;
 
         var keyword = FindKeyword(words, input);
 
-        return new PuzzleResult(keyword);
+        return new PuzzleResult(keyword, "nonsense");
     }
 
     private static string FindKeyword(IEnumerable<string> words, string input)

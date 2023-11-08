@@ -16,6 +16,7 @@ public abstract class Puzzle
 
     protected string InputFile => FileReader.ReadTextFile(InputFilePath);
     protected string TextFile(string fileName) => ReadLocalFile(fileName);
+    protected string CommonTextFile(string fileName) => ReadCommonFile(fileName);
 
     protected string PuzzlePath => Path.Combine(PuzzlePathParts);
 
@@ -23,6 +24,17 @@ public abstract class Puzzle
     {
         var parts = PuzzlePathParts.SkipLast(1).ToList();
         parts.Add(fileName);
+        var filePath = Path.Combine(parts.ToArray());
+        return FileReader.ReadTextFile(filePath);
+    }
+
+    private string ReadCommonFile(string fileName)
+    {
+        var parts = new List<string>
+        {
+            "CommonInputFiles",
+            fileName
+        };
         var filePath = Path.Combine(parts.ToArray());
         return FileReader.ReadTextFile(filePath);
     }

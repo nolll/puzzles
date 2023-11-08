@@ -10,7 +10,7 @@ public class Euler016 : EulerPuzzle
     protected override PuzzleResult Run()
     {
         var result = Run(1000);
-        return new PuzzleResult(result, 1366);
+        return new PuzzleResult(result, "6a5889bb0190d0211a991f47bb19a777");
     }
 
     public int Run(int power)

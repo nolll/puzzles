@@ -19,7 +19,7 @@ public class Euler035 : EulerPuzzle
                 count++;
         }
 
-        return new PuzzleResult(count, 55);
+        return new PuzzleResult(count, "b53b3a3d6ab90ce0268229151c9bde11");
     }
 
     public static IEnumerable<int> GetRotations(int n)

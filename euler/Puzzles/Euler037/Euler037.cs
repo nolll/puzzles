@@ -26,7 +26,7 @@ public class Euler037 : EulerPuzzle
             i++;
         }
 
-        return new PuzzleResult(sum, 748317);
+        return new PuzzleResult(sum, "cace46c61b00de1b60874936a093981d");
     }
 
     public static bool IsTruncatable(int n)

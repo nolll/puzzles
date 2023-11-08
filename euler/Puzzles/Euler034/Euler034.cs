@@ -19,7 +19,7 @@ public class Euler034 : EulerPuzzle
                 total += i;
             }
         }
-        return new PuzzleResult(total, 40730);
+        return new PuzzleResult(total, "60803ea798a0c0dfb7f36397d8d4d772");
     }
 
     public static int GetDigitFactorialSum(int n)

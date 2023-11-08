@@ -38,7 +38,7 @@ public class Euler027 : EulerPuzzle
             }
         }
             
-        return new PuzzleResult(product, -59231);
+        return new PuzzleResult(product, "69d9e3218fd7abb6ff453ea96505183d");
     }
 
     public int GetPrimeCount(int a, int b)

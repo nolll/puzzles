@@ -21,7 +21,7 @@ public class Euler023 : EulerPuzzle
                 sum += i;
         }
             
-        return new PuzzleResult(sum, 4179871);
+        return new PuzzleResult(sum, "2c8258c0604152962f7787571511cf28");
     }
 
     private static HashSet<int> GetSums(List<int> abundantNumbers)

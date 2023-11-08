@@ -9,7 +9,7 @@ public class Euler014 : EulerPuzzle
     protected override PuzzleResult Run()
     {
         var result = Run(1_000_000);
-        return new PuzzleResult(result, 837799);
+        return new PuzzleResult(result, "5052c3765262bb2c6be537abd60b305e");
     }
 
     private int Run(int limit)

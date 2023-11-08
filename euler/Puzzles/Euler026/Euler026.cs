@@ -12,7 +12,7 @@ public class Euler026 : EulerPuzzle
     protected override PuzzleResult Run()
     {
         var result = Run(999);
-        return new PuzzleResult(result, 983);
+        return new PuzzleResult(result, "6aab1270668d8cac7cef2566a1c5f569");
     }
 
     public int Run(int maxDivisor)

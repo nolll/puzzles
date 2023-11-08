@@ -12,7 +12,7 @@ public class Euler042 : EulerPuzzle
         var triangularNumbers = GetTriangularNumbers(1000).ToHashSet();
         var count = words.Select(GetWordValue).Count(o => triangularNumbers.Contains(o));
 
-        return new PuzzleResult(count, 162);
+        return new PuzzleResult(count, "82aa4b0af34c2313a562076992e50aa3");
     }
 
     public static IEnumerable<int> GetTriangularNumbers(int n)

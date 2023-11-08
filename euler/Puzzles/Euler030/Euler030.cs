@@ -11,7 +11,7 @@ public class Euler030 : EulerPuzzle
     {
         var result = Run(5);
 
-        return new PuzzleResult(result, 443839);
+        return new PuzzleResult(result, "27a1779a8a8c323a307ac8a70bc4489d");
     }
 
     public int Run(int power)

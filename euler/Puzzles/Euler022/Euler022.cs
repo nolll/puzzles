@@ -25,7 +25,7 @@ public class Euler022 : EulerPuzzle
     protected override PuzzleResult Run()
     {
         var sum = _nameScores.Values.Sum();
-        return new PuzzleResult(sum, 871198282);
+        return new PuzzleResult(sum, "f2c9c91cb025746f781fa4db8be3983f");
     }
 
     private int GetNameScore(string name, int index)

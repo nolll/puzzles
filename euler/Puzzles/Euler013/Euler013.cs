@@ -11,7 +11,7 @@ public class Euler013 : EulerPuzzle
     protected override PuzzleResult Run()
     {
         var result = Run(Input);
-        return new PuzzleResult(result, "5537376230");
+        return new PuzzleResult(result, null, "361113f19fd302adc31268f8283a4f2d");
     }
 
     public string Run(string listOfNumbers)

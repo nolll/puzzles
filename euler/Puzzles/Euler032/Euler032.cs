@@ -27,7 +27,7 @@ public class Euler032 : EulerPuzzle
 
         var result = pandigitalProducts.Sum();
 
-        return new PuzzleResult(result, 45228);
+        return new PuzzleResult(result, "100f6e37d0b0564490a2ee27eff0660d");
     }
 
     public static bool IsPandigital(int a, int b)

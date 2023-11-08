@@ -11,7 +11,7 @@ public class Euler028 : EulerPuzzle
     {
         var result = Run(1001);
 
-        return new PuzzleResult(result, 669_171_001);
+        return new PuzzleResult(result, "0d53425bd7c5bf9919df3718c8e49fa6");
     }
 
     public int Run(int size)

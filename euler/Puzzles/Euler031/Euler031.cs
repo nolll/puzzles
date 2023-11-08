@@ -13,7 +13,7 @@ public class Euler031 : EulerPuzzle
 
         var result = Run(denominations, targetSum);
 
-        return new PuzzleResult(result, 73682);
+        return new PuzzleResult(result, "142dfe4a33d624d2b830a9257e96726d");
     }
 
     public int Run(IEnumerable<int> denominations, int target, bool print = false)

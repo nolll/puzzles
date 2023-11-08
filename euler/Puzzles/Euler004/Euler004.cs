@@ -10,7 +10,7 @@ public class Euler004 : EulerPuzzle
     {
         var largestPalindrome = Run(100, 999);
 
-        return new PuzzleResult(largestPalindrome, 906609);
+        return new PuzzleResult(largestPalindrome, "d4cfc27d16ea72a96b83d9bdef6ce2ec");
     }
     
     public int Run(int minFactor, int maxFactor)

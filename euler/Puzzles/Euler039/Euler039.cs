@@ -13,7 +13,7 @@ public class Euler039 : EulerPuzzle
         var groups = solutions.GroupBy(o => o.a + o.b + o.c);
         var perimeterWithMostSolutions = groups.OrderByDescending(o => o.Count()).First();
 
-        return new PuzzleResult(perimeterWithMostSolutions.Key, 840);
+        return new PuzzleResult(perimeterWithMostSolutions.Key, "fa83a11a198d5a7f0bf77a1987bcd006");
     }
 
     private static IEnumerable<(int a, int b, int c)> FindSolutions(int n)

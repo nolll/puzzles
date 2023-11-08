@@ -31,6 +31,6 @@ public class Euler040 : EulerPuzzle
 
         var product = numbers.Aggregate(1, (a, b) => a * b);
 
-        return new PuzzleResult(product, 210);
+        return new PuzzleResult(product, "6f3ef77ac0e3619e98159e9b6febf557");
     }
 }

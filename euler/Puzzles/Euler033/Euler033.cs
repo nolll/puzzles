@@ -28,6 +28,6 @@ public class Euler033 : EulerPuzzle
         // Found by inspecting the numbers. The denominator is the numerator * 100
         var resultDenominator = combinedDenominator / combinedNumerator;
 
-        return new PuzzleResult(resultDenominator, 100);
+        return new PuzzleResult(resultDenominator, "f899139df5e1059396431415e770c6dd");
     }
 }

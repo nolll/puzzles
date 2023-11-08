@@ -11,7 +11,7 @@ public class Euler029 : EulerPuzzle
     {
         var result = Run(100);
 
-        return new PuzzleResult(result, 9183);
+        return new PuzzleResult(result, "6f0ca67289d79eb35d19decbc0a08453");
     }
 
     public int Run(int limit)

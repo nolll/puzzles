@@ -11,7 +11,7 @@ public class Euler020 : EulerPuzzle
     {
         BigInteger factorial = 100;
         var result = Run(factorial);
-        return new PuzzleResult(result, 648);
+        return new PuzzleResult(result, "443cb001c138b2561a0d90720d6ce111");
     }
 
     public int Run(BigInteger factorial)

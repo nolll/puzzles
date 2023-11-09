@@ -85,8 +85,8 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     {
         if (result is null)
             AnsiConsole.MarkupLine(MarkupColor("Missing", Color.Red));
-        else if (result.Status is PuzzleResultStatus.Empty)
-            AnsiConsole.WriteLine("No puzzle");
+        else if (result.Status is PuzzleResultStatus.Missing)
+            AnsiConsole.MarkupLine(MarkupColor("No puzzle", Color.Grey));
         else if (result.Status is PuzzleResultStatus.Correct)
             WriteAnswer(result, Color.Green);
         else if (result.Status is PuzzleResultStatus.Failed or PuzzleResultStatus.Timeout or PuzzleResultStatus.Wrong)

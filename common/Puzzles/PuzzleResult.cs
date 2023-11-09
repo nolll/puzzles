@@ -4,6 +4,7 @@ namespace Common.Puzzles;
 
 public class PuzzleResult
 {
+    public PuzzleType Type { get; set; }
     public string? CorrectAnswer { get; }
     public string? CorrectAnswerHash { get; }
     public string Answer { get; }
@@ -13,13 +14,29 @@ public class PuzzleResult
     {
     }
 
+    private PuzzleResult(PuzzleType type)
+        : this(type, null)
+    {
+    }
+
+    private PuzzleResult(PuzzleType type, string? answer)
+        : this(type, answer, null, null)
+    {
+    }
+
     public PuzzleResult(string? answer, string? correctAnswer)
         : this(answer, correctAnswer, null)
     {
     }
 
     public PuzzleResult(string? answer, string? correctAnswer, string? correctAnswerHash)
+        : this(PuzzleType.Default, answer, correctAnswer, correctAnswerHash)
     {
+    }
+
+    private PuzzleResult(PuzzleType type, string? answer, string? correctAnswer, string? correctAnswerHash)
+    {
+        Type = type;
         CorrectAnswer = correctAnswer;
         CorrectAnswerHash = correctAnswerHash;
         Answer = answer ?? string.Empty;
@@ -55,6 +72,6 @@ public class PuzzleResult
     {
     }
 
-    public static PuzzleResult Empty => new("No puzzle here");
-    public static PuzzleResult Failed => new("Failed");
+    public static PuzzleResult Empty => new(PuzzleType.Empty, "No puzzle here");
+    public static PuzzleResult Failed => new(PuzzleType.Default, "Failed");
 }

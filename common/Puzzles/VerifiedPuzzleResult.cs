@@ -13,6 +13,6 @@ public class VerifiedPuzzleResult
         Status = status;
     }
 
-    public static VerifiedPuzzleResult Empty => new(PuzzleResult.Empty, string.Empty, PuzzleResultStatus.Empty);
+    public static VerifiedPuzzleResult Empty => new(PuzzleResult.Empty, string.Empty, PuzzleResultStatus.Missing);
     public static VerifiedPuzzleResult Failed => new(PuzzleResult.Failed, string.Empty, PuzzleResultStatus.Failed);
 }

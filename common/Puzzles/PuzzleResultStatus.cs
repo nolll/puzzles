@@ -6,7 +6,6 @@ public enum PuzzleResultStatus
     Completed,
     Wrong,
     Missing,
-    Empty,
     Failed,
     Timeout
 }

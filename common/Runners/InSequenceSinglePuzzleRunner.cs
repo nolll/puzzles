@@ -46,7 +46,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 
     private void RunPart(Func<PuzzleResult> runFunc, int index)
     {
-        var status = PuzzleResultStatus.Empty;
+        var status = PuzzleResultStatus.Missing;
         var timer = new Timer();
         var time = TimeSpan.Zero;
         var waited = false;
@@ -84,9 +84,13 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
                 MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Green),
             PuzzleResultStatus.Failed or PuzzleResultStatus.Wrong => 
                 MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red),
+            PuzzleResultStatus.Missing =>
+                MarkupColor(PadResult(""), Color.Grey),
             PuzzleResultStatus.Timeout => 
                 MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
-            _ => MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Yellow)
+            PuzzleResultStatus.Completed => 
+                MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Yellow),
+            _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
         };
     }
 

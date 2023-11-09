@@ -5,6 +5,7 @@ namespace Aoc.Puzzles.Aoc2021.Aoc202123;
 public class Aoc202123 : AocPuzzle
 {
     public override string Name => "Amphipod";
+    public override bool NeedsRewrite => true;
     public override string Comment => "Solved manually";
 
     protected override PuzzleResult RunPart1()
@@ -13,7 +14,7 @@ public class Aoc202123 : AocPuzzle
         amphipods.ArrangePart1();
         var result = amphipods.Energy;
 
-        return new PuzzleResult(result, 11120);
+        return new PuzzleResult(result, "8547c3b85863d2e52d88fad570aefbe9");
     }
 
     protected override PuzzleResult RunPart2()
@@ -22,7 +23,7 @@ public class Aoc202123 : AocPuzzle
         amphipods.ArrangePart2();
         var result = amphipods.Energy;
 
-        return new PuzzleResult(result, 49232);
+        return new PuzzleResult(result, "afb93cd8fe6106e1b659d77f58b53c61");
     }
 
     private const string Input1 = """

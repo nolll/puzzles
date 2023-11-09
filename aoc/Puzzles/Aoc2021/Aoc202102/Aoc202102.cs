@@ -11,7 +11,7 @@ public class Aoc202102 : AocPuzzle
         var control = new SubmarineControl(InputFile, false);
         control.Move();
             
-        return new PuzzleResult(control.Result, 1580000);
+        return new PuzzleResult(control.Result, "9d9dec9baf0fe61bbb7a9e95cc1ae2de");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202102 : AocPuzzle
         var control = new SubmarineControl(InputFile, true);
         control.Move();
 
-        return new PuzzleResult(control.Result, 1251263225);
+        return new PuzzleResult(control.Result, "6b29326368c507ef0dbbe41523850cd2");
     }
 }

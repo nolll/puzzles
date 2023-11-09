@@ -9,7 +9,7 @@ public class Aoc201625 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var generator = new ClockSignalGenerator();
-        return new PuzzleResult(generator.LowestA, 198);
+        return new PuzzleResult(generator.LowestA, "5523923bd52d76e1c1d68b1cfdff95b5");
     }
 
     protected override PuzzleResult RunPart2() => PuzzleResult.Empty;

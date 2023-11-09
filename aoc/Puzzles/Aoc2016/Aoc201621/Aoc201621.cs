@@ -10,13 +10,13 @@ public class Aoc201621 : AocPuzzle
     {
         var scrambler = new StringScrambler(InputFile);
         var scrambled = scrambler.Scramble("abcdefgh");
-        return new PuzzleResult(scrambled, "dbfgaehc");
+        return new PuzzleResult(scrambled, "d23262df6c0ae121dad862c4941b0e84");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var scrambler = new StringScrambler(InputFile);
         var unscrambled = scrambler.Unscramble("fbgdceah");
-        return new PuzzleResult(unscrambled, "aghfcdeb");
+        return new PuzzleResult(unscrambled, "c7601768c42b9f9aa8cbb994da21b9fd");
     }
 }

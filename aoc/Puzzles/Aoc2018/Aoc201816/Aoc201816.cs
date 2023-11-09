@@ -15,7 +15,7 @@ public class Aoc201816 : AocPuzzle
             
         var computer = new OpComputer();
         var count = computer.InputsMatchingThreeOrMore(input1);
-        return new PuzzleResult(count, 567);
+        return new PuzzleResult(count, "4f397654d0fda9404b23756deb7529aa");
     }
 
     protected override PuzzleResult RunPart2()
@@ -26,6 +26,6 @@ public class Aoc201816 : AocPuzzle
 
         var computer = new OpComputer();
         var value = computer.RunTestProgram(input1, input2);
-        return new PuzzleResult(value, 610);
+        return new PuzzleResult(value, "d1dc18eac2526ddd22d5eb33e4f04011");
     }
 }

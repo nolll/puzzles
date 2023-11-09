@@ -11,7 +11,7 @@ public class Aoc201503 : AocPuzzle
         var grid = new DeliveryGrid();
         grid.DeliverBySanta(InputFile);
             
-        return new PuzzleResult(grid.SantaDeliveryCount, 2592);
+        return new PuzzleResult(grid.SantaDeliveryCount, "68e2d15877e8590fe0285bff9141a8cf");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc201503 : AocPuzzle
         var grid = new DeliveryGrid();
         grid.DeliverBySantaAndRobot(InputFile);
             
-        return new PuzzleResult(grid.SantaDeliveryCount, 2360);
+        return new PuzzleResult(grid.SantaDeliveryCount, "7d063c75c9ee4f2a8fe2d97228a36f79");
     }
 }

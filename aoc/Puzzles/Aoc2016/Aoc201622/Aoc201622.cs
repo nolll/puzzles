@@ -10,13 +10,13 @@ public class Aoc201622 : AocPuzzle
     {
         var storageGrid = new StorageGrid(InputFile);
         var pairCount = storageGrid.GetViablePairCount();
-        return new PuzzleResult(pairCount, 950);
+        return new PuzzleResult(pairCount, "75405bd6fc453111e999ebdc18ba4f78");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var storageGrid = new StorageGrid(InputFile);
         var moveCount = storageGrid.MoveStorage();
-        return new PuzzleResult(moveCount, 256);
+        return new PuzzleResult(moveCount, "112a5875109cbca20cbe3dd1d02fe9fd");
     }
 }

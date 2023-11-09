@@ -11,7 +11,7 @@ public class Aoc201913 : AocPuzzle
         var arcade = new Arcade(InputFile);
         arcade.Play();
 
-        return new PuzzleResult(arcade.NumberOfBlockTiles, 226);
+        return new PuzzleResult(arcade.NumberOfBlockTiles, "65621a57e5ba6bbdc37540f0d2320098");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc201913 : AocPuzzle
         var arcade = new Arcade(InputFile);
         arcade.Play(2);
 
-        return new PuzzleResult(arcade.Score, 10800);
+        return new PuzzleResult(arcade.Score, "6c32f2b8d2a26180534728ccb213e116");
     }
 }

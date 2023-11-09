@@ -10,13 +10,13 @@ public class Aoc201501 : AocPuzzle
     {
         var navigator = new FloorNavigator(InputFile);
 
-        return new PuzzleResult(navigator.DestinationFloor, 138);
+        return new PuzzleResult(navigator.DestinationFloor, "d8ee6b0475f3971b598eab03bf31bed4");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var navigator = new FloorNavigator(InputFile);
             
-        return new PuzzleResult(navigator.FirstBasementInstruction, 1771);
+        return new PuzzleResult(navigator.FirstBasementInstruction, "eda1f9a68a0c771a5fdedc4228d1080c");
     }
 }

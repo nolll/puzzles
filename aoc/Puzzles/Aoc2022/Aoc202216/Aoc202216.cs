@@ -11,7 +11,7 @@ public class Aoc202216 : AocPuzzle
         var pipes = new VolcanicPipes(InputFile);
         var result = pipes.Part1();
 
-        return new PuzzleResult(result, 2059);
+        return new PuzzleResult(result, "dd3e51c50edd114901226b469c51dd40");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202216 : AocPuzzle
         var pipes = new VolcanicPipes(InputFile);
         var result = pipes.Part2();
 
-        return new PuzzleResult(result, 2790);
+        return new PuzzleResult(result, "29db1cdba5fd2b052581c68854027ea8");
     }
 }

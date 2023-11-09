@@ -12,13 +12,13 @@ public class Aoc201611 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var simulator = new RadioisotopeSimulator(Input1);
-        return new PuzzleResult(simulator.StepCount, 37);
+        return new PuzzleResult(simulator.StepCount, "ad33c84632fce9c362c34badb2563b3e");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var simulator = new RadioisotopeSimulator(Input2);
-        return new PuzzleResult(simulator.StepCount, 61);
+        return new PuzzleResult(simulator.StepCount, "19a0276a07d73a49e5bde8ad4f1ee6ee");
     }
 
     private const string Input1 = """

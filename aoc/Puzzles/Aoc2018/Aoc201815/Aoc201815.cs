@@ -12,7 +12,7 @@ public class Aoc201815 : AocPuzzle
     {
         var battle = new ChocolateBattle(InputFile);
         battle.RunOnce();
-        return new PuzzleResult(battle.Outcome, 246_176);
+        return new PuzzleResult(battle.Outcome, "78d65601c1d852a1cb1c731ef5403795");
     }
 
     protected override PuzzleResult RunPart2()
@@ -20,6 +20,6 @@ public class Aoc201815 : AocPuzzle
         var battle2 = new ChocolateBattle(InputFile);
         const int initialAttackPower = 14; // Was 4. Optimized after correct answer was found
         battle2.RunUntilElvesWins(initialAttackPower);
-        return new PuzzleResult(battle2.Outcome, 58_128);
+        return new PuzzleResult(battle2.Outcome, "69659adc98aaf6e1d1febd9dabddca6f");
     }
 }

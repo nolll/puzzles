@@ -11,12 +11,12 @@ public class Aoc201624 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var shortestPath = Navigator.Run(false);
-        return new PuzzleResult(shortestPath, 502);
+        return new PuzzleResult(shortestPath, "573c0267baa35fb5a2a80250ac4d8775");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var shortestPath = Navigator.Run(true);
-        return new PuzzleResult(shortestPath, 724);
+        return new PuzzleResult(shortestPath, "5d497a617fb2aecf0d9e02ee07665b4e");
     }
 }

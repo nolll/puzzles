@@ -15,7 +15,7 @@ public class Aoc201903 : AocPuzzle
 
         var intersectionFinder = new IntersectionFinder(wirePathA, wirePathB);
         var distance = intersectionFinder.ClosestIntersection.Distance;
-        return new PuzzleResult(distance, 865);
+        return new PuzzleResult(distance, "3dbd15d37a682cfa1ca55525a248c184");
     }
 
     protected override PuzzleResult RunPart2()
@@ -26,6 +26,6 @@ public class Aoc201903 : AocPuzzle
 
         var intersectionFinder = new IntersectionFinder(wirePathA, wirePathB);
         var steps = intersectionFinder.FewestSteps.Steps;
-        return new PuzzleResult(steps, 35_038);
+        return new PuzzleResult(steps, "51670676a41763c6093416dd009a8ba6");
     }
 }

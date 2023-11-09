@@ -12,14 +12,14 @@ public class Aoc202119 : AocPuzzle
     {
         var result = GetResult();
 
-        return new PuzzleResult(result.BeaconCount, 353);
+        return new PuzzleResult(result.BeaconCount, "a6668fd005e7ebda4e124253eea1e56e");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var result = GetResult();
 
-        return new PuzzleResult(result.MaxDistance, 10832);
+        return new PuzzleResult(result.MaxDistance, "ce2bc05651a369b5171388ec7e4f2438");
     }
 
     private BeaconSystemResult GetResult()

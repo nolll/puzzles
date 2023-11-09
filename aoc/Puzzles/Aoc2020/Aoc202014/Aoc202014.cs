@@ -10,13 +10,13 @@ public class Aoc202014 : AocPuzzle
     {
         var system = new BitmaskSystem1();
         var sum = system.Run(InputFile);
-        return new PuzzleResult(sum, 11_179_633_149_677);
+        return new PuzzleResult(sum, "df6ceb0c5b8153992f5246f19ad4d827");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var system = new BitmaskSystem2();
         var sum = system.Run(InputFile);
-        return new PuzzleResult(sum, 4_822_600_194_774);
+        return new PuzzleResult(sum, "578a4ca2408035c16e799f4662a58823");
     }
 }

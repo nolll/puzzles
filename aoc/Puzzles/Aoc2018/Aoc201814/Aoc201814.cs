@@ -10,14 +10,14 @@ public class Aoc201814 : AocPuzzle
     {
         var generator = new RecipeGenerator();
         var scores = generator.ScoresAfter(Input);
-        return new PuzzleResult(scores, "3718110721");
+        return new PuzzleResult(scores, "0d4f97136a1cd3a6231512be77e5a06d");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var generator = new RecipeGenerator();
         var count = generator.RecipeCountBefore(Input.ToString());
-        return new PuzzleResult(count, 20_298_300);
+        return new PuzzleResult(count, "e266a7be3c46a5ed35b66710ecd16496");
     }
 
     private const int Input = 306281;

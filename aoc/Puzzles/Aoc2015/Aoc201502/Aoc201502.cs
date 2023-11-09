@@ -10,13 +10,13 @@ public class Aoc201502 : AocPuzzle
     {
         var paperResult = GiftWrappingCalculator.GetRequiredPaper(InputFile);
 
-        return new PuzzleResult(paperResult, 1_606_483);
+        return new PuzzleResult(paperResult, "dfdf9c79dfad493d6417a9a284a9670b");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var ribbonResult = GiftWrappingCalculator.GetRequiredRibbon(InputFile);
             
-        return new PuzzleResult(ribbonResult, 3_842_356);
+        return new PuzzleResult(ribbonResult, "385d3372d91329e3166413c1cb3126d5");
     }
 }

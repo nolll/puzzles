@@ -15,14 +15,14 @@ public class Aoc202220 : AocPuzzle
     {
         var result = Run(InputFile, 1, 1);
 
-        return new PuzzleResult(result, 18257);
+        return new PuzzleResult(result, "7b8b8bc2da7c3dc6f35e0079a36a0aea");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var result = Run(InputFile, 811_589_153, 10);
 
-        return new PuzzleResult(result, 4_148_032_160_983);
+        return new PuzzleResult(result, "ad028751d05a122940933df675dc9eb5");
     }
 
     public static long Run(string input, long multiplier, int iterationCount)

@@ -10,13 +10,13 @@ public class Aoc202109 : AocPuzzle
     {
         var heightMap = new HeightMap();
         var result = heightMap.FindLowPointSum(InputFile);
-        return new PuzzleResult(result, 591);
+        return new PuzzleResult(result, "de7031e6bc6f92fb3ebea43ee2b3fe27");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var heightMap = new HeightMap();
         var result = heightMap.FindBasinSizes(InputFile);
-        return new PuzzleResult(result, 1113424);
+        return new PuzzleResult(result, "1079be915c188387b9068d26a9911fcc");
     }
 }

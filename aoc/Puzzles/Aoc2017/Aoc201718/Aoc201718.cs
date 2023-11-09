@@ -10,13 +10,13 @@ public class Aoc201718 : AocPuzzle
     {
         var single = new SingleRunner(InputFile);
         single.Run();
-        return new PuzzleResult(single.RecoveredFrequency, 4601);
+        return new PuzzleResult(single.RecoveredFrequency, "83f5054894620fa4e35d5a042e71f9a0");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var duet = new DuetRunner(InputFile);
         duet.Run();
-        return new PuzzleResult(duet.Program1SendCount, 6858);
+        return new PuzzleResult(duet.Program1SendCount, "5bfcd9b6e8755474ab31f818b763418e");
     }
 }

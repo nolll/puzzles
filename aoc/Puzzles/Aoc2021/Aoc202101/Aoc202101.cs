@@ -11,7 +11,7 @@ public class Aoc202101 : AocPuzzle
         var calculator = new DepthMeasurement();
         var result = calculator.GetNumberOfIncreasingMeasurements(InputFile, false);
             
-        return new PuzzleResult(result, 1477);
+        return new PuzzleResult(result, "ff696c9ddfc6c58065e2e08cdc35e82d");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202101 : AocPuzzle
         var calculator = new DepthMeasurement();
         var result = calculator.GetNumberOfIncreasingMeasurements(InputFile, true);
 
-        return new PuzzleResult(result, 1523);
+        return new PuzzleResult(result, "5c9945a8d579421d86e2b7811105be5e");
     }
 }

@@ -14,7 +14,7 @@ public class Aoc201905 : AocPuzzle
         var ci1 = new IntCodeComputer(InputFile, ReadInputPart1, WriteOutput);
         ci1.Start();
 
-        return new PuzzleResult(_output, 5_346_030);
+        return new PuzzleResult(_output, "fb635501f54f36e602ebf7e465625fba");
     }
 
     protected override PuzzleResult RunPart2()
@@ -22,7 +22,7 @@ public class Aoc201905 : AocPuzzle
         var ci2 = new IntCodeComputer(InputFile, ReadInputPart2, WriteOutput);
         ci2.Start();
 
-        return new PuzzleResult(_output, 513_116);
+        return new PuzzleResult(_output, "35062337f01f4ea95b2e1f10c739b629");
     }
 
     private long ReadInputPart1() => 1;

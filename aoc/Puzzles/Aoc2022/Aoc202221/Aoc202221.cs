@@ -13,14 +13,14 @@ public class Aoc202221 : AocPuzzle
     {
         var result = Part1(InputFile);
 
-        return new PuzzleResult(result, 223_971_851_179_174);
+        return new PuzzleResult(result, "b3adb16b1c9bf83decdb14842cf25854");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var result = Part2(InputFile);
 
-        return new PuzzleResult(result, 3_379_022_190_351);
+        return new PuzzleResult(result, "cdbf9008c2bea6596aa238829913849e");
     }
 
     public long Part1(string input)

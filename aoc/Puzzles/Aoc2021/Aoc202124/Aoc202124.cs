@@ -33,13 +33,13 @@ public class Aoc202124 : AocPuzzle
     {
         var result = LargestValidNumber;
 
-        return new PuzzleResult(result, 91398299697996);
+        return new PuzzleResult(result, "e513806c32f88d6227c6a529844981ef");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var result = SmallestValidNumber;
 
-        return new PuzzleResult(result, 41171183141291);
+        return new PuzzleResult(result, "aa756b55fecfa23d098754af71fcc02a");
     }
 }

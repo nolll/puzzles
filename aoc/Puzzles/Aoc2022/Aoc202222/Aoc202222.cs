@@ -13,13 +13,13 @@ public class Aoc202222 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var result = Part1(InputFile);
-        return new PuzzleResult(result, 47462);
+        return new PuzzleResult(result, "5230885ca3521519a0995658751be3a5");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var result = Part2(InputFile);
-        return new PuzzleResult(result, 137045);
+        return new PuzzleResult(result, "192dc6b2bb8fcfe7b7deaa5f30ec9f80");
     }
 
     public static int Part1(string input)

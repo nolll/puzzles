@@ -11,7 +11,7 @@ public class Aoc201916 : AocPuzzle
         var algorithm1 = new FrequencyAlgorithmPart1(InputFile);
         var result1 = algorithm1.Run(100);
 
-        return new PuzzleResult(result1, "19944447");
+        return new PuzzleResult(result1, "e995b448fd31fb067432b47f11ac0e67");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc201916 : AocPuzzle
         var algorithm2 = new FrequencyAlgorithmPart2(InputFile);
         var result2 = algorithm2.Run(100);
 
-        return new PuzzleResult(result2, "81207421");
+        return new PuzzleResult(result2, "0b00b51e4f1b1d517a2bb16008f7af58");
     }
 }

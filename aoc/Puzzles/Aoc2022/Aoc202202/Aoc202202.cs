@@ -10,13 +10,13 @@ public class Aoc202202 : AocPuzzle
     {
         var game = new RockPaperScissors();
         var result = game.Part1(InputFile);
-        return new PuzzleResult(result, 12586);
+        return new PuzzleResult(result, "21342a8c13c83a2420368dd586a7a5dd");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var game = new RockPaperScissors();
         var result = game.Part2(InputFile);
-        return new PuzzleResult(result, 13193);
+        return new PuzzleResult(result, "ee182ab67d32eeac3499142ceeb632c3");
     }
 }

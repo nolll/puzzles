@@ -10,13 +10,13 @@ public class Aoc202021 : AocPuzzle
     {
         var detector = new AllergenDetector(InputFile);
         var ingredientCount = detector.FindIngredientsWithoutAllergens();
-        return new PuzzleResult(ingredientCount, 2595);
+        return new PuzzleResult(ingredientCount, "a3862d6533f785e932eeaa517ad2549d");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var detector = new AllergenDetector(InputFile);
         var ingredientList = detector.GetIngredientList();
-        return new PuzzleResult(ingredientList, "thvm,jmdg,qrsczjv,hlmvqh,zmb,mrfxh,ckqq,zrgzf");
+        return new PuzzleResult(ingredientList, "6adefc0d0ced658ef54a524396bb93a1");
     }
 }

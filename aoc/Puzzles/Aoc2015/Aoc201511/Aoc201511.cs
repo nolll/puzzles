@@ -14,13 +14,13 @@ public class Aoc201511: AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        return new PuzzleResult(FirstPassword, "hxbxxyzz");
+        return new PuzzleResult(FirstPassword, "cbfa97a52cf7d437b49df9f708d401ec");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var pwd2 = Validator.FindNextPassword(FirstPassword);
-        return new PuzzleResult(pwd2, "hxcaabcc");
+        return new PuzzleResult(pwd2, "604b8c33c454d9dbcc19b86576a16f1c");
     }
 
     private const string Input = "hxbxwxba";

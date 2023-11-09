@@ -14,7 +14,7 @@ public class Aoc201911 : AocPuzzle
         var robot1 = new PaintRobot(InputFile);
         var result1 = robot1.Paint(false);
 
-        return new PuzzleResult(result1.PaintedPanelCount, 1732);
+        return new PuzzleResult(result1.PaintedPanelCount, "450a7268b37892570104286b9fd8e5f2");
     }
 
     protected override PuzzleResult RunPart2()
@@ -24,7 +24,7 @@ public class Aoc201911 : AocPuzzle
         var printout = CleanPrintout(result2.Printout);
         var letters = OcrSmallFont.ReadString(printout);
 
-        return new PuzzleResult(letters, "ABCLFUHJ");
+        return new PuzzleResult(letters, "f5a3ea8d16e26ffd7e4c01382dfcd31c");
     }
 
     private string CleanPrintout(string s)

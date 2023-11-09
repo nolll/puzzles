@@ -9,12 +9,12 @@ public class Aoc201509 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var calculator = new RouteCalculator(InputFile);
-        return new PuzzleResult(calculator.ShortestDistance, 117);
+        return new PuzzleResult(calculator.ShortestDistance, "4cc29488fe313222695140cafd29224d");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var calculator = new RouteCalculator(InputFile);
-        return new PuzzleResult(calculator.LongestDistance, 909);
+        return new PuzzleResult(calculator.LongestDistance, "6d5195b794f070d181a56006b064ff95");
     }
 }

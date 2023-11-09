@@ -12,7 +12,7 @@ public class Aoc201522 : AocPuzzle
         var p = GetParams();
         var simulator = new WizardRpgSimulator(WizardRpgGameMode.Easy);
         var leastManaRequiredToWinEasy = simulator.WinWithLowestCost(p.HitPoints, p.Damage);
-        return new PuzzleResult(leastManaRequiredToWinEasy, 1824);
+        return new PuzzleResult(leastManaRequiredToWinEasy, "1f020968b40b91444beee0e8a33624d1");
     }
 
     protected override PuzzleResult RunPart2()
@@ -20,7 +20,7 @@ public class Aoc201522 : AocPuzzle
         var p = GetParams();
         var simulator = new WizardRpgSimulator(WizardRpgGameMode.Hard);
         var leastManaRequiredToWinHard = simulator.WinWithLowestCost(p.HitPoints, p.Damage);
-        return new PuzzleResult(leastManaRequiredToWinHard, 1937);
+        return new PuzzleResult(leastManaRequiredToWinHard, "d76b3b0ad8b9bce7fab0c1ba0de0d20e");
     }
 
     private Params GetParams()

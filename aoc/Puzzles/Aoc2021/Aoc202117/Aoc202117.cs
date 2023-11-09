@@ -12,14 +12,14 @@ public class Aoc202117 : AocPuzzle
     {
         var result = Shoot();
 
-        return new PuzzleResult(result.MaxHeight, 11175);
+        return new PuzzleResult(result.MaxHeight, "375d1d4838312873a7516c061904317c");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var result = Shoot();
 
-        return new PuzzleResult(result.HitCount, 3540);
+        return new PuzzleResult(result.HitCount, "25eea3cce163ac31e5c10a5df5210cee");
     }
 
     private TrickshotResult Shoot()

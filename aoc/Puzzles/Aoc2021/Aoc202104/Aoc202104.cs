@@ -11,7 +11,7 @@ public class Aoc202104 : AocPuzzle
         var diagnostics = new BingoGame(InputFile);
         var result = diagnostics.Play(false);
 
-        return new PuzzleResult(result, 45031);
+        return new PuzzleResult(result, "95287604b1b5cd043b3268068d4c34ef");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202104 : AocPuzzle
         var diagnostics = new BingoGame(InputFile);
         var result = diagnostics.Play(true);
 
-        return new PuzzleResult(result, 2568);
+        return new PuzzleResult(result, "d3b6f7e7618d28f0aac8b2a2c99f5b2e");
     }
 }

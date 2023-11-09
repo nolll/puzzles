@@ -12,7 +12,7 @@ public class Aoc201914 : AocPuzzle
         reactor.Run();
         var oreForOneFuel = reactor.RequiredOreForOneFuel;
 
-        return new PuzzleResult(oreForOneFuel, 469_536);
+        return new PuzzleResult(oreForOneFuel, "4f7b51a9155bea7c24bbb1d4757e4bf1");
     }
 
     protected override PuzzleResult RunPart2()
@@ -21,6 +21,6 @@ public class Aoc201914 : AocPuzzle
         reactor.Run();
         var fuelCount = reactor.FuelFromOneTrillionOre;
 
-        return new PuzzleResult(fuelCount, 3_343_477);
+        return new PuzzleResult(fuelCount, "d2bf7b83647cf534681bd96e1a53db40");
     }
 }

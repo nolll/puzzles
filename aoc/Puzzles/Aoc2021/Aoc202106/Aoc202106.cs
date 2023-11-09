@@ -10,13 +10,13 @@ public class Aoc202106 : AocPuzzle
     {
         var fishCounter = new FishCounter(InputFile);
         var result = fishCounter.FishCountAfter(80);
-        return new PuzzleResult(result, 383_160);
+        return new PuzzleResult(result, "f41058112a3490c1842a14e75ebfef8c");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var fishCounter = new FishCounter(InputFile);
         var result = fishCounter.FishCountAfter(256);
-        return new PuzzleResult(result, 1_721_148_811_504);
+        return new PuzzleResult(result, "d49cf732d5285745340ba70c6a3ddc15");
     }
 }

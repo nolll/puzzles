@@ -13,7 +13,7 @@ public class Aoc201917 : AocPuzzle
         var sif = new ScaffoldIntersectionFinder(input);
         var result1 = sif.GetSumOfAlignmentParameters();
 
-        return new PuzzleResult(result1, 8408);
+        return new PuzzleResult(result1, "8e35e428c486ee717b90ef52086fa0d3");
     }
 
     protected override PuzzleResult RunPart2()
@@ -21,6 +21,6 @@ public class Aoc201917 : AocPuzzle
         var sc2 = new ScaffoldingComputer2(InputFile);
         var result2 = sc2.Run();
 
-        return new PuzzleResult(result2, 1_168_948);
+        return new PuzzleResult(result2, "8972452161d6f5ef5e3681d5ce31f9b6");
     }
 }

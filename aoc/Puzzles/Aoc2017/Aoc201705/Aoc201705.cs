@@ -10,13 +10,13 @@ public class Aoc201705 : AocPuzzle
     {
         var jumper1 = new InstructionJumper(InputFile);
         jumper1.Start1();
-        return new PuzzleResult(jumper1.StepCount, 387_096);
+        return new PuzzleResult(jumper1.StepCount, "3893f5208a5bb1ed3716ffb10c7074d1");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var jumper2 = new InstructionJumper(InputFile);
         jumper2.Start2();
-        return new PuzzleResult(jumper2.StepCount, 28_040_648);
+        return new PuzzleResult(jumper2.StepCount, "e9b390d2f610956da9f592bc52c789cc");
     }
 }

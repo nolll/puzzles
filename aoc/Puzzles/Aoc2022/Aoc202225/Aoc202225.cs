@@ -12,7 +12,7 @@ public class Aoc202225 : AocPuzzle
     {
         var result = Part1(InputFile);
 
-        return new PuzzleResult(result, "2-=0-=-2=111=220=100");
+        return new PuzzleResult(result, "793d1443281edc7d7e628e25d8aa07a4");
     }
 
     public string Part1(string input)

@@ -10,13 +10,13 @@ public class Aoc201601 : AocPuzzle
     {
         var calc = new EasterbunnyDistanceCalculator();
         calc.Go(InputFile);
-        return new PuzzleResult(calc.DistanceToTarget, 262);
+        return new PuzzleResult(calc.DistanceToTarget, "1dd73ae9ac359d399e07fb888b022f7a");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var calc = new EasterbunnyDistanceCalculator();
         calc.Go(InputFile);
-        return new PuzzleResult(calc.DistanceToFirstRepeat, 131);
+        return new PuzzleResult(calc.DistanceToFirstRepeat, "4648ca473c884f7676991b343c2db8e0");
     }
 }

@@ -9,12 +9,12 @@ public class Aoc201513 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var table = new DinnerTable(InputFile);
-        return new PuzzleResult(table.HappinessChange, 618);
+        return new PuzzleResult(table.HappinessChange, "dc9344b26ae0a5267f6fed8baed68a66");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var table = new DinnerTable(InputFile, true);
-        return new PuzzleResult(table.HappinessChange, 601);
+        return new PuzzleResult(table.HappinessChange, "a65dc47bae92b7cf052aa4311e6a429a");
     }
 }

@@ -10,14 +10,14 @@ public class Aoc201921 : AocPuzzle
     {
         var walkingDroid = new SpringDroid(InputFile, WalkProgram);
         walkingDroid.Run();
-        return new PuzzleResult(walkingDroid.HullDamage, 19_362_822);
+        return new PuzzleResult(walkingDroid.HullDamage, "94b1bc03281d28814cbce9dd5bcc5806");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var runningDroid = new SpringDroid(InputFile, RunProgram);
         runningDroid.Run();
-        return new PuzzleResult(runningDroid.HullDamage, 1_143_625_214);
+        return new PuzzleResult(runningDroid.HullDamage, "4b70c64b560c7856fb229521380a084d");
     }
 
     private const string WalkProgram = """

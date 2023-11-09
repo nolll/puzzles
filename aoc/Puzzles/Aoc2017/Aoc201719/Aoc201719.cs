@@ -10,13 +10,13 @@ public class Aoc201719 : AocPuzzle
     {
         var finder = new TubeRouteFinder(InputFile);
         finder.FindRoute();
-        return new PuzzleResult(finder.Route, "PVBSCMEQHY");
+        return new PuzzleResult(finder.Route, "36064495be39a4cd3633df813ec64919");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var finder = new TubeRouteFinder(InputFile);
         finder.FindRoute();
-        return new PuzzleResult(finder.StepCount, 17_736);
+        return new PuzzleResult(finder.StepCount, "b6a57d5dbd470ae22225f4116dc39da0");
     }
 }

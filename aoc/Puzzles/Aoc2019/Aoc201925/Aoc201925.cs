@@ -11,7 +11,7 @@ public class Aoc201925 : AocPuzzle
         var investigationDroid = new InvestigationDroid(InputFile);
         var password = investigationDroid.Run();
 
-        return new PuzzleResult(password, "285213704");
+        return new PuzzleResult(password, "378fea8b73ddddacf10ae3b5978e47ab");
     }
 
     protected override PuzzleResult RunPart2() => PuzzleResult.Empty;

@@ -15,7 +15,7 @@ public class Aoc201824 : AocPuzzle
 
         var system = new ImmuneSystem(immuneInput, infectionInput);
         system.Fight();
-        return new PuzzleResult(system.WinningArmyUnitCount, 9328);
+        return new PuzzleResult(system.WinningArmyUnitCount, "84df04e9e9a02e41225db74dadfd8c9d");
     }
 
     protected override PuzzleResult RunPart2()
@@ -26,6 +26,6 @@ public class Aoc201824 : AocPuzzle
             
         var system = new ImmuneSystem(immuneInput, infectionInput);
         system.FightUntilImmuneSystemWins();
-        return new PuzzleResult(system.WinningArmyUnitCount, 2172);
+        return new PuzzleResult(system.WinningArmyUnitCount, "bfce9d78a8a72d8fd0d76fd5fc479dc8");
     }
 }

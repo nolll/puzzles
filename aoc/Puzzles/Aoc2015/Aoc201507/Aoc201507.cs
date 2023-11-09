@@ -10,13 +10,13 @@ public class Aoc201507 : AocPuzzle
     {
         var circuit = new Circuit(InputFile);
         var runOne = circuit.RunOne("a");
-        return new PuzzleResult(runOne, 956);
+        return new PuzzleResult(runOne, "d726fcd2e75525a2fa0a5c741cc7582f");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var circuit = new Circuit(InputFile);
         var runTwo = circuit.RunTwo("a", "b");
-        return new PuzzleResult(runTwo, 40_149);
+        return new PuzzleResult(runTwo, "135c8ac6a573e214fabaf9728fc2cddb");
     }
 }

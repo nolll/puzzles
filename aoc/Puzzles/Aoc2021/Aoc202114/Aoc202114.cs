@@ -11,7 +11,7 @@ public class Aoc202114 : AocPuzzle
         var polymerization = new Polymerization();
         var result = polymerization.Run(InputFile, 10);
 
-        return new PuzzleResult(result, 3247);
+        return new PuzzleResult(result, "1efc37e1defc93f45f72522371cce05c");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202114 : AocPuzzle
         var polymerization = new Polymerization();
         var result = polymerization.Run(InputFile, 40);
 
-        return new PuzzleResult(result, 4110568157153);
+        return new PuzzleResult(result, "d36de0cab46393825975a1adaea40dc4");
     }
 }

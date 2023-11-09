@@ -14,14 +14,14 @@ public class Aoc202223 : AocPuzzle
     {
         var (emptyCount, _) = Run(InputFile, 10);
 
-        return new PuzzleResult(emptyCount, 4181);
+        return new PuzzleResult(emptyCount, "b2078a7c2a582e68796f55a71f1fe1cd");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var (_, endRound) = Run(InputFile);
 
-        return new PuzzleResult(endRound, 973);
+        return new PuzzleResult(endRound, "b4b9f7dae4709930cd73d70f45eac0ae");
     }
 
     private readonly (int x, int y) _north = (0, -1);

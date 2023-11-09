@@ -11,7 +11,7 @@ public class Aoc202125 : AocPuzzle
         var herd = new HerdOfSeaCucumbers(InputFile);
         var result = herd.MoveUntilStop();
 
-        return new PuzzleResult(result, 518);
+        return new PuzzleResult(result, "b2c5d4f507c64adf10e3434888f5c9a9");
     }
 
     protected override PuzzleResult RunPart2() => PuzzleResult.Empty;

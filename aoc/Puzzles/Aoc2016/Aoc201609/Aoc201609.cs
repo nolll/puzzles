@@ -9,12 +9,12 @@ public class Aoc201609 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var decompressor = new FileDecompressor(InputFile);
-        return new PuzzleResult(decompressor.DecompressedLengthV1, 107_035);
+        return new PuzzleResult(decompressor.DecompressedLengthV1, "963b04cd929c376aa9a75d813a774205");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var decompressor = new FileDecompressor(InputFile);
-        return new PuzzleResult(decompressor.DecompressedLengthV2, 11_451_628_995);
+        return new PuzzleResult(decompressor.DecompressedLengthV2, "bfe4afdea90f1f177895b3bbde55f5a5");
     }
 }

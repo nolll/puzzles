@@ -10,7 +10,7 @@ public class Aoc201725 : AocPuzzle
     {
         var turingMachine = new TuringMachine(InputFile);
         var checksum = turingMachine.Run();
-        return new PuzzleResult(checksum, 4387);
+        return new PuzzleResult(checksum, "a18cb67e5cdfb9d5e9a4afd12de0d627");
     }
 
     protected override PuzzleResult RunPart2() => PuzzleResult.Empty;

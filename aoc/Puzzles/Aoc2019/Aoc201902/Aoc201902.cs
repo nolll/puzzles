@@ -12,7 +12,7 @@ public class Aoc201902 : AocPuzzle
         var computer = new ConsoleComputer(InputFile);
         computer.Start(false, 12, 2);
         var value = computer.Result;
-        return new PuzzleResult(value, 3_101_844);
+        return new PuzzleResult(value, "85e8cb8123555ca9bd39b2c6b962e54a");
     }
 
     protected override PuzzleResult RunPart2()
@@ -20,6 +20,6 @@ public class Aoc201902 : AocPuzzle
         var solutionFinder = new ComputerSolutionFinder(InputFile);
         var result = solutionFinder.FindSolution(19690720);
         var answer = 100 * result!.Noun + result.Verb;
-        return new PuzzleResult(answer, 8478);
+        return new PuzzleResult(answer, "b505e47f6dc62ca5acbbe708dd2192a5");
     }
 }

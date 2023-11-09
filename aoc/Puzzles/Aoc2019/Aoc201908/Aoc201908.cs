@@ -11,7 +11,7 @@ public class Aoc201908 : AocPuzzle
     {
         var image = new SpaceImage(InputFile);
         var checksum = image.Checksum;
-        return new PuzzleResult(checksum, 1716);
+        return new PuzzleResult(checksum, "f120f42ddc8c176e63cab4413a41bd99");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc201908 : AocPuzzle
         var image = new SpaceImage(InputFile);
         var printedImage = image.Print();
         var letters = OcrSmallFont.ReadString(printedImage);
-        return new PuzzleResult(letters, "KFABY");
+        return new PuzzleResult(letters, "a51c490e0a182d6faf996faa2205c829");
     }
 }

@@ -11,7 +11,7 @@ public class Aoc202025 : AocPuzzle
         var finder = new EncryptionKeyFinder(InputFile);
         var key = finder.FindKey();
 
-        return new PuzzleResult(key, 7269858);
+        return new PuzzleResult(key, "340def679154dbcee66df7e80ce2dd0d");
     }
 
     protected override PuzzleResult RunPart2() => PuzzleResult.Empty;

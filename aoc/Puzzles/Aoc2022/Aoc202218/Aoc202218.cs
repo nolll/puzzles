@@ -11,7 +11,7 @@ public class Aoc202218 : AocPuzzle
         var lavaCubes = new LavaCubes();
         var result = lavaCubes.Part1(InputFile);
 
-        return new PuzzleResult(result, 4444);
+        return new PuzzleResult(result, "91235a24016ae0426b247e67bd3d3195");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202218 : AocPuzzle
         var lavaCubes = new LavaCubes();
         var result = lavaCubes.Part2(InputFile);
 
-        return new PuzzleResult(result, 2530);
+        return new PuzzleResult(result, "40f35a686b6090010950fa3c11fb38ed");
     }
 }

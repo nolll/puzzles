@@ -11,7 +11,7 @@ public class Aoc202120 : AocPuzzle
         var trenchMap = new TrenchMap();
         var result = trenchMap.GetLitPixelCount(InputFile, 2);
 
-        return new PuzzleResult(result, 5765);
+        return new PuzzleResult(result, "45662f27fb9cbf099b4d5453539159a2");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202120 : AocPuzzle
         var trenchMap = new TrenchMap();
         var result = trenchMap.GetLitPixelCount(InputFile, 50);
 
-        return new PuzzleResult(result, 18509);
+        return new PuzzleResult(result, "0225d04616fb918456e876afd4831afd");
     }
 }

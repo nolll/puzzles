@@ -11,7 +11,7 @@ public class Aoc202207 : AocPuzzle
         var fileSystem = new FileSystem(InputFile);
         var result = fileSystem.Part1();
 
-        return new PuzzleResult(result, 1989474);
+        return new PuzzleResult(result, "4f30884d94a8463608dcc378747e00f7");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202207 : AocPuzzle
         var fileSystem = new FileSystem(InputFile);
         var result = fileSystem.Part2();
 
-        return new PuzzleResult(result, 1111607);
+        return new PuzzleResult(result, "e619d2b3e6e0cf1c93c956785cb6e527");
     }
 }

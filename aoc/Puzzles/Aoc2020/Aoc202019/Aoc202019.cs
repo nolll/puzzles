@@ -10,13 +10,13 @@ public class Aoc202019 : AocPuzzle
     {
         var validator = new MonsterImageValidator(InputFile);
         var result = validator.ValidCount();
-        return new PuzzleResult(result, 122);
+        return new PuzzleResult(result, "5689e3eed11a233bb204f8f0e2bfe42f");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var validator = new MonsterImageValidator(InputFile, true);
         var result = validator.ValidCount();
-        return new PuzzleResult(result, 287);
+        return new PuzzleResult(result, "95d28bbc9dd67fbc8d8db74ab2879177");
     }
 }

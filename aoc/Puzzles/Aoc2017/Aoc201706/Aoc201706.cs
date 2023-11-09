@@ -10,13 +10,13 @@ public class Aoc201706 : AocPuzzle
     {
         var reallocator = new MemoryReallocator(InputFile);
         reallocator.Run();
-        return new PuzzleResult(reallocator.Steps, 6681);
+        return new PuzzleResult(reallocator.Steps, "5cc5e4c13f678b66cbe8e4c449049395");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var reallocator = new MemoryReallocator(InputFile);
         reallocator.Run();
-        return new PuzzleResult(reallocator.LoopSize, 2392);
+        return new PuzzleResult(reallocator.LoopSize, "9db0fcedbdf5df5cc87a97b23d4e1414");
     }
 }

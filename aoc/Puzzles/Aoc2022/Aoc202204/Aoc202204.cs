@@ -11,7 +11,7 @@ public class Aoc202204 : AocPuzzle
         var cleaning = new Cleaning();
         var result = cleaning.Part1(InputFile);
 
-        return new PuzzleResult(result, 571);
+        return new PuzzleResult(result, "9569cfbf59abc27202b8777006153703");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202204 : AocPuzzle
         var cleaning = new Cleaning();
         var result = cleaning.Part2(InputFile);
 
-        return new PuzzleResult(result, 917);
+        return new PuzzleResult(result, "1cf622579ace09c8f182b5640835416f");
     }
 }

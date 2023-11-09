@@ -11,7 +11,7 @@ public class Aoc202112 : AocPuzzle
         var caveSystem = new CaveSystem(InputFile, false);
         var result = caveSystem.CountPaths();
             
-        return new PuzzleResult(result, 5254);
+        return new PuzzleResult(result, "f0ddaeeb33f1a0ff7a113ef020e9decd");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202112 : AocPuzzle
         var caveSystem = new CaveSystem(InputFile, true);
         var result = caveSystem.CountPaths();
             
-        return new PuzzleResult(result, 149385);
+        return new PuzzleResult(result, "435c45d6610ccd392e06c43e52654eb5");
     }
 }

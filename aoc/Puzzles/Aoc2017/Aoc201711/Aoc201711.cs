@@ -9,12 +9,12 @@ public class Aoc201711 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var navigator = new HexGridNavigator(InputFile);
-        return new PuzzleResult(navigator.EndDistance, 808);
+        return new PuzzleResult(navigator.EndDistance, "b7c04ecac2d0150916a741834019f8ec");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var navigator = new HexGridNavigator(InputFile);
-        return new PuzzleResult(navigator.MaxDistance, 1556);
+        return new PuzzleResult(navigator.MaxDistance, "f67800158ae4e032d3f2c498107dafa8");
     }
 }

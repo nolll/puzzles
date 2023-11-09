@@ -10,13 +10,13 @@ public class Aoc201518 : AocPuzzle
     {
         var gif = new AnimatedGif(InputFile);
         gif.RunAnimation(100);
-        return new PuzzleResult(gif.LightCount, 821);
+        return new PuzzleResult(gif.LightCount, "cf54372c819da8af501619293a164f4f");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var gif = new AnimatedGif(InputFile, true);
         gif.RunAnimation(100);
-        return new PuzzleResult(gif.LightCount, 886);
+        return new PuzzleResult(gif.LightCount, "91a84e73c4b0d0185f19367fdc75f4a7");
     }
 }

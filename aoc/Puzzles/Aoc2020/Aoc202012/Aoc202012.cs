@@ -10,13 +10,13 @@ public class Aoc202012 : AocPuzzle
     {
         var system = new SimpleFerryNavigationSystem(InputFile);
         system.Run();
-        return new PuzzleResult(system.DistanceTravelled, 1424);
+        return new PuzzleResult(system.DistanceTravelled, "c78da9d22889e3d4313249117e3752f4");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var system = new WaypointFerryNavigationSystem(InputFile);
         system.Run();
-        return new PuzzleResult(system.DistanceTravelled, 63447);
+        return new PuzzleResult(system.DistanceTravelled, "c0c5befc741f65a1030078ab200ffe10");
     }
 }

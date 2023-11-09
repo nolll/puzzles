@@ -11,7 +11,7 @@ public class Aoc202224 : AocPuzzle
         var blizzardNavigation = new BlizzardNavigation(InputFile);
         var result = blizzardNavigation.Part1();
 
-        return new PuzzleResult(result, 249);
+        return new PuzzleResult(result, "2cfc10140c99d8efac8a77765769479d");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202224 : AocPuzzle
         var blizzardNavigation = new BlizzardNavigation(InputFile);
         var result = blizzardNavigation.Part2();
 
-        return new PuzzleResult(result, 735);
+        return new PuzzleResult(result, "f055d2b6a8b11466406da741a5dd4b83");
     }
 }

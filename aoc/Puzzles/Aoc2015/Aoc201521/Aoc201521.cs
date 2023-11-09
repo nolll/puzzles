@@ -12,7 +12,7 @@ public class Aoc201521 : AocPuzzle
         var p = GetParams();
         var simulator = new RpgSimulator();
         var leastGoldRequiredToWin = simulator.WinWithLowestCost(p.HitPoints, p.Damage, p.Armor);
-        return new PuzzleResult(leastGoldRequiredToWin, 78);
+        return new PuzzleResult(leastGoldRequiredToWin, "d826748d893fac708069e01d784895e8");
     }
 
     protected override PuzzleResult RunPart2()
@@ -20,7 +20,7 @@ public class Aoc201521 : AocPuzzle
         var p = GetParams();
         var simulator = new RpgSimulator();
         var mostGoldThatLoses = simulator.LoseWithHighestCost(p.HitPoints, p.Damage, p.Armor);
-        return new PuzzleResult(mostGoldThatLoses, 148);
+        return new PuzzleResult(mostGoldThatLoses, "0eeae3017f640ddc69c8b13ff60c9f0f");
     }
 
     private Params GetParams()

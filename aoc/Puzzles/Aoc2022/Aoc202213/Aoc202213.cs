@@ -11,7 +11,7 @@ public class Aoc202213 : AocPuzzle
         var signal = new DistressSignal();
         var result = signal.Part1(InputFile);
 
-        return new PuzzleResult(result, 6568);
+        return new PuzzleResult(result, "b7ce4fc8127f3ae910077459ccdd2466");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202213 : AocPuzzle
         var signal = new DistressSignal();
         var result = signal.Part2(InputFile);
 
-        return new PuzzleResult(result, 19493);
+        return new PuzzleResult(result, "dae06225ebac50b689604b2ca86cfabf");
     }
 }

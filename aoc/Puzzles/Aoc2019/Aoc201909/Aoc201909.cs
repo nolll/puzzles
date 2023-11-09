@@ -12,7 +12,7 @@ public class Aoc201909 : AocPuzzle
         var boostTester = new BoostRunner(InputFile, 1);
         var testerResult = boostTester.Run();
 
-        return new PuzzleResult(testerResult.LastOutput, 3_380_552_333);
+        return new PuzzleResult(testerResult.LastOutput, "d7f50f8a7d7941f1943aebc443a86484");
     }
 
     protected override PuzzleResult RunPart2()
@@ -20,6 +20,6 @@ public class Aoc201909 : AocPuzzle
         var boostRunner = new BoostRunner(InputFile, 2);
         var runnerResult = boostRunner.Run();
 
-        return new PuzzleResult(runnerResult.LastOutput, 78_831);
+        return new PuzzleResult(runnerResult.LastOutput, "336de8801a44e745a6f69e2c6dc0d4a3");
     }
 }

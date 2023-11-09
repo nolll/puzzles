@@ -11,7 +11,7 @@ public class Aoc202219 : AocPuzzle
         var factory = new RobotFactory();
         var result = factory.Part1(InputFile);
 
-        return new PuzzleResult(result, 2193);
+        return new PuzzleResult(result, "11353deb56afd92426a160a11f5506b0");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc202219 : AocPuzzle
         var factory = new RobotFactory();
         var result = factory.Part2(InputFile);
 
-        return new PuzzleResult(result, 7200);
+        return new PuzzleResult(result, "a5034749df5937c49bba3b06acc7119c");
     }
 }

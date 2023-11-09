@@ -10,7 +10,7 @@ public class Aoc201825 : AocPuzzle
     {
         var finder = new ConstellationFinder(InputFile);
         var constellationCount = finder.Find();
-        return new PuzzleResult(constellationCount, 375);
+        return new PuzzleResult(constellationCount, "d346cc690c1ce3f1e472e11a710e1982");
     }
 
     protected override PuzzleResult RunPart2() => PuzzleResult.Empty;

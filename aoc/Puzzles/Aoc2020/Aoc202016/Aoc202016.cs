@@ -10,13 +10,13 @@ public class Aoc202016 : AocPuzzle
     {
         var validator = new TicketValidator();
         var result = validator.GetErrorRate(InputFile);
-        return new PuzzleResult(result, 23_122);
+        return new PuzzleResult(result, "7d78cfbc759526833a4566918a854e5b");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var validator = new TicketValidator();
         var result = validator.CalculateAnswer(InputFile);
-        return new PuzzleResult(result, 362_974_212_989);
+        return new PuzzleResult(result, "f42f08ba29065a89fd379a7eceb34b50");
     }
 }

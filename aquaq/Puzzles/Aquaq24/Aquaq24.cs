@@ -20,6 +20,6 @@ public class Aquaq24 : AquaqPuzzle
         // The answer is just a part of the string
         var result = decoded.Split(" ").Last().Trim();
 
-        return new PuzzleResult(result, null, "23ad8be7b57a17a9bee0021b20637f29");
+        return new PuzzleResult(result, "23ad8be7b57a17a9bee0021b20637f29");
     }
 }

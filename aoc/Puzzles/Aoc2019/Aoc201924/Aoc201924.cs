@@ -11,7 +11,7 @@ public class Aoc201924 : AocPuzzle
         var simulator = new BugLifeSimulator(InputFile);
         simulator.RunUntilRepeat();
 
-        return new PuzzleResult(simulator.BiodiversityRating, 12_129_040);
+        return new PuzzleResult(simulator.BiodiversityRating, "1871d15193d508d5be66268ad3cc074a");
     }
 
     protected override PuzzleResult RunPart2()
@@ -19,6 +19,6 @@ public class Aoc201924 : AocPuzzle
         var recursiveSimulator = new RecursiveBugLifeSimulator(InputFile);
         recursiveSimulator.Run(200);
 
-        return new PuzzleResult(recursiveSimulator.BugCount, 2109);
+        return new PuzzleResult(recursiveSimulator.BugCount, "4309fbaca8e02ca8066a8fa6b49f9b2b");
     }
 }

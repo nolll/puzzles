@@ -10,13 +10,13 @@ public class Aoc202007 : AocPuzzle
     {
         var processor = new LuggageProcessor(InputFile);
         var count1 = processor.NumberOfBagsThatCanContainGoldBags();
-        return new PuzzleResult(count1, 272);
+        return new PuzzleResult(count1, "e58b666bd08fdb2db4284193545ca076");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var processor = new LuggageProcessor(InputFile);
         var count2 = processor.NumberOfBagsThatAGoldBagContains();
-        return new PuzzleResult(count2, 172246);
+        return new PuzzleResult(count2, "0362b078252328a96bca4cbfb7bcf250");
     }
 }

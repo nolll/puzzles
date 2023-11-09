@@ -9,12 +9,12 @@ public class Aoc201810 : AocPuzzle
     protected override PuzzleResult RunPart1()
     {
         var finder = new StarMessageFinder(InputFile, 9);
-        return new PuzzleResult(finder.Message, "HRPHBRKG");
+        return new PuzzleResult(finder.Message, "fe599bdad14da318ee1e5741dda34bce");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var finder = new StarMessageFinder(InputFile, 9);
-        return new PuzzleResult(finder.IterationCount, 10355);
+        return new PuzzleResult(finder.IterationCount, "05ede0b8fbe47e6f4fba31b20085c653");
     }
 }

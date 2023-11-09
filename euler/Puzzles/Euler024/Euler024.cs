@@ -19,6 +19,6 @@ public class Euler024 : EulerPuzzle
         strings = strings.OrderBy(o => o).ToList();
         var result = strings[999999];
             
-        return new PuzzleResult(result, null, "c8c867235759f60d31cd3afd7b3f1d90");
+        return new PuzzleResult(result, "c8c867235759f60d31cd3afd7b3f1d90");
     }
 }

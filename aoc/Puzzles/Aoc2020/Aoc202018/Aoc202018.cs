@@ -10,13 +10,13 @@ public class Aoc202018 : AocPuzzle
     {
         var calculator = new HomeworkCalculator();
         var result = calculator.SumOfAll(InputFile, MathPrecedence.Order);
-        return new PuzzleResult(result, 4_297_397_455_886);
+        return new PuzzleResult(result, "4a4cb1e5143143fe556872f0d8ace4bc");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var calculator = new HomeworkCalculator();
         var result = calculator.SumOfAll(InputFile, MathPrecedence.Addition);
-        return new PuzzleResult(result, 93_000_656_194_428);
+        return new PuzzleResult(result, "f4ba1f258e57a75e7a35552abca1311f");
     }
 }

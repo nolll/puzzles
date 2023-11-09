@@ -10,13 +10,13 @@ public class Aoc202004 : AocPuzzle
     {
         var processor = new PassportProcessor(InputFile);
         var passportCount = processor.GetNumberOfPassportsThatHasAllFields();
-        return new PuzzleResult(passportCount, 210);
+        return new PuzzleResult(passportCount, "1e10a803d525ec160795a9bed9161106");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var processor = new PassportProcessor(InputFile);
         var passportCount = processor.GetNumberOfValidPassports();
-        return new PuzzleResult(passportCount, 131);
+        return new PuzzleResult(passportCount, "4648ca473c884f7676991b343c2db8e0");
     }
 }

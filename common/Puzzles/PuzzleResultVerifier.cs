@@ -5,15 +5,20 @@ namespace Common.Puzzles;
 public class PuzzleResultVerifier
 {
     private readonly string _seed;
+    private readonly bool _isEnabled;
     private readonly Hashfactory _hashFactory = new();
 
     public PuzzleResultVerifier(string seed)
     {
         _seed = seed;
+        _isEnabled = seed != string.Empty;
     }
 
     public VerifiedPuzzleResult Verify(PuzzleResult result)
     {
+        if (!_isEnabled)
+            return new VerifiedPuzzleResult(result, "", PuzzleResultStatus.Completed);
+
         var hash = GetHash(result.Answer);
         var status = GetStatus(result.Type, result.Answer, hash, result.CheckHash);
         return new VerifiedPuzzleResult(result, hash, status);

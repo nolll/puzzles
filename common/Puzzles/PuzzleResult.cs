@@ -11,7 +11,7 @@ public class PuzzleResult
     public static PuzzleResult Empty => new(PuzzleType.Empty, "No puzzle here");
     public static PuzzleResult Failed => new(PuzzleType.Default, "Failed");
 
-    public PuzzleResult(string? answer, string? checkHash)
+    public PuzzleResult(string? answer, string? checkHash = null)
         : this(PuzzleType.Default, answer, checkHash)
     {
     }

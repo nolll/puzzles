@@ -88,7 +88,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
                 MarkupColor(PadResult(""), Color.Grey),
             PuzzleResultStatus.Timeout => 
                 MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
-            PuzzleResultStatus.Completed => 
+            PuzzleResultStatus.Completed or PuzzleResultStatus.Unverified => 
                 MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Yellow),
             _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
         };

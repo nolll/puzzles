@@ -17,7 +17,7 @@ public class PuzzleResultVerifier
     public VerifiedPuzzleResult Verify(PuzzleResult result)
     {
         if (!_isEnabled)
-            return new VerifiedPuzzleResult(result, "", PuzzleResultStatus.Completed);
+            return new VerifiedPuzzleResult(result, "", PuzzleResultStatus.Unverified);
 
         var hash = GetHash(result.Answer);
         var status = GetStatus(result.Type, result.Answer, hash, result.CheckHash);

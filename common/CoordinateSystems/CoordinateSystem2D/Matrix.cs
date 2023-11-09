@@ -300,7 +300,8 @@ public class Matrix<T> where T : struct
                     sb.Append('.');
             }
 
-            sb.AppendLine();
+            if(y < YMax)
+                sb.AppendLine();
         }
 
         return sb.ToString();

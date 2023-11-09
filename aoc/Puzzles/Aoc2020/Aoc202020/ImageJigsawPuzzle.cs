@@ -7,24 +7,14 @@ namespace Aoc.Puzzles.Aoc2020.Aoc202020;
 
 public class ImageJigsawPuzzle
 {
-    private const string SeaMonsterPattern = """
-..................#.
-#....##....##....###
-.#..#..#..#..#..#...
-""";
-
     public readonly Dictionary<long, JigsawTile> TilesById;
     private readonly Dictionary<string, List<JigsawTile>> _matchesByEdge;
     private readonly Dictionary<long, List<JigsawTile>> _matchesById;
-    private readonly Matrix<char> _seaMonsterMatrix;
-    private readonly List<MatrixAddress> _seaMonsterHashAddresses;
-
+    
     public long ProductOfCornerTileIds { get; }
         
     public ImageJigsawPuzzle(string input)
     {
-        _seaMonsterMatrix = MatrixBuilder.BuildCharMatrix(SeaMonsterPattern);
-        _seaMonsterHashAddresses = _seaMonsterMatrix.Coords.Where(o => _seaMonsterMatrix.ReadValueAt(o) == '#').ToList();
         var groups = PuzzleInputReader.ReadStringGroups(input);
         TilesById = new Dictionary<long, JigsawTile>();
         foreach (var group in groups)
@@ -36,8 +26,6 @@ public class ImageJigsawPuzzle
         _matchesByEdge = FindMatchingEdges(TilesById.Values.ToList());
 
         ProductOfCornerTileIds = CornerTiles.Aggregate<JigsawTile, long>(1, (current, tile) => current * tile.Id);
-
-            
     }
 
     public long NumberOfHashesThatAreNotPartOfASeaMonster
@@ -45,89 +33,13 @@ public class ImageJigsawPuzzle
         get
         {
             var image = ArrangeTilesAndPaintImage();
-            var numberOfSeaMonsters = SearchForSeaMonsters(image);
+            var numberOfSeaMonsters = new SeaMonsterCounter().GetCount(image); 
             var numberOfHashes = image.Values.Count(o => o == '#');
-            var numberOfHashesInSeaMonster = 15;
+            const int numberOfHashesInSeaMonster = 15;
             return numberOfHashes - numberOfSeaMonsters * numberOfHashesInSeaMonster;
         }
     }
-
-    private int GetNumberOfSeaMonsters(Matrix<char> matrix)
-    {
-        var seaMonsterCount = 0;
-        for (var y = 0; y < matrix.Height - _seaMonsterMatrix.Height; y++)
-        {
-            for (var x = 0; x < matrix.Width - _seaMonsterMatrix.Width; x++)
-            {
-                var foundSeaMonster = _seaMonsterHashAddresses.All(address => matrix.ReadValueAt(x + address.X, y + address.Y) == '#');
-                seaMonsterCount += foundSeaMonster ? 1 : 0;
-            }
-        }
-
-        return seaMonsterCount;
-    }
-
-    private int SearchForSeaMonsters(Matrix<char> matrix)
-    {
-        var numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
-
-        var rotationCount = 0;
-        while (rotationCount < 4 && numberOfSeaMonsters == 0)
-        {
-            matrix = matrix.RotateRight();
-            rotationCount++;
-            numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
-        }
-
-        rotationCount = 0;
-            
-        if (numberOfSeaMonsters == 0)
-        {
-            matrix = matrix.FlipVertical();
-            numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
-            while (rotationCount < 4 && numberOfSeaMonsters == 0)
-            {
-                matrix = matrix.RotateRight();
-                rotationCount++;
-                numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
-            }
-        }
-
-        rotationCount = 0;
-        numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
-        if (numberOfSeaMonsters == 0)
-        {
-            matrix = matrix.FlipHorizontal();
-            numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
-            while (rotationCount < 4 && numberOfSeaMonsters == 0)
-            {
-                matrix = matrix.RotateRight();
-                rotationCount++;
-                numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
-            }
-        }
-
-        rotationCount = 0;
-        if (numberOfSeaMonsters == 0)
-        {
-            matrix = matrix.FlipVertical();
-            numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
-            while (rotationCount < 4 && numberOfSeaMonsters == 0)
-            {
-                matrix = matrix.RotateRight();
-                rotationCount++;
-                numberOfSeaMonsters = GetNumberOfSeaMonsters(matrix);
-            }
-        }
-
-        return numberOfSeaMonsters;
-    }
-
-    private string GetPrintout(Matrix<char> matrix)
-    {
-        return matrix.Print().Replace("\r\n", "");
-    }
-
+    
     public IList<JigsawTile> CornerTiles => _matchesById.Where(o => o.Value.Count == 2).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
     public IList<JigsawTile> EdgeTiles => _matchesById.Where(o => o.Value.Count == 3).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
     public IList<JigsawTile> CenterTiles => _matchesById.Where(o => o.Value.Count == 4).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
@@ -141,17 +53,17 @@ public class ImageJigsawPuzzle
         tileMatrix.MoveTo(0, 0);
         tileMatrix.WriteValue(currentTile.Id);
 
-        RotateUntilCornerTileIsCorrect(currentTile);
+        new TopLeftCornerMatcher(_matchesByEdge).TryAllRotations(currentTile);
 
         while (tileMatrix.Values.Count(o => o != 0) < TilesById.Values.Count)
         {
             var edgeToFit = currentTile.Edges["right"];
             var matches = _matchesByEdge[edgeToFit];
-            currentTile = matches?.FirstOrDefault(o => o != null && o.Id != currentTile.Id);
+            currentTile = matches.FirstOrDefault(o => o.Id != currentTile.Id);
             if (currentTile != null)
             {
                 tileMatrix.MoveRight();
-                RotateUntilLeftEdgeMatches(currentTile, edgeToFit);
+                new LeftEdgeMatcher(edgeToFit).TryAllRotations(currentTile);
                 tileMatrix.WriteValue(currentTile.Id);
             }
             else
@@ -162,7 +74,7 @@ public class ImageJigsawPuzzle
                 edgeToFit = currentTile.Edges["bottom"];
                 matches = _matchesByEdge[edgeToFit];
                 currentTile = matches.First(o => o.Id != currentTile.Id);
-                RotateUntilTopEdgeMatches(currentTile, edgeToFit);
+                new TopEdgeMatcher(edgeToFit).TryAllRotations(currentTile);
                 tileMatrix.WriteValue(currentTile.Id);
             }
         }
@@ -194,143 +106,6 @@ public class ImageJigsawPuzzle
         }
         return imageMatrix;
     }
-        
-    private void RotateUntilLeftEdgeMatches(JigsawTile currentTile, string edgeToFit)
-    {
-        var rotationCount = 0;
-        while (rotationCount < 4 && currentTile.Edges["left"] != edgeToFit)
-        {
-            currentTile.RotateRight();
-            rotationCount++;
-        }
-
-        rotationCount = 0;
-        if (currentTile.Edges["left"] != edgeToFit)
-        {
-            currentTile.FlipVertical();
-            while (rotationCount < 4 && currentTile.Edges["left"] != edgeToFit)
-            {
-                currentTile.RotateRight();
-                rotationCount++;
-            }
-        }
-
-        rotationCount = 0;
-        if (currentTile.Edges["left"] != edgeToFit)
-        {
-            currentTile.FlipHorizontal();
-            while (rotationCount < 4 && currentTile.Edges["left"] != edgeToFit)
-            {
-                currentTile.RotateRight();
-                rotationCount++;
-            }
-        }
-
-        rotationCount = 0;
-        if (currentTile.Edges["left"] != edgeToFit)
-        {
-            currentTile.FlipVertical();
-            while (rotationCount < 4 && currentTile.Edges["left"] != edgeToFit)
-            {
-                currentTile.RotateRight();
-                rotationCount++;
-            }
-        }
-    }
-
-    private void RotateUntilTopEdgeMatches(JigsawTile currentTile, string edgeToFit)
-    {
-        var rotationCount = 0;
-        while (rotationCount < 4 && currentTile.Edges["top"] != edgeToFit)
-        {
-            currentTile.RotateRight();
-            rotationCount++;
-        }
-
-        rotationCount = 0;
-        if (currentTile.Edges["top"] != edgeToFit)
-        {
-            currentTile.FlipVertical();
-            while (rotationCount < 4 && currentTile.Edges["top"] != edgeToFit)
-            {
-                currentTile.RotateRight();
-                rotationCount++;
-            }
-        }
-
-        rotationCount = 0;
-        if (currentTile.Edges["top"] != edgeToFit)
-        {
-            currentTile.FlipHorizontal();
-            while (rotationCount < 4 && currentTile.Edges["top"] != edgeToFit)
-            {
-                currentTile.RotateRight();
-                rotationCount++;
-            }
-        }
-
-        rotationCount = 0;
-        if (currentTile.Edges["top"] != edgeToFit)
-        {
-            currentTile.FlipVertical();
-            while (rotationCount < 4 && currentTile.Edges["top"] != edgeToFit)
-            {
-                currentTile.RotateRight();
-                rotationCount++;
-            }
-        }
-    }
-
-    private void RotateUntilCornerTileIsCorrect(JigsawTile currentTile)
-    {
-        var rotationCount = 0;
-        while (rotationCount < 4 && !IsCornerPieceRotatedCorrectly(currentTile, "top", "left"))
-        {
-            currentTile.RotateRight();
-            rotationCount++;
-        }
-
-        rotationCount = 0;
-        if (!IsCornerPieceRotatedCorrectly(currentTile, "top", "left"))
-        {
-            currentTile.FlipVertical();
-            while (rotationCount < 4 && !IsCornerPieceRotatedCorrectly(currentTile, "top", "left"))
-            {
-                currentTile.RotateRight();
-                rotationCount++;
-            }
-        }
-
-        rotationCount = 0;
-        if (!IsCornerPieceRotatedCorrectly(currentTile, "top", "left"))
-        {
-            currentTile.FlipHorizontal();
-            while (rotationCount < 4 && !IsCornerPieceRotatedCorrectly(currentTile, "top", "left"))
-            {
-                currentTile.RotateRight();
-                rotationCount++;
-            }
-        }
-
-        rotationCount = 0;
-        if (!IsCornerPieceRotatedCorrectly(currentTile, "top", "left"))
-        {
-            currentTile.FlipVertical();
-            while (rotationCount < 4 && !IsCornerPieceRotatedCorrectly(currentTile, "top", "left"))
-            {
-                currentTile.RotateRight();
-                rotationCount++;
-            }
-        }
-    }
-
-    private bool IsCornerPieceRotatedCorrectly(JigsawTile tile, string edge1, string edge2)
-    {
-        var matchingTilesEdge1 = _matchesByEdge[tile.Edges[edge1]];
-        var matchingTilesEdge2 = _matchesByEdge[tile.Edges[edge2]];
-
-        return matchingTilesEdge1.Count == 1 && matchingTilesEdge2.Count == 1;
-    }
 
     private static Dictionary<long, List<JigsawTile>> FindMatchingTiles(IList<JigsawTile> tiles)
     {
@@ -351,7 +126,7 @@ public class ImageJigsawPuzzle
         {
             foreach (var edge in tile.Edges.Values)
             {
-                var reversedEdge = edge.Reverse();
+                var reversedEdge = edge.ReverseString();
                 if (!matches.TryGetValue(edge, out var list))
                 {
                     list = new List<JigsawTile>();

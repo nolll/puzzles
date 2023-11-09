@@ -1,7 +1,6 @@
 ﻿using Common.Formatting;
 using Common.Puzzles;
 using Spectre.Console;
-using System.Collections.Generic;
 using Timer = Common.Timing.Timer;
 
 namespace Common.Runners;
@@ -52,7 +51,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
     {
         PuzzleResult? result = null;
-        PrintTime(puzzleIndex); 
+        PrintTime(puzzleIndex);
         var timer = new Timer();
         var task = Task.Run(() => result = puzzleFunc());
         while (!task.IsCompleted)

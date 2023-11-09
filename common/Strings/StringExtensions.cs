@@ -11,4 +11,11 @@ public static class StringExtensions
 
     public static bool IsPalindrome(this string s) => 
         string.Join("", s.Reverse()) == s;
+
+    public static string ReverseString(this string s)
+    {
+        var charArray = s.ToCharArray();
+        Array.Reverse(charArray);
+        return new string(charArray);
+    }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Common.CoordinateSystems.CoordinateSystem2D;
+using Common.Strings;
 
 namespace Aoc.Puzzles.Aoc2020.Aoc202020;
 
@@ -10,46 +11,24 @@ public class JigsawTile
     public long Id { get; }
     public Matrix<char> Matrix;
 
-    public JigsawTile(long id, Matrix<char> matrix)
+    private JigsawTile(long id, Matrix<char> matrix)
     {
         Id = id;
         Matrix = matrix;
     }
 
-    public bool HasMatchingEdge(JigsawTile otherTile)
-    {
-        foreach (var edge in Edges.Values)
-        {
-            if (otherTile.Edges.Values.Any(HasMatchingEdge))
-                return true;
-        }
-
-        return false;
-    }
+    public bool HasMatchingEdge(JigsawTile otherTile) => 
+        Edges.Values.Any(edge => otherTile.Edges.Values.Any(HasMatchingEdge));
 
     public bool HasMatchingEdge(string edge)
     {
-        var reverseEdge = edge.Reverse();
-        if (Edges.Any(o => o.Value == edge || o.Value == reverseEdge))
-            return true;
-
-        return false;
+        var reverseEdge = edge.ReverseString();
+        return Edges.Any(o => o.Value == edge || o.Value == reverseEdge);
     }
 
-    public void RotateRight()
-    {
-        Matrix = Matrix.RotateRight();
-    }
-
-    public void FlipVertical()
-    {
-        Matrix = Matrix.FlipVertical();
-    }
-
-    public void FlipHorizontal()
-    {
-        Matrix = Matrix.FlipHorizontal();
-    }
+    public void RotateRight() => Matrix = Matrix.RotateRight();
+    public void FlipVertical() => Matrix = Matrix.FlipVertical();
+    public void FlipHorizontal() => Matrix = Matrix.FlipHorizontal();
 
     public Dictionary<string, string> Edges
     {
@@ -88,12 +67,7 @@ public class JigsawTile
             };
         }
     }
-
-    public string Print()
-    {
-        return Matrix.Print();
-    }
-
+    
     public static JigsawTile Parse(string s)
     {
         var parts = s.Split(':');

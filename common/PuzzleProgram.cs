@@ -1,5 +1,4 @@
-﻿using Puzzles.aoc;
-using Puzzles.common.Puzzles;
+﻿using Puzzles.common.Puzzles;
 using Puzzles.common.Runners;
 
 namespace Puzzles.common;

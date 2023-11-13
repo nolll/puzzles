@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2021.Aoc202117;
+namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202117;
 
 public class TrickShot
 {

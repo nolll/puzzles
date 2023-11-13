@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
-using Common.Combinatorics;
-using Common.Puzzles;
+using Puzzles.common.Combinatorics;
+using Puzzles.common.Puzzles;
 
-namespace Aquaq.Puzzles.Aquaq26;
+namespace Puzzles.aquaq.Puzzles.Aquaq26;
 
 public class Aquaq26 : AquaqPuzzle
 {

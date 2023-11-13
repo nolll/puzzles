@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace Aoc.Puzzles.Aoc2018.Aoc201823;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201823;
 
 public class SpaceBox
 {

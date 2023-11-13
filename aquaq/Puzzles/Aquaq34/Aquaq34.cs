@@ -1,7 +1,7 @@
-﻿using Common.Puzzles;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using Puzzles.common.Puzzles;
 
-namespace Aquaq.Puzzles.Aquaq34;
+namespace Puzzles.aquaq.Puzzles.Aquaq34;
 
 public class Aquaq34 : AquaqPuzzle
 {

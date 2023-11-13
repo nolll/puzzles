@@ -1,7 +1,7 @@
-﻿using Common.Puzzles;
-using Common.Strings;
+﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201903;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201903;
 
 public class Aoc201903 : AocPuzzle
 {

@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2015.Aoc201521;
+namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201521;
 
 public class RpgProperty
 {

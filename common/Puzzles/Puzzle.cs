@@ -1,6 +1,7 @@
-﻿using Common.Files;
+﻿using System.IO;
+using Puzzles.common.Files;
 
-namespace Common.Puzzles;
+namespace Puzzles.common.Puzzles;
 
 public abstract class Puzzle
 {
@@ -17,6 +18,7 @@ public abstract class Puzzle
     protected string InputFile => FileReader.ReadTextFile(InputFilePath);
     protected string TextFile(string fileName) => ReadLocalFile(fileName);
     protected string CommonTextFile(string fileName) => ReadCommonFile(fileName);
+    protected abstract string CollectionTag { get; }
 
     protected string PuzzlePath => Path.Combine(PuzzlePathParts);
 
@@ -32,6 +34,7 @@ public abstract class Puzzle
     {
         var parts = new List<string>
         {
+            CollectionTag,
             "CommonInputFiles",
             fileName
         };
@@ -49,18 +52,30 @@ public abstract class Puzzle
 
     private string InputFilePath => $"{PuzzlePath}.txt";
 
-    public virtual IEnumerable<string> GetTags()
+    public IEnumerable<string> Tags
     {
-        if (!string.IsNullOrEmpty(Comment))
-            yield return PuzzleTag.Commented;
+        get
+        {
+            yield return CollectionTag;
 
-        if (IsSlow)
-            yield return PuzzleTag.Slow;
+            foreach (var customTag in CustomTags)
+            {
+                yield return customTag;
+            }
 
-        if (NeedsRewrite)
-            yield return PuzzleTag.Rewrite;
+            if (!string.IsNullOrEmpty(Comment))
+                yield return PuzzleTag.Commented;
 
-        if (IsFunToOptimize)
-            yield return PuzzleTag.Fun;
+            if (IsSlow)
+                yield return PuzzleTag.Slow;
+
+            if (NeedsRewrite)
+                yield return PuzzleTag.Rewrite;
+
+            if (IsFunToOptimize)
+                yield return PuzzleTag.Fun;
+        }
     }
+
+    protected virtual IEnumerable<string> CustomTags => Enumerable.Empty<string>();
 }

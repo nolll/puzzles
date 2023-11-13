@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Aoc.Puzzles.Aoc2015.Aoc201520;
+namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201520;
 
 public class Aoc201520Tests
 {

@@ -1,7 +1,7 @@
 ﻿using System.Text;
-using Common.Computers.IntCode;
+using Puzzles.common.Computers.IntCode;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201917;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201917;
 
 public class ScaffoldingComputer1
 {

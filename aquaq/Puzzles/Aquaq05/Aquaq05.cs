@@ -1,6 +1,6 @@
-﻿using Common.Puzzles;
+﻿using Puzzles.common.Puzzles;
 
-namespace Aquaq.Puzzles.Aquaq05;
+namespace Puzzles.aquaq.Puzzles.Aquaq05;
 
 public class Aquaq05 : AquaqPuzzle
 {

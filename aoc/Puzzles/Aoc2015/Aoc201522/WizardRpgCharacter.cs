@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2015.Aoc201522;
+namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201522;
 
 public abstract class WizardRpgCharacter
 {

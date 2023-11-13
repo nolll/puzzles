@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using Common.CoordinateSystems.CoordinateSystem2D;
-using Common.Ocr;
-using Common.Strings;
+﻿using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.Ocr;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2016.Aoc201608;
+namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201608;
 
 public class ScreenSimulator
 {

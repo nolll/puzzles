@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Common.Puzzles;
+﻿using Puzzles.common.Puzzles;
 
-namespace Aoc.Puzzles.Aoc2021.Aoc202124;
+namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202124;
 
 public class Aoc202124 : AocPuzzle
 {

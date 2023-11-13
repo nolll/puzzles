@@ -1,8 +1,6 @@
-using System;
-using System.Linq;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2015.Aoc201505;
+namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201505;
 
 public class NaughtyOrNiceEvaluator
 {

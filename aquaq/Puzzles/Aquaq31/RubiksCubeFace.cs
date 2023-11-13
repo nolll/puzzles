@@ -1,6 +1,6 @@
-﻿using Common.CoordinateSystems.CoordinateSystem2D;
+﻿using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aquaq.Puzzles.Aquaq31;
+namespace Puzzles.aquaq.Puzzles.Aquaq31;
 
 public class RubiksCubeFace
 {

@@ -1,8 +1,8 @@
-﻿using Common.Combinatorics;
-using Common.Numbers;
-using Common.Puzzles;
+﻿using Puzzles.common.Combinatorics;
+using Puzzles.common.Numbers;
+using Puzzles.common.Puzzles;
 
-namespace Euler.Puzzles.Euler041;
+namespace Puzzles.euler.Puzzles.Euler041;
 
 public class Euler041 : EulerPuzzle
 {

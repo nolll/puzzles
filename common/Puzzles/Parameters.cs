@@ -1,6 +1,6 @@
-﻿using Common.Parameters;
+﻿using Puzzles.common.Parameters;
 
-namespace Common.Puzzles;
+namespace Puzzles.common.Puzzles;
 
 public class Parameters
 {

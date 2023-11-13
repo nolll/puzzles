@@ -1,7 +1,7 @@
-﻿using Common.Cryptography;
-using Common.Puzzles;
+﻿using Puzzles.common.Cryptography;
+using Puzzles.common.Puzzles;
 
-namespace Aquaq.Puzzles.Aquaq23;
+namespace Puzzles.aquaq.Puzzles.Aquaq23;
 
 public class Aquaq23 : AquaqPuzzle
 {

@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Aoc.Puzzles.Aoc2015.Aoc201510;
+namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201510;
 
 public class LookAndSayGame
 {

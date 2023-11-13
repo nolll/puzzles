@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace Aoc.Puzzles.Aoc2017.Aoc201716;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201716;
 
 public class ExchangeMove : DanceMove
 {

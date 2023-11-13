@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2019.Aoc201904;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201904;
 
 public static class PasswordAnalyzer
 {

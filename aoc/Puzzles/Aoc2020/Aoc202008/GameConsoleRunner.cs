@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2020.Aoc202008;
+namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202008;
 
 public class GameConsoleRunner
 {

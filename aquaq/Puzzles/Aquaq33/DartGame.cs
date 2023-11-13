@@ -1,6 +1,6 @@
-﻿using Common.Combinatorics;
+﻿using Puzzles.common.Combinatorics;
 
-namespace Aquaq.Puzzles.Aquaq33;
+namespace Puzzles.aquaq.Puzzles.Aquaq33;
 
 public class DartGame
 {

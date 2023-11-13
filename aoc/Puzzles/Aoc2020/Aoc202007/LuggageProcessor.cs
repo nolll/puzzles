@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2020.Aoc202007;
+namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202007;
 
 public class LuggageProcessor
 {

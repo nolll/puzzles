@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2017.Aoc201723;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201723;
 
 public class CoProcessor
 {

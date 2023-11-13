@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Common.Puzzles;
+﻿using Puzzles.common.Puzzles;
 
-namespace Aoc;
+namespace Puzzles.aoc;
 
 public abstract class AocPuzzle : TwoPartsPuzzle
 {
     private readonly string _year;
+    private readonly string _day;
 
     public override string Id { get; }
     public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
+    protected override string CollectionTag => PuzzleTag.Aoc;
 
     protected AocPuzzle()
     {
@@ -20,15 +20,18 @@ public abstract class AocPuzzle : TwoPartsPuzzle
         var id = $"{year}{paddedDay}";
         Id = id;
         SortId = id;
-        Title = $"Day {day} {year}";
-        ListTitle = $"Day {paddedDay} {year}";
+        Title = $"Advent of Code {year}-{paddedDay}";
+        ListTitle = $"{PuzzleTag.Aoc} {year}-{paddedDay}";
         _year = year.ToString();
+        _day = day.ToString();
     }
 
-    public override IEnumerable<string> GetTags()
+    protected override IEnumerable<string> CustomTags
     {
-        var tags = base.GetTags().ToList();
-        tags.Add(_year);
-        return tags;
+        get
+        {
+            yield return _year;
+            yield return _day;
+        }
     }
 }

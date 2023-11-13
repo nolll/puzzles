@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Common.Formatting;
+namespace Puzzles.common.Formatting;
 
 public static class Formatter
 {

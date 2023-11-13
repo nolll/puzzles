@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Common.Lists;
+﻿using Puzzles.common.Lists;
 
-namespace Aoc.Puzzles.Aoc2016.Aoc201619;
+namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201619;
 
 public class WhiteElephantParty
 {

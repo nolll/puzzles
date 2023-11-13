@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace Common.Parameters;
+namespace Puzzles.common.Parameters;
 
 public class ParameterTests
 {

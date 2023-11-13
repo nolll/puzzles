@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2021.Aoc202107;
+﻿namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202107;
 
 public class CrabSubmarines
 {

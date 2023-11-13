@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2018.Aoc201825;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201825;
 
 public class Constellation
 {

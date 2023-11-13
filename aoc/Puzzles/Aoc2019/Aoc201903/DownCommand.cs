@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2019.Aoc201903;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201903;
 
 public class DownCommand : Command
 {

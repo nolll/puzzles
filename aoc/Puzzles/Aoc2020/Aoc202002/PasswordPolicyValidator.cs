@@ -1,6 +1,4 @@
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2020.Aoc202002;
+namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202002;
 
 public class PasswordPolicyValidator
 {

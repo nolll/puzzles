@@ -1,8 +1,8 @@
-using Common.Cryptography;
 using FluentAssertions;
 using NUnit.Framework;
+using Puzzles.common.Cryptography;
 
-namespace Aoc.Puzzles.Aoc2017.Aoc201710;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201710;
 
 public class Aoc201710Tests
 {

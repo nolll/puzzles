@@ -1,4 +1,4 @@
-﻿namespace Common.Puzzles;
+﻿namespace Puzzles.common.Puzzles;
 
 public class PuzzleInTest : Puzzle
 {
@@ -7,6 +7,7 @@ public class PuzzleInTest : Puzzle
     public override string Title { get; }
     public override string ListTitle { get; }
     public override string Name { get; }
+    protected override string CollectionTag { get; }
     public override IList<Func<PuzzleResult>> RunFunctions => new List<Func<PuzzleResult>>();
 
     public PuzzleInTest(
@@ -14,13 +15,15 @@ public class PuzzleInTest : Puzzle
         string? sortId = null,
         string? title = null, 
         string? listTitle = null, 
-        string? name = null)
+        string? name = null,
+        string? collectionTag = null)
     {
         Id = id ?? string.Empty;
         SortId = sortId ?? string.Empty;
         Title = title ?? string.Empty;
         ListTitle = listTitle ?? string.Empty;
         Name = name ?? string.Empty;
+        CollectionTag = collectionTag ?? string.Empty;
     }
 }
 

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace Aoc.Puzzles.Aoc2021.Aoc202114;
+namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202114;
 
 public static class CountMerger
 {

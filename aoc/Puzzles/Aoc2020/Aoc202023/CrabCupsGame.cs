@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using Common.Lists;
+using Puzzles.common.Lists;
 
-namespace Aoc.Puzzles.Aoc2020.Aoc202023;
+namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202023;
 
 public class CrabCupsGame
 {

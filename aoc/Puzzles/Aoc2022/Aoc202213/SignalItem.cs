@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2022.Aoc202213;
+namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202213;
 
 public class SignalItem
 {

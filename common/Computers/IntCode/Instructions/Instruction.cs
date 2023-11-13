@@ -1,6 +1,6 @@
-using Common.Computers.IntCode.Parameters;
+using Puzzles.common.Computers.IntCode.Parameters;
 
-namespace Common.Computers.IntCode.Instructions;
+namespace Puzzles.common.Computers.IntCode.Instructions;
 
 public abstract class Instruction
 {

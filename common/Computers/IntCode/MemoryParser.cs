@@ -1,4 +1,4 @@
-﻿namespace Common.Computers.IntCode;
+﻿namespace Puzzles.common.Computers.IntCode;
 
 public static class MemoryParser
 {

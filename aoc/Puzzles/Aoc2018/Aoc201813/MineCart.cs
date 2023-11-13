@@ -1,6 +1,6 @@
-using Common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2018.Aoc201813;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201813;
 
 public class MineCart
 {

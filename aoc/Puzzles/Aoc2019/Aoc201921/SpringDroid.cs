@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Common.Computers.IntCode;
-using Common.Strings;
+using Puzzles.common.Computers.IntCode;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201921;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201921;
 
 public class SpringDroid
 {

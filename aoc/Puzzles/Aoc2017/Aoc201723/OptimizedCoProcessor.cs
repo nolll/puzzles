@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2017.Aoc201723;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201723;
 
 public class OptimizedCoProcessor
 {

@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2015.Aoc201507;
+namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201507;
 
 public class Circuit
 {

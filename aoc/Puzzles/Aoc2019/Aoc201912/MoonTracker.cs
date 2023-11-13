@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Common.CoordinateSystems.CoordinateSystem3D;
-using Common.Maths;
+using Puzzles.common.CoordinateSystems.CoordinateSystem3D;
+using Puzzles.common.Maths;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201912;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201912;
 
 public class MoonTracker
 {

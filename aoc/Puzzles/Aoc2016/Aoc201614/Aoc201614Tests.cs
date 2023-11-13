@@ -1,9 +1,8 @@
-using System.Linq;
-using Common.Strings;
 using FluentAssertions;
 using NUnit.Framework;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2016.Aoc201614;
+namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201614;
 
 public class Aoc201614Tests
 {

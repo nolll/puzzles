@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2017.Aoc201702;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201702;
 
 public class Spreadsheet
 {

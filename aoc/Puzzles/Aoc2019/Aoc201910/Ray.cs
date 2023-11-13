@@ -1,6 +1,4 @@
-using System;
-
-namespace Aoc.Puzzles.Aoc2019.Aoc201910;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201910;
 
 public class Ray : IEquatable<Ray>
 {

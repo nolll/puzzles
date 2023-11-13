@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Common.Computers.Operation;
+namespace Puzzles.common.Computers.Operation;
 
 public class OpComputerTests
 {

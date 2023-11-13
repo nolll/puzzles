@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace Common.Numbers;
+namespace Puzzles.common.Numbers;
 
 public class ConversionTests
 {

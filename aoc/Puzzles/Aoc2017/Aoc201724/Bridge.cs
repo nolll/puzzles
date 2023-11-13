@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2017.Aoc201724;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201724;
 
 public class Bridge
 {

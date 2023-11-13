@@ -1,7 +1,6 @@
-using System;
-using Common.CoordinateSystems.CoordinateSystem3D;
+using Puzzles.common.CoordinateSystems.CoordinateSystem3D;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201912;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201912;
 
 public class Moon
 {

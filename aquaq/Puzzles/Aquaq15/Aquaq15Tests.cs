@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace Aquaq.Puzzles.Aquaq15;
+namespace Puzzles.aquaq.Puzzles.Aquaq15;
 
 public class Aquaq15Tests
 {

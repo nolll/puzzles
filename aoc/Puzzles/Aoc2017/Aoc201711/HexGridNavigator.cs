@@ -1,7 +1,6 @@
-using System;
-using Common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2017.Aoc201711;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201711;
 
 public class HexGridNavigator
 {

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Common.Strings;
+﻿using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2021.Aoc202102;
+namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202102;
 
 public class SubmarineControl
 {

@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2019.Aoc201903;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201903;
 
 public class Plotter
 {

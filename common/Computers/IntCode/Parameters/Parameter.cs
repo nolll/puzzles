@@ -1,4 +1,4 @@
-namespace Common.Computers.IntCode.Parameters;
+namespace Puzzles.common.Computers.IntCode.Parameters;
 
 public abstract class Parameter
 {

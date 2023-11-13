@@ -1,6 +1,6 @@
-﻿using Common.Puzzles;
+﻿using Puzzles.common.Puzzles;
 
-namespace Aoc.Puzzles.Aoc2017.Aoc201719;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201719;
 
 public class Aoc201719 : AocPuzzle
 {

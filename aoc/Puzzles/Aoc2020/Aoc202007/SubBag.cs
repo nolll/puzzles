@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2020.Aoc202007;
+namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202007;
 
 public class SubBag
 {

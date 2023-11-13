@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2020.Aoc202019;
+namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202019;
 
 public class MonsterImageValidator
 {

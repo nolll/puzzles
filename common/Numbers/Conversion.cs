@@ -1,7 +1,6 @@
-﻿using Spectre.Console.Rendering;
-using System.Text;
+﻿using System.Text;
 
-namespace Common.Numbers;
+namespace Puzzles.common.Numbers;
 
 public static class Conversion
 {

@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2016.Aoc201611;
+namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201611;
 
 public class RadioisotopeFacility
 {

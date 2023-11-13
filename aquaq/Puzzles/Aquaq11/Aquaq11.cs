@@ -1,7 +1,7 @@
-﻿using Common.CoordinateSystems.CoordinateSystem2D;
-using Common.Puzzles;
+﻿using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.Puzzles;
 
-namespace Aquaq.Puzzles.Aquaq11;
+namespace Puzzles.aquaq.Puzzles.Aquaq11;
 
 public class Aquaq11 : AquaqPuzzle
 {

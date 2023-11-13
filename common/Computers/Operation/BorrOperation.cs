@@ -1,4 +1,4 @@
-namespace Common.Computers.Operation;
+namespace Puzzles.common.Computers.Operation;
 
 public class BorrOperation : Operation
 {

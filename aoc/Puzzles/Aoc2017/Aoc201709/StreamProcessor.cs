@@ -1,7 +1,6 @@
-using System.Linq;
 using System.Text;
 
-namespace Aoc.Puzzles.Aoc2017.Aoc201709;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201709;
 
 public class StreamProcessor
 {

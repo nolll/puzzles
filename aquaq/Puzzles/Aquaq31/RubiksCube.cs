@@ -1,6 +1,4 @@
-﻿using Common.Computers.IntCode.Instructions;
-
-namespace Aquaq.Puzzles.Aquaq31;
+﻿namespace Puzzles.aquaq.Puzzles.Aquaq31;
 
 public class RubiksCube
 {

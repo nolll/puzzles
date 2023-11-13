@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Common.CoordinateSystems.CoordinateSystem2D;
-using Common.Strings;
+﻿using System.Text.RegularExpressions;
+using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2016.Aoc201622;
+namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201622;
 
 public class StorageGrid
 {

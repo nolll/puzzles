@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2017.Aoc201708;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201708;
 
 public class CpuInstructionCalculator
 {

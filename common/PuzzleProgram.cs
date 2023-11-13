@@ -1,18 +1,16 @@
-﻿using Common.Puzzles;
-using Common.Runners;
+﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Runners;
 
-namespace Common;
+namespace Puzzles.common;
 
-public class Program
+public class PuzzleProgram
 {
-    private const int PuzzleTimeout = 10;
-
     private readonly IPuzzleRepository _puzzleRepository;
     private readonly IHelpPrinter _helpPrinter;
     private readonly PuzzleRunner _runner;
     private readonly string _debugPuzzle;
 
-    public Program(IPuzzleRepository puzzleRepository,
+    public PuzzleProgram(IPuzzleRepository puzzleRepository,
         IHelpPrinter helpPrinter, Options options)
     {
         _puzzleRepository = puzzleRepository;

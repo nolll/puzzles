@@ -1,4 +1,4 @@
-﻿namespace Common.Puzzles;
+﻿namespace Puzzles.common.Puzzles;
 
 public enum PuzzleResultStatus
 {

@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Common.Ocr;
-using Common.Strings;
+using Puzzles.common.Ocr;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2022.Aoc202210;
+namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202210;
 
 public class CathodeRayTube
 {

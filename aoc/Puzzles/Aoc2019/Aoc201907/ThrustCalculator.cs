@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using Common.Combinatorics;
+using Puzzles.common.Combinatorics;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201907;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201907;
 
 public class ThrustCalculator
 {

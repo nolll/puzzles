@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2021.Aoc202124;
+namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202124;
 
 [DebuggerDisplay("{W},{X},{Y},{Z}")]
 public class AluState

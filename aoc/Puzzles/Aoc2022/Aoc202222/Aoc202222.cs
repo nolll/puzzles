@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Common.CoordinateSystems.CoordinateSystem2D;
-using Common.Puzzles;
-using Common.Strings;
+﻿using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2022.Aoc202222;
+namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202222;
 
 public class Aoc202222 : AocPuzzle
 {

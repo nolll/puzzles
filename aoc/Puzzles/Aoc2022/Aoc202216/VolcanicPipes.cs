@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2022.Aoc202216;
+namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202216;
 
 // Very inspired by hyper-neutrino
 // https://www.youtube.com/watch?v=bLMj50cpOug&t=657s

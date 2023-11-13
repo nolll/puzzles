@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using Common.CoordinateSystems.CoordinateSystem3D;
+using Puzzles.common.CoordinateSystems.CoordinateSystem3D;
 
-namespace Aoc.Puzzles.Aoc2021.Aoc202122;
+namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202122;
 
 [DebuggerDisplay("{From.X},{From.Y},{From.Z}..{To.X},{To.Y},{To.Z}")]
 public class RebootArea : IEquatable<RebootArea>

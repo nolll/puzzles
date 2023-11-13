@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2020.Aoc202012;
+namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202012;
 
 public class FerryNavigationInstruction
 {

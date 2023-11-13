@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2015.Aoc201520;
+namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201520;
 
 public class PresentDelivery
 {

@@ -1,6 +1,6 @@
-﻿using Common.Puzzles;
+﻿using Puzzles.common.Puzzles;
 
-namespace Aquaq;
+namespace Puzzles.aquaq;
 
 public abstract class AquaqPuzzle : OnePartPuzzle
 {
@@ -8,6 +8,7 @@ public abstract class AquaqPuzzle : OnePartPuzzle
     public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
+    protected override string CollectionTag => PuzzleTag.Aquaq;
 
     protected AquaqPuzzle()
     {
@@ -15,7 +16,15 @@ public abstract class AquaqPuzzle : OnePartPuzzle
         var paddedId = id.PadLeft(2, '0');
         Id = id;
         SortId = paddedId;
-        Title = $"Puzzle {id}";
-        ListTitle = $"Puzzle {paddedId}";
+        Title = $"AquaQ Challenge {id}";
+        ListTitle = $"{PuzzleTag.Aquaq} {paddedId}";
+    }
+
+    protected override IEnumerable<string> CustomTags
+    {
+        get
+        {
+            yield return Id;
+        }
     }
 }

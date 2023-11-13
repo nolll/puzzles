@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Common.CoordinateSystems.CoordinateSystem3D;
+namespace Puzzles.common.CoordinateSystems.CoordinateSystem3D;
 
 public class Matrix3D<T> where T : struct
 {

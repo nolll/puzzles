@@ -1,6 +1,6 @@
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2020.Aoc202025;
+namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202025;
 
 public class EncryptionKeyFinder
 {

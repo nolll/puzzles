@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Common.CoordinateSystems.CoordinateSystem2D;
+﻿using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2021.Aoc202123;
+namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202123;
 
 public class Amphipods
 {

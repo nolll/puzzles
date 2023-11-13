@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2017.Aoc201704;
+﻿namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201704;
 
 public class PassphraseValidator
 {

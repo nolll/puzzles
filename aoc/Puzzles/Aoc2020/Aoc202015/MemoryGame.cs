@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2020.Aoc202015;
+namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202015;
 
 public class MemoryGame
 {

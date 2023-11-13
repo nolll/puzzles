@@ -1,4 +1,4 @@
-namespace Common.Strings;
+namespace Puzzles.common.Strings;
 
 public static class StringTools
 {

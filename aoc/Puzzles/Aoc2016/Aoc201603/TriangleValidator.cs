@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2016.Aoc201603;
+namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201603;
 
 public class TriangleValidator
 {

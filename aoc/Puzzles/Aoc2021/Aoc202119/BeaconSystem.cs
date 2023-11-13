@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Common.CoordinateSystems.CoordinateSystem3D;
-using Common.Strings;
+using Puzzles.common.CoordinateSystems.CoordinateSystem3D;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2021.Aoc202119;
+namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202119;
 
 public class BeaconSystem
 {

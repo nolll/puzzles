@@ -1,7 +1,7 @@
-﻿using Common.Puzzles;
+﻿using Puzzles.common.Puzzles;
 using Spectre.Console;
 
-namespace Euler;
+namespace Puzzles.euler;
 
 public class EulerHelpPrinter : IHelpPrinter
 {

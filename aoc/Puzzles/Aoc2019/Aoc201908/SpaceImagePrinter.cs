@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201908;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201908;
 
 public class SpaceImagePrinter
 {

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace Aoc.Puzzles.Aoc2015.Aoc201507;
+namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201507;
 
 public class RightShiftWire : Wire
 {

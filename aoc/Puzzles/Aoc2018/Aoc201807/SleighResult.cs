@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2018.Aoc201807;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201807;
 
 public class SleighResult
 {

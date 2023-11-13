@@ -1,6 +1,6 @@
-﻿using Common.Cryptography;
+﻿using Puzzles.common.Cryptography;
 
-namespace Common.Puzzles;
+namespace Puzzles.common.Puzzles;
 
 public class PuzzleResultVerifier
 {

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Common.Computers.IntCode;
+﻿using System.Text;
+using Puzzles.common.Computers.IntCode;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201925;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201925;
 
 public class InvestigationDroid
 {

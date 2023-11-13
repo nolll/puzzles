@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2016.Aoc201624;
+namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201624;
 
 public class AirDuctPath
 {

@@ -1,6 +1,6 @@
-using Common.Computers.IntCode;
+using Puzzles.common.Computers.IntCode;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201907;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201907;
 
 public class Amplifier
 {

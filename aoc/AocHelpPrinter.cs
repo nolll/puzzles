@@ -1,7 +1,7 @@
-﻿using Common.Puzzles;
+﻿using Puzzles.common.Puzzles;
 using Spectre.Console;
 
-namespace Aoc;
+namespace Puzzles.aoc;
 
 public class AocHelpPrinter : IHelpPrinter
 {

@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2015.Aoc201515;
+namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201515;
 
 public class CookieIngredient
 {

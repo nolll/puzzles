@@ -1,4 +1,4 @@
-﻿namespace Common.Puzzles;
+﻿namespace Puzzles.common.Puzzles;
 
 public class PuzzleFilter
 {
@@ -14,7 +14,7 @@ public class PuzzleFilter
         var r = puzzles;
         foreach (var tag in _parameters.Tags)
         {
-            r = r.Where(o => o.GetTags().Contains(tag));
+            r = r.Where(o => o.Tags.Contains(tag));
         }
 
         return r;

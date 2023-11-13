@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Aoc.Puzzles.Aoc2018.Aoc201804;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201804;
 
 public class GuardSleepPuzzle
 {

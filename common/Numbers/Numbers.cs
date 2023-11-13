@@ -1,4 +1,4 @@
-﻿namespace Common.Numbers;
+﻿namespace Puzzles.common.Numbers;
 
 public static class Numbers
 {

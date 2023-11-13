@@ -1,6 +1,6 @@
-﻿using Common.Puzzles;
+﻿using Puzzles.common.Puzzles;
 
-namespace Euler;
+namespace Puzzles.euler;
 
 public abstract class EulerPuzzle : OnePartPuzzle
 {
@@ -8,6 +8,7 @@ public abstract class EulerPuzzle : OnePartPuzzle
     public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
+    protected override string CollectionTag => PuzzleTag.Euler;
 
     protected EulerPuzzle()
     {
@@ -15,7 +16,15 @@ public abstract class EulerPuzzle : OnePartPuzzle
         var paddedId = id.PadLeft(3, '0');
         Id = id;
         SortId = paddedId;
-        Title = $"Puzzle {id}";
-        ListTitle = $"Puzzle {paddedId}";
+        Title = $"Project Euler {id}";
+        ListTitle = $"{PuzzleTag.Euler} {paddedId}";
+    }
+
+    protected override IEnumerable<string> CustomTags
+    {
+        get
+        {
+            yield return Id;
+        }
     }
 }

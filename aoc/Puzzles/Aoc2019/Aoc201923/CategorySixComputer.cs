@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Common.Computers.IntCode;
+﻿using Puzzles.common.Computers.IntCode;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201923;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201923;
 
 public class CategorySixComputer
 {

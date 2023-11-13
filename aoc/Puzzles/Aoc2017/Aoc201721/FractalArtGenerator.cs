@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Common.CoordinateSystems.CoordinateSystem2D;
-using Common.Strings;
+using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2017.Aoc201721;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201721;
 
 public class FractalArtGenerator
 {

@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Common.Strings;
+﻿using System.Text;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2018.Aoc201802;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201802;
 
 public class SimilarIdsPuzzle
 {

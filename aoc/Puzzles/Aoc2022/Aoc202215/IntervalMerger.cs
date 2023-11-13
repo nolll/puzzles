@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Aoc.Puzzles.Aoc2022.Aoc202215;
+namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202215;
 
 public static class IntervalMerger
 {

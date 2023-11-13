@@ -1,7 +1,6 @@
-using System;
-using Common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2018.Aoc201811;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201811;
 
 public class PowerGrid
 {

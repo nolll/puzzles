@@ -1,4 +1,4 @@
-﻿namespace Common.Timing;
+﻿namespace Puzzles.common.Timing;
 
 public interface ISystemTimeProvider
 {

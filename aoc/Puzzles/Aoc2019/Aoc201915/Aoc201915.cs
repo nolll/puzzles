@@ -1,7 +1,7 @@
-﻿using Common.CoordinateSystems.CoordinateSystem2D;
-using Common.Puzzles;
+﻿using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.Puzzles;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201915;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201915;
 
 public class Aoc201915 : AocPuzzle
 {

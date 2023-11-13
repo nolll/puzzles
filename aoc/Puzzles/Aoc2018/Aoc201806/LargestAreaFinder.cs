@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using Common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2018.Aoc201806;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201806;
 
 public class LargestAreaFinder
 {

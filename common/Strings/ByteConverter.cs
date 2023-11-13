@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Common.Strings;
+namespace Puzzles.common.Strings;
 
 public static class ByteConverter
 {

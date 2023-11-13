@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace Common.Graphs;
+namespace Puzzles.common.Graphs;
 
 public class GraphTests
 {

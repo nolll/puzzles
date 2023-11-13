@@ -1,4 +1,4 @@
-namespace Common.Ocr;
+namespace Puzzles.common.Ocr;
 
 public static class OcrLargeFont
 {

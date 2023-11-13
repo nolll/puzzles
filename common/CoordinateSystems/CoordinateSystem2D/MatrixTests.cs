@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Common.CoordinateSystems.CoordinateSystem2D;
+namespace Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
 public class MatrixTests
 {

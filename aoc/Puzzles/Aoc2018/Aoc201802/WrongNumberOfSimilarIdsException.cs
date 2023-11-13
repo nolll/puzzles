@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Aoc.Puzzles.Aoc2018.Aoc201802;
+﻿namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201802;
 
 public class WrongNumberOfSimilarIdsException : Exception
 {

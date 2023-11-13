@@ -1,8 +1,7 @@
-using System.Linq;
 using System.Text;
-using Common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2017.Aoc201719;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201719;
 
 public class TubeRouteFinder
 {

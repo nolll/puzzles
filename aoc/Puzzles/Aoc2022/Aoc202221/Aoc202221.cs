@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Common.Puzzles;
-using Common.Strings;
+﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2022.Aoc202221;
+namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202221;
 
 public class Aoc202221 : AocPuzzle
 {

@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2018.Aoc201804;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201804;
 
 public static class GuardEventReader
 {

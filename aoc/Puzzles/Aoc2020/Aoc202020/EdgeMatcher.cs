@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2020.Aoc202020;
+namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202020;
 
 public abstract class EdgeMatcher : TileMatcher
 {

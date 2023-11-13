@@ -1,8 +1,8 @@
-using Common.CoordinateSystems.CoordinateSystem2D;
 using FluentAssertions;
 using NUnit.Framework;
+using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2022.Aoc202222;
+namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202222;
 
 public class Aoc202222Tests
 {

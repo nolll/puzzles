@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Common.Maths;
+namespace Puzzles.common.Maths;
 
 public static class MathTools
 {

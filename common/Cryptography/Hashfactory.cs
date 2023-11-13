@@ -1,8 +1,8 @@
 using System.Security.Cryptography;
 using System.Text;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Common.Cryptography;
+namespace Puzzles.common.Cryptography;
 
 public class Hashfactory
 {

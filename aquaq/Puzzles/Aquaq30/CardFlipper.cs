@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Aquaq.Puzzles.Aquaq30;
+namespace Puzzles.aquaq.Puzzles.Aquaq30;
 
 public class CardFlipper
 {

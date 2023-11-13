@@ -1,6 +1,4 @@
-using System;
-
-namespace Aoc.Puzzles.Aoc2015.Aoc201517;
+namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201517;
 
 public class EggnogContainer : IEquatable<EggnogContainer>
 {

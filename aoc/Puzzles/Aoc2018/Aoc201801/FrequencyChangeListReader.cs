@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2018.Aoc201801;
+﻿namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201801;
 
 public static class FrequencyChangeListReader
 {

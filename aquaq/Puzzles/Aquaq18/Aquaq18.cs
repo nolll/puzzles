@@ -1,8 +1,7 @@
-﻿using Common.Puzzles;
-using Common.Strings;
-using NUnit.Framework.Constraints;
+﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
-namespace Aquaq.Puzzles.Aquaq18;
+namespace Puzzles.aquaq.Puzzles.Aquaq18;
 
 public class Aquaq18 : AquaqPuzzle
 {

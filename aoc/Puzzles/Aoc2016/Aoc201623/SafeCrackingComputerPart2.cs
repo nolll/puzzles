@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2016.Aoc201623;
+namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201623;
 
 public class SafeCrackingComputerPart2
 {

@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2021.Aoc202121;
+namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202121;
 
 public class DiracDicePlayer
 {

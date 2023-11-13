@@ -1,4 +1,4 @@
-﻿namespace Common.CoordinateSystems;
+﻿namespace Puzzles.common.CoordinateSystems;
 
 public static class MatrixConstants
 {

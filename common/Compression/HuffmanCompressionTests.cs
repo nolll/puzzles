@@ -1,8 +1,7 @@
-﻿using NUnit.Framework;
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
-namespace Common.Compression;
+namespace Puzzles.common.Compression;
 
 public class HuffmanCompressionTests
 {

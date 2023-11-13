@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Common.Computers.IntCode;
+namespace Puzzles.common.Computers.IntCode;
 
 public class BoostTests
 {

@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2022.Aoc202204;
+namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202204;
 
 public class CleaningRange
 {

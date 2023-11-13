@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace Common.Cryptography;
+namespace Puzzles.common.Cryptography;
 
 public class PlayfairCipherTests
 {

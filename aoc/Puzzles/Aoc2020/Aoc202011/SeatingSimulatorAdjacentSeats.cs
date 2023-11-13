@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Aoc.Puzzles.Aoc2020.Aoc202011;
+﻿namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202011;
 
 public class SeatingSimulatorAdjacentSeats : SeatingSimulator
 {

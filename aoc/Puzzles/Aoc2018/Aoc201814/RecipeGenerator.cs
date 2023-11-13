@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2018.Aoc201814;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201814;
 
 public class RecipeGenerator
 {

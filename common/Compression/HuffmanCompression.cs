@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Common.Compression;
+namespace Puzzles.common.Compression;
 
 public class HuffmanCompression
 {

@@ -1,8 +1,8 @@
-using Common.Computers.IntCode.Instructions;
 using FluentAssertions;
 using NUnit.Framework;
+using Puzzles.common.Computers.IntCode.Instructions;
 
-namespace Common.Computers.IntCode;
+namespace Puzzles.common.Computers.IntCode;
 
 public class InstructionParserTests
 {

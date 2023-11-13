@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Aoc.Puzzles.Aoc2018.Aoc201805;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201805;
 
 public class PolymerPuzzle
 {

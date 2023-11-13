@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-
-namespace Aoc.Puzzles.Aoc2017.Aoc201718;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201718;
 
 public class DuetProgramPart2
 {

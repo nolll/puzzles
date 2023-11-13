@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace Aoc.Puzzles.Aoc2018.Aoc201803;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201803;
 
 public class ClaimThatDoesNotOverlapPuzzle
 {

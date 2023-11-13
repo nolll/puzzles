@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
-using Common.Computers.IntCode;
-using Common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.Computers.IntCode;
+using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aoc.Puzzles.Aoc2019.Aoc201911;
+namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201911;
 
 public class PaintRobot
 {

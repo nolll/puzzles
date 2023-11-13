@@ -1,4 +1,4 @@
-namespace Common.Computers.Operation;
+namespace Puzzles.common.Computers.Operation;
 
 public abstract class Operation
 {

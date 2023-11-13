@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Aoc.Puzzles.Aoc2019.Aoc201904;
+﻿namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201904;
 
 public class PasswordFinder
 {

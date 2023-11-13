@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2017.Aoc201718;
+namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201718;
 
 public class SingleRunner
 {

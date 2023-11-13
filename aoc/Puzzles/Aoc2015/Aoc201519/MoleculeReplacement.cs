@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
-namespace Aoc.Puzzles.Aoc2015.Aoc201519;
+namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201519;
 
 internal class MoleculeReplacement
 {

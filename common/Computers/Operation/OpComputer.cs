@@ -1,6 +1,7 @@
-using Common.Strings;
+using System.Threading;
+using Puzzles.common.Strings;
 
-namespace Common.Computers.Operation;
+namespace Puzzles.common.Computers.Operation;
 
 public class OpComputer
 {

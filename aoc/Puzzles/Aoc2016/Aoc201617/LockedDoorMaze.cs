@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
-using Common.CoordinateSystems.CoordinateSystem2D;
-using Common.Cryptography;
+using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.Cryptography;
 
-namespace Aoc.Puzzles.Aoc2016.Aoc201617;
+namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201617;
 
 public class LockedDoorMaze
 {

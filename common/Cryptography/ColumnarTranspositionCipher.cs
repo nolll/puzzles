@@ -1,6 +1,6 @@
-﻿using Common.CoordinateSystems.CoordinateSystem2D;
+﻿using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Common.Cryptography;
+namespace Puzzles.common.Cryptography;
 
 public static class ColumnarTranspositionCipher
 {

@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2018.Aoc201807;
+namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201807;
 
 public class SleighAssembler
 {

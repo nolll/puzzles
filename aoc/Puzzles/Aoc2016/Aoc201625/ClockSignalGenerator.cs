@@ -1,4 +1,4 @@
-namespace Aoc.Puzzles.Aoc2016.Aoc201625;
+namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201625;
 
 public class ClockSignalGenerator
 {

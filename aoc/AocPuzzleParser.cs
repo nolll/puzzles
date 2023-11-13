@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Aoc;
+﻿namespace Puzzles.aoc;
 
 public static class AocPuzzleParser
 {

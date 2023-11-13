@@ -1,7 +1,6 @@
-using System.Linq;
-using Common.Strings;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2022.Aoc202204;
+namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202204;
 
 public class Cleaning
 {

@@ -1,8 +1,8 @@
-﻿using Common.CoordinateSystems.CoordinateSystem2D;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
+using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Aquaq.Puzzles.Aquaq03;
+namespace Puzzles.aquaq.Puzzles.Aquaq03;
 
 public class Aquaq03Tests
 {

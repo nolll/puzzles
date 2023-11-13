@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace Aoc.Puzzles.Aoc2016.Aoc201610;
+namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201610;
 
 public class BotGiver : IGiver
 {

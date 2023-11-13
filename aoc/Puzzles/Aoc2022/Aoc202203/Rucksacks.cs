@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Common.Strings;
+﻿using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2022.Aoc202203;
+namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202203;
 
 public static class Rucksacks
 {

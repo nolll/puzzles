@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Common.CoordinateSystems.CoordinateSystem2D;
-using Common.Strings;
+﻿using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.common.Strings;
 
-namespace Aoc.Puzzles.Aoc2021.Aoc202105;
+namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202105;
 
 public class VentsMap
 {

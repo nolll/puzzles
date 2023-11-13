@@ -10,20 +10,11 @@ public class ParameterTests
     {
         var result = Puzzles.Parameters.Parse("");
 
-        result.Id.Should().BeNull();
+        result.Query.Should().BeNull();
         result.Tags.Should().BeEmpty();
         result.ShowHelp.Should().BeFalse();
     }
-
-    [TestCase("--puzzle 1")]
-    [TestCase("-p 1")]
-    public void ParsePuzzle(string input)
-    {
-        var result = Puzzles.Parameters.Parse(input);
-
-        result.Id.Should().Be("1");
-    }
-
+    
     [TestCase("--tags 1,test,3")]
     [TestCase("-t 1,test,3")]
     public void ParseTags(string input)
@@ -34,7 +25,18 @@ public class ParameterTests
         result.Tags[1].Should().Be("test");
         result.Tags[2].Should().Be("3");
     }
-    
+
+    [TestCase("--search foo")]
+    [TestCase("-s foo")]
+    public void ParseSearch(string input)
+    {
+        var result = Puzzles.Parameters.Parse(input);
+
+        result.Query.Should().Be("foo");
+    }
+
+
+
     [TestCase("--help")]
     [TestCase("--help true")]
     [TestCase("-h")]

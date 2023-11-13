@@ -30,9 +30,4 @@ public class PuzzleRunner
         else
             new MultiPuzzleRunner(enumerable, _puzzleTimeout, _hashSeed).Run();
     }
-
-    public void Run(Puzzle puzzle)
-    {
-        Run(new List<Puzzle> { puzzle });
-    }
 }

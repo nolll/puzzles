@@ -18,8 +18,19 @@ public class PuzzleRepository
         _puzzles.AddRange(puzzleFactory.CreatePuzzles<EulerPuzzle>());
     }
 
-    public Puzzle? GetPuzzle(string id) =>
-        _puzzles.FirstOrDefault(o => o.Id == id);
-
     public IList<Puzzle> GetPuzzles() => _puzzles;
+
+    public List<Puzzle> Search(string query)
+    {
+        return _puzzles
+            .Where(o => MatchesQuery(o, query))
+            .ToList();
+    }
+
+    private static bool MatchesQuery(Puzzle o, string query)
+    {
+        return o.Title.Contains(query, StringComparison.InvariantCultureIgnoreCase) ||
+               o.Name.Contains(query, StringComparison.InvariantCultureIgnoreCase) ||
+               o.Comment is not null && o.Comment.Contains(query, StringComparison.InvariantCultureIgnoreCase);
+    }
 }

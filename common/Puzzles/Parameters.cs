@@ -4,28 +4,28 @@ namespace Puzzles.common.Puzzles;
 
 public class Parameters
 {
-    public string? Id { get; }
     public List<string> Tags { get; }
+    public string? Query { get; }
     public bool ShowHelp { get; }
 
     public Parameters(
-        string? id = null,
-        List<string>? tags = null, 
+        List<string>? tags = null,
+        string? query = null,
         bool showHelp = false)
     {
-        Id = id;
         Tags = tags ?? new List<string>();
+        Query = query;
         ShowHelp = showHelp;
     }
 
     public static Parameters Parse(IEnumerable<string> args)
     {
         var parser = new ParameterParser(args);
-        var id = parser.GetValue("-p", "--puzzle");
-        var tags = parser.GetListValue("-t", "--tags"); 
+        var tags = parser.GetListValue("-t", "--tags");
+        var query = parser.GetValue("-s", "--search");
         var showHelp = parser.GetBoolValue("-h", "--help") ?? false;
 
-        return new Parameters(id, tags, showHelp);
+        return new Parameters(tags, query, showHelp);
     }
 
     public static Parameters Parse(string args)

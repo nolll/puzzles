@@ -17,6 +17,8 @@ dotnet run -- [parameters]
                   --tags aquaq (runs all aquaq puzzles)
                   --tags euler,4 (runs euler puzzle 4)
 
+-s    --search    search query. Use quotes if the query contains spaces
+
 -h    --help      display this help text
 
 ";

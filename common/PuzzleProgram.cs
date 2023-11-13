@@ -1,5 +1,7 @@
-﻿using Puzzles.common.Puzzles;
+﻿using Microsoft.VisualBasic.FileIO;
+using Puzzles.common.Puzzles;
 using Puzzles.common.Runners;
+using Spectre.Console;
 
 namespace Puzzles.common;
 
@@ -18,43 +20,40 @@ public class PuzzleProgram
         _debugPuzzle = options.DebugPuzzle;
     }
 
-    public void Run(string[] args)
+    public void Run(IEnumerable<string> args)
     {
         var parameters = ParseParameters(args);
 
         if (parameters.ShowHelp)
             _helpPrinter.Print();
+        else if (parameters.Query is not null)
+            Search(parameters.Query);
         else
             RunPuzzles(parameters);
     }
-
+    
     private void RunPuzzles(Puzzles.Parameters parameters)
-    {
-        if (parameters.Id != null)
-            RunSingle(parameters.Id);
-        else
-            RunAll(parameters);
-    }
-
-    private void RunSingle(string id)
-    {
-        var puzzle = _puzzleRepository.GetPuzzle(id);
-
-        if (puzzle == null)
-            throw new Exception($"The specified puzzle could not be found ({id})");
-
-        _runner.Run(puzzle);
-    }
-
-    private void RunAll(Puzzles.Parameters parameters)
     {
         var puzzles = _puzzleRepository.GetPuzzles();
         var filteredPuzzles = new PuzzleFilter(parameters).Filter(puzzles);
         _runner.Run(filteredPuzzles);
     }
 
-    private Puzzles.Parameters ParseParameters(string[] args) =>
+    private void Search(string query)
+    {
+        var puzzles = _puzzleRepository.Search(query);
+        AnsiConsole.WriteLine($"Search: {query}");
+        if(!puzzles.Any())
+            AnsiConsole.WriteLine("No puzzles found!");
+
+        foreach (var puzzle in puzzles)
+        {
+            AnsiConsole.WriteLine($"{puzzle.Title}: {puzzle.Name}");
+        }
+    }
+
+    private Puzzles.Parameters ParseParameters(IEnumerable<string> args) =>
         DebugMode.IsDebugMode
-            ? new Puzzles.Parameters(id: _debugPuzzle)
+            ? new Puzzles.Parameters(query: _debugPuzzle)
             : Puzzles.Parameters.Parse(args);
 }

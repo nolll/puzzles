@@ -28,7 +28,7 @@ public class PuzzleRunner
         if (count == 1)
             new StandaloneSinglePuzzleRunner(enumerable.First(), _hashSeed).Run();
         else
-            new MultiPuzzleRunner(_puzzleTimeout, _hashSeed).Run(enumerable);
+            new MultiPuzzleRunner(enumerable, _puzzleTimeout, _hashSeed).Run();
     }
 
     public void Run(Puzzle puzzle)

@@ -7,24 +7,31 @@ namespace Common.Runners;
 
 public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 {
-    private const int ResultColumnWidth = 10;
-    private const int CommentColumnWidth = 24;
-    private const int TruncatedCommentLength = CommentColumnWidth - 3;
-
     private readonly Puzzle _puzzle;
     private readonly TimeSpan _timeoutTimespan;
     private readonly PuzzleResultVerifier _resultVerifier;
+    private readonly int _resultLength;
+    private readonly int _commentLength;
+    private readonly int _truncatedCommentLength;
     private readonly string _title;
     private readonly string _commentMarkup;
     private readonly string[] _markups;
 
-    public InSequenceSinglePuzzleRunner(Puzzle puzzle, TimeSpan timeoutTimespan, PuzzleResultVerifier resultVerifier)
+    public InSequenceSinglePuzzleRunner(
+        Puzzle puzzle, 
+        TimeSpan timeoutTimespan, 
+        PuzzleResultVerifier resultVerifier,
+        int titleWidth,
+        int resultWidth,
+        int commentWidth)
     {
         _puzzle = puzzle;
         _timeoutTimespan = timeoutTimespan;
         _resultVerifier = resultVerifier;
-
-        _title = _puzzle.ListTitle.PadRight(11);
+        _resultLength = resultWidth;
+        _commentLength = commentWidth;
+        _truncatedCommentLength = commentWidth - 3;
+        _title = _puzzle.ListTitle.PadRight(titleWidth);
         _commentMarkup = MarkupComment(_puzzle.Comment);
         _markups = new string[_puzzle.RunFunctions.Count];
         for (var i = 0; i < _puzzle.RunFunctions.Count; i++)
@@ -94,8 +101,8 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
         };
     }
 
-    private static string PadResult(string s) => Pad(s, ResultColumnWidth);
-    private static string PadComment(string s) => Pad(s, CommentColumnWidth);
+    private string PadResult(string s) => Pad(s, _resultLength);
+    private string PadComment(string s) => Pad(s, _commentLength);
     private static string Pad(string s, int width) => s.PadRight(width);
 
     private void PrintRow()
@@ -104,13 +111,13 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
         AnsiConsole.Markup($"\r| {_title} | {results} | {_commentMarkup} |");
     }
 
-    private static string MarkupComment(string? comment) =>
+    private string MarkupComment(string? comment) =>
         comment is null
             ? PadComment(string.Empty)
             : MarkupColor(PadComment(TruncateComment(comment)), Color.Yellow);
 
-    private static string TruncateComment(string fullComment) =>
-        fullComment.Length > TruncatedCommentLength
-            ? fullComment[..TruncatedCommentLength] + "..."
+    private string TruncateComment(string fullComment) =>
+        fullComment.Length > _truncatedCommentLength
+            ? fullComment[.._truncatedCommentLength] + "..."
             : fullComment;
 }

@@ -5,42 +5,67 @@ namespace Common.Runners;
 
 public class MultiPuzzleRunner
 {
+    private const int TitleLength = 11;
+    private const int ResultLength = 10;
+    private const int CommentLength = 24;
+
+    private readonly IList<Puzzle> _puzzles;
+    private readonly int _funcCount;
     private readonly TimeSpan _timeoutTimespan;
     private readonly PuzzleResultVerifier _resultVerifier;
 
-    public MultiPuzzleRunner(int timeoutSeconds, string hashSeed)
+    public MultiPuzzleRunner(IEnumerable<Puzzle> puzzles, int timeoutSeconds, string hashSeed)
     {
+        _puzzles = puzzles.ToList();
+        _funcCount = _puzzles.Max(o => o.RunFunctions.Count);
         _timeoutTimespan = TimeSpan.FromSeconds(timeoutSeconds);
         _resultVerifier = new PuzzleResultVerifier(hashSeed);
     }
 
-    public void Run(IEnumerable<Puzzle> puzzles)
+    public void Run()
     {
-        var puzzleList = puzzles.ToList();
-        var maxRunFuncCount = puzzleList.Max(o => o.RunFunctions.Count);
-        var partTitles = maxRunFuncCount > 1
-            ? Enumerable.Range(1, maxRunFuncCount).Select(o => $"part {o}    ")
-            : new List<string> { "result    " };
-        var variableParts = string.Join(" | ", partTitles);
-        
-        var partsDividers = maxRunFuncCount > 1
-            ? Enumerable.Range(1, maxRunFuncCount).Select(_ => "----------")
-            : new List<string> { "----------" };
-        var variableDividers = string.Join("---", partsDividers);
-        var divider = $"----------------{variableDividers}-----------------------------";
-
         AnsiConsole.Cursor.Show(false);
-        AnsiConsole.WriteLine($"Running {puzzleList.Count} puzzles");
-        AnsiConsole.WriteLine(divider);
-        AnsiConsole.WriteLine($"| puzzle      | {variableParts} | comment                  |");
-        AnsiConsole.WriteLine(divider);
+        PrintHeader();
 
-        foreach (var puzzle in puzzleList)
+        foreach (var puzzle in _puzzles)
         {
-            new InSequenceSinglePuzzleRunner(puzzle, _timeoutTimespan, _resultVerifier).Run();
+            new InSequenceSinglePuzzleRunner(
+                puzzle, 
+                _timeoutTimespan, 
+                _resultVerifier,
+                TitleLength, 
+                ResultLength, 
+                CommentLength).Run();
         }
 
-        AnsiConsole.WriteLine(divider);
+        PrintFooter();
         AnsiConsole.Cursor.Show(true);
+    }
+
+    private void PrintHeader()
+    {
+        var partTitles = _funcCount > 1
+            ? Enumerable.Range(1, _funcCount).Select(o => $"part {o}")
+            : new List<string> { "result" };
+        var paddedPartTitles = partTitles.Select(o => o.PadRight(10));
+        var variableParts = string.Join(" | ", paddedPartTitles);
+
+        AnsiConsole.WriteLine($"Running {_puzzles.Count} puzzles");
+        PrintDivider();
+        AnsiConsole.WriteLine($"| {"puzzle",-TitleLength} | {variableParts} | {"comment",-CommentLength} |");
+        PrintDivider();
+    }
+
+    private void PrintFooter()
+    {
+        PrintDivider();
+    }
+
+    private void PrintDivider()
+    {
+        var partsDividers = Enumerable.Range(1, _funcCount).Select(_ => "----------");
+        var variableDividers = string.Join("---", partsDividers);
+        var divider = $"----------------{variableDividers}-----------------------------";
+        AnsiConsole.WriteLine(divider);
     }
 }

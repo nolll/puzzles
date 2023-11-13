@@ -5,7 +5,7 @@ using Puzzles.euler;
 
 namespace Puzzles;
 
-public class PuzzleRepository : IPuzzleRepository
+public class PuzzleRepository
 {
     private readonly List<Puzzle> _puzzles;
         

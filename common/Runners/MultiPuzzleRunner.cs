@@ -35,7 +35,8 @@ public class MultiPuzzleRunner
                 _resultVerifier,
                 TitleLength, 
                 ResultLength, 
-                CommentLength).Run();
+                CommentLength,
+                _funcCount).Run();
         }
 
         PrintFooter();

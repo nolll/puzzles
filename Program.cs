@@ -1,5 +1,4 @@
-﻿using Puzzles.aoc;
-using Puzzles.common;
+﻿using Puzzles.common;
 
 namespace Puzzles;
 
@@ -7,10 +6,7 @@ public class Program
 {
     static void Main(string[] args)
     {
-        var program = new PuzzleProgram(
-            new PuzzleRepository(),
-            new AocHelpPrinter(),
-            OptionsReader.Read());
+        var program = new PuzzleProgram(OptionsReader.Read());
 
         program.Run(args);
     }

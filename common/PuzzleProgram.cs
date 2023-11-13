@@ -1,20 +1,20 @@
-﻿using Puzzles.common.Puzzles;
+﻿using Puzzles.aoc;
+using Puzzles.common.Puzzles;
 using Puzzles.common.Runners;
 
 namespace Puzzles.common;
 
 public class PuzzleProgram
 {
-    private readonly IPuzzleRepository _puzzleRepository;
-    private readonly IHelpPrinter _helpPrinter;
+    private readonly PuzzleRepository _puzzleRepository;
+    private readonly HelpPrinter _helpPrinter;
     private readonly PuzzleRunner _runner;
     private readonly string _debugPuzzle;
 
-    public PuzzleProgram(IPuzzleRepository puzzleRepository,
-        IHelpPrinter helpPrinter, Options options)
+    public PuzzleProgram(Options options)
     {
-        _puzzleRepository = puzzleRepository;
-        _helpPrinter = helpPrinter;
+        _puzzleRepository = new PuzzleRepository();
+        _helpPrinter = new HelpPrinter();
         _runner = new PuzzleRunner(options.TimeoutSeconds, options.HashSeed);
         _debugPuzzle = options.DebugPuzzle;
     }

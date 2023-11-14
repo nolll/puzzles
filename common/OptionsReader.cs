@@ -12,6 +12,6 @@ public static class OptionsReader
         return new Options(
             configuration["hashSeed"],
             configuration["timeoutSeconds"],
-            configuration["debugPuzzle"]);
+            configuration["debugTags"]);
     }
 }

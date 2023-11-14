@@ -10,14 +10,14 @@ public class PuzzleProgram
     private readonly PuzzleRepository _puzzleRepository;
     private readonly HelpPrinter _helpPrinter;
     private readonly PuzzleRunner _runner;
-    private readonly string _debugPuzzle;
+    private readonly string _debugTags;
 
     public PuzzleProgram(Options options)
     {
         _puzzleRepository = new PuzzleRepository();
         _helpPrinter = new HelpPrinter();
         _runner = new PuzzleRunner(options.TimeoutSeconds, options.HashSeed);
-        _debugPuzzle = options.DebugPuzzle;
+        _debugTags = options.DebugTags;
     }
 
     public void Run(IEnumerable<string> args)
@@ -54,6 +54,6 @@ public class PuzzleProgram
 
     private Puzzles.Parameters ParseParameters(IEnumerable<string> args) =>
         DebugMode.IsDebugMode
-            ? new Puzzles.Parameters(query: _debugPuzzle)
+            ? new Puzzles.Parameters(tags: _debugTags.Split(',').ToList())
             : Puzzles.Parameters.Parse(args);
 }

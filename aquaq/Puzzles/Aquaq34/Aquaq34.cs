@@ -11,7 +11,7 @@ public class Aquaq34 : AquaqPuzzle
     {
         var result = LongestRouteTime(InputFile);
 
-        return new PuzzleResult(result, (string?)null);
+        return new PuzzleResult(result);
     }
 
     public static int LongestRouteTime(string input)
@@ -214,7 +214,7 @@ public class Aquaq34 : AquaqPuzzle
         public int StartTime { get; set; }
         public string StartTimeStr { get; set; } = "";
         public Station? StartStation { get; set; }
-        public List<Leg> Legs { get; set; } = new List<Leg>();
+        public List<Leg> Legs { get; set; } = new();
         public int LegCount { get; set; }
         public int TimeTravelled => ArrivalTime - StartTime;
         public Station? CurrentStation { get; set; }

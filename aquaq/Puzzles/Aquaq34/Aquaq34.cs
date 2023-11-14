@@ -210,9 +210,9 @@ public class Aquaq34 : AquaqPuzzle
     
     private class Train
     {
-        public string Name { get; set; }
+        public string Name { get; init; } = "";
         public int StartTime { get; set; }
-        public string StartTimeStr { get; set; }
+        public string StartTimeStr { get; set; } = "";
         public Station? StartStation { get; set; }
         public List<Leg> Legs { get; set; } = new List<Leg>();
         public int LegCount { get; set; }
@@ -236,18 +236,18 @@ public class Aquaq34 : AquaqPuzzle
 
     private class Leg
     {
-        public Station? From { get; set; }
-        public Station To { get; set; }
-        public int DepartureTime { get; set; }
-        public string DepartureTimeStr { get; set; }
-        public int ArrivalTime { get; set; }
-        public string ArrivalTimeStr { get; set; }
+        public Station? From { get; init; }
+        public Station? To { get; init; }
+        public int DepartureTime { get; init; }
+        public string DepartureTimeStr { get; init; } = "";
+        public int ArrivalTime { get; init; }
+        public string ArrivalTimeStr { get; init; } = "";
         public int TravelTime => ArrivalTime - DepartureTime;
     }
 
     private class RouteTimestamp
     {
-        public int? Numeric { get; set; }
-        public string Textual { get; set; }
+        public int? Numeric { get; init; }
+        public string Textual { get; init; } = "";
     }
 }

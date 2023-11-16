@@ -6,19 +6,21 @@ public class Aquaq37 : AquaqPuzzle
 {
     public override string Name => "GUESS WORDS";
 
+    private const int WordLength = 5;
+
     protected override PuzzleResult Run()
     {
         var words = FindWords(InputFile);
         var score = words.Sum(GetWordScore);
 
-        return new PuzzleResult(score);
+        return new PuzzleResult(score, "ba0ef798d7f57b80a0675236159ccfb1");
     }
 
     public List<string> FindWords(string input)
     {
         var words = CommonTextFile("Words.txt")
             .Split(Environment.NewLine)
-            .Where(o => o.Length == 5)
+            .Where(o => o.Length == WordLength)
             .ToList();
 
         var guesses = input
@@ -27,14 +29,8 @@ public class Aquaq37 : AquaqPuzzle
             .Select(ParseGuess)
             .ToList();
 
-        return FindWords(words, guesses);
-    }
-
-    public static List<string> FindWords(List<string> words, List<Guess> guesses)
-    {
         var foundWords = new List<string>();
         var used = new HashSet<string>();
-        var blockedChars = new HashSet<char>();
         var remainingGuesses = guesses.ToList();
         var matchingWords = words.ToList();
         while (remainingGuesses.Any())
@@ -42,36 +38,25 @@ public class Aquaq37 : AquaqPuzzle
             var guess = remainingGuesses.First();
             remainingGuesses = remainingGuesses.Skip(1).ToList();
             used.Add(guess.Word);
-            foreach (var blockedChar in guess.BlockedChars())
-            {
-                blockedChars.Add(blockedChar);
-            }
-            var lastGuess = guesses.Last();
+
             matchingWords = matchingWords
-                .Where(o => lastGuess.IsMatch(o))
                 .Where(o => !used.Contains(o))
-                .Where(o => !ContainsBlockedChar(o, blockedChars))
+                .Where(o => guess.IsMatch(o))
                 .ToList();
 
-            if (matchingWords.Count == 1)
-            {
-                var foundWord = matchingWords.First();
-                foundWords.Add(foundWord);
-                blockedChars.Clear();
-                used.Clear();
-                matchingWords = words.ToList();
-                Console.WriteLine(foundWord);
-            }
-            
+            if (matchingWords.Count > 1)
+                continue;
+
+            var foundWord = matchingWords.First();
+            foundWords.Add(foundWord);
+            used.Clear();
+            matchingWords = words.ToList();
         }
 
         return foundWords;
     }
 
-    private static bool ContainsBlockedChar(string word, HashSet<char> blockedChars) 
-        => word.Any(blockedChars.Contains);
-
-    public static Guess ParseGuess(string s)
+    private static Guess ParseGuess(string s)
     {
         var parts = s.Split(',');
         var word = parts[0];
@@ -82,38 +67,51 @@ public class Aquaq37 : AquaqPuzzle
 
     public static int GetWordScore(string word) => word.Select(o => o - 'a').Sum();
 
-    public record Guess(string Word, int[] Result)
+    public class Guess
     {
-        public int CorrectCount => Result.Count(o => o == 2);
+        public string Word { get; }
+        private readonly int[] _result;
+
+        public Guess(string word, int[] result)
+        {
+            Word = word;
+            _result = result;
+        }
 
         public bool IsMatch(string other)
         {
-            for (var i = 0; i < 5; i++)
+            for (var i = 0; i < WordLength; i++)
             {
-                if (Result[i] == 2 && other[i] != Word[i])
-                    return false;
+                var result = _result[i];
+                var wordChar = Word[i];
+                var otherChar = other[i];
+                switch (result)
+                {
+                    case 2 when wordChar != otherChar:
+                    case 0 or 1 when wordChar == otherChar:
+                        return false;
+                }
             }
 
-            return true;
-        }
-
-        public char[] BlockedChars()
-        {
-            var correctChars = CorrectChars();
-            return Word.Where(o => !correctChars.Contains(o)).ToArray();
-        }
-
-        private HashSet<char> CorrectChars()
-        {
-            var corrext = new List<char>();
-
-            for (var i = 0; i < 5; i++)
+            var possibleChars = new List<char>();
+            var blockedChars = new List<char>();
+            var remainingChars = new List<char>();
+            for (var i = 0; i < WordLength; i++)
             {
-                if (Result[i] == 1 || Result[i] == 2)
-                    corrext.Add(Word[i]);
+                var result = _result[i];
+                var wordChar = Word[i];
+                var otherChar = other[i];
+                if (result is 0 or 1)
+                    remainingChars.Add(otherChar);
+
+                if (result == 1)
+                    possibleChars.Add(wordChar);
+
+                if (result == 0)
+                    blockedChars.Add(wordChar);
             }
 
-            return corrext.Distinct().ToHashSet();
+            return possibleChars.All(remainingChars.Remove) && !blockedChars.Any(remainingChars.Contains);
         }
-    };
+    }
 }

@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using NUnit.Framework.Constraints;
-using Puzzles.common.Puzzles;
+﻿using Puzzles.common.Puzzles;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq37;
 
@@ -28,51 +26,46 @@ public class Aquaq37 : AquaqPuzzle
             .Skip(1)
             .Select(ParseGuess)
             .ToList();
-        var guessSections = new List<List<Guess>>();
 
-        var currentList = new List<Guess>();
-        var lastCorrectCount = 0;
-        foreach (var guess in guesses)
+        return FindWords(words, guesses);
+    }
+
+    public static List<string> FindWords(List<string> words, List<Guess> guesses)
+    {
+        var foundWords = new List<string>();
+        var used = new HashSet<string>();
+        var blockedChars = new HashSet<char>();
+        var remainingGuesses = guesses.ToList();
+        var matchingWords = words.ToList();
+        while (remainingGuesses.Any())
         {
-            if (guess.CorrectCount < lastCorrectCount)
+            var guess = remainingGuesses.First();
+            remainingGuesses = remainingGuesses.Skip(1).ToList();
+            used.Add(guess.Word);
+            foreach (var blockedChar in guess.BlockedChars())
             {
-                guessSections.Add(currentList);
-                currentList = new List<Guess>();
+                blockedChars.Add(blockedChar);
             }
+            var lastGuess = guesses.Last();
+            matchingWords = matchingWords
+                .Where(o => lastGuess.IsMatch(o))
+                .Where(o => !used.Contains(o))
+                .Where(o => !ContainsBlockedChar(o, blockedChars))
+                .ToList();
 
-            lastCorrectCount = guess.CorrectCount;
-
-            currentList.Add(guess);
-        }
-        guessSections.Add(currentList);
-
-        return FindWords(words, guessSections);
-    }
-
-    public static List<string> FindWords(List<string> words, List<List<Guess>> guessSections)
-    {
-        return guessSections.Select(o => FindNextWord(words, o)).ToList();
-    }
-
-    public static string FindNextWord(List<string> words, List<Guess> guesses)
-    {
-        var used = guesses.Select(o => o.Word).ToHashSet();
-        var blockedChars = guesses.SelectMany(o => o.BlockedChars()).Distinct().ToHashSet();
-        var lastGuess = guesses.Last();
-        var matchingWords = words
-            .Where(o => 
-                lastGuess.IsMatch(o) && 
-                !used.Contains(o));
-
-        var matchingWords2 = matchingWords.Where(o => !ContainsBlockedChar(o, blockedChars));
-        var matchingWord = matchingWords2.FirstOrDefault();
-        if (matchingWord is not null)
-        {
-            return matchingWord;
+            if (matchingWords.Count == 1)
+            {
+                var foundWord = matchingWords.First();
+                foundWords.Add(foundWord);
+                blockedChars.Clear();
+                used.Clear();
+                matchingWords = words.ToList();
+                Console.WriteLine(foundWord);
+            }
+            
         }
 
-        Console.WriteLine(lastGuess.Word);
-        throw new Exception();
+        return foundWords;
     }
 
     private static bool ContainsBlockedChar(string word, HashSet<char> blockedChars) 

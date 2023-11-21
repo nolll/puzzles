@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Puzzles.common.Combinatorics;
+using Puzzles.common.Maths;
 using Puzzles.common.Puzzles;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq36;
@@ -128,5 +129,17 @@ public class Aquaq36 : AquaqPuzzle
         {
             return HashCode.Combine(A, B);
         }
+    }
+
+    public static Dictionary<int, int[]> GetFactors(IEnumerable<int> gridNumbers)
+    {
+        var dictionary = new Dictionary<int, int[]>();
+        foreach (var n in gridNumbers)
+        {
+            var factors = MathTools.GetFactors(n).ToArray();
+            dictionary.Add(n, factors);
+        }
+
+        return dictionary;
     }
 }

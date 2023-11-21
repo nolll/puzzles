@@ -1,5 +1,6 @@
 using FluentAssertions;
 using NUnit.Framework;
+using Puzzles.common.Maths;
 
 namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201520;
 
@@ -65,12 +66,7 @@ public class Aoc201520Tests
     {
         var delivery = new PresentDelivery();
         var myResult = delivery.FindIntFactors(786_240).OrderBy(o => o).ToList();
-        var internetResult = GetFactors(786_240);
+        var internetResult = MathTools.GetFactors(786_240);
         myResult.Count.Should().Be(internetResult.Count);
-    }
-
-    private static List<int> GetFactors(int me)
-    {
-        return Enumerable.Range(1, me).Where(x => me % x == 0).ToList();
     }
 }

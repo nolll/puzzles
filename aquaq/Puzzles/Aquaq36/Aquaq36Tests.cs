@@ -18,4 +18,25 @@ public class Aquaq36Tests
 
         result.Should().Be(142);
     }
+
+    [Test]
+    public void Factors()
+    {
+        //var gridNumbers = "10 12 25 99 45 20 16 28 64 20 15 14 8 36 11 16"
+        var gridNumbers = "10 12 25 99 45 20"
+            .Split().Select(int.Parse).ToArray();
+
+        var result = Aquaq36.GetFactors(gridNumbers);
+
+        var expected = new Dictionary<int, int[]>
+        {
+            { 10, new[] { 1, 2, 5, 10 } },
+            { 12, new[] { 1, 2, 3, 4, 6, 12 } },
+            { 25, new[] { 1, 5, 25 } },
+            { 99, new[] { 1, 3, 9, 11, 33, 99 } },
+            { 45, new[] { 1, 3, 5, 9, 15, 45 } },
+            { 20, new[] { 1, 2, 4, 5, 10, 20 } }
+        };
+        result.Should().BeEquivalentTo(expected);
+    }
 }

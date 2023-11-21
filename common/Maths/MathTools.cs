@@ -4,25 +4,17 @@ namespace Puzzles.common.Maths;
 
 public static class MathTools
 {
-    public static long Gcd(long a, long b)
-    {
-        return b == 0 ? a : Gcd(b, a % b);
-    }
+    public static long Gcd(long a, long b) 
+        => b == 0 ? a : Gcd(b, a % b);
 
-    public static long Lcm(params long[] numbers)
-    {
-        return Lcm((IEnumerable<long>)numbers);
-    }
+    public static long Lcm(params long[] numbers) 
+        => Lcm((IEnumerable<long>)numbers);
 
-    public static long Lcm(IEnumerable<long> numbers)
-    {
-        return numbers.Aggregate(Lcm);
-    }
+    public static long Lcm(IEnumerable<long> numbers) 
+        => numbers.Aggregate(Lcm);
 
-    public static long Lcm(long a, long b)
-    {
-        return System.Math.Abs(a * b) / Gcd(a, b);
-    }
+    public static long Lcm(long a, long b) 
+        => Math.Abs(a * b) / Gcd(a, b);
 
     public static BigInteger ToPowerOf(int num, int power)
     {
@@ -44,5 +36,10 @@ public static class MathTools
         }
 
         return result;
+    }
+
+    public static List<int> GetFactors(int n)
+    {
+        return Enumerable.Range(1, n).Where(o => n % o == 0).ToList();
     }
 }

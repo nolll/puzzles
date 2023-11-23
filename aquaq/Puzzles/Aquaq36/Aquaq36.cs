@@ -11,7 +11,10 @@ public class Aquaq36 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        throw new NotImplementedException();
+        var grid = "55 285 27 323 22 400 20 49 40 336 50 98 36 12 96 294";
+        var gridNumbers = grid.Split(' ').Select(o => new GridNumber(int.Parse(o))).ToList();
+        var allFactors = gridNumbers.SelectMany(o => o.Factors).Distinct().Order().ToList();
+        return PuzzleResult.Empty;
     }
 
     public static int Solve(int[] gridNumbers, int[] inputNumbers)
@@ -131,15 +134,30 @@ public class Aquaq36 : AquaqPuzzle
         }
     }
 
-    public static Dictionary<int, int[]> GetFactors(IEnumerable<int> gridNumbers)
+    [DebuggerDisplay("{Number}: {FactorString}")]
+    private class GridNumber
     {
-        var dictionary = new Dictionary<int, int[]>();
+        public List<int> Factors { get; }
+        public string FactorString { get; }
+        public int Number { get; }
+
+        public GridNumber(int number)
+        {
+            Number = number;
+            Factors = MathTools.GetFactors(number);
+            FactorString = string.Join(", ", Factors);
+        }
+    }
+
+    public static int[] GetAllFactors(IEnumerable<int> gridNumbers)
+    {
+        var list = new List<int>();
         foreach (var n in gridNumbers)
         {
             var factors = MathTools.GetFactors(n).ToArray();
-            dictionary.Add(n, factors);
+            list.AddRange(factors);
         }
 
-        return dictionary;
+        return list.Order().ToArray();
     }
 }

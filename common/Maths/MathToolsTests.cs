@@ -15,4 +15,19 @@ public class MathToolsTests
 
         result.Should().Be(expected);
     }
+
+    [TestCase(10, new[] { 1, 2, 5, 10 })]
+    [TestCase(12, new[] { 1, 2, 3, 4, 6, 12 })]
+    [TestCase(25, new[] { 1, 5, 25 })]
+    [TestCase(99, new[] { 1, 3, 9, 11, 33, 99 })]
+    [TestCase(45, new[] { 1, 3, 5, 9, 15, 45 })]
+    [TestCase(20, new[] { 1, 2, 4, 5, 10, 20 })]
+    [TestCase(11, new[] { 1, 11 })]
+    [TestCase(17, new[] { 1, 17 })]
+    public void GetFactors(int input, int[] expected)
+    {
+        var result = MathTools.GetFactors(input);
+
+        result.Should().BeEquivalentTo(expected);
+    }
 }

@@ -26,7 +26,7 @@ Part 1: 407.183s60
 
     protected override PuzzleResult Run()
     {
-        var factorProvider = new FactorProvider();
+        var factorProvider = new FactorCache();
         var tetonors = InputFile.Split($"{Environment.NewLine}{Environment.NewLine}");
         var sum = 0;
 
@@ -42,14 +42,13 @@ Part 1: 407.183s60
         return new PuzzleResult(sum);
     }
 
-    public static int Solve(List<int> grid, List<int> input,
-        FactorProvider factorProvider = null)
+    public static int Solve(List<int> grid, List<int> input, FactorCache? factorCache = null)
     {
         var possibleInputs = GetPossibleInputs(grid, input);
 
         foreach (var possibleInput in possibleInputs)
         {
-            var result = Solve(grid, possibleInput, factorProvider ?? new FactorProvider(), 0);
+            var result = Solve(grid, possibleInput, factorCache ?? new FactorCache(), 0);
             if (result > 0)
                 return result;
         }
@@ -71,14 +70,14 @@ Part 1: 407.183s60
         return possibleInputs;
     }
 
-    private static int Solve(List<int> grid, List<int> input, FactorProvider factorProvider, int sum)
+    private static int Solve(List<int> grid, List<int> input, FactorCache factorCache, int sum)
     {
         if (!grid.Any())
             return sum;
 
         foreach (var gridNumber in grid)
         {
-            var factorList = factorProvider.Get(gridNumber);
+            var factorList = factorCache.Get(gridNumber);
             foreach (var factors in factorList)
             {
                 if (input.Contains(factors.a) && input.Contains(factors.b))
@@ -93,7 +92,7 @@ Part 1: 407.183s60
                         newGrid.Remove(s);
                         newInput.Remove(factors.a);
                         newInput.Remove(factors.b);
-                        var result = Solve(newGrid, newInput, factorProvider, sum + factors.b - factors.a);
+                        var result = Solve(newGrid, newInput, factorCache, sum + factors.b - factors.a);
                         if (result > 0)
                             return result;
                     }
@@ -104,7 +103,7 @@ Part 1: 407.183s60
         return 0;
     }
 
-    public class FactorProvider
+    public class FactorCache
     {
         private readonly Dictionary<int, List<(int, int)>> _cache = new();
 
@@ -129,5 +128,49 @@ Part 1: 407.183s60
         }
 
         return list.Order().ToList();
+    }
+
+    public static Dictionary<int, List<int>> FindPossibleInputNumbers(List<int?> input, int max, HashSet<int>? factors = null)
+    {
+        var d = new Dictionary<int, List<int>>();
+        for (var i = 0; i < input.Count; i++)
+        {
+            if (input[i] is null)
+            {
+                var lowerBound = FindLowerBound(input, i);
+                var upperBound = FindUpperBound(input, i, max);
+                var rangeCount = upperBound - lowerBound + 1;
+                var numbers = Enumerable.Range(lowerBound, rangeCount);
+                if (factors != null)
+                    numbers = numbers.Where(factors.Contains);
+                d.Add(i, numbers.ToList());
+            }
+        }
+
+        return d;
+    }
+
+    private static int FindLowerBound(List<int?> input, int index)
+    {
+        for (var j = index - 1; j >= 0; j++)
+        {
+            var v = input[j];
+            if (v is not null)
+                return v.Value;
+        }
+
+        return 1;
+    }
+
+    private static int FindUpperBound(List<int?> input, int index, int max)
+    {
+        for (var j = index + 1; j < input.Count; j++)
+        {
+            var v = input[j];
+            if (v is not null)
+                return v.Value;
+        }
+
+        return max;
     }
 }

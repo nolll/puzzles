@@ -2,154 +2,124 @@
 using Puzzles.common.Combinatorics;
 using Puzzles.common.Maths;
 using Puzzles.common.Puzzles;
+using static Puzzles.aquaq.Puzzles.Aquaq36.Aquaq36;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq36;
 
 public class Aquaq36 : AquaqPuzzle
 {
+/*
+Part 1: 30.332s211
+Part 1: 57.818s212
+Part 1: 58.071s260
+Part 1: 60.270s139
+Part 1: 60.686s82
+Part 1: 61.389s95
+Part 1: 74.507s178
+Part 1: 97.802s46
+Part 1: 126.687s55
+Part 1: 238.005s123
+Part 1: 407.183s60
+*/
+
     public override string Name => "Tetonor Terror";
 
     protected override PuzzleResult Run()
     {
-        var grid = "55 285 27 323 22 400 20 49 40 336 50 98 36 12 96 294";
-        var gridNumbers = grid.Split(' ').Select(o => new GridNumber(int.Parse(o))).ToList();
-        var allFactors = gridNumbers.SelectMany(o => o.Factors).Distinct().Order().ToList();
-        return PuzzleResult.Empty;
+        var factorProvider = new FactorProvider();
+        var tetonors = InputFile.Split($"{Environment.NewLine}{Environment.NewLine}");
+        var sum = 0;
+
+        foreach (var tetonor in tetonors)
+        {
+            var rows = tetonor.Split(Environment.NewLine);
+            var grid = rows[0][2..].Split(' ').Select(int.Parse).ToList();
+            var input = rows[1][2..].Split(' ').Where(o => o != "*").Select(int.Parse).ToList();
+            var result = Solve(grid, input, factorProvider);
+            sum += result;
+        }
+
+        return new PuzzleResult(sum);
     }
 
-    public static int Solve(int[] gridNumbers, int[] inputNumbers)
+    public static int Solve(List<int> grid, List<int> input,
+        FactorProvider factorProvider = null)
     {
-        var indexCombinations = CombinationGenerator.GetUniqueCombinationsFixedSize(Enumerable.Range(0, 16).ToList(), 2);
-        //var inputCombinations = CombinationGenerator.GetCombinationsFixedSize(inputNumbers, 2);
-        var candidates = indexCombinations.Select(o => new Candidate(o[0], o[1], inputNumbers[o[0]], inputNumbers[o[1]])).Distinct().ToList();
-        var matchingCandidates = candidates
-            .Where(o => gridNumbers.Contains(o.Sum) || gridNumbers.Contains(o.Product))
-            .ToList();
-        //var gridNumberCandidates =
-        //    gridNumbers.Select(v => matchingCandidates.Where(o => o.IsMatching(v)).ToList()).ToList();
+        var possibleInputs = GetPossibleInputs(grid, input);
 
-        var sortedInputNumbers = inputNumbers.OrderDescending().ToList();
-        var largestSum = sortedInputNumbers[0] + sortedInputNumbers[1];
-        var tooLargeToBeSum = gridNumbers.Where(o => o > largestSum);
-
-        var gridDivisors = gridNumbers.Distinct()
-            .Select((n, index) => (Number: n, Index: index))
-            .ToDictionary(k => k.Index, v => FindDivisors(v.Number)
-                .Where(inputNumbers.Contains)
-                .ToArray());
-        var sortedGridNumbers = gridNumbers.OrderDescending().ToList();
-
-        var sum = 0;
-        var pairs = new List<Candidate>();
-
-        while (sortedGridNumbers.Any())
+        foreach (var possibleInput in possibleInputs)
         {
-            foreach (var gridNumber in sortedGridNumbers)
+            var result = Solve(grid, possibleInput, factorProvider ?? new FactorProvider(), 0);
+            if (result > 0)
+                return result;
+        }
+
+        return 0;
+    }
+
+    private static List<List<int>> GetPossibleInputs(List<int> grid, List<int> input)
+    {
+        var missingCount = grid.Count - input.Count;
+        var factors = GetAllFactors(grid);
+        var factorCombinations = CombinationGenerator.GetCombinationsFixedSize(factors, missingCount);
+        var possibleInputs = new List<List<int>>();
+        foreach (var combination in factorCombinations)
+        {
+            possibleInputs.Add(combination.Concat(input).ToList());
+        }
+
+        return possibleInputs;
+    }
+
+    private static int Solve(List<int> grid, List<int> input, FactorProvider factorProvider, int sum)
+    {
+        if (!grid.Any())
+            return sum;
+
+        foreach (var gridNumber in grid)
+        {
+            var factorList = factorProvider.Get(gridNumber);
+            foreach (var factors in factorList)
             {
-                //var divisors = FindDivisors(gridNumber)
-                //    .Where(inputNumbers.Contains)
-                //    .ToArray();
-
-                var productCandidates = candidates
-                    .Where(o => o.Product == gridNumber || o.Sum == gridNumber)
-                    .ToList();
-
-                if (productCandidates.Count > 0)
+                if (input.Contains(factors.a) && input.Contains(factors.b))
                 {
-                    var candidate = productCandidates.First();
-                    sortedGridNumbers.Remove(candidate.Product);
-                    sortedGridNumbers.Remove(candidate.Sum);
-                    sortedInputNumbers.Remove(candidate.A);
-                    sortedInputNumbers.Remove(candidate.B);
-                    pairs.Add(candidate);
-                    sum += candidate.Diff;
-                    candidates.Remove(candidate);
-                    break;
+                    var p = factors.a * factors.b;
+                    var s = factors.a + factors.b;
+                    if (grid.Contains(p) && grid.Contains(s))
+                    {
+                        var newGrid = grid.ToList();
+                        var newInput = input.ToList();
+                        newGrid.Remove(p);
+                        newGrid.Remove(s);
+                        newInput.Remove(factors.a);
+                        newInput.Remove(factors.b);
+                        var result = Solve(newGrid, newInput, factorProvider, sum + factors.b - factors.a);
+                        if (result > 0)
+                            return result;
+                    }
                 }
             }
         }
-
-        var usedGridNumbers = new HashSet<int>();
-        var usedInputNumbers = new HashSet<int>();
-
-        return sum;
+        
+        return 0;
     }
 
-    private static int[] FindDivisors(int n)
+    public class FactorProvider
     {
-        var divisors = new List<int>();
-        for (var i = 1; i <= n; i++)
-        {
-            if(n % i == 0)
-                divisors.Add(i);
-        }
-        return divisors.ToArray();
-    }
+        private readonly Dictionary<int, List<(int, int)>> _cache = new();
 
-    [DebuggerDisplay("{A},{B} -- Sum: {Sum} Product: {Product}")]
-    private class Candidate : IEquatable<Candidate>
-    {
-        public int IndexA { get; }
-        public int IndexB { get; }
-        public int A { get; }
-        public int B { get; }
-        public int Sum { get; }
-        public int Product { get; }
-        public int Diff { get; }
-
-        public Candidate(int indexA, int indexB, int a, int b)
+        public List<(int a, int b)> Get(int n)
         {
-            IndexA = indexA;
-            IndexB = indexB;
-            A = Math.Min(a, b);
-            B = Math.Max(b, a);
-            Sum = a + b;
-            Product = a * b;
-            Diff = B - A;
-        }
+            if (_cache.TryGetValue(n, out var factors))
+                return factors;
 
-        public bool IsMatching(int gridNumber)
-        {
-            return gridNumber == Sum || gridNumber == Product;
-        }
-
-        public bool Equals(Candidate? other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return A == other.A && B == other.B;
-        }
-
-        public override bool Equals(object? obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Candidate)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(A, B);
+            factors = MathTools.GetMultiplicationFactors(n);
+            _cache.Add(n, factors);
+            return factors;
         }
     }
 
-    [DebuggerDisplay("{Number}: {FactorString}")]
-    private class GridNumber
-    {
-        public List<int> Factors { get; }
-        public string FactorString { get; }
-        public int Number { get; }
-
-        public GridNumber(int number)
-        {
-            Number = number;
-            Factors = MathTools.GetFactors(number);
-            FactorString = string.Join(", ", Factors);
-        }
-    }
-
-    public static int[] GetAllFactors(IEnumerable<int> gridNumbers)
+    public static List<int> GetAllFactors(IEnumerable<int> gridNumbers)
     {
         var list = new List<int>();
         foreach (var n in gridNumbers)
@@ -158,6 +128,6 @@ public class Aquaq36 : AquaqPuzzle
             list.AddRange(factors);
         }
 
-        return list.Order().ToArray();
+        return list.Order().ToList();
     }
 }

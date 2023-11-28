@@ -30,4 +30,14 @@ public class MathToolsTests
 
         result.Should().BeEquivalentTo(expected);
     }
+
+    [Test]
+    public void GetMultiplicationFactors()
+    {
+        var result = MathTools.GetMultiplicationFactors(21);
+
+        result.Count.Should().Be(2);
+        result.First().Should().Be((1, 21));
+        result.Last().Should().Be((3, 7));
+    }
 }

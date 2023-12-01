@@ -13,7 +13,7 @@ public class Aoc202301 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var values = FindCalibrationValuesPart1(InputFile);
+        var values = FindCalibrationNumberPart1(InputFile);
         var result = values.Sum();
 
         return new PuzzleResult(result, "93e7c44a86bd9d03f7156e6fc3ed61c8");
@@ -21,96 +21,49 @@ public class Aoc202301 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var values = FindCalibrationValuesPart2(InputFile);
+        var values = FindCalibrationNumberPart2(InputFile);
         var result = values.Sum();
 
         return new PuzzleResult(result, "1a8775b7ae93118b31708e052207307d");
     }
 
-    public static List<int> FindCalibrationValuesPart1(string input)
-    {
-        return input.Split(Environment.NewLine).Select(FindCalibrationNumberPart1).ToList();
-    }
+    public static List<int> FindCalibrationNumberPart1(string input) 
+        => input.Split(Environment.NewLine)
+            .Select(FindCalibrationNumber)
+            .ToList();
 
-    public static List<int> FindCalibrationValuesPart2(string input)
-    {
-        return input.Split(Environment.NewLine).Select(FindCalibrationNumberPart2).ToList();
-    }
+    public static List<int> FindCalibrationNumberPart2(string input) 
+        => input.Split(Environment.NewLine)
+            .Select(ReplaceStringDigits)
+            .Select(FindCalibrationNumber)
+            .ToList();
 
-    public static int FindCalibrationNumberPart1(string input)
+    private static int FindCalibrationNumber(string input)
     {
-        var indices = FindCalibrationDigitIndices(input);
-
-        var firstNumber = input[indices.firstIndex];
-        var lastNumber = input[indices.lastIndex];
+        var firstNumber = FindFirstDigit(input);
+        var lastNumber = FindLastDigit(input);
 
         return int.Parse($"{firstNumber}{lastNumber}");
     }
 
-    public static int FindCalibrationNumberPart2(string input)
+    public static string ReplaceStringDigits(string s)
     {
-        var preparedInput = ReplaceStringDigits(input);
-        var calibrationNumber = FindCalibrationNumberPart1(preparedInput);
-        return calibrationNumber;
-    }
-
-    public static string ReplaceStringDigits(string input)
-    {
-        var hasWord = Words.Any(o => input.IndexOf(o, StringComparison.Ordinal) > -1);
-        if (!hasWord)
-            return input;
-
-        var result = $"{input}";
-
-        string? firstWord = null;
-        var firstWordIndex = int.MaxValue;
         for (var i = 0; i < Words.Count; i++)
         {
             var word = Words[i];
-            var index = result.IndexOf(word, StringComparison.Ordinal);
-            if (index != -1 && index < firstWordIndex)
-            {
-                firstWordIndex = index;
-                firstWord = word;
-            }
+            var digit = i + 1;
+            s = s.Replace(word, $"{word}{digit}{word}");
         }
 
-        if(firstWord is not null) 
-            result = result.Replace(firstWord, (Words.IndexOf(firstWord) + 1) + firstWord);
-
-        string? lastWord = null;
-        var lastWordIndex = int.MinValue;
-        for (var i = 0; i < Words.Count; i++)
-        {
-            var word = Words[i];
-            var index = result.LastIndexOf(word, StringComparison.Ordinal);
-            if (index != -1 && index > lastWordIndex)
-            {
-                lastWordIndex = index;
-                lastWord = word;
-            }
-        }
-
-        if (lastWord is not null) 
-            result = result.Replace(lastWord, (Words.IndexOf(lastWord) + 1) + lastWord);
-
-        return result;
+        return s;
     }
 
-    private static (int firstIndex, int lastIndex) FindCalibrationDigitIndices(string input)
-    {
-        int? firstNumberIndex = null;
-        int? lastNumberIndex = null;
-        for (var i = 0; i < input.Length; i++)
-        {
-            var c = input[i];
-            if (firstNumberIndex is null && int.TryParse(c.ToString(), out _)) 
-                firstNumberIndex = i;
+    private static int FindFirstDigit(string input) 
+        => int.Parse(input.ToCharArray().First(IsDigit).ToString());
 
-            if (int.TryParse(c.ToString(), out _)) 
-                lastNumberIndex = i;
-        }
+    private static int FindLastDigit(string input)
+        => int.Parse(input.ToCharArray().Last(IsDigit).ToString());
 
-        return (firstNumberIndex ?? 0, lastNumberIndex ?? 0);
-    }
+    private static bool IsDigit(char c) 
+        => int.TryParse(c.ToString(), out _);
 }

@@ -6,6 +6,8 @@ namespace Puzzles.aquaq.Puzzles.Aquaq36;
 public class Aquaq36 : AquaqPuzzle
 {
     public override string Name => "Tetonor Terror";
+    public override bool IsSlow => true;
+    public override bool NeedsRewrite => true;
 
     protected override PuzzleResult Run()
     {
@@ -23,7 +25,7 @@ public class Aquaq36 : AquaqPuzzle
             sum += result;
         }
 
-        return new PuzzleResult(sum);
+        return new PuzzleResult(sum, "ed32dfd657e38da7c712ea1c69f58f6d");
     }
 
     public static int Solve(List<int> grid, List<int?> input, FactorCache? factorCache = null)

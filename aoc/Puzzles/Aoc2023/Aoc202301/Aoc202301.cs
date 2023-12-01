@@ -58,12 +58,7 @@ public class Aoc202301 : AocPuzzle
         return s;
     }
 
-    private static int FindFirstDigit(string input) 
-        => int.Parse(input.ToCharArray().First(IsDigit).ToString());
-
-    private static int FindLastDigit(string input)
-        => int.Parse(input.ToCharArray().Last(IsDigit).ToString());
-
-    private static bool IsDigit(char c) 
-        => int.TryParse(c.ToString(), out _);
+    private static int FindFirstDigit(string input) => int.Parse(input.ToCharArray().First(IsDigit).ToString());
+    private static int FindLastDigit(string input) => int.Parse(input.ToCharArray().Last(IsDigit).ToString());
+    private static bool IsDigit(char c) => int.TryParse(c.ToString(), out _);
 }

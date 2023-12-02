@@ -6,6 +6,13 @@ public class Aoc202302 : AocPuzzle
 {
     public override string Name => "Cube Conundrum";
 
+    private static readonly Dictionary<string, int> ValidGameCubeCounts = new()
+    {
+        { "red", 12 },
+        { "green", 13 },
+        { "blue", 14 }
+    };
+
     protected override PuzzleResult RunPart1()
     {
         var result = PlayGames(InputFile);
@@ -18,93 +25,50 @@ public class Aoc202302 : AocPuzzle
         return new PuzzleResult(result.GamePower, "45825cd43460cbc76a940d6eb06ebc6b");
     }
 
-    public static GameResult PlayGames(string input)
+    public static TotalResult PlayGames(string input)
     {
-        var cubeCounts = new Dictionary<string, int>
+        var games = input.Split(Environment.NewLine);
+        var results = games.Select(PlayGame).ToList();
+        var validGameSum = results.Where(o => o.IsValid).Sum(o => o.GameId);
+        var totalPower = results.Sum(o => o.GamePower);
+
+        return new TotalResult(validGameSum, totalPower);
+    }
+
+    private static GameResult PlayGame(string game)
+    {
+        var isValid = true;
+        var gameParts = game.Split(':').ToList();
+        var gameId = int.Parse(gameParts[0].Split(' ')[1]);
+        var sets = gameParts[1].Trim().Split(';');
+
+        var maxCubeCounts = new Dictionary<string, int>()
         {
-            { "red", 12 },
-            { "green", 13 },
-            { "blue", 14 }
+            { "red", 0 },
+            { "green", 0 },
+            { "blue", 0 }
         };
 
-        var gamePowers = new List<int>();
-        var validGames = new List<int>();
-        var games = input.Split(Environment.NewLine);
-        foreach (var line in games)
+        foreach (var set in sets)
         {
-            var isValid = true;
-            var gameParts = line.Split(':').Select(o => o.Trim()).ToList();
-            var gameId = int.Parse(gameParts[0].Split(' ')[1]);
-            var sets = gameParts[1].Trim().Split(';').Select(o => o.Trim());
-
-            var maxCubeCounts = new Dictionary<string, int>()
+            var cubes = set.Trim().Split(',');
+            foreach (var cube in cubes)
             {
-                { "red", 0 },
-                { "green", 0 },
-                { "blue", 0 }
-            };
+                var parts = cube.Trim().Split(' ').ToList();
+                var count = int.Parse(parts[0]);
+                var color = parts[1];
 
-            foreach (var set in sets)
-            {
-                var cubes = set.Split(',').Select(o => o.Trim());
-                foreach (var cube in cubes)
-                {
-                    var parts = cube.Split(' ').Select(o => o.Trim()).ToList();
-                    var count = int.Parse(parts[0]);
-                    var color = parts[1];
+                maxCubeCounts[color] = Math.Max(count, maxCubeCounts[color]);
 
-                    maxCubeCounts[color] = Math.Max(count, maxCubeCounts[color]);
-
-                    if (count > cubeCounts[color])
-                        isValid = false;
-                }
+                if (count > ValidGameCubeCounts[color])
+                    isValid = false;
             }
-
-            var gamePower = maxCubeCounts.Values.Aggregate(1, (a, b) => a * b);
-            gamePowers.Add(gamePower);
-
-            if (isValid)
-                validGames.Add(gameId);
         }
 
-        return new GameResult(validGames.Sum(), gamePowers.Sum());
+        var gamePower = maxCubeCounts.Values.Aggregate(1, (a, b) => a * b);
+        return new GameResult(gameId, isValid, gamePower);
     }
 
-    public static int GamePower(string input)
-    {
-        var gamePowers = new List<int>();
-        var games = input.Split(Environment.NewLine);
-        foreach (var line in games)
-        {
-            var gameParts = line.Split(':').Select(o => o.Trim()).ToList();
-            var sets = gameParts[1].Trim().Split(';').Select(o => o.Trim());
-
-            var maxCubeCounts = new Dictionary<string, int>()
-            {
-                { "red", 0 },
-                { "green", 0 },
-                { "blue", 0 }
-            };
-
-            foreach (var set in sets)
-            {
-                var cubes = set.Split(',').Select(o => o.Trim());
-                foreach (var cube in cubes)
-                {
-                    var parts = cube.Split(' ').Select(o => o.Trim()).ToList();
-                    var count = int.Parse(parts[0]);
-                    var color = parts[1];
-
-                    maxCubeCounts[color] = Math.Max(count, maxCubeCounts[color]);
-                }
-            }
-
-            var gamePower = maxCubeCounts.Values.Aggregate(1, (a, b) => a * b);
-            gamePowers.Add(gamePower);
-        }
-
-        return gamePowers.Sum();
-    }
-
-    public record GameResult(int ValidGames, int GamePower);
+    private record GameResult(int GameId, bool IsValid, int GamePower);
+    public record TotalResult(int ValidGames, int GamePower);
 }

@@ -49,7 +49,8 @@ public class Aquaq34 : AquaqPuzzle
             var strId = trainId.ToString().PadLeft(4, '0');
             var train = new Train
             {
-                Name = $"Train {strId}"
+                Name = $"Train {strId}",
+                State = TrainState.NotStarted
             };
 
             for (var i = 0; i < timestamps.Count; i++)
@@ -161,7 +162,7 @@ public class Aquaq34 : AquaqPuzzle
             // WAITING -> AT STATION
             foreach (var station in stations)
             {
-                var trainIsInStation = trains.Any(o => o.State == TrainState.AtStation && o.CurrentStation!.Name == station.Name);
+                var trainIsInStation = trains.Any(o => o.State == TrainState.AtStation && o.CurrentStation?.Name == station.Name);
                 if(trainIsInStation)
                     continue;
 
@@ -172,7 +173,6 @@ public class Aquaq34 : AquaqPuzzle
                     .ToList();
                 
                 var firstInLine = waiting.FirstOrDefault();
-
                 if (firstInLine is not null)
                 {
                     firstInLine.State = TrainState.AtStation;
@@ -198,15 +198,7 @@ public class Aquaq34 : AquaqPuzzle
     }
 
     [DebuggerDisplay("{Name}")]
-    private class Station
-    {
-        public string Name { get; }
-        
-        public Station(string name)
-        {
-            Name = name;
-        }
-    }
+    private record Station(string Name);
     
     private class Train
     {

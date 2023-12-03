@@ -6,7 +6,7 @@ namespace Puzzles.Euler.Puzzles.Euler040;
 public class Euler040 : EulerPuzzle
 {
     private const int Initial = 1;
-    private const int Max = 1_000_000;
+    private const int MaxLength = 1_000_000;
     private const int StepMultiplier = 10;
 
     public override string Name => "Champernowne's Constant";
@@ -16,15 +16,15 @@ public class Euler040 : EulerPuzzle
         var sb = new StringBuilder();
         var i = Initial;
 
-        while (sb.Length < Max)
+        while (sb.Length < MaxLength)
         {
-            sb.Append(i.ToString());
+            sb.Append(i);
             i++;
         }
 
         var s = sb.ToString();
         var numbers = new List<int>();
-        for (var j = Initial; j < Max; j *= StepMultiplier)
+        for (var j = Initial; j < MaxLength; j *= StepMultiplier)
         {
             numbers.Add(int.Parse(s[j - 1].ToString()));
         }

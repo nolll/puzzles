@@ -10,18 +10,20 @@ public class Euler036 : EulerPuzzle
 
     protected override PuzzleResult Run()
     {
-        var sum = 0;
-        for (var i = 0; i < 1_000_000; i++)
-        {
-            var s = i.ToString();
-            if (s.IsPalindrome())
-            {
-                var binary = Conversion.ToBinary(i);
-                if (binary.IsPalindrome())
-                    sum += i;
-            }
-        }
+        var sum = Enumerable.Range(0, 1_000_000)
+            .Where(IsPalindromeInBothBases)
+            .Sum();
 
         return new PuzzleResult(sum, "710d458ea3f1a020b4ad4198a1ec846f");
+    }
+
+    public static bool IsPalindromeInBothBases(int n)
+    {
+        var s = n.ToString();
+        if (!s.IsPalindrome())
+            return false;
+        
+        var binary = Conversion.ToBinary(n);
+        return binary.IsPalindrome();
     }
 }

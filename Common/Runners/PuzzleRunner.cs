@@ -7,11 +7,13 @@ public class PuzzleRunner
 {
     private readonly int _puzzleTimeout;
     private readonly string _hashSeed;
+    private readonly bool _isDebugMode;
 
-    public PuzzleRunner(int puzzleTimeout, string hashSeed)
+    public PuzzleRunner(int puzzleTimeout, string hashSeed, bool isDebugMode)
     {
         _puzzleTimeout = puzzleTimeout;
         _hashSeed = hashSeed;
+        _isDebugMode = isDebugMode;
     }
 
     public void Run(IEnumerable<Puzzle> puzzles)
@@ -26,8 +28,8 @@ public class PuzzleRunner
         }
 
         if (count == 1)
-            new StandaloneSinglePuzzleRunner(enumerable.First(), _hashSeed).Run();
+            new StandaloneSinglePuzzleRunner(enumerable.First(), _hashSeed, _isDebugMode).Run();
         else
-            new MultiPuzzleRunner(enumerable, _puzzleTimeout, _hashSeed).Run();
+            new MultiPuzzleRunner(enumerable, _puzzleTimeout, _hashSeed, _isDebugMode).Run();
     }
 }

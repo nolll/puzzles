@@ -15,7 +15,7 @@ public class PuzzleProgram
     {
         _puzzleRepository = new PuzzleRepository();
         _helpPrinter = new HelpPrinter();
-        _runner = new PuzzleRunner(options.TimeoutSeconds, options.HashSeed);
+        _runner = new PuzzleRunner(options.TimeoutSeconds, options.HashSeed, DebugMode.IsDebugMode);
         _debugTags = options.DebugTags;
     }
 

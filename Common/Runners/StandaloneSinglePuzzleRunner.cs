@@ -10,17 +10,27 @@ namespace Puzzles.Common.Runners;
 public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
 {
     private readonly Puzzle _puzzle;
+    private readonly bool _isDebugMode;
     private const int StatusPadding = 15;
 
     private readonly PuzzleResultVerifier _resultVerifier;
 
-    public StandaloneSinglePuzzleRunner(Puzzle puzzle, string hashSeed)
+    public StandaloneSinglePuzzleRunner(Puzzle puzzle, string hashSeed, bool isDebugMode)
     {
         _puzzle = puzzle;
+        _isDebugMode = isDebugMode;
         _resultVerifier = new PuzzleResultVerifier(hashSeed);
     }
 
     public void Run()
+    {
+        if(_isDebugMode)
+            RunDebugMode();
+        else
+            RunStandardMode();
+    }
+
+    private void RunStandardMode()
     {
         AnsiConsole.Cursor.Show(false);
         WriteHeader(_puzzle);
@@ -33,6 +43,17 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         }
 
         AnsiConsole.Cursor.Show(true);
+    }
+
+    private void RunDebugMode()
+    {
+        WriteHeader(_puzzle);
+
+        foreach (var runFunc in _puzzle.RunFunctions)
+        {
+            var result = runFunc();
+            AnsiConsole.WriteLine(result.Answer);
+        }
     }
 
     private static void WriteHeader(Puzzle puzzle)

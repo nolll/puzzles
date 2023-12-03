@@ -1,6 +1,6 @@
-using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201613;
+namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201613;
 
 public class Maze
 {

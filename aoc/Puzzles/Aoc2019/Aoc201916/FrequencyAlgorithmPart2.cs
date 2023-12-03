@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201916;
+namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201916;
 
 public class FrequencyAlgorithmPart2
 {

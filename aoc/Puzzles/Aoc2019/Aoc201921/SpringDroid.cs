@@ -1,7 +1,7 @@
-using Puzzles.common.Computers.IntCode;
-using Puzzles.common.Strings;
+using Puzzles.Common.Computers.IntCode;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201921;
+namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201921;
 
 public class SpringDroid
 {

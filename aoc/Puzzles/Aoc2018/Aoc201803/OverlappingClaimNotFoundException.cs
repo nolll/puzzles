@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201803;
+namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201803;
 
 public class OverlappingClaimNotFoundException : Exception
 {

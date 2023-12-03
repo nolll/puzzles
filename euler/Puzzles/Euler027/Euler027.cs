@@ -1,7 +1,7 @@
-﻿using Puzzles.common.Numbers;
-using Puzzles.common.Puzzles;
+﻿using Puzzles.Common.Numbers;
+using Puzzles.Common.Puzzles;
 
-namespace Puzzles.euler.Puzzles.Euler027;
+namespace Puzzles.Euler.Puzzles.Euler027;
 
 public class Euler027 : EulerPuzzle
 {

@@ -1,7 +1,7 @@
-using Puzzles.common.Maths;
-using Puzzles.common.Strings;
+using Puzzles.Common.Maths;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202013;
+namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202013;
 
 public class BusScheduler2
 {

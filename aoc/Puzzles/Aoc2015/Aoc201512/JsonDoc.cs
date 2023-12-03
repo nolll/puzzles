@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201512;
+namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201512;
 
 public class JsonDoc
 {

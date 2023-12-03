@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201914;
+namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201914;
 
 public class ReactionParser
 {

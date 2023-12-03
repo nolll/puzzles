@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 using System.Text.RegularExpressions;
-using Puzzles.common.Puzzles;
+using Puzzles.Common.Puzzles;
 
-namespace Puzzles.euler.Puzzles.Euler026;
+namespace Puzzles.Euler.Puzzles.Euler026;
 
 public class Euler026 : EulerPuzzle
 {

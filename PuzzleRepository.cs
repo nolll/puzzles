@@ -1,7 +1,7 @@
-﻿using Puzzles.aoc;
-using Puzzles.aquaq;
-using Puzzles.common.Puzzles;
-using Puzzles.euler;
+﻿using Puzzles.Aoc;
+using Puzzles.Aquaq;
+using Puzzles.Common.Puzzles;
+using Puzzles.Euler;
 
 namespace Puzzles;
 

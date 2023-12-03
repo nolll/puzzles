@@ -1,7 +1,7 @@
-using Puzzles.common.CoordinateSystems.CoordinateSystem3D;
-using Puzzles.common.Strings;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202119;
+namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202119;
 
 public class BeaconSystem
 {

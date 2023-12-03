@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202124;
+namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202124;
 
 [DebuggerDisplay("{W},{X},{Y},{Z}")]
 public class AluState

@@ -1,4 +1,4 @@
-﻿namespace Puzzles.common.Strings;
+﻿namespace Puzzles.Common.Strings;
 
 public static class LevenshteinDistance
 {

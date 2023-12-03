@@ -1,4 +1,4 @@
-namespace Puzzles.common.CoordinateSystems.CoordinateSystem3D;
+namespace Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
 
 public static class Dimension
 {

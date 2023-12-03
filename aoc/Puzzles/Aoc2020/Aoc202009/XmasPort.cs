@@ -1,7 +1,7 @@
-﻿using Puzzles.common.Combinatorics;
-using Puzzles.common.Strings;
+﻿using Puzzles.Common.Combinatorics;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202009;
+namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202009;
 
 public class XmasPort
 {

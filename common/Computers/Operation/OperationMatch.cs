@@ -1,4 +1,4 @@
-namespace Puzzles.common.Computers.Operation;
+namespace Puzzles.Common.Computers.Operation;
 
 public class OperationMatch
 {

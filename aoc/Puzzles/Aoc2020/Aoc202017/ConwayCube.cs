@@ -1,7 +1,7 @@
-using Puzzles.common.CoordinateSystems.CoordinateSystem3D;
-using Puzzles.common.CoordinateSystems.CoordinateSystem4D;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem4D;
 
-namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202017;
+namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202017;
 
 public class ConwayCube
 {

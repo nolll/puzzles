@@ -1,4 +1,4 @@
-﻿namespace Puzzles.aquaq.Puzzles.Aquaq08;
+﻿namespace Puzzles.Aquaq.Puzzles.Aquaq08;
 
 public class Day
 {

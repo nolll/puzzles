@@ -1,7 +1,7 @@
-using Puzzles.common.CoordinateSystems.CoordinateSystem3D;
-using Puzzles.common.Strings;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202218;
+namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202218;
 
 public class LavaCubes
 {

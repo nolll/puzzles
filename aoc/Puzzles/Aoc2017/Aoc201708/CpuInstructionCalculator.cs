@@ -1,6 +1,6 @@
-using Puzzles.common.Strings;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201708;
+namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201708;
 
 public class CpuInstructionCalculator
 {

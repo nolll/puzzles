@@ -1,4 +1,4 @@
-﻿namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201619;
+﻿namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201619;
 
 public class PartyElf
 {

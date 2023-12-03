@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202225;
+namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202225;
 
 public static class SnafuConverter
 {

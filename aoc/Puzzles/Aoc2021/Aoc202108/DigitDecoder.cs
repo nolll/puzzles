@@ -1,4 +1,4 @@
-﻿namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202108;
+﻿namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202108;
 
 public class DigitDecoder
 {

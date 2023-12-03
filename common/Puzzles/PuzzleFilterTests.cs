@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace Puzzles.common.Puzzles;
+namespace Puzzles.Common.Puzzles;
 
 public class PuzzleFilterTests
 {

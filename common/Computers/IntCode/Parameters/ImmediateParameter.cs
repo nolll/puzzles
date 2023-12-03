@@ -1,4 +1,4 @@
-namespace Puzzles.common.Computers.IntCode.Parameters;
+namespace Puzzles.Common.Computers.IntCode.Parameters;
 
 public class ImmediateParameter : Parameter
 {

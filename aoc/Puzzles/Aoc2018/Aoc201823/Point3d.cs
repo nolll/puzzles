@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201823;
+namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201823;
 
 public class Point3d
 {

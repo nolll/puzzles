@@ -1,4 +1,4 @@
-﻿namespace Puzzles.aquaq.Puzzles.Aquaq38;
+﻿namespace Puzzles.Aquaq.Puzzles.Aquaq38;
 
 public class IndexStreakProvider
 {

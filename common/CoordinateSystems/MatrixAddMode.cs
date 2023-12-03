@@ -1,4 +1,4 @@
-namespace Puzzles.common.CoordinateSystems;
+namespace Puzzles.Common.CoordinateSystems;
 
 public enum MatrixAddMode
 {

@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using Puzzles.common.Files;
+using Puzzles.Common.Files;
 
-namespace Puzzles.common.Puzzles;
+namespace Puzzles.Common.Puzzles;
 
 public abstract class Puzzle
 {

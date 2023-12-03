@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201621;
+namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201621;
 
 public abstract class RotateInstruction : IScrambleInstruction
 {

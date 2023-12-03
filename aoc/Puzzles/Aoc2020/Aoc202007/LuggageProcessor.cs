@@ -1,6 +1,6 @@
-using Puzzles.common.Strings;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202007;
+namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202007;
 
 public class LuggageProcessor
 {

@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Puzzles.common.Strings;
+namespace Puzzles.Common.Strings;
 
 public class LevenshteinDistanceTests
 {

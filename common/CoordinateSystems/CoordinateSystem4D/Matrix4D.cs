@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Puzzles.common.CoordinateSystems.CoordinateSystem4D;
+namespace Puzzles.Common.CoordinateSystems.CoordinateSystem4D;
 
 public class Matrix4D<T> where T : struct
 {

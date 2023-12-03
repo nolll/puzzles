@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201616;
+namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201616;
 
 public class DragonCurve
 {

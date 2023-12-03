@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Puzzles.common.Combinatorics;
+namespace Puzzles.Common.Combinatorics;
 
 public class CombinationGeneratorTests
 {

@@ -1,4 +1,4 @@
-namespace Puzzles.common.Tests;
+namespace Puzzles.Common.Tests;
 
 public static class TestHelper
 {

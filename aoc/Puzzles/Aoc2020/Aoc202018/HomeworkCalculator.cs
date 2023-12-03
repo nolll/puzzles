@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
-using Puzzles.common.Strings;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202018;
+namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202018;
 
 public class HomeworkCalculator
 {

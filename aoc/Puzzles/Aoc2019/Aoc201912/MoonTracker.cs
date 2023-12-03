@@ -1,7 +1,7 @@
-using Puzzles.common.CoordinateSystems.CoordinateSystem3D;
-using Puzzles.common.Maths;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
+using Puzzles.Common.Maths;
 
-namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201912;
+namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201912;
 
 public class MoonTracker
 {

@@ -1,6 +1,6 @@
-using Puzzles.common.Strings;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201620;
+namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201620;
 
 public class FirewallRules
 {

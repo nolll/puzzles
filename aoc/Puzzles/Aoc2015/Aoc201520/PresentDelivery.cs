@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201520;
+namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201520;
 
 public class PresentDelivery
 {

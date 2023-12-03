@@ -1,4 +1,4 @@
-﻿namespace Puzzles.euler;
+﻿namespace Puzzles.Euler;
 
 public static class EulerPuzzleParser
 {

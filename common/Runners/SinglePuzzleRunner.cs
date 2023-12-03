@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace Puzzles.common.Runners;
+namespace Puzzles.Common.Runners;
 
 public abstract class SinglePuzzleRunner
 {

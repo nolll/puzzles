@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201609;
+namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201609;
 
 public class FileDecompressor
 {

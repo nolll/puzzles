@@ -1,6 +1,6 @@
-using Puzzles.common.Strings;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202211;
+namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202211;
 
 public class MonkeyBusiness
 {

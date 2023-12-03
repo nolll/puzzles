@@ -1,4 +1,4 @@
-﻿namespace Puzzles.common.Graphs;
+﻿namespace Puzzles.Common.Graphs;
 
 public static class Graph
 {

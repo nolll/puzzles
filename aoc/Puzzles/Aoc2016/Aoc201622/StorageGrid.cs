@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
-using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
-using Puzzles.common.Strings;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201622;
+namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201622;
 
 public class StorageGrid
 {

@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Puzzles.common.Formatting;
-using Puzzles.common.Puzzles;
+using Puzzles.Common.Formatting;
+using Puzzles.Common.Puzzles;
 using Spectre.Console;
-using Timer = Puzzles.common.Timing.Timer;
+using Timer = Puzzles.Common.Timing.Timer;
 
-namespace Puzzles.common.Runners;
+namespace Puzzles.Common.Runners;
 
 public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 {

@@ -1,4 +1,4 @@
-﻿namespace Puzzles.common.Cryptography;
+﻿namespace Puzzles.Common.Cryptography;
 
 public static class CaesarCipher
 {

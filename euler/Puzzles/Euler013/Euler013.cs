@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
-using Puzzles.common.Puzzles;
-using Puzzles.common.Strings;
+using Puzzles.Common.Puzzles;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.euler.Puzzles.Euler013;
+namespace Puzzles.Euler.Puzzles.Euler013;
 
 public class Euler013 : EulerPuzzle
 {

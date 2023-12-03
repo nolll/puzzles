@@ -1,7 +1,7 @@
-﻿using Puzzles.common.Numbers;
-using Puzzles.common.Puzzles;
+﻿using Puzzles.Common.Numbers;
+using Puzzles.Common.Puzzles;
 
-namespace Puzzles.aquaq.Puzzles.Aquaq04;
+namespace Puzzles.Aquaq.Puzzles.Aquaq04;
 
 public class Aquaq04 : AquaqPuzzle
 {

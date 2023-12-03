@@ -1,6 +1,6 @@
-using Puzzles.common.Lists;
+using Puzzles.Common.Lists;
 
-namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201717;
+namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201717;
 
 public class SpinlockRunnerPart1
 {

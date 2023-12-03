@@ -1,6 +1,6 @@
-using Puzzles.common.Strings;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201523;
+namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201523;
 
 public class ChristmasComputer
 {

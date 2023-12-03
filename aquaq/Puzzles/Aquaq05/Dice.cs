@@ -1,4 +1,4 @@
-﻿namespace Puzzles.aquaq.Puzzles.Aquaq05;
+﻿namespace Puzzles.Aquaq.Puzzles.Aquaq05;
 
 public class Dice
 {

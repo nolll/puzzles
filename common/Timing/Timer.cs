@@ -1,4 +1,4 @@
-﻿namespace Puzzles.common.Timing;
+﻿namespace Puzzles.Common.Timing;
 
 public class Timer
 {

@@ -1,6 +1,6 @@
-using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201822;
+namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201822;
 
 public enum CaveTool
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Puzzles.common;
+namespace Puzzles.Common;
 
 public static class OptionsReader
 {

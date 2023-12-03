@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Puzzles.common.Numbers;
+namespace Puzzles.Common.Numbers;
 
 public class NumbersTests
 {

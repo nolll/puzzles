@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Puzzles.common.Ocr;
+namespace Puzzles.Common.Ocr;
 
 public class OcrSmallFontTests
 {

@@ -1,6 +1,6 @@
-using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201722;
+namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201722;
 
 public class VirusInfection
 {

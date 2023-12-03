@@ -1,6 +1,6 @@
-using Puzzles.common.Strings;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202205;
+namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202205;
 
 public class CargoCrane
 {

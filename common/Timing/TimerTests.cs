@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace Puzzles.common.Timing;
+namespace Puzzles.Common.Timing;
 
 public class TimerTests
 {

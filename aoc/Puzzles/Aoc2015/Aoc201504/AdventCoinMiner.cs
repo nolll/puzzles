@@ -1,6 +1,6 @@
-﻿using Puzzles.common.Cryptography;
+﻿using Puzzles.Common.Cryptography;
 
-namespace Puzzles.aoc.Puzzles.Aoc2015.Aoc201504;
+namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201504;
 
 public class AdventCoinMiner
 {

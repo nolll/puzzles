@@ -1,6 +1,6 @@
-using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.aoc.Puzzles.Aoc2021.Aoc202115;
+namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202115;
 
 public class ChitonRisk
 {

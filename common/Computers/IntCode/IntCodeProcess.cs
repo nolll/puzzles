@@ -1,7 +1,7 @@
-﻿using Puzzles.common.Computers.IntCode.Instructions;
-using Puzzles.common.Computers.IntCode.Parameters;
+﻿using Puzzles.Common.Computers.IntCode.Instructions;
+using Puzzles.Common.Computers.IntCode.Parameters;
 
-namespace Puzzles.common.Computers.IntCode;
+namespace Puzzles.Common.Computers.IntCode;
 
 public class IntCodeProcess
 {

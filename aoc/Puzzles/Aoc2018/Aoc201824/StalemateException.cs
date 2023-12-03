@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201824;
+namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201824;
 
 public class StalemateException : Exception
 {

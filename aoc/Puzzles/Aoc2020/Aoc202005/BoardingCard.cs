@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202005;
+namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202005;
 
 public class BoardingCard
 {

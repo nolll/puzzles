@@ -1,7 +1,7 @@
-using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
-using Puzzles.common.Strings;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202020;
+namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202020;
 
 public class ImageJigsawPuzzle
 {

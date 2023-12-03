@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202211;
+namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202211;
 
 public class MonkeyOperation
 {

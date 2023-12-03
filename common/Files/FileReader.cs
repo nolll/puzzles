@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace Puzzles.common.Files;
+namespace Puzzles.Common.Files;
 
 public static class FileReader
 {

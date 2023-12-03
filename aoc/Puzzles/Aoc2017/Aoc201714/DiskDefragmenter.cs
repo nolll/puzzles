@@ -1,8 +1,8 @@
 using System.Text;
-using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
-using Puzzles.common.Cryptography;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.Common.Cryptography;
 
-namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201714;
+namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201714;
 
 public class DiskDefragmenter
 {

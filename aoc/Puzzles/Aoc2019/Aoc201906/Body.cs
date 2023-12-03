@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201906;
+namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201906;
 
 public class Body
 {

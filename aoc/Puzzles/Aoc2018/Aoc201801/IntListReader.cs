@@ -1,6 +1,6 @@
-﻿using Puzzles.common.Strings;
+﻿using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201801;
+namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201801;
 
 public static class IntListReader
 {

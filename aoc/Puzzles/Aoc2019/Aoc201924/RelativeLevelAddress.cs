@@ -1,6 +1,6 @@
-using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.aoc.Puzzles.Aoc2019.Aoc201924;
+namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201924;
 
 public class RelativeLevelAddress
 {

@@ -1,4 +1,4 @@
-﻿namespace Puzzles.common.Runners;
+﻿namespace Puzzles.Common.Runners;
 
 public static class DebugMode
 {

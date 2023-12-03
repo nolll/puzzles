@@ -1,4 +1,4 @@
-﻿namespace Puzzles.common.Computers.IntCode;
+﻿namespace Puzzles.Common.Computers.IntCode;
 
 public class ConsoleComputer : IntCodeComputer
 {

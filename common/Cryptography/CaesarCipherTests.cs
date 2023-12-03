@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace Puzzles.common.Cryptography;
+namespace Puzzles.Common.Cryptography;
 
 public class CaesarCipherTests
 {

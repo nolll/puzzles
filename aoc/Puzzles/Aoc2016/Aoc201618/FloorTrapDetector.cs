@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201618;
+namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201618;
 
 public class FloorTrapDetector
 {

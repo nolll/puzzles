@@ -1,4 +1,4 @@
-﻿namespace Puzzles.common.Parameters;
+﻿namespace Puzzles.Common.Parameters;
 
 public class ParameterParser
 {

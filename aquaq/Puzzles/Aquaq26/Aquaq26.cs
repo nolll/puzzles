@@ -1,9 +1,9 @@
 ﻿using System.Numerics;
-using Puzzles.common.Combinatorics;
-using Puzzles.common.Puzzles;
-using Puzzles.common.Strings;
+using Puzzles.Common.Combinatorics;
+using Puzzles.Common.Puzzles;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aquaq.Puzzles.Aquaq26;
+namespace Puzzles.Aquaq.Puzzles.Aquaq26;
 
 public class Aquaq26 : AquaqPuzzle
 {

@@ -1,6 +1,6 @@
-using Puzzles.common.Lists;
+using Puzzles.Common.Lists;
 
-namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202023;
+namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202023;
 
 public class CrabCupsGame
 {

@@ -1,8 +1,8 @@
-﻿using Puzzles.common.Maths;
-using Puzzles.common.Puzzles;
-using Puzzles.common.Strings;
+﻿using Puzzles.Common.Maths;
+using Puzzles.Common.Puzzles;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aquaq.Puzzles.Aquaq36;
+namespace Puzzles.Aquaq.Puzzles.Aquaq36;
 
 public class Aquaq36 : AquaqPuzzle
 {

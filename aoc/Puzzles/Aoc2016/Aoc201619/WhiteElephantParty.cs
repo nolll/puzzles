@@ -1,6 +1,6 @@
-﻿using Puzzles.common.Lists;
+﻿using Puzzles.Common.Lists;
 
-namespace Puzzles.aoc.Puzzles.Aoc2016.Aoc201619;
+namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201619;
 
 public class WhiteElephantParty
 {

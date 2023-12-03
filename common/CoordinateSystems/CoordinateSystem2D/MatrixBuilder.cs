@@ -1,6 +1,6 @@
-using Puzzles.common.Strings;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+namespace Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
 public static class MatrixBuilder
 {

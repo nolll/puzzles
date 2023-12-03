@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Puzzles.common.Numbers;
+namespace Puzzles.Common.Numbers;
 
 public static class Conversion
 {

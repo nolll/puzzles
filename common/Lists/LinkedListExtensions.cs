@@ -1,4 +1,4 @@
-namespace Puzzles.common.Lists;
+namespace Puzzles.Common.Lists;
 
 public static class LinkedListExtensions
 {

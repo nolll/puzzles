@@ -1,4 +1,4 @@
-namespace Puzzles.common.Combinatorics;
+namespace Puzzles.Common.Combinatorics;
 
 public static class PermutationGenerator
 {

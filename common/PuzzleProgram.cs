@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualBasic.FileIO;
-using Puzzles.common.Puzzles;
-using Puzzles.common.Runners;
+﻿using Puzzles.Common.Puzzles;
+using Puzzles.Common.Runners;
 using Spectre.Console;
 
-namespace Puzzles.common;
+namespace Puzzles.Common;
 
 public class PuzzleProgram
 {

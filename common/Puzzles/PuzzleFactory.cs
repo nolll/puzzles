@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Puzzles.common.Puzzles;
+namespace Puzzles.Common.Puzzles;
 
 public class PuzzleFactory
 {

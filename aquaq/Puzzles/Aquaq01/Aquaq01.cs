@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using Puzzles.common.Puzzles;
+using Puzzles.Common.Puzzles;
 
-namespace Puzzles.aquaq.Puzzles.Aquaq01;
+namespace Puzzles.Aquaq.Puzzles.Aquaq01;
 
 public class Aquaq01 : AquaqPuzzle
 {

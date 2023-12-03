@@ -1,4 +1,4 @@
-﻿namespace Puzzles.aquaq.Puzzles.Aquaq34;
+﻿namespace Puzzles.Aquaq.Puzzles.Aquaq34;
 
 public class WaitingTrainComparer : IComparer<Train>
 {

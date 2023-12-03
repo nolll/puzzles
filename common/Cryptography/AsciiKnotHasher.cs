@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Puzzles.common.Cryptography;
+namespace Puzzles.Common.Cryptography;
 
 public class AsciiKnotHasher
 {

@@ -1,4 +1,4 @@
-namespace Puzzles.common.Computers.IntCode.Instructions;
+namespace Puzzles.Common.Computers.IntCode.Instructions;
 
 public class JumpIfFalseInstruction : Instruction
 {

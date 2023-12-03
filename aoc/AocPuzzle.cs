@@ -1,6 +1,6 @@
-﻿using Puzzles.common.Puzzles;
+﻿using Puzzles.Common.Puzzles;
 
-namespace Puzzles.aoc;
+namespace Puzzles.Aoc;
 
 public abstract class AocPuzzle : TwoPartsPuzzle
 {

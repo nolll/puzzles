@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
-using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202224;
+namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202224;
 
 public class BlizzardNavigation
 {

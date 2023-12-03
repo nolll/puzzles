@@ -1,8 +1,8 @@
-﻿using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
-using Puzzles.common.Puzzles;
-using Puzzles.common.Strings;
+﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
+using Puzzles.Common.Puzzles;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.aoc.Puzzles.Aoc2022.Aoc202223;
+namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202223;
 
 public class Aoc202223 : AocPuzzle
 {

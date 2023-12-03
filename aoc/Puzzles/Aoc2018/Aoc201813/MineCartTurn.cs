@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2018.Aoc201813;
+namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201813;
 
 public enum MineCartTurn
 {

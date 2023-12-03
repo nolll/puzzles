@@ -1,6 +1,6 @@
-using Puzzles.common.CoordinateSystems.CoordinateSystem3D;
+using Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
 
-namespace Puzzles.aoc.Puzzles.Aoc2017.Aoc201720;
+namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201720;
 
 public class Particle
 {

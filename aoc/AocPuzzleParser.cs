@@ -1,4 +1,4 @@
-﻿namespace Puzzles.aoc;
+﻿namespace Puzzles.Aoc;
 
 public static class AocPuzzleParser
 {

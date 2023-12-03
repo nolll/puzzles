@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace Puzzles.common.Compression;
+namespace Puzzles.Common.Compression;
 
 public class HuffmanCompressionTests
 {

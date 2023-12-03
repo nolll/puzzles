@@ -1,4 +1,4 @@
-namespace Puzzles.aoc.Puzzles.Aoc2020.Aoc202008;
+namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202008;
 
 public class GameConsoleExit
 {

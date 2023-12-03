@@ -1,6 +1,6 @@
-using Puzzles.common.Strings;
+using Puzzles.Common.Strings;
 
-namespace Puzzles.common.Ocr;
+namespace Puzzles.Common.Ocr;
 
 public static class OcrLargeFont
 {

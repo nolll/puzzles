@@ -40,8 +40,8 @@ public class Aoc201802Tests
     [Test]
     public void HandleProvidedExample()
     {
-        const string ids = "abcdef\nbababc\nabbcde\nabcccd\naabcdd\nabcdee\nababab";
-        var puzzle = new BoxChecksumPuzzle(ids);
+        const string ids = "abcdef bababc abbcde abcccd aabcdd abcdee ababab";
+        var puzzle = new BoxChecksumPuzzle(SpacesToNewLines(ids));
         puzzle.Checksum.Should().Be(12);
     }
 
@@ -70,4 +70,6 @@ public class Aoc201802Tests
         var commonLetters = SimilarIdsPuzzle.GetCommonLetters(str1, str2);
         commonLetters.Should().Be("ace");
     }
+
+    private string SpacesToNewLines(string input) => input.Replace(" ", Environment.NewLine);
 }

@@ -21,7 +21,7 @@ public class NumbersTests
     {
         var result = Numbers.IsPrime(n);
 
-        result.Should().Be(result);
+        result.Should().Be(expected);
     }
 
     [TestCase(1, 1)]

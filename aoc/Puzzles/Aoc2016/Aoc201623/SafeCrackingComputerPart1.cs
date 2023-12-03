@@ -12,7 +12,7 @@ public class SafeCrackingComputerPart1
 
     public SafeCrackingComputerPart1(string input, int a, int c)
     {
-        _instructions = PuzzleInputReader.ReadLines(input).ToArray();
+        _instructions = StringReader.ReadLines(input).ToArray();
         _registers = new Dictionary<char, int>
         {
             ['a'] = a,

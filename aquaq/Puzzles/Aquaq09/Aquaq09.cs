@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq09;
 
@@ -9,7 +10,7 @@ public class Aquaq09 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var numbers = InputFile.Split(Environment.NewLine)
+        var numbers = StringReader.ReadLines(InputFile)
             .Select(BigInteger.Parse);
         var result = MultiplyLargeNumbers(numbers);
 

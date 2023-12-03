@@ -14,7 +14,7 @@ public class LuggageProcessor
 
     private void ParseBags(string input)
     {
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         foreach (var row in rows)
         {
             ParseBag(row);

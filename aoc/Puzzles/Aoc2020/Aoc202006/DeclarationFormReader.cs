@@ -8,7 +8,7 @@ public class DeclarationFormReader
 
     public DeclarationFormReader(string input)
     {
-        _groups = PuzzleInputReader.ReadLineGroups(input);
+        _groups = StringReader.ReadLineGroups(input);
     }
 
     public int SumOfAtLeastOneYes

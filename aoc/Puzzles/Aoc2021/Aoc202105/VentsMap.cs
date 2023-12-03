@@ -7,7 +7,7 @@ public class VentsMap
 {
     public int Run(string input, bool perpendicularOnly)
     {
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         var lines = ParseLines(rows);
         if (perpendicularOnly)
             lines = lines.Where(o => o.IsPerpendicular).ToList();

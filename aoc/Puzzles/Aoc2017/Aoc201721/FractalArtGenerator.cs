@@ -33,7 +33,7 @@ public class FractalArtGenerator
 
     private static IList<FractalRule> ParseRules(string input)
     {
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         return rows.Select(ParseRule).ToList();
     }
 

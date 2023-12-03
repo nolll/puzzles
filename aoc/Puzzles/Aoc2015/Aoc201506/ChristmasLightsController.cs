@@ -26,7 +26,7 @@ public class ChristmasLightsController
 
     private static IEnumerable<Command> ParseCommands(string input, bool useBrightness)
     {
-        var strings = PuzzleInputReader.ReadLines(input);
+        var strings = StringReader.ReadLines(input);
         return strings.Select(o => CreateCommand(o, useBrightness)).ToList();
     }
 

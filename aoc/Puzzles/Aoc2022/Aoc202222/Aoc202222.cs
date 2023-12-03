@@ -22,7 +22,7 @@ public class Aoc202222 : AocPuzzle
 
     public static int Part1(string input)
     {
-        var groups = PuzzleInputReader.ReadStringGroupsWithWhitespace(input);
+        var groups = StringReader.ReadStringGroupsWithWhitespace(input);
         var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(groups[0], ' ');
         matrix.MoveTo(0, 0);
         matrix.TurnTo(MatrixDirection.Right);
@@ -100,7 +100,7 @@ public class Aoc202222 : AocPuzzle
 
     public static int Part2(string input)
     {
-        var groups = PuzzleInputReader.ReadStringGroupsWithWhitespace(input);
+        var groups = StringReader.ReadStringGroupsWithWhitespace(input);
         var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(groups[0], ' ');
         matrix.MoveTo(0, 0);
         matrix.TurnTo(MatrixDirection.Right);

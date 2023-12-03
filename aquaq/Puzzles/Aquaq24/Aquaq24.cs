@@ -1,5 +1,6 @@
 ﻿using Puzzles.common.Compression;
 using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq24;
 
@@ -9,7 +10,7 @@ public class Aquaq24 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var parts = InputFile.Split(Environment.NewLine);
+        var parts = StringReader.ReadLines(InputFile);
 
         var charset = parts[0];
         var encoded = parts[1];

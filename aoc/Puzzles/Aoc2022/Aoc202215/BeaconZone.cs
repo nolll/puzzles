@@ -7,7 +7,7 @@ public class BeaconZone
 {
     public int Part1(string input, int y, bool print)
     {
-        var lines = PuzzleInputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         var pairs = lines.Select(ParsePair).ToList();
 
         var beacons = pairs.Select(o => o.beacon).ToList();
@@ -50,7 +50,7 @@ public class BeaconZone
 
     public long Part2(string input, int size)
     {
-        var lines = PuzzleInputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         var pairs = lines.Select(ParsePair).ToList();
 
         var beaconDistances = new Dictionary<MatrixAddress, int>();

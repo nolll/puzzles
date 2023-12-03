@@ -10,7 +10,7 @@ public class BoardingCardProcessor
 
     public BoardingCardProcessor(string input)
     {
-        _boardingCards = PuzzleInputReader.ReadLines(input).Select(BoardingCard.Parse);
+        _boardingCards = StringReader.ReadLines(input).Select(BoardingCard.Parse);
     }
 
     public BoardingCard? FindMySeat()

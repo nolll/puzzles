@@ -1,5 +1,6 @@
 ﻿using Puzzles.common.Cryptography;
 using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq35;
 
@@ -9,7 +10,7 @@ public class Aquaq35 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var words = CommonTextFile("Words.txt").Split(Environment.NewLine);
+        var words = StringReader.ReadLines(CommonTextFile("Words.txt"));
         var input = InputFile;
 
         var keyword = FindKeyword(words, input);

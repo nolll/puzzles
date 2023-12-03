@@ -23,7 +23,7 @@ public class HexagonalFloor
 
     public HexagonalFloor(string input)
     {
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         _instructions = rows.Select(ParseInstruction);
         _matrix = new Matrix<char>(defaultValue: Nothing);
         _adjacentCoordsCache = new Dictionary<string, List<MatrixAddress>>();

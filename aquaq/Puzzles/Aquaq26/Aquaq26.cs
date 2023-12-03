@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Puzzles.common.Combinatorics;
 using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq26;
 
@@ -10,7 +11,7 @@ public class Aquaq26 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var inputNumbers = InputFile.Split(Environment.NewLine)
+        var inputNumbers = StringReader.ReadLines(InputFile)
             .Select(BigInteger.Parse);
 
         var sum = inputNumbers.Aggregate(BigInteger.Zero, (current, n) => current + FindFirstLargerNumber(n) - n);

@@ -18,7 +18,7 @@ public class SueSelector
 
     private IList<Sue> ParseSues(string input)
     {
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         return rows.Select(ParseSue).ToList();
     }
 

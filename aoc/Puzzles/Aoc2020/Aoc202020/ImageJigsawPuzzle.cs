@@ -13,7 +13,7 @@ public class ImageJigsawPuzzle
         
     public ImageJigsawPuzzle(string input)
     {
-        var groups = PuzzleInputReader.ReadStringGroups(input);
+        var groups = StringReader.ReadStringGroups(input);
         TilesById = new Dictionary<long, JigsawTile>();
         foreach (var group in groups)
         {

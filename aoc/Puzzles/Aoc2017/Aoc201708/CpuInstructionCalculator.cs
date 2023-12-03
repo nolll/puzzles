@@ -11,7 +11,7 @@ public class CpuInstructionCalculator
     public CpuInstructionCalculator(string input)
     {
         _registers = new Dictionary<string, int>();
-        var instructions = PuzzleInputReader.ReadLines(input);
+        var instructions = StringReader.ReadLines(input);
             
         foreach (var instruction in instructions)
         {

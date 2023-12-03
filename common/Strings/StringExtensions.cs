@@ -18,4 +18,7 @@ public static class StringExtensions
         Array.Reverse(charArray);
         return new string(charArray);
     }
+
+    public static bool IsLower(this string s) => s.All(char.IsLower);
+    public static bool IsUpper(this string s) => s.All(char.IsUpper);
 }

@@ -12,7 +12,7 @@ public class Alu
 
     public Alu(string input)
     {
-        var lines = PuzzleInputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         _instructions = lines.Select(ParseInstruction);
         _params1 = new[] { 1, 1, 1, 26, 1, 1, 26, 1, 1, 26, 26, 26, 26, 26 };
         _params2 = new[] { 12, 11, 11, -6, 15, 12, -9, 14, 14, -5, -9, -5, -2, -7 };

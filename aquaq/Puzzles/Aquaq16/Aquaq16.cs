@@ -1,4 +1,5 @@
 ﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq16;
 
@@ -46,7 +47,7 @@ public class Aquaq16 : AquaqPuzzle
 
     private static IEnumerable<Letter> ParseLetters(string alphabet)
     {
-        var lines = alphabet.Split(Environment.NewLine).ToArray();
+        var lines = StringReader.ReadLines(alphabet).ToArray();
         var c = 'A';
         for (var i = 0; i < alphabet.Length; i += LetterHeight)
         {

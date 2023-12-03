@@ -14,7 +14,7 @@ public class ParticleTracker
 
     private IList<Particle> ReadData(string data)
     {
-        var rows = PuzzleInputReader.ReadLines(data);
+        var rows = StringReader.ReadLines(data);
         var particles = new List<Particle>();
         var id = 0;
         foreach (var row in rows)

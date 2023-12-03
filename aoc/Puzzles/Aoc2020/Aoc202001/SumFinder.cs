@@ -9,7 +9,7 @@ public class SumFinder
 
     public SumFinder(string input)
     {
-        _numbers = PuzzleInputReader.ReadLines(input).Select(int.Parse).ToList();
+        _numbers = StringReader.ReadLines(input).Select(int.Parse).ToList();
     }
 
     public IList<int> FindNumbersThatAddUpTo(int target, int numbersToFind)

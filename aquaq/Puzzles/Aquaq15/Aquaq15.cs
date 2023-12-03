@@ -1,5 +1,6 @@
 ﻿using Puzzles.common.Graphs;
 using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq15;
 
@@ -14,7 +15,7 @@ public class Aquaq15 : AquaqPuzzle
 
     public int Run(string input) 
     {
-        var transformations = input.Split(Environment.NewLine)
+        var transformations = StringReader.ReadLines(input)
             .Select(o => o.Split(','))
             .Select(o => new WordTransformation(o[0], o[1]))
             .ToList();
@@ -23,8 +24,7 @@ public class Aquaq15 : AquaqPuzzle
         var maxLength = wordLengths.Max();
         var minLength = wordLengths.Min();
 
-        var validWords = CommonTextFile("Words.txt")
-            .Split(Environment.NewLine)
+        var validWords = StringReader.ReadLines(CommonTextFile("Words.txt"))
             .Where(o => o.Length >= minLength && o.Length <= maxLength)
             .GroupBy(o => o.Length)
             .ToDictionary(k => k.Key, o => BuildInputs(o.ToList()).ToList());

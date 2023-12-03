@@ -19,7 +19,7 @@ public class ChristmasComputer
         _registers['a'] = a;
         _registers['b'] = 0;
 
-        var instructions = PuzzleInputReader.ReadLines(program);
+        var instructions = StringReader.ReadLines(program);
         var pointer = 0;
         while (pointer >= 0 && pointer < instructions.Count)
         {

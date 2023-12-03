@@ -23,7 +23,7 @@ public class Aoc202221 : AocPuzzle
 
     public long Part1(string input)
     {
-        var lines = PuzzleInputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         var monkeys = GetMonkeys(lines);
 
         var root = monkeys["root"];
@@ -68,7 +68,7 @@ public class Aoc202221 : AocPuzzle
 
     public long Part2(string input)
     {
-        var lines = PuzzleInputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
 
         var tempMonkeys = GetMonkeys(lines);
         var numbers = new Dictionary<string, long>();

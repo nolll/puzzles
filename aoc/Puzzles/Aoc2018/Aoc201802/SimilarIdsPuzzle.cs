@@ -9,7 +9,7 @@ public class SimilarIdsPuzzle
 
     public SimilarIdsPuzzle(string input)
     {
-        var ids = PuzzleInputReader.ReadLines(input);
+        var ids = StringReader.ReadLines(input);
         var similarIds = GetSimilarIds(ids);
         if (similarIds.Count != 2)
             throw new WrongNumberOfSimilarIdsException(similarIds);

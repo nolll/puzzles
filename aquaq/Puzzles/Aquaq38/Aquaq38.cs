@@ -1,4 +1,5 @@
 ﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq38;
 
@@ -9,7 +10,7 @@ public class Aquaq38 : AquaqPuzzle
     protected override PuzzleResult Run()
     {
         var indexStreakProvider = new IndexStreakProvider();
-        var lists = InputFile.Split(Environment.NewLine)
+        var lists = StringReader.ReadLines(InputFile)
             .Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();
         var sum = lists.Sum(o => GetComfScore(indexStreakProvider, o));
 

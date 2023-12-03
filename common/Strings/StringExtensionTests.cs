@@ -46,4 +46,24 @@ public class StringExtensionTests
 
         result.Should().Be(expected);
     }
+
+    [TestCase("ABCDE", true)]
+    [TestCase("AbCdE", false)]
+    [TestCase("abcde", false)]
+    public void IsUpper(string s, bool expected)
+    {
+        var result = s.IsUpper();
+
+        result.Should().Be(expected);
+    }
+
+    [TestCase("ABCDE", false)]
+    [TestCase("AbCdE", false)]
+    [TestCase("abcde", true)]
+    public void IsLower(string s, bool expected)
+    {
+        var result = s.IsLower();
+
+        result.Should().Be(expected);
+    }
 }

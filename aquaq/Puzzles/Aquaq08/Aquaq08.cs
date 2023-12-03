@@ -1,4 +1,5 @@
 ﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq08;
 
@@ -16,7 +17,7 @@ public class Aquaq08 : AquaqPuzzle
 
     public static (int milk, int cereal) Run(string input)
     {
-        var days = input.Split(Environment.NewLine)
+        var days = StringReader.ReadLines(input)
             .Skip(1)
             .Select(o =>
         {

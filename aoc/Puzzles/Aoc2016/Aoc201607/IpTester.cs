@@ -6,13 +6,13 @@ public class IpTester
 {
     public int TlsSupportCount(string input)
     {
-        var ips = PuzzleInputReader.ReadLines(input);
+        var ips = StringReader.ReadLines(input);
         return ips.Count(SupportsTls);
     }
 
     public int SslSupportCount(string input)
     {
-        var ips = PuzzleInputReader.ReadLines(input);
+        var ips = StringReader.ReadLines(input);
         return ips.Count(SupportsSsl);
     }
 

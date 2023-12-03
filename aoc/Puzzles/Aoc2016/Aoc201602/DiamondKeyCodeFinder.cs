@@ -77,6 +77,6 @@ public class DiamondKeyCodeFinder
 
     private static IList<char[]> ParseCommands(string input)
     {
-        return PuzzleInputReader.ReadLines(input).Select(o => o.ToCharArray()).ToList();
+        return StringReader.ReadLines(input).Select(o => o.ToCharArray()).ToList();
     }
 }

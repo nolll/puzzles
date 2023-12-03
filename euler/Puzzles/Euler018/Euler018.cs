@@ -23,7 +23,7 @@ public class Euler018 : EulerPuzzle
 
     private static IEnumerable<List<TriangleNode>> BuildTriangle(string triangleString)
     {
-        var lines = InputReader.ReadLines(triangleString);
+        var lines = StringReader.ReadLines(triangleString);
         var triangle = new List<List<TriangleNode>>();
         foreach (var line in lines)
         {

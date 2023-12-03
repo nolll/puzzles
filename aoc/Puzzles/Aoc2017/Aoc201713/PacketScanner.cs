@@ -59,7 +59,7 @@ public class PacketScanner
     private IList<FirewallLayer> ParseLayers(string input)
     {
         var dictionary = new Dictionary<int, FirewallLayer>();
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         foreach (var row in rows)
         {
             var parts = row.Split(": ");

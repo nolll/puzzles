@@ -9,7 +9,7 @@ public class Aoc201903 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var wirePaths = PuzzleInputReader.ReadLines(InputFile);
+        var wirePaths = StringReader.ReadLines(InputFile);
         var wirePathA = wirePaths[0];
         var wirePathB = wirePaths[1];
 
@@ -20,7 +20,7 @@ public class Aoc201903 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var wirePaths = PuzzleInputReader.ReadLines(InputFile);
+        var wirePaths = StringReader.ReadLines(InputFile);
         var wirePathA = wirePaths[0];
         var wirePathB = wirePaths[1];
 

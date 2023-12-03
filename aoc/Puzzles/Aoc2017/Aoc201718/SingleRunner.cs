@@ -10,7 +10,7 @@ public class SingleRunner
 
     public SingleRunner(string input)
     {
-        _operations = PuzzleInputReader.ReadLines(input);
+        _operations = StringReader.ReadLines(input);
     }
 
     public void Run()

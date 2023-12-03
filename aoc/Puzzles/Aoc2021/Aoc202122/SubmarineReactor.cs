@@ -7,7 +7,7 @@ public class SubmarineReactor
 {
     public int Reboot(string input)
     {
-        var lines = PuzzleInputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         var instructions = lines.Select(ParseInstruction).ToList();
 
         var matrix = new Matrix3D<char>(50, 50, 50, '.');
@@ -34,7 +34,7 @@ public class SubmarineReactor
 
     public long Reboot2(string input, int? maxSize = null)
     {
-        var lines = PuzzleInputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         var instructions = lines.Select(ParseInstruction).ToList();
 
         var areas = new List<RebootArea>();

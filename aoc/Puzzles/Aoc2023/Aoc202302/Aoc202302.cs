@@ -1,4 +1,5 @@
 ﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aoc.Puzzles.Aoc2023.Aoc202302;
 
@@ -27,7 +28,7 @@ public class Aoc202302 : AocPuzzle
 
     public static TotalResult PlayGames(string input)
     {
-        var games = input.Split(Environment.NewLine);
+        var games = StringReader.ReadLines(input);
         var results = games.Select(PlayGame).ToList();
         var validGameSum = results.Where(o => o.IsValid).Sum(o => o.GameId);
         var totalPower = results.Sum(o => o.GamePower);

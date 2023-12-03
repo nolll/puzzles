@@ -1,4 +1,5 @@
 ﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq17;
 
@@ -13,7 +14,7 @@ public class Aquaq17 : AquaqPuzzle
 
     public static string Run(string input)
     {
-        var lines = input.Split(Environment.NewLine).Skip(1);
+        var lines = StringReader.ReadLines(input).Skip(1);
 
         var scoreList = new List<TeamScore>();
 

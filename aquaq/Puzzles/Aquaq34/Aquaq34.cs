@@ -1,4 +1,5 @@
 ﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq34;
 
@@ -18,7 +19,7 @@ public class Aquaq34 : AquaqPuzzle
 
     public static int LongestRouteTime(string input)
     {
-        var lines = input.Split(Environment.NewLine).ToArray();
+        var lines = StringReader.ReadLines(input).ToArray();
         var dataLines = lines.Skip(1).ToArray();
         var trainNames = lines.First().Split(',').Skip(1).ToArray();
         var stationNames = lines.Skip(1).Select(o => o[..1]).ToArray();

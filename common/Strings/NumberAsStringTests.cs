@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Puzzles.common.Strings;
 
-public class NumberAsWordsTests
+public class NumberAsStringTests
 {
     [TestCase(1, "one")]
     [TestCase(2, "two")]

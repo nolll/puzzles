@@ -6,7 +6,7 @@ public class RobotFactory
 {
     public int Part1(string input)
     {
-        var lines = PuzzleInputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         var blueprints = lines.Select(ParseBlueprint);
         var qualityLevels = blueprints.Select(GetQualityLevel);
 
@@ -15,7 +15,7 @@ public class RobotFactory
 
     public int Part2(string input)
     {
-        var lines = PuzzleInputReader.ReadLines(input, false).Take(3);
+        var lines = StringReader.ReadLines(input, false).Take(3);
         var blueprints = lines.Select(ParseBlueprint);
         var qualityLevels = blueprints.Select(o => FindBestConfiguration(o, 32).GeodeCount);
 

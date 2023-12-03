@@ -11,7 +11,7 @@ public class SimpleFerryNavigationSystem
         
     public SimpleFerryNavigationSystem(string input)
     {
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         _intructions = rows.Select(FerryNavigationInstruction.Parse);
 
         _matrix = new Matrix<int>();

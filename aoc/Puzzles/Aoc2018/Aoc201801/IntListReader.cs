@@ -6,7 +6,7 @@ public static class IntListReader
 {
     public static List<int> Read(string str)
     {
-        return PuzzleInputReader.ReadLines(str).Select(ConvertToInt).ToList();
+        return StringReader.ReadLines(str).Select(ConvertToInt).ToList();
     }
 
     private static int ConvertToInt(string str)

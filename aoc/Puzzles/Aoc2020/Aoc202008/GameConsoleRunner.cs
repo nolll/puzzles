@@ -10,12 +10,12 @@ public class GameConsoleRunner
     public GameConsoleRunner(string input)
     {
         _input = input;
-        _instructionCount = PuzzleInputReader.ReadLines(input).Count;
+        _instructionCount = StringReader.ReadLines(input).Count;
     }
 
     public static IList<GameConsoleInstruction> ParseInstructions(string input)
     {
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         return rows.Select(GameConsoleInstruction.Parse).ToList();
     }
 

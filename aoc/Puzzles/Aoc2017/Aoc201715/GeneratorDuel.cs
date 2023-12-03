@@ -18,7 +18,7 @@ public class GeneratorDuel
 
     public static GeneratorDuel Parse(string input)
     {
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         var startValues = rows.Select(o => long.Parse(o.Split(' ').Last())).ToList();
 
         return new GeneratorDuel(startValues.First(), startValues.Last());

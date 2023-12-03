@@ -7,7 +7,7 @@ public static class ClaimListReader
 {
     public static List<Claim> Read(string str)
     {
-        return PuzzleInputReader.ReadLines(str).Select(ConvertToClaim).ToList();
+        return StringReader.ReadLines(str).Select(ConvertToClaim).ToList();
     }
 
     private static Claim ConvertToClaim(string str)

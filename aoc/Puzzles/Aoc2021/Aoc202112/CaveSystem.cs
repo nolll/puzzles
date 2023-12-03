@@ -10,7 +10,7 @@ public class CaveSystem
     public CaveSystem(string input, bool allowSmallRevisit)
     {
         _allowSmallRevisit = allowSmallRevisit;
-        var lines = PuzzleInputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         _connections = new Dictionary<string, HashSet<string>>();
         foreach (var line in lines)
         {
@@ -45,7 +45,7 @@ public class CaveSystem
     {
         var paths = new List<string>();
         path = $"{path}{current}-";
-        if (StringTools.IsLower(current))
+        if (current.IsLower())
             lowercasePath = $"{lowercasePath}{current}-";
         var links = _connections[current];
 
@@ -54,7 +54,7 @@ public class CaveSystem
 
         foreach (var link in links)
         {
-            var isUpper = StringTools.IsUpper(link);
+            var isUpper = link.IsUpper();
             var wasUsed = WasUsed(lowercasePath, link);
             var canBeUsed = isUpper || !wasUsed;
             if (canBeUsed)

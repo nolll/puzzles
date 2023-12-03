@@ -1,5 +1,6 @@
 ﻿using Puzzles.common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq19;
 
@@ -12,7 +13,7 @@ public class Aquaq19 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var result = InputFile.Split(Environment.NewLine)
+        var result = StringReader.ReadLines(InputFile)
             .Select(o => RunGame(o, true)).Sum();
 
         return new PuzzleResult(result, "99a57b5b2a95e407216743a84d68c0e0");

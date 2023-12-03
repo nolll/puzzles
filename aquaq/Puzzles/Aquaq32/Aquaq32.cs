@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq32;
 
@@ -11,7 +12,7 @@ public class Aquaq32 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var lines = InputFile.Split(Environment.NewLine);
+        var lines = StringReader.ReadLines(InputFile);
         var result = lines.Count(IsBalanced);
 
         return new PuzzleResult(result, "8b52d401a6c9cf4350dc85e2cebcec81");

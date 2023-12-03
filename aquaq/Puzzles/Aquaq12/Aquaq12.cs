@@ -1,4 +1,5 @@
 ﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq12;
 
@@ -15,7 +16,7 @@ public class Aquaq12 : AquaqPuzzle
 
     public static int RideLift(string input)
     {
-        var floors = input.Split(Environment.NewLine)
+        var floors = StringReader.ReadLines(input)
             .Select(o => o.Split(' ').Select(int.Parse).ToArray())
             .Select(o => new Floor(o[0] == 0, o[1])).ToArray();
 

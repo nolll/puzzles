@@ -1,4 +1,5 @@
 ﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq30;
 
@@ -9,7 +10,7 @@ public class Aquaq30 : AquaqPuzzle
     protected override PuzzleResult Run()
     {
         var cardFlipper = new CardFlipper();
-        var decks = InputFile.Split(Environment.NewLine);
+        var decks = StringReader.ReadLines(InputFile);
         var sum = decks.Sum(cardFlipper.CountValidStartingMoves);
 
         return new PuzzleResult(sum, "a7ac2d6ffdd2d7759b9d51599832deae");

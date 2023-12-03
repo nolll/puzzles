@@ -1,4 +1,5 @@
 ﻿using Puzzles.common.Puzzles;
+using Puzzles.common.Strings;
 
 namespace Puzzles.aoc.Puzzles.Aoc2023.Aoc202301;
 
@@ -27,13 +28,13 @@ public class Aoc202301 : AocPuzzle
         return new PuzzleResult(result, "1a8775b7ae93118b31708e052207307d");
     }
 
-    public static List<int> FindCalibrationNumberPart1(string input) 
-        => input.Split(Environment.NewLine)
+    public static List<int> FindCalibrationNumberPart1(string input)
+        => StringReader.ReadLines(input)
             .Select(FindCalibrationNumber)
             .ToList();
 
     public static List<int> FindCalibrationNumberPart2(string input) 
-        => input.Split(Environment.NewLine)
+        => StringReader.ReadLines(input)
             .Select(ReplaceStringDigits)
             .Select(FindCalibrationNumber)
             .ToList();

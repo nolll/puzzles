@@ -12,7 +12,7 @@ public class HomeworkCalculator
 
     public long SumOfAll(string input, MathPrecedence precedence)
     {
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         return rows.Sum(o => Sum(o, precedence));
     }
 

@@ -31,7 +31,7 @@ public class StringScrambler
     private IList<IScrambleInstruction> ParseInstructions(string input)
     {
         var instructions = new List<IScrambleInstruction>();
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         foreach (var row in rows)
         {
             instructions.Add(ParseInstruction(row));

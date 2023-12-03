@@ -11,7 +11,7 @@ public class MonorailComputer
 
     public MonorailComputer(string input, int a, int c)
     {
-        var instructions = PuzzleInputReader.ReadLines(input).ToArray();
+        var instructions = StringReader.ReadLines(input).ToArray();
         _registers = new Dictionary<char, int>
         {
             ['a'] = a,

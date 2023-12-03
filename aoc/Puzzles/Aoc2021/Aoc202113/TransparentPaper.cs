@@ -10,7 +10,7 @@ public class TransparentPaper
 
     public TransparentPaper(string input)
     {
-        var groups = PuzzleInputReader.ReadLineGroups(input);
+        var groups = StringReader.ReadLineGroups(input);
 
         _matrix = BuildMatrix(groups.First());
         _folds = groups[1];

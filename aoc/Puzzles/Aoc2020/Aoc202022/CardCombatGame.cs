@@ -8,7 +8,7 @@ public class CardCombatGame
 
     public CardCombatGame(string input)
     {
-        _groups = PuzzleInputReader.ReadLineGroups(input);
+        _groups = StringReader.ReadLineGroups(input);
     }
 
     public List<List<int>> CreatePlayers()

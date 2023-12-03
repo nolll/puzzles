@@ -8,7 +8,7 @@ public class AllergenDetector
 
     public AllergenDetector(string input)
     {
-        var rows = PuzzleInputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         _foods = rows.Select(Food.Parse);
     }
 

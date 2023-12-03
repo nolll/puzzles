@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Puzzles.common.Puzzles;
+﻿using Puzzles.common.Puzzles;
 
 namespace Puzzles.aquaq.Puzzles.Aquaq34;
 
@@ -7,11 +6,14 @@ public class Aquaq34 : AquaqPuzzle
 {
     public override string Name => "Train in Vain";
 
+    private const int TimeAtStation = 5;
+    private static readonly IComparer<Train> WaitingTrainComparer = new WaitingTrainComparer();
+
     protected override PuzzleResult Run()
     {
         var result = LongestRouteTime(InputFile);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, "7730ffba6665d8cc2f907ff7ea6fe6ea");
     }
 
     public static int LongestRouteTime(string input)
@@ -21,7 +23,7 @@ public class Aquaq34 : AquaqPuzzle
         var trainNames = lines.First().Split(',').Skip(1).ToArray();
         var stationNames = lines.Skip(1).Select(o => o[..1]).ToArray();
         var stations = new List<Station>();
-        var routeTimestamps = trainNames.Select(o => new List<RouteTimestamp>()).ToList();
+        var routeTimestamps = trainNames.Select(o => new List<int?>()).ToList();
 
         for (var i = 0; i < dataLines.Length; i++)
         {
@@ -32,12 +34,7 @@ public class Aquaq34 : AquaqPuzzle
             var timeData = line.Split(',').Skip(1).ToArray();
             for (var j = 0; j < timeData.Length; j++)
             {
-                int? time = timeData[j].Length > 0 ? ParseMinutes(timeData[j]) : null;
-                var timestamp = new RouteTimestamp
-                {
-                    Numeric = time,
-                    Textual = timeData[j]
-                };
+                int? timestamp = timeData[j].Length > 0 ? ParseMinutes(timeData[j]) : null;
                 routeTimestamps[j].Add(timestamp);
             }
         }
@@ -46,17 +43,16 @@ public class Aquaq34 : AquaqPuzzle
         var trainId = 1;
         foreach (var timestamps in routeTimestamps)
         {
-            var strId = trainId.ToString().PadLeft(4, '0');
             var train = new Train
             {
-                Name = $"Train {strId}",
+                RouteId = trainId,
                 State = TrainState.NotStarted
             };
 
             for (var i = 0; i < timestamps.Count; i++)
             {
                 var timestamp = timestamps[i];
-                if(timestamp.Numeric == null)
+                if(timestamp is null)
                     continue;
 
                 var station = stations[i];
@@ -64,8 +60,7 @@ public class Aquaq34 : AquaqPuzzle
                 if (train.StartStation is null)
                 {
                     train.StartStation = station;
-                    train.StartTime = timestamp.Numeric.Value;
-                    train.StartTimeStr = timestamp.Textual;
+                    train.StartTime = timestamp.Value;
                 }
                 else
                 {
@@ -77,28 +72,20 @@ public class Aquaq34 : AquaqPuzzle
                         ? train.Legs.Last().ArrivalTime
                         : train.StartTime;
 
-                    var departureTimeStr = train.Legs.Any()
-                        ? train.Legs.Last().ArrivalTimeStr
-                        : train.StartTimeStr;
-
-                    var arrivalTime = timestamp.Numeric.Value;
-                    var arrivalTimeStr = timestamp.Textual;
+                    var arrivalTime = timestamp.Value;
 
                     var leg = new Leg
                     {
                         From = from,
                         To = station,
                         DepartureTime = departureTime,
-                        DepartureTimeStr = departureTimeStr,
-                        ArrivalTime = arrivalTime,
-                        ArrivalTimeStr = arrivalTimeStr
+                        ArrivalTime = arrivalTime
                     };
 
                     train.Legs.Add(leg);
                 }
             }
 
-            train.LegCount = train.Legs.Count;
             trains.Add(train);
             trainId++;
         }
@@ -110,6 +97,7 @@ public class Aquaq34 : AquaqPuzzle
             var atStation = trains.Where(o => o.State == TrainState.AtStation);
             foreach (var train in atStation)
             {
+                train.TimeLeftAtStation--;
                 if (train.TimeLeftAtStation == 0)
                 {
                     train.CurrentStation = null;
@@ -124,10 +112,6 @@ public class Aquaq34 : AquaqPuzzle
                         train.TimeLeftToDestination = train.Legs.First().TravelTime;
                     }
                 }
-                else
-                {
-                    train.TimeLeftAtStation--;
-                }
             }
 
             // NOT STARTED -> WAITING
@@ -138,6 +122,7 @@ public class Aquaq34 : AquaqPuzzle
                 {
                     train.State = TrainState.Waiting;
                     train.CurrentStation = train.StartStation;
+                    train.TimeWaited = 1;
                 }
             }
 
@@ -152,6 +137,7 @@ public class Aquaq34 : AquaqPuzzle
                     train.LastStation = currentLeg.From;
                     train.CurrentStation = currentLeg.To;
                     train.Legs.RemoveAt(0);
+                    train.TimeWaited = 1;
                 }
                 else
                 {
@@ -168,25 +154,26 @@ public class Aquaq34 : AquaqPuzzle
 
                 var waiting = trains
                     .Where(o => o.State == TrainState.Waiting && o.CurrentStation?.Name == station.Name)
-                    .OrderBy(o => o.LastStation?.Name ?? "")
-                    .ThenBy(o => o.Name)
+                    .Order(WaitingTrainComparer)
                     .ToList();
                 
                 var firstInLine = waiting.FirstOrDefault();
                 if (firstInLine is not null)
                 {
                     firstInLine.State = TrainState.AtStation;
-                    firstInLine.TimeLeftAtStation = 4;
+                    firstInLine.TimeLeftAtStation = TimeAtStation;
+                }
+
+                foreach (var train in waiting.Skip(1))
+                {
+                    train.TimeWaited += 1;
                 }
             }
 
             elapsed++;
         }
 
-        trains = trains.OrderByDescending(o => o.TimeTravelled).ToList();
-        var longestTime = trains.First().TimeTravelled;
-
-        return longestTime;
+        return trains.Max(o => o.TimeTravelled);
     }
 
     private static int ParseMinutes(string time)
@@ -195,51 +182,5 @@ public class Aquaq34 : AquaqPuzzle
         int.TryParse(parts[0].TrimStart('0'), out var hours);
         int.TryParse(parts[1].TrimStart('0'), out var minutes);
         return hours * 60 + minutes;
-    }
-
-    [DebuggerDisplay("{Name}")]
-    private record Station(string Name);
-    
-    private class Train
-    {
-        public string Name { get; init; } = "";
-        public int StartTime { get; set; }
-        public string StartTimeStr { get; set; } = "";
-        public Station? StartStation { get; set; }
-        public List<Leg> Legs { get; set; } = new();
-        public int LegCount { get; set; }
-        public int TimeTravelled => ArrivalTime - StartTime;
-        public Station? CurrentStation { get; set; }
-        public Station? LastStation { get; set; }
-        public int TimeLeftAtStation { get; set; }
-        public int TimeLeftToDestination { get; set; }
-        public int ArrivalTime { get; set; }
-        public TrainState State { get; set; }
-    }
-
-    private enum TrainState
-    {
-        NotStarted,
-        Waiting,
-        AtStation,
-        Travelling,
-        Finished
-    }
-
-    private class Leg
-    {
-        public Station? From { get; init; }
-        public Station? To { get; init; }
-        public int DepartureTime { get; init; }
-        public string DepartureTimeStr { get; init; } = "";
-        public int ArrivalTime { get; init; }
-        public string ArrivalTimeStr { get; init; } = "";
-        public int TravelTime => ArrivalTime - DepartureTime;
-    }
-
-    private class RouteTimestamp
-    {
-        public int? Numeric { get; init; }
-        public string Textual { get; init; } = "";
     }
 }

@@ -60,4 +60,67 @@ public class NumbersTests
 
         result.Should().Be(expected);
     }
+
+    [TestCase(1, 1)]
+    [TestCase(2, 3)]
+    [TestCase(3, 6)]
+    [TestCase(4, 10)]
+    [TestCase(5, 15)]
+    public void GetTriangularNumber(int n, long expected)
+    {
+        Numbers.GetTriangularNumber(n).Should().Be(expected);
+    }
+
+    [TestCase(1, true)]
+    [TestCase(3, true)]
+    [TestCase(6, true)]
+    [TestCase(10, true)]
+    [TestCase(15, true)]
+    [TestCase(16, false)]
+    public void IsTriangularNumber(int n, bool expected)
+    {
+        Numbers.IsTriangularNumber(n).Should().Be(expected);
+    }
+
+    [TestCase(1, 1)]
+    [TestCase(2, 5)]
+    [TestCase(3, 12)]
+    [TestCase(4, 22)]
+    [TestCase(5, 35)]
+    public void GetPentagonalNumber(int n, long expected)
+    {
+        Numbers.GetPentagonalNumber(n).Should().Be(expected);
+    }
+
+    [TestCase(1, true)]
+    [TestCase(5, true)]
+    [TestCase(12, true)]
+    [TestCase(22, true)]
+    [TestCase(35, true)]
+    [TestCase(36, false)]
+    public void IsPentagonalNumber(int n, bool expected)
+    {
+        Numbers.IsPentagonalNumber(n).Should().Be(expected);
+    }
+
+    [TestCase(1, 1)]
+    [TestCase(2, 6)]
+    [TestCase(3, 15)]
+    [TestCase(4, 28)]
+    [TestCase(5, 45)]
+    public void GetHexagonalNumber(int n, long expected)
+    {
+        Numbers.GetHexagonalNumber(n).Should().Be(expected);
+    }
+
+    [TestCase(1, true)]
+    [TestCase(6, true)]
+    [TestCase(15, true)]
+    [TestCase(28, true)]
+    [TestCase(45, true)]
+    [TestCase(46, false)]
+    public void IsHexagonalNumber(int n, bool expected)
+    {
+        Numbers.IsHexagonalNumber(n).Should().Be(expected);
+    }
 }

@@ -137,4 +137,11 @@ public static class Numbers
 
         return true;
     }
+
+    public static long GetTriangularNumber(long n) => n * (n + 1) / 2;
+    public static bool IsTriangularNumber(long x) => (Math.Sqrt(8 * x + 1) - 1) % 2 == 0;
+    public static long GetPentagonalNumber(long n) => n * (3 * n - 1) / 2;
+    public static bool IsPentagonalNumber(long x) => (Math.Sqrt(24 * x + 1) + 1) % 6 == 0;
+    public static long GetHexagonalNumber(long n) => n * (2 * n - 1);
+    public static bool IsHexagonalNumber(long x) => (Math.Sqrt(8 * x + 1) + 1) % 4 == 0;
 }

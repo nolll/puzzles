@@ -9,29 +9,29 @@ public class Aoc202304 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var result = GetScore(InputFile);
+        var result = FlipThroughCards(InputFile);
 
-        return new PuzzleResult(result.Part1, "5e02a1c34982f7f74973f0d751dd71da");
+        return new PuzzleResult(result.Score, "5e02a1c34982f7f74973f0d751dd71da");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var result = GetScore(InputFile);
+        var result = FlipThroughCards(InputFile);
 
-        return new PuzzleResult(result.Part2, "283e4ad08baa8b2611e44898628a8363");
+        return new PuzzleResult(result.CardCount, "283e4ad08baa8b2611e44898628a8363");
     }
 
-    public static (int Part1, int Part2) GetScore(string input)
+    public static (int Score, int CardCount) FlipThroughCards(string input)
     {
         var lines = StringReader.ReadLines(input);
-        var p1 = 0;
+        var totalScore = 0;
         var cards = new Dictionary<int, int>();
         var index = 1;
         foreach (var line in lines)
         {
             var parts = line.Replace("  ", " ").Split(new[] { ':', '|' });
-            var mine = parts[1].Trim().Split(' ').Select(o => int.Parse(o.Trim()));
-            var winning = parts[2].Trim().Split(' ').Select(o => int.Parse(o.Trim()));
+            var winning = ParseCards(parts[1]);
+            var mine = ParseCards(parts[2]);
 
             var myCards = mine.ToHashSet();
             var score = 0;
@@ -48,19 +48,18 @@ public class Aoc202304 : AocPuzzle
                 }
             }
 
-            p1 += score;
+            totalScore += score;
             cards.Add(index, matchCount);
             index++;
         }
 
-        var p2 = 0;
-        foreach (var key in cards.Keys)
-        {
-            p2 += GetScore(cards, key);
-        }
+        var cardCount = cards.Keys.Sum(key => GetScore(cards, key));
 
-        return (p1, p2);
+        return (totalScore, cardCount);
     }
+
+    private static IEnumerable<int> ParseCards(string s)
+        => s.Trim().Split(' ').Select(o => int.Parse(o.Trim()));
 
     private static int GetScore(Dictionary<int, int> cards, int cardKey)
     {

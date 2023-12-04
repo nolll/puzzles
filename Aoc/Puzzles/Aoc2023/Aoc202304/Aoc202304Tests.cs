@@ -17,9 +17,9 @@ public class Aoc202304Tests
     [Test]
     public void ScratchCards()
     {
-        var result = Aoc202304.GetScore(Input);
+        var result = Aoc202304.FlipThroughCards(Input);
 
-        result.Part1.Should().Be(13);
-        result.Part2.Should().Be(30);
+        result.Score.Should().Be(13);
+        result.CardCount.Should().Be(30);
     }
 }

@@ -42,17 +42,17 @@ public class Aoc202305Tests
                                   """;
 
     [Test]
-    public void SeedToLocation1()
+    public void Part1()
     {
-        var result = Aoc202305.SeedToLocation1(Input);
+        var result = Aoc202305.SeedToLocation(Input);
 
         result.Should().Be(35);
     }
 
     [Test]
-    public void SeedToLocation2()
+    public void Part2()
     {
-        var result = Aoc202305.SeedToLocation2(Input);
+        var result = Aoc202305.LocationToSeed(Input);
 
         result.Should().Be(46);
     }

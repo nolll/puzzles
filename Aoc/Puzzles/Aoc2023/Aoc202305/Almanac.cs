@@ -13,22 +13,21 @@ public class Almanac
     private readonly Ranges _humidityToLocation;
         
     public List<SeedRange> SeedRanges { get; }
-    public IEnumerable<long> Seeds { get; }
+    public List<long> Seeds { get; }
 
     public Almanac(string input)
     {
         var groups = StringReader.ReadLineGroups(input);
 
+        Seeds = groups[0].First().Split(": ").Last().Split(' ').Select(long.Parse).ToList();
         SeedRanges = new List<SeedRange>();
-        var seedNumbers = groups[0].First().Split(": ").Last().Split(' ').Select(long.Parse).ToList();
-        for (var i = 0; i < seedNumbers.Count; i += 2)
+        for (var i = 0; i < Seeds.Count; i += 2)
         {
-            var start = seedNumbers[i];
-            var length = seedNumbers[i + 1];
-            SeedRanges.Add(new SeedRange(start, length));
+            var start = Seeds[i];
+            var length = Seeds[i + 1];
+            SeedRanges.Add(new SeedRange(start, start + length));
         }
 
-        Seeds = groups[0].First().Split(": ").Last().Split(' ').Select(long.Parse);
         _seedToSoil = ParseGroup(groups[1]);
         _soilToFertilizer = ParseGroup(groups[2]);
         _fertilizerToWater = ParseGroup(groups[3]);

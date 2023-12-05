@@ -44,7 +44,7 @@ public class Aoc202305Tests
     [Test]
     public void Part1()
     {
-        var result = Aoc202305.SeedToLocation(Input);
+        var result = Aoc202305.Part1(Input);
 
         result.Should().Be(35);
     }
@@ -52,7 +52,7 @@ public class Aoc202305Tests
     [Test]
     public void Part2()
     {
-        var result = Aoc202305.LocationToSeed(Input);
+        var result = Aoc202305.Part2(Input);
 
         result.Should().Be(46);
     }

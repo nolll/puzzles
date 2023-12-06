@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Puzzles.Common.Files;
+﻿using Puzzles.Common.Files;
 
 namespace Puzzles.Common.Puzzles;
 

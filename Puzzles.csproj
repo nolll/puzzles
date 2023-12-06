@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Common1\**" />
-    <EmbeddedResource Remove="Common1\**" />
-    <None Remove="Common1\**" />
+    <Compile Remove="Common\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <None Remove="Common\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="Common1\Common1.csproj" />
+    <ProjectReference Include="Common\Common.csproj" />
   </ItemGroup>
 
 </Project>

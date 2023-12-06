@@ -7,7 +7,6 @@ public class Aoc202305 : AocPuzzle
 {
     public override string Name => "If You Give A Seed A Fertilizer";
     public override string Comment => "Range solution for part 2 inspired by HyperNeutrino";
-    public override bool IsSlow => true;
 
     protected override PuzzleResult RunPart1()
     {

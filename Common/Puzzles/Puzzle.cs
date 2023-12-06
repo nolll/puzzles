@@ -34,7 +34,6 @@ public abstract class Puzzle
     {
         var parts = new List<string>
         {
-            CollectionTag,
             "CommonInputFiles",
             fileName
         };

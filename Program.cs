@@ -8,5 +8,4 @@ public class Program
 
         program.Run(args);
     }
-
 }

@@ -11,27 +11,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="aoc/Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
-    <None Include="aquaq/Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
-    <None Include="aquaq/CommonInputFiles/*.txt" CopyToOutputDirectory="Always" />
-    <None Include="euler/Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
+    <None Include="Aoc/Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
+    <None Include="Euler/Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
     <None Include="*.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Aoc1\**" />
-    <Compile Remove="Aquaq1\**" />
-    <Compile Remove="Common1\**" />
+    <Compile Remove="Aquaq\**" />
     <Compile Remove="Common\**" />
     <Compile Remove="Euler1\**" />
     <EmbeddedResource Remove="Aoc1\**" />
-    <EmbeddedResource Remove="Aquaq1\**" />
-    <EmbeddedResource Remove="Common1\**" />
+    <EmbeddedResource Remove="Aquaq\**" />
     <EmbeddedResource Remove="Common\**" />
     <EmbeddedResource Remove="Euler1\**" />
     <None Remove="Aoc1\**" />
-    <None Remove="Aquaq1\**" />
-    <None Remove="Common1\**" />
+    <None Remove="Aquaq\**" />
     <None Remove="Common\**" />
     <None Remove="Euler1\**" />
   </ItemGroup>
@@ -49,7 +44,7 @@
 
   <ItemGroup>
     <ProjectReference Include="Aoc1\Aoc1.csproj" />
-    <ProjectReference Include="Aquaq1\Aquaq1.csproj" />
+    <ProjectReference Include="Aquaq\Aquaq.csproj" />
     <ProjectReference Include="Common\Common.csproj" />
     <ProjectReference Include="Euler1\Euler1.csproj" />
   </ItemGroup>

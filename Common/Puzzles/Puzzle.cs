@@ -44,7 +44,7 @@ public abstract class Puzzle
     private string[] PuzzlePathParts => GetType()
         .FullName!
         .Split('.')
-        .Skip(1)
+        .Skip(2)
         .ToArray();
 
     public abstract IList<Func<PuzzleResult>> RunFunctions { get; }

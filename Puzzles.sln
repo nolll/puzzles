@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cli", "Cli.csproj", "{7BCB32B5-D40E-4AB5-BC2E-DCF75DEDDC29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client.csproj", "{7BCB32B5-D40E-4AB5-BC2E-DCF75DEDDC29}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{94184920-152B-466E-B6EE-CD37059A9CB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools", "Tools\Tools.csproj", "{94184920-152B-466E-B6EE-CD37059A9CB9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquaq", "Aquaq\Aquaq.csproj", "{39025A57-68F1-451A-BB33-2270935A68B8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoc", "Aoc\Aoc.csproj", "{7DE53994-4C8F-4673-86A5-D27B2252842C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Euler", "Euler\Euler.csproj", "{824965CE-E8B5-486A-BACE-1F7993C204EC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F231054D-8D9F-42FB-BAC6-FDAE6D479AE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,9 +53,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{7BCB32B5-D40E-4AB5-BC2E-DCF75DEDDC29} = {F231054D-8D9F-42FB-BAC6-FDAE6D479AE3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {927E9BEA-CA2E-4C8C-9F1C-190BD0AE6EF7}

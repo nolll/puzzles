@@ -1,5 +1,5 @@
-﻿using Puzzles.Common.Computers.Operation;
-using Puzzles.Common.Puzzles;
+﻿using Pzl.Tools.Computers.Operation;
+using Pzl.Tools.Puzzles;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201819;
 

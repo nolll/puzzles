@@ -1,6 +1,6 @@
-﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
-using Puzzles.Common.Puzzles;
-using Puzzles.Common.Strings;
+﻿using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Puzzles;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq14;
 

@@ -1,4 +1,4 @@
-﻿using Puzzles.Common.Puzzles;
+﻿using Pzl.Tools.Puzzles;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202003;
 

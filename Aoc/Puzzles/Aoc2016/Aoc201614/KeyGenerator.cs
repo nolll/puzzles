@@ -1,6 +1,6 @@
 using System.Text;
-using Puzzles.Common.Cryptography;
-using Puzzles.Common.Strings;
+using Pzl.Tools.Cryptography;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
 

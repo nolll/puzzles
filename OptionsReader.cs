@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Pzl.Cli;
+namespace Pzl.Client;
 
 public static class OptionsReader
 {

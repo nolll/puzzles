@@ -1,9 +1,9 @@
-﻿using Puzzles.Common.Puzzles;
-using Pzl.Aoc;
+﻿using Pzl.Aoc;
 using Pzl.Aquaq;
 using Pzl.Euler;
+using Pzl.Tools.Puzzles;
 
-namespace Pzl.Cli;
+namespace Pzl.Client;
 
 public class PuzzleRepository
 {

@@ -1,6 +1,6 @@
 using FluentAssertions;
 using NUnit.Framework;
-using Puzzles.Common.Tests;
+using Pzl.Tools.Tests;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201811;
 

@@ -1,4 +1,4 @@
-﻿using Puzzles.Common.Combinatorics;
+﻿using Pzl.Tools.Combinatorics;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq33;
 

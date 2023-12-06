@@ -1,6 +1,6 @@
-﻿using Puzzles.Common.Compression;
-using Puzzles.Common.Puzzles;
-using Puzzles.Common.Strings;
+﻿using Pzl.Tools.Compression;
+using Pzl.Tools.Puzzles;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq24;
 

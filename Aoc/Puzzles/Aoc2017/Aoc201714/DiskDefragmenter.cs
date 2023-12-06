@@ -1,6 +1,6 @@
 using System.Text;
-using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
-using Puzzles.Common.Cryptography;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Cryptography;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201714;
 

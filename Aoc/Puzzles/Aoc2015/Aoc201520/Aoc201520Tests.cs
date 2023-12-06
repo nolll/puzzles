@@ -1,6 +1,6 @@
 using FluentAssertions;
 using NUnit.Framework;
-using Puzzles.Common.Maths;
+using Pzl.Tools.Maths;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201520;
 

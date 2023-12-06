@@ -1,5 +1,5 @@
 using System.Threading;
-using Puzzles.Common.Strings;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201723;
 

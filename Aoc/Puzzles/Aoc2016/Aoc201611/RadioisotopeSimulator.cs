@@ -1,5 +1,5 @@
-using Puzzles.Common.Combinatorics;
-using Puzzles.Common.Strings;
+using Pzl.Tools.Combinatorics;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
 

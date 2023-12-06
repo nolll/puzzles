@@ -1,6 +1,6 @@
 using FluentAssertions;
 using NUnit.Framework;
-using Puzzles.Common.Cryptography;
+using Pzl.Tools.Cryptography;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201710;
 

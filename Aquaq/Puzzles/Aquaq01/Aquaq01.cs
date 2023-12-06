@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using Puzzles.Common.Puzzles;
+using Pzl.Tools.Puzzles;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq01;
 

@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using Puzzles.Common.Puzzles;
+using Pzl.Tools.Puzzles;
 
 namespace Pzl.Euler.Puzzles.Euler040;
 

@@ -1,5 +1,5 @@
-using Puzzles.Common.Computers.IntCode;
-using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Computers.IntCode;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201911;
 

@@ -1,6 +1,6 @@
-﻿using Puzzles.Common.Graphs;
-using Puzzles.Common.Puzzles;
-using Puzzles.Common.Strings;
+﻿using Pzl.Tools.Graphs;
+using Pzl.Tools.Puzzles;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq15;
 

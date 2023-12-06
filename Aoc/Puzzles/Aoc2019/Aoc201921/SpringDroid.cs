@@ -1,5 +1,5 @@
-using Puzzles.Common.Computers.IntCode;
-using Puzzles.Common.Strings;
+using Pzl.Tools.Computers.IntCode;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201921;
 

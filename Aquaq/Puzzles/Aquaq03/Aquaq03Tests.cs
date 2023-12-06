@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq03;
 

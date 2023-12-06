@@ -1,5 +1,5 @@
-﻿using Puzzles.Common.Maths;
-using Puzzles.Common.Puzzles;
+﻿using Pzl.Tools.Maths;
+using Pzl.Tools.Puzzles;
 
 namespace Pzl.Euler.Puzzles.Euler030;
 

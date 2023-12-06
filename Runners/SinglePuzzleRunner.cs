@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace Pzl.Cli.Runners;
+namespace Pzl.Client.Runners;
 
 public abstract class SinglePuzzleRunner
 {

@@ -1,7 +1,7 @@
-﻿using Puzzles.Common.Puzzles;
+﻿using Pzl.Tools.Puzzles;
 using Spectre.Console;
 
-namespace Pzl.Cli.Runners;
+namespace Pzl.Client.Runners;
 
 public class MultiPuzzleRunner
 {

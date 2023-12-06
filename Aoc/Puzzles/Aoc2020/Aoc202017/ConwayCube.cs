@@ -1,5 +1,5 @@
-using Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
-using Puzzles.Common.CoordinateSystems.CoordinateSystem4D;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem4D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202017;
 

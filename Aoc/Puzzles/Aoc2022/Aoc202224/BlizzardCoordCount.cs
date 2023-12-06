@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202224;
 

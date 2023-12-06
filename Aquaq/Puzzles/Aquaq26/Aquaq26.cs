@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
-using Puzzles.Common.Combinatorics;
-using Puzzles.Common.Puzzles;
-using Puzzles.Common.Strings;
+using Pzl.Tools.Combinatorics;
+using Pzl.Tools.Puzzles;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq26;
 

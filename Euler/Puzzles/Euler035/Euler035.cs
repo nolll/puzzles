@@ -1,6 +1,6 @@
-﻿using Puzzles.Common.Numbers;
-using Puzzles.Common.Puzzles;
-using Puzzles.Common.Strings;
+﻿using Pzl.Tools.Numbers;
+using Pzl.Tools.Puzzles;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Euler.Puzzles.Euler035;
 

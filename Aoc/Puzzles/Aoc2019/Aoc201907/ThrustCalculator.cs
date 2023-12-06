@@ -1,4 +1,4 @@
-using Puzzles.Common.Combinatorics;
+using Pzl.Tools.Combinatorics;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201907;
 

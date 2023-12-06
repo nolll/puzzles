@@ -1,5 +1,5 @@
 using System.Text;
-using Puzzles.Common.Strings;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201807;
 

@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Configurations>Debug;Release;Single</Configurations>
+    <LangVersion>12.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <GenerateProgramFile>false</GenerateProgramFile>
+    <RootNamespace>Pzl.Client</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="*.json" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Aoc\**" />
+    <Compile Remove="Aquaq\**" />
+    <Compile Remove="Tools\**" />
+    <Compile Remove="Euler\**" />
+    <EmbeddedResource Remove="Aoc\**" />
+    <EmbeddedResource Remove="Aquaq\**" />
+    <EmbeddedResource Remove="Tools\**" />
+    <EmbeddedResource Remove="Euler\**" />
+    <None Remove="Aoc\**" />
+    <None Remove="Aquaq\**" />
+    <None Remove="Tools\**" />
+    <None Remove="Euler\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageReference Include="Spectre.Console" Version="0.47.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Aoc\Aoc.csproj" />
+    <ProjectReference Include="Aquaq\Aquaq.csproj" />
+    <ProjectReference Include="Tools\Tools.csproj" />
+    <ProjectReference Include="Euler\Euler.csproj" />
+  </ItemGroup>
+
+</Project>

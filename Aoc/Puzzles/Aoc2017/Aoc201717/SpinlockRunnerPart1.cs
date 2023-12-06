@@ -1,4 +1,4 @@
-using Puzzles.Common.Lists;
+using Pzl.Tools.Lists;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201717;
 

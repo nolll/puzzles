@@ -1,5 +1,5 @@
 using System.Text.RegularExpressions;
-using Puzzles.Common.Strings;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202018;
 

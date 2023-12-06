@@ -1,4 +1,4 @@
-﻿namespace Pzl.Cli;
+﻿namespace Pzl.Client;
 
 public class Options
 {

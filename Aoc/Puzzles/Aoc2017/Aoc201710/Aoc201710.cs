@@ -1,5 +1,5 @@
-﻿using Puzzles.Common.Cryptography;
-using Puzzles.Common.Puzzles;
+﻿using Pzl.Tools.Cryptography;
+using Pzl.Tools.Puzzles;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201710;
 

@@ -1,5 +1,5 @@
-using Puzzles.Common.Maths;
-using Puzzles.Common.Strings;
+using Pzl.Tools.Maths;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202013;
 

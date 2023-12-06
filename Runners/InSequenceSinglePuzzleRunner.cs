@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Puzzles.Common.Formatting;
-using Puzzles.Common.Puzzles;
+using Pzl.Tools.Formatting;
+using Pzl.Tools.Puzzles;
 using Spectre.Console;
-using Timer = Puzzles.Common.Timing.Timer;
+using Timer = Pzl.Tools.Timing.Timer;
 
-namespace Pzl.Cli.Runners;
+namespace Pzl.Client.Runners;
 
 public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 {

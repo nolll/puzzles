@@ -1,6 +1,5 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
-using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq12;
 

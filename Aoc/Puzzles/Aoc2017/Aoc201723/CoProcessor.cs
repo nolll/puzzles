@@ -1,5 +1,5 @@
+using System.Threading;
 using Puzzles.Common.Strings;
-using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201723;
 

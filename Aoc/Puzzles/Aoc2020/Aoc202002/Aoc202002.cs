@@ -1,6 +1,5 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
-using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202002;
 

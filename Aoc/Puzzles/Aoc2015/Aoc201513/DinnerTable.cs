@@ -1,6 +1,5 @@
 using Puzzles.Common.Combinatorics;
 using Puzzles.Common.Strings;
-using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201513;
 

@@ -1,7 +1,6 @@
 ﻿using Puzzles.Common.Cryptography;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
-using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq35;
 

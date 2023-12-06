@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
-using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Euler.Puzzles.Euler013;
 

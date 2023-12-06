@@ -1,5 +1,4 @@
 using Puzzles.Common.Strings;
-using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Common.Ocr;
 

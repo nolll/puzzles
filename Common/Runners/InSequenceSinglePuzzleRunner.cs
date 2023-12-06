@@ -1,4 +1,6 @@
-﻿using Puzzles.Common.Formatting;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Puzzles.Common.Formatting;
 using Puzzles.Common.Puzzles;
 using Spectre.Console;
 using Timer = Puzzles.Common.Timing.Timer;

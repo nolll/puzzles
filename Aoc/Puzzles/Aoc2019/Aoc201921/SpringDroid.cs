@@ -1,6 +1,5 @@
 using Puzzles.Common.Computers.IntCode;
 using Puzzles.Common.Strings;
-using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201921;
 

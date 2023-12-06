@@ -1,7 +1,6 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using Puzzles.Common.Strings;
-using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202019;
 

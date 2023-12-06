@@ -3,7 +3,7 @@ using Puzzles.Aquaq;
 using Puzzles.Common.Puzzles;
 using Puzzles.Euler;
 
-namespace Puzzles;
+namespace Pzl.Cli;
 
 public class PuzzleRepository
 {

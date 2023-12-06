@@ -1,4 +1,4 @@
-﻿namespace Puzzles.Common.Runners;
+﻿namespace Pzl.Cli.Runners;
 
 public static class DebugMode
 {

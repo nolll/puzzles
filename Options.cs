@@ -1,4 +1,4 @@
-﻿namespace Puzzles;
+﻿namespace Pzl.Cli;
 
 public class Options
 {

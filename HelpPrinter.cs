@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace Puzzles;
+namespace Pzl.Cli;
 
 public class HelpPrinter
 {

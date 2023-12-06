@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Puzzles;
+namespace Pzl.Cli;
 
 public static class OptionsReader
 {

@@ -5,7 +5,7 @@ using Puzzles.Common.Puzzles;
 using Spectre.Console;
 using Timer = Puzzles.Common.Timing.Timer;
 
-namespace Puzzles.Common.Runners;
+namespace Pzl.Cli.Runners;
 
 public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 {

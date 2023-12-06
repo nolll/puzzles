@@ -1,8 +1,8 @@
 ﻿using Puzzles.Common.Puzzles;
-using Puzzles.Common.Runners;
+using Pzl.Cli.Runners;
 using Spectre.Console;
 
-namespace Puzzles;
+namespace Pzl.Cli;
 
 public class PuzzleProgram
 {
@@ -31,7 +31,7 @@ public class PuzzleProgram
             RunPuzzles(parameters);
     }
     
-    private void RunPuzzles(Common.Puzzles.Parameters parameters)
+    private void RunPuzzles(Puzzles.Common.Puzzles.Parameters parameters)
     {
         var puzzles = _puzzleRepository.GetPuzzles();
         var filteredPuzzles = new PuzzleFilter(parameters).Filter(puzzles);
@@ -51,8 +51,8 @@ public class PuzzleProgram
         }
     }
 
-    private Common.Puzzles.Parameters ParseParameters(IEnumerable<string> args) =>
+    private Puzzles.Common.Puzzles.Parameters ParseParameters(IEnumerable<string> args) =>
         DebugMode.IsDebugMode
-            ? new Common.Puzzles.Parameters(tags: _debugTags.Split(',').ToList())
-            : Common.Puzzles.Parameters.Parse(args);
+            ? new Puzzles.Common.Puzzles.Parameters(tags: _debugTags.Split(',').ToList())
+            : Puzzles.Common.Puzzles.Parameters.Parse(args);
 }

@@ -15,7 +15,7 @@ public class SpringDroid
     {
         _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
         _currentCommand = new List<char>();
-        _commands = StringReader.ReadLines(script.Trim());
+        _commands = InputReader.ReadLines(script.Trim());
     }
 
     public void Run()

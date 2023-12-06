@@ -6,13 +6,13 @@ public static class Rucksacks
 {
     public static int GetPriority1(string input)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = InputReader.ReadLines(input, false);
         return GetPrioritySumForLines(lines);
     }
 
     public static int GetPriority2(string input)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = InputReader.ReadLines(input, false);
         return GetPrioritySumForGroups(lines);
     }
 

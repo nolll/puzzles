@@ -25,7 +25,7 @@ public class Aoc201521 : AocPuzzle
 
     private Params GetParams()
     {
-        var rows = StringReader.ReadLines(InputFile);
+        var rows = InputReader.ReadLines(InputFile);
 
         return new Params
         {

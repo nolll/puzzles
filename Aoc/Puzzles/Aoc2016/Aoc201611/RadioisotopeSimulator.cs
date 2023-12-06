@@ -91,7 +91,7 @@ public class RadioisotopeSimulator
 
     private RadioisotopeFacility ParseFacility(string input)
     {
-        var strFloors = StringReader.ReadLines(input);
+        var strFloors = InputReader.ReadLines(input);
         return new RadioisotopeFacility(strFloors.Select(ParseFloor).ToList(), 0, _isotopeNameProvider, _anonymousNameProvider);
     }
 

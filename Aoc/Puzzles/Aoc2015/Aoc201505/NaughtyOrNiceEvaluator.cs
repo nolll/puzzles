@@ -8,13 +8,13 @@ public class NaughtyOrNiceEvaluator
 
     public static int GetNiceCount1(string input)
     {
-        var strings = StringReader.ReadLines(input);
+        var strings = InputReader.ReadLines(input);
         return strings.Count(IsNice1);
     }
 
     public static int GetNiceCount2(string input)
     {
-        var strings = StringReader.ReadLines(input);
+        var strings = InputReader.ReadLines(input);
         return strings.Count(IsNice2);
     }
 

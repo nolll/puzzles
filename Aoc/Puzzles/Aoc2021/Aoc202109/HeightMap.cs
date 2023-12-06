@@ -80,7 +80,7 @@ public class HeightMap
     private static Matrix<int> CreateMatrix(string input)
     {
         var matrix = new Matrix<int>();
-        var lines = StringReader.ReadLines(input);
+        var lines = InputReader.ReadLines(input);
 
         var y = 0;
         foreach (var line in lines)

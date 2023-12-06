@@ -19,11 +19,11 @@ public class Aquaq37 : AquaqPuzzle
 
     public List<string> FindWords(string input)
     {
-        var words = StringReader.ReadLines(CommonTextFile("Words.txt"))
+        var words = InputReader.ReadLines(CommonTextFile("Words.txt"))
             .Where(o => o.Length == WordLength)
             .ToList();
 
-        var guesses = StringReader.ReadLines(input)
+        var guesses = InputReader.ReadLines(input)
             .Skip(1)
             .Select(ParseGuess)
             .ToList();

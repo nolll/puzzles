@@ -14,7 +14,7 @@ public class SubmarineControl
     public SubmarineControl(string input, bool useAim)
     {
         _useAim = useAim;
-        _lines = StringReader.ReadLines(input);
+        _lines = InputReader.ReadLines(input);
 
         _x = 0;
         _y = 0;

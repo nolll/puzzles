@@ -10,7 +10,7 @@ public class XmasPort
 
     public XmasPort(string input, int preambleLength)
     {
-        _values = StringReader.ReadLines(input).Select(long.Parse).ToList();
+        _values = InputReader.ReadLines(input).Select(long.Parse).ToList();
         _preambleLength = preambleLength;
     }
 

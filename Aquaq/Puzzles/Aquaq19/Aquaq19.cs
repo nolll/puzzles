@@ -13,7 +13,7 @@ public class Aquaq19 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var result = StringReader.ReadLines(InputFile)
+        var result = InputReader.ReadLines(InputFile)
             .Select(o => RunGame(o, true)).Sum();
 
         return new PuzzleResult(result, "99a57b5b2a95e407216743a84d68c0e0");

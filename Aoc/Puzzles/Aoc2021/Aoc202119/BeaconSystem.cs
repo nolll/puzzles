@@ -7,7 +7,7 @@ public class BeaconSystem
 {
     public BeaconSystemResult GetResult(string input)
     {
-        var groups = StringReader.ReadLineGroups(input);
+        var groups = InputReader.ReadLineGroups(input);
         var scanners = groups.Select(ParseScanner).ToList();
 
         var baseScanner = scanners.First();

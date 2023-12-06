@@ -11,7 +11,7 @@ public class CathodeRayTube
     public (int sum, string letters, string image) Run(string input)
     {
         var values = new List<int>();
-        var lines = StringReader.ReadLines(input, false);
+        var lines = InputReader.ReadLines(input, false);
         var cycle = 0;
         var x = 1;
         var command = "";

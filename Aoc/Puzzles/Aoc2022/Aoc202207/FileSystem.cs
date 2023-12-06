@@ -37,7 +37,7 @@ public class FileSystem
 
     private static ElfDirectory ParseFileSystem(string input)
     {
-        var lines = StringReader.ReadLines(input, false).Skip(1);
+        var lines = InputReader.ReadLines(input, false).Skip(1);
 
         var fileSystem = new ElfDirectory();
         var currentDir = fileSystem;

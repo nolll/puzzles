@@ -100,7 +100,7 @@ public class CookieBakery
 
     private IList<CookieIngredient> ParseIngredients(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = InputReader.ReadLines(input);
         return rows.Select(ParseIngredient).ToList();
     }
 

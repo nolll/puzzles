@@ -17,7 +17,7 @@ public class RopeBridge
 
     private int Run(string input, int knotCount)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = InputReader.ReadLines(input, false);
         var visited = new HashSet<MatrixAddress>();
         var knots = new MatrixAddress[knotCount];
         for (var i = 0; i < knotCount; i++)

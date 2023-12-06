@@ -7,7 +7,7 @@ public static class GuardEventReader
 {
     public static List<GuardEvent> Read(string str)
     {
-        return StringReader.ReadLines(str).Select(ConvertToGuardEvent).OrderBy(o => o.Timestamp).ToList();
+        return InputReader.ReadLines(str).Select(ConvertToGuardEvent).OrderBy(o => o.Timestamp).ToList();
     }
 
     private static GuardEvent ConvertToGuardEvent(string str)

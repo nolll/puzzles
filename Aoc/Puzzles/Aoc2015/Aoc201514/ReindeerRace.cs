@@ -39,7 +39,7 @@ public class ReindeerRace
 
     private IList<Reindeer> ParseReindeers(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = InputReader.ReadLines(input);
         return rows.Select(ParseReindeer).ToList();
     }
 

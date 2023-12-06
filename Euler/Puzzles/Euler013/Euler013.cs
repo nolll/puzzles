@@ -16,7 +16,7 @@ public class Euler013 : EulerPuzzle
 
     public string Run(string listOfNumbers)
     {
-        var rows = StringReader.ReadLines(listOfNumbers);
+        var rows = InputReader.ReadLines(listOfNumbers);
         var numbers = rows.Select(BigInteger.Parse);
 
         var sum = new BigInteger();

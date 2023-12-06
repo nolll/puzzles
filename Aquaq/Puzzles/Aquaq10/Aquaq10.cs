@@ -17,7 +17,7 @@ public class Aquaq10 : AquaqPuzzle
 
     public static int Run(string input, string source, string target)
     {
-        var graphInput = StringReader.ReadLines(input)
+        var graphInput = InputReader.ReadLines(input)
             .Skip(1)
             .Select(ParseGraphInput).ToList();
 

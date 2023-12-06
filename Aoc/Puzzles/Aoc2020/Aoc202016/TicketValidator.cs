@@ -97,7 +97,7 @@ public class TicketValidator
 
     private static Data ParseData(string input)
     {
-        var groups = StringReader.ReadLineGroups(input);
+        var groups = InputReader.ReadLineGroups(input);
         var ruleRows = groups[0];
         var rules = ruleRows.Select(Rule.Parse).ToDictionary(rule => rule.Name);
         var myTicket = Ticket.Parse(groups[1][1]);

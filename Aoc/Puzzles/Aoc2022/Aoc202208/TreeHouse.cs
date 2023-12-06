@@ -15,7 +15,7 @@ public class TreeHouse
 
     public TreeHouse(string input)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = InputReader.ReadLines(input, false);
         var patchWidth = lines[0].Length;
         var patchHeight = lines.Count;
         _treeMatrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);

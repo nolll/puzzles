@@ -9,7 +9,7 @@ public class Pipes
 
     public Pipes(string input)
     {
-        var strRows = StringReader.ReadLines(input);
+        var strRows = InputReader.ReadLines(input);
         var dictionary = new Dictionary<int, IList<int>>();
         var groups = new List<List<int>>();
 

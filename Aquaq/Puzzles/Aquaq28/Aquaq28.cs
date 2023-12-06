@@ -22,7 +22,7 @@ public class Aquaq28 : AquaqPuzzle
 
     public static string Encrypt(string input, string word)
     {
-        var lines = StringReader.ReadLines(input)
+        var lines = InputReader.ReadLines(input)
             .Skip(1).SkipLast(1)
             .Select(o => o.Substring(1, o.Length - 2));
         var matrixInput = string.Join(Environment.NewLine, lines);

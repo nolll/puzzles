@@ -15,7 +15,7 @@ public class CoProcessor
     public long RegisterH => _registers["h"];
 
     public CoProcessor(string input, long registerA = 0)
-        : this(StringReader.ReadLines(input), registerA)
+        : this(InputReader.ReadLines(input), registerA)
     {
     }
 

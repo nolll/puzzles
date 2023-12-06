@@ -17,7 +17,7 @@ public class Aquaq08 : AquaqPuzzle
 
     public static (int milk, int cereal) Run(string input)
     {
-        var days = StringReader.ReadLines(input)
+        var days = InputReader.ReadLines(input)
             .Skip(1)
             .Select(o =>
         {

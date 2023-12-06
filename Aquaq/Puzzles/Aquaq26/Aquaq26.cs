@@ -11,7 +11,7 @@ public class Aquaq26 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var inputNumbers = StringReader.ReadLines(InputFile)
+        var inputNumbers = InputReader.ReadLines(InputFile)
             .Select(BigInteger.Parse);
 
         var sum = inputNumbers.Aggregate(BigInteger.Zero, (current, n) => current + FindFirstLargerNumber(n) - n);

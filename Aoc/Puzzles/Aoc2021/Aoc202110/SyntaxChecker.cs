@@ -24,14 +24,14 @@ public class SyntaxChecker
 
     public int GetTotalErrorScore(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = InputReader.ReadLines(input);
 
         return lines.Sum(GetErrorScore);
     }
 
     public long FindMiddleScore(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = InputReader.ReadLines(input);
         var completionStrings = new List<string>();
             
         foreach (var line in lines)

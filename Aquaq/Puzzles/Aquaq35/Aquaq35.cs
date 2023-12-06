@@ -10,7 +10,7 @@ public class Aquaq35 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var words = StringReader.ReadLines(CommonTextFile("Words.txt"));
+        var words = InputReader.ReadLines(CommonTextFile("Words.txt"));
         var input = InputFile;
 
         var keyword = FindKeyword(words, input);

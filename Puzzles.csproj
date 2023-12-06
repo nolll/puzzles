@@ -35,4 +35,8 @@
     <PackageReference Include="Spectre.Console" Version="0.47.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="Common1\Common1.csproj" />
+  </ItemGroup>
+
 </Project>

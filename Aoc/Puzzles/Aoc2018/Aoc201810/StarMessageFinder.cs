@@ -47,7 +47,7 @@ public class StarMessageFinder
 
     private IEnumerable<StarPosition> ParsePositions(string input)
     {
-        var strings = StringReader.ReadLines(input);
+        var strings = InputReader.ReadLines(input);
         foreach (var s in strings)
         {
             yield return ParsePosition(s);

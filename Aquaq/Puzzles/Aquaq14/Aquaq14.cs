@@ -31,7 +31,7 @@ public class Aquaq14 : AquaqPuzzle
 
     public static int PlayBingo(string input)
     {
-        var games = StringReader.ReadLines(input).Select(o => o.Split(' ').Select(int.Parse));
+        var games = InputReader.ReadLines(input).Select(o => o.Split(' ').Select(int.Parse));
 
         var totalSum = 0;
         foreach (var numbers in games)
@@ -58,7 +58,7 @@ public class Aquaq14 : AquaqPuzzle
 
     private static Dictionary<int, MatrixAddress> BuildBoard()
     {
-        var boardLines = StringReader.ReadLines(BoardInput.Replace("  ", " "));
+        var boardLines = InputReader.ReadLines(BoardInput.Replace("  ", " "));
         var board = new Dictionary<int, MatrixAddress>();
 
         var y = 0;

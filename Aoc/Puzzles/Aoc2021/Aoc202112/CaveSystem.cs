@@ -10,7 +10,7 @@ public class CaveSystem
     public CaveSystem(string input, bool allowSmallRevisit)
     {
         _allowSmallRevisit = allowSmallRevisit;
-        var lines = StringReader.ReadLines(input);
+        var lines = InputReader.ReadLines(input);
         _connections = new Dictionary<string, HashSet<string>>();
         foreach (var line in lines)
         {

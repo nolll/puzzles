@@ -11,7 +11,7 @@ public class DuetRunner
 
     public DuetRunner(string input)
     {
-        _operations = StringReader.ReadLines(input);
+        _operations = InputReader.ReadLines(input);
         _queues = new List<List<long>>
         {
             new List<long>(),

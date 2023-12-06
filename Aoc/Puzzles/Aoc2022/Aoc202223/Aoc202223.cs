@@ -146,7 +146,7 @@ public class Aoc202223 : AocPuzzle
     private HashSet<MatrixAddress> ParseElves(string input)
     {
         var elves = new HashSet<MatrixAddress>();
-        var lines = StringReader.ReadLines(input);
+        var lines = InputReader.ReadLines(input);
         for (var y = 0; y < lines.Count; y++)
         {
             var line = lines[y];

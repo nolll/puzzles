@@ -6,7 +6,7 @@ public class Polymerization
 {
     public long Run(string input, int stepCount)
     {
-        var groups = StringReader.ReadLineGroups(input);
+        var groups = InputReader.ReadLineGroups(input);
 
         var rules = new Dictionary<(char, char), char>();
         foreach (var strRule in groups[1])

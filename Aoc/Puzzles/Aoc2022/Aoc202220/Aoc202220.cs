@@ -24,7 +24,7 @@ public class Aoc202220 : AocPuzzle
 
     public static long Run(string input, long multiplier, int iterationCount)
     {
-        var numbers = StringReader.ReadLines(input, false).Select(s => long.Parse(s) * multiplier).ToList();
+        var numbers = InputReader.ReadLines(input, false).Select(s => long.Parse(s) * multiplier).ToList();
 
         var list = new LinkedList<long>();
         var set = new Dictionary<long, LinkedListNode<long>>();

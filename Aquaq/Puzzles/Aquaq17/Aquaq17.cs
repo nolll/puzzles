@@ -14,7 +14,7 @@ public class Aquaq17 : AquaqPuzzle
 
     public static string Run(string input)
     {
-        var lines = StringReader.ReadLines(input).Skip(1);
+        var lines = InputReader.ReadLines(input).Skip(1);
 
         var scoreList = new List<TeamScore>();
 

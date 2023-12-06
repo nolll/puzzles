@@ -23,7 +23,7 @@ public class Aoc202304 : AocPuzzle
 
     public static (int Score, int CardCount) FlipThroughCards(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = InputReader.ReadLines(input);
         var totalScore = 0;
         var cards = new Dictionary<int, int>();
         var index = 1;

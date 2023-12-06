@@ -8,7 +8,7 @@ public class SevenSegmentDisplayDecoder
 
     public SevenSegmentDisplayDecoder(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = InputReader.ReadLines(input);
         _decoders = new List<DigitDecoder>();
         foreach (var line in lines)
         {

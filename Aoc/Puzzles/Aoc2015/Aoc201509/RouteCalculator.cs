@@ -97,7 +97,7 @@ public class RouteCalculator
 
     private IList<Distance> GetDistances(string input)
     {
-        return StringReader.ReadLines(input).Select(CreateDistance).ToList();
+        return InputReader.ReadLines(input).Select(CreateDistance).ToList();
     }
 
     private Distance CreateDistance(string s)

@@ -13,7 +13,7 @@ public class ConstellationFinder
 
     private IList<Point4d> ParsePoints(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = InputReader.ReadLines(input);
         return rows.Select(ParsePoint).ToList();
     }
 

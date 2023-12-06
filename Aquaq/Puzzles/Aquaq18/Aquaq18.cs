@@ -9,7 +9,7 @@ public class Aquaq18 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var sum = StringReader.ReadLines(InputFile)
+        var sum = InputReader.ReadLines(InputFile)
             .Select(o => DateTime.Parse($"2020-02-02 {o}"))
             .Select(StepsToPalindrome)
             .Sum();

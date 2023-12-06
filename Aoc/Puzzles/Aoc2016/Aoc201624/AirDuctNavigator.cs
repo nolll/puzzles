@@ -103,7 +103,7 @@ public class AirDuctNavigator
     {
         _locations = new List<AirDuctLocation>();
         _matrix = new Matrix<char>();
-        var rows = StringReader.ReadLines(input);
+        var rows = InputReader.ReadLines(input);
         var y = 0;
         foreach (var row in rows)
         {

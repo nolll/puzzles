@@ -41,7 +41,7 @@ public class BridgeBuilder
 
     private void InitComponents(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = InputReader.ReadLines(input);
         _components = rows.Select(ParseComponent).ToList();
     }
 

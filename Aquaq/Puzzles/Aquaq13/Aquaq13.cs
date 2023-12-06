@@ -9,7 +9,7 @@ public class Aquaq13 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var lines = StringReader.ReadLines(InputFile);
+        var lines = InputReader.ReadLines(InputFile);
         var sum = lines.Sum(FindMaxRepeats);
 
         return new PuzzleResult(sum, "86680930d41e9acceb49215121585640");

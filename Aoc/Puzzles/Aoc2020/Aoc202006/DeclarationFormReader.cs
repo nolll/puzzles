@@ -8,7 +8,7 @@ public class DeclarationFormReader
 
     public DeclarationFormReader(string input)
     {
-        _groups = StringReader.ReadLineGroups(input);
+        _groups = InputReader.ReadLineGroups(input);
     }
 
     public int SumOfAtLeastOneYes

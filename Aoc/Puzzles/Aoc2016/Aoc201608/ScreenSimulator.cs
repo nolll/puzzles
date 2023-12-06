@@ -15,7 +15,7 @@ public class ScreenSimulator
 
     public ScreenSimulatorResult Run(string input)
     {
-        var instructions = StringReader.ReadLines(input).Select(CreateInstruction).ToList();
+        var instructions = InputReader.ReadLines(input).Select(CreateInstruction).ToList();
         foreach (var instruction in instructions)
         {
             instruction.Execute();

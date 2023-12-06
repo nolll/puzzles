@@ -49,7 +49,7 @@ public class MonkeyBusiness
 
     private static Monkey[] ParseMonkeys(string input)
     {
-        return StringReader.ReadLineGroups(input)
+        return InputReader.ReadLineGroups(input)
             .Select(ParseMonkey)
             .ToArray();
     }

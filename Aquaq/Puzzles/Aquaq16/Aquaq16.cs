@@ -47,7 +47,7 @@ public class Aquaq16 : AquaqPuzzle
 
     private static IEnumerable<Letter> ParseLetters(string alphabet)
     {
-        var lines = StringReader.ReadLines(alphabet).ToArray();
+        var lines = InputReader.ReadLines(alphabet).ToArray();
         var c = 'A';
         for (var i = 0; i < alphabet.Length; i += LetterHeight)
         {

@@ -10,7 +10,7 @@ public class CargoCrane
 
     public CargoCrane(string input)
     {
-        var groups = StringReader.ReadLineGroupsWithWhiteSpace(input);
+        var groups = InputReader.ReadLineGroupsWithWhiteSpace(input);
         _stacks = ParseStacks(groups.First());
         _moves = groups[1];
     }

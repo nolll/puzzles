@@ -24,7 +24,7 @@ public class Aoc202303 : AocPuzzle
 
     public static Result Run(string input)
     {
-        var lines = StringReader.ReadLines(input); ;
+        var lines = InputReader.ReadLines(input); ;
         var width = lines.First().Length;
         var height = lines.Count;
         var numberCoordList = FindNumberCoords(lines);

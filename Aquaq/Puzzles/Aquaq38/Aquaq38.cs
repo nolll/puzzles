@@ -10,7 +10,7 @@ public class Aquaq38 : AquaqPuzzle
     protected override PuzzleResult Run()
     {
         var indexStreakProvider = new IndexStreakProvider();
-        var lists = StringReader.ReadLines(InputFile)
+        var lists = InputReader.ReadLines(InputFile)
             .Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();
         var sum = lists.Sum(o => GetComfScore(indexStreakProvider, o));
 

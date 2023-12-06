@@ -55,7 +55,7 @@ public class FallingSand
     private static Matrix<char> BuildMatrix(string input, int part)
     {
         var matrix = new Matrix<char>(1, 1, '.');
-        var lines = StringReader.ReadLines(input, false);
+        var lines = InputReader.ReadLines(input, false);
 
         var coordLists = lines.Select(o => o.Split(" -> "));
         foreach (var coordList in coordLists)

@@ -23,7 +23,7 @@ public class Aoc202306 : AocPuzzle
 
     public static long BoatRace1(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = InputReader.ReadLines(input);
         var times = lines.First().Split(":").Last().Split(' ').Where(o => o.Length > 0).Select(int.Parse).ToList();
         var distances = lines.Last().Split(":").Last().Split(' ').Where(o => o.Length > 0).Select(int.Parse).ToList();
 
@@ -41,7 +41,7 @@ public class Aoc202306 : AocPuzzle
 
     public static long BoatRace2(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = InputReader.ReadLines(input);
         var time = long.Parse(string.Join("", lines.First().Split(":").Last().Split(' ').Where(o => o.Length > 0)));
         var targetDistance = long.Parse(string.Join("", lines.Last().Split(":").Last().Split(' ').Where(o => o.Length > 0)));
 

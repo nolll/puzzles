@@ -38,7 +38,7 @@ public class KineticSculpture
 
     private IList<KineticSculptureDisc> ParseDiscs(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = InputReader.ReadLines(input);
         return rows.Select(ParseDisc).ToList();
     }
 

@@ -236,7 +236,7 @@ public class NanobotFormation
 
     private IList<Nanobot> ParseBots(string input)
     {
-        return StringReader.ReadLines(input).Select(ParseBot).ToList();
+        return InputReader.ReadLines(input).Select(ParseBot).ToList();
     }
 
     private Nanobot ParseBot(string s)

@@ -10,7 +10,7 @@ public class BingoGame
 
     public BingoGame(string input)
     {
-        var groups = StringReader.ReadStringGroups(input);
+        var groups = InputReader.ReadStringGroups(input);
         _numbers = groups.First().Split(',').Select(int.Parse).ToList();
         _boards = ParseBoards(groups.Skip(1));
     }

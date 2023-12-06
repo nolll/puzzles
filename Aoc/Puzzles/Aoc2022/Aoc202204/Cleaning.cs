@@ -6,7 +6,7 @@ public class Cleaning
 {
     public int Part1(string input)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = InputReader.ReadLines(input, false);
         var ranges = lines.Select(ParseRanges);
 
         return ranges.Count(o => o.a.Contains(o.b) || o.b.Contains(o.a));
@@ -14,7 +14,7 @@ public class Cleaning
 
     public int Part2(string input)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = InputReader.ReadLines(input, false);
         var ranges = lines.Select(ParseRanges);
 
         return ranges.Count(o => o.a.Overlaps(o.b) || o.b.Overlaps(o.a));

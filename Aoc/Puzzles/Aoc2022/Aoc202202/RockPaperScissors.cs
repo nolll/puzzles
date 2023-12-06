@@ -6,14 +6,14 @@ public class RockPaperScissors
 {
     public int Part1(string input)
     {
-        return StringReader
+        return InputReader
             .ReadLines(input, false)
             .Select(Part1Round.Parse).Sum(o => o.Score);
     }
 
     public int Part2(string input)
     {
-        return StringReader
+        return InputReader
             .ReadLines(input, false)
             .Select(Part2Round.Parse).Sum(o => o.Score);
     }

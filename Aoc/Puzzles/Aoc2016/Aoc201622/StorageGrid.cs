@@ -81,7 +81,7 @@ public class StorageGrid
 
     private Matrix<StorageNode> ParseGrid(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = InputReader.ReadLines(input);
         var dataRows = rows.Skip(2);
         var matrix = new Matrix<StorageNode>();
 

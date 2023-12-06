@@ -9,7 +9,7 @@ public class Aquaq00 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var keyPresses = StringReader.ReadLines(InputFile)
+        var keyPresses = InputReader.ReadLines(InputFile)
             .Select(o => o.Trim().Split(' ').ToArray())
             .Select(o => (int.Parse(o[0]), int.Parse(o[1])));
 

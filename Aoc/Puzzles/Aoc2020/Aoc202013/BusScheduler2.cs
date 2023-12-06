@@ -10,7 +10,7 @@ public class BusScheduler2
 
     public BusScheduler2(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = InputReader.ReadLines(input);
         _earliestMinute = int.Parse(rows[0]);
         _busDepartureMinutes = rows[1].Split(',').ToList();
     }

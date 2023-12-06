@@ -15,7 +15,7 @@ public class Aquaq21 : AquaqPuzzle
 
     public static int Run(string input, int width)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = InputReader.ReadLines(input);
         var rows = lines.Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();
 
         var inputs = new List<Graph.Input>();

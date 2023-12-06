@@ -16,7 +16,7 @@ public class Aoc202225 : AocPuzzle
 
     public string Part1(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = InputReader.ReadLines(input);
         var sum = lines.Select(SnafuConverter.ToNumber).Sum();
         return SnafuConverter.ToSnafu(sum);
     }

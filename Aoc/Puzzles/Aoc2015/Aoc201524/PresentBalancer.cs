@@ -9,7 +9,7 @@ public class PresentBalancer
 
     public PresentBalancer(string input, int groupCount)
     {
-        var presents = StringReader.ReadLines(input).Select(long.Parse).ToList();
+        var presents = InputReader.ReadLines(input).Select(long.Parse).ToList();
         presents.Reverse();
         var sum = presents.Sum();
         var partitionSum = sum / groupCount;

@@ -111,7 +111,7 @@ public class ImmuneSystem
 
     private void ParseGroups(ImmuneSystemArmy army, string s, int boost)
     {
-        var rows = StringReader.ReadLines(s).Skip(1);
+        var rows = InputReader.ReadLines(s).Skip(1);
         var counter = 0;
         foreach (var row in rows)
         {

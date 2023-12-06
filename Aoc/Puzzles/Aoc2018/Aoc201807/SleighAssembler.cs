@@ -76,7 +76,7 @@ public class SleighAssembler
 
     private IDictionary<string, SleighStep> GetSteps(string input)
     {
-        var instructions = StringReader.ReadLines(input);
+        var instructions = InputReader.ReadLines(input);
         var steps = new Dictionary<string, SleighStep>();
         foreach (var instruction in instructions)
         {

@@ -9,7 +9,7 @@ public class DigitalList
 
     public DigitalList(string input)
     {
-        var strings = StringReader.ReadLines(input);
+        var strings = InputReader.ReadLines(input);
         var codeCount = strings.Sum(CountCode);
         var memoryCount = strings.Sum(CountMemory);
         var encodedCount = strings.Sum(CountEncoded);

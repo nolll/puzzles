@@ -12,7 +12,7 @@ public class WaypointFerryNavigationSystem
 
     public WaypointFerryNavigationSystem(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = InputReader.ReadLines(input);
         _intructions = rows.Select(FerryNavigationInstruction.Parse);
 
         _address = new MatrixAddress(0, 0);

@@ -6,7 +6,7 @@ public class DepthMeasurement
 {
     public int GetNumberOfIncreasingMeasurements(string input, bool useSlidingWindow)
     {
-        var depths = StringReader.ReadLines(input).Select(int.Parse).ToList();
+        var depths = InputReader.ReadLines(input).Select(int.Parse).ToList();
 
         var count = 0;
         var prev = 0;

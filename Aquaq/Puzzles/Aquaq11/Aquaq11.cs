@@ -19,7 +19,7 @@ public class Aquaq11 : AquaqPuzzle
 
     public static int CountRequiredTiles(string input)
     {
-        var areas = StringReader.ReadLines(input)
+        var areas = InputReader.ReadLines(input)
             .Skip(1)
             .Select(line => line.Split(',').Select(int.Parse).ToArray())
             .Select(o => new TileSquare(new MatrixAddress(o[0], o[1]), new MatrixAddress(o[2], o[3])))

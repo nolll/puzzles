@@ -10,7 +10,7 @@ public class Aquaq24 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var parts = StringReader.ReadLines(InputFile);
+        var parts = InputReader.ReadLines(InputFile);
 
         var charset = parts[0];
         var encoded = parts[1];

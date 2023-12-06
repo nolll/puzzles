@@ -9,7 +9,7 @@ public class RecursiveTowers
 
     public RecursiveTowers(string input)
     {
-        var strings = StringReader.ReadLines(input);
+        var strings = InputReader.ReadLines(input);
         var discs = new Dictionary<string, Disc>();
         foreach (var strDisc in strings)
         {

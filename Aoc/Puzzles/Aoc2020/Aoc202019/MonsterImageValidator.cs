@@ -13,7 +13,7 @@ public class MonsterImageValidator
 
     public MonsterImageValidator(string input, bool useRecursiveRules = false)
     {
-        var groups = StringReader.ReadLineGroups(input);
+        var groups = InputReader.ReadLineGroups(input);
         var ruleStrings = groups[0];
         _messages = groups.Count > 1 ? groups[1] : new List<string>();
         _rules = ParseRules(ruleStrings);

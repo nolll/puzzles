@@ -10,7 +10,7 @@ public class SingleRunner
 
     public SingleRunner(string input)
     {
-        _operations = StringReader.ReadLines(input);
+        _operations = InputReader.ReadLines(input);
     }
 
     public void Run()

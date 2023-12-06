@@ -9,7 +9,7 @@ public class Aquaq07 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var games = StringReader.ReadLines(InputFile)
+        var games = InputReader.ReadLines(InputFile)
             .Skip(1)
             .Select(o => o.Split(','))
             .ToList();

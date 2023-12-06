@@ -1,6 +1,4 @@
-﻿using Puzzles.Common;
-
-namespace Puzzles;
+﻿namespace Puzzles;
 
 public class Program
 {

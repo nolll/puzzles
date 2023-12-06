@@ -92,7 +92,7 @@ public class ReservoirFiller
         _matrix.MoveTo(_source);
         _matrix.WriteValue(SourceTile);
 
-        var rows = StringReader.ReadLines(input);
+        var rows = InputReader.ReadLines(input);
 
         foreach (var row in rows)
         {

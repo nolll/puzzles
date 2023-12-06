@@ -10,7 +10,7 @@ public class Aquaq09 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var numbers = StringReader.ReadLines(InputFile)
+        var numbers = InputReader.ReadLines(InputFile)
             .Select(BigInteger.Parse);
         var result = MultiplyLargeNumbers(numbers);
 

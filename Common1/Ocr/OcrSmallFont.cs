@@ -7,7 +7,7 @@ public static class OcrSmallFont
     public static string ReadString(string crtImage)
     {
         const int charWidth = 5;
-        var rows = StringReader.ReadLines(crtImage).Select(o => o.Trim()).ToList();
+        var rows = InputReader.ReadLines(crtImage).Select(o => o.Trim()).ToList();
         var stringLength = (int)Math.Ceiling((double)rows.First().Length / charWidth);
         rows = rows.Select(o => o.PadRight(stringLength * charWidth, '.')).ToList();
         var s = "";
@@ -24,7 +24,7 @@ public static class OcrSmallFont
 
     public static char ReadLetter(string crtLetter)
     {
-        var rows = StringReader.ReadLines(crtLetter).Select(o => o.Trim().Replace(" ", ".")).ToList();
+        var rows = InputReader.ReadLines(crtLetter).Select(o => o.Trim().Replace(" ", ".")).ToList();
         switch (rows[0])
         {
             case "###.." when rows[5] == "###..":

@@ -9,4 +9,8 @@
     <RootNamespace>Pzl.Common</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectCapability Remove="TestContainer" />
+  </ItemGroup>
+
 </Project>

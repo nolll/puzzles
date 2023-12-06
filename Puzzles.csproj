@@ -48,7 +48,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="Aoc1\Aoc1.csproj" />
+    <ProjectReference Include="Aquaq1\Aquaq1.csproj" />
     <ProjectReference Include="Common\Common.csproj" />
+    <ProjectReference Include="Euler1\Euler1.csproj" />
   </ItemGroup>
 
 </Project>

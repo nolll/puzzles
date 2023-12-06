@@ -19,9 +19,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Aoc1\**" />
+    <Compile Remove="Aquaq1\**" />
+    <Compile Remove="Common1\**" />
     <Compile Remove="Common\**" />
+    <Compile Remove="Euler1\**" />
+    <EmbeddedResource Remove="Aoc1\**" />
+    <EmbeddedResource Remove="Aquaq1\**" />
+    <EmbeddedResource Remove="Common1\**" />
     <EmbeddedResource Remove="Common\**" />
+    <EmbeddedResource Remove="Euler1\**" />
+    <None Remove="Aoc1\**" />
+    <None Remove="Aquaq1\**" />
+    <None Remove="Common1\**" />
     <None Remove="Common\**" />
+    <None Remove="Euler1\**" />
   </ItemGroup>
 
   <ItemGroup>

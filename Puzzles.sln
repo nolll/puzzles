@@ -5,7 +5,13 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Puzzles", "Puzzles.csproj", "{7BCB32B5-D40E-4AB5-BC2E-DCF75DEDDC29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{94184920-152B-466E-B6EE-CD37059A9CB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{94184920-152B-466E-B6EE-CD37059A9CB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquaq1", "Aquaq1\Aquaq1.csproj", "{39025A57-68F1-451A-BB33-2270935A68B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aoc1", "Aoc1\Aoc1.csproj", "{7DE53994-4C8F-4673-86A5-D27B2252842C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euler1", "Euler1\Euler1.csproj", "{824965CE-E8B5-486A-BACE-1F7993C204EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +32,24 @@ Global
 		{94184920-152B-466E-B6EE-CD37059A9CB9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{94184920-152B-466E-B6EE-CD37059A9CB9}.Single|Any CPU.ActiveCfg = Debug|Any CPU
 		{94184920-152B-466E-B6EE-CD37059A9CB9}.Single|Any CPU.Build.0 = Debug|Any CPU
+		{39025A57-68F1-451A-BB33-2270935A68B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39025A57-68F1-451A-BB33-2270935A68B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39025A57-68F1-451A-BB33-2270935A68B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39025A57-68F1-451A-BB33-2270935A68B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39025A57-68F1-451A-BB33-2270935A68B8}.Single|Any CPU.ActiveCfg = Debug|Any CPU
+		{39025A57-68F1-451A-BB33-2270935A68B8}.Single|Any CPU.Build.0 = Debug|Any CPU
+		{7DE53994-4C8F-4673-86A5-D27B2252842C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DE53994-4C8F-4673-86A5-D27B2252842C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DE53994-4C8F-4673-86A5-D27B2252842C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DE53994-4C8F-4673-86A5-D27B2252842C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DE53994-4C8F-4673-86A5-D27B2252842C}.Single|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DE53994-4C8F-4673-86A5-D27B2252842C}.Single|Any CPU.Build.0 = Debug|Any CPU
+		{824965CE-E8B5-486A-BACE-1F7993C204EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{824965CE-E8B5-486A-BACE-1F7993C204EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{824965CE-E8B5-486A-BACE-1F7993C204EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{824965CE-E8B5-486A-BACE-1F7993C204EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{824965CE-E8B5-486A-BACE-1F7993C204EC}.Single|Any CPU.ActiveCfg = Debug|Any CPU
+		{824965CE-E8B5-486A-BACE-1F7993C204EC}.Single|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,3 @@
-using System.Threading;
 using Puzzles.Common.Strings;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201723;

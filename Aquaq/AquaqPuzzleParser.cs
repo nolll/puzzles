@@ -1,4 +1,4 @@
-﻿namespace Puzzles.Aquaq;
+﻿namespace Pzl.Aquaq;
 
 public static class AquaqPuzzleParser
 {

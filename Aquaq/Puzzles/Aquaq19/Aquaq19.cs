@@ -2,7 +2,7 @@
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aquaq.Puzzles.Aquaq19;
+namespace Pzl.Aquaq.Puzzles.Aquaq19;
 
 public class Aquaq19 : AquaqPuzzle
 {

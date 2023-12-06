@@ -1,4 +1,4 @@
-﻿namespace Puzzles.Aquaq.Puzzles.Aquaq08;
+﻿namespace Pzl.Aquaq.Puzzles.Aquaq08;
 
 public abstract class Product
 {

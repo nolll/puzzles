@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.Aquaq.Puzzles.Aquaq03;
+namespace Pzl.Aquaq.Puzzles.Aquaq03;
 
 public class Aquaq03Tests
 {

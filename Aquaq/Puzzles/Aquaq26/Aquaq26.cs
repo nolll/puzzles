@@ -3,7 +3,7 @@ using Puzzles.Common.Combinatorics;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aquaq.Puzzles.Aquaq26;
+namespace Pzl.Aquaq.Puzzles.Aquaq26;
 
 public class Aquaq26 : AquaqPuzzle
 {

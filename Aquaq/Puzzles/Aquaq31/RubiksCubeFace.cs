@@ -1,6 +1,6 @@
 ﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.Aquaq.Puzzles.Aquaq31;
+namespace Pzl.Aquaq.Puzzles.Aquaq31;
 
 public class RubiksCubeFace
 {

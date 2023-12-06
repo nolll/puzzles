@@ -1,4 +1,4 @@
-﻿namespace Puzzles.Aquaq.Puzzles.Aquaq34;
+﻿namespace Pzl.Aquaq.Puzzles.Aquaq34;
 
 public class Leg
 {

@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201803;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201803;
 
 public static class ClaimListReader
 {

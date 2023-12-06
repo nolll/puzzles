@@ -1,7 +1,7 @@
 ﻿using Puzzles.Common.Cryptography;
 using Puzzles.Common.Puzzles;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201710;
+namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201710;
 
 public class Aoc201710 : AocPuzzle
 {

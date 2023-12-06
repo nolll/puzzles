@@ -1,7 +1,7 @@
 ﻿using Puzzles.Common.Computers.Operation;
 using Puzzles.Common.Puzzles;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201816;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201816;
 
 public class Aoc201816 : AocPuzzle
 {

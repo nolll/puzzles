@@ -1,6 +1,6 @@
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201507;
+namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201507;
 
 public class Circuit
 {

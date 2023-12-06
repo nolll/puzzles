@@ -2,7 +2,7 @@
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202222;
+namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202222;
 
 public class Aoc202222 : AocPuzzle
 {

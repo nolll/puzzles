@@ -1,6 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202111;
+namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202111;
 
 public class OctopusFlasher
 {

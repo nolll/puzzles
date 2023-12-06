@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201810;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201810;
 
 public class StarPosition
 {

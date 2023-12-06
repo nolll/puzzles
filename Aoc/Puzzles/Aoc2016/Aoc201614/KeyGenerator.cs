@@ -2,7 +2,7 @@ using System.Text;
 using Puzzles.Common.Cryptography;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201614;
+namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
 
 public class KeyGenerator
 {

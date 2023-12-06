@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201717;
+namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201717;
 
 public class SpinlockRunnerPart2
 {

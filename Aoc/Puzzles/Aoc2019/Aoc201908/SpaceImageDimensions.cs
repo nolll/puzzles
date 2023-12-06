@@ -1,4 +1,4 @@
-﻿namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201908;
+﻿namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201908;
 
 public class SpaceImageDimensions
 {

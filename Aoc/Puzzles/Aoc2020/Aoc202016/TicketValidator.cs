@@ -1,6 +1,6 @@
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202016;
+namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202016;
 
 public class TicketValidator
 {

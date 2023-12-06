@@ -1,7 +1,7 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202122;
+namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202122;
 
 public class SubmarineReactor
 {

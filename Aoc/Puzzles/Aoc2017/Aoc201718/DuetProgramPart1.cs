@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201718;
+namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201718;
 
 public class DuetProgramPart1
 {

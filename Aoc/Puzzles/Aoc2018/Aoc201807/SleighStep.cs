@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201807;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201807;
 
 public class SleighStep
 {

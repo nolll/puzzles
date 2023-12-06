@@ -1,6 +1,6 @@
 ﻿using Puzzles.Common.Computers.IntCode;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201923;
+namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201923;
 
 public class CategorySixComputer
 {

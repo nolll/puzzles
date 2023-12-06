@@ -1,6 +1,6 @@
 using Puzzles.Common.Combinatorics;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201521;
+namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201521;
 
 public class RpgSimulator
 {

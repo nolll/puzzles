@@ -1,6 +1,6 @@
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201825;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201825;
 
 public class ConstellationFinder
 {

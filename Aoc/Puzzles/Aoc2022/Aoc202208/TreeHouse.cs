@@ -1,7 +1,7 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202208;
+namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202208;
 
 public class TreeHouse
 {

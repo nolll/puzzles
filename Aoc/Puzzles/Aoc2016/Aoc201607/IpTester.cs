@@ -1,6 +1,6 @@
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201607;
+namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201607;
 
 public class IpTester
 {

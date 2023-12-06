@@ -1,6 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201912;
+namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201912;
 
 public class Moon
 {

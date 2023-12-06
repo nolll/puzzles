@@ -2,7 +2,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using Puzzles.Common.Maths;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201520;
+namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201520;
 
 public class Aoc201520Tests
 {

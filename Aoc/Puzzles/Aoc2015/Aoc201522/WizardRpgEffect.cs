@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201522;
+namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201522;
 
 public class WizardRpgEffect
 {

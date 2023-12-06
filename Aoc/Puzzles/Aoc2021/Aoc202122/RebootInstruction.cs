@@ -1,6 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202122;
+namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202122;
 
 public class RebootInstruction
 {

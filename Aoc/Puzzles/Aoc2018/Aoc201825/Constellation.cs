@@ -1,6 +1,6 @@
 using System.Collections.Immutable;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201825;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201825;
 
 public class Constellation
 {

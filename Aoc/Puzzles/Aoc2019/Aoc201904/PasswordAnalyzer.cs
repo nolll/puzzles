@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201904;
+namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201904;
 
 public static class PasswordAnalyzer
 {

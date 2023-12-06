@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201808;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201808;
 
 public class LicenseNode
 {

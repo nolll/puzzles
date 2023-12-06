@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201705;
+namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201705;
 
 public class InstructionJumper
 {

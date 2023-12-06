@@ -2,7 +2,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202019;
+namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202019;
 
 public class MonsterImageValidator
 {

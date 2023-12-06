@@ -1,7 +1,7 @@
 using System.Text;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202110;
+namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202110;
 
 public class SyntaxChecker
 {

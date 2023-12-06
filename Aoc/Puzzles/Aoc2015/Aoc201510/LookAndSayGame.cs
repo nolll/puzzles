@@ -1,7 +1,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201510;
+namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201510;
 
 public class LookAndSayGame
 {

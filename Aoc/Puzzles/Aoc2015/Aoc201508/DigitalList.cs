@@ -1,6 +1,6 @@
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201508;
+namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201508;
 
 public class DigitalList
 {

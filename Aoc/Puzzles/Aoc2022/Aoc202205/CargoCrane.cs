@@ -1,6 +1,6 @@
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202205;
+namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202205;
 
 public class CargoCrane
 {

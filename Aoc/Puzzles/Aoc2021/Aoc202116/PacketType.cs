@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202116;
+namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202116;
 
 public enum PacketType
 {

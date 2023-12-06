@@ -1,6 +1,6 @@
 ﻿using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202102;
+namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202102;
 
 public class SubmarineControl
 {

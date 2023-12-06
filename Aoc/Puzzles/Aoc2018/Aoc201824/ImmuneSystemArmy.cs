@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201824;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201824;
 
 public enum ImmuneSystemArmy
 {

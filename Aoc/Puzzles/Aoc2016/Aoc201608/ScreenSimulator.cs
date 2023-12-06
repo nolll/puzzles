@@ -2,7 +2,7 @@
 using Puzzles.Common.Ocr;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201608;
+namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201608;
 
 public class ScreenSimulator
 {

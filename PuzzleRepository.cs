@@ -1,5 +1,5 @@
-﻿using Puzzles.Aoc;
-using Puzzles.Common.Puzzles;
+﻿using Puzzles.Common.Puzzles;
+using Pzl.Aoc;
 using Pzl.Aquaq;
 using Pzl.Euler;
 

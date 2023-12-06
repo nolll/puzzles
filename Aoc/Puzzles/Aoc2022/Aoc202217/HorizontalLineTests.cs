@@ -2,7 +2,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202217;
+namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202217;
 
 public class HorizontalLineTests
 {

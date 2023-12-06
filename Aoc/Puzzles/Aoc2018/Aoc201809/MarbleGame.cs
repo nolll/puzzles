@@ -1,6 +1,6 @@
 using Puzzles.Common.Lists;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201809;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201809;
 
 public class MarbleGame
 {

@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202215;
+namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202215;
 
 [DebuggerDisplay("{Start},{End}")]
 public class Interval

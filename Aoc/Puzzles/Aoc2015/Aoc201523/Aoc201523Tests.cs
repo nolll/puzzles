@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201523;
+namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201523;
 
 public class Aoc201523Tests
 {

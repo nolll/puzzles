@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202219;
+namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202219;
 
 public record FactoryBlueprint(
     int Id, 

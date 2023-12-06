@@ -1,6 +1,6 @@
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202114;
+namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202114;
 
 public class Polymerization
 {

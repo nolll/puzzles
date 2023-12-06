@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201716;
+namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201716;
 
 public class SpinMove : DanceMove
 {

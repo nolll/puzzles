@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201701;
+namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201701;
 
 public class CaptchaCalculator
 {

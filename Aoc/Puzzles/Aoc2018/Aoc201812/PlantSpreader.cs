@@ -1,6 +1,6 @@
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201812;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201812;
 
 public class PlantSpreader
 {

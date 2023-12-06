@@ -1,7 +1,7 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202113;
+namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202113;
 
 public class TransparentPaper
 {

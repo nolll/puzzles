@@ -1,7 +1,7 @@
 ﻿using Puzzles.Common.Computers.IntCode;
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201913;
+namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201913;
 
 public class Arcade
 {

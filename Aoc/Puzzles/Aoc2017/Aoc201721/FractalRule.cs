@@ -1,6 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201721;
+namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201721;
 
 public class FractalRule
 {

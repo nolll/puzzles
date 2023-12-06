@@ -1,6 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201820;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201820;
 
 public class RegexToExplore
 {

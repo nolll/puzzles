@@ -1,4 +1,4 @@
-namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201621;
+namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201621;
 
 public class SwapLetterInstruction : IScrambleInstruction
 {

@@ -1,6 +1,6 @@
 ﻿using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202203;
+namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202203;
 
 public static class Rucksacks
 {

@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;Single</Configurations>
     <LangVersion>12.0</LangVersion>
-    <RootNamespace>Puzzles.Aoc</RootNamespace>
+    <RootNamespace>Pzl.Aoc</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

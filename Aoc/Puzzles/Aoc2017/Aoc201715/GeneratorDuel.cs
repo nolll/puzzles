@@ -1,6 +1,6 @@
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201715;
+namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201715;
 
 public class GeneratorDuel
 {

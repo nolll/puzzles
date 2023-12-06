@@ -2,7 +2,7 @@ using System.Text;
 using Puzzles.Common.Cryptography;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201605;
+namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201605;
 
 public class PasswordGenerator
 {

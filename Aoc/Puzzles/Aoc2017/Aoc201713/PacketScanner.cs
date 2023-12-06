@@ -1,6 +1,6 @@
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201713;
+namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201713;
 
 public class PacketScanner
 {

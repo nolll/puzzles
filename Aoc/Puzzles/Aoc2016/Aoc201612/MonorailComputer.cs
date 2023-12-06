@@ -1,6 +1,6 @@
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201612;
+namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201612;
 
 public class MonorailComputer
 {

@@ -2,7 +2,7 @@
 using Puzzles.Common.Runners;
 using Spectre.Console;
 
-namespace Puzzles.Common;
+namespace Puzzles;
 
 public class PuzzleProgram
 {
@@ -31,7 +31,7 @@ public class PuzzleProgram
             RunPuzzles(parameters);
     }
     
-    private void RunPuzzles(Puzzles.Parameters parameters)
+    private void RunPuzzles(Common.Puzzles.Parameters parameters)
     {
         var puzzles = _puzzleRepository.GetPuzzles();
         var filteredPuzzles = new PuzzleFilter(parameters).Filter(puzzles);
@@ -51,8 +51,8 @@ public class PuzzleProgram
         }
     }
 
-    private Puzzles.Parameters ParseParameters(IEnumerable<string> args) =>
+    private Common.Puzzles.Parameters ParseParameters(IEnumerable<string> args) =>
         DebugMode.IsDebugMode
-            ? new Puzzles.Parameters(tags: _debugTags.Split(',').ToList())
-            : Puzzles.Parameters.Parse(args);
+            ? new Common.Puzzles.Parameters(tags: _debugTags.Split(',').ToList())
+            : Common.Puzzles.Parameters.Parse(args);
 }

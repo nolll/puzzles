@@ -1,4 +1,4 @@
-﻿namespace Puzzles.Common;
+﻿namespace Puzzles;
 
 public class Options
 {

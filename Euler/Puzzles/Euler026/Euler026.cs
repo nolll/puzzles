@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Puzzles.Common.Puzzles;
 
-namespace Puzzles.Euler.Puzzles.Euler026;
+namespace Pzl.Euler.Puzzles.Euler026;
 
 public class Euler026 : EulerPuzzle
 {

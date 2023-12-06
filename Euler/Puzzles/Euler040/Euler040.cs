@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Puzzles.Common.Puzzles;
 
-namespace Puzzles.Euler.Puzzles.Euler040;
+namespace Pzl.Euler.Puzzles.Euler040;
 
 public class Euler040 : EulerPuzzle
 {

@@ -2,7 +2,7 @@
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
 
-namespace Puzzles.Euler.Puzzles.Euler013;
+namespace Pzl.Euler.Puzzles.Euler013;
 
 public class Euler013 : EulerPuzzle
 {

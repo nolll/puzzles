@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Puzzles.Euler.Puzzles.Euler027;
+namespace Pzl.Euler.Puzzles.Euler027;
 
 public class Euler027Tests
 {

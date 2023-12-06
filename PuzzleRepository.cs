@@ -1,7 +1,7 @@
 ﻿using Puzzles.Aoc;
 using Puzzles.Common.Puzzles;
-using Puzzles.Euler;
 using Pzl.Aquaq;
+using Pzl.Euler;
 
 namespace Pzl.Cli;
 

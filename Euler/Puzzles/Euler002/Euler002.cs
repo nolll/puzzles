@@ -1,6 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 
-namespace Puzzles.Euler.Puzzles.Euler002;
+namespace Pzl.Euler.Puzzles.Euler002;
 
 public class Euler002 : EulerPuzzle
 {

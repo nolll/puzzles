@@ -1,7 +1,7 @@
 ﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Puzzles;
 
-namespace Puzzles.Euler.Puzzles.Euler011;
+namespace Pzl.Euler.Puzzles.Euler011;
 
 public class Euler011 : EulerPuzzle
 {

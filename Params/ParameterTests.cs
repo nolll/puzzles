@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace Pzl.Client.Parameters;
+namespace Pzl.Client.Params;
 
 public class ParameterTests
 {

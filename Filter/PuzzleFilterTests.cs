@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using Pzl.Client.Params;
 using Pzl.Common;
 
 namespace Pzl.Client.Filter;
@@ -15,7 +16,7 @@ public class PuzzleFilterTests
             new PlainPuzzleInTest()
         };
 
-        var parameters = new Parameters.Parameters(tags: new List<string> { PuzzleTag.Slow });
+        var parameters = new Parameters(tags: new List<string> { PuzzleTag.Slow });
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 
@@ -32,7 +33,7 @@ public class PuzzleFilterTests
             new PlainPuzzleInTest()
         };
         
-        var parameters = new Parameters.Parameters(tags: new List<string> { PuzzleTag.Commented });
+        var parameters = new Parameters(tags: new List<string> { PuzzleTag.Commented });
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 
@@ -49,7 +50,7 @@ public class PuzzleFilterTests
             new PlainPuzzleInTest()
         };
 
-        var parameters = new Parameters.Parameters(tags: new List<string> { PuzzleTag.Fun });
+        var parameters = new Parameters(tags: new List<string> { PuzzleTag.Fun });
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 

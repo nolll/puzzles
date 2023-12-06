@@ -1,7 +1,4 @@
-﻿using Pzl.Aoc;
-using Pzl.Aquaq;
-using Pzl.Common;
-using Pzl.Euler;
+﻿using Pzl.Common;
 
 namespace Pzl.Client;
 
@@ -9,13 +6,9 @@ public class PuzzleRepository
 {
     private readonly List<Puzzle> _puzzles;
         
-    public PuzzleRepository()
+    public PuzzleRepository(IEnumerable<IPuzzleProvider> puzzleProviders)
     {
-        var puzzleFactory = new PuzzleFactory();
-        _puzzles = new List<Puzzle>();
-        _puzzles.AddRange(puzzleFactory.CreatePuzzles<AocPuzzle>());
-        _puzzles.AddRange(puzzleFactory.CreatePuzzles<AquaqPuzzle>());
-        _puzzles.AddRange(puzzleFactory.CreatePuzzles<EulerPuzzle>());
+        _puzzles = puzzleProviders.SelectMany(o => o.GetPuzzles()).ToList();
     }
 
     public IList<Puzzle> GetPuzzles() => _puzzles;

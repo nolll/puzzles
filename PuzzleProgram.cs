@@ -1,8 +1,12 @@
-﻿using Pzl.Client.Debug;
+﻿using Pzl.Aoc;
+using Pzl.Aquaq;
+using Pzl.Client.Debug;
 using Pzl.Client.Filter;
 using Pzl.Client.Help;
-using Pzl.Client.Running;
+using Pzl.Client.Params;
 using Pzl.Client.Running.Runners;
+using Pzl.Common;
+using Pzl.Euler;
 using Spectre.Console;
 
 namespace Pzl.Client;
@@ -16,7 +20,14 @@ public class PuzzleProgram
 
     public PuzzleProgram(Options options)
     {
-        _puzzleRepository = new PuzzleRepository();
+        var puzzleProviders = new List<IPuzzleProvider>
+        {
+            new AocPuzzleProvider(),
+            new AquaqPuzzleProvider(),
+            new EulerPuzzleProvider()
+        };
+
+        _puzzleRepository = new PuzzleRepository(puzzleProviders);
         _helpPrinter = new HelpPrinter();
         _runner = new PuzzleRunner(options.TimeoutSeconds, options.HashSeed, DebugMode.IsDebugMode);
         _debugTags = options.DebugTags;
@@ -34,7 +45,7 @@ public class PuzzleProgram
             RunPuzzles(parameters);
     }
     
-    private void RunPuzzles(Parameters.Parameters parameters)
+    private void RunPuzzles(Parameters parameters)
     {
         var puzzles = _puzzleRepository.GetPuzzles();
         var filteredPuzzles = new PuzzleFilter(parameters).Filter(puzzles);
@@ -45,7 +56,7 @@ public class PuzzleProgram
     {
         var puzzles = _puzzleRepository.Search(query);
         AnsiConsole.WriteLine($"Search: {query}");
-        if(!puzzles.Any())
+        if(puzzles.Count == 0)
             AnsiConsole.WriteLine("No puzzles found!");
 
         foreach (var puzzle in puzzles)
@@ -54,8 +65,10 @@ public class PuzzleProgram
         }
     }
 
-    private Parameters.Parameters ParseParameters(IEnumerable<string> args) =>
+    private Parameters ParseParameters(IEnumerable<string> args) =>
         DebugMode.IsDebugMode
-            ? new Parameters.Parameters(tags: _debugTags.Split(',').ToList())
-            : Parameters.Parameters.Parse(args);
+            ? DebugParameters
+            : Parameters.Parse(args);
+
+    private Parameters DebugParameters => new(tags: _debugTags.Split(',').ToList());
 }

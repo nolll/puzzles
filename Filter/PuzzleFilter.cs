@@ -1,12 +1,13 @@
-﻿using Pzl.Common;
+﻿using Pzl.Client.Params;
+using Pzl.Common;
 
 namespace Pzl.Client.Filter;
 
 public class PuzzleFilter
 {
-    private readonly Parameters.Parameters _parameters;
+    private readonly Parameters _parameters;
 
-    public PuzzleFilter(Parameters.Parameters parameters)
+    public PuzzleFilter(Parameters parameters)
     {
         _parameters = parameters;
     }

@@ -1,11 +1,13 @@
-﻿using System.Reflection;
-using Pzl.Common;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
-namespace Pzl.Client;
+namespace Pzl.Common;
 
 public class PuzzleFactory
 {
-    public List<Puzzle> CreatePuzzles<T>() where T : Puzzle =>
+    public static List<Puzzle> CreatePuzzles<T>() where T : Puzzle =>
         GetConcreteSubclassesOf<T>()
             .Select(CreatePuzzle<T>)
             .OrderBy(o => o.SortId)

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Configurations>Debug;Release;Single</Configurations>
     <LangVersion>12.0</LangVersion>
     <Nullable>enable</Nullable>
@@ -11,11 +12,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="aoc/Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
-    <None Include="aquaq/Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
-    <None Include="aquaq/CommonInputFiles/*.txt" CopyToOutputDirectory="Always" />
-    <None Include="euler/Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
+    <None Include="Aoc/Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
+    <None Include="Euler/Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
     <None Include="*.json" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Aoc\**" />
+    <Compile Remove="Aquaq\**" />
+    <Compile Remove="Common\**" />
+    <Compile Remove="Euler\**" />
+    <EmbeddedResource Remove="Aoc\**" />
+    <EmbeddedResource Remove="Aquaq\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <EmbeddedResource Remove="Euler\**" />
+    <None Remove="Aoc\**" />
+    <None Remove="Aquaq\**" />
+    <None Remove="Common\**" />
+    <None Remove="Euler\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +41,13 @@
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
     <PackageReference Include="Spectre.Console" Version="0.47.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Aoc\Aoc.csproj" />
+    <ProjectReference Include="Aquaq\Aquaq.csproj" />
+    <ProjectReference Include="Common\Common.csproj" />
+    <ProjectReference Include="Euler\Euler.csproj" />
   </ItemGroup>
 
 </Project>

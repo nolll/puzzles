@@ -1,5 +1,5 @@
-﻿using System.IO;
-using System.Text;
+﻿using System.Text;
+using System.IO;
 
 namespace Puzzles.Common.Files;
 

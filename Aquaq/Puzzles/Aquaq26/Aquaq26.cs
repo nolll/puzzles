@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
+using Pzl.Common;
 using Pzl.Tools.Combinatorics;
-using Pzl.Tools.Puzzles;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq26;

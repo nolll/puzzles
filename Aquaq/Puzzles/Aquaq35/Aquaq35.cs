@@ -1,5 +1,5 @@
-﻿using Pzl.Tools.Cryptography;
-using Pzl.Tools.Puzzles;
+﻿using Pzl.Common;
+using Pzl.Tools.Cryptography;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq35;

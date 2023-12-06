@@ -1,5 +1,5 @@
-﻿using Pzl.Tools.Graphs;
-using Pzl.Tools.Puzzles;
+﻿using Pzl.Common;
+using Pzl.Tools.Graphs;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq10;

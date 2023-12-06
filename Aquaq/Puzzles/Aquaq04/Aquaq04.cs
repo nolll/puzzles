@@ -1,5 +1,5 @@
-﻿using Pzl.Tools.Numbers;
-using Pzl.Tools.Puzzles;
+﻿using Pzl.Common;
+using Pzl.Tools.Numbers;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq04;
 

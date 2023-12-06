@@ -1,5 +1,5 @@
-﻿using Pzl.Tools.Ocr;
-using Pzl.Tools.Puzzles;
+﻿using Pzl.Common;
+using Pzl.Tools.Ocr;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201911;
 

@@ -1,6 +1,6 @@
-﻿using Pzl.Tools.Cryptography;
+﻿using Pzl.Common;
+using Pzl.Tools.Cryptography;
 using Pzl.Tools.Numbers;
-using Pzl.Tools.Puzzles;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq22;
 

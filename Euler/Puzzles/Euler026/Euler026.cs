@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 using System.Text.RegularExpressions;
-using Pzl.Tools.Puzzles;
+using Pzl.Common;
 
 namespace Pzl.Euler.Puzzles.Euler026;
 

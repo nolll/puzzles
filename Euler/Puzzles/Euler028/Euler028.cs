@@ -1,5 +1,5 @@
-﻿using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
-using Pzl.Tools.Puzzles;
+﻿using Pzl.Common;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Euler.Puzzles.Euler028;
 

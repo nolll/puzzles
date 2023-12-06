@@ -1,5 +1,5 @@
-﻿using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
-using Pzl.Tools.Puzzles;
+﻿using Pzl.Common;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq11;

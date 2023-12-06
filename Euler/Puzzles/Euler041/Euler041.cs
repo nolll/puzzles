@@ -1,6 +1,6 @@
-﻿using Pzl.Tools.Combinatorics;
+﻿using Pzl.Common;
+using Pzl.Tools.Combinatorics;
 using Pzl.Tools.Numbers;
-using Pzl.Tools.Puzzles;
 
 namespace Pzl.Euler.Puzzles.Euler041;
 

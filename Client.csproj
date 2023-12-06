@@ -18,16 +18,24 @@
   <ItemGroup>
     <Compile Remove="Aoc\**" />
     <Compile Remove="Aquaq\**" />
+    <Compile Remove="Common\**" />
     <Compile Remove="Tools\**" />
     <Compile Remove="Euler\**" />
     <EmbeddedResource Remove="Aoc\**" />
     <EmbeddedResource Remove="Aquaq\**" />
+    <EmbeddedResource Remove="Common\**" />
     <EmbeddedResource Remove="Tools\**" />
     <EmbeddedResource Remove="Euler\**" />
     <None Remove="Aoc\**" />
     <None Remove="Aquaq\**" />
+    <None Remove="Common\**" />
     <None Remove="Tools\**" />
     <None Remove="Euler\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Puzzles.v3.ncrunchproject" />
+    <None Remove="Puzzles.v3.ncrunchsolution" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,8 +52,14 @@
   <ItemGroup>
     <ProjectReference Include="Aoc\Aoc.csproj" />
     <ProjectReference Include="Aquaq\Aquaq.csproj" />
+    <ProjectReference Include="Common\Common.csproj" />
     <ProjectReference Include="Tools\Tools.csproj" />
     <ProjectReference Include="Euler\Euler.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Debug\" />
+    <Folder Include="Help\" />
   </ItemGroup>
 
 </Project>

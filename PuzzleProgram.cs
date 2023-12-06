@@ -1,5 +1,8 @@
-﻿using Pzl.Client.Runners;
-using Pzl.Tools.Puzzles;
+﻿using Pzl.Client.Debug;
+using Pzl.Client.Filter;
+using Pzl.Client.Help;
+using Pzl.Client.Running;
+using Pzl.Client.Running.Runners;
 using Spectre.Console;
 
 namespace Pzl.Client;
@@ -31,7 +34,7 @@ public class PuzzleProgram
             RunPuzzles(parameters);
     }
     
-    private void RunPuzzles(Parameters parameters)
+    private void RunPuzzles(Parameters.Parameters parameters)
     {
         var puzzles = _puzzleRepository.GetPuzzles();
         var filteredPuzzles = new PuzzleFilter(parameters).Filter(puzzles);
@@ -51,8 +54,8 @@ public class PuzzleProgram
         }
     }
 
-    private Parameters ParseParameters(IEnumerable<string> args) =>
+    private Parameters.Parameters ParseParameters(IEnumerable<string> args) =>
         DebugMode.IsDebugMode
-            ? new Parameters(tags: _debugTags.Split(',').ToList())
-            : Parameters.Parse(args);
+            ? new Parameters.Parameters(tags: _debugTags.Split(',').ToList())
+            : Parameters.Parameters.Parse(args);
 }

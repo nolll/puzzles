@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq25;
 
@@ -94,7 +95,7 @@ public class Aquaq25 : AquaqPuzzle
 
     public static string ClicksToMorse(string input)
     {
-        var timeStamps = InputReader.ReadLines(input)
+        var timeStamps = StringReader.ReadLines(input)
             .Select(o => o.Trim())
             .Where(o => o.Length > 0)
             .Select(o => DateTime.Parse($"2020-02-02 {o}"))

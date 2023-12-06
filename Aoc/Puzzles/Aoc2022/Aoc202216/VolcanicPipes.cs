@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202216;
 
@@ -21,7 +22,7 @@ public class VolcanicPipes
     {
         var valves = new List<string>();
         var tunnels = new Dictionary<string, List<string>>();
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
 
         foreach (var line in lines)
         {

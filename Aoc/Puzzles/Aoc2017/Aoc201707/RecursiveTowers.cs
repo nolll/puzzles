@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201707;
 
@@ -9,7 +10,7 @@ public class RecursiveTowers
 
     public RecursiveTowers(string input)
     {
-        var strings = InputReader.ReadLines(input);
+        var strings = StringReader.ReadLines(input);
         var discs = new Dictionary<string, Disc>();
         foreach (var strDisc in strings)
         {

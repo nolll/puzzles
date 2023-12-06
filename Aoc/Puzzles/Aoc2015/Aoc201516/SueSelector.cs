@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201516;
 
@@ -18,7 +19,7 @@ public class SueSelector
 
     private IList<Sue> ParseSues(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         return rows.Select(ParseSue).ToList();
     }
 

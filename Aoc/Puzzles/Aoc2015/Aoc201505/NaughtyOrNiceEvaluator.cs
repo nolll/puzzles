@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201505;
 
@@ -8,13 +9,13 @@ public class NaughtyOrNiceEvaluator
 
     public static int GetNiceCount1(string input)
     {
-        var strings = InputReader.ReadLines(input);
+        var strings = StringReader.ReadLines(input);
         return strings.Count(IsNice1);
     }
 
     public static int GetNiceCount2(string input)
     {
-        var strings = InputReader.ReadLines(input);
+        var strings = StringReader.ReadLines(input);
         return strings.Count(IsNice2);
     }
 

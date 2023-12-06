@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2023.Aoc202301;
 
@@ -29,12 +30,12 @@ public class Aoc202301 : AocPuzzle
     }
 
     public static List<int> FindCalibrationNumberPart1(string input)
-        => InputReader.ReadLines(input)
+        => StringReader.ReadLines(input)
             .Select(FindCalibrationNumber)
             .ToList();
 
     public static List<int> FindCalibrationNumberPart2(string input) 
-        => InputReader.ReadLines(input)
+        => StringReader.ReadLines(input)
             .Select(ReplaceStringDigits)
             .Select(FindCalibrationNumber)
             .ToList();

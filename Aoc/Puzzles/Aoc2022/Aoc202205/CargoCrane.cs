@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202205;
 
@@ -10,7 +11,7 @@ public class CargoCrane
 
     public CargoCrane(string input)
     {
-        var groups = InputReader.ReadLineGroupsWithWhiteSpace(input);
+        var groups = StringReader.ReadLineGroupsWithWhiteSpace(input);
         _stacks = ParseStacks(groups.First());
         _moves = groups[1];
     }

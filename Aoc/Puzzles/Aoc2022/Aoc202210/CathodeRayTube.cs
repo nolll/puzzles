@@ -1,5 +1,6 @@
 using Puzzles.Common.Ocr;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202210;
 
@@ -11,7 +12,7 @@ public class CathodeRayTube
     public (int sum, string letters, string image) Run(string input)
     {
         var values = new List<int>();
-        var lines = InputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         var cycle = 0;
         var x = 1;
         var command = "";

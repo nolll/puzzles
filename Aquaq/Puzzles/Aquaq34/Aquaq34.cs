@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq34;
 
@@ -19,7 +20,7 @@ public class Aquaq34 : AquaqPuzzle
 
     public static int LongestRouteTime(string input)
     {
-        var lines = InputReader.ReadLines(input).ToArray();
+        var lines = StringReader.ReadLines(input).ToArray();
         var dataLines = lines.Skip(1).ToArray();
         var trainNames = lines.First().Split(',').Skip(1).ToArray();
         var stationNames = lines.Skip(1).Select(o => o[..1]).ToArray();

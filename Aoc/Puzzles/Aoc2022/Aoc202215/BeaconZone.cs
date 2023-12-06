@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202215;
 
@@ -7,7 +8,7 @@ public class BeaconZone
 {
     public int Part1(string input, int y, bool print)
     {
-        var lines = InputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         var pairs = lines.Select(ParsePair).ToList();
 
         var beacons = pairs.Select(o => o.beacon).ToList();
@@ -50,7 +51,7 @@ public class BeaconZone
 
     public long Part2(string input, int size)
     {
-        var lines = InputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         var pairs = lines.Select(ParsePair).ToList();
 
         var beaconDistances = new Dictionary<MatrixAddress, int>();

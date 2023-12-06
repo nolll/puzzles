@@ -1,6 +1,7 @@
 ﻿using Puzzles.Common.Maths;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq36;
 
@@ -13,12 +14,12 @@ public class Aquaq36 : AquaqPuzzle
     protected override PuzzleResult Run()
     {
         var factorProvider = new FactorCache();
-        var tetonors = InputReader.ReadStringGroups(InputFile);
+        var tetonors = StringReader.ReadStringGroups(InputFile);
         var sum = 0;
 
         foreach (var tetonor in tetonors)
         {
-            var rows = InputReader.ReadLines(tetonor);
+            var rows = StringReader.ReadLines(tetonor);
             var grid = rows[0][2..].Split(' ').Select(int.Parse).ToList();
             var input = rows[1][2..].Split(' ').Select(o => (int?)(o == "*" ? null : int.Parse(o))).ToList();
             var result = Solve(grid, input, factorProvider);

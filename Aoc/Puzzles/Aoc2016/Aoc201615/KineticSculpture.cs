@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201615;
 
@@ -38,7 +39,7 @@ public class KineticSculpture
 
     private IList<KineticSculptureDisc> ParseDiscs(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         return rows.Select(ParseDisc).ToList();
     }
 

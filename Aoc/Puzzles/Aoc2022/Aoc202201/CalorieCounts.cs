@@ -1,4 +1,5 @@
 ﻿using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202201;
 
@@ -10,7 +11,7 @@ public class CalorieCounts
 
     public CalorieCounts(string input)
     {
-        var stringGroups = InputReader.ReadLineGroups(input);
+        var stringGroups = StringReader.ReadLineGroups(input);
         _sums = stringGroups.Select(o => o.Sum(int.Parse)).ToArray();
     }
 }

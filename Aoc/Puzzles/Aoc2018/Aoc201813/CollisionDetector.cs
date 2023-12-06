@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201813;
 
@@ -79,7 +80,7 @@ public class CollisionDetector
 
     private void BuildMatrixAndCarts(string input)
     {
-        var rows = InputReader.ReadLines(input).ToList();
+        var rows = StringReader.ReadLines(input).ToList();
         var width = rows.First().Length;
         var height = rows.Count();
         _matrix = new Matrix<char>(width, height);

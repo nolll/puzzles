@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201824;
 
@@ -111,7 +112,7 @@ public class ImmuneSystem
 
     private void ParseGroups(ImmuneSystemArmy army, string s, int boost)
     {
-        var rows = InputReader.ReadLines(s).Skip(1);
+        var rows = StringReader.ReadLines(s).Skip(1);
         var counter = 0;
         foreach (var row in rows)
         {

@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201523;
 
@@ -19,7 +20,7 @@ public class ChristmasComputer
         _registers['a'] = a;
         _registers['b'] = 0;
 
-        var instructions = InputReader.ReadLines(program);
+        var instructions = StringReader.ReadLines(program);
         var pointer = 0;
         while (pointer >= 0 && pointer < instructions.Count)
         {

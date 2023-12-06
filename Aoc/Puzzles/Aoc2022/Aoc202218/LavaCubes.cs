@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202218;
 
@@ -7,7 +8,7 @@ public class LavaCubes
 {
     public int Part1(string input)
     {
-        var cubes = InputReader.ReadLines(input)
+        var cubes = StringReader.ReadLines(input)
             .Select(o => o.Split(',').ToArray())
             .Select(o => new Cube(int.Parse(o[0]), int.Parse(o[1]), int.Parse(o[2])))
             .ToList();
@@ -30,7 +31,7 @@ public class LavaCubes
     {
         var padding = 1;
 
-        var cubes = InputReader.ReadLines(input)
+        var cubes = StringReader.ReadLines(input)
             .Select(o => o.Split(',').ToArray())
             .Select(o => new Cube(int.Parse(o[0]) + padding, int.Parse(o[1]) + padding, int.Parse(o[2]) + padding))
             .ToList();

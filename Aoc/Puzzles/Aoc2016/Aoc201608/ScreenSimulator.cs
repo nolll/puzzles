@@ -1,6 +1,7 @@
 ﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Ocr;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201608;
 
@@ -15,7 +16,7 @@ public class ScreenSimulator
 
     public ScreenSimulatorResult Run(string input)
     {
-        var instructions = InputReader.ReadLines(input).Select(CreateInstruction).ToList();
+        var instructions = StringReader.ReadLines(input).Select(CreateInstruction).ToList();
         foreach (var instruction in instructions)
         {
             instruction.Execute();

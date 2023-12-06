@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202208;
 
@@ -15,7 +16,7 @@ public class TreeHouse
 
     public TreeHouse(string input)
     {
-        var lines = InputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         var patchWidth = lines[0].Length;
         var patchHeight = lines.Count;
         _treeMatrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);

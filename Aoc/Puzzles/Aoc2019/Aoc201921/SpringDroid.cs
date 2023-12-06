@@ -1,5 +1,6 @@
 using Puzzles.Common.Computers.IntCode;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201921;
 
@@ -15,7 +16,7 @@ public class SpringDroid
     {
         _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
         _currentCommand = new List<char>();
-        _commands = InputReader.ReadLines(script.Trim());
+        _commands = StringReader.ReadLines(script.Trim());
     }
 
     public void Run()

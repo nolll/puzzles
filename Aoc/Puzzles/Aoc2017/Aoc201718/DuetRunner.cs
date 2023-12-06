@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201718;
 
@@ -11,7 +12,7 @@ public class DuetRunner
 
     public DuetRunner(string input)
     {
-        _operations = InputReader.ReadLines(input);
+        _operations = StringReader.ReadLines(input);
         _queues = new List<List<long>>
         {
             new List<long>(),

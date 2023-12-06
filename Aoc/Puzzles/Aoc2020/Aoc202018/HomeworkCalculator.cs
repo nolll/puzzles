@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202018;
 
@@ -12,7 +13,7 @@ public class HomeworkCalculator
 
     public long SumOfAll(string input, MathPrecedence precedence)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         return rows.Sum(o => Sum(o, precedence));
     }
 

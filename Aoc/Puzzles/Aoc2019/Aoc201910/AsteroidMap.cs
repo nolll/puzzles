@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2019.Aoc201910;
 
@@ -15,7 +16,7 @@ public class AsteroidMap
     private IList<IList<Asteroid?>> GetAsteroidMatrix(string map)
     {
         var asteroids = new List<IList<Asteroid?>>();
-        var rows = InputReader.ReadLines(map);
+        var rows = StringReader.ReadLines(map);
         for (var y = 0; y < rows.Count; y++)
         {
             var asteroidRow = new List<Asteroid?>();

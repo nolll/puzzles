@@ -1,6 +1,7 @@
 ﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq28;
 
@@ -22,7 +23,7 @@ public class Aquaq28 : AquaqPuzzle
 
     public static string Encrypt(string input, string word)
     {
-        var lines = InputReader.ReadLines(input)
+        var lines = StringReader.ReadLines(input)
             .Skip(1).SkipLast(1)
             .Select(o => o.Substring(1, o.Length - 2));
         var matrixInput = string.Join(Environment.NewLine, lines);

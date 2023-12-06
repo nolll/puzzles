@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201802;
 
@@ -9,7 +10,7 @@ public class SimilarIdsPuzzle
 
     public SimilarIdsPuzzle(string input)
     {
-        var ids = InputReader.ReadLines(input);
+        var ids = StringReader.ReadLines(input);
         var similarIds = GetSimilarIds(ids);
         if (similarIds.Count != 2)
             throw new WrongNumberOfSimilarIdsException(similarIds);

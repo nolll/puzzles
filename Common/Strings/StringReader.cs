@@ -1,6 +1,6 @@
 ﻿namespace Puzzles.Common.Strings;
 
-public static class InputReader
+public static class StringReader
 {
     private static readonly string LineBreak = Environment.NewLine;
     private static readonly string DoubleLineBreak = $"{LineBreak}{LineBreak}";

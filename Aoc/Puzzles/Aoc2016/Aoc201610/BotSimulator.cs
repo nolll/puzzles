@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201610;
 
@@ -9,7 +10,7 @@ public class BotSimulator
 
     public BotSimulator(string input)
     {
-        var instructions = InputReader.ReadLines(input);
+        var instructions = StringReader.ReadLines(input);
         var valueInstructions = new List<string>();
         var passInstructions = new List<string>();
         _bots = new Dictionary<int, Bot>();

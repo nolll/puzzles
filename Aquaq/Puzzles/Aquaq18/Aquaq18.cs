@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq18;
 
@@ -9,7 +10,7 @@ public class Aquaq18 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var sum = InputReader.ReadLines(InputFile)
+        var sum = StringReader.ReadLines(InputFile)
             .Select(o => DateTime.Parse($"2020-02-02 {o}"))
             .Select(StepsToPalindrome)
             .Sum();

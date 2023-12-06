@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202005;
 
@@ -10,7 +11,7 @@ public class BoardingCardProcessor
 
     public BoardingCardProcessor(string input)
     {
-        _boardingCards = InputReader.ReadLines(input).Select(BoardingCard.Parse);
+        _boardingCards = StringReader.ReadLines(input).Select(BoardingCard.Parse);
     }
 
     public BoardingCard? FindMySeat()

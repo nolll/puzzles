@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201624;
 
@@ -103,7 +104,7 @@ public class AirDuctNavigator
     {
         _locations = new List<AirDuctLocation>();
         _matrix = new Matrix<char>();
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         var y = 0;
         foreach (var row in rows)
         {

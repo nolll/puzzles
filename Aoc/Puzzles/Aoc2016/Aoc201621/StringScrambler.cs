@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201621;
 
@@ -31,7 +32,7 @@ public class StringScrambler
     private IList<IScrambleInstruction> ParseInstructions(string input)
     {
         var instructions = new List<IScrambleInstruction>();
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         foreach (var row in rows)
         {
             instructions.Add(ParseInstruction(row));

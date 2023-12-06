@@ -1,6 +1,7 @@
 ﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq11;
 
@@ -19,7 +20,7 @@ public class Aquaq11 : AquaqPuzzle
 
     public static int CountRequiredTiles(string input)
     {
-        var areas = InputReader.ReadLines(input)
+        var areas = StringReader.ReadLines(input)
             .Skip(1)
             .Select(line => line.Split(',').Select(int.Parse).ToArray())
             .Select(o => new TileSquare(new MatrixAddress(o[0], o[1]), new MatrixAddress(o[2], o[3])))

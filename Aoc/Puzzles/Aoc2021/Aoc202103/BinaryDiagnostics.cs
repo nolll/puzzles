@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202103;
 
@@ -6,7 +7,7 @@ public class BinaryDiagnostics
 {
     public int GetFuelConsumption(string input)
     {
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         var charLists = lines.Select(o => o.ToCharArray()).ToList();
 
         var size = charLists.First().Length;
@@ -45,7 +46,7 @@ public class BinaryDiagnostics
 
     public int GetLifeSupportRating(string input)
     {
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         var charLists = lines.Select(o => o.ToCharArray()).ToList();
         var size = lines.First().Length;
         var oxygenGeneratorRating = charLists.ToList();

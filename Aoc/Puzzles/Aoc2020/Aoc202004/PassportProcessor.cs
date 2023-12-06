@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202004;
 
@@ -8,7 +9,7 @@ public class PassportProcessor
 
     public PassportProcessor(string input)
     {
-        var rows = InputReader.ReadLines(input.Replace("\r\n\r\n", "--").Replace("\r\n", " ").Replace("--", "\r\n"));
+        var rows = StringReader.ReadLines(input.Replace("\r\n\r\n", "--").Replace("\r\n", " ").Replace("--", "\r\n"));
         _passports = rows.Select(o => new Passport(o.Trim())).ToList();
     }
 

@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202112;
 
@@ -10,7 +11,7 @@ public class CaveSystem
     public CaveSystem(string input, bool allowSmallRevisit)
     {
         _allowSmallRevisit = allowSmallRevisit;
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         _connections = new Dictionary<string, HashSet<string>>();
         foreach (var line in lines)
         {

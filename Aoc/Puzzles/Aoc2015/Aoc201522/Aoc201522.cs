@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201522;
 
@@ -25,7 +26,7 @@ public class Aoc201522 : AocPuzzle
 
     private Params GetParams()
     {
-        var rows = InputReader.ReadLines(InputFile);
+        var rows = StringReader.ReadLines(InputFile);
 
         return new Params
         {

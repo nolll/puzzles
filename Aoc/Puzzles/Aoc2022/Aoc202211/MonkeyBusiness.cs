@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202211;
 
@@ -49,7 +50,7 @@ public class MonkeyBusiness
 
     private static Monkey[] ParseMonkeys(string input)
     {
-        return InputReader.ReadLineGroups(input)
+        return StringReader.ReadLineGroups(input)
             .Select(ParseMonkey)
             .ToArray();
     }

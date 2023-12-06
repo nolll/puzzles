@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201812;
 
@@ -11,7 +12,7 @@ public class PlantSpreader
 
     public PlantSpreader(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         var state = rows.First().Split(' ')[2];
         var paddingStr = "..............................................................................................................................................................................................................................................................................................................................................................";
         state = $"{paddingStr}{state}{paddingStr}";

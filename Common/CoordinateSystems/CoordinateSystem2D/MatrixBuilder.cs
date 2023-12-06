@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 
@@ -6,13 +7,13 @@ public static class MatrixBuilder
 {
     public static Matrix<char> BuildCharMatrix(string input, char defaultValue = default)
     {
-        var rows = InputReader.ReadLines(input.Trim()).Select(o => o.Trim()).ToArray();
+        var rows = StringReader.ReadLines(input.Trim()).Select(o => o.Trim()).ToArray();
         return BuildCharMatrix(new Matrix<char>(1, 1, defaultValue), rows);
     }
 
     public static Matrix<char> BuildCharMatrixWithoutTrim(string input, char defaultValue = default)
     {
-        var rows = InputReader.ReadLines(input).ToArray();
+        var rows = StringReader.ReadLines(input).ToArray();
         return BuildCharMatrixWithoutTrim(new Matrix<char>(1, 1, defaultValue), rows);
     }
 
@@ -59,7 +60,7 @@ public static class MatrixBuilder
     public static Matrix<int> BuildIntMatrixFromSpaceSeparated(string input, int defaultValue = default)
     {
         var matrix = new Matrix<int>(1, 1, defaultValue);
-        var rows = InputReader.ReadLines(input.Trim());
+        var rows = StringReader.ReadLines(input.Trim());
         var y = 0;
         foreach (var row in rows)
         {
@@ -86,7 +87,7 @@ public static class MatrixBuilder
 
     private static Matrix<int> BuildIntMatrixFromNonSeparated(Matrix<int> matrix, string input)
     {
-        var rows = InputReader.ReadLines(input.Trim());
+        var rows = StringReader.ReadLines(input.Trim());
         var y = 0;
         foreach (var row in rows)
         {
@@ -107,7 +108,7 @@ public static class MatrixBuilder
 
     private static (int w, int h) GetNonSeparatedSize(string input)
     {
-        var rows = InputReader.ReadLines(input.Trim());
+        var rows = StringReader.ReadLines(input.Trim());
         var w = rows.First().Trim().Length;
         var h = rows.Count();
         return (w, h);

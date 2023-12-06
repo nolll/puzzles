@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq00;
 
@@ -9,7 +10,7 @@ public class Aquaq00 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var keyPresses = InputReader.ReadLines(InputFile)
+        var keyPresses = StringReader.ReadLines(InputFile)
             .Select(o => o.Trim().Split(' ').ToArray())
             .Select(o => (int.Parse(o[0]), int.Parse(o[1])));
 

@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202021;
 
@@ -8,7 +9,7 @@ public class AllergenDetector
 
     public AllergenDetector(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         _foods = rows.Select(Food.Parse);
     }
 

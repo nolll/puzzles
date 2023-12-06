@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202024;
 
@@ -23,7 +24,7 @@ public class HexagonalFloor
 
     public HexagonalFloor(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         _instructions = rows.Select(ParseInstruction);
         _matrix = new Matrix<char>(defaultValue: Nothing);
         _adjacentCoordsCache = new Dictionary<string, List<MatrixAddress>>();

@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201712;
 
@@ -9,7 +10,7 @@ public class Pipes
 
     public Pipes(string input)
     {
-        var strRows = InputReader.ReadLines(input);
+        var strRows = StringReader.ReadLines(input);
         var dictionary = new Dictionary<int, IList<int>>();
         var groups = new List<List<int>>();
 

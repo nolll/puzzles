@@ -1,6 +1,7 @@
 ﻿using Puzzles.Common.Graphs;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq21;
 
@@ -15,7 +16,7 @@ public class Aquaq21 : AquaqPuzzle
 
     public static int Run(string input, int width)
     {
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         var rows = lines.Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();
 
         var inputs = new List<Graph.Input>();

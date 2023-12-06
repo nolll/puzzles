@@ -1,4 +1,5 @@
 ﻿using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202203;
 
@@ -6,13 +7,13 @@ public static class Rucksacks
 {
     public static int GetPriority1(string input)
     {
-        var lines = InputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         return GetPrioritySumForLines(lines);
     }
 
     public static int GetPriority2(string input)
     {
-        var lines = InputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         return GetPrioritySumForGroups(lines);
     }
 

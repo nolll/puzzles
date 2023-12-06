@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201612;
 
@@ -11,7 +12,7 @@ public class MonorailComputer
 
     public MonorailComputer(string input, int a, int c)
     {
-        var instructions = InputReader.ReadLines(input).ToArray();
+        var instructions = StringReader.ReadLines(input).ToArray();
         _registers = new Dictionary<char, int>
         {
             ['a'] = a,

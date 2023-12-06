@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201822;
 
@@ -9,7 +10,7 @@ public class Aoc201822 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var rows = InputReader.ReadLines(InputFile);
+        var rows = StringReader.ReadLines(InputFile);
         var depth = int.Parse(rows.First().Split(' ').Last());
         var targetCoords = rows.Last().Split(' ').Last().Split(',').Select(int.Parse).ToList();
         var targetX = targetCoords.First();
@@ -21,7 +22,7 @@ public class Aoc201822 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var rows = InputReader.ReadLines(InputFile);
+        var rows = StringReader.ReadLines(InputFile);
         var depth = int.Parse(rows.First().Split(' ').Last());
         var targetCoords = rows.Last().Split(' ').Last().Split(',').Select(int.Parse).ToList();
         var targetX = targetCoords.First();

@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201817;
 
@@ -92,7 +93,7 @@ public class ReservoirFiller
         _matrix.MoveTo(_source);
         _matrix.WriteValue(SourceTile);
 
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
 
         foreach (var row in rows)
         {

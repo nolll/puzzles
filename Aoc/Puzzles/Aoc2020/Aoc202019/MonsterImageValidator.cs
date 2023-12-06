@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202019;
 
@@ -13,7 +14,7 @@ public class MonsterImageValidator
 
     public MonsterImageValidator(string input, bool useRecursiveRules = false)
     {
-        var groups = InputReader.ReadLineGroups(input);
+        var groups = StringReader.ReadLineGroups(input);
         var ruleStrings = groups[0];
         _messages = groups.Count > 1 ? groups[1] : new List<string>();
         _rules = ParseRules(ruleStrings);

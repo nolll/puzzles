@@ -1,6 +1,7 @@
 ﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2023.Aoc202303;
 
@@ -24,7 +25,7 @@ public class Aoc202303 : AocPuzzle
 
     public static Result Run(string input)
     {
-        var lines = InputReader.ReadLines(input); ;
+        var lines = StringReader.ReadLines(input); ;
         var width = lines.First().Length;
         var height = lines.Count;
         var numberCoordList = FindNumberCoords(lines);

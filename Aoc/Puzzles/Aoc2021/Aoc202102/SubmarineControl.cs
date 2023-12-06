@@ -1,4 +1,5 @@
 ﻿using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202102;
 
@@ -14,7 +15,7 @@ public class SubmarineControl
     public SubmarineControl(string input, bool useAim)
     {
         _useAim = useAim;
-        _lines = InputReader.ReadLines(input);
+        _lines = StringReader.ReadLines(input);
 
         _x = 0;
         _y = 0;

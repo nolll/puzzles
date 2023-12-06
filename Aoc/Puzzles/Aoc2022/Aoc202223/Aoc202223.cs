@@ -1,6 +1,7 @@
 ﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202223;
 
@@ -146,7 +147,7 @@ public class Aoc202223 : AocPuzzle
     private HashSet<MatrixAddress> ParseElves(string input)
     {
         var elves = new HashSet<MatrixAddress>();
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         for (var y = 0; y < lines.Count; y++)
         {
             var line = lines[y];

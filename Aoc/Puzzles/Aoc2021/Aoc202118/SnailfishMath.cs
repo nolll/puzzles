@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202118;
 
@@ -12,7 +13,7 @@ public class SnailfishMath
 
     public int LargestMagnitude(string input)
     {
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         var largestMagnitude = 0;
         foreach (var line1 in lines)
         {
@@ -158,7 +159,7 @@ public class SnailfishMath
 
     private static List<SnailfishNumber> ParseNumbers(string input)
     {
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         var numbers = lines.Select(o => new SnailfishNumber(o)).ToList();
         return numbers;
     }

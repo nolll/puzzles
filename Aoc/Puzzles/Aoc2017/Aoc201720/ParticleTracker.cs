@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201720;
 
@@ -14,7 +15,7 @@ public class ParticleTracker
 
     private IList<Particle> ReadData(string data)
     {
-        var rows = InputReader.ReadLines(data);
+        var rows = StringReader.ReadLines(data);
         var particles = new List<Particle>();
         var id = 0;
         foreach (var row in rows)

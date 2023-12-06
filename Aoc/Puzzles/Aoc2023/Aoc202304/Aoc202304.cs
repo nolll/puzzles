@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2023.Aoc202304;
 
@@ -23,7 +24,7 @@ public class Aoc202304 : AocPuzzle
 
     public static (int Score, int CardCount) FlipThroughCards(string input)
     {
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         var totalScore = 0;
         var cards = new Dictionary<int, int>();
         var index = 1;

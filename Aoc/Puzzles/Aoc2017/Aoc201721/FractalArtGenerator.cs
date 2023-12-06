@@ -1,6 +1,7 @@
 using System.Text;
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201721;
 
@@ -33,7 +34,7 @@ public class FractalArtGenerator
 
     private static IList<FractalRule> ParseRules(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         return rows.Select(ParseRule).ToList();
     }
 

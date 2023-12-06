@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201622;
 
@@ -81,7 +82,7 @@ public class StorageGrid
 
     private Matrix<StorageNode> ParseGrid(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         var dataRows = rows.Skip(2);
         var matrix = new Matrix<StorageNode>();
 

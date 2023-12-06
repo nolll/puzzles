@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201804;
 
@@ -7,7 +8,7 @@ public static class GuardEventReader
 {
     public static List<GuardEvent> Read(string str)
     {
-        return InputReader.ReadLines(str).Select(ConvertToGuardEvent).OrderBy(o => o.Timestamp).ToList();
+        return StringReader.ReadLines(str).Select(ConvertToGuardEvent).OrderBy(o => o.Timestamp).ToList();
     }
 
     private static GuardEvent ConvertToGuardEvent(string str)

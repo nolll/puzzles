@@ -1,4 +1,5 @@
 ﻿using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202101;
 
@@ -6,7 +7,7 @@ public class DepthMeasurement
 {
     public int GetNumberOfIncreasingMeasurements(string input, bool useSlidingWindow)
     {
-        var depths = InputReader.ReadLines(input).Select(int.Parse).ToList();
+        var depths = StringReader.ReadLines(input).Select(int.Parse).ToList();
 
         var count = 0;
         var prev = 0;

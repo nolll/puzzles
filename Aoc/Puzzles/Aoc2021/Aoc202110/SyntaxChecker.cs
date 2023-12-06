@@ -1,5 +1,6 @@
 using System.Text;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202110;
 
@@ -24,14 +25,14 @@ public class SyntaxChecker
 
     public int GetTotalErrorScore(string input)
     {
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
 
         return lines.Sum(GetErrorScore);
     }
 
     public long FindMiddleScore(string input)
     {
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         var completionStrings = new List<string>();
             
         foreach (var line in lines)

@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201623;
 
@@ -12,7 +13,7 @@ public class SafeCrackingComputerPart1
 
     public SafeCrackingComputerPart1(string input, int a, int c)
     {
-        _instructions = InputReader.ReadLines(input).ToArray();
+        _instructions = StringReader.ReadLines(input).ToArray();
         _registers = new Dictionary<char, int>
         {
             ['a'] = a,

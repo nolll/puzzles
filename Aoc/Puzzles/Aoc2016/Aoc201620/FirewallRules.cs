@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201620;
 
@@ -13,7 +14,7 @@ public class FirewallRules
 
     public long? GetLowestUnblockedIp()
     {
-        var blockedRanges = InputReader.ReadLines(_input).Select(ParseIpRange).OrderBy(o => o.Start).ToArray();
+        var blockedRanges = StringReader.ReadLines(_input).Select(ParseIpRange).OrderBy(o => o.Start).ToArray();
         long ip = 0;
         while (true)
         {
@@ -29,7 +30,7 @@ public class FirewallRules
     public long GetAllowedIpCount(long upperbound)
     {
         var rangesWithoutOverlaps = new List<IpRange>();
-        var blockedRanges = InputReader.ReadLines(_input).Select(ParseIpRange).ToList();
+        var blockedRanges = StringReader.ReadLines(_input).Select(ParseIpRange).ToList();
         while (blockedRanges.Any())
         {
             var range = blockedRanges.First();

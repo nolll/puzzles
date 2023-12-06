@@ -1,5 +1,6 @@
 using Puzzles.Common.Combinatorics;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201611;
 
@@ -91,7 +92,7 @@ public class RadioisotopeSimulator
 
     private RadioisotopeFacility ParseFacility(string input)
     {
-        var strFloors = InputReader.ReadLines(input);
+        var strFloors = StringReader.ReadLines(input);
         return new RadioisotopeFacility(strFloors.Select(ParseFloor).ToList(), 0, _isotopeNameProvider, _anonymousNameProvider);
     }
 

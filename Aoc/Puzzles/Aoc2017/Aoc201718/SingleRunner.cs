@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201718;
 
@@ -10,7 +11,7 @@ public class SingleRunner
 
     public SingleRunner(string input)
     {
-        _operations = InputReader.ReadLines(input);
+        _operations = StringReader.ReadLines(input);
     }
 
     public void Run()

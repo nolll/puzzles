@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2023.Aoc202305;
 
@@ -24,7 +25,7 @@ public class Aoc202305 : AocPuzzle
 
     public static long Part1(string input)
     {
-        var groups = InputReader.ReadLineGroups(input);
+        var groups = StringReader.ReadLineGroups(input);
 
         var seeds = ParseSeeds(groups.First());
         var rangeGroups = groups.Skip(1).Select(ParseGroup).ToList();
@@ -53,7 +54,7 @@ public class Aoc202305 : AocPuzzle
 
     public static long Part2(string input)
     {
-        var groups = InputReader.ReadLineGroups(input);
+        var groups = StringReader.ReadLineGroups(input);
 
         var seedNumbers = ParseSeeds(groups.First());
         var rangeGroups = groups.Skip(1).Select(ParseGroup).ToList();

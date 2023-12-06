@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202114;
 
@@ -6,7 +7,7 @@ public class Polymerization
 {
     public long Run(string input, int stepCount)
     {
-        var groups = InputReader.ReadLineGroups(input);
+        var groups = StringReader.ReadLineGroups(input);
 
         var rules = new Dictionary<(char, char), char>();
         foreach (var strRule in groups[1])

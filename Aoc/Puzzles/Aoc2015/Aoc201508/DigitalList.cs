@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201508;
 
@@ -9,7 +10,7 @@ public class DigitalList
 
     public DigitalList(string input)
     {
-        var strings = InputReader.ReadLines(input);
+        var strings = StringReader.ReadLines(input);
         var codeCount = strings.Sum(CountCode);
         var memoryCount = strings.Sum(CountMemory);
         var encodedCount = strings.Sum(CountEncoded);

@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201803;
 
@@ -7,7 +8,7 @@ public static class ClaimListReader
 {
     public static List<Claim> Read(string str)
     {
-        return InputReader.ReadLines(str).Select(ConvertToClaim).ToList();
+        return StringReader.ReadLines(str).Select(ConvertToClaim).ToList();
     }
 
     private static Claim ConvertToClaim(string str)

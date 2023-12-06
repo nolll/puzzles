@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202214;
 
@@ -55,7 +56,7 @@ public class FallingSand
     private static Matrix<char> BuildMatrix(string input, int part)
     {
         var matrix = new Matrix<char>(1, 1, '.');
-        var lines = InputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
 
         var coordLists = lines.Select(o => o.Split(" -> "));
         foreach (var coordList in coordLists)

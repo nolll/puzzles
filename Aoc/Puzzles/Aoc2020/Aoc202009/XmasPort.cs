@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Combinatorics;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202009;
 
@@ -10,7 +11,7 @@ public class XmasPort
 
     public XmasPort(string input, int preambleLength)
     {
-        _values = InputReader.ReadLines(input).Select(long.Parse).ToList();
+        _values = StringReader.ReadLines(input).Select(long.Parse).ToList();
         _preambleLength = preambleLength;
     }
 

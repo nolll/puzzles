@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201724;
 
@@ -41,7 +42,7 @@ public class BridgeBuilder
 
     private void InitComponents(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         _components = rows.Select(ParseComponent).ToList();
     }
 

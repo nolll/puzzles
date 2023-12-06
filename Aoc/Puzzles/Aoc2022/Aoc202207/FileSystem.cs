@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202207;
 
@@ -37,7 +38,7 @@ public class FileSystem
 
     private static ElfDirectory ParseFileSystem(string input)
     {
-        var lines = InputReader.ReadLines(input, false).Skip(1);
+        var lines = StringReader.ReadLines(input, false).Skip(1);
 
         var fileSystem = new ElfDirectory();
         var currentDir = fileSystem;

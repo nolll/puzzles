@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201507;
 
@@ -28,7 +29,7 @@ public class Circuit
 
     private IDictionary<string, Wire> GetWires(string input)
     {
-        var strings = InputReader.ReadLines(input);
+        var strings = StringReader.ReadLines(input);
         var wires = new Dictionary<string, Wire>();
         foreach (var s in strings)
         {

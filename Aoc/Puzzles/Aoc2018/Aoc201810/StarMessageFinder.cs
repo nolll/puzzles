@@ -1,6 +1,7 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Ocr;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2018.Aoc201810;
 
@@ -47,7 +48,7 @@ public class StarMessageFinder
 
     private IEnumerable<StarPosition> ParsePositions(string input)
     {
-        var strings = InputReader.ReadLines(input);
+        var strings = StringReader.ReadLines(input);
         foreach (var s in strings)
         {
             yield return ParsePosition(s);

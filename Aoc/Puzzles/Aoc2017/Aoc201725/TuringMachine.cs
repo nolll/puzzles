@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201725;
 
@@ -15,7 +16,7 @@ public class TuringMachine
         _tape = new LinkedList<int>();
         _cursor = _tape.AddFirst(0);
 
-        var rows = InputReader.ReadLines(input.Replace("-", "").Replace(".", "").Replace(":", ""), true);
+        var rows = StringReader.ReadLines(input.Replace("-", "").Replace(".", "").Replace(":", ""), true);
 
         var beginRow = rows[0];
         _startState = beginRow.Split(' ')[3].First();

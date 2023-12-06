@@ -1,5 +1,6 @@
 using Puzzles.Common.Combinatorics;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201517;
 
@@ -9,7 +10,7 @@ public class EggnogContainers
 
     public EggnogContainers(string input)
     {
-        _containers = InputReader.ReadLines(input).Select((o, index) => new EggnogContainer(index, int.Parse((string) o))).ToList();
+        _containers = StringReader.ReadLines(input).Select((o, index) => new EggnogContainer(index, int.Parse((string) o))).ToList();
     }
         
     public IList<List<EggnogContainer>> GetCombinations(int targetVolume)

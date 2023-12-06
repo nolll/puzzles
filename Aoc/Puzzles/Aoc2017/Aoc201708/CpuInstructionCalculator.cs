@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201708;
 
@@ -11,7 +12,7 @@ public class CpuInstructionCalculator
     public CpuInstructionCalculator(string input)
     {
         _registers = new Dictionary<string, int>();
-        var instructions = InputReader.ReadLines(input);
+        var instructions = StringReader.ReadLines(input);
             
         foreach (var instruction in instructions)
         {

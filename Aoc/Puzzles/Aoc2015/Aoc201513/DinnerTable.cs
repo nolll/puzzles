@@ -1,5 +1,6 @@
 using Puzzles.Common.Combinatorics;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201513;
 
@@ -36,7 +37,7 @@ public class DinnerTable
 
     private IDictionary<string, DinnerGuest> ParseGuests(string input, bool includeMe)
     {
-        var rules = InputReader.ReadLines(input);
+        var rules = StringReader.ReadLines(input);
         var guests = new Dictionary<string, DinnerGuest>();
 
         if (includeMe)

@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq13;
 
@@ -9,7 +10,7 @@ public class Aquaq13 : AquaqPuzzle
 
     protected override PuzzleResult Run()
     {
-        var lines = InputReader.ReadLines(InputFile);
+        var lines = StringReader.ReadLines(InputFile);
         var sum = lines.Sum(FindMaxRepeats);
 
         return new PuzzleResult(sum, "86680930d41e9acceb49215121585640");

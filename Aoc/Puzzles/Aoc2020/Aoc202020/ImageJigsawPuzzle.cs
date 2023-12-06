@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202020;
 
@@ -13,7 +14,7 @@ public class ImageJigsawPuzzle
         
     public ImageJigsawPuzzle(string input)
     {
-        var groups = InputReader.ReadStringGroups(input);
+        var groups = StringReader.ReadStringGroups(input);
         TilesById = new Dictionary<long, JigsawTile>();
         foreach (var group in groups)
         {

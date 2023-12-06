@@ -1,5 +1,6 @@
 using Puzzles.Common.Combinatorics;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201509;
 
@@ -97,7 +98,7 @@ public class RouteCalculator
 
     private IList<Distance> GetDistances(string input)
     {
-        return InputReader.ReadLines(input).Select(CreateDistance).ToList();
+        return StringReader.ReadLines(input).Select(CreateDistance).ToList();
     }
 
     private Distance CreateDistance(string s)

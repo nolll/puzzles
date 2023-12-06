@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201715;
 
@@ -18,7 +19,7 @@ public class GeneratorDuel
 
     public static GeneratorDuel Parse(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         var startValues = rows.Select(o => long.Parse(o.Split(' ').Last())).ToList();
 
         return new GeneratorDuel(startValues.First(), startValues.Last());

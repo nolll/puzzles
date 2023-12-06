@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202025;
 
@@ -10,7 +11,7 @@ public class EncryptionKeyFinder
 
     public EncryptionKeyFinder(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         _cardPublicKey = long.Parse(rows[0]);
         _doorPublicKey = long.Parse(rows[1]);
     }

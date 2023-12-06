@@ -1,6 +1,7 @@
 ﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq14;
 
@@ -31,7 +32,7 @@ public class Aquaq14 : AquaqPuzzle
 
     public static int PlayBingo(string input)
     {
-        var games = InputReader.ReadLines(input).Select(o => o.Split(' ').Select(int.Parse));
+        var games = StringReader.ReadLines(input).Select(o => o.Split(' ').Select(int.Parse));
 
         var totalSum = 0;
         foreach (var numbers in games)
@@ -58,7 +59,7 @@ public class Aquaq14 : AquaqPuzzle
 
     private static Dictionary<int, MatrixAddress> BuildBoard()
     {
-        var boardLines = InputReader.ReadLines(BoardInput.Replace("  ", " "));
+        var boardLines = StringReader.ReadLines(BoardInput.Replace("  ", " "));
         var board = new Dictionary<int, MatrixAddress>();
 
         var y = 0;

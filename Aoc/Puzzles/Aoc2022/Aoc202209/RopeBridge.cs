@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202209;
 
@@ -17,7 +18,7 @@ public class RopeBridge
 
     private int Run(string input, int knotCount)
     {
-        var lines = InputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         var visited = new HashSet<MatrixAddress>();
         var knots = new MatrixAddress[knotCount];
         for (var i = 0; i < knotCount; i++)

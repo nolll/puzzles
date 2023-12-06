@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2016.Aoc201607;
 
@@ -6,13 +7,13 @@ public class IpTester
 {
     public int TlsSupportCount(string input)
     {
-        var ips = InputReader.ReadLines(input);
+        var ips = StringReader.ReadLines(input);
         return ips.Count(SupportsTls);
     }
 
     public int SslSupportCount(string input)
     {
-        var ips = InputReader.ReadLines(input);
+        var ips = StringReader.ReadLines(input);
         return ips.Count(SupportsSsl);
     }
 

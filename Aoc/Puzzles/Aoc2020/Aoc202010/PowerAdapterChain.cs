@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202010;
 
@@ -9,7 +10,7 @@ public class PowerAdapterChain
 
     public PowerAdapterChain(string input)
     {
-        _adapters = InputReader.ReadLines(input).Select(int.Parse).OrderBy(o => o).ToList();
+        _adapters = StringReader.ReadLines(input).Select(int.Parse).OrderBy(o => o).ToList();
         var currentValue = 0;
         var diffOneCount = 0;
         var diffThreeCount = 0;

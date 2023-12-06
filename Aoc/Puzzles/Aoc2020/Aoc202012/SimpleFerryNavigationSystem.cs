@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202012;
 
@@ -11,7 +12,7 @@ public class SimpleFerryNavigationSystem
         
     public SimpleFerryNavigationSystem(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         _intructions = rows.Select(FerryNavigationInstruction.Parse);
 
         _matrix = new Matrix<int>();

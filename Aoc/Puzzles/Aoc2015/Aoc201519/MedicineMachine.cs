@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201519;
 
@@ -8,7 +9,7 @@ public class MedicineMachine
 
     public MedicineMachine(string input)
     {
-        _replacements = InputReader.ReadLines(input).Select(ParseReplacement).OrderByDescending(o => o.Right.Length).ThenBy(o => o.Right);
+        _replacements = StringReader.ReadLines(input).Select(ParseReplacement).OrderByDescending(o => o.Right.Length).ThenBy(o => o.Right);
     }
 
     public IList<string> GetCalibrationMolecules(string startMolecule)

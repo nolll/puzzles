@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201723;
 
@@ -14,7 +15,7 @@ public class CoProcessor
     public long RegisterH => _registers["h"];
 
     public CoProcessor(string input, long registerA = 0)
-        : this(InputReader.ReadLines(input), registerA)
+        : this(StringReader.ReadLines(input), registerA)
     {
     }
 

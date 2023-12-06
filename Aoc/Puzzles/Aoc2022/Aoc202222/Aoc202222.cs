@@ -1,6 +1,7 @@
 ﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202222;
 
@@ -22,7 +23,7 @@ public class Aoc202222 : AocPuzzle
 
     public static int Part1(string input)
     {
-        var groups = InputReader.ReadStringGroupsWithWhitespace(input);
+        var groups = StringReader.ReadStringGroupsWithWhitespace(input);
         var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(groups[0], ' ');
         matrix.MoveTo(0, 0);
         matrix.TurnTo(MatrixDirection.Right);
@@ -100,7 +101,7 @@ public class Aoc202222 : AocPuzzle
 
     public static int Part2(string input)
     {
-        var groups = InputReader.ReadStringGroupsWithWhitespace(input);
+        var groups = StringReader.ReadStringGroupsWithWhitespace(input);
         var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(groups[0], ' ');
         matrix.MoveTo(0, 0);
         matrix.TurnTo(MatrixDirection.Right);

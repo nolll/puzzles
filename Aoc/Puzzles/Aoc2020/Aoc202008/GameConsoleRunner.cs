@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202008;
 
@@ -10,12 +11,12 @@ public class GameConsoleRunner
     public GameConsoleRunner(string input)
     {
         _input = input;
-        _instructionCount = InputReader.ReadLines(input).Count;
+        _instructionCount = StringReader.ReadLines(input).Count;
     }
 
     public static IList<GameConsoleInstruction> ParseInstructions(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         return rows.Select(GameConsoleInstruction.Parse).ToList();
     }
 

@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202014;
 
@@ -8,7 +9,7 @@ public class BitmaskSystem2
     {
         var bitmask = "";
         var mem = new Dictionary<long, long>();
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         foreach (var row in rows)
         {
             if (row.StartsWith("mask"))

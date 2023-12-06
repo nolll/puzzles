@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202213;
 
@@ -6,7 +7,7 @@ public class DistressSignal
 {
     public int Part1(string input)
     {
-        var lineGroups = InputReader.ReadLineGroups(input);
+        var lineGroups = StringReader.ReadLineGroups(input);
         var indexSum = 0;
         
         for (var i = 0; i < lineGroups.Count; i++)
@@ -25,7 +26,7 @@ public class DistressSignal
 
     public int Part2(string input)
     {
-        var lines = InputReader.ReadLines(input, false);
+        var lines = StringReader.ReadLines(input, false);
         var items = lines.Select(ParseSignalItem).ToList();
         var dividerItems = CreateDividerItems();
         items.AddRange(dividerItems);

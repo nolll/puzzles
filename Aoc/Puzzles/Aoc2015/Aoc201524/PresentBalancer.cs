@@ -1,5 +1,6 @@
 using Puzzles.Common.Combinatorics;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201524;
 
@@ -9,7 +10,7 @@ public class PresentBalancer
 
     public PresentBalancer(string input, int groupCount)
     {
-        var presents = InputReader.ReadLines(input).Select(long.Parse).ToList();
+        var presents = StringReader.ReadLines(input).Select(long.Parse).ToList();
         presents.Reverse();
         var sum = presents.Sum();
         var partitionSum = sum / groupCount;

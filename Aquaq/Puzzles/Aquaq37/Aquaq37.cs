@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aquaq.Puzzles.Aquaq37;
 
@@ -19,11 +20,11 @@ public class Aquaq37 : AquaqPuzzle
 
     public List<string> FindWords(string input)
     {
-        var words = InputReader.ReadLines(CommonTextFile("Words.txt"))
+        var words = StringReader.ReadLines(CommonTextFile("Words.txt"))
             .Where(o => o.Length == WordLength)
             .ToList();
 
-        var guesses = InputReader.ReadLines(input)
+        var guesses = StringReader.ReadLines(input)
             .Skip(1)
             .Select(ParseGuess)
             .ToList();

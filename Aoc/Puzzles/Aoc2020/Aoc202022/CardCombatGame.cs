@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202022;
 
@@ -8,7 +9,7 @@ public class CardCombatGame
 
     public CardCombatGame(string input)
     {
-        _groups = InputReader.ReadLineGroups(input);
+        _groups = StringReader.ReadLineGroups(input);
     }
 
     public List<List<int>> CreatePlayers()

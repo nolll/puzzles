@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202104;
 
@@ -10,7 +11,7 @@ public class BingoGame
 
     public BingoGame(string input)
     {
-        var groups = InputReader.ReadStringGroups(input);
+        var groups = StringReader.ReadStringGroups(input);
         _numbers = groups.First().Split(',').Select(int.Parse).ToList();
         _boards = ParseBoards(groups.Skip(1));
     }

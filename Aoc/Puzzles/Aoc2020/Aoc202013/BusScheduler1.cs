@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202013;
 
@@ -9,7 +10,7 @@ public class BusScheduler1
 
     public BusScheduler1(string input)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         _earliestMinute = int.Parse(rows[0]);
         _busDepartureMinutes = rows[1].Split(',').Where(o => o != "x").Select(int.Parse).ToList();
     }

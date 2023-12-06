@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2022.Aoc202225;
 
@@ -16,7 +17,7 @@ public class Aoc202225 : AocPuzzle
 
     public string Part1(string input)
     {
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
         var sum = lines.Select(SnafuConverter.ToNumber).Sum();
         return SnafuConverter.ToSnafu(sum);
     }

@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem3D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202119;
 
@@ -7,7 +8,7 @@ public class BeaconSystem
 {
     public BeaconSystemResult GetResult(string input)
     {
-        var groups = InputReader.ReadLineGroups(input);
+        var groups = StringReader.ReadLineGroups(input);
         var scanners = groups.Select(ParseScanner).ToList();
 
         var baseScanner = scanners.First();

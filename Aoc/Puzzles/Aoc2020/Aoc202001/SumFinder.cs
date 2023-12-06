@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.Combinatorics;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2020.Aoc202001;
 
@@ -9,7 +10,7 @@ public class SumFinder
 
     public SumFinder(string input)
     {
-        _numbers = InputReader.ReadLines(input).Select(int.Parse).ToList();
+        _numbers = StringReader.ReadLines(input).Select(int.Parse).ToList();
     }
 
     public IList<int> FindNumbersThatAddUpTo(int target, int numbersToFind)

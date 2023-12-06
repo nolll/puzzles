@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2015.Aoc201506;
 
@@ -26,7 +27,7 @@ public class ChristmasLightsController
 
     private static IEnumerable<Command> ParseCommands(string input, bool useBrightness)
     {
-        var strings = InputReader.ReadLines(input);
+        var strings = StringReader.ReadLines(input);
         return strings.Select(o => CreateCommand(o, useBrightness)).ToList();
     }
 

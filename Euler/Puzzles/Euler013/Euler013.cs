@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Euler.Puzzles.Euler013;
 
@@ -16,7 +17,7 @@ public class Euler013 : EulerPuzzle
 
     public string Run(string listOfNumbers)
     {
-        var rows = InputReader.ReadLines(listOfNumbers);
+        var rows = StringReader.ReadLines(listOfNumbers);
         var numbers = rows.Select(BigInteger.Parse);
 
         var sum = new BigInteger();

@@ -1,4 +1,5 @@
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2017.Aoc201713;
 
@@ -59,7 +60,7 @@ public class PacketScanner
     private IList<FirewallLayer> ParseLayers(string input)
     {
         var dictionary = new Dictionary<int, FirewallLayer>();
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         foreach (var row in rows)
         {
             var parts = row.Split(": ");

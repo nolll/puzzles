@@ -1,5 +1,6 @@
 using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202109;
 
@@ -80,7 +81,7 @@ public class HeightMap
     private static Matrix<int> CreateMatrix(string input)
     {
         var matrix = new Matrix<int>();
-        var lines = InputReader.ReadLines(input);
+        var lines = StringReader.ReadLines(input);
 
         var y = 0;
         foreach (var line in lines)

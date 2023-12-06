@@ -1,5 +1,6 @@
 ﻿using Puzzles.Common.CoordinateSystems.CoordinateSystem2D;
 using Puzzles.Common.Strings;
+using StringReader = Puzzles.Common.Strings.StringReader;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2021.Aoc202105;
 
@@ -7,7 +8,7 @@ public class VentsMap
 {
     public int Run(string input, bool perpendicularOnly)
     {
-        var rows = InputReader.ReadLines(input);
+        var rows = StringReader.ReadLines(input);
         var lines = ParseLines(rows);
         if (perpendicularOnly)
             lines = lines.Where(o => o.IsPerpendicular).ToList();

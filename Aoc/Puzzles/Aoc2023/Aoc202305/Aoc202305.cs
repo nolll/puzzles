@@ -1,6 +1,5 @@
 ﻿using Puzzles.Common.Puzzles;
 using Puzzles.Common.Strings;
-using static Puzzles.Common.Graphs.Graph;
 
 namespace Puzzles.Aoc.Puzzles.Aoc2023.Aoc202305;
 

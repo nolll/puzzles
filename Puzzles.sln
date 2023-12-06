@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquaq", "Aquaq\Aquaq.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aoc", "Aoc\Aoc.csproj", "{7DE53994-4C8F-4673-86A5-D27B2252842C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Euler1", "Euler1\Euler1.csproj", "{824965CE-E8B5-486A-BACE-1F7993C204EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Euler", "Euler\Euler.csproj", "{824965CE-E8B5-486A-BACE-1F7993C204EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

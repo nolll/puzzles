@@ -22,11 +22,11 @@ public class Aoc202005Tests
     public void FindBoardingCardWithHighestId()
     {
         const string input = """
-FBFBBFFRLR
-BFFFBBFRRR
-FFFBBBFRRR
-BBFFBBFRLL
-""";
+                             FBFBBFFRLR
+                             BFFFBBFRRR
+                             FFFBBBFRRR
+                             BBFFBBFRLL
+                             """;
 
         var processor = new BoardingCardProcessor(input.Trim());
 

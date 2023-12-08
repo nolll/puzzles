@@ -9,10 +9,10 @@ public class Aoc201509Tests
     public void CalculateShortestAndLongestRoute()
     {
         const string input = """
-London to Dublin = 464
-London to Belfast = 518
-Dublin to Belfast = 141
-""";
+                             London to Dublin = 464
+                             London to Belfast = 518
+                             Dublin to Belfast = 141
+                             """;
 
         var calculator = new RouteCalculator(input.Trim());
 

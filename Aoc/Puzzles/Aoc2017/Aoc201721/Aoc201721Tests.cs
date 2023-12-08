@@ -9,9 +9,9 @@ public class Aoc201721Tests
     public void TwelvePixelsOnAfterTwoIterations()
     {
         const string input = """
-../.# => ##./#../...
-.#./..#/### => #..#/..../..../#..#
-""";
+                             ../.# => ##./#../...
+                             .#./..#/### => #..#/..../..../#..#
+                             """;
 
         var generator = new FractalArtGenerator(input.Trim());
         generator.Run(2);

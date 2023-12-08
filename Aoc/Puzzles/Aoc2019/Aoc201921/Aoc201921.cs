@@ -21,23 +21,23 @@ public class Aoc201921 : AocPuzzle
     }
 
     private const string WalkProgram = """
-OR A T
-AND B T
-AND C T
-NOT T J
-AND D J
-WALK
-""";
+                                       OR A T
+                                       AND B T
+                                       AND C T
+                                       NOT T J
+                                       AND D J
+                                       WALK
+                                       """;
 
     private const string RunProgram = """
-OR A T
-AND B T
-AND C T
-NOT T J
-OR E T
-OR H T
-AND T J
-AND D J
-RUN
-""";
+                                      OR A T
+                                      AND B T
+                                      AND C T
+                                      NOT T J
+                                      OR E T
+                                      OR H T
+                                      AND T J
+                                      AND D J
+                                      RUN
+                                      """;
 }

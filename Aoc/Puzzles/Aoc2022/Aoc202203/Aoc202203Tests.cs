@@ -22,11 +22,11 @@ public class Aoc202203Tests
     }
 
     private const string Input = """
-vJrwpWtwJgWrhcsFMMfFFhFp
-jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
-PmmdzqPrVvPwwTWBwg
-wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
-ttgJtRGJQctTZtZT
-CrZsJsPPZsGzwwsLwLmpwMDw
-""";
+                                 vJrwpWtwJgWrhcsFMMfFFhFp
+                                 jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+                                 PmmdzqPrVvPwwTWBwg
+                                 wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+                                 ttgJtRGJQctTZtZT
+                                 CrZsJsPPZsGzwwsLwLmpwMDw
+                                 """;
 }

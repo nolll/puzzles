@@ -9,12 +9,12 @@ public class Aoc202012Tests
     public void SimpleFerryNavigation()
     {
         const string input = """
-F10
-N3
-F7
-R90
-F11
-""";
+                             F10
+                             N3
+                             F7
+                             R90
+                             F11
+                             """;
 
         var system = new SimpleFerryNavigationSystem(input.Trim());
         system.Run();
@@ -27,12 +27,12 @@ F11
     public void WaypointFerryNavigation()
     {
         const string input = """
-F10
-N3
-F7
-R90
-F11
-""";
+                             F10
+                             N3
+                             F7
+                             R90
+                             F11
+                             """;
 
         var system = new WaypointFerryNavigationSystem(input.Trim());
         system.Run();

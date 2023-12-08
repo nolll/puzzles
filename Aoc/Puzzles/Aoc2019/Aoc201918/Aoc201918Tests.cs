@@ -10,10 +10,10 @@ public class Aoc201918Tests
     public void OneRobot_ShortestPathIsFound1()
     {
         const string input = """
-#########
-#b.A.@.a#
-#########
-""";
+                             #########
+                             #b.A.@.a#
+                             #########
+                             """;
 
         var keyCollector = new KeyCollector(input);
         keyCollector.Run();
@@ -25,12 +25,12 @@ public class Aoc201918Tests
     public void OneRobot_ShortestPathIsFound2()
     {
         const string input = """
-########################
-#f.D.E.e.C.b.A.@.a.B.c.#
-######################.#
-#d.....................#
-########################
-""";
+                             ########################
+                             #f.D.E.e.C.b.A.@.a.B.c.#
+                             ######################.#
+                             #d.....................#
+                             ########################
+                             """;
 
         var keyCollector = new KeyCollector(input);
         keyCollector.Run();
@@ -42,12 +42,12 @@ public class Aoc201918Tests
     public void OneRobot_ShortestPathIsFound3()
     {
         const string input = """
-########################
-#...............b.C.D.f#
-#.######################
-#.....@.a.B.c.d.A.e.F.g#
-########################
-""";
+                             ########################
+                             #...............b.C.D.f#
+                             #.######################
+                             #.....@.a.B.c.d.A.e.F.g#
+                             ########################
+                             """;
 
         var keyCollector = new KeyCollector(input);
         keyCollector.Run();
@@ -59,16 +59,16 @@ public class Aoc201918Tests
     public void OneRobot_ShortestPathIsFound4()
     {
         const string input = """
-#################
-#i.G..c...e..H.p#
-########.########
-#j.A..b...f..D.o#
-########@########
-#k.E..a...g..B.n#
-########.########
-#l.F..d...h..C.m#
-#################
-""";
+                             #################
+                             #i.G..c...e..H.p#
+                             ########.########
+                             #j.A..b...f..D.o#
+                             ########@########
+                             #k.E..a...g..B.n#
+                             ########.########
+                             #l.F..d...h..C.m#
+                             #################
+                             """;
 
         var keyCollector = new KeyCollector(input);
         keyCollector.Run();
@@ -80,13 +80,13 @@ public class Aoc201918Tests
     public void OneRobot_ShortestPathIsFound5()
     {
         const string input = """
-########################
-#@..............ac.GI.b#
-###d#e#f################
-###A#B#C################
-###g#h#i################
-########################
-""";
+                             ########################
+                             #@..............ac.GI.b#
+                             ###d#e#f################
+                             ###A#B#C################
+                             ###g#h#i################
+                             ########################
+                             """;
 
         var keyCollector = new KeyCollector(input);
         keyCollector.Run();
@@ -98,14 +98,14 @@ public class Aoc201918Tests
     public void FourRobots_ShortestPathIsFound1()
     {
         const string input = """
-#######
-#a.#Cd#
-##...##
-##.@.##
-##...##
-#cB#Ab#
-#######
-""";
+                             #######
+                             #a.#Cd#
+                             ##...##
+                             ##.@.##
+                             ##...##
+                             #cB#Ab#
+                             #######
+                             """;
 
         var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
@@ -117,14 +117,14 @@ public class Aoc201918Tests
     public void FourRobots_ShortestPathIsFound2()
     {
         const string input = """
-###############
-#d.ABC.#.....a#
-######...######
-######.@.######
-######...######
-#b.....#.....c#
-###############
-""";
+                             ###############
+                             #d.ABC.#.....a#
+                             ######...######
+                             ######.@.######
+                             ######...######
+                             #b.....#.....c#
+                             ###############
+                             """;
 
         var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
@@ -136,14 +136,14 @@ public class Aoc201918Tests
     public void FourRobots_ShortestPathIsFound3()
     {
         const string input = """
-#############
-#DcBa.#.GhKl#
-#.###...#I###
-#e#d#.@.#j#k#
-###C#...###J#
-#fEbA.#.FgHi#
-#############
-""";
+                             #############
+                             #DcBa.#.GhKl#
+                             #.###...#I###
+                             #e#d#.@.#j#k#
+                             ###C#...###J#
+                             #fEbA.#.FgHi#
+                             #############
+                             """;
 
         var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
@@ -158,16 +158,16 @@ public class Aoc201918Tests
     public void FourRobots_ShortestPathIsFound4()
     {
         const string input = """
-#############
-#g#f.D#..h#l#
-#F###e#E###.#
-#dCba...BcIJ#
-#####.@.#####
-#nK.L...G...#
-#M###N#H###.#
-#o#m..#i#jk.#
-#############
-""";
+                             #############
+                             #g#f.D#..h#l#
+                             #F###e#E###.#
+                             #dCba...BcIJ#
+                             #####.@.#####
+                             #nK.L...G...#
+                             #M###N#H###.#
+                             #o#m..#i#jk.#
+                             #############
+                             """;
 
         var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();

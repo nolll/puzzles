@@ -9,13 +9,13 @@ public class Aoc201719Tests
     public void FindsAllCharacters()
     {
         const string input = """
-     |          
-     |  +--+    
-     A  |  C    
- F---|----E|--+ 
-     |  |  |  D 
-     +B-+  +--+ 
-""";
+                                  |          
+                                  |  +--+    
+                                  A  |  C    
+                              F---|----E|--+ 
+                                  |  |  |  D 
+                                  +B-+  +--+ 
+                             """;
 
         var finder = new TubeRouteFinder(input);
         finder.FindRoute();

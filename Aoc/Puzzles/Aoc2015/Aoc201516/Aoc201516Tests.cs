@@ -9,10 +9,10 @@ public class Aoc201516Tests
     public void SelectsCorrectAuntSue()
     {
         const string input = """
-Sue 1: pomeranians: 3, perfumes: 6, vizslas: 0
-Sue 2: vizslas: 0, perfumes: 1, trees: 3
-Sue 3: vizslas: 7, pomeranians: 1, akitas: 10
-""";
+                             Sue 1: pomeranians: 3, perfumes: 6, vizslas: 0
+                             Sue 2: vizslas: 0, perfumes: 1, trees: 3
+                             Sue 3: vizslas: 7, pomeranians: 1, akitas: 10
+                             """;
 
         var sueSelector = new SueSelector(input.Trim());
 

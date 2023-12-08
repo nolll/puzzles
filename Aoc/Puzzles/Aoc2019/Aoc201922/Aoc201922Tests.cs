@@ -55,17 +55,17 @@ public class Aoc201922Tests
         var shuffler = new CardShuffler();
 
         const string input = """
-deal into new stack
-cut -2
-deal with increment 7
-cut 8
-cut -4
-deal with increment 7
-cut 3
-deal with increment 9
-deal with increment 3
-cut -1
-""";
+                             deal into new stack
+                             cut -2
+                             deal with increment 7
+                             cut 8
+                             cut -4
+                             deal with increment 7
+                             cut 3
+                             deal with increment 9
+                             deal with increment 3
+                             cut -1
+                             """;
 
         var deck = shuffler.Shuffle(10, input);
 

@@ -9,10 +9,10 @@ public class Aoc202017Tests
     public void AfterSixIterations_3D()
     {
         const string input = """
-.#.
-..#
-###
-""";
+                             .#.
+                             ..#
+                             ###
+                             """;
 
         var cube = new ConwayCube();
         var activeCubes = cube.Boot3D(input, 6);
@@ -24,10 +24,10 @@ public class Aoc202017Tests
     public void AfterSixIterations_4D()
     {
         const string input = """
-.#.
-..#
-###
-""";
+                             .#.
+                             ..#
+                             ###
+                             """;
 
         var cube = new ConwayCube();
         var activeCubes = cube.Boot4D(input, 6);

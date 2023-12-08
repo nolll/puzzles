@@ -9,11 +9,11 @@ public class Aoc201611Tests
     public void StepCountIsCorrect()
     {
         const string input = """
-The first floor contains a hydrogen-compatible microchip and a lithium-compatible microchip.
-The second floor contains a hydrogen generator.
-The third floor contains a lithium generator.
-The fourth floor contains nothing relevant.
-""";
+                             The first floor contains a hydrogen-compatible microchip and a lithium-compatible microchip.
+                             The second floor contains a hydrogen generator.
+                             The third floor contains a lithium generator.
+                             The fourth floor contains nothing relevant.
+                             """;
 
         var simulator = new RadioisotopeSimulator(input);
 

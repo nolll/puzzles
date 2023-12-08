@@ -9,13 +9,13 @@ public class Aoc201806Tests
     public void FindsLargestArea()
     {
         const string input = """
-1, 1
-1, 6
-8, 3
-3, 4
-5, 5
-8, 9
-""";
+                             1, 1
+                             1, 6
+                             8, 3
+                             3, 4
+                             5, 5
+                             8, 9
+                             """;
 
         var finder = new LargestAreaFinder(input);
         var area = finder.GetSizeOfLargestArea();
@@ -27,13 +27,13 @@ public class Aoc201806Tests
     public void FindsAreaOfCentralArea()
     {
         const string input = """
-1, 1
-1, 6
-8, 3
-3, 4
-5, 5
-8, 9
-""";
+                             1, 1
+                             1, 6
+                             8, 3
+                             3, 4
+                             5, 5
+                             8, 9
+                             """;
 
         var finder = new LargestAreaFinder(input);
         var area = finder.GetSizeOfCentralArea(32);

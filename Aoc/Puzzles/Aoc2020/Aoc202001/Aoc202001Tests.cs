@@ -9,13 +9,13 @@ public class Aoc202001Tests
     public void FindTwoNumbers()
     {
         const string input = """
-1721
-979
-366
-299
-675
-1456
-""";
+                             1721
+                             979
+                             366
+                             299
+                             675
+                             1456
+                             """;
 
         var sumFinder = new SumFinder(input.Trim());
         var numbers = sumFinder.FindNumbersThatAddUpTo(2020, 2);
@@ -28,13 +28,13 @@ public class Aoc202001Tests
     public void FindThreeNumbers()
     {
         const string input = """
-1721
-979
-366
-299
-675
-1456
-""";
+                             1721
+                             979
+                             366
+                             299
+                             675
+                             1456
+                             """;
 
         var sumFinder = new SumFinder(input.Trim());
         var numbers = sumFinder.FindNumbersThatAddUpTo(2020, 3);

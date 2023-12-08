@@ -7,10 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201721;
 public class FractalArtGenerator
 {
     private const string Inital = """
-.#.
-..#
-###
-""";
+                                  .#.
+                                  ..#
+                                  ###
+                                  """;
 
     private Matrix<char> _matrix;
     private readonly IList<FractalRule> _transformationRules2X2;

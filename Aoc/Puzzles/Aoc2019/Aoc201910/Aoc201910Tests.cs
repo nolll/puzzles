@@ -9,12 +9,12 @@ public class Aoc201910Tests
     public void Asteroid_3_4_DetectsTheMostAsteroids()
     {
         const string map = """
-.#..#
-.....
-#####
-....#
-...##
-""";
+                           .#..#
+                           .....
+                           #####
+                           ....#
+                           ...##
+                           """;
 
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
@@ -28,17 +28,17 @@ public class Aoc201910Tests
     public void Asteroid_5_8_DetectsTheMostAsteroids()
     {
         const string map = """
-......#.#.
-#..#.#....
-..#######.
-.#.#.###..
-.#..#.....
-..#....#.#
-#..#....#.
-.##.#..###
-##...#..#.
-.#....####
-""";
+                           ......#.#.
+                           #..#.#....
+                           ..#######.
+                           .#.#.###..
+                           .#..#.....
+                           ..#....#.#
+                           #..#....#.
+                           .##.#..###
+                           ##...#..#.
+                           .#....####
+                           """;
 
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
@@ -52,17 +52,17 @@ public class Aoc201910Tests
     public void Asteroid_1_2_DetectsTheMostAsteroids()
     {
         const string map = """
-#.#...#.#.
-.###....#.
-.#....#...
-##.#.#.#.#
-....#.#.#.
-.##..###.#
-..#...##..
-..##....##
-......#...
-.####.###.
-""";
+                           #.#...#.#.
+                           .###....#.
+                           .#....#...
+                           ##.#.#.#.#
+                           ....#.#.#.
+                           .##..###.#
+                           ..#...##..
+                           ..##....##
+                           ......#...
+                           .####.###.
+                           """;
 
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
@@ -76,17 +76,17 @@ public class Aoc201910Tests
     public void Asteroid_6_3_DetectsTheMostAsteroids()
     {
         const string map = """
-.#..#..###
-####.###.#
-....###.#.
-..###.##.#
-##.##.#.#.
-....###..#
-..#.#..#.#
-#..#.#.###
-.##...##.#
-.....#.#..
-""";
+                           .#..#..###
+                           ####.###.#
+                           ....###.#.
+                           ..###.##.#
+                           ##.##.#.#.
+                           ....###..#
+                           ..#.#..#.#
+                           #..#.#.###
+                           .##...##.#
+                           .....#.#..
+                           """;
 
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
@@ -100,27 +100,27 @@ public class Aoc201910Tests
     public void Asteroid_11_13_DetectsTheMostAsteroids()
     {
         const string map = """
-.#..##.###...#######
-##.############..##.
-.#.######.########.#
-.###.#######.####.#.
-#####.##.#.##.###.##
-..#####..#.#########
-####################
-#.####....###.#.#.##
-##.#################
-#####.##.###..####..
-..######..##.#######
-####.##.####...##..#
-.#####..#.######.###
-##...#.##########...
-#.##########.#######
-.####.#.###.###.#.##
-....##.##.###..#####
-.#.#.###########.###
-#.#.#.#####.####.###
-###.##.####.##.#..##
-""";
+                           .#..##.###...#######
+                           ##.############..##.
+                           .#.######.########.#
+                           .###.#######.####.#.
+                           #####.##.#.##.###.##
+                           ..#####..#.#########
+                           ####################
+                           #.####....###.#.#.##
+                           ##.#################
+                           #####.##.###..####..
+                           ..######..##.#######
+                           ####.##.####...##..#
+                           .#####..#.######.###
+                           ##...#.##########...
+                           #.##########.#######
+                           .####.#.###.###.#.##
+                           ....##.##.###..#####
+                           .#.#.###########.###
+                           #.#.#.#####.####.###
+                           ###.##.####.##.#..##
+                           """;
 
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
@@ -134,12 +134,12 @@ public class Aoc201910Tests
     public void MapForVaporizeResultsInTheCorrectAsteroid()
     {
         const string map = """
-.#....#####...#..
-##...##.#####..##
-##...#...#.#####.
-..#.....X...###..
-..#.#.....#....##
-""";
+                           .#....#####...#..
+                           ##...##.#####..##
+                           ##...#...#.#####.
+                           ..#.....X...###..
+                           ..#.#.....#....##
+                           """;
 
         var detector = new AsteroidDetector();
         var result = detector.Detect(map.Trim());
@@ -152,12 +152,12 @@ public class Aoc201910Tests
     public void VaporizeOrderIsCorrect()
     {
         const string map = """
-.A....BCDEF...G..
-HI...JK.LMNOP..QR
-ST...U...V.WXYZ1.
-..2.....#...345..
-..6.7.....8....90
-""";
+                           .A....BCDEF...G..
+                           HI...JK.LMNOP..QR
+                           ST...U...V.WXYZ1.
+                           ..2.....#...345..
+                           ..6.7.....8....90
+                           """;
 
         var detector = new AsteroidVaporizer();
         var result = detector.Vaporize(map.Trim());

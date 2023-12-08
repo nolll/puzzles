@@ -11,9 +11,9 @@ public class Aoc202124Tests
     public void TestAlu1(long p, int expected)
     {
         const string input = """
-inp x
-mul x -1
-""";
+                             inp x
+                             mul x -1
+                             """;
 
         var alu = new Alu(input.Trim());
         var result = alu.Process(p);
@@ -29,11 +29,11 @@ mul x -1
     public void TestAlu2(long p, int expected)
     {
         const string input = """
-inp z
-inp x
-mul z 3
-eql z x
-""";
+                             inp z
+                             inp x
+                             mul z 3
+                             eql z x
+                             """;
 
         var alu = new Alu(input.Trim());
         var result = alu.Process(p);
@@ -53,18 +53,18 @@ eql z x
     public void TestAlu2(long p, int expW, int expX, int expY, int expZ)
     {
         const string input = """
-inp w
-add z w
-mod z 2
-div w 2
-add y w
-mod y 2
-div w 2
-add x w
-mod x 2
-div w 2
-mod w 2
-""";
+                             inp w
+                             add z w
+                             mod z 2
+                             div w 2
+                             add y w
+                             mod y 2
+                             div w 2
+                             add x w
+                             mod x 2
+                             div w 2
+                             mod w 2
+                             """;
 
         var alu = new Alu(input.Trim());
         var result = alu.Process(p);

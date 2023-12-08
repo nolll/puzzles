@@ -9,13 +9,13 @@ public class Aoc201813Tests
     public void LocationOfFirstCollision()
     {
         const string input = """
-/->-\        
-|   |  /----\
-| /-+--+-\  |
-| | |  | v  |
-\-+-/  \-+--/
-  \------/   
-""";
+                             /->-\        
+                             |   |  /----\
+                             | /-+--+-\  |
+                             | | |  | v  |
+                             \-+-/  \-+--/
+                               \------/   
+                             """;
 
         var detector = new CollisionDetector(input);
         detector.RunCarts();
@@ -29,14 +29,14 @@ public class Aoc201813Tests
     public void LocationOfLastCart()
     {
         const string input = """
-/>-<\  
-|   |  
-| /<+-\
-| | | v
-\>+</ |
-  |   ^
-  \<->/
-""";
+                             />-<\  
+                             |   |  
+                             | /<+-\
+                             | | | v
+                             \>+</ |
+                               |   ^
+                               \<->/
+                             """;
 
         var detector = new CollisionDetector(input);
         detector.RunCarts();

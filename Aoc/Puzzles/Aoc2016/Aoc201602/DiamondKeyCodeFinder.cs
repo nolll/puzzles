@@ -63,12 +63,12 @@ public class DiamondKeyCodeFinder
     private static Matrix<char> BuildButtonMatrix()
     {
         const string input = """
-..1..
-.234.
-56789
-.ABC.
-..D..
-""";
+                             ..1..
+                             .234.
+                             56789
+                             .ABC.
+                             ..D..
+                             """;
 
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         matrix.MoveTo(0, 2);

@@ -27,16 +27,16 @@ public class Aoc202008Tests
     public void ModifiedProgramReturnsCorrectExitStatus()
     {
         const string input = """
-nop +0
-acc +1
-jmp +4
-acc +3
-jmp -3
-acc -99
-acc +1
-nop -4
-acc +6
-""";
+                             nop +0
+                             acc +1
+                             jmp +4
+                             acc +3
+                             jmp -3
+                             acc -99
+                             acc +1
+                             nop -4
+                             acc +6
+                             """;
 
         var instructions = GameConsoleRunner.ParseInstructions(input.Trim());
         var console = new GameConsole(instructions);
@@ -47,14 +47,14 @@ acc +6
     }
 
     private const string Input = """
-nop +0
-acc +1
-jmp +4
-acc +3
-jmp -3
-acc -99
-acc +1
-jmp -4
-acc +6
-""";
+                                 nop +0
+                                 acc +1
+                                 jmp +4
+                                 acc +3
+                                 jmp -3
+                                 acc -99
+                                 acc +1
+                                 jmp -4
+                                 acc +6
+                                 """;
 }

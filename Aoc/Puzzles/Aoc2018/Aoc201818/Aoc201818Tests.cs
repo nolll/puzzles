@@ -9,17 +9,17 @@ public class Aoc201818Tests
     public void ResourceValueIsCorrect()
     {
         const string input = """
-.#.#...|#.
-.....#|##|
-.|..|...#.
-..|#.....#
-#.#|||#|#|
-...#.||...
-.|....|...
-||...#|.#|
-|.||||..|.
-...#.|..|.
-""";
+                             .#.#...|#.
+                             .....#|##|
+                             .|..|...#.
+                             ..|#.....#
+                             #.#|||#|#|
+                             ...#.||...
+                             .|....|...
+                             ||...#|.#|
+                             |.||||..|.
+                             ...#.|..|.
+                             """;
 
         var collection = new LumberCollection(input);
         collection.Run(10);

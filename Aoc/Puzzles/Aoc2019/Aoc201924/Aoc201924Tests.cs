@@ -9,12 +9,12 @@ public class Aoc201924Tests
     public void AfterZeroMinutes()
     {
         const string input = """
-....#
-#..#.
-#..##
-..#..
-#....
-""";
+                             ....#
+                             #..#.
+                             #..##
+                             ..#..
+                             #....
+                             """;
 
         var simulator = new BugLifeSimulator(input);
         simulator.Run(0);
@@ -26,12 +26,12 @@ public class Aoc201924Tests
     public void AfterOneMinute()
     {
         const string input = """
-....#
-#..#.
-#..##
-..#..
-#....
-""";
+                             ....#
+                             #..#.
+                             #..##
+                             ..#..
+                             #....
+                             """;
 
         var simulator = new BugLifeSimulator(input);
         simulator.Run(1);
@@ -43,12 +43,12 @@ public class Aoc201924Tests
     public void AfterTwoMinutes()
     {
         const string input = """
-....#
-#..#.
-#..##
-..#..
-#....
-""";
+                             ....#
+                             #..#.
+                             #..##
+                             ..#..
+                             #....
+                             """;
 
         var simulator = new BugLifeSimulator(input);
         simulator.Run(2);
@@ -60,12 +60,12 @@ public class Aoc201924Tests
     public void AfterThreeMinutes()
     {
         const string input = """
-....#
-#..#.
-#..##
-..#..
-#....
-""";
+                             ....#
+                             #..#.
+                             #..##
+                             ..#..
+                             #....
+                             """;
 
         var simulator = new BugLifeSimulator(input);
         simulator.Run(3);
@@ -77,12 +77,12 @@ public class Aoc201924Tests
     public void AfterFourMinutes()
     {
         const string input = """
-....#
-#..#.
-#..##
-..#..
-#....
-""";
+                             ....#
+                             #..#.
+                             #..##
+                             ..#..
+                             #....
+                             """;
 
         var simulator = new BugLifeSimulator(input);
         simulator.Run(4);
@@ -94,12 +94,12 @@ public class Aoc201924Tests
     public void UntilRepeat_String()
     {
         const string input = """
-....#
-#..#.
-#..##
-..#..
-#....
-""";
+                             ....#
+                             #..#.
+                             #..##
+                             ..#..
+                             #....
+                             """;
 
         var simulator = new BugLifeSimulator(input);
         simulator.RunUntilRepeat();
@@ -111,12 +111,12 @@ public class Aoc201924Tests
     public void UntilRepeat_BiodiversityRating()
     {
         const string input = """
-....#
-#..#.
-#..##
-..#..
-#....
-""";
+                             ....#
+                             #..#.
+                             #..##
+                             ..#..
+                             #....
+                             """;
 
         var simulator = new BugLifeSimulator(input);
         simulator.RunUntilRepeat();
@@ -128,12 +128,12 @@ public class Aoc201924Tests
     public void Recursive_BugCount()
     {
         const string input = """
-....#
-#..#.
-#..##
-..#..
-#....
-""";
+                             ....#
+                             #..#.
+                             #..##
+                             ..#..
+                             #....
+                             """;
 
         var simulator = new RecursiveBugLifeSimulator(input);
         simulator.Run(10);

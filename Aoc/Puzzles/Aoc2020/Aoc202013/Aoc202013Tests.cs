@@ -9,9 +9,9 @@ public class Aoc202013Tests
     public void EarliestDeparture()
     {
         const string input = """
-939
-7,13,x,x,59,x,31,19
-""";
+                             939
+                             7,13,x,x,59,x,31,19
+                             """;
 
         var scheduler = new BusScheduler1(input.Trim());
         var value = scheduler.GetBusValue();

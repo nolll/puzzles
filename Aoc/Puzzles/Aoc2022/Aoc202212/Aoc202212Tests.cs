@@ -24,10 +24,10 @@ public class Aoc202212Tests
     }
 
     private const string Input = """
-Sabqponm
-abcryxxl
-accszExk
-acctuvwj
-abdefghi
-""";
+                                 Sabqponm
+                                 abcryxxl
+                                 accszExk
+                                 acctuvwj
+                                 abdefghi
+                                 """;
 }

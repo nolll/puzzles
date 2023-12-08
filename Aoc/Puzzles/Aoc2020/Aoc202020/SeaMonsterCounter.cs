@@ -5,10 +5,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202020;
 public class SeaMonsterCounter
 {
     private const string SeaMonsterPattern = """
-..................#.
-#....##....##....###
-.#..#..#..#..#..#...
-""";
+                                             ..................#.
+                                             #....##....##....###
+                                             .#..#..#..#..#..#...
+                                             """;
 
     private readonly List<Func<Matrix<char>, Matrix<char>>> _searchFlips = new()
     {

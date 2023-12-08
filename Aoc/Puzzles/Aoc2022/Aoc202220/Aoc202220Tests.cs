@@ -22,12 +22,12 @@ public class Aoc202220Tests
     }
 
     private const string Input = """
-1
-2
--3
-3
--2
-0
-4
-""";
+                                 1
+                                 2
+                                 -3
+                                 3
+                                 -2
+                                 0
+                                 4
+                                 """;
 }

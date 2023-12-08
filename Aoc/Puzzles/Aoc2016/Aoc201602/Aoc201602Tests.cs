@@ -9,11 +9,11 @@ public class Aoc201602Tests
     public void FindsSquareKeycode()
     {
         const string input = """
-ULL
-RRDDD
-LURDL
-UUUUD
-""";
+                             ULL
+                             RRDDD
+                             LURDL
+                             UUUUD
+                             """;
 
         var finder = new SquareKeyCodeFinder();
         var code = finder.Find(input.Trim());
@@ -25,11 +25,11 @@ UUUUD
     public void FindsDiamondKeycode()
     {
         const string input = """
-ULL
-RRDDD
-LURDL
-UUUUD
-""";
+                             ULL
+                             RRDDD
+                             LURDL
+                             UUUUD
+                             """;
 
         var finder = new DiamondKeyCodeFinder();
         var code = finder.Find(input.Trim());

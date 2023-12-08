@@ -9,12 +9,12 @@ public class Aoc201915Tests
     public void Returns4Minutes()
     {
         const string map = """
- ##   
-#..## 
-#.#..#
-#.X.# 
- ###  
-""";
+                            ##
+                           #..##
+                           #.#..#
+                           #.X.#
+                            ###
+                           """;
 
         var filler = new OxygenFiller(map);
         var result = filler.Fill();

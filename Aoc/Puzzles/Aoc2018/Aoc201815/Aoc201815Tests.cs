@@ -9,14 +9,14 @@ public class Aoc201815Tests
     public void BattleResultsInCorrectOutcome_Case1()
     {
         const string input = """
-#######
-#.G...#
-#...EG#
-#.#.#G#
-#..G#E#
-#.....#
-#######
-""";
+                             #######
+                             #.G...#
+                             #...EG#
+                             #.#.#G#
+                             #..G#E#
+                             #.....#
+                             #######
+                             """;
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -28,14 +28,14 @@ public class Aoc201815Tests
     public void BattleResultsInCorrectOutcome_Case2()
     {
         const string input = """
-#######
-#G..#E#
-#E#E.E#
-#G.##.#
-#...#E#
-#...E.#
-#######
-""";
+                             #######
+                             #G..#E#
+                             #E#E.E#
+                             #G.##.#
+                             #...#E#
+                             #...E.#
+                             #######
+                             """;
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -47,14 +47,14 @@ public class Aoc201815Tests
     public void BattleResultsInCorrectOutcome_Case3()
     {
         const string input = """
-#######
-#E..EG#
-#.#G.E#
-#E.##E#
-#G..#.#
-#..E#.#
-#######
-""";
+                             #######
+                             #E..EG#
+                             #.#G.E#
+                             #E.##E#
+                             #G..#.#
+                             #..E#.#
+                             #######
+                             """;
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -66,14 +66,14 @@ public class Aoc201815Tests
     public void BattleResultsInCorrectOutcome_Case4()
     {
         const string input = """
-#######
-#E.G#.#
-#.#G..#
-#G.#.G#
-#G..#.#
-#...E.#
-#######
-""";
+                             #######
+                             #E.G#.#
+                             #.#G..#
+                             #G.#.G#
+                             #G..#.#
+                             #...E.#
+                             #######
+                             """;
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -86,14 +86,14 @@ public class Aoc201815Tests
     public void BattleResultsInCorrectOutcome_Case5()
     {
         const string input = """
-#######
-#.E...#
-#.#..G#
-#.###.#
-#E#G#G#
-#...#G#
-#######
-""";
+                             #######
+                             #.E...#
+                             #.#..G#
+                             #.###.#
+                             #E#G#G#
+                             #...#G#
+                             #######
+                             """;
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -106,16 +106,16 @@ public class Aoc201815Tests
     public void BattleResultsInCorrectOutcome_Case6()
     {
         const string input = """
-#########
-#G......#
-#.E.#...#
-#..##..G#
-#...##..#
-#...#...#
-#.G...G.#
-#.....G.#
-#########
-""";
+                             #########
+                             #G......#
+                             #.E.#...#
+                             #..##..G#
+                             #...##..#
+                             #...#...#
+                             #.G...G.#
+                             #.....G.#
+                             #########
+                             """;
 
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
@@ -127,14 +127,14 @@ public class Aoc201815Tests
     public void BattleResultsForElvesWinningWithoutLosses_Case1()
     {
         const string input = """
-#######
-#.G...#
-#...EG#
-#.#.#G#
-#..G#E#
-#.....#
-#######
-""";
+                             #######
+                             #.G...#
+                             #...EG#
+                             #.#.#G#
+                             #..G#E#
+                             #.....#
+                             #######
+                             """;
 
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
@@ -146,14 +146,14 @@ public class Aoc201815Tests
     public void BattleResultsForElvesWinningWithoutLosses_Case2()
     {
         const string input = """
-#######
-#E..EG#
-#.#G.E#
-#E.##E#
-#G..#.#
-#..E#.#
-#######
-""";
+                             #######
+                             #E..EG#
+                             #.#G.E#
+                             #E.##E#
+                             #G..#.#
+                             #..E#.#
+                             #######
+                             """;
 
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
@@ -165,14 +165,14 @@ public class Aoc201815Tests
     public void BattleResultsForElvesWinningWithoutLosses_Case3()
     {
         const string input = """
-#######
-#E.G#.#
-#.#G..#
-#G.#.G#
-#G..#.#
-#...E.#
-#######
-""";
+                             #######
+                             #E.G#.#
+                             #.#G..#
+                             #G.#.G#
+                             #G..#.#
+                             #...E.#
+                             #######
+                             """;
 
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
@@ -184,14 +184,14 @@ public class Aoc201815Tests
     public void BattleResultsForElvesWinningWithoutLosses_Case4()
     {
         const string input = """
-#######
-#.E...#
-#.#..G#
-#.###.#
-#E#G#G#
-#...#G#
-#######
-""";
+                             #######
+                             #.E...#
+                             #.#..G#
+                             #.###.#
+                             #E#G#G#
+                             #...#G#
+                             #######
+                             """;
 
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);
@@ -203,16 +203,16 @@ public class Aoc201815Tests
     public void BattleResultsForElvesWinningWithoutLosses_Case5()
     {
         const string input = """
-#########
-#G......#
-#.E.#...#
-#..##..G#
-#...##..#
-#...#...#
-#.G...G.#
-#.....G.#
-#########
-""";
+                             #########
+                             #G......#
+                             #.E.#...#
+                             #..##..G#
+                             #...##..#
+                             #...#...#
+                             #.G...G.#
+                             #.....G.#
+                             #########
+                             """;
 
         var battle = new ChocolateBattle(input);
         battle.RunUntilElvesWins(4);

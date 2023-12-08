@@ -24,8 +24,8 @@ public class Year2022Day02Tests
     }
 
     private const string Input = """
-A Y
-B X
-C Z
-""";
+                                 A Y
+                                 B X
+                                 C Z
+                                 """;
 }

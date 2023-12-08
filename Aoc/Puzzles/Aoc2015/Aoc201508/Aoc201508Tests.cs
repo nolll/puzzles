@@ -9,11 +9,11 @@ public class Aoc201508Tests
     public void CodeToMemoryDifference()
     {
         const string input = """
-""
-"abc"
-"aaa\"aaa"
-"\x27"
-""";
+                             ""
+                             "abc"
+                             "aaa\"aaa"
+                             "\x27"
+                             """;
 
         var digitalList = new DigitalList(input.Trim());
 
@@ -24,11 +24,11 @@ public class Aoc201508Tests
     public void EncodedToCodeDifference()
     {
         const string input = """
-""
-"abc"
-"aaa\"aaa"
-"\x27"
-""";
+                             ""
+                             "abc"
+                             "aaa\"aaa"
+                             "\x27"
+                             """;
 
         var digitalList = new DigitalList(input.Trim());
 

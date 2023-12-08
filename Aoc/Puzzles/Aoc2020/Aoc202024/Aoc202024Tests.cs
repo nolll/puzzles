@@ -101,25 +101,25 @@ public class Aoc202024Tests
     }
 
     private const string Input = """
-sesenwnenenewseeswwswswwnenewsewsw
-neeenesenwnwwswnenewnwwsewnenwseswesw
-seswneswswsenwwnwse
-nwnwneseeswswnenewneswwnewseswneseene
-swweswneswnenwsewnwneneseenw
-eesenwseswswnenwswnwnwsewwnwsene
-sewnenenenesenwsewnenwwwse
-wenwwweseeeweswwwnwwe
-wsweesenenewnwwnwsenewsenwwsesesenwne
-neeswseenwwswnwswswnw
-nenwswwsewswnenenewsenwsenwnesesenew
-enewnwewneswsewnwswenweswnenwsenwsw
-sweneswneswneneenwnewenewwneswswnese
-swwesenesewenwneswnwwneseswwne
-enesenwswwswneneswsenwnewswseenwsese
-wnwnesenesenenwwnenwsewesewsesesew
-nenewswnwewswnenesenwnesewesw
-eneswnwswnwsenenwnwnwwseeswneewsenese
-neswnwewnwnwseenwseesewsenwsweewe
-wseweeenwnesenwwwswnew
-""";
+                                 sesenwnenenewseeswwswswwnenewsewsw
+                                 neeenesenwnwwswnenewnwwsewnenwseswesw
+                                 seswneswswsenwwnwse
+                                 nwnwneseeswswnenewneswwnewseswneseene
+                                 swweswneswnenwsewnwneneseenw
+                                 eesenwseswswnenwswnwnwsewwnwsene
+                                 sewnenenenesenwsewnenwwwse
+                                 wenwwweseeeweswwwnwwe
+                                 wsweesenenewnwwnwsenewsenwwsesesenwne
+                                 neeswseenwwswnwswswnw
+                                 nenwswwsewswnenenewsenwsenwnesesenew
+                                 enewnwewneswsewnwswenweswnenwsenwsw
+                                 sweneswneswneneenwnewenewwneswswnese
+                                 swwesenesewenwneswnwwneseswwne
+                                 enesenwswwswneneswsenwnewswseenwsese
+                                 wnwnesenesenenwwnenwsewesewsesesew
+                                 nenewswnwewswnenesenwnesewesw
+                                 eneswnwswnwsenenwnwnwwseeswneewsenese
+                                 neswnwewnwnwseenwseesewsenwsweewe
+                                 wseweeenwnesenwwwswnew
+                                 """;
 }

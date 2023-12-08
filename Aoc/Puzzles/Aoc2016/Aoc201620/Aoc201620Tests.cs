@@ -9,10 +9,10 @@ public class Aoc201620Tests
     public void FindsUnblockedIps()
     {
         const string input = """
-5-8
-0-2
-4-7
-""";
+                             5-8
+                             0-2
+                             4-7
+                             """;
 
         var rules = new FirewallRules(input.Trim());
         var lowestIp = rules.GetLowestUnblockedIp();
@@ -24,10 +24,10 @@ public class Aoc201620Tests
     public void AllowedIpCountIsCorrect()
     {
         const string input = """
-5-8
-0-2
-4-7
-""";
+                             5-8
+                             0-2
+                             4-7
+                             """;
 
         var rules = new FirewallRules(input.Trim());
         var lowestIp = rules.GetAllowedIpCount(9);

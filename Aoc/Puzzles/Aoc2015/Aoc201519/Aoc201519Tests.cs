@@ -10,10 +10,10 @@ public class Aoc201519Tests
     {
         const string startMolecule = "HOH";
         const string input = """
-H => HO
-H => OH
-O => HH
-""";
+                             H => HO
+                             H => OH
+                             O => HH
+                             """;
 
         var machine = new MedicineMachine(input.Trim());
         var molecules = machine.GetCalibrationMolecules(startMolecule);
@@ -26,12 +26,12 @@ O => HH
     public void TimeToMakeMolecule(string molecule, int steps)
     {
         const string input = """
-e => H
-e => O
-H => HO
-H => OH
-O => HH
-""";
+                             e => H
+                             e => O
+                             H => HO
+                             H => OH
+                             O => HH
+                             """;
 
         var machine = new MedicineMachine(input.Trim());
         var stepCount = machine.StepsToMake(molecule);

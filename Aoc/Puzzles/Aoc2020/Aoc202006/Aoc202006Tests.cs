@@ -24,20 +24,20 @@ public class Aoc202006Tests
     }
 
     private const string Input = """
-abc
+                                 abc
 
-a
-b
-c
+                                 a
+                                 b
+                                 c
 
-ab
-ac
+                                 ab
+                                 ac
 
-a
-a
-a
-a
+                                 a
+                                 a
+                                 a
+                                 a
 
-b
-""";
+                                 b
+                                 """;
 }

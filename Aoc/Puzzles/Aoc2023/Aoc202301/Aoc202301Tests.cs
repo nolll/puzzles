@@ -8,13 +8,12 @@ public class Aoc202301Tests
     [Test]
     public void CalibrationNumbersPart1()
     {
-        const string input = 
-"""
-1abc2
-pqr3stu8vwx
-a1b2c3d4e5f
-treb7uchet
-""";
+        const string input = """
+                             1abc2
+                             pqr3stu8vwx
+                             a1b2c3d4e5f
+                             treb7uchet
+                             """;
 
         var result = Aoc202301.FindCalibrationNumberPart1(input).Sum();
 
@@ -24,16 +23,15 @@ treb7uchet
     [Test]
     public void CalibrationNumbersPart2()
     {
-        const string input =
-"""
-two1nine
-eightwothree
-abcone2threexyz
-xtwone3four
-4nineeightseven2
-zoneight234
-7pqrstsixteen
-""";
+        const string input = """
+                             two1nine
+                             eightwothree
+                             abcone2threexyz
+                             xtwone3four
+                             4nineeightseven2
+                             zoneight234
+                             7pqrstsixteen
+                             """;
 
         var result = Aoc202301.FindCalibrationNumberPart2(input).Sum();
 

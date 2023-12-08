@@ -6,23 +6,23 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201606;
 public class Aoc201606Tests
 {
     private const string Input = """
-eedadn
-drvtee
-eandsr
-raavrd
-atevrs
-tsrnev
-sdttsa
-rasrtv
-nssdts
-ntnada
-svetve
-tesnvt
-vntsnd
-vrdear
-dvrsen
-enarar
-""";
+                                 eedadn
+                                 drvtee
+                                 eandsr
+                                 raavrd
+                                 atevrs
+                                 tsrnev
+                                 sdttsa
+                                 rasrtv
+                                 nssdts
+                                 ntnada
+                                 svetve
+                                 tesnvt
+                                 vntsnd
+                                 vrdear
+                                 dvrsen
+                                 enarar
+                                 """;
 
     [Test]
     public void MessageIsCorrect_MostCommon()

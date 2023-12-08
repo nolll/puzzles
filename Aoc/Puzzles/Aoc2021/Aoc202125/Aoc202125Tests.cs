@@ -23,14 +23,14 @@ public class Aoc202125Tests
     }
 
     private const string Input = """
-v...>>.vv>
-.vv>>.vv..
->>.>v>...v
->>v>>.>.v.
-v>v.vv.v..
->.>>..v...
-.vv..>.>v.
-v.v..>>v.v
-....v..v.>
-""";
+                                 v...>>.vv>
+                                 .vv>>.vv..
+                                 >>.>v>...v
+                                 >>v>>.>.v.
+                                 v>v.vv.v..
+                                 >.>>..v...
+                                 .vv..>.>v.
+                                 v.v..>>v.v
+                                 ....v..v.>
+                                 """;
 }

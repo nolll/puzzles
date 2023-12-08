@@ -6,10 +6,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201722;
 public class Aoc201722Tests
 {
     private const string Input = """
-..#
-#..
-...
-""";
+                                 ..#
+                                 #..
+                                 ...
+                                 """;
 
     [TestCase(7, 5)]
     [TestCase(70, 41)]

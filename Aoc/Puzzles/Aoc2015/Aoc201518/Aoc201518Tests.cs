@@ -6,13 +6,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201518;
 public class Aoc201518Tests
 {
     private const string Input = """
-.#.#.#
-...##.
-#....#
-..#...
-#.#..#
-####..
-""";
+                                 .#.#.#
+                                 ...##.
+                                 #....#
+                                 ..#...
+                                 #.#..#
+                                 ####..
+                                 """;
 
     [Test]
     public void LightCountAfterOneStep()

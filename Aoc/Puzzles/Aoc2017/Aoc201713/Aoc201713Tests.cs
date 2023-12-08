@@ -9,11 +9,11 @@ public class Aoc201713Tests
     public void SeverityIsCorrect()
     {
         const string input = """
-0: 3
-1: 2
-4: 4
-6: 4
-""";
+                             0: 3
+                             1: 2
+                             4: 4
+                             6: 4
+                             """;
 
         var scanner = new PacketScanner(input.Trim());
         var severity = scanner.GetSeverity();
@@ -42,11 +42,11 @@ public class Aoc201713Tests
     public void DelayUntilPassIsCorrect()
     {
         const string input = """
-0: 3
-1: 2
-4: 4
-6: 4
-""";
+                             0: 3
+                             1: 2
+                             4: 4
+                             6: 4
+                             """;
 
         var scanner = new PacketScanner(input.Trim());
         var delay = scanner.DelayUntilPass();

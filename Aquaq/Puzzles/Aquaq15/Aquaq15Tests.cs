@@ -18,12 +18,11 @@ public class Aquaq15Tests
     [Test]
     public void CountStepsForThree()
     {
-        const string input =
-"""
-fly,try
-try,fly
-word,maze
-""";
+        const string input = """
+                             fly,try
+                             try,fly
+                             word,maze
+                             """;
 
         var result = new Aquaq15().Run(input);
 

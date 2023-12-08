@@ -5,14 +5,13 @@ namespace Pzl.Aquaq.Puzzles.Aquaq12;
 
 public class Aquaq12Tests
 {
-    private const string Input =
-"""
-1 2
-0 3
-1 1
-0 1
-1 5
-""";
+    private const string Input = """
+                                 1 2
+                                 0 3
+                                 1 1
+                                 0 1
+                                 1 5
+                                 """;
 
     [Test]
     public void RideTheLift()

@@ -9,14 +9,14 @@ public class Aoc201917Tests
     public void IntersectionsFound()
     {
         const string input = """
-..#..........
-..#..........
-#######...###
-#.#...#...#.#
-#############
-..#...#...#..
-..#####...^..
-""";
+                             ..#..........
+                             ..#..........
+                             #######...###
+                             #.#...#...#.#
+                             #############
+                             ..#...#...#..
+                             ..#####...^..
+                             """;
 
         var intersectionFinder = new ScaffoldIntersectionFinder(input);
         var result = intersectionFinder.GetSumOfAlignmentParameters();

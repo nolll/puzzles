@@ -9,13 +9,13 @@ public class Aoc201623Tests
     public void RegisterAIsCorrect()
     {
         const string input = """
-cpy 41 a
-inc a
-inc a
-dec a
-jnz a 2
-dec a
-""";
+                             cpy 41 a
+                             inc a
+                             inc a
+                             dec a
+                             jnz a 2
+                             dec a
+                             """;
 
         var control = new SafeCrackingComputerPart1(input.Trim(), 0, 0);
 
@@ -26,14 +26,14 @@ dec a
     public void RegisterAIsCorrectWithToggleInstruction()
     {
         const string input = """
-cpy 2 a
-tgl a
-tgl a
-tgl a
-cpy 1 a
-dec a
-dec a
-""";
+                             cpy 2 a
+                             tgl a
+                             tgl a
+                             tgl a
+                             cpy 1 a
+                             dec a
+                             dec a
+                             """;
 
         var control = new SafeCrackingComputerPart1(input.Trim(), 0, 0);
 

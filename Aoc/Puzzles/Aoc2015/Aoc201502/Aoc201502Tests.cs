@@ -18,9 +18,10 @@ public class Aoc201502Tests
     public void CorrectSquareFeetForMultipleGifts()
     {
         const string input = """
-2x3x4
-1x1x10
-""";
+                             2x3x4
+                             1x1x10
+                             """;
+
         const int expected = 101;
 
         var result = GiftWrappingCalculator.GetRequiredPaper(input);
@@ -41,9 +42,10 @@ public class Aoc201502Tests
     public void CorrectRibbonLengthForMultipleGifts()
     {
         const string input = """
-2x3x4
-1x1x10
-""";
+                             2x3x4
+                             1x1x10
+                             """;
+
         const int expected = 48;
 
         var result = GiftWrappingCalculator.GetRequiredRibbon(input);

@@ -9,12 +9,12 @@ public class Aoc201624Tests
     public void FindsClosestRoute()
     {
         const string input = """
-###########
-#0.1.....2#
-#.#######.#
-#4.......3#
-###########
-""";
+                             ###########
+                             #0.1.....2#
+                             #.#######.#
+                             #4.......3#
+                             ###########
+                             """;
 
         var navigator = new AirDuctNavigator(input);
         var shortestPath = navigator.Run(false);
@@ -26,12 +26,12 @@ public class Aoc201624Tests
     public void FindsClosestRouteAndGoesBackToStart()
     {
         const string input = """
-###########
-#0.1.....2#
-#.#######.#
-#4.......3#
-###########
-""";
+                             ###########
+                             #0.1.....2#
+                             #.#######.#
+                             #4.......3#
+                             ###########
+                             """;
 
         var navigator = new AirDuctNavigator(input);
         var shortestPath = navigator.Run(true);

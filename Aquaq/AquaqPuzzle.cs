@@ -8,7 +8,7 @@ public abstract class AquaqPuzzle : OnePartPuzzle
     public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
-    protected override string CollectionTag => PuzzleTag.Aquaq;
+    protected override string CollectionTag => "aquaq";
 
     protected AquaqPuzzle()
     {
@@ -17,7 +17,7 @@ public abstract class AquaqPuzzle : OnePartPuzzle
         Id = id;
         SortId = paddedId;
         Title = $"AquaQ Challenge {id}";
-        ListTitle = $"{PuzzleTag.Aquaq} {paddedId}";
+        ListTitle = $"AquaQ {paddedId}";
     }
 
     protected override IEnumerable<string> CustomTags

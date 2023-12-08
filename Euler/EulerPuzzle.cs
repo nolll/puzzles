@@ -8,7 +8,7 @@ public abstract class EulerPuzzle : OnePartPuzzle
     public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
-    protected override string CollectionTag => PuzzleTag.Euler;
+    protected override string CollectionTag => "euler";
 
     protected EulerPuzzle()
     {
@@ -17,7 +17,7 @@ public abstract class EulerPuzzle : OnePartPuzzle
         Id = id;
         SortId = paddedId;
         Title = $"Project Euler {id}";
-        ListTitle = $"{PuzzleTag.Euler} {paddedId}";
+        ListTitle = $"Euler {paddedId}";
     }
 
     protected override IEnumerable<string> CustomTags

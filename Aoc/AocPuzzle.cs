@@ -11,7 +11,7 @@ public abstract class AocPuzzle : TwoPartsPuzzle
     public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
-    protected override string CollectionTag => PuzzleTag.Aoc;
+    protected override string CollectionTag => "aoc";
 
     protected AocPuzzle()
     {
@@ -21,7 +21,7 @@ public abstract class AocPuzzle : TwoPartsPuzzle
         Id = id;
         SortId = id;
         Title = $"Advent of Code {year}-{paddedDay}";
-        ListTitle = $"{PuzzleTag.Aoc} {year}-{paddedDay}";
+        ListTitle = $"Aoc {year}-{paddedDay}";
         _year = year.ToString();
         _day = day.ToString();
     }

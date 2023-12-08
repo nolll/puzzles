@@ -62,7 +62,7 @@ public class NumberAsString
             7 => "seventy",
             8 => "eighty",
             9 => "ninety",
-            _ => ""
+            _ => throw new ArgumentException($"{n} is out of range")
         };
     }
 
@@ -95,7 +95,7 @@ public class NumberAsString
             17 => "seventeen",
             18 => "eighteen",
             19 => "nineteen",
-            _ => ""
+            _ => throw new ArgumentException($"{n} is out of range")
         };
     }
 

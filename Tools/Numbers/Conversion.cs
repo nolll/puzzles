@@ -21,22 +21,19 @@ public static class Conversion
         ("I", 1)
     };
 
-    public static string ToBinary(int n)
-    {
-        return Convert.ToString(n, 2);
-    }
+    public static string ToBinary(int n) => Convert.ToString(n, 2);
 
     public static string ToRoman(int input)
     {
         var roman = new StringBuilder();
         while (input > 0)
         {
-            foreach (var segment in RomanNumberSegments)
+            foreach (var (letters, value) in RomanNumberSegments)
             {
-                if (input >= segment.Value)
+                if (input >= value)
                 {
-                    roman.Append(segment.Letters);
-                    input -= segment.Value;
+                    roman.Append(letters);
+                    input -= value;
                     break;
                 }
             }

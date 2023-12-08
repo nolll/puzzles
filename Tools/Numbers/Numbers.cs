@@ -56,7 +56,7 @@ public static class Numbers
         return true;
     }
 
-    public static long FindLargestPrimeFactor(long num)
+    public static long LargestPrimeFactor(long num)
     {
         long largest = 0;
 
@@ -88,12 +88,12 @@ public static class Numbers
     {
         for (var i = 1; i * i <= n; i++)
         {
-            if (n % i == 0)
-            {
-                yield return i;
-                if (i != n / i)
-                    yield return n / i;
-            }
+            if (n % i != 0) 
+                continue;
+            
+            yield return i;
+            if (i != n / i)
+                yield return n / i;
         }
     }
     

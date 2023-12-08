@@ -24,6 +24,15 @@ public class NumbersTests
         result.Should().Be(expected);
     }
 
+    [TestCase(13195, 29)]
+    [TestCase(14, 7)]
+    public void LargestPrimeFactors(int n, int expected)
+    {
+        var result = Numbers.LargestPrimeFactor(n);
+
+        result.Should().Be(expected);
+    }
+
     [TestCase(1, 1)]
     [TestCase(3, 2)]
     [TestCase(6, 4)]
@@ -50,6 +59,7 @@ public class NumbersTests
         result.Should().Be(expected);
     }
 
+    [TestCase(12345678901, false)]
     [TestCase(1234567890, true)]
     [TestCase(1234, false)]
     [TestCase(1233, false)]

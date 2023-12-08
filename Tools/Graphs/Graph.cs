@@ -2,11 +2,11 @@
 
 public static class Graph
 {
-    public static int GetLowestCost(List<Input> inputs, string source, string target)
-        => GetLowestCost(inputs, source, target, 1);
+    public static int GetLowestCost(List<Input> inputs, string source, string target) => 
+        GetLowestCost(inputs, source, target, 1);
 
-    public static int GetHighestCost(List<Input> inputs, string source, string target)
-        => GetLowestCost(inputs, source, target, -1);
+    public static int GetHighestCost(List<Input> inputs, string source, string target) => 
+        GetLowestCost(inputs, source, target, -1);
 
     private static int GetLowestCost(List<Input> inputs, string source, string target, int costModifier)
     {

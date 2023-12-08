@@ -54,19 +54,10 @@ public class Matrix<T> where T : struct
         YMax = max.Y;
     }
 
-    public IEnumerable<T> Values
-    {
-        get
-        {
-            foreach (var coord in Coords)
-            {
-                if (_matrix.TryGetValue(coord, out var v))
-                    yield return v;
-                else
-                    yield return _defaultValue;
-            }
-        }
-    }
+    public IEnumerable<T> Values =>
+        Coords.Select(coord => _matrix.TryGetValue(coord, out var v) 
+            ? v 
+            : _defaultValue);
 
     public IEnumerable<MatrixAddress> Coords
     {
@@ -85,12 +76,10 @@ public class Matrix<T> where T : struct
     public T ReadValue() => ReadValueAt(Address);
     public T ReadValueAt(int x, int y) => ReadValueAt(new MatrixAddress(x, y));
 
-    public T ReadValueAt(MatrixAddress coord)
-    {
-        return _matrix.TryGetValue(coord, out var v)
+    public T ReadValueAt(MatrixAddress coord) =>
+        _matrix.TryGetValue(coord, out var v)
             ? v
             : _defaultValue;
-    }
 
     public void WriteValue(T value) => WriteValueAt(Address, value);
     public void WriteValueAt(int x, int y, T value) => WriteValueAt(new MatrixAddress(x, y), value);

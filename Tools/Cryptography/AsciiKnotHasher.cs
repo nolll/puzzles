@@ -15,7 +15,7 @@ public class AsciiKnotHasher
     public AsciiKnotHasher(string input)
     {
         var lengths = input.ToCharArray().Select(o => (int)o).ToList();
-        lengths.AddRange(new[] { 17, 31, 73, 47, 23 });
+        lengths.AddRange([17, 31, 73, 47, 23]);
         _lengths = lengths.ToArray();
         _list = FillList(256);
         _listIndex = 0;
@@ -37,7 +37,7 @@ public class AsciiKnotHasher
         Hash = GetHash(denseHash);
     }
 
-    private string GetHash(IEnumerable<int> denseHash)
+    private static string GetHash(IEnumerable<int> denseHash)
     {
         var hash = new StringBuilder();
         foreach (var v in denseHash)
@@ -71,7 +71,7 @@ public class AsciiKnotHasher
         }
     }
 
-    private int[] FillList(int size)
+    private static int[] FillList(int size)
     {
         var list = new int[size];
         for (var i = 0; i < size; i++) 
@@ -92,7 +92,7 @@ public class AsciiKnotHasher
         _skip++;
     }
 
-    private void WriteValues(int[] values)
+    private void WriteValues(IEnumerable<int> values)
     {
         var current = _listIndex;
         foreach (var v in values)

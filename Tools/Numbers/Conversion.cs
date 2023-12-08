@@ -4,8 +4,8 @@ namespace Pzl.Tools.Numbers;
 
 public static class Conversion
 {
-    private static readonly List<(string Letters, int Value)> RomanNumberSegments = new()
-    {
+    private static readonly List<(string Letters, int Value)> RomanNumberSegments =
+    [
         ("M", 1000),
         ("CM", 900),
         ("D", 500),
@@ -19,7 +19,7 @@ public static class Conversion
         ("V", 5),
         ("IV", 4),
         ("I", 1)
-    };
+    ];
 
     public static string ToBinary(int n) => Convert.ToString(n, 2);
 

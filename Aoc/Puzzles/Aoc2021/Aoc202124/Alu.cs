@@ -8,15 +8,15 @@ public class Alu
     private readonly int[] _params1;
     private readonly int[] _params2;
     private readonly int[] _params3;
-    private long[] _zMax;
+    private readonly long[] _zMax;
 
     public Alu(string input)
     {
         var lines = StringReader.ReadLines(input);
         _instructions = lines.Select(ParseInstruction);
-        _params1 = new[] { 1, 1, 1, 26, 1, 1, 26, 1, 1, 26, 26, 26, 26, 26 };
-        _params2 = new[] { 12, 11, 11, -6, 15, 12, -9, 14, 14, -5, -9, -5, -2, -7 };
-        _params3 = new[] { 4, 10, 10, 14, 6, 16, 1, 7, 8, 11, 8, 3, 1, 8 };
+        _params1 = [1, 1, 1, 26, 1, 1, 26, 1, 1, 26, 26, 26, 26, 26];
+        _params2 = [12, 11, 11, -6, 15, 12, -9, 14, 14, -5, -9, -5, -2, -7];
+        _params3 = [4, 10, 10, 14, 6, 16, 1, 7, 8, 11, 8, 3, 1, 8];
         var zList = new List<long>();
         long currentZMax = 1;
         foreach (var p in _params1)
@@ -29,7 +29,7 @@ public class Alu
         _zMax = zList.ToArray();
     }
 
-    private AluInstruction ParseInstruction(string s)
+    private static AluInstruction ParseInstruction(string s)
     {
         var parts = s.Split(' ');
         var operation = parts[0];
@@ -61,7 +61,6 @@ public class Alu
         {
             if (z > _zMax[i])
             {
-                //Console.WriteLine(_zMax[i]);
                 return z;
             }
             z = ProcessInstruction(inputs[i], z, _params1[i], _params2[i], _params3[i]);
@@ -70,7 +69,7 @@ public class Alu
         return z;
     }
 
-    private long ProcessInstruction(int input, long z, int p1, int p2, int p3)
+    private static long ProcessInstruction(int input, long z, int p1, int p2, int p3)
     {
         var z1 = (long)Math.Floor((double)z / p1);
         if (input == z % 26 + p2)

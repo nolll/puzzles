@@ -31,10 +31,7 @@ public static class Numbers
         return primes;
     }
 
-    public static bool IsPrime(int n)
-    {
-        return IsPrime((long)n);
-    }
+    public static bool IsPrime(int n) => IsPrime((long)n);
 
     public static bool IsPrime(long n)
     {
@@ -97,10 +94,8 @@ public static class Numbers
         }
     }
     
-    public static IEnumerable<int> GetProperDivisors(int x)
-    {
-        return GetAllDivisors(x).OrderBy(o => o).SkipLast(1);
-    }
+    public static IEnumerable<int> GetProperDivisors(int x) => 
+        GetAllDivisors(x).OrderBy(o => o).SkipLast(1);
 
     public static bool IsPandigital1Through9(long n)
     {

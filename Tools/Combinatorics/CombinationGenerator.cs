@@ -11,9 +11,9 @@ public static class CombinationGenerator
         var tailCombos = GetUniqueCombinationsAnySize(list.Skip(1).ToList());
         tailCombos.ForEach(combo =>
         {
-            result.Add(new List<T>(combo));
+            result.Add([..combo]);
             combo.Add(list[0]);
-            result.Add(new List<T>(combo));
+            result.Add([..combo]);
         });
         return result;
     }
@@ -53,9 +53,9 @@ public static class CombinationGenerator
         var tailCombos = GetUniqueCombinationsAnySize(list.Skip(1).ToList());
         tailCombos.ForEach(combo =>
         {
-            result.Add(new List<T>(combo));
+            result.Add([..combo]);
             combo.Add(list[0]);
-            result.Add(new List<T>(combo));
+            result.Add([..combo]);
         });
         return result.Where(o => o.Count <= size);
     }

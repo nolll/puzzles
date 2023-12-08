@@ -32,7 +32,7 @@ public class AirDuctNavigator
             
         foreach (var path in startPaths)
         {
-            var stepCount = FollowPath(path, new List<AirDuctLocation>(), goBackToStartWhenDone);
+            var stepCount = FollowPath(path, [], goBackToStartWhenDone);
             stepCounts.Add(stepCount);
         }
 
@@ -93,7 +93,7 @@ public class AirDuctNavigator
         return stepCount;
     }
 
-    private string GetCacheKey(char key, IList<AirDuctLocation> visitedLocations)
+    private static string GetCacheKey(char key, IList<AirDuctLocation> visitedLocations)
     {
         var joinedKeys = string.Join('-', visitedLocations.OrderBy(o => o.Id).Select(o => o.Id));
         return $"{key}.{joinedKeys}";
@@ -101,7 +101,7 @@ public class AirDuctNavigator
 
     private void Init(string input)
     {
-        _locations = new List<AirDuctLocation>();
+        _locations = [];
         _matrix = new Matrix<char>();
         var rows = StringReader.ReadLines(input);
         var y = 0;

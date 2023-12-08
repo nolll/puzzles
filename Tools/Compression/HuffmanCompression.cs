@@ -49,10 +49,9 @@ public class HuffmanCompression
     }
 
     private IList<Node> GetNodes()
-        =>
-            _charset.ToCharArray()
+        => _charset.ToCharArray()
                 .GroupBy(o => o)
-                .Select(o => new Node(o.Key.ToString(), o.Count(), new List<Node>()))
+                .Select(o => new Node(o.Key.ToString(), o.Count(), []))
                 .OrderBy(o => o.Weight)
                 .ThenBy(o => o.Key.First())
                 .ToList();

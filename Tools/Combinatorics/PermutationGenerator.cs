@@ -2,15 +2,11 @@ namespace Pzl.Tools.Combinatorics;
 
 public static class PermutationGenerator
 {
-    public static IList<IEnumerable<int>> GetPermutations(IList<int> numbers)
-    {
-        return GetPermutations(numbers, numbers.Count).ToList();
-    }
+    public static IList<IEnumerable<int>> GetPermutations(IList<int> numbers) => 
+        GetPermutations(numbers, numbers.Count).ToList();
 
-    public static IList<IEnumerable<string>> GetPermutations(IList<string> strings)
-    {
-        return GetPermutations(strings, strings.Count).ToList();
-    }
+    public static IList<IEnumerable<string>> GetPermutations(IList<string> strings) => 
+        GetPermutations(strings, strings.Count).ToList();
 
     public static IEnumerable<IEnumerable<T>> GetPermutations<T>(IList<T> list, int length)
     {

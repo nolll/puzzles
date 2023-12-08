@@ -6,31 +6,17 @@ namespace Pzl.Tools.Cryptography;
 
 public class Hashfactory
 {
-    private readonly MD5 _md5;
-    
-    public Hashfactory()
-    {
-        _md5 = MD5.Create();
-    }
+    private readonly MD5 _md5 = MD5.Create();
 
-    public string StringHashFromString(string str)
-    {
-        return StringHashFromBytes(Encoding.ASCII.GetBytes(str));
-    }
+    public string StringHashFromString(string str) => 
+        StringHashFromBytes(Encoding.ASCII.GetBytes(str));
 
-    public string StringHashFromBytes(byte[] bytes)
-    {
-        var hashedBytes = ByteHashFromBytes(bytes);
-        return ByteConverter.ToHexString(hashedBytes);
-    }
+    public string StringHashFromBytes(byte[] bytes) => 
+        ByteConverter.ToHexString(ByteHashFromBytes(bytes));
 
-    public byte[] ByteHashFromString(string str)
-    {
-        return ByteHashFromBytes(Encoding.ASCII.GetBytes(str));
-    }
+    public byte[] ByteHashFromString(string str) => 
+        ByteHashFromBytes(Encoding.ASCII.GetBytes(str));
 
-    public byte[] ByteHashFromBytes(byte[] bytes)
-    {
-        return _md5.ComputeHash(bytes);
-    }
+    public byte[] ByteHashFromBytes(byte[] bytes) => 
+        _md5.ComputeHash(bytes);
 }

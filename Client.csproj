@@ -53,7 +53,6 @@
     <ProjectReference Include="Aoc\Aoc.csproj" />
     <ProjectReference Include="Aquaq\Aquaq.csproj" />
     <ProjectReference Include="Common\Common.csproj" />
-    <ProjectReference Include="Tools\Tools.csproj" />
     <ProjectReference Include="Euler\Euler.csproj" />
   </ItemGroup>
 

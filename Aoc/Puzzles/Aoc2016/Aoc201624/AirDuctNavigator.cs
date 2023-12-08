@@ -5,16 +5,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201624;
 
 public class AirDuctNavigator
 {
-    private IList<AirDuctLocation> _locations = new List<AirDuctLocation>();
+    private List<AirDuctLocation> _locations = [];
     private Matrix<char> _matrix = new();
-    private readonly IDictionary<(char, char), AirDuctPath> _paths;
-    private readonly IDictionary<string, int> _cache;
+    private readonly Dictionary<(char, char), AirDuctPath> _paths = new();
+    private readonly Dictionary<string, int> _cache = new();
     private AirDuctRobot _robot = new(new MatrixAddress(0, 0));
 
     public AirDuctNavigator(string input)
     {
-        _paths = new Dictionary<(char, char), AirDuctPath>();
-        _cache = new Dictionary<string, int>();
         Init(input);
         MapPaths();
     }
@@ -28,38 +26,19 @@ public class AirDuctNavigator
     {
         var allPaths = GetAllPaths(_robot.Address);
         var startPaths = GetStartPaths(allPaths);
-        var stepCounts = new List<int>();
-            
-        foreach (var path in startPaths)
-        {
-            var stepCount = FollowPath(path, [], goBackToStartWhenDone);
-            stepCounts.Add(stepCount);
-        }
+        var stepCounts = startPaths.Select(path => FollowPath(path, [], goBackToStartWhenDone)).ToList();
 
-        return stepCounts.Any() ? stepCounts.Min() : 0;
+        return stepCounts.Count > 0 ? stepCounts.Min() : 0;
     }
 
     private int FindShortestPathFrom(AirDuctLocation currentLocation, IList<AirDuctLocation> visitedLocations, bool goBackToStartWhenDone)
     {
-        var stepCounts = new List<int>();
-        var pathsToFollow = new List<AirDuctPath>();
         var remainingLocations = GetRemainingLocations(visitedLocations);
-        foreach (var location in remainingLocations)
-        {
-            if (location.Id != currentLocation.Id)
-            {
-                var path = _paths[(currentLocation.Id, location.Id)];
-                pathsToFollow.Add(path);
-            }
-        }
+        var stepCounts = remainingLocations.Where(o => o.Id != currentLocation.Id)
+            .Select(o => _paths[(currentLocation.Id, o.Id)])
+            .Select(path => FollowPath(path, visitedLocations, goBackToStartWhenDone)).ToList();
 
-        foreach (var path in pathsToFollow)
-        {
-            var stepCount = FollowPath(path, visitedLocations, goBackToStartWhenDone);
-            stepCounts.Add(stepCount);
-        }
-
-        return stepCounts.Any() ? stepCounts.Min() : 0;
+        return stepCounts.Count > 0 ? stepCounts.Min() : 0;
     }
 
     private IEnumerable<AirDuctLocation> GetRemainingLocations(IList<AirDuctLocation> visitedLocations)
@@ -133,17 +112,7 @@ public class AirDuctNavigator
         }
     }
 
-    private IList<AirDuctPath> GetStartPaths(IList<AirDuctPath> allPaths)
-    {
-        var paths = new List<AirDuctPath>();
-
-        foreach (var path in allPaths)
-        {
-            paths.Add(path);
-        }
-
-        return paths;
-    }
+    private static IList<AirDuctPath> GetStartPaths(IList<AirDuctPath> allPaths) => allPaths.ToList();
 
     private IList<AirDuctPath> GetAllPaths(MatrixAddress startAddress)
     {
@@ -152,10 +121,8 @@ public class AirDuctNavigator
         foreach (var location in _locations)
         {
             var coords = PathFinder.ShortestPathTo(_matrix, startAddress, location.Address);
-            if (coords.Count > 0)
-            {
+            if (coords.Count > 0) 
                 paths.Add(new AirDuctPath(location, coords.Count));
-            }
         }
 
         return paths;

@@ -4,5 +4,5 @@ namespace Pzl.Common;
 
 public interface IPuzzleProvider
 {
-    List<Puzzle> GetPuzzles();
+    List<PuzzleDefinition> GetPuzzles();
 }

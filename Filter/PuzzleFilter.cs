@@ -22,4 +22,15 @@ public class PuzzleFilter
 
         return r;
     }
+
+    public IEnumerable<PuzzleDefinition> Filter(IEnumerable<PuzzleDefinition> puzzles)
+    {
+        var r = puzzles;
+        foreach (var tag in _parameters.Tags)
+        {
+            r = r.Where(o => o.Tags.Contains(tag));
+        }
+
+        return r;
+    }
 }

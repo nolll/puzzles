@@ -4,22 +4,22 @@ namespace Pzl.Client;
 
 public class PuzzleRepository
 {
-    private readonly List<Puzzle> _puzzles;
+    private readonly List<PuzzleDefinition> _puzzleDefinitions;
         
     public PuzzleRepository(IEnumerable<IPuzzleProvider> puzzleProviders)
     {
-        _puzzles = puzzleProviders.SelectMany(o => o.GetPuzzles()).ToList();
+        _puzzleDefinitions = puzzleProviders.SelectMany(o => o.GetPuzzles()).ToList();
     }
 
-    public IList<Puzzle> GetPuzzles() => _puzzles;
+    public IList<Puzzle> GetPuzzles() => _puzzleDefinitions.Select(o => o.Instance).ToList();
 
-    public List<Puzzle> Search(string query) =>
-        _puzzles
+    public List<PuzzleDefinition> Search(string query) =>
+        _puzzleDefinitions
             .Where(o => MatchesQuery(o, query))
             .ToList();
 
-    private static bool MatchesQuery(Puzzle o, string query) =>
-        o.Title.Contains(query, StringComparison.InvariantCultureIgnoreCase) ||
-        o.Name.Contains(query, StringComparison.InvariantCultureIgnoreCase) ||
-        o.Comment is not null && o.Comment.Contains(query, StringComparison.InvariantCultureIgnoreCase);
+    private static bool MatchesQuery(PuzzleDefinition definition, string query) =>
+        definition.Title.Contains(query, StringComparison.InvariantCultureIgnoreCase) ||
+        definition.Name.Contains(query, StringComparison.InvariantCultureIgnoreCase) ||
+        definition.Comment is not null && definition.Comment.Contains(query, StringComparison.InvariantCultureIgnoreCase);
 }

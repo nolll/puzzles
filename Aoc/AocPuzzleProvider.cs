@@ -4,8 +4,14 @@ namespace Pzl.Aoc;
 
 public class AocPuzzleProvider : IPuzzleProvider
 {
-    public List<Puzzle> GetPuzzles()
+    public List<PuzzleDefinition> GetPuzzles() =>
+        PuzzleFactory.GetTypes<AocPuzzle>()
+            .Select(CreatePuzzleDefinition)
+            .ToList();
+
+    private static PuzzleDefinition CreatePuzzleDefinition(Type t)
     {
-        return PuzzleFactory.CreatePuzzles<AocPuzzle>();
+        var instance = PuzzleFactory.CreatePuzzle<AocPuzzle>(t);
+        return new PuzzleDefinition(t, instance);
     }
 }

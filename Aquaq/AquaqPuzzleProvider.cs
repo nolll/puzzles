@@ -4,8 +4,14 @@ namespace Pzl.Aquaq;
 
 public class AquaqPuzzleProvider : IPuzzleProvider
 {
-    public List<Puzzle> GetPuzzles()
+    public List<PuzzleDefinition> GetPuzzles() =>
+        PuzzleFactory.GetTypes<AquaqPuzzle>()
+            .Select(CreatePuzzleDefinition)
+            .ToList();
+
+    private static PuzzleDefinition CreatePuzzleDefinition(Type t)
     {
-        return PuzzleFactory.CreatePuzzles<AquaqPuzzle>();
+        var instance = PuzzleFactory.CreatePuzzle<AquaqPuzzle>(t);
+        return new PuzzleDefinition(t, instance);
     }
 }

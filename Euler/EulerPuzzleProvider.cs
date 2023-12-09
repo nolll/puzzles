@@ -4,8 +4,14 @@ namespace Pzl.Euler;
 
 public class EulerPuzzleProvider : IPuzzleProvider
 {
-    public List<Puzzle> GetPuzzles()
+    public List<PuzzleDefinition> GetPuzzles() =>
+        PuzzleFactory.GetTypes<EulerPuzzle>()
+            .Select(CreatePuzzleDefinition)
+            .ToList();
+
+    private static PuzzleDefinition CreatePuzzleDefinition(Type t)
     {
-        return PuzzleFactory.CreatePuzzles<EulerPuzzle>();
+        var instance = PuzzleFactory.CreatePuzzle<EulerPuzzle>(t);
+        return new PuzzleDefinition(t, instance);
     }
 }

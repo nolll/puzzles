@@ -13,7 +13,10 @@ public class PuzzleFactory
             .OrderBy(o => o.SortId)
             .ToList();
 
-    private static Puzzle CreatePuzzle<T>(Type t) where T : Puzzle
+    public static List<Type> GetTypes<T>() where T : Puzzle =>
+        GetConcreteSubclassesOf<T>().ToList();
+
+    public static Puzzle CreatePuzzle<T>(Type t) where T : Puzzle
     {
         if (Activator.CreateInstance(t) is not T puzzle)
             throw new Exception($"Could not create puzzle: {t}");

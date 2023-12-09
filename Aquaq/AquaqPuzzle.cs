@@ -4,7 +4,8 @@ namespace Pzl.Aquaq;
 
 public abstract class AquaqPuzzle : OnePartPuzzle
 {
-    public override string Id { get; }
+    private readonly string _id;
+
     public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
@@ -12,11 +13,10 @@ public abstract class AquaqPuzzle : OnePartPuzzle
 
     protected AquaqPuzzle()
     {
-        var id = AquaqPuzzleParser.GetPuzzleId(GetType()).ToString();
-        var paddedId = id.PadLeft(2, '0');
-        Id = id;
+        _id = AquaqPuzzleParser.GetPuzzleId(GetType()).ToString();
+        var paddedId = _id.PadLeft(2, '0');
         SortId = paddedId;
-        Title = $"AquaQ Challenge {id}";
+        Title = $"AquaQ Challenge {_id}";
         ListTitle = $"AquaQ {paddedId}";
     }
 
@@ -24,7 +24,7 @@ public abstract class AquaqPuzzle : OnePartPuzzle
     {
         get
         {
-            yield return Id;
+            yield return _id;
         }
     }
 }

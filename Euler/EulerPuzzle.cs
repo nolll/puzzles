@@ -4,7 +4,8 @@ namespace Pzl.Euler;
 
 public abstract class EulerPuzzle : OnePartPuzzle
 {
-    public override string Id { get; }
+    private readonly string _id;
+
     public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
@@ -12,11 +13,10 @@ public abstract class EulerPuzzle : OnePartPuzzle
 
     protected EulerPuzzle()
     {
-        var id = EulerPuzzleParser.GetPuzzleId(GetType()).ToString();
-        var paddedId = id.PadLeft(3, '0');
-        Id = id;
+        _id = EulerPuzzleParser.GetPuzzleId(GetType()).ToString();
+        var paddedId = _id.PadLeft(3, '0');
         SortId = paddedId;
-        Title = $"Project Euler {id}";
+        Title = $"Project Euler {_id}";
         ListTitle = $"Euler {paddedId}";
     }
 
@@ -24,7 +24,7 @@ public abstract class EulerPuzzle : OnePartPuzzle
     {
         get
         {
-            yield return Id;
+            yield return _id;
         }
     }
 }

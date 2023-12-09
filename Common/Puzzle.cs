@@ -7,7 +7,6 @@ namespace Pzl.Common;
 
 public abstract class Puzzle
 {
-    public abstract string Id { get; }
     public abstract string SortId { get; }
     public abstract string Title { get; }
     public abstract string ListTitle { get; }

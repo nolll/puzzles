@@ -15,10 +15,16 @@ public class CommentAttribute(string comment) : Attribute
 }
 
 [AttributeUsage(AttributeTargets.Class)]
-public class IsSlowAttribute : Attribute;
+public class Attributes : Attribute;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class IsFunToOptimizeAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class NeedsRewriteAttribute : Attribute;
+
+[AttributeUsage(AttributeTargets.Class)]
+public class NumberOfPartsAttribute(int numberOfParts) : Attribute
+{
+    public int NumberOfParts { get; } = numberOfParts;
+}

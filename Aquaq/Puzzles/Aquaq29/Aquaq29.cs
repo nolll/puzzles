@@ -2,7 +2,7 @@
 
 namespace Pzl.Aquaq.Puzzles.Aquaq29;
 
-[IsSlow]
+[Attributes]
 [Name("On the up and up")]
 public class Aquaq29 : AquaqPuzzle
 {

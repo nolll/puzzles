@@ -11,9 +11,7 @@ public class PuzzleDefinitionInTest : PuzzleDefinition
         string? listTitle = null,
         string? name = null,
         string? comment = null,
-        bool? isSlow = null,
-        bool? needsRewrite = null,
-        bool? isFunToOptimize = null)
+        int? numberOfParts = null)
         : base(
             typeof(Puzzle),
             tags ?? [],
@@ -22,9 +20,7 @@ public class PuzzleDefinitionInTest : PuzzleDefinition
             listTitle ?? "",
             name ?? "",
             comment,
-            isSlow ?? false,
-            needsRewrite ?? false,
-            isFunToOptimize ?? false)
+            numberOfParts ?? 1)
     {
     }
 }

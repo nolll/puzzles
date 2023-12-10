@@ -2,7 +2,7 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201815;
 
-[IsSlow] // Could still use optimization, the hard coded 14 is a little ugly
+[Attributes] // Could still use optimization, the hard coded 14 is a little ugly
 [Name("Beverage Bandits")]
 [Comment("Battle Simulator")]
 public class Aoc201815 : AocPuzzle

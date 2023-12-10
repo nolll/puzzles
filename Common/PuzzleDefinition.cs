@@ -6,20 +6,16 @@ namespace Pzl.Common;
 public class PuzzleDefinition
 {
     public Type Type { get; }
-    public Puzzle Instance { get; }
     public IEnumerable<string> Tags { get; }
     public string SortId { get; }
     public string Title { get; }
     public string ListTitle { get; }
     public string Name { get; }
     public string? Comment { get; }
-    public bool IsSlow { get; }
-    public bool NeedsRewrite { get; }
-    public bool IsFunToOptimize { get; }
+    public int NumberOfParts { get; }
 
     public PuzzleDefinition(
         PuzzleData data, 
-        Puzzle instance,
         List<string> tags,
         string sortId,
         string title,
@@ -32,11 +28,8 @@ public class PuzzleDefinition
             listTitle,
             data.Name,
             data.Comment,
-            data.IsSlow,
-            data.NeedsRewrite,
-            data.IsFunToOptimize)
+            data.NumberOfParts)
     {
-        Instance = instance;
     }
 
     private static IEnumerable<string> CreateTags(PuzzleData data)
@@ -62,9 +55,7 @@ public class PuzzleDefinition
         string listTitle, 
         string name, 
         string? comment, 
-        bool isSlow, 
-        bool needsRewrite, 
-        bool isFunToOptimize)
+        int numberOfParts)
     {
         Type = type;
         Tags = tags;
@@ -73,8 +64,6 @@ public class PuzzleDefinition
         ListTitle = listTitle;
         Name = name;
         Comment = comment;
-        IsSlow = isSlow;
-        NeedsRewrite = needsRewrite;
-        IsFunToOptimize = isFunToOptimize;
+        NumberOfParts = numberOfParts;
     }
 }

@@ -17,7 +17,6 @@ public class AquaqPuzzleProvider : IPuzzleProvider
         var title = $"AquaQ Challenge {id}";
         var listTitle = $"AquaQ {paddedId}";
         List<string> tags = ["aquaq", id];
-        var instance = PuzzleFactory.CreateInstance<AquaqPuzzle>(data.Type);
-        return new PuzzleDefinition(data, instance, tags, sortId, title, listTitle);
+        return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }
 }

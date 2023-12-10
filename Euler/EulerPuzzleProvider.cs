@@ -18,7 +18,6 @@ public class EulerPuzzleProvider : IPuzzleProvider
         var title = $"Project Euler {id}";
         var listTitle = $"Euler {paddedId}";
         List<string> tags = ["euler", id];
-        var instance = PuzzleFactory.CreateInstance<EulerPuzzle>(data.Type);
-        return new PuzzleDefinition(data, instance, tags, sortId, title, listTitle);
+        return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }
 }

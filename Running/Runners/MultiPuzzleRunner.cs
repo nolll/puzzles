@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Pzl.Client.Running.Results;
+﻿using Pzl.Client.Running.Results;
 using Pzl.Common;
 using Spectre.Console;
 
@@ -11,8 +10,7 @@ public class MultiPuzzleRunner
     private const int ResultLength = 10;
     private const int CommentLength = 24;
 
-    private List<PuzzleDefinition> _definitions;
-    private readonly List<Puzzle> _puzzles;
+    private readonly List<PuzzleDefinition> _definitions;
     private readonly int _funcCount;
     private readonly TimeSpan _timeoutTimespan;
     private readonly PuzzleResultVerifier _resultVerifier;
@@ -20,8 +18,7 @@ public class MultiPuzzleRunner
     public MultiPuzzleRunner(List<PuzzleDefinition> puzzles, int timeoutSeconds, string hashSeed, bool isDebugMode)
     {
         _definitions = puzzles;
-        _puzzles = puzzles.Select(o => o.Instance).ToList();
-        _funcCount = _puzzles.Max(o => o.RunFunctions.Count);
+        _funcCount = _definitions.Max(o => o.NumberOfParts);
         _timeoutTimespan = TimeSpan.FromSeconds(timeoutSeconds);
         _resultVerifier = new PuzzleResultVerifier(hashSeed);
     }
@@ -55,7 +52,7 @@ public class MultiPuzzleRunner
         var paddedPartTitles = partTitles.Select(o => o.PadRight(10));
         var variableParts = string.Join(" | ", paddedPartTitles);
 
-        AnsiConsole.WriteLine($"Running {_puzzles.Count} puzzles");
+        AnsiConsole.WriteLine($"Running {_definitions.Count} puzzles");
         PrintDivider();
         AnsiConsole.WriteLine($"| {"puzzle",-TitleLength} | {variableParts} | {"comment",-CommentLength} |");
         PrintDivider();

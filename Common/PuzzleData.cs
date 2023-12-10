@@ -10,8 +10,16 @@ public class PuzzleData
     public bool IsSlow { get; }
     public bool NeedsRewrite { get; }
     public bool IsFunToOptimize { get; }
+    public int NumberOfParts { get; }
 
-    public PuzzleData(Type type, string name, string? comment, bool isSlow, bool needsRewrite, bool isFunToOptimize)
+    public PuzzleData(
+        Type type, 
+        string name, 
+        string? comment, 
+        bool isSlow, 
+        bool needsRewrite, 
+        bool isFunToOptimize,
+        int numberOfParts)
     {
         Type = type;
         Name = name;
@@ -19,5 +27,6 @@ public class PuzzleData
         IsSlow = isSlow;
         NeedsRewrite = needsRewrite;
         IsFunToOptimize = isFunToOptimize;
+        NumberOfParts = numberOfParts;
     }
 }

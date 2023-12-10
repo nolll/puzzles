@@ -19,12 +19,13 @@ public class PuzzleFactory
         var isSlow = IsSlow(type);
         var needsRewrite = NeedsRewrite(type);
         var isFunToOptimize = IsFunToOptimize(type);
-        return new PuzzleData(type, name, comment, isSlow, needsRewrite, isFunToOptimize);
+        var numberOfParts = GetNumberOfParts(type);
+        return new PuzzleData(type, name, comment, isSlow, needsRewrite, isFunToOptimize, numberOfParts);
     }
 
-    public static Puzzle CreateInstance<T>(Type t) where T : Puzzle
+    public static Puzzle CreateInstance(Type t)
     {
-        if (Activator.CreateInstance(t) is not T puzzle)
+        if (Activator.CreateInstance(t) is not Puzzle puzzle)
             throw new Exception($"Could not create puzzle: {t}");
 
         return puzzle;
@@ -48,11 +49,14 @@ public class PuzzleFactory
         type.GetCustomAttribute<CommentAttribute>(false)?.Comment;
 
     private static bool IsSlow(MemberInfo type) =>
-        type.GetCustomAttribute<IsSlowAttribute>(false) is not null;
+        type.GetCustomAttribute<Attributes>(false) is not null;
 
     private static bool NeedsRewrite(MemberInfo type) =>
         type.GetCustomAttribute<NeedsRewriteAttribute>(false) is not null;
 
     private static bool IsFunToOptimize(MemberInfo type) =>
         type.GetCustomAttribute<IsFunToOptimizeAttribute>(false) is not null;
+
+    private static int GetNumberOfParts(MemberInfo type) =>
+        type.GetCustomAttribute<NumberOfPartsAttribute>(true)?.NumberOfParts ?? 1;
 }

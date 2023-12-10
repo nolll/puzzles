@@ -19,7 +19,6 @@ public class AocPuzzleProvider : IPuzzleProvider
         var listTitle = $"Aoc {year}-{paddedDay}";
         List<string> tags = ["aoc", year.ToString(), day.ToString()];
 
-        var instance = PuzzleFactory.CreateInstance<AocPuzzle>(data.Type);
-        return new PuzzleDefinition(data, instance, tags, sortId, title, listTitle);
+        return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }
 }

@@ -10,7 +10,7 @@ namespace Pzl.Client.Running.Runners;
 
 public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 {
-    private readonly Puzzle _puzzle;
+    private readonly PuzzleDefinition _definition;
     private readonly TimeSpan _timeoutTimespan;
     private readonly PuzzleResultVerifier _resultVerifier;
     private readonly int _resultLength;
@@ -29,7 +29,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
         int commentWidth,
         int maxFuncCount)
     {
-        _puzzle = puzzle.Instance;
+        _definition = puzzle;
         _timeoutTimespan = timeoutTimespan;
         _resultVerifier = resultVerifier;
         _resultLength = resultWidth;
@@ -47,9 +47,10 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     public void Run()
     {
         PrintRow();
-        for (var i = 0; i < _puzzle.RunFunctions.Count; i++)
+        var instance = PuzzleFactory.CreateInstance(_definition.Type);
+        for (var i = 0; i < instance.RunFunctions.Count; i++)
         {
-            var runFunc = _puzzle.RunFunctions[i];
+            var runFunc = instance.RunFunctions[i];
             RunPart(() => runFunc(), i);
         }
         AnsiConsole.WriteLine();

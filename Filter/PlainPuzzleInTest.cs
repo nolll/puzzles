@@ -1,10 +1,3 @@
 ﻿namespace Pzl.Client.Filter;
 
-public class PlainPuzzleDefinitionInTest : PuzzleDefinitionInTest
-{
-    public PlainPuzzleDefinitionInTest()
-        : base(
-            name: "Plain Puzzle")
-    {
-    }
-}
+public class PlainPuzzleDefinitionInTest() : PuzzleDefinitionInTest(name: "Plain Puzzle");

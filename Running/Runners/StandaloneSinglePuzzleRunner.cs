@@ -12,14 +12,12 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
 {
     private readonly PuzzleResultVerifier _resultVerifier;
     private readonly PuzzleDefinition _definition;
-    private readonly Puzzle _puzzle;
     private readonly bool _isDebugMode;
     private const int StatusPadding = 15;
 
     public StandaloneSinglePuzzleRunner(PuzzleDefinition puzzle, string hashSeed, bool isDebugMode)
     {
         _definition = puzzle;
-        _puzzle = puzzle.Instance;
         _isDebugMode = isDebugMode;
         _resultVerifier = new PuzzleResultVerifier(hashSeed);
     }
@@ -36,10 +34,11 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     {
         AnsiConsole.Cursor.Show(false);
         WriteHeader(_definition);
+        var instance = PuzzleFactory.CreateInstance(_definition.Type);
 
-        for (var i = 0; i < _puzzle.RunFunctions.Count; i++)
+        for (var i = 0; i < instance.RunFunctions.Count; i++)
         {
-            var runFunc = _puzzle.RunFunctions[i];
+            var runFunc = instance.RunFunctions[i];
             AnsiConsole.WriteLine();
             RunAndPrintPuzzleResult(i + 1, runFunc);
         }
@@ -50,8 +49,9 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     private void RunDebugMode()
     {
         WriteHeader(_definition);
+        var instance = PuzzleFactory.CreateInstance(_definition.Type);
 
-        foreach (var runFunc in _puzzle.RunFunctions)
+        foreach (var runFunc in instance.RunFunctions)
         {
             var result = runFunc();
             AnsiConsole.WriteLine(result.Answer);

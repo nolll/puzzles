@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201622;
 
+[Name("Grid Computing")]
 public class Aoc201622 : AocPuzzle
 {
-    public override string Name => "Grid Computing";
-
     protected override PuzzleResult RunPart1()
     {
         var storageGrid = new StorageGrid(InputFile);

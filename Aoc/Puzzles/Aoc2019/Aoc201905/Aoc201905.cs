@@ -3,11 +3,10 @@ using Pzl.Tools.Computers.IntCode;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201905;
 
+[Name("Sunny with a Chance of Asteroids")]
 public class Aoc201905 : AocPuzzle
 {
     private long _output;
-
-    public override string Name => "Sunny with a Chance of Asteroids";
 
     protected override PuzzleResult RunPart1()
     {

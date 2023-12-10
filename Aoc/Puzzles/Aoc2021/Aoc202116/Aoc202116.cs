@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202116;
 
+[Name("Packet Decoder")]
 public class Aoc202116 : AocPuzzle
 {
-    public override string Name => "Packet Decoder";
-
     protected override PuzzleResult RunPart1()
     {
         var packet = BitsPacket.FromHex(InputFile);

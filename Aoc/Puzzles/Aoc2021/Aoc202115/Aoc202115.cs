@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202115;
 
+[Name("Chiton")]
 public class Aoc202115 : AocPuzzle
 {
-    public override string Name => "Chiton";
-
     protected override PuzzleResult RunPart1()
     {
         var chitonRisk = new ChitonRisk();

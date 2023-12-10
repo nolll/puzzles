@@ -2,10 +2,9 @@
 
 namespace Pzl.Aquaq.Puzzles.Aquaq06;
 
+[Name("Let me count the ways")]
 public class Aquaq06 : AquaqPuzzle
 {
-    public override string Name => "Let me count the ways";
-
     protected override PuzzleResult Run()
     {
         const int n = 123;

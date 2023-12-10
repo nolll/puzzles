@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201724;
 
+[Name("Electromagnetic Moat")]
 public class Aoc201724 : AocPuzzle
 {
-    public override string Name => "Electromagnetic Moat";
-
     protected override PuzzleResult RunPart1()
     {
         var builder1 = new BridgeBuilder(InputFile, false);

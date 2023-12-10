@@ -3,14 +3,15 @@
 namespace Pzl.Common;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class CommentAttribute : Attribute
+public class NameAttribute(string name) : Attribute
 {
-    public string Comment { get; }
+    public string Name { get; } = name;
+}
 
-    public CommentAttribute(string comment)
-    {
-        Comment = comment;
-    }
+[AttributeUsage(AttributeTargets.Class)]
+public class CommentAttribute(string comment) : Attribute
+{
+    public string Comment { get; } = comment;
 }
 
 [AttributeUsage(AttributeTargets.Class)]

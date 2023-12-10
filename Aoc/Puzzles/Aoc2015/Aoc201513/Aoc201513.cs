@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201513;
 
+[Name("Knights of the Dinner Table")]
 public class Aoc201513 : AocPuzzle
 {
-    public override string Name => "Knights of the Dinner Table";
-
     protected override PuzzleResult RunPart1()
     {
         var table = new DinnerTable(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler008;
 
+[Name("Largest product in a series")]
 public class Euler008 : EulerPuzzle
 {
-    public override string Name => "Largest product in a series";
-
     protected override PuzzleResult Run()
     {
         var largestProduct = Run(13);

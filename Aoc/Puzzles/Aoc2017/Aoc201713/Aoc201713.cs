@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201713;
 
+[Name("Packet Scanners")]
 public class Aoc201713 : AocPuzzle
 {
-    public override string Name => "Packet Scanners";
-
     protected override PuzzleResult RunPart1()
     {
         var scanner1 = new PacketScanner(InputFile);

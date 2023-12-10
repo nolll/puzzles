@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201520;
 
+[Name("Infinite Elves and Infinite Houses")]
 public class Aoc201520 : AocPuzzle
 {
-    public override string Name => "Infinite Elves and Infinite Houses";
-
     protected override PuzzleResult RunPart1()
     {
         var presentDelivery = new PresentDelivery();

@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler039;
 
+[Name("Integer Right Triangle")]
 public class Euler039 : EulerPuzzle
 {
-    public override string Name => "Integer Right Triangle";
-
     protected override PuzzleResult Run()
     {
         var solutions = FindSolutions(1000);

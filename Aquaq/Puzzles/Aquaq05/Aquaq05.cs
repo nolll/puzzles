@@ -2,10 +2,9 @@
 
 namespace Pzl.Aquaq.Puzzles.Aquaq05;
 
+[Name("Snake eyes")]
 public class Aquaq05 : AquaqPuzzle
 {
-    public override string Name => "Snake eyes";
-
     protected override PuzzleResult Run()
     {
         var sum = FindSumOfIndexesWithMatchingDice(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201805;
 
+[Name("Alchemical Reduction")]
 public class Aoc201805 : AocPuzzle
 {
-    public override string Name => "Alchemical Reduction";
-
     protected override PuzzleResult RunPart1()
     {
         var polymerPuzzle = new PolymerPuzzle();

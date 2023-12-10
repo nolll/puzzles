@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202302;
 
+[Name("Cube Conundrum")]
 public class Aoc202302 : AocPuzzle
 {
-    public override string Name => "Cube Conundrum";
-
     private static readonly Dictionary<string, int> ValidGameCubeCounts = new()
     {
         { "red", 12 },

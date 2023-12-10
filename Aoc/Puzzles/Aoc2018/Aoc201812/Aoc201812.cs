@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201812;
 
+[Name("Subterranean Sustainability")]
 public class Aoc201812 : AocPuzzle
 {
-    public override string Name => "Subterranean Sustainability";
-
     protected override PuzzleResult RunPart1()
     {
         var spreader = new PlantSpreader(InputFile);

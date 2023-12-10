@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201707;
 
+[Name("Recursive Circus")]
 public class Aoc201707 : AocPuzzle
 {
-    public override string Name => "Recursive Circus";
-
     protected override PuzzleResult RunPart1()
     {
         var towers = new RecursiveTowers(InputFile);

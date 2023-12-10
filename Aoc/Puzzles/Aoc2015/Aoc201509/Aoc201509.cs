@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201509;
 
+[Name("All in a Single Night")]
 public class Aoc201509 : AocPuzzle
 {
-    public override string Name => "All in a Single Night";
-
     protected override PuzzleResult RunPart1()
     {
         var calculator = new RouteCalculator(InputFile);

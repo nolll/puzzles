@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202114;
 
+[Name("Extended Polymerization")]
 public class Aoc202114 : AocPuzzle
 {
-    public override string Name => "Extended Polymerization";
-
     protected override PuzzleResult RunPart1()
     {
         var polymerization = new Polymerization();

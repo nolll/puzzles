@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202121;
 
+[Name("Dirac Dice")]
 public class Aoc202121 : AocPuzzle
 {
-    public override string Name => "Dirac Dice";
-
     protected override PuzzleResult RunPart1()
     {
         var game = new DiracDiceGame();

@@ -3,10 +3,9 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq04;
 
+[Name("This is good co-primen")]
 public class Aquaq04 : AquaqPuzzle
 {
-    public override string Name => "This is good co-primen";
-
     private const int Input = 987820;
 
     protected override PuzzleResult Run()

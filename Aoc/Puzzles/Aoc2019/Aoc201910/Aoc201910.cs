@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201910;
 
+[Name("Monitoring Station")]
 public class Aoc201910 : AocPuzzle
 {
-    public override string Name => "Monitoring Station";
-
     protected override PuzzleResult RunPart1()
     {
         var detector = new AsteroidDetector();

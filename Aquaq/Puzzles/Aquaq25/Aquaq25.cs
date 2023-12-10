@@ -3,6 +3,7 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq25;
 
+[Name("S'morse")]
 public class Aquaq25 : AquaqPuzzle
 {
     private static readonly Dictionary<char, string> CharToMorse = new()
@@ -36,8 +37,6 @@ public class Aquaq25 : AquaqPuzzle
     };
 
     private static readonly Dictionary<string, char> MorseToChar = CharToMorse.ToDictionary(k => k.Value, v => v.Key);
-
-    public override string Name => "S'morse";
 
     protected override PuzzleResult Run()
     {

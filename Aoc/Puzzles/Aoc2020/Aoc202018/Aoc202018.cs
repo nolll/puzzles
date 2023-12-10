@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202018;
 
+[Name("Operation Order")]
 public class Aoc202018 : AocPuzzle
 {
-    public override string Name => "Operation Order";
-
     protected override PuzzleResult RunPart1()
     {
         var calculator = new HomeworkCalculator();

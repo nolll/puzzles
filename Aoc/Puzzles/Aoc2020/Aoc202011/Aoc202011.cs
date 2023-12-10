@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202011;
 
+[Name("Seating System")]
 public class Aoc202011 : AocPuzzle
 {
-    public override string Name => "Seating System";
-
     protected override PuzzleResult RunPart1()
     {
         var simulator = new SeatingSimulatorAdjacentSeats(InputFile);

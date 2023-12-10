@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201708;
 
+[Name("I Heard You Like Registers")]
 public class Aoc201708 : AocPuzzle
 {
-    public override string Name => "I Heard You Like Registers";
-
     protected override PuzzleResult RunPart1()
     {
         var calculator = new CpuInstructionCalculator(InputFile);

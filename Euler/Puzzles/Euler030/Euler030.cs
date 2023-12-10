@@ -3,10 +3,9 @@ using Pzl.Tools.Maths;
 
 namespace Pzl.Euler.Puzzles.Euler030;
 
+[Name("Digit fifth powers")]
 public class Euler030 : EulerPuzzle
 {
-    public override string Name => "Digit fifth powers";
-
     protected override PuzzleResult Run()
     {
         var result = Run(5);

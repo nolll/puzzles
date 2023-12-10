@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201525;
 
+[Name("Let It Snow")]
 public class Aoc201525 : AocPuzzle
 {
-    public override string Name => "Let It Snow";
-
     protected override PuzzleResult RunPart1()
     {
         var p = GetParams();

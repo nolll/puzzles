@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq15;
 
+[Name("word wore more mare maze")]
 public class Aquaq15 : AquaqPuzzle
 {
-    public override string Name => "word wore more mare maze";
-
     protected override PuzzleResult Run()
     {
         return new PuzzleResult(Run(InputFile), "ffafde1afff1c3904275c8225e772bf1");

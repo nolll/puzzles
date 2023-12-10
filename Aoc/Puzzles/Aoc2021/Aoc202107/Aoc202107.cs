@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202107;
 
+[Name("The Treachery of Whales")]
 public class Aoc202107 : AocPuzzle
 {
-    public override string Name => "The Treachery of Whales";
-
     protected override PuzzleResult RunPart1()
     {
         var crabSubmarines = new CrabSubmarines();

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201613;
 
+[Name("A Maze of Twisty Little Cubicles")]
 public class Aoc201613 : AocPuzzle
 {
-    public override string Name => "A Maze of Twisty Little Cubicles";
-
     protected override PuzzleResult RunPart1()
     {
         var maze = new Maze(50, 50, Input);

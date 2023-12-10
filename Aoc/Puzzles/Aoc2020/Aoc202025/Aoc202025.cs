@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202025;
 
+[Name("Combo Breaker")]
 public class Aoc202025 : AocPuzzle
 {
-    public override string Name => "Combo Breaker";
-
     protected override PuzzleResult RunPart1()
     {
         var finder = new EncryptionKeyFinder(InputFile);

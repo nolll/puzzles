@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202225;
 
+[Name("Full of Hot Air")]
 public class Aoc202225 : AocPuzzle
 {
-    public override string Name => "Full of Hot Air";
-
     protected override PuzzleResult RunPart1()
     {
         var result = Part1(InputFile);

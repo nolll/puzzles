@@ -2,11 +2,10 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201605;
 
+[Name("How About a Nice Game of Chess?")]
 public class Aoc201605 : AocPuzzle
 {
     private readonly PasswordGenerator _generator = new();
-
-    public override string Name => "How About a Nice Game of Chess?";
 
     protected override PuzzleResult RunPart1()
     {

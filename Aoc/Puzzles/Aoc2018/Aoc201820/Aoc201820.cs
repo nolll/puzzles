@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201820;
 
+[Name("A Regular Map")]
 public class Aoc201820 : AocPuzzle
 {
-    public override string Name => "A Regular Map";
-
     protected override PuzzleResult RunPart1()
     {
         var navigator = new RegularMapNavigator(InputFile);

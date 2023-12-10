@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq24;
 
+[Name("Huff and Puff")]
 public class Aquaq24 : AquaqPuzzle
 {
-    public override string Name => "Huff and Puff";
-
     protected override PuzzleResult Run()
     {
         var parts = StringReader.ReadLines(InputFile);

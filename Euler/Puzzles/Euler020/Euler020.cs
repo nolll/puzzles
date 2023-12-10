@@ -3,10 +3,9 @@ using Pzl.Common;
 
 namespace Pzl.Euler.Puzzles.Euler020;
 
+[Name("Factorial digit sum")]
 public class Euler020 : EulerPuzzle
 {
-    public override string Name => "Factorial digit sum";
-
     protected override PuzzleResult Run()
     {
         BigInteger factorial = 100;

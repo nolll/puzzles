@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202013;
 
+[Name("Shuttle Search")]
 public class Aoc202013 : AocPuzzle
 {
-    public override string Name => "Shuttle Search";
-
     protected override PuzzleResult RunPart1()
     {
         var system = new BusScheduler1(InputFile);

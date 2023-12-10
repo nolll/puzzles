@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201610;
 
+[Name("Balance Bots")]
 public class Aoc201610 : AocPuzzle
 {
-    public override string Name => "Balance Bots";
-
     protected override PuzzleResult RunPart1()
     {
         var simulator = new BotSimulator(InputFile);

@@ -5,10 +5,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq26;
 
+[Name("Typo Theft")]
 public class Aquaq26 : AquaqPuzzle
 {
-    public override string Name => "Typo Theft";
-
     protected override PuzzleResult Run()
     {
         var inputNumbers = StringReader.ReadLines(InputFile)

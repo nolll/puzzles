@@ -4,12 +4,11 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq19;
 
+[Name("It's alive")]
 public class Aquaq19 : AquaqPuzzle
 {
     private const char Filled = '#';
     private const char Empty = '.';
-
-    public override string Name => "It's alive";
 
     protected override PuzzleResult Run()
     {

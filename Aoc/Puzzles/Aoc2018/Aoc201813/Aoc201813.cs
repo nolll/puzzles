@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201813;
 
+[Name("Mine Cart Madness")]
 public class Aoc201813 : AocPuzzle
 {
-    public override string Name => "Mine Cart Madness";
-
     protected override PuzzleResult RunPart1()
     {
         var detector = new CollisionDetector(InputFile);

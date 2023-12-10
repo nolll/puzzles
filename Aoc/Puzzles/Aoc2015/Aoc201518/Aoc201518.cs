@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201518;
 
+[Name("Like a GIF For Your Yard")]
 public class Aoc201518 : AocPuzzle
 {
-    public override string Name => "Like a GIF For Your Yard";
-
     protected override PuzzleResult RunPart1()
     {
         var gif = new AnimatedGif(InputFile);

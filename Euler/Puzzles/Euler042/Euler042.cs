@@ -3,10 +3,9 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler042;
 
+[Name("Coded Triangle Numbers")]
 public class Euler042 : EulerPuzzle
 {
-    public override string Name => "Coded Triangle Numbers";
-
     protected override PuzzleResult Run()
     {
         var words = InputFile.Split(',').Select(o => o.Trim('\"'));

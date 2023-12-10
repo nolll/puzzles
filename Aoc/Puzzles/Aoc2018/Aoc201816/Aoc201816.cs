@@ -3,10 +3,9 @@ using Pzl.Tools.Computers.Operation;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201816;
 
+[Name("Chronal Classification")]
 public class Aoc201816 : AocPuzzle
 {
-    public override string Name => "Chronal Classification";
-
     protected override PuzzleResult RunPart1()
     {
         var inputs = InputFile.Split("\r\n\r\n\r\n");

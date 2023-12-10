@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler034;
 
+[Name("Digit Factorials")]
 public class Euler034 : EulerPuzzle
 {
-    public override string Name => "Digit Factorials";
-
     protected override PuzzleResult Run()
     {
         var total = 0;

@@ -14,11 +14,12 @@ public class PuzzleFactory
 
     private static PuzzleData CreateData(Type type)
     {
+        var name = GetName(type);
         var comment = GetComment(type);
         var isSlow = IsSlow(type);
         var needsRewrite = NeedsRewrite(type);
         var isFunToOptimize = IsFunToOptimize(type);
-        return new PuzzleData(type, comment, isSlow, needsRewrite, isFunToOptimize);
+        return new PuzzleData(type, name, comment, isSlow, needsRewrite, isFunToOptimize);
     }
 
     public static Puzzle CreateInstance<T>(Type t) where T : Puzzle
@@ -39,6 +40,9 @@ public class PuzzleFactory
                 IsAbstract: false
             })
         ?? new List<Type>();
+
+    private static string GetName(MemberInfo type) =>
+        type.GetCustomAttribute<NameAttribute>(false)?.Name ?? "No name provided";
 
     private static string? GetComment(MemberInfo type) => 
         type.GetCustomAttribute<CommentAttribute>(false)?.Comment;

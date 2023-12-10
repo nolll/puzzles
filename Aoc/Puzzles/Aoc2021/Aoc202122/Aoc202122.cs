@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202122;
 
+[Name("Reactor Reboot")]
 public class Aoc202122 : AocPuzzle
 {
-    public override string Name => "Reactor Reboot";
-
     protected override PuzzleResult RunPart1()
     {
         var reactor = new SubmarineReactor();

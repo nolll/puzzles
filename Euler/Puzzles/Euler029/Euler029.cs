@@ -3,10 +3,9 @@ using Pzl.Common;
 
 namespace Pzl.Euler.Puzzles.Euler029;
 
+[Name("Distinct powers")]
 public class Euler029 : EulerPuzzle
 {
-    public override string Name => "Distinct powers";
-
     protected override PuzzleResult Run()
     {
         var result = Run(100);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201702;
 
+[Name("Corruption Checksum")]
 public class Aoc201702 : AocPuzzle
 {
-    public override string Name => "Corruption Checksum";
-
     protected override PuzzleResult RunPart1()
     {
         var spreadsheet = new Spreadsheet(InputFile);

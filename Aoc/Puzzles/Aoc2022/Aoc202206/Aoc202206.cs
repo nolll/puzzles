@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202206;
 
+[Name("Tuning Trouble")]
 public class Aoc202206 : AocPuzzle
 {
-    public override string Name => "Tuning Trouble";
-
     protected override PuzzleResult RunPart1()
     {
         var result = TuningTrouble.FindMarker(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201804;
 
+[Name("Repose Record")]
 public class Aoc201804 : AocPuzzle
 {
-    public override string Name => "Repose Record";
-
     protected override PuzzleResult RunPart1()
     {
         var guardSleepPuzzle = new GuardSleepPuzzle(InputFile);

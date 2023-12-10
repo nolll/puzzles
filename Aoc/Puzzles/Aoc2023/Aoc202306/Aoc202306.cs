@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202306;
 
+[Name("Wait For It")]
 public class Aoc202306 : AocPuzzle
 {
-    public override string Name => "Wait For It";
-
     protected override PuzzleResult RunPart1()
     {
         var result = BoatRace1(InputFile);

@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq34;
 
+[Name("Train in Vain")]
 public class Aquaq34 : AquaqPuzzle
 {
-    public override string Name => "Train in Vain";
-
     private const int TimeAtStation = 5;
     private static readonly IComparer<Train> WaitingTrainComparer = new WaitingTrainComparer();
 

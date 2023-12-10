@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq11;
 
+[Name("Boxed In")]
 public class Aquaq11 : AquaqPuzzle
 {
     private const char Empty = '.';
     private const char Filled = '#';
-    public override string Name => "Boxed In";
 
     protected override PuzzleResult Run()
     {

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202213;
 
+[Name("Distress Signal")]
 public class Aoc202213 : AocPuzzle
 {
-    public override string Name => "Distress Signal";
-
     protected override PuzzleResult RunPart1()
     {
         var signal = new DistressSignal();

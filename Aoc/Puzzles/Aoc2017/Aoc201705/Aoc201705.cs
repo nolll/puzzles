@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201705;
 
+[Name("A Maze of Twisty Trampolines, All Alike")]
 public class Aoc201705 : AocPuzzle
 {
-    public override string Name => "A Maze of Twisty Trampolines, All Alike";
-
     protected override PuzzleResult RunPart1()
     {
         var jumper1 = new InstructionJumper(InputFile);

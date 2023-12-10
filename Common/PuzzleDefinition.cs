@@ -30,7 +30,7 @@ public class PuzzleDefinition
             sortId,
             title,
             listTitle,
-            instance.Name,
+            data.Name,
             data.Comment,
             data.IsSlow,
             data.NeedsRewrite,

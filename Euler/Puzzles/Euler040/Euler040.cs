@@ -3,13 +3,12 @@ using Pzl.Common;
 
 namespace Pzl.Euler.Puzzles.Euler040;
 
+[Name("Champernowne's Constant")]
 public class Euler040 : EulerPuzzle
 {
     private const int Initial = 1;
     private const int MaxLength = 1_000_000;
     private const int StepMultiplier = 10;
-
-    public override string Name => "Champernowne's Constant";
 
     protected override PuzzleResult Run()
     {

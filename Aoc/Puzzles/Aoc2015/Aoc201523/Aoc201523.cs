@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201523;
 
+[Name("Opening the Turing Lock")]
 public class Aoc201523 : AocPuzzle
 {
-    public override string Name => "Opening the Turing Lock";
-
     protected override PuzzleResult RunPart1()
     {
         var computer1 = new ChristmasComputer();

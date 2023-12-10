@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202005;
 
+[Name("Binary Boarding")]
 public class Aoc202005 : AocPuzzle
 {
-    public override string Name => "Binary Boarding";
-
     protected override PuzzleResult RunPart1()
     {
         var processor = new BoardingCardProcessor(InputFile);

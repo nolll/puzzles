@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler002;
 
+[Name("Even Fibonacci numbers")]
 public class Euler002 : EulerPuzzle
 {
-    public override string Name => "Even Fibonacci numbers";
-
     protected override PuzzleResult Run()
     {
         var sum = Run(4_000_000);

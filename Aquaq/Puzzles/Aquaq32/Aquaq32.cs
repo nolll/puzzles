@@ -4,11 +4,10 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq32;
 
+[Name("In Parenthesis")]
 public class Aquaq32 : AquaqPuzzle
 {
     private static readonly Regex ClutterRegex = new("[^\\(\\)\\[\\]\\{\\}]");
-
-    public override string Name => "In Parenthesis";
 
     protected override PuzzleResult Run()
     {

@@ -2,11 +2,10 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202117;
 
+[Name("Trick Shot")]
 public class Aoc202117 : AocPuzzle
 {
     private TrickshotResult? _result;
-
-    public override string Name => "Trick Shot";
 
     protected override PuzzleResult RunPart1()
     {

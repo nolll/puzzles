@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202101;
 
+[Name("Sonar Sweep")]
 public class Aoc202101 : AocPuzzle
 {
-    public override string Name => "Sonar Sweep";
-
     protected override PuzzleResult RunPart1()
     {
         var calculator = new DepthMeasurement();

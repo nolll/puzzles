@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202120;
 
+[Name("Trench Map")]
 public class Aoc202120 : AocPuzzle
 {
-    public override string Name => "Trench Map";
-
     protected override PuzzleResult RunPart1()
     {
         var trenchMap = new TrenchMap();

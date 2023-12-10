@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202020;
 
+[Name("Jurassic Jigsaw")]
 public class Aoc202020 : AocPuzzle
 {
-    public override string Name => "Jurassic Jigsaw";
-
     protected override PuzzleResult RunPart1()
     {
         var puzzle = new ImageJigsawPuzzle(InputFile);

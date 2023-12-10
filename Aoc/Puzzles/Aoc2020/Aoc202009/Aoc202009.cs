@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202009;
 
+[Name("Encoding Error")]
 public class Aoc202009 : AocPuzzle
 {
-    public override string Name => "Encoding Error";
-
     protected override PuzzleResult RunPart1()
     {
         var port = new XmasPort(InputFile, 25);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201712;
 
+[Name("Digital Plumber")]
 public class Aoc201712 : AocPuzzle
 {
-    public override string Name => "Digital Plumber";
-
     protected override PuzzleResult RunPart1()
     {
         var pipes = new Pipes(InputFile);

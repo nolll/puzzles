@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202021;
 
+[Name("Allergen Assessment")]
 public class Aoc202021 : AocPuzzle
 {
-    public override string Name => "Allergen Assessment";
-
     protected override PuzzleResult RunPart1()
     {
         var detector = new AllergenDetector(InputFile);

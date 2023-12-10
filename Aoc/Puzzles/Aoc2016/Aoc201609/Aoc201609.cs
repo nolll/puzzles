@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201609;
 
+[Name("Explosives in Cyberspace")]
 public class Aoc201609 : AocPuzzle
 {
-    public override string Name => "Explosives in Cyberspace";
-
     protected override PuzzleResult RunPart1()
     {
         var decompressor = new FileDecompressor(InputFile);

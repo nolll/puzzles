@@ -3,10 +3,9 @@ using Pzl.Tools.Computers.Operation;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201819;
 
+[Name("Go With The Flow")]
 public class Aoc201819 : AocPuzzle
 {
-    public override string Name => "Go With The Flow";
-
     protected override PuzzleResult RunPart1()
     {
         var computer = new OpComputer();

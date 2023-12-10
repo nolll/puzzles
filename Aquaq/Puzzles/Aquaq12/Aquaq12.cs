@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq12;
 
+[Name("A Day In The Lift")]
 public class Aquaq12 : AquaqPuzzle
 {
-    public override string Name => "A Day In The Lift";
-
     protected override PuzzleResult Run()
     {
         var result = RideLift(InputFile);

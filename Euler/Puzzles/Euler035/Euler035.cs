@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Euler.Puzzles.Euler035;
 
+[Name("Circular Primes")]
 public class Euler035 : EulerPuzzle
 {
-    public override string Name => "Circular Primes";
-
     protected override PuzzleResult Run()
     {
         var count = 0;

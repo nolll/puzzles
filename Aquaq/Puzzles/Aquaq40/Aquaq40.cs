@@ -2,10 +2,9 @@
 
 namespace Pzl.Aquaq.Puzzles.Aquaq40;
 
+[Name("Prominence promenade")]
 public class Aquaq40 : AquaqPuzzle
 {
-    public override string Name => "Prominence promenade";
-
     protected override PuzzleResult Run()
     {
         var sum = GetSum(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202224;
 
+[Name("Blizzard Basin")]
 public class Aoc202224 : AocPuzzle
 {
-    public override string Name => "Blizzard Basin";
-
     protected override PuzzleResult RunPart1()
     {
         var blizzardNavigation = new BlizzardNavigation(InputFile);

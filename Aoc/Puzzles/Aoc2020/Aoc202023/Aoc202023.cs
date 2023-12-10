@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202023;
 
+[Name("Crab Cups")]
 public class Aoc202023 : AocPuzzle
 {
-    public override string Name => "Crab Cups";
-
     protected override PuzzleResult RunPart1()
     {
         var game = new CrabCupsGame(Input);

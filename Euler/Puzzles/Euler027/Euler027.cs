@@ -3,9 +3,9 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler027;
 
+[Name("Quadratic primes")]
 public class Euler027 : EulerPuzzle
 {
-    public override string Name => "Quadratic primes";
     private readonly Dictionary<int, bool> _primeCache;
 
     public Euler027()

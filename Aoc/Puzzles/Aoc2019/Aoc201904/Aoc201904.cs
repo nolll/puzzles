@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201904;
 
+[Name("Secure Container")]
 public class Aoc201904 : AocPuzzle
 {
-    public override string Name => "Secure Container";
-
     protected override PuzzleResult RunPart1()
     {
         var passwordBounds = Input.Split('-');

@@ -3,11 +3,10 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler023;
 
+[Name("Non-abundant sums")]
 public class Euler023 : EulerPuzzle
 {
     private const int UpperLimit = 28123;
-
-    public override string Name => "Non-abundant sums";
 
     protected override PuzzleResult Run()
     {

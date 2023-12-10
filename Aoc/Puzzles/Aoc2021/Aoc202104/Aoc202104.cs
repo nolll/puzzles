@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202104;
 
+[Name("Giant Squid")]
 public class Aoc202104 : AocPuzzle
 {
-    public override string Name => "Giant Squid";
-
     protected override PuzzleResult RunPart1()
     {
         var diagnostics = new BingoGame(InputFile);

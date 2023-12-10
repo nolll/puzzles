@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201901;
 
+[Name("The Tyranny of the Rocket Equation")]
 public class Aoc201901 : AocPuzzle
 {
-    public override string Name => "The Tyranny of the Rocket Equation";
-
     protected override PuzzleResult RunPart1()
     {
         var massCalculator = new MassCalculator(InputFile);

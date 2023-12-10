@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202014;
 
+[Name("Docking Data")]
 public class Aoc202014 : AocPuzzle
 {
-    public override string Name => "Docking Data";
-
     protected override PuzzleResult RunPart1()
     {
         var system = new BitmaskSystem1();

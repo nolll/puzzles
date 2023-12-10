@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201507;
 
+[Name("Some Assembly Required")]
 public class Aoc201507 : AocPuzzle
 {
-    public override string Name => "Some Assembly Required";
-
     protected override PuzzleResult RunPart1()
     {
         var circuit = new Circuit(InputFile);

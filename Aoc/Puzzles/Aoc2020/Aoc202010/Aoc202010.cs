@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202010;
 
+[Name("Adapter Array")]
 public class Aoc202010 : AocPuzzle
 {
-    public override string Name => "Adapter Array";
-
     protected override PuzzleResult RunPart1()
     {
         var chain = new PowerAdapterChain(InputFile);

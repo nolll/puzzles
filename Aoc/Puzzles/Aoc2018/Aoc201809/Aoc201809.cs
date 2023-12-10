@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201809;
 
+[Name("Marble Mania")]
 public class Aoc201809 : AocPuzzle
 {
-    public override string Name => "Marble Mania";
-
     protected override PuzzleResult RunPart1()
     {
         var game = MarbleGame.Parse(InputFile);

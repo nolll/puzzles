@@ -3,10 +3,9 @@ using Pzl.Tools.Ocr;
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202113;
 
+[Name("Transparent Origami")]
 public class Aoc202113 : AocPuzzle
 {
-    public override string Name => "Transparent Origami";
-
     protected override PuzzleResult RunPart1()
     {
         var paper = new TransparentPaper(InputFile);

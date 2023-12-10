@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201925;
 
+[Name("Cryostasis")]
 public class Aoc201925 : AocPuzzle
 {
-    public override string Name => "Cryostasis";
-
     protected override PuzzleResult RunPart1()
     {
         var investigationDroid = new InvestigationDroid(InputFile);

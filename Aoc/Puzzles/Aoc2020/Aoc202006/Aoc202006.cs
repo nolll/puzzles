@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202006;
 
+[Name("Custom Customs")]
 public class Aoc202006 : AocPuzzle
 {
-    public override string Name => "Custom Customs";
-
     protected override PuzzleResult RunPart1()
     {
         var reader = new DeclarationFormReader(InputFile);

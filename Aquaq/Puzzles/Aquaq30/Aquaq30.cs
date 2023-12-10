@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq30;
 
+[Name("Flip Out")]
 public class Aquaq30 : AquaqPuzzle
 {
-    public override string Name => "Flip Out";
-
     protected override PuzzleResult Run()
     {
         var cardFlipper = new CardFlipper();

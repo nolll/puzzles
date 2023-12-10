@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202202;
 
+[Name("Rock Paper Scissors")]
 public class Aoc202202 : AocPuzzle
 {
-    public override string Name => "Rock Paper Scissors";
-
     protected override PuzzleResult RunPart1()
     {
         var game = new RockPaperScissors();

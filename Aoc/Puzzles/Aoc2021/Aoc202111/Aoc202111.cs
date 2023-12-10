@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202111;
 
+[Name("Dumbo Octopus")]
 public class Aoc202111 : AocPuzzle
 {
-    public override string Name => "Dumbo Octopus";
-
     protected override PuzzleResult RunPart1()
     {
         var flasher = new OctopusFlasher(InputFile);

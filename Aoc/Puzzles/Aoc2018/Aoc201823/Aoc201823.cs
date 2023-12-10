@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201823;
 
+[Name("Experimental Emergency Teleportation")]
 public class Aoc201823 : AocPuzzle
 {
-    public override string Name => "Experimental Emergency Teleportation";
-
     protected override PuzzleResult RunPart1()
     {
         var formation = new NanobotFormation(InputFile);

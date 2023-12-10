@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202103;
 
+[Name("Binary Diagnostic")]
 public class Aoc202103 : AocPuzzle
 {
-    public override string Name => "Binary Diagnostic";
-
     protected override PuzzleResult RunPart1()
     {
         var diagnostics = new BinaryDiagnostics();

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201924;
 
+[Name("Planet of Discord")]
 public class Aoc201924 : AocPuzzle
 {
-    public override string Name => "Planet of Discord";
-
     protected override PuzzleResult RunPart1()
     {
         var simulator = new BugLifeSimulator(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201606;
 
+[Name("Signals and Noise")]
 public class Aoc201606 : AocPuzzle
 {
-    public override string Name => "Signals and Noise";
-
     protected override PuzzleResult RunPart1()
     {
         var reader = new RepetitionCodeReader();

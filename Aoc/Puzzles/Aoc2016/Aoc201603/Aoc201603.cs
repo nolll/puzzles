@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201603;
 
+[Name("Squares With Three Sides")]
 public class Aoc201603 : AocPuzzle
 {
-    public override string Name => "Squares With Three Sides";
-
     protected override PuzzleResult RunPart1()
     {
         var validator = new TriangleValidator();

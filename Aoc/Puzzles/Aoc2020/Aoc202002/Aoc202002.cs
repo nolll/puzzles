@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202002;
 
+[Name("Password Philosophy")]
 public class Aoc202002 : AocPuzzle
 {
-    public override string Name => "Password Philosophy";
-
     protected override PuzzleResult RunPart1()
     {
         var validator = new PasswordPolicyValidator();

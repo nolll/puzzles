@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202118;
 
+[Name("Snailfish")]
 public class Aoc202118 : AocPuzzle
 {
-    public override string Name => "Snailfish";
-
     protected override PuzzleResult RunPart1()
     {
         var math = new SnailfishMath();

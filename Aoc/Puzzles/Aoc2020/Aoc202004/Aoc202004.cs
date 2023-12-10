@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202004;
 
+[Name("Passport Processing")]
 public class Aoc202004 : AocPuzzle
 {
-    public override string Name => "Passport Processing";
-
     protected override PuzzleResult RunPart1()
     {
         var processor = new PassportProcessor(InputFile);

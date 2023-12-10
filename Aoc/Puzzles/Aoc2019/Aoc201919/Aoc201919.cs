@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201919;
 
+[Name("Tractor Beam")]
 public class Aoc201919 : AocPuzzle
 {
-    public override string Name => "Tractor Beam";
-
     protected override PuzzleResult RunPart1()
     {
         var tbc = new TractorBeamComputer1(InputFile, 50, 50);

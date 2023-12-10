@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201616;
 
+[Name("Dragon Checksum")]
 public class Aoc201616 : AocPuzzle
 {
-    public override string Name => "Dragon Checksum";
-
     protected override PuzzleResult RunPart1()
     {
         var dragonCurve = new DragonCurve();

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201602;
 
+[Name("Bathroom Security")]
 public class Aoc201602 : AocPuzzle
 {
-    public override string Name => "Bathroom Security";
-
     protected override PuzzleResult RunPart1()
     {
         var squareCodeFinder = new SquareKeyCodeFinder();

@@ -3,10 +3,9 @@ using Pzl.Tools.Cryptography;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201710;
 
+[Name("Knot Hash")]
 public class Aoc201710 : AocPuzzle
 {
-    public override string Name => "Knot Hash";
-
     protected override PuzzleResult RunPart1()
     {
         var intHasher = new IntKnotHasher(InputFile);

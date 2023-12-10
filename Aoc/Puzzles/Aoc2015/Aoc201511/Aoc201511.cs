@@ -2,6 +2,7 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201511;
 
+[Name("Corporate Policy")]
 public class Aoc201511: AocPuzzle
 {
     private CorporatePasswordValidator? _validator;
@@ -9,8 +10,6 @@ public class Aoc201511: AocPuzzle
 
     private CorporatePasswordValidator Validator => _validator ??= new CorporatePasswordValidator();
     private string FirstPassword => _firstPassword ??= Validator.FindNextPassword(Input);
-
-    public override string Name => "Corporate Policy";
 
     protected override PuzzleResult RunPart1()
     {

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201920;
 
+[Name("Donut Maze")]
 public class Aoc201920 : AocPuzzle
 {
-    public override string Name => "Donut Maze";
-
     protected override PuzzleResult RunPart1()
     {
         var mazeSolver = new DonutMazeSolver(InputFile);

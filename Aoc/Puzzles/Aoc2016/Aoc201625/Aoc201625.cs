@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201625;
 
+[Name("Clock Signal")]
 public class Aoc201625 : AocPuzzle
 {
-    public override string Name => "Clock Signal";
-
     protected override PuzzleResult RunPart1()
     {
         var generator = new ClockSignalGenerator();

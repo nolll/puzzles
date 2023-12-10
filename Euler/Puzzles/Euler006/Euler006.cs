@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler006;
 
+[Name("Sum square difference")]
 public class Euler006 : EulerPuzzle
 {
-    public override string Name => "Sum square difference";
-
     protected override PuzzleResult Run()
     {
         var diff = Run(100);

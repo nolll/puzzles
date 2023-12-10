@@ -2,12 +2,11 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201918;
 
-[Comment("Key Collector - Part 2 is too optimized. Tests fails")]
 [NeedsRewrite]
+[Name("Many-Worlds Interpretation")]
+[Comment("Key Collector - Part 2 is too optimized. Tests fails")]
 public class Aoc201918 : AocPuzzle
 {
-    public override string Name => "Many-Worlds Interpretation";
-
     protected override PuzzleResult RunPart1()
     {
         var keyCollector = new KeyCollector(InputFile);

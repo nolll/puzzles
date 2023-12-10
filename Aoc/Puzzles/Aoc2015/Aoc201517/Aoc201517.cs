@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201517;
 
+[Name("No Such Thing as Too Much")]
 public class Aoc201517 : AocPuzzle
 {
-    public override string Name => "No Such Thing as Too Much";
-
     protected override PuzzleResult RunPart1()
     {
         var container = new EggnogContainers(InputFile);

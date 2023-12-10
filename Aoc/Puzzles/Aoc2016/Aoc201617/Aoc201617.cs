@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201617;
 
+[Name("Two Steps Forward")]
 public class Aoc201617 : AocPuzzle
 {
-    public override string Name => "Two Steps Forward";
-
     protected override PuzzleResult RunPart1()
     {
         var maze = new LockedDoorMaze();

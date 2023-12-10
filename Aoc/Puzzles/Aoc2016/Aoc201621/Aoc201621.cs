@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201621;
 
+[Name("Scrambled Letters and Hash")]
 public class Aoc201621 : AocPuzzle
 {
-    public override string Name => "Scrambled Letters and Hash";
-
     protected override PuzzleResult RunPart1()
     {
         var scrambler = new StringScrambler(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler043;
 
+[Name("Sub-string Divisibility")]
 public class Euler043 : EulerPuzzle
 {
-    public override string Name => "Sub-string Divisibility";
-
     protected override PuzzleResult Run()
     {
         var divisors = new[] { 2, 3, 5, 7, 11, 13, 17 };

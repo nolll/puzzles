@@ -2,10 +2,9 @@
 
 namespace Pzl.Aquaq.Puzzles.Aquaq02;
 
+[Name("One is all you need")]
 public class Aquaq02 : AquaqPuzzle
 {
-    public override string Name => "One is all you need";
-
     protected override PuzzleResult Run()
     {
         var input = InputFile.Split(' ').Select(int.Parse);

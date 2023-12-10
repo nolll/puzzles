@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202012;
 
+[Name("Rain Risk")]
 public class Aoc202012 : AocPuzzle
 {
-    public override string Name => "Rain Risk";
-
     protected override PuzzleResult RunPart1()
     {
         var system = new SimpleFerryNavigationSystem(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201612;
 
+[Name("Leonardo's Monorail")]
 public class Aoc201612 : AocPuzzle
 {
-    public override string Name => "Leonardo's Monorail";
-
     protected override PuzzleResult RunPart1()
     {
         var computer = new MonorailComputer(InputFile, 0, 0);

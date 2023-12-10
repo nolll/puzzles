@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201703;
 
+[Name("Spiral Memory")]
 public class Aoc201703 : AocPuzzle
 {
-    public override string Name => "Spiral Memory";
-
     protected override PuzzleResult RunPart1()
     {
         var memory1 = new SpiralMemory(Input, SpiralMemoryMode.RunToTarget);

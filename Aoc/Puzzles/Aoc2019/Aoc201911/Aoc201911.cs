@@ -3,10 +3,9 @@ using Pzl.Tools.Ocr;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201911;
 
+[Name("Space Police")]
 public class Aoc201911 : AocPuzzle
 {
-    public override string Name => "Space Police";
-
     protected override PuzzleResult RunPart1()
     {
         var robot1 = new PaintRobot(InputFile);

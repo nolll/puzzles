@@ -2,11 +2,10 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201504;
 
+[Name("The Ideal Stocking Stuffer")]
 public class Aoc201504 : AocPuzzle
 {
     private int _index;
-
-    public override string Name => "The Ideal Stocking Stuffer";
 
     protected override PuzzleResult RunPart1()
     {

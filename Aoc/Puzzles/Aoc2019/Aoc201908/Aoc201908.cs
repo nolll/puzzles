@@ -3,10 +3,9 @@ using Pzl.Tools.Ocr;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201908;
 
+[Name("Space Image Format")]
 public class Aoc201908 : AocPuzzle
 {
-    public override string Name => "Space Image Format";
-
     protected override PuzzleResult RunPart1()
     {
         var image = new SpaceImage(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201913;
 
+[Name("Care Package")]
 public class Aoc201913 : AocPuzzle
 {
-    public override string Name => "Care Package";
-
     protected override PuzzleResult RunPart1()
     {
         var arcade = new Arcade(InputFile);

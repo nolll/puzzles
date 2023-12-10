@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202211;
 
+[Name("Monkey in the Middle")]
 public class Aoc202211 : AocPuzzle
 {
-    public override string Name => "Monkey in the Middle";
-
     protected override PuzzleResult RunPart1()
     {
         var monkeyBusiness = new MonkeyBusiness();

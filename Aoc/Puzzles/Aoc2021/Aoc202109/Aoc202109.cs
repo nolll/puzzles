@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202109;
 
+[Name("Smoke Basin")]
 public class Aoc202109 : AocPuzzle
 {
-    public override string Name => "Smoke Basin";
-
     protected override PuzzleResult RunPart1()
     {
         var heightMap = new HeightMap();

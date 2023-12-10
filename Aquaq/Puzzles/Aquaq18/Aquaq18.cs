@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq18;
 
+[Name("Emit time")]
 public class Aquaq18 : AquaqPuzzle
 {
-    public override string Name => "Emit time";
-
     protected override PuzzleResult Run()
     {
         var sum = StringReader.ReadLines(InputFile)

@@ -3,14 +3,11 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202301;
 
+[Name("Trebuchet?!")]
 public class Aoc202301 : AocPuzzle
 {
-    public override string Name => "Trebuchet?!";
-
-    private static readonly List<string> Words = new()
-    {
-        "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
-    };
+    private static readonly List<string> Words =
+        ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
     protected override PuzzleResult RunPart1()
     {

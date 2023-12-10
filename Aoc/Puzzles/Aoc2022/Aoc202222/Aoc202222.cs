@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202222;
 
+[Name("Monkey Map")]
 public class Aoc202222 : AocPuzzle
 {
-    public override string Name => "Monkey Map";
-
     protected override PuzzleResult RunPart1()
     {
         var result = Part1(InputFile);

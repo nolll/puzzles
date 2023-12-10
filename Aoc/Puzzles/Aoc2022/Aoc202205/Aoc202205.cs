@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202205;
 
+[Name("Supply Stacks")]
 public class Aoc202205 : AocPuzzle
 {
-    public override string Name => "Supply Stacks";
-
     protected override PuzzleResult RunPart1()
     {
         var crane = new CargoCrane(InputFile);

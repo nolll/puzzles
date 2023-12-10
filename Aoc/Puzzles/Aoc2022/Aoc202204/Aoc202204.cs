@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202204;
 
+[Name("Camp Cleanup")]
 public class Aoc202204 : AocPuzzle
 {
-    public override string Name => "Camp Cleanup";
-
     protected override PuzzleResult RunPart1()
     {
         var cleaning = new Cleaning();

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201615;
 
+[Name("Timing is Everything")]
 public class Aoc201615 : AocPuzzle
 {
-    public override string Name => "Timing is Everything";
-
     protected override PuzzleResult RunPart1()
     {
         var sculpture = new KineticSculpture(InputFile);

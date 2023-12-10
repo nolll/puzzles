@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler033;
 
+[Name("Digit Cancelling Fraction")]
 public class Euler033 : EulerPuzzle
 {
-    public override string Name => "Digit Cancelling Fraction";
-
     protected override PuzzleResult Run()
     {
         var fractions = new List<Fraction>();

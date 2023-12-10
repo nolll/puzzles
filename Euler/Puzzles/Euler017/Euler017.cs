@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Euler.Puzzles.Euler017;
 
+[Name("Number letter counts")]
 public class Euler017 : EulerPuzzle
 {
-    public override string Name => "Number letter counts";
-
     protected override PuzzleResult Run()
     {
         var result = Run(1000);

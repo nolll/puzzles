@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201903;
 
+[Name("Crossed Wires")]
 public class Aoc201903 : AocPuzzle
 {
-    public override string Name => "Crossed Wires";
-
     protected override PuzzleResult RunPart1()
     {
         var wirePaths = StringReader.ReadLines(InputFile);

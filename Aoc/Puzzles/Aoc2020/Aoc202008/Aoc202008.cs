@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202008;
 
+[Name("Handheld Halting")]
 public class Aoc202008 : AocPuzzle
 {
-    public override string Name => "Handheld Halting";
-
     protected override PuzzleResult RunPart1()
     {
         var console = new GameConsoleRunner(InputFile);

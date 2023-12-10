@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201721;
 
+[Name("Fractal Art")]
 public class Aoc201721 : AocPuzzle
 {
-    public override string Name => "Fractal Art";
-
     protected override PuzzleResult RunPart1()
     {
         var artGenerator1 = new FractalArtGenerator(InputFile);

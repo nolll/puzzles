@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler001;
 
+[Name("Multiples of 3 or 5")]
 public class Euler001 : EulerPuzzle
 {
-    public override string Name => "Multiples of 3 or 5";
-
     protected override PuzzleResult Run()
     {
         var sum = Run(1000);

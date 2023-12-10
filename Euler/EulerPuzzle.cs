@@ -2,4 +2,5 @@
 
 namespace Pzl.Euler;
 
+[Name("")]
 public abstract class EulerPuzzle : OnePartPuzzle;

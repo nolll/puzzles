@@ -2,10 +2,9 @@
 
 namespace Pzl.Aquaq.Puzzles.Aquaq20;
 
+[Name("Blackjack")]
 public class Aquaq20 : AquaqPuzzle
 {
-    public override string Name => "Blackjack";
-
     protected override PuzzleResult Run()
     {
         return new PuzzleResult(PlayBlackjack(InputFile), "112a5875109cbca20cbe3dd1d02fe9fd");

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201725;
 
+[Name("The Halting Problem")]
 public class Aoc201725 : AocPuzzle
 {
-    public override string Name => "The Halting Problem";
-
     protected override PuzzleResult RunPart1()
     {
         var turingMachine = new TuringMachine(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201619;
 
+[Name("An Elephant Named Joseph")]
 public class Aoc201619 : AocPuzzle
 {
-    public override string Name => "An Elephant Named Joseph";
-
     protected override PuzzleResult RunPart1()
     {
         var party = new WhiteElephantParty(Input);

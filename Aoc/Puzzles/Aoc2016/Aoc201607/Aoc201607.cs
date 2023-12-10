@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201607;
 
+[Name("Internet Protocol Version 7")]
 public class Aoc201607 : AocPuzzle
 {
-    public override string Name => "Internet Protocol Version 7";
-
     protected override PuzzleResult RunPart1()
     {
         var tester = new IpTester();

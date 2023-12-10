@@ -2,12 +2,11 @@
 
 namespace Pzl.Euler.Puzzles.Euler038;
 
+[Name("Pandigital Multiples")]
 public class Euler038 : EulerPuzzle
 {
     private const int Limit = 10_000;
     private const int MaxLength = 9;
-
-    public override string Name => "Pandigital Multiples";
 
     protected override PuzzleResult Run()
     {

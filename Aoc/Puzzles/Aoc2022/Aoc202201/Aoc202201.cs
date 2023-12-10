@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202201;
 
+[Name("Calorie Counting")]
 public class Aoc202201 : AocPuzzle
 {
-    public override string Name => "Calorie Counting";
-
     protected override PuzzleResult RunPart1()
     {
         var calorieCounts = new CalorieCounts(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201704;
 
+[Name("High-Entropy Passphrases")]
 public class Aoc201704 : AocPuzzle
 {
-    public override string Name => "High-Entropy Passphrases";
-
     protected override PuzzleResult RunPart1()
     {
         var validator = new PassphraseValidator();

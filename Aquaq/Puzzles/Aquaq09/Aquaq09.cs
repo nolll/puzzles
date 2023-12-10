@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq09;
 
+[Name("Big Data?")]
 public class Aquaq09 : AquaqPuzzle
 {
-    public override string Name => "Big Data?";
-
     protected override PuzzleResult Run()
     {
         var numbers = StringReader.ReadLines(InputFile)

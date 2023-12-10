@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202112;
 
+[Name("Passage Pathing")]
 public class Aoc202112 : AocPuzzle
 {
-    public override string Name => "Passage Pathing";
-
     protected override PuzzleResult RunPart1()
     {
         var caveSystem = new CaveSystem(InputFile, false);

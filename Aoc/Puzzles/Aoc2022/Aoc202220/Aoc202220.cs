@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202220;
 
+[Name("Grove Positioning System")]
 public class Aoc202220 : AocPuzzle
 {
-    public override string Name => "Grove Positioning System";
-
     protected override PuzzleResult RunPart1()
     {
         var result = Run(InputFile, 1, 1);

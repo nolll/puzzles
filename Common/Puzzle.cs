@@ -7,8 +7,6 @@ namespace Pzl.Common;
 
 public abstract class Puzzle
 {
-    public abstract string Name { get; }
-
     protected string InputFile => FileReader.ReadTextFile(InputFilePath);
     protected string TextFile(string fileName) => ReadLocalFile(fileName);
     protected string CommonTextFile(string fileName) => ReadCommonFile(fileName);
@@ -43,17 +41,4 @@ public abstract class Puzzle
     public abstract IList<Func<PuzzleResult>> RunFunctions { get; }
 
     private string InputFilePath => $"{PuzzlePath}.txt";
-
-    public IEnumerable<string> Tags
-    {
-        get
-        {
-            foreach (var customTag in CustomTags)
-            {
-                yield return customTag;
-            }
-        }
-    }
-
-    protected virtual IEnumerable<string> CustomTags => Enumerable.Empty<string>();
 }

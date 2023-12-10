@@ -2,10 +2,9 @@
 
 namespace Pzl.Aquaq.Puzzles.Aquaq03;
 
+[Name("Short walks")]
 public class Aquaq03 : AquaqPuzzle
 {
-    public override string Name => "Short walks";
-
     protected override PuzzleResult Run()
     {
         var walker = new Walker();

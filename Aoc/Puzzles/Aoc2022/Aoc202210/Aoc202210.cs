@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202210;
 
+[Name("Cathode-Ray Tube")]
 public class Aoc202210 : AocPuzzle
 {
-    public override string Name => "Cathode-Ray Tube";
-
     protected override PuzzleResult RunPart1()
     {
         var tube = new CathodeRayTube();

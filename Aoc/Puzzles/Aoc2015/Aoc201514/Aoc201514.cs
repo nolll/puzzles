@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201514;
 
+[Name("Reindeer Olympics")]
 public class Aoc201514 : AocPuzzle
 {
-    public override string Name => "Reindeer Olympics";
-
     protected override PuzzleResult RunPart1()
     {
         var race = new ReindeerRace(InputFile, 2503);

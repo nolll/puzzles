@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201825;
 
+[Name("Four-Dimensional Adventure")]
 public class Aoc201825 : AocPuzzle
 {
-    public override string Name => "Four-Dimensional Adventure";
-
     protected override PuzzleResult RunPart1()
     {
         var finder = new ConstellationFinder(InputFile);

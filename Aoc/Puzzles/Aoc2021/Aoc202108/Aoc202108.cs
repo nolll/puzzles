@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202108;
 
+[Name("Seven Segment Search")]
 public class Aoc202108 : AocPuzzle
 {
-    public override string Name => "Seven Segment Search";
-
     protected override PuzzleResult RunPart1()
     {
         var decoder = new SevenSegmentDisplayDecoder(InputFile);

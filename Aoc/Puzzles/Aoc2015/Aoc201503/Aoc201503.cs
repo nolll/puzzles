@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201503;
 
+[Name("Perfectly Spherical Houses in a Vacuum")]
 public class Aoc201503 : AocPuzzle
 {
-    public override string Name => "Perfectly Spherical Houses in a Vacuum";
-
     protected override PuzzleResult RunPart1()
     {
         var grid = new DeliveryGrid();

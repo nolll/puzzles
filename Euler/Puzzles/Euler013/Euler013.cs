@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Euler.Puzzles.Euler013;
 
+[Name("Large sum")]
 public class Euler013 : EulerPuzzle
 {
-    public override string Name => "Large sum";
-
     protected override PuzzleResult Run()
     {
         var result = Run(Input);

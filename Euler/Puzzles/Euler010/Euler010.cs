@@ -3,10 +3,9 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler010;
 
+[Name("Summation of primes")]
 public class Euler010 : EulerPuzzle
 {
-    public override string Name => "Summation of primes";
-
     protected override PuzzleResult Run()
     {
         var result = Run(2_000_000);

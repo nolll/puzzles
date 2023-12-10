@@ -3,10 +3,9 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler021;
 
+[Name("Amicable numbers")]
 public class Euler021 : EulerPuzzle
 {
-    public override string Name => "Amicable numbers";
-
     protected override PuzzleResult Run()
     {
         var sums = new Dictionary<int, int>();

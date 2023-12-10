@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202304;
 
+[Name("Scratchcards")]
 public class Aoc202304 : AocPuzzle
 {
-    public override string Name => "Scratchcards";
-
     protected override PuzzleResult RunPart1()
     {
         var result = FlipThroughCards(InputFile);

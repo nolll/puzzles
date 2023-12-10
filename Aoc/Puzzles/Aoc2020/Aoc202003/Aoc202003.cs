@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202003;
 
+[Name("Toboggan Trajectory")]
 public class Aoc202003 : AocPuzzle
 {
-    public override string Name => "Toboggan Trajectory";
-
     protected override PuzzleResult RunPart1()
     {
         var navigator = new TreeNavigator(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler014;
 
+[Name("Longest Collatz sequence")]
 public class Euler014 : EulerPuzzle
 {
-    public override string Name => "Longest Collatz sequence";
-
     protected override PuzzleResult Run()
     {
         var result = Run(1_000_000);

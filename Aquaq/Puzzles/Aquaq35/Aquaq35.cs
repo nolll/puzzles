@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq35;
 
+[Name("Columns")]
 public class Aquaq35 : AquaqPuzzle
 {
-    public override string Name => "Columns";
-
     protected override PuzzleResult Run()
     {
         var words = StringReader.ReadLines(CommonTextFile("Words.txt"));

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201701;
 
+[Name("Inverse Captcha")]
 public class Aoc201701 : AocPuzzle
 {
-    public override string Name => "Inverse Captcha";
-
     protected override PuzzleResult RunPart1()
     {
         var calc = new CaptchaCalculator(InputFile);

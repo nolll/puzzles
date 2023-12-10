@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202019;
 
+[Name("Monster Messages")]
 public class Aoc202019 : AocPuzzle
 {
-    public override string Name => "Monster Messages";
-
     protected override PuzzleResult RunPart1()
     {
         var validator = new MonsterImageValidator(InputFile);

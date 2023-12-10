@@ -6,10 +6,9 @@ namespace Pzl.Aquaq.Puzzles.Aquaq36;
 
 [IsSlow]
 [NeedsRewrite]
+[Name("Tetonor Terror")]
 public class Aquaq36 : AquaqPuzzle
 {
-    public override string Name => "Tetonor Terror";
-
     protected override PuzzleResult Run()
     {
         var factorProvider = new FactorCache();

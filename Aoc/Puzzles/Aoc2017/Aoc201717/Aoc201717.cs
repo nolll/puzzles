@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201717;
 
+[Name("Spinlock")]
 public class Aoc201717 : AocPuzzle
 {
-    public override string Name => "Spinlock";
-
     protected override PuzzleResult RunPart1()
     {
         var runner1 = new SpinlockRunnerPart1(Input);

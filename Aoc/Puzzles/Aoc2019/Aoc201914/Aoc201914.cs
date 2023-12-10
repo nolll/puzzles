@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201914;
 
+[Name("Space Stoichiometry")]
 public class Aoc201914 : AocPuzzle
 {
-    public override string Name => "Space Stoichiometry";
-
     protected override PuzzleResult RunPart1()
     {
         var reactor = new NanoReactor(InputFile);

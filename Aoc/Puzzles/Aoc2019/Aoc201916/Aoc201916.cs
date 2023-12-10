@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201916;
 
+[Name("Flawed Frequency Transmission")]
 public class Aoc201916 : AocPuzzle
 {
-    public override string Name => "Flawed Frequency Transmission";
-
     protected override PuzzleResult RunPart1()
     {
         var algorithm1 = new FrequencyAlgorithmPart1(InputFile);

@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq00;
 
+[Name("What's a numpad?")]
 public class Aquaq00 : AquaqPuzzle
 {
-    public override string Name => "What's a numpad?";
-
     protected override PuzzleResult Run()
     {
         var keyPresses = StringReader.ReadLines(InputFile)

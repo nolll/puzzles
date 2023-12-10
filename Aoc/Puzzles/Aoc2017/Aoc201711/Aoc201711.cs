@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201711;
 
+[Name("Hex Ed")]
 public class Aoc201711 : AocPuzzle
 {
-    public override string Name => "Hex Ed";
-
     protected override PuzzleResult RunPart1()
     {
         var navigator = new HexGridNavigator(InputFile);

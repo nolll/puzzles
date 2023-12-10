@@ -3,10 +3,9 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler044;
 
+[Name("Pentagon Numbers")]
 public class Euler044 : EulerPuzzle
 {
-    public override string Name => "Pentagon Numbers";
-
     protected override PuzzleResult Run()
     {
         var i = 0;

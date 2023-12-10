@@ -4,10 +4,11 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq14;
 
+[Name("That's a bingo")]
 public class Aquaq14 : AquaqPuzzle
 {
     private const int BoardSize = 5;
-
+    
     private const string BoardInput = """
                                       6  17 34 50 68
                                       10 21 45 53 66
@@ -20,8 +21,6 @@ public class Aquaq14 : AquaqPuzzle
     private static readonly Dictionary<int, MatrixAddress> Board = BuildBoard();
     private static readonly IEnumerable<MatrixAddress> Diagonal1 = BuildDiagonal1();
     private static readonly IEnumerable<MatrixAddress> Diagonal2 = BuildDiagonal2();
-
-    public override string Name => "That's a bingo";
 
     protected override PuzzleResult Run()
     {

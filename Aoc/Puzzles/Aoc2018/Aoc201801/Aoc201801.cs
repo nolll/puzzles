@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201801;
 
+[Name("Chronal Calibration")]
 public class Aoc201801 : AocPuzzle
 {
-    public override string Name => "Chronal Calibration";
-
     protected override PuzzleResult RunPart1()
     {
         var frequencyPuzzle = new FrequencyPuzzle(InputFile);

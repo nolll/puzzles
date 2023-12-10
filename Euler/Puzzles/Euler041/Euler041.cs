@@ -4,10 +4,9 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler041;
 
+[Name("Pandigital Prime")]
 public class Euler041 : EulerPuzzle
 {
-    public override string Name => "Pandigital Prime";
-
     protected override PuzzleResult Run()
     {
         var largest = 0L;

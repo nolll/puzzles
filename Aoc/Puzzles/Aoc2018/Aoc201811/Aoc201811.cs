@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201811;
 
+[Name("Chronal Charge")]
 public class Aoc201811 : AocPuzzle
 {
-    public override string Name => "Chronal Charge";
-
     protected override PuzzleResult RunPart1()
     {
         var grid = new PowerGrid(300, Input);

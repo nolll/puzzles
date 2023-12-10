@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202303;
 
+[Name("Gear Ratios")]
 public class Aoc202303 : AocPuzzle
 {
-    public override string Name => "Gear Ratios";
-
     protected override PuzzleResult RunPart1()
     {
         var result = Run(InputFile);

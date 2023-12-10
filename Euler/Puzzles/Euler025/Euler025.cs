@@ -3,10 +3,9 @@ using Pzl.Common;
 
 namespace Pzl.Euler.Puzzles.Euler025;
 
+[Name("1000-digit Fibonacci number")]
 public class Euler025 : EulerPuzzle
 {
-    public override string Name => "1000-digit Fibonacci number";
-
     protected override PuzzleResult Run()
     {
         var result = Run(1000);

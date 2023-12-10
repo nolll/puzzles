@@ -3,10 +3,9 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler045;
 
+[Name("Triangular, Pentagonal, and Hexagonal")]
 public class Euler045 : EulerPuzzle
 {
-    public override string Name => "Triangular, Pentagonal, and Hexagonal";
-
     protected override PuzzleResult Run()
     {
         const int input = 285;

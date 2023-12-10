@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201608;
 
+[Name("Two-Factor Authentication")]
 public class Aoc201608 : AocPuzzle
 {
-    public override string Name => "Two-Factor Authentication";
-
     protected override PuzzleResult RunPart1()
     {
         var simulator = new ScreenSimulator(50, 6);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201715;
 
+[Name("Dueling Generators")]
 public class Aoc201715 : AocPuzzle
 {
-    public override string Name => "Dueling Generators";
-
     protected override PuzzleResult RunPart1()
     {
         var duel = GeneratorDuel.Parse(InputFile);

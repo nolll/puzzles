@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202106;
 
+[Name("Lanternfish")]
 public class Aoc202106 : AocPuzzle
 {
-    public override string Name => "Lanternfish";
-
     protected override PuzzleResult RunPart1()
     {
         var fishCounter = new FishCounter(InputFile);

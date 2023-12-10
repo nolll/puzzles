@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202215;
 
+[Name("Beacon Exclusion Zone")]
 public class Aoc202215 : AocPuzzle
 {
-    public override string Name => "Beacon Exclusion Zone";
-
     protected override PuzzleResult RunPart1()
     {
         var zone = new BeaconZone();

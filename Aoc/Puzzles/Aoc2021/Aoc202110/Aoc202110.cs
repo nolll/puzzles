@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202110;
 
+[Name("Syntax Scoring")]
 public class Aoc202110 : AocPuzzle
 {
-    public override string Name => "Syntax Scoring";
-
     protected override PuzzleResult RunPart1()
     {
         var syntaxChecker = new SyntaxChecker();

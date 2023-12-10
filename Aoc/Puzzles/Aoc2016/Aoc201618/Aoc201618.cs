@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201618;
 
+[Name("Like a Rogue")]
 public class Aoc201618 : AocPuzzle
 {
-    public override string Name => "Like a Rogue";
-
     protected override PuzzleResult RunPart1()
     {
         var detector = new FloorTrapDetector(InputFile);

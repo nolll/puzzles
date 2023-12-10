@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201808;
 
+[Name("Memory Maneuver")]
 public class Aoc201808 : AocPuzzle
 {
-    public override string Name => "Memory Maneuver";
-
     protected override PuzzleResult RunPart1()
     {
         var calculator = new LicenseNumberCalculator(InputFile);

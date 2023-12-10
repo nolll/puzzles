@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202207;
 
+[Name("No Space Left On Device")]
 public class Aoc202207 : AocPuzzle
 {
-    public override string Name => "No Space Left On Device";
-
     protected override PuzzleResult RunPart1()
     {
         var fileSystem = new FileSystem(InputFile);

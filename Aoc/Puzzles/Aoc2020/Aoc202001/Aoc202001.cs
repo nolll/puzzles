@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202001;
 
+[Name("Report Repair")]
 public class Aoc202001 : AocPuzzle
 {
-    public override string Name => "Report Repair";
-
     protected override PuzzleResult RunPart1()
     {
         var sumFinder = new SumFinder(InputFile);

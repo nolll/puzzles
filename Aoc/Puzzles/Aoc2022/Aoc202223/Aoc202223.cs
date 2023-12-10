@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202223;
 
+[Name("Unstable Diffusion")]
 public class Aoc202223 : AocPuzzle
 {
-    public override string Name => "Unstable Diffusion";
-
     protected override PuzzleResult RunPart1()
     {
         var (emptyCount, _) = Run(InputFile, 10);

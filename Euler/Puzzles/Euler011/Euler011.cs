@@ -3,10 +3,9 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Euler.Puzzles.Euler011;
 
+[Name("Largest product in a grid")]
 public class Euler011 : EulerPuzzle
 {
-    public override string Name => "Largest product in a grid";
-
     protected override PuzzleResult Run()
     {
         var result = Run(Grid);

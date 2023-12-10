@@ -2,6 +2,7 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202124;
 
+[Name("Arithmetic Logic Unit")]
 public class Aoc202124 : AocPuzzle
 {
     private List<string>? _validNumbers;
@@ -24,9 +25,7 @@ public class Aoc202124 : AocPuzzle
 
     private long SmallestValidNumber => long.Parse(ValidNumbers.First());
     private long LargestValidNumber => long.Parse(ValidNumbers.Last());
-
-    public override string Name => "Arithmetic Logic Unit";
-
+    
     protected override PuzzleResult RunPart1()
     {
         var result = LargestValidNumber;

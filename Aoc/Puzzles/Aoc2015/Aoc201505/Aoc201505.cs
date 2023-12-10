@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201505;
 
+[Name("Doesn't He Have Intern-Elves For This?")]
 public class Aoc201505 : AocPuzzle
 {
-    public override string Name => "Doesn't He Have Intern-Elves For This?";
-
     protected override PuzzleResult RunPart1()
     {
         var niceCount = NaughtyOrNiceEvaluator.GetNiceCount1(InputFile);

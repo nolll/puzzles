@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201508;
 
+[Name("Matchsticks")]
 public class Aoc201508 : AocPuzzle
 {
-    public override string Name => "Matchsticks";
-
     protected override PuzzleResult RunPart1()
     {
         var digitalList = new DigitalList(InputFile);

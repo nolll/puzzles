@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler009;
 
+[Name("Special Pythagorean triplet")]
 public class Euler009 : EulerPuzzle
 {
-    public override string Name => "Special Pythagorean triplet";
-
     protected override PuzzleResult Run()
     {
         var product = Run(1000);

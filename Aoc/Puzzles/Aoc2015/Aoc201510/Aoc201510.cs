@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201510;
 
+[Name("Elves Look, Elves Say")]
 public class Aoc201510 : AocPuzzle
 {
-    public override string Name => "Elves Look, Elves Say";
-
     protected override PuzzleResult RunPart1()
     {
         var game = new LookAndSayGame(Input, 40);

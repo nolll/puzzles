@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201921;
 
+[Name("Springdroid Adventure")]
 public class Aoc201921 : AocPuzzle
 {
-    public override string Name => "Springdroid Adventure";
-
     protected override PuzzleResult RunPart1()
     {
         var walkingDroid = new SpringDroid(InputFile, WalkProgram);

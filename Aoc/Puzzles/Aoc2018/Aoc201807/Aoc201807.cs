@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201807;
 
+[Name("The Sum of Its Parts")]
 public class Aoc201807 : AocPuzzle
 {
-    public override string Name => "The Sum of Its Parts";
-
     protected override PuzzleResult RunPart1()
     {
         var assembler1 = new SleighAssembler(InputFile, 1, 0);

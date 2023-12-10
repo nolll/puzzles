@@ -3,10 +3,9 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Euler.Puzzles.Euler028;
 
+[Name("Number spiral diagonals")]
 public class Euler028 : EulerPuzzle
 {
-    public override string Name => "Number spiral diagonals";
-
     protected override PuzzleResult Run()
     {
         var result = Run(1001);

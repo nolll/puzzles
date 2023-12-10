@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Euler.Puzzles.Euler036;
 
+[Name("Double-base Palindromes")]
 public class Euler036 : EulerPuzzle
 {
-    public override string Name => "Double-base Palindromes";
-
     protected override PuzzleResult Run()
     {
         var sum = Enumerable.Range(0, 1_000_000)

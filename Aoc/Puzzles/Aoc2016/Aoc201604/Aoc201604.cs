@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201604;
 
+[Name("Security Through Obscurity")]
 public class Aoc201604 : AocPuzzle
 {
-    public override string Name => "Security Through Obscurity";
-
     protected override PuzzleResult RunPart1()
     {
         var validator = new RoomValidator(InputFile);

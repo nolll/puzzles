@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202015;
 
+[Name("Rambunctious Recitation")]
 public class Aoc202015 : AocPuzzle
 {
-    public override string Name => "Rambunctious Recitation";
-
     protected override PuzzleResult RunPart1()
     {
         var system = new MemoryGame(Input);

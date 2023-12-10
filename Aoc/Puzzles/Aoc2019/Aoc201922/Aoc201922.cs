@@ -2,12 +2,11 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201922;
 
-[Comment("Learn more math")]
 [NeedsRewrite]
+[Name("Slam Shuffle")]
+[Comment("Learn more math")]
 public class Aoc201922 : AocPuzzle
 {
-    public override string Name => "Slam Shuffle";
-
     protected override PuzzleResult RunPart1()
     {
         var shuffler1 = new CardShuffler();

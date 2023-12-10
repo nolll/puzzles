@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq07;
 
+[Name("What is best in life?")]
 public class Aquaq07 : AquaqPuzzle
 {
-    public override string Name => "What is best in life?";
-
     protected override PuzzleResult Run()
     {
         var games = StringReader.ReadLines(InputFile)

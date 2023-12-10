@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201524;
 
+[Name("It Hangs in the Balance")]
 public class Aoc201524 : AocPuzzle
 {
-    public override string Name => "It Hangs in the Balance";
-
     protected override PuzzleResult RunPart1()
     {
         var balancer1 = new PresentBalancer(InputFile, 3);

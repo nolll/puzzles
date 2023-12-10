@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201818;
 
+[Name("Settlers of The North Pole")]
 public class Aoc201818 : AocPuzzle
 {
-    public override string Name => "Settlers of The North Pole";
-
     protected override PuzzleResult RunPart1()
     {
         var collection = new LumberCollection(InputFile);

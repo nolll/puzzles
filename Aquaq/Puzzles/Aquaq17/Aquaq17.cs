@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq17;
 
+[Name("The Beautiful Shame")]
 public class Aquaq17 : AquaqPuzzle
 {
-    public override string Name => "The Beautiful Shame";
-
     protected override PuzzleResult Run()
     {
         return new PuzzleResult(Run(InputFile), "033640f1946bb06d49b637ee7b1c3a80");

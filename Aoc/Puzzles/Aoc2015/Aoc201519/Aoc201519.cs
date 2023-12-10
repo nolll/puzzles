@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201519;
 
+[Name("Medicine for Rudolph")]
 public class Aoc201519 : AocPuzzle
 {
-    public override string Name => "Medicine for Rudolph";
-
     protected override PuzzleResult RunPart1()
     {
         var machine = new MedicineMachine(InputFile);

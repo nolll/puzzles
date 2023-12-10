@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202219;
 
+[Name("Not Enough Minerals")]
 public class Aoc202219 : AocPuzzle
 {
-    public override string Name => "Not Enough Minerals";
-
     protected override PuzzleResult RunPart1()
     {
         var factory = new RobotFactory();

@@ -4,10 +4,9 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq22;
 
+[Name("Veni Vidi Vitavi")]
 public class Aquaq22 : AquaqPuzzle
 {
-    public override string Name => "Veni Vidi Vitavi";
-
     protected override PuzzleResult Run()
     {
         var numbers = InputFile.Split(' ').Select(int.Parse);

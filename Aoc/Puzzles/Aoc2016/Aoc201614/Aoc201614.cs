@@ -3,11 +3,10 @@
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
 
 [IsSlow] // 26s for part 2
+[Name("One-Time Pad")]
 [Comment("Slow hashing")]
 public class Aoc201614 : AocPuzzle
 {
-    public override string Name => "One-Time Pad";
-
     protected override PuzzleResult RunPart1()
     {
         var generator = new KeyGenerator();

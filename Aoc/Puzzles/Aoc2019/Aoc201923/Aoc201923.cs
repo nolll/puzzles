@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201923;
 
+[Name("Category Six")]
 public class Aoc201923 : AocPuzzle
 {
-    public override string Name => "Category Six";
-
     protected override PuzzleResult RunPart1()
     {
         var network = new CategorySixNetwork(InputFile);

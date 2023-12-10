@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202307;
 
+[Name("Camel Cards")]
 public class Aoc202307 : AocPuzzle
 {
-    public override string Name => "Camel Cards";
-
     protected override PuzzleResult RunPart1() 
         => new(PokerPart1(InputFile), "eb6c5937d75bbb79d79d7e01895aacd4");
 

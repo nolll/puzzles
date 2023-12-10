@@ -3,12 +3,11 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler037;
 
+[Name("Truncatable Primes")]
 public class Euler037 : EulerPuzzle
 {
     private const int Target = 11;
     private const int Initial = 8;
-
-    public override string Name => "Truncatable Primes";
 
     protected override PuzzleResult Run()
     {

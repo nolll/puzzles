@@ -2,11 +2,10 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202119;
 
+[Name("Beacon Scanner")]
 public class Aoc202119 : AocPuzzle
 {
     private BeaconSystemResult? _result;
-
-    public override string Name => "Beacon Scanner";
 
     protected override PuzzleResult RunPart1()
     {

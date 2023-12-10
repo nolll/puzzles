@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Euler.Puzzles.Euler018;
 
+[Name("Maximum path sum I")]
 public class Euler018 : EulerPuzzle
 {
-    public override string Name => "Maximum path sum I";
-
     protected override PuzzleResult Run()
     {
         var result = Run(Triangle);

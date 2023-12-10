@@ -3,10 +3,9 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler012;
 
+[Name("Highly divisible triangular number")]
 public class Euler012 : EulerPuzzle
 {
-    public override string Name => "Highly divisible triangular number";
-
     protected override PuzzleResult Run()
     {
         var result = Run(501);

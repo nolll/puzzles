@@ -3,11 +3,10 @@
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201623;
 
 [IsSlow] // 196s for part 2
+[Name("Safe Cracking")]
 [Comment("Factorial of 12")]
 public class Aoc201623 : AocPuzzle
 {
-    public override string Name => "Safe Cracking";
-
     protected override PuzzleResult RunPart1()
     {
         var computer = new SafeCrackingComputerPart1(InputFile, 7, 0);

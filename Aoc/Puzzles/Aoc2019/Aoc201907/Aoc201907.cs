@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201907;
 
+[Name("Amplification Circuit")]
 public class Aoc201907 : AocPuzzle
 {
-    public override string Name => "Amplification Circuit";
-
     protected override PuzzleResult RunPart1()
     {
         var calculator = new ThrustCalculator(InputFile);

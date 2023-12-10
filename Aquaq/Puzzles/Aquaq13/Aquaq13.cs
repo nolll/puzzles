@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq13;
 
+[Name("O RLE?")]
 public class Aquaq13 : AquaqPuzzle
 {
-    public override string Name => "O RLE?";
-
     protected override PuzzleResult Run()
     {
         var lines = StringReader.ReadLines(InputFile);

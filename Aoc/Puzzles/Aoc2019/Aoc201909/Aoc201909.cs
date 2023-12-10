@@ -3,10 +3,9 @@ using Pzl.Tools.Computers.IntCode;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201909;
 
+[Name("Sensor Boost")]
 public class Aoc201909 : AocPuzzle
 {
-    public override string Name => "Sensor Boost";
-
     protected override PuzzleResult RunPart1()
     {
         var boostTester = new BoostRunner(InputFile, 1);

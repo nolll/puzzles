@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201515;
 
+[Name("Science for Hungry People")]
 public class Aoc201515 : AocPuzzle
 {
-    public override string Name => "Science for Hungry People";
-
     protected override PuzzleResult RunPart1()
     {
         var bakery = new CookieBakery(InputFile);

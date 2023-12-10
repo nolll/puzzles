@@ -2,11 +2,10 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201624;
 
+[Name("Air Duct Spelunking")]
 public class Aoc201624 : AocPuzzle
 {
     private AirDuctNavigator Navigator => new(InputFile);
-
-    public override string Name => "Air Duct Spelunking";
 
     protected override PuzzleResult RunPart1()
     {

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202216;
 
+[Name("Proboscidea Volcanium")]
 public class Aoc202216 : AocPuzzle
 {
-    public override string Name => "Proboscidea Volcanium";
-
     protected override PuzzleResult RunPart1()
     {
         var pipes = new VolcanicPipes(InputFile);

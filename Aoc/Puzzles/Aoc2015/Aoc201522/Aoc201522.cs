@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201522;
 
+[Name("Wizard Simulator 20XX")]
 public class Aoc201522 : AocPuzzle
 {
-    public override string Name => "Wizard Simulator 20XX";
-
     protected override PuzzleResult RunPart1()
     {
         var p = GetParams();

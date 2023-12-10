@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201824;
 
+[Name("Immune System Simulator 20XX")]
 public class Aoc201824 : AocPuzzle
 {
-    public override string Name => "Immune System Simulator 20XX";
-
     protected override PuzzleResult RunPart1()
     {
         var inputs = InputFile.Split("\r\n\r\n");

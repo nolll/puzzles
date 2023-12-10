@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler032;
 
+[Name("Pandigital products")]
 public class Euler032 : EulerPuzzle
 {
-    public override string Name => "Pandigital products";
-
     private const string AllChars = "123456789";
 
     protected override PuzzleResult Run()

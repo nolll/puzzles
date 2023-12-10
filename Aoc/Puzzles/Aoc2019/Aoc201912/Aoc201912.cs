@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201912;
 
+[Name("The N-Body Problem")]
 public class Aoc201912 : AocPuzzle
 {
-    public override string Name => "The N-Body Problem";
-
     protected override PuzzleResult RunPart1()
     {
         var tracker1 = new MoonTracker(InputFile);

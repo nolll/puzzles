@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201822;
 
+[Name("Mode Maze")]
 public class Aoc201822 : AocPuzzle
 {
-    public override string Name => "Mode Maze";
-
     protected override PuzzleResult RunPart1()
     {
         var rows = StringReader.ReadLines(InputFile);

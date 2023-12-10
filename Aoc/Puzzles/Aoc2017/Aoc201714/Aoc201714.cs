@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201714;
 
+[Name("Disk Defragmentation")]
 public class Aoc201714 : AocPuzzle
 {
-    public override string Name => "Disk Defragmentation";
-
     protected override PuzzleResult RunPart1()
     {
         var defragmenter = new DiskDefragmenter(Input);

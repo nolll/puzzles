@@ -3,10 +3,9 @@ using Pzl.Tools.Cryptography;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq23;
 
+[Name("Fair Play")]
 public class Aquaq23 : AquaqPuzzle
 {
-    public override string Name => "Fair Play";
-
     protected override PuzzleResult Run()
     {
         var result = new PlayfairCipher("power plant").Decrypt("vepcundbyoaeirotivluxnotpstfnbwept");

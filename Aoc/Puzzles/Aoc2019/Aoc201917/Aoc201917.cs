@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201917;
 
+[Name("Set and Forget")]
 public class Aoc201917 : AocPuzzle
 {
-    public override string Name => "Set and Forget";
-
     protected override PuzzleResult RunPart1()
     {
         var sc = new ScaffoldingComputer1(InputFile);

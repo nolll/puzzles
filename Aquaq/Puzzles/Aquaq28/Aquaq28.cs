@@ -4,14 +4,13 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq28;
 
+[Name("Hall of Mirrors")]
 public class Aquaq28 : AquaqPuzzle
 {
     private const char MirrorLeft = '\\';
     private const char MirrorRight = '/';
     private const char Empty = ' ';
     private const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789";
-
-    public override string Name => "Hall of Mirrors";
 
     protected override PuzzleResult Run()
     {

@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq37;
 
+[Name("GUESS WORDS")]
 public class Aquaq37 : AquaqPuzzle
 {
-    public override string Name => "GUESS WORDS";
-
     private const int WordLength = 5;
 
     protected override PuzzleResult Run()

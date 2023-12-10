@@ -1,14 +1,12 @@
-﻿using System.Globalization;
-using Pzl.Common;
+﻿using Pzl.Common;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202309;
 
+[Name("Mirage Maintenance")]
 public class Aoc202309 : AocPuzzle
 {
-    public override string Name => "Mirage Maintenance";
-    
     protected override PuzzleResult RunPart1() => 
         new(Part1(InputFile), "42abec426a1f1903197aaf0635b6a29a");
 

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201706;
 
+[Name("Memory Reallocation")]
 public class Aoc201706 : AocPuzzle
 {
-    public override string Name => "Memory Reallocation";
-
     protected override PuzzleResult RunPart1()
     {
         var reallocator = new MemoryReallocator(InputFile);

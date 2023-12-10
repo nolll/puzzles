@@ -3,10 +3,9 @@ using Pzl.Tools.Computers.IntCode;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201902;
 
+[Name("1202 Program Alarm")]
 public class Aoc201902 : AocPuzzle
 {
-    public override string Name => "1202 Program Alarm";
-
     protected override PuzzleResult RunPart1()
     {
         var computer = new ConsoleComputer(InputFile);

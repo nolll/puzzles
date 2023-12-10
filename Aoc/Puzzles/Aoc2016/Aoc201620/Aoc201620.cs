@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201620;
 
+[Name("Firewall Rules")]
 public class Aoc201620 : AocPuzzle
 {
-    public override string Name => "Firewall Rules";
-
     protected override PuzzleResult RunPart1()
     {
         var rules = new FirewallRules(InputFile);

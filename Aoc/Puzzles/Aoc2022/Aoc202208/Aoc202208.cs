@@ -2,11 +2,10 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202208;
 
+[Name("Treetop Tree House")]
 public class Aoc202208 : AocPuzzle
 {
     private TreeHouse? _treeHouse;
-
-    public override string Name => "Treetop Tree House";
 
     protected override PuzzleResult RunPart1()
     {

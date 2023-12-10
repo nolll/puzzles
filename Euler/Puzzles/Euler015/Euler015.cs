@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler015;
 
+[Name("Lattice paths")]
 public class Euler015 : EulerPuzzle
 {
-    public override string Name => "Lattice paths";
-
     protected override PuzzleResult Run()
     {
         var result = Run(20);

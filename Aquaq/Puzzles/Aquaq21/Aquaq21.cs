@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq21;
 
+[Name("Clean Sweep")]
 public class Aquaq21 : AquaqPuzzle
 {
-    public override string Name => "Clean Sweep";
-
     protected override PuzzleResult Run()
     {
         return new PuzzleResult(Run(InputFile, 5), "e9476ebab07e71bb8b8872bca85185f5");

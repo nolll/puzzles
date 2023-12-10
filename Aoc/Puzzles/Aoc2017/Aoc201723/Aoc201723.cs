@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201723;
 
+[Name("Coprocessor Conflagration")]
 public class Aoc201723 : AocPuzzle
 {
-    public override string Name => "Coprocessor Conflagration";
-
     protected override PuzzleResult RunPart1()
     {
         var processor1 = new CoProcessor(InputFile);

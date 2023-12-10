@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201719;
 
+[Name("A Series of Tubes")]
 public class Aoc201719 : AocPuzzle
 {
-    public override string Name => "A Series of Tubes";
-
     protected override PuzzleResult RunPart1()
     {
         var finder = new TubeRouteFinder(InputFile);

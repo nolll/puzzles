@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq38;
 
+[Name("Number Neighbours")]
 public class Aquaq38 : AquaqPuzzle
 {
-    public override string Name => "Number Neighbours";
-
     protected override PuzzleResult Run()
     {
         var indexStreakProvider = new IndexStreakProvider();

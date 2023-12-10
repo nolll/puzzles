@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202105;
 
+[Name("Hydrothermal Venture")]
 public class Aoc202105 : AocPuzzle
 {
-    public override string Name => "Hydrothermal Venture";
-
     protected override PuzzleResult RunPart1()
     {
         var ventsMap = new VentsMap();

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202017;
 
+[Name("Conway Cubes")]
 public class Aoc202017 : AocPuzzle
 {
-    public override string Name => "Conway Cubes";
-
     protected override PuzzleResult RunPart1()
     {
         var cube = new ConwayCube();

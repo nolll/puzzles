@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202016;
 
+[Name("Ticket Translation")]
 public class Aoc202016 : AocPuzzle
 {
-    public override string Name => "Ticket Translation";
-
     protected override PuzzleResult RunPart1()
     {
         var validator = new TicketValidator();

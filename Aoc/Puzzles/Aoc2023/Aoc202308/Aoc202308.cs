@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202308;
 
+[Name("Haunted Wasteland")]
 public class Aoc202308 : AocPuzzle
 {
-    public override string Name => "Haunted Wasteland";
-
     protected override PuzzleResult RunPart1()
     {
         return new PuzzleResult(DesertPath1(InputFile), "fc2f3ff0b243fed57135f9ca59507411");

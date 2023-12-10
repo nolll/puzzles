@@ -3,10 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq08;
 
+[Name("Cron Flakes")]
 public class Aquaq08 : AquaqPuzzle
 {
-    public override string Name => "Cron Flakes";
-
     protected override PuzzleResult Run()
     {
         var (milk, cereal) = Run(InputFile);

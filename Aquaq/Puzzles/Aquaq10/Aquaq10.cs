@@ -4,10 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq10;
 
+[Name("Troll Toll")]
 public class Aquaq10 : AquaqPuzzle
 {
-    public override string Name => "Troll Toll";
-
     protected override PuzzleResult Run()
     {
         var result = Run(InputFile, "TUPAC", "DIDDY");

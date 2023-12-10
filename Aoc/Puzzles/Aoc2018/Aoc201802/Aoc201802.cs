@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201802;
 
+[Name("Inventory Management System")]
 public class Aoc201802 : AocPuzzle
 {
-    public override string Name => "Inventory Management System";
-
     protected override PuzzleResult RunPart1()
     {
         var boxChecksumPuzzle = new BoxChecksumPuzzle(InputFile);

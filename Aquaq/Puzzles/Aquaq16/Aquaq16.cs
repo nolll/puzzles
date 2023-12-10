@@ -3,11 +3,10 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq16;
 
+[Name("Keming")]
 public class Aquaq16 : AquaqPuzzle
 {
     private const int LetterHeight = 6;
-
-    public override string Name => "Keming";
 
     protected override PuzzleResult Run()
     {

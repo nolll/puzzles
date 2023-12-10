@@ -3,10 +3,9 @@ using Pzl.Tools.Maths;
 
 namespace Pzl.Euler.Puzzles.Euler016;
 
+[Name("Power digit sum")]
 public class Euler016 : EulerPuzzle
 {
-    public override string Name => "Power digit sum";
-
     protected override PuzzleResult Run()
     {
         var result = Run(1000);

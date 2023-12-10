@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201720;
 
+[Name("Particle Swarm")]
 public class Aoc201720 : AocPuzzle
 {
-    public override string Name => "Particle Swarm";
-
     protected override PuzzleResult RunPart1()
     {
         var tracker1 = new ParticleTracker(InputFile);

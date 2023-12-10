@@ -3,10 +3,9 @@ using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler007;
 
+[Name("10001st prime")]
 public class Euler007 : EulerPuzzle
 {
-    public override string Name => "10001st prime";
-
     protected override PuzzleResult Run()
     {
         var nthPrime = Run(10001);

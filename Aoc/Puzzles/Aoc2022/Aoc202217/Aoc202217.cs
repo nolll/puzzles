@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202217;
 
+[Name("Pyroclastic Flow")]
 public class Aoc202217 : AocPuzzle
 {
-    public override string Name => "Pyroclastic Flow";
-
     protected override PuzzleResult RunPart1()
     {
         var tetris = new Tetris();

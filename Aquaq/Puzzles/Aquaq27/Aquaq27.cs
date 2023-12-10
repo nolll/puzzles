@@ -3,11 +3,10 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq27;
 
+[Name("Snake Eater")]
 public class Aquaq27 : AquaqPuzzle
 {
     private const char Empty = ' ';
-
-    public override string Name => "Snake Eater";
 
     protected override PuzzleResult Run()
     {

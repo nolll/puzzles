@@ -2,10 +2,9 @@
 
 namespace Pzl.Euler.Puzzles.Euler004;
 
+[Name("Largest palindrome product")]
 public class Euler004 : EulerPuzzle
 {
-    public override string Name => "Largest palindrome product";
-
     protected override PuzzleResult Run()
     {
         var largestPalindrome = Run(100, 999);

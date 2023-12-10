@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201722;
 
+[Name("Sporifica Virus")]
 public class Aoc201722 : AocPuzzle
 {
-    public override string Name => "Sporifica Virus";
-
     protected override PuzzleResult RunPart1()
     {
         var infection1 = new VirusInfection(InputFile);

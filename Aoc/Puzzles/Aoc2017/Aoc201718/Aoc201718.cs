@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201718;
 
+[Name("Duet")]
 public class Aoc201718 : AocPuzzle
 {
-    public override string Name => "Duet";
-
     protected override PuzzleResult RunPart1()
     {
         var single = new SingleRunner(InputFile);

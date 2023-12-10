@@ -2,10 +2,9 @@
 
 namespace Pzl.Aquaq.Puzzles.Aquaq39;
 
+[Name("Game of Throwns")]
 public class Aquaq39 : AquaqPuzzle
 {
-    public override string Name => "Game of Throwns";
-
     private const int GameTarget = 501;
     private const int DartsPerTurn = 3;
 

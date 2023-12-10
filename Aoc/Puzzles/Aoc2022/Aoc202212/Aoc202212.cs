@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202212;
 
+[Name("Hill Climbing Algorithm")]
 public class Aoc202212 : AocPuzzle
 {
-    public override string Name => "Hill Climbing Algorithm";
-
     protected override PuzzleResult RunPart1()
     {
         var hillClimbing = new HillClimbing();

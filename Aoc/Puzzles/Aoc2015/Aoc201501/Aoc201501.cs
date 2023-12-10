@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201501;
 
+[Name("Not Quite Lisp")]
 public class Aoc201501 : AocPuzzle
 {
-    public override string Name => "Not Quite Lisp";
-
     protected override PuzzleResult RunPart1()
     {
         var navigator = new FloorNavigator(InputFile);

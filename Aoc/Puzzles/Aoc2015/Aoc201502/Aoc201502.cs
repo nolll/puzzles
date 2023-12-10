@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201502;
 
+[Name("I Was Told There Would Be No Math")]
 public class Aoc201502 : AocPuzzle
 {
-    public override string Name => "I Was Told There Would Be No Math";
-
     protected override PuzzleResult RunPart1()
     {
         var paperResult = GiftWrappingCalculator.GetRequiredPaper(InputFile);

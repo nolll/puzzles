@@ -3,10 +3,10 @@ using Pzl.Common;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq01;
 
+[Name("Rose by any other name")]
 public class Aquaq01 : AquaqPuzzle
 {
     private static readonly Regex HexRegex = new("[^0123456789abcdef]");
-    public override string Name => "Rose by any other name";
 
     private const string Input = "do you think that maybe like, 1 in 10 people could be actually robots?";
 

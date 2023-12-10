@@ -5,10 +5,9 @@ namespace Pzl.Euler.Puzzles.Euler024;
 
 [IsSlow]
 [NeedsRewrite]
+[Name("Lexicographic permutations")]
 public class Euler024 : EulerPuzzle
 {
-    public override string Name => "Lexicographic permutations";
-
     protected override PuzzleResult Run()
     {
         var result = Run(10, 1_000_000);

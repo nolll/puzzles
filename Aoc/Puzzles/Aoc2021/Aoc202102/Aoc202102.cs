@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202102;
 
+[Name("Dive!")]
 public class Aoc202102 : AocPuzzle
 {
-    public override string Name => "Dive!";
-
     protected override PuzzleResult RunPart1()
     {
         var control = new SubmarineControl(InputFile, false);

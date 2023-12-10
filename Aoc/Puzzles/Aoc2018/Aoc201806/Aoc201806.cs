@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201806;
 
+[Name("Chronal Coordinates")]
 public class Aoc201806 : AocPuzzle
 {
-    public override string Name => "Chronal Coordinates";
-
     protected override PuzzleResult RunPart1()
     {
         var finder = new LargestAreaFinder(InputFile);

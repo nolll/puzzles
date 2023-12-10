@@ -2,11 +2,10 @@
 
 namespace Pzl.Euler.Puzzles.Euler022;
 
+[Name("Names scores")]
 public class Euler022 : EulerPuzzle
 {
     private readonly Dictionary<string, int> _nameScores;
-
-    public override string Name => "Names scores";
 
     public Euler022()
     {

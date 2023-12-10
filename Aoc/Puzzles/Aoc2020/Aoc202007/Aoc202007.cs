@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202007;
 
+[Name("Handy Haversacks")]
 public class Aoc202007 : AocPuzzle
 {
-    public override string Name => "Handy Haversacks";
-
     protected override PuzzleResult RunPart1()
     {
         var processor = new LuggageProcessor(InputFile);

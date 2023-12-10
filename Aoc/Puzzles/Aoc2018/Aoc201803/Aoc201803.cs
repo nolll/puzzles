@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201803;
 
+[Name("No Matter How You Slice It")]
 public class Aoc201803 : AocPuzzle
 {
-    public override string Name => "No Matter How You Slice It";
-
     protected override PuzzleResult RunPart1()
     {
         var claimsOverlapCountPuzzle = new ClaimsOverlapCountPuzzle(InputFile);

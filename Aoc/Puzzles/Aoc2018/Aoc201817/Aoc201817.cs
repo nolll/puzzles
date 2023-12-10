@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201817;
 
+[Name("Reservoir Research")]
 public class Aoc201817 : AocPuzzle
 {
-    public override string Name => "Reservoir Research";
-
     protected override PuzzleResult RunPart1()
     {
         var filler = new ReservoirFiller(InputFile);

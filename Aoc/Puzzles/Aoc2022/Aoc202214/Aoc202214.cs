@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202214;
 
+[Name("Regolith Reservoir")]
 public class Aoc202214 : AocPuzzle
 {
-    public override string Name => "Regolith Reservoir";
-
     protected override PuzzleResult RunPart1()
     {
         var fallingSand = new FallingSand();

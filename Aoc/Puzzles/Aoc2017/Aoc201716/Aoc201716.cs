@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201716;
 
+[Name("Permutation Promenade")]
 public class Aoc201716 : AocPuzzle
 {
-    public override string Name => "Permutation Promenade";
-
     protected override PuzzleResult RunPart1()
     {
         var dancingPrograms1 = new DancingPrograms();

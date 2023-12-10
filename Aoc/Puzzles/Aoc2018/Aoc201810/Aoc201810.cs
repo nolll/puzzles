@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201810;
 
+[Name("The Stars Align")]
 public class Aoc201810 : AocPuzzle
 {
-    public override string Name => "The Stars Align";
-
     protected override PuzzleResult RunPart1()
     {
         var finder = new StarMessageFinder(InputFile, 9);

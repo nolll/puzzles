@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201516;
 
+[Name("Aunt Sue")]
 public class Aoc201516 : AocPuzzle
 {
-    public override string Name => "Aunt Sue";
-
     protected override PuzzleResult RunPart1()
     {
         var sueSelector = new SueSelector(InputFile);

@@ -2,10 +2,9 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202203;
 
+[Name("Rucksack Reorganization")]
 public class Aoc202203 : AocPuzzle
 {
-    public override string Name => "Rucksack Reorganization";
-
     protected override PuzzleResult RunPart1()
     {
         var result = Rucksacks.GetPriority1(InputFile);

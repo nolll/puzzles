@@ -3,10 +3,9 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202310;
 
+[Name("Pipe Maze")]
 public class Aoc202310 : AocPuzzle
 {
-    public override string Name => "Pipe Maze";
-
     protected override PuzzleResult RunPart1() => 
         new(FarthestPoint(InputFile), "7307413d1efe2d8b5a4994a204a50a86");
 

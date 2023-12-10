@@ -8,25 +8,53 @@ public class Aoc202310 : AocPuzzle
     public override string Name => "Pipe Maze";
 
     protected override PuzzleResult RunPart1() => 
-        new(FarthestPoint(InputFile, '|'), "7307413d1efe2d8b5a4994a204a50a86");
+        new(FarthestPoint(InputFile), "7307413d1efe2d8b5a4994a204a50a86");
 
     protected override PuzzleResult RunPart2() => 
-        new(EnclosedTileCount(InputFile, '|'), "59413d1f83d3d395818ceddd09c64bbf");
+        new(EnclosedTileCount(InputFile), "59413d1f83d3d395818ceddd09c64bbf");
 
-    public static int FarthestPoint(string input, char startPointChar)
+    public static int FarthestPoint(string input)
     {
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         var startPoint = matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
+        var startPointChar = GetStartPointChar(matrix, startPoint);
         matrix.WriteValueAt(startPoint, startPointChar);
         var loop = GetLoop(matrix, startPoint);
 
         return loop.Count / 2;
     }
 
-    public static int EnclosedTileCount(string input, char startPointChar)
+    private static char GetStartPointChar(Matrix<char> matrix, MatrixAddress startPoint)
+    {
+        var (x, y) = startPoint.Tuple;
+        var top = matrix.ReadValueAt(new MatrixAddress(x, y - 1));
+        var right = matrix.ReadValueAt(new MatrixAddress(x + 1, y));
+        var bottom = matrix.ReadValueAt(new MatrixAddress(x, y + 1));
+        var left = matrix.ReadValueAt(new MatrixAddress(x - 1, y));
+
+        var enterFromTop = top is 'F' or '|' or '7';
+        var enterFromRight = right is 'J' or '-' or '7';
+        var enterFromBottom = bottom is 'J' or '|' or 'L';
+        var enterFromLeft = left is 'F' or '-' or 'L';
+
+        if (enterFromTop && enterFromRight)
+            return 'L';
+        if (enterFromRight && enterFromBottom)
+            return 'F';
+        if (enterFromBottom && enterFromLeft)
+            return '7';
+        if (enterFromLeft && enterFromTop)
+            return 'J';
+        if (enterFromTop && enterFromBottom)
+            return '|';
+        return '-';
+    }
+
+    public static int EnclosedTileCount(string input)
     {
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         var startPoint = matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
+        var startPointChar = GetStartPointChar(matrix, startPoint);
         matrix.WriteValueAt(startPoint, startPointChar);
         var loopPath = GetLoop(matrix, startPoint).ToHashSet();
         var otherCoords = matrix.Coords.Where(o => !loopPath.Contains(o)).ToList();

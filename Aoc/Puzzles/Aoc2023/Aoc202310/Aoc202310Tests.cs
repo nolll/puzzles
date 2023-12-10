@@ -18,7 +18,7 @@ public class Aoc202310Tests
                              .....
                              """;
 
-        var result = Aoc202310.FarthestPoint(input, 'F');
+        var result = Aoc202310.FarthestPoint(input);
 
         result.Should().Be(4);
     }
@@ -71,7 +71,7 @@ public class Aoc202310Tests
                              ...........
                              """;
 
-        var result = Aoc202310.EnclosedTileCount(input, 'F');
+        var result = Aoc202310.EnclosedTileCount(input);
 
         result.Should().Be(4);
     }
@@ -91,7 +91,7 @@ public class Aoc202310Tests
                              ..........
                              """;
 
-        var result = Aoc202310.EnclosedTileCount(input, 'F');
+        var result = Aoc202310.EnclosedTileCount(input);
 
         result.Should().Be(4);
     }
@@ -112,7 +112,7 @@ public class Aoc202310Tests
                              ....L---J.LJ.LJLJ...
                              """;
 
-        var result = Aoc202310.EnclosedTileCount(input, 'F');
+        var result = Aoc202310.EnclosedTileCount(input);
 
         result.Should().Be(8);
     }
@@ -133,7 +133,7 @@ public class Aoc202310Tests
                              L7JLJL-JLJLJL--JLJ.L
                              """;
 
-        var result = Aoc202310.EnclosedTileCount(input, '7');
+        var result = Aoc202310.EnclosedTileCount(input);
 
         result.Should().Be(10);
     }

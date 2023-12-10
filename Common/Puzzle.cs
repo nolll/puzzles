@@ -7,12 +7,7 @@ namespace Pzl.Common;
 
 public abstract class Puzzle
 {
-    public abstract string SortId { get; }
-    public abstract string Title { get; }
-    public abstract string ListTitle { get; }
     public abstract string Name { get; }
-    public virtual bool NeedsRewrite => false;
-    public virtual bool IsFunToOptimize => false;
 
     protected string InputFile => FileReader.ReadTextFile(InputFilePath);
     protected string TextFile(string fileName) => ReadLocalFile(fileName);
@@ -57,12 +52,6 @@ public abstract class Puzzle
             {
                 yield return customTag;
             }
-
-            if (NeedsRewrite)
-                yield return PuzzleTag.Rewrite;
-
-            if (IsFunToOptimize)
-                yield return PuzzleTag.Fun;
         }
     }
 

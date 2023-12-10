@@ -17,29 +17,41 @@ public class PuzzleDefinition
     public bool NeedsRewrite { get; }
     public bool IsFunToOptimize { get; }
 
-    public PuzzleDefinition(PuzzleData data, Puzzle instance)
+    public PuzzleDefinition(
+        PuzzleData data, 
+        Puzzle instance,
+        List<string> tags,
+        string sortId,
+        string title,
+        string listTitle)
         : this(
             data.Type,
-            [..instance.Tags, ..CreateTags(data)],
-            instance.SortId,
-            instance.Title,
-            instance.ListTitle,
+            [..tags, ..CreateTags(data)],
+            sortId,
+            title,
+            listTitle,
             instance.Name,
             data.Comment,
             data.IsSlow,
-            instance.NeedsRewrite,
-            instance.IsFunToOptimize)
+            data.NeedsRewrite,
+            data.IsFunToOptimize)
     {
         Instance = instance;
     }
 
     private static IEnumerable<string> CreateTags(PuzzleData data)
     {
+        if (data.Comment is not null)
+            yield return PuzzleTag.Commented; 
+        
         if (data.IsSlow)
             yield return PuzzleTag.Slow;
 
-        if (data.Comment is not null)
-            yield return PuzzleTag.Commented;
+        if (data.NeedsRewrite)
+            yield return PuzzleTag.Rewrite;
+
+        if (data.IsFunToOptimize)
+            yield return PuzzleTag.Fun;
     }
 
     public PuzzleDefinition(

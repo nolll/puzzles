@@ -14,9 +14,11 @@ public class PuzzleFactory
 
     private static PuzzleData CreateData(Type type)
     {
-        var isSlow = IsSlow(type);
         var comment = GetComment(type);
-        return new PuzzleData(type, isSlow, comment);
+        var isSlow = IsSlow(type);
+        var needsRewrite = NeedsRewrite(type);
+        var isFunToOptimize = IsFunToOptimize(type);
+        return new PuzzleData(type, comment, isSlow, needsRewrite, isFunToOptimize);
     }
 
     public static Puzzle CreateInstance<T>(Type t) where T : Puzzle
@@ -38,9 +40,15 @@ public class PuzzleFactory
             })
         ?? new List<Type>();
 
-    private static bool IsSlow(MemberInfo type) => 
-        type.GetCustomAttribute<IsSlowAttribute>(false) is not null;
-
     private static string? GetComment(MemberInfo type) => 
         type.GetCustomAttribute<CommentAttribute>(false)?.Comment;
+
+    private static bool IsSlow(MemberInfo type) =>
+        type.GetCustomAttribute<IsSlowAttribute>(false) is not null;
+
+    private static bool NeedsRewrite(MemberInfo type) =>
+        type.GetCustomAttribute<NeedsRewriteAttribute>(false) is not null;
+
+    private static bool IsFunToOptimize(MemberInfo type) =>
+        type.GetCustomAttribute<IsFunToOptimizeAttribute>(false) is not null;
 }

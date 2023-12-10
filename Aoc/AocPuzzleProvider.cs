@@ -11,7 +11,15 @@ public class AocPuzzleProvider : IPuzzleProvider
 
     private static PuzzleDefinition CreatePuzzleDefinition(PuzzleData data)
     {
+        var (year, day) = AocPuzzleParser.GetYearAndDay(data.Type);
+        var paddedDay = day.ToString().PadLeft(2, '0');
+        var id = $"{year}{paddedDay}";
+        var sortId = $"aoc {id}";
+        var title = $"Advent of Code {year}-{paddedDay}";
+        var listTitle = $"Aoc {year}-{paddedDay}";
+        List<string> tags = ["aoc", year.ToString(), day.ToString()];
+
         var instance = PuzzleFactory.CreateInstance<AocPuzzle>(data.Type);
-        return new PuzzleDefinition(data, instance);
+        return new PuzzleDefinition(data, instance, tags, sortId, title, listTitle);
     }
 }

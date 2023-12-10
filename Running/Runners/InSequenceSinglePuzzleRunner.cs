@@ -35,7 +35,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
         _resultLength = resultWidth;
         _commentLength = commentWidth;
         _truncatedCommentLength = commentWidth - 3;
-        _title = _puzzle.ListTitle.PadRight(titleWidth);
+        _title = puzzle.ListTitle.PadRight(titleWidth);
         _commentMarkup = MarkupComment(puzzle.Comment);
         _markups = new string[maxFuncCount];
         for (var i = 0; i < maxFuncCount; i++)

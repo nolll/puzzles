@@ -3,10 +3,10 @@
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201918;
 
 [Comment("Key Collector - Part 2 is too optimized. Tests fails")]
+[NeedsRewrite]
 public class Aoc201918 : AocPuzzle
 {
     public override string Name => "Many-Worlds Interpretation";
-    public override bool NeedsRewrite => true;
 
     protected override PuzzleResult RunPart1()
     {

@@ -3,10 +3,10 @@
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201922;
 
 [Comment("Learn more math")]
+[NeedsRewrite]
 public class Aoc201922 : AocPuzzle
 {
     public override string Name => "Slam Shuffle";
-    public override bool NeedsRewrite => true;
 
     protected override PuzzleResult RunPart1()
     {

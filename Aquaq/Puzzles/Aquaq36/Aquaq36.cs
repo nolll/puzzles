@@ -5,10 +5,10 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq36;
 
 [IsSlow]
+[NeedsRewrite]
 public class Aquaq36 : AquaqPuzzle
 {
     public override string Name => "Tetonor Terror";
-    public override bool NeedsRewrite => true;
 
     protected override PuzzleResult Run()
     {
@@ -66,13 +66,11 @@ public class Aquaq36 : AquaqPuzzle
         if (!grid.Any())
             return sum;
 
-        //var seen = new HashSet<GridPair>();
         foreach (var gridNumber in grid)
         {
             var pairs = GetGridPairs(gridNumber, grid, factorCache);
             foreach (var pair in pairs)
             {
-                //seen.Add(pair);
                 var aIndices = IndicesContaining(inputs, pair.A);
                 var bIndices = IndicesContaining(inputs, pair.B);
 
@@ -156,7 +154,7 @@ public class Aquaq36 : AquaqPuzzle
             }
             else
             {
-                list.Add(new() { v.Value });
+                list.Add([v.Value]);
             }
         }
 

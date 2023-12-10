@@ -8,7 +8,9 @@ public class PuzzleRepository
         
     public PuzzleRepository(IEnumerable<IPuzzleProvider> puzzleProviders)
     {
-        _puzzleDefinitions = puzzleProviders.SelectMany(o => o.GetPuzzles()).ToList();
+        _puzzleDefinitions = puzzleProviders.SelectMany(o => o.GetPuzzles())
+            .OrderBy(o => o.SortId)
+            .ToList();
     }
 
     public IList<PuzzleDefinition> GetPuzzles() => _puzzleDefinitions;

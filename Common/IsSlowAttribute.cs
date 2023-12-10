@@ -15,3 +15,9 @@ public class CommentAttribute : Attribute
 
 [AttributeUsage(AttributeTargets.Class)]
 public class IsSlowAttribute : Attribute;
+
+[AttributeUsage(AttributeTargets.Class)]
+public class IsFunToOptimizeAttribute : Attribute;
+
+[AttributeUsage(AttributeTargets.Class)]
+public class NeedsRewriteAttribute : Attribute;

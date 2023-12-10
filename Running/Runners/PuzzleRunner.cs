@@ -16,9 +16,9 @@ public class PuzzleRunner
         _isDebugMode = isDebugMode;
     }
 
-    public void Run(IEnumerable<Puzzle> puzzles)
+    public void Run(IEnumerable<PuzzleDefinition> puzzles)
     {
-        var enumerable = puzzles as Puzzle[] ?? puzzles.ToArray();
+        var enumerable = puzzles.ToArray();
         var count = enumerable.Length;
 
         if (count == 0)

@@ -18,17 +18,43 @@ public class PuzzleDefinition
     public bool IsFunToOptimize { get; }
 
     public PuzzleDefinition(Type type, Puzzle instance)
+        : this(
+            type,
+            instance.Tags,
+            instance.SortId,
+            instance.Title,
+            instance.ListTitle,
+            instance.Name,
+            instance.Comment,
+            instance.IsSlow,
+            instance.NeedsRewrite,
+            instance.IsFunToOptimize)
+    {
+        Instance = instance;
+    }
+
+    public PuzzleDefinition(
+        Type type, 
+        IEnumerable<string> tags, 
+        string sortId, 
+        string title, 
+        string listTitle, 
+        string name, 
+        string? comment, 
+        bool isSlow, 
+        bool needsRewrite, 
+        bool isFunToOptimize)
     {
         Type = type;
-        Instance = instance;
-        Tags = instance.Tags;
-        SortId = instance.SortId;
-        Title = instance.Title;
-        ListTitle = instance.ListTitle;
-        Name = instance.Name;
-        Comment = instance.Comment;
-        IsSlow = instance.IsSlow;
-        NeedsRewrite = instance.NeedsRewrite;
-        IsFunToOptimize = instance.IsFunToOptimize;
+        Instance = null;
+        Tags = tags;
+        SortId = sortId;
+        Title = title;
+        ListTitle = listTitle;
+        Name = name;
+        Comment = comment;
+        IsSlow = isSlow;
+        NeedsRewrite = needsRewrite;
+        IsFunToOptimize = isFunToOptimize;
     }
 }

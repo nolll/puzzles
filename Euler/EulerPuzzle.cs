@@ -9,7 +9,6 @@ public abstract class EulerPuzzle : OnePartPuzzle
     public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
-    protected override string CollectionTag => "euler";
 
     protected EulerPuzzle()
     {
@@ -24,6 +23,7 @@ public abstract class EulerPuzzle : OnePartPuzzle
     {
         get
         {
+            yield return "euler";
             yield return _id;
         }
     }

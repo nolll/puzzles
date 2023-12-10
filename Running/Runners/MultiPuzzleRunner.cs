@@ -1,4 +1,5 @@
-﻿using Pzl.Client.Running.Results;
+﻿using FluentAssertions;
+using Pzl.Client.Running.Results;
 using Pzl.Common;
 using Spectre.Console;
 
@@ -15,9 +16,9 @@ public class MultiPuzzleRunner
     private readonly TimeSpan _timeoutTimespan;
     private readonly PuzzleResultVerifier _resultVerifier;
 
-    public MultiPuzzleRunner(IEnumerable<Puzzle> puzzles, int timeoutSeconds, string hashSeed, bool isDebugMode)
+    public MultiPuzzleRunner(IEnumerable<PuzzleDefinition> puzzles, int timeoutSeconds, string hashSeed, bool isDebugMode)
     {
-        _puzzles = puzzles.ToList();
+        _puzzles = puzzles.Select(o => o.Instance).ToList();
         _funcCount = _puzzles.Max(o => o.RunFunctions.Count);
         _timeoutTimespan = TimeSpan.FromSeconds(timeoutSeconds);
         _resultVerifier = new PuzzleResultVerifier(hashSeed);

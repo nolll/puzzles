@@ -9,8 +9,7 @@ public abstract class AquaqPuzzle : OnePartPuzzle
     public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
-    protected override string CollectionTag => "aquaq";
-
+    
     protected AquaqPuzzle()
     {
         _id = AquaqPuzzleParser.GetPuzzleId(GetType()).ToString();
@@ -24,6 +23,7 @@ public abstract class AquaqPuzzle : OnePartPuzzle
     {
         get
         {
+            yield return "aquaq";
             yield return _id;
         }
     }

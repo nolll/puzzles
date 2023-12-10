@@ -10,7 +10,6 @@ public abstract class AocPuzzle : TwoPartsPuzzle
     public override string SortId { get; }
     public override string Title { get; }
     public override string ListTitle { get; }
-    protected override string CollectionTag => "aoc";
 
     protected AocPuzzle()
     {
@@ -28,6 +27,7 @@ public abstract class AocPuzzle : TwoPartsPuzzle
     {
         get
         {
+            yield return "aoc";
             yield return _year;
             yield return _day;
         }

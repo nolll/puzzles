@@ -1,7 +1,14 @@
-﻿namespace Pzl.Client.Filter;
+﻿using Pzl.Common;
 
-public class SlowPuzzleInTest : PuzzleInTest
+namespace Pzl.Client.Filter;
+
+public class SlowPuzzleDefinitionInTest : PuzzleDefinitionInTest
 {
-    public override string Name => "Slow Puzzle";
-    public override bool IsSlow => true;
+    public SlowPuzzleDefinitionInTest() 
+        : base(
+            tags: [PuzzleTag.Slow],
+            name : "Slow Puzzle", 
+            isSlow : true)
+    {
+    }
 }

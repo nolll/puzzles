@@ -1,7 +1,14 @@
-﻿namespace Pzl.Client.Filter;
+﻿using Pzl.Common;
 
-public class FunPuzzleInTest : PuzzleInTest
+namespace Pzl.Client.Filter;
+
+public class FunPuzzleDefinitionInTest : PuzzleDefinitionInTest
 {
-    public override string Name => "Fun Puzzle";
-    public override bool IsFunToOptimize => true;
+    public FunPuzzleDefinitionInTest()
+        : base(
+            tags: [PuzzleTag.Fun],
+            name: "Fun Puzzle",
+            isFunToOptimize: true)
+    {
+    }
 }

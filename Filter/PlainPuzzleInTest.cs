@@ -1,6 +1,10 @@
 ﻿namespace Pzl.Client.Filter;
 
-public class PlainPuzzleInTest : PuzzleInTest
+public class PlainPuzzleDefinitionInTest : PuzzleDefinitionInTest
 {
-    public override string Name => "Plain Puzzle";
+    public PlainPuzzleDefinitionInTest()
+        : base(
+            name: "Plain Puzzle")
+    {
+    }
 }

@@ -16,9 +16,9 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
 
     private readonly PuzzleResultVerifier _resultVerifier;
 
-    public StandaloneSinglePuzzleRunner(Puzzle puzzle, string hashSeed, bool isDebugMode)
+    public StandaloneSinglePuzzleRunner(PuzzleDefinition puzzle, string hashSeed, bool isDebugMode)
     {
-        _puzzle = puzzle;
+        _puzzle = puzzle.Instance;
         _isDebugMode = isDebugMode;
         _resultVerifier = new PuzzleResultVerifier(hashSeed);
     }

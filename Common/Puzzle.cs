@@ -19,7 +19,6 @@ public abstract class Puzzle
     protected string InputFile => FileReader.ReadTextFile(InputFilePath);
     protected string TextFile(string fileName) => ReadLocalFile(fileName);
     protected string CommonTextFile(string fileName) => ReadCommonFile(fileName);
-    protected abstract string CollectionTag { get; }
 
     protected string PuzzlePath => Path.Combine(PuzzlePathParts);
 
@@ -56,8 +55,6 @@ public abstract class Puzzle
     {
         get
         {
-            yield return CollectionTag;
-
             foreach (var customTag in CustomTags)
             {
                 yield return customTag;

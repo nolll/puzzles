@@ -11,7 +11,7 @@ public class PuzzleRepository
         _puzzleDefinitions = puzzleProviders.SelectMany(o => o.GetPuzzles()).ToList();
     }
 
-    public IList<Puzzle> GetPuzzles() => _puzzleDefinitions.Select(o => o.Instance).ToList();
+    public IList<PuzzleDefinition> GetPuzzles() => _puzzleDefinitions;
 
     public List<PuzzleDefinition> Search(string query) =>
         _puzzleDefinitions

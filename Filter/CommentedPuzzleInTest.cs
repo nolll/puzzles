@@ -1,7 +1,14 @@
-﻿namespace Pzl.Client.Filter;
+﻿using Pzl.Common;
 
-public class CommentedPuzzleInTest : PuzzleInTest
+namespace Pzl.Client.Filter;
+
+public class CommentedPuzzleDefinitionInTest : PuzzleDefinitionInTest
 {
-    public override string Name => "Commented Puzzle";
-    public override string Comment => "Comment";
+    public CommentedPuzzleDefinitionInTest()
+        : base(
+            tags: [PuzzleTag.Commented],
+            name: "Commented Puzzle",
+            comment: "Comment")
+    {
+    }
 }

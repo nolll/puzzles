@@ -16,10 +16,9 @@ public class PuzzleRunner
         _isDebugMode = isDebugMode;
     }
 
-    public void Run(IEnumerable<PuzzleDefinition> puzzles)
+    public void Run(List<PuzzleDefinition> puzzles)
     {
-        var enumerable = puzzles.ToArray();
-        var count = enumerable.Length;
+        var count = puzzles.Count;
 
         if (count == 0)
         {
@@ -28,8 +27,8 @@ public class PuzzleRunner
         }
 
         if (count == 1)
-            new StandaloneSinglePuzzleRunner(enumerable.First(), _hashSeed, _isDebugMode).Run();
+            new StandaloneSinglePuzzleRunner(puzzles.First(), _hashSeed, _isDebugMode).Run();
         else
-            new MultiPuzzleRunner(enumerable, _puzzleTimeout, _hashSeed, _isDebugMode).Run();
+            new MultiPuzzleRunner(puzzles, _puzzleTimeout, _hashSeed, _isDebugMode).Run();
     }
 }

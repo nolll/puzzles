@@ -4,10 +4,10 @@ using Pzl.Common;
 
 namespace Pzl.Euler.Puzzles.Euler026;
 
+[Comment("My original solution involved regex and is left as the RunSlow method. At least I learned something!")]
 public class Euler026 : EulerPuzzle
 {
     public override string Name => "Reciprocal cycles";
-    public override string Comment => "My original solution involved regex and is left as the RunSlow method. At least I learned something!";
 
     protected override PuzzleResult Run()
     {

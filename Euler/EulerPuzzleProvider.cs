@@ -9,9 +9,9 @@ public class EulerPuzzleProvider : IPuzzleProvider
             .Select(CreatePuzzleDefinition)
             .ToList();
 
-    private static PuzzleDefinition CreatePuzzleDefinition(Type t)
+    private static PuzzleDefinition CreatePuzzleDefinition(PuzzleData data)
     {
-        var instance = PuzzleFactory.CreatePuzzle<EulerPuzzle>(t);
-        return new PuzzleDefinition(t, instance);
+        var instance = PuzzleFactory.CreateInstance<EulerPuzzle>(data.Type);
+        return new PuzzleDefinition(data, instance);
     }
 }

@@ -3,10 +3,10 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202305;
 
+[Comment("Range solution for part 2 inspired by HyperNeutrino")]
 public class Aoc202305 : AocPuzzle
 {
     public override string Name => "If You Give A Seed A Fertilizer";
-    public override string Comment => "Range solution for part 2 inspired by HyperNeutrino";
 
     protected override PuzzleResult RunPart1()
     {

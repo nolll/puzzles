@@ -2,10 +2,10 @@
 
 namespace Pzl.Aquaq.Puzzles.Aquaq29;
 
+[IsSlow]
 public class Aquaq29 : AquaqPuzzle
 {
     public override string Name => "On the up and up";
-    public override bool IsSlow => true;
 
     protected override PuzzleResult Run()
     {

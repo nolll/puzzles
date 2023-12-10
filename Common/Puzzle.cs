@@ -11,8 +11,6 @@ public abstract class Puzzle
     public abstract string Title { get; }
     public abstract string ListTitle { get; }
     public abstract string Name { get; }
-    public virtual string? Comment => null;
-    public virtual bool IsSlow => false;
     public virtual bool NeedsRewrite => false;
     public virtual bool IsFunToOptimize => false;
 
@@ -59,12 +57,6 @@ public abstract class Puzzle
             {
                 yield return customTag;
             }
-
-            if (!string.IsNullOrEmpty(Comment))
-                yield return PuzzleTag.Commented;
-
-            if (IsSlow)
-                yield return PuzzleTag.Slow;
 
             if (NeedsRewrite)
                 yield return PuzzleTag.Rewrite;

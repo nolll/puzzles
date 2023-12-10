@@ -9,9 +9,9 @@ public class AquaqPuzzleProvider : IPuzzleProvider
             .Select(CreatePuzzleDefinition)
             .ToList();
 
-    private static PuzzleDefinition CreatePuzzleDefinition(Type t)
+    private static PuzzleDefinition CreatePuzzleDefinition(PuzzleData data)
     {
-        var instance = PuzzleFactory.CreatePuzzle<AquaqPuzzle>(t);
-        return new PuzzleDefinition(t, instance);
+        var instance = PuzzleFactory.CreateInstance<AquaqPuzzle>(data.Type);
+        return new PuzzleDefinition(data, instance);
     }
 }

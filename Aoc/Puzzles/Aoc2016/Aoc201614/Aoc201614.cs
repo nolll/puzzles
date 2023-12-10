@@ -2,12 +2,11 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
 
+[IsSlow] // 26s for part 2
+[Comment("Slow hashing")]
 public class Aoc201614 : AocPuzzle
 {
     public override string Name => "One-Time Pad";
-
-    public override string Comment => "Slow hashing";
-    public override bool IsSlow => true; // 26s for part 2
 
     protected override PuzzleResult RunPart1()
     {

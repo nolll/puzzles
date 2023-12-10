@@ -21,7 +21,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     private readonly string[] _markups;
 
     public InSequenceSinglePuzzleRunner(
-        Puzzle puzzle, 
+        PuzzleDefinition puzzle, 
         TimeSpan timeoutTimespan, 
         PuzzleResultVerifier resultVerifier,
         int titleWidth,
@@ -29,14 +29,14 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
         int commentWidth,
         int maxFuncCount)
     {
-        _puzzle = puzzle;
+        _puzzle = puzzle.Instance;
         _timeoutTimespan = timeoutTimespan;
         _resultVerifier = resultVerifier;
         _resultLength = resultWidth;
         _commentLength = commentWidth;
         _truncatedCommentLength = commentWidth - 3;
         _title = _puzzle.ListTitle.PadRight(titleWidth);
-        _commentMarkup = MarkupComment(_puzzle.Comment);
+        _commentMarkup = MarkupComment(puzzle.Comment);
         _markups = new string[maxFuncCount];
         for (var i = 0; i < maxFuncCount; i++)
         {

@@ -7,16 +7,19 @@ namespace Pzl.Common;
 
 public class PuzzleFactory
 {
-    public static List<Puzzle> CreatePuzzles<T>() where T : Puzzle =>
-        GetConcreteSubclassesOf<T>()
-            .Select(CreatePuzzle<T>)
-            .OrderBy(o => o.SortId)
-            .ToList();
+    public static List<PuzzleData> GetTypes<T>() where T : Puzzle
+    {
+        return GetConcreteSubclassesOf<T>().Select(CreateData).ToList();
+    }
 
-    public static List<Type> GetTypes<T>() where T : Puzzle =>
-        GetConcreteSubclassesOf<T>().ToList();
+    private static PuzzleData CreateData(Type type)
+    {
+        var isSlow = IsSlow(type);
+        var comment = GetComment(type);
+        return new PuzzleData(type, isSlow, comment);
+    }
 
-    public static Puzzle CreatePuzzle<T>(Type t) where T : Puzzle
+    public static Puzzle CreateInstance<T>(Type t) where T : Puzzle
     {
         if (Activator.CreateInstance(t) is not T puzzle)
             throw new Exception($"Could not create puzzle: {t}");
@@ -34,4 +37,10 @@ public class PuzzleFactory
                 IsAbstract: false
             })
         ?? new List<Type>();
+
+    private static bool IsSlow(MemberInfo type) => 
+        type.GetCustomAttribute<IsSlowAttribute>(false) is not null;
+
+    private static string? GetComment(MemberInfo type) => 
+        type.GetCustomAttribute<CommentAttribute>(false)?.Comment;
 }

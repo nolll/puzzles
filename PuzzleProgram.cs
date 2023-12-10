@@ -48,7 +48,7 @@ public class PuzzleProgram
     private void RunPuzzles(Parameters parameters)
     {
         var puzzles = _puzzleRepository.GetPuzzles();
-        var filteredPuzzles = new PuzzleFilter(parameters).Filter(puzzles);
+        var filteredPuzzles = new PuzzleFilter(parameters).Filter(puzzles).ToList();
         _runner.Run(filteredPuzzles);
     }
 

@@ -3,11 +3,11 @@ using Pzl.Tools.Computers.Operation;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201821;
 
+[IsSlow] // 134s for part 2
+[Comment("OpComputer")]
 public class Aoc201821 : AocPuzzle
 {
     public override string Name => "Chronal Conversion";
-    public override string Comment => "OpComputer";
-    public override bool IsSlow => true; // 134s for part 2
 
     protected override PuzzleResult RunPart1()
     {

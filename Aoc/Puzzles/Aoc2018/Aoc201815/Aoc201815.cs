@@ -2,11 +2,11 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201815;
 
+[IsSlow] // Could still use optimization, the hard coded 14 is a little ugly
+[Comment("Battle Simulator")]
 public class Aoc201815 : AocPuzzle
 {
     public override string Name => "Beverage Bandits";
-    public override string Comment => "Battle Simulator";
-    public override bool IsSlow => true; // Could still use optimization, the hard coded 14 is a little ugly
 
     protected override PuzzleResult RunPart1()
     {

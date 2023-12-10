@@ -21,7 +21,6 @@ public class PuzzleFilterTests
         var result = filter.Filter(puzzles).ToList();
 
         result.Count.Should().Be(1);
-        result.First().IsSlow.Should().BeTrue();
     }
 
     [Test]

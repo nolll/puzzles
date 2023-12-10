@@ -9,9 +9,9 @@ public class AocPuzzleProvider : IPuzzleProvider
             .Select(CreatePuzzleDefinition)
             .ToList();
 
-    private static PuzzleDefinition CreatePuzzleDefinition(Type t)
+    private static PuzzleDefinition CreatePuzzleDefinition(PuzzleData data)
     {
-        var instance = PuzzleFactory.CreatePuzzle<AocPuzzle>(t);
-        return new PuzzleDefinition(t, instance);
+        var instance = PuzzleFactory.CreateInstance<AocPuzzle>(data.Type);
+        return new PuzzleDefinition(data, instance);
     }
 }

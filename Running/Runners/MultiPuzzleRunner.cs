@@ -11,13 +11,15 @@ public class MultiPuzzleRunner
     private const int ResultLength = 10;
     private const int CommentLength = 24;
 
-    private readonly IList<Puzzle> _puzzles;
+    private List<PuzzleDefinition> _definitions;
+    private readonly List<Puzzle> _puzzles;
     private readonly int _funcCount;
     private readonly TimeSpan _timeoutTimespan;
     private readonly PuzzleResultVerifier _resultVerifier;
 
-    public MultiPuzzleRunner(IEnumerable<PuzzleDefinition> puzzles, int timeoutSeconds, string hashSeed, bool isDebugMode)
+    public MultiPuzzleRunner(List<PuzzleDefinition> puzzles, int timeoutSeconds, string hashSeed, bool isDebugMode)
     {
+        _definitions = puzzles;
         _puzzles = puzzles.Select(o => o.Instance).ToList();
         _funcCount = _puzzles.Max(o => o.RunFunctions.Count);
         _timeoutTimespan = TimeSpan.FromSeconds(timeoutSeconds);
@@ -29,7 +31,7 @@ public class MultiPuzzleRunner
         AnsiConsole.Cursor.Show(false);
         PrintHeader();
 
-        foreach (var puzzle in _puzzles)
+        foreach (var puzzle in _definitions)
         {
             new InSequenceSinglePuzzleRunner(
                 puzzle, 

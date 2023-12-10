@@ -2,12 +2,11 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
 
+[IsSlow] // 16s for part 2
+[Comment("Floor permutations")]
 public class Aoc201611 : AocPuzzle
 {
     public override string Name => "Radioisotope Thermoelectric Generators";
-
-    public override string Comment => "Floor permutations";
-    public override bool IsSlow => true; // 16s for part 2
 
     protected override PuzzleResult RunPart1()
     {

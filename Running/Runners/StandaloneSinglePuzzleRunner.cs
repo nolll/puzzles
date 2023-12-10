@@ -10,14 +10,15 @@ namespace Pzl.Client.Running.Runners;
 
 public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
 {
+    private readonly PuzzleResultVerifier _resultVerifier;
+    private readonly PuzzleDefinition _definition;
     private readonly Puzzle _puzzle;
     private readonly bool _isDebugMode;
     private const int StatusPadding = 15;
 
-    private readonly PuzzleResultVerifier _resultVerifier;
-
     public StandaloneSinglePuzzleRunner(PuzzleDefinition puzzle, string hashSeed, bool isDebugMode)
     {
+        _definition = puzzle;
         _puzzle = puzzle.Instance;
         _isDebugMode = isDebugMode;
         _resultVerifier = new PuzzleResultVerifier(hashSeed);
@@ -34,7 +35,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     private void RunStandardMode()
     {
         AnsiConsole.Cursor.Show(false);
-        WriteHeader(_puzzle);
+        WriteHeader(_definition);
 
         for (var i = 0; i < _puzzle.RunFunctions.Count; i++)
         {
@@ -48,7 +49,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
 
     private void RunDebugMode()
     {
-        WriteHeader(_puzzle);
+        WriteHeader(_definition);
 
         foreach (var runFunc in _puzzle.RunFunctions)
         {
@@ -57,7 +58,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         }
     }
 
-    private static void WriteHeader(Puzzle puzzle)
+    private static void WriteHeader(PuzzleDefinition puzzle)
     {
         AnsiConsole.WriteLine($"{puzzle.Title}:");
         AnsiConsole.WriteLine(puzzle.Name);
@@ -89,6 +90,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
 
         if (task.IsFaulted)
             return VerifiedPuzzleResult.Failed;
+
         if (result is not null)
             return _resultVerifier.Verify(result);
             

@@ -4,10 +4,10 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq36;
 
+[IsSlow]
 public class Aquaq36 : AquaqPuzzle
 {
     public override string Name => "Tetonor Terror";
-    public override bool IsSlow => true;
     public override bool NeedsRewrite => true;
 
     protected override PuzzleResult Run()

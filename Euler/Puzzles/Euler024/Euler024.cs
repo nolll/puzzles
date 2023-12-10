@@ -3,10 +3,10 @@ using Pzl.Tools.Combinatorics;
 
 namespace Pzl.Euler.Puzzles.Euler024;
 
+[IsSlow]
 public class Euler024 : EulerPuzzle
 {
     public override string Name => "Lexicographic permutations";
-    public override bool IsSlow => true;
     public override bool NeedsRewrite => true;
 
     protected override PuzzleResult Run()

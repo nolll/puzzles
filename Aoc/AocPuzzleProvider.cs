@@ -5,7 +5,7 @@ namespace Pzl.Aoc;
 public class AocPuzzleProvider : IPuzzleProvider
 {
     public List<PuzzleDefinition> GetPuzzles() =>
-        PuzzleFactory.GetTypes<AocPuzzle>()
+        PuzzleDataReader.ReadData<AocPuzzle>()
             .Select(CreatePuzzleDefinition)
             .ToList();
 

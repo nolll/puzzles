@@ -1,12 +1,11 @@
 ﻿using Pzl.Common;
-using System.Security.Cryptography;
 
 namespace Pzl.Euler;
 
 public class EulerPuzzleProvider : IPuzzleProvider
 {
     public List<PuzzleDefinition> GetPuzzles() =>
-        PuzzleFactory.GetTypes<EulerPuzzle>()
+        PuzzleDataReader.ReadData<EulerPuzzle>()
             .Select(CreatePuzzleDefinition)
             .ToList();
 

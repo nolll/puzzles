@@ -5,7 +5,7 @@ namespace Pzl.Aquaq;
 public class AquaqPuzzleProvider : IPuzzleProvider
 {
     public List<PuzzleDefinition> GetPuzzles() =>
-        PuzzleFactory.GetTypes<AquaqPuzzle>()
+        PuzzleDataReader.ReadData<AquaqPuzzle>()
             .Select(CreatePuzzleDefinition)
             .ToList();
 

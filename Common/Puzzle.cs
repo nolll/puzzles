@@ -7,8 +7,10 @@ namespace Pzl.Common;
 
 public abstract class Puzzle(string? input = null)
 {
-    protected string InputFile2 { get; } = input ?? string.Empty;
-    protected string InputFile => FileReader.ReadTextFile(InputFilePath);
+    protected string InjectedInput { get; } = input ?? string.Empty;
+    protected string InputFile => !string.IsNullOrEmpty(InjectedInput) 
+        ? InjectedInput
+        : FileReader.ReadTextFile(InputFilePath);
     protected string TextFile(string fileName) => ReadLocalFile(fileName);
     protected string CommonTextFile(string fileName) => ReadCommonFile(fileName);
 

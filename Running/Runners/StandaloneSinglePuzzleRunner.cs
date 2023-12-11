@@ -15,7 +15,10 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     private readonly bool _isDebugMode;
     private const int StatusPadding = 15;
 
-    public StandaloneSinglePuzzleRunner(PuzzleDefinition puzzle, string hashSeed, bool isDebugMode)
+    public StandaloneSinglePuzzleRunner(
+        PuzzleDefinition puzzle, 
+        string hashSeed,
+        bool isDebugMode)
     {
         _definition = puzzle;
         _isDebugMode = isDebugMode;
@@ -34,6 +37,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     {
         AnsiConsole.Cursor.Show(false);
         WriteHeader(_definition);
+        
         var instance = PuzzleFactory.CreateInstance(_definition.Type);
 
         for (var i = 0; i < instance.RunFunctions.Count; i++)

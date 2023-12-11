@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace Pzl.Common;
 
-public class PuzzleFactory
+public static class PuzzleDataReader
 {
-    public static List<PuzzleData> GetTypes<T>() where T : Puzzle
+    public static List<PuzzleData> ReadData<T>() where T : Puzzle
     {
         return GetConcreteSubclassesOf<T>().Select(CreateData).ToList();
     }
@@ -23,29 +23,10 @@ public class PuzzleFactory
         return new PuzzleData(type, name, comment, isSlow, needsRewrite, isFunToOptimize, numberOfParts);
     }
 
-    public static Puzzle CreateInstance(Type t)
-    {
-        if (Activator.CreateInstance(t) is not Puzzle puzzle)
-            throw new Exception($"Could not create puzzle: {t}");
-
-        return puzzle;
-    }
-
-    private static IEnumerable<Type> GetConcreteSubclassesOf<T>() where T : class =>
-        Assembly
-            .GetAssembly(typeof(T))?
-            .GetTypes()
-            .Where(o => o.IsSubclassOf(typeof(T)) && o is
-            {
-                IsClass: true,
-                IsAbstract: false
-            })
-        ?? new List<Type>();
-
     private static string GetName(MemberInfo type) =>
         type.GetCustomAttribute<NameAttribute>(false)?.Name ?? "No name provided";
 
-    private static string? GetComment(MemberInfo type) => 
+    private static string? GetComment(MemberInfo type) =>
         type.GetCustomAttribute<CommentAttribute>(false)?.Comment;
 
     private static bool IsSlow(MemberInfo type) =>
@@ -59,4 +40,15 @@ public class PuzzleFactory
 
     private static int GetNumberOfParts(MemberInfo type) =>
         type.GetCustomAttribute<NumberOfPartsAttribute>(true)?.NumberOfParts ?? 1;
+
+    private static IEnumerable<Type> GetConcreteSubclassesOf<T>() where T : class =>
+        Assembly
+            .GetAssembly(typeof(T))?
+            .GetTypes()
+            .Where(o => o.IsSubclassOf(typeof(T)) && o is
+            {
+                IsClass: true,
+                IsAbstract: false
+            })
+        ?? new List<Type>();
 }

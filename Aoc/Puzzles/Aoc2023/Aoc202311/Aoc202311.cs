@@ -4,7 +4,7 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202311;
 
 [Name("Cosmic Expansion")]
-public class Aoc202311 : AocPuzzle
+public class Aoc202311(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {

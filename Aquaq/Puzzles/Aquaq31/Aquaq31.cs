@@ -3,11 +3,11 @@
 namespace Pzl.Aquaq.Puzzles.Aquaq31;
 
 [Name("Brandless Combination Cubes")]
-public class Aquaq31 : AquaqPuzzle
+public class Aquaq31(string input) : AquaqPuzzle(input)
 {
     protected override PuzzleResult Run()
     {
-        var result = Rotate(InputFile);
+        var result = Rotate(Input);
 
         return new PuzzleResult(result, "a5034749df5937c49bba3b06acc7119c");
     }

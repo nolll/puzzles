@@ -3,19 +3,20 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq16;
 
+[AdditionalLocalInputFile("Alphabet.txt")]
 [Name("Keming")]
-public class Aquaq16 : AquaqPuzzle
+public class Aquaq16(string input, string additionalInput) : AquaqPuzzle(input, additionalInput)
 {
     private const int LetterHeight = 6;
 
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(InputFile), "b900eb74f94c2243de65005bcc4ebd2c");
+        return new PuzzleResult(Run(Input), "b900eb74f94c2243de65005bcc4ebd2c");
     }
 
     public int Run(string input)
     {
-        var alphabet = ParseLetters(TextFile("Alphabet.txt"))
+        var alphabet = ParseLetters(AdditionalInput)
             .ToDictionary(k => k.Character, v => v);
 
         var letters = input.ToCharArray().Select(o => alphabet[o]).ToArray();

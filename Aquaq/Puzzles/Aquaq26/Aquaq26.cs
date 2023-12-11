@@ -6,11 +6,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq26;
 
 [Name("Typo Theft")]
-public class Aquaq26 : AquaqPuzzle
+public class Aquaq26(string input) : AquaqPuzzle(input)
 {
     protected override PuzzleResult Run()
     {
-        var inputNumbers = StringReader.ReadLines(InputFile)
+        var inputNumbers = StringReader.ReadLines(Input)
             .Select(BigInteger.Parse);
 
         var sum = inputNumbers.Aggregate(BigInteger.Zero, (current, n) => current + FindFirstLargerNumber(n) - n);

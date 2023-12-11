@@ -2,4 +2,4 @@
 
 namespace Pzl.Aquaq;
 
-public abstract class AquaqPuzzle(string? input = null) : OnePartPuzzle(input);
+public abstract class AquaqPuzzle(string? input = null, string? additionalInput = null) : OnePartPuzzle(input, additionalInput);

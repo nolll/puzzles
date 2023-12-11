@@ -3,11 +3,11 @@
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201813;
 
 [Name("Mine Cart Madness")]
-public class Aoc201813 : AocPuzzle
+public class Aoc201813(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var detector = new CollisionDetector(InputFile);
+        var detector = new CollisionDetector(Input);
         detector.RunCarts();
         var firstCollisionCoords = detector.LocationOfFirstCollision;
         var firstCollition = $"{firstCollisionCoords!.X},{firstCollisionCoords.Y}";
@@ -16,7 +16,7 @@ public class Aoc201813 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var detector = new CollisionDetector(InputFile);
+        var detector = new CollisionDetector(Input);
         detector.RunCarts();
         var lastCartCoords = detector.LocationOfLastCart;
         var lastCart = $"{lastCartCoords!.X},{lastCartCoords.Y}";

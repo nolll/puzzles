@@ -4,7 +4,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201522;
 
 [Name("Wizard Simulator 20XX")]
-public class Aoc201522 : AocPuzzle
+public class Aoc201522(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
@@ -24,7 +24,7 @@ public class Aoc201522 : AocPuzzle
 
     private Params GetParams()
     {
-        var rows = StringReader.ReadLines(InputFile);
+        var rows = StringReader.ReadLines(Input);
 
         return new Params
         {

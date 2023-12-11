@@ -3,14 +3,15 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq37;
 
+[AdditionalCommonInputFile("Words.txt")]
 [Name("GUESS WORDS")]
-public class Aquaq37 : AquaqPuzzle
+public class Aquaq37(string input, string additionalInput) : AquaqPuzzle(input, additionalInput)
 {
     private const int WordLength = 5;
 
     protected override PuzzleResult Run()
     {
-        var words = FindWords(InputFile);
+        var words = FindWords(Input);
         var score = words.Sum(GetWordScore);
 
         return new PuzzleResult(score, "ba0ef798d7f57b80a0675236159ccfb1");
@@ -18,7 +19,7 @@ public class Aquaq37 : AquaqPuzzle
 
     public List<string> FindWords(string input)
     {
-        var words = StringReader.ReadLines(CommonTextFile("Words.txt"))
+        var words = StringReader.ReadLines(AdditionalInput)
             .Where(o => o.Length == WordLength)
             .ToList();
 

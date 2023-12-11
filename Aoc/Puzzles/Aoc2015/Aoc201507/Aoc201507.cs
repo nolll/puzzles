@@ -3,18 +3,18 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201507;
 
 [Name("Some Assembly Required")]
-public class Aoc201507 : AocPuzzle
+public class Aoc201507(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var circuit = new Circuit(InputFile);
+        var circuit = new Circuit(Input);
         var runOne = circuit.RunOne("a");
         return new PuzzleResult(runOne, "d726fcd2e75525a2fa0a5c741cc7582f");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var circuit = new Circuit(InputFile);
+        var circuit = new Circuit(Input);
         var runTwo = circuit.RunTwo("a", "b");
         return new PuzzleResult(runTwo, "135c8ac6a573e214fabaf9728fc2cddb");
     }

@@ -3,12 +3,12 @@
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202115;
 
 [Name("Chiton")]
-public class Aoc202115 : AocPuzzle
+public class Aoc202115(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
         var chitonRisk = new ChitonRisk();
-        var result = chitonRisk.FindRiskLevelForSmallCave(InputFile);
+        var result = chitonRisk.FindRiskLevelForSmallCave(Input);
 
         return new PuzzleResult(result, "044f1b14974612cad17255d7683d0892");
     }
@@ -16,7 +16,7 @@ public class Aoc202115 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var chitonRisk = new ChitonRisk();
-        var result = chitonRisk.FindRiskLevelForLargeCave(InputFile);
+        var result = chitonRisk.FindRiskLevelForLargeCave(Input);
 
         return new PuzzleResult(result, "99cda5f07b0381340587915a1e9f5cb2");
     }

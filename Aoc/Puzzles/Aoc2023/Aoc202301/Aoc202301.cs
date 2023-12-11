@@ -4,14 +4,14 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202301;
 
 [Name("Trebuchet?!")]
-public class Aoc202301 : AocPuzzle
+public class Aoc202301(string input) : AocPuzzle(input)
 {
     private static readonly List<string> Words =
         ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
     protected override PuzzleResult RunPart1()
     {
-        var values = FindCalibrationNumberPart1(InputFile);
+        var values = FindCalibrationNumberPart1(Input);
         var result = values.Sum();
 
         return new PuzzleResult(result, "93e7c44a86bd9d03f7156e6fc3ed61c8");
@@ -19,7 +19,7 @@ public class Aoc202301 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var values = FindCalibrationNumberPart2(InputFile);
+        var values = FindCalibrationNumberPart2(Input);
         var result = values.Sum();
 
         return new PuzzleResult(result, "1a8775b7ae93118b31708e052207307d");

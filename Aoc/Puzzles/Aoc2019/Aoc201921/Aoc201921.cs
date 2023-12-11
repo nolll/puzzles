@@ -3,18 +3,18 @@
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201921;
 
 [Name("Springdroid Adventure")]
-public class Aoc201921 : AocPuzzle
+public class Aoc201921(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var walkingDroid = new SpringDroid(InputFile, WalkProgram);
+        var walkingDroid = new SpringDroid(Input, WalkProgram);
         walkingDroid.Run();
         return new PuzzleResult(walkingDroid.HullDamage, "94b1bc03281d28814cbce9dd5bcc5806");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var runningDroid = new SpringDroid(InputFile, RunProgram);
+        var runningDroid = new SpringDroid(Input, RunProgram);
         runningDroid.Run();
         return new PuzzleResult(runningDroid.HullDamage, "4b70c64b560c7856fb229521380a084d");
     }

@@ -3,18 +3,18 @@
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202012;
 
 [Name("Rain Risk")]
-public class Aoc202012 : AocPuzzle
+public class Aoc202012(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var system = new SimpleFerryNavigationSystem(InputFile);
+        var system = new SimpleFerryNavigationSystem(Input);
         system.Run();
         return new PuzzleResult(system.DistanceTravelled, "c78da9d22889e3d4313249117e3752f4");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var system = new WaypointFerryNavigationSystem(InputFile);
+        var system = new WaypointFerryNavigationSystem(Input);
         system.Run();
         return new PuzzleResult(system.DistanceTravelled, "c0c5befc741f65a1030078ab200ffe10");
     }

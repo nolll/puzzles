@@ -2,13 +2,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201625;
 
 public class ClockSignalGenerator
 {
-    public int LowestA = 0;
+    public readonly int LowestA = 0;
 
     public ClockSignalGenerator()
     {
         var index = 1;
         var output = "";
-        var targetOutputLength = 10;
+        const int targetOutputLength = 10;
 
         while (output != "0101010101")
         {

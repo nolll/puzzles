@@ -4,12 +4,12 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq38;
 
 [Name("Number Neighbours")]
-public class Aquaq38 : AquaqPuzzle
+public class Aquaq38(string input) : AquaqPuzzle(input)
 {
     protected override PuzzleResult Run()
     {
         var indexStreakProvider = new IndexStreakProvider();
-        var lists = StringReader.ReadLines(InputFile)
+        var lists = StringReader.ReadLines(Input)
             .Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();
         var sum = lists.Sum(o => GetComfScore(indexStreakProvider, o));
 

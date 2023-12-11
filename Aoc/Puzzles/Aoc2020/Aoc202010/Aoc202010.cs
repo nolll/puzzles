@@ -3,17 +3,17 @@
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202010;
 
 [Name("Adapter Array")]
-public class Aoc202010 : AocPuzzle
+public class Aoc202010(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var chain = new PowerAdapterChain(InputFile);
+        var chain = new PowerAdapterChain(Input);
         return new PuzzleResult(chain.DifferenceProduct, "56be819907a3ccd3fa53c9340c9cd2b7");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var chain = new PowerAdapterChain(InputFile);
+        var chain = new PowerAdapterChain(Input);
         var combinations = chain.GetTotalNumberOfCombinations();
         return new PuzzleResult(combinations, "791600ed80a4c8e120ae60a88193043f");
     }

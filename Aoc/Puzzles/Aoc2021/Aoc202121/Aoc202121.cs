@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202121;
 
 [Name("Dirac Dice")]
-public class Aoc202121 : AocPuzzle
+public class Aoc202121(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {

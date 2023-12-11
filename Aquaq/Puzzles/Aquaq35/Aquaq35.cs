@@ -4,13 +4,14 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq35;
 
+[AdditionalCommonInputFile("Words.txt")]
 [Name("Columns")]
-public class Aquaq35 : AquaqPuzzle
+public class Aquaq35(string input, string additionalFile) : AquaqPuzzle(input, additionalFile)
 {
     protected override PuzzleResult Run()
     {
-        var words = StringReader.ReadLines(CommonTextFile("Words.txt"));
-        var input = InputFile;
+        var words = StringReader.ReadLines(AdditionalInput);
+        var input = Input;
 
         var keyword = FindKeyword(words, input);
 

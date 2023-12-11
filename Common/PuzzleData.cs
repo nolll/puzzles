@@ -11,6 +11,8 @@ public class PuzzleData
     public bool NeedsRewrite { get; }
     public bool IsFunToOptimize { get; }
     public int NumberOfParts { get; }
+    public string? CommonFile { get; }
+    public string? LocalFile { get; }
 
     public PuzzleData(
         Type type, 
@@ -19,7 +21,9 @@ public class PuzzleData
         bool isSlow, 
         bool needsRewrite, 
         bool isFunToOptimize,
-        int numberOfParts)
+        int numberOfParts,
+        string? commonFile,
+        string? localFile)
     {
         Type = type;
         Name = name;
@@ -28,5 +32,7 @@ public class PuzzleData
         NeedsRewrite = needsRewrite;
         IsFunToOptimize = isFunToOptimize;
         NumberOfParts = numberOfParts;
+        CommonFile = commonFile;
+        LocalFile = localFile;
     }
 }

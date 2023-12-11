@@ -4,11 +4,11 @@ using Pzl.Tools.Numbers;
 namespace Pzl.Euler.Puzzles.Euler042;
 
 [Name("Coded Triangle Numbers")]
-public class Euler042 : EulerPuzzle
+public class Euler042(string input) : EulerPuzzle(input)
 {
     protected override PuzzleResult Run()
     {
-        var words = InputFile.Split(',').Select(o => o.Trim('\"'));
+        var words = Input.Split(',').Select(o => o.Trim('\"'));
         var count = words.Select(GetWordValue).Count(o => Numbers.IsTriangularNumber(o));
 
         return new PuzzleResult(count, "b8170c241f9f4405debc7e76a6e8623e");

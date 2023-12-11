@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201714;
 
 [Name("Disk Defragmentation")]
-public class Aoc201714 : AocPuzzle
+public class Aoc201714() : AocPuzzle("amgozmfv")
 {
     protected override PuzzleResult RunPart1()
     {
@@ -16,6 +16,4 @@ public class Aoc201714 : AocPuzzle
         var defragmenter = new DiskDefragmenter(Input);
         return new PuzzleResult(defragmenter.RegionCount, "3e2bb366df3fce1977350353f38f3787");
     }
-
-    private const string Input = "amgozmfv";
 }

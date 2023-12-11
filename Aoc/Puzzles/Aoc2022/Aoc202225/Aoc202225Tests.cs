@@ -8,7 +8,7 @@ public class Aoc202225Tests
     [Test]
     public void Part1()
     {
-        var puzzle = new Aoc202225();
+        var puzzle = new Aoc202225(Input);
         var result = puzzle.Part1(Input);
 
         result.Should().Be("2=-1=0");

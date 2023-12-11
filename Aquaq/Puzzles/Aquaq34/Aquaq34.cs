@@ -4,14 +4,14 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq34;
 
 [Name("Train in Vain")]
-public class Aquaq34 : AquaqPuzzle
+public class Aquaq34(string input) : AquaqPuzzle(input)
 {
     private const int TimeAtStation = 5;
     private static readonly IComparer<Train> WaitingTrainComparer = new WaitingTrainComparer();
 
     protected override PuzzleResult Run()
     {
-        var result = LongestRouteTime(InputFile);
+        var result = LongestRouteTime(Input);
 
         return new PuzzleResult(result, "7730ffba6665d8cc2f907ff7ea6fe6ea");
     }

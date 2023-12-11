@@ -13,6 +13,8 @@ public class PuzzleDefinition
     public string Name { get; }
     public string? Comment { get; }
     public int NumberOfParts { get; }
+    public string? CommonFile { get; }
+    public string? LocalFile { get; }
 
     public PuzzleDefinition(
         PuzzleData data, 
@@ -28,7 +30,9 @@ public class PuzzleDefinition
             listTitle,
             data.Name,
             data.Comment,
-            data.NumberOfParts)
+            data.NumberOfParts,
+            data.CommonFile,
+            data.LocalFile)
     {
     }
 
@@ -55,7 +59,9 @@ public class PuzzleDefinition
         string listTitle, 
         string name, 
         string? comment, 
-        int numberOfParts)
+        int numberOfParts,
+        string? commonFile,
+        string? localFile)
     {
         Type = type;
         Tags = tags;
@@ -65,5 +71,7 @@ public class PuzzleDefinition
         Name = name;
         Comment = comment;
         NumberOfParts = numberOfParts;
+        CommonFile = commonFile;
+        LocalFile = localFile;
     }
 }

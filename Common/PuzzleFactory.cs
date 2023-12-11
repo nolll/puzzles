@@ -20,7 +20,18 @@ public static class PuzzleDataReader
         var needsRewrite = NeedsRewrite(type);
         var isFunToOptimize = IsFunToOptimize(type);
         var numberOfParts = GetNumberOfParts(type);
-        return new PuzzleData(type, name, comment, isSlow, needsRewrite, isFunToOptimize, numberOfParts);
+        var commonFile = GetAdditionalCommonInputFile(type);
+        var localFile = GetAdditionalLocalInputFile(type);
+        return new PuzzleData(
+            type,
+            name,
+            comment,
+            isSlow,
+            needsRewrite,
+            isFunToOptimize,
+            numberOfParts,
+            commonFile,
+            localFile);
     }
 
     private static string GetName(MemberInfo type) =>
@@ -30,7 +41,7 @@ public static class PuzzleDataReader
         type.GetCustomAttribute<CommentAttribute>(false)?.Comment;
 
     private static bool IsSlow(MemberInfo type) =>
-        type.GetCustomAttribute<Attributes>(false) is not null;
+        type.GetCustomAttribute<IsSlowAttribute>(false) is not null;
 
     private static bool NeedsRewrite(MemberInfo type) =>
         type.GetCustomAttribute<NeedsRewriteAttribute>(false) is not null;
@@ -40,6 +51,12 @@ public static class PuzzleDataReader
 
     private static int GetNumberOfParts(MemberInfo type) =>
         type.GetCustomAttribute<NumberOfPartsAttribute>(true)?.NumberOfParts ?? 1;
+
+    private static string? GetAdditionalCommonInputFile(MemberInfo type) =>
+        type.GetCustomAttribute<AdditionalCommonInputFileAttribute>(false)?.FileName;
+
+    private static string? GetAdditionalLocalInputFile(MemberInfo type) =>
+        type.GetCustomAttribute<AdditionalLocalInputFileAttribute>(false)?.FileName;
 
     private static IEnumerable<Type> GetConcreteSubclassesOf<T>() where T : class =>
         Assembly

@@ -47,7 +47,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     public void Run()
     {
         PrintRow();
-        var instance = PuzzleFactory.CreateInstance(_definition.Type);
+        var instance = PuzzleFactory.CreateInstance(_definition);
         for (var i = 0; i < instance.RunFunctions.Count; i++)
         {
             var runFunc = instance.RunFunctions[i];

@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201525;
 
 [Name("Let It Snow")]
-public class Aoc201525 : AocPuzzle
+public class Aoc201525(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
@@ -17,7 +17,7 @@ public class Aoc201525 : AocPuzzle
 
     private Params GetParams()
     {
-        var words = InputFile.Replace(".", "").Replace(",", "").Split(' ');
+        var words = Input.Replace(".", "").Replace(",", "").Split(' ');
 
         return new Params
         {

@@ -3,13 +3,13 @@
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202208;
 
 [Name("Treetop Tree House")]
-public class Aoc202208 : AocPuzzle
+public class Aoc202208(string input) : AocPuzzle(input)
 {
     private TreeHouse? _treeHouse;
 
     protected override PuzzleResult RunPart1()
     {
-        _treeHouse = new TreeHouse(InputFile);
+        _treeHouse = new TreeHouse(Input);
         _treeHouse.Calc();
         var result = _treeHouse.VisibleTreesCount;
 

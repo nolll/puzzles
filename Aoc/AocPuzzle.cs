@@ -2,4 +2,13 @@
 
 namespace Pzl.Aoc;
 
-public abstract class AocPuzzle(string? input = null) : TwoPartsPuzzle(input);
+public abstract class AocPuzzle : TwoPartsPuzzle
+{
+    protected AocPuzzle()
+    {
+    }
+
+    protected AocPuzzle(string input) : base(input)
+    {
+    }
+}

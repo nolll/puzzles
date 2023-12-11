@@ -4,12 +4,13 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq15;
 
+[AdditionalCommonInputFile("Words.txt")]
 [Name("word wore more mare maze")]
-public class Aquaq15 : AquaqPuzzle
+public class Aquaq15(string input, string additionalInput) : AquaqPuzzle(input, additionalInput)
 {
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(InputFile), "ffafde1afff1c3904275c8225e772bf1");
+        return new PuzzleResult(Run(Input), "ffafde1afff1c3904275c8225e772bf1");
     }
 
     public int Run(string input) 
@@ -23,7 +24,7 @@ public class Aquaq15 : AquaqPuzzle
         var maxLength = wordLengths.Max();
         var minLength = wordLengths.Min();
 
-        var validWords = StringReader.ReadLines(CommonTextFile("Words.txt"))
+        var validWords = StringReader.ReadLines(AdditionalInput)
             .Where(o => o.Length >= minLength && o.Length <= maxLength)
             .GroupBy(o => o.Length)
             .ToDictionary(k => k.Key, o => BuildInputs(o.ToList()).ToList());

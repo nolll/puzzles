@@ -9,14 +9,14 @@ public class Aoc202223 : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var (emptyCount, _) = Run(InputFile, 10);
+        var (emptyCount, _) = Run(Input, 10);
 
         return new PuzzleResult(emptyCount, "b2078a7c2a582e68796f55a71f1fe1cd");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var (_, endRound) = Run(InputFile);
+        var (_, endRound) = Run(Input);
 
         return new PuzzleResult(endRound, "b4b9f7dae4709930cd73d70f45eac0ae");
     }
@@ -33,7 +33,7 @@ public class Aoc202223 : AocPuzzle
     private readonly List<(int x, int y)> _searchResults;
     private readonly List<(int x, int y)> _deltas;
 
-    public Aoc202223()
+    public Aoc202223(string input) : base(input)
     {
         _searchDeltas = new List<List<(int x, int y)>>
         {

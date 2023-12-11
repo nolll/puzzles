@@ -5,11 +5,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq21;
 
 [Name("Clean Sweep")]
-public class Aquaq21 : AquaqPuzzle
+public class Aquaq21(string input) : AquaqPuzzle(input)
 {
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(InputFile, 5), "e9476ebab07e71bb8b8872bca85185f5");
+        return new PuzzleResult(Run(Input, 5), "e9476ebab07e71bb8b8872bca85185f5");
     }
 
     public static int Run(string input, int width)

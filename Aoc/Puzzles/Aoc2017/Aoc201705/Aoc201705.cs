@@ -3,18 +3,18 @@
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201705;
 
 [Name("A Maze of Twisty Trampolines, All Alike")]
-public class Aoc201705 : AocPuzzle
+public class Aoc201705(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var jumper1 = new InstructionJumper(InputFile);
+        var jumper1 = new InstructionJumper(Input);
         jumper1.Start1();
         return new PuzzleResult(jumper1.StepCount, "3893f5208a5bb1ed3716ffb10c7074d1");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var jumper2 = new InstructionJumper(InputFile);
+        var jumper2 = new InstructionJumper(Input);
         jumper2.Start2();
         return new PuzzleResult(jumper2.StepCount, "e9b390d2f610956da9f592bc52c789cc");
     }

@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201904;
 
 [Name("Secure Container")]
-public class Aoc201904 : AocPuzzle
+public class Aoc201904() : AocPuzzle("357253-892942")
 {
     protected override PuzzleResult RunPart1()
     {
@@ -28,6 +28,4 @@ public class Aoc201904 : AocPuzzle
         var passwordCount = passwords.Count();
         return new PuzzleResult(passwordCount, "a91290a19800def81b170a8a45592c43");
     }
-
-    private const string Input = "357253-892942";
 }

@@ -4,7 +4,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202123;
 
 [NeedsRewrite]
 [Name("Amphipod")]
-[Comment("Solved manually")]
+[Comment("Solved by hand")]
 public class Aoc202123 : AocPuzzle
 {
     protected override PuzzleResult RunPart1()

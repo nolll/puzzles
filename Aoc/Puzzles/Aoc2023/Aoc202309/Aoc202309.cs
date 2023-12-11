@@ -5,13 +5,13 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202309;
 
 [Name("Mirage Maintenance")]
-public class Aoc202309 : AocPuzzle
+public class Aoc202309(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1() => 
-        new(Part1(InputFile), "42abec426a1f1903197aaf0635b6a29a");
+        new(Part1(Input), "42abec426a1f1903197aaf0635b6a29a");
 
     protected override PuzzleResult RunPart2() => 
-        new(Part2(InputFile), "652e203bd80c5889b310a0a8efdb2301");
+        new(Part2(Input), "652e203bd80c5889b310a0a8efdb2301");
 
     public static long Part1(string input) => 
         StringReader.ReadLines(input).Select(FindNextNumber).Sum();

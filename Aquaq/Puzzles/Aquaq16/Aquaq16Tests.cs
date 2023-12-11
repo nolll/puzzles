@@ -8,7 +8,9 @@ public class Aquaq16Tests
     [Test]
     public void KerningSpaces()
     {
-        var result = new Aquaq16().Run("LTA");
+        const string input = "LTA";
+
+        var result = new Aquaq16(input, "").Run(input);
 
         result.Should().Be(53);
     }

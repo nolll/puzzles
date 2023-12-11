@@ -5,14 +5,14 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq19;
 
 [Name("It's alive")]
-public class Aquaq19 : AquaqPuzzle
+public class Aquaq19(string input) : AquaqPuzzle(input)
 {
     private const char Filled = '#';
     private const char Empty = '.';
 
     protected override PuzzleResult Run()
     {
-        var result = StringReader.ReadLines(InputFile)
+        var result = StringReader.ReadLines(Input)
             .Select(o => RunGame(o, true)).Sum();
 
         return new PuzzleResult(result, "99a57b5b2a95e407216743a84d68c0e0");

@@ -3,17 +3,17 @@
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201711;
 
 [Name("Hex Ed")]
-public class Aoc201711 : AocPuzzle
+public class Aoc201711(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var navigator = new HexGridNavigator(InputFile);
+        var navigator = new HexGridNavigator(Input);
         return new PuzzleResult(navigator.EndDistance, "b7c04ecac2d0150916a741834019f8ec");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var navigator = new HexGridNavigator(InputFile);
+        var navigator = new HexGridNavigator(Input);
         return new PuzzleResult(navigator.MaxDistance, "f67800158ae4e032d3f2c498107dafa8");
     }
 }

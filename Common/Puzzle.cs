@@ -5,43 +5,10 @@ using System.Linq;
 
 namespace Pzl.Common;
 
-public abstract class Puzzle(string? input = null)
+public abstract class Puzzle(string? input = null, string? additionalInput = null)
 {
-    protected string InjectedInput { get; } = input ?? string.Empty;
-    protected string InputFile => !string.IsNullOrEmpty(InjectedInput) 
-        ? InjectedInput
-        : FileReader.ReadTextFile(InputFilePath);
-    protected string TextFile(string fileName) => ReadLocalFile(fileName);
-    protected string CommonTextFile(string fileName) => ReadCommonFile(fileName);
-
-    protected string PuzzlePath => Path.Combine(PuzzlePathParts);
-
-    private string ReadLocalFile(string fileName)
-    {
-        var parts = PuzzlePathParts.SkipLast(1).ToList();
-        parts.Add(fileName);
-        var filePath = Path.Combine(parts.ToArray());
-        return FileReader.ReadTextFile(filePath);
-    }
-
-    private string ReadCommonFile(string fileName)
-    {
-        var parts = new List<string>
-        {
-            "CommonInputFiles",
-            fileName
-        };
-        var filePath = Path.Combine(parts.ToArray());
-        return FileReader.ReadTextFile(filePath);
-    }
-
-    private string[] PuzzlePathParts => GetType()
-        .FullName!
-        .Split('.')
-        .Skip(2)
-        .ToArray();
+    protected readonly string Input = input ?? string.Empty;
+    protected readonly string AdditionalInput = additionalInput ?? string.Empty;
 
     public abstract IList<Func<PuzzleResult>> RunFunctions { get; }
-
-    private string InputFilePath => $"{PuzzlePath}.txt";
 }

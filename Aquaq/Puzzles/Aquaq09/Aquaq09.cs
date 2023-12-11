@@ -5,11 +5,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq09;
 
 [Name("Big Data?")]
-public class Aquaq09 : AquaqPuzzle
+public class Aquaq09(string input) : AquaqPuzzle(input)
 {
     protected override PuzzleResult Run()
     {
-        var numbers = StringReader.ReadLines(InputFile)
+        var numbers = StringReader.ReadLines(Input)
             .Select(BigInteger.Parse);
         var result = MultiplyLargeNumbers(numbers);
 

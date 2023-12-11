@@ -3,19 +3,19 @@
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201607;
 
 [Name("Internet Protocol Version 7")]
-public class Aoc201607 : AocPuzzle
+public class Aoc201607(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
         var tester = new IpTester();
-        var tlsSupportCount = tester.TlsSupportCount(InputFile);
+        var tlsSupportCount = tester.TlsSupportCount(Input);
         return new PuzzleResult(tlsSupportCount, "e5028de6073400f8137ef0152f3ce53b");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var tester = new IpTester();
-        var sslSupportCount = tester.SslSupportCount(InputFile);
+        var sslSupportCount = tester.SslSupportCount(Input);
         return new PuzzleResult(sslSupportCount, "e54678768fabf49128ceb9f16bd2f125");
     }
 }

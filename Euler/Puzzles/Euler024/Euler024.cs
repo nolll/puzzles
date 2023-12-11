@@ -3,8 +3,9 @@ using Pzl.Tools.Combinatorics;
 
 namespace Pzl.Euler.Puzzles.Euler024;
 
-[Attributes]
+[IsSlow]
 [NeedsRewrite]
+
 [Name("Lexicographic permutations")]
 public class Euler024 : EulerPuzzle
 {

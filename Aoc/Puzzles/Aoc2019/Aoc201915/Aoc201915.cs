@@ -4,13 +4,13 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201915;
 
 [Name("Oxygen System")]
-public class Aoc201915 : AocPuzzle
+public class Aoc201915(string input) : AocPuzzle(input)
 {
     private Matrix<char> _map = new();
 
     protected override PuzzleResult RunPart1()
     {
-        var droid = new RepairDroid(InputFile);
+        var droid = new RepairDroid(Input);
         var (result, map) = droid.Run();
         _map = map;
 

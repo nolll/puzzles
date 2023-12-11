@@ -5,13 +5,13 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq32;
 
 [Name("In Parenthesis")]
-public class Aquaq32 : AquaqPuzzle
+public class Aquaq32(string input) : AquaqPuzzle(input)
 {
     private static readonly Regex ClutterRegex = new("[^\\(\\)\\[\\]\\{\\}]");
 
     protected override PuzzleResult Run()
     {
-        var lines = StringReader.ReadLines(InputFile);
+        var lines = StringReader.ReadLines(Input);
         var result = lines.Count(IsBalanced);
 
         return new PuzzleResult(result, "8b52d401a6c9cf4350dc85e2cebcec81");

@@ -79,7 +79,7 @@ public class Aquaq37Tests
     [TestCase(GroupInput, "group")]
     public void FindWords(string input, string expected)
     {
-        var result = new Aquaq37().FindWords(input);
+        var result = new Aquaq37(input, "").FindWords(input);
 
         result.FirstOrDefault().Should().Be(expected);
     }

@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202124;
 
 [Name("Arithmetic Logic Unit")]
-public class Aoc202124 : AocPuzzle
+public class Aoc202124(string input) : AocPuzzle(input)
 {
     private List<string>? _validNumbers;
     

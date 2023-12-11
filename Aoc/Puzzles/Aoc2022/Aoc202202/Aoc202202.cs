@@ -3,19 +3,19 @@
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202202;
 
 [Name("Rock Paper Scissors")]
-public class Aoc202202 : AocPuzzle
+public class Aoc202202(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
         var game = new RockPaperScissors();
-        var result = game.Part1(InputFile);
+        var result = game.Part1(Input);
         return new PuzzleResult(result, "21342a8c13c83a2420368dd586a7a5dd");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var game = new RockPaperScissors();
-        var result = game.Part2(InputFile);
+        var result = game.Part2(Input);
         return new PuzzleResult(result, "ee182ab67d32eeac3499142ceeb632c3");
     }
 }

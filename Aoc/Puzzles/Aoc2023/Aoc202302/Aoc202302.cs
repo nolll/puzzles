@@ -4,7 +4,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202302;
 
 [Name("Cube Conundrum")]
-public class Aoc202302 : AocPuzzle
+public class Aoc202302(string input) : AocPuzzle(input)
 {
     private static readonly Dictionary<string, int> ValidGameCubeCounts = new()
     {
@@ -15,13 +15,13 @@ public class Aoc202302 : AocPuzzle
 
     protected override PuzzleResult RunPart1()
     {
-        var result = PlayGames(InputFile);
+        var result = PlayGames(Input);
         return new PuzzleResult(result.ValidGames, "70e2be8af168fc9534f8384b244c60f7");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var result = PlayGames(InputFile);
+        var result = PlayGames(Input);
         return new PuzzleResult(result.GamePower, "45825cd43460cbc76a940d6eb06ebc6b");
     }
 

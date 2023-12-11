@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202015;
 
 [Name("Rambunctious Recitation")]
-public class Aoc202015 : AocPuzzle
+public class Aoc202015() : AocPuzzle("12,1,16,3,11,0")
 {
     protected override PuzzleResult RunPart1()
     {
@@ -18,6 +18,4 @@ public class Aoc202015 : AocPuzzle
         var result = system.Play(30000000);
         return new PuzzleResult(result, "7bcf2e0ed295f1de70b3d5368e465107");
     }
-
-    private const string Input = "12,1,16,3,11,0";
 }

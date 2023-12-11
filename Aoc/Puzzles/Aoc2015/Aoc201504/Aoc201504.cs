@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201504;
 
 [Name("The Ideal Stocking Stuffer")]
-public class Aoc201504 : AocPuzzle
+public class Aoc201504() : AocPuzzle("iwrupvqb")
 {
     private int _index;
 
@@ -19,6 +19,4 @@ public class Aoc201504 : AocPuzzle
         var coin = AdventCoinMiner.Mine(Input, 6, _index);
         return new PuzzleResult(coin, "9eb348bda7d61e7026099765b89a55fa");
     }
-
-    private const string Input = "iwrupvqb";
 }

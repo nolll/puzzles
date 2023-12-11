@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq18;
 
 [Name("Emit time")]
-public class Aquaq18 : AquaqPuzzle
+public class Aquaq18(string input) : AquaqPuzzle(input)
 {
     protected override PuzzleResult Run()
     {
-        var sum = StringReader.ReadLines(InputFile)
+        var sum = StringReader.ReadLines(Input)
             .Select(o => DateTime.Parse($"2020-02-02 {o}"))
             .Select(StepsToPalindrome)
             .Sum();

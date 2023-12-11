@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201617;
 
 [Name("Two Steps Forward")]
-public class Aoc201617 : AocPuzzle
+public class Aoc201617() : AocPuzzle("yjjvjgan")
 {
     protected override PuzzleResult RunPart1()
     {
@@ -18,6 +18,4 @@ public class Aoc201617 : AocPuzzle
         maze.FindPaths(Input);
         return new PuzzleResult(maze.LongestPath?.Length, "0926372f3b51236a2e58ce27bc97d696");
     }
-
-    private const string Input = "yjjvjgan";
 }

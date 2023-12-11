@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201510;
 
 [Name("Elves Look, Elves Say")]
-public class Aoc201510 : AocPuzzle
+public class Aoc201510() : AocPuzzle("1113222113")
 {
     protected override PuzzleResult RunPart1()
     {
@@ -16,6 +16,4 @@ public class Aoc201510 : AocPuzzle
         var game2 = new LookAndSayGame(Input, 50);
         return new PuzzleResult(game2.Result.Length, "f96f3f93bd5cbf8f3cf1bcf814ba4707");
     }
-
-    private const string Input = "1113222113";
 }

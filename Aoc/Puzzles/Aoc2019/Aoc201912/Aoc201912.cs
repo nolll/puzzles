@@ -3,11 +3,11 @@
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201912;
 
 [Name("The N-Body Problem")]
-public class Aoc201912 : AocPuzzle
+public class Aoc201912(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var tracker1 = new MoonTracker(InputFile);
+        var tracker1 = new MoonTracker(Input);
         const int iterations = 1000;
         tracker1.Run(iterations);
 
@@ -16,7 +16,7 @@ public class Aoc201912 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var tracker2 = new MoonTracker(InputFile);
+        var tracker2 = new MoonTracker(Input);
         tracker2.RunUntilRepeat();
 
         return new PuzzleResult(tracker2.Iterations, "b61b39d42360ecd83bd6094a285a4251");

@@ -2,10 +2,10 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
 
-[Attributes] // 26s for part 2
+[IsSlow] // 26s for part 2
 [Name("One-Time Pad")]
 [Comment("Slow hashing")]
-public class Aoc201614 : AocPuzzle
+public class Aoc201614() : AocPuzzle("zpqevtbw")
 {
     protected override PuzzleResult RunPart1()
     {
@@ -22,6 +22,4 @@ public class Aoc201614 : AocPuzzle
             
         return new PuzzleResult(index, "f84f1a02e789615187ec700dcf71ab79");
     }
-
-    private static string Input => "zpqevtbw";
 }

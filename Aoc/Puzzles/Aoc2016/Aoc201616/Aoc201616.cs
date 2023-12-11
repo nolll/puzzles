@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201616;
 
 [Name("Dragon Checksum")]
-public class Aoc201616 : AocPuzzle
+public class Aoc201616() : AocPuzzle("01000100010010111")
 {
     protected override PuzzleResult RunPart1()
     {
@@ -18,6 +18,4 @@ public class Aoc201616 : AocPuzzle
         var checksum = dragonCurve.Run(Input, 35651584);
         return new PuzzleResult(checksum, "e5cc9c18ff1145ba041c85c6de72c9e2");
     }
-
-    private const string Input = "01000100010010111";
 }

@@ -3,12 +3,12 @@
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202204;
 
 [Name("Camp Cleanup")]
-public class Aoc202204 : AocPuzzle
+public class Aoc202204(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
         var cleaning = new Cleaning();
-        var result = cleaning.Part1(InputFile);
+        var result = cleaning.Part1(Input);
 
         return new PuzzleResult(result, "9569cfbf59abc27202b8777006153703");
     }
@@ -16,7 +16,7 @@ public class Aoc202204 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var cleaning = new Cleaning();
-        var result = cleaning.Part2(InputFile);
+        var result = cleaning.Part2(Input);
 
         return new PuzzleResult(result, "1cf622579ace09c8f182b5640835416f");
     }

@@ -4,13 +4,13 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202307;
 
 [Name("Camel Cards")]
-public class Aoc202307 : AocPuzzle
+public class Aoc202307(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1() 
-        => new(PokerPart1(InputFile), "eb6c5937d75bbb79d79d7e01895aacd4");
+        => new(PokerPart1(Input), "eb6c5937d75bbb79d79d7e01895aacd4");
 
     protected override PuzzleResult RunPart2() 
-        => new(PokerPart2(InputFile), "dd9dfa02733e4b1eec0869e16d5b27ff");
+        => new(PokerPart2(Input), "dd9dfa02733e4b1eec0869e16d5b27ff");
 
     public static long PokerPart1(string input) => Poker(input, new Part1PokerHandComparer());
     public static long PokerPart2(string input) => Poker(input, new Part2PokerHandComparer());

@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202117;
 
 [Name("Trick Shot")]
-public class Aoc202117 : AocPuzzle
+public class Aoc202117(string input) : AocPuzzle(input)
 {
     private TrickshotResult? _result;
 

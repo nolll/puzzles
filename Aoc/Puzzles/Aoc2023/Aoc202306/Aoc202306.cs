@@ -4,18 +4,18 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202306;
 
 [Name("Wait For It")]
-public class Aoc202306 : AocPuzzle
+public class Aoc202306(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var result = BoatRace1(InputFile);
+        var result = BoatRace1(Input);
 
         return new PuzzleResult(result, "7eb8c120d057c526ef2c425f6db9493c");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var result = BoatRace2(InputFile);
+        var result = BoatRace2(Input);
 
         return new PuzzleResult(result, "365c29b8564f3c2e47e2bcfca7b191de");
     }

@@ -38,7 +38,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         AnsiConsole.Cursor.Show(false);
         WriteHeader(_definition);
         
-        var instance = PuzzleFactory.CreateInstance(_definition.Type);
+        var instance = PuzzleFactory.CreateInstance(_definition);
 
         for (var i = 0; i < instance.RunFunctions.Count; i++)
         {
@@ -53,7 +53,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     private void RunDebugMode()
     {
         WriteHeader(_definition);
-        var instance = PuzzleFactory.CreateInstance(_definition.Type);
+        var instance = PuzzleFactory.CreateInstance(_definition);
 
         foreach (var runFunc in instance.RunFunctions)
         {

@@ -3,19 +3,19 @@
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202016;
 
 [Name("Ticket Translation")]
-public class Aoc202016 : AocPuzzle
+public class Aoc202016(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
         var validator = new TicketValidator();
-        var result = validator.GetErrorRate(InputFile);
+        var result = validator.GetErrorRate(Input);
         return new PuzzleResult(result, "7d78cfbc759526833a4566918a854e5b");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var validator = new TicketValidator();
-        var result = validator.CalculateAnswer(InputFile);
+        var result = validator.CalculateAnswer(Input);
         return new PuzzleResult(result, "f42f08ba29065a89fd379a7eceb34b50");
     }
 }

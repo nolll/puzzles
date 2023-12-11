@@ -15,7 +15,7 @@ public class CommentAttribute(string comment) : Attribute
 }
 
 [AttributeUsage(AttributeTargets.Class)]
-public class Attributes : Attribute;
+public class IsSlowAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class IsFunToOptimizeAttribute : Attribute;
@@ -27,4 +27,16 @@ public class NeedsRewriteAttribute : Attribute;
 public class NumberOfPartsAttribute(int numberOfParts) : Attribute
 {
     public int NumberOfParts { get; } = numberOfParts;
+}
+
+[AttributeUsage(AttributeTargets.Class)]
+public class AdditionalCommonInputFileAttribute(string fileName) : Attribute
+{
+    public string FileName { get; } = fileName;
+}
+
+[AttributeUsage(AttributeTargets.Class)]
+public class AdditionalLocalInputFileAttribute(string fileName) : Attribute
+{
+    public string FileName { get; } = fileName;
 }

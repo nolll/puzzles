@@ -3,12 +3,12 @@
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202210;
 
 [Name("Cathode-Ray Tube")]
-public class Aoc202210 : AocPuzzle
+public class Aoc202210(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
         var tube = new CathodeRayTube();
-        var (result, _, _) = tube.Run(InputFile);
+        var (result, _, _) = tube.Run(Input);
 
         return new PuzzleResult(result, "cbd8f00e296a6ea077faf3fd0363b201");
     }
@@ -16,7 +16,7 @@ public class Aoc202210 : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var tube = new CathodeRayTube();
-        var (_, result, _) = tube.Run(InputFile);
+        var (_, result, _) = tube.Run(Input);
 
         return new PuzzleResult(result, "0b3ccbb8211fc474bd2156e662bf15fd");
     }

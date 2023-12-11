@@ -3,7 +3,7 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201511;
 
 [Name("Corporate Policy")]
-public class Aoc201511: AocPuzzle
+public class Aoc201511() : AocPuzzle("hxbxwxba")
 {
     private CorporatePasswordValidator? _validator;
     private string? _firstPassword;
@@ -21,6 +21,4 @@ public class Aoc201511: AocPuzzle
         var pwd2 = Validator.FindNextPassword(FirstPassword);
         return new PuzzleResult(pwd2, "604b8c33c454d9dbcc19b86576a16f1c");
     }
-
-    private const string Input = "hxbxwxba";
 }

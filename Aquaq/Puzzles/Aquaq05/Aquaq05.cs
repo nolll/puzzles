@@ -3,11 +3,11 @@
 namespace Pzl.Aquaq.Puzzles.Aquaq05;
 
 [Name("Snake eyes")]
-public class Aquaq05 : AquaqPuzzle
+public class Aquaq05(string input) : AquaqPuzzle(input)
 {
     protected override PuzzleResult Run()
     {
-        var sum = FindSumOfIndexesWithMatchingDice(InputFile);
+        var sum = FindSumOfIndexesWithMatchingDice(Input);
 
         return new PuzzleResult(sum, "618a2293fcd6600e06eb2d002758bd97");
     }

@@ -4,11 +4,9 @@ using Pzl.Common;
 namespace Pzl.Aquaq.Puzzles.Aquaq01;
 
 [Name("Rose by any other name")]
-public class Aquaq01 : AquaqPuzzle
+public class Aquaq01(string input) : AquaqPuzzle(input)
 {
     private static readonly Regex HexRegex = new("[^0123456789abcdef]");
-
-    private const string Input = "do you think that maybe like, 1 in 10 people could be actually robots?";
 
     protected override PuzzleResult Run()
     {

@@ -8,12 +8,12 @@ public class Aoc202311(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        return new PuzzleResult(Distances(InputFile, 1), "04a7795748b2f6d2e38898623e8ef01a");
+        return new PuzzleResult(Distances(Input, 1), "04a7795748b2f6d2e38898623e8ef01a");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        return new PuzzleResult(Distances(InputFile, 1_000_000), "73bccfdcdd826f77dcdaf67bedecded9");
+        return new PuzzleResult(Distances(Input, 1_000_000), "73bccfdcdd826f77dcdaf67bedecded9");
     }
 
     public static long Distances(string input, long multiplier)

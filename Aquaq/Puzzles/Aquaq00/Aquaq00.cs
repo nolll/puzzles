@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq00;
 
 [Name("What's a numpad?")]
-public class Aquaq00 : AquaqPuzzle
+public class Aquaq00(string input) : AquaqPuzzle(input)
 {
     protected override PuzzleResult Run()
     {
-        var keyPresses = StringReader.ReadLines(InputFile)
+        var keyPresses = StringReader.ReadLines(Input)
             .Select(o => o.Trim().Split(' ').ToArray())
             .Select(o => (int.Parse(o[0]), int.Parse(o[1])));
 

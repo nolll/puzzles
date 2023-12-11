@@ -64,7 +64,9 @@ public class PuzzleDefinitionInTest(
     string? listTitle = null,
     string? name = null,
     string? comment = null,
-    int? numberOfParts = null)
+    int? numberOfParts = null,
+    string? commonFile = null,
+    string? localFile = null)
     : PuzzleDefinition(typeof(Puzzle),
         tags ?? [],
         sortId ?? "",
@@ -72,7 +74,9 @@ public class PuzzleDefinitionInTest(
         listTitle ?? "",
         name ?? "",
         comment,
-        numberOfParts ?? 1);
+        numberOfParts ?? 1,
+        commonFile,
+        localFile);
 
 public class PlainPuzzleDefinitionInTest() : PuzzleDefinitionInTest(name: "Plain Puzzle");
 

@@ -3,11 +3,11 @@
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201824;
 
 [Name("Immune System Simulator 20XX")]
-public class Aoc201824 : AocPuzzle
+public class Aoc201824(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var inputs = InputFile.Split("\r\n\r\n");
+        var inputs = Input.Split("\r\n\r\n");
         var immuneInput = inputs.First();
         var infectionInput = inputs.Last();
 
@@ -18,7 +18,7 @@ public class Aoc201824 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var inputs = InputFile.Split("\r\n\r\n");
+        var inputs = Input.Split("\r\n\r\n");
         var immuneInput = inputs.First();
         var infectionInput = inputs.Last();
             

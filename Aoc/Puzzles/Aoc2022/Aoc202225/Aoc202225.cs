@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202225;
 
 [Name("Full of Hot Air")]
-public class Aoc202225 : AocPuzzle
+public class Aoc202225(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var result = Part1(InputFile);
+        var result = Part1(Input);
 
         return new PuzzleResult(result, "793d1443281edc7d7e628e25d8aa07a4");
     }

@@ -8,7 +8,7 @@ public class Aoc202221Tests
     [Test]
     public void Part1()
     {
-        var result = new Aoc202221().Part1(Input);
+        var result = new Aoc202221(Input).Part1(Input);
 
         result.Should().Be(152);
     }
@@ -24,7 +24,7 @@ public class Aoc202221Tests
     [Test]
     public void Part2()
     {
-        var result = new Aoc202221().Part2(Input);
+        var result = new Aoc202221(Input).Part2(Input);
 
         result.Should().Be(301);
     }

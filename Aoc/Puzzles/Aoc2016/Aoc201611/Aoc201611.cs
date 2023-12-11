@@ -2,7 +2,7 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
 
-[Attributes] // 16s for part 2
+[IsSlow] // 16s for part 2
 [Name("Radioisotope Thermoelectric Generators")]
 [Comment("Floor permutations")]
 public class Aoc201611 : AocPuzzle

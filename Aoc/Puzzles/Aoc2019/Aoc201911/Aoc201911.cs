@@ -4,11 +4,11 @@ using Pzl.Tools.Ocr;
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201911;
 
 [Name("Space Police")]
-public class Aoc201911 : AocPuzzle
+public class Aoc201911(string input) : AocPuzzle(input)
 {
     protected override PuzzleResult RunPart1()
     {
-        var robot1 = new PaintRobot(InputFile);
+        var robot1 = new PaintRobot(Input);
         var result1 = robot1.Paint(false);
 
         return new PuzzleResult(result1.PaintedPanelCount, "450a7268b37892570104286b9fd8e5f2");
@@ -16,7 +16,7 @@ public class Aoc201911 : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var robot2 = new PaintRobot(InputFile);
+        var robot2 = new PaintRobot(Input);
         var result2 = robot2.Paint(true);
         var printout = CleanPrintout(result2.Printout);
         var letters = OcrSmallFont.ReadString(printout);

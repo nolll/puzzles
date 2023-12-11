@@ -3,11 +3,11 @@
 namespace Pzl.Aquaq.Puzzles.Aquaq02;
 
 [Name("One is all you need")]
-public class Aquaq02 : AquaqPuzzle
+public class Aquaq02(string input) : AquaqPuzzle(input)
 {
     protected override PuzzleResult Run()
     {
-        var input = InputFile.Split(' ').Select(int.Parse);
+        var input = Input.Split(' ').Select(int.Parse);
         var uniqueNumbers = GetUniqueNumbers(input);
 
         return new PuzzleResult(uniqueNumbers.Sum(), "7397f491441078a2bddb62ede05a1f8c");

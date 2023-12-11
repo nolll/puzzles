@@ -3,34 +3,17 @@ using System.Diagnostics;
 namespace Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 [DebuggerDisplay("{X},{Y}")]
-public class MatrixAddress : IEquatable<MatrixAddress>
+public class MatrixAddress(int x, int y) : IEquatable<MatrixAddress>
 {
     private string? _id;
     private (int, int)? _tuple;
         
-    public int X { get; }
-    public int Y { get; }
+    public int X { get; } = x;
+    public int Y { get; } = y;
     public string Id => _id ??= $"{X},{Y}";
     public (int x, int y) Tuple => _tuple ??= (X, Y);
 
-    public MatrixAddress(int x, int y)
-    {
-        X = x;
-        Y = y;
-    }
-
-    public int ManhattanDistanceTo(MatrixAddress other)
-    {
-        var xMax = Math.Max(X, other.X);
-        var xMin = Math.Min(X, other.X);
-        var xDiff = xMax - xMin;
-
-        var yMax = Math.Max(Y, other.Y);
-        var yMin = Math.Min(Y, other.Y);
-        var yDiff = yMax - yMin;
-
-        return xDiff + yDiff;
-    }
+    public int ManhattanDistanceTo(MatrixAddress other) => Math.Abs(X - other.X) + Math.Abs(Y - other.Y);
 
     public bool Equals(MatrixAddress? other)
     {
@@ -47,8 +30,5 @@ public class MatrixAddress : IEquatable<MatrixAddress>
         return Equals((MatrixAddress)obj);
     }
 
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(X, Y);
-    }
+    public override int GetHashCode() => HashCode.Combine(X, Y);
 }

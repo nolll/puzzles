@@ -17,26 +17,8 @@ public class Matrix4DAddress : IEquatable<Matrix4DAddress>
         Id = $"{x},{y},{z},{w}";
     }
 
-    public int ManhattanDistanceTo(Matrix4DAddress other)
-    {
-        var xMax = Math.Max(X, other.X);
-        var xMin = Math.Min(X, other.X);
-        var xDiff = xMax - xMin;
-
-        var yMax = Math.Max(Y, other.Y);
-        var yMin = Math.Min(Y, other.Y);
-        var yDiff = yMax - yMin;
-
-        var zMax = Math.Max(Z, other.Z);
-        var zMin = Math.Min(Z, other.Z);
-        var zDiff = zMax - zMin;
-
-        var wMax = Math.Max(W, other.W);
-        var wMin = Math.Min(W, other.W);
-        var wDiff = wMax - wMin;
-
-        return xDiff + yDiff + zDiff + wDiff;
-    }
+    public int ManhattanDistanceTo(Matrix4DAddress other) => 
+        Math.Abs(X - other.X) + Math.Abs(Y - other.Y) + Math.Abs(Z - other.Z) + Math.Abs(W - other.W);
 
     public bool Equals(Matrix4DAddress? other)
     {
@@ -53,8 +35,5 @@ public class Matrix4DAddress : IEquatable<Matrix4DAddress>
         return Equals((Matrix4DAddress) obj);
     }
 
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(X, Y, Z, W, Id);
-    }
+    public override int GetHashCode() => HashCode.Combine(X, Y, Z, W, Id);
 }

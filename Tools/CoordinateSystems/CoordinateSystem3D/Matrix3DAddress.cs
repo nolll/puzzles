@@ -18,27 +18,10 @@ public class Matrix3DAddress : IEquatable<Matrix3DAddress>
         Id = $"{x},{y},{z}";
     }
 
-    public int ManhattanDistanceTo(Matrix3DAddress other)
-    {
-        var xMax = Math.Max(X, other.X);
-        var xMin = Math.Min(X, other.X);
-        var xDiff = xMax - xMin;
+    public int ManhattanDistanceTo(Matrix3DAddress other) => 
+        Math.Abs(X - other.X) + Math.Abs(Y - other.Y) + Math.Abs(Z - other.Z);
 
-        var yMax = Math.Max(Y, other.Y);
-        var yMin = Math.Min(Y, other.Y);
-        var yDiff = yMax - yMin;
-
-        var zMax = Math.Max(Z, other.Z);
-        var zMin = Math.Min(Z, other.Z);
-        var zDiff = zMax - zMin;
-
-        return xDiff + yDiff + zDiff;
-    }
-
-    public override string ToString()
-    {
-        return $"{X},{Y},{Z}";
-    }
+    public override string ToString() => $"{X},{Y},{Z}";
 
     public bool Equals(Matrix3DAddress? other)
     {
@@ -55,8 +38,5 @@ public class Matrix3DAddress : IEquatable<Matrix3DAddress>
         return Equals((Matrix3DAddress)obj);
     }
 
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(X, Y, Z, Id);
-    }
+    public override int GetHashCode() => HashCode.Combine(X, Y, Z, Id);
 }

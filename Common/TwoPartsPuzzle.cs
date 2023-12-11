@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Pzl.Common;
 
 [NumberOfParts(2)]
-public abstract class TwoPartsPuzzle : Puzzle
+public abstract class TwoPartsPuzzle(string? input = null) : Puzzle(input)
 {
     protected abstract PuzzleResult RunPart1();
     protected abstract PuzzleResult RunPart2();

@@ -15,8 +15,57 @@ public class MatrixTests
                                       MNOP
                                       """;
 
+    [TestCase(0, true)]
+    [TestCase(1, false)]
+    public void IsAtTopEdge(int y, bool expected)
+    {
+        var matrix = new Matrix<int>(5, 5);
+        matrix.MoveTo(1, y);
+
+        matrix.IsAtTop.Should().Be(expected);
+    }
+
+    [TestCase(4, true)]
+    [TestCase(3, false)]
+    public void IsAtRightEdge(int x, bool expected)
+    {
+        var matrix = new Matrix<int>(5, 5);
+        matrix.MoveTo(x, 1);
+
+        matrix.IsAtRightEdge.Should().Be(expected);
+    }
+
+    [TestCase(4, true)]
+    [TestCase(3, false)]
+    public void IsAtBottomEdge(int y, bool expected)
+    {
+        var matrix = new Matrix<int>(5, 5);
+        matrix.MoveTo(1, y);
+
+        matrix.IsAtBottom.Should().Be(expected);
+    }
+
+    [TestCase(0, true)]
+    [TestCase(1, false)]
+    public void IsAtLeftEdge(int x, bool expected)
+    {
+        var matrix = new Matrix<int>(5, 5);
+        matrix.MoveTo(x, 1);
+
+        matrix.IsAtLeftEdge.Should().Be(expected);
+    }
+
+    [TestCase(5, 2)]
+    [TestCase(10, 5)]
+    public void Center(int size, int expected)
+    {
+        var matrix = new Matrix<int>(size, size);
+
+        matrix.Center.Tuple.Should().Be((expected, expected));
+    }
+
     [Test]
-    public void MoveToWorks()
+    public void MoveTo()
     {
         var matrix = new Matrix<int>(5, 5);
         matrix.MoveTo(1, 2);
@@ -26,7 +75,7 @@ public class MatrixTests
     }
 
     [Test]
-    public void MoveForwardWorks()
+    public void MoveForward()
     {
         var matrix = new Matrix<int>(5, 5);
         matrix.MoveTo(1, 3);
@@ -37,7 +86,7 @@ public class MatrixTests
     }
 
     [Test]
-    public void TurnAndMoveForwardWorks()
+    public void TurnAndMoveForward()
     {
         var matrix = new Matrix<int>(5, 5);
         matrix.TurnRight();

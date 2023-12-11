@@ -17,11 +17,20 @@ public class Matrix<T> where T : struct
     public MatrixDirection Direction { get; private set; }
     public MatrixAddress Address { get; private set; }
     public MatrixAddress StartAddress { get; }
-    public bool IsAtTop => Address.Y == 0;
-    public bool IsAtRightEdge => Address.X == Width - 1;
-    public bool IsAtBottom => Address.Y == Height - 1;
-    public bool IsAtLeftEdge => Address.X == 0;
-    public MatrixAddress Center => new(Width / 2, Height / 2);
+    public bool IsAtTop => Address.Y == YMin;
+    public bool IsAtRightEdge => Address.X == XMax;
+    public bool IsAtBottom => Address.Y == YMax;
+    public bool IsAtLeftEdge => Address.X == XMin;
+    
+    public MatrixAddress Center
+    {
+        get
+        {
+            var xDiff = Math.Abs(XMax - XMin);
+            var yDiff = Math.Abs(YMax - YMin);
+            return new(XMax - xDiff / 2, YMax - yDiff / 2);
+        }
+    }
 
     public Matrix(int width = 1, int height = 1, T defaultValue = default)
         : this(

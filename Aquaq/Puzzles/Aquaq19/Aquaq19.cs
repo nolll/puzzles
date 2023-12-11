@@ -38,7 +38,7 @@ public class Aquaq19 : AquaqPuzzle
             if (adjacentCache.TryGetValue(c, out var list))
                 return list;
 
-            list = matrix.PerpendicularAdjacentCoordsTo(c).Where(o => !matrix.IsOutOfRange(o)).ToList();
+            list = matrix.OrthogonalAdjacentCoordsTo(c).Where(o => !matrix.IsOutOfRange(o)).ToList();
             adjacentCache.Add(c, list);
             return list;
         }

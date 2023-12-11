@@ -42,7 +42,7 @@ public class BlizzardNavigation
                 walls.Add(coord);
             }
 
-            _neighborCache.Add(coord, _matrix.PerpendicularAdjacentCoordsTo(coord).ToList());
+            _neighborCache.Add(coord, _matrix.OrthogonalAdjacentCoordsTo(coord).ToList());
         }
 
         var prints = new HashSet<string>();

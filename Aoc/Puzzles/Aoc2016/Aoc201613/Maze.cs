@@ -25,7 +25,7 @@ public class Maze
             {
                 _matrix.MoveTo(coord);
                 _matrix.WriteValue('O');
-                var adjacentCoords = _matrix.PerpendicularAdjacentCoords.Where(o => _matrix.ReadValueAt(o) == '.').ToList();
+                var adjacentCoords = _matrix.OrthogonalAdjacentCoords.Where(o => _matrix.ReadValueAt(o) == '.').ToList();
                 newQueue.AddRange(adjacentCoords);
             }
 

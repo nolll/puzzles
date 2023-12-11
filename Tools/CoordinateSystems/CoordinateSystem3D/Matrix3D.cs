@@ -27,15 +27,8 @@ public class Matrix3D<T> where T : struct
         StartAddress = new Matrix3DAddress(0, 0, 0);
     }
 
-    public bool TryMoveTo(Matrix3DAddress address)
-    {
-        return MoveTo(address, false);
-    }
-
-    public bool MoveTo(Matrix3DAddress address)
-    {
-        return MoveTo(address, true);
-    }
+    public bool TryMoveTo(Matrix3DAddress address) => MoveTo(address, false);
+    public bool MoveTo(Matrix3DAddress address) => MoveTo(address, true);
 
     private bool MoveTo(Matrix3DAddress address, bool extend)
     {
@@ -54,119 +47,45 @@ public class Matrix3D<T> where T : struct
         return true;
     }
 
-    public bool TryMoveTo(int x, int y, int z)
-    {
-        return MoveTo(new Matrix3DAddress(x, y, z), false);
-    }
+    public bool TryMoveTo(int x, int y, int z) => MoveTo(new Matrix3DAddress(x, y, z), false);
+    public bool MoveTo(int x, int y, int z) => MoveTo(new Matrix3DAddress(x, y, z), true);
+    public bool TryMoveUp(int steps = 1) => MoveUp(steps, false);
+    public bool MoveUp(int steps = 1) => MoveUp(steps, true);
+    private bool MoveUp(int steps, bool extend) => MoveTo(new Matrix3DAddress(Address.X, Address.Y - steps, Address.Z), extend);
+    public bool TryMoveRight(int steps = 1) => MoveRight(steps, false);
+    public bool MoveRight(int steps = 1) => MoveRight(steps, true);
+    private bool MoveRight(int steps, bool extend) => MoveTo(new Matrix3DAddress(Address.X + steps, Address.Y, Address.Z), extend);
+    public bool TryMoveDown(int steps = 1) => MoveDown(steps, false);
+    public bool MoveDown(int steps = 1) => MoveDown(steps, true);
+    private bool MoveDown(int steps, bool extend) => MoveTo(new Matrix3DAddress(Address.X, Address.Y + steps, Address.Z), extend);
+    public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
+    public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
+    private bool MoveLeft(int steps, bool extend) => MoveTo(new Matrix3DAddress(Address.X - steps, Address.Y, Address.Z), extend);
+    public T ReadValue() => ReadValueAt(Address.X, Address.Y, Address.Z);
+    public T ReadValueAt(Matrix3DAddress address) => ReadValueAt(address.X, address.Y, address.Z);
+    public T ReadValueAt(int x, int y, int z) => _matrix[z][y][x];
+    public void WriteValue(T value) => _matrix[Address.Z][Address.Y][Address.X] = value;
 
-    public bool MoveTo(int x, int y, int z)
-    {
-        return MoveTo(new Matrix3DAddress(x, y, z), true);
-    }
+    public bool IsOutOfRange(Matrix3DAddress address) =>
+        address.Z >= Depth ||
+        address.Z < 0 || 
+        address.Y >= Height ||
+        address.Y < 0 ||
+        address.X >= Width ||
+        address.X < 0;
 
-    public bool TryMoveUp(int steps = 1)
-    {
-        return MoveUp(steps, false);
-    }
+    public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
+    public IList<Matrix3DAddress> OrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-    public bool MoveUp(int steps = 1)
-    {
-        return MoveUp(steps, true);
-    }
-
-    private bool MoveUp(int steps, bool extend)
-    {
-        return MoveTo(new Matrix3DAddress(Address.X, Address.Y - steps, Address.Z), extend);
-    }
-
-    public bool TryMoveRight(int steps = 1)
-    {
-        return MoveRight(steps, false);
-    }
-
-    public bool MoveRight(int steps = 1)
-    {
-        return MoveRight(steps, true);
-    }
-
-    private bool MoveRight(int steps, bool extend)
-    {
-        return MoveTo(new Matrix3DAddress(Address.X + steps, Address.Y, Address.Z), extend);
-    }
-
-    public bool TryMoveDown(int steps = 1)
-    {
-        return MoveDown(steps, false);
-    }
-
-    public bool MoveDown(int steps = 1)
-    {
-        return MoveDown(steps, true);
-    }
-
-    private bool MoveDown(int steps, bool extend)
-    {
-        return MoveTo(new Matrix3DAddress(Address.X, Address.Y + steps, Address.Z), extend);
-    }
-
-    public bool TryMoveLeft(int steps = 1)
-    {
-        return MoveLeft(steps, false);
-    }
-
-    public bool MoveLeft(int steps = 1)
-    {
-        return MoveLeft(steps, true);
-    }
-
-    private bool MoveLeft(int steps, bool extend)
-    {
-        return MoveTo(new Matrix3DAddress(Address.X - steps, Address.Y, Address.Z), extend);
-    }
-        
-    public T ReadValue()
-    {
-        return ReadValueAt(Address.X, Address.Y, Address.Z);
-    }
-
-    public T ReadValueAt(Matrix3DAddress address)
-    {
-        return ReadValueAt(address.X, address.Y, address.Z);
-    }
-
-    public T ReadValueAt(int x, int y, int z)
-    {
-        return _matrix[z][y][x];
-    }
-
-    public void WriteValue(T value)
-    {
-        _matrix[Address.Z][Address.Y][Address.X] = value;
-    }
-
-    public bool IsOutOfRange(Matrix3DAddress address)
-    {
-        return address.Z >= Depth ||
-               address.Z < 0 || 
-               address.Y >= Height ||
-               address.Y < 0 ||
-               address.X >= Width ||
-               address.X < 0;
-    }
-
-    public IList<T> PerpendicularAdjacentValues => PerpendicularAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<Matrix3DAddress> PerpendicularAdjacentCoords => PossiblePerpendicularAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
-
-    private IList<Matrix3DAddress> PossiblePerpendicularAdjacentCoords =>
-        new List<Matrix3DAddress>
-        {
-            new Matrix3DAddress(Address.X + 1, Address.Y, Address.Z),
-            new Matrix3DAddress(Address.X - 1, Address.Y, Address.Z),
-            new Matrix3DAddress(Address.X, Address.Y + 1, Address.Z),
-            new Matrix3DAddress(Address.X, Address.Y - 1, Address.Z),
-            new Matrix3DAddress(Address.X, Address.Y, Address.Z + 1),
-            new Matrix3DAddress(Address.X, Address.Y, Address.Z - 1)
-        };
+    private IList<Matrix3DAddress> PossibleOrthogonalAdjacentCoords =>
+    [
+        new(Address.X + 1, Address.Y, Address.Z),
+        new(Address.X - 1, Address.Y, Address.Z),
+        new(Address.X, Address.Y + 1, Address.Z),
+        new(Address.X, Address.Y - 1, Address.Z),
+        new(Address.X, Address.Y, Address.Z + 1),
+        new(Address.X, Address.Y, Address.Z - 1)
+    ];
 
     public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
     public IList<Matrix3DAddress> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();

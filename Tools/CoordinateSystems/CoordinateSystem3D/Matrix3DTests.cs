@@ -49,9 +49,9 @@ public class Matrix3DTests
 
         matrix.MoveTo(1, 1, 1);
 
-        matrix.PerpendicularAdjacentCoords.Count.Should().Be(6);
+        matrix.OrthogonalAdjacentCoords.Count.Should().Be(6);
 
-        var adjacentCoords = matrix.PerpendicularAdjacentCoords;
+        var adjacentCoords = matrix.OrthogonalAdjacentCoords;
         var cubesAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
         var cubesAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
         var cubesAtZZero = adjacentCoords.Where(o => o.Z == 0).ToList();

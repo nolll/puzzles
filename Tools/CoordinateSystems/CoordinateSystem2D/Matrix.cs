@@ -99,13 +99,13 @@ public class Matrix<T> where T : struct
         _matrix[coord] = value;
     }
 
-    public IList<T> PerpendicularAdjacentValues => PerpendicularAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<T> PerpendicularAdjacentValuesTo(MatrixAddress address) => PerpendicularAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
-    public IList<MatrixAddress> PerpendicularAdjacentCoords => PerpendicularAdjacentCoordsTo(Address);
-    public IList<MatrixAddress> PerpendicularAdjacentCoordsTo(MatrixAddress address) => PossiblePerpendicularAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
+    public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
+    public IList<T> OrthogonalAdjacentValuesTo(MatrixAddress address) => OrthogonalAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
+    public IList<MatrixAddress> OrthogonalAdjacentCoords => OrthogonalAdjacentCoordsTo(Address);
+    public IList<MatrixAddress> OrthogonalAdjacentCoordsTo(MatrixAddress address) => PossibleOrthogonalAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
 
-    public IEnumerable<MatrixAddress> PossiblePerpendicularAdjacentCoords => PossiblePerpendicularAdjacentCoordsTo(Address);
-    public IEnumerable<MatrixAddress> PossiblePerpendicularAdjacentCoordsTo(MatrixAddress address) => new List<MatrixAddress>
+    public IEnumerable<MatrixAddress> PossibleOrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoordsTo(Address);
+    public IEnumerable<MatrixAddress> PossibleOrthogonalAdjacentCoordsTo(MatrixAddress address) => new List<MatrixAddress>
     {
         new(address.X, address.Y - 1),
         new(address.X + 1, address.Y),

@@ -49,7 +49,7 @@ public class HillClimbing
         {
             var next = queue.Dequeue();
             var count = seen[next];
-            var adjacentCoords = matrix.PerpendicularAdjacentCoordsTo(next)
+            var adjacentCoords = matrix.OrthogonalAdjacentCoordsTo(next)
                 .Where(o => !seen.ContainsKey(o) && matrix.ReadValueAt(o) - matrix.ReadValueAt(next) <= 1);
             foreach (var adjacentCoord in adjacentCoords)
             {

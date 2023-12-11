@@ -45,7 +45,7 @@ public class BugLifeSimulator
             {
                 _matrix.MoveTo(x, y);
                 var currentValue = _matrix.ReadValue();
-                var adjacentValues = _matrix.PerpendicularAdjacentValues;
+                var adjacentValues = _matrix.OrthogonalAdjacentValues;
                 var neighborCount = adjacentValues.Count(o => o == '#');
                 var newValue = GetNewValue(currentValue, neighborCount);
                 newMatrix.MoveTo(x, y);

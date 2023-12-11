@@ -5,12 +5,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202105;
 
 public class VentsMap
 {
-    public int Run(string input, bool perpendicularOnly)
+    public int Run(string input, bool orthogonalOnly)
     {
         var rows = StringReader.ReadLines(input);
         var lines = ParseLines(rows);
-        if (perpendicularOnly)
-            lines = lines.Where(o => o.IsPerpendicular).ToList();
+        if (orthogonalOnly)
+            lines = lines.Where(o => o.IsOrthogonal).ToList();
         var width = lines.Max(o => Math.Max(o.Start.X, o.End.X));
         var height = lines.Max(o => Math.Max(o.Start.Y, o.End.Y));
         var matrix = new Matrix<int>(width, height);

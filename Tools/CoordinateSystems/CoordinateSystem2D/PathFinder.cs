@@ -26,7 +26,7 @@ public static class PathFinder
         while (!currentAddress.Equals(to))
         {
             pathMatrix.MoveTo(currentAddress);
-            var adjacentCoords = pathMatrix.PerpendicularAdjacentCoords
+            var adjacentCoords = pathMatrix.OrthogonalAdjacentCoords
                 .Where(o => pathMatrix.ReadValueAt(o) > -1)
                 .OrderBy(o => pathMatrix.ReadValueAt(o))
                 .ThenBy(o => o.Y)
@@ -51,7 +51,7 @@ public static class PathFinder
         {
             var next = queue[index];
             matrix.MoveTo(next.X, next.Y);
-            var adjacentCoords = matrix.PerpendicularAdjacentCoords
+            var adjacentCoords = matrix.OrthogonalAdjacentCoords
                 .Where(o => matrix.ReadValueAt(o) == '.' && !seen.Contains(o.Tuple))
                 .ToList();
             var newCoordCounts = adjacentCoords.Select(o => new CoordCount(o, next.Count + 1)).ToList();
@@ -76,7 +76,7 @@ public static class PathFinder
             var next = queue[index];
             var count = seen[next];
             matrix.MoveTo(next.X, next.Y);
-            var adjacentCoords = matrix.PerpendicularAdjacentCoords
+            var adjacentCoords = matrix.OrthogonalAdjacentCoords
                 .Where(o => matrix.ReadValueAt(o) == '.' && !seen.ContainsKey(o))
                 .ToList();
             queue.AddRange(adjacentCoords);

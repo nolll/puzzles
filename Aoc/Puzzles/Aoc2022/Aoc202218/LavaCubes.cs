@@ -56,7 +56,7 @@ public class LavaCubes
             var current = queue.Dequeue();
             matrix.MoveTo(current);
             matrix.WriteValue('~');
-            var adjacent = matrix.PerpendicularAdjacentCoords;
+            var adjacent = matrix.OrthogonalAdjacentCoords;
             var validAdjacent = adjacent.Where(o => !seen.Contains(o) && matrix.ReadValueAt(o) == '.');
             foreach (var c in validAdjacent)
             {

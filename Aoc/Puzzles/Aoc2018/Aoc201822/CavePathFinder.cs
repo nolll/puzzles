@@ -39,7 +39,7 @@ public static class CavePathFinder
             if (!isStart)
             {
                 var region = matrix.ReadValueAt(currentAddress);
-                var adjacentCoords = matrix.PerpendicularAdjacentCoordsTo(currentAddress);
+                var adjacentCoords = matrix.OrthogonalAdjacentCoordsTo(currentAddress);
                 foreach (var next in adjacentCoords)
                 {
                     var targetRegion = matrix.ReadValueAt(next);

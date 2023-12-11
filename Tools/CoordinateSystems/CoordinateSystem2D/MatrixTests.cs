@@ -80,15 +80,15 @@ public class MatrixTests
     }
 
     [Test]
-    public void PerpendicularAdjacentCoordsExist()
+    public void OrthogonalAdjacentCoordsExist()
     {
         var matrix = new Matrix<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
-        matrix.PerpendicularAdjacentCoords.Count.Should().Be(4);
+        matrix.OrthogonalAdjacentCoords.Count.Should().Be(4);
 
-        var adjacentCoords = matrix.PerpendicularAdjacentCoords;
+        var adjacentCoords = matrix.OrthogonalAdjacentCoords;
         var squaresInFirstCol = adjacentCoords.Where(o => o.X == -1).ToList();
         var squaresInFirstRow = adjacentCoords.Where(o => o.Y == -1).ToList();
         squaresInFirstCol.Count.Should().Be(1);

@@ -137,7 +137,7 @@ public class ChitonRisk
             return coords;
 
         matrix.MoveTo(address);
-        coords = matrix.PerpendicularAdjacentCoords;
+        coords = matrix.OrthogonalAdjacentCoords;
         _neighborCache.Add(address, coords);
         return coords;
     }

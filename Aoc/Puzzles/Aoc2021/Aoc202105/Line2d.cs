@@ -5,7 +5,7 @@ public class Line2d
     public Position2d Start { get; }
     public Position2d End { get; }
     public List<Position2d> Positions { get; }
-    public bool IsPerpendicular { get; }
+    public bool IsOrthogonal { get; }
 
     public Line2d(Position2d a, Position2d b)
     {
@@ -17,7 +17,7 @@ public class Line2d
 
         var isHorizontal = a.Y == b.Y;
         var isVertical = a.X == b.X;
-        IsPerpendicular = isHorizontal || isVertical;
+        IsOrthogonal = isHorizontal || isVertical;
 
         Positions = GetPositions().ToList();
     }

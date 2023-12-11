@@ -76,7 +76,7 @@ public class Aoc202310 : AocPuzzle
                 continue; 
 
             enlargedMatrix.WriteValueAt(current, 'O');
-            var adjacent = enlargedMatrix.PerpendicularAdjacentCoordsTo(current);
+            var adjacent = enlargedMatrix.OrthogonalAdjacentCoordsTo(current);
             foreach (var a in adjacent)
             {
                 if (!seen.Contains(a))

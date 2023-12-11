@@ -105,13 +105,13 @@ public class DonutMazeSolver
         {
             var currentCoords = letterCoords.First();
             letterCoords.RemoveAt(0);
-            var secondsLetterCoords = _map.PerpendicularAdjacentCoordsTo(currentCoords).First(o => IsLetter(_map.ReadValueAt(o)));
+            var secondsLetterCoords = _map.OrthogonalAdjacentCoordsTo(currentCoords).First(o => IsLetter(_map.ReadValueAt(o)));
             var firstLetter = _map.ReadValueAt(currentCoords);
             var secondLetter = _map.ReadValueAt(secondsLetterCoords);
             letterCoords.Remove(secondsLetterCoords);
             _map.WriteValueAt(currentCoords, '#');
             _map.WriteValueAt(secondsLetterCoords, '#');
-            var secondLetterHasAdjacentCorridor = _map.PerpendicularAdjacentValuesTo(secondsLetterCoords).Any(o => o == '.');
+            var secondLetterHasAdjacentCorridor = _map.OrthogonalAdjacentValuesTo(secondsLetterCoords).Any(o => o == '.');
             var name = string.Concat(firstLetter, secondLetter);
             var portalAddress = secondLetterHasAdjacentCorridor ? secondsLetterCoords : currentCoords;
             _map.WriteValueAt(portalAddress, '.');

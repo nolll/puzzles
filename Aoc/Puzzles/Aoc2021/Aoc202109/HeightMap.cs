@@ -14,7 +14,7 @@ public class HeightMap
         foreach (var coord in coords)
         {
             var v = matrix.ReadValueAt(coord);
-            var adjacentValues = matrix.PerpendicularAdjacentValuesTo(coord);
+            var adjacentValues = matrix.OrthogonalAdjacentValuesTo(coord);
             var isLowPoint = !adjacentValues.Any(o => o <= v);
 
             if (isLowPoint)
@@ -55,7 +55,7 @@ public class HeightMap
                 if (matrix.ReadValueAt(c) < 9)
                 {
                     basinSize++;
-                    var adjacentCoords = matrix.PerpendicularAdjacentCoordsTo(c);
+                    var adjacentCoords = matrix.OrthogonalAdjacentCoordsTo(c);
                     foreach (var a in adjacentCoords)
                     {
                         if (!checkedCoords.Contains(a) && !coordsToCheck.Contains(a))

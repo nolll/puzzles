@@ -176,7 +176,7 @@ public class ChocolateBattle
         {
             if (_matrix.ReadValueAt(coord) != '#')
             {
-                var neighbors = _matrix.PerpendicularAdjacentCoordsTo(coord)
+                var neighbors = _matrix.OrthogonalAdjacentCoordsTo(coord)
                     .Where(o => _matrix.ReadValueAt(o) != '#')
                     .ToList();
                 _neighborCache.Add((coord.X, coord.Y), neighbors);

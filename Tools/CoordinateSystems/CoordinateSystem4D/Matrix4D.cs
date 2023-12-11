@@ -28,15 +28,8 @@ public class Matrix4D<T> where T : struct
         StartAddress = new Matrix4DAddress(0, 0, 0, 0);
     }
 
-    public bool TryMoveTo(Matrix4DAddress address)
-    {
-        return MoveTo(address, false);
-    }
-
-    public bool MoveTo(Matrix4DAddress address)
-    {
-        return MoveTo(address, true);
-    }
+    public bool TryMoveTo(Matrix4DAddress address) => MoveTo(address, false);
+    public bool MoveTo(Matrix4DAddress address) => MoveTo(address, true);
 
     private bool MoveTo(Matrix4DAddress address, bool extend)
     {
@@ -56,123 +49,49 @@ public class Matrix4D<T> where T : struct
         return true;
     }
 
-    public bool TryMoveTo(int x, int y, int z, int w)
-    {
-        return MoveTo(new Matrix4DAddress(x, y, z, w), false);
-    }
+    public bool TryMoveTo(int x, int y, int z, int w) => MoveTo(new Matrix4DAddress(x, y, z, w), false);
+    public bool MoveTo(int x, int y, int z, int w) => MoveTo(new Matrix4DAddress(x, y, z, w), true);
+    public bool TryMoveUp(int steps = 1) => MoveUp(steps, false);
+    public bool MoveUp(int steps = 1) => MoveUp(steps, true);
+    private bool MoveUp(int steps, bool extend) => MoveTo(new Matrix4DAddress(Address.X, Address.Y - steps, Address.Z, Address.W), extend);
+    public bool TryMoveRight(int steps = 1) => MoveRight(steps, false);
+    public bool MoveRight(int steps = 1) => MoveRight(steps, true);
+    private bool MoveRight(int steps, bool extend) => MoveTo(new Matrix4DAddress(Address.X + steps, Address.Y, Address.Z, Address.W), extend);
+    public bool TryMoveDown(int steps = 1) => MoveDown(steps, false);
+    public bool MoveDown(int steps = 1) => MoveDown(steps, true);
+    private bool MoveDown(int steps, bool extend) => MoveTo(new Matrix4DAddress(Address.X, Address.Y + steps, Address.Z, Address.W), extend);
+    public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
+    public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
+    private bool MoveLeft(int steps, bool extend) => MoveTo(new Matrix4DAddress(Address.X - steps, Address.Y, Address.Z, Address.W), extend);
+    public T ReadValue() => ReadValueAt(Address.X, Address.Y, Address.Z, Address.W);
+    public T ReadValueAt(Matrix4DAddress address) => ReadValueAt(address.X, address.Y, address.Z, address.W);
+    public T ReadValueAt(int x, int y, int z, int w) => _matrix[w][z][y][x];
+    public void WriteValue(T value) => _matrix[Address.W][Address.Z][Address.Y][Address.X] = value;
 
-    public bool MoveTo(int x, int y, int z, int w)
-    {
-        return MoveTo(new Matrix4DAddress(x, y, z, w), true);
-    }
+    public bool IsOutOfRange(Matrix4DAddress address) =>
+        address.W >= Duration ||
+        address.W < 0 ||
+        address.Z >= Depth ||
+        address.Z < 0 ||
+        address.Y >= Height ||
+        address.Y < 0 ||
+        address.X >= Width ||
+        address.X < 0;
 
-    public bool TryMoveUp(int steps = 1)
-    {
-        return MoveUp(steps, false);
-    }
+    public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
+    public IList<Matrix4DAddress> OrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-    public bool MoveUp(int steps = 1)
-    {
-        return MoveUp(steps, true);
-    }
-
-    private bool MoveUp(int steps, bool extend)
-    {
-        return MoveTo(new Matrix4DAddress(Address.X, Address.Y - steps, Address.Z, Address.W), extend);
-    }
-
-    public bool TryMoveRight(int steps = 1)
-    {
-        return MoveRight(steps, false);
-    }
-
-    public bool MoveRight(int steps = 1)
-    {
-        return MoveRight(steps, true);
-    }
-
-    private bool MoveRight(int steps, bool extend)
-    {
-        return MoveTo(new Matrix4DAddress(Address.X + steps, Address.Y, Address.Z, Address.W), extend);
-    }
-
-    public bool TryMoveDown(int steps = 1)
-    {
-        return MoveDown(steps, false);
-    }
-
-    public bool MoveDown(int steps = 1)
-    {
-        return MoveDown(steps, true);
-    }
-
-    private bool MoveDown(int steps, bool extend)
-    {
-        return MoveTo(new Matrix4DAddress(Address.X, Address.Y + steps, Address.Z, Address.W), extend);
-    }
-
-    public bool TryMoveLeft(int steps = 1)
-    {
-        return MoveLeft(steps, false);
-    }
-
-    public bool MoveLeft(int steps = 1)
-    {
-        return MoveLeft(steps, true);
-    }
-
-    private bool MoveLeft(int steps, bool extend)
-    {
-        return MoveTo(new Matrix4DAddress(Address.X - steps, Address.Y, Address.Z, Address.W), extend);
-    }
-
-    public T ReadValue()
-    {
-        return ReadValueAt(Address.X, Address.Y, Address.Z, Address.W);
-    }
-
-    public T ReadValueAt(Matrix4DAddress address)
-    {
-        return ReadValueAt(address.X, address.Y, address.Z, address.W);
-    }
-
-    public T ReadValueAt(int x, int y, int z, int w)
-    {
-        return _matrix[w][z][y][x];
-    }
-
-    public void WriteValue(T value)
-    {
-        _matrix[Address.W][Address.Z][Address.Y][Address.X] = value;
-    }
-
-    public bool IsOutOfRange(Matrix4DAddress address)
-    {
-        return address.W >= Duration ||
-               address.W < 0 ||
-               address.Z >= Depth ||
-               address.Z < 0 ||
-               address.Y >= Height ||
-               address.Y < 0 ||
-               address.X >= Width ||
-               address.X < 0;
-    }
-
-    public IList<T> PerpendicularAdjacentValues => PerpendicularAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<Matrix4DAddress> PerpendicularAdjacentCoords => PossiblePerpendicularAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
-        
-    private IList<Matrix4DAddress> PossiblePerpendicularAdjacentCoords =>
-        new List<Matrix4DAddress>
-        {
-            new Matrix4DAddress(Address.X + 1, Address.Y, Address.Z, Address.W),
-            new Matrix4DAddress(Address.X - 1, Address.Y, Address.Z, Address.W),
-            new Matrix4DAddress(Address.X, Address.Y + 1, Address.Z, Address.W),
-            new Matrix4DAddress(Address.X, Address.Y - 1, Address.Z, Address.W),
-            new Matrix4DAddress(Address.X, Address.Y, Address.Z + 1, Address.W),
-            new Matrix4DAddress(Address.X, Address.Y, Address.Z - 1, Address.W),
-            new Matrix4DAddress(Address.X, Address.Y, Address.Z, Address.W + 1),
-            new Matrix4DAddress(Address.X, Address.Y, Address.Z, Address.W - 1)
-        };
+    private IList<Matrix4DAddress> PossibleOrthogonalAdjacentCoords =>
+    [
+        new(Address.X + 1, Address.Y, Address.Z, Address.W),
+        new(Address.X - 1, Address.Y, Address.Z, Address.W),
+        new(Address.X, Address.Y + 1, Address.Z, Address.W),
+        new(Address.X, Address.Y - 1, Address.Z, Address.W),
+        new(Address.X, Address.Y, Address.Z + 1, Address.W),
+        new(Address.X, Address.Y, Address.Z - 1, Address.W),
+        new(Address.X, Address.Y, Address.Z, Address.W + 1),
+        new(Address.X, Address.Y, Address.Z, Address.W - 1)
+    ];
 
     public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
     public IList<Matrix4DAddress> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();

@@ -35,7 +35,7 @@ public class RecursiveDonutMazeSolver
             var currentCoords = letterCoords.First();
             letterCoords.RemoveAt(0);
             matrix.MoveTo(currentCoords);
-            var secondLetterCoords = matrix.PerpendicularAdjacentCoords.First(o => IsLetter(matrix.ReadValueAt(o)));
+            var secondLetterCoords = matrix.OrthogonalAdjacentCoords.First(o => IsLetter(matrix.ReadValueAt(o)));
             var firstLetter = matrix.ReadValueAt(currentCoords);
             var secondLetter = matrix.ReadValueAt(secondLetterCoords);
             letterCoords.Remove(secondLetterCoords);
@@ -43,12 +43,12 @@ public class RecursiveDonutMazeSolver
             matrix.WriteValue(Chars.Wall);
             matrix.MoveTo(secondLetterCoords);
             matrix.WriteValue(Chars.Wall);
-            var secondLetterHasAdjacentCorridor = matrix.PerpendicularAdjacentValues.Any(o => o == Chars.Path);
+            var secondLetterHasAdjacentCorridor = matrix.OrthogonalAdjacentValues.Any(o => o == Chars.Path);
             matrix.MoveTo(currentCoords);
             var name = string.Concat(firstLetter, secondLetter);
             var letterAddress = secondLetterHasAdjacentCorridor ? secondLetterCoords : currentCoords;
             matrix.MoveTo(letterAddress);
-            var portalAddress = matrix.PerpendicularAdjacentCoords.First(o => matrix.ReadValueAt(o) == Chars.Path);
+            var portalAddress = matrix.OrthogonalAdjacentCoords.First(o => matrix.ReadValueAt(o) == Chars.Path);
             if (name == "AA")
             {
                 _startAddress = portalAddress;
@@ -99,7 +99,7 @@ public class RecursiveDonutMazeSolver
         foreach (var coord in matrix.Coords)
         {
             var coords = matrix
-                .PerpendicularAdjacentCoordsTo(coord)
+                .OrthogonalAdjacentCoordsTo(coord)
                 .Where(o => matrix.ReadValueAt(o) == Chars.Path)
                 .ToList();
             dictionary.Add(coord.Tuple, coords);

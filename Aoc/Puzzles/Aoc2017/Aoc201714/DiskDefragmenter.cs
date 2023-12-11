@@ -42,7 +42,7 @@ public class DiskDefragmenter
                             var atp = addressesToProcess.First();
                             processed.Add(atp.Id, currentRegion);
                             addressesToProcess.RemoveAt(0);
-                            var adjacent = disk.PerpendicularAdjacentCoordsTo(atp);
+                            var adjacent = disk.OrthogonalAdjacentCoordsTo(atp);
                             var coordsToAdd = adjacent.Where(o =>
                                 disk.ReadValueAt(o) == '#' &&
                                 !processed.ContainsKey(o.Id) &&

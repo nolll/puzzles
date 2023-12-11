@@ -2,5 +2,5 @@
 
 public static class MatrixConstants
 {
-    public static int[] AdjacentDeltas = { -1, 0, 1 };
+    public static readonly int[] AdjacentDeltas = [-1, 0, 1];
 }

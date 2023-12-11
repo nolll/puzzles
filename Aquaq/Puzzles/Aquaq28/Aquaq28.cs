@@ -5,7 +5,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq28;
 
 [Name("Hall of Mirrors")]
-public class Aquaq28(string input) : AquaqPuzzle(input)
+public class Aquaq28(string input) : AquaqPuzzle
 {
     private const char MirrorLeft = '\\';
     private const char MirrorRight = '/';
@@ -14,7 +14,7 @@ public class Aquaq28(string input) : AquaqPuzzle(input)
 
     protected override PuzzleResult Run()
     {
-        var result = Encrypt(Input, "FISSION_MAILED");
+        var result = Encrypt(input, "FISSION_MAILED");
 
         return new PuzzleResult(result, "b2f9a54afc1e88e86671425bfc4e48b4");
     }

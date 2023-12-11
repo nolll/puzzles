@@ -3,14 +3,14 @@
 namespace Pzl.Aquaq.Puzzles.Aquaq39;
 
 [Name("Game of Throwns")]
-public class Aquaq39(string input) : AquaqPuzzle(input)
+public class Aquaq39(string input) : AquaqPuzzle
 {
     private const int GameTarget = 501;
     private const int DartsPerTurn = 3;
 
     protected override PuzzleResult Run()
     {
-        var result = PlayGame(Input);
+        var result = PlayGame(input);
 
         return new PuzzleResult(result, "5522d4ea2615abc82626c1563f788ce8");
     }

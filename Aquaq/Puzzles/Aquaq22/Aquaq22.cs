@@ -5,11 +5,11 @@ using Pzl.Tools.Numbers;
 namespace Pzl.Aquaq.Puzzles.Aquaq22;
 
 [Name("Veni Vidi Vitavi")]
-public class Aquaq22(string input) : AquaqPuzzle(input)
+public class Aquaq22(string input) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
-        var numbers = Input.Split(' ').Select(int.Parse);
+        var numbers = input.Split(' ').Select(int.Parse);
         var romanNumbers = numbers.Select(Conversion.ToRoman);
         var sum = ToCaesarCipherSum(string.Join("", romanNumbers));
 

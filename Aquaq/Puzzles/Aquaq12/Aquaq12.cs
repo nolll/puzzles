@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq12;
 
 [Name("A Day In The Lift")]
-public class Aquaq12(string input) : AquaqPuzzle(input)
+public class Aquaq12(string input) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
-        var result = RideLift(Input);
+        var result = RideLift(input);
 
         return new PuzzleResult(result, "a6668fd005e7ebda4e124253eea1e56e");
     }

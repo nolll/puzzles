@@ -6,12 +6,11 @@ namespace Pzl.Aquaq.Puzzles.Aquaq35;
 
 [AdditionalCommonInputFile("Words.txt")]
 [Name("Columns")]
-public class Aquaq35(string input, string additionalFile) : AquaqPuzzle(input, additionalFile)
+public class Aquaq35(string input, string additionalInput) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
-        var words = StringReader.ReadLines(AdditionalInput);
-        var input = Input;
+        var words = StringReader.ReadLines(additionalInput);
 
         var keyword = FindKeyword(words, input);
 

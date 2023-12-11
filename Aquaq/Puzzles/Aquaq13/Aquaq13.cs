@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq13;
 
 [Name("O RLE?")]
-public class Aquaq13(string input) : AquaqPuzzle(input)
+public class Aquaq13(string input) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
-        var lines = StringReader.ReadLines(Input);
+        var lines = StringReader.ReadLines(input);
         var sum = lines.Sum(FindMaxRepeats);
 
         return new PuzzleResult(sum, "86680930d41e9acceb49215121585640");

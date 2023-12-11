@@ -5,21 +5,21 @@ namespace Pzl.Aquaq.Puzzles.Aquaq16;
 
 [AdditionalLocalInputFile("Alphabet.txt")]
 [Name("Keming")]
-public class Aquaq16(string input, string additionalInput) : AquaqPuzzle(input, additionalInput)
+public class Aquaq16(string input, string additionalInput) : AquaqPuzzle
 {
     private const int LetterHeight = 6;
 
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(Input), "b900eb74f94c2243de65005bcc4ebd2c");
+        return new PuzzleResult(Run(input), "b900eb74f94c2243de65005bcc4ebd2c");
     }
 
-    public int Run(string input)
+    public int Run(string input2)
     {
-        var alphabet = ParseLetters(AdditionalInput)
+        var alphabet = ParseLetters(additionalInput)
             .ToDictionary(k => k.Character, v => v);
 
-        var letters = input.ToCharArray().Select(o => alphabet[o]).ToArray();
+        var letters = input2.ToCharArray().Select(o => alphabet[o]).ToArray();
         var spaceCount = 0;
         for (var i = 0; i < letters.Length - 1; i++)
         {

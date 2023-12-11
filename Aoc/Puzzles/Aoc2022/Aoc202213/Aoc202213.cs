@@ -3,12 +3,12 @@
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202213;
 
 [Name("Distress Signal")]
-public class Aoc202213(string input) : AocPuzzle(input)
+public class Aoc202213(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
         var signal = new DistressSignal();
-        var result = signal.Part1(Input);
+        var result = signal.Part1(input);
 
         return new PuzzleResult(result, "b7ce4fc8127f3ae910077459ccdd2466");
     }
@@ -16,7 +16,7 @@ public class Aoc202213(string input) : AocPuzzle(input)
     protected override PuzzleResult RunPart2()
     {
         var signal = new DistressSignal();
-        var result = signal.Part2(Input);
+        var result = signal.Part2(input);
 
         return new PuzzleResult(result, "dae06225ebac50b689604b2ca86cfabf");
     }

@@ -4,13 +4,13 @@ using Pzl.Common;
 namespace Pzl.Aquaq.Puzzles.Aquaq01;
 
 [Name("Rose by any other name")]
-public class Aquaq01(string input) : AquaqPuzzle(input)
+public class Aquaq01(string input) : AquaqPuzzle
 {
     private static readonly Regex HexRegex = new("[^0123456789abcdef]");
 
     protected override PuzzleResult Run()
     {
-        var result = GetHexString(Input);
+        var result = GetHexString(input);
 
         return new PuzzleResult(result, "8ee5a43d96dd610ecf1d39eccfddf218");
     }

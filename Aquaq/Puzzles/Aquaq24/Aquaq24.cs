@@ -5,11 +5,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq24;
 
 [Name("Huff and Puff")]
-public class Aquaq24(string input) : AquaqPuzzle(input)
+public class Aquaq24(string input) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
-        var parts = StringReader.ReadLines(Input);
+        var parts = StringReader.ReadLines(input);
 
         var charset = parts[0];
         var encoded = parts[1];

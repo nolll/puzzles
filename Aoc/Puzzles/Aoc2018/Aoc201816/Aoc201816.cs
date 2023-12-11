@@ -4,11 +4,11 @@ using Pzl.Tools.Computers.Operation;
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201816;
 
 [Name("Chronal Classification")]
-public class Aoc201816(string input) : AocPuzzle(input)
+public class Aoc201816(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var inputs = Input.Split("\r\n\r\n\r\n");
+        var inputs = input.Split("\r\n\r\n\r\n");
         var input1 = inputs.First();
             
         var computer = new OpComputer();
@@ -18,7 +18,7 @@ public class Aoc201816(string input) : AocPuzzle(input)
 
     protected override PuzzleResult RunPart2()
     {
-        var inputs = Input.Split("\r\n\r\n\r\n");
+        var inputs = input.Split("\r\n\r\n\r\n");
         var input1 = inputs.First();
         var input2 = inputs.Last();
 

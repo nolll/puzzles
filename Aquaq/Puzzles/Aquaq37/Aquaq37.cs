@@ -5,25 +5,25 @@ namespace Pzl.Aquaq.Puzzles.Aquaq37;
 
 [AdditionalCommonInputFile("Words.txt")]
 [Name("GUESS WORDS")]
-public class Aquaq37(string input, string additionalInput) : AquaqPuzzle(input, additionalInput)
+public class Aquaq37(string input, string additionalInput) : AquaqPuzzle
 {
     private const int WordLength = 5;
 
     protected override PuzzleResult Run()
     {
-        var words = FindWords(Input);
+        var words = FindWords(input);
         var score = words.Sum(GetWordScore);
 
         return new PuzzleResult(score, "ba0ef798d7f57b80a0675236159ccfb1");
     }
 
-    public List<string> FindWords(string input)
+    public List<string> FindWords(string input2)
     {
-        var words = StringReader.ReadLines(AdditionalInput)
+        var words = StringReader.ReadLines(additionalInput)
             .Where(o => o.Length == WordLength)
             .ToList();
 
-        var guesses = StringReader.ReadLines(input)
+        var guesses = StringReader.ReadLines(input2)
             .Skip(1)
             .Select(ParseGuess)
             .ToList();

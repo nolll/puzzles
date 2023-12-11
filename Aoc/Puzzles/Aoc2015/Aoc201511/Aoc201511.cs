@@ -3,13 +3,13 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201511;
 
 [Name("Corporate Policy")]
-public class Aoc201511() : AocPuzzle("hxbxwxba")
+public class Aoc201511(string input) : AocPuzzle
 {
     private CorporatePasswordValidator? _validator;
     private string? _firstPassword;
 
     private CorporatePasswordValidator Validator => _validator ??= new CorporatePasswordValidator();
-    private string FirstPassword => _firstPassword ??= Validator.FindNextPassword(Input);
+    private string FirstPassword => _firstPassword ??= Validator.FindNextPassword(input);
 
     protected override PuzzleResult RunPart1()
     {

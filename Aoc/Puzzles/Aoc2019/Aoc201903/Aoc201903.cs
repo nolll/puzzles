@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201903;
 
 [Name("Crossed Wires")]
-public class Aoc201903(string input) : AocPuzzle(input)
+public class Aoc201903(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var wirePaths = StringReader.ReadLines(Input);
+        var wirePaths = StringReader.ReadLines(input);
         var wirePathA = wirePaths[0];
         var wirePathB = wirePaths[1];
 
@@ -19,7 +19,7 @@ public class Aoc201903(string input) : AocPuzzle(input)
 
     protected override PuzzleResult RunPart2()
     {
-        var wirePaths = StringReader.ReadLines(Input);
+        var wirePaths = StringReader.ReadLines(input);
         var wirePathA = wirePaths[0];
         var wirePathB = wirePaths[1];
 

@@ -4,9 +4,9 @@ using Pzl.Tools.Numbers;
 namespace Pzl.Aquaq.Puzzles.Aquaq04;
 
 [Name("This is good co-primen")]
-public class Aquaq04(string input) : AquaqPuzzle(input)
+public class Aquaq04(string input) : AquaqPuzzle
 {
-    private int IntInput => int.Parse(Input);
+    private int IntInput => int.Parse(input);
 
     protected override PuzzleResult Run()
     {

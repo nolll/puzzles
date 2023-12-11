@@ -3,11 +3,11 @@
 namespace Pzl.Aquaq.Puzzles.Aquaq40;
 
 [Name("Prominence promenade")]
-public class Aquaq40(string input) : AquaqPuzzle(input)
+public class Aquaq40(string input) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
-        var sum = GetSum(Input);
+        var sum = GetSum(input);
 
         return new PuzzleResult(sum, "d0882d4e6f6cf4f90adcda93e5d420bc");
     }

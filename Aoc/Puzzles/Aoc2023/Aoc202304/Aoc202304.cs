@@ -4,18 +4,18 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202304;
 
 [Name("Scratchcards")]
-public class Aoc202304(string input) : AocPuzzle(input)
+public class Aoc202304(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var result = FlipThroughCards(Input);
+        var result = FlipThroughCards(input);
 
         return new PuzzleResult(result.Score, "5e02a1c34982f7f74973f0d751dd71da");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var result = FlipThroughCards(Input);
+        var result = FlipThroughCards(input);
 
         return new PuzzleResult(result.CardCount, "283e4ad08baa8b2611e44898628a8363");
     }

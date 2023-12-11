@@ -5,7 +5,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq14;
 
 [Name("That's a bingo")]
-public class Aquaq14(string input) : AquaqPuzzle(input)
+public class Aquaq14(string input) : AquaqPuzzle
 {
     private const int BoardSize = 5;
     
@@ -24,7 +24,7 @@ public class Aquaq14(string input) : AquaqPuzzle(input)
 
     protected override PuzzleResult Run()
     {
-        var result = PlayBingo(Input);
+        var result = PlayBingo(input);
         return new PuzzleResult(result, "d9665f8161f8ada6709d7be1564965fa");
     }
 

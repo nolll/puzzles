@@ -3,9 +3,9 @@
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201619;
 
 [Name("An Elephant Named Joseph")]
-public class Aoc201619(string input) : AocPuzzle(input)
+public class Aoc201619(string input) : AocPuzzle
 {
-    private int IntInput => int.Parse(Input);
+    private int IntInput => int.Parse(input);
 
     protected override PuzzleResult RunPart1()
     {

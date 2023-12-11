@@ -3,9 +3,9 @@
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201811;
 
 [Name("Chronal Charge")]
-public class Aoc201811(string input) : AocPuzzle(input)
+public class Aoc201811(string input) : AocPuzzle
 {
-    private int IntInput => int.Parse(Input);
+    private int IntInput => int.Parse(input);
 
     protected override PuzzleResult RunPart1()
     {

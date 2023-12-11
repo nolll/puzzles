@@ -2,4 +2,4 @@
 
 namespace Pzl.Euler;
 
-public abstract class EulerPuzzle(string? input = null) : OnePartPuzzle(input);
+public abstract class EulerPuzzle : OnePartPuzzle;

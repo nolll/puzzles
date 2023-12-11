@@ -5,17 +5,17 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202222;
 
 [Name("Monkey Map")]
-public class Aoc202222(string input) : AocPuzzle(input)
+public class Aoc202222(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var result = Part1(Input);
+        var result = Part1(input);
         return new PuzzleResult(result, "5230885ca3521519a0995658751be3a5");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var result = Part2(Input);
+        var result = Part2(input);
         return new PuzzleResult(result, "192dc6b2bb8fcfe7b7deaa5f30ec9f80");
     }
 

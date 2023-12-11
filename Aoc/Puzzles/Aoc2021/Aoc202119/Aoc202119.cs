@@ -4,7 +4,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202119;
 
 [IsSlow]
 [Name("Beacon Scanner")]
-public class Aoc202119(string input) : AocPuzzle(input)
+public class Aoc202119(string input) : AocPuzzle
 {
     private BeaconSystemResult? _result;
 
@@ -27,7 +27,7 @@ public class Aoc202119(string input) : AocPuzzle(input)
         if(_result == null)
         {
             var system = new BeaconSystem();
-            _result = system.GetResult(Input);
+            _result = system.GetResult(input);
         }
 
         return _result;

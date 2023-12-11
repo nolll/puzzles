@@ -4,7 +4,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq25;
 
 [Name("S'morse")]
-public class Aquaq25(string input) : AquaqPuzzle(input)
+public class Aquaq25(string input) : AquaqPuzzle
 {
     private static readonly Dictionary<char, string> CharToMorse = new()
     {
@@ -40,7 +40,7 @@ public class Aquaq25(string input) : AquaqPuzzle(input)
 
     protected override PuzzleResult Run()
     {
-        var morse = ClicksToMorse(Input);
+        var morse = ClicksToMorse(input);
         var result = DecodeMorse(morse);
         var resultParts = result.Split(' ');
 

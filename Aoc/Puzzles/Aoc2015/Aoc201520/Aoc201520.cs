@@ -3,9 +3,9 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201520;
 
 [Name("Infinite Elves and Infinite Houses")]
-public class Aoc201520(string input) : AocPuzzle(input)
+public class Aoc201520(string input) : AocPuzzle
 {
-    private int IntInput => int.Parse(Input);
+    private int IntInput => int.Parse(input);
 
     protected override PuzzleResult RunPart1()
     {

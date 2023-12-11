@@ -3,11 +3,11 @@
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201904;
 
 [Name("Secure Container")]
-public class Aoc201904() : AocPuzzle("357253-892942")
+public class Aoc201904(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var passwordBounds = Input.Split('-');
+        var passwordBounds = input.Split('-');
         var passwordLowerbound = int.Parse(passwordBounds[0]);
         var passwordUpperbound = int.Parse(passwordBounds[1]);
 
@@ -19,7 +19,7 @@ public class Aoc201904() : AocPuzzle("357253-892942")
 
     protected override PuzzleResult RunPart2()
     {
-        var passwordBounds = Input.Split('-');
+        var passwordBounds = input.Split('-');
         var passwordLowerbound = int.Parse(passwordBounds[0]);
         var passwordUpperbound = int.Parse(passwordBounds[1]);
 

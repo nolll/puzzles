@@ -3,9 +3,9 @@
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202023;
 
 [Name("Crab Cups")]
-public class Aoc202023(string input) : AocPuzzle(input)
+public class Aoc202023(string input) : AocPuzzle
 {
-    private int IntInput => int.Parse(Input);
+    private int IntInput => int.Parse(input);
 
     protected override PuzzleResult RunPart1()
     {

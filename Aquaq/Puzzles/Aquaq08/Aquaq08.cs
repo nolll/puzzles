@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq08;
 
 [Name("Cron Flakes")]
-public class Aquaq08(string input) : AquaqPuzzle(input)
+public class Aquaq08(string input) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
-        var (milk, cereal) = Run(Input);
+        var (milk, cereal) = Run(input);
         var sum = milk + cereal;
 
         return new PuzzleResult(sum, "dd27abc4b9d9ddead1ae574a69b3edbc");

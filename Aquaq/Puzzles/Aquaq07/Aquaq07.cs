@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq07;
 
 [Name("What is best in life?")]
-public class Aquaq07(string input) : AquaqPuzzle(input)
+public class Aquaq07(string input) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
-        var games = StringReader.ReadLines(Input)
+        var games = StringReader.ReadLines(input)
             .Skip(1)
             .Select(o => o.Split(','))
             .ToList();

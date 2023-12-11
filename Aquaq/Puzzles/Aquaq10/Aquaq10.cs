@@ -5,11 +5,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq10;
 
 [Name("Troll Toll")]
-public class Aquaq10(string input) : AquaqPuzzle(input)
+public class Aquaq10(string input) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
-        var result = Run(Input, "TUPAC", "DIDDY");
+        var result = Run(input, "TUPAC", "DIDDY");
 
         return new PuzzleResult(result, "970a7dc35bbbeae207c821cbc8bbb930");
     }

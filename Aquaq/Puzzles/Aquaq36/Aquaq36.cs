@@ -7,12 +7,12 @@ namespace Pzl.Aquaq.Puzzles.Aquaq36;
 [IsSlow]
 [NeedsRewrite]
 [Name("Tetonor Terror")]
-public class Aquaq36(string input) : AquaqPuzzle(input)
+public class Aquaq36(string input) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
         var factorProvider = new FactorCache();
-        var tetonors = StringReader.ReadStringGroups(Input);
+        var tetonors = StringReader.ReadStringGroups(input);
         var sum = 0;
 
         foreach (var tetonor in tetonors)

@@ -6,16 +6,16 @@ namespace Pzl.Aquaq.Puzzles.Aquaq15;
 
 [AdditionalCommonInputFile("Words.txt")]
 [Name("word wore more mare maze")]
-public class Aquaq15(string input, string additionalInput) : AquaqPuzzle(input, additionalInput)
+public class Aquaq15(string input, string additionalInput) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(Input), "ffafde1afff1c3904275c8225e772bf1");
+        return new PuzzleResult(Run(input), "ffafde1afff1c3904275c8225e772bf1");
     }
 
-    public int Run(string input) 
+    public int Run(string input2) 
     {
-        var transformations = StringReader.ReadLines(input)
+        var transformations = StringReader.ReadLines(input2)
             .Select(o => o.Split(','))
             .Select(o => new WordTransformation(o[0], o[1]))
             .ToList();
@@ -24,7 +24,7 @@ public class Aquaq15(string input, string additionalInput) : AquaqPuzzle(input, 
         var maxLength = wordLengths.Max();
         var minLength = wordLengths.Min();
 
-        var validWords = StringReader.ReadLines(AdditionalInput)
+        var validWords = StringReader.ReadLines(additionalInput)
             .Where(o => o.Length >= minLength && o.Length <= maxLength)
             .GroupBy(o => o.Length)
             .ToDictionary(k => k.Key, o => BuildInputs(o.ToList()).ToList());

@@ -5,65 +5,59 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202223;
 
 [Name("Unstable Diffusion")]
-public class Aoc202223 : AocPuzzle
+public class Aoc202223(string input) : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    private static readonly (int x, int y) North = (0, -1);
+    private static readonly (int x, int y) NorthEast = (1, -1);
+    private static readonly (int x, int y) East = (1, 0);
+    private static readonly (int x, int y) SouthEast = (1, 1);
+    private static readonly (int x, int y) South = (0, 1);
+    private static readonly (int x, int y) SouthWest = (-1, 1);
+    private static readonly (int x, int y) West = (-1, 0);
+    private static readonly (int x, int y) NorthWest = (-1, -1);
+
+    private readonly List<List<(int x, int y)>> _searchDeltas = new()
     {
-        var (emptyCount, _) = Run(Input, 10);
+        new () { North, NorthWest, NorthEast },
+        new () { South, SouthWest, SouthEast },
+        new() { West, NorthWest, SouthWest },
+        new() { East, NorthEast, SouthEast }
+    };
+
+    private readonly List<(int x, int y)> _searchResults = new()
+    {
+        North,
+        South,
+        West,
+        East
+    };
+
+    private readonly List<(int x, int y)> _deltas = new()
+    {
+        North,
+        NorthEast,
+        East,
+        SouthEast,
+        South,
+        SouthWest,
+        West,
+        NorthWest,
+    };
+
+protected override PuzzleResult RunPart1()
+    {
+        var (emptyCount, _) = Run(input, 10);
 
         return new PuzzleResult(emptyCount, "b2078a7c2a582e68796f55a71f1fe1cd");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var (_, endRound) = Run(Input);
+        var (_, endRound) = Run(input);
 
         return new PuzzleResult(endRound, "b4b9f7dae4709930cd73d70f45eac0ae");
     }
-
-    private readonly (int x, int y) _north = (0, -1);
-    private readonly (int x, int y) _northEast = (1, -1);
-    private readonly (int x, int y) _east = (1, 0);
-    private readonly (int x, int y) _southEast = (1, 1);
-    private readonly (int x, int y) _south = (0, 1);
-    private readonly (int x, int y) _southWest = (-1, 1);
-    private readonly (int x, int y) _west = (-1, 0);
-    private readonly (int x, int y) _northWest = (-1, -1);
-    private readonly List<List<(int x, int y)>> _searchDeltas;
-    private readonly List<(int x, int y)> _searchResults;
-    private readonly List<(int x, int y)> _deltas;
-
-    public Aoc202223(string input) : base(input)
-    {
-        _searchDeltas = new List<List<(int x, int y)>>
-        {
-            new() { _north, _northWest, _northEast },
-            new() { _south, _southWest, _southEast },
-            new() { _west, _northWest, _southWest },
-            new() { _east, _northEast, _southEast }
-        };
-
-        _searchResults = new List<(int x, int y)>
-        {
-            _north,
-            _south,
-            _west,
-            _east
-        };
-
-        _deltas = new List<(int x, int y)>
-        {
-            _north,
-            _northEast,
-            _east,
-            _southEast,
-            _south,
-            _southWest,
-            _west,
-            _northWest,
-        };
-    }
-
+    
     public (int emptyCount, int endRound) Run(string input, int rounds = int.MaxValue)
     {
         var elves = ParseElves(input);

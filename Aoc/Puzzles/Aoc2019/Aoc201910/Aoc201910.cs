@@ -3,12 +3,12 @@
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201910;
 
 [Name("Monitoring Station")]
-public class Aoc201910(string input) : AocPuzzle(input)
+public class Aoc201910(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
         var detector = new AsteroidDetector();
-        var detectorResult = detector.Detect(Input);
+        var detectorResult = detector.Detect(input);
 
         return new PuzzleResult(detectorResult.RayCount, "1ce0626fd555d7e4aa7dfebfe816d1ed");
     }
@@ -16,7 +16,7 @@ public class Aoc201910(string input) : AocPuzzle(input)
     protected override PuzzleResult RunPart2()
     {
         var vaporizer = new AsteroidVaporizer();
-        var vaporizeResult = vaporizer.Vaporize(Input);
+        var vaporizeResult = vaporizer.Vaporize(input);
         var asteroidNr200 = vaporizeResult.DestroyedAsteroids[199];
         var result = asteroidNr200.X * 100 + asteroidNr200.Y;
 

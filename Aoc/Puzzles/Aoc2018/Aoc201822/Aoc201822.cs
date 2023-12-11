@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201822;
 
 [Name("Mode Maze")]
-public class Aoc201822(string input) : AocPuzzle(input)
+public class Aoc201822(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var rows = StringReader.ReadLines(Input);
+        var rows = StringReader.ReadLines(input);
         var depth = int.Parse(rows.First().Split(' ').Last());
         var targetCoords = rows.Last().Split(' ').Last().Split(',').Select(int.Parse).ToList();
         var targetX = targetCoords.First();
@@ -20,7 +20,7 @@ public class Aoc201822(string input) : AocPuzzle(input)
 
     protected override PuzzleResult RunPart2()
     {
-        var rows = StringReader.ReadLines(Input);
+        var rows = StringReader.ReadLines(input);
         var depth = int.Parse(rows.First().Split(' ').Last());
         var targetCoords = rows.Last().Split(' ').Last().Split(',').Select(int.Parse).ToList();
         var targetX = targetCoords.First();

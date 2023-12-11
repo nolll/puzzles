@@ -3,19 +3,19 @@
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201606;
 
 [Name("Signals and Noise")]
-public class Aoc201606(string input) : AocPuzzle(input)
+public class Aoc201606(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
         var reader = new RepetitionCodeReader();
-        var messageMostCommon = reader.ReadMostCommon(Input);
+        var messageMostCommon = reader.ReadMostCommon(input);
         return new PuzzleResult(messageMostCommon, "d501463dd43fdef3d85d722210ab3940");
     }
 
     protected override PuzzleResult RunPart2()
     {
         var reader = new RepetitionCodeReader();
-        var messageLeastCommon = reader.ReadLeastCommon(Input);
+        var messageLeastCommon = reader.ReadLeastCommon(input);
         return new PuzzleResult(messageLeastCommon, "509675b487b1cf475001b9592fab4a95");
     }
 }

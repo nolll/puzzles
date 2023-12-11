@@ -4,18 +4,18 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202221;
 
 [Name("Monkey Math")]
-public class Aoc202221(string input) : AocPuzzle(input)
+public class Aoc202221(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var result = Part1(Input);
+        var result = Part1(input);
 
         return new PuzzleResult(result, "b3adb16b1c9bf83decdb14842cf25854");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var result = Part2(Input);
+        var result = Part2(input);
 
         return new PuzzleResult(result, "cdbf9008c2bea6596aa238829913849e");
     }

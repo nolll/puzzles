@@ -5,14 +5,14 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq11;
 
 [Name("Boxed In")]
-public class Aquaq11(string input) : AquaqPuzzle(input)
+public class Aquaq11(string input) : AquaqPuzzle
 {
     private const char Empty = '.';
     private const char Filled = '#';
 
     protected override PuzzleResult Run()
     {
-        var result = CountRequiredTiles(Input);
+        var result = CountRequiredTiles(input);
 
         return new PuzzleResult(result, "f8ed67eec68206fe2abe5c3685719e46");
     }

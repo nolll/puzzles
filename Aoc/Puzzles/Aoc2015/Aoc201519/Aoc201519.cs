@@ -3,18 +3,18 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201519;
 
 [Name("Medicine for Rudolph")]
-public class Aoc201519(string input) : AocPuzzle(input)
+public class Aoc201519(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var machine = new MedicineMachine(Input);
+        var machine = new MedicineMachine(input);
         var molecules = machine.GetCalibrationMolecules(TargetMolecule);
         return new PuzzleResult(molecules.Count, "77a78fac5dfd9115e594172b543d74fd");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        var machine = new MedicineMachine(Input);
+        var machine = new MedicineMachine(input);
         var steps = machine.StepsToMake(TargetMolecule);
         return new PuzzleResult(steps, "905da6933274380eec1c8efe61ee0350");
     }

@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq17;
 
 [Name("The Beautiful Shame")]
-public class Aquaq17(string input) : AquaqPuzzle(input)
+public class Aquaq17(string input) : AquaqPuzzle
 {
     protected override PuzzleResult Run()
     {
-        return new PuzzleResult(Run(Input), "033640f1946bb06d49b637ee7b1c3a80");
+        return new PuzzleResult(Run(input), "033640f1946bb06d49b637ee7b1c3a80");
     }
 
     public static string Run(string input)

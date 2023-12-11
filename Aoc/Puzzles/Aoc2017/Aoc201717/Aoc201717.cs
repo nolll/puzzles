@@ -3,9 +3,9 @@
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201717;
 
 [Name("Spinlock")]
-public class Aoc201717(string input) : AocPuzzle(input)
+public class Aoc201717(string input) : AocPuzzle
 {
-    private int IntInput => int.Parse(Input);
+    private int IntInput => int.Parse(input);
 
     protected override PuzzleResult RunPart1()
     {

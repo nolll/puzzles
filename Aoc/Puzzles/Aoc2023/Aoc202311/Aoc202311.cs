@@ -19,51 +19,17 @@ public class Aoc202311 : AocPuzzle
     public static long Distances(string input, long multiplier)
     {
         var matrix = MatrixBuilder.BuildCharMatrix(input);
-        var expandedCols = new List<long>();
-        var expandedX = 0L;
-        for (var x = 0; x <= matrix.XMax; x++)
-        {
-            var galaxies = 0;
-            for (var y = 0; y <= matrix.YMax; y++)
-            {
-                if (matrix.ReadValueAt(x, y) == '#')
-                {
-                    galaxies++;
-                }
-            }
-
-            if(galaxies == 0)
-            {
-                expandedX += multiplier - 1;
-            }
-
-            expandedCols.Add(x + expandedX);
-        }
-
-        var expandedRows = new List<long>();
-        var expandedY = 0L;
-        for (var y = 0; y <= matrix.YMax; y++)
-        {
-            var galaxies = 0;
-            for (var x = 0; x <= matrix.XMax; x++)
-            {
-                if (matrix.ReadValueAt(x, y) == '#')
-                {
-                    galaxies++;
-                }
-            }
-
-            if (galaxies == 0)
-            {
-                expandedY += multiplier - 1;
-            }
-
-            expandedRows.Add(y + expandedY);
-        }
+        var expandedXValues = ExpandX(matrix, multiplier);
+        var expandedYValues = ExpandY(matrix, multiplier);
 
         var galaxyCoords = matrix.Coords.Where(o => matrix.ReadValueAt(o) == '#');
-        var expandedCoords = galaxyCoords.Select(o => (expandedCols[o.X], expandedRows[o.Y])).ToList();
+        var expandedCoords = galaxyCoords.Select(o => (expandedXValues[o.X], expandedYValues[o.Y])).ToList();
 
+        return GetManhattanTotal(expandedCoords);
+    }
+
+    private static long GetManhattanTotal(List<(long, long)> expandedCoords)
+    {
         var total = 0L;
         foreach (var a in expandedCoords)
         {
@@ -79,16 +45,64 @@ public class Aoc202311 : AocPuzzle
         return total / 2;
     }
 
-    private static long ManhattanDistance((long x, long y) a, (long x, long y) b)
+    private static List<long> ExpandX(Matrix<char> matrix, long multiplier)
     {
-        var xMax = Math.Max(a.x, b.x);
-        var xMin = Math.Min(a.x, b.x);
-        var xDiff = xMax - xMin;
+        var expandedXValues = new List<long>();
+        var expandedX = 0L;
+        var galaxyCounts = new List<int>();
 
-        var yMax = Math.Max(a.y, b.y);
-        var yMin = Math.Min(a.y, b.y);
-        var yDiff = yMax - yMin;
+        for (var x = 0; x <= matrix.XMax; x++)
+        {
+            var galaxies = 0;
+            for (var y = 0; y <= matrix.YMax; y++)
+            {
+                if (matrix.ReadValueAt(x, y) == '#') 
+                    galaxies++;
+            }
 
-        return xDiff + yDiff;
+            galaxyCounts.Add(galaxies);
+        }
+
+        for (var x = 0; x < galaxyCounts.Count; x++)
+        {
+            if (galaxyCounts[x] == 0) 
+                expandedX += multiplier - 1;
+
+            expandedXValues.Add(x + expandedX);
+        }
+
+        return expandedXValues;
     }
+
+    private static List<long> ExpandY(Matrix<char> matrix, long multiplier)
+    {
+        var expandedYValues = new List<long>();
+        var expandedY = 0L;
+        var galaxyCounts = new List<int>();
+
+        for (var y = 0; y <= matrix.YMax; y++)
+        {
+            var galaxies = 0;
+            for (var x = 0; x <= matrix.XMax; x++)
+            {
+                if (matrix.ReadValueAt(x, y) == '#') 
+                    galaxies++;
+            }
+
+            galaxyCounts.Add(galaxies);
+        }
+
+        for (var y = 0; y < galaxyCounts.Count; y++)
+        {
+            if (galaxyCounts[y] == 0) 
+                expandedY += multiplier - 1;
+
+            expandedYValues.Add(y + expandedY);
+        }
+
+        return expandedYValues;
+    }
+
+    private static long ManhattanDistance((long x, long y) a, (long x, long y) b) => 
+        Math.Max(a.x, b.x) - Math.Min(a.x, b.x) + (Math.Max(a.y, b.y) - Math.Min(a.y, b.y));
 }

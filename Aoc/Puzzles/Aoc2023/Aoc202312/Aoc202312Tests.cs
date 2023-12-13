@@ -1059,6 +1059,16 @@ public class Aoc202312Tests
         result.Should().Be(expected);
     }
 
+    [TestCase("#.#??????? 1,1,4", 3)]
+    [TestCase("##..??#??##?? 2,8", 2)]
+    [TestCase("#???.?????? 2,2", 5)]
+    public void SelectedRealData(string input, int expected)
+    {
+        var result = Aoc202312.CombinationCount(input);
+
+        result.Should().Be(expected);
+    }
+
     [TestCase("???.### 1,1,3", 1)]
     [TestCase(".??..??...?##. 1,1,3", 16384)]
     [TestCase("?#?#?#?#?#?#?#? 1,3,1,6", 1)]

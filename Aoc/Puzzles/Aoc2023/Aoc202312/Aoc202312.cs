@@ -48,54 +48,105 @@ public class Aoc202312(string input) : AocPuzzle
             damagedGroups = damagedGroups2;
         }
 
-        var count = GetValidCount(layout.ToCharArray().ToList(), damagedGroups, 0);
+        var count = GetValidCount(layout.ToCharArray().ToList(), damagedGroups, 0, "");
 
         return count;
     }
 
-    private static long GetValidCount(List<char> layout, List<int> damagedGroups, int pos)
+    private static long GetValidCount(List<char> layout, List<int> damagedGroups, int pos, string s)
     {
         if (damagedGroups.Count == 0)
+        {
+            Console.WriteLine(s);
             return layout.Skip(pos).Any(o => o == '#') ? 0 : 1;
+        }
 
         var minLength = damagedGroups.Sum() +  damagedGroups.Count - 1;
-        var loopLength = layout.Count - pos - minLength;
+        var nextSpace = -1;//layout.Skip(pos).ToList().IndexOf('.');
+        var maxLoopLength = layout.Count - pos - minLength;
+        var loopLength = nextSpace == -1
+            ? maxLoopLength
+            : Math.Min(nextSpace, maxLoopLength);
         var validCount = 0L;
         var groupSize = damagedGroups.First();
+        var hasFoundSpot = false;
+        var hasFoundHash = false;
         for (var i = 0; i <= loopLength; i++)
         {
-            var canBeAtPos = CanGroupBeAtPos(layout, groupSize, pos + i);
-            
-            if (canBeAtPos)
+            var hitHash = HitHash(layout, groupSize, pos + i);
+
+            var hitSpace = HitSpace(layout, groupSize, pos + i);
+            if (hitSpace)
             {
-                validCount += GetValidCount(layout, damagedGroups.Skip(1).ToList(), pos + i + groupSize + 1);
+                if (hasFoundSpot)
+                    break;
+                continue;
             }
+
+            var isAdjacentToDamaged = IsAdjacentToDamaged(layout, groupSize, pos + i);
+            if (isAdjacentToDamaged)
+                continue;
+
+            hasFoundSpot = true;
+            var ns = $"{s}{GenerateString('.', i)}{GenerateString('#', groupSize)}.";
+            validCount += GetValidCount(layout, damagedGroups.Skip(1).ToList(), pos + i + groupSize + 1, ns);
+
+            var isExactMatch = IsExactMatch(layout, groupSize, pos + i);
+            if (isExactMatch)
+                break;
         }
 
         return validCount;
     }
 
-    private static bool CanGroupBeAtPos(List<char> layout, int length, int pos)
+    private static bool HitSpace(List<char> layout, int length, int pos)
+    {
+        for (var i = 0; i < length; i++)
+        {
+            if (layout[pos + i] == '.')
+                return true;
+        }
+
+        return false;
+    }
+
+    private static bool HitHash(List<char> layout, int length, int pos)
+    {
+        for (var i = 0; i < length; i++)
+        {
+            if (layout[pos + i] == '#')
+                return true;
+        }
+
+        return false;
+    }
+
+    private static bool IsExactMatch(List<char> layout, int length, int pos)
+    {
+        for (var i = 0; i < length; i++)
+        {
+            if (layout[pos + i] != '#')
+                return false;
+        }
+
+        return true;
+    }
+
+    private static bool IsAdjacentToDamaged(List<char> layout, int length, int pos)
     {
         if (pos > 0)
         {
             if (layout[pos - 1] == '#')
-                return false;
-        }
-
-        for (var i = 0; i < length; i++)
-        {
-            if (layout[pos + i] == '.')
-                return false;
+                return true;
         }
 
         if (pos + length < layout.Count - 1)
         {
             if (layout[pos + length] == '#')
-                return false;
+                return true;
         }
 
-        return true;
+        return false;
     }
 
     public static int CombinationCountOld(string s, bool isPart2 = false)

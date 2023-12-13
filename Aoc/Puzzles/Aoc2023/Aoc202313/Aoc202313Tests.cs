@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202313;
 public class Aoc202313Tests
 {
     [Test]
-    public void Mirrors()
+    public void MirrorsExample1()
     {
         const string input = """
                              #.##..##.
@@ -23,6 +23,42 @@ public class Aoc202313Tests
         result.Should().Be(5);
     }
 
+    [Test]
+    public void MirrorsMatchLastRow()
+    {
+        const string input = """
+                             ..##..###
+                             ##.##.##.
+                             #####.##.
+                             ..##..###
+                             #....#..#
+                             #...##..#
+                             #...##..#
+                             """;
+
+        var result = Aoc202313.CountReflections(input);
+
+        result.Should().Be(600);
+    }
+
+    [Test]
+    public void MirrorsMatchLastCol()
+    {
+        const string input = """
+                             ..##..#..
+                             ##.##.#..
+                             ###-#.#..
+                             ..##..###
+                             #....#.##
+                             ##..##.##
+                             #...##.##
+                             """;
+
+        var result = Aoc202313.CountReflections(input);
+
+        result.Should().Be(8);
+    }
+    
     [Test]
     public void SmudgedMirrors()
     {

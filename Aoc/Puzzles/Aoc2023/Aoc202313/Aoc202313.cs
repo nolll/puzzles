@@ -1,7 +1,6 @@
 ﻿using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Strings;
-using Spectre.Console;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202313;
 
@@ -21,43 +20,39 @@ public class Aoc202313(string input) : AocPuzzle
         var s = StringReader.ReadStringGroups(input);
         var result = s.Sum(CountSmudgedReflections);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, "32a6556a3bdfe559c36bdafb480740ef");
     }
 
     public static int CountReflections(string s)
     {
         var matrix = MatrixBuilder.BuildCharMatrix(s);
 
-        return CountReflections(matrix);
+        return CountReflections(matrix, -1);
     }
 
-    public static int CountReflections(Matrix<char> matrix)
+    private static int CountReflections(Matrix<char> matrix, int orig)
     {
-        var rows = Rows(matrix);
+        var rows = Rows(matrix, orig);
         if (rows > 0)
             return rows * 100;
 
-        return Columns(matrix);
+        return Columns(matrix, orig);
     }
-
-    public static int CountRowReflections(Matrix<char> matrix) => Rows(matrix) * 100;
-    public static int CountColReflections(Matrix<char> matrix) => Columns(matrix);
 
     public static int CountSmudgedReflections(string s)
     {
         var matrix = MatrixBuilder.BuildCharMatrix(s);
-        var orig = CountReflections(matrix);
+        var orig = CountReflections(matrix, -1);
 
         foreach (var coord in matrix.Coords)
         {
             var v = matrix.ReadValueAt(coord);
             var n = v == '#' ? '.' : '#';
             matrix.WriteValueAt(coord, n);
-            var c = CountReflections(matrix);
+            var c = CountReflections(matrix, orig);
             matrix.WriteValueAt(coord, v);
-            if (c > 0 && c != orig)
+            if (c > 0)
             {
-                //Console.WriteLine($"{orig} => {c}");
                 return c;
             }
         }
@@ -65,65 +60,37 @@ public class Aoc202313(string input) : AocPuzzle
         return 0;
     }
 
-    //public static int CountSmudgedReflections(string s)
-    //{
-    //    var matrix = MatrixBuilder.BuildCharMatrix(s);
-    //    var orig = CountReflections(matrix);
-    //    var origRows = CountRowReflections(matrix);
-
-    //    foreach (var coord in matrix.Coords)
-    //    {
-    //        var v = matrix.ReadValueAt(coord);
-    //        var n = v == '#' ? '.' : '#';
-    //        matrix.WriteValueAt(coord, n);
-    //        var rows = CountRowReflections(matrix);
-    //        matrix.WriteValueAt(coord, v);
-    //        if (rows > 0 && rows != origRows && rows != orig)
-    //            return rows;
-    //    }
-
-    //    var origCols = CountColReflections(matrix);
-    //    foreach (var coord in matrix.Coords)
-    //    {
-    //        var v = matrix.ReadValueAt(coord);
-    //        var n = v == '#' ? '.' : '#';
-    //        matrix.WriteValueAt(coord, n);
-    //        var cols = CountColReflections(matrix);
-    //        matrix.WriteValueAt(coord, v);
-    //        if (cols > 0 && cols != origCols && cols != orig)
-    //            return cols;
-    //    }
-
-    //    return 0;
-    //}
-
-    private static int Columns(Matrix<char> matrix)
+    private static int Columns(Matrix<char> matrix, int orig)
     {
-        var cols = Enumerable.Range(0, matrix.XMax + 1).Select(o => ReadCol(matrix, o)).ToList();
-        return FindReflection(cols);
+        var cols = Enumerable.Range(0, matrix.Width).Select(x => ReadCol(matrix, x)).ToList();
+        return FindReflection(cols, orig);
     }
 
-    private static int Rows(Matrix<char> matrix)
+    private static int Rows(Matrix<char> matrix, int orig)
     {
-        var rows = Enumerable.Range(0, matrix.YMax + 1).Select(o => ReadRow(matrix, o)).ToList();
-        return FindReflection(rows);
+        var rows = Enumerable.Range(0, matrix.Height).Select(y => ReadRow(matrix, y)).ToList();
+        var origCompare = orig >= 100 ? orig / 100 : 0;
+        return FindReflection(rows, origCompare);
     }
 
-    private static int FindReflection(List<string> lines)
+    private static int FindReflection(List<string> lines, int orig)
     {
         for (var i = 1; i < lines.Count; i++)
         {
+            if (i == orig)
+                continue;
+
             var xDown = i;
             var xUp = i - 1;
             var down = lines[xDown];
             var up = lines[xUp];
+            const int xMin = 0;
+            var xMax = lines.Count - 1;
 
             while (down == up)
             {
-                if (xUp <= 0 || xDown >= lines.Count - 1)
-                {
+                if (xUp <= xMin || xDown >= xMax)
                     return i;
-                }
 
                 xDown++;
                 xUp--;
@@ -135,25 +102,9 @@ public class Aoc202313(string input) : AocPuzzle
         return 0;
     }
 
-    private static string ReadRow(Matrix<char> matrix, int y)
-    {
-        var currentCol = "";
-        for (var x = 0; x <= matrix.XMax; x++)
-        {
-            currentCol += matrix.ReadValueAt(x, y);
-        }
+    private static string ReadRow(Matrix<char> matrix, int y) => 
+        string.Join("", Enumerable.Range(0, matrix.Width).Select(x => matrix.ReadValueAt(x, y)));
 
-        return currentCol;
-    }
-
-    private static string ReadCol(Matrix<char> matrix, int x)
-    {
-        var currentRow = "";
-        for (var y = 0; y <= matrix.YMax; y++)
-        {
-            currentRow += matrix.ReadValueAt(x, y);
-        }
-
-        return currentRow;
-    }
+    private static string ReadCol(Matrix<char> matrix, int x) =>
+        string.Join("", Enumerable.Range(0, matrix.Height).Select(y => matrix.ReadValueAt(x, y)));
 }

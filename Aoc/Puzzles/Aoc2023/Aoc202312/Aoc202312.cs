@@ -20,13 +20,85 @@ public class Aoc202312(string input) : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        //var lines = StringReader.ReadLines(input);
-        //var counts = lines.Select(o => CombinationCount(o, true));
-
         return new PuzzleResult(0);
+
+        var lines = StringReader.ReadLines(input);
+        var counts = lines.Select(o => CombinationCount(o, true));
+
+        return new PuzzleResult(counts.Sum());
     }
 
-    public static int CombinationCount(string s, bool isPart2 = false)
+    public static long CombinationCount(string s, bool isPart2 = false)
+    {
+        var parts = s.Split(' ');
+        var layout = parts.First();
+        var damagedGroups = parts.Last().Split(',').Select(int.Parse).ToList();
+
+        if (isPart2)
+        {
+            var layouts2 = new List<string>();
+            var damagedGroups2 = new List<int>();
+            for (var i = 0; i < 5; i++)
+            {
+                layouts2.Add(layout);
+                damagedGroups2.AddRange(damagedGroups);
+            }
+
+            layout = string.Join('?', layouts2);
+            damagedGroups = damagedGroups2;
+        }
+
+        var count = GetValidCount(layout.ToCharArray().ToList(), damagedGroups, 0);
+
+        return count;
+    }
+
+    private static long GetValidCount(List<char> layout, List<int> damagedGroups, int pos)
+    {
+        if (damagedGroups.Count == 0)
+            return layout.Skip(pos).Any(o => o == '#') ? 0 : 1;
+
+        var minLength = damagedGroups.Sum() +  damagedGroups.Count - 1;
+        var loopLength = layout.Count - pos - minLength;
+        var validCount = 0L;
+        var groupSize = damagedGroups.First();
+        for (var i = 0; i <= loopLength; i++)
+        {
+            var canBeAtPos = CanGroupBeAtPos(layout, groupSize, pos + i);
+            
+            if (canBeAtPos)
+            {
+                validCount += GetValidCount(layout, damagedGroups.Skip(1).ToList(), pos + i + groupSize + 1);
+            }
+        }
+
+        return validCount;
+    }
+
+    private static bool CanGroupBeAtPos(List<char> layout, int length, int pos)
+    {
+        if (pos > 0)
+        {
+            if (layout[pos - 1] == '#')
+                return false;
+        }
+
+        for (var i = 0; i < length; i++)
+        {
+            if (layout[pos + i] == '.')
+                return false;
+        }
+
+        if (pos + length < layout.Count - 1)
+        {
+            if (layout[pos + length] == '#')
+                return false;
+        }
+
+        return true;
+    }
+
+    public static int CombinationCountOld(string s, bool isPart2 = false)
     {
         var parts = s.Split(' ');
         var layout = parts.First();
@@ -63,6 +135,8 @@ public class Aoc202312(string input) : AocPuzzle
         var validStrings = strings.Where(o => IsValid(o, layout)).ToList();
 
         var partitionCount = completePartitions.Count;
+
+        Console.WriteLine($"___ {s} => {validStrings.Count}");
 
         return validStrings.Count;
     }

@@ -19,8 +19,6 @@ public class Aoc202312(string input) : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        return new PuzzleResult(0);
-
         var lines = StringReader.ReadLines(input);
         var counts = lines.Select(o => CombinationCount(o, true));
 
@@ -47,12 +45,19 @@ public class Aoc202312(string input) : AocPuzzle
             damagedGroups = damagedGroups2;
         }
 
-        var count = GetValidCount(layout.ToCharArray().ToList(), damagedGroups, 0, "");
+        var seen = new Dictionary<string, long>();
+        var count = GetValidCount(layout.ToCharArray().ToList(), damagedGroups, 0, "", seen);
+
+        Console.WriteLine($"   {s}: {count}");
 
         return count;
     }
 
-    private static long GetValidCount(List<char> layout, List<int> damagedGroups, int pos, string s)
+    private static long GetValidCount(
+        List<char> layout, 
+        List<int> damagedGroups, 
+        int pos, string s,
+        Dictionary<string, long> seen)
     {
         if (!IsValid(layout, s))
             return 0;
@@ -66,13 +71,20 @@ public class Aoc202312(string input) : AocPuzzle
         var groupSize = damagedGroups.First();
         for (var i = 0; i <= loopLength; i++)
         {
+            var ns = $"{s}{GenerateString('.', i)}{GenerateString('#', groupSize)}.";
+            if (seen.TryGetValue(ns, out var cached))
+            {
+                validCount += cached;
+                continue;
+            }
+
             var isAdjacentToDamaged = IsAdjacentToDamaged(layout, groupSize, pos + i);
             if (isAdjacentToDamaged)
                 continue;
 
-            var ns = $"{s}{GenerateString('.', i)}{GenerateString('#', groupSize)}.";
-            validCount += GetValidCount(layout, damagedGroups.Skip(1).ToList(), pos + i + groupSize + 1, ns);
-
+            var c = GetValidCount(layout, damagedGroups.Skip(1).ToList(), pos + i + groupSize + 1, ns, seen);
+            validCount += c;
+            seen.Add(ns, c);
             var isExactMatch = IsExactMatch(layout, groupSize, pos + i);
             if (isExactMatch)
                 break;

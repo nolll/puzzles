@@ -1080,6 +1080,14 @@ public class Aoc202312Tests
     {
         var result = Aoc202312.CombinationCount(input, true);
 
+        result.Should().Be(expected);   
+    }
+
+    [TestCase("????.???????#?#.? 1,5", 108778)]
+    public void RealCombinationCountPart2(string input, int expected)
+    {
+        var result = Aoc202312.CombinationCount(input, true);
+
         result.Should().Be(expected);
     }
 }

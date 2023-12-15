@@ -2,7 +2,7 @@ using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202315;
 
-[Name("Parabolic Reflector Dish")]
+[Name("Lens Library")]
 public class Aoc202315(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
@@ -15,7 +15,7 @@ public class Aoc202315(string input) : AocPuzzle
     protected override PuzzleResult RunPart2()
     {
         var instructions = input.Split(',').ToList();
-        var boxes = Enumerable.Range(0, 256).Select((o, index) => new Box(index + 0)).ToArray();
+        var boxes = Enumerable.Range(0, 256).Select((_, index) => new Box(index + 0)).ToArray();
 
         foreach (var instruction in instructions)
         {
@@ -25,13 +25,7 @@ public class Aoc202315(string input) : AocPuzzle
                 : instruction.Split('-');
 
             var label = parts.First();
-            var focalLength = operation == Operation.Equal
-                ? int.Parse(parts.Last())
-                : 0;
-
-            var boxId = HashScore(label);
-
-            var box = boxes[boxId];
+            var box = boxes[HashScore(label)];
 
             if (operation == Operation.Subtract)
             {
@@ -39,6 +33,7 @@ public class Aoc202315(string input) : AocPuzzle
             }
             else
             {
+                var focalLength = int.Parse(parts.Last());
                 var lens = box.Lenses.FirstOrDefault(o => o.Label == label);
                 if (lens is not null)
                     lens.FocalLength = focalLength;
@@ -52,18 +47,8 @@ public class Aoc202315(string input) : AocPuzzle
         return new PuzzleResult(sum, "c596fa2656ce06bc3fb557ddd741c834");
     }
 
-    public static int HashScore(string s)
-    {
-        var v = 0;
-        foreach (var c in s)
-        {
-            v += c;
-            v *= 17;
-            v %= 256;
-        }
-
-        return v;
-    }
+    public static int HashScore(string s) => 
+        s.Aggregate(0, (current, c) => (current + c) * 17 % 256);
 
     private enum Operation
     {
@@ -74,23 +59,8 @@ public class Aoc202315(string input) : AocPuzzle
 
 public class Box(int id)
 {
-    public int Id { get; } = id;
     public List<Lens> Lenses { get; set; } = new();
-
-    public int FocusingPower
-    {
-        get
-        {
-            var total = 0;
-            for (var i = 0; i < Lenses.Count; i++)
-            {
-                var power = (Id + 1) * (i + 1) * Lenses[i].FocalLength;
-                total += power;
-            }
-
-            return total;
-        }
-    }
+    public int FocusingPower => Lenses.Select((t, i) => (id + 1) * (i + 1) * t.FocalLength).Sum();
 }
 
 public class Lens(string label, int focalLength)

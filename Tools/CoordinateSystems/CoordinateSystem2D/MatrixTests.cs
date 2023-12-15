@@ -22,7 +22,7 @@ public class MatrixTests
         var matrix = new Matrix<int>(5, 5);
         matrix.MoveTo(1, y);
 
-        matrix.IsAtTop.Should().Be(expected);
+        matrix.IsAtTopEdge.Should().Be(expected);
     }
 
     [TestCase(4, true)]
@@ -42,7 +42,7 @@ public class MatrixTests
         var matrix = new Matrix<int>(5, 5);
         matrix.MoveTo(1, y);
 
-        matrix.IsAtBottom.Should().Be(expected);
+        matrix.IsAtBottomEdge.Should().Be(expected);
     }
 
     [TestCase(0, true)]

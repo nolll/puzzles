@@ -17,9 +17,9 @@ public class Matrix<T> where T : struct
     public MatrixDirection Direction { get; private set; }
     public MatrixAddress Address { get; private set; }
     public MatrixAddress StartAddress { get; }
-    public bool IsAtTop => Address.Y == YMin;
+    public bool IsAtTopEdge => Address.Y == YMin;
     public bool IsAtRightEdge => Address.X == XMax;
-    public bool IsAtBottom => Address.Y == YMax;
+    public bool IsAtBottomEdge => Address.Y == YMax;
     public bool IsAtLeftEdge => Address.X == XMin;
     
     public MatrixAddress Center

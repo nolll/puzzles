@@ -65,77 +65,34 @@ public class Aoc202314(string input) : AocPuzzle
         return sum;
     }
 
-    private static void MoveNorth(Matrix<char> matrix)
+    private static void MoveNorth(Matrix<char> matrix) =>
+        Move(matrix, c => c.OrderBy(o => o.Y).ThenBy(o => o.X), CanMoveNorth, m => m.MoveUp());
+
+    private static void MoveEast(Matrix<char> matrix) =>
+        Move(matrix, c => c.OrderByDescending(o => o.X).ThenBy(o => o.Y), CanMoveEast, m => m.MoveRight());
+
+    private static void MoveSouth(Matrix<char> matrix) =>
+        Move(matrix, c => c.OrderByDescending(o => o.Y).ThenBy(o => o.X), CanMoveSouth, m => m.MoveDown());
+
+    private static void MoveWest(Matrix<char> matrix) =>
+        Move(matrix, c => c.OrderBy(o => o.Y).ThenBy(o => o.X), CanMoveWest, m => m.MoveLeft());
+
+    private static void Move(
+        Matrix<char> matrix, 
+        Func<IEnumerable<MatrixAddress>, IEnumerable<MatrixAddress>> order, 
+        Func<Matrix<char>, bool> canMove, 
+        Action<Matrix<char>> move)
     {
-        var roundRocks = matrix.Coords.Where(o => matrix.ReadValueAt(o) == 'O')
-            .OrderBy(o => o.Y).ThenBy(o => o.X)
-            .ToList();
+        var roundRocks = order(matrix.Coords.Where(o => matrix.ReadValueAt(o) == 'O'));
 
         foreach (var roundRock in roundRocks)
         {
             matrix.MoveTo(roundRock);
 
-            while (CanMoveNorth(matrix))
+            while (canMove(matrix))
             {
                 matrix.WriteValue('.');
-                matrix.MoveUp();
-                matrix.WriteValue('O');
-            }
-        }
-    }
-
-    private static void MoveEast(Matrix<char> matrix)
-    {
-        var roundRocks = matrix.Coords.Where(o => matrix.ReadValueAt(o) == 'O')
-            .OrderByDescending(o => o.X).ThenBy(o => o.Y)
-            .ToList();
-
-        foreach (var roundRock in roundRocks)
-        {
-            matrix.MoveTo(roundRock);
-
-            while (CanMoveEast(matrix))
-            {
-                matrix.WriteValue('.');
-                matrix.MoveRight();
-                matrix.WriteValue('O');
-            }
-        }
-    }
-
-    private static void MoveSouth(Matrix<char> matrix)
-    {
-        var roundRocks = matrix.Coords.Where(o => matrix.ReadValueAt(o) == 'O')
-            .OrderByDescending(o => o.Y).ThenBy(o => o.X)
-            .ToList();
-
-        foreach (var roundRock in roundRocks)
-        {
-            matrix.MoveTo(roundRock);
-
-            while (CanMoveSouth(matrix))
-            {
-                matrix.WriteValue('.');
-                matrix.MoveDown();
-                matrix.WriteValue('O');
-            }
-        }
-    }
-
-    private static void MoveWest(Matrix<char> matrix)
-    {
-        var roundRocks = matrix.Coords.Where(o => matrix.ReadValueAt(o) == 'O')
-            .OrderBy(o => o.Y).ThenBy(o => o.X)
-            .ToList();
-
-        foreach (var roundRock in roundRocks)
-        {
-            matrix.MoveTo(roundRock);
-
-            while (CanMoveWest(matrix))
-            {
-                matrix.WriteValue('.');
-                matrix.MoveLeft();
+                move(matrix);
                 matrix.WriteValue('O');
             }
         }
@@ -148,7 +105,7 @@ public class Aoc202314(string input) : AocPuzzle
         return matrix;
     }
 
-    public static void RunCycle(Matrix<char> matrix, int iterations)
+    private static void RunCycle(Matrix<char> matrix, int iterations)
     {
         for (var i = 0; i < iterations; i++)
         {
@@ -156,7 +113,7 @@ public class Aoc202314(string input) : AocPuzzle
         }
     }
 
-    public static void RunCycle(Matrix<char> matrix)
+    private static void RunCycle(Matrix<char> matrix)
     {
         MoveNorth(matrix);
         MoveWest(matrix);
@@ -164,51 +121,23 @@ public class Aoc202314(string input) : AocPuzzle
         MoveEast(matrix);
     }
 
-    private static bool CanMoveNorth(Matrix<char> matrix)
+    private static bool CanMoveNorth(Matrix<char> matrix) =>
+        CanMove(() => matrix.IsAtTopEdge, () => matrix.ReadValueAt(matrix.Address.X, matrix.Address.Y - 1));
+
+    private static bool CanMoveEast(Matrix<char> matrix) =>
+        CanMove(() => matrix.IsAtRightEdge, () => matrix.ReadValueAt(matrix.Address.X + 1, matrix.Address.Y));
+
+    private static bool CanMoveSouth(Matrix<char> matrix) =>
+        CanMove(() => matrix.IsAtBottomEdge, () => matrix.ReadValueAt(matrix.Address.X, matrix.Address.Y + 1));
+
+    private static bool CanMoveWest(Matrix<char> matrix) => 
+        CanMove(() => matrix.IsAtLeftEdge, () => matrix.ReadValueAt(matrix.Address.X - 1, matrix.Address.Y));
+
+    private static bool CanMove(Func<bool> isAtEdge, Func<char> readValue)
     {
-        if (matrix.IsAtTop)
+        if (isAtEdge())
             return false;
 
-        var northValue = matrix.ReadValueAt(matrix.Address.X, matrix.Address.Y - 1);
-        if (northValue is '#' or 'O')
-            return false;
-
-        return true;
-    }
-
-    private static bool CanMoveEast(Matrix<char> matrix)
-    {
-        if (matrix.IsAtRightEdge)
-            return false;
-
-        var eastValue = matrix.ReadValueAt(matrix.Address.X + 1, matrix.Address.Y);
-        if (eastValue is '#' or 'O')
-            return false;
-
-        return true;
-    }
-
-    private static bool CanMoveSouth(Matrix<char> matrix)
-    {
-        if (matrix.IsAtBottom)
-            return false;
-
-        var southValue = matrix.ReadValueAt(matrix.Address.X, matrix.Address.Y + 1);
-        if (southValue is '#' or 'O')
-            return false;
-
-        return true;
-    }
-
-    private static bool CanMoveWest(Matrix<char> matrix)
-    {
-        if (matrix.IsAtLeftEdge)
-            return false;
-
-        var westValue = matrix.ReadValueAt(matrix.Address.X - 1, matrix.Address.Y);
-        if (westValue is '#' or 'O')
-            return false;
-
-        return true;
+        return readValue() is not ('#' or 'O');
     }
 }

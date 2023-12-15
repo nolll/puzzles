@@ -17,7 +17,7 @@ public class TreeNavigator
         matrix.MoveTo(0, 0);
 
         var treeCount = 0;
-        while (!matrix.IsAtBottom)
+        while (!matrix.IsAtBottomEdge)
         {
             for (var i = 0; i < trajectory.Right; i++)
             {

@@ -61,7 +61,7 @@ public class Aquaq28(string input) : AquaqPuzzle
                     break;
             }
 
-            encrypted += matrix.IsAtBottom || matrix.IsAtTop
+            encrypted += matrix.IsAtBottomEdge || matrix.IsAtTopEdge
                 ? Characters[matrix.Address.X]
                 : Characters[matrix.Address.Y];
         }

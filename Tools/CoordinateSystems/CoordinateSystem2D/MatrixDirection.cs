@@ -49,6 +49,6 @@ public class MatrixDirection : IEquatable<MatrixDirection>
 
     public override int GetHashCode()
     {
-        return (Name != null ? Name.GetHashCode() : 0);
+        return (Name.GetHashCode());
     }
 }

@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202310;
 

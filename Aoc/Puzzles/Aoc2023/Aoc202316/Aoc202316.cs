@@ -3,7 +3,7 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202316;
 
-[Name("Lens Library")]
+[Name("The Floor Will Be Lava")]
 public class Aoc202316(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()

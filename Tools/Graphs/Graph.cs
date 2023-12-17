@@ -3,12 +3,18 @@
 public static class Graph
 {
     public static int GetLowestCost(List<Input> inputs, string source, string target) => 
-        GetLowestCost(inputs, source, target, 1);
+        GetLowestCost(inputs, source, [target], 1);
 
-    public static int GetHighestCost(List<Input> inputs, string source, string target) => 
-        GetLowestCost(inputs, source, target, -1);
+    public static int GetLowestCost(List<Input> inputs, string source, List<string> targets) =>
+        GetLowestCost(inputs, source, targets, 1);
 
-    private static int GetLowestCost(List<Input> inputs, string source, string target, int costModifier)
+    public static int GetHighestCost(List<Input> inputs, string source, string target) =>
+        GetLowestCost(inputs, source, [target], -1);
+    
+    public static int GetHighestCost(List<Input> inputs, string source, List<string> targets) => 
+        GetLowestCost(inputs, source, targets, -1);
+
+    private static int GetLowestCost(List<Input> inputs, string source, List<string> targets, int costModifier)
     {
         var nodes = new Dictionary<string, Node>();
 
@@ -24,32 +30,35 @@ public static class Graph
                 node.Connections.Add(new Connection(input.To, input.Cost * costModifier));
         }
 
-        return GetLowestCost(nodes, source, target) * costModifier;
+        return GetLowestCost(nodes, source, targets) * costModifier;
     }
     
-    private static int GetLowestCost(Dictionary<string, Node> nodes, string source, string target)
+    private static int GetLowestCost(Dictionary<string, Node> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => int.MaxValue);
         visited[source] = 0;
         var queue = new Queue<Node>(new List<Node> { start });
 
-        while (queue.Any())
+        while (queue.Count > 0)
         {
             var node = queue.Dequeue();
             var steps = visited[node.Name];
             foreach (var connection in node.Connections)
             {
-                var visitedConnection = visited[connection.Name];
+                if (!visited.TryGetValue(connection.Name, out var visitedConnection))
+                    continue;
+
                 var cost = steps + connection.Cost;
                 if (cost >= visitedConnection) 
                     continue;
+
                 visited[connection.Name] = cost;
                 queue.Enqueue(nodes[connection.Name]);
             }
         }
 
-        return visited[target];
+        return targets.Min(o => visited[o]);
     }
 
     public record Input(string From, string To, int Cost = 1);

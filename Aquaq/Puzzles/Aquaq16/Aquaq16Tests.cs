@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using Pzl.Common;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq16;
 
@@ -10,7 +11,7 @@ public class Aquaq16Tests
     {
         const string input = "LTA";
 
-        var result = new Aquaq16(input, "").Run(input);
+        var result = new Aquaq16(input, FileReader.ReadLocal(typeof(Aquaq16), "Alphabet.txt")).Run(input);
 
         result.Should().Be(53);
     }

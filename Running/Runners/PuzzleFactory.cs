@@ -21,8 +21,8 @@ public static class PuzzleFactory
         var parameterCount = ctor.GetParameters().Length;
         return parameterCount switch
         {
-            2 => [PuzzleFileReader.ReadInput(definition.Type), ReadAdditionalFile(definition)],
-            1 => [PuzzleFileReader.ReadInput(definition.Type)],
+            2 => [FileReader.ReadInput(definition.Type), ReadAdditionalFile(definition)],
+            1 => [FileReader.ReadInput(definition.Type)],
             _ => []
         };
     }
@@ -30,10 +30,10 @@ public static class PuzzleFactory
     private static string ReadAdditionalFile(PuzzleDefinition definition)
     {
         if (definition.CommonFile is not null)
-            return PuzzleFileReader.ReadCommon(definition.CommonFile);
+            return FileReader.ReadCommon(definition.CommonFile);
 
         if (definition.LocalFile is not null)
-            return PuzzleFileReader.ReadLocal(definition.Type, definition.LocalFile);
+            return FileReader.ReadLocal(definition.Type, definition.LocalFile);
 
         return "";
     }

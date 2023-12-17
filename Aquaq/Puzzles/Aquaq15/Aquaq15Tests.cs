@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using Pzl.Common;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq15;
 
@@ -10,7 +11,7 @@ public class Aquaq15Tests
     {
         const string input = "fly,try";
 
-        var result = new Aquaq15(input, "").Run(input);
+        var result = new Aquaq15(input, FileReader.ReadCommon("Words.txt")).Run(input);
 
         result.Should().Be(3);
     }
@@ -24,7 +25,7 @@ public class Aquaq15Tests
                              word,maze
                              """;
 
-        var result = new Aquaq15(input, "").Run(input);
+        var result = new Aquaq15(input, FileReader.ReadCommon("Words.txt")).Run(input);
 
         result.Should().Be(45);
     }

@@ -19,120 +19,71 @@ public class Aoc202312(string input) : AocPuzzle
         var lines = StringReader.ReadLines(input);
         var counts = lines.Select(o => CombinationCount(o, true));
 
-        return new PuzzleResult(counts.Sum());
+        return new PuzzleResult(counts.Sum(), "2ecb30790515e2ebbae12a478dbf36f7");
     }
 
     public static long CombinationCount(string s, bool isPart2 = false)
     {
         var parts = s.Split(' ');
-        var layout = parts.First();
-        var damagedGroups = parts.Last().Split(',').Select(int.Parse).ToList();
+        var pattern = parts.First();
+        var groups = parts.Last().Split(',').Select(int.Parse).ToList();
 
         if (isPart2)
         {
-            var layouts2 = new List<string>();
-            var damagedGroups2 = new List<int>();
+            var pattern2 = new List<string>();
+            var groups2 = new List<int>();
             for (var i = 0; i < 5; i++)
             {
-                layouts2.Add(layout);
-                damagedGroups2.AddRange(damagedGroups);
+                pattern2.Add(pattern);
+                groups2.AddRange(groups);
             }
 
-            layout = string.Join('?', layouts2);
-            damagedGroups = damagedGroups2;
+            pattern = string.Join('?', pattern2);
+            groups = groups2;
         }
 
-        var seen = new Dictionary<string, long>();
-        var count = GetValidCount(layout.ToCharArray().ToList(), damagedGroups, 0, "", seen);
-
-        Console.WriteLine($"   {s}: {count}");
-
-        return count;
+        var seen = new Dictionary<(string, string), long>();
+        return GetValidCount(pattern.ToCharArray(), groups.ToArray(), seen);
     }
 
     private static long GetValidCount(
-        List<char> layout, 
-        List<int> damagedGroups, 
-        int pos, string s,
-        Dictionary<string, long> seen)
+        char[] pattern,
+        int[] groups,
+        Dictionary<(string, string), long> seen)
     {
-        if (!IsValid(layout, s))
-            return 0;
+        if (pattern.Length == 0)
+            return groups.Length == 0 ? 1 : 0;
 
-        if (damagedGroups.Count == 0)
-            return layout.Skip(pos).Any(o => o == '#') ? 0 : 1;
+        if (groups.Length == 0)
+            return pattern.Any(o => o == '#') ? 0 : 1;
 
-        var minLength = damagedGroups.Sum() + damagedGroups.Count - 1;
-        var loopLength = layout.Count - pos - minLength;
-        var validCount = 0L;
-        var groupSize = damagedGroups.First();
-        for (var i = 0; i <= loopLength; i++)
+        var cacheKey = (string.Join("", pattern), string.Join(",", groups));
+        if (seen.TryGetValue(cacheKey, out var validCount))
+            return validCount;
+
+        var c = pattern.First();
+        if (c is '.' or '?')
         {
-            var ns = $"{s}{GenerateString('.', i)}{GenerateString('#', groupSize)}.";
-            if (seen.TryGetValue(ns, out var cached))
-            {
-                validCount += cached;
-                continue;
-            }
-
-            var isAdjacentToDamaged = IsAdjacentToDamaged(layout, groupSize, pos + i);
-            if (isAdjacentToDamaged)
-                continue;
-
-            var c = GetValidCount(layout, damagedGroups.Skip(1).ToList(), pos + i + groupSize + 1, ns, seen);
-            validCount += c;
-            seen.Add(ns, c);
-            var isExactMatch = IsExactMatch(layout, groupSize, pos + i);
-            if (isExactMatch)
-                break;
+            validCount += GetValidCount(pattern.Skip(1).ToArray(), groups, seen);
         }
+
+        if (c is '#' or '?')
+        {
+            var groupLength = groups.First();
+            if (groupLength <= pattern.Length)
+            {
+                var matchesGroup = !pattern.Take(groupLength).Contains('.');
+                if (matchesGroup)
+                {
+                    var hasAdjacentGroup = pattern.Length > groupLength && pattern[groupLength] == '#';
+                    if (!hasAdjacentGroup) 
+                        validCount += GetValidCount(pattern.Skip(groupLength + 1).ToArray(), groups.Skip(1).ToArray(), seen);
+                }
+            }
+        }
+
+        seen.Add(cacheKey, validCount);
 
         return validCount;
-    }
-
-    private static bool IsValid(List<char> layout, string s)
-    {
-        var a = s.ToCharArray();
-        for (var i = 0; i < Math.Min(layout.Count, s.Length); i++)
-        {
-            var isValid = layout[i] == '?' || layout[i] == a[i];
-            if (!isValid)
-                return false;
-        }
-
-        return true;
-    }
-
-    private static bool IsExactMatch(List<char> layout, int length, int pos)
-    {
-        for (var i = 0; i < length; i++)
-        {
-            if (layout[pos + i] != '#')
-                return false;
-        }
-
-        return true;
-    }
-
-    private static bool IsAdjacentToDamaged(List<char> layout, int length, int pos)
-    {
-        if (pos > 0)
-        {
-            if (layout[pos - 1] == '#')
-                return true;
-        }
-
-        if (pos + length < layout.Count - 1)
-        {
-            if (layout[pos + length] == '#')
-                return true;
-        }
-
-        return false;
-    }
-
-    private static string GenerateString(char c, int length)
-    {
-        return string.Join("", Enumerable.Range(0, length).Select(o => c));
     }
 }

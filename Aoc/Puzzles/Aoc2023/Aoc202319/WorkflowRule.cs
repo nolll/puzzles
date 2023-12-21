@@ -3,10 +3,9 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202319;
 public abstract class WorkflowRule
 {
     public abstract string Target { get; }
-    public abstract string Field { get; }
-    public abstract int Value { get; }
+    protected abstract string Field { get; }
     public abstract bool Evaluate(Part part);
-    public abstract bool Evaluate(int v);
+    protected abstract bool Evaluate(int v);
 
     public ValidValues Include(ValidValues validValues)
     {

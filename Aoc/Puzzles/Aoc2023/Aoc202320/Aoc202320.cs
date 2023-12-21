@@ -1,20 +1,25 @@
 using Pzl.Common;
+using Pzl.Tools.Maths;
 using Pzl.Tools.Strings;
+using System.Runtime.CompilerServices;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202320;
 
 [Name("Pulse Propagation")]
 public class Aoc202320(string input) : AocPuzzle
 {
+    private static string[] _part2Modules = ["rz", "mr", "jg", "kv"];
+
     protected override PuzzleResult RunPart1() => 
         new(CountPulses(input, 1000), "826f2e187e18624950644293ef2e6c8d");
 
-    protected override PuzzleResult RunPart2() => 
-        PuzzleResult.Empty;
+    protected override PuzzleResult RunPart2() =>
+        new(CountPulses(input, 5000, true), "1fd3846c9dc834364bf2cdc9c11dfbdb");
 
-    public static long CountPulses(string s, int iterations)
+    public static long CountPulses(string s, int iterations, bool isPart2 = false)
     {
         var modules = ParseModules(s);
+        var part2State = _part2Modules.ToDictionary(o => o, _ => 0L);
 
         for (var i = 0; i < iterations; i++)
         {
@@ -23,6 +28,7 @@ public class Aoc202320(string input) : AocPuzzle
             while (queue.Count > 0)
             {
                 var (from, current) = queue.Dequeue();
+
                 current.ReceivePulse(from, modules[from].OutputPulse);
                 
                 if (!current.ShouldSend)
@@ -37,6 +43,20 @@ public class Aoc202320(string input) : AocPuzzle
                     }
                 }
             }
+
+            if (!isPart2) 
+                continue;
+
+            foreach (var key in part2State.Keys)
+            {
+                if (part2State[key] == 0 && modules[key].LowPulseCount == 1)
+                {
+                    part2State[key] = i + 1;
+                }
+            }
+
+            if (part2State.Values.All(o => o > 0))
+                return MathTools.Lcm(part2State.Values);
         }
 
         var low = modules.Values.Sum(o => o.LowPulseCount);

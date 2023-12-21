@@ -2,6 +2,9 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202319;
 
 public class ValidValues
 {
+    private const int RangeStart = 1;
+    private const int RangeEnd = 4000;
+
     public Dictionary<string, List<int>> Ranges { get; }
 
     public ValidValues()
@@ -26,5 +29,7 @@ public class ValidValues
         };
     }
 
-    private static List<int> FillRange() => Enumerable.Range(1, 4000 - 1).ToList();
+    public long Count => Ranges.Values.Select(o => o.Count).Aggregate(1L, (a, b) => a * b);
+
+    private static List<int> FillRange() => Enumerable.Range(RangeStart, RangeEnd).ToList();
 }

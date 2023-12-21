@@ -8,12 +8,12 @@ public class Aoc202319(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        return new PuzzleResult(SortParts(input));
+        return new PuzzleResult(SortParts(input), "7b8de33db969cb470b0df2112b952250");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        return new PuzzleResult(CountCombinations(input));
+        return new PuzzleResult(CountCombinations(input), "ad71ffd5c3aaba62bb775dfc6a95358e");
     }
 
     public static int SortParts(string s)
@@ -23,22 +23,26 @@ public class Aoc202319(string input) : AocPuzzle
         var workflows = workflowList.ToDictionary(o => o.Label, o => o);
         var parts = groups.Last().Select(ParsePart);
 
-        var accepted = new List<Part>();
-        foreach (var part in parts)
+        return parts.Where(part => IsAccepted(workflows, part, "in"))
+            .Sum(o => o.Fields.Values.Sum());
+    }
+
+    private static bool IsAccepted(Dictionary<string, Workflow> workflows, Part part, string target)
+    {
+        if (target == "A")
+            return true;
+
+        if (target == "R")
+            return false;
+
+        var workflow = workflows[target];
+        foreach (var rule in workflow.Rules)
         {
-            var target = "in";
-            while (target != "A" && target != "R")
-            {
-                target = workflows[target].Rules.First(r => r.Evaluate(part)).Target;
-            }
-            
-            if(target == "A")
-                accepted.Add(part);
+            if (rule.Evaluate(part))
+                return IsAccepted(workflows, part, rule.Target);
         }
 
-        var sum = accepted.Sum(o => o.Fields.Values.Sum());
-
-        return sum;
+        return IsAccepted(workflows, part, workflow.Fallback);
     }
 
     public static long CountCombinations(string str)
@@ -49,66 +53,48 @@ public class Aoc202319(string input) : AocPuzzle
 
         var ranges = new ValidValues();
 
-        var result = GetAcceptedValues(workflows, "in", ranges);
-
-        var ss = result.Select(o => o.Ranges.Values.Select(p => p.Count).Aggregate(1L, (a, b) => a * b)).Sum();
-        return ss;
-        //var x = result.SelectMany(o => o.Ranges["x"]).Distinct().Count();
-        //var m = result.SelectMany(o => o.Ranges["m"]).Distinct().Count();
-        //var a = result.SelectMany(o => o.Ranges["a"]).Distinct().Count();
-        //var s = result.SelectMany(o => o.Ranges["s"]).Distinct().Count();
-        //return 1L * x * m * a * s;
+        var count = CountAcceptedValues(workflows, "in", ranges);
+        return count;
     }
 
-    private static List<ValidValues> GetAcceptedValues(
+    private static long CountAcceptedValues(
         Dictionary<string, Workflow> workflows,
         string target,
         ValidValues validValues)
     {
-        var acceptedRanges = new List<ValidValues>();
+        if (target == "R")
+            return 0;
+
+        if (target == "A")
+            return validValues.Count;
+
+        var currentValues = validValues;
         var workflow = workflows[target];
-        var currentValues = new ValidValues(validValues);
+    
+        var total = 0L;
+        var moreToProcess = true;
 
         foreach (var rule in workflow.Rules)
         {
-            if (rule.Field == "")
+            var includedValues = rule.Include(currentValues);
+            var excludedValues = rule.Exclude(currentValues);
+
+            if(includedValues.Count > 0)
+                total += CountAcceptedValues(workflows, rule.Target, includedValues);
+
+            if (excludedValues.Count == 0)
             {
-                if (rule.Target == "A")
-                {
-                    acceptedRanges.Add(new ValidValues(currentValues));
-                    break;
-                }
-
-                if (rule.Target == "R")
-                    break;
-
-                acceptedRanges.AddRange(GetAcceptedValues(workflows, rule.Target, new ValidValues(currentValues)));
+                moreToProcess = false;
+                break;
             }
-            else
-            {
-                var ruleValues = new ValidValues(currentValues);
-                var includedValues = rule.Include(ruleValues);
-                var excludedValues = rule.Exclude(ruleValues);
 
-                if (rule.Target == "A")
-                {
-                    acceptedRanges.Add(includedValues);
-                    currentValues = excludedValues;
-                    continue;
-                }
-
-                if (rule.Target == "R")
-                {
-                    currentValues = excludedValues;
-                    continue;
-                }
-
-                acceptedRanges.AddRange(GetAcceptedValues(workflows, rule.Target, includedValues));
-                currentValues = excludedValues;
-            }
+            currentValues = excludedValues;
         }
 
-        return acceptedRanges;
+        if(moreToProcess)
+            total += CountAcceptedValues(workflows, workflow.Fallback, currentValues);
+
+        return total;
     }
 
     private static Part ParsePart(string inp)
@@ -129,26 +115,22 @@ public class Aoc202319(string input) : AocPuzzle
     {
         var parts = s.TrimEnd('}').Split('{');
         var label = parts.First();
-        var rules = parts.Last().Split(',').Select(ParseRule).ToList();
-        return new Workflow(label, rules);
+        var ruleParts = parts.Last().Split(',');
+        var rules = ruleParts.SkipLast(1).Select(ParseRule).ToList();
+        var fallback = ruleParts.Last();
+        return new Workflow(label, rules, fallback);
     }
 
     private static WorkflowRule ParseRule(string s)
     {
         var parts = s.Split(':');
         var target = parts.Last();
-        var hasRule = parts.Length > 1;
-        var field = hasRule ? parts[0][..1] : "";
-        var comparison = hasRule ? parts[0].Substring(1,1) : "";
-        var value = hasRule ? int.Parse(parts[0][2..]) : 0;
+        var field = parts[0][..1];
+        var comparison = parts[0].Substring(1, 1);
+        var value = int.Parse(parts[0][2..]);
 
-        if (hasRule)
-        {
-            if (comparison == "<")
-                return new LessThanRule(target, field, value);
-            return new GreaterThanRule(target, field, value);
-        }
-        
-        return new NoRule(target);
+        return comparison == "<" 
+            ? new LessThanRule(target, field, value) 
+            : new GreaterThanRule(target, field, value);
     }
 }

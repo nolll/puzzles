@@ -47,43 +47,69 @@ public class Aoc202319(string input) : AocPuzzle
         var workflowList = groups.First().Select(ParseWorkflow).ToList();
         var workflows = workflowList.ToDictionary(o => o.Label, o => o);
 
-        var minMax = new MinMax(1, 4000, 1, 4000, 1, 4000, 1, 4000);
+        var ranges = new ValidValues();
 
-        //var result = GetMinMax(workflows, "in", minMax);
-        //var x = result.XMax - result.XMin;
-        //var m = result.MMax - result.MMin;
-        //var a = result.AMax - result.AMin;
-        //var s = result.SMax - result.SMin;
+        var result = GetAcceptedValues(workflows, "in", ranges);
+
+        var ss = result.Select(o => o.Ranges.Values.Select(p => p.Count).Aggregate(1L, (a, b) => a * b)).Sum();
+        return ss;
+        //var x = result.SelectMany(o => o.Ranges["x"]).Distinct().Count();
+        //var m = result.SelectMany(o => o.Ranges["m"]).Distinct().Count();
+        //var a = result.SelectMany(o => o.Ranges["a"]).Distinct().Count();
+        //var s = result.SelectMany(o => o.Ranges["s"]).Distinct().Count();
         //return 1L * x * m * a * s;
-        return 0;
     }
 
-    //private static MinMax GetMinMax(
-    //    Dictionary<string, Workflow> workflows,
-    //    string target,
-    //    MinMax minMax)
-    //{
-    //    if (target == "A")
-    //        return minMax;
+    private static List<ValidValues> GetAcceptedValues(
+        Dictionary<string, Workflow> workflows,
+        string target,
+        ValidValues validValues)
+    {
+        var acceptedRanges = new List<ValidValues>();
+        var workflow = workflows[target];
+        var currentValues = new ValidValues(validValues);
 
-    //    var workflow = workflows[target];
-        
-    //    foreach (var rule in workflow.Rules)
-    //    {
-    //        if (rule.Field == "")
-    //            return (minValues, maxValues);
+        foreach (var rule in workflow.Rules)
+        {
+            if (rule.Field == "")
+            {
+                if (rule.Target == "A")
+                {
+                    acceptedRanges.Add(new ValidValues(currentValues));
+                    break;
+                }
 
-    //        if (rule.Target == "R")
-    //            continue;
+                if (rule.Target == "R")
+                    break;
 
-    //        //var ruleTarget = rule.Target;
+                acceptedRanges.AddRange(GetAcceptedValues(workflows, rule.Target, new ValidValues(currentValues)));
+            }
+            else
+            {
+                var ruleValues = new ValidValues(currentValues);
+                var includedValues = rule.Include(ruleValues);
+                var excludedValues = rule.Exclude(ruleValues);
 
-    //        //if (ruleTarget != "R")
-    //        //    count += CountCombinations(workflows, target, combinations / rule.MatchingCount);
+                if (rule.Target == "A")
+                {
+                    acceptedRanges.Add(includedValues);
+                    currentValues = excludedValues;
+                    continue;
+                }
 
-    //    }
-    //    return possible;
-    //}
+                if (rule.Target == "R")
+                {
+                    currentValues = excludedValues;
+                    continue;
+                }
+
+                acceptedRanges.AddRange(GetAcceptedValues(workflows, rule.Target, includedValues));
+                currentValues = excludedValues;
+            }
+        }
+
+        return acceptedRanges;
+    }
 
     private static Part ParsePart(string inp)
     {
@@ -125,53 +151,4 @@ public class Aoc202319(string input) : AocPuzzle
         
         return new NoRule(target);
     }
-}
-
-public record MinMax(int XMin, int XMax, int MMin, int MMax, int AMin, int AMax, int SMin, int SMax);
-
-public class LessThanRule(string target, string field, int value) : WorkflowRule
-{
-    public override string Target { get; } = target;
-    public override string Field { get; } = field;
-    public override int Value { get; } = value;
-    public override int MatchingCount { get; } = value - 1;
-    public override bool Evaluate(Part part) => part.Fields[field] < value;
-}
-
-public class GreaterThanRule(string target, string field, int value) : WorkflowRule
-{
-    public override string Target { get; } = target;
-    public override string Field { get; } = field;
-    public override int Value { get; } = value;
-    public override int MatchingCount { get; } = 4000 - value;
-    public override bool Evaluate(Part part) => part.Fields[field] > value;
-}
-
-public class NoRule(string target) : WorkflowRule
-{
-    public override string Target { get; } = target;
-    public override string Field { get; } = "";
-    public override int Value { get; } = 0;
-    public override int MatchingCount { get; } = 4000;
-    public override bool Evaluate(Part part) => true;
-}
-
-public abstract class WorkflowRule
-{
-    public abstract string Target { get; }
-    public abstract string Field { get; }
-    public abstract int Value { get; }
-    public abstract int MatchingCount { get; }
-    public abstract bool Evaluate(Part part);
-}
-
-public class Workflow(string label, List<WorkflowRule> rules)
-{
-    public string Label { get; } = label;
-    public List<WorkflowRule> Rules { get; } = rules;
-}
-
-public class Part(Dictionary<string, int> fields)
-{
-    public Dictionary<string, int> Fields { get; } = fields;
 }

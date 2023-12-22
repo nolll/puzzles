@@ -8,8 +8,6 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202320;
 [Name("Pulse Propagation")]
 public class Aoc202320(string input) : AocPuzzle
 {
-    private static string[] _part2Modules = ["rz", "mr", "jg", "kv"];
-
     protected override PuzzleResult RunPart1() => 
         new(CountPulses(input, 1000), "826f2e187e18624950644293ef2e6c8d");
 
@@ -19,7 +17,12 @@ public class Aoc202320(string input) : AocPuzzle
     public static long CountPulses(string s, int iterations, bool isPart2 = false)
     {
         var modules = ParseModules(s);
-        var part2State = _part2Modules.ToDictionary(o => o, _ => 0L);
+        var moduleSendingToRx = modules.Values.First(o => o.Targets.Length == 1 && o.Targets.First() == "rx");
+        var modulesToCheck = modules.Values
+            .Where(o => o.Targets.Length == 1 && o.Targets.First() == moduleSendingToRx.Name)
+            .Select(o => o.Name)
+            .ToArray();
+        var part2State = modulesToCheck.ToDictionary(o => o, _ => 0L);
 
         for (var i = 0; i < iterations; i++)
         {

@@ -25,4 +25,22 @@ public class GraphTests
 
         result.Should().Be(29);
     }
+
+    [Test]
+    public void HighestCost()
+    {
+        var input = new List<Graph.Input>
+        {
+            new("A", "B", 1),
+            new("B", "C", 1),
+            new("C", "D", 1),
+            new("D", "E", 1),
+            new("A", "E", 1),
+            new("E", "A", 0)
+        };
+
+        var result = Graph.GetHighestCost(input, "A", "E");
+
+        result.Should().Be(4);
+    }
 }

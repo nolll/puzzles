@@ -1,5 +1,4 @@
 using Pzl.Common;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
 using Pzl.Tools.Strings;
 
@@ -10,7 +9,7 @@ public class Aoc202322(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        return PuzzleResult.Empty;
+        return new PuzzleResult(DisintegrateBricks(input), "1365c818d49ae8af1974dc302f134abb");
     }
 
     protected override PuzzleResult RunPart2()
@@ -20,54 +19,67 @@ public class Aoc202322(string input) : AocPuzzle
 
     public static int DisintegrateBricks(string s)
     {
-        var bricks = StringReader.ReadLines(s).Select(ParseBrick).OrderBy(o => o.From.Z).ToList();
+        var bricks = StringReader.ReadLines(s).Select(ParseBrick).OrderBy(o => o.Bottom.Z).ToList();
 
-        var lastBrick = bricks.First();
-        lastBrick.MoveTo(1);
-        foreach (var brick in bricks.Skip(1))
-        {
-            brick.MoveTo(1);
-            while (brick.IsOverlapping(lastBrick))
-            {
-                brick.MoveUp();
-            }
-
-            lastBrick = brick;
-        }
+        bricks = MoveDownAsFarAsPossible(bricks);
 
         var bricksThatCanBeRemoved = new List<Brick>();
         foreach (var removedBrick in bricks)
         {
-            var canBeRemoved = true;
-            foreach (var checkedBrick in bricks)
+            var touchingBricks = CloneBricks(bricks.Where(o => o.Bottom.Z == removedBrick.Top.Z + 1).ToList());
+            var blockingBricks = bricks.Where(o => o.Top.Z == removedBrick.Top.Z && removedBrick.Id != o.Id).ToList();
+
+            var unsupportedBricks = 0;
+            foreach (var touchingBrick in touchingBricks)
             {
-                if(checkedBrick.Id == removedBrick.Id)
-                    continue;
-
-                checkedBrick.MoveDown();
-                var isColliding = bricks.Any(o => o.IsOverlapping(checkedBrick));
-                if (!isColliding)
+                touchingBrick.MoveDown();
+                var hasSupport = touchingBrick.Bottom.Z == 0 || blockingBricks.Any(o => o.IsOverlapping(touchingBrick));
+                if (!hasSupport)
                 {
-                    canBeRemoved = false;
-                    break;
+                    unsupportedBricks++;
                 }
-
-                checkedBrick.MoveUp();
             }
 
-            if(canBeRemoved)
+            if (unsupportedBricks == 0)
                 bricksThatCanBeRemoved.Add(removedBrick);
         }
 
         return bricksThatCanBeRemoved.Count;
     }
 
+    private static List<Brick> MoveDownAsFarAsPossible(List<Brick> bricks)
+    {
+        bricks = CloneBricks(bricks);
+        var settledBricks = new List<Brick>();
+        foreach (var brick in bricks)
+        {
+            while (brick.Bottom.Z > 1)
+            {
+                brick.MoveDown();
+                var blockingBricks = settledBricks.Where(o => o.Top.Z == brick.Bottom.Z).ToList();
+                var isOverlapping = blockingBricks.Any(o => o.IsOverlapping(brick));
+                if (isOverlapping)
+                {
+                    brick.MoveUp();
+                    break;
+                }
+            }
+
+            settledBricks.Add(brick);
+        }
+
+        return settledBricks;
+    }
+
+    private static List<Brick> CloneBricks(List<Brick> bricks) => bricks.Select(CloneBrick).ToList();
+    private static Brick CloneBrick(Brick brick) => new(brick.Id, brick.Bottom, brick.Top);
+
     private static Brick ParseBrick(string s, int index)
     {
         var parts = s.Split('~');
-        var from = ParseAddress(parts[0]);
-        var to = ParseAddress(parts[1]);
-        return new Brick(index, from, to);
+        var bottom = ParseAddress(parts[0]);
+        var top = ParseAddress(parts[1]);
+        return new Brick(index, bottom, top);
     }
 
     private static Matrix3DAddress ParseAddress(string s)
@@ -75,36 +87,4 @@ public class Aoc202322(string input) : AocPuzzle
         var parts = s.Split(',').Select(int.Parse).ToArray();
         return new Matrix3DAddress(parts[0], parts[1], parts[2]);
     }
-}
-
-internal class Brick
-{
-    public int Id { get; }
-    public Matrix3DAddress From { get; private set; }
-    public Matrix3DAddress To { get; private set; }
-
-    public Brick(int id, Matrix3DAddress from, Matrix3DAddress to)
-    {
-        Id = id;
-        From = from;
-        To = to;
-    }
-
-    public bool IsOverlapping(Brick other) =>
-        IsOverlapping(From.X, To.X, other.From.X, other.To.X) &&
-        IsOverlapping(From.Y, To.Y, other.From.Y, other.To.Y) &&
-        IsOverlapping(From.Z, To.Z, other.From.Z, other.To.Z);
-
-    public void MoveUp() => MoveTo(From.Z + 1);
-    public void MoveDown() => MoveTo(From.Z - 1);
-
-    public void MoveTo(int zBottom)
-    {
-        var diff = To.Z - From.Z;
-        From = new Matrix3DAddress(From.X, From.Y, zBottom + diff);
-        To = new Matrix3DAddress(To.X, To.Y, zBottom);
-    }
-
-    private static bool IsOverlapping(int fromA, int toA, int fromB, int toB)
-        => (fromA <= toB && toA >= fromB);
 }

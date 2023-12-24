@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Graphs;
@@ -33,41 +34,48 @@ public class Aoc202323(string input) : AocPuzzle
             var current = queue.Dequeue();
             seen.Add(current);
 
-            var north = GetCoord(current, MatrixDirection.Up);
-            var east = GetCoord(current, MatrixDirection.Right);
-            var south = GetCoord(current, MatrixDirection.Down);
-            var west = GetCoord(current, MatrixDirection.Left);
-
-            if (!seen.Contains(north) && !matrix.IsOutOfRange(north) && matrix.ReadValueAt(north) is '.' or '^')
-            {
-                graph.Add(new Graph.Input(current.Id, north.Id, -1));
-                queue.Enqueue(north);
-            }
-
-            if (!seen.Contains(east) && !matrix.IsOutOfRange(east) && matrix.ReadValueAt(east) is '.' or '>')
-            {
-                graph.Add(new Graph.Input(current.Id, east.Id, -1));
-                queue.Enqueue(east);
-            }
-
-            if (!seen.Contains(south) && !matrix.IsOutOfRange(south) && matrix.ReadValueAt(south) is '.' or 'v')
-            {
-                graph.Add(new Graph.Input(current.Id, south.Id, -1));
-                queue.Enqueue(south);
-            }
-
-            if (!seen.Contains(west) && !matrix.IsOutOfRange(west) && matrix.ReadValueAt(west) is '.' or '<')
-            {
-                graph.Add(new Graph.Input(current.Id, west.Id, -1));
-                queue.Enqueue(west);
-            }
+            var neighbors = GetNeighbors(matrix, current).Where(o => !seen.Contains(o));
+            var inputs = neighbors.Select(o => new Graph.Input(current.Id, o.Id, -1));
+            graph.AddRange(inputs);
         }
 
         graph.Add(new Graph.Input(target.Id, start.Id, 0));
 
         var result = -Graph.GetLowestCost(graph, start.Id, target.Id);
+        //var result2 = PathFinder.LongestPathTo(matrix, start, target, GetNeighbors);
 
         return result;
+    }
+
+    private static List<MatrixAddress> GetNeighbors(Matrix<char> matrix, MatrixAddress coord)
+    {
+        var adjacent = new List<MatrixAddress>();
+        var north = GetCoord(coord, MatrixDirection.Up);
+        var east = GetCoord(coord, MatrixDirection.Right);
+        var south = GetCoord(coord, MatrixDirection.Down);
+        var west = GetCoord(coord, MatrixDirection.Left);
+
+        if (!matrix.IsOutOfRange(north) && matrix.ReadValueAt(north) is '.' or '^')
+        {
+            adjacent.Add(north);
+        }
+
+        if (!matrix.IsOutOfRange(east) && matrix.ReadValueAt(east) is '.' or '>')
+        {
+            adjacent.Add(east);
+        }
+
+        if (!matrix.IsOutOfRange(south) && matrix.ReadValueAt(south) is '.' or 'v')
+        {
+            adjacent.Add(south);
+        }
+
+        if (!matrix.IsOutOfRange(west) && matrix.ReadValueAt(west) is '.' or '<')
+        {
+            adjacent.Add(west);
+        }
+
+        return adjacent;
     }
 
     private static MatrixAddress GetCoord(MatrixAddress coord, MatrixDirection direction) => 

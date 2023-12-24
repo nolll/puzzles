@@ -11,9 +11,13 @@ public static class PathFinder
         return goal?.Count ?? 0;
     }
 
-    public static IList<MatrixAddress> ShortestPathTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    public static IList<MatrixAddress> ShortestPathTo(
+        Matrix<char> matrix, 
+        MatrixAddress from, 
+        MatrixAddress to,
+        Func<Matrix<char>, MatrixAddress, List<MatrixAddress>>? neighborFunc = null)
     {
-        var coordCounts = GetCoordCounts(matrix, from, to);
+        var coordCounts = GetCoordCounts(matrix, from, to, neighborFunc ?? GetNeighbors);
         var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
         foreach (var coordCount in coordCounts)
         {
@@ -42,7 +46,46 @@ public static class PathFinder
         return path;
     }
 
-    private static IList<CoordCount> GetCoordCounts(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
+    public static IList<MatrixAddress> LongestPathTo(
+        Matrix<char> matrix,
+        MatrixAddress from,
+        MatrixAddress to,
+        Func<Matrix<char>, MatrixAddress, List<MatrixAddress>>? neighborFunc = null)
+    {
+        var coordCounts = GetCoordCounts(matrix, from, to, neighborFunc ?? GetNeighbors);
+        var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
+        foreach (var coordCount in coordCounts)
+        {
+            pathMatrix.MoveTo(coordCount.X, coordCount.Y);
+            pathMatrix.WriteValue(coordCount.Count);
+        }
+
+        var path = new List<MatrixAddress>();
+        var currentAddress = from;
+        while (!currentAddress.Equals(to))
+        {
+            pathMatrix.MoveTo(currentAddress);
+            var adjacentCoords = pathMatrix.OrthogonalAdjacentCoords
+                .Where(o => pathMatrix.ReadValueAt(o) > -1)
+                .OrderByDescending(pathMatrix.ReadValueAt)
+                .ThenBy(o => o.Y)
+                .ThenBy(o => o.X)
+                .ToList();
+            var bestAddress = adjacentCoords.FirstOrDefault();
+            if (bestAddress == null)
+                break;
+            currentAddress = new MatrixAddress(bestAddress.X, bestAddress.Y);
+            path.Add(currentAddress);
+        }
+
+        return path;
+    }
+
+    private static IList<CoordCount> GetCoordCounts(
+        Matrix<char> matrix, 
+        MatrixAddress from, 
+        MatrixAddress to, 
+        Func<Matrix<char>, MatrixAddress, List<MatrixAddress>> neighborFunc)
     {
         var queue = new List<CoordCount> { new(to.X, to.Y, 0) };
         var seen = new HashSet<(int, int)> { to.Tuple };
@@ -51,9 +94,7 @@ public static class PathFinder
         {
             var next = queue[index];
             matrix.MoveTo(next.X, next.Y);
-            var adjacentCoords = matrix.OrthogonalAdjacentCoords
-                .Where(o => matrix.ReadValueAt(o) == '.' && !seen.Contains(o.Tuple))
-                .ToList();
+            var adjacentCoords = neighborFunc(matrix, matrix.Address).Where(o => !seen.Contains(o.Tuple)).ToList();
             var newCoordCounts = adjacentCoords.Select(o => new CoordCount(o, next.Count + 1)).ToList();
             queue.AddRange(newCoordCounts);
             foreach (var coordCount in newCoordCounts)
@@ -65,6 +106,9 @@ public static class PathFinder
 
         return queue;
     }
+
+    private static List<MatrixAddress> GetNeighbors(Matrix<char> matrix, MatrixAddress coord) => 
+        matrix.OrthogonalAdjacentCoords.Where(o => matrix.ReadValueAt(o) == '.').ToList();
 
     private static IList<CoordCount> CachedGetCoordCounts(Matrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
     {

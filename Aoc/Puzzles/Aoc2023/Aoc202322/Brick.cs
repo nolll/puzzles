@@ -2,25 +2,20 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202322;
 
-internal class Brick
+internal class Brick(int id, Matrix3DAddress bottom, Matrix3DAddress top)
 {
-    public int Id { get; }
-    public Matrix3DAddress Bottom { get; private set; }
-    public Matrix3DAddress Top { get; private set; }
+    public int Id { get; } = id;
+    public Matrix3DAddress Bottom { get; private set; } = bottom;
+    public Matrix3DAddress Top { get; private set; } = top;
+    public bool CanBeRemoved { get; set; }
+    public HashSet<int> Supporting { get; } = new();
+    public HashSet<int> SupportedBy { get; } = new();
 
-    public Brick(int id, Matrix3DAddress bottom, Matrix3DAddress top)
-    {
-        Id = id;
-        Bottom = bottom;
-        Top = top;
-    }
-
-    public bool IsOverlapping(Brick other) =>
+    public bool IsSupporting(Brick other) =>
         IsOverlapping(Bottom.X, Top.X, other.Bottom.X, other.Top.X) &&
         IsOverlapping(Bottom.Y, Top.Y, other.Bottom.Y, other.Top.Y) &&
-        IsOverlapping(Bottom.Z, Top.Z, other.Bottom.Z, other.Top.Z);
+        IsOverlapping(Bottom.Z, Top.Z, other.Bottom.Z - 1, other.Top.Z - 1);
 
-    public void MoveUp() => MoveTo(Bottom.Z + 1);
     public void MoveDown() => MoveTo(Bottom.Z - 1);
 
     private void MoveTo(int zBottom)

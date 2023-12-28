@@ -9,60 +9,108 @@ public class Aoc202322(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        return new PuzzleResult(DisintegrateBricks(input), "1365c818d49ae8af1974dc302f134abb");
+        return new PuzzleResult(CountBricksThatCanBeRemoved(input), "1365c818d49ae8af1974dc302f134abb");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        return PuzzleResult.Empty;
+        return new PuzzleResult(CountTotalRemovedBricks(input), "81d92f2381d8798f847dd6eb9e0ea6b2");
     }
 
-    public static int DisintegrateBricks(string s)
+    public static int CountBricksThatCanBeRemoved(string s)
     {
-        var bricks = StringReader.ReadLines(s).Select(ParseBrick).OrderBy(o => o.Bottom.Z).ToList();
+        var bricks = GetBricksWithInfo(GetSettledBricks(s));
+        var bricksThatCanBeRemoved = bricks.Where(o => o.CanBeRemoved);
+        return bricksThatCanBeRemoved.Count();
+    }
 
-        bricks = MoveDownAsFarAsPossible(bricks);
+    public static int CountTotalRemovedBricks(string s)
+    {
+        var bricks = GetBricksWithInfo(GetSettledBricks(s));
+        var dict = bricks.ToDictionary(k => k.Id, v => v);
 
-        var bricksThatCanBeRemoved = new List<Brick>();
-        foreach (var removedBrick in bricks)
+        var totalRemoved = 0;
+        foreach (var removedBrick in bricks.Where(o => !o.CanBeRemoved))
         {
-            var touchingBricks = CloneBricks(bricks.Where(o => o.Bottom.Z == removedBrick.Top.Z + 1).ToList());
-            var blockingBricks = bricks.Where(o => o.Top.Z == removedBrick.Top.Z && removedBrick.Id != o.Id).ToList();
-
-            var unsupportedBricks = 0;
-            foreach (var touchingBrick in touchingBricks)
+            var queue = new Queue<int>();
+            var removed = new HashSet<int> { removedBrick.Id };
+            foreach (var supporting in removedBrick.Supporting)
             {
-                touchingBrick.MoveDown();
-                var hasSupport = touchingBrick.Bottom.Z == 0 || blockingBricks.Any(o => o.IsOverlapping(touchingBrick));
-                if (!hasSupport)
+                queue.Enqueue(supporting);
+            }
+
+            while (queue.Count > 0)
+            {
+                var id = queue.Dequeue();
+                var brick = dict[id];
+                if (brick.SupportedBy.All(removed.Contains))
                 {
-                    unsupportedBricks++;
+                    removed.Add(id);
+
+                    foreach (var supportedBrick in brick.Supporting)
+                    {
+                        queue.Enqueue(supportedBrick);
+                    }
                 }
             }
 
-            if (unsupportedBricks == 0)
-                bricksThatCanBeRemoved.Add(removedBrick);
+            totalRemoved += removed.Count - 1;
         }
 
-        return bricksThatCanBeRemoved.Count;
+        return totalRemoved;
+    }
+
+    private static List<Brick> GetSettledBricks(string s)
+    {
+        var bricks = StringReader.ReadLines(s).Select(ParseBrick).OrderBy(o => o.Bottom.Z).ToList();
+
+        return MoveDownAsFarAsPossible(bricks).OrderBy(o => o.Bottom.Z).ToList();
+    }
+
+    private static List<Brick> GetBricksWithInfo(List<Brick> bricks)
+    {
+        foreach (var currentBrick in bricks)
+        {
+            var bricksThatCouldBeRestingOnCurrentBrick = bricks.Where(o => o.Bottom.Z == currentBrick.Top.Z + 1);
+            var otherBricksWithSameTopLevel = bricks
+                .Where(o => o.Top.Z == currentBrick.Top.Z)
+                .Where(o => currentBrick.Id != o.Id).ToList();
+
+            var bricksOnlySupportedByCurrentBrick = new List<int>();
+            foreach (var brickThatCouldBeRestingOnCurrentBlock in bricksThatCouldBeRestingOnCurrentBrick)
+            {
+                var hasOtherSupport = otherBricksWithSameTopLevel.Any(o => o.IsSupporting(brickThatCouldBeRestingOnCurrentBlock));
+                if (!hasOtherSupport)
+                {
+                    bricksOnlySupportedByCurrentBrick.Add(brickThatCouldBeRestingOnCurrentBlock.Id);
+                }
+
+                if (currentBrick.IsSupporting(brickThatCouldBeRestingOnCurrentBlock))
+                {
+                    currentBrick.Supporting.Add(brickThatCouldBeRestingOnCurrentBlock.Id);
+                    brickThatCouldBeRestingOnCurrentBlock.SupportedBy.Add(currentBrick.Id);
+                }
+            }
+
+            currentBrick.CanBeRemoved = bricksOnlySupportedByCurrentBrick.Count == 0;
+        }
+
+        return bricks;
     }
 
     private static List<Brick> MoveDownAsFarAsPossible(List<Brick> bricks)
     {
-        bricks = CloneBricks(bricks);
         var settledBricks = new List<Brick>();
         foreach (var brick in bricks)
         {
             while (brick.Bottom.Z > 1)
             {
-                brick.MoveDown();
-                var blockingBricks = settledBricks.Where(o => o.Top.Z == brick.Bottom.Z).ToList();
-                var isOverlapping = blockingBricks.Any(o => o.IsOverlapping(brick));
-                if (isOverlapping)
-                {
-                    brick.MoveUp();
+                var blockingBricks = settledBricks.Where(o => o.Top.Z == brick.Bottom.Z - 1).ToList();
+                var isSettled = blockingBricks.Any(o => o.IsSupporting(brick));
+                if (isSettled)
                     break;
-                }
+
+                brick.MoveDown();
             }
 
             settledBricks.Add(brick);
@@ -70,9 +118,6 @@ public class Aoc202322(string input) : AocPuzzle
 
         return settledBricks;
     }
-
-    private static List<Brick> CloneBricks(List<Brick> bricks) => bricks.Select(CloneBrick).ToList();
-    private static Brick CloneBrick(Brick brick) => new(brick.Id, brick.Bottom, brick.Top);
 
     private static Brick ParseBrick(string s, int index)
     {

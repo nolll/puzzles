@@ -44,16 +44,20 @@ public class Aoc202301(string input) : AocPuzzle
         return int.Parse($"{firstNumber}{lastNumber}");
     }
 
-    public static string ReplaceStringDigits(string s)
+    private static string ReplaceStringDigits(string s)
     {
         for (var i = 0; i < Words.Count; i++)
         {
-            var word = Words[i];
-            var digit = i + 1;
-            s = s.Replace(word, $"{word}{digit}{word}");
+            s = ReplaceWord(s, i + 1);
         }
 
         return s;
+    }
+
+    private static string ReplaceWord(string s, int digit)
+    {
+        var word = Words[digit - 1];
+        return s.Replace(word, $"{word}{digit}{word}");
     }
 
     private static int FindFirstDigit(string input) => int.Parse(input.ToCharArray().First(IsDigit).ToString());

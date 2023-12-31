@@ -161,7 +161,7 @@ public class MatrixTests
     }
 
     [Test]
-    public void Copy()
+    public void Clone()
     {
         const string input = """
                              #..
@@ -178,7 +178,33 @@ public class MatrixTests
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
-        matrix = matrix.Copy();
+        matrix = matrix.Clone();
+
+        matrix.Print().Should().Be(expectedMatrix.Print());
+    }
+
+    [Test]
+    public void CloneAndMultiply()
+    {
+        const string input = """
+                             #..
+                             #..
+                             .#.
+                             """;
+
+        const string expected = """
+                                #..#..
+                                #..#..
+                                .#..#.
+                                #..#..
+                                #..#..
+                                .#..#.
+                                """;
+
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+
+        matrix = matrix.Clone(2);
 
         matrix.Print().Should().Be(expectedMatrix.Print());
     }

@@ -330,13 +330,41 @@ public class Matrix<T> where T : struct
                address.X < XMin;
     }
 
-    public Matrix<T> Copy()
+    public Matrix<T> Clone(int multiplier = 1)
     {
-        var values = _matrix.ToDictionary(item => item.Key, item => item.Value);
+        multiplier = multiplier < 1 ? 1 : multiplier;
+
+        var values = GetValuesForClone(multiplier);
         var min = new MatrixAddress(XMin, YMin);
-        var max = new MatrixAddress(XMax, YMax);
+        var max = GetMaxAddressForClone(multiplier);
         return new Matrix<T>(min, max, values, _defaultValue);
     }
+
+    private Dictionary<MatrixAddress, T> GetValuesForClone(int multiplier)
+    {
+        var values = _matrix.ToDictionary(item => item.Key, item => item.Value);
+
+        if (multiplier == 1)
+            return values;
+
+        var extendedValues = new Dictionary<MatrixAddress, T>();
+
+        for (var xm = 0; xm < multiplier; xm++)
+        {
+            for (var ym = 0; ym < multiplier; ym++)
+            {
+                foreach (var (coord, value) in values)
+                {
+                    extendedValues.Add(new MatrixAddress(coord.X + xm * Width, coord.Y + ym * Height), value);
+                }
+            }
+        }
+
+        return extendedValues;
+    }
+
+    private MatrixAddress GetMaxAddressForClone(int multiplier) => 
+        new(XMax + Width * (multiplier - 1), YMax + Height * (multiplier - 1));
 
     public Matrix<T> RotateLeft()
     {

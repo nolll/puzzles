@@ -32,7 +32,7 @@ public abstract class SeatingSimulator
 
     private void RunOnce()
     {
-        var newMatrix = Matrix.Copy();
+        var newMatrix = Matrix.Clone();
 
         foreach (var coord in Matrix.Coords)
         {

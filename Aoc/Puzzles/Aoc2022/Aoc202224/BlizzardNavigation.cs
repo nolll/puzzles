@@ -151,7 +151,7 @@ public class BlizzardNavigation
 
     private string PrintMatrix(List<Blizzard> blizzards)
     {
-        var newMatrix = _matrix.Copy();
+        var newMatrix = _matrix.Clone();
         foreach (var blizzard in blizzards)
         {
             var v = newMatrix.ReadValueAt(blizzard.Address);

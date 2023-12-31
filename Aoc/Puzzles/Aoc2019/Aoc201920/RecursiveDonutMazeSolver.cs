@@ -67,7 +67,7 @@ public class RecursiveDonutMazeSolver
 
         var portals = new Dictionary<(int, int), DonutPortal>();
         var orderedPortalAddresses = portalAddresses.OrderBy(o => o.Name).ToList();
-        var topMatrix = matrix.Copy();
+        var topMatrix = matrix.Clone();
 
         while (orderedPortalAddresses.Any())
         {

@@ -18,9 +18,9 @@ public class RecursiveBugLifeSimulator
     public RecursiveBugLifeSimulator(string input)
     {
         _matrixes = new Dictionary<int, Matrix<char>>();
-        _matrixes[-1] = _emptyMatrix.Copy();
+        _matrixes[-1] = _emptyMatrix.Clone();
         _matrixes[0] = BuildMatrix(input);
-        _matrixes[1] = _emptyMatrix.Copy();
+        _matrixes[1] = _emptyMatrix.Clone();
 
         _cells = BuildCells();
         _relativeAddresses = BuildRelativeAddresses();
@@ -39,7 +39,7 @@ public class RecursiveBugLifeSimulator
         if (_matrixes.TryGetValue(level, out var matrix))
             return matrix;
 
-        matrix = _emptyMatrix.Copy();
+        matrix = _emptyMatrix.Clone();
         _matrixes.Add(level, matrix);
         return matrix;
     }
@@ -51,7 +51,7 @@ public class RecursiveBugLifeSimulator
         foreach (var level in levels)
         {
             var matrix = GetMatrix(level);
-            var newMatrix = _emptyMatrix.Copy();
+            var newMatrix = _emptyMatrix.Clone();
 
             foreach (var address in _cells.Values)
             {
@@ -68,7 +68,7 @@ public class RecursiveBugLifeSimulator
         foreach (var key in _matrixes.Keys)
         {
             if (!newMatrixes.ContainsKey(key))
-                newMatrixes[key] = _emptyMatrix.Copy();
+                newMatrixes[key] = _emptyMatrix.Clone();
         }
 
         _matrixes = newMatrixes;

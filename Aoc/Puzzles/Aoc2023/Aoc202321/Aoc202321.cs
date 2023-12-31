@@ -16,6 +16,9 @@ public class Aoc202321(string input) : AocPuzzle
         // guesses
         // 608_148_528_908_778 not correct
         // 608_148_533_763_966 not correct
+        // 608_148_613_469_947 not correct
+        // 608_148_528_908_778 not correct
+        // 608_151_537_506_942
 
         return new PuzzleResult(CountPositionsAfterMany(input));
     }
@@ -32,58 +35,56 @@ public class Aoc202321(string input) : AocPuzzle
     {
         var matrix = MatrixBuilder.BuildCharMatrix(s);
         var start = matrix.FindAddresses('S').First();
-        var (sx, sy) = start.Tuple;
-        var (minx, miny) = new MatrixAddress(matrix.XMin, matrix.YMin).Tuple;
-        var (maxx, maxy) = new MatrixAddress(matrix.XMax, matrix.YMax).Tuple;
+        var center = start.X;
+        var (left, top) = new MatrixAddress(matrix.XMin, matrix.YMin).Tuple;
+        var (right, bottom) = new MatrixAddress(matrix.XMax, matrix.YMax).Tuple;
         var size = matrix.Width;
         matrix.WriteValueAt(start, '.');
-
+         
         const int stepCount = 26_501_365;
-        var gridSize = (stepCount - size / 2) / size - 1;
+        var gridWidth = stepCount / size - 1;
 
-        var oddSectionCount = (long)Math.Pow(Math.Floor((double)gridSize / 2) * 2 + 1, 2);
-        var evenSectionCount = (long)Math.Pow(Math.Floor((double)(gridSize + 1) / 2) * 2, 2);
+        //var odd = (long)Math.Pow(Math.Floor((double)gridWidth / 2) * 2 + 1, 2);
+        //var even = (long)Math.Pow(Math.Floor((double)(gridWidth + 1) / 2) * 2, 2);
 
-        var filledOddSection = CountPositionsAfter(matrix, start, size * 2 + 1);
-        var filledEvenSection = CountPositionsAfter(matrix, start, size * 2);
+        long oddMultiplier = gridWidth / 2 * 2 + 1;
+        long odd = oddMultiplier * oddMultiplier;
 
-        var largeSectionCount = gridSize;
-        var smallSectionCount = gridSize + 1;
+        long evenMultiplier = (gridWidth + 1) / 2 * 2;
+        long even = evenMultiplier * evenMultiplier;
 
-        var sectionSteps = size - 1;
-        var smallSectionSteps = (int)Math.Floor((double)size / 2);
-        var largeSectionSteps = (int)Math.Floor((double)size * 3 / 2);
+        var oddPoints = CountPositionsAfter(matrix, start, size);
+        var evenPoints = CountPositionsAfter(matrix, start, size + 1);
 
-        var top = new MatrixAddress(sx, miny);
-        var fromTop = CountPositionsAfter(matrix, top, sectionSteps);
-        var right = new MatrixAddress(maxx, sy);
-        var fromRight = CountPositionsAfter(matrix, right, sectionSteps);
-        var bottom = new MatrixAddress(sx, maxy);
-        var fromBottom = CountPositionsAfter(matrix, bottom, sectionSteps);
-        var left = new MatrixAddress(minx, sy);
-        var fromLeft = CountPositionsAfter(matrix, left, sectionSteps);
+        var smallCount = gridWidth + 1;
+        var largeCount = gridWidth;
 
-        var topRight = new MatrixAddress(maxx, miny);
-        var fromTopRightSmall = CountPositionsAfter(matrix, topRight, smallSectionSteps);
-        var fromTopRightLarge = CountPositionsAfter(matrix, topRight, largeSectionSteps);
+        var cornerSteps = size - 1;
+        var smallSteps = (int)Math.Floor((double)size / 2) - 1;
+        var largeSteps = (int)Math.Floor((double)size * 3 / 2) - 1;
 
-        var bottomRight = new MatrixAddress(maxx, maxy);
-        var fromBottomRightSmall = CountPositionsAfter(matrix, bottomRight, smallSectionSteps);
-        var fromBottomRightLarge = CountPositionsAfter(matrix, bottomRight, largeSectionSteps);
-        
-        var bottomLeft = new MatrixAddress(minx, maxy);
-        var fromBottomLeftSmall = CountPositionsAfter(matrix, bottomLeft, smallSectionSteps);
-        var fromBottomLeftLarge = CountPositionsAfter(matrix, bottomLeft, largeSectionSteps);
-        
-        var topLeft = new MatrixAddress(minx, miny);
-        var fromTopLeftSmall = CountPositionsAfter(matrix, topLeft, smallSectionSteps);
-        var fromTopLeftLarge = CountPositionsAfter(matrix, topLeft, largeSectionSteps);
+        var ct = CountPositionsAfter(matrix, new MatrixAddress(center, bottom), cornerSteps);
+        var cr = CountPositionsAfter(matrix, new MatrixAddress(left, center), cornerSteps);
+        var cb = CountPositionsAfter(matrix, new MatrixAddress(center, top), cornerSteps);
+        var cl = CountPositionsAfter(matrix, new MatrixAddress(right, center), cornerSteps);
 
-        var filledPlots = filledOddSection * oddSectionCount
-                          + filledEvenSection * evenSectionCount
-                          + (fromTopRightLarge + fromBottomRightLarge + fromBottomLeftLarge + fromTopLeftLarge) * largeSectionCount
-                          + (fromTopRightSmall + fromBottomRightSmall + fromBottomLeftSmall + fromTopLeftSmall) * smallSectionCount
-                          + fromTop + fromRight + fromBottom + fromLeft;
+        var str = CountPositionsAfter(matrix, new MatrixAddress(left, bottom), smallSteps);
+        var ltr = CountPositionsAfter(matrix, new MatrixAddress(left, bottom), largeSteps);
+
+        var sbr = CountPositionsAfter(matrix, new MatrixAddress(left, top), smallSteps);
+        var lbr = CountPositionsAfter(matrix, new MatrixAddress(left, top), largeSteps);
+
+        var sbl = CountPositionsAfter(matrix, new MatrixAddress(right, top), smallSteps);
+        var lbl = CountPositionsAfter(matrix, new MatrixAddress(right, top), largeSteps);
+
+        var stl = CountPositionsAfter(matrix, new MatrixAddress(right, bottom), smallSteps);
+        var ltl = CountPositionsAfter(matrix, new MatrixAddress(right, bottom), largeSteps);
+
+        var filledPlots = oddPoints * odd
+                          + evenPoints * even
+                          + ct + cr + cb + cl
+                          + (str + sbr + sbl + stl) * smallCount
+                          + (ltr + lbr + lbl + ltl) * largeCount;
 
         return filledPlots;
     }

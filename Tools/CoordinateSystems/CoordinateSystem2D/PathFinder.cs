@@ -46,41 +46,6 @@ public static class PathFinder
         return path;
     }
 
-    public static IList<MatrixAddress> LongestPathTo(
-        Matrix<char> matrix,
-        MatrixAddress from,
-        MatrixAddress to,
-        Func<Matrix<char>, MatrixAddress, List<MatrixAddress>>? neighborFunc = null)
-    {
-        var coordCounts = GetCoordCounts(matrix, from, to, neighborFunc ?? GetNeighbors);
-        var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
-        foreach (var coordCount in coordCounts)
-        {
-            pathMatrix.MoveTo(coordCount.X, coordCount.Y);
-            pathMatrix.WriteValue(coordCount.Count);
-        }
-
-        var path = new List<MatrixAddress>();
-        var currentAddress = from;
-        while (!currentAddress.Equals(to))
-        {
-            pathMatrix.MoveTo(currentAddress);
-            var adjacentCoords = pathMatrix.OrthogonalAdjacentCoords
-                .Where(o => pathMatrix.ReadValueAt(o) > -1)
-                .OrderByDescending(pathMatrix.ReadValueAt)
-                .ThenBy(o => o.Y)
-                .ThenBy(o => o.X)
-                .ToList();
-            var bestAddress = adjacentCoords.FirstOrDefault();
-            if (bestAddress == null)
-                break;
-            currentAddress = new MatrixAddress(bestAddress.X, bestAddress.Y);
-            path.Add(currentAddress);
-        }
-
-        return path;
-    }
-
     private static IList<CoordCount> GetCoordCounts(
         Matrix<char> matrix, 
         MatrixAddress from, 

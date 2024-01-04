@@ -1,53 +1,120 @@
-using System.Diagnostics.CodeAnalysis;
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
-using Pzl.Tools.Graphs;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202323;
 
 [Name("A Long Walk")]
+[IsSlow]
 public class Aoc202323(string input) : AocPuzzle
 {
+    private static readonly Dictionary<MatrixDirection, char> ValidSlopes = new()
+    {
+        { MatrixDirection.Up, '^' },
+        { MatrixDirection.Right, '>' },
+        { MatrixDirection.Down, 'v' },
+        { MatrixDirection.Left, '<' }
+    };
+
     protected override PuzzleResult RunPart1()
     {
-        return PuzzleResult.Empty;
+        return new PuzzleResult(LongestHike(input, false), "854218011528db376afeffbf53800ecd");
     }
 
     protected override PuzzleResult RunPart2()
     {
-        return PuzzleResult.Empty;
+        return new PuzzleResult(LongestHike(input, true), "22bcf9382d0e8177c5c6ef52f07fd7b9");
     }
 
-    public static int LongestHike(string s)
+    public static int LongestHike(string s, bool canClimbSlopes)
     {
         var matrix = MatrixBuilder.BuildCharMatrix(s);
         var start = new MatrixAddress(matrix.XMin + 1, matrix.YMin);
         var target = new MatrixAddress(matrix.XMax - 1, matrix.YMax);
 
-        var queue = new Queue<MatrixAddress>();
-        queue.Enqueue(start);
-        var seen = new HashSet<MatrixAddress>();
-        var graph = new List<Graph.Input>();
+        var graphCoords = FindGraphCoords(matrix, start, target).ToList();
+        var graph = BuildGraph(matrix, graphCoords, canClimbSlopes);
 
-        while (queue.Count > 0)
-        {
-            var current = queue.Dequeue();
-            seen.Add(current);
-
-            var neighbors = GetNeighbors(matrix, current).Where(o => !seen.Contains(o));
-            var inputs = neighbors.Select(o => new Graph.Input(current.Id, o.Id, -1));
-            graph.AddRange(inputs);
-        }
-
-        graph.Add(new Graph.Input(target.Id, start.Id, 0));
-
-        var result = -Graph.GetLowestCost(graph, start.Id, target.Id);
-        //var result2 = PathFinder.LongestPathTo(matrix, start, target, GetNeighbors);
-
-        return result;
+        return FindLongestRoute(graph, [], start.Id, target.Id);
     }
 
-    private static List<MatrixAddress> GetNeighbors(Matrix<char> matrix, MatrixAddress coord)
+    private static IEnumerable<MatrixAddress> FindGraphCoords(Matrix<char> matrix, MatrixAddress start, MatrixAddress target)
+    {
+        yield return start;
+        yield return target;
+
+        foreach (var current in matrix.Coords)
+        {
+            if (matrix.ReadValueAt(current) == '#')
+                continue;
+
+            var neighbors = matrix.OrthogonalAdjacentCoordsTo(current)
+                .Where(o => matrix.ReadValueAt(o) != '#');
+            if (neighbors.Count() > 2)
+            {
+                yield return current;
+            }
+        }
+    }
+
+    private static Dictionary<string, Dictionary<string, int>> BuildGraph(
+        Matrix<char> matrix,
+        List<MatrixAddress> graphCoords, 
+        bool canClimbSlopes)
+    {
+        var graph = new Dictionary<string, Dictionary<string, int>>();
+        foreach (var startCoord in graphCoords)
+        {
+            var queue = new Queue<(MatrixAddress, int)>();
+            queue.Enqueue((startCoord, 0));
+            var seen = new HashSet<MatrixAddress> { startCoord };
+            graph.Add(startCoord.Id, new());
+
+            while (queue.Count > 0)
+            {
+                var (current, distance) = queue.Dequeue();
+                if (distance != 0 && graphCoords.Contains(current))
+                {
+                    graph[startCoord.Id].Add(current.Id, distance);
+                    continue;
+                }
+
+                var neigbors = GetNeighbors(matrix, current, canClimbSlopes).Where(o => !seen.Contains(o));
+                foreach (var neighbor in neigbors)
+                {
+                    queue.Enqueue((neighbor, distance + 1));
+                    seen.Add(neighbor);
+                }
+            }
+        }
+
+        return graph;
+    }
+
+    private static int FindLongestRoute(
+        Dictionary<string, Dictionary<string, int>> graph, 
+        HashSet<string> seen,
+        string current, 
+        string target)
+    {
+        if (current == target)
+            return 0;
+
+        var max = int.MinValue;
+        var connections = graph[current];
+        var newSeen = seen.ToHashSet();
+        newSeen.Add(current);
+        foreach (var connection in connections.Keys)
+        {
+            if(newSeen.Contains(connection))
+                continue;
+
+            max = Math.Max(max, FindLongestRoute(graph, newSeen, connection, target) + graph[current][connection]);
+        }
+
+        return max;
+    }
+
+    private static List<MatrixAddress> GetNeighbors(Matrix<char> matrix, MatrixAddress coord, bool canClimbSlopes)
     {
         var adjacent = new List<MatrixAddress>();
         var north = GetCoord(coord, MatrixDirection.Up);
@@ -55,27 +122,24 @@ public class Aoc202323(string input) : AocPuzzle
         var south = GetCoord(coord, MatrixDirection.Down);
         var west = GetCoord(coord, MatrixDirection.Left);
 
-        if (!matrix.IsOutOfRange(north) && matrix.ReadValueAt(north) is '.' or '^')
-        {
-            adjacent.Add(north);
-        }
-
-        if (!matrix.IsOutOfRange(east) && matrix.ReadValueAt(east) is '.' or '>')
-        {
-            adjacent.Add(east);
-        }
-
-        if (!matrix.IsOutOfRange(south) && matrix.ReadValueAt(south) is '.' or 'v')
-        {
-            adjacent.Add(south);
-        }
-
-        if (!matrix.IsOutOfRange(west) && matrix.ReadValueAt(west) is '.' or '<')
-        {
-            adjacent.Add(west);
-        }
+        if (CanGoDirection(matrix, north, canClimbSlopes, MatrixDirection.Up)) adjacent.Add(north);
+        if (CanGoDirection(matrix, east, canClimbSlopes, MatrixDirection.Right)) adjacent.Add(east);
+        if (CanGoDirection(matrix, south, canClimbSlopes, MatrixDirection.Down)) adjacent.Add(south);
+        if (CanGoDirection(matrix, west, canClimbSlopes, MatrixDirection.Left)) adjacent.Add(west);
 
         return adjacent;
+    }
+
+    private static bool CanGoDirection(Matrix<char> matrix, MatrixAddress coord, bool canClimbSlopes, MatrixDirection direction)
+    {
+        if (matrix.IsOutOfRange(coord))
+            return false;
+
+        var value = matrix.ReadValueAt(coord);
+        if (canClimbSlopes && value is not '#')
+            return true;
+
+        return value == '.' || value == ValidSlopes[direction];
     }
 
     private static MatrixAddress GetCoord(MatrixAddress coord, MatrixDirection direction) => 

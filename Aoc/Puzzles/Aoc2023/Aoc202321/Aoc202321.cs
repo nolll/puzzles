@@ -48,10 +48,10 @@ public class Aoc202321(string input) : AocPuzzle
         //var even = (long)Math.Pow(Math.Floor((double)(gridWidth + 1) / 2) * 2, 2);
 
         long oddMultiplier = gridWidth / 2 * 2 + 1;
-        long odd = oddMultiplier * oddMultiplier;
+        var odd = oddMultiplier * oddMultiplier;
 
         long evenMultiplier = (gridWidth + 1) / 2 * 2;
-        long even = evenMultiplier * evenMultiplier;
+        var even = evenMultiplier * evenMultiplier;
 
         var oddPoints = CountPositionsAfter(matrix, start, size);
         var evenPoints = CountPositionsAfter(matrix, start, size + 1);

@@ -1,13 +1,16 @@
-﻿namespace Pzl.Aquaq.Puzzles.Aquaq31;
+﻿using System.Text;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+
+namespace Pzl.Aquaq.Puzzles.Aquaq31;
 
 public class RubiksCube
 {
-    public RubiksCubeFace Front { get; } = CreateFace('b');
-    public RubiksCubeFace Up { get; } = CreateFace('w');
-    public RubiksCubeFace Left { get; } = CreateFace('r');
-    public RubiksCubeFace Right { get; } = CreateFace('o');
-    public RubiksCubeFace Down { get; } = CreateFace('y');
-    public RubiksCubeFace Back { get; } = CreateFace('g');
+    public RubiksCubeFace Front { get; } = new(CubeColors.Blue);
+    public RubiksCubeFace Up { get; } = new(CubeColors.White);
+    public RubiksCubeFace Left { get; } = new(CubeColors.Red);
+    public RubiksCubeFace Right { get; } = new(CubeColors.Orange);
+    public RubiksCubeFace Down { get; } = new(CubeColors.Yellow);
+    public RubiksCubeFace Back { get; } = new(CubeColors.Green);
 
     public void Rotate(string instruction)
     {
@@ -17,24 +20,24 @@ public class RubiksCube
 
     private Action GetRotateFunc(string instruction) => instruction switch
     {
-        "F" => RotateFront,
-        "F'" => RotateFrontPrime,
-        "U" => RotateUp,
-        "U'" => RotateUpPrime,
-        "L" => RotateLeft,
-        "L'" => RotateLeftPrime,
-        "R" => RotateRight,
-        "R'" => RotateRightPrime,
-        "D" => RotateDown,
-        "D'" => RotateDownPrime,
-        "B" => RotateBack,
-        "B'" => RotateBackPrime,
-        "X" => RotateCubeX,
-        "X'" => RotateCubeXPrime,
-        "Y" => RotateCubeY,
-        "Y'" => RotateCubeYPrime,
-        "Z" => RotateCubeZ,
-        "Z'" => RotateCubeZPrime,
+        CubeRotations.Front => RotateFront,
+        CubeRotations.FrontPrime => RotateFrontPrime,
+        CubeRotations.Up => RotateUp,
+        CubeRotations.UpPrime => RotateUpPrime,
+        CubeRotations.Left => RotateLeft,
+        CubeRotations.LeftPrime => RotateLeftPrime,
+        CubeRotations.Right => RotateRight,
+        CubeRotations.RightPrime => RotateRightPrime,
+        CubeRotations.Down => RotateDown,
+        CubeRotations.DownPrime => RotateDownPrime,
+        CubeRotations.Back => RotateBack,
+        CubeRotations.BackPrime => RotateBackPrime,
+        CubeRotations.CubeX => RotateCubeX,
+        CubeRotations.CubeXPrime => RotateCubeXPrime,
+        CubeRotations.CubeY => RotateCubeY,
+        CubeRotations.CubeYPrime => RotateCubeYPrime,
+        CubeRotations.CubeZ => RotateCubeZ,
+        CubeRotations.CubeZPrime => RotateCubeZPrime,
         _ => throw new Exception("Unknown rotation")
     };
 
@@ -194,42 +197,6 @@ public class RubiksCube
         Up.WriteTopRow(fromLeft.Reverse());
     }
 
-    private void RotateCubeZ()
-    {
-        Back.RotateLeft();
-        Front.RotateRight();
-        var left = Left.ReadAll();
-        var up = Up.ReadAll();
-        var right = Right.ReadAll();
-        var down = Down.ReadAll();
-        Up.WriteAll(left);
-        Up.RotateLeft();
-        Left.WriteAll(down);
-        Left.RotateLeft();
-        Right.WriteAll(up);
-        Right.RotateLeft();
-        Down.WriteAll(right);
-        Down.RotateLeft();
-    }
-
-    private void RotateCubeZPrime()
-    {
-        Back.RotateRight();
-        Front.RotateLeft();
-        var left = Left.ReadAll();
-        var up = Up.ReadAll();
-        var right = Right.ReadAll();
-        var down = Down.ReadAll();
-        Up.WriteAll(right);
-        Up.RotateRight();
-        Left.WriteAll(up);
-        Left.RotateRight();
-        Right.WriteAll(down);
-        Right.RotateRight();
-        Down.WriteAll(left);
-        Down.RotateRight();
-    }
-
     private void RotateCubeX()
     {
         Left.RotateLeft();
@@ -294,5 +261,90 @@ public class RubiksCube
         Back.WriteAll(right);
     }
 
-    private static RubiksCubeFace CreateFace(char initial) => new(initial);
+    private void RotateCubeZ()
+    {
+        Back.RotateLeft();
+        Front.RotateRight();
+        var left = Left.ReadAll();
+        var up = Up.ReadAll();
+        var right = Right.ReadAll();
+        var down = Down.ReadAll();
+        Up.WriteAll(left);
+        Up.RotateLeft();
+        Left.WriteAll(down);
+        Left.RotateLeft();
+        Right.WriteAll(up);
+        Right.RotateLeft();
+        Down.WriteAll(right);
+        Down.RotateLeft();
+    }
+
+    private void RotateCubeZPrime()
+    {
+        Back.RotateRight();
+        Front.RotateLeft();
+        var left = Left.ReadAll();
+        var up = Up.ReadAll();
+        var right = Right.ReadAll();
+        var down = Down.ReadAll();
+        Up.WriteAll(right);
+        Up.RotateRight();
+        Left.WriteAll(up);
+        Left.RotateRight();
+        Right.WriteAll(down);
+        Right.RotateRight();
+        Down.WriteAll(left);
+        Down.RotateRight();
+    }
+
+    public string PrintFlat()
+    {
+        var s = new StringBuilder();
+        s.AppendLine(Front.PrintFlat());
+        s.AppendLine(Up.PrintFlat());
+        s.AppendLine(Left.PrintFlat());
+        s.AppendLine(Right.PrintFlat());
+        s.AppendLine(Down.PrintFlat());
+        s.AppendLine(Back.PrintFlat());
+
+        return s.ToString();
+    }
+
+    public string Print()
+    {
+        var pm = new Matrix<char>(9, 12, '.');
+        var frontMatrix = Front.Matrix;
+        var upMatrix = Up.Matrix;
+        var leftMatrix = Left.Matrix;
+        var rightMatrix = Right.Matrix;
+        var downMatrix = Down.Matrix;
+        var backMatrix = Back.Matrix.RotateLeft().RotateLeft();
+
+        ApplyToPrintMatrix(pm, upMatrix, new MatrixAddress(3, 0));
+        ApplyToPrintMatrix(pm, leftMatrix, new MatrixAddress(0, 3));
+        ApplyToPrintMatrix(pm, frontMatrix, new MatrixAddress(3, 3));
+        ApplyToPrintMatrix(pm, rightMatrix, new MatrixAddress(6, 3));
+        ApplyToPrintMatrix(pm, downMatrix, new MatrixAddress(3, 6));
+        ApplyToPrintMatrix(pm, backMatrix, new MatrixAddress(3, 9));
+
+        return pm.Print();
+    }
+
+    private void ApplyToPrintMatrix(Matrix<char> printMatrix, Matrix<char> faceMatrix, MatrixAddress startAddress)
+    {
+        foreach (var coord in faceMatrix.Coords)
+        {
+            printMatrix.WriteValueAt(startAddress.X + coord.X, startAddress.Y + coord.Y, faceMatrix.ReadValueAt(coord));
+        }
+    }
+
+    public void Scramble()
+    {
+        var rnd = new Random((int)DateTime.Now.Ticks);
+        var rotations = CubeRotations.All;
+        for (var i = 0; i < 100; i++)
+        {
+            Rotate(rotations[rnd.Next(rotations.Length - 1)]);
+        }
+    }
 }

@@ -43,11 +43,11 @@ public class Aquaq31Tests
         var cube = new RubiksCube();
         cube.Rotate(rotation);
 
-        cube.Front.Print().Should().Be(front);
-        cube.Up.Print().Should().Be(up);
-        cube.Left.Print().Should().Be(left);
-        cube.Right.Print().Should().Be(right);
-        cube.Down.Print().Should().Be(down);
-        cube.Back.Print().Should().Be(back);
+        cube.Front.PrintFlat().Should().Be(front);
+        cube.Up.PrintFlat().Should().Be(up);
+        cube.Left.PrintFlat().Should().Be(left);
+        cube.Right.PrintFlat().Should().Be(right);
+        cube.Down.PrintFlat().Should().Be(down);
+        cube.Back.PrintFlat().Should().Be(back);
     }
 }

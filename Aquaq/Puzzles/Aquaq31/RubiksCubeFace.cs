@@ -2,15 +2,10 @@
 
 namespace Pzl.Aquaq.Puzzles.Aquaq31;
 
-public class RubiksCubeFace
+public class RubiksCubeFace(char initial)
 {
     private const int Size = 3;
-    private Matrix<char> _matrix;
-
-    public RubiksCubeFace(char initial)
-    {
-        _matrix = new Matrix<char>(Size, Size, initial);
-    }
+    private Matrix<char> _matrix = new(Size, Size, initial);
 
     public char[] ReadAll() => _matrix.Values.ToArray();
     public char[] ReadLeftColumn() => ReadColumn(0);
@@ -20,6 +15,8 @@ public class RubiksCubeFace
     public char[] ReadTopRow() => ReadRow(0);
     public char[] ReadBottomRow() => ReadRow(2);
     private char[] ReadRow(int y) => Enumerable.Range(0, Size).Select(o => _matrix.ReadValueAt(o, y)).ToArray();
+
+    public Matrix<char> Matrix => _matrix.Clone();
 
     public void WriteAll(IEnumerable<char> chars)
     {
@@ -57,17 +54,18 @@ public class RubiksCubeFace
 
     public void RotateRight() => _matrix = _matrix.RotateRight();
     public void RotateLeft() => _matrix = _matrix.RotateLeft();
-    public string Print() => string.Join("", _matrix.Values);
+    public string PrintFlat() => string.Join("", _matrix.Values);
+    public string Print() => _matrix.Print();
     public int Product => _matrix.Values.Select(GetColorValue).Aggregate(1, (a, b) => a * b);
 
     private static int GetColorValue(char c) => c switch
     {
-        'b' => 1,
-        'w' => 2,
-        'r' => 3,
-        'o' => 4,
-        'y' => 5,
-        'g' => 6,
+        CubeColors.Blue => 1,
+        CubeColors.White => 2,
+        CubeColors.Red => 3,
+        CubeColors.Orange => 4,
+        CubeColors.Yellow => 5,
+        CubeColors.Green => 6,
         _ => throw new Exception("Unknown color")
     };
 }

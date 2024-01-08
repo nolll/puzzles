@@ -22,4 +22,9 @@ public class Hailstone
         Position = [x, y, z];
         Velocity = [vx, vy, vz];
     }
+
+    public string Print()
+    {
+        return $"{X}, {Y}, {Z} @ {Vx}, {Vy}, {Vz}";
+    }
 }

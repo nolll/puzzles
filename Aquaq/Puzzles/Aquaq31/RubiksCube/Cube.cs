@@ -1,16 +1,30 @@
 ﻿using System.Text;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
-namespace Pzl.Aquaq.Puzzles.Aquaq31;
+namespace Pzl.Aquaq.Puzzles.Aquaq31.RubiksCube;
 
-public class RubiksCube
+public class Cube
 {
-    public RubiksCubeFace Front { get; } = new(CubeColors.Blue);
-    public RubiksCubeFace Up { get; } = new(CubeColors.White);
-    public RubiksCubeFace Left { get; } = new(CubeColors.Red);
-    public RubiksCubeFace Right { get; } = new(CubeColors.Orange);
-    public RubiksCubeFace Down { get; } = new(CubeColors.Yellow);
-    public RubiksCubeFace Back { get; } = new(CubeColors.Green);
+    public CubeFace Front { get; } = new(CubeColors.Blue);
+    public CubeFace Up { get; } = new(CubeColors.White);
+    public CubeFace Left { get; } = new(CubeColors.Red);
+    public CubeFace Right { get; } = new(CubeColors.Orange);
+    public CubeFace Down { get; } = new(CubeColors.Yellow);
+    public CubeFace Back { get; } = new(CubeColors.Green);
+
+    private readonly CubeFace[] _faces;
+
+    public CubeFace BlueFace => _faces.First(o => o.Center == CubeColors.Blue);
+    public CubeFace WhiteFace => _faces.First(o => o.Center == CubeColors.White);
+    public CubeFace RedFace => _faces.First(o => o.Center == CubeColors.Red);
+    public CubeFace OrangeFace => _faces.First(o => o.Center == CubeColors.Orange);
+    public CubeFace YellowFace => _faces.First(o => o.Center == CubeColors.Yellow);
+    public CubeFace GreenFace => _faces.First(o => o.Center == CubeColors.Green);
+
+    public Cube()
+    {
+        _faces = [Front, Up, Left, Right, Down, Back];
+    }
 
     public void Rotate(string instruction)
     {
@@ -32,16 +46,16 @@ public class RubiksCube
         CubeRotations.DownPrime => RotateDownPrime,
         CubeRotations.Back => RotateBack,
         CubeRotations.BackPrime => RotateBackPrime,
-        CubeRotations.CubeX => RotateCubeX,
-        CubeRotations.CubeXPrime => RotateCubeXPrime,
-        CubeRotations.CubeY => RotateCubeY,
-        CubeRotations.CubeYPrime => RotateCubeYPrime,
-        CubeRotations.CubeZ => RotateCubeZ,
-        CubeRotations.CubeZPrime => RotateCubeZPrime,
+        CubeRotations.CubeX => RotateX,
+        CubeRotations.CubeXPrime => RotateXPrime,
+        CubeRotations.CubeY => RotateY,
+        CubeRotations.CubeYPrime => RotateYPrime,
+        CubeRotations.CubeZ => RotateZ,
+        CubeRotations.CubeZPrime => RotateZPrime,
         _ => throw new Exception("Unknown rotation")
     };
 
-    private void RotateFront()
+    public void RotateFront()
     {
         Front.RotateRight();
         var fromUp = Up.ReadBottomRow();
@@ -54,7 +68,7 @@ public class RubiksCube
         Down.WriteTopRow(fromRight.Reverse());
     }
 
-    private void RotateFrontPrime()
+    public void RotateFrontPrime()
     {
         Front.RotateLeft();
         var fromUp = Up.ReadBottomRow();
@@ -67,7 +81,7 @@ public class RubiksCube
         Down.WriteTopRow(fromLeft);
     }
 
-    private void RotateUp()
+    public void RotateUp()
     {
         Up.RotateRight();
         var fromFront = Front.ReadTopRow();
@@ -80,7 +94,7 @@ public class RubiksCube
         Back.WriteTopRow(fromLeft);
     }
 
-    private void RotateUpPrime()
+    public void RotateUpPrime()
     {
         Up.RotateLeft();
         var fromFront = Front.ReadTopRow();
@@ -93,7 +107,7 @@ public class RubiksCube
         Back.WriteTopRow(fromRight);
     }
 
-    private void RotateLeft()
+    public void RotateLeft()
     {
         Left.RotateRight();
         var fromFront = Front.ReadLeftColumn();
@@ -106,7 +120,7 @@ public class RubiksCube
         Back.WriteRightColumn(fromDown.Reverse());
     }
 
-    private void RotateLeftPrime()
+    public void RotateLeftPrime()
     {
         Left.RotateLeft();
         var fromFront = Front.ReadLeftColumn();
@@ -119,7 +133,7 @@ public class RubiksCube
         Back.WriteRightColumn(fromUp.Reverse());
     }
 
-    private void RotateRight()
+    public void RotateRight()
     {
         Right.RotateRight();
         var fromFront = Front.ReadRightColumn();
@@ -132,7 +146,7 @@ public class RubiksCube
         Back.WriteLeftColumn(fromUp.Reverse());
     }
 
-    private void RotateRightPrime()
+    public void RotateRightPrime()
     {
         Right.RotateLeft();
         var fromFront = Front.ReadRightColumn();
@@ -145,7 +159,7 @@ public class RubiksCube
         Back.WriteLeftColumn(fromDown.Reverse());
     }
 
-    private void RotateDown()
+    public void RotateDown()
     {
         Down.RotateRight();
         var fromFront = Front.ReadBottomRow();
@@ -158,7 +172,7 @@ public class RubiksCube
         Back.WriteBottomRow(fromRight);
     }
 
-    private void RotateDownPrime()
+    public void RotateDownPrime()
     {
         Down.RotateLeft();
         var fromFront = Front.ReadBottomRow();
@@ -171,7 +185,7 @@ public class RubiksCube
         Back.WriteBottomRow(fromLeft);
     }
 
-    private void RotateBack()
+    public void RotateBack()
     {
         Back.RotateRight();
         var fromUp = Up.ReadTopRow();
@@ -184,7 +198,7 @@ public class RubiksCube
         Up.WriteTopRow(fromRight);
     }
 
-    private void RotateBackPrime()
+    public void RotateBackPrime()
     {
         Back.RotateLeft();
         var fromUp = Up.ReadTopRow();
@@ -197,7 +211,7 @@ public class RubiksCube
         Up.WriteTopRow(fromLeft.Reverse());
     }
 
-    private void RotateCubeX()
+    public void RotateX()
     {
         Left.RotateLeft();
         Right.RotateRight();
@@ -215,7 +229,7 @@ public class RubiksCube
         Back.RotateLeft();
     }
 
-    private void RotateCubeXPrime()
+    public void RotateXPrime()
     {
         Left.RotateRight();
         Right.RotateLeft();
@@ -233,7 +247,7 @@ public class RubiksCube
         Back.RotateLeft();
     }
 
-    private void RotateCubeY()
+    public void RotateY()
     {
         Up.RotateRight();
         Down.RotateLeft();
@@ -247,10 +261,10 @@ public class RubiksCube
         Back.WriteAll(left);
     }
 
-    private void RotateCubeYPrime()
+    public void RotateYPrime()
     {
-        Up.RotateRight();
-        Down.RotateLeft();
+        Up.RotateLeft();
+        Down.RotateRight();
         var front = Front.ReadAll();
         var left = Left.ReadAll();
         var right = Right.ReadAll();
@@ -261,7 +275,7 @@ public class RubiksCube
         Back.WriteAll(right);
     }
 
-    private void RotateCubeZ()
+    public void RotateZ()
     {
         Back.RotateLeft();
         Front.RotateRight();
@@ -270,16 +284,16 @@ public class RubiksCube
         var right = Right.ReadAll();
         var down = Down.ReadAll();
         Up.WriteAll(left);
-        Up.RotateLeft();
+        Up.RotateRight();
         Left.WriteAll(down);
-        Left.RotateLeft();
+        Left.RotateRight();
         Right.WriteAll(up);
-        Right.RotateLeft();
+        Right.RotateRight();
         Down.WriteAll(right);
-        Down.RotateLeft();
+        Down.RotateRight();
     }
 
-    private void RotateCubeZPrime()
+    public void RotateZPrime()
     {
         Back.RotateRight();
         Front.RotateLeft();
@@ -288,13 +302,13 @@ public class RubiksCube
         var right = Right.ReadAll();
         var down = Down.ReadAll();
         Up.WriteAll(right);
-        Up.RotateRight();
+        Up.RotateLeft();
         Left.WriteAll(up);
-        Left.RotateRight();
+        Left.RotateLeft();
         Right.WriteAll(down);
-        Right.RotateRight();
+        Right.RotateLeft();
         Down.WriteAll(left);
-        Down.RotateRight();
+        Down.RotateLeft();
     }
 
     public string PrintFlat()
@@ -307,10 +321,10 @@ public class RubiksCube
         s.AppendLine(Down.PrintFlat());
         s.AppendLine(Back.PrintFlat());
 
-        return s.ToString();
+        return s.ToString().Trim();
     }
 
-    public string Print()
+    public string Print3d()
     {
         var pm = new Matrix<char>(9, 12, '.');
         var frontMatrix = Front.Matrix;
@@ -330,6 +344,29 @@ public class RubiksCube
         return pm.Print();
     }
 
+    /// <summary>
+    /// Prints front, up, left, right, down, back
+    /// </summary>
+    public string Print()
+    {
+        var pm = new Matrix<char>(23, 3, ' ');
+        var frontMatrix = Front.Matrix;
+        var upMatrix = Up.Matrix;
+        var leftMatrix = Left.Matrix;
+        var rightMatrix = Right.Matrix;
+        var downMatrix = Down.Matrix;
+        var backMatrix = Back.Matrix;
+
+        ApplyToPrintMatrix(pm, frontMatrix, new MatrixAddress(0, 0));
+        ApplyToPrintMatrix(pm, upMatrix, new MatrixAddress(4, 0));
+        ApplyToPrintMatrix(pm, leftMatrix, new MatrixAddress(8, 0));
+        ApplyToPrintMatrix(pm, rightMatrix, new MatrixAddress(12, 0));
+        ApplyToPrintMatrix(pm, downMatrix, new MatrixAddress(16, 0));
+        ApplyToPrintMatrix(pm, backMatrix, new MatrixAddress(20, 0));
+
+        return pm.Print();
+    }
+
     private void ApplyToPrintMatrix(Matrix<char> printMatrix, Matrix<char> faceMatrix, MatrixAddress startAddress)
     {
         foreach (var coord in faceMatrix.Coords)
@@ -338,13 +375,12 @@ public class RubiksCube
         }
     }
 
-    public void Scramble()
+    public void Scramble(int rotationsCount = 100)
     {
-        var rnd = new Random((int)DateTime.Now.Ticks);
-        var rotations = CubeRotations.All;
-        for (var i = 0; i < 100; i++)
+        var rotations = CubeRotations.Random(rotationsCount);
+        foreach (var rotation in rotations)
         {
-            Rotate(rotations[rnd.Next(rotations.Length - 1)]);
+            Rotate(rotation);
         }
     }
 }

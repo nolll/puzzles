@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aquaq.Puzzles.Aquaq31;
+﻿namespace Pzl.Aquaq.Puzzles.Aquaq31.RubiksCube;
 
 public static class CubeColors
 {

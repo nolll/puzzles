@@ -1,11 +1,26 @@
 ﻿using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
-namespace Pzl.Aquaq.Puzzles.Aquaq31;
+namespace Pzl.Aquaq.Puzzles.Aquaq31.RubiksCube;
 
-public class RubiksCubeFace(char initial)
+public class CubeFace
 {
     private const int Size = 3;
-    private Matrix<char> _matrix = new(Size, Size, initial);
+    private Matrix<char> _matrix;
+
+    public CubeFace(char initial)
+    {
+        _matrix = new(Size, Size, initial);
+    }
+
+    public char TopLeft => _matrix.ReadValueAt(0, 0);
+    public char Top => _matrix.ReadValueAt(1, 0);
+    public char TopRight => _matrix.ReadValueAt(2, 0);
+    public char Left => _matrix.ReadValueAt(1, 0);
+    public char Center => _matrix.ReadValueAt(1, 1);
+    public char Right => _matrix.ReadValueAt(1, 2);
+    public char BottomLeft => _matrix.ReadValueAt(0, 2);
+    public char Bottom => _matrix.ReadValueAt(1, 2);
+    public char BottomRight => _matrix.ReadValueAt(2, 2);
 
     public char[] ReadAll() => _matrix.Values.ToArray();
     public char[] ReadLeftColumn() => ReadColumn(0);

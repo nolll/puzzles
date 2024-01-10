@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aquaq.Puzzles.Aquaq31;
+﻿namespace Pzl.Aquaq.Puzzles.Aquaq31.RubiksCube;
 
 public static class CubeRotations
 {
@@ -21,7 +21,7 @@ public static class CubeRotations
     public const string CubeZ = "Z";
     public const string CubeZPrime = "Z'";
 
-    public static string[] All = [
+    private static readonly string[] All = [
         Front,
         FrontPrime,
         Up,
@@ -34,11 +34,23 @@ public static class CubeRotations
         DownPrime,
         Back,
         BackPrime,
-        //CubeX,
-        //CubeXPrime,
-        //CubeY,
-        //CubeYPrime,
-        //CubeZ,
-        //CubeZPrime
+        CubeX,
+        CubeXPrime,
+        CubeY,
+        CubeYPrime,
+        CubeZ,
+        CubeZPrime
     ];
+
+    public static string[] Random(int count)
+    {
+        var rnd = new Random((int)DateTime.Now.Ticks);
+        var rotations = new List<string>();
+        for (var i = 0; i < count; i++)
+        {
+            rotations.Add(All[rnd.Next(All.Length - 1)]);
+        }
+
+        return rotations.ToArray();
+    }
 }

@@ -14,7 +14,7 @@ public class Aquaq31(string input) : AquaqPuzzle
 
     public static int Rotate(string input)
     {
-        var cube = new RubiksCube();
+        var cube = new RubiksCube.Cube();
         var instructions = ParseInstructions(input);
 
         foreach (var instruction in instructions)

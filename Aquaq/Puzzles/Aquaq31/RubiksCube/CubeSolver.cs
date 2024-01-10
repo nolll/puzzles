@@ -13,33 +13,18 @@ public class CubeSolver
     {
     }
 
-    public void BringToFront(char color)
+    public void BringToFront(char color) => BringToFace(Cube.Front, color, ["X", "X", "X", "X", "XY", "YY"]);
+    public void BringToUp(char color) => BringToFace(Cube.Up, color, ["X", "X", "X", "X", "XZ", "ZZ"]);
+    public void BringToDown(char color) => BringToFace(Cube.Down, color, ["X", "X", "X", "X", "XZ", "ZZ"]);
+
+    private void BringToFace(CubeFace face, char color, string[] rotations)
     {
-        if (Cube.Front.Center == color) 
-            return;
-        
-        Cube.RotateX();
-        
-        if (Cube.Front.Center == color) 
-            return;
-        
-        Cube.RotateX();
-        
-        if (Cube.Front.Center == color) 
-            return;
-        
-        Cube.RotateX();
-        
-        if (Cube.Front.Center == color) 
-            return;
-        
-        Cube.RotateX();
-        Cube.RotateY();
-        
-        if (Cube.Front.Center == color) 
-            return;
-        
-        Cube.RotateY();
-        Cube.RotateY();
+        foreach (var rotation in rotations)
+        {
+            if (face.Center == color)
+                return;
+
+            Cube.Rotate(rotation);
+        }
     }
 }

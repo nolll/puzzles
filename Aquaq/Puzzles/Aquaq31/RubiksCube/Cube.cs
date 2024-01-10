@@ -26,10 +26,14 @@ public class Cube
         _faces = [Front, Up, Left, Right, Down, Back];
     }
 
-    public void Rotate(string instruction)
+    public void Rotate(string instructions)
     {
-        var rotateFunc = GetRotateFunc(instruction);
-        rotateFunc();
+        var rotations = ParseInstructions(instructions);
+        foreach (var rotation in rotations)
+        {
+            var rotateFunc = GetRotateFunc(rotation);
+            rotateFunc();
+        }
     }
 
     private Action GetRotateFunc(string instruction) => instruction switch
@@ -382,5 +386,19 @@ public class Cube
         {
             Rotate(rotation);
         }
+    }
+
+    private static IEnumerable<string> ParseInstructions(string s)
+    {
+        var instructions = new List<string>();
+        foreach (var c in s)
+        {
+            if (c == '\'')
+                instructions[^1] += c;
+            else
+                instructions.Add(c.ToString());
+        }
+
+        return instructions;
     }
 }

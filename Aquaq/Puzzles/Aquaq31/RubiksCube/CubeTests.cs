@@ -239,6 +239,27 @@ public class CubeTests
                                  """);
     }
 
+    [TestCase("XXXX")]
+    [TestCase("X'X'X'X'")]
+    [TestCase("YYYY")]
+    [TestCase("Y'Y'Y'Y'")]
+    [TestCase("ZZZZ")]
+    [TestCase("Z'Z'Z'Z'")]
+    [TestCase("XZXZXZ")]
+    [TestCase("XYXYXY")]
+    [TestCase("XZX'X'Z'YX'Z")]
+    public void MultipleCubeRotations_BackToStart(string rotations)
+    {
+        var cube = CubeTestHelper.CreateScrambledCube();
+        cube.Rotate(rotations);
+
+        cube.Print().Should().Be("""
+                                 orr rbb gww yoy owb oow
+                                 yby rww wrr oog gyg ogb
+                                 ygw gbb ryg orr wyg ybb
+                                 """);
+    }
+
     [Test]
     public void FindEdges()
     {

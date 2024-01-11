@@ -13,9 +13,12 @@ public class CubeSolver
     {
     }
 
-    public void BringToFront(char color) => BringToFace(Cube.Front, color, ["X", "X", "X", "X", "XY", "YY"]);
-    public void BringToUp(char color) => BringToFace(Cube.Up, color, ["X", "X", "X", "X", "XZ", "ZZ"]);
-    public void BringToDown(char color) => BringToFace(Cube.Down, color, ["X", "X", "X", "X", "XZ", "ZZ"]);
+    public void BringToFront(char color) => BringToFace(Cube.Front, color, FrontBackSearchRotations);
+    public void BringToUp(char color) => BringToFace(Cube.Up, color, UpDownSearchRotations);
+    public void BringToDown(char color) => BringToFace(Cube.Down, color, UpDownSearchRotations);
+
+    private static readonly string[] FrontBackSearchRotations = ["X", "X", "X", "X", "XY", "YY"];
+    private static readonly string[] UpDownSearchRotations = ["X", "X", "X", "X", "XZ", "ZZ"];
 
     private void BringToFace(CubeFace face, char color, string[] rotations)
     {

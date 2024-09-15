@@ -40,4 +40,15 @@ public class CubeSolverTests
 
         solver.Cube.Down.Center.Should().Be(CubeColors.Blue);
     }
+
+    //[Test]
+    //public void MoveWhiteEdgesToYellowFace()
+    //{
+    //    var cube = CubeTestHelper.CreateScrambledCube();
+
+    //    cube.YellowFace.Top.Should().Be(CubeColors.White);
+    //    cube.YellowFace.Left.Should().Be(CubeColors.White);
+    //    cube.YellowFace.Right.Should().Be(CubeColors.White);
+    //    cube.YellowFace.Bottom.Should().Be(CubeColors.White);
+    //}
 }

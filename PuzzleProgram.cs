@@ -1,6 +1,6 @@
 ﻿using Pzl.Aoc;
 using Pzl.Aquaq;
-using Pzl.Client.Debug;
+using Pzl.Client.Debugging;
 using Pzl.Client.Filter;
 using Pzl.Client.Help;
 using Pzl.Client.Params;

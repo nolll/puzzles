@@ -24,7 +24,7 @@ public class PuzzleProgram
         {
             new AocPuzzleProvider(),
             new AquaqPuzzleProvider(),
-            new EulerPuzzleProvider()
+            new EulerPuzzleProvider(),
         };
 
         _puzzleRepository = new PuzzleRepository(puzzleProviders);

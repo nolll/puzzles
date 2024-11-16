@@ -2,9 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
+        <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Configurations>Debug;Release;Single</Configurations>
+        <LangVersion>12.0</LangVersion>
         <RootNamespace>Pzl.Everybody</RootNamespace>
+        <OutputType>Library</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,12 +16,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Common\Common.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="Puzzles\Everybody01\Everybody01.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 
 </Project>

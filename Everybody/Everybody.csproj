@@ -8,7 +8,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <None Include="Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\Common\Common.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Puzzles\Everybody01\Everybody01.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

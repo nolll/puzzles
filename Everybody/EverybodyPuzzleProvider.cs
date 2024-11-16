@@ -11,14 +11,12 @@ public class EverybodyPuzzleProvider : IPuzzleProvider
 
     private static PuzzleDefinition CreatePuzzleDefinition(PuzzleData data)
     {
-        var (year, day) = EverybodyPuzzleParser.GetYearAndDay(data.Type);
-        var paddedDay = day.ToString().PadLeft(2, '0');
-        var id = $"{year}{paddedDay}";
-        var sortId = $"aoc {id}";
-        var title = $"Advent of Code {year}-{paddedDay}";
-        var listTitle = $"Aoc {year}-{paddedDay}";
-        List<string> tags = ["aoc", year.ToString(), day.ToString()];
-
+        var id = EverybodyPuzzleParser.GetPuzzleId(data.Type).ToString();
+        var paddedId = id.PadLeft(2, '0');
+        var sortId = $"everybody {paddedId}";
+        var title = $"Everybody Codes {id}";
+        var listTitle = $"Everybody {paddedId}";
+        List<string> tags = ["everybody", id];
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }
 }

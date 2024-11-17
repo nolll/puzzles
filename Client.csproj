@@ -23,16 +23,19 @@
     <Compile Remove="Common\**" />
     <Compile Remove="Tools\**" />
     <Compile Remove="Euler\**" />
+    <Compile Remove="Everybody\**" />
     <EmbeddedResource Remove="Aoc\**" />
     <EmbeddedResource Remove="Aquaq\**" />
     <EmbeddedResource Remove="Common\**" />
     <EmbeddedResource Remove="Tools\**" />
     <EmbeddedResource Remove="Euler\**" />
+    <EmbeddedResource Remove="Everybody\**" />
     <None Remove="Aoc\**" />
     <None Remove="Aquaq\**" />
     <None Remove="Common\**" />
     <None Remove="Tools\**" />
     <None Remove="Euler\**" />
+    <None Remove="Everybody\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,6 +59,7 @@
     <ProjectReference Include="Aquaq\Aquaq.csproj" />
     <ProjectReference Include="Common\Common.csproj" />
     <ProjectReference Include="Euler\Euler.csproj" />
+    <ProjectReference Include="Everybody\Everybody.csproj" />
   </ItemGroup>
 
   <ItemGroup>

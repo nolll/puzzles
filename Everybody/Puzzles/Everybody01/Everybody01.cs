@@ -1,6 +1,6 @@
 using Pzl.Common;
 
-namespace Pzl.Everybody;
+namespace Pzl.Everybody.Puzzles.Everybody01;
 
 [Name("Temp title")]
 public class Everybody01(string input) : EverybodyPuzzle

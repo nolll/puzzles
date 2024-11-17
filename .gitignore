@@ -331,3 +331,5 @@ ASALocalRun/
 
 **/appsettings.json
 **/*.ncrunchproject
+
+**/.DS_Store

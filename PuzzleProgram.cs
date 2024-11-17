@@ -7,6 +7,7 @@ using Pzl.Client.Params;
 using Pzl.Client.Running.Runners;
 using Pzl.Common;
 using Pzl.Euler;
+using Pzl.Everybody;
 using Spectre.Console;
 
 namespace Pzl.Client;
@@ -24,7 +25,8 @@ public class PuzzleProgram
         {
             new AocPuzzleProvider(),
             new AquaqPuzzleProvider(),
-            new EulerPuzzleProvider()
+            new EulerPuzzleProvider(),
+            new EverybodyPuzzleProvider(),
         };
 
         _puzzleRepository = new PuzzleRepository(puzzleProviders);

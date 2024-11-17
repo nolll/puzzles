@@ -13,6 +13,7 @@ public class PuzzleDefinition
     public string Name { get; }
     public string? Comment { get; }
     public int NumberOfParts { get; }
+    public bool HasUniqueInputsPerPart { get; }
     public string? CommonFile { get; }
     public string? LocalFile { get; }
 
@@ -31,6 +32,7 @@ public class PuzzleDefinition
             data.Name,
             data.Comment,
             data.NumberOfParts,
+            data.HasUniqueInputsPerPart,
             data.CommonFile,
             data.LocalFile)
     {
@@ -60,6 +62,7 @@ public class PuzzleDefinition
         string name, 
         string? comment, 
         int numberOfParts,
+        bool hasUniqueInputsPerPart,
         string? commonFile,
         string? localFile)
     {
@@ -71,6 +74,7 @@ public class PuzzleDefinition
         Name = name;
         Comment = comment;
         NumberOfParts = numberOfParts;
+        HasUniqueInputsPerPart = hasUniqueInputsPerPart;
         CommonFile = commonFile;
         LocalFile = localFile;
     }

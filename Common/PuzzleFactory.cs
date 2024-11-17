@@ -20,6 +20,7 @@ public static class PuzzleDataReader
         var needsRewrite = NeedsRewrite(type);
         var isFunToOptimize = IsFunToOptimize(type);
         var numberOfParts = GetNumberOfParts(type);
+        var hasUniqueInputsPerPart = HasUniqueInputsForParts(type);
         var commonFile = GetAdditionalCommonInputFile(type);
         var localFile = GetAdditionalLocalInputFile(type);
         return new PuzzleData(
@@ -30,6 +31,7 @@ public static class PuzzleDataReader
             needsRewrite,
             isFunToOptimize,
             numberOfParts,
+            hasUniqueInputsPerPart,
             commonFile,
             localFile);
     }
@@ -51,6 +53,9 @@ public static class PuzzleDataReader
 
     private static int GetNumberOfParts(MemberInfo type) =>
         type.GetCustomAttribute<NumberOfPartsAttribute>(true)?.NumberOfParts ?? 1;
+    
+    private static bool HasUniqueInputsForParts(MemberInfo type) =>
+        type.GetCustomAttribute<HasUniqueInputsForParts>(true) is not null;
 
     private static string? GetAdditionalCommonInputFile(MemberInfo type) =>
         type.GetCustomAttribute<AdditionalCommonInputFileAttribute>(false)?.FileName;

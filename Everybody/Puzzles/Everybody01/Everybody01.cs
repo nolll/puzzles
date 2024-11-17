@@ -2,8 +2,8 @@ using Pzl.Common;
 
 namespace Pzl.Everybody.Puzzles.Everybody01;
 
-[Name("Temp title")]
-public class Everybody01(string input) : EverybodyPuzzle
+[Name("Everybody Codes Quest 1")]
+public class Everybody01(string[] inputs) : EverybodyPuzzle
 {
     protected override PuzzleResult RunPart1()
     {

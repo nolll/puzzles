@@ -10,7 +10,7 @@ public static class PuzzleFactory
         var ctor = definition.Type.GetConstructors().First();
         var args = GetArgs(definition, ctor);
 
-        if (ctor?.Invoke(args) is not Puzzle puzzle)
+        if (ctor.Invoke(args) is not Puzzle puzzle)
             throw new Exception($"Could not create puzzle: {definition.Type}");
 
         return puzzle;
@@ -18,11 +18,13 @@ public static class PuzzleFactory
 
     private static object[] GetArgs(PuzzleDefinition definition, MethodBase ctor)
     {
-        var parameterCount = ctor.GetParameters().Length;
+        var parameters = ctor.GetParameters();
+        var parameterCount = parameters.Length;
+        var inputs = FileReader.ReadInputs(definition);
         return parameterCount switch
         {
-            2 => [FileReader.ReadInput(definition.Type), ReadAdditionalFile(definition)],
-            1 => [FileReader.ReadInput(definition.Type)],
+            2 => [inputs, ReadAdditionalFile(definition)],
+            1 => [inputs],
             _ => []
         };
     }

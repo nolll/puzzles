@@ -30,6 +30,9 @@ public class NumberOfPartsAttribute(int numberOfParts) : Attribute
 }
 
 [AttributeUsage(AttributeTargets.Class)]
+public class HasUniqueInputsForParts : Attribute;
+
+[AttributeUsage(AttributeTargets.Class)]
 public class AdditionalCommonInputFileAttribute(string fileName) : Attribute
 {
     public string FileName { get; } = fileName;

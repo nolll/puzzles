@@ -2,37 +2,31 @@ using Pzl.Common;
 
 namespace Pzl.Everybody.Puzzles.Everybody01;
 
-[Name("Everybody Codes Quest 1")]
+[Name("The Battle for the Farmlands")]
 public class Everybody01(string[] inputs) : EverybodyPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var count = CountPotionsForOneCreature(inputs[0]);
+        var count = PotionsNeeded(inputs[0], 1);
         
         return new PuzzleResult(count, "93584fbfb539341540431fdcbdd43e43");
     }
     
     protected override PuzzleResult RunPart2()
     {
-        var count = CountPotionsForTwoCreatures(inputs[1]);
+        var count = PotionsNeeded(inputs[1], 2);
         
         return new PuzzleResult(count, "29c8c2e9da7059c271b37645091e3caa");
     }
     
     protected override PuzzleResult RunPart3()
     {
-        var count = CountPotionsForThreeCreatures(inputs[2]);
+        var count = PotionsNeeded(inputs[2], 3);
         
         return new PuzzleResult(count, "114dce9075f6d580a84376f6f7eceeeb");
     }
 
-    public static int CountPotionsForOneCreature(string input) => PotionsNeeded(input, 1);
-    
-    public static int CountPotionsForTwoCreatures(string input) => PotionsNeeded(input, 2);
-
-    public static int CountPotionsForThreeCreatures(string input) => PotionsNeeded(input, 3);
-
-    private static int PotionsNeeded(string input, int groupSize) => 
+    public static int PotionsNeeded(string input, int groupSize) => 
         SplitToSize(input, groupSize)
             .Sum(s => s.Sum(GetPotionCount) + CalculateBonus(GetCreatureCount(s)));
 
@@ -42,7 +36,7 @@ public class Everybody01(string[] inputs) : EverybodyPuzzle
         {
             yield return s.Substring(i, size);
         }
-    }
+    }   
 
     private static int CalculateBonus(int creatureCount) => creatureCount switch
     {

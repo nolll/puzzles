@@ -9,7 +9,7 @@ public class Everybody01Tests
     public void OneCreature()
     {
         const string input = "ABBAC";
-        var count = Everybody01.CountPotionsForOneCreature(input);
+        var count = Everybody01.PotionsNeeded(input, 1);
 
         count.Should().Be(5);
     }
@@ -18,7 +18,7 @@ public class Everybody01Tests
     public void TwoCreatures()
     {
         const string input = "AxBCDDCAxD";
-        var count = Everybody01.CountPotionsForTwoCreatures(input);
+        var count = Everybody01.PotionsNeeded(input, 2);
 
         count.Should().Be(28);
     }
@@ -27,7 +27,7 @@ public class Everybody01Tests
     public void ThreeCreatures()
     {
         const string input = "xBxAAABCDxCC";
-        var count = Everybody01.CountPotionsForThreeCreatures(input);
+        var count = Everybody01.PotionsNeeded(input, 3);
 
         count.Should().Be(30);
     }

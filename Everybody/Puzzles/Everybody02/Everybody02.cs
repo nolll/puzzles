@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Everybody02;
@@ -22,7 +23,11 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
     
     protected override PuzzleResult RunPart3()
     {
-        return PuzzleResult.Empty;
+        var count = CountRunicSymbolsInMatrix(inputs[2]);
+        
+        // 10203, correct length, correct first letter
+        
+        return new PuzzleResult(count);
     }
 
     private static int CountRunicWords(string input)
@@ -68,6 +73,102 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
         }
 
         return count;
+    }
+    
+    private static int CountRunicSymbolsInMatrix(string input)
+    {
+        var parts = input.Split($"{Environment.NewLine}", StringSplitOptions.RemoveEmptyEntries);
+        var words = parts.First().Split(':').Last();
+        var s = parts.Skip(1).ToArray();
+        return CountRunicSymbols(words.Split(','), s);
+    }
+    
+    public static int CountRunicSymbolsInMatrix(string[] words, string[] rows)
+    {
+        var wrappingRows = rows.Select(o => $"{o}{o}");
+        var wrappingMatrixInput = string.Join(Environment.NewLine, wrappingRows);
+        var wrappingMatrix = MatrixBuilder.BuildCharMatrix(wrappingMatrixInput);
+        
+        var matrixInput = string.Join(Environment.NewLine, rows);
+        var matrix = MatrixBuilder.BuildCharMatrix(matrixInput);
+        
+        var set = new HashSet<(int, int)>();
+
+        foreach (var word in words)
+        {
+            var hits = new List<MatrixAddress>();
+            for (var row = matrix.YMin; row <= matrix.YMax; row++)
+            {
+                hits.AddRange(SearchRight(wrappingMatrix, row, word));
+                hits.AddRange(SearchRight(wrappingMatrix, row, word.ReverseString()));
+            }
+            
+            for (var col = matrix.XMin; col <= matrix.XMax; col++)
+            {
+                hits.AddRange(SearchDown(matrix, col, word));
+                hits.AddRange(SearchDown(matrix, col, word.ReverseString()));
+            }
+
+            foreach (var hit in hits)
+            {
+                set.Add((hit.X, hit.Y));
+            }
+        }
+
+        foreach (var v in set)
+        {
+            matrix.WriteValueAt(v.Item1, v.Item2, '_');
+        }
+        
+        Console.WriteLine(matrix.Print());
+
+        return set.Count;
+    }
+
+    private static List<MatrixAddress> SearchRight(Matrix<char> matrix, int row, string word)
+    {
+        var realWidth = matrix.Width / 2;
+        var hits = new List<MatrixAddress>();
+        
+        for (var startCol = matrix.XMin; startCol <= matrix.XMax - word.Length + 1; startCol++)
+        {
+            var currentWord = "";
+            var curPositions = new List<MatrixAddress>();
+            for (var col = startCol; col < startCol + word.Length; col++)
+            {
+                var curPos = new MatrixAddress(col % realWidth, row);
+                curPositions.Add(curPos);
+                currentWord += matrix.ReadValueAt(curPos);
+            }
+
+            if (currentWord == word)
+            {
+                hits.AddRange(curPositions);
+            }
+        }
+        return hits;
+    }
+    
+    private static List<MatrixAddress> SearchDown(Matrix<char> matrix, int col, string word)
+    {
+        var hits = new List<MatrixAddress>();
+        for (var startRow = matrix.YMin; startRow <= matrix.YMax - word.Length + 1; startRow++)
+        {
+            var currentWord = "";
+            var curPositions = new List<MatrixAddress>();
+            for (var row = startRow; row < startRow + word.Length; row++)
+            {
+                var curPos = new MatrixAddress(col, row);
+                curPositions.Add(curPos);
+                currentWord += matrix.ReadValueAt(curPos);
+            }
+
+            if (currentWord == word)
+            {
+                hits.AddRange(curPositions);
+            }
+        }
+        return hits;
     }
 
     private static int OccurrencesInString(string word, string s)

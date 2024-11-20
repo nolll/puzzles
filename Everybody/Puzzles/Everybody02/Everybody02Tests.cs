@@ -31,4 +31,22 @@ public class Everybody02Tests
 
         count.Should().Be(expected);
     }
+    
+    [Test]
+    public void CountRunicSymbolsInMatrix()
+    {
+        string[] words = ["THE", "OWE", "MES", "ROD", "RODEO"];
+        
+        const string scales = """
+                              HELWORLT
+                              ENIGWDXL
+                              TRODEOAL
+                              """;
+
+        var count = Everybody02.CountRunicSymbolsInMatrix(words, scales.Split());
+
+        count.Should().Be(10);
+    }
 }
+
+    

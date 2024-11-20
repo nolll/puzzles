@@ -36,17 +36,9 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
         return CountRunicWords(words.Split(','), [s]);
     }
     
-    public static int CountRunicWords(string[] words, string[] strings)
-    {
-        var count = 0;
-        foreach (var s in strings)
-        {
-            count += words.Sum(o => OccurrencesInString(o, s));
-        }
+    public static int CountRunicWords(string[] words, string[] strings) => 
+        strings.Sum(s => words.Sum(o => OccurrencesInString(o, s)));
 
-        return count;
-    }
-    
     private static int CountRunicSymbols(string input)
     {
         var parts = input.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
@@ -63,8 +55,14 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
             var set = new HashSet<int>();
             foreach (var word in words)
             {
-                set = SymbolsHit(word, s, set);
-                set = SymbolsHit(word.ReverseString(), s, set);
+                var found = Search(s, word);
+                var foundReversed = Search(s, word.ReverseString());
+                found.AddRange(foundReversed);
+                
+                foreach (var hit in found)
+                {
+                    set.Add(hit);
+                }
             }
 
             count += set.Count;
@@ -133,46 +131,14 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
         
         for (var i = 0; i < s.Length - word.Length + 1; i++)
         {
-            var current = s.Substring(i, word.Length);
-            if (current == word)
-            {
-                for (var j = i; j < i + word.Length; j++)
-                {
-                    hits.Add(j);
-                }
-            }
+            if (s.Substring(i, word.Length) == word)
+                hits.AddRange(Enumerable.Range(i, word.Length));
         }
 
         return hits;
     }
 
-    private static int OccurrencesInString(string word, string s)
-    {
-        var count = 0;
-        for (var i = 0; i < s.Length - word.Length; i++)
-        {
-            var current = s.Substring(i, word.Length);
-            if (current == word)
-                count++;
-        }
-
-        return count;
-    }
-    
-    private static HashSet<int> SymbolsHit(string word, string s, HashSet<int> set)
-    {
-        for (var i = 0; i < s.Length - word.Length + 1; i++)
-        {
-            var current = s.Substring(i, word.Length);
-            if (current == word)
-            {
-                for (var j = i; j < i + word.Length; j++)
-                {
-                    set.Add(j);
-                }
-            }
-        }
-
-        return set;
-    }
+    private static int OccurrencesInString(string word, string s) => 
+        Enumerable.Range(0, s.Length - word.Length + 1)
+            .Count(o => s.Substring(o, word.Length) == word);
 }

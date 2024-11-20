@@ -25,9 +25,7 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
     {
         var count = CountRunicSymbolsInMatrix(inputs[2]);
         
-        // 10203, correct length, correct first letter
-        
-        return new PuzzleResult(count);
+        return new PuzzleResult(count, "45b4423987a6cf8c24dba08ecb86fc71");
     }
 
     private static int CountRunicWords(string input)
@@ -80,94 +78,71 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
         var parts = input.Split($"{Environment.NewLine}", StringSplitOptions.RemoveEmptyEntries);
         var words = parts.First().Split(':').Last();
         var s = parts.Skip(1).ToArray();
-        return CountRunicSymbols(words.Split(','), s);
+        return CountRunicSymbolsInMatrix(words.Split(','), s);
     }
     
     public static int CountRunicSymbolsInMatrix(string[] words, string[] rows)
     {
-        var wrappingRows = rows.Select(o => $"{o}{o}");
-        var wrappingMatrixInput = string.Join(Environment.NewLine, wrappingRows);
-        var wrappingMatrix = MatrixBuilder.BuildCharMatrix(wrappingMatrixInput);
-        
-        var matrixInput = string.Join(Environment.NewLine, rows);
-        var matrix = MatrixBuilder.BuildCharMatrix(matrixInput);
+        var rowWidth = rows.First().Length;
+        var horizontalRows = rows.Select(o => $"{o}{o}").ToList();
+        var verticalRows = new List<string>();
+        for (var i = 0; i < rowWidth; i++)
+        {
+            var s = rows.Aggregate("", (current, row) => current + row[i]);
+            verticalRows.Add(s);
+        }
         
         var set = new HashSet<(int, int)>();
 
         foreach (var word in words)
         {
-            var hits = new List<MatrixAddress>();
-            for (var row = matrix.YMin; row <= matrix.YMax; row++)
+            var reversedWord = word.ReverseString();
+            var hits = new List<(int, int)>();
+            var rowNr = 0;
+            foreach (var row in horizontalRows)
             {
-                hits.AddRange(SearchRight(wrappingMatrix, row, word));
-                hits.AddRange(SearchRight(wrappingMatrix, row, word.ReverseString()));
+                var found = Search(row, word);
+                var foundReversed = Search(row, reversedWord);
+                found.AddRange(foundReversed);
+                hits.AddRange(found.Select(o => (o % rowWidth, rowNr)));
+                rowNr++;
             }
             
-            for (var col = matrix.XMin; col <= matrix.XMax; col++)
+            var colNr = 0;
+            foreach (var row in verticalRows)
             {
-                hits.AddRange(SearchDown(matrix, col, word));
-                hits.AddRange(SearchDown(matrix, col, word.ReverseString()));
+                var found = Search(row, word);
+                var foundReversed = Search(row, reversedWord);
+                found.AddRange(foundReversed);
+                hits.AddRange(found.Select(o => (colNr, o)));
+                colNr++;
             }
 
             foreach (var hit in hits)
             {
-                set.Add((hit.X, hit.Y));
+                set.Add((hit.Item1, hit.Item2));
             }
         }
-
-        foreach (var v in set)
-        {
-            matrix.WriteValueAt(v.Item1, v.Item2, '_');
-        }
         
-        Console.WriteLine(matrix.Print());
-
         return set.Count;
     }
 
-    private static List<MatrixAddress> SearchRight(Matrix<char> matrix, int row, string word)
+    private static List<int> Search(string s, string word)
     {
-        var realWidth = matrix.Width / 2;
-        var hits = new List<MatrixAddress>();
+        var hits = new List<int>();
         
-        for (var startCol = matrix.XMin; startCol <= matrix.XMax - word.Length + 1; startCol++)
+        for (var i = 0; i < s.Length - word.Length + 1; i++)
         {
-            var currentWord = "";
-            var curPositions = new List<MatrixAddress>();
-            for (var col = startCol; col < startCol + word.Length; col++)
+            var current = s.Substring(i, word.Length);
+            if (current == word)
             {
-                var curPos = new MatrixAddress(col % realWidth, row);
-                curPositions.Add(curPos);
-                currentWord += matrix.ReadValueAt(curPos);
-            }
-
-            if (currentWord == word)
-            {
-                hits.AddRange(curPositions);
+                for (var j = i; j < i + word.Length; j++)
+                {
+                    hits.Add(j);
+                }
             }
         }
-        return hits;
-    }
-    
-    private static List<MatrixAddress> SearchDown(Matrix<char> matrix, int col, string word)
-    {
-        var hits = new List<MatrixAddress>();
-        for (var startRow = matrix.YMin; startRow <= matrix.YMax - word.Length + 1; startRow++)
-        {
-            var currentWord = "";
-            var curPositions = new List<MatrixAddress>();
-            for (var row = startRow; row < startRow + word.Length; row++)
-            {
-                var curPos = new MatrixAddress(col, row);
-                curPositions.Add(curPos);
-                currentWord += matrix.ReadValueAt(curPos);
-            }
 
-            if (currentWord == word)
-            {
-                hits.AddRange(curPositions);
-            }
-        }
         return hits;
     }
 

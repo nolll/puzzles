@@ -8,14 +8,14 @@ public class EverybodyPuzzleProvider : IPuzzleProvider
         PuzzleDataReader.ReadData<EverybodyPuzzle>()
             .Select(CreatePuzzleDefinition)
             .ToList();
-
+    
     private static PuzzleDefinition CreatePuzzleDefinition(PuzzleData data)
     {
         var id = EverybodyPuzzleParser.GetPuzzleId(data.Type).ToString();
         var paddedId = id.PadLeft(2, '0');
         var sortId = $"everybody {paddedId}";
         var title = $"Everybody Codes {id}";
-        var listTitle = $"Everybody {paddedId}";
+        var listTitle = $"Every {paddedId}";
         List<string> tags = ["everybody", id];
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }

@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Strings;
@@ -52,25 +53,26 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
         var count = 0;
         foreach (var s in strings)
         {
-            var set = new HashSet<int>();
-            foreach (var word in words)
-            {
-                var found = Search(s, word);
-                var foundReversed = Search(s, word.ReverseString());
-                found.AddRange(foundReversed);
-                
-                foreach (var hit in found)
-                {
-                    set.Add(hit);
-                }
-            }
-
-            count += set.Count;
+            count += CountRunicSymbols(words, s);
         }
 
         return count;
     }
+
+    private static int CountRunicSymbols(string[] words, string s)
+    {
+        var set = new HashSet<int>();
+        foreach (var word in words)
+        {
+            set.AddRange(FindRunicSymbols(word, s));
+        }
+
+        return set.Count;
+    }
     
+    private static IEnumerable<int> FindRunicSymbols(string word, string s) => 
+        FindMatchingIndices(s, word).Concat(FindMatchingIndices(s, word.ReverseString()));
+
     private static int CountRunicSymbolsInMatrix(string input)
     {
         var parts = input.Split($"{Environment.NewLine}", StringSplitOptions.RemoveEmptyEntries);
@@ -94,14 +96,11 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
 
         foreach (var word in words)
         {
-            var reversedWord = word.ReverseString();
             var hits = new List<(int, int)>();
             var rowNr = 0;
             foreach (var row in horizontalRows)
             {
-                var found = Search(row, word);
-                var foundReversed = Search(row, reversedWord);
-                found.AddRange(foundReversed);
+                var found = FindRunicSymbols(word, row);
                 hits.AddRange(found.Select(o => (o % rowWidth, rowNr)));
                 rowNr++;
             }
@@ -109,9 +108,7 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
             var colNr = 0;
             foreach (var row in verticalRows)
             {
-                var found = Search(row, word);
-                var foundReversed = Search(row, reversedWord);
-                found.AddRange(foundReversed);
+                var found = FindRunicSymbols(word, row);
                 hits.AddRange(found.Select(o => (colNr, o)));
                 colNr++;
             }
@@ -125,17 +122,18 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
         return set.Count;
     }
 
-    private static List<int> Search(string s, string word)
+    private static IEnumerable<int> FindMatchingIndices(string s, string word)
     {
-        var hits = new List<int>();
-        
         for (var i = 0; i < s.Length - word.Length + 1; i++)
         {
-            if (s.Substring(i, word.Length) == word)
-                hits.AddRange(Enumerable.Range(i, word.Length));
+            if (s.Substring(i, word.Length) != word)
+                continue;
+            
+            for (var j = i; j < i + word.Length; j++)
+            {
+                yield return j;
+            }
         }
-
-        return hits;
     }
 
     private static int OccurrencesInString(string word, string s) => 

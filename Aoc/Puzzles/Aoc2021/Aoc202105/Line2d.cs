@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202105;
+namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202105;
 
 public class Line2d
 {

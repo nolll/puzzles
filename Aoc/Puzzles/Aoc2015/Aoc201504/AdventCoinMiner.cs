@@ -1,4 +1,4 @@
-﻿using Pzl.Tools.Cryptography;
+using Pzl.Tools.Cryptography;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201504;
 

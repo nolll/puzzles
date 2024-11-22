@@ -1,4 +1,4 @@
-﻿ngwp: dbhf + lhwf
+ngwp: dbhf + lhwf
 rcdg: npwg * pdqh
 cqwl: bwgm + bplm
 nprq: vwfn * gpss

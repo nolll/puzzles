@@ -1,4 +1,4 @@
-﻿guess,result
+guess,result
 papal,0 2 0 0 0
 cacti,0 2 0 0 0
 bauds,0 2 0 0 0

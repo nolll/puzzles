@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using Pzl.Common;
 using Pzl.Tools.Strings;
 

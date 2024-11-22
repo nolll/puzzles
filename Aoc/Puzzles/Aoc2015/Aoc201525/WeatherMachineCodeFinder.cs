@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201525;
+namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201525;
 
 public class WeatherMachineCodeFinder
 {

@@ -1,4 +1,4 @@
-﻿vibrant salmon bags contain 1 vibrant gold bag, 2 wavy aqua bags, 1 dotted crimson bag.
+vibrant salmon bags contain 1 vibrant gold bag, 2 wavy aqua bags, 1 dotted crimson bag.
 dotted plum bags contain 3 wavy cyan bags.
 muted salmon bags contain 2 pale purple bags, 3 dull orange bags, 2 dotted lime bags, 3 clear crimson bags.
 wavy green bags contain 1 plaid crimson bag.

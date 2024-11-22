@@ -1,4 +1,4 @@
-﻿namespace Pzl.Client.Params;
+namespace Pzl.Client.Params;
 
 public class Parameters
 {

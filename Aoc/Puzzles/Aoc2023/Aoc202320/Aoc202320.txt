@@ -1,4 +1,4 @@
-﻿&kv -> qb
+&kv -> qb
 %px -> qz, tk
 %xk -> sv, zv
 %rj -> lx, qz

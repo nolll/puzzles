@@ -1,4 +1,4 @@
-﻿jio a, +18
+jio a, +18
 inc a
 tpl a
 inc a

@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aquaq.Puzzles.Aquaq31.RubiksCube;
+namespace Pzl.Aquaq.Puzzles.Aquaq31.RubiksCube;
 
 public class CubeSolver
 {

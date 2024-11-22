@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using FluentAssertions;
 using NUnit.Framework;
 

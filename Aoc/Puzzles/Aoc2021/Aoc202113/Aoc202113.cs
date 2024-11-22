@@ -1,4 +1,4 @@
-﻿using Pzl.Common;
+using Pzl.Common;
 using Pzl.Tools.Ocr;
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202113;

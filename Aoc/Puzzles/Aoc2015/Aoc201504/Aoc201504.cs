@@ -1,4 +1,4 @@
-﻿using Pzl.Common;
+using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201504;
 

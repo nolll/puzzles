@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202306;

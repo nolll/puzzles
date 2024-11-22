@@ -1,4 +1,4 @@
-﻿Immune System:
+Immune System:
 2334 units each with 8900 hit points with an attack that does 31 fire damage at initiative 4
 411 units each with 8067 hit points with an attack that does 195 radiation damage at initiative 1
 449 units each with 9820 hit points (weak to fire) with an attack that does 193 bludgeoning damage at initiative 3

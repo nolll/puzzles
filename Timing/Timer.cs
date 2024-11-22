@@ -1,4 +1,4 @@
-﻿namespace Pzl.Client.Timing;
+namespace Pzl.Client.Timing;
 
 public class Timer
 {

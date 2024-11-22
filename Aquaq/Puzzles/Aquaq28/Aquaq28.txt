@@ -1,4 +1,4 @@
-﻿ ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789 
+ ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789 
 A               \ /       /\          A
 B   /         \/   / \           \  / B
 C         / \       /  /     /       /C

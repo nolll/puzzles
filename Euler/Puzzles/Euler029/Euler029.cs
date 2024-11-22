@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Pzl.Common;
 
 namespace Pzl.Euler.Puzzles.Euler029;

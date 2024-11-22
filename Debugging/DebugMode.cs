@@ -1,4 +1,4 @@
-﻿namespace Pzl.Client.Debugging;
+namespace Pzl.Client.Debugging;
 
 public static class DebugMode
 {

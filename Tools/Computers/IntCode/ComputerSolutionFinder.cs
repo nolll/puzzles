@@ -1,4 +1,4 @@
-﻿namespace Pzl.Tools.Computers.IntCode;
+namespace Pzl.Tools.Computers.IntCode;
 
 public class ComputerSolutionFinder
 {

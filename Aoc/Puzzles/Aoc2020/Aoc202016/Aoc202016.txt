@@ -1,4 +1,4 @@
-﻿departure location: 34-269 or 286-964
+departure location: 34-269 or 286-964
 departure station: 27-584 or 609-973
 departure platform: 49-135 or 155-974
 departure track: 36-248 or 255-954

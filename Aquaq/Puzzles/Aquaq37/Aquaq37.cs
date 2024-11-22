@@ -1,4 +1,4 @@
-﻿using Pzl.Common;
+using Pzl.Common;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq37;

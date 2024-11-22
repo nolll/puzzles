@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc;
+namespace Pzl.Aoc;
 
 public static class AocPuzzleParser
 {

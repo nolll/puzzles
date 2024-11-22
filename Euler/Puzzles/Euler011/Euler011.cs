@@ -1,4 +1,4 @@
-﻿using Pzl.Common;
+using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Euler.Puzzles.Euler011;

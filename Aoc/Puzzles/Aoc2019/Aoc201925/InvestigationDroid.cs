@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using Pzl.Tools.Computers.IntCode;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201925;

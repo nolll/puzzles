@@ -1,4 +1,4 @@
-﻿using Pzl.Common;
+using Pzl.Common;
 using Pzl.Tools.Computers.IntCode;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201905;

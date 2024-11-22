@@ -1,4 +1,4 @@
-﻿namespace Pzl.Client.Running.Results;
+namespace Pzl.Client.Running.Results;
 
 public enum PuzzleResultStatus
 {

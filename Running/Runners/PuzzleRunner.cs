@@ -1,4 +1,4 @@
-﻿using Pzl.Common;
+using Pzl.Common;
 using Spectre.Console;
 
 namespace Pzl.Client.Running.Runners;

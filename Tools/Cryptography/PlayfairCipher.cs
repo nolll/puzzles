@@ -1,4 +1,4 @@
-﻿namespace Pzl.Tools.Cryptography;
+namespace Pzl.Tools.Cryptography;
 
 public class PlayfairCipher
 {

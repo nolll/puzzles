@@ -124,11 +124,11 @@ public class Aoc202324(string input) : AocPuzzle
 
         var candidates = pha.MaxBy(o => o.Value.Count).Value;
 
-        Console.WriteLine();
-        foreach (var candidate in candidates)
-        {
-            Console.WriteLine(candidate.Print());
-        }
+        // Console.WriteLine();
+        // foreach (var candidate in candidates)
+        // {
+        //     Console.WriteLine(candidate.Print());
+        // }
 
         return parallelMax;
     }

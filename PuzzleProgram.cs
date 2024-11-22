@@ -1,4 +1,4 @@
-﻿using Pzl.Aoc;
+using Pzl.Aoc;
 using Pzl.Aquaq;
 using Pzl.Client.Debugging;
 using Pzl.Client.Filter;

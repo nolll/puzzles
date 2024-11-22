@@ -1,4 +1,4 @@
-﻿namespace Pzl.Euler.Puzzles.Euler033;
+namespace Pzl.Euler.Puzzles.Euler033;
 
 public class Fraction
 {

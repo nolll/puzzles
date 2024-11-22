@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202106;
+namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202106;
 
 public class FishCounter
 {

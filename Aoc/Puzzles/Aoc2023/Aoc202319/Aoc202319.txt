@@ -1,4 +1,4 @@
-﻿fxr{x>387:R,a<752:R,s>1381:fb,sn}
+fxr{x>387:R,a<752:R,s>1381:fb,sn}
 dds{m<1139:jr,s<1864:jct,R}
 dt{m<2896:vr,xt}
 sz{s<1606:cnp,R}

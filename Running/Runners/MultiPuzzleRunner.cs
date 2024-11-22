@@ -1,4 +1,4 @@
-﻿using Pzl.Client.Running.Results;
+using Pzl.Client.Running.Results;
 using Pzl.Common;
 using Spectre.Console;
 

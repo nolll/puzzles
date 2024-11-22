@@ -1,4 +1,4 @@
-﻿namespace Pzl.Tools.Numbers;
+namespace Pzl.Tools.Numbers;
 
 public static class Numbers
 {

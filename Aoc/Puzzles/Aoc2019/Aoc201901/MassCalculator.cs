@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201901;
+namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201901;
 
 public class MassCalculator
 {

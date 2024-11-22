@@ -1,4 +1,4 @@
-﻿av inc 167 if f > -9
+av inc 167 if f > -9
 av inc 640 if uea == 0
 fk dec -960 if tn > -9
 tn dec 438 if fk == 960

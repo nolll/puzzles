@@ -1,4 +1,4 @@
-﻿Faerun to Tristram = 65
+Faerun to Tristram = 65
 Faerun to Tambi = 129
 Faerun to Norrath = 144
 Faerun to Snowdin = 71

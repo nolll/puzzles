@@ -1,4 +1,4 @@
-﻿using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Ocr;
 using Pzl.Tools.Strings;
 

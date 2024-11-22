@@ -1,4 +1,4 @@
-﻿af AND ah -> ai
+af AND ah -> ai
 NOT lk -> ll
 hz RSHIFT 1 -> is
 NOT go -> gp

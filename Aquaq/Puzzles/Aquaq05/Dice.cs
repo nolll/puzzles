@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aquaq.Puzzles.Aquaq05;
+namespace Pzl.Aquaq.Puzzles.Aquaq05;
 
 public class Dice
 {

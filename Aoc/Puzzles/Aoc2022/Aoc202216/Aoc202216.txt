@@ -1,4 +1,4 @@
-﻿Valve JI has flow rate=21; tunnels lead to valves WI, XG
+Valve JI has flow rate=21; tunnels lead to valves WI, XG
 Valve DM has flow rate=3; tunnels lead to valves JX, NG, AW, BY, PF
 Valve AZ has flow rate=0; tunnels lead to valves FJ, VC
 Valve YQ has flow rate=0; tunnels lead to valves TE, OP

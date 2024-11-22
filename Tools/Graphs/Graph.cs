@@ -1,4 +1,4 @@
-﻿namespace Pzl.Tools.Graphs;
+namespace Pzl.Tools.Graphs;
 
 public static class Graph
 {

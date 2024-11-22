@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201801;
+namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201801;
 
 public class FrequencyPuzzle
 {

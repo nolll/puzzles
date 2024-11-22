@@ -1,4 +1,4 @@
-﻿using Pzl.Common;
+using Pzl.Common;
 using Pzl.Tools.Combinatorics;
 
 namespace Pzl.Euler.Puzzles.Euler024;

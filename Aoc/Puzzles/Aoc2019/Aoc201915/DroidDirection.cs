@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201915;
+namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201915;
 
 public enum DroidDirection
 {

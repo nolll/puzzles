@@ -1,4 +1,4 @@
-﻿namespace Pzl.Client;
+namespace Pzl.Client;
 
 public class Options(string? hashSeed, string? timeoutSeconds, string? debugTags)
 {

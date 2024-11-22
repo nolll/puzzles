@@ -1,4 +1,4 @@
-﻿using Pzl.Client.Params;
+using Pzl.Client.Params;
 using Pzl.Common;
 
 namespace Pzl.Client.Filter;

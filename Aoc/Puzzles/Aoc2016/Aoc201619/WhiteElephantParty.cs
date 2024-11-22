@@ -1,4 +1,4 @@
-﻿using Pzl.Tools.Lists;
+using Pzl.Tools.Lists;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201619;
 

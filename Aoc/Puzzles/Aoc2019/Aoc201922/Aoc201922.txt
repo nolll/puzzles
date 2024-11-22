@@ -1,4 +1,4 @@
-﻿cut 1470
+cut 1470
 deal with increment 46
 cut -6481
 deal with increment 70

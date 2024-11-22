@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202221;
+namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202221;
 
 public class DivisionMonkey : MathMonkey
 {

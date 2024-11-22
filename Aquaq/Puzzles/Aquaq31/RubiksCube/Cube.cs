@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq31.RubiksCube;

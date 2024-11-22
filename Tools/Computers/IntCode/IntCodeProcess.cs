@@ -1,4 +1,4 @@
-﻿using Pzl.Tools.Computers.IntCode.Instructions;
+using Pzl.Tools.Computers.IntCode.Instructions;
 using Pzl.Tools.Computers.IntCode.Parameters;
 
 namespace Pzl.Tools.Computers.IntCode;

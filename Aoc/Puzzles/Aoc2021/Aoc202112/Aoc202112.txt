@@ -1,4 +1,4 @@
-﻿VJ-nx
+VJ-nx
 start-sv
 nx-UL
 FN-nx

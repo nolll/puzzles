@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201802;

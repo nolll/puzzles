@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Pzl.Common;
 
 namespace Pzl.Client.Running.Runners;

@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Threading.Tasks;
 using Pzl.Client.Formatting;
 using Pzl.Client.Running.Results;

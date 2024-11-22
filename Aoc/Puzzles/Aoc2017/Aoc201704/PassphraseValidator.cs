@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201704;
+namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201704;
 
 public class PassphraseValidator
 {

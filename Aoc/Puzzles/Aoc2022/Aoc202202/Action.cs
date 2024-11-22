@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202202;
+namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202202;
 
 public enum Action
 {

@@ -1,4 +1,4 @@
-﻿namespace Pzl.Common;
+namespace Pzl.Common;
 
 public enum PuzzleType
 {

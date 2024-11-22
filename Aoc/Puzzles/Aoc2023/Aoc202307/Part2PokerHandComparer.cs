@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202307;
+namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202307;
 
 public class Part2PokerHandComparer() : PokerHandComparer(1)
 {

@@ -1,4 +1,4 @@
-﻿using Pzl.Common;
+using Pzl.Common;
 using Pzl.Tools.Cryptography;
 using Pzl.Tools.Strings;
 

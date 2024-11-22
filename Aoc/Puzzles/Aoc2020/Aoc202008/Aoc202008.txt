@@ -1,4 +1,4 @@
-﻿acc +6
+acc +6
 acc +21
 nop +297
 jmp +2

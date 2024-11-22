@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq30;
 

@@ -1,4 +1,4 @@
-﻿namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201501;
+namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201501;
 
 public class FloorNavigator
 {

@@ -1,4 +1,4 @@
-﻿namespace Pzl.Tools.Strings;
+namespace Pzl.Tools.Strings;
 
 public class NumberAsString
 {

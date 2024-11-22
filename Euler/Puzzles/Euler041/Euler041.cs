@@ -1,4 +1,4 @@
-﻿using Pzl.Common;
+using Pzl.Common;
 using Pzl.Tools.Combinatorics;
 using Pzl.Tools.Numbers;
 

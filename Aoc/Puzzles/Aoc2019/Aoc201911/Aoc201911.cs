@@ -26,7 +26,7 @@ public class Aoc201911(string input) : AocPuzzle
 
     private string CleanPrintout(string s)
     {
-        var rows = s.Split("\r\n").ToList();
+        var rows = s.Split(Environment.NewLine).ToList();
         var rowsWithOutput = new List<string>();
 
         foreach(var row in rows)

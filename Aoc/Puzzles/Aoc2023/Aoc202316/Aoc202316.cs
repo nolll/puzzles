@@ -17,7 +17,7 @@ public class Aoc202316(string input) : AocPuzzle
     {
         var result = MostEnergy(input);
 
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, "67135aadd3392286aed149b56d3e6417");
     }
 
     public static int MostEnergy(string s)

@@ -7,7 +7,7 @@ public class Aoc201824(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var inputs = input.Split("\r\n\r\n");
+        var inputs = input.Split($"{Environment.NewLine}{Environment.NewLine}");
         var immuneInput = inputs.First();
         var infectionInput = inputs.Last();
 
@@ -18,7 +18,7 @@ public class Aoc201824(string input) : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var inputs = input.Split("\r\n\r\n");
+        var inputs = input.Split($"{Environment.NewLine}{Environment.NewLine}");
         var immuneInput = inputs.First();
         var infectionInput = inputs.Last();
             

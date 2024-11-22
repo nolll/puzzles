@@ -1,30 +1,28 @@
-using NUnit.Framework.Internal;
 using Pzl.Common;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Everybody02;
 
 [Name("The Runes of Power")]
-public class Everybody02(string[] inputs) : EverybodyPuzzle
+public class Everybody02() : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
-        var count = CountRunicWords(inputs[0]);
+        var count = CountRunicWords(input);
         
         return new PuzzleResult(count, "a95c75956922f6f91c685f01d8548eb1");
     }
     
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
-        var count = CountRunicSymbols(inputs[1]);
+        var count = CountRunicSymbols(input);
         
         return new PuzzleResult(count, "df79c139a238567f7809c68a9e99d7bc");
     }
     
-    protected override PuzzleResult RunPart3()
+    protected override PuzzleResult RunPart3(string input)
     {
-        var count = CountRunicSymbolsInMatrix(inputs[2]);
+        var count = CountRunicSymbolsInMatrix(input);
         
         return new PuzzleResult(count, "45b4423987a6cf8c24dba08ecb86fc71");
     }
@@ -48,16 +46,7 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
         return CountRunicSymbols(words.Split(','), s);
     }
     
-    public static int CountRunicSymbols(string[] words, string[] strings)
-    {
-        var count = 0;
-        foreach (var s in strings)
-        {
-            count += CountRunicSymbols(words, s);
-        }
-
-        return count;
-    }
+    public static int CountRunicSymbols(string[] words, string[] strings) => strings.Sum(s => CountRunicSymbols(words, s));
 
     private static int CountRunicSymbols(string[] words, string s)
     {

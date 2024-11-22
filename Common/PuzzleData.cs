@@ -12,6 +12,7 @@ public class PuzzleData
     public bool IsFunToOptimize { get; }
     public int NumberOfParts { get; }
     public bool HasUniqueInputsPerPart { get; }
+    public bool ProvideInputToRunFunctions { get; }
     public string? CommonFile { get; }
     public string? LocalFile { get; }
 
@@ -24,6 +25,7 @@ public class PuzzleData
         bool isFunToOptimize,
         int numberOfParts,
         bool hasUniqueInputsPerPart,
+        bool provideInputToRunFunctions,
         string? commonFile,
         string? localFile)
     {
@@ -35,6 +37,7 @@ public class PuzzleData
         IsFunToOptimize = isFunToOptimize;
         NumberOfParts = numberOfParts;
         HasUniqueInputsPerPart = hasUniqueInputsPerPart;
+        ProvideInputToRunFunctions = provideInputToRunFunctions;
         CommonFile = commonFile;
         LocalFile = localFile;
     }

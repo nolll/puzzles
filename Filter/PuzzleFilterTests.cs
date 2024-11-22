@@ -66,6 +66,7 @@ public class PuzzleDefinitionInTest(
     string? comment = null,
     int? numberOfParts = null,
     bool? hasUniqueInputsPerPart = null,
+    bool? provideInputToRunFunction = null,
     string? commonFile = null,
     string? localFile = null)
     : PuzzleDefinition(typeof(Puzzle),
@@ -77,6 +78,7 @@ public class PuzzleDefinitionInTest(
         comment,
         numberOfParts ?? 1,
         hasUniqueInputsPerPart ?? false,
+        provideInputToRunFunction ?? false,
         commonFile,
         localFile);
 

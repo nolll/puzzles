@@ -11,4 +11,6 @@ public abstract class TwoPartsPuzzle : Puzzle
 
     public override IList<Func<PuzzleResult>> RunFunctions =>
         new List<Func<PuzzleResult>> { RunPart1, RunPart2 };
+    
+    public override IList<Func<string, PuzzleResult>> RunFunctionsWithInput => [];
 }

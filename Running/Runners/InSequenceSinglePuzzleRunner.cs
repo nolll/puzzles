@@ -47,12 +47,27 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     public void Run()
     {
         PrintRow();
+        var inputs = FileReader.ReadInputs(_definition);
         var instance = PuzzleFactory.CreateInstance(_definition);
-        for (var i = 0; i < instance.RunFunctions.Count; i++)
+
+        if (_definition.ProvideInputToRunFunctions)
         {
-            var runFunc = instance.RunFunctions[i];
-            RunPart(() => runFunc(), i);
+            for (var i = 0; i < instance.RunFunctionsWithInput.Count; i++)
+            {
+                var input = _definition.HasUniqueInputsPerPart ? inputs[i] : inputs[0];
+                var runFunc = instance.RunFunctionsWithInput[i];
+                RunPart(() => runFunc(input), i);
+            }
         }
+        else
+        {
+            for (var i = 0; i < instance.RunFunctions.Count; i++)
+            {
+                var runFunc = instance.RunFunctions[i];
+                RunPart(() => runFunc(), i);
+            }    
+        }
+        
         AnsiConsole.WriteLine();
     }
 

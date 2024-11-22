@@ -1,4 +1,5 @@
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+﻿using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Tools.Cryptography;
 
@@ -19,7 +20,7 @@ public static class ColumnarTranspositionCipher
             rowList.Add(s.Substring(i, keywordLength));
         }
 
-        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(string.Join(Environment.NewLine, rowList));
+        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(string.Join(LineBreaks.Single, rowList));
         var encryptedMatrix = new Matrix<char>(matrix.Width, matrix.Height, ' ');
         var pickingOrder = GetEncryptSelectionOrder(keyword);
 
@@ -44,7 +45,7 @@ public static class ColumnarTranspositionCipher
             rowList.Add(input.Substring(i, splitLength));
         }
 
-        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(string.Join(Environment.NewLine, rowList))
+        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(string.Join(LineBreaks.Single, rowList))
             .Transpose();
         var decryptedMatrix = new Matrix<char>(matrix.Width, matrix.Height, ' ');
         var pickingOrder = GetDecryptSelectionOrder(keyword);

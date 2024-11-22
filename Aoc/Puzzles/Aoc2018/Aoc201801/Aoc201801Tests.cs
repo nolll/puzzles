@@ -1,5 +1,6 @@
 using FluentAssertions;
 using NUnit.Framework;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201801;
 
@@ -48,5 +49,5 @@ public class Aoc201801Tests
         puzzle.FirstRepeatedFrequency.Should().Be(expected);
     }
 
-    private string SpacesToNewLines(string input) => input.Replace(" ", Environment.NewLine);
+    private string SpacesToNewLines(string input) => input.Replace(" ", LineBreaks.Single);
 }

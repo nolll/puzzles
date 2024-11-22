@@ -77,7 +77,7 @@ public class CathodeRayTube
             i++;
 
             if (i > 0 && i % 40 == 0)
-                s += Environment.NewLine;
+                s += LineBreaks.Single;
         }
 
         return s.Trim();

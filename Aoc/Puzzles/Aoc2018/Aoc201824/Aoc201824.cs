@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201824;
 
@@ -7,7 +8,7 @@ public class Aoc201824(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var inputs = input.Split($"{Environment.NewLine}{Environment.NewLine}");
+        var inputs = input.Split(LineBreaks.Double);
         var immuneInput = inputs.First();
         var infectionInput = inputs.Last();
 
@@ -18,7 +19,7 @@ public class Aoc201824(string input) : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var inputs = input.Split($"{Environment.NewLine}{Environment.NewLine}");
+        var inputs = input.Split(LineBreaks.Double);
         var immuneInput = inputs.First();
         var infectionInput = inputs.Last();
             

@@ -31,7 +31,7 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
 
     private static int CountRunicWords(string input)
     {
-        var parts = input.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+        var parts = input.Split(LineBreaks.Single, StringSplitOptions.RemoveEmptyEntries);
         var words = parts.First().Split(':').Last();
         var s = parts.Last();
         return CountRunicWords(words.Split(','), [s]);
@@ -42,7 +42,7 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
 
     private static int CountRunicSymbols(string input)
     {
-        var parts = input.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+        var parts = input.Split(LineBreaks.Single, StringSplitOptions.RemoveEmptyEntries);
         var words = parts.First().Split(':').Last();
         var s = parts.Skip(1).ToArray();
         return CountRunicSymbols(words.Split(','), s);
@@ -75,7 +75,7 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
 
     private static int CountRunicSymbolsInMatrix(string input)
     {
-        var parts = input.Split($"{Environment.NewLine}", StringSplitOptions.RemoveEmptyEntries);
+        var parts = input.Split($"{LineBreaks.Single}", StringSplitOptions.RemoveEmptyEntries);
         var words = parts.First().Split(':').Last();
         var s = parts.Skip(1).ToArray();
         return CountRunicSymbolsInMatrix(words.Split(','), s);

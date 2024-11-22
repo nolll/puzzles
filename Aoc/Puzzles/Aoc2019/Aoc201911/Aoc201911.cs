@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Ocr;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201911;
 
@@ -26,7 +27,7 @@ public class Aoc201911(string input) : AocPuzzle
 
     private string CleanPrintout(string s)
     {
-        var rows = s.Split(Environment.NewLine).ToList();
+        var rows = s.Split(LineBreaks.Single).ToList();
         var rowsWithOutput = new List<string>();
 
         foreach(var row in rows)

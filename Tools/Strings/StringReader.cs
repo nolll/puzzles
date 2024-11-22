@@ -2,15 +2,12 @@ namespace Pzl.Tools.Strings;
 
 public static class StringReader
 {
-    private static readonly string LineBreak = Environment.NewLine;
-    private static readonly string DoubleLineBreak = $"{LineBreak}{LineBreak}";
-
     public static IList<string> ReadLines(string str) => 
         ReadLines(str, true);
 
     public static IList<string> ReadLines(string str, bool includeEmptyLines)
     {
-        var lines = str.Split(LineBreak);
+        var lines = str.Split(LineBreaks.Single);
         if (!includeEmptyLines)
             return lines.Where(o => o.Length > 0).ToList();
 
@@ -24,8 +21,8 @@ public static class StringReader
         ReadStringGroupsWithWhitespace(str).Select(ReadLines).ToList();
 
     public static IList<string> ReadStringGroups(string str) => 
-        str.Trim().Split(DoubleLineBreak).ToList();
+        str.Trim().Split(LineBreaks.Double).ToList();
 
     public static IList<string> ReadStringGroupsWithWhitespace(string str) => 
-        str.Split(DoubleLineBreak).ToList();
+        str.Split(LineBreaks.Double).ToList();
 }

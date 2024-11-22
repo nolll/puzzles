@@ -1,3 +1,5 @@
+using Pzl.Tools.Strings;
+
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
 
 public class RadioisotopeFacility
@@ -80,7 +82,7 @@ public class RadioisotopeFacility
             strings.Add(s);
         }
 
-        return string.Join(Environment.NewLine, strings);
+        return string.Join(LineBreaks.Single, strings);
     }
 
     private bool NeedToMoveDown

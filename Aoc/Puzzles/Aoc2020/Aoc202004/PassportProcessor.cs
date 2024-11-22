@@ -8,7 +8,7 @@ public class PassportProcessor
 
     public PassportProcessor(string input)
     {
-        var rows = StringReader.ReadLines(input.Replace($"{Environment.NewLine}{Environment.NewLine}", "--").Replace(Environment.NewLine, " ").Replace("--", Environment.NewLine));
+        var rows = StringReader.ReadLines(input.Replace(LineBreaks.Double, "--").Replace(LineBreaks.Single, " ").Replace("--", LineBreaks.Single));
         _passports = rows.Select(o => new Passport(o.Trim())).ToList();
     }
 

@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Computers.Operation;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201816;
 
@@ -8,7 +9,7 @@ public class Aoc201816(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var inputs = input.Split($"{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}");
+        var inputs = input.Split(LineBreaks.Triple);
         var input1 = inputs.First();
             
         var computer = new OpComputer();
@@ -18,7 +19,7 @@ public class Aoc201816(string input) : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var inputs = input.Split($"{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}");
+        var inputs = input.Split(LineBreaks.Triple);
         var input1 = inputs.First();
         var input2 = inputs.Last();
 

@@ -1,4 +1,5 @@
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201721;
 
@@ -10,7 +11,7 @@ public class FractalRule
     public FractalRule(string input, string output)
     {
         Input = input;
-        Output = MatrixBuilder.BuildCharMatrix(output.Replace("/", Environment.NewLine));
+        Output = MatrixBuilder.BuildCharMatrix(output.Replace("/", LineBreaks.Single));
     }
 
     public bool IsMatch(string compare)

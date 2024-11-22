@@ -1,4 +1,5 @@
 ﻿using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202120;
 
@@ -6,7 +7,7 @@ public class TrenchMap
 {
     public int GetLitPixelCount(string input, int steps)
     {
-        var groups = input.Split($"{Environment.NewLine}{Environment.NewLine}");
+        var groups = input.Split(LineBreaks.Double);
         var algorithm = groups[0].Trim();
         var inputImage = MatrixBuilder.BuildCharMatrix(groups[1].Trim(), '.');
         inputImage.ExtendAllDirections(5);

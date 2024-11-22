@@ -24,7 +24,7 @@ public class Aquaq28(string input) : AquaqPuzzle
         var lines = StringReader.ReadLines(input)
             .Skip(1).SkipLast(1)
             .Select(o => o.Substring(1, o.Length - 2));
-        var matrixInput = string.Join(Environment.NewLine, lines);
+        var matrixInput = string.Join(LineBreaks.Single, lines);
 
         var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(matrixInput, Empty);
 

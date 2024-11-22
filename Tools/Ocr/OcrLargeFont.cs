@@ -15,7 +15,7 @@ public static class OcrLargeFont
         for (var i = 0; i < stringLength; i++)
         {
             var start = i * charWidth;
-            var letter = string.Join(Environment.NewLine, rows.Select(o => o.Substring(start, charWidth)));
+            var letter = string.Join(LineBreaks.Single, rows.Select(o => o.Substring(start, charWidth)));
             s += ReadLetter(letter);
         }
 

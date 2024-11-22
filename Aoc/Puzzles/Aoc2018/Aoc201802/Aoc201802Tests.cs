@@ -1,5 +1,6 @@
 using FluentAssertions;
 using NUnit.Framework;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201802;
 
@@ -71,5 +72,5 @@ public class Aoc201802Tests
         commonLetters.Should().Be("ace");
     }
 
-    private string SpacesToNewLines(string input) => input.Replace(" ", Environment.NewLine);
+    private string SpacesToNewLines(string input) => input.Replace(" ", LineBreaks.Single);
 }

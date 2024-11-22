@@ -8,7 +8,7 @@ public class Aoc201816(string input) : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {
-        var inputs = input.Split("\r\n\r\n\r\n");
+        var inputs = input.Split($"{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}");
         var input1 = inputs.First();
             
         var computer = new OpComputer();
@@ -18,7 +18,7 @@ public class Aoc201816(string input) : AocPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var inputs = input.Split("\r\n\r\n\r\n");
+        var inputs = input.Split($"{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}");
         var input1 = inputs.First();
         var input2 = inputs.Last();
 

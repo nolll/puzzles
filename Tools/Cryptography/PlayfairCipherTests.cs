@@ -6,28 +6,17 @@ namespace Pzl.Tools.Cryptography;
 public class PlayfairCipherTests
 {
     [Test]
-    public void CreateStringBoard()
-    {
-        const string expected = "playfirbcdeghkmnoqstuvwxz";
-
-        var result = new PlayfairCipher("play fair").CreateStringCipherBoard();
-
-        result.Should().Be(expected);
-    }
+    public void CreateStringBoard() => new PlayfairCipher("play fair")
+        .CreateStringCipherBoard()
+        .Should().Be("playfirbcdeghkmnoqstuvwxz");
 
     [Test]
-    public void Encrypt()
-    {
-        var result = new PlayfairCipher("play fair").Encrypt("flawless");
-
-        result.Should().Be("pabapgxyxy");
-    }
+    public void Encrypt() => new PlayfairCipher("play fair")
+        .Encrypt("flawless")
+        .Should().Be("pabapgxyxy");
 
     [Test]
-    public void Decrypt()
-    {
-        var result = new PlayfairCipher("play fair").Decrypt("pabapgxyxy");
-
-        result.Should().Be("flawlesxsx");
-    }
+    public void Decrypt() => new PlayfairCipher("play fair")
+        .Decrypt("pabapgxyxy")
+        .Should().Be("flawlesxsx");
 }

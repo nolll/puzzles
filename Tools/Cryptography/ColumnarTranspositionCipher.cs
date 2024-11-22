@@ -62,21 +62,17 @@ public static class ColumnarTranspositionCipher
         return string.Join("", decryptedMatrix.Values);
     }
 
-    public static int[] GetEncryptSelectionOrder(string input)
-    {
-        return input.ToCharArray()
+    public static int[] GetEncryptSelectionOrder(string input) =>
+        input.ToCharArray()
             .Select((o, index) => (index, character: o))
             .OrderBy(o => o.character)
             .Select(o => o.index)
             .ToArray();
-    }
 
-    public static int[] GetDecryptSelectionOrder(string input)
-    {
-        return GetEncryptSelectionOrder(input)
+    public static int[] GetDecryptSelectionOrder(string input) =>
+        GetEncryptSelectionOrder(input)
             .Select((o, index) => (order: o, index))
             .OrderBy(o => o.order)
             .Select(o => o.index)
             .ToArray();
-    }
 }

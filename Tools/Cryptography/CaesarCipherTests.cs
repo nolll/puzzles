@@ -31,10 +31,5 @@ public class CaesarCipherTests
     [TestCase('X', 24)]
     [TestCase('Y', 25)]
     [TestCase('Z', 26)]
-    public void Encrypt(char input, int expected)
-    {
-        var result = CaesarCipher.Encrypt(input);
-
-        result.Should().Be(expected);
-    }
+    public void Encrypt(char input, int expected) => CaesarCipher.Encrypt(input).Should().Be(expected);
 }

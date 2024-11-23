@@ -6,7 +6,6 @@ public static class DebugMode
     {
         get
         {
-            return true;
 #if SINGLE
             return true;
 #else

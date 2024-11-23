@@ -3,25 +3,25 @@ using Pzl.Common;
 namespace Pzl.Everybody.Puzzles.Everybody01;
 
 [Name("The Battle for the Farmlands")]
-public class Everybody01() : EverybodyPuzzle
+public class Everybody01(string[] inputs) : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    protected override PuzzleResult RunPart1()
     {
-        var count = PotionsNeeded(input, 1);
+        var count = PotionsNeeded(inputs[0], 1);
         
         return new PuzzleResult(count, "93584fbfb539341540431fdcbdd43e43");
     }
     
-    protected override PuzzleResult RunPart2(string input)
+    protected override PuzzleResult RunPart2()
     {
-        var count = PotionsNeeded(input, 2);
+        var count = PotionsNeeded(inputs[1], 2);
         
         return new PuzzleResult(count, "29c8c2e9da7059c271b37645091e3caa");
     }
     
-    protected override PuzzleResult RunPart3(string input)
+    protected override PuzzleResult RunPart3()
     {
-        var count = PotionsNeeded(input, 3);
+        var count = PotionsNeeded(inputs[2], 3);
         
         return new PuzzleResult(count, "114dce9075f6d580a84376f6f7eceeeb");
     }

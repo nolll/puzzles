@@ -10,6 +10,4 @@ public abstract class OnePartPuzzle : Puzzle
 
     public override IList<Func<PuzzleResult>> RunFunctions =>
         new List<Func<PuzzleResult>> { Run };
-    
-    public override IList<Func<string, PuzzleResult>> RunFunctionsWithInput => [];
 }

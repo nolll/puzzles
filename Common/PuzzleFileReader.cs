@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +10,7 @@ public static class FileReader
 {
     private static string[] PuzzlePathParts(Type t) => t.FullName!.Split('.').Skip(2).ToArray();
 
-    public static string[] ReadInputs(PuzzleDefinition definition)
+    public static object ReadInputs(PuzzleDefinition definition)
     {
         if(definition.HasUniqueInputsPerPart)
         {
@@ -19,14 +19,7 @@ public static class FileReader
                 .ToArray();
         }
         
-        return [ReadInput(definition.Type)];
-    }
-    
-    public static object ReadInputsAsObject(PuzzleDefinition definition)
-    {
-        return definition.HasUniqueInputsPerPart 
-            ? ReadInputs(definition) 
-            : ReadInputs(definition).First();
+        return ReadInput(definition.Type);
     }
     
     public static string ReadInput(Type t)

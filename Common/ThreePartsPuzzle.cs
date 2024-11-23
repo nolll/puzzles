@@ -6,12 +6,10 @@ namespace Pzl.Common;
 [NumberOfParts(3)]
 public abstract class ThreePartsPuzzle : Puzzle
 {
-    protected abstract PuzzleResult RunPart1(string input);
-    protected abstract PuzzleResult RunPart2(string input);
-    protected abstract PuzzleResult RunPart3(string input);
+    protected abstract PuzzleResult RunPart1();
+    protected abstract PuzzleResult RunPart2();
+    protected abstract PuzzleResult RunPart3();
 
-    public override IList<Func<PuzzleResult>> RunFunctions => [];
-
-    public override IList<Func<string, PuzzleResult>> RunFunctionsWithInput => 
-        [RunPart1, RunPart2, RunPart3];
+    public override IList<Func<PuzzleResult>> RunFunctions =>
+        new List<Func<PuzzleResult>> { RunPart1, RunPart2, RunPart3 };
 }

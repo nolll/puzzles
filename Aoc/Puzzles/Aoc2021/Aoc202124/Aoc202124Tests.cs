@@ -50,7 +50,7 @@ public class Aoc202124Tests
     [TestCase(7, 0, 1, 1, 1)]
     [TestCase(8, 1, 0, 0, 0)]
     [TestCase(9, 1, 0, 0, 1)]
-    public void TestAlu2(long p, int expW, int expX, int expY, int expZ)
+    public void TestAlu3(long p, int expW, int expX, int expY, int expZ)
     {
         const string input = """
                              inp w

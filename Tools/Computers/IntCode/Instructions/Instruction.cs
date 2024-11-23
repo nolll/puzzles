@@ -37,12 +37,11 @@ public abstract class Instruction
     private Parameter CreateParameter(int parameterIndex, ParameterType type)
     {
         var pos = _pointer + 1 + parameterIndex;
-        if (type == ParameterType.Relative)
-            return new RelativeParameter(pos);
-
-        if (type == ParameterType.Immediate)
-            return new ImmediateParameter(pos);
-
-        return new PositionParameter(pos);
+        return type switch
+        {
+            ParameterType.Relative => new RelativeParameter(pos),
+            ParameterType.Immediate => new ImmediateParameter(pos),
+            _ => new PositionParameter(pos)
+        };
     }
 }

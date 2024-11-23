@@ -1,11 +1,13 @@
 using FluentAssertions;
 using NUnit.Framework;
+using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202325;
 
 public class Aoc202325Tests
 {
     [Test]
+    [Ignore(TestHelper.WorkInProgress)]
     public void DivideIntoGroups()
     {
         const string input = """

@@ -99,8 +99,8 @@ public class HuffmanCompression
         return d;
     }
 
-    private IDictionary<string, string> GetDecoding()
-        => Encoding.ToDictionary(k => k.Value, v => v.Key);
+    private IDictionary<string, string> GetDecoding() => 
+        Encoding.ToDictionary(k => k.Value, v => v.Key);
 
     public record Node(string Key, int Weight, List<Node> Children);
 }

@@ -43,6 +43,6 @@ public class Aoc201911(string input) : AocPuzzle
         var lastCharPos = rowsWithOutput.Max(o => o.LastIndexOf('1'));
         var length = lastCharPos - firstCharPos + 1;
         var printoutRows = rowsWithOutput.Select(o => o.Substring(firstCharPos, length));
-        return string.Join("\r\n", printoutRows).Replace('0', '.').Replace('1', '#');
+        return string.Join(LineBreaks.Single, printoutRows).Replace('0', '.').Replace('1', '#');
     }
 }

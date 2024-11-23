@@ -8,20 +8,14 @@ public class HuffmanCompressionTests
     private const string Charset = "A_DEAD_DAD_CEDED_A_BAD_BABE_A_BEADED_ABACA_BED";
 
     [Test]
-    public void Encode()
-    {
-        var result = new HuffmanCompression(Charset).Encode("CEDED");
-
-        result.Should().Be("11101100011000");
-    }
+    public void Encode() => new HuffmanCompression(Charset)
+        .Encode("CEDED")
+        .Should().Be("11101100011000");
 
     [Test]
-    public void Decode()
-    {
-        var result = new HuffmanCompression(Charset).Decode("11101100011000");
-
-        result.Should().Be("CEDED");
-    }
+    public void Decode() => new HuffmanCompression(Charset)
+        .Decode("11101100011000")
+        .Should().Be("CEDED");
 
     [Test]
     public void GetNodes()

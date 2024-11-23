@@ -1,5 +1,6 @@
 using FluentAssertions;
 using NUnit.Framework;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202019;
 
@@ -147,6 +148,6 @@ public class Aoc202019Tests
                                      aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba
                                      """;
 
-    private static string RulesAndMessages1 => $"{Rules1}\r\n\r\n{Messages1}";
-    private static string RulesAndMessages2 => $"{Rules2}\r\n\r\n{Messages2}";
+    private static string RulesAndMessages1 => $"{Rules1}{LineBreaks.Double}{Messages1}";
+    private static string RulesAndMessages2 => $"{Rules2}{LineBreaks.Double}{Messages2}";
 }

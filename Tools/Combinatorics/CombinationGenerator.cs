@@ -60,11 +60,8 @@ public static class CombinationGenerator
         return result.Where(o => o.Count <= size);
     }
 
-    public static IEnumerable<IList<T>> GetCombinationsFixedSize<T>(IList<T> list, int size)
-    {
-        var accList = new List<T>();
-        return GetCombinationsFixedSizeRecursive<T>(accList, list, size, 0);
-    }
+    public static IEnumerable<IList<T>> GetCombinationsFixedSize<T>(IList<T> list, int size) => 
+        GetCombinationsFixedSizeRecursive(new List<T>(), list, size, 0);
 
     private static IEnumerable<IList<T>> GetCombinationsFixedSizeRecursive<T>(IList<T> accList, IList<T> list, int size, int i)
     {

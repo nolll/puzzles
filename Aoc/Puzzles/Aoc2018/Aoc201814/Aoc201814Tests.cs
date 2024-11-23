@@ -9,7 +9,7 @@ public class Aoc201814Tests
     [TestCase(9, "5158916779")]
     [TestCase(18, "9251071085")]
     [TestCase(2018, "5941429882")]
-    public void FindRecipeScores(int input, string expected)
+    public void FindRecipeScores1(int input, string expected)
     {
         var generator = new RecipeGenerator();
         var scores = generator.ScoresAfter(input);
@@ -21,7 +21,7 @@ public class Aoc201814Tests
     [TestCase("51589", 9)]
     [TestCase("92510", 18)]
     [TestCase("59414", 2018)]
-    public void FindRecipeScores(string input, int expected)
+    public void FindRecipeScores2(string input, int expected)
     {
         var generator = new RecipeGenerator();
         var count = generator.RecipeCountBefore(input);

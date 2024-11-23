@@ -7,6 +7,6 @@ public class PermutationGeneratorTests
 {
     [Test]
     public void GeneratesAllPermutations() => 
-        PermutationGenerator.GetPermutations(new[] { 1, 2, 3 })
+        PermutationGenerator.GetPermutations([1, 2, 3])
             .ToList().Count.Should().Be(6);
 }

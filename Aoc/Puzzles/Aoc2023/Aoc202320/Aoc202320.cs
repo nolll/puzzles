@@ -17,13 +17,17 @@ public class Aoc202320(string input) : AocPuzzle
     public static long CountPulses(string s, int iterations, bool isPart2 = false)
     {
         var modules = ParseModules(s);
-        var moduleSendingToRx = modules.Values.First(o => o.Targets.Length == 1 && o.Targets.First() == "rx");
-        var modulesToCheck = modules.Values
-            .Where(o => o.Targets.Length == 1 && o.Targets.First() == moduleSendingToRx.Name)
-            .Select(o => o.Name)
-            .ToArray();
-        var part2State = modulesToCheck.ToDictionary(o => o, _ => 0L);
-
+        var part2State = new Dictionary<string, long>();
+        if (isPart2)
+        {
+            var moduleSendingToRx = modules.Values.First(o => o.Targets.Length == 1 && o.Targets.First() == "rx");
+            var modulesToCheck = modules.Values
+                .Where(o => o.Targets.Length == 1 && o.Targets.First() == moduleSendingToRx.Name)
+                .Select(o => o.Name)
+                .ToArray();
+            part2State = modulesToCheck.ToDictionary(o => o, _ => 0L);
+        }
+        
         for (var i = 0; i < iterations; i++)
         {
             var queue = new Queue<(string, Module)>();

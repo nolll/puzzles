@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202201;
 
-public class Year2022Day01Tests
+public class Aoc202201Tests
 {
     [Test]
     public void Part1()

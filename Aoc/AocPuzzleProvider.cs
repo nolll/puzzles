@@ -1,4 +1,4 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 
 namespace Pzl.Aoc;
 
@@ -11,7 +11,7 @@ public class AocPuzzleProvider : IPuzzleProvider
 
     private static PuzzleDefinition CreatePuzzleDefinition(PuzzleData data)
     {
-        var (year, day) = AocPuzzleParser.GetYearAndDay(data.Type);
+        var (year, day) = AocPuzzleParser.ParseYearAndDay(data.Type);
         var paddedDay = day.ToString().PadLeft(2, '0');
         var id = $"{year}{paddedDay}";
         var sortId = $"aoc {id}";

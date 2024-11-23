@@ -5,7 +5,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202325;
 
 [Name("Snowverload")]
-public class Aoc202325(string input) : AocPuzzle
+public class Aoc202325() : AocPuzzle
 {
     protected override PuzzleResult RunPart1()
     {

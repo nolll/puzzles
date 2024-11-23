@@ -1,24 +1,17 @@
-namespace Pzl.Tools.Strings;
+﻿namespace Pzl.Tools.Strings;
 
-public class NumberAsString
+public class NumberAsString(int number)
 {
-    private readonly int _number;
-
-    public NumberAsString(int number)
-    {
-        _number = number;
-    }
-
     public override string ToString()
     {
-        var s = _number.ToString();
+        var s = number.ToString();
 
         return s.Length switch
         {
             4 => GetWordsForFourDigits(),
-            3 => GetWordsForThreeDigits(_number),
-            2 => GetWordsForTwoDigits(_number),
-            _ => GetWordsForOneDigit(_number)
+            3 => GetWordsForThreeDigits(number),
+            2 => GetWordsForTwoDigits(number),
+            _ => GetWordsForOneDigit(number)
         };
     }
 

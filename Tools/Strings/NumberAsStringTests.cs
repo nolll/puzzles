@@ -39,10 +39,7 @@ public class NumberAsStringTests
     [TestCase(900, "nine hundred")]
     [TestCase(999, "nine hundred and ninetynine")]
     [TestCase(1000, "one thousand")]
-    public void ToString_ReturnsCorrectString(int n, string expected)
-    {
-        var result = new NumberAsString(n).ToString();
-
-        result.Should().Be(expected);
-    }
+    public void ToString_ReturnsCorrectString(int n, string expected) =>
+        new NumberAsString(n).ToString()
+            .Should().Be(expected);
 }

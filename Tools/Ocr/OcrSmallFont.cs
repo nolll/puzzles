@@ -25,44 +25,26 @@ public static class OcrSmallFont
     public static char ReadLetter(string crtLetter)
     {
         var rows = StringReader.ReadLines(crtLetter).Select(o => o.Trim().Replace(" ", ".")).ToList();
-        switch (rows[0])
+        return rows[0] switch
         {
-            case "###.." when rows[5] == "###..":
-                return 'B';
-            case "###.." when rows[5] == "#....":
-                return 'P';
-            case "###..":
-                return 'R';
-            case ".##.." when rows[5] == ".###.":
-                return 'G';
-            case ".##.." when rows[3] == "#....":
-                return 'C';
-            case ".##.." when rows[5] == ".##..":
-                return 'O';
-            case ".##..":
-                return 'A';
-            case "####." when rows[5] == "#....":
-                return 'F';
-            case "####." when rows[2] == "###..":
-                return 'E';
-            case "####.":
-                return 'Z';
-            case "#..#." when rows[5] == ".##..":
-                return 'U';
-            case "#..#." when rows[2] == "##...":
-                return 'K';
-            case "#..#.":
-                return 'H';
-            case "#....":
-                return 'L';
-            case "#...#":
-                return 'Y';
-            case ".###.":
-                return 'I';
-            case "..##.":
-                return 'J';
-            default:
-                return ' ';
-        }
+            "###.." when rows[5] == "###.." => 'B',
+            "###.." when rows[5] == "#...." => 'P',
+            "###.." => 'R',
+            ".##.." when rows[5] == ".###." => 'G',
+            ".##.." when rows[3] == "#...." => 'C',
+            ".##.." when rows[5] == ".##.." => 'O',
+            ".##.." => 'A',
+            "####." when rows[5] == "#...." => 'F',
+            "####." when rows[2] == "###.." => 'E',
+            "####." => 'Z',
+            "#..#." when rows[5] == ".##.." => 'U',
+            "#..#." when rows[2] == "##..." => 'K',
+            "#..#." => 'H',
+            "#...." => 'L',
+            "#...#" => 'Y',
+            ".###." => 'I',
+            "..##." => 'J',
+            _ => ' '
+        };
     }
 }

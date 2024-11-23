@@ -23,20 +23,10 @@ public class OcrSmallFontTests
     [TestCase(InputY, 'Y')]
     [TestCase(InputZ, 'Z')]
     [TestCase(InputSpace, ' ')]
-    public void TestReadLetter(string input, char expected)
-    {
-        var result = OcrSmallFont.ReadLetter(input);
-
-        result.Should().Be(expected);
-    }
+    public void TestReadLetter(string input, char expected) => OcrSmallFont.ReadLetter(input).Should().Be(expected);
 
     [Test]
-    public void TestReadString()
-    {
-        var result = OcrSmallFont.ReadString(Input);
-
-        result.Should().Be("ABC");
-    }
+    public void TestReadString() => OcrSmallFont.ReadString(Input).Should().Be("ABC");
 
     private const string Input = """
                                  .##..###...##..

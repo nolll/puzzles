@@ -12,20 +12,14 @@ public class OcrLargeFontTests
     [TestCase(InputP, 'P')]
     [TestCase(InputR, 'R')]
     [TestCase(InputSpace, ' ')]
-    public void TestReadLetter(string input, char expected)
-    {
-        var result = OcrLargeFont.ReadLetter(input);
-
-        result.Should().Be(expected);
-    }
+    public void TestReadLetter(string input, char expected) =>
+        OcrLargeFont.ReadLetter(input)
+            .Should().Be(expected);
 
     [Test]
-    public void TestReadString()
-    {
-        var result = OcrLargeFont.ReadString(Input);
-
-        result.Should().Be("HRP");
-    }
+    public void TestReadString() =>
+        OcrLargeFont.ReadString(Input)
+            .Should().Be("HRP");
 
     private const string Input = """
                                  #....#..#####...#####...

@@ -5,6 +5,10 @@ public class ClapDance(List<List<int>> columns)
     public string DanceRounds(int rounds)
     {
         var shout = "";
+        
+        //Console.WriteLine("Start");
+        //Print();
+        
         for (var round = 1; round <= rounds; round++)
         {
             shout = Dance(round);
@@ -18,14 +22,20 @@ public class ClapDance(List<List<int>> columns)
         var counter = new Dictionary<string, int>();
         var round = 1;
         
-        while (round < 1000000)
+        //Console.WriteLine("Start");
+        //Print();
+        
+        while (true)
         {
             var shout = Dance(round);
             if (!counter.TryAdd(shout, 1))
                 counter[shout]++;
 
             if (counter[shout] == target)
+            {
                 return long.Parse(shout) * round;
+            }
+
             round++;
         }
 
@@ -43,18 +53,39 @@ public class ClapDance(List<List<int>> columns)
         for (var i = 0; i < clapper; i++)
         {
             dancerIndex += direction;
+            
+            if (dancerIndex >= columns[danceCol].Count || dancerIndex < 0)
+            {
+                direction *= -1;
+                dancerIndex += direction;
+            }
         }
 
-        if (dancerIndex >= columns[danceCol].Count || dancerIndex < 0)
-        {
-            direction *= -1;
-            dancerIndex += direction;
-        }
-        if(dancerIndex > columns[danceCol].Count)
+        var insertIndex = direction > 0 ? dancerIndex : dancerIndex + 1;
+        if (insertIndex > columns[danceCol].Count)
             columns[danceCol].Add(clapper);
         else
-            columns[danceCol].Insert(dancerIndex, clapper);
+            columns[danceCol].Insert(insertIndex, clapper);
 
+        //Console.WriteLine($"Round {round}");
+        //Print();
+        
         return string.Join("", columns.Select(o => o.First()));
+    }
+
+    private void Print()
+    {
+        var maxLength = columns.Max(o => o.Count);
+        for (var i = 0; i < maxLength; i++)
+        {
+            foreach (var column in columns)
+            {
+                var v = column.Count > i
+                    ? column[i].ToString()
+                    : " ";
+                Console.Write($"{v} ");
+            }
+            Console.WriteLine();
+        }
     }
 }

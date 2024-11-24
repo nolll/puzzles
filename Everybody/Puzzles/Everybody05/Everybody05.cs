@@ -15,8 +15,8 @@ public class Everybody05(string[] inputs) : EverybodyPuzzle
 
     protected override PuzzleResult RunPart2()
     {
-        var result = RunPart1(inputs[1], 2024);
-        return new PuzzleResult(result);
+        var result = RunPart2(inputs[1], 2024);
+        return new PuzzleResult(result, "6b4db5dbf70faa6e08d4a645d6d2b4cc");
     }
 
     protected override PuzzleResult RunPart3()
@@ -47,10 +47,10 @@ public class Everybody05(string[] inputs) : EverybodyPuzzle
         foreach (var row in rows)
         {
             var nums = row.Split(' ').Select(int.Parse).ToList();
-            for (var i = 0; i < nums.Count(); i++)
+            for (var i = 0; i < nums.Count; i++)
             {
                 if(columns.Count <= i)
-                    columns.Add(new List<int>());
+                    columns.Add([]);
                 columns[i].Add(nums[i]);
             }
         }

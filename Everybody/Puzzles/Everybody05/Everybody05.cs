@@ -21,7 +21,8 @@ public class Everybody05(string[] inputs) : EverybodyPuzzle
 
     protected override PuzzleResult RunPart3()
     {
-        return PuzzleResult.Empty;
+        var result = RunPart3(inputs[2]);
+        return new PuzzleResult(result, "5789564a5b01f519e8eddcfc0f7aa6a2");
     }
 
     public static string RunPart1(string input, int rounds)
@@ -32,10 +33,18 @@ public class Everybody05(string[] inputs) : EverybodyPuzzle
         return result;
     }
     
-    public static long RunPart2(string input, int count)
+    public static long RunPart2(string input, int target)
     {
         var columns = ParseDance(input);
-        var result = columns.DanceUntilRepeatCount(count);
+        var result = columns.DanceUntilRepeatCount(target);
+        
+        return result;
+    }
+    
+    public static long RunPart3(string input)
+    {
+        var columns = ParseDance(input);
+        var result = columns.DanceForever();
         
         return result;
     }

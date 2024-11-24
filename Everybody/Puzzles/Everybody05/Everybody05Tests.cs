@@ -37,4 +37,15 @@ public class Everybody05Tests
 
         Everybody05.RunPart2(input, 2024).Should().Be(50877075);
     }
+    
+    [Test]
+    public void Part3()
+    {
+        const string input = """
+                             2 3 4 5
+                             6 7 8 9
+                             """;
+
+        Everybody05.RunPart3(input).Should().Be(6584);
+    }
 }

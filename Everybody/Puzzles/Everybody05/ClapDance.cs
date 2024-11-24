@@ -6,9 +6,6 @@ public class ClapDance(List<List<int>> columns)
     {
         var shout = "";
         
-        //Console.WriteLine("Start");
-        //Print();
-        
         for (var round = 1; round <= rounds; round++)
         {
             shout = Dance(round);
@@ -21,9 +18,6 @@ public class ClapDance(List<List<int>> columns)
     {
         var counter = new Dictionary<string, int>();
         var round = 1;
-        
-        //Console.WriteLine("Start");
-        //Print();
         
         while (true)
         {
@@ -38,10 +32,31 @@ public class ClapDance(List<List<int>> columns)
 
             round++;
         }
-
-        throw new Exception("Never finished");
     }
+    
+    public long DanceForever()
+    {
+        var round = 1;
+        
+        var set = new HashSet<(int, string)>();
+        var highest = 0L;
+        while (true)
+        {
+            var shout = long.Parse(Dance(round));
+            
+            var state = (round % columns.Count, ToString());
+            if (shout > highest)
+                highest = shout;
+     
+            if (set.Contains(state))
+                return highest;
+            
+            set.Add(state);
 
+            round++;
+        }
+    }
+    
     private string Dance(int round)
     {
         var clapperCol = (round - 1) % columns.Count;
@@ -66,26 +81,9 @@ public class ClapDance(List<List<int>> columns)
             columns[danceCol].Add(clapper);
         else
             columns[danceCol].Insert(insertIndex, clapper);
-
-        //Console.WriteLine($"Round {round}");
-        //Print();
         
         return string.Join("", columns.Select(o => o.First()));
     }
 
-    private void Print()
-    {
-        var maxLength = columns.Max(o => o.Count);
-        for (var i = 0; i < maxLength; i++)
-        {
-            foreach (var column in columns)
-            {
-                var v = column.Count > i
-                    ? column[i].ToString()
-                    : " ";
-                Console.Write($"{v} ");
-            }
-            Console.WriteLine();
-        }
-    }
+    public override string ToString() => string.Join("|", columns.Select(o => string.Join(",", o)));
 }

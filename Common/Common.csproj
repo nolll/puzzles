@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;Single</Configurations>
-    <LangVersion>12.0</LangVersion>
+    <LangVersion>13.0</LangVersion>
     <RootNamespace>Pzl.Common</RootNamespace>
   </PropertyGroup>
 

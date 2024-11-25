@@ -12,7 +12,7 @@ public class Aquaq40Tests
     {
         var result = Aquaq40.FindPeakIndices(Input);
 
-        result.Should().BeEquivalentTo(new[] { 6, 13, 18 });
+        result.Should().BeEquivalentTo([6, 13, 18]);
     }
 
     [Test]

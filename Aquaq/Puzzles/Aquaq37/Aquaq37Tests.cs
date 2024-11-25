@@ -88,7 +88,7 @@ public class Aquaq37Tests
     [Test]
     public void MajorMarry()
     {
-        var guess = new Aquaq37.Guess("marry", new[] { 2, 2, 1, 0, 0 });
+        var guess = new Aquaq37.Guess("marry", [2, 2, 1, 0, 0]);
         var result = guess.IsMatch("major");
 
         result.Should().BeTrue();
@@ -97,7 +97,7 @@ public class Aquaq37Tests
     [Test]
     public void GroomDoggo()
     {
-        var guess = new Aquaq37.Guess("doggo", new[] { 0, 1, 1, 0, 0 });
+        var guess = new Aquaq37.Guess("doggo", [0, 1, 1, 0, 0]);
         var result = guess.IsMatch("groom");
 
         result.Should().BeFalse();

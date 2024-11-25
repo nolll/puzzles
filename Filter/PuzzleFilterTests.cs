@@ -32,7 +32,7 @@ public class PuzzleFilterTests
             new PlainPuzzleDefinitionInTest()
         };
         
-        var parameters = new Parameters(tags: new List<string> { PuzzleTag.Commented });
+        var parameters = new Parameters(tags: [PuzzleTag.Commented]);
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 
@@ -49,7 +49,7 @@ public class PuzzleFilterTests
             new PlainPuzzleDefinitionInTest()
         };
 
-        var parameters = new Parameters(tags: new List<string> { PuzzleTag.Fun });
+        var parameters = new Parameters(tags: [PuzzleTag.Fun]);
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 

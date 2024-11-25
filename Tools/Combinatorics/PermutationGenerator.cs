@@ -14,6 +14,6 @@ public static class PermutationGenerator
 
         return GetPermutations(list, length - 1)
             .SelectMany(t => list.Where(e => !t.Contains(e)),
-                (t1, t2) => t1.Concat(new[] { t2 }));
+                (t1, t2) => t1.Concat([t2]));
     }
 }

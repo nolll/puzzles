@@ -17,18 +17,18 @@ public class Euler043 : EulerPuzzle
         return new PuzzleResult(numbers.Sum(), "0700006fb08f1a62536c94a99b1e1adc");
     }
 
-    private List<string> FindNumbers(string s, List<int> remainingNumbers, int[] divisors)
+    private static List<string> FindNumbers(string s, List<int> remainingNumbers, int[] divisors)
     {
         var length = s.Length;
         if (length > 3)
         {
             var lastThree = int.Parse(s[^3..]);
             if (lastThree % divisors[length - 4] != 0)
-                return new();
+                return [];
         }
 
         if (!remainingNumbers.Any())
-            return new() { s };
+            return [s];
 
         var list = new List<string>();
         for (var i = 0; i < remainingNumbers.Count; i++)

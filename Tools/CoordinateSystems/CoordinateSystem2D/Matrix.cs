@@ -4,9 +4,10 @@ namespace Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 public class Matrix<T> where T : struct
 {
-    private readonly T _defaultValue;
     private readonly IDictionary<MatrixAddress, T> _matrix = new Dictionary<MatrixAddress, T>();
 
+    public T DefaultValue { get; }
+    
     public int Width => XMax - XMin + 1;
     public int Height => YMax - YMin + 1;
     public int XMin { get; private set; }
@@ -43,7 +44,7 @@ public class Matrix<T> where T : struct
 
     private Matrix(T defaultValue)
     {
-        _defaultValue = defaultValue;
+        DefaultValue = defaultValue;
         Address = new MatrixAddress(0, 0);
         StartAddress = new MatrixAddress(0, 0);
         Direction = MatrixDirection.Up;
@@ -66,7 +67,7 @@ public class Matrix<T> where T : struct
     public IEnumerable<T> Values =>
         Coords.Select(coord => _matrix.TryGetValue(coord, out var v) 
             ? v 
-            : _defaultValue);
+            : DefaultValue);
 
     public IEnumerable<MatrixAddress> Coords
     {
@@ -88,7 +89,7 @@ public class Matrix<T> where T : struct
     public T ReadValueAt(MatrixAddress coord) =>
         _matrix.TryGetValue(coord, out var v)
             ? v
-            : _defaultValue;
+            : DefaultValue;
 
     public void WriteValue(T value) => WriteValueAt(Address, value);
     public void WriteValueAt(int x, int y, T value) => WriteValueAt(new MatrixAddress(x, y), value);
@@ -337,7 +338,7 @@ public class Matrix<T> where T : struct
         var values = GetValuesForClone(multiplier);
         var min = new MatrixAddress(XMin, YMin);
         var max = GetMaxAddressForClone(multiplier);
-        return new Matrix<T>(min, max, values, _defaultValue);
+        return new Matrix<T>(min, max, values, DefaultValue);
     }
 
     private Dictionary<MatrixAddress, T> GetValuesForClone(int multiplier)
@@ -371,7 +372,7 @@ public class Matrix<T> where T : struct
         var values = _matrix.ToDictionary(item => new MatrixAddress(item.Key.Y, YMax - item.Key.X), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        return new Matrix<T>(min, max, values, _defaultValue);
+        return new Matrix<T>(min, max, values, DefaultValue);
     }
 
     public Matrix<T> RotateRight()
@@ -379,7 +380,7 @@ public class Matrix<T> where T : struct
         var values = _matrix.ToDictionary(item => new MatrixAddress(XMax - item.Key.Y, item.Key.X), item => item.Value);
         var min = new MatrixAddress(YMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        return new Matrix<T>(min, max, values, _defaultValue);
+        return new Matrix<T>(min, max, values, DefaultValue);
     }
 
     public Matrix<T> Slice(MatrixAddress? from = null, MatrixAddress? to = null)
@@ -393,7 +394,7 @@ public class Matrix<T> where T : struct
             .ToDictionary(item => new MatrixAddress(item.Key.X - dx, item.Key.Y - dy), item => item.Value);
         var slicedFrom = new MatrixAddress(from.X - dx, from.Y - dy);
         var slicedTo = new MatrixAddress(to.X - dx, to.Y - dy);
-        return new Matrix<T>(slicedFrom, slicedTo, values, _defaultValue);
+        return new Matrix<T>(slicedFrom, slicedTo, values, DefaultValue);
     }
 
     public Matrix<T> Slice(MatrixAddress from, int width, int height)
@@ -407,7 +408,7 @@ public class Matrix<T> where T : struct
         var values = _matrix.ToDictionary(item => new MatrixAddress(item.Key.X, YMax - item.Key.Y), item => item.Value);
         var min = new MatrixAddress(XMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        return new Matrix<T>(min, max, values, _defaultValue);
+        return new Matrix<T>(min, max, values, DefaultValue);
     }
 
     public Matrix<T> FlipHorizontal()
@@ -415,7 +416,7 @@ public class Matrix<T> where T : struct
         var values = _matrix.ToDictionary(item => new MatrixAddress(XMax - item.Key.X, item.Key.Y), item => item.Value);
         var min = new MatrixAddress(XMin, YMin);
         var max = new MatrixAddress(XMax, YMax);
-        return new Matrix<T>(min, max, values, _defaultValue);
+        return new Matrix<T>(min, max, values, DefaultValue);
     }
 
     public Matrix<T> Transpose()
@@ -423,6 +424,6 @@ public class Matrix<T> where T : struct
         var values = _matrix.ToDictionary(item => new MatrixAddress(item.Key.Y, item.Key.X), item => item.Value);
         var min = new MatrixAddress(YMin, XMin);
         var max = new MatrixAddress(YMax, XMax);
-        return new Matrix<T>(min, max, values, _defaultValue);
+        return new Matrix<T>(min, max, values, DefaultValue);
     }
 }

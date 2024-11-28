@@ -4,7 +4,6 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Everybody07;
 
-[IsSlow] // 55s for part 3
 [Name("Not Fast but Furious")]
 public class Everybody07(string[] inputs) : EverybodyPuzzle
 {
@@ -63,13 +62,13 @@ public class Everybody07(string[] inputs) : EverybodyPuzzle
 
     private static int Part3(string trackString, string input)
     {
-        var loopCount = 2024;
         var track = BuildTerrain(trackString);
         var rivalActions = BuildActions(input.Split(':').Last());
-        var rivalScore = RunRace(track, rivalActions, loopCount);
-        var actionCombinations = GenerateActionCombinations();
-
-        return actionCombinations.Select(action => RunRace(track, action, loopCount)).Count(o => o > rivalScore);
+        var loopsNeeded = rivalActions.Length;
+        var rivalScore = RunRace(track, rivalActions, loopsNeeded);
+        return GenerateActionCombinations()
+            .Select(action => RunRace(track, action, loopsNeeded))
+            .Count(o => o > rivalScore);
     }
 
     private static IEnumerable<int[]> GenerateActionCombinations()

@@ -15,32 +15,23 @@ public class Euler031 : EulerPuzzle
         return new PuzzleResult(result, "7175474dc7b139b075af256e2253a076");
     }
 
-    public int Run(IEnumerable<int> denominations, int target, bool print = false)
-    {
-        var count = CountCombinations(denominations.OrderByDescending(o => o).ToList(), target, "", print);
+    public int Run(IEnumerable<int> denominations, int target, bool print = false) => 
+        CountCombinations(denominations.OrderByDescending(o => o).ToList(), target);
 
-        return count;
-    }
-
-    private static int CountCombinations(IReadOnlyCollection<int> denominations, int target, string str, bool print)
+    private static int CountCombinations(IReadOnlyCollection<int> denominations, int target)
     {
         if (target < 0 || !denominations.Any())
             return 0;
 
         if (target == 0)
-        {
-            if(print)
-                Console.WriteLine(str);
-
             return 1;
-        }
 
         var count = 0;
         var denomination = denominations.First();
         var remainingDenominations = denominations.Skip(1).ToList();
 
-        count += CountCombinations(denominations, target - denomination, $"{str}{denomination}, ", print);
-        count += CountCombinations(remainingDenominations, target, str, print);
+        count += CountCombinations(denominations, target - denomination);
+        count += CountCombinations(remainingDenominations, target);
 
         return count;
     }

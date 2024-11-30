@@ -1,9 +1,8 @@
 using Pzl.Common;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Everybody.Puzzles.Everybody08;
 
-[Name("A Shrine for Nullpointer\n")]
+[Name("A Shrine for Nullpointer")]
 public class Everybody08(string[] inputs) : EverybodyPuzzle
 {
     protected override PuzzleResult RunPart1()

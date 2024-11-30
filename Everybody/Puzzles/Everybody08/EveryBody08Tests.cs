@@ -18,4 +18,11 @@ public class EveryBody08Tests
         var result = Everybody08.Part2("3", 50, 5);
         result.Should().Be(27);
     }
+    
+    [Test]
+    public void Part3()
+    {
+        var result = Everybody08.Part3("2", 160, 5);
+        result.Should().Be(2);
+    }
 }

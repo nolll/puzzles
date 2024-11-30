@@ -20,42 +20,77 @@ public class Everybody08(string[] inputs) : EverybodyPuzzle
 
     protected override PuzzleResult RunPart3()
     {
-        return PuzzleResult.Empty;
+        var result = Part3(inputs[2]);
+        return new PuzzleResult(result);
     }
 
     public static int Part1(string input)
     {
         var availableBlocks = int.Parse(input);
         var level = 1;
-        var levels = new List<int> { level };
+        var cols = new List<int> { level };
         
-        while (levels.Sum() < availableBlocks)
+        while (cols.Sum() < availableBlocks)
         {
             level += 2;
-            levels.Add(level);
+            cols.Add(level);
         }
         
-        return (levels.Sum() - availableBlocks) * levels.Last();
+        return (cols.Sum() - availableBlocks) * cols.Last();
     }
 
     public static long Part2(string input, int availableBlocks = 20240000, int acolyteCount = 1111)
     {
         var priestCount = int.Parse(input);
         var thickness = 1;
-        var levels = new List<long> { thickness };
+        var cols = new List<long> { thickness };
         
-        while (levels.Sum() < availableBlocks)
+        while (cols.Sum() < availableBlocks)
         {
             thickness = thickness * priestCount % acolyteCount;
-            levels.Insert(0, 0);
-            levels.Add(0);
-            for (var i = 0; i < levels.Count; i++)
+            cols.Insert(0, 0);
+            cols.Add(0);
+            for (var i = 0; i < cols.Count; i++)
             {
-                levels[i] += thickness;
+                cols[i] += thickness;
             }
         }
 
-        var sum = levels.Sum();
-        return (sum - availableBlocks) * levels.Count;
+        var sum = cols.Sum();
+        return (sum - availableBlocks) * cols.Count;
+    }
+    
+    public static long Part3(string input, int availableBlocks = 202400000, int acolyteCount = 10)
+    {
+        var priestCount = int.Parse(input);
+        var thickness = 1;
+        var cols = new List<long> { thickness };
+        var space = 0L;
+        var sum = cols.Sum();
+        
+        while (sum - space < availableBlocks)
+        {
+            thickness = thickness * priestCount % acolyteCount + acolyteCount;
+            cols.Insert(0, 0);
+            cols.Add(0);
+            for (var i = 0; i < cols.Count; i++)
+            {
+                cols[i] += thickness;
+            }
+            
+            sum = cols.Sum();
+            space = 0;
+            for (var i = 1; i < cols.Count - 1; i++)
+            {
+                var prevHeight = cols[i - 1];
+                var nextHeight = cols[i + 1];
+                var maxSpace = Math.Min(prevHeight, nextHeight);
+                var thisSpace = priestCount * cols.Count * cols[i] % acolyteCount;
+                space += Math.Min(maxSpace, thisSpace);
+            }
+            //space = cols.Skip(1).SkipLast(1).Sum(col => priestCount * cols.Count * col % acolyteCount);
+        }
+        
+        return sum - space - availableBlocks;
     }
 }

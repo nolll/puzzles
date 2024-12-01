@@ -6,8 +6,8 @@ namespace Pzl.Common;
 [NumberOfParts(1)]
 public abstract class OnePartPuzzle : Puzzle
 {
-    protected abstract PuzzleResult Run();
+    protected abstract PuzzleResult Run(string input);
 
-    public override IList<Func<PuzzleResult>> RunFunctions => [Run];
-    public override IList<Func<string, PuzzleResult>> RunFunctionsWithInput => [];
+    public override IList<Func<PuzzleResult>> RunFunctions => [];
+    public override IList<Func<string, PuzzleResult>> RunFunctionsWithInput => [Run];
 }

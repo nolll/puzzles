@@ -1,13 +1,13 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 using Pzl.Tools.Compression;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq24;
 
 [Name("Huff and Puff")]
-public class Aquaq24(string input) : AquaqPuzzle
+public class Aquaq24 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var parts = StringReader.ReadLines(input);
 

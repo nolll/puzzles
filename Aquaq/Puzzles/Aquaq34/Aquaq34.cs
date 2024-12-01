@@ -1,15 +1,15 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq34;
 
 [Name("Train in Vain")]
-public class Aquaq34(string input) : AquaqPuzzle
+public class Aquaq34 : AquaqPuzzle
 {
     private const int TimeAtStation = 5;
     private static readonly IComparer<Train> WaitingTrainComparer = new WaitingTrainComparer();
 
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var result = LongestRouteTime(input);
 

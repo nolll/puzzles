@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aquaq.Puzzles.Aquaq03;
 
 [Name("Short walks")]
-public class Aquaq03(string input) : AquaqPuzzle
+public class Aquaq03 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var walker = new Walker();
         var result = walker.Walk(input);

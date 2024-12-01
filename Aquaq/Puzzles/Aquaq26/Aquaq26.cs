@@ -6,9 +6,9 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq26;
 
 [Name("Typo Theft")]
-public class Aquaq26(string input) : AquaqPuzzle
+public class Aquaq26 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var inputNumbers = StringReader.ReadLines(input)
             .Select(BigInteger.Parse);

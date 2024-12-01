@@ -1,13 +1,13 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 using Pzl.Tools.Cryptography;
 using Pzl.Tools.Numbers;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq22;
 
 [Name("Veni Vidi Vitavi")]
-public class Aquaq22(string input) : AquaqPuzzle
+public class Aquaq22 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var numbers = input.Split(' ').Select(int.Parse);
         var romanNumbers = numbers.Select(Conversion.ToRoman);

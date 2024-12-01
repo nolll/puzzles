@@ -8,7 +8,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq35;
 [Name("Columns")]
 public class Aquaq35(string input, string additionalInput) : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var words = StringReader.ReadLines(additionalInput);
 

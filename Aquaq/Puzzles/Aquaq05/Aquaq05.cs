@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aquaq.Puzzles.Aquaq05;
 
 [Name("Snake eyes")]
-public class Aquaq05(string input) : AquaqPuzzle
+public class Aquaq05 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var sum = FindSumOfIndexesWithMatchingDice(input);
 

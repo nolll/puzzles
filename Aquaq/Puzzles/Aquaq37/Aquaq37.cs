@@ -1,4 +1,4 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq37;
@@ -9,7 +9,7 @@ public class Aquaq37(string input, string additionalInput) : AquaqPuzzle
 {
     private const int WordLength = 5;
 
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var words = FindWords(input);
         var score = words.Sum(GetWordScore);

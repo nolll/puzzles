@@ -5,14 +5,14 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq28;
 
 [Name("Hall of Mirrors")]
-public class Aquaq28(string input) : AquaqPuzzle
+public class Aquaq28 : AquaqPuzzle
 {
     private const char MirrorLeft = '\\';
     private const char MirrorRight = '/';
     private const char Empty = ' ';
     private const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789";
 
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var result = Encrypt(input, "FISSION_MAILED");
 

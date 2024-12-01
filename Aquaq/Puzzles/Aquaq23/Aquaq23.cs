@@ -6,7 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq23;
 [Name("Fair Play")]
 public class Aquaq23 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var result = new PlayfairCipher("power plant").Decrypt("vepcundbyoaeirotivluxnotpstfnbwept");
 

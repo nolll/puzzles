@@ -9,12 +9,12 @@ public class Aquaq16(string input, string additionalInput) : AquaqPuzzle
 {
     private const int LetterHeight = 6;
 
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
-        return new PuzzleResult(Run(input), "b900eb74f94c2243de65005bcc4ebd2c");
+        return new PuzzleResult(RunInternal(input), "b900eb74f94c2243de65005bcc4ebd2c");
     }
     
-    public int Run(string input2)
+    public int RunInternal(string input2)
     {
         var alphabet = ParseLetters(additionalInput)
             .ToDictionary(k => k.Character, v => v);

@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aquaq.Puzzles.Aquaq40;
 
 [Name("Prominence promenade")]
-public class Aquaq40(string input) : AquaqPuzzle
+public class Aquaq40 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var sum = GetSum(input);
 

@@ -11,7 +11,7 @@ public class Aquaq16Tests
     {
         const string input = "LTA";
 
-        var result = new Aquaq16(input, FileReader.ReadLocal(typeof(Aquaq16), "Alphabet.txt")).Run(input);
+        var result = new Aquaq16(input, FileReader.ReadLocal(typeof(Aquaq16), "Alphabet.txt")).RunInternal(input);
 
         result.Should().Be(53);
     }

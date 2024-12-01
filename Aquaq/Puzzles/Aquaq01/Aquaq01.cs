@@ -1,14 +1,14 @@
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Pzl.Common;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq01;
 
 [Name("Rose by any other name")]
-public class Aquaq01(string input) : AquaqPuzzle
+public class Aquaq01 : AquaqPuzzle
 {
     private static readonly Regex HexRegex = new("[^0123456789abcdef]");
 
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var result = GetHexString(input);
 

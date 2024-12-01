@@ -4,11 +4,11 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 namespace Pzl.Aquaq.Puzzles.Aquaq27;
 
 [Name("Snake Eater")]
-public class Aquaq27(string input) : AquaqPuzzle
+public class Aquaq27 : AquaqPuzzle
 {
     private const char Empty = ' ';
 
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var result = CalculateSnakeScore(input);
 

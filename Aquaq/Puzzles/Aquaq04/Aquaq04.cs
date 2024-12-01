@@ -8,7 +8,7 @@ public class Aquaq04(string input) : AquaqPuzzle
 {
     private int IntInput => int.Parse(input);
 
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var sum = FindCoPrimesFor(IntInput).Sum();
         return new PuzzleResult(sum, "7a296f6d92cf29d6ec3b4e51af411018");

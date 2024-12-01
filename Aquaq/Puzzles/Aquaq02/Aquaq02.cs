@@ -1,11 +1,11 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq02;
 
 [Name("One is all you need")]
-public class Aquaq02(string input) : AquaqPuzzle
+public class Aquaq02 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var input2 = input.Split(' ').Select(int.Parse);
         var uniqueNumbers = GetUniqueNumbers(input2);

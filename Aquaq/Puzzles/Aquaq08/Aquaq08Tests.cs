@@ -8,7 +8,7 @@ public class Aquaq08Tests
     [Test]
     public void DaySixState()
     {
-        var result = Aquaq08.Run(Input);
+        var result = Aquaq08.RunInternal(Input);
 
         result.milk.Should().Be(1600);
         result.cereal.Should().Be(600);

@@ -1,4 +1,4 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 using Pzl.Tools.Graphs;
 using Pzl.Tools.Strings;
 
@@ -8,12 +8,12 @@ namespace Pzl.Aquaq.Puzzles.Aquaq15;
 [Name("word wore more mare maze")]
 public class Aquaq15(string input, string additionalInput) : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
-        return new PuzzleResult(Run(input), "ffafde1afff1c3904275c8225e772bf1");
+        return new PuzzleResult(RunInternal(input), "ffafde1afff1c3904275c8225e772bf1");
     }
 
-    public int Run(string input2) 
+    public int RunInternal(string input2) 
     {
         var transformations = StringReader.ReadLines(input2)
             .Select(o => o.Split(','))

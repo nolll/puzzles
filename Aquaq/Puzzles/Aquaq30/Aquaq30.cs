@@ -4,9 +4,9 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq30;
 
 [Name("Flip Out")]
-public class Aquaq30(string input) : AquaqPuzzle
+public class Aquaq30 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var cardFlipper = new CardFlipper();
         var decks = StringReader.ReadLines(input);

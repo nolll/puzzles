@@ -4,17 +4,17 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq08;
 
 [Name("Cron Flakes")]
-public class Aquaq08(string input) : AquaqPuzzle
+public class Aquaq08 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
-        var (milk, cereal) = Run(input);
+        var (milk, cereal) = RunInternal(input);
         var sum = milk + cereal;
 
         return new PuzzleResult(sum, "dd27abc4b9d9ddead1ae574a69b3edbc");
     }
 
-    public static (int milk, int cereal) Run(string input)
+    public static (int milk, int cereal) RunInternal(string input)
     {
         var days = StringReader.ReadLines(input)
             .Skip(1)

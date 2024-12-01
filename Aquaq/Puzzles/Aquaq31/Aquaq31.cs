@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aquaq.Puzzles.Aquaq31;
 
 [Name("Brandless Combination Cubes")]
-public class Aquaq31(string input) : AquaqPuzzle
+public class Aquaq31 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var result = Rotate(input);
 

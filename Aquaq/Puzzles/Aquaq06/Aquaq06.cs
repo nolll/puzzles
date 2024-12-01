@@ -5,7 +5,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq06;
 [Name("Let me count the ways")]
 public class Aquaq06 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         const int n = 123;
         var result = FindOneCount(n);

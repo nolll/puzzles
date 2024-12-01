@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aquaq.Puzzles.Aquaq20;
 
 [Name("Blackjack")]
-public class Aquaq20(string input) : AquaqPuzzle
+public class Aquaq20 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         return new PuzzleResult(PlayBlackjack(input), "112a5875109cbca20cbe3dd1d02fe9fd");
     }

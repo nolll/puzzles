@@ -7,9 +7,9 @@ namespace Pzl.Aquaq.Puzzles.Aquaq36;
 [IsSlow]
 [NeedsRewrite]
 [Name("Tetonor Terror")]
-public class Aquaq36(string input) : AquaqPuzzle
+public class Aquaq36 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var factorProvider = new FactorCache();
         var tetonors = StringReader.ReadStringGroups(input);
@@ -19,8 +19,8 @@ public class Aquaq36(string input) : AquaqPuzzle
         {
             var rows = StringReader.ReadLines(tetonor);
             var grid = rows[0][2..].Split(' ').Select(int.Parse).ToList();
-            var input = rows[1][2..].Split(' ').Select(o => (int?)(o == "*" ? null : int.Parse(o))).ToList();
-            var result = Solve(grid, input, factorProvider);
+            var inp = rows[1][2..].Split(' ').Select(o => (int?)(o == "*" ? null : int.Parse(o))).ToList();
+            var result = Solve(grid, inp, factorProvider);
 
             sum += result;
         }

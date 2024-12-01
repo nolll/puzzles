@@ -5,9 +5,9 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq10;
 
 [Name("Troll Toll")]
-public class Aquaq10(string input) : AquaqPuzzle
+public class Aquaq10 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var result = Run(input, "TUPAC", "DIDDY");
 

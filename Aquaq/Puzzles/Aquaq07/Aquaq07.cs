@@ -4,9 +4,9 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles.Aquaq07;
 
 [Name("What is best in life?")]
-public class Aquaq07(string input) : AquaqPuzzle
+public class Aquaq07 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var games = StringReader.ReadLines(input)
             .Skip(1)

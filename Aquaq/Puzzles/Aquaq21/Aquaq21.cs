@@ -1,13 +1,13 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 using Pzl.Tools.Graphs;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq21;
 
 [Name("Clean Sweep")]
-public class Aquaq21(string input) : AquaqPuzzle
+public class Aquaq21 : AquaqPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         return new PuzzleResult(Run(input, 5), "e9476ebab07e71bb8b8872bca85185f5");
     }

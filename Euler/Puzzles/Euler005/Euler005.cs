@@ -5,7 +5,7 @@ namespace Pzl.Euler.Puzzles.Euler005;
 [Name("Smallest multiple")]
 public class Euler005 : EulerPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var smallestMultiple = Run(20);
         return new PuzzleResult(smallestMultiple, "6a929ec1d5586fac0506b20ad87b56e5");

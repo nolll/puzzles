@@ -5,7 +5,7 @@ namespace Pzl.Euler.Puzzles.Euler031;
 [Name("Coin sums")]
 public class Euler031 : EulerPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var denominations = new List<int> { 1, 2, 5, 10, 20, 50, 100, 200 };
         const int targetSum = 200;

@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Pzl.Euler.Puzzles.Euler024;
 
-public class Euler24Tests
+public class Euler024Tests
 {
     [Test]
     public void PermutationsAreGeneratedInLexicographicOrder()

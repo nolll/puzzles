@@ -6,13 +6,13 @@ namespace Pzl.Euler.Puzzles.Euler011;
 [Name("Largest product in a grid")]
 public class Euler011 : EulerPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
-        var result = Run(Grid);
+        var result = RunInternal(Grid);
         return new PuzzleResult(result, "7dc8a53ba7f75787b1ab0d03ba571c17");
     }
 
-    public long Run(string grid)
+    public long RunInternal(string grid)
     {
         var matrix = BuildMatrix(grid);
         var sumFinder = new GridProductFinder(matrix);

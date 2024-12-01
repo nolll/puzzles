@@ -1,4 +1,4 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 
 namespace Pzl.Euler.Puzzles.Euler022;
 
@@ -21,7 +21,7 @@ public class Euler022 : EulerPuzzle
         }
     }
 
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var sum = _nameScores.Values.Sum();
         return new PuzzleResult(sum, "f945fb704b17ec3abec8a9f14abcc3aa");

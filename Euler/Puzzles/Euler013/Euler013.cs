@@ -5,15 +5,15 @@ using Pzl.Tools.Strings;
 namespace Pzl.Euler.Puzzles.Euler013;
 
 [Name("Large sum")]
-public class Euler013(string input) : EulerPuzzle
+public class Euler013(string legacyInput) : EulerPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
-        var result = Run(input);
+        var result = RunInternal(input);
         return new PuzzleResult(result, "9a8a979a38f81877c39016dde66dda45");
     }
 
-    public string Run(string listOfNumbers)
+    public string RunInternal(string listOfNumbers)
     {
         var rows = StringReader.ReadLines(listOfNumbers);
         var numbers = rows.Select(BigInteger.Parse);

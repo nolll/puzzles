@@ -13,7 +13,7 @@ public class Aquaq16(string input, string additionalInput) : AquaqPuzzle
     {
         return new PuzzleResult(Run(input), "b900eb74f94c2243de65005bcc4ebd2c");
     }
-
+    
     public int Run(string input2)
     {
         var alphabet = ParseLetters(additionalInput)

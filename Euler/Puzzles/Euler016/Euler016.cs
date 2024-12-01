@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler016;
 [Name("Power digit sum")]
 public class Euler016 : EulerPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var result = Run(1000);
         return new PuzzleResult(result, "09386463dd33adc5ea634c4084b68919");

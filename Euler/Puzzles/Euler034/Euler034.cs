@@ -5,7 +5,7 @@ namespace Pzl.Euler.Puzzles.Euler034;
 [Name("Digit Factorials")]
 public class Euler034 : EulerPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var total = 0;
 

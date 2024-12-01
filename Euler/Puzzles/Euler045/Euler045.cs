@@ -6,10 +6,10 @@ namespace Pzl.Euler.Puzzles.Euler045;
 [Name("Triangular, Pentagonal, and Hexagonal")]
 public class Euler045 : EulerPuzzle
 {
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
-        const int input = 285;
-        var i = input + 1;
+        const int inputValue = 285;
+        var i = inputValue + 1;
 
         while (true)
         {

@@ -16,7 +16,7 @@ public class Euler018Tests
                                 """;
 
         var puzzle = new Euler018();
-        var result = puzzle.Run(triangle);
+        var result = puzzle.RunInternal(triangle);
 
         result.Should().Be(23);
     }

@@ -8,7 +8,7 @@ public class Euler038 : EulerPuzzle
     private const int Limit = 10_000;
     private const int MaxLength = 9;
 
-    protected override PuzzleResult Run()
+    protected override PuzzleResult Run(string input)
     {
         var products = new List<long>();
         var n = 1;

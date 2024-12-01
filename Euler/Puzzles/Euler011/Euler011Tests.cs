@@ -17,7 +17,7 @@ public class Euler011Tests
                             """;
 
         var puzzle = new Euler011();
-        var result = puzzle.Run(grid);
+        var result = puzzle.RunInternal(grid);
 
         result.Should().Be(48);
     }

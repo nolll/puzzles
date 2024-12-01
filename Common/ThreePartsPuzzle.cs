@@ -11,4 +11,5 @@ public abstract class ThreePartsPuzzle : Puzzle
     protected abstract PuzzleResult RunPart3();
 
     public override IList<Func<PuzzleResult>> RunFunctions => [RunPart1, RunPart2, RunPart3];
+    public override IList<Func<string, PuzzleResult>> RunFunctionsWithInput => [];
 }

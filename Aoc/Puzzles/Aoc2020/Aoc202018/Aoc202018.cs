@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202018;
 
 [Name("Operation Order")]
-public class Aoc202018(string input) : AocPuzzle
+public class Aoc202018 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var calculator = new HomeworkCalculator();
         var result = calculator.SumOfAll(input, MathPrecedence.Order);
         return new PuzzleResult(result, "4a4cb1e5143143fe556872f0d8ace4bc");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var calculator = new HomeworkCalculator();
         var result = calculator.SumOfAll(input, MathPrecedence.Addition);

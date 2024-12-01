@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201916;
 
 [Name("Flawed Frequency Transmission")]
-public class Aoc201916(string input) : AocPuzzle
+public class Aoc201916 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var algorithm1 = new FrequencyAlgorithmPart1(input);
         var result1 = algorithm1.Run(100);
@@ -13,7 +13,7 @@ public class Aoc201916(string input) : AocPuzzle
         return new PuzzleResult(result1, "e995b448fd31fb067432b47f11ac0e67");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var algorithm2 = new FrequencyAlgorithmPart2(input);
         var result2 = algorithm2.Run(100);

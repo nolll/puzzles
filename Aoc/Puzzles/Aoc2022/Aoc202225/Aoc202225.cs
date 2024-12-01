@@ -4,9 +4,9 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202225;
 
 [Name("Full of Hot Air")]
-public class Aoc202225(string input) : AocPuzzle
+public class Aoc202225 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var result = Part1(input);
 
@@ -20,5 +20,5 @@ public class Aoc202225(string input) : AocPuzzle
         return SnafuConverter.ToSnafu(sum);
     }
 
-    protected override PuzzleResult RunPart2() => PuzzleResult.Empty;
+    protected override PuzzleResult RunPart2(string input) => PuzzleResult.Empty;
 }

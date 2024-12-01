@@ -1,11 +1,11 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201503;
 
 [Name("Perfectly Spherical Houses in a Vacuum")]
-public class Aoc201503(string input) : AocPuzzle
+public class Aoc201503 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var grid = new DeliveryGrid();
         grid.DeliverBySanta(input);
@@ -13,7 +13,7 @@ public class Aoc201503(string input) : AocPuzzle
         return new PuzzleResult(grid.SantaDeliveryCount, "68e2d15877e8590fe0285bff9141a8cf");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var grid = new DeliveryGrid();
         grid.DeliverBySantaAndRobot(input);

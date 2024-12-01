@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201914;
 
 [Name("Space Stoichiometry")]
-public class Aoc201914(string input) : AocPuzzle
+public class Aoc201914 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var reactor = new NanoReactor(input);
         reactor.Run();
@@ -14,7 +14,7 @@ public class Aoc201914(string input) : AocPuzzle
         return new PuzzleResult(oreForOneFuel, "4f7b51a9155bea7c24bbb1d4757e4bf1");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var reactor = new NanoReactor(input);
         reactor.Run();

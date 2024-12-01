@@ -5,16 +5,16 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202220;
 
 [Name("Grove Positioning System")]
-public class Aoc202220(string input) : AocPuzzle
+public class Aoc202220 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var result = Run(input, 1, 1);
 
         return new PuzzleResult(result, "7b8b8bc2da7c3dc6f35e0079a36a0aea");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var result = Run(input, 811_589_153, 10);
 

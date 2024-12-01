@@ -8,23 +8,15 @@ public class Aoc202221Tests
     [Test]
     public void Part1()
     {
-        var result = new Aoc202221(Input).Part1(Input);
+        var result = new Aoc202221().Part1(Input);
 
         result.Should().Be(152);
     }
 
-    //[Test]
-    //public void Part2Naive()
-    //{
-    //    var result = new Year2022Day21().Part2Naive(Input);
-
-    //    result.Should().Be(301);
-    //}
-
     [Test]
     public void Part2()
     {
-        var result = new Aoc202221(Input).Part2(Input);
+        var result = new Aoc202221().Part2(Input);
 
         result.Should().Be(301);
     }

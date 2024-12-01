@@ -116,7 +116,7 @@ public class Aoc202313Tests
                              #....#..#
                              """;
 
-        var result = new Aoc202313(input).RunFunctions.First()();
+        var result = new Aoc202313().RunFunctionsWithInput.First()(input);
 
         result.Answer.Should().Be("405");
     }
@@ -142,7 +142,7 @@ public class Aoc202313Tests
                              #....#..#
                              """;
 
-        var result = new Aoc202313(input).RunFunctions.Last()();
+        var result = new Aoc202313().RunFunctionsWithInput.Last()(input);
 
         result.Answer.Should().Be("400");
     }

@@ -1,19 +1,19 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 using Pzl.Tools.Ocr;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201908;
 
 [Name("Space Image Format")]
-public class Aoc201908(string input) : AocPuzzle
+public class Aoc201908 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var image = new SpaceImage(input);
         var checksum = image.Checksum;
         return new PuzzleResult(checksum, "f120f42ddc8c176e63cab4413a41bd99");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var image = new SpaceImage(input);
         var printedImage = image.Print();

@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202004;
 
 [Name("Passport Processing")]
-public class Aoc202004(string input) : AocPuzzle
+public class Aoc202004 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var processor = new PassportProcessor(input);
         var passportCount = processor.GetNumberOfPassportsThatHasAllFields();
         return new PuzzleResult(passportCount, "1e10a803d525ec160795a9bed9161106");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var processor = new PassportProcessor(input);
         var passportCount = processor.GetNumberOfValidPassports();

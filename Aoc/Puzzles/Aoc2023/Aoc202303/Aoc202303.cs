@@ -5,16 +5,16 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202303;
 
 [Name("Gear Ratios")]
-public class Aoc202303(string input) : AocPuzzle
+public class Aoc202303 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var result = Run(input);
 
         return new PuzzleResult(result.EngineParts, "9f5f9a7fa049bd552fc05c71b10aab1c");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var result = Run(input);
 

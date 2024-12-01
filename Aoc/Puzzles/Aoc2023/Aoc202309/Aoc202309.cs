@@ -5,12 +5,12 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202309;
 
 [Name("Mirage Maintenance")]
-public class Aoc202309(string input) : AocPuzzle
+public class Aoc202309 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1() => 
+    protected override PuzzleResult RunPart1(string input) => 
         new(Part1(input), "42abec426a1f1903197aaf0635b6a29a");
 
-    protected override PuzzleResult RunPart2() => 
+    protected override PuzzleResult RunPart2(string input) => 
         new(Part2(input), "652e203bd80c5889b310a0a8efdb2301");
 
     public static long Part1(string input) => 

@@ -1,11 +1,11 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201813;
 
 [Name("Mine Cart Madness")]
-public class Aoc201813(string input) : AocPuzzle
+public class Aoc201813 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var detector = new CollisionDetector(input);
         detector.RunCarts();
@@ -14,7 +14,7 @@ public class Aoc201813(string input) : AocPuzzle
         return new PuzzleResult(firstCollition, "289dd4c6742ccddf660417b3b45acad3");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var detector = new CollisionDetector(input);
         detector.RunCarts();

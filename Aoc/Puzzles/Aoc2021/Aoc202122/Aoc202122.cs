@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202122;
 
 [Name("Reactor Reboot")]
-public class Aoc202122(string input) : AocPuzzle
+public class Aoc202122 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var reactor = new SubmarineReactor();
         var result = reactor.Reboot2(input, 50);
@@ -13,7 +13,7 @@ public class Aoc202122(string input) : AocPuzzle
         return new PuzzleResult(result, "f49f5f28c7496f86abfeaed9d077e669");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var reactor = new SubmarineReactor();
         var result = reactor.Reboot2(input);

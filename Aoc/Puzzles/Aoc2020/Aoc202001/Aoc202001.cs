@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202001;
 
 [Name("Report Repair")]
-public class Aoc202001(string input) : AocPuzzle
+public class Aoc202001 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var sumFinder = new SumFinder(input);
         var numbers1 = sumFinder.FindNumbersThatAddUpTo(Target, 2);
@@ -13,7 +13,7 @@ public class Aoc202001(string input) : AocPuzzle
         return new PuzzleResult(product, "89120e7d60fb863cc69d69128748e52d");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var sumFinder = new SumFinder(input);
         var numbers = sumFinder.FindNumbersThatAddUpTo(Target, 3);

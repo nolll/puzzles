@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201621;
 
 [Name("Scrambled Letters and Hash")]
-public class Aoc201621(string input) : AocPuzzle
+public class Aoc201621 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var scrambler = new StringScrambler(input);
         var scrambled = scrambler.Scramble("abcdefgh");
         return new PuzzleResult(scrambled, "d23262df6c0ae121dad862c4941b0e84");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var scrambler = new StringScrambler(input);
         var unscrambled = scrambler.Unscramble("fbgdceah");

@@ -5,9 +5,9 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201911;
 
 [Name("Space Police")]
-public class Aoc201911(string input) : AocPuzzle
+public class Aoc201911 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var robot1 = new PaintRobot(input);
         var result1 = robot1.Paint(false);
@@ -15,7 +15,7 @@ public class Aoc201911(string input) : AocPuzzle
         return new PuzzleResult(result1.PaintedPanelCount, "450a7268b37892570104286b9fd8e5f2");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var robot2 = new PaintRobot(input);
         var result2 = robot2.Paint(true);

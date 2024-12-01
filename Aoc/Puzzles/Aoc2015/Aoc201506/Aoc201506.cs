@@ -1,18 +1,18 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201506;
 
 [Name("Probably a Fire Hazard")]
-public class Aoc201506(string input) : AocPuzzle
+public class Aoc201506 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var controller = new ChristmasLightsController();
         controller.RunCommands(input, false);
         return new PuzzleResult(controller.LitCount, "8cde00a802ab8a80c8939584c4fede8a");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var controller = new ChristmasLightsController();
         controller.RunCommands(input, true);

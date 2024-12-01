@@ -1,24 +1,24 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201511;
 
 [Name("Corporate Policy")]
-public class Aoc201511(string input) : AocPuzzle
+public class Aoc201511 : AocPuzzle
 {
     private CorporatePasswordValidator? _validator;
     private string? _firstPassword;
 
     private CorporatePasswordValidator Validator => _validator ??= new CorporatePasswordValidator();
-    private string FirstPassword => _firstPassword ??= Validator.FindNextPassword(input);
+    private string FirstPassword(string input) => _firstPassword ??= Validator.FindNextPassword(input);
 
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
-        return new PuzzleResult(FirstPassword, "cbfa97a52cf7d437b49df9f708d401ec");
+        return new PuzzleResult(FirstPassword(input), "cbfa97a52cf7d437b49df9f708d401ec");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
-        var pwd2 = Validator.FindNextPassword(FirstPassword);
+        var pwd2 = Validator.FindNextPassword(FirstPassword(input));
         return new PuzzleResult(pwd2, "604b8c33c454d9dbcc19b86576a16f1c");
     }
 }

@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201912;
 
 [Name("The N-Body Problem")]
-public class Aoc201912(string input) : AocPuzzle
+public class Aoc201912 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var tracker1 = new MoonTracker(input);
         const int iterations = 1000;
@@ -14,7 +14,7 @@ public class Aoc201912(string input) : AocPuzzle
         return new PuzzleResult(tracker1.TotalEnergy, "f4aa1e6262770dd457b3fc1a02f903b9");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var tracker2 = new MoonTracker(input);
         tracker2.RunUntilRepeat();

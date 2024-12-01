@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202021;
 
 [Name("Allergen Assessment")]
-public class Aoc202021(string input) : AocPuzzle
+public class Aoc202021 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var detector = new AllergenDetector(input);
         var ingredientCount = detector.FindIngredientsWithoutAllergens();
         return new PuzzleResult(ingredientCount, "a3862d6533f785e932eeaa517ad2549d");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var detector = new AllergenDetector(input);
         var ingredientList = detector.GetIngredientList();

@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201722;
 
 [Name("Sporifica Virus")]
-public class Aoc201722(string input) : AocPuzzle
+public class Aoc201722 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var infection1 = new VirusInfection(input);
         var infectionCount1 = infection1.RunPart1(10_000);
         return new PuzzleResult(infectionCount1, "ae293a43b47d6820d75321581ad234d0");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var infection2 = new VirusInfection(input);
         var infectionCount2 = infection2.RunPart2(10_000_000);

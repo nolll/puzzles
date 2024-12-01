@@ -5,16 +5,16 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201815;
 [IsSlow] // Could still use optimization, the hard coded 14 is a little ugly
 [Name("Beverage Bandits")]
 [Comment("Battle Simulator")]
-public class Aoc201815(string input) : AocPuzzle
+public class Aoc201815 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var battle = new ChocolateBattle(input);
         battle.RunOnce();
         return new PuzzleResult(battle.Outcome, "78d65601c1d852a1cb1c731ef5403795");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var battle2 = new ChocolateBattle(input);
         const int initialAttackPower = 14; // Was 4. Optimized after correct answer was found

@@ -4,14 +4,14 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202319;
 
 [Name("Aplenty")]
-public class Aoc202319(string input) : AocPuzzle
+public class Aoc202319 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         return new PuzzleResult(SortParts(input), "7b8de33db969cb470b0df2112b952250");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         return new PuzzleResult(CountCombinations(input), "ad71ffd5c3aaba62bb775dfc6a95358e");
     }

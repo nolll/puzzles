@@ -4,9 +4,9 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202002;
 
 [Name("Password Philosophy")]
-public class Aoc202002(string input) : AocPuzzle
+public class Aoc202002 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var validator = new PasswordPolicyValidator();
         var policies = StringReader.ReadLines(input);
@@ -14,7 +14,7 @@ public class Aoc202002(string input) : AocPuzzle
         return new PuzzleResult(count, "ebf6e414ef8abc275a90f1a99df980cf");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var validator = new PasswordPolicyValidator();
         var policies = StringReader.ReadLines(input);

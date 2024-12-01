@@ -5,7 +5,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202223;
 
 [Name("Unstable Diffusion")]
-public class Aoc202223(string input) : AocPuzzle
+public class Aoc202223 : AocPuzzle
 {
     private static readonly (int x, int y) North = (0, -1);
     private static readonly (int x, int y) NorthEast = (1, -1);
@@ -44,14 +44,14 @@ public class Aoc202223(string input) : AocPuzzle
         NorthWest,
     };
 
-protected override PuzzleResult RunPart1()
+protected override PuzzleResult RunPart1(string input)
     {
         var (emptyCount, _) = Run(input, 10);
 
         return new PuzzleResult(emptyCount, "b2078a7c2a582e68796f55a71f1fe1cd");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var (_, endRound) = Run(input);
 

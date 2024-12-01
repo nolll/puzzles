@@ -1,18 +1,18 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201718;
 
 [Name("Duet")]
-public class Aoc201718(string input) : AocPuzzle
+public class Aoc201718 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var single = new SingleRunner(input);
         single.Run();
         return new PuzzleResult(single.RecoveredFrequency, "83f5054894620fa4e35d5a042e71f9a0");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var duet = new DuetRunner(input);
         duet.Run();

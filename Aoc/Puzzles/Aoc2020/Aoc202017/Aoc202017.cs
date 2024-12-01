@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202017;
 
 [Name("Conway Cubes")]
-public class Aoc202017(string input) : AocPuzzle
+public class Aoc202017 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var cube = new ConwayCube();
         var result = cube.Boot3D(input, 6);
         return new PuzzleResult(result, "86fb7e6bf0dd282e332fdf0fe14cb572");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var cube = new ConwayCube();
         var result = cube.Boot4D(input, 6);

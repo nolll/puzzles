@@ -5,9 +5,9 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201816;
 
 [Name("Chronal Classification")]
-public class Aoc201816(string input) : AocPuzzle
+public class Aoc201816 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var inputs = input.Split(LineBreaks.Triple);
         var input1 = inputs.First();
@@ -17,7 +17,7 @@ public class Aoc201816(string input) : AocPuzzle
         return new PuzzleResult(count, "4f397654d0fda9404b23756deb7529aa");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var inputs = input.Split(LineBreaks.Triple);
         var input1 = inputs.First();

@@ -7,14 +7,14 @@ public class Aoc202117 : AocPuzzle
 {
     private TrickshotResult? _result;
 
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var result = Shoot();
 
         return new PuzzleResult(result.MaxHeight, "375d1d4838312873a7516c061904317c");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var result = Shoot();
 

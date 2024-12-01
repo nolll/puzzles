@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202204;
 
 [Name("Camp Cleanup")]
-public class Aoc202204(string input) : AocPuzzle
+public class Aoc202204 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var cleaning = new Cleaning();
         var result = cleaning.Part1(input);
@@ -13,7 +13,7 @@ public class Aoc202204(string input) : AocPuzzle
         return new PuzzleResult(result, "9569cfbf59abc27202b8777006153703");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var cleaning = new Cleaning();
         var result = cleaning.Part2(input);

@@ -1,22 +1,20 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201619;
 
 [Name("An Elephant Named Joseph")]
-public class Aoc201619(string input) : AocPuzzle
+public class Aoc201619 : AocPuzzle
 {
-    private int IntInput => int.Parse(input);
-
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
-        var party = new WhiteElephantParty(IntInput);
+        var party = new WhiteElephantParty(int.Parse(input));
         var winner = party.StealFromNextElf();
         return new PuzzleResult(winner, "0ff6e8f1eb200db98926c54e1a1fac6a");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
-        var party = new WhiteElephantParty(IntInput);
+        var party = new WhiteElephantParty(int.Parse(input));
         var winner = party.StealFromElfAcrossCircle();
         return new PuzzleResult(winner, "b67fd31a59ecdb3e94d0fbdfc778e61f");
     }

@@ -4,12 +4,12 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202307;
 
 [Name("Camel Cards")]
-public class Aoc202307(string input) : AocPuzzle
+public class Aoc202307 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1() 
+    protected override PuzzleResult RunPart1(string input) 
         => new(PokerPart1(input), "eb6c5937d75bbb79d79d7e01895aacd4");
 
-    protected override PuzzleResult RunPart2() 
+    protected override PuzzleResult RunPart2(string input) 
         => new(PokerPart2(input), "dd9dfa02733e4b1eec0869e16d5b27ff");
 
     public static long PokerPart1(string input) => Poker(input, new Part1PokerHandComparer());

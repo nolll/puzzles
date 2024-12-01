@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202315;
 
 [Name("Lens Library")]
-public class Aoc202315(string input) : AocPuzzle
+public class Aoc202315 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var result = input.Split(',').Sum(HashScore);
 
         return new PuzzleResult(result, "4c69a3b3d84dfabf7180d2d8541d7389");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var instructions = input.Split(',').ToList();
         var boxes = Enumerable.Range(0, 256).Select((_, index) => new Box(index + 0)).ToArray();

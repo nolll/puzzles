@@ -4,16 +4,16 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202324;
 
 [Name("Never Tell Me The Odds")]
-public class Aoc202324(string input) : AocPuzzle
+public class Aoc202324 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var result = CountIntersectingWithin(input, 200_000_000_000_000, 400_000_000_000_000);
 
         return new PuzzleResult(result, "907db44ec104f348525996e3821ac11d");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var result = FindStartPosition(input);
 

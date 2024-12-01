@@ -5,16 +5,16 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202305;
 
 [Name("If You Give A Seed A Fertilizer")]
 [Comment("Range solution for part 2 inspired by HyperNeutrino")]
-public class Aoc202305(string input) : AocPuzzle
+public class Aoc202305 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var result = Part1(input);
 
         return new PuzzleResult(result, "8af1efe2f5bf2d0e78873be92fcd8fff");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var result = Part2(input);
 

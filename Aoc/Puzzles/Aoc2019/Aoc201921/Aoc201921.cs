@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201921;
 
 [Name("Springdroid Adventure")]
-public class Aoc201921(string input) : AocPuzzle
+public class Aoc201921 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var walkingDroid = new SpringDroid(input, WalkProgram);
         walkingDroid.Run();
         return new PuzzleResult(walkingDroid.HullDamage, "94b1bc03281d28814cbce9dd5bcc5806");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var runningDroid = new SpringDroid(input, RunProgram);
         runningDroid.Run();

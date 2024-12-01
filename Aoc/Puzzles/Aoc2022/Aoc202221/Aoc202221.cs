@@ -1,19 +1,19 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202221;
 
 [Name("Monkey Math")]
-public class Aoc202221(string input) : AocPuzzle
+public class Aoc202221 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var result = Part1(input);
 
         return new PuzzleResult(result, "b3adb16b1c9bf83decdb14842cf25854");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var result = Part2(input);
 

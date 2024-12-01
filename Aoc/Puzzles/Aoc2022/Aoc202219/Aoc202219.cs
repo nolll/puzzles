@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202219;
 
 [Name("Not Enough Minerals")]
-public class Aoc202219(string input) : AocPuzzle
+public class Aoc202219 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var factory = new RobotFactory();
         var result = factory.Part1(input);
@@ -13,7 +13,7 @@ public class Aoc202219(string input) : AocPuzzle
         return new PuzzleResult(result, "11353deb56afd92426a160a11f5506b0");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var factory = new RobotFactory();
         var result = factory.Part2(input);

@@ -4,14 +4,14 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202321;
 
 [Name("Step Counter")]
-public class Aoc202321(string input) : AocPuzzle
+public class Aoc202321 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         return new PuzzleResult(CountPositionsAfter64(input), "c843850a004e76c6cad0745f43786af0");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         // guesses
         // 608_148_528_908_778 not correct

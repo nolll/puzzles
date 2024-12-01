@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201608;
 
 [Name("Two-Factor Authentication")]
-public class Aoc201608(string input) : AocPuzzle
+public class Aoc201608 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var simulator = new ScreenSimulator(50, 6);
         var simulatorResult = simulator.Run(input);
         return new PuzzleResult(simulatorResult.PixelCount, "40e526702a7945ea86fbcec32dd72a4d");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var simulator = new ScreenSimulator(50, 6);
         var simulatorResult = simulator.Run(input);

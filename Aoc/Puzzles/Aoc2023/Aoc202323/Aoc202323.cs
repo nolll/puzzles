@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202323;
 
 [Name("A Long Walk")]
 [IsSlow]
-public class Aoc202323(string input) : AocPuzzle
+public class Aoc202323 : AocPuzzle
 {
     private static readonly Dictionary<MatrixDirection, char> ValidSlopes = new()
     {
@@ -15,12 +15,12 @@ public class Aoc202323(string input) : AocPuzzle
         { MatrixDirection.Left, '<' }
     };
 
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         return new PuzzleResult(LongestHike(input, false), "854218011528db376afeffbf53800ecd");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         return new PuzzleResult(LongestHike(input, true), "22bcf9382d0e8177c5c6ef52f07fd7b9");
     }

@@ -4,9 +4,9 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201822;
 
 [Name("Mode Maze")]
-public class Aoc201822(string input) : AocPuzzle
+public class Aoc201822 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var rows = StringReader.ReadLines(input);
         var depth = int.Parse(rows.First().Split(' ').Last());
@@ -18,7 +18,7 @@ public class Aoc201822(string input) : AocPuzzle
         return new PuzzleResult(caveSystem.TotalRiskLevel, "5df14da907f6928ed33a598ab21592eb");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var rows = StringReader.ReadLines(input);
         var depth = int.Parse(rows.First().Split(' ').Last());

@@ -4,11 +4,11 @@ using Pzl.Tools.Computers.IntCode;
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201905;
 
 [Name("Sunny with a Chance of Asteroids")]
-public class Aoc201905(string input) : AocPuzzle
+public class Aoc201905 : AocPuzzle
 {
     private long _output;
 
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var ci1 = new IntCodeComputer(input, ReadInputPart1, WriteOutput);
         ci1.Start();
@@ -16,7 +16,7 @@ public class Aoc201905(string input) : AocPuzzle
         return new PuzzleResult(_output, "fb635501f54f36e602ebf7e465625fba");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var ci2 = new IntCodeComputer(input, ReadInputPart2, WriteOutput);
         ci2.Start();

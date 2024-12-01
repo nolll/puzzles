@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202120;
 
 [Name("Trench Map")]
-public class Aoc202120(string input) : AocPuzzle
+public class Aoc202120 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var trenchMap = new TrenchMap();
         var result = trenchMap.GetLitPixelCount(input, 2);
@@ -13,7 +13,7 @@ public class Aoc202120(string input) : AocPuzzle
         return new PuzzleResult(result, "45662f27fb9cbf099b4d5453539159a2");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var trenchMap = new TrenchMap();
         var result = trenchMap.GetLitPixelCount(input, 50);

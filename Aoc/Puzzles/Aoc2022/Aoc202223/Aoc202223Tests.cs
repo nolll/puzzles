@@ -8,7 +8,7 @@ public class Aoc202223Tests
     [Test]
     public void Part1Small()
     {
-        var puzzle = new Aoc202223(SmallInput);
+        var puzzle = new Aoc202223();
         var (emptyCount, endRound) = puzzle.Run(SmallInput);
 
         emptyCount.Should().Be(25);
@@ -18,7 +18,7 @@ public class Aoc202223Tests
     [Test]
     public void Part1Large()
     {
-        var puzzle = new Aoc202223(LargeInput);
+        var puzzle = new Aoc202223();
         var (emptyCount, endRound) = puzzle.Run(LargeInput, 10);
 
         emptyCount.Should().Be(110);
@@ -28,7 +28,7 @@ public class Aoc202223Tests
     [Test]
     public void Part2()
     {
-        var puzzle = new Aoc202223(LargeInput);
+        var puzzle = new Aoc202223();
         var (emptyCount, endRound) = puzzle.Run(LargeInput);
 
         emptyCount.Should().Be(146);

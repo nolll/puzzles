@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202216;
 
 [Name("Proboscidea Volcanium")]
-public class Aoc202216(string input) : AocPuzzle
+public class Aoc202216 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var pipes = new VolcanicPipes(input);
         var result = pipes.Part1();
@@ -13,7 +13,7 @@ public class Aoc202216(string input) : AocPuzzle
         return new PuzzleResult(result, "dd3e51c50edd114901226b469c51dd40");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var pipes = new VolcanicPipes(input);
         var result = pipes.Part2();

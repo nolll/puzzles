@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202210;
 
 [Name("Cathode-Ray Tube")]
-public class Aoc202210(string input) : AocPuzzle
+public class Aoc202210 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var tube = new CathodeRayTube();
         var (result, _, _) = tube.Run(input);
@@ -13,7 +13,7 @@ public class Aoc202210(string input) : AocPuzzle
         return new PuzzleResult(result, "cbd8f00e296a6ea077faf3fd0363b201");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var tube = new CathodeRayTube();
         var (_, result, _) = tube.Run(input);

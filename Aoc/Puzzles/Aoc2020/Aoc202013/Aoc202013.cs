@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202013;
 
 [Name("Shuttle Search")]
-public class Aoc202013(string input) : AocPuzzle
+public class Aoc202013 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var system = new BusScheduler1(input);
         var value = system.GetBusValue();
         return new PuzzleResult(value, "22dea96fc3fe7cf98d5ae3e3a29c196a");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var system = new BusScheduler2(input);
         var value = system.GetContestMinute();

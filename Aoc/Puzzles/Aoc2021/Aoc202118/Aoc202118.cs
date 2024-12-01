@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202118;
 
 [Name("Snailfish")]
-public class Aoc202118(string input) : AocPuzzle
+public class Aoc202118 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var math = new SnailfishMath();
         var result = math.Sum(input);
@@ -13,7 +13,7 @@ public class Aoc202118(string input) : AocPuzzle
         return new PuzzleResult(result.Magnitude, "1d3da7fb83304ae6368c25c4835fb0af");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var math = new SnailfishMath();
         var result = math.LargestMagnitude(input);

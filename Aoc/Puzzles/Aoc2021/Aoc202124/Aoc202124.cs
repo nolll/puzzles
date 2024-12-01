@@ -26,14 +26,14 @@ public class Aoc202124 : AocPuzzle
     private long SmallestValidNumber => long.Parse(ValidNumbers.First());
     private long LargestValidNumber => long.Parse(ValidNumbers.Last());
     
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var result = LargestValidNumber;
 
         return new PuzzleResult(result, "e513806c32f88d6227c6a529844981ef");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var result = SmallestValidNumber;
 

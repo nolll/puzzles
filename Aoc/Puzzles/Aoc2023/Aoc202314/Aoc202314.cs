@@ -4,16 +4,16 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202314;
 
 [Name("Parabolic Reflector Dish")]
-public class Aoc202314(string input) : AocPuzzle
+public class Aoc202314 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var result = RollNorth(input);
 
         return new PuzzleResult(result, "38c4a3857389e8b424b86782b940d736");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var result = RunManyCycles(input);
         

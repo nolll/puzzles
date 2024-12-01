@@ -1,21 +1,21 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201525;
 
 [Name("Let It Snow")]
-public class Aoc201525(string input) : AocPuzzle
+public class Aoc201525 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
-        var p = GetParams();
+        var p = GetParams(input);
         var codeFinder = new WeatherMachineCodeFinder();
         var code = codeFinder.FindCodeAt(p.TargetX, p.TargetY);
         return new PuzzleResult(code, "d755f54368cc6c88fb38633954dddb9f");
     }
 
-    protected override PuzzleResult RunPart2() => PuzzleResult.Empty;
+    protected override PuzzleResult RunPart2(string input) => PuzzleResult.Empty;
 
-    private Params GetParams()
+    private Params GetParams(string input)
     {
         var words = input.Replace(".", "").Replace(",", "").Split(' ');
 

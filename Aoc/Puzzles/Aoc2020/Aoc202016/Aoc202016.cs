@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202016;
 
 [Name("Ticket Translation")]
-public class Aoc202016(string input) : AocPuzzle
+public class Aoc202016 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var validator = new TicketValidator();
         var result = validator.GetErrorRate(input);
         return new PuzzleResult(result, "7d78cfbc759526833a4566918a854e5b");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var validator = new TicketValidator();
         var result = validator.CalculateAnswer(input);

@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202102;
 
 [Name("Dive!")]
-public class Aoc202102(string input) : AocPuzzle
+public class Aoc202102 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var control = new SubmarineControl(input, false);
         control.Move();
@@ -13,7 +13,7 @@ public class Aoc202102(string input) : AocPuzzle
         return new PuzzleResult(control.Result, "9d9dec9baf0fe61bbb7a9e95cc1ae2de");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var control = new SubmarineControl(input, true);
         control.Move();

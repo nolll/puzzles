@@ -1,28 +1,28 @@
-using Pzl.Common;
+﻿using Pzl.Common;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201522;
 
 [Name("Wizard Simulator 20XX")]
-public class Aoc201522(string input) : AocPuzzle
+public class Aoc201522 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
-        var p = GetParams();
+        var p = GetParams(input);
         var simulator = new WizardRpgSimulator(WizardRpgGameMode.Easy);
         var leastManaRequiredToWinEasy = simulator.WinWithLowestCost(p.HitPoints, p.Damage);
         return new PuzzleResult(leastManaRequiredToWinEasy, "1f020968b40b91444beee0e8a33624d1");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
-        var p = GetParams();
+        var p = GetParams(input);
         var simulator = new WizardRpgSimulator(WizardRpgGameMode.Hard);
         var leastManaRequiredToWinHard = simulator.WinWithLowestCost(p.HitPoints, p.Damage);
         return new PuzzleResult(leastManaRequiredToWinHard, "d76b3b0ad8b9bce7fab0c1ba0de0d20e");
     }
 
-    private Params GetParams()
+    private Params GetParams(string input)
     {
         var rows = StringReader.ReadLines(input);
 

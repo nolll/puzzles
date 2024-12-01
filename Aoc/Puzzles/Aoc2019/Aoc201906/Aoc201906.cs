@@ -3,16 +3,16 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201906;
 
 [Name("Universal Orbit Map")]
-public class Aoc201906(string input) : AocPuzzle
+public class Aoc201906 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var calculator = new OrbitCalculator(input);
         var orbitCount = calculator.GetOrbitCount();
         return new PuzzleResult(orbitCount, "47b7e7a9aac22c8d0dc3f8a1f510498a");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var calculator = new OrbitCalculator(input);
         var distance = calculator.GetSantaDistance();

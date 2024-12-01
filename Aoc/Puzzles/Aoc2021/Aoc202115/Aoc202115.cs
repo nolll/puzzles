@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202115;
 
 [Name("Chiton")]
-public class Aoc202115(string input) : AocPuzzle
+public class Aoc202115 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var chitonRisk = new ChitonRisk();
         var result = chitonRisk.FindRiskLevelForSmallCave(input);
@@ -13,7 +13,7 @@ public class Aoc202115(string input) : AocPuzzle
         return new PuzzleResult(result, "044f1b14974612cad17255d7683d0892");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var chitonRisk = new ChitonRisk();
         var result = chitonRisk.FindRiskLevelForLargeCave(input);

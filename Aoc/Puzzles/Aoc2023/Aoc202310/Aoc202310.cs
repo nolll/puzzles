@@ -4,12 +4,12 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202310;
 
 [Name("Pipe Maze")]
-public class Aoc202310(string input) : AocPuzzle
+public class Aoc202310 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1() => 
+    protected override PuzzleResult RunPart1(string input) => 
         new(FarthestPoint(input), "7307413d1efe2d8b5a4994a204a50a86");
 
-    protected override PuzzleResult RunPart2() => 
+    protected override PuzzleResult RunPart2(string input) => 
         new(EnclosedTileCount(input), "59413d1f83d3d395818ceddd09c64bbf");
 
     public static int FarthestPoint(string input)

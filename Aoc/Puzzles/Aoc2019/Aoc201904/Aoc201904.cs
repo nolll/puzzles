@@ -3,9 +3,9 @@ using Pzl.Common;
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201904;
 
 [Name("Secure Container")]
-public class Aoc201904(string input) : AocPuzzle
+public class Aoc201904 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
         var passwordBounds = input.Split('-');
         var passwordLowerbound = int.Parse(passwordBounds[0]);
@@ -17,7 +17,7 @@ public class Aoc201904(string input) : AocPuzzle
         return new PuzzleResult(passwordCount, "130c5099df019116c1fa98e589523b7c");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
         var passwordBounds = input.Split('-');
         var passwordLowerbound = int.Parse(passwordBounds[0]);

@@ -17,7 +17,7 @@ public class Aoc202312Tests
                              ?###???????? 3,2,1
                              """;
 
-        var result = new Aoc202312().RunFunctionsWithInput.First()(input);
+        var result = new Aoc202312().RunFunctions.First()(input);
 
         result.Answer.Should().Be("21");
     }
@@ -34,7 +34,7 @@ public class Aoc202312Tests
                              ?###???????? 3,2,1
                              """;
 
-        var result = new Aoc202312().RunFunctionsWithInput.Last()(input);
+        var result = new Aoc202312().RunFunctions.Last()(input);
 
         result.Answer.Should().Be("525152");
     }

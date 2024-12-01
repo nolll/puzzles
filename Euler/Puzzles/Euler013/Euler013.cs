@@ -5,7 +5,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Euler.Puzzles.Euler013;
 
 [Name("Large sum")]
-public class Euler013(string input) : EulerPuzzle
+public class Euler013 : EulerPuzzle
 {
     protected override PuzzleResult Run(string input)
     {

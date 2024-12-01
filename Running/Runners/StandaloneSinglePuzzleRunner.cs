@@ -39,29 +39,17 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         WriteHeader(_definition);
         
         var inputs = FileReader.ReadInputs(_definition);
-        var instance = PuzzleFactory.CreateInstance(_definition, inputs);
-
-        if (_definition.ProvideInputToRunFunctions)
+        var instance = PuzzleFactory.CreateInstance(_definition);
+        
+        for (var i = 0; i < instance.RunFunctions.Count; i++)
         {
-            for (var i = 0; i < instance.RunFunctionsWithInput.Count; i++)
-            {
-                var runFunc = instance.RunFunctionsWithInput[i];
-                var input = _definition.HasUniqueInputsPerPart
-                    ? inputs[i]
-                    : inputs[0];
+            var runFunc = instance.RunFunctions[i];
+            var input = _definition.HasUniqueInputsPerPart
+                ? inputs[i]
+                : inputs[0];
 
-                AnsiConsole.WriteLine();
-                RunAndPrintPuzzleResult(i + 1, runFunc, input);
-            }
-        }
-        else
-        {
-            for (var i = 0; i < instance.RunFunctions.Count; i++)
-            {
-                var runFunc = instance.RunFunctions[i];
-                AnsiConsole.WriteLine();
-                RunAndPrintPuzzleResult(i + 1, runFunc);
-            }
+            AnsiConsole.WriteLine();
+            RunAndPrintPuzzleResult(i + 1, runFunc, input);
         }
 
         AnsiConsole.Cursor.Show(true);
@@ -71,27 +59,16 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     {
         WriteHeader(_definition);
         var inputs = FileReader.ReadInputs(_definition);
-        var instance = PuzzleFactory.CreateInstance(_definition, inputs);
-
-        if (_definition.ProvideInputToRunFunctions)
+        var instance = PuzzleFactory.CreateInstance(_definition);
+        
+        for (var i = 0; i < instance.RunFunctions.Count; i++)
         {
-            for (var i = 0; i < instance.RunFunctionsWithInput.Count; i++)
-            {
-                var runFunc = instance.RunFunctionsWithInput[i];
-                var input = _definition.HasUniqueInputsPerPart
-                    ? inputs[i]
-                    : inputs[0];
-                var result = runFunc(input);
-                AnsiConsole.WriteLine(result.Answer);
-            }
-        }
-        else
-        {
-            foreach (var runFunc in instance.RunFunctions)
-            {
-                var result = runFunc();
-                AnsiConsole.WriteLine(result.Answer);
-            }
+            var runFunc = instance.RunFunctions[i];
+            var input = _definition.HasUniqueInputsPerPart
+                ? inputs[i]
+                : inputs[0];
+            var result = runFunc(input);
+            AnsiConsole.WriteLine(result.Answer);
         }
     }
 

@@ -14,7 +14,7 @@ public class Euler013Tests
                                30000000000000000000000000000000000000000000000000
                                """;
 
-        var puzzle = new Euler013(numbers);
+        var puzzle = new Euler013();
         var result = puzzle.RunInternal(numbers);
 
         result.Should().Be("6000000000");

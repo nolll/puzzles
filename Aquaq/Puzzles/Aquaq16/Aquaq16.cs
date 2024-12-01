@@ -5,7 +5,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq16;
 
 [AdditionalLocalInputFile("Alphabet.txt")]
 [Name("Keming")]
-public class Aquaq16(string input, string additionalInput) : AquaqPuzzle
+public class Aquaq16(string additionalInput) : AquaqPuzzle
 {
     private const int LetterHeight = 6;
 

@@ -5,7 +5,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq37;
 
 [AdditionalCommonInputFile("Words.txt")]
 [Name("GUESS WORDS")]
-public class Aquaq37(string input, string additionalInput) : AquaqPuzzle
+public class Aquaq37(string additionalInput) : AquaqPuzzle
 {
     private const int WordLength = 5;
 

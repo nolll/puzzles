@@ -4,7 +4,7 @@ using Pzl.Tools.Numbers;
 namespace Pzl.Euler.Puzzles.Euler042;
 
 [Name("Coded Triangle Numbers")]
-public class Euler042(string input) : EulerPuzzle
+public class Euler042 : EulerPuzzle
 {
     protected override PuzzleResult Run(string input)
     {

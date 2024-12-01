@@ -8,6 +8,5 @@ public abstract class OnePartPuzzle : Puzzle
 {
     protected abstract PuzzleResult Run(string input);
 
-    public override IList<Func<PuzzleResult>> RunFunctions => [];
-    public override IList<Func<string, PuzzleResult>> RunFunctionsWithInput => [Run];
+    public override IList<Func<string, PuzzleResult>> RunFunctions => [Run];
 }

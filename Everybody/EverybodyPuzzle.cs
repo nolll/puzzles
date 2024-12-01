@@ -2,5 +2,5 @@ using Pzl.Common;
 
 namespace Pzl.Everybody;
 
-[HasUniqueInputsForParts, ProvideInputToRunFunction]
+[HasUniqueInputsForParts]
 public abstract class EverybodyPuzzle : ThreePartsPuzzle;

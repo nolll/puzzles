@@ -4,13 +4,11 @@ using Pzl.Tools.Numbers;
 namespace Pzl.Aquaq.Puzzles.Aquaq04;
 
 [Name("This is good co-primen")]
-public class Aquaq04(string input) : AquaqPuzzle
+public class Aquaq04 : AquaqPuzzle
 {
-    private int IntInput => int.Parse(input);
-
     protected override PuzzleResult Run(string input)
     {
-        var sum = FindCoPrimesFor(IntInput).Sum();
+        var sum = FindCoPrimesFor(int.Parse(input)).Sum();
         return new PuzzleResult(sum, "7a296f6d92cf29d6ec3b4e51af411018");
     }
 

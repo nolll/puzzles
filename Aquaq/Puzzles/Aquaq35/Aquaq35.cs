@@ -6,7 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq35;
 
 [AdditionalCommonInputFile("Words.txt")]
 [Name("Columns")]
-public class Aquaq35(string input, string additionalInput) : AquaqPuzzle
+public class Aquaq35(string additionalInput) : AquaqPuzzle
 {
     protected override PuzzleResult Run(string input)
     {

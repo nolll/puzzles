@@ -16,7 +16,7 @@ public class Aoc202315Tests
     [Test]
     public void Part1()
     {
-        var result = new Aoc202315().RunFunctionsWithInput.First()("rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7");
+        var result = new Aoc202315().RunFunctions.First()("rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7");
 
         result.Answer.Should().Be("1320");
     }
@@ -24,7 +24,7 @@ public class Aoc202315Tests
     [Test]
     public void Part2()
     {
-        var result = new Aoc202315().RunFunctionsWithInput.Last()("rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7");
+        var result = new Aoc202315().RunFunctions.Last()("rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7");
 
         result.Answer.Should().Be("145");
     }

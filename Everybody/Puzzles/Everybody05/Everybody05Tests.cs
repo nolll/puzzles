@@ -46,6 +46,6 @@ public class Everybody05Tests
                              6 7 8 9
                              """;
 
-        Everybody05.RunPart3(input).Should().Be(6584);
+        Everybody05.Part3(input).Should().Be(6584);
     }
 }

@@ -38,13 +38,30 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         AnsiConsole.Cursor.Show(false);
         WriteHeader(_definition);
         
-        var instance = PuzzleFactory.CreateInstance(_definition);
+        var inputs = FileReader.ReadInputs(_definition);
+        var instance = PuzzleFactory.CreateInstance(_definition, inputs);
 
-        for (var i = 0; i < instance.RunFunctions.Count; i++)
+        if (_definition.ProvideInputToRunFunctions)
         {
-            var runFunc = instance.RunFunctions[i];
-            AnsiConsole.WriteLine();
-            RunAndPrintPuzzleResult(i + 1, runFunc);
+            for (var i = 0; i < instance.RunFunctionsWithInput.Count; i++)
+            {
+                var runFunc = instance.RunFunctionsWithInput[i];
+                var input = _definition.HasUniqueInputsPerPart
+                    ? inputs[i]
+                    : inputs[0];
+
+                AnsiConsole.WriteLine();
+                RunAndPrintPuzzleResult(i + 1, runFunc, input);
+            }
+        }
+        else
+        {
+            for (var i = 0; i < instance.RunFunctions.Count; i++)
+            {
+                var runFunc = instance.RunFunctions[i];
+                AnsiConsole.WriteLine();
+                RunAndPrintPuzzleResult(i + 1, runFunc);
+            }
         }
 
         AnsiConsole.Cursor.Show(true);
@@ -53,12 +70,28 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     private void RunDebugMode()
     {
         WriteHeader(_definition);
-        var instance = PuzzleFactory.CreateInstance(_definition);
+        var inputs = FileReader.ReadInputs(_definition);
+        var instance = PuzzleFactory.CreateInstance(_definition, inputs);
 
-        foreach (var runFunc in instance.RunFunctions)
+        if (_definition.ProvideInputToRunFunctions)
         {
-            var result = runFunc();
-            AnsiConsole.WriteLine(result.Answer);
+            for (var i = 0; i < instance.RunFunctionsWithInput.Count; i++)
+            {
+                var runFunc = instance.RunFunctionsWithInput[i];
+                var input = _definition.HasUniqueInputsPerPart
+                    ? inputs[i]
+                    : inputs[0];
+                var result = runFunc(input);
+                AnsiConsole.WriteLine(result.Answer);
+            }
+        }
+        else
+        {
+            foreach (var runFunc in instance.RunFunctions)
+            {
+                var result = runFunc();
+                AnsiConsole.WriteLine(result.Answer);
+            }
         }
     }
 
@@ -79,6 +112,13 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         AnsiConsole.WriteLine();
         WriteAnswer(result);
     }
+    
+    private void RunAndPrintPuzzleResult(int puzzleIndex, Func<string, PuzzleResult> puzzleFunc, string input)
+    {
+        var result = RunPuzzle(puzzleIndex, puzzleFunc, input);
+        AnsiConsole.WriteLine();
+        WriteAnswer(result);
+    }
 
     private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
     {
@@ -86,6 +126,30 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         PrintTime(puzzleIndex);
         var timer = new Timer();
         var task = Task.Run(() => result = puzzleFunc());
+        while (!task.IsCompleted)
+        {
+            PrintTime(puzzleIndex, timer.FromStart);
+            Thread.Sleep(ProgressWaitTime);
+        }
+
+        if (task.IsFaulted && task.Exception is not null)
+            throw task.Exception;
+
+        if (task.IsFaulted)
+            return VerifiedPuzzleResult.Failed;
+
+        if (result is not null)
+            return _resultVerifier.Verify(result);
+            
+        return VerifiedPuzzleResult.Empty;
+    }
+    
+    private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, Func<string, PuzzleResult> puzzleFunc, string input)
+    {
+        PuzzleResult? result = null;
+        PrintTime(puzzleIndex);
+        var timer = new Timer();
+        var task = Task.Run(() => result = puzzleFunc(input));
         while (!task.IsCompleted)
         {
             PrintTime(puzzleIndex, timer.FromStart);

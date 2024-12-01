@@ -10,7 +10,19 @@ public static class FileReader
 {
     private static string[] PuzzlePathParts(Type t) => t.FullName!.Split('.').Skip(2).ToArray();
 
-    public static object ReadInputs(PuzzleDefinition definition)
+    public static string[] ReadInputs(PuzzleDefinition definition)
+    {
+        if(definition.HasUniqueInputsPerPart)
+        {
+            return Enumerable.Range(0, definition.NumberOfParts)
+                .Select(o => ReadPartInput(definition.Type, o + 1))
+                .ToArray();
+        }
+        
+        return [ReadInput(definition.Type)];
+    }
+    
+    public static object ReadInputsAsObject(PuzzleDefinition definition)
     {
         if(definition.HasUniqueInputsPerPart)
         {

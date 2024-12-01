@@ -5,23 +5,23 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 namespace Pzl.Everybody.Puzzles.Everybody03;
 
 [Name("Mining Maestro")]
-public class Everybody03(string[] inputs) : EverybodyPuzzle
+public class Everybody03 : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
-        var result = Run(inputs[0], false);
+        var result = Run(input, false);
         return new PuzzleResult(result, "f8809d3064586fdc87c819e0caa76093");
     }
     
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
-        var result = Run(inputs[1], false);
+        var result = Run(input, false);
         return new PuzzleResult(result, "d6f8a8bfba935c69e51e8d3249dc7264");
     }
 
-    protected override PuzzleResult RunPart3()
+    protected override PuzzleResult RunPart3(string input)
     {
-        var result = Run(inputs[2], true);
+        var result = Run(input, true);
         return new PuzzleResult(result, "b37fb7a9a2f7e97880544e19b5c4e323");
     }
     

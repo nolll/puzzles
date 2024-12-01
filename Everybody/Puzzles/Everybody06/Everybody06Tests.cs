@@ -21,14 +21,14 @@ public class Everybody06Tests
     [Test]
     public void Part1()
     {
-        var result = Everybody06.RunPart1(Input);
+        var result = Everybody06.Part1(Input);
         result.Should().Be("RRB@");
     }
     
     [Test]
     public void Part2And3()
     {
-        var result = Everybody06.RunPart2And3(Input);
+        var result = Everybody06.Part2And3(Input);
         result.Should().Be("RB@");
     }
 }

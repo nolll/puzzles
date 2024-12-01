@@ -3,23 +3,23 @@ using Pzl.Common;
 namespace Pzl.Everybody.Puzzles.Everybody08;
 
 [Name("A Shrine for Nullpointer")]
-public class Everybody08(string[] inputs) : EverybodyPuzzle
+public class Everybody08 : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
-        var result = Part1(inputs[0]);
+        var result = Part1(input);
         return new PuzzleResult(result, "5dbd06d4622464e1becf46096ff400a7");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
-        var result = Part2(inputs[1]);
+        var result = Part2(input);
         return new PuzzleResult(result, "afafe068673279bd495b7ccfc71a0064");
     }
 
-    protected override PuzzleResult RunPart3()
+    protected override PuzzleResult RunPart3(string input)
     {
-        var result = Part3(inputs[2]);
+        var result = Part3(input);
         return new PuzzleResult(result);
     }
 

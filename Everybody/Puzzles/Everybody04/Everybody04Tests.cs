@@ -29,6 +29,6 @@ public class Everybody04Tests
                              8
                              """;
 
-        Everybody04.RunPart3(input).Should().Be(8);
+        Everybody04.Part3(input).Should().Be(8);
     }
 }

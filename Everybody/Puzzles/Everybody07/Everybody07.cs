@@ -5,23 +5,23 @@ using Pzl.Tools.Strings;
 namespace Pzl.Everybody.Puzzles.Everybody07;
 
 [Name("Not Fast but Furious")]
-public class Everybody07(string[] inputs) : EverybodyPuzzle
+public class Everybody07 : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
-        var result = Part1(inputs[0]);
+        var result = Part1(input);
         return new PuzzleResult(result, "05a999b2ab72fff505423f40ee4af56b");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
-        var result = Part2(Part2Track, inputs[1]);
+        var result = Part2(Part2Track, input);
         return new PuzzleResult(result, "f315ce3865ed329f4eee3ec0d64bb032");
     }
 
-    protected override PuzzleResult RunPart3()
+    protected override PuzzleResult RunPart3(string input)
     {
-        var result = Part3(Part3Track, inputs[2]);
+        var result = Part3(Part3Track, input);
         return new PuzzleResult(result, "2945d46a4a840d740dfe233d50659d0c");
     }
 

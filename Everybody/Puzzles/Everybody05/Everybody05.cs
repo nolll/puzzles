@@ -5,23 +5,23 @@ using Spectre.Console;
 namespace Pzl.Everybody.Puzzles.Everybody05;
 
 [Name("Pseudo-Random Clap Dance")]
-public class Everybody05(string[] inputs) : EverybodyPuzzle
+public class Everybody05 : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
-        var result = RunPart1(inputs[0], 10);
+        var result = RunPart1(input, 10);
         return new PuzzleResult(result, "950b4825d76ba062befffe8cb9a0be2c");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
-        var result = RunPart2(inputs[1], 2024);
+        var result = RunPart2(input, 2024);
         return new PuzzleResult(result, "6b4db5dbf70faa6e08d4a645d6d2b4cc");
     }
 
-    protected override PuzzleResult RunPart3()
+    protected override PuzzleResult RunPart3(string input)
     {
-        var result = RunPart3(inputs[2]);
+        var result = Part3(input);
         return new PuzzleResult(result, "5789564a5b01f519e8eddcfc0f7aa6a2");
     }
 
@@ -41,7 +41,7 @@ public class Everybody05(string[] inputs) : EverybodyPuzzle
         return result;
     }
     
-    public static long RunPart3(string input)
+    public static long Part3(string input)
     {
         var columns = ParseDance(input);
         var result = columns.DanceForever();

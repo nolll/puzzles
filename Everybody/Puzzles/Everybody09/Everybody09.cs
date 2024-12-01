@@ -4,21 +4,21 @@ using Pzl.Tools.Strings;
 namespace Pzl.Everybody.Puzzles.Everybody09;
 
 [Name("")]
-public class Everybody09(string[] inputs) : EverybodyPuzzle
+public class Everybody09 : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1()
+    protected override PuzzleResult RunPart1(string input)
     {
-        var result = Part1(inputs[0]);
+        var result = Part1(input);
         return new PuzzleResult(result, "dffa64bee7ea0c0ad66724de7afe7c08");
     }
 
-    protected override PuzzleResult RunPart2()
+    protected override PuzzleResult RunPart2(string input)
     {
-        var result = Part2(inputs[1]);
+        var result = Part2(input);
         return new PuzzleResult(result, "6032109447891782512325cb9251f9e2");
     }
 
-    protected override PuzzleResult RunPart3()
+    protected override PuzzleResult RunPart3(string input)
     {
         return PuzzleResult.Empty;
     }

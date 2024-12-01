@@ -1,13 +1,4 @@
-using System;
-using System.Collections.Generic;
-
 namespace Pzl.Common;
 
 [NumberOfParts(2)]
-public abstract class TwoPartsPuzzle : Puzzle
-{
-    protected abstract PuzzleResult RunPart1(string input);
-    protected abstract PuzzleResult RunPart2(string input);
-
-    public override IList<Func<string, PuzzleResult>> RunFunctions => [RunPart1, RunPart2];
-}
+public abstract class TwoPartsPuzzle : Puzzle;

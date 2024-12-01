@@ -8,7 +8,7 @@ namespace Pzl.Everybody.Puzzles.Everybody02;
 [Name("The Runes of Power")]
 public class Everybody02 : EverybodyPuzzle
 {
-    public override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var (words, strings) = ParseWordsAndStrings(input);
         var count = CountRunicWords(words, strings);
@@ -16,7 +16,7 @@ public class Everybody02 : EverybodyPuzzle
         return new PuzzleResult(count, "a95c75956922f6f91c685f01d8548eb1");
     }
 
-    public override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var (words, strings) = ParseWordsAndStrings(input);
         var count = CountRunicSymbols(words, strings);
@@ -24,7 +24,7 @@ public class Everybody02 : EverybodyPuzzle
         return new PuzzleResult(count, "df79c139a238567f7809c68a9e99d7bc");
     }
 
-    public override PuzzleResult RunPart3(string input)
+    public PuzzleResult RunPart3(string input)
     {
         var (words, strings) = ParseWordsAndStrings(input);
         var count = CountRunicSymbolsInMatrix(words, strings);

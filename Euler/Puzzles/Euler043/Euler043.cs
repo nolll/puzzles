@@ -5,7 +5,7 @@ namespace Pzl.Euler.Puzzles.Euler043;
 [Name("Sub-string Divisibility")]
 public class Euler043 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var divisors = new[] { 2, 3, 5, 7, 11, 13, 17 };
         var remainingNumbers = Enumerable.Range(0, 10).ToList();

@@ -5,7 +5,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq31;
 [Name("Brandless Combination Cubes")]
 public class Aquaq31 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = Rotate(input);
 

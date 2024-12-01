@@ -7,19 +7,19 @@ namespace Pzl.Everybody.Puzzles.Everybody05;
 [Name("Pseudo-Random Clap Dance")]
 public class Everybody05 : EverybodyPuzzle
 {
-    public override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var result = RunPart1(input, 10);
         return new PuzzleResult(result, "950b4825d76ba062befffe8cb9a0be2c");
     }
 
-    public override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var result = RunPart2(input, 2024);
         return new PuzzleResult(result, "6b4db5dbf70faa6e08d4a645d6d2b4cc");
     }
 
-    public override PuzzleResult RunPart3(string input)
+    public PuzzleResult RunPart3(string input)
     {
         var columns = ParseDance(input);
         var result = columns.DanceForever();

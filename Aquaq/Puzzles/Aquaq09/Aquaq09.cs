@@ -7,7 +7,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq09;
 [Name("Big Data?")]
 public class Aquaq09 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var numbers = StringReader.ReadLines(input)
             .Select(BigInteger.Parse);

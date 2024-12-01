@@ -8,7 +8,7 @@ public class Aoc201915 : AocPuzzle
 {
     private Matrix<char> _map = new();
 
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var droid = new RepairDroid(input);
         var (result, map) = droid.Run();
@@ -17,7 +17,7 @@ public class Aoc201915 : AocPuzzle
         return new PuzzleResult(result, "d20cf84c4da08d20e303bd7439d54765");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var filler = new OxygenFiller(_map);
         var result = filler.Fill();

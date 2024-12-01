@@ -6,7 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq08;
 [Name("Cron Flakes")]
 public class Aquaq08 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var (milk, cereal) = RunInternal(input);
         var sum = milk + cereal;

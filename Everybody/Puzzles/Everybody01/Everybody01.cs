@@ -5,21 +5,21 @@ namespace Pzl.Everybody.Puzzles.Everybody01;
 [Name("The Battle for the Farmlands")]
 public class Everybody01 : EverybodyPuzzle
 {
-    public override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var count = PotionsNeeded(input, 1);
         
         return new PuzzleResult(count, "93584fbfb539341540431fdcbdd43e43");
     }
 
-    public override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var count = PotionsNeeded(input, 2);
         
         return new PuzzleResult(count, "29c8c2e9da7059c271b37645091e3caa");
     }
 
-    public override PuzzleResult RunPart3(string input)
+    public PuzzleResult RunPart3(string input)
     {
         var count = PotionsNeeded(input, 3);
         

@@ -5,14 +5,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202014;
 [Name("Docking Data")]
 public class Aoc202014 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var system = new BitmaskSystem1();
         var sum = system.Run(input);
         return new PuzzleResult(sum, "df6ceb0c5b8153992f5246f19ad4d827");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var system = new BitmaskSystem2();
         var sum = system.Run(input);

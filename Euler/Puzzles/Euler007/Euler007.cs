@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler007;
 [Name("10001st prime")]
 public class Euler007 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var nthPrime = Run(10001);
 

@@ -6,7 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq04;
 [Name("This is good co-primen")]
 public class Aquaq04 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var sum = FindCoPrimesFor(int.Parse(input)).Sum();
         return new PuzzleResult(sum, "7a296f6d92cf29d6ec3b4e51af411018");

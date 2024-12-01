@@ -8,10 +8,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202320;
 [Name("Pulse Propagation")]
 public class Aoc202320 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input) => 
+    public PuzzleResult RunPart1(string input) => 
         new(CountPulses(input, 1000), "826f2e187e18624950644293ef2e6c8d");
 
-    protected override PuzzleResult RunPart2(string input) =>
+    public PuzzleResult RunPart2(string input) =>
         new(CountPulses(input, 5000, true), "1fd3846c9dc834364bf2cdc9c11dfbdb");
 
     public static long CountPulses(string s, int iterations, bool isPart2 = false)

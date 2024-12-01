@@ -6,14 +6,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202306;
 [Name("Wait For It")]
 public class Aoc202306 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var result = BoatRace1(input);
 
         return new PuzzleResult(result, "7eb8c120d057c526ef2c425f6db9493c");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var result = BoatRace2(input);
 

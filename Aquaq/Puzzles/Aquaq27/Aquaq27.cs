@@ -8,7 +8,7 @@ public class Aquaq27 : AquaqPuzzle
 {
     private const char Empty = ' ';
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = CalculateSnakeScore(input);
 

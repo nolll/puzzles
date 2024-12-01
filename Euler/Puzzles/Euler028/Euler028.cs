@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler028;
 [Name("Number spiral diagonals")]
 public class Euler028 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = Run(1001);
 

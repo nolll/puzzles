@@ -8,7 +8,7 @@ public class Aquaq01 : AquaqPuzzle
 {
     private static readonly Regex HexRegex = new("[^0123456789abcdef]");
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = GetHexString(input);
 

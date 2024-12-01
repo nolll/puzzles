@@ -10,7 +10,7 @@ public class Aquaq11 : AquaqPuzzle
     private const char Empty = '.';
     private const char Filled = '#';
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = CountRequiredTiles(input);
 

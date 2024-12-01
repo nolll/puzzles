@@ -5,7 +5,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq33;
 [Name("Bit of Bully")]
 public class Aquaq33 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         return new PuzzleResult(Run(245701), "3c08f90044660194d3d619fa4c14d736");
     }

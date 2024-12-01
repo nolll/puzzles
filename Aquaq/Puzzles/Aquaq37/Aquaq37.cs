@@ -9,7 +9,7 @@ public class Aquaq37(string additionalInput) : AquaqPuzzle
 {
     private const int WordLength = 5;
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var words = FindWords(input);
         var score = words.Sum(GetWordScore);

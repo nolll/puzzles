@@ -7,7 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202123;
 [Comment("Solved by hand")]
 public class Aoc202123 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var amphipods = new Amphipods(Input1);
         amphipods.ArrangePart1();
@@ -16,7 +16,7 @@ public class Aoc202123 : AocPuzzle
         return new PuzzleResult(result, "8547c3b85863d2e52d88fad570aefbe9");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var amphipods = new Amphipods(Input2);
         amphipods.ArrangePart2();

@@ -5,7 +5,7 @@ namespace Pzl.Euler.Puzzles.Euler019;
 [Name("Counting Sundays")]
 public class Euler019 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var startDate = DateTime.Parse("1901-01-01");
         var endDate = DateTime.Parse("2000-12-31");

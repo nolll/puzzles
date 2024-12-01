@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201824;
 [Name("Immune System Simulator 20XX")]
 public class Aoc201824 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var inputs = input.Split(LineBreaks.Double);
         var immuneInput = inputs.First();
@@ -17,7 +17,7 @@ public class Aoc201824 : AocPuzzle
         return new PuzzleResult(system.WinningArmyUnitCount, "84df04e9e9a02e41225db74dadfd8c9d");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var inputs = input.Split(LineBreaks.Double);
         var immuneInput = inputs.First();

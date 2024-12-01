@@ -5,7 +5,7 @@ namespace Pzl.Euler.Puzzles.Euler004;
 [Name("Largest palindrome product")]
 public class Euler004 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var largestPalindrome = Run(100, 999);
 

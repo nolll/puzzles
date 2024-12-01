@@ -6,7 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq17;
 [Name("The Beautiful Shame")]
 public class Aquaq17 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         return new PuzzleResult(RunInternal(input), "033640f1946bb06d49b637ee7b1c3a80");
     }

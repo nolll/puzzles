@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202225;
 [Name("Full of Hot Air")]
 public class Aoc202225 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var result = Part1(input);
 
@@ -19,6 +19,4 @@ public class Aoc202225 : AocPuzzle
         var sum = lines.Select(SnafuConverter.ToNumber).Sum();
         return SnafuConverter.ToSnafu(sum);
     }
-
-    protected override PuzzleResult RunPart2(string input) => PuzzleResult.Empty;
 }

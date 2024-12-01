@@ -22,7 +22,7 @@ public class Aquaq14 : AquaqPuzzle
     private static readonly IEnumerable<MatrixAddress> Diagonal1 = BuildDiagonal1();
     private static readonly IEnumerable<MatrixAddress> Diagonal2 = BuildDiagonal2();
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = PlayBingo(input);
         return new PuzzleResult(result, "d9665f8161f8ada6709d7be1564965fa");

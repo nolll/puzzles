@@ -7,7 +7,7 @@ namespace Pzl.Everybody.Puzzles.Everybody07;
 [Name("Not Fast but Furious")]
 public class Everybody07 : EverybodyPuzzle
 {
-    public override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var knights = new List<Knight>();
@@ -24,13 +24,13 @@ public class Everybody07 : EverybodyPuzzle
         return new PuzzleResult(result, "05a999b2ab72fff505423f40ee4af56b");
     }
 
-    public override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var result = Part2(Part2Track, input);
         return new PuzzleResult(result, "f315ce3865ed329f4eee3ec0d64bb032");
     }
 
-    public override PuzzleResult RunPart3(string input)
+    public PuzzleResult RunPart3(string input)
     {
         var result = Part3(Part3Track, input);
         return new PuzzleResult(result, "2945d46a4a840d740dfe233d50659d0c");

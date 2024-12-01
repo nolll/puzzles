@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler042;
 [Name("Coded Triangle Numbers")]
 public class Euler042 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var words = input.Split(',').Select(o => o.Trim('\"'));
         var count = words.Select(GetWordValue).Count(o => Numbers.IsTriangularNumber(o));

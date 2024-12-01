@@ -6,7 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq18;
 [Name("Emit time")]
 public class Aquaq18 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var sum = StringReader.ReadLines(input)
             .Select(o => DateTime.Parse($"2020-02-02 {o}"))

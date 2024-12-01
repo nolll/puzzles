@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202105;
 [Name("Hydrothermal Venture")]
 public class Aoc202105 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var ventsMap = new VentsMap();
         var result = ventsMap.Run(input, true);
@@ -13,7 +13,7 @@ public class Aoc202105 : AocPuzzle
         return new PuzzleResult(result, "72e2846f2036e57e75a10d9d0b5a99ad");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var ventsMap = new VentsMap();
         var result = ventsMap.Run(input, false);

@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202103;
 [Name("Binary Diagnostic")]
 public class Aoc202103 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var diagnostics = new BinaryDiagnostics();
         var result = diagnostics.GetFuelConsumption(input);
@@ -13,7 +13,7 @@ public class Aoc202103 : AocPuzzle
         return new PuzzleResult(result, "a1a6d0eb7bc34e96753cd342f3c1d6d2");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var diagnostics = new BinaryDiagnostics();
         var result = diagnostics.GetLifeSupportRating(input);

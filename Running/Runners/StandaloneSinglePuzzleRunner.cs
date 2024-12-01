@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Pzl.Client.Formatting;
 using Pzl.Client.Running.Results;
@@ -40,16 +41,19 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         
         var inputs = FileReader.ReadInputs(_definition);
         var instance = PuzzleFactory.CreateInstance(_definition);
+        var funcs = _definition.Type.GetMethods()
+            .Where(o => o is { IsPublic: true, IsStatic: false } && o.ReturnType == typeof(PuzzleResult))
+            .OrderBy(o => o.Name)
+            .ToArray();
         
-        for (var i = 0; i < instance.RunFunctions.Count; i++)
+        for (var i = 0; i < funcs.Length; i++)
         {
-            var runFunc = instance.RunFunctions[i];
             var input = _definition.HasUniqueInputsPerPart
                 ? inputs[i]
                 : inputs[0];
 
             AnsiConsole.WriteLine();
-            RunAndPrintPuzzleResult(i + 1, runFunc, input);
+            RunAndPrintPuzzleResult(i + 1, instance, funcs[i], input);
         }
 
         AnsiConsole.Cursor.Show(true);
@@ -60,15 +64,21 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         WriteHeader(_definition);
         var inputs = FileReader.ReadInputs(_definition);
         var instance = PuzzleFactory.CreateInstance(_definition);
+        var funcs = _definition.Type.GetMethods()
+            .Where(o => o is { IsPublic: true, IsStatic: false } && o.ReturnType == typeof(PuzzleResult))
+            .OrderBy(o => o.Name)
+            .ToArray();
         
-        for (var i = 0; i < instance.RunFunctions.Count; i++)
+        for (var i = 0; i < funcs.Length; i++)
         {
-            var runFunc = instance.RunFunctions[i];
             var input = _definition.HasUniqueInputsPerPart
                 ? inputs[i]
                 : inputs[0];
-            var result = runFunc(input);
-            AnsiConsole.WriteLine(result.Answer);
+            var result = funcs[i].Invoke(instance, [input]);
+            if (result is not PuzzleResult puzzleResult)
+                throw new Exception("Function did not return a PuzzleResult");
+            
+            AnsiConsole.WriteLine(puzzleResult.Answer);
         }
     }
 
@@ -82,51 +92,27 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         if (puzzle.Comment is not null)
             AnsiConsole.MarkupLine($"[yellow]{puzzle.Comment}[/]");
     }
-
-    private void RunAndPrintPuzzleResult(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
+    
+    private void RunAndPrintPuzzleResult(int puzzleIndex, Puzzle puzzle, MethodInfo func, string input)
     {
-        var result = RunPuzzle(puzzleIndex, puzzleFunc);
+        var result = RunPuzzle(puzzleIndex, puzzle, func, input);
         AnsiConsole.WriteLine();
         WriteAnswer(result);
     }
     
-    private void RunAndPrintPuzzleResult(int puzzleIndex, Func<string, PuzzleResult> puzzleFunc, string input)
-    {
-        var result = RunPuzzle(puzzleIndex, puzzleFunc, input);
-        AnsiConsole.WriteLine();
-        WriteAnswer(result);
-    }
-
-    private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, Func<PuzzleResult> puzzleFunc)
+    private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, Puzzle puzzle, MethodInfo func, string input)
     {
         PuzzleResult? result = null;
         PrintTime(puzzleIndex);
         var timer = new Timer();
-        var task = Task.Run(() => result = puzzleFunc());
-        while (!task.IsCompleted)
+        
+        var task = Task.Run(() =>
         {
-            PrintTime(puzzleIndex, timer.FromStart);
-            Thread.Sleep(ProgressWaitTime);
-        }
-
-        if (task.IsFaulted && task.Exception is not null)
-            throw task.Exception;
-
-        if (task.IsFaulted)
-            return VerifiedPuzzleResult.Failed;
-
-        if (result is not null)
-            return _resultVerifier.Verify(result);
-            
-        return VerifiedPuzzleResult.Empty;
-    }
-    
-    private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, Func<string, PuzzleResult> puzzleFunc, string input)
-    {
-        PuzzleResult? result = null;
-        PrintTime(puzzleIndex);
-        var timer = new Timer();
-        var task = Task.Run(() => result = puzzleFunc(input));
+            var obj = func.Invoke(puzzle, [input]);
+            if (obj is PuzzleResult puzzleResult)
+                result = puzzleResult;
+        });
+        
         while (!task.IsCompleted)
         {
             PrintTime(puzzleIndex, timer.FromStart);

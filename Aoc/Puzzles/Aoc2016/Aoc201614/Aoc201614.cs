@@ -7,7 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
 [Comment("Slow hashing")]
 public class Aoc201614 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var generator = new KeyGenerator();
         var index = generator.GetIndexOfNThKey(input, 64, 0);
@@ -15,7 +15,7 @@ public class Aoc201614 : AocPuzzle
         return new PuzzleResult(index, "ab424c3c48235af9c7eadd8da2414dea");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var generator = new KeyGenerator();
         var index = generator.GetIndexOfNThKey(input, 64, 2016);

@@ -5,14 +5,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202003;
 [Name("Toboggan Trajectory")]
 public class Aoc202003 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var navigator = new TreeNavigator(input);
         var treeCount = navigator.GetSingleTreeCount();
         return new PuzzleResult(treeCount, "5523923bd52d76e1c1d68b1cfdff95b5");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var navigator = new TreeNavigator(input);
         var treeCounts = navigator.GetAllTreeCounts().ToList();

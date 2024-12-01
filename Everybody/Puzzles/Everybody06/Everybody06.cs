@@ -6,19 +6,19 @@ namespace Pzl.Everybody.Puzzles.Everybody06;
 [Name("The Tree of Titans")]
 public class Everybody06 : EverybodyPuzzle
 {
-    public override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var result = Part1(input);
         return new PuzzleResult(result, "1e1f24ab14407ffbaf4f6b9143384384");
     }
 
-    public override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var result = Part2And3(input);
         return new PuzzleResult(result, "aaacecff7b5d20d54ea2d96c4797166e");
     }
 
-    public override PuzzleResult RunPart3(string input)
+    public PuzzleResult RunPart3(string input)
     {
         var result = Part2And3(input);
         return new PuzzleResult(result, "c3544a49e37c3dfedc6dec99596402da");

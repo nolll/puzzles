@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201914;
 [Name("Space Stoichiometry")]
 public class Aoc201914 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var reactor = new NanoReactor(input);
         reactor.Run();
@@ -14,7 +14,7 @@ public class Aoc201914 : AocPuzzle
         return new PuzzleResult(oreForOneFuel, "4f7b51a9155bea7c24bbb1d4757e4bf1");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var reactor = new NanoReactor(input);
         reactor.Run();

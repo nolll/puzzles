@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler020;
 [Name("Factorial digit sum")]
 public class Euler020 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         BigInteger factorial = 100;
         var result = Run(factorial);

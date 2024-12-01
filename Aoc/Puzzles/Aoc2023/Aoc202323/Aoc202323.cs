@@ -15,12 +15,12 @@ public class Aoc202323 : AocPuzzle
         { MatrixDirection.Left, '<' }
     };
 
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         return new PuzzleResult(LongestHike(input, false), "854218011528db376afeffbf53800ecd");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         return new PuzzleResult(LongestHike(input, true), "22bcf9382d0e8177c5c6ef52f07fd7b9");
     }

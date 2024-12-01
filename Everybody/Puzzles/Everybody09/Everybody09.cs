@@ -6,7 +6,7 @@ namespace Pzl.Everybody.Puzzles.Everybody09;
 [Name("")]
 public class Everybody09 : EverybodyPuzzle
 {
-    public override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var balls = ParseBalls(input);
         int[] stamps = [1, 3, 5, 10];
@@ -44,7 +44,7 @@ public class Everybody09 : EverybodyPuzzle
         return new PuzzleResult(result, "dffa64bee7ea0c0ad66724de7afe7c08");
     }
 
-    public override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var balls = ParseBalls(input);
         int[] stamps = [1, 3, 5, 10, 15, 16, 20, 24, 25, 30];
@@ -73,11 +73,6 @@ public class Everybody09 : EverybodyPuzzle
         return new PuzzleResult(result, "6032109447891782512325cb9251f9e2");
     }
 
-    public override PuzzleResult RunPart3(string input)
-    {
-        return PuzzleResult.Empty;
-    }
-    
     private static int[] ParseBalls(string input) => 
         input.Split(LineBreaks.Single).Select(int.Parse).ToArray();
 

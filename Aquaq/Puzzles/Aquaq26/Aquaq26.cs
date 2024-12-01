@@ -8,7 +8,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq26;
 [Name("Typo Theft")]
 public class Aquaq26 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var inputNumbers = StringReader.ReadLines(input)
             .Select(BigInteger.Parse);

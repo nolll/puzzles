@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202104;
 [Name("Giant Squid")]
 public class Aoc202104 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var diagnostics = new BingoGame(input);
         var result = diagnostics.Play(false);
@@ -13,7 +13,7 @@ public class Aoc202104 : AocPuzzle
         return new PuzzleResult(result, "95287604b1b5cd043b3268068d4c34ef");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var diagnostics = new BingoGame(input);
         var result = diagnostics.Play(true);

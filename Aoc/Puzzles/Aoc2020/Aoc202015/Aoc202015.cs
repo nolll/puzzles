@@ -5,14 +5,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202015;
 [Name("Rambunctious Recitation")]
 public class Aoc202015 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var system = new MemoryGame(input);
         var result = system.Play(2020);
         return new PuzzleResult(result, "9b1872aba49cfd16a3cc25436caa89e4");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var system = new MemoryGame(input);
         var result = system.Play(30000000);

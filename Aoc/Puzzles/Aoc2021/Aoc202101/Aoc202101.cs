@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202101;
 [Name("Sonar Sweep")]
 public class Aoc202101 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var calculator = new DepthMeasurement();
         var result = calculator.GetNumberOfIncreasingMeasurements(input, false);
@@ -13,7 +13,7 @@ public class Aoc202101 : AocPuzzle
         return new PuzzleResult(result, "ff696c9ddfc6c58065e2e08cdc35e82d");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var calculator = new DepthMeasurement();
         var result = calculator.GetNumberOfIncreasingMeasurements(input, true);

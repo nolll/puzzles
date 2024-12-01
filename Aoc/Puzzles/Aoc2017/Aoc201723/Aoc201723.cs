@@ -5,14 +5,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201723;
 [Name("Coprocessor Conflagration")]
 public class Aoc201723 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var processor1 = new CoProcessor(input);
         processor1.Run();
         return new PuzzleResult(processor1.MulCount, "971baa2f7382241fa0fb324cff9c6dd6");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var processor2 = new OptimizedCoProcessor();
         processor2.Run();

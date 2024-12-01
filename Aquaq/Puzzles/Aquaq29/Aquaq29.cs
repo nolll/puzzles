@@ -6,7 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq29;
 [Name("On the up and up")]
 public class Aquaq29 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var count = 0;
         for (var i = 0; i <= 520185742; i++)

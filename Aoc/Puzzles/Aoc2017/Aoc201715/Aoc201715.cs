@@ -5,14 +5,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201715;
 [Name("Dueling Generators")]
 public class Aoc201715 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var duel = GeneratorDuel.Parse(input);
         duel.Run(40_000_000);
         return new PuzzleResult(duel.FinalCount, "4eda86461504e63d609bceb54bbafa32");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var duel2 = GeneratorDuel.Parse(input);
         duel2.Run2(5_000_000);

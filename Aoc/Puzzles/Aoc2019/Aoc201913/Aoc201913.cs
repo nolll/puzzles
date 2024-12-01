@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201913;
 [Name("Care Package")]
 public class Aoc201913 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var arcade = new Arcade(input);
         arcade.Play();
@@ -13,7 +13,7 @@ public class Aoc201913 : AocPuzzle
         return new PuzzleResult(arcade.NumberOfBlockTiles, "65621a57e5ba6bbdc37540f0d2320098");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var arcade = new Arcade(input);
         arcade.Play(2);

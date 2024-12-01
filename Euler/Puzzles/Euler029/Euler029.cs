@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler029;
 [Name("Distinct powers")]
 public class Euler029 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = Run(100);
 

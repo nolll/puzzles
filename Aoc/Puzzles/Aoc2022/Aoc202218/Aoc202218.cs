@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202218;
 [Name("Boiling Boulders")]
 public class Aoc202218 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var lavaCubes = new LavaCubes();
         var result = lavaCubes.Part1(input);
@@ -13,7 +13,7 @@ public class Aoc202218 : AocPuzzle
         return new PuzzleResult(result, "91235a24016ae0426b247e67bd3d3195");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var lavaCubes = new LavaCubes();
         var result = lavaCubes.Part2(input);

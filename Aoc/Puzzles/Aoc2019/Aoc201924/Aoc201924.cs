@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201924;
 [Name("Planet of Discord")]
 public class Aoc201924 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var simulator = new BugLifeSimulator(input);
         simulator.RunUntilRepeat();
@@ -13,7 +13,7 @@ public class Aoc201924 : AocPuzzle
         return new PuzzleResult(simulator.BiodiversityRating, "1871d15193d508d5be66268ad3cc074a");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var recursiveSimulator = new RecursiveBugLifeSimulator(input);
         recursiveSimulator.Run(200);

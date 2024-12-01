@@ -5,14 +5,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201602;
 [Name("Bathroom Security")]
 public class Aoc201602 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var squareCodeFinder = new SquareKeyCodeFinder();
         var squareCode = squareCodeFinder.Find(input);
         return new PuzzleResult(squareCode, "bc6c7825d96d5406ad3776a37c342187");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var diamondCodeFinder = new DiamondKeyCodeFinder();
         var diamondCode = diamondCodeFinder.Find(input);

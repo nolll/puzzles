@@ -6,21 +6,21 @@ namespace Pzl.Everybody.Puzzles.Everybody04;
 [Name("Royal Smith's Puzzle")]
 public class Everybody04 : EverybodyPuzzle
 {
-    public override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var result = RunPart1And2(input);
 
         return new PuzzleResult(result, "eabb36cc8d28867fc0f0d332eda02eb3");
     }
 
-    public override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var result = RunPart1And2(input);
 
         return new PuzzleResult(result, "0a37c73499ec6bdb6af25453b7099e38");
     }
 
-    public override PuzzleResult RunPart3(string input)
+    public PuzzleResult RunPart3(string input)
     {
         var result = Part3(input);
 

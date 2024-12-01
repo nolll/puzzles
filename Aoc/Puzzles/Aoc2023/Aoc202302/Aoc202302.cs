@@ -13,13 +13,13 @@ public class Aoc202302 : AocPuzzle
         { "blue", 14 }
     };
 
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var result = PlayGames(input);
         return new PuzzleResult(result.ValidGames, "70e2be8af168fc9534f8384b244c60f7");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var result = PlayGames(input);
         return new PuzzleResult(result.GamePower, "45825cd43460cbc76a940d6eb06ebc6b");

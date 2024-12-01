@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202112;
 [Name("Passage Pathing")]
 public class Aoc202112 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var caveSystem = new CaveSystem(input, false);
         var result = caveSystem.CountPaths();
@@ -13,7 +13,7 @@ public class Aoc202112 : AocPuzzle
         return new PuzzleResult(result, "f0ddaeeb33f1a0ff7a113ef020e9decd");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var caveSystem = new CaveSystem(input, true);
         var result = caveSystem.CountPaths();

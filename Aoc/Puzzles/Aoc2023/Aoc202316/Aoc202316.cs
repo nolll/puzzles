@@ -6,14 +6,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202316;
 [Name("The Floor Will Be Lava")]
 public class Aoc202316 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var result = EnergizedCount(input);
 
         return new PuzzleResult(result, "2e8a9c0e869279c02d7e2cdcf12d40ff");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var result = MostEnergy(input);
 

@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201521;
 [Name("RPG Simulator 20XX")]
 public class Aoc201521 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var p = GetParams(input);
         var simulator = new RpgSimulator();
@@ -14,7 +14,7 @@ public class Aoc201521 : AocPuzzle
         return new PuzzleResult(leastGoldRequiredToWin, "d826748d893fac708069e01d784895e8");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var p = GetParams(input);
         var simulator = new RpgSimulator();

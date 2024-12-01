@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201902;
 [Name("1202 Program Alarm")]
 public class Aoc201902 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var computer = new ConsoleComputer(input);
         computer.Start(false, 12, 2);
@@ -14,7 +14,7 @@ public class Aoc201902 : AocPuzzle
         return new PuzzleResult(value, "85e8cb8123555ca9bd39b2c6b962e54a");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var solutionFinder = new ComputerSolutionFinder(input);
         var result = solutionFinder.FindSolution(19690720);

@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201910;
 [Name("Monitoring Station")]
 public class Aoc201910 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var detector = new AsteroidDetector();
         var detectorResult = detector.Detect(input);
@@ -13,7 +13,7 @@ public class Aoc201910 : AocPuzzle
         return new PuzzleResult(detectorResult.RayCount, "1ce0626fd555d7e4aa7dfebfe816d1ed");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var vaporizer = new AsteroidVaporizer();
         var vaporizeResult = vaporizer.Vaporize(input);

@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler018;
 [Name("Maximum path sum I")]
 public class Euler018 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = RunInternal(Triangle);
         return new PuzzleResult(result, "ac0ed37fe47b088e57246f49e0564317");

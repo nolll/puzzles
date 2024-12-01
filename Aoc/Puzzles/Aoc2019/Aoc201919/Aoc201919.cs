@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201919;
 [Name("Tractor Beam")]
 public class Aoc201919 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var tbc = new TractorBeamComputer1(input, 50, 50);
         var result = tbc.GetPullCount();
@@ -13,7 +13,7 @@ public class Aoc201919 : AocPuzzle
         return new PuzzleResult(result, "984c01d5977631fa8cd48a8fbd689c1c");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var tbc = new TractorBeamComputer2(input, 50, 50);
         var result = tbc.Find100By100Square();

@@ -8,7 +8,7 @@ namespace Pzl.Euler.Puzzles.Euler026;
 [Comment("My original solution involved regex and is left as the RunSlow method. At least I learned something!")]
 public class Euler026 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = Run(999);
         return new PuzzleResult(result, "dbf66eed8ad4924ee0ac82e9f5354934");

@@ -12,7 +12,7 @@ public class Aquaq28 : AquaqPuzzle
     private const char Empty = ' ';
     private const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789";
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = Encrypt(input, "FISSION_MAILED");
 

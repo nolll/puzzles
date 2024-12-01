@@ -5,14 +5,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201806;
 [Name("Chronal Coordinates")]
 public class Aoc201806 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var finder = new LargestAreaFinder(input);
         var size = finder.GetSizeOfLargestArea();
         return new PuzzleResult(size, "38a2162984fb4f3ad26481fe9d035149");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var finder = new LargestAreaFinder(input);
         var size = finder.GetSizeOfCentralArea(10000);

@@ -6,7 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq12;
 [Name("A Day In The Lift")]
 public class Aquaq12 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = RideLift(input);
 

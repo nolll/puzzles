@@ -7,12 +7,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202322;
 [Name("Sand Slabs")]
 public class Aoc202322 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         return new PuzzleResult(CountBricksThatCanBeRemoved(input), "1365c818d49ae8af1974dc302f134abb");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         return new PuzzleResult(CountTotalRemovedBricks(input), "81d92f2381d8798f847dd6eb9e0ea6b2");
     }

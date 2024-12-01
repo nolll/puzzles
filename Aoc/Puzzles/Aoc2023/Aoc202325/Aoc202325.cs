@@ -7,16 +7,6 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202325;
 [Name("Snowverload")]
 public class Aoc202325() : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
-    {
-        return PuzzleResult.Empty;
-    }
-
-    protected override PuzzleResult RunPart2(string input)
-    {
-        return PuzzleResult.Empty;
-    }
-
     public static int DivideIntoGroups(string s)
     {
         var components = ParseComponents(s);

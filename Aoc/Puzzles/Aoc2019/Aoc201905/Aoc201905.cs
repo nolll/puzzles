@@ -8,7 +8,7 @@ public class Aoc201905 : AocPuzzle
 {
     private long _output;
 
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var ci1 = new IntCodeComputer(input, ReadInputPart1, WriteOutput);
         ci1.Start();
@@ -16,7 +16,7 @@ public class Aoc201905 : AocPuzzle
         return new PuzzleResult(_output, "fb635501f54f36e602ebf7e465625fba");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var ci2 = new IntCodeComputer(input, ReadInputPart2, WriteOutput);
         ci2.Start();

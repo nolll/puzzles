@@ -7,7 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201922;
 [Comment("Learn more math")]
 public class Aoc201922 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var shuffler1 = new CardShuffler();
         var deck = shuffler1.Shuffle(10_007, input);
@@ -15,7 +15,7 @@ public class Aoc201922 : AocPuzzle
         return new PuzzleResult(positionOfCard2019, "40fa2fae9a8a1308387285c95b7d3844");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var shuffler2 = new CardShuffler();
         var cardAtPosition2020 = shuffler2.ShuffleBig(input);

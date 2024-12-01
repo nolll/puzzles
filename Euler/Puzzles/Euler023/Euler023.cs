@@ -8,7 +8,7 @@ public class Euler023 : EulerPuzzle
 {
     private const int UpperLimit = 28123;
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var abundantNumbers = FindAbundantNumbers(UpperLimit).ToList();
         var sumsOfAbundantNumbers = GetSums(abundantNumbers);

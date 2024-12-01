@@ -9,7 +9,7 @@ public class Euler037 : EulerPuzzle
     private const int Target = 11;
     private const int Initial = 8;
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var count = 0;
         var sum = 0;

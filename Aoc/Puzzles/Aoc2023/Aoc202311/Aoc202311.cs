@@ -6,12 +6,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202311;
 [Name("Cosmic Expansion")]
 public class Aoc202311 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         return new PuzzleResult(Distances(input, 1), "04a7795748b2f6d2e38898623e8ef01a");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         return new PuzzleResult(Distances(input, 1_000_000), "73bccfdcdd826f77dcdaf67bedecded9");
     }

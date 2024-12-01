@@ -8,14 +8,14 @@ public class Aoc202119 : AocPuzzle
 {
     private BeaconSystemResult? _result;
 
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var result = GetResult(input);
 
         return new PuzzleResult(result.BeaconCount, "a6668fd005e7ebda4e124253eea1e56e");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var result = GetResult(input);
 

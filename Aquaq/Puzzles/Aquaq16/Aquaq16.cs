@@ -9,7 +9,7 @@ public class Aquaq16(string additionalInput) : AquaqPuzzle
 {
     private const int LetterHeight = 6;
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         return new PuzzleResult(RunInternal(input), "b900eb74f94c2243de65005bcc4ebd2c");
     }

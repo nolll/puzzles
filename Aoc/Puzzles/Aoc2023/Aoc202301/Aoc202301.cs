@@ -9,7 +9,7 @@ public class Aoc202301 : AocPuzzle
     private static readonly List<string> Words =
         ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var values = FindCalibrationNumberPart1(input);
         var result = values.Sum();
@@ -17,7 +17,7 @@ public class Aoc202301 : AocPuzzle
         return new PuzzleResult(result, "93e7c44a86bd9d03f7156e6fc3ed61c8");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var values = FindCalibrationNumberPart2(input);
         var result = values.Sum();

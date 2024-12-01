@@ -8,7 +8,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq15;
 [Name("word wore more mare maze")]
 public class Aquaq15(string additionalInput) : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         return new PuzzleResult(RunInternal(input), "ffafde1afff1c3904275c8225e772bf1");
     }

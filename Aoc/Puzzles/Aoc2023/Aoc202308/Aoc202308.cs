@@ -7,12 +7,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202308;
 [Name("Haunted Wasteland")]
 public class Aoc202308 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         return new PuzzleResult(DesertPath1(input), "fc2f3ff0b243fed57135f9ca59507411");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         return new PuzzleResult(DesertPath2(input), "ea69e01b93e2a5ffbd263edd44ecc7e8");
     }

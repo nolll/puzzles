@@ -7,7 +7,7 @@ public class Euler032 : EulerPuzzle
 {
     private const string AllChars = "123456789";
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         const int limit = 2000;
         var pandigitalProducts = new HashSet<int>();

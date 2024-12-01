@@ -9,7 +9,7 @@ public class Aquaq32 : AquaqPuzzle
 {
     private static readonly Regex ClutterRegex = new("[^\\(\\)\\[\\]\\{\\}]");
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var lines = StringReader.ReadLines(input);
         var result = lines.Count(IsBalanced);

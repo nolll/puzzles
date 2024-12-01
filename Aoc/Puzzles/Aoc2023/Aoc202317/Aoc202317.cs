@@ -7,14 +7,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202317;
 [Name("Clumsy Crucible")]
 public class Aoc202317 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var result = LeastHeatPart1(input);
 
         return new PuzzleResult(result, "cf7fd7c685bf666303ab74ad1d2252e2");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var result = LeastHeatPart2(input);
 

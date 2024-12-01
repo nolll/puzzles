@@ -7,7 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202313;
 [Name("Point of Incidence")]
 public class Aoc202313 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var s = StringReader.ReadStringGroups(input);
         var result = s.Sum(CountReflections);
@@ -15,7 +15,7 @@ public class Aoc202313 : AocPuzzle
         return new PuzzleResult(result, "ee9ffa0006ecc43014e2c3a817904396");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var s = StringReader.ReadStringGroups(input);
         var result = s.Sum(CountSmudgedReflections);

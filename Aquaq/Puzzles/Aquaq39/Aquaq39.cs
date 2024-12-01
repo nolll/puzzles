@@ -8,7 +8,7 @@ public class Aquaq39 : AquaqPuzzle
     private const int GameTarget = 501;
     private const int DartsPerTurn = 3;
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = PlayGame(input);
 

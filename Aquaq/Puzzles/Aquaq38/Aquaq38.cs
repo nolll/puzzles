@@ -6,7 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq38;
 [Name("Number Neighbours")]
 public class Aquaq38 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var indexStreakProvider = new IndexStreakProvider();
         var lists = StringReader.ReadLines(input)

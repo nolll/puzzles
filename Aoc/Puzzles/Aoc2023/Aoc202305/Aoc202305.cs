@@ -7,14 +7,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202305;
 [Comment("Range solution for part 2 inspired by HyperNeutrino")]
 public class Aoc202305 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var result = Part1(input);
 
         return new PuzzleResult(result, "8af1efe2f5bf2d0e78873be92fcd8fff");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var result = Part2(input);
 

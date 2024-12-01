@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202121;
 [Name("Dirac Dice")]
 public class Aoc202121 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var game = new DiracDiceGame();
         var result = game.Play(8, 2);
@@ -13,7 +13,7 @@ public class Aoc202121 : AocPuzzle
         return new PuzzleResult(result.Result, "97097680a3e3bcba7ebb46d172476cd9");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var game = new RealDiracDiceGame();
         var result = game.Play(8, 2);

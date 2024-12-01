@@ -38,7 +38,7 @@ public class Aquaq25 : AquaqPuzzle
 
     private static readonly Dictionary<string, char> MorseToChar = CharToMorse.ToDictionary(k => k.Value, v => v.Key);
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var morse = ClicksToMorse(input);
         var result = DecodeMorse(morse);

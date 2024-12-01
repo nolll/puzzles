@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201917;
 [Name("Set and Forget")]
 public class Aoc201917 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var sc = new ScaffoldingComputer1(input);
         var input2 = sc.Run();
@@ -15,7 +15,7 @@ public class Aoc201917 : AocPuzzle
         return new PuzzleResult(result1, "8e35e428c486ee717b90ef52086fa0d3");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var sc2 = new ScaffoldingComputer2(input);
         var result2 = sc2.Run();

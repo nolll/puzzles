@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler030;
 [Name("Digit fifth powers")]
 public class Euler030 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = Run(5);
 

@@ -7,13 +7,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201623;
 [Comment("Factorial of 12")]
 public class Aoc201623 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var computer = new SafeCrackingComputerPart1(input, 7, 0);
         return new PuzzleResult(computer.ValueA, "11e66781d74c9188561ba3937d053d99");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         // By inspecting output from the computer I realized that it is calculating the factorial of 12
         var computer = new SafeCrackingComputerPart2(input, 12, 0);

@@ -5,14 +5,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201619;
 [Name("An Elephant Named Joseph")]
 public class Aoc201619 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var party = new WhiteElephantParty(int.Parse(input));
         var winner = party.StealFromNextElf();
         return new PuzzleResult(winner, "0ff6e8f1eb200db98926c54e1a1fac6a");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var party = new WhiteElephantParty(int.Parse(input));
         var winner = party.StealFromElfAcrossCircle();

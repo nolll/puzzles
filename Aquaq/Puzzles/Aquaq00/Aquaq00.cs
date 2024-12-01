@@ -6,7 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq00;
 [Name("What's a numpad?")]
 public class Aquaq00 : AquaqPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var keyPresses = StringReader.ReadLines(input)
             .Select(o => o.Trim().Split(' ').ToArray())

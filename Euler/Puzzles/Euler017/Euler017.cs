@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler017;
 [Name("Number letter counts")]
 public class Euler017 : EulerPuzzle
 {
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = Run(1000);
         return new PuzzleResult(result, "96bf6c43cf870a65a7526b18a8d55292");

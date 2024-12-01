@@ -10,7 +10,7 @@ public class Aquaq19 : AquaqPuzzle
     private const char Filled = '#';
     private const char Empty = '.';
 
-    protected override PuzzleResult Run(string input)
+    public PuzzleResult Run(string input)
     {
         var result = StringReader.ReadLines(input)
             .Select(o => RunGame(o, true)).Sum();

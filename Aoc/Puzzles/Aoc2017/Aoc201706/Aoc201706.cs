@@ -5,14 +5,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201706;
 [Name("Memory Reallocation")]
 public class Aoc201706 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var reallocator = new MemoryReallocator(input);
         reallocator.Run();
         return new PuzzleResult(reallocator.Steps, "5cc5e4c13f678b66cbe8e4c449049395");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var reallocator = new MemoryReallocator(input);
         reallocator.Run();

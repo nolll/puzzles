@@ -8,14 +8,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201821;
 [Comment("OpComputer")]
 public class Aoc201821 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var computer = new OpComputer();
         var result = computer.RunSpecialForDay21(input, 0, true);
         return new PuzzleResult(result, "cbaac5c05e7a649e9d578813a7d96c60");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var computer = new OpComputer();
         var result = computer.RunSpecialForDay21(input, 0, false);

@@ -8,14 +8,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202318;
 [Name("Lavaduct Lagoon")]
 public class Aoc202318 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var result = DigPoolPart1(input);
 
         return new PuzzleResult(result, "61347c48a0a4bc715d0c1c2ea446a36e");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var result = DigPoolPart2(input);
 

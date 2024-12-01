@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202312;
 [Name("Hot Springs")]
 public class Aoc202312 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var lines = StringReader.ReadLines(input);
         var counts = lines.Select(o => CombinationCount(o));
@@ -14,7 +14,7 @@ public class Aoc202312 : AocPuzzle
         return new PuzzleResult(counts.Sum(), "ec83138b082ab4da38bb60e88263c52f");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var lines = StringReader.ReadLines(input);
         var counts = lines.Select(o => CombinationCount(o, true));

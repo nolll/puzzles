@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201903;
 [Name("Crossed Wires")]
 public class Aoc201903 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var wirePaths = StringReader.ReadLines(input);
         var wirePathA = wirePaths[0];
@@ -17,7 +17,7 @@ public class Aoc201903 : AocPuzzle
         return new PuzzleResult(distance, "3dbd15d37a682cfa1ca55525a248c184");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var wirePaths = StringReader.ReadLines(input);
         var wirePathA = wirePaths[0];

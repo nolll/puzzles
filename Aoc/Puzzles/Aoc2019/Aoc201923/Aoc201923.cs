@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201923;
 [Name("Category Six")]
 public class Aoc201923 : AocPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public PuzzleResult RunPart1(string input)
     {
         var network = new CategorySixNetwork(input);
         network.Run();
@@ -13,7 +13,7 @@ public class Aoc201923 : AocPuzzle
         return new PuzzleResult(network.FirstNatPacket!.Y, "d95714c17b4e575c231127539580c9ac");
     }
 
-    protected override PuzzleResult RunPart2(string input)
+    public PuzzleResult RunPart2(string input)
     {
         var network = new CategorySixNetwork(input);
         network.Run();

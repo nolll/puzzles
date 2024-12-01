@@ -48,16 +48,8 @@ public class Everybody02(string[] inputs) : EverybodyPuzzle
         return CountRunicSymbols(words.Split(','), s);
     }
     
-    public static int CountRunicSymbols(string[] words, string[] strings)
-    {
-        var count = 0;
-        foreach (var s in strings)
-        {
-            count += CountRunicSymbols(words, s);
-        }
-
-        return count;
-    }
+    public static int CountRunicSymbols(string[] words, string[] strings) => 
+        strings.Sum(s => CountRunicSymbols(words, s));
 
     private static int CountRunicSymbols(string[] words, string s)
     {

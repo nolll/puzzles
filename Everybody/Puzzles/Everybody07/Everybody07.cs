@@ -7,25 +7,7 @@ namespace Pzl.Everybody.Puzzles.Everybody07;
 [Name("Not Fast but Furious")]
 public class Everybody07 : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
-    {
-        var result = Part1(input);
-        return new PuzzleResult(result, "05a999b2ab72fff505423f40ee4af56b");
-    }
-
-    protected override PuzzleResult RunPart2(string input)
-    {
-        var result = Part2(Part2Track, input);
-        return new PuzzleResult(result, "f315ce3865ed329f4eee3ec0d64bb032");
-    }
-
-    protected override PuzzleResult RunPart3(string input)
-    {
-        var result = Part3(Part3Track, input);
-        return new PuzzleResult(result, "2945d46a4a840d740dfe233d50659d0c");
-    }
-
-    public static string Part1(string input)
+    public override PuzzleResult RunPart1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var knights = new List<Knight>();
@@ -37,10 +19,24 @@ public class Everybody07 : EverybodyPuzzle
             knights.Add(new Knight(parts[0], score));
         }
 
-        return string.Join("", knights.OrderByDescending(o => o.Score).Select(o => o.Name));
+        var result = string.Join("", knights.OrderByDescending(o => o.Score).Select(o => o.Name));
+        
+        return new PuzzleResult(result, "05a999b2ab72fff505423f40ee4af56b");
     }
-    
-    public static string Part2(string trackString, string input)
+
+    public override PuzzleResult RunPart2(string input)
+    {
+        var result = Part2(Part2Track, input);
+        return new PuzzleResult(result, "f315ce3865ed329f4eee3ec0d64bb032");
+    }
+
+    public override PuzzleResult RunPart3(string input)
+    {
+        var result = Part3(Part3Track, input);
+        return new PuzzleResult(result, "2945d46a4a840d740dfe233d50659d0c");
+    }
+
+    public string Part2(string trackString, string input)
     {
         const int loopCount = 10;
         

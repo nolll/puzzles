@@ -8,47 +8,42 @@ namespace Pzl.Everybody.Puzzles.Everybody02;
 [Name("The Runes of Power")]
 public class Everybody02 : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public override PuzzleResult RunPart1(string input)
     {
-        var count = CountRunicWords(input);
+        var (words, strings) = ParseWordsAndStrings(input);
+        var count = CountRunicWords(words, strings);
         
         return new PuzzleResult(count, "a95c75956922f6f91c685f01d8548eb1");
     }
-    
-    protected override PuzzleResult RunPart2(string input)
+
+    public override PuzzleResult RunPart2(string input)
     {
-        var count = CountRunicSymbols(input);
+        var (words, strings) = ParseWordsAndStrings(input);
+        var count = CountRunicSymbols(words, strings);
         
         return new PuzzleResult(count, "df79c139a238567f7809c68a9e99d7bc");
     }
-    
-    protected override PuzzleResult RunPart3(string input)
+
+    public override PuzzleResult RunPart3(string input)
     {
-        var count = CountRunicSymbolsInMatrix(input);
+        var (words, strings) = ParseWordsAndStrings(input);
+        var count = CountRunicSymbolsInMatrix(words, strings);
         
         return new PuzzleResult(count, "45b4423987a6cf8c24dba08ecb86fc71");
     }
 
-    private static int CountRunicWords(string input)
+    private static (string[] words, string[] strings) ParseWordsAndStrings(string input)
     {
         var parts = input.Split(LineBreaks.Single, StringSplitOptions.RemoveEmptyEntries);
-        var words = parts.First().Split(':').Last();
-        var s = parts.Last();
-        return CountRunicWords(words.Split(','), [s]);
+        var words = parts.First().Split(':').Last().Split(',');
+        var strings = parts.Skip(1).ToArray();
+        return (words, strings);
     }
-    
-    public static int CountRunicWords(string[] words, string[] strings) => 
+
+    public int CountRunicWords(string[] words, string[] strings) => 
         strings.Sum(s => words.Sum(o => OccurrencesInString(o, s)));
 
-    private static int CountRunicSymbols(string input)
-    {
-        var parts = input.Split(LineBreaks.Single, StringSplitOptions.RemoveEmptyEntries);
-        var words = parts.First().Split(':').Last();
-        var s = parts.Skip(1).ToArray();
-        return CountRunicSymbols(words.Split(','), s);
-    }
-    
-    public static int CountRunicSymbols(string[] words, string[] strings) => 
+    public int CountRunicSymbols(string[] words, string[] strings) => 
         strings.Sum(s => CountRunicSymbols(words, s));
 
     private static int CountRunicSymbols(string[] words, string s)
@@ -65,15 +60,7 @@ public class Everybody02 : EverybodyPuzzle
     private static IEnumerable<int> FindRunicSymbols(string word, string s) => 
         FindMatchingIndices(s, word).Concat(FindMatchingIndices(s, word.ReverseString()));
 
-    private static int CountRunicSymbolsInMatrix(string input)
-    {
-        var parts = input.Split($"{LineBreaks.Single}", StringSplitOptions.RemoveEmptyEntries);
-        var words = parts.First().Split(':').Last();
-        var s = parts.Skip(1).ToArray();
-        return CountRunicSymbolsInMatrix(words.Split(','), s);
-    }
-    
-    public static int CountRunicSymbolsInMatrix(string[] words, string[] rows)
+    public int CountRunicSymbolsInMatrix(string[] words, string[] rows)
     {
         var rowWidth = rows.First().Length;
         var horizontalRows = rows.Select(o => $"{o}{o}").ToList();

@@ -13,6 +13,10 @@
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)' == 'Single' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="*.json" CopyToOutputDirectory="Always" />
   </ItemGroup>

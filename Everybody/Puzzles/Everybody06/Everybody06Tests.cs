@@ -21,14 +21,16 @@ public class Everybody06Tests
     [Test]
     public void Part1()
     {
-        var result = Everybody06.Part1(Input);
-        result.Should().Be("RRB@");
+        var result = Sut.RunPart1(Input);
+        result.Answer.Should().Be("RRB@");
     }
     
     [Test]
     public void Part2And3()
     {
-        var result = Everybody06.Part2And3(Input);
-        result.Should().Be("RB@");
+        var result = Sut.RunPart2(Input);
+        result.Answer.Should().Be("RB@");
     }
+    
+    private static Everybody06 Sut => new();
 }

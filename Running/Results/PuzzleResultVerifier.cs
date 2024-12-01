@@ -3,17 +3,10 @@ using Pzl.Tools.Cryptography;
 
 namespace Pzl.Client.Running.Results;
 
-public class PuzzleResultVerifier
+public class PuzzleResultVerifier(string seed)
 {
-    private readonly string _seed;
-    private readonly bool _isEnabled;
+    private readonly bool _isEnabled = seed != string.Empty;
     private readonly Hashfactory _hashFactory = new();
-
-    public PuzzleResultVerifier(string seed)
-    {
-        _seed = seed;
-        _isEnabled = seed != string.Empty;
-    }
 
     public VerifiedPuzzleResult Verify(PuzzleResult result)
     {
@@ -21,14 +14,14 @@ public class PuzzleResultVerifier
             return new VerifiedPuzzleResult(result, "", PuzzleResultStatus.Unverified);
 
         var hash = GetHash(result.Answer);
-        var status = GetStatus(result.Type, result.Answer, hash, result.CheckHash);
+        var status = GetStatus(result.Type, result.Answer, hash, result.Hash);
         return new VerifiedPuzzleResult(result, hash, status);
     }
 
     private string GetHash(string answer)
     {
         return answer != string.Empty 
-            ? _hashFactory.StringHashFromString($"{_seed}{answer}") 
+            ? _hashFactory.StringHashFromString($"{seed}{answer}") 
             : string.Empty;
     }
 

@@ -15,8 +15,8 @@ public class Everybody09Tests
                              16
                              """;
         
-        var result = Everybody09.Part1(input);
-        result.Should().Be(10);
+        var result = Sut.RunPart1(input);
+        result.Answer.Should().Be("10");
     }
     
     [Test]
@@ -29,7 +29,9 @@ public class Everybody09Tests
                              99
                              """;
         
-        var result = Everybody09.Part2(input);
-        result.Should().Be(10);
+        var result = Sut.RunPart2(input);
+        result.Answer.Should().Be("10");
     }
+    
+    private static Everybody09 Sut => new();
 }

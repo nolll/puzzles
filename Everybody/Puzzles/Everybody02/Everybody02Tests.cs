@@ -13,7 +13,7 @@ public class Everybody02Tests
     {
         string[] words = ["THE", "OWE", "MES", "ROD", "HER"];
 
-        var count = Everybody02.CountRunicWords(words, [input]);
+        var count = Sut.CountRunicWords(words, [input]);
 
         count.Should().Be(expected);
     }
@@ -27,7 +27,7 @@ public class Everybody02Tests
     {
         string[] words = ["THE", "OWE", "MES", "ROD", "HER", "QAQ"];
 
-        var count = Everybody02.CountRunicSymbols(words, [input]);
+        var count = Sut.CountRunicSymbols(words, [input]);
 
         count.Should().Be(expected);
     }
@@ -43,10 +43,12 @@ public class Everybody02Tests
                               TRODEOAL
                               """;
 
-        var count = Everybody02.CountRunicSymbolsInMatrix(words, scales.Split());
+        var count = Sut.CountRunicSymbolsInMatrix(words, scales.Split());
 
         count.Should().Be(10);
     }
+    
+    private static Everybody02 Sut => new();
 }
 
     

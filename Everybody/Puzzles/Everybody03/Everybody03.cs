@@ -7,25 +7,31 @@ namespace Pzl.Everybody.Puzzles.Everybody03;
 [Name("Mining Maestro")]
 public class Everybody03 : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public enum SlopeRule
     {
-        var result = Run(input, false);
-        return new PuzzleResult(result, "f8809d3064586fdc87c819e0caa76093");
+        Orthogonal,
+        Diagonal
     }
     
-    protected override PuzzleResult RunPart2(string input)
+    public override PuzzleResult RunPart1(string input)
     {
-        var result = Run(input, false);
+        var result = Run(input, SlopeRule.Orthogonal);
+        return new PuzzleResult(result, "f8809d3064586fdc87c819e0caa76093");
+    }
+
+    public override PuzzleResult RunPart2(string input)
+    {
+        var result = Run(input, SlopeRule.Orthogonal);
         return new PuzzleResult(result, "d6f8a8bfba935c69e51e8d3249dc7264");
     }
 
-    protected override PuzzleResult RunPart3(string input)
+    public override PuzzleResult RunPart3(string input)
     {
-        var result = Run(input, true);
+        var result = Run(input, SlopeRule.Diagonal);
         return new PuzzleResult(result, "b37fb7a9a2f7e97880544e19b5c4e323");
     }
-    
-    public static int Run(string input, bool includeDiagonal = false)
+
+    private static int Run(string input, SlopeRule slopeRule)
     {
         var charMatrix = MatrixBuilder.BuildCharMatrix(input);
         var matrix = new Matrix<int>(charMatrix.Width, charMatrix.Height);
@@ -41,14 +47,14 @@ public class Everybody03 : EverybodyPuzzle
             }
         }
 
-        var requiredNeighbors = includeDiagonal ? 8 : 4;
+        var requiredNeighbors = slopeRule == SlopeRule.Diagonal ? 8 : 4;
         
         while (coords.Count > 0)
         {
             var nextCoords = new List<MatrixAddress>();
             foreach (var coord in coords)
             {
-                var neighbors = includeDiagonal
+                var neighbors = slopeRule == SlopeRule.Diagonal
                     ? matrix.AllAdjacentValuesTo(coord)
                     : matrix.OrthogonalAdjacentValuesTo(coord);
                 

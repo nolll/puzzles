@@ -15,7 +15,7 @@ public class Everybody04Tests
                              8
                              """;
 
-        Everybody04.RunPart1And2(input).Should().Be(10);
+        Sut.RunPart1(input).Answer.Should().Be("10");
     }
     
     [Test]
@@ -29,6 +29,8 @@ public class Everybody04Tests
                              8
                              """;
 
-        Everybody04.Part3(input).Should().Be(8);
+        Sut.RunPart3(input).Answer.Should().Be("8");
     }
+
+    private static Everybody04 Sut => new();
 }

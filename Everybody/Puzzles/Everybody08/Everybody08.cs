@@ -5,25 +5,7 @@ namespace Pzl.Everybody.Puzzles.Everybody08;
 [Name("A Shrine for Nullpointer")]
 public class Everybody08 : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
-    {
-        var result = Part1(input);
-        return new PuzzleResult(result, "5dbd06d4622464e1becf46096ff400a7");
-    }
-
-    protected override PuzzleResult RunPart2(string input)
-    {
-        var result = Part2(input);
-        return new PuzzleResult(result, "afafe068673279bd495b7ccfc71a0064");
-    }
-
-    protected override PuzzleResult RunPart3(string input)
-    {
-        var result = Part3(input);
-        return new PuzzleResult(result);
-    }
-
-    public static int Part1(string input)
+    public override PuzzleResult RunPart1(string input)
     {
         var availableBlocks = int.Parse(input);
         var level = 1;
@@ -35,10 +17,24 @@ public class Everybody08 : EverybodyPuzzle
             cols.Add(level);
         }
         
-        return (cols.Sum() - availableBlocks) * cols.Last();
+        var result = (cols.Sum() - availableBlocks) * cols.Last();
+        
+        return new PuzzleResult(result, "5dbd06d4622464e1becf46096ff400a7");
     }
 
-    public static long Part2(string input, int availableBlocks = 20240000, int acolyteCount = 1111)
+    public override PuzzleResult RunPart2(string input)
+    {
+        var result = RunPart2(input, 20240000, 1111);
+        return new PuzzleResult(result, "afafe068673279bd495b7ccfc71a0064");
+    }
+
+    public override PuzzleResult RunPart3(string input)
+    {
+        var result = RunPart3(input, 202400000, 10);
+        return new PuzzleResult(result);
+    }
+
+    public long RunPart2(string input, int availableBlocks, int acolyteCount)
     {
         var priestCount = int.Parse(input);
         var thickness = 1;
@@ -59,7 +55,7 @@ public class Everybody08 : EverybodyPuzzle
         return (sum - availableBlocks) * cols.Count;
     }
     
-    public static long Part3(string input, int availableBlocks = 202400000, int acolyteCount = 10)
+    public long RunPart3(string input, int availableBlocks, int acolyteCount)
     {
         var priestCount = int.Parse(input);
         var thickness = 1;

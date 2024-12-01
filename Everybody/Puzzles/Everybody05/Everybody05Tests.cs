@@ -24,7 +24,7 @@ public class Everybody05Tests
                              5 2 3 4
                              """;
 
-        Everybody05.RunPart1(input, rounds).Should().Be(expected);
+        Sut.RunPart1(input, rounds).Should().Be(expected);
     }
     
     [Test]
@@ -35,7 +35,7 @@ public class Everybody05Tests
                              6 7 8 9
                              """;
 
-        Everybody05.RunPart2(input, 2024).Should().Be(50877075);
+        Sut.RunPart2(input, 2024).Should().Be(50877075);
     }
     
     [Test]
@@ -46,6 +46,8 @@ public class Everybody05Tests
                              6 7 8 9
                              """;
 
-        Everybody05.Part3(input).Should().Be(6584);
+        Sut.RunPart3(input).Answer.Should().Be("6584");
     }
+
+    private static Everybody05 Sut => new();
 }

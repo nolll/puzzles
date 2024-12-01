@@ -6,26 +6,9 @@ namespace Pzl.Everybody.Puzzles.Everybody09;
 [Name("")]
 public class Everybody09 : EverybodyPuzzle
 {
-    protected override PuzzleResult RunPart1(string input)
+    public override PuzzleResult RunPart1(string input)
     {
-        var result = Part1(input);
-        return new PuzzleResult(result, "dffa64bee7ea0c0ad66724de7afe7c08");
-    }
-
-    protected override PuzzleResult RunPart2(string input)
-    {
-        var result = Part2(input);
-        return new PuzzleResult(result, "6032109447891782512325cb9251f9e2");
-    }
-
-    protected override PuzzleResult RunPart3(string input)
-    {
-        return PuzzleResult.Empty;
-    }
-    
-    public static int Part1(string input)
-    {
-        var balls = input.Split(LineBreaks.Single).Select(int.Parse).ToArray();
+        var balls = ParseBalls(input);
         int[] stamps = [1, 3, 5, 10];
         var beetleCounts = new List<int>();
         
@@ -56,24 +39,14 @@ public class Everybody09 : EverybodyPuzzle
             beetleCounts.Add(beetleCount);
         }
 
-        return beetleCounts.Sum();
+        var result = beetleCounts.Sum();
+        
+        return new PuzzleResult(result, "dffa64bee7ea0c0ad66724de7afe7c08");
     }
 
-    private class ShortestCombination
+    public override PuzzleResult RunPart2(string input)
     {
-        public int Length { get; set; } = int.MaxValue;
-
-        public void Report(List<int> combination)
-        {
-            var count = combination.Count;
-            if (count < Length)
-                Length = count;
-        }
-    }
-    
-    public static int Part2(string input)
-    {
-        var balls = input.Split(LineBreaks.Single).Select(int.Parse).ToArray();
+        var balls = ParseBalls(input);
         int[] stamps = [1, 3, 5, 10, 15, 16, 20, 24, 25, 30];
         var orderedStamps = stamps.OrderDescending().ToList();
         var stampSum = stamps.Sum();
@@ -95,9 +68,30 @@ public class Everybody09 : EverybodyPuzzle
             results.Add((ball, shortestSolution));
         }
         
-        return results.Sum(o => o.Item2.Count);
+        var result = results.Sum(o => o.Item2.Count);
+        
+        return new PuzzleResult(result, "6032109447891782512325cb9251f9e2");
     }
 
+    public override PuzzleResult RunPart3(string input)
+    {
+        return PuzzleResult.Empty;
+    }
+    
+    private static int[] ParseBalls(string input) => 
+        input.Split(LineBreaks.Single).Select(int.Parse).ToArray();
+
+    private class ShortestCombination
+    {
+        public int Length { get; set; } = int.MaxValue;
+
+        public void Report(List<int> combination)
+        {
+            var count = combination.Count;
+            if (count < Length)
+                Length = count;
+        }
+    }
     
     private static List<List<int>> GetCombinations(
         IReadOnlyCollection<int> denominations, 

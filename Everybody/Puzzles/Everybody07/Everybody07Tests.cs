@@ -15,7 +15,7 @@ public class Everybody07Tests
                              D:=,=,=,+
                              """;
 
-        Everybody07.Part1(input).Should().Be("BDCA");
+        Sut.RunPart1(input).Answer.Should().Be("BDCA");
     }
     
     [Test]
@@ -34,6 +34,8 @@ public class Everybody07Tests
                              D:=,=,=,+
                              """;
 
-        Everybody07.Part2(track, input).Should().Be("DCBA");
+        Sut.Part2(track, input).Should().Be("DCBA");
     }
+    
+    private static Everybody07 Sut => new();
 }

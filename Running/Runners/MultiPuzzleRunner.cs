@@ -1,4 +1,4 @@
-using Pzl.Client.Running.Results;
+﻿using Pzl.Client.Running.Results;
 using Pzl.Common;
 using Spectre.Console;
 
@@ -15,7 +15,7 @@ public class MultiPuzzleRunner
     private readonly TimeSpan _timeoutTimespan;
     private readonly PuzzleResultVerifier _resultVerifier;
 
-    public MultiPuzzleRunner(List<PuzzleDefinition> puzzles, int timeoutSeconds, string hashSeed, bool isDebugMode)
+    public MultiPuzzleRunner(List<PuzzleDefinition> puzzles, int timeoutSeconds, string hashSeed)
     {
         _definitions = puzzles;
         _funcCount = _definitions.Max(o => o.NumberOfParts);

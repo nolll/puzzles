@@ -1,4 +1,4 @@
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Pzl.Client.Formatting;
 using Pzl.Client.Running.Results;
@@ -64,8 +64,11 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
 
     private static void WriteHeader(PuzzleDefinition puzzle)
     {
-        AnsiConsole.WriteLine($"{puzzle.Title}:");
-        AnsiConsole.WriteLine(puzzle.Name);
+        AnsiConsole.WriteLine($"{puzzle.Title}");
+        
+        if (!string.IsNullOrEmpty(puzzle.Name))
+            AnsiConsole.WriteLine(puzzle.Name);
+        
         if (puzzle.Comment is not null)
             AnsiConsole.MarkupLine($"[yellow]{puzzle.Comment}[/]");
     }

@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201617;
 
 public class LockedDoorMaze
 {
-    private readonly Hashfactory _hashFactory;
+    private readonly HashFactory _hashFactory;
     private readonly MatrixAddress _target;
 
     public string? ShortestPath { get; private set; }
@@ -13,7 +13,7 @@ public class LockedDoorMaze
 
     public LockedDoorMaze()
     {
-        _hashFactory = new Hashfactory();
+        _hashFactory = new HashFactory();
         _target = new MatrixAddress(3, 3);
     }
 

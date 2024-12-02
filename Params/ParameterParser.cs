@@ -31,13 +31,13 @@ public class ParameterParser(IEnumerable<string> args)
         return target;
     }
 
-    public List<string> GetListValue(params string[] keys)
+    public string[] GetListValue(params string[] keys)
     {
         var val = GetValue(keys);
         if (val == null)
-            return new List<string>();
+            return [];
 
-        return val.Split(',').ToList();
+        return val.Split(',').ToArray();
     }
 
     public string? GetValue(params string[] keys)
@@ -47,9 +47,7 @@ public class ParameterParser(IEnumerable<string> args)
             if (!_dictionary.ContainsKey(key))
                 continue;
 
-            return _dictionary.TryGetValue(key, out var val)
-                ? val 
-                : "";
+            return _dictionary.GetValueOrDefault(key, "");
         }
 
         return null;
@@ -67,14 +65,9 @@ public class ParameterParser(IEnumerable<string> args)
             var hasValue = !value?.StartsWith("-") ?? false;
             value = hasValue ? value : "";
             if (isKeyword)
-            {
                 dictionary.Add(item, value);
-            }
-
-            if (hasValue)
-            {
+            if (hasValue) 
                 i++;
-            }
         }
 
         return dictionary;

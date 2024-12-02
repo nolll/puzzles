@@ -3,15 +3,14 @@ using Pzl.Tools.Cryptography;
 
 namespace Pzl.Client.Running.Results;
 
-public class PuzzleResultVerifier(string seed)
+public class ResultVerifier(HashFactory hashFactory, string seed)
 {
     private readonly bool _isEnabled = seed != string.Empty;
-    private readonly Hashfactory _hashFactory = new();
 
     public VerifiedPuzzleResult Verify(PuzzleResult result)
     {
         if (!_isEnabled)
-            return new VerifiedPuzzleResult(result, "", PuzzleResultStatus.Unverified);
+            return new VerifiedPuzzleResult(result, "", ResultStatus.Unverified);
 
         var hash = GetHash(result.Answer);
         var status = GetStatus(result.Type, result.Answer, hash, result.Hash);
@@ -21,27 +20,27 @@ public class PuzzleResultVerifier(string seed)
     private string GetHash(string answer)
     {
         return answer != string.Empty 
-            ? _hashFactory.StringHashFromString($"{seed}{answer}") 
+            ? hashFactory.StringHashFromString($"{seed}{answer}") 
             : string.Empty;
     }
 
-    private static PuzzleResultStatus GetStatus(
+    private static ResultStatus GetStatus(
         PuzzleType type, 
         string? answer, 
         string answerHash,
         string? checkHash)
     {
         if (type is PuzzleType.Empty)
-            return PuzzleResultStatus.Missing;
+            return ResultStatus.Missing;
 
         if (answer is null)
-            return PuzzleResultStatus.Wrong;
+            return ResultStatus.Wrong;
         
         if (checkHash is not null)
             return answerHash == checkHash
-                ? PuzzleResultStatus.Correct
-                : PuzzleResultStatus.Wrong;
+                ? ResultStatus.Correct
+                : ResultStatus.Wrong;
 
-        return PuzzleResultStatus.Completed;
+        return ResultStatus.Completed;
     }
 }

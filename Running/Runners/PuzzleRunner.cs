@@ -1,9 +1,15 @@
+using Pzl.Client.Debugging;
+using Pzl.Client.Running.Results;
 using Pzl.Common;
 using Spectre.Console;
 
 namespace Pzl.Client.Running.Runners;
 
-public class PuzzleRunner(int puzzleTimeout, string hashSeed, bool isDebugMode)
+public class PuzzleRunner(
+    PuzzleFactory puzzleFactory, 
+    ResultVerifier resultVerifier, 
+    int puzzleTimeout, 
+    RunMode runMode)
 {
     public void Run(List<PuzzleDefinition> puzzles)
     {
@@ -13,10 +19,10 @@ public class PuzzleRunner(int puzzleTimeout, string hashSeed, bool isDebugMode)
                 AnsiConsole.WriteLine("No puzzles found.");
                 break;
             case 1:
-                new StandaloneSinglePuzzleRunner(puzzles.First(), hashSeed, isDebugMode).Run();
+                new StandaloneSinglePuzzleRunner(puzzleFactory, resultVerifier, puzzles.First(), runMode).Run();
                 break;
             default:
-                new MultiPuzzleRunner(puzzles, puzzleTimeout, hashSeed).Run();
+                new MultiPuzzleRunner(puzzleFactory, resultVerifier, puzzles, puzzleTimeout).Run();
                 break;
         }
     }

@@ -65,9 +65,7 @@ public class PuzzleDefinitionInTest(
     string? name = null,
     string? comment = null,
     int? numberOfParts = null,
-    bool? hasUniqueInputsPerPart = null,
-    string? commonFile = null,
-    string? localFile = null)
+    bool? hasUniqueInputsPerPart = null)
     : PuzzleDefinition(typeof(Puzzle),
         tags ?? [],
         sortId ?? "",
@@ -76,9 +74,7 @@ public class PuzzleDefinitionInTest(
         name ?? "",
         comment,
         numberOfParts ?? 1,
-        hasUniqueInputsPerPart ?? false,
-        commonFile,
-        localFile);
+        hasUniqueInputsPerPart ?? false);
 
 public class PlainPuzzleDefinitionInTest() : PuzzleDefinitionInTest(name: "Plain Puzzle");
 

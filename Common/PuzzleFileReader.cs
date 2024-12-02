@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Pzl.Common;
 
-public static class FileReader
+public class FileReader
 {
     private static string[] PuzzlePathParts(Type t) => t.FullName!.Split('.').Skip(2).ToArray();
 
-    public static string[] ReadInputs(PuzzleDefinition definition)
+    public string[] ReadInputs(PuzzleDefinition definition)
     {
         if(definition.HasUniqueInputsPerPart)
         {
@@ -23,7 +23,7 @@ public static class FileReader
         return [ReadInput(definition.Type)];
     }
     
-    public static string ReadAdditionalFile(Type t, MethodInfo method)
+    public string ReadAdditionalFile(Type t, MethodInfo method)
     {
         var commonFile = GetAdditionalCommonInputFile(method);
         if (commonFile is not null)
@@ -60,7 +60,7 @@ public static class FileReader
         return s;
     }
 
-    public static string ReadCommon(string fileName)
+    public string ReadCommon(string fileName)
     {
         var parts = new List<string>
         {
@@ -71,7 +71,7 @@ public static class FileReader
         return ReadTextFile(filePath);
     }
 
-    public static string ReadLocal(Type t, string fileName)
+    public string ReadLocal(Type t, string fileName)
     {
         var parts = PuzzlePathParts(t).SkipLast(1).ToList();
         parts.Add(fileName);

@@ -4,10 +4,12 @@ using Pzl.Client.Debugging;
 using Pzl.Client.Filter;
 using Pzl.Client.Help;
 using Pzl.Client.Params;
+using Pzl.Client.Running.Results;
 using Pzl.Client.Running.Runners;
 using Pzl.Common;
 using Pzl.Euler;
 using Pzl.Everybody;
+using Pzl.Tools.Cryptography;
 using Spectre.Console;
 
 namespace Pzl.Client;
@@ -17,7 +19,7 @@ public class PuzzleProgram
     private readonly PuzzleRepository _puzzleRepository;
     private readonly HelpPrinter _helpPrinter;
     private readonly PuzzleRunner _runner;
-    private readonly string _debugTags;
+    private readonly ParameterProvider _parameterProvider;
 
     public PuzzleProgram(Options options)
     {
@@ -29,24 +31,31 @@ public class PuzzleProgram
             new EverybodyPuzzleProvider(),
         };
 
+        var fileReader = new FileReader();
+        var puzzleFactory = new PuzzleFactory(fileReader);
+        var hashFactory = new HashFactory();
+        var resultVerifier = new ResultVerifier(hashFactory, options.HashSeed);
+        var runMode = new RunMode();
+        _parameterProvider = new ParameterProvider(runMode, options.DebugTags);
         _puzzleRepository = new PuzzleRepository(puzzleProviders);
         _helpPrinter = new HelpPrinter();
-        _runner = new PuzzleRunner(options.TimeoutSeconds, options.HashSeed, DebugMode.IsDebugMode);
-        _debugTags = options.DebugTags;
+        _runner = new PuzzleRunner(puzzleFactory, resultVerifier, options.TimeoutSeconds, runMode);
     }
 
-    public void Run(IEnumerable<string> args)
-    {
-        var parameters = ParseParameters(args);
+    public void Run(IEnumerable<string> args) => Run(_parameterProvider.GetParameters(args));
 
+    private void Run(Parameters parameters)
+    {
         if (parameters.ShowHelp)
-            _helpPrinter.Print();
+            Print();
         else if (parameters.Query is not null)
             Search(parameters.Query);
         else
             RunPuzzles(parameters);
     }
     
+    private void Print() => _helpPrinter.Print();
+
     private void RunPuzzles(Parameters parameters)
     {
         var puzzles = _puzzleRepository.GetPuzzles();
@@ -66,11 +75,14 @@ public class PuzzleProgram
             AnsiConsole.WriteLine($"{puzzle.Title}: {puzzle.Name}");
         }
     }
+}
 
-    private Parameters ParseParameters(IEnumerable<string> args) =>
-        DebugMode.IsDebugMode
+public class ParameterProvider(RunMode runMode, string debugTags)
+{
+    public Parameters GetParameters(IEnumerable<string> args) =>
+        runMode.IsDebug
             ? DebugParameters
             : Parameters.Parse(args);
 
-    private Parameters DebugParameters => new(tags: _debugTags.Split(',').ToList());
+    private Parameters DebugParameters => new(tags: debugTags.Split(',').ToArray());
 }

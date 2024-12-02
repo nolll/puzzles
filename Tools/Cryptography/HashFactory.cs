@@ -4,7 +4,7 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Tools.Cryptography;
 
-public class Hashfactory
+public class HashFactory
 {
     private readonly MD5 _md5 = MD5.Create();
 

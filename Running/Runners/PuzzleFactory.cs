@@ -2,9 +2,9 @@ using Pzl.Common;
 
 namespace Pzl.Client.Running.Runners;
 
-public static class PuzzleFactory
+public class PuzzleFactory(FileReader fileReader)
 {
-    public static PuzzleInstance CreateInstance(PuzzleDefinition definition)
+    public PuzzleInstance CreateInstance(PuzzleDefinition definition)
     {
         var ctor = definition.Type.GetConstructors().First();
 
@@ -16,7 +16,7 @@ public static class PuzzleFactory
             .OrderBy(o => o.Name)
             .ToArray();
         
-        var inputs = FileReader.ReadInputs(definition);
+        var inputs = fileReader.ReadInputs(definition);
 
         var funcs = new List<PuzzleFunction>();
         for (var i = 0; i < methods.Length; i++)
@@ -29,7 +29,7 @@ public static class PuzzleFactory
             object[] parameters = [input];
             if (method.GetParameters().Length > 1)
             {
-                var additionalInput = FileReader.ReadAdditionalFile(definition.Type, method);
+                var additionalInput = fileReader.ReadAdditionalFile(definition.Type, method);
                 if(!string.IsNullOrEmpty(additionalInput))
                     parameters = [.. inputs, additionalInput];
             }

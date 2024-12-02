@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
 
 public class KeyGenerator
 {
-    private readonly Hashfactory _hashFactory;
+    private readonly HashFactory _hashFactory;
     private readonly IDictionary<int, byte[]> _hashes;
     private readonly IDictionary<byte, byte[]> _byteCache;
     private readonly IDictionary<int, byte?> _repeatingByteCache;
@@ -14,7 +14,7 @@ public class KeyGenerator
 
     public KeyGenerator()
     {
-        _hashFactory = new Hashfactory();
+        _hashFactory = new HashFactory();
         _hashes = new Dictionary<int, byte[]>();
         _byteCache = BuildByteCache();
         _repeatingByteCache = new Dictionary<int, byte?>();

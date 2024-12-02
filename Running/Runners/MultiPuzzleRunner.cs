@@ -10,17 +10,23 @@ public class MultiPuzzleRunner
     private const int ResultLength = 10;
     private const int CommentLength = 24;
 
+    private readonly PuzzleFactory _puzzleFactory;
     private readonly List<PuzzleDefinition> _definitions;
     private readonly int _funcCount;
     private readonly TimeSpan _timeoutTimespan;
-    private readonly PuzzleResultVerifier _resultVerifier;
+    private readonly ResultVerifier _resultVerifier;
 
-    public MultiPuzzleRunner(List<PuzzleDefinition> puzzles, int timeoutSeconds, string hashSeed)
+    public MultiPuzzleRunner(
+        PuzzleFactory puzzleFactory, 
+        ResultVerifier resultVerifier,
+        List<PuzzleDefinition> puzzles, 
+        int timeoutSeconds)
     {
+        _puzzleFactory = puzzleFactory;
         _definitions = puzzles;
         _funcCount = _definitions.Max(o => o.NumberOfParts);
         _timeoutTimespan = TimeSpan.FromSeconds(timeoutSeconds);
-        _resultVerifier = new PuzzleResultVerifier(hashSeed);
+        _resultVerifier = resultVerifier;
     }
 
     public void Run()
@@ -31,6 +37,7 @@ public class MultiPuzzleRunner
         foreach (var puzzle in _definitions)
         {
             new InSequenceSinglePuzzleRunner(
+                _puzzleFactory,
                 puzzle, 
                 _timeoutTimespan, 
                 _resultVerifier,

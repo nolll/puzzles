@@ -1,4 +1,4 @@
-using Pzl.Tools.Cryptography;
+﻿using Pzl.Tools.Cryptography;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201504;
 
@@ -7,7 +7,7 @@ public class AdventCoinMiner
     public static int Mine(string key, int leadingZeros, int startIndex = 1)
     {
         var index = startIndex;
-        var hashFactory = new Hashfactory();
+        var hashFactory = new HashFactory();
         var isCoinFound = GetCompareFunc(leadingZeros);
         while (true)
         {

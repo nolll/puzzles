@@ -1,6 +1,6 @@
 namespace Pzl.Client.Running.Results;
 
-public enum PuzzleResultStatus
+public enum ResultStatus
 {
     Correct,
     Completed,

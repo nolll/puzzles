@@ -12,8 +12,6 @@ public class PuzzleData
     public bool IsFunToOptimize { get; }
     public int NumberOfParts { get; }
     public bool HasUniqueInputsPerPart { get; }
-    public string? CommonFile { get; }
-    public string? LocalFile { get; }
 
     public PuzzleData(
         Type type, 
@@ -23,9 +21,7 @@ public class PuzzleData
         bool needsRewrite, 
         bool isFunToOptimize,
         int numberOfParts,
-        bool hasUniqueInputsPerPart,
-        string? commonFile,
-        string? localFile)
+        bool hasUniqueInputsPerPart)
     {
         Type = type;
         Name = name;
@@ -35,7 +31,5 @@ public class PuzzleData
         IsFunToOptimize = isFunToOptimize;
         NumberOfParts = numberOfParts;
         HasUniqueInputsPerPart = hasUniqueInputsPerPart;
-        CommonFile = commonFile;
-        LocalFile = localFile;
     }
 }

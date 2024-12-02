@@ -1,8 +1,8 @@
 namespace Pzl.Client.Debugging;
 
-public static class DebugMode
+public class RunMode
 {
-    public static bool IsDebugMode
+    public bool IsDebug
     {
         get
         {

@@ -10,9 +10,10 @@ namespace Pzl.Client.Running.Runners;
 
 public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 {
+    private readonly PuzzleFactory _puzzleFactory;
     private readonly PuzzleDefinition _definition;
     private readonly TimeSpan _timeoutTimespan;
-    private readonly PuzzleResultVerifier _resultVerifier;
+    private readonly ResultVerifier _resultVerifier;
     private readonly int _resultLength;
     private readonly int _commentLength;
     private readonly int _truncatedCommentLength;
@@ -21,14 +22,16 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     private readonly string[] _markups;
 
     public InSequenceSinglePuzzleRunner(
+        PuzzleFactory puzzleFactory,
         PuzzleDefinition puzzle, 
         TimeSpan timeoutTimespan, 
-        PuzzleResultVerifier resultVerifier,
+        ResultVerifier resultVerifier,
         int titleWidth,
         int resultWidth,
         int commentWidth,
         int maxFuncCount)
     {
+        _puzzleFactory = puzzleFactory;
         _definition = puzzle;
         _timeoutTimespan = timeoutTimespan;
         _resultVerifier = resultVerifier;
@@ -47,7 +50,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     public void Run()
     {
         PrintRow();
-        var instance = PuzzleFactory.CreateInstance(_definition);
+        var instance = _puzzleFactory.CreateInstance(_definition);
 
         for (var i = 0; i < instance.Funcs.Length; i++)
         {
@@ -60,7 +63,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 
     private void RunPart(Func<PuzzleResult> runFunc, int index)
     {
-        var status = PuzzleResultStatus.Missing;
+        var status = ResultStatus.Missing;
         var timer = new Timer();
         var time = TimeSpan.Zero;
         var waited = false;
@@ -71,7 +74,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
             if (timer.FromStart >= _timeoutTimespan)
             {
                 cancellation.Cancel();
-                status = PuzzleResultStatus.Timeout;
+                status = ResultStatus.Timeout;
                 break;
             }
 
@@ -82,7 +85,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
             Thread.Sleep(ProgressWaitTime);
         }
 
-        status = task.IsFaulted ? PuzzleResultStatus.Failed : status;
+        status = task.IsFaulted ? ResultStatus.Failed : status;
         time = waited ? time : timer.FromStart;
         UpdateResult(index, MarkupTime(time, status));
         PrintRow();
@@ -90,19 +93,19 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 
     private void UpdateResult(int index, string markup) => _markups[index] = markup;
 
-    private string MarkupTime(TimeSpan time, PuzzleResultStatus status)
+    private string MarkupTime(TimeSpan time, ResultStatus status)
     {
         return status switch
         {
-            PuzzleResultStatus.Correct =>
+            ResultStatus.Correct =>
                 MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Green),
-            PuzzleResultStatus.Failed or PuzzleResultStatus.Wrong => 
+            ResultStatus.Failed or ResultStatus.Wrong => 
                 MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red),
-            PuzzleResultStatus.Missing =>
+            ResultStatus.Missing =>
                 MarkupColor(PadResult(""), Color.Grey),
-            PuzzleResultStatus.Timeout => 
+            ResultStatus.Timeout => 
                 MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
-            PuzzleResultStatus.Completed or PuzzleResultStatus.Unverified => 
+            ResultStatus.Completed or ResultStatus.Unverified => 
                 MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Yellow),
             _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
         };

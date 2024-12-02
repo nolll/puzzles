@@ -1,20 +1,13 @@
 namespace Pzl.Client.Params;
 
-public class Parameters
+public class Parameters(
+    string[]? tags = null,
+    string? query = null,
+    bool showHelp = false)
 {
-    public List<string> Tags { get; }
-    public string? Query { get; }
-    public bool ShowHelp { get; }
-
-    public Parameters(
-        List<string>? tags = null,
-        string? query = null,
-        bool showHelp = false)
-    {
-        Tags = tags ?? new List<string>();
-        Query = query;
-        ShowHelp = showHelp;
-    }
+    public string[] Tags { get; } = tags ?? [];
+    public string? Query { get; } = query;
+    public bool ShowHelp { get; } = showHelp;
 
     public static Parameters Parse(IEnumerable<string> args)
     {
@@ -26,8 +19,5 @@ public class Parameters
         return new Parameters(tags, query, showHelp);
     }
 
-    public static Parameters Parse(string args)
-    {
-        return Parse(args.Split(' '));
-    }
+    public static Parameters Parse(string args) => Parse(args.Split(' '));
 }

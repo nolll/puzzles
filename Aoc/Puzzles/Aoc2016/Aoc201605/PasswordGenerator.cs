@@ -17,7 +17,7 @@ public class PasswordGenerator
 
     public string Generate1(string key)
     {
-        var hashFactory = new Hashfactory();
+        var hashFactory = new HashFactory();
         var pwd = new StringBuilder();
         while (pwd.Length < 8)
         {
@@ -38,7 +38,7 @@ public class PasswordGenerator
         
     public string Generate2(string key)
     {
-        var hashFactory = new Hashfactory();
+        var hashFactory = new HashFactory();
         const int pwdLength = 8;
         var pwdArray = new char[pwdLength];
 

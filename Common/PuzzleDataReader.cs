@@ -21,8 +21,7 @@ public static class PuzzleDataReader
         var isFunToOptimize = IsFunToOptimize(type);
         var numberOfParts = GetNumberOfParts(type);
         var hasUniqueInputsPerPart = HasUniqueInputsForParts(type);
-        var commonFile = GetAdditionalCommonInputFile(type);
-        var localFile = GetAdditionalLocalInputFile(type);
+
         return new PuzzleData(
             type,
             name,
@@ -31,9 +30,7 @@ public static class PuzzleDataReader
             needsRewrite,
             isFunToOptimize,
             numberOfParts,
-            hasUniqueInputsPerPart,
-            commonFile,
-            localFile);
+            hasUniqueInputsPerPart);
     }
 
     private static string GetName(MemberInfo type) =>
@@ -56,12 +53,6 @@ public static class PuzzleDataReader
     
     private static bool HasUniqueInputsForParts(MemberInfo type) =>
         type.GetCustomAttribute<HasUniqueInputsForParts>(true) is not null;
-    
-    private static string? GetAdditionalCommonInputFile(MemberInfo type) =>
-        type.GetCustomAttribute<AdditionalCommonInputFileAttribute>(false)?.FileName;
-
-    private static string? GetAdditionalLocalInputFile(MemberInfo type) =>
-        type.GetCustomAttribute<AdditionalLocalInputFileAttribute>(false)?.FileName;
 
     private static IEnumerable<Type> GetConcreteSubclassesOf<T>() where T : class =>
         Assembly

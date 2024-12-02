@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Pzl.Common;
@@ -22,19 +23,26 @@ public static class FileReader
         return [ReadInput(definition.Type)];
     }
     
-    public static object ReadInputsAsObject(PuzzleDefinition definition)
+    public static string ReadAdditionalFile(Type t, MethodInfo method)
     {
-        if(definition.HasUniqueInputsPerPart)
-        {
-            return Enumerable.Range(0, definition.NumberOfParts)
-                .Select(o => ReadPartInput(definition.Type, o + 1))
-                .ToArray();
-        }
-        
-        return ReadInput(definition.Type);
+        var commonFile = GetAdditionalCommonInputFile(method);
+        if (commonFile is not null)
+            return ReadCommon(commonFile);
+
+        var localFile = GetAdditionalLocalInputFile(method);
+        if (localFile is not null)
+            return ReadLocal(t, localFile);
+
+        return "";
     }
     
-    public static string ReadInput(Type t)
+    private static string? GetAdditionalCommonInputFile(MethodInfo method) =>
+        method.GetCustomAttribute<AdditionalCommonInputFileAttribute>(false)?.FileName;
+    
+    private static string? GetAdditionalLocalInputFile(MethodInfo method) =>
+        method.GetCustomAttribute<AdditionalLocalInputFileAttribute>(false)?.FileName;
+
+    private static string ReadInput(Type t)
     {
         var path  = Path.Combine(PuzzlePathParts(t));
         var inputFilePath = $"{path}.txt";
@@ -42,8 +50,8 @@ public static class FileReader
 
         return s;
     }
-    
-    public static string ReadPartInput(Type t, int part)
+
+    private static string ReadPartInput(Type t, int part)
     {
         var path  = Path.Combine(PuzzlePathParts(t));
         var inputFilePath = $"{path}-{part}.txt";

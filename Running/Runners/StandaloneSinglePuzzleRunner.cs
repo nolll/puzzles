@@ -41,19 +41,23 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         
         var inputs = FileReader.ReadInputs(_definition);
         var instance = PuzzleFactory.CreateInstance(_definition);
-        var funcs = _definition.Type.GetMethods()
-            .Where(o => o is { IsPublic: true, IsStatic: false } && o.ReturnType == typeof(PuzzleResult))
-            .OrderBy(o => o.Name)
-            .ToArray();
         
-        for (var i = 0; i < funcs.Length; i++)
+        for (var i = 0; i < instance.Funcs.Length; i++)
         {
+            var func = instance.Funcs[i];
             var input = _definition.HasUniqueInputsPerPart
                 ? inputs[i]
                 : inputs[0];
+            
+            string[] p = [input];
+            if (func.ParameterCount > 1)
+            {
+                var additionalInput = FileReader.ReadAdditionalFile(_definition.Type, func.Method);
+                p = [.. inputs, additionalInput];
+            }
 
             AnsiConsole.WriteLine();
-            RunAndPrintPuzzleResult(i + 1, instance, funcs[i], input);
+            RunAndPrintPuzzleResult(i + 1, func, p);
         }
 
         AnsiConsole.Cursor.Show(true);
@@ -64,21 +68,22 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         WriteHeader(_definition);
         var inputs = FileReader.ReadInputs(_definition);
         var instance = PuzzleFactory.CreateInstance(_definition);
-        var funcs = _definition.Type.GetMethods()
-            .Where(o => o is { IsPublic: true, IsStatic: false } && o.ReturnType == typeof(PuzzleResult))
-            .OrderBy(o => o.Name)
-            .ToArray();
         
-        for (var i = 0; i < funcs.Length; i++)
+        for (var i = 0; i < instance.Funcs.Length; i++)
         {
+            var func = instance.Funcs[i];
             var input = _definition.HasUniqueInputsPerPart
                 ? inputs[i]
                 : inputs[0];
-            var result = funcs[i].Invoke(instance, [input]);
-            if (result is not PuzzleResult puzzleResult)
-                throw new Exception("Function did not return a PuzzleResult");
-            
-            AnsiConsole.WriteLine(puzzleResult.Answer);
+            object[] p = [input];
+            if (func.ParameterCount > 1)
+            {
+                var additionalInput = FileReader.ReadAdditionalFile(_definition.Type, func.Method);
+                p = [.. inputs, additionalInput];
+            }
+            var result = func.Invoke(p);
+
+            AnsiConsole.WriteLine(result.Answer);
         }
     }
 
@@ -93,24 +98,22 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
             AnsiConsole.MarkupLine($"[yellow]{puzzle.Comment}[/]");
     }
     
-    private void RunAndPrintPuzzleResult(int puzzleIndex, Puzzle puzzle, MethodInfo func, string input)
+    private void RunAndPrintPuzzleResult(int puzzleIndex, PuzzleFunction func, string[] inputs)
     {
-        var result = RunPuzzle(puzzleIndex, puzzle, func, input);
+        var result = RunPuzzle(puzzleIndex, func, inputs);
         AnsiConsole.WriteLine();
         WriteAnswer(result);
     }
     
-    private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, Puzzle puzzle, MethodInfo func, string input)
+    private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, PuzzleFunction func, string[] inputs)
     {
         PuzzleResult? result = null;
         PrintTime(puzzleIndex);
         var timer = new Timer();
         
         var task = Task.Run(() =>
-        {
-            var obj = func.Invoke(puzzle, [input]);
-            if (obj is PuzzleResult puzzleResult)
-                result = puzzleResult;
+        { 
+            result = func.Invoke(inputs.Select(object (o) => o).ToArray());
         });
         
         while (!task.IsCompleted)

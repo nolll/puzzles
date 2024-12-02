@@ -4,11 +4,11 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq35;
 
-[AdditionalCommonInputFile("Words.txt")]
 [Name("Columns")]
-public class Aquaq35(string additionalInput) : AquaqPuzzle
+public class Aquaq35 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [AdditionalCommonInputFile("Words.txt")]
+    public PuzzleResult Run(string input, string additionalInput)
     {
         var words = StringReader.ReadLines(additionalInput);
 

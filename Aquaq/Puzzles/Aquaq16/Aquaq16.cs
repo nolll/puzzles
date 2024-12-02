@@ -3,23 +3,23 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq16;
 
-[AdditionalLocalInputFile("Alphabet.txt")]
 [Name("Keming")]
-public class Aquaq16(string additionalInput) : AquaqPuzzle
+public class Aquaq16 : AquaqPuzzle
 {
     private const int LetterHeight = 6;
 
-    public PuzzleResult Run(string input)
+    [AdditionalLocalInputFile("Alphabet.txt")]
+    public PuzzleResult Run(string input, string additionalInput)
     {
-        return new PuzzleResult(RunInternal(input), "b900eb74f94c2243de65005bcc4ebd2c");
+        return new PuzzleResult(RunInternal(input, additionalInput), "b900eb74f94c2243de65005bcc4ebd2c");
     }
     
-    public int RunInternal(string input2)
+    public int RunInternal(string input, string additionalInput)
     {
         var alphabet = ParseLetters(additionalInput)
             .ToDictionary(k => k.Character, v => v);
 
-        var letters = input2.ToCharArray().Select(o => alphabet[o]).ToArray();
+        var letters = input.ToCharArray().Select(o => alphabet[o]).ToArray();
         var spaceCount = 0;
         for (var i = 0; i < letters.Length - 1; i++)
         {

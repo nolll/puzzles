@@ -49,25 +49,22 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
         PrintRow();
         var inputs = FileReader.ReadInputs(_definition);
         var instance = PuzzleFactory.CreateInstance(_definition);
-        var funcs = _definition.Type.GetMethods()
-            .Where(o => o is { IsPublic: true, IsStatic: false } && o.ReturnType == typeof(PuzzleResult))
-            .OrderBy(o => o.Name)
-            .ToArray();
 
-        for (var i = 0; i < funcs.Length; i++)
+        for (var i = 0; i < instance.Funcs.Length; i++)
         {
-            var func = funcs[i];
+            var func = instance.Funcs[i];
             var input = _definition.HasUniqueInputsPerPart
                 ? inputs[i]
                 : inputs[0];
-            RunPart(() =>
+            
+            object[] p = [input];
+            if (func.ParameterCount > 1)
             {
-                var result = func.Invoke(instance, [input]);
-                if (result is not PuzzleResult puzzleResult)
-                    throw new Exception("Function did not return a PuzzleResult");
-
-                return puzzleResult;
-            }, i);
+                var additionalInput = FileReader.ReadAdditionalFile(_definition.Type, func.Method);
+                p = [.. inputs, additionalInput];
+            }
+            
+            RunPart(() => func.Invoke(p), i);
         }
         
         AnsiConsole.WriteLine();

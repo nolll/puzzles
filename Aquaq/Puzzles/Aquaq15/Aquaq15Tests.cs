@@ -11,7 +11,7 @@ public class Aquaq15Tests
     {
         const string input = "fly,try";
 
-        var result = new Aquaq15(FileReader.ReadCommon("Words.txt")).RunInternal(input);
+        var result = new Aquaq15().RunInternal(input, FileReader.ReadCommon("Words.txt"));
 
         result.Should().Be(3);
     }
@@ -25,7 +25,7 @@ public class Aquaq15Tests
                              word,maze
                              """;
 
-        var result = new Aquaq15(FileReader.ReadCommon("Words.txt")).RunInternal(input);
+        var result = new Aquaq15().RunInternal(input, FileReader.ReadCommon("Words.txt"));
 
         result.Should().Be(45);
     }

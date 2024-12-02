@@ -4,18 +4,18 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq15;
 
-[AdditionalCommonInputFile("Words.txt")]
 [Name("word wore more mare maze")]
-public class Aquaq15(string additionalInput) : AquaqPuzzle
+public class Aquaq15 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [AdditionalCommonInputFile("Words.txt")]
+    public PuzzleResult Run(string input, string additionalInput)
     {
-        return new PuzzleResult(RunInternal(input), "ffafde1afff1c3904275c8225e772bf1");
+        return new PuzzleResult(RunInternal(input, additionalInput), "ffafde1afff1c3904275c8225e772bf1");
     }
 
-    public int RunInternal(string input2) 
+    public int RunInternal(string input, string additionalInput) 
     {
-        var transformations = StringReader.ReadLines(input2)
+        var transformations = StringReader.ReadLines(input)
             .Select(o => o.Split(','))
             .Select(o => new WordTransformation(o[0], o[1]))
             .ToList();
@@ -41,7 +41,6 @@ public class Aquaq15(string additionalInput) : AquaqPuzzle
 
     private static IEnumerable<Graph.Input> BuildInputs(List<string> validWords)
     {
-        var length = validWords.First().Length;
         foreach (var validWord in validWords)
         {
             var similarWords = validWords.Where(o => IsSimilar(validWord, o));

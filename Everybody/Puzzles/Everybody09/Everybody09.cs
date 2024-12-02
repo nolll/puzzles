@@ -72,6 +72,67 @@ public class Everybody09 : EverybodyPuzzle
         
         return new PuzzleResult(result, "6032109447891782512325cb9251f9e2");
     }
+    
+    public PuzzleResult RunPart3(string input)
+    {
+        var seen = new Dictionary<int, List<int>>();
+        List<int> stamps = [1, 3, 5, 10, 15, 16, 20, 24, 25, 30, 37, 38, 49, 50, 74, 75, 100, 101];
+        var orderedStamps = stamps.OrderDescending().ToList();
+        var combinedSums = input.Split(LineBreaks.Single).Select(int.Parse);
+        var total = 0;
+        foreach (var sum in combinedSums)
+        {
+            var mid = sum / 2;
+            var min = mid - 100;
+            var max = mid + 100;
+            var minCount = int.MaxValue;
+            for (var i = min; i <= max; i++)
+            {
+                var a = i;
+                var b = sum - i;
+                if (!seen.TryGetValue(a, out var s1))
+                {
+                    s1 = SolveBall(a, orderedStamps);
+                    seen.Add(a, s1);
+                }
+                
+                if (!seen.TryGetValue(b, out var s2))
+                {
+                    s2 = SolveBall(b, orderedStamps);
+                    seen.Add(b, s2);
+                }
+                
+                if (Math.Abs(s1.Sum() - s2.Sum()) <= 100)
+                {
+                    var count = s1.Count + s2.Count;
+                    minCount = Math.Min(minCount, count);
+                }
+            }
+            
+            Console.WriteLine(minCount);
+
+            total += minCount;
+        }
+
+        return new PuzzleResult(total);
+    }
+    
+    private static List<int> SolveBall(int ball, List<int> stamps)
+    {
+        List<int> combinations = [];
+        var stampSum = stamps.Sum();
+        var largestStamp = stamps.First();
+
+        while (ball > stampSum)
+        {
+            ball -= largestStamp;
+            combinations.Add(largestStamp);
+        }
+        
+        var shortestCombination = new ShortestCombination();
+        var solutions = GetCombinations(stamps, ball, combinations, shortestCombination).OrderBy(o => o.Count);
+        return solutions.First();
+    }
 
     private static int[] ParseBalls(string input) => 
         input.Split(LineBreaks.Single).Select(int.Parse).ToArray();

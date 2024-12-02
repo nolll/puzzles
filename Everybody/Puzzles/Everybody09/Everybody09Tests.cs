@@ -33,5 +33,18 @@ public class Everybody09Tests
         result.Answer.Should().Be("10");
     }
     
+    [Test]
+    public void Part3()
+    {
+        const string input = """
+                             156488
+                             352486
+                             546212
+                             """;
+        
+        var result = Sut.RunPart3(input);
+        result.Answer.Should().Be("10449");
+    }
+    
     private static Everybody09 Sut => new();
 }

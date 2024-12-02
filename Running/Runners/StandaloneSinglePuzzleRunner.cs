@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Pzl.Client.Formatting;
 using Pzl.Client.Running.Results;
@@ -39,25 +38,14 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         AnsiConsole.Cursor.Show(false);
         WriteHeader(_definition);
         
-        var inputs = FileReader.ReadInputs(_definition);
         var instance = PuzzleFactory.CreateInstance(_definition);
         
         for (var i = 0; i < instance.Funcs.Length; i++)
         {
             var func = instance.Funcs[i];
-            var input = _definition.HasUniqueInputsPerPart
-                ? inputs[i]
-                : inputs[0];
             
-            string[] p = [input];
-            if (func.ParameterCount > 1)
-            {
-                var additionalInput = FileReader.ReadAdditionalFile(_definition.Type, func.Method);
-                p = [.. inputs, additionalInput];
-            }
-
             AnsiConsole.WriteLine();
-            RunAndPrintPuzzleResult(i + 1, func, p);
+            RunAndPrintPuzzleResult(i + 1, func);
         }
 
         AnsiConsole.Cursor.Show(true);
@@ -66,22 +54,11 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
     private void RunDebugMode()
     {
         WriteHeader(_definition);
-        var inputs = FileReader.ReadInputs(_definition);
         var instance = PuzzleFactory.CreateInstance(_definition);
         
-        for (var i = 0; i < instance.Funcs.Length; i++)
+        foreach (var func in instance.Funcs)
         {
-            var func = instance.Funcs[i];
-            var input = _definition.HasUniqueInputsPerPart
-                ? inputs[i]
-                : inputs[0];
-            object[] p = [input];
-            if (func.ParameterCount > 1)
-            {
-                var additionalInput = FileReader.ReadAdditionalFile(_definition.Type, func.Method);
-                p = [.. inputs, additionalInput];
-            }
-            var result = func.Invoke(p);
+            var result = func.Invoke();
 
             AnsiConsole.WriteLine(result.Answer);
         }
@@ -98,14 +75,14 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
             AnsiConsole.MarkupLine($"[yellow]{puzzle.Comment}[/]");
     }
     
-    private void RunAndPrintPuzzleResult(int puzzleIndex, PuzzleFunction func, string[] inputs)
+    private void RunAndPrintPuzzleResult(int puzzleIndex, PuzzleFunction func)
     {
-        var result = RunPuzzle(puzzleIndex, func, inputs);
+        var result = RunPuzzle(puzzleIndex, func);
         AnsiConsole.WriteLine();
         WriteAnswer(result);
     }
     
-    private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, PuzzleFunction func, string[] inputs)
+    private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, PuzzleFunction func)
     {
         PuzzleResult? result = null;
         PrintTime(puzzleIndex);
@@ -113,7 +90,7 @@ public class StandaloneSinglePuzzleRunner : SinglePuzzleRunner
         
         var task = Task.Run(() =>
         { 
-            result = func.Invoke(inputs.Select(object (o) => o).ToArray());
+            result = func.Invoke();
         });
         
         while (!task.IsCompleted)

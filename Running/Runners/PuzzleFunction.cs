@@ -3,15 +3,11 @@ using Pzl.Common;
 
 namespace Pzl.Client.Running.Runners;
 
-public class PuzzleFunction(Puzzle puzzle, MethodInfo method)
+public class PuzzleFunction(Puzzle puzzle, MethodInfo method, object[] parameters)
 {
-    public Puzzle Puzzle { get; } = puzzle;
-    public MethodInfo Method { get; } = method;
-    public int ParameterCount { get; } = method.GetParameters().Length;
-
-    public PuzzleResult Invoke(object[] args)
+    public PuzzleResult Invoke()
     {
-        var result = Method.Invoke(Puzzle, args);
+        var result = method.Invoke(puzzle, parameters);
         if (result is not PuzzleResult puzzleResult)
             throw new Exception("Result is not of type PuzzleResult");
 

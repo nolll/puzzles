@@ -1,11 +1,11 @@
-using Spectre.Console;
+﻿using Spectre.Console;
 
 namespace Pzl.Client.Help;
 
 public class HelpPrinter
 {
     private const string HelpText = """
-                                    My solutions to Advent of Code, AquaQ Challenge and Project Euler.
+                                    My solutions to Advent of Code, AquaQ Challenge, Project Euler and Everybody Codes.
                                     https://github.com/nolll/puzzles
 
                                     Usage:

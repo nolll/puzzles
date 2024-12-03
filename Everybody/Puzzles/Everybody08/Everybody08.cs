@@ -31,7 +31,7 @@ public class Everybody08 : EverybodyPuzzle
     public PuzzleResult RunPart3(string input)
     {
         var result = RunPart3(input, 202400000, 10);
-        return new PuzzleResult(result);
+        return new PuzzleResult(result, "52ce3b750999eebc1512e2d801e327a4");
     }
 
     public long RunPart2(string input, int availableBlocks, int acolyteCount)
@@ -58,12 +58,12 @@ public class Everybody08 : EverybodyPuzzle
     public long RunPart3(string input, int availableBlocks, int acolyteCount)
     {
         var priestCount = int.Parse(input);
-        var thickness = 1;
+        var thickness = 1L;
         var cols = new List<long> { thickness };
         var space = 0L;
-        var sum = cols.Sum();
+        var totalSum = thickness;
         
-        while (sum - space < availableBlocks)
+        while (totalSum - space < availableBlocks)
         {
             thickness = thickness * priestCount % acolyteCount + acolyteCount;
             cols.Insert(0, 0);
@@ -71,21 +71,12 @@ public class Everybody08 : EverybodyPuzzle
             for (var i = 0; i < cols.Count; i++)
             {
                 cols[i] += thickness;
+                totalSum += thickness;
             }
             
-            sum = cols.Sum();
-            space = 0;
-            for (var i = 1; i < cols.Count - 1; i++)
-            {
-                var prevHeight = cols[i - 1];
-                var nextHeight = cols[i + 1];
-                var maxSpace = Math.Min(prevHeight, nextHeight);
-                var thisSpace = priestCount * cols.Count * cols[i] % acolyteCount;
-                space += Math.Min(maxSpace, thisSpace);
-            }
-            //space = cols.Skip(1).SkipLast(1).Sum(col => priestCount * cols.Count * col % acolyteCount);
+            space = cols.Skip(1).SkipLast(1).Sum(col => col * priestCount * cols.Count % acolyteCount);
         }
         
-        return sum - space - availableBlocks;
+        return totalSum - space - availableBlocks;
     }
 }

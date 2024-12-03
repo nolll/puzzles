@@ -1,7 +1,11 @@
+using System.Text.RegularExpressions;
+
 namespace Pzl.Tools.Numbers;
 
 public static class Numbers
 {
+    private static readonly Regex DigitRegex = new("(\\d+)");
+
     public static IEnumerable<int> FindPrimesBelow(int limit)
     {
         var primes = new List<int> {2};
@@ -139,4 +143,10 @@ public static class Numbers
     public static bool IsPentagonalNumber(long x) => (Math.Sqrt(24 * x + 1) + 1) % 6 == 0;
     public static long GetHexagonalNumber(long n) => n * (2 * n - 1);
     public static bool IsHexagonalNumber(long x) => (Math.Sqrt(8 * x + 1) + 1) % 4 == 0;
+
+    public static int[] IntsFromString(string s)
+    {
+        var matches = DigitRegex.Matches(s);
+        return matches.Select(o => int.Parse(o.ToString())).ToArray();
+    }
 }

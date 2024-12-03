@@ -133,4 +133,8 @@ public class NumbersTests
     {
         Numbers.IsHexagonalNumber(n).Should().Be(expected);
     }
+
+    [Test]
+    public void IntsFromString() => 
+        Numbers.IntsFromString("abc123def456ghi").Should().BeEquivalentTo((int[])[123, 456]);
 }

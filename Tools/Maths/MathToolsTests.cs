@@ -9,12 +9,7 @@ public class MathToolsTests
     [TestCase(90915, 435, 33, 57)]
     [TestCase(616, 2, 4, 8, 77)]
     [TestCase(616, 2, 8, 77)]
-    public void FindsLcm(long expected, params long[] numbers)
-    {
-        var result = MathTools.Lcm(numbers);
-
-        result.Should().Be(expected);
-    }
+    public void FindsLcm(long expected, params long[] numbers) => MathTools.Lcm(numbers).Should().Be(expected);
 
     [TestCase(10, new[] { 1, 2, 5, 10 })]
     [TestCase(12, new[] { 1, 2, 3, 4, 6, 12 })]
@@ -24,12 +19,8 @@ public class MathToolsTests
     [TestCase(20, new[] { 1, 2, 4, 5, 10, 20 })]
     [TestCase(11, new[] { 1, 11 })]
     [TestCase(17, new[] { 1, 17 })]
-    public void GetFactors(int input, int[] expected)
-    {
-        var result = MathTools.GetFactors(input);
-
-        result.Should().BeEquivalentTo(expected);
-    }
+    public void GetFactors(int input, int[] expected) => 
+        MathTools.GetFactors(input).Should().BeEquivalentTo(expected);
 
     [Test]
     public void GetMultiplicationFactors()

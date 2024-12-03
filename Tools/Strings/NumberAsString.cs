@@ -2,18 +2,14 @@
 
 public class NumberAsString(int number)
 {
-    public override string ToString()
-    {
-        var s = number.ToString();
-
-        return s.Length switch
+    public override string ToString() =>
+        number.ToString().Length switch
         {
             4 => GetWordsForFourDigits(),
             3 => GetWordsForThreeDigits(number),
             2 => GetWordsForTwoDigits(number),
             _ => GetWordsForOneDigit(number)
         };
-    }
 
     private static string GetWordsForOneDigit(int n) => n switch
     {
@@ -37,8 +33,7 @@ public class NumberAsString(int number)
     {
         var s = n.ToString();
         var tens = GetWordsForTens(int.Parse(s[..1]));
-        var rest = s[1..];
-        var singles = GetWordsForTwoDigits(int.Parse(rest));
+        var singles = GetWordsForTwoDigits(int.Parse(s[1..]));
 
         return $"{tens}{singles}";
     }
@@ -63,8 +58,7 @@ public class NumberAsString(int number)
     {
         var s = n.ToString();
         var hundreds = GetWordsForHundreds(int.Parse(s[..1]));
-        var rest = s[1..];
-        var tens = GetWordsForTwoDigits(int.Parse(rest));
+        var tens = GetWordsForTwoDigits(int.Parse(s[1..]));
             
         return tens.Length > 0
             ? $"{hundreds} and {tens}"

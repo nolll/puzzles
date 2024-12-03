@@ -5,29 +5,9 @@ namespace Pzl.Tools.Strings;
 
 public class LevenshteinDistanceTests
 {
-    [Test]
-    public void NoDifference()
-    {
-        const string str = "abcde";
-        var distance = LevenshteinDistance.Compute(str, str);
-        distance.Should().Be(0);
-    }
-
-    [Test]
-    public void OneCharDifference()
-    {
-        const string str1 = "abcde";
-        const string str2 = "abcdX";
-        var distance = LevenshteinDistance.Compute(str1, str2);
-        distance.Should().Be(1);
-    }
-
-    [Test]
-    public void TwoCharDifference()
-    {
-        const string str1 = "abcde";
-        const string str2 = "abcXY";
-        var distance = LevenshteinDistance.Compute(str1, str2);
-        distance.Should().Be(2);
-    }
+    [TestCase("abcde", "abcde", 0)]
+    [TestCase("abcde", "abcdx", 1)]
+    [TestCase("abcde", "abcxy", 2)]
+    public void Difference(string a, string b, int expected) => 
+        LevenshteinDistance.Compute(a, b).Should().Be(expected);
 }

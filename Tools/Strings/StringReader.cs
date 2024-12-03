@@ -8,10 +8,9 @@ public static class StringReader
     public static IList<string> ReadLines(string str, bool includeEmptyLines)
     {
         var lines = str.Split(LineBreaks.Single);
-        if (!includeEmptyLines)
-            return lines.Where(o => o.Length > 0).ToList();
-
-        return lines.ToList();
+        return !includeEmptyLines 
+            ? lines.Where(o => o.Length > 0).ToList() 
+            : lines.ToList();
     }
 
     public static IList<IList<string>> ReadLineGroups(string str) => 

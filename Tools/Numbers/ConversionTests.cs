@@ -9,8 +9,7 @@ public class ConversionTests
     [TestCase(1, "1")]
     [TestCase(3, "11")]
     [TestCase(8, "1000")]
-    public void ToBinary(int n, string expected) 
-        => Conversion.ToBinary(n).Should().Be(expected);
+    public void ToBinary(int n, string expected) => Conversion.ToBinary(n).Should().Be(expected);
 
     [TestCase(1, "I")]
     [TestCase(2, "II")]
@@ -35,6 +34,5 @@ public class ConversionTests
     [TestCase(1000, "M")]
     [TestCase(2000, "MM")]
     [TestCase(2555, "MMDLV")]
-    public void RomanNumbers(int input, string expected) 
-        => Conversion.ToRoman(input).Should().Be(expected);
+    public void RomanNumbers(int input, string expected) => Conversion.ToRoman(input).Should().Be(expected);
 }

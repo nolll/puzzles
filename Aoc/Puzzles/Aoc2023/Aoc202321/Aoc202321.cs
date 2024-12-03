@@ -13,17 +13,10 @@ public class Aoc202321 : AocPuzzle
 
     public PuzzleResult RunPart2(string input)
     {
-        // guesses
-        // 608_148_528_908_778 not correct
-        // 608_148_533_763_966 not correct
-        // 608_148_613_469_947 not correct
-        // 608_148_528_908_778 not correct
-        // 608_151_537_506_942
-
-        return new PuzzleResult(CountPositionsAfterMany(input));
+        return new PuzzleResult(CountPositionsAfterMany(input), "82eccc3aebc6a8cca12ce692d9765520");
     }
 
-    public static int CountPositionsAfter64(string s, int steps = 64)
+    public static long CountPositionsAfter64(string s, int steps = 64)
     {
         var matrix = MatrixBuilder.BuildCharMatrix(s);
         var start = matrix.FindAddresses('S').First();
@@ -43,9 +36,6 @@ public class Aoc202321 : AocPuzzle
          
         const int stepCount = 26_501_365;
         var gridWidth = stepCount / size - 1;
-
-        //var odd = (long)Math.Pow(Math.Floor((double)gridWidth / 2) * 2 + 1, 2);
-        //var even = (long)Math.Pow(Math.Floor((double)(gridWidth + 1) / 2) * 2, 2);
 
         long oddMultiplier = gridWidth / 2 * 2 + 1;
         var odd = oddMultiplier * oddMultiplier;
@@ -89,7 +79,7 @@ public class Aoc202321 : AocPuzzle
         return filledPlots;
     }
 
-    private static int CountPositionsAfter(Matrix<char> matrix, MatrixAddress start, int steps = 64)
+    private static long CountPositionsAfter(Matrix<char> matrix, MatrixAddress start, int steps = 64)
     {
         var lit = new HashSet<MatrixAddress> { start };
 
@@ -116,7 +106,6 @@ public class Aoc202321 : AocPuzzle
         {
             pm.WriteValueAt(coord, 'O');
         }
-        var print = pm.Print();
 
         return lit.Count;
     }

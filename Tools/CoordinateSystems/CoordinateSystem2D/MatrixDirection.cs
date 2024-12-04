@@ -21,16 +21,14 @@ public class MatrixDirection : IEquatable<MatrixDirection>
     public static readonly MatrixDirection Down = new("down", 0, 1);
     public static readonly MatrixDirection Left = new("left", -1, 0);
 
-    public static MatrixDirection Create(string name)
-    {
-        return name switch
+    public static MatrixDirection Create(string name) =>
+        name switch
         {
             "up" => Up,
             "right" => Right,
             "down" => Down,
             _ => Left
         };
-    }
 
     public bool Equals(MatrixDirection? other)
     {
@@ -47,10 +45,6 @@ public class MatrixDirection : IEquatable<MatrixDirection>
         return Equals((MatrixDirection)obj);
     }
 
-    public override int GetHashCode()
-    {
-        return (Name.GetHashCode());
-    }
-
+    public override int GetHashCode() => Name.GetHashCode();
     public override string ToString() => Name;
 }

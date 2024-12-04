@@ -1,13 +1,14 @@
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
-using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202404;
 
 [Name("Ceres Search")]
 public class Aoc202404 : AocPuzzle
 {
+    private const int Part1WordLength = 4;
+
     public PuzzleResult Part1(string input)
     {
         var matrix = MatrixBuilder.BuildCharMatrix(input);
@@ -38,46 +39,41 @@ public class Aoc202404 : AocPuzzle
         foreach (var coord in matrix.Coords)
         {
             matrix.MoveTo(coord);
-            xmasCount += ReadX(matrix);
+            xmasCount += IsX(matrix) ? 1 : 0;
         }
         
         return new PuzzleResult(xmasCount, "be01756ac17140a11342a320132dee7e");
     }
 
-    private string ReadWord(Matrix<char> matrix, (int x, int y) dir)
+    private static string ReadWord(Matrix<char> matrix, (int x, int y) dir) => 
+        string.Join("", ReadWordAsEnumerable(matrix, dir));
+
+    private static IEnumerable<char> ReadWordAsEnumerable(Matrix<char> matrix, (int x, int y) dir)
     {
-        var word = "";
-        word += matrix.ReadValue();
-        for (var i = 0; i < 3; i++)
+        yield return matrix.ReadValue();
+
+        var i = 1;
+        while (i < Part1WordLength)
         {
             if (!matrix.TryMoveTo(matrix.Address.X + dir.x, matrix.Address.Y + dir.y))
                 break;
-            
-            word += matrix.ReadValue();
-        }
 
-        return word;
+            yield return matrix.ReadValue();
+            i++;
+        }
     }
     
-    private int ReadX(Matrix<char> matrix)
+    private static bool IsX(Matrix<char> matrix)
     {
         var c = matrix.ReadValue();
         if (c != 'A')
-            return 0;
+            return false;
+
+        var chars = MatrixConstants.DiagonalDirections
+            .Select(o => matrix.ReadValueAt(matrix.Address.X + o.x, matrix.Address.Y - o.y)).ToArray();
         
-        var tr = matrix.ReadValueAt(matrix.Address.X + 1, matrix.Address.Y - 1);
-        var br = matrix.ReadValueAt(matrix.Address.X + 1, matrix.Address.Y + 1);
-        var bl = matrix.ReadValueAt(matrix.Address.X - 1, matrix.Address.Y + 1);
-        var tl = matrix.ReadValueAt(matrix.Address.X - 1, matrix.Address.Y - 1);
-
-        var words = new List<string>();
-        var word1 = $"{tl}A{br}"; 
-        var word2 = $"{tr}A{bl}"; 
-        words.Add(word1);
-        words.Add(word1.ReverseString());
-        words.Add(word2);
-        words.Add(word2.ReverseString());
-
-        return words.Count(o => o == "MAS") == 2 ? 1 : 0;
+        return IsMas($"{chars[0]}A{chars[2]}") && IsMas($"{chars[1]}A{chars[3]}");
     }
+
+    private static bool IsMas(string word) => word is "MAS" or "SAM";
 }

@@ -323,13 +323,11 @@ public class Matrix<T> where T : struct
         return addresses;
     }
 
-    public bool IsOutOfRange(MatrixAddress address)
-    {
-        return address.Y > YMax ||
-               address.Y < YMin ||
-               address.X > XMax ||
-               address.X < XMin;
-    }
+    public bool IsOutOfRange(MatrixAddress address) =>
+        address.Y > YMax ||
+        address.Y < YMin ||
+        address.X > XMax ||
+        address.X < XMin;
 
     public Matrix<T> Clone(int multiplier = 1)
     {
@@ -397,11 +395,11 @@ public class Matrix<T> where T : struct
         return new Matrix<T>(slicedFrom, slicedTo, values, DefaultValue);
     }
 
-    public Matrix<T> Slice(MatrixAddress from, int width, int height)
-    {
-        var to = new MatrixAddress(from.X + width, from.Y + height);
-        return Slice(from, to);
-    }
+    public Matrix<T> Slice(MatrixAddress from, int size) => 
+        Slice(from, size, size);
+
+    public Matrix<T> Slice(MatrixAddress from, int width, int height) => 
+        Slice(from, new MatrixAddress(from.X + width - 1, from.Y + height - 1));
 
     public Matrix<T> FlipVertical()
     {

@@ -16,15 +16,21 @@ public class Everybody12Tests
                              =============
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("13");
+        Sut.Part2(input).Answer.Should().Be("13");
     }
 
     [Test]
     public void Part2()
     {
-        const string input = "";
+        const string input = """
+                             .............
+                             .C...........
+                             .B......H....
+                             .A......T.H..
+                             =============
+                             """;
 
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part2(input).Answer.Should().Be("22");
     }
 
     [Test]

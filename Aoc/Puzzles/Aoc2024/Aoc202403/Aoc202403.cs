@@ -9,7 +9,7 @@ public class Aoc202403 : AocPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var instructions = new Regex(@"mul\(\d+,\d+\)").Matches(input).Select(o => o.ToString());
+        var instructions = new Regex(@"mul\(\d{1,3},\d{1,3}\)").Matches(input).Select(o => o.ToString());
         var pairs = instructions.Select(Numbers.IntsFromString).ToArray();
         var result = pairs.Sum(o => o[0] * o[1]);
         return new PuzzleResult(result, "106efdc638384c80769741faa573a260");

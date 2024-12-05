@@ -3,6 +3,7 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Everybody11;
 
+[Name("Biological Warfare")]
 public class Everybody11 : EverybodyPuzzle
 {
     public PuzzleResult Part1(string input)

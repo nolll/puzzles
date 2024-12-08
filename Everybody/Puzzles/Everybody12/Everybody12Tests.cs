@@ -36,9 +36,13 @@ public class Everybody12Tests
     [Test]
     public void Part3()
     {
-        const string input = "";
+        const string input = """
+                             6 5
+                             6 7
+                             10 5
+                             """;
 
-        Sut.Part3(input).Answer.Should().Be("0");
+        Sut.Part3(input).Answer.Should().Be("11");
     }
 
     private static Everybody12 Sut => new();

@@ -1,5 +1,7 @@
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Numbers;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Everybody12;
 
@@ -37,7 +39,6 @@ public class Everybody12 : EverybodyPuzzle
             while (!outOfBounds)
             {
                 matrix.MoveTo(catapult.coord);
-                var pmatrix = matrix.Clone();
                 var range = Enumerable.Range(0, power).ToArray();
                 
                 // Move up
@@ -45,14 +46,12 @@ public class Everybody12 : EverybodyPuzzle
                 {
                     matrix.MoveUp();
                     matrix.MoveRight();
-                    pmatrix.WriteValueAt(matrix.Address, '*');
                 }
                 
                 // Move right
                 foreach (var _ in range)
                 {
                     matrix.MoveRight();
-                    pmatrix.WriteValueAt(matrix.Address, '*');
                 }
 
                 // Move down until bottom
@@ -65,7 +64,6 @@ public class Everybody12 : EverybodyPuzzle
                     }
 
                     matrix.MoveDown();
-                    pmatrix.WriteValueAt(matrix.Address, '*');
                     if (matrix.Address.Y == matrix.YMax)
                     {
                         break;
@@ -73,8 +71,6 @@ public class Everybody12 : EverybodyPuzzle
                     
                     if (matrix.ReadValue() != 'T' && matrix.ReadValue() != 'H')
                         continue;
-                    
-                    pmatrix.WriteValueAt(matrix.Address, 'X');
                     
                     if (bestShots.TryGetValue(matrix.Address, out var bestShot))
                     {
@@ -86,9 +82,6 @@ public class Everybody12 : EverybodyPuzzle
                         bestShots[matrix.Address] = (catapult.name, power);
                     }
                 }
-
-                var print = pmatrix.Print();
-                //Console.WriteLine(print);
                 
                 power++;
             }
@@ -117,6 +110,168 @@ public class Everybody12 : EverybodyPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        return new PuzzleResult(0);
+        const string board = """
+                             .C.
+                             .B.
+                             .A.
+                             ===
+                             """;
+        
+        var matrix = MatrixBuilder.BuildCharMatrix(board, '.');
+        var meteors = input.Split(LineBreaks.Single)
+            .Select(Numbers.IntsFromString)
+            .Select(o => new MatrixAddress(o[0], o[1]))
+            .ToList();
+        
+        var xMax = meteors.Max(o => o.X);
+        var yMax = meteors.Max(o => o.Y);
+        
+        matrix.ExtendUp(yMax);
+        matrix.ExtendRight(xMax);
+
+        var aCoord = matrix.FindAddresses('A').First();
+        var bCoord = matrix.FindAddresses('B').First();
+        var cCoord = matrix.FindAddresses('C').First();
+        (char name, MatrixAddress coord)[] catapults = [('A', aCoord), ('B', bCoord), ('C', cCoord)];
+
+        var meteorCoords = GetAllMeteorCoords(matrix, meteors, aCoord, catapults);
+
+        //var pmatrix = matrix.Clone();
+        //foreach (var coord in meteorCoords)
+        //{
+        //    pmatrix.WriteValueAt(coord, '*');
+        //}
+        //var print = pmatrix.Print();
+        
+        var trajectories = SimulateTrajectories(matrix, catapults, meteorCoords)
+            .GroupBy(o => (o.coord, o.time))
+            .ToDictionary(o => o.Key, v => v.OrderBy(o => o.coord.Y).ThenBy(o => o.power).ToList());
+        
+        var bestList = new List<(char catapult, int altitude, int power, int time)>();
+        for (var meteorId = 0; meteorId < meteors.Count; meteorId++)
+        {
+            var best = (' ', int.MaxValue, int.MaxValue, 0);
+            var meteor = meteors[meteorId];
+            var coord = new MatrixAddress(aCoord.X + meteor.X, aCoord.Y - meteor.Y);
+            var isDone = false;
+            var time = 0;
+            while (!isDone)
+            {
+                if (trajectories.TryGetValue((coord, time), out var hits))
+                {
+                    if (hits.Any())
+                    {
+                        var bestHit = hits.First();
+                        if (bestHit.coord.Y < best.Item2 || bestHit.coord.Y == best.Item2 && bestHit.power < best.Item3)
+                            best = (bestHit.catapult, bestHit.coord.Y, bestHit.power, bestHit.time);
+                    }
+                }
+
+                coord = new MatrixAddress(coord.X - 1, coord.Y + 1);
+                isDone = coord.Y == matrix.YMax ||
+                         coord.X == matrix.XMin ||
+                         catapults.Any(o => o.coord.Equals(coord));
+                time++;
+            }
+
+            bestList.Add(best);
+        }
+
+        var sum = 0;
+        foreach (var o in bestList) 
+            sum += o.power;
+
+        return new PuzzleResult(sum);
+    }
+
+    private List<(char catapult, MatrixAddress coord, int time, int power)> SimulateTrajectories(
+        Matrix<char> matrix,
+        (char name, MatrixAddress coord)[] catapults, 
+        HashSet<MatrixAddress> meteorCoords)
+    {
+        var list = new List<(char catapult, MatrixAddress coord, int time, int power)>();
+        foreach (var catapult in catapults)
+        {
+            var power = 1;
+            var outOfBounds = false;
+            var multiplier = catapult.name switch
+            {
+                'C' => 3,
+                'B' => 2,
+                _ => 1
+            };
+            while (!outOfBounds)
+            {
+                var t = 0;
+                matrix.MoveTo(catapult.coord);
+                var range = Enumerable.Range(0, power).ToArray();
+            
+                // Move up
+                foreach (var _ in range)
+                {
+                    matrix.MoveUp();
+                    matrix.MoveRight();
+                    t++;
+                    if(meteorCoords.Contains(matrix.Address))
+                        list.Add((catapult.name, matrix.Address, t, power * multiplier));
+                }
+            
+                // Move right
+                foreach (var _ in range)
+                {
+                    matrix.MoveRight();
+                    t++;
+                    if(meteorCoords.Contains(matrix.Address))
+                        list.Add((catapult.name, matrix.Address, t, power * multiplier));
+                }
+
+                // Move down until bottom
+                while (true)
+                {
+                    if (!matrix.TryMoveRight())
+                    {
+                        outOfBounds = true;
+                        break;
+                    }
+
+                    matrix.MoveDown();
+                    if (matrix.Address.Y == matrix.YMax)
+                    {
+                        break;
+                    }
+
+                    t++;
+                    if(meteorCoords.Contains(matrix.Address))
+                        list.Add((catapult.name, matrix.Address, t, power * multiplier));
+                }
+            
+                power++;
+            }
+        }
+
+        return list;
+    }
+
+    private static HashSet<MatrixAddress> GetAllMeteorCoords(Matrix<char> matrix,
+        List<MatrixAddress> meteors,
+        MatrixAddress aCoord, (char name, MatrixAddress coord)[] catapults)
+    {
+        var coords = new HashSet<MatrixAddress>();
+        for (var meteorId = 0; meteorId < meteors.Count; meteorId++)
+        {
+            var meteor = meteors[meteorId];
+            var coord = new MatrixAddress(aCoord.X + meteor.X, aCoord.Y - meteor.Y);
+            var isDone = false;
+            while (!isDone)
+            {
+                coord = new MatrixAddress(coord.X - 1, coord.Y + 1);
+                coords.Add(coord);
+                isDone = coord.Y == matrix.YMax ||
+                         coord.X == matrix.XMin ||
+                         catapults.Any(o => o.coord.Equals(coord));
+            }
+        }
+
+        return coords;
     }
 }

@@ -36,6 +36,9 @@
     <None Update="Puzzles\Aoc2024\Aoc202408\Aoc202407.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Puzzles\Aoc2024\Aoc202409\Aoc202408.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

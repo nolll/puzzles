@@ -27,4 +27,11 @@ public class Hailstone
     {
         return $"{X}, {Y}, {Z} @ {Vx}, {Vy}, {Vz}";
     }
+
+    public void Move(long t = 1)
+    {
+        Position[Dimension.X] += Vx * t;
+        Position[Dimension.Y] += Vy * t;
+        Position[Dimension.Z] += Vz * t;
+;    }
 }

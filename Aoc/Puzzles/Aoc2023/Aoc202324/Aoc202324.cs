@@ -15,9 +15,11 @@ public class Aoc202324 : AocPuzzle
 
     public PuzzleResult RunPart2(string input)
     {
-        var result = FindStartPosition(input);
-
-        return new PuzzleResult(result);
+        //var result = FindRockPosition(input);
+        //var sum = result.x + result.y + result.z;
+        var sum = 0;
+        
+        return new PuzzleResult(sum);
     }
 
     public static int CountIntersectingWithin(string s, long min, long max)
@@ -64,6 +66,52 @@ public class Aoc202324 : AocPuzzle
 
         return count;
     }
+    
+    public static (long x, long y, long z) FindRockPosition(string s)
+    {
+        var allHailstones = ParseHailstones(s);
+        var range = Enumerable.Range(-500, 500).ToArray();
+
+        var c = 0;
+        while (true)
+        {
+            c++;
+            Console.WriteLine(c);
+            var hailstones = GetRandomHailstones(allHailstones).ToList();
+            foreach (var dvx in range)
+            {
+                foreach (var dvy in range)
+                {
+                    var hail0 = hailstones[0].WithVelocityDelta(dvx, dvy);
+                    var intercepts = hailstones
+                        .Skip(1)
+                        .Select(o => o.WithVelocityDelta(dvx, dvy).IntersectsWith(hail0))
+                        .Where(o => o is not null)
+                        .ToList();
+
+                    var first = intercepts.FirstOrDefault();
+                    if(first is null)
+                        continue;
+                    
+                    if (intercepts.Count == 3 &&
+                        intercepts.All(o => o.X == first.X) &&
+                        intercepts.All(o => o.Y == first.Y)
+                    ) {
+                        foreach (var dvz in range)
+                        {
+                            var z1 = hailstones[1].TestZ(intercepts[0].Time, dvz);
+                            var z2 = hailstones[2].TestZ(intercepts[1].Time, dvz);
+                            var z3 = hailstones[3].TestZ(intercepts[2].Time, dvz);
+                            if (z1 == z2 && z2 == z3)
+                            {
+                                return ((long)intercepts.First().X, (long)intercepts.First().Y, (long)z1);
+                            }
+                        }
+                    }
+                }   
+            }
+        }
+    }
 
     private static List<Hailstone> ParseHailstones(string s)
     {
@@ -73,64 +121,20 @@ public class Aoc202324 : AocPuzzle
             .ToList();
     }
 
-    public static int FindStartPosition(string s)
+    private static IEnumerable<Hailstone> GetRandomHailstones(List<Hailstone> hailstones)
     {
-        var hailstones = ParseHailstones(s);
-        var parallelMax = 0;
-        var minDistanceX = long.MaxValue;
-        var minDistanceY = long.MaxValue;
-        var minDistanceZ = long.MaxValue;
-
-        var pha = new Dictionary<int, List<Hailstone>>();
-
-        for (var i = 0; i < hailstones.Count; i++)
+        var totalCount = hailstones.Count;
+        var set = new HashSet<int>();
+        var random = new Random();
+        while (set.Count < 4)
         {
-            var parallel = 0;
-            var ha = hailstones[i];
-            pha[i] = [ha];
-
-            for (var j = i; j < hailstones.Count; j++)
-            {
-                var hb = hailstones[j];
-                if (ha.Id == hb.Id)
-                    continue;
-
-                minDistanceX = Math.Min(minDistanceX, Math.Abs(ha.X - hb.X));
-                minDistanceY = Math.Min(minDistanceY, Math.Abs(ha.Y - hb.Y));
-                minDistanceZ = Math.Min(minDistanceZ, Math.Abs(ha.Z - hb.Z));
-
-                var vxMax = Math.Abs(Math.Max(ha.Vx, hb.Vx));
-                var vxMin = Math.Abs(Math.Min(ha.Vx, hb.Vx));
-                var isParallelX = vxMax % vxMin == 0;
-
-                var vyMax = Math.Abs(Math.Max(ha.Vy, hb.Vy));
-                var vyMin = Math.Abs(Math.Min(ha.Vy, hb.Vy));
-                var isParallelY = vyMax % vyMin == 0;
-
-                var vzMax = Math.Abs(Math.Max(ha.Vz, hb.Vz));
-                var vzMin = Math.Abs(Math.Min(ha.Vz, hb.Vz));
-                var isParallelZ = vzMax % vzMin == 0;
-
-                var isParallel = isParallelX && isParallelY;
-                if (isParallel)
-                {
-                    parallel++;
-                    pha[i].Add(hb);
-                }
-            }
-
-            parallelMax = Math.Max(parallelMax, parallel);
+            set.Add(random.Next(totalCount));
         }
 
-        var candidates = pha.MaxBy(o => o.Value.Count).Value;
-
-        // Console.WriteLine();
-        // foreach (var candidate in candidates)
-        // {
-        //     Console.WriteLine(candidate.Print());
-        // }
-
-        return parallelMax;
+        foreach (var index in set)
+        {
+            yield return hailstones[index];
+        }
     }
 
     private static double GetDistance(Point a, Point b)

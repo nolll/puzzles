@@ -64,7 +64,7 @@ public class Aoc202409 : AocPuzzle
         {
             var fileLength = 0;
             var filePos = b;
-            for (int j = 0; j < nums[i]; j++)
+            for (var j = 0; j < nums[i]; j++)
             {
                 blocks[b] = isFile ? i / 2 : -1;
                 b++;

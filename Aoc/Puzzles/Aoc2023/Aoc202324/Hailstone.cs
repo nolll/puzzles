@@ -4,9 +4,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202324;
 
 public class Hailstone
 {
+    public static double DoubleTolerance = 0.00001;
+    
     public long Id { get; }
     
-    public double? Slope { get; }
+    public Double? Slope => Vx == 0 ? null : (double)Vy / Vx;
     public long[] Position { get; }
     public long[] Velocity { get; }
     public long X => Position[Dimension.X];
@@ -21,7 +23,6 @@ public class Hailstone
         Id = id;
         Position = [x, y, z];
         Velocity = [vx, vy, vz];
-        Slope = Vx == 0 ? null : (double)Vy / Vx;
     }
 
     public string Print()
@@ -31,11 +32,11 @@ public class Hailstone
 
     public Hailstone WithVelocityDelta(long dvx, long dvy) => new(Id, X, Y, Z, Vx + dvx, Vy + dvy, Vz);
 
-    public double TestZ(double time, long deltaVz) => Z + time * (Vz + deltaVz);
+    public double TestZ(double time, long deltaVz) => (double)Z + time * ((double)Vz + deltaVz);
     
     public Intersection? IntersectsWith(Hailstone other)
     {
-        if (Slope is null || other.Slope is null || Math.Abs(Slope.Value - other.Slope.Value) < 0.1)
+        if (Slope is null || other.Slope is null || Math.Abs(Slope.Value - other.Slope.Value) < DoubleTolerance)
             return null;
 
         var slope = Slope.Value;

@@ -8,16 +8,38 @@ public class Aoc202324 : AocPuzzle
 {
     public PuzzleResult RunPart1(string input)
     {
-        var result = CountIntersectingWithin(input, 200_000_000_000_000, 400_000_000_000_000);
+        var result = CountIntersectingWithin2(input, 200_000_000_000_000, 400_000_000_000_000);
 
         return new PuzzleResult(result, "907db44ec104f348525996e3821ac11d");
+    }
+    
+    public static int CountIntersectingWithin2(string s, long min, long max)
+    {
+        var count = 0;
+        var hailstones = ParseHailstones(s);
+        foreach (var a in hailstones)
+        {
+            foreach (var b in hailstones)
+            {
+                if (a.Id == b.Id)
+                    continue;
+
+                var intersection = a.IntersectsWith(b);
+                if(intersection is null)
+                    continue;
+
+                var isInRange = intersection.X > min && intersection.X < max && intersection.Y > min && intersection.Y < max; 
+                count += isInRange ? 1 : 0;
+            }   
+        }
+
+        return count;
     }
 
     public PuzzleResult RunPart2(string input)
     {
-        //var result = FindRockPosition(input);
-        //var sum = result.x + result.y + result.z;
-        var sum = 0;
+        var result = FindRockPosition(input);
+        var sum = result.x + result.y + result.z;
         
         return new PuzzleResult(sum);
     }
@@ -66,18 +88,21 @@ public class Aoc202324 : AocPuzzle
 
         return count;
     }
-    
-    public static (long x, long y, long z) FindRockPosition(string s)
+
+    private static (long x, long y, long z) FindRockPosition(string s)
     {
         var allHailstones = ParseHailstones(s);
         var range = Enumerable.Range(-500, 500).ToArray();
 
         var c = 0;
+        var seen = new HashSet<(long, long, long, long)>();
         while (true)
         {
-            c++;
-            Console.WriteLine(c);
             var hailstones = GetRandomHailstones(allHailstones).ToList();
+            var key = (hailstones[0].Id, hailstones[1].Id, hailstones[2].Id, hailstones[3].Id);
+            if (!seen.Add(key))
+                throw new Exception("No more hailstones");
+
             foreach (var dvx in range)
             {
                 foreach (var dvy in range)
@@ -89,20 +114,22 @@ public class Aoc202324 : AocPuzzle
                         .Where(o => o is not null)
                         .ToList();
 
-                    var first = intercepts.FirstOrDefault();
-                    if(first is null)
+                    if (intercepts.Count == 0)
                         continue;
                     
-                    if (intercepts.Count == 3 &&
-                        intercepts.All(o => o.X == first.X) &&
-                        intercepts.All(o => o.Y == first.Y)
+                    var first = intercepts.First()!;
+
+                    if (intercepts.Count < 3)
+                        continue;
+                    
+                    if (intercepts.All(o => Math.Abs(o.X - first.X) < 10.1&& Math.Abs(o.Y - first.Y) < 0.1)
                     ) {
                         foreach (var dvz in range)
                         {
                             var z1 = hailstones[1].TestZ(intercepts[0].Time, dvz);
                             var z2 = hailstones[2].TestZ(intercepts[1].Time, dvz);
                             var z3 = hailstones[3].TestZ(intercepts[2].Time, dvz);
-                            if (z1 == z2 && z2 == z3)
+                            if (Math.Abs(z1 - z2) < 0.1 && Math.Abs(z2 - z3) < 0.1)
                             {
                                 return ((long)intercepts.First().X, (long)intercepts.First().Y, (long)z1);
                             }

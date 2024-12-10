@@ -35,7 +35,7 @@ public class Hailstone
     
     public Intersection? IntersectsWith(Hailstone other)
     {
-        if (Slope is null || other.Slope is null || Slope == other.Slope)
+        if (Slope is null || other.Slope is null || Math.Abs(Slope.Value - other.Slope.Value) < 0.1)
             return null;
 
         var slope = Slope.Value;

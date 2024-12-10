@@ -8,12 +8,12 @@ public class Aoc202324 : AocPuzzle
 {
     public PuzzleResult RunPart1(string input)
     {
-        var result = CountIntersectingWithin2(input, 200_000_000_000_000, 400_000_000_000_000);
+        var result = CountIntersectingWithin(input, 200_000_000_000_000, 400_000_000_000_000);
 
         return new PuzzleResult(result, "907db44ec104f348525996e3821ac11d");
     }
     
-    public static int CountIntersectingWithin2(string s, long min, long max)
+    public static int CountIntersectingWithin(string s, long min, long max)
     {
         var count = 0;
         var hailstones = ParseHailstones(s);

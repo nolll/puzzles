@@ -16,7 +16,7 @@ public class Aoc202324Tests
     [Test]
     public void CountIntersecting()
     {
-        var result = Aoc202324.CountIntersectingWithin2(Input, 7, 27);
+        var result = Aoc202324.CountIntersectingWithin(Input, 7, 27);
 
         result.Should().Be(2);
     }

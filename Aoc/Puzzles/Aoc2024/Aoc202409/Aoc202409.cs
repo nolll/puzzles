@@ -2,7 +2,7 @@ using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202409;
 
-[Name("")]
+[Name("Disk Fragmenter")]
 public class Aoc202409 : AocPuzzle
 {
     public PuzzleResult Part1(string input)

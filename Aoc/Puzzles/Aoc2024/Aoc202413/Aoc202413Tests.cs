@@ -1,0 +1,81 @@
+using FluentAssertions;
+using NUnit.Framework;
+
+namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202413;
+
+public class Aoc202413Tests
+{
+    private const string Input = """
+                                 Button A: X+94, Y+34
+                                 Button B: X+22, Y+67
+                                 Prize: X=8400, Y=5400
+
+                                 Button A: X+26, Y+66
+                                 Button B: X+67, Y+21
+                                 Prize: X=12748, Y=12176
+
+                                 Button A: X+17, Y+86
+                                 Button B: X+84, Y+37
+                                 Prize: X=7870, Y=6450
+
+                                 Button A: X+69, Y+23
+                                 Button B: X+27, Y+71
+                                 Prize: X=18641, Y=10279
+                                 """;
+
+    [Test]
+    public void Part1()
+    {
+        Sut.Part1(Input).Answer.Should().Be("480");
+    }
+
+    [Test]
+    public void IsSolvable1()
+    {
+        const string input = """
+                             Button A: X+94, Y+34
+                             Button B: X+22, Y+67
+                             Prize: X=8400, Y=5400
+                             """;
+    
+        Sut.IsSolvable(input).Should().BeFalse();
+    }
+    
+    [Test]
+    public void IsSolvable2()
+    {
+        const string input = """
+                             Button A: X+26, Y+66
+                             Button B: X+67, Y+21
+                             Prize: X=12748, Y=12176
+                             """;
+    
+        Sut.IsSolvable(input).Should().BeTrue();
+    }
+    
+    [Test]
+    public void IsSolvable3()
+    {
+        const string input = """
+                             Button A: X+17, Y+86
+                             Button B: X+84, Y+37
+                             Prize: X=7870, Y=6450
+                             """;
+    
+        Sut.IsSolvable(input).Should().BeFalse();
+    }
+    
+    [Test]
+    public void IsSolvable4()
+    {
+        const string input = """
+                             Button A: X+69, Y+23
+                             Button B: X+27, Y+71
+                             Prize: X=18641, Y=10279
+                             """;
+    
+        Sut.IsSolvable(input).Should().BeTrue();
+    }
+
+    private static Aoc202413 Sut => new();
+}

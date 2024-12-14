@@ -4,7 +4,7 @@ namespace Pzl.Tools.Numbers;
 
 public static class Numbers
 {
-    private static readonly Regex DigitRegex = new("(\\d+)");
+    private static readonly Regex DigitRegex = new("(-?\\d+)");
 
     public static IEnumerable<int> FindPrimesBelow(int limit)
     {

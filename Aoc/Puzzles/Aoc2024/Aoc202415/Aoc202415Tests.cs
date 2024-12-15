@@ -25,11 +25,51 @@ public class Aoc202415Tests
     }
 
     [Test]
-    public void Part2()
+    public void Part2_1()
     {
-        const string input = "";
+        const string input = """
+                             #######
+                             #...#.#
+                             #.....#
+                             #..OO@#
+                             #..O..#
+                             #.....#
+                             #######
+                             
+                             <vv<<^^<<^^
+                             """;
 
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part2(input).Answer.Should().Be("618");
+    }
+    
+    [Test]
+    public void Part2_2()
+    {
+        const string input = """
+                             ##########
+                             #..O..O.O#
+                             #......O.#
+                             #.OO..O.O#
+                             #..O@..O.#
+                             #O#..O...#
+                             #O..O..O.#
+                             #.OO.O.OO#
+                             #....O...#
+                             ##########
+
+                             <vv>^<v^>v>^vv^v>v<>v^v<v<^vv<<<^><<><>>v<vvv<>^v^>^<<<><<v<<<v^vv^v>^
+                             vvv<<^>^v^^><<>>><>^<<><^vv^^<>vvv<>><^^v>^>vv<>v<<<<v<^v>^<^^>>>^<v<v
+                             ><>vv>v^v^<>><>>>><^^>vv>v<^^^>>v^v^<^^>v^^>v^<^v>v<>>v^v^<v>v^^<^^vv<
+                             <<v<^>>^^^^>>>v^<>vvv^><v<<<>^^^vv^<vvv>^>v<^^^^v<>^>vvvv><>>v^<<^^^^^
+                             ^><^><>>><>^^<<^^v>>><^<v>^<vv>>v>>>^v><>^v><<<<v>>v<v<v>vvv>^<><<>^><
+                             ^>><>^v<><^vvv<^^<><v<<<<<><^v<<<><<<^^<v<^^^><^>>^<v^><<<^>>^v<v^v<v^
+                             >^>>^v>vv>^<<^v<>><<><<v<<v><>v<^vv<<<>^^v^>^^>>><<^v>>v^v><^^>>^<>vv^
+                             <><^^>^^^<><vvvvv^v<v<<>^v<v>v<<^><<><<><<<^^<<<^<<>><<><^^^>^^<>^>v<>
+                             ^^>vv<^v^v<vv>^<><v<^v>^^^>>>^^vvv^>vvv<>>>^<^>>>>>^<<^v>^vvv<>^<><<v>
+                             v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^
+                             """;
+
+        Sut.Part2(input).Answer.Should().Be("9021");
     }
 
     private static Aoc202415 Sut => new();

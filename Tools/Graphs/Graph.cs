@@ -17,27 +17,15 @@ public static class Graph
     public static (int cost, List<string> path) GetShortestPath(List<Input> inputs, string source, string target) => 
         GetShortestPath(inputs, source, [target]);
 
-    private static int GetLowestCost(List<Input> inputs, string source, List<string> targets, int costModifier)
-    {
-        var nodes = GetNodes(inputs, source, costModifier);
+    private static int GetLowestCost(List<Input> inputs, string source, List<string> targets, int costModifier) => 
+        GetLowestCost(GetNodes(inputs, source, costModifier), source, targets) * costModifier;
 
-        return GetLowestCost(nodes, source, targets) * costModifier;
-    }
-    
-    public static (int cost, List<string> path) GetShortestPath(List<Input> inputs, string source, List<string> targets)
-    {
-        var nodes = GetNodes(inputs, source);
+    public static (int cost, List<string> path) GetShortestPath(List<Input> inputs, string source, List<string> targets) => 
+        GetShortestPath(GetNodes(inputs, source), source, targets);
 
-        return GetShortestPath(nodes, source, targets);
-    }
-    
-    public static (int cost, List<List<string>> path) GetShortestPaths(List<Input> inputs, string source, List<string> targets)
-    {
-        var nodes = GetNodes(inputs, source);
+    public static (int cost, List<List<string>> path) GetShortestPaths(List<Input> inputs, string source, List<string> targets) => 
+        GetShortestPaths(GetNodes(inputs, source), source, targets);
 
-        return GetShortestPaths(nodes, source, targets);
-    }
-    
     private static Dictionary<string, Node> GetNodes(List<Input> inputs, string source, int costModifier = 1)
     {
         var nodes = new Dictionary<string, Node>();
@@ -62,7 +50,8 @@ public static class Graph
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => int.MaxValue);
         visited[source] = 0;
-        var queue = new Queue<Node>(new List<Node> { start });
+        var queue = new PriorityQueue<Node, int>();
+        queue.Enqueue(start, 0);
 
         while (queue.Count > 0)
         {
@@ -78,7 +67,7 @@ public static class Graph
                     continue;
 
                 visited[connection.Name] = cost;
-                queue.Enqueue(nodes[connection.Name]);
+                queue.Enqueue(nodes[connection.Name], cost);
             }
         }
 
@@ -90,7 +79,8 @@ public static class Graph
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => (cost: int.MaxValue, path: new List<string>()));
         visited[source] = (0, [source]);
-        var queue = new Queue<Node>(new List<Node> { start });
+        var queue = new PriorityQueue<Node, int>();
+        queue.Enqueue(start, 0);
 
         while (queue.Count > 0)
         {
@@ -106,7 +96,7 @@ public static class Graph
                     continue;
 
                 visited[connection.Name] = (cost, [..path, connection.Name]);
-                queue.Enqueue(nodes[connection.Name]);
+                queue.Enqueue(nodes[connection.Name], cost);
             }
         }
         
@@ -118,7 +108,8 @@ public static class Graph
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => (cost: int.MaxValue, paths: new List<List<string>>()));
         visited[source] = (0, [new List<string>{source}]);
-        var queue = new Queue<Node>(new List<Node> { start });
+        var queue = new PriorityQueue<Node, int>();
+        queue.Enqueue(start, 0);
 
         while (queue.Count > 0)
         {
@@ -140,7 +131,7 @@ public static class Graph
                 newPaths.AddRange(paths.Select(path => (List<string>) [..path, connection.Name]));
                 visited[connection.Name] = (cost, newPaths);
                 if(cost < visitedConnection.cost)
-                    queue.Enqueue(nodes[connection.Name]);
+                    queue.Enqueue(nodes[connection.Name], cost);
             }
         }
         

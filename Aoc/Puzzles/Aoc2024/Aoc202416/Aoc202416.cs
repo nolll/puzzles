@@ -44,10 +44,7 @@ public class Aoc202416 : AocPuzzle
         return new PuzzleResult(visited.Count, "6f785a700e3bd5c59db14bf9f8eb6d46");
     }
 
-    private HashSet<MatrixAddress> FindVisitedCoords(
-        Matrix<char> matrix, 
-        MatrixAddress start,
-        MatrixAddress end)
+    private HashSet<MatrixAddress> FindVisitedCoords(Matrix<char> matrix, MatrixAddress start, MatrixAddress end)
     {
         var startKey = $"{MatrixDirection.Right}|{start.Id}";
         List<string> endKeys = [$"{MatrixDirection.Right}|{end.Id}", $"{MatrixDirection.Up}|{end.Id}"];
@@ -70,7 +67,7 @@ public class Aoc202416 : AocPuzzle
         var spaceCoords = matrix.FindAddresses(EmptySpace);
         foreach (var coord in spaceCoords)
         {
-            foreach (var dir in AllDirections)
+            foreach (var dir in MatrixDirection.AllDirections)
             {
                 matrix.MoveTo(coord);
                 matrix.TurnTo(dir);
@@ -87,22 +84,16 @@ public class Aoc202416 : AocPuzzle
                 for (var i = 1; i <= 3; i++)
                 {
                     matrix.TurnRight();
-                    var cost = i % 2 == 0 ? 2000 : 1000;
+                    if(i % 2 == 0)
+                        continue;
+                    
                     var fromKey = $"{dir.Name}|{coord.Id}";
                     var toKey = $"{matrix.Direction.Name}|{matrix.Address.Id}";
-                    inputs.Add(new Graph.Input(fromKey, toKey, cost));
+                    inputs.Add(new Graph.Input(fromKey, toKey, 1000));
                 }
             }
         }
 
         return inputs;
     }
-    
-    private static List<MatrixDirection> AllDirections =>
-    [
-        MatrixDirection.Up,
-        MatrixDirection.Right,
-        MatrixDirection.Down,
-        MatrixDirection.Left
-    ];
 }

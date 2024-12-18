@@ -54,6 +54,7 @@ public class Aoc202324 : AocPuzzle
     
     private static (long x, long y, long z) FindRockPosition(string s)
     {
+        /*
         var allHailstones = ParseHailstones(s);
         var rangeSize = 500;
         var range = Enumerable.Range(-rangeSize, rangeSize).ToArray();
@@ -101,6 +102,7 @@ public class Aoc202324 : AocPuzzle
                 }   
             }
         }
+        */
 
         return (0, 0, 0);
     }

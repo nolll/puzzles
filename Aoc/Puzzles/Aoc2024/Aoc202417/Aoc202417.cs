@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Numbers;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202417;
 
@@ -9,13 +10,21 @@ public class Aoc202417 : AocPuzzle
     public PuzzleResult Part1(string input)
     {
         var nums = Numbers.IntsFromString(input);
+        var program = nums.Skip(3).ToArray();
+        var output = RunProgram(program, nums[0], nums[1], nums[2]);
+        var res = string.Join(",", output);
+        
+        return new PuzzleResult(res, "8ecd8cdd2990f11eb9ae9f0793770018");
+    }
+
+    private long[] RunProgram(int[] program, long a, long b, long c)
+    {
         var mem = new Dictionary<char, long>
         {
-            ['a'] = nums[0],
-            ['b'] = nums[1],
-            ['c'] = nums[2]
+            ['a'] = a,
+            ['b'] = b,
+            ['c'] = c
         };
-        var program = nums.Skip(3).ToArray();
         var output = new List<long>();
 
         var i = 0;
@@ -55,12 +64,12 @@ public class Aoc202417 : AocPuzzle
                 var comb = GetComboValue(mem, op);
                 output.Add(comb % 8);
             }
-            if (instr == 6) // bdv
+            else if (instr == 6) // bdv
             {
                 var comb = GetComboValue(mem, op);
                 mem['b'] = (long)Math.Floor(mem['a'] / Math.Pow(2, comb));
             }
-            if (instr == 7) // cdv
+            else if (instr == 7) // cdv
             {
                 var comb = GetComboValue(mem, op);
                 mem['c'] = (long)Math.Floor(mem['a'] / Math.Pow(2, comb));
@@ -69,9 +78,7 @@ public class Aoc202417 : AocPuzzle
             i += 2;
         }
 
-        var res = string.Join(",", output);
-        
-        return new PuzzleResult(res);
+        return output.ToArray();
     }
 
     private long GetComboValue(Dictionary<char, long> mem, long op) =>
@@ -86,6 +93,50 @@ public class Aoc202417 : AocPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        return new PuzzleResult(0);
+        var nums = Numbers.IntsFromString(input);
+        var program = nums.Skip(3).ToArray();
+        var programId = string.Join(",", program);
+
+        var a = 0L;
+        while (a < 200_000)
+        {
+            var output = RunProgram(program, a, nums[1], nums[2]);
+            var res = string.Join(",", output);
+            //var resxor = 8 ^ a;
+            //var bin = Convert.ToString(a, 2);
+            //Console.WriteLine($"{a}: {res} ({resxor})");
+            if (res == programId)
+                break;
+            a++;
+        }
+        
+        // 711912872598208 too high
+
+        return new PuzzleResult(a);
     }
+    
+    /*
+    public PuzzleResult Part2_2(string input)
+    {
+        var nums = Numbers.IntsFromString(input);
+        var program = nums.Skip(3).Select(o => (long)o).ToArray();
+
+        var res = Calc8Result(program);
+        
+        return new PuzzleResult(res);
+    }
+    */
+
+    private long Calc8Result(long[] nums)
+    {
+        var multiplier = 8L;
+        var res = 0L;
+        foreach (var n in nums)
+        {
+            res += n * multiplier;
+            multiplier *= 8;
+        }
+
+        return res;
+    } 
 }

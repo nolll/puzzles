@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.HashSets;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202408;

@@ -34,7 +34,7 @@ public static class Graph
         {
             if (!nodes.TryGetValue(input.From, out var node))
             {
-                node = new Node(input.From, new List<Connection>());
+                node = new Node(input.From, []);
                 nodes.Add(input.From, node);
             }
 

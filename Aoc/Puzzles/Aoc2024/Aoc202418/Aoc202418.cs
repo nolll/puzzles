@@ -1,4 +1,3 @@
-using FluentAssertions.Extensions;
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Numbers;

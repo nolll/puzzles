@@ -42,7 +42,7 @@ public class Aoc202418Tests
     [Test]
     public void Part2()
     {
-        Sut.Part2(Input, 12, null, 7, 7).Should().Be("6,1");
+        Sut.Part2(Input, 7, 7).Should().Be("6,1");
     }
 
     private static Aoc202418 Sut => new();

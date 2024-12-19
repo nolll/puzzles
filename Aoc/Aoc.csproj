@@ -12,63 +12,6 @@
 
   <ItemGroup>
     <None Include="Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
-    <None Update="Puzzles\Aoc2024\Aoc202401\Aoc202301.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202402\Aoc202401.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202403\Aoc202402.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202404\Aoc202403.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202405\Aoc202404.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202406\Aoc202401.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202407\Aoc202406.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202408\Aoc202407.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202409\Aoc202408.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202410\Aoc202409.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202411\Aoc202410.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202412\Aoc202411.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202413\Aoc202412.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202414\Aoc202413.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202415\Aoc202414.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202416\Aoc202415.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202417\Aoc202416.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202418\Aoc202417.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Puzzles\Aoc2024\Aoc202419\Aoc202418.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>

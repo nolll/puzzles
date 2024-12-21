@@ -26,7 +26,7 @@ public static class Graph
     public static (int cost, List<List<string>> path) GetShortestPaths(List<Input> inputs, string source, List<string> targets) => 
         GetShortestPaths(GetNodes(inputs, source), source, targets);
 
-    private static Dictionary<string, Node> GetNodes(List<Input> inputs, string source, int costModifier = 1)
+    public static Dictionary<string, Node> GetNodes(List<Input> inputs, string source, int costModifier = 1)
     {
         var nodes = new Dictionary<string, Node>();
 
@@ -139,6 +139,6 @@ public static class Graph
     }
 
     public record Input(string From, string To, int Cost = 1);
-    private record Node(string Name, List<Connection> Connections);
-    private record Connection(string Name, int Cost);
+    public record Node(string Name, List<Connection> Connections);
+    public record Connection(string Name, int Cost);
 }

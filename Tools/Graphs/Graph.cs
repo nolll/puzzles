@@ -23,7 +23,7 @@ public static class Graph
     public static (int cost, List<string> path) GetShortestPath(List<Input> inputs, string source, List<string> targets) => 
         GetShortestPath(GetNodes(inputs, source), source, targets);
 
-    public static (int cost, List<List<string>> path) GetShortestPaths(List<Input> inputs, string source, List<string> targets) => 
+    public static (int cost, List<List<string>> paths) GetShortestPaths(List<Input> inputs, string source, List<string> targets) => 
         GetShortestPaths(GetNodes(inputs, source), source, targets);
 
     public static Dictionary<string, Node> GetNodes(List<Input> inputs, string source, int costModifier = 1)
@@ -103,7 +103,7 @@ public static class Graph
         return targets.Select(o => visited[o]).MinBy(o => o.cost);
     }
     
-    private static (int cost, List<List<string>> path) GetShortestPaths(Dictionary<string, Node> nodes, string source, List<string> targets)
+    private static (int cost, List<List<string>> paths) GetShortestPaths(Dictionary<string, Node> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => (cost: int.MaxValue, paths: new List<List<string>>()));

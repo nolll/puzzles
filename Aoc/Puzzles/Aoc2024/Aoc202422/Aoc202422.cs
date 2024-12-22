@@ -22,20 +22,17 @@ public class Aoc202422 : AocPuzzle
         var allBuyerScores = new List<Dictionary<(int, int, int, int), long>>();
         foreach (var buyer in buyers)
         {
-            var ones = buyer.Select(o => o.ToString())
-                .Select(o => o.Substring(o.Length - 1, 1))
-                .Select(int.Parse)
-                .ToArray();
+            var ones = buyer.Select(o => (int)(o % 10)).ToArray();
             
             var buyerScores = new Dictionary<(int, int, int, int), long>();
             for (var i = 4; i < ones.Length; i++)
             {
-                var diff1 = ones[i - 3] - ones[i - 4];
-                var diff2 = ones[i - 2] - ones[i - 3];
-                var diff3 = ones[i - 1] - ones[i - 2];
-                var diff4 = ones[i] - ones[i - 1];
-                var diff = (diff1, diff2, diff3, diff4);
-                buyerScores.TryAdd(diff, ones[i]);
+                var v1 = ones[i - 4];
+                var v2 = ones[i - 3];
+                var v3 = ones[i - 2];
+                var v4 = ones[i - 1];
+                var v = ones[i];
+                buyerScores.TryAdd((v2 - v1, v3 - v2, v4 - v3, v - v4), v);
             }
             
             allBuyerScores.Add(buyerScores);
@@ -74,14 +71,13 @@ public class Aoc202422 : AocPuzzle
 
     private static long Generate(long n)
     {
-        const long mod = 16777216; 
-        var n1 = n * 64;
-        n = (n1 ^ n) % mod;
-        var n2 = (long)Math.Floor((double)n / 32);
-        n = (n2 ^ n) % mod;
-        var n3 = n * 2048;
-        n = (n3 ^ n) % mod;
+        n = Prune(Mix(n, n * 64));
+        n = Prune(Mix(n, n / 32));
+        n = Prune(Mix(n, n * 2048));
         
         return n;
     }
+    
+    private static long Mix(long a, long b) => a ^ b;
+    private static long Prune(long n) => n % 16777216;
 }

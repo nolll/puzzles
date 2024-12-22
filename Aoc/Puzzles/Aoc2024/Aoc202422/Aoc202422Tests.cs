@@ -15,7 +15,8 @@ public class Aoc202422Tests
     [TestCase(8, 12249484)]
     [TestCase(9, 7753432)]
     [TestCase(10, 5908254)]
-    public void Generate(int iterations, long expected) => Sut.Generate(123, iterations).Should().Be(expected);
+    public void Generate(int iterations, long expected) => 
+        Aoc202422.Generate(123, iterations).Last().Should().Be(expected);
 
     [Test]
     public void Part1()
@@ -33,9 +34,14 @@ public class Aoc202422Tests
     [Test]
     public void Part2()
     {
-        const string input = "";
+        const string input = """
+                             1
+                             2
+                             3
+                             2024
+                             """;
 
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part2(input).Answer.Should().Be("23");
     }
 
     private static Aoc202422 Sut => new();

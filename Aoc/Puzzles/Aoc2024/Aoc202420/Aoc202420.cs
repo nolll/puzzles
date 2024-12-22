@@ -8,7 +8,7 @@ public class Aoc202420 : AocPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var result = CountCheatsBetterThan(input, 100, 2);
+        var result = CountCheatsBetterThanPart1(input, 100);
         
         return new PuzzleResult(result, "345ad458eb8fecd2bee1b07cda111f5b");
     }
@@ -24,6 +24,58 @@ public class Aoc202420 : AocPuzzle
     {
         var results = ScoresWithCheats(input, cheatCount);
         return results.paths.Count(o => results.baseScore - o.Count >= limit);
+    }
+    
+    public int CountCheatsBetterThanPart1(string input, int limit)
+    {
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var start = matrix.FindAddresses('S').First();
+        var end = matrix.FindAddresses('E').First();
+        matrix.WriteValueAt(start, '.');
+        matrix.WriteValueAt(end, '.');
+        
+        var path = PathFinder.ShortestPathTo(matrix, start, end);
+        path = [start, ..path];
+
+        var distanceToTarget = new Dictionary<MatrixAddress, int>();
+        for (var i = 0; i < path.Count; i++)
+        {
+            distanceToTarget.Add(path[i], path.Count - i);
+        }
+
+        var cheats = new List<int>();
+        foreach (var coord in path)
+        {
+            matrix.MoveTo(coord);
+            matrix.TurnTo(MatrixDirection.Up);
+            for (var i = 0; i < 4; i++)
+            {
+                matrix.TurnRight();
+                if (!matrix.TryMoveForward())
+                    continue;
+
+                if(matrix.ReadValue() == '.')
+                {
+                    matrix.MoveBackward();
+                    continue;
+                }
+
+                if (!matrix.MoveForward())
+                    continue;
+                
+                if(matrix.ReadValue() == '.')
+                {
+                    var diff = distanceToTarget[coord] - distanceToTarget[matrix.Address];
+                    if(diff > 0)
+                        cheats.Add(diff);
+                }
+
+                matrix.MoveBackward();
+                matrix.MoveBackward();
+            }
+        }
+
+        return cheats.Count(o => o > limit);
     }
     
     public (int baseScore, List<List<MatrixAddress>> paths) ScoresWithCheats(string input, int cheatCount)

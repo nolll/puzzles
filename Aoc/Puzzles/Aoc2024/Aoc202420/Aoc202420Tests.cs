@@ -27,7 +27,7 @@ public class Aoc202420Tests
     [Test]
     public void Part1_1()
     {
-        Sut.CountCheatsBetterThan(Input, 35, 2).Should().Be(4);
+        Sut.CountCheatsBetterThanPart1(Input, 35).Should().Be(4);
     }
     
     [Test]

@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.HashSets;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202420;
 
@@ -15,7 +16,7 @@ public class Aoc202420 : AocPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        var result = CountCheatsBetterThan(input, 100, 20);
+        var result = CountCheatsBetterThanPart2(input, 100);
         
         return new PuzzleResult(0);
     }
@@ -76,6 +77,65 @@ public class Aoc202420 : AocPuzzle
         }
 
         return cheats.Count(o => o > limit);
+    }
+
+    public int CountCheatsBetterThanPart2(string input, int limit) => 
+        GetCheatsPart2(input, limit).Count(o => o.Value > limit);
+
+    public Dictionary<(MatrixAddress from, MatrixAddress to), int> GetCheatsPart2(string input, int limit)
+    {
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var start = matrix.FindAddresses('S').First();
+        var end = matrix.FindAddresses('E').First();
+        matrix.WriteValueAt(start, '.');
+        matrix.WriteValueAt(end, '.');
+        
+        var path = PathFinder.ShortestPathTo(matrix, start, end);
+        path = [start, ..path];
+        
+        var distanceToTarget = new Dictionary<MatrixAddress, int>();
+        for (var i = 0; i < path.Count; i++)
+        {
+            distanceToTarget.Add(path[i], path.Count - i - 1);
+        }
+        
+        var cheats = new Dictionary<(MatrixAddress from, MatrixAddress to), int>();
+        var counter = 1;
+        Console.WriteLine($" Total count: {path.Count}");
+        foreach (var coord in path)
+        {
+            var closeTargets = path
+                .Where(o =>
+                {
+                    var distance = o.ManhattanDistanceTo(coord);
+                    var isClose = distance is > 0 and <= 20;
+                    if (!isClose)
+                        return false;
+                    return distanceToTarget[coord] - distanceToTarget[o] - distance > limit;
+                }).ToList();
+            
+            Console.WriteLine($" {counter}: {coord.Id}: {closeTargets.Count}");
+            counter++;
+            
+            foreach (var target in closeTargets)
+            {
+                var p = PathFinder.ShortestPathTo(matrix, coord, target, NeighborFunc);
+                if (p.Count > 0)
+                {
+                    var diff = distanceToTarget[coord] - distanceToTarget[target] - p.Count;
+                    if (diff > 0) 
+                        cheats[(coord, target)] = diff;
+                }
+
+                continue;
+
+                List<MatrixAddress> NeighborFunc(Matrix<char> m, MatrixAddress c) => 
+                    matrix.OrthogonalAdjacentCoords.Where(o => matrix.Address.Equals(end) || matrix.ReadValueAt(o) == '#')
+                        .ToList();
+            }
+        }
+
+        return cheats;
     }
     
     public (int baseScore, List<List<MatrixAddress>> paths) ScoresWithCheats(string input, int cheatCount)

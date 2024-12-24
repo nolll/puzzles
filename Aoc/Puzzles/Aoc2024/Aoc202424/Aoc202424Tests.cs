@@ -83,7 +83,22 @@ public class Aoc202424Tests
     [Test]
     public void Part2()
     {
-        const string input = "";
+        const string input = """
+                             x00: 1
+                             x01: 1
+                             x02: 0
+                             x03: 1
+                             y00: 1
+                             y01: 0
+                             y02: 1
+                             y03: 1
+                             
+                             z00: 0
+                             z01: 0
+                             z02: 0
+                             z03: 1
+                             z04: 1
+                             """;
 
         Sut.Part2(input).Answer.Should().Be("0");
     }

@@ -24,6 +24,9 @@
     <None Update="Puzzles\Aoc2024\Aoc202423\Aoc202422.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Puzzles\Aoc2024\Aoc202424\Aoc202423.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

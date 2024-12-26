@@ -1,21 +1,15 @@
 using Pzl.Common;
-using Pzl.Tools.Combinatorics;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202424;
 
 [Name("Crossed Wires")]
+[Comment("Solved by manual inspection of printout")]
 public class Aoc202424 : AocPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var parts = input.Split(LineBreaks.Double);
-        var wires = parts[0].Split(LineBreaks.Single)
-            .Select(o => o.Split(": "))
-            .ToDictionary(k => k[0], v => long.Parse(v[1]));
-        var gates = parts[1].Split(LineBreaks.Single)
-            .Select(o => o.Split(' '))
-            .ToDictionary(k => k[4], v => (v[0], v[2], v[1]));
+        var (wires, gates) = ParseWiresAndGates(input);
 
         var processor = new Processor(gates, wires);
         
@@ -28,11 +22,45 @@ public class Aoc202424 : AocPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        var result = Part2(input, 4);
-        return new PuzzleResult(result);
+        var (wires, gates) = ParseWiresAndGates(input);
+
+        var zgates = gates.Keys.Where(o => o.StartsWith('z')).Order().ToList();
+        var xwires = wires.Where(o => o.Key.StartsWith('x')).OrderByDescending(o => o.Key).Select(o => o.Value);
+        var ywires = wires.Where(o => o.Key.StartsWith('y')).OrderByDescending(o => o.Key).Select(o => o.Value);
+        var x = Convert.ToInt64(string.Join("", xwires), 2);
+        var y = Convert.ToInt64(string.Join("", ywires), 2);
+
+        // Found by inspecting printout
+        List<string[]> swaps =
+        [
+            ["z07", "swt"],
+            ["z13", "pqc"],
+            ["wsv", "rjm"],
+            ["z31", "bgs"]
+        ];
+
+        foreach (var swap in swaps) 
+            (gates[swap[0]], gates[swap[1]]) = (gates[swap[1]], gates[swap[0]]);
+        
+        // Print(gates, zgates);
+        
+        var processor = new Processor(gates, wires);
+        var results = zgates.Select(zgate => processor.Process(zgate)).ToList();
+        var r = Convert.ToInt64(string.Join("", results.Reversed()), 2);
+        
+        // Make sure result is correct. This will fail without the swaps
+        if (r != x + y)
+            throw new Exception("Calculation not correct");
+        
+        var swapped = swaps.SelectMany(o => o).Order();
+
+        var result = string.Join(",", swapped);
+        
+        return new PuzzleResult(result, "664e08ee1c7756ec0bf56764e81d2280");
     }
-    
-    public string Part2(string input, int swapCount)
+
+    private (Dictionary<string, long> wires, Dictionary<string, (string, string, string)> gates) ParseWiresAndGates(
+        string input)
     {
         var parts = input.Split(LineBreaks.Double);
         var wires = parts[0].Split(LineBreaks.Single)
@@ -42,78 +70,38 @@ public class Aoc202424 : AocPuzzle
             .Select(o => o.Split(' '))
             .ToDictionary(k => k[4], v => (v[0], v[2], v[1]));
 
-        var xwires = wires.Where(o => o.Key.StartsWith('x')).OrderByDescending(o => o.Key).Select(o => o.Value);
-        var ywires = wires.Where(o => o.Key.StartsWith('y')).OrderByDescending(o => o.Key).Select(o => o.Value);
-        var a = Convert.ToInt64(string.Join("", xwires), 2);
-        var b = Convert.ToInt64(string.Join("", ywires), 2);
+        return (wires, gates);
+    }
 
-        var gateNames = gates.Keys.Order().ToArray();
-        var swapset = new HashSet<(string, string)>();
-        for (var i = 0; i < gates.Keys.Count; i++)
+    private void Print(Dictionary<string, (string, string, string)> gates, List<string> zgates)
+    {
+        foreach (var zgate in zgates)
         {
-            for (var j = i + 1; j < gates.Keys.Count; j++)
-            {
-                if (i == j)
-                    continue;
-
-                swapset.Add((gateNames[i], gateNames[j]));
-            }
+            Console.WriteLine();
+            Print(gates, zgate, 3, 0);
         }
+    }
 
-        var swaps = swapset.ToArray();
-        Console.WriteLine("Get combos");
-        var swapcombos = CombinationGenerator.GetUniqueCombinationsFixedSize(swaps, swapCount).Where(o =>
-        {
-            var all = new List<string>();
-            foreach (var swap in o)
-            {
-                all.Add(swap.Item1);
-                all.Add(swap.Item2);
-            }
+    private void Print(Dictionary<string, (string, string, string)> gates, string name, int maxdepth, int depth)
+    {
+        if (depth == maxdepth)
+            return;
 
-            return all.Distinct().Count() == o.Count * swapCount;
-        }).ToList();
+        if (!gates.TryGetValue(name, out var gate))
+            return;
         
-        Console.WriteLine($" Swapcombos: {swapcombos.Count()}");
+        var space = new string(' ', depth * 2);
+        Console.WriteLine($"{space}{name} = {gate.Item1} {gate.Item3} {gate.Item2}");
         
-        var expectedResult = a & b;
-
-        var zgates = gates.Keys.Where(o => o.StartsWith('z')).OrderDescending().ToList();
-        IList<(string, string)> selectedSwap = [];
-        var processor = new Processor(gates, wires);
-        var counter = 0;
-        foreach (var combo in swapcombos)
-        {
-            counter++;
-            processor.Swap(combo);
-            var results = zgates.Select(o => processor.Process(o));
-            var dec = Convert.ToInt64(string.Join("", results), 2);
-            if (dec == expectedResult)
-            {
-                selectedSwap = combo;
-                break;
-            }
-            processor.Swap(combo);
-            Console.WriteLine(counter);
-        }
-
-        var result = new List<string>();
-        foreach (var swap in selectedSwap)
-        {
-            result.Add(swap.Item1);
-            result.Add(swap.Item2);
-        }
-
-        var ans = string.Join(",", result.Order());
-        
-        return ans;
+        Print(gates, gates[name].Item1, maxdepth, depth + 1);
+        Print(gates, gates[name].Item2, maxdepth, depth + 1);
     }
 
     private class Processor
     {
         private readonly Dictionary<string, long> _wires;
         private readonly Dictionary<string, (string a, string b, Func<string, string, long> f)> _gates;
-
+        
         public Processor(Dictionary<string, (string a, string b, string op)> gates, Dictionary<string, long> wires)
         {
             _gates = gates.ToDictionary(o => o.Key, o => (o.Value.a, o.Value.b, f: GetProcessFunc(o.Value.op)));
@@ -124,7 +112,7 @@ public class Aoc202424 : AocPuzzle
         {
             if (_wires.TryGetValue(name, out var v))
                 return v;
-
+            
             var gate = _gates[name];
             return gate.f(gate.a, gate.b);
         }
@@ -141,13 +129,5 @@ public class Aoc202424 : AocPuzzle
         private long ProcessAnd(string a, string b) => Process(a) & Process(b);
         private long ProcessOr(string a, string b) => Process(a) | Process(b);
         private long ProcessXor(string a, string b) => Process(a) ^ Process(b);
-
-        public void Swap(IList<(string, string)> swaps)
-        {
-            foreach (var swap in swaps)
-            {
-                (_gates[swap.Item1], _gates[swap.Item2]) = (_gates[swap.Item2], _gates[swap.Item1]);
-            }
-        }
     }
 }

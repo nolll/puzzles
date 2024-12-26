@@ -4,6 +4,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202324;
 
 [Name("Never Tell Me The Odds")]
+[Comment("Learn more about equation systems")]
 public class Aoc202324 : AocPuzzle
 {
     public PuzzleResult RunPart1(string input)

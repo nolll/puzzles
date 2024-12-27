@@ -7,8 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202325;
 public class Aoc202325Tests
 {
     [Test]
-    [Ignore(TestHelper.WorkInProgress)]
-    public void DivideIntoGroups()
+    public void Part1()
     {
         const string input = """
                              jqt: rhn xhk nvd
@@ -26,8 +25,8 @@ public class Aoc202325Tests
                              frs: qnr lhk lsr
                              """;
 
-        var result = Aoc202325.DivideIntoGroups(input);
-
-        result.Should().Be(54);
+        Sut.Part1(input).Answer.Should().Be("54");
     }
+
+    private Aoc202325 Sut => new();
 }

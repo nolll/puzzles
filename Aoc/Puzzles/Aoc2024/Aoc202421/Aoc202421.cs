@@ -41,40 +41,13 @@ public class Aoc202421 : AocPuzzle
         return new PuzzleResult(result, "11dc3947e6394cb17a12fc9fb6d874c7");
     }
 
-    private long Run(string input, int robotCount)
-    {
-        var codes = input.Split(LineBreaks.Single);
-        var result = 0L;
-        foreach (var code in codes)
-        {
-            var length = Solve(code, robotCount);
-            var numpart = Numbers.IntsFromString(code).First();
-            result += length * numpart;
-        }
-        
-        return result;
-    }
+    private long Run(string input, int robotCount) => 
+        input.Split(LineBreaks.Single)
+            .Sum(code => Solve(code, robotCount) * Numbers.IntsFromString(code).First());
 
-    public long Solve(string code, int robotCount)
-    {
-        var inputs = Solve(code, NumSeqs);
-        
-        var optimal = long.MaxValue;
-        var cache = new Dictionary<(string x, string y, int depth), long>();
-        foreach (var seq in inputs)
-        {
-            var length = 0L;
-            foreach (var (a, b) in ("A" + seq).Zip(seq))
-            {
-                length += ComputeLength(cache, a.ToString(), b.ToString(), robotCount);
-            }
+    public long Solve(string code, int robotCount) =>
+        Solve(code, NumSeqs).Select(o => ComputeLength([], o, robotCount)).Min();
 
-            optimal = Math.Min(optimal, length); 
-        }
-
-        return optimal;
-    }
-    
     private List<string> Solve(string code, Dictionary<(string, string), List<string>> seqs)
     {
         var options = new List<List<string>>();
@@ -88,31 +61,24 @@ public class Aoc202421 : AocPuzzle
         return results.Select(o => string.Join("", o)).ToList();
     }
 
-    private static long ComputeLength(Dictionary<(string x, string y, int depth), long> cache, string x, string y, int depth)
+    private static long ComputeLength(Dictionary<(string seq, int depth), long> cache, string seq, int depth)
     {
         if (depth == 1)
-            return ArrowLengths[(x, y)];
+            return ("A" + seq).Zip(seq).Select(o => ArrowLengths[(o.First.ToString(), o.Second.ToString())]).Sum();
         
-        var cachekey = (x, y, depth);
+        var cachekey = (seq, depth);
         if (cache.TryGetValue(cachekey, out var cachedlength))
             return cachedlength;
-
-        var optimal = long.MaxValue;
-
-        foreach (var seq in ArrowSeqs[(x, y)])
+        
+        var length = 0L;
+        foreach (var (x, y) in ("A" + seq).Zip(seq))
         {
-            var length = 0L;
-            foreach (var (a, b) in ("A" + seq).Zip(seq))
-            {
-                length += ComputeLength(cache, a.ToString(), b.ToString(), depth - 1);
-            }
-
-            optimal = Math.Min(optimal, length);
+            length += ArrowSeqs[(x.ToString(), y.ToString())].Select(o => ComputeLength(cache, o, depth - 1)).Min();
         }
 
-        cache.TryAdd(cachekey, optimal);
+        cache.TryAdd(cachekey, length);
         
-        return optimal;
+        return length;
     }
 
     private static Dictionary<(string, string), List<string>> ComputeSequences(List<List<string>> keypad)
@@ -147,14 +113,7 @@ public class Aoc202421 : AocPuzzle
                 while (q.Count > 0)
                 {
                     var ((r, c), moves) = q.Dequeue();
-                    var dirs = new List<(int nr, int nc, string nm)>
-                    {
-                        (r - 1, c, "^"),
-                        (r, c + 1, ">"),
-                        (r + 1, c, "v"),
-                        (r, c - 1, "<")
-                    };
-                    foreach (var (nr, nc, nm) in dirs)
+                    foreach (var (nr, nc, nm) in GetNextMoves(r, c))
                     {
                         if (nr < 0 || nc < 0 || nr >= keypad.Count || nc >= keypad[0].Count)
                             continue;
@@ -183,10 +142,19 @@ public class Aoc202421 : AocPuzzle
                         break;
 
                 }
+                
                 seqs[(x, y)] = possibilities;
             }    
         }
 
         return seqs;
     }
+
+    private static List<(int nr, int nc, string nm)> GetNextMoves(int r, int c) =>
+    [
+        (r - 1, c, "^"),
+        (r, c + 1, ">"),
+        (r + 1, c, "v"),
+        (r, c - 1, "<")
+    ];
 }

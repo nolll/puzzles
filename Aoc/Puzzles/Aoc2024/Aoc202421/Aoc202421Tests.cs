@@ -10,7 +10,7 @@ public class Aoc202421Tests
     {
         const string input = "029A";
 
-        Sut.Solve(input).Should().Be(68);
+        Sut.Solve(input, 2).Should().Be(68);
     }
     
     [Test]

@@ -1,184 +1,144 @@
 using Pzl.Common;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
-using Pzl.Tools.Graphs;
+using Pzl.Tools.Combinatorics;
+using Pzl.Tools.Numbers;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202421;
 
 [Name("Keypad Conundrum")]
 public class Aoc202421 : AocPuzzle
 {
-    private string _robot1Pos = "A";
-    private string _robot2Pos = "A";
-    private string _robot3Pos = "A";
-
-    private const string NumKeys = """
-                                   789
-                                   456
-                                   123
-                                   .0A
-                                   """;
-
-    private const string ArrowKeys = """
-                                     .^A
-                                     <v>
-                                     """;
-
-    private static readonly Dictionary<(string, string), char> NumDirections = BuildNumDirections(NumKeys);
-    private static readonly Dictionary<(string, string), char> ArrowDirections = BuildNumDirections(ArrowKeys);
-    private static readonly List<Graph.Input> NumpadInputs = GetNumpadInputs();
-    private static readonly List<Graph.Input> ArrowpadInputs = GetArrowpadInputs();
-
-    private static List<Graph.Input> GetNumpadInputs()
-    {
-        var matrix = MatrixBuilder.BuildCharMatrix(NumKeys);
-        var inputs = new List<Graph.Input>();
-        
-        foreach (var coord in matrix.Coords)
-        {
-            var v = matrix.ReadValueAt(coord);
-            var adj = matrix.OrthogonalAdjacentValuesTo(coord).Where(o => o != '.');
-            inputs.AddRange(adj.Select(adjv => new Graph.Input(v.ToString(), adjv.ToString())));
-        }
-        
-        return inputs;
-    }
-
-    private static List<Graph.Input> GetArrowpadInputs()
-    {
-        var matrix = MatrixBuilder.BuildCharMatrix(ArrowKeys);
-        var inputs = new List<Graph.Input>();
-        
-        foreach (var coord in matrix.Coords)
-        {
-            var v = matrix.ReadValueAt(coord);
-            var adj = matrix.OrthogonalAdjacentValuesTo(coord).Where(o => o != '.');
-            inputs.AddRange(adj.Select(adjv => new Graph.Input(v.ToString(), adjv.ToString())));
-        }
-        
-        return inputs;
-    }
-
-    private string GetDirectionsLevel1(string input)
-    {
-        var directions = "";
-        foreach (var c in input)
-        {
-            var to = c.ToString();
-            var result = Graph.GetShortestPath(NumpadInputs, _robot1Pos, to);
-            var path = string.Join("", result.path);
-            directions += GetDirectionsLevel2(GetNumDirections(path) + "A");
-            _robot1Pos = to;
-        }
-
-        return directions;
-    }
+    private static readonly List<List<string>> Numpad =
+    [
+        ["7", "8", "9"],
+        ["4", "5", "6"],
+        ["1", "2", "3"],
+        ["", "0", "A"]
+    ];
     
-    private string GetDirectionsLevel2(string input)
-    {
-        var directions = "";
-        foreach (var c in input)
-        {
-            var to = c.ToString();
-            var result = Graph.GetShortestPath(ArrowpadInputs, _robot2Pos, to);
-            var path = string.Join("", result.path);
-            directions += GetDirectionsLevel3(GetArrowDirections(path) + "A");
-            _robot2Pos = to;
-        }
+    private static readonly List<List<string>> Arrowpad =
+    [
+        ["", "^", "A"],
+        ["<", "v", ">"]
+    ];
 
-        return directions;
-    }
-    
-    private string GetDirectionsLevel3(string input)
-    {
-        var directions = "";
-        foreach (var c in input)
-        {
-            var to = c.ToString();
-            var result = Graph.GetShortestPath(ArrowpadInputs, _robot3Pos, to);
-            var path = string.Join("", result.path);
-            directions += GetArrowDirections(path) + "A";
-            _robot3Pos = to;
-        }
-
-        return directions;
-    }
-    
     public PuzzleResult Part1(string input)
     {
-        var directions = GetDirectionsLevel1(input);
-        
-        return new PuzzleResult(directions);
-    }
-
-    private string GetNumDirections(string path)
-    {
-        var dirs = "";
-        for (var i = 0; i < path.Length - 1; i++)
+        var codes = input.Split(LineBreaks.Single);
+        var result = 0L;
+        foreach (var code in codes)
         {
-            var from = path[i].ToString();
-            var to = path[i + 1].ToString();
-            dirs += NumDirections[(from, to)];
+            var length = Solve(code);
+            var numpart = Numbers.IntsFromString(code).First();
+            result += length * numpart;
         }
         
-        return dirs;
+        return new PuzzleResult(result, "0e39f69d96697459d6010612d45068b8");
     }
     
-    private string GetArrowDirections(string path)
-    {
-        var dirs = "";
-        for (var i = 0; i < path.Length - 1; i++)
-        {
-            var from = path[i].ToString();
-            var to = path[i + 1].ToString();
-            dirs += ArrowDirections[(from, to)];
-        }
-        
-        return dirs;
-    }
-
-    private static Dictionary<(string, string), char> BuildNumDirections(string layout)
-    {
-        var directions = new Dictionary<(string, string), char>();
-        var matrix = MatrixBuilder.BuildCharMatrix(layout);
-        foreach (var coord in matrix.Coords)
-        {
-            matrix.MoveTo(coord);
-            var from = matrix.ReadValue().ToString();
-            if (from == ".")
-                continue;
-            
-            for (var i = 0; i < 4; i++)
-            {
-                matrix.TurnRight();
-                if (matrix.TryMoveForward())
-                {
-                    var to = matrix.ReadValue().ToString();
-                    if (to != "." && to != from)
-                    {
-                        directions.Add((from, to), GetDirection(matrix.Direction));
-                    }
-                    
-                    matrix.MoveBackward();
-                }
-            }
-        }
-
-        return directions;
-    }
-
-    private static char GetDirection(MatrixDirection dir)
-    {
-        if (dir.Equals(MatrixDirection.Up))
-            return '^';
-        if (dir.Equals(MatrixDirection.Right))
-            return '>';
-        if (dir.Equals(MatrixDirection.Down))
-            return 'v';
-        return '<';
-    }
-
     public PuzzleResult Part2(string input)
     {
         return new PuzzleResult(0);
+    }
+
+    public int Solve(string code)
+    {
+        var next = Solve(code, Numpad);
+        for (var _ = 0; _ < 2; _++)
+        {
+            var possibleNext = new List<string>();
+            foreach (var seq in next)
+            {
+                possibleNext.AddRange(Solve(seq, Arrowpad));
+            }
+
+            var minlength = possibleNext.Min(o => o.Length);
+            next = possibleNext.Where(o => o.Length == minlength).ToList();
+        }
+
+        return next.First().Length;
+    }
+
+    private List<string> Solve(string code, List<List<string>> keypad)
+    {
+        var pos = new Dictionary<string, (int r, int c)>();
+        for (var r = 0; r < keypad.Count; r++)
+        {
+            for (var c = 0; c < keypad[0].Count; c++)
+            {
+                var key = keypad[r][c];
+                if (key != "")
+                    pos[key] = (r, c);
+            }
+        }
+
+        var seqs = new Dictionary<(string, string), List<string>>();
+        foreach (var x in pos.Keys)
+        {
+            foreach (var y in pos.Keys)
+            {
+                if (x == y)
+                {
+                    seqs[(x, y)] = ["A"];
+                    continue;
+                }
+
+                var possibilities = new List<string>();
+                var q = new Queue<((int r, int c), string sequence)>();
+                q.Enqueue((pos[x], ""));
+                var optimal = int.MaxValue;
+                var foundOptimal = false;
+                while (q.Count > 0)
+                {
+                    var ((r, c), moves) = q.Dequeue();
+                    var dirs = new List<(int nr, int nc, string nm)>
+                    {
+                        (r - 1, c, "^"),
+                        (r, c + 1, ">"),
+                        (r + 1, c, "v"),
+                        (r, c - 1, "<")
+                    };
+                    foreach (var (nr, nc, nm) in dirs)
+                    {
+                        if (nr < 0 || nc < 0 || nr >= keypad.Count || nc >= keypad[0].Count)
+                            continue;
+
+                        if (keypad[nr][nc] == "")
+                            continue;
+                        
+                        if (keypad[nr][nc] == y)
+                        {
+                            if (optimal < moves.Length + 1)
+                            {
+                                foundOptimal = true;
+                                break;
+                            }
+
+                            optimal = moves.Length + 1;
+                            possibilities.Add(moves + nm + "A");
+                        }
+                        else
+                        {
+                            q.Enqueue(((nr, nc), moves + nm));
+                        }
+                    }
+
+                    if (foundOptimal)
+                        break;
+
+                }
+                seqs[(x, y)] = possibilities;
+            }    
+        }
+
+        var options = new List<List<string>>();
+        foreach (var (x, y) in ("A" + code).Zip(code))
+        {
+            options.Add(seqs[(x.ToString(), y.ToString())]);
+        }
+
+        var results = CombinationGenerator.CartesianProduct(options);
+        
+        return results.Select(o => string.Join("", o)).ToList();
     }
 }

@@ -5,36 +5,26 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202421;
 
 public class Aoc202421Tests
 {
-    //[Test]
-    //public void Part1_FirstLevel()
-    //{
-    //    const string input = "029A";
-    //
-    //    Sut.Part1(input).Answer.Length.Should().Be("<A^A>^^AvvvA".Length);
-    //}
-    
     [Test]
-    public void Part1_ThirdLevel()
+    public void Part1()
     {
         const string input = "029A";
 
-        Sut.Part1(input).Answer.Length.Should().Be("<vA<AA>>^AvAA<^A>A<v<A>>^AvA^A<vA>^A<v<A>^A>AAvA^A<v<A>A>^AAAvA<^A>A".Length);
+        Sut.Solve(input).Should().Be(68);
     }
-
-    //[Test]
-    //public void Part1_SecondLevel()
-    //{
-    //    const string input = "029A";
-    //
-    //    Sut.Part1(input).Answer.Length.Should().Be("v<<A>>^A<A>AvA<^AA>A<vAAA>^A".Length);
-    //}
-
+    
     [Test]
-    public void Part2()
+    public void Part1_All()
     {
-        const string input = "";
+        const string input = """
+                             029A
+                             980A
+                             179A
+                             456A
+                             379A
+                             """;
 
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part1(input).Answer.Should().Be("126384");
     }
 
     private static Aoc202421 Sut => new();

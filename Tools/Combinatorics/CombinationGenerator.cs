@@ -82,4 +82,17 @@ public static class CombinationGenerator
 
         return e;
     }
+    
+    // Found here: https://stackoverflow.com/questions/3093622/generating-all-possible-combinations/3098381
+    public static  IEnumerable<IEnumerable<T>> CartesianProduct<T>(IEnumerable<IEnumerable<T>> sequences)
+    {
+        IEnumerable<IEnumerable<T>> emptyProduct = [[]];
+        return sequences.Aggregate(
+            emptyProduct,
+            (accumulator, sequence) =>
+                from accseq in accumulator 
+                from item in sequence
+                select accseq.Concat([item])              
+        );
+    }
 }

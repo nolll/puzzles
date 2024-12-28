@@ -9,24 +9,24 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202421;
 // Solved with a lot of help from HyperNeutrino. I was on the right track tho
 public class Aoc202421 : AocPuzzle
 {
-    private static readonly List<List<string>> Numpad =
+    private static readonly List<List<char>> Numpad =
     [
-        ["7", "8", "9"],
-        ["4", "5", "6"],
-        ["1", "2", "3"],
-        ["", "0", "A"]
+        ['7', '8', '9'],
+        ['4', '5', '6'],
+        ['1', '2', '3'],
+        [' ', '0', 'A']
     ];
     
-    private static readonly List<List<string>> Arrowpad =
+    private static readonly List<List<char>> Arrowpad =
     [
-        ["", "^", "A"],
-        ["<", "v", ">"]
+        [' ', '^', 'A'],
+        ['<', 'v', '>']
     ];
 
-    private static readonly Dictionary<(string, string), List<string>> NumSeqs = ComputeSequences(Numpad);
-    private static readonly Dictionary<(string, string), List<string>> ArrowSeqs = ComputeSequences(Arrowpad);
+    private static readonly Dictionary<(char, char), List<string>> NumSeqs = ComputeSequences(Numpad);
+    private static readonly Dictionary<(char, char), List<string>> ArrowSeqs = ComputeSequences(Arrowpad);
 
-    private static readonly Dictionary<(string, string), int> ArrowLengths =
+    private static readonly Dictionary<(char, char), int> ArrowLengths =
         ArrowSeqs.ToDictionary(k => k.Key, v => v.Value.First().Length);
 
     public PuzzleResult Part1(string input)
@@ -48,12 +48,12 @@ public class Aoc202421 : AocPuzzle
     public long Solve(string code, int robotCount) =>
         Solve(code, NumSeqs).Select(o => ComputeLength([], o, robotCount)).Min();
 
-    private List<string> Solve(string code, Dictionary<(string, string), List<string>> seqs)
+    private List<string> Solve(string code, Dictionary<(char, char), List<string>> seqs)
     {
         var options = new List<List<string>>();
         foreach (var (x, y) in ("A" + code).Zip(code))
         {
-            options.Add(seqs[(x.ToString(), y.ToString())]);
+            options.Add(seqs[(x, y)]);
         }
 
         var results = CombinationGenerator.CartesianProduct(options);
@@ -64,7 +64,7 @@ public class Aoc202421 : AocPuzzle
     private static long ComputeLength(Dictionary<(string seq, int depth), long> cache, string seq, int depth)
     {
         if (depth == 1)
-            return ("A" + seq).Zip(seq).Select(o => ArrowLengths[(o.First.ToString(), o.Second.ToString())]).Sum();
+            return ("A" + seq).Zip(seq).Select(o => ArrowLengths[(o.First, o.Second)]).Sum();
         
         var cachekey = (seq, depth);
         if (cache.TryGetValue(cachekey, out var cachedlength))
@@ -73,7 +73,7 @@ public class Aoc202421 : AocPuzzle
         var length = 0L;
         foreach (var (x, y) in ("A" + seq).Zip(seq))
         {
-            length += ArrowSeqs[(x.ToString(), y.ToString())].Select(o => ComputeLength(cache, o, depth - 1)).Min();
+            length += ArrowSeqs[(x, y)].Select(o => ComputeLength(cache, o, depth - 1)).Min();
         }
 
         cache.TryAdd(cachekey, length);
@@ -81,20 +81,20 @@ public class Aoc202421 : AocPuzzle
         return length;
     }
 
-    private static Dictionary<(string, string), List<string>> ComputeSequences(List<List<string>> keypad)
+    private static Dictionary<(char, char), List<string>> ComputeSequences(List<List<char>> keypad)
     {
-        var pos = new Dictionary<string, (int r, int c)>();
+        var pos = new Dictionary<char, (int r, int c)>();
         for (var r = 0; r < keypad.Count; r++)
         {
             for (var c = 0; c < keypad[0].Count; c++)
             {
                 var key = keypad[r][c];
-                if (key != "")
+                if (key != ' ')
                     pos[key] = (r, c);
             }
         }
 
-        var seqs = new Dictionary<(string, string), List<string>>();
+        var seqs = new Dictionary<(char, char), List<string>>();
         foreach (var x in pos.Keys)
         {
             foreach (var y in pos.Keys)
@@ -118,7 +118,7 @@ public class Aoc202421 : AocPuzzle
                         if (nr < 0 || nc < 0 || nr >= keypad.Count || nc >= keypad[0].Count)
                             continue;
 
-                        if (keypad[nr][nc] == "")
+                        if (keypad[nr][nc] == ' ')
                             continue;
                         
                         if (keypad[nr][nc] == y)

@@ -24,11 +24,11 @@ public class Aoc202119 : AocPuzzle
 
     private BeaconSystemResult GetResult(string input)
     {
-        if(_result == null)
-        {
-            var system = new BeaconSystem();
-            _result = system.GetResult(input);
-        }
+        if (_result != null)
+            return _result;
+        
+        var system = new BeaconSystem();
+        _result = system.GetResult(input);
 
         return _result;
     }

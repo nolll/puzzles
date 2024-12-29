@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
 
 public class RadioisotopeSimulator
 {
-    private readonly HashSet<string> _previousFacilities = new();
+    private readonly HashSet<string> _previousFacilities = [];
     private readonly IsotopeNameProvider _isotopeNameProvider = new();
     private readonly AnonymousNameProvider _anonymousNameProvider = new();
 
@@ -40,12 +40,12 @@ public class RadioisotopeSimulator
                         f.Floors[newFloor].Items.Add(item);
                     }
 
-                    if (!AlreadyVisited(f))
-                    {
-                        TrackVisit(f);
-                        if (f.IsValid) 
-                            newFacilities.Add(f);
-                    }
+                    if (AlreadyVisited(f))
+                        continue;
+                    
+                    TrackVisit(f);
+                    if (f.IsValid) 
+                        newFacilities.Add(f);
                 }
             }
 
@@ -60,14 +60,12 @@ public class RadioisotopeSimulator
                     f.Floors[oldFloor].Items.Remove(item);
                     f.Floors[newFloor].Items.Add(item);
 
-                    if (!AlreadyVisited(f))
-                    {
-                        TrackVisit(f);
-                        if (f.IsValid)
-                        {
-                            newFacilities.Add(f);
-                        }
-                    }
+                    if (AlreadyVisited(f))
+                        continue;
+                    
+                    TrackVisit(f);
+                    if (f.IsValid) 
+                        newFacilities.Add(f);
                 }
             }
         }
@@ -79,20 +77,13 @@ public class RadioisotopeSimulator
         return finishedFacility ?? FindFinishedFacility(newFacilities);
     }
 
-    private bool AlreadyVisited(RadioisotopeFacility f)
-    {
-        return _previousFacilities.Contains(f.AnonymizedId);
-    }
-
-    private void TrackVisit(RadioisotopeFacility f)
-    {
-        _previousFacilities.Add(f.AnonymizedId);
-    }
+    private bool AlreadyVisited(RadioisotopeFacility f) => _previousFacilities.Contains(f.AnonymizedId);
+    private void TrackVisit(RadioisotopeFacility f) => _previousFacilities.Add(f.AnonymizedId);
 
     private RadioisotopeFacility ParseFacility(string input)
     {
-        var strFloors = StringReader.ReadLines(input);
-        return new RadioisotopeFacility(strFloors.Select(ParseFloor).ToList(), 0, _isotopeNameProvider, _anonymousNameProvider);
+        return new RadioisotopeFacility(
+            StringReader.ReadLines(input).Select(ParseFloor).ToList(), 0, _isotopeNameProvider, _anonymousNameProvider);
     }
 
     private RadioisotopeFloor ParseFloor(string s)
@@ -108,13 +99,12 @@ public class RadioisotopeSimulator
 
     private RadioisotopeItem CreateItem(string s, int index)
     {
-        var i = _itemCounter;
         _itemCounter++;
         var parts = s.Split('-');
         var name = parts.First();
         var type = parts.Last();
         if (type == "microchip")
-            return new Microchip(name, i);
-        return new Generator(name, i);
+            return new Microchip(name);
+        return new Generator(name);
     }
 }

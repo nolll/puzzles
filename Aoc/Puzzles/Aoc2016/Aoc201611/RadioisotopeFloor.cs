@@ -1,14 +1,9 @@
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
 
-public class RadioisotopeFloor
+public class RadioisotopeFloor(IList<RadioisotopeItem> items)
 {
-    public IList<RadioisotopeItem> Items { get; }
+    public IList<RadioisotopeItem> Items { get; } = items;
     public string Id => string.Join(null, Items.Select(o => o.Id).OrderBy(o => o));
-
-    public RadioisotopeFloor(IList<RadioisotopeItem> items)
-    {
-        Items = items;
-    }
 
     public bool IsValid
     {

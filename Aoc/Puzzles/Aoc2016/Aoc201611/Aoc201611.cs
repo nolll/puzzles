@@ -2,9 +2,7 @@ using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
 
-[IsSlow] // 16s for part 2
 [Name("Radioisotope Thermoelectric Generators")]
-[Comment("Floor permutations")]
 public class Aoc201611 : AocPuzzle
 {
     public PuzzleResult RunPart1(string input)

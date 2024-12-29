@@ -1,8 +1,3 @@
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
 
-public class Generator : RadioisotopeItem
-{
-    public Generator(string name, int index = 0) : base(name, index, RadioisotopeType.Generator)
-    {
-    }
-}
+public class Generator(string name) : RadioisotopeItem(name, RadioisotopeType.Generator);

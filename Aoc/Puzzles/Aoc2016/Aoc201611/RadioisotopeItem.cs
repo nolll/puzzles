@@ -3,14 +3,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
 public abstract class RadioisotopeItem
 {
     public string Name { get; }
-    public int Index { get; }
     public RadioisotopeType Type { get; }
     public string Id { get; }
 
-    protected RadioisotopeItem(string name, int index, RadioisotopeType type)
+    protected RadioisotopeItem(string name, RadioisotopeType type)
     {
         Name = name;
-        Index = index;
         Type = type;
         Id = BuildId();
     }

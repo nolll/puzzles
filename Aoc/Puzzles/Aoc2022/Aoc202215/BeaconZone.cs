@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202215;
 
 public class BeaconZone
 {
-    public int Part1(string input, int y, bool print)
+    public int Part1(string input, int y)
     {
         var lines = StringReader.ReadLines(input, false);
         var pairs = lines.Select(ParsePair).ToList();
@@ -21,7 +21,7 @@ public class BeaconZone
         var minx = pairs.Select(o => Math.Min(o.sensor.X, o.beacon.X) - beaconDistances[o.sensor]).Min();
         var maxx = pairs.Select(o => Math.Max(o.sensor.X, o.beacon.X) + beaconDistances[o.sensor]).Max();
 
-        // todo: Use the same solution as for day 2. Get intervals for y here
+        // todo: Use the same solution as for part 2. Get intervals for y here
 
         var count = 0;
         for (var x = minx; x <= maxx; x++)
@@ -29,19 +29,9 @@ public class BeaconZone
             var current = new MatrixAddress(x, y);
 
             if (beacons.Contains(current))
-            {
                 continue;
-            }
 
-            var canContainBeacon = true;
-            foreach (var kv in beaconDistances)
-            {
-                var distanceToSensor = current.ManhattanDistanceTo(kv.Key);
-                if (distanceToSensor <= kv.Value)
-                    canContainBeacon = false;
-            }
-
-            if (!canContainBeacon)
+            if (!beaconDistances.All(kv => kv.Value < current.ManhattanDistanceTo(kv.Key)))
                 count++;
         }
 
@@ -63,11 +53,11 @@ public class BeaconZone
         for (var y = 0; y < size; y++)
         {
             var intervals = GetIntervalsForRow(y, 0, size, beaconDistances);
-            if (intervals.Count > 1)
-            {
-                var x = intervals.First().End + 1;
-                return (long)x * 4_000_000 + y;
-            }
+            if (intervals.Count <= 1)
+                continue;
+            
+            var x = intervals.First().End + 1;
+            return (long)x * 4_000_000 + y;
         }
 
         return 0;
@@ -77,24 +67,23 @@ public class BeaconZone
     {
         var intervals = new List<Interval>();
 
-        foreach (var bd in beaconDistances)
+        foreach (var (coord, beaconDistance) in beaconDistances)
         {
-            var beaconDistance = bd.Value;
-            var sensorY = bd.Key.Y;
+            var sensorY = coord.Y;
             var overlap = beaconDistance - Math.Abs(sensorY - row);
-            if (overlap > 0)
-            {
-                var sensorX = bd.Key.X;
-                var start = Math.Max(sensorX - overlap, minX);
-                var end = Math.Min(sensorX + overlap, maxX);
-                intervals.Add(new Interval(start, end));
-            }
+            if (overlap <= 0)
+                continue;
+            
+            var sensorX = coord.X;
+            var start = Math.Max(sensorX - overlap, minX);
+            var end = Math.Min(sensorX + overlap, maxX);
+            intervals.Add(new Interval(start, end));
         }
 
         return IntervalMerger.MergeIntervals(intervals);
     }
 
-    private (MatrixAddress sensor, MatrixAddress beacon) ParsePair(string input)
+    private static (MatrixAddress sensor, MatrixAddress beacon) ParsePair(string input)
     {
         var parts = input.Split(':');
         var sensorPart = parts[0].Trim();

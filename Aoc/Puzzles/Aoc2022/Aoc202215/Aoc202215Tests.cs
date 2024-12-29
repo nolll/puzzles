@@ -9,7 +9,7 @@ public class Aoc202215Tests
     public void Part1()
     {
         var zone = new BeaconZone();
-        var result = zone.Part1(Input, 10, false);
+        var result = zone.Part1(Input, 10);
 
         result.Should().Be(26);
     }

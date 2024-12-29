@@ -4,7 +4,6 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202323;
 
 [Name("A Long Walk")]
-[IsSlow]
 public class Aoc202323 : AocPuzzle
 {
     private static readonly Dictionary<MatrixDirection, char> ValidSlopes = new()

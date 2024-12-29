@@ -2,34 +2,22 @@ using System;
 
 namespace Pzl.Common;
 
-public class PuzzleData
+public class PuzzleData(
+    Type type,
+    string name,
+    string? comment,
+    bool isSlow,
+    bool needsRewrite,
+    bool isFunToOptimize,
+    int numberOfParts,
+    bool hasUniqueInputsPerPart)
 {
-    public Type Type { get; }
-    public string Name { get; }
-    public string? Comment { get; }
-    public bool IsSlow { get; }
-    public bool NeedsRewrite { get; }
-    public bool IsFunToOptimize { get; }
-    public int NumberOfParts { get; }
-    public bool HasUniqueInputsPerPart { get; }
-
-    public PuzzleData(
-        Type type, 
-        string name, 
-        string? comment, 
-        bool isSlow, 
-        bool needsRewrite, 
-        bool isFunToOptimize,
-        int numberOfParts,
-        bool hasUniqueInputsPerPart)
-    {
-        Type = type;
-        Name = name;
-        Comment = comment;
-        IsSlow = isSlow;
-        NeedsRewrite = needsRewrite;
-        IsFunToOptimize = isFunToOptimize;
-        NumberOfParts = numberOfParts;
-        HasUniqueInputsPerPart = hasUniqueInputsPerPart;
-    }
+    public Type Type { get; } = type;
+    public string Name { get; } = name;
+    public string? Comment { get; } = comment;
+    public bool IsSlow { get; } = isSlow;
+    public bool NeedsRewrite { get; } = needsRewrite;
+    public bool IsFunToOptimize { get; } = isFunToOptimize;
+    public int NumberOfParts { get; } = numberOfParts;
+    public bool HasUniqueInputsPerPart { get; } = hasUniqueInputsPerPart;
 }

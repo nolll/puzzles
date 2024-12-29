@@ -3,17 +3,26 @@ using System.Collections.Generic;
 
 namespace Pzl.Common;
 
-public class PuzzleDefinition
+public class PuzzleDefinition(
+    Type type,
+    IEnumerable<string> tags,
+    string sortId,
+    string title,
+    string listTitle,
+    string name,
+    string? comment,
+    int numberOfParts,
+    bool hasUniqueInputsPerPart)
 {
-    public Type Type { get; }
-    public IEnumerable<string> Tags { get; }
-    public string SortId { get; }
-    public string Title { get; }
-    public string ListTitle { get; }
-    public string Name { get; }
-    public string? Comment { get; }
-    public int NumberOfParts { get; }
-    public bool HasUniqueInputsPerPart { get; }
+    public Type Type { get; } = type;
+    public IEnumerable<string> Tags { get; } = tags;
+    public string SortId { get; } = sortId;
+    public string Title { get; } = title;
+    public string ListTitle { get; } = listTitle;
+    public string Name { get; } = name;
+    public string? Comment { get; } = comment;
+    public int NumberOfParts { get; } = numberOfParts;
+    public bool HasUniqueInputsPerPart { get; } = hasUniqueInputsPerPart;
 
     public PuzzleDefinition(
         PuzzleData data, 
@@ -47,27 +56,5 @@ public class PuzzleDefinition
 
         if (data.IsFunToOptimize)
             yield return PuzzleTag.Fun;
-    }
-
-    public PuzzleDefinition(
-        Type type, 
-        IEnumerable<string> tags, 
-        string sortId, 
-        string title, 
-        string listTitle, 
-        string name, 
-        string? comment, 
-        int numberOfParts,
-        bool hasUniqueInputsPerPart)
-    {
-        Type = type;
-        Tags = tags;
-        SortId = sortId;
-        Title = title;
-        ListTitle = listTitle;
-        Name = name;
-        Comment = comment;
-        NumberOfParts = numberOfParts;
-        HasUniqueInputsPerPart = hasUniqueInputsPerPart;
     }
 }

@@ -2,14 +2,13 @@ using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202215;
 
-[IsSlow]
 [Name("Beacon Exclusion Zone")]
 public class Aoc202215 : AocPuzzle
 {
     public PuzzleResult RunPart1(string input)
     {
         var zone = new BeaconZone();
-        var result = zone.Part1(input, 2_000_000, false);
+        var result = zone.Part1(input, 2_000_000);
 
         return new PuzzleResult(result, "f81ea7aff75f183d6afc5816570af244");
     }

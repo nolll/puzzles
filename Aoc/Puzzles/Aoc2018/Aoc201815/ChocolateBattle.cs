@@ -5,15 +5,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201815;
 public class ChocolateBattle
 {
     private readonly string _input;
-    private Matrix<char> _matrix = new Matrix<char>();
+    private Matrix<char> _matrix = new();
     private IList<BattleFigure> _figures = new List<BattleFigure>();
 
     private IDictionary<(int x, int y), IList<MatrixAddress>> _neighborCache =
         new Dictionary<(int x, int y), IList<MatrixAddress>>();
 
     public int Outcome { get; private set; }
-    public string Winners = "";
-    public int ElfAttackPower { get; private set; }
+    private string _winners = "";
 
     public ChocolateBattle(string input)
     {
@@ -28,13 +27,11 @@ public class ChocolateBattle
             Init(elfAttackPower);
             var initialElfCount = _figures.Count(o => o.Type == BattleFigureType.Elf);
             Run(true);
-            if (Winners == "Elves" && _figures.Count(o => o.Type == BattleFigureType.Elf) == initialElfCount)
+            if (_winners == "Elves" && _figures.Count(o => o.Type == BattleFigureType.Elf) == initialElfCount)
                 break;
 
             elfAttackPower++;
         }
-
-        ElfAttackPower = elfAttackPower;
     }
 
     public void RunOnce()
@@ -42,7 +39,6 @@ public class ChocolateBattle
         const int elfAttackPower = 3;
         Init(elfAttackPower);
         Run(false);
-        ElfAttackPower = elfAttackPower;
     }
 
     private void Run(bool breakOnElfDeath)
@@ -110,12 +106,13 @@ public class ChocolateBattle
                         .First();
                     var enemy = enemies.First(o => o.Address.Equals(bestEnemyAddress));
                     enemy.Hit(figure.AttackPower);
-                    if (enemy.IsDead)
-                    {
-                        if (breakOnElfDeath && enemy.Type == BattleFigureType.Elf)
-                            return;
-                        _matrix.WriteValueAt(enemy.Address, '.');
-                    }
+                    if (!enemy.IsDead)
+                        continue;
+                    
+                    if (breakOnElfDeath && enemy.Type == BattleFigureType.Elf)
+                        return;
+                    
+                    _matrix.WriteValueAt(enemy.Address, '.');
                 }
             }
 
@@ -127,7 +124,7 @@ public class ChocolateBattle
         }
 
         Outcome = _figures.Sum(o => o.HitPoints) * round;
-        Winners = _figures.First().Type == BattleFigureType.Elf ? "Elves" : "Goblin";
+        _winners = _figures.First().Type == BattleFigureType.Elf ? "Elves" : "Goblin";
     }
 
     private IList<MatrixAddress> NeighborCache(MatrixAddress coord)
@@ -144,7 +141,6 @@ public class ChocolateBattle
         _figures = new List<BattleFigure>();
         var rows = _input.Trim().Split('\n');
         var y = 0;
-        var figureId = 0;
 
         var width = rows.First().Length;
         var height = rows.Length;
@@ -161,8 +157,7 @@ public class ChocolateBattle
                 if (c is BattleFigureType.Elf or BattleFigureType.Goblin)
                 {
                     var attackPower = c == BattleFigureType.Elf ? elfAttackPower : 3;
-                    _figures.Add(new BattleFigure(figureId, c, attackPower, address));
-                    figureId++;
+                    _figures.Add(new BattleFigure(c, attackPower, address));
                 }
 
                 x += 1;
@@ -174,13 +169,13 @@ public class ChocolateBattle
         _neighborCache = new Dictionary<(int x, int y), IList<MatrixAddress>>();
         foreach (var coord in _matrix.Coords)
         {
-            if (_matrix.ReadValueAt(coord) != '#')
-            {
-                var neighbors = _matrix.OrthogonalAdjacentCoordsTo(coord)
-                    .Where(o => _matrix.ReadValueAt(o) != '#')
-                    .ToList();
-                _neighborCache.Add((coord.X, coord.Y), neighbors);
-            }
+            if (_matrix.ReadValueAt(coord) == '#') 
+                continue;
+            
+            var neighbors = _matrix.OrthogonalAdjacentCoordsTo(coord)
+                .Where(o => _matrix.ReadValueAt(o) != '#')
+                .ToList();
+            _neighborCache.Add((coord.X, coord.Y), neighbors);
         }
     }
 }

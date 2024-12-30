@@ -2,7 +2,6 @@ using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202119;
 
-[IsSlow]
 [Name("Beacon Scanner")]
 public class Aoc202119 : AocPuzzle
 {

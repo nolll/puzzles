@@ -105,9 +105,11 @@ public class Matrix<T> where T : struct
             YMin = coord.Y;
         else if (coord.Y > YMax)
             YMax = coord.Y;
-
+        
         _matrix[coord] = value;
     }
+    
+    public void ClearValueAt(MatrixAddress coord) => _matrix.Remove(coord);
 
     public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
     public IList<T> OrthogonalAdjacentValuesTo(MatrixAddress address) => OrthogonalAdjacentCoordsTo(address).Select(ReadValueAt).ToList();

@@ -49,12 +49,12 @@ public class Aquaq36 : AquaqPuzzle
         foreach (var gridNumber in gridNumbers)
         {
             var sum = gridNumber.A + gridNumber.B;
-            if (grid.Contains(sum))
-            {
-                var a = Math.Min(gridNumber.A, gridNumber.B);
-                var b = Math.Max(gridNumber.A, gridNumber.B);
-                list.Add(new GridPair(n, sum, a, b));
-            }
+            if (!grid.Contains(sum))
+                continue;
+            
+            var a = Math.Min(gridNumber.A, gridNumber.B);
+            var b = Math.Max(gridNumber.A, gridNumber.B);
+            list.Add(new GridPair(n, sum, a, b));
         }
 
         return list;
@@ -70,25 +70,25 @@ public class Aquaq36 : AquaqPuzzle
             var pairs = GetGridPairs(gridNumber, grid, factorCache);
             foreach (var pair in pairs)
             {
-                var aIndices = IndicesContaining(inputs, pair.A);
-                var bIndices = IndicesContaining(inputs, pair.B);
+                var aIndices = IndicesContaining(inputs, pair.A).ToList();
+                var bIndices = IndicesContaining(inputs, pair.B).ToList();
 
                 foreach (var a in aIndices)
                 {
                     foreach (var b in bIndices)
                     {
-                        if (a != b)
-                        {
-                            var newGrid = grid.ToList();
-                            var newInput = inputs.ToList();
-                            newGrid.Remove(pair.Product);
-                            newGrid.Remove(pair.Sum);
-                            newInput.RemoveAt(Math.Max(a, b));
-                            newInput.RemoveAt(Math.Min(a, b));
-                            var result = Solve(newGrid, newInput, factorCache, sum + Math.Abs(pair.B - pair.A));
-                            if (result > 0)
-                                return result;
-                        }
+                        if (a == b)
+                            continue;
+                        
+                        var newGrid = grid.ToList();
+                        var newInput = inputs.ToList();
+                        newGrid.Remove(pair.Product);
+                        newGrid.Remove(pair.Sum);
+                        newInput.RemoveAt(Math.Max(a, b));
+                        newInput.RemoveAt(Math.Min(a, b));
+                        var result = Solve(newGrid, newInput, factorCache, sum + Math.Abs(pair.B - pair.A));
+                        if (result > 0)
+                            return result;
                     }
                 }
             }

@@ -4,32 +4,19 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
 
-public class KeyGenerator
+public class KeyGenerator(int stretchCount)
 {
-    private readonly HashFactory _hashFactory;
-    private readonly IDictionary<int, byte[]> _hashes;
-    private readonly IDictionary<byte, byte[]> _byteCache;
-    private readonly IDictionary<int, byte?> _repeatingByteCache;
-    private readonly IDictionary<(int, byte), bool> _fiveInARowOfCache;
+    private readonly HashFactory _hashFactory = new();
+    private readonly Dictionary<int, byte[]> _hashes = new();
+    private readonly (byte, byte)[] _byteCache = BuildByteCache();
 
-    public KeyGenerator()
-    {
-        _hashFactory = new HashFactory();
-        _hashes = new Dictionary<int, byte[]>();
-        _byteCache = BuildByteCache();
-        _repeatingByteCache = new Dictionary<int, byte?>();
-        _fiveInARowOfCache = new Dictionary<(int, byte), bool>();
-    }
-
-    public int GetIndexOfNThKey(string salt, int n, int stretchCount)
+    public int GetIndexOfNThKey(string salt, int n)
     {
         var keyCount = 0;
         var index = 0;
         while (keyCount < n)
         {
-            var hash = GetHash(salt, index, stretchCount);
-            var isKey = IsKey(salt, index, hash, stretchCount);
-            if (isKey)
+            if (IsKey(salt, index, GetHash(salt, index)))
                 keyCount++;
 
             index++;
@@ -38,44 +25,31 @@ public class KeyGenerator
         return index - 1;
     }
 
-    public bool IsKey(string salt, int index, byte[] hash, int stretchCount)
+    public bool IsKey(string salt, int index, byte[] hash) => 
+        TryGetRepeatingByte(hash, out var repeatingByte) && 
+        Next1000HashesHasFiveInARowOf(salt, index + 1, repeatingByte);
+
+    public static bool TryGetRepeatingByte(byte[] hash, out byte repeatingByte)
     {
-        if (!_repeatingByteCache.TryGetValue(index, out var repeatingByte))
+        for (var i = 0; i < hash.Length - 2; i++)
         {
-            repeatingByte = GetRepeatingByte(hash);
-            _repeatingByteCache.Add(index, repeatingByte);
+            var b = hash[i];
+            if (hash[i + 1] != b || hash[i + 2] != b)
+                continue;
+            
+            repeatingByte = b;
+            return true;
         }
 
-        return repeatingByte != null && Next1000HashesHasFiveInARowOf(salt, index + 1, repeatingByte.Value, stretchCount);
-    }
-
-    public static byte? GetRepeatingByte(byte[] hash)
-    {
-        var limit = hash.Length - 2;
-        for (var i = 0; i < limit; i++)
-        {
-            var c = hash[i];
-            if (hash[i + 1] == c && hash[i + 2] == c)
-                return c;
-        }
-
-        return null;
+        repeatingByte = byte.MinValue;
+        return false;
     }
     
-    private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, byte searchFor, int stretchCount)
+    private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, byte searchFor)
     {
         for (var count = 0; count < 1000; count++)
         {
-            var index = fromIndex + count;
-
-            if (!_fiveInARowOfCache.TryGetValue((index, searchFor), out var hasFiveInARowOf))
-            {
-                var hashedBytes = GetHash(salt, index, stretchCount);
-                hasFiveInARowOf = HasFiveInARowOf(hashedBytes, searchFor);
-                _fiveInARowOfCache.Add((index, searchFor), hasFiveInARowOf);
-            }
-
-            if (hasFiveInARowOf)
+            if (HasFiveInARowOf(GetHash(salt, fromIndex + count), searchFor))
                 return true;
         }
         
@@ -86,31 +60,23 @@ public class KeyGenerator
     {
         for (var i = 0; i < hash.Length - 4; i++)
         {
-
             if (hash[i] == searchFor &&
                 hash[i + 1] == searchFor &&
                 hash[i + 2] == searchFor &&
                 hash[i + 3] == searchFor &&
                 hash[i + 4] == searchFor)
                 return true;
-
-            //if (hash[i] == searchFor &&
-            //    hash[i + 1] == searchFor &&
-            //    hash[i + 2] == searchFor &&
-            //    hash[i + 3] == searchFor &&
-            //    hash[i + 4] == searchFor)
-            //    return true;
         }
 
         return false;
     }
     
-    public byte[] GetHash(string salt, int index, int stretchCount)
+    public byte[] GetHash(string salt, int index)
     {
         if (_hashes.TryGetValue(index, out var hash))
             return hash;
 
-        hash = CreateHash(salt + index, stretchCount);
+        hash = CreateHash(salt + index);
         _hashes.Add(index, hash);
         return hash;
     }
@@ -118,7 +84,7 @@ public class KeyGenerator
     private byte[] CreateSimpleHash(byte[] bytes) => 
         ConvertToHexBytes(_hashFactory.ByteHashFromBytes(bytes));
 
-    public byte[] CreateHash(string str, int stretchCount)
+    public byte[] CreateHash(string str)
     {
         var hash = CreateSimpleHash(Encoding.ASCII.GetBytes(str));
 
@@ -130,26 +96,28 @@ public class KeyGenerator
         return hash;
     }
 
-    private byte[] ConvertToHexBytes(IEnumerable<byte> hashedBytes)
+    private byte[] ConvertToHexBytes(byte[] hashedBytes)
     {
         var hexBytes = new byte[32];
         var index = 0;
-        foreach (var hashedByte in hashedBytes)
+        foreach (var b in hashedBytes)
         {
-            Buffer.BlockCopy(_byteCache[hashedByte], 0, hexBytes, index, 2);
+            var (b1, b2) = _byteCache[b];
+            hexBytes[index] = b1;
+            hexBytes[index + 1] = b2;
             index += 2;
         }
 
         return hexBytes;
     }
 
-    private static Dictionary<byte, byte[]> BuildByteCache()
+    private static (byte, byte)[] BuildByteCache()
     {
-        var cache = new Dictionary<byte, byte[]>();
+        var cache = new(byte, byte)[byte.MaxValue + 1];
         for (int i = byte.MinValue; i <= byte.MaxValue; i++)
         {
-            var b = (byte) i;
-            cache.Add(b, Encoding.ASCII.GetBytes(ByteConverter.ToHexString(b)));
+            var bytes = Encoding.ASCII.GetBytes(ByteConverter.ToHexString((byte)i));
+            cache[i] = (bytes[0], bytes[1]);
         }
 
         return cache;

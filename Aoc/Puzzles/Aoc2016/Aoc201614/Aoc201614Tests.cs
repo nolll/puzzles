@@ -9,8 +9,8 @@ public class Aoc201614Tests
     [Test]
     public void GeneratesCorrectKeys()
     {
-        var generator = new KeyGenerator();
-        var index = generator.GetIndexOfNThKey("abc", 64, 0);
+        var generator = new KeyGenerator(0);
+        var index = generator.GetIndexOfNThKey("abc", 64);
 
         index.Should().Be(22728);
     }
@@ -18,8 +18,8 @@ public class Aoc201614Tests
     [Test]
     public void GeneratesCorrectStretchedKeys()
     {
-        var generator = new KeyGenerator();
-        var index = generator.GetIndexOfNThKey("abc", 64, 10);
+        var generator = new KeyGenerator(10);
+        var index = generator.GetIndexOfNThKey("abc", 64);
 
         index.Should().Be(12665);
     }
@@ -28,10 +28,10 @@ public class Aoc201614Tests
     [TestCase(1, "eec80a0c92dc8a0777c619d9bb51e910")]
     [TestCase(2, "16062ce768787384c81fe17a7a60c7e3")]
     [TestCase(10, "8de2bfc94801e26c8c6729bd30d5c952")]
-    public void StretchedHash(int iterations, string expected)
+    public void StretchedHash(int stretchCount, string expected)
     {
-        var generator = new KeyGenerator();
-        var hashedBytes = generator.CreateHash("abc0", iterations);
+        var generator = new KeyGenerator(stretchCount);
+        var hashedBytes = generator.CreateHash("abc0");
         var hash = ByteConverter.ToString(hashedBytes);
             
         hash.Should().Be(expected);
@@ -40,13 +40,13 @@ public class Aoc201614Tests
     [TestCase("aaa01010101010101010", 'a')]
     [TestCase("bbaaab10101010101010", 'a')]
     [TestCase("bbaaabbbb01010101010", 'a')]
-    [TestCase("bbaab010101010101010", null)]
-    public void RepeatedChars(string str, char? expected)
+    [TestCase("bbaab010101010101010", byte.MinValue)]
+    public void RepeatedChars(string str, char expected)
     {
         var byteHash = str.ToCharArray().Select(o => (byte)o).ToArray();
-        var c = KeyGenerator.GetRepeatingByte(byteHash);
-
-        c.Should().Be((byte?)expected);
+        KeyGenerator.TryGetRepeatingByte(byteHash, out var c);
+        
+        c.Should().Be((byte)expected);
     }
     
     [TestCase("aaaaa010101010101010", true)]
@@ -64,11 +64,11 @@ public class Aoc201614Tests
     [Test]
     public void Index39IsAKey()
     {
-        var generator = new KeyGenerator();
+        var generator = new KeyGenerator(0);
         const string salt = "abc";
         const int index = 39;
-        var hash = generator.GetHash(salt, index, 0);
-        var isKey = generator.IsKey(salt, index, hash, 0);
+        var hash = generator.GetHash(salt, index);
+        var isKey = generator.IsKey(salt, index, hash);
 
         isKey.Should().BeTrue();
     }

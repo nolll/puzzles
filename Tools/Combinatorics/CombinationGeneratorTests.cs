@@ -6,7 +6,21 @@ namespace Pzl.Tools.Combinatorics;
 public class CombinationGeneratorTests
 {
     [Test]
-    public void GeneratesAllCombinations()
+    public void GeneratesAllUniqueCombinationsOfAnySize()
+    {
+        var result = CombinationGenerator.GetUniqueCombinationsAnySize([1, 2, 3]).ToList();
+        result.Count.Should().Be(7);
+        result[0].Should().BeEquivalentTo([1]);
+        result[1].Should().BeEquivalentTo([2]);
+        result[2].Should().BeEquivalentTo([2, 1]);
+        result[3].Should().BeEquivalentTo([3]);
+        result[4].Should().BeEquivalentTo([3, 1]);
+        result[5].Should().BeEquivalentTo([2, 3]);
+        result[6].Should().BeEquivalentTo([1, 2, 3]);
+    }
+    
+    [Test]
+    public void GeneratesAllUniqueCombinationsOfSpecifiedSize()
     {
         var result = CombinationGenerator.GetUniqueCombinationsFixedSize([1, 2, 3, 4, 5], 3).ToList();
         result.Count.Should().Be(10);
@@ -21,9 +35,22 @@ public class CombinationGeneratorTests
         result[8].Should().BeEquivalentTo([2, 4, 5]);
         result[9].Should().BeEquivalentTo([3, 4, 5]);
     }
+    
+    [Test]
+    public void GeneratesAllUniqueCombinationsOfMaxSize()
+    {
+        var result = CombinationGenerator.GetUniqueCombinationsMaxSize([1, 2, 3], 2).ToList();
+        result.Count.Should().Be(6);
+        result[0].Should().BeEquivalentTo([1]);
+        result[1].Should().BeEquivalentTo([2]);
+        result[2].Should().BeEquivalentTo([2, 1]);
+        result[3].Should().BeEquivalentTo([3]);
+        result[4].Should().BeEquivalentTo([3, 1]);
+        result[5].Should().BeEquivalentTo([2, 3]);
+    }
 
     [Test]
-    public void GeneratesAllCombinationsIncludingDuplicates()
+    public void GeneratesAllCombinationsIncludingDuplicatesOfSpecifiedSize()
     {
         var result = CombinationGenerator.GetCombinationsFixedSize([1, 2, 3], 2).ToList();
         result.Count.Should().Be(9);

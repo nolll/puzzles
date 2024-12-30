@@ -309,9 +309,8 @@ public class MatrixTests
     public void SliceSize()
     {
         const string expected = """
-                                FGH
-                                JKL
-                                NOP
+                                FG
+                                JK
                                 """;
 
         var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);

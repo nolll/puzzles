@@ -117,13 +117,8 @@ public class Matrix<T> where T : struct
     public IList<MatrixAddress> OrthogonalAdjacentCoordsTo(MatrixAddress address) => PossibleOrthogonalAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
 
     public IEnumerable<MatrixAddress> PossibleOrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoordsTo(Address);
-    public IEnumerable<MatrixAddress> PossibleOrthogonalAdjacentCoordsTo(MatrixAddress address) => new List<MatrixAddress>
-    {
-        new(address.X, address.Y - 1),
-        new(address.X + 1, address.Y),
-        new(address.X, address.Y + 1),
-        new(address.X - 1, address.Y)
-    };
+    public IEnumerable<MatrixAddress> PossibleOrthogonalAdjacentCoordsTo(MatrixAddress address) => 
+        MatrixConstants.OrthogonalDirections.Select(dir => new MatrixAddress(address.X + dir.x, address.Y + dir.y));
 
     public IList<T> AllAdjacentValues => AllAdjacentCoordsTo(Address).Select(ReadValueAt).ToList();
     public IList<T> AllAdjacentValuesTo(MatrixAddress address) => AllAdjacentCoordsTo(address).Select(ReadValueAt).ToList();

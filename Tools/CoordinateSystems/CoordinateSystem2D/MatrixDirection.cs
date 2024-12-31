@@ -48,5 +48,5 @@ public class MatrixDirection : IEquatable<MatrixDirection>
     public override int GetHashCode() => Name.GetHashCode();
     public override string ToString() => Name;
 
-    public static List<MatrixDirection> AllDirections => [Up, Right, Down, Left];
+    public static readonly List<MatrixDirection> AllDirections = [Up, Right, Down, Left];
 }

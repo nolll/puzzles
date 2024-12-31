@@ -4,13 +4,6 @@ namespace Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 public static class PathFinder
 {
-    public static int CachedStepCountTo(Matrix<char> matrix, MatrixAddress from, MatrixAddress to)
-    {
-        var coordCounts = CachedGetCoordCounts(matrix, new List<MatrixAddress> { from }, to);
-        var goal = coordCounts.FirstOrDefault(o => o.X == to.X && o.Y == to.Y);
-        return goal?.Count ?? 0;
-    }
-
     public static IList<MatrixAddress> ShortestPathTo(
         Matrix<char> matrix, 
         MatrixAddress from, 
@@ -74,28 +67,6 @@ public static class PathFinder
 
     private static List<MatrixAddress> GetNeighbors(Matrix<char> matrix, MatrixAddress coord) => 
         matrix.OrthogonalAdjacentCoords.Where(o => matrix.ReadValueAt(o) == '.').ToList();
-
-    private static IList<CoordCount> CachedGetCoordCounts(Matrix<char> matrix, IList<MatrixAddress> from, MatrixAddress to)
-    {
-        var seen = from.ToDictionary(k => k, v => 0);
-        var queue = from.ToList();
-        var index = 0;
-        while (index < queue.Count && !seen.ContainsKey(to))
-        {
-            var next = queue[index];
-            var count = seen[next];
-            matrix.MoveTo(next.X, next.Y);
-            var adjacentCoords = matrix.OrthogonalAdjacentCoords
-                .Where(o => matrix.ReadValueAt(o) == '.' && !seen.ContainsKey(o))
-                .ToList();
-            queue.AddRange(adjacentCoords);
-            foreach (var adjacentCoord in adjacentCoords)
-                seen[adjacentCoord] = count + 1;
-            index++;
-        }
-
-        return queue.Select(o => new CoordCount(o, seen[o])).ToList();
-    }
 }
 
 [DebuggerDisplay("{X},{Y},{Count}")]

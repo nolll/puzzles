@@ -2,16 +2,13 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201613;
 
-public class Maze
+public class Maze(int width, int height, int secretNumber)
 {
-    private readonly Matrix<char> _matrix;
+    private readonly Matrix<char> _matrix = BuildMatrix(width, height, secretNumber);
 
-    public Maze(in int width, in int height, in int secretNumber)
-    {
-        _matrix = BuildMatrix(width, height, secretNumber);
-    }
-
-    public int StepCountToTarget(int targetX, int targetY) => PathFinder.CachedStepCountTo(_matrix, new MatrixAddress(1, 1), new MatrixAddress(targetX, targetY));
+    public int StepCountToTarget(int targetX, int targetY) =>
+        PathFinder.ShortestPathTo(_matrix, new MatrixAddress(1, 1), new MatrixAddress(targetX, targetY)).Count;
+    
     public int LocationCountAfter(int steps) => LocationCountAfter(new MatrixAddress(1, 1), steps);
 
     private int LocationCountAfter(MatrixAddress from, int steps)

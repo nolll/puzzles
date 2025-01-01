@@ -12,7 +12,7 @@ public class Aoc201511Tests
     public void ValidatePasswords(string pwd, bool expected)
     {
         var validator = new CorporatePasswordValidator();
-        var isValid = validator.IsValid(pwd);
+        var isValid = CorporatePasswordValidator.IsValid(pwd);
 
         isValid.Should().Be(expected);
     }
@@ -22,7 +22,7 @@ public class Aoc201511Tests
     public void FindsNextPassword(string pwd, string expected)
     {
         var validator = new CorporatePasswordValidator();
-        var next = validator.FindNextPassword(pwd);
+        var next = CorporatePasswordValidator.FindNextPassword(pwd);
 
         next.Should().Be(expected);
     }

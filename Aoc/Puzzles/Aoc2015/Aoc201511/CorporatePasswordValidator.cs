@@ -2,21 +2,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201511;
 
 public class CorporatePasswordValidator
 {
-    public bool IsValid(string pwd)
-    {
-        if (ContainsForbiddenCharacters(pwd))
-            return false;
+    public static bool IsValid(string pwd) => 
+        !ContainsForbiddenCharacters(pwd) && ContainsTwoPairs(pwd) && ContainsSequence(pwd);
 
-        if (!ContainsTwoPairs(pwd))
-            return false;
-
-        if (!ContainsSequence(pwd))
-            return false;
-
-        return true;
-    }
-
-    public string FindNextPassword(string pwd)
+    public static string FindNextPassword(string pwd)
     {
         do
         {
@@ -26,7 +15,7 @@ public class CorporatePasswordValidator
         return pwd;
     }
 
-    private string Next(string pwd)
+    private static string Next(string pwd)
     {
         var chars = pwd.ToCharArray();
         var i = chars.Length - 1;
@@ -41,12 +30,10 @@ public class CorporatePasswordValidator
         return string.Concat(chars);
     }
 
-    private bool ContainsForbiddenCharacters(string pwd)
-    {
-        return pwd.Contains('i') || pwd.Contains('o') || pwd.Contains('l');
-    }
+    private static bool ContainsForbiddenCharacters(string pwd) => 
+        pwd.Contains('i') || pwd.Contains('o') || pwd.Contains('l');
 
-    private bool ContainsSequence(string pwd)
+    private static bool ContainsSequence(string pwd)
     {
         for (var i = 0; i < pwd.Length - 2; i++)
         {
@@ -61,23 +48,19 @@ public class CorporatePasswordValidator
         return false;
     }
 
-    private bool ContainsTwoPairs(string pwd)
-    {
-        var pairs = GetPairs(pwd).Distinct();
-        return pairs.Count() >= 2;
-    }
+    private static bool ContainsTwoPairs(string pwd) => GetPairs(pwd).Distinct().Count() >= 2;
 
-    private IEnumerable<string> GetPairs(string pwd)
+    private static IEnumerable<string> GetPairs(string pwd)
     {
         for (var i = 0; i < pwd.Length - 1; i++)
         {
             var current = pwd[i];
             var next = pwd[i + 1];
-            if (current == next)
-            {
-                yield return string.Concat(current, next);
-                i++;
-            }
+            if (current != next) 
+                continue;
+            
+            yield return string.Concat(current, next);
+            i++;
         }
     }
 }

@@ -2,8 +2,7 @@ namespace Pzl.Tools.Strings;
 
 public static class StringReader
 {
-    public static IList<string> ReadLines(string str) => 
-        ReadLines(str, true);
+    public static IList<string> ReadLines(string str) => ReadLines(str, true);
 
     public static IList<string> ReadLines(string str, bool includeEmptyLines)
     {

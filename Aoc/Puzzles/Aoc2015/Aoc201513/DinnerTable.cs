@@ -5,6 +5,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201513;
 
 public class DinnerTable
 {
+    private const string Me = "Me";
+    
     public int HappinessChange { get; }
 
     public DinnerTable(string input, bool includeMe = false)
@@ -34,16 +36,13 @@ public class DinnerTable
         return happiness;
     }
 
-    private IDictionary<string, DinnerGuest> ParseGuests(string input, bool includeMe)
+    private static IDictionary<string, DinnerGuest> ParseGuests(string input, bool includeMe)
     {
         var rules = StringReader.ReadLines(input);
         var guests = new Dictionary<string, DinnerGuest>();
 
-        if (includeMe)
-        {
-            const string name = "Me";
-            guests.Add(name, new DinnerGuest(name));
-        }
+        if (includeMe) 
+            guests.Add(Me, new DinnerGuest(Me));
 
         foreach (var r in rules)
         {

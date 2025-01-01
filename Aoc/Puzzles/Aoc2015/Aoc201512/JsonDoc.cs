@@ -15,30 +15,14 @@ public class JsonDoc
         Sum = GetRecursiveSum(json.RootElement);
     }
 
-    private int GetRecursiveSum(JsonElement jsonElement)
+    private int GetRecursiveSum(JsonElement jsonElement) => jsonElement.ValueKind switch
     {
-        var type = jsonElement.ValueKind;
-
-        if (type == JsonValueKind.String)
-            return 0;
-
-        if (type == JsonValueKind.Number)
-        {
-            if (jsonElement.TryGetInt32(out var num))
-                return num;
-            return 0;
-        }
-
-        if (type == JsonValueKind.Array)
-            return jsonElement.EnumerateArray().Sum(GetRecursiveSum);
-
-        if (type == JsonValueKind.Object)
-        {
-            if (!_includeRed && jsonElement.EnumerateObject().Any(o => o.Value.ValueKind== JsonValueKind.String && o.Value.ToString() == "red"))
-                return 0;
-            return jsonElement.EnumerateObject().Sum(o => GetRecursiveSum(o.Value));
-        }
-
-        return 0;
-    }
+        JsonValueKind.String => 0,
+        JsonValueKind.Number => jsonElement.TryGetInt32(out var num) ? num : 0,
+        JsonValueKind.Array => jsonElement.EnumerateArray().Sum(GetRecursiveSum),
+        JsonValueKind.Object when !_includeRed && jsonElement.EnumerateObject()
+            .Any(o => o.Value.ValueKind == JsonValueKind.String && o.Value.ToString() == "red") => 0,
+        JsonValueKind.Object => jsonElement.EnumerateObject().Sum(o => GetRecursiveSum(o.Value)),
+        _ => 0
+    };
 }

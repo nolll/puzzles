@@ -5,30 +5,32 @@ namespace Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 [DebuggerDisplay("{Name}")]
 public class MatrixDirection : IEquatable<MatrixDirection>
 {
-    public string Name { get; }
+    public char Name { get; }
     public int X { get; }
     public int Y { get; }
 
-    private MatrixDirection(string name, int x, int y)
+    private MatrixDirection(char name, int x, int y)
     {
         Name = name;
         X = x;
         Y = y;
     }
 
-    public static readonly MatrixDirection Up = new("up", 0, -1);
-    public static readonly MatrixDirection Right = new("right", 1, 0);
-    public static readonly MatrixDirection Down = new("down", 0, 1);
-    public static readonly MatrixDirection Left = new("left", -1, 0);
-
-    public static MatrixDirection Create(string name) =>
-        name switch
+    public static readonly MatrixDirection Up = new('^', 0, -1);
+    public static readonly MatrixDirection Right = new('>', 1, 0);
+    public static readonly MatrixDirection Down = new('v', 0, 1);
+    public static readonly MatrixDirection Left = new('<', -1, 0);
+    
+    public static MatrixDirection Get(char dir) =>
+        dir switch
         {
-            "up" => Up,
-            "right" => Right,
-            "down" => Down,
+            '^' => Up,
+            '>' => Right,
+            'v' => Down,
             _ => Left
         };
+    
+    public static readonly List<MatrixDirection> All = [Up, Right, Down, Left];
 
     public bool Equals(MatrixDirection? other)
     {
@@ -46,7 +48,5 @@ public class MatrixDirection : IEquatable<MatrixDirection>
     }
 
     public override int GetHashCode() => Name.GetHashCode();
-    public override string ToString() => Name;
-
-    public static readonly List<MatrixDirection> AllDirections = [Up, Right, Down, Left];
+    public override string ToString() => Name.ToString();
 }

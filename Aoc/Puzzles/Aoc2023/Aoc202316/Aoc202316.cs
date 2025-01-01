@@ -48,7 +48,7 @@ public class Aoc202316 : AocPuzzle
         var lit = new HashSet<MatrixAddress>();
         var beams = new Queue<Beam>();
         beams.Enqueue(start);
-        var seen = new HashSet<(MatrixAddress, string)>();
+        var seen = new HashSet<(MatrixAddress, char)>();
 
         while (beams.Count > 0)
         {

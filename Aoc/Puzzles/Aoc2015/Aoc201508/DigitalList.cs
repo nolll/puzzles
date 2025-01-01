@@ -17,12 +17,9 @@ public class DigitalList
         EncodedMinusCodeDiff = encodedCount - codeCount;
     }
 
-    private int CountCode(string s)
-    {
-        return s.Length;
-    }
+    private static int CountCode(string s) => s.Length;
 
-    private int CountMemory(string s)
+    private static int CountMemory(string s)
     {
         s = s.Remove(0, 1);
         s = s.Remove(s.Length - 1);
@@ -39,7 +36,7 @@ public class DigitalList
         return s.Length;
     }
 
-    private int CountEncoded(string s)
+    private static int CountEncoded(string s)
     {
         s = s.Replace("\\", "\\\\");
         s = s.Replace("\"", "\\\"");

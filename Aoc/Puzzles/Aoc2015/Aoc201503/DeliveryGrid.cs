@@ -4,19 +4,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201503;
 
 public class DeliveryGrid
 {
-    private readonly Matrix<int> _matrix;
+    private readonly Matrix<int> _matrix = new();
     public int SantaDeliveryCount => _matrix.Values.Count(o => o > 0);
 
-    public DeliveryGrid()
-    {
-        _matrix = new Matrix<int>();
-    }
-
-    public void DeliverBySanta(string input)
-    {
-        var directions = input.ToCharArray();
-        DeliverAccordingToDirections(directions);
-    }
+    public void DeliverBySanta(string input) => DeliverAccordingToDirections(input.ToCharArray());
 
     public void DeliverBySantaAndRobot(string input)
     {
@@ -46,21 +37,6 @@ public class DeliveryGrid
         }
     }
 
-    private void DeliverPresent()
-    {
-        var oldVal = _matrix.ReadValue();
-        _matrix.WriteValue(oldVal + 1);
-    }
-
-    private void Move(char direction)
-    {
-        if (direction == '^')
-            _matrix.MoveUp();
-        if (direction == '>')
-            _matrix.MoveRight();
-        if (direction == 'v')
-            _matrix.MoveDown();
-        if (direction == '<')
-            _matrix.MoveLeft();
-    }
+    private void DeliverPresent() => _matrix.WriteValue(_matrix.ReadValue() + 1);
+    private void Move(char direction) => _matrix.Move(MatrixDirection.Get(direction));
 }

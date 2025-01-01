@@ -1,27 +1,16 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201507;
 
-public class LeftShiftWire : Wire
+public class LeftShiftWire(IDictionary<string, Wire> dictionary, string a, ushort distance)
+    : Wire
 {
-    private readonly IDictionary<string, Wire> _dictionary;
-    private readonly string _a;
-    private readonly ushort _distance;
-
-    private ushort WireASignal => _dictionary[_a].Signal;
+    private ushort WireASignal => dictionary[a].Signal;
 
     public override ushort Signal
     {
         get
         {
-            if (_signal == null)
-                _signal = (ushort)(WireASignal << _distance);
+            _signal ??= (ushort)(WireASignal << distance);
             return _signal.Value;
         }
-    }
-        
-    public LeftShiftWire(IDictionary<string, Wire> dictionary, string a, ushort distance)
-    {
-        _dictionary = dictionary;
-        _a = a;
-        _distance = distance;
     }
 }

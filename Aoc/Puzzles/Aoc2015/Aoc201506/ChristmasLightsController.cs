@@ -1,19 +1,15 @@
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201506;
 
-public class ChristmasLightsController
+public class ChristmasLightsController(int size = 1000)
 {
-    private readonly Matrix<int> _matrix;
+    private readonly Matrix<int> _matrix = new(size, size);
 
     public int LitCount => _matrix.Values.Count(o => o > 0);
     public int TotalBrightness => _matrix.Values.Sum();
-
-    public ChristmasLightsController(int size = 1000)
-    {
-        _matrix = new Matrix<int>(size, size);
-    }
 
     public void RunCommands(string input, bool useBrightness)
     {
@@ -24,39 +20,96 @@ public class ChristmasLightsController
         }
     }
 
-    private static IEnumerable<Command> ParseCommands(string input, bool useBrightness)
-    {
-        var strings = StringReader.ReadLines(input);
-        return strings.Select(o => CreateCommand(o, useBrightness)).ToList();
-    }
+    private static IEnumerable<Command> ParseCommands(string input, bool useBrightness) => 
+        StringReader.ReadLines(input).Select(o => CreateCommand(o, useBrightness)).ToList();
 
     private static Command CreateCommand(string s, bool useBrightness)
     {
         var paramString = s.Replace("turn on", "").Replace("turn off", "").Replace("toggle", "");
         if (s.StartsWith("turn on"))
-        {
             return useBrightness
                 ? new IncreaseCommand(paramString, 1)
                 : new TurnOnCommand(paramString);
-        }
 
         if (s.StartsWith("turn off"))
-        {
             return useBrightness
                 ? new IncreaseCommand(paramString, -1)
                 : new TurnOffCommand(s);
-        }
 
         if (s.StartsWith("toggle"))
-        {
             return useBrightness
                 ? new IncreaseCommand(paramString, 2)
                 : new ToggleCommand(s);
-        }
 
         return new VoidCommand();
     }
 
+    private class TurnOnCommand : Command
+    {
+        public TurnOnCommand(string s)
+            : base(s.Replace("turn on", ""))
+        {
+        }
+
+        public TurnOnCommand(int xa, int ya, int xb, int yb)
+            : base(xa, ya, xb, yb)
+        {
+        }
+
+        protected override void Change(Matrix<int> matrix, int x, int y) => matrix.WriteValueAt(x, y, 1);
+    }
+
+    private class TurnOffCommand : Command
+    {
+        public TurnOffCommand(string s)
+            : base(s.Replace("turn off", ""))
+        {
+        }
+
+        public TurnOffCommand(int xa, int ya, int xb, int yb)
+            : base(xa, ya, xb, yb)
+        {
+        }
+
+        protected override void Change(Matrix<int> matrix, int x, int y) => matrix.WriteValueAt(x, y, 0);
+    }
+
+    private class ToggleCommand : Command
+    {
+        public ToggleCommand(string s)
+            : base(s.Replace("toggle", ""))
+        {
+        }
+
+        public ToggleCommand(int xa, int ya, int xb, int yb)
+            : base(xa, ya, xb, yb)
+        {
+        }
+
+        protected override void Change(Matrix<int> matrix, int x, int y)
+        {
+            var newValue = matrix.ReadValueAt(x, y) == 0 ? 1 : 0;
+            matrix.WriteValueAt(x, y, newValue);
+        }
+    }
+
+    private class IncreaseCommand(string s, int increment) : Command(s)
+    {
+        protected override void Change(Matrix<int> matrix, int x, int y)
+        {
+            var currentValue = matrix.ReadValueAt(x, y);
+            var newValue = currentValue + increment;
+            if (newValue < 0)
+                newValue = 0;
+            matrix.WriteValueAt(x, y, newValue);
+        }
+    }
+
+    private class VoidCommand() : Command(0, 0, 0, 0)
+    {
+        protected override void Change(Matrix<int> matrix, int x, int y) {}
+    }
+    
     private abstract class Command
     {
         private readonly int _xa;
@@ -66,13 +119,11 @@ public class ChristmasLightsController
 
         protected Command(string s)
         {
-            var strCoords = s.Trim().Split(" through ");
-            var a = strCoords[0].Split(',');
-            var b = strCoords[1].Split(',');
-            _xa = int.Parse(a[0]);
-            _ya = int.Parse(a[1]);
-            _xb = int.Parse(b[0]);
-            _yb = int.Parse(b[1]);
+            var ints = Numbers.IntsFromString(s);
+            _xa = ints[0];
+            _ya = ints[1];
+            _xb = ints[2];
+            _yb = ints[3];
         }
 
         protected Command(int xa, int ya, int xb, int yb)
@@ -97,106 +148,7 @@ public class ChristmasLightsController
         protected abstract void Change(Matrix<int> matrix, int x, int y);
     }
 
-    private class TurnOnCommand : Command
-    {
-        public TurnOnCommand(string s)
-            : base(s.Replace("turn on", ""))
-        {
-        }
-
-        public TurnOnCommand(int xa, int ya, int xb, int yb)
-            : base(xa, ya, xb, yb)
-        {
-        }
-
-        protected override void Change(Matrix<int> matrix, int x, int y)
-        {
-            matrix.WriteValueAt(x, y, 1);
-        }
-    }
-
-    private class TurnOffCommand : Command
-    {
-        public TurnOffCommand(string s)
-            : base(s.Replace("turn off", ""))
-        {
-        }
-
-        public TurnOffCommand(int xa, int ya, int xb, int yb)
-            : base(xa, ya, xb, yb)
-        {
-        }
-
-        protected override void Change(Matrix<int> matrix, int x, int y)
-        {
-            matrix.WriteValueAt(x, y, 0);
-        }
-    }
-
-    private class ToggleCommand : Command
-    {
-        public ToggleCommand(string s)
-            : base(s.Replace("toggle", ""))
-        {
-        }
-
-        public ToggleCommand(int xa, int ya, int xb, int yb)
-            : base(xa, ya, xb, yb)
-        {
-        }
-
-        protected override void Change(Matrix<int> matrix, int x, int y)
-        {
-            var currentValue = matrix.ReadValueAt(x, y);
-            var newValue = currentValue == 0 ? 1 : 0;
-            matrix.WriteValueAt(x, y, newValue);
-        }
-    }
-
-    private class IncreaseCommand : Command
-    {
-        private readonly int _increment;
-
-        public IncreaseCommand(string s, int increment)
-            : base(s)
-        {
-            _increment = increment;
-        }
-        
-        protected override void Change(Matrix<int> matrix, int x, int y)
-        {
-            var currentValue = matrix.ReadValueAt(x, y);
-            var newValue = currentValue + _increment;
-            if (newValue < 0)
-                newValue = 0;
-            matrix.WriteValueAt(x, y, newValue);
-        }
-    }
-
-    private class VoidCommand : Command
-    {
-        public VoidCommand()
-            : base(0, 0, 0, 0)
-        {
-        }
-
-        protected override void Change(Matrix<int> matrix, int x, int y)
-        {
-        }
-    }
-
-    public void TurnOn(int xa, int ya, int xb, int yb)
-    {
-        new TurnOnCommand(xa, ya, xb, yb).Move(_matrix);
-    }
-
-    public void TurnOff(int xa, int ya, int xb, int yb)
-    {
-        new TurnOffCommand(xa, ya, xb, yb).Move(_matrix);
-    }
-
-    public void Toggle(int xa, int ya, int xb, int yb)
-    {
-        new ToggleCommand(xa, ya, xb, yb).Move(_matrix);
-    }
+    public void TurnOn(int xa, int ya, int xb, int yb) => new TurnOnCommand(xa, ya, xb, yb).Move(_matrix);
+    public void TurnOff(int xa, int ya, int xb, int yb) => new TurnOffCommand(xa, ya, xb, yb).Move(_matrix);
+    public void Toggle(int xa, int ya, int xb, int yb) => new ToggleCommand(xa, ya, xb, yb).Move(_matrix);
 }

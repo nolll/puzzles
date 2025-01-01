@@ -11,10 +11,7 @@ public class FloorNavigator
         var index = 1;
         foreach (var c in instructions)
         {
-            if (c == '(')
-                DestinationFloor++;
-            if (c == ')')
-                DestinationFloor--;
+            DestinationFloor += FloorDelta(c);
 
             if (FirstBasementInstruction == null && DestinationFloor < 0)
                 FirstBasementInstruction = index;
@@ -22,4 +19,11 @@ public class FloorNavigator
             index++;
         }
     }
+
+    private int FloorDelta(char c) => c switch
+    {
+        '(' => 1,
+        ')' => -1,
+        _ => 0
+    };
 }

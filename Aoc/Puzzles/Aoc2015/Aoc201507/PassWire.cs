@@ -1,25 +1,15 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201507;
 
-public class PassWire : Wire
+public class PassWire(IDictionary<string, Wire> dictionary, string a) : Wire
 {
-    private readonly IDictionary<string, Wire> _dictionary;
-    private readonly string _a;
-
-    private ushort WireASignal => ushort.TryParse(_a, out var n) ? n : _dictionary[_a].Signal;
+    private ushort WireASignal => ushort.TryParse(a, out var n) ? n : dictionary[a].Signal;
 
     public override ushort Signal
     {
         get
         {
-            if (_signal == null)
-                _signal = WireASignal;
+            _signal ??= WireASignal;
             return _signal.Value;
         }
-    }
-
-    public PassWire(IDictionary<string, Wire> dictionary, string a)
-    {
-        _dictionary = dictionary;
-        _a = a;
     }
 }

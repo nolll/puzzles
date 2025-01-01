@@ -2,11 +2,11 @@
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201504;
 
-public class AdventCoinMiner
+public abstract class AdventCoinMiner
 {
-    public static int Mine(string key, int leadingZeros, int startIndex = 1)
+    public static int Mine(string key, int leadingZeros)
     {
-        var index = startIndex;
+        var index = 1;
         var hashFactory = new HashFactory();
         var isCoinFound = GetCompareFunc(leadingZeros);
         while (true)

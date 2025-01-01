@@ -34,10 +34,7 @@ public class LookAndSayGame
         return sb.ToString();
     }
 
-    private static string GenerateString(Part part)
-    {
-        return $"{part.Count}{part.Character}";
-    }
+    private static string GenerateString(Part part) => $"{part.Count}{part.Character}";
 
     private static IList<Part> GetPartsWithLoop(string s)
     {
@@ -57,37 +54,9 @@ public class LookAndSayGame
         return parts;
     }
 
-    private IList<Part> GetPartsWithRegex(string s)
+    private class Part(char character)
     {
-        var regex = new Regex("(.)\\1*");
-        var matches = regex.Matches(s);
-
-        var parts = new List<Part>();
-        foreach (var match in matches)
-        {
-            var v = match.ToString()!;
-            var part = new Part(v[0], v.Length);
-            parts.Add(part);
-        }
-
-        return parts;
-    }
-
-    private class Part
-    {
-        public char Character { get; }
-        public int Count { get; set; }
-
-        public Part(char character)
-        {
-            Character = character;
-            Count = 0;
-        }
-
-        public Part(char character, int count)
-        {
-            Character = character;
-            Count = count;
-        }
+        public char Character { get; } = character;
+        public int Count { get; set; } = 0;
     }
 }

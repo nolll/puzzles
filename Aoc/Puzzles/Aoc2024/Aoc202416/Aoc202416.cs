@@ -67,7 +67,7 @@ public class Aoc202416 : AocPuzzle
         var spaceCoords = matrix.FindAddresses(EmptySpace);
         foreach (var coord in spaceCoords)
         {
-            foreach (var dir in MatrixDirection.AllDirections)
+            foreach (var dir in MatrixDirection.All)
             {
                 matrix.MoveTo(coord);
                 matrix.TurnTo(dir);

@@ -160,6 +160,9 @@ public class Matrix<T> where T : struct
     public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
     private bool MoveLeft(int steps, bool extend) => MoveTo(new MatrixAddress(Address.X - steps, Address.Y), extend);
     public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
+    public bool Move(MatrixDirection dir, int steps = 1) => Move(dir, steps, true);
+    private bool Move(MatrixDirection dir, int steps, bool extend) => MoveTo(new MatrixAddress(Address.X + dir.X, Address.Y + dir.Y), extend);
+    public bool TryMove(MatrixDirection dir, int steps = 1) => Move(dir, steps, false);
 
     public bool MoveTo(MatrixAddress address, bool extend)
     {

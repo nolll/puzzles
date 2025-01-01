@@ -59,12 +59,10 @@ public class RouteCalculator
         return totalDistance;
     }
 
-    private List<List<string>> GetRoutes(IList<string> locations)
-    {
-        return PermutationGenerator.GetPermutations(locations).Select(o => o.ToList()).ToList();
-    }
+    private static List<List<string>> GetRoutes(IList<string> locations) => 
+        PermutationGenerator.GetPermutations(locations).Select(o => o.ToList()).ToList();
 
-    private IList<string> GetLocations(IList<Distance> distances)
+    private static IList<string> GetLocations(IList<Distance> distances)
     {
         var locations = new List<string>();
         foreach (var distance in distances)
@@ -90,17 +88,12 @@ public class RouteCalculator
         return dictionary;
     }
 
-    private string GetKey(string from, string to)
-    {
-        return $"{from}->{to}";
-    }
+    private static string GetKey(string from, string to) => $"{from}->{to}";
 
-    private IList<Distance> GetDistances(string input)
-    {
-        return StringReader.ReadLines(input).Select(CreateDistance).ToList();
-    }
+    private static IList<Distance> GetDistances(string input) => 
+        StringReader.ReadLines(input).Select(CreateDistance).ToList();
 
-    private Distance CreateDistance(string s)
+    private static Distance CreateDistance(string s)
     {
         var parts = s.Split(' ');
         var from = parts[0];

@@ -2,21 +2,12 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201505;
 
-public class NaughtyOrNiceEvaluator
+public abstract class NaughtyOrNiceEvaluator
 {
     private const string Vowels = "aeiou";
 
-    public static int GetNiceCount1(string input)
-    {
-        var strings = StringReader.ReadLines(input);
-        return strings.Count(IsNice1);
-    }
-
-    public static int GetNiceCount2(string input)
-    {
-        var strings = StringReader.ReadLines(input);
-        return strings.Count(IsNice2);
-    }
+    public static int GetNiceCount1(string input) => StringReader.ReadLines(input).Count(IsNice1);
+    public static int GetNiceCount2(string input) => StringReader.ReadLines(input).Count(IsNice2);
 
     public static bool IsNice1(string input)
     {

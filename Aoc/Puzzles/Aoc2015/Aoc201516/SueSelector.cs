@@ -16,11 +16,7 @@ public class SueSelector
         SueNumberPart2 = correctSuePart2?.Number ?? 0;
     }
 
-    private IList<Sue> ParseSues(string input)
-    {
-        var rows = StringReader.ReadLines(input);
-        return rows.Select(ParseSue).ToList();
-    }
+    private IList<Sue> ParseSues(string input) => StringReader.ReadLines(input).Select(ParseSue).ToList();
 
     private Sue ParseSue(string s)
     {

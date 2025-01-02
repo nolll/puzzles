@@ -1,20 +1,11 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201516;
 
-public class Sue
+public class Sue(int number)
 {
-    private readonly IDictionary<string, int> _properties;
-    public int Number { get; }
+    private readonly IDictionary<string, int> _properties = new Dictionary<string, int>();
+    public int Number { get; } = number;
 
-    public Sue(int number)
-    {
-        Number = number;
-        _properties = new Dictionary<string, int>();
-    }
-
-    public void Set(string name, int amount)
-    {
-        _properties.Add(name, amount);
-    }
+    public void Set(string name, int amount) => _properties.Add(name, amount);
 
     public bool IsCorrectSuePart1 =>
         IsNullOrEqual("children", 3) &&
@@ -40,21 +31,12 @@ public class Sue
         IsNullOrEqual("cars", 2) &&
         IsNullOrEqual("perfumes", 1);
 
-    private bool IsNullOrEqual(string name, int amount)
-    {
-        var hasKey = _properties.ContainsKey(name);
-        return !hasKey || _properties[name] == amount;
-    }
+    private bool IsNullOrEqual(string name, int amount) => 
+        !_properties.ContainsKey(name) || _properties[name] == amount;
 
-    private bool IsNullOrGreaterThan(string name, int amount)
-    {
-        var hasKey = _properties.ContainsKey(name);
-        return !hasKey || _properties[name] > amount;
-    }
+    private bool IsNullOrGreaterThan(string name, int amount) => 
+        !_properties.ContainsKey(name) || _properties[name] > amount;
 
-    private bool IsNullOrLessThan(string name, int amount)
-    {
-        var hasKey = _properties.ContainsKey(name);
-        return !hasKey || _properties[name] < amount;
-    }
+    private bool IsNullOrLessThan(string name, int amount) => 
+        !_properties.ContainsKey(name) || _properties[name] < amount;
 }

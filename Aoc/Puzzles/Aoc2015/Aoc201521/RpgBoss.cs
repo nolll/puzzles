@@ -1,9 +1,3 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201521;
 
-public class RpgBoss : RpgCharacter
-{
-    public RpgBoss(in int points, in int damage, in int armor)
-        : base("boss", in points, in damage, in armor)
-    {
-    }
-}
+public class RpgBoss(int points, int damage, int armor) : RpgCharacter("boss", points, damage, armor);

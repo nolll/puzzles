@@ -2,13 +2,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201521;
 
 public class RpgPlayer : RpgCharacter
 {
-    public RpgPlayer(in int points, in int damage, in int armor)
-        : base("player", in points, in damage, in armor)
+    public RpgPlayer(int points, int damage, int armor)
+        : base("player", points, damage, armor)
     {
     }
 
-    public RpgPlayer(in int points, IList<RpgProperty> properties)
-        : base("player", in points, properties.Sum(o => o.Damage), properties.Sum(o => o.Armor))
+    public RpgPlayer(int points, IList<RpgProperty> properties)
+        : base("player", points, properties.Sum(o => o.Damage), properties.Sum(o => o.Armor))
     {
     }
 }

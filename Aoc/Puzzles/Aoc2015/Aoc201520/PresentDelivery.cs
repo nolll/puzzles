@@ -2,42 +2,36 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201520;
 
 public class PresentDelivery
 {
-    public int Deliver1(in int target, bool useOptimization)
+    public int Deliver1(int target, bool useOptimization)
     {
         var house = FindLowerbound(target);
-        
-        while (true)
+        var presentCount = 0;
+        while (presentCount < target)
         {
             var hasAllLowFactors = HasAllLowFactors(house);
             if (!useOptimization || hasAllLowFactors)
             {
                 var factors = FindIntFactors(house);
-                var presentCount = factors.Sum(o => o * 10);
-                if (presentCount >= target)
-                {
-                    return house;
-                }
+                presentCount = factors.Sum(o => o * 10);
             }
                 
             house++;
         }
+
+        return house - 1;
     }
 
-    private int FindLowerbound(in int target)
+    private static int FindLowerbound(int target)
     {
         var result = 0;
         var i = 1;
-        while (true)
+        while (result <= target)
         {
-            var nextResult = result + i * 10;
-
-            if (nextResult > target)
-                return i;
-
-            result = nextResult;
-                
+            result += i * 10;
             i++;
         }
+
+        return i;
     }
 
     public IList<int> FindIntFactors(int target)
@@ -46,10 +40,8 @@ public class PresentDelivery
         var i = target / 2;
         while (i > 0)
         {
-            if (target % i == 0)
-            {
+            if (target % i == 0) 
                 factors.Add(i);
-            }
 
             i--;
         }
@@ -58,7 +50,7 @@ public class PresentDelivery
         return factors;
     }
 
-    private bool HasAllLowFactors(int target)
+    private static bool HasAllLowFactors(int target)
     {
         if (target % 2 != 0)
             return false;

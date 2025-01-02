@@ -1,4 +1,5 @@
 ﻿using Pzl.Common;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201521;
@@ -24,25 +25,20 @@ public class Aoc201521 : AocPuzzle
 
     private Params GetParams(string input)
     {
-        var rows = StringReader.ReadLines(input);
-
+        var ints = Numbers.IntsFromString(input);
+        
         return new Params
         {
-            HitPoints = GetIntFromRow(rows[0]),
-            Damage = GetIntFromRow(rows[1]),
-            Armor = GetIntFromRow(rows[2])
+            HitPoints = ints[0],
+            Damage = ints[1],
+            Armor = ints[2]
         };
-    }
-
-    private static int GetIntFromRow(string s)
-    {
-        return int.Parse(s.Split(':')[1].Trim());
     }
 
     private class Params
     {
-        public int HitPoints { get; set; }
-        public int Damage { get; set; }
-        public int Armor { get; set; }
+        public int HitPoints { get; init; }
+        public int Damage { get; init; }
+        public int Armor { get; init; }
     }
 }

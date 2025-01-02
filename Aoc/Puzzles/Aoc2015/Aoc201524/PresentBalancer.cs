@@ -18,20 +18,19 @@ public class PresentBalancer
         QuantumEntanglementOfFirstGroup = quantumEntanglements.Min();
     }
 
-    private IEnumerable<IEnumerable<long>> FindGroups(List<long> presents, long partitionSum)
+    private static IEnumerable<IEnumerable<long>> FindGroups(List<long> presents, long partitionSum)
     {
         var count = 1;
         while(count < presents.Count)
         {
             var combinations = CombinationGenerator.GetUniqueCombinationsFixedSize(presents, count);
-            var valid = combinations.Where(o => o.Sum() == partitionSum);
-            if (valid.Any())
-            {
+            var valid = combinations.Where(o => o.Sum() == partitionSum).ToList();
+            if (valid.Count > 0)
                 return valid;
-            }
+            
             count++;
         }
 
-        return Enumerable.Empty<IEnumerable<long>>();
+        return [];
     }
 }

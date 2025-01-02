@@ -4,15 +4,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201523;
 
 public class ChristmasComputer
 {
-    private readonly Dictionary<char, int> _registers;
+    private readonly Dictionary<char, int> _registers = [];
 
     public int RegisterA => _registers['a'];
     public int RegisterB => _registers['b'];
-
-    public ChristmasComputer()
-    {
-        _registers = new Dictionary<char, int>();
-    }
 
     public void Run(string program, int a = 0)
     {
@@ -30,30 +25,26 @@ public class ChristmasComputer
             if (name == "hlf")
             {
                 var register = parts[1].First();
-                _registers[register] = _registers[register] / 2;
+                _registers[register] /= 2;
                 pointer++;
             }
-
             else if (name == "tpl")
             {
                 var register = parts[1].First();
-                _registers[register] = _registers[register] * 3;
+                _registers[register] *= 3;
                 pointer++;
             }
-
             else if (name == "inc")
             {
                 var register = parts[1].First();
-                _registers[register] = _registers[register] + 1;
+                _registers[register] += 1;
                 pointer++;
             }
-
             else if (name == "jmp")
             {
                 var offset = int.Parse(parts[1].Replace("+", ""));
                 pointer += offset;
             }
-
             else if (name == "jie")
             {
                 var register = parts[1].Replace(",", "").First();
@@ -63,7 +54,6 @@ public class ChristmasComputer
                 else
                     pointer++;
             }
-
             else if (name == "jio")
             {
                 var register = parts[1].Replace(",", "").First();

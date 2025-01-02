@@ -8,36 +8,31 @@ public class RpgSimulator
 
     private readonly IList<RpgProperty> _weapons = new List<RpgProperty>
     {
-        new RpgProperty("Dagger", 8, 4, 0),
-        new RpgProperty("Shortsword", 10, 5, 0),
-        new RpgProperty("Warhammer", 25, 6, 0),
-        new RpgProperty("Longsword", 40, 7, 0),
-        new RpgProperty("Greataxe", 74, 8, 0)
+        new (8, 4, 0),
+        new (10, 5, 0),
+        new (25, 6, 0),
+        new (40, 7, 0),
+        new (74, 8, 0)
     };
 
     private readonly IList<RpgProperty> _armor = new List<RpgProperty>
     {
-        new RpgProperty("Leather", 13, 0, 1),
-        new RpgProperty("Chainmail", 31, 0, 2),
-        new RpgProperty("Splintmail", 53, 0, 3),
-        new RpgProperty("Bandedmail", 75, 0, 4),
-        new RpgProperty("Platemail", 102, 0, 5)
+        new (13, 0, 1),
+        new (31, 0, 2),
+        new (53, 0, 3),
+        new (75, 0, 4),
+        new (102, 0, 5)
     };
 
     private readonly IList<RpgProperty> _rings = new List<RpgProperty>
     {
-        new RpgProperty("Damage +1", 25, 1, 0),
-        new RpgProperty("Damage +2", 50, 2, 0),
-        new RpgProperty("Damage +3", 100, 3, 0),
-        new RpgProperty("Defense +1", 20, 0, 1),
-        new RpgProperty("Defense +2", 40, 0, 2),
-        new RpgProperty("Defense +3", 80, 0, 3)
+        new (25, 1, 0),
+        new (50, 2, 0),
+        new (100, 3, 0),
+        new (20, 0, 1),
+        new (40, 0, 2),
+        new (80, 0, 3)
     };
-
-    public RpgSimulator()
-    {
-        RoundsPlayed = 0;
-    }
 
     public int WinWithLowestCost(int bossPoints, int bossDamage, int bossArmor)
     {
@@ -52,12 +47,12 @@ public class RpgSimulator
             var player = new RpgPlayer(100, properties);
 
             var winner = Run(boss, player);
-            if (winner.Name == "player")
-            {
-                var cost = properties.Sum(o => o.Cost);
-                if (cost < lowest)
-                    lowest = cost;
-            }
+            if (winner.Name != "player") 
+                continue;
+            
+            var cost = properties.Sum(o => o.Cost);
+            if (cost < lowest)
+                lowest = cost;
         }
 
         return lowest;
@@ -76,12 +71,12 @@ public class RpgSimulator
             var player = new RpgPlayer(100, properties);
 
             var winner = Run(boss, player);
-            if (winner.Name == "boss")
-            {
-                var cost = properties.Sum(o => o.Cost);
-                if (cost > highestCost)
-                    highestCost = cost;
-            }
+            if (winner.Name != "boss") 
+                continue;
+            
+            var cost = properties.Sum(o => o.Cost);
+            if (cost > highestCost)
+                highestCost = cost;
         }
 
         return highestCost;
@@ -112,21 +107,19 @@ public class RpgSimulator
         return combinations;
     }
 
-    private IList<List<RpgProperty>> GetWeaponCombinations()
-    {
-        return _weapons.Select(weapon => new List<RpgProperty> {weapon}).ToList();
-    }
+    private IList<List<RpgProperty>> GetWeaponCombinations() => 
+        _weapons.Select(weapon => new List<RpgProperty> {weapon}).ToList();
 
     private IList<List<RpgProperty>> GetArmorCombinations()
     {
-        var combinations = new List<List<RpgProperty>> { new List<RpgProperty>() };
+        var combinations = new List<List<RpgProperty>> { new() };
         combinations.AddRange(_armor.Select(armor => new List<RpgProperty> { armor }));
         return combinations;
     }
 
     private IList<List<RpgProperty>> GetRingCombinations()
     {
-        var combinations = new List<List<RpgProperty>> { new List<RpgProperty>() };
+        var combinations = new List<List<RpgProperty>> { new() };
         combinations.AddRange(_rings.Select(ring => new List<RpgProperty> { ring }));
         combinations.AddRange(PermutationGenerator.GetPermutations(_rings, 2).Select(o => o.ToList()).ToList());
         return combinations;

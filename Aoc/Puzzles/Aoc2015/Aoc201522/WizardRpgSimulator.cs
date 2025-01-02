@@ -1,27 +1,14 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201522;
 
-public enum WizardRpgGameMode
+public class WizardRpgSimulator(WizardRpgGameMode gameMode)
 {
-    Easy,
-    Hard
-}
-
-public class WizardRpgSimulator
-{
-    private readonly WizardRpgGameMode _gameMode;
-
-    public WizardRpgSimulator(WizardRpgGameMode gameMode)
-    {
-        _gameMode = gameMode;
-    }
-
     private readonly IList<WizardRpgSpell> _spells = new List<WizardRpgSpell>
     {
-        new WizardRpgSpell("Magic Missile", 53, 4, 0, 0, 0, 0),
-        new WizardRpgSpell("Drain", 73, 2, 0, 2, 0, 0),
-        new WizardRpgSpell("Shield", 113, 0, 7, 0, 0, 6),
-        new WizardRpgSpell("Poison", 173, 3, 0, 0, 0, 6),
-        new WizardRpgSpell("Recharge", 229, 0, 0, 0, 101, 5),
+        new ("Magic Missile", 53, 4, 0, 0, 0, 0),
+        new ("Drain", 73, 2, 0, 2, 0, 0),
+        new ("Shield", 113, 0, 7, 0, 0, 6),
+        new ("Poison", 173, 3, 0, 0, 0, 6),
+        new ("Recharge", 229, 0, 0, 0, 101, 5),
     };
 
     public int WinWithLowestCost(int bossPoints, int bossDamage)
@@ -42,7 +29,7 @@ public class WizardRpgSimulator
             var newPlayer = new WizardRpgPlayer(player.Mana, player.Points, player.Damage);
             var newCost = cost + spell.Cost;
 
-            if (_gameMode == WizardRpgGameMode.Hard)
+            if (gameMode == WizardRpgGameMode.Hard)
                 newPlayer.Points--;
 
             var newEffects = effects.Select(o => new WizardRpgEffect(o.Name, o.Damage, o.Armor, o.Healing, o.Recharge, o.Timer)).ToList();
@@ -99,9 +86,7 @@ public class WizardRpgSimulator
             }
 
             if (!newPlayer.IsAlive)
-            {
                 continue;
-            }
 
             var nextCost = Run(newBoss, newPlayer, newEffects, newCost);
 
@@ -112,7 +97,7 @@ public class WizardRpgSimulator
         return costs.Any() ? costs.Min() : 0;
     }
 
-    private bool CanCastSpell(IEnumerable<WizardRpgEffect> effects, WizardRpgPlayer player, WizardRpgSpell spell)
+    private static bool CanCastSpell(IEnumerable<WizardRpgEffect> effects, WizardRpgPlayer player, WizardRpgSpell spell)
     {
         var canAffordSpell = player.Mana >= spell.Cost;
         var spellAlreadyCast = effects.Any(o => o.Name == spell.Name);

@@ -3,37 +3,29 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201514;
 public class Reindeer
 {
     private readonly int _period;
+    private readonly int _speed;
+    private readonly int _flyTime;
 
-    public string Name { get; }
-    public int Speed { get; }
-    public int FlyTime { get; }
-    public int RestTime { get; }
     public int Score { get; private set; }
 
-    public Reindeer(string name, in int speed, in int flyTime, in int restTime)
+    public Reindeer(int speed, int flyTime, int restTime)
     {
-        Name = name;
-        Speed = speed;
-        FlyTime = flyTime;
-        RestTime = restTime;
-        Score = 0;
-        _period = FlyTime + RestTime;
+        _speed = speed;
+        _flyTime = flyTime;
+        _period = _flyTime + restTime;
     }
 
-    public void IncreaseScore()
-    {
-        Score += 1;
-    }
+    public void IncreaseScore() => Score += 1;
 
     public int DistanceAfter(in int seconds)
     {
         var completedPeriods = (int)Math.Floor((decimal)seconds / _period);
         var secondsInCurrentPeriod = seconds % _period;
-        var flySecondsInCurrentPeriod = secondsInCurrentPeriod > FlyTime
-            ? FlyTime
+        var flySecondsInCurrentPeriod = secondsInCurrentPeriod > _flyTime
+            ? _flyTime
             : secondsInCurrentPeriod;
 
-        var totalFlySeconds = completedPeriods * FlyTime + flySecondsInCurrentPeriod;
-        return totalFlySeconds * Speed;
+        var totalFlySeconds = completedPeriods * _flyTime + flySecondsInCurrentPeriod;
+        return totalFlySeconds * _speed;
     }
 }

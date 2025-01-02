@@ -1,3 +1,4 @@
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201514;
@@ -15,19 +16,15 @@ public class ReindeerRace
         WinningScore = GetWinningScore(reindeers, time);
     }
 
-    private int GetWinningScore(IList<Reindeer> reindeers, int time)
+    private static int GetWinningScore(IList<Reindeer> reindeers, int time)
     {
         for (var i = 1; i <= time; i++)
         {
-            var distances = new List<(int distance, Reindeer reindeer)>();
-            foreach (var reindeer in reindeers)
-            {
-                distances.Add((reindeer.DistanceAfter(i), reindeer));
-            }
-
-            var ordered = distances.OrderByDescending(o => o.distance).ToList();
-            var maxValue = ordered.First().distance;
-            var leaders = ordered.Where(o => o.distance == maxValue).Select(o => o.reindeer);
+            var distances = reindeers.Select(reindeer => (distance: reindeer.DistanceAfter(i), reindeer))
+                .OrderByDescending(o => o.distance)
+                .ToList();
+            var maxValue = distances.First().distance;
+            var leaders = distances.Where(o => o.distance == maxValue).Select(o => o.reindeer);
 
             foreach (var leader in leaders)
             {
@@ -37,20 +34,16 @@ public class ReindeerRace
         return reindeers.Max(o => o.Score);
     }
 
-    private IList<Reindeer> ParseReindeers(string input)
-    {
-        var rows = StringReader.ReadLines(input);
-        return rows.Select(ParseReindeer).ToList();
-    }
+    private static IList<Reindeer> ParseReindeers(string input) => 
+        StringReader.ReadLines(input).Select(ParseReindeer).ToList();
 
-    private Reindeer ParseReindeer(string str)
+    private static Reindeer ParseReindeer(string str)
     {
-        var parts = str.Split(' ');
-        var name = parts[0];
-        var speed = int.Parse(parts[3]);
-        var flyTime = int.Parse(parts[6]);
-        var restTime = int.Parse(parts[13]);
+        var ints = Numbers.IntsFromString(str);
+        var speed = ints[0];
+        var flyTime = ints[1];
+        var restTime = ints[2];
 
-        return new Reindeer(name, speed, flyTime, restTime);
+        return new Reindeer(speed, flyTime, restTime);
     }
 }

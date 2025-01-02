@@ -1,33 +1,23 @@
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201517;
 
-public class EggnogContainer : IEquatable<EggnogContainer>
+public class EggnogContainer(int id, int volume) : IEquatable<EggnogContainer>
 {
-    public int Id { get; }
-    public int Volume { get; }
-
-    public EggnogContainer(int id, int volume)
-    {
-        Id = id;
-        Volume = volume;
-    }
+    private readonly int _id = id;
+    public int Volume { get; } = volume;
 
     public bool Equals(EggnogContainer? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return Id == other.Id;
+        return _id == other._id;
     }
 
     public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != this.GetType()) return false;
-        return Equals((EggnogContainer) obj);
+        return obj.GetType() == GetType() && Equals((EggnogContainer) obj);
     }
 
-    public override int GetHashCode()
-    {
-        return Id;
-    }
+    public override int GetHashCode() => _id;
 }

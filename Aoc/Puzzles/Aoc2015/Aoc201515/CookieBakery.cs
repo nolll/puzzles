@@ -1,3 +1,4 @@
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201515;
@@ -11,8 +12,6 @@ public class CookieBakery
     {
         var ingredients = ParseIngredients(input);
         var combinations = GetCombinations(ingredients.Count);
-        HighestScore = 0;
-        HighestScoreWith500Calories = 0;
 
         foreach (var combination in combinations)
         {
@@ -26,7 +25,7 @@ public class CookieBakery
         }
     }
 
-    private int GetScore(IList<CookieIngredient> ingredients, List<int> percentages)
+    private static int GetScore(IList<CookieIngredient> ingredients, List<int> percentages)
     {
         var capacity = 0;
         var durability = 0;
@@ -49,14 +48,9 @@ public class CookieBakery
         return capacity * durability * flavor * texture;
     }
 
-    private int GetCalories(IList<CookieIngredient> ingredients, List<int> percentages)
+    private static int GetCalories(IList<CookieIngredient> ingredients, List<int> percentages)
     {
-        var calories = 0;
-
-        for (var i = 0; i < ingredients.Count; i++)
-        {
-            calories += percentages[i] * ingredients[i].Calories;
-        }
+        var calories = ingredients.Select((t, i) => percentages[i] * t.Calories).Sum();
 
         return calories > 0 ? calories : 0;
     }
@@ -74,7 +68,7 @@ public class CookieBakery
             {
                 var b = max - a;
                 if(a + b == max)
-                    combinations.Add(new List<int>{a, b});
+                    combinations.Add([a, b]);
             }
         }
 
@@ -88,8 +82,7 @@ public class CookieBakery
                     {
                         var d = max - a - b - c;
                         if (a + b + c + d == max)
-                            combinations.Add(new List<int> { a, b, c, d });
-
+                            combinations.Add([a, b, c, d]);
                     }
                 }
             }
@@ -98,21 +91,17 @@ public class CookieBakery
         return combinations;
     }
 
-    private IList<CookieIngredient> ParseIngredients(string input)
-    {
-        var rows = StringReader.ReadLines(input);
-        return rows.Select(ParseIngredient).ToList();
-    }
+    private static IList<CookieIngredient> ParseIngredients(string input) => 
+        StringReader.ReadLines(input).Select(ParseIngredient).ToList();
 
-    private CookieIngredient ParseIngredient(string s)
+    private static CookieIngredient ParseIngredient(string s)
     {
-        var parts = s.Replace(":", "").Replace(",", "").Split(' ');
-        var name = parts[0];
-        var capacity = int.Parse(parts[2]);
-        var durability = int.Parse(parts[4]);
-        var flavor = int.Parse(parts[6]);
-        var texture = int.Parse(parts[8]);
-        var calories = int.Parse(parts[10]);
-        return new CookieIngredient(name, capacity, durability, flavor, texture, calories);
+        var ints = Numbers.IntsFromString(s);
+        var capacity = ints[0];
+        var durability = ints[1];
+        var flavor = ints[2];
+        var texture = ints[3];
+        var calories = ints[4];
+        return new CookieIngredient(capacity, durability, flavor, texture, calories);
     }
 }

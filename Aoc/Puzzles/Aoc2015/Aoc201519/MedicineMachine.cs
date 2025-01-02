@@ -29,27 +29,27 @@ public class MedicineMachine
             foreach (var replacement in _replacements)
             {
                 var pos = molecule.IndexOf(replacement.Right, StringComparison.InvariantCulture);
-                if (pos >= 0)
-                {
-                    molecule = ReplaceFirst(molecule, replacement.Right, replacement.Left);
-                    steps++;
-                    break;
-                }
+                if (pos < 0) 
+                    continue;
+                
+                molecule = ReplaceFirst(molecule, replacement.Right, replacement.Left);
+                steps++;
+                break;
             }
         }
 
         return steps;
     }
 
-    private string ReplaceFirst(string text, string search, string replace)
+    private static string ReplaceFirst(string text, string search, string replace)
     {
         var pos = text.IndexOf(search, StringComparison.InvariantCulture);
-        if (pos < 0)
-            return text;
-        return string.Concat(text.Substring(0, pos), replace, text.Substring(pos + search.Length));
+        return pos < 0 
+            ? text 
+            : string.Concat(text[..pos], replace, text[(pos + search.Length)..]);
     }
 
-    private MoleculeReplacement ParseReplacement(string s)
+    private static MoleculeReplacement ParseReplacement(string s)
     {
         var parts = s.Split(" => ");
         var input = parts[0];

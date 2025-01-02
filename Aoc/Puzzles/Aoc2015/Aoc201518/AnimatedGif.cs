@@ -46,10 +46,7 @@ public class AnimatedGif
         TurnOnLight(_matrix.XMin, _matrix.YMax);
     }
 
-    private void TurnOnLight(int x, int y)
-    {
-        _matrix.WriteValueAt(x, y, LightOn);
-    }
+    private void TurnOnLight(int x, int y) => _matrix.WriteValueAt(x, y, LightOn);
 
     private static char GetNewState(in char value, in int adjacentOnCount)
     {

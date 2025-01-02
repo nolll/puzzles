@@ -6,12 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201602;
 
 public class DiamondKeyCodeFinder
 {
-    private readonly Matrix<char> _buttons;
-
-    public DiamondKeyCodeFinder()
-    {
-        _buttons = BuildButtonMatrix();
-    }
+    private readonly Matrix<char> _buttons = BuildButtonMatrix();
 
     public string Find(string input)
     {
@@ -19,45 +14,21 @@ public class DiamondKeyCodeFinder
         var code = new StringBuilder();
         foreach (var commandLine in commandLines)
         {
-            foreach (var command in commandLine)
-            {
+            foreach (var command in commandLine) 
                 Move(command);
-            }
 
             code.Append(_buttons.ReadValue());
         }
+        
         return code.ToString();
     }
 
     private void Move(char direction)
     {
-        if (direction == 'U')
-        {
-            _buttons.TryMoveUp();
-            if (_buttons.ReadValue() == '.')
-                _buttons.MoveDown();
-        }
-
-        if (direction == 'R')
-        {
-            _buttons.TryMoveRight();
-            if (_buttons.ReadValue() == '.')
-                _buttons.MoveLeft();
-        }
-
-        if (direction == 'D')
-        {
-            _buttons.TryMoveDown();
-            if (_buttons.ReadValue() == '.')
-                _buttons.MoveUp();
-        }
-
-        if (direction == 'L')
-        {
-            _buttons.TryMoveLeft();
-            if (_buttons.ReadValue() == '.')
-                _buttons.MoveRight();
-        }
+        var dir = DirectionConverter.GetDirection(direction);
+        _buttons.TryMove(dir);
+        if (_buttons.ReadValue() == '.')
+            _buttons.Move(dir.Opposite);
     }
 
     private static Matrix<char> BuildButtonMatrix()
@@ -75,8 +46,17 @@ public class DiamondKeyCodeFinder
         return matrix;
     }
 
-    private static IList<char[]> ParseCommands(string input)
+    private static IList<char[]> ParseCommands(string input) => 
+        StringReader.ReadLines(input).Select(o => o.ToCharArray()).ToList();
+}
+
+public static class DirectionConverter
+{
+    public static MatrixDirection GetDirection(char direction) => direction switch
     {
-        return StringReader.ReadLines(input).Select(o => o.ToCharArray()).ToList();
-    }
+        'U' => MatrixDirection.Up,
+        'R' => MatrixDirection.Right,
+        'D' => MatrixDirection.Down,
+        _ => MatrixDirection.Left
+    };
 }

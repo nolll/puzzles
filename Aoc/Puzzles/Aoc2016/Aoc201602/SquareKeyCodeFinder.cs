@@ -6,12 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201602;
 
 public class SquareKeyCodeFinder
 {
-    private readonly Matrix<char> _buttons;
-
-    public SquareKeyCodeFinder()
-    {
-        _buttons = BuildButtonMatrix();
-    }
+    private readonly Matrix<char> _buttons = BuildButtonMatrix();
 
     public string Find(string input)
     {
@@ -19,10 +14,8 @@ public class SquareKeyCodeFinder
         var code = new StringBuilder();
         foreach (var commandLine in commandLines)
         {
-            foreach (var command in commandLine)
-            {
+            foreach (var command in commandLine) 
                 Move(command);
-            }
 
             code.Append(_buttons.ReadValue());
         }
@@ -31,14 +24,8 @@ public class SquareKeyCodeFinder
 
     private void Move(char direction)
     {
-        if (direction == 'U')
-            _buttons.TryMoveUp();
-        if (direction == 'R')
-            _buttons.TryMoveRight();
-        if (direction == 'D')
-            _buttons.TryMoveDown();
-        if (direction == 'L')
-            _buttons.TryMoveLeft();
+        var dir = DirectionConverter.GetDirection(direction);
+        _buttons.TryMove(dir);
     }
 
     private static Matrix<char> BuildButtonMatrix()
@@ -54,8 +41,6 @@ public class SquareKeyCodeFinder
         return matrix;
     }
 
-    private static IList<char[]> ParseCommands(string input)
-    {
-        return StringReader.ReadLines(input).Select(o => o.ToCharArray()).ToList();
-    }
+    private static IList<char[]> ParseCommands(string input) => 
+        StringReader.ReadLines(input).Select(o => o.ToCharArray()).ToList();
 }

@@ -1,18 +1,9 @@
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201604;
 
-public class CharacterCount
+public class CharacterCount(char c)
 {
-    public char C { get; }
+    public char C { get; } = c;
     public int Count { get; private set; }
 
-    public CharacterCount(char c)
-    {
-        C = c;
-        Count = 0;
-    }
-
-    public void Increment()
-    {
-        Count += 1;
-    }
+    public void Increment() => Count += 1;
 }

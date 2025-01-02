@@ -11,7 +11,7 @@ public class Room
     public Room(string input)
     {
         var split1 = input.Split('[').ToList();
-        var checksum = split1[1].Substring(0, split1[1].Length - 1);
+        var checksum = split1[1][..^1];
         var sortedChecksum = string.Join('-', checksum.ToCharArray().OrderBy(o => o)).Replace("-", "");
         var split2 = split1[0].Split('-');
         Id = int.Parse(split2.Last());

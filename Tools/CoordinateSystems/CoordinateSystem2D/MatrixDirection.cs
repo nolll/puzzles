@@ -16,19 +16,26 @@ public class MatrixDirection : IEquatable<MatrixDirection>
         Y = y;
     }
 
-    public static readonly MatrixDirection Up = new('^', 0, -1);
-    public static readonly MatrixDirection Right = new('>', 1, 0);
-    public static readonly MatrixDirection Down = new('v', 0, 1);
-    public static readonly MatrixDirection Left = new('<', -1, 0);
+    public static readonly MatrixDirection Up = new(DirectionName.Up, 0, -1);
+    public static readonly MatrixDirection Right = new(DirectionName.Right, 1, 0);
+    public static readonly MatrixDirection Down = new(DirectionName.Down, 0, 1);
+    public static readonly MatrixDirection Left = new(DirectionName.Left, -1, 0);
+
+    public static MatrixDirection Get(char dir) => dir switch
+    {
+        DirectionName.Up => Up,
+        DirectionName.Right => Right,
+        DirectionName.Down => Down,
+        _ => Left
+    };
     
-    public static MatrixDirection Get(char dir) =>
-        dir switch
-        {
-            '^' => Up,
-            '>' => Right,
-            'v' => Down,
-            _ => Left
-        };
+    public MatrixDirection Opposite => Name switch
+    {
+        DirectionName.Up => Down,
+        DirectionName.Right => Left,
+        DirectionName.Down => Up,
+        _ => Right
+    };
     
     public static readonly List<MatrixDirection> All = [Up, Right, Down, Left];
 

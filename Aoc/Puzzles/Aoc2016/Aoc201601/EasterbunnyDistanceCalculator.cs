@@ -4,14 +4,9 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201601;
 
 public class EasterbunnyDistanceCalculator
 {
-    private readonly Matrix<int> _matrix;
+    private readonly Matrix<int> _matrix = new();
     private int? _distanceToFirstRepeatedAddress;
 
-    public EasterbunnyDistanceCalculator()
-    {
-        _matrix = new Matrix<int>();
-    }
-        
     public void Go(string input)
     {
         var instructions = input.Split(',').Select(o => o.Trim());
@@ -25,6 +20,7 @@ public class EasterbunnyDistanceCalculator
                 _matrix.TurnRight();
             else
                 _matrix.TurnLeft();
+            
             for (var i = 0; i < distance; i++)
             {
                 _matrix.MoveForward();

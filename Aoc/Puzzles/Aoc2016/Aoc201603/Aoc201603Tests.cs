@@ -10,7 +10,7 @@ public class Aoc201603Tests
     public void ValidateTriangles(string triangleSpec, bool expectedResult)
     {
         var validator = new TriangleValidator();
-        var isValid = validator.IsValid(triangleSpec);
+        var isValid = TriangleValidator.IsValid(triangleSpec);
 
         isValid.Should().Be(expectedResult);
     }

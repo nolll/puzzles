@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using Pzl.Common;
+using Pzl.Tools.Lists;
 using Pzl.Tools.Numbers;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202403;
@@ -31,9 +32,9 @@ public class Aoc202403 : AocPuzzle
 
             if (!isEnabled)
                 continue;
-
-            var pair = Numbers.IntsFromString(ins);
-            total += pair[0] * pair[1];
+            
+            var (a, b) = Numbers.IntsFromString(ins);
+            total += a * b;
         }
         
         return new PuzzleResult(total, "7c76f7c7072aeaf4950328540fc4266b");

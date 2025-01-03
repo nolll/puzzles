@@ -26,13 +26,5 @@ public class Aoc202414Tests
         Sut.Part1(input, 11, 7).Should().Be(12);
     }
 
-    [Test]
-    public void Part2()
-    {
-        const string input = "";
-
-        Sut.Part2(input).Answer.Should().Be("0");
-    }
-
     private static Aoc202414 Sut => new();
 }

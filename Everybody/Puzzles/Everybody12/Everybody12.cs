@@ -136,33 +136,27 @@ public class Everybody12 : EverybodyPuzzle
 
         var meteorCoords = GetAllMeteorCoords(matrix, meteors, aCoord, catapults);
 
-        //var pmatrix = matrix.Clone();
-        //foreach (var coord in meteorCoords)
-        //{
-        //    pmatrix.WriteValueAt(coord, '*');
-        //}
-        //var print = pmatrix.Print();
-        
         var trajectories = SimulateTrajectories(matrix, catapults, meteorCoords)
-            .GroupBy(o => (o.coord, o.time))
+            .GroupBy(o => o.coord)
             .ToDictionary(o => o.Key, v => v.OrderBy(o => o.coord.Y).ThenBy(o => o.power).ToList());
         
         var bestList = new List<(char catapult, int altitude, int power, int time)>();
-        for (var meteorId = 0; meteorId < meteors.Count; meteorId++)
+        foreach (var t in meteors)
         {
-            var best = (' ', int.MaxValue, int.MaxValue, 0);
-            var meteor = meteors[meteorId];
+            var best = (catapult: ' ', altitude: int.MaxValue, power: int.MaxValue, time: 0);
+            var meteor = t;
             var coord = new MatrixAddress(aCoord.X + meteor.X, aCoord.Y - meteor.Y);
             var isDone = false;
             var time = 0;
             while (!isDone)
             {
-                if (trajectories.TryGetValue((coord, time), out var hits))
+                if (trajectories.TryGetValue(coord, out var hits))
                 {
-                    if (hits.Any())
+                    var validHits = hits.Where(o => o.time <= time).ToList();
+                    if (validHits.Any())
                     {
-                        var bestHit = hits.First();
-                        if (bestHit.coord.Y < best.Item2 || bestHit.coord.Y == best.Item2 && bestHit.power < best.Item3)
+                        var bestHit = validHits.OrderBy(o => o.time).First();
+                        if (bestHit.coord.Y < best.altitude || bestHit.coord.Y == best.altitude && bestHit.power < best.power)
                             best = (bestHit.catapult, bestHit.coord.Y, bestHit.power, bestHit.time);
                     }
                 }
@@ -177,9 +171,7 @@ public class Everybody12 : EverybodyPuzzle
             bestList.Add(best);
         }
 
-        var sum = 0;
-        foreach (var o in bestList) 
-            sum += o.power;
+        var sum = bestList.Sum(o => o.power);
 
         return new PuzzleResult(sum);
     }

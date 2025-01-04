@@ -173,7 +173,7 @@ public class Everybody12 : EverybodyPuzzle
 
         var sum = bestList.Sum(o => o.power);
 
-        return new PuzzleResult(sum);
+        return new PuzzleResult(sum, "10d32566118d059169a691eef70e6b1e");
     }
 
     private List<(char catapult, MatrixAddress coord, int time, int power)> SimulateTrajectories(

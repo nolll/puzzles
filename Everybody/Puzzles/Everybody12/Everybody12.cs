@@ -174,7 +174,7 @@ public class Everybody12 : EverybodyPuzzle
     private List<(MatrixAddress coord, int time, int power)> SimulateTrajectories(
         Matrix<char> matrix,
         (char name, MatrixAddress coord)[] catapults, 
-        HashSet<MatrixAddress> meteorCoords)
+        HashSet<(int x, int y)> meteorCoords)
     {
         var list = new List<(MatrixAddress coord, int time, int power)>();
         foreach (var catapult in catapults)
@@ -200,7 +200,7 @@ public class Everybody12 : EverybodyPuzzle
                     matrix.MoveUp();
                     matrix.MoveRight();
                     t++;
-                    if(meteorCoords.Contains(matrix.Address))
+                    if(meteorCoords.Contains(matrix.Address.Tuple))
                         list.Add((matrix.Address, t, power * multiplier));
                 }
             
@@ -209,7 +209,7 @@ public class Everybody12 : EverybodyPuzzle
                 {
                     matrix.MoveRight();
                     t++;
-                    if(meteorCoords.Contains(matrix.Address))
+                    if(meteorCoords.Contains(matrix.Address.Tuple))
                         list.Add((matrix.Address, t, power * multiplier));
                 }
 
@@ -227,7 +227,7 @@ public class Everybody12 : EverybodyPuzzle
                         break;
 
                     t++;
-                    if(meteorCoords.Contains(matrix.Address))
+                    if(meteorCoords.Contains(matrix.Address.Tuple))
                         list.Add((matrix.Address, t, power * multiplier));
                 }
             
@@ -238,24 +238,24 @@ public class Everybody12 : EverybodyPuzzle
         return list;
     }
 
-    private static HashSet<MatrixAddress> GetAllMeteorCoords(
+    private static HashSet<(int x, int y)> GetAllMeteorCoords(
         (int xmin, int ymax) limits,
         List<MatrixAddress> meteors,
         MatrixAddress aCoord, (char name, MatrixAddress coord)[] catapults)
     {
-        var coords = new HashSet<MatrixAddress>();
+        var coords = new HashSet<(int x, int y)>();
         for (var meteorId = 0; meteorId < meteors.Count; meteorId++)
         {
             var meteor = meteors[meteorId];
-            var coord = new MatrixAddress(aCoord.X + meteor.X, aCoord.Y - meteor.Y);
+            var coord = (x: aCoord.X + meteor.X, y: aCoord.Y - meteor.Y);
             var isDone = false;
             while (!isDone)
             {
-                coord = new MatrixAddress(coord.X - 1, coord.Y + 1);
+                coord = (coord.x - 1, coord.y + 1);
                 coords.Add(coord);
-                isDone = coord.Y == limits.ymax ||
-                         coord.X == limits.xmin ||
-                         catapults.Any(o => o.coord.Equals(coord));
+                isDone = coord.y == limits.ymax ||
+                         coord.x == limits.xmin ||
+                         catapults.Any(o => o.coord.Tuple.Equals(coord));
             }
         }
 

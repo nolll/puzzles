@@ -105,34 +105,20 @@ public class Everybody12 : EverybodyPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        const string board = """
-                             .C.
-                             .B.
-                             .A.
-                             ===
-                             """;
-        
-        var matrix = MatrixBuilder.BuildCharMatrix(board, '.');
         var meteors = input.Split(LineBreaks.Single)
             .Select(Numbers.IntsFromString)
-            .Select(o => new MatrixAddress(o[0], o[1]))
+            .Select(o => (x: o[0], y: o[1]))
             .ToList();
-        
-        var xMax = meteors.Max(o => o.X);
-        var yMax = meteors.Max(o => o.Y);
-        
-        matrix.ExtendUp(yMax);
-        matrix.ExtendRight(xMax);
 
-        var aCoord = matrix.FindAddresses('A').First();
-        var bCoord = matrix.FindAddresses('B').First();
-        var cCoord = matrix.FindAddresses('C').First();
-        (char name, MatrixAddress coord)[] catapults = [('A', aCoord), ('B', bCoord), ('C', cCoord)];
-
-        var limits = (xmin: matrix.XMin, ymax: matrix.YMax);
+        var aCoord = (x: 0, y: 2);
+        var bCoord = (x: 0, y: 1);
+        var cCoord = (x: 0, y: 0);
+        (char name, (int x, int y) coord)[] catapults = [('A', aCoord), ('B', bCoord), ('C', cCoord)];
+        
+        var limits = (xmin: 0, xmax: meteors.Max(o => o.x), ymax: aCoord.y + 1);
         var meteorCoords = GetAllMeteorCoords(limits, meteors, aCoord, catapults);
 
-        var trajectories = SimulateTrajectories(matrix, catapults, meteorCoords)
+        var trajectories = SimulateTrajectories(limits, catapults, meteorCoords)
             .GroupBy(o => o.coord)
             .ToDictionary(o => o.Key, v => v.OrderBy(o => o.coord.y).ThenBy(o => o.power).ToList());
         
@@ -140,7 +126,7 @@ public class Everybody12 : EverybodyPuzzle
         foreach (var meteor in meteors)
         {
             var best = (altitude: int.MaxValue, power: int.MaxValue, time: 0);
-            var coord = (x: aCoord.X + meteor.X, y: aCoord.Y - meteor.Y);
+            var coord = (x: aCoord.x + meteor.x, y: aCoord.y - meteor.y);
             var isDone = false;
             var time = 0;
             while (!isDone)
@@ -157,9 +143,9 @@ public class Everybody12 : EverybodyPuzzle
                 }
 
                 coord = (coord.x - 1, coord.y + 1);
-                isDone = coord.y == matrix.YMax ||
-                         coord.x == matrix.XMin ||
-                         catapults.Any(o => o.coord.Tuple.Equals(coord));
+                isDone = coord.y == limits.ymax ||
+                         coord.x == limits.xmin ||
+                         catapults.Any(o => o.coord.Equals(coord));
                 time++;
             }
 
@@ -172,8 +158,8 @@ public class Everybody12 : EverybodyPuzzle
     }
 
     private List<((int x, int y) coord, int time, int power)> SimulateTrajectories(
-        Matrix<char> matrix,
-        (char name, MatrixAddress coord)[] catapults, 
+        (int xmin, int xmax, int ymax) limits,
+        (char name, (int x, int y) coord)[] catapults,
         HashSet<(int x, int y)> meteorCoords)
     {
         var list = new List<((int x, int y) coord, int time, int power)>();
@@ -191,44 +177,45 @@ public class Everybody12 : EverybodyPuzzle
             while (!outOfBounds)
             {
                 var t = 0;
-                matrix.MoveTo(catapult.coord);
+                var (x, y) = catapult.coord;
                 var range = Enumerable.Range(0, power).ToArray();
             
                 // Move up
                 foreach (var _ in range)
                 {
-                    matrix.MoveUp();
-                    matrix.MoveRight();
+                    y--;
+                    x++;
                     t++;
-                    if(meteorCoords.Contains(matrix.Address.Tuple))
-                        list.Add((matrix.Address.Tuple, t, power * multiplier));
+                    if(meteorCoords.Contains((x, y)))
+                        list.Add(((x, y), t, power * multiplier));
                 }
             
                 // Move right
                 foreach (var _ in range)
                 {
-                    matrix.MoveRight();
+                    x++;
                     t++;
-                    if(meteorCoords.Contains(matrix.Address.Tuple))
-                        list.Add((matrix.Address.Tuple, t, power * multiplier));
+                    if(meteorCoords.Contains((x, y)))
+                        list.Add(((x, y), t, power * multiplier));
                 }
 
                 // Move down until bottom
                 while (true)
                 {
-                    if (!matrix.TryMoveRight())
+                    x++;
+                    if (x > limits.xmax)
                     {
                         outOfBounds = true;
                         break;
                     }
 
-                    matrix.MoveDown();
-                    if (matrix.Address.Y == matrix.YMax)
+                    y++;
+                    if (y == limits.ymax)
                         break;
 
                     t++;
-                    if(meteorCoords.Contains(matrix.Address.Tuple))
-                        list.Add((matrix.Address.Tuple, t, power * multiplier));
+                    if(meteorCoords.Contains((x, y)))
+                        list.Add(((x, y), t, power * multiplier));
                 }
             
                 power++;
@@ -239,15 +226,16 @@ public class Everybody12 : EverybodyPuzzle
     }
 
     private static HashSet<(int x, int y)> GetAllMeteorCoords(
-        (int xmin, int ymax) limits,
-        List<MatrixAddress> meteors,
-        MatrixAddress aCoord, (char name, MatrixAddress coord)[] catapults)
+        (int xmin, int xmax, int ymax) limits,
+        List<(int x, int y)> meteors,
+        (int x, int y) aCoord,
+        (char name, (int x, int y) coord)[] catapults)
     {
         var coords = new HashSet<(int x, int y)>();
         for (var meteorId = 0; meteorId < meteors.Count; meteorId++)
         {
             var meteor = meteors[meteorId];
-            var coord = (x: aCoord.X + meteor.X, y: aCoord.Y - meteor.Y);
+            var coord = (x: aCoord.x + meteor.x, y: aCoord.y - meteor.y);
             var isDone = false;
             while (!isDone)
             {
@@ -255,7 +243,7 @@ public class Everybody12 : EverybodyPuzzle
                 coords.Add(coord);
                 isDone = coord.y == limits.ymax ||
                          coord.x == limits.xmin ||
-                         catapults.Any(o => o.coord.Tuple.Equals(coord));
+                         catapults.Any(o => o.coord.Equals(coord));
             }
         }
 

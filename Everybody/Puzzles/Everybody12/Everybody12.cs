@@ -134,13 +134,13 @@ public class Everybody12 : EverybodyPuzzle
 
         var trajectories = SimulateTrajectories(matrix, catapults, meteorCoords)
             .GroupBy(o => o.coord)
-            .ToDictionary(o => o.Key, v => v.OrderBy(o => o.coord.Y).ThenBy(o => o.power).ToList());
+            .ToDictionary(o => o.Key, v => v.OrderBy(o => o.coord.y).ThenBy(o => o.power).ToList());
         
         var bestList = new List<(int altitude, int power, int time)>();
         foreach (var meteor in meteors)
         {
             var best = (altitude: int.MaxValue, power: int.MaxValue, time: 0);
-            var coord = new MatrixAddress(aCoord.X + meteor.X, aCoord.Y - meteor.Y);
+            var coord = (x: aCoord.X + meteor.X, y: aCoord.Y - meteor.Y);
             var isDone = false;
             var time = 0;
             while (!isDone)
@@ -151,15 +151,15 @@ public class Everybody12 : EverybodyPuzzle
                     if (validHits.Any())
                     {
                         var bestHit = validHits.OrderBy(o => o.time).First();
-                        if (bestHit.coord.Y < best.altitude || bestHit.coord.Y == best.altitude && bestHit.power < best.power)
-                            best = (bestHit.coord.Y, bestHit.power, bestHit.time);
+                        if (bestHit.coord.y < best.altitude || bestHit.coord.y == best.altitude && bestHit.power < best.power)
+                            best = (bestHit.coord.y, bestHit.power, bestHit.time);
                     }
                 }
 
-                coord = new MatrixAddress(coord.X - 1, coord.Y + 1);
-                isDone = coord.Y == matrix.YMax ||
-                         coord.X == matrix.XMin ||
-                         catapults.Any(o => o.coord.Equals(coord));
+                coord = (coord.x - 1, coord.y + 1);
+                isDone = coord.y == matrix.YMax ||
+                         coord.x == matrix.XMin ||
+                         catapults.Any(o => o.coord.Tuple.Equals(coord));
                 time++;
             }
 
@@ -171,12 +171,12 @@ public class Everybody12 : EverybodyPuzzle
         return new PuzzleResult(sum, "10d32566118d059169a691eef70e6b1e");
     }
 
-    private List<(MatrixAddress coord, int time, int power)> SimulateTrajectories(
+    private List<((int x, int y) coord, int time, int power)> SimulateTrajectories(
         Matrix<char> matrix,
         (char name, MatrixAddress coord)[] catapults, 
         HashSet<(int x, int y)> meteorCoords)
     {
-        var list = new List<(MatrixAddress coord, int time, int power)>();
+        var list = new List<((int x, int y) coord, int time, int power)>();
         foreach (var catapult in catapults)
         {
             var power = 1;
@@ -201,7 +201,7 @@ public class Everybody12 : EverybodyPuzzle
                     matrix.MoveRight();
                     t++;
                     if(meteorCoords.Contains(matrix.Address.Tuple))
-                        list.Add((matrix.Address, t, power * multiplier));
+                        list.Add((matrix.Address.Tuple, t, power * multiplier));
                 }
             
                 // Move right
@@ -210,7 +210,7 @@ public class Everybody12 : EverybodyPuzzle
                     matrix.MoveRight();
                     t++;
                     if(meteorCoords.Contains(matrix.Address.Tuple))
-                        list.Add((matrix.Address, t, power * multiplier));
+                        list.Add((matrix.Address.Tuple, t, power * multiplier));
                 }
 
                 // Move down until bottom
@@ -228,7 +228,7 @@ public class Everybody12 : EverybodyPuzzle
 
                     t++;
                     if(meteorCoords.Contains(matrix.Address.Tuple))
-                        list.Add((matrix.Address, t, power * multiplier));
+                        list.Add((matrix.Address.Tuple, t, power * multiplier));
                 }
             
                 power++;

@@ -5,6 +5,8 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Everybody12;
 
+[IsSlow]
+[Comment("Looping too much")]
 [Name("Desert Shower")]
 public class Everybody12 : EverybodyPuzzle
 {
@@ -49,10 +51,7 @@ public class Everybody12 : EverybodyPuzzle
                 }
                 
                 // Move right
-                foreach (var _ in range)
-                {
-                    matrix.MoveRight();
-                }
+                foreach (var _ in range) matrix.MoveRight();
 
                 // Move down until bottom
                 while (true)
@@ -65,9 +64,7 @@ public class Everybody12 : EverybodyPuzzle
 
                     matrix.MoveDown();
                     if (matrix.Address.Y == matrix.YMax)
-                    {
                         break;
-                    }
                     
                     if (matrix.ReadValue() != 'T' && matrix.ReadValue() != 'H')
                         continue;
@@ -78,9 +75,7 @@ public class Everybody12 : EverybodyPuzzle
                             bestShots[matrix.Address] = (catapult.name, power);
                     }
                     else
-                    {
                         bestShots[matrix.Address] = (catapult.name, power);
-                    }
                 }
                 
                 power++;
@@ -141,10 +136,9 @@ public class Everybody12 : EverybodyPuzzle
             .ToDictionary(o => o.Key, v => v.OrderBy(o => o.coord.Y).ThenBy(o => o.power).ToList());
         
         var bestList = new List<(char catapult, int altitude, int power, int time)>();
-        foreach (var t in meteors)
+        foreach (var meteor in meteors)
         {
             var best = (catapult: ' ', altitude: int.MaxValue, power: int.MaxValue, time: 0);
-            var meteor = t;
             var coord = new MatrixAddress(aCoord.X + meteor.X, aCoord.Y - meteor.Y);
             var isDone = false;
             var time = 0;
@@ -192,6 +186,7 @@ public class Everybody12 : EverybodyPuzzle
                 'B' => 2,
                 _ => 1
             };
+            
             while (!outOfBounds)
             {
                 var t = 0;
@@ -228,9 +223,7 @@ public class Everybody12 : EverybodyPuzzle
 
                     matrix.MoveDown();
                     if (matrix.Address.Y == matrix.YMax)
-                    {
                         break;
-                    }
 
                     t++;
                     if(meteorCoords.Contains(matrix.Address))

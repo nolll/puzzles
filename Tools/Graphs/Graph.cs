@@ -45,7 +45,7 @@ public static class Graph
         return nodes;
     }
     
-    private static int GetLowestCost(Dictionary<string, Node> nodes, string source, List<string> targets)
+    public static int GetLowestCost(Dictionary<string, Node> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => int.MaxValue);

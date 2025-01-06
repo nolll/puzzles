@@ -5,14 +5,19 @@ namespace Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
 public class Matrix3D<T> where T : struct
 {
     private readonly T _defaultValue;
-    private readonly IList<IList<IList<T>>> _matrix;
+    private readonly IDictionary<Matrix3DAddress, T> _matrix = new Dictionary<Matrix3DAddress, T>();
     public Matrix3DAddress Address { get; private set; }
     public Matrix3DAddress StartAddress { get; set; }
-
-    public IList<T> Values => _matrix.SelectMany(x => x).SelectMany(x => x).ToList();
-    public int Depth => _matrix.Count;
-    public int Height => _matrix.Any() ? _matrix[0].Count : 0;
-    public int Width => _matrix.Any() && _matrix[0].Any() ? _matrix[0][0].Count : 0;
+    
+    public int Width => XMax - XMin + 1;
+    public int Height => YMax - YMin + 1;
+    public int Depth => ZMax - ZMin + 1;
+    public int XMin { get; private set; }
+    public int XMax { get; private set; }
+    public int YMin { get; private set; }
+    public int YMax { get; private set; }
+    public int ZMin { get; private set; }
+    public int ZMax { get; private set; }
     public bool IsAtTop => Address.Y == 0;
     public bool IsAtRightEdge => Address.X == Width - 1;
     public bool IsAtBottom => Address.Y == Height - 1;
@@ -25,6 +30,28 @@ public class Matrix3D<T> where T : struct
         _matrix = BuildMatrix(width, height, depth, defaultValue);
         Address = new Matrix3DAddress(0, 0, 0);
         StartAddress = new Matrix3DAddress(0, 0, 0);
+    }
+    
+    public IEnumerable<T> Values =>
+        Coords.Select(coord => _matrix.TryGetValue(coord, out var v) 
+            ? v 
+            : _defaultValue);
+
+    public IEnumerable<Matrix3DAddress> Coords
+    {
+        get
+        {
+            for (int z = ZMin; z <= ZMax; z++)
+            {
+                for (var y = YMin; y <= YMax; y++)
+                {
+                    for (var x = XMin; x <= XMax; x++)
+                    {
+                        yield return new Matrix3DAddress(x, y, z);
+                    }
+                }   
+            }
+        }
     }
 
     public bool TryMoveTo(Matrix3DAddress address) => MoveTo(address, false);
@@ -40,9 +67,9 @@ public class Matrix3D<T> where T : struct
                 return false;
         }
 
-        var x = address.X > 0 ? address.X : 0;
-        var y = address.Y > 0 ? address.Y : 0;
-        var z = address.Z > 0 ? address.Z : 0;
+        var x = address.X > XMin ? address.X : 0;
+        var y = address.Y > YMin ? address.Y : 0;
+        var z = address.Z > ZMin ? address.Z : 0;
         Address = new Matrix3DAddress(x, y, z);
         return true;
     }
@@ -62,17 +89,39 @@ public class Matrix3D<T> where T : struct
     public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
     private bool MoveLeft(int steps, bool extend) => MoveTo(new Matrix3DAddress(Address.X - steps, Address.Y, Address.Z), extend);
     public T ReadValue() => ReadValueAt(Address.X, Address.Y, Address.Z);
-    public T ReadValueAt(Matrix3DAddress address) => ReadValueAt(address.X, address.Y, address.Z);
-    public T ReadValueAt(int x, int y, int z) => _matrix[z][y][x];
-    public void WriteValue(T value) => _matrix[Address.Z][Address.Y][Address.X] = value;
+    public T ReadValueAt(Matrix3DAddress address) => _matrix[address];
+    public T ReadValueAt(int x, int y, int z) => ReadValueAt(new Matrix3DAddress(x, y, z));
+    public void WriteValue(T value) => WriteValueAt(Address, value);
+    
+    public void WriteValueAt(Matrix3DAddress coord, T value)
+    {
+        if (coord.X < XMin)
+            XMin = coord.X;
+        else if (coord.X > XMax)
+            XMax = coord.X;
+
+        if (coord.Y < YMin)
+            YMin = coord.Y;
+        else if (coord.Y > YMax)
+            YMax = coord.Y;
+        
+        if (coord.Z < ZMin)
+            ZMin = coord.Z;
+        else if (coord.Z > ZMax)
+            ZMax = coord.Z;
+        
+        _matrix[coord] = value;
+        
+        _matrix[Address] = value;
+    }
 
     public bool IsOutOfRange(Matrix3DAddress address) =>
-        address.Z >= Depth ||
-        address.Z < 0 || 
-        address.Y >= Height ||
-        address.Y < 0 ||
-        address.X >= Width ||
-        address.X < 0;
+        address.Z >= ZMax ||
+        address.Z < ZMin || 
+        address.Y >= YMax ||
+        address.Y < YMin ||
+        address.X >= XMax ||
+        address.X < XMin;
 
     public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
     public IList<Matrix3DAddress> OrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
@@ -128,24 +177,18 @@ public class Matrix3D<T> where T : struct
         return matrix;
     }
 
-    private IList<IList<IList<T>>> BuildMatrix(int width, int height, int depth, T defaultValue)
+    private Dictionary<Matrix3DAddress, T> BuildMatrix(int width, int height, int depth, T defaultValue)
     {
-        var matrix = new List<IList<IList<T>>>();
+        var matrix = new Dictionary<Matrix3DAddress, T>();
         for (var z = 0; z < depth; z++)
         {
-            var level = new List<IList<T>>();
             for (var y = 0; y < height; y++)
             {
-                var row = new List<T>();
                 for (var x = 0; x < width; x++)
                 {
-                    row.Add(defaultValue);
+                    matrix.Add(new Matrix3DAddress(x, y, z), defaultValue);
                 }
-
-                level.Add(row);
             }
-
-            matrix.Add(level);
         }
 
         return matrix;
@@ -230,85 +273,25 @@ public class Matrix3D<T> where T : struct
 
     private void AddRows(int numberOfRows, MatrixAddMode addMode)
     {
-        var width = Width;
-        var depth = Depth;
-        for (var z = 0; z < depth; z++)
-        {
-            var level = _matrix[z];
-            for (var y = 0; y < numberOfRows; y++)
-            {
-                var row = new List<T>();
-                for (var x = 0; x < width; x++)
-                {
-                    row.Add(_defaultValue);
-                }
-
-                if (addMode == MatrixAddMode.Prepend)
-                    level.Insert(0, row);
-                else
-                    level.Add(row);
-            }
-        }
+        if (addMode == MatrixAddMode.Prepend)
+            YMin -= numberOfRows;
+        else
+            YMax += numberOfRows;
     }
 
     private void AddCols(int numberOfCols, MatrixAddMode addMode)
     {
-        var height = Height;
-        var depth = Depth;
-        for (var z = 0; z < depth; z++)
-        {
-            var level = _matrix[z];
-            for (var y = 0; y < height; y++)
-            {
-                var row = level[y];
-                for (var x = 0; x < numberOfCols; x++)
-                {
-                    if(addMode == MatrixAddMode.Prepend)
-                        row.Insert(0, _defaultValue);
-                    else 
-                        row.Add(_defaultValue);
-                }
-            }
-        }
+        if (addMode == MatrixAddMode.Prepend)
+            XMin -= numberOfCols;
+        else
+            XMax += numberOfCols;
     }
 
     private void AddLevels(int numberOfLevels, MatrixAddMode addMode)
     {
-        var height = Height;
-        var width = Width;
-        for (var z = 0; z < numberOfLevels; z++)
-        {
-            var level = new List<IList<T>>();
-            for (var y = 0; y < height; y++)
-            {
-                var row = new List<T>();
-                for (var x = 0; x < width; x++)
-                {
-                    row.Add(_defaultValue);
-                }
-                level.Add(row);
-            }
-
-            if(addMode == MatrixAddMode.Prepend)
-                _matrix.Insert(0, level);
-            else
-                _matrix.Add(level);
-        }
-    }
-
-    public string PrintLevel(int level)
-    {
-        var sb = new StringBuilder();
-        foreach (var row in _matrix[level])
-        {
-            foreach (var o in row)
-            {
-                sb.Append(o);
-            }
-
-            sb.AppendLine();
-        }
-
-        return sb.ToString().Trim();
+        if (addMode == MatrixAddMode.Prepend)
+            ZMin -= numberOfLevels;
+        else
+            ZMax += numberOfLevels;
     }
 }

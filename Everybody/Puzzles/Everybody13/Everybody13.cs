@@ -1,8 +1,6 @@
-using System.Collections;
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Graphs;
-using Pzl.Tools.Queues;
 
 namespace Pzl.Everybody.Puzzles.Everybody13;
 
@@ -11,51 +9,54 @@ public class Everybody13 : EverybodyPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
-        var start = matrix.FindAddresses('S').First();
-        matrix.WriteValueAt(start, '0');
-        var target = matrix.FindAddresses('E').First();
-        matrix.WriteValueAt(target, '0');
-        var inputs = new List<Graph.Input>();
-        var q = new Queue<MatrixAddress>();
-        var seen = new HashSet<MatrixAddress>();
-        q.Enqueue(start);
-        while (q.Count > 0)
-        {
-            var current = q.Dequeue();
-            var currentLevel = int.Parse(matrix.ReadValueAt(current).ToString());
-            seen.Add(current);
-            var nbrs = matrix.OrthogonalAdjacentCoordsTo(current);
-            foreach (var nbr in nbrs)
-            {
-                if (seen.Contains(nbr))
-                    continue;
-
-                var v = matrix.ReadValueAt(nbr);
-                if (v == '#')
-                    continue;
-
-                var nbrLevel = int.Parse(v.ToString());
-                var cost = GetCost(currentLevel, nbrLevel);
-                inputs.Add(new Graph.Input(current.Id, nbr.Id, cost + 1));
-                inputs.Add(new Graph.Input(nbr.Id, current.Id, cost + 1));
-                q.Enqueue(nbr);
-            }
-        }
-        
-        var lowestCost = Graph.GetLowestCost(inputs, start.Id, target.Id);
-        
-        return new PuzzleResult(lowestCost, "cc8e51053c4445ee974c4672602452ae");
+        var result = Solve(input);
+        return new PuzzleResult(result, "cc8e51053c4445ee974c4672602452ae");
     }
 
     public PuzzleResult Part2(string input)
     {
-        return new PuzzleResult(0);
+        var result = Solve(input);
+        return new PuzzleResult(result, "a66cce437d7531d58ae98d0084ae5e9d");
     }
 
     public PuzzleResult Part3(string input)
     {
-        return new PuzzleResult(0);
+        var result = Solve(input);
+        return new PuzzleResult(result, "3bebcd17eed852e6918bf8d5eae753cb");
+    }
+    
+    private int Solve(string input)
+    {
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var start = matrix.FindAddresses('E').First();
+        matrix.WriteValueAt(start, '0');
+        var targets = matrix.FindAddresses('S');
+        foreach (var target in targets)
+        {
+            matrix.WriteValueAt(target, '0');
+        }
+        var inputs = new List<Graph.Input>();
+        foreach (var current in matrix.Coords)
+        {
+            var cv = matrix.ReadValueAt(current);
+            if (cv is '#' or ' ')
+                continue;
+            
+            var currentLevel = int.Parse(matrix.ReadValueAt(current).ToString());
+            var nbrs = matrix.OrthogonalAdjacentCoordsTo(current);
+            foreach (var nbr in nbrs)
+            {
+                var nv = matrix.ReadValueAt(nbr);
+                if (nv == '#')
+                    continue;
+
+                var nbrLevel = int.Parse(nv.ToString());
+                var cost = GetCost(currentLevel, nbrLevel);
+                inputs.Add(new Graph.Input(current.Id, nbr.Id, cost + 1));
+            }
+        }
+        
+        return Graph.GetLowestCost(inputs, start.Id, targets.Select(o => o.Id).ToList());
     }
 
     public int GetCost(int a, int b)

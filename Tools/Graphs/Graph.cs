@@ -50,8 +50,8 @@ public static class Graph
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => int.MaxValue);
         visited[source] = 0;
-        var queue = new PriorityQueue<Node, int>();
-        queue.Enqueue(start, 0);
+        var queue = new Queue<Node>();
+        queue.Enqueue(start);
 
         while (queue.Count > 0)
         {
@@ -67,7 +67,7 @@ public static class Graph
                     continue;
 
                 visited[connection.Name] = cost;
-                queue.Enqueue(nodes[connection.Name], cost);
+                queue.Enqueue(nodes[connection.Name]);
             }
         }
 
@@ -79,8 +79,8 @@ public static class Graph
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => (cost: int.MaxValue, path: new List<string>()));
         visited[source] = (0, [source]);
-        var queue = new PriorityQueue<Node, int>();
-        queue.Enqueue(start, 0);
+        var queue = new Queue<Node>();
+        queue.Enqueue(start);
 
         while (queue.Count > 0)
         {
@@ -96,7 +96,7 @@ public static class Graph
                     continue;
 
                 visited[connection.Name] = (cost, [..path, connection.Name]);
-                queue.Enqueue(nodes[connection.Name], cost);
+                queue.Enqueue(nodes[connection.Name]);
             }
         }
         

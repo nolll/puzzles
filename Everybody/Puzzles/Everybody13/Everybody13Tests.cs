@@ -18,6 +18,15 @@ public class Everybody13Tests
 
         Sut.Part1(input).Answer.Should().Be("28");
     }
+    
+    [TestCase(0, 0, 0)]
+    [TestCase(1, 2, 1)]
+    [TestCase(1, 9, 2)]
+    [TestCase(9, 1, 2)]
+    public void Cost(int a, int b, int expected)
+    {
+        Sut.GetCost(a, b).Should().Be(expected);
+    }
 
     [Test]
     public void Part2()

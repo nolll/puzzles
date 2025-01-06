@@ -36,7 +36,7 @@ public class Everybody13 : EverybodyPuzzle
                     continue;
 
                 var nbrLevel = int.Parse(v.ToString());
-                var cost = Math.Min(Math.Abs(currentLevel - nbrLevel), Math.Abs(currentLevel + 10 - nbrLevel));
+                var cost = GetCost(currentLevel, nbrLevel);
                 inputs.Add(new Graph.Input(current.Id, nbr.Id, cost + 1));
                 inputs.Add(new Graph.Input(nbr.Id, current.Id, cost + 1));
                 q.Enqueue(nbr);
@@ -45,9 +45,7 @@ public class Everybody13 : EverybodyPuzzle
         
         var lowestCost = Graph.GetLowestCost(inputs, start.Id, target.Id);
         
-        // 203 length correct, first char incorrect
-        
-        return new PuzzleResult(lowestCost);
+        return new PuzzleResult(lowestCost, "cc8e51053c4445ee974c4672602452ae");
     }
 
     public PuzzleResult Part2(string input)
@@ -58,5 +56,16 @@ public class Everybody13 : EverybodyPuzzle
     public PuzzleResult Part3(string input)
     {
         return new PuzzleResult(0);
+    }
+
+    public int GetCost(int a, int b)
+    {
+        var large = Math.Max(a, b);
+        var small = Math.Min(a, b);
+        var diff = large - small;
+        if (diff > 5)
+            diff = 10 - diff;
+
+        return diff;
     }
 }

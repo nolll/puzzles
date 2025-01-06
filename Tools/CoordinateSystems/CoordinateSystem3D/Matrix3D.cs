@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
 
 public class Matrix3D<T> where T : struct
@@ -65,9 +67,9 @@ public class Matrix3D<T> where T : struct
                 return false;
         }
 
-        var x = address.X > XMin ? address.X : 0;
-        var y = address.Y > YMin ? address.Y : 0;
-        var z = address.Z > ZMin ? address.Z : 0;
+        var x = address.X > XMin ? address.X : XMin;
+        var y = address.Y > YMin ? address.Y : YMin;
+        var z = address.Z > ZMin ? address.Z : ZMin;
         Address = new Matrix3DAddress(x, y, z);
         return true;
     }
@@ -87,7 +89,11 @@ public class Matrix3D<T> where T : struct
     public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
     private bool MoveLeft(int steps, bool extend) => MoveTo(new Matrix3DAddress(Address.X - steps, Address.Y, Address.Z), extend);
     public T ReadValue() => ReadValueAt(Address.X, Address.Y, Address.Z);
-    public T ReadValueAt(Matrix3DAddress address) => _matrix[address];
+
+    public T ReadValueAt(Matrix3DAddress coord) => _matrix.TryGetValue(coord, out var v)
+        ? v
+        : _defaultValue;
+
     public T ReadValueAt(int x, int y, int z) => ReadValueAt(new Matrix3DAddress(x, y, z));
     public void WriteValue(T value) => WriteValueAt(Address, value);
     
@@ -109,16 +115,14 @@ public class Matrix3D<T> where T : struct
             ZMax = coord.Z;
         
         _matrix[coord] = value;
-        
-        _matrix[Address] = value;
     }
 
     public bool IsOutOfRange(Matrix3DAddress address) =>
-        address.Z >= ZMax ||
+        address.Z > ZMax ||
         address.Z < ZMin || 
-        address.Y >= YMax ||
+        address.Y > YMax ||
         address.Y < YMin ||
-        address.X >= XMax ||
+        address.X > XMax ||
         address.X < XMin;
 
     public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
@@ -292,4 +296,24 @@ public class Matrix3D<T> where T : struct
         else
             ZMax += numberOfLevels;
     }
+    
+    public string Print(int z)
+    {
+        var sb = new StringBuilder();
+
+        for (var y = YMin; y <= YMax; y++)
+        {
+            for (var x = XMin; x <= XMax; x++)
+            { 
+                sb.Append(ReadValueAt(x, y, z));
+            }
+
+            if(y < YMax)
+                sb.AppendLine();
+        }
+
+        return sb.ToString();
+    }
+
+    public void Clear() => _matrix.Clear();
 }

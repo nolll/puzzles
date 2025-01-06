@@ -15,8 +15,8 @@ public class Matrix3DTests
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
-        var emptyRowsValue = matrix.ReadValueAt(0, 0, 0);
-        var writtenValue = matrix.ReadValueAt(1, 1, 1);
+        var emptyRowsValue = matrix.ReadValueAt(-1, -1, -1);
+        var writtenValue = matrix.ReadValueAt(0, 0, 0);
         emptyRowsValue.Should().Be(DefaultValue);
         writtenValue.Should().Be(WriteValue);
         matrix.Width.Should().Be(3);
@@ -31,8 +31,8 @@ public class Matrix3DTests
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections(2);
 
-        var emptyRowsValue = matrix.ReadValueAt(0, 0, 0);
-        var writtenValue = matrix.ReadValueAt(2, 2, 2);
+        var emptyRowsValue = matrix.ReadValueAt(-1, -1, -1);
+        var writtenValue = matrix.ReadValueAt(0, 0, 0);
         emptyRowsValue.Should().Be(DefaultValue);
         writtenValue.Should().Be(WriteValue);
         matrix.Width.Should().Be(5);
@@ -47,17 +47,17 @@ public class Matrix3DTests
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
-        matrix.MoveTo(1, 1, 1);
+        matrix.MoveTo(0, 0, 0);
 
         matrix.OrthogonalAdjacentCoords.Count.Should().Be(6);
 
         var adjacentCoords = matrix.OrthogonalAdjacentCoords;
-        var cubesAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
-        var cubesAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
-        var cubesAtZZero = adjacentCoords.Where(o => o.Z == 0).ToList();
-        cubesAtXZero.Count.Should().Be(1);
-        cubesAtYZero.Count.Should().Be(1);
-        cubesAtZZero.Count.Should().Be(1);
+        var cubesAtXMin = adjacentCoords.Where(o => o.X == matrix.XMin).ToList();
+        var cubesAtYMin = adjacentCoords.Where(o => o.Y == matrix.YMin).ToList();
+        var cubesAtZMin = adjacentCoords.Where(o => o.Z == matrix.ZMin).ToList();
+        cubesAtXMin.Count.Should().Be(1);
+        cubesAtYMin.Count.Should().Be(1);
+        cubesAtZMin.Count.Should().Be(1);
     }
 
     [Test]
@@ -67,16 +67,16 @@ public class Matrix3DTests
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
-        matrix.MoveTo(1, 1, 1);
+        matrix.MoveTo(0, 0, 0);
 
         matrix.AllAdjacentCoords.Count.Should().Be(26);
 
         var adjacentCoords = matrix.AllAdjacentCoords;
-        var cubesAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
-        var cubesAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
-        var cubesAtZZero = adjacentCoords.Where(o => o.Z == 0).ToList();
-        cubesAtXZero.Count.Should().Be(9);
-        cubesAtYZero.Count.Should().Be(9);
-        cubesAtZZero.Count.Should().Be(9);
+        var cubesAtXMin = adjacentCoords.Where(o => o.X == matrix.XMin).ToList();
+        var cubesAtYMin = adjacentCoords.Where(o => o.Y == matrix.YMin).ToList();
+        var cubesAtZMin = adjacentCoords.Where(o => o.Z == matrix.ZMin).ToList();
+        cubesAtXMin.Count.Should().Be(9);
+        cubesAtYMin.Count.Should().Be(9);
+        cubesAtZMin.Count.Should().Be(9);
     }
 }

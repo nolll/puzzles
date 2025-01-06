@@ -1,8 +1,10 @@
+using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202218;
 
+[Comment("The 3d matrix is a little broken")]
 public class LavaCubes
 {
     public int Part1(string input)
@@ -66,11 +68,11 @@ public class LavaCubes
         }
 
         var trappedCoords = new List<Matrix3DAddress>();
-        for (var x = 0; x < matrix.Width; x++)
+        for (var x = matrix.XMin; x <= matrix.XMax; x++)
         {
-            for (var y = 0; y < matrix.Height; y++)
+            for (var y = matrix.YMin; y <= matrix.YMax; y++)
             {
-                for (var z = 0; z < matrix.Depth; z++)
+                for (var z = matrix.ZMin; z <= matrix.ZMax; z++)
                 {
                     var c = new Matrix3DAddress(x, y, z);
                     if (matrix.ReadValueAt(c) == '.')
@@ -141,9 +143,6 @@ public class LavaCubes
                 _subtractedArea += 1;
         }
 
-        public bool Equals(Cube other)
-        {
-            return X == other.X && Y == other.Y && Z == other.Z;
-        }
+        public bool Equals(Cube other) => X == other.X && Y == other.Y && Z == other.Z;
     }
 }

@@ -86,10 +86,9 @@ public class Matrix<T> where T : struct
     public T ReadValue() => ReadValueAt(Address);
     public T ReadValueAt(int x, int y) => ReadValueAt(new MatrixAddress(x, y));
 
-    public T ReadValueAt(MatrixAddress coord) =>
-        _matrix.TryGetValue(coord, out var v)
-            ? v
-            : DefaultValue;
+    public T ReadValueAt(MatrixAddress coord) => _matrix.TryGetValue(coord, out var v)
+        ? v
+        : DefaultValue;
 
     public void WriteValue(T value) => WriteValueAt(Address, value);
     public void WriteValueAt(int x, int y, T value) => WriteValueAt(new MatrixAddress(x, y), value);

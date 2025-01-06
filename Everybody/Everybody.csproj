@@ -12,45 +12,6 @@
 
     <ItemGroup>
         <None Include="Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
-        <None Update="Puzzles\Everybody07\Everybody07-1.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody07\Everybody07-2.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody07\Everybody07-3.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody08\Everybody07-1.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody08\Everybody08-3.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody09\Everybody08-3.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody09\Everybody09-3.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody10\Everybody09-1.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody10\Everybody10-3.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody11\Everybody10-1.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody12\Everybody11-1.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody12\Everybody12-2.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Everybody12\Everybody12-3.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
     </ItemGroup>
 
     <ItemGroup>

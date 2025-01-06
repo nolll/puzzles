@@ -5,8 +5,6 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Everybody12;
 
-[IsSlow]
-[Comment("Looping too much")]
 [Name("Desert Shower")]
 public class Everybody12 : EverybodyPuzzle
 {

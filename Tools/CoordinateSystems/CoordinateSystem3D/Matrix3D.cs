@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
 
 public class Matrix3D<T> where T : struct

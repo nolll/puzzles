@@ -1,7 +1,4 @@
-using System.Reflection.Metadata;
 using Pzl.Common;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
 using Pzl.Tools.Graphs;
 using Pzl.Tools.Strings;
 
@@ -40,60 +37,19 @@ public class Everybody14 : EverybodyPuzzle
         var lines = input.Split(LineBreaks.Single);
         foreach (var line in lines)
         {
-            var x = 0;
-            var y = 0;
-            var z = 0;
+            var pos = GetStartPos();
             
             foreach (var instr in line.Split(','))
             {
+                var c = instr[0];
                 var v = int.Parse(instr[1..]);
-                if (instr.StartsWith("R"))
+                var dimension = GetDimension(c);
+                var direction = GetDirection(c);
+                
+                for (var i = 0; i < v; i++)
                 {
-                    for (var i = 0; i < v; i++)
-                    {
-                        x++;
-                        seen.Add((x, y, z));
-                    }
-                }
-                else if (instr.StartsWith("L"))
-                {
-                    for (var i = 0; i < v; i++)
-                    {
-                        x--;
-                        seen.Add((x, y, z));
-                    }
-                }
-                else if (instr.StartsWith("U"))
-                {
-                    for (var i = 0; i < v; i++)
-                    {
-                        y--;
-                        seen.Add((x, y, z));
-                    }
-                }
-                else if (instr.StartsWith("D"))
-                {
-                    for (var i = 0; i < v; i++)
-                    {
-                        y++;
-                        seen.Add((x, y, z));
-                    }
-                }
-                else if (instr.StartsWith("F"))
-                {
-                    for (var i = 0; i < v; i++)
-                    {
-                        z++;
-                        seen.Add((x, y, z));
-                    }
-                }
-                else if (instr.StartsWith("B"))
-                {
-                    for (var i = 0; i < v; i++)
-                    {
-                        z--;
-                        seen.Add((x, y, z));
-                    }
+                    pos[dimension] += direction;
+                    seen.Add(ToTuple(pos));
                 }
             }   
         }
@@ -112,76 +68,25 @@ public class Everybody14 : EverybodyPuzzle
         var lines = input.Split(LineBreaks.Single);
         foreach (var line in lines)
         {
-            var x = 0;
-            var y = 0;
-            var z = 0;
+            var pos = GetStartPos();
 
             foreach (var instr in line.Split(','))
             {
+                var c = instr[0];
                 var v = int.Parse(instr[1..]);
-                if (instr.StartsWith("R"))
+                var dimension = GetDimension(c);
+                var direction = GetDirection(c);
+                
+                for (var i = 0; i < v; i++)
                 {
-                    for (var i = 0; i < v; i++)
-                    {
-                        x++;
-                        coords.Add((x, y, z));
-                        if (x == 0 && z == 0)
-                            trunk.Add((x, y, z));
-                    }
-                }
-                else if (instr.StartsWith("L"))
-                {
-                    for (var i = 0; i < v; i++)
-                    {
-                        x--;
-                        coords.Add((x, y, z));
-                        if (x == 0 && z == 0)
-                            trunk.Add((x, y, z));
-                    }
-                }
-                else if (instr.StartsWith("U"))
-                {
-                    for (var i = 0; i < v; i++)
-                    {
-                        y--;
-                        coords.Add((x, y, z));
-                        if (x == 0 && z == 0)
-                            trunk.Add((x, y, z));
-                    }
-                }
-                else if (instr.StartsWith("D"))
-                {
-                    for (var i = 0; i < v; i++)
-                    {
-                        y++;
-                        coords.Add((x, y, z));
-                        if (x == 0 && z == 0)
-                            trunk.Add((x, y, z));
-                    }
-                }
-                else if (instr.StartsWith("F"))
-                {
-                    for (var i = 0; i < v; i++)
-                    {
-                        z++;
-                        coords.Add((x, y, z));
-                        if (x == 0 && z == 0)
-                            trunk.Add((x, y, z));
-                    }
-                }
-                else if (instr.StartsWith("B"))
-                {
-                    for (var i = 0; i < v; i++)
-                    {
-                        z--;
-                        coords.Add((x, y, z));
-                        if (x == 0 && z == 0)
-                            trunk.Add((x, y, z));
-                    }
+                    pos[dimension] += direction;
+                    coords.Add(ToTuple(pos));
+                    if (IsTrunk(pos))
+                        trunk.Add(ToTuple(pos));
                 }
             }
 
-            leaves.Add((x, y, z));
+            leaves.Add(ToTuple(pos));
         }
         
         var inputs = new List<Graph.Input>();
@@ -205,6 +110,26 @@ public class Everybody14 : EverybodyPuzzle
         
         return new PuzzleResult(best, "55d3e09b26d9f60ed08c206a7505561f");
     }
+
+    private static bool IsTrunk(Dictionary<char, int> pos) => pos['x'] == 0 && pos['z'] == 0;
+
+    private static (int, int, int) ToTuple(Dictionary<char, int> pos) => (pos['x'], pos['y'], pos['z']);
+
+    private static Dictionary<char, int> GetStartPos() => new()
+    {
+        { 'x', 0 },
+        { 'y', 0 },
+        { 'z', 0 }
+    };
+
+    private static char GetDimension(char c) => c switch
+    {
+        'R' or 'L' => 'x',
+        'U' or 'D' => 'y',
+        _ => 'z'
+    };
+    
+    private static int GetDirection(char c) => c is 'R' or 'D' or 'F' ? 1 : -1;
 
     private static List<(int x, int y, int z)> OrthogonalAdjacentCoords((int x, int y, int z) coord)
     {

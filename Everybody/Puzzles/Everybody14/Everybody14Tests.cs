@@ -16,9 +16,12 @@ public class Everybody14Tests
     [Test]
     public void Part2()
     {
-        const string input = "";
+        const string input = """
+                             U5,R3,D2,L5,U4,R5,D2
+                             U6,L1,D2,R3,U2,L1
+                             """;
 
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part2(input).Answer.Should().Be("32");
     }
 
     [Test]

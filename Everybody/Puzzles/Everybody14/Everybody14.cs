@@ -4,7 +4,7 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Everybody14;
 
-[Name("")]
+[Name("The House of Palms")]
 public class Everybody14 : EverybodyPuzzle
 {
     public PuzzleResult Part1(string input)

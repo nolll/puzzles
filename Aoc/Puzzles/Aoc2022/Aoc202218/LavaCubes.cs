@@ -1,10 +1,8 @@
-using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202218;
 
-[Comment("The 3d matrix is a little broken")]
 public class LavaCubes
 {
     public int Part1(string input)
@@ -16,12 +14,9 @@ public class LavaCubes
 
         foreach (var a in cubes)
         {
-            foreach (var b in cubes)
+            foreach (var b in cubes.Where(b => !b.Equals(a)))
             {
-                if (!b.Equals(a))
-                {
-                    a.AdjustTotalArea(b);
-                }
+                a.AdjustTotalArea(b);
             }
         }
 
@@ -30,7 +25,7 @@ public class LavaCubes
 
     public int Part2(string input)
     {
-        var padding = 1;
+        const int padding = 1;
 
         var cubes = StringReader.ReadLines(input)
             .Select(o => o.Split(',').ToArray())
@@ -83,24 +78,18 @@ public class LavaCubes
 
         foreach (var a in cubes)
         {
-            foreach (var b in cubes)
+            foreach (var b in cubes.Where(b => !b.Equals(a)))
             {
-                if (!b.Equals(a))
-                {
-                    a.AdjustTotalArea(b);
-                }
+                a.AdjustTotalArea(b);
             }
         }
 
         var trappedCubes = trappedCoords.Select(o => new Cube(o.X, o.Y, o.Z)).ToList();
         foreach (var a in trappedCubes)
         {
-            foreach (var b in trappedCubes)
+            foreach (var b in trappedCubes.Where(b => !b.Equals(a)))
             {
-                if (!b.Equals(a))
-                {
-                    a.AdjustTotalArea(b);
-                }
+                a.AdjustTotalArea(b);
             }
         }
 
@@ -110,20 +99,13 @@ public class LavaCubes
         return cubeTotalArea - trappedTotalArea;
     }
 
-    private class Cube
+    private class Cube(int x, int y, int z)
     {
-        public int X { get; }
-        public int Y { get; }
-        public int Z { get; }
+        public int X { get; } = x;
+        public int Y { get; } = y;
+        public int Z { get; } = z;
         private int _subtractedArea;
         private const int FullArea = 6;
-
-        public Cube(int x, int y, int z)
-        {
-            X = x;
-            Y = y;
-            Z = z;
-        }
 
         public int AdjustedArea => FullArea - _subtractedArea;
 

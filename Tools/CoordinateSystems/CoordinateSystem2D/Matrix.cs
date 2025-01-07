@@ -40,6 +40,8 @@ public class Matrix<T> where T : struct
             new Dictionary<MatrixAddress, T>(), 
             defaultValue)
     {
+        XMax = width - 1;
+        YMax = height - 1;
     }
 
     private Matrix(T defaultValue)

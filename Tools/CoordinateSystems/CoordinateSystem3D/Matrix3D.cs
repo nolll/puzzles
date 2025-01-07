@@ -22,12 +22,25 @@ public class Matrix3D<T> where T : struct
     public bool IsAtRightEdge => Address.X == Width - 1;
     public bool IsAtBottom => Address.Y == Height - 1;
     public bool IsAtLeftEdge => Address.X == 0;
-    public Matrix3DAddress Center => new(Width / 2, Height / 2, Depth / 2);
+    
+    public Matrix3DAddress Center
+    {
+        get
+        {
+            var xDiff = Math.Abs(XMax - XMin);
+            var yDiff = Math.Abs(YMax - YMin);
+            var zDiff = Math.Abs(ZMax - ZMin);
+            return new(XMax - xDiff / 2, YMax - yDiff / 2, ZMax - zDiff / 2);
+        }
+    }
 
     public Matrix3D(int width = 1, int height = 1, int depth = 1, T defaultValue = default)
     {
         _defaultValue = defaultValue;
         _matrix = BuildMatrix(width, height, depth, defaultValue);
+        XMax = width - 1;
+        YMax = height - 1;
+        ZMax = depth - 1;
         Address = new Matrix3DAddress(0, 0, 0);
         StartAddress = new Matrix3DAddress(0, 0, 0);
     }

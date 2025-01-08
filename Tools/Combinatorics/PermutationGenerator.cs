@@ -8,6 +8,9 @@ public static class PermutationGenerator
     public static IList<IEnumerable<string>> GetPermutations(IList<string> strings) => 
         GetPermutations(strings, strings.Count).ToList();
 
+    public static IEnumerable<IEnumerable<T>> GetPermutations<T>(IList<T> list) =>
+        GetPermutations(list, list.Count);
+    
     public static IEnumerable<IEnumerable<T>> GetPermutations<T>(IList<T> list, int length)
     {
         if (length == 1) return list.Select(t => new[] { t });

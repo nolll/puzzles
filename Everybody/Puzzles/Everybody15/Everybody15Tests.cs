@@ -24,9 +24,20 @@ public class Everybody15Tests
     [Test]
     public void Part2()
     {
-        const string input = "";
+        const string input = """
+                             ##########.##########
+                             #...................#
+                             #.###.##.###.##.#.#.#
+                             #..A#.#..~~~....#A#.#
+                             #.#...#.~~~~~...#.#.#
+                             #.#.#.#.~~~~~.#.#.#.#
+                             #...#.#.B~~~B.#.#...#
+                             #...#....BBB..#....##
+                             #C............#....C#
+                             #####################
+                             """;
 
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part2(input).Answer.Should().Be("38");
     }
 
     [Test]

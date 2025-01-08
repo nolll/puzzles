@@ -3,43 +3,36 @@ namespace Pzl.Tools.Graphs;
 public static class Graph
 {
     public static int GetLowestCost(List<Input> inputs, string source, string target) => 
-        GetLowestCost(inputs, source, [target], 1);
-
-    public static int GetLowestCost(List<Input> inputs, string source, List<string> targets) =>
-        GetLowestCost(inputs, source, targets, 1);
-
-    public static int GetHighestCost(List<Input> inputs, string source, string target) =>
-        GetLowestCost(inputs, source, [target], -1);
+        GetLowestCost(inputs, source, [target]);
     
-    public static int GetHighestCost(List<Input> inputs, string source, List<string> targets) => 
-        GetLowestCost(inputs, source, targets, -1);
-    
+    public static int GetLowestCost(List<Input> inputs, string source, List<string> targets) => 
+        GetLowestCost(GetNodes(inputs), source, targets);
+
     public static (int cost, List<string> path) GetShortestPath(List<Input> inputs, string source, string target) => 
         GetShortestPath(inputs, source, [target]);
 
-    private static int GetLowestCost(List<Input> inputs, string source, List<string> targets, int costModifier) => 
-        GetLowestCost(GetNodes(inputs, source, costModifier), source, targets) * costModifier;
-
     public static (int cost, List<string> path) GetShortestPath(List<Input> inputs, string source, List<string> targets) => 
-        GetShortestPath(GetNodes(inputs, source), source, targets);
+        GetShortestPath(GetNodes(inputs), source, targets);
 
     public static (int cost, List<List<string>> paths) GetShortestPaths(List<Input> inputs, string source, List<string> targets) => 
-        GetShortestPaths(GetNodes(inputs, source), source, targets);
+        GetShortestPaths(GetNodes(inputs), source, targets);
 
-    public static Dictionary<string, Node> GetNodes(List<Input> inputs, string source, int costModifier = 1)
+    public static Dictionary<string, Node> GetNodes(List<Input> inputs)
     {
         var nodes = new Dictionary<string, Node>();
 
         foreach (var input in inputs)
         {
-            if (!nodes.TryGetValue(input.From, out var node))
+            if (!nodes.TryGetValue(input.From, out var fromNode))
             {
-                node = new Node(input.From, []);
-                nodes.Add(input.From, node);
+                fromNode = new Node(input.From, []);
+                nodes.Add(input.From, fromNode);
             }
-
-            if (input.To != source)
-                node.Connections.Add(new Connection(input.To, input.Cost * costModifier));
+            
+            if(!nodes.ContainsKey(input.To))
+                nodes.Add(input.To, new Node(input.To, []));
+            
+            fromNode.Connections.Add(new Connection(input.To, input.Cost));
         }
 
         return nodes;

@@ -25,7 +25,7 @@ public class Aquaq21 : AquaqPuzzle
             const string startId = "start";
             var toId = $"0-{position}";
             var cost = firstRow.Skip(position).Take(width).Sum();
-            inputs.Add(new Graph.Input(startId, toId, cost));
+            inputs.Add(new Graph.Input(startId, toId, -cost));
         }
 
         for (var rowIndex = 0; rowIndex < rows.Count - 1; rowIndex++)
@@ -41,7 +41,7 @@ public class Aquaq21 : AquaqPuzzle
 
                     var toId = $"{rowIndex + 1}-{position + offset}";
                     var cost = rows[rowIndex + 1].Skip(position + offset).Take(width).Sum();
-                    inputs.Add(new Graph.Input(startId, toId, cost));
+                    inputs.Add(new Graph.Input(startId, toId, -cost));
                 }
             }
         }
@@ -54,9 +54,6 @@ public class Aquaq21 : AquaqPuzzle
             inputs.Add(new Graph.Input(startId, toId, 0));
         }
 
-        inputs.Add(new Graph.Input("end", "start", 0));
-
-        var result = Graph.GetHighestCost(inputs, "start", "end");
-        return result;
+        return -Graph.GetLowestCost(inputs, "start", "end");
     }
 }

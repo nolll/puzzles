@@ -6,7 +6,7 @@ public static class Graph
         GetLowestCost(inputs, source, [target]);
     
     public static int GetLowestCost(List<Input> inputs, string source, List<string> targets) => 
-        GetLowestCost(GetNodes(inputs), source, targets);
+        GetShortestPath(GetNodes(inputs), source, targets).cost;
 
     public static (int cost, List<string> path) GetShortestPath(List<Input> inputs, string source, string target) => 
         GetShortestPath(inputs, source, [target]);
@@ -37,6 +37,9 @@ public static class Graph
 
         return nodes;
     }
+
+    public static int GetLowestCost(Dictionary<string, Node> nodes, string source, string target) =>
+        GetLowestCost(nodes, source, [target]);
     
     public static int GetLowestCost(Dictionary<string, Node> nodes, string source, List<string> targets)
     {

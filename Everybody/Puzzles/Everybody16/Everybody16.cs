@@ -49,6 +49,13 @@ public class Everybody16 : EverybodyPuzzle
 
     public PuzzleResult Part2(string input)
     {
+        var score = Part2(input, 202420242024);
+        
+        return new PuzzleResult(score, "8ba1d5c403e6bf5c0aad202e81e5e515");
+    }
+
+    public long Part2(string input, long target)
+    {
         var parts = input.Split(LineBreaks.Double);
         var increments = parts[0].Split(',').Select(int.Parse).ToArray();
         var wheels = new List<List<string>>();
@@ -73,36 +80,43 @@ public class Everybody16 : EverybodyPuzzle
             wheels.Add(wheel);
         }
 
-        var lcm = MathTools.Lcm(increments.Select(o => (long)o));
-        Console.WriteLine($"lcm: {lcm}");
-
         var seen = new HashSet<string>();
-        var count = 1;
+        var count = 0L;
         var score = 0L;
-        while (true)
+        var skipped = false;
+        while (count < target)
         {
+            count++;
             var cats = new List<string>();
+            var indices = new List<int>();
             for (var i = 0; i < wheels.Count; i++)
             {
                 var wheel = wheels[i];
-                var cat = wheel[count * increments[i] % wheel.Count];
+                var index = (int)(count * increments[i] % wheel.Count);
+                var cat = wheel[index];
                 cats.Add(cat);
+                indices.Add(index);
             }
-            
-            var full = string.Join("", cats);
-            if (seen.Contains(full))
-                break;
 
+            var key = string.Join("", indices);
             var stripped = string.Join("", cats.Select(o => $"{o[0]}{o[2]}"));
-            score += Score(stripped);
+            var currentScore = Score(stripped); 
             
-            seen.Add(full);
-            count++;
+            if (!skipped && seen.Contains(key))
+            {
+                skipped = true;
+                var loopLength = seen.Count;
+                var skip = target / loopLength;
+                score = skip * score - currentScore;
+                count = skip * loopLength;
+            }
+
+            score += currentScore;
+            
+            seen.Add(key);
         }
 
-        var result = 0;
-        
-        return new PuzzleResult(result);
+        return score;
     }
 
     public int Score(string s)

@@ -107,7 +107,7 @@ public class Everybody16Tests
     [TestCase("-_->.>>.<", 1)]
     [TestCase("^_^^_^>.<", 2)]
     [TestCase("^_^^_^^_^", 5)]
-    public void Scoring(string input, int expected) => Sut.Score(input).Should().Be(expected);
+    public void Scoring(string input, int expected) => Everybody16.Score(input).Should().Be(expected);
 
     private static Everybody16 Sut => new();
 }

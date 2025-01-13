@@ -23,31 +23,7 @@ public class Everybody16Tests
     [TestCase(3, 4)]
     [TestCase(4, 5)]
     [TestCase(5, 7)]
-    [TestCase(6, 7)]
-    [TestCase(7, 9)]
-    [TestCase(8, 11)]
-    [TestCase(9, 14)]
     [TestCase(10, 15)]
-    [TestCase(11, 17)]
-    [TestCase(12, 18)]
-    [TestCase(13, 20)]
-    [TestCase(14, 21)]
-    [TestCase(15, 21)]
-    [TestCase(16, 23)]
-    [TestCase(17, 23)]
-    [TestCase(18, 25)]
-    [TestCase(19, 25)]
-    [TestCase(20, 28)]
-    [TestCase(21, 30)]
-    [TestCase(22, 32)]
-    [TestCase(23, 32)]
-    [TestCase(24, 34)]
-    [TestCase(25, 35)]
-    [TestCase(26, 37)]
-    [TestCase(27, 38)]
-    [TestCase(28, 39)]
-    [TestCase(29, 41)]
-    [TestCase(30, 41)]
     [TestCase(100, 138)]
     [TestCase(1000, 1383)]
     [TestCase(10000, 13833)]
@@ -60,20 +36,78 @@ public class Everybody16Tests
     [TestCase(100000000000, 138333333333)]
     [TestCase(202420242024, 280014668134)]
     public void Part2(long target, long expected) => Sut.Part2(Input, target).Should().Be(expected);
+    
+    [TestCase(1, 4, 1)]
+    [TestCase(2, 6, 1)]
+    [TestCase(3, 9, 2)]
+    [TestCase(10, 26, 5)]
+    [TestCase(100, 246, 50)]
+    [TestCase(256, 627, 128)]
+    public void Part3(int pulls, int max, int min)
+    {
+        const string input = """
+                             1,2,3
+
+                             ^_^ -.- ^,-
+                             >.- ^_^ >.<
+                             -_- -.- ^.^
+                                 -.^ >.<
+                                 >.>
+                             """;
+
+        var (rmin, rmax) = Sut.Part3(input, pulls);
+        rmax.Should().Be(max);
+        rmin.Should().Be(min);
+    }
+
+    private readonly int[] _counts = [3, 5, 4];
+    private readonly int[] _increments = [1, 2, 3];
+    
+    [Test]
+    public void PrevNext1()
+    {
+        var result = Sut.GetNextPositions(_counts, _increments, [0, 0, 0]);
+
+        result[0].Should().BeEquivalentTo([0, 1, 2]);
+        result[1].Should().BeEquivalentTo([1, 2, 3]);
+        result[2].Should().BeEquivalentTo([2, 3, 0]);
+    }
+    
+    [Test]
+    public void PrevNext2()
+    {
+        var result = Sut.GetNextPositions(_counts, _increments, [0, 1, 2]);
+
+        result[0].Should().BeEquivalentTo([0, 2, 0]);
+        result[1].Should().BeEquivalentTo([1, 3, 1]);
+        result[2].Should().BeEquivalentTo([2, 4, 2]);
+    }
+    
+    [Test]
+    public void PrevNext3()
+    {
+        var result = Sut.GetNextPositions(_counts, _increments, [1, 2, 3]);
+
+        result[0].Should().BeEquivalentTo([1, 3, 1]);
+        result[1].Should().BeEquivalentTo([2, 4, 2]);
+        result[2].Should().BeEquivalentTo([0, 0, 3]);
+    }
+    
+    [Test]
+    public void PrevNext4()
+    {
+        var result = Sut.GetNextPositions(_counts, _increments, [2, 3, 0]);
+
+        result[0].Should().BeEquivalentTo([2, 4, 2]);
+        result[1].Should().BeEquivalentTo([0, 0, 3]);
+        result[2].Should().BeEquivalentTo([1, 1, 0]);
+    }
 
     [TestCase(">.--.-^_^", 1)]
     [TestCase("-_->.>>.<", 1)]
     [TestCase("^_^^_^>.<", 2)]
     [TestCase("^_^^_^^_^", 5)]
     public void Scoring(string input, int expected) => Sut.Score(input).Should().Be(expected);
-
-    [Test]
-    public void Part3()
-    {
-        const string input = "";
-
-        Sut.Part3(input).Answer.Should().Be("0");
-    }
 
     private static Everybody16 Sut => new();
 }

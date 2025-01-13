@@ -57,7 +57,8 @@ public class Everybody16 : EverybodyPuzzle
     public PuzzleResult Part3(string input)
     {
         var (min, max) = Part3(input, 256);
-        return new PuzzleResult($"{max} {min}");
+        
+        return new PuzzleResult($"{max} {min}", "912149637877bbdd3f19be24133372ed");
     }
     
     public long Part2(string input, long target)
@@ -151,112 +152,79 @@ public class Everybody16 : EverybodyPuzzle
             wheels.Add(wheel);
         }
         
-        var count = 0L;
         var counts = wheels.Select(o => o.Count).ToArray();
-        var scorecache = new Dictionary<string, int>();
-        var nextcache = new Dictionary<string, string[]>();
-        var mincache = new Dictionary<(string, int), long>();
-        var maxcache = new Dictionary<(string, int), long>();
+        var mincache = new Dictionary<(string, int), int>();
+        var maxcache = new Dictionary<(string, int), int>();
         var pos = wheels.Select(_ => 0).ToArray();
-        while (true)
-        {
-            count++;
-            var cats = new List<string>();
-            var indices = new List<int>();
-            for (var i = 0; i < wheels.Count; i++)
-            {
-                var wheel = wheels[i];
-                var index = (int)(count * increments[i] % wheel.Count);
-                var cat = wheel[index];
-                cats.Add(cat);
-                indices.Add(index);
-            }
-
-            var key = GetKey(indices);
-            var stripped = string.Join("", cats.Select(o => $"{o[0]}{o[2]}"));
-            var currentScore = Score(stripped);
-            var next = GetNextPositions(counts, increments, indices.ToArray());
-            nextcache.TryAdd(key, next.Select(GetKey).ToArray());
-            
-            if (!scorecache.TryAdd(key, currentScore))
-            {
-                break;
-            }
-        }
-
-        var poskey = GetKey(pos);
-        var min = FindMin(mincache, scorecache, nextcache, poskey, pullCount, 0);
-        var max = FindMax(maxcache, scorecache, nextcache, poskey, pullCount, 0);
+        
+        var min = FindMin(wheels, counts, increments, pos, pullCount, mincache);
+        var max = FindMax(wheels, counts, increments, pos, pullCount, maxcache);
 
         return (min, max);
     }
 
     private string GetKey(IEnumerable<int> a) => string.Join(",", a);
 
-    private long FindMin(
-        Dictionary<(string, int), long> cache, 
-        Dictionary<string, int> scorecache,
-        Dictionary<string, string[]> nextcache,
-        string poskey,
-        int pullCountsLeft,
-        int score)
+    private int FindMin(
+        List<List<string>> wheels,
+        int[] counts,
+        int[] increments,
+        int[] state,
+        int pullsLeft,
+        Dictionary<(string, int), int> cache)
     {
-        if (pullCountsLeft == 0)
-            return score;
+        if (pullsLeft == 0)
+            return 0;
 
-        var cachekey = (poskey, pullCountsLeft);
-        if (cache.TryGetValue(cachekey, out var cached))
+        var key = (GetKey(state), pullsLeft);
+        if (cache.ContainsKey(key))
+            return cache[key];
+
+        var ans = int.MaxValue;
+        var newStates = GetNextPositions(counts, increments, state);
+        foreach (var newState in newStates)
         {
-            if (cached <= score)
-                return cached;
-        }
-        
-        var nextkeys = nextcache[poskey];
-        
-        var list = new List<long>();
-        var npc = pullCountsLeft - 1;
-        foreach (var newkey in nextkeys)
-        {
-            var v = FindMin(cache, scorecache, nextcache, newkey, npc, score + scorecache[newkey]);
-            cache.TryAdd((newkey, npc), v);
-            list.Add(v);
+            var cats = newState.Select((o, index) => wheels[index][o]);
+            var stripped = string.Join("", cats.Select(o => $"{o[0]}{o[2]}"));
+            var score = Score(stripped);
+            var newScore = score + FindMin(wheels, counts, increments, newState, pullsLeft - 1, cache);
+            ans = Math.Min(ans, newScore);
         }
 
-        var result = list.Min();
-        return result;
+        cache[key] = ans;
+        
+        return ans;
     }
     
-    private long FindMax(
-        Dictionary<(string, int), long> cache, 
-        Dictionary<string, int> scorecache,
-        Dictionary<string, string[]> nextcache,
-        string poskey,
-        int pullCountsLeft,
-        int score)
+    private int FindMax(
+        List<List<string>> wheels,
+        int[] counts,
+        int[] increments,
+        int[] state,
+        int pullsLeft,
+        Dictionary<(string, int), int> cache)
     {
-        if (pullCountsLeft == 0)
-            return score;
-        
-        var cachekey = (poskey, pullCountsLeft);
-        if (cache.TryGetValue(cachekey, out var cached))
+        if (pullsLeft == 0)
+            return 0;
+
+        var key = (GetKey(state), pullsLeft);
+        if (cache.ContainsKey(key))
+            return cache[key];
+
+        var ans = 0;
+        var newStates = GetNextPositions(counts, increments, state);
+        foreach (var newState in newStates)
         {
-            if (cached >= score)
-                return cached;
-        }
-        
-        var nextkeys = nextcache[poskey];
-        
-        var list = new List<long>();
-        var npc = pullCountsLeft - 1;
-        foreach (var newkey in nextkeys)
-        {
-            var v = FindMax(cache, scorecache, nextcache, newkey, pullCountsLeft - 1, score + scorecache[newkey]);
-            cache.TryAdd((newkey, npc), v);
-            list.Add(v);
+            var cats = newState.Select((o, index) => wheels[index][o]);
+            var stripped = string.Join("", cats.Select(o => $"{o[0]}{o[2]}"));
+            var score = Score(stripped);
+            var newScore = score + FindMax(wheels, counts, increments, newState, pullsLeft - 1, cache);
+            ans = Math.Max(ans, newScore);
         }
 
-        var result = list.Max();
-        return result;
+        cache[key] = ans;
+        
+        return ans;
     }
 
     public List<int[]> GetNextPositions(int[] counts, int[] increments, int[] positions)
@@ -268,14 +236,7 @@ public class Everybody16 : EverybodyPuzzle
             var np = new int[counts.Length];
             for (var i = 0; i < counts.Length; i++)
             {
-                var pos = positions[i];
-                var n = pos + diff + increments[i];
-                while (n < 0)
-                    n += counts[i];
-                while (n > counts[i] - 1)
-                    n -= counts[i];
-
-                np[i] = n;
+                np[i] = (positions[i] + diff + increments[i] + counts[i]) % counts[i];
             }
             
             nextPositions.Add(np);

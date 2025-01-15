@@ -46,14 +46,14 @@ public class Aoc202317 : AocPuzzle
             targets.Add($"{targetCoord.Id}|{MatrixDirection.Down}|{i}");
         }
 
-        var counts = sources.Select(source => Graph.GetLowestCost(graph, source, targets)).ToList();
+        var counts = sources.Select(source => Dijkstra.Cost(graph, source, targets)).ToList();
 
         return counts.Min();
     }
 
-    private static List<Graph.Edge> BuildGraph(Matrix<int> matrix, int minStraightCount, int maxStraightCount)
+    private static List<GraphEdge> BuildGraph(Matrix<int> matrix, int minStraightCount, int maxStraightCount)
     {
-        var graph = new List<Graph.Edge>();
+        var graph = new List<GraphEdge>();
         foreach (var coord in matrix.Coords)
         {
             graph.AddRange(GetDirectionGraph(matrix, coord, MatrixDirection.Up, minStraightCount, maxStraightCount));
@@ -65,7 +65,7 @@ public class Aoc202317 : AocPuzzle
         return graph;
     }
 
-    private static List<Graph.Edge> GetDirectionGraph(Matrix<int> matrix, MatrixAddress coord, MatrixDirection forward, int minStraightCount, int maxStraightCount)
+    private static List<GraphEdge> GetDirectionGraph(Matrix<int> matrix, MatrixAddress coord, MatrixDirection forward, int minStraightCount, int maxStraightCount)
     {
         matrix.MoveTo(coord);
         matrix.TurnTo(forward);
@@ -80,17 +80,17 @@ public class Aoc202317 : AocPuzzle
         var rightCoord = new MatrixAddress(coord.X + right.X, coord.Y + right.Y);
         var rightCheckCoord = new MatrixAddress(coord.X + right.X * minStraightCount, coord.Y + right.Y * minStraightCount);
         var forwardCoord = new MatrixAddress(coord.X + forward.X, coord.Y + forward.Y);
-        var graph = new List<Graph.Edge>();
+        var graph = new List<GraphEdge>();
 
         for (var i = 1; i <= maxStraightCount; i++)
         {
             var fromId = $"{coord.Id}|{forward}|{i}";
             if (i >= minStraightCount && !matrix.IsOutOfRange(leftCheckCoord))
-                graph.Add(new Graph.Edge(fromId, $"{leftCoord.Id}|{left}|1", matrix.ReadValueAt(leftCoord)));
+                graph.Add(new GraphEdge(fromId, $"{leftCoord.Id}|{left}|1", matrix.ReadValueAt(leftCoord)));
             if (i >= minStraightCount && !matrix.IsOutOfRange(rightCheckCoord))
-                graph.Add(new Graph.Edge(fromId, $"{rightCoord.Id}|{right}|1", matrix.ReadValueAt(rightCoord)));
+                graph.Add(new GraphEdge(fromId, $"{rightCoord.Id}|{right}|1", matrix.ReadValueAt(rightCoord)));
             if (i < maxStraightCount && !matrix.IsOutOfRange(forwardCoord))
-                graph.Add(new Graph.Edge(fromId, $"{forwardCoord.Id}|{forward}|{i + 1}", matrix.ReadValueAt(forwardCoord)));
+                graph.Add(new GraphEdge(fromId, $"{forwardCoord.Id}|{forward}|{i + 1}", matrix.ReadValueAt(forwardCoord)));
         }
 
         return graph;

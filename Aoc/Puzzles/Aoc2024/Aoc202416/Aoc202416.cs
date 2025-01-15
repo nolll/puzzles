@@ -24,7 +24,7 @@ public class Aoc202416 : AocPuzzle
         
         var startKey = $"{MatrixDirection.Right}|{start.Id}";
         List<string> endKeys = [$"{MatrixDirection.Right}|{end.Id}", $"{MatrixDirection.Up}|{end.Id}"];
-        var shortestPath = Graph.GetShortestPath(inputs, startKey, endKeys);
+        var shortestPath = Dijkstra.Path(inputs, startKey, endKeys);
         
         return new PuzzleResult(shortestPath.cost, "7f6e0e55c1b9ba30973eeb8218555c3a");
     }
@@ -49,7 +49,7 @@ public class Aoc202416 : AocPuzzle
         var startKey = $"{MatrixDirection.Right}|{start.Id}";
         List<string> endKeys = [$"{MatrixDirection.Right}|{end.Id}", $"{MatrixDirection.Up}|{end.Id}"];
         var inputs = BuildGraph(matrix);
-        var (_, paths) = Graph.GetShortestPaths(inputs, startKey, endKeys);
+        var (_, paths) = Dijkstra.Paths(inputs, startKey, endKeys);
         
         var usedCoords = paths
             .SelectMany(o => o)
@@ -60,9 +60,9 @@ public class Aoc202416 : AocPuzzle
         return usedCoords;
     }
 
-    private List<Graph.Edge> BuildGraph(Matrix<char> matrix)
+    private List<GraphEdge> BuildGraph(Matrix<char> matrix)
     {
-        var edges = new List<Graph.Edge>();
+        var edges = new List<GraphEdge>();
 
         var spaceCoords = matrix.FindAddresses(EmptySpace);
         foreach (var coord in spaceCoords)
@@ -77,7 +77,7 @@ public class Aoc202416 : AocPuzzle
                 {
                     var fromKey = $"{dir.Name}|{coord.Id}";
                     var toKey = $"{matrix.Direction.Name}|{matrix.Address.Id}";
-                    edges.Add(new Graph.Edge(fromKey, toKey));
+                    edges.Add(new GraphEdge(fromKey, toKey));
                 }
                 matrix.MoveBackward();
                 
@@ -89,7 +89,7 @@ public class Aoc202416 : AocPuzzle
                     
                     var fromKey = $"{dir.Name}|{coord.Id}";
                     var toKey = $"{matrix.Direction.Name}|{matrix.Address.Id}";
-                    edges.Add(new Graph.Edge(fromKey, toKey, 1000));
+                    edges.Add(new GraphEdge(fromKey, toKey, 1000));
                 }
             }
         }

@@ -2,51 +2,54 @@ namespace Pzl.Tools.Graphs;
 
 public static class Graph
 {
-    public static int GetLowestCost(List<Edge> edges, string source, string target) => 
-        GetLowestCost(edges, source, [target]);
-    
-    public static int GetLowestCost(List<Edge> edges, string source, List<string> targets) => 
-        GetShortestPath(GetNodes(edges), source, targets).cost;
-
-    public static (int cost, List<string> path) GetShortestPath(List<Edge> edges, string source, string target) => 
-        GetShortestPath(edges, source, [target]);
-
-    public static (int cost, List<string> path) GetShortestPath(List<Edge> edges, string source, List<string> targets) => 
-        GetShortestPath(GetNodes(edges), source, targets);
-
-    public static (int cost, List<List<string>> paths) GetShortestPaths(List<Edge> edges, string source, List<string> targets) => 
-        GetShortestPaths(GetNodes(edges), source, targets);
-
-    public static Dictionary<string, Node> GetNodes(List<Edge> edges)
+    public static Dictionary<string, GraphNode> GetNodes(IEnumerable<GraphEdge> edges)
     {
-        var nodes = new Dictionary<string, Node>();
+        var nodes = new Dictionary<string, GraphNode>();
 
         foreach (var edge in edges)
         {
             if (!nodes.TryGetValue(edge.From, out var fromNode))
             {
-                fromNode = new Node(edge.From, []);
+                fromNode = new GraphNode(edge.From, []);
                 nodes.Add(edge.From, fromNode);
             }
             
             if(!nodes.ContainsKey(edge.To))
-                nodes.Add(edge.To, new Node(edge.To, []));
+                nodes.Add(edge.To, new GraphNode(edge.To, []));
             
-            fromNode.Connections.Add(new Connection(edge.To, edge.Cost));
+            fromNode.Connections.Add(new GraphConnection(edge.To, edge.Cost));
         }
 
         return nodes;
     }
+}
 
-    public static int GetLowestCost(Dictionary<string, Node> nodes, string source, string target) =>
-        GetLowestCost(nodes, source, [target]);
+public static class Dijkstra
+{
+    public static int Cost(List<GraphEdge> edges, string source, string target) => 
+        Cost(edges, source, [target]);
     
-    public static int GetLowestCost(Dictionary<string, Node> nodes, string source, List<string> targets)
+    public static int Cost(List<GraphEdge> edges, string source, List<string> targets) => 
+        Path(Graph.GetNodes(edges), source, targets).cost;
+
+    public static (int cost, List<string> path) Path(List<GraphEdge> edges, string source, string target) => 
+        Path(edges, source, [target]);
+
+    public static (int cost, List<string> path) Path(List<GraphEdge> edges, string source, List<string> targets) => 
+        Path(Graph.GetNodes(edges), source, targets);
+
+    public static (int cost, List<List<string>> paths) Paths(List<GraphEdge> edges, string source, List<string> targets) => 
+        Paths(Graph.GetNodes(edges), source, targets);
+
+    public static int Cost(Dictionary<string, GraphNode> nodes, string source, string target) =>
+        Cost(nodes, source, [target]);
+    
+    public static int Cost(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => int.MaxValue);
         visited[source] = 0;
-        var queue = new Queue<Node>();
+        var queue = new Queue<GraphNode>();
         queue.Enqueue(start);
 
         while (queue.Count > 0)
@@ -70,12 +73,12 @@ public static class Graph
         return targets.Min(o => visited[o]);
     }
     
-    private static (int cost, List<string> path) GetShortestPath(Dictionary<string, Node> nodes, string source, List<string> targets)
+    private static (int cost, List<string> path) Path(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => (cost: int.MaxValue, path: new List<string>()));
         visited[source] = (0, [source]);
-        var queue = new Queue<Node>();
+        var queue = new Queue<GraphNode>();
         queue.Enqueue(start);
 
         while (queue.Count > 0)
@@ -99,12 +102,12 @@ public static class Graph
         return targets.Select(o => visited[o]).MinBy(o => o.cost);
     }
     
-    private static (int cost, List<List<string>> paths) GetShortestPaths(Dictionary<string, Node> nodes, string source, List<string> targets)
+    private static (int cost, List<List<string>> paths) Paths(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => (cost: int.MaxValue, paths: new List<List<string>>()));
         visited[source] = (0, [new List<string>{source}]);
-        var queue = new PriorityQueue<Node, int>();
+        var queue = new PriorityQueue<GraphNode, int>();
         queue.Enqueue(start, 0);
 
         while (queue.Count > 0)
@@ -133,8 +136,4 @@ public static class Graph
         
         return targets.Select(o => visited[o]).MinBy(o => o.cost);
     }
-
-    public record Edge(string From, string To, int Cost = 1);
-    public record Node(string Name, List<Connection> Connections);
-    public record Connection(string Name, int Cost);
 }

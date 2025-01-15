@@ -89,21 +89,21 @@ public class Everybody14 : EverybodyPuzzle
             leaves.Add(ToTuple(pos));
         }
         
-        var edges = new List<Graph.Edge>();
+        var edges = new List<GraphEdge>();
         foreach (var coord in coords)
         {
             var nbrs = OrthogonalAdjacentCoords(coord);
             foreach (var nbr in nbrs)
             {
                 if(coords.Contains(nbr)) 
-                    edges.Add(new Graph.Edge(Id(coord), Id(nbr)));
+                    edges.Add(new GraphEdge(Id(coord), Id(nbr)));
             }
         }
 
         var best = int.MaxValue;
         foreach (var t in trunk)
         {
-            var sum = leaves.Sum(leaf => Graph.GetLowestCost(edges, Id(leaf), Id(t)));
+            var sum = leaves.Sum(leaf => Dijkstra.Cost(edges, Id(leaf), Id(t)));
 
             best = Math.Min(best, sum);
         }

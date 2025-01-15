@@ -35,7 +35,7 @@ public class Everybody13 : EverybodyPuzzle
         {
             matrix.WriteValueAt(target, '0');
         }
-        var edges = new List<Graph.Edge>();
+        var edges = new List<GraphEdge>();
         foreach (var current in matrix.Coords)
         {
             var cv = matrix.ReadValueAt(current);
@@ -52,11 +52,11 @@ public class Everybody13 : EverybodyPuzzle
 
                 var nbrLevel = int.Parse(nv.ToString());
                 var cost = GetCost(currentLevel, nbrLevel);
-                edges.Add(new Graph.Edge(current.Id, nbr.Id, cost + 1));
+                edges.Add(new GraphEdge(current.Id, nbr.Id, cost + 1));
             }
         }
         
-        return Graph.GetLowestCost(edges, start.Id, targets.Select(o => o.Id).ToList());
+        return Dijkstra.Cost(edges, start.Id, targets.Select(o => o.Id).ToList());
     }
 
     public int GetCost(int a, int b)

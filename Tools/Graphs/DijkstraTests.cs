@@ -3,12 +3,12 @@ using NUnit.Framework;
 
 namespace Pzl.Tools.Graphs;
 
-public class GraphTests
+public class DijkstraTests
 {
     [Test]
     public void SmallestCost()
     {
-        var edges = new List<Graph.Edge>
+        var edges = new List<GraphEdge>
         {
             new("A", "B", 8),
             new("B", "A", 8),
@@ -21,7 +21,7 @@ public class GraphTests
             new("E", "C", 6)
         };
 
-        var result = Graph.GetLowestCost(edges, "A", "C");
+        var result = Dijkstra.Cost(edges, "A", "C");
 
         result.Should().Be(29);
     }

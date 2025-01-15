@@ -20,16 +20,16 @@ public class Aquaq10 : AquaqPuzzle
             .Skip(1)
             .Select(ParseGraphInput).ToList();
 
-        return Graph.GetLowestCost(graphInput, source, target);
+        return Dijkstra.Cost(graphInput, source, target);
     }
 
-    private static Graph.Edge ParseGraphInput(string s)
+    private static GraphEdge ParseGraphInput(string s)
     {
         var parts = s.Split(',');
         var from = parts[0];
         var to = parts[1];
         var cost = int.Parse(parts[2]);
 
-        return new Graph.Edge(from, to, cost);
+        return new GraphEdge(from, to, cost);
     }
 }

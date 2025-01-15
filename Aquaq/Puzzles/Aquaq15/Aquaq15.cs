@@ -33,20 +33,20 @@ public class Aquaq15 : AquaqPuzzle
         foreach (var transformation in transformations)
         {
             var inputs = validWords[transformation.WordLength];
-            product *= Graph.GetLowestCost(inputs, transformation.From, transformation.To) + 1;
+            product *= Dijkstra.Cost(inputs, transformation.From, transformation.To) + 1;
         }
 
         return product;
     }
 
-    private static IEnumerable<Graph.Edge> BuildEdges(List<string> validWords)
+    private static IEnumerable<GraphEdge> BuildEdges(List<string> validWords)
     {
         foreach (var validWord in validWords)
         {
             var similarWords = validWords.Where(o => IsSimilar(validWord, o));
             foreach (var similarWord in similarWords)
             {
-                yield return new Graph.Edge(validWord, similarWord);
+                yield return new GraphEdge(validWord, similarWord);
             }
         }
     }

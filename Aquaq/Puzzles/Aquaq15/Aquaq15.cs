@@ -27,7 +27,7 @@ public class Aquaq15 : AquaqPuzzle
         var validWords = StringReader.ReadLines(additionalInput)
             .Where(o => o.Length >= minLength && o.Length <= maxLength)
             .GroupBy(o => o.Length)
-            .ToDictionary(k => k.Key, o => BuildInputs(o.ToList()).ToList());
+            .ToDictionary(k => k.Key, o => BuildEdges(o.ToList()).ToList());
 
         var product = 1;
         foreach (var transformation in transformations)
@@ -39,14 +39,14 @@ public class Aquaq15 : AquaqPuzzle
         return product;
     }
 
-    private static IEnumerable<Graph.Input> BuildInputs(List<string> validWords)
+    private static IEnumerable<Graph.Edge> BuildEdges(List<string> validWords)
     {
         foreach (var validWord in validWords)
         {
             var similarWords = validWords.Where(o => IsSimilar(validWord, o));
             foreach (var similarWord in similarWords)
             {
-                yield return new Graph.Input(validWord, similarWord);
+                yield return new Graph.Edge(validWord, similarWord);
             }
         }
     }

@@ -23,13 +23,13 @@ public class Aquaq10 : AquaqPuzzle
         return Graph.GetLowestCost(graphInput, source, target);
     }
 
-    private static Graph.Input ParseGraphInput(string s)
+    private static Graph.Edge ParseGraphInput(string s)
     {
         var parts = s.Split(',');
         var from = parts[0];
         var to = parts[1];
         var cost = int.Parse(parts[2]);
 
-        return new Graph.Input(from, to, cost);
+        return new Graph.Edge(from, to, cost);
     }
 }

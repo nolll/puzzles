@@ -16,7 +16,7 @@ public class Everybody15 : EverybodyPuzzle
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         var start = new MatrixAddress(input.Split(LineBreaks.Single).First().IndexOf('.'), 0);
         var targets = matrix.FindAddresses('H');
-        var inputs = GetInputs(matrix).ToList();
+        var inputs = GetEdges(matrix).ToList();
 
         var cost = Graph.GetLowestCost(inputs, start.Id, targets.Select(o => o.Id).ToList()) * 2;
         
@@ -32,7 +32,7 @@ public class Everybody15 : EverybodyPuzzle
         var allHerbCoords = herbCoords.Values.SelectMany(o => o).ToList();
         var herbTypes = herbCoords.Keys.ToList();
         var herbCombinations = PermutationGenerator.GetPermutations(herbTypes).Select(o => (List<char>)[..o, 'S']);
-        var inputs = GetInputs(matrix).ToList();
+        var inputs = GetEdges(matrix).ToList();
         var nodes = Graph.GetNodes(inputs);
 
         var costs = new Dictionary<(string, string), int>();
@@ -78,7 +78,7 @@ public class Everybody15 : EverybodyPuzzle
         var allHerbCoords = herbCoords.Values.SelectMany(o => o).ToList();
         var herbTypes = herbCoords.Keys.ToList();
         List<List<char>> herbCombinations = [['G', 'H', 'I', 'J', 'K', 'E', 'D', 'C', 'B', 'A', 'R', 'Q', 'P', 'O', 'N', 'S']];
-        var inputs = GetInputs(matrix).ToList();
+        var inputs = GetEdges(matrix).ToList();
         var nodes = Graph.GetNodes(inputs);
 
         var costs = new Dictionary<(string, string), int>();
@@ -163,7 +163,7 @@ public class Everybody15 : EverybodyPuzzle
         return coords;
     }
 
-    private static IEnumerable<Graph.Input> GetInputs(Matrix<char> matrix)
+    private static IEnumerable<Graph.Edge> GetEdges(Matrix<char> matrix)
     {
         foreach (var coord in matrix.Coords)
         {
@@ -177,8 +177,8 @@ public class Everybody15 : EverybodyPuzzle
                 if (nv is '#' or '~')
                     continue;
                 
-                yield return new Graph.Input(coord.Id, nbr.Id);
-                yield return new Graph.Input(nbr.Id, coord.Id);
+                yield return new Graph.Edge(coord.Id, nbr.Id);
+                yield return new Graph.Edge(nbr.Id, coord.Id);
             }
         }
     }

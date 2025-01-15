@@ -60,9 +60,9 @@ public class Aoc202416 : AocPuzzle
         return usedCoords;
     }
 
-    private List<Graph.Input> BuildGraph(Matrix<char> matrix)
+    private List<Graph.Edge> BuildGraph(Matrix<char> matrix)
     {
-        var inputs = new List<Graph.Input>();
+        var edges = new List<Graph.Edge>();
 
         var spaceCoords = matrix.FindAddresses(EmptySpace);
         foreach (var coord in spaceCoords)
@@ -77,7 +77,7 @@ public class Aoc202416 : AocPuzzle
                 {
                     var fromKey = $"{dir.Name}|{coord.Id}";
                     var toKey = $"{matrix.Direction.Name}|{matrix.Address.Id}";
-                    inputs.Add(new Graph.Input(fromKey, toKey));
+                    edges.Add(new Graph.Edge(fromKey, toKey));
                 }
                 matrix.MoveBackward();
                 
@@ -89,11 +89,11 @@ public class Aoc202416 : AocPuzzle
                     
                     var fromKey = $"{dir.Name}|{coord.Id}";
                     var toKey = $"{matrix.Direction.Name}|{matrix.Address.Id}";
-                    inputs.Add(new Graph.Input(fromKey, toKey, 1000));
+                    edges.Add(new Graph.Edge(fromKey, toKey, 1000));
                 }
             }
         }
 
-        return inputs;
+        return edges;
     }
 }

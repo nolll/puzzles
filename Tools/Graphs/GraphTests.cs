@@ -8,7 +8,7 @@ public class GraphTests
     [Test]
     public void SmallestCost()
     {
-        var input = new List<Graph.Input>
+        var edges = new List<Graph.Edge>
         {
             new("A", "B", 8),
             new("B", "A", 8),
@@ -21,7 +21,7 @@ public class GraphTests
             new("E", "C", 6)
         };
 
-        var result = Graph.GetLowestCost(input, "A", "C");
+        var result = Graph.GetLowestCost(edges, "A", "C");
 
         result.Should().Be(29);
     }

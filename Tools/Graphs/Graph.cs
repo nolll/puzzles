@@ -2,37 +2,37 @@ namespace Pzl.Tools.Graphs;
 
 public static class Graph
 {
-    public static int GetLowestCost(List<Input> inputs, string source, string target) => 
-        GetLowestCost(inputs, source, [target]);
+    public static int GetLowestCost(List<Edge> edges, string source, string target) => 
+        GetLowestCost(edges, source, [target]);
     
-    public static int GetLowestCost(List<Input> inputs, string source, List<string> targets) => 
-        GetShortestPath(GetNodes(inputs), source, targets).cost;
+    public static int GetLowestCost(List<Edge> edges, string source, List<string> targets) => 
+        GetShortestPath(GetNodes(edges), source, targets).cost;
 
-    public static (int cost, List<string> path) GetShortestPath(List<Input> inputs, string source, string target) => 
-        GetShortestPath(inputs, source, [target]);
+    public static (int cost, List<string> path) GetShortestPath(List<Edge> edges, string source, string target) => 
+        GetShortestPath(edges, source, [target]);
 
-    public static (int cost, List<string> path) GetShortestPath(List<Input> inputs, string source, List<string> targets) => 
-        GetShortestPath(GetNodes(inputs), source, targets);
+    public static (int cost, List<string> path) GetShortestPath(List<Edge> edges, string source, List<string> targets) => 
+        GetShortestPath(GetNodes(edges), source, targets);
 
-    public static (int cost, List<List<string>> paths) GetShortestPaths(List<Input> inputs, string source, List<string> targets) => 
-        GetShortestPaths(GetNodes(inputs), source, targets);
+    public static (int cost, List<List<string>> paths) GetShortestPaths(List<Edge> edges, string source, List<string> targets) => 
+        GetShortestPaths(GetNodes(edges), source, targets);
 
-    public static Dictionary<string, Node> GetNodes(List<Input> inputs)
+    public static Dictionary<string, Node> GetNodes(List<Edge> edges)
     {
         var nodes = new Dictionary<string, Node>();
 
-        foreach (var input in inputs)
+        foreach (var edge in edges)
         {
-            if (!nodes.TryGetValue(input.From, out var fromNode))
+            if (!nodes.TryGetValue(edge.From, out var fromNode))
             {
-                fromNode = new Node(input.From, []);
-                nodes.Add(input.From, fromNode);
+                fromNode = new Node(edge.From, []);
+                nodes.Add(edge.From, fromNode);
             }
             
-            if(!nodes.ContainsKey(input.To))
-                nodes.Add(input.To, new Node(input.To, []));
+            if(!nodes.ContainsKey(edge.To))
+                nodes.Add(edge.To, new Node(edge.To, []));
             
-            fromNode.Connections.Add(new Connection(input.To, input.Cost));
+            fromNode.Connections.Add(new Connection(edge.To, edge.Cost));
         }
 
         return nodes;
@@ -134,7 +134,7 @@ public static class Graph
         return targets.Select(o => visited[o]).MinBy(o => o.cost);
     }
 
-    public record Input(string From, string To, int Cost = 1);
+    public record Edge(string From, string To, int Cost = 1);
     public record Node(string Name, List<Connection> Connections);
     public record Connection(string Name, int Cost);
 }

@@ -17,7 +17,7 @@ public class Aquaq21 : AquaqPuzzle
         var lines = StringReader.ReadLines(input);
         var rows = lines.Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();
 
-        var inputs = new List<Graph.Input>();
+        var edges = new List<Graph.Edge>();
 
         var firstRow = rows.First();
         for (var position = 0; position <= firstRow.Length - width; position++)
@@ -25,7 +25,7 @@ public class Aquaq21 : AquaqPuzzle
             const string startId = "start";
             var toId = $"0-{position}";
             var cost = firstRow.Skip(position).Take(width).Sum();
-            inputs.Add(new Graph.Input(startId, toId, -cost));
+            edges.Add(new Graph.Edge(startId, toId, -cost));
         }
 
         for (var rowIndex = 0; rowIndex < rows.Count - 1; rowIndex++)
@@ -41,7 +41,7 @@ public class Aquaq21 : AquaqPuzzle
 
                     var toId = $"{rowIndex + 1}-{position + offset}";
                     var cost = rows[rowIndex + 1].Skip(position + offset).Take(width).Sum();
-                    inputs.Add(new Graph.Input(startId, toId, -cost));
+                    edges.Add(new Graph.Edge(startId, toId, -cost));
                 }
             }
         }
@@ -51,9 +51,9 @@ public class Aquaq21 : AquaqPuzzle
         {
             var startId = $"{rows.Count - 1}-{position}";
             const string toId = "end";
-            inputs.Add(new Graph.Input(startId, toId, 0));
+            edges.Add(new Graph.Edge(startId, toId, 0));
         }
 
-        return -Graph.GetLowestCost(inputs, "start", "end");
+        return -Graph.GetLowestCost(edges, "start", "end");
     }
 }

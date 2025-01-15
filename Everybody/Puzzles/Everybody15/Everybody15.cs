@@ -18,7 +18,7 @@ public class Everybody15 : EverybodyPuzzle
         var targets = matrix.FindAddresses('H');
         var inputs = GetEdges(matrix).ToList();
 
-        var cost = Dijkstra.Cost(inputs, start.Id, targets.Select(o => o.Id).ToList()) * 2;
+        var cost = Dijkstra.BestCost(inputs, start.Id, targets.Select(o => o.Id).ToList()) * 2;
         
         return new PuzzleResult(cost, "4d832f8cc35ae0da374a91187caa538b");
     }
@@ -49,7 +49,7 @@ public class Everybody15 : EverybodyPuzzle
                     continue;
                 }
 
-                var cost = Dijkstra.Cost(nodes, a, b);
+                var cost = Dijkstra.BestCost(nodes, a, b);
                 costs.TryAdd((a, b), cost);
                 costs.TryAdd((b, a), cost);
             }
@@ -100,7 +100,7 @@ public class Everybody15 : EverybodyPuzzle
                         continue;
                     }
 
-                    var cost = Dijkstra.Cost(nodes, a, b);
+                    var cost = Dijkstra.BestCost(nodes, a, b);
                     costs.TryAdd((a, b), cost);
                     costs.TryAdd((b, a), cost);
                 }

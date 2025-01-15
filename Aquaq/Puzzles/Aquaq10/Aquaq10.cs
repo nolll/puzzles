@@ -20,7 +20,7 @@ public class Aquaq10 : AquaqPuzzle
             .Skip(1)
             .Select(ParseGraphInput).ToList();
 
-        return Dijkstra.Cost(graphInput, source, target);
+        return Dijkstra.BestCost(graphInput, source, target);
     }
 
     private static GraphEdge ParseGraphInput(string s)

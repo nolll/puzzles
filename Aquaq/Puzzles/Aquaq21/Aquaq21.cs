@@ -54,6 +54,6 @@ public class Aquaq21 : AquaqPuzzle
             edges.Add(new GraphEdge(startId, toId, 0));
         }
 
-        return -Dijkstra.Cost(edges, "start", "end");
+        return -Dijkstra.BestCost(edges, "start", "end");
     }
 }

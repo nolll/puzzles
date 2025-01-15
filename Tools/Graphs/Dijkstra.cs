@@ -1,50 +1,26 @@
 namespace Pzl.Tools.Graphs;
 
-public static class Graph
-{
-    public static Dictionary<string, GraphNode> GetNodes(IEnumerable<GraphEdge> edges)
-    {
-        var nodes = new Dictionary<string, GraphNode>();
-
-        foreach (var edge in edges)
-        {
-            if (!nodes.TryGetValue(edge.From, out var fromNode))
-            {
-                fromNode = new GraphNode(edge.From, []);
-                nodes.Add(edge.From, fromNode);
-            }
-            
-            if(!nodes.ContainsKey(edge.To))
-                nodes.Add(edge.To, new GraphNode(edge.To, []));
-            
-            fromNode.Connections.Add(new GraphConnection(edge.To, edge.Cost));
-        }
-
-        return nodes;
-    }
-}
-
 public static class Dijkstra
 {
-    public static int Cost(List<GraphEdge> edges, string source, string target) => 
-        Cost(edges, source, [target]);
+    public static int BestCost(List<GraphEdge> edges, string source, string target) => 
+        BestCost(edges, source, [target]);
     
-    public static int Cost(List<GraphEdge> edges, string source, List<string> targets) => 
-        Path(Graph.GetNodes(edges), source, targets).cost;
+    public static int BestCost(List<GraphEdge> edges, string source, List<string> targets) => 
+        BestPath(Graph.GetNodes(edges), source, targets).cost;
 
-    public static (int cost, List<string> path) Path(List<GraphEdge> edges, string source, string target) => 
-        Path(edges, source, [target]);
+    public static (int cost, List<string> path) BestPath(List<GraphEdge> edges, string source, string target) => 
+        BestPath(edges, source, [target]);
 
-    public static (int cost, List<string> path) Path(List<GraphEdge> edges, string source, List<string> targets) => 
-        Path(Graph.GetNodes(edges), source, targets);
+    public static (int cost, List<string> path) BestPath(List<GraphEdge> edges, string source, List<string> targets) => 
+        BestPath(Graph.GetNodes(edges), source, targets);
 
-    public static (int cost, List<List<string>> paths) Paths(List<GraphEdge> edges, string source, List<string> targets) => 
-        Paths(Graph.GetNodes(edges), source, targets);
+    public static (int cost, List<List<string>> paths) BestPaths(List<GraphEdge> edges, string source, List<string> targets) => 
+        BestPaths(Graph.GetNodes(edges), source, targets);
 
-    public static int Cost(Dictionary<string, GraphNode> nodes, string source, string target) =>
-        Cost(nodes, source, [target]);
+    public static int BestCost(Dictionary<string, GraphNode> nodes, string source, string target) =>
+        BestCost(nodes, source, [target]);
     
-    public static int Cost(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
+    public static int BestCost(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => int.MaxValue);
@@ -73,7 +49,7 @@ public static class Dijkstra
         return targets.Min(o => visited[o]);
     }
     
-    private static (int cost, List<string> path) Path(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
+    private static (int cost, List<string> path) BestPath(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => (cost: int.MaxValue, path: new List<string>()));
@@ -102,7 +78,7 @@ public static class Dijkstra
         return targets.Select(o => visited[o]).MinBy(o => o.cost);
     }
     
-    private static (int cost, List<List<string>> paths) Paths(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
+    private static (int cost, List<List<string>> paths) BestPaths(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => (cost: int.MaxValue, paths: new List<List<string>>()));

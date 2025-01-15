@@ -56,7 +56,7 @@ public class Everybody13 : EverybodyPuzzle
             }
         }
         
-        return Dijkstra.Cost(edges, start.Id, targets.Select(o => o.Id).ToList());
+        return Dijkstra.BestCost(edges, start.Id, targets.Select(o => o.Id).ToList());
     }
 
     public int GetCost(int a, int b)

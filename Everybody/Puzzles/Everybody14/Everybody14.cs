@@ -103,7 +103,7 @@ public class Everybody14 : EverybodyPuzzle
         var best = int.MaxValue;
         foreach (var t in trunk)
         {
-            var sum = leaves.Sum(leaf => Dijkstra.Cost(edges, Id(leaf), Id(t)));
+            var sum = leaves.Sum(leaf => Dijkstra.BestCost(edges, Id(leaf), Id(t)));
 
             best = Math.Min(best, sum);
         }

@@ -21,7 +21,7 @@ public class DijkstraTests
             new("E", "C", 6)
         };
 
-        var result = Dijkstra.Cost(edges, "A", "C");
+        var result = Dijkstra.BestCost(edges, "A", "C");
 
         result.Should().Be(29);
     }

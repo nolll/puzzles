@@ -46,7 +46,7 @@ public class Aoc202317 : AocPuzzle
             targets.Add($"{targetCoord.Id}|{MatrixDirection.Down}|{i}");
         }
 
-        var counts = sources.Select(source => Dijkstra.Cost(graph, source, targets)).ToList();
+        var counts = sources.Select(source => Dijkstra.BestCost(graph, source, targets)).ToList();
 
         return counts.Min();
     }

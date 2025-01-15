@@ -16,7 +16,7 @@ public class Everybody17Tests
                              *.*..
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("11");
+        Sut.Part1(input).Answer.Should().Be("16");
     }
 
     [Test]

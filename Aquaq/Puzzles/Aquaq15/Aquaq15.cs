@@ -33,7 +33,7 @@ public class Aquaq15 : AquaqPuzzle
         foreach (var transformation in transformations)
         {
             var inputs = validWords[transformation.WordLength];
-            product *= Dijkstra.Cost(inputs, transformation.From, transformation.To) + 1;
+            product *= Dijkstra.BestCost(inputs, transformation.From, transformation.To) + 1;
         }
 
         return product;

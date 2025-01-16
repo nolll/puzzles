@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.State;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Everybody15;
@@ -37,20 +38,11 @@ public class Everybody15 : EverybodyPuzzle
         var width = grid[0].Length;
         var start = new MatrixAddress(input.Split(LineBreaks.Single).First().IndexOf('.'), 0);
         var herbs = GetHerbs(grid);
-        var herbToIndex = new Dictionary<char, int>();
-
-        var allFound = 0L;
-        var index = 0;
-        foreach (var type in herbs)
-        {
-            herbToIndex[type] = index;
-            allFound |= (uint)(1 << index);
-            index++;
-        }
+        var bitstate = new BitState(herbs);
 
         var q = new Queue<(long, int, int, long)>();
         q.Enqueue((0, start.Y, start.X, 0));
-        var seen = new bool[width * height * (allFound + 1)];
+        var seen = new bool[width * height * (bitstate.FullState + 1)];
 
         while (q.Count > 0)
         {
@@ -61,7 +53,7 @@ public class Everybody15 : EverybodyPuzzle
 
             seen[key] = true;
 
-            if (r == start.Y && c == start.X && found == allFound)
+            if (r == start.Y && c == start.X && bitstate.IsFull(found))
                 return d;
             
             foreach (var (dr, dc) in _diffs)
@@ -74,7 +66,7 @@ public class Everybody15 : EverybodyPuzzle
                     continue;
                 
                 var newFound = v != '.'
-                    ? found | (uint)(1 << herbToIndex[v])
+                    ? bitstate.MarkValue(found, v)
                     : found;
 
                 q.Enqueue((d + 1, rr, cc, newFound));

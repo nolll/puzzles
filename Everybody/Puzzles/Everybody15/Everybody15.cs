@@ -32,7 +32,7 @@ public class Everybody15 : EverybodyPuzzle
 
     private long Run(string input)
     {
-        var grid = input.Split(LineBreaks.Single);
+        var grid = input.Split(LineBreaks.Single).Select(o => o.ToCharArray()).ToArray();
         var height = grid.Length;
         var width = grid[0].Length;
         var start = new MatrixAddress(input.Split(LineBreaks.Single).First().IndexOf('.'), 0);
@@ -84,7 +84,7 @@ public class Everybody15 : EverybodyPuzzle
         throw new Exception("No result");
     }
 
-    private static HashSet<char> GetHerbs(string[] grid)
+    private static HashSet<char> GetHerbs(char[][] grid)
     {
         var herbs = new HashSet<char>();
         for (var r = 0; r < grid.Length; r++)

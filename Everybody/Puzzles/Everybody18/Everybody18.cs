@@ -3,7 +3,7 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Everybody.Puzzles.Everybody18;
 
-[Name("")]
+[Name("The Ring")]
 public class Everybody18 : EverybodyPuzzle
 {
     public PuzzleResult Part1(string input)
@@ -22,9 +22,10 @@ public class Everybody18 : EverybodyPuzzle
     {
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         var palmtrees = matrix.FindAddresses('P');
-        HashSet<MatrixAddress> current = matrix.Coords.Where(o => (o.X == 0 || o.X == matrix.XMax) && matrix.ReadValueAt(o) == '.')
+        var current = matrix.Coords.Where(o => (o.X == 0 || o.X == matrix.XMax) && matrix.ReadValueAt(o) == '.')
             .ToHashSet();
         var reached = new HashSet<MatrixAddress>();
+        var seen = new HashSet<MatrixAddress>();
         var time = 0;
         while (reached.Count < palmtrees.Count)
         {
@@ -34,6 +35,9 @@ public class Everybody18 : EverybodyPuzzle
                 var adjacent = matrix.OrthogonalAdjacentCoordsTo(c);
                 foreach (var adj in adjacent)
                 {
+                    if (!seen.Add(adj))
+                        continue;
+
                     var v = matrix.ReadValueAt(adj); 
                     if (v != '#') 
                         next.Add(adj);
@@ -53,6 +57,47 @@ public class Everybody18 : EverybodyPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        return new PuzzleResult(0);
+        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var palmtrees = matrix.FindAddresses('P');
+        var possibleStarts = matrix.FindAddresses('.');
+        var hits = possibleStarts.ToDictionary(k => k, _ => new Dictionary<MatrixAddress, int>());
+        var allcurrent = palmtrees
+            .Select(o => (palmtree: o, current: new HashSet<MatrixAddress> { o }, seen: new HashSet<MatrixAddress>()))
+            .ToList();
+        
+        var time = 1;
+        while (hits.Values.Any(o => o.Count < palmtrees.Count))
+        {
+            var allnext = new List<(MatrixAddress palmtree, HashSet<MatrixAddress> current, HashSet<MatrixAddress> seen)>();
+            foreach (var (palmtree, current, seen) in allcurrent)
+            {
+                var next = new HashSet<MatrixAddress>();
+                foreach (var c in current)
+                {
+                    var adjacent = matrix.OrthogonalAdjacentCoordsTo(c);
+                    foreach (var adj in adjacent)
+                    {
+                        if (!seen.Add(adj))
+                            continue;
+
+                        var v = matrix.ReadValueAt(adj); 
+                        if (v != '#') 
+                            next.Add(adj);
+                
+                        if (v == '.' && !hits[adj].ContainsKey(palmtree)) 
+                            hits[adj].Add(palmtree, time);
+                    }
+                }
+
+                allnext.Add((palmtree, next, seen));
+            }
+
+            allcurrent = allnext;
+            time++;
+        }
+
+        var best = hits.Values.Select(o => o.Values.Sum()).Min();
+
+        return new PuzzleResult(best, "393186167939da99eb22eccf3da6b31b");
     }
 }

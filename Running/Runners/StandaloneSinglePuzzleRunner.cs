@@ -110,7 +110,7 @@ public class StandaloneSinglePuzzleRunner(
             ? Formatter.FormatTime(time.Value)
             : string.Empty;
 
-        AnsiConsole.Write($"\rPart {puzzleNumber}: {formattedTime}".PadRight(StatusPadding));
+        AnsiConsole.Write($"\rPart {puzzleNumber}: {formattedTime} ");
     }
     
     private static void WriteAnswer(VerifiedPuzzleResult? result)

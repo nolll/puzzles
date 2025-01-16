@@ -40,9 +40,15 @@ public class Everybody18Tests
     [Test]
     public void Part3()
     {
-        const string input = "";
+        const string input = """
+                             ##########
+                             #.#......#
+                             #.P.####P#
+                             #.#...P#.#
+                             ##########
+                             """;
 
-        Sut.Part3(input).Answer.Should().Be("0");
+        Sut.Part3(input).Answer.Should().Be("12");
     }
 
     private static Everybody18 Sut => new();

@@ -39,6 +39,25 @@ public class Everybody15Tests
 
         Sut.Part2(input).Answer.Should().Be("38");
     }
+    
+    [Test]
+    public void Part3()
+    {
+        const string input = """
+                             ##########.##########
+                             #...................#
+                             #.###.##.###.##.#.#.#
+                             #..A#.#..~~~....#A#.#
+                             #.#...#.~~~~~...#.#.#
+                             #.#.#.#.~~~~~.#.#.#.#
+                             #...#.#.B~~~B.#.#...#
+                             #...#....BBB..#....##
+                             #C............#....C#
+                             #####################
+                             """;
+
+        Sut.Part3(input).Answer.Should().Be("38");
+    }
 
     private static Everybody15 Sut => new();
 }

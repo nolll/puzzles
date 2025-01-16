@@ -8,17 +8,33 @@ public class Everybody18Tests
     [Test]
     public void Part1()
     {
-        const string input = "";
+        const string input = """
+                             ##########
+                             ..#......#
+                             #.P.####P#
+                             #.#...P#.#
+                             ##########
+                             """;
 
-        Sut.Part1(input).Answer.Should().Be("0");
+        Sut.Part1(input).Answer.Should().Be("11");
     }
 
     [Test]
     public void Part2()
     {
-        const string input = "";
+        const string input = """
+                             #######################
+                             ...P..P...#P....#.....#
+                             #.#######.#.#.#.#####.#
+                             #.....#...#P#.#..P....#
+                             #.#####.#####.#########
+                             #...P....P.P.P.....P#.#
+                             #.#######.#####.#.#.#.#
+                             #...#.....#P...P#.#....
+                             #######################
+                             """;
 
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part2(input).Answer.Should().Be("21");
     }
 
     [Test]

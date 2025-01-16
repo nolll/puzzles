@@ -2,7 +2,7 @@ namespace Pzl.Tools.Graphs;
 
 public static class Kruskal
 {
-    public static int MinimumSpanningTree(List<GraphEdge> edges)
+    public static long MinimumSpanningTree(List<GraphEdge> edges)
     {
         var i = 0;
         var e = 0;
@@ -30,7 +30,7 @@ public static class Kruskal
             }
         }
         
-        var minimumCost = 0;
+        var minimumCost = 0L;
         for (i = 0; i < e; ++i) {
             minimumCost += result[i].Cost;
         }

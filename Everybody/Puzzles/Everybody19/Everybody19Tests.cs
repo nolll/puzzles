@@ -18,6 +18,20 @@ public class Everybody19Tests
 
         Sut.Part1(input).Answer.Should().Be("WIN");
     }
+    
+    [Test]
+    public void Part1_Details()
+    {
+        const string input = """
+                             LR
+
+                             >aINb
+                             cdefg
+                             Whij<
+                             """;
+
+        Sut.Part1(input).Answer.Should().Be("WIN");
+    }
 
     [Test]
     public void Part2()
@@ -35,14 +49,6 @@ public class Everybody19Tests
 
         Sut.Part2(input).Answer.Should().Be("VICTORY");
     }
-
-    [Test]
-    public void Part3()
-    {
-        const string input = "";
-
-        Sut.Part3(input).Answer.Should().Be("0");
-    }
-
+    
     private static Everybody19 Sut => new();
 }

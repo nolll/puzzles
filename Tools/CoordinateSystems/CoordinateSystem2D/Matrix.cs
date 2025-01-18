@@ -22,6 +22,7 @@ public class Matrix<T> where T : struct
     public bool IsAtRightEdge => Address.X == XMax;
     public bool IsAtBottomEdge => Address.Y == YMax;
     public bool IsAtLeftEdge => Address.X == XMin;
+    public bool IsAtEdge => IsAtTopEdge || IsAtRightEdge || IsAtBottomEdge || IsAtLeftEdge;
     
     public MatrixAddress Center
     {

@@ -38,11 +38,11 @@ public class Everybody15 : EverybodyPuzzle
         var width = grid[0].Length;
         var start = new MatrixAddress(input.Split(LineBreaks.Single).First().IndexOf('.'), 0);
         var herbs = GetHerbs(grid);
-        var bitstate = new BitState(herbs);
+        var bitstate = new BitStateHandler(herbs);
 
         var q = new Queue<(long, int, int, long)>();
         q.Enqueue((0, start.Y, start.X, 0));
-        var seen = new bool[width * height * (bitstate.FullState + 1)];
+        var seen = new bool[width * height * (bitstate.MaxValue + 1)];
 
         while (q.Count > 0)
         {
@@ -53,7 +53,7 @@ public class Everybody15 : EverybodyPuzzle
 
             seen[key] = true;
 
-            if (r == start.Y && c == start.X && bitstate.IsFull(found))
+            if (r == start.Y && c == start.X && bitstate.IsAllMarked(found))
                 return d;
             
             foreach (var (dr, dc) in _diffs)

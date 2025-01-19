@@ -1,23 +1,24 @@
 namespace Pzl.Tools.State;
 
-public class BitState
+public class BitStateHandler
 {
     private readonly Dictionary<char, int> _lookup = new();
-    public long FullState { get; }
+    public long MaxValue { get; }
     
-    public BitState(IEnumerable<char> values)
+    public BitStateHandler(IEnumerable<char> values)
     {
-        FullState = 0L;
+        MaxValue = 0L;
         var i = 0;
         
         foreach (var v in values)
         {
             _lookup[v] = i;
-            FullState |= (uint)(1 << i);
+            MaxValue |= (uint)(1 << i);
             i++;
         }
     }
 
-    public bool IsFull(long v) => v == FullState;
+    public bool IsAllMarked(long v) => v == MaxValue;
     public long MarkValue(long state, char c) => state | (uint)(1 << _lookup[c]);
+    public bool IsMarked(long state, char c) => (state & (1 << _lookup[c])) > 0;
 }

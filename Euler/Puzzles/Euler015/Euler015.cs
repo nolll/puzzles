@@ -11,10 +11,7 @@ public class Euler015 : EulerPuzzle
         return new PuzzleResult(result, "24564b04f61254168e07eb4d1c9df79f");
     }
 
-    public long Run(int gridSize)
-    {
-        return PascalTriangle(gridSize).Max();
-    }
+    public long Run(int gridSize) => PascalTriangle(gridSize).Max();
 
     private static IEnumerable<long> PascalTriangle(int levels)
     {

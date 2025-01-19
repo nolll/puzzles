@@ -54,37 +54,26 @@ public class Euler018 : EulerPuzzle
         return triangle;
     }
 
-    protected class TriangleNode
+    protected class TriangleNode(int value)
     {
         private int? _bestPath;
 
-        private int Value { get; }
+        private int Value { get; } = value;
         private List<TriangleNode> Children { get; } = new();
 
         public int BestPath
         {
             get
             {
-                if (_bestPath == null)
-                {
-                    _bestPath = Children.Any()
-                        ? Value + Children.Max(o => o.BestPath)
-                        : Value;
-                }
+                _bestPath ??= Children.Any()
+                    ? Value + Children.Max(o => o.BestPath)
+                    : Value;
 
                 return _bestPath.Value;
             }
         }
 
-        public TriangleNode(int value)
-        {
-            Value = value;
-        }
-
-        public void AddChild(TriangleNode triangleNode)
-        {
-            Children.Add(triangleNode);
-        }
+        public void AddChild(TriangleNode triangleNode) => Children.Add(triangleNode);
     }
 
     private const string Triangle = """

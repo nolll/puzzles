@@ -12,10 +12,6 @@ public class Euler010 : EulerPuzzle
         return new PuzzleResult(result, "91e6ee4eecd36e3d7d1278ed37721706");
     }
 
-    public long Run(int limit)
-    {
-        var primes = Numbers.FindPrimesBelow(limit);
-
-        return primes.Aggregate<int, long>(0, (current, p) => current + p);
-    }
+    public long Run(int limit) => 
+        Numbers.FindPrimesBelow(limit).Aggregate<int, long>(0, (current, p) => current + p);
 }

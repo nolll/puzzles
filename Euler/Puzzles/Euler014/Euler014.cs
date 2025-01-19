@@ -19,13 +19,10 @@ public class Euler014 : EulerPuzzle
         while (i < limit)
         {
             var sequence = GenerateCollatzSequence(i);
-
             var length = sequence.Count();
 
-            if (length > longestSequence.Length)
-            {
+            if (length > longestSequence.Length) 
                 longestSequence = (i, length);
-            }
 
             i++;
         }
@@ -40,13 +37,9 @@ public class Euler014 : EulerPuzzle
         while (n > 1)
         {
             if (n % 2 == 0)
-            {
                 n /= 2;
-            }
             else
-            {
                 n = n * 3 + 1;
-            }
 
             yield return n;
         }

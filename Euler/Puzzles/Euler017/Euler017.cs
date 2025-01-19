@@ -24,13 +24,6 @@ public class Euler017 : EulerPuzzle
         return CountLetters(strings);
     }
         
-    private static int CountLetters(IEnumerable<string> strings)
-    {
-        return strings.Select(CountLetters).Sum();
-    }
-
-    private static int CountLetters(string s)
-    {
-        return s.Replace(" ", "").Length;
-    }
+    private static int CountLetters(IEnumerable<string> strings) => strings.Select(CountLetters).Sum();
+    private static int CountLetters(string s) => s.Replace(" ", "").Length;
 }

@@ -8,7 +8,6 @@ public class Euler004 : EulerPuzzle
     public PuzzleResult Run(string input)
     {
         var largestPalindrome = Run(100, 999);
-
         return new PuzzleResult(largestPalindrome, "bf66c93b5263ee5be1d362b688a9a581");
     }
     
@@ -24,18 +23,15 @@ public class Euler004 : EulerPuzzle
                 var min = Math.Min(a, b);
                 var max = Math.Max(a, b);
 
-                if (!tried.Contains((min, max)))
-                {
-                    tried.Add((min, max));
-                    var product = min * max;
-                    var str = product.ToString();
-                    var reverse = string.Concat(str.ToCharArray().Reverse());
+                if (!tried.Add((min, max)))
+                    continue;
 
-                    if (str == reverse && product > largestPalindrome)
-                    {
-                        largestPalindrome = product;
-                    }
-                }
+                var product = min * max;
+                var str = product.ToString();
+                var reverse = string.Concat(str.ToCharArray().Reverse());
+
+                if (str == reverse && product > largestPalindrome) 
+                    largestPalindrome = product;
             }
         }
 

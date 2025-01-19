@@ -20,8 +20,6 @@ public class Euler001 : EulerPuzzle
                 multiplesOf3Or5.Add(i);
         }
 
-        var sum = multiplesOf3Or5.Sum();
-
-        return sum;
+        return multiplesOf3Or5.Sum();
     }
 }

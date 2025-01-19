@@ -25,10 +25,8 @@ public class Euler008 : EulerPuzzle
                 product *= series[i + j];
             }
 
-            if (product > largestProduct)
-            {
+            if (product > largestProduct) 
                 largestProduct = product;
-            }
         }
             
         return largestProduct;

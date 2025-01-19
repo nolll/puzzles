@@ -25,9 +25,6 @@ public class Euler002 : EulerPuzzle
             numbers.Add(nextNumber);
         }
 
-        var evenNumbers = numbers.Where(o => o % 2 == 0);
-        var sum = evenNumbers.Sum();
-
-        return sum;
+        return numbers.Where(o => o % 2 == 0).Sum();
     }
 }

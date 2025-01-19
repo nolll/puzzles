@@ -18,9 +18,7 @@ public class Euler009 : EulerPuzzle
         foreach (var (a, b, c) in combinations)
         {
             if (a + b + c == targetSum && a * a + b * b == c * c)
-            {
                 return a * b * c;
-            }
         }
 
         return 0;

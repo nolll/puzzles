@@ -25,10 +25,9 @@ public class Euler019 : EulerPuzzle
         var currentDate = firstSunday;
         while (currentDate < endDate)
         {
-            if (currentDate.Day == 1)
-            {
+            if (currentDate.Day == 1) 
                 sundayCount++;
-            }
+            
             currentDate = currentDate.AddDays(7);
         }
             

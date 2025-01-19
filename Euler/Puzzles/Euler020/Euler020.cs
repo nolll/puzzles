@@ -23,7 +23,6 @@ public class Euler020 : EulerPuzzle
             current--;
         }
 
-        var numbers = product.ToString().ToCharArray().Select(o => o.ToString()).Select(int.Parse);
-        return numbers.Sum();
+        return product.ToString().ToCharArray().Select(o => o.ToString()).Select(int.Parse).Sum();
     }
 }

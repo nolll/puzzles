@@ -18,6 +18,9 @@ public class Everybody20 : EverybodyPuzzle
     private readonly Dictionary<char, int> _changes = new()
     {
         { '.', -1 },
+        { 'A', -1 },
+        { 'B', -1 },
+        { 'C', -1 },
         { '-', -2 },
         { '+', 1 }
     };
@@ -27,14 +30,7 @@ public class Everybody20 : EverybodyPuzzle
         var grid = MatrixBuilder.BuildCharMatrix(input);
         var s = grid.FindAddresses('S').First();
         grid.WriteValueAt(s, '.');
-
-        var states = new Dictionary<(int x, int y, char dir), int>
-        {
-            { (s.X, s.Y, MatrixDirection.Up.Name), 1000 },
-            { (s.X, s.Y, MatrixDirection.Right.Name), 1000 },
-            { (s.X, s.Y, MatrixDirection.Down.Name), 1000 },
-            { (s.X, s.Y, MatrixDirection.Left.Name), 1000 }
-        };
+        var states = MatrixDirection.All.ToDictionary(k => (s.X, s.Y, k.Name), _ => 1000);
 
         for (var i = 0; i < 100; i++)
         {
@@ -75,7 +71,55 @@ public class Everybody20 : EverybodyPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        return new PuzzleResult(0);
+        var grid = MatrixBuilder.BuildCharMatrix(input);
+        var s = grid.FindAddresses('S').First();
+        grid.WriteValueAt(s, '.');
+        var states = MatrixDirection.All.ToDictionary(k => (s.X, s.Y, k.Name, ' '), _ => 10000);
+        var time = 0;
+        var found = false;
+        
+        while (!found)
+        {
+            time++;
+            var next = new Dictionary<(int x, int y, char dir, char checkpoint), int>();
+            foreach (var state in states)
+            {
+                var (x, y, dir, checkpoint) = state.Key;
+                var score = state.Value;
+                grid.MoveTo(x, y);
+                grid.TurnTo(MatrixDirection.Get(dir));
+                foreach (var nextdir in _nextDirections[dir])
+                {
+                    grid.TurnTo(nextdir);
+                    if (grid.TryMoveForward())
+                    {
+                        var v = grid.ReadValue();
+                        if (v != '#')
+                        {
+                            var newCheckpoint = checkpoint == ' ' && v == 'A' || 
+                                                checkpoint == 'A' && v == 'B' || 
+                                                checkpoint == 'B' && v == 'C'
+                                ? v
+                                : checkpoint;
+                            var newScore = score + _changes[grid.ReadValue()];
+                            if (newScore >= 10000 && grid.Address.X == s.X && grid.Address.Y == s.Y && newCheckpoint == 'C')
+                                found = true;
+                            var key = (grid.Address.X, grid.Address.Y, grid.Direction.Name, newCheckpoint);
+                            if (next.TryGetValue(key, out var prevScore))
+                                next[key] = Math.Max(newScore, prevScore);
+                            else
+                                next[key] = newScore;
+                        }
+                            
+                        grid.MoveBackward();
+                    }
+                }
+            }
+            
+            states = next;
+        }
+        
+        return new PuzzleResult(time, "455f69d24dffb75a22302c1cbad1475b");
     }
 
     public PuzzleResult Part3(string input)

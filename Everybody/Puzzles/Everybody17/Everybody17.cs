@@ -7,7 +7,6 @@ namespace Pzl.Everybody.Puzzles.Everybody17;
 // Thanks to GeeksforGeeks for the algorithm:
 // https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/ 
 [Name("Galactic Geometry")]
-[Comment("Write a graph function for finding connected components")]
 public class Everybody17 : EverybodyPuzzle
 {
     public PuzzleResult Part1(string input)
@@ -25,35 +24,10 @@ public class Everybody17 : EverybodyPuzzle
     public PuzzleResult Part3(string input)
     {
         var stars = FindStars(input);
-        var groups = new List<List<string>>();
-
         var edges = GetEdges(stars).Where(o => o.Cost < 6);
         var nodes = Graph.GetNodes(edges);
-        var nodesLeft = nodes.Keys.ToHashSet();
-        
-        while (nodesLeft.Count > 0)
-        {
-            var group = new List<string>();
-            var q = new Queue<string>();
-            q.Enqueue(nodesLeft.First());
-            while (q.Count > 0)
-            {
-                var name = q.Dequeue();
-                if (!nodesLeft.Contains(name))
-                    continue;
-                
-                group.Add(name);
-                nodesLeft.Remove(name);
-                foreach (var connection in nodes[name].Connections)
-                {
-                    q.Enqueue(connection.Name);
-                }
-            }
-            
-            groups.Add(group);
-        }
-        
-        var starGroups = groups.Select(o => o.Select(MatrixAddress.Parse).ToList());
+        var components = Graph.GetConnectedComponents(nodes);
+        var starGroups = components.Select(o => o.Keys.Select(MatrixAddress.Parse).ToList());
         var result = starGroups.Select(GetSize).OrderDescending().Take(3).Aggregate((long)1, (a, b) => a * b);
         
         return new PuzzleResult(result, "7906b8b4e0147d5e4d4c422a2042a3d8");

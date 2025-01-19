@@ -22,4 +22,34 @@ public static class Graph
 
         return nodes;
     }
+
+    public static List<Dictionary<string, GraphNode>> GetConnectedComponents(Dictionary<string, GraphNode> nodes)
+    {
+        var nodesLeft = nodes.Keys.ToHashSet();
+        var groups = new List<Dictionary<string, GraphNode>>();
+        
+        while (nodesLeft.Count > 0)
+        {
+            var group = new Dictionary<string, GraphNode>();
+            var q = new Queue<string>();
+            q.Enqueue(nodesLeft.First());
+            while (q.Count > 0)
+            {
+                var name = q.Dequeue();
+                if (!nodesLeft.Contains(name))
+                    continue;
+                
+                group.Add(name, nodes[name]);
+                nodesLeft.Remove(name);
+                foreach (var connection in nodes[name].Connections)
+                {
+                    q.Enqueue(connection.Name);
+                }
+            }
+            
+            groups.Add(group);
+        }
+
+        return groups;
+    }
 }

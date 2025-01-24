@@ -26,18 +26,16 @@ public class Euler021 : EulerPuzzle
             if(!sums.ContainsKey(dA))
                 continue;
 
-            var b = dA;
-
-            if (a == b)
+            if (a == dA)
                 continue;
                 
             var dB = sums[dA];
 
-            if (dA == b && dB == a)
-            {
-                amicableNumbers.Add(dA);
-                amicableNumbers.Add(dB);
-            }
+            if (dB != a)
+                continue;
+            
+            amicableNumbers.Add(dA);
+            amicableNumbers.Add(dB);
         }
 
         var amicableSum = amicableNumbers.Sum();
@@ -45,9 +43,5 @@ public class Euler021 : EulerPuzzle
         return new PuzzleResult(amicableSum, "bfa83952447e586ff82b1adaed0d53ea");
     }
 
-    public static int GetFactorialSum(int n)
-    {
-        var factors = Numbers.GetProperDivisors(n);
-        return factors.Sum();
-    }
+    public static int GetFactorialSum(int n) => Numbers.GetProperDivisors(n).Sum();
 }

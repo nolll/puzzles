@@ -13,10 +13,8 @@ public class Euler034 : EulerPuzzle
         for (var i = 3; i < 50000; i++)
         {
             var sum = GetDigitFactorialSum(i);
-            if(i == sum)
-            {
+            if (i == sum)
                 total += i;
-            }
         }
         return new PuzzleResult(total, "2464ceb2b2cb7b3a2ecb0a4eab5de58b");
     }

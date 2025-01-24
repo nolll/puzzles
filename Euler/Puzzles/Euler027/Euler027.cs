@@ -15,26 +15,23 @@ public class Euler027 : EulerPuzzle
 
     public PuzzleResult Run(string input)
     {
-        const int limit = 1000;
-        const int aLimit = limit - 1;
-        const int bLimit = limit;
+        const int bLimit = 1000;
+        const int aLimit = bLimit - 1;
         const int aMin = -aLimit;
-        const int aMax = aLimit;
         const int bMin = -bLimit;
-        const int bMax = bLimit;
         var mostPrimes = 0;
         var product = 0;
 
-        for (var a = aMin; a <= aMax; a++)
+        for (var a = aMin; a <= aLimit; a++)
         {
-            for (var b = bMin; b <= bMax; b++)
+            for (var b = bMin; b <= bLimit; b++)
             {
                 var primeCount = GetPrimeCount(a, b);
-                if (primeCount > mostPrimes)
-                {
-                    mostPrimes = primeCount;
-                    product = a * b;
-                }
+                if (primeCount <= mostPrimes)
+                    continue;
+                
+                mostPrimes = primeCount;
+                product = a * b;
             }
         }
             

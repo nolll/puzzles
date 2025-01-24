@@ -31,9 +31,8 @@ public class Euler043 : EulerPuzzle
             return [s];
 
         var list = new List<string>();
-        for (var i = 0; i < remainingNumbers.Count; i++)
+        foreach (var n in remainingNumbers)
         {
-            var n = remainingNumbers[i];
             list.AddRange(FindNumbers(s + n, remainingNumbers.Where(o => o != n).ToList(), divisors));
         }
 

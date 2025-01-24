@@ -23,10 +23,8 @@ public class Euler040 : EulerPuzzle
 
         var s = sb.ToString();
         var numbers = new List<int>();
-        for (var j = Initial; j < MaxLength; j *= StepMultiplier)
-        {
+        for (var j = Initial; j < MaxLength; j *= StepMultiplier) 
             numbers.Add(int.Parse(s[j - 1].ToString()));
-        }
 
         var product = numbers.Aggregate(1, (a, b) => a * b);
 

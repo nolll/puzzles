@@ -29,15 +29,8 @@ public class Euler032 : EulerPuzzle
         return new PuzzleResult(result, "735c4542e52acbb81533403307c46237");
     }
 
-    public static bool IsPandigital(int a, int b)
-    {
-        return IsPandigital(a, b, a * b);
-    }
+    public static bool IsPandigital(int a, int b) => IsPandigital(a, b, a * b);
 
-    private static bool IsPandigital(int a, int b, int product)
-    {
-        var s = $"{a}{b}{product}";
-        var sorted = string.Concat(s.OrderBy(c => c));
-        return sorted == AllChars;
-    }
+    private static bool IsPandigital(int a, int b, int product) => 
+        string.Concat($"{a}{b}{product}".OrderBy(c => c)) == AllChars;
 }

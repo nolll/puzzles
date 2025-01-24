@@ -28,11 +28,7 @@ public class Euler037 : EulerPuzzle
         return new PuzzleResult(sum, "89fae62491c03802ab17f278061a576d");
     }
 
-    public static bool IsTruncatable(int n)
-    {
-        return IsTruncatableLeft(n) && IsTruncatableRight(n);
-    }
-
+    public static bool IsTruncatable(int n) => IsTruncatableLeft(n) && IsTruncatableRight(n);
     private static bool IsTruncatableLeft(int n) => IsTruncatable(n, s => s[1..]);
     private static bool IsTruncatableRight(int n) => IsTruncatable(n, s => s[..^1]);
 

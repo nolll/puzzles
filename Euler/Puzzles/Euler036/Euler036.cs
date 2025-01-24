@@ -16,13 +16,6 @@ public class Euler036 : EulerPuzzle
         return new PuzzleResult(sum, "710d458ea3f1a020b4ad4198a1ec846f");
     }
 
-    public static bool IsPalindromeInBothBases(int n)
-    {
-        var s = n.ToString();
-        if (!s.IsPalindrome())
-            return false;
-        
-        var binary = Conversion.ToBinary(n);
-        return binary.IsPalindrome();
-    }
+    public static bool IsPalindromeInBothBases(int n) => 
+        n.ToString().IsPalindrome() && Conversion.ToBinary(n).IsPalindrome();
 }

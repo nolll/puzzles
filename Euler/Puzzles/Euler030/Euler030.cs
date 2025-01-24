@@ -9,7 +9,6 @@ public class Euler030 : EulerPuzzle
     public PuzzleResult Run(string input)
     {
         var result = Run(5);
-
         return new PuzzleResult(result, "7ba4d46ba8ab138fff39c45c1e2b574b");
     }
 
@@ -32,11 +31,5 @@ public class Euler030 : EulerPuzzle
         }
     }
 
-    private static int GetUpperBound(int power)
-    {
-        var n = MathTools.Pow(9, power);
-        var s = n.ToString();
-        var l = s.Length + 1;
-        return MathTools.Pow(10, l);
-    }
+    private static int GetUpperBound(int power) => MathTools.Pow(10, MathTools.Pow(9, power).ToString().Length + 1);
 }

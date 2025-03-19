@@ -6,6 +6,7 @@ using Pzl.Client.Help;
 using Pzl.Client.Params;
 using Pzl.Client.Running.Results;
 using Pzl.Client.Running.Runners;
+using Pzl.Codyssi;
 using Pzl.Common;
 using Pzl.Euler;
 using Pzl.Everybody;
@@ -29,6 +30,7 @@ public class PuzzleProgram
             new AquaqPuzzleProvider(),
             new EulerPuzzleProvider(),
             new EverybodyPuzzleProvider(),
+            new CodyssiPuzzleProvider()
         };
 
         var fileReader = new FileReader();

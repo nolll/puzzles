@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Configurations>Debug;Release;Single</Configurations>
+        <LangVersion>13.0</LangVersion>
+        <RootNamespace>Pzl.Codyssi</RootNamespace>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Common\Common.csproj" />
+        <ProjectReference Include="..\Tools\Tools.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="8.1.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+        <PackageReference Include="NUnit" Version="4.3.2" />
+        <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
+    </ItemGroup>
+
+</Project>

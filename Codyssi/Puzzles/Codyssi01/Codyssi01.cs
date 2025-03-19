@@ -40,6 +40,20 @@ public class Codyssi01 : CodyssiPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        return new PuzzleResult(0);
+        var lines = input.Split(LineBreaks.Single).ToList();
+        
+        var digits = lines.SkipLast(1).ToArray();
+        var numbers = new List<int>();
+        for (var i = 0; i < digits.Length; i += 2)
+        {
+            numbers.Add(int.Parse($"{digits[i]}{digits[i + 1]}"));
+        }
+        var multipliers = lines.Last().ToCharArray().Select(o => o is '+' ? 1 : -1).Reversed().ToArray();
+        var n = numbers.First();
+        numbers = numbers.Skip(1).ToList();
+
+        n += numbers.Select((t, i) => t * multipliers[i]).Sum();
+
+        return new PuzzleResult(n, "7e2613ac221549d96730491340a1b69e");
     }
 }

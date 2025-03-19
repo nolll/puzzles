@@ -20,24 +20,13 @@ public class Codyssi01Tests
                                  """;
 
     [Test]
-    public void Part1()
-    {
-        Sut.Part1(Input).Answer.Should().Be("21");
-    }
+    public void Part1() => Sut.Part1(Input).Answer.Should().Be("21");
 
     [Test]
-    public void Part2()
-    {
-        Sut.Part2(Input).Answer.Should().Be("23");
-    }
+    public void Part2() => Sut.Part2(Input).Answer.Should().Be("23");
 
     [Test]
-    public void Part3()
-    {
-        const string input = "";
-
-        Sut.Part3(input).Answer.Should().Be("0");
-    }
+    public void Part3() => Sut.Part3(Input).Answer.Should().Be("189");
 
     private static Codyssi01 Sut => new();
 }

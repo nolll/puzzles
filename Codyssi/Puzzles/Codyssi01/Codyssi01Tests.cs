@@ -5,32 +5,30 @@ namespace Pzl.Codyssi.Puzzles.Codyssi01;
 
 public class Codyssi01Tests
 {
+    private const string Input = """
+                                 8
+                                 1
+                                 5
+                                 5
+                                 7
+                                 6
+                                 5
+                                 4
+                                 3
+                                 1
+                                 -++-++-++
+                                 """;
+
     [Test]
     public void Part1()
     {
-        const string input = """
-                             8
-                             1
-                             5
-                             5
-                             7
-                             6
-                             5
-                             4
-                             3
-                             1
-                             -++-++-++
-                             """;
-
-        Sut.Part1(input).Answer.Should().Be("21");
+        Sut.Part1(Input).Answer.Should().Be("21");
     }
 
     [Test]
     public void Part2()
     {
-        const string input = "";
-
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part2(Input).Answer.Should().Be("23");
     }
 
     [Test]

@@ -24,7 +24,18 @@ public class Codyssi01 : CodyssiPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        return new PuzzleResult(0);
+        var lines = input.Split(LineBreaks.Single).ToList();
+        
+        var numbers = lines.SkipLast(1).Select(int.Parse).ToArray();
+        var multipliers = lines.Last().ToCharArray().Select(o => o is '+' ? 1 : -1).Reversed().ToArray();
+        var n = numbers.First();
+
+        for (var i = 0; i < multipliers.Length; i++)
+        {
+            n += numbers[i + 1] * multipliers[i];
+        }
+        
+        return new PuzzleResult(n, "d79852c3963ccb64147853df691ef1cf");
     }
 
     public PuzzleResult Part3(string input)

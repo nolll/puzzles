@@ -2,10 +2,10 @@ using System.Text;
 using Pzl.Common;
 using Pzl.Tools.Strings;
 
-namespace Pzl.Codyssi.Puzzles.Codyssi04;
+namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202504;
 
 [Name("Aeolian Transmissions")]
-public class Codyssi04 : CodyssiPuzzle
+public class Codyssi202504 : CodyssiPuzzle
 {
     public PuzzleResult Part1(string input)
     {

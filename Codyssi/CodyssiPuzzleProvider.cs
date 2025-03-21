@@ -11,12 +11,14 @@ public class CodyssiPuzzleProvider : IPuzzleProvider
     
     private static PuzzleDefinition CreatePuzzleDefinition(PuzzleData data)
     {
-        var id = CodyssiPuzzleParser.GetPuzzleId(data.Type).ToString();
-        var paddedId = id.PadLeft(2, '0');
-        var sortId = $"codyssi {paddedId}";
-        var title = $"Codyssi {id}";
-        var listTitle = $"Codyssi {paddedId}";
-        List<string> tags = ["codyssi", id];
+        var (year, day) = CodyssiPuzzleParser.GetPuzzleId(data.Type);
+        var paddedDay = day.ToString().PadLeft(2, '0');
+        var id = $"{year}{paddedDay}";
+        var sortId = $"codyssi {id}";
+        var title = $"Codyssi {year}-{paddedDay}";
+        var listTitle = $"C5i {year}-{paddedDay}";
+        List<string> tags = ["codyssi", year.ToString(), day.ToString()];
+
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }
 }

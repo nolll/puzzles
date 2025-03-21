@@ -1,9 +1,9 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Pzl.Codyssi.Puzzles.Codyssi02;
+namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202502;
 
-public class Codyssi02Tests
+public class Codyssi202502Tests
 {
     private const string Input = """
                                  Function A: ADD 495
@@ -32,5 +32,5 @@ public class Codyssi02Tests
     [Test]
     public void Part3() => Sut.Part3(Input).Answer.Should().Be("5496");
 
-    private static Codyssi02 Sut => new();
+    private static Codyssi202502 Sut => new();
 }

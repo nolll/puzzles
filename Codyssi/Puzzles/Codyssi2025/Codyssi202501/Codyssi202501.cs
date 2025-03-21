@@ -1,10 +1,10 @@
 using Pzl.Common;
 using Pzl.Tools.Strings;
 
-namespace Pzl.Codyssi.Puzzles.Codyssi01;
+namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202501;
 
 [Name("Compass Calibration")]
-public class Codyssi01 : CodyssiPuzzle
+public class Codyssi202501 : CodyssiPuzzle
 {
     public PuzzleResult Part1(string input)
     {

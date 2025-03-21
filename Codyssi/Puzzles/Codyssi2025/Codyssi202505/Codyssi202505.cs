@@ -3,10 +3,10 @@ using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
-namespace Pzl.Codyssi.Puzzles.Codyssi05;
+namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202505;
 
 [Name("Patron Islands")]
-public class Codyssi05 : CodyssiPuzzle
+public class Codyssi202505 : CodyssiPuzzle
 {
     public PuzzleResult Part1(string input)
     {

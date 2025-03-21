@@ -2,10 +2,10 @@ using Pzl.Common;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
-namespace Pzl.Codyssi.Puzzles.Codyssi02;
+namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202502;
 
 [Name("Absurd Arithmetic")]
-public class Codyssi02 : CodyssiPuzzle
+public class Codyssi202502 : CodyssiPuzzle
 {
     public PuzzleResult Part1(string input)
     {

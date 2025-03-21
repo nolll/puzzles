@@ -2,10 +2,10 @@ using Pzl.Common;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
-namespace Pzl.Codyssi.Puzzles.Codyssi03;
+namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202503;
 
 [Name("Supplies in Surplus")]
-public class Codyssi03 : CodyssiPuzzle
+public class Codyssi202503 : CodyssiPuzzle
 {
     public PuzzleResult Part1(string input)
     {

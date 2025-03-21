@@ -3,7 +3,7 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Codyssi.Puzzles.Codyssi2024.Codyssi202401;
 
-[Name("")]
+[Name("Handling the Budget")]
 public class Codyssi202401 : CodyssiPuzzle
 {
     public PuzzleResult Part1(string input)

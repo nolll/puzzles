@@ -18,7 +18,7 @@ public class Codyssi202404Tests
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("7");
 
     [Test]
-    public void Part2() => Sut.Part2(Input).Answer.Should().Be("0");
+    public void Part2() => Sut.Part2(Input).Answer.Should().Be("6");
 
     [Test]
     public void Part3() => Sut.Part3(Input).Answer.Should().Be("0");

@@ -21,7 +21,7 @@ public class Codyssi202404Tests
     public void Part2() => Sut.Part2(Input).Answer.Should().Be("6");
 
     [Test]
-    public void Part3() => Sut.Part3(Input).Answer.Should().Be("0");
+    public void Part3() => Sut.Part3(Input).Answer.Should().Be("15");
 
     private static Codyssi202404 Sut => new();
 }

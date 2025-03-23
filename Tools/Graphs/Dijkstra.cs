@@ -8,10 +8,10 @@ public static class Dijkstra
     public static int BestCost(List<GraphEdge> edges, string source, List<string> targets) => 
         BestPath(Graph.GetNodes(edges), source, targets).cost;
 
-    public static (int cost, List<string> path) BestPath(List<GraphEdge> edges, string source, string target) => 
+    public static (int cost, List<string> path) BestPath(IEnumerable<GraphEdge> edges, string source, string target) => 
         BestPath(edges, source, [target]);
 
-    public static (int cost, List<string> path) BestPath(List<GraphEdge> edges, string source, List<string> targets) => 
+    public static (int cost, List<string> path) BestPath(IEnumerable<GraphEdge> edges, string source, List<string> targets) => 
         BestPath(Graph.GetNodes(edges), source, targets);
 
     public static (int cost, List<List<string>> paths) BestPaths(List<GraphEdge> edges, string source, List<string> targets) => 

@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Chars;
 
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202506;
 
@@ -7,7 +8,7 @@ public class Codyssi202506 : CodyssiPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var count = input.Select(IsAlphabetical).Select(isLetter => isLetter ? 1 : 0).Sum();
+        var count = input.Select(Chars.IsAlphabetic).Select(isLetter => isLetter ? 1 : 0).Sum();
         return new PuzzleResult(count, "fdcf01fc54fbd900671723d23cced1f2");
     }
 
@@ -32,23 +33,24 @@ public class Codyssi202506 : CodyssiPuzzle
 
     private static int CalculateScoreFromPrevious(int prevScore)
     {
+        const int limit = 52;
         var mod = prevScore * 2 - 5;
         
         while (mod < 1)
-            mod += 52;
+            mod += limit;
         
-        while (mod > 52)
-            mod -= 52;
+        while (mod > limit)
+            mod -= limit;
         
         return mod;
     }
 
-    private static bool IsAlphabetical(char c) => c is >= 'a' and <= 'z' or >= 'A' and <= 'Z';
-
-    private static int GetScore(char c) => c switch
+    private static int GetScore(char c)
     {
-        >= 'a' and <= 'z' => c - 'a' + 1,
-        >= 'A' and <= 'Z' => c - 'A' + 27,
-        _ => 0
-    };
+        if (Chars.IsAlphabeticLower(c))
+            return c - 'a' + 1;
+        if (Chars.IsAlphabeticUpper(c))
+            return c - 'A' + 27;
+        return 0;
+    }
 }

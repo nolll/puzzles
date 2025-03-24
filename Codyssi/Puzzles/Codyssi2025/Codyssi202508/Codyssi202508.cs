@@ -9,7 +9,7 @@ public class Codyssi202508 : CodyssiPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var count = input.Count(Chars.IsAlphabetic);
+        var count = input.Count(Chars.IsAlphabeticLower);
         return new PuzzleResult(count, "6a585e7eb1dcbd71879f4142df959659");
     }
 
@@ -54,5 +54,5 @@ public class Codyssi202508 : CodyssiPuzzle
     }
     
     private static bool CanBeReducedPart3(char a, char b) => 
-        Chars.IsNumeric(a) && Chars.IsAlphabetic(b) || Chars.IsAlphabetic(a) && Chars.IsNumeric(b);
+        Chars.IsNumeric(a) && Chars.IsAlphabeticLower(b) || Chars.IsAlphabeticLower(a) && Chars.IsNumeric(b);
 }

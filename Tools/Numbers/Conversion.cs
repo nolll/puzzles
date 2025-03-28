@@ -41,4 +41,32 @@ public static class Conversion
 
         return roman.ToString();
     }
+    
+    public static string ToBaseX(long v, int radix, string digits)
+    {
+        const int bitsInLong = 64;
+        
+        if (radix < 2 || radix > digits.Length)
+            throw new ArgumentException("The radix must be >= 2 and <= " + digits.Length);
+
+        if (v == 0)
+            return "0";
+
+        var index = bitsInLong - 1;
+        var currentNumber = Math.Abs(v);
+        var charArray = new char[bitsInLong];
+
+        while (currentNumber != 0)
+        {
+            var remainder = (int)(currentNumber % radix);
+            charArray[index--] = digits[remainder];
+            currentNumber /= radix;
+        }
+
+        var result = new string(charArray, index + 1, bitsInLong - index - 1);
+        if (v < 0) 
+            result = "-" + result;
+
+        return result;
+    }
 }

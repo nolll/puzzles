@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Codyssi.Puzzles.Codyssi2024.Codyssi202403;
@@ -26,6 +27,9 @@ public class Codyssi202403 : CodyssiPuzzle
         return new PuzzleResult(result, "b1273b880eaaf6e24e986fdcdd291ef9");
     }
     
+    public static string ToBase65(long v) => 
+        Conversion.ToBaseX(v, 65, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#");
+    
     private static long ParseLine((string v, int b) line) => ParseLine(line.v, line.b);
     private static long ParseLine(string v, int b) => Convert.ToInt32(v, b);
     
@@ -34,35 +38,4 @@ public class Codyssi202403 : CodyssiPuzzle
             .Select(o => o.Split(' '))
             .Select(o => (o.First(), int.Parse(o.Last())))
             .Sum(ParseLine);
-    
-    private static string ToBase65(long v) => 
-        ToBaseX(v, 65, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#");
-
-    private static string ToBaseX(long v, int radix, string digits)
-    {
-        const int bitsInLong = 64;
-        
-        if (radix < 2 || radix > digits.Length)
-            throw new ArgumentException("The radix must be >= 2 and <= " + digits.Length);
-
-        if (v == 0)
-            return "0";
-
-        var index = bitsInLong - 1;
-        var currentNumber = Math.Abs(v);
-        var charArray = new char[bitsInLong];
-
-        while (currentNumber != 0)
-        {
-            var remainder = (int)(currentNumber % radix);
-            charArray[index--] = digits[remainder];
-            currentNumber /= radix;
-        }
-
-        var result = new string(charArray, index + 1, bitsInLong - index - 1);
-        if (v < 0) 
-            result = "-" + result;
-
-        return result;
-    }
 }

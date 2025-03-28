@@ -1,13 +1,11 @@
-using FluentAssertions;
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Graphs;
-using Pzl.Tools.Queues;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202510;
 
-[Name("")]
+[Name("Cyclops Chaos")]
 public class Codyssi202510 : CodyssiPuzzle
 {
     public PuzzleResult Part1(string input)

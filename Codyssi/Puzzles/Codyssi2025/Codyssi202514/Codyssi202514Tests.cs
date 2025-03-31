@@ -27,10 +27,10 @@ public class Codyssi202514Tests
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("90");
 
     [Test]
-    public void Part2() => Sut.Part2(Input).Answer.Should().Be("0");
+    public void Part2() => Sut.Part2(Input).Answer.Should().Be("8256");
 
     [Test]
-    public void Part3() => Sut.Part3(Input).Answer.Should().Be("0");
+    public void Part3() => Sut.RunPart2And3(Input, 150).Should().Be(59388);
 
     private static Codyssi202514 Sut => new();
 }

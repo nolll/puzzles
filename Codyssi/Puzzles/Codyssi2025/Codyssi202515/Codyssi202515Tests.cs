@@ -30,10 +30,10 @@ public class Codyssi202515Tests
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("12645822");
 
     [Test]
-    public void Part2() => Sut.Part2(Input).Answer.Should().Be("0");
+    public void Part2() => Sut.Part2(Input).Answer.Should().Be("ozNxANO-pYNonIG-MUantNm-lOSlxki-SDJtdpa-JSXfNAJ");
 
     [Test]
-    public void Part3() => Sut.Part3(Input).Answer.Should().Be("0");
+    public void Part3() => Sut.Part3(Input).Answer.Should().Be("pYNonIG");
 
     private static Codyssi202515 Sut => new();
 }

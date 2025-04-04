@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+using System.Numerics;
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Lists;
@@ -8,13 +10,37 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202516;
 [Name("Leviathan Mindscape")]
 public class Codyssi202516 : CodyssiPuzzle
 {
+    private const int GridSize = 80;
+
     public PuzzleResult Part1(string input)
     {
-        var result = RunPart1(input, 80);
+        var result = RunPart1(input, GridSize);
         return new PuzzleResult(result, "daf580450a171146930ce60cd7756da5");
     }
 
     public long RunPart1(string input, int gridSize)
+    {
+        var cube = Execute(input, gridSize);
+        var top2 = cube.Faces.Select(o => (long)o.Absorbtion).OrderDescending().Take(2).ToArray();
+        var p = top2.First() * top2.Last();
+
+        return p;
+    }
+    
+    public PuzzleResult Part2(string input)
+    {
+        var result = RunPart2(input, GridSize);
+        return new PuzzleResult(result, "178f79ec48eeee9f4a62432ee8003d1e");
+    }
+    
+    public BigInteger RunPart2(string input, int gridSize)
+    {
+        var cube = Execute(input, gridSize);
+        var sums = cube.Faces.Select(o => o.Matrix).Select(GetBestSum).ToArray();
+        return sums.Aggregate(new BigInteger(1), (product, o) => product * o);
+    }
+
+    private Cube Execute(string input, int gridSize)
     {
         var cube = new Cube(gridSize);
 
@@ -24,30 +50,31 @@ public class Codyssi202516 : CodyssiPuzzle
 
         for (var i = 0; i < transformations.Length; i++)
         {
-            var parts = transformations[i].Split();
+            var transformation = transformations[i];
+            var parts = transformation.Split();
             var command = parts[0];
             var v = int.Parse(parts.Last());
             if (command == "ROW")
             {
                 var row = int.Parse(parts[1]) - 1;
-                var values = cube.Front.ReadRow(row).Select(o => (o + v) % 100).ToList();
+                var values = cube.Front.ReadRow(row).Select(o => AdjustValue(o + v)).ToList();
                 cube.Front.WriteRow(row, values);
                 cube.Front.Absorbtion += v * values.Count;
             }
             else if (command == "COL")
             {
                 var col = int.Parse(parts[1]) - 1;
-                var values = cube.Front.ReadRow(col).Select(o => (o + v) % 100).ToList();
-                cube.Front.WriteRow(col, values);
+                var values = cube.Front.ReadColumn(col).Select(o => AdjustValue(o + v)).ToList();
+                cube.Front.WriteColumn(col, values);
                 cube.Front.Absorbtion += v * values.Count;
             }
             else
             {
-                var values = cube.Front.ReadAll().Select(o => (o + v) % 100).ToList();
+                var values = cube.Front.ReadAll().Select(o => AdjustValue(o + v)).ToList();
                 cube.Front.WriteAll(values);
                 cube.Front.Absorbtion += v * values.Count;
             }
-
+            
             if (i >= rotations.Length)
                 break;
 
@@ -55,10 +82,17 @@ public class Codyssi202516 : CodyssiPuzzle
             cube.Rotate(rotation);
         }
 
-        var top2 = cube.Faces.Select(o => (long)o.Absorbtion).OrderDescending().Take(2).ToArray();
-        var p = top2.First() * top2.Last();
+        return cube;
+    }
 
-        return p;
+    private int AdjustValue(int v)
+    {
+        while (v > 100)
+        {
+            v -= 100;
+        }
+        
+        return v;
     }
 
     private class Cube
@@ -218,10 +252,10 @@ public class Codyssi202516 : CodyssiPuzzle
 
         private Action GetRotateFunc(char rotation) => rotation switch
         {
-            'U' => RotateYPrime,
-            'R' => RotateX,
-            'D' => RotateY,
-            _ => RotateXPrime
+            'U' => RotateXPrime,
+            'R' => RotateY,
+            'D' => RotateX,
+            _ => RotateYPrime
         };
     }
 
@@ -282,10 +316,10 @@ public class Codyssi202516 : CodyssiPuzzle
             }
         }
 
-        public void WriteLeftColumn(IEnumerable<char> values) => WriteColumn(0, values);
-        public void WriteRightColumn(IEnumerable<char> values) => WriteColumn(2, values);
+        public void WriteLeftColumn(IEnumerable<int> values) => WriteColumn(0, values);
+        public void WriteRightColumn(IEnumerable<int> values) => WriteColumn(2, values);
 
-        public void WriteColumn(int x, IEnumerable<char> values)
+        public void WriteColumn(int x, IEnumerable<int> values)
         {
             var y = 0;
             foreach (var value in values)
@@ -313,13 +347,36 @@ public class Codyssi202516 : CodyssiPuzzle
         //};
     }
 
-    public PuzzleResult Part2(string input)
-    {
-        return new PuzzleResult(0);
-    }
-
     public PuzzleResult Part3(string input)
     {
         return new PuzzleResult(0);
+    }
+    
+    private long GetBestSum(Matrix<int> grid)
+    {
+        var best = 0L;
+        for (var y = grid.YMin; y <= grid.YMax; y++)
+        {
+            var sum = 0L;
+            for (var x = grid.XMin; x <= grid.XMax; x++)
+            {
+                sum += grid.ReadValueAt(x, y);
+            }
+
+            best = Math.Max(best, sum);
+        }
+        
+        for (var x = grid.XMin; x <= grid.XMax; x++)
+        {
+            var sum = 0L;
+            for (var y = grid.YMin; y <= grid.YMax; y++)    
+            {
+                sum += grid.ReadValueAt(x, y);
+            }
+
+            best = Math.Max(best, sum);
+        }
+
+        return best;
     }
 }

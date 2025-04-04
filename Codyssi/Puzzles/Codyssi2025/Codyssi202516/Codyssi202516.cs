@@ -39,8 +39,21 @@ public class Codyssi202516 : CodyssiPuzzle
         var sums = cube.Faces.Select(o => o.Matrix).Select(GetBestSum).ToArray();
         return sums.Aggregate(new BigInteger(1), (product, o) => product * o);
     }
+    
+    public PuzzleResult Part3(string input)
+    {
+        var result = RunPart3(input, GridSize);
+        return new PuzzleResult(result, "9215f7b88a764c37a7227b14051e4267");
+    }
+    
+    public BigInteger RunPart3(string input, int gridSize)
+    {
+        var cube = Execute(input, gridSize, true);
+        var sums = cube.Faces.Select(o => o.Matrix).Select(GetBestSum).ToArray();
+        return sums.Aggregate(new BigInteger(1), (product, o) => product * o);
+    }
 
-    private Cube Execute(string input, int gridSize)
+    private Cube Execute(string input, int gridSize, bool wrapAround = false)
     {
         var cube = new Cube(gridSize);
 
@@ -57,16 +70,24 @@ public class Codyssi202516 : CodyssiPuzzle
             if (command == "ROW")
             {
                 var row = int.Parse(parts[1]) - 1;
-                var values = cube.Front.ReadRow(row).Select(o => AdjustValue(o + v)).ToList();
-                cube.Front.WriteRow(row, values);
-                cube.Front.Absorbtion += v * values.Count;
+                CubeFace[] faces = wrapAround ? [cube.Front, cube.Right, cube.Back, cube.Left] : [cube.Front];
+                foreach (var face in faces)
+                {
+                    var values = face.ReadRow(row).Select(o => AdjustValue(o + v)).ToList();
+                    face.WriteRow(row, values);
+                    face.Absorbtion += v * values.Count;
+                }
             }
             else if (command == "COL")
             {
                 var col = int.Parse(parts[1]) - 1;
-                var values = cube.Front.ReadColumn(col).Select(o => AdjustValue(o + v)).ToList();
-                cube.Front.WriteColumn(col, values);
-                cube.Front.Absorbtion += v * values.Count;
+                (CubeFace face, int col)[] faces = wrapAround ? [(cube.Front, col), (cube.Down, col), (cube.Back, cube.Back.Matrix.XMax - col), (cube.Up, col)] : [(cube.Front, col)];
+                foreach (var (face, c) in faces)
+                {
+                    var values = face.ReadColumn(c).Select(o => AdjustValue(o + v)).ToList();
+                    face.WriteColumn(c, values);
+                    face.Absorbtion += v * values.Count;
+                }
             }
             else
             {
@@ -87,34 +108,24 @@ public class Codyssi202516 : CodyssiPuzzle
 
     private int AdjustValue(int v)
     {
-        while (v > 100)
-        {
+        while (v > 100) 
             v -= 100;
-        }
         
         return v;
     }
 
-    private class Cube
+    private class Cube(int size)
     {
-        public CubeFace Front { get; }
-        public CubeFace Up { get; }
-        public CubeFace Right { get; }
-        public CubeFace Down { get; }
-        public CubeFace Left { get; }
-        public CubeFace Back { get; }
+        private const int Initial = 1;
+        
+        public CubeFace Front { get; } = new(Initial, size);
+        public CubeFace Up { get; } = new(Initial, size);
+        public CubeFace Right { get; } = new(Initial, size);
+        public CubeFace Down { get; } = new(Initial, size);
+        public CubeFace Left { get; } = new(Initial, size);
+        public CubeFace Back { get; } = new(Initial, size);
 
         public CubeFace[] Faces => [Front, Up, Right, Down, Left, Back];
-
-        public Cube(int size)
-        {
-            Front = new CubeFace(1, size);
-            Up = new CubeFace(1, size);
-            Right = new CubeFace(1, size);
-            Down = new CubeFace(1, size);
-            Left = new CubeFace(1, size);
-            Back = new CubeFace(1, size);
-        }
 
         public void Rotate(char rotation) => GetRotateFunc(rotation)();
 
@@ -213,43 +224,7 @@ public class Codyssi202516 : CodyssiPuzzle
             Back.WriteAll(right);
             Back.Absorbtion = rightAbsorbtion;
         }
-
-        // public void RotateZ()
-        // {
-        //     Back.RotateLeft();
-        //     Front.RotateRight();
-        //     var left = Left.ReadAll();
-        //     var up = Up.ReadAll();
-        //     var right = Right.ReadAll();
-        //     var down = Down.ReadAll();
-        //     Up.WriteAll(left);
-        //     Up.RotateRight();
-        //     Left.WriteAll(down);
-        //     Left.RotateRight();
-        //     Right.WriteAll(up);
-        //     Right.RotateRight();
-        //     Down.WriteAll(right);
-        //     Down.RotateRight();
-        // }
-        //
-        // public void RotateZPrime()
-        // {
-        //     Back.RotateRight();
-        //     Front.RotateLeft();
-        //     var left = Left.ReadAll();
-        //     var up = Up.ReadAll();
-        //     var right = Right.ReadAll();
-        //     var down = Down.ReadAll();
-        //     Up.WriteAll(right);
-        //     Up.RotateLeft();
-        //     Left.WriteAll(up);
-        //     Left.RotateLeft();
-        //     Right.WriteAll(down);
-        //     Right.RotateLeft();
-        //     Down.WriteAll(left);
-        //     Down.RotateLeft();
-        // }
-
+        
         private Action GetRotateFunc(char rotation) => rotation switch
         {
             'U' => RotateXPrime,
@@ -259,7 +234,7 @@ public class Codyssi202516 : CodyssiPuzzle
         };
     }
 
-    public class CubeFace
+    private class CubeFace
     {
         private readonly int _size;
         private Matrix<int> _matrix;
@@ -272,23 +247,8 @@ public class Codyssi202516 : CodyssiPuzzle
             _matrix = new(_size, _size, initial);
         }
 
-        //public int TopLeft => _matrix.ReadValueAt(0, 0);
-        //public int Top => _matrix.ReadValueAt(1, 0);
-        //public int TopRight => _matrix.ReadValueAt(2, 0);
-        //public int Left => _matrix.ReadValueAt(1, 0);
-        //public int Center => _matrix.ReadValueAt(1, 1);
-        //public int Right => _matrix.ReadValueAt(1, 2);
-        //public int BottomLeft => _matrix.ReadValueAt(0, 2);
-        //public int Bottom => _matrix.ReadValueAt(1, 2);
-        //public int BottomRight => _matrix.ReadValueAt(2, 2);
-
         public int[] ReadAll() => _matrix.Values.ToArray();
-        public int[] ReadLeftColumn() => ReadColumn(0);
-        public int[] ReadRightColumn() => ReadColumn(2);
         public int[] ReadColumn(int x) => Enumerable.Range(0, _size).Select(o => _matrix.ReadValueAt(x, o)).ToArray();
-
-        public int[] ReadTopRow() => ReadRow(0);
-        public int[] ReadBottomRow() => ReadRow(2);
         public int[] ReadRow(int y) => Enumerable.Range(0, _size).Select(o => _matrix.ReadValueAt(o, y)).ToArray();
 
         public Matrix<int> Matrix => _matrix.Clone();
@@ -303,9 +263,6 @@ public class Codyssi202516 : CodyssiPuzzle
             }
         }
 
-        public void WriteTopRow(IEnumerable<int> values) => WriteRow(0, values);
-        public void WriteBottomRow(IEnumerable<int> values) => WriteRow(2, values);
-
         public void WriteRow(int y, IEnumerable<int> values)
         {
             var x = 0;
@@ -315,9 +272,6 @@ public class Codyssi202516 : CodyssiPuzzle
                 x++;
             }
         }
-
-        public void WriteLeftColumn(IEnumerable<int> values) => WriteColumn(0, values);
-        public void WriteRightColumn(IEnumerable<int> values) => WriteColumn(2, values);
 
         public void WriteColumn(int x, IEnumerable<int> values)
         {
@@ -331,28 +285,9 @@ public class Codyssi202516 : CodyssiPuzzle
 
         public void RotateRight() => _matrix = _matrix.RotateRight();
         public void RotateLeft() => _matrix = _matrix.RotateLeft();
-        public string PrintFlat() => string.Join("", _matrix.Values);
-        public string Print() => _matrix.Print();
-        //public int Product => _matrix.Values.Select(GetColorValue).Aggregate(1, (a, b) => a * b);
-
-        //private static int GetColorValue(char c) => c switch
-        //{
-        //    CubeColors.Blue => 1,
-        //    CubeColors.White => 2,
-        //    CubeColors.Red => 3,
-        //    CubeColors.Orange => 4,
-        //    CubeColors.Yellow => 5,
-        //    CubeColors.Green => 6,
-        //    _ => throw new Exception("Unknown color")
-        //};
-    }
-
-    public PuzzleResult Part3(string input)
-    {
-        return new PuzzleResult(0);
     }
     
-    private long GetBestSum(Matrix<int> grid)
+    private static long GetBestSum(Matrix<int> grid)
     {
         var best = 0L;
         for (var y = grid.YMin; y <= grid.YMax; y++)

@@ -15,7 +15,7 @@ public class Euler031 : EulerPuzzle
         return new PuzzleResult(result, "7175474dc7b139b075af256e2253a076");
     }
 
-    public int Run(IEnumerable<int> denominations, int target, bool print = false) => 
+    public int Run(IEnumerable<int> denominations, int target) => 
         CountCombinations(denominations.OrderByDescending(o => o).ToList(), target);
 
     private static int CountCombinations(IReadOnlyCollection<int> denominations, int target)

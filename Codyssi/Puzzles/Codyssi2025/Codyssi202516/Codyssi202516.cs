@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using System.Numerics;
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;

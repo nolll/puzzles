@@ -142,13 +142,12 @@ public class Everybody20 : EverybodyPuzzle
         var grid = input.Split(LineBreaks.Single).Select(line => line.ToCharArray()).ToArray();
         var width = grid[0].Length;
         var height = grid.Length;
-
-        // find the starting point
-        var starting = (x: 0, y: 0);
+        
+        var start = (x: 0, y: 0);
         for (var y = 0; y < height; y++) {
             for (var x = 0; x < width; x++) {
                 if (grid[y][x] == 'S') {
-                    starting = (x, y);
+                    start = (x, y);
                     grid[y][x] = '.';
                 }
             }
@@ -159,14 +158,14 @@ public class Everybody20 : EverybodyPuzzle
         var rightMovement = stepsToGoodCol;
         while (altitude > 0) {
             if (rightMovement != 0) {
-                starting.x += Math.Sign(stepsToGoodCol);
+                start.x += Math.Sign(stepsToGoodCol);
                 rightMovement += -Math.Sign(stepsToGoodCol);
             } else {
-                starting.y = (starting.y + 1) % height;
+                start.y = (start.y + 1) % height;
                 distance++;
             }
 
-            altitude += changes[grid[starting.y][starting.x]];
+            altitude += changes[grid[start.y][start.x]];
         }
 
         return distance;

@@ -95,9 +95,18 @@ public class Everybody20Tests
     [Test]
     public void Part3()
     {
-        const string input = "";
+        const string input = """
+                             #......S......#
+                             #-...+...-...+#
+                             #.............#
+                             #..+...-...+..#
+                             #.............#
+                             #-...-...+...-#
+                             #.............#
+                             #..#...+...+..#
+                             """;
 
-        Sut.Part3(input).Answer.Should().Be("0");
+        Everybody20.RunPart3(input, 4).Should().Be(768790);
     }
 
     private static Everybody20 Sut => new();

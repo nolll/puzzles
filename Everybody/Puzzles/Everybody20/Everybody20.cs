@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Everybody20;
 
@@ -124,6 +125,50 @@ public class Everybody20 : EverybodyPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        return new PuzzleResult(0);
+        var result = RunPart3(input, -3);
+        return new PuzzleResult(result, "f410a855e124b277c01cf1caebd9778e");
+    }
+
+    // The best col was obvious. 4 cols to the right for the test input and three steps to the right for the real input
+    public static int RunPart3(string input, int stepsToGoodCol)
+    {
+        var changes = new Dictionary<char, int>
+        {
+            { '.', -1 },
+            { '-', -2 },
+            { '+', 1 }
+        };
+
+        var grid = input.Split(LineBreaks.Single).Select(line => line.ToCharArray()).ToArray();
+        var width = grid[0].Length;
+        var height = grid.Length;
+
+        // find the starting point
+        var starting = (x: 0, y: 0);
+        for (var y = 0; y < height; y++) {
+            for (var x = 0; x < width; x++) {
+                if (grid[y][x] == 'S') {
+                    starting = (x, y);
+                    grid[y][x] = '.';
+                }
+            }
+        }
+        
+        var altitude = 384400;
+        var distance = 0;
+        var rightMovement = stepsToGoodCol;
+        while (altitude > 0) {
+            if (rightMovement != 0) {
+                starting.x += Math.Sign(stepsToGoodCol);
+                rightMovement += -Math.Sign(stepsToGoodCol);
+            } else {
+                starting.y = (starting.y + 1) % height;
+                distance++;
+            }
+
+            altitude += changes[grid[starting.y][starting.x]];
+        }
+
+        return distance;
     }
 }

@@ -30,7 +30,10 @@ public class Codyssi202518Tests
     public void Part1_2() => Sut.RunPart1(Input2, 10, 15, 60).Should().Be(32545);
 
     [Test]
-    public void Part2() => Sut.Part2(Input1).Answer.Should().Be("0");
+    public void Part2_1() => Sut.RunPart2(Input1, 3, 3, 5, 2, 2, 4, 0).Should().Be(23);
+    
+    [Test]
+    public void Part2_2() => Sut.RunPart2(Input2, 10, 15, 60, 9, 14, 59, 0).Should().Be(217);
 
     [Test]
     public void Part3() => Sut.Part3(Input1).Answer.Should().Be("0");

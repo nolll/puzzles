@@ -8,7 +8,7 @@ public class Codyssi202501 : CodyssiPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var lines = input.Split(LineBreaks.Single).ToList();
+        var lines = input.Split(LineBreaks.Single);
         var numbers = lines.SkipLast(1).Select(int.Parse).ToArray();
         var multipliers = GetMultipliers(lines.Last());
         var n = multipliers.Select((t, i) => numbers[i] * t).Sum();
@@ -29,7 +29,7 @@ public class Codyssi202501 : CodyssiPuzzle
     public PuzzleResult Part3(string input)
     {
         var lines = input.Split(LineBreaks.Single).ToList();
-        var digits = lines.SkipLast(1).ToArray();
+        var digits = lines.SkipLast(1).Select(int.Parse).ToArray();
         var numbers = new List<int>();
         for (var i = 0; i < digits.Length; i += 2)
         {

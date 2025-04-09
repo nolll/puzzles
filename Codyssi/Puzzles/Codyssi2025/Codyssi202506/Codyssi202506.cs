@@ -1,11 +1,14 @@
 using Pzl.Common;
 using Pzl.Tools.Chars;
+using Pzl.Tools.Maths;
 
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202506;
 
 [Name("Lotus Scramble")]
 public class Codyssi202506 : CodyssiPuzzle
 {
+    private const int UpperBound = 52;
+
     public PuzzleResult Part1(string input)
     {
         var count = input.Select(Chars.IsAlphabetic).Select(isLetter => isLetter ? 1 : 0).Sum();
@@ -31,19 +34,7 @@ public class Codyssi202506 : CodyssiPuzzle
         return new PuzzleResult(scores.Sum(), "31fa3178274e6a4bb86259563a07d7d0");
     }
 
-    private static int CalculateScoreFromPrevious(int prevScore)
-    {
-        const int limit = 52;
-        var mod = prevScore * 2 - 5;
-        
-        while (mod < 1)
-            mod += limit;
-        
-        while (mod > limit)
-            mod -= limit;
-        
-        return mod;
-    }
+    private static int CalculateScoreFromPrevious(int prevScore) => MathTools.Clamp(prevScore * 2 - 5, 1, UpperBound);
 
     private static int GetScore(char c)
     {

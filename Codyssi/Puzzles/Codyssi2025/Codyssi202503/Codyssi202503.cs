@@ -17,8 +17,7 @@ public class Codyssi202503 : CodyssiPuzzle
             foreach (var pile in piles)
             {
                 var nums = Numbers.IntsFromString(pile.Replace('-', ' '));
-                var count = nums[1] - nums[0] + 1;
-                boxCount += count;
+                boxCount += nums[1] - nums[0] + 1;
             }
         }
         

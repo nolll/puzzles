@@ -3,6 +3,7 @@ using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Debug;
 using Pzl.Tools.Lists;
+using Pzl.Tools.Maths;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202516;
@@ -67,7 +68,7 @@ public class Codyssi202516 : CodyssiPuzzle
                 CubeFace[] faces = wrapAround ? [cube.Front, cube.Right, cube.Back, cube.Left] : [cube.Front];
                 foreach (var face in faces)
                 {
-                    var values = face.ReadRow(row).Select(o => AdjustValue(o + v)).ToList();
+                    var values = face.ReadRow(row).Select(o => Clamp(o + v)).ToList();
                     face.WriteRow(row, values);
                     face.Absorbtion += v * values.Count;
                 }
@@ -78,14 +79,14 @@ public class Codyssi202516 : CodyssiPuzzle
                 (CubeFace face, int col)[] faces = wrapAround ? [(cube.Front, col), (cube.Down, col), (cube.Back, cube.Back.Matrix.XMax - col), (cube.Up, col)] : [(cube.Front, col)];
                 foreach (var (face, c) in faces)
                 {
-                    var values = face.ReadColumn(c).Select(o => AdjustValue(o + v)).ToList();
+                    var values = face.ReadColumn(c).Select(o => Clamp(o + v)).ToList();
                     face.WriteColumn(c, values);
                     face.Absorbtion += v * values.Count;
                 }
             }
             else
             {
-                var values = cube.Front.ReadAll().Select(o => AdjustValue(o + v)).ToList();
+                var values = cube.Front.ReadAll().Select(o => Clamp(o + v)).ToList();
                 cube.Front.WriteAll(values);
                 cube.Front.Absorbtion += v * values.Count;
             }
@@ -100,13 +101,7 @@ public class Codyssi202516 : CodyssiPuzzle
         return cube;
     }
 
-    private static int AdjustValue(int v)
-    {
-        while (v > 100) 
-            v -= 100;
-        
-        return v;
-    }
+    private static int Clamp(int v) => MathTools.Clamp(v, 1, 100);
 
     private class Cube(int size)
     {

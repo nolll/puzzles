@@ -1,3 +1,5 @@
+using Pzl.Tools.Maths;
+
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202518;
 
 public class DebrisSystem(int sizex, int sizey, int sizez, Debris[] debris)
@@ -10,7 +12,6 @@ public class DebrisSystem(int sizex, int sizey, int sizez, Debris[] debris)
     private int Maxz { get; } = sizez - 1;
     private const int Minw = -1;
     private const int Maxw = 1;
-    private const int Diffw = Maxw - Minw + 1;
         
     private readonly Dictionary<int, Dictionary<(int x, int y, int z, int w), int>> _cache = new();
 
@@ -39,21 +40,10 @@ public class DebrisSystem(int sizex, int sizey, int sizez, Debris[] debris)
         ClampW(d.W + d.Vw * time)
     );
 
-    private int ClampX(int v) => Clamp(Minx, Maxx, sizex, v);
-    private int ClampY(int v) => Clamp(Miny, Maxy, sizey, v);
-    private int ClampZ(int v) => Clamp(Minz, Maxz, sizez, v);
-    private int ClampW(int v) => Clamp(Minw, Maxw, Diffw, v);
-
-    private static int Clamp(int min, int max, int diff, int v)
-    {
-        while (v < min)
-            v += diff;
-            
-        while (v > max)
-            v -= diff;
-
-        return v;
-    }
+    private int ClampX(int v) => MathTools.Clamp(v, Minx, Maxx);
+    private int ClampY(int v) => MathTools.Clamp(v, Miny, Maxy);
+    private int ClampZ(int v) => MathTools.Clamp(v, Minz, Maxz);
+    private int ClampW(int v) => MathTools.Clamp(v, Minw, Maxw);
         
     public int Count => debris.Length;
 

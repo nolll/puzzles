@@ -31,4 +31,14 @@ public class MathToolsTests
         result.First().Should().Be((1, 21));
         result.Last().Should().Be((3, 7));
     }
+
+    [TestCase(1, 1)]
+    [TestCase(-1, 99)]
+    [TestCase(101, 1)]
+    public void Clamp(int input, int expected) => MathTools.Clamp(input, 1, 100).Should().Be(expected);
+
+    [TestCase(1, 1)]
+    [TestCase(-1, 99)]
+    [TestCase(101, 1)]
+    public void Clamp(long input, long expected) => MathTools.Clamp(input, 1, 100).Should().Be(expected);
 }

@@ -1,6 +1,7 @@
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Lists;
+using Pzl.Tools.Maths;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202512;
@@ -130,7 +131,7 @@ public class Codyssi202512 : CodyssiPuzzle
         return best;
     }
 
-    private void Shift(Matrix<int> grid, string what, int which, int steps)
+    private static void Shift(Matrix<int> grid, string what, int which, int steps)
     {
         if (what == "COL")
             ShiftCol(grid, which, steps);
@@ -159,7 +160,7 @@ public class Codyssi202512 : CodyssiPuzzle
         }
     }
     
-    private void ShiftRow(Matrix<int> grid, int row, int steps)
+    private static void ShiftRow(Matrix<int> grid, int row, int steps)
     {
         var values = new List<int>();
         for (var col = 0; col < grid.Width; col++)
@@ -202,7 +203,7 @@ public class Codyssi202512 : CodyssiPuzzle
     {
         foreach (var coord in coords)
         {
-            grid.WriteValueAt(coord, Clamp(func(grid.ReadValueAt(coord), amount)));
+            grid.WriteValueAt(coord, (int)Clamp(func(grid.ReadValueAt(coord), amount)));
         }
     }
 
@@ -213,14 +214,5 @@ public class Codyssi202512 : CodyssiPuzzle
         _ => (a, b) => a * b
     };
 
-    private static int Clamp(long v)
-    {
-        while (v < 0)
-            v += UpperBound;
-
-        while (v >= UpperBound)
-            v -= UpperBound;
-
-        return (int)v;
-    }
+    private static long Clamp(long v) => MathTools.Clamp(v, 0, UpperBound);
 }

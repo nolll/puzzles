@@ -46,4 +46,30 @@ public static class MathTools
             })
             .Distinct()
             .ToList();
+
+    public static int Clamp(int v, int min, int max)
+    {
+        var incr = max - min + 1;
+        
+        while (v < min)
+            v += incr;
+            
+        while (v > max)
+            v -= incr;
+
+        return v;
+    }
+    
+    public static long Clamp(long v, long min, long max)
+    {
+        var incr = max - min + 1;
+        
+        while (v < min)
+            v += incr;
+            
+        while (v > max)
+            v -= incr;
+
+        return v;
+    }
 }

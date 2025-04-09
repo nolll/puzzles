@@ -113,6 +113,22 @@ public class Matrix<T> where T : struct
     
     public void ClearValueAt(MatrixAddress coord) => _matrix.Remove(coord);
 
+    public IEnumerable<T> ReadRowValues(int y)
+    {
+        for (var x = XMin; x <= XMax; x++)
+        {
+            yield return ReadValueAt(x, y);
+        }
+    }
+    
+    public IEnumerable<T> ReadColValues(int x)
+    {
+        for (var y = YMin; y <= YMax; y++)    
+        {
+            yield return ReadValueAt(x, y);
+        }
+    }
+
     public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
     public IList<T> OrthogonalAdjacentValuesTo(MatrixAddress address) => OrthogonalAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
     public IList<MatrixAddress> OrthogonalAdjacentCoords => OrthogonalAdjacentCoordsTo(Address);

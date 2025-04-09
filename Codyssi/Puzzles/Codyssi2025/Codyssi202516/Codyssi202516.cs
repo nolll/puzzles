@@ -1,6 +1,7 @@
 using System.Numerics;
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Debug;
 using Pzl.Tools.Lists;
 using Pzl.Tools.Strings;
 
@@ -21,9 +22,7 @@ public class Codyssi202516 : CodyssiPuzzle
     {
         var cube = Execute(input, gridSize);
         var top2 = cube.Faces.Select(o => (long)o.Absorbtion).OrderDescending().Take(2).ToArray();
-        var p = top2.First() * top2.Last();
-
-        return p;
+        return top2.First() * top2.Last();
     }
     
     public PuzzleResult Part2(string input)
@@ -31,26 +30,22 @@ public class Codyssi202516 : CodyssiPuzzle
         var result = RunPart2(input, GridSize);
         return new PuzzleResult(result, "178f79ec48eeee9f4a62432ee8003d1e");
     }
-    
-    public BigInteger RunPart2(string input, int gridSize)
-    {
-        var cube = Execute(input, gridSize);
-        var sums = cube.Faces.Select(o => o.Matrix).Select(GetBestSum).ToArray();
-        return sums.Aggregate(new BigInteger(1), (product, o) => product * o);
-    }
-    
+
+    public BigInteger RunPart2(string input, int gridSize) => Execute(input, gridSize).Faces
+        .Select(o => o.Matrix)
+        .Select(GetBestSum)
+        .Aggregate(new BigInteger(1), (product, o) => product * o);
+
     public PuzzleResult Part3(string input)
     {
         var result = RunPart3(input, GridSize);
         return new PuzzleResult(result, "9215f7b88a764c37a7227b14051e4267");
     }
-    
-    public BigInteger RunPart3(string input, int gridSize)
-    {
-        var cube = Execute(input, gridSize, true);
-        var sums = cube.Faces.Select(o => o.Matrix).Select(GetBestSum).ToArray();
-        return sums.Aggregate(new BigInteger(1), (product, o) => product * o);
-    }
+
+    public BigInteger RunPart3(string input, int gridSize) => Execute(input, gridSize, true).Faces
+        .Select(o => o.Matrix)
+        .Select(GetBestSum)
+        .Aggregate(new BigInteger(1), (product, o) => product * o);
 
     private Cube Execute(string input, int gridSize, bool wrapAround = false)
     {
@@ -105,7 +100,7 @@ public class Codyssi202516 : CodyssiPuzzle
         return cube;
     }
 
-    private int AdjustValue(int v)
+    private static int AdjustValue(int v)
     {
         while (v > 100) 
             v -= 100;
@@ -291,24 +286,12 @@ public class Codyssi202516 : CodyssiPuzzle
         var best = 0L;
         for (var y = grid.YMin; y <= grid.YMax; y++)
         {
-            var sum = 0L;
-            for (var x = grid.XMin; x <= grid.XMax; x++)
-            {
-                sum += grid.ReadValueAt(x, y);
-            }
-
-            best = Math.Max(best, sum);
+            best = Math.Max(best, grid.ReadRowValues(y).Sum());
         }
         
         for (var x = grid.XMin; x <= grid.XMax; x++)
         {
-            var sum = 0L;
-            for (var y = grid.YMin; y <= grid.YMax; y++)    
-            {
-                sum += grid.ReadValueAt(x, y);
-            }
-
-            best = Math.Max(best, sum);
+            best = Math.Max(best, grid.ReadColValues(x).Sum());
         }
 
         return best;

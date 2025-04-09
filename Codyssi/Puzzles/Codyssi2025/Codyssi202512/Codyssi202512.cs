@@ -112,47 +112,19 @@ public class Codyssi202512 : CodyssiPuzzle
                 Modify(grid, parts[0], parts[2], int.Parse(parts[3]) - 1, int.Parse(parts[1]));
                 break;
         }
-
-        //Print(grid);
     }
-
-    private void Print(Matrix<int> grid)
-    {
-        for (var y = grid.YMin; y <= grid.YMax; y++)
-        {
-            for (var x = grid.XMin; x <= grid.XMax; x++)
-            {
-                Console.Write(grid.ReadValueAt(x, y).ToString().PadLeft(5, ' '));
-            }
-            
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-    }
-
-    private long GetBestSum(Matrix<int> grid)
+    
+    private static long GetBestSum(Matrix<int> grid)
     {
         var best = 0L;
         for (var y = grid.YMin; y <= grid.YMax; y++)
         {
-            var sum = 0L;
-            for (var x = grid.XMin; x <= grid.XMax; x++)
-            {
-                sum += grid.ReadValueAt(x, y);
-            }
-
-            best = Math.Max(best, sum);
+            best = Math.Max(best, grid.ReadRowValues(y).Select(o => (long)o).Sum());
         }
         
         for (var x = grid.XMin; x <= grid.XMax; x++)
         {
-            var sum = 0L;
-            for (var y = grid.YMin; y <= grid.YMax; y++)    
-            {
-                sum += grid.ReadValueAt(x, y);
-            }
-
-            best = Math.Max(best, sum);
+            best = Math.Max(best, grid.ReadColValues(x).Select(o => (long)o).Sum());
         }
 
         return best;
@@ -166,7 +138,7 @@ public class Codyssi202512 : CodyssiPuzzle
             ShiftRow(grid, which, steps);
     }
 
-    private void ShiftCol(Matrix<int> grid, int col, int steps)
+    private static void ShiftCol(Matrix<int> grid, int col, int steps)
     {
         var values = new List<int>();
         for (var row = 0; row < grid.Height; row++)
@@ -208,61 +180,40 @@ public class Codyssi202512 : CodyssiPuzzle
         }
     }
 
-    private void ModifyAll(Matrix<int> grid, string modification, int amount)
-    {
-        var coords = grid.Coords;
-        Modify(grid, coords, modification, amount);
-    }
+    private static void ModifyAll(Matrix<int> grid, string modification, int amount) => 
+        Modify(grid, grid.Coords, modification, amount);
 
-    private void Modify(Matrix<int> grid, string modification, string what, int which, int amount)
-    {
-        var coords = what == "COL"
+    private static void Modify(Matrix<int> grid, string modification, string what, int which, int amount) => 
+        Modify(grid, GetCoordsToModify(grid, what, which), modification, amount);
+
+    private static IEnumerable<MatrixAddress> GetCoordsToModify(Matrix<int> grid, string what, int which) => 
+        what == "COL"
             ? grid.Coords.Where(o => o.X == which)
             : grid.Coords.Where(o => o.Y == which);
-        Modify(grid, coords, modification, amount);
-    }
-    
-    private void Modify(Matrix<int> grid, IEnumerable<MatrixAddress> coords, string modification, int amount)
-    {
-        switch (modification)
-        {
-            case "ADD":
-                Add(grid, coords, amount);
-                break;
-            case "SUB":
-                Sub(grid, coords, amount);
-                break;
-            default:
-                Multiply(grid, coords, amount);
-                break;
-        }
-    }
-    
-    private void Add(Matrix<int> grid, IEnumerable<MatrixAddress> coords, int amount)
+
+    private static void Modify(Matrix<int> grid, IEnumerable<MatrixAddress> coords, string modification, int amount) => 
+        ApplyModification(grid, GetModificationFunc(modification), coords, amount);
+
+    private static void ApplyModification(
+        Matrix<int> grid, 
+        Func<int, int, int> func, 
+        IEnumerable<MatrixAddress> coords, 
+        int amount)
     {
         foreach (var coord in coords)
         {
-            grid.WriteValueAt(coord, AdjustValue(grid.ReadValueAt(coord) + amount));
-        }
-    }
-    
-    private void Sub(Matrix<int> grid, IEnumerable<MatrixAddress> coords, int amount)
-    {
-        foreach (var coord in coords)
-        {
-            grid.WriteValueAt(coord, AdjustValue(grid.ReadValueAt(coord) - amount));
-        }
-    }
-    
-    private void Multiply(Matrix<int> grid, IEnumerable<MatrixAddress> coords, int amount)
-    {
-        foreach (var coord in coords)
-        {
-            grid.WriteValueAt(coord, AdjustValue(grid.ReadValueAt(coord) * (long)amount));
+            grid.WriteValueAt(coord, Clamp(func(grid.ReadValueAt(coord), amount)));
         }
     }
 
-    private int AdjustValue(long v)
+    private static Func<int, int, int> GetModificationFunc(string modification) => modification switch
+    {
+        "ADD" => (a, b) => a + b,
+        "SUB" => (a, b) => a - b,
+        _ => (a, b) => a * b
+    };
+
+    private static int Clamp(long v)
     {
         while (v < 0)
             v += UpperBound;

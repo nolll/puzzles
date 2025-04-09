@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Debug;
 
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202518;
 
@@ -40,7 +41,7 @@ public class Codyssi202518 : CodyssiPuzzle
         const int tw = 0;
 
         var debrisSystem = DebrisParser.Parse(input, sizex, sizey, sizez);
-
+        
         var seen = new HashSet<(int x, int y, int z, int w, int damage, int time)>();
         var queue = new Queue<(int x, int y, int z, int w, int damage, int time)>();
         queue.Enqueue((0, 0, 0, 0, 0, 0));

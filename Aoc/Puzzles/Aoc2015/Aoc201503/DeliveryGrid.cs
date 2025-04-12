@@ -11,20 +11,23 @@ public class DeliveryGrid
 
     public void DeliverBySantaAndRobot(string input)
     {
-        var allDirections = input.ToCharArray();
-        var santaDirections = new List<char>();
-        var robotDirections = new List<char>();
-        for (var i = 0; i < allDirections.Length; i++)
-        {
-            if (i % 2 == 0)
-                santaDirections.Add(allDirections[i]);
-            else
-                robotDirections.Add(allDirections[i]);
-        }
-
+        var (santaDirections, robotDirections) = SplitDirections(input.ToCharArray());
         DeliverAccordingToDirections(santaDirections);
         _matrix.MoveTo(_matrix.StartAddress);
         DeliverAccordingToDirections(robotDirections);
+    }
+
+    private static (IEnumerable<char> santa, IEnumerable<char> robot) SplitDirections(char[] allDirections)
+    {
+        var santaDirections = new List<char>();
+        var robotDirections = new List<char>();
+        for (var i = 0; i < allDirections.Length; i += 2)
+        {
+            santaDirections.Add(allDirections[i]);
+            robotDirections.Add(allDirections[i + 1]);
+        }
+
+        return (santaDirections, robotDirections);
     }
 
     private void DeliverAccordingToDirections(IEnumerable<char> directions)

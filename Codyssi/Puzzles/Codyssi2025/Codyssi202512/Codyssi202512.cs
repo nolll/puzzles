@@ -9,7 +9,8 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202512;
 [Name("Challenging the Whirlpool")]
 public class Codyssi202512 : CodyssiPuzzle
 {
-    private const long UpperBound = 1073741824;
+    private const long MaxValue = 1073741824;
+    private const long UpperBound = MaxValue - 1;
 
     public PuzzleResult Part1(string input)
     {

@@ -65,22 +65,22 @@ public class Codyssi202516Tests
                                   """;
 
     [Test]
-    public void Part1() => Sut.RunPart1(Input1, 3).Should().Be(201474);
+    public void Part1() => Sut.Part1(Input1, 3).Answer.Should().Be("201474");
 
     [Test]
-    public void Part2_1() => Sut.RunPart2(Input1, 3).Should().Be(118727856);
+    public void Part2_1() => Sut.Part2(Input1, 3).Answer.Should().Be("118727856");
     
     [Test]
-    public void Part2_2() => Sut.RunPart2(Input2, 80).Should().Be(BigInteger.Parse("369594451623936000000"));
+    public void Part2_2() => Sut.Part2(Input2, 80).Answer.Should().Be("369594451623936000000");
     
     [Test]
-    public void Part2_3() => Sut.RunPart2(Input3, 80).Should().Be(BigInteger.Parse("41477439119464857600000"));
+    public void Part2_3() => Sut.Part2(Input3, 80).Answer.Should().Be("41477439119464857600000");
 
     [Test]
-    public void Part3_1() => Sut.RunPart3(Input1, 3).Should().Be(BigInteger.Parse("59477096746944"));
+    public void Part3_1() => Sut.Part3(Input1, 3).Answer.Should().Be("59477096746944");
     
     [Test]
-    public void Part3_2() => Sut.RunPart3(Input2, 80).Should().Be(BigInteger.Parse("118479211258970523303936"));
+    public void Part3_2() => Sut.Part3(Input2, 80).Answer.Should().Be("118479211258970523303936");
 
     private static Codyssi202516 Sut => new();
 }

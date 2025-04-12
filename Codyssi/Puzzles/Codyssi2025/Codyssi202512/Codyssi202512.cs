@@ -132,13 +132,12 @@ public class Codyssi202512 : CodyssiPuzzle
         return best;
     }
 
-    private static void Shift(Matrix<int> grid, string what, int which, int steps)
-    {
-        if (what == "COL")
-            ShiftCol(grid, which, steps);
-        else
-            ShiftRow(grid, which, steps);
-    }
+    private static void Shift(Matrix<int> grid, string what, int which, int steps) => 
+        GetShiftFunc(what)(grid, which, steps);
+
+    private static Action<Matrix<int>, int, int> GetShiftFunc(string what) => what == "COL" 
+        ? ShiftCol 
+        : ShiftRow;
 
     private static void ShiftCol(Matrix<int> grid, int col, int steps)
     {

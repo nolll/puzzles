@@ -20,12 +20,13 @@ public abstract class AdventCoinMiner
         }
     }
 
-    private static Func<byte[], bool> GetCompareFunc(int leadingZeros)
-        => leadingZeros == 5 ? StartsWithFiveZeros : StartsWithSixZeros;
+    private static Func<byte[], bool> GetCompareFunc(int leadingZeros) => leadingZeros == 5 
+        ? StartsWithFiveZeros 
+        : StartsWithSixZeros;
 
-    private static bool StartsWithFiveZeros(byte[] bytes) 
-        => bytes[0] == 0 && bytes[1] == 0 && bytes[2] < 10;
+    private static bool StartsWithFiveZeros(byte[] bytes) => 
+        bytes[0] == 0 && bytes[1] == 0 && bytes[2] < 10;
 
-    private static bool StartsWithSixZeros(byte[] bytes) 
-        => bytes[0] == 0 && bytes[1] == 0 && bytes[2] == 0;
+    private static bool StartsWithSixZeros(byte[] bytes) => 
+        bytes[0] == 0 && bytes[1] == 0 && bytes[2] == 0;
 }

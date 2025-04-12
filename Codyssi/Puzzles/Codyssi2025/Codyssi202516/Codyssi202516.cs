@@ -13,42 +13,33 @@ public class Codyssi202516 : CodyssiPuzzle
 {
     private const int GridSize = 80;
 
-    public PuzzleResult Part1(string input)
-    {
-        var result = RunPart1(input, GridSize);
-        return new PuzzleResult(result, "daf580450a171146930ce60cd7756da5");
-    }
-
-    public long RunPart1(string input, int gridSize)
+    public PuzzleResult Part1(string input, int gridSize = GridSize)
     {
         var cube = Execute(input, gridSize);
         var top2 = cube.Faces.Select(o => (long)o.Absorbtion).OrderDescending().Take(2).ToArray();
-        return top2.First() * top2.Last();
+        var result = top2.First() * top2.Last();
+        return new PuzzleResult(result, "daf580450a171146930ce60cd7756da5");
     }
     
-    public PuzzleResult Part2(string input)
+    public PuzzleResult Part2(string input, int gridSize = GridSize)
     {
-        var result = RunPart2(input, GridSize);
+        var result = Execute(input, gridSize).Faces
+            .Select(o => o.Matrix)
+            .Select(GetBestSum)
+            .Aggregate(new BigInteger(1), (product, o) => product * o);
         return new PuzzleResult(result, "178f79ec48eeee9f4a62432ee8003d1e");
     }
 
-    public BigInteger RunPart2(string input, int gridSize) => Execute(input, gridSize).Faces
-        .Select(o => o.Matrix)
-        .Select(GetBestSum)
-        .Aggregate(new BigInteger(1), (product, o) => product * o);
-
-    public PuzzleResult Part3(string input)
+    public PuzzleResult Part3(string input, int gridSize = GridSize)
     {
-        var result = RunPart3(input, GridSize);
+        var result = Execute(input, gridSize, true).Faces
+            .Select(o => o.Matrix)
+            .Select(GetBestSum)
+            .Aggregate(new BigInteger(1), (product, o) => product * o);
         return new PuzzleResult(result, "9215f7b88a764c37a7227b14051e4267");
     }
 
-    public BigInteger RunPart3(string input, int gridSize) => Execute(input, gridSize, true).Faces
-        .Select(o => o.Matrix)
-        .Select(GetBestSum)
-        .Aggregate(new BigInteger(1), (product, o) => product * o);
-
-    private Cube Execute(string input, int gridSize, bool wrapAround = false)
+    private static Cube Execute(string input, int gridSize, bool wrapAround = false)
     {
         var cube = new Cube(gridSize);
 

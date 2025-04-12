@@ -10,30 +10,25 @@ public class Codyssi202518 : CodyssiPuzzle
     private const int SizeY = 15;
     private const int SizeZ = 60;
 
-    public PuzzleResult Part1(string input)
+    public PuzzleResult Part1(string input, int sizex = SizeX, int sizey = SizeY, int sizez = SizeZ)
     {
-        var result = RunPart1(input, SizeX, SizeY, SizeZ);
+        var result = DebrisParser.Parse(input, sizex, sizey, sizez).Count;
         return new PuzzleResult(result, "a8c76203a26abde805a1a11cbd419b79");
     }
     
-    public PuzzleResult Part2(string input)
+    public PuzzleResult Part2(string input, int sizex = SizeX, int sizey = SizeY, int sizez = SizeZ)
     {
-        const int acceptableDamage = 0;
-        var result = RunPart2And3(input, SizeX, SizeY, SizeZ, acceptableDamage);
+        var result = RunPart2And3(input, sizex, sizey, sizez, 0);
         return new PuzzleResult(result, "c8dcfc39bf271a441c80feaf46160a32");
     }
     
-    public PuzzleResult Part3(string input)
+    public PuzzleResult Part3(string input, int sizex = SizeX, int sizey = SizeY, int sizez = SizeZ)
     {
-        const int acceptableDamage = 3;
-        var result = RunPart2And3(input, SizeX, SizeY, SizeZ, acceptableDamage);
+        var result = RunPart2And3(input, sizex, sizey, sizez, 3);
         return new PuzzleResult(result, "f81b4b34e7f317b195c2bfb97a67f3de");
     }
 
-    public int RunPart1(string input, int sizex, int sizey, int sizez) => 
-        DebrisParser.Parse(input, sizex, sizey, sizez).Count;
-    
-    public int RunPart2And3(string input, int sizex, int sizey, int sizez, int acceptableDamage)
+    private static int RunPart2And3(string input, int sizex, int sizey, int sizez, int acceptableDamage)
     {
         var tx = sizex - 1;
         var ty = sizey - 1;
@@ -69,8 +64,6 @@ public class Codyssi202518 : CodyssiPuzzle
                     continue;
                 
                 var a = (ax, ay, az, aw, nd, newtime);
-                if (seen.Contains(a))
-                    continue;
                 
                 queue.Enqueue(a);
             }

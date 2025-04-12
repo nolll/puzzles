@@ -10,21 +10,13 @@ public class Aoc201505Tests
     [TestCase("jchzalrnumimnmhp", false)]
     [TestCase("haegwjzuvuyypxyu", false)]
     [TestCase("dvszwmarrgswjxmb", false)]
-    public void NaughtyOrNice_AlgorithmOne(string input, bool expected)
-    {
-        var isNice = NaughtyOrNiceEvaluator.IsNice1(input);
-
-        isNice.Should().Be(expected);
-    }
+    public void NaughtyOrNice_AlgorithmOne(string input, bool expected) => 
+        NaughtyOrNiceEvaluator.IsNice1(input).Should().Be(expected);
 
     [TestCase("qjhvhtzxzqqjkmpb", true)]
     [TestCase("xxyxx", true)]
     [TestCase("uurcxstgmygtbstg", false)]
     [TestCase("ieodomkazucvgmuy", false)]
-    public void NaughtyOrNice_AlgorithmTwo(string input, bool expected)
-    {
-        var isNice = NaughtyOrNiceEvaluator.IsNice2(input);
-
-        isNice.Should().Be(expected);
-    }
+    public void NaughtyOrNice_AlgorithmTwo(string input, bool expected) => 
+        NaughtyOrNiceEvaluator.IsNice2(input).Should().Be(expected);
 }

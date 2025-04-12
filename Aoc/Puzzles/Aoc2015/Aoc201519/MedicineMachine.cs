@@ -1,3 +1,4 @@
+using Pzl.Tools.Lists;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201519;
@@ -51,9 +52,7 @@ public class MedicineMachine
 
     private static MoleculeReplacement ParseReplacement(string s)
     {
-        var parts = s.Split(" => ");
-        var input = parts[0];
-        var output = parts[1];
+        var (input, output) = s.Split(" => ");
         return new MoleculeReplacement(input, output);
     }
 }

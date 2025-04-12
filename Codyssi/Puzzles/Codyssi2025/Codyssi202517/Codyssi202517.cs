@@ -79,9 +79,7 @@ public class Codyssi202517 : CodyssiPuzzle
     {
         var state = stair + "_" + floor;
         if (cache.TryGetValue(state, out var dfs))
-        {
             return dfs;
-        }
 
         var config = stairById[stair];
         if (config.StairTo == "END" && config.FloorTo == floor)
@@ -91,9 +89,7 @@ public class Codyssi202517 : CodyssiPuzzle
         }
 
         if (config.StairTo == "END" && floor > config.FloorTo)
-        {
             return new BigInteger(0);
-        }
 
         var nextJumps = new HashSet<string>();
         foreach (var move in moves)
@@ -117,16 +113,12 @@ public class Codyssi202517 : CodyssiPuzzle
         while (true)
         {
             if (!stairById.TryGetValue(stair, out var config))
-            {
                 return;
-            }
 
             if (stepsLeft == 0)
             {
-                if (floor >= config.FloorFrom && floor <= config.FloorTo)
-                {
+                if (floor >= config.FloorFrom && floor <= config.FloorTo) 
                     jumps.Add(stair + "_" + floor);
-                }
             }
             else
             {

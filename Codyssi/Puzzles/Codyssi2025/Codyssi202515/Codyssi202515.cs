@@ -112,7 +112,7 @@ public class Codyssi202515 : CodyssiPuzzle
             
             return paths[0][i].Parent!;
         }
-
+        
         throw new Exception("Common ancestor not found");
     }
 }

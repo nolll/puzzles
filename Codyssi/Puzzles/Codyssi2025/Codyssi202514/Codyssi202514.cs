@@ -23,9 +23,9 @@ public class Codyssi202514 : CodyssiPuzzle
         return new PuzzleResult(result, "034d794512e58624f111ea6c90e4abcc");
     }
     
-    public PuzzleResult Part3(string input)
+    public PuzzleResult Part3(string input, int unitCount = 300)
     {
-        var result = RunPart2And3(input, 300);
+        var result = RunPart2And3(input, unitCount);
         return new PuzzleResult(result, "3bafbd664e33fa504df74844376f1c19");
     }
 

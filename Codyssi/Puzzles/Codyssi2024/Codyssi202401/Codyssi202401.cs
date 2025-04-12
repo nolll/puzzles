@@ -12,10 +12,11 @@ public class Codyssi202401 : CodyssiPuzzle
         return new PuzzleResult(sum, "2c9b60f4690033fb65c71e08bbc479a7");
     }
 
-    public PuzzleResult Part2(string input) => new(RunPart2(input, 20), "c0e85368ae1524b621528b134724ecaa");
-
-    public int RunPart2(string input, int freeItemCount) => 
-        input.Split(LineBreaks.Single).Select(int.Parse).Order().SkipLast(freeItemCount).Sum();
+    public PuzzleResult Part2(string input, int freeItemCount = 20)
+    {
+        var sum = input.Split(LineBreaks.Single).Select(int.Parse).Order().SkipLast(freeItemCount).Sum();
+        return new PuzzleResult(sum, "c0e85368ae1524b621528b134724ecaa");
+    }
 
     public PuzzleResult Part3(string input)
     {

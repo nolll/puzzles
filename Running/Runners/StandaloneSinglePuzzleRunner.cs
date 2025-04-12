@@ -81,10 +81,7 @@ public class StandaloneSinglePuzzleRunner(
         PrintTime(puzzleIndex);
         var timer = new Timer();
         
-        var task = Task.Run(() =>
-        { 
-            result = func.Invoke();
-        });
+        var task = Task.Run(() => result = func.Invoke());
         
         while (!task.IsCompleted)
         {
@@ -92,16 +89,15 @@ public class StandaloneSinglePuzzleRunner(
             Thread.Sleep(ProgressWaitTime);
         }
 
-        if (task.IsFaulted && task.Exception is not null)
+        if (task is { IsFaulted: true, Exception: not null })
             throw task.Exception;
 
         if (task.IsFaulted)
             return VerifiedPuzzleResult.Failed;
 
-        if (result is not null)
-            return resultVerifier.Verify(result);
-            
-        return VerifiedPuzzleResult.Empty;
+        return result is not null 
+            ? resultVerifier.Verify(result) 
+            : VerifiedPuzzleResult.Empty;
     }
 
     private static void PrintTime(int puzzleNumber, TimeSpan? time = null)

@@ -5,42 +5,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202001;
 
 public class Aoc202001Tests
 {
+    private const string Input = """
+                                 1721
+                                 979
+                                 366
+                                 299
+                                 675
+                                 1456
+                                 """;
+    
     [Test]
-    public void FindTwoNumbers()
-    {
-        const string input = """
-                             1721
-                             979
-                             366
-                             299
-                             675
-                             1456
-                             """;
-
-        var sumFinder = new SumFinder(input.Trim());
-        var numbers = sumFinder.FindNumbersThatAddUpTo(2020, 2);
-
-        numbers[0].Should().Be(1721);
-        numbers[1].Should().Be(299);
-    }
-
+    public void Part1() => Sut.Part1(Input).Answer.Should().Be("514579");
+    
     [Test]
-    public void FindThreeNumbers()
-    {
-        const string input = """
-                             1721
-                             979
-                             366
-                             299
-                             675
-                             1456
-                             """;
+    public void Part2() => Sut.Part2(Input).Answer.Should().Be("241861950");
 
-        var sumFinder = new SumFinder(input.Trim());
-        var numbers = sumFinder.FindNumbersThatAddUpTo(2020, 3);
-
-        numbers[0].Should().Be(979);
-        numbers[1].Should().Be(366);
-        numbers[2].Should().Be(675);
-    }
+    private static Aoc202001 Sut => new();
 }

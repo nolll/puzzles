@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201525;
 [Name("Let It Snow")]
 public class Aoc201525 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    public PuzzleResult Part1(string input)
     {
         var p = GetParams(input);
         var codeFinder = new WeatherMachineCodeFinder();
@@ -13,7 +13,7 @@ public class Aoc201525 : AocPuzzle
         return new PuzzleResult(code, "d755f54368cc6c88fb38633954dddb9f");
     }
 
-    private Params GetParams(string input)
+    private static Params GetParams(string input)
     {
         var words = input.Replace(".", "").Replace(",", "").Split(' ');
 

@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201522;
 [Name("Wizard Simulator 20XX")]
 public class Aoc201522 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    public PuzzleResult Part1(string input)
     {
         var p = GetParams(input);
         var simulator = new WizardRpgSimulator(WizardRpgGameMode.Easy);
@@ -14,7 +14,7 @@ public class Aoc201522 : AocPuzzle
         return new PuzzleResult(leastManaRequiredToWinEasy, "1f020968b40b91444beee0e8a33624d1");
     }
 
-    public PuzzleResult RunPart2(string input)
+    public PuzzleResult Part2(string input)
     {
         var p = GetParams(input);
         var simulator = new WizardRpgSimulator(WizardRpgGameMode.Hard);
@@ -22,7 +22,7 @@ public class Aoc201522 : AocPuzzle
         return new PuzzleResult(leastManaRequiredToWinHard, "d76b3b0ad8b9bce7fab0c1ba0de0d20e");
     }
 
-    private Params GetParams(string input)
+    private static Params GetParams(string input)
     {
         var rows = StringReader.ReadLines(input);
 

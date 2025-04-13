@@ -14,8 +14,8 @@ public class Aoc201516Tests
                              Sue 3: vizslas: 7, pomeranians: 1, akitas: 10
                              """;
 
-        var sueSelector = new SueSelector(input.Trim());
-
-        sueSelector.SueNumberPart1.Should().Be(2);
+        Sut.Part1(input).Answer.Should().Be("2");
     }
+
+    private static Aoc201516 Sut => new();
 }

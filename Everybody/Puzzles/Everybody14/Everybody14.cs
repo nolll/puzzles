@@ -93,18 +93,13 @@ public class Everybody14 : EverybodyPuzzle
         foreach (var coord in coords)
         {
             var nbrs = OrthogonalAdjacentCoords(coord);
-            foreach (var nbr in nbrs)
-            {
-                if(coords.Contains(nbr)) 
-                    edges.Add(new GraphEdge(Id(coord), Id(nbr)));
-            }
+            edges.AddRange(nbrs.Where(nbr => coords.Contains(nbr)).Select(nbr => new GraphEdge(Id(coord), Id(nbr))));
         }
 
         var best = int.MaxValue;
         foreach (var t in trunk)
         {
             var sum = leaves.Sum(leaf => Dijkstra.BestCost(edges, Id(leaf), Id(t)));
-
             best = Math.Min(best, sum);
         }
         
@@ -131,19 +126,18 @@ public class Everybody14 : EverybodyPuzzle
     
     private static int GetDirection(char c) => c is 'R' or 'D' or 'F' ? 1 : -1;
 
-    private static List<(int x, int y, int z)> OrthogonalAdjacentCoords((int x, int y, int z) coord)
-    {
-        var (x, y, z) = coord;
-        return
-        [
-            (x + 1, y, z),
-            (x - 1, y, z),
-            (x, y + 1, z),
-            (x, y - 1, z),
-            (x, y, z + 1),
-            (x, y, z - 1)
-        ];
-    }
+    private static List<(int x, int y, int z)> OrthogonalAdjacentCoords((int x, int y, int z) coord) => 
+        OrthogonalAdjacentCoords(coord.x, coord.y, coord.z);
+
+    private static List<(int x, int y, int z)> OrthogonalAdjacentCoords(int x, int y, int z) =>
+    [
+        (x + 1, y, z),
+        (x - 1, y, z),
+        (x, y + 1, z),
+        (x, y - 1, z),
+        (x, y, z + 1),
+        (x, y, z - 1)
+    ];
 
     private static string Id((int x, int y, int z) coord) => $"{coord.x},{coord.y},{coord.z}";
 }

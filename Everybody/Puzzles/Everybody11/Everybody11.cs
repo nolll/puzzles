@@ -31,7 +31,7 @@ public class Everybody11 : EverybodyPuzzle
     public long Solve(string input, string initalTermite, long days) => 
         Solve(ParseConversions(input), initalTermite, days);
 
-    private long Solve(Dictionary<string, string[]> conversions, string initalTermite, long days) => 
+    private static long Solve(Dictionary<string, string[]> conversions, string initalTermite, long days) => 
         CountTermites(conversions, new Dictionary<(string, long), long>(), initalTermite, days);
     
     private static long CountTermites(

@@ -109,7 +109,7 @@ public class Codyssi202516 : CodyssiPuzzle
 
         public void Rotate(char rotation) => GetRotateFunc(rotation)();
 
-        public void RotateX()
+        private void RotateX()
         {
             Left.RotateLeft();
             Right.RotateRight();
@@ -135,7 +135,7 @@ public class Codyssi202516 : CodyssiPuzzle
             Back.RotateLeft();
         }
 
-        public void RotateXPrime()
+        private void RotateXPrime()
         {
             Left.RotateRight();
             Right.RotateLeft();
@@ -161,7 +161,7 @@ public class Codyssi202516 : CodyssiPuzzle
             Back.RotateLeft();
         }
 
-        public void RotateY()
+        private void RotateY()
         {
             Up.RotateRight();
             Down.RotateLeft();
@@ -183,7 +183,7 @@ public class Codyssi202516 : CodyssiPuzzle
             Back.Absorbtion = leftAbsorbtion;
         }
 
-        public void RotateYPrime()
+        private void RotateYPrime()
         {
             Up.RotateLeft();
             Down.RotateRight();

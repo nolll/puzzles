@@ -59,11 +59,9 @@ public class Everybody13 : EverybodyPuzzle
         return Dijkstra.BestCost(edges, start.Id, targets.Select(o => o.Id).ToList());
     }
 
-    public int GetCost(int a, int b)
+    public static int GetCost(int a, int b)
     {
-        var large = Math.Max(a, b);
-        var small = Math.Min(a, b);
-        var diff = large - small;
+        var diff = Math.Max(a, b) - Math.Min(a, b);
         if (diff > 5)
             diff = 10 - diff;
 

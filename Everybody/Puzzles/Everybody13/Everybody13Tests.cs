@@ -25,7 +25,7 @@ public class Everybody13Tests
     [TestCase(9, 1, 2)]
     public void Cost(int a, int b, int expected)
     {
-        Sut.GetCost(a, b).Should().Be(expected);
+        Everybody13.GetCost(a, b).Should().Be(expected);
     }
     
     [Test]

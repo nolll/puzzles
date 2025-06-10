@@ -144,9 +144,9 @@ public static class Numbers
     public static long GetHexagonalNumber(long n) => n * (2 * n - 1);
     public static bool IsHexagonalNumber(long x) => (Math.Sqrt(8 * x + 1) + 1) % 4 == 0;
 
-    public static int[] IntsFromString(string s)
-    {
-        var matches = DigitRegex.Matches(s);
-        return matches.Select(o => int.Parse(o.ToString())).ToArray();
-    }
+    public static int[] IntsFromString(string s) => 
+        DigitRegex.Matches(s).Select(o => int.Parse(o.ToString())).ToArray();
+
+    public static long[] LongsFromString(string s) => 
+        DigitRegex.Matches(s).Select(o => long.Parse(o.ToString())).ToArray();
 }

@@ -16,6 +16,7 @@ public class HelpPrinter
                                                       --tags aoc,2022 (runs all 2022 aoc puzzles)
                                                       --tags aquaq (runs all aquaq puzzles)
                                                       --tags ece,2024,12 (runs everybody codes event 2024 quest 12)
+                                                      --tags ecs,s2,1 (runs everybody codes story 2 quest 1)
                                                       --tags euler,4 (runs euler puzzle 4)
                                                       --tags codyssi,2025,15 (runs codyssi challenge 15 2025)
 

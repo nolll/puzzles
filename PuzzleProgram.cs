@@ -29,7 +29,7 @@ public class PuzzleProgram
             new AocPuzzleProvider(),
             new AquaqPuzzleProvider(),
             new EulerPuzzleProvider(),
-            new EverybodyPuzzleProvider(),
+            new EverybodyEventPuzzleProvider(),
             new CodyssiPuzzleProvider()
         };
 

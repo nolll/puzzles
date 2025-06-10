@@ -1,0 +1,24 @@
+using Pzl.Common;
+
+namespace Pzl.Everybody;
+
+public class EverybodyEventPuzzleProvider : IPuzzleProvider
+{
+    public List<PuzzleDefinition> GetPuzzles() =>
+        PuzzleDataReader.ReadData<EverybodyEventPuzzle>()
+            .Select(CreatePuzzleDefinition)
+            .ToList();
+    
+    private static PuzzleDefinition CreatePuzzleDefinition(PuzzleData data)
+    {
+        var (year, day) = EverybodyEventPuzzleParser.ParseYearAndDay(data.Type);
+        var paddedDay = day.ToString().PadLeft(2, '0');
+        var id = $"{year}{paddedDay}";
+        var sortId = $"ece {id}";
+        var title = $"Everybody Codes Event {year}-{paddedDay}";
+        var listTitle = $"Ece {year}-{paddedDay}";
+        List<string> tags = ["ece", year.ToString(), day.ToString()];
+
+        return new PuzzleDefinition(data, tags, sortId, title, listTitle);
+    }
+}

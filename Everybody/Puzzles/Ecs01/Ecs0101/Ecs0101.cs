@@ -55,19 +55,39 @@ public class Ecs0101 : EverybodyStoryPuzzle
         return long.Parse(string.Join("", list.Reversed()));
     }
     
-    public long LimitedEniSum(long a, long b, long c, long x, long y, long z, long m) => 
-        LimitedEni(a, x, m) + LimitedEni(b, y, m) + LimitedEni(c, z, m);
+    public long LimitedEniSum(long a, long b, long c, long x, long y, long z, long m)
+    {
+        var sum1 = LimitedEni(a, x, m);
+        var sum2 = LimitedEni(b, y, m);
+        var sum3 = LimitedEni(c, z, m);
+        var total =  sum1 + sum2 + sum3;
+        return total;
+    }
 
     public long LimitedEni(long n, long exp, long mod)
     {
         var list = new List<long>();
         var s = 1L;
-        for (var i = 0; i < exp; i++)
+        var seen = new Dictionary<long, long>();
+        var skipped = false;
+        for (var i = 0L; i < exp; i++)
         {
             s = s * n % mod;
             list.Add(s);
+            if (!skipped && seen.TryGetValue(s, out var value))
+            {
+                var cycleLength = i - value;
+                var maxSkip = exp - i - 5;
+                var skip = maxSkip / cycleLength;
+                i += skip;
+                skipped = true;
+            }
+
+            seen.TryAdd(s, i);
         }
-        
-        return long.Parse(string.Join("", list.Reversed().Take(5)));
+
+        var items = list.Reversed().Take(5).ToList();
+        var result = long.Parse(string.Join("", items));
+        return result;
     }
 }

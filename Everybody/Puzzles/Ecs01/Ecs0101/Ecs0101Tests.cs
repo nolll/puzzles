@@ -49,6 +49,15 @@ public class Ecs0101Tests
         Sut.RunPart2(input).Answer.Should().Be("1507702060886");
     }
     
+    [TestCase(4, 4, 6, 3, 14, 15, 11, 150231)]
+    [TestCase(8, 4, 7, 8, 14, 16, 12, 110099)]
+    [TestCase(2, 8, 6, 2, 14, 15, 13, 9387665)]
+    [TestCase(5, 9, 6, 8, 16, 18, 14, 1113198)]
+    [TestCase(5, 9, 7, 6, 16, 18, 15, 11051340)]
+    [TestCase(8, 8, 8, 6, 19, 16, 16, 0)]
+    public void LimitedEniSum(long a, long b, long c, long x, long y, long z, long m, long expected) => 
+        Sut.LimitedEniSum(a, b, c, x, y, z, m).Should().Be(expected);
+    
     [Test]
     public void EniSum() => Sut.EniSum(4, 4, 6, 3, 4, 5, 11).Should().Be(114644);
 

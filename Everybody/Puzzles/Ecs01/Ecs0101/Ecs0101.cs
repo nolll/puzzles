@@ -10,61 +10,50 @@ public class Ecs0101 : EverybodyStoryPuzzle
 {
     public PuzzleResult RunPart1(string input)
     {
-        var lines = input.Split(LineBreaks.Single);
-        var best = 0L;
-        foreach (var line in lines)
-        {
-            var (a, b, c, x, y, z, m) = Numbers.IntsFromString(line);
-            best = Math.Max(best, EniSum(a, b, c, x, y, z, m));
-        }
-        
-        return new PuzzleResult(best, "400b09c8e50afd8c884e7693f14f2d76");
+        var result = FindBestResult(Eni1, input);
+        return new PuzzleResult(result, "400b09c8e50afd8c884e7693f14f2d76");
     }
 
     public PuzzleResult RunPart2(string input)
+    {
+        var result = FindBestResult(Eni2, input);
+        return new PuzzleResult(result, "218170e1ab319a7f79e6be73f824bcb7");
+    }
+
+    public PuzzleResult RunPart3(string input)
+    {
+        var result = FindBestResult(Eni3, input);
+        return new PuzzleResult(result, "66e6499f59383f4a9fd43d9320e68816");
+    }
+
+    private static long FindBestResult(Func<long, long, long, long> eni, string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var best = 0L;
         foreach (var line in lines)
         {
             var (a, b, c, x, y, z, m) = Numbers.LongsFromString(line);
-            best = Math.Max(best, LimitedEniSum(a, b, c, x, y, z, m));
+            best = Math.Max(best, EniSum(eni, a, b, c, x, y, z, m));
         }
-        
-        return new PuzzleResult(best);
+
+        return best;
     }
 
-    public PuzzleResult RunPart3(string input)
-    {
-        return new PuzzleResult("");
-    }
-
-    public long EniSum(long a, long b, long c, long x, long y, long z, long m) => 
-        Eni(a, x, m) + Eni(b, y, m) + Eni(c, z, m);
-
-    public long Eni(long n, long exp, long mod)
+    public static long Eni1(long n, long exp, long mod)
     {
         var list = new List<long>();
         var s = 1L;
+        
         for (var i = 0; i < exp; i++)
         {
             s = s * n % mod;
             list.Add(s);
         }
-        
-        return long.Parse(string.Join("", list.Reversed()));
-    }
-    
-    public long LimitedEniSum(long a, long b, long c, long x, long y, long z, long m)
-    {
-        var sum1 = LimitedEni(a, x, m);
-        var sum2 = LimitedEni(b, y, m);
-        var sum3 = LimitedEni(c, z, m);
-        var total =  sum1 + sum2 + sum3;
-        return total;
+
+        return GetResult(list);
     }
 
-    public long LimitedEni(long n, long exp, long mod)
+    public static long Eni2(long n, long exp, long mod)
     {
         var list = new List<long>();
         var s = 1L;
@@ -74,20 +63,50 @@ public class Ecs0101 : EverybodyStoryPuzzle
         {
             s = s * n % mod;
             list.Add(s);
-            if (!skipped && seen.TryGetValue(s, out var value))
+            if (!skipped && seen.TryGetValue(s, out var seenIndex))
             {
-                var cycleLength = i - value;
-                var maxSkip = exp - i - 5;
-                var skip = maxSkip / cycleLength;
-                i += skip;
+                var cycleLength = i - seenIndex;
+                var skipCount = (exp - i) / cycleLength - 5;
+                i += skipCount * cycleLength;
                 skipped = true;
             }
 
             seen.TryAdd(s, i);
         }
 
-        var items = list.Reversed().Take(5).ToList();
-        var result = long.Parse(string.Join("", items));
-        return result;
+        return GetResult(list.TakeLast(5));
     }
+    
+    public static long EniSum(Func<long, long, long, long> eni, long a, long b, long c, long x, long y, long z, long m) => 
+        eni(a, x, m) + eni(b, y, m) + eni(c, z, m);
+
+    public static long Eni3(long n, long exp, long mod)
+    {
+        var list = new List<long>();
+        var s = 1L;
+        var score = 0L;
+        var seen = new Dictionary<long, long>();
+        var skipped = false;
+        for (var i = 0L; i < exp; i++)
+        {
+            s = s * n % mod;
+            score += s;
+            list.Add(s);
+            if (!skipped && seen.TryGetValue(s, out var seenIndex))
+            {
+                var cycleLength = (int)(i - seenIndex);
+                var cycleScore = list.Skip((int)seenIndex + 1).Take(cycleLength).Sum();
+                var skipCount = (exp - i) / cycleLength - 5;
+                i += skipCount * cycleLength;
+                score += skipCount * cycleScore;
+                skipped = true;
+            }
+
+            seen.TryAdd(s, i);
+        }
+
+        return score;
+    }
+    
+    private static long GetResult(IEnumerable<long> list) => long.Parse(string.Join("", list.Reversed().ToList()));
 }

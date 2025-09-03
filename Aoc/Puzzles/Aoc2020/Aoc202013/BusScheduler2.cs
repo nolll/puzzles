@@ -5,13 +5,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202013;
 
 public class BusScheduler2
 {
-    private int _earliestMinute;
     private readonly List<string> _busDepartureMinutes;
 
     public BusScheduler2(string input)
     {
         var rows = StringReader.ReadLines(input);
-        _earliestMinute = int.Parse(rows[0]);
         _busDepartureMinutes = rows[1].Split(',').ToList();
     }
 
@@ -46,25 +44,14 @@ public class BusScheduler2
         return time;
     }
 
-    private static bool IsMatching(IEnumerable<Bus> currentBuses, long time)
-    {
-        return currentBuses.All(o => IsMatching(o, time));
-    }
+    private static bool IsMatching(IEnumerable<Bus> currentBuses, long time) =>
+        currentBuses.All(o => IsMatching(o, time));
 
-    private static bool IsMatching(Bus bus, long time)
-    {
-        return (time + bus.Delay) % bus.Id == 0;
-    }
+    private static bool IsMatching(Bus bus, long time) => (time + bus.Delay) % bus.Id == 0;
 
-    private class Bus
+    private class Bus(long id, long delay)
     {
-        public long Id { get; }
-        public long Delay { get; }
-
-        public Bus(long id, long delay)
-        {
-            Id = id;
-            Delay = delay;
-        }
+        public long Id { get; } = id;
+        public long Delay { get; } = delay;
     }
 }

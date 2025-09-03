@@ -19,20 +19,18 @@ public class Ecs0103Tests
     }
 
     [Test]
-    public void Part2()
+    public void Part2And3()
     {
-        const string input = "";
+        const string input = """
+                             x=12 y=2
+                             x=8 y=4
+                             x=7 y=1
+                             x=1 y=5
+                             x=1 y=3
+                             """;
 
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part2(input).Answer.Should().Be("14");
     }
-
-    [Test]
-    public void Part3()
-    {
-        const string input = "";
-
-        Sut.Part3(input).Answer.Should().Be("0");
-    }
-
+    
     private static Ecs0103 Sut => new();
 }

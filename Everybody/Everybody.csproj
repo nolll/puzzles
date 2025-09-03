@@ -219,6 +219,9 @@
         <None Update="Puzzles\Ecs01\Ecs0103\Ecs0103-3.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="Puzzles\Ecs02\Ecs0201\Ecs0101-1.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>

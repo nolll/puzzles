@@ -14,19 +14,11 @@ public class Ecs0202Tests
     }
 
     [Test]
-    public void Part2()
+    public void Part2And3()
     {
-        const string input = "";
+        const string input = "GGBR";
 
-        Sut.Part2(input).Answer.Should().Be("0");
-    }
-
-    [Test]
-    public void Part3()
-    {
-        const string input = "";
-
-        Sut.Part3(input).Answer.Should().Be("0");
+        Ecs0202.Part2And3(input, 5).Should().Be(14);
     }
 
     private static Ecs0202 Sut => new();

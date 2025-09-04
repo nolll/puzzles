@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Combinatorics;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Lists;
 using Pzl.Tools.Strings;
@@ -10,11 +11,7 @@ public class Ecs0201 : EverybodyStoryPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var (input1, input2) = input.Split(LineBreaks.Double);
-        var matrix = MatrixBuilder.BuildCharMatrix(input1, '.');
-        matrix.ExtendUp();
-        
-        var tokens = input2.Split(LineBreaks.Single);
+        var (matrix, tokens, _) = Parse(input);
         var coins = 0;
         
         for (var i = 0; i < tokens.Length; i++)
@@ -29,18 +26,13 @@ public class Ecs0201 : EverybodyStoryPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        var (input1, input2) = input.Split(LineBreaks.Double);
-        var matrix = MatrixBuilder.BuildCharMatrix(input1, '.');
-        matrix.ExtendUp();
-        
-        var tokens = input2.Split(LineBreaks.Single);
+        var (matrix, tokens, slotCount) = Parse(input);
         var coins = 0;
-        var numSlots = (matrix.Width + 1) / 2;
         
         foreach (var token in tokens)
         {
             var best = (slot: 0, finalSlot: 0, score: 0);
-            for (var slot = 1; slot <= numSlots; slot++)
+            for (var slot = 1; slot <= slotCount; slot++)
             {
                 var result = Play(matrix, token, slot);
                 if (result.score > best.score)
@@ -55,20 +47,42 @@ public class Ecs0201 : EverybodyStoryPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        return new PuzzleResult(0);
+        var (matrix, tokens, slotCount) = Parse(input);
+        var scores = new Dictionary<(int token, int slot), int>();
+
+        for (var index = 0; index < tokens.Length; index++)
+        {
+            var token = tokens[index];
+            for (var slot = 1; slot <= slotCount; slot++)
+            {
+                var result = Play(matrix, token, slot);
+                scores.Add((index, slot), result.score);
+            }
+        }
+
+        var allSlots = Enumerable.Range(1, slotCount).ToList();
+        var combinations = PermutationGenerator.GetPermutations(allSlots, tokens.Length).ToArray();
+
+        var worst = int.MaxValue;
+        var best = int.MinValue;
+
+        foreach (var slots in combinations)
+        {
+            var score = slots.Select((t, token) => scores[(token, t)]).Sum();
+
+            worst = Math.Min(worst, score);
+            best = Math.Max(best, score);
+        }
+
+        return new PuzzleResult($"{worst} {best}", "28c4bfb9e7bb062915af989c9b4b8e33");
     }
-    
+
     private static (int slot, int finalSlot, int score) Play(Matrix<char> matrix, string token, int slot)
     {
         var x = (slot - 1) * 2;
         matrix.MoveTo(x, matrix.YMin);
-        
         var tokenIndex = 0;
-            
-        var pmatrix = matrix.Clone();
-        pmatrix.MoveTo(matrix.Address);
-        pmatrix.WriteValue('X');
-            
+        
         while (matrix.TryMoveDown())
         {
             if (matrix.ReadValue() == '*')
@@ -94,5 +108,16 @@ public class Ecs0201 : EverybodyStoryPuzzle
 
         var finalSlot = matrix.Address.X / 2 + 1;
         return (slot, finalSlot, Math.Max(finalSlot * 2 - slot, 0));
+    }
+
+    private static (Matrix<char> m, string[] t, int slotCount) Parse(string input)
+    {
+        var (input1, input2) = input.Split(LineBreaks.Double);
+        var matrix = MatrixBuilder.BuildCharMatrix(input1, '.');
+        matrix.ExtendUp();
+        var tokens = input2.Split(LineBreaks.Single);
+        var slotCount = (matrix.Width + 1) / 2;
+
+        return (matrix, tokens, slotCount);
     }
 }

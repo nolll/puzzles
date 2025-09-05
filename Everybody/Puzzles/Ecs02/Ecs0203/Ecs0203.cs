@@ -12,17 +12,12 @@ public class Ecs0203 : EverybodyStoryPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var dice = ParseDice(input);
-
+        var dice = ParseDice(input);S
         var score = 0;
         var rollCount = 0;
         while (score < 10_000)
         {
-            foreach (var die in dice)
-            {
-                score += die.Roll();
-            }
-
+            score += dice.Sum(die => die.Roll());
             rollCount++;
         }
         
@@ -65,19 +60,18 @@ public class Ecs0203 : EverybodyStoryPuzzle
         var (diceInput, matrixInput) = input.Split(LineBreaks.Double);
         var dice = ParseDice(diceInput);
         var matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(matrixInput);
-        var totalSet = new HashSet<string>();
+        var totalSet = new HashSet<MatrixAddress>();
         
         foreach (var die in dice)
         {
-            var score = die.Roll();
-            var spaces = matrix.FindAddresses(score);
-            var set = new HashSet<string>();
-            set.AddRange(spaces.Select(o => o.Id));
+            var spaces = matrix.FindAddresses(die.Roll());
+            var set = new HashSet<MatrixAddress>();
+            set.AddRange(spaces);
 
             while (spaces.Any())
             {
-                score = die.Roll();
-                var newSpaces = new List<MatrixAddress>();
+                var score = die.Roll();
+                var newSpaces = new HashSet<MatrixAddress>();
                 foreach (var space in spaces)
                 {
                     if(matrix.ReadValueAt(space) == score)
@@ -87,11 +81,11 @@ public class Ecs0203 : EverybodyStoryPuzzle
                         .Where(o => matrix.ReadValueAt(o) == score));
                 }
 
-                set.AddRange(newSpaces.Select(o => o.Id));
+                set.UnionWith(newSpaces);
                 spaces = newSpaces.DistinctBy(o => o.Tuple).ToList();
             }
             
-            totalSet.AddRange(set);
+            totalSet.UnionWith(set);
         }
         
         return new PuzzleResult(totalSet.Count, "0573f4383c024a477b878cfe7f4997a7");
@@ -135,8 +129,8 @@ public class Ecs0203 : EverybodyStoryPuzzle
 
     private class Player(int id, Die die)
     {
-        public int Id { get; set; } = id;
-        public Die Die { get; set; } = die;
-        public int Position { get; set; } = 0;
+        public int Id { get; } = id;
+        public Die Die { get; } = die;
+        public int Position { get; set; }
     }
 }

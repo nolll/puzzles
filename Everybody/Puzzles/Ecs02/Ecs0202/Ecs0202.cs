@@ -1,5 +1,4 @@
 using Pzl.Common;
-using Pzl.Tools.Debug;
 
 namespace Pzl.Everybody.Puzzles.Ecs02.Ecs0202;
 

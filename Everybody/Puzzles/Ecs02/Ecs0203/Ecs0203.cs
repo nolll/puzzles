@@ -1,5 +1,6 @@
-using System.IO;
 using Pzl.Common;
+using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.HashSets;
 using Pzl.Tools.Lists;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
@@ -19,7 +20,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
         {
             foreach (var die in dice)
             {
-                score += die.Roll(rollCount + 1);
+                score += die.Roll();
             }
 
             rollCount++;
@@ -37,7 +38,6 @@ public class Ecs0203 : EverybodyStoryPuzzle
         var players = dice.Select(o => new Player(o.Id, o)).ToList();
         var done = new List<Player>();
         
-        var rollCount = 1;
         while (players.Any(o => o.Position < goal))
         {
             for (var i = 0; i < players.Count; i++)
@@ -46,7 +46,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
                 if (player.Position == goal)
                     continue;
 
-                var score = player.Die.Roll(rollCount);
+                var score = player.Die.Roll();
 
                 if (racetrack[player.Position] == score)
                     player.Position++;
@@ -54,8 +54,6 @@ public class Ecs0203 : EverybodyStoryPuzzle
                 if(player.Position == goal)
                     done.Add(player);
             }
-            
-            rollCount++;
         }
 
         var result = string.Join(",", done.Select(o => o.Id));
@@ -64,7 +62,39 @@ public class Ecs0203 : EverybodyStoryPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        return new PuzzleResult(0);
+        var (diceInput, matrixInput) = input.Split(LineBreaks.Double);
+        var dice = ParseDice(diceInput);
+        var matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(matrixInput);
+        var totalSet = new HashSet<string>();
+        
+        foreach (var die in dice)
+        {
+            var score = die.Roll();
+            var spaces = matrix.FindAddresses(score);
+            var set = new HashSet<string>();
+            set.AddRange(spaces.Select(o => o.Id));
+
+            while (spaces.Any())
+            {
+                score = die.Roll();
+                var newSpaces = new List<MatrixAddress>();
+                foreach (var space in spaces)
+                {
+                    if(matrix.ReadValueAt(space) == score)
+                        newSpaces.Add(space);
+                    
+                    newSpaces.AddRange(matrix.OrthogonalAdjacentCoordsTo(space)
+                        .Where(o => matrix.ReadValueAt(o) == score));
+                }
+
+                set.AddRange(newSpaces.Select(o => o.Id));
+                spaces = newSpaces.DistinctBy(o => o.Tuple).ToList();
+            }
+            
+            totalSet.AddRange(set);
+        }
+        
+        return new PuzzleResult(totalSet.Count, "0573f4383c024a477b878cfe7f4997a7");
     }
 
     private static Die[] ParseDice(string input)
@@ -86,18 +116,19 @@ public class Ecs0203 : EverybodyStoryPuzzle
     private class Die(int id, int seed, int[] faces)
     {
         public int Id { get; } = id;
-        private readonly int _seed = seed;
         private long _pulse = seed;
         private int _face;
+        private int _rollNumber = 1;
         
-        public int Roll(int rollNumber)
+        public int Roll()
         {
-            var spin = rollNumber * _pulse;
+            var spin = _rollNumber * _pulse;
             _face = (int)((_face + spin) % faces.Length);
             _pulse += spin;
-            _pulse %= _seed;
-            _pulse = _pulse + 1 + rollNumber + _seed;
+            _pulse %= seed;
+            _pulse += 1 + _rollNumber + seed;
             var result = faces[_face];
+            _rollNumber++;
             return result;
         }
     }

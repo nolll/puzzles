@@ -12,7 +12,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var dice = ParseDice(input);S
+        var dice = ParseDice(input);
         var score = 0;
         var rollCount = 0;
         while (score < 10_000)

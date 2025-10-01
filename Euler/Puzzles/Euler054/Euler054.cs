@@ -10,6 +10,7 @@ public class Euler054 : EulerPuzzle
     public PuzzleResult Run(string input)
     {
         var lines = input.Split(LineBreaks.Single);
+        var p1WinCount = 0;
         foreach (var line in lines)
         {
             var cards = line.Split();
@@ -17,40 +18,20 @@ public class Euler054 : EulerPuzzle
             var h2 = new Hand(cards.Skip(5));
 
             var comparison = h1.CompareTo(h2);
-            var result = GetWinDescription(comparison);
-            
-            DebugPrinter.Print(string.Join(" ", h1.Cards.Select(o => o.ToString())), h1.Rank.ToString());
-            DebugPrinter.Print(string.Join(" ", h2.Cards.Select(o => o.ToString())), h2.Rank.ToString());
-            DebugPrinter.Print(result);
-            Console.WriteLine();
+            if (comparison > 0)
+                p1WinCount++;
         }
 
-        return new PuzzleResult(0);
+        return new PuzzleResult(p1WinCount, "8d522a87a80f6f36a9599b3158b73a2b");
     }
 
-    private string GetWinDescription(int comparison) => comparison switch
+    private class Card(char suit, char value)
     {
-        1 => "P1 Wins",
-        -1 => "P2 Wins",
-        _ => "Draw"
-    };
+        public char Suit { get; } = suit;
+        public char Value { get; } = value;
+        public int Rank { get; } = GetRank(value);
 
-    public class Card
-    {
-        public char Suit { get; }
-        public char Value { get; }
-        public int Rank { get; }
-        
-        public Card(char suit, char value)
-        {
-            Suit = suit;
-            Value = value;
-            Rank = GetRank(value);
-        }
-
-        public Card(string id) : this(id[1], id[0])
-        {
-        }
+        public Card(string id) : this(id[1], id[0]) {}
 
         private static int GetRank(char value) => value switch
         {
@@ -83,49 +64,27 @@ public class Euler054 : EulerPuzzle
         private int[] _rankComparer = [];
         
         public HandRank Rank { get; private set; }
-        
-        public Hand(Card[] cards)
+
+        private Hand(Card[] cards)
         {
-            Cards = cards;
             EvaluateHand(cards);
         }
         
-        public Hand(string cards) : this(cards.Split())
-        {
-        }
+        public Hand(string cards) : this(cards.Split()) {}
         
-        public Hand(IEnumerable<string> cards) : this(cards.Select(o => new Card(o)).ToArray())
-        {
-        }
-
-        public Card[] Cards { get; }
-
-        private static bool IsStr8(Card[] cards)
-        {
-            var sorted = cards.OrderByDescending(o => o.Rank).ToArray();
-            
-            return sorted[0].Rank - 1 == sorted[1].Rank &&
-                   sorted[1].Rank - 1 == sorted[2].Rank &&
-                   sorted[2].Rank - 1 == sorted[3].Rank &&
-                   sorted[3].Rank - 1 == sorted[4].Rank ||
-                   sorted[0].Rank == 14 &&
-                   sorted[1].Rank == 5 &&
-                   sorted[2].Rank == 4 &&
-                   sorted[3].Rank == 3 &&
-                   sorted[4].Rank == 2;
-        }
+        public Hand(IEnumerable<string> cards) : this(cards.Select(o => new Card(o)).ToArray()) {}
 
         public int CompareTo(Hand other)
         {
             if (other.Rank > Rank)
-                return 1;
-            if (other.Rank < Rank)
                 return -1;
+            if (other.Rank < Rank)
+                return 1;
 
             for (var i = 0; i < _rankComparer.Length; i++)
             {
                 if (other._rankComparer[i] > _rankComparer[i])
-                    return 1;
+                    return -1;
                 if (other._rankComparer[i] < _rankComparer[i])
                     return 1;
             }
@@ -140,39 +99,44 @@ public class Euler054 : EulerPuzzle
             var largestGroupSize = rankGroups.First().Count();
             _rankComparer = rankGroups.Select(o => o.First().Rank).ToArray();
             
-            if (rankGroupCount == 2 && largestGroupSize == 4)
+            switch (rankGroupCount)
             {
-                Rank = HandRank.Quads;
-                return;
-            }
-            
-            if (rankGroupCount == 2 && largestGroupSize == 3)
-            {
-                Rank = HandRank.Boat;
-                return;
-            }
-
-            if (rankGroupCount == 3 && largestGroupSize == 3)
-            {
-                Rank = HandRank.Trips;
-                return;
-            }
-
-            if (rankGroupCount == 3 && largestGroupSize == 2)
-            {
-                Rank = HandRank.TwoPair;
-                return;
+                case 2 when largestGroupSize == 4:
+                    Rank = HandRank.Quads;
+                    return;
+                case 2 when largestGroupSize == 3:
+                    Rank = HandRank.Boat;
+                    return;
+                case 3 when largestGroupSize == 3:
+                    Rank = HandRank.Trips;
+                    return;
+                case 3 when largestGroupSize == 2:
+                    Rank = HandRank.TwoPair;
+                    return;
+                case 4 when largestGroupSize == 2:
+                    Rank = HandRank.OnePair;
+                    return;
             }
 
-            if (rankGroupCount == 4 && largestGroupSize == 2)
-            {
-                Rank = HandRank.OnePair;
-                return;
-            }
-            
             var suitGroups = cards.GroupBy(o => o.Suit);
             var isFlush = suitGroups.Count() == 1;
-            var isStr8 = IsStr8(cards);
+            
+            var sorted = cards.OrderByDescending(o => o.Rank).ToArray();
+
+            var isWheel = sorted[0].Rank == 14 &&
+                          sorted[1].Rank == 5 &&
+                          sorted[2].Rank == 4 &&
+                          sorted[3].Rank == 3 &&
+                          sorted[4].Rank == 2;
+            
+            var isStr8 = isWheel || 
+                         sorted[0].Rank - 1 == sorted[1].Rank &&
+                         sorted[1].Rank - 1 == sorted[2].Rank &&
+                         sorted[2].Rank - 1 == sorted[3].Rank &&
+                         sorted[3].Rank - 1 == sorted[4].Rank;
+                          
+            if (isWheel)
+                _rankComparer = [5, 4, 3, 2, 1];
             
             if (isStr8 && isFlush)
             {

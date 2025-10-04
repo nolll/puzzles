@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler012;
 [Name("Highly divisible triangular number")]
 public class Euler012 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var result = Run(501);
         return new PuzzleResult(result, "fea73831ed90d121b1b03e10004a2ead");

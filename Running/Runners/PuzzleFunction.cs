@@ -18,6 +18,9 @@ public class PuzzleFunction(Puzzle puzzle, MethodInfo method, object[] passedPar
     private static object[] AddOptionalParameters(MethodInfo methodInfo, object[] passedParams)
     {
         var methodParamCount = methodInfo.GetParameters().Length;
+        if (methodParamCount == 0)
+            return [];
+        
         if (passedParams.Length == methodParamCount)
             return passedParams;
 

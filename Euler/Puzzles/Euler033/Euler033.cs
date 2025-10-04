@@ -5,7 +5,7 @@ namespace Pzl.Euler.Puzzles.Euler033;
 [Name("Digit Cancelling Fraction")]
 public class Euler033 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var fractions = new List<Fraction>();
 

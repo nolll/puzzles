@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler041;
 [Name("Pandigital Prime")]
 public class Euler041 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var largest = 0L;
         for (var x = 9; x >= 1; x--)

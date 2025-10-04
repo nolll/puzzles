@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler035;
 [Name("Circular Primes")]
 public class Euler035 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var count = 0;
         for (var i = 0; i < 1_000_000; i++)

@@ -6,14 +6,9 @@ namespace Pzl.Euler.Puzzles.Euler027;
 [Name("Quadratic primes")]
 public class Euler027 : EulerPuzzle
 {
-    private readonly Dictionary<int, bool> _primeCache;
+    private readonly Dictionary<int, bool> _primeCache = new();
 
-    public Euler027()
-    {
-        _primeCache = new Dictionary<int, bool>();
-    }
-
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         const int bLimit = 1000;
         const int aLimit = bLimit - 1;

@@ -21,7 +21,7 @@ public class Euler022 : EulerPuzzle
         }
     }
 
-    public PuzzleResult Run(string input) => new(_nameScores.Values.Sum(), "f945fb704b17ec3abec8a9f14abcc3aa");
+    public PuzzleResult Run() => new(_nameScores.Values.Sum(), "f945fb704b17ec3abec8a9f14abcc3aa");
 
     private static int GetNameScore(string name, int index)
     {

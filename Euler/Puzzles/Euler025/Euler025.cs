@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler025;
 [Name("1000-digit Fibonacci number")]
 public class Euler025 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var result = Run(1000);
         return new PuzzleResult(result, "b0f9f78357a59417863c853ccb8cff75");

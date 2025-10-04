@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler021;
 [Name("Amicable numbers")]
 public class Euler021 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var sums = new Dictionary<int, int>();
         var amicableNumbers = new HashSet<int>();

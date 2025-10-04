@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler049;
 [Name("Prime Permutations")]
 public class Euler049 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         const int limit = 10_000;
         var primes = Numbers.FindPrimesBelow(limit).ToArray();

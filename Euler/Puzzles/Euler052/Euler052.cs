@@ -5,7 +5,7 @@ namespace Pzl.Euler.Puzzles.Euler052;
 [Name("Permuted Multiples")]
 public class Euler052 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var n = 1;
 

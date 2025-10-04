@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler046;
 [Name("Goldbach's Other Conjecture")]
 public class Euler046 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var n = 1;
         var found = true;

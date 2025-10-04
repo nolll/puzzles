@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler047;
 [Name("Distinct Primes Factors")]
 public class Euler047 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var n = 1;
         const int searchFor = 4;

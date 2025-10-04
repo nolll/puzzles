@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler045;
 [Name("Triangular, Pentagonal, and Hexagonal")]
 public class Euler045 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         const int inputValue = 285;
         var i = inputValue + 1;

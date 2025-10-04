@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler055;
 [Name("Lychrel Numbers")]
 public class Euler055 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var n = new BigInteger(1);
         var lychrelCount = 0;

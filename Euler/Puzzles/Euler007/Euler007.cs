@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler007;
 [Name("10001st prime")]
 public class Euler007 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var nthPrime = Run(10001);
         return new PuzzleResult(nthPrime, "42330f784700c1eb6c8e5aab1559caa5");

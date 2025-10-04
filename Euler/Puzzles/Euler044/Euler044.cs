@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler044;
 [Name("Pentagon Numbers")]
 public class Euler044 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var i = 0;
         while(true)

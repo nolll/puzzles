@@ -10,7 +10,7 @@ public class Euler040 : EulerPuzzle
     private const int MaxLength = 1_000_000;
     private const int StepMultiplier = 10;
 
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var sb = new StringBuilder();
         var i = Initial;

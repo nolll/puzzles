@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler048;
 [Name("Self Powers")]
 public class Euler048 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var sum = new BigInteger(0);
         

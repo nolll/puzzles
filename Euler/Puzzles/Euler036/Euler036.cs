@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler036;
 [Name("Double-base Palindromes")]
 public class Euler036 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var sum = Enumerable.Range(0, 1_000_000)
             .Where(IsPalindromeInBothBases)

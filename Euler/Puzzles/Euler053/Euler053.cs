@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler053;
 [Name("Combinatoric Selections")]
 public class Euler053 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var count = 0;
         

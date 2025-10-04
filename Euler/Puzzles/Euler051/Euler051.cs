@@ -8,7 +8,7 @@ namespace Pzl.Euler.Puzzles.Euler051;
 [Name("Prime Digit Replacements")]
 public class Euler051 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var n = 0;
         const int target = 8;

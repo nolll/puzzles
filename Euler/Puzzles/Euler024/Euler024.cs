@@ -8,7 +8,7 @@ namespace Pzl.Euler.Puzzles.Euler024;
 [Name("Lexicographic permutations")]
 public class Euler024 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var result = Run(10, 1_000_000);
         

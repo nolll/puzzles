@@ -5,7 +5,7 @@ namespace Pzl.Euler.Puzzles.Euler039;
 [Name("Integer Right Triangle")]
 public class Euler039 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    public PuzzleResult Run()
     {
         var solutions = FindSolutions(1000);
         

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202112;
 
 public class Aoc202112Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var caveSystem = new CaveSystem(Input.Trim(), false);
@@ -14,7 +11,7 @@ public class Aoc202112Tests
         result.Should().Be(10);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var caveSystem = new CaveSystem(Input.Trim(), true);

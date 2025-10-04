@@ -1,5 +1,4 @@
 using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Client.Params;
 using Pzl.Common;
 
@@ -7,7 +6,7 @@ namespace Pzl.Client.Filter;
 
 public class PuzzleFilterTests
 {
-    [Test]
+    [Fact]
     public void FilterSlow()
     {
         var puzzles = new List<PuzzleDefinition>
@@ -23,7 +22,7 @@ public class PuzzleFilterTests
         result.Count.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void FilterCommented()
     {
         var puzzles = new List<PuzzleDefinition>
@@ -40,7 +39,7 @@ public class PuzzleFilterTests
         result.First().Comment.Should().Be("Comment");
     }
 
-    [Test]
+    [Fact]
     public void FilterFun()
     {
         var puzzles = new List<PuzzleDefinition>

@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202010;
 
 public class Aoc202010Tests
@@ -53,8 +50,9 @@ public class Aoc202010Tests
                                   3
                                   """;
 
-    [TestCase(Input1, 35)]
-    [TestCase(Input2, 220)]
+    [Theory]
+    [InlineData(Input1, 35)]
+    [InlineData(Input2, 220)]
     public void PowerAdapterChainIsCorrect(string input, int expected)
     {
         var chain = new PowerAdapterChain(input.Trim());
@@ -63,8 +61,9 @@ public class Aoc202010Tests
         product.Should().Be(expected);
     }
 
-    [TestCase(Input1, 8)]
-    [TestCase(Input2, 19208)]
+    [Theory]
+    [InlineData(Input1, 8)]
+    [InlineData(Input2, 19208)]
     public void PowerAdapterChainTotalCombinations(string input, int expected)
     {
         var chain = new PowerAdapterChain(input.Trim());

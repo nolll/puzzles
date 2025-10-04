@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202324;
 
 public class Aoc202324Tests
@@ -13,7 +10,7 @@ public class Aoc202324Tests
                                  20, 19, 15 @  1, -5, -3
                                  """;
 
-    [Test]
+    [Fact]
     public void CountIntersecting()
     {
         var result = Aoc202324.CountIntersectingWithin(Input, 7, 27);
@@ -21,7 +18,7 @@ public class Aoc202324Tests
         result.Should().Be(2);
     }
     
-    [Test]
+    [Fact]
     public void Part2()
     {
         var result = Sut.RunPart2(Input);

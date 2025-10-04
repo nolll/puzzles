@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202207;
 
 public class Aoc202207Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var fileSystem = new FileSystem(Input);
@@ -14,7 +11,7 @@ public class Aoc202207Tests
         result.Should().Be(95437);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var fileSystem = new FileSystem(Input);

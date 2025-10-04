@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202518;
 
 public class Codyssi202518Tests
@@ -23,22 +20,22 @@ public class Codyssi202518Tests
                                   RULE 8: 3x+6y+9z+9a DIVIDE 5 HAS REMAINDER 3 | DEBRIS VELOCITY (1, 1, -1, -1)
                                   """;
 
-    [Test]
+    [Fact]
     public void Part1_1() => Sut.Part1(Input1, 3, 3, 5).Answer.Should().Be("146");
     
-    [Test]
+    [Fact]
     public void Part1_2() => Sut.Part1(Input2).Answer.Should().Be("32545");
 
-    [Test]
+    [Fact]
     public void Part2_1() => Sut.Part2(Input1, 3, 3, 5).Answer.Should().Be("23");
     
-    [Test]
+    [Fact]
     public void Part2_2() => Sut.Part2(Input2).Answer.Should().Be("217");
 
-    [Test]
+    [Fact]
     public void Part3_1() => Sut.Part3(Input1, 3, 3, 5).Answer.Should().Be("8");
     
-    [Test]
+    [Fact]
     public void Part3_2() => Sut.Part3(Input2).Answer.Should().Be("166");
 
     private static Codyssi202518 Sut => new();

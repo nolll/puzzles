@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202204;
 
 public class Aoc202204Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var cleaning = new Cleaning();
@@ -14,7 +11,7 @@ public class Aoc202204Tests
         result.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var cleaning = new Cleaning();

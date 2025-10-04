@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201724;
 
 public class Aoc201724Tests
 {
-    [Test]
+    [Fact]
     public void FindsStrongestBridge()
     {
         var builder = new BridgeBuilder(Input.Trim(), false);
@@ -14,7 +11,7 @@ public class Aoc201724Tests
         bridge.Strength.Should().Be(31);
     }
 
-    [Test]
+    [Fact]
     public void FindsLongestBridge()
     {
         var builder = new BridgeBuilder(Input.Trim(), true);

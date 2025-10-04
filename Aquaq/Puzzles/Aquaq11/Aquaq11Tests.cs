@@ -1,5 +1,4 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq11;
 
@@ -12,7 +11,7 @@ public class Aquaq11Tests
                                  6,3,8,7
                                  """;
 
-    [Test]
+    [Fact]
     public void CountRequiredTile()
     {
         var result = Aquaq11.CountRequiredTiles(Input);

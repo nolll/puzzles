@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201824;
 
 public class Aoc201824Tests
@@ -17,7 +14,7 @@ public class Aoc201824Tests
                                           4485 units each with 2961 hit points (immune to radiation; weak to fire, cold) with an attack that does 12 slashing damage at initiative 4
                                           """;
 
-    [Test]
+    [Fact]
     public void FightIsCorrect()
     {
         var system = new ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());
@@ -30,7 +27,7 @@ public class Aoc201824Tests
         system.WinningArmyUnitCount.Should().Be(5216);
     }
 
-    [Test]
+    [Fact]
     public void FightWithBoostIsCorrect()
     {
         var system = new ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());
@@ -39,7 +36,7 @@ public class Aoc201824Tests
         system.WinningArmyUnitCount.Should().Be(51);
     }
 
-    [Test]
+    [Fact]
     public void FightUntilImmuneSystemWinsIsCorrect()
     {
         var system = new ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());

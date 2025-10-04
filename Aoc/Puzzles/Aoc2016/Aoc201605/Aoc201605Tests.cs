@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201605;
 
 public class Aoc201605Tests
 {
-    [Test]
+    [Fact]
     public void GeneratesPasswordWithFirstAlgorithm()
     {
         const string input = "abc";
@@ -15,7 +12,7 @@ public class Aoc201605Tests
         pwd.Should().Be("18f47a30");
     }
 
-    [Test]
+    [Fact]
     public void GeneratesPasswordWithSecondAlgorithm()
     {
         const string input = "abc";

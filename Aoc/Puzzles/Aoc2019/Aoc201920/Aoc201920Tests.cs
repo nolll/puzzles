@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201920;
 
 public class Aoc201920Tests
 {
-    [Test]
+    [Fact]
     public void FindsShortestRoute1()
     {
         const string input = """
@@ -35,7 +32,7 @@ public class Aoc201920Tests
         solver.ShortestStepCount.Should().Be(23);
     }
 
-    [Test]
+    [Fact]
     public void FindsShortestRoute2()
     {
         const string input = """
@@ -83,7 +80,7 @@ public class Aoc201920Tests
         solver.ShortestStepCount.Should().Be(58);
     }
 
-    [Test]
+    [Fact]
     public void FindsShortestRouteRecursive()
     {
         const string input = """

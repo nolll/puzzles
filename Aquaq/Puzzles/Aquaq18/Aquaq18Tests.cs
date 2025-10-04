@@ -1,12 +1,12 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq18;
 
 public class Aquaq18Tests
 {
-    [TestCase("13:41:00", false)]
-    [TestCase("13:44:31", true)]
+    [Theory]
+    [InlineData("13:41:00", false)]
+    [InlineData("13:44:31", true)]
     public void IsPalindrome(string input, bool expected)
     {
         var dateTime = DateTime.Parse($"2020-02-02 {input}");
@@ -15,7 +15,7 @@ public class Aquaq18Tests
         result.Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void StepsToPalindrome()
     {
         var dateTime = DateTime.Parse("2020-02-02 13:41:00");

@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202122;
 
 public class Aoc202122Tests
 {
-    [Test]
+    [Fact]
     public void GetSize()
     {
         var area = new RebootArea(new Matrix3DAddress(-54112, -85059, -27449), new Matrix3DAddress(-39298, -49293, 7877));
@@ -15,7 +13,7 @@ public class Aoc202122Tests
         result.Should().Be(18_719_357_085_335);
     }
 
-    [Test]
+    [Fact]
     public void GetRemainingParts_CornerOverlap_LeftBottomCloseOverlapping()
     {
         var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(2, 2, 2));
@@ -31,7 +29,7 @@ public class Aoc202122Tests
         result[2].To.Should().Be(new Matrix3DAddress(2, 2, 0));
     }
 
-    [Test]
+    [Fact]
     public void GetRemainingParts_CornerOverlap_LeftTopCloseOverlapping()
     {
         var area1 = new RebootArea(new Matrix3DAddress(1, 1, 1), new Matrix3DAddress(3, 3, 3));
@@ -47,7 +45,7 @@ public class Aoc202122Tests
         result[2].To.Should().Be(new Matrix3DAddress(3, 3, 3));
     }
 
-    [Test]
+    [Fact]
     public void GetRemainingParts_EdgeOverlap_LeftBottomOverlapping()
     {
         var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(3, 3, 3));
@@ -65,7 +63,7 @@ public class Aoc202122Tests
         result[3].To.Should().Be(new Matrix3DAddress(3, 3, 3));
     }
 
-    [Test]
+    [Fact]
     public void Part1()
     {
         var reactor = new SubmarineReactor();
@@ -74,7 +72,7 @@ public class Aoc202122Tests
         result.Should().Be(39);
     }
 
-    [Test]
+    [Fact]
     public void Part1Advanced_WithInput1()
     {
         var reactor = new SubmarineReactor();
@@ -83,7 +81,7 @@ public class Aoc202122Tests
         result.Should().Be(39);
     }
 
-    [Test]
+    [Fact]
     public void Part1Advanced_WithInput2()
     {
         var reactor = new SubmarineReactor();
@@ -92,7 +90,7 @@ public class Aoc202122Tests
         result.Should().Be(590784);
     }
 
-    [Test]
+    [Fact]
     public void Part1Advanced_WithInput3()
     {
         var reactor = new SubmarineReactor();

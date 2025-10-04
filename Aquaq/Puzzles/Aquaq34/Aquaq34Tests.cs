@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq34;
 
 public class Aquaq34Tests
 {
-    [Test]
+    [Fact]
     public void TrainRoutes()
     {
         const string input = """

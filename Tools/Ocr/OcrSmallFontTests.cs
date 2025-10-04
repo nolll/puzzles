@@ -1,31 +1,29 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Tools.Ocr;
 
 public class OcrSmallFontTests
 {
-    [TestCase(InputA, 'A')]
-    [TestCase(InputB, 'B')]
-    [TestCase(InputC, 'C')]
-    [TestCase(InputE, 'E')]
-    [TestCase(InputF, 'F')]
-    [TestCase(InputG, 'G')]
-    [TestCase(InputH, 'H')]
-    [TestCase(InputI, 'I')]
-    [TestCase(InputJ, 'J')]
-    [TestCase(InputK, 'K')]
-    [TestCase(InputL, 'L')]
-    [TestCase(InputO, 'O')]
-    [TestCase(InputP, 'P')]
-    [TestCase(InputR, 'R')]
-    [TestCase(InputU, 'U')]
-    [TestCase(InputY, 'Y')]
-    [TestCase(InputZ, 'Z')]
-    [TestCase(InputSpace, ' ')]
+    [Theory]
+    [InlineData(InputA, 'A')]
+    [InlineData(InputB, 'B')]
+    [InlineData(InputC, 'C')]
+    [InlineData(InputE, 'E')]
+    [InlineData(InputF, 'F')]
+    [InlineData(InputG, 'G')]
+    [InlineData(InputH, 'H')]
+    [InlineData(InputI, 'I')]
+    [InlineData(InputJ, 'J')]
+    [InlineData(InputK, 'K')]
+    [InlineData(InputL, 'L')]
+    [InlineData(InputO, 'O')]
+    [InlineData(InputP, 'P')]
+    [InlineData(InputR, 'R')]
+    [InlineData(InputU, 'U')]
+    [InlineData(InputY, 'Y')]
+    [InlineData(InputZ, 'Z')]
+    [InlineData(InputSpace, ' ')]
     public void TestReadLetter(string input, char expected) => OcrSmallFont.ReadLetter(input).Should().Be(expected);
 
-    [Test]
+    [Fact]
     public void TestReadString() => OcrSmallFont.ReadString(Input).Should().Be("ABC");
 
     private const string Input = """

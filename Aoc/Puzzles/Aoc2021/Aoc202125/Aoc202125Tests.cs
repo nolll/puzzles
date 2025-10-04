@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202125;
 
 public class Aoc202125Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var herd = new HerdOfSeaCucumbers(Input);
@@ -14,7 +11,7 @@ public class Aoc202125Tests
         result.Should().Be(58);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var result = 0;

@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202217;
 
 public class VerticalLineTests
 {
-    [Test]
+    [Fact]
     public void CanMoveRight()
     {
         var matrix = new Matrix<char>(3, 6, '.');
@@ -20,7 +18,7 @@ public class VerticalLineTests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void CanNotMoveRight()
     {
         var matrix = new Matrix<char>(3, 6, '.');
@@ -34,7 +32,7 @@ public class VerticalLineTests
         result.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void CanMoveLeft()
     {
         var matrix = new Matrix<char>(3, 6, '.');
@@ -48,7 +46,7 @@ public class VerticalLineTests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void CanNotMoveLeft()
     {
         var matrix = new Matrix<char>(3, 6, '.');
@@ -62,7 +60,7 @@ public class VerticalLineTests
         result.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void CanMoveDown()
     {
         var matrix = new Matrix<char>(3, 6, '.');
@@ -76,7 +74,7 @@ public class VerticalLineTests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void CanNotMoveDown()
     {
         var matrix = new Matrix<char>(3, 6, '.');

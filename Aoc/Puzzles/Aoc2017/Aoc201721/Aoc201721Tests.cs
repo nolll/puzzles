@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201721;
 
 public class Aoc201721Tests
 {
-    [Test]
+    [Fact]
     public void TwelvePixelsOnAfterTwoIterations()
     {
         const string input = """

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202114;
 
 public class Aoc202114Tests
 {
-    [Test]
+    [Fact]
     public void OneStep()
     {
         var polymerization = new Polymerization();
@@ -14,7 +11,7 @@ public class Aoc202114Tests
         result.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void TwoSteps()
     {
         var polymerization = new Polymerization();
@@ -23,7 +20,7 @@ public class Aoc202114Tests
         result.Should().Be(5);
     }
 
-    [Test]
+    [Fact]
     public void TenSteps()
     {
         var polymerization = new Polymerization();
@@ -32,7 +29,7 @@ public class Aoc202114Tests
         result.Should().Be(1588);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var polymerization = new Polymerization();

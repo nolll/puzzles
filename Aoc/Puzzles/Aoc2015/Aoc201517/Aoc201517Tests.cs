@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201517;
 
 public class Aoc201517Tests
 {
-    [Test]
+    [Fact]
     public void NumberOfCombinationsIsCorrect()
     {
         const string input = """

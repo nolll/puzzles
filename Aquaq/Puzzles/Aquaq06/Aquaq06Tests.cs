@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq06;
 
 public class Aquaq06Tests
 {
-    [Test]
+    [Fact]
     public void CountOccurrencesOfOne()
     {
         var result = Aquaq06.FindOneCount(3);

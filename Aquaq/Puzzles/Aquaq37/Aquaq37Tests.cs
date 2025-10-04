@@ -1,5 +1,4 @@
 using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Common;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq37;
@@ -70,14 +69,15 @@ public class Aquaq37Tests
                                       growl,2 2 2 0 0
                                       """;
 
-    [TestCase(WordsInput, "words")]
-    [TestCase(MajorInput, "major")]
-    [TestCase(StoryInput, "story")]
-    [TestCase(BeganInput, "began")]
-    [TestCase(ThereInput, "there")]
-    [TestCase(PriorInput, "prior")]
-    [TestCase(UnderInput, "under")]
-    [TestCase(GroupInput, "group")]
+    [Theory]
+    [InlineData(WordsInput, "words")]
+    [InlineData(MajorInput, "major")]
+    [InlineData(StoryInput, "story")]
+    [InlineData(BeganInput, "began")]
+    [InlineData(ThereInput, "there")]
+    [InlineData(PriorInput, "prior")]
+    [InlineData(UnderInput, "under")]
+    [InlineData(GroupInput, "group")]
     public void FindWords(string input, string expected)
     {
         var result = new Aquaq37().FindWords(input, new FileReader().ReadCommon("Words.txt"));
@@ -85,7 +85,7 @@ public class Aquaq37Tests
         result.FirstOrDefault().Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void MajorMarry()
     {
         var guess = new Aquaq37.Guess("marry", [2, 2, 1, 0, 0]);
@@ -94,7 +94,7 @@ public class Aquaq37Tests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void GroomDoggo()
     {
         var guess = new Aquaq37.Guess("doggo", [0, 1, 1, 0, 0]);
@@ -103,10 +103,11 @@ public class Aquaq37Tests
         result.Should().BeFalse();
     }
 
-    [TestCase("a", 0)]
-    [TestCase("wordsmince", 113)]
-    [TestCase("words", 74)]
-    [TestCase("mince", 39)]
+    [Theory]
+    [InlineData("a", 0)]
+    [InlineData("wordsmince", 113)]
+    [InlineData("words", 74)]
+    [InlineData("mince", 39)]
     public void WordScore(string input, int expected)
     {
         Aquaq37.GetWordScore(input).Should().Be(expected);

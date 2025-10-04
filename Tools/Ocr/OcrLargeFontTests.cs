@@ -1,22 +1,20 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Tools.Ocr;
 
 public class OcrLargeFontTests
 {
-    [TestCase(InputB, 'B')]
-    [TestCase(InputG, 'G')]
-    [TestCase(InputH, 'H')]
-    [TestCase(InputK, 'K')]
-    [TestCase(InputP, 'P')]
-    [TestCase(InputR, 'R')]
-    [TestCase(InputSpace, ' ')]
+    [Theory]
+    [InlineData(InputB, 'B')]
+    [InlineData(InputG, 'G')]
+    [InlineData(InputH, 'H')]
+    [InlineData(InputK, 'K')]
+    [InlineData(InputP, 'P')]
+    [InlineData(InputR, 'R')]
+    [InlineData(InputSpace, ' ')]
     public void TestReadLetter(string input, char expected) =>
         OcrLargeFont.ReadLetter(input)
             .Should().Be(expected);
 
-    [Test]
+    [Fact]
     public void TestReadString() =>
         OcrLargeFont.ReadString(Input)
             .Should().Be("HRP");

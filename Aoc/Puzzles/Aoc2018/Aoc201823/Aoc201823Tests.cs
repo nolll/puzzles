@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201823;
 
 public class Aoc201823Tests
 {
-    [Test]
+    [Fact]
     public void NanobotsInRangeOfStrongestNanobot()
     {
         const string input = """
@@ -26,7 +23,7 @@ public class Aoc201823Tests
         botCount.Should().Be(7);
     }
 
-    [Test]
+    [Fact]
     public void CubeDivision1X2X2()
     {
         var cube = new SpaceBox(new Point3d(0, 0, 0), new Point3d(0, 1, 1));
@@ -63,7 +60,7 @@ public class Aoc201823Tests
         subCubes[3].Max.Z.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void CubeDivision2X2X2()
     {
         var cube = new SpaceBox(new Point3d(0, 0, 0), new Point3d(1, 1, 1));
@@ -128,7 +125,7 @@ public class Aoc201823Tests
         subCubes[7].Max.Z.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void CubeDivision4X4X4()
     {
         var cube = new SpaceBox(new Point3d(0, 0, 0), new Point3d(3, 3, 3));
@@ -193,7 +190,7 @@ public class Aoc201823Tests
         subCubes[7].Max.Z.Should().Be(3);
     }
 
-    [Test]
+    [Fact]
     public void CubeDivision5X5X5()
     {
         var cube = new SpaceBox(new Point3d(0, 0, 0), new Point3d(4, 4, 4));
@@ -258,7 +255,7 @@ public class Aoc201823Tests
         subCubes[7].Max.Z.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void CubeDivision4X4X4Negative()
     {
         var cube = new SpaceBox(new Point3d(-3, -3, -3), new Point3d(0, 0, 0));
@@ -323,7 +320,7 @@ public class Aoc201823Tests
         subCubes[7].Max.Z.Should().Be(0);
     }
 
-    [Test]
+    [Fact]
     public void FindDistanceToBestCoords()
     {
         const string input = """

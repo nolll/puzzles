@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202423;
 
 public class Aoc202423Tests
@@ -40,10 +37,10 @@ public class Aoc202423Tests
                                  td-yn
                                  """;
 
-    [Test]
+    [Fact]
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("7");
 
-    [Test]
+    [Fact]
     public void Part2() => Sut.Part2(Input).Answer.Should().Be("co,de,ka,ta");
 
     private static Aoc202423 Sut => new();

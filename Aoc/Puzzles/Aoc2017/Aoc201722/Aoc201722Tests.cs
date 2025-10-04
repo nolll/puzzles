@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201722;
 
 public class Aoc201722Tests
@@ -11,9 +8,10 @@ public class Aoc201722Tests
                                  ...
                                  """;
 
-    [TestCase(7, 5)]
-    [TestCase(70, 41)]
-    [TestCase(10000, 5587)]
+    [Theory]
+    [InlineData(7, 5)]
+    [InlineData(70, 41)]
+    [InlineData(10000, 5587)]
     public void InfectionCountIsCorrectForPart1(int iterations, int expected)
     {
         var infection = new VirusInfection(Input);
@@ -22,8 +20,9 @@ public class Aoc201722Tests
         infectionCount.Should().Be(expected);
     }
 
-    [TestCase(100, 26)]
-    [TestCase(10_000_000, 2_511_944)]
+    [Theory]
+    [InlineData(100, 26)]
+    [InlineData(10_000_000, 2_511_944)]
     public void InfectionCountIsCorrectForPart2(int iterations, int expected)
     {
         var infection = new VirusInfection(Input);

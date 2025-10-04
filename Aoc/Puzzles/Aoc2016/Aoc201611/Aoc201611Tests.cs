@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
 
 public class Aoc201611Tests
 {
-    [Test]
+    [Fact]
     public void StepCountIsCorrect()
     {
         const string input = """
@@ -20,7 +17,7 @@ public class Aoc201611Tests
         simulator.StepCount.Should().Be(11);
     }
 
-    [Test]
+    [Fact]
     public void IdIsCorrect1()
     {
         var items = new List<RadioisotopeItem>
@@ -34,7 +31,7 @@ public class Aoc201611Tests
         floor.Id.Should().Be("HGHMLM");
     }
 
-    [Test]
+    [Fact]
     public void EmptyFloorIsValid()
     {
         var items = new List<RadioisotopeItem>();
@@ -43,7 +40,7 @@ public class Aoc201611Tests
         floor.IsValid.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void OnlyGeneratorsIsValid()
     {
         var items = new List<RadioisotopeItem>
@@ -55,7 +52,7 @@ public class Aoc201611Tests
         floor.IsValid.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void OnlyMicrochipsIsValid()
     {
         var items = new List<RadioisotopeItem>
@@ -67,7 +64,7 @@ public class Aoc201611Tests
         floor.IsValid.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void MatchingItemsIsValid()
     {
         var items = new List<RadioisotopeItem>
@@ -80,7 +77,7 @@ public class Aoc201611Tests
         floor.IsValid.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void NonMatchingItemsIsInvalid()
     {
         var items = new List<RadioisotopeItem>
@@ -93,7 +90,7 @@ public class Aoc201611Tests
         floor.IsValid.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void ExtraChipIsInvalid()
     {
         var items = new List<RadioisotopeItem>
@@ -107,7 +104,7 @@ public class Aoc201611Tests
         floor.IsValid.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void ExtraGeneratorIsValid()
     {
         var items = new List<RadioisotopeItem>
@@ -121,7 +118,7 @@ public class Aoc201611Tests
         floor.IsValid.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void IdIsCorrect2()
     {
         var floors = new List<RadioisotopeFloor>
@@ -146,7 +143,7 @@ public class Aoc201611Tests
         facility.Id.Should().Be("0:HGHMLM||LG|");
     }
 
-    [Test]
+    [Fact]
     public void AnonymizedIdIsCorrect()
     {
         var floors = new List<RadioisotopeFloor>
@@ -171,7 +168,7 @@ public class Aoc201611Tests
         facility.AnonymizedId.Should().Be("0:1X1Y2Y||2X|");
     }
     
-    [Test]
+    [Fact]
     public void FacilityIsValid()
     {
         var floors = new List<RadioisotopeFloor>
@@ -186,7 +183,7 @@ public class Aoc201611Tests
         facility.IsValid.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void FacilityIsInvalid()
     {
         var floors = new List<RadioisotopeFloor>
@@ -206,7 +203,7 @@ public class Aoc201611Tests
         facility.IsValid.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void IsFinished()
     {
         var floors = new List<RadioisotopeFloor>
@@ -226,7 +223,7 @@ public class Aoc201611Tests
         facility.IsDone.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void IsNotFinished()
     {
         var floors = new List<RadioisotopeFloor>

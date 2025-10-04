@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202008;
 
 public class Aoc202008Tests
 {
-    [Test]
+    [Fact]
     public void AccIsCorrectBeforeInfiniteLoop()
     {
         var console = new GameConsoleRunner(Input.Trim());
@@ -14,7 +11,7 @@ public class Aoc202008Tests
         accBeforeRepeat.Should().Be(5);
     }
 
-    [Test]
+    [Fact]
     public void AccIsCorrectAfterTerminateInModifiedProgram()
     {
         var console = new GameConsoleRunner(Input.Trim());
@@ -23,7 +20,7 @@ public class Aoc202008Tests
         accAtTermination.Should().Be(8);
     }
 
-    [Test]
+    [Fact]
     public void ModifiedProgramReturnsCorrectExitStatus()
     {
         const string input = """

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202308;
 
 public class Aoc202308Tests
 {
-    [Test]
+    [Fact]
     public void DesertPart1Example1()
     {
         const string input ="""
@@ -25,7 +22,7 @@ public class Aoc202308Tests
         result.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void DesertPart1Example2()
     {
         const string input = """
@@ -41,7 +38,7 @@ public class Aoc202308Tests
         result.Should().Be(6);
     }
 
-    [Test]
+    [Fact]
     public void DesertPart2()
     {
         const string input = """

@@ -1,19 +1,18 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq25;
 
 public class Aquaq25Tests
 {
-    [Test]
+    [Fact]
     public void EncodeMorse() => Aquaq25.EncodeMorse("jam donut")
         .Should().Be(".--- .- --   -.. --- -. ..- -");
 
-    [Test]
+    [Fact]
     public void DecodeMorse() => Aquaq25.DecodeMorse(".--- .- --   -.. --- -. ..- -")
         .Should().Be("jam donut");
 
-    [Test]
+    [Fact]
     public void ClicksToMorse()
     {
         const string input = """

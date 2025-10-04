@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202109;
 
 public class Aoc202109Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var heightMap = new HeightMap();
@@ -15,7 +12,7 @@ public class Aoc202109Tests
         result.Should().Be(15);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var heightMap = new HeightMap();

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202102;
 
 public class Aoc202102Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var validator = new SubmarineControl(Input.Trim(), false);
@@ -14,7 +11,7 @@ public class Aoc202102Tests
         validator.Result.Should().Be(150);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var validator = new SubmarineControl(Input.Trim(), true);

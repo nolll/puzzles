@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202317;
 
 public class Aoc202317Tests
 {
-    [Test]
+    [Fact]
     public void LeastHeatPart1()
     {
         const string input = """
@@ -29,7 +26,7 @@ public class Aoc202317Tests
         result.Should().Be(102);
     }
 
-    [Test]
+    [Fact]
     public void LeastHeatPart2_1()
     {
         const string input = """
@@ -53,7 +50,7 @@ public class Aoc202317Tests
         result.Should().Be(94);
     }
 
-    [Test]
+    [Fact]
     public void LeastHeatPart2_2()
     {
         const string input = """

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201509;
 
 public class Aoc201509Tests
 {
-    [Test]
+    [Fact]
     public void CalculateShortestAndLongestRoute()
     {
         const string input = """

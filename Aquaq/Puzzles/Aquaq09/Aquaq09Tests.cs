@@ -1,12 +1,11 @@
 using System.Numerics;
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq09;
 
 public class Aquaq09Tests
 {
-    [Test]
+    [Fact]
     public void MultiplyLargeNumbers()
     {
         var input = new List<int> { 2, 4, 8 }.Select(o => new BigInteger(o));

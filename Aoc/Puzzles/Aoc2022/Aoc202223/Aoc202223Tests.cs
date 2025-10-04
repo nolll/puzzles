@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202223;
 
 public class Aoc202223Tests
 {
-    [Test]
+    [Fact]
     public void Part1Small()
     {
         var puzzle = new Aoc202223();
@@ -15,7 +12,7 @@ public class Aoc202223Tests
         endRound.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void Part1Large()
     {
         var puzzle = new Aoc202223();
@@ -25,7 +22,7 @@ public class Aoc202223Tests
         endRound.Should().Be(10);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var puzzle = new Aoc202223();

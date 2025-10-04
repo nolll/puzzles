@@ -1,14 +1,12 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201616;
 
 public class Aoc201616Tests
 {
-    [TestCase("1", "100")]
-    [TestCase("0", "001")]
-    [TestCase("11111", "11111000000")]
-    [TestCase("111100001010", "1111000010100101011110000")]
+    [Theory]
+    [InlineData("1", "100")]
+    [InlineData("0", "001")]
+    [InlineData("11111", "11111000000")]
+    [InlineData("111100001010", "1111000010100101011110000")]
     public void DataIsCorrect(string input, string expected)
     {
         var dragonCurve = new DragonCurve();
@@ -17,7 +15,7 @@ public class Aoc201616Tests
         data.Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void DataAndLengthIsCorrect()
     {
         const string input = "111100001010";
@@ -31,7 +29,7 @@ public class Aoc201616Tests
         data.Length.Should().Be(expectedLength);
     }
 
-    [Test]
+    [Fact]
     public void ChecksumIsCorrect()
     {
         const string input = "110010110100";

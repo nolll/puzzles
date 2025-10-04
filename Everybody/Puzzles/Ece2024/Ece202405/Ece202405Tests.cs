@@ -1,20 +1,20 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Everybody.Puzzles.Ece2024.Ece202405;
 
 public class Ece202405Tests
 {
-    [TestCase(1, "3345")]
-    [TestCase(2, "3245")]
-    [TestCase(3, "3255")]
-    [TestCase(4, "3252")]
-    [TestCase(5, "4252")]
-    [TestCase(6, "4452")]
-    [TestCase(7, "4422")]
-    [TestCase(8, "4423")]
-    [TestCase(9, "2423")]
-    [TestCase(10, "2323")]
+    [Theory]
+    [InlineData(1, "3345")]
+    [InlineData(2, "3245")]
+    [InlineData(3, "3255")]
+    [InlineData(4, "3252")]
+    [InlineData(5, "4252")]
+    [InlineData(6, "4452")]
+    [InlineData(7, "4422")]
+    [InlineData(8, "4423")]
+    [InlineData(9, "2423")]
+    [InlineData(10, "2323")]
     public void Part1(int rounds, string expected)
     {
         const string input = """
@@ -27,7 +27,7 @@ public class Ece202405Tests
         Sut.RunPart1(input, rounds).Should().Be(expected);
     }
     
-    [Test]
+    [Fact]
     public void Part2()
     {
         const string input = """
@@ -38,7 +38,7 @@ public class Ece202405Tests
         Sut.RunPart2(input, 2024).Should().Be(50877075);
     }
     
-    [Test]
+    [Fact]
     public void Part3()
     {
         const string input = """

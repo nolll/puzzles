@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202123;
 
 public class Aoc202123Tests
 {
-    [Test]
+    [Fact]
     public void Moving()
     {
         var amphipods = new Amphipods(Input2, true);

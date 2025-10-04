@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Codyssi.Puzzles.Codyssi2024.Codyssi202403;
 
 public class Codyssi202403Tests
@@ -16,13 +13,13 @@ public class Codyssi202403Tests
                                  6541027340 8
                                  """;
 
-    [Test]
+    [Fact]
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("78");
 
-    [Test]
+    [Fact]
     public void Part2() => Sut.Part2(Input).Answer.Should().Be("3487996082");
 
-    [Test]
+    [Fact]
     public void Part3() => Sut.Part3(Input).Answer.Should().Be("30PzDC");
 
     private static Codyssi202403 Sut => new();

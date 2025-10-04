@@ -1,13 +1,13 @@
 using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq03;
 
 public class Aquaq03Tests
 {
-    [TestCase("UDRR", 4, 1, 14)]
-    [TestCase("RR", 3, 0, 6)]
+    [Theory]
+    [InlineData("UDRR", 4, 1, 14)]
+    [InlineData("RR", 3, 0, 6)]
     public void ShouldEndAt(string input, int expectedX, int expectedY, int expectedSum)
     {
         var walker = new Walker();

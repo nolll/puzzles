@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202009;
 
 public class Aoc202009Tests
@@ -28,7 +25,7 @@ public class Aoc202009Tests
                                  576
                                  """;
 
-    [Test]
+    [Fact]
     public void FirstInvalidNumber()
     {
         var port = new XmasPort(Input.Trim(), 5);
@@ -37,7 +34,7 @@ public class Aoc202009Tests
         num.Should().Be(127);
     }
 
-    [Test]
+    [Fact]
     public void FirstWeakness()
     {
         var port = new XmasPort(Input.Trim(), 5);

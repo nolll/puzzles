@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201717;
 
 public class Aoc201717Tests
 {
-    [Test]
+    [Fact]
     public void NextValueIsCorrect()
     {
         const int input = 3;
@@ -16,7 +13,7 @@ public class Aoc201717Tests
         runner.SecondValue.Should().Be(1226);
     }
 
-    [Test]
+    [Fact]
     public void SecondValueIsCorrect()
     {
         const int input = 3;

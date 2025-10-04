@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202323;
 
 public class Aoc202323Tests
@@ -31,7 +28,7 @@ public class Aoc202323Tests
                                  #####################.#
                                  """;
 
-    [Test]
+    [Fact]
     public void LongestHikePart1()
     {
         var result = Aoc202323.LongestHike(Input, false);
@@ -39,7 +36,7 @@ public class Aoc202323Tests
         result.Should().Be(94);
     }
 
-    [Test]
+    [Fact]
     public void LongestHikePart2()
     {
         var result = Aoc202323.LongestHike(Input, true);

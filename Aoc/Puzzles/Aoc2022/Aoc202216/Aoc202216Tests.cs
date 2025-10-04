@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202216;
 
 public class Aoc202216Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var pipes = new VolcanicPipes(Input);
@@ -14,7 +11,7 @@ public class Aoc202216Tests
         result.Should().Be(1651);
     }
 
-    [Test]
+    [Fact]
     public void Part1Linear()
     {
         // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
@@ -24,7 +21,7 @@ public class Aoc202216Tests
         result.Should().Be(2640);
     }
 
-    [Test]
+    [Fact]
     public void Part1Quadratic()
     {
         // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
@@ -34,7 +31,7 @@ public class Aoc202216Tests
         result.Should().Be(13468);
     }
 
-    [Test]
+    [Fact]
     public void Part1Circular()
     {
         // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
@@ -44,7 +41,7 @@ public class Aoc202216Tests
         result.Should().Be(1288);
     }
 
-    [Test]
+    [Fact]
     public void Part1Clustered()
     {
         // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
@@ -54,7 +51,7 @@ public class Aoc202216Tests
         result.Should().Be(2400);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var pipes = new VolcanicPipes(Input);

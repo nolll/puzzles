@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq04;
 
 public class Aquaq04Tests
 {
-    [Test]
+    [Fact]
     public void FindCoPrimes()
     {
         var result = Aquaq04.FindCoPrimesFor(15).ToArray();

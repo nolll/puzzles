@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201524;
 
 public class Aoc201524Tests
 {
-    [Test]
+    [Fact]
     public void QuantumEntanglementOfFirstGroupIsCorrect()
     {
         const string input = """

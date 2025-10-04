@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202115;
 
 public class Aoc202115Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var chitonRisk = new ChitonRisk();
@@ -14,7 +11,7 @@ public class Aoc202115Tests
         result.Should().Be(40);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var chitonRisk = new ChitonRisk();

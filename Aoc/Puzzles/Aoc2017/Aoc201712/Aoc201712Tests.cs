@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201712;
 
 public class Aoc201712Tests
 {
-    [Test]
+    [Fact]
     public void GroupCounts()
     {
         const string input = """

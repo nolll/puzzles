@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202310;
 
 public class Aoc202310Tests
 {
-    [Test]
+    [Fact]
     public void Pipes()
     {
         const string input = """
@@ -22,7 +20,7 @@ public class Aoc202310Tests
         result.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void Enlarge()
     {
         const string input = """
@@ -55,7 +53,7 @@ public class Aoc202310Tests
         result.Print().Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void Enclosed1()
     {
         const string input = """
@@ -75,7 +73,7 @@ public class Aoc202310Tests
         result.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void Enclosed2()
     {
         const string input = """
@@ -95,7 +93,7 @@ public class Aoc202310Tests
         result.Should().Be(4);
     }
     
-    [Test]
+    [Fact]
     public void Enclosed3()
     {
         const string input = """
@@ -116,7 +114,7 @@ public class Aoc202310Tests
         result.Should().Be(8);
     }
 
-    [Test]
+    [Fact]
     public void Enclosed4()
     {
         const string input = """

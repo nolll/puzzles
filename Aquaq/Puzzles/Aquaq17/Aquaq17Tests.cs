@@ -1,5 +1,4 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq17;
 
@@ -18,7 +17,7 @@ public class Aquaq17Tests
                                  1902-01-01,Other9,Somaliland,0,1,_,_,_,_
                                  """;
 
-    [Test]
+    [Fact]
     public void FindShame()
     {
         var result = Aquaq17.RunInternal(Input);

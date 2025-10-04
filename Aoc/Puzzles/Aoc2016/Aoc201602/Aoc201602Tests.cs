@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201602;
 
 public class Aoc201602Tests
 {
-    [Test]
+    [Fact]
     public void FindsSquareKeycode()
     {
         const string input = """
@@ -21,7 +18,7 @@ public class Aoc201602Tests
         code.Should().Be("1985");
     }
 
-    [Test]
+    [Fact]
     public void FindsDiamondKeycode()
     {
         const string input = """

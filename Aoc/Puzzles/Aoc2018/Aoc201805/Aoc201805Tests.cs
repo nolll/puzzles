@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201805;
 
 public class Aoc201805Tests
 {
-    [Test]
+    [Fact]
     public void FullPolymer()
     {
         const string input = "dabAcCaCBAcCcaDA";
@@ -15,7 +12,7 @@ public class Aoc201805Tests
         reducedPolymer.Should().Be("dabCBAcaDA");
     }
 
-    [Test]
+    [Fact]
     public void ImprovedPolymer()
     {
         const string input = "dabAcCaCBAcCcaDA";

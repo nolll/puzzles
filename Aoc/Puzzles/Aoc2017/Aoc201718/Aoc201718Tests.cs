@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201718;
 
 public class Aoc201718Tests
 {
-    [Test]
+    [Fact]
     public void SingleRunnerFindsFrequency()
     {
         const string input = """
@@ -27,7 +24,7 @@ public class Aoc201718Tests
         single.RecoveredFrequency.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void DuetRunnerSendCountIsCorrect()
     {
         const string input = """

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202108;
 
 public class Aoc202108Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var puzzle = new SevenSegmentDisplayDecoder(Input.Trim());
@@ -14,8 +11,9 @@ public class Aoc202108Tests
         result.Should().Be(26);
     }
 
-    [TestCase("abc", "abcd", true)]
-    [TestCase("abc", "abde", false)]
+    [Theory]
+    [InlineData("abc", "abcd", true)]
+    [InlineData("abc", "abde", false)]
     public void IsSubsetOf(string sShort, string sLong, bool expected)
     {
         var decoder = new DigitDecoder(SingleInput);
@@ -24,14 +22,14 @@ public class Aoc202108Tests
         result.Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void Part2Single()
     {
         var decoder = new DigitDecoder(SingleInput);
         decoder.DecodedNumber.Should().Be(5353);
     }
         
-    [Test]
+    [Fact]
     public void Part2()
     {
         var puzzle = new SevenSegmentDisplayDecoder(Input.Trim());

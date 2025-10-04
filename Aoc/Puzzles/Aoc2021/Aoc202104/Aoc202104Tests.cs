@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202104;
 
 public class Aoc202104Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var game = new BingoGame(Input);
@@ -14,7 +11,7 @@ public class Aoc202104Tests
         result.Should().Be(4512);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var game = new BingoGame(Input);

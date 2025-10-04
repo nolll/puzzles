@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq08;
 
 public class Aquaq08Tests
 {
-    [Test]
+    [Fact]
     public void DaySixState()
     {
         var result = Aquaq08.RunInternal(Input);

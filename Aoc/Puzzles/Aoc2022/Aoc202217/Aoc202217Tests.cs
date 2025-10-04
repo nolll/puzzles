@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202217;
 
 public class Aoc202217Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var tetris = new Tetris();
@@ -14,7 +11,7 @@ public class Aoc202217Tests
         result.Should().Be(3068);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var tetris = new Tetris();
@@ -23,7 +20,7 @@ public class Aoc202217Tests
         result.Should().Be(1_514_285_714_288);
     }
 
-    [Test]
+    [Fact]
     public void CycleFinder_NoCycle()
     {
         var input = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -34,7 +31,7 @@ public class Aoc202217Tests
         result.Length.Should().Be(0);
     }
 
-    [Test]
+    [Fact]
     public void CycleFinder_CycleFound()
     {
         var input = new[] { 7, 8, 9, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6, 7 };

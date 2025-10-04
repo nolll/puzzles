@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202414;
 
 public class Aoc202414Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         const string input = """

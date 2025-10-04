@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202412;
 
 public class Aoc202412Tests
 {
-    [Test]
+    [Fact]
     public void Part1_1()
     {
         const string input = """
@@ -18,7 +15,7 @@ public class Aoc202412Tests
         Sut.Part1(input).Answer.Should().Be("140");
     }
 
-    [Test]
+    [Fact]
     public void Part1_2()
     {
         const string input = """
@@ -37,7 +34,7 @@ public class Aoc202412Tests
         Sut.Part1(input).Answer.Should().Be("1930");
     }
     
-    [Test]
+    [Fact]
     public void Part2_1()
     {
         const string input = """
@@ -50,7 +47,7 @@ public class Aoc202412Tests
         Sut.Part2(input).Answer.Should().Be("80");
     }
     
-    [Test]
+    [Fact]
     public void Part2_2()
     {
         const string input = """
@@ -69,7 +66,7 @@ public class Aoc202412Tests
         Sut.Part2(input).Answer.Should().Be("1206");
     }
     
-    [Test]
+    [Fact]
     public void Part2_3()
     {
         const string input = """
@@ -83,7 +80,7 @@ public class Aoc202412Tests
         Sut.Part2(input).Answer.Should().Be("236");
     }
     
-    [Test]
+    [Fact]
     public void Part2_4()
     {
         const string input = """

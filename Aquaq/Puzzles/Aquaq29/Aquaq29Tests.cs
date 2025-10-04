@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq29;
 
 public class Aquaq29Tests
 {
-    [Test]
+    [Fact]
     public void CountGoodNumbers()
     {
         var input = new List<int>

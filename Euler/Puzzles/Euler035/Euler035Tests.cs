@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Euler.Puzzles.Euler035;
 
 public class Euler035Tests
 {
-    [Test]
+    [Fact]
     public void Rotations()
     {
         var result = Euler035.GetRotations(12345).ToArray();

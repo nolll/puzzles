@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202121;
 
 public class Aoc202121Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var game = new DiracDiceGame();
@@ -14,7 +11,7 @@ public class Aoc202121Tests
         result.Result.Should().Be(739785);
     }
     
-    [Test]
+    [Fact]
     public void Part2()
     {
         var game = new RealDiracDiceGame();

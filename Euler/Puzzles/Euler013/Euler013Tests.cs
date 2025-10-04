@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Euler.Puzzles.Euler013;
 
 public class Euler013Tests
 {
-    [Test]
+    [Fact]
     public void Test()
     {
         const string numbers = """

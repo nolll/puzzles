@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202402;
 
 public class Aoc202402Tests
@@ -14,14 +11,14 @@ public class Aoc202402Tests
                                  1 3 6 7 9
                                  """;
 
-    [Test]
+    [Fact]
     public void Part1()
     {
         var result = Sut.Part1(Input);
         result.Answer.Should().Be("2");
     }
     
-    [Test]
+    [Fact]
     public void Part2()
     {
         var result = Sut.Part2(Input);

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201719;
 
 public class Aoc201719Tests
 {
-    [Test]
+    [Fact]
     public void FindsAllCharacters()
     {
         const string input = """

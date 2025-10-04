@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201714;
 
 public class Aoc201714Tests
 {
-    [Test]
+    [Fact]
     public void UsedSquaresAreCorrect()
     {
         const string input = "flqrgnkx";
@@ -15,7 +12,7 @@ public class Aoc201714Tests
         defragmenter.UsedCount.Should().Be(8108);
     }
 
-    [Test]
+    [Fact]
     public void FindsRegions()
     {
         const string input = "flqrgnkx";

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201912;
 
 public class Aoc201912Tests
 {
-    [Test]
+    [Fact]
     public void After1Step()
     {
         const string map = """
@@ -35,7 +32,7 @@ public class Aoc201912Tests
         moonTracker.Moons[3].Z.Should().Be(0);
     }
 
-    [Test]
+    [Fact]
     public void After5Steps()
     {
         const string map = """
@@ -65,7 +62,7 @@ public class Aoc201912Tests
         moonTracker.Moons[3].Z.Should().Be(-1);
     }
 
-    [Test]
+    [Fact]
     public void After2770Steps()
     {
         const string map = """
@@ -95,7 +92,7 @@ public class Aoc201912Tests
         moonTracker.Moons[3].Z.Should().Be(0);
     }
 
-    [Test]
+    [Fact]
     public void TotalEnergyAfter10Steps()
     {
         const string map = """
@@ -111,7 +108,7 @@ public class Aoc201912Tests
         moonTracker.TotalEnergy.Should().Be(179);
     }
 
-    [Test]
+    [Fact]
     public void TotalEnergyAfter100Steps()
     {
         const string map = """
@@ -151,7 +148,7 @@ public class Aoc201912Tests
         moonTracker.Moons[3].Vz.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void CycleLengthIs2772()
     {
         const string map = """
@@ -167,7 +164,7 @@ public class Aoc201912Tests
         moonTracker.Iterations.Should().Be(2772);
     }
 
-    [Test]
+    [Fact]
     public void CycleLengthIs4686774924()
     {
         const string map = """

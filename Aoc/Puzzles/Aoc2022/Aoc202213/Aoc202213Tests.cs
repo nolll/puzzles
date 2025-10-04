@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202213;
 
 public class Aoc202213Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var signal = new DistressSignal();
@@ -14,7 +11,7 @@ public class Aoc202213Tests
         result.Should().Be(13);
     }
 
-    [Test]
+    [Fact]
     public void Parse1()
     {
         var result = DistressSignal.ParseSignalItem("[1,1,3,1,1]");
@@ -22,7 +19,7 @@ public class Aoc202213Tests
         result.Print().Should().Be("[1,1,3,1,1]");
     }
 
-    [Test]
+    [Fact]
     public void Parse2()
     {
         var result = DistressSignal.ParseSignalItem("[[1],4]");
@@ -30,7 +27,7 @@ public class Aoc202213Tests
         result.Print().Should().Be("[[1],4]");
     }
 
-    [Test]
+    [Fact]
     public void Parse3()
     {
         var result = DistressSignal.ParseSignalItem("[[[]]]");
@@ -38,7 +35,7 @@ public class Aoc202213Tests
         result.Print().Should().Be("[[[]]]");
     }
 
-    [Test]
+    [Fact]
     public void Parse4()
     {
         var result = DistressSignal.ParseSignalItem("[[8,7,6]]");
@@ -46,7 +43,7 @@ public class Aoc202213Tests
         result.Print().Should().Be("[[8,7,6]]");
     }
 
-    [Test]
+    [Fact]
     public void Parse5()
     {
         var result = DistressSignal.ParseSignalItem("[1,[2,[3,[4,[5,6,7]]]],8,9]");
@@ -54,7 +51,7 @@ public class Aoc202213Tests
         result.Print().Should().Be("[1,[2,[3,[4,[5,6,7]]]],8,9]");
     }
 
-    [Test]
+    [Fact]
     public void Compare1()
     {
         var left = DistressSignal.ParseSignalItem("[1,1,3,1,1]");
@@ -64,7 +61,7 @@ public class Aoc202213Tests
         result.Should().Be(-1);
     }
 
-    [Test]
+    [Fact]
     public void Compare2()
     {
         var left = DistressSignal.ParseSignalItem("[[1],[2,3,4]]");
@@ -74,7 +71,7 @@ public class Aoc202213Tests
         result.Should().Be(-1);
     }
 
-    [Test]
+    [Fact]
     public void Compare3()
     {
         var left = DistressSignal.ParseSignalItem("[9]");
@@ -84,7 +81,7 @@ public class Aoc202213Tests
         result.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void Compare4()
     {
         var left = DistressSignal.ParseSignalItem("[[4,4],4,4]");
@@ -94,7 +91,7 @@ public class Aoc202213Tests
         result.Should().Be(-1);
     }
 
-    [Test]
+    [Fact]
     public void Compare5()
     {
         var left = DistressSignal.ParseSignalItem("[7,7,7,7]");
@@ -104,7 +101,7 @@ public class Aoc202213Tests
         result.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void Compare6()
     {
         var left = DistressSignal.ParseSignalItem("[]");
@@ -114,7 +111,7 @@ public class Aoc202213Tests
         result.Should().Be(-1);
     }
 
-    [Test]
+    [Fact]
     public void Compare7()
     {
         var left = DistressSignal.ParseSignalItem("[[[]]]");
@@ -124,7 +121,7 @@ public class Aoc202213Tests
         result.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void Compare8()
     {
         var left = DistressSignal.ParseSignalItem("[1,[2,[3,[4,[5,6,7]]]],8,9]");
@@ -134,7 +131,7 @@ public class Aoc202213Tests
         result.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var signal = new DistressSignal();

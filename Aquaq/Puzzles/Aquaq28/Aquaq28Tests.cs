@@ -1,5 +1,4 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq28;
 
@@ -14,7 +13,7 @@ public class Aquaq28Tests
                                   ABCD
                                  """;
 
-    [Test]
+    [Fact]
     public void MirrorEncrypt() => Aquaq28.Encrypt(Input, "DAD")
         .Should().Be("CCC");
 }

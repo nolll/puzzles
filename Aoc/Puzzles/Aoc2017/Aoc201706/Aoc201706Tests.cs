@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201706;
 
 public class Aoc201706Tests
 {
-    [Test]
+    [Fact]
     public void StepsUntilRepeat()
     {
         const string input = "0,2,7,0";

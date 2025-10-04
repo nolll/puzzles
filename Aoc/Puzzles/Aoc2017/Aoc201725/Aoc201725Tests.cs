@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201725;
 
 public class Aoc201725Tests
 {
-    [Test]
+    [Fact]
     public void ChecksumIsCorrect()
     {
         const string input = """

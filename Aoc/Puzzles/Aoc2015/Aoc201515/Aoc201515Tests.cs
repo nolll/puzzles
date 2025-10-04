@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201515;
 
 public class Aoc201515Tests
@@ -10,7 +7,7 @@ public class Aoc201515Tests
                                  Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3
                                  """;
 
-    [Test]
+    [Fact]
     public void FindsHighestCookieScore()
     {
         var baker = new CookieBakery(Input);
@@ -19,7 +16,7 @@ public class Aoc201515Tests
         score.Should().Be(62842880);
     }
 
-    [Test]
+    [Fact]
     public void FindsHighestCookieScoreWith500Calories()
     {
         var baker = new CookieBakery(Input);

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202215;
 
 public class Aoc202215Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var zone = new BeaconZone();
@@ -14,7 +11,7 @@ public class Aoc202215Tests
         result.Should().Be(26);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var zone = new BeaconZone();

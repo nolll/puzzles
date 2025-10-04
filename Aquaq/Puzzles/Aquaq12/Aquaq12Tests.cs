@@ -1,5 +1,4 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq12;
 
@@ -13,7 +12,7 @@ public class Aquaq12Tests
                                  1 5
                                  """;
 
-    [Test]
+    [Fact]
     public void RideTheLift()
     {
         var result = Aquaq12.RideLift(Input);

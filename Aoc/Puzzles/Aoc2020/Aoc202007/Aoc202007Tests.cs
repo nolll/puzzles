@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202007;
 
 public class Aoc202007Tests
 {
-    [Test]
+    [Fact]
     public void NumberOfBagsThatCanCarryGoldBags()
     {
         const string input = """
@@ -26,7 +23,7 @@ public class Aoc202007Tests
         count.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void NumberOfBagsThatAGoldBagsContains()
     {
         const string input = """

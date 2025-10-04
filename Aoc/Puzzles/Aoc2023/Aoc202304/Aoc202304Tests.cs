@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202304;
 
 public class Aoc202304Tests
@@ -14,7 +11,7 @@ public class Aoc202304Tests
                                  Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
                                  """;
 
-    [Test]
+    [Fact]
     public void ScratchCards()
     {
         var result = Aoc202304.FlipThroughCards(Input);

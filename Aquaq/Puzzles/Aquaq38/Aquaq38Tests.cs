@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq38;
 
 public class Aquaq38Tests
 {
-    [Test]
+    [Fact]
     public void IndexStreaks()
     {
         var streaks = new IndexStreakProvider().Get([1, 3, 2]);
@@ -34,7 +33,7 @@ public class Aquaq38Tests
         streaks.Should().BeEquivalentTo(expected);
     }
 
-    [Test]
+    [Fact]
     public void ComfScore()
     {
         var streaks = Aquaq38.GetComfScore(new IndexStreakProvider(), [1, 3, 2]);

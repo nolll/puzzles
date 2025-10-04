@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201906;
 
 public class Aoc201906Tests
 {
-    [Test]
+    [Fact]
     public void ReturnsCorrectNumberOfOrbits()
     {
         const string input = """
@@ -28,7 +25,7 @@ public class Aoc201906Tests
         result.Should().Be(42);
     }
 
-    [Test]
+    [Fact]
     public void ReturnsDistanceFromMeToSanta()
     {
         const string input = """

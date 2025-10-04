@@ -1,14 +1,14 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Everybody.Puzzles.Ece2024.Ece202402;
 
 public class Ece202402Tests
 {
-    [TestCase("AWAKEN THE POWER ADORNED WITH THE FLAMES BRIGHT IRE", 4)]
-    [TestCase("THE FLAME SHIELDED THE HEART OF THE KINGS", 3)]
-    [TestCase("POWE PO WER P OWE R", 2)]
-    [TestCase("THERE IS THE END", 3)]
+    [Theory]
+    [InlineData("AWAKEN THE POWER ADORNED WITH THE FLAMES BRIGHT IRE", 4)]
+    [InlineData("THE FLAME SHIELDED THE HEART OF THE KINGS", 3)]
+    [InlineData("POWE PO WER P OWE R", 2)]
+    [InlineData("THERE IS THE END", 3)]
     public void CountRunicWords(string input, int expected)
     {
         string[] words = ["THE", "OWE", "MES", "ROD", "HER"];
@@ -18,11 +18,12 @@ public class Ece202402Tests
         count.Should().Be(expected);
     }
     
-    [TestCase("AWAKEN THE POWER ADORNED WITH THE FLAMES BRIGHT IRE", 15)]
-    [TestCase("THE FLAME SHIELDED THE HEART OF THE KINGS", 9)]
-    [TestCase("POWE PO WER P OWE R", 6)]
-    [TestCase("THERE IS THE END", 7)]
-    [TestCase("QAQAQ", 5)]
+    [Theory]
+    [InlineData("AWAKEN THE POWER ADORNED WITH THE FLAMES BRIGHT IRE", 15)]
+    [InlineData("THE FLAME SHIELDED THE HEART OF THE KINGS", 9)]
+    [InlineData("POWE PO WER P OWE R", 6)]
+    [InlineData("THERE IS THE END", 7)]
+    [InlineData("QAQAQ", 5)]
     public void CountRunicSymbols(string input, int expected)
     {
         string[] words = ["THE", "OWE", "MES", "ROD", "HER", "QAQ"];
@@ -32,7 +33,7 @@ public class Ece202402Tests
         count.Should().Be(expected);
     }
     
-    [Test]
+    [Fact]
     public void CountRunicSymbolsInMatrix()
     {
         string[] words = ["THE", "OWE", "MES", "ROD", "RODEO"];

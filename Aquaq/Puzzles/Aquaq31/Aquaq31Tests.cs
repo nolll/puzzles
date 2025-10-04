@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq31;
 
 public class Aquaq31Tests
 {
-    [Test]
+    [Fact]
     public void Rotate()
     {
         var result = Aquaq31.Rotate("U'LBRU");

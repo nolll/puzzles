@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201713;
 
 public class Aoc201713Tests
 {
-    [Test]
+    [Fact]
     public void SeverityIsCorrect()
     {
         const string input = """
@@ -19,17 +16,16 @@ public class Aoc201713Tests
         var severity = scanner.GetSeverity();
         severity.Should().Be(24);
     }
-        
-    [TestCase(0, 0, false)]
-    [TestCase(1, 0, false)]
-
-    [TestCase(2, 0, true)]
-    [TestCase(2, 1, false)]
-    [TestCase(2, 2, true)]
-
-    [TestCase(3, 2, false)]
-    [TestCase(3, 3, false)]
-    [TestCase(3, 4, true)]
+     
+    [Theory]
+    [InlineData(0, 0, false)]
+    [InlineData(1, 0, false)]
+    [InlineData(2, 0, true)]
+    [InlineData(2, 1, false)]
+    [InlineData(2, 2, true)]
+    [InlineData(3, 2, false)]
+    [InlineData(3, 3, false)]
+    [InlineData(3, 4, true)]
     public void IsCaughtAfterIterations(int range, int iteration, bool expected)
     {
         var layer = new FirewallLayer(range);
@@ -38,7 +34,7 @@ public class Aoc201713Tests
         pos.Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void DelayUntilPassIsCorrect()
     {
         const string input = """

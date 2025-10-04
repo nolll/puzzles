@@ -1,16 +1,13 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201615;
 
 public class Aoc201615Tests
 {
-    [TestCase(5, 4, 0, false)]
-    [TestCase(5, 4, 1, true)]
-    [TestCase(5, 4, 2, false)]
-
-    [TestCase(2, 1, 0, false)]
-    [TestCase(2, 1, 1, true)]
+    [Theory]
+    [InlineData(5, 4, 0, false)]
+    [InlineData(5, 4, 1, true)]
+    [InlineData(5, 4, 2, false)]
+    [InlineData(2, 1, 0, false)]
+    [InlineData(2, 1, 1, true)]
     public void CapsulePassesDisc(int positions, int startPos, int time, bool expected)
     {
         var disc = new KineticSculptureDisc(positions, startPos);
@@ -19,7 +16,7 @@ public class Aoc201615Tests
         pos.Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void CapsulePassesAtTime5()
     {
         const string input = """

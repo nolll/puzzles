@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Tools.Combinatorics;
 
 public class PermutationGeneratorTests
 {
-    [Test]
+    [Fact]
     public void GeneratesAllPermutations()
     {
         var result = PermutationGenerator.GetPermutations([1, 2, 3]).ToList();

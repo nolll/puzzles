@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202220;
 
 public class Aoc202220Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var result = Aoc202220.Run(Input, 1, 1);
@@ -13,7 +10,7 @@ public class Aoc202220Tests
         result.Should().Be(3);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var result = Aoc202220.Run(Input, 811_589_153, 10);

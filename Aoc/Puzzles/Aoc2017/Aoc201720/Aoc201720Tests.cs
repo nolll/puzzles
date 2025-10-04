@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201720;
 
 public class Aoc201720Tests
@@ -17,7 +14,7 @@ public class Aoc201720Tests
                                   p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>
                                   """;
 
-    [Test]
+    [Fact]
     public void After1Step()
     {
         var particleTracker = new ParticleTracker(Input1.Trim());
@@ -27,7 +24,7 @@ public class Aoc201720Tests
         particleTracker.Particles[1].X.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void After2Steps()
     {
         var particleTracker = new ParticleTracker(Input1.Trim());
@@ -37,7 +34,7 @@ public class Aoc201720Tests
         particleTracker.Particles[1].X.Should().Be(-2);
     }
 
-    [Test]
+    [Fact]
     public void After3Steps()
     {
         var particleTracker = new ParticleTracker(Input1.Trim());
@@ -47,7 +44,7 @@ public class Aoc201720Tests
         particleTracker.Particles[1].X.Should().Be(-8);
     }
 
-    [Test]
+    [Fact]
     public void ClosestParticleInTheLongRun()
     {
         var particleTracker = new ParticleTracker(Input1.Trim());
@@ -56,7 +53,7 @@ public class Aoc201720Tests
         particle.Should().Be(0);
     }
 
-    [Test]
+    [Fact]
     public void Collisions()
     {
         var particleTracker = new ParticleTracker(Input2.Trim());

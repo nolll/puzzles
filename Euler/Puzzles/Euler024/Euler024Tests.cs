@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Euler.Puzzles.Euler024;
 
 public class Euler024Tests
 {
-    [Test]
+    [Fact]
     public void PermutationsAreGeneratedInLexicographicOrder()
     {
         var permutations = Euler024.GetPermutations(3);

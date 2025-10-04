@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201608;
 
 public class Aoc201608Tests
 {
-    [Test]
+    [Fact]
     public void PixelCount()
     {
         const string input = """

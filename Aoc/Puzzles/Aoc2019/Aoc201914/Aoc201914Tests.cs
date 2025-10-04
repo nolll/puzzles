@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201914;
 
 public class Aoc201914Tests
 {
-    [Test]
+    [Fact]
     public void NumberOfOresIs31()
     {
         const string input = """
@@ -24,7 +21,7 @@ public class Aoc201914Tests
         result.Should().Be(31);
     }
 
-    [Test]
+    [Fact]
     public void NumberOfOresIs165()
     {
         const string input = """
@@ -44,7 +41,7 @@ public class Aoc201914Tests
         result.Should().Be(165);
     }
 
-    [Test]
+    [Fact]
     public void NumberOfOresIs13312()
     {
         const string input = """
@@ -66,7 +63,7 @@ public class Aoc201914Tests
         result.Should().Be(13312);
     }
 
-    [Test]
+    [Fact]
     public void NumberOfOresIs180697()
     {
         const string input = """
@@ -91,7 +88,7 @@ public class Aoc201914Tests
         result.Should().Be(180697);
     }
 
-    [Test]
+    [Fact]
     public void NumberOfOresIs2210736()
     {
         const string input = """
@@ -121,7 +118,7 @@ public class Aoc201914Tests
         result.Should().Be(2210736);
     }
 
-    [Test]
+    [Fact]
     public void FuelsForOneTrillionOresIs82892753()
     {
         const string input = """
@@ -143,7 +140,7 @@ public class Aoc201914Tests
         fuel.Should().Be(82892753);
     }
 
-    [Test]
+    [Fact]
     public void FuelsForOneTrillionOresIsCorrect5586022()
     {
         const string input = """
@@ -168,7 +165,7 @@ public class Aoc201914Tests
         fuel.Should().Be(5586022);
     }
 
-    [Test]
+    [Fact]
     public void FuelsForOneTrillionOresIsCorrect460664()
     {
         const string input = """

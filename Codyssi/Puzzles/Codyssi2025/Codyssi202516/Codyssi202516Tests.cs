@@ -1,6 +1,4 @@
 using System.Numerics;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202516;
 
@@ -64,22 +62,22 @@ public class Codyssi202516Tests
                                   ULDDRUURDRULRDLLURLDRLURLLL
                                   """;
 
-    [Test]
+    [Fact]
     public void Part1() => Sut.Part1(Input1, 3).Answer.Should().Be("201474");
 
-    [Test]
+    [Fact]
     public void Part2_1() => Sut.Part2(Input1, 3).Answer.Should().Be("118727856");
     
-    [Test]
+    [Fact]
     public void Part2_2() => Sut.Part2(Input2, 80).Answer.Should().Be("369594451623936000000");
     
-    [Test]
+    [Fact]
     public void Part2_3() => Sut.Part2(Input3, 80).Answer.Should().Be("41477439119464857600000");
 
-    [Test]
+    [Fact]
     public void Part3_1() => Sut.Part3(Input1, 3).Answer.Should().Be("59477096746944");
     
-    [Test]
+    [Fact]
     public void Part3_2() => Sut.Part3(Input2, 80).Answer.Should().Be("118479211258970523303936");
 
     private static Codyssi202516 Sut => new();

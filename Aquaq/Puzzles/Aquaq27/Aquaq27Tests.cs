@@ -1,5 +1,4 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq27;
 
@@ -21,7 +20,7 @@ public class Aquaq27Tests
                                              grumpiness
                                  """;
 
-    [Test] 
+    [Fact] 
     public void SnakeScore() => Aquaq27.CalculateSnakeScore(Input)
         .Should().Be(7995);
 }

@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq00;
 
 public class Aquaq00Tests
 {
-    [Test]
+    [Fact]
     public void Numpad()
     {
         var keyPresses = new List<(int key, int count)>

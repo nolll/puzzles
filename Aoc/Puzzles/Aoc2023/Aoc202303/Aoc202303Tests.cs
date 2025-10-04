@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202303;
 
 public class Aoc202303Tests
@@ -18,7 +15,7 @@ public class Aoc202303Tests
                                  .664.598..
                                  """;
 
-    [Test]
+    [Fact]
     public void EngineParts()
     {
         var result = Aoc202303.Run(Input);
@@ -26,7 +23,7 @@ public class Aoc202303Tests
         result.EngineParts.Should().Be(4361);
     }
 
-    [Test]
+    [Fact]
     public void GearRatios()
     {
         var result = Aoc202303.Run(Input);

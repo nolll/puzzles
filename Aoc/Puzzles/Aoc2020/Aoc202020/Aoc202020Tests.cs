@@ -1,12 +1,9 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202020;
 
 public class Aoc202020Tests
 {
-    [TestCase(2311)]
-    public void EdgesAreCorrect(long tileId)
+    [Fact]
+    public void EdgesAreCorrect()
     {
         const string input = """
                              Tile 2311:
@@ -30,7 +27,8 @@ public class Aoc202020Tests
         tile.Edges["left"].Should().Be(".#####..#.");
     }
 
-    [TestCase(2311, 3079)]
+    [Theory]
+    [InlineData(2311, 3079)]
     public void TilesHasMatchingEdge(long tileId1, long tileId2)
     {
         var puzzle = new ImageJigsawPuzzle(Input);
@@ -42,7 +40,7 @@ public class Aoc202020Tests
         hasMatchingEdge.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void CornerTilesAreCorrect()
     {
         var puzzle = new ImageJigsawPuzzle(Input);
@@ -55,7 +53,7 @@ public class Aoc202020Tests
         cornerTiles[3].Id.Should().Be(3079);
     }
 
-    [Test]
+    [Fact]
     public void EdgeTilesAreCorrect()
     {
         var puzzle = new ImageJigsawPuzzle(Input);
@@ -68,7 +66,7 @@ public class Aoc202020Tests
         cornerTiles[3].Id.Should().Be(2729);
     }
 
-    [Test]
+    [Fact]
     public void CenterTilesAreCorrect()
     {
         var puzzle = new ImageJigsawPuzzle(Input);
@@ -78,7 +76,7 @@ public class Aoc202020Tests
         cornerTiles[0].Id.Should().Be(1427);
     }
 
-    [Test]
+    [Fact]
     public void CornerTileProductIsCorrect()
     {
         var puzzle = new ImageJigsawPuzzle(Input);
@@ -87,7 +85,7 @@ public class Aoc202020Tests
         product.Should().Be(20899048083289);
     }
 
-    [Test]
+    [Fact]
     public void RemoveBorders()
     {
         const string input = """
@@ -121,7 +119,7 @@ public class Aoc202020Tests
         tile.Matrix.Print().Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void NumberOfHashesNotPartOfSeaMonsters()
     {
         var puzzle = new ImageJigsawPuzzle(Input);

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202118;
 
 public class Aoc202118Tests
 {
-    [Test]
+    [Fact]
     public void Parsing1()
     {
         var number = new SnailfishNumber("[1,2]");
@@ -14,7 +11,7 @@ public class Aoc202118Tests
         number.Right.LiteralValue.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void Parsing2()
     {
         var number = new SnailfishNumber("[[1,2],3]");
@@ -24,7 +21,7 @@ public class Aoc202118Tests
         number.Right.LiteralValue.Should().Be(3);
     }
 
-    [Test]
+    [Fact]
     public void Parsing3()
     {
         var number = new SnailfishNumber("[9,[8,7]]");
@@ -34,7 +31,7 @@ public class Aoc202118Tests
         number.Right.Right.LiteralValue.Should().Be(7);
     }
 
-    [Test]
+    [Fact]
     public void Parsing4()
     {
         var number = new SnailfishNumber("[[1,9],[8,5]]");
@@ -45,7 +42,7 @@ public class Aoc202118Tests
         number.Right.Right.LiteralValue.Should().Be(5);
     }
 
-    [Test]
+    [Fact]
     public void Parsing5()
     {
         var number = new SnailfishNumber("[[[[1,2],[3,4]],[[5,6],[7,8]]],9]");
@@ -62,7 +59,7 @@ public class Aoc202118Tests
         number.Right.LiteralValue.Should().Be(9);
     }
 
-    [Test]
+    [Fact]
     public void Parsing6()
     {
         var number = new SnailfishNumber("[[[9,[3,8]],[[0,9],6]],[[[3,7],[4,9]],3]]");
@@ -70,7 +67,7 @@ public class Aoc202118Tests
         number.ToString().Should().Be("[[[9,[3,8]],[[0,9],6]],[[[3,7],[4,9]],3]]");
     }
 
-    [Test]
+    [Fact]
     public void Parsing7()
     {
         var number = new SnailfishNumber("[[[[1,3],[5,3]],[[1,3],[8,7]]],[[[4,9],[6,9]],[[8,2],[7,3]]]]");
@@ -78,7 +75,7 @@ public class Aoc202118Tests
         number.ToString().Should().Be("[[[[1,3],[5,3]],[[1,3],[8,7]]],[[[4,9],[6,9]],[[8,2],[7,3]]]]");
     }
 
-    [Test]
+    [Fact]
     public void Parsing8()
     {
         var number = new SnailfishNumber("[[[[0,7],4],[5,[0,3]]],[1,1]]");
@@ -86,7 +83,7 @@ public class Aoc202118Tests
         number.ToString().Should().Be("[[[[0,7],4],[5,[0,3]]],[1,1]]");
     }
 
-    [Test]
+    [Fact]
     public void Exploding1()
     {
         var math = new SnailfishMath();
@@ -96,7 +93,7 @@ public class Aoc202118Tests
         result.ToString().Should().Be("[[[[0,9],2],3],4]");
     }
 
-    [Test]
+    [Fact]
     public void Exploding2()
     {
         var math = new SnailfishMath();
@@ -106,7 +103,7 @@ public class Aoc202118Tests
         result.ToString().Should().Be("[7,[6,[5,[7,0]]]]");
     }
 
-    [Test]
+    [Fact]
     public void Exploding3()
     {
         var math = new SnailfishMath();
@@ -116,7 +113,7 @@ public class Aoc202118Tests
         result.ToString().Should().Be("[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]");
     }
 
-    [Test]
+    [Fact]
     public void Adding1()
     {
         var math = new SnailfishMath();
@@ -127,7 +124,7 @@ public class Aoc202118Tests
         result.ToString().Should().Be("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]");
     }
 
-    [Test]
+    [Fact]
     public void Sum1()
     {
         const string input = """
@@ -145,7 +142,7 @@ public class Aoc202118Tests
         result.ToString().Should().Be("[[[[5,0],[7,4]],[5,5]],[6,6]]");
     }
 
-    [Test]
+    [Fact]
     public void Sum2()
     {
         const string input = """
@@ -167,7 +164,7 @@ public class Aoc202118Tests
         result.ToString().Should().Be("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]");
     }
 
-    [Test]
+    [Fact]
     public void Magnitude1()
     {
         var math = new SnailfishMath();
@@ -176,7 +173,7 @@ public class Aoc202118Tests
         number.Magnitude.Should().Be(143);
     }
 
-    [Test]
+    [Fact]
     public void Magnitude2()
     {
         var math = new SnailfishMath();
@@ -185,7 +182,7 @@ public class Aoc202118Tests
         number.Magnitude.Should().Be(3488);
     }
 
-    [Test]
+    [Fact]
     public void Part1()
     {
         const string input = """
@@ -208,7 +205,7 @@ public class Aoc202118Tests
         result.Magnitude.Should().Be(4140);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         const string input = """

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201803;
 
 public class Aoc201803Tests
 {
-    [Test]
+    [Fact]
     public void NoOverlap()
     {
         const string claims = """
@@ -18,7 +15,7 @@ public class Aoc201803Tests
         puzzle.OverlapCount.Should().Be(0);
     }
 
-    [Test]
+    [Fact]
     public void Overlap()
     {
         const string claims = """
@@ -31,7 +28,7 @@ public class Aoc201803Tests
         puzzle.OverlapCount.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void IdWithNoOverlap()
     {
         const string claims = """

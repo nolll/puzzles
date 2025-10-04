@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202314;
 
 public class Aoc202314Tests
 {
-    [Test]
+    [Fact]
     public void RollNorth()
     {
         const string input = """
@@ -26,7 +23,7 @@ public class Aoc202314Tests
         result.Should().Be(136);
     }
 
-    [Test]
+    [Fact]
     public void RunOneCycle()
     {
         const string input = """
@@ -60,7 +57,7 @@ public class Aoc202314Tests
         result.Print().Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void RunManyCycles()
     {
         const string input = """
@@ -81,7 +78,7 @@ public class Aoc202314Tests
         result.Should().Be(64);
     }
 
-    [Test]
+    [Fact]
     public void RunTwoCycles()
     {
         const string input = """

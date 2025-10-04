@@ -1,18 +1,16 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202222;
 
 public class Aoc202222Tests
 {
-    [Test]
+    [Fact]
     public void Part1() => Aoc202222.Part1(Input).Should().Be(6032);
 
     // todo: write tests for part 2 test data (separate mapping, or sort out general mapping).
     // There are tests for the mapping of the real data though
     
-    //[Test]
+    //[Fact]
     //public void Part2()
     //{                            
     //    var puzzle = new Year2022Day22();
@@ -21,43 +19,47 @@ public class Aoc202222Tests
     //    result.Should().Be(5031);
     //}
 
-    [TestCase(0, 100, '^', 50, 50, '>')]
-    [TestCase(49, 100, '^', 50, 99, '>')]
-    [TestCase(50, 0, '^', 0, 150, '>')]
-    [TestCase(99, 0, '^', 0, 199, '>')]
-    [TestCase(100, 0, '^', 0, 199, '^')]
-    [TestCase(149, 0, '^', 49, 199, '^')]
+    [Theory]
+    [InlineData(0, 100, '^', 50, 50, '>')]
+    [InlineData(49, 100, '^', 50, 99, '>')]
+    [InlineData(50, 0, '^', 0, 150, '>')]
+    [InlineData(99, 0, '^', 0, 199, '>')]
+    [InlineData(100, 0, '^', 0, 199, '^')]
+    [InlineData(149, 0, '^', 49, 199, '^')]
     public void TestUpTransitions(int fromX, int fromY, char fromDir, int toX, int toY, char toDir) => 
         TestTransitions(fromX, fromY, fromDir, toX, toY, toDir);
 
-    [TestCase(149, 0, '>', 99, 149, '<')]
-    [TestCase(149, 49, '>', 99, 100, '<')]
-    [TestCase(99, 50, '>', 100, 49, '^')]
-    [TestCase(99, 99, '>', 149, 49, '^')]
-    [TestCase(99, 100, '>', 149, 49, '<')]
-    [TestCase(99, 149, '>', 149, 0, '<')]
-    [TestCase(49, 150, '>', 50, 149, '^')]
-    [TestCase(49, 199, '>', 99, 149, '^')]
+    [Theory]
+    [InlineData(149, 0, '>', 99, 149, '<')]
+    [InlineData(149, 49, '>', 99, 100, '<')]
+    [InlineData(99, 50, '>', 100, 49, '^')]
+    [InlineData(99, 99, '>', 149, 49, '^')]
+    [InlineData(99, 100, '>', 149, 49, '<')]
+    [InlineData(99, 149, '>', 149, 0, '<')]
+    [InlineData(49, 150, '>', 50, 149, '^')]
+    [InlineData(49, 199, '>', 99, 149, '^')]
     public void TestRightTransitions(int fromX, int fromY, char fromDir, int toX, int toY, char toDir) => 
         TestTransitions(fromX, fromY, fromDir, toX, toY, toDir);
 
-    [TestCase(0, 199, 'v', 100, 0, 'v')]
-    [TestCase(49, 199, 'v', 149, 0, 'v')]
-    [TestCase(50, 149, 'v', 49, 150, '<')]
-    [TestCase(99, 149, 'v', 49, 199, '<')]
-    [TestCase(100, 49, 'v', 99, 50, '<')]
-    [TestCase(149, 49, 'v', 99, 99, '<')]
+    [Theory]
+    [InlineData(0, 199, 'v', 100, 0, 'v')]
+    [InlineData(49, 199, 'v', 149, 0, 'v')]
+    [InlineData(50, 149, 'v', 49, 150, '<')]
+    [InlineData(99, 149, 'v', 49, 199, '<')]
+    [InlineData(100, 49, 'v', 99, 50, '<')]
+    [InlineData(149, 49, 'v', 99, 99, '<')]
     public void TestDownTransitions(int fromX, int fromY, char fromDir, int toX, int toY, char toDir) => 
         TestTransitions(fromX, fromY, fromDir, toX, toY, toDir);
 
-    [TestCase(50, 0, '<', 0, 149, '>')]
-    [TestCase(50, 49, '<', 0, 100, '>')]
-    [TestCase(50, 50, '<', 0, 100, 'v')]
-    [TestCase(50, 99, '<', 49, 100, 'v')]
-    [TestCase(0, 100, '<', 50, 49, '>')]
-    [TestCase(0, 149, '<', 50, 0, '>')]
-    [TestCase(0, 150, '<', 50, 0, 'v')]
-    [TestCase(0, 199, '<', 99, 0, 'v')]
+    [Theory]
+    [InlineData(50, 0, '<', 0, 149, '>')]
+    [InlineData(50, 49, '<', 0, 100, '>')]
+    [InlineData(50, 50, '<', 0, 100, 'v')]
+    [InlineData(50, 99, '<', 49, 100, 'v')]
+    [InlineData(0, 100, '<', 50, 49, '>')]
+    [InlineData(0, 149, '<', 50, 0, '>')]
+    [InlineData(0, 150, '<', 50, 0, 'v')]
+    [InlineData(0, 199, '<', 99, 0, 'v')]
     public void TestLeftTransitions(int fromX, int fromY, char fromDir, int toX, int toY, char toDir) => 
         TestTransitions(fromX, fromY, fromDir, toX, toY, toDir);
 

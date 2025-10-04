@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201707;
 
 public class Aoc201707Tests
@@ -21,7 +18,7 @@ public class Aoc201707Tests
                                  cntj (57)
                                  """;
 
-    [Test]
+    [Fact]
     public void FindsNameOfBottomProgram()
     {
         var towers = new RecursiveTowers(Input);
@@ -30,7 +27,7 @@ public class Aoc201707Tests
         name.Should().Be("tknk");
     }
 
-    [Test]
+    [Fact]
     public void FindsWeightDiff()
     {
         var towers = new RecursiveTowers(Input);

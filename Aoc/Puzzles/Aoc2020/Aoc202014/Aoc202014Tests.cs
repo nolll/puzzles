@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202014;
 
 public class Aoc202014Tests
 {
-    [Test]
+    [Fact]
     public void Part1_SumIsCorrect()
     {
         const string input = """
@@ -21,7 +18,7 @@ public class Aoc202014Tests
         sum.Should().Be(165);
     }
 
-    [Test]
+    [Fact]
     public void Part2_SumIsCorrect()
     {
         const string input = """

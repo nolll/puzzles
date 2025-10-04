@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Tools.Graphs;
 
 public class DijkstraTests
 {
-    [Test]
+    [Fact]
     public void SmallestCost()
     {
         var edges = new List<GraphEdge>

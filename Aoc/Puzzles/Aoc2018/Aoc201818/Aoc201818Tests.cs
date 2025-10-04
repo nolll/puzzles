@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201818;
 
 public class Aoc201818Tests
 {
-    [Test]
+    [Fact]
     public void ResourceValueIsCorrect()
     {
         const string input = """

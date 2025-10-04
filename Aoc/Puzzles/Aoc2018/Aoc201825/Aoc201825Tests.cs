@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201825;
 
 public class Aoc201825Tests
 {
-    [Test]
+    [Fact]
     public void FindsConstellations1()
     {
         const string input = """
@@ -25,7 +22,7 @@ public class Aoc201825Tests
         constellationCount.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void FindsConstellations2()
     {
         const string input = """
@@ -47,7 +44,7 @@ public class Aoc201825Tests
         constellationCount.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void FindsConstellations3()
     {
         const string input = """
@@ -69,7 +66,7 @@ public class Aoc201825Tests
         constellationCount.Should().Be(3);
     }
 
-    [Test]
+    [Fact]
     public void FindsConstellations4()
     {
         const string input = """

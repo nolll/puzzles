@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201804;
 
 public class Aoc201804Tests
 {
-    [Test]
+    [Fact]
     public void StrategyOne()
     {
         var puzzle = new GuardSleepPuzzle(Input);
@@ -14,7 +11,7 @@ public class Aoc201804Tests
         puzzle.StrategyOneScore.Should().Be(240);
     }
 
-    [Test]
+    [Fact]
     public void StrategyTwo()
     {
         var puzzle = new GuardSleepPuzzle(Input);

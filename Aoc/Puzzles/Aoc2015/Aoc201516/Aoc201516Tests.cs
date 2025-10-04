@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201516;
 
 public class Aoc201516Tests
 {
-    [Test]
+    [Fact]
     public void SelectsCorrectAuntSue()
     {
         const string input = """

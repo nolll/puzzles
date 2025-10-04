@@ -1,5 +1,4 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Everybody.Puzzles.Ece2024.Ece202406;
 
@@ -18,14 +17,14 @@ public class Ece202406Tests
                                  BUG:ANT
                                  """;
 
-    [Test]
+    [Fact]
     public void Part1()
     {
         var result = Sut.RunPart1(Input);
         result.Answer.Should().Be("RRB@");
     }
     
-    [Test]
+    [Fact]
     public void Part2And3()
     {
         var result = Sut.RunPart2(Input);

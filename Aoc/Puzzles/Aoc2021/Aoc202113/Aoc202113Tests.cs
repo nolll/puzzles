@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202113;
 
 public class Aoc202113Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var paper = new TransparentPaper(Input);
@@ -14,7 +11,7 @@ public class Aoc202113Tests
         result.Should().Be(17);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var paper = new TransparentPaper(Input);

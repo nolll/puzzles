@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202006;
 
 public class Aoc202006Tests
 {
-    [Test]
+    [Fact]
     public void SumOfAtLeastYesAnswerCounts()
     {
         var reader = new DeclarationFormReader(Input);
@@ -14,7 +11,7 @@ public class Aoc202006Tests
         sum.Should().Be(11);
     }
 
-    [Test]
+    [Fact]
     public void SumOfAllAnswerCounts()
     {
         var reader = new DeclarationFormReader(Input);

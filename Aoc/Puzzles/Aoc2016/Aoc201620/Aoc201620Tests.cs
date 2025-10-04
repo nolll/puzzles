@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201620;
 
 public class Aoc201620Tests
 {
-    [Test]
+    [Fact]
     public void FindsUnblockedIps()
     {
         const string input = """
@@ -20,7 +17,7 @@ public class Aoc201620Tests
         lowestIp.Should().Be(3);
     }
 
-    [Test]
+    [Fact]
     public void AllowedIpCountIsCorrect()
     {
         const string input = """

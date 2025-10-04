@@ -1,12 +1,11 @@
 using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Common;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq16;
 
 public class Aquaq16Tests
 {
-    [Test]
+    [Fact]
     public void KerningSpaces()
     {
         const string input = "LTA";

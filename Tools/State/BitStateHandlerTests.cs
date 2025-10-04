@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Tools.State;
 
 public class BitStateHandlerTests
 {
-    [Test]
+    [Fact]
     public void IsAllMarked()
     {
         var sut = new BitStateHandler("abcd");
@@ -17,14 +14,14 @@ public class BitStateHandlerTests
         sut.IsAllMarked(state).Should().BeTrue();
     }
     
-    [Test]
+    [Fact]
     public void MaxValue()
     {
         var sut = new BitStateHandler("abcd");
         sut.MaxValue.Should().Be(15);
     }
 
-    [Test]
+    [Fact]
     public void IsMarked()
     {
         var sut = new BitStateHandler("abcd");

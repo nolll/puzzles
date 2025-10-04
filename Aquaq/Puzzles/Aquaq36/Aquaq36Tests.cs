@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq36;
 
 public class Aquaq36Tests
 {
-    [Test]
+    [Fact]
     public void SolveWithKnownNumbers()
     {
         var gridNumbers = "252 260 13 30 25 144 36 30 48 21 40 30 224 56 46 22"
@@ -19,7 +18,7 @@ public class Aquaq36Tests
         result.Should().Be(142);
     }
 
-    [Test]
+    [Fact]
     public void Factors()
     {
         var gridNumbers = "10 12 25"
@@ -32,7 +31,7 @@ public class Aquaq36Tests
         result.Should().BeEquivalentTo(expected);
     }
     
-    [Test]
+    [Fact]
     public void PossibleInputNumbers()
     {
         var input = "* 2 3 * 4 5 6 * 7 7 * 10 10 13 * 15"
@@ -63,7 +62,7 @@ public class Aquaq36Tests
         });
     }
 
-    //[Test]
+    //[Fact]
     //public void PossibleInputNumbersCombinationsRestrictedToFactors()
     //{
     //    var input = "* 2 3 * 4 5 6 * 7 7 * 10 10 13 * 15"
@@ -84,7 +83,7 @@ public class Aquaq36Tests
     //    });
     //}
 
-    //[Test]
+    //[Fact]
     //public void PossibleFullInputNumbersRestrictedToFactors()
     //{
     //    var input = "* 2 3 * 4 5 6 * 7 7 * 10 10 13 * 15"

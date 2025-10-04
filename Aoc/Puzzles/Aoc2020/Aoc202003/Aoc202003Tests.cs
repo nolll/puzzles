@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202003;
 
 public class Aoc202003Tests
@@ -19,7 +16,7 @@ public class Aoc202003Tests
                                  .#..#...#.#
                                  """;
 
-    [Test]
+    [Fact]
     public void TreeCount_3_1_IsCorrect()
     {
         var navigator = new TreeNavigator(Input);
@@ -28,7 +25,7 @@ public class Aoc202003Tests
         treeCount.Should().Be(7);
     }
 
-    [Test]
+    [Fact]
     public void TreeCount_1_2_IsCorrect()
     {
         var navigator = new TreeNavigator(Input);
@@ -37,7 +34,7 @@ public class Aoc202003Tests
         treeCount.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void TreeCountsAreCorrect()
     {
         var navigator = new TreeNavigator(Input);

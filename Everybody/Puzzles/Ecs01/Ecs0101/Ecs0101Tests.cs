@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Everybody.Puzzles.Ecs01.Ecs0101;
 
 public class Ecs0101Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         const string input = """
@@ -20,7 +19,7 @@ public class Ecs0101Tests
         Sut.RunPart1(input).Answer.Should().Be("11611972920");
     }
     
-    [Test]
+    [Fact]
     public void Part2_1()
     {
         const string input = """
@@ -35,7 +34,7 @@ public class Ecs0101Tests
         Sut.RunPart2(input).Answer.Should().Be("11051340");
     }
     
-    [Test]
+    [Fact]
     public void Part2_2()
     {
         const string input = """
@@ -49,7 +48,7 @@ public class Ecs0101Tests
         Sut.RunPart2(input).Answer.Should().Be("1507702060886");
     }
     
-    [Test]
+    [Fact]
     public void Part3_1()
     {
         const string input = """
@@ -64,7 +63,7 @@ public class Ecs0101Tests
         Sut.RunPart3(input).Answer.Should().Be("3279640");
     }
     
-    [Test]
+    [Fact]
     public void Part3_2()
     {
         const string input = """
@@ -78,35 +77,40 @@ public class Ecs0101Tests
         Sut.RunPart3(input).Answer.Should().Be("7276515438396");
     }
     
-    [TestCase(2, 4, 5, 1342)]
-    [TestCase(3, 5, 16, 311193)]
+    [Theory]
+    [InlineData(2, 4, 5, 1342)]
+    [InlineData(3, 5, 16, 311193)]
     public void Eni1(long n, long exp, long mod, long expected) => Ecs0101.Eni1(n, exp, mod).Should().Be(expected);
     
-    [Test]
+    [Fact]
     public void Eni1Sum() => Ecs0101.EniSum(Ecs0101.Eni1, 4, 4, 6, 3, 4, 5, 11).Should().Be(114644);
 
-    [TestCase(2, 7, 5, 34213)]
-    [TestCase(3, 8, 16, 111931)]
-    [TestCase(4, 14, 11, 39541)]
+    [Theory]
+    [InlineData(2, 7, 5, 34213)]
+    [InlineData(3, 8, 16, 111931)]
+    [InlineData(4, 14, 11, 39541)]
     public void Eni2(long n, long exp, long mod, long expected) =>
         Ecs0101.Eni2(n, exp, mod).Should().Be(expected);
     
-    [TestCase(4, 4, 6, 3, 14, 15, 11, 150231)]
-    [TestCase(8, 4, 7, 8, 14, 16, 12, 110099)]
-    [TestCase(2, 8, 6, 2, 14, 15, 13, 9387665)]
-    [TestCase(5, 9, 6, 8, 16, 18, 14, 1113198)]
-    [TestCase(5, 9, 7, 6, 16, 18, 15, 11051340)]
-    [TestCase(8, 8, 8, 6, 19, 16, 16, 0)]
+    [Theory]
+    [InlineData(4, 4, 6, 3, 14, 15, 11, 150231)]
+    [InlineData(8, 4, 7, 8, 14, 16, 12, 110099)]
+    [InlineData(2, 8, 6, 2, 14, 15, 13, 9387665)]
+    [InlineData(5, 9, 6, 8, 16, 18, 14, 1113198)]
+    [InlineData(5, 9, 7, 6, 16, 18, 15, 11051340)]
+    [InlineData(8, 8, 8, 6, 19, 16, 16, 0)]
     public void Eni2Sum(long a, long b, long c, long x, long y, long z, long m, long expected) => 
         Ecs0101.EniSum(Ecs0101.Eni2, a, b, c, x, y, z, m).Should().Be(expected);
     
-    [TestCase(2, 7, 5, 19)]
-    [TestCase(3, 8, 16, 48)]
+    [Theory]
+    [InlineData(2, 7, 5, 19)]
+    [InlineData(3, 8, 16, 48)]
     public void Eni3(long n, long exp, long mod, long expected) =>
         Ecs0101.Eni3(n, exp, mod).Should().Be(expected);
     
-    [TestCase(2, 8, 6, 2000, 14000, 15000, 130, 2079860)]
-    [TestCase(8, 8, 8, 6000, 19000, 16000, 160, 3279640)]
+    [Theory]
+    [InlineData(2, 8, 6, 2000, 14000, 15000, 130, 2079860)]
+    [InlineData(8, 8, 8, 6000, 19000, 16000, 160, 3279640)]
     public void Eni3Sum(long a, long b, long c, long x, long y, long z, long m, long expected) => 
         Ecs0101.EniSum(Ecs0101.Eni3, a, b, c, x, y, z, m).Should().Be(expected);
 

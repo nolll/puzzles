@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202514;
 
 public class Codyssi202514Tests
@@ -23,13 +20,13 @@ public class Codyssi202514Tests
                                  15 xRbzjOM | Quality : 36, Cost : 20, Unique Materials : 21
                                  """;
 
-    [Test]
+    [Fact]
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("90");
 
-    [Test]
+    [Fact]
     public void Part2() => Sut.Part2(Input).Answer.Should().Be("8256");
 
-    [Test]
+    [Fact]
     public void Part3() => Sut.Part3(Input, 150).Answer.Should().Be("59388");
 
     private static Codyssi202514 Sut => new();

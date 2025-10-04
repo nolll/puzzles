@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202313;
 
 public class Aoc202313Tests
 {
-    [Test]
+    [Fact]
     public void MirrorsExample1()
     {
         const string input = """
@@ -23,7 +20,7 @@ public class Aoc202313Tests
         result.Should().Be(5);
     }
 
-    [Test]
+    [Fact]
     public void MirrorsMatchLastRow()
     {
         const string input = """
@@ -41,7 +38,7 @@ public class Aoc202313Tests
         result.Should().Be(600);
     }
 
-    [Test]
+    [Fact]
     public void MirrorsMatchLastCol()
     {
         const string input = """
@@ -59,7 +56,7 @@ public class Aoc202313Tests
         result.Should().Be(8);
     }
     
-    [Test]
+    [Fact]
     public void SmudgedMirrors()
     {
         const string input = """
@@ -77,7 +74,7 @@ public class Aoc202313Tests
         result.Should().Be(300);
     }
 
-    [Test]
+    [Fact]
     public void SmudgedMirrors2()
     {
         const string input = """
@@ -95,7 +92,7 @@ public class Aoc202313Tests
         result.Should().Be(100);
     }
 
-    [Test]
+    [Fact]
     public void Part1()
     {
         const string input = """
@@ -121,7 +118,7 @@ public class Aoc202313Tests
         result.Answer.Should().Be("405");
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         const string input = """

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Euler.Puzzles.Euler023;
 
 public class Euler023Tests
 {
-    [Test]
+    [Fact]
     public void Test()
     {
         var result = Euler023.FindAbundantNumbers(13);

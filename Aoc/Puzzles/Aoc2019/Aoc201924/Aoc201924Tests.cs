@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201924;
 
 public class Aoc201924Tests
 {
-    [Test]
+    [Fact]
     public void AfterZeroMinutes()
     {
         const string input = """
@@ -22,7 +19,7 @@ public class Aoc201924Tests
         simulator.String.Should().Be("....##..#.#..##..#..#....");
     }
 
-    [Test]
+    [Fact]
     public void AfterOneMinute()
     {
         const string input = """
@@ -39,7 +36,7 @@ public class Aoc201924Tests
         simulator.String.Should().Be("#..#.####.###.###.##.##..");
     }
 
-    [Test]
+    [Fact]
     public void AfterTwoMinutes()
     {
         const string input = """
@@ -56,7 +53,7 @@ public class Aoc201924Tests
         simulator.String.Should().Be("#####....#....#...#.#.###");
     }
 
-    [Test]
+    [Fact]
     public void AfterThreeMinutes()
     {
         const string input = """
@@ -73,7 +70,7 @@ public class Aoc201924Tests
         simulator.String.Should().Be("#....####....###.##..##.#");
     }
 
-    [Test]
+    [Fact]
     public void AfterFourMinutes()
     {
         const string input = """
@@ -90,7 +87,7 @@ public class Aoc201924Tests
         simulator.String.Should().Be("####.....###..#.....##...");
     }
 
-    [Test]
+    [Fact]
     public void UntilRepeat_String()
     {
         const string input = """
@@ -107,7 +104,7 @@ public class Aoc201924Tests
         simulator.String.Should().Be("...............#.....#...");
     }
 
-    [Test]
+    [Fact]
     public void UntilRepeat_BiodiversityRating()
     {
         const string input = """
@@ -124,7 +121,7 @@ public class Aoc201924Tests
         simulator.BiodiversityRating.Should().Be(2129920);
     }
 
-    [Test]
+    [Fact]
     public void Recursive_BugCount()
     {
         const string input = """

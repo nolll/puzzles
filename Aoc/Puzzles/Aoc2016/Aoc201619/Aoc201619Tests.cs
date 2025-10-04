@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201619;
 
 public class Aoc201619Tests
 {
-    [Test]
+    [Fact]
     public void StealFromNextElf_ThirdElfGetsAllPresents()
     {
         const int input = 5;
@@ -16,7 +13,7 @@ public class Aoc201619Tests
         winner.Should().Be(3);
     }
 
-    [Test]
+    [Fact]
     public void StealFromAcrossTheCircle_SecondElfGetsAllPresents()
     {
         const int input = 5;

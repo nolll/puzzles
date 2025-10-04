@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201623;
 
 public class Aoc201623Tests
 {
-    [Test]
+    [Fact]
     public void RegisterAIsCorrect()
     {
         const string input = """
@@ -22,7 +19,7 @@ public class Aoc201623Tests
         control.ValueA.Should().Be(42);
     }
 
-    [Test]
+    [Fact]
     public void RegisterAIsCorrectWithToggleInstruction()
     {
         const string input = """

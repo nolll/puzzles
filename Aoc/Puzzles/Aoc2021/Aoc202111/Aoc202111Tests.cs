@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202111;
 
 public class Aoc202111Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var flasher = new OctopusFlasher(Input);
@@ -14,7 +11,7 @@ public class Aoc202111Tests
         result.Should().Be(1656);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var flasher = new OctopusFlasher(Input);

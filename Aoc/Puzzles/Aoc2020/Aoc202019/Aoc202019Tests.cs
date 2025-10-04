@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202019;
 
 public class Aoc202019Tests
 {
-    [Test]
+    [Fact]
     public void NumberOfValidMessagesIs2()
     {
         var validator = new MonsterImageValidator(RulesAndMessages1, false);
@@ -15,7 +13,7 @@ public class Aoc202019Tests
         result.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void NumberOfValidMessagesIs3()
     {
         var validator = new MonsterImageValidator(RulesAndMessages2, false);
@@ -24,21 +22,22 @@ public class Aoc202019Tests
         result.Should().Be(3);
     }
 
-    [TestCase("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
-    [TestCase("bbabbbbaabaabba", true)]
-    [TestCase("babbbbaabbbbbabbbbbbaabaaabaaa", false)]
-    [TestCase("aaabbbbbbaaaabaababaabababbabaaabbababababaaa", false)]
-    [TestCase("bbbbbbbaaaabbbbaaabbabaaa", false)]
-    [TestCase("bbbababbbbaaaaaaaabbababaaababaabab", false)]
-    [TestCase("ababaaaaaabaaab", true)]
-    [TestCase("ababaaaaabbbaba", true)]
-    [TestCase("baabbaaaabbaaaababbaababb", false)]
-    [TestCase("abbbbabbbbaaaababbbbbbaaaababb", false)]
-    [TestCase("aaaaabbaabaaaaababaa", false)]
-    [TestCase("aaaabbaaaabbaaa", false)]
-    [TestCase("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", false)]
-    [TestCase("babaaabbbaaabaababbaabababaaab", false)]
-    [TestCase("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", false)]
+    [Theory]
+    [InlineData("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
+    [InlineData("bbabbbbaabaabba", true)]
+    [InlineData("babbbbaabbbbbabbbbbbaabaaabaaa", false)]
+    [InlineData("aaabbbbbbaaaabaababaabababbabaaabbababababaaa", false)]
+    [InlineData("bbbbbbbaaaabbbbaaabbabaaa", false)]
+    [InlineData("bbbababbbbaaaaaaaabbababaaababaabab", false)]
+    [InlineData("ababaaaaaabaaab", true)]
+    [InlineData("ababaaaaabbbaba", true)]
+    [InlineData("baabbaaaabbaaaababbaababb", false)]
+    [InlineData("abbbbabbbbaaaababbbbbbaaaababb", false)]
+    [InlineData("aaaaabbaabaaaaababaa", false)]
+    [InlineData("aaaabbaaaabbaaa", false)]
+    [InlineData("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", false)]
+    [InlineData("babaaabbbaaabaababbaabababaaab", false)]
+    [InlineData("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", false)]
     public void SpecificMessagesIsValid_UnmodifiedRules(string message, bool expected)
     {
         var validator = new MonsterImageValidator(Rules2, false);
@@ -47,21 +46,22 @@ public class Aoc202019Tests
         isValid.Should().Be(expected);
     }
 
-    [TestCase("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
-    [TestCase("bbabbbbaabaabba", true)]
-    [TestCase("babbbbaabbbbbabbbbbbaabaaabaaa", true)]
-    [TestCase("aaabbbbbbaaaabaababaabababbabaaabbababababaaa", true)]
-    [TestCase("bbbbbbbaaaabbbbaaabbabaaa", true)]
-    [TestCase("bbbababbbbaaaaaaaabbababaaababaabab", true)]
-    [TestCase("ababaaaaaabaaab", true)]
-    [TestCase("ababaaaaabbbaba", true)]
-    [TestCase("baabbaaaabbaaaababbaababb", true)]
-    [TestCase("abbbbabbbbaaaababbbbbbaaaababb", true)]
-    [TestCase("aaaaabbaabaaaaababaa", true)]
-    [TestCase("aaaabbaaaabbaaa", false)]
-    [TestCase("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", true)]
-    [TestCase("babaaabbbaaabaababbaabababaaab", false)]
-    [TestCase("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", true)]
+    [Theory]
+    [InlineData("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
+    [InlineData("bbabbbbaabaabba", true)]
+    [InlineData("babbbbaabbbbbabbbbbbaabaaabaaa", true)]
+    [InlineData("aaabbbbbbaaaabaababaabababbabaaabbababababaaa", true)]
+    [InlineData("bbbbbbbaaaabbbbaaabbabaaa", true)]
+    [InlineData("bbbababbbbaaaaaaaabbababaaababaabab", true)]
+    [InlineData("ababaaaaaabaaab", true)]
+    [InlineData("ababaaaaabbbaba", true)]
+    [InlineData("baabbaaaabbaaaababbaababb", true)]
+    [InlineData("abbbbabbbbaaaababbbbbbaaaababb", true)]
+    [InlineData("aaaaabbaabaaaaababaa", true)]
+    [InlineData("aaaabbaaaabbaaa", false)]
+    [InlineData("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", true)]
+    [InlineData("babaaabbbaaabaababbaabababaaab", false)]
+    [InlineData("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", true)]
     public void SpecificMessageIsValid_ModifiedRules(string message, bool expected)
     {
         var validator = new MonsterImageValidator(Rules2, true);
@@ -70,7 +70,7 @@ public class Aoc202019Tests
         isValid.Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void NumberOfValidMessagesIs12()
     {
         var validator = new MonsterImageValidator(RulesAndMessages2, true);

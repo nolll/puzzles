@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201910;
 
 public class Aoc201910Tests
 {
-    [Test]
+    [Fact]
     public void Asteroid_3_4_DetectsTheMostAsteroids()
     {
         const string map = """
@@ -24,7 +21,7 @@ public class Aoc201910Tests
         result.RayCount.Should().Be(8);
     }
 
-    [Test]
+    [Fact]
     public void Asteroid_5_8_DetectsTheMostAsteroids()
     {
         const string map = """
@@ -48,7 +45,7 @@ public class Aoc201910Tests
         result.RayCount.Should().Be(33);
     }
 
-    [Test]
+    [Fact]
     public void Asteroid_1_2_DetectsTheMostAsteroids()
     {
         const string map = """
@@ -72,7 +69,7 @@ public class Aoc201910Tests
         result.RayCount.Should().Be(35);
     }
 
-    [Test]
+    [Fact]
     public void Asteroid_6_3_DetectsTheMostAsteroids()
     {
         const string map = """
@@ -96,7 +93,7 @@ public class Aoc201910Tests
         result.RayCount.Should().Be(41);
     }
 
-    [Test]
+    [Fact]
     public void Asteroid_11_13_DetectsTheMostAsteroids()
     {
         const string map = """
@@ -130,7 +127,7 @@ public class Aoc201910Tests
         result.RayCount.Should().Be(210);
     }
 
-    [Test]
+    [Fact]
     public void MapForVaporizeResultsInTheCorrectAsteroid()
     {
         const string map = """
@@ -148,7 +145,7 @@ public class Aoc201910Tests
         result.BestAsteroid.Y.Should().Be(3);
     }
 
-    [Test]
+    [Fact]
     public void VaporizeOrderIsCorrect()
     {
         const string map = """

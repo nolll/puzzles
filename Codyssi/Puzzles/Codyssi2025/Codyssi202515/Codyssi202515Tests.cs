@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202515;
 
 public class Codyssi202515Tests
@@ -26,13 +23,13 @@ public class Codyssi202515Tests
                                  FyNcJHX | 9047
                                  """;
 
-    [Test]
+    [Fact]
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("12645822");
 
-    [Test]
+    [Fact]
     public void Part2() => Sut.Part2(Input).Answer.Should().Be("ozNxANO-pYNonIG-MUantNm-lOSlxki-SDJtdpa-JSXfNAJ");
 
-    [Test]
+    [Fact]
     public void Part3() => Sut.Part3(Input).Answer.Should().Be("pYNonIG");
 
     private static Codyssi202515 Sut => new();

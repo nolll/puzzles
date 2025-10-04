@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202301;
 
 public class Aoc202301Tests
 {
-    [Test]
+    [Fact]
     public void CalibrationNumbersPart1()
     {
         const string input = """
@@ -20,7 +17,7 @@ public class Aoc202301Tests
         result.Should().Be(142);
     }
     
-    [Test]
+    [Fact]
     public void CalibrationNumbersPart2()
     {
         const string input = """

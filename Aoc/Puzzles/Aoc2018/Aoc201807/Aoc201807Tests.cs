@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201807;
 
 public class Aoc201807Tests
 {
-    [Test]
+    [Fact]
     public void FindsOrder()
     {
         const string input = """
@@ -24,7 +21,7 @@ public class Aoc201807Tests
         result.Order.Should().Be("CABDFE");
     }
 
-    [Test]
+    [Fact]
     public void FindsOrderConcurrently()
     {
         const string input = """

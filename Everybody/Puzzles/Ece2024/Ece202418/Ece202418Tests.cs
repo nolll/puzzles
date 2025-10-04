@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Everybody.Puzzles.Ece2024.Ece202418;
 
 public class Ece202418Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         const string input = """
@@ -19,7 +18,7 @@ public class Ece202418Tests
         Sut.Part1(input).Answer.Should().Be("11");
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         const string input = """
@@ -37,7 +36,7 @@ public class Ece202418Tests
         Sut.Part2(input).Answer.Should().Be("21");
     }
 
-    [Test]
+    [Fact]
     public void Part3()
     {
         const string input = """

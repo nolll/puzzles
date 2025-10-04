@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202420;
 
 public class Aoc202420Tests
@@ -23,13 +20,13 @@ public class Aoc202420Tests
                                  ###############
                                  """;
 
-    [Test]
+    [Fact]
     public void Part1_1() => Aoc202420.CountCheatsBetterThan(Input, 2, 35).Should().Be(4);
 
-    [Test]
+    [Fact]
     public void Part2_1() => Aoc202420.CountCheatsBetterThan(Input, 20, 50).Should().Be(285);
 
-    [Test]
+    [Fact]
     public void Part1_2()
     {
         var result = Aoc202420.GetCheats(Input, 2);
@@ -59,7 +56,7 @@ public class Aoc202420Tests
         bucket64.Count.Should().Be(1);
     }
     
-    [Test]
+    [Fact]
     public void Part2_2()
     {
         var rSavings = Aoc202420.GetCheats(Input, 20);

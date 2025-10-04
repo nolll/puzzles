@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201603;
 
 public class Aoc201603Tests
 {
-    [TestCase("12 13 14", true)]
-    [TestCase("1 2 5", false)]
+    [Theory]
+    [InlineData("12 13 14", true)]
+    [InlineData("1 2 5", false)]
     public void ValidateTriangles(string triangleSpec, bool expectedResult)
     {
         var validator = new TriangleValidator();
@@ -15,7 +13,7 @@ public class Aoc201603Tests
         isValid.Should().Be(expectedResult);
     }
 
-    [Test]
+    [Fact]
     public void ValidHorizontalCount()
     {
         const string input = """
@@ -29,7 +27,7 @@ public class Aoc201603Tests
         validCount.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void ValidVerticalCount()
     {
         const string input = """

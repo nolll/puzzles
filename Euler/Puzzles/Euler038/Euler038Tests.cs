@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Euler.Puzzles.Euler038;
 
 public class Euler038Tests
 {
-    [TestCase(9, 918273645)]
-    [TestCase(192, 192384576)]
+    [Theory]
+    [InlineData(9, 918273645)]
+    [InlineData(192, 192384576)]
     public void GetConcatenatedProduct(int n, long expected)
     {
         var result = Euler038.GetConcatenatedProduct(n);

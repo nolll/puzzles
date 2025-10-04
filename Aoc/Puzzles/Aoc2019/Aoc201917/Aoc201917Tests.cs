@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201917;
 
 public class Aoc201917Tests
 {
-    [Test]
+    [Fact]
     public void IntersectionsFound()
     {
         const string input = """

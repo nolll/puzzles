@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202217;
 
 public class SquareTests
 {
-    [Test]
+    [Fact]
     public void CanMoveRight()
     {
         var matrix = new Matrix<char>(4, 4, '.');
@@ -20,7 +18,7 @@ public class SquareTests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void CanNotMoveRight()
     {
         var matrix = new Matrix<char>(4, 4, '.');
@@ -34,7 +32,7 @@ public class SquareTests
         result.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void CanMoveLeft()
     {
         var matrix = new Matrix<char>(4, 4, '.');
@@ -48,7 +46,7 @@ public class SquareTests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void CanNotMoveLeft()
     {
         var matrix = new Matrix<char>(4, 4, '.');
@@ -62,7 +60,7 @@ public class SquareTests
         result.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void CanMoveDown()
     {
         var matrix = new Matrix<char>(4, 4, '.');
@@ -76,7 +74,7 @@ public class SquareTests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void CanNotMoveDown()
     {
         var matrix = new Matrix<char>(4, 4, '.');

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201716;
 
 public class Aoc201716Tests
 {
-    [Test]
+    [Fact]
     public void CorrectOrderAfterOneDance()
     {
         const string input = "s1,x3/4,pe/b";
@@ -17,7 +14,7 @@ public class Aoc201716Tests
         dancingPrograms.Programs.Should().Be("baedc");
     }
 
-    [Test]
+    [Fact]
     public void CorrectOrderAfterOneBillionDances()
     {
         const string input = "s1,x3/4,pe/b";

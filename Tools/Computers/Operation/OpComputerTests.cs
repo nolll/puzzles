@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Tools.Computers.Operation;
 
 public class OpComputerTests
 {
-    [Test]
+    [Fact]
     public void FindThreeMathingOperations()
     {
         var before = new long[] { 3, 2, 1, 1 };
@@ -17,7 +14,7 @@ public class OpComputerTests
         matchingOperations.Count.Should().Be(3);
     }
 
-    [Test]
+    [Fact]
     public void CorrectValueInRegister0AfterProgramHalts()
     {
         const string input = """

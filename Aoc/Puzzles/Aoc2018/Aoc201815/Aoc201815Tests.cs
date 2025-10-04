@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201815;
 
 public class Aoc201815Tests
 {
-    [Test]
+    [Fact]
     public void BattleResultsInCorrectOutcome_Case1()
     {
         const string input = """
@@ -24,7 +21,7 @@ public class Aoc201815Tests
         battle.Outcome.Should().Be(27730);
     }
 
-    [Test]
+    [Fact]
     public void BattleResultsInCorrectOutcome_Case2()
     {
         const string input = """
@@ -43,7 +40,7 @@ public class Aoc201815Tests
         battle.Outcome.Should().Be(36334);
     }
 
-    [Test]
+    [Fact]
     public void BattleResultsInCorrectOutcome_Case3()
     {
         const string input = """
@@ -62,7 +59,7 @@ public class Aoc201815Tests
         battle.Outcome.Should().Be(39514);
     }
 
-    [Test]
+    [Fact]
     public void BattleResultsInCorrectOutcome_Case4()
     {
         const string input = """
@@ -82,7 +79,7 @@ public class Aoc201815Tests
     }
 
 
-    [Test]
+    [Fact]
     public void BattleResultsInCorrectOutcome_Case5()
     {
         const string input = """
@@ -102,7 +99,7 @@ public class Aoc201815Tests
     }
 
 
-    [Test]
+    [Fact]
     public void BattleResultsInCorrectOutcome_Case6()
     {
         const string input = """
@@ -123,7 +120,7 @@ public class Aoc201815Tests
         battle.Outcome.Should().Be(18740);
     }
 
-    [Test]
+    [Fact]
     public void BattleResultsForElvesWinningWithoutLosses_Case1()
     {
         const string input = """
@@ -142,7 +139,7 @@ public class Aoc201815Tests
         battle.Outcome.Should().Be(4988);
     }
 
-    [Test]
+    [Fact]
     public void BattleResultsForElvesWinningWithoutLosses_Case2()
     {
         const string input = """
@@ -161,7 +158,7 @@ public class Aoc201815Tests
         battle.Outcome.Should().Be(31284);
     }
 
-    [Test]
+    [Fact]
     public void BattleResultsForElvesWinningWithoutLosses_Case3()
     {
         const string input = """
@@ -180,7 +177,7 @@ public class Aoc201815Tests
         battle.Outcome.Should().Be(3478);
     }
 
-    [Test]
+    [Fact]
     public void BattleResultsForElvesWinningWithoutLosses_Case4()
     {
         const string input = """
@@ -199,7 +196,7 @@ public class Aoc201815Tests
         battle.Outcome.Should().Be(6474);
     }
 
-    [Test]
+    [Fact]
     public void BattleResultsForElvesWinningWithoutLosses_Case5()
     {
         const string input = """

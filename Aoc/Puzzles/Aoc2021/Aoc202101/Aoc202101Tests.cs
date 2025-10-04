@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202101;
 
 public class Aoc202101Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var validator = new DepthMeasurement();
@@ -14,7 +11,7 @@ public class Aoc202101Tests
         result.Should().Be(7);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var validator = new DepthMeasurement();

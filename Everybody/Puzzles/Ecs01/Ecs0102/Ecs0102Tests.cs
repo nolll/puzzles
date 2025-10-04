@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Everybody.Puzzles.Ecs01.Ecs0102;
 
 public class Ecs0102Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         const string input = """
@@ -21,7 +20,7 @@ public class Ecs0102Tests
         Sut.Part1(input).Answer.Should().Be("CFGNLK");
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         const string input = """
@@ -39,7 +38,7 @@ public class Ecs0102Tests
         Sut.Part2(input).Answer.Should().Be("MGFLNK");
     }
 
-    [Test]
+    [Fact]
     public void Part3_1()
     {
         const string input = """
@@ -58,7 +57,7 @@ public class Ecs0102Tests
         Sut.Part3(input).Answer.Should().Be("DJMGL");
     }
     
-    [Test]
+    [Fact]
     public void Part3_2()
     {
         const string input = """

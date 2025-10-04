@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Euler.Puzzles.Euler012;
 
 public class Euler012Tests
 {
-    [Test]
+    [Fact]
     public void Test()
     {
         var puzzle = new Euler012();

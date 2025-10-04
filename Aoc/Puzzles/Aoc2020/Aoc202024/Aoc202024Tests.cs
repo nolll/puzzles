@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202024;
 
 public class Aoc202024Tests
 {
-    [TestCase("esew")]
-    [TestCase("nwwswee")]
+    [Theory]
+    [InlineData("esew")]
+    [InlineData("nwwswee")]
     public void OneTileIsBlackAfterArrange(string input)
     {
         var floor = new HexagonalFloor(input);
@@ -16,7 +14,7 @@ public class Aoc202024Tests
         result.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void FiveTilesAreBlackAfterArrange()
     {
         var floor = new HexagonalFloor(Input.Trim());
@@ -26,7 +24,7 @@ public class Aoc202024Tests
         result.Should().Be(10);
     }
 
-    [Test]
+    [Fact]
     public void FiveTilesAreBlack()
     {
         var floor = new HexagonalFloor(Input.Trim());
@@ -36,7 +34,7 @@ public class Aoc202024Tests
         result.Should().Be(10);
     }
 
-    [Test]
+    [Fact]
     public void BlackTilesCorrectAfterEachRun()
     {
         var floor = new HexagonalFloor(Input.Trim());

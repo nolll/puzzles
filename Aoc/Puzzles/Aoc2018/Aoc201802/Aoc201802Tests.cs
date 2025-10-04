@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201802;
 
 public class Aoc201802Tests
 {
-    [Test]
+    [Fact]
     public void NoSimilarIds()
     {
         var ids = new List<string> { "abcde", "fghij" };
@@ -14,7 +12,7 @@ public class Aoc201802Tests
         similarIds.Count.Should().Be(0);
     }
 
-    [Test]
+    [Fact]
     public void EqualIdsIds_ReturnsNoMatch()
     {
         var ids = new List<string> { "abcde", "abcde" };
@@ -22,7 +20,7 @@ public class Aoc201802Tests
         similarIds.Count.Should().Be(0);
     }
 
-    [Test]
+    [Fact]
     public void OneSimilarId()
     {
         var ids = new List<string> { "abcde", "abcdX" };
@@ -30,7 +28,7 @@ public class Aoc201802Tests
         similarIds.Count.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void TwoSimilarIds_ReturnsOnlyFirstMatch()
     {
         var ids = new List<string> { "abcde", "abcdX", "fghij", "fghiX" };
@@ -38,7 +36,7 @@ public class Aoc201802Tests
         similarIds.Count.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void HandleProvidedExample()
     {
         const string ids = "abcdef bababc abbcde abcccd aabcdd abcdee ababab";
@@ -46,7 +44,7 @@ public class Aoc201802Tests
         puzzle.Checksum.Should().Be(12);
     }
 
-    [Test]
+    [Fact]
     public void AllLettersCommon()
     {
         const string str = "abcde";
@@ -54,7 +52,7 @@ public class Aoc201802Tests
         commonLetters.Should().Be("abcde");
     }
 
-    [Test]
+    [Fact]
     public void NoLettersCommon()
     {
         const string str1 = "abcde";
@@ -63,7 +61,7 @@ public class Aoc201802Tests
         commonLetters.Should().Be("");
     }
 
-    [Test]
+    [Fact]
     public void ThreeLettersCommon()
     {
         const string str1 = "abcde";

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201708;
 
 public class Aoc201708Tests
 {
-    [Test]
+    [Fact]
     public void GetLargestValue()
     {
         const string input = """

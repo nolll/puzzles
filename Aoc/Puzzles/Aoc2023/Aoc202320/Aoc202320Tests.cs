@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202320;
 
 public class Aoc202320Tests
 {
-    [Test]
+    [Fact]
     public void CountPulsesExample1()
     {
         const string input = """
@@ -21,7 +18,7 @@ public class Aoc202320Tests
         result.Should().Be(32000000);
     }
     
-    [Test]
+    [Fact]
     public void CountPulsesExample2()
     {
         const string input = """

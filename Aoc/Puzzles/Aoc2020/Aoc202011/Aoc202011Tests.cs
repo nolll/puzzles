@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202011;
 
 public class Aoc202011Tests
 {
-    [Test]
+    [Fact]
     public void NumberOfOccupiedSeatsIsCorrect_FirstAlgorithm()
     {
         const string input = """
@@ -28,7 +25,7 @@ public class Aoc202011Tests
         result.Should().Be(37);
     }
 
-    [Test]
+    [Fact]
     public void NumberOfOccupiedSeatsIsCorrect_SecondAlgorithm()
     {
         const string input = """

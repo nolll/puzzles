@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202312;
 
 public class Aoc202312Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         const string input = """
@@ -22,7 +19,7 @@ public class Aoc202312Tests
         result.Answer.Should().Be("21");
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         const string input = """
@@ -39,12 +36,13 @@ public class Aoc202312Tests
         result.Answer.Should().Be("525152");
     }
 
-    [TestCase("???.### 1,1,3", 1)]
-    [TestCase(".??..??...?##. 1,1,3", 4)]
-    [TestCase("?#?#?#?#?#?#?#? 1,3,1,6", 1)]
-    [TestCase("????.#...#... 4,1,1", 1)]
-    [TestCase("????.######..#####. 1,6,5", 4)]
-    [TestCase("?###???????? 3,2,1", 10)]
+    [Theory]
+    [InlineData("???.### 1,1,3", 1)]
+    [InlineData(".??..??...?##. 1,1,3", 4)]
+    [InlineData("?#?#?#?#?#?#?#? 1,3,1,6", 1)]
+    [InlineData("????.#...#... 4,1,1", 1)]
+    [InlineData("????.######..#####. 1,6,5", 4)]
+    [InlineData("?###???????? 3,2,1", 10)]
     public void CombinationCount(string input, int expected)
     {
         var result = Aoc202312.CombinationCount(input);
@@ -52,10 +50,11 @@ public class Aoc202312Tests
         result.Should().Be(expected);
     }
 
-    [TestCase("#.#??????? 1,1,4", 3)]
-    [TestCase("##..??#??##?? 2,8", 2)]
-    [TestCase("#???.?????? 2,2", 5)]
-    [TestCase("##??##??#?.?.??. 10,1", 3)]
+    [Theory]
+    [InlineData("#.#??????? 1,1,4", 3)]
+    [InlineData("##..??#??##?? 2,8", 2)]
+    [InlineData("#???.?????? 2,2", 5)]
+    [InlineData("##??##??#?.?.??. 10,1", 3)]
     public void SelectedRealData(string input, int expected)
     {
         var result = Aoc202312.CombinationCount(input);
@@ -63,12 +62,13 @@ public class Aoc202312Tests
         result.Should().Be(expected);
     }
 
-    [TestCase("???.### 1,1,3", 1)]
-    [TestCase(".??..??...?##. 1,1,3", 16384)]
-    [TestCase("?#?#?#?#?#?#?#? 1,3,1,6", 1)]
-    [TestCase("????.#...#... 4,1,1", 16)]
-    [TestCase("????.######..#####. 1,6,5", 2500)]
-    [TestCase("?###???????? 3,2,1", 506250)]
+    [Theory]
+    [InlineData("???.### 1,1,3", 1)]
+    [InlineData(".??..??...?##. 1,1,3", 16384)]
+    [InlineData("?#?#?#?#?#?#?#? 1,3,1,6", 1)]
+    [InlineData("????.#...#... 4,1,1", 16)]
+    [InlineData("????.######..#####. 1,6,5", 2500)]
+    [InlineData("?###???????? 3,2,1", 506250)]
     public void CombinationCountPart2(string input, int expected)
     {
         var result = Aoc202312.CombinationCount(input, true);
@@ -76,7 +76,8 @@ public class Aoc202312Tests
         result.Should().Be(expected);   
     }
 
-    [TestCase("????.???????#?#.? 1,5", 108778)]
+    [Theory]
+    [InlineData("????.???????#?#.? 1,5", 108778)]
     public void RealCombinationCountPart2(string input, int expected)
     {
         var result = Aoc202312.CombinationCount(input, true);

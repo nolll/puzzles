@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 public class MatrixTests
@@ -15,8 +12,9 @@ public class MatrixTests
                                       MNOP
                                       """;
 
-    [TestCase(0, true)]
-    [TestCase(1, false)]
+    [Theory]
+    [InlineData(0, true)]
+    [InlineData(1, false)]
     public void IsAtTopEdge(int y, bool expected)
     {
         var matrix = new Matrix<int>(5, 5);
@@ -25,8 +23,9 @@ public class MatrixTests
         matrix.IsAtTopEdge.Should().Be(expected);
     }
 
-    [TestCase(4, true)]
-    [TestCase(3, false)]
+    [Theory]
+    [InlineData(4, true)]
+    [InlineData(3, false)]
     public void IsAtRightEdge(int x, bool expected)
     {
         var matrix = new Matrix<int>(5, 5);
@@ -35,8 +34,9 @@ public class MatrixTests
         matrix.IsAtRightEdge.Should().Be(expected);
     }
 
-    [TestCase(4, true)]
-    [TestCase(3, false)]
+    [Theory]
+    [InlineData(4, true)]
+    [InlineData(3, false)]
     public void IsAtBottomEdge(int y, bool expected)
     {
         var matrix = new Matrix<int>(5, 5);
@@ -45,8 +45,9 @@ public class MatrixTests
         matrix.IsAtBottomEdge.Should().Be(expected);
     }
 
-    [TestCase(0, true)]
-    [TestCase(1, false)]
+    [Theory]
+    [InlineData(0, true)]
+    [InlineData(1, false)]
     public void IsAtLeftEdge(int x, bool expected)
     {
         var matrix = new Matrix<int>(5, 5);
@@ -55,8 +56,9 @@ public class MatrixTests
         matrix.IsAtLeftEdge.Should().Be(expected);
     }
 
-    [TestCase(5, 2)]
-    [TestCase(10, 5)]
+    [Theory]
+    [InlineData(5, 2)]
+    [InlineData(10, 5)]
     public void Center(int size, int expected)
     {
         var matrix = new Matrix<int>(size, size);
@@ -64,7 +66,7 @@ public class MatrixTests
         matrix.Center.Tuple.Should().Be((expected, expected));
     }
 
-    [Test]
+    [Fact]
     public void MoveTo()
     {
         var matrix = new Matrix<int>(5, 5);
@@ -74,7 +76,7 @@ public class MatrixTests
         matrix.Address.Y.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void MoveForward()
     {
         var matrix = new Matrix<int>(5, 5);
@@ -85,7 +87,7 @@ public class MatrixTests
         matrix.Address.Y.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void TurnAndMoveForward()
     {
         var matrix = new Matrix<int>(5, 5);
@@ -98,7 +100,7 @@ public class MatrixTests
         matrix.Address.Y.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void ExtendAllTo3()
     {
         var matrix = new Matrix<char>(1, 1, DefaultValue);
@@ -113,7 +115,7 @@ public class MatrixTests
         matrix.Height.Should().Be(3);
     }
 
-    [Test]
+    [Fact]
     public void ExtendAllTo5()
     {
         var matrix = new Matrix<char>(1, 1, DefaultValue);
@@ -128,7 +130,7 @@ public class MatrixTests
         matrix.Height.Should().Be(5);
     }
 
-    [Test]
+    [Fact]
     public void OrthogonalAdjacentCoordsExist()
     {
         var matrix = new Matrix<char>(1, 1, DefaultValue);
@@ -144,7 +146,7 @@ public class MatrixTests
         squaresInFirstRow.Count.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void AllAdjacentCoordsExists()
     {
         var matrix = new Matrix<char>(1, 1, DefaultValue);
@@ -160,7 +162,7 @@ public class MatrixTests
         squaresInFirstRow.Count.Should().Be(3);
     }
 
-    [Test]
+    [Fact]
     public void Clone()
     {
         const string input = """
@@ -183,7 +185,7 @@ public class MatrixTests
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
-    [Test]
+    [Fact]
     public void CloneAndMultiply()
     {
         const string input = """
@@ -209,7 +211,7 @@ public class MatrixTests
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
-    [Test]
+    [Fact]
     public void RotateRight()
     {
         const string input = """
@@ -232,7 +234,7 @@ public class MatrixTests
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
-    [Test]
+    [Fact]
     public void RotateLeft()
     {
         const string input = """
@@ -255,7 +257,7 @@ public class MatrixTests
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
-    [Test]
+    [Fact]
     public void Slice()
     {
         const string expected = """
@@ -271,7 +273,7 @@ public class MatrixTests
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
-    [Test]
+    [Fact]
     public void SliceFrom()
     {
         const string expected = """
@@ -288,7 +290,7 @@ public class MatrixTests
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
-    [Test]
+    [Fact]
     public void SliceTo()
     {
         const string expected = """
@@ -305,7 +307,7 @@ public class MatrixTests
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
-    [Test]
+    [Fact]
     public void SliceSize()
     {
         const string expected = """
@@ -321,7 +323,7 @@ public class MatrixTests
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
-    [Test]
+    [Fact]
     public void FlipVertical()
     {
         const string input = """
@@ -344,7 +346,7 @@ public class MatrixTests
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
-    [Test]
+    [Fact]
     public void FlipHorizontal()
     {
         const string input = """
@@ -367,7 +369,7 @@ public class MatrixTests
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
 
-    [Test]
+    [Fact]
     public void Transpose()
     {
         const string input = """

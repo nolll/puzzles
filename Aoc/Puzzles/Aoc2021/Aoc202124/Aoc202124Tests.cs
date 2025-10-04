@@ -1,13 +1,11 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202124;
 
 public class Aoc202124Tests
 {
-    [TestCase(1, -1)]
-    [TestCase(2, -2)]
-    [TestCase(3, -3)]
+    [Theory]
+    [InlineData(1, -1)]
+    [InlineData(2, -2)]
+    [InlineData(3, -3)]
     public void TestAlu1(long p, int expected)
     {
         const string input = """
@@ -21,11 +19,12 @@ public class Aoc202124Tests
         result.Memory['x'].Should().Be(expected);
     }
 
-    [TestCase(23, 0)]
-    [TestCase(24, 0)]
-    [TestCase(25, 0)]
-    [TestCase(26, 1)]
-    [TestCase(39, 1)]
+    [Theory]
+    [InlineData(23, 0)]
+    [InlineData(24, 0)]
+    [InlineData(25, 0)]
+    [InlineData(26, 1)]
+    [InlineData(39, 1)]
     public void TestAlu2(long p, int expected)
     {
         const string input = """
@@ -41,15 +40,16 @@ public class Aoc202124Tests
         result.Memory['z'].Should().Be(expected);
     }
 
-    [TestCase(1, 0, 0, 0, 1)]
-    [TestCase(2, 0, 0, 1, 0)]
-    [TestCase(3, 0, 0, 1, 1)]
-    [TestCase(4, 0, 1, 0, 0)]
-    [TestCase(5, 0, 1, 0, 1)]
-    [TestCase(6, 0, 1, 1, 0)]
-    [TestCase(7, 0, 1, 1, 1)]
-    [TestCase(8, 1, 0, 0, 0)]
-    [TestCase(9, 1, 0, 0, 1)]
+    [Theory]
+    [InlineData(1, 0, 0, 0, 1)]
+    [InlineData(2, 0, 0, 1, 0)]
+    [InlineData(3, 0, 0, 1, 1)]
+    [InlineData(4, 0, 1, 0, 0)]
+    [InlineData(5, 0, 1, 0, 1)]
+    [InlineData(6, 0, 1, 1, 0)]
+    [InlineData(7, 0, 1, 1, 1)]
+    [InlineData(8, 1, 0, 0, 0)]
+    [InlineData(9, 1, 0, 0, 1)]
     public void TestAlu3(long p, int expW, int expX, int expY, int expZ)
     {
         const string input = """

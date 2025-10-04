@@ -1,13 +1,11 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202106;
 
 public class Aoc202106Tests
 {
-    [TestCase(18, 26)]
-    [TestCase(80, 5934)]
-    [TestCase(256, 26_984_457_539)]
+    [Theory]
+    [InlineData(18, 26)]
+    [InlineData(80, 5934)]
+    [InlineData(256, 26_984_457_539)]
     public void Test(int days, long expected)
     {
         var fishCounter = new FishCounter(Input);

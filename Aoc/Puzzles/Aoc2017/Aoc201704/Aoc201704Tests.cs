@@ -1,13 +1,11 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201704;
 
 public class Aoc201704Tests
 {
-    [TestCase("aa bb cc dd ee", true)]
-    [TestCase("aa bb cc dd aa", false)]
-    [TestCase("aa bb cc dd aaa", true)]
+    [Theory]
+    [InlineData("aa bb cc dd ee", true)]
+    [InlineData("aa bb cc dd aa", false)]
+    [InlineData("aa bb cc dd aaa", true)]
     public void ValidatePassword1(string input, bool expected)
     {
         var validator = new PassphraseValidator();
@@ -16,11 +14,12 @@ public class Aoc201704Tests
         coin.Should().Be(expected);
     }
 
-    [TestCase("abcde fghij", true)]
-    [TestCase("abcde xyz ecdab", false)]
-    [TestCase("a ab abc abd abf abj", true)]
-    [TestCase("iiii oiii ooii oooi oooo", true)]
-    [TestCase("oiii ioii iioi iiio", false)]
+    [Theory]
+    [InlineData("abcde fghij", true)]
+    [InlineData("abcde xyz ecdab", false)]
+    [InlineData("a ab abc abd abf abj", true)]
+    [InlineData("iiii oiii ooii oooi oooo", true)]
+    [InlineData("oiii ioii iioi iiio", false)]
     public void ValidatePassword2(string input, bool expected)
     {
         var validator = new PassphraseValidator();

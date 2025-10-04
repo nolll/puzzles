@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201715;
 
 public class Aoc201715Tests
 {
-    [Test]
+    [Fact]
     public void Part1_MatchCountIsOneAfter5Runs()
     {
         var duel = new GeneratorDuel(65, 8921);
@@ -14,7 +11,7 @@ public class Aoc201715Tests
         duel.FinalCount.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void Part1_MatchCountIsOneAfter40MRuns()
     {
         var duel = new GeneratorDuel(65, 8921);
@@ -23,7 +20,7 @@ public class Aoc201715Tests
         duel.FinalCount.Should().Be(588);
     }
 
-    [Test]
+    [Fact]
     public void Part2_Finds309PairsIn5Runs()
     {
         var duel = new GeneratorDuel(65, 8921);

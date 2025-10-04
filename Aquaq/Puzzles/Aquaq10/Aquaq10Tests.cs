@@ -1,5 +1,4 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq10;
 
@@ -18,7 +17,7 @@ public class Aquaq10Tests
                                  E,C,6
                                  """;
 
-    [Test]
+    [Fact]
     public void SmallestCost()
     {
         var result = Aquaq10.Run(Input, "A", "C");

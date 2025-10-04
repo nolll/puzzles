@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202016;
 
 public class Aoc202016Tests
 {
-    [Test]
+    [Fact]
     public void TicketErrorRate()
     {
         const string input = """
@@ -29,7 +26,7 @@ public class Aoc202016Tests
         result.Should().Be(71);
     }
 
-    [Test]
+    [Fact]
     public void FindTicketFields()
     {
         const string input = """

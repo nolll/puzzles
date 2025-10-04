@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202417;
 
 public class Aoc202417Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         const string input = """
@@ -18,9 +15,8 @@ public class Aoc202417Tests
     
         Sut.Part1(input).Answer.Should().Be("4,6,3,5,6,3,5,2,1,0");
     }
-
-    [Test]
-    [Ignore("Fails, but I dont't understand why. The real input works fine")]
+    
+    [Fact(Skip = "Fails, but I dont't understand why. The real input works fine")]
     public void Part2()
     {
         const string input = """

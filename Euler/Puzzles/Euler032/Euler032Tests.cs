@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Euler.Puzzles.Euler032;
 
 public class Euler032Tests
 {
-    [Test]
+    [Fact]
     public void IsPandigital()
     {
         var puzzle = new Euler032();
@@ -14,7 +11,7 @@ public class Euler032Tests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void IsNotPandigital()
     {
         var puzzle = new Euler032();

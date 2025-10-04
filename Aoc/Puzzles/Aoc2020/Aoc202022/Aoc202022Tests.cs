@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202022;
 
 public class Aoc202022Tests
 {
-    [Test]
+    [Fact]
     public void NormalGame_WinningScoreIs306()
     {
         var game = new CardCombatGame(Input);
@@ -14,7 +11,7 @@ public class Aoc202022Tests
         score.Should().Be(306);
     }
 
-    [Test]
+    [Fact]
     public void InfiniteGame_Ends()
     {
         const string input = """
@@ -35,7 +32,7 @@ public class Aoc202022Tests
         ended.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void RecursiveGame_WinningScoreIs306()
     {
         var game = new CardCombatGame(Input);

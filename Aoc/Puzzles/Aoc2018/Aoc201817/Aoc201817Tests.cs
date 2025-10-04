@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201817;
 
 public class Aoc201817Tests
 {
-    [Test]
+    [Fact]
     public void NumberOfWaterTilesIsCorrect()
     {
         const string input = """

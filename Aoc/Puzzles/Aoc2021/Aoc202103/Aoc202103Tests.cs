@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202103;
 
 public class Aoc202103Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var diagnostics = new BinaryDiagnostics();
@@ -14,7 +11,7 @@ public class Aoc202103Tests
         result.Should().Be(198);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var diagnostics = new BinaryDiagnostics();

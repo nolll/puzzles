@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202012;
 
 public class Aoc202012Tests
 {
-    [Test]
+    [Fact]
     public void SimpleFerryNavigation()
     {
         const string input = """
@@ -23,7 +20,7 @@ public class Aoc202012Tests
         result.Should().Be(25);
     }
 
-    [Test]
+    [Fact]
     public void WaypointFerryNavigation()
     {
         const string input = """

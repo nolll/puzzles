@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202021;
 
 public class Aoc202021Tests
@@ -12,7 +9,7 @@ public class Aoc202021Tests
                                  sqjhc mxmxvkd sbzzf (contains fish)
                                  """;
 
-    [Test]
+    [Fact]
     public void IngredientsWithoutAllergens()
     {
         var detector = new AllergenDetector(Input.Trim());
@@ -21,7 +18,7 @@ public class Aoc202021Tests
         ingredientCount.Should().Be(5);
     }
 
-    [Test]
+    [Fact]
     public void CanonicalIngredientList()
     {
         var detector = new AllergenDetector(Input.Trim());

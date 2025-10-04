@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Tools.Maths;
 
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201520;
 
 public class Aoc201520Tests
 {
-    [Test]
+    [Fact]
     public void FirstHouseToGet150Presents()
     {
         const int input = 150;
@@ -17,7 +15,7 @@ public class Aoc201520Tests
         house.Should().Be(8);
     }
 
-    [Test]
+    [Fact]
     public void FindIntFactors8()
     {
         var delivery = new PresentDelivery();
@@ -30,7 +28,7 @@ public class Aoc201520Tests
         result[3].Should().Be(8);
     }
 
-    [Test]
+    [Fact]
     public void FindIntFactors81()
     {
         var delivery = new PresentDelivery();
@@ -44,7 +42,7 @@ public class Aoc201520Tests
         result[4].Should().Be(81);
     }
 
-    [Test]
+    [Fact]
     public void FindIntFactors2354()
     {
         var delivery = new PresentDelivery();
@@ -61,7 +59,7 @@ public class Aoc201520Tests
         result[7].Should().Be(2354);
     }
 
-    [Test]
+    [Fact]
     public void IntFactorFuncIsCorrect()
     {
         var delivery = new PresentDelivery();

@@ -1,24 +1,22 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202422;
 
 public class Aoc202422Tests
 {
-    [TestCase(1, 15887950)]
-    [TestCase(2, 16495136)]
-    [TestCase(3, 527345)]
-    [TestCase(4, 704524)]
-    [TestCase(5, 1553684)]
-    [TestCase(6, 12683156)]
-    [TestCase(7, 11100544)]
-    [TestCase(8, 12249484)]
-    [TestCase(9, 7753432)]
-    [TestCase(10, 5908254)]
+    [Theory]
+    [InlineData(1, 15887950)]
+    [InlineData(2, 16495136)]
+    [InlineData(3, 527345)]
+    [InlineData(4, 704524)]
+    [InlineData(5, 1553684)]
+    [InlineData(6, 12683156)]
+    [InlineData(7, 11100544)]
+    [InlineData(8, 12249484)]
+    [InlineData(9, 7753432)]
+    [InlineData(10, 5908254)]
     public void Generate(int iterations, long expected) => 
         Aoc202422.Generate(123, iterations).Last().Should().Be(expected);
 
-    [Test]
+    [Fact]
     public void Part1()
     {
         const string input = """
@@ -31,7 +29,7 @@ public class Aoc202422Tests
         Sut.Part1(input).Answer.Should().Be("37327623");
     }
     
-    [Test]
+    [Fact]
     public void Part2()
     {
         const string input = """

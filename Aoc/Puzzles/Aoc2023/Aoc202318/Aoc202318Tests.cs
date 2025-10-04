@@ -1,13 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
-using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202318;
 
 public class Aoc202318Tests
 {
-    [Test]
+    [Fact]
     public void LavaPoolPart1()
     {
         const string input = """
@@ -32,7 +30,7 @@ public class Aoc202318Tests
         result.Should().Be(62);
     }
 
-    [Test]
+    [Fact]
     public void LavaPoolPart2()
     {
         const string input = """
@@ -57,20 +55,21 @@ public class Aoc202318Tests
         result.Should().Be(952408144115);
     }
 
-    [TestCase("70c71", 461937)]
-    [TestCase("0dc57", 56407)]
-    [TestCase("5713f", 356671)]
-    [TestCase("d2c08", 863240)]
-    [TestCase("59c68", 367720)]
-    [TestCase("411b9", 266681)]
-    [TestCase("8ceee", 577262)]
-    [TestCase("caa17", 829975)]
-    [TestCase("1b58a", 112010)]
-    [TestCase("caa17", 829975)]
-    [TestCase("7807d", 491645)]
-    [TestCase("a77fa", 686074)]
-    [TestCase("01523", 5411)]
-    [TestCase("7a21e", 500254)]
+    [Theory]
+    [InlineData("70c71", 461937)]
+    [InlineData("0dc57", 56407)]
+    [InlineData("5713f", 356671)]
+    [InlineData("d2c08", 863240)]
+    [InlineData("59c68", 367720)]
+    [InlineData("411b9", 266681)]
+    [InlineData("8ceee", 577262)]
+    [InlineData("caa17", 829975)]
+    [InlineData("1b58a", 112010)]
+    [InlineData("caa17", 829975)]
+    [InlineData("7807d", 491645)]
+    [InlineData("a77fa", 686074)]
+    [InlineData("01523", 5411)]
+    [InlineData("7a21e", 500254)]
     public void ParseHex(string input, int expected)
     {
         var result = Aoc202318.ParseHex(input);

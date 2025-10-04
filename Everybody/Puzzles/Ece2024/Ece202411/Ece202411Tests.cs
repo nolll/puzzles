@@ -1,14 +1,14 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Everybody.Puzzles.Ece2024.Ece202411;
 
 public class Ece202411Tests
 {
-    [TestCase(1, 2)]
-    [TestCase(2, 3)]
-    [TestCase(3, 5)]
-    [TestCase(4, 8)]
+    [Theory]
+    [InlineData(1, 2)]
+    [InlineData(2, 3)]
+    [InlineData(3, 5)]
+    [InlineData(4, 8)]
     public void Part1And2(int days, int expected)
     {
         const string input = """
@@ -20,7 +20,7 @@ public class Ece202411Tests
         Sut.Solve(input, "A", days).Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void Part3()
     {
         const string input = """

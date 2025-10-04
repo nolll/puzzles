@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq31.RubiksCube;
 
 public class CubeTests
 {
-    [Test]
+    [Fact]
     public void RotateFront()
     {
         var cube = new Cube();
@@ -18,7 +17,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateFrontPrime()
     {
         var cube = new Cube();
@@ -31,7 +30,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateUp()
     {
         var cube = new Cube();
@@ -44,7 +43,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateUpPrime()
     {
         var cube = new Cube();
@@ -57,7 +56,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateLeft()
     {
         var cube = new Cube();
@@ -70,7 +69,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateLeftPrime()
     {
         var cube = new Cube();
@@ -83,7 +82,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateRight()
     {
         var cube = new Cube();
@@ -96,7 +95,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateRightPrime()
     {
         var cube = new Cube();
@@ -109,7 +108,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateDown()
     {
         var cube = new Cube();
@@ -122,7 +121,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateDownPrime()
     {
         var cube = new Cube();
@@ -135,7 +134,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateBack()
     {
         var cube = new Cube();
@@ -148,7 +147,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateBackPrime()
     {
         var cube = new Cube();
@@ -161,7 +160,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateX()
     {
         var cube = CubeTestHelper.CreateScrambledCube();
@@ -174,7 +173,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateXPrime()
     {
         var cube = CubeTestHelper.CreateScrambledCube();
@@ -187,7 +186,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateY()
     {
         var cube = CubeTestHelper.CreateScrambledCube();
@@ -200,7 +199,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateYPrime()
     {
         var cube = CubeTestHelper.CreateScrambledCube();
@@ -213,7 +212,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateZ()
     {
         var cube = CubeTestHelper.CreateScrambledCube();
@@ -226,7 +225,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void RotateZPrime()
     {
         var cube = CubeTestHelper.CreateScrambledCube();
@@ -239,15 +238,16 @@ public class CubeTests
                                  """);
     }
 
-    [TestCase("XXXX")]
-    [TestCase("X'X'X'X'")]
-    [TestCase("YYYY")]
-    [TestCase("Y'Y'Y'Y'")]
-    [TestCase("ZZZZ")]
-    [TestCase("Z'Z'Z'Z'")]
-    [TestCase("XZXZXZ")]
-    [TestCase("XYXYXY")]
-    [TestCase("XZX'X'Z'YX'Z")]
+    [Theory]
+    [InlineData("XXXX")]
+    [InlineData("X'X'X'X'")]
+    [InlineData("YYYY")]
+    [InlineData("Y'Y'Y'Y'")]
+    [InlineData("ZZZZ")]
+    [InlineData("Z'Z'Z'Z'")]
+    [InlineData("XZXZXZ")]
+    [InlineData("XYXYXY")]
+    [InlineData("XZX'X'Z'YX'Z")]
     public void MultipleCubeRotations_BackToStart(string rotations)
     {
         var cube = CubeTestHelper.CreateScrambledCube();
@@ -260,7 +260,7 @@ public class CubeTests
                                  """);
     }
 
-    [Test]
+    [Fact]
     public void FindEdges()
     {
         var cube = new Cube();

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201506;
 
 public class Aoc201506Tests
 {
-    [Test]
+    [Fact]
     public void TurnsOnAllLights()
     {
         var controller = new ChristmasLightsController(5);
@@ -14,7 +11,7 @@ public class Aoc201506Tests
         controller.LitCount.Should().Be(25);
     }
 
-    [Test]
+    [Fact]
     public void TurnsOnAllLightsTurnsOffFiveLights()
     {
         var controller = new ChristmasLightsController(5);
@@ -24,7 +21,7 @@ public class Aoc201506Tests
         controller.LitCount.Should().Be(20);
     }
 
-    [Test]
+    [Fact]
     public void TurnsOnAllLightsTurnsOffFiveLightsTogglesAllLights()
     {
         var controller = new ChristmasLightsController(5);

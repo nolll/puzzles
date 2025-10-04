@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201812;
 
 public class Aoc201812Tests
 {
-    [Test]
+    [Fact]
     public void PlantScoreIsCorrect()
     {
         const string input = """

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202201;
 
 public class Aoc202201Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var calorieCounts = new CalorieCounts(Input);
@@ -14,7 +11,7 @@ public class Aoc202201Tests
         result.Should().Be(24000);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var calorieCounts = new CalorieCounts(Input);

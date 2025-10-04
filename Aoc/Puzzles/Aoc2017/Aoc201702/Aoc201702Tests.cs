@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201702;
 
 public class Aoc201702Tests
 {
-    [Test]
+    [Fact]
     public void ChecksumMaxMinIsCorrect()
     {
         const string input = """
@@ -19,7 +16,7 @@ public class Aoc201702Tests
         spreadsheet.ChecksumMaxMin.Should().Be(18);
     }
 
-    [Test]
+    [Fact]
     public void ChecksumDivisionIsCorrect()
     {
         const string input = """

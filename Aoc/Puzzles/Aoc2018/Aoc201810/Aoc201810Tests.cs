@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201810;
 
 public class Aoc201810Tests
 {
-    [Test]
+    [Fact]
     public void FindsMessage()
     {
         const string input = """

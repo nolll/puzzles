@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202211;
 
 public class Aoc202211Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var monkeyBusiness = new MonkeyBusiness();
@@ -14,7 +11,7 @@ public class Aoc202211Tests
         result.Should().Be(10605);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var monkeyBusiness = new MonkeyBusiness();

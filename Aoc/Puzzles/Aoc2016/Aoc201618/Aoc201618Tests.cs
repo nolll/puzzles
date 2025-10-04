@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201618;
 
 public class Aoc201618Tests
 {
-    [Test]
+    [Fact]
     public void SafeCountIsCorrect()
     {
         const string input = ".^^.^.^^^^";

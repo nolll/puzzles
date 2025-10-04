@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201514;
 
 public class Aoc201514Tests
 {
-    [Test]
+    [Fact]
     public void WinningReindeerDistance()
     {
         const string input = """
@@ -20,7 +17,7 @@ public class Aoc201514Tests
         race.WinningDistance.Should().Be(1120);
     }
 
-    [Test]
+    [Fact]
     public void WinningReindeerScore()
     {
         const string input = """

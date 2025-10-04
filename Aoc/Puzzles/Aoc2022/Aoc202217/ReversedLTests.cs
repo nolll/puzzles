@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202217;
 
 public class ReversedLTests
 {
-    [Test]
+    [Fact]
     public void CanMoveRight()
     {
         var matrix = new Matrix<char>(5, 5, '.');
@@ -20,7 +18,7 @@ public class ReversedLTests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void CanNotMoveRight()
     {
         var matrix = new Matrix<char>(5, 5, '.');
@@ -34,7 +32,7 @@ public class ReversedLTests
         result.Should().BeFalse();
     }
     
-    [Test]
+    [Fact]
     public void CanMoveLeft()
     {
         var matrix = new Matrix<char>(5, 5, '.');
@@ -48,7 +46,7 @@ public class ReversedLTests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void CanNotMoveLeft()
     {
         var matrix = new Matrix<char>(5, 5, '.');
@@ -62,7 +60,7 @@ public class ReversedLTests
         result.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void CanNotMoveLeftBlocked()
     {
         var matrix = new Matrix<char>(5, 5, '.');
@@ -77,7 +75,7 @@ public class ReversedLTests
         result.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void CanMoveDown()
     {
         var matrix = new Matrix<char>(5, 5, '.');
@@ -91,7 +89,7 @@ public class ReversedLTests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void CanNotMoveDown()
     {
         var matrix = new Matrix<char>(5, 5, '.');

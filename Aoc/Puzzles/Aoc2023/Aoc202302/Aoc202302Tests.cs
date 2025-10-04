@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202302;
 
 public class Aoc202302Tests
@@ -13,7 +10,7 @@ public class Aoc202302Tests
                                  Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
                                  """;
 
-    [Test]
+    [Fact]
     public void ValidGames()
     {
         var result = Aoc202302.PlayGames(Input);
@@ -21,7 +18,7 @@ public class Aoc202302Tests
         result.ValidGames.Should().Be(8);
     }
 
-    [Test]
+    [Fact]
     public void GamePower()
     {
         var result = Aoc202302.PlayGames(Input);

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Tools.Graphs;
 
 public class KruskalTests
 {
-    [Test]
+    [Fact]
     public void MinimumSpanningTree()
     {
         GraphEdge[] edges =

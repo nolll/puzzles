@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201613;
 
 public class Aoc201613Tests
 {
-    [Test]
+    [Fact]
     public void ShortestStepCountIsCorrect()
     {
         const int input = 10;
@@ -15,11 +12,12 @@ public class Aoc201613Tests
         stepCount.Should().Be(11);
     }
 
-    [TestCase(0, 1)]
-    [TestCase(1, 3)]
-    [TestCase(2, 5)]
-    [TestCase(3, 6)]
-    [TestCase(4, 9)]
+    [Theory]
+    [InlineData(0, 1)]
+    [InlineData(1, 3)]
+    [InlineData(2, 5)]
+    [InlineData(3, 6)]
+    [InlineData(4, 9)]
     public void LocationCountIsCorrect(int steps, int expected)
     {
         const int input = 10;

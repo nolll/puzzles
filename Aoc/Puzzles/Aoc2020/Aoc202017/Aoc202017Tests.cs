@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202017;
 
 public class Aoc202017Tests
 {
-    [Test]
+    [Fact]
     public void AfterSixIterations_3D()
     {
         const string input = """
@@ -20,7 +17,7 @@ public class Aoc202017Tests
         activeCubes.Should().Be(112);
     }
 
-    [Test]
+    [Fact]
     public void AfterSixIterations_4D()
     {
         const string input = """

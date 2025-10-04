@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202218;
 
 public class Aoc202218Tests
 {
-    [Test]
+    [Fact]
     public void Part1Small()
     {
         var lavaCubes = new LavaCubes();
@@ -14,7 +11,7 @@ public class Aoc202218Tests
         result.Should().Be(10);
     }
 
-    [Test]
+    [Fact]
     public void Part1Large()
     {
         var lavaCubes = new LavaCubes();
@@ -23,7 +20,7 @@ public class Aoc202218Tests
         result.Should().Be(64);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var lavaCubes = new LavaCubes();

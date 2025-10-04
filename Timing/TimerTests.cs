@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Client.Timing;
 
 public class TimerTests
 {
-    [Test]
+    [Fact]
     public void Timer()
     {
         var startTime = DateTime.Parse("2020-02-02 20:20:20");

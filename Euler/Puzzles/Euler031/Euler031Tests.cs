@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Euler.Puzzles.Euler031;
 
 public class Euler031Tests
 {
-    [Test]
+    [Fact]
     public void TwoDenominations()
     {
         var puzzle = new Euler031();
@@ -14,7 +11,7 @@ public class Euler031Tests
         result.Should().Be(2);
     }
 
-    [Test]
+    [Fact]
     public void ThreeDenominations()
     {
         var puzzle = new Euler031();
@@ -23,7 +20,7 @@ public class Euler031Tests
         result.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void FourDenominations()
     {
         var puzzle = new Euler031();

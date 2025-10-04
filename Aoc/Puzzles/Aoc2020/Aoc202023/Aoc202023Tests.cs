@@ -1,13 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202023;
 
 public class Aoc202023Tests
 {
     private const int Input = 389_125_467;
 
-    [Test]
+    [Fact]
     public void ResultAfter10MovesIsCorrect()
     {
         var game = new CrabCupsGame(Input);
@@ -16,7 +13,7 @@ public class Aoc202023Tests
         game.ResultString.Should().Be("92658374");
     }
 
-    [Test]
+    [Fact]
     public void ExtendedResultAfter10MillionMovesIsCorrect()
     {
         var game = new CrabCupsGame(Input, true);

@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
 
 public class Matrix3DTests
@@ -8,7 +5,7 @@ public class Matrix3DTests
     private const char DefaultValue = '.';
     private const char WriteValue = '#';
 
-    [Test]
+    [Fact]
     public void ExtendAllTo3()
     {
         var matrix = new Matrix3D<char>(1, 1, 1, DefaultValue);
@@ -24,7 +21,7 @@ public class Matrix3DTests
         matrix.Depth.Should().Be(3);
     }
 
-    [Test]
+    [Fact]
     public void ExtendAll5()
     {
         var matrix = new Matrix3D<char>(1, 1, 1, DefaultValue);
@@ -40,7 +37,7 @@ public class Matrix3DTests
         matrix.Depth.Should().Be(5);
     }
 
-    [Test]
+    [Fact]
     public void AllAdjacent6Exists()
     {
         var matrix = new Matrix3D<char>(1, 1, 1, DefaultValue);
@@ -60,7 +57,7 @@ public class Matrix3DTests
         cubesAtZMin.Count.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void AllAdjacent26Exists()
     {
         var matrix = new Matrix3D<char>(1, 1, 1, DefaultValue);

@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Euler.Puzzles.Euler021;
 
 public class Euler021Tests
 {
-    [Test]
+    [Fact]
     public void Test()
     {
         const int a = 220;

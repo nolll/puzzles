@@ -1,13 +1,11 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201617;
 
 public class Aoc201617Tests
 {
-    [TestCase("ihgpwlah", "DDRRRD")]
-    [TestCase("kglvqrro", "DDUDRLRRUDRD")]
-    [TestCase("ulqzkmiv", "DRURDRUDDLLDLUURRDULRLDUUDDDRR")]
+    [Theory]
+    [InlineData("ihgpwlah", "DDRRRD")]
+    [InlineData("kglvqrro", "DDUDRLRRUDRD")]
+    [InlineData("ulqzkmiv", "DRURDRUDDLLDLUURRDULRLDUUDDDRR")]
     public void FindShortestPath(string passcode, string expectedPath)
     {
         var maze = new LockedDoorMaze();

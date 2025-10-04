@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201513;
 
 public class Aoc201513Tests
 {
-    [Test]
+    [Fact]
     public void HappinessChangeIsCorrect()
     {
         const string input = """

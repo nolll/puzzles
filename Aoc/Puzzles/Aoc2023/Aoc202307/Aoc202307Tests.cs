@@ -1,17 +1,15 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202307;
 
 public class Aoc202307Tests
 {
-    [TestCase("AAAAA", HandRank.FiveOfAKind)]
-    [TestCase("AA8AA", HandRank.FourOfAKind)]
-    [TestCase("23332", HandRank.FullHouse)]
-    [TestCase("TTT98", HandRank.ThreeOfAKind)]
-    [TestCase("23432", HandRank.TwoPair)]
-    [TestCase("A23A4", HandRank.OnePair)]
-    [TestCase("23456", HandRank.HighCard)]
+    [Theory]
+    [InlineData("AAAAA", HandRank.FiveOfAKind)]
+    [InlineData("AA8AA", HandRank.FourOfAKind)]
+    [InlineData("23332", HandRank.FullHouse)]
+    [InlineData("TTT98", HandRank.ThreeOfAKind)]
+    [InlineData("23432", HandRank.TwoPair)]
+    [InlineData("A23A4", HandRank.OnePair)]
+    [InlineData("23456", HandRank.HighCard)]
     public void GetHandRankPart1(string input, HandRank expected)
     {
         var result = PokerHand.GetPart1Rank(input);
@@ -19,18 +17,19 @@ public class Aoc202307Tests
         result.Should().Be(expected);
     }
 
-    [TestCase("JJJJJ", HandRank.FiveOfAKind)] // 5
-    [TestCase("JJJJ2", HandRank.FiveOfAKind)] // 4
-    [TestCase("JJJ22", HandRank.FiveOfAKind)] // 3
-    [TestCase("JJ222", HandRank.FiveOfAKind)] // 22
-    [TestCase("J2222", HandRank.FiveOfAKind)] // 1
-    [TestCase("JT555", HandRank.FourOfAKind)] // 1
-    [TestCase("JJKTT", HandRank.FourOfAKind)] // 2
-    [TestCase("JJKTQ", HandRank.ThreeOfAKind)] // 2
-    [TestCase("JQQQA", HandRank.FourOfAKind)] // 1
-    [TestCase("JQQ22", HandRank.FullHouse)] // 1
-    [TestCase("JQQ2A", HandRank.ThreeOfAKind)] // 1
-    [TestCase("JQ32A", HandRank.OnePair)] // 1
+    [Theory]
+    [InlineData("JJJJJ", HandRank.FiveOfAKind)] // 5
+    [InlineData("JJJJ2", HandRank.FiveOfAKind)] // 4
+    [InlineData("JJJ22", HandRank.FiveOfAKind)] // 3
+    [InlineData("JJ222", HandRank.FiveOfAKind)] // 22
+    [InlineData("J2222", HandRank.FiveOfAKind)] // 1
+    [InlineData("JT555", HandRank.FourOfAKind)] // 1
+    [InlineData("JJKTT", HandRank.FourOfAKind)] // 2
+    [InlineData("JJKTQ", HandRank.ThreeOfAKind)] // 2
+    [InlineData("JQQQA", HandRank.FourOfAKind)] // 1
+    [InlineData("JQQ22", HandRank.FullHouse)] // 1
+    [InlineData("JQQ2A", HandRank.ThreeOfAKind)] // 1
+    [InlineData("JQ32A", HandRank.OnePair)] // 1
     public void GetHandRankPart2(string input, HandRank expected)
     {
         var result = PokerHand.GetPart2Rank(input);
@@ -38,7 +37,7 @@ public class Aoc202307Tests
         result.Should().Be(expected);
     }
 
-    [Test]
+    [Fact]
     public void PokerPart1()
     {
         const string input = """
@@ -54,7 +53,7 @@ public class Aoc202307Tests
         result.Should().Be(6440);
     }
 
-    [Test]
+    [Fact]
     public void PokerPart2()
     {
         const string input = """

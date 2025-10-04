@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201624;
 
 public class Aoc201624Tests
 {
-    [Test]
+    [Fact]
     public void FindsClosestRoute()
     {
         const string input = """
@@ -22,7 +19,7 @@ public class Aoc201624Tests
         shortestPath.Should().Be(14);
     }
 
-    [Test]
+    [Fact]
     public void FindsClosestRouteAndGoesBackToStart()
     {
         const string input = """

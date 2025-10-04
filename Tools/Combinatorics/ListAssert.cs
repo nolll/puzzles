@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Pzl.Tools.Combinatorics;
 
 public static class ListAssert

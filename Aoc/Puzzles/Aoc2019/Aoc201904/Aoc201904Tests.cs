@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201904;
 
 public class Aoc201904Tests
 {
-    [TestCase(112233)]
-    [TestCase(111122)]
+    [Theory]
+    [InlineData(112233)]
+    [InlineData(111122)]
     public void PasswordIsValid(int pwd)
     {
         var passwordValidator = new PasswordValidator();
@@ -15,10 +13,11 @@ public class Aoc201904Tests
         result.Should().BeTrue();
     }
 
-    [TestCase(111111)]
-    [TestCase(223450)]
-    [TestCase(123789)]
-    [TestCase(123444)]
+    [Theory]
+    [InlineData(111111)]
+    [InlineData(223450)]
+    [InlineData(123789)]
+    [InlineData(123444)]
     public void PasswordIsInvalid(int pwd)
     {
         var passwordValidator = new PasswordValidator();
@@ -27,7 +26,7 @@ public class Aoc201904Tests
         result.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void AllDifferentChars_NoGroupsOfTwo()
     {
         const int pwd = 123789;
@@ -37,7 +36,7 @@ public class Aoc201904Tests
         result.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void TwoAdjacentEqualChars_OneGroupsOfTwo()
     {
         const int pwd = 223450;
@@ -47,7 +46,7 @@ public class Aoc201904Tests
         result.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void ThreeAdjacentEqualChars_NoGroupsOfTwo()
     {
         const int pwd = 123444;

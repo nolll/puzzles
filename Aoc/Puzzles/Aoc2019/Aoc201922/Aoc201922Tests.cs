@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201922;
 
 public class Aoc201922Tests
 {
-    [Test]
+    [Fact]
     public void DealIntoNewStack()
     {
         var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -16,7 +13,7 @@ public class Aoc201922Tests
         deck.Should().BeEquivalentTo(expectedDeck);
     }
 
-    [Test]
+    [Fact]
     public void PositiveCut()
     {
         var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -27,7 +24,7 @@ public class Aoc201922Tests
         deck.Should().BeEquivalentTo(expectedDeck);
     }
 
-    [Test]
+    [Fact]
     public void NegativeCut()
     {
         var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -38,7 +35,7 @@ public class Aoc201922Tests
         deck.Should().BeEquivalentTo(expectedDeck);
     }
 
-    [Test]
+    [Fact]
     public void Increment()
     {
         var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -49,7 +46,7 @@ public class Aoc201922Tests
         deck.Should().BeEquivalentTo(expectedDeck);
     }
 
-    [Test]
+    [Fact]
     public void ShuffleMany()
     {
         var shuffler = new CardShuffler();

@@ -1,11 +1,10 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq05;
 
 public class Aquaq05Tests
 {
-    [Test]
+    [Fact]
     public void RotateDiceLeft()
     {
         var dice = new Dice(1, 6, 2, 5, 3, 4);
@@ -19,7 +18,7 @@ public class Aquaq05Tests
         dice.Bottom.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void RotateDiceRight()
     {
         var dice = new Dice(1, 6, 2, 5, 3, 4);
@@ -33,7 +32,7 @@ public class Aquaq05Tests
         dice.Bottom.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void RotateDiceUp()
     {
         var dice = new Dice(1, 6, 2, 5, 3, 4);
@@ -47,7 +46,7 @@ public class Aquaq05Tests
         dice.Bottom.Should().Be(6);
     }
 
-    [Test]
+    [Fact]
     public void RotateDiceDown()
     {
         var dice = new Dice(1, 6, 2, 5, 3, 4);
@@ -61,7 +60,7 @@ public class Aquaq05Tests
         dice.Bottom.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void FindSumOfIndexes() =>
         Aquaq05.FindSumOfIndexesWithMatchingDice("LRDLU")
             .Should().Be(5);

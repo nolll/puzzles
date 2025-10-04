@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202322;
 
 public class Aoc202322Tests
 {
-    [Test]
+    [Fact]
     public void CountBricksThatCanBeRemoved()
     {
         const string input = """
@@ -23,7 +20,7 @@ public class Aoc202322Tests
         result.Should().Be(5);
     }
 
-    [Test]
+    [Fact]
     public void CountTotalRemovedBricks()
     {
         const string input = """

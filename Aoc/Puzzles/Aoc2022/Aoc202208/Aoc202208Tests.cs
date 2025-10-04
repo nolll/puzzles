@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202208;
 
 public class Aoc202208Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var treeHouse = new TreeHouse(Input);
@@ -15,7 +12,7 @@ public class Aoc202208Tests
         result.Should().Be(21);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var treeHouse = new TreeHouse(Input);

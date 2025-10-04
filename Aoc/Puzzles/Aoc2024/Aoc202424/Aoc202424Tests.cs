@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202424;
 
 public class Aoc202424Tests
 {
-    [Test]
+    [Fact]
     public void Part1_1()
     {
         const string input = """
@@ -24,7 +21,7 @@ public class Aoc202424Tests
         Sut.Part1(input).Answer.Should().Be("4");
     }
     
-    [Test]
+    [Fact]
     public void Part1_2()
     {
         const string input = """

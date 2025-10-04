@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202224;
 
 public class Aoc202224Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var blizzardNavigation = new BlizzardNavigation(Input);
@@ -14,7 +11,7 @@ public class Aoc202224Tests
         result.Should().Be(18);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var blizzardNavigation = new BlizzardNavigation(Input);

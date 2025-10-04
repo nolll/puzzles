@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202110;
 
 public class Aoc202110Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var syntaxChecker = new SyntaxChecker();
@@ -14,7 +11,7 @@ public class Aoc202110Tests
         result.Should().Be(26397);
     }
 
-    [Test]
+    [Fact]
     public void ValidateSingle()
     {
         var syntaxChecker = new SyntaxChecker();
@@ -23,7 +20,7 @@ public class Aoc202110Tests
         result.Should().Be(1197);
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var syntaxChecker = new SyntaxChecker();
@@ -32,7 +29,7 @@ public class Aoc202110Tests
         result.Should().Be(288957);
     }
 
-    [Test]
+    [Fact]
     public void CompletionString()
     {
         var syntaxChecker = new SyntaxChecker();
@@ -41,7 +38,7 @@ public class Aoc202110Tests
         result.Should().Be("}}]])})]");
     }
 
-    [Test]
+    [Fact]
     public void CompletionScore()
     {
         var syntaxChecker = new SyntaxChecker();

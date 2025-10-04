@@ -1,23 +1,20 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Tools.Compression;
 
 public class HuffmanCompressionTests
 {
     private const string Charset = "A_DEAD_DAD_CEDED_A_BAD_BABE_A_BEADED_ABACA_BED";
 
-    [Test]
+    [Fact]
     public void Encode() => new HuffmanCompression(Charset)
         .Encode("CEDED")
         .Should().Be("11101100011000");
 
-    [Test]
+    [Fact]
     public void Decode() => new HuffmanCompression(Charset)
         .Decode("11101100011000")
         .Should().Be("CEDED");
 
-    [Test]
+    [Fact]
     public void GetNodes()
     {
         var result = new HuffmanCompression(Charset).Nodes;
@@ -36,7 +33,7 @@ public class HuffmanCompressionTests
         result[5].Weight.Should().Be(11);
     }
 
-    [Test]
+    [Fact]
     public void JoinNodes()
     {
         var result = new HuffmanCompression(Charset).Tree;
@@ -46,7 +43,7 @@ public class HuffmanCompressionTests
         result[0].Weight.Should().Be(46);
     }
 
-    [Test]
+    [Fact]
     public void GetCharCodes()
     {
         var result = new HuffmanCompression(Charset).Encoding;

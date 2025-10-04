@@ -1,5 +1,4 @@
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq21;
 
@@ -12,7 +11,7 @@ public class Aquaq21Tests
                                  3 7 9 8 2
                                  """;
 
-    [Test]
+    [Fact]
     public void CollectDust()
     {
         var result = Aquaq21.Run(Input, 3);

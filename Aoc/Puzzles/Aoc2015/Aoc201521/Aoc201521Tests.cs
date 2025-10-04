@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201521;
 
 public class Aoc201521Tests
 {
-    [Test]
+    [Fact]
     public void PlayerWinsInFourRounds()
     {
         var simulator = new RpgSimulator();

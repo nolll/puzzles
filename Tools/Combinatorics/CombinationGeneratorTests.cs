@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Tools.Combinatorics;
 
 public class CombinationGeneratorTests
 {
-    [Test]
+    [Fact]
     public void GeneratesAllUniqueCombinationsOfAnySize()
     {
         var result = CombinationGenerator.GetUniqueCombinationsAnySize([1, 2, 3]).ToList();
@@ -23,7 +20,7 @@ public class CombinationGeneratorTests
         ListAssert.IsEquivalent(result, expected);
     }
     
-    [Test]
+    [Fact]
     public void GeneratesAllUniqueCombinationsOfSpecifiedSize()
     {
         var result = CombinationGenerator.GetUniqueCombinationsFixedSize([1, 2, 3, 4, 5], 3).ToList();
@@ -44,7 +41,7 @@ public class CombinationGeneratorTests
         ListAssert.IsEquivalent(result, expected);
     }
     
-    [Test]
+    [Fact]
     public void GeneratesAllUniqueCombinationsOfMaxSize()
     {
         var result = CombinationGenerator.GetUniqueCombinationsMaxSize([1, 2, 3], 2).ToList();
@@ -61,7 +58,7 @@ public class CombinationGeneratorTests
         ListAssert.IsEquivalent(result, expected);
     }
 
-    [Test]
+    [Fact]
     public void GeneratesAllCombinationsIncludingDuplicatesOfSpecifiedSize()
     {
         var result = CombinationGenerator.GetCombinationsFixedSize([1, 2, 3], 2).ToList();
@@ -81,7 +78,7 @@ public class CombinationGeneratorTests
         ListAssert.IsEquivalent(result, expected);
     }
 
-    [Test]
+    [Fact]
     public void GeneratesCartesianProductOfLists()
     {
         var result = CombinationGenerator.CartesianProduct([[1, 2], [3, 4, 5], [6, 7]]).ToList();

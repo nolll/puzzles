@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201621;
 
 public class Aoc201621Tests
 {
-    [Test]
+    [Fact]
     public void CorrectScramble()
     {
         const string input = """
@@ -27,7 +24,7 @@ public class Aoc201621Tests
         result.Should().Be("decab");
     }
 
-    [Test]
+    [Fact]
     public void CorrectUnscramble()
     {
         const string input = """

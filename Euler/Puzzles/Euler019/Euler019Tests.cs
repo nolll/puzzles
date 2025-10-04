@@ -1,12 +1,9 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Euler.Puzzles.Euler019;
 
 public class Euler019Tests
 {
 
-    [Test]
+    [Fact]
     public void Test()
     {
         var startDate = DateTime.Parse("2020-01-01");

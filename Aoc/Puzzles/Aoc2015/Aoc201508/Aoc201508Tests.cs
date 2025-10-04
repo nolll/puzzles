@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201508;
 
 public class Aoc201508Tests
 {
-    [Test]
+    [Fact]
     public void CodeToMemoryDifference()
     {
         const string input = """
@@ -20,7 +17,7 @@ public class Aoc201508Tests
         digitalList.CodeMinusMemoryDiff.Should().Be(12);
     }
 
-    [Test]
+    [Fact]
     public void EncodedToCodeDifference()
     {
         const string input = """

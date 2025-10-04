@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202311;
 
 public class Aoc202311Tests
 {
-    [Test]
+    [Fact]
     public void Distances1()
     {
         const string input = """
@@ -26,7 +23,7 @@ public class Aoc202311Tests
         result.Should().Be(374);
     }
 
-    [Test]
+    [Fact]
     public void Distances2()
     {
         const string input = """

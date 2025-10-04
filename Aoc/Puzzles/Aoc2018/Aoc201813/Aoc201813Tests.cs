@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201813;
 
 public class Aoc201813Tests
 {
-    [Test]
+    [Fact]
     public void LocationOfFirstCollision()
     {
         const string input = """
@@ -25,7 +22,7 @@ public class Aoc201813Tests
         str.Should().Be("7,3");
     }
 
-    [Test]
+    [Fact]
     public void LocationOfLastCart()
     {
         const string input = """

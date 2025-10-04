@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201525;
 
 public class Aoc201525Tests
 {
-    [Test]
+    [Fact]
     public void FindsCode3_3()
     {
         const int targetX = 3;
@@ -17,7 +14,7 @@ public class Aoc201525Tests
         code.Should().Be(1601130);
     }
 
-    [Test]
+    [Fact]
     public void FindsCode6_4()
     {
         const int targetX = 6;

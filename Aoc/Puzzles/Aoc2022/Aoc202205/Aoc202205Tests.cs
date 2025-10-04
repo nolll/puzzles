@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202205;
 
 public class Aoc202205Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var crane = new CargoCrane(Input);
@@ -15,7 +12,7 @@ public class Aoc202205Tests
         result.Should().Be("CMZ");
     }
 
-    [Test]
+    [Fact]
     public void Part2()
     {
         var crane = new CargoCrane(Input);

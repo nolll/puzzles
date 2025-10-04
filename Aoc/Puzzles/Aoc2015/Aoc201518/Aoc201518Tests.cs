@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201518;
 
 public class Aoc201518Tests
@@ -14,7 +11,7 @@ public class Aoc201518Tests
                                  ####..
                                  """;
 
-    [Test]
+    [Fact]
     public void LightCountAfterOneStep()
     {
         var gif = new AnimatedGif(Input);
@@ -23,7 +20,7 @@ public class Aoc201518Tests
         gif.LightCount.Should().Be(11);
     }
 
-    [Test]
+    [Fact]
     public void LightCountAfterTwoSteps()
     {
         var gif = new AnimatedGif(Input);
@@ -32,7 +29,7 @@ public class Aoc201518Tests
         gif.LightCount.Should().Be(8);
     }
 
-    [Test]
+    [Fact]
     public void LightCountAfterThreeSteps()
     {
         var gif = new AnimatedGif(Input);
@@ -41,7 +38,7 @@ public class Aoc201518Tests
         gif.LightCount.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void LightCountAfterFourSteps()
     {
         var gif = new AnimatedGif(Input);
@@ -50,7 +47,7 @@ public class Aoc201518Tests
         gif.LightCount.Should().Be(4);
     }
 
-    [Test]
+    [Fact]
     public void LightCountAfterOneStepWithLitCorners()
     {
         var gif = new AnimatedGif(Input, true);
@@ -59,7 +56,7 @@ public class Aoc201518Tests
         gif.LightCount.Should().Be(18);
     }
 
-    [Test]
+    [Fact]
     public void LightCountAfterTwoStepsWithLitCorners()
     {
         var gif = new AnimatedGif(Input, true);
@@ -68,7 +65,7 @@ public class Aoc201518Tests
         gif.LightCount.Should().Be(18);
     }
 
-    [Test]
+    [Fact]
     public void LightCountAfterThreeStepsWithLitCorners()
     {
         var gif = new AnimatedGif(Input, true);
@@ -77,7 +74,7 @@ public class Aoc201518Tests
         gif.LightCount.Should().Be(18);
     }
 
-    [Test]
+    [Fact]
     public void LightCountAfterFourStepsWithLitCorners()
     {
         var gif = new AnimatedGif(Input, true);
@@ -86,7 +83,7 @@ public class Aoc201518Tests
         gif.LightCount.Should().Be(14);
     }
 
-    [Test]
+    [Fact]
     public void LightCountAfterFiveStepsWithLitCorners()
     {
         var gif = new AnimatedGif(Input, true);

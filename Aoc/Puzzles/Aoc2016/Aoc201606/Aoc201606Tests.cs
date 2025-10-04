@@ -1,6 +1,3 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201606;
 
 public class Aoc201606Tests
@@ -24,7 +21,7 @@ public class Aoc201606Tests
                                  enarar
                                  """;
 
-    [Test]
+    [Fact]
     public void MessageIsCorrect_MostCommon()
     {
         var reader = new RepetitionCodeReader();
@@ -33,7 +30,7 @@ public class Aoc201606Tests
         coin.Should().Be("easter");
     }
 
-    [Test]
+    [Fact]
     public void MessageIsCorrect_LeastCommon()
     {
         var reader = new RepetitionCodeReader();

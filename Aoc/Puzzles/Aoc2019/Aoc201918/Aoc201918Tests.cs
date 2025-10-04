@@ -1,12 +1,10 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201918;
 
 public class Aoc201918Tests
 {
-    [Test]
+    [Fact]
     public void OneRobot_ShortestPathIsFound1()
     {
         const string input = """
@@ -21,7 +19,7 @@ public class Aoc201918Tests
         keyCollector.ShortestPath.Should().Be(8);
     }
         
-    [Test]
+    [Fact]
     public void OneRobot_ShortestPathIsFound2()
     {
         const string input = """
@@ -38,7 +36,7 @@ public class Aoc201918Tests
         keyCollector.ShortestPath.Should().Be(86);
     }
 
-    [Test]
+    [Fact]
     public void OneRobot_ShortestPathIsFound3()
     {
         const string input = """
@@ -55,7 +53,7 @@ public class Aoc201918Tests
         keyCollector.ShortestPath.Should().Be(132);
     }
 
-    [Test]
+    [Fact]
     public void OneRobot_ShortestPathIsFound4()
     {
         const string input = """
@@ -76,7 +74,7 @@ public class Aoc201918Tests
         keyCollector.ShortestPath.Should().Be(136);
     }
 
-    [Test]
+    [Fact]
     public void OneRobot_ShortestPathIsFound5()
     {
         const string input = """
@@ -94,7 +92,7 @@ public class Aoc201918Tests
         keyCollector.ShortestPath.Should().Be(81);
     }
 
-    [Test]
+    [Fact]
     public void FourRobots_ShortestPathIsFound1()
     {
         const string input = """
@@ -113,7 +111,7 @@ public class Aoc201918Tests
         keyCollector.ShortestPath.Should().Be(8);
     }
 
-    [Test]
+    [Fact]
     public void FourRobots_ShortestPathIsFound2()
     {
         const string input = """
@@ -132,7 +130,7 @@ public class Aoc201918Tests
         keyCollector.ShortestPath.Should().Be(24);
     }
 
-    [Test]
+    [Fact]
     public void FourRobots_ShortestPathIsFound3()
     {
         const string input = """
@@ -150,11 +148,10 @@ public class Aoc201918Tests
 
         keyCollector.ShortestPath.Should().Be(32);
     }
-
-    [Test]
+    
     // This completes in 70 steps, and the code works for the real data. 
     // The solution probably needs to be more clever regarding quadrants.
-    [Ignore(TestHelper.FailingTest)]
+    [Fact(Skip = TestHelper.FailingTest)]
     public void FourRobots_ShortestPathIsFound4()
     {
         const string input = """

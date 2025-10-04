@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201806;
 
 public class Aoc201806Tests
 {
-    [Test]
+    [Fact]
     public void FindsLargestArea()
     {
         const string input = """
@@ -23,7 +20,7 @@ public class Aoc201806Tests
         area.Should().Be(17);
     }
 
-    [Test]
+    [Fact]
     public void FindsAreaOfCentralArea()
     {
         const string input = """

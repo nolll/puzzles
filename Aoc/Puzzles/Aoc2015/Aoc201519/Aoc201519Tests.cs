@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201519;
 
 public class Aoc201519Tests
 {
-    [Test]
+    [Fact]
     public void FindsDistinctMolecules()
     {
         const string startMolecule = "HOH";
@@ -21,8 +18,9 @@ public class Aoc201519Tests
         molecules.Count.Should().Be(4);
     }
 
-    [TestCase("HOH", 3)]
-    [TestCase("HOHOHO", 6)]
+    [Theory]
+    [InlineData("HOH", 3)]
+    [InlineData("HOHOHO", 6)]
     public void TimeToMakeMolecule(string molecule, int steps)
     {
         const string input = """

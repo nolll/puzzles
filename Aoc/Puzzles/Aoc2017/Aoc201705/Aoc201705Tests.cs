@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201705;
 
 public class Aoc201705Tests
 {
-    [Test]
+    [Fact]
     public void Part1_StepsUntilExit()
     {
         const string input = """
@@ -22,7 +19,7 @@ public class Aoc201705Tests
         jumper.StepCount.Should().Be(5);
     }
 
-    [Test]
+    [Fact]
     public void Part2_StepsUntilExit()
     {
         const string input = """

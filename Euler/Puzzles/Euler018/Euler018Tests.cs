@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Euler.Puzzles.Euler018;
 
 public class Euler018Tests
 {
-    [Test]
+    [Fact]
     public void Test()
     {
         const string triangle = """

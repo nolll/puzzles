@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202209;
 
 public class Aoc202209Tests
 {
-    [Test]
+    [Fact]
     public void Part1()
     {
         var ropeBridge = new RopeBridge();
@@ -14,7 +11,7 @@ public class Aoc202209Tests
         result.Should().Be(13);
     }
 
-    [Test]
+    [Fact]
     public void Part2Example1()
     {
         var ropeBridge = new RopeBridge();
@@ -23,7 +20,7 @@ public class Aoc202209Tests
         result.Should().Be(1);
     }
 
-    [Test]
+    [Fact]
     public void Part2Example2()
     {
         var ropeBridge = new RopeBridge();

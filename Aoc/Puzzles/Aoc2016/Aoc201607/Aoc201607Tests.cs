@@ -12,7 +12,7 @@ public class Aoc201607Tests
         var ipTester = new IpTester();
         var result = ipTester.SupportsTls(ip);
 
-        result.Should().Be(result);
+        result.Should().Be(expected);
     }
 
     [Theory]
@@ -25,6 +25,6 @@ public class Aoc201607Tests
         var ipTester = new IpTester();
         var result = ipTester.SupportsSsl(ip);
 
-        result.Should().Be(result);
+        result.Should().Be(expected);
     }
 }

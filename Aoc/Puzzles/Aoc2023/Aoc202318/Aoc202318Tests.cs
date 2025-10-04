@@ -56,20 +56,19 @@ public class Aoc202318Tests
     }
 
     [Theory]
-    [InlineData("70c71", 461937)]
     [InlineData("0dc57", 56407)]
-    [InlineData("5713f", 356671)]
-    [InlineData("d2c08", 863240)]
-    [InlineData("59c68", 367720)]
+    [InlineData("01523", 5411)]
+    [InlineData("1b58a", 112010)]
     [InlineData("411b9", 266681)]
+    [InlineData("5713f", 356671)]
+    [InlineData("59c68", 367720)]
+    [InlineData("70c71", 461937)]
+    [InlineData("7807d", 491645)]
+    [InlineData("7a21e", 500254)]
+    [InlineData("a77fa", 686074)]
     [InlineData("8ceee", 577262)]
     [InlineData("caa17", 829975)]
-    [InlineData("1b58a", 112010)]
-    [InlineData("caa17", 829975)]
-    [InlineData("7807d", 491645)]
-    [InlineData("a77fa", 686074)]
-    [InlineData("01523", 5411)]
-    [InlineData("7a21e", 500254)]
+    [InlineData("d2c08", 863240)]
     public void ParseHex(string input, int expected)
     {
         var result = Aoc202318.ParseHex(input);

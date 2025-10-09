@@ -7,6 +7,7 @@ using Pzl.Tools.Numbers;
 namespace Pzl.Euler.Puzzles.Euler060;
 
 [Name("Prime Pair Sets")]
+[IsSlow, Comment("Better prime cache?")]
 public class Euler060 : EulerPuzzle
 {
     private readonly Dictionary<int, bool> _primeCache = new();

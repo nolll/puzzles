@@ -101,4 +101,16 @@ public class NumbersTests
     [Fact]
     public void IntsFromString() => 
         Numbers.IntsFromString("abc123def456ghi").Should().BeEquivalentTo((int[])[123, 456]);
+    
+    [Theory]
+    [InlineData(6, 1)]
+    [InlineData(28, 2)]
+    [InlineData(46456, 5)]
+    public void CountDigits(int n, int expected) => Numbers.NumDigits(n).Should().Be(expected);
+    
+    [Theory]
+    [InlineData(6, 3, 63)]
+    [InlineData(28, 84, 2884)]
+    [InlineData(46456, 54, 4645654)]
+    public void ConcatInts(int a, int b, int expected) => Numbers.Concat([a, b]).Should().Be(expected);
 }

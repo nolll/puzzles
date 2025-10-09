@@ -14,14 +14,15 @@ public static class Numbers
         {
             var root = Math.Sqrt(i);
             var found = false;
-                
-            for (int j = 0, count = primes.Count; j < count; j++)
+            var count = primes.Count;
+            
+            for (var j = 0; j < count; j++)
             {
-                int divisor;
-                if ((divisor = primes[j]) > root)
+                var divisor = primes[j];
+                if (divisor > root)
                     break;
 
-                if ((i % divisor) == 0)
+                if (i % divisor == 0)
                 {
                     found = true;
                     break;
@@ -51,9 +52,11 @@ public static class Numbers
         var upperBound = (long)Math.Floor(Math.Sqrt(n));
 
         for (var i = 3; i <= upperBound; i += 2)
+        {
             if (n % i == 0)
                 return false;
-
+        }
+        
         return true;
     }
 
@@ -149,4 +152,18 @@ public static class Numbers
 
     public static long[] LongsFromString(string s) => 
         DigitRegex.Matches(s).Select(o => long.Parse(o.ToString())).ToArray();
+    
+    public static int Concat(int[] values) {
+        var num = values.Length;
+        var total = 0;
+        for (var i = num - 1; i >= 0; i--) {
+            total += values[i] * (int)Math.Pow(10, NumDigits(total));
+        }
+        return total;
+    }
+
+    public static int NumDigits(int i) {
+        if (i == 0) return 0;
+        return 1 + (int) (Math.Log(i) / Math.Log(10));
+    }
 }

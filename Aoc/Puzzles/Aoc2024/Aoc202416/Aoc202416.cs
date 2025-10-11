@@ -26,7 +26,7 @@ public class Aoc202416 : AocPuzzle
         List<string> endKeys = [$"{MatrixDirection.Right}|{end.Id}", $"{MatrixDirection.Up}|{end.Id}"];
         var shortestPath = Dijkstra.BestPath(inputs, startKey, endKeys);
         
-        return new PuzzleResult(shortestPath.cost, "7f6e0e55c1b9ba30973eeb8218555c3a");
+        return new PuzzleResult(shortestPath.Cost, "7f6e0e55c1b9ba30973eeb8218555c3a");
     }
 
     public PuzzleResult Part2(string input)

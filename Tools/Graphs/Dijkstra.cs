@@ -6,12 +6,12 @@ public static class Dijkstra
         BestCost(edges, source, [target]);
     
     public static int BestCost(List<GraphEdge> edges, string source, List<string> targets) => 
-        BestPath(Graph.GetNodes(edges), source, targets).cost;
+        BestPath(Graph.GetNodes(edges), source, targets).Cost;
 
-    public static (int cost, List<string> path) BestPath(IEnumerable<GraphEdge> edges, string source, string target) => 
+    public static Result BestPath(IEnumerable<GraphEdge> edges, string source, string target) => 
         BestPath(edges, source, [target]);
 
-    public static (int cost, List<string> path) BestPath(IEnumerable<GraphEdge> edges, string source, List<string> targets) => 
+    public static Result BestPath(IEnumerable<GraphEdge> edges, string source, List<string> targets) => 
         BestPath(Graph.GetNodes(edges), source, targets);
 
     public static (int cost, List<List<string>> paths) BestPaths(List<GraphEdge> edges, string source, List<string> targets) => 
@@ -49,11 +49,11 @@ public static class Dijkstra
         return targets.Min(o => visited[o]);
     }
     
-    private static (int cost, List<string> path) BestPath(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
+    private static Result BestPath(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
-        var visited = nodes.Keys.ToDictionary(k => k, _ => (cost: int.MaxValue, path: new List<string>()));
-        visited[source] = (0, [source]);
+        var visited = nodes.Keys.ToDictionary(k => k, _ => new Result(int.MaxValue, new List<string>()));
+        visited[source] = new Result(0, [source]);
         var queue = new Queue<GraphNode>();
         queue.Enqueue(start);
 
@@ -67,15 +67,15 @@ public static class Dijkstra
                     continue;
 
                 var cost = steps + connection.Cost;
-                if (cost >= visitedConnection.cost) 
+                if (cost >= visitedConnection.Cost) 
                     continue;
 
-                visited[connection.Name] = (cost, [..path, connection.Name]);
+                visited[connection.Name] = new Result(cost, [..path, connection.Name]);
                 queue.Enqueue(nodes[connection.Name]);
             }
         }
         
-        return targets.Select(o => visited[o]).MinBy(o => o.cost);
+        return targets.Select(o => visited[o]).MinBy(o => o.Cost) ?? new Result(0, []);
     }
     
     private static (int cost, List<List<string>> paths) BestPaths(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
@@ -112,4 +112,6 @@ public static class Dijkstra
         
         return targets.Select(o => visited[o]).MinBy(o => o.cost);
     }
+
+    public record Result(int Cost, List<string> Path);
 }

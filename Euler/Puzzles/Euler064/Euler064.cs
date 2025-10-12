@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Debug;
 using Pzl.Tools.Maths;
 
 namespace Pzl.Euler.Puzzles.Euler064;
@@ -13,19 +14,19 @@ public class Euler064 : EulerPuzzle
         var result = 0;
         for (var n = 2L; n <= 10_000L; n++)
         {
-            var cycle = GetContinuedFractionCycle(n);
-            if (cycle.Length % 2 == 1)
+            var cf = GetContinuedFraction(n);
+            if (cf.cycle.Length % 2 != 0)
                 result++;
         }
         
         return new PuzzleResult(result, "44e91baf8c82f4b22ddd38842c45659b");
     }
 
-    private static long[] GetContinuedFractionCycle(long n)
+    public static (long a0, long[] cycle) GetContinuedFraction(long n)
     {
         var floor = (long)Math.Sqrt(n);
         if ((long)Math.Pow(floor, 2) == n)
-            return [];
+            return (floor, []);
 
         List<long> results = [floor];
         var states = new List<(long, long)>();
@@ -42,13 +43,13 @@ public class Euler064 : EulerPuzzle
             c -= split * d;
             c = -c;
             b = d;
-            var state = (b: b, c);
+            var state = (b, c);
             results.Add(a);
             if (states.Contains(state))
                 break;
             states.Add(state);
         }
         
-        return results.ToArray();
+        return (results.First(), results.Skip(1).SkipLast(1).ToArray());
     }
 }

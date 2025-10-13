@@ -1,6 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
-
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202318;
 
 public class Aoc202318Tests
@@ -25,7 +22,7 @@ public class Aoc202318Tests
                              U 2 (#7a21e3)
                              """;
 
-        var result = Aoc202318.DigPoolPart1(input);
+        var result = Aoc202318.SolvePart1(input);
 
         result.Should().Be(62);
     }
@@ -50,7 +47,7 @@ public class Aoc202318Tests
                              U 2 (#7a21e3)
                              """;
 
-        var result = Aoc202318.DigPoolPart2(input);
+        var result = Aoc202318.SolvePart2(input);
 
         result.Should().Be(952408144115);
     }

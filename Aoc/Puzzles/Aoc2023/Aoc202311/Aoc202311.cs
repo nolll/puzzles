@@ -104,5 +104,5 @@ public class Aoc202311 : AocPuzzle
     }
 
     private static long ManhattanDistance((long x, long y) a, (long x, long y) b) => 
-        Math.Abs(a.x - b.x) + (Math.Abs(a.y - b.y));
+        Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
 }

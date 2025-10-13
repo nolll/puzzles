@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Maths;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202318;
@@ -10,108 +11,111 @@ public class Aoc202318 : AocPuzzle
 {
     public PuzzleResult RunPart1(string input)
     {
-        var result = DigPoolPart1(input);
+        var result = SolvePart1(input);
 
         return new PuzzleResult(result, "61347c48a0a4bc715d0c1c2ea446a36e");
     }
 
     public PuzzleResult RunPart2(string input)
     {
-        var result = DigPoolPart2(input);
+        var result = SolvePart2(input);
 
         return new PuzzleResult(result, "5ad2f7a72c31e629c55fb65dab16d204");
     }
 
-    public static long DigPoolPart1(string s)
+    public static long SolvePart1(string s) => Solve(ParseInstructionPart1, s);
+    public static long SolvePart2(string s) => Solve(ParseInstructionPart2, s);
+
+    private static long Solve(Func<string, Instruction> parse, string s)
     {
-        var matrix = new Matrix<char>(1, 1, '.');
-        var rows = StringReader.ReadLines(s);
-        var lines = new List<Line>();
-        var currentCoord = new MatrixAddress(matrix.XMin, matrix.YMin);
-        var corners = new List<MatrixAddress> { currentCoord };
-        foreach (var row in rows)
+        var current = new Point(0, 0);
+        var corners = new List<Point> { current };
+        var instructions = ParseInstructions(parse, s);
+        
+        foreach (var i in instructions)
         {
-            var parts = row.Split(' ').ToArray();
-            var dir = ParseDirectionPart1(parts[0][0]);
-            var len = int.Parse(parts[1]);
-
-            var nextCoord = new MatrixAddress(currentCoord.X + dir.X * len, currentCoord.Y + dir.Y * len);
-            lines.Add(new Line(currentCoord, nextCoord));
-            corners.Add(nextCoord);
-            currentCoord = nextCoord;
-        }
-
-        return Area(corners, lines);
-    }
-
-    public static long DigPoolPart2(string s)
-    {
-        var matrix = new Matrix<char>(1, 1, '.');
-        var rows = StringReader.ReadLines(s);
-        var currentCoord = new MatrixAddress(matrix.XMin, matrix.YMin);
-        var lines = new List<Line>();
-        var corners = new List<MatrixAddress> { currentCoord };
-        foreach (var row in rows)
-        {
-            var parts = row.Split(' ').ToArray();
-            var hex = parts[2].TrimStart('(').TrimEnd(')').TrimStart('#');
-            var dir = ParseDirectionPart2(hex.Last());
-            var len = ParseHex(hex[..5]);
-            var next = new MatrixAddress(currentCoord.X + dir.X * len, currentCoord.Y + dir.Y * len);
-            lines.Add(new Line(currentCoord, next));
+            var x = current.X + i.Direction.X * i.Distance;
+            var y = current.Y + i.Direction.Y * i.Distance;
+            var next = new Point(x, y);
             corners.Add(next);
-            currentCoord = next;
+            current = next;
         }
 
-        return Area(corners, lines);
+        return Area(corners);
     }
 
-    private static long Area(List<MatrixAddress> corners, List<Line> lines)
+    private static long Area(List<Point> corners)
     {
-        var area = ShoelaceArea(corners.Select(o => ((long)o.X, (long)o.Y)).ToList());
-        var circ = lines.Sum(o => o.From.ManhattanDistanceTo(o.To));
+        var shoelaceArea = GetShoelaceArea(corners);
+        var circumference = GetCircumference(corners);
 
-        return area + circ / 2 + 1;
+        return GetPicksArea(shoelaceArea, circumference);
     }
 
-    private static long ShoelaceArea(List<(long X, long Y)> coords)
+    private static long GetCircumference(List<Point> corners)
     {
-        var n = coords.Count;
-        long a = 0;
-        for (var i = 0; i < n - 1; i++)
+        var sum = 0L;
+        for (var i = 0; i < corners.Count - 1; i++)
         {
-            a += coords[i].X * coords[i + 1].Y - coords[i + 1].X * coords[i].Y;
+            sum += ManhattanDistance(corners[i], corners[i + 1]);
         }
-        return Math.Abs(a + coords[n - 1].X * coords[0].Y - coords[0].X * coords[n - 1].Y) / 2;
+
+        return sum;
+    }
+
+    private static long GetPicksArea(long shoelaceArea, long circumference) => shoelaceArea + circumference / 2 + 1;
+
+    private static long GetShoelaceArea(List<Point> coords)
+    {
+        var sum = Enumerable.Range(0, coords.Count).Sum(i => coords[i].X * (coords[Clamp(i + 1)].Y - coords[Clamp(i - 1)].Y));
+        return Math.Abs(sum) / 2;
+
+        int Clamp(int n) => MathTools.Clamp(n, 0, coords.Count - 1);
     }
 
     public static int ParseHex(string hex) => Convert.ToInt32(hex, 16);
+    
+    private static IEnumerable<Instruction> ParseInstructions(Func<string, Instruction> parse, string s) => 
+        StringReader.ReadLines(s).Select(parse);
 
-    private static MatrixDirection ParseDirectionPart1(char c)
+    private static Instruction ParseInstructionPart1(string s)
     {
-        return c switch
-        {
-            'U' => MatrixDirection.Up,
-            'R' => MatrixDirection.Right,
-            'D' => MatrixDirection.Down,
-            _ => MatrixDirection.Left
-        };
-    }
+        var parts = s.Split(' ').ToArray();
+        var dir = ParseDirectionPart1(parts[0][0]);
+        var len = int.Parse(parts[1]);
 
-    private static MatrixDirection ParseDirectionPart2(char c)
+        return new Instruction(dir, len);
+    }
+    
+    private static Instruction ParseInstructionPart2(string s)
     {
-        return c switch
-        {
-            '3' => MatrixDirection.Up,
-            '0' => MatrixDirection.Right,
-            '1' => MatrixDirection.Down,
-            _ => MatrixDirection.Left
-        };
-    }
-}
+        var parts = s.Split(' ').ToArray();
+        var hex = parts[2].TrimStart('(').TrimEnd(')').TrimStart('#');
+        var dir = ParseDirectionPart2(hex.Last());
+        var len = ParseHex(hex[..5]);
 
-public class Line(MatrixAddress from, MatrixAddress to)
-{
-    public MatrixAddress From { get; } = from;
-    public MatrixAddress To { get; } = to;
+        return new Instruction(dir, len);
+    }
+    
+    private static MatrixDirection ParseDirectionPart1(char c) => c switch
+    {
+        'U' => MatrixDirection.Up,
+        'R' => MatrixDirection.Right,
+        'D' => MatrixDirection.Down,
+        _ => MatrixDirection.Left
+    };
+
+    private static MatrixDirection ParseDirectionPart2(char c) => c switch
+    {
+        '3' => MatrixDirection.Up,
+        '0' => MatrixDirection.Right,
+        '1' => MatrixDirection.Down,
+        _ => MatrixDirection.Left
+    };
+    
+    private static long ManhattanDistance(Point a, Point b) => 
+        Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y);
+
+    private record Point(long X, long Y);
+    private record Instruction(MatrixDirection Direction, int Distance);
 }

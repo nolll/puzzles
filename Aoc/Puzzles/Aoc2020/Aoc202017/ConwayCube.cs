@@ -7,85 +7,76 @@ public class ConwayCube
 {
     public int Boot3D(string input, int iterations)
     {
-        var matrix = Matrix3DBuilder.BuildCharMatrix(input, '.');
+        var grid = Grid3dBuilder.BuildCharMatrix(input, '.');
 
         for (var i = 0; i < iterations; i++)
         {
-            matrix.ExtendAllDirections();
+            grid.ExtendAllDirections();
             var ons = new List<Coord3d>();
-            for (var z = matrix.ZMin; z <= matrix.ZMax; z++)
+            for (var z = grid.ZMin; z <= grid.ZMax; z++)
             {
-                for (var y = matrix.YMin; y <= matrix.YMax; y++)
+                for (var y = grid.YMin; y <= grid.YMax; y++)
                 {
-                    for (var x = matrix.XMin; x <= matrix.XMax; x++)
+                    for (var x = grid.XMin; x <= grid.XMax; x++)
                     {
-                        matrix.MoveTo(x, y, z);
-                        var currentValue = matrix.ReadValue();
-                        var adjacentValues = matrix.AllAdjacentValues;
+                        grid.MoveTo(x, y, z);
+                        var currentValue = grid.ReadValue();
+                        var adjacentValues = grid.AllAdjacentValues;
                         var neighborCount = adjacentValues.Count(o => o == '#');
                         var newValue = GetNewValue(currentValue, neighborCount);
                         if(newValue == '#')
-                            ons.Add(matrix.Address);
+                            ons.Add(grid.Address);
                     }
                 }
             }
             
-            matrix.Clear();
+            grid.Clear();
             foreach (var coord in ons) 
-                matrix.WriteValueAt(coord, '#');
-
-            //var p1after = matrix.Print(-1);
-            //var p2after = matrix.Print(0);
-            //var p3after = matrix.Print(1);
-
-            //var xxxx = 0;
+                grid.WriteValueAt(coord, '#');
         }
-        return matrix.Values.Count(o => o == '#');  
+        
+        return grid.Values.Count(o => o == '#');  
     }
 
     public int Boot4D(string input, int iterations)
     {
-        var matrix = Matrix4DBuilder.BuildCharMatrix(input, '.');
+        var grid = Grid4dBuilder.BuildCharMatrix(input, '.');
 
         for (var i = 0; i < iterations; i++)
         {
-            matrix.ExtendAllDirections();
-            var newMatrix = new Matrix4D<char>(1, 1, 1, 1, '.');
-            for (var w = 0; w < matrix.Duration; w++)
+            grid.ExtendAllDirections();
+            var newGrid = new Grid4d<char>(1, 1, 1, 1, '.');
+            for (var w = 0; w < grid.Duration; w++)
             {
-                for (var z = 0; z < matrix.Depth; z++)
+                for (var z = 0; z < grid.Depth; z++)
                 {
-                    for (var y = 0; y < matrix.Height; y++)
+                    for (var y = 0; y < grid.Height; y++)
                     {
-                        for (var x = 0; x < matrix.Width; x++)
+                        for (var x = 0; x < grid.Width; x++)
                         {
-                            matrix.MoveTo(x, y, z, w);
-                            var currentValue = matrix.ReadValue();
-                            var adjacentValues = matrix.AllAdjacentValues;
+                            grid.MoveTo(x, y, z, w);
+                            var currentValue = grid.ReadValue();
+                            var adjacentValues = grid.AllAdjacentValues;
                             var neighborCount = adjacentValues.Count(o => o == '#');
                             var newValue = GetNewValue(currentValue, neighborCount);
-                            newMatrix.MoveTo(x, y, z, w);
-                            newMatrix.WriteValue(newValue);
+                            newGrid.MoveTo(x, y, z, w);
+                            newGrid.WriteValue(newValue);
                         }
                     }
                 }
             }
 
-            newMatrix.StartAddress = matrix.StartAddress;
-            matrix = newMatrix;
+            newGrid.StartAddress = grid.StartAddress;
+            grid = newGrid;
 
         }
-        return matrix.Values.Count(o => o == '#');
+        return grid.Values.Count(o => o == '#');
     }
 
-    private static char GetNewValue(char currentValue, int neighborCount)
+    private static char GetNewValue(char currentValue, int neighborCount) => currentValue switch
     {
-        if (currentValue == '#' && neighborCount != 2 && neighborCount != 3)
-            return '.';
-
-        if (currentValue == '.' && neighborCount == 3)
-            return '#';
-
-        return currentValue;
-    }
+        '#' when neighborCount != 2 && neighborCount != 3 => '.',
+        '.' when neighborCount == 3 => '#',
+        _ => currentValue
+    };
 }

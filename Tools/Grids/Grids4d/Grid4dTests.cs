@@ -1,6 +1,6 @@
 namespace Pzl.Tools.Grids.Grids4d;
 
-public class Matrix4DTests
+public class Grid4dTests
 {
     private const char DefaultValue = '.';
     private const char WriteValue = '#';
@@ -8,7 +8,7 @@ public class Matrix4DTests
     [Fact]
     public void ExtendAllTo3()
     {
-        var matrix = new Matrix4D<char>(1, 1, 1, 1, DefaultValue);
+        var matrix = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
@@ -26,7 +26,7 @@ public class Matrix4DTests
     [Fact]
     public void ExtendAll5()
     {
-        var matrix = new Matrix4D<char>(1, 1, 1, 1, DefaultValue);
+        var matrix = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections(2);
 
@@ -44,7 +44,7 @@ public class Matrix4DTests
     [Fact]
     public void AllAdjacentExists()
     {
-        var matrix = new Matrix4D<char>(1, 1, 1, 1, DefaultValue);
+        var matrix = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 

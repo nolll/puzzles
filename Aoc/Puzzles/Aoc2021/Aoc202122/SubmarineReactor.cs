@@ -9,9 +9,8 @@ public class SubmarineReactor
     {
         var lines = StringReader.ReadLines(input);
         var instructions = lines.Select(ParseInstruction).ToList();
-
-        var matrix = new Matrix3D<char>(50, 50, 50, '.');
-        var matrix2 = new Dictionary<(int, int, int), bool>();
+        
+        var grid = new Dictionary<(int, int, int), bool>();
 
         foreach (var instruction in instructions.Where(o => Math.Abs(o.To.X) <= 50 && Math.Abs(o.To.Z) <= 50 && Math.Abs(o.To.Z) <= 50))
         {
@@ -23,13 +22,13 @@ public class SubmarineReactor
                 {
                     for (var x = instruction.From.X; x <= instruction.To.X; x++)
                     {
-                        matrix2[(x, y, z)] = isOn;
+                        grid[(x, y, z)] = isOn;
                     }
                 }
             }
         }
 
-        return matrix2.Values.Count(o => o);
+        return grid.Values.Count(o => o);
     }
 
     public long Reboot2(string input, int? maxSize = null)

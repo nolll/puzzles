@@ -36,7 +36,7 @@ public class LavaCubes
         var height = cubes.Select(o => o.Y).Max() + padding * 2;
         var depth = cubes.Select(o => o.Z).Max() + padding * 2;
 
-        var matrix = new Matrix3D<char>(width, height, depth, '.');
+        var matrix = new Grid3d<char>(width, height, depth, '.');
         foreach (var cube in cubes)
         {
             matrix.MoveTo(cube.X, cube.Y, cube.Z);

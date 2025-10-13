@@ -1,6 +1,6 @@
 namespace Pzl.Tools.Grids.Grids3d;
 
-public class Matrix3DTests
+public class Grid3dTests
 {
     private const char DefaultValue = '.';
     private const char WriteValue = '#';
@@ -8,7 +8,7 @@ public class Matrix3DTests
     [Fact]
     public void ExtendAllTo3()
     {
-        var matrix = new Matrix3D<char>(1, 1, 1, DefaultValue);
+        var matrix = new Grid3d<char>(1, 1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
@@ -24,7 +24,7 @@ public class Matrix3DTests
     [Fact]
     public void ExtendAll5()
     {
-        var matrix = new Matrix3D<char>(1, 1, 1, DefaultValue);
+        var matrix = new Grid3d<char>(1, 1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections(2);
 
@@ -40,7 +40,7 @@ public class Matrix3DTests
     [Fact]
     public void AllAdjacent6Exists()
     {
-        var matrix = new Matrix3D<char>(1, 1, 1, DefaultValue);
+        var matrix = new Grid3d<char>(1, 1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
@@ -60,7 +60,7 @@ public class Matrix3DTests
     [Fact]
     public void AllAdjacent26Exists()
     {
-        var matrix = new Matrix3D<char>(1, 1, 1, DefaultValue);
+        var matrix = new Grid3d<char>(1, 1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 

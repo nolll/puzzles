@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Pzl.Tools.Grids.Grids4d;
 
-public class Matrix4D<T> where T : struct
+public class Grid4d<T> where T : struct
 {
     private readonly T _defaultValue;
     private readonly IList<IList<IList<IList<T>>>> _matrix;
@@ -20,7 +20,7 @@ public class Matrix4D<T> where T : struct
     public bool IsAtLeftEdge => Address.X == 0;
     public Coord4d Center => new(Width / 2, Height / 2, Depth / 2, Duration / 2);
 
-    public Matrix4D(int width = 1, int height = 1, int depth = 1, int duration = 1, T defaultValue = default)
+    public Grid4d(int width = 1, int height = 1, int depth = 1, int duration = 1, T defaultValue = default)
     {
         _defaultValue = defaultValue;
         _matrix = BuildMatrix(width, height, depth, duration, defaultValue);
@@ -118,9 +118,9 @@ public class Matrix4D<T> where T : struct
         }
     }
 
-    public Matrix4D<T> Copy()
+    public Grid4d<T> Copy()
     {
-        var matrix = new Matrix4D<T>();
+        var matrix = new Grid4d<T>();
         for (var w = 0; w < Duration; w++)
         {
             for (var z = 0; z < Depth; z++)

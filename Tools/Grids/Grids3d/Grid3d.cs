@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Pzl.Tools.Grids.Grids3d;
 
-public class Matrix3D<T> where T : struct
+public class Grid3d<T> where T : struct
 {
     private readonly T _defaultValue;
     private readonly IDictionary<Coord3d, T> _matrix = new Dictionary<Coord3d, T>();
@@ -34,7 +34,7 @@ public class Matrix3D<T> where T : struct
         }
     }
 
-    public Matrix3D(int width = 1, int height = 1, int depth = 1, T defaultValue = default)
+    public Grid3d(int width = 1, int height = 1, int depth = 1, T defaultValue = default)
     {
         _defaultValue = defaultValue;
         _matrix = BuildMatrix(width, height, depth, defaultValue);
@@ -173,9 +173,9 @@ public class Matrix3D<T> where T : struct
         }
     }
 
-    public Matrix3D<T> Copy()
+    public Grid3d<T> Copy()
     {
-        var matrix = new Matrix3D<T>();
+        var matrix = new Grid3d<T>();
         for (var z = 0; z < Depth; z++)
         {
             for (var y = 0; y < Height; y++)

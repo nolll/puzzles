@@ -1,11 +1,13 @@
+using Pzl.Tools.Strings;
+
 namespace Pzl.Tools.Grids.Grids4d;
 
-public static class Matrix4DBuilder
+public static class Grid4dBuilder
 {
-    public static Matrix4D<char> BuildCharMatrix(string input, char defaultValue = default)
+    public static Grid4d<char> BuildCharMatrix(string input, char defaultValue = default)
     {
-        var matrix = new Matrix4D<char>(1, 1, 1, 1, defaultValue);
-        var rows = input.Trim().Split('\n');
+        var matrix = new Grid4d<char>(1, 1, 1, 1, defaultValue);
+        var rows = input.Trim().Split(LineBreaks.Single);
         const int w = 0;
         const int z = 0;
         var y = 0;

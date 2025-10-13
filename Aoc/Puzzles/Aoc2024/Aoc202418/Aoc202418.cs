@@ -31,7 +31,7 @@ public class Aoc202418 : AocPuzzle
     {
         var coords = input.Split(LineBreaks.Single)
             .Select(Numbers.IntsFromString)
-            .Select(o => new MatrixAddress(o[0], o[1]))
+            .Select(o => new Coord(o[0], o[1]))
             .Take(steps);
 
         var matrix = new Matrix<char>(width, height, EmptySpace);
@@ -40,8 +40,8 @@ public class Aoc202418 : AocPuzzle
             matrix.WriteValueAt(coord, Wall);
         }
 
-        var start = new MatrixAddress(0, 0);
-        var end = new MatrixAddress(matrix.XMax, matrix.YMax);
+        var start = new Coord(0, 0);
+        var end = new Coord(matrix.XMax, matrix.YMax);
 
         return PathFinder.ShortestPathTo(matrix, start, end).Count;
     }
@@ -50,12 +50,12 @@ public class Aoc202418 : AocPuzzle
     {
         var coords = input.Split(LineBreaks.Single)
             .Select(Numbers.IntsFromString)
-            .Select(o => new MatrixAddress(o[0], o[1]))
+            .Select(o => new Coord(o[0], o[1]))
             .ToArray();
 
         var matrix = new Matrix<char>(width, height, EmptySpace);
-        var start = new MatrixAddress(0, 0);
-        var end = new MatrixAddress(matrix.XMax, matrix.YMax);
+        var start = new Coord(0, 0);
+        var end = new Coord(matrix.XMax, matrix.YMax);
 
         var lo = 0;
         var hi = coords.Length - 1;
@@ -72,9 +72,9 @@ public class Aoc202418 : AocPuzzle
     }
 
     private static bool CanReachExit(Matrix<char> matrix,
-        MatrixAddress start,
-        MatrixAddress end,
-        MatrixAddress[] coords,
+        Coord start,
+        Coord end,
+        Coord[] coords,
         int n)
     {
         var m = matrix.Clone();

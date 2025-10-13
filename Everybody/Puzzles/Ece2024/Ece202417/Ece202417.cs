@@ -27,7 +27,7 @@ public class Ece202417 : EverybodyEventPuzzle
         var edges = GetEdges(stars).Where(o => o.Cost < 6);
         var nodes = Graph.GetNodes(edges);
         var components = Graph.GetConnectedComponents(nodes);
-        var starGroups = components.Select(o => o.Keys.Select(MatrixAddress.Parse).ToList());
+        var starGroups = components.Select(o => o.Keys.Select(Coord.Parse).ToList());
         var result = starGroups.Select(GetSize).OrderDescending().Take(3).Aggregate((long)1, (a, b) => a * b);
         
         return new PuzzleResult(result, "7906b8b4e0147d5e4d4c422a2042a3d8");
@@ -35,13 +35,13 @@ public class Ece202417 : EverybodyEventPuzzle
     
     private static long Part1And2(string input) => GetSize(FindStars(input));
 
-    private static IList<MatrixAddress> FindStars(string input) => 
+    private static IList<Coord> FindStars(string input) => 
         MatrixBuilder.BuildCharMatrix(input).FindAddresses('*');
 
-    private static long GetSize(IList<MatrixAddress> stars) => 
+    private static long GetSize(IList<Coord> stars) => 
         Kruskal.MinimumSpanningTree(GetEdges(stars).ToList()) + stars.Count;
 
-    private static IEnumerable<GraphEdge> GetEdges(IList<MatrixAddress> stars)
+    private static IEnumerable<GraphEdge> GetEdges(IList<Coord> stars)
     {
         foreach (var a in stars)
         {

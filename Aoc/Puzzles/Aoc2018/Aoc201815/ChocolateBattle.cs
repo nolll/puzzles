@@ -7,8 +7,8 @@ public class ChocolateBattle(string input)
     private Matrix<char> _matrix = new();
     private IList<BattleFigure> _figures = new List<BattleFigure>();
 
-    private IDictionary<MatrixAddress, IList<MatrixAddress>> _neighborCache =
-        new Dictionary<MatrixAddress, IList<MatrixAddress>>();
+    private IDictionary<Coord, IList<Coord>> _neighborCache =
+        new Dictionary<Coord, IList<Coord>>();
 
     public int Outcome { get; private set; }
     private string _winners = "";
@@ -58,7 +58,7 @@ public class ChocolateBattle(string input)
 
                 if (!adjacentEnemyAddresses.Any())
                 {
-                    var targets = new List<MatrixAddress>();
+                    var targets = new List<Coord>();
                     foreach (var enemy in enemies)
                     {
                         var adjacentAddresses = NeighborCache(enemy.Address);
@@ -83,7 +83,7 @@ public class ChocolateBattle(string input)
                     if (bestMove != null)
                     {
                         _matrix.WriteValueAt(figure.Address, '.');
-                        var newAddress = new MatrixAddress(bestMove.X, bestMove.Y);
+                        var newAddress = new Coord(bestMove.X, bestMove.Y);
                         figure.MoveTo(newAddress);
                         _matrix.WriteValueAt(newAddress, figure.Type);
                     }
@@ -121,7 +121,7 @@ public class ChocolateBattle(string input)
         _winners = _figures.First().Type == BattleFigureType.Elf ? "Elves" : "Goblin";
     }
 
-    private IList<MatrixAddress> NeighborCache(MatrixAddress coord) => _neighborCache[coord];
+    private IList<Coord> NeighborCache(Coord coord) => _neighborCache[coord];
 
     private bool IsBothTypesStillAlive =>
         _figures.Any(o => o.Type == BattleFigureType.Elf) &&
@@ -143,7 +143,7 @@ public class ChocolateBattle(string input)
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {
-                var address = new MatrixAddress(x, y);
+                var address = new Coord(x, y);
                 _matrix.WriteValueAt(address, c);
                 if (c is BattleFigureType.Elf or BattleFigureType.Goblin)
                 {
@@ -157,7 +157,7 @@ public class ChocolateBattle(string input)
             y += 1;
         }
 
-        _neighborCache = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
+        _neighborCache = new Dictionary<Coord, IList<Coord>>();
         foreach (var coord in _matrix.Coords)
         {
             if (_matrix.ReadValueAt(coord) == '#') 

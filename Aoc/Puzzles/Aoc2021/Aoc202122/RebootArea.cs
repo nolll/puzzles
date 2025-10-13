@@ -6,10 +6,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202122;
 [DebuggerDisplay("{From.X},{From.Y},{From.Z}..{To.X},{To.Y},{To.Z}")]
 public class RebootArea : IEquatable<RebootArea>
 {
-    public Matrix3DAddress From { get; }
-    public Matrix3DAddress To { get; }
+    public Coord3d From { get; }
+    public Coord3d To { get; }
     
-    public RebootArea(Matrix3DAddress from, Matrix3DAddress to)
+    public RebootArea(Coord3d from, Coord3d to)
     {
         From = from;
         To = to;
@@ -38,47 +38,47 @@ public class RebootArea : IEquatable<RebootArea>
     public List<RebootArea> GetRemainingParts(RebootArea other)
     {
         var parts = new List<RebootArea>();
-        var cropped = new RebootArea(new Matrix3DAddress(From.X, From.Y, From.Z), new Matrix3DAddress(To.X, To.Y, To.Z));
+        var cropped = new RebootArea(new Coord3d(From.X, From.Y, From.Z), new Coord3d(To.X, To.Y, To.Z));
 
         // x-axis pos
         if (cropped.From.X <= other.To.X && other.To.X <= cropped.To.X)
         {
-            parts.Add(new RebootArea(new Matrix3DAddress(other.To.X + 1, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, cropped.To.Z)));
-            cropped = new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(other.To.X, cropped.To.Y, cropped.To.Z));
+            parts.Add(new RebootArea(new Coord3d(other.To.X + 1, cropped.From.Y, cropped.From.Z), new Coord3d(cropped.To.X, cropped.To.Y, cropped.To.Z)));
+            cropped = new RebootArea(new Coord3d(cropped.From.X, cropped.From.Y, cropped.From.Z), new Coord3d(other.To.X, cropped.To.Y, cropped.To.Z));
         }
 
         // x-axis neg
         if (cropped.From.X <= other.From.X && other.From.X <= cropped.To.X)
         {
-            parts.Add(new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(other.From.X - 1, cropped.To.Y, cropped.To.Z)));
-            cropped = new RebootArea(new Matrix3DAddress(other.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, cropped.To.Z)); 
+            parts.Add(new RebootArea(new Coord3d(cropped.From.X, cropped.From.Y, cropped.From.Z), new Coord3d(other.From.X - 1, cropped.To.Y, cropped.To.Z)));
+            cropped = new RebootArea(new Coord3d(other.From.X, cropped.From.Y, cropped.From.Z), new Coord3d(cropped.To.X, cropped.To.Y, cropped.To.Z)); 
         }
 
         // y-axis pos
         if (cropped.From.Y <= other.To.Y && other.To.Y <= cropped.To.Y)
         {
-            parts.Add(new RebootArea(new Matrix3DAddress(cropped.From.X, other.To.Y + 1, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, cropped.To.Z)));
-            cropped = new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, other.To.Y, cropped.To.Z)); 
+            parts.Add(new RebootArea(new Coord3d(cropped.From.X, other.To.Y + 1, cropped.From.Z), new Coord3d(cropped.To.X, cropped.To.Y, cropped.To.Z)));
+            cropped = new RebootArea(new Coord3d(cropped.From.X, cropped.From.Y, cropped.From.Z), new Coord3d(cropped.To.X, other.To.Y, cropped.To.Z)); 
         }
 
         // y-axis neg
         if (cropped.From.Y <= other.From.Y && other.From.Y <= cropped.To.Y)
         {
-            parts.Add(new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, other.From.Y - 1, cropped.To.Z)));
-            cropped = new RebootArea(new Matrix3DAddress(cropped.From.X, other.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, cropped.To.Z)); 
+            parts.Add(new RebootArea(new Coord3d(cropped.From.X, cropped.From.Y, cropped.From.Z), new Coord3d(cropped.To.X, other.From.Y - 1, cropped.To.Z)));
+            cropped = new RebootArea(new Coord3d(cropped.From.X, other.From.Y, cropped.From.Z), new Coord3d(cropped.To.X, cropped.To.Y, cropped.To.Z)); 
         }
 
         // z-axis pos
         if (cropped.From.Z <= other.To.Z && other.To.Z <= cropped.To.Z)
         {
-            parts.Add(new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, other.To.Z + 1), new Matrix3DAddress(cropped.To.X, cropped.To.Y, cropped.To.Z)));
-            cropped = new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, other.To.Z)); 
+            parts.Add(new RebootArea(new Coord3d(cropped.From.X, cropped.From.Y, other.To.Z + 1), new Coord3d(cropped.To.X, cropped.To.Y, cropped.To.Z)));
+            cropped = new RebootArea(new Coord3d(cropped.From.X, cropped.From.Y, cropped.From.Z), new Coord3d(cropped.To.X, cropped.To.Y, other.To.Z)); 
         }
 
         // z-axis neg
         if (cropped.From.Z <= other.From.Z && other.From.Z <= cropped.To.Z)
         {
-            parts.Add(new RebootArea(new Matrix3DAddress(cropped.From.X, cropped.From.Y, cropped.From.Z), new Matrix3DAddress(cropped.To.X, cropped.To.Y, other.From.Z - 1)));
+            parts.Add(new RebootArea(new Coord3d(cropped.From.X, cropped.From.Y, cropped.From.Z), new Coord3d(cropped.To.X, cropped.To.Y, other.From.Z - 1)));
         }
 
         return parts;

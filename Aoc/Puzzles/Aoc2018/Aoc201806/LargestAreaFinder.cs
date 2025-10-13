@@ -6,7 +6,7 @@ public class LargestAreaFinder
 {
     private Matrix<int> _matrix = new();
 
-    private readonly IList<MatrixAddress> _coords;
+    private readonly IList<Coord> _coords;
     private readonly IList<int> _ids;
 
     public LargestAreaFinder(string input)
@@ -68,7 +68,7 @@ public class LargestAreaFinder
         return markers;
     }
 
-    private void FillMatrix(IList<MatrixAddress> coords)
+    private void FillMatrix(IList<Coord> coords)
     {
         foreach (var coord in _matrix.Coords)
         {
@@ -88,7 +88,7 @@ public class LargestAreaFinder
         }
     }
 
-    private void BuildMatrix(IList<MatrixAddress> coords)
+    private void BuildMatrix(IList<Coord> coords)
     {
         var width = coords.Max(o => o.X) + 1;
         var height = coords.Max(o => o.Y) + 1;
@@ -104,14 +104,14 @@ public class LargestAreaFinder
         }
     }
 
-    private static IList<MatrixAddress> GetCoords(string input)
+    private static IList<Coord> GetCoords(string input)
     {
         var strCoords = input.Trim().Split('\n');
-        var coords = new List<MatrixAddress>();
+        var coords = new List<Coord>();
         foreach (var str in strCoords)
         {
             var list = str.Trim().Split(',').Select(int.Parse).ToArray();
-            coords.Add(new MatrixAddress(list[0], list[1]));
+            coords.Add(new Coord(list[0], list[1]));
         }
 
         return coords;

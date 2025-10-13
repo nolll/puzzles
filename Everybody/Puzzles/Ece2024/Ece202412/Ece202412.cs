@@ -29,9 +29,9 @@ public class Ece202412 : EverybodyEventPuzzle
         var aCoord = matrix.FindAddresses('A').First();
         var bCoord = matrix.FindAddresses('B').First();
         var cCoord = matrix.FindAddresses('C').First();
-        (char name, MatrixAddress coord)[] catapults = [('A', aCoord), ('B', bCoord), ('C', cCoord)];
+        (char name, Coord coord)[] catapults = [('A', aCoord), ('B', bCoord), ('C', cCoord)];
 
-        var bestShots = new Dictionary<MatrixAddress, (char name, int power)>();
+        var bestShots = new Dictionary<Coord, (char name, int power)>();
         foreach (var catapult in catapults)
         {
             var power = 1;

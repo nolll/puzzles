@@ -18,12 +18,12 @@ public class ScaffoldIntersectionFinder
         return sum;
     }
 
-    private IEnumerable<MatrixAddress> GetIntersections()
+    private IEnumerable<Coord> GetIntersections()
     {
         return _matrix.Coords.Where(coord => IsIntersection(coord.X, coord.Y)).ToList();
     }
 
-    private char? GetValueAt(MatrixAddress coord)
+    private char? GetValueAt(Coord coord)
     {
         if (_matrix.IsOutOfRange(coord))
             return null;
@@ -32,23 +32,23 @@ public class ScaffoldIntersectionFinder
 
     private bool IsIntersection(int x, int y)
     {
-        var v = GetValueAt(new MatrixAddress(x, y));
+        var v = GetValueAt(new Coord(x, y));
         if (v == '.')
             return false;
 
-        v = GetValueAt(new MatrixAddress(x, y - 1));
+        v = GetValueAt(new Coord(x, y - 1));
         if (v == '.')
             return false;
 
-        v = GetValueAt(new MatrixAddress(x + 1, y));
+        v = GetValueAt(new Coord(x + 1, y));
         if (v == '.')
             return false;
 
-        v = GetValueAt(new MatrixAddress(x, y + 1));
+        v = GetValueAt(new Coord(x, y + 1));
         if (v == '.')
             return false;
 
-        v = GetValueAt(new MatrixAddress(x - 1, y));
+        v = GetValueAt(new Coord(x - 1, y));
         if (v == '.')
             return false;
 

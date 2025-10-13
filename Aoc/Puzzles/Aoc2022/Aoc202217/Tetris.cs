@@ -60,7 +60,7 @@ public class Tetris
 
         while (rockIndex < rockCount)
         {
-            var shapeBottomLeft = new MatrixAddress(2, highestTop - 3);
+            var shapeBottomLeft = new Coord(2, highestTop - 3);
             var shapeIndex = rockIndex % Shapes.Length;
             var shape = Shapes[shapeIndex];
             matrix.MoveTo(shapeBottomLeft);
@@ -73,12 +73,12 @@ public class Tetris
                 var move = moves[moveIndex % moves.Length];
 
                 if (move == Left && shape.CanMoveLeft(matrix, shapeBottomLeft))
-                    shapeBottomLeft = new MatrixAddress(shapeBottomLeft.X - 1, shapeBottomLeft.Y);
+                    shapeBottomLeft = new Coord(shapeBottomLeft.X - 1, shapeBottomLeft.Y);
                 else if (move == Right && shape.CanMoveRight(matrix, shapeBottomLeft))
-                    shapeBottomLeft = new MatrixAddress(shapeBottomLeft.X + 1, shapeBottomLeft.Y);
+                    shapeBottomLeft = new Coord(shapeBottomLeft.X + 1, shapeBottomLeft.Y);
 
                 if (shape.CanMoveDown(matrix, shapeBottomLeft))
-                    shapeBottomLeft = new MatrixAddress(shapeBottomLeft.X, shapeBottomLeft.Y + 1);
+                    shapeBottomLeft = new Coord(shapeBottomLeft.X, shapeBottomLeft.Y + 1);
                 else
                     movedDown = false;
                 

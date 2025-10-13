@@ -8,9 +8,9 @@ public class VaultPath
 
     public int StepCount { get; }
     public VaultKey Target { get; }
-    public IList<MatrixAddress> Coords { get; }
+    public IList<Coord> Coords { get; }
 
-    public VaultPath(VaultKey target, IList<MatrixAddress> coords, IList<char> keysNeeded)
+    public VaultPath(VaultKey target, IList<Coord> coords, IList<char> keysNeeded)
     {
         Target = target;
         Coords = coords;

@@ -9,8 +9,8 @@ public class RecursiveBugLifeSimulator
     private const int SameLevel = 0;
     private const int OuterLevel = -1;
     private IDictionary<int, Matrix<char>> _matrixes;
-    private readonly IDictionary<MatrixAddress, IList<RelativeLevelAddress>> _relativeAddresses;
-    private readonly Dictionary<int, MatrixAddress> _cells;
+    private readonly IDictionary<Coord, IList<RelativeLevelAddress>> _relativeAddresses;
+    private readonly Dictionary<int, Coord> _cells;
     private readonly Matrix<char> _emptyMatrix = new Matrix<char>(Size, Size, '.');
 
     public int BugCount => _matrixes.Values.Sum(o => o.Values.Count(m => m == '#'));
@@ -74,13 +74,13 @@ public class RecursiveBugLifeSimulator
         _matrixes = newMatrixes;
     }
 
-    private int GetNeighborCount(int level, MatrixAddress address)
+    private int GetNeighborCount(int level, Coord address)
     {
         var adjacentValues = GetAdjacentValues(level, address);
         return adjacentValues.Count(o => o == '#');
     }
 
-    private IEnumerable<char> GetAdjacentValues(int level, MatrixAddress address)
+    private IEnumerable<char> GetAdjacentValues(int level, Coord address)
     {
         var adjacentAddresses = _relativeAddresses[address];
         foreach (var relativeLevelAddress in adjacentAddresses)
@@ -123,9 +123,9 @@ public class RecursiveBugLifeSimulator
         return matrix;
     }
 
-    private static Dictionary<int, MatrixAddress> BuildCells()
+    private static Dictionary<int, Coord> BuildCells()
     {
-        return new Dictionary<int, MatrixAddress>
+        return new Dictionary<int, Coord>
         {
             [1] = new(0, 0),
             [2] = new(1, 0),
@@ -154,9 +154,9 @@ public class RecursiveBugLifeSimulator
         };
     }
 
-    private IDictionary<MatrixAddress, IList<RelativeLevelAddress>> BuildRelativeAddresses()
+    private IDictionary<Coord, IList<RelativeLevelAddress>> BuildRelativeAddresses()
     {
-        var relativeAddresses = new Dictionary<MatrixAddress, IList<RelativeLevelAddress>>
+        var relativeAddresses = new Dictionary<Coord, IList<RelativeLevelAddress>>
         {
             [_cells[1]] = new List<RelativeLevelAddress>
             {

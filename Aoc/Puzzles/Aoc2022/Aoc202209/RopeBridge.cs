@@ -18,11 +18,11 @@ public class RopeBridge
     private int Run(string input, int knotCount)
     {
         var lines = StringReader.ReadLines(input, false);
-        var visited = new HashSet<MatrixAddress>();
-        var knots = new MatrixAddress[knotCount];
+        var visited = new HashSet<Coord>();
+        var knots = new Coord[knotCount];
         for (var i = 0; i < knotCount; i++)
         {
-            knots[i] = new MatrixAddress(0, 0);
+            knots[i] = new Coord(0, 0);
         }
         
         visited.Add(knots.Last());
@@ -50,7 +50,7 @@ public class RopeBridge
                     {
                         var xSteps = diffX != 0 ? diffX / Math.Abs(diffX) : 0;
                         var ySteps = diffY != 0 ? diffY / Math.Abs(diffY) : 0;
-                        knots[j] = new MatrixAddress(knots[j].X - xSteps, knots[j].Y - ySteps);
+                        knots[j] = new Coord(knots[j].X - xSteps, knots[j].Y - ySteps);
                     }
                 }
 
@@ -62,14 +62,14 @@ public class RopeBridge
         return result;
     }
 
-    private MatrixAddress GetPosAfterMove(MatrixAddress coord, string direction)
+    private Coord GetPosAfterMove(Coord coord, string direction)
     {
         return direction switch
         {
-            "U" => new MatrixAddress(coord.X, coord.Y + 1),
-            "R" => new MatrixAddress(coord.X + 1, coord.Y),
-            "D" => new MatrixAddress(coord.X, coord.Y - 1),
-            _ => new MatrixAddress(coord.X - 1, coord.Y)
+            "U" => new Coord(coord.X, coord.Y + 1),
+            "R" => new Coord(coord.X + 1, coord.Y),
+            "D" => new Coord(coord.X, coord.Y - 1),
+            _ => new Coord(coord.X - 1, coord.Y)
         };
     }
 

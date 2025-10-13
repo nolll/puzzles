@@ -13,7 +13,7 @@ public class BeaconSystem
         var baseScanner = scanners.First();
         var otherScanners = scanners.Skip(1).ToList();
 
-        var scannerLocations = new List<Matrix3DAddress>();
+        var scannerLocations = new List<Coord3d>();
 
         while (otherScanners.Any())
         {
@@ -27,7 +27,7 @@ public class BeaconSystem
 
                 foreach (var relCoord in found.Value.beaconCoords)
                 {
-                    baseScanner.AddCoord(new Matrix3DAddress(
+                    baseScanner.AddCoord(new Coord3d(
                         found.Value.scannerCoord.X - relCoord.X,
                         found.Value.scannerCoord.Y - relCoord.Y,
                         found.Value.scannerCoord.Z - relCoord.Z));
@@ -62,30 +62,30 @@ public class BeaconSystem
         return new BeaconScanner(id, beaconCoords);
     }
 
-    private static Matrix3DAddress ParseCoord(string s)
+    private static Coord3d ParseCoord(string s)
     {
         var numbers = s.Split(',').Select(int.Parse).ToArray();
-        return new Matrix3DAddress(numbers[0], numbers[1], numbers[2]);
+        return new Coord3d(numbers[0], numbers[1], numbers[2]);
     }
 }
 
 public record BeaconSystemResult(int BeaconCount, int MaxDistance);
 
-internal class BeaconScanner(int id, HashSet<Matrix3DAddress> beaconCoords)
+internal class BeaconScanner(int id, HashSet<Coord3d> beaconCoords)
 {
     public int Id { get; } = id;
-    public HashSet<Matrix3DAddress> BeaconCoords { get; } = beaconCoords;
+    public HashSet<Coord3d> BeaconCoords { get; } = beaconCoords;
 
-    public (Matrix3DAddress scannerCoord, List<Matrix3DAddress> beaconCoords)? FindMatchingRotation(HashSet<Matrix3DAddress> otherCoords)
+    public (Coord3d scannerCoord, List<Coord3d> beaconCoords)? FindMatchingRotation(HashSet<Coord3d> otherCoords)
     {
-        var transforms = new List<Func<Matrix3DAddress, Matrix3DAddress>>
+        var transforms = new List<Func<Coord3d, Coord3d>>
         {
-            coord => new Matrix3DAddress(coord.X, coord.Y, coord.Z),
-            coord => new Matrix3DAddress(coord.Z, coord.X, coord.Y),
-            coord => new Matrix3DAddress(coord.Y, coord.Z, coord.X),
-            coord => new Matrix3DAddress(coord.X, coord.Z, coord.Y),
-            coord => new Matrix3DAddress(coord.Z, coord.Y, coord.X),
-            coord => new Matrix3DAddress(coord.Y, coord.X, coord.Z),
+            coord => new Coord3d(coord.X, coord.Y, coord.Z),
+            coord => new Coord3d(coord.Z, coord.X, coord.Y),
+            coord => new Coord3d(coord.Y, coord.Z, coord.X),
+            coord => new Coord3d(coord.X, coord.Z, coord.Y),
+            coord => new Coord3d(coord.Z, coord.Y, coord.X),
+            coord => new Coord3d(coord.Y, coord.X, coord.Z),
         };
         
         var rotations = new List<(int x, int y, int z)>
@@ -104,22 +104,22 @@ internal class BeaconScanner(int id, HashSet<Matrix3DAddress> beaconCoords)
         {
             foreach (var rotation in rotations)
             {
-                var compareCoords = new List<Matrix3DAddress>();
+                var compareCoords = new List<Coord3d>();
                 foreach (var otherCoord in otherCoords)
                 {
                     var transformedCoord = transform(otherCoord);
                     var x = transformedCoord.X * rotation.x;
                     var y = transformedCoord.Y * rotation.y;
                     var z = transformedCoord.Z * rotation.z;
-                    compareCoords.Add(new Matrix3DAddress(x, y, z));
+                    compareCoords.Add(new Coord3d(x, y, z));
                 }
 
-                var scannerPositions = new Dictionary<Matrix3DAddress, int>();
+                var scannerPositions = new Dictionary<Coord3d, int>();
                 foreach (var coord in BeaconCoords)
                 {
                     foreach (var compareCoord in compareCoords)
                     {
-                        var scannerPosition = new Matrix3DAddress(
+                        var scannerPosition = new Coord3d(
                             coord.X + compareCoord.X, 
                             coord.Y + compareCoord.Y, 
                             coord.Z + compareCoord.Z);
@@ -140,7 +140,7 @@ internal class BeaconScanner(int id, HashSet<Matrix3DAddress> beaconCoords)
         return null;
     }
 
-    public void AddCoord(Matrix3DAddress newCoord)
+    public void AddCoord(Coord3d newCoord)
     {
         BeaconCoords.Add(newCoord);
     }

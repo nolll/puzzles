@@ -144,7 +144,7 @@ public class KeyCollector
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {
-                var address = new MatrixAddress(x, y);
+                var address = new Coord(x, y);
                 var charToWrite = c;
 
                 if (char.IsLower(c))
@@ -179,22 +179,22 @@ public class KeyCollector
             _matrix.WriteValueAt(robotLocation.X + 1, robotLocation.Y, '#');
             _matrix.WriteValueAt(robotLocation.X, robotLocation.Y + 1, '#');
 
-            var robot1Location = new MatrixAddress(robotLocation.X - 1, robotLocation.Y - 1);
+            var robot1Location = new Coord(robotLocation.X - 1, robotLocation.Y - 1);
             _matrix.WriteValueAt(robot1Location, '.'); 
             var robot1 = new VaultRobot(robot1Location);
             _robots.Add(robot1);
 
-            var robot2Location = new MatrixAddress(robotLocation.X + 1, robotLocation.Y - 1);
+            var robot2Location = new Coord(robotLocation.X + 1, robotLocation.Y - 1);
             _matrix.WriteValueAt(robot2Location, '.');
             var robot2 = new VaultRobot(robot2Location);
             _robots.Add(robot2);
 
-            var robot3Location = new MatrixAddress(robotLocation.X - 1, robotLocation.Y + 1);
+            var robot3Location = new Coord(robotLocation.X - 1, robotLocation.Y + 1);
             _matrix.WriteValueAt(robot3Location, '.'); 
             var robot3 = new VaultRobot(robot3Location);
             _robots.Add(robot3);
 
-            var robot4Location = new MatrixAddress(robotLocation.X + 1, robotLocation.Y + 1);
+            var robot4Location = new Coord(robotLocation.X + 1, robotLocation.Y + 1);
             _matrix.WriteValueAt(robot4Location, '.'); 
             var robot4 = new VaultRobot(robot4Location);
             _robots.Add(robot4);
@@ -232,7 +232,7 @@ public class KeyCollector
         return foundByOthers;
     }
 
-    private IList<VaultPath> GetAllPaths(MatrixAddress startAddress)
+    private IList<VaultPath> GetAllPaths(Coord startAddress)
     {
         var paths = new List<VaultPath>();
 
@@ -262,7 +262,7 @@ public class KeyCollector
         }
     }
 
-    private IEnumerable<VaultDoor> FindBlockingDoors(IEnumerable<MatrixAddress> coords)
+    private IEnumerable<VaultDoor> FindBlockingDoors(IEnumerable<Coord> coords)
     {
         foreach (var coord in coords)
         {

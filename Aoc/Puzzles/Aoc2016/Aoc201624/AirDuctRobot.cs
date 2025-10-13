@@ -4,9 +4,9 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201624;
 
 public class AirDuctRobot
 {
-    public MatrixAddress Address { get; }
+    public Coord Address { get; }
 
-    public AirDuctRobot(MatrixAddress address)
+    public AirDuctRobot(Coord address)
     {
         Address = address;
     }

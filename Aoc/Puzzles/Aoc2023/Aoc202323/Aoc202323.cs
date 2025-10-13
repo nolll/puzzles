@@ -27,8 +27,8 @@ public class Aoc202323 : AocPuzzle
     public static int LongestHike(string s, bool canClimbSlopes)
     {
         var matrix = MatrixBuilder.BuildCharMatrix(s);
-        var start = new MatrixAddress(matrix.XMin + 1, matrix.YMin);
-        var target = new MatrixAddress(matrix.XMax - 1, matrix.YMax);
+        var start = new Coord(matrix.XMin + 1, matrix.YMin);
+        var target = new Coord(matrix.XMax - 1, matrix.YMax);
 
         var graphCoords = FindGraphCoords(matrix, start, target).ToList();
         var graph = BuildGraph(matrix, graphCoords, canClimbSlopes);
@@ -36,7 +36,7 @@ public class Aoc202323 : AocPuzzle
         return FindLongestRoute(graph, [], start.Id, target.Id);
     }
 
-    private static IEnumerable<MatrixAddress> FindGraphCoords(Matrix<char> matrix, MatrixAddress start, MatrixAddress target)
+    private static IEnumerable<Coord> FindGraphCoords(Matrix<char> matrix, Coord start, Coord target)
     {
         yield return start;
         yield return target;
@@ -57,15 +57,15 @@ public class Aoc202323 : AocPuzzle
 
     private static Dictionary<string, Dictionary<string, int>> BuildGraph(
         Matrix<char> matrix,
-        List<MatrixAddress> graphCoords, 
+        List<Coord> graphCoords, 
         bool canClimbSlopes)
     {
         var graph = new Dictionary<string, Dictionary<string, int>>();
         foreach (var startCoord in graphCoords)
         {
-            var queue = new Queue<(MatrixAddress, int)>();
+            var queue = new Queue<(Coord, int)>();
             queue.Enqueue((startCoord, 0));
-            var seen = new HashSet<MatrixAddress> { startCoord };
+            var seen = new HashSet<Coord> { startCoord };
             graph.Add(startCoord.Id, new());
 
             while (queue.Count > 0)
@@ -113,9 +113,9 @@ public class Aoc202323 : AocPuzzle
         return max;
     }
 
-    private static List<MatrixAddress> GetNeighbors(Matrix<char> matrix, MatrixAddress coord, bool canClimbSlopes)
+    private static List<Coord> GetNeighbors(Matrix<char> matrix, Coord coord, bool canClimbSlopes)
     {
-        var adjacent = new List<MatrixAddress>();
+        var adjacent = new List<Coord>();
         var north = GetCoord(coord, MatrixDirection.Up);
         var east = GetCoord(coord, MatrixDirection.Right);
         var south = GetCoord(coord, MatrixDirection.Down);
@@ -129,7 +129,7 @@ public class Aoc202323 : AocPuzzle
         return adjacent;
     }
 
-    private static bool CanGoDirection(Matrix<char> matrix, MatrixAddress coord, bool canClimbSlopes, MatrixDirection direction)
+    private static bool CanGoDirection(Matrix<char> matrix, Coord coord, bool canClimbSlopes, MatrixDirection direction)
     {
         if (matrix.IsOutOfRange(coord))
             return false;
@@ -141,6 +141,6 @@ public class Aoc202323 : AocPuzzle
         return value == '.' || value == ValidSlopes[direction];
     }
 
-    private static MatrixAddress GetCoord(MatrixAddress coord, MatrixDirection direction) => 
+    private static Coord GetCoord(Coord coord, MatrixDirection direction) => 
         new(coord.X + direction.X, coord.Y + direction.Y);
 }

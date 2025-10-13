@@ -17,11 +17,11 @@ public class PowerGrid
         FillMatrix();
     }
 
-    public (MatrixAddress coords, int size) GetMaxCoordsAnySize()
+    public (Coord coords, int size) GetMaxCoordsAnySize()
     {
         var maxPowerLevel = int.MinValue;
         var maxPowerLevelSize = 0;
-        var maxPowerLevelAddress = new MatrixAddress(0, 0);
+        var maxPowerLevelAddress = new Coord(0, 0);
         for (var ySquare = 0; ySquare < MatrixSize; ySquare++)
         {
             for (var xSquare = 0; xSquare < MatrixSize; xSquare++)
@@ -48,7 +48,7 @@ public class PowerGrid
                     {
                         maxPowerLevel = powerLevel;
                         maxPowerLevelSize = size + 1;
-                        maxPowerLevelAddress = new MatrixAddress(xSquare, ySquare);
+                        maxPowerLevelAddress = new Coord(xSquare, ySquare);
                     }
                 }
             }
@@ -69,10 +69,10 @@ public class PowerGrid
         }
     }
 
-    public MatrixAddress GetMaxCoords()
+    public Coord GetMaxCoords()
     {
         var maxPowerLevel = int.MinValue;
-        var maxPowerLevelAddress = new MatrixAddress(0, 0);
+        var maxPowerLevelAddress = new Coord(0, 0);
         for (var y = 0; y < MatrixSize - 2; y++)
         {
             for (var x = 0; x < MatrixSize - 2; x++)
@@ -81,7 +81,7 @@ public class PowerGrid
                 if (powerLevel > maxPowerLevel)
                 {
                     maxPowerLevel = powerLevel;
-                    maxPowerLevelAddress = new MatrixAddress(x, y);
+                    maxPowerLevelAddress = new Coord(x, y);
                 }
             }
         }

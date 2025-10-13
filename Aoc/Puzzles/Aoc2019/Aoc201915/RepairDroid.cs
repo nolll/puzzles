@@ -11,14 +11,14 @@ public class RepairDroid
 
     private IntCodeComputer _computer;
     private readonly Matrix<char> _matrix;
-    private readonly Queue<(MatrixAddress, MatrixDirection, IntCodeComputer)> _queue;
-    private MatrixAddress _target = new MatrixAddress(0, 0);
+    private readonly Queue<(Coord, MatrixDirection, IntCodeComputer)> _queue;
+    private Coord _target = new Coord(0, 0);
 
     public RepairDroid(string program)
     {
         _computer = new IntCodeComputer(MemoryParser.Parse(program), ReadInput, WriteOutput);
         _matrix = new Matrix<char>(defaultValue: ' ');
-        _queue = new Queue<(MatrixAddress, MatrixDirection, IntCodeComputer)>();
+        _queue = new Queue<(Coord, MatrixDirection, IntCodeComputer)>();
     }
 
     public (int, Matrix<char>) Run()

@@ -60,18 +60,18 @@ public class Ecs0203 : EverybodyStoryPuzzle
         var (diceInput, matrixInput) = input.Split(LineBreaks.Double);
         var dice = ParseDice(diceInput);
         var matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(matrixInput);
-        var totalSet = new HashSet<MatrixAddress>();
+        var totalSet = new HashSet<Coord>();
         
         foreach (var die in dice)
         {
             var spaces = matrix.FindAddresses(die.Roll());
-            var set = new HashSet<MatrixAddress>();
+            var set = new HashSet<Coord>();
             set.AddRange(spaces);
 
             while (spaces.Any())
             {
                 var score = die.Roll();
-                var newSpaces = new HashSet<MatrixAddress>();
+                var newSpaces = new HashSet<Coord>();
                 foreach (var space in spaces)
                 {
                     if(matrix.ReadValueAt(space) == score)

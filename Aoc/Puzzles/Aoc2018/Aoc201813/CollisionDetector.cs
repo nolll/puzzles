@@ -7,8 +7,8 @@ public class CollisionDetector
 {
     private Matrix<char> _matrix = new Matrix<char>(1, 1);
     private IList<MineCart> _carts = new List<MineCart>();
-    public MatrixAddress? LocationOfFirstCollision { get; private set; }
-    public MatrixAddress? LocationOfLastCart { get; private set; }
+    public Coord? LocationOfFirstCollision { get; private set; }
+    public Coord? LocationOfLastCart { get; private set; }
 
     public CollisionDetector(string input)
     {
@@ -52,19 +52,19 @@ public class CollisionDetector
             if (_carts.Count < 2)
             {
                 var lastCart = _carts.FirstOrDefault();
-                LocationOfLastCart = lastCart?.Coords ?? new MatrixAddress(0, 0);
+                LocationOfLastCart = lastCart?.Coords ?? new Coord(0, 0);
                 break;
             }
         }
     }
 
-    private static bool HasCrashed(IEnumerable<MineCart> carts1, IEnumerable<MineCart> carts2, MatrixAddress coords)
+    private static bool HasCrashed(IEnumerable<MineCart> carts1, IEnumerable<MineCart> carts2, Coord coords)
     {
         return carts1.Any(cart => cart.Coords.X == coords.X && cart.Coords.Y == coords.Y)
                || carts2.Any(cart => cart.Coords.X == coords.X && cart.Coords.Y == coords.Y);
     }
 
-    private static void RemoveCartAt(IList<MineCart> carts, MatrixAddress coords)
+    private static void RemoveCartAt(IList<MineCart> carts, Coord coords)
     {
         for (var i = 0; i < carts.Count; i++)
         {
@@ -91,7 +91,7 @@ public class CollisionDetector
             {
                 var c = row[x];
                 var mapChar = c;
-                var coords = new MatrixAddress(x, y);
+                var coords = new Coord(x, y);
                 if (IsCartChar(c))
                 {
                     mapChar = GetMapChar(c);

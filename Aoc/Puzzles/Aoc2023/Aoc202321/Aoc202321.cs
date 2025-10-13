@@ -29,8 +29,8 @@ public class Aoc202321 : AocPuzzle
         var matrix = MatrixBuilder.BuildCharMatrix(s);
         var start = matrix.FindAddresses('S').First();
         var center = start.X;
-        var (left, top) = new MatrixAddress(matrix.XMin, matrix.YMin);
-        var (right, bottom) = new MatrixAddress(matrix.XMax, matrix.YMax);
+        var (left, top) = new Coord(matrix.XMin, matrix.YMin);
+        var (right, bottom) = new Coord(matrix.XMax, matrix.YMax);
         var size = matrix.Width;
         matrix.WriteValueAt(start, '.');
          
@@ -53,22 +53,22 @@ public class Aoc202321 : AocPuzzle
         var smallSteps = (int)Math.Floor((double)size / 2) - 1;
         var largeSteps = (int)Math.Floor((double)size * 3 / 2) - 1;
 
-        var ct = CountPositionsAfter(matrix, new MatrixAddress(center, bottom), cornerSteps);
-        var cr = CountPositionsAfter(matrix, new MatrixAddress(left, center), cornerSteps);
-        var cb = CountPositionsAfter(matrix, new MatrixAddress(center, top), cornerSteps);
-        var cl = CountPositionsAfter(matrix, new MatrixAddress(right, center), cornerSteps);
+        var ct = CountPositionsAfter(matrix, new Coord(center, bottom), cornerSteps);
+        var cr = CountPositionsAfter(matrix, new Coord(left, center), cornerSteps);
+        var cb = CountPositionsAfter(matrix, new Coord(center, top), cornerSteps);
+        var cl = CountPositionsAfter(matrix, new Coord(right, center), cornerSteps);
 
-        var str = CountPositionsAfter(matrix, new MatrixAddress(left, bottom), smallSteps);
-        var ltr = CountPositionsAfter(matrix, new MatrixAddress(left, bottom), largeSteps);
+        var str = CountPositionsAfter(matrix, new Coord(left, bottom), smallSteps);
+        var ltr = CountPositionsAfter(matrix, new Coord(left, bottom), largeSteps);
 
-        var sbr = CountPositionsAfter(matrix, new MatrixAddress(left, top), smallSteps);
-        var lbr = CountPositionsAfter(matrix, new MatrixAddress(left, top), largeSteps);
+        var sbr = CountPositionsAfter(matrix, new Coord(left, top), smallSteps);
+        var lbr = CountPositionsAfter(matrix, new Coord(left, top), largeSteps);
 
-        var sbl = CountPositionsAfter(matrix, new MatrixAddress(right, top), smallSteps);
-        var lbl = CountPositionsAfter(matrix, new MatrixAddress(right, top), largeSteps);
+        var sbl = CountPositionsAfter(matrix, new Coord(right, top), smallSteps);
+        var lbl = CountPositionsAfter(matrix, new Coord(right, top), largeSteps);
 
-        var stl = CountPositionsAfter(matrix, new MatrixAddress(right, bottom), smallSteps);
-        var ltl = CountPositionsAfter(matrix, new MatrixAddress(right, bottom), largeSteps);
+        var stl = CountPositionsAfter(matrix, new Coord(right, bottom), smallSteps);
+        var ltl = CountPositionsAfter(matrix, new Coord(right, bottom), largeSteps);
 
         var filledPlots = oddPoints * odd
                           + evenPoints * even
@@ -79,13 +79,13 @@ public class Aoc202321 : AocPuzzle
         return filledPlots;
     }
 
-    private static long CountPositionsAfter(Matrix<char> matrix, MatrixAddress start, int steps = 64)
+    private static long CountPositionsAfter(Matrix<char> matrix, Coord start, int steps = 64)
     {
-        var lit = new HashSet<MatrixAddress> { start };
+        var lit = new HashSet<Coord> { start };
 
         for (var i = 0; i < steps; i++)
         {
-            var newLit = new HashSet<MatrixAddress>();
+            var newLit = new HashSet<Coord>();
             foreach (var litCoord in lit)
             {
                 var allAdjacent = matrix.OrthogonalAdjacentCoordsTo(litCoord);

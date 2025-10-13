@@ -11,7 +11,7 @@ public class Ece202410 : EverybodyEventPuzzle
     public PuzzleResult Part1(string input)
     {
         var matrix = MatrixBuilder.BuildCharMatrix(input);
-        var offset = new MatrixAddress(0, 0);
+        var offset = new Coord(0, 0);
         FillSymbols(matrix, offset);
         var word = ReadWord(matrix, offset);
         
@@ -70,14 +70,14 @@ public class Ece202410 : EverybodyEventPuzzle
         return score;
     }
     
-    private static string ReadWord(Matrix<char> matrix, MatrixAddress offset)
+    private static string ReadWord(Matrix<char> matrix, Coord offset)
     {
-        var wordMatrix = matrix.Slice(new MatrixAddress(offset.X + 2, offset.Y + 2), 4, 4);
+        var wordMatrix = matrix.Slice(new Coord(offset.X + 2, offset.Y + 2), 4, 4);
         var chars = wordMatrix.Coords.Select(o => wordMatrix.ReadValueAt(o));
         return string.Join("", chars);
     }
     
-    private static void FillSymbols(Matrix<char> matrix, MatrixAddress offset)
+    private static void FillSymbols(Matrix<char> matrix, Coord offset)
     {
         var coords = GetLocalCoords(offset);
         
@@ -96,7 +96,7 @@ public class Ece202410 : EverybodyEventPuzzle
         }
     }
     
-    private static void FillUnknowns(Matrix<char> matrix, MatrixAddress offset)
+    private static void FillUnknowns(Matrix<char> matrix, Coord offset)
     {
         var coords = GetLocalCoords(offset);
         var positions = Enumerable.Range(0, 8).ToArray();
@@ -105,8 +105,8 @@ public class Ece202410 : EverybodyEventPuzzle
             if (matrix.ReadValueAt(coord) != '.')
                 continue;
 
-            var horizontal = positions.Select(o => new MatrixAddress(o + offset.X, coord.Y));
-            var vertical = positions.Select(o => new MatrixAddress(coord.X, o + offset.Y));
+            var horizontal = positions.Select(o => new Coord(o + offset.X, coord.Y));
+            var vertical = positions.Select(o => new Coord(coord.X, o + offset.Y));
             var all = horizontal.Concat(vertical).Where(o => !o.Equals(coord)).ToList();
             var questionMarkCoords = all.Where(o => matrix.ReadValueAt(o) == '?').ToList();
             var allChars = all.Select(matrix.ReadValueAt);
@@ -121,18 +121,18 @@ public class Ece202410 : EverybodyEventPuzzle
         }
     }
     
-    private static IEnumerable<MatrixAddress> GetLocalCoords(MatrixAddress offset)
+    private static IEnumerable<Coord> GetLocalCoords(Coord offset)
     {
         for (var y = 0; y < SegmentSize; y++)
         {
             for (var x = 0; x < SegmentSize; x++)
             {
-                yield return new MatrixAddress(offset.X + x, offset.Y + y);
+                yield return new Coord(offset.X + x, offset.Y + y);
             }    
         }
     }
     
-    private static IEnumerable<MatrixAddress> GetOffsets(Matrix<char> matrix, int space)
+    private static IEnumerable<Coord> GetOffsets(Matrix<char> matrix, int space)
     {
         var x = matrix.XMin;
         var y = matrix.YMin;
@@ -140,7 +140,7 @@ public class Ece202410 : EverybodyEventPuzzle
         {
             while (x <= matrix.XMax + space)
             {
-                yield return new MatrixAddress(x, y);
+                yield return new Coord(x, y);
                 x += SegmentSize + space;
             }
 

@@ -7,7 +7,7 @@ public class Aoc202122Tests
     [Fact]
     public void GetSize()
     {
-        var area = new RebootArea(new Matrix3DAddress(-54112, -85059, -27449), new Matrix3DAddress(-39298, -49293, 7877));
+        var area = new RebootArea(new Coord3d(-54112, -85059, -27449), new Coord3d(-39298, -49293, 7877));
         var result = area.GetSize();
 
         result.Should().Be(18_719_357_085_335);
@@ -16,51 +16,51 @@ public class Aoc202122Tests
     [Fact]
     public void GetRemainingParts_CornerOverlap_LeftBottomCloseOverlapping()
     {
-        var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(2, 2, 2));
-        var area2 = new RebootArea(new Matrix3DAddress(1, 1, 1), new Matrix3DAddress(3, 3, 3));
+        var area1 = new RebootArea(new Coord3d(0, 0, 0), new Coord3d(2, 2, 2));
+        var area2 = new RebootArea(new Coord3d(1, 1, 1), new Coord3d(3, 3, 3));
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(3);
-        result[0].From.Should().Be(new Matrix3DAddress(0, 0, 0));
-        result[0].To.Should().Be(new Matrix3DAddress(0, 2, 2));
-        result[1].From.Should().Be(new Matrix3DAddress(1, 0, 0));
-        result[1].To.Should().Be(new Matrix3DAddress(2, 0, 2));
-        result[2].From.Should().Be(new Matrix3DAddress(1, 1, 0));
-        result[2].To.Should().Be(new Matrix3DAddress(2, 2, 0));
+        result[0].From.Should().Be(new Coord3d(0, 0, 0));
+        result[0].To.Should().Be(new Coord3d(0, 2, 2));
+        result[1].From.Should().Be(new Coord3d(1, 0, 0));
+        result[1].To.Should().Be(new Coord3d(2, 0, 2));
+        result[2].From.Should().Be(new Coord3d(1, 1, 0));
+        result[2].To.Should().Be(new Coord3d(2, 2, 0));
     }
 
     [Fact]
     public void GetRemainingParts_CornerOverlap_LeftTopCloseOverlapping()
     {
-        var area1 = new RebootArea(new Matrix3DAddress(1, 1, 1), new Matrix3DAddress(3, 3, 3));
-        var area2 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(2, 2, 2));
+        var area1 = new RebootArea(new Coord3d(1, 1, 1), new Coord3d(3, 3, 3));
+        var area2 = new RebootArea(new Coord3d(0, 0, 0), new Coord3d(2, 2, 2));
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(3);
-        result[0].From.Should().Be(new Matrix3DAddress(1, 1, 3));
-        result[0].To.Should().Be(new Matrix3DAddress(2, 2, 3));
-        result[1].From.Should().Be(new Matrix3DAddress(1, 3, 1));
-        result[1].To.Should().Be(new Matrix3DAddress(2, 3, 3));
-        result[2].From.Should().Be(new Matrix3DAddress(3, 1, 1));
-        result[2].To.Should().Be(new Matrix3DAddress(3, 3, 3));
+        result[0].From.Should().Be(new Coord3d(1, 1, 3));
+        result[0].To.Should().Be(new Coord3d(2, 2, 3));
+        result[1].From.Should().Be(new Coord3d(1, 3, 1));
+        result[1].To.Should().Be(new Coord3d(2, 3, 3));
+        result[2].From.Should().Be(new Coord3d(3, 1, 1));
+        result[2].To.Should().Be(new Coord3d(3, 3, 3));
     }
 
     [Fact]
     public void GetRemainingParts_EdgeOverlap_LeftBottomOverlapping()
     {
-        var area1 = new RebootArea(new Matrix3DAddress(0, 0, 0), new Matrix3DAddress(3, 3, 3));
-        var area2 = new RebootArea(new Matrix3DAddress(2, 2, 1), new Matrix3DAddress(4, 4, 2));
+        var area1 = new RebootArea(new Coord3d(0, 0, 0), new Coord3d(3, 3, 3));
+        var area2 = new RebootArea(new Coord3d(2, 2, 1), new Coord3d(4, 4, 2));
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(4);
-        result[0].From.Should().Be(new Matrix3DAddress(0, 0, 0));
-        result[0].To.Should().Be(new Matrix3DAddress(1, 3, 3));
-        result[1].From.Should().Be(new Matrix3DAddress(2, 0, 0));
-        result[1].To.Should().Be(new Matrix3DAddress(3, 1, 3));
-        result[2].From.Should().Be(new Matrix3DAddress(2, 2, 0));
-        result[2].To.Should().Be(new Matrix3DAddress(3, 3, 0));
-        result[3].From.Should().Be(new Matrix3DAddress(2, 2, 3));
-        result[3].To.Should().Be(new Matrix3DAddress(3, 3, 3));
+        result[0].From.Should().Be(new Coord3d(0, 0, 0));
+        result[0].To.Should().Be(new Coord3d(1, 3, 3));
+        result[1].From.Should().Be(new Coord3d(2, 0, 0));
+        result[1].To.Should().Be(new Coord3d(3, 1, 3));
+        result[2].From.Should().Be(new Coord3d(2, 2, 0));
+        result[2].To.Should().Be(new Coord3d(3, 3, 0));
+        result[3].From.Should().Be(new Coord3d(2, 2, 3));
+        result[3].To.Should().Be(new Coord3d(3, 3, 3));
     }
 
     [Fact]

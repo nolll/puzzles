@@ -79,7 +79,7 @@ public class Aoc202314 : AocPuzzle
 
     private static void Move(
         Matrix<char> matrix, 
-        Func<IEnumerable<MatrixAddress>, IEnumerable<MatrixAddress>> order, 
+        Func<IEnumerable<Coord>, IEnumerable<Coord>> order, 
         Func<Matrix<char>, bool> canMove, 
         Action<Matrix<char>> move)
     {

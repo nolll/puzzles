@@ -35,9 +35,9 @@ public class HerdOfSeaCucumbers
         return cucumbersToMoveEast.Any() || cucumbersToMoveSouth.Any();
     }
 
-    private List<MatrixAddress> FindCucumbersToMoveEast()
+    private List<Coord> FindCucumbersToMoveEast()
     {
-        var cucumbersToMoveEast = new List<MatrixAddress>();
+        var cucumbersToMoveEast = new List<Coord>();
         for (var y = 0; y < _matrix.Height; y++)
         {
             for (var x = 0; x < _matrix.Width; x++)
@@ -48,7 +48,7 @@ public class HerdOfSeaCucumbers
                 {
                     var next = _matrix.TryMoveRight() ? _matrix.ReadValue() : _matrix.ReadValueAt(0, _matrix.Address.Y);
                     if (next == '.')
-                        cucumbersToMoveEast.Add(new MatrixAddress(x, y));
+                        cucumbersToMoveEast.Add(new Coord(x, y));
                 }
             }
         }
@@ -56,7 +56,7 @@ public class HerdOfSeaCucumbers
         return cucumbersToMoveEast;
     }
 
-    private void MoveCucumberEast(List<MatrixAddress> cucumbersToMove)
+    private void MoveCucumberEast(List<Coord> cucumbersToMove)
     {
         foreach (var coord in cucumbersToMove)
         {
@@ -74,9 +74,9 @@ public class HerdOfSeaCucumbers
         }
     }
 
-    private List<MatrixAddress> FindCucumbersToMoveSouth()
+    private List<Coord> FindCucumbersToMoveSouth()
     {
-        var cucumbersToMoveSouth = new List<MatrixAddress>();
+        var cucumbersToMoveSouth = new List<Coord>();
 
         foreach (var coord in _matrix.Coords)
         {
@@ -93,7 +93,7 @@ public class HerdOfSeaCucumbers
         return cucumbersToMoveSouth;
     }
 
-    private void MoveCucumberSouth(List<MatrixAddress> cucumbersToMove)
+    private void MoveCucumberSouth(List<Coord> cucumbersToMove)
     {
         foreach (var coord in cucumbersToMove)
         {

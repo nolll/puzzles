@@ -38,7 +38,7 @@ public class Codyssi202510 : CodyssiPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        var cost = RunPart2And3(input, new MatrixAddress(14, 14));
+        var cost = RunPart2And3(input, new Coord(14, 14));
         
         return new PuzzleResult(cost, "8e0e2fd983585eea7c17bb92929d6c32");
     }
@@ -50,13 +50,13 @@ public class Codyssi202510 : CodyssiPuzzle
         return new PuzzleResult(cost, "ef05794a9a4d22520dd94a67775c2c15");
     }
     
-    public int RunPart2And3(string input, MatrixAddress? target = null)
+    public int RunPart2And3(string input, Coord? target = null)
     {
         var grid = MatrixBuilder.BuildIntMatrixFromNonSeparated(input.Replace(" ", ""));
         var edges = new List<GraphEdge>();
-        var queue = new Queue<MatrixAddress>();
-        var start = new MatrixAddress(0, 0);
-        var end = target ?? new MatrixAddress(grid.XMax, grid.YMax);
+        var queue = new Queue<Coord>();
+        var start = new Coord(0, 0);
+        var end = target ?? new Coord(grid.XMax, grid.YMax);
         var startCost = grid.ReadValueAt(start);
         queue.Enqueue(start);
         var seen = new HashSet<string>();

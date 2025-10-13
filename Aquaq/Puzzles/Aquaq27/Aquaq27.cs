@@ -22,7 +22,7 @@ public class Aquaq27 : AquaqPuzzle
         var adjacentDictionary = coordsWithChars
             .ToDictionary(k => k, v => matrix.OrthogonalAdjacentCoordsTo(v).Where(coordsWithChars.Contains).ToList());
         var ends = adjacentDictionary.Where(o => o.Value.Count == 1).Select(o => o.Key);
-        var visited = new HashSet<MatrixAddress>();
+        var visited = new HashSet<Coord>();
         var words = new List<string>();
 
         foreach (var start in ends)

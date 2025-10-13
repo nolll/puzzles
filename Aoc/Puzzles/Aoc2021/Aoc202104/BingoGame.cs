@@ -73,7 +73,7 @@ public class BingoBoard
     public int Id { get; }
     private readonly Matrix<int> _numbers;
     private readonly Matrix<bool> _marks;
-    private readonly IList<MatrixAddress> _coords;
+    private readonly IList<Coord> _coords;
 
     public BingoBoard(int id, Matrix<int> numbers, Matrix<bool> marks)
     {

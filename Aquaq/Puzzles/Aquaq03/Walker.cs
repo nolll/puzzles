@@ -6,7 +6,7 @@ public class Walker
 {
     private readonly Matrix<char> _matrix;
     
-    public MatrixAddress Pos => _matrix.Address;
+    public Coord Pos => _matrix.Address;
 
     public Walker()
     {

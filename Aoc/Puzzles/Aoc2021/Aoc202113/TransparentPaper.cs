@@ -70,8 +70,8 @@ public class TransparentPaper
 
     private void FoldHorizontal(int foldCol)
     {
-        var keepTo = new MatrixAddress(foldCol - 1, _matrix.Height - 1);
-        var foldFrom = new MatrixAddress(foldCol + 1, 0);
+        var keepTo = new Coord(foldCol - 1, _matrix.Height - 1);
+        var foldFrom = new Coord(foldCol + 1, 0);
 
         var newMatrix = _matrix.Clone().Slice(to: keepTo);
         var foldMatrix = _matrix.Clone().Slice(foldFrom);
@@ -95,8 +95,8 @@ public class TransparentPaper
 
     private void FoldVertical(int foldRow)
     {
-        var keepTo = new MatrixAddress(_matrix.Width - 1, foldRow - 1);
-        var foldFrom = new MatrixAddress(0, foldRow + 1);
+        var keepTo = new Coord(_matrix.Width - 1, foldRow - 1);
+        var foldFrom = new Coord(0, foldRow + 1);
 
         var newMatrix = _matrix.Clone().Slice(to: keepTo);
         var foldMatrix = _matrix.Clone().Slice(foldFrom);

@@ -34,7 +34,7 @@ public class Ece202403 : EverybodyEventPuzzle
     {
         var charMatrix = MatrixBuilder.BuildCharMatrix(input);
         var matrix = new Matrix<int>(charMatrix.Width, charMatrix.Height);
-        var coords = new List<MatrixAddress>();
+        var coords = new List<Coord>();
         var digLevel = 1;
         
         foreach (var coord in charMatrix.Coords)
@@ -50,7 +50,7 @@ public class Ece202403 : EverybodyEventPuzzle
         
         while (coords.Count > 0)
         {
-            var nextCoords = new List<MatrixAddress>();
+            var nextCoords = new List<Coord>();
             foreach (var coord in coords)
             {
                 var neighbors = slopeRule == SlopeRule.Diagonal

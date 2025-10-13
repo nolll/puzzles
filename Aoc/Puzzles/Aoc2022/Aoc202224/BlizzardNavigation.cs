@@ -10,17 +10,17 @@ public class BlizzardNavigation
     private const char Down = 'v';
     private const char Left = '<';
 
-    private readonly MatrixAddress _enter = new(0, 0);
-    private readonly MatrixAddress _exit = new(0, 0);
-    private readonly Dictionary<MatrixAddress, IList<MatrixAddress>> _neighborCache = new();
-    private readonly List<ImmutableHashSet<MatrixAddress>> _uniqueBlizzards = new();
+    private readonly Coord _enter = new(0, 0);
+    private readonly Coord _exit = new(0, 0);
+    private readonly Dictionary<Coord, IList<Coord>> _neighborCache = new();
+    private readonly List<ImmutableHashSet<Coord>> _uniqueBlizzards = new();
     private readonly Matrix<char> _matrix;
 
     public BlizzardNavigation(string input)
     {
         _matrix = MatrixBuilder.BuildCharMatrix(input);
         var blizzards = new List<Blizzard>();
-        var walls = new List<MatrixAddress>();
+        var walls = new List<Coord>();
         foreach (var coord in _matrix.Coords)
         {
             var value = _matrix.ReadValueAt(coord);
@@ -73,10 +73,10 @@ public class BlizzardNavigation
         return leg3;
     }
 
-    private int CountSteps(MatrixAddress from, MatrixAddress to, int offset = 0)
+    private int CountSteps(Coord from, Coord to, int offset = 0)
     {
         var uniqueCount = _uniqueBlizzards.Count;
-        var seen = new HashSet<(MatrixAddress, int)>();
+        var seen = new HashSet<(Coord, int)>();
         var queue = new List<BlizzardCoordCount> { new(from, offset) };
         var index = 0;
 
@@ -118,30 +118,30 @@ public class BlizzardNavigation
             var y = blizzard.Address.Y;
             if (blizzard.Direction == Up)
             {
-                var newCoord = new MatrixAddress(x, y - 1);
+                var newCoord = new Coord(x, y - 1);
                 if (newCoord.Y == _matrix.YMin) 
-                    newCoord = new MatrixAddress(x, _matrix.YMax - 1);
+                    newCoord = new Coord(x, _matrix.YMax - 1);
                 movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
             }
             else if (blizzard.Direction == Right)
             {
-                var newCoord = new MatrixAddress(x + 1, y);
+                var newCoord = new Coord(x + 1, y);
                 if (newCoord.X == _matrix.XMax) 
-                    newCoord = new MatrixAddress(1, y);
+                    newCoord = new Coord(1, y);
                 movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
             }
             else if (blizzard.Direction == Down)
             {
-                var newCoord = new MatrixAddress(x, y + 1);
+                var newCoord = new Coord(x, y + 1);
                 if (newCoord.Y == _matrix.YMax) 
-                    newCoord = new MatrixAddress(x, 1);
+                    newCoord = new Coord(x, 1);
                 movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
             }
             else
             {
-                var newCoord = new MatrixAddress(x - 1, y);
+                var newCoord = new Coord(x - 1, y);
                 if (newCoord.X == _matrix.XMin) 
-                    newCoord = new MatrixAddress(_matrix.XMax - 1, y);
+                    newCoord = new Coord(_matrix.XMax - 1, y);
                 movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
             }
         }

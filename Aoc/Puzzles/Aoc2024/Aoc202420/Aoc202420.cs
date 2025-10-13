@@ -23,7 +23,7 @@ public class Aoc202420 : AocPuzzle
     public static int CountCheatsBetterThan(string input, int radius, int limit) => 
         GetCheats(input, radius).Count(o => o.Value >= limit);
 
-    public static Dictionary<(MatrixAddress from, MatrixAddress to), int> GetCheats(string input, int radius)
+    public static Dictionary<(Coord from, Coord to), int> GetCheats(string input, int radius)
     {
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         var start = matrix.FindAddresses('S').First();
@@ -34,13 +34,13 @@ public class Aoc202420 : AocPuzzle
         var path = PathFinder.ShortestPathTo(matrix, start, end);
         path = [start, ..path];
         
-        var distanceToTarget = new Dictionary<MatrixAddress, int>();
+        var distanceToTarget = new Dictionary<Coord, int>();
         for (var i = 0; i < path.Count; i++)
         {
             distanceToTarget.Add(path[i], path.Count - i - 1);
         }
 
-        var cheats = new Dictionary<(MatrixAddress from, MatrixAddress to), int>();
+        var cheats = new Dictionary<(Coord from, Coord to), int>();
         foreach (var coord in path)
         {
             for (var y = -radius; y <= radius; y++)
@@ -50,7 +50,7 @@ public class Aoc202420 : AocPuzzle
                     if (Math.Abs(y) + Math.Abs(x) > radius)
                         continue;
                     
-                    var nc = new MatrixAddress(coord.X + x, coord.Y + y);
+                    var nc = new Coord(coord.X + x, coord.Y + y);
                     if (matrix.IsOutOfRange(nc) || matrix.ReadValueAt(nc) == '#')
                         continue;
 

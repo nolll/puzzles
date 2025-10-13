@@ -19,9 +19,9 @@ public class StorageGrid
         return GetNodesThatCanMove().Count;
     }
 
-    private IList<MatrixAddress> GetNodesThatCanMove()
+    private IList<Coord> GetNodesThatCanMove()
     {
-        var nodes = new List<MatrixAddress>();
+        var nodes = new List<Coord>();
 
         for (var ya = 0; ya < _storage.Height; ya++)
         {
@@ -39,7 +39,7 @@ public class StorageGrid
                             var nodeACanFitOnNodeB = nodeA.Used <= nodeB.Avail;
                             if (nodeAHasData && nodeACanFitOnNodeB)
                             {
-                                nodes.Add(new MatrixAddress(xa, ya));
+                                nodes.Add(new Coord(xa, ya));
                             }
                         }
                     }
@@ -60,20 +60,20 @@ public class StorageGrid
             matrix.WriteValue('.');
         }
 
-        var startAddress = new MatrixAddress(0, 0);
+        var startAddress = new Coord(0, 0);
         for (var y = 0; y < _storage.Height; y++)
         {
             for (var x = 0; x < _storage.Width; x++)
             {
                 var node = _storage.ReadValueAt(x, y);
                 if (node.Used == 0)
-                    startAddress = new MatrixAddress(x, y);
+                    startAddress = new Coord(x, y);
             }
         }
 
-        var topLeft = new MatrixAddress(0, 0);
-        var topRight = new MatrixAddress(matrix.Width - 1, 0);
-        var goal = new MatrixAddress(topRight.X - 1, topRight.Y);
+        var topLeft = new Coord(0, 0);
+        var topRight = new Coord(matrix.Width - 1, 0);
+        var goal = new Coord(topRight.X - 1, topRight.Y);
         var distance1 = PathFinder.ShortestPathTo(matrix, startAddress, goal).Count;
         var distance2 = PathFinder.ShortestPathTo(matrix, goal, topLeft).Count;
         return distance1 + distance2 * 5 + 1;

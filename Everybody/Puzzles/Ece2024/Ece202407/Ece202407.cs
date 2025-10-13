@@ -110,7 +110,7 @@ public class Ece202407 : EverybodyEventPuzzle
 
     private static int[] BuildTerrain(string trackLoop)
     {
-        var visited = new HashSet<MatrixAddress>();
+        var visited = new HashSet<Coord>();
         var terrain = new List<int>();
         var trackMatrix = MatrixBuilder.BuildCharMatrix(trackLoop, ' ');
         trackMatrix.MoveTo(trackMatrix.XMin, trackMatrix.YMin);

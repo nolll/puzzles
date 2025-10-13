@@ -5,10 +5,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202122;
 public class RebootInstruction
 {
     public string Mode { get; }
-    public Matrix3DAddress From { get; }
-    public Matrix3DAddress To { get; }
+    public Coord3d From { get; }
+    public Coord3d To { get; }
 
-    public RebootInstruction(string mode, Matrix3DAddress from, Matrix3DAddress to)
+    public RebootInstruction(string mode, Coord3d from, Coord3d to)
     {
         Mode = mode;
         From = from;

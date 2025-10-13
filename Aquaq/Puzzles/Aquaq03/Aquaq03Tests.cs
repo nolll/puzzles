@@ -13,7 +13,7 @@ public class Aquaq03Tests
         var walker = new Walker();
         var result = walker.Walk(input);
 
-        walker.Pos.Should().Be(new MatrixAddress(expectedX, expectedY));
+        walker.Pos.Should().Be(new Coord(expectedX, expectedY));
         result.Should().Be(expectedSum);
     }
 }

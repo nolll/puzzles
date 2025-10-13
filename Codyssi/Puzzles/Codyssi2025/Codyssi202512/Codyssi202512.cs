@@ -156,7 +156,7 @@ public class Codyssi202512 : CodyssiPuzzle
         
         for (var row = 0; row < grid.Height; row++)
         {
-            grid.WriteValueAt(new MatrixAddress(col, row), newValues[row]);
+            grid.WriteValueAt(new Coord(col, row), newValues[row]);
         }
     }
     
@@ -177,7 +177,7 @@ public class Codyssi202512 : CodyssiPuzzle
         
         for (var col = 0; col < grid.Width; col++)
         {
-            grid.WriteValueAt(new MatrixAddress(col, row), newValues[col]);
+            grid.WriteValueAt(new Coord(col, row), newValues[col]);
         }
     }
 
@@ -187,18 +187,18 @@ public class Codyssi202512 : CodyssiPuzzle
     private static void Modify(Matrix<int> grid, string modification, string what, int which, int amount) => 
         Modify(grid, GetCoordsToModify(grid, what, which), modification, amount);
 
-    private static IEnumerable<MatrixAddress> GetCoordsToModify(Matrix<int> grid, string what, int which) => 
+    private static IEnumerable<Coord> GetCoordsToModify(Matrix<int> grid, string what, int which) => 
         what == "COL"
             ? grid.Coords.Where(o => o.X == which)
             : grid.Coords.Where(o => o.Y == which);
 
-    private static void Modify(Matrix<int> grid, IEnumerable<MatrixAddress> coords, string modification, int amount) => 
+    private static void Modify(Matrix<int> grid, IEnumerable<Coord> coords, string modification, int amount) => 
         ApplyModification(grid, GetModificationFunc(modification), coords, amount);
 
     private static void ApplyModification(
         Matrix<int> grid, 
         Func<int, int, int> func, 
-        IEnumerable<MatrixAddress> coords, 
+        IEnumerable<Coord> coords, 
         int amount)
     {
         foreach (var coord in coords)

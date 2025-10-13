@@ -18,9 +18,9 @@ public class Aquaq14 : AquaqPuzzle
                                       """;
 
     private static readonly int[] Range = Enumerable.Range(0, BoardSize).ToArray();
-    private static readonly Dictionary<int, MatrixAddress> Board = BuildBoard();
-    private static readonly IEnumerable<MatrixAddress> Diagonal1 = BuildDiagonal1();
-    private static readonly IEnumerable<MatrixAddress> Diagonal2 = BuildDiagonal2();
+    private static readonly Dictionary<int, Coord> Board = BuildBoard();
+    private static readonly IEnumerable<Coord> Diagonal1 = BuildDiagonal1();
+    private static readonly IEnumerable<Coord> Diagonal2 = BuildDiagonal2();
 
     public PuzzleResult Run(string input)
     {
@@ -36,7 +36,7 @@ public class Aquaq14 : AquaqPuzzle
         foreach (var numbers in games)
         {
             var numberCount = 0;
-            var game = new List<MatrixAddress>();
+            var game = new List<Coord>();
             foreach (var number in numbers)
             {
                 numberCount++;
@@ -55,10 +55,10 @@ public class Aquaq14 : AquaqPuzzle
         return totalSum;
     }
 
-    private static Dictionary<int, MatrixAddress> BuildBoard()
+    private static Dictionary<int, Coord> BuildBoard()
     {
         var boardLines = StringReader.ReadLines(BoardInput.Replace("  ", " "));
-        var board = new Dictionary<int, MatrixAddress>();
+        var board = new Dictionary<int, Coord>();
 
         var y = 0;
         foreach (var boardLine in boardLines)
@@ -67,7 +67,7 @@ public class Aquaq14 : AquaqPuzzle
             var x = 0;
             foreach (var lineNumber in lineNumbers)
             {
-                var address = new MatrixAddress(x, y);
+                var address = new Coord(x, y);
                 board.Add(lineNumber, address);
                 x += 1;
             }
@@ -78,21 +78,21 @@ public class Aquaq14 : AquaqPuzzle
         return board;
     }
 
-    private static bool IsBingo(IReadOnlyCollection<MatrixAddress> game) 
+    private static bool IsBingo(IReadOnlyCollection<Coord> game) 
         => IsHorizontalBingo(game) || IsVerticalBingo(game) || IsDiagonalBingo(game);
 
-    private static bool IsHorizontalBingo(IEnumerable<MatrixAddress> game)
+    private static bool IsHorizontalBingo(IEnumerable<Coord> game)
         => game.GroupBy(o => o.X).Any(o => o.Count() == 5);
 
-    private static bool IsVerticalBingo(IEnumerable<MatrixAddress> game)
+    private static bool IsVerticalBingo(IEnumerable<Coord> game)
         => game.GroupBy(o => o.Y).Any(o => o.Count() == 5);
 
-    private static bool IsDiagonalBingo(IReadOnlyCollection<MatrixAddress> game) 
+    private static bool IsDiagonalBingo(IReadOnlyCollection<Coord> game) 
         => Diagonal1.All(game.Contains) || Diagonal2.All(game.Contains);
 
-    private static IEnumerable<MatrixAddress> BuildDiagonal1() 
-        => Range.Select(o => new MatrixAddress(o, o));
+    private static IEnumerable<Coord> BuildDiagonal1() 
+        => Range.Select(o => new Coord(o, o));
 
-    private static IEnumerable<MatrixAddress> BuildDiagonal2()
-        => Range.Select(o => new MatrixAddress(BoardSize - o - 1, o));
+    private static IEnumerable<Coord> BuildDiagonal2()
+        => Range.Select(o => new Coord(BoardSize - o - 1, o));
 }

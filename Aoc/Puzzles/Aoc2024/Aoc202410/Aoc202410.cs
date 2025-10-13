@@ -24,7 +24,7 @@ public class Aoc202410 : AocPuzzle
         return new PuzzleResult(totalScore, "9f0c79d76028ec84f2fda12a86e15c52");
     }
 
-    private static int CountPaths(Matrix<int> matrix, MatrixAddress coord, HashSet<MatrixAddress>? seen = null)
+    private static int CountPaths(Matrix<int> matrix, Coord coord, HashSet<Coord>? seen = null)
     {
         var v = matrix.ReadValueAt(coord);
         seen?.Add(coord);

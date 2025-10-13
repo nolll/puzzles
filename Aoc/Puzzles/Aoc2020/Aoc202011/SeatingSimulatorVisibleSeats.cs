@@ -39,7 +39,7 @@ public class SeatingSimulatorVisibleSeats : SeatingSimulator
         return currentValue;
     }
 
-    private char? GetVisible(Func<int, bool> func, MatrixAddress pos)
+    private char? GetVisible(Func<int, bool> func, Coord pos)
     {
         Matrix.MoveTo(pos);
         while (func(1))

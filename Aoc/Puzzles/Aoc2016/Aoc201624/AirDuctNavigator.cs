@@ -9,7 +9,7 @@ public class AirDuctNavigator
     private Matrix<char> _matrix = new();
     private readonly Dictionary<(char, char), AirDuctPath> _paths = new();
     private readonly Dictionary<string, int> _cache = new();
-    private AirDuctRobot _robot = new(new MatrixAddress(0, 0));
+    private AirDuctRobot _robot = new(new Coord(0, 0));
 
     public AirDuctNavigator(string input)
     {
@@ -90,7 +90,7 @@ public class AirDuctNavigator
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {
-                var address = new MatrixAddress(x, y);
+                var address = new Coord(x, y);
                 _matrix.MoveTo(address);
                 var charToWrite = c;
 
@@ -114,7 +114,7 @@ public class AirDuctNavigator
 
     private static IList<AirDuctPath> GetStartPaths(IList<AirDuctPath> allPaths) => allPaths.ToList();
 
-    private IList<AirDuctPath> GetAllPaths(MatrixAddress startAddress)
+    private IList<AirDuctPath> GetAllPaths(Coord startAddress)
     {
         var paths = new List<AirDuctPath>();
 

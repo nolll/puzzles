@@ -12,11 +12,11 @@ public class RecursiveDonutMazeSolver
     }
 
     public int ShortestStepCount { get; }
-    private MatrixAddress _startAddress = new(0, 0);
-    private MatrixAddress _endAddress = new(0, 0);
-    private IDictionary<MatrixAddress, DonutPortal> _portals = new Dictionary<MatrixAddress, DonutPortal>();
-    private IDictionary<MatrixAddress, IList<MatrixAddress>> _outerAdjacentCache = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
-    private IDictionary<MatrixAddress, IList<MatrixAddress>> _innerAdjacentCache = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
+    private Coord _startAddress = new(0, 0);
+    private Coord _endAddress = new(0, 0);
+    private IDictionary<Coord, DonutPortal> _portals = new Dictionary<Coord, DonutPortal>();
+    private IDictionary<Coord, IList<Coord>> _outerAdjacentCache = new Dictionary<Coord, IList<Coord>>();
+    private IDictionary<Coord, IList<Coord>> _innerAdjacentCache = new Dictionary<Coord, IList<Coord>>();
 
     public RecursiveDonutMazeSolver(string input)
     {
@@ -65,7 +65,7 @@ public class RecursiveDonutMazeSolver
             portalAddresses.Add(portal);
         }
 
-        var portals = new Dictionary<MatrixAddress, DonutPortal>();
+        var portals = new Dictionary<Coord, DonutPortal>();
         var orderedPortalAddresses = portalAddresses.OrderBy(o => o.Name).ToList();
         var topMatrix = matrix.Clone();
 
@@ -93,9 +93,9 @@ public class RecursiveDonutMazeSolver
         _innerAdjacentCache = BuildAdjacentCache(matrix);
     }
 
-    private IDictionary<MatrixAddress, IList<MatrixAddress>> BuildAdjacentCache(Matrix<char> matrix)
+    private IDictionary<Coord, IList<Coord>> BuildAdjacentCache(Matrix<char> matrix)
     {
-        var dictionary = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
+        var dictionary = new Dictionary<Coord, IList<Coord>>();
         foreach (var coord in matrix.Coords)
         {
             var coords = matrix
@@ -108,7 +108,7 @@ public class RecursiveDonutMazeSolver
         return dictionary;
     }
 
-    private static bool IsOuterPortal(Matrix<char> matrix, MatrixAddress address)
+    private static bool IsOuterPortal(Matrix<char> matrix, Coord address)
     {
         const int distance = 2;
         var xIsOnEdge = matrix.XMin + distance == address.X || matrix.XMax - distance == address.X;
@@ -116,25 +116,25 @@ public class RecursiveDonutMazeSolver
         return xIsOnEdge || yIsOnEdge;
     }
 
-    private static IEnumerable<MatrixAddress> FindLetterCoords(Matrix<char> matrix) => 
+    private static IEnumerable<Coord> FindLetterCoords(Matrix<char> matrix) => 
         matrix.Coords.Where(o => IsLetter(matrix.ReadValueAt(o)));
 
     private static bool IsLetter(char c) => c != Chars.Wall && c != Chars.Path;
 
-    private int StepCountTo(MatrixAddress from, MatrixAddress to)
+    private int StepCountTo(Coord from, Coord to)
     {
         var coordCounts = GetCoordCounts(from, to);
         var goal = coordCounts.FirstOrDefault(o => o.Depth == 0 && o.Coord.X == from.X && o.Coord.Y == from.Y);
         return goal?.Count ?? 0;
     }
 
-    private IList<MatrixAddress> GetAdjacentCoords(MatrixAddress coord, int depth) => GetAdjacentCache(depth)[coord];
+    private IList<Coord> GetAdjacentCoords(Coord coord, int depth) => GetAdjacentCache(depth)[coord];
 
-    private IDictionary<MatrixAddress, IList<MatrixAddress>> GetAdjacentCache(int depth) => depth == 0
+    private IDictionary<Coord, IList<Coord>> GetAdjacentCache(int depth) => depth == 0
         ? _outerAdjacentCache
         : _innerAdjacentCache;
 
-    private IList<CoordCount> GetCoordCounts(MatrixAddress from, MatrixAddress to)
+    private IList<CoordCount> GetCoordCounts(Coord from, Coord to)
     {
         var queue = new List<CoordCount> { new(0, to, 0) };
         var seen = new HashSet<(int, int, int)>();
@@ -166,5 +166,5 @@ public class RecursiveDonutMazeSolver
         return queue;
     }
 
-    private record CoordCount(int Depth, MatrixAddress Coord, int Count);
+    private record CoordCount(int Depth, Coord Coord, int Count);
 }

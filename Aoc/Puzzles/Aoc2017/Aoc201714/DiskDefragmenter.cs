@@ -29,14 +29,14 @@ public class DiskDefragmenter
         {
             for (var x = 0; x < disk.Width; x++)
             {
-                var address = new MatrixAddress(x, y);
+                var address = new Coord(x, y);
                 var value = disk.ReadValueAt(address);
                 if (value == '#')
                 {
                     if (!processed.ContainsKey(address.Id))
                     {
                         currentRegion += 1;
-                        var addressesToProcess = new List<MatrixAddress> { address };
+                        var addressesToProcess = new List<Coord> { address };
                         while (addressesToProcess.Any())
                         {
                             var atp = addressesToProcess.First();

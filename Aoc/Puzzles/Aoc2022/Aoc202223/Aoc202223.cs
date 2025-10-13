@@ -67,8 +67,8 @@ public class Aoc202223 : AocPuzzle
 
         while(round < rounds)
         {
-            var targets = new Dictionary<MatrixAddress, MatrixAddress>();
-            var targetCount = new Dictionary<MatrixAddress, int>();
+            var targets = new Dictionary<Coord, Coord>();
+            var targetCount = new Dictionary<Coord, int>();
 
             foreach (var elf in elves)
             {
@@ -83,7 +83,7 @@ public class Aoc202223 : AocPuzzle
                     for (var k = 0; k < _searchDeltas[deltaIndex].Count; k++)
                     {
                         var (dx, dy) = _searchDeltas[deltaIndex][k];
-                        var searchAddress = new MatrixAddress(elf.X + dx, elf.Y + dy);
+                        var searchAddress = new Coord(elf.X + dx, elf.Y + dy);
                         if (elves.Contains(searchAddress))
                             foundElf = true;
                     }
@@ -91,7 +91,7 @@ public class Aoc202223 : AocPuzzle
                     if (!foundElf)
                     {
                         var (dx, dy) = _searchResults[deltaIndex];
-                        var target = new MatrixAddress(elf.X + dx, elf.Y + dy);
+                        var target = new Coord(elf.X + dx, elf.Y + dy);
                         targets[elf] = target;
                         if (!targetCount.TryAdd(target, 1))
                             targetCount[target]++;
@@ -136,9 +136,9 @@ public class Aoc202223 : AocPuzzle
         return (emptyCount, round);
     }
 
-    private HashSet<MatrixAddress> ParseElves(string input)
+    private HashSet<Coord> ParseElves(string input)
     {
-        var elves = new HashSet<MatrixAddress>();
+        var elves = new HashSet<Coord>();
         var lines = StringReader.ReadLines(input);
         for (var y = 0; y < lines.Count; y++)
         {
@@ -146,18 +146,18 @@ public class Aoc202223 : AocPuzzle
             for (var x = 0; x < line.Length; x++)
             {
                 if (line[x] == '#')
-                    elves.Add(new MatrixAddress(x, y));
+                    elves.Add(new Coord(x, y));
             }
         }
 
         return elves;
     }
 
-    private bool HasNeighbors(HashSet<MatrixAddress> elfs, MatrixAddress elf)
+    private bool HasNeighbors(HashSet<Coord> elfs, Coord elf)
     {
         foreach (var delta in _deltas)
         {
-            var neighbor = new MatrixAddress(elf.X + delta.x, elf.Y + delta.y);
+            var neighbor = new Coord(elf.X + delta.x, elf.Y + delta.y);
             if (elfs.Contains(neighbor))
                 return true;
         }
@@ -165,7 +165,7 @@ public class Aoc202223 : AocPuzzle
         return false;
     }
 
-    private string Print(HashSet<MatrixAddress> coords)
+    private string Print(HashSet<Coord> coords)
     {
         var matrix = new Matrix<char>(1, 1, '.');
         foreach (var coord in coords)

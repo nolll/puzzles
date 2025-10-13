@@ -6,16 +6,16 @@ public class CaveSystem
 {
     private readonly long _depth;
     private Matrix<CaveRegion> _cave = new();
-    private readonly MatrixAddress _mouth;
-    private readonly MatrixAddress _target;
+    private readonly Coord _mouth;
+    private readonly Coord _target;
 
     public long TotalRiskLevel { get; }
 
     public CaveSystem(long depth, int targetX, int targetY)
     {
         _depth = depth;
-        _mouth = new MatrixAddress(0, 0);
-        _target = new MatrixAddress(targetX, targetY);
+        _mouth = new Coord(0, 0);
+        _target = new Coord(targetX, targetY);
         BuildCave(_target);
         TotalRiskLevel = GetTotalRiskLevel();
     }
@@ -34,7 +34,7 @@ public class CaveSystem
         return riskLevel;
     }
 
-    private void BuildCave(MatrixAddress target)
+    private void BuildCave(Coord target)
     {
         const int padding = 15;
         var xMax = target.X + padding;
@@ -47,7 +47,7 @@ public class CaveSystem
         {
             for (var x = 0; x < width; x++)
             {
-                var address = new MatrixAddress(x, y);
+                var address = new Coord(x, y);
                 var region = _cave.ReadValueAt(address);
                 region.GeologicIndex = GetGeologicIndex(address);
                 region.ErosionLevel = GetErosionLevel(region.GeologicIndex);
@@ -58,7 +58,7 @@ public class CaveSystem
         }
     }
 
-    private long GetGeologicIndex(MatrixAddress address)
+    private long GetGeologicIndex(Coord address)
     {
         if (address.Equals(_mouth) || address.Equals(_target))
             return 0;

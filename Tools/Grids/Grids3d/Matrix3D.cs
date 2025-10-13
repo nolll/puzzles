@@ -5,9 +5,9 @@ namespace Pzl.Tools.Grids.Grids3d;
 public class Matrix3D<T> where T : struct
 {
     private readonly T _defaultValue;
-    private readonly IDictionary<Matrix3DAddress, T> _matrix = new Dictionary<Matrix3DAddress, T>();
-    public Matrix3DAddress Address { get; private set; }
-    public Matrix3DAddress StartAddress { get; set; }
+    private readonly IDictionary<Coord3d, T> _matrix = new Dictionary<Coord3d, T>();
+    public Coord3d Address { get; private set; }
+    public Coord3d StartAddress { get; set; }
     
     public int Width => XMax - XMin + 1;
     public int Height => YMax - YMin + 1;
@@ -23,7 +23,7 @@ public class Matrix3D<T> where T : struct
     public bool IsAtBottom => Address.Y == Height - 1;
     public bool IsAtLeftEdge => Address.X == 0;
     
-    public Matrix3DAddress Center
+    public Coord3d Center
     {
         get
         {
@@ -41,8 +41,8 @@ public class Matrix3D<T> where T : struct
         XMax = width - 1;
         YMax = height - 1;
         ZMax = depth - 1;
-        Address = new Matrix3DAddress(0, 0, 0);
-        StartAddress = new Matrix3DAddress(0, 0, 0);
+        Address = new Coord3d(0, 0, 0);
+        StartAddress = new Coord3d(0, 0, 0);
     }
     
     public IEnumerable<T> Values =>
@@ -50,7 +50,7 @@ public class Matrix3D<T> where T : struct
             ? v 
             : _defaultValue);
 
-    public IEnumerable<Matrix3DAddress> Coords
+    public IEnumerable<Coord3d> Coords
     {
         get
         {
@@ -60,17 +60,17 @@ public class Matrix3D<T> where T : struct
                 {
                     for (var x = XMin; x <= XMax; x++)
                     {
-                        yield return new Matrix3DAddress(x, y, z);
+                        yield return new Coord3d(x, y, z);
                     }
                 }   
             }
         }
     }
 
-    public bool TryMoveTo(Matrix3DAddress address) => MoveTo(address, false);
-    public bool MoveTo(Matrix3DAddress address) => MoveTo(address, true);
+    public bool TryMoveTo(Coord3d address) => MoveTo(address, false);
+    public bool MoveTo(Coord3d address) => MoveTo(address, true);
 
-    private bool MoveTo(Matrix3DAddress address, bool extend)
+    private bool MoveTo(Coord3d address, bool extend)
     {
         if (IsOutOfRange(address))
         {
@@ -83,34 +83,34 @@ public class Matrix3D<T> where T : struct
         var x = address.X > XMin ? address.X : XMin;
         var y = address.Y > YMin ? address.Y : YMin;
         var z = address.Z > ZMin ? address.Z : ZMin;
-        Address = new Matrix3DAddress(x, y, z);
+        Address = new Coord3d(x, y, z);
         return true;
     }
 
-    public bool TryMoveTo(int x, int y, int z) => MoveTo(new Matrix3DAddress(x, y, z), false);
-    public bool MoveTo(int x, int y, int z) => MoveTo(new Matrix3DAddress(x, y, z), true);
+    public bool TryMoveTo(int x, int y, int z) => MoveTo(new Coord3d(x, y, z), false);
+    public bool MoveTo(int x, int y, int z) => MoveTo(new Coord3d(x, y, z), true);
     public bool TryMoveUp(int steps = 1) => MoveUp(steps, false);
     public bool MoveUp(int steps = 1) => MoveUp(steps, true);
-    private bool MoveUp(int steps, bool extend) => MoveTo(new Matrix3DAddress(Address.X, Address.Y - steps, Address.Z), extend);
+    private bool MoveUp(int steps, bool extend) => MoveTo(new Coord3d(Address.X, Address.Y - steps, Address.Z), extend);
     public bool TryMoveRight(int steps = 1) => MoveRight(steps, false);
     public bool MoveRight(int steps = 1) => MoveRight(steps, true);
-    private bool MoveRight(int steps, bool extend) => MoveTo(new Matrix3DAddress(Address.X + steps, Address.Y, Address.Z), extend);
+    private bool MoveRight(int steps, bool extend) => MoveTo(new Coord3d(Address.X + steps, Address.Y, Address.Z), extend);
     public bool TryMoveDown(int steps = 1) => MoveDown(steps, false);
     public bool MoveDown(int steps = 1) => MoveDown(steps, true);
-    private bool MoveDown(int steps, bool extend) => MoveTo(new Matrix3DAddress(Address.X, Address.Y + steps, Address.Z), extend);
+    private bool MoveDown(int steps, bool extend) => MoveTo(new Coord3d(Address.X, Address.Y + steps, Address.Z), extend);
     public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
     public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
-    private bool MoveLeft(int steps, bool extend) => MoveTo(new Matrix3DAddress(Address.X - steps, Address.Y, Address.Z), extend);
+    private bool MoveLeft(int steps, bool extend) => MoveTo(new Coord3d(Address.X - steps, Address.Y, Address.Z), extend);
     public T ReadValue() => ReadValueAt(Address.X, Address.Y, Address.Z);
 
-    public T ReadValueAt(Matrix3DAddress coord) => _matrix.TryGetValue(coord, out var v)
+    public T ReadValueAt(Coord3d coord) => _matrix.TryGetValue(coord, out var v)
         ? v
         : _defaultValue;
 
-    public T ReadValueAt(int x, int y, int z) => ReadValueAt(new Matrix3DAddress(x, y, z));
+    public T ReadValueAt(int x, int y, int z) => ReadValueAt(new Coord3d(x, y, z));
     public void WriteValue(T value) => WriteValueAt(Address, value);
     
-    public void WriteValueAt(Matrix3DAddress coord, T value)
+    public void WriteValueAt(Coord3d coord, T value)
     {
         if (coord.X < XMin)
             XMin = coord.X;
@@ -130,7 +130,7 @@ public class Matrix3D<T> where T : struct
         _matrix[coord] = value;
     }
 
-    public bool IsOutOfRange(Matrix3DAddress address) =>
+    public bool IsOutOfRange(Coord3d address) =>
         address.Z > ZMax ||
         address.Z < ZMin || 
         address.Y > YMax ||
@@ -139,9 +139,9 @@ public class Matrix3D<T> where T : struct
         address.X < XMin;
 
     public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<Matrix3DAddress> OrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
+    public IList<Coord3d> OrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-    private IList<Matrix3DAddress> PossibleOrthogonalAdjacentCoords =>
+    private IList<Coord3d> PossibleOrthogonalAdjacentCoords =>
     [
         new(Address.X + 1, Address.Y, Address.Z),
         new(Address.X - 1, Address.Y, Address.Z),
@@ -152,9 +152,9 @@ public class Matrix3D<T> where T : struct
     ];
 
     public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<Matrix3DAddress> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
+    public IList<Coord3d> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-    private IEnumerable<Matrix3DAddress> AllPossibleAdjacentCoords
+    private IEnumerable<Coord3d> AllPossibleAdjacentCoords
     {
         get
         {
@@ -164,7 +164,7 @@ public class Matrix3D<T> where T : struct
                 {
                     foreach (var dx in MatrixConstants.AdjacentDeltas)
                     {
-                        var coord = new Matrix3DAddress(Address.X + dx, Address.Y - dy, Address.Z - dz);
+                        var coord = new Coord3d(Address.X + dx, Address.Y - dy, Address.Z - dz);
                         if (!coord.Equals(Address))
                             yield return coord;
                     }
@@ -192,16 +192,16 @@ public class Matrix3D<T> where T : struct
         return matrix;
     }
 
-    private Dictionary<Matrix3DAddress, T> BuildMatrix(int width, int height, int depth, T defaultValue)
+    private Dictionary<Coord3d, T> BuildMatrix(int width, int height, int depth, T defaultValue)
     {
-        var matrix = new Dictionary<Matrix3DAddress, T>();
+        var matrix = new Dictionary<Coord3d, T>();
         for (var z = 0; z < depth; z++)
         {
             for (var y = 0; y < height; y++)
             {
                 for (var x = 0; x < width; x++)
                 {
-                    matrix.Add(new Matrix3DAddress(x, y, z), defaultValue);
+                    matrix.Add(new Coord3d(x, y, z), defaultValue);
                 }
             }
         }
@@ -209,67 +209,67 @@ public class Matrix3D<T> where T : struct
         return matrix;
     }
 
-    private void ExtendMatrix(Matrix3DAddress address)
+    private void ExtendMatrix(Coord3d address)
     {
         ExtendX(address);
         ExtendY(address);
         ExtendZ(address);
     }
 
-    private void ExtendX(Matrix3DAddress address)
+    private void ExtendX(Coord3d address)
     {
         if (address.X < 0)
             ExtendLeft(address);
         ExtendRight(address);
     }
 
-    private void ExtendLeft(Matrix3DAddress address)
+    private void ExtendLeft(Coord3d address)
     {
         AddCols(-address.X, MatrixAddMode.Prepend);
-        StartAddress = new Matrix3DAddress(StartAddress.X - address.X, StartAddress.Y, StartAddress.Z);
+        StartAddress = new Coord3d(StartAddress.X - address.X, StartAddress.Y, StartAddress.Z);
     }
 
-    private void ExtendRight(Matrix3DAddress address)
+    private void ExtendRight(Coord3d address)
     {
         var extendBy = address.X - (Width - 1);
         if (extendBy > 0)
             AddCols(extendBy, MatrixAddMode.Append);
     }
 
-    private void ExtendY(Matrix3DAddress address)
+    private void ExtendY(Coord3d address)
     {
         if (address.Y < 0)
             ExtendTop(address);
         ExtendBottom(address);
     }
 
-    private void ExtendTop(Matrix3DAddress address)
+    private void ExtendTop(Coord3d address)
     {
         AddRows(-address.Y, MatrixAddMode.Prepend);
-        StartAddress = new Matrix3DAddress(StartAddress.X, StartAddress.Y - address.Y, StartAddress.Z);
+        StartAddress = new Coord3d(StartAddress.X, StartAddress.Y - address.Y, StartAddress.Z);
     }
 
-    private void ExtendBottom(Matrix3DAddress address)
+    private void ExtendBottom(Coord3d address)
     {
         var extendBy = address.Y - (Height - 1);
         if (extendBy > 0)
             AddRows(extendBy, MatrixAddMode.Append);
     }
 
-    private void ExtendZ(Matrix3DAddress address)
+    private void ExtendZ(Coord3d address)
     {
         if (address.Z < 0)
             ExtendClose(address);
         ExtendFar(address);
     }
 
-    private void ExtendClose(Matrix3DAddress address)
+    private void ExtendClose(Coord3d address)
     {
         AddLevels(-address.Z, MatrixAddMode.Prepend);
-        StartAddress = new Matrix3DAddress(StartAddress.X, StartAddress.Y, StartAddress.Z - address.Z);
+        StartAddress = new Coord3d(StartAddress.X, StartAddress.Y, StartAddress.Z - address.Z);
     }
 
-    private void ExtendFar(Matrix3DAddress address)
+    private void ExtendFar(Coord3d address)
     {
         var extendBy = address.Z - (Depth - 1);
         if (extendBy > 0)

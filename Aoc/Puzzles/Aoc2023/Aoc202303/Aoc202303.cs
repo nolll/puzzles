@@ -51,11 +51,11 @@ public class Aoc202303 : AocPuzzle
 
                 if (int.TryParse(item, out var number))
                 {
-                    var coords = new List<MatrixAddress>();
+                    var coords = new List<Coord>();
                     for (var i = 0; i < numberLength; i++)
                     {
                         var x = index + i;
-                        coords.Add(new MatrixAddress(x, row));
+                        coords.Add(new Coord(x, row));
                     }
 
                     numberCoordList.Add(new NumberCoord(number, coords));
@@ -163,6 +163,6 @@ public class Aoc202303 : AocPuzzle
         return gearRatios;
     }
 
-    private record NumberCoord(int Number, List<MatrixAddress> Coords);
+    private record NumberCoord(int Number, List<Coord> Coords);
     public record Result(int EngineParts, int GearRatios);
 }

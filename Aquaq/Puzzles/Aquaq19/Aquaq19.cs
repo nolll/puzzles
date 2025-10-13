@@ -23,17 +23,17 @@ public class Aquaq19 : AquaqPuzzle
         var parts = s.Split(' ');
         var iterations = int.Parse(parts[0]);
         var size = int.Parse(parts[1]);
-        var filledCoords = new HashSet<MatrixAddress>();
-        var adjacentCache = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
+        var filledCoords = new HashSet<Coord>();
+        var adjacentCache = new Dictionary<Coord, IList<Coord>>();
 
         for (var i = 2; i < parts.Length; i += 2)
         {
-            filledCoords.Add(new MatrixAddress(int.Parse(parts[i + 1]), int.Parse(parts[i])));
+            filledCoords.Add(new Coord(int.Parse(parts[i + 1]), int.Parse(parts[i])));
         }
 
         var matrix = new Matrix<char>(size, size, Empty);
 
-        IList<MatrixAddress> GetAdjacent(MatrixAddress c)
+        IList<Coord> GetAdjacent(Coord c)
         {
             if (adjacentCache.TryGetValue(c, out var list))
                 return list;
@@ -47,7 +47,7 @@ public class Aquaq19 : AquaqPuzzle
         var hasSkippedAhead = false;
         for (var i = 0; i < iterations; i++)
         {
-            var newFilledCoords = new HashSet<MatrixAddress>();
+            var newFilledCoords = new HashSet<Coord>();
             var affectedCoords = filledCoords
                 .SelectMany(GetAdjacent)
                 .Distinct();

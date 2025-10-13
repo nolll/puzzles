@@ -20,9 +20,9 @@ public class Aoc202412 : AocPuzzle
                 break;
 
             var v = matrix.ReadValueAt(coord);
-            var queue = new Queue<MatrixAddress>();
+            var queue = new Queue<Coord>();
             queue.Enqueue(coord);
-            var set = new HashSet<MatrixAddress>();
+            var set = new HashSet<Coord>();
             while (queue.Count > 0)
             {
                 var c = queue.Dequeue();
@@ -68,9 +68,9 @@ public class Aoc202412 : AocPuzzle
                 break;
 
             var v = matrix.ReadValueAt(coord);
-            var queue = new Queue<MatrixAddress>();
+            var queue = new Queue<Coord>();
             queue.Enqueue(coord);
-            var set = new HashSet<MatrixAddress>();
+            var set = new HashSet<Coord>();
             while (queue.Count > 0)
             {
                 var c = queue.Dequeue();

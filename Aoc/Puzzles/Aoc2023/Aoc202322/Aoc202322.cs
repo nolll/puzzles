@@ -127,9 +127,9 @@ public class Aoc202322 : AocPuzzle
         return new Brick(index, bottom, top);
     }
 
-    private static Matrix3DAddress ParseAddress(string s)
+    private static Coord3d ParseAddress(string s)
     {
         var parts = s.Split(',').Select(int.Parse).ToArray();
-        return new Matrix3DAddress(parts[0], parts[1], parts[2]);
+        return new Coord3d(parts[0], parts[1], parts[2]);
     }
 }

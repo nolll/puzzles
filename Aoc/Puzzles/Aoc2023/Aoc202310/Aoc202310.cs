@@ -23,13 +23,13 @@ public class Aoc202310 : AocPuzzle
         return loop.Count / 2;
     }
 
-    private static char GetStartPointChar(Matrix<char> matrix, MatrixAddress startPoint)
+    private static char GetStartPointChar(Matrix<char> matrix, Coord startPoint)
     {
         var (x, y) = startPoint;
-        var top = matrix.ReadValueAt(new MatrixAddress(x, y - 1));
-        var right = matrix.ReadValueAt(new MatrixAddress(x + 1, y));
-        var bottom = matrix.ReadValueAt(new MatrixAddress(x, y + 1));
-        var left = matrix.ReadValueAt(new MatrixAddress(x - 1, y));
+        var top = matrix.ReadValueAt(new Coord(x, y - 1));
+        var right = matrix.ReadValueAt(new Coord(x + 1, y));
+        var bottom = matrix.ReadValueAt(new Coord(x, y + 1));
+        var left = matrix.ReadValueAt(new Coord(x - 1, y));
 
         var enterFromTop = top is 'F' or '|' or '7';
         var enterFromRight = right is 'J' or '-' or '7';
@@ -64,10 +64,10 @@ public class Aoc202310 : AocPuzzle
         }
 
         var enlargedMatrix = EnlargeMatrix(matrix);
-        var target = new MatrixAddress(enlargedMatrix.XMax, enlargedMatrix.YMax);
-        var queue = new Queue<MatrixAddress>();
+        var target = new Coord(enlargedMatrix.XMax, enlargedMatrix.YMax);
+        var queue = new Queue<Coord>();
         queue.Enqueue(target);
-        var seen = new HashSet<MatrixAddress>();
+        var seen = new HashSet<Coord>();
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
@@ -89,13 +89,13 @@ public class Aoc202310 : AocPuzzle
         return otherCoords.Count(o => enlargedMatrix.ReadValueAt(o.X * 2 + 1, o.Y * 2 + 1) == '.');
     }
 
-    private static List<MatrixAddress> GetLoop(Matrix<char> matrix, MatrixAddress startPoint)
+    private static List<Coord> GetLoop(Matrix<char> matrix, Coord startPoint)
     {
         var currentPoint = startPoint;
 
         var stepCount = 0;
-        var seen = new HashSet<MatrixAddress>();
-        var loop = new List<MatrixAddress>();
+        var seen = new HashSet<Coord>();
+        var loop = new List<Coord>();
         while (!seen.Contains(currentPoint) && stepCount < 100000)
         {
             var connections = FindConnections(matrix, currentPoint);
@@ -111,15 +111,15 @@ public class Aoc202310 : AocPuzzle
         return loop;
     }
 
-    private static IEnumerable<MatrixAddress> FindConnections(Matrix<char> matrix, MatrixAddress currentPoint)
+    private static IEnumerable<Coord> FindConnections(Matrix<char> matrix, Coord currentPoint)
     {
         var currentPipePart = matrix.ReadValueAt(currentPoint);
 
         var (x, y) = currentPoint;
-        var top = new MatrixAddress(x, y - 1);
-        var right = new MatrixAddress(x + 1, y);
-        var bottom = new MatrixAddress(x, y + 1);
-        var left = new MatrixAddress(x - 1, y);
+        var top = new Coord(x, y - 1);
+        var right = new Coord(x + 1, y);
+        var bottom = new Coord(x, y + 1);
+        var left = new Coord(x - 1, y);
 
         return currentPipePart switch
         {

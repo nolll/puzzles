@@ -8,8 +8,8 @@ public class ReservoirFiller
     private Matrix<char> _matrix = new();
     private int _yMin = int.MaxValue;
     private int _yMax = int.MinValue;
-    private readonly MatrixAddress _source = new(500, 0);
-    private List<MatrixAddress> _openAddresses = new();
+    private readonly Coord _source = new(500, 0);
+    private List<Coord> _openAddresses = new();
 
     private const char SourceTile = '+';
     private const char WallTile = '#';
@@ -28,7 +28,7 @@ public class ReservoirFiller
 
     public void Fill()
     {
-        _openAddresses = new List<MatrixAddress> { new(_source.X, _source.Y) };
+        _openAddresses = new List<Coord> { new(_source.X, _source.Y) };
         while (_openAddresses.Any())
         {
             var current = _openAddresses.First();
@@ -37,7 +37,7 @@ public class ReservoirFiller
             if (valueBelow == WallTile || valueBelow == RestingWaterTile)
             {
                 _openAddresses.RemoveAt(0);
-                AddToOpenAddresses(new MatrixAddress(_matrix.Address.X, _matrix.Address.Y - 1));
+                AddToOpenAddresses(new Coord(_matrix.Address.X, _matrix.Address.Y - 1));
                 continue;
             }
 
@@ -138,7 +138,7 @@ public class ReservoirFiller
             _yMax = y;
     }
 
-    private void AddToOpenAddresses(MatrixAddress address)
+    private void AddToOpenAddresses(Coord address)
     {
         if(!_openAddresses.Contains(address))
             _openAddresses.Add(address);

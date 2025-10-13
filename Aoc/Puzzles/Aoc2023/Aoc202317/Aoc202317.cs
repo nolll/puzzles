@@ -29,8 +29,8 @@ public class Aoc202317 : AocPuzzle
         var matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(s);
 
         var graph = BuildGraph(matrix, minStraightCount, maxStraightCount);
-        var sourceCoord = new MatrixAddress(matrix.XMin, matrix.XMin);
-        var targetCoord = new MatrixAddress(matrix.XMax, matrix.YMax);
+        var sourceCoord = new Coord(matrix.XMin, matrix.XMin);
+        var targetCoord = new Coord(matrix.XMax, matrix.YMax);
         
         List<string> sources =
         [
@@ -65,7 +65,7 @@ public class Aoc202317 : AocPuzzle
         return graph;
     }
 
-    private static List<GraphEdge> GetDirectionGraph(Matrix<int> matrix, MatrixAddress coord, MatrixDirection forward, int minStraightCount, int maxStraightCount)
+    private static List<GraphEdge> GetDirectionGraph(Matrix<int> matrix, Coord coord, MatrixDirection forward, int minStraightCount, int maxStraightCount)
     {
         matrix.MoveTo(coord);
         matrix.TurnTo(forward);
@@ -75,11 +75,11 @@ public class Aoc202317 : AocPuzzle
         matrix.TurnRight();
         var right = matrix.Direction;
         matrix.TurnTo(forward); 
-        var leftCoord = new MatrixAddress(coord.X + left.X, coord.Y + left.Y);
-        var leftCheckCoord = new MatrixAddress(coord.X + left.X * minStraightCount, coord.Y + left.Y * minStraightCount);
-        var rightCoord = new MatrixAddress(coord.X + right.X, coord.Y + right.Y);
-        var rightCheckCoord = new MatrixAddress(coord.X + right.X * minStraightCount, coord.Y + right.Y * minStraightCount);
-        var forwardCoord = new MatrixAddress(coord.X + forward.X, coord.Y + forward.Y);
+        var leftCoord = new Coord(coord.X + left.X, coord.Y + left.Y);
+        var leftCheckCoord = new Coord(coord.X + left.X * minStraightCount, coord.Y + left.Y * minStraightCount);
+        var rightCoord = new Coord(coord.X + right.X, coord.Y + right.Y);
+        var rightCheckCoord = new Coord(coord.X + right.X * minStraightCount, coord.Y + right.Y * minStraightCount);
+        var forwardCoord = new Coord(coord.X + forward.X, coord.Y + forward.Y);
         var graph = new List<GraphEdge>();
 
         for (var i = 1; i <= maxStraightCount; i++)

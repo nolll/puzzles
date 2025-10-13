@@ -41,14 +41,14 @@ public class Aoc202316 : AocPuzzle
     }
 
     public static int EnergizedCount(string s) => 
-        EnergizedCount(MatrixBuilder.BuildCharMatrix(s), new Beam(new MatrixAddress(0, 0), MatrixDirection.Right));
+        EnergizedCount(MatrixBuilder.BuildCharMatrix(s), new Beam(new Coord(0, 0), MatrixDirection.Right));
 
     public static int EnergizedCount(Matrix<char> matrix, Beam start)
     {
-        var lit = new HashSet<MatrixAddress>();
+        var lit = new HashSet<Coord>();
         var beams = new Queue<Beam>();
         beams.Enqueue(start);
-        var seen = new HashSet<(MatrixAddress, char)>();
+        var seen = new HashSet<(Coord, char)>();
 
         while (beams.Count > 0)
         {
@@ -81,16 +81,16 @@ public class Aoc202316 : AocPuzzle
                 if (isHorizontal)
                 {
                     if(!matrix.IsAtTopEdge)
-                        beams.Enqueue(new Beam(new MatrixAddress(matrix.Address.X, matrix.Address.Y - 1), MatrixDirection.Up));
+                        beams.Enqueue(new Beam(new Coord(matrix.Address.X, matrix.Address.Y - 1), MatrixDirection.Up));
                     if (!matrix.IsAtBottomEdge)
-                        beams.Enqueue(new Beam(new MatrixAddress(matrix.Address.X, matrix.Address.Y + 1), MatrixDirection.Down));
+                        beams.Enqueue(new Beam(new Coord(matrix.Address.X, matrix.Address.Y + 1), MatrixDirection.Down));
                 }
                 else 
                 {
                     if (!matrix.IsAtRightEdge)
-                        beams.Enqueue(new Beam(new MatrixAddress(matrix.Address.X + 1, matrix.Address.Y), MatrixDirection.Right));
+                        beams.Enqueue(new Beam(new Coord(matrix.Address.X + 1, matrix.Address.Y), MatrixDirection.Right));
                     if (!matrix.IsAtLeftEdge)
-                        beams.Enqueue(new Beam(new MatrixAddress(matrix.Address.X - 1, matrix.Address.Y), MatrixDirection.Left));
+                        beams.Enqueue(new Beam(new Coord(matrix.Address.X - 1, matrix.Address.Y), MatrixDirection.Left));
                 }
             }
 
@@ -139,10 +139,10 @@ public class Aoc202316 : AocPuzzle
 
 public class Beam
 {
-    public MatrixAddress Position { get; }
+    public Coord Position { get; }
     public MatrixDirection Direction { get; }
 
-    public Beam(MatrixAddress position, MatrixDirection direction)
+    public Beam(Coord position, MatrixDirection direction)
     {
         Position = position;
         Direction = direction;

@@ -4,9 +4,9 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201918;
 
 public class VaultRobot
 {
-    public MatrixAddress Address { get; }
+    public Coord Address { get; }
 
-    public VaultRobot(MatrixAddress address)
+    public VaultRobot(Coord address)
     {
         Address = address;
     }

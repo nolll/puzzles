@@ -11,12 +11,12 @@ public enum PortalType
 public abstract class DonutPortal
 {
     public string Name { get; }
-    public MatrixAddress Location { get; }
-    public MatrixAddress Target { get; }
+    public Coord Location { get; }
+    public Coord Target { get; }
     public abstract int DepthChange { get; }
     public abstract PortalType Type { get; }
 
-    protected DonutPortal(string name, MatrixAddress location, MatrixAddress target)
+    protected DonutPortal(string name, Coord location, Coord target)
     {
         Name = name;
         Location = location;

@@ -18,7 +18,7 @@ public class HexagonalFloor
 
     private readonly IEnumerable<List<string>> _instructions;
     private readonly Matrix<char> _matrix;
-    private readonly Dictionary<string, List<MatrixAddress>> _adjacentCoordsCache;
+    private readonly Dictionary<string, List<Coord>> _adjacentCoordsCache;
     public int BlackTileCount => _matrix.Values.Count(o => o == Black);
 
     public HexagonalFloor(string input)
@@ -26,7 +26,7 @@ public class HexagonalFloor
         var rows = StringReader.ReadLines(input);
         _instructions = rows.Select(ParseInstruction);
         _matrix = new Matrix<char>(defaultValue: Nothing);
-        _adjacentCoordsCache = new Dictionary<string, List<MatrixAddress>>();
+        _adjacentCoordsCache = new Dictionary<string, List<Coord>>();
     }
 
     private static List<string> ParseInstruction(string s)
@@ -111,8 +111,8 @@ public class HexagonalFloor
 
     private void ApplyRules()
     {
-        var tilesToFlipToBlack = new List<MatrixAddress>();
-        var tilesToFlipToWhite = new List<MatrixAddress>();
+        var tilesToFlipToBlack = new List<Coord>();
+        var tilesToFlipToWhite = new List<Coord>();
 
         foreach (var coord in _matrix.Coords)
         {
@@ -154,7 +154,7 @@ public class HexagonalFloor
 
     private void FillEmptyTilesWithWhite()
     {
-        var tilesToFill = new List<MatrixAddress>();
+        var tilesToFill = new List<Coord>();
 
         foreach (var coord in _matrix.Coords)
         {
@@ -181,7 +181,7 @@ public class HexagonalFloor
         }
     }
 
-    private List<char> GetAdjacent6Values(MatrixAddress coord)
+    private List<char> GetAdjacent6Values(Coord coord)
     {
         var currentAddress = _matrix.Address;
         var addresses = GetAdjacent6Coords(coord);
@@ -198,13 +198,13 @@ public class HexagonalFloor
         return values;
     }
 
-    private List<MatrixAddress> GetAdjacent6Coords(MatrixAddress coord)
+    private List<Coord> GetAdjacent6Coords(Coord coord)
     {
         var key = coord.Id;
         if (_adjacentCoordsCache.TryGetValue(key, out var coords))
             return coords;
             
-        coords = new List<MatrixAddress>
+        coords = new List<Coord>
         {
             new(coord.X + 1, coord.Y - 1),
             new(coord.X + 2, coord.Y),

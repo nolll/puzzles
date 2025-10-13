@@ -10,7 +10,7 @@ public class Codyssi202505 : CodyssiPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var ship = new MatrixAddress(0, 0);
+        var ship = new Coord(0, 0);
         var coords = SortByDistance(Parse(input), ship);
         var result = coords.Last().ManhattanDistanceTo(ship) - coords.First().ManhattanDistanceTo(ship);
         return new PuzzleResult(result, "8970c66cc5feb9663d03802a881d2305");
@@ -18,7 +18,7 @@ public class Codyssi202505 : CodyssiPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        var ship = new MatrixAddress(0, 0);
+        var ship = new Coord(0, 0);
         var coords = SortByDistance(Parse(input), ship);
         var closest = coords.First();
         coords = SortByDistance(coords.Skip(1), closest);
@@ -28,7 +28,7 @@ public class Codyssi202505 : CodyssiPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        var current = new MatrixAddress(0, 0);
+        var current = new Coord(0, 0);
         var coords = Parse(input);
 
         var total = 0;
@@ -46,15 +46,15 @@ public class Codyssi202505 : CodyssiPuzzle
         return new PuzzleResult(total, "9f7fe9e9b27c388197a28609ca587687");
     }
 
-    private static List<MatrixAddress> SortByDistance(IEnumerable<MatrixAddress> coords, MatrixAddress current) =>
+    private static List<Coord> SortByDistance(IEnumerable<Coord> coords, Coord current) =>
         coords
             .OrderBy(o => o.ManhattanDistanceTo(current))
             .ThenBy(o => o.X)
             .ThenBy(o => o.Y)
             .ToList();
 
-    private static List<MatrixAddress> Parse(string input) => input.Split(LineBreaks.Single)
+    private static List<Coord> Parse(string input) => input.Split(LineBreaks.Single)
         .Select(Numbers.IntsFromString)
-        .Select(o => new MatrixAddress(o.First(), o.Last()))
+        .Select(o => new Coord(o.First(), o.Last()))
         .ToList();
 }

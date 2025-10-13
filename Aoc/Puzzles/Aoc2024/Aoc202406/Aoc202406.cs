@@ -27,14 +27,14 @@ public class Aoc202406 : AocPuzzle
 
     private static int? GetVisitCount(
         Matrix<char> matrix,
-        MatrixAddress startCoord,
-        MatrixAddress? blockedCoord = null) =>
+        Coord startCoord,
+        Coord? blockedCoord = null) =>
         GetVisited(matrix, startCoord, blockedCoord)?.Count;
     
-    private static HashSet<MatrixAddress>? GetVisited(Matrix<char> matrix, MatrixAddress startCoord, MatrixAddress? blockedCoord = null)
+    private static HashSet<Coord>? GetVisited(Matrix<char> matrix, Coord startCoord, Coord? blockedCoord = null)
     {
-        var cache = new HashSet<(MatrixAddress, MatrixDirection)>();
-        var visited = new HashSet<MatrixAddress>();
+        var cache = new HashSet<(Coord, MatrixDirection)>();
+        var visited = new HashSet<Coord>();
         
         matrix.MoveTo(startCoord);
         matrix.TurnTo(MatrixDirection.Up);

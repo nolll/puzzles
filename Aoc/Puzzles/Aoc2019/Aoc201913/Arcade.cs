@@ -97,7 +97,7 @@ public class Arcade
 
     private void WriteToScreen(int x, int y, int tile)
     {
-        _screen.MoveTo(new MatrixAddress(x, y));
+        _screen.MoveTo(new Coord(x, y));
         _screen.WriteValue(ArcadeTiles.Chars[tile]);
     }
 }

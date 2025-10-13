@@ -175,7 +175,7 @@ public class Aoc202222 : AocPuzzle
         return password;
     }
 
-    public static (MatrixAddress newCoord, MatrixDirection newDirection) MapExitPosition(MatrixAddress c, MatrixDirection d, int size)
+    public static (Coord newCoord, MatrixDirection newDirection) MapExitPosition(Coord c, MatrixDirection d, int size)
     {
         var x = c.X;
         var y = c.Y;
@@ -183,45 +183,45 @@ public class Aoc202222 : AocPuzzle
         if (d.Equals(MatrixDirection.Up))
         {
             if (c.X < size) // from left to front
-                return (new MatrixAddress(y - size, x + size), MatrixDirection.Right);
+                return (new Coord(y - size, x + size), MatrixDirection.Right);
             if (c.X < size * 2) // from top to back
-                return (new MatrixAddress(y, x + size * 2), MatrixDirection.Right);
+                return (new Coord(y, x + size * 2), MatrixDirection.Right);
             if (c.X < size * 3) // from right to back
-                return (new MatrixAddress(x - size * 2, y + size * 4 - 1), MatrixDirection.Up);
+                return (new Coord(x - size * 2, y + size * 4 - 1), MatrixDirection.Up);
         }
         else if (d.Equals(MatrixDirection.Right))
         {
             if (c.Y < size) // from right to bottom
-                return (new MatrixAddress(x - size, size * 3 - y - 1), MatrixDirection.Left);
+                return (new Coord(x - size, size * 3 - y - 1), MatrixDirection.Left);
             if (c.Y < size * 2) // from front to right
-                return (new MatrixAddress(y + size, x - size), MatrixDirection.Up);
+                return (new Coord(y + size, x - size), MatrixDirection.Up);
             if (c.Y < size * 3) // from bottom to right
-                return (new MatrixAddress(x + size, size * 3 - y - 1), MatrixDirection.Left);
+                return (new Coord(x + size, size * 3 - y - 1), MatrixDirection.Left);
             if (c.Y < size * 4) // from back to bottom
-                return (new MatrixAddress(y - size * 2, x + size * 2), MatrixDirection.Up);
+                return (new Coord(y - size * 2, x + size * 2), MatrixDirection.Up);
         }
         else if (d.Equals(MatrixDirection.Down))
         {
             if (c.X < size) // from back to right
-                return (new MatrixAddress(x + size * 2, y - size * 4 + 1), MatrixDirection.Down);
+                return (new Coord(x + size * 2, y - size * 4 + 1), MatrixDirection.Down);
             if (c.X < size * 2) // from bottom to back
-                return (new MatrixAddress(y - size * 2, x + size * 2), MatrixDirection.Left);
+                return (new Coord(y - size * 2, x + size * 2), MatrixDirection.Left);
             if (c.X < size * 3) // from right to front
-                return (new MatrixAddress(y + size, x - size), MatrixDirection.Left);
+                return (new Coord(y + size, x - size), MatrixDirection.Left);
         }
         else
         {
             if (c.Y < size) // from top to left
-                return (new MatrixAddress(x - size, size * 3 - y - 1), MatrixDirection.Right);
+                return (new Coord(x - size, size * 3 - y - 1), MatrixDirection.Right);
             if (c.Y < size * 2) // from front to left
-                return (new MatrixAddress(y - size, x + size), MatrixDirection.Down);
+                return (new Coord(y - size, x + size), MatrixDirection.Down);
             if (c.Y < size * 3) // from left to top
-                return (new MatrixAddress(x + size, size * 3 - y - 1), MatrixDirection.Right);
+                return (new Coord(x + size, size * 3 - y - 1), MatrixDirection.Right);
             if (c.Y < size * 4) // from back to top
-                return (new MatrixAddress(y - size * 2, x), MatrixDirection.Down);
+                return (new Coord(y - size * 2, x), MatrixDirection.Down);
         }
 
-        return (new MatrixAddress(0, 0), MatrixDirection.Up);
+        return (new Coord(0, 0), MatrixDirection.Up);
     }
 
     private static IEnumerable<string> ParsePath(string s)

@@ -8,33 +8,33 @@ public class Amphipods
     private readonly Matrix<char> _matrix;
     private readonly Dictionary<char, int> _stepCosts;
 
-    private readonly MatrixAddress _hallwayLeft = new(1, 1);
-    private readonly MatrixAddress _hallwayA = new(2, 1);
-    private readonly MatrixAddress _hallwayAb = new(4, 1);
-    private readonly MatrixAddress _hallwayBc = new(6, 1);
-    private readonly MatrixAddress _hallwayCd = new(8, 1);
-    private readonly MatrixAddress _hallwayD = new(10, 1);
-    private readonly MatrixAddress _hallwayRight = new(11, 1);
+    private readonly Coord _hallwayLeft = new(1, 1);
+    private readonly Coord _hallwayA = new(2, 1);
+    private readonly Coord _hallwayAb = new(4, 1);
+    private readonly Coord _hallwayBc = new(6, 1);
+    private readonly Coord _hallwayCd = new(8, 1);
+    private readonly Coord _hallwayD = new(10, 1);
+    private readonly Coord _hallwayRight = new(11, 1);
 
-    private readonly MatrixAddress _roomA1 = new(3, 2);
-    private readonly MatrixAddress _roomA2 = new(3, 3);
-    private readonly MatrixAddress _roomA3 = new(3, 4);
-    private readonly MatrixAddress _roomA4 = new(3, 5);
+    private readonly Coord _roomA1 = new(3, 2);
+    private readonly Coord _roomA2 = new(3, 3);
+    private readonly Coord _roomA3 = new(3, 4);
+    private readonly Coord _roomA4 = new(3, 5);
 
-    private readonly MatrixAddress _roomB1 = new(5, 2);
-    private readonly MatrixAddress _roomB2 = new(5, 3);
-    private readonly MatrixAddress _roomB3 = new(5, 4);
-    private readonly MatrixAddress _roomB4 = new(5, 5);
+    private readonly Coord _roomB1 = new(5, 2);
+    private readonly Coord _roomB2 = new(5, 3);
+    private readonly Coord _roomB3 = new(5, 4);
+    private readonly Coord _roomB4 = new(5, 5);
 
-    private readonly MatrixAddress _roomC1 = new(7, 2);
-    private readonly MatrixAddress _roomC2 = new(7, 3);
-    private readonly MatrixAddress _roomC3 = new(7, 4);
-    private readonly MatrixAddress _roomC4 = new(7, 5);
+    private readonly Coord _roomC1 = new(7, 2);
+    private readonly Coord _roomC2 = new(7, 3);
+    private readonly Coord _roomC3 = new(7, 4);
+    private readonly Coord _roomC4 = new(7, 5);
 
-    private readonly MatrixAddress _roomD1 = new(9, 2);
-    private readonly MatrixAddress _roomD2 = new(9, 3);
-    private readonly MatrixAddress _roomD3 = new(9, 4);
-    private readonly MatrixAddress _roomD4 = new(9, 5);
+    private readonly Coord _roomD1 = new(9, 2);
+    private readonly Coord _roomD2 = new(9, 3);
+    private readonly Coord _roomD3 = new(9, 4);
+    private readonly Coord _roomD4 = new(9, 5);
 
     public int Energy { get; private set; }
 
@@ -152,7 +152,7 @@ public class Amphipods
         Move(_hallwayRight, _roomD1);
     }
 
-    private void Move(MatrixAddress from, MatrixAddress to)
+    private void Move(Coord from, Coord to)
     {
         _matrix.MoveTo(from);
         var c = _matrix.ReadValue();
@@ -170,7 +170,7 @@ public class Amphipods
         var stepCost = _stepCosts[c];
         var stepCount = 0;
         if (from.Y > 1 && to.Y > 1)
-            stepCount += from.Y - 1 + new MatrixAddress(from.X, 1).ManhattanDistanceTo(to);
+            stepCount += from.Y - 1 + new Coord(from.X, 1).ManhattanDistanceTo(to);
         else
             stepCount = from.ManhattanDistanceTo(to);
 

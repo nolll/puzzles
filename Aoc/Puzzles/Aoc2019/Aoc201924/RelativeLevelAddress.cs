@@ -5,9 +5,9 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201924;
 public class RelativeLevelAddress
 {
     public int RelativeLevel { get; }
-    public MatrixAddress Address { get; }
+    public Coord Address { get; }
 
-    public RelativeLevelAddress(int relativeLevel, MatrixAddress address)
+    public RelativeLevelAddress(int relativeLevel, Coord address)
     {
         RelativeLevel = relativeLevel;
         Address = address;

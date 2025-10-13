@@ -36,7 +36,7 @@ public class Ece202415 : EverybodyEventPuzzle
         var grid = input.Split(LineBreaks.Single).Select(o => o.ToCharArray()).ToArray();
         var height = grid.Length;
         var width = grid[0].Length;
-        var start = new MatrixAddress(input.Split(LineBreaks.Single).First().IndexOf('.'), 0);
+        var start = new Coord(input.Split(LineBreaks.Single).First().IndexOf('.'), 0);
         var herbs = GetHerbs(grid);
         var bitstate = new BitStateHandler(herbs);
 

@@ -19,7 +19,7 @@ public class SeaMonsterCounter
     };
 
     private readonly Matrix<char> _seaMonsterMatrix;
-    private readonly List<MatrixAddress> _seaMonsterHashAddresses;
+    private readonly List<Coord> _seaMonsterHashAddresses;
 
     public SeaMonsterCounter()
     {

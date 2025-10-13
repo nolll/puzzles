@@ -88,11 +88,11 @@ public class SubmarineReactor
         return new RebootInstruction(mode, coords.from, coords.to);
     }
 
-    private (Matrix3DAddress from, Matrix3DAddress to) ParseCoords(string s)
+    private (Coord3d from, Coord3d to) ParseCoords(string s)
     {
         var parts = s.Split(',').Select(ParseFromTo).ToList();
-        var from = new Matrix3DAddress(parts[0].from, parts[1].from, parts[2].from);
-        var to = new Matrix3DAddress(parts[0].to, parts[1].to, parts[2].to);
+        var from = new Coord3d(parts[0].from, parts[1].from, parts[2].from);
+        var to = new Coord3d(parts[0].to, parts[1].to, parts[2].to);
         return (from, to);
     }
 

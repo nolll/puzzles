@@ -5,9 +5,9 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201920;
 public class DonutPortalAddress
 {
     public string Name { get; }
-    public MatrixAddress Address { get; }
+    public Coord Address { get; }
 
-    public DonutPortalAddress(string name, MatrixAddress address)
+    public DonutPortalAddress(string name, Coord address)
     {
         Name = name;
         Address = address;

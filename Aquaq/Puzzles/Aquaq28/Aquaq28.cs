@@ -31,7 +31,7 @@ public class Aquaq28 : AquaqPuzzle
         var encrypted = string.Empty;
         foreach (var c in word)
         {
-            var startPos = new MatrixAddress(0, Characters.IndexOf(c));
+            var startPos = new Coord(0, Characters.IndexOf(c));
             matrix.MoveTo(startPos);
             matrix.FaceRight();
 

@@ -338,12 +338,12 @@ public class Cube
         var downMatrix = Down.Matrix;
         var backMatrix = Back.Matrix.RotateLeft().RotateLeft();
 
-        ApplyToPrintMatrix(pm, upMatrix, new MatrixAddress(3, 0));
-        ApplyToPrintMatrix(pm, leftMatrix, new MatrixAddress(0, 3));
-        ApplyToPrintMatrix(pm, frontMatrix, new MatrixAddress(3, 3));
-        ApplyToPrintMatrix(pm, rightMatrix, new MatrixAddress(6, 3));
-        ApplyToPrintMatrix(pm, downMatrix, new MatrixAddress(3, 6));
-        ApplyToPrintMatrix(pm, backMatrix, new MatrixAddress(3, 9));
+        ApplyToPrintMatrix(pm, upMatrix, new Coord(3, 0));
+        ApplyToPrintMatrix(pm, leftMatrix, new Coord(0, 3));
+        ApplyToPrintMatrix(pm, frontMatrix, new Coord(3, 3));
+        ApplyToPrintMatrix(pm, rightMatrix, new Coord(6, 3));
+        ApplyToPrintMatrix(pm, downMatrix, new Coord(3, 6));
+        ApplyToPrintMatrix(pm, backMatrix, new Coord(3, 9));
 
         return pm.Print();
     }
@@ -361,17 +361,17 @@ public class Cube
         var downMatrix = Down.Matrix;
         var backMatrix = Back.Matrix;
 
-        ApplyToPrintMatrix(pm, frontMatrix, new MatrixAddress(0, 0));
-        ApplyToPrintMatrix(pm, upMatrix, new MatrixAddress(4, 0));
-        ApplyToPrintMatrix(pm, leftMatrix, new MatrixAddress(8, 0));
-        ApplyToPrintMatrix(pm, rightMatrix, new MatrixAddress(12, 0));
-        ApplyToPrintMatrix(pm, downMatrix, new MatrixAddress(16, 0));
-        ApplyToPrintMatrix(pm, backMatrix, new MatrixAddress(20, 0));
+        ApplyToPrintMatrix(pm, frontMatrix, new Coord(0, 0));
+        ApplyToPrintMatrix(pm, upMatrix, new Coord(4, 0));
+        ApplyToPrintMatrix(pm, leftMatrix, new Coord(8, 0));
+        ApplyToPrintMatrix(pm, rightMatrix, new Coord(12, 0));
+        ApplyToPrintMatrix(pm, downMatrix, new Coord(16, 0));
+        ApplyToPrintMatrix(pm, backMatrix, new Coord(20, 0));
 
         return pm.Print();
     }
 
-    private void ApplyToPrintMatrix(Matrix<char> printMatrix, Matrix<char> faceMatrix, MatrixAddress startAddress)
+    private void ApplyToPrintMatrix(Matrix<char> printMatrix, Matrix<char> faceMatrix, Coord startAddress)
     {
         foreach (var coord in faceMatrix.Coords)
         {

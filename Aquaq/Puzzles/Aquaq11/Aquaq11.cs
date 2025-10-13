@@ -22,7 +22,7 @@ public class Aquaq11 : AquaqPuzzle
         var areas = StringReader.ReadLines(input)
             .Skip(1)
             .Select(line => line.Split(',').Select(int.Parse).ToArray())
-            .Select(o => new TileSquare(new MatrixAddress(o[0], o[1]), new MatrixAddress(o[2], o[3])))
+            .Select(o => new TileSquare(new Coord(o[0], o[1]), new Coord(o[2], o[3])))
             .ToList();
 
         var overlappingAreas = areas.Where(o => areas.Count(p => p.IsOverlapping(o)) > 1);
@@ -45,10 +45,10 @@ public class Aquaq11 : AquaqPuzzle
 
     private class TileSquare
     {
-        public MatrixAddress From { get; }
-        public MatrixAddress To { get; }
+        public Coord From { get; }
+        public Coord To { get; }
 
-        public TileSquare(MatrixAddress from, MatrixAddress to)
+        public TileSquare(Coord from, Coord to)
         {
             From = from;
             To = to;

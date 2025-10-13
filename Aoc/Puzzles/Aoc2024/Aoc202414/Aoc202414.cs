@@ -27,7 +27,7 @@ public class Aoc202414 : AocPuzzle
         const int time = 100;
         var lines = input.Split(LineBreaks.Single);
         var nums = lines.Select(Numbers.IntsFromString);
-        var robots = nums.Select(o => new Robot(new MatrixAddress(o[0], o[1]), new MatrixAddress(o[2], o[3]))).ToArray();
+        var robots = nums.Select(o => new Robot(new Coord(o[0], o[1]), new Coord(o[2], o[3]))).ToArray();
         
         foreach (var robot in robots)
         {
@@ -35,7 +35,7 @@ public class Aoc202414 : AocPuzzle
             var y = (robot.Location.Y + robot.Velocity.Y * time) % height;
             while (x < 0) x += width;
             while (y < 0) y += height;
-            robot.Location = new MatrixAddress(x, y);    
+            robot.Location = new Coord(x, y);    
         }
 
         var matrix = new Matrix<int>(width, height);
@@ -45,7 +45,7 @@ public class Aoc202414 : AocPuzzle
             matrix.WriteValueAt(robot.Location, v + 1);
         }
         
-        MatrixAddress[] sliceCoords =
+        Coord[] sliceCoords =
         [
             new(0, 0),
             new(width / 2 + 1, 0),
@@ -64,7 +64,7 @@ public class Aoc202414 : AocPuzzle
         const int time = 10000;
         var lines = input.Split(LineBreaks.Single);
         var nums = lines.Select(Numbers.IntsFromString);
-        var robots = nums.Select(o => new Robot(new MatrixAddress(o[0], o[1]), new MatrixAddress(o[2], o[3]))).ToArray();
+        var robots = nums.Select(o => new Robot(new Coord(o[0], o[1]), new Coord(o[2], o[3]))).ToArray();
         
         for (var t = 0; t < time; t++)
         {
@@ -72,7 +72,7 @@ public class Aoc202414 : AocPuzzle
             {
                 var x = (robot.Location.X + robot.Velocity.X + width) % width;
                 var y = (robot.Location.Y + robot.Velocity.Y + height) % height;
-                robot.Location = new MatrixAddress(x, y); 
+                robot.Location = new Coord(x, y); 
             }
 
             var centeredRobots = robots.Count(o => o.Location.X > 30 && o.Location.X < width - 30 && o.Location.Y > 50);
@@ -83,9 +83,9 @@ public class Aoc202414 : AocPuzzle
         return 0;
     }
 
-    private class Robot(MatrixAddress location, MatrixAddress velocity)
+    private class Robot(Coord location, Coord velocity)
     {
-        public MatrixAddress Location { get; set; } = location;
-        public MatrixAddress Velocity { get; } = velocity;
+        public Coord Location { get; set; } = location;
+        public Coord Velocity { get; } = velocity;
     }
 }

@@ -24,9 +24,9 @@ public class Aoc202408 : AocPuzzle
         return new PuzzleResult(count, "e01777da998c6b596501f3853bd26a8d");
     }
 
-    private static List<MatrixAddress> FindAntinodes1(Matrix<char> matrix)
+    private static List<Coord> FindAntinodes1(Matrix<char> matrix)
     {
-        var antinodes = new HashSet<MatrixAddress>();
+        var antinodes = new HashSet<Coord>();
         var types = matrix.Values.Distinct().Where(o => o != matrix.DefaultValue);
         foreach (var type in types)
         {
@@ -34,14 +34,14 @@ public class Aoc202408 : AocPuzzle
             var pairs = GetPairs(antennas);
             foreach (var pair in pairs)
             {
-                var absDiff = new MatrixAddress(Math.Abs(pair.b.X - pair.a.X), Math.Abs(pair.b.Y - pair.a.Y));
+                var absDiff = new Coord(Math.Abs(pair.b.X - pair.a.X), Math.Abs(pair.b.Y - pair.a.Y));
                 
                 var adx = pair.a.X > pair.b.X ? absDiff.X : -absDiff.X;
                 var ady = pair.a.Y > pair.b.Y ? absDiff.Y : -absDiff.Y;
                 var bdx = pair.b.X > pair.a.X ? absDiff.X : -absDiff.X;
                 var bdy = pair.b.Y > pair.a.Y ? absDiff.Y : -absDiff.Y;
                 
-                MatrixAddress[] nodes =
+                Coord[] nodes =
                 [
                     new(pair.a.X + adx, pair.a.Y + ady),
                     new(pair.b.X + bdx, pair.b.Y + bdy)
@@ -54,9 +54,9 @@ public class Aoc202408 : AocPuzzle
         return antinodes.ToList();
     }
     
-    private static List<MatrixAddress> FindAntinodes2(Matrix<char> matrix)
+    private static List<Coord> FindAntinodes2(Matrix<char> matrix)
     {
-        var antinodes = new HashSet<MatrixAddress>();
+        var antinodes = new HashSet<Coord>();
         var types = matrix.Values.Distinct().Where(o => o != matrix.DefaultValue);
         foreach (var type in types)
         {
@@ -64,7 +64,7 @@ public class Aoc202408 : AocPuzzle
             var pairs = GetPairs(antennas);
             foreach (var pair in pairs)
             {
-                var absDiff = new MatrixAddress(Math.Abs(pair.b.X - pair.a.X), Math.Abs(pair.b.Y - pair.a.Y));
+                var absDiff = new Coord(Math.Abs(pair.b.X - pair.a.X), Math.Abs(pair.b.Y - pair.a.Y));
                 
                 var adx = pair.a.X > pair.b.X ? absDiff.X : -absDiff.X;
                 var ady = pair.a.Y > pair.b.Y ? absDiff.Y : -absDiff.Y;
@@ -75,14 +75,14 @@ public class Aoc202408 : AocPuzzle
                 while (!matrix.IsOutOfRange(dir0))
                 {
                     antinodes.Add(dir0);
-                    dir0 = new MatrixAddress(dir0.X + adx, dir0.Y + ady);
+                    dir0 = new Coord(dir0.X + adx, dir0.Y + ady);
                 }
                     
                 var dir1 = pair.b;
                 while (!matrix.IsOutOfRange(dir1))
                 {
                     antinodes.Add(dir1);
-                    dir1 = new MatrixAddress(dir1.X + bdx, dir1.Y + bdy);
+                    dir1 = new Coord(dir1.X + bdx, dir1.Y + bdy);
                 }
             }
         }
@@ -90,7 +90,7 @@ public class Aoc202408 : AocPuzzle
         return antinodes.ToList();
     }
 
-    private static IEnumerable<(MatrixAddress a, MatrixAddress b)> GetPairs(IList<MatrixAddress> antennas)
+    private static IEnumerable<(Coord a, Coord b)> GetPairs(IList<Coord> antennas)
     {
         for (var i = 0; i < antennas.Count; i++)
         {
@@ -99,7 +99,7 @@ public class Aoc202408 : AocPuzzle
                 if (i == j) 
                     continue;
                 
-                MatrixAddress[] pair = [antennas[i], antennas[j]];
+                Coord[] pair = [antennas[i], antennas[j]];
                 pair = pair.OrderBy(o => o.Y).ThenBy(o => o.X).ToArray();
                 yield return (pair[0], pair[1]);
             }

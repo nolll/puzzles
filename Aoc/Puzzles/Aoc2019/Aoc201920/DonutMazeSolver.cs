@@ -121,7 +121,7 @@ public class DonutMazeSolver
         return portals;
     }
 
-    private IEnumerable<MatrixAddress> FindLetterCoords() 
+    private IEnumerable<Coord> FindLetterCoords() 
         => _map.Coords.Where(coord => IsLetter(_map.ReadValueAt(coord)));
     
     private static bool IsLetter(char c) => c != '#' && c != '.';

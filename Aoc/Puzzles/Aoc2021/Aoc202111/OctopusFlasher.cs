@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202111;
 public class OctopusFlasher
 {
     private readonly Matrix<int> _matrix;
-    private readonly IList<MatrixAddress> _coords;
+    private readonly IList<Coord> _coords;
 
     public OctopusFlasher(string input)
     {
@@ -20,7 +20,7 @@ public class OctopusFlasher
         var i = 0;
         while(true)
         {
-            var flashed = new HashSet<MatrixAddress>();
+            var flashed = new HashSet<Coord>();
 
             IncrementAll();
             var coordsToFlash = GetCoordsToFlash();
@@ -58,7 +58,7 @@ public class OctopusFlasher
         }
     }
 
-    private IList<MatrixAddress> GetCoordsToFlash()
+    private IList<Coord> GetCoordsToFlash()
     {
         return _coords.Where(o => _matrix.ReadValueAt(o) > 9).ToList();
     }

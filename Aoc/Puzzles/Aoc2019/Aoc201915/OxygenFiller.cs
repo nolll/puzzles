@@ -24,7 +24,7 @@ public class OxygenFiller
         var recentlyFilledAddresses = _matrix.FindAddresses('X');
         while (_matrix.Values.Any(o => o == '.'))
         {
-            var addressesToFill = new List<MatrixAddress>();
+            var addressesToFill = new List<Coord>();
             foreach (var a in recentlyFilledAddresses)
             {
                 var validAddresses = _matrix.OrthogonalAdjacentCoordsTo(a).Where(o => _matrix.ReadValueAt(o) == '.');

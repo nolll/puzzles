@@ -67,7 +67,7 @@ public class Aoc202222Tests
     {
         var fromDirection = MatrixDirection.Get(fromDir);
         var toDirection = MatrixDirection.Get(toDir);
-        var (c, d) = Aoc202222.MapExitPosition(new MatrixAddress(fromX, fromY), fromDirection, 50);
+        var (c, d) = Aoc202222.MapExitPosition(new Coord(fromX, fromY), fromDirection, 50);
 
         c.X.Should().Be(toX);
         c.Y.Should().Be(toY);

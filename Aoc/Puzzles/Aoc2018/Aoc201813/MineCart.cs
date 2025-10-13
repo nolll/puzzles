@@ -6,17 +6,17 @@ public class MineCart
 {
     private MineCartTurn _nextTurn;
         
-    public MatrixAddress Coords { get; private set; }
+    public Coord Coords { get; private set; }
     public MatrixDirection Direction { get; private set; }
 
-    public MineCart(MatrixAddress coords, MatrixDirection direction)
+    public MineCart(Coord coords, MatrixDirection direction)
     {
         Coords = coords;
         Direction = direction;
         _nextTurn = MineCartTurn.Left;
     }
     
-    public void MoveTo(MatrixAddress coords)
+    public void MoveTo(Coord coords)
     {
         Coords = coords;
     }

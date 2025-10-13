@@ -64,7 +64,7 @@ public class Aoc202415 : AocPuzzle
         List<IBox> allBoxes,
         MatrixDirection direction)
     {
-        var coordToCheck = new MatrixAddress(matrix.Address.X + direction.X, matrix.Address.Y + direction.Y);
+        var coordToCheck = new Coord(matrix.Address.X + direction.X, matrix.Address.Y + direction.Y);
         var v = matrix.ReadValueAt(coordToCheck);
         if (v == Symbol.Wall)
         {
@@ -97,7 +97,7 @@ public class Aoc202415 : AocPuzzle
             var steps = hasTwoCoords && lookTwoAhead
                 ? 2
                 : 1;
-            var coordToCheck = new MatrixAddress(boxCoord.X + direction.X * steps, boxCoord.Y + direction.Y * steps);
+            var coordToCheck = new Coord(boxCoord.X + direction.X * steps, boxCoord.Y + direction.Y * steps);
             var v = matrix.ReadValueAt(coordToCheck);
             if (v == Symbol.Wall)
             {
@@ -145,13 +145,13 @@ public class Aoc202415 : AocPuzzle
         var walls = matrix.FindAddresses(Symbol.Wall);
         foreach (var wall in walls)
         {
-            wideMatrix.WriteValueAt(new MatrixAddress(wall.X * 2, wall.Y), Symbol.Wall);
-            wideMatrix.WriteValueAt(new MatrixAddress(wall.X * 2 + 1, wall.Y), Symbol.Wall);
+            wideMatrix.WriteValueAt(new Coord(wall.X * 2, wall.Y), Symbol.Wall);
+            wideMatrix.WriteValueAt(new Coord(wall.X * 2 + 1, wall.Y), Symbol.Wall);
         }
 
-        wideMatrix.MoveTo(new MatrixAddress(matrix.Address.X * 2, matrix.Address.Y));
+        wideMatrix.MoveTo(new Coord(matrix.Address.X * 2, matrix.Address.Y));
         var allBoxes = boxCoords
-            .Select(o => new BoxPart2([new MatrixAddress(o.X * 2, o.Y), new MatrixAddress(o.X * 2 + 1, o.Y)]))
+            .Select(o => new BoxPart2([new Coord(o.X * 2, o.Y), new Coord(o.X * 2 + 1, o.Y)]))
             .Cast<IBox>().ToList();
         
         matrix = wideMatrix;
@@ -186,30 +186,30 @@ public class Aoc202415 : AocPuzzle
 
     public interface IBox
     {
-        public List<MatrixAddress> Coords { get; }
+        public List<Coord> Coords { get; }
         public void Move(MatrixDirection dir);
     }
     
-    private class BoxPart1(MatrixAddress coord) : IBox
+    private class BoxPart1(Coord coord) : IBox
     {
-        private MatrixAddress _coord = coord;
-        public List<MatrixAddress> Coords => [_coord];
+        private Coord _coord = coord;
+        public List<Coord> Coords => [_coord];
         
         public void Move(MatrixDirection dir)
         {
-            _coord = new MatrixAddress(_coord.X + dir.X, _coord.Y + dir.Y);
+            _coord = new Coord(_coord.X + dir.X, _coord.Y + dir.Y);
         }
     }
     
-    private class BoxPart2(List<MatrixAddress> coords) : IBox
+    private class BoxPart2(List<Coord> coords) : IBox
     {
-        public List<MatrixAddress> Coords { get; } = coords;
+        public List<Coord> Coords { get; } = coords;
 
         public void Move(MatrixDirection dir)
         {
             for (var i = 0; i < Coords.Count; i++)
             {
-                Coords[i] = new MatrixAddress(Coords[i].X + dir.X, Coords[i].Y + dir.Y);
+                Coords[i] = new Coord(Coords[i].X + dir.X, Coords[i].Y + dir.Y);
             }
         }
     }

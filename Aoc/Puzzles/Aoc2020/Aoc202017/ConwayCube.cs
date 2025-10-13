@@ -12,7 +12,7 @@ public class ConwayCube
         for (var i = 0; i < iterations; i++)
         {
             matrix.ExtendAllDirections();
-            var ons = new List<Matrix3DAddress>();
+            var ons = new List<Coord3d>();
             for (var z = matrix.ZMin; z <= matrix.ZMax; z++)
             {
                 for (var y = matrix.YMin; y <= matrix.YMax; y++)

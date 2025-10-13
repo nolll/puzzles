@@ -269,7 +269,7 @@ public class MatrixTests
         var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
-        matrix = matrix.Slice(new MatrixAddress(1, 1), new MatrixAddress(2, 2));
+        matrix = matrix.Slice(new Coord(1, 1), new Coord(2, 2));
 
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
@@ -286,7 +286,7 @@ public class MatrixTests
         var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
-        matrix = matrix.Slice(new MatrixAddress(1, 1));
+        matrix = matrix.Slice(new Coord(1, 1));
 
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
@@ -303,7 +303,7 @@ public class MatrixTests
         var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
-        matrix = matrix.Slice(to: new MatrixAddress(2, 2));
+        matrix = matrix.Slice(to: new Coord(2, 2));
 
         matrix.Print().Should().Be(expectedMatrix.Print());
     }
@@ -319,7 +319,7 @@ public class MatrixTests
         var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
         var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
 
-        matrix = matrix.Slice(new MatrixAddress(1, 1), 2, 2);
+        matrix = matrix.Slice(new Coord(1, 1), 2, 2);
 
         matrix.Print().Should().Be(expectedMatrix.Print());
     }

@@ -76,6 +76,6 @@ public class JigsawTile
 
     public void RemoveBorder()
     {
-        Matrix = Matrix.Slice(new MatrixAddress(Matrix.XMin + 1, Matrix.YMin + 1), new MatrixAddress(Matrix.XMax - 1, Matrix.YMax - 1));
+        Matrix = Matrix.Slice(new Coord(Matrix.XMin + 1, Matrix.YMin + 1), new Coord(Matrix.XMax - 1, Matrix.YMax - 1));
     }
 }

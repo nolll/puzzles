@@ -28,7 +28,7 @@ public class HeightMap
     {
         var matrix = CreateMatrix(input);
 
-        var checkedCoords = new HashSet<MatrixAddress>();
+        var checkedCoords = new HashSet<Coord>();
         var allCoords = matrix.Coords;
         var basinSizes = new List<int>();
 
@@ -44,7 +44,7 @@ public class HeightMap
                 continue;
             }
 
-            var coordsToCheck = new HashSet<MatrixAddress> {currentCoord};
+            var coordsToCheck = new HashSet<Coord> {currentCoord};
             var basinSize = 0;
             while (coordsToCheck.Any())
             {

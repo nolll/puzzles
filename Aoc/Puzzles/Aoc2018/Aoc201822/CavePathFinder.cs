@@ -11,7 +11,7 @@ public enum CaveTool
 
 public static class CavePathFinder
 {
-    public static int StepCountTo(Matrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
+    public static int StepCountTo(Matrix<CaveRegion> matrix, Coord from, Coord to)
     {
         var coordCounts = GetCoordCounts(matrix, from, to);
         return coordCounts
@@ -20,7 +20,7 @@ public static class CavePathFinder
             .MinBy(o => o);
     }
 
-    private static IList<CaveCoordCount> GetCoordCounts(Matrix<CaveRegion> matrix, MatrixAddress from, MatrixAddress to)
+    private static IList<CaveCoordCount> GetCoordCounts(Matrix<CaveRegion> matrix, Coord from, Coord to)
     {
         var seen = new Dictionary<(int x, int y, CaveTool tool), int>();
         var queue = new List<CaveCoordCount>
@@ -33,7 +33,7 @@ public static class CavePathFinder
         while (index < queue.Count)
         {
             var current = queue[index];
-            var currentAddress = new MatrixAddress(current.X, current.Y);
+            var currentAddress = new Coord(current.X, current.Y);
             var isStart = currentAddress.Equals(from);
 
             if (!isStart)

@@ -6,8 +6,8 @@ public class Matrix4D<T> where T : struct
 {
     private readonly T _defaultValue;
     private readonly IList<IList<IList<IList<T>>>> _matrix;
-    public Matrix4DAddress Address { get; private set; }
-    public Matrix4DAddress StartAddress { get; set; }
+    public Coord4d Address { get; private set; }
+    public Coord4d StartAddress { get; set; }
 
     public IList<T> Values => _matrix.SelectMany(x => x).SelectMany(x => x).SelectMany(x => x).ToList();
     public int Duration => _matrix.Count;
@@ -18,20 +18,20 @@ public class Matrix4D<T> where T : struct
     public bool IsAtRightEdge => Address.X == Width - 1;
     public bool IsAtBottom => Address.Y == Height - 1;
     public bool IsAtLeftEdge => Address.X == 0;
-    public Matrix4DAddress Center => new(Width / 2, Height / 2, Depth / 2, Duration / 2);
+    public Coord4d Center => new(Width / 2, Height / 2, Depth / 2, Duration / 2);
 
     public Matrix4D(int width = 1, int height = 1, int depth = 1, int duration = 1, T defaultValue = default)
     {
         _defaultValue = defaultValue;
         _matrix = BuildMatrix(width, height, depth, duration, defaultValue);
-        Address = new Matrix4DAddress(0, 0, 0, 0);
-        StartAddress = new Matrix4DAddress(0, 0, 0, 0);
+        Address = new Coord4d(0, 0, 0, 0);
+        StartAddress = new Coord4d(0, 0, 0, 0);
     }
 
-    public bool TryMoveTo(Matrix4DAddress address) => MoveTo(address, false);
-    public bool MoveTo(Matrix4DAddress address) => MoveTo(address, true);
+    public bool TryMoveTo(Coord4d address) => MoveTo(address, false);
+    public bool MoveTo(Coord4d address) => MoveTo(address, true);
 
-    private bool MoveTo(Matrix4DAddress address, bool extend)
+    private bool MoveTo(Coord4d address, bool extend)
     {
         if (IsOutOfRange(address))
         {
@@ -45,30 +45,30 @@ public class Matrix4D<T> where T : struct
         var y = address.Y > 0 ? address.Y : 0;
         var z = address.Z > 0 ? address.Z : 0;
         var w = address.W > 0 ? address.W : 0;
-        Address = new Matrix4DAddress(x, y, z, w);
+        Address = new Coord4d(x, y, z, w);
         return true;
     }
 
-    public bool TryMoveTo(int x, int y, int z, int w) => MoveTo(new Matrix4DAddress(x, y, z, w), false);
-    public bool MoveTo(int x, int y, int z, int w) => MoveTo(new Matrix4DAddress(x, y, z, w), true);
+    public bool TryMoveTo(int x, int y, int z, int w) => MoveTo(new Coord4d(x, y, z, w), false);
+    public bool MoveTo(int x, int y, int z, int w) => MoveTo(new Coord4d(x, y, z, w), true);
     public bool TryMoveUp(int steps = 1) => MoveUp(steps, false);
     public bool MoveUp(int steps = 1) => MoveUp(steps, true);
-    private bool MoveUp(int steps, bool extend) => MoveTo(new Matrix4DAddress(Address.X, Address.Y - steps, Address.Z, Address.W), extend);
+    private bool MoveUp(int steps, bool extend) => MoveTo(new Coord4d(Address.X, Address.Y - steps, Address.Z, Address.W), extend);
     public bool TryMoveRight(int steps = 1) => MoveRight(steps, false);
     public bool MoveRight(int steps = 1) => MoveRight(steps, true);
-    private bool MoveRight(int steps, bool extend) => MoveTo(new Matrix4DAddress(Address.X + steps, Address.Y, Address.Z, Address.W), extend);
+    private bool MoveRight(int steps, bool extend) => MoveTo(new Coord4d(Address.X + steps, Address.Y, Address.Z, Address.W), extend);
     public bool TryMoveDown(int steps = 1) => MoveDown(steps, false);
     public bool MoveDown(int steps = 1) => MoveDown(steps, true);
-    private bool MoveDown(int steps, bool extend) => MoveTo(new Matrix4DAddress(Address.X, Address.Y + steps, Address.Z, Address.W), extend);
+    private bool MoveDown(int steps, bool extend) => MoveTo(new Coord4d(Address.X, Address.Y + steps, Address.Z, Address.W), extend);
     public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
     public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
-    private bool MoveLeft(int steps, bool extend) => MoveTo(new Matrix4DAddress(Address.X - steps, Address.Y, Address.Z, Address.W), extend);
+    private bool MoveLeft(int steps, bool extend) => MoveTo(new Coord4d(Address.X - steps, Address.Y, Address.Z, Address.W), extend);
     public T ReadValue() => ReadValueAt(Address.X, Address.Y, Address.Z, Address.W);
-    public T ReadValueAt(Matrix4DAddress address) => ReadValueAt(address.X, address.Y, address.Z, address.W);
+    public T ReadValueAt(Coord4d address) => ReadValueAt(address.X, address.Y, address.Z, address.W);
     public T ReadValueAt(int x, int y, int z, int w) => _matrix[w][z][y][x];
     public void WriteValue(T value) => _matrix[Address.W][Address.Z][Address.Y][Address.X] = value;
 
-    public bool IsOutOfRange(Matrix4DAddress address) =>
+    public bool IsOutOfRange(Coord4d address) =>
         address.W >= Duration ||
         address.W < 0 ||
         address.Z >= Depth ||
@@ -79,9 +79,9 @@ public class Matrix4D<T> where T : struct
         address.X < 0;
 
     public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<Matrix4DAddress> OrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
+    public IList<Coord4d> OrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-    private IList<Matrix4DAddress> PossibleOrthogonalAdjacentCoords =>
+    private IList<Coord4d> PossibleOrthogonalAdjacentCoords =>
     [
         new(Address.X + 1, Address.Y, Address.Z, Address.W),
         new(Address.X - 1, Address.Y, Address.Z, Address.W),
@@ -94,9 +94,9 @@ public class Matrix4D<T> where T : struct
     ];
 
     public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<Matrix4DAddress> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
+    public IList<Coord4d> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-    private IEnumerable<Matrix4DAddress> AllPossibleAdjacentCoords
+    private IEnumerable<Coord4d> AllPossibleAdjacentCoords
     {
         get
         {
@@ -108,7 +108,7 @@ public class Matrix4D<T> where T : struct
                     {
                         foreach (var dx in MatrixConstants.AdjacentDeltas)
                         {
-                            var coord = new Matrix4DAddress(Address.X + dx, Address.Y + dy, Address.Z + dz, Address.W + dw);
+                            var coord = new Coord4d(Address.X + dx, Address.Y + dy, Address.Z + dz, Address.W + dw);
                             if(!coord.Equals(Address))
                                 yield return coord;
                         }
@@ -169,7 +169,7 @@ public class Matrix4D<T> where T : struct
         return matrix;
     }
 
-    private void ExtendMatrix(Matrix4DAddress address)
+    private void ExtendMatrix(Coord4d address)
     {
         ExtendX(address);
         ExtendY(address);
@@ -177,80 +177,80 @@ public class Matrix4D<T> where T : struct
         ExtendW(address);
     }
 
-    private void ExtendX(Matrix4DAddress address)
+    private void ExtendX(Coord4d address)
     {
         if (address.X < 0)
             ExtendLeft(address);
         ExtendRight(address);
     }
 
-    private void ExtendLeft(Matrix4DAddress address)
+    private void ExtendLeft(Coord4d address)
     {
         AddCols(-address.X, MatrixAddMode.Prepend);
-        StartAddress = new Matrix4DAddress(StartAddress.X - address.X, StartAddress.Y, StartAddress.Z, StartAddress.W);
+        StartAddress = new Coord4d(StartAddress.X - address.X, StartAddress.Y, StartAddress.Z, StartAddress.W);
     }
 
-    private void ExtendRight(Matrix4DAddress address)
+    private void ExtendRight(Coord4d address)
     {
         var extendBy = address.X - (Width - 1);
         if (extendBy > 0)
             AddCols(extendBy, MatrixAddMode.Append);
     }
 
-    private void ExtendY(Matrix4DAddress address)
+    private void ExtendY(Coord4d address)
     {
         if (address.Y < 0)
             ExtendTop(address);
         ExtendBottom(address);
     }
 
-    private void ExtendTop(Matrix4DAddress address)
+    private void ExtendTop(Coord4d address)
     {
         AddRows(-address.Y, MatrixAddMode.Prepend);
-        StartAddress = new Matrix4DAddress(StartAddress.X, StartAddress.Y - address.Y, StartAddress.Z, StartAddress.W);
+        StartAddress = new Coord4d(StartAddress.X, StartAddress.Y - address.Y, StartAddress.Z, StartAddress.W);
     }
 
-    private void ExtendBottom(Matrix4DAddress address)
+    private void ExtendBottom(Coord4d address)
     {
         var extendBy = address.Y - (Height - 1);
         if (extendBy > 0)
             AddRows(extendBy, MatrixAddMode.Append);
     }
 
-    private void ExtendZ(Matrix4DAddress address)
+    private void ExtendZ(Coord4d address)
     {
         if (address.Z < 0)
             ExtendClose(address);
         ExtendFar(address);
     }
 
-    private void ExtendClose(Matrix4DAddress address)
+    private void ExtendClose(Coord4d address)
     {
         AddLevels(-address.Z, MatrixAddMode.Prepend);
-        StartAddress = new Matrix4DAddress(StartAddress.X, StartAddress.Y, StartAddress.Z - address.Z, StartAddress.W);
+        StartAddress = new Coord4d(StartAddress.X, StartAddress.Y, StartAddress.Z - address.Z, StartAddress.W);
     }
 
-    private void ExtendFar(Matrix4DAddress address)
+    private void ExtendFar(Coord4d address)
     {
         var extendBy = address.Z - (Depth - 1);
         if (extendBy > 0)
             AddLevels(extendBy, MatrixAddMode.Append);
     }
 
-    private void ExtendW(Matrix4DAddress address)
+    private void ExtendW(Coord4d address)
     {
         if (address.W < 0)
             ExtendNow(address);
         ExtendThen(address);
     }
 
-    private void ExtendNow(Matrix4DAddress address)
+    private void ExtendNow(Coord4d address)
     {
         AddTime(-address.W, MatrixAddMode.Prepend);
-        StartAddress = new Matrix4DAddress(StartAddress.X, StartAddress.Y, StartAddress.Z, StartAddress.W - address.W);
+        StartAddress = new Coord4d(StartAddress.X, StartAddress.Y, StartAddress.Z, StartAddress.W - address.W);
     }
 
-    private void ExtendThen(Matrix4DAddress address)
+    private void ExtendThen(Coord4d address)
     {
         var extendBy = address.W - (Duration - 1);
         if (extendBy > 0)

@@ -44,7 +44,7 @@ public class Aoc202416 : AocPuzzle
         return new PuzzleResult(visited.Count, "6f785a700e3bd5c59db14bf9f8eb6d46");
     }
 
-    private HashSet<MatrixAddress> FindVisitedCoords(Matrix<char> matrix, MatrixAddress start, MatrixAddress end)
+    private HashSet<Coord> FindVisitedCoords(Matrix<char> matrix, Coord start, Coord end)
     {
         var startKey = $"{MatrixDirection.Right}|{start.Id}";
         List<string> endKeys = [$"{MatrixDirection.Right}|{end.Id}", $"{MatrixDirection.Up}|{end.Id}"];
@@ -54,7 +54,7 @@ public class Aoc202416 : AocPuzzle
         var usedCoords = paths
             .SelectMany(o => o)
             .Select(Numbers.IntsFromString)
-            .Select(o => new MatrixAddress(o[0], o[1]))
+            .Select(o => new Coord(o[0], o[1]))
             .ToHashSet();
 
         return usedCoords;

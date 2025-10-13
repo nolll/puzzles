@@ -66,7 +66,7 @@ public class Euler011 : EulerPuzzle
                 if (!IsInMatrix(x, y))
                     return 0;
 
-                sum *= matrix.ReadValueAt(new MatrixAddress(x, y));
+                sum *= matrix.ReadValueAt(new Coord(x, y));
             }
 
             return sum;

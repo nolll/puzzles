@@ -43,10 +43,10 @@ public class LavaCubes
             matrix.WriteValue('#');
         }
 
-        var start = new Matrix3DAddress(0, 0, 0);
-        var queue = new Queue<Matrix3DAddress>();
+        var start = new Coord3d(0, 0, 0);
+        var queue = new Queue<Coord3d>();
         queue.Enqueue(start);
-        var seen = new HashSet<Matrix3DAddress>();
+        var seen = new HashSet<Coord3d>();
 
         while (queue.Count > 0)
         {
@@ -62,14 +62,14 @@ public class LavaCubes
             }
         }
 
-        var trappedCoords = new List<Matrix3DAddress>();
+        var trappedCoords = new List<Coord3d>();
         for (var x = matrix.XMin; x <= matrix.XMax; x++)
         {
             for (var y = matrix.YMin; y <= matrix.YMax; y++)
             {
                 for (var z = matrix.ZMin; z <= matrix.ZMax; z++)
                 {
-                    var c = new Matrix3DAddress(x, y, z);
+                    var c = new Coord3d(x, y, z);
                     if (matrix.ReadValueAt(c) == '.')
                         trappedCoords.Add(c);
                 }

@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202214;
 
 public class FallingSand
 {
-    private readonly MatrixAddress _sandSource = new(500, 0);
+    private readonly Coord _sandSource = new(500, 0);
 
     public int Part1(string input)
     {
@@ -60,13 +60,13 @@ public class FallingSand
         var coordLists = lines.Select(o => o.Split(" -> "));
         foreach (var coordList in coordLists)
         {
-            var coords = new List<MatrixAddress>();
+            var coords = new List<Coord>();
             foreach (var coord in coordList)
             {
                 var parts = coord.Split(',');
                 var x = int.Parse(parts[0]);
                 var y = int.Parse(parts[1]);
-                coords.Add(new MatrixAddress(x, y));
+                coords.Add(new Coord(x, y));
             }
 
             for (var i = 1; i < coords.Count; i++)
@@ -119,9 +119,9 @@ public class FallingSand
         return matrix;
     }
 
-    private static bool TryMove(Matrix<char> matrix, MatrixAddress currentSand, out MatrixAddress newSand)
+    private static bool TryMove(Matrix<char> matrix, Coord currentSand, out Coord newSand)
     {
-        var down = new MatrixAddress(currentSand.X, currentSand.Y + 1);
+        var down = new Coord(currentSand.X, currentSand.Y + 1);
         matrix.MoveTo(down);
 
         if (matrix.ReadValueAt(down) == '.')
@@ -130,7 +130,7 @@ public class FallingSand
             return true;
         }
 
-        var downLeft = new MatrixAddress(down.X - 1, down.Y);
+        var downLeft = new Coord(down.X - 1, down.Y);
         matrix.MoveTo(downLeft);
         if (matrix.ReadValueAt(downLeft) == '.')
         {
@@ -138,7 +138,7 @@ public class FallingSand
             return true;
         }
 
-        var downRight = new MatrixAddress(down.X + 1, down.Y);
+        var downRight = new Coord(down.X + 1, down.Y);
         matrix.MoveTo(downRight);
         if (matrix.ReadValueAt(downRight) == '.')
         {

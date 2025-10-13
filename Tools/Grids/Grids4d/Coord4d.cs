@@ -1,6 +1,6 @@
 namespace Pzl.Tools.Grids.Grids4d;
 
-public class Matrix4DAddress : IEquatable<Matrix4DAddress>
+public class Coord4d : IEquatable<Coord4d>
 {
     public int X { get; }
     public int Y { get; }
@@ -8,7 +8,7 @@ public class Matrix4DAddress : IEquatable<Matrix4DAddress>
     public int W { get; }
     public string Id { get; }
 
-    public Matrix4DAddress(int x, int y, int z, int w)
+    public Coord4d(int x, int y, int z, int w)
     {
         X = x;
         Y = y;
@@ -17,10 +17,10 @@ public class Matrix4DAddress : IEquatable<Matrix4DAddress>
         Id = $"{x},{y},{z},{w}";
     }
 
-    public int ManhattanDistanceTo(Matrix4DAddress other) => 
+    public int ManhattanDistanceTo(Coord4d other) => 
         Math.Abs(X - other.X) + Math.Abs(Y - other.Y) + Math.Abs(Z - other.Z) + Math.Abs(W - other.W);
 
-    public bool Equals(Matrix4DAddress? other)
+    public bool Equals(Coord4d? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -32,7 +32,7 @@ public class Matrix4DAddress : IEquatable<Matrix4DAddress>
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != this.GetType()) return false;
-        return Equals((Matrix4DAddress) obj);
+        return Equals((Coord4d) obj);
     }
 
     public override int GetHashCode() => HashCode.Combine(X, Y, Z, W, Id);

@@ -24,12 +24,12 @@ public class Ece202418 : EverybodyEventPuzzle
         var palmtrees = matrix.FindAddresses('P');
         var current = matrix.Coords.Where(o => (o.X == 0 || o.X == matrix.XMax) && matrix.ReadValueAt(o) == '.')
             .ToHashSet();
-        var reached = new HashSet<MatrixAddress>();
-        var seen = new HashSet<MatrixAddress>();
+        var reached = new HashSet<Coord>();
+        var seen = new HashSet<Coord>();
         var time = 0;
         while (reached.Count < palmtrees.Count)
         {
-            var next = new HashSet<MatrixAddress>();
+            var next = new HashSet<Coord>();
             foreach (var c in current)
             {
                 var adjacent = matrix.OrthogonalAdjacentCoordsTo(c);
@@ -60,18 +60,18 @@ public class Ece202418 : EverybodyEventPuzzle
         var matrix = MatrixBuilder.BuildCharMatrix(input);
         var palmtrees = matrix.FindAddresses('P');
         var possibleStarts = matrix.FindAddresses('.');
-        var hits = possibleStarts.ToDictionary(k => k, _ => new Dictionary<MatrixAddress, int>());
+        var hits = possibleStarts.ToDictionary(k => k, _ => new Dictionary<Coord, int>());
         var allcurrent = palmtrees
-            .Select(o => (palmtree: o, current: new HashSet<MatrixAddress> { o }, seen: new HashSet<MatrixAddress>()))
+            .Select(o => (palmtree: o, current: new HashSet<Coord> { o }, seen: new HashSet<Coord>()))
             .ToList();
         
         var time = 1;
         while (hits.Values.Any(o => o.Count < palmtrees.Count))
         {
-            var allnext = new List<(MatrixAddress palmtree, HashSet<MatrixAddress> current, HashSet<MatrixAddress> seen)>();
+            var allnext = new List<(Coord palmtree, HashSet<Coord> current, HashSet<Coord> seen)>();
             foreach (var (palmtree, current, seen) in allcurrent)
             {
-                var next = new HashSet<MatrixAddress>();
+                var next = new HashSet<Coord>();
                 foreach (var c in current)
                 {
                     var adjacent = matrix.OrthogonalAdjacentCoordsTo(c);

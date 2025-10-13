@@ -53,8 +53,8 @@ public class TrenchMap
                 }
             }
 
-            var sliceFrom = new MatrixAddress(outputImage.XMin + 1, outputImage.YMin + 1);
-            var sliceTo = new MatrixAddress(outputImage.XMax - 1, outputImage.YMax - 1);
+            var sliceFrom = new Coord(outputImage.XMin + 1, outputImage.YMin + 1);
+            var sliceTo = new Coord(outputImage.XMax - 1, outputImage.YMax - 1);
             outputImage = outputImage.Slice(sliceFrom, sliceTo);
             inputImage = outputImage;
         }

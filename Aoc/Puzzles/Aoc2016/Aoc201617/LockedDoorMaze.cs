@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201617;
 public class LockedDoorMaze
 {
     private readonly HashFactory _hashFactory;
-    private readonly MatrixAddress _target;
+    private readonly Coord _target;
 
     public string? ShortestPath { get; private set; }
     public string? LongestPath { get; private set; }
@@ -14,13 +14,13 @@ public class LockedDoorMaze
     public LockedDoorMaze()
     {
         _hashFactory = new HashFactory();
-        _target = new MatrixAddress(3, 3);
+        _target = new Coord(3, 3);
     }
 
     public void FindPaths(string passcode)
     {
         var finishedPaths = new List<MazeStep>();
-        var openPaths = new List<MazeStep> { new MazeStep(new MatrixAddress(0, 0), "") };
+        var openPaths = new List<MazeStep> { new MazeStep(new Coord(0, 0), "") };
         while (openPaths.Any())
         {
             var current = openPaths.First();
@@ -37,22 +37,22 @@ public class LockedDoorMaze
             var y = current.Address.Y;
 
             if (CanMoveUp(current.Address, hash))
-                openPaths.Add(new MazeStep(new MatrixAddress(x, y - 1), current.Path + 'U'));
+                openPaths.Add(new MazeStep(new Coord(x, y - 1), current.Path + 'U'));
             if (CanMoveDown(current.Address, hash))
-                openPaths.Add(new MazeStep(new MatrixAddress(x, y + 1), current.Path + 'D'));
+                openPaths.Add(new MazeStep(new Coord(x, y + 1), current.Path + 'D'));
             if (CanMoveLeft(current.Address, hash))
-                openPaths.Add(new MazeStep(new MatrixAddress(x - 1, y), current.Path + 'L'));
+                openPaths.Add(new MazeStep(new Coord(x - 1, y), current.Path + 'L'));
             if (CanMoveRight(current.Address, hash))
-                openPaths.Add(new MazeStep(new MatrixAddress(x + 1, y), current.Path + 'R'));
+                openPaths.Add(new MazeStep(new Coord(x + 1, y), current.Path + 'R'));
         }
 
         ShortestPath = finishedPaths.OrderBy(o => o.Path.Length).First().Path;
         LongestPath = finishedPaths.OrderByDescending(o => o.Path.Length).First().Path;
     }
 
-    private bool CanMoveUp(MatrixAddress currentAddress, string hash) => currentAddress.Y > 0 && CanMove(hash[0]);
-    private bool CanMoveDown(MatrixAddress currentAddress, string hash) => currentAddress.Y < _target.Y && CanMove(hash[1]);
-    private bool CanMoveLeft(MatrixAddress currentAddress, string hash) => currentAddress.X > 0 && CanMove(hash[2]);
-    private bool CanMoveRight(MatrixAddress currentAddress, string hash) => currentAddress.X < _target.X && CanMove(hash[3]);
+    private bool CanMoveUp(Coord currentAddress, string hash) => currentAddress.Y > 0 && CanMove(hash[0]);
+    private bool CanMoveDown(Coord currentAddress, string hash) => currentAddress.Y < _target.Y && CanMove(hash[1]);
+    private bool CanMoveLeft(Coord currentAddress, string hash) => currentAddress.X > 0 && CanMove(hash[2]);
+    private bool CanMoveRight(Coord currentAddress, string hash) => currentAddress.X < _target.X && CanMove(hash[3]);
     private bool CanMove(char c) => c > 'a';
 }

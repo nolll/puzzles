@@ -11,7 +11,7 @@ public class BeaconZone
         var pairs = lines.Select(ParsePair).ToList();
 
         var beacons = pairs.Select(o => o.beacon).ToList();
-        var beaconDistances = new Dictionary<MatrixAddress, int>();
+        var beaconDistances = new Dictionary<Coord, int>();
         foreach (var (sensor, beacon) in pairs)
         {
             var distance = sensor.ManhattanDistanceTo(beacon);
@@ -26,7 +26,7 @@ public class BeaconZone
         var count = 0;
         for (var x = minx; x <= maxx; x++)
         {
-            var current = new MatrixAddress(x, y);
+            var current = new Coord(x, y);
 
             if (beacons.Contains(current))
                 continue;
@@ -43,7 +43,7 @@ public class BeaconZone
         var lines = StringReader.ReadLines(input, false);
         var pairs = lines.Select(ParsePair).ToList();
 
-        var beaconDistances = new Dictionary<MatrixAddress, int>();
+        var beaconDistances = new Dictionary<Coord, int>();
         foreach (var (sensor, beacon) in pairs)
         {
             var distance = sensor.ManhattanDistanceTo(beacon);
@@ -63,7 +63,7 @@ public class BeaconZone
         return 0;
     }
 
-    private static List<Interval> GetIntervalsForRow(int row, int minX, int maxX, Dictionary<MatrixAddress, int> beaconDistances)
+    private static List<Interval> GetIntervalsForRow(int row, int minX, int maxX, Dictionary<Coord, int> beaconDistances)
     {
         var intervals = new List<Interval>();
 
@@ -83,7 +83,7 @@ public class BeaconZone
         return IntervalMerger.MergeIntervals(intervals);
     }
 
-    private static (MatrixAddress sensor, MatrixAddress beacon) ParsePair(string input)
+    private static (Coord sensor, Coord beacon) ParsePair(string input)
     {
         var parts = input.Split(':');
         var sensorPart = parts[0].Trim();
@@ -94,6 +94,6 @@ public class BeaconZone
         parts = beaconPart.Split(' ');
         var beaconX = int.Parse(parts[4].Split('=')[1].Trim(','));
         var beaconY = int.Parse(parts[5].Split('=')[1]);
-        return (new MatrixAddress(sensorX, sensorY), new MatrixAddress(beaconX, beaconY));
+        return (new Coord(sensorX, sensorY), new Coord(beaconX, beaconY));
     }
 }

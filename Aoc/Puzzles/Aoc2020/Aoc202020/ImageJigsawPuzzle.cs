@@ -45,35 +45,35 @@ public class ImageJigsawPuzzle
     private Grid<char> ArrangeTilesAndPaintImage()
     {
         var cornerTilesLeft = CornerTiles.ToList();
-        var tileMatrix = new Grid<long>();
+        var tileGrid = new Grid<long>();
         var currentTile = cornerTilesLeft.First();
 
-        tileMatrix.MoveTo(0, 0);
-        tileMatrix.WriteValue(currentTile.Id);
+        tileGrid.MoveTo(0, 0);
+        tileGrid.WriteValue(currentTile.Id);
 
         new TopLeftCornerMatcher(_matchesByEdge).TryAllRotations(currentTile);
 
-        while (tileMatrix.Values.Count(o => o != 0) < TilesById.Values.Count)
+        while (tileGrid.Values.Count(o => o != 0) < TilesById.Values.Count)
         {
             var edgeToFit = currentTile.Edges["right"];
             var matches = _matchesByEdge[edgeToFit];
             currentTile = matches.FirstOrDefault(o => o.Id != currentTile.Id);
             if (currentTile != null)
             {
-                tileMatrix.MoveRight();
+                tileGrid.MoveRight();
                 new LeftEdgeMatcher(edgeToFit).TryAllRotations(currentTile);
-                tileMatrix.WriteValue(currentTile.Id);
+                tileGrid.WriteValue(currentTile.Id);
             }
             else
             {
-                tileMatrix.MoveTo(0, tileMatrix.Address.Y);
-                currentTile = TilesById[tileMatrix.ReadValue()];
-                tileMatrix.MoveDown();
+                tileGrid.MoveTo(0, tileGrid.Coord.Y);
+                currentTile = TilesById[tileGrid.ReadValue()];
+                tileGrid.MoveDown();
                 edgeToFit = currentTile.Edges["bottom"];
                 matches = _matchesByEdge[edgeToFit];
                 currentTile = matches.First(o => o.Id != currentTile.Id);
                 new TopEdgeMatcher(edgeToFit).TryAllRotations(currentTile);
-                tileMatrix.WriteValue(currentTile.Id);
+                tileGrid.WriteValue(currentTile.Id);
             }
         }
 
@@ -82,12 +82,12 @@ public class ImageJigsawPuzzle
             tile.RemoveBorder();
         }
 
-        var imageMatrix = new Grid<char>();
-        for (var tileY = 0; tileY < tileMatrix.Height; tileY++)
+        var imageGrid = new Grid<char>();
+        for (var tileY = 0; tileY < tileGrid.Height; tileY++)
         {
-            for (var tileX = 0; tileX < tileMatrix.Width; tileX++)
+            for (var tileX = 0; tileX < tileGrid.Width; tileX++)
             {
-                var tile = TilesById[tileMatrix.ReadValueAt(tileX, tileY)];
+                var tile = TilesById[tileGrid.ReadValueAt(tileX, tileY)];
                 var tileOffsetX = tileX * tile.Grid.Width;
                 var tileOffsetY = tileY * tile.Grid.Height;
                 for (var localY = 0; localY < tile.Grid.Height; localY++)
@@ -97,12 +97,12 @@ public class ImageJigsawPuzzle
                         var x = localX + tileOffsetX;
                         var y = localY + tileOffsetY;
 
-                        imageMatrix.WriteValueAt(x, y, tile.Grid.ReadValueAt(localX, localY));
+                        imageGrid.WriteValueAt(x, y, tile.Grid.ReadValueAt(localX, localY));
                     }
                 }
             }
         }
-        return imageMatrix;
+        return imageGrid;
     }
 
     private static Dictionary<long, List<JigsawTile>> FindMatchingTiles(IList<JigsawTile> tiles)

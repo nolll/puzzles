@@ -70,8 +70,8 @@ public class JigsawTile
     {
         var parts = s.Split(':');
         var id = long.Parse(parts[0].Split(' ')[1]);
-        var matrix = GridBuilder.BuildCharGrid(parts[1].Trim());
-        return new JigsawTile(id, matrix);
+        var grid = GridBuilder.BuildCharGrid(parts[1].Trim());
+        return new JigsawTile(id, grid);
     }
 
     public void RemoveBorder()

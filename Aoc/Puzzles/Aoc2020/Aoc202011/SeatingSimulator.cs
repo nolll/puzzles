@@ -32,7 +32,7 @@ public abstract class SeatingSimulator
 
     private void RunOnce()
     {
-        var newMatrix = Grid.Clone();
+        var newGrid = Grid.Clone();
 
         foreach (var coord in Grid.Coords)
         {
@@ -42,11 +42,11 @@ public abstract class SeatingSimulator
             var neighborCount = adjacentValues.Count(o => o == OccupiedChair);
             var newValue = GetSeatStatus(currentValue, neighborCount);
 
-            newMatrix.MoveTo(coord);
-            newMatrix.WriteValue(newValue);
+            newGrid.MoveTo(coord);
+            newGrid.WriteValue(newValue);
         }
         
-        Grid = newMatrix;
+        Grid = newGrid;
     }
 
     protected abstract IList<char> GetAdjacentSeats();

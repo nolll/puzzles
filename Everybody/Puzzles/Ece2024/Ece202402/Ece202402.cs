@@ -26,7 +26,7 @@ public class Ece202402 : EverybodyEventPuzzle
     public PuzzleResult RunPart3(string input)
     {
         var (words, strings) = ParseWordsAndStrings(input);
-        var count = CountRunicSymbolsInMatrix(words, strings);
+        var count = CountRunicSymbolsInGrid(words, strings);
         
         return new PuzzleResult(count, "45b4423987a6cf8c24dba08ecb86fc71");
     }
@@ -59,7 +59,7 @@ public class Ece202402 : EverybodyEventPuzzle
     private static IEnumerable<int> FindRunicSymbols(string word, string s) => 
         FindMatchingIndices(s, word).Concat(FindMatchingIndices(s, word.ReverseString()));
 
-    public int CountRunicSymbolsInMatrix(string[] words, string[] rows)
+    public int CountRunicSymbolsInGrid(string[] words, string[] rows)
     {
         var rowWidth = rows.First().Length;
         var horizontalRows = rows.Select(o => $"{o}{o}").ToList();

@@ -1,5 +1,3 @@
-using Pzl.Tools.Lists;
-
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201717;
 
 public class SpinlockRunnerPart1

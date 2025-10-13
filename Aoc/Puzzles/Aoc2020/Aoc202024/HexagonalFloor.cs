@@ -56,7 +56,7 @@ public class HexagonalFloor
         _grid.WriteValue(White);
         foreach (var instruction in _instructions)
         {
-            _grid.MoveTo(_grid.StartAddress);
+            _grid.MoveTo(_grid.StartCoord);
             foreach (var step in instruction)
             {
                 switch (step)
@@ -168,7 +168,7 @@ public class HexagonalFloor
                     {
                         if (_grid.TryMoveTo(address) && _grid.ReadValueAt(address) == Nothing)
                         {
-                            tilesToFill.Add(_grid.Address);
+                            tilesToFill.Add(_grid.Coord);
                         }
                     }
                 }
@@ -183,7 +183,7 @@ public class HexagonalFloor
 
     private List<char> GetAdjacent6Values(Coord coord)
     {
-        var currentAddress = _grid.Address;
+        var currentAddress = _grid.Coord;
         var addresses = GetAdjacent6Coords(coord);
         var values = new List<char>();
         foreach (var address in addresses)

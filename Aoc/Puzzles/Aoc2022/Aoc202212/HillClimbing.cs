@@ -6,26 +6,23 @@ public class HillClimbing
 {
     public int Part1(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var from = FindFromCoord(matrix);
-        var to = FindToCoord(matrix);
-        matrix.WriteValueAt(from, 'a');
-        matrix.WriteValueAt(to, 'z');
-        var steps = StepCountTo(matrix, from, to);
-
-        return steps;
+        var grid = GridBuilder.BuildCharGrid(input);
+        var from = FindFromCoord(grid);
+        var to = FindToCoord(grid);
+        grid.WriteValueAt(from, 'a');
+        grid.WriteValueAt(to, 'z');
+        return StepCountTo(grid, from, to);
     }
 
     public int Part2(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var from = FindFromCoord(matrix); 
-        var to = FindToCoord(matrix);
-        matrix.WriteValueAt(from, 'a');
-        matrix.WriteValueAt(to, 'z');
-        var startingPoints = matrix.Coords.Where(coord => matrix.ReadValueAt(coord) == 'a').ToList();
-        var stepCount = StepCountTo(matrix, startingPoints, to);
-        return stepCount;
+        var grid = GridBuilder.BuildCharGrid(input);
+        var from = FindFromCoord(grid); 
+        var to = FindToCoord(grid);
+        grid.WriteValueAt(from, 'a');
+        grid.WriteValueAt(to, 'z');
+        var startingPoints = grid.Coords.Where(coord => grid.ReadValueAt(coord) == 'a').ToList();
+        return StepCountTo(grid, startingPoints, to);
     }
 
     private static Coord FindFromCoord(Grid<char> grid) => grid.Coords.First(o => grid.ReadValueAt(o) == 'S');

@@ -1,6 +1,6 @@
 namespace Pzl.Tools.Grids;
 
-public static class MatrixConstants
+public static class GridConstants
 {
     public static readonly int[] AdjacentDeltas = [-1, 0, 1];
 

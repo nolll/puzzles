@@ -9,52 +9,52 @@ public class FallingSand
 
     public int Part1(string input)
     {
-        var matrix = BuildMatrix(input, 1);
+        var grid = BuildGrid(input, 1);
 
-        matrix.MoveTo(_sandSource);
-        while (matrix.ReadValueAt(_sandSource) == '.')
+        grid.MoveTo(_sandSource);
+        while (grid.ReadValueAt(_sandSource) == '.')
         {
             var currentSand = _sandSource;
 
-            while (TryMove(matrix, currentSand, out var newSand))
+            while (TryMove(grid, currentSand, out var newSand))
             {
                 currentSand = newSand;
 
-                if (currentSand.Y == matrix.Height - 1)
+                if (currentSand.Y == grid.Height - 1)
                     break;
             }
 
-            if (currentSand.Y == matrix.Height - 1)
+            if (currentSand.Y == grid.Height - 1)
                 break;
 
-            matrix.WriteValueAt(currentSand, 'o');
+            grid.WriteValueAt(currentSand, 'o');
         }
 
-        return matrix.Values.Count(o => o == 'o');
+        return grid.Values.Count(o => o == 'o');
     }
 
     public int Part2(string input)
     {
-        var matrix = BuildMatrix(input, 2);
+        var grid = BuildGrid(input, 2);
 
-        matrix.MoveTo(_sandSource);
-        while (matrix.ReadValueAt(_sandSource) == '.')
+        grid.MoveTo(_sandSource);
+        while (grid.ReadValueAt(_sandSource) == '.')
         {
             var currentSand = _sandSource;
-            while (TryMove(matrix, currentSand, out var newSand))
+            while (TryMove(grid, currentSand, out var newSand))
             {
                 currentSand = newSand;
             }
 
-            matrix.WriteValueAt(currentSand, 'o');
+            grid.WriteValueAt(currentSand, 'o');
         }
 
-        return matrix.Values.Count(o => o == 'o');
+        return grid.Values.Count(o => o == 'o');
     }
 
-    private static Grid<char> BuildMatrix(string input, int part)
+    private static Grid<char> BuildGrid(string input, int part)
     {
-        var matrix = new Grid<char>(1, 1, '.');
+        var grid = new Grid<char>(1, 1, '.');
         var lines = StringReader.ReadLines(input, false);
 
         var coordLists = lines.Select(o => o.Split(" -> "));
@@ -84,8 +84,8 @@ public class FallingSand
                     var x = a.X;
                     for (var y = minY; y <= maxY; y++)
                     {
-                        matrix.MoveTo(x, y);
-                        matrix.WriteValueAt(x, y, '#');
+                        grid.MoveTo(x, y);
+                        grid.WriteValueAt(x, y, '#');
                     }
                 }
                 else
@@ -93,8 +93,8 @@ public class FallingSand
                     var y = a.Y;
                     for (var x = minX; x <= maxX; x++)
                     {
-                        matrix.MoveTo(x, y);
-                        matrix.WriteValueAt(x, y, '#');
+                        grid.MoveTo(x, y);
+                        grid.WriteValueAt(x, y, '#');
                     }
                 }
             }
@@ -102,21 +102,21 @@ public class FallingSand
 
         if (part == 1)
         {
-            matrix.ExtendRight();
+            grid.ExtendRight();
         }
 
         if (part == 2)
         {
-            matrix.ExtendRight(matrix.Width);
-            matrix.ExtendDown(2);
-            var sy = matrix.Height - 1;
-            for (var x = 0; x < matrix.Width; x++)
+            grid.ExtendRight(grid.Width);
+            grid.ExtendDown(2);
+            var sy = grid.Height - 1;
+            for (var x = 0; x < grid.Width; x++)
             {
-                matrix.WriteValueAt(x, sy, '#');
+                grid.WriteValueAt(x, sy, '#');
             }
         }
 
-        return matrix;
+        return grid;
     }
 
     private static bool TryMove(Grid<char> grid, Coord currentSand, out Coord newSand)

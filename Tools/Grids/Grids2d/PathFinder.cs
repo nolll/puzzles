@@ -11,21 +11,21 @@ public static class PathFinder
         Func<Grid<char>, Coord, List<Coord>>? neighborFunc = null)
     {
         var coordCounts = GetCoordCounts(grid, from, to, neighborFunc ?? GetNeighbors);
-        var pathMatrix = new Grid<int>(grid.Width, grid.Height, -1);
+        var pathGrid = new Grid<int>(grid.Width, grid.Height, -1);
         foreach (var coordCount in coordCounts)
         {
-            pathMatrix.MoveTo(coordCount.X, coordCount.Y);
-            pathMatrix.WriteValue(coordCount.Count);
+            pathGrid.MoveTo(coordCount.X, coordCount.Y);
+            pathGrid.WriteValue(coordCount.Count);
         }
 
         var path = new List<Coord>();
         var currentAddress = from;
         while (!currentAddress.Equals(to))
         {
-            pathMatrix.MoveTo(currentAddress);
-            var adjacentCoords = pathMatrix.OrthogonalAdjacentCoords
-                .Where(o => pathMatrix.ReadValueAt(o) > -1)
-                .OrderBy(o => pathMatrix.ReadValueAt(o))
+            pathGrid.MoveTo(currentAddress);
+            var adjacentCoords = pathGrid.OrthogonalAdjacentCoords
+                .Where(o => pathGrid.ReadValueAt(o) > -1)
+                .OrderBy(o => pathGrid.ReadValueAt(o))
                 .ThenBy(o => o.Y)
                 .ThenBy(o => o.X)
                 .ToList();
@@ -52,7 +52,7 @@ public static class PathFinder
         {
             var next = queue[index];
             grid.MoveTo(next.X, next.Y);
-            var adjacentCoords = neighborFunc(grid, grid.Address).Where(o => !seen.Contains(o)).ToList();
+            var adjacentCoords = neighborFunc(grid, grid.Coord).Where(o => !seen.Contains(o)).ToList();
             var newCoordCounts = adjacentCoords.Select(o => new CoordCount(o, next.Count + 1)).ToList();
             queue.AddRange(newCoordCounts);
             foreach (var coordCount in newCoordCounts)

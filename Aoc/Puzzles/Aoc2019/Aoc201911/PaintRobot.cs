@@ -55,7 +55,7 @@ public class PaintRobot
         if (_mode == PaintMode.Paint)
         {
             Paint((int)output);
-            _paintCounts.WriteValueAt(_panels.Address, _paintCounts.ReadValue() + 1);
+            _paintCounts.WriteValueAt(_panels.Coord, _paintCounts.ReadValue() + 1);
             _mode = PaintMode.Move;
         }
         else

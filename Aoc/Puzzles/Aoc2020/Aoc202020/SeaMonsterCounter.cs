@@ -10,13 +10,13 @@ public class SeaMonsterCounter
                                              .#..#..#..#..#..#...
                                              """;
 
-    private readonly List<Func<Grid<char>, Grid<char>>> _searchFlips = new()
-    {
-        matrix => matrix.FlipVertical(),
-        matrix => matrix.FlipHorizontal(),
-        matrix => matrix.FlipVertical(),
-        matrix => matrix.FlipHorizontal()
-    };
+    private readonly List<Func<Grid<char>, Grid<char>>> _searchFlips =
+    [
+        grid => grid.FlipVertical(),
+        grid => grid.FlipHorizontal(),
+        grid => grid.FlipVertical(),
+        grid => grid.FlipHorizontal()
+    ];
 
     private readonly Grid<char> _seaMonsterGrid;
     private readonly List<Coord> _seaMonsterHashAddresses;

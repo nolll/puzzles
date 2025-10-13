@@ -6,7 +6,7 @@ public class Walker
 {
     private readonly Grid<char> _grid;
     
-    public Coord Pos => _grid.Address;
+    public Coord Pos => _grid.Coord;
 
     public Walker()
     {

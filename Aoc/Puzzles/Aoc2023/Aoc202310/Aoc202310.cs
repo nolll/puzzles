@@ -14,11 +14,11 @@ public class Aoc202310 : AocPuzzle
 
     public static int FarthestPoint(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var startPoint = matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
-        var startPointChar = GetStartPointChar(matrix, startPoint);
-        matrix.WriteValueAt(startPoint, startPointChar);
-        var loop = GetLoop(matrix, startPoint);
+        var grid = GridBuilder.BuildCharGrid(input);
+        var startPoint = grid.Coords.First(o => grid.ReadValueAt(o) == 'S');
+        var startPointChar = GetStartPointChar(grid, startPoint);
+        grid.WriteValueAt(startPoint, startPointChar);
+        var loop = GetLoop(grid, startPoint);
 
         return loop.Count / 2;
     }
@@ -51,20 +51,20 @@ public class Aoc202310 : AocPuzzle
 
     public static int EnclosedTileCount(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var startPoint = matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
-        var startPointChar = GetStartPointChar(matrix, startPoint);
-        matrix.WriteValueAt(startPoint, startPointChar);
-        var loopPath = GetLoop(matrix, startPoint).ToHashSet();
-        var otherCoords = matrix.Coords.Where(o => !loopPath.Contains(o)).ToList();
+        var grid = GridBuilder.BuildCharGrid(input);
+        var startPoint = grid.Coords.First(o => grid.ReadValueAt(o) == 'S');
+        var startPointChar = GetStartPointChar(grid, startPoint);
+        grid.WriteValueAt(startPoint, startPointChar);
+        var loopPath = GetLoop(grid, startPoint).ToHashSet();
+        var otherCoords = grid.Coords.Where(o => !loopPath.Contains(o)).ToList();
 
         foreach (var otherCoord in otherCoords)
         {
-            matrix.WriteValueAt(otherCoord, '.');
+            grid.WriteValueAt(otherCoord, '.');
         }
 
-        var enlargedMatrix = EnlargeMatrix(matrix);
-        var target = new Coord(enlargedMatrix.XMax, enlargedMatrix.YMax);
+        var enlargedGrid = EnlargeGrid(grid);
+        var target = new Coord(enlargedGrid.XMax, enlargedGrid.YMax);
         var queue = new Queue<Coord>();
         queue.Enqueue(target);
         var seen = new HashSet<Coord>();
@@ -72,11 +72,11 @@ public class Aoc202310 : AocPuzzle
         {
             var current = queue.Dequeue();
             seen.Add(current);
-            if (enlargedMatrix.ReadValueAt(current) != '.')
+            if (enlargedGrid.ReadValueAt(current) != '.')
                 continue; 
 
-            enlargedMatrix.WriteValueAt(current, 'O');
-            var adjacent = enlargedMatrix.OrthogonalAdjacentCoordsTo(current);
+            enlargedGrid.WriteValueAt(current, 'O');
+            var adjacent = enlargedGrid.OrthogonalAdjacentCoordsTo(current);
             foreach (var a in adjacent)
             {
                 if (!seen.Contains(a))
@@ -86,7 +86,7 @@ public class Aoc202310 : AocPuzzle
             }
         }
 
-        return otherCoords.Count(o => enlargedMatrix.ReadValueAt(o.X * 2 + 1, o.Y * 2 + 1) == '.');
+        return otherCoords.Count(o => enlargedGrid.ReadValueAt(o.X * 2 + 1, o.Y * 2 + 1) == '.');
     }
 
     private static List<Coord> GetLoop(Grid<char> grid, Coord startPoint)
@@ -133,7 +133,7 @@ public class Aoc202310 : AocPuzzle
         };
     }
 
-    public static Grid<char> EnlargeMatrix(Grid<char> grid)
+    public static Grid<char> EnlargeGrid(Grid<char> grid)
     {
         var enlarged = new Grid<char>(grid.Width * 2 + 2, grid.Height * 2 + 2, '.');
         foreach (var coord in grid.Coords)

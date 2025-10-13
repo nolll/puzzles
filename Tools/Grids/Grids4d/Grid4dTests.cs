@@ -8,51 +8,51 @@ public class Grid4dTests
     [Fact]
     public void ExtendAllTo3()
     {
-        var matrix = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
-        matrix.WriteValue(WriteValue);
-        matrix.ExtendAllDirections();
+        var grid = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
+        grid.WriteValue(WriteValue);
+        grid.ExtendAllDirections();
 
-        var emptyRowsValue = matrix.ReadValueAt(0, 0, 0, 0);
-        var writtenValue = matrix.ReadValueAt(1, 1, 1, 1);
-        matrix.Values.Count.Should().Be(81);
+        var emptyRowsValue = grid.ReadValueAt(0, 0, 0, 0);
+        var writtenValue = grid.ReadValueAt(1, 1, 1, 1);
+        grid.Values.Count.Should().Be(81);
         emptyRowsValue.Should().Be(DefaultValue);
         writtenValue.Should().Be(WriteValue);
-        matrix.Width.Should().Be(3);
-        matrix.Height.Should().Be(3);
-        matrix.Depth.Should().Be(3);
-        matrix.Duration.Should().Be(3);
+        grid.Width.Should().Be(3);
+        grid.Height.Should().Be(3);
+        grid.Depth.Should().Be(3);
+        grid.Duration.Should().Be(3);
     }
 
     [Fact]
     public void ExtendAll5()
     {
-        var matrix = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
-        matrix.WriteValue(WriteValue);
-        matrix.ExtendAllDirections(2);
+        var grid = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
+        grid.WriteValue(WriteValue);
+        grid.ExtendAllDirections(2);
 
-        var emptyRowsValue = matrix.ReadValueAt(0, 0, 0, 0);
-        var writtenValue = matrix.ReadValueAt(2, 2, 2, 2);
-        matrix.Values.Count.Should().Be(625);
+        var emptyRowsValue = grid.ReadValueAt(0, 0, 0, 0);
+        var writtenValue = grid.ReadValueAt(2, 2, 2, 2);
+        grid.Values.Count.Should().Be(625);
         emptyRowsValue.Should().Be(DefaultValue);
         writtenValue.Should().Be(WriteValue);
-        matrix.Width.Should().Be(5);
-        matrix.Height.Should().Be(5);
-        matrix.Depth.Should().Be(5);
-        matrix.Duration.Should().Be(5);
+        grid.Width.Should().Be(5);
+        grid.Height.Should().Be(5);
+        grid.Depth.Should().Be(5);
+        grid.Duration.Should().Be(5);
     }
 
     [Fact]
     public void AllAdjacentExists()
     {
-        var matrix = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
-        matrix.WriteValue(WriteValue);
-        matrix.ExtendAllDirections();
+        var grid = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
+        grid.WriteValue(WriteValue);
+        grid.ExtendAllDirections();
 
-        matrix.MoveTo(1, 1, 1, 1);
+        grid.MoveTo(1, 1, 1, 1);
             
-        matrix.AllAdjacentCoords.Count.Should().Be(80);
+        grid.AllAdjacentCoords.Count.Should().Be(80);
 
-        var adjacentCoords = matrix.AllAdjacentCoords;
+        var adjacentCoords = grid.AllAdjacentCoords;
         var cubesAtXZero = adjacentCoords.Where(o => o.X == 0).ToList();
         var cubesAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
         var cubesAtZZero = adjacentCoords.Where(o => o.Z == 0).ToList();

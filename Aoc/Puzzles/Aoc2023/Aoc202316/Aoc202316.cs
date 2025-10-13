@@ -22,18 +22,18 @@ public class Aoc202316 : AocPuzzle
 
     public static int MostEnergy(string s)
     {
-        var matrix = GridBuilder.BuildCharGrid(s);
+        var grid = GridBuilder.BuildCharGrid(s);
 
         var beams = new List<Beam>();
-        beams.AddRange(matrix.Coords.Where(o => o.Y == matrix.YMin).Select(o => new Beam(o, GridDirection.Down)));
-        beams.AddRange(matrix.Coords.Where(o => o.X == matrix.XMax).Select(o => new Beam(o, GridDirection.Left)));
-        beams.AddRange(matrix.Coords.Where(o => o.Y == matrix.YMax).Select(o => new Beam(o, GridDirection.Up)));
-        beams.AddRange(matrix.Coords.Where(o => o.X == matrix.XMin).Select(o => new Beam(o, GridDirection.Right)));
+        beams.AddRange(grid.Coords.Where(o => o.Y == grid.YMin).Select(o => new Beam(o, GridDirection.Down)));
+        beams.AddRange(grid.Coords.Where(o => o.X == grid.XMax).Select(o => new Beam(o, GridDirection.Left)));
+        beams.AddRange(grid.Coords.Where(o => o.Y == grid.YMax).Select(o => new Beam(o, GridDirection.Up)));
+        beams.AddRange(grid.Coords.Where(o => o.X == grid.XMin).Select(o => new Beam(o, GridDirection.Right)));
 
         var max = 0;
         foreach (var beam in beams)
         {
-            var energy = EnergizedCount(matrix, beam);
+            var energy = EnergizedCount(grid, beam);
             max = Math.Max(energy, max);
         }
 
@@ -58,7 +58,7 @@ public class Aoc202316 : AocPuzzle
 
             grid.MoveTo(beam.Position);
             seen.Add((beam.Position, beam.Direction.Name));
-            lit.Add(grid.Address);
+            lit.Add(grid.Coord);
             var v = grid.ReadValue();
             var isHorizontal = beam.Direction.Equals(GridDirection.Left) ||
                                beam.Direction.Equals(GridDirection.Right);
@@ -72,7 +72,7 @@ public class Aoc202316 : AocPuzzle
                 var moved = grid.TryMoveForward();
                 if (moved)
                 {
-                    beams.Enqueue(new Beam(grid.Address, grid.Direction));
+                    beams.Enqueue(new Beam(grid.Coord, grid.Direction));
                 }
             }
 
@@ -81,16 +81,16 @@ public class Aoc202316 : AocPuzzle
                 if (isHorizontal)
                 {
                     if(!grid.IsAtTopEdge)
-                        beams.Enqueue(new Beam(new Coord(grid.Address.X, grid.Address.Y - 1), GridDirection.Up));
+                        beams.Enqueue(new Beam(new Coord(grid.Coord.X, grid.Coord.Y - 1), GridDirection.Up));
                     if (!grid.IsAtBottomEdge)
-                        beams.Enqueue(new Beam(new Coord(grid.Address.X, grid.Address.Y + 1), GridDirection.Down));
+                        beams.Enqueue(new Beam(new Coord(grid.Coord.X, grid.Coord.Y + 1), GridDirection.Down));
                 }
                 else 
                 {
                     if (!grid.IsAtRightEdge)
-                        beams.Enqueue(new Beam(new Coord(grid.Address.X + 1, grid.Address.Y), GridDirection.Right));
+                        beams.Enqueue(new Beam(new Coord(grid.Coord.X + 1, grid.Coord.Y), GridDirection.Right));
                     if (!grid.IsAtLeftEdge)
-                        beams.Enqueue(new Beam(new Coord(grid.Address.X - 1, grid.Address.Y), GridDirection.Left));
+                        beams.Enqueue(new Beam(new Coord(grid.Coord.X - 1, grid.Coord.Y), GridDirection.Left));
                 }
             }
 
@@ -101,28 +101,28 @@ public class Aoc202316 : AocPuzzle
                     var direction = v == '\\' ? GridDirection.Left : GridDirection.Right;
                     grid.TurnTo(direction);
                     if (grid.TryMoveForward())
-                        beams.Enqueue(new Beam(grid.Address, direction));
+                        beams.Enqueue(new Beam(grid.Coord, direction));
                 }
                 else if (beam.Direction.Equals(GridDirection.Right))
                 {
                     var direction = v == '\\' ? GridDirection.Down : GridDirection.Up;
                     grid.TurnTo(direction);
                     if (grid.TryMoveForward())
-                        beams.Enqueue(new Beam(grid.Address, direction));
+                        beams.Enqueue(new Beam(grid.Coord, direction));
                 }
                 else if (beam.Direction.Equals(GridDirection.Down))
                 {
                     var direction = v == '\\' ? GridDirection.Right : GridDirection.Left;
                     grid.TurnTo(direction);
                     if (grid.TryMoveForward())
-                        beams.Enqueue(new Beam(grid.Address, direction));
+                        beams.Enqueue(new Beam(grid.Coord, direction));
                 }
                 else
                 {
                     var direction = v == '\\' ? GridDirection.Up : GridDirection.Down;
                     grid.TurnTo(direction);
                     if (grid.TryMoveForward())
-                        beams.Enqueue(new Beam(grid.Address, direction));
+                        beams.Enqueue(new Beam(grid.Coord, direction));
                 }
             }
         }

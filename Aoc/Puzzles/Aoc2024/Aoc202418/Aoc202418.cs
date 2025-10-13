@@ -34,16 +34,16 @@ public class Aoc202418 : AocPuzzle
             .Select(o => new Coord(o[0], o[1]))
             .Take(steps);
 
-        var matrix = new Grid<char>(width, height, EmptySpace);
+        var grid = new Grid<char>(width, height, EmptySpace);
         foreach (var coord in coords)
         {
-            matrix.WriteValueAt(coord, Wall);
+            grid.WriteValueAt(coord, Wall);
         }
 
         var start = new Coord(0, 0);
-        var end = new Coord(matrix.XMax, matrix.YMax);
+        var end = new Coord(grid.XMax, grid.YMax);
 
-        return PathFinder.ShortestPathTo(matrix, start, end).Count;
+        return PathFinder.ShortestPathTo(grid, start, end).Count;
     }
 
     public string Part2(string input, int width, int height)
@@ -53,16 +53,16 @@ public class Aoc202418 : AocPuzzle
             .Select(o => new Coord(o[0], o[1]))
             .ToArray();
 
-        var matrix = new Grid<char>(width, height, EmptySpace);
+        var grid = new Grid<char>(width, height, EmptySpace);
         var start = new Coord(0, 0);
-        var end = new Coord(matrix.XMax, matrix.YMax);
+        var end = new Coord(grid.XMax, grid.YMax);
 
         var lo = 0;
         var hi = coords.Length - 1;
         while (lo < hi)
         {
             var mid = (lo + hi) / 2;
-            if (CanReachExit(matrix, start, end, coords, mid + 1))
+            if (CanReachExit(grid, start, end, coords, mid + 1))
                 lo = mid + 1;
             else
                 hi = mid;

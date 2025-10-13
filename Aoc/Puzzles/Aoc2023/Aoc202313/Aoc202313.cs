@@ -25,9 +25,9 @@ public class Aoc202313 : AocPuzzle
 
     public static int CountReflections(string s)
     {
-        var matrix = GridBuilder.BuildCharGrid(s);
+        var grid = GridBuilder.BuildCharGrid(s);
 
-        return CountReflections(matrix, -1);
+        return CountReflections(grid, -1);
     }
 
     private static int CountReflections(Grid<char> grid, int orig)
@@ -41,16 +41,16 @@ public class Aoc202313 : AocPuzzle
 
     public static int CountSmudgedReflections(string s)
     {
-        var matrix = GridBuilder.BuildCharGrid(s);
-        var orig = CountReflections(matrix, -1);
+        var grid = GridBuilder.BuildCharGrid(s);
+        var orig = CountReflections(grid, -1);
 
-        foreach (var coord in matrix.Coords)
+        foreach (var coord in grid.Coords)
         {
-            var v = matrix.ReadValueAt(coord);
+            var v = grid.ReadValueAt(coord);
             var n = v == '#' ? '.' : '#';
-            matrix.WriteValueAt(coord, n);
-            var c = CountReflections(matrix, orig);
-            matrix.WriteValueAt(coord, v);
+            grid.WriteValueAt(coord, n);
+            var c = CountReflections(grid, orig);
+            grid.WriteValueAt(coord, v);
             if (c > 0)
             {
                 return c;

@@ -5,7 +5,7 @@ namespace Pzl.Tools.Grids.Grids3d;
 public class Grid3d<T> where T : struct
 {
     private readonly T _defaultValue;
-    private readonly IDictionary<Coord3d, T> _matrix = new Dictionary<Coord3d, T>();
+    private readonly IDictionary<Coord3d, T> _grid;
     public Coord3d Address { get; private set; }
     public Coord3d StartAddress { get; set; }
     
@@ -37,7 +37,7 @@ public class Grid3d<T> where T : struct
     public Grid3d(int width = 1, int height = 1, int depth = 1, T defaultValue = default)
     {
         _defaultValue = defaultValue;
-        _matrix = BuildMatrix(width, height, depth, defaultValue);
+        _grid = BuildGrid(width, height, depth, defaultValue);
         XMax = width - 1;
         YMax = height - 1;
         ZMax = depth - 1;
@@ -46,7 +46,7 @@ public class Grid3d<T> where T : struct
     }
     
     public IEnumerable<T> Values =>
-        Coords.Select(coord => _matrix.TryGetValue(coord, out var v) 
+        Coords.Select(coord => _grid.TryGetValue(coord, out var v) 
             ? v 
             : _defaultValue);
 
@@ -75,7 +75,7 @@ public class Grid3d<T> where T : struct
         if (IsOutOfRange(address))
         {
             if (extend)
-                ExtendMatrix(address);
+                ExtendGrid(address);
             else
                 return false;
         }
@@ -103,7 +103,7 @@ public class Grid3d<T> where T : struct
     private bool MoveLeft(int steps, bool extend) => MoveTo(new Coord3d(Address.X - steps, Address.Y, Address.Z), extend);
     public T ReadValue() => ReadValueAt(Address.X, Address.Y, Address.Z);
 
-    public T ReadValueAt(Coord3d coord) => _matrix.TryGetValue(coord, out var v)
+    public T ReadValueAt(Coord3d coord) => _grid.TryGetValue(coord, out var v)
         ? v
         : _defaultValue;
 
@@ -127,7 +127,7 @@ public class Grid3d<T> where T : struct
         else if (coord.Z > ZMax)
             ZMax = coord.Z;
         
-        _matrix[coord] = value;
+        _grid[coord] = value;
     }
 
     public bool IsOutOfRange(Coord3d address) =>
@@ -158,11 +158,11 @@ public class Grid3d<T> where T : struct
     {
         get
         {
-            foreach (var dz in MatrixConstants.AdjacentDeltas)
+            foreach (var dz in GridConstants.AdjacentDeltas)
             {
-                foreach (var dy in MatrixConstants.AdjacentDeltas)
+                foreach (var dy in GridConstants.AdjacentDeltas)
                 {
-                    foreach (var dx in MatrixConstants.AdjacentDeltas)
+                    foreach (var dx in GridConstants.AdjacentDeltas)
                     {
                         var coord = new Coord3d(Address.X + dx, Address.Y - dy, Address.Z - dz);
                         if (!coord.Equals(Address))
@@ -175,41 +175,41 @@ public class Grid3d<T> where T : struct
 
     public Grid3d<T> Copy()
     {
-        var matrix = new Grid3d<T>();
+        var grid = new Grid3d<T>();
         for (var z = 0; z < Depth; z++)
         {
             for (var y = 0; y < Height; y++)
             {
                 for (var x = 0; x < Width; x++)
                 {
-                    matrix.MoveTo(x, y, z);
-                    matrix.WriteValue(ReadValueAt(x, y, z));
+                    grid.MoveTo(x, y, z);
+                    grid.WriteValue(ReadValueAt(x, y, z));
                 }
             }
         }
 
-        matrix.MoveTo(Address);
-        return matrix;
+        grid.MoveTo(Address);
+        return grid;
     }
 
-    private Dictionary<Coord3d, T> BuildMatrix(int width, int height, int depth, T defaultValue)
+    private Dictionary<Coord3d, T> BuildGrid(int width, int height, int depth, T defaultValue)
     {
-        var matrix = new Dictionary<Coord3d, T>();
+        var grid = new Dictionary<Coord3d, T>();
         for (var z = 0; z < depth; z++)
         {
             for (var y = 0; y < height; y++)
             {
                 for (var x = 0; x < width; x++)
                 {
-                    matrix.Add(new Coord3d(x, y, z), defaultValue);
+                    grid.Add(new Coord3d(x, y, z), defaultValue);
                 }
             }
         }
 
-        return matrix;
+        return grid;
     }
 
-    private void ExtendMatrix(Coord3d address)
+    private void ExtendGrid(Coord3d address)
     {
         ExtendX(address);
         ExtendY(address);
@@ -225,7 +225,7 @@ public class Grid3d<T> where T : struct
 
     private void ExtendLeft(Coord3d address)
     {
-        AddCols(-address.X, MatrixAddMode.Prepend);
+        AddCols(-address.X, GridAddMode.Prepend);
         StartAddress = new Coord3d(StartAddress.X - address.X, StartAddress.Y, StartAddress.Z);
     }
 
@@ -233,7 +233,7 @@ public class Grid3d<T> where T : struct
     {
         var extendBy = address.X - (Width - 1);
         if (extendBy > 0)
-            AddCols(extendBy, MatrixAddMode.Append);
+            AddCols(extendBy, GridAddMode.Append);
     }
 
     private void ExtendY(Coord3d address)
@@ -245,7 +245,7 @@ public class Grid3d<T> where T : struct
 
     private void ExtendTop(Coord3d address)
     {
-        AddRows(-address.Y, MatrixAddMode.Prepend);
+        AddRows(-address.Y, GridAddMode.Prepend);
         StartAddress = new Coord3d(StartAddress.X, StartAddress.Y - address.Y, StartAddress.Z);
     }
 
@@ -253,7 +253,7 @@ public class Grid3d<T> where T : struct
     {
         var extendBy = address.Y - (Height - 1);
         if (extendBy > 0)
-            AddRows(extendBy, MatrixAddMode.Append);
+            AddRows(extendBy, GridAddMode.Append);
     }
 
     private void ExtendZ(Coord3d address)
@@ -265,7 +265,7 @@ public class Grid3d<T> where T : struct
 
     private void ExtendClose(Coord3d address)
     {
-        AddLevels(-address.Z, MatrixAddMode.Prepend);
+        AddLevels(-address.Z, GridAddMode.Prepend);
         StartAddress = new Coord3d(StartAddress.X, StartAddress.Y, StartAddress.Z - address.Z);
     }
 
@@ -273,38 +273,38 @@ public class Grid3d<T> where T : struct
     {
         var extendBy = address.Z - (Depth - 1);
         if (extendBy > 0)
-            AddLevels(extendBy, MatrixAddMode.Append);
+            AddLevels(extendBy, GridAddMode.Append);
     }
 
     public void ExtendAllDirections(int steps = 1)
     {
-        AddCols(steps, MatrixAddMode.Prepend);
-        AddCols(steps, MatrixAddMode.Append);
-        AddRows(steps, MatrixAddMode.Prepend);
-        AddRows(steps, MatrixAddMode.Append);
-        AddLevels(steps, MatrixAddMode.Prepend);
-        AddLevels(steps, MatrixAddMode.Append);
+        AddCols(steps, GridAddMode.Prepend);
+        AddCols(steps, GridAddMode.Append);
+        AddRows(steps, GridAddMode.Prepend);
+        AddRows(steps, GridAddMode.Append);
+        AddLevels(steps, GridAddMode.Prepend);
+        AddLevels(steps, GridAddMode.Append);
     }
 
-    private void AddRows(int numberOfRows, MatrixAddMode addMode)
+    private void AddRows(int numberOfRows, GridAddMode addMode)
     {
-        if (addMode == MatrixAddMode.Prepend)
+        if (addMode == GridAddMode.Prepend)
             YMin -= numberOfRows;
         else
             YMax += numberOfRows;
     }
 
-    private void AddCols(int numberOfCols, MatrixAddMode addMode)
+    private void AddCols(int numberOfCols, GridAddMode addMode)
     {
-        if (addMode == MatrixAddMode.Prepend)
+        if (addMode == GridAddMode.Prepend)
             XMin -= numberOfCols;
         else
             XMax += numberOfCols;
     }
 
-    private void AddLevels(int numberOfLevels, MatrixAddMode addMode)
+    private void AddLevels(int numberOfLevels, GridAddMode addMode)
     {
-        if (addMode == MatrixAddMode.Prepend)
+        if (addMode == GridAddMode.Prepend)
             ZMin -= numberOfLevels;
         else
             ZMax += numberOfLevels;
@@ -328,5 +328,5 @@ public class Grid3d<T> where T : struct
         return sb.ToString();
     }
 
-    public void Clear() => _matrix.Clear();
+    public void Clear() => _grid.Clear();
 }

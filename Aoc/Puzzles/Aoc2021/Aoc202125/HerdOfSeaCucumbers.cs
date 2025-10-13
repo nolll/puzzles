@@ -46,7 +46,7 @@ public class HerdOfSeaCucumbers
                 var current = _grid.ReadValue();
                 if (current == '>')
                 {
-                    var next = _grid.TryMoveRight() ? _grid.ReadValue() : _grid.ReadValueAt(0, _grid.Address.Y);
+                    var next = _grid.TryMoveRight() ? _grid.ReadValue() : _grid.ReadValueAt(0, _grid.Coord.Y);
                     if (next == '.')
                         cucumbersToMoveEast.Add(new Coord(x, y));
                 }
@@ -68,7 +68,7 @@ public class HerdOfSeaCucumbers
             }
             else
             {
-                _grid.MoveTo(0, _grid.Address.Y);
+                _grid.MoveTo(0, _grid.Coord.Y);
                 _grid.WriteValue('>');
             }
         }
@@ -84,7 +84,7 @@ public class HerdOfSeaCucumbers
             var current = _grid.ReadValue();
             if (current == 'v')
             {
-                var next = _grid.TryMoveDown() ? _grid.ReadValue() : _grid.ReadValueAt(_grid.Address.X, 0);
+                var next = _grid.TryMoveDown() ? _grid.ReadValue() : _grid.ReadValueAt(_grid.Coord.X, 0);
                 if (next == '.')
                     cucumbersToMoveSouth.Add(coord);
             }
@@ -105,7 +105,7 @@ public class HerdOfSeaCucumbers
             }
             else
             {
-                _grid.MoveTo(_grid.Address.X, 0);
+                _grid.MoveTo(_grid.Coord.X, 0);
                 _grid.WriteValue('v');
             }
         }

@@ -27,10 +27,10 @@ public class Aoc202303 : AocPuzzle
         var width = lines.First().Length;
         var height = lines.Count;
         var numberCoordList = FindNumberCoords(lines);
-        var symbolMatrix = BuildSymbolMatrix(lines, width, height);
-        var numberMatrix = BuildNumberMatrix(numberCoordList, width, height);
-        var engineParts = FindEngineParts(numberCoordList, symbolMatrix);
-        var gearRatios = FindGearRatios(numberMatrix, symbolMatrix);
+        var symbolGrid = BuildSymbolGrid(lines, width, height);
+        var numberGrid = BuildNumberGrid(numberCoordList, width, height);
+        var engineParts = FindEngineParts(numberCoordList, symbolGrid);
+        var gearRatios = FindGearRatios(numberGrid, symbolGrid);
 
         return new Result(engineParts.Sum(), gearRatios.Sum());
     }
@@ -83,9 +83,9 @@ public class Aoc202303 : AocPuzzle
         return string.Join("", cleanedLine);
     }
 
-    private static Grid<char> BuildSymbolMatrix(IEnumerable<string> lines, int width, int height)
+    private static Grid<char> BuildSymbolGrid(IEnumerable<string> lines, int width, int height)
     {
-        var symbolMatrix = new Grid<char>(width, height);
+        var symbolGrid = new Grid<char>(width, height);
         var row = 0;
         foreach (var line in lines)
         {
@@ -96,28 +96,28 @@ public class Aoc202303 : AocPuzzle
                 var isDigit = char.IsDigit(c);
                 var isSymbol = !isDigit && c != '.';
                 var symbol = isSymbol ? c : '.';
-                symbolMatrix.WriteValueAt(i, row, symbol);
+                symbolGrid.WriteValueAt(i, row, symbol);
             }
 
             row++;
         }
 
-        return symbolMatrix;
+        return symbolGrid;
     }
 
-    private static Grid<int> BuildNumberMatrix(List<NumberCoord> numberCoordList, int width, int height)
+    private static Grid<int> BuildNumberGrid(List<NumberCoord> numberCoordList, int width, int height)
     {
-        var numberMatrix = new Grid<int>(width, height);
+        var numberGrid = new Grid<int>(width, height);
 
         foreach (var numberCoord in numberCoordList)
         {
             foreach (var coord in numberCoord.Coords)
             {
-                numberMatrix.WriteValueAt(coord, numberCoord.Number);
+                numberGrid.WriteValueAt(coord, numberCoord.Number);
             }
         }
 
-        return numberMatrix;
+        return numberGrid;
     }
 
     private static List<int> FindEngineParts(List<NumberCoord> numberCoordList, Grid<char> symbolGrid)

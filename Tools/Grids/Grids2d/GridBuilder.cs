@@ -58,7 +58,7 @@ public static class GridBuilder
 
     public static Grid<int> BuildIntGridFromSpaceSeparated(string input, int defaultValue = default)
     {
-        var matrix = new Grid<int>(1, 1, defaultValue);
+        var grid = new Grid<int>(1, 1, defaultValue);
         var rows = StringReader.ReadLines(input.Trim());
         var y = 0;
         foreach (var row in rows)
@@ -67,15 +67,15 @@ public static class GridBuilder
             var numbers = row.Trim().Split(' ').Where(o => o.Length > 0).Select(int.Parse);
             foreach (var n in numbers)
             {
-                matrix.MoveTo(x, y);
-                matrix.WriteValue(n);
+                grid.MoveTo(x, y);
+                grid.WriteValue(n);
                 x += 1;
             }
 
             y += 1;
         }
 
-        return matrix;
+        return grid;
     }
 
     public static Grid<int> BuildIntGridFromNonSeparated(string input, int defaultValue = default)

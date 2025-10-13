@@ -25,13 +25,13 @@ public class Aoc202420 : AocPuzzle
 
     public static Dictionary<(Coord from, Coord to), int> GetCheats(string input, int radius)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var start = matrix.FindAddresses('S').First();
-        var end = matrix.FindAddresses('E').First();
-        matrix.WriteValueAt(start, '.');
-        matrix.WriteValueAt(end, '.');
+        var grid = GridBuilder.BuildCharGrid(input);
+        var start = grid.FindAddresses('S').First();
+        var end = grid.FindAddresses('E').First();
+        grid.WriteValueAt(start, '.');
+        grid.WriteValueAt(end, '.');
         
-        var path = PathFinder.ShortestPathTo(matrix, start, end);
+        var path = PathFinder.ShortestPathTo(grid, start, end);
         path = [start, ..path];
         
         var distanceToTarget = new Dictionary<Coord, int>();
@@ -51,7 +51,7 @@ public class Aoc202420 : AocPuzzle
                         continue;
                     
                     var nc = new Coord(coord.X + x, coord.Y + y);
-                    if (matrix.IsOutOfRange(nc) || matrix.ReadValueAt(nc) == '#')
+                    if (grid.IsOutOfRange(nc) || grid.ReadValueAt(nc) == '#')
                         continue;
 
                     var diff = distanceToTarget[coord] - distanceToTarget[nc] - coord.ManhattanDistanceTo(nc);

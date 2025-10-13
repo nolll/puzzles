@@ -1,30 +1,30 @@
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201803;
 
-public class FabricMatrixFactory
+public class FabricGridFactory
 {
     public static int[,] Create(List<Claim> claims)
     {
-        var matrix = GetEmptyMatrix(claims);
+        var grid = GetEmptyGrid(claims);
         foreach (var claim in claims)
         {
             for (var row = claim.Top; row < claim.Top + claim.Height; row++)
             {
                 for (var col = claim.Left; col < claim.Left + claim.Width; col++)
                 {
-                    matrix[col, row] += 1;
+                    grid[col, row] += 1;
                 }
             }
         }
-        return matrix;
+        return grid;
     }
 
-    private static int[,] GetEmptyMatrix(List<Claim> claims)
+    private static int[,] GetEmptyGrid(List<Claim> claims)
     {
-        var size = GetMatrixSize(claims);
+        var size = GetGridSize(claims);
         return new int[size.width, size.height];
     }
 
-    private static (int width, int height) GetMatrixSize(List<Claim> claims)
+    private static (int width, int height) GetGridSize(List<Claim> claims)
     {
         var width = 0;
         var height = 0;

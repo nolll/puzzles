@@ -8,21 +8,21 @@ public class ChitonRisk
 
     public int FindRiskLevelForSmallCave(string input)
     {
-        var matrix = GridBuilder.BuildIntGridFromNonSeparated(input);
-        return FindRiskLevel(matrix);
+        var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
+        return FindRiskLevel(grid);
     }
 
     public int FindRiskLevelForLargeCave(string input)
     {
-        var smallMatrix = GridBuilder.BuildIntGridFromNonSeparated(input);
-        var largeMatrix = BuildLargeMatrix(smallMatrix);
-        return FindRiskLevel(largeMatrix);
+        var smallGrid = GridBuilder.BuildIntGridFromNonSeparated(input);
+        var largeGrid = BuildLargeGrid(smallGrid);
+        return FindRiskLevel(largeGrid);
     }
 
-    private Grid<int> BuildLargeMatrix(Grid<int> smallGrid)
+    private Grid<int> BuildLargeGrid(Grid<int> smallGrid)
     {
         const int multiplier = 5;
-        var largeMatrix = new Grid<int>(smallGrid.Width * multiplier, smallGrid.Height * multiplier);
+        var largeGrid = new Grid<int>(smallGrid.Width * multiplier, smallGrid.Height * multiplier);
         var width = smallGrid.Width;
         var height = smallGrid.Height;
         for (var Y = 0; Y < multiplier; Y++) 
@@ -39,13 +39,13 @@ public class ChitonRisk
                             vLarge -= 9;
                         var xLarge = X * width + x;
                         var yLarge = Y * height + y;
-                        largeMatrix.WriteValueAt(xLarge, yLarge, vLarge);
+                        largeGrid.WriteValueAt(xLarge, yLarge, vLarge);
                     }
                 }
             }
         }
 
-        return largeMatrix;
+        return largeGrid;
     }
 
     private int FindRiskLevel(Grid<int> grid)
@@ -60,62 +60,62 @@ public class ChitonRisk
             sum += grid.ReadValueAt(coord);
         }
 
-        //PrintPath(matrix, path);
+        //PrintPath(grid, path);
 
         return sum;
     }
 
     private void PrintPath(Grid<int> grid, IList<Coord> path)
     {
-        var pathMatrix = new Grid<char>(grid.Width, grid.Height, defaultValue: '.');
+        var pathGrid = new Grid<char>(grid.Width, grid.Height, defaultValue: '.');
         foreach (var coord in path)
         {
-            pathMatrix.WriteValueAt(coord, '#');
+            pathGrid.WriteValueAt(coord, '#');
         }
 
-        Console.WriteLine(pathMatrix.Print());
+        Console.WriteLine(pathGrid.Print());
     }
 
     private Grid<int> GetCoordCounts(Grid<int> grid, Coord from, Coord to)
     {
         var queue = new Queue<Coord>();
         queue.Enqueue(to);
-        var seenMatrix = new Grid<int>(grid.Width, grid.Height, int.MaxValue);
-        seenMatrix.WriteValueAt(to, grid.ReadValueAt(to));
-        while (queue.Any() && seenMatrix.ReadValueAt(from) == int.MaxValue)
+        var seenGrid = new Grid<int>(grid.Width, grid.Height, int.MaxValue);
+        seenGrid.WriteValueAt(to, grid.ReadValueAt(to));
+        while (queue.Any() && seenGrid.ReadValueAt(from) == int.MaxValue)
         {
             var next = queue.Dequeue();
-            var currentScore = seenMatrix.ReadValueAt(next.X, next.Y);
+            var currentScore = seenGrid.ReadValueAt(next.X, next.Y);
             var adjacentCoords = GetAdjacentCoords(grid, new Coord(next.X, next.Y))
                 .OrderBy(grid.ReadValueAt);
 
             foreach (var adjacentCoord in adjacentCoords)
             {
                 var newScore = currentScore + grid.ReadValueAt(adjacentCoord);
-                var existing = seenMatrix.ReadValueAt(adjacentCoord);
+                var existing = seenGrid.ReadValueAt(adjacentCoord);
                 if (newScore < existing)
                 {
                     queue.Enqueue(adjacentCoord);
-                    seenMatrix.WriteValueAt(adjacentCoord, newScore);
+                    seenGrid.WriteValueAt(adjacentCoord, newScore);
                 }
             }
         }
 
-        return seenMatrix;
+        return seenGrid;
     }
 
     private IList<Coord> GetBestPathTo(Grid<int> grid, Coord from, Coord to)
     {
-        var pathMatrix = GetCoordCounts(grid, from, to);
+        var pathGrid = GetCoordCounts(grid, from, to);
         
         var path = new List<Coord>();
         var pathSet = new HashSet<Coord>();
         var currentAddress = from;
         while (!currentAddress.Equals(to))
         {
-            var adjacentCoords = GetAdjacentCoords(pathMatrix, currentAddress)
-                .Where(o => pathMatrix.ReadValueAt(o) > -1 && !pathSet.Contains(o))
-                .OrderBy(o => pathMatrix.ReadValueAt(o))
+            var adjacentCoords = GetAdjacentCoords(pathGrid, currentAddress)
+                .Where(o => pathGrid.ReadValueAt(o) > -1 && !pathSet.Contains(o))
+                .OrderBy(o => pathGrid.ReadValueAt(o))
                 .ThenBy(o => o.Y)
                 .ThenBy(o => o.X)
                 .ToList();

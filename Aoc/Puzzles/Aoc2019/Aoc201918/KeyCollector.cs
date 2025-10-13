@@ -137,7 +137,7 @@ public class KeyCollector
         _doors = new List<VaultDoor>();
         _grid = new Grid<char>(width, height);
         var y = _grid.YMin;
-        var robotLocation = _grid.StartAddress;
+        var robotLocation = _grid.StartCoord;
         foreach (var row in rows)
         {
             var x = _grid.XMin;

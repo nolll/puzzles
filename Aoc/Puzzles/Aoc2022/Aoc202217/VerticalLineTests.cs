@@ -7,13 +7,12 @@ public class VerticalLineTests
     [Fact]
     public void CanMoveRight()
     {
-        var matrix = new Grid<char>(3, 6, '.');
+        var grid = new Grid<char>(3, 6, '.');
         var bottomLeft = new Coord(1, 4);
         var shape = new VerticalLineShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveRight(matrix, bottomLeft);
+        var result = shape.CanMoveRight(grid, bottomLeft);
 
         result.Should().BeTrue();
     }
@@ -21,13 +20,12 @@ public class VerticalLineTests
     [Fact]
     public void CanNotMoveRight()
     {
-        var matrix = new Grid<char>(3, 6, '.');
+        var grid = new Grid<char>(3, 6, '.');
         var bottomLeft = new Coord(2, 4);
         var shape = new VerticalLineShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveRight(matrix, bottomLeft);
+        var result = shape.CanMoveRight(grid, bottomLeft);
 
         result.Should().BeFalse();
     }
@@ -35,13 +33,12 @@ public class VerticalLineTests
     [Fact]
     public void CanMoveLeft()
     {
-        var matrix = new Grid<char>(3, 6, '.');
+        var grid = new Grid<char>(3, 6, '.');
         var bottomLeft = new Coord(1, 4);
         var shape = new VerticalLineShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveLeft(matrix, bottomLeft);
+        var result = shape.CanMoveLeft(grid, bottomLeft);
 
         result.Should().BeTrue();
     }
@@ -49,13 +46,12 @@ public class VerticalLineTests
     [Fact]
     public void CanNotMoveLeft()
     {
-        var matrix = new Grid<char>(3, 6, '.');
+        var grid = new Grid<char>(3, 6, '.');
         var bottomLeft = new Coord(0, 4);
         var shape = new VerticalLineShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveLeft(matrix, bottomLeft);
+        var result = shape.CanMoveLeft(grid, bottomLeft);
 
         result.Should().BeFalse();
     }
@@ -63,13 +59,12 @@ public class VerticalLineTests
     [Fact]
     public void CanMoveDown()
     {
-        var matrix = new Grid<char>(3, 6, '.');
+        var grid = new Grid<char>(3, 6, '.');
         var bottomLeft = new Coord(1, 4);
         var shape = new VerticalLineShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveDown(matrix, bottomLeft);
+        var result = shape.CanMoveDown(grid, bottomLeft);
 
         result.Should().BeTrue();
     }
@@ -77,13 +72,12 @@ public class VerticalLineTests
     [Fact]
     public void CanNotMoveDown()
     {
-        var matrix = new Grid<char>(3, 6, '.');
+        var grid = new Grid<char>(3, 6, '.');
         var bottomLeft = new Coord(1, 5);
         var shape = new VerticalLineShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveDown(matrix, bottomLeft);
+        var result = shape.CanMoveDown(grid, bottomLeft);
 
         result.Should().BeFalse();
     }

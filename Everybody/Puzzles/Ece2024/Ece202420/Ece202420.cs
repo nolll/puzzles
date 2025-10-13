@@ -51,7 +51,7 @@ public class Ece202420 : EverybodyEventPuzzle
                         if (v != '#')
                         {
                             var newScore = score + _changes[grid.ReadValue()];
-                            var key = (grid.Address.X, grid.Address.Y, grid.Direction.Name);
+                            var key = (grid.Coord.X, grid.Coord.Y, grid.Direction.Name);
                             if (next.TryGetValue(key, out var prevScore))
                                 next[key] = Math.Max(newScore, prevScore);
                             else
@@ -103,9 +103,9 @@ public class Ece202420 : EverybodyEventPuzzle
                                 ? v
                                 : checkpoint;
                             var newScore = score + _changes[grid.ReadValue()];
-                            if (newScore >= 10000 && grid.Address.X == s.X && grid.Address.Y == s.Y && newCheckpoint == 'C')
+                            if (newScore >= 10000 && grid.Coord.X == s.X && grid.Coord.Y == s.Y && newCheckpoint == 'C')
                                 found = true;
-                            var key = (grid.Address.X, grid.Address.Y, grid.Direction.Name, newCheckpoint);
+                            var key = (grid.Coord.X, grid.Coord.Y, grid.Direction.Name, newCheckpoint);
                             if (next.TryGetValue(key, out var prevScore))
                                 next[key] = Math.Max(newScore, prevScore);
                             else

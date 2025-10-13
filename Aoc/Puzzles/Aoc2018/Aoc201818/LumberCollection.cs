@@ -49,17 +49,17 @@ public class LumberCollection
 
     private Grid<char> GetNextIteration()
     {
-        var newMatrix = new Grid<char>();
+        var newGrid = new Grid<char>();
         for (var y = 0; y < _grid.Height; y++)
         {
             for (var x = 0; x < _grid.Width; x++)
             {
                 _grid.MoveTo(x, y);
-                newMatrix.MoveTo(x, y);
-                newMatrix.WriteValue(GetNewValue());
+                newGrid.MoveTo(x, y);
+                newGrid.WriteValue(GetNewValue());
             }
         }
-        return newMatrix;
+        return newGrid;
     }
 
     private char GetNewValue()

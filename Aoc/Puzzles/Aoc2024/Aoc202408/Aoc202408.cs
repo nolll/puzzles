@@ -10,16 +10,16 @@ public class Aoc202408 : AocPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input, '.');
-        var count = FindAntinodes1(matrix).Count;
+        var grid = GridBuilder.BuildCharGrid(input, '.');
+        var count = FindAntinodes1(grid).Count;
         
         return new PuzzleResult(count, "af57e33340c00c6ce0f53d7c2f21f201");
     }
     
     public PuzzleResult Part2(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input, '.');
-        var count = FindAntinodes2(matrix).Count;
+        var grid = GridBuilder.BuildCharGrid(input, '.');
+        var count = FindAntinodes2(grid).Count;
         
         return new PuzzleResult(count, "e01777da998c6b596501f3853bd26a8d");
     }

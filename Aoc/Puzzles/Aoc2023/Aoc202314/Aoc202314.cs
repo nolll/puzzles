@@ -25,12 +25,12 @@ public class Aoc202314 : AocPuzzle
         const int iterations = 1_000_000_000;
         var seen = new Dictionary<string, int>();
         var list = new List<string>();
-        var matrix = GridBuilder.BuildCharGrid(s);
+        var grid = GridBuilder.BuildCharGrid(s);
 
         for (var i = 0; i < iterations; i++)
         {
-            RunCycle(matrix);
-            var print = matrix.Print();
+            RunCycle(grid);
+            var print = grid.Print();
             if (seen.TryGetValue(print, out var lastSeen))
             {
                 var repeatLength = i - lastSeen;
@@ -42,7 +42,7 @@ public class Aoc202314 : AocPuzzle
 
                 var diff = largeTarget - iterations + 1;
                 var target = i - diff;
-                matrix = GridBuilder.BuildCharGrid(list[target]);
+                grid = GridBuilder.BuildCharGrid(list[target]);
                 break;
             }
 
@@ -50,17 +50,17 @@ public class Aoc202314 : AocPuzzle
             list.Add(print);
         }
 
-        var roundRocks = matrix.Coords.Where(o => matrix.ReadValueAt(o) == 'O').ToList();
-        var sum = roundRocks.Sum(o => matrix.Height - o.Y);
+        var roundRocks = grid.Coords.Where(o => grid.ReadValueAt(o) == 'O').ToList();
+        var sum = roundRocks.Sum(o => grid.Height - o.Y);
         return sum;
     }
 
     public static int RollNorth(string s)
     {
-        var matrix = GridBuilder.BuildCharGrid(s);
-        MoveNorth(matrix);
-        var roundRocks = matrix.Coords.Where(o => matrix.ReadValueAt(o) == 'O').ToList();
-        var sum = roundRocks.Sum(o => matrix.Height - o.Y);
+        var grid = GridBuilder.BuildCharGrid(s);
+        MoveNorth(grid);
+        var roundRocks = grid.Coords.Where(o => grid.ReadValueAt(o) == 'O').ToList();
+        var sum = roundRocks.Sum(o => grid.Height - o.Y);
 
         return sum;
     }
@@ -100,9 +100,9 @@ public class Aoc202314 : AocPuzzle
 
     public static Grid<char> RunCycle(string s, int iterations)
     {
-        var matrix = GridBuilder.BuildCharGrid(s);
-        RunCycle(matrix, iterations);
-        return matrix;
+        var grid = GridBuilder.BuildCharGrid(s);
+        RunCycle(grid, iterations);
+        return grid;
     }
 
     private static void RunCycle(Grid<char> grid, int iterations)
@@ -122,16 +122,16 @@ public class Aoc202314 : AocPuzzle
     }
 
     private static bool CanMoveNorth(Grid<char> grid) =>
-        CanMove(() => grid.IsAtTopEdge, () => grid.ReadValueAt(grid.Address.X, grid.Address.Y - 1));
+        CanMove(() => grid.IsAtTopEdge, () => grid.ReadValueAt(grid.Coord.X, grid.Coord.Y - 1));
 
     private static bool CanMoveEast(Grid<char> grid) =>
-        CanMove(() => grid.IsAtRightEdge, () => grid.ReadValueAt(grid.Address.X + 1, grid.Address.Y));
+        CanMove(() => grid.IsAtRightEdge, () => grid.ReadValueAt(grid.Coord.X + 1, grid.Coord.Y));
 
     private static bool CanMoveSouth(Grid<char> grid) =>
-        CanMove(() => grid.IsAtBottomEdge, () => grid.ReadValueAt(grid.Address.X, grid.Address.Y + 1));
+        CanMove(() => grid.IsAtBottomEdge, () => grid.ReadValueAt(grid.Coord.X, grid.Coord.Y + 1));
 
     private static bool CanMoveWest(Grid<char> grid) => 
-        CanMove(() => grid.IsAtLeftEdge, () => grid.ReadValueAt(grid.Address.X - 1, grid.Address.Y));
+        CanMove(() => grid.IsAtLeftEdge, () => grid.ReadValueAt(grid.Coord.X - 1, grid.Coord.Y));
 
     private static bool CanMove(Func<bool> isAtEdge, Func<char> readValue)
     {

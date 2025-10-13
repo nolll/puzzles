@@ -3,12 +3,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201908;
 public class SpaceImage
 {
     private readonly IList<SpaceImageLayer> _layers;
-    private readonly IList<IList<char>> _matrix;
+    private readonly IList<IList<char>> _grid;
 
     public SpaceImage(string imageData)
     {
         _layers = GetLayers(imageData).ToList();
-        _matrix = ComposeImage();
+        _grid = ComposeImage();
     }
 
     private IEnumerable<SpaceImageLayer> GetLayers(string imageData)
@@ -50,7 +50,7 @@ public class SpaceImage
     public string Print()
     {
         var printer = new SpaceImagePrinter();
-        return printer.Print(_matrix);
+        return printer.Print(_grid);
     }
 
     public int Checksum

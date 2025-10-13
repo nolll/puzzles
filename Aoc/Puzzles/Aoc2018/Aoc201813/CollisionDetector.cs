@@ -14,7 +14,7 @@ public class CollisionDetector
     {
         LocationOfFirstCollision = null;
         LocationOfLastCart = null;
-        BuildMatrixAndCarts(input);
+        BuildGridAndCarts(input);
     }
 
     public void RunCarts()
@@ -30,17 +30,17 @@ public class CollisionDetector
                 _grid.MoveTo(cart.Coords);
                 _grid.TurnTo(cart.Direction);
                 _grid.MoveForward();
-                cart.MoveTo(_grid.Address);
+                cart.MoveTo(_grid.Coord);
                 var val = _grid.ReadValue();
                 cart.Turn(val);
 
-                if (HasCrashed(cartsToMove, movedCarts, _grid.Address))
+                if (HasCrashed(cartsToMove, movedCarts, _grid.Coord))
                 {
                     if(LocationOfFirstCollision == null) 
-                        LocationOfFirstCollision = _grid.Address;
+                        LocationOfFirstCollision = _grid.Coord;
 
-                    RemoveCartAt(cartsToMove, _grid.Address);
-                    RemoveCartAt(movedCarts, _grid.Address);
+                    RemoveCartAt(cartsToMove, _grid.Coord);
+                    RemoveCartAt(movedCarts, _grid.Coord);
                 }
                 else
                 {
@@ -77,7 +77,7 @@ public class CollisionDetector
         }
     }
 
-    private void BuildMatrixAndCarts(string input)
+    private void BuildGridAndCarts(string input)
     {
         var rows = StringReader.ReadLines(input).ToList();
         var width = rows.First().Length;

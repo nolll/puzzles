@@ -36,13 +36,13 @@ public class StarMessageFinder
     {
         var yOffset = positions.Min(o => o.Y);
         var xOffset = positions.Min(o => o.X);
-        var matrix = new Grid<char>(1, 1, '.');
+        var grid = new Grid<char>(1, 1, '.');
         foreach (var position in positions)
         {
-            matrix.MoveTo(position.X - xOffset, position.Y - yOffset);
-            matrix.WriteValue('#');
+            grid.MoveTo(position.X - xOffset, position.Y - yOffset);
+            grid.WriteValue('#');
         }
-        return matrix.Print();
+        return grid.Print();
     }
 
     private IEnumerable<StarPosition> ParsePositions(string input)

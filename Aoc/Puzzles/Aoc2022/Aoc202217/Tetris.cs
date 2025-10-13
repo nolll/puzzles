@@ -51,7 +51,7 @@ public class Tetris
     private static List<int> GetHeightDiffs(string input, long rockCount)
     {
         var moves = input.ToCharArray();
-        var matrix = new Grid<char>(7, 1, '.');
+        var grid = new Grid<char>(7, 1, '.');
         long rockIndex = 0;
         var moveIndex = 0;
         var lastShapeTop = 0;
@@ -63,8 +63,8 @@ public class Tetris
             var shapeBottomLeft = new Coord(2, highestTop - 3);
             var shapeIndex = rockIndex % Shapes.Length;
             var shape = Shapes[shapeIndex];
-            matrix.MoveTo(shapeBottomLeft);
-            matrix.MoveUp(shape.Height);
+            grid.MoveTo(shapeBottomLeft);
+            grid.MoveUp(shape.Height);
             var movedDown = true;
             var heightBefore = highestTop;
 
@@ -72,12 +72,12 @@ public class Tetris
             {
                 var move = moves[moveIndex % moves.Length];
 
-                if (move == Left && shape.CanMoveLeft(matrix, shapeBottomLeft))
+                if (move == Left && shape.CanMoveLeft(grid, shapeBottomLeft))
                     shapeBottomLeft = new Coord(shapeBottomLeft.X - 1, shapeBottomLeft.Y);
-                else if (move == Right && shape.CanMoveRight(matrix, shapeBottomLeft))
+                else if (move == Right && shape.CanMoveRight(grid, shapeBottomLeft))
                     shapeBottomLeft = new Coord(shapeBottomLeft.X + 1, shapeBottomLeft.Y);
 
-                if (shape.CanMoveDown(matrix, shapeBottomLeft))
+                if (shape.CanMoveDown(grid, shapeBottomLeft))
                     shapeBottomLeft = new Coord(shapeBottomLeft.X, shapeBottomLeft.Y + 1);
                 else
                     movedDown = false;
@@ -89,7 +89,7 @@ public class Tetris
             highestTop = Math.Min(highestTop, lastShapeTop);
             var heightAdded = highestTop - heightBefore;
             heightDiffs.Add(Math.Abs(heightAdded));
-            shape.Paint(matrix, shapeBottomLeft);
+            shape.Paint(grid, shapeBottomLeft);
             rockIndex++;
         }
 

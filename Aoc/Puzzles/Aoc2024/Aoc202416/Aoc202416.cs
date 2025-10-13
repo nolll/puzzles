@@ -12,15 +12,15 @@ public class Aoc202416 : AocPuzzle
 
     public PuzzleResult Part1(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var start = matrix.FindAddresses('S').First();
-        var end = matrix.FindAddresses('E').First();
-        matrix.WriteValueAt(start, EmptySpace);
-        matrix.WriteValueAt(end, EmptySpace);
-        matrix.MoveTo(start);
-        matrix.TurnTo(GridDirection.Right);
+        var grid = GridBuilder.BuildCharGrid(input);
+        var start = grid.FindAddresses('S').First();
+        var end = grid.FindAddresses('E').First();
+        grid.WriteValueAt(start, EmptySpace);
+        grid.WriteValueAt(end, EmptySpace);
+        grid.MoveTo(start);
+        grid.TurnTo(GridDirection.Right);
 
-        var inputs = BuildGraph(matrix);
+        var inputs = BuildGraph(grid);
         
         var startKey = $"{GridDirection.Right}|{start.Id}";
         List<string> endKeys = [$"{GridDirection.Right}|{end.Id}", $"{GridDirection.Up}|{end.Id}"];
@@ -31,15 +31,15 @@ public class Aoc202416 : AocPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input, '.');
-        var start = matrix.FindAddresses('S').First();
-        var end = matrix.FindAddresses('E').First();
-        matrix.WriteValueAt(start, EmptySpace);
-        matrix.WriteValueAt(end, EmptySpace);
-        matrix.MoveTo(start);
-        matrix.TurnTo(GridDirection.Right);
+        var grid = GridBuilder.BuildCharGrid(input, '.');
+        var start = grid.FindAddresses('S').First();
+        var end = grid.FindAddresses('E').First();
+        grid.WriteValueAt(start, EmptySpace);
+        grid.WriteValueAt(end, EmptySpace);
+        grid.MoveTo(start);
+        grid.TurnTo(GridDirection.Right);
         
-        var visited = FindVisitedCoords(matrix, start, end);
+        var visited = FindVisitedCoords(grid, start, end);
         
         return new PuzzleResult(visited.Count, "6f785a700e3bd5c59db14bf9f8eb6d46");
     }
@@ -76,7 +76,7 @@ public class Aoc202416 : AocPuzzle
                 if (grid.ReadValue() == EmptySpace)
                 {
                     var fromKey = $"{dir.Name}|{coord.Id}";
-                    var toKey = $"{grid.Direction.Name}|{grid.Address.Id}";
+                    var toKey = $"{grid.Direction.Name}|{grid.Coord.Id}";
                     edges.Add(new GraphEdge(fromKey, toKey));
                 }
                 grid.MoveBackward();
@@ -88,7 +88,7 @@ public class Aoc202416 : AocPuzzle
                         continue;
                     
                     var fromKey = $"{dir.Name}|{coord.Id}";
-                    var toKey = $"{grid.Direction.Name}|{grid.Address.Id}";
+                    var toKey = $"{grid.Direction.Name}|{grid.Coord.Id}";
                     edges.Add(new GraphEdge(fromKey, toKey, 1000));
                 }
             }

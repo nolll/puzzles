@@ -8,14 +8,14 @@ public class Euler011 : EulerPuzzle
 {
     public PuzzleResult Run()
     {
-        var result = RunInternal(Grid);
+        var result = RunInternal(Input);
         return new PuzzleResult(result, "7dc8a53ba7f75787b1ab0d03ba571c17");
     }
 
-    public long RunInternal(string grid)
+    public long RunInternal(string input)
     {
-        var matrix = BuildMatrix(grid);
-        var sumFinder = new GridProductFinder(matrix);
+        var grid = BuildGrid(input);
+        var sumFinder = new GridProductFinder(grid);
         return sumFinder.FindLargestSum();
     }
 
@@ -63,7 +63,7 @@ public class Euler011 : EulerPuzzle
                 var x = _x + i * dx;
                 var y = _y + i * dy;
 
-                if (!IsInMatrix(x, y))
+                if (!IsInGrid(x, y))
                     return 0;
 
                 sum *= grid.ReadValueAt(new Coord(x, y));
@@ -72,12 +72,12 @@ public class Euler011 : EulerPuzzle
             return sum;
         }
 
-        private bool IsInMatrix(int x, int y) => x >= 0 && y >= 0 && y < grid.Height && x < grid.Width;
+        private bool IsInGrid(int x, int y) => x >= 0 && y >= 0 && y < grid.Height && x < grid.Width;
     }
 
-    private static Grid<int> BuildMatrix(string input, char defaultValue = default)
+    private static Grid<int> BuildGrid(string input, char defaultValue = default)
     {
-        var matrix = new Grid<int>(1, 1, defaultValue);
+        var grid = new Grid<int>(1, 1, defaultValue);
         var rows = input.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)
@@ -90,18 +90,18 @@ public class Euler011 : EulerPuzzle
                 var num = trimmed.Length > 0
                     ? int.Parse(trimmed)
                     : 0;
-                matrix.MoveTo(x, y);
-                matrix.WriteValue(num);
+                grid.MoveTo(x, y);
+                grid.WriteValue(num);
                 x += 1;
             }
 
             y += 1;
         }
 
-        return matrix;
+        return grid;
     }
 
-    private const string Grid = """
+    private const string Input = """
                                 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
                                 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
                                 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65

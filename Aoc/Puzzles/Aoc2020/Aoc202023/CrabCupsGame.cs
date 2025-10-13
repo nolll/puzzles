@@ -1,5 +1,3 @@
-using Pzl.Tools.Lists;
-
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202023;
 
 public class CrabCupsGame

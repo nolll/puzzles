@@ -8,7 +8,7 @@ public class ScaffoldIntersectionFinder
 
     public ScaffoldIntersectionFinder(string input)
     {
-        _grid = BuildMatrix(input);
+        _grid = BuildGrid(input);
     }
 
     public int GetSumOfAlignmentParameters()
@@ -55,9 +55,9 @@ public class ScaffoldIntersectionFinder
         return true;
     }
 
-    private Grid<char> BuildMatrix(string map)
+    private Grid<char> BuildGrid(string map)
     {
-        var matrix = new Grid<char>();
+        var grid = new Grid<char>();
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)
@@ -66,14 +66,14 @@ public class ScaffoldIntersectionFinder
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {
-                matrix.MoveTo(x, y);
-                matrix.WriteValue(c);
+                grid.MoveTo(x, y);
+                grid.WriteValue(c);
                 x += 1;
             }
 
             y += 1;
         }
 
-        return matrix;
+        return grid;
     }
 }

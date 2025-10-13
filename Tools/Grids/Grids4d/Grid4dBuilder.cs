@@ -4,9 +4,9 @@ namespace Pzl.Tools.Grids.Grids4d;
 
 public static class Grid4dBuilder
 {
-    public static Grid4d<char> BuildCharMatrix(string input, char defaultValue = default)
+    public static Grid4d<char> BuildCharGrid(string input, char defaultValue = default)
     {
-        var matrix = new Grid4d<char>(1, 1, 1, 1, defaultValue);
+        var grid = new Grid4d<char>(1, 1, 1, 1, defaultValue);
         var rows = input.Trim().Split(LineBreaks.Single);
         const int w = 0;
         const int z = 0;
@@ -17,14 +17,14 @@ public static class Grid4dBuilder
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {
-                matrix.MoveTo(x, y, z, w);
-                matrix.WriteValue(c);
+                grid.MoveTo(x, y, z, w);
+                grid.WriteValue(c);
                 x += 1;
             }
 
             y += 1;
         }
 
-        return matrix;
+        return grid;
     }
 }

@@ -7,12 +7,12 @@ public class ClaimThatDoesNotOverlapPuzzle
     public ClaimThatDoesNotOverlapPuzzle(string input)
     {
         var claims = ClaimListReader.Read(input);
-        var matrix = FabricMatrixFactory.Create(claims);
-        var claim = FindNonOverlappingClaim(matrix, claims);
+        var grid = FabricGridFactory.Create(claims);
+        var claim = FindNonOverlappingClaim(grid, claims);
         ClaimId = claim.Id;
     }
 
-    private Claim FindNonOverlappingClaim(int[,] matrix, List<Claim> claims)
+    private Claim FindNonOverlappingClaim(int[,] grid, List<Claim> claims)
     {
         foreach (var claim in claims)
         {
@@ -21,7 +21,7 @@ public class ClaimThatDoesNotOverlapPuzzle
             {
                 for (var col = claim.Left; col < claim.Left + claim.Width; col++)
                 {
-                    if (matrix[col, row] > 1)
+                    if (grid[col, row] > 1)
                         overlaps++;
                 }
             }

@@ -18,11 +18,11 @@ public class Aoc202311 : AocPuzzle
 
     public static long Distances(string input, long multiplier)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var expandedXValues = ExpandX(matrix, multiplier);
-        var expandedYValues = ExpandY(matrix, multiplier);
+        var grid = GridBuilder.BuildCharGrid(input);
+        var expandedXValues = ExpandX(grid, multiplier);
+        var expandedYValues = ExpandY(grid, multiplier);
 
-        var galaxyCoords = matrix.Coords.Where(o => matrix.ReadValueAt(o) == '#');
+        var galaxyCoords = grid.Coords.Where(o => grid.ReadValueAt(o) == '#');
         var expandedCoords = galaxyCoords.Select(o => (expandedXValues[o.X], expandedYValues[o.Y])).ToList();
 
         return GetManhattanTotal(expandedCoords);

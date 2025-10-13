@@ -33,10 +33,10 @@ public class HexGridNavigator
     {
         get
         {
-            var x = _grid.Address.X;
-            var y = _grid.Address.Y;
-            var xStart = _grid.StartAddress.X;
-            var yStart = _grid.StartAddress.Y;
+            var x = _grid.Coord.X;
+            var y = _grid.Coord.Y;
+            var xStart = _grid.StartCoord.X;
+            var yStart = _grid.StartCoord.Y;
             var xMax = Math.Max(xStart, x);
             var xMin = Math.Min(xStart, x);
             var yMax = Math.Max(yStart, y);

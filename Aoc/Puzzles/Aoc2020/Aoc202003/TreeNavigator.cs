@@ -2,34 +2,27 @@ using Pzl.Tools.Grids.Grids2d;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202003;
 
-public class TreeNavigator
+public class TreeNavigator(string input)
 {
-    private readonly string _input;
-
-    public TreeNavigator(string input)
-    {
-        _input = input;
-    }
-
     public long GetTreeCount(TreeTrajectory trajectory)
     {
-        var matrix = GridBuilder.BuildCharGrid(_input);
-        matrix.MoveTo(0, 0);
+        var grid = GridBuilder.BuildCharGrid(input);
+        grid.MoveTo(0, 0);
 
         var treeCount = 0;
-        while (!matrix.IsAtBottomEdge)
+        while (!grid.IsAtBottomEdge)
         {
             for (var i = 0; i < trajectory.Right; i++)
             {
-                var movedRight = matrix.TryMoveRight();
+                var movedRight = grid.TryMoveRight();
                 if (!movedRight)
-                    matrix.MoveTo(0, matrix.Address.Y);
+                    grid.MoveTo(0, grid.Coord.Y);
             }
 
             for (var i = 0; i < trajectory.Down; i++)
-                matrix.MoveDown();
+                grid.MoveDown();
 
-            var hasTree = matrix.ReadValue() == '#';
+            var hasTree = grid.ReadValue() == '#';
             treeCount += hasTree ? 1 : 0;
         }
 
@@ -41,17 +34,14 @@ public class TreeNavigator
         return GetTreeCount(new TreeTrajectory(3, 1));
     }
 
-    public IEnumerable<long> GetAllTreeCounts()
-    {
-        var trajectories = new List<TreeTrajectory>
-        {
-            new(1, 1),
-            new(3, 1),
-            new(5, 1),
-            new(7, 1),
-            new(1, 2)
-        };
+    public IEnumerable<long> GetAllTreeCounts() => Trajectories.Select(GetTreeCount);
 
-        return trajectories.Select(GetTreeCount);
-    }
+    private static List<TreeTrajectory> Trajectories =>
+    [
+        new(1, 1),
+        new(3, 1),
+        new(5, 1),
+        new(7, 1),
+        new(1, 2)
+    ];
 }

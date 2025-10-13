@@ -12,13 +12,13 @@ public class TransparentPaper
     {
         var groups = StringReader.ReadLineGroups(input);
 
-        _grid = BuildMatrix(groups.First());
+        _grid = BuildGrid(groups.First());
         _folds = groups[1];
     }
 
-    private static Grid<char> BuildMatrix(IEnumerable<string> rows)
+    private static Grid<char> BuildGrid(IEnumerable<string> rows)
     {
-        var matrix = new Grid<char>(defaultValue: '.');
+        var grid = new Grid<char>(defaultValue: '.');
 
         foreach (var row in rows)
         {
@@ -26,10 +26,10 @@ public class TransparentPaper
             var x = parts[0];
             var y = parts[1];
 
-            matrix.WriteValueAt(x, y, '#');
+            grid.WriteValueAt(x, y, '#');
         }
 
-        return matrix;
+        return grid;
     }
 
     public int DotCountAfterFirstFold()
@@ -73,24 +73,24 @@ public class TransparentPaper
         var keepTo = new Coord(foldCol - 1, _grid.Height - 1);
         var foldFrom = new Coord(foldCol + 1, 0);
 
-        var newMatrix = _grid.Clone().Slice(to: keepTo);
-        var foldMatrix = _grid.Clone().Slice(foldFrom);
-        foldMatrix = foldMatrix.FlipHorizontal();
-        var widthDiff = newMatrix.Width - foldMatrix.Width;
+        var newGrid = _grid.Clone().Slice(to: keepTo);
+        var foldGrid = _grid.Clone().Slice(foldFrom);
+        foldGrid = foldGrid.FlipHorizontal();
+        var widthDiff = newGrid.Width - foldGrid.Width;
 
-        for (var y = 0; y < newMatrix.Height; y++)
+        for (var y = 0; y < newGrid.Height; y++)
         {
-            for (var x = widthDiff; x < newMatrix.Width; x++)
+            for (var x = widthDiff; x < newGrid.Width; x++)
             {
-                var v = foldMatrix.ReadValueAt(x - widthDiff, y);
+                var v = foldGrid.ReadValueAt(x - widthDiff, y);
                 if (v == '#')
                 {
-                    newMatrix.WriteValueAt(x, y, v);
+                    newGrid.WriteValueAt(x, y, v);
                 }
             }
         }
 
-        _grid = newMatrix;
+        _grid = newGrid;
     }
 
     private void FoldVertical(int foldRow)
@@ -98,23 +98,23 @@ public class TransparentPaper
         var keepTo = new Coord(_grid.Width - 1, foldRow - 1);
         var foldFrom = new Coord(0, foldRow + 1);
 
-        var newMatrix = _grid.Clone().Slice(to: keepTo);
-        var foldMatrix = _grid.Clone().Slice(foldFrom);
-        foldMatrix = foldMatrix.FlipVertical();
-        var heightDiff = newMatrix.Height - foldMatrix.Height;
+        var newGrid = _grid.Clone().Slice(to: keepTo);
+        var foldGrid = _grid.Clone().Slice(foldFrom);
+        foldGrid = foldGrid.FlipVertical();
+        var heightDiff = newGrid.Height - foldGrid.Height;
 
-        for (var y = heightDiff; y < newMatrix.Height; y++)
+        for (var y = heightDiff; y < newGrid.Height; y++)
         {
-            for (var x = 0; x < newMatrix.Width; x++)
+            for (var x = 0; x < newGrid.Width; x++)
             {
-                var v = foldMatrix.ReadValueAt(x, y - heightDiff);
+                var v = foldGrid.ReadValueAt(x, y - heightDiff);
                 if (v == '#')
                 {
-                    newMatrix.WriteValueAt(x, y, v);
+                    newGrid.WriteValueAt(x, y, v);
                 }
             }
         }
 
-        _grid = newMatrix;
+        _grid = newGrid;
     }
 }

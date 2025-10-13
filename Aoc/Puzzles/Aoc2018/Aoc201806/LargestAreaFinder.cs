@@ -13,8 +13,8 @@ public class LargestAreaFinder
     {
         _coords = GetCoords(input);
         _ids = new List<int>();
-        BuildMatrix(_coords);
-        FillMatrix(_coords);
+        BuildGrid(_coords);
+        FillGrid(_coords);
     }
 
     public int GetSizeOfLargestArea()
@@ -61,14 +61,14 @@ public class LargestAreaFinder
                 _grid.MoveForward();
             }
 
-            if (_grid.Address.X == _grid.XMin && _grid.Address.Y == _grid.YMin)
+            if (_grid.Coord.X == _grid.XMin && _grid.Coord.Y == _grid.YMin)
                 done = true;
         }
 
         return markers;
     }
 
-    private void FillMatrix(IList<Coord> coords)
+    private void FillGrid(IList<Coord> coords)
     {
         foreach (var coord in _grid.Coords)
         {
@@ -76,11 +76,11 @@ public class LargestAreaFinder
             if (_grid.ReadValue() != -1)
                 continue;
 
-            var coordsOrderedByDistance = coords.OrderBy(o => _grid.Address.ManhattanDistanceTo(o)).ToList();
+            var coordsOrderedByDistance = coords.OrderBy(o => _grid.Coord.ManhattanDistanceTo(o)).ToList();
             var coord1 = coordsOrderedByDistance[0];
             var coord2 = coordsOrderedByDistance[1];
-            var distance1 = _grid.Address.ManhattanDistanceTo(coord1);
-            var distance2 = _grid.Address.ManhattanDistanceTo(coord2);
+            var distance1 = _grid.Coord.ManhattanDistanceTo(coord1);
+            var distance2 = _grid.Coord.ManhattanDistanceTo(coord2);
             var c = distance1 == distance2
                 ? 0
                 : _grid.ReadValueAt(coord1) + 1000;
@@ -88,7 +88,7 @@ public class LargestAreaFinder
         }
     }
 
-    private void BuildMatrix(IList<Coord> coords)
+    private void BuildGrid(IList<Coord> coords)
     {
         var width = coords.Max(o => o.X) + 1;
         var height = coords.Max(o => o.Y) + 1;

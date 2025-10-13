@@ -15,7 +15,7 @@ public class FractalArtGenerator
     private Grid<char> _grid;
     private readonly IList<FractalRule> _transformationRules2X2;
     private readonly IList<FractalRule> _transformationRules3X3;
-    private readonly IDictionary<string, IList<MatrixVariant>> _variantCache;
+    private readonly IDictionary<string, IList<GridVariant>> _variantCache;
     private readonly IDictionary<string, Grid<char>> _transformCache;
 
     public int PixelsOn => _grid.Values.Count(o => o == '#');
@@ -27,7 +27,7 @@ public class FractalArtGenerator
         _transformationRules3X3 = rules.Where(o => o.Input.Length != 5).ToList();
 
         _grid = GridBuilder.BuildCharGrid(Inital);
-        _variantCache = new Dictionary<string, IList<MatrixVariant>>();
+        _variantCache = new Dictionary<string, IList<GridVariant>>();
         _transformCache = new Dictionary<string, Grid<char>>();
     }
 
@@ -59,66 +59,51 @@ public class FractalArtGenerator
     private void Modify()
     {
         var size = _grid.Width;
-        var subMatrixSize = size % 2 == 0 ? 2 : 3;
-        Modify(subMatrixSize);
+        var subgridSize = size % 2 == 0 ? 2 : 3;
+        Modify(subgridSize);
     }
 
     private void Modify(int subSize)
     {
-        var matrices = GetSubmatrices(subSize);
-        var transformed = new List<Grid<char>>();
-        foreach (var matrix in matrices)
-        {
-            transformed.Add(Transform(matrix));
-        }
-
-        _grid = Join(transformed);
+        _grid = Join(GetSubgrids(subSize).Select(Transform).ToList());
     }
 
-    private static Grid<char> Join(List<Grid<char>> matrices)
+    private static Grid<char> Join(List<Grid<char>> grids)
     {
-        var newMatrix = new Grid<char>();
-        var size = matrices.First().Width;
-        var matricesPerRow = (int)Math.Sqrt(matrices.Count);
+        var newGrid = new Grid<char>();
+        var size = grids.First().Width;
+        var gridsPerRow = (int)Math.Sqrt(grids.Count);
         var col = 0;
         var row = 0;
-        foreach (var matrix in matrices)
+        foreach (var grid in grids)
         {
-            for (var y = 0; y < matrix.Height; y++)
+            for (var y = 0; y < grid.Height; y++)
             {
-                for (var x = 0; x < matrix.Width; x++)
+                for (var x = 0; x < grid.Width; x++)
                 {
                     var localX = x + col * size;
                     var localY = y + row * size;
-                    newMatrix.MoveTo(localX, localY);
-                    newMatrix.WriteValue(matrix.ReadValueAt(x, y));
+                    newGrid.MoveTo(localX, localY);
+                    newGrid.WriteValue(grid.ReadValueAt(x, y));
                 }
             }
 
             col++;
-            if (col >= matricesPerRow)
+            if (col >= gridsPerRow)
             {
                 col = 0;
                 row++;
             }
         }
 
-        return newMatrix;
+        return newGrid;
     }
 
-    private class MatrixVariant
-    {
-        public string Key { get; }
+    private record GridVariant(string Key);
 
-        public MatrixVariant(string key)
-        {
-            Key = key;
-        }
-    }
-
-    private IList<MatrixVariant> GetVariants(Grid<char> grid)
+    private IList<GridVariant> GetVariants(Grid<char> grid)
     {
-        var key = MatrixToString(grid);
+        var key = GridToString(grid);
         if (_variantCache.TryGetValue(key, out var variants))
             return variants;
             
@@ -127,49 +112,49 @@ public class FractalArtGenerator
         return variants;
     }
 
-    private static IEnumerable<MatrixVariant> CreateVariants(Grid<char> grid)
+    private static IEnumerable<GridVariant> CreateVariants(Grid<char> grid)
     {
-        yield return new MatrixVariant(MatrixToString(grid));
+        yield return new GridVariant(GridToString(grid));
 
-        var flippedMatrix = FlipMatrixHorizontally(grid);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix));
+        var flippedGrid = FlipGridHorizontally(grid);
+        yield return new GridVariant(GridToString(flippedGrid));
 
-        flippedMatrix = FlipMatrixVertically(grid);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix));
+        flippedGrid = FlipGridVertically(grid);
+        yield return new GridVariant(GridToString(flippedGrid));
 
-        var rotatedMatrix = RotateMatrixRight(grid);
-        yield return new MatrixVariant(MatrixToString(rotatedMatrix));
+        var rotatedGrid = RotateGridRight(grid);
+        yield return new GridVariant(GridToString(rotatedGrid));
 
-        flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix));
+        flippedGrid = FlipGridHorizontally(rotatedGrid);
+        yield return new GridVariant(GridToString(flippedGrid));
 
-        flippedMatrix = FlipMatrixVertically(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix));
+        flippedGrid = FlipGridVertically(rotatedGrid);
+        yield return new GridVariant(GridToString(flippedGrid));
 
-        rotatedMatrix = RotateMatrixRight(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(rotatedMatrix));
+        rotatedGrid = RotateGridRight(rotatedGrid);
+        yield return new GridVariant(GridToString(rotatedGrid));
 
-        flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix));
+        flippedGrid = FlipGridHorizontally(rotatedGrid);
+        yield return new GridVariant(GridToString(flippedGrid));
 
-        flippedMatrix = FlipMatrixVertically(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix));
+        flippedGrid = FlipGridVertically(rotatedGrid);
+        yield return new GridVariant(GridToString(flippedGrid));
 
-        rotatedMatrix = RotateMatrixRight(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(rotatedMatrix));
+        rotatedGrid = RotateGridRight(rotatedGrid);
+        yield return new GridVariant(GridToString(rotatedGrid));
 
-        flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix));
+        flippedGrid = FlipGridHorizontally(rotatedGrid);
+        yield return new GridVariant(GridToString(flippedGrid));
 
-        flippedMatrix = FlipMatrixVertically(rotatedMatrix);
-        yield return new MatrixVariant(MatrixToString(flippedMatrix));
+        flippedGrid = FlipGridVertically(rotatedGrid);
+        yield return new GridVariant(GridToString(flippedGrid));
     }
 
     private Grid<char> Transform(Grid<char> grid)
     {
-        var key = MatrixToString(grid);
-        if (_transformCache.TryGetValue(key, out var transformedMatrix))
-            return transformedMatrix;
+        var key = GridToString(grid);
+        if (_transformCache.TryGetValue(key, out var transformedGrid))
+            return transformedGrid;
 
         var variants = GetVariants(grid);
         var size = grid.Width;
@@ -181,9 +166,9 @@ public class FractalArtGenerator
             {
                 if (rule.IsMatch(variant.Key))
                 {
-                    transformedMatrix = rule.Output;
-                    _transformCache.Add(key, transformedMatrix);
-                    return transformedMatrix;
+                    transformedGrid = rule.Output;
+                    _transformCache.Add(key, transformedGrid);
+                    return transformedGrid;
                 }
                         
             }
@@ -192,7 +177,7 @@ public class FractalArtGenerator
         throw new Exception("No transformation rule matched");
     }
 
-    private static Grid<char> FlipMatrixHorizontally(Grid<char> grid)
+    private static Grid<char> FlipGridHorizontally(Grid<char> grid)
     {
         var width = grid.Width;
         var flipped = new Grid<char>();
@@ -208,7 +193,7 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private static Grid<char> FlipMatrixVertically(Grid<char> grid)
+    private static Grid<char> FlipGridVertically(Grid<char> grid)
     {
         var height = grid.Height;
         var flipped = new Grid<char>();
@@ -224,7 +209,7 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private static Grid<char> RotateMatrixRight(Grid<char> grid)
+    private static Grid<char> RotateGridRight(Grid<char> grid)
     {
         var height = grid.Height;
         var flipped = new Grid<char>(1, 1, ' ');
@@ -241,7 +226,7 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private static string MatrixToString(Grid<char> grid)
+    private static string GridToString(Grid<char> grid)
     {
         var sb = new StringBuilder();
         for (var y = 0; y < grid.Height; y++)
@@ -257,7 +242,7 @@ public class FractalArtGenerator
         return sb.ToString().TrimEnd('/');
     }
 
-    private IEnumerable<Grid<char>> GetSubmatrices(int subSize)
+    private IEnumerable<Grid<char>> GetSubgrids(int subSize)
     {
         var size = _grid.Width;
         var x = 0;
@@ -266,18 +251,18 @@ public class FractalArtGenerator
         {
             while (x < size)
             {
-                var matrix = new Grid<char>();
+                var grid = new Grid<char>();
                 for (var localY = 0; localY < subSize; localY++)
                 {
                     for (var localX = 0; localX < subSize; localX++)
                     {
-                        matrix.MoveTo(localX, localY);
-                        matrix.WriteValue(_grid.ReadValueAt(x + localX, y + localY));
+                        grid.MoveTo(localX, localY);
+                        grid.WriteValue(_grid.ReadValueAt(x + localX, y + localY));
                     }
                 }
 
                 x += subSize;
-                yield return matrix;
+                yield return grid;
             }
 
             y += subSize;

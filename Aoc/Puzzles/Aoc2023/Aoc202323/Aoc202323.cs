@@ -26,12 +26,12 @@ public class Aoc202323 : AocPuzzle
 
     public static int LongestHike(string s, bool canClimbSlopes)
     {
-        var matrix = GridBuilder.BuildCharGrid(s);
-        var start = new Coord(matrix.XMin + 1, matrix.YMin);
-        var target = new Coord(matrix.XMax - 1, matrix.YMax);
+        var grid = GridBuilder.BuildCharGrid(s);
+        var start = new Coord(grid.XMin + 1, grid.YMin);
+        var target = new Coord(grid.XMax - 1, grid.YMax);
 
-        var graphCoords = FindGraphCoords(matrix, start, target).ToList();
-        var graph = BuildGraph(matrix, graphCoords, canClimbSlopes);
+        var graphCoords = FindGraphCoords(grid, start, target).ToList();
+        var graph = BuildGraph(grid, graphCoords, canClimbSlopes);
 
         return FindLongestRoute(graph, [], start.Id, target.Id);
     }

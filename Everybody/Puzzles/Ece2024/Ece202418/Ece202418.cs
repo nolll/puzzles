@@ -20,9 +20,9 @@ public class Ece202418 : EverybodyEventPuzzle
 
     private int Part1And2(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var palmtrees = matrix.FindAddresses('P');
-        var current = matrix.Coords.Where(o => (o.X == 0 || o.X == matrix.XMax) && matrix.ReadValueAt(o) == '.')
+        var grid = GridBuilder.BuildCharGrid(input);
+        var palmtrees = grid.FindAddresses('P');
+        var current = grid.Coords.Where(o => (o.X == 0 || o.X == grid.XMax) && grid.ReadValueAt(o) == '.')
             .ToHashSet();
         var reached = new HashSet<Coord>();
         var seen = new HashSet<Coord>();
@@ -32,17 +32,17 @@ public class Ece202418 : EverybodyEventPuzzle
             var next = new HashSet<Coord>();
             foreach (var c in current)
             {
-                var adjacent = matrix.OrthogonalAdjacentCoordsTo(c);
+                var adjacent = grid.OrthogonalAdjacentCoordsTo(c);
                 foreach (var adj in adjacent)
                 {
                     if (!seen.Add(adj))
                         continue;
 
-                    var v = matrix.ReadValueAt(adj); 
+                    var v = grid.ReadValueAt(adj); 
                     if (v != '#') 
                         next.Add(adj);
                     
-                    if (matrix.ReadValueAt(adj) == 'P') 
+                    if (grid.ReadValueAt(adj) == 'P') 
                         reached.Add(adj);
                 }
             }
@@ -57,9 +57,9 @@ public class Ece202418 : EverybodyEventPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var palmtrees = matrix.FindAddresses('P');
-        var possibleStarts = matrix.FindAddresses('.');
+        var grid = GridBuilder.BuildCharGrid(input);
+        var palmtrees = grid.FindAddresses('P');
+        var possibleStarts = grid.FindAddresses('.');
         var hits = possibleStarts.ToDictionary(k => k, _ => new Dictionary<Coord, int>());
         var allcurrent = palmtrees
             .Select(o => (palmtree: o, current: new HashSet<Coord> { o }, seen: new HashSet<Coord>()))
@@ -74,13 +74,13 @@ public class Ece202418 : EverybodyEventPuzzle
                 var next = new HashSet<Coord>();
                 foreach (var c in current)
                 {
-                    var adjacent = matrix.OrthogonalAdjacentCoordsTo(c);
+                    var adjacent = grid.OrthogonalAdjacentCoordsTo(c);
                     foreach (var adj in adjacent)
                     {
                         if (!seen.Add(adj))
                             continue;
 
-                        var v = matrix.ReadValueAt(adj); 
+                        var v = grid.ReadValueAt(adj); 
                         if (v != '#') 
                             next.Add(adj);
                 

@@ -112,22 +112,22 @@ public class Ece202407 : EverybodyEventPuzzle
     {
         var visited = new HashSet<Coord>();
         var terrain = new List<int>();
-        var trackMatrix = GridBuilder.BuildCharGrid(trackLoop, ' ');
-        trackMatrix.MoveTo(trackMatrix.XMin, trackMatrix.YMin);
-        trackMatrix.MoveRight();
+        var trackGrid = GridBuilder.BuildCharGrid(trackLoop, ' ');
+        trackGrid.MoveTo(trackGrid.XMin, trackGrid.YMin);
+        trackGrid.MoveRight();
         
         while (true)
         {
-            terrain.Add(ConvertToInt(trackMatrix.ReadValue()));
-            visited.Add(trackMatrix.Address);
+            terrain.Add(ConvertToInt(trackGrid.ReadValue()));
+            visited.Add(trackGrid.Coord);
             
-            var next = trackMatrix.OrthogonalAdjacentCoords.FirstOrDefault(o =>
-                !visited.Contains(o) && trackMatrix.ReadValueAt(o) != trackMatrix.DefaultValue);
+            var next = trackGrid.OrthogonalAdjacentCoords.FirstOrDefault(o =>
+                !visited.Contains(o) && trackGrid.ReadValueAt(o) != trackGrid.DefaultValue);
 
             if (next is null)
                 break;
             
-            trackMatrix.MoveTo(next);
+            trackGrid.MoveTo(next);
         }
 
         return terrain.ToArray();

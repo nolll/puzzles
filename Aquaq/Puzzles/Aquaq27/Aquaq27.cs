@@ -17,10 +17,10 @@ public class Aquaq27 : AquaqPuzzle
 
     public static int CalculateSnakeScore(string input)
     {
-        var matrix = GridBuilder.BuildCharGridWithoutTrim(input, Empty);
-        var coordsWithChars = matrix.Coords.Where(o => matrix.ReadValueAt(o) != Empty).ToHashSet();
+        var grid = GridBuilder.BuildCharGridWithoutTrim(input, Empty);
+        var coordsWithChars = grid.Coords.Where(o => grid.ReadValueAt(o) != Empty).ToHashSet();
         var adjacentDictionary = coordsWithChars
-            .ToDictionary(k => k, v => matrix.OrthogonalAdjacentCoordsTo(v).Where(coordsWithChars.Contains).ToList());
+            .ToDictionary(k => k, v => grid.OrthogonalAdjacentCoordsTo(v).Where(coordsWithChars.Contains).ToList());
         var ends = adjacentDictionary.Where(o => o.Value.Count == 1).Select(o => o.Key);
         var visited = new HashSet<Coord>();
         var words = new List<string>();
@@ -41,7 +41,7 @@ public class Aquaq27 : AquaqPuzzle
                                   adjacent.First().X != adjacent.Last().X
                                   && adjacent.First().Y != adjacent.Last().Y;
                 var isEndOfSnake = adjacent.All(visited.Contains);
-                word += matrix.ReadValueAt(cur);
+                word += grid.ReadValueAt(cur);
 
                 if (isEndOfSnake || isEndOfWord)
                 {

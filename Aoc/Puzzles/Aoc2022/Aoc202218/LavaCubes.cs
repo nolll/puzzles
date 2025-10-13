@@ -36,11 +36,11 @@ public class LavaCubes
         var height = cubes.Select(o => o.Y).Max() + padding * 2;
         var depth = cubes.Select(o => o.Z).Max() + padding * 2;
 
-        var matrix = new Grid3d<char>(width, height, depth, '.');
+        var grid = new Grid3d<char>(width, height, depth, '.');
         foreach (var cube in cubes)
         {
-            matrix.MoveTo(cube.X, cube.Y, cube.Z);
-            matrix.WriteValue('#');
+            grid.MoveTo(cube.X, cube.Y, cube.Z);
+            grid.WriteValue('#');
         }
 
         var start = new Coord3d(0, 0, 0);
@@ -51,10 +51,10 @@ public class LavaCubes
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
-            matrix.MoveTo(current);
-            matrix.WriteValue('~');
-            var adjacent = matrix.OrthogonalAdjacentCoords;
-            var validAdjacent = adjacent.Where(o => !seen.Contains(o) && matrix.ReadValueAt(o) == '.');
+            grid.MoveTo(current);
+            grid.WriteValue('~');
+            var adjacent = grid.OrthogonalAdjacentCoords;
+            var validAdjacent = adjacent.Where(o => !seen.Contains(o) && grid.ReadValueAt(o) == '.');
             foreach (var c in validAdjacent)
             {
                 seen.Add(c);
@@ -63,14 +63,14 @@ public class LavaCubes
         }
 
         var trappedCoords = new List<Coord3d>();
-        for (var x = matrix.XMin; x <= matrix.XMax; x++)
+        for (var x = grid.XMin; x <= grid.XMax; x++)
         {
-            for (var y = matrix.YMin; y <= matrix.YMax; y++)
+            for (var y = grid.YMin; y <= grid.YMax; y++)
             {
-                for (var z = matrix.ZMin; z <= matrix.ZMax; z++)
+                for (var z = grid.ZMin; z <= grid.ZMax; z++)
                 {
                     var c = new Coord3d(x, y, z);
-                    if (matrix.ReadValueAt(c) == '.')
+                    if (grid.ReadValueAt(c) == '.')
                         trappedCoords.Add(c);
                 }
             }

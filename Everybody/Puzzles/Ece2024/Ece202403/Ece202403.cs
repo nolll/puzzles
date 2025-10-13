@@ -32,17 +32,17 @@ public class Ece202403 : EverybodyEventPuzzle
 
     private static int Run(string input, SlopeRule slopeRule)
     {
-        var charMatrix = GridBuilder.BuildCharGrid(input);
-        var matrix = new Grid<int>(charMatrix.Width, charMatrix.Height);
+        var charGrid = GridBuilder.BuildCharGrid(input);
+        var grid = new Grid<int>(charGrid.Width, charGrid.Height);
         var coords = new List<Coord>();
         var digLevel = 1;
         
-        foreach (var coord in charMatrix.Coords)
+        foreach (var coord in charGrid.Coords)
         {
-            if (charMatrix.ReadValueAt(coord) == '#')
+            if (charGrid.ReadValueAt(coord) == '#')
             {
                 coords.Add(coord);
-                matrix.WriteValueAt(coord, digLevel);
+                grid.WriteValueAt(coord, digLevel);
             }
         }
 
@@ -54,12 +54,12 @@ public class Ece202403 : EverybodyEventPuzzle
             foreach (var coord in coords)
             {
                 var neighbors = slopeRule == SlopeRule.Diagonal
-                    ? matrix.AllAdjacentValuesTo(coord)
-                    : matrix.OrthogonalAdjacentValuesTo(coord);
+                    ? grid.AllAdjacentValuesTo(coord)
+                    : grid.OrthogonalAdjacentValuesTo(coord);
                 
                 if (neighbors.Count == requiredNeighbors && neighbors.All(o => o >= digLevel))
                 {
-                    matrix.WriteValueAt(coord, digLevel + 1);
+                    grid.WriteValueAt(coord, digLevel + 1);
                     nextCoords.Add(coord);
                 }
             }
@@ -67,6 +67,6 @@ public class Ece202403 : EverybodyEventPuzzle
             coords = nextCoords;
         }
         
-        return matrix.Values.Sum();
+        return grid.Values.Sum();
     }
 }

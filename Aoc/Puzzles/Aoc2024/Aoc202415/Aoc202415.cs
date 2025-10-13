@@ -19,37 +19,37 @@ public class Aoc202415 : AocPuzzle
     public PuzzleResult Part1(string input)
     {
         var parts = input.Split(LineBreaks.Double);
-        var matrix = GridBuilder.BuildCharGrid(parts[0]);
+        var grid = GridBuilder.BuildCharGrid(parts[0]);
         var moves = parts[1].Replace(LineBreaks.Single, "").ToCharArray();
         
-        matrix.MoveTo(matrix.FindAddresses(Symbol.Robot).First());
-        matrix.WriteValue(Symbol.Empty);
+        grid.MoveTo(grid.FindAddresses(Symbol.Robot).First());
+        grid.WriteValue(Symbol.Empty);
 
-        var allBoxes = matrix.FindAddresses(Symbol.Box).Select(o => new BoxPart1(o)).Cast<IBox>().ToList();
+        var allBoxes = grid.FindAddresses(Symbol.Box).Select(o => new BoxPart1(o)).Cast<IBox>().ToList();
         foreach (var box in allBoxes)
         {
-            matrix.WriteValueAt(box.Coords.First(), Symbol.Empty);
+            grid.WriteValueAt(box.Coords.First(), Symbol.Empty);
         }
         
         foreach (var move in moves)
         {
             var direction = GetDirection(move);
-            matrix.TurnTo(direction);
-            var lastCoord = matrix.Address;
+            grid.TurnTo(direction);
+            var lastCoord = grid.Coord;
 
-            var (canMove, boxesToMove) = CanMoveRobot(matrix, allBoxes, direction);
+            var (canMove, boxesToMove) = CanMoveRobot(grid, allBoxes, direction);
             if (!canMove)
             {
-                matrix.MoveTo(lastCoord);
+                grid.MoveTo(lastCoord);
                 continue;
             }
             
-            matrix.MoveTo(lastCoord);
-            matrix.MoveForward();
+            grid.MoveTo(lastCoord);
+            grid.MoveForward();
             
             foreach (var box in boxesToMove.Reversed())
             {
-                box.Move(matrix.Direction);
+                box.Move(grid.Direction);
             }
         }
         
@@ -64,7 +64,7 @@ public class Aoc202415 : AocPuzzle
         List<IBox> allBoxes,
         GridDirection direction)
     {
-        var coordToCheck = new Coord(grid.Address.X + direction.X, grid.Address.Y + direction.Y);
+        var coordToCheck = new Coord(grid.Coord.X + direction.X, grid.Coord.Y + direction.Y);
         var v = grid.ReadValueAt(coordToCheck);
         if (v == Symbol.Wall)
         {
@@ -129,52 +129,52 @@ public class Aoc202415 : AocPuzzle
     public PuzzleResult Part2(string input)
     {
         var parts = input.Split(LineBreaks.Double);
-        var matrix = GridBuilder.BuildCharGrid(parts[0]);
+        var grid = GridBuilder.BuildCharGrid(parts[0]);
         var moves = parts[1].Replace(LineBreaks.Single, "").ToCharArray();
         
-        matrix.MoveTo(matrix.FindAddresses(Symbol.Robot).First());
-        matrix.WriteValue(Symbol.Empty);
+        grid.MoveTo(grid.FindAddresses(Symbol.Robot).First());
+        grid.WriteValue(Symbol.Empty);
 
-        var boxCoords = matrix.FindAddresses(Symbol.Box); 
+        var boxCoords = grid.FindAddresses(Symbol.Box); 
         foreach (var coord in boxCoords)
         {
-            matrix.WriteValueAt(coord, Symbol.Empty);
+            grid.WriteValueAt(coord, Symbol.Empty);
         }
 
-        var wideMatrix = new Grid<char>(matrix.Width * 2, matrix.Height, Symbol.Empty);
-        var walls = matrix.FindAddresses(Symbol.Wall);
+        var wideGrid = new Grid<char>(grid.Width * 2, grid.Height, Symbol.Empty);
+        var walls = grid.FindAddresses(Symbol.Wall);
         foreach (var wall in walls)
         {
-            wideMatrix.WriteValueAt(new Coord(wall.X * 2, wall.Y), Symbol.Wall);
-            wideMatrix.WriteValueAt(new Coord(wall.X * 2 + 1, wall.Y), Symbol.Wall);
+            wideGrid.WriteValueAt(new Coord(wall.X * 2, wall.Y), Symbol.Wall);
+            wideGrid.WriteValueAt(new Coord(wall.X * 2 + 1, wall.Y), Symbol.Wall);
         }
 
-        wideMatrix.MoveTo(new Coord(matrix.Address.X * 2, matrix.Address.Y));
+        wideGrid.MoveTo(new Coord(grid.Coord.X * 2, grid.Coord.Y));
         var allBoxes = boxCoords
             .Select(o => new BoxPart2([new Coord(o.X * 2, o.Y), new Coord(o.X * 2 + 1, o.Y)]))
             .Cast<IBox>().ToList();
         
-        matrix = wideMatrix;
+        grid = wideGrid;
         
         foreach (var move in moves)
         {
             var direction = GetDirection(move);
-            matrix.TurnTo(direction);
-            var lastCoord = matrix.Address;
+            grid.TurnTo(direction);
+            var lastCoord = grid.Coord;
 
-            var (canMove, boxesToMove) = CanMoveRobot(matrix, allBoxes, direction);
+            var (canMove, boxesToMove) = CanMoveRobot(grid, allBoxes, direction);
             if (!canMove)
             {
-                matrix.MoveTo(lastCoord);
+                grid.MoveTo(lastCoord);
                 continue;
             }
             
-            matrix.MoveTo(lastCoord);
-            matrix.MoveForward();
+            grid.MoveTo(lastCoord);
+            grid.MoveForward();
             
             foreach (var box in boxesToMove.Reversed())
             {
-                box.Move(matrix.Direction);
+                box.Move(grid.Direction);
             }
         }
         

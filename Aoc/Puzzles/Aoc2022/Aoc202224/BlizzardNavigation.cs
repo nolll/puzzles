@@ -48,7 +48,7 @@ public class BlizzardNavigation
         var prints = new HashSet<string>();
         while (true)
         {
-            var print = PrintMatrix(blizzards);
+            var print = PrintGrid(blizzards);
             if (prints.Contains(print))
                 break;
 
@@ -149,20 +149,20 @@ public class BlizzardNavigation
         return movedBlizzards;
     }
 
-    private string PrintMatrix(List<Blizzard> blizzards)
+    private string PrintGrid(List<Blizzard> blizzards)
     {
-        var newMatrix = _grid.Clone();
+        var newGrid = _grid.Clone();
         foreach (var blizzard in blizzards)
         {
-            var v = newMatrix.ReadValueAt(blizzard.Address);
+            var v = newGrid.ReadValueAt(blizzard.Address);
             if (v == '.')
-                newMatrix.WriteValueAt(blizzard.Address, blizzard.Direction);
+                newGrid.WriteValueAt(blizzard.Address, blizzard.Direction);
             else if (int.TryParse(v.ToString(), out var i))
-                newMatrix.WriteValueAt(blizzard.Address, (i + 1).ToString().First());
+                newGrid.WriteValueAt(blizzard.Address, (i + 1).ToString().First());
             else
-                newMatrix.WriteValueAt(blizzard.Address, '2');
+                newGrid.WriteValueAt(blizzard.Address, '2');
         }
 
-        return newMatrix.Print();
+        return newGrid.Print();
     }
 }

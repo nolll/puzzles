@@ -4,7 +4,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201613;
 
 public class Maze(int width, int height, int secretNumber)
 {
-    private readonly Grid<char> _grid = BuildMatrix(width, height, secretNumber);
+    private readonly Grid<char> _grid = BuildGrid(width, height, secretNumber);
 
     public int StepCountToTarget(int targetX, int targetY) =>
         PathFinder.ShortestPathTo(_grid, new Coord(1, 1), new Coord(targetX, targetY)).Count;
@@ -33,9 +33,9 @@ public class Maze(int width, int height, int secretNumber)
         return _grid.Values.Count(o => o == 'O');
     }
 
-    private static Grid<char> BuildMatrix(in int width, in int height, in int secretNumber)
+    private static Grid<char> BuildGrid(in int width, in int height, in int secretNumber)
     {
-        var matrix = new Grid<char>();
+        var grid = new Grid<char>();
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < width; x++)
@@ -45,10 +45,10 @@ public class Maze(int width, int height, int secretNumber)
                 var numberOfSetBits = binary.Count(o => o == '1');
                 var isOpenSpace = numberOfSetBits % 2 == 0;
                 var c = isOpenSpace ? '.' : '#';
-                matrix.WriteValueAt(x, y, c);
+                grid.WriteValueAt(x, y, c);
             }
         }
 
-        return matrix;
+        return grid;
     }
 }

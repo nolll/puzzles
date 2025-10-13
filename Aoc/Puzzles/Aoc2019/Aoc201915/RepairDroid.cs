@@ -34,9 +34,9 @@ public class RepairDroid
             computer.Start();
         }
 
-        _grid.MoveTo(_grid.StartAddress);
+        _grid.MoveTo(_grid.StartCoord);
 
-        var path = PathFinder.ShortestPathTo(_grid, _grid.StartAddress, _target);
+        var path = PathFinder.ShortestPathTo(_grid, _grid.StartCoord, _target);
         return (path.Count, _grid);
     }
 
@@ -61,7 +61,7 @@ public class RepairDroid
             case Found:
                 _grid.MoveForward();
                 _grid.WriteValue('X');
-                _target = _grid.Address;
+                _target = _grid.Coord;
                 break;
         }
 
@@ -69,7 +69,7 @@ public class RepairDroid
         _computer.Stop();
         foreach (var direction in directions)
         {
-            _queue.Enqueue((_grid.Address, direction, _computer.Clone()));
+            _queue.Enqueue((_grid.Coord, direction, _computer.Clone()));
         }
         
         return false;

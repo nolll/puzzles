@@ -5,15 +5,15 @@ namespace Pzl.Tools.Grids.Grids4d;
 public class Grid4d<T> where T : struct
 {
     private readonly T _defaultValue;
-    private readonly IList<IList<IList<IList<T>>>> _matrix;
+    private readonly IList<IList<IList<IList<T>>>> _grid;
     public Coord4d Address { get; private set; }
     public Coord4d StartAddress { get; set; }
 
-    public IList<T> Values => _matrix.SelectMany(x => x).SelectMany(x => x).SelectMany(x => x).ToList();
-    public int Duration => _matrix.Count;
-    public int Depth => _matrix.Any() ? _matrix[0].Count : 0;
-    public int Height => _matrix.Any() && _matrix[0].Any() ? _matrix[0][0].Count : 0;
-    public int Width => _matrix.Any() && _matrix[0].Any() && _matrix[0][0].Any() ? _matrix[0][0][0].Count : 0;
+    public IList<T> Values => _grid.SelectMany(x => x).SelectMany(x => x).SelectMany(x => x).ToList();
+    public int Duration => _grid.Count;
+    public int Depth => _grid.Any() ? _grid[0].Count : 0;
+    public int Height => _grid.Any() && _grid[0].Any() ? _grid[0][0].Count : 0;
+    public int Width => _grid.Any() && _grid[0].Any() && _grid[0][0].Any() ? _grid[0][0][0].Count : 0;
     public bool IsAtTop => Address.Y == 0;
     public bool IsAtRightEdge => Address.X == Width - 1;
     public bool IsAtBottom => Address.Y == Height - 1;
@@ -23,7 +23,7 @@ public class Grid4d<T> where T : struct
     public Grid4d(int width = 1, int height = 1, int depth = 1, int duration = 1, T defaultValue = default)
     {
         _defaultValue = defaultValue;
-        _matrix = BuildMatrix(width, height, depth, duration, defaultValue);
+        _grid = BuildGrid(width, height, depth, duration, defaultValue);
         Address = new Coord4d(0, 0, 0, 0);
         StartAddress = new Coord4d(0, 0, 0, 0);
     }
@@ -36,7 +36,7 @@ public class Grid4d<T> where T : struct
         if (IsOutOfRange(address))
         {
             if (extend)
-                ExtendMatrix(address);
+                ExtendGrid(address);
             else
                 return false;
         }
@@ -65,8 +65,8 @@ public class Grid4d<T> where T : struct
     private bool MoveLeft(int steps, bool extend) => MoveTo(new Coord4d(Address.X - steps, Address.Y, Address.Z, Address.W), extend);
     public T ReadValue() => ReadValueAt(Address.X, Address.Y, Address.Z, Address.W);
     public T ReadValueAt(Coord4d address) => ReadValueAt(address.X, address.Y, address.Z, address.W);
-    public T ReadValueAt(int x, int y, int z, int w) => _matrix[w][z][y][x];
-    public void WriteValue(T value) => _matrix[Address.W][Address.Z][Address.Y][Address.X] = value;
+    public T ReadValueAt(int x, int y, int z, int w) => _grid[w][z][y][x];
+    public void WriteValue(T value) => _grid[Address.W][Address.Z][Address.Y][Address.X] = value;
 
     public bool IsOutOfRange(Coord4d address) =>
         address.W >= Duration ||
@@ -100,13 +100,13 @@ public class Grid4d<T> where T : struct
     {
         get
         {
-            foreach (var dw in MatrixConstants.AdjacentDeltas)
+            foreach (var dw in GridConstants.AdjacentDeltas)
             {
-                foreach (var dz in MatrixConstants.AdjacentDeltas)
+                foreach (var dz in GridConstants.AdjacentDeltas)
                 {
-                    foreach (var dy in MatrixConstants.AdjacentDeltas)
+                    foreach (var dy in GridConstants.AdjacentDeltas)
                     {
-                        foreach (var dx in MatrixConstants.AdjacentDeltas)
+                        foreach (var dx in GridConstants.AdjacentDeltas)
                         {
                             var coord = new Coord4d(Address.X + dx, Address.Y + dy, Address.Z + dz, Address.W + dw);
                             if(!coord.Equals(Address))
@@ -120,7 +120,7 @@ public class Grid4d<T> where T : struct
 
     public Grid4d<T> Copy()
     {
-        var matrix = new Grid4d<T>();
+        var grid = new Grid4d<T>();
         for (var w = 0; w < Duration; w++)
         {
             for (var z = 0; z < Depth; z++)
@@ -129,20 +129,20 @@ public class Grid4d<T> where T : struct
                 {
                     for (var x = 0; x < Width; x++)
                     {
-                        matrix.MoveTo(x, y, z, w);
-                        matrix.WriteValue(ReadValueAt(x, y, z, w));
+                        grid.MoveTo(x, y, z, w);
+                        grid.WriteValue(ReadValueAt(x, y, z, w));
                     }
                 }
             }
         }
 
-        matrix.MoveTo(Address);
-        return matrix;
+        grid.MoveTo(Address);
+        return grid;
     }
 
-    private IList<IList<IList<IList<T>>>> BuildMatrix(int width, int height, int depth, int duration, T defaultValue)
+    private IList<IList<IList<IList<T>>>> BuildGrid(int width, int height, int depth, int duration, T defaultValue)
     {
-        var matrix = new List<IList<IList<IList<T>>>>();
+        var grid = new List<IList<IList<IList<T>>>>();
         for (var w = 0; w < duration; w++)
         {
             var time = new List<IList<IList<T>>>();
@@ -163,13 +163,13 @@ public class Grid4d<T> where T : struct
                 time.Add(level);
             }
 
-            matrix.Add(time);
+            grid.Add(time);
         }
 
-        return matrix;
+        return grid;
     }
 
-    private void ExtendMatrix(Coord4d address)
+    private void ExtendGrid(Coord4d address)
     {
         ExtendX(address);
         ExtendY(address);
@@ -186,7 +186,7 @@ public class Grid4d<T> where T : struct
 
     private void ExtendLeft(Coord4d address)
     {
-        AddCols(-address.X, MatrixAddMode.Prepend);
+        AddCols(-address.X, GridAddMode.Prepend);
         StartAddress = new Coord4d(StartAddress.X - address.X, StartAddress.Y, StartAddress.Z, StartAddress.W);
     }
 
@@ -194,7 +194,7 @@ public class Grid4d<T> where T : struct
     {
         var extendBy = address.X - (Width - 1);
         if (extendBy > 0)
-            AddCols(extendBy, MatrixAddMode.Append);
+            AddCols(extendBy, GridAddMode.Append);
     }
 
     private void ExtendY(Coord4d address)
@@ -206,7 +206,7 @@ public class Grid4d<T> where T : struct
 
     private void ExtendTop(Coord4d address)
     {
-        AddRows(-address.Y, MatrixAddMode.Prepend);
+        AddRows(-address.Y, GridAddMode.Prepend);
         StartAddress = new Coord4d(StartAddress.X, StartAddress.Y - address.Y, StartAddress.Z, StartAddress.W);
     }
 
@@ -214,7 +214,7 @@ public class Grid4d<T> where T : struct
     {
         var extendBy = address.Y - (Height - 1);
         if (extendBy > 0)
-            AddRows(extendBy, MatrixAddMode.Append);
+            AddRows(extendBy, GridAddMode.Append);
     }
 
     private void ExtendZ(Coord4d address)
@@ -226,7 +226,7 @@ public class Grid4d<T> where T : struct
 
     private void ExtendClose(Coord4d address)
     {
-        AddLevels(-address.Z, MatrixAddMode.Prepend);
+        AddLevels(-address.Z, GridAddMode.Prepend);
         StartAddress = new Coord4d(StartAddress.X, StartAddress.Y, StartAddress.Z - address.Z, StartAddress.W);
     }
 
@@ -234,7 +234,7 @@ public class Grid4d<T> where T : struct
     {
         var extendBy = address.Z - (Depth - 1);
         if (extendBy > 0)
-            AddLevels(extendBy, MatrixAddMode.Append);
+            AddLevels(extendBy, GridAddMode.Append);
     }
 
     private void ExtendW(Coord4d address)
@@ -246,7 +246,7 @@ public class Grid4d<T> where T : struct
 
     private void ExtendNow(Coord4d address)
     {
-        AddTime(-address.W, MatrixAddMode.Prepend);
+        AddTime(-address.W, GridAddMode.Prepend);
         StartAddress = new Coord4d(StartAddress.X, StartAddress.Y, StartAddress.Z, StartAddress.W - address.W);
     }
 
@@ -254,29 +254,29 @@ public class Grid4d<T> where T : struct
     {
         var extendBy = address.W - (Duration - 1);
         if (extendBy > 0)
-            AddTime(extendBy, MatrixAddMode.Append);
+            AddTime(extendBy, GridAddMode.Append);
     }
 
     public void ExtendAllDirections(int steps = 1)
     {
-        AddCols(steps, MatrixAddMode.Prepend);
-        AddCols(steps, MatrixAddMode.Append);
-        AddRows(steps, MatrixAddMode.Prepend);
-        AddRows(steps, MatrixAddMode.Append);
-        AddLevels(steps, MatrixAddMode.Prepend);
-        AddLevels(steps, MatrixAddMode.Append);
-        AddTime(steps, MatrixAddMode.Prepend);
-        AddTime(steps, MatrixAddMode.Append);
+        AddCols(steps, GridAddMode.Prepend);
+        AddCols(steps, GridAddMode.Append);
+        AddRows(steps, GridAddMode.Prepend);
+        AddRows(steps, GridAddMode.Append);
+        AddLevels(steps, GridAddMode.Prepend);
+        AddLevels(steps, GridAddMode.Append);
+        AddTime(steps, GridAddMode.Prepend);
+        AddTime(steps, GridAddMode.Append);
     }
 
-    private void AddRows(int count, MatrixAddMode addMode)
+    private void AddRows(int count, GridAddMode addMode)
     {
         var width = Width;
         var depth = Depth;
         var duration = Duration;
         for (var w = 0; w < duration; w++)
         {
-            var time = _matrix[w];
+            var time = _grid[w];
             for (var z = 0; z < depth; z++)
             {
                 var level = time[z];
@@ -288,7 +288,7 @@ public class Grid4d<T> where T : struct
                         row.Add(_defaultValue);
                     }
 
-                    if (addMode == MatrixAddMode.Prepend)
+                    if (addMode == GridAddMode.Prepend)
                         level.Insert(0, row);
                     else
                         level.Add(row);
@@ -298,14 +298,14 @@ public class Grid4d<T> where T : struct
         }
     }
 
-    private void AddCols(int count, MatrixAddMode addMode)
+    private void AddCols(int count, GridAddMode addMode)
     {
         var height = Height;
         var depth = Depth;
         var duration = Duration;
         for (var w = 0; w < duration; w++)
         {
-            var time = _matrix[w];
+            var time = _grid[w];
             for (var z = 0; z < depth; z++)
             {
                 var level = time[z];
@@ -314,7 +314,7 @@ public class Grid4d<T> where T : struct
                     var row = level[y];
                     for (var x = 0; x < count; x++)
                     {
-                        if (addMode == MatrixAddMode.Prepend)
+                        if (addMode == GridAddMode.Prepend)
                             row.Insert(0, _defaultValue);
                         else
                             row.Add(_defaultValue);
@@ -324,14 +324,14 @@ public class Grid4d<T> where T : struct
         }
     }
 
-    private void AddLevels(int count, MatrixAddMode addMode)
+    private void AddLevels(int count, GridAddMode addMode)
     {
         var height = Height;
         var width = Width;
         var duration = Duration;
         for (var w = 0; w < duration; w++)
         {
-            var time = _matrix[w];
+            var time = _grid[w];
             for (var z = 0; z < count; z++)
             {
                 var level = new List<IList<T>>();
@@ -346,7 +346,7 @@ public class Grid4d<T> where T : struct
                     level.Add(row);
                 }
 
-                if (addMode == MatrixAddMode.Prepend)
+                if (addMode == GridAddMode.Prepend)
                     time.Insert(0, level);
                 else
                     time.Add(level);
@@ -355,7 +355,7 @@ public class Grid4d<T> where T : struct
         }
     }
 
-    private void AddTime(int count, MatrixAddMode addMode)
+    private void AddTime(int count, GridAddMode addMode)
     {
         var height = Height;
         var width = Width;
@@ -378,17 +378,17 @@ public class Grid4d<T> where T : struct
                 time.Add(level);
             }
 
-            if(addMode == MatrixAddMode.Prepend)
-                _matrix.Insert(0, time);
+            if(addMode == GridAddMode.Prepend)
+                _grid.Insert(0, time);
             else
-                _matrix.Add(time);
+                _grid.Add(time);
         }
     }
 
     public string PrintLevel(int time, int level)
     {
         var sb = new StringBuilder();
-        foreach (var row in _matrix[time][level])
+        foreach (var row in _grid[time][level])
         {
             foreach (var o in row)
             {

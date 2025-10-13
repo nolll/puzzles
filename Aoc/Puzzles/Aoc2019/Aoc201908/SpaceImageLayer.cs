@@ -4,7 +4,7 @@ public class SpaceImageLayer
 {
     private readonly string _data;
     private readonly int _width;
-    private readonly IList<IList<char>> _matrix;
+    private readonly IList<IList<char>> _grid;
         
     public int NumberOfZeros => GetCharCount(_data, '0');
     public int NumberOfOnes => GetCharCount(_data, '1');
@@ -14,10 +14,10 @@ public class SpaceImageLayer
     {
         _data = data;
         _width = width;
-        _matrix = CreateMatrix(data);
+        _grid = CreateGrid(data);
     }
 
-    private IList<IList<char>> CreateMatrix(string data)
+    private IList<IList<char>> CreateGrid(string data)
     {
         var rows = GetRows(data).ToList();
         return new List<IList<char>>(rows);
@@ -33,13 +33,13 @@ public class SpaceImageLayer
 
     public char GetChar(int x, int y)
     {
-        return _matrix[y][x];
+        return _grid[y][x];
     }
 
     public string Print()
     {
         var printer = new SpaceImagePrinter();
-        return printer.Print(_matrix);
+        return printer.Print(_grid);
     }
 
     private int GetCharCount(string data, char character)

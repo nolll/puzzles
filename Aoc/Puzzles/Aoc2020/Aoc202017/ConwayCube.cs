@@ -7,7 +7,7 @@ public class ConwayCube
 {
     public int Boot3D(string input, int iterations)
     {
-        var grid = Grid3dBuilder.BuildCharMatrix(input, '.');
+        var grid = Grid3dBuilder.BuildCharGrid(input, '.');
 
         for (var i = 0; i < iterations; i++)
         {
@@ -40,7 +40,7 @@ public class ConwayCube
 
     public int Boot4D(string input, int iterations)
     {
-        var grid = Grid4dBuilder.BuildCharMatrix(input, '.');
+        var grid = Grid4dBuilder.BuildCharGrid(input, '.');
 
         for (var i = 0; i < iterations; i++)
         {

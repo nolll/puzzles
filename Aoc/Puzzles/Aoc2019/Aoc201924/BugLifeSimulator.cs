@@ -11,7 +11,7 @@ public class BugLifeSimulator
 
     public BugLifeSimulator(string input)
     {
-        _grid = BuildMatrix(input);
+        _grid = BuildGrid(input);
         _previousStrings = new List<string>();
     }
 
@@ -38,7 +38,7 @@ public class BugLifeSimulator
 
     private void NextIteration()
     {
-        var newMatrix = new Grid<char>(1, 1);
+        var newGrid = new Grid<char>(1, 1);
         for (var y = 0; y < _grid.Height; y++)
         {
             for (var x = 0; x < _grid.Width; x++)
@@ -48,12 +48,12 @@ public class BugLifeSimulator
                 var adjacentValues = _grid.OrthogonalAdjacentValues;
                 var neighborCount = adjacentValues.Count(o => o == '#');
                 var newValue = GetNewValue(currentValue, neighborCount);
-                newMatrix.MoveTo(x, y);
-                newMatrix.WriteValue(newValue);
+                newGrid.MoveTo(x, y);
+                newGrid.WriteValue(newValue);
             }
         }
 
-        _grid = newMatrix;
+        _grid = newGrid;
     }
 
     private char GetNewValue(char currentValue, int neighborCount)
@@ -84,9 +84,9 @@ public class BugLifeSimulator
         }
     }
 
-    private Grid<char> BuildMatrix(string map)
+    private Grid<char> BuildGrid(string map)
     {
-        var matrix = new Grid<char>(1, 1);
+        var grid = new Grid<char>(1, 1);
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)
@@ -95,14 +95,14 @@ public class BugLifeSimulator
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {
-                matrix.MoveTo(x, y);
-                matrix.WriteValue(c);
+                grid.MoveTo(x, y);
+                grid.WriteValue(c);
                 x += 1;
             }
 
             y += 1;
         }
 
-        return matrix;
+        return grid;
     }
 }

@@ -4,7 +4,7 @@ namespace Pzl.Tools.Grids.Grids2d;
 
 public class Grid<T> where T : struct
 {
-    private readonly IDictionary<Coord, T> _matrix = new Dictionary<Coord, T>();
+    private readonly IDictionary<Coord, T> _grid = new Dictionary<Coord, T>();
 
     public T DefaultValue { get; }
     
@@ -16,12 +16,12 @@ public class Grid<T> where T : struct
     public int YMax { get; private set; }
 
     public GridDirection Direction { get; private set; }
-    public Coord Address { get; private set; }
-    public Coord StartAddress { get; }
-    public bool IsAtTopEdge => Address.Y == YMin;
-    public bool IsAtRightEdge => Address.X == XMax;
-    public bool IsAtBottomEdge => Address.Y == YMax;
-    public bool IsAtLeftEdge => Address.X == XMin;
+    public Coord Coord { get; private set; }
+    public Coord StartCoord { get; }
+    public bool IsAtTopEdge => Coord.Y == YMin;
+    public bool IsAtRightEdge => Coord.X == XMax;
+    public bool IsAtBottomEdge => Coord.Y == YMax;
+    public bool IsAtLeftEdge => Coord.X == XMin;
     public bool IsAtEdge => IsAtTopEdge || IsAtRightEdge || IsAtBottomEdge || IsAtLeftEdge;
     
     public Coord Center
@@ -48,8 +48,8 @@ public class Grid<T> where T : struct
     private Grid(T defaultValue)
     {
         DefaultValue = defaultValue;
-        Address = new Coord(0, 0);
-        StartAddress = new Coord(0, 0);
+        Coord = new Coord(0, 0);
+        StartCoord = new Coord(0, 0);
         Direction = GridDirection.Up;
     }
 
@@ -60,17 +60,16 @@ public class Grid<T> where T : struct
         T defaultValue = default)
         : this(defaultValue)
     {
-        _matrix = values;
+        _grid = values;
         XMin = min.X;
         XMax = max.X;
         YMin = min.Y;
         YMax = max.Y;
     }
 
-    public IEnumerable<T> Values =>
-        Coords.Select(coord => _matrix.TryGetValue(coord, out var v) 
-            ? v 
-            : DefaultValue);
+    public IEnumerable<T> Values => Coords.Select(coord => _grid.TryGetValue(coord, out var v)
+        ? v
+        : DefaultValue);
 
     public IEnumerable<Coord> Coords
     {
@@ -86,14 +85,14 @@ public class Grid<T> where T : struct
         }
     }
 
-    public T ReadValue() => ReadValueAt(Address);
+    public T ReadValue() => ReadValueAt(Coord);
     public T ReadValueAt(int x, int y) => ReadValueAt(new Coord(x, y));
 
-    public T ReadValueAt(Coord coord) => _matrix.TryGetValue(coord, out var v)
+    public T ReadValueAt(Coord coord) => _grid.TryGetValue(coord, out var v)
         ? v
         : DefaultValue;
 
-    public void WriteValue(T value) => WriteValueAt(Address, value);
+    public void WriteValue(T value) => WriteValueAt(Coord, value);
     public void WriteValueAt(int x, int y, T value) => WriteValueAt(new Coord(x, y), value);
 
     public void WriteValueAt(Coord coord, T value)
@@ -108,10 +107,10 @@ public class Grid<T> where T : struct
         else if (coord.Y > YMax)
             YMax = coord.Y;
         
-        _matrix[coord] = value;
+        _grid[coord] = value;
     }
     
-    public void ClearValueAt(Coord coord) => _matrix.Remove(coord);
+    public void ClearValueAt(Coord coord) => _grid.Remove(coord);
 
     public IEnumerable<T> ReadRowValues(int y)
     {
@@ -131,23 +130,23 @@ public class Grid<T> where T : struct
 
     public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
     public IList<T> OrthogonalAdjacentValuesTo(Coord address) => OrthogonalAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
-    public IList<Coord> OrthogonalAdjacentCoords => OrthogonalAdjacentCoordsTo(Address);
+    public IList<Coord> OrthogonalAdjacentCoords => OrthogonalAdjacentCoordsTo(Coord);
     public IList<Coord> OrthogonalAdjacentCoordsTo(Coord address) => PossibleOrthogonalAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
 
-    public IEnumerable<Coord> PossibleOrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoordsTo(Address);
+    public IEnumerable<Coord> PossibleOrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoordsTo(Coord);
     public IEnumerable<Coord> PossibleOrthogonalAdjacentCoordsTo(Coord address) => 
-        MatrixConstants.OrthogonalDirections.Select(dir => new Coord(address.X + dir.x, address.Y + dir.y));
+        GridConstants.OrthogonalDirections.Select(dir => new Coord(address.X + dir.x, address.Y + dir.y));
 
-    public IList<T> AllAdjacentValues => AllAdjacentCoordsTo(Address).Select(ReadValueAt).ToList();
+    public IList<T> AllAdjacentValues => AllAdjacentCoordsTo(Coord).Select(ReadValueAt).ToList();
     public IList<T> AllAdjacentValuesTo(Coord address) => AllAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
-    public IList<Coord> AllAdjacentCoords => AllAdjacentCoordsTo(Address);
+    public IList<Coord> AllAdjacentCoords => AllAdjacentCoordsTo(Coord);
     public IList<Coord> AllAdjacentCoordsTo(Coord address) => AllPossibleAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
 
     private IEnumerable<Coord> AllPossibleAdjacentCoordsTo(Coord address)
     {
-        foreach (var dy in MatrixConstants.AdjacentDeltas)
+        foreach (var dy in GridConstants.AdjacentDeltas)
         {
-            foreach (var dx in MatrixConstants.AdjacentDeltas)
+            foreach (var dx in GridConstants.AdjacentDeltas)
             {
                 var coord = new Coord(address.X + dx, address.Y + dy);
                 if (!coord.Equals(address))
@@ -161,25 +160,25 @@ public class Grid<T> where T : struct
     public bool TryMoveTo(Coord address) => MoveTo(address, false);
     public bool TryMoveTo(int x, int y) => MoveTo(new Coord(x, y), false);
     public bool MoveForward() => MoveForward(true);
-    private bool MoveForward(bool extend) => MoveTo(new Coord(Address.X + Direction.X, Address.Y + Direction.Y), extend);
+    private bool MoveForward(bool extend) => MoveTo(new Coord(Coord.X + Direction.X, Coord.Y + Direction.Y), extend);
     public bool TryMoveForward() => MoveForward(false);
     public bool MoveBackward() => MoveBackward(true);
-    private bool MoveBackward(bool extend) => MoveTo(new Coord(Address.X - Direction.X, Address.Y - Direction.Y), extend);
+    private bool MoveBackward(bool extend) => MoveTo(new Coord(Coord.X - Direction.X, Coord.Y - Direction.Y), extend);
     public bool TryMoveBackward() => MoveBackward(false);
     public bool MoveUp(int steps = 1) => MoveUp(steps, true);
-    private bool MoveUp(int steps, bool extend) => MoveTo(new Coord(Address.X, Address.Y - steps), extend);
+    private bool MoveUp(int steps, bool extend) => MoveTo(new Coord(Coord.X, Coord.Y - steps), extend);
     public bool TryMoveUp(int steps = 1) => MoveUp(steps, false);
     public bool MoveRight(int steps = 1) => MoveRight(steps, true);
-    private bool MoveRight(int steps, bool extend) => MoveTo(new Coord(Address.X + steps, Address.Y), extend);
+    private bool MoveRight(int steps, bool extend) => MoveTo(new Coord(Coord.X + steps, Coord.Y), extend);
     public bool TryMoveRight(int steps = 1) => MoveRight(steps, false);
     public bool MoveDown(int steps = 1) => MoveDown(steps, true);
-    private bool MoveDown(int steps, bool extend) => MoveTo(new Coord(Address.X, Address.Y + steps), extend);
+    private bool MoveDown(int steps, bool extend) => MoveTo(new Coord(Coord.X, Coord.Y + steps), extend);
     public bool TryMoveDown(int steps = 1) => MoveDown(steps, false);
     public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
-    private bool MoveLeft(int steps, bool extend) => MoveTo(new Coord(Address.X - steps, Address.Y), extend);
+    private bool MoveLeft(int steps, bool extend) => MoveTo(new Coord(Coord.X - steps, Coord.Y), extend);
     public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
     public bool Move(GridDirection dir, int steps = 1) => Move(dir, steps, true);
-    private bool Move(GridDirection dir, int steps, bool extend) => MoveTo(new Coord(Address.X + dir.X, Address.Y + dir.Y), extend);
+    private bool Move(GridDirection dir, int steps, bool extend) => MoveTo(new Coord(Coord.X + dir.X, Coord.Y + dir.Y), extend);
     public bool TryMove(GridDirection dir, int steps = 1) => Move(dir, steps, false);
 
     public bool MoveTo(Coord address, bool extend)
@@ -187,14 +186,14 @@ public class Grid<T> where T : struct
         if (IsOutOfRange(address))
         {
             if (extend)
-                ExtendMatrix(address);
+                ExtendGrid(address);
             else
                 return false;
         }
 
         var x = address.X > XMin ? address.X : XMin;
         var y = address.Y > YMin ? address.Y : YMin;
-        Address = new Coord(x, y);
+        Coord = new Coord(x, y);
         return true;
     }
 
@@ -231,7 +230,7 @@ public class Grid<T> where T : struct
     public GridDirection FaceDown() => TurnTo(GridDirection.Down);
     public GridDirection FaceLeft() => TurnTo(GridDirection.Left);
 
-    private void ExtendMatrix(Coord address)
+    private void ExtendGrid(Coord address)
     {
         ExtendX(address);
         ExtendY(address);
@@ -244,13 +243,13 @@ public class Grid<T> where T : struct
         ExtendRight(address);
     }
 
-    private void ExtendLeft(Coord address) => AddCols(-address.X, MatrixAddMode.Prepend);
+    private void ExtendLeft(Coord address) => AddCols(-address.X, GridAddMode.Prepend);
 
     private void ExtendRight(Coord address)
     {
         var extendBy = address.X - XMax;
         if (extendBy > 0)
-            AddCols(extendBy, MatrixAddMode.Append);
+            AddCols(extendBy, GridAddMode.Append);
     }
 
     private void ExtendY(Coord address)
@@ -260,26 +259,26 @@ public class Grid<T> where T : struct
         ExtendBottom(address);
     }
 
-    private void ExtendTop(Coord address) => AddRows(-address.Y, MatrixAddMode.Prepend);
+    private void ExtendTop(Coord address) => AddRows(-address.Y, GridAddMode.Prepend);
 
     private void ExtendBottom(Coord address)
     {
         var extendBy = address.Y - YMax;
         if (extendBy > 0)
-            AddRows(extendBy, MatrixAddMode.Append);
+            AddRows(extendBy, GridAddMode.Append);
     }
 
-    private void AddRows(int numberOfRows, MatrixAddMode addMode)
+    private void AddRows(int numberOfRows, GridAddMode addMode)
     {
-        if (addMode == MatrixAddMode.Prepend)
+        if (addMode == GridAddMode.Prepend)
             YMin -= numberOfRows;
         else
             YMax += numberOfRows;
     }
 
-    private void AddCols(int numberOfCols, MatrixAddMode addMode)
+    private void AddCols(int numberOfCols, GridAddMode addMode)
     {
-        if (addMode == MatrixAddMode.Prepend)
+        if (addMode == GridAddMode.Prepend)
             XMin -= numberOfCols;
         else
             XMax += numberOfCols;
@@ -293,10 +292,10 @@ public class Grid<T> where T : struct
         ExtendLeft(steps);
     }
 
-    public void ExtendUp(int steps = 1) => AddRows(steps, MatrixAddMode.Prepend);
-    public void ExtendRight(int steps = 1) => AddCols(steps, MatrixAddMode.Append);
-    public void ExtendDown(int steps = 1) => AddRows(steps, MatrixAddMode.Append);
-    public void ExtendLeft(int steps = 1) => AddCols(steps, MatrixAddMode.Prepend);
+    public void ExtendUp(int steps = 1) => AddRows(steps, GridAddMode.Prepend);
+    public void ExtendRight(int steps = 1) => AddCols(steps, GridAddMode.Append);
+    public void ExtendDown(int steps = 1) => AddRows(steps, GridAddMode.Append);
+    public void ExtendLeft(int steps = 1) => AddCols(steps, GridAddMode.Prepend);
 
     public string Print(bool markCurrentAddress = false, bool markStartAddress = false, T currentAddressMarker = default, T startAddressMarker = default, bool spacing = false)
     {
@@ -306,9 +305,9 @@ public class Grid<T> where T : struct
         {
             for (var x = XMin; x <= XMax; x++)
             {
-                if (markCurrentAddress && x == Address.X && y == Address.Y)
+                if (markCurrentAddress && x == Coord.X && y == Coord.Y)
                     sb.Append('D');
-                else if (markStartAddress && x == StartAddress.X && y == StartAddress.Y)
+                else if (markStartAddress && x == StartCoord.X && y == StartCoord.Y)
                     sb.Append('S');
                 else
                     sb.Append(ReadValueAt(x, y));
@@ -359,7 +358,7 @@ public class Grid<T> where T : struct
 
     private Dictionary<Coord, T> GetValuesForClone(int multiplier)
     {
-        var values = _matrix.ToDictionary(item => item.Key, item => item.Value);
+        var values = _grid.ToDictionary(item => item.Key, item => item.Value);
 
         if (multiplier == 1)
             return values;
@@ -385,7 +384,7 @@ public class Grid<T> where T : struct
 
     public Grid<T> RotateLeft()
     {
-        var values = _matrix.ToDictionary(item => new Coord(item.Key.Y, YMax - item.Key.X), item => item.Value);
+        var values = _grid.ToDictionary(item => new Coord(item.Key.Y, YMax - item.Key.X), item => item.Value);
         var min = new Coord(YMin, YMin);
         var max = new Coord(XMax, YMax);
         return new Grid<T>(min, max, values, DefaultValue);
@@ -393,7 +392,7 @@ public class Grid<T> where T : struct
 
     public Grid<T> RotateRight()
     {
-        var values = _matrix.ToDictionary(item => new Coord(XMax - item.Key.Y, item.Key.X), item => item.Value);
+        var values = _grid.ToDictionary(item => new Coord(XMax - item.Key.Y, item.Key.X), item => item.Value);
         var min = new Coord(YMin, YMin);
         var max = new Coord(XMax, YMax);
         return new Grid<T>(min, max, values, DefaultValue);
@@ -405,7 +404,7 @@ public class Grid<T> where T : struct
         to ??= new Coord(XMax, YMax);
         var dx = from.X;
         var dy = from.Y;
-        var values = _matrix
+        var values = _grid
             .Where(item => item.Key.X >= from.X && item.Key.Y >= from.Y && item.Key.X <= to.X && item.Key.Y <= to.Y)
             .ToDictionary(item => new Coord(item.Key.X - dx, item.Key.Y - dy), item => item.Value);
         var slicedFrom = new Coord(from.X - dx, from.Y - dy);
@@ -421,7 +420,7 @@ public class Grid<T> where T : struct
 
     public Grid<T> FlipVertical()
     {
-        var values = _matrix.ToDictionary(item => new Coord(item.Key.X, YMax - item.Key.Y), item => item.Value);
+        var values = _grid.ToDictionary(item => new Coord(item.Key.X, YMax - item.Key.Y), item => item.Value);
         var min = new Coord(XMin, YMin);
         var max = new Coord(XMax, YMax);
         return new Grid<T>(min, max, values, DefaultValue);
@@ -429,7 +428,7 @@ public class Grid<T> where T : struct
 
     public Grid<T> FlipHorizontal()
     {
-        var values = _matrix.ToDictionary(item => new Coord(XMax - item.Key.X, item.Key.Y), item => item.Value);
+        var values = _grid.ToDictionary(item => new Coord(XMax - item.Key.X, item.Key.Y), item => item.Value);
         var min = new Coord(XMin, YMin);
         var max = new Coord(XMax, YMax);
         return new Grid<T>(min, max, values, DefaultValue);
@@ -437,7 +436,7 @@ public class Grid<T> where T : struct
 
     public Grid<T> Transpose()
     {
-        var values = _matrix.ToDictionary(item => new Coord(item.Key.Y, item.Key.X), item => item.Value);
+        var values = _grid.ToDictionary(item => new Coord(item.Key.Y, item.Key.X), item => item.Value);
         var min = new Coord(YMin, XMin);
         var max = new Coord(YMax, XMax);
         return new Grid<T>(min, max, values, DefaultValue);

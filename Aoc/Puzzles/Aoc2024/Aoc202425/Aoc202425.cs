@@ -14,18 +14,18 @@ public class Aoc202425 : AocPuzzle
         var keys = new List<int[]>();
         foreach (var part in parts)
         {
-            var matrix = GridBuilder.BuildCharGrid(part);
+            var grid = GridBuilder.BuildCharGrid(part);
             int[] a = [0, 0, 0, 0, 0];
-            for (var x = 0; x < matrix.Width; x++)
+            for (var x = 0; x < grid.Width; x++)
             {
-                for (var y = 1; y < matrix.Height - 1; y++)
+                for (var y = 1; y < grid.Height - 1; y++)
                 {
-                    if(matrix.ReadValueAt(x, y) == '#')
+                    if(grid.ReadValueAt(x, y) == '#')
                         a[x]++;
                 }
             }
             
-            var isLock = IsLock(matrix);
+            var isLock = IsLock(grid);
             if(isLock)
                 locks.Add(a);
             else

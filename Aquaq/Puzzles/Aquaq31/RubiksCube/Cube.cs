@@ -331,19 +331,19 @@ public class Cube
     public string Print3d()
     {
         var pm = new Grid<char>(9, 12, '.');
-        var frontMatrix = Front.Grid;
-        var upMatrix = Up.Grid;
-        var leftMatrix = Left.Grid;
-        var rightMatrix = Right.Grid;
-        var downMatrix = Down.Grid;
-        var backMatrix = Back.Grid.RotateLeft().RotateLeft();
+        var frontGrid = Front.Grid;
+        var upGrid = Up.Grid;
+        var leftGrid = Left.Grid;
+        var rightGrid = Right.Grid;
+        var downGrid = Down.Grid;
+        var backGrid = Back.Grid.RotateLeft().RotateLeft();
 
-        ApplyToPrintMatrix(pm, upMatrix, new Coord(3, 0));
-        ApplyToPrintMatrix(pm, leftMatrix, new Coord(0, 3));
-        ApplyToPrintMatrix(pm, frontMatrix, new Coord(3, 3));
-        ApplyToPrintMatrix(pm, rightMatrix, new Coord(6, 3));
-        ApplyToPrintMatrix(pm, downMatrix, new Coord(3, 6));
-        ApplyToPrintMatrix(pm, backMatrix, new Coord(3, 9));
+        ApplyToPrintGrid(pm, upGrid, new Coord(3, 0));
+        ApplyToPrintGrid(pm, leftGrid, new Coord(0, 3));
+        ApplyToPrintGrid(pm, frontGrid, new Coord(3, 3));
+        ApplyToPrintGrid(pm, rightGrid, new Coord(6, 3));
+        ApplyToPrintGrid(pm, downGrid, new Coord(3, 6));
+        ApplyToPrintGrid(pm, backGrid, new Coord(3, 9));
 
         return pm.Print();
     }
@@ -354,24 +354,24 @@ public class Cube
     public string Print()
     {
         var pm = new Grid<char>(23, 3, ' ');
-        var frontMatrix = Front.Grid;
-        var upMatrix = Up.Grid;
-        var leftMatrix = Left.Grid;
-        var rightMatrix = Right.Grid;
-        var downMatrix = Down.Grid;
-        var backMatrix = Back.Grid;
+        var frontGrid = Front.Grid;
+        var upGrid = Up.Grid;
+        var leftGrid = Left.Grid;
+        var rightGrid = Right.Grid;
+        var downGrid = Down.Grid;
+        var backGrid = Back.Grid;
 
-        ApplyToPrintMatrix(pm, frontMatrix, new Coord(0, 0));
-        ApplyToPrintMatrix(pm, upMatrix, new Coord(4, 0));
-        ApplyToPrintMatrix(pm, leftMatrix, new Coord(8, 0));
-        ApplyToPrintMatrix(pm, rightMatrix, new Coord(12, 0));
-        ApplyToPrintMatrix(pm, downMatrix, new Coord(16, 0));
-        ApplyToPrintMatrix(pm, backMatrix, new Coord(20, 0));
+        ApplyToPrintGrid(pm, frontGrid, new Coord(0, 0));
+        ApplyToPrintGrid(pm, upGrid, new Coord(4, 0));
+        ApplyToPrintGrid(pm, leftGrid, new Coord(8, 0));
+        ApplyToPrintGrid(pm, rightGrid, new Coord(12, 0));
+        ApplyToPrintGrid(pm, downGrid, new Coord(16, 0));
+        ApplyToPrintGrid(pm, backGrid, new Coord(20, 0));
 
         return pm.Print();
     }
 
-    private void ApplyToPrintMatrix(Grid<char> printGrid, Grid<char> faceGrid, Coord startAddress)
+    private void ApplyToPrintGrid(Grid<char> printGrid, Grid<char> faceGrid, Coord startAddress)
     {
         foreach (var coord in faceGrid.Coords)
         {

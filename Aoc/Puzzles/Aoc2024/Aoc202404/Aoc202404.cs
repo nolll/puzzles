@@ -11,17 +11,17 @@ public class Aoc202404 : AocPuzzle
 
     public PuzzleResult Part1(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
+        var grid = GridBuilder.BuildCharGrid(input);
 
         var xmasCount = 0;
-        foreach (var coord in matrix.Coords)
+        foreach (var coord in grid.Coords)
         {
             var words = new List<string>();
             
-            foreach (var dir in MatrixConstants.AllDirections)
+            foreach (var dir in GridConstants.AllDirections)
             {
-                matrix.MoveTo(coord);
-                var word = ReadWord(matrix, dir);
+                grid.MoveTo(coord);
+                var word = ReadWord(grid, dir);
                 words.Add(word);
             }
 
@@ -33,13 +33,13 @@ public class Aoc202404 : AocPuzzle
     
     public PuzzleResult Part2(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input, '.');
+        var grid = GridBuilder.BuildCharGrid(input, '.');
 
         var xmasCount = 0;
-        foreach (var coord in matrix.Coords)
+        foreach (var coord in grid.Coords)
         {
-            matrix.MoveTo(coord);
-            xmasCount += IsX(matrix) ? 1 : 0;
+            grid.MoveTo(coord);
+            xmasCount += IsX(grid) ? 1 : 0;
         }
         
         return new PuzzleResult(xmasCount, "be01756ac17140a11342a320132dee7e");
@@ -55,7 +55,7 @@ public class Aoc202404 : AocPuzzle
         var i = 1;
         while (i < Part1WordLength)
         {
-            if (!grid.TryMoveTo(grid.Address.X + dir.x, grid.Address.Y + dir.y))
+            if (!grid.TryMoveTo(grid.Coord.X + dir.x, grid.Coord.Y + dir.y))
                 break;
 
             yield return grid.ReadValue();
@@ -69,8 +69,8 @@ public class Aoc202404 : AocPuzzle
         if (c != 'A')
             return false;
 
-        var chars = MatrixConstants.DiagonalDirections
-            .Select(o => grid.ReadValueAt(grid.Address.X + o.x, grid.Address.Y - o.y)).ToArray();
+        var chars = GridConstants.DiagonalDirections
+            .Select(o => grid.ReadValueAt(grid.Coord.X + o.x, grid.Coord.Y - o.y)).ToArray();
         
         return IsMas($"{chars[0]}A{chars[2]}") && IsMas($"{chars[1]}A{chars[3]}");
     }

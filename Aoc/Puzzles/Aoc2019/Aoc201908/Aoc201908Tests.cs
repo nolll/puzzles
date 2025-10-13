@@ -3,7 +3,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201908;
 public class Aoc201908Tests
 {
     [Fact]
-    public void LayerMatrixIsCorrect()
+    public void LayerGridIsCorrect()
     {
         const string data = "012011210021";
         const int width = 4;

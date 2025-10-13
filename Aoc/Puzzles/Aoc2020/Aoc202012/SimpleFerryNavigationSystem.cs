@@ -7,7 +7,7 @@ public class SimpleFerryNavigationSystem
 {
     private readonly Grid<int> _grid;
     private readonly IEnumerable<FerryNavigationInstruction> _intructions;
-    public int DistanceTravelled => _grid.Address.ManhattanDistanceTo(_grid.StartAddress);
+    public int DistanceTravelled => _grid.Coord.ManhattanDistanceTo(_grid.StartCoord);
         
     public SimpleFerryNavigationSystem(string input)
     {

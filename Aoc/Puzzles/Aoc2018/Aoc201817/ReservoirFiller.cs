@@ -17,27 +17,27 @@ public class ReservoirFiller
     private const char RunningWaterTile = '|';
     private const char RestingWaterTile = '~';
 
-    public int TotalWaterTileCount => _grid.Values.Count(o => o == RestingWaterTile || o == RunningWaterTile) - DistanceFromSourceToMinY;
+    public int TotalWaterTileCount => _grid.Values.Count(o => o is RestingWaterTile or RunningWaterTile) - DistanceFromSourceToMinY;
     public int RetainedWaterTileCount => _grid.Values.Count(o => o == RestingWaterTile);
     private int DistanceFromSourceToMinY => _yMin - _source.Y - 1;
 
     public ReservoirFiller(string input)
     {
-        BuildMatrix(input);
+        BuildGrid(input);
     }
 
     public void Fill()
     {
-        _openAddresses = new List<Coord> { new(_source.X, _source.Y) };
+        _openAddresses = [new(_source.X, _source.Y)];
         while (_openAddresses.Any())
         {
             var current = _openAddresses.First();
             _grid.MoveTo(current);
-            var valueBelow = _grid.ReadValueAt(_grid.Address.X, _grid.Address.Y + 1);
+            var valueBelow = _grid.ReadValueAt(_grid.Coord.X, _grid.Coord.Y + 1);
             if (valueBelow == WallTile || valueBelow == RestingWaterTile)
             {
                 _openAddresses.RemoveAt(0);
-                AddToOpenAddresses(new Coord(_grid.Address.X, _grid.Address.Y - 1));
+                AddToOpenAddresses(new Coord(_grid.Coord.X, _grid.Coord.Y - 1));
                 continue;
             }
 
@@ -86,7 +86,7 @@ public class ReservoirFiller
         }
     }
 
-    private void BuildMatrix(string input)
+    private void BuildGrid(string input)
     {
         _grid = new Grid<char>(1, 1, EmptyTile);
         _grid.MoveTo(_source);
@@ -154,10 +154,10 @@ public class ReservoirFiller
             {
                 if (value == EmptyTile)
                     _grid.WriteValue(RunningWaterTile);
-                var valueBelow = _grid.ReadValueAt(_grid.Address.X, _grid.Address.Y + 1);
+                var valueBelow = _grid.ReadValueAt(_grid.Coord.X, _grid.Coord.Y + 1);
                 if (valueBelow == EmptyTile || valueBelow == RunningWaterTile)
                 {
-                    AddToOpenAddresses(_grid.Address);
+                    AddToOpenAddresses(_grid.Coord);
                     return true;
                 }
             }
@@ -178,10 +178,10 @@ public class ReservoirFiller
             {
                 if (value == EmptyTile)
                     _grid.WriteValue(RunningWaterTile);
-                var valueBelow = _grid.ReadValueAt(_grid.Address.X, _grid.Address.Y + 1);
+                var valueBelow = _grid.ReadValueAt(_grid.Coord.X, _grid.Coord.Y + 1);
                 if (valueBelow == EmptyTile || valueBelow == RunningWaterTile)
                 {
-                    AddToOpenAddresses(_grid.Address);
+                    AddToOpenAddresses(_grid.Coord);
                     return true;
                 }
             }
@@ -192,5 +192,5 @@ public class ReservoirFiller
         }
     }
 
-    private bool IsAtBottom => _grid.Address.Y > _yMax;
+    private bool IsAtBottom => _grid.Coord.Y > _yMax;
 }

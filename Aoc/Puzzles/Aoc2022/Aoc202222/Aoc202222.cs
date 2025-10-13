@@ -22,11 +22,11 @@ public class Aoc202222 : AocPuzzle
     public static int Part1(string input)
     {
         var groups = StringReader.ReadStringGroupsWithWhitespace(input);
-        var matrix = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
-        matrix.MoveTo(0, 0);
-        matrix.TurnTo(GridDirection.Right);
-        while (matrix.ReadValue() == ' ')
-            matrix.MoveForward();
+        var grid = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
+        grid.MoveTo(0, 0);
+        grid.TurnTo(GridDirection.Right);
+        while (grid.ReadValue() == ' ')
+            grid.MoveForward();
 
         var path = ParsePath(groups[1]);
 
@@ -37,17 +37,17 @@ public class Aoc202222 : AocPuzzle
             {
                 while (stepsToMove > 0)
                 {
-                    var lastPos = matrix.Address;
+                    var lastPos = grid.Coord;
                     var moveSucceeded = true;
-                    if (matrix.TryMoveForward())
+                    if (grid.TryMoveForward())
                     {
-                        if (matrix.ReadValue() == '#')
+                        if (grid.ReadValue() == '#')
                         {
-                            matrix.MoveTo(lastPos);
+                            grid.MoveTo(lastPos);
                             break;
                         }
 
-                        if (matrix.ReadValue() == ' ')
+                        if (grid.ReadValue() == ' ')
                             moveSucceeded = false;
                     }
                     else
@@ -57,22 +57,22 @@ public class Aoc202222 : AocPuzzle
 
                     if (!moveSucceeded)
                     {
-                        if (matrix.Direction.Equals(GridDirection.Up))
-                            matrix.MoveTo(matrix.Address.X, matrix.YMax);
-                        else if (matrix.Direction.Equals(GridDirection.Right))
-                            matrix.MoveTo(matrix.XMin, matrix.Address.Y);
-                        else if (matrix.Direction.Equals(GridDirection.Down))
-                            matrix.MoveTo(matrix.Address.X, matrix.YMin);
+                        if (grid.Direction.Equals(GridDirection.Up))
+                            grid.MoveTo(grid.Coord.X, grid.YMax);
+                        else if (grid.Direction.Equals(GridDirection.Right))
+                            grid.MoveTo(grid.XMin, grid.Coord.Y);
+                        else if (grid.Direction.Equals(GridDirection.Down))
+                            grid.MoveTo(grid.Coord.X, grid.YMin);
                         else
-                            matrix.MoveTo(matrix.XMax, matrix.Address.Y);
+                            grid.MoveTo(grid.XMax, grid.Coord.Y);
                     }
 
-                    while (matrix.ReadValue() == ' ')
-                        matrix.MoveForward();
+                    while (grid.ReadValue() == ' ')
+                        grid.MoveForward();
 
-                    if (matrix.ReadValue() == '#')
+                    if (grid.ReadValue() == '#')
                     {
-                        matrix.MoveTo(lastPos);
+                        grid.MoveTo(lastPos);
                         break;
                     }
 
@@ -82,15 +82,15 @@ public class Aoc202222 : AocPuzzle
             else
             {
                 if (instruction == "R")
-                    matrix.TurnRight();
+                    grid.TurnRight();
                 else
-                    matrix.TurnLeft();
+                    grid.TurnLeft();
             }
         }
 
-        var row = matrix.Address.Y + 1;
-        var col = matrix.Address.X + 1;
-        var facingScore = GetFacingScore(matrix.Direction);
+        var row = grid.Coord.Y + 1;
+        var col = grid.Coord.X + 1;
+        var facingScore = GetFacingScore(grid.Direction);
 
         var password = 1000 * row + 4 * col + facingScore;
 
@@ -100,12 +100,12 @@ public class Aoc202222 : AocPuzzle
     public static int Part2(string input)
     {
         var groups = StringReader.ReadStringGroupsWithWhitespace(input);
-        var matrix = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
-        matrix.MoveTo(0, 0);
-        matrix.TurnTo(GridDirection.Right);
+        var grid = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
+        grid.MoveTo(0, 0);
+        grid.TurnTo(GridDirection.Right);
 
-        while (matrix.ReadValue() == ' ')
-            matrix.MoveForward();
+        while (grid.ReadValue() == ' ')
+            grid.MoveForward();
 
         var path = ParsePath(groups[1]);
 
@@ -116,20 +116,20 @@ public class Aoc202222 : AocPuzzle
             {
                 while (stepsToMove > 0)
                 {
-                    var lastPos = matrix.Address;
-                    var lastDirection = matrix.Direction;
+                    var lastPos = grid.Coord;
+                    var lastDirection = grid.Direction;
                     var moveSucceeded = true;
-                    if (matrix.TryMoveForward())
+                    if (grid.TryMoveForward())
                     {
-                        if (matrix.ReadValue() == '#')
+                        if (grid.ReadValue() == '#')
                         {
-                            matrix.MoveTo(lastPos);
+                            grid.MoveTo(lastPos);
                             break;
                         }
 
-                        if (matrix.ReadValue() == ' ')
+                        if (grid.ReadValue() == ' ')
                         {
-                            matrix.MoveTo(lastPos);
+                            grid.MoveTo(lastPos);
                             moveSucceeded = false;
                         }
                     }
@@ -140,17 +140,17 @@ public class Aoc202222 : AocPuzzle
 
                     if (!moveSucceeded)
                     {
-                        var (newCoord, newDirection) = MapExitPosition(matrix.Address, matrix.Direction, 50);
-                        if (matrix.TryMoveTo(newCoord))
+                        var (newCoord, newDirection) = MapExitPosition(grid.Coord, grid.Direction, 50);
+                        if (grid.TryMoveTo(newCoord))
                         {
-                            matrix.TurnTo(newDirection);
+                            grid.TurnTo(newDirection);
                         }
                     }
 
-                    if (matrix.ReadValue() == '#')
+                    if (grid.ReadValue() == '#')
                     {
-                        matrix.MoveTo(lastPos);
-                        matrix.TurnTo(lastDirection);
+                        grid.MoveTo(lastPos);
+                        grid.TurnTo(lastDirection);
                         break;
                     }
 
@@ -160,15 +160,15 @@ public class Aoc202222 : AocPuzzle
             else
             {
                 if (instruction == "R")
-                    matrix.TurnRight();
+                    grid.TurnRight();
                 else
-                    matrix.TurnLeft();
+                    grid.TurnLeft();
             }
         }
 
-        var row = matrix.Address.Y + 1;
-        var col = matrix.Address.X + 1;
-        var facingScore = GetFacingScore(matrix.Direction);
+        var row = grid.Coord.Y + 1;
+        var col = grid.Coord.X + 1;
+        var facingScore = GetFacingScore(grid.Direction);
 
         var password = 1000 * row + 4 * col + facingScore;
 

@@ -10,7 +10,7 @@ public class SeatingSimulatorVisibleSeats : SeatingSimulator
 
     protected override IList<char> GetAdjacentSeats()
     {
-        var pos = Grid.Address;
+        var pos = Grid.Coord;
         var values = new List<char?>
         {
             GetVisible(Grid.TryMoveUp, pos),

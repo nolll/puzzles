@@ -10,47 +10,47 @@ public class Ece202410 : EverybodyEventPuzzle
 
     public PuzzleResult Part1(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
+        var grid = GridBuilder.BuildCharGrid(input);
         var offset = new Coord(0, 0);
-        FillSymbols(matrix, offset);
-        var word = ReadWord(matrix, offset);
+        FillSymbols(grid, offset);
+        var word = ReadWord(grid, offset);
         
         return new PuzzleResult(word, "b62fc815678f7269aae352e26d1c3600");
     }
     
     public PuzzleResult Part2(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var offsets = GetOffsets(matrix, 1).ToList();
+        var grid = GridBuilder.BuildCharGrid(input);
+        var offsets = GetOffsets(grid, 1).ToList();
 
         foreach (var offset in offsets)
         {
-            FillSymbols(matrix, offset);
+            FillSymbols(grid, offset);
         }
 
-        var result = offsets.Select(offset => ReadWord(matrix, offset)).ToList().Sum(GetScore);
+        var result = offsets.Select(offset => ReadWord(grid, offset)).ToList().Sum(GetScore);
         return new PuzzleResult(result, "ca8e2900fb3be19c6e0fbea1fa76eff6");
     }
     
     public PuzzleResult Part3(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
+        var grid = GridBuilder.BuildCharGrid(input);
         
         const int overlap = 2;
-        var offsets = GetOffsets(matrix, -overlap).ToList();
+        var offsets = GetOffsets(grid, -overlap).ToList();
 
         const int sweepCount = 2;
         for (var i = 0; i < sweepCount; i++)
         {
             foreach (var offset in offsets)
             {
-                FillSymbols(matrix, offset);
-                FillUnknowns(matrix, offset);
+                FillSymbols(grid, offset);
+                FillUnknowns(grid, offset);
             }
         }
 
         var result = offsets
-            .Select(offset => ReadWord(matrix, offset))
+            .Select(offset => ReadWord(grid, offset))
             .Where(o => !o.Contains('.'))
             .Sum(GetScore);
         
@@ -72,8 +72,8 @@ public class Ece202410 : EverybodyEventPuzzle
     
     private static string ReadWord(Grid<char> grid, Coord offset)
     {
-        var wordMatrix = grid.Slice(new Coord(offset.X + 2, offset.Y + 2), 4, 4);
-        var chars = wordMatrix.Coords.Select(o => wordMatrix.ReadValueAt(o));
+        var wordGrid = grid.Slice(new Coord(offset.X + 2, offset.Y + 2), 4, 4);
+        var chars = wordGrid.Coords.Select(o => wordGrid.ReadValueAt(o));
         return string.Join("", chars);
     }
     

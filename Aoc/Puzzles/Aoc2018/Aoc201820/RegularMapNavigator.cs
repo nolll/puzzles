@@ -41,13 +41,13 @@ public class RegularMapNavigator
     private void BuildMap(string input)
     {
         input = input.TrimEnd(Chars.End).TrimStart(Chars.Start);
-        _distances[_map.Address] = 0;
+        _distances[_map.Coord] = 0;
         _map.WriteValue(Chars.Room);
         var queue = new Stack<Coord>();
         foreach (var c in input)
         {
             if (c == Chars.GroupStart)
-                queue.Push(_map.Address);
+                queue.Push(_map.Coord);
             else if (c == Chars.GroupEnd)
                 _map.MoveTo(queue.Pop());
             else if (c == Chars.Next)
@@ -59,7 +59,7 @@ public class RegularMapNavigator
 
     private void Move(char c)
     {
-        var lastDistance = _distances[_map.Address];
+        var lastDistance = _distances[_map.Coord];
         var move = GetMoveFunc(c);
         move();
         _map.WriteValue(Chars.Room);
@@ -70,7 +70,7 @@ public class RegularMapNavigator
         }
 
         var distance = lastDistance + 1;
-        _distances[_map.Address] = _distances.TryGetValue(_map.Address, out var existingDistance)
+        _distances[_map.Coord] = _distances.TryGetValue(_map.Coord, out var existingDistance)
             ? Math.Min(distance, existingDistance)
             : distance;
     }

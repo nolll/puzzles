@@ -26,11 +26,11 @@ public class Aoc202317 : AocPuzzle
 
     private static int LeastHeat(string s, int minStraightCount, int maxStraightCount)
     {
-        var matrix = GridBuilder.BuildIntGridFromNonSeparated(s);
+        var grid = GridBuilder.BuildIntGridFromNonSeparated(s);
 
-        var graph = BuildGraph(matrix, minStraightCount, maxStraightCount);
-        var sourceCoord = new Coord(matrix.XMin, matrix.XMin);
-        var targetCoord = new Coord(matrix.XMax, matrix.YMax);
+        var graph = BuildGraph(grid, minStraightCount, maxStraightCount);
+        var sourceCoord = new Coord(grid.XMin, grid.XMin);
+        var targetCoord = new Coord(grid.XMax, grid.YMax);
         
         List<string> sources =
         [

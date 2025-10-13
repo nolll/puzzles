@@ -7,18 +7,18 @@ public class ClaimsOverlapCountPuzzle
     public ClaimsOverlapCountPuzzle(string input)
     {
         var claims = ClaimListReader.Read(input);
-        var matrix = FabricMatrixFactory.Create(claims);
-        OverlapCount = GetOverlapCount(matrix);
+        var grid = FabricGridFactory.Create(claims);
+        OverlapCount = GetOverlapCount(grid);
     }
 
-    private int GetOverlapCount(int[,] matrix)
+    private int GetOverlapCount(int[,] grid)
     {
         var overlapCount = 0;
-        for (var row = 0; row < matrix.GetLength(0); row++)
+        for (var row = 0; row < grid.GetLength(0); row++)
         {
-            for (var col = 0; col < matrix.GetLength(1); col++)
+            for (var col = 0; col < grid.GetLength(1); col++)
             {
-                if (matrix[col, row] > 1)
+                if (grid[col, row] > 1)
                     overlapCount++;
             }
         }

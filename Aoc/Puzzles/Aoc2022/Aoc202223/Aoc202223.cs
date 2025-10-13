@@ -167,13 +167,13 @@ public class Aoc202223 : AocPuzzle
 
     private string Print(HashSet<Coord> coords)
     {
-        var matrix = new Grid<char>(1, 1, '.');
+        var grid = new Grid<char>(1, 1, '.');
         foreach (var coord in coords)
         {
-            matrix.MoveTo(coord);
-            matrix.WriteValue('#');
+            grid.MoveTo(coord);
+            grid.WriteValue('#');
         }
 
-        return matrix.Print();
+        return grid.Print();
     }
 }

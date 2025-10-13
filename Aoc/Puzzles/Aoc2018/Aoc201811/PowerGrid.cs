@@ -4,17 +4,17 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201811;
 
 public class PowerGrid
 {
-    private int MatrixSize { get; }
+    private int GridSize { get; }
     private readonly int _serialNumber;
-    private readonly int[,] _matrix;
+    private readonly int[,] _grid;
 
-    public PowerGrid(int matrixSize, int serialNumber)
+    public PowerGrid(int gridSize, int serialNumber)
     {
-        MatrixSize = matrixSize;
+        GridSize = gridSize;
         _serialNumber = serialNumber;
-        _matrix = new int[MatrixSize, MatrixSize];
+        _grid = new int[GridSize, GridSize];
 
-        FillMatrix();
+        FillGrid();
     }
 
     public (Coord coords, int size) GetMaxCoordsAnySize()
@@ -22,11 +22,11 @@ public class PowerGrid
         var maxPowerLevel = int.MinValue;
         var maxPowerLevelSize = 0;
         var maxPowerLevelAddress = new Coord(0, 0);
-        for (var ySquare = 0; ySquare < MatrixSize; ySquare++)
+        for (var ySquare = 0; ySquare < GridSize; ySquare++)
         {
-            for (var xSquare = 0; xSquare < MatrixSize; xSquare++)
+            for (var xSquare = 0; xSquare < GridSize; xSquare++)
             {
-                var maxSquareSize = MatrixSize - Math.Max(xSquare, ySquare);
+                var maxSquareSize = GridSize - Math.Max(xSquare, ySquare);
                 var powerLevel = 0;
                 for (var size = 1; size < maxSquareSize; size++)
                 {
@@ -34,14 +34,14 @@ public class PowerGrid
                     {
                         var x = xSquare + size;
                         var y = ySquare + yy;
-                        powerLevel += _matrix[x, y];
+                        powerLevel += _grid[x, y];
                     }
 
                     for (var xx = 0; xx <= size; xx++)
                     {
                         var x = xSquare + xx;
                         var y = ySquare + size;
-                        powerLevel += _matrix[x, y];
+                        powerLevel += _grid[x, y];
                     }
 
                     if (powerLevel > maxPowerLevel)
@@ -57,14 +57,14 @@ public class PowerGrid
         return (maxPowerLevelAddress, maxPowerLevelSize);
     }
 
-    private void FillMatrix()
+    private void FillGrid()
     {
-        for (var y = 0; y < MatrixSize - 2; y++)
+        for (var y = 0; y < GridSize - 2; y++)
         {
-            for (var x = 0; x < MatrixSize - 2; x++)
+            for (var x = 0; x < GridSize - 2; x++)
             {
                 var powerLevel = GetSinglePowerLevel(x, y);
-                _matrix[x, y] = powerLevel;
+                _grid[x, y] = powerLevel;
             }
         }
     }
@@ -73,9 +73,9 @@ public class PowerGrid
     {
         var maxPowerLevel = int.MinValue;
         var maxPowerLevelAddress = new Coord(0, 0);
-        for (var y = 0; y < MatrixSize - 2; y++)
+        for (var y = 0; y < GridSize - 2; y++)
         {
-            for (var x = 0; x < MatrixSize - 2; x++)
+            for (var x = 0; x < GridSize - 2; x++)
             {
                 var powerLevel = GetSquarePowerLevel(x, y, 3);
                 if (powerLevel > maxPowerLevel)
@@ -96,7 +96,7 @@ public class PowerGrid
         {
             for (var xx = 0; xx < size; xx++)
             {
-                total += _matrix[x + xx, y + yy];
+                total += _grid[x + xx, y + yy];
             }
         }
 

@@ -52,12 +52,12 @@ public class StorageGrid
 
     public int MoveStorage()
     {
-        var matrix = new Grid<char>(_storage.Width, _storage.Height, '#');
+        var grid = new Grid<char>(_storage.Width, _storage.Height, '#');
         var nodesThatCanMove = GetNodesThatCanMove();
         foreach (var address in nodesThatCanMove)
         {
-            matrix.MoveTo(address);
-            matrix.WriteValue('.');
+            grid.MoveTo(address);
+            grid.WriteValue('.');
         }
 
         var startAddress = new Coord(0, 0);
@@ -72,10 +72,10 @@ public class StorageGrid
         }
 
         var topLeft = new Coord(0, 0);
-        var topRight = new Coord(matrix.Width - 1, 0);
+        var topRight = new Coord(grid.Width - 1, 0);
         var goal = new Coord(topRight.X - 1, topRight.Y);
-        var distance1 = PathFinder.ShortestPathTo(matrix, startAddress, goal).Count;
-        var distance2 = PathFinder.ShortestPathTo(matrix, goal, topLeft).Count;
+        var distance1 = PathFinder.ShortestPathTo(grid, startAddress, goal).Count;
+        var distance2 = PathFinder.ShortestPathTo(grid, goal, topLeft).Count;
         return distance1 + distance2 * 5 + 1;
     }
 
@@ -83,7 +83,7 @@ public class StorageGrid
     {
         var rows = StringReader.ReadLines(input);
         var dataRows = rows.Skip(2);
-        var matrix = new Grid<StorageNode>();
+        var grid = new Grid<StorageNode>();
 
         foreach (var row in dataRows)
         {
@@ -98,11 +98,11 @@ public class StorageGrid
             var used = int.Parse(parts[2].Replace("T", ""));
             var avail = int.Parse(parts[3].Replace("T", ""));
 
-            matrix.MoveTo(x, y);
-            matrix.WriteValue(new StorageNode(size, used, avail));
+            grid.MoveTo(x, y);
+            grid.WriteValue(new StorageNode(size, used, avail));
         }
 
-        return matrix;
+        return grid;
     }
 
     private string RemoveExtraSpaces(string s)

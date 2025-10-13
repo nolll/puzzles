@@ -8,7 +8,7 @@ public class OxygenFiller
 
     public OxygenFiller(Grid<char> grid)
     {
-        grid.MoveTo(grid.StartAddress);
+        grid.MoveTo(grid.StartCoord);
         grid.TurnTo(GridDirection.Up);
         _grid = grid;
     }

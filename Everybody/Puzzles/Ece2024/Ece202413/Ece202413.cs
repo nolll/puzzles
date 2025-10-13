@@ -27,26 +27,26 @@ public class Ece202413 : EverybodyEventPuzzle
     
     private int Solve(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var start = matrix.FindAddresses('E').First();
-        matrix.WriteValueAt(start, '0');
-        var targets = matrix.FindAddresses('S');
+        var grid = GridBuilder.BuildCharGrid(input);
+        var start = grid.FindAddresses('E').First();
+        grid.WriteValueAt(start, '0');
+        var targets = grid.FindAddresses('S');
         foreach (var target in targets)
         {
-            matrix.WriteValueAt(target, '0');
+            grid.WriteValueAt(target, '0');
         }
         var edges = new List<GraphEdge>();
-        foreach (var current in matrix.Coords)
+        foreach (var current in grid.Coords)
         {
-            var cv = matrix.ReadValueAt(current);
+            var cv = grid.ReadValueAt(current);
             if (cv is '#' or ' ')
                 continue;
             
-            var currentLevel = int.Parse(matrix.ReadValueAt(current).ToString());
-            var nbrs = matrix.OrthogonalAdjacentCoordsTo(current);
+            var currentLevel = int.Parse(grid.ReadValueAt(current).ToString());
+            var nbrs = grid.OrthogonalAdjacentCoordsTo(current);
             foreach (var nbr in nbrs)
             {
-                var nv = matrix.ReadValueAt(nbr);
+                var nv = grid.ReadValueAt(nbr);
                 if (nv == '#')
                     continue;
 

@@ -13,7 +13,7 @@ public class DeliveryGrid
     {
         var (santaDirections, robotDirections) = SplitDirections(input.ToCharArray());
         DeliverAccordingToDirections(santaDirections);
-        _grid.MoveTo(_grid.StartAddress);
+        _grid.MoveTo(_grid.StartCoord);
         DeliverAccordingToDirections(robotDirections);
     }
 

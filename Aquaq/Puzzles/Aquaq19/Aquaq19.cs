@@ -31,14 +31,14 @@ public class Aquaq19 : AquaqPuzzle
             filledCoords.Add(new Coord(int.Parse(parts[i + 1]), int.Parse(parts[i])));
         }
 
-        var matrix = new Grid<char>(size, size, Empty);
+        var grid = new Grid<char>(size, size, Empty);
 
         IList<Coord> GetAdjacent(Coord c)
         {
             if (adjacentCache.TryGetValue(c, out var list))
                 return list;
 
-            list = matrix.OrthogonalAdjacentCoordsTo(c).Where(o => !matrix.IsOutOfRange(o)).ToList();
+            list = grid.OrthogonalAdjacentCoordsTo(c).Where(o => !grid.IsOutOfRange(o)).ToList();
             adjacentCache.Add(c, list);
             return list;
         }

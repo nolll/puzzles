@@ -11,14 +11,14 @@ public class Ecs0201 : EverybodyStoryPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var (matrix, tokens, _) = Parse(input);
+        var (grid, tokens, _) = Parse(input);
         var coins = 0;
         
         for (var i = 0; i < tokens.Length; i++)
         {
             var token = tokens[i];
             var slot = i + 1;
-            coins += Play(matrix, token, slot).score;
+            coins += Play(grid, token, slot).score;
         }
         
         return new PuzzleResult(coins, "dad5d715238be69f7117d91bb3938a10");
@@ -26,7 +26,7 @@ public class Ecs0201 : EverybodyStoryPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        var (matrix, tokens, slotCount) = Parse(input);
+        var (grid, tokens, slotCount) = Parse(input);
         var coins = 0;
         
         foreach (var token in tokens)
@@ -34,7 +34,7 @@ public class Ecs0201 : EverybodyStoryPuzzle
             var best = (slot: 0, finalSlot: 0, score: 0);
             for (var slot = 1; slot <= slotCount; slot++)
             {
-                var result = Play(matrix, token, slot);
+                var result = Play(grid, token, slot);
                 if (result.score > best.score)
                     best = result;
             }
@@ -47,7 +47,7 @@ public class Ecs0201 : EverybodyStoryPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        var (matrix, tokens, slotCount) = Parse(input);
+        var (grid, tokens, slotCount) = Parse(input);
         var scores = new Dictionary<(int token, int slot), int>();
 
         for (var index = 0; index < tokens.Length; index++)
@@ -55,7 +55,7 @@ public class Ecs0201 : EverybodyStoryPuzzle
             var token = tokens[index];
             for (var slot = 1; slot <= slotCount; slot++)
             {
-                var result = Play(matrix, token, slot);
+                var result = Play(grid, token, slot);
                 scores.Add((index, slot), result.score);
             }
         }
@@ -106,18 +106,18 @@ public class Ecs0201 : EverybodyStoryPuzzle
             tokenIndex += 1;
         }
 
-        var finalSlot = grid.Address.X / 2 + 1;
+        var finalSlot = grid.Coord.X / 2 + 1;
         return (slot, finalSlot, Math.Max(finalSlot * 2 - slot, 0));
     }
 
     private static (Grid<char> m, string[] t, int slotCount) Parse(string input)
     {
         var (input1, input2) = input.Split(LineBreaks.Double);
-        var matrix = GridBuilder.BuildCharGrid(input1, '.');
-        matrix.ExtendUp();
+        var grid = GridBuilder.BuildCharGrid(input1, '.');
+        grid.ExtendUp();
         var tokens = input2.Split(LineBreaks.Single);
-        var slotCount = (matrix.Width + 1) / 2;
+        var slotCount = (grid.Width + 1) / 2;
 
-        return (matrix, tokens, slotCount);
+        return (grid, tokens, slotCount);
     }
 }

@@ -57,14 +57,14 @@ public class Ecs0203 : EverybodyStoryPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        var (diceInput, matrixInput) = input.Split(LineBreaks.Double);
+        var (diceInput, gridInput) = input.Split(LineBreaks.Double);
         var dice = ParseDice(diceInput);
-        var matrix = GridBuilder.BuildIntGridFromNonSeparated(matrixInput);
+        var grid = GridBuilder.BuildIntGridFromNonSeparated(gridInput);
         var totalSet = new HashSet<Coord>();
         
         foreach (var die in dice)
         {
-            var spaces = matrix.FindAddresses(die.Roll());
+            var spaces = grid.FindAddresses(die.Roll());
             var set = new HashSet<Coord>();
             set.AddRange(spaces);
 
@@ -74,11 +74,11 @@ public class Ecs0203 : EverybodyStoryPuzzle
                 var newSpaces = new HashSet<Coord>();
                 foreach (var space in spaces)
                 {
-                    if(matrix.ReadValueAt(space) == score)
+                    if(grid.ReadValueAt(space) == score)
                         newSpaces.Add(space);
                     
-                    newSpaces.AddRange(matrix.OrthogonalAdjacentCoordsTo(space)
-                        .Where(o => matrix.ReadValueAt(o) == score));
+                    newSpaces.AddRange(grid.OrthogonalAdjacentCoordsTo(space)
+                        .Where(o => grid.ReadValueAt(o) == score));
                 }
 
                 set.UnionWith(newSpaces);

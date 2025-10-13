@@ -27,28 +27,28 @@ public class RecursiveDonutMazeSolver
 
     private void Setup(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input.Replace(Chars.Space, Chars.Wall));
+        var grid = GridBuilder.BuildCharGrid(input.Replace(Chars.Space, Chars.Wall));
         var portalAddresses = new List<DonutPortalAddress>();
-        var letterCoords = FindLetterCoords(matrix).ToList();
+        var letterCoords = FindLetterCoords(grid).ToList();
         while (letterCoords.Count > 0)
         {
             var currentCoords = letterCoords.First();
             letterCoords.RemoveAt(0);
-            matrix.MoveTo(currentCoords);
-            var secondLetterCoords = matrix.OrthogonalAdjacentCoords.First(o => IsLetter(matrix.ReadValueAt(o)));
-            var firstLetter = matrix.ReadValueAt(currentCoords);
-            var secondLetter = matrix.ReadValueAt(secondLetterCoords);
+            grid.MoveTo(currentCoords);
+            var secondLetterCoords = grid.OrthogonalAdjacentCoords.First(o => IsLetter(grid.ReadValueAt(o)));
+            var firstLetter = grid.ReadValueAt(currentCoords);
+            var secondLetter = grid.ReadValueAt(secondLetterCoords);
             letterCoords.Remove(secondLetterCoords);
-            matrix.MoveTo(currentCoords);
-            matrix.WriteValue(Chars.Wall);
-            matrix.MoveTo(secondLetterCoords);
-            matrix.WriteValue(Chars.Wall);
-            var secondLetterHasAdjacentCorridor = matrix.OrthogonalAdjacentValues.Any(o => o == Chars.Path);
-            matrix.MoveTo(currentCoords);
+            grid.MoveTo(currentCoords);
+            grid.WriteValue(Chars.Wall);
+            grid.MoveTo(secondLetterCoords);
+            grid.WriteValue(Chars.Wall);
+            var secondLetterHasAdjacentCorridor = grid.OrthogonalAdjacentValues.Any(o => o == Chars.Path);
+            grid.MoveTo(currentCoords);
             var name = string.Concat(firstLetter, secondLetter);
             var letterAddress = secondLetterHasAdjacentCorridor ? secondLetterCoords : currentCoords;
-            matrix.MoveTo(letterAddress);
-            var portalAddress = matrix.OrthogonalAdjacentCoords.First(o => matrix.ReadValueAt(o) == Chars.Path);
+            grid.MoveTo(letterAddress);
+            var portalAddress = grid.OrthogonalAdjacentCoords.First(o => grid.ReadValueAt(o) == Chars.Path);
             if (name == "AA")
             {
                 _startAddress = portalAddress;
@@ -59,15 +59,15 @@ public class RecursiveDonutMazeSolver
                 _endAddress = portalAddress;
                 continue;
             }
-            matrix.MoveTo(portalAddress);
-            matrix.WriteValue(Chars.Path);
+            grid.MoveTo(portalAddress);
+            grid.WriteValue(Chars.Path);
             var portal = new DonutPortalAddress(name, portalAddress);
             portalAddresses.Add(portal);
         }
 
         var portals = new Dictionary<Coord, DonutPortal>();
         var orderedPortalAddresses = portalAddresses.OrderBy(o => o.Name).ToList();
-        var topMatrix = matrix.Clone();
+        var topGrid = grid.Clone();
 
         while (orderedPortalAddresses.Any())
         {
@@ -76,7 +76,7 @@ public class RecursiveDonutMazeSolver
             var b = orderedPortalAddresses.First();
             orderedPortalAddresses.RemoveAt(0);
 
-            var aIsOuter = IsOuterPortal(matrix, a.Address);
+            var aIsOuter = IsOuterPortal(grid, a.Address);
             var outer = aIsOuter ? a : b;
             var inner = aIsOuter ? b : a;
 
@@ -84,13 +84,13 @@ public class RecursiveDonutMazeSolver
             portals.Add(inner.Address, innerPortal);
             var outerPortal = new OuterDonutPortal(outer.Name, outer.Address, inner.Address);
             portals.Add(outer.Address, outerPortal);
-            topMatrix.MoveTo(outer.Address);
-            topMatrix.WriteValue(Chars.Wall);
+            topGrid.MoveTo(outer.Address);
+            topGrid.WriteValue(Chars.Wall);
         }
 
         _portals = portals;
-        _outerAdjacentCache = BuildAdjacentCache(topMatrix);
-        _innerAdjacentCache = BuildAdjacentCache(matrix);
+        _outerAdjacentCache = BuildAdjacentCache(topGrid);
+        _innerAdjacentCache = BuildAdjacentCache(grid);
     }
 
     private IDictionary<Coord, IList<Coord>> BuildAdjacentCache(Grid<char> grid)

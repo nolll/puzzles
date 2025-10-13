@@ -22,13 +22,13 @@ public class Ece202412 : EverybodyEventPuzzle
 
     private int Part1And2(string input)
     {
-        var matrix = GridBuilder.BuildCharGrid(input, '.');
-        matrix.ExtendUp(15);
-        matrix.ExtendRight(20);
+        var grid = GridBuilder.BuildCharGrid(input, '.');
+        grid.ExtendUp(15);
+        grid.ExtendRight(20);
 
-        var aCoord = matrix.FindAddresses('A').First();
-        var bCoord = matrix.FindAddresses('B').First();
-        var cCoord = matrix.FindAddresses('C').First();
+        var aCoord = grid.FindAddresses('A').First();
+        var bCoord = grid.FindAddresses('B').First();
+        var cCoord = grid.FindAddresses('C').First();
         (char name, Coord coord)[] catapults = [('A', aCoord), ('B', bCoord), ('C', cCoord)];
 
         var bestShots = new Dictionary<Coord, (char name, int power)>();
@@ -38,42 +38,42 @@ public class Ece202412 : EverybodyEventPuzzle
             var outOfBounds = false;
             while (!outOfBounds)
             {
-                matrix.MoveTo(catapult.coord);
+                grid.MoveTo(catapult.coord);
                 var range = Enumerable.Range(0, power).ToArray();
                 
                 // Move up
                 foreach (var _ in range)
                 {
-                    matrix.MoveUp();
-                    matrix.MoveRight();
+                    grid.MoveUp();
+                    grid.MoveRight();
                 }
                 
                 // Move right
-                foreach (var _ in range) matrix.MoveRight();
+                foreach (var _ in range) grid.MoveRight();
 
                 // Move down until bottom
                 while (true)
                 {
-                    if (!matrix.TryMoveRight())
+                    if (!grid.TryMoveRight())
                     {
                         outOfBounds = true;
                         break;
                     }
 
-                    matrix.MoveDown();
-                    if (matrix.Address.Y == matrix.YMax)
+                    grid.MoveDown();
+                    if (grid.Coord.Y == grid.YMax)
                         break;
                     
-                    if (matrix.ReadValue() != 'T' && matrix.ReadValue() != 'H')
+                    if (grid.ReadValue() != 'T' && grid.ReadValue() != 'H')
                         continue;
                     
-                    if (bestShots.TryGetValue(matrix.Address, out var bestShot))
+                    if (bestShots.TryGetValue(grid.Coord, out var bestShot))
                     {
                         if(power < bestShot.power)
-                            bestShots[matrix.Address] = (catapult.name, power);
+                            bestShots[grid.Coord] = (catapult.name, power);
                     }
                     else
-                        bestShots[matrix.Address] = (catapult.name, power);
+                        bestShots[grid.Coord] = (catapult.name, power);
                 }
                 
                 power++;
@@ -91,7 +91,7 @@ public class Ece202412 : EverybodyEventPuzzle
                 _ => 1
             };
 
-            var shotsRequired = matrix.ReadValueAt(key) == 'H'
+            var shotsRequired = grid.ReadValueAt(key) == 'H'
                 ? 2
                 : 1;
 

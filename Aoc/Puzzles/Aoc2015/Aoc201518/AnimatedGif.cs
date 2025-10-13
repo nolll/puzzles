@@ -24,15 +24,15 @@ public class AnimatedGif
     {
         for (var i = 0; i < steps; i++)
         {
-            var newMatrix = new Grid<char>();
+            var newGrid = new Grid<char>();
 
             foreach (var coord in _grid.Coords)
             {
                 var adjacentValues = _grid.AllAdjacentValuesTo(coord);
-                newMatrix.WriteValueAt(coord, GetNewState(_grid.ReadValueAt(coord), adjacentValues.Count(o => o == LightOn)));
+                newGrid.WriteValueAt(coord, GetNewState(_grid.ReadValueAt(coord), adjacentValues.Count(o => o == LightOn)));
             }
             
-            _grid = newMatrix;
+            _grid = newGrid;
             if (_isCornersLit)
                 TurnOnCornerLights();
         }

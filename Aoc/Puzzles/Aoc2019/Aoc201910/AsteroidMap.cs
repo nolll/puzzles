@@ -8,11 +8,11 @@ public class AsteroidMap
 
     public AsteroidMap(string data)
     {
-        var matrix = GetAsteroidMatrix(data);
-        _list = GetAsteroidList(matrix);
+        var grid = GetAsteroidGrid(data);
+        _list = GetAsteroidList(grid);
     }
 
-    private IList<IList<Asteroid?>> GetAsteroidMatrix(string map)
+    private IList<IList<Asteroid?>> GetAsteroidGrid(string map)
     {
         var asteroids = new List<IList<Asteroid?>>();
         var rows = StringReader.ReadLines(map);
@@ -31,10 +31,10 @@ public class AsteroidMap
         return asteroids;
     }
 
-    private IList<Asteroid> GetAsteroidList(IList<IList<Asteroid?>> matrix)
+    private IList<Asteroid> GetAsteroidList(IList<IList<Asteroid?>> grid)
     {
         var list = new List<Asteroid>();
-        foreach (var row in matrix)
+        foreach (var row in grid)
         {
             list.AddRange(row.Where(o => o != null).Cast<Asteroid>());
         }

@@ -13,10 +13,10 @@ public class VentsMap
             lines = lines.Where(o => o.IsOrthogonal).ToList();
         var width = lines.Max(o => Math.Max(o.Start.X, o.End.X));
         var height = lines.Max(o => Math.Max(o.Start.Y, o.End.Y));
-        var matrix = new Grid<int>(width, height);
+        var grid = new Grid<int>(width, height);
 
-        matrix = MapLines(matrix, lines);
-        var c = matrix.Values.Count(o => o >= 2);
+        grid = MapLines(grid, lines);
+        var c = grid.Values.Count(o => o >= 2);
 
         return c;
     }
@@ -34,20 +34,17 @@ public class VentsMap
         return grid;
     }
 
-    private static List<Line2d> ParseLines(IEnumerable<string> rows)
-    {
-        return rows.Select(ParseLine).ToList();
-    }
+    private static List<Line2d> ParseLines(IEnumerable<string> rows) => rows.Select(ParseLine).ToList();
 
     private static Line2d ParseLine(string s)
     {
-        var positions = s.Split(" -> ").Select(ParsePosition).ToList();
-        return new Line2d(positions[0], positions[1]);
+        var (a, b) = s.Split(" -> ").Select(ParsePosition).ToArray();
+        return new Line2d(a, b);
     }
 
     private static Position2d ParsePosition(string s)
     {
-        var parts = s.Split(',').Select(int.Parse).ToArray();
-        return new Position2d(parts[0], parts[1]);
+        var (a, b) = s.Split(',').Select(int.Parse).ToArray();
+        return new Position2d(a, b);
     }
 }

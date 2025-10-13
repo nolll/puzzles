@@ -7,13 +7,12 @@ public class SquareTests
     [Fact]
     public void CanMoveRight()
     {
-        var matrix = new Grid<char>(4, 4, '.');
+        var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 2);
         var shape = new SquareShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveRight(matrix, bottomLeft);
+        var result = shape.CanMoveRight(grid, bottomLeft);
 
         result.Should().BeTrue();
     }
@@ -21,13 +20,12 @@ public class SquareTests
     [Fact]
     public void CanNotMoveRight()
     {
-        var matrix = new Grid<char>(4, 4, '.');
+        var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(2, 2);
         var shape = new SquareShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveRight(matrix, bottomLeft);
+        var result = shape.CanMoveRight(grid, bottomLeft);
 
         result.Should().BeFalse();
     }
@@ -35,13 +33,12 @@ public class SquareTests
     [Fact]
     public void CanMoveLeft()
     {
-        var matrix = new Grid<char>(4, 4, '.');
+        var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 2);
         var shape = new SquareShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveLeft(matrix, bottomLeft);
+        var result = shape.CanMoveLeft(grid, bottomLeft);
 
         result.Should().BeTrue();
     }
@@ -49,13 +46,12 @@ public class SquareTests
     [Fact]
     public void CanNotMoveLeft()
     {
-        var matrix = new Grid<char>(4, 4, '.');
+        var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(0, 2);
         var shape = new SquareShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveLeft(matrix, bottomLeft);
+        var result = shape.CanMoveLeft(grid, bottomLeft);
 
         result.Should().BeFalse();
     }
@@ -63,13 +59,12 @@ public class SquareTests
     [Fact]
     public void CanMoveDown()
     {
-        var matrix = new Grid<char>(4, 4, '.');
+        var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 2);
         var shape = new SquareShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveDown(matrix, bottomLeft);
+        var result = shape.CanMoveDown(grid, bottomLeft);
 
         result.Should().BeTrue();
     }
@@ -77,13 +72,12 @@ public class SquareTests
     [Fact]
     public void CanNotMoveDown()
     {
-        var matrix = new Grid<char>(4, 4, '.');
+        var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 3);
         var shape = new SquareShape();
-        shape.Paint(matrix, bottomLeft);
-        Console.WriteLine(matrix.Print());
+        shape.Paint(grid, bottomLeft);
 
-        var result = shape.CanMoveDown(matrix, bottomLeft);
+        var result = shape.CanMoveDown(grid, bottomLeft);
 
         result.Should().BeFalse();
     }

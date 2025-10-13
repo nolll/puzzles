@@ -24,46 +24,46 @@ public class Aquaq28 : AquaqPuzzle
         var lines = StringReader.ReadLines(input)
             .Skip(1).SkipLast(1)
             .Select(o => o.Substring(1, o.Length - 2));
-        var matrixInput = string.Join(LineBreaks.Single, lines);
+        var gridInput = string.Join(LineBreaks.Single, lines);
 
-        var matrix = GridBuilder.BuildCharGridWithoutTrim(matrixInput, Empty);
+        var grid = GridBuilder.BuildCharGridWithoutTrim(gridInput, Empty);
 
         var encrypted = string.Empty;
         foreach (var c in word)
         {
             var startPos = new Coord(0, Characters.IndexOf(c));
-            matrix.MoveTo(startPos);
-            matrix.FaceRight();
+            grid.MoveTo(startPos);
+            grid.FaceRight();
 
             while (true)
             {
-                var v = matrix.ReadValue();
+                var v = grid.ReadValue();
 
                 if (v == MirrorLeft)
                 {
-                    if (IsMovingHorizontally(matrix))
-                        matrix.TurnRight();
+                    if (IsMovingHorizontally(grid))
+                        grid.TurnRight();
                     else
-                        matrix.TurnLeft();
+                        grid.TurnLeft();
 
-                    matrix.WriteValue(MirrorRight);
+                    grid.WriteValue(MirrorRight);
                 }
                 else if(v == MirrorRight)
                 {
-                    if (IsMovingHorizontally(matrix))
-                        matrix.TurnLeft();
+                    if (IsMovingHorizontally(grid))
+                        grid.TurnLeft();
                     else
-                        matrix.TurnRight();
-                    matrix.WriteValue(MirrorLeft);
+                        grid.TurnRight();
+                    grid.WriteValue(MirrorLeft);
                 }
 
-                if (!matrix.TryMoveForward())
+                if (!grid.TryMoveForward())
                     break;
             }
 
-            encrypted += matrix.IsAtBottomEdge || matrix.IsAtTopEdge
-                ? Characters[matrix.Address.X]
-                : Characters[matrix.Address.Y];
+            encrypted += grid.IsAtBottomEdge || grid.IsAtTopEdge
+                ? Characters[grid.Coord.X]
+                : Characters[grid.Coord.Y];
         }
 
         return encrypted;

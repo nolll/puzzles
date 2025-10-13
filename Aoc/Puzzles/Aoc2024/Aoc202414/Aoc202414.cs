@@ -38,11 +38,11 @@ public class Aoc202414 : AocPuzzle
             robot.Location = new Coord(x, y);    
         }
 
-        var matrix = new Grid<int>(width, height);
+        var grid = new Grid<int>(width, height);
         foreach (var robot in robots)
         {
-            var v = matrix.ReadValueAt(robot.Location);
-            matrix.WriteValueAt(robot.Location, v + 1);
+            var v = grid.ReadValueAt(robot.Location);
+            grid.WriteValueAt(robot.Location, v + 1);
         }
         
         Coord[] sliceCoords =
@@ -53,7 +53,7 @@ public class Aoc202414 : AocPuzzle
             new(width / 2 + 1, height / 2 + 1)
         ];
         
-        var quadrants = sliceCoords.Select(o => matrix.Slice(o, width / 2, height / 2));
+        var quadrants = sliceCoords.Select(o => grid.Slice(o, width / 2, height / 2));
         var sum = quadrants.Aggregate(1, (v, quadrant) => v * quadrant.Values.Sum());
 
         return sum;

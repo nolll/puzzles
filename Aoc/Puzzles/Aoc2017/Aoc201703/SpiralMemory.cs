@@ -9,39 +9,39 @@ public class SpiralMemory
 
     public SpiralMemory(int targetSquare, SpiralMemoryMode mode)
     {
-        var matrix = BuildMatrix(targetSquare, mode);
-        Distance = matrix.Address.ManhattanDistanceTo(matrix.StartAddress);
-        Value = matrix.ReadValue();
+        var grid = BuildGrid(targetSquare, mode);
+        Distance = grid.Coord.ManhattanDistanceTo(grid.StartCoord);
+        Value = grid.ReadValue();
     }
 
-    private static Grid<long> BuildMatrix(int targetSquare, SpiralMemoryMode mode)
+    private static Grid<long> BuildGrid(int targetSquare, SpiralMemoryMode mode)
     {
-        var matrix = new Grid<long>();
-        matrix.TurnTo(GridDirection.Down);
+        var grid = new Grid<long>();
+        grid.TurnTo(GridDirection.Down);
         var currentSquare = 1;
-        matrix.WriteValue(currentSquare);
+        grid.WriteValue(currentSquare);
         while (currentSquare < targetSquare)
         {
-            matrix.TurnLeft();
-            matrix.MoveForward();
-            var v = matrix.ReadValue();
+            grid.TurnLeft();
+            grid.MoveForward();
+            var v = grid.ReadValue();
             if (v > 0)
             {
-                matrix.MoveBackward();
-                matrix.TurnRight();
-                matrix.MoveForward();
+                grid.MoveBackward();
+                grid.TurnRight();
+                grid.MoveForward();
             }
             var valueToWrite = mode == SpiralMemoryMode.RunToValue
-                ? matrix.AllAdjacentValues.Sum() 
+                ? grid.AllAdjacentValues.Sum() 
                 : currentSquare;
 
-            matrix.WriteValue(valueToWrite);
+            grid.WriteValue(valueToWrite);
             if (mode == SpiralMemoryMode.RunToValue && valueToWrite > targetSquare)
                 break;
 
             currentSquare += 1;
         }
 
-        return matrix;
+        return grid;
     }
 }

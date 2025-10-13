@@ -34,7 +34,7 @@ public class Ece202402Tests
     }
     
     [Fact]
-    public void CountRunicSymbolsInMatrix()
+    public void CountRunicSymbolsInGrid()
     {
         string[] words = ["THE", "OWE", "MES", "ROD", "RODEO"];
         
@@ -44,7 +44,7 @@ public class Ece202402Tests
                               TRODEOAL
                               """;
 
-        var count = Sut.CountRunicSymbolsInMatrix(words, scales.Split());
+        var count = Sut.CountRunicSymbolsInGrid(words, scales.Split());
 
         count.Should().Be(10);
     }

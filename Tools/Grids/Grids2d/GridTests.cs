@@ -17,10 +17,10 @@ public class GridTests
     [InlineData(1, false)]
     public void IsAtTopEdge(int y, bool expected)
     {
-        var matrix = new Grid<int>(5, 5);
-        matrix.MoveTo(1, y);
+        var grid = new Grid<int>(5, 5);
+        grid.MoveTo(1, y);
 
-        matrix.IsAtTopEdge.Should().Be(expected);
+        grid.IsAtTopEdge.Should().Be(expected);
     }
 
     [Theory]
@@ -28,10 +28,10 @@ public class GridTests
     [InlineData(3, false)]
     public void IsAtRightEdge(int x, bool expected)
     {
-        var matrix = new Grid<int>(5, 5);
-        matrix.MoveTo(x, 1);
+        var grid = new Grid<int>(5, 5);
+        grid.MoveTo(x, 1);
 
-        matrix.IsAtRightEdge.Should().Be(expected);
+        grid.IsAtRightEdge.Should().Be(expected);
     }
 
     [Theory]
@@ -39,10 +39,10 @@ public class GridTests
     [InlineData(3, false)]
     public void IsAtBottomEdge(int y, bool expected)
     {
-        var matrix = new Grid<int>(5, 5);
-        matrix.MoveTo(1, y);
+        var grid = new Grid<int>(5, 5);
+        grid.MoveTo(1, y);
 
-        matrix.IsAtBottomEdge.Should().Be(expected);
+        grid.IsAtBottomEdge.Should().Be(expected);
     }
 
     [Theory]
@@ -50,10 +50,10 @@ public class GridTests
     [InlineData(1, false)]
     public void IsAtLeftEdge(int x, bool expected)
     {
-        var matrix = new Grid<int>(5, 5);
-        matrix.MoveTo(x, 1);
+        var grid = new Grid<int>(5, 5);
+        grid.MoveTo(x, 1);
 
-        matrix.IsAtLeftEdge.Should().Be(expected);
+        grid.IsAtLeftEdge.Should().Be(expected);
     }
 
     [Theory]
@@ -61,86 +61,86 @@ public class GridTests
     [InlineData(10, 5)]
     public void Center(int size, int expected)
     {
-        var matrix = new Grid<int>(size, size);
+        var grid = new Grid<int>(size, size);
 
-        matrix.Center.X.Should().Be(expected);
-        matrix.Center.Y.Should().Be(expected);
+        grid.Center.X.Should().Be(expected);
+        grid.Center.Y.Should().Be(expected);
     }
 
     [Fact]
     public void MoveTo()
     {
-        var matrix = new Grid<int>(5, 5);
-        matrix.MoveTo(1, 2);
+        var grid = new Grid<int>(5, 5);
+        grid.MoveTo(1, 2);
 
-        matrix.Address.X.Should().Be(1);
-        matrix.Address.Y.Should().Be(2);
+        grid.Coord.X.Should().Be(1);
+        grid.Coord.Y.Should().Be(2);
     }
 
     [Fact]
     public void MoveForward()
     {
-        var matrix = new Grid<int>(5, 5);
-        matrix.MoveTo(1, 3);
-        matrix.MoveForward();
+        var grid = new Grid<int>(5, 5);
+        grid.MoveTo(1, 3);
+        grid.MoveForward();
 
-        matrix.Address.X.Should().Be(1);
-        matrix.Address.Y.Should().Be(2);
+        grid.Coord.X.Should().Be(1);
+        grid.Coord.Y.Should().Be(2);
     }
 
     [Fact]
     public void TurnAndMoveForward()
     {
-        var matrix = new Grid<int>(5, 5);
-        matrix.TurnRight();
-        matrix.MoveForward();
-        matrix.TurnRight();
-        matrix.MoveForward();
+        var grid = new Grid<int>(5, 5);
+        grid.TurnRight();
+        grid.MoveForward();
+        grid.TurnRight();
+        grid.MoveForward();
 
-        matrix.Address.X.Should().Be(1);
-        matrix.Address.Y.Should().Be(1);
+        grid.Coord.X.Should().Be(1);
+        grid.Coord.Y.Should().Be(1);
     }
 
     [Fact]
     public void ExtendAllTo3()
     {
-        var matrix = new Grid<char>(1, 1, DefaultValue);
-        matrix.WriteValue(WriteValue);
-        matrix.ExtendAllDirections();
+        var grid = new Grid<char>(1, 1, DefaultValue);
+        grid.WriteValue(WriteValue);
+        grid.ExtendAllDirections();
 
-        var emptyRowsValue = matrix.ReadValueAt(-1, -1);
-        var writtenValue = matrix.ReadValueAt(0, 0);
+        var emptyRowsValue = grid.ReadValueAt(-1, -1);
+        var writtenValue = grid.ReadValueAt(0, 0);
         emptyRowsValue.Should().Be(DefaultValue);
         writtenValue.Should().Be(WriteValue);
-        matrix.Width.Should().Be(3);
-        matrix.Height.Should().Be(3);
+        grid.Width.Should().Be(3);
+        grid.Height.Should().Be(3);
     }
 
     [Fact]
     public void ExtendAllTo5()
     {
-        var matrix = new Grid<char>(1, 1, DefaultValue);
-        matrix.WriteValue(WriteValue);
-        matrix.ExtendAllDirections(2);
+        var grid = new Grid<char>(1, 1, DefaultValue);
+        grid.WriteValue(WriteValue);
+        grid.ExtendAllDirections(2);
 
-        var emptyRowsValue = matrix.ReadValueAt(-2, -2);
-        var writtenValue = matrix.ReadValueAt(0, 0);
+        var emptyRowsValue = grid.ReadValueAt(-2, -2);
+        var writtenValue = grid.ReadValueAt(0, 0);
         emptyRowsValue.Should().Be(DefaultValue);
         writtenValue.Should().Be(WriteValue);
-        matrix.Width.Should().Be(5);
-        matrix.Height.Should().Be(5);
+        grid.Width.Should().Be(5);
+        grid.Height.Should().Be(5);
     }
 
     [Fact]
     public void OrthogonalAdjacentCoordsExist()
     {
-        var matrix = new Grid<char>(1, 1, DefaultValue);
-        matrix.WriteValue(WriteValue);
-        matrix.ExtendAllDirections();
+        var grid = new Grid<char>(1, 1, DefaultValue);
+        grid.WriteValue(WriteValue);
+        grid.ExtendAllDirections();
 
-        matrix.OrthogonalAdjacentCoords.Count.Should().Be(4);
+        grid.OrthogonalAdjacentCoords.Count.Should().Be(4);
 
-        var adjacentCoords = matrix.OrthogonalAdjacentCoords;
+        var adjacentCoords = grid.OrthogonalAdjacentCoords;
         var squaresInFirstCol = adjacentCoords.Where(o => o.X == -1).ToList();
         var squaresInFirstRow = adjacentCoords.Where(o => o.Y == -1).ToList();
         squaresInFirstCol.Count.Should().Be(1);
@@ -150,13 +150,13 @@ public class GridTests
     [Fact]
     public void AllAdjacentCoordsExists()
     {
-        var matrix = new Grid<char>(1, 1, DefaultValue);
-        matrix.WriteValue(WriteValue);
-        matrix.ExtendAllDirections();
+        var grid = new Grid<char>(1, 1, DefaultValue);
+        grid.WriteValue(WriteValue);
+        grid.ExtendAllDirections();
 
-        matrix.AllAdjacentCoords.Count.Should().Be(8);
+        grid.AllAdjacentCoords.Count.Should().Be(8);
 
-        var adjacentCoords = matrix.AllAdjacentCoords;
+        var adjacentCoords = grid.AllAdjacentCoords;
         var squaresInFirstCol = adjacentCoords.Where(o => o.X == -1).ToList();
         var squaresInFirstRow = adjacentCoords.Where(o => o.Y == -1).ToList();
         squaresInFirstCol.Count.Should().Be(3);
@@ -178,12 +178,12 @@ public class GridTests
                                 .#.
                                 """;
 
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
+        var grid = GridBuilder.BuildCharGrid(input);
+        var expectedGrid = GridBuilder.BuildCharGrid(expected);
 
-        matrix = matrix.Clone();
+        grid = grid.Clone();
 
-        matrix.Print().Should().Be(expectedMatrix.Print());
+        grid.Print().Should().Be(expectedGrid.Print());
     }
 
     [Fact]
@@ -204,12 +204,12 @@ public class GridTests
                                 .#..#.
                                 """;
 
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
+        var grid = GridBuilder.BuildCharGrid(input);
+        var expectedGrid = GridBuilder.BuildCharGrid(expected);
 
-        matrix = matrix.Clone(2);
+        grid = grid.Clone(2);
 
-        matrix.Print().Should().Be(expectedMatrix.Print());
+        grid.Print().Should().Be(expectedGrid.Print());
     }
 
     [Fact]
@@ -227,12 +227,12 @@ public class GridTests
                                 ...
                                 """;
 
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
+        var grid = GridBuilder.BuildCharGrid(input);
+        var expectedGrid = GridBuilder.BuildCharGrid(expected);
 
-        matrix = matrix.RotateRight();
+        grid = grid.RotateRight();
 
-        matrix.Print().Should().Be(expectedMatrix.Print());
+        grid.Print().Should().Be(expectedGrid.Print());
     }
 
     [Fact]
@@ -250,12 +250,12 @@ public class GridTests
                                 ##.
                                 """;
 
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
+        var grid = GridBuilder.BuildCharGrid(input);
+        var expectedGrid = GridBuilder.BuildCharGrid(expected);
 
-        matrix = matrix.RotateLeft();
+        grid = grid.RotateLeft();
 
-        matrix.Print().Should().Be(expectedMatrix.Print());
+        grid.Print().Should().Be(expectedGrid.Print());
     }
 
     [Fact]
@@ -266,12 +266,12 @@ public class GridTests
                                 JK
                                 """;
 
-        var matrix = GridBuilder.BuildCharGrid(SliceInput);
-        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
+        var grid = GridBuilder.BuildCharGrid(SliceInput);
+        var expectedGrid = GridBuilder.BuildCharGrid(expected);
 
-        matrix = matrix.Slice(new Coord(1, 1), new Coord(2, 2));
+        grid = grid.Slice(new Coord(1, 1), new Coord(2, 2));
 
-        matrix.Print().Should().Be(expectedMatrix.Print());
+        grid.Print().Should().Be(expectedGrid.Print());
     }
 
     [Fact]
@@ -283,12 +283,12 @@ public class GridTests
                                 NOP
                                 """;
 
-        var matrix = GridBuilder.BuildCharGrid(SliceInput);
-        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
+        var grid = GridBuilder.BuildCharGrid(SliceInput);
+        var expectedGrid = GridBuilder.BuildCharGrid(expected);
 
-        matrix = matrix.Slice(new Coord(1, 1));
+        grid = grid.Slice(new Coord(1, 1));
 
-        matrix.Print().Should().Be(expectedMatrix.Print());
+        grid.Print().Should().Be(expectedGrid.Print());
     }
 
     [Fact]
@@ -300,12 +300,12 @@ public class GridTests
                                 IJK
                                 """;
 
-        var matrix = GridBuilder.BuildCharGrid(SliceInput);
-        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
+        var grid = GridBuilder.BuildCharGrid(SliceInput);
+        var expectedGrid = GridBuilder.BuildCharGrid(expected);
 
-        matrix = matrix.Slice(to: new Coord(2, 2));
+        grid = grid.Slice(to: new Coord(2, 2));
 
-        matrix.Print().Should().Be(expectedMatrix.Print());
+        grid.Print().Should().Be(expectedGrid.Print());
     }
 
     [Fact]
@@ -316,12 +316,12 @@ public class GridTests
                                 JK
                                 """;
 
-        var matrix = GridBuilder.BuildCharGrid(SliceInput);
-        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
+        var grid = GridBuilder.BuildCharGrid(SliceInput);
+        var expectedGrid = GridBuilder.BuildCharGrid(expected);
 
-        matrix = matrix.Slice(new Coord(1, 1), 2, 2);
+        grid = grid.Slice(new Coord(1, 1), 2, 2);
 
-        matrix.Print().Should().Be(expectedMatrix.Print());
+        grid.Print().Should().Be(expectedGrid.Print());
     }
 
     [Fact]
@@ -339,12 +339,12 @@ public class GridTests
                                 #..
                                 """;
 
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
+        var grid = GridBuilder.BuildCharGrid(input);
+        var expectedGrid = GridBuilder.BuildCharGrid(expected);
 
-        matrix = matrix.FlipVertical();
+        grid = grid.FlipVertical();
 
-        matrix.Print().Should().Be(expectedMatrix.Print());
+        grid.Print().Should().Be(expectedGrid.Print());
     }
 
     [Fact]
@@ -362,12 +362,12 @@ public class GridTests
                                 ...
                                 """;
 
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
+        var grid = GridBuilder.BuildCharGrid(input);
+        var expectedGrid = GridBuilder.BuildCharGrid(expected);
 
-        matrix = matrix.FlipHorizontal();
+        grid = grid.FlipHorizontal();
 
-        matrix.Print().Should().Be(expectedMatrix.Print());
+        grid.Print().Should().Be(expectedGrid.Print());
     }
 
     [Fact]
@@ -385,11 +385,11 @@ public class GridTests
                                 ...
                                 """;
 
-        var matrix = GridBuilder.BuildCharGrid(input);
-        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
+        var grid = GridBuilder.BuildCharGrid(input);
+        var expectedGrid = GridBuilder.BuildCharGrid(expected);
 
-        matrix = matrix.Transpose();
+        grid = grid.Transpose();
 
-        matrix.Print().Should().Be(expectedMatrix.Print());
+        grid.Print().Should().Be(expectedGrid.Print());
     }
 }

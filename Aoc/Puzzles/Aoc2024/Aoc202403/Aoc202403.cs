@@ -1,6 +1,5 @@
 using System.Text.RegularExpressions;
 using Pzl.Common;
-using Pzl.Tools.Lists;
 using Pzl.Tools.Numbers;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202403;

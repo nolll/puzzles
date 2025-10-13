@@ -18,21 +18,21 @@ public class Aoc202321 : AocPuzzle
 
     public static long CountPositionsAfter64(string s, int steps = 64)
     {
-        var matrix = GridBuilder.BuildCharGrid(s);
-        var start = matrix.FindAddresses('S').First();
-        matrix.WriteValueAt(start, '.');
-        return CountPositionsAfter(matrix, start, steps);
+        var grid = GridBuilder.BuildCharGrid(s);
+        var start = grid.FindAddresses('S').First();
+        grid.WriteValueAt(start, '.');
+        return CountPositionsAfter(grid, start, steps);
     }
 
     public static long CountPositionsAfterMany(string s)
     {
-        var matrix = GridBuilder.BuildCharGrid(s);
-        var start = matrix.FindAddresses('S').First();
+        var grid = GridBuilder.BuildCharGrid(s);
+        var start = grid.FindAddresses('S').First();
         var center = start.X;
-        var (left, top) = new Coord(matrix.XMin, matrix.YMin);
-        var (right, bottom) = new Coord(matrix.XMax, matrix.YMax);
-        var size = matrix.Width;
-        matrix.WriteValueAt(start, '.');
+        var (left, top) = new Coord(grid.XMin, grid.YMin);
+        var (right, bottom) = new Coord(grid.XMax, grid.YMax);
+        var size = grid.Width;
+        grid.WriteValueAt(start, '.');
          
         const int stepCount = 26_501_365;
         var gridWidth = stepCount / size - 1;
@@ -43,8 +43,8 @@ public class Aoc202321 : AocPuzzle
         long evenMultiplier = (gridWidth + 1) / 2 * 2;
         var even = evenMultiplier * evenMultiplier;
 
-        var oddPoints = CountPositionsAfter(matrix, start, size);
-        var evenPoints = CountPositionsAfter(matrix, start, size + 1);
+        var oddPoints = CountPositionsAfter(grid, start, size);
+        var evenPoints = CountPositionsAfter(grid, start, size + 1);
 
         var smallCount = gridWidth + 1;
         var largeCount = gridWidth;
@@ -53,22 +53,22 @@ public class Aoc202321 : AocPuzzle
         var smallSteps = (int)Math.Floor((double)size / 2) - 1;
         var largeSteps = (int)Math.Floor((double)size * 3 / 2) - 1;
 
-        var ct = CountPositionsAfter(matrix, new Coord(center, bottom), cornerSteps);
-        var cr = CountPositionsAfter(matrix, new Coord(left, center), cornerSteps);
-        var cb = CountPositionsAfter(matrix, new Coord(center, top), cornerSteps);
-        var cl = CountPositionsAfter(matrix, new Coord(right, center), cornerSteps);
+        var ct = CountPositionsAfter(grid, new Coord(center, bottom), cornerSteps);
+        var cr = CountPositionsAfter(grid, new Coord(left, center), cornerSteps);
+        var cb = CountPositionsAfter(grid, new Coord(center, top), cornerSteps);
+        var cl = CountPositionsAfter(grid, new Coord(right, center), cornerSteps);
 
-        var str = CountPositionsAfter(matrix, new Coord(left, bottom), smallSteps);
-        var ltr = CountPositionsAfter(matrix, new Coord(left, bottom), largeSteps);
+        var str = CountPositionsAfter(grid, new Coord(left, bottom), smallSteps);
+        var ltr = CountPositionsAfter(grid, new Coord(left, bottom), largeSteps);
 
-        var sbr = CountPositionsAfter(matrix, new Coord(left, top), smallSteps);
-        var lbr = CountPositionsAfter(matrix, new Coord(left, top), largeSteps);
+        var sbr = CountPositionsAfter(grid, new Coord(left, top), smallSteps);
+        var lbr = CountPositionsAfter(grid, new Coord(left, top), largeSteps);
 
-        var sbl = CountPositionsAfter(matrix, new Coord(right, top), smallSteps);
-        var lbl = CountPositionsAfter(matrix, new Coord(right, top), largeSteps);
+        var sbl = CountPositionsAfter(grid, new Coord(right, top), smallSteps);
+        var lbl = CountPositionsAfter(grid, new Coord(right, top), largeSteps);
 
-        var stl = CountPositionsAfter(matrix, new Coord(right, bottom), smallSteps);
-        var ltl = CountPositionsAfter(matrix, new Coord(right, bottom), largeSteps);
+        var stl = CountPositionsAfter(grid, new Coord(right, bottom), smallSteps);
+        var ltl = CountPositionsAfter(grid, new Coord(right, bottom), largeSteps);
 
         var filledPlots = oddPoints * odd
                           + evenPoints * even

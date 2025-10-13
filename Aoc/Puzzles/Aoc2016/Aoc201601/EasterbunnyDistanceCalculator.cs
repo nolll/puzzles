@@ -26,13 +26,13 @@ public class EasterbunnyDistanceCalculator
                 _grid.MoveForward();
                 if (_grid.ReadValue() == 1 && _distanceToFirstRepeatedAddress == null)
                 {
-                    _distanceToFirstRepeatedAddress = _grid.StartAddress.ManhattanDistanceTo(_grid.Address);
+                    _distanceToFirstRepeatedAddress = _grid.StartCoord.ManhattanDistanceTo(_grid.Coord);
                 }
                 _grid.WriteValue(1);
             }
         }
     }
 
-    public int DistanceToTarget => _grid.StartAddress.ManhattanDistanceTo(_grid.Address);
+    public int DistanceToTarget => _grid.StartCoord.ManhattanDistanceTo(_grid.Coord);
     public int DistanceToFirstRepeat => _distanceToFirstRepeatedAddress ?? 0;
 }

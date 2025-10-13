@@ -8,18 +8,18 @@ public class Aoc202410 : AocPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var matrix = GridBuilder.BuildIntGridFromNonSeparated(input);
-        var trailHeads = matrix.FindAddresses(0);
-        var totalScore = trailHeads.Sum(trailHead => CountPaths(matrix, trailHead, []));
+        var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
+        var trailHeads = grid.FindAddresses(0);
+        var totalScore = trailHeads.Sum(trailHead => CountPaths(grid, trailHead, []));
 
         return new PuzzleResult(totalScore, "6149f23d412a8b5869010747e43f41ea");
     }
 
     public PuzzleResult Part2(string input)
     {
-        var matrix = GridBuilder.BuildIntGridFromNonSeparated(input);
-        var trailHeads = matrix.FindAddresses(0);
-        var totalScore = trailHeads.Sum(trailHead => CountPaths(matrix, trailHead));
+        var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
+        var trailHeads = grid.FindAddresses(0);
+        var totalScore = trailHeads.Sum(trailHead => CountPaths(grid, trailHead));
 
         return new PuzzleResult(totalScore, "9f0c79d76028ec84f2fda12a86e15c52");
     }

@@ -1,6 +1,6 @@
 namespace Pzl.Tools.Grids;
 
-public enum MatrixAddMode
+public enum GridAddMode
 {
     Prepend,
     Append

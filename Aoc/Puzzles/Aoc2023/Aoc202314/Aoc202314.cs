@@ -25,7 +25,7 @@ public class Aoc202314 : AocPuzzle
         const int iterations = 1_000_000_000;
         var seen = new Dictionary<string, int>();
         var list = new List<string>();
-        var matrix = MatrixBuilder.BuildCharMatrix(s);
+        var matrix = GridBuilder.BuildCharGrid(s);
 
         for (var i = 0; i < iterations; i++)
         {
@@ -42,7 +42,7 @@ public class Aoc202314 : AocPuzzle
 
                 var diff = largeTarget - iterations + 1;
                 var target = i - diff;
-                matrix = MatrixBuilder.BuildCharMatrix(list[target]);
+                matrix = GridBuilder.BuildCharGrid(list[target]);
                 break;
             }
 
@@ -57,7 +57,7 @@ public class Aoc202314 : AocPuzzle
 
     public static int RollNorth(string s)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(s);
+        var matrix = GridBuilder.BuildCharGrid(s);
         MoveNorth(matrix);
         var roundRocks = matrix.Coords.Where(o => matrix.ReadValueAt(o) == 'O').ToList();
         var sum = roundRocks.Sum(o => matrix.Height - o.Y);
@@ -65,73 +65,73 @@ public class Aoc202314 : AocPuzzle
         return sum;
     }
 
-    private static void MoveNorth(Matrix<char> matrix) =>
-        Move(matrix, c => c.OrderBy(o => o.Y).ThenBy(o => o.X), CanMoveNorth, m => m.MoveUp());
+    private static void MoveNorth(Grid<char> grid) =>
+        Move(grid, c => c.OrderBy(o => o.Y).ThenBy(o => o.X), CanMoveNorth, m => m.MoveUp());
 
-    private static void MoveEast(Matrix<char> matrix) =>
-        Move(matrix, c => c.OrderByDescending(o => o.X).ThenBy(o => o.Y), CanMoveEast, m => m.MoveRight());
+    private static void MoveEast(Grid<char> grid) =>
+        Move(grid, c => c.OrderByDescending(o => o.X).ThenBy(o => o.Y), CanMoveEast, m => m.MoveRight());
 
-    private static void MoveSouth(Matrix<char> matrix) =>
-        Move(matrix, c => c.OrderByDescending(o => o.Y).ThenBy(o => o.X), CanMoveSouth, m => m.MoveDown());
+    private static void MoveSouth(Grid<char> grid) =>
+        Move(grid, c => c.OrderByDescending(o => o.Y).ThenBy(o => o.X), CanMoveSouth, m => m.MoveDown());
 
-    private static void MoveWest(Matrix<char> matrix) =>
-        Move(matrix, c => c.OrderBy(o => o.Y).ThenBy(o => o.X), CanMoveWest, m => m.MoveLeft());
+    private static void MoveWest(Grid<char> grid) =>
+        Move(grid, c => c.OrderBy(o => o.Y).ThenBy(o => o.X), CanMoveWest, m => m.MoveLeft());
 
     private static void Move(
-        Matrix<char> matrix, 
+        Grid<char> grid, 
         Func<IEnumerable<Coord>, IEnumerable<Coord>> order, 
-        Func<Matrix<char>, bool> canMove, 
-        Action<Matrix<char>> move)
+        Func<Grid<char>, bool> canMove, 
+        Action<Grid<char>> move)
     {
-        var roundRocks = order(matrix.Coords.Where(o => matrix.ReadValueAt(o) == 'O'));
+        var roundRocks = order(grid.Coords.Where(o => grid.ReadValueAt(o) == 'O'));
 
         foreach (var roundRock in roundRocks)
         {
-            matrix.MoveTo(roundRock);
+            grid.MoveTo(roundRock);
 
-            while (canMove(matrix))
+            while (canMove(grid))
             {
-                matrix.WriteValue('.');
-                move(matrix);
-                matrix.WriteValue('O');
+                grid.WriteValue('.');
+                move(grid);
+                grid.WriteValue('O');
             }
         }
     }
 
-    public static Matrix<char> RunCycle(string s, int iterations)
+    public static Grid<char> RunCycle(string s, int iterations)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(s);
+        var matrix = GridBuilder.BuildCharGrid(s);
         RunCycle(matrix, iterations);
         return matrix;
     }
 
-    private static void RunCycle(Matrix<char> matrix, int iterations)
+    private static void RunCycle(Grid<char> grid, int iterations)
     {
         for (var i = 0; i < iterations; i++)
         {
-            RunCycle(matrix);
+            RunCycle(grid);
         }
     }
 
-    private static void RunCycle(Matrix<char> matrix)
+    private static void RunCycle(Grid<char> grid)
     {
-        MoveNorth(matrix);
-        MoveWest(matrix);
-        MoveSouth(matrix);
-        MoveEast(matrix);
+        MoveNorth(grid);
+        MoveWest(grid);
+        MoveSouth(grid);
+        MoveEast(grid);
     }
 
-    private static bool CanMoveNorth(Matrix<char> matrix) =>
-        CanMove(() => matrix.IsAtTopEdge, () => matrix.ReadValueAt(matrix.Address.X, matrix.Address.Y - 1));
+    private static bool CanMoveNorth(Grid<char> grid) =>
+        CanMove(() => grid.IsAtTopEdge, () => grid.ReadValueAt(grid.Address.X, grid.Address.Y - 1));
 
-    private static bool CanMoveEast(Matrix<char> matrix) =>
-        CanMove(() => matrix.IsAtRightEdge, () => matrix.ReadValueAt(matrix.Address.X + 1, matrix.Address.Y));
+    private static bool CanMoveEast(Grid<char> grid) =>
+        CanMove(() => grid.IsAtRightEdge, () => grid.ReadValueAt(grid.Address.X + 1, grid.Address.Y));
 
-    private static bool CanMoveSouth(Matrix<char> matrix) =>
-        CanMove(() => matrix.IsAtBottomEdge, () => matrix.ReadValueAt(matrix.Address.X, matrix.Address.Y + 1));
+    private static bool CanMoveSouth(Grid<char> grid) =>
+        CanMove(() => grid.IsAtBottomEdge, () => grid.ReadValueAt(grid.Address.X, grid.Address.Y + 1));
 
-    private static bool CanMoveWest(Matrix<char> matrix) => 
-        CanMove(() => matrix.IsAtLeftEdge, () => matrix.ReadValueAt(matrix.Address.X - 1, matrix.Address.Y));
+    private static bool CanMoveWest(Grid<char> grid) => 
+        CanMove(() => grid.IsAtLeftEdge, () => grid.ReadValueAt(grid.Address.X - 1, grid.Address.Y));
 
     private static bool CanMove(Func<bool> isAtEdge, Func<char> readValue)
     {

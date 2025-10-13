@@ -51,7 +51,7 @@ public class Tetris
     private static List<int> GetHeightDiffs(string input, long rockCount)
     {
         var moves = input.ToCharArray();
-        var matrix = new Matrix<char>(7, 1, '.');
+        var matrix = new Grid<char>(7, 1, '.');
         long rockIndex = 0;
         var moveIndex = 0;
         var lastShapeTop = 0;

@@ -4,13 +4,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202111;
 
 public class OctopusFlasher
 {
-    private readonly Matrix<int> _matrix;
+    private readonly Grid<int> _grid;
     private readonly IList<Coord> _coords;
 
     public OctopusFlasher(string input)
     {
-        _matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
-        _coords = _matrix.Coords.ToList();
+        _grid = GridBuilder.BuildIntGridFromNonSeparated(input);
+        _coords = _grid.Coords.ToList();
     }
 
     public int Run(int? maxSteps = null)
@@ -28,19 +28,19 @@ public class OctopusFlasher
             while (coordsToFlash.Any())
             {
                 var flashCoord = coordsToFlash.First();
-                _matrix.MoveTo(flashCoord);
-                _matrix.WriteValue(0);
+                _grid.MoveTo(flashCoord);
+                _grid.WriteValue(0);
                 flashed.Add(flashCoord);
 
-                foreach (var adjacentCoord in _matrix.AllAdjacentCoords)
+                foreach (var adjacentCoord in _grid.AllAdjacentCoords)
                 {
                     if (flashed.Contains(adjacentCoord))
                         continue;
 
-                    _matrix.MoveTo(adjacentCoord);
-                    var adjacentValue = _matrix.ReadValue();
+                    _grid.MoveTo(adjacentCoord);
+                    var adjacentValue = _grid.ReadValue();
                     var newAdjacentValue = adjacentValue + 1;
-                    _matrix.WriteValue(newAdjacentValue);
+                    _grid.WriteValue(newAdjacentValue);
                 }
 
                 coordsToFlash = GetCoordsToFlash();
@@ -60,17 +60,17 @@ public class OctopusFlasher
 
     private IList<Coord> GetCoordsToFlash()
     {
-        return _coords.Where(o => _matrix.ReadValueAt(o) > 9).ToList();
+        return _coords.Where(o => _grid.ReadValueAt(o) > 9).ToList();
     }
 
     private void IncrementAll()
     {
         foreach (var coord in _coords)
         {
-            _matrix.MoveTo(coord);
-            var v = _matrix.ReadValue();
+            _grid.MoveTo(coord);
+            var v = _grid.ReadValue();
             var newValue = v + 1;
-            _matrix.WriteValue(newValue);
+            _grid.WriteValue(newValue);
         }
     }
 }

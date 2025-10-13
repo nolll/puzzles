@@ -27,7 +27,7 @@ public class Aquaq11 : AquaqPuzzle
 
         var overlappingAreas = areas.Where(o => areas.Count(p => p.IsOverlapping(o)) > 1);
 
-        var matrix = new Matrix<char>(defaultValue: Empty);
+        var matrix = new Grid<char>(defaultValue: Empty);
 
         foreach (var area in overlappingAreas)
         {

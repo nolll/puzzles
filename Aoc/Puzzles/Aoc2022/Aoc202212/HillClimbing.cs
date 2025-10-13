@@ -6,7 +6,7 @@ public class HillClimbing
 {
     public int Part1(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var from = FindFromCoord(matrix);
         var to = FindToCoord(matrix);
         matrix.WriteValueAt(from, 'a');
@@ -18,7 +18,7 @@ public class HillClimbing
 
     public int Part2(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var from = FindFromCoord(matrix); 
         var to = FindToCoord(matrix);
         matrix.WriteValueAt(from, 'a');
@@ -28,20 +28,20 @@ public class HillClimbing
         return stepCount;
     }
 
-    private static Coord FindFromCoord(Matrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
-    private static Coord FindToCoord(Matrix<char> matrix) => matrix.Coords.First(o => matrix.ReadValueAt(o) == 'E');
+    private static Coord FindFromCoord(Grid<char> grid) => grid.Coords.First(o => grid.ReadValueAt(o) == 'S');
+    private static Coord FindToCoord(Grid<char> grid) => grid.Coords.First(o => grid.ReadValueAt(o) == 'E');
 
-    private static int StepCountTo(Matrix<char> matrix, Coord from, Coord to) =>
-        StepCountTo(matrix, new List<Coord> { from }, to);
+    private static int StepCountTo(Grid<char> grid, Coord from, Coord to) =>
+        StepCountTo(grid, new List<Coord> { from }, to);
 
-    private static int StepCountTo(Matrix<char> matrix, IList<Coord> from, Coord to)
+    private static int StepCountTo(Grid<char> grid, IList<Coord> from, Coord to)
     {
-        var coordCounts = GetCoordCounts(matrix, from, to);
+        var coordCounts = GetCoordCounts(grid, from, to);
         var goal = coordCounts.FirstOrDefault(o => o.X == to.X && o.Y == to.Y);
         return goal?.Count ?? 0;
     }
     
-    private static IList<CoordCount> GetCoordCounts(Matrix<char> matrix, IList<Coord> from, Coord to)
+    private static IList<CoordCount> GetCoordCounts(Grid<char> grid, IList<Coord> from, Coord to)
     {
         var seen = from.ToDictionary(k => k, v => 0);
         var queue = new Queue<Coord>(from);
@@ -49,8 +49,8 @@ public class HillClimbing
         {
             var next = queue.Dequeue();
             var count = seen[next];
-            var adjacentCoords = matrix.OrthogonalAdjacentCoordsTo(next)
-                .Where(o => !seen.ContainsKey(o) && matrix.ReadValueAt(o) - matrix.ReadValueAt(next) <= 1);
+            var adjacentCoords = grid.OrthogonalAdjacentCoordsTo(next)
+                .Where(o => !seen.ContainsKey(o) && grid.ReadValueAt(o) - grid.ReadValueAt(next) <= 1);
             foreach (var adjacentCoord in adjacentCoords)
             {
                 queue.Enqueue(adjacentCoord);

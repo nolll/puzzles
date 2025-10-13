@@ -17,7 +17,7 @@ public class Aquaq27 : AquaqPuzzle
 
     public static int CalculateSnakeScore(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(input, Empty);
+        var matrix = GridBuilder.BuildCharGridWithoutTrim(input, Empty);
         var coordsWithChars = matrix.Coords.Where(o => matrix.ReadValueAt(o) != Empty).ToHashSet();
         var adjacentDictionary = coordsWithChars
             .ToDictionary(k => k, v => matrix.OrthogonalAdjacentCoordsTo(v).Where(coordsWithChars.Contains).ToList());

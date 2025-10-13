@@ -17,15 +17,15 @@ public class HexagonalFloor
     private const string NorthWest = "nw";
 
     private readonly IEnumerable<List<string>> _instructions;
-    private readonly Matrix<char> _matrix;
+    private readonly Grid<char> _grid;
     private readonly Dictionary<string, List<Coord>> _adjacentCoordsCache;
-    public int BlackTileCount => _matrix.Values.Count(o => o == Black);
+    public int BlackTileCount => _grid.Values.Count(o => o == Black);
 
     public HexagonalFloor(string input)
     {
         var rows = StringReader.ReadLines(input);
         _instructions = rows.Select(ParseInstruction);
-        _matrix = new Matrix<char>(defaultValue: Nothing);
+        _grid = new Grid<char>(defaultValue: Nothing);
         _adjacentCoordsCache = new Dictionary<string, List<Coord>>();
     }
 
@@ -53,46 +53,46 @@ public class HexagonalFloor
 
     public void Arrange()
     {
-        _matrix.WriteValue(White);
+        _grid.WriteValue(White);
         foreach (var instruction in _instructions)
         {
-            _matrix.MoveTo(_matrix.StartAddress);
+            _grid.MoveTo(_grid.StartAddress);
             foreach (var step in instruction)
             {
                 switch (step)
                 {
                     case NorthEast:
-                        _matrix.MoveUp();
-                        _matrix.MoveRight();
+                        _grid.MoveUp();
+                        _grid.MoveRight();
                         break;
                     case East:
-                        _matrix.MoveRight();
-                        _matrix.MoveRight();
+                        _grid.MoveRight();
+                        _grid.MoveRight();
                         break;
                     case SouthEast:
-                        _matrix.MoveDown();
-                        _matrix.MoveRight();
+                        _grid.MoveDown();
+                        _grid.MoveRight();
                         break;
                     case SouthWest:
-                        _matrix.MoveDown();
-                        _matrix.MoveLeft();
+                        _grid.MoveDown();
+                        _grid.MoveLeft();
                         break;
                     case West:
-                        _matrix.MoveLeft();
-                        _matrix.MoveLeft();
+                        _grid.MoveLeft();
+                        _grid.MoveLeft();
                         break;
                     case NorthWest:
-                        _matrix.MoveUp();
-                        _matrix.MoveLeft();
+                        _grid.MoveUp();
+                        _grid.MoveLeft();
                         break;
                 }
 
-                if (_matrix.ReadValue() == Nothing)
-                    _matrix.WriteValue(White);
+                if (_grid.ReadValue() == Nothing)
+                    _grid.WriteValue(White);
             }
 
-            var tile = _matrix.ReadValue() == Black ? White : Black;
-            _matrix.WriteValue(tile);
+            var tile = _grid.ReadValue() == Black ? White : Black;
+            _grid.WriteValue(tile);
         }
     }
 
@@ -100,10 +100,10 @@ public class HexagonalFloor
     {
         for (var day = 0; day < dayCount; day++)
         {
-            _matrix.ExtendUp(1);
-            _matrix.ExtendRight(2);
-            _matrix.ExtendDown(1);
-            _matrix.ExtendLeft(2);
+            _grid.ExtendUp(1);
+            _grid.ExtendRight(2);
+            _grid.ExtendDown(1);
+            _grid.ExtendLeft(2);
             FillEmptyTilesWithWhite();
             ApplyRules();
         }
@@ -114,9 +114,9 @@ public class HexagonalFloor
         var tilesToFlipToBlack = new List<Coord>();
         var tilesToFlipToWhite = new List<Coord>();
 
-        foreach (var coord in _matrix.Coords)
+        foreach (var coord in _grid.Coords)
         {
-            var thisValue = _matrix.ReadValueAt(coord);
+            var thisValue = _grid.ReadValueAt(coord);
 
             if (thisValue != Nothing)
             {
@@ -143,12 +143,12 @@ public class HexagonalFloor
 
         foreach (var address in tilesToFlipToBlack)
         {
-            _matrix.WriteValueAt(address, Black);
+            _grid.WriteValueAt(address, Black);
         }
 
         foreach (var address in tilesToFlipToWhite)
         {
-            _matrix.WriteValueAt(address, White);
+            _grid.WriteValueAt(address, White);
         }
     }
 
@@ -156,9 +156,9 @@ public class HexagonalFloor
     {
         var tilesToFill = new List<Coord>();
 
-        foreach (var coord in _matrix.Coords)
+        foreach (var coord in _grid.Coords)
         {
-            if (_matrix.ReadValueAt(coord) != Nothing)
+            if (_grid.ReadValueAt(coord) != Nothing)
             {
                 var adjacentAddresses = GetAdjacent6Coords(coord);
                 var adjacentValues = GetAdjacent6Values(coord);
@@ -166,9 +166,9 @@ public class HexagonalFloor
                 {
                     foreach (var address in adjacentAddresses)
                     {
-                        if (_matrix.TryMoveTo(address) && _matrix.ReadValueAt(address) == Nothing)
+                        if (_grid.TryMoveTo(address) && _grid.ReadValueAt(address) == Nothing)
                         {
-                            tilesToFill.Add(_matrix.Address);
+                            tilesToFill.Add(_grid.Address);
                         }
                     }
                 }
@@ -177,24 +177,24 @@ public class HexagonalFloor
         
         foreach (var address in tilesToFill)
         {
-            _matrix.WriteValueAt(address, White);
+            _grid.WriteValueAt(address, White);
         }
     }
 
     private List<char> GetAdjacent6Values(Coord coord)
     {
-        var currentAddress = _matrix.Address;
+        var currentAddress = _grid.Address;
         var addresses = GetAdjacent6Coords(coord);
         var values = new List<char>();
         foreach (var address in addresses)
         {
-            if (_matrix.TryMoveTo(address))
+            if (_grid.TryMoveTo(address))
             {
-                values.Add(_matrix.ReadValue());
+                values.Add(_grid.ReadValue());
             }
         }
 
-        _matrix.MoveTo(currentAddress);
+        _grid.MoveTo(currentAddress);
         return values;
     }
 

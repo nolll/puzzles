@@ -5,20 +5,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202113;
 
 public class TransparentPaper
 {
-    private Matrix<char> _matrix;
+    private Grid<char> _grid;
     private readonly IList<string> _folds;
 
     public TransparentPaper(string input)
     {
         var groups = StringReader.ReadLineGroups(input);
 
-        _matrix = BuildMatrix(groups.First());
+        _grid = BuildMatrix(groups.First());
         _folds = groups[1];
     }
 
-    private static Matrix<char> BuildMatrix(IEnumerable<string> rows)
+    private static Grid<char> BuildMatrix(IEnumerable<string> rows)
     {
-        var matrix = new Matrix<char>(defaultValue: '.');
+        var matrix = new Grid<char>(defaultValue: '.');
 
         foreach (var row in rows)
         {
@@ -35,7 +35,7 @@ public class TransparentPaper
     public int DotCountAfterFirstFold()
     {
         Fold(_folds.First());
-        return _matrix.Values.Count(o => o == '#');
+        return _grid.Values.Count(o => o == '#');
     }
 
     public string MessageAfterFold()
@@ -43,7 +43,7 @@ public class TransparentPaper
         foreach (var fold in _folds) 
             Fold(fold);
 
-        return _matrix.Print();
+        return _grid.Print();
     }
 
     private void Fold(string fold)
@@ -70,11 +70,11 @@ public class TransparentPaper
 
     private void FoldHorizontal(int foldCol)
     {
-        var keepTo = new Coord(foldCol - 1, _matrix.Height - 1);
+        var keepTo = new Coord(foldCol - 1, _grid.Height - 1);
         var foldFrom = new Coord(foldCol + 1, 0);
 
-        var newMatrix = _matrix.Clone().Slice(to: keepTo);
-        var foldMatrix = _matrix.Clone().Slice(foldFrom);
+        var newMatrix = _grid.Clone().Slice(to: keepTo);
+        var foldMatrix = _grid.Clone().Slice(foldFrom);
         foldMatrix = foldMatrix.FlipHorizontal();
         var widthDiff = newMatrix.Width - foldMatrix.Width;
 
@@ -90,16 +90,16 @@ public class TransparentPaper
             }
         }
 
-        _matrix = newMatrix;
+        _grid = newMatrix;
     }
 
     private void FoldVertical(int foldRow)
     {
-        var keepTo = new Coord(_matrix.Width - 1, foldRow - 1);
+        var keepTo = new Coord(_grid.Width - 1, foldRow - 1);
         var foldFrom = new Coord(0, foldRow + 1);
 
-        var newMatrix = _matrix.Clone().Slice(to: keepTo);
-        var foldMatrix = _matrix.Clone().Slice(foldFrom);
+        var newMatrix = _grid.Clone().Slice(to: keepTo);
+        var foldMatrix = _grid.Clone().Slice(foldFrom);
         foldMatrix = foldMatrix.FlipVertical();
         var heightDiff = newMatrix.Height - foldMatrix.Height;
 
@@ -115,6 +115,6 @@ public class TransparentPaper
             }
         }
 
-        _matrix = newMatrix;
+        _grid = newMatrix;
     }
 }

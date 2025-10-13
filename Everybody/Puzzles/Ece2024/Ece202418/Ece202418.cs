@@ -20,7 +20,7 @@ public class Ece202418 : EverybodyEventPuzzle
 
     private int Part1And2(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var palmtrees = matrix.FindAddresses('P');
         var current = matrix.Coords.Where(o => (o.X == 0 || o.X == matrix.XMax) && matrix.ReadValueAt(o) == '.')
             .ToHashSet();
@@ -57,7 +57,7 @@ public class Ece202418 : EverybodyEventPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var palmtrees = matrix.FindAddresses('P');
         var possibleStarts = matrix.FindAddresses('.');
         var hits = possibleStarts.ToDictionary(k => k, _ => new Dictionary<Coord, int>());

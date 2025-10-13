@@ -6,16 +6,16 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201911;
 public class PaintRobot
 {
     private readonly string _program;
-    private readonly Matrix<int> _panels;
-    private readonly Matrix<int> _paintCounts;
+    private readonly Grid<int> _panels;
+    private readonly Grid<int> _paintCounts;
     private PaintMode _mode;
     private IntCodeComputer? _computer;
 
     public PaintRobot(string program, int shipWidth = 100, int shipHeight = 100)
     {
         _program = program;
-        _panels = new Matrix<int>(shipWidth, shipHeight);
-        _paintCounts = new Matrix<int>(shipWidth, shipHeight);
+        _panels = new Grid<int>(shipWidth, shipHeight);
+        _paintCounts = new Grid<int>(shipWidth, shipHeight);
     }
 
     public Result Paint(bool startOnWhitePanel)

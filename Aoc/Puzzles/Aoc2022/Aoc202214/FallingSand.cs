@@ -52,9 +52,9 @@ public class FallingSand
         return matrix.Values.Count(o => o == 'o');
     }
 
-    private static Matrix<char> BuildMatrix(string input, int part)
+    private static Grid<char> BuildMatrix(string input, int part)
     {
-        var matrix = new Matrix<char>(1, 1, '.');
+        var matrix = new Grid<char>(1, 1, '.');
         var lines = StringReader.ReadLines(input, false);
 
         var coordLists = lines.Select(o => o.Split(" -> "));
@@ -119,28 +119,28 @@ public class FallingSand
         return matrix;
     }
 
-    private static bool TryMove(Matrix<char> matrix, Coord currentSand, out Coord newSand)
+    private static bool TryMove(Grid<char> grid, Coord currentSand, out Coord newSand)
     {
         var down = new Coord(currentSand.X, currentSand.Y + 1);
-        matrix.MoveTo(down);
+        grid.MoveTo(down);
 
-        if (matrix.ReadValueAt(down) == '.')
+        if (grid.ReadValueAt(down) == '.')
         {
             newSand = down;
             return true;
         }
 
         var downLeft = new Coord(down.X - 1, down.Y);
-        matrix.MoveTo(downLeft);
-        if (matrix.ReadValueAt(downLeft) == '.')
+        grid.MoveTo(downLeft);
+        if (grid.ReadValueAt(downLeft) == '.')
         {
             newSand = downLeft;
             return true;
         }
 
         var downRight = new Coord(down.X + 1, down.Y);
-        matrix.MoveTo(downRight);
-        if (matrix.ReadValueAt(downRight) == '.')
+        grid.MoveTo(downRight);
+        if (grid.ReadValueAt(downRight) == '.')
         {
             newSand = downRight;
             return true;

@@ -4,14 +4,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201924;
 
 public class BugLifeSimulator
 {
-    private Matrix<char> _matrix;
+    private Grid<char> _grid;
 
-    public string String => string.Join("", _matrix.Values);
+    public string String => string.Join("", _grid.Values);
     private readonly IList<string> _previousStrings;
 
     public BugLifeSimulator(string input)
     {
-        _matrix = BuildMatrix(input);
+        _grid = BuildMatrix(input);
         _previousStrings = new List<string>();
     }
 
@@ -38,14 +38,14 @@ public class BugLifeSimulator
 
     private void NextIteration()
     {
-        var newMatrix = new Matrix<char>(1, 1);
-        for (var y = 0; y < _matrix.Height; y++)
+        var newMatrix = new Grid<char>(1, 1);
+        for (var y = 0; y < _grid.Height; y++)
         {
-            for (var x = 0; x < _matrix.Width; x++)
+            for (var x = 0; x < _grid.Width; x++)
             {
-                _matrix.MoveTo(x, y);
-                var currentValue = _matrix.ReadValue();
-                var adjacentValues = _matrix.OrthogonalAdjacentValues;
+                _grid.MoveTo(x, y);
+                var currentValue = _grid.ReadValue();
+                var adjacentValues = _grid.OrthogonalAdjacentValues;
                 var neighborCount = adjacentValues.Count(o => o == '#');
                 var newValue = GetNewValue(currentValue, neighborCount);
                 newMatrix.MoveTo(x, y);
@@ -53,7 +53,7 @@ public class BugLifeSimulator
             }
         }
 
-        _matrix = newMatrix;
+        _grid = newMatrix;
     }
 
     private char GetNewValue(char currentValue, int neighborCount)
@@ -73,7 +73,7 @@ public class BugLifeSimulator
         {
             long totalScore = 0;
             var currentScore = 1;
-            foreach (var c in _matrix.Values)
+            foreach (var c in _grid.Values)
             {
                 if(c == '#')
                     totalScore += currentScore;
@@ -84,9 +84,9 @@ public class BugLifeSimulator
         }
     }
 
-    private Matrix<char> BuildMatrix(string map)
+    private Grid<char> BuildMatrix(string map)
     {
-        var matrix = new Matrix<char>(1, 1);
+        var matrix = new Grid<char>(1, 1);
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

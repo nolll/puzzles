@@ -5,13 +5,13 @@ namespace Pzl.Tools.Grids.Grids2d;
 public static class PathFinder
 {
     public static IList<Coord> ShortestPathTo(
-        Matrix<char> matrix, 
+        Grid<char> grid, 
         Coord from, 
         Coord to,
-        Func<Matrix<char>, Coord, List<Coord>>? neighborFunc = null)
+        Func<Grid<char>, Coord, List<Coord>>? neighborFunc = null)
     {
-        var coordCounts = GetCoordCounts(matrix, from, to, neighborFunc ?? GetNeighbors);
-        var pathMatrix = new Matrix<int>(matrix.Width, matrix.Height, -1);
+        var coordCounts = GetCoordCounts(grid, from, to, neighborFunc ?? GetNeighbors);
+        var pathMatrix = new Grid<int>(grid.Width, grid.Height, -1);
         foreach (var coordCount in coordCounts)
         {
             pathMatrix.MoveTo(coordCount.X, coordCount.Y);
@@ -40,10 +40,10 @@ public static class PathFinder
     }
 
     private static IList<CoordCount> GetCoordCounts(
-        Matrix<char> matrix, 
+        Grid<char> grid, 
         Coord from, 
         Coord to, 
-        Func<Matrix<char>, Coord, List<Coord>> neighborFunc)
+        Func<Grid<char>, Coord, List<Coord>> neighborFunc)
     {
         var queue = new List<CoordCount> { new(to.X, to.Y, 0) };
         var seen = new HashSet<Coord> { to };
@@ -51,8 +51,8 @@ public static class PathFinder
         while (index < queue.Count && !seen.Contains(from))
         {
             var next = queue[index];
-            matrix.MoveTo(next.X, next.Y);
-            var adjacentCoords = neighborFunc(matrix, matrix.Address).Where(o => !seen.Contains(o)).ToList();
+            grid.MoveTo(next.X, next.Y);
+            var adjacentCoords = neighborFunc(grid, grid.Address).Where(o => !seen.Contains(o)).ToList();
             var newCoordCounts = adjacentCoords.Select(o => new CoordCount(o, next.Count + 1)).ToList();
             queue.AddRange(newCoordCounts);
             foreach (var coordCount in newCoordCounts)
@@ -65,8 +65,8 @@ public static class PathFinder
         return queue;
     }
 
-    private static List<Coord> GetNeighbors(Matrix<char> matrix, Coord coord) => 
-        matrix.OrthogonalAdjacentCoords.Where(o => matrix.ReadValueAt(o) == '.').ToList();
+    private static List<Coord> GetNeighbors(Grid<char> grid, Coord coord) => 
+        grid.OrthogonalAdjacentCoords.Where(o => grid.ReadValueAt(o) == '.').ToList();
 }
 
 [DebuggerDisplay("{X},{Y},{Count}")]

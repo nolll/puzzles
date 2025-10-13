@@ -36,23 +36,23 @@ public class PlusShape : TetrisShape
     {
     }
 
-    public override bool CanMoveLeft(Matrix<char> matrix, Coord bottomLeft)
+    public override bool CanMoveLeft(Grid<char> grid, Coord bottomLeft)
     {
-        return CheckCoords(matrix, bottomLeft, _left);
+        return CheckCoords(grid, bottomLeft, _left);
     }
 
-    public override bool CanMoveRight(Matrix<char> matrix, Coord bottomLeft)
+    public override bool CanMoveRight(Grid<char> grid, Coord bottomLeft)
     {
-        return CheckCoords(matrix, bottomLeft, _right);
+        return CheckCoords(grid, bottomLeft, _right);
     }
 
-    public override bool CanMoveDown(Matrix<char> matrix, Coord bottomLeft)
+    public override bool CanMoveDown(Grid<char> grid, Coord bottomLeft)
     {
-        return CheckCoords(matrix, bottomLeft, _down);
+        return CheckCoords(grid, bottomLeft, _down);
     }
 
-    public override void Paint(Matrix<char> matrix, Coord bottomLeft)
+    public override void Paint(Grid<char> grid, Coord bottomLeft)
     {
-        Paint(matrix, bottomLeft, _shape);
+        Paint(grid, bottomLeft, _shape);
     }
 }

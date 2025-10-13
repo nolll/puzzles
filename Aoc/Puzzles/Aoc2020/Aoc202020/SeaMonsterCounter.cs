@@ -10,7 +10,7 @@ public class SeaMonsterCounter
                                              .#..#..#..#..#..#...
                                              """;
 
-    private readonly List<Func<Matrix<char>, Matrix<char>>> _searchFlips = new()
+    private readonly List<Func<Grid<char>, Grid<char>>> _searchFlips = new()
     {
         matrix => matrix.FlipVertical(),
         matrix => matrix.FlipHorizontal(),
@@ -18,23 +18,23 @@ public class SeaMonsterCounter
         matrix => matrix.FlipHorizontal()
     };
 
-    private readonly Matrix<char> _seaMonsterMatrix;
+    private readonly Grid<char> _seaMonsterGrid;
     private readonly List<Coord> _seaMonsterHashAddresses;
 
     public SeaMonsterCounter()
     {
-        _seaMonsterMatrix = MatrixBuilder.BuildCharMatrix(SeaMonsterPattern);
-        _seaMonsterHashAddresses = _seaMonsterMatrix.Coords.Where(o => _seaMonsterMatrix.ReadValueAt(o) == '#').ToList();
+        _seaMonsterGrid = GridBuilder.BuildCharGrid(SeaMonsterPattern);
+        _seaMonsterHashAddresses = _seaMonsterGrid.Coords.Where(o => _seaMonsterGrid.ReadValueAt(o) == '#').ToList();
     }
 
-    private int Count(Matrix<char> matrix)
+    private int Count(Grid<char> grid)
     {
         var seaMonsterCount = 0;
-        for (var y = 0; y < matrix.Height - _seaMonsterMatrix.Height; y++)
+        for (var y = 0; y < grid.Height - _seaMonsterGrid.Height; y++)
         {
-            for (var x = 0; x < matrix.Width - _seaMonsterMatrix.Width; x++)
+            for (var x = 0; x < grid.Width - _seaMonsterGrid.Width; x++)
             {
-                var foundSeaMonster = _seaMonsterHashAddresses.All(address => matrix.ReadValueAt(x + address.X, y + address.Y) == '#');
+                var foundSeaMonster = _seaMonsterHashAddresses.All(address => grid.ReadValueAt(x + address.X, y + address.Y) == '#');
                 seaMonsterCount += foundSeaMonster ? 1 : 0;
             }
         }
@@ -42,16 +42,16 @@ public class SeaMonsterCounter
         return seaMonsterCount;
     }
 
-    public int GetCount(Matrix<char> matrix)
+    public int GetCount(Grid<char> grid)
     {
         foreach (var flip in _searchFlips)
         {
-            matrix = flip(matrix);
+            grid = flip(grid);
             for (var i = 0; i < 4; i++)
             {
-                matrix = matrix.RotateRight();
+                grid = grid.RotateRight();
 
-                var count = Count(matrix);
+                var count = Count(grid);
                 if (count > 0)
                     return count;
             }

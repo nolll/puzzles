@@ -4,7 +4,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201820;
 
 public class RegularMapNavigator
 {
-    private readonly Matrix<char> _map;
+    private readonly Grid<char> _map;
     private readonly IDictionary<Coord, int> _distances;
 
     private static class Chars
@@ -29,7 +29,7 @@ public class RegularMapNavigator
         MostDoors = 0;
         const int size = 220;
         const int start = size / 2;
-        _map = new Matrix<char>(size, size, Chars.Wall);
+        _map = new Grid<char>(size, size, Chars.Wall);
         _distances = new Dictionary<Coord, int>();
         var startAddress = new Coord(start, start);
         _map.MoveTo(startAddress);

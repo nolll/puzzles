@@ -14,10 +14,10 @@ public class SpiralMemory
         Value = matrix.ReadValue();
     }
 
-    private static Matrix<long> BuildMatrix(int targetSquare, SpiralMemoryMode mode)
+    private static Grid<long> BuildMatrix(int targetSquare, SpiralMemoryMode mode)
     {
-        var matrix = new Matrix<long>();
-        matrix.TurnTo(MatrixDirection.Down);
+        var matrix = new Grid<long>();
+        matrix.TurnTo(GridDirection.Down);
         var currentSquare = 1;
         matrix.WriteValue(currentSquare);
         while (currentSquare < targetSquare)

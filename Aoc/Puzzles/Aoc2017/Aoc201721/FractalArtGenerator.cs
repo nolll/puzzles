@@ -12,13 +12,13 @@ public class FractalArtGenerator
                                   ###
                                   """;
 
-    private Matrix<char> _matrix;
+    private Grid<char> _grid;
     private readonly IList<FractalRule> _transformationRules2X2;
     private readonly IList<FractalRule> _transformationRules3X3;
     private readonly IDictionary<string, IList<MatrixVariant>> _variantCache;
-    private readonly IDictionary<string, Matrix<char>> _transformCache;
+    private readonly IDictionary<string, Grid<char>> _transformCache;
 
-    public int PixelsOn => _matrix.Values.Count(o => o == '#');
+    public int PixelsOn => _grid.Values.Count(o => o == '#');
 
     public FractalArtGenerator(string input)
     {
@@ -26,9 +26,9 @@ public class FractalArtGenerator
         _transformationRules2X2 = rules.Where(o => o.Input.Length == 5).ToList();
         _transformationRules3X3 = rules.Where(o => o.Input.Length != 5).ToList();
 
-        _matrix = MatrixBuilder.BuildCharMatrix(Inital);
+        _grid = GridBuilder.BuildCharGrid(Inital);
         _variantCache = new Dictionary<string, IList<MatrixVariant>>();
-        _transformCache = new Dictionary<string, Matrix<char>>();
+        _transformCache = new Dictionary<string, Grid<char>>();
     }
 
     private static IList<FractalRule> ParseRules(string input)
@@ -58,7 +58,7 @@ public class FractalArtGenerator
 
     private void Modify()
     {
-        var size = _matrix.Width;
+        var size = _grid.Width;
         var subMatrixSize = size % 2 == 0 ? 2 : 3;
         Modify(subMatrixSize);
     }
@@ -66,18 +66,18 @@ public class FractalArtGenerator
     private void Modify(int subSize)
     {
         var matrices = GetSubmatrices(subSize);
-        var transformed = new List<Matrix<char>>();
+        var transformed = new List<Grid<char>>();
         foreach (var matrix in matrices)
         {
             transformed.Add(Transform(matrix));
         }
 
-        _matrix = Join(transformed);
+        _grid = Join(transformed);
     }
 
-    private static Matrix<char> Join(List<Matrix<char>> matrices)
+    private static Grid<char> Join(List<Grid<char>> matrices)
     {
-        var newMatrix = new Matrix<char>();
+        var newMatrix = new Grid<char>();
         var size = matrices.First().Width;
         var matricesPerRow = (int)Math.Sqrt(matrices.Count);
         var col = 0;
@@ -116,28 +116,28 @@ public class FractalArtGenerator
         }
     }
 
-    private IList<MatrixVariant> GetVariants(Matrix<char> matrix)
+    private IList<MatrixVariant> GetVariants(Grid<char> grid)
     {
-        var key = MatrixToString(matrix);
+        var key = MatrixToString(grid);
         if (_variantCache.TryGetValue(key, out var variants))
             return variants;
             
-        variants = CreateVariants(matrix).ToList();
+        variants = CreateVariants(grid).ToList();
         _variantCache.Add(key, variants);
         return variants;
     }
 
-    private static IEnumerable<MatrixVariant> CreateVariants(Matrix<char> matrix)
+    private static IEnumerable<MatrixVariant> CreateVariants(Grid<char> grid)
     {
-        yield return new MatrixVariant(MatrixToString(matrix));
+        yield return new MatrixVariant(MatrixToString(grid));
 
-        var flippedMatrix = FlipMatrixHorizontally(matrix);
+        var flippedMatrix = FlipMatrixHorizontally(grid);
         yield return new MatrixVariant(MatrixToString(flippedMatrix));
 
-        flippedMatrix = FlipMatrixVertically(matrix);
+        flippedMatrix = FlipMatrixVertically(grid);
         yield return new MatrixVariant(MatrixToString(flippedMatrix));
 
-        var rotatedMatrix = RotateMatrixRight(matrix);
+        var rotatedMatrix = RotateMatrixRight(grid);
         yield return new MatrixVariant(MatrixToString(rotatedMatrix));
 
         flippedMatrix = FlipMatrixHorizontally(rotatedMatrix);
@@ -165,14 +165,14 @@ public class FractalArtGenerator
         yield return new MatrixVariant(MatrixToString(flippedMatrix));
     }
 
-    private Matrix<char> Transform(Matrix<char> matrix)
+    private Grid<char> Transform(Grid<char> grid)
     {
-        var key = MatrixToString(matrix);
+        var key = MatrixToString(grid);
         if (_transformCache.TryGetValue(key, out var transformedMatrix))
             return transformedMatrix;
 
-        var variants = GetVariants(matrix);
-        var size = matrix.Width;
+        var variants = GetVariants(grid);
+        var size = grid.Width;
         var rules = size == 2 ? _transformationRules2X2 : _transformationRules3X3;
 
         foreach (var rule in rules)
@@ -192,47 +192,47 @@ public class FractalArtGenerator
         throw new Exception("No transformation rule matched");
     }
 
-    private static Matrix<char> FlipMatrixHorizontally(Matrix<char> matrix)
+    private static Grid<char> FlipMatrixHorizontally(Grid<char> grid)
     {
-        var width = matrix.Width;
-        var flipped = new Matrix<char>();
-        for (var y = 0; y < matrix.Height; y++)
+        var width = grid.Width;
+        var flipped = new Grid<char>();
+        for (var y = 0; y < grid.Height; y++)
         {
             for (var x = 0; x < width; x++)
             {
                 flipped.MoveTo(width - x - 1, y);
-                flipped.WriteValue(matrix.ReadValueAt(x, y));
+                flipped.WriteValue(grid.ReadValueAt(x, y));
             }
         }
 
         return flipped;
     }
 
-    private static Matrix<char> FlipMatrixVertically(Matrix<char> matrix)
+    private static Grid<char> FlipMatrixVertically(Grid<char> grid)
     {
-        var height = matrix.Height;
-        var flipped = new Matrix<char>();
+        var height = grid.Height;
+        var flipped = new Grid<char>();
         for (var y = 0; y < height; y++)
         {
-            for (var x = 0; x < matrix.Width; x++)
+            for (var x = 0; x < grid.Width; x++)
             {
                 flipped.MoveTo(x, height - y - 1);
-                flipped.WriteValue(matrix.ReadValueAt(x, y));
+                flipped.WriteValue(grid.ReadValueAt(x, y));
             }
         }
 
         return flipped;
     }
 
-    private static Matrix<char> RotateMatrixRight(Matrix<char> matrix)
+    private static Grid<char> RotateMatrixRight(Grid<char> grid)
     {
-        var height = matrix.Height;
-        var flipped = new Matrix<char>(1, 1, ' ');
+        var height = grid.Height;
+        var flipped = new Grid<char>(1, 1, ' ');
         for (var y = 0; y < height; y++)
         {
-            for (var x = 0; x < matrix.Width; x++)
+            for (var x = 0; x < grid.Width; x++)
             {
-                var value = matrix.ReadValueAt(x, y);
+                var value = grid.ReadValueAt(x, y);
                 flipped.MoveTo(height - y - 1, x);
                 flipped.WriteValue(value);
             }
@@ -241,14 +241,14 @@ public class FractalArtGenerator
         return flipped;
     }
 
-    private static string MatrixToString(Matrix<char> matrix)
+    private static string MatrixToString(Grid<char> grid)
     {
         var sb = new StringBuilder();
-        for (var y = 0; y < matrix.Height; y++)
+        for (var y = 0; y < grid.Height; y++)
         {
-            for (var x = 0; x < matrix.Width; x++)
+            for (var x = 0; x < grid.Width; x++)
             {
-                sb.Append(matrix.ReadValueAt(x, y));
+                sb.Append(grid.ReadValueAt(x, y));
             }
 
             sb.Append("/");
@@ -257,22 +257,22 @@ public class FractalArtGenerator
         return sb.ToString().TrimEnd('/');
     }
 
-    private IEnumerable<Matrix<char>> GetSubmatrices(int subSize)
+    private IEnumerable<Grid<char>> GetSubmatrices(int subSize)
     {
-        var size = _matrix.Width;
+        var size = _grid.Width;
         var x = 0;
         var y = 0;
         while (y < size)
         {
             while (x < size)
             {
-                var matrix = new Matrix<char>();
+                var matrix = new Grid<char>();
                 for (var localY = 0; localY < subSize; localY++)
                 {
                     for (var localX = 0; localX < subSize; localX++)
                     {
                         matrix.MoveTo(localX, localY);
-                        matrix.WriteValue(_matrix.ReadValueAt(x + localX, y + localY));
+                        matrix.WriteValue(_grid.ReadValueAt(x + localX, y + localY));
                     }
                 }
 

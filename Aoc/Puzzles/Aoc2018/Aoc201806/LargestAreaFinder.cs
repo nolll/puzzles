@@ -4,7 +4,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201806;
 
 public class LargestAreaFinder
 {
-    private Matrix<int> _matrix = new();
+    private Grid<int> _grid = new();
 
     private readonly IList<Coord> _coords;
     private readonly IList<int> _ids;
@@ -28,7 +28,7 @@ public class LargestAreaFinder
     public int GetSizeOfCentralArea(int distanceLimit)
     {
         var centralAreaCount = 0;
-        foreach (var coord in _matrix.Coords)
+        foreach (var coord in _grid.Coords)
         {
             var sumOfdistances = _coords.Select(o => o.ManhattanDistanceTo(coord)).Sum();
             if (sumOfdistances < distanceLimit)
@@ -40,28 +40,28 @@ public class LargestAreaFinder
 
     private IList<int> GetNonEdgeMasters(IList<int> edgeMarkers)
     {
-        return _matrix.Values.Where(o => o != 0 && !edgeMarkers.Contains(o)).ToList();
+        return _grid.Values.Where(o => o != 0 && !edgeMarkers.Contains(o)).ToList();
     }
 
     private IList<int> FindEdgeMarkers()
     {
-        _matrix.MoveTo(_matrix.XMin, _matrix.YMin);
-        _matrix.TurnTo(MatrixDirection.Right);
+        _grid.MoveTo(_grid.XMin, _grid.YMin);
+        _grid.TurnTo(GridDirection.Right);
         var markers = new List<int>();
         var done = false;
         while (!done)
         {
-            var val = _matrix.ReadValue();
+            var val = _grid.ReadValue();
             if(val != 0 && !markers.Contains(val) && !_ids.Contains(val))
                 markers.Add(val);
 
-            if (!_matrix.TryMoveForward())
+            if (!_grid.TryMoveForward())
             {
-                _matrix.TurnRight();
-                _matrix.MoveForward();
+                _grid.TurnRight();
+                _grid.MoveForward();
             }
 
-            if (_matrix.Address.X == _matrix.XMin && _matrix.Address.Y == _matrix.YMin)
+            if (_grid.Address.X == _grid.XMin && _grid.Address.Y == _grid.YMin)
                 done = true;
         }
 
@@ -70,21 +70,21 @@ public class LargestAreaFinder
 
     private void FillMatrix(IList<Coord> coords)
     {
-        foreach (var coord in _matrix.Coords)
+        foreach (var coord in _grid.Coords)
         {
-            _matrix.MoveTo(coord);
-            if (_matrix.ReadValue() != -1)
+            _grid.MoveTo(coord);
+            if (_grid.ReadValue() != -1)
                 continue;
 
-            var coordsOrderedByDistance = coords.OrderBy(o => _matrix.Address.ManhattanDistanceTo(o)).ToList();
+            var coordsOrderedByDistance = coords.OrderBy(o => _grid.Address.ManhattanDistanceTo(o)).ToList();
             var coord1 = coordsOrderedByDistance[0];
             var coord2 = coordsOrderedByDistance[1];
-            var distance1 = _matrix.Address.ManhattanDistanceTo(coord1);
-            var distance2 = _matrix.Address.ManhattanDistanceTo(coord2);
+            var distance1 = _grid.Address.ManhattanDistanceTo(coord1);
+            var distance2 = _grid.Address.ManhattanDistanceTo(coord2);
             var c = distance1 == distance2
                 ? 0
-                : _matrix.ReadValueAt(coord1) + 1000;
-            _matrix.WriteValue(c);
+                : _grid.ReadValueAt(coord1) + 1000;
+            _grid.WriteValue(c);
         }
     }
 
@@ -93,12 +93,12 @@ public class LargestAreaFinder
         var width = coords.Max(o => o.X) + 1;
         var height = coords.Max(o => o.Y) + 1;
 
-        _matrix = new Matrix<int>(width, height, -1);
+        _grid = new Grid<int>(width, height, -1);
 
         var c = 1;
         foreach (var coord in coords)
         {
-            _matrix.WriteValueAt(coord, c);
+            _grid.WriteValueAt(coord, c);
             _ids.Add(c);
             c += 1;
         }

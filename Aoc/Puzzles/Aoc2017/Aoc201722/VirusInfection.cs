@@ -9,16 +9,16 @@ public class VirusInfection
     private const char Infected = '#';
     private const char Flagged = 'F';
 
-    private readonly Matrix<char> _matrix;
+    private readonly Grid<char> _grid;
 
     public VirusInfection(string input)
     {
-        _matrix = MatrixBuilder.BuildCharMatrix(input, '.');
+        _grid = GridBuilder.BuildCharGrid(input, '.');
 
-        var x = (_matrix.Width - 1) / 2;
-        var y = (_matrix.Height - 1) / 2;
-        _matrix.MoveTo(x, y);
-        _matrix.TurnTo(MatrixDirection.Up);
+        var x = (_grid.Width - 1) / 2;
+        var y = (_grid.Height - 1) / 2;
+        _grid.MoveTo(x, y);
+        _grid.TurnTo(GridDirection.Up);
     }
 
     public int RunPart1(int iterations)
@@ -26,20 +26,20 @@ public class VirusInfection
         var infectionCount = 0;
         for (var i = 0; i < iterations; i++)
         {
-            var val = _matrix.ReadValue();
+            var val = _grid.ReadValue();
             if (val == Infected)
             {
-                _matrix.TurnRight();
-                _matrix.WriteValue(Clean);
+                _grid.TurnRight();
+                _grid.WriteValue(Clean);
             }
             else
             {
-                _matrix.TurnLeft();
-                _matrix.WriteValue(Infected);
+                _grid.TurnLeft();
+                _grid.WriteValue(Infected);
                 infectionCount++;
             }
 
-            _matrix.MoveForward();
+            _grid.MoveForward();
         }
 
         return infectionCount;
@@ -50,30 +50,30 @@ public class VirusInfection
         var infectionCount = 0;
         for (var i = 0; i < iterations; i++)
         {
-            var val = _matrix.ReadValue();
+            var val = _grid.ReadValue();
             if (val == Clean)
             {
-                _matrix.TurnLeft();
-                _matrix.WriteValue(Weakened);
+                _grid.TurnLeft();
+                _grid.WriteValue(Weakened);
             }
             else if(val == Weakened)
             {
-                _matrix.WriteValue(Infected);
+                _grid.WriteValue(Infected);
                 infectionCount++;
             }
             else if (val == Infected)
             {
-                _matrix.TurnRight();
-                _matrix.WriteValue(Flagged);
+                _grid.TurnRight();
+                _grid.WriteValue(Flagged);
             }
             else
             {
-                _matrix.TurnRight();
-                _matrix.TurnRight();
-                _matrix.WriteValue(Clean);
+                _grid.TurnRight();
+                _grid.TurnRight();
+                _grid.WriteValue(Clean);
             }
 
-            _matrix.MoveForward();
+            _grid.MoveForward();
         }
 
         return infectionCount;

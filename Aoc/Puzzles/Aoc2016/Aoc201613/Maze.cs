@@ -4,10 +4,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201613;
 
 public class Maze(int width, int height, int secretNumber)
 {
-    private readonly Matrix<char> _matrix = BuildMatrix(width, height, secretNumber);
+    private readonly Grid<char> _grid = BuildMatrix(width, height, secretNumber);
 
     public int StepCountToTarget(int targetX, int targetY) =>
-        PathFinder.ShortestPathTo(_matrix, new Coord(1, 1), new Coord(targetX, targetY)).Count;
+        PathFinder.ShortestPathTo(_grid, new Coord(1, 1), new Coord(targetX, targetY)).Count;
     
     public int LocationCountAfter(int steps) => LocationCountAfter(new Coord(1, 1), steps);
 
@@ -20,9 +20,9 @@ public class Maze(int width, int height, int secretNumber)
             var newQueue = new List<Coord>();
             foreach (var coord in queue)
             {
-                _matrix.MoveTo(coord);
-                _matrix.WriteValue('O');
-                var adjacentCoords = _matrix.OrthogonalAdjacentCoords.Where(o => _matrix.ReadValueAt(o) == '.').ToList();
+                _grid.MoveTo(coord);
+                _grid.WriteValue('O');
+                var adjacentCoords = _grid.OrthogonalAdjacentCoords.Where(o => _grid.ReadValueAt(o) == '.').ToList();
                 newQueue.AddRange(adjacentCoords);
             }
 
@@ -30,12 +30,12 @@ public class Maze(int width, int height, int secretNumber)
             i++;
         }
 
-        return _matrix.Values.Count(o => o == 'O');
+        return _grid.Values.Count(o => o == 'O');
     }
 
-    private static Matrix<char> BuildMatrix(in int width, in int height, in int secretNumber)
+    private static Grid<char> BuildMatrix(in int width, in int height, in int secretNumber)
     {
-        var matrix = new Matrix<char>();
+        var matrix = new Grid<char>();
         for (var y = 0; y < height; y++)
         {
             for (var x = 0; x < width; x++)

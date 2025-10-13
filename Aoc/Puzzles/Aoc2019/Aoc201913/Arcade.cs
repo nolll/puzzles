@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201913;
 public class Arcade
 {
     private readonly IntCodeComputer _computer;
-    private readonly Matrix<char> _screen;
+    private readonly Grid<char> _screen;
     private ArcadeMode _mode;
     private int _x = 0;
     private int _y = 0;
@@ -19,7 +19,7 @@ public class Arcade
     {
         _mode = ArcadeMode.X;
 
-        _screen = new Matrix<char>();
+        _screen = new Grid<char>();
         _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
     }
 

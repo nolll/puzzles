@@ -32,8 +32,8 @@ public class Ece202403 : EverybodyEventPuzzle
 
     private static int Run(string input, SlopeRule slopeRule)
     {
-        var charMatrix = MatrixBuilder.BuildCharMatrix(input);
-        var matrix = new Matrix<int>(charMatrix.Width, charMatrix.Height);
+        var charMatrix = GridBuilder.BuildCharGrid(input);
+        var matrix = new Grid<int>(charMatrix.Width, charMatrix.Height);
         var coords = new List<Coord>();
         var digLevel = 1;
         

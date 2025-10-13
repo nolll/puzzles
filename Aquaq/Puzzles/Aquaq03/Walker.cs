@@ -4,14 +4,14 @@ namespace Pzl.Aquaq.Puzzles.Aquaq03;
 
 public class Walker
 {
-    private readonly Matrix<char> _matrix;
+    private readonly Grid<char> _grid;
     
-    public Coord Pos => _matrix.Address;
+    public Coord Pos => _grid.Address;
 
     public Walker()
     {
-        _matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(Room);
-        _matrix.MoveTo(2, 0);
+        _grid = GridBuilder.BuildCharGridWithoutTrim(Room);
+        _grid.MoveTo(2, 0);
     }
 
     public int Walk(string input)
@@ -31,19 +31,19 @@ public class Walker
     {
         Turn(c);
 
-        _matrix.TryMoveForward();
-        if (_matrix.ReadValue() == ' ')
-            _matrix.MoveBackward();
+        _grid.TryMoveForward();
+        if (_grid.ReadValue() == ' ')
+            _grid.MoveBackward();
     }
 
     private void Turn(char c)
     {
         var _ = c switch
         {
-            'U' => _matrix.TurnTo(MatrixDirection.Up),
-            'R' => _matrix.TurnTo(MatrixDirection.Right),
-            'D' => _matrix.TurnTo(MatrixDirection.Down),
-            _ => _matrix.TurnTo(MatrixDirection.Left)
+            'U' => _grid.TurnTo(GridDirection.Up),
+            'R' => _grid.TurnTo(GridDirection.Right),
+            'D' => _grid.TurnTo(GridDirection.Down),
+            _ => _grid.TurnTo(GridDirection.Left)
         };
     }
 

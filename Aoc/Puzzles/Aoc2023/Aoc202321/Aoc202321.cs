@@ -18,7 +18,7 @@ public class Aoc202321 : AocPuzzle
 
     public static long CountPositionsAfter64(string s, int steps = 64)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(s);
+        var matrix = GridBuilder.BuildCharGrid(s);
         var start = matrix.FindAddresses('S').First();
         matrix.WriteValueAt(start, '.');
         return CountPositionsAfter(matrix, start, steps);
@@ -26,7 +26,7 @@ public class Aoc202321 : AocPuzzle
 
     public static long CountPositionsAfterMany(string s)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(s);
+        var matrix = GridBuilder.BuildCharGrid(s);
         var start = matrix.FindAddresses('S').First();
         var center = start.X;
         var (left, top) = new Coord(matrix.XMin, matrix.YMin);
@@ -79,7 +79,7 @@ public class Aoc202321 : AocPuzzle
         return filledPlots;
     }
 
-    private static long CountPositionsAfter(Matrix<char> matrix, Coord start, int steps = 64)
+    private static long CountPositionsAfter(Grid<char> grid, Coord start, int steps = 64)
     {
         var lit = new HashSet<Coord> { start };
 
@@ -88,10 +88,10 @@ public class Aoc202321 : AocPuzzle
             var newLit = new HashSet<Coord>();
             foreach (var litCoord in lit)
             {
-                var allAdjacent = matrix.OrthogonalAdjacentCoordsTo(litCoord);
+                var allAdjacent = grid.OrthogonalAdjacentCoordsTo(litCoord);
                 foreach (var a in allAdjacent)
                 {
-                    if (matrix.ReadValueAt(a) != '#')
+                    if (grid.ReadValueAt(a) != '#')
                     {
                         newLit.Add(a);
                     }
@@ -101,7 +101,7 @@ public class Aoc202321 : AocPuzzle
             lit = newLit;
         }
 
-        var pm = matrix.Clone();
+        var pm = grid.Clone();
         foreach (var coord in lit)
         {
             pm.WriteValueAt(coord, 'O');

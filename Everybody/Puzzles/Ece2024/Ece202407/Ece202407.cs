@@ -112,7 +112,7 @@ public class Ece202407 : EverybodyEventPuzzle
     {
         var visited = new HashSet<Coord>();
         var terrain = new List<int>();
-        var trackMatrix = MatrixBuilder.BuildCharMatrix(trackLoop, ' ');
+        var trackMatrix = GridBuilder.BuildCharGrid(trackLoop, ' ');
         trackMatrix.MoveTo(trackMatrix.XMin, trackMatrix.YMin);
         trackMatrix.MoveRight();
         

@@ -77,16 +77,16 @@ public class Ecs0201 : EverybodyStoryPuzzle
         return new PuzzleResult($"{worst} {best}", "28c4bfb9e7bb062915af989c9b4b8e33");
     }
 
-    private static (int slot, int finalSlot, int score) Play(Matrix<char> matrix, string token, int slot)
+    private static (int slot, int finalSlot, int score) Play(Grid<char> grid, string token, int slot)
     {
         var x = (slot - 1) * 2;
-        matrix.MoveTo(x, matrix.YMin);
+        grid.MoveTo(x, grid.YMin);
         var tokenIndex = 0;
         
-        while (matrix.TryMoveDown())
+        while (grid.TryMoveDown())
         {
-            if (matrix.ReadValue() == '*')
-                matrix.MoveUp();
+            if (grid.ReadValue() == '*')
+                grid.MoveUp();
             else
                 continue;
                 
@@ -94,26 +94,26 @@ public class Ecs0201 : EverybodyStoryPuzzle
                 
             if (instruction == 'L')
             {
-                if (!matrix.TryMoveLeft())
-                    matrix.MoveRight();
+                if (!grid.TryMoveLeft())
+                    grid.MoveRight();
             }
             else
             {
-                if (!matrix.TryMoveRight())
-                    matrix.MoveLeft();
+                if (!grid.TryMoveRight())
+                    grid.MoveLeft();
             }
 
             tokenIndex += 1;
         }
 
-        var finalSlot = matrix.Address.X / 2 + 1;
+        var finalSlot = grid.Address.X / 2 + 1;
         return (slot, finalSlot, Math.Max(finalSlot * 2 - slot, 0));
     }
 
-    private static (Matrix<char> m, string[] t, int slotCount) Parse(string input)
+    private static (Grid<char> m, string[] t, int slotCount) Parse(string input)
     {
         var (input1, input2) = input.Split(LineBreaks.Double);
-        var matrix = MatrixBuilder.BuildCharMatrix(input1, '.');
+        var matrix = GridBuilder.BuildCharGrid(input1, '.');
         matrix.ExtendUp();
         var tokens = input2.Split(LineBreaks.Single);
         var slotCount = (matrix.Width + 1) / 2;

@@ -27,7 +27,7 @@ public class Ece202413 : EverybodyEventPuzzle
     
     private int Solve(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var start = matrix.FindAddresses('E').First();
         matrix.WriteValueAt(start, '0');
         var targets = matrix.FindAddresses('S');

@@ -116,7 +116,7 @@ public class Aoc202020Tests
         var tile = JigsawTile.Parse(input);
         tile.RemoveBorder();
 
-        tile.Matrix.Print().Should().Be(expected);
+        tile.Grid.Print().Should().Be(expected);
     }
 
     [Fact]

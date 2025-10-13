@@ -8,12 +8,12 @@ public abstract class SeatingSimulator
     protected const char OccupiedChair = '#';
     protected const char EmptyChair = 'L';
 
-    protected Matrix<char> Matrix;
+    protected Grid<char> Grid;
     public int OccupiedSeatCount { get; private set; }
 
     protected SeatingSimulator(string input)
     {
-        Matrix = MatrixBuilder.BuildCharMatrix(input);
+        Grid = GridBuilder.BuildCharGrid(input);
     }
 
     public void Run()
@@ -24,7 +24,7 @@ public abstract class SeatingSimulator
         {
             prevCount = currentCount;
             RunOnce();
-            currentCount = Matrix.Values.Count(o => o == OccupiedChair);
+            currentCount = Grid.Values.Count(o => o == OccupiedChair);
         }
 
         OccupiedSeatCount = currentCount;
@@ -32,12 +32,12 @@ public abstract class SeatingSimulator
 
     private void RunOnce()
     {
-        var newMatrix = Matrix.Clone();
+        var newMatrix = Grid.Clone();
 
-        foreach (var coord in Matrix.Coords)
+        foreach (var coord in Grid.Coords)
         {
-            Matrix.MoveTo(coord);
-            var currentValue = Matrix.ReadValue();
+            Grid.MoveTo(coord);
+            var currentValue = Grid.ReadValue();
             var adjacentValues = GetAdjacentSeats();
             var neighborCount = adjacentValues.Count(o => o == OccupiedChair);
             var newValue = GetSeatStatus(currentValue, neighborCount);
@@ -46,7 +46,7 @@ public abstract class SeatingSimulator
             newMatrix.WriteValue(newValue);
         }
         
-        Matrix = newMatrix;
+        Grid = newMatrix;
     }
 
     protected abstract IList<char> GetAdjacentSeats();

@@ -10,34 +10,34 @@ public class RepairDroid
     private const int Found = 2;
 
     private IntCodeComputer _computer;
-    private readonly Matrix<char> _matrix;
-    private readonly Queue<(Coord, MatrixDirection, IntCodeComputer)> _queue;
+    private readonly Grid<char> _grid;
+    private readonly Queue<(Coord, GridDirection, IntCodeComputer)> _queue;
     private Coord _target = new Coord(0, 0);
 
     public RepairDroid(string program)
     {
         _computer = new IntCodeComputer(MemoryParser.Parse(program), ReadInput, WriteOutput);
-        _matrix = new Matrix<char>(defaultValue: ' ');
-        _queue = new Queue<(Coord, MatrixDirection, IntCodeComputer)>();
+        _grid = new Grid<char>(defaultValue: ' ');
+        _queue = new Queue<(Coord, GridDirection, IntCodeComputer)>();
     }
 
-    public (int, Matrix<char>) Run()
+    public (int, Grid<char>) Run()
     {
         _computer.Start();
 
         while (_queue.Any())
         {
             var (address, direction, computer) = _queue.Dequeue();
-            _matrix.MoveTo(address);
-            _matrix.TurnTo(direction);
+            _grid.MoveTo(address);
+            _grid.TurnTo(direction);
             _computer = computer;
             computer.Start();
         }
 
-        _matrix.MoveTo(_matrix.StartAddress);
+        _grid.MoveTo(_grid.StartAddress);
 
-        var path = PathFinder.ShortestPathTo(_matrix, _matrix.StartAddress, _target);
-        return (path.Count, _matrix);
+        var path = PathFinder.ShortestPathTo(_grid, _grid.StartAddress, _target);
+        return (path.Count, _grid);
     }
 
     private long ReadInput()
@@ -50,18 +50,18 @@ public class RepairDroid
         switch (output)
         {
             case HitWall:
-                _matrix.MoveForward();
-                _matrix.WriteValue('#');
-                _matrix.MoveBackward();
+                _grid.MoveForward();
+                _grid.WriteValue('#');
+                _grid.MoveBackward();
                 break;
             case Moved:
-                _matrix.MoveForward();
-                _matrix.WriteValue('.');
+                _grid.MoveForward();
+                _grid.WriteValue('.');
                 break;
             case Found:
-                _matrix.MoveForward();
-                _matrix.WriteValue('X');
-                _target = _matrix.Address;
+                _grid.MoveForward();
+                _grid.WriteValue('X');
+                _target = _grid.Address;
                 break;
         }
 
@@ -69,50 +69,50 @@ public class RepairDroid
         _computer.Stop();
         foreach (var direction in directions)
         {
-            _queue.Enqueue((_matrix.Address, direction, _computer.Clone()));
+            _queue.Enqueue((_grid.Address, direction, _computer.Clone()));
         }
         
         return false;
     }
 
-    private IEnumerable<MatrixDirection> FindUnvisitedDirections()
+    private IEnumerable<GridDirection> FindUnvisitedDirections()
     {
-        var directions = new List<MatrixDirection>();
+        var directions = new List<GridDirection>();
         
-        _matrix.MoveForward();
-        if (_matrix.ReadValue() == ' ')
-            directions.Add(_matrix.Direction);
-        _matrix.MoveBackward();
-        _matrix.TurnRight();
+        _grid.MoveForward();
+        if (_grid.ReadValue() == ' ')
+            directions.Add(_grid.Direction);
+        _grid.MoveBackward();
+        _grid.TurnRight();
 
-        _matrix.MoveForward();
-        if (_matrix.ReadValue() == ' ')
-            directions.Add(_matrix.Direction);
-        _matrix.MoveBackward();
-        _matrix.TurnRight();
+        _grid.MoveForward();
+        if (_grid.ReadValue() == ' ')
+            directions.Add(_grid.Direction);
+        _grid.MoveBackward();
+        _grid.TurnRight();
 
-        _matrix.MoveForward();
-        if (_matrix.ReadValue() == ' ')
-            directions.Add(_matrix.Direction);
-        _matrix.MoveBackward();
-        _matrix.TurnRight();
+        _grid.MoveForward();
+        if (_grid.ReadValue() == ' ')
+            directions.Add(_grid.Direction);
+        _grid.MoveBackward();
+        _grid.TurnRight();
 
-        _matrix.MoveForward();
-        if (_matrix.ReadValue() == ' ')
-            directions.Add(_matrix.Direction);
-        _matrix.MoveBackward();
-        _matrix.TurnRight();
+        _grid.MoveForward();
+        if (_grid.ReadValue() == ' ')
+            directions.Add(_grid.Direction);
+        _grid.MoveBackward();
+        _grid.TurnRight();
 
         return directions;
     }
 
     private DroidDirection GetDroidDirection()
     {
-        if (_matrix.Direction.Equals(MatrixDirection.Right))
+        if (_grid.Direction.Equals(GridDirection.Right))
             return DroidDirection.East;
-        if (_matrix.Direction.Equals(MatrixDirection.Down))
+        if (_grid.Direction.Equals(GridDirection.Down))
             return DroidDirection.South;
-        if (_matrix.Direction.Equals(MatrixDirection.Left))
+        if (_grid.Direction.Equals(GridDirection.Left))
             return DroidDirection.West;
         return DroidDirection.North;
     }

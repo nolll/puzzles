@@ -8,27 +8,27 @@ public class LumberCollection
     private const char Wood = '|';
     private const char Lumber = '#';
 
-    private Matrix<char> _matrix;
-    private int LumberCount => _matrix.Values.Count(o => o == Lumber);
-    private int WoodCount => _matrix.Values.Count(o => o == Wood);
+    private Grid<char> _grid;
+    private int LumberCount => _grid.Values.Count(o => o == Lumber);
+    private int WoodCount => _grid.Values.Count(o => o == Wood);
     public int ResourceValue => LumberCount * WoodCount;
 
     public LumberCollection(string input)
     {
-        _matrix = MatrixBuilder.BuildCharMatrix(input);
+        _grid = GridBuilder.BuildCharGrid(input);
     }
 
     public void Run(int minutes)
     {
         var foundPeriod = false;
-        var earlierLayouts = new List<string> {_matrix.Print()};
+        var earlierLayouts = new List<string> {_grid.Print()};
         for (var i = 0; i < minutes; i++)
         {
-            _matrix = GetNextIteration();
+            _grid = GetNextIteration();
 
             if (!foundPeriod)
             {
-                var print = _matrix.Print();
+                var print = _grid.Print();
                 var earlierIndex = earlierLayouts.IndexOf(print);
                 if (earlierIndex != -1)
                 {
@@ -47,14 +47,14 @@ public class LumberCollection
         }
     }
 
-    private Matrix<char> GetNextIteration()
+    private Grid<char> GetNextIteration()
     {
-        var newMatrix = new Matrix<char>();
-        for (var y = 0; y < _matrix.Height; y++)
+        var newMatrix = new Grid<char>();
+        for (var y = 0; y < _grid.Height; y++)
         {
-            for (var x = 0; x < _matrix.Width; x++)
+            for (var x = 0; x < _grid.Width; x++)
             {
-                _matrix.MoveTo(x, y);
+                _grid.MoveTo(x, y);
                 newMatrix.MoveTo(x, y);
                 newMatrix.WriteValue(GetNewValue());
             }
@@ -64,8 +64,8 @@ public class LumberCollection
 
     private char GetNewValue()
     {
-        var adjacent = _matrix.AllAdjacentValues;
-        var currentValue = _matrix.ReadValue();
+        var adjacent = _grid.AllAdjacentValues;
+        var currentValue = _grid.ReadValue();
         if (currentValue == Open)
             return adjacent.Count(o => o == Wood) >= 3 ? Wood : currentValue;
         if (currentValue == Wood)

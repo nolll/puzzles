@@ -27,7 +27,7 @@ public class RecursiveDonutMazeSolver
 
     private void Setup(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input.Replace(Chars.Space, Chars.Wall));
+        var matrix = GridBuilder.BuildCharGrid(input.Replace(Chars.Space, Chars.Wall));
         var portalAddresses = new List<DonutPortalAddress>();
         var letterCoords = FindLetterCoords(matrix).ToList();
         while (letterCoords.Count > 0)
@@ -93,14 +93,14 @@ public class RecursiveDonutMazeSolver
         _innerAdjacentCache = BuildAdjacentCache(matrix);
     }
 
-    private IDictionary<Coord, IList<Coord>> BuildAdjacentCache(Matrix<char> matrix)
+    private IDictionary<Coord, IList<Coord>> BuildAdjacentCache(Grid<char> grid)
     {
         var dictionary = new Dictionary<Coord, IList<Coord>>();
-        foreach (var coord in matrix.Coords)
+        foreach (var coord in grid.Coords)
         {
-            var coords = matrix
+            var coords = grid
                 .OrthogonalAdjacentCoordsTo(coord)
-                .Where(o => matrix.ReadValueAt(o) == Chars.Path)
+                .Where(o => grid.ReadValueAt(o) == Chars.Path)
                 .ToList();
             dictionary.Add(coord, coords);
         }
@@ -108,16 +108,16 @@ public class RecursiveDonutMazeSolver
         return dictionary;
     }
 
-    private static bool IsOuterPortal(Matrix<char> matrix, Coord address)
+    private static bool IsOuterPortal(Grid<char> grid, Coord address)
     {
         const int distance = 2;
-        var xIsOnEdge = matrix.XMin + distance == address.X || matrix.XMax - distance == address.X;
-        var yIsOnEdge = matrix.YMin + distance == address.Y || matrix.YMax - distance == address.Y;
+        var xIsOnEdge = grid.XMin + distance == address.X || grid.XMax - distance == address.X;
+        var yIsOnEdge = grid.YMin + distance == address.Y || grid.YMax - distance == address.Y;
         return xIsOnEdge || yIsOnEdge;
     }
 
-    private static IEnumerable<Coord> FindLetterCoords(Matrix<char> matrix) => 
-        matrix.Coords.Where(o => IsLetter(matrix.ReadValueAt(o)));
+    private static IEnumerable<Coord> FindLetterCoords(Grid<char> grid) => 
+        grid.Coords.Where(o => IsLetter(grid.ReadValueAt(o)));
 
     private static bool IsLetter(char c) => c != Chars.Wall && c != Chars.Path;
 

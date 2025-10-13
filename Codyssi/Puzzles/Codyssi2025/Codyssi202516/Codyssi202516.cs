@@ -24,7 +24,7 @@ public class Codyssi202516 : CodyssiPuzzle
     public PuzzleResult Part2(string input, int gridSize = GridSize)
     {
         var result = Execute(input, gridSize).Faces
-            .Select(o => o.Matrix)
+            .Select(o => o.Grid)
             .Select(GetBestSum)
             .Aggregate(new BigInteger(1), (product, o) => product * o);
         return new PuzzleResult(result, "178f79ec48eeee9f4a62432ee8003d1e");
@@ -33,7 +33,7 @@ public class Codyssi202516 : CodyssiPuzzle
     public PuzzleResult Part3(string input, int gridSize = GridSize)
     {
         var result = Execute(input, gridSize, true).Faces
-            .Select(o => o.Matrix)
+            .Select(o => o.Grid)
             .Select(GetBestSum)
             .Aggregate(new BigInteger(1), (product, o) => product * o);
         return new PuzzleResult(result, "9215f7b88a764c37a7227b14051e4267");
@@ -67,7 +67,7 @@ public class Codyssi202516 : CodyssiPuzzle
             else if (command == "COL")
             {
                 var col = int.Parse(parts[1]) - 1;
-                (CubeFace face, int col)[] faces = wrapAround ? [(cube.Front, col), (cube.Down, col), (cube.Back, cube.Back.Matrix.XMax - col), (cube.Up, col)] : [(cube.Front, col)];
+                (CubeFace face, int col)[] faces = wrapAround ? [(cube.Front, col), (cube.Down, col), (cube.Back, cube.Back.Grid.XMax - col), (cube.Up, col)] : [(cube.Front, col)];
                 foreach (var (face, c) in faces)
                 {
                     var values = face.ReadColumn(c).Select(o => Clamp(o + v)).ToList();
@@ -217,29 +217,29 @@ public class Codyssi202516 : CodyssiPuzzle
     private class CubeFace
     {
         private readonly int _size;
-        private Matrix<int> _matrix;
+        private Grid<int> _grid;
         
         public int Absorbtion { get; set; } 
 
         public CubeFace(int initial, int size)
         {
             _size = size;
-            _matrix = new(_size, _size, initial);
+            _grid = new(_size, _size, initial);
         }
 
-        public int[] ReadAll() => _matrix.Values.ToArray();
-        public int[] ReadColumn(int x) => Enumerable.Range(0, _size).Select(o => _matrix.ReadValueAt(x, o)).ToArray();
-        public int[] ReadRow(int y) => Enumerable.Range(0, _size).Select(o => _matrix.ReadValueAt(o, y)).ToArray();
+        public int[] ReadAll() => _grid.Values.ToArray();
+        public int[] ReadColumn(int x) => Enumerable.Range(0, _size).Select(o => _grid.ReadValueAt(x, o)).ToArray();
+        public int[] ReadRow(int y) => Enumerable.Range(0, _size).Select(o => _grid.ReadValueAt(o, y)).ToArray();
 
-        public Matrix<int> Matrix => _matrix.Clone();
+        public Grid<int> Grid => _grid.Clone();
 
         public void WriteAll(IEnumerable<int> values)
         {
             var charArray = values.ToArray();
-            var coordsArray = _matrix.Coords.ToArray();
+            var coordsArray = _grid.Coords.ToArray();
             for (var i = 0; i < coordsArray.Length; i++)
             {
-                _matrix.WriteValueAt(coordsArray[i], charArray[i]);
+                _grid.WriteValueAt(coordsArray[i], charArray[i]);
             }
         }
 
@@ -248,7 +248,7 @@ public class Codyssi202516 : CodyssiPuzzle
             var x = 0;
             foreach (var value in values)
             {
-                _matrix.WriteValueAt(x, y, value);
+                _grid.WriteValueAt(x, y, value);
                 x++;
             }
         }
@@ -258,16 +258,16 @@ public class Codyssi202516 : CodyssiPuzzle
             var y = 0;
             foreach (var value in values)
             {
-                _matrix.WriteValueAt(x, y, value);
+                _grid.WriteValueAt(x, y, value);
                 y++;
             }
         }
 
-        public void RotateRight() => _matrix = _matrix.RotateRight();
-        public void RotateLeft() => _matrix = _matrix.RotateLeft();
+        public void RotateRight() => _grid = _grid.RotateRight();
+        public void RotateLeft() => _grid = _grid.RotateLeft();
     }
     
-    private static long GetBestSum(Matrix<int> grid)
+    private static long GetBestSum(Grid<int> grid)
     {
         var best = 0L;
         for (var y = grid.YMin; y <= grid.YMax; y++)

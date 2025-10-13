@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201813;
 
 public class CollisionDetector
 {
-    private Matrix<char> _matrix = new Matrix<char>(1, 1);
+    private Grid<char> _grid = new Grid<char>(1, 1);
     private IList<MineCart> _carts = new List<MineCart>();
     public Coord? LocationOfFirstCollision { get; private set; }
     public Coord? LocationOfLastCart { get; private set; }
@@ -27,20 +27,20 @@ public class CollisionDetector
             {
                 var cart = cartsToMove.First();
                 cartsToMove.RemoveAt(0);
-                _matrix.MoveTo(cart.Coords);
-                _matrix.TurnTo(cart.Direction);
-                _matrix.MoveForward();
-                cart.MoveTo(_matrix.Address);
-                var val = _matrix.ReadValue();
+                _grid.MoveTo(cart.Coords);
+                _grid.TurnTo(cart.Direction);
+                _grid.MoveForward();
+                cart.MoveTo(_grid.Address);
+                var val = _grid.ReadValue();
                 cart.Turn(val);
 
-                if (HasCrashed(cartsToMove, movedCarts, _matrix.Address))
+                if (HasCrashed(cartsToMove, movedCarts, _grid.Address))
                 {
                     if(LocationOfFirstCollision == null) 
-                        LocationOfFirstCollision = _matrix.Address;
+                        LocationOfFirstCollision = _grid.Address;
 
-                    RemoveCartAt(cartsToMove, _matrix.Address);
-                    RemoveCartAt(movedCarts, _matrix.Address);
+                    RemoveCartAt(cartsToMove, _grid.Address);
+                    RemoveCartAt(movedCarts, _grid.Address);
                 }
                 else
                 {
@@ -82,7 +82,7 @@ public class CollisionDetector
         var rows = StringReader.ReadLines(input).ToList();
         var width = rows.First().Length;
         var height = rows.Count();
-        _matrix = new Matrix<char>(width, height);
+        _grid = new Grid<char>(width, height);
         _carts = new List<MineCart>();
         for (var y = 0; y < height; y++)
         {
@@ -100,7 +100,7 @@ public class CollisionDetector
                     _carts.Add(cart);
                 }
 
-                _matrix.WriteValueAt(x, y, mapChar);
+                _grid.WriteValueAt(x, y, mapChar);
             }
         }
     }
@@ -115,14 +115,14 @@ public class CollisionDetector
         return c is CharConstants.Up or CharConstants.Down ? CharConstants.Vertical : CharConstants.Horizontal;
     }
 
-    private MatrixDirection GetDirection(char c)
+    private GridDirection GetDirection(char c)
     {
         return c switch
         {
-            CharConstants.Up => MatrixDirection.Up,
-            CharConstants.Right => MatrixDirection.Right,
-            CharConstants.Down => MatrixDirection.Down,
-            _ => MatrixDirection.Left
+            CharConstants.Up => GridDirection.Up,
+            CharConstants.Right => GridDirection.Right,
+            CharConstants.Down => GridDirection.Down,
+            _ => GridDirection.Left
         };
     }
 }

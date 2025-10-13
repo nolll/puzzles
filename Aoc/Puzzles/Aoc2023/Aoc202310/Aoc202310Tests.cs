@@ -46,7 +46,7 @@ public class Aoc202310Tests
                              ............
                              """;
 
-        var inputMatrix = MatrixBuilder.BuildCharMatrix(input);
+        var inputMatrix = GridBuilder.BuildCharGrid(input);
 
         var result = Aoc202310.EnlargeMatrix(inputMatrix);
 

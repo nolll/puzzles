@@ -4,14 +4,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201711;
 
 public class HexGridNavigator
 {
-    private readonly Matrix<int> _matrix;
+    private readonly Grid<int> _grid;
     public int EndDistance { get; }
     public int MaxDistance { get; }
 
     public HexGridNavigator(string input)
     {
-        _matrix = new Matrix<int>();
-        _matrix.TurnTo(MatrixDirection.Up);
+        _grid = new Grid<int>();
+        _grid.TurnTo(GridDirection.Up);
 
         var directions = input.Split(',');
         var maxDistance = 0;
@@ -33,10 +33,10 @@ public class HexGridNavigator
     {
         get
         {
-            var x = _matrix.Address.X;
-            var y = _matrix.Address.Y;
-            var xStart = _matrix.StartAddress.X;
-            var yStart = _matrix.StartAddress.Y;
+            var x = _grid.Address.X;
+            var y = _grid.Address.Y;
+            var xStart = _grid.StartAddress.X;
+            var yStart = _grid.StartAddress.Y;
             var xMax = Math.Max(xStart, x);
             var xMin = Math.Min(xStart, x);
             var yMax = Math.Max(yStart, y);
@@ -73,33 +73,33 @@ public class HexGridNavigator
     {
         if (direction == "n")
         {
-            _matrix.MoveUp();
-            _matrix.MoveUp();
+            _grid.MoveUp();
+            _grid.MoveUp();
         }
         else if (direction == "ne")
         {
-            _matrix.MoveRight();
-            _matrix.MoveUp();
+            _grid.MoveRight();
+            _grid.MoveUp();
         }
         else if (direction == "se")
         {
-            _matrix.MoveRight();
-            _matrix.MoveDown();
+            _grid.MoveRight();
+            _grid.MoveDown();
         }
         else if (direction == "s")
         {
-            _matrix.MoveDown();
-            _matrix.MoveDown();
+            _grid.MoveDown();
+            _grid.MoveDown();
         }
         else if (direction == "sw")
         {
-            _matrix.MoveLeft();
-            _matrix.MoveDown();
+            _grid.MoveLeft();
+            _grid.MoveDown();
         }
         else if (direction == "nw")
         {
-            _matrix.MoveLeft();
-            _matrix.MoveUp();
+            _grid.MoveLeft();
+            _grid.MoveUp();
         }
     }
 }

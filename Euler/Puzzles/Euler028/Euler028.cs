@@ -18,26 +18,26 @@ public class Euler028 : EulerPuzzle
         return CalculateDiagonalSum(matrix);
     }
 
-    private static int CalculateDiagonalSum(Matrix<int> matrix)
+    private static int CalculateDiagonalSum(Grid<int> grid)
     {
         var sum = 0;
 
-        matrix.MoveTo(0, 0);
+        grid.MoveTo(0, 0);
         while (true)
         {
-            sum += matrix.ReadValue();
-            if (matrix.TryMoveRight())
-                matrix.MoveDown();
+            sum += grid.ReadValue();
+            if (grid.TryMoveRight())
+                grid.MoveDown();
             else
                 break;
         }
 
-        matrix.MoveTo(matrix.Width - 1, 0);
+        grid.MoveTo(grid.Width - 1, 0);
         while (true)
         {
-            sum += matrix.ReadValue();
-            if (matrix.TryMoveLeft())
-                matrix.MoveDown();
+            sum += grid.ReadValue();
+            if (grid.TryMoveLeft())
+                grid.MoveDown();
             else
                 break;
         }
@@ -47,13 +47,13 @@ public class Euler028 : EulerPuzzle
         return sum;
     }
 
-    private static Matrix<int> BuildMatrix(int size)
+    private static Grid<int> BuildMatrix(int size)
     {
         var i = 1;
-        var matrix = new Matrix<int>(1001, 1001);
+        var matrix = new Grid<int>(1001, 1001);
         matrix.MoveTo(500, 500);
         matrix.WriteValue(i);
-        matrix.TurnTo(MatrixDirection.Right);
+        matrix.TurnTo(GridDirection.Right);
         matrix.MoveForward();
         i++;
         matrix.WriteValue(i);

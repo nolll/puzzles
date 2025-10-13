@@ -14,35 +14,35 @@ public class BlizzardNavigation
     private readonly Coord _exit = new(0, 0);
     private readonly Dictionary<Coord, IList<Coord>> _neighborCache = new();
     private readonly List<ImmutableHashSet<Coord>> _uniqueBlizzards = new();
-    private readonly Matrix<char> _matrix;
+    private readonly Grid<char> _grid;
 
     public BlizzardNavigation(string input)
     {
-        _matrix = MatrixBuilder.BuildCharMatrix(input);
+        _grid = GridBuilder.BuildCharGrid(input);
         var blizzards = new List<Blizzard>();
         var walls = new List<Coord>();
-        foreach (var coord in _matrix.Coords)
+        foreach (var coord in _grid.Coords)
         {
-            var value = _matrix.ReadValueAt(coord);
-            if (coord.Y == _matrix.YMin && value == '.')
+            var value = _grid.ReadValueAt(coord);
+            if (coord.Y == _grid.YMin && value == '.')
             {
                 _enter = coord;
             }
-            else if (coord.Y == _matrix.YMax && value == '.')
+            else if (coord.Y == _grid.YMax && value == '.')
             {
                 _exit = coord;
             }
             else if (value != '#' && value != '.')
             {
                 blizzards.Add(new Blizzard(value, coord));
-                _matrix.WriteValueAt(coord, '.');
+                _grid.WriteValueAt(coord, '.');
             }
             else if (value == '#')
             {
                 walls.Add(coord);
             }
 
-            _neighborCache.Add(coord, _matrix.OrthogonalAdjacentCoordsTo(coord).ToList());
+            _neighborCache.Add(coord, _grid.OrthogonalAdjacentCoordsTo(coord).ToList());
         }
 
         var prints = new HashSet<string>();
@@ -119,29 +119,29 @@ public class BlizzardNavigation
             if (blizzard.Direction == Up)
             {
                 var newCoord = new Coord(x, y - 1);
-                if (newCoord.Y == _matrix.YMin) 
-                    newCoord = new Coord(x, _matrix.YMax - 1);
+                if (newCoord.Y == _grid.YMin) 
+                    newCoord = new Coord(x, _grid.YMax - 1);
                 movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
             }
             else if (blizzard.Direction == Right)
             {
                 var newCoord = new Coord(x + 1, y);
-                if (newCoord.X == _matrix.XMax) 
+                if (newCoord.X == _grid.XMax) 
                     newCoord = new Coord(1, y);
                 movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
             }
             else if (blizzard.Direction == Down)
             {
                 var newCoord = new Coord(x, y + 1);
-                if (newCoord.Y == _matrix.YMax) 
+                if (newCoord.Y == _grid.YMax) 
                     newCoord = new Coord(x, 1);
                 movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
             }
             else
             {
                 var newCoord = new Coord(x - 1, y);
-                if (newCoord.X == _matrix.XMin) 
-                    newCoord = new Coord(_matrix.XMax - 1, y);
+                if (newCoord.X == _grid.XMin) 
+                    newCoord = new Coord(_grid.XMax - 1, y);
                 movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
             }
         }
@@ -151,7 +151,7 @@ public class BlizzardNavigation
 
     private string PrintMatrix(List<Blizzard> blizzards)
     {
-        var newMatrix = _matrix.Clone();
+        var newMatrix = _grid.Clone();
         foreach (var blizzard in blizzards)
         {
             var v = newMatrix.ReadValueAt(blizzard.Address);

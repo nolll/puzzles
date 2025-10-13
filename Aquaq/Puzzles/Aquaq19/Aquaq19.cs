@@ -31,7 +31,7 @@ public class Aquaq19 : AquaqPuzzle
             filledCoords.Add(new Coord(int.Parse(parts[i + 1]), int.Parse(parts[i])));
         }
 
-        var matrix = new Matrix<char>(size, size, Empty);
+        var matrix = new Grid<char>(size, size, Empty);
 
         IList<Coord> GetAdjacent(Coord c)
         {

@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201719;
 
 public class TubeRouteFinder
 {
-    private readonly Matrix<char> _matrix;
+    private readonly Grid<char> _grid;
 
     private const char Space = ' ';
     private const char Empty = '.';
@@ -19,11 +19,11 @@ public class TubeRouteFinder
     public TubeRouteFinder(string input)
     {
         var adjustedInput = input.Replace(Space, Empty);
-        _matrix = MatrixBuilder.BuildCharMatrix(adjustedInput);
+        _grid = GridBuilder.BuildCharGrid(adjustedInput);
         var y = 0;
-        var x = _matrix.Values.ToList().IndexOf(Vertical);
-        _matrix.MoveTo(x, y);
-        _matrix.TurnTo(MatrixDirection.Down);
+        var x = _grid.Values.ToList().IndexOf(Vertical);
+        _grid.MoveTo(x, y);
+        _grid.TurnTo(GridDirection.Down);
     }
 
     public void FindRoute()
@@ -31,7 +31,7 @@ public class TubeRouteFinder
         var route = new StringBuilder();
         while (true)
         {
-            var val = _matrix.ReadValue();
+            var val = _grid.ReadValue();
 
             if (val == Empty) { 
                 break;
@@ -41,36 +41,36 @@ public class TubeRouteFinder
 
             if (val == Vertical || val == Horizontal)
             {
-                _matrix.MoveForward();
+                _grid.MoveForward();
                 continue;
             }
 
             if (val == Plus)
             {
-                _matrix.TurnLeft();
-                _matrix.MoveForward();
-                var invalidChar = _matrix.Direction.Equals(MatrixDirection.Left) || _matrix.Direction.Equals(MatrixDirection.Right)
+                _grid.TurnLeft();
+                _grid.MoveForward();
+                var invalidChar = _grid.Direction.Equals(GridDirection.Left) || _grid.Direction.Equals(GridDirection.Right)
                     ? Vertical
                     : Horizontal;
 
-                var tempVal = _matrix.ReadValue();
+                var tempVal = _grid.ReadValue();
                 if (tempVal == invalidChar || tempVal == Empty)
                 {
-                    _matrix.MoveBackward();
-                    _matrix.TurnLeft();
-                    _matrix.TurnLeft();
+                    _grid.MoveBackward();
+                    _grid.TurnLeft();
+                    _grid.TurnLeft();
                 }
                 else
                 {
-                    _matrix.MoveBackward();
+                    _grid.MoveBackward();
                 }
 
-                _matrix.MoveForward();
+                _grid.MoveForward();
                 continue;
             }
 
             route.Append(val);
-            _matrix.MoveForward();
+            _grid.MoveForward();
         }
 
         Route = route.ToString();

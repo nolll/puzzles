@@ -22,9 +22,9 @@ public class Aoc202222 : AocPuzzle
     public static int Part1(string input)
     {
         var groups = StringReader.ReadStringGroupsWithWhitespace(input);
-        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(groups[0], ' ');
+        var matrix = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
         matrix.MoveTo(0, 0);
-        matrix.TurnTo(MatrixDirection.Right);
+        matrix.TurnTo(GridDirection.Right);
         while (matrix.ReadValue() == ' ')
             matrix.MoveForward();
 
@@ -57,11 +57,11 @@ public class Aoc202222 : AocPuzzle
 
                     if (!moveSucceeded)
                     {
-                        if (matrix.Direction.Equals(MatrixDirection.Up))
+                        if (matrix.Direction.Equals(GridDirection.Up))
                             matrix.MoveTo(matrix.Address.X, matrix.YMax);
-                        else if (matrix.Direction.Equals(MatrixDirection.Right))
+                        else if (matrix.Direction.Equals(GridDirection.Right))
                             matrix.MoveTo(matrix.XMin, matrix.Address.Y);
-                        else if (matrix.Direction.Equals(MatrixDirection.Down))
+                        else if (matrix.Direction.Equals(GridDirection.Down))
                             matrix.MoveTo(matrix.Address.X, matrix.YMin);
                         else
                             matrix.MoveTo(matrix.XMax, matrix.Address.Y);
@@ -100,9 +100,9 @@ public class Aoc202222 : AocPuzzle
     public static int Part2(string input)
     {
         var groups = StringReader.ReadStringGroupsWithWhitespace(input);
-        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(groups[0], ' ');
+        var matrix = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
         matrix.MoveTo(0, 0);
-        matrix.TurnTo(MatrixDirection.Right);
+        matrix.TurnTo(GridDirection.Right);
 
         while (matrix.ReadValue() == ' ')
             matrix.MoveForward();
@@ -175,53 +175,53 @@ public class Aoc202222 : AocPuzzle
         return password;
     }
 
-    public static (Coord newCoord, MatrixDirection newDirection) MapExitPosition(Coord c, MatrixDirection d, int size)
+    public static (Coord newCoord, GridDirection newDirection) MapExitPosition(Coord c, GridDirection d, int size)
     {
         var x = c.X;
         var y = c.Y;
 
-        if (d.Equals(MatrixDirection.Up))
+        if (d.Equals(GridDirection.Up))
         {
             if (c.X < size) // from left to front
-                return (new Coord(y - size, x + size), MatrixDirection.Right);
+                return (new Coord(y - size, x + size), GridDirection.Right);
             if (c.X < size * 2) // from top to back
-                return (new Coord(y, x + size * 2), MatrixDirection.Right);
+                return (new Coord(y, x + size * 2), GridDirection.Right);
             if (c.X < size * 3) // from right to back
-                return (new Coord(x - size * 2, y + size * 4 - 1), MatrixDirection.Up);
+                return (new Coord(x - size * 2, y + size * 4 - 1), GridDirection.Up);
         }
-        else if (d.Equals(MatrixDirection.Right))
+        else if (d.Equals(GridDirection.Right))
         {
             if (c.Y < size) // from right to bottom
-                return (new Coord(x - size, size * 3 - y - 1), MatrixDirection.Left);
+                return (new Coord(x - size, size * 3 - y - 1), GridDirection.Left);
             if (c.Y < size * 2) // from front to right
-                return (new Coord(y + size, x - size), MatrixDirection.Up);
+                return (new Coord(y + size, x - size), GridDirection.Up);
             if (c.Y < size * 3) // from bottom to right
-                return (new Coord(x + size, size * 3 - y - 1), MatrixDirection.Left);
+                return (new Coord(x + size, size * 3 - y - 1), GridDirection.Left);
             if (c.Y < size * 4) // from back to bottom
-                return (new Coord(y - size * 2, x + size * 2), MatrixDirection.Up);
+                return (new Coord(y - size * 2, x + size * 2), GridDirection.Up);
         }
-        else if (d.Equals(MatrixDirection.Down))
+        else if (d.Equals(GridDirection.Down))
         {
             if (c.X < size) // from back to right
-                return (new Coord(x + size * 2, y - size * 4 + 1), MatrixDirection.Down);
+                return (new Coord(x + size * 2, y - size * 4 + 1), GridDirection.Down);
             if (c.X < size * 2) // from bottom to back
-                return (new Coord(y - size * 2, x + size * 2), MatrixDirection.Left);
+                return (new Coord(y - size * 2, x + size * 2), GridDirection.Left);
             if (c.X < size * 3) // from right to front
-                return (new Coord(y + size, x - size), MatrixDirection.Left);
+                return (new Coord(y + size, x - size), GridDirection.Left);
         }
         else
         {
             if (c.Y < size) // from top to left
-                return (new Coord(x - size, size * 3 - y - 1), MatrixDirection.Right);
+                return (new Coord(x - size, size * 3 - y - 1), GridDirection.Right);
             if (c.Y < size * 2) // from front to left
-                return (new Coord(y - size, x + size), MatrixDirection.Down);
+                return (new Coord(y - size, x + size), GridDirection.Down);
             if (c.Y < size * 3) // from left to top
-                return (new Coord(x + size, size * 3 - y - 1), MatrixDirection.Right);
+                return (new Coord(x + size, size * 3 - y - 1), GridDirection.Right);
             if (c.Y < size * 4) // from back to top
-                return (new Coord(y - size * 2, x), MatrixDirection.Down);
+                return (new Coord(y - size * 2, x), GridDirection.Down);
         }
 
-        return (new Coord(0, 0), MatrixDirection.Up);
+        return (new Coord(0, 0), GridDirection.Up);
     }
 
     private static IEnumerable<string> ParsePath(string s)
@@ -230,13 +230,13 @@ public class Aoc202222 : AocPuzzle
         return css.Split(',').ToArray();
     }
 
-    private static int GetFacingScore(MatrixDirection d)
+    private static int GetFacingScore(GridDirection d)
     {
-        if (d.Equals(MatrixDirection.Up))
+        if (d.Equals(GridDirection.Up))
             return 3;
-        if (d.Equals(MatrixDirection.Right))
+        if (d.Equals(GridDirection.Right))
             return 0;
-        if (d.Equals(MatrixDirection.Down))
+        if (d.Equals(GridDirection.Down))
             return 1;
         return 2;
     }

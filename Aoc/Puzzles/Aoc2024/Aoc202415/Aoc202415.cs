@@ -19,7 +19,7 @@ public class Aoc202415 : AocPuzzle
     public PuzzleResult Part1(string input)
     {
         var parts = input.Split(LineBreaks.Double);
-        var matrix = MatrixBuilder.BuildCharMatrix(parts[0]);
+        var matrix = GridBuilder.BuildCharGrid(parts[0]);
         var moves = parts[1].Replace(LineBreaks.Single, "").ToCharArray();
         
         matrix.MoveTo(matrix.FindAddresses(Symbol.Robot).First());
@@ -60,12 +60,12 @@ public class Aoc202415 : AocPuzzle
     }
 
     private (bool canMove, HashSet<IBox> boxesThatMustMove) CanMoveRobot(
-        Matrix<char> matrix,
+        Grid<char> grid,
         List<IBox> allBoxes,
-        MatrixDirection direction)
+        GridDirection direction)
     {
-        var coordToCheck = new Coord(matrix.Address.X + direction.X, matrix.Address.Y + direction.Y);
-        var v = matrix.ReadValueAt(coordToCheck);
+        var coordToCheck = new Coord(grid.Address.X + direction.X, grid.Address.Y + direction.Y);
+        var v = grid.ReadValueAt(coordToCheck);
         if (v == Symbol.Wall)
         {
             return (false, []);
@@ -75,30 +75,30 @@ public class Aoc202415 : AocPuzzle
         if (box is null)
             return (true, []);
         
-        var res = CanMoveBox(matrix, allBoxes, box, direction);
+        var res = CanMoveBox(grid, allBoxes, box, direction);
         return !res.canMove 
             ? (false, []) 
             : (true, res.boxesThatMustMove);
     }
     
     private (bool canMove, HashSet<IBox> boxesThatMustMove) CanMoveBox(
-        Matrix<char> matrix,
+        Grid<char> grid,
         List<IBox> allBoxes,
         IBox box,
-        MatrixDirection direction)
+        GridDirection direction)
     {
         var list = new HashSet<IBox>();
         var hasTwoCoords = box.Coords.Count == 2;
         for (var i = 0; i < box.Coords.Count; i++)
         {
             var boxCoord = box.Coords[i];
-            var lookTwoAhead = i == 0 && direction.Equals(MatrixDirection.Right) ||
-                               i == 1 && direction.Equals(MatrixDirection.Left);
+            var lookTwoAhead = i == 0 && direction.Equals(GridDirection.Right) ||
+                               i == 1 && direction.Equals(GridDirection.Left);
             var steps = hasTwoCoords && lookTwoAhead
                 ? 2
                 : 1;
             var coordToCheck = new Coord(boxCoord.X + direction.X * steps, boxCoord.Y + direction.Y * steps);
-            var v = matrix.ReadValueAt(coordToCheck);
+            var v = grid.ReadValueAt(coordToCheck);
             if (v == Symbol.Wall)
             {
                 return (false, []);
@@ -107,7 +107,7 @@ public class Aoc202415 : AocPuzzle
             var subBox = allBoxes.FirstOrDefault(o => o.Coords.Contains(coordToCheck));
             if (subBox is not null)
             {
-                var res = CanMoveBox(matrix, allBoxes, subBox, direction);
+                var res = CanMoveBox(grid, allBoxes, subBox, direction);
                 if (!res.canMove)
                     return (false, []);
                 list.AddRange(res.boxesThatMustMove);
@@ -117,19 +117,19 @@ public class Aoc202415 : AocPuzzle
         return (true, [..list, box]);
     }
 
-    private MatrixDirection GetDirection(char dir) =>
+    private GridDirection GetDirection(char dir) =>
         dir switch
         {
-            '^' => MatrixDirection.Up,
-            '>' => MatrixDirection.Right,
-            'v' => MatrixDirection.Down,
-            _ => MatrixDirection.Left
+            '^' => GridDirection.Up,
+            '>' => GridDirection.Right,
+            'v' => GridDirection.Down,
+            _ => GridDirection.Left
         };
 
     public PuzzleResult Part2(string input)
     {
         var parts = input.Split(LineBreaks.Double);
-        var matrix = MatrixBuilder.BuildCharMatrix(parts[0]);
+        var matrix = GridBuilder.BuildCharGrid(parts[0]);
         var moves = parts[1].Replace(LineBreaks.Single, "").ToCharArray();
         
         matrix.MoveTo(matrix.FindAddresses(Symbol.Robot).First());
@@ -141,7 +141,7 @@ public class Aoc202415 : AocPuzzle
             matrix.WriteValueAt(coord, Symbol.Empty);
         }
 
-        var wideMatrix = new Matrix<char>(matrix.Width * 2, matrix.Height, Symbol.Empty);
+        var wideMatrix = new Grid<char>(matrix.Width * 2, matrix.Height, Symbol.Empty);
         var walls = matrix.FindAddresses(Symbol.Wall);
         foreach (var wall in walls)
         {
@@ -187,7 +187,7 @@ public class Aoc202415 : AocPuzzle
     public interface IBox
     {
         public List<Coord> Coords { get; }
-        public void Move(MatrixDirection dir);
+        public void Move(GridDirection dir);
     }
     
     private class BoxPart1(Coord coord) : IBox
@@ -195,7 +195,7 @@ public class Aoc202415 : AocPuzzle
         private Coord _coord = coord;
         public List<Coord> Coords => [_coord];
         
-        public void Move(MatrixDirection dir)
+        public void Move(GridDirection dir)
         {
             _coord = new Coord(_coord.X + dir.X, _coord.Y + dir.Y);
         }
@@ -205,7 +205,7 @@ public class Aoc202415 : AocPuzzle
     {
         public List<Coord> Coords { get; } = coords;
 
-        public void Move(MatrixDirection dir)
+        public void Move(GridDirection dir)
         {
             for (var i = 0; i < Coords.Count; i++)
             {

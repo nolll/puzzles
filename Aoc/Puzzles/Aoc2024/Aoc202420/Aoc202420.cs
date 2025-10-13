@@ -25,7 +25,7 @@ public class Aoc202420 : AocPuzzle
 
     public static Dictionary<(Coord from, Coord to), int> GetCheats(string input, int radius)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var start = matrix.FindAddresses('S').First();
         var end = matrix.FindAddresses('E').First();
         matrix.WriteValueAt(start, '.');

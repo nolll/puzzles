@@ -10,7 +10,7 @@ public class Ece202410 : EverybodyEventPuzzle
 
     public PuzzleResult Part1(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var offset = new Coord(0, 0);
         FillSymbols(matrix, offset);
         var word = ReadWord(matrix, offset);
@@ -20,7 +20,7 @@ public class Ece202410 : EverybodyEventPuzzle
     
     public PuzzleResult Part2(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var offsets = GetOffsets(matrix, 1).ToList();
 
         foreach (var offset in offsets)
@@ -34,7 +34,7 @@ public class Ece202410 : EverybodyEventPuzzle
     
     public PuzzleResult Part3(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         
         const int overlap = 2;
         var offsets = GetOffsets(matrix, -overlap).ToList();
@@ -70,53 +70,53 @@ public class Ece202410 : EverybodyEventPuzzle
         return score;
     }
     
-    private static string ReadWord(Matrix<char> matrix, Coord offset)
+    private static string ReadWord(Grid<char> grid, Coord offset)
     {
-        var wordMatrix = matrix.Slice(new Coord(offset.X + 2, offset.Y + 2), 4, 4);
+        var wordMatrix = grid.Slice(new Coord(offset.X + 2, offset.Y + 2), 4, 4);
         var chars = wordMatrix.Coords.Select(o => wordMatrix.ReadValueAt(o));
         return string.Join("", chars);
     }
     
-    private static void FillSymbols(Matrix<char> matrix, Coord offset)
+    private static void FillSymbols(Grid<char> grid, Coord offset)
     {
         var coords = GetLocalCoords(offset);
         
         int[] positions = [0, 1, 6, 7];
         foreach (var coord in coords)
         {
-            if (matrix.ReadValueAt(coord) != '.')
+            if (grid.ReadValueAt(coord) != '.')
                 continue;
             
-            var horizontal = positions.Aggregate("", (current, pos) => current + matrix.ReadValueAt(pos + offset.X, coord.Y));
-            var vertical = positions.Aggregate("", (current, pos) => current + matrix.ReadValueAt(coord.X, pos + offset.Y));
+            var horizontal = positions.Aggregate("", (current, pos) => current + grid.ReadValueAt(pos + offset.X, coord.Y));
+            var vertical = positions.Aggregate("", (current, pos) => current + grid.ReadValueAt(coord.X, pos + offset.Y));
             var c = horizontal.FirstOrDefault(o => vertical.Contains(o));
             if (c == default)
                 c = '.';
-            matrix.WriteValueAt(coord, c);
+            grid.WriteValueAt(coord, c);
         }
     }
     
-    private static void FillUnknowns(Matrix<char> matrix, Coord offset)
+    private static void FillUnknowns(Grid<char> grid, Coord offset)
     {
         var coords = GetLocalCoords(offset);
         var positions = Enumerable.Range(0, 8).ToArray();
         foreach (var coord in coords)
         {
-            if (matrix.ReadValueAt(coord) != '.')
+            if (grid.ReadValueAt(coord) != '.')
                 continue;
 
             var horizontal = positions.Select(o => new Coord(o + offset.X, coord.Y));
             var vertical = positions.Select(o => new Coord(coord.X, o + offset.Y));
             var all = horizontal.Concat(vertical).Where(o => !o.Equals(coord)).ToList();
-            var questionMarkCoords = all.Where(o => matrix.ReadValueAt(o) == '?').ToList();
-            var allChars = all.Select(matrix.ReadValueAt);
+            var questionMarkCoords = all.Where(o => grid.ReadValueAt(o) == '?').ToList();
+            var allChars = all.Select(grid.ReadValueAt);
             var charsWithOneOccurrence = allChars.Where(o => o != '.' && o != '?').GroupBy(o => o).Where(o => o.Count() == 1).Select(o => o.Key).ToList();
             if (charsWithOneOccurrence.Count == 1)
             {
                 var c = charsWithOneOccurrence.First();
-                matrix.WriteValueAt(coord, charsWithOneOccurrence.First());
+                grid.WriteValueAt(coord, charsWithOneOccurrence.First());
                 if(questionMarkCoords.Count == 1)
-                    matrix.WriteValueAt(questionMarkCoords.First(), c);
+                    grid.WriteValueAt(questionMarkCoords.First(), c);
             }
         }
     }
@@ -132,19 +132,19 @@ public class Ece202410 : EverybodyEventPuzzle
         }
     }
     
-    private static IEnumerable<Coord> GetOffsets(Matrix<char> matrix, int space)
+    private static IEnumerable<Coord> GetOffsets(Grid<char> grid, int space)
     {
-        var x = matrix.XMin;
-        var y = matrix.YMin;
-        while (y <= matrix.YMax + space)
+        var x = grid.XMin;
+        var y = grid.YMin;
+        while (y <= grid.YMax + space)
         {
-            while (x <= matrix.XMax + space)
+            while (x <= grid.XMax + space)
             {
                 yield return new Coord(x, y);
                 x += SegmentSize + space;
             }
 
-            x = matrix.XMin;
+            x = grid.XMin;
             y += SegmentSize + space;
         }
     }

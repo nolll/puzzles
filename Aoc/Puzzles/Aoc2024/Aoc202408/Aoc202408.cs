@@ -10,7 +10,7 @@ public class Aoc202408 : AocPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input, '.');
+        var matrix = GridBuilder.BuildCharGrid(input, '.');
         var count = FindAntinodes1(matrix).Count;
         
         return new PuzzleResult(count, "af57e33340c00c6ce0f53d7c2f21f201");
@@ -18,19 +18,19 @@ public class Aoc202408 : AocPuzzle
     
     public PuzzleResult Part2(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input, '.');
+        var matrix = GridBuilder.BuildCharGrid(input, '.');
         var count = FindAntinodes2(matrix).Count;
         
         return new PuzzleResult(count, "e01777da998c6b596501f3853bd26a8d");
     }
 
-    private static List<Coord> FindAntinodes1(Matrix<char> matrix)
+    private static List<Coord> FindAntinodes1(Grid<char> grid)
     {
         var antinodes = new HashSet<Coord>();
-        var types = matrix.Values.Distinct().Where(o => o != matrix.DefaultValue);
+        var types = grid.Values.Distinct().Where(o => o != grid.DefaultValue);
         foreach (var type in types)
         {
-            var antennas = matrix.FindAddresses(type);
+            var antennas = grid.FindAddresses(type);
             var pairs = GetPairs(antennas);
             foreach (var pair in pairs)
             {
@@ -47,20 +47,20 @@ public class Aoc202408 : AocPuzzle
                     new(pair.b.X + bdx, pair.b.Y + bdy)
                 ];
                 
-                antinodes.AddRange(nodes.Where(o => !matrix.IsOutOfRange(o)));
+                antinodes.AddRange(nodes.Where(o => !grid.IsOutOfRange(o)));
             }
         }
         
         return antinodes.ToList();
     }
     
-    private static List<Coord> FindAntinodes2(Matrix<char> matrix)
+    private static List<Coord> FindAntinodes2(Grid<char> grid)
     {
         var antinodes = new HashSet<Coord>();
-        var types = matrix.Values.Distinct().Where(o => o != matrix.DefaultValue);
+        var types = grid.Values.Distinct().Where(o => o != grid.DefaultValue);
         foreach (var type in types)
         {
-            var antennas = matrix.FindAddresses(type);
+            var antennas = grid.FindAddresses(type);
             var pairs = GetPairs(antennas);
             foreach (var pair in pairs)
             {
@@ -72,14 +72,14 @@ public class Aoc202408 : AocPuzzle
                 var bdy = pair.b.Y > pair.a.Y ? absDiff.Y : -absDiff.Y;
 
                 var dir0 = pair.a;
-                while (!matrix.IsOutOfRange(dir0))
+                while (!grid.IsOutOfRange(dir0))
                 {
                     antinodes.Add(dir0);
                     dir0 = new Coord(dir0.X + adx, dir0.Y + ady);
                 }
                     
                 var dir1 = pair.b;
-                while (!matrix.IsOutOfRange(dir1))
+                while (!grid.IsOutOfRange(dir1))
                 {
                     antinodes.Add(dir1);
                     dir1 = new Coord(dir1.X + bdx, dir1.Y + bdy);

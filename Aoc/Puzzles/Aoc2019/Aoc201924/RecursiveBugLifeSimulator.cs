@@ -8,19 +8,19 @@ public class RecursiveBugLifeSimulator
     private const int InnerLevel = 1;
     private const int SameLevel = 0;
     private const int OuterLevel = -1;
-    private IDictionary<int, Matrix<char>> _matrixes;
+    private IDictionary<int, Grid<char>> _matrixes;
     private readonly IDictionary<Coord, IList<RelativeLevelAddress>> _relativeAddresses;
     private readonly Dictionary<int, Coord> _cells;
-    private readonly Matrix<char> _emptyMatrix = new Matrix<char>(Size, Size, '.');
+    private readonly Grid<char> _emptyGrid = new Grid<char>(Size, Size, '.');
 
     public int BugCount => _matrixes.Values.Sum(o => o.Values.Count(m => m == '#'));
 
     public RecursiveBugLifeSimulator(string input)
     {
-        _matrixes = new Dictionary<int, Matrix<char>>();
-        _matrixes[-1] = _emptyMatrix.Clone();
+        _matrixes = new Dictionary<int, Grid<char>>();
+        _matrixes[-1] = _emptyGrid.Clone();
         _matrixes[0] = BuildMatrix(input);
-        _matrixes[1] = _emptyMatrix.Clone();
+        _matrixes[1] = _emptyGrid.Clone();
 
         _cells = BuildCells();
         _relativeAddresses = BuildRelativeAddresses();
@@ -34,24 +34,24 @@ public class RecursiveBugLifeSimulator
         }
     }
 
-    private Matrix<char> GetMatrix(int level)
+    private Grid<char> GetMatrix(int level)
     {
         if (_matrixes.TryGetValue(level, out var matrix))
             return matrix;
 
-        matrix = _emptyMatrix.Clone();
+        matrix = _emptyGrid.Clone();
         _matrixes.Add(level, matrix);
         return matrix;
     }
 
     private void NextIteration()
     {
-        var newMatrixes = new Dictionary<int, Matrix<char>>();
+        var newMatrixes = new Dictionary<int, Grid<char>>();
         var levels = _matrixes.Keys.OrderBy(o => o).ToList();
         foreach (var level in levels)
         {
             var matrix = GetMatrix(level);
-            var newMatrix = _emptyMatrix.Clone();
+            var newMatrix = _emptyGrid.Clone();
 
             foreach (var address in _cells.Values)
             {
@@ -68,7 +68,7 @@ public class RecursiveBugLifeSimulator
         foreach (var key in _matrixes.Keys)
         {
             if (!newMatrixes.ContainsKey(key))
-                newMatrixes[key] = _emptyMatrix.Clone();
+                newMatrixes[key] = _emptyGrid.Clone();
         }
 
         _matrixes = newMatrixes;
@@ -101,9 +101,9 @@ public class RecursiveBugLifeSimulator
         return currentValue;
     }
 
-    private static Matrix<char> BuildMatrix(string map)
+    private static Grid<char> BuildMatrix(string map)
     {
-        var matrix = new Matrix<char>(1, 1);
+        var matrix = new Grid<char>(1, 1);
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

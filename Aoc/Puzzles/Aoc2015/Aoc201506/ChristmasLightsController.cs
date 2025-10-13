@@ -6,17 +6,17 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201506;
 
 public class ChristmasLightsController(int size = 1000)
 {
-    private readonly Matrix<int> _matrix = new(size, size);
+    private readonly Grid<int> _grid = new(size, size);
 
-    public int LitCount => _matrix.Values.Count(o => o > 0);
-    public int TotalBrightness => _matrix.Values.Sum();
+    public int LitCount => _grid.Values.Count(o => o > 0);
+    public int TotalBrightness => _grid.Values.Sum();
 
     public void RunCommands(string input, bool useBrightness)
     {
         var commands = ParseCommands(input, useBrightness);
         foreach (var command in commands)
         {
-            command.Move(_matrix);
+            command.Move(_grid);
         }
     }
 
@@ -56,7 +56,7 @@ public class ChristmasLightsController(int size = 1000)
         {
         }
 
-        protected override void Change(Matrix<int> matrix, int x, int y) => matrix.WriteValueAt(x, y, 1);
+        protected override void Change(Grid<int> grid, int x, int y) => grid.WriteValueAt(x, y, 1);
     }
 
     private class TurnOffCommand : Command
@@ -71,7 +71,7 @@ public class ChristmasLightsController(int size = 1000)
         {
         }
 
-        protected override void Change(Matrix<int> matrix, int x, int y) => matrix.WriteValueAt(x, y, 0);
+        protected override void Change(Grid<int> grid, int x, int y) => grid.WriteValueAt(x, y, 0);
     }
 
     private class ToggleCommand : Command
@@ -86,28 +86,28 @@ public class ChristmasLightsController(int size = 1000)
         {
         }
 
-        protected override void Change(Matrix<int> matrix, int x, int y)
+        protected override void Change(Grid<int> grid, int x, int y)
         {
-            var newValue = matrix.ReadValueAt(x, y) == 0 ? 1 : 0;
-            matrix.WriteValueAt(x, y, newValue);
+            var newValue = grid.ReadValueAt(x, y) == 0 ? 1 : 0;
+            grid.WriteValueAt(x, y, newValue);
         }
     }
 
     private class IncreaseCommand(string s, int increment) : Command(s)
     {
-        protected override void Change(Matrix<int> matrix, int x, int y)
+        protected override void Change(Grid<int> grid, int x, int y)
         {
-            var currentValue = matrix.ReadValueAt(x, y);
+            var currentValue = grid.ReadValueAt(x, y);
             var newValue = currentValue + increment;
             if (newValue < 0)
                 newValue = 0;
-            matrix.WriteValueAt(x, y, newValue);
+            grid.WriteValueAt(x, y, newValue);
         }
     }
 
     private class VoidCommand() : Command(0, 0, 0, 0)
     {
-        protected override void Change(Matrix<int> matrix, int x, int y) {}
+        protected override void Change(Grid<int> grid, int x, int y) {}
     }
     
     private abstract class Command
@@ -134,21 +134,21 @@ public class ChristmasLightsController(int size = 1000)
             _yb = yb;
         }
 
-        public void Move(Matrix<int> matrix)
+        public void Move(Grid<int> grid)
         {
             for (var x = _xa; x <= _xb; x++)
             {
                 for (var y = _ya; y <= _yb; y++)
                 {
-                    Change(matrix, x, y);
+                    Change(grid, x, y);
                 }
             }
         }
 
-        protected abstract void Change(Matrix<int> matrix, int x, int y);
+        protected abstract void Change(Grid<int> grid, int x, int y);
     }
 
-    public void TurnOn(int xa, int ya, int xb, int yb) => new TurnOnCommand(xa, ya, xb, yb).Move(_matrix);
-    public void TurnOff(int xa, int ya, int xb, int yb) => new TurnOffCommand(xa, ya, xb, yb).Move(_matrix);
-    public void Toggle(int xa, int ya, int xb, int yb) => new ToggleCommand(xa, ya, xb, yb).Move(_matrix);
+    public void TurnOn(int xa, int ya, int xb, int yb) => new TurnOnCommand(xa, ya, xb, yb).Move(_grid);
+    public void TurnOff(int xa, int ya, int xb, int yb) => new TurnOffCommand(xa, ya, xb, yb).Move(_grid);
+    public void Toggle(int xa, int ya, int xb, int yb) => new ToggleCommand(xa, ya, xb, yb).Move(_grid);
 }

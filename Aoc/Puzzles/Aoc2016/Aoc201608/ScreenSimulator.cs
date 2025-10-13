@@ -6,11 +6,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201608;
 
 public class ScreenSimulator
 {
-    private readonly Matrix<char> _screen;
+    private readonly Grid<char> _screen;
 
     public ScreenSimulator(int width, int height)
     {
-        _screen = new Matrix<char>(width, height, '.');
+        _screen = new Grid<char>(width, height, '.');
     }
 
     public ScreenSimulatorResult Run(string input)

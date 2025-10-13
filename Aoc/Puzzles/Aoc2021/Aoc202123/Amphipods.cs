@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202123;
 public class Amphipods
 {
     private readonly bool _isPrinterEnabled;
-    private readonly Matrix<char> _matrix;
+    private readonly Grid<char> _grid;
     private readonly Dictionary<char, int> _stepCosts;
 
     private readonly Coord _hallwayLeft = new(1, 1);
@@ -41,7 +41,7 @@ public class Amphipods
     public Amphipods(string input, bool isPrinterEnabled = false)
     {
         _isPrinterEnabled = isPrinterEnabled;
-        _matrix = MatrixBuilder.BuildCharMatrix(input.Replace('.', ' ').Replace('#', '.'));
+        _grid = GridBuilder.BuildCharGrid(input.Replace('.', ' ').Replace('#', '.'));
         _stepCosts = new Dictionary<char, int>
         {
             { 'A', 1 },
@@ -154,18 +154,18 @@ public class Amphipods
 
     private void Move(Coord from, Coord to)
     {
-        _matrix.MoveTo(from);
-        var c = _matrix.ReadValue();
+        _grid.MoveTo(from);
+        var c = _grid.ReadValue();
 
         if (c == '.' || c == ' ')
             throw new Exception($"Read character was '{c}'. Must be a letter");
 
-        if (_matrix.ReadValueAt(to) != ' ')
+        if (_grid.ReadValueAt(to) != ' ')
             throw new Exception($"Target character was '{c}'. Must be ' '");
         
-        _matrix.WriteValue(' ');
-        _matrix.MoveTo(to);
-        _matrix.WriteValue(c);
+        _grid.WriteValue(' ');
+        _grid.MoveTo(to);
+        _grid.WriteValue(c);
 
         var stepCost = _stepCosts[c];
         var stepCount = 0;
@@ -185,7 +185,7 @@ public class Amphipods
         if (!_isPrinterEnabled)
             return;
 
-        Console.WriteLine(_matrix.Print());
+        Console.WriteLine(_grid.Print());
         Console.WriteLine($"Energy: {Energy}");
         Console.WriteLine();
     }

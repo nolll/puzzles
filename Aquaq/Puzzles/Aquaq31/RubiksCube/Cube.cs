@@ -330,13 +330,13 @@ public class Cube
 
     public string Print3d()
     {
-        var pm = new Matrix<char>(9, 12, '.');
-        var frontMatrix = Front.Matrix;
-        var upMatrix = Up.Matrix;
-        var leftMatrix = Left.Matrix;
-        var rightMatrix = Right.Matrix;
-        var downMatrix = Down.Matrix;
-        var backMatrix = Back.Matrix.RotateLeft().RotateLeft();
+        var pm = new Grid<char>(9, 12, '.');
+        var frontMatrix = Front.Grid;
+        var upMatrix = Up.Grid;
+        var leftMatrix = Left.Grid;
+        var rightMatrix = Right.Grid;
+        var downMatrix = Down.Grid;
+        var backMatrix = Back.Grid.RotateLeft().RotateLeft();
 
         ApplyToPrintMatrix(pm, upMatrix, new Coord(3, 0));
         ApplyToPrintMatrix(pm, leftMatrix, new Coord(0, 3));
@@ -353,13 +353,13 @@ public class Cube
     /// </summary>
     public string Print()
     {
-        var pm = new Matrix<char>(23, 3, ' ');
-        var frontMatrix = Front.Matrix;
-        var upMatrix = Up.Matrix;
-        var leftMatrix = Left.Matrix;
-        var rightMatrix = Right.Matrix;
-        var downMatrix = Down.Matrix;
-        var backMatrix = Back.Matrix;
+        var pm = new Grid<char>(23, 3, ' ');
+        var frontMatrix = Front.Grid;
+        var upMatrix = Up.Grid;
+        var leftMatrix = Left.Grid;
+        var rightMatrix = Right.Grid;
+        var downMatrix = Down.Grid;
+        var backMatrix = Back.Grid;
 
         ApplyToPrintMatrix(pm, frontMatrix, new Coord(0, 0));
         ApplyToPrintMatrix(pm, upMatrix, new Coord(4, 0));
@@ -371,11 +371,11 @@ public class Cube
         return pm.Print();
     }
 
-    private void ApplyToPrintMatrix(Matrix<char> printMatrix, Matrix<char> faceMatrix, Coord startAddress)
+    private void ApplyToPrintMatrix(Grid<char> printGrid, Grid<char> faceGrid, Coord startAddress)
     {
-        foreach (var coord in faceMatrix.Coords)
+        foreach (var coord in faceGrid.Coords)
         {
-            printMatrix.WriteValueAt(startAddress.X + coord.X, startAddress.Y + coord.Y, faceMatrix.ReadValueAt(coord));
+            printGrid.WriteValueAt(startAddress.X + coord.X, startAddress.Y + coord.Y, faceGrid.ReadValueAt(coord));
         }
     }
 

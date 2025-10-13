@@ -1,6 +1,6 @@
 namespace Pzl.Tools.Grids.Grids2d;
 
-public class MatrixTests
+public class GridTests
 {
     private const char DefaultValue = '.';
     private const char WriteValue = '#';
@@ -17,7 +17,7 @@ public class MatrixTests
     [InlineData(1, false)]
     public void IsAtTopEdge(int y, bool expected)
     {
-        var matrix = new Matrix<int>(5, 5);
+        var matrix = new Grid<int>(5, 5);
         matrix.MoveTo(1, y);
 
         matrix.IsAtTopEdge.Should().Be(expected);
@@ -28,7 +28,7 @@ public class MatrixTests
     [InlineData(3, false)]
     public void IsAtRightEdge(int x, bool expected)
     {
-        var matrix = new Matrix<int>(5, 5);
+        var matrix = new Grid<int>(5, 5);
         matrix.MoveTo(x, 1);
 
         matrix.IsAtRightEdge.Should().Be(expected);
@@ -39,7 +39,7 @@ public class MatrixTests
     [InlineData(3, false)]
     public void IsAtBottomEdge(int y, bool expected)
     {
-        var matrix = new Matrix<int>(5, 5);
+        var matrix = new Grid<int>(5, 5);
         matrix.MoveTo(1, y);
 
         matrix.IsAtBottomEdge.Should().Be(expected);
@@ -50,7 +50,7 @@ public class MatrixTests
     [InlineData(1, false)]
     public void IsAtLeftEdge(int x, bool expected)
     {
-        var matrix = new Matrix<int>(5, 5);
+        var matrix = new Grid<int>(5, 5);
         matrix.MoveTo(x, 1);
 
         matrix.IsAtLeftEdge.Should().Be(expected);
@@ -61,7 +61,7 @@ public class MatrixTests
     [InlineData(10, 5)]
     public void Center(int size, int expected)
     {
-        var matrix = new Matrix<int>(size, size);
+        var matrix = new Grid<int>(size, size);
 
         matrix.Center.X.Should().Be(expected);
         matrix.Center.Y.Should().Be(expected);
@@ -70,7 +70,7 @@ public class MatrixTests
     [Fact]
     public void MoveTo()
     {
-        var matrix = new Matrix<int>(5, 5);
+        var matrix = new Grid<int>(5, 5);
         matrix.MoveTo(1, 2);
 
         matrix.Address.X.Should().Be(1);
@@ -80,7 +80,7 @@ public class MatrixTests
     [Fact]
     public void MoveForward()
     {
-        var matrix = new Matrix<int>(5, 5);
+        var matrix = new Grid<int>(5, 5);
         matrix.MoveTo(1, 3);
         matrix.MoveForward();
 
@@ -91,7 +91,7 @@ public class MatrixTests
     [Fact]
     public void TurnAndMoveForward()
     {
-        var matrix = new Matrix<int>(5, 5);
+        var matrix = new Grid<int>(5, 5);
         matrix.TurnRight();
         matrix.MoveForward();
         matrix.TurnRight();
@@ -104,7 +104,7 @@ public class MatrixTests
     [Fact]
     public void ExtendAllTo3()
     {
-        var matrix = new Matrix<char>(1, 1, DefaultValue);
+        var matrix = new Grid<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
@@ -119,7 +119,7 @@ public class MatrixTests
     [Fact]
     public void ExtendAllTo5()
     {
-        var matrix = new Matrix<char>(1, 1, DefaultValue);
+        var matrix = new Grid<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections(2);
 
@@ -134,7 +134,7 @@ public class MatrixTests
     [Fact]
     public void OrthogonalAdjacentCoordsExist()
     {
-        var matrix = new Matrix<char>(1, 1, DefaultValue);
+        var matrix = new Grid<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
@@ -150,7 +150,7 @@ public class MatrixTests
     [Fact]
     public void AllAdjacentCoordsExists()
     {
-        var matrix = new Matrix<char>(1, 1, DefaultValue);
+        var matrix = new Grid<char>(1, 1, DefaultValue);
         matrix.WriteValue(WriteValue);
         matrix.ExtendAllDirections();
 
@@ -178,8 +178,8 @@ public class MatrixTests
                                 .#.
                                 """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+        var matrix = GridBuilder.BuildCharGrid(input);
+        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
 
         matrix = matrix.Clone();
 
@@ -204,8 +204,8 @@ public class MatrixTests
                                 .#..#.
                                 """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+        var matrix = GridBuilder.BuildCharGrid(input);
+        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
 
         matrix = matrix.Clone(2);
 
@@ -227,8 +227,8 @@ public class MatrixTests
                                 ...
                                 """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+        var matrix = GridBuilder.BuildCharGrid(input);
+        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
 
         matrix = matrix.RotateRight();
 
@@ -250,8 +250,8 @@ public class MatrixTests
                                 ##.
                                 """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+        var matrix = GridBuilder.BuildCharGrid(input);
+        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
 
         matrix = matrix.RotateLeft();
 
@@ -266,8 +266,8 @@ public class MatrixTests
                                 JK
                                 """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
-        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+        var matrix = GridBuilder.BuildCharGrid(SliceInput);
+        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
 
         matrix = matrix.Slice(new Coord(1, 1), new Coord(2, 2));
 
@@ -283,8 +283,8 @@ public class MatrixTests
                                 NOP
                                 """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
-        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+        var matrix = GridBuilder.BuildCharGrid(SliceInput);
+        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
 
         matrix = matrix.Slice(new Coord(1, 1));
 
@@ -300,8 +300,8 @@ public class MatrixTests
                                 IJK
                                 """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
-        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+        var matrix = GridBuilder.BuildCharGrid(SliceInput);
+        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
 
         matrix = matrix.Slice(to: new Coord(2, 2));
 
@@ -316,8 +316,8 @@ public class MatrixTests
                                 JK
                                 """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(SliceInput);
-        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+        var matrix = GridBuilder.BuildCharGrid(SliceInput);
+        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
 
         matrix = matrix.Slice(new Coord(1, 1), 2, 2);
 
@@ -339,8 +339,8 @@ public class MatrixTests
                                 #..
                                 """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+        var matrix = GridBuilder.BuildCharGrid(input);
+        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
 
         matrix = matrix.FlipVertical();
 
@@ -362,8 +362,8 @@ public class MatrixTests
                                 ...
                                 """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+        var matrix = GridBuilder.BuildCharGrid(input);
+        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
 
         matrix = matrix.FlipHorizontal();
 
@@ -385,8 +385,8 @@ public class MatrixTests
                                 ...
                                 """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
-        var expectedMatrix = MatrixBuilder.BuildCharMatrix(expected);
+        var matrix = GridBuilder.BuildCharGrid(input);
+        var expectedMatrix = GridBuilder.BuildCharGrid(expected);
 
         matrix = matrix.Transpose();
 

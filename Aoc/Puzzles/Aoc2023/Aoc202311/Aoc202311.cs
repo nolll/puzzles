@@ -18,7 +18,7 @@ public class Aoc202311 : AocPuzzle
 
     public static long Distances(string input, long multiplier)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var expandedXValues = ExpandX(matrix, multiplier);
         var expandedYValues = ExpandY(matrix, multiplier);
 
@@ -45,18 +45,18 @@ public class Aoc202311 : AocPuzzle
         return total / 2;
     }
 
-    private static List<long> ExpandX(Matrix<char> matrix, long multiplier)
+    private static List<long> ExpandX(Grid<char> grid, long multiplier)
     {
         var expandedXValues = new List<long>();
         var expandedX = 0L;
         var galaxyCounts = new List<int>();
 
-        for (var x = 0; x <= matrix.XMax; x++)
+        for (var x = 0; x <= grid.XMax; x++)
         {
             var galaxies = 0;
-            for (var y = 0; y <= matrix.YMax; y++)
+            for (var y = 0; y <= grid.YMax; y++)
             {
-                if (matrix.ReadValueAt(x, y) == '#') 
+                if (grid.ReadValueAt(x, y) == '#') 
                     galaxies++;
             }
 
@@ -74,18 +74,18 @@ public class Aoc202311 : AocPuzzle
         return expandedXValues;
     }
 
-    private static List<long> ExpandY(Matrix<char> matrix, long multiplier)
+    private static List<long> ExpandY(Grid<char> grid, long multiplier)
     {
         var expandedYValues = new List<long>();
         var expandedY = 0L;
         var galaxyCounts = new List<int>();
 
-        for (var y = 0; y <= matrix.YMax; y++)
+        for (var y = 0; y <= grid.YMax; y++)
         {
             var galaxies = 0;
-            for (var x = 0; x <= matrix.XMax; x++)
+            for (var x = 0; x <= grid.XMax; x++)
             {
-                if (matrix.ReadValueAt(x, y) == '#') 
+                if (grid.ReadValueAt(x, y) == '#') 
                     galaxies++;
             }
 

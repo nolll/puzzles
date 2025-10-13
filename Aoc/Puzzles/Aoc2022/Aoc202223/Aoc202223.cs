@@ -167,7 +167,7 @@ public class Aoc202223 : AocPuzzle
 
     private string Print(HashSet<Coord> coords)
     {
-        var matrix = new Matrix<char>(1, 1, '.');
+        var matrix = new Grid<char>(1, 1, '.');
         foreach (var coord in coords)
         {
             matrix.MoveTo(coord);

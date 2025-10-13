@@ -13,7 +13,7 @@ public class VentsMap
             lines = lines.Where(o => o.IsOrthogonal).ToList();
         var width = lines.Max(o => Math.Max(o.Start.X, o.End.X));
         var height = lines.Max(o => Math.Max(o.Start.Y, o.End.Y));
-        var matrix = new Matrix<int>(width, height);
+        var matrix = new Grid<int>(width, height);
 
         matrix = MapLines(matrix, lines);
         var c = matrix.Values.Count(o => o >= 2);
@@ -21,17 +21,17 @@ public class VentsMap
         return c;
     }
 
-    private static Matrix<int> MapLines(Matrix<int> matrix, List<Line2d> lines)
+    private static Grid<int> MapLines(Grid<int> grid, List<Line2d> lines)
     {
         foreach (var line in lines)
         {
             foreach (var pos in line.Positions)
             {
-                matrix.WriteValueAt(pos.X, pos.Y, matrix.ReadValueAt(pos.X, pos.Y) + 1);
+                grid.WriteValueAt(pos.X, pos.Y, grid.ReadValueAt(pos.X, pos.Y) + 1);
             }
         }
 
-        return matrix;
+        return grid;
     }
 
     private static List<Line2d> ParseLines(IEnumerable<string> rows)

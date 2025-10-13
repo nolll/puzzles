@@ -7,7 +7,7 @@ public class HorizontalLineTests
     [Fact]
     public void CanMoveRight()
     {
-        var matrix = new Matrix<char>(6, 3, '.');
+        var matrix = new Grid<char>(6, 3, '.');
         var bottomLeft = new Coord(1, 1);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -21,7 +21,7 @@ public class HorizontalLineTests
     [Fact]
     public void CanNotMoveRight()
     {
-        var matrix = new Matrix<char>(6, 3, '.');
+        var matrix = new Grid<char>(6, 3, '.');
         var bottomLeft = new Coord(2, 1);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -35,7 +35,7 @@ public class HorizontalLineTests
     [Fact]
     public void CanMoveLeft()
     {
-        var matrix = new Matrix<char>(6, 3, '.');
+        var matrix = new Grid<char>(6, 3, '.');
         var bottomLeft = new Coord(1, 1);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -49,7 +49,7 @@ public class HorizontalLineTests
     [Fact]
     public void CanNotMoveLeft()
     {
-        var matrix = new Matrix<char>(6, 3, '.');
+        var matrix = new Grid<char>(6, 3, '.');
         var bottomLeft = new Coord(0, 1);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -63,7 +63,7 @@ public class HorizontalLineTests
     [Fact]
     public void CanMoveDown()
     {
-        var matrix = new Matrix<char>(6, 3, '.');
+        var matrix = new Grid<char>(6, 3, '.');
         var bottomLeft = new Coord(1, 1);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);
@@ -77,7 +77,7 @@ public class HorizontalLineTests
     [Fact]
     public void CanNotMoveDown()
     {
-        var matrix = new Matrix<char>(6, 3, '.');
+        var matrix = new Grid<char>(6, 3, '.');
         var bottomLeft = new Coord(1, 2);
         var shape = new HorizontalLineShape();
         shape.Paint(matrix, bottomLeft);

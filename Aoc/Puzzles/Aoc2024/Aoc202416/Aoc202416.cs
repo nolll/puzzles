@@ -12,18 +12,18 @@ public class Aoc202416 : AocPuzzle
 
     public PuzzleResult Part1(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var start = matrix.FindAddresses('S').First();
         var end = matrix.FindAddresses('E').First();
         matrix.WriteValueAt(start, EmptySpace);
         matrix.WriteValueAt(end, EmptySpace);
         matrix.MoveTo(start);
-        matrix.TurnTo(MatrixDirection.Right);
+        matrix.TurnTo(GridDirection.Right);
 
         var inputs = BuildGraph(matrix);
         
-        var startKey = $"{MatrixDirection.Right}|{start.Id}";
-        List<string> endKeys = [$"{MatrixDirection.Right}|{end.Id}", $"{MatrixDirection.Up}|{end.Id}"];
+        var startKey = $"{GridDirection.Right}|{start.Id}";
+        List<string> endKeys = [$"{GridDirection.Right}|{end.Id}", $"{GridDirection.Up}|{end.Id}"];
         var shortestPath = Dijkstra.BestPath(inputs, startKey, endKeys);
         
         return new PuzzleResult(shortestPath.Cost, "7f6e0e55c1b9ba30973eeb8218555c3a");
@@ -31,24 +31,24 @@ public class Aoc202416 : AocPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input, '.');
+        var matrix = GridBuilder.BuildCharGrid(input, '.');
         var start = matrix.FindAddresses('S').First();
         var end = matrix.FindAddresses('E').First();
         matrix.WriteValueAt(start, EmptySpace);
         matrix.WriteValueAt(end, EmptySpace);
         matrix.MoveTo(start);
-        matrix.TurnTo(MatrixDirection.Right);
+        matrix.TurnTo(GridDirection.Right);
         
         var visited = FindVisitedCoords(matrix, start, end);
         
         return new PuzzleResult(visited.Count, "6f785a700e3bd5c59db14bf9f8eb6d46");
     }
 
-    private HashSet<Coord> FindVisitedCoords(Matrix<char> matrix, Coord start, Coord end)
+    private HashSet<Coord> FindVisitedCoords(Grid<char> grid, Coord start, Coord end)
     {
-        var startKey = $"{MatrixDirection.Right}|{start.Id}";
-        List<string> endKeys = [$"{MatrixDirection.Right}|{end.Id}", $"{MatrixDirection.Up}|{end.Id}"];
-        var inputs = BuildGraph(matrix);
+        var startKey = $"{GridDirection.Right}|{start.Id}";
+        List<string> endKeys = [$"{GridDirection.Right}|{end.Id}", $"{GridDirection.Up}|{end.Id}"];
+        var inputs = BuildGraph(grid);
         var (_, paths) = Dijkstra.BestPaths(inputs, startKey, endKeys);
         
         var usedCoords = paths
@@ -60,35 +60,35 @@ public class Aoc202416 : AocPuzzle
         return usedCoords;
     }
 
-    private List<GraphEdge> BuildGraph(Matrix<char> matrix)
+    private List<GraphEdge> BuildGraph(Grid<char> grid)
     {
         var edges = new List<GraphEdge>();
 
-        var spaceCoords = matrix.FindAddresses(EmptySpace);
+        var spaceCoords = grid.FindAddresses(EmptySpace);
         foreach (var coord in spaceCoords)
         {
-            foreach (var dir in MatrixDirection.All)
+            foreach (var dir in GridDirection.All)
             {
-                matrix.MoveTo(coord);
-                matrix.TurnTo(dir);
+                grid.MoveTo(coord);
+                grid.TurnTo(dir);
 
-                matrix.MoveForward();
-                if (matrix.ReadValue() == EmptySpace)
+                grid.MoveForward();
+                if (grid.ReadValue() == EmptySpace)
                 {
                     var fromKey = $"{dir.Name}|{coord.Id}";
-                    var toKey = $"{matrix.Direction.Name}|{matrix.Address.Id}";
+                    var toKey = $"{grid.Direction.Name}|{grid.Address.Id}";
                     edges.Add(new GraphEdge(fromKey, toKey));
                 }
-                matrix.MoveBackward();
+                grid.MoveBackward();
                 
                 for (var i = 1; i <= 3; i++)
                 {
-                    matrix.TurnRight();
+                    grid.TurnRight();
                     if(i % 2 == 0)
                         continue;
                     
                     var fromKey = $"{dir.Name}|{coord.Id}";
-                    var toKey = $"{matrix.Direction.Name}|{matrix.Address.Id}";
+                    var toKey = $"{grid.Direction.Name}|{grid.Address.Id}";
                     edges.Add(new GraphEdge(fromKey, toKey, 1000));
                 }
             }

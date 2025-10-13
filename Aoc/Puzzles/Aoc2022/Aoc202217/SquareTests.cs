@@ -7,7 +7,7 @@ public class SquareTests
     [Fact]
     public void CanMoveRight()
     {
-        var matrix = new Matrix<char>(4, 4, '.');
+        var matrix = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 2);
         var shape = new SquareShape();
         shape.Paint(matrix, bottomLeft);
@@ -21,7 +21,7 @@ public class SquareTests
     [Fact]
     public void CanNotMoveRight()
     {
-        var matrix = new Matrix<char>(4, 4, '.');
+        var matrix = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(2, 2);
         var shape = new SquareShape();
         shape.Paint(matrix, bottomLeft);
@@ -35,7 +35,7 @@ public class SquareTests
     [Fact]
     public void CanMoveLeft()
     {
-        var matrix = new Matrix<char>(4, 4, '.');
+        var matrix = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 2);
         var shape = new SquareShape();
         shape.Paint(matrix, bottomLeft);
@@ -49,7 +49,7 @@ public class SquareTests
     [Fact]
     public void CanNotMoveLeft()
     {
-        var matrix = new Matrix<char>(4, 4, '.');
+        var matrix = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(0, 2);
         var shape = new SquareShape();
         shape.Paint(matrix, bottomLeft);
@@ -63,7 +63,7 @@ public class SquareTests
     [Fact]
     public void CanMoveDown()
     {
-        var matrix = new Matrix<char>(4, 4, '.');
+        var matrix = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 2);
         var shape = new SquareShape();
         shape.Paint(matrix, bottomLeft);
@@ -77,7 +77,7 @@ public class SquareTests
     [Fact]
     public void CanNotMoveDown()
     {
-        var matrix = new Matrix<char>(4, 4, '.');
+        var matrix = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 3);
         var shape = new SquareShape();
         shape.Paint(matrix, bottomLeft);

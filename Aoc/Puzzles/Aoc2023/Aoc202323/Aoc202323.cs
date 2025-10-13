@@ -6,12 +6,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202323;
 [Name("A Long Walk")]
 public class Aoc202323 : AocPuzzle
 {
-    private static readonly Dictionary<MatrixDirection, char> ValidSlopes = new()
+    private static readonly Dictionary<GridDirection, char> ValidSlopes = new()
     {
-        { MatrixDirection.Up, '^' },
-        { MatrixDirection.Right, '>' },
-        { MatrixDirection.Down, 'v' },
-        { MatrixDirection.Left, '<' }
+        { GridDirection.Up, '^' },
+        { GridDirection.Right, '>' },
+        { GridDirection.Down, 'v' },
+        { GridDirection.Left, '<' }
     };
 
     public PuzzleResult RunPart1(string input)
@@ -26,7 +26,7 @@ public class Aoc202323 : AocPuzzle
 
     public static int LongestHike(string s, bool canClimbSlopes)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(s);
+        var matrix = GridBuilder.BuildCharGrid(s);
         var start = new Coord(matrix.XMin + 1, matrix.YMin);
         var target = new Coord(matrix.XMax - 1, matrix.YMax);
 
@@ -36,18 +36,18 @@ public class Aoc202323 : AocPuzzle
         return FindLongestRoute(graph, [], start.Id, target.Id);
     }
 
-    private static IEnumerable<Coord> FindGraphCoords(Matrix<char> matrix, Coord start, Coord target)
+    private static IEnumerable<Coord> FindGraphCoords(Grid<char> grid, Coord start, Coord target)
     {
         yield return start;
         yield return target;
 
-        foreach (var current in matrix.Coords)
+        foreach (var current in grid.Coords)
         {
-            if (matrix.ReadValueAt(current) == '#')
+            if (grid.ReadValueAt(current) == '#')
                 continue;
 
-            var neighbors = matrix.OrthogonalAdjacentCoordsTo(current)
-                .Where(o => matrix.ReadValueAt(o) != '#');
+            var neighbors = grid.OrthogonalAdjacentCoordsTo(current)
+                .Where(o => grid.ReadValueAt(o) != '#');
             if (neighbors.Count() > 2)
             {
                 yield return current;
@@ -56,7 +56,7 @@ public class Aoc202323 : AocPuzzle
     }
 
     private static Dictionary<string, Dictionary<string, int>> BuildGraph(
-        Matrix<char> matrix,
+        Grid<char> grid,
         List<Coord> graphCoords, 
         bool canClimbSlopes)
     {
@@ -77,7 +77,7 @@ public class Aoc202323 : AocPuzzle
                     continue;
                 }
 
-                var neigbors = GetNeighbors(matrix, current, canClimbSlopes).Where(o => !seen.Contains(o));
+                var neigbors = GetNeighbors(grid, current, canClimbSlopes).Where(o => !seen.Contains(o));
                 foreach (var neighbor in neigbors)
                 {
                     queue.Enqueue((neighbor, distance + 1));
@@ -113,34 +113,34 @@ public class Aoc202323 : AocPuzzle
         return max;
     }
 
-    private static List<Coord> GetNeighbors(Matrix<char> matrix, Coord coord, bool canClimbSlopes)
+    private static List<Coord> GetNeighbors(Grid<char> grid, Coord coord, bool canClimbSlopes)
     {
         var adjacent = new List<Coord>();
-        var north = GetCoord(coord, MatrixDirection.Up);
-        var east = GetCoord(coord, MatrixDirection.Right);
-        var south = GetCoord(coord, MatrixDirection.Down);
-        var west = GetCoord(coord, MatrixDirection.Left);
+        var north = GetCoord(coord, GridDirection.Up);
+        var east = GetCoord(coord, GridDirection.Right);
+        var south = GetCoord(coord, GridDirection.Down);
+        var west = GetCoord(coord, GridDirection.Left);
 
-        if (CanGoDirection(matrix, north, canClimbSlopes, MatrixDirection.Up)) adjacent.Add(north);
-        if (CanGoDirection(matrix, east, canClimbSlopes, MatrixDirection.Right)) adjacent.Add(east);
-        if (CanGoDirection(matrix, south, canClimbSlopes, MatrixDirection.Down)) adjacent.Add(south);
-        if (CanGoDirection(matrix, west, canClimbSlopes, MatrixDirection.Left)) adjacent.Add(west);
+        if (CanGoDirection(grid, north, canClimbSlopes, GridDirection.Up)) adjacent.Add(north);
+        if (CanGoDirection(grid, east, canClimbSlopes, GridDirection.Right)) adjacent.Add(east);
+        if (CanGoDirection(grid, south, canClimbSlopes, GridDirection.Down)) adjacent.Add(south);
+        if (CanGoDirection(grid, west, canClimbSlopes, GridDirection.Left)) adjacent.Add(west);
 
         return adjacent;
     }
 
-    private static bool CanGoDirection(Matrix<char> matrix, Coord coord, bool canClimbSlopes, MatrixDirection direction)
+    private static bool CanGoDirection(Grid<char> grid, Coord coord, bool canClimbSlopes, GridDirection direction)
     {
-        if (matrix.IsOutOfRange(coord))
+        if (grid.IsOutOfRange(coord))
             return false;
 
-        var value = matrix.ReadValueAt(coord);
+        var value = grid.ReadValueAt(coord);
         if (canClimbSlopes && value is not '#')
             return true;
 
         return value == '.' || value == ValidSlopes[direction];
     }
 
-    private static Coord GetCoord(Coord coord, MatrixDirection direction) => 
+    private static Coord GetCoord(Coord coord, GridDirection direction) => 
         new(coord.X + direction.X, coord.Y + direction.Y);
 }

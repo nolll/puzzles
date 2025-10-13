@@ -38,7 +38,7 @@ public class Aoc202414 : AocPuzzle
             robot.Location = new Coord(x, y);    
         }
 
-        var matrix = new Matrix<int>(width, height);
+        var matrix = new Grid<int>(width, height);
         foreach (var robot in robots)
         {
             var v = matrix.ReadValueAt(robot.Location);

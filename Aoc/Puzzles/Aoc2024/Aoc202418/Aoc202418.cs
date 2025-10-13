@@ -34,7 +34,7 @@ public class Aoc202418 : AocPuzzle
             .Select(o => new Coord(o[0], o[1]))
             .Take(steps);
 
-        var matrix = new Matrix<char>(width, height, EmptySpace);
+        var matrix = new Grid<char>(width, height, EmptySpace);
         foreach (var coord in coords)
         {
             matrix.WriteValueAt(coord, Wall);
@@ -53,7 +53,7 @@ public class Aoc202418 : AocPuzzle
             .Select(o => new Coord(o[0], o[1]))
             .ToArray();
 
-        var matrix = new Matrix<char>(width, height, EmptySpace);
+        var matrix = new Grid<char>(width, height, EmptySpace);
         var start = new Coord(0, 0);
         var end = new Coord(matrix.XMax, matrix.YMax);
 
@@ -71,13 +71,13 @@ public class Aoc202418 : AocPuzzle
         return coords[lo].Id;
     }
 
-    private static bool CanReachExit(Matrix<char> matrix,
+    private static bool CanReachExit(Grid<char> grid,
         Coord start,
         Coord end,
         Coord[] coords,
         int n)
     {
-        var m = matrix.Clone();
+        var m = grid.Clone();
 
         for (var i = 0; i < n; i++)
         {

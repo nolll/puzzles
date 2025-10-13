@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Pzl.Tools.Grids.Grids2d;
 
-public class Matrix<T> where T : struct
+public class Grid<T> where T : struct
 {
     private readonly IDictionary<Coord, T> _matrix = new Dictionary<Coord, T>();
 
@@ -15,7 +15,7 @@ public class Matrix<T> where T : struct
     public int YMin { get; private set; }
     public int YMax { get; private set; }
 
-    public MatrixDirection Direction { get; private set; }
+    public GridDirection Direction { get; private set; }
     public Coord Address { get; private set; }
     public Coord StartAddress { get; }
     public bool IsAtTopEdge => Address.Y == YMin;
@@ -34,7 +34,7 @@ public class Matrix<T> where T : struct
         }
     }
 
-    public Matrix(int width = 1, int height = 1, T defaultValue = default)
+    public Grid(int width = 1, int height = 1, T defaultValue = default)
         : this(
             new Coord(0, 0), 
             new Coord(width - 1, height - 1),
@@ -45,15 +45,15 @@ public class Matrix<T> where T : struct
         YMax = height - 1;
     }
 
-    private Matrix(T defaultValue)
+    private Grid(T defaultValue)
     {
         DefaultValue = defaultValue;
         Address = new Coord(0, 0);
         StartAddress = new Coord(0, 0);
-        Direction = MatrixDirection.Up;
+        Direction = GridDirection.Up;
     }
 
-    private Matrix(
+    private Grid(
         Coord min, 
         Coord max, 
         IDictionary<Coord, T> values, 
@@ -178,9 +178,9 @@ public class Matrix<T> where T : struct
     public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
     private bool MoveLeft(int steps, bool extend) => MoveTo(new Coord(Address.X - steps, Address.Y), extend);
     public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
-    public bool Move(MatrixDirection dir, int steps = 1) => Move(dir, steps, true);
-    private bool Move(MatrixDirection dir, int steps, bool extend) => MoveTo(new Coord(Address.X + dir.X, Address.Y + dir.Y), extend);
-    public bool TryMove(MatrixDirection dir, int steps = 1) => Move(dir, steps, false);
+    public bool Move(GridDirection dir, int steps = 1) => Move(dir, steps, true);
+    private bool Move(GridDirection dir, int steps, bool extend) => MoveTo(new Coord(Address.X + dir.X, Address.Y + dir.Y), extend);
+    public bool TryMove(GridDirection dir, int steps = 1) => Move(dir, steps, false);
 
     public bool MoveTo(Coord address, bool extend)
     {
@@ -198,38 +198,38 @@ public class Matrix<T> where T : struct
         return true;
     }
 
-    public MatrixDirection TurnLeft()
+    public GridDirection TurnLeft()
     {
-        if (Direction.Equals(MatrixDirection.Up))
-            return TurnTo(MatrixDirection.Left);
-        if (Direction.Equals(MatrixDirection.Right))
-            return TurnTo(MatrixDirection.Up);
-        if (Direction.Equals(MatrixDirection.Down))
-            return TurnTo(MatrixDirection.Right);
-        return TurnTo(MatrixDirection.Down);
+        if (Direction.Equals(GridDirection.Up))
+            return TurnTo(GridDirection.Left);
+        if (Direction.Equals(GridDirection.Right))
+            return TurnTo(GridDirection.Up);
+        if (Direction.Equals(GridDirection.Down))
+            return TurnTo(GridDirection.Right);
+        return TurnTo(GridDirection.Down);
     }
 
-    public MatrixDirection TurnRight()
+    public GridDirection TurnRight()
     {
-        if (Direction.Equals(MatrixDirection.Up))
-            return TurnTo(MatrixDirection.Right);
-        if (Direction.Equals(MatrixDirection.Right))
-            return TurnTo(MatrixDirection.Down);
-        if (Direction.Equals(MatrixDirection.Down))
-            return TurnTo(MatrixDirection.Left);
-        return TurnTo(MatrixDirection.Up);
+        if (Direction.Equals(GridDirection.Up))
+            return TurnTo(GridDirection.Right);
+        if (Direction.Equals(GridDirection.Right))
+            return TurnTo(GridDirection.Down);
+        if (Direction.Equals(GridDirection.Down))
+            return TurnTo(GridDirection.Left);
+        return TurnTo(GridDirection.Up);
     }
 
-    public MatrixDirection TurnTo(MatrixDirection direction)
+    public GridDirection TurnTo(GridDirection direction)
     {
         Direction = direction;
         return direction;
     }
 
-    public MatrixDirection FaceUp() => TurnTo(MatrixDirection.Up);
-    public MatrixDirection FaceRight() => TurnTo(MatrixDirection.Right);
-    public MatrixDirection FaceDown() => TurnTo(MatrixDirection.Down);
-    public MatrixDirection FaceLeft() => TurnTo(MatrixDirection.Left);
+    public GridDirection FaceUp() => TurnTo(GridDirection.Up);
+    public GridDirection FaceRight() => TurnTo(GridDirection.Right);
+    public GridDirection FaceDown() => TurnTo(GridDirection.Down);
+    public GridDirection FaceLeft() => TurnTo(GridDirection.Left);
 
     private void ExtendMatrix(Coord address)
     {
@@ -347,14 +347,14 @@ public class Matrix<T> where T : struct
         address.X > XMax ||
         address.X < XMin;
 
-    public Matrix<T> Clone(int multiplier = 1)
+    public Grid<T> Clone(int multiplier = 1)
     {
         multiplier = multiplier < 1 ? 1 : multiplier;
 
         var values = GetValuesForClone(multiplier);
         var min = new Coord(XMin, YMin);
         var max = GetMaxAddressForClone(multiplier);
-        return new Matrix<T>(min, max, values, DefaultValue);
+        return new Grid<T>(min, max, values, DefaultValue);
     }
 
     private Dictionary<Coord, T> GetValuesForClone(int multiplier)
@@ -383,23 +383,23 @@ public class Matrix<T> where T : struct
     private Coord GetMaxAddressForClone(int multiplier) => 
         new(XMax + Width * (multiplier - 1), YMax + Height * (multiplier - 1));
 
-    public Matrix<T> RotateLeft()
+    public Grid<T> RotateLeft()
     {
         var values = _matrix.ToDictionary(item => new Coord(item.Key.Y, YMax - item.Key.X), item => item.Value);
         var min = new Coord(YMin, YMin);
         var max = new Coord(XMax, YMax);
-        return new Matrix<T>(min, max, values, DefaultValue);
+        return new Grid<T>(min, max, values, DefaultValue);
     }
 
-    public Matrix<T> RotateRight()
+    public Grid<T> RotateRight()
     {
         var values = _matrix.ToDictionary(item => new Coord(XMax - item.Key.Y, item.Key.X), item => item.Value);
         var min = new Coord(YMin, YMin);
         var max = new Coord(XMax, YMax);
-        return new Matrix<T>(min, max, values, DefaultValue);
+        return new Grid<T>(min, max, values, DefaultValue);
     }
 
-    public Matrix<T> Slice(Coord? from = null, Coord? to = null)
+    public Grid<T> Slice(Coord? from = null, Coord? to = null)
     {
         from ??= new Coord(XMin, YMin);
         to ??= new Coord(XMax, YMax);
@@ -410,36 +410,36 @@ public class Matrix<T> where T : struct
             .ToDictionary(item => new Coord(item.Key.X - dx, item.Key.Y - dy), item => item.Value);
         var slicedFrom = new Coord(from.X - dx, from.Y - dy);
         var slicedTo = new Coord(to.X - dx, to.Y - dy);
-        return new Matrix<T>(slicedFrom, slicedTo, values, DefaultValue);
+        return new Grid<T>(slicedFrom, slicedTo, values, DefaultValue);
     }
 
-    public Matrix<T> Slice(Coord from, int size) => 
+    public Grid<T> Slice(Coord from, int size) => 
         Slice(from, size, size);
 
-    public Matrix<T> Slice(Coord from, int width, int height) => 
+    public Grid<T> Slice(Coord from, int width, int height) => 
         Slice(from, new Coord(from.X + width - 1, from.Y + height - 1));
 
-    public Matrix<T> FlipVertical()
+    public Grid<T> FlipVertical()
     {
         var values = _matrix.ToDictionary(item => new Coord(item.Key.X, YMax - item.Key.Y), item => item.Value);
         var min = new Coord(XMin, YMin);
         var max = new Coord(XMax, YMax);
-        return new Matrix<T>(min, max, values, DefaultValue);
+        return new Grid<T>(min, max, values, DefaultValue);
     }
 
-    public Matrix<T> FlipHorizontal()
+    public Grid<T> FlipHorizontal()
     {
         var values = _matrix.ToDictionary(item => new Coord(XMax - item.Key.X, item.Key.Y), item => item.Value);
         var min = new Coord(XMin, YMin);
         var max = new Coord(XMax, YMax);
-        return new Matrix<T>(min, max, values, DefaultValue);
+        return new Grid<T>(min, max, values, DefaultValue);
     }
 
-    public Matrix<T> Transpose()
+    public Grid<T> Transpose()
     {
         var values = _matrix.ToDictionary(item => new Coord(item.Key.Y, item.Key.X), item => item.Value);
         var min = new Coord(YMin, XMin);
         var max = new Coord(YMax, XMax);
-        return new Matrix<T>(min, max, values, DefaultValue);
+        return new Grid<T>(min, max, values, DefaultValue);
     }
 }

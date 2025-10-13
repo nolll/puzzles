@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201602;
 
 public class DiamondKeyCodeFinder
 {
-    private readonly Matrix<char> _buttons = BuildButtonMatrix();
+    private readonly Grid<char> _buttons = BuildButtonMatrix();
 
     public string Find(string input)
     {
@@ -31,7 +31,7 @@ public class DiamondKeyCodeFinder
             _buttons.Move(dir.Opposite);
     }
 
-    private static Matrix<char> BuildButtonMatrix()
+    private static Grid<char> BuildButtonMatrix()
     {
         const string input = """
                              ..1..
@@ -41,7 +41,7 @@ public class DiamondKeyCodeFinder
                              ..D..
                              """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         matrix.MoveTo(0, 2);
         return matrix;
     }
@@ -52,11 +52,11 @@ public class DiamondKeyCodeFinder
 
 public static class DirectionConverter
 {
-    public static MatrixDirection GetDirection(char direction) => direction switch
+    public static GridDirection GetDirection(char direction) => direction switch
     {
-        'U' => MatrixDirection.Up,
-        'R' => MatrixDirection.Right,
-        'D' => MatrixDirection.Down,
-        _ => MatrixDirection.Left
+        'U' => GridDirection.Up,
+        'R' => GridDirection.Right,
+        'D' => GridDirection.Down,
+        _ => GridDirection.Left
     };
 }

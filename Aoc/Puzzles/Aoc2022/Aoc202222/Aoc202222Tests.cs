@@ -65,8 +65,8 @@ public class Aoc202222Tests
 
     private static void TestTransitions(int fromX, int fromY, char fromDir, int toX, int toY, char toDir)
     {
-        var fromDirection = MatrixDirection.Get(fromDir);
-        var toDirection = MatrixDirection.Get(toDir);
+        var fromDirection = GridDirection.Get(fromDir);
+        var toDirection = GridDirection.Get(toDir);
         var (c, d) = Aoc202222.MapExitPosition(new Coord(fromX, fromY), fromDirection, 50);
 
         c.X.Should().Be(toX);

@@ -42,10 +42,10 @@ public class ImageJigsawPuzzle
     public IList<JigsawTile> EdgeTiles => _matchesById.Where(o => o.Value.Count == 3).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
     public IList<JigsawTile> CenterTiles => _matchesById.Where(o => o.Value.Count == 4).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
 
-    private Matrix<char> ArrangeTilesAndPaintImage()
+    private Grid<char> ArrangeTilesAndPaintImage()
     {
         var cornerTilesLeft = CornerTiles.ToList();
-        var tileMatrix = new Matrix<long>();
+        var tileMatrix = new Grid<long>();
         var currentTile = cornerTilesLeft.First();
 
         tileMatrix.MoveTo(0, 0);
@@ -82,22 +82,22 @@ public class ImageJigsawPuzzle
             tile.RemoveBorder();
         }
 
-        var imageMatrix = new Matrix<char>();
+        var imageMatrix = new Grid<char>();
         for (var tileY = 0; tileY < tileMatrix.Height; tileY++)
         {
             for (var tileX = 0; tileX < tileMatrix.Width; tileX++)
             {
                 var tile = TilesById[tileMatrix.ReadValueAt(tileX, tileY)];
-                var tileOffsetX = tileX * tile.Matrix.Width;
-                var tileOffsetY = tileY * tile.Matrix.Height;
-                for (var localY = 0; localY < tile.Matrix.Height; localY++)
+                var tileOffsetX = tileX * tile.Grid.Width;
+                var tileOffsetY = tileY * tile.Grid.Height;
+                for (var localY = 0; localY < tile.Grid.Height; localY++)
                 {
-                    for (var localX = 0; localX < tile.Matrix.Width; localX++)
+                    for (var localX = 0; localX < tile.Grid.Width; localX++)
                     {
                         var x = localX + tileOffsetX;
                         var y = localY + tileOffsetY;
 
-                        imageMatrix.WriteValueAt(x, y, tile.Matrix.ReadValueAt(localX, localY));
+                        imageMatrix.WriteValueAt(x, y, tile.Grid.ReadValueAt(localX, localY));
                     }
                 }
             }

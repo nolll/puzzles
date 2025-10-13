@@ -10,20 +10,20 @@ public class SeatingSimulatorVisibleSeats : SeatingSimulator
 
     protected override IList<char> GetAdjacentSeats()
     {
-        var pos = Matrix.Address;
+        var pos = Grid.Address;
         var values = new List<char?>
         {
-            GetVisible(Matrix.TryMoveUp, pos),
+            GetVisible(Grid.TryMoveUp, pos),
             GetVisible(TryMoveUpRight, pos),
-            GetVisible(Matrix.TryMoveRight, pos),
+            GetVisible(Grid.TryMoveRight, pos),
             GetVisible(TryMoveRightDown, pos),
-            GetVisible(Matrix.TryMoveDown, pos),
+            GetVisible(Grid.TryMoveDown, pos),
             GetVisible(TryMoveDownLeft, pos),
-            GetVisible(Matrix.TryMoveLeft, pos),
+            GetVisible(Grid.TryMoveLeft, pos),
             GetVisible(TryMoveLeftUp, pos),
         };
 
-        Matrix.MoveTo(pos);
+        Grid.MoveTo(pos);
 
         return values.Where(o => o != null).Cast<char>().ToList();
     }
@@ -41,10 +41,10 @@ public class SeatingSimulatorVisibleSeats : SeatingSimulator
 
     private char? GetVisible(Func<int, bool> func, Coord pos)
     {
-        Matrix.MoveTo(pos);
+        Grid.MoveTo(pos);
         while (func(1))
         {
-            var v = Matrix.ReadValue();
+            var v = Grid.ReadValue();
             if (v != Floor)
                 return v;
         }
@@ -52,8 +52,8 @@ public class SeatingSimulatorVisibleSeats : SeatingSimulator
         return null;
     }
 
-    private bool TryMoveUpRight(int steps) => Matrix.TryMoveUp(steps) && Matrix.TryMoveRight(steps);
-    private bool TryMoveRightDown(int steps) => Matrix.TryMoveRight(steps) && Matrix.TryMoveDown(steps);
-    private bool TryMoveDownLeft(int steps) => Matrix.TryMoveDown(steps) && Matrix.TryMoveLeft(steps);
-    private bool TryMoveLeftUp(int steps) => Matrix.TryMoveLeft(steps) && Matrix.TryMoveUp(steps);
+    private bool TryMoveUpRight(int steps) => Grid.TryMoveUp(steps) && Grid.TryMoveRight(steps);
+    private bool TryMoveRightDown(int steps) => Grid.TryMoveRight(steps) && Grid.TryMoveDown(steps);
+    private bool TryMoveDownLeft(int steps) => Grid.TryMoveDown(steps) && Grid.TryMoveLeft(steps);
+    private bool TryMoveLeftUp(int steps) => Grid.TryMoveLeft(steps) && Grid.TryMoveUp(steps);
 }

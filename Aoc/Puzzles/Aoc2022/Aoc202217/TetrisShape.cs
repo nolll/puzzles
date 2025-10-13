@@ -18,23 +18,23 @@ public abstract class TetrisShape
         return deltas.Select(o => new Coord(baseCoord.X + o.X, baseCoord.Y + o.Y));
     }
 
-    protected static bool CheckCoords(Matrix<char> matrix, Coord bottomLeft, IEnumerable<Coord> deltas)
+    protected static bool CheckCoords(Grid<char> grid, Coord bottomLeft, IEnumerable<Coord> deltas)
     {
         var coords = deltas.Select(o => new Coord(bottomLeft.X + o.X, bottomLeft.Y + o.Y));
-        return coords.All(o => !matrix.IsOutOfRange(o) && matrix.ReadValueAt(o) == '.');
+        return coords.All(o => !grid.IsOutOfRange(o) && grid.ReadValueAt(o) == '.');
     }
 
-    public abstract bool CanMoveLeft(Matrix<char> matrix, Coord bottomLeft);
-    public abstract bool CanMoveRight(Matrix<char> matrix, Coord bottomLeft);
-    public abstract bool CanMoveDown(Matrix<char> matrix, Coord bottomLeft);
-    public abstract void Paint(Matrix<char> matrix, Coord bottomLeft);
+    public abstract bool CanMoveLeft(Grid<char> grid, Coord bottomLeft);
+    public abstract bool CanMoveRight(Grid<char> grid, Coord bottomLeft);
+    public abstract bool CanMoveDown(Grid<char> grid, Coord bottomLeft);
+    public abstract void Paint(Grid<char> grid, Coord bottomLeft);
 
-    protected static void Paint(Matrix<char> matrix, Coord bottomLeft, IEnumerable<Coord> deltas)
+    protected static void Paint(Grid<char> grid, Coord bottomLeft, IEnumerable<Coord> deltas)
     {
         var coords = TranslateCoords(bottomLeft, deltas);
         foreach (var coord in coords)
         {
-            matrix.WriteValueAt(coord, '#');
+            grid.WriteValueAt(coord, '#');
         }
     }
 

@@ -73,14 +73,14 @@ public class RopeBridge
         };
     }
 
-    private MatrixDirection GetDir(string part)
+    private GridDirection GetDir(string part)
     {
         return part switch
         {
-            "U" => MatrixDirection.Up,
-            "R" => MatrixDirection.Right,
-            "D" => MatrixDirection.Down,
-            _ => MatrixDirection.Left
+            "U" => GridDirection.Up,
+            "R" => GridDirection.Right,
+            "D" => GridDirection.Down,
+            _ => GridDirection.Left
         };
     }
 }

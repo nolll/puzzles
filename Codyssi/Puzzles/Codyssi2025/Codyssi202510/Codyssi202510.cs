@@ -52,7 +52,7 @@ public class Codyssi202510 : CodyssiPuzzle
     
     public int RunPart2And3(string input, Coord? target = null)
     {
-        var grid = MatrixBuilder.BuildIntMatrixFromNonSeparated(input.Replace(" ", ""));
+        var grid = GridBuilder.BuildIntGridFromNonSeparated(input.Replace(" ", ""));
         var edges = new List<GraphEdge>();
         var queue = new Queue<Coord>();
         var start = new Coord(0, 0);

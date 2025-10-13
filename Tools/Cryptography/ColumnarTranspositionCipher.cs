@@ -20,8 +20,8 @@ public static class ColumnarTranspositionCipher
             rowList.Add(s.Substring(i, keywordLength));
         }
 
-        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(string.Join(LineBreaks.Single, rowList));
-        var encryptedMatrix = new Matrix<char>(matrix.Width, matrix.Height, ' ');
+        var matrix = GridBuilder.BuildCharGridWithoutTrim(string.Join(LineBreaks.Single, rowList));
+        var encryptedMatrix = new Grid<char>(matrix.Width, matrix.Height, ' ');
         var pickingOrder = GetEncryptSelectionOrder(keyword);
 
         for (var y = matrix.YMin; y <= matrix.YMax; y++)
@@ -45,9 +45,9 @@ public static class ColumnarTranspositionCipher
             rowList.Add(input.Substring(i, splitLength));
         }
 
-        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(string.Join(LineBreaks.Single, rowList))
+        var matrix = GridBuilder.BuildCharGridWithoutTrim(string.Join(LineBreaks.Single, rowList))
             .Transpose();
-        var decryptedMatrix = new Matrix<char>(matrix.Width, matrix.Height, ' ');
+        var decryptedMatrix = new Grid<char>(matrix.Width, matrix.Height, ' ');
         var pickingOrder = GetDecryptSelectionOrder(keyword);
 
         for (var y = matrix.YMin; y <= matrix.YMax; y++)

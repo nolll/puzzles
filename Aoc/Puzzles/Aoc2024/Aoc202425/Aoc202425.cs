@@ -14,7 +14,7 @@ public class Aoc202425 : AocPuzzle
         var keys = new List<int[]>();
         foreach (var part in parts)
         {
-            var matrix = MatrixBuilder.BuildCharMatrix(part);
+            var matrix = GridBuilder.BuildCharGrid(part);
             int[] a = [0, 0, 0, 0, 0];
             for (var x = 0; x < matrix.Width; x++)
             {
@@ -39,11 +39,11 @@ public class Aoc202425 : AocPuzzle
 
     private static bool IsMatch(int[] l, int[] k) => !l.Where((t, i) => k[i] + t > 5).Any();
 
-    private static bool IsLock(Matrix<char> matrix)
+    private static bool IsLock(Grid<char> grid)
     {
-        for (var x = 0; x < matrix.Width; x++)
+        for (var x = 0; x < grid.Width; x++)
         {
-            if (matrix.ReadValueAt(x, 0) == '.')
+            if (grid.ReadValueAt(x, 0) == '.')
                 return false;
         }
         return true;

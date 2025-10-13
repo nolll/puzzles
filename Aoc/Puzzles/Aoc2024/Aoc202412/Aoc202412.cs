@@ -10,7 +10,7 @@ public class Aoc202412 : AocPuzzle
 {
     public PuzzleResult Part1(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var totalPrice = 0;
         
         while (true)
@@ -58,7 +58,7 @@ public class Aoc202412 : AocPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input, '.');
+        var matrix = GridBuilder.BuildCharGrid(input, '.');
         var totalPrice = 0;
         
         while (true)
@@ -82,7 +82,7 @@ public class Aoc202412 : AocPuzzle
                     queue.Enqueue(neighbor);
             }
             
-            var plantMatrix = new Matrix<char>(matrix.Width + 1, matrix.Height + 1, '.');
+            var plantMatrix = new Grid<char>(matrix.Width + 1, matrix.Height + 1, '.');
             foreach (var c in set) 
                 plantMatrix.WriteValueAt(c, v);
 

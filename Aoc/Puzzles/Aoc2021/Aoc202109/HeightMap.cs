@@ -77,9 +77,9 @@ public class HeightMap
             .Aggregate(1, (product, basin) => product * basin);
     }
 
-    private static Matrix<int> CreateMatrix(string input)
+    private static Grid<int> CreateMatrix(string input)
     {
-        var matrix = new Matrix<int>();
+        var matrix = new Grid<int>();
         var lines = StringReader.ReadLines(input);
 
         var y = 0;

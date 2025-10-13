@@ -26,7 +26,7 @@ public class Aquaq28 : AquaqPuzzle
             .Select(o => o.Substring(1, o.Length - 2));
         var matrixInput = string.Join(LineBreaks.Single, lines);
 
-        var matrix = MatrixBuilder.BuildCharMatrixWithoutTrim(matrixInput, Empty);
+        var matrix = GridBuilder.BuildCharGridWithoutTrim(matrixInput, Empty);
 
         var encrypted = string.Empty;
         foreach (var c in word)
@@ -69,6 +69,6 @@ public class Aquaq28 : AquaqPuzzle
         return encrypted;
     }
 
-    private static bool IsMovingHorizontally(Matrix<char> matrix) 
-        => matrix.Direction.Equals(MatrixDirection.Right) || matrix.Direction.Equals(MatrixDirection.Left);
+    private static bool IsMovingHorizontally(Grid<char> grid) 
+        => grid.Direction.Equals(GridDirection.Right) || grid.Direction.Equals(GridDirection.Left);
 }

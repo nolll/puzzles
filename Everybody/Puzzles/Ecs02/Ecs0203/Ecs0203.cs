@@ -59,7 +59,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
     {
         var (diceInput, matrixInput) = input.Split(LineBreaks.Double);
         var dice = ParseDice(diceInput);
-        var matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(matrixInput);
+        var matrix = GridBuilder.BuildIntGridFromNonSeparated(matrixInput);
         var totalSet = new HashSet<Coord>();
         
         foreach (var die in dice)

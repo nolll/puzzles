@@ -7,7 +7,7 @@ public class ReversedLTests
     [Fact]
     public void CanMoveRight()
     {
-        var matrix = new Matrix<char>(5, 5, '.');
+        var matrix = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(1, 3);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);
@@ -21,7 +21,7 @@ public class ReversedLTests
     [Fact]
     public void CanNotMoveRight()
     {
-        var matrix = new Matrix<char>(5, 5, '.');
+        var matrix = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(2, 3);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);
@@ -35,7 +35,7 @@ public class ReversedLTests
     [Fact]
     public void CanMoveLeft()
     {
-        var matrix = new Matrix<char>(5, 5, '.');
+        var matrix = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(1, 3);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);
@@ -49,7 +49,7 @@ public class ReversedLTests
     [Fact]
     public void CanNotMoveLeft()
     {
-        var matrix = new Matrix<char>(5, 5, '.');
+        var matrix = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(0, 3);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);
@@ -63,7 +63,7 @@ public class ReversedLTests
     [Fact]
     public void CanNotMoveLeftBlocked()
     {
-        var matrix = new Matrix<char>(5, 5, '.');
+        var matrix = new Grid<char>(5, 5, '.');
         matrix.WriteValueAt(2, 1, 'o');
         var bottomLeft = new Coord(1, 3);
         var shape = new ReversedLShape();
@@ -78,7 +78,7 @@ public class ReversedLTests
     [Fact]
     public void CanMoveDown()
     {
-        var matrix = new Matrix<char>(5, 5, '.');
+        var matrix = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(1, 3);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);
@@ -92,7 +92,7 @@ public class ReversedLTests
     [Fact]
     public void CanNotMoveDown()
     {
-        var matrix = new Matrix<char>(5, 5, '.');
+        var matrix = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(1, 4);
         var shape = new ReversedLShape();
         shape.Paint(matrix, bottomLeft);

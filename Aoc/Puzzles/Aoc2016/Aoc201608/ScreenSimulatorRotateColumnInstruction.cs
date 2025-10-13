@@ -4,13 +4,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201608;
 
 public class ScreenSimulatorRotateColumnInstruction : IScreenSimulatorInstruction
 {
-    private readonly Matrix<char> _matrix;
+    private readonly Grid<char> _grid;
     private readonly int _column;
     private readonly int _steps;
 
-    public ScreenSimulatorRotateColumnInstruction(Matrix<char> matrix, int column, int steps)
+    public ScreenSimulatorRotateColumnInstruction(Grid<char> grid, int column, int steps)
     {
-        _matrix = matrix;
+        _grid = grid;
         _column = column;
         _steps = steps;
     }
@@ -18,22 +18,22 @@ public class ScreenSimulatorRotateColumnInstruction : IScreenSimulatorInstructio
     public void Execute()
     {
         var x = _column;
-        var newCol = new char[_matrix.Height];
-        for (var y = 0; y < _matrix.Height; y++)
+        var newCol = new char[_grid.Height];
+        for (var y = 0; y < _grid.Height; y++)
         {
             var newy = y + _steps;
             if (newy < 0)
-                newy += _matrix.Height;
+                newy += _grid.Height;
 
-            if (newy >= _matrix.Height)
-                newy -= _matrix.Height;
+            if (newy >= _grid.Height)
+                newy -= _grid.Height;
 
-            newCol[newy] = _matrix.ReadValueAt(x, y);
+            newCol[newy] = _grid.ReadValueAt(x, y);
         }
 
-        for (var y = 0; y < _matrix.Height; y++)
+        for (var y = 0; y < _grid.Height; y++)
         {
-            _matrix.WriteValueAt(x, y, newCol[y]);
+            _grid.WriteValueAt(x, y, newCol[y]);
         }
     }
 }

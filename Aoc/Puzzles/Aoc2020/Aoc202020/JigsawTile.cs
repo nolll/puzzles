@@ -7,12 +7,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202020;
 public class JigsawTile
 {
     public long Id { get; }
-    public Matrix<char> Matrix;
+    public Grid<char> Grid;
 
-    private JigsawTile(long id, Matrix<char> matrix)
+    private JigsawTile(long id, Grid<char> grid)
     {
         Id = id;
-        Matrix = matrix;
+        Grid = grid;
     }
 
     public bool HasMatchingEdge(JigsawTile otherTile) => 
@@ -24,9 +24,9 @@ public class JigsawTile
         return Edges.Any(o => o.Value == edge || o.Value == reverseEdge);
     }
 
-    public void RotateRight() => Matrix = Matrix.RotateRight();
-    public void FlipVertical() => Matrix = Matrix.FlipVertical();
-    public void FlipHorizontal() => Matrix = Matrix.FlipHorizontal();
+    public void RotateRight() => Grid = Grid.RotateRight();
+    public void FlipVertical() => Grid = Grid.FlipVertical();
+    public void FlipHorizontal() => Grid = Grid.FlipHorizontal();
 
     public Dictionary<string, string> Edges
     {
@@ -37,23 +37,23 @@ public class JigsawTile
             var bottom = new StringBuilder();
             var left = new StringBuilder();
 
-            var width = Matrix.Width;
-            var height = Matrix.Height;
+            var width = Grid.Width;
+            var height = Grid.Height;
 
             const int yTop = 0;
             var yBottom = height - 1;
             for (var x = 0; x < width; x++)
             {
-                top.Append(Matrix.ReadValueAt(x, yTop));
-                bottom.Append(Matrix.ReadValueAt(x, yBottom));
+                top.Append(Grid.ReadValueAt(x, yTop));
+                bottom.Append(Grid.ReadValueAt(x, yBottom));
             }
 
             var xRight = width - 1;
             const int xLeft = 0;
             for (var y = 0; y < height; y++)
             {
-                right.Append(Matrix.ReadValueAt(xRight, y));
-                left.Append(Matrix.ReadValueAt(xLeft, y));
+                right.Append(Grid.ReadValueAt(xRight, y));
+                left.Append(Grid.ReadValueAt(xLeft, y));
             }
 
             return new Dictionary<string, string>
@@ -70,12 +70,12 @@ public class JigsawTile
     {
         var parts = s.Split(':');
         var id = long.Parse(parts[0].Split(' ')[1]);
-        var matrix = MatrixBuilder.BuildCharMatrix(parts[1].Trim());
+        var matrix = GridBuilder.BuildCharGrid(parts[1].Trim());
         return new JigsawTile(id, matrix);
     }
 
     public void RemoveBorder()
     {
-        Matrix = Matrix.Slice(new Coord(Matrix.XMin + 1, Matrix.YMin + 1), new Coord(Matrix.XMax - 1, Matrix.YMax - 1));
+        Grid = Grid.Slice(new Coord(Grid.XMin + 1, Grid.YMin + 1), new Coord(Grid.XMax - 1, Grid.YMax - 1));
     }
 }

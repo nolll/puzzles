@@ -7,9 +7,9 @@ public class MineCart
     private MineCartTurn _nextTurn;
         
     public Coord Coords { get; private set; }
-    public MatrixDirection Direction { get; private set; }
+    public GridDirection Direction { get; private set; }
 
-    public MineCart(Coord coords, MatrixDirection direction)
+    public MineCart(Coord coords, GridDirection direction)
     {
         Coords = coords;
         Direction = direction;
@@ -49,7 +49,7 @@ public class MineCart
         return MineCartTurn.Left;
     }
 
-    private MatrixDirection GetDirection(in char c)
+    private GridDirection GetDirection(in char c)
     {
         if (c == CharConstants.Backslash)
             return GetDirectionForBackslash();
@@ -60,42 +60,42 @@ public class MineCart
         return GetDirectionForPlus();
     }
 
-    private MatrixDirection GetDirectionForBackslash()
+    private GridDirection GetDirectionForBackslash()
     {
-        if (Direction.Equals(MatrixDirection.Up))
-            return MatrixDirection.Left;
-        if (Direction.Equals(MatrixDirection.Right))
-            return MatrixDirection.Down;
-        if (Direction.Equals(MatrixDirection.Down))
-            return MatrixDirection.Right;
-        return MatrixDirection.Up;
+        if (Direction.Equals(GridDirection.Up))
+            return GridDirection.Left;
+        if (Direction.Equals(GridDirection.Right))
+            return GridDirection.Down;
+        if (Direction.Equals(GridDirection.Down))
+            return GridDirection.Right;
+        return GridDirection.Up;
     }
 
-    private MatrixDirection GetDirectionForSlash()
+    private GridDirection GetDirectionForSlash()
     {
-        if (Direction.Equals(MatrixDirection.Up))
-            return MatrixDirection.Right;
-        if (Direction.Equals(MatrixDirection.Right))
-            return MatrixDirection.Up;
-        if (Direction.Equals(MatrixDirection.Down))
-            return MatrixDirection.Left;
-        return MatrixDirection.Down;
+        if (Direction.Equals(GridDirection.Up))
+            return GridDirection.Right;
+        if (Direction.Equals(GridDirection.Right))
+            return GridDirection.Up;
+        if (Direction.Equals(GridDirection.Down))
+            return GridDirection.Left;
+        return GridDirection.Down;
     }
 
-    private MatrixDirection GetDirectionForPlus()
+    private GridDirection GetDirectionForPlus()
     {
         if (_nextTurn == MineCartTurn.Straight)
             return Direction;
 
-        if (Direction.Equals(MatrixDirection.Up))
-            return _nextTurn == MineCartTurn.Left ? MatrixDirection.Left : MatrixDirection.Right;
+        if (Direction.Equals(GridDirection.Up))
+            return _nextTurn == MineCartTurn.Left ? GridDirection.Left : GridDirection.Right;
 
-        if (Direction.Equals(MatrixDirection.Right))
-            return _nextTurn == MineCartTurn.Left ? MatrixDirection.Up : MatrixDirection.Down;
+        if (Direction.Equals(GridDirection.Right))
+            return _nextTurn == MineCartTurn.Left ? GridDirection.Up : GridDirection.Down;
 
-        if (Direction.Equals(MatrixDirection.Down))
-            return _nextTurn == MineCartTurn.Left ? MatrixDirection.Right : MatrixDirection.Left;
+        if (Direction.Equals(GridDirection.Down))
+            return _nextTurn == MineCartTurn.Left ? GridDirection.Right : GridDirection.Left;
 
-        return _nextTurn == MineCartTurn.Left ? MatrixDirection.Down : MatrixDirection.Up;
+        return _nextTurn == MineCartTurn.Left ? GridDirection.Down : GridDirection.Up;
     }
 }

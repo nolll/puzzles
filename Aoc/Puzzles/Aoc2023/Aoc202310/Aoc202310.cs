@@ -14,7 +14,7 @@ public class Aoc202310 : AocPuzzle
 
     public static int FarthestPoint(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var startPoint = matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
         var startPointChar = GetStartPointChar(matrix, startPoint);
         matrix.WriteValueAt(startPoint, startPointChar);
@@ -23,13 +23,13 @@ public class Aoc202310 : AocPuzzle
         return loop.Count / 2;
     }
 
-    private static char GetStartPointChar(Matrix<char> matrix, Coord startPoint)
+    private static char GetStartPointChar(Grid<char> grid, Coord startPoint)
     {
         var (x, y) = startPoint;
-        var top = matrix.ReadValueAt(new Coord(x, y - 1));
-        var right = matrix.ReadValueAt(new Coord(x + 1, y));
-        var bottom = matrix.ReadValueAt(new Coord(x, y + 1));
-        var left = matrix.ReadValueAt(new Coord(x - 1, y));
+        var top = grid.ReadValueAt(new Coord(x, y - 1));
+        var right = grid.ReadValueAt(new Coord(x + 1, y));
+        var bottom = grid.ReadValueAt(new Coord(x, y + 1));
+        var left = grid.ReadValueAt(new Coord(x - 1, y));
 
         var enterFromTop = top is 'F' or '|' or '7';
         var enterFromRight = right is 'J' or '-' or '7';
@@ -51,7 +51,7 @@ public class Aoc202310 : AocPuzzle
 
     public static int EnclosedTileCount(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         var startPoint = matrix.Coords.First(o => matrix.ReadValueAt(o) == 'S');
         var startPointChar = GetStartPointChar(matrix, startPoint);
         matrix.WriteValueAt(startPoint, startPointChar);
@@ -89,7 +89,7 @@ public class Aoc202310 : AocPuzzle
         return otherCoords.Count(o => enlargedMatrix.ReadValueAt(o.X * 2 + 1, o.Y * 2 + 1) == '.');
     }
 
-    private static List<Coord> GetLoop(Matrix<char> matrix, Coord startPoint)
+    private static List<Coord> GetLoop(Grid<char> grid, Coord startPoint)
     {
         var currentPoint = startPoint;
 
@@ -98,7 +98,7 @@ public class Aoc202310 : AocPuzzle
         var loop = new List<Coord>();
         while (!seen.Contains(currentPoint) && stepCount < 100000)
         {
-            var connections = FindConnections(matrix, currentPoint);
+            var connections = FindConnections(grid, currentPoint);
             seen.Add(currentPoint);
             loop.Add(currentPoint);
             var nextPoint = connections.FirstOrDefault(o => !seen.Contains(o));
@@ -111,9 +111,9 @@ public class Aoc202310 : AocPuzzle
         return loop;
     }
 
-    private static IEnumerable<Coord> FindConnections(Matrix<char> matrix, Coord currentPoint)
+    private static IEnumerable<Coord> FindConnections(Grid<char> grid, Coord currentPoint)
     {
-        var currentPipePart = matrix.ReadValueAt(currentPoint);
+        var currentPipePart = grid.ReadValueAt(currentPoint);
 
         var (x, y) = currentPoint;
         var top = new Coord(x, y - 1);
@@ -133,14 +133,14 @@ public class Aoc202310 : AocPuzzle
         };
     }
 
-    public static Matrix<char> EnlargeMatrix(Matrix<char> matrix)
+    public static Grid<char> EnlargeMatrix(Grid<char> grid)
     {
-        var enlarged = new Matrix<char>(matrix.Width * 2 + 2, matrix.Height * 2 + 2, '.');
-        foreach (var coord in matrix.Coords)
+        var enlarged = new Grid<char>(grid.Width * 2 + 2, grid.Height * 2 + 2, '.');
+        foreach (var coord in grid.Coords)
         {
             var x = coord.X * 2 + 1;
             var y = coord.Y * 2 + 1;
-            var v = matrix.ReadValueAt(coord);
+            var v = grid.ReadValueAt(coord);
             var downValue = v is '|' or 'F' or '7'
                 ? '|'
                 : '.';

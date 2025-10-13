@@ -9,14 +9,14 @@ public class TrenchMap
     {
         var groups = input.Split(LineBreaks.Double);
         var algorithm = groups[0].Trim();
-        var inputImage = MatrixBuilder.BuildCharMatrix(groups[1].Trim(), '.');
+        var inputImage = GridBuilder.BuildCharGrid(groups[1].Trim(), '.');
         inputImage.ExtendAllDirections(5);
-        Matrix<char> outputImage = new Matrix<char>('.');
+        Grid<char> outputImage = new Grid<char>('.');
         
         for (var i = 0; i < steps; i++)
         {
             var defaultValue = inputImage.ReadValueAt(inputImage.XMin, inputImage.YMin);
-            var newInputImage = new Matrix<char>(inputImage.Width, inputImage.Height, defaultValue);
+            var newInputImage = new Grid<char>(inputImage.Width, inputImage.Height, defaultValue);
             for (var y = inputImage.YMin; y <= inputImage.YMax; y++)
             {
                 for (var x = inputImage.XMin; x <= inputImage.XMax; x++)
@@ -28,7 +28,7 @@ public class TrenchMap
 
             inputImage = newInputImage;
             inputImage.ExtendAllDirections(3);
-            outputImage = new Matrix<char>(1, 1, defaultValue);
+            outputImage = new Grid<char>(1, 1, defaultValue);
             
             for (var y = inputImage.YMin + 1; y <= inputImage.YMax - 1; y++)
             {

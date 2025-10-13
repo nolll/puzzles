@@ -8,23 +8,23 @@ public class ChitonRisk
 
     public int FindRiskLevelForSmallCave(string input)
     {
-        var matrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
+        var matrix = GridBuilder.BuildIntGridFromNonSeparated(input);
         return FindRiskLevel(matrix);
     }
 
     public int FindRiskLevelForLargeCave(string input)
     {
-        var smallMatrix = MatrixBuilder.BuildIntMatrixFromNonSeparated(input);
+        var smallMatrix = GridBuilder.BuildIntGridFromNonSeparated(input);
         var largeMatrix = BuildLargeMatrix(smallMatrix);
         return FindRiskLevel(largeMatrix);
     }
 
-    private Matrix<int> BuildLargeMatrix(Matrix<int> smallMatrix)
+    private Grid<int> BuildLargeMatrix(Grid<int> smallGrid)
     {
         const int multiplier = 5;
-        var largeMatrix = new Matrix<int>(smallMatrix.Width * multiplier, smallMatrix.Height * multiplier);
-        var width = smallMatrix.Width;
-        var height = smallMatrix.Height;
+        var largeMatrix = new Grid<int>(smallGrid.Width * multiplier, smallGrid.Height * multiplier);
+        var width = smallGrid.Width;
+        var height = smallGrid.Height;
         for (var Y = 0; Y < multiplier; Y++) 
         {
             for (var X = 0; X < multiplier; X++)
@@ -33,7 +33,7 @@ public class ChitonRisk
                 {
                     for (var x = 0; x < width; x++)
                     {
-                        var vSmall = smallMatrix.ReadValueAt(x, y);
+                        var vSmall = smallGrid.ReadValueAt(x, y);
                         var vLarge = X + Y + vSmall;
                         while (vLarge > 9)
                             vLarge -= 9;
@@ -48,16 +48,16 @@ public class ChitonRisk
         return largeMatrix;
     }
 
-    private int FindRiskLevel(Matrix<int> matrix)
+    private int FindRiskLevel(Grid<int> grid)
     {
         var from = new Coord(0, 0);
-        var to = new Coord(matrix.Width - 1, matrix.Height - 1);
-        var path = GetBestPathTo(matrix, from, to);
+        var to = new Coord(grid.Width - 1, grid.Height - 1);
+        var path = GetBestPathTo(grid, from, to);
 
         var sum = 0;
         foreach (var coord in path)
         {
-            sum += matrix.ReadValueAt(coord);
+            sum += grid.ReadValueAt(coord);
         }
 
         //PrintPath(matrix, path);
@@ -65,9 +65,9 @@ public class ChitonRisk
         return sum;
     }
 
-    private void PrintPath(Matrix<int> matrix, IList<Coord> path)
+    private void PrintPath(Grid<int> grid, IList<Coord> path)
     {
-        var pathMatrix = new Matrix<char>(matrix.Width, matrix.Height, defaultValue: '.');
+        var pathMatrix = new Grid<char>(grid.Width, grid.Height, defaultValue: '.');
         foreach (var coord in path)
         {
             pathMatrix.WriteValueAt(coord, '#');
@@ -76,22 +76,22 @@ public class ChitonRisk
         Console.WriteLine(pathMatrix.Print());
     }
 
-    private Matrix<int> GetCoordCounts(Matrix<int> matrix, Coord from, Coord to)
+    private Grid<int> GetCoordCounts(Grid<int> grid, Coord from, Coord to)
     {
         var queue = new Queue<Coord>();
         queue.Enqueue(to);
-        var seenMatrix = new Matrix<int>(matrix.Width, matrix.Height, int.MaxValue);
-        seenMatrix.WriteValueAt(to, matrix.ReadValueAt(to));
+        var seenMatrix = new Grid<int>(grid.Width, grid.Height, int.MaxValue);
+        seenMatrix.WriteValueAt(to, grid.ReadValueAt(to));
         while (queue.Any() && seenMatrix.ReadValueAt(from) == int.MaxValue)
         {
             var next = queue.Dequeue();
             var currentScore = seenMatrix.ReadValueAt(next.X, next.Y);
-            var adjacentCoords = GetAdjacentCoords(matrix, new Coord(next.X, next.Y))
-                .OrderBy(matrix.ReadValueAt);
+            var adjacentCoords = GetAdjacentCoords(grid, new Coord(next.X, next.Y))
+                .OrderBy(grid.ReadValueAt);
 
             foreach (var adjacentCoord in adjacentCoords)
             {
-                var newScore = currentScore + matrix.ReadValueAt(adjacentCoord);
+                var newScore = currentScore + grid.ReadValueAt(adjacentCoord);
                 var existing = seenMatrix.ReadValueAt(adjacentCoord);
                 if (newScore < existing)
                 {
@@ -104,9 +104,9 @@ public class ChitonRisk
         return seenMatrix;
     }
 
-    private IList<Coord> GetBestPathTo(Matrix<int> matrix, Coord from, Coord to)
+    private IList<Coord> GetBestPathTo(Grid<int> grid, Coord from, Coord to)
     {
-        var pathMatrix = GetCoordCounts(matrix, from, to);
+        var pathMatrix = GetCoordCounts(grid, from, to);
         
         var path = new List<Coord>();
         var pathSet = new HashSet<Coord>();
@@ -131,13 +131,13 @@ public class ChitonRisk
         return path;
     }
 
-    private IList<Coord> GetAdjacentCoords<T>(Matrix<T> matrix, Coord address) where T : struct
+    private IList<Coord> GetAdjacentCoords<T>(Grid<T> grid, Coord address) where T : struct
     {
         if (_neighborCache.TryGetValue(address, out var coords))
             return coords;
 
-        matrix.MoveTo(address);
-        coords = matrix.OrthogonalAdjacentCoords;
+        grid.MoveTo(address);
+        coords = grid.OrthogonalAdjacentCoords;
         _neighborCache.Add(address, coords);
         return coords;
     }

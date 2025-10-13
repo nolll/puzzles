@@ -19,7 +19,7 @@ public class Euler011 : EulerPuzzle
         return sumFinder.FindLargestSum();
     }
 
-    private class GridProductFinder(Matrix<int> matrix)
+    private class GridProductFinder(Grid<int> grid)
     {
         private int _x;
         private int _y;
@@ -39,9 +39,9 @@ public class Euler011 : EulerPuzzle
             };
                 
             var largestSum = 0;
-            for (_y = 0; _y < matrix.Height; _y++)
+            for (_y = 0; _y < grid.Height; _y++)
             {
-                for (_x = 0; _x < matrix.Width; _x++)
+                for (_x = 0; _x < grid.Width; _x++)
                 {
                     foreach (var (dx, dy) in deltas)
                     {
@@ -66,18 +66,18 @@ public class Euler011 : EulerPuzzle
                 if (!IsInMatrix(x, y))
                     return 0;
 
-                sum *= matrix.ReadValueAt(new Coord(x, y));
+                sum *= grid.ReadValueAt(new Coord(x, y));
             }
 
             return sum;
         }
 
-        private bool IsInMatrix(int x, int y) => x >= 0 && y >= 0 && y < matrix.Height && x < matrix.Width;
+        private bool IsInMatrix(int x, int y) => x >= 0 && y >= 0 && y < grid.Height && x < grid.Width;
     }
 
-    private static Matrix<int> BuildMatrix(string input, char defaultValue = default)
+    private static Grid<int> BuildMatrix(string input, char defaultValue = default)
     {
-        var matrix = new Matrix<int>(1, 1, defaultValue);
+        var matrix = new Grid<int>(1, 1, defaultValue);
         var rows = input.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

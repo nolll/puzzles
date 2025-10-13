@@ -11,16 +11,16 @@ public enum CaveTool
 
 public static class CavePathFinder
 {
-    public static int StepCountTo(Matrix<CaveRegion> matrix, Coord from, Coord to)
+    public static int StepCountTo(Grid<CaveRegion> grid, Coord from, Coord to)
     {
-        var coordCounts = GetCoordCounts(matrix, from, to);
+        var coordCounts = GetCoordCounts(grid, from, to);
         return coordCounts
             .Where(o => o.X == from.X && o.Y == from.Y)
             .Select(o => o.CountWhenSwitchedToTorch)
             .MinBy(o => o);
     }
 
-    private static IList<CaveCoordCount> GetCoordCounts(Matrix<CaveRegion> matrix, Coord from, Coord to)
+    private static IList<CaveCoordCount> GetCoordCounts(Grid<CaveRegion> grid, Coord from, Coord to)
     {
         var seen = new Dictionary<(int x, int y, CaveTool tool), int>();
         var queue = new List<CaveCoordCount>
@@ -38,11 +38,11 @@ public static class CavePathFinder
 
             if (!isStart)
             {
-                var region = matrix.ReadValueAt(currentAddress);
-                var adjacentCoords = matrix.OrthogonalAdjacentCoordsTo(currentAddress);
+                var region = grid.ReadValueAt(currentAddress);
+                var adjacentCoords = grid.OrthogonalAdjacentCoordsTo(currentAddress);
                 foreach (var next in adjacentCoords)
                 {
-                    var targetRegion = matrix.ReadValueAt(next);
+                    var targetRegion = grid.ReadValueAt(next);
                     var targetTool = GetTool(region, targetRegion, current.Tool);
                     var visited = seen.TryGetValue((next.X, next.Y, targetTool), out var existingCount);
                     var cost = current.Tool == targetTool ? 1 : 8;

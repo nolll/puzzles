@@ -9,7 +9,7 @@ public class SeatingSimulatorAdjacentSeats : SeatingSimulator
 
     protected override IList<char> GetAdjacentSeats()
     {
-        return Matrix.AllAdjacentValues;
+        return Grid.AllAdjacentValues;
     }
 
     protected override char GetSeatStatus(char currentValue, int neighborCount)

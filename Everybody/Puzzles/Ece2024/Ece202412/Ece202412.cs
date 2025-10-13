@@ -22,7 +22,7 @@ public class Ece202412 : EverybodyEventPuzzle
 
     private int Part1And2(string input)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(input, '.');
+        var matrix = GridBuilder.BuildCharGrid(input, '.');
         matrix.ExtendUp(15);
         matrix.ExtendRight(20);
 

@@ -8,14 +8,14 @@ public class AnimatedGif
     private const char LightOff = '.';
 
     private readonly bool _isCornersLit;
-    private Matrix<char> _matrix;
+    private Grid<char> _grid;
 
-    public int LightCount => _matrix.Values.Count(o => o == LightOn);
+    public int LightCount => _grid.Values.Count(o => o == LightOn);
 
     public AnimatedGif(in string input, in bool isCornersLit = false)
     {
         _isCornersLit = isCornersLit;
-        _matrix = MatrixBuilder.BuildCharMatrix(input);
+        _grid = GridBuilder.BuildCharGrid(input);
         if (_isCornersLit)
             TurnOnCornerLights();
     }
@@ -24,15 +24,15 @@ public class AnimatedGif
     {
         for (var i = 0; i < steps; i++)
         {
-            var newMatrix = new Matrix<char>();
+            var newMatrix = new Grid<char>();
 
-            foreach (var coord in _matrix.Coords)
+            foreach (var coord in _grid.Coords)
             {
-                var adjacentValues = _matrix.AllAdjacentValuesTo(coord);
-                newMatrix.WriteValueAt(coord, GetNewState(_matrix.ReadValueAt(coord), adjacentValues.Count(o => o == LightOn)));
+                var adjacentValues = _grid.AllAdjacentValuesTo(coord);
+                newMatrix.WriteValueAt(coord, GetNewState(_grid.ReadValueAt(coord), adjacentValues.Count(o => o == LightOn)));
             }
             
-            _matrix = newMatrix;
+            _grid = newMatrix;
             if (_isCornersLit)
                 TurnOnCornerLights();
         }
@@ -40,13 +40,13 @@ public class AnimatedGif
 
     private void TurnOnCornerLights()
     {
-        TurnOnLight(_matrix.XMin, _matrix.YMin);
-        TurnOnLight(_matrix.XMax, _matrix.YMin);
-        TurnOnLight(_matrix.XMax, _matrix.YMax);
-        TurnOnLight(_matrix.XMin, _matrix.YMax);
+        TurnOnLight(_grid.XMin, _grid.YMin);
+        TurnOnLight(_grid.XMax, _grid.YMin);
+        TurnOnLight(_grid.XMax, _grid.YMax);
+        TurnOnLight(_grid.XMin, _grid.YMax);
     }
 
-    private void TurnOnLight(int x, int y) => _matrix.WriteValueAt(x, y, LightOn);
+    private void TurnOnLight(int x, int y) => _grid.WriteValueAt(x, y, LightOn);
 
     private static char GetNewState(in char value, in int adjacentOnCount)
     {

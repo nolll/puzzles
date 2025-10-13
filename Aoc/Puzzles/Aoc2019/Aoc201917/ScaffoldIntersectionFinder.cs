@@ -4,11 +4,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201917;
 
 public class ScaffoldIntersectionFinder
 {
-    private readonly Matrix<char> _matrix;
+    private readonly Grid<char> _grid;
 
     public ScaffoldIntersectionFinder(string input)
     {
-        _matrix = BuildMatrix(input);
+        _grid = BuildMatrix(input);
     }
 
     public int GetSumOfAlignmentParameters()
@@ -20,14 +20,14 @@ public class ScaffoldIntersectionFinder
 
     private IEnumerable<Coord> GetIntersections()
     {
-        return _matrix.Coords.Where(coord => IsIntersection(coord.X, coord.Y)).ToList();
+        return _grid.Coords.Where(coord => IsIntersection(coord.X, coord.Y)).ToList();
     }
 
     private char? GetValueAt(Coord coord)
     {
-        if (_matrix.IsOutOfRange(coord))
+        if (_grid.IsOutOfRange(coord))
             return null;
-        return _matrix.ReadValueAt(coord);
+        return _grid.ReadValueAt(coord);
     }
 
     private bool IsIntersection(int x, int y)
@@ -55,9 +55,9 @@ public class ScaffoldIntersectionFinder
         return true;
     }
 
-    private Matrix<char> BuildMatrix(string map)
+    private Grid<char> BuildMatrix(string map)
     {
-        var matrix = new Matrix<char>();
+        var matrix = new Grid<char>();
         var rows = map.Trim().Split('\n');
         var y = 0;
         foreach (var row in rows)

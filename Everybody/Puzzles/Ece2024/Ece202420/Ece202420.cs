@@ -8,12 +8,12 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202420;
 [Name("Gliding Finale")]
 public class Ece202420 : EverybodyEventPuzzle
 {
-    private readonly Dictionary<char, MatrixDirection[]> _nextDirections = new()
+    private readonly Dictionary<char, GridDirection[]> _nextDirections = new()
     {
-        { MatrixDirection.Up.Name, [MatrixDirection.Left, MatrixDirection.Up, MatrixDirection.Right] },
-        { MatrixDirection.Right.Name, [MatrixDirection.Up, MatrixDirection.Right, MatrixDirection.Down] },
-        { MatrixDirection.Down.Name, [MatrixDirection.Right, MatrixDirection.Down, MatrixDirection.Left] },
-        { MatrixDirection.Left.Name, [MatrixDirection.Down, MatrixDirection.Left, MatrixDirection.Up] }
+        { GridDirection.Up.Name, [GridDirection.Left, GridDirection.Up, GridDirection.Right] },
+        { GridDirection.Right.Name, [GridDirection.Up, GridDirection.Right, GridDirection.Down] },
+        { GridDirection.Down.Name, [GridDirection.Right, GridDirection.Down, GridDirection.Left] },
+        { GridDirection.Left.Name, [GridDirection.Down, GridDirection.Left, GridDirection.Up] }
     };
 
     private readonly Dictionary<char, int> _changes = new()
@@ -28,10 +28,10 @@ public class Ece202420 : EverybodyEventPuzzle
 
     public PuzzleResult Part1(string input)
     {
-        var grid = MatrixBuilder.BuildCharMatrix(input);
+        var grid = GridBuilder.BuildCharGrid(input);
         var s = grid.FindAddresses('S').First();
         grid.WriteValueAt(s, '.');
-        var states = MatrixDirection.All.ToDictionary(k => (s.X, s.Y, k.Name), _ => 1000);
+        var states = GridDirection.All.ToDictionary(k => (s.X, s.Y, k.Name), _ => 1000);
 
         for (var i = 0; i < 100; i++)
         {
@@ -41,7 +41,7 @@ public class Ece202420 : EverybodyEventPuzzle
                 var (x, y, dir) = state.Key;
                 var score = state.Value;
                 grid.MoveTo(x, y);
-                grid.TurnTo(MatrixDirection.Get(dir));
+                grid.TurnTo(GridDirection.Get(dir));
                 foreach (var nextdir in _nextDirections[dir])
                 {
                     grid.TurnTo(nextdir);
@@ -72,10 +72,10 @@ public class Ece202420 : EverybodyEventPuzzle
 
     public PuzzleResult Part2(string input)
     {
-        var grid = MatrixBuilder.BuildCharMatrix(input);
+        var grid = GridBuilder.BuildCharGrid(input);
         var s = grid.FindAddresses('S').First();
         grid.WriteValueAt(s, '.');
-        var states = MatrixDirection.All.ToDictionary(k => (s.X, s.Y, k.Name, ' '), _ => 10000);
+        var states = GridDirection.All.ToDictionary(k => (s.X, s.Y, k.Name, ' '), _ => 10000);
         var time = 0;
         var found = false;
         
@@ -88,7 +88,7 @@ public class Ece202420 : EverybodyEventPuzzle
                 var (x, y, dir, checkpoint) = state.Key;
                 var score = state.Value;
                 grid.MoveTo(x, y);
-                grid.TurnTo(MatrixDirection.Get(dir));
+                grid.TurnTo(GridDirection.Get(dir));
                 foreach (var nextdir in _nextDirections[dir])
                 {
                     grid.TurnTo(nextdir);

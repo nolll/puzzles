@@ -6,7 +6,7 @@ public class KeyCollector
 {
     private IList<VaultKey> _keys = new List<VaultKey>();
     private IList<VaultDoor> _doors = new List<VaultDoor>();
-    private Matrix<char> _matrix = new();
+    private Grid<char> _grid = new();
     private readonly IDictionary<(char, char), VaultPath> _paths;
     private readonly IDictionary<string, int> _cache;
     private readonly IList<VaultRobot> _robots;
@@ -135,12 +135,12 @@ public class KeyCollector
         var height = rows.Length;
         _keys = new List<VaultKey>();
         _doors = new List<VaultDoor>();
-        _matrix = new Matrix<char>(width, height);
-        var y = _matrix.YMin;
-        var robotLocation = _matrix.StartAddress;
+        _grid = new Grid<char>(width, height);
+        var y = _grid.YMin;
+        var robotLocation = _grid.StartAddress;
         foreach (var row in rows)
         {
-            var x = _matrix.XMin;
+            var x = _grid.XMin;
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {
@@ -163,7 +163,7 @@ public class KeyCollector
                     charToWrite = '@';
                 }
 
-                _matrix.WriteValueAt(address, charToWrite);
+                _grid.WriteValueAt(address, charToWrite);
 
                 x += 1;
             }
@@ -173,36 +173,36 @@ public class KeyCollector
 
         if (useFourRobots)
         {
-            _matrix.WriteValueAt(robotLocation.X, robotLocation.Y - 1, '#');
-            _matrix.WriteValueAt(robotLocation.X - 1, robotLocation.Y, '#');
-            _matrix.WriteValueAt(robotLocation, '#');
-            _matrix.WriteValueAt(robotLocation.X + 1, robotLocation.Y, '#');
-            _matrix.WriteValueAt(robotLocation.X, robotLocation.Y + 1, '#');
+            _grid.WriteValueAt(robotLocation.X, robotLocation.Y - 1, '#');
+            _grid.WriteValueAt(robotLocation.X - 1, robotLocation.Y, '#');
+            _grid.WriteValueAt(robotLocation, '#');
+            _grid.WriteValueAt(robotLocation.X + 1, robotLocation.Y, '#');
+            _grid.WriteValueAt(robotLocation.X, robotLocation.Y + 1, '#');
 
             var robot1Location = new Coord(robotLocation.X - 1, robotLocation.Y - 1);
-            _matrix.WriteValueAt(robot1Location, '.'); 
+            _grid.WriteValueAt(robot1Location, '.'); 
             var robot1 = new VaultRobot(robot1Location);
             _robots.Add(robot1);
 
             var robot2Location = new Coord(robotLocation.X + 1, robotLocation.Y - 1);
-            _matrix.WriteValueAt(robot2Location, '.');
+            _grid.WriteValueAt(robot2Location, '.');
             var robot2 = new VaultRobot(robot2Location);
             _robots.Add(robot2);
 
             var robot3Location = new Coord(robotLocation.X - 1, robotLocation.Y + 1);
-            _matrix.WriteValueAt(robot3Location, '.'); 
+            _grid.WriteValueAt(robot3Location, '.'); 
             var robot3 = new VaultRobot(robot3Location);
             _robots.Add(robot3);
 
             var robot4Location = new Coord(robotLocation.X + 1, robotLocation.Y + 1);
-            _matrix.WriteValueAt(robot4Location, '.'); 
+            _grid.WriteValueAt(robot4Location, '.'); 
             var robot4 = new VaultRobot(robot4Location);
             _robots.Add(robot4);
         }
         else
         {
             var robot = new VaultRobot(robotLocation);
-            _matrix.WriteValueAt(robotLocation, '.');
+            _grid.WriteValueAt(robotLocation, '.');
             _robots.Add(robot);
         }
     }
@@ -238,7 +238,7 @@ public class KeyCollector
 
         foreach (var key in _keys)
         {
-            var coords = PathFinder.ShortestPathTo(_matrix, startAddress, key.Address);
+            var coords = PathFinder.ShortestPathTo(_grid, startAddress, key.Address);
             if (coords.Count > 0)
                 paths.Add(new VaultPath(key, coords, new List<char>()));
         }
@@ -253,7 +253,7 @@ public class KeyCollector
             var otherKeys = _keys.Where(o => o.Id != key.Id);
             foreach (var otherKey in otherKeys)
             {
-                var coords = PathFinder.ShortestPathTo(_matrix, key.Address, otherKey.Address);
+                var coords = PathFinder.ShortestPathTo(_grid, key.Address, otherKey.Address);
                 var blockingDoors = FindBlockingDoors(coords);
                 var keysNeeded = blockingDoors.Select(o => char.ToLower(o.Id)).ToList();
                 var path = new VaultPath(otherKey, coords, keysNeeded);

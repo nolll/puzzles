@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201822;
 public class CaveSystem
 {
     private readonly long _depth;
-    private Matrix<CaveRegion> _cave = new();
+    private Grid<CaveRegion> _cave = new();
     private readonly Coord _mouth;
     private readonly Coord _target;
 
@@ -41,7 +41,7 @@ public class CaveSystem
         var yMax = target.Y + padding;
         var width = xMax - 1;
         var height = yMax - 1;
-        _cave = new Matrix<CaveRegion>(width, height);
+        _cave = new Grid<CaveRegion>(width, height);
 
         for (var y = 0; y < height; y++)
         {

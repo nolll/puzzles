@@ -4,7 +4,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201920;
 
 public class DonutMazeSolver
 {
-    private Matrix<char> _map = new();
+    private Grid<char> _map = new();
     public int ShortestStepCount { get; }
 
     public DonutMazeSolver(string input)
@@ -127,5 +127,5 @@ public class DonutMazeSolver
     private static bool IsLetter(char c) => c != '#' && c != '.';
     
     private void BuildMap(string input) 
-        => _map = MatrixBuilder.BuildCharMatrix(input.Replace(' ', '#'));
+        => _map = GridBuilder.BuildCharGrid(input.Replace(' ', '#'));
 }

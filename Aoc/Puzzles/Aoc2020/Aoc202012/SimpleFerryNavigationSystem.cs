@@ -5,17 +5,17 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202012;
 
 public class SimpleFerryNavigationSystem
 {
-    private readonly Matrix<int> _matrix;
+    private readonly Grid<int> _grid;
     private readonly IEnumerable<FerryNavigationInstruction> _intructions;
-    public int DistanceTravelled => _matrix.Address.ManhattanDistanceTo(_matrix.StartAddress);
+    public int DistanceTravelled => _grid.Address.ManhattanDistanceTo(_grid.StartAddress);
         
     public SimpleFerryNavigationSystem(string input)
     {
         var rows = StringReader.ReadLines(input);
         _intructions = rows.Select(FerryNavigationInstruction.Parse);
 
-        _matrix = new Matrix<int>();
-        _matrix.TurnRight();
+        _grid = new Grid<int>();
+        _grid.TurnRight();
     }
 
     public void Run()
@@ -31,16 +31,16 @@ public class SimpleFerryNavigationSystem
         switch (instruction.Direction)
         {
             case 'N':
-                _matrix.MoveUp(instruction.Value);
+                _grid.MoveUp(instruction.Value);
                 break;
             case 'E':
-                _matrix.MoveRight(instruction.Value);
+                _grid.MoveRight(instruction.Value);
                 break;
             case 'S':
-                _matrix.MoveDown(instruction.Value);
+                _grid.MoveDown(instruction.Value);
                 break;
             case 'W':
-                _matrix.MoveLeft(instruction.Value);
+                _grid.MoveLeft(instruction.Value);
                 break;
             case 'L':
                 TurnLeft(instruction.Value);
@@ -58,7 +58,7 @@ public class SimpleFerryNavigationSystem
     {
         for (var i = 0; i < steps; i++)
         {
-            _matrix.MoveForward();
+            _grid.MoveForward();
         }
     }
 
@@ -66,7 +66,7 @@ public class SimpleFerryNavigationSystem
     {
         for (var i = 0; i < degrees; i += 90)
         {
-            _matrix.TurnLeft();
+            _grid.TurnLeft();
         }
     }
 
@@ -74,7 +74,7 @@ public class SimpleFerryNavigationSystem
     {
         for (var i = 0; i < degrees; i += 90)
         {
-            _matrix.TurnRight();
+            _grid.TurnRight();
         }
     }
 }

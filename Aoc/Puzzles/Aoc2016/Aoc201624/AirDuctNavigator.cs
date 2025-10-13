@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201624;
 public class AirDuctNavigator
 {
     private List<AirDuctLocation> _locations = [];
-    private Matrix<char> _matrix = new();
+    private Grid<char> _grid = new();
     private readonly Dictionary<(char, char), AirDuctPath> _paths = new();
     private readonly Dictionary<string, int> _cache = new();
     private AirDuctRobot _robot = new(new Coord(0, 0));
@@ -81,7 +81,7 @@ public class AirDuctNavigator
     private void Init(string input)
     {
         _locations = [];
-        _matrix = new Matrix<char>();
+        _grid = new Grid<char>();
         var rows = StringReader.ReadLines(input);
         var y = 0;
         foreach (var row in rows)
@@ -91,7 +91,7 @@ public class AirDuctNavigator
             foreach (var c in chars)
             {
                 var address = new Coord(x, y);
-                _matrix.MoveTo(address);
+                _grid.MoveTo(address);
                 var charToWrite = c;
 
                 if (char.IsNumber(c))
@@ -103,7 +103,7 @@ public class AirDuctNavigator
                         _locations.Add(new AirDuctLocation(c, address));
                 }
 
-                _matrix.WriteValue(charToWrite);
+                _grid.WriteValue(charToWrite);
 
                 x += 1;
             }
@@ -120,7 +120,7 @@ public class AirDuctNavigator
 
         foreach (var location in _locations)
         {
-            var coords = PathFinder.ShortestPathTo(_matrix, startAddress, location.Address);
+            var coords = PathFinder.ShortestPathTo(_grid, startAddress, location.Address);
             if (coords.Count > 0) 
                 paths.Add(new AirDuctPath(location, coords.Count));
         }
@@ -141,7 +141,7 @@ public class AirDuctNavigator
                 if(_paths.ContainsKey((location.Id, otherLocation.Id)) || _paths.ContainsKey((otherLocation.Id, location.Id)))
                     continue;
                     
-                var stepCountToLocation = PathFinder.ShortestPathTo(_matrix, location.Address, otherLocation.Address).Count;
+                var stepCountToLocation = PathFinder.ShortestPathTo(_grid, location.Address, otherLocation.Address).Count;
                 var pathToLocation = new AirDuctPath(otherLocation, stepCountToLocation);
                 var pathBack = new AirDuctPath(location, stepCountToLocation);
                 _paths.Add((location.Id, otherLocation.Id), pathToLocation);

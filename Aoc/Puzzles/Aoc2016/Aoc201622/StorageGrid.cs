@@ -7,7 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201622;
 public class StorageGrid
 {
     private readonly Regex _whiteSpaceRegex = new("[ ]{2,}", RegexOptions.None);
-    private readonly Matrix<StorageNode> _storage;
+    private readonly Grid<StorageNode> _storage;
 
     public StorageGrid(string input)
     {
@@ -52,7 +52,7 @@ public class StorageGrid
 
     public int MoveStorage()
     {
-        var matrix = new Matrix<char>(_storage.Width, _storage.Height, '#');
+        var matrix = new Grid<char>(_storage.Width, _storage.Height, '#');
         var nodesThatCanMove = GetNodesThatCanMove();
         foreach (var address in nodesThatCanMove)
         {
@@ -79,11 +79,11 @@ public class StorageGrid
         return distance1 + distance2 * 5 + 1;
     }
 
-    private Matrix<StorageNode> ParseGrid(string input)
+    private Grid<StorageNode> ParseGrid(string input)
     {
         var rows = StringReader.ReadLines(input);
         var dataRows = rows.Skip(2);
-        var matrix = new Matrix<StorageNode>();
+        var matrix = new Grid<StorageNode>();
 
         foreach (var row in dataRows)
         {

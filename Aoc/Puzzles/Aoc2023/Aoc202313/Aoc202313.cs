@@ -25,23 +25,23 @@ public class Aoc202313 : AocPuzzle
 
     public static int CountReflections(string s)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(s);
+        var matrix = GridBuilder.BuildCharGrid(s);
 
         return CountReflections(matrix, -1);
     }
 
-    private static int CountReflections(Matrix<char> matrix, int orig)
+    private static int CountReflections(Grid<char> grid, int orig)
     {
-        var rows = Rows(matrix, orig);
+        var rows = Rows(grid, orig);
         if (rows > 0)
             return rows * 100;
 
-        return Columns(matrix, orig);
+        return Columns(grid, orig);
     }
 
     public static int CountSmudgedReflections(string s)
     {
-        var matrix = MatrixBuilder.BuildCharMatrix(s);
+        var matrix = GridBuilder.BuildCharGrid(s);
         var orig = CountReflections(matrix, -1);
 
         foreach (var coord in matrix.Coords)
@@ -60,15 +60,15 @@ public class Aoc202313 : AocPuzzle
         return 0;
     }
 
-    private static int Columns(Matrix<char> matrix, int orig)
+    private static int Columns(Grid<char> grid, int orig)
     {
-        var cols = Enumerable.Range(0, matrix.Width).Select(x => ReadCol(matrix, x)).ToList();
+        var cols = Enumerable.Range(0, grid.Width).Select(x => ReadCol(grid, x)).ToList();
         return FindReflection(cols, orig);
     }
 
-    private static int Rows(Matrix<char> matrix, int orig)
+    private static int Rows(Grid<char> grid, int orig)
     {
-        var rows = Enumerable.Range(0, matrix.Height).Select(y => ReadRow(matrix, y)).ToList();
+        var rows = Enumerable.Range(0, grid.Height).Select(y => ReadRow(grid, y)).ToList();
         var origCompare = orig >= 100 ? orig / 100 : 0;
         return FindReflection(rows, origCompare);
     }
@@ -102,9 +102,9 @@ public class Aoc202313 : AocPuzzle
         return 0;
     }
 
-    private static string ReadRow(Matrix<char> matrix, int y) => 
-        string.Join("", Enumerable.Range(0, matrix.Width).Select(x => matrix.ReadValueAt(x, y)));
+    private static string ReadRow(Grid<char> grid, int y) => 
+        string.Join("", Enumerable.Range(0, grid.Width).Select(x => grid.ReadValueAt(x, y)));
 
-    private static string ReadCol(Matrix<char> matrix, int x) =>
-        string.Join("", Enumerable.Range(0, matrix.Height).Select(y => matrix.ReadValueAt(x, y)));
+    private static string ReadCol(Grid<char> grid, int x) =>
+        string.Join("", Enumerable.Range(0, grid.Height).Select(y => grid.ReadValueAt(x, y)));
 }

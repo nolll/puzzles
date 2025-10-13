@@ -15,7 +15,7 @@ public class Codyssi202512 : CodyssiPuzzle
     public PuzzleResult Part1(string input)
     {
         var (p1, p2, _) = input.Split(LineBreaks.Double);
-        var grid = MatrixBuilder.BuildIntMatrixFromSpaceSeparated(p1);
+        var grid = GridBuilder.BuildIntGridFromSpaceSeparated(p1);
         var instructions = p2.Split(LineBreaks.Single);
 
         foreach (var instruction in instructions)
@@ -31,7 +31,7 @@ public class Codyssi202512 : CodyssiPuzzle
     public PuzzleResult Part2(string input)
     {
         var (p1, p2, p3) = input.Split(LineBreaks.Double);
-        var grid = MatrixBuilder.BuildIntMatrixFromSpaceSeparated(p1);
+        var grid = GridBuilder.BuildIntGridFromSpaceSeparated(p1);
         var instructions = p2.Split(LineBreaks.Single).ToList();
         var moves = p3.Split(LineBreaks.Single);
 
@@ -63,7 +63,7 @@ public class Codyssi202512 : CodyssiPuzzle
     public PuzzleResult Part3(string input)
     {
         var (p1, p2, p3) = input.Split(LineBreaks.Double);
-        var grid = MatrixBuilder.BuildIntMatrixFromSpaceSeparated(p1);
+        var grid = GridBuilder.BuildIntGridFromSpaceSeparated(p1);
         var instructions = p2.Split(LineBreaks.Single).ToList();
         var moves = p3.Split(LineBreaks.Single);
 
@@ -99,7 +99,7 @@ public class Codyssi202512 : CodyssiPuzzle
         return new PuzzleResult(best, "939c50d043eda275028daf308085dcf8");
     }
 
-    private void ExecuteInstruction(Matrix<int> grid, string instruction)
+    private void ExecuteInstruction(Grid<int> grid, string instruction)
     {
         var parts = instruction.Split(' ');
         switch (parts.Length)
@@ -116,7 +116,7 @@ public class Codyssi202512 : CodyssiPuzzle
         }
     }
     
-    private static long GetBestSum(Matrix<int> grid)
+    private static long GetBestSum(Grid<int> grid)
     {
         var best = 0L;
         for (var y = grid.YMin; y <= grid.YMax; y++)
@@ -132,14 +132,14 @@ public class Codyssi202512 : CodyssiPuzzle
         return best;
     }
 
-    private static void Shift(Matrix<int> grid, string what, int which, int steps) => 
+    private static void Shift(Grid<int> grid, string what, int which, int steps) => 
         GetShiftFunc(what)(grid, which, steps);
 
-    private static Action<Matrix<int>, int, int> GetShiftFunc(string what) => what == "COL" 
+    private static Action<Grid<int>, int, int> GetShiftFunc(string what) => what == "COL" 
         ? ShiftCol 
         : ShiftRow;
 
-    private static void ShiftCol(Matrix<int> grid, int col, int steps)
+    private static void ShiftCol(Grid<int> grid, int col, int steps)
     {
         var values = new List<int>();
         for (var row = 0; row < grid.Height; row++)
@@ -160,7 +160,7 @@ public class Codyssi202512 : CodyssiPuzzle
         }
     }
     
-    private static void ShiftRow(Matrix<int> grid, int row, int steps)
+    private static void ShiftRow(Grid<int> grid, int row, int steps)
     {
         var values = new List<int>();
         for (var col = 0; col < grid.Width; col++)
@@ -181,22 +181,22 @@ public class Codyssi202512 : CodyssiPuzzle
         }
     }
 
-    private static void ModifyAll(Matrix<int> grid, string modification, int amount) => 
+    private static void ModifyAll(Grid<int> grid, string modification, int amount) => 
         Modify(grid, grid.Coords, modification, amount);
 
-    private static void Modify(Matrix<int> grid, string modification, string what, int which, int amount) => 
+    private static void Modify(Grid<int> grid, string modification, string what, int which, int amount) => 
         Modify(grid, GetCoordsToModify(grid, what, which), modification, amount);
 
-    private static IEnumerable<Coord> GetCoordsToModify(Matrix<int> grid, string what, int which) => 
+    private static IEnumerable<Coord> GetCoordsToModify(Grid<int> grid, string what, int which) => 
         what == "COL"
             ? grid.Coords.Where(o => o.X == which)
             : grid.Coords.Where(o => o.Y == which);
 
-    private static void Modify(Matrix<int> grid, IEnumerable<Coord> coords, string modification, int amount) => 
+    private static void Modify(Grid<int> grid, IEnumerable<Coord> coords, string modification, int amount) => 
         ApplyModification(grid, GetModificationFunc(modification), coords, amount);
 
     private static void ApplyModification(
-        Matrix<int> grid, 
+        Grid<int> grid, 
         Func<int, int, int> func, 
         IEnumerable<Coord> coords, 
         int amount)

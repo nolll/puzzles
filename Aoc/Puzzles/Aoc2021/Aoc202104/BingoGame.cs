@@ -60,7 +60,7 @@ public class BingoGame
         var i = 0;
         foreach (var input in inputs)
         {
-            d.Add(i, new BingoBoard(i, MatrixBuilder.BuildIntMatrixFromSpaceSeparated(input), new Matrix<bool>(5, 5)));
+            d.Add(i, new BingoBoard(i, GridBuilder.BuildIntGridFromSpaceSeparated(input), new Grid<bool>(5, 5)));
             i++;
         }
 
@@ -71,11 +71,11 @@ public class BingoGame
 public class BingoBoard
 {
     public int Id { get; }
-    private readonly Matrix<int> _numbers;
-    private readonly Matrix<bool> _marks;
+    private readonly Grid<int> _numbers;
+    private readonly Grid<bool> _marks;
     private readonly IList<Coord> _coords;
 
-    public BingoBoard(int id, Matrix<int> numbers, Matrix<bool> marks)
+    public BingoBoard(int id, Grid<int> numbers, Grid<bool> marks)
     {
         Id = id;
         _numbers = numbers;

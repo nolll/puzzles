@@ -64,24 +64,24 @@ public class Aoc202318 : AocPuzzle
         return new Instruction(DirectionFromColor(hex), ParseHex(hex[..5]));
     }
     
-    private static MatrixDirection DirectionFromString(string s) => s[0] switch
+    private static GridDirection DirectionFromString(string s) => s[0] switch
     {
-        'U' => MatrixDirection.Up,
-        'R' => MatrixDirection.Right,
-        'D' => MatrixDirection.Down,
-        _ => MatrixDirection.Left
+        'U' => GridDirection.Up,
+        'R' => GridDirection.Right,
+        'D' => GridDirection.Down,
+        _ => GridDirection.Left
     };
 
-    private static MatrixDirection DirectionFromColor(string color) => color[^1] switch
+    private static GridDirection DirectionFromColor(string color) => color[^1] switch
     {
-        '3' => MatrixDirection.Up,
-        '0' => MatrixDirection.Right,
-        '1' => MatrixDirection.Down,
-        _ => MatrixDirection.Left
+        '3' => GridDirection.Up,
+        '0' => GridDirection.Right,
+        '1' => GridDirection.Down,
+        _ => GridDirection.Left
     };
     
     private static long ManhattanDistance(Point a, Point b) => Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y);
 
     private record Point(long X, long Y);
-    private record Instruction(MatrixDirection Direction, int Distance);
+    private record Instruction(GridDirection Direction, int Distance);
 }

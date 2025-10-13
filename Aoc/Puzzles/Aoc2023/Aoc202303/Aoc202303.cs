@@ -83,9 +83,9 @@ public class Aoc202303 : AocPuzzle
         return string.Join("", cleanedLine);
     }
 
-    private static Matrix<char> BuildSymbolMatrix(IEnumerable<string> lines, int width, int height)
+    private static Grid<char> BuildSymbolMatrix(IEnumerable<string> lines, int width, int height)
     {
-        var symbolMatrix = new Matrix<char>(width, height);
+        var symbolMatrix = new Grid<char>(width, height);
         var row = 0;
         foreach (var line in lines)
         {
@@ -105,9 +105,9 @@ public class Aoc202303 : AocPuzzle
         return symbolMatrix;
     }
 
-    private static Matrix<int> BuildNumberMatrix(List<NumberCoord> numberCoordList, int width, int height)
+    private static Grid<int> BuildNumberMatrix(List<NumberCoord> numberCoordList, int width, int height)
     {
-        var numberMatrix = new Matrix<int>(width, height);
+        var numberMatrix = new Grid<int>(width, height);
 
         foreach (var numberCoord in numberCoordList)
         {
@@ -120,7 +120,7 @@ public class Aoc202303 : AocPuzzle
         return numberMatrix;
     }
 
-    private static List<int> FindEngineParts(List<NumberCoord> numberCoordList, Matrix<char> symbolMatrix)
+    private static List<int> FindEngineParts(List<NumberCoord> numberCoordList, Grid<char> symbolGrid)
     {
         var engineParts = new List<int>();
         foreach (var numberCoord in numberCoordList)
@@ -128,7 +128,7 @@ public class Aoc202303 : AocPuzzle
             var hasAdjacentSymbol = false;
             foreach (var coord in numberCoord.Coords)
             {
-                var adjacent = symbolMatrix.AllAdjacentValuesTo(coord);
+                var adjacent = symbolGrid.AllAdjacentValuesTo(coord);
                 if (adjacent.Any(o => o != '.'))
                     hasAdjacentSymbol = true;
             }
@@ -140,16 +140,16 @@ public class Aoc202303 : AocPuzzle
         return engineParts;
     }
 
-    private static List<int> FindGearRatios(Matrix<int> numberMatrix, Matrix<char> symbolMatrix)
+    private static List<int> FindGearRatios(Grid<int> numberGrid, Grid<char> symbolGrid)
     {
-        var symbolCoords = symbolMatrix.Coords;
+        var symbolCoords = symbolGrid.Coords;
         var gearRatios = new List<int>();
         foreach (var symbolCoord in symbolCoords)
         {
-            if (symbolMatrix.ReadValueAt(symbolCoord) != '*')
+            if (symbolGrid.ReadValueAt(symbolCoord) != '*')
                 continue;
 
-            var adjacentValues = numberMatrix.AllAdjacentValuesTo(symbolCoord)
+            var adjacentValues = numberGrid.AllAdjacentValuesTo(symbolCoord)
                 .Where(o => o > 0)
                 .Distinct()
                 .ToList();

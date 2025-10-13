@@ -2,21 +2,21 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Tools.Grids.Grids2d;
 
-public static class MatrixBuilder
+public static class GridBuilder
 {
-    public static Matrix<char> BuildCharMatrix(string input, char defaultValue = default)
+    public static Grid<char> BuildCharGrid(string input, char defaultValue = default)
     {
         var rows = StringReader.ReadLines(input.Trim()).Select(o => o.Trim()).ToArray();
-        return BuildCharMatrix(new Matrix<char>(1, 1, defaultValue), rows);
+        return BuildCharGrid(new Grid<char>(1, 1, defaultValue), rows);
     }
 
-    public static Matrix<char> BuildCharMatrixWithoutTrim(string input, char defaultValue = default)
+    public static Grid<char> BuildCharGridWithoutTrim(string input, char defaultValue = default)
     {
         var rows = StringReader.ReadLines(input).ToArray();
-        return BuildCharMatrixWithoutTrim(new Matrix<char>(1, 1, defaultValue), rows);
+        return BuildCharGridWithoutTrim(new Grid<char>(1, 1, defaultValue), rows);
     }
 
-    private static Matrix<char> BuildCharMatrix(Matrix<char> matrix, string[] rows)
+    private static Grid<char> BuildCharGrid(Grid<char> grid, string[] rows)
     {
         var y = 0;
         foreach (var row in rows)
@@ -25,18 +25,18 @@ public static class MatrixBuilder
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {
-                matrix.MoveTo(x, y);
-                matrix.WriteValue(c);
+                grid.MoveTo(x, y);
+                grid.WriteValue(c);
                 x += 1;
             }
 
             y += 1;
         }
 
-        return matrix;
+        return grid;
     }
 
-    private static Matrix<char> BuildCharMatrixWithoutTrim(Matrix<char> matrix, string[] rows)
+    private static Grid<char> BuildCharGridWithoutTrim(Grid<char> grid, string[] rows)
     {
         var y = 0;
         foreach (var row in rows)
@@ -45,20 +45,20 @@ public static class MatrixBuilder
             var chars = row.ToCharArray();
             foreach (var c in chars)
             {
-                matrix.MoveTo(x, y);
-                matrix.WriteValue(c);
+                grid.MoveTo(x, y);
+                grid.WriteValue(c);
                 x += 1;
             }
 
             y += 1;
         }
 
-        return matrix;
+        return grid;
     }
 
-    public static Matrix<int> BuildIntMatrixFromSpaceSeparated(string input, int defaultValue = default)
+    public static Grid<int> BuildIntGridFromSpaceSeparated(string input, int defaultValue = default)
     {
-        var matrix = new Matrix<int>(1, 1, defaultValue);
+        var matrix = new Grid<int>(1, 1, defaultValue);
         var rows = StringReader.ReadLines(input.Trim());
         var y = 0;
         foreach (var row in rows)
@@ -78,13 +78,13 @@ public static class MatrixBuilder
         return matrix;
     }
 
-    public static Matrix<int> BuildIntMatrixFromNonSeparated(string input, int defaultValue = default)
+    public static Grid<int> BuildIntGridFromNonSeparated(string input, int defaultValue = default)
     {
         var (w, h) = GetNonSeparatedSize(input);
-        return BuildIntMatrixFromNonSeparated(new Matrix<int>(w, h, defaultValue), input);
+        return BuildIntGridFromNonSeparated(new Grid<int>(w, h, defaultValue), input);
     }
 
-    private static Matrix<int> BuildIntMatrixFromNonSeparated(Matrix<int> matrix, string input)
+    private static Grid<int> BuildIntGridFromNonSeparated(Grid<int> grid, string input)
     {
         var rows = StringReader.ReadLines(input.Trim());
         var y = 0;
@@ -94,15 +94,15 @@ public static class MatrixBuilder
             var numbers = row.Trim().ToCharArray().Select(o => o.ToString()).Select(int.Parse);
             foreach (var n in numbers)
             {
-                matrix.MoveTo(x, y);
-                matrix.WriteValue(n);
+                grid.MoveTo(x, y);
+                grid.WriteValue(n);
                 x += 1;
             }
 
             y += 1;
         }
 
-        return matrix;
+        return grid;
     }
 
     private static (int w, int h) GetNonSeparatedSize(string input)

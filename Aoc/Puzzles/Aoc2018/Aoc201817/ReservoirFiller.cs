@@ -5,7 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201817;
 
 public class ReservoirFiller
 {
-    private Matrix<char> _matrix = new();
+    private Grid<char> _grid = new();
     private int _yMin = int.MaxValue;
     private int _yMax = int.MinValue;
     private readonly Coord _source = new(500, 0);
@@ -17,8 +17,8 @@ public class ReservoirFiller
     private const char RunningWaterTile = '|';
     private const char RestingWaterTile = '~';
 
-    public int TotalWaterTileCount => _matrix.Values.Count(o => o == RestingWaterTile || o == RunningWaterTile) - DistanceFromSourceToMinY;
-    public int RetainedWaterTileCount => _matrix.Values.Count(o => o == RestingWaterTile);
+    public int TotalWaterTileCount => _grid.Values.Count(o => o == RestingWaterTile || o == RunningWaterTile) - DistanceFromSourceToMinY;
+    public int RetainedWaterTileCount => _grid.Values.Count(o => o == RestingWaterTile);
     private int DistanceFromSourceToMinY => _yMin - _source.Y - 1;
 
     public ReservoirFiller(string input)
@@ -32,28 +32,28 @@ public class ReservoirFiller
         while (_openAddresses.Any())
         {
             var current = _openAddresses.First();
-            _matrix.MoveTo(current);
-            var valueBelow = _matrix.ReadValueAt(_matrix.Address.X, _matrix.Address.Y + 1);
+            _grid.MoveTo(current);
+            var valueBelow = _grid.ReadValueAt(_grid.Address.X, _grid.Address.Y + 1);
             if (valueBelow == WallTile || valueBelow == RestingWaterTile)
             {
                 _openAddresses.RemoveAt(0);
-                AddToOpenAddresses(new Coord(_matrix.Address.X, _matrix.Address.Y - 1));
+                AddToOpenAddresses(new Coord(_grid.Address.X, _grid.Address.Y - 1));
                 continue;
             }
 
             while (true)
             {
-                _matrix.MoveDown();
+                _grid.MoveDown();
                 if (IsAtBottom)
                 {
                     _openAddresses.RemoveAt(0);
                     break;
                 }
                     
-                var value = _matrix.ReadValue();
+                var value = _grid.ReadValue();
                 if (value is WallTile or RestingWaterTile)
                 {
-                    _matrix.MoveUp();
+                    _grid.MoveUp();
                     var canFlowRight = TryFlowRight();
                     var canFlowLeft = TryFlowLeft();
                     var isBlockedRight = !canFlowRight;
@@ -63,11 +63,11 @@ public class ReservoirFiller
                     {
                         while (true)
                         {
-                            _matrix.MoveRight();
-                            if (_matrix.ReadValue() == WallTile)
+                            _grid.MoveRight();
+                            if (_grid.ReadValue() == WallTile)
                                 break;
 
-                            _matrix.WriteValue(RestingWaterTile);
+                            _grid.WriteValue(RestingWaterTile);
                         }
 
                         break;
@@ -80,7 +80,7 @@ public class ReservoirFiller
                 if (value is EmptyTile or RunningWaterTile)
                 {
                     if(value == EmptyTile)
-                        _matrix.WriteValue(RunningWaterTile);
+                        _grid.WriteValue(RunningWaterTile);
                 }
             }
         }
@@ -88,9 +88,9 @@ public class ReservoirFiller
 
     private void BuildMatrix(string input)
     {
-        _matrix = new Matrix<char>(1, 1, EmptyTile);
-        _matrix.MoveTo(_source);
-        _matrix.WriteValue(SourceTile);
+        _grid = new Grid<char>(1, 1, EmptyTile);
+        _grid.MoveTo(_source);
+        _grid.WriteValue(SourceTile);
 
         var rows = StringReader.ReadLines(input);
 
@@ -125,8 +125,8 @@ public class ReservoirFiller
 
     private void WriteWall(in int x, in int y)
     {
-        _matrix.MoveTo(x, y);
-        _matrix.WriteValue(WallTile);
+        _grid.MoveTo(x, y);
+        _grid.WriteValue(WallTile);
         SetMinAndMax(y);
     }
 
@@ -148,16 +148,16 @@ public class ReservoirFiller
     {
         while (true)
         {
-            _matrix.MoveRight();
-            var value = _matrix.ReadValue();
+            _grid.MoveRight();
+            var value = _grid.ReadValue();
             if (value == EmptyTile || value == RunningWaterTile)
             {
                 if (value == EmptyTile)
-                    _matrix.WriteValue(RunningWaterTile);
-                var valueBelow = _matrix.ReadValueAt(_matrix.Address.X, _matrix.Address.Y + 1);
+                    _grid.WriteValue(RunningWaterTile);
+                var valueBelow = _grid.ReadValueAt(_grid.Address.X, _grid.Address.Y + 1);
                 if (valueBelow == EmptyTile || valueBelow == RunningWaterTile)
                 {
-                    AddToOpenAddresses(_matrix.Address);
+                    AddToOpenAddresses(_grid.Address);
                     return true;
                 }
             }
@@ -172,16 +172,16 @@ public class ReservoirFiller
     {
         while (true)
         {
-            _matrix.MoveLeft();
-            var value = _matrix.ReadValue();
+            _grid.MoveLeft();
+            var value = _grid.ReadValue();
             if (value == EmptyTile || value == RunningWaterTile)
             {
                 if (value == EmptyTile)
-                    _matrix.WriteValue(RunningWaterTile);
-                var valueBelow = _matrix.ReadValueAt(_matrix.Address.X, _matrix.Address.Y + 1);
+                    _grid.WriteValue(RunningWaterTile);
+                var valueBelow = _grid.ReadValueAt(_grid.Address.X, _grid.Address.Y + 1);
                 if (valueBelow == EmptyTile || valueBelow == RunningWaterTile)
                 {
-                    AddToOpenAddresses(_matrix.Address);
+                    AddToOpenAddresses(_grid.Address);
                     return true;
                 }
             }
@@ -192,5 +192,5 @@ public class ReservoirFiller
         }
     }
 
-    private bool IsAtBottom => _matrix.Address.Y > _yMax;
+    private bool IsAtBottom => _grid.Address.Y > _yMax;
 }

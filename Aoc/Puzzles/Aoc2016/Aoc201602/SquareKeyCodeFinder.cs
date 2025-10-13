@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201602;
 
 public class SquareKeyCodeFinder
 {
-    private readonly Matrix<char> _buttons = BuildButtonMatrix();
+    private readonly Grid<char> _buttons = BuildButtonMatrix();
 
     public string Find(string input)
     {
@@ -28,7 +28,7 @@ public class SquareKeyCodeFinder
         _buttons.TryMove(dir);
     }
 
-    private static Matrix<char> BuildButtonMatrix()
+    private static Grid<char> BuildButtonMatrix()
     {
         const string input = """
                              123
@@ -36,7 +36,7 @@ public class SquareKeyCodeFinder
                              789
                              """;
 
-        var matrix = MatrixBuilder.BuildCharMatrix(input);
+        var matrix = GridBuilder.BuildCharGrid(input);
         matrix.MoveTo(1, 1);
         return matrix;
     }

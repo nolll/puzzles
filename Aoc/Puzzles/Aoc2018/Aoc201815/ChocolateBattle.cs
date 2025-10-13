@@ -4,7 +4,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201815;
 
 public class ChocolateBattle(string input)
 {
-    private Matrix<char> _matrix = new();
+    private Grid<char> _grid = new();
     private IList<BattleFigure> _figures = new List<BattleFigure>();
 
     private IDictionary<Coord, IList<Coord>> _neighborCache =
@@ -54,7 +54,7 @@ public class ChocolateBattle(string input)
                     break;
                 }
 
-                var adjacentEnemyAddresses = NeighborCache(figure.Address).Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
+                var adjacentEnemyAddresses = NeighborCache(figure.Address).Where(o => _grid.ReadValueAt(o) == enemyType).ToList();
 
                 if (!adjacentEnemyAddresses.Any())
                 {
@@ -64,7 +64,7 @@ public class ChocolateBattle(string input)
                         var adjacentAddresses = NeighborCache(enemy.Address);
                         foreach (var adjacentAddress in adjacentAddresses)
                         {
-                            if (_matrix.ReadValueAt(adjacentAddress) == '.')
+                            if (_grid.ReadValueAt(adjacentAddress) == '.')
                             {
                                 targets.Add(adjacentAddress);
                             }
@@ -72,7 +72,7 @@ public class ChocolateBattle(string input)
                     }
 
                     targets = targets.Distinct().ToList();
-                    var paths = targets.Select(o => PathFinder.ShortestPathTo(_matrix, figure.Address, o)).ToList();
+                    var paths = targets.Select(o => PathFinder.ShortestPathTo(_grid, figure.Address, o)).ToList();
                     var possibleMoves = paths
                         .Where(o => o.Any())
                         .OrderBy(o => o.Count)
@@ -82,14 +82,14 @@ public class ChocolateBattle(string input)
                     var bestMove = possibleMoves.FirstOrDefault();
                     if (bestMove != null)
                     {
-                        _matrix.WriteValueAt(figure.Address, '.');
+                        _grid.WriteValueAt(figure.Address, '.');
                         var newAddress = new Coord(bestMove.X, bestMove.Y);
                         figure.MoveTo(newAddress);
-                        _matrix.WriteValueAt(newAddress, figure.Type);
+                        _grid.WriteValueAt(newAddress, figure.Type);
                     }
                 }
 
-                adjacentEnemyAddresses = NeighborCache(figure.Address).Where(o => _matrix.ReadValueAt(o) == enemyType).ToList();
+                adjacentEnemyAddresses = NeighborCache(figure.Address).Where(o => _grid.ReadValueAt(o) == enemyType).ToList();
 
                 if (adjacentEnemyAddresses.Any())
                 {
@@ -106,7 +106,7 @@ public class ChocolateBattle(string input)
                     if (breakOnElfDeath && enemy.Type == BattleFigureType.Elf)
                         return;
                     
-                    _matrix.WriteValueAt(enemy.Address, '.');
+                    _grid.WriteValueAt(enemy.Address, '.');
                 }
             }
 
@@ -135,7 +135,7 @@ public class ChocolateBattle(string input)
 
         var width = rows.First().Length;
         var height = rows.Length;
-        _matrix = new Matrix<char>(width, height);
+        _grid = new Grid<char>(width, height);
 
         foreach (var row in rows)
         {
@@ -144,7 +144,7 @@ public class ChocolateBattle(string input)
             foreach (var c in chars)
             {
                 var address = new Coord(x, y);
-                _matrix.WriteValueAt(address, c);
+                _grid.WriteValueAt(address, c);
                 if (c is BattleFigureType.Elf or BattleFigureType.Goblin)
                 {
                     var attackPower = c == BattleFigureType.Elf ? elfAttackPower : 3;
@@ -158,13 +158,13 @@ public class ChocolateBattle(string input)
         }
 
         _neighborCache = new Dictionary<Coord, IList<Coord>>();
-        foreach (var coord in _matrix.Coords)
+        foreach (var coord in _grid.Coords)
         {
-            if (_matrix.ReadValueAt(coord) == '#') 
+            if (_grid.ReadValueAt(coord) == '#') 
                 continue;
             
-            var neighbors = _matrix.OrthogonalAdjacentCoordsTo(coord)
-                .Where(o => _matrix.ReadValueAt(o) != '#')
+            var neighbors = _grid.OrthogonalAdjacentCoordsTo(coord)
+                .Where(o => _grid.ReadValueAt(o) != '#')
                 .ToList();
             
             _neighborCache.Add(coord, neighbors);

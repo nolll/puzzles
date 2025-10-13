@@ -82,7 +82,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
                 }
 
                 set.UnionWith(newSpaces);
-                spaces = newSpaces.DistinctBy(o => o.Tuple).ToList();
+                spaces = newSpaces.Distinct().ToList();
             }
             
             totalSet.UnionWith(set);

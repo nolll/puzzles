@@ -14,9 +14,9 @@ public class RecursiveDonutMazeSolver
     public int ShortestStepCount { get; }
     private MatrixAddress _startAddress = new(0, 0);
     private MatrixAddress _endAddress = new(0, 0);
-    private IDictionary<(int, int), DonutPortal> _portals = new Dictionary<(int, int), DonutPortal>();
-    private IDictionary<(int, int), IList<MatrixAddress>> _outerAdjacentCache = new Dictionary<(int, int), IList<MatrixAddress>>();
-    private IDictionary<(int, int), IList<MatrixAddress>> _innerAdjacentCache = new Dictionary<(int, int), IList<MatrixAddress>>();
+    private IDictionary<MatrixAddress, DonutPortal> _portals = new Dictionary<MatrixAddress, DonutPortal>();
+    private IDictionary<MatrixAddress, IList<MatrixAddress>> _outerAdjacentCache = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
+    private IDictionary<MatrixAddress, IList<MatrixAddress>> _innerAdjacentCache = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
 
     public RecursiveDonutMazeSolver(string input)
     {
@@ -65,7 +65,7 @@ public class RecursiveDonutMazeSolver
             portalAddresses.Add(portal);
         }
 
-        var portals = new Dictionary<(int, int), DonutPortal>();
+        var portals = new Dictionary<MatrixAddress, DonutPortal>();
         var orderedPortalAddresses = portalAddresses.OrderBy(o => o.Name).ToList();
         var topMatrix = matrix.Clone();
 
@@ -81,9 +81,9 @@ public class RecursiveDonutMazeSolver
             var inner = aIsOuter ? b : a;
 
             var innerPortal = new InnerDonutPortal(inner.Name, inner.Address, outer.Address);
-            portals.Add(inner.Address.Tuple, innerPortal);
+            portals.Add(inner.Address, innerPortal);
             var outerPortal = new OuterDonutPortal(outer.Name, outer.Address, inner.Address);
-            portals.Add(outer.Address.Tuple, outerPortal);
+            portals.Add(outer.Address, outerPortal);
             topMatrix.MoveTo(outer.Address);
             topMatrix.WriteValue(Chars.Wall);
         }
@@ -93,16 +93,16 @@ public class RecursiveDonutMazeSolver
         _innerAdjacentCache = BuildAdjacentCache(matrix);
     }
 
-    private IDictionary<(int, int), IList<MatrixAddress>> BuildAdjacentCache(Matrix<char> matrix)
+    private IDictionary<MatrixAddress, IList<MatrixAddress>> BuildAdjacentCache(Matrix<char> matrix)
     {
-        var dictionary = new Dictionary<(int, int), IList<MatrixAddress>>();
+        var dictionary = new Dictionary<MatrixAddress, IList<MatrixAddress>>();
         foreach (var coord in matrix.Coords)
         {
             var coords = matrix
                 .OrthogonalAdjacentCoordsTo(coord)
                 .Where(o => matrix.ReadValueAt(o) == Chars.Path)
                 .ToList();
-            dictionary.Add(coord.Tuple, coords);
+            dictionary.Add(coord, coords);
         }
 
         return dictionary;
@@ -116,15 +116,10 @@ public class RecursiveDonutMazeSolver
         return xIsOnEdge || yIsOnEdge;
     }
 
-    private static IEnumerable<MatrixAddress> FindLetterCoords(Matrix<char> matrix)
-    {
-        return matrix.Coords.Where(o => IsLetter(matrix.ReadValueAt(o)));
-    }
+    private static IEnumerable<MatrixAddress> FindLetterCoords(Matrix<char> matrix) => 
+        matrix.Coords.Where(o => IsLetter(matrix.ReadValueAt(o)));
 
-    private static bool IsLetter(char c)
-    {
-        return c != Chars.Wall && c != Chars.Path;
-    }
+    private static bool IsLetter(char c) => c != Chars.Wall && c != Chars.Path;
 
     private int StepCountTo(MatrixAddress from, MatrixAddress to)
     {
@@ -133,17 +128,11 @@ public class RecursiveDonutMazeSolver
         return goal?.Count ?? 0;
     }
 
-    private IList<MatrixAddress> GetAdjacentCoords(MatrixAddress coord, int depth)
-    {
-        return GetAdjacentCache(depth)[coord.Tuple];
-    }
+    private IList<MatrixAddress> GetAdjacentCoords(MatrixAddress coord, int depth) => GetAdjacentCache(depth)[coord];
 
-    private IDictionary<(int, int), IList<MatrixAddress>> GetAdjacentCache(int depth)
-    {
-        return depth == 0
-            ? _outerAdjacentCache
-            : _innerAdjacentCache;
-    }
+    private IDictionary<MatrixAddress, IList<MatrixAddress>> GetAdjacentCache(int depth) => depth == 0
+        ? _outerAdjacentCache
+        : _innerAdjacentCache;
 
     private IList<CoordCount> GetCoordCounts(MatrixAddress from, MatrixAddress to)
     {
@@ -164,7 +153,7 @@ public class RecursiveDonutMazeSolver
                 seen.Add((newCoordCount.Depth, newCoordCount.Coord.X, newCoordCount.Coord.Y));
             }
 
-            if (_portals.TryGetValue((next.Coord.X, next.Coord.Y), out var portal))
+            if (_portals.TryGetValue(next.Coord, out var portal))
             {
                 var portalCoordCount = new CoordCount(next.Depth + portal.DepthChange, portal.Target, next.Count + 1);
                 queue.Add(portalCoordCount);
@@ -177,17 +166,5 @@ public class RecursiveDonutMazeSolver
         return queue;
     }
 
-    private class CoordCount
-    {
-        public int Depth { get; }
-        public MatrixAddress Coord { get; }
-        public int Count { get; }
-
-        public CoordCount(int depth, MatrixAddress coord, int count)
-        {
-            Depth = depth;
-            Coord = coord;
-            Count = count;
-        }
-    }
+    private record CoordCount(int Depth, MatrixAddress Coord, int Count);
 }

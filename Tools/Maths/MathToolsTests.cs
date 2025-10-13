@@ -3,22 +3,22 @@ namespace Pzl.Tools.Maths;
 public class MathToolsTests
 {
     [Theory]
-    [InlineData(9, 9, 3)]
-    [InlineData(90915, 435, 33, 57)]
-    [InlineData(616, 2, 4, 8, 77)]
-    [InlineData(616, 2, 8, 77)]
+    [InlineData(9, 9L, 3L)]
+    [InlineData(90915, 435L, 33L, 57L)]
+    [InlineData(616, 2L, 4L, 8L, 77L)]
+    [InlineData(616, 2L, 8L, 77L)]
     public void FindsLcm(long expected, params long[] numbers) => MathTools.Lcm(numbers).Should().Be(expected);
 
     [Theory]
-    [InlineData(10, new[] { 1, 2, 5, 10 })]
-    [InlineData(12, new[] { 1, 2, 3, 4, 6, 12 })]
-    [InlineData(25, new[] { 1, 5, 25 })]
-    [InlineData(99, new[] { 1, 3, 9, 11, 33, 99 })]
-    [InlineData(45, new[] { 1, 3, 5, 9, 15, 45 })]
-    [InlineData(20, new[] { 1, 2, 4, 5, 10, 20 })]
-    [InlineData(11, new[] { 1, 11 })]
-    [InlineData(17, new[] { 1, 17 })]
-    public void GetFactors(int input, int[] expected) => 
+    [InlineData(10, 1, 2, 5, 10)]
+    [InlineData(12, 1, 2, 3, 4, 6, 12)]
+    [InlineData(25, 1, 5, 25)]
+    [InlineData(99, 1, 3, 9, 11, 33, 99)]
+    [InlineData(45, 1, 3, 5, 9, 15, 45)]
+    [InlineData(20, 1, 2, 4, 5, 10, 20)]
+    [InlineData(11, 1, 11)]
+    [InlineData(17, 1, 17)]
+    public void GetFactors(int input, params int[] expected) => 
         MathTools.GetFactors(input).Should().BeEquivalentTo(expected);
 
     [Fact]

@@ -46,18 +46,18 @@ public static class PathFinder
         Func<Matrix<char>, MatrixAddress, List<MatrixAddress>> neighborFunc)
     {
         var queue = new List<CoordCount> { new(to.X, to.Y, 0) };
-        var seen = new HashSet<(int, int)> { to.Tuple };
+        var seen = new HashSet<MatrixAddress> { to };
         var index = 0;
-        while (index < queue.Count && !seen.Contains(from.Tuple))
+        while (index < queue.Count && !seen.Contains(from))
         {
             var next = queue[index];
             matrix.MoveTo(next.X, next.Y);
-            var adjacentCoords = neighborFunc(matrix, matrix.Address).Where(o => !seen.Contains(o.Tuple)).ToList();
+            var adjacentCoords = neighborFunc(matrix, matrix.Address).Where(o => !seen.Contains(o)).ToList();
             var newCoordCounts = adjacentCoords.Select(o => new CoordCount(o, next.Count + 1)).ToList();
             queue.AddRange(newCoordCounts);
             foreach (var coordCount in newCoordCounts)
             {
-                seen.Add(coordCount.Coord.Tuple);
+                seen.Add(coordCount.Coord);
             }
             index++;
         }

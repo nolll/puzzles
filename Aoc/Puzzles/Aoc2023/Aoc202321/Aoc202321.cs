@@ -29,8 +29,8 @@ public class Aoc202321 : AocPuzzle
         var matrix = MatrixBuilder.BuildCharMatrix(s);
         var start = matrix.FindAddresses('S').First();
         var center = start.X;
-        var (left, top) = new MatrixAddress(matrix.XMin, matrix.YMin).Tuple;
-        var (right, bottom) = new MatrixAddress(matrix.XMax, matrix.YMax).Tuple;
+        var (left, top) = new MatrixAddress(matrix.XMin, matrix.YMin);
+        var (right, bottom) = new MatrixAddress(matrix.XMax, matrix.YMax);
         var size = matrix.Width;
         matrix.WriteValueAt(start, '.');
          

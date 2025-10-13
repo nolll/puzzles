@@ -63,7 +63,8 @@ public class MatrixTests
     {
         var matrix = new Matrix<int>(size, size);
 
-        matrix.Center.Tuple.Should().Be((expected, expected));
+        matrix.Center.X.Should().Be(expected);
+        matrix.Center.Y.Should().Be(expected);
     }
 
     [Fact]

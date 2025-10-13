@@ -25,7 +25,7 @@ public class Aoc202310 : AocPuzzle
 
     private static char GetStartPointChar(Matrix<char> matrix, MatrixAddress startPoint)
     {
-        var (x, y) = startPoint.Tuple;
+        var (x, y) = startPoint;
         var top = matrix.ReadValueAt(new MatrixAddress(x, y - 1));
         var right = matrix.ReadValueAt(new MatrixAddress(x + 1, y));
         var bottom = matrix.ReadValueAt(new MatrixAddress(x, y + 1));
@@ -115,7 +115,7 @@ public class Aoc202310 : AocPuzzle
     {
         var currentPipePart = matrix.ReadValueAt(currentPoint);
 
-        var (x, y) = currentPoint.Tuple;
+        var (x, y) = currentPoint;
         var top = new MatrixAddress(x, y - 1);
         var right = new MatrixAddress(x + 1, y);
         var bottom = new MatrixAddress(x, y + 1);

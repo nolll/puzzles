@@ -1,4 +1,4 @@
-namespace Pzl.Tools.CoordinateSystems;
+namespace Pzl.Tools.Grids;
 
 public static class MatrixConstants
 {

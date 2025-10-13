@@ -1,4 +1,4 @@
-namespace Pzl.Tools.CoordinateSystems.CoordinateSystem4D;
+namespace Pzl.Tools.Grids.Grids4d;
 
 public class Matrix4DTests
 {

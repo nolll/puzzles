@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
+namespace Pzl.Tools.Grids.Grids3d;
 
 [DebuggerDisplay("{X},{Y},{Z}")]
 public class Matrix3DAddress : IEquatable<Matrix3DAddress>

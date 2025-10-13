@@ -1,6 +1,6 @@
 using Pzl.Common;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Graphs;
+using Pzl.Tools.Grids.Grids2d;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202317;
 

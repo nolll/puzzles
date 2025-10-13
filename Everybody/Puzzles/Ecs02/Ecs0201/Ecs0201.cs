@@ -1,6 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Combinatorics;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Grids.Grids2d;
 using Pzl.Tools.Lists;
 using Pzl.Tools.Strings;
 

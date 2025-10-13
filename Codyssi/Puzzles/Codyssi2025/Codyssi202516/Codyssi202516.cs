@@ -1,7 +1,7 @@
 using System.Numerics;
 using Pzl.Common;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Debug;
+using Pzl.Tools.Grids.Grids2d;
 using Pzl.Tools.Lists;
 using Pzl.Tools.Maths;
 using Pzl.Tools.Strings;

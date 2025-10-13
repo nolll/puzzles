@@ -1,4 +1,4 @@
-namespace Pzl.Tools.CoordinateSystems;
+namespace Pzl.Tools.Grids;
 
 public enum MatrixAddMode
 {

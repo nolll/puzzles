@@ -1,6 +1,6 @@
 using Pzl.Tools.Strings;
 
-namespace Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+namespace Pzl.Tools.Grids.Grids2d;
 
 public static class MatrixBuilder
 {

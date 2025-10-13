@@ -1,5 +1,5 @@
 using FluentAssertions;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Grids.Grids2d;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq03;
 

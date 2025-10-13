@@ -1,5 +1,5 @@
 using Pzl.Common;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Grids.Grids2d;
 
 namespace Pzl.Everybody.Puzzles.Ece2024.Ece202410;
 

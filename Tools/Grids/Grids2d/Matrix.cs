@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+namespace Pzl.Tools.Grids.Grids2d;
 
 public class Matrix<T> where T : struct
 {

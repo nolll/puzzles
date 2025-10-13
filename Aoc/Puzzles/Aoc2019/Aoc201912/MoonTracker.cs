@@ -1,4 +1,4 @@
-using Pzl.Tools.CoordinateSystems.CoordinateSystem3D;
+using Pzl.Tools.Grids.Grids3d;
 using Pzl.Tools.Maths;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201912;

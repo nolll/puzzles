@@ -1,5 +1,5 @@
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
 using Pzl.Tools.Cryptography;
+using Pzl.Tools.Grids.Grids2d;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201617;
 

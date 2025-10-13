@@ -1,5 +1,5 @@
 using System.Text.RegularExpressions;
-using Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+using Pzl.Tools.Grids.Grids2d;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201622;

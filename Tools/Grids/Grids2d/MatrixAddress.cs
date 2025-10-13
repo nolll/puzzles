@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Pzl.Tools.CoordinateSystems.CoordinateSystem2D;
+namespace Pzl.Tools.Grids.Grids2d;
 
 [DebuggerDisplay("{X},{Y}")]
 public record MatrixAddress(int X, int Y)

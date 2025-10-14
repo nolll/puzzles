@@ -5,6 +5,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202214;
 
 public class FallingSand
 {
+    private static class Chars
+    {
+        public const char Space = '.';
+        public const char Sand = 'o';
+        public const char Wall = '#';
+    }
+    
     private readonly Coord _sandSource = new(500, 0);
 
     public int Part1(string input)
@@ -12,7 +19,7 @@ public class FallingSand
         var grid = BuildGrid(input, 1);
 
         grid.MoveTo(_sandSource);
-        while (grid.ReadValueAt(_sandSource) == '.')
+        while (grid.ReadValueAt(_sandSource) == Chars.Space)
         {
             var currentSand = _sandSource;
 
@@ -27,10 +34,10 @@ public class FallingSand
             if (currentSand.Y == grid.Height - 1)
                 break;
 
-            grid.WriteValueAt(currentSand, 'o');
+            grid.WriteValueAt(currentSand, Chars.Sand);
         }
 
-        return grid.Values.Count(o => o == 'o');
+        return grid.Values.Count(o => o == Chars.Sand);
     }
 
     public int Part2(string input)
@@ -38,7 +45,7 @@ public class FallingSand
         var grid = BuildGrid(input, 2);
 
         grid.MoveTo(_sandSource);
-        while (grid.ReadValueAt(_sandSource) == '.')
+        while (grid.ReadValueAt(_sandSource) == Chars.Space)
         {
             var currentSand = _sandSource;
             while (TryMove(grid, currentSand, out var newSand))
@@ -46,15 +53,15 @@ public class FallingSand
                 currentSand = newSand;
             }
 
-            grid.WriteValueAt(currentSand, 'o');
+            grid.WriteValueAt(currentSand, Chars.Sand);
         }
 
-        return grid.Values.Count(o => o == 'o');
+        return grid.Values.Count(o => o == Chars.Sand);
     }
 
     private static Grid<char> BuildGrid(string input, int part)
     {
-        var grid = new Grid<char>(1, 1, '.');
+        var grid = new Grid<char>(1, 1, Chars.Space);
         var lines = StringReader.ReadLines(input, false);
 
         var coordLists = lines.Select(o => o.Split(" -> "));
@@ -85,7 +92,7 @@ public class FallingSand
                     for (var y = minY; y <= maxY; y++)
                     {
                         grid.MoveTo(x, y);
-                        grid.WriteValueAt(x, y, '#');
+                        grid.WriteValueAt(x, y, Chars.Wall);
                     }
                 }
                 else
@@ -94,7 +101,7 @@ public class FallingSand
                     for (var x = minX; x <= maxX; x++)
                     {
                         grid.MoveTo(x, y);
-                        grid.WriteValueAt(x, y, '#');
+                        grid.WriteValueAt(x, y, Chars.Wall);
                     }
                 }
             }
@@ -112,7 +119,7 @@ public class FallingSand
             var sy = grid.Height - 1;
             for (var x = 0; x < grid.Width; x++)
             {
-                grid.WriteValueAt(x, sy, '#');
+                grid.WriteValueAt(x, sy, Chars.Wall);
             }
         }
 
@@ -124,7 +131,7 @@ public class FallingSand
         var down = new Coord(currentSand.X, currentSand.Y + 1);
         grid.MoveTo(down);
 
-        if (grid.ReadValueAt(down) == '.')
+        if (grid.ReadValueAt(down) == Chars.Space)
         {
             newSand = down;
             return true;
@@ -132,7 +139,7 @@ public class FallingSand
 
         var downLeft = new Coord(down.X - 1, down.Y);
         grid.MoveTo(downLeft);
-        if (grid.ReadValueAt(downLeft) == '.')
+        if (grid.ReadValueAt(downLeft) == Chars.Space)
         {
             newSand = downLeft;
             return true;
@@ -140,7 +147,7 @@ public class FallingSand
 
         var downRight = new Coord(down.X + 1, down.Y);
         grid.MoveTo(downRight);
-        if (grid.ReadValueAt(downRight) == '.')
+        if (grid.ReadValueAt(downRight) == Chars.Space)
         {
             newSand = downRight;
             return true;

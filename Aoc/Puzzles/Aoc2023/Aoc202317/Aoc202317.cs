@@ -46,9 +46,7 @@ public class Aoc202317 : AocPuzzle
             targets.Add($"{targetCoord.Id}|{GridDirection.Down}|{i}");
         }
 
-        var counts = sources.Select(source => Dijkstra.BestCost(graph, source, targets)).ToList();
-
-        return counts.Min();
+        return sources.Select(source => Dijkstra.BestCost(graph, source, targets)).Min();
     }
 
     private static List<GraphEdge> BuildGraph(Grid<int> grid, int minStraightCount, int maxStraightCount)
@@ -65,7 +63,7 @@ public class Aoc202317 : AocPuzzle
         return graph;
     }
 
-    private static List<GraphEdge> GetDirectionGraph(Grid<int> grid, Coord coord, GridDirection forward, int minStraightCount, int maxStraightCount)
+    private static IEnumerable<GraphEdge> GetDirectionGraph(Grid<int> grid, Coord coord, GridDirection forward, int minStraightCount, int maxStraightCount)
     {
         grid.MoveTo(coord);
         grid.TurnTo(forward);
@@ -74,25 +72,22 @@ public class Aoc202317 : AocPuzzle
         grid.TurnTo(forward);
         grid.TurnRight();
         var right = grid.Direction;
-        grid.TurnTo(forward); 
+        grid.TurnTo(forward);
         var leftCoord = new Coord(coord.X + left.X, coord.Y + left.Y);
         var leftCheckCoord = new Coord(coord.X + left.X * minStraightCount, coord.Y + left.Y * minStraightCount);
         var rightCoord = new Coord(coord.X + right.X, coord.Y + right.Y);
         var rightCheckCoord = new Coord(coord.X + right.X * minStraightCount, coord.Y + right.Y * minStraightCount);
         var forwardCoord = new Coord(coord.X + forward.X, coord.Y + forward.Y);
-        var graph = new List<GraphEdge>();
 
         for (var i = 1; i <= maxStraightCount; i++)
         {
             var fromId = $"{coord.Id}|{forward}|{i}";
             if (i >= minStraightCount && !grid.IsOutOfRange(leftCheckCoord))
-                graph.Add(new GraphEdge(fromId, $"{leftCoord.Id}|{left}|1", grid.ReadValueAt(leftCoord)));
+                yield return new GraphEdge(fromId, $"{leftCoord.Id}|{left}|1", grid.ReadValueAt(leftCoord));
             if (i >= minStraightCount && !grid.IsOutOfRange(rightCheckCoord))
-                graph.Add(new GraphEdge(fromId, $"{rightCoord.Id}|{right}|1", grid.ReadValueAt(rightCoord)));
+                yield return new GraphEdge(fromId, $"{rightCoord.Id}|{right}|1", grid.ReadValueAt(rightCoord));
             if (i < maxStraightCount && !grid.IsOutOfRange(forwardCoord))
-                graph.Add(new GraphEdge(fromId, $"{forwardCoord.Id}|{forward}|{i + 1}", grid.ReadValueAt(forwardCoord)));
+                yield return new GraphEdge(fromId, $"{forwardCoord.Id}|{forward}|{i + 1}", grid.ReadValueAt(forwardCoord));
         }
-
-        return graph;
     }
 }

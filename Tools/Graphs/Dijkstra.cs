@@ -6,7 +6,7 @@ public static class Dijkstra
         BestCost(edges, source, [target]);
     
     public static int BestCost(List<GraphEdge> edges, string source, List<string> targets) => 
-        BestPath(Graph.GetNodes(edges), source, targets).Cost;
+        BestCost(Graph.GetNodes(edges), source, targets);
 
     public static Result BestPath(IEnumerable<GraphEdge> edges, string source, string target) => 
         BestPath(edges, source, [target]);
@@ -19,8 +19,8 @@ public static class Dijkstra
 
     public static int BestCost(Dictionary<string, GraphNode> nodes, string source, string target) =>
         BestCost(nodes, source, [target]);
-    
-    public static int BestCost(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
+
+    private static int BestCost(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => int.MaxValue);
@@ -52,7 +52,7 @@ public static class Dijkstra
     private static Result BestPath(Dictionary<string, GraphNode> nodes, string source, List<string> targets)
     {
         var start = nodes[source];
-        var visited = nodes.Keys.ToDictionary(k => k, _ => new Result(int.MaxValue, new List<string>()));
+        var visited = nodes.Keys.ToDictionary(k => k, _ => new Result(int.MaxValue, []));
         visited[source] = new Result(0, [source]);
         var queue = new Queue<GraphNode>();
         queue.Enqueue(start);

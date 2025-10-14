@@ -325,26 +325,26 @@ public class Grid<T> where T : struct
 
     public IList<Coord> FindAddresses(T value)
     {
-        var addresses = new List<Coord>();
+        var coords = new List<Coord>();
         for (var y = YMin; y <= YMax; y++)
         {
             for (var x = XMin; x <= XMax; x++)
             {
-                var address = new Coord(x, y);
-                var val = ReadValueAt(address);
+                var coord = new Coord(x, y);
+                var val = ReadValueAt(coord);
                 if (val.Equals(value))
-                    addresses.Add(address);
+                    coords.Add(coord);
             }
         }
 
-        return addresses;
+        return coords;
     }
 
-    public bool IsOutOfRange(Coord address) =>
-        address.Y > YMax ||
-        address.Y < YMin ||
-        address.X > XMax ||
-        address.X < XMin;
+    public bool IsOutOfRange(Coord coord) =>
+        coord.Y > YMax ||
+        coord.Y < YMin ||
+        coord.X > XMax ||
+        coord.X < XMin;
 
     public Grid<T> Clone(int multiplier = 1)
     {
@@ -412,8 +412,7 @@ public class Grid<T> where T : struct
         return new Grid<T>(slicedFrom, slicedTo, values, DefaultValue);
     }
 
-    public Grid<T> Slice(Coord from, int size) => 
-        Slice(from, size, size);
+    public Grid<T> Slice(Coord from, int size) => Slice(from, size, size);
 
     public Grid<T> Slice(Coord from, int width, int height) => 
         Slice(from, new Coord(from.X + width - 1, from.Y + height - 1));

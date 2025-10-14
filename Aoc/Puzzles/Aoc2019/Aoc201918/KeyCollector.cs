@@ -1,4 +1,5 @@
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201918;
 
@@ -130,7 +131,7 @@ public class KeyCollector
 
     private void Init(string input, bool useFourRobots)
     {
-        var rows = input.Trim().Split('\n');
+        var rows = input.Trim().Split(LineBreaks.Single);
         var width = rows.First().Length;
         var height = rows.Length;
         _keys = new List<VaultKey>();
@@ -268,10 +269,10 @@ public class KeyCollector
         {
             foreach (var door in _doors)
             {
-                if (door.Address.Equals(coord))
-                {
-                    yield return door;
-                }
+                if (!door.Address.Equals(coord))
+                    continue;
+                
+                yield return door;
             }
         }
     }

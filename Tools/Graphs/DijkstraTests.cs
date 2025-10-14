@@ -18,8 +18,6 @@ public class DijkstraTests
             new("E", "C", 6)
         };
 
-        var result = Dijkstra.BestCost(edges, "A", "C");
-
-        result.Should().Be(29);
+        Dijkstra.BestCost(edges, "A", "C").Should().Be(29);
     }
 }

@@ -24,9 +24,9 @@ public class Aoc202416 : AocPuzzle
         
         var startKey = $"{GridDirection.Right}|{start.Id}";
         List<string> endKeys = [$"{GridDirection.Right}|{end.Id}", $"{GridDirection.Up}|{end.Id}"];
-        var shortestPath = Dijkstra.BestPath(inputs, startKey, endKeys);
+        var shortestPath = Dijkstra.BestCost(inputs, startKey, endKeys);
         
-        return new PuzzleResult(shortestPath.Cost, "7f6e0e55c1b9ba30973eeb8218555c3a");
+        return new PuzzleResult(shortestPath, "7f6e0e55c1b9ba30973eeb8218555c3a");
     }
 
     public PuzzleResult Part2(string input)
@@ -60,7 +60,7 @@ public class Aoc202416 : AocPuzzle
         return usedCoords;
     }
 
-    private List<GraphEdge> BuildGraph(Grid<char> grid)
+    private static List<GraphEdge> BuildGraph(Grid<char> grid)
     {
         var edges = new List<GraphEdge>();
 

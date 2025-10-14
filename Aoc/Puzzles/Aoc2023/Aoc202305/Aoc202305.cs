@@ -10,24 +10,20 @@ public class Aoc202305 : AocPuzzle
     public PuzzleResult RunPart1(string input)
     {
         var result = Part1(input);
-
         return new PuzzleResult(result, "8af1efe2f5bf2d0e78873be92fcd8fff");
     }
 
     public PuzzleResult RunPart2(string input)
     {
         var result = Part2(input);
-
         return new PuzzleResult(result, "bd7466367c1fe654a2ec0e3f1fe3f112");
     }
 
     public static long Part1(string input)
     {
         var groups = StringReader.ReadLineGroups(input);
-
         var seeds = ParseSeeds(groups.First());
         var rangeGroups = groups.Skip(1).Select(ParseGroup).ToList();
-
         var locations = seeds.Select(seed => Convert(rangeGroups, seed));
 
         return locations.Min();
@@ -39,11 +35,11 @@ public class Aoc202305 : AocPuzzle
         {
             foreach (var range in rangeGroup.Ranges)
             {
-                if (range.IsInRange(v))
-                {
-                    v = v - range.Source + range.Destination;
-                    break;
-                }
+                if (!range.IsInRange(v))
+                    continue;
+                
+                v = v - range.Source + range.Destination;
+                break;
             }
         }
 
@@ -78,11 +74,10 @@ public class Aoc202305 : AocPuzzle
 
                     if (overlapStart >= overlapEnd)
                         continue;
-                    
-                    newSeeds.Push(
-                        new SeedRange(
-                            overlapStart - range.Source + range.Destination,
-                            overlapEnd - range.Source + range.Destination));
+
+                    newSeeds.Push(new SeedRange(
+                        overlapStart - range.Source + range.Destination,
+                        overlapEnd - range.Source + range.Destination));
 
                     if (overlapStart > seed.Start)
                         seeds.Push(seed with { End = overlapStart });

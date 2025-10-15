@@ -120,7 +120,7 @@ public class AirDuctNavigator
 
         foreach (var location in _locations)
         {
-            var coords = PathFinder.ShortestPathTo(_grid, startAddress, location.Address);
+            var coords = PathFinder.ShortestPathTo(_grid, startAddress, location.Address).ToList();
             if (coords.Count > 0) 
                 paths.Add(new AirDuctPath(location, coords.Count));
         }
@@ -141,7 +141,7 @@ public class AirDuctNavigator
                 if(_paths.ContainsKey((location.Id, otherLocation.Id)) || _paths.ContainsKey((otherLocation.Id, location.Id)))
                     continue;
                     
-                var stepCountToLocation = PathFinder.ShortestPathTo(_grid, location.Address, otherLocation.Address).Count;
+                var stepCountToLocation = PathFinder.ShortestPathTo(_grid, location.Address, otherLocation.Address).Count();
                 var pathToLocation = new AirDuctPath(otherLocation, stepCountToLocation);
                 var pathBack = new AirDuctPath(location, stepCountToLocation);
                 _paths.Add((location.Id, otherLocation.Id), pathToLocation);

@@ -34,7 +34,7 @@ public class HillClimbing
     private static int StepCountTo(Grid<char> grid, IList<Coord> from, Coord to)
     {
         var coordCounts = GetCoordCounts(grid, from, to);
-        var goal = coordCounts.FirstOrDefault(o => o.X == to.X && o.Y == to.Y);
+        var goal = coordCounts.FirstOrDefault(o => o.Coord.X == to.X && o.Coord.Y == to.Y);
         return goal?.Count ?? 0;
     }
     

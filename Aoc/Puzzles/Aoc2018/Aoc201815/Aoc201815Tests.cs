@@ -15,10 +15,7 @@ public class Aoc201815Tests
                              #######
                              """;
 
-        var battle = new ChocolateBattle(input);
-        battle.RunOnce();
-
-        battle.Outcome.Should().Be(27730);
+        new ChocolateBattle(input).FightOneRound().Should().Be(27730);
     }
 
     [Fact]
@@ -34,10 +31,7 @@ public class Aoc201815Tests
                              #######
                              """;
 
-        var battle = new ChocolateBattle(input);
-        battle.RunOnce();
-
-        battle.Outcome.Should().Be(36334);
+        new ChocolateBattle(input).FightOneRound().Should().Be(36334);
     }
 
     [Fact]
@@ -53,10 +47,7 @@ public class Aoc201815Tests
                              #######
                              """;
 
-        var battle = new ChocolateBattle(input);
-        battle.RunOnce();
-
-        battle.Outcome.Should().Be(39514);
+        new ChocolateBattle(input).FightOneRound().Should().Be(39514);
     }
 
     [Fact]
@@ -72,10 +63,7 @@ public class Aoc201815Tests
                              #######
                              """;
 
-        var battle = new ChocolateBattle(input);
-        battle.RunOnce();
-
-        battle.Outcome.Should().Be(27755);
+        new ChocolateBattle(input).FightOneRound().Should().Be(27755);
     }
 
 
@@ -92,10 +80,7 @@ public class Aoc201815Tests
                              #######
                              """;
 
-        var battle = new ChocolateBattle(input);
-        battle.RunOnce();
-
-        battle.Outcome.Should().Be(28944);
+        new ChocolateBattle(input).FightOneRound().Should().Be(28944);
     }
 
 
@@ -114,10 +99,7 @@ public class Aoc201815Tests
                              #########
                              """;
 
-        var battle = new ChocolateBattle(input);
-        battle.RunOnce();
-
-        battle.Outcome.Should().Be(18740);
+        new ChocolateBattle(input).FightOneRound().Should().Be(18740);
     }
 
     [Fact]
@@ -133,10 +115,7 @@ public class Aoc201815Tests
                              #######
                              """;
 
-        var battle = new ChocolateBattle(input);
-        battle.RunUntilElvesWins(4);
-
-        battle.Outcome.Should().Be(4988);
+        new ChocolateBattle(input).FightUntilElvesWins().Should().Be(4988);
     }
 
     [Fact]
@@ -152,10 +131,7 @@ public class Aoc201815Tests
                              #######
                              """;
 
-        var battle = new ChocolateBattle(input);
-        battle.RunUntilElvesWins(4);
-
-        battle.Outcome.Should().Be(31284);
+        new ChocolateBattle(input).FightUntilElvesWins().Should().Be(31284);
     }
 
     [Fact]
@@ -171,10 +147,7 @@ public class Aoc201815Tests
                              #######
                              """;
 
-        var battle = new ChocolateBattle(input);
-        battle.RunUntilElvesWins(4);
-
-        battle.Outcome.Should().Be(3478);
+        new ChocolateBattle(input).FightUntilElvesWins().Should().Be(3478);
     }
 
     [Fact]
@@ -190,10 +163,7 @@ public class Aoc201815Tests
                              #######
                              """;
 
-        var battle = new ChocolateBattle(input);
-        battle.RunUntilElvesWins(4);
-
-        battle.Outcome.Should().Be(6474);
+        new ChocolateBattle(input).FightUntilElvesWins().Should().Be(6474);
     }
 
     [Fact]
@@ -211,9 +181,6 @@ public class Aoc201815Tests
                              #########
                              """;
 
-        var battle = new ChocolateBattle(input);
-        battle.RunUntilElvesWins(4);
-
-        battle.Outcome.Should().Be(1140);
+        new ChocolateBattle(input).FightUntilElvesWins().Should().Be(1140);
     }
 }

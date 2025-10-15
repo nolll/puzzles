@@ -43,7 +43,7 @@ public class Aoc202418 : AocPuzzle
         var start = new Coord(0, 0);
         var end = new Coord(grid.XMax, grid.YMax);
 
-        return PathFinder.ShortestPathTo(grid, start, end).Count;
+        return PathFinder.ShortestPathTo(grid, start, end).Count();
     }
 
     public string Part2(string input, int width, int height)
@@ -85,6 +85,6 @@ public class Aoc202418 : AocPuzzle
         }
         
         var r = PathFinder.ShortestPathTo(m, start, end);
-        return r.Count != 0;
+        return r.Count() != 0;
     }
 }

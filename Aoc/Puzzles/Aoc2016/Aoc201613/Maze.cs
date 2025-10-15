@@ -7,7 +7,7 @@ public class Maze(int width, int height, int secretNumber)
     private readonly Grid<char> _grid = BuildGrid(width, height, secretNumber);
 
     public int StepCountToTarget(int targetX, int targetY) =>
-        PathFinder.ShortestPathTo(_grid, new Coord(1, 1), new Coord(targetX, targetY)).Count;
+        PathFinder.ShortestPathTo(_grid, new Coord(1, 1), new Coord(targetX, targetY)).Count();
     
     public int LocationCountAfter(int steps) => LocationCountAfter(new Coord(1, 1), steps);
 

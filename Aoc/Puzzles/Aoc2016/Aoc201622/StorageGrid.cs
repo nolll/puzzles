@@ -74,8 +74,8 @@ public class StorageGrid
         var topLeft = new Coord(0, 0);
         var topRight = new Coord(grid.Width - 1, 0);
         var goal = new Coord(topRight.X - 1, topRight.Y);
-        var distance1 = PathFinder.ShortestPathTo(grid, startAddress, goal).Count;
-        var distance2 = PathFinder.ShortestPathTo(grid, goal, topLeft).Count;
+        var distance1 = PathFinder.ShortestPathTo(grid, startAddress, goal).Count();
+        var distance2 = PathFinder.ShortestPathTo(grid, goal, topLeft).Count();
         return distance1 + distance2 * 5 + 1;
     }
 

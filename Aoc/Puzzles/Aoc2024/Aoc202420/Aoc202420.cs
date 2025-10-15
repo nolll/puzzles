@@ -31,7 +31,7 @@ public class Aoc202420 : AocPuzzle
         grid.WriteValueAt(start, '.');
         grid.WriteValueAt(end, '.');
         
-        var path = PathFinder.ShortestPathTo(grid, start, end);
+        var path = PathFinder.ShortestPathTo(grid, start, end).ToList();
         path = [start, ..path];
         
         var distanceToTarget = new Dictionary<Coord, int>();

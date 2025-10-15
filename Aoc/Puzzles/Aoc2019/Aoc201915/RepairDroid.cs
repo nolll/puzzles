@@ -37,7 +37,7 @@ public class RepairDroid
         _grid.MoveTo(_grid.StartCoord);
 
         var path = PathFinder.ShortestPathTo(_grid, _grid.StartCoord, _target);
-        return (path.Count, _grid);
+        return (path.Count(), _grid);
     }
 
     private long ReadInput()

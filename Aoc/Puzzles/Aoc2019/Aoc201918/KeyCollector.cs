@@ -239,7 +239,7 @@ public class KeyCollector
 
         foreach (var key in _keys)
         {
-            var coords = PathFinder.ShortestPathTo(_grid, startAddress, key.Address);
+            var coords = PathFinder.ShortestPathTo(_grid, startAddress, key.Address).ToList();
             if (coords.Count > 0)
                 paths.Add(new VaultPath(key, coords, new List<char>()));
         }
@@ -254,7 +254,7 @@ public class KeyCollector
             var otherKeys = _keys.Where(o => o.Id != key.Id);
             foreach (var otherKey in otherKeys)
             {
-                var coords = PathFinder.ShortestPathTo(_grid, key.Address, otherKey.Address);
+                var coords = PathFinder.ShortestPathTo(_grid, key.Address, otherKey.Address).ToList();
                 var blockingDoors = FindBlockingDoors(coords);
                 var keysNeeded = blockingDoors.Select(o => char.ToLower(o.Id)).ToList();
                 var path = new VaultPath(otherKey, coords, keysNeeded);

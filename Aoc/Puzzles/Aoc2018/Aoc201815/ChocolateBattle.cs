@@ -4,167 +4,170 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201815;
 
 public class ChocolateBattle(string input)
 {
-    private Grid<char> _grid = new();
-    private IList<BattleFigure> _figures = new List<BattleFigure>();
-
-    private IDictionary<Coord, IList<Coord>> _neighborCache =
-        new Dictionary<Coord, IList<Coord>>();
-
-    public int Outcome { get; private set; }
-    private string _winners = "";
-
-    public void RunUntilElvesWins(int initalAttackPower)
+    private static class Chars
     {
-        var elfAttackPower = initalAttackPower;
+        public const char Wall = '#';
+        public const char Space = '.';
+        public const char Goblin = 'G';
+        public const char Elf = 'E';
+    }
+    
+    private const int ElfAttackPowerPart1 = 3;
+    private const int ElfAttackPowerPart2 = 4;
+    
+    private Grid<char> _grid = new();
+    private List<BattleFigure> _figures = [];
+    private Dictionary<Coord, IList<Coord>> _neighborCache = new();
+
+    public int FightOneRound()
+    {
+        Reset(ElfAttackPowerPart1);
+        BuildNeighborCache();
+        var round = Fight();
+        return Result(round);
+    }
+    
+    public int FightUntilElvesWins()
+    {
+        var attackPower = ElfAttackPowerPart2;
+        Reset(attackPower);
+        BuildNeighborCache();
+        var initialElfCount = ElfCount;
         while (true)
         {
-            Init(elfAttackPower);
-            var initialElfCount = _figures.Count(o => o.Type == BattleFigureType.Elf);
-            Run(true);
-            if (_winners == "Elves" && _figures.Count(o => o.Type == BattleFigureType.Elf) == initialElfCount)
-                break;
+            var round = Fight(true);
+            if (round > 0 && GoblinCount == 0 && ElfCount == initialElfCount)
+                return Result(round);
 
-            elfAttackPower++;
+            attackPower++;
+            Reset(attackPower);
         }
     }
 
-    public void RunOnce()
-    {
-        const int elfAttackPower = 3;
-        Init(elfAttackPower);
-        Run(false);
-    }
+    private int Result(int round) => _figures.Sum(o => o.HitPoints) * round;
+    private int ElfCount => FigureCount(Chars.Elf);
+    private int GoblinCount => FigureCount(Chars.Goblin);
+    private int FigureCount(char c) => _figures.Where(o => !o.IsDead).Count(o => o.Type == c);
 
-    private void Run(bool breakOnElfDeath)
+    private int Fight(bool breakOnElfDeath = false)
     {
         var round = 0;
         while (IsBothTypesStillAlive)
         {
-            var incrementRound = true;
+            var gameOver = false;
             foreach (var figure in _figures)
             {
                 if (figure.IsDead)
                     continue;
 
-                var enemyType = figure.Type == BattleFigureType.Elf ? BattleFigureType.Goblin : BattleFigureType.Elf;
-                var enemies = _figures.Where(o => o.Type == enemyType).ToList();
-                if (enemies.All(o => o.IsDead))
+                var enemyType = figure.Type == Chars.Elf ? Chars.Goblin : Chars.Elf;
+                var enemies = _figures.Where(o => o.Type == enemyType && !o.IsDead).ToList();
+                if (!enemies.Any())
                 {
-                    incrementRound = false;
+                    gameOver = true;
                     break;
                 }
 
-                var adjacentEnemyAddresses = NeighborCache(figure.Address).Where(o => _grid.ReadValueAt(o) == enemyType).ToList();
+                var enemy = GetEnemyToFight(enemies, figure, enemyType);
 
-                if (!adjacentEnemyAddresses.Any())
+                if (enemy is null)
                 {
-                    var targets = new List<Coord>();
-                    foreach (var enemy in enemies)
-                    {
-                        var adjacentAddresses = NeighborCache(enemy.Address);
-                        foreach (var adjacentAddress in adjacentAddresses)
-                        {
-                            if (_grid.ReadValueAt(adjacentAddress) == '.')
-                            {
-                                targets.Add(adjacentAddress);
-                            }
-                        }
-                    }
-
-                    targets = targets.Distinct().ToList();
-                    var paths = targets.Select(o => PathFinder.ShortestPathTo(_grid, figure.Address, o)).ToList();
-                    var possibleMoves = paths
-                        .Where(o => o.Any())
-                        .OrderBy(o => o.Count)
-                        .ThenBy(o => o.First().Y)
-                        .ThenBy(o => o.First().X)
-                        .Select(o => o.First());
-                    var bestMove = possibleMoves.FirstOrDefault();
-                    if (bestMove != null)
-                    {
-                        _grid.WriteValueAt(figure.Address, '.');
-                        var newAddress = new Coord(bestMove.X, bestMove.Y);
-                        figure.MoveTo(newAddress);
-                        _grid.WriteValueAt(newAddress, figure.Type);
-                    }
+                    MoveCloser(enemies, figure);
+                    enemy = GetEnemyToFight(enemies, figure, enemyType);
                 }
 
-                adjacentEnemyAddresses = NeighborCache(figure.Address).Where(o => _grid.ReadValueAt(o) == enemyType).ToList();
-
-                if (adjacentEnemyAddresses.Any())
-                {
-                    var bestEnemyAddress = adjacentEnemyAddresses
-                        .OrderBy(ea => enemies.Single(f => !f.IsDead && f.Address.Equals(ea)).HitPoints)
-                        .ThenBy(o => o.Y)
-                        .ThenBy(o => o.X)
-                        .First();
-                    var enemy = enemies.First(o => o.Address.Equals(bestEnemyAddress));
-                    enemy.Hit(figure.AttackPower);
-                    if (!enemy.IsDead)
-                        continue;
+                if (enemy is null)
+                    continue;
+                
+                enemy.Hit(figure.AttackPower);
+                if (!enemy.IsDead)
+                    continue;
                     
-                    if (breakOnElfDeath && enemy.Type == BattleFigureType.Elf)
-                        return;
+                _grid.WriteValueAt(enemy.Coord, Chars.Space);
                     
-                    _grid.WriteValueAt(enemy.Address, '.');
-                }
+                if (breakOnElfDeath && enemy.Type == Chars.Elf)
+                    return 0;
             }
 
-            _figures = _figures.Where(o => !o.IsDead).OrderBy(o => o.Address.Y).ThenBy(o => o.Address.X).ToList();
-            if (incrementRound)
-            {
+            _figures = _figures.Where(o => !o.IsDead).OrderBy(o => o.Coord.Y).ThenBy(o => o.Coord.X).ToList();
+            
+            if (!gameOver) 
                 round++;
-            }
         }
 
-        Outcome = _figures.Sum(o => o.HitPoints) * round;
-        _winners = _figures.First().Type == BattleFigureType.Elf ? "Elves" : "Goblin";
+        return round;
     }
+
+    private BattleFigure? GetEnemyToFight(List<BattleFigure> enemies, BattleFigure figure, char enemyType)
+    {
+        var adjacentEnemyCoords = NeighborCache(figure.Coord).Where(o => _grid.ReadValueAt(o) == enemyType).ToList();
+        if (!adjacentEnemyCoords.Any())
+            return null;
+        
+        var bestEnemyCoord = adjacentEnemyCoords
+            .OrderBy(ea => enemies.Single(f => f.Coord.Equals(ea)).HitPoints)
+            .ThenBy(o => o.Y)
+            .ThenBy(o => o.X)
+            .FirstOrDefault();
+                    
+        return enemies.First(o => o.Coord.Equals(bestEnemyCoord));
+    }
+
+    private void MoveCloser(List<BattleFigure> enemies, BattleFigure figure)
+    {
+        var bestMove = GetBestMove(enemies, figure);
+
+        if (bestMove == null)
+            return;
+        
+        _grid.WriteValueAt(figure.Coord, Chars.Space);
+        figure.MoveTo(bestMove);
+        _grid.WriteValueAt(bestMove, figure.Type);
+    }
+
+    private Coord? GetBestMove(List<BattleFigure> enemies, BattleFigure figure) => GetTargetCoords(enemies)
+        .Distinct()
+        .Select(o => PathFinder.ShortestPathTo(_grid, figure.Coord, o))
+        .Where(o => o.Any())
+        .OrderBy(o => o.Count())
+        .ThenBy(o => o.First().Y)
+        .ThenBy(o => o.First().X)
+        .Select(o => o.First())
+        .FirstOrDefault();
+
+    private IEnumerable<Coord> GetTargetCoords(List<BattleFigure> enemies) => 
+        enemies.SelectMany(o => NeighborCache(o.Coord).Where(p => _grid.ReadValueAt(p) == Chars.Space));
 
     private IList<Coord> NeighborCache(Coord coord) => _neighborCache[coord];
 
-    private bool IsBothTypesStillAlive =>
-        _figures.Any(o => o.Type == BattleFigureType.Elf) &&
-        _figures.Any(o => o.Type == BattleFigureType.Goblin);
+    private bool IsBothTypesStillAlive => _figures.Select(o => o.Type).Distinct().Count() == 2;
 
-    private void Init(int elfAttackPower)
+    private void Reset(int elfAttackPower)
     {
-        _figures = new List<BattleFigure>();
-        var rows = input.Trim().Split('\n');
-        var y = 0;
-
-        var width = rows.First().Length;
-        var height = rows.Length;
-        _grid = new Grid<char>(width, height);
-
-        foreach (var row in rows)
+        _figures = [];
+        _grid = GridBuilder.BuildCharGrid(input);
+        
+        foreach (var coord in _grid.Coords)
         {
-            var x = 0;
-            var chars = row.Trim().ToCharArray();
-            foreach (var c in chars)
+            var c = _grid.ReadValueAt(coord);
+            if (c is Chars.Elf or Chars.Goblin)
             {
-                var address = new Coord(x, y);
-                _grid.WriteValueAt(address, c);
-                if (c is BattleFigureType.Elf or BattleFigureType.Goblin)
-                {
-                    var attackPower = c == BattleFigureType.Elf ? elfAttackPower : 3;
-                    _figures.Add(new BattleFigure(c, attackPower, address));
-                }
-
-                x += 1;
+                var attackPower = c == Chars.Elf ? elfAttackPower : 3;
+                _figures.Add(new BattleFigure(c, attackPower, coord));
             }
-
-            y += 1;
         }
+    }
 
+    private void BuildNeighborCache()
+    {
         _neighborCache = new Dictionary<Coord, IList<Coord>>();
         foreach (var coord in _grid.Coords)
         {
-            if (_grid.ReadValueAt(coord) == '#') 
+            if (_grid.ReadValueAt(coord) == Chars.Wall) 
                 continue;
             
             var neighbors = _grid.OrthogonalAdjacentCoordsTo(coord)
-                .Where(o => _grid.ReadValueAt(o) != '#')
+                .Where(o => _grid.ReadValueAt(o) != Chars.Wall)
                 .ToList();
             
             _neighborCache.Add(coord, neighbors);

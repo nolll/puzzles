@@ -6,13 +6,12 @@ public class SafeCrackingComputerPart2
 {
     private readonly Dictionary<char, int> _registers;
     private int _index;
-    private readonly AssembunnyInstruction[] _instructions;
 
     public int ValueA => _registers['a'];
 
     public SafeCrackingComputerPart2(string input, int a, int c)
     {
-        _instructions = StringReader.ReadLines(input).Select(o => new AssembunnyInstruction(o)).ToArray();
+        var instructions = StringReader.ReadLines(input).Select(o => new AssembunnyInstruction(o)).ToArray();
         _registers = new Dictionary<char, int>
         {
             ['a'] = a,
@@ -22,9 +21,9 @@ public class SafeCrackingComputerPart2
         };
         _index = 0;
 
-        while (_index < _instructions.Length)
+        while (_index < instructions.Length)
         {
-            var s = _instructions[_index];
+            var s = instructions[_index];
             var command = s.Name;
             try
             {
@@ -32,29 +31,9 @@ public class SafeCrackingComputerPart2
                 {
                     var value = s.Args[0];
                     var target = s.Args[1].First();
-                    if (int.TryParse(value, out var num))
-                    {
-                        _registers[target] = num;
-                    }
-                    else
-                    {
-                        var v = value.First();
-                        // Never got this optimization right, so the solution took 10 minutes
-                        //if (target == 'd' && v == 'a')
-                        //{
-                        //    while (_registers['b'] > 0)
-                        //    {
-                        //        var r = _registers['a'] * _registers['b'];
-                        //        _registers['b']--;
-                        //        _registers['a'] = r;
-                        //        _registers['d'] = r;
-                        //    }
-                        //}
-                        //else
-                        //{
-                        _registers[target] = _registers[value.First()];
-                        //}
-                    }
+                    _registers[target] = int.TryParse(value, out var num) 
+                        ? num 
+                        : _registers[value.First()];
 
                     IncrementIndex();
                 }
@@ -91,40 +70,27 @@ public class SafeCrackingComputerPart2
 
                 else if (command == "tgl")
                 {
-                    var target = s.Args[0].First();
-                    var val = _registers[target];
-                    var indexToToggle = _index + val;
-                    if (indexToToggle >= 0 && indexToToggle < _instructions.Length)
+                    var indexToToggle = _index + _registers[s.Args[0].First()];
+                    if (indexToToggle >= 0 && indexToToggle < instructions.Length)
                     {
-                        var instructionToToggle = _instructions[indexToToggle];
+                        var instructionToToggle = instructions[indexToToggle];
                         var name = instructionToToggle.Name;
                         if (instructionToToggle.Args.Count == 1)
                         {
-                            if (name == "inc")
-                                instructionToToggle.Name = "dec";
-                            else
-                                instructionToToggle.Name = "inc";
+                            instructionToToggle.Name = name == "inc" 
+                                ? "dec" 
+                                : "inc";
                         }
                         else
                         {
-                            if (name == "jnz")
-                                instructionToToggle.Name = "cpy";
-                            else
-                                instructionToToggle.Name = "jnz";
+                            instructionToToggle.Name = name == "jnz" 
+                                ? "cpy" 
+                                : "jnz";
                         }
                     }
 
                     IncrementIndex();
                 }
-
-                //Console.WriteLine($"a: {_registers['a']}, b: {_registers['b']}, c: {_registers['c']}, d: {_registers['d']}");
-                //if (_index == 3)
-                //{
-                //    Console.WriteLine($"{_index}. {s}");
-                //    Console.WriteLine($"a: {_registers['a']}, b: {_registers['b']}, c: {_registers['c']}, d: {_registers['d']}");
-                //    Console.WriteLine();
-                //    Thread.Sleep(500);
-                //}
             }
             catch
             {

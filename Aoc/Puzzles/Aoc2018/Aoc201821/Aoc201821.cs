@@ -3,7 +3,7 @@ using Pzl.Tools.Computers.Operation;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201821;
 
-[IsSlow] // 134s for part 2
+[IsSlow] // 69s for part 2
 [Name("Chronal Conversion")]
 [Comment("OpComputer")]
 public class Aoc201821 : AocPuzzle

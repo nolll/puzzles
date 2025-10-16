@@ -2,9 +2,7 @@ using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201815;
 
-[IsSlow] // 18s for part 2
 [Name("Beverage Bandits")]
-[Comment("Battle Simulator")]
 public class Aoc201815 : AocPuzzle
 {
     public PuzzleResult RunPart1(string input)

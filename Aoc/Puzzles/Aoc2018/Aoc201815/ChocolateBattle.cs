@@ -1,4 +1,5 @@
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.HashSets;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201815;
 
@@ -117,15 +118,15 @@ public class ChocolateBattle(string input)
     {
         var bestMove = GetBestMove(enemies, figure);
 
-        if (bestMove == null)
+        if (bestMove is null)
             return;
         
         _grid.WriteValueAt(figure.Coord, Chars.Space);
         figure.MoveTo(bestMove);
         _grid.WriteValueAt(bestMove, figure.Type);
     }
-
-    private Coord? GetBestMove(List<BattleFigure> enemies, BattleFigure figure) => GetTargetCoords(enemies)
+    
+    private Coord? GetBestMove(List<BattleFigure> enemies, BattleFigure figure) => GetPossibleCoords(enemies, figure)
         .Distinct()
         .Select(o => PathFinder.ShortestPathTo(_grid, figure.Coord, o))
         .Where(o => o.Any())
@@ -134,6 +135,34 @@ public class ChocolateBattle(string input)
         .ThenBy(o => o.First().X)
         .Select(o => o.First())
         .FirstOrDefault();
+
+    private IEnumerable<Coord> GetPossibleCoords(List<BattleFigure> enemies, BattleFigure figure)
+    {
+        var allTargetCoords = GetTargetCoords(enemies).ToHashSet();
+
+        HashSet<Coord> currentCoords = [figure.Coord];
+        var seen = currentCoords.ToHashSet();
+        while (true)
+        {
+            var newCoords = new HashSet<Coord>();
+            foreach (var a in currentCoords)
+            {
+                var validAddresses = NeighborCache(a).Where(o => !seen.Contains(o) && _grid.ReadValueAt(o) == '.').ToList();
+                newCoords.AddRange(validAddresses);
+            }
+
+            seen.AddRange(newCoords);
+            
+            if (newCoords.Count == 0)
+                return [];
+            
+            var foundCoords = newCoords.Intersect(allTargetCoords).ToList();
+            if (foundCoords.Any())
+                return foundCoords.ToList();
+
+            currentCoords = newCoords;
+        }
+    }
 
     private IEnumerable<Coord> GetTargetCoords(List<BattleFigure> enemies) => 
         enemies.SelectMany(o => NeighborCache(o.Coord).Where(p => _grid.ReadValueAt(p) == Chars.Space));
@@ -150,11 +179,11 @@ public class ChocolateBattle(string input)
         foreach (var coord in _grid.Coords)
         {
             var c = _grid.ReadValueAt(coord);
-            if (c is Chars.Elf or Chars.Goblin)
-            {
-                var attackPower = c == Chars.Elf ? elfAttackPower : 3;
-                _figures.Add(new BattleFigure(c, attackPower, coord));
-            }
+            if (c is not (Chars.Elf or Chars.Goblin))
+                continue;
+            
+            var attackPower = c == Chars.Elf ? elfAttackPower : 3;
+            _figures.Add(new BattleFigure(c, attackPower, coord));
         }
     }
 
@@ -165,12 +194,12 @@ public class ChocolateBattle(string input)
         {
             if (_grid.ReadValueAt(coord) == Chars.Wall) 
                 continue;
-            
-            var neighbors = _grid.OrthogonalAdjacentCoordsTo(coord)
-                .Where(o => _grid.ReadValueAt(o) != Chars.Wall)
-                .ToList();
-            
-            _neighborCache.Add(coord, neighbors);
+
+            _neighborCache.Add(coord, GetNeighbors(coord));
         }
     }
+
+    private List<Coord> GetNeighbors(Coord coord) => _grid.OrthogonalAdjacentCoordsTo(coord)
+        .Where(o => _grid.ReadValueAt(o) != Chars.Wall)
+        .ToList();
 }

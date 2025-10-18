@@ -7,23 +7,25 @@ namespace Pzl.Euler.Puzzles.Euler047;
 [Name("Distinct Primes Factors")]
 public class Euler047 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    public PuzzleResult Run() => new(FindSeries(4), "eac3c019f679164d514795ae37eaa2c7");
+
+    public int FindSeries(int searchFor)
     {
         var n = 1;
-        const int searchFor = 4;
         var correctCount = 0;
+        
+        // This is an optimization. Solved without precalc in about 20s
+        var primes = Numbers.FindPrimesBelow(700).ToArray();
 
         while (correctCount != searchFor)
         {
-            correctCount = MathTools.GetFactors(n).Count(Numbers.IsPrime) == searchFor
+            correctCount = MathTools.GetFactors(primes, n).Count(Numbers.IsPrime) == searchFor
                 ? correctCount + 1
                 : 0;
 
             n++;
         }
 
-        var firstInSeries = n - searchFor;
-        
-        return new PuzzleResult(firstInSeries, "eac3c019f679164d514795ae37eaa2c7");
+        return n - searchFor;
     }
 }

@@ -31,10 +31,8 @@ public static class MathTools
         return result;
     }
 
-    public static List<int> GetFactors(int n) => 
-        Enumerable.Range(1, n)
-            .Where(o => n % o == 0)
-            .ToList();
+    public static List<int> GetFactors(int n) => Enumerable.Range(1, n).Where(o => n % o == 0).ToList();
+    public static List<int> GetFactors(int[] primes, int n) => primes.Where(o => n % o == 0).ToList();
 
     public static List<(int a, int b)> GetMultiplicationFactors(int n) =>
         Enumerable.Range(1, n)

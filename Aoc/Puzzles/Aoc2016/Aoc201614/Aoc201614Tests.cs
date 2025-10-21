@@ -61,16 +61,4 @@ public class Aoc201614Tests
 
         hasFiveInARow.Should().Be(expected);
     }
-
-    [Fact]
-    public void Index39IsAKey()
-    {
-        var generator = new KeyGenerator(0);
-        const string salt = "abc";
-        const int index = 39;
-        var hash = generator.GetHash(salt, index);
-        var isKey = generator.IsKey(salt, index, hash);
-
-        isKey.Should().BeTrue();
-    }
 }

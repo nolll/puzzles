@@ -6,30 +6,36 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
 
 public class KeyGenerator(int stretchCount)
 {
+    private const int ListLength = 1000;
     private readonly HashFactory _hashFactory = new();
-    private readonly Dictionary<int, byte[]> _hashes = new();
-    private readonly Dictionary<(int, byte), bool> _fiveInARowOf = new();
-    private readonly Dictionary<int, bool> _fiveInARow = new();
     private readonly (byte, byte)[] _byteCache = BuildByteCache();
 
     public int GetIndexOfNThKey(string salt, int n)
     {
         var keyCount = 0;
         var index = 0;
+        var list = new LinkedList<HashInfo>();
         while (keyCount < n)
         {
-            if (IsKey(salt, index, GetHash(salt, index)))
-                keyCount++;
+            var has1000 = index > ListLength;
+            var hash = CreateHash($"{salt}{index}");
+            var (hasThree, hasFive) = HasRepeadedChars(hash);
+            list.AddLast(new HashInfo(hash, hasThree, hasFive));
+
+            if (has1000)
+            {
+                list.RemoveFirst();
+                if (list.First!.Value.HasThree && TryGetRepeatingByte(list.First!.Value.Hash, out var repeatingByte) && HasFiveInARowOf(list, repeatingByte))
+                {
+                    keyCount++;
+                }
+            }
 
             index++;
         }
         
-        return index - 1;
+        return index - ListLength - 1;
     }
-
-    public bool IsKey(string salt, int index, byte[] hash) => 
-        TryGetRepeatingByte(hash, out var repeatingByte) && 
-        Next1000HashesHasFiveInARowOf(salt, index + 1, repeatingByte);
 
     public static bool TryGetRepeatingByte(byte[] hash, out byte repeatingByte)
     {
@@ -50,40 +56,20 @@ public class KeyGenerator(int stretchCount)
         return false;
     }
     
-    private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, byte searchFor)
+    private bool HasFiveInARowOf(LinkedList<HashInfo> hashInfos, byte searchFor)
     {
-        for (var index = fromIndex; index < fromIndex + 1000; index++)
+        var current = hashInfos.First?.Next;
+        while (current is not null)
         {
-            if (HasFiveInARowOf(salt, index, searchFor))
+            if (current.Value.HasFive && HasFiveInARowOf(current.Value.Hash, searchFor))
                 return true;
+
+            current = current.Next;
         }
-        
+
         return false;
     }
 
-    private bool HasFiveInARowOf(string salt, int index, byte searchFor)
-    {
-        if (_fiveInARow.TryGetValue(index, out var hasFiveInARow) && !hasFiveInARow)
-            return false;
-        
-        if (_fiveInARowOf.TryGetValue((index, searchFor), out var hasFiveInARowOf))
-            return hasFiveInARowOf;
-
-        var hash = GetHash(salt, index);
-        hasFiveInARow = HasFiveInARow(hash);
-        _fiveInARow[index] = hasFiveInARow;
-
-        if (!hasFiveInARow)
-        {
-            _fiveInARowOf[(index, searchFor)] = false;
-            return false;
-        }
-
-        hasFiveInARowOf = HasFiveInARowOf(hash, searchFor);
-        _fiveInARowOf[(index, searchFor)] = hasFiveInARowOf;
-        return hasFiveInARowOf;
-    }
-    
     public static bool HasFiveInARowOf(byte[] hash, byte searchFor)
     {
         var count = 0;
@@ -98,31 +84,29 @@ public class KeyGenerator(int stretchCount)
         return false;
     }
 
-    private static bool HasFiveInARow(byte[] hash)
+    private static (bool hasThree, bool hasFive) HasRepeadedChars(byte[] hash)
     {
         var count = 0;
+        var hasThree = false;
+        var hasFive = false;
         
         for (var i = 1; i < hash.Length; i++)
         {
             count = hash[i] == hash[i - 1] ? count + 1 : 0;
 
+            if (count == 2)
+                hasThree = true;
+
             if (count == 4)
-                return true;
+            {
+                hasFive = true;
+                break;
+            }
         }
         
-        return false;
+        return (hasThree, hasFive);
     }
-    
-    public byte[] GetHash(string salt, int index)
-    {
-        if (_hashes.TryGetValue(index, out var hash))
-            return hash;
 
-        hash = CreateHash(salt + index);
-        _hashes.Add(index, hash);
-        return hash;
-    }
-    
     private byte[] CreateSimpleHash(byte[] bytes) => 
         ConvertToHexBytes(_hashFactory.ByteHashFromBytes(bytes));
 
@@ -163,5 +147,12 @@ public class KeyGenerator(int stretchCount)
         }
 
         return cache;
+    }
+
+    private class HashInfo(byte[] hash, bool hasThree, bool hasFive)
+    {
+        public byte[] Hash { get; } = hash;
+        public bool HasThree { get; } = hasThree;
+        public bool HasFive { get; } = hasFive;
     }
 }

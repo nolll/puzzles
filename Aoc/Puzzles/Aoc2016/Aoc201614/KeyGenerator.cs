@@ -8,6 +8,8 @@ public class KeyGenerator(int stretchCount)
 {
     private readonly HashFactory _hashFactory = new();
     private readonly Dictionary<int, byte[]> _hashes = new();
+    private readonly Dictionary<(int, byte), bool> _fiveInARowOf = new();
+    private readonly Dictionary<int, bool> _fiveInARow = new();
     private readonly (byte, byte)[] _byteCache = BuildByteCache();
 
     public int GetIndexOfNThKey(string salt, int n)
@@ -31,13 +33,16 @@ public class KeyGenerator(int stretchCount)
 
     public static bool TryGetRepeatingByte(byte[] hash, out byte repeatingByte)
     {
-        for (var i = 0; i < hash.Length - 2; i++)
+        var count = 0;
+        
+        for (var i = 1; i < hash.Length; i++)
         {
-            var b = hash[i];
-            if (hash[i + 1] != b || hash[i + 2] != b)
+            count = hash[i] == hash[i - 1] ? count + 1 : 0;
+
+            if (count != 2)
                 continue;
             
-            repeatingByte = b;
+            repeatingByte = hash[i];
             return true;
         }
 
@@ -47,27 +52,64 @@ public class KeyGenerator(int stretchCount)
     
     private bool Next1000HashesHasFiveInARowOf(string salt, int fromIndex, byte searchFor)
     {
-        for (var count = 0; count < 1000; count++)
+        for (var index = fromIndex; index < fromIndex + 1000; index++)
         {
-            if (HasFiveInARowOf(GetHash(salt, fromIndex + count), searchFor))
+            if (HasFiveInARowOf(salt, index, searchFor))
                 return true;
         }
         
         return false;
     }
+
+    private bool HasFiveInARowOf(string salt, int index, byte searchFor)
+    {
+        if (_fiveInARow.TryGetValue(index, out var hasFiveInARow) && !hasFiveInARow)
+            return false;
+        
+        if (_fiveInARowOf.TryGetValue((index, searchFor), out var hasFiveInARowOf))
+            return hasFiveInARowOf;
+
+        var hash = GetHash(salt, index);
+        hasFiveInARow = HasFiveInARow(hash);
+        _fiveInARow[index] = hasFiveInARow;
+
+        if (!hasFiveInARow)
+        {
+            _fiveInARowOf[(index, searchFor)] = false;
+            return false;
+        }
+
+        hasFiveInARowOf = HasFiveInARowOf(hash, searchFor);
+        _fiveInARowOf[(index, searchFor)] = hasFiveInARowOf;
+        return hasFiveInARowOf;
+    }
     
     public static bool HasFiveInARowOf(byte[] hash, byte searchFor)
     {
-        for (var i = 0; i < hash.Length - 4; i++)
+        var count = 0;
+        foreach (var b in hash)
         {
-            if (hash[i] == searchFor &&
-                hash[i + 1] == searchFor &&
-                hash[i + 2] == searchFor &&
-                hash[i + 3] == searchFor &&
-                hash[i + 4] == searchFor)
+            count = b == searchFor ? count + 1 : 0;
+            
+            if(count == 5)
                 return true;
         }
 
+        return false;
+    }
+
+    private static bool HasFiveInARow(byte[] hash)
+    {
+        var count = 0;
+        
+        for (var i = 1; i < hash.Length; i++)
+        {
+            count = hash[i] == hash[i - 1] ? count + 1 : 0;
+
+            if (count == 4)
+                return true;
+        }
+        
         return false;
     }
     

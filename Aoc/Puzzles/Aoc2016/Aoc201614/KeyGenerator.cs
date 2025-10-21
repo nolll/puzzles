@@ -26,9 +26,7 @@ public class KeyGenerator(int stretchCount)
             {
                 list.RemoveFirst();
                 if (list.First!.Value.HasThree && TryGetRepeatingByte(list.First!.Value.Hash, out var repeatingByte) && HasFiveInARowOf(list, repeatingByte))
-                {
                     keyCount++;
-                }
             }
 
             index++;
@@ -128,15 +126,13 @@ public class KeyGenerator(int stretchCount)
         var index = 0;
         foreach (var b in hashedBytes)
         {
-            var (b1, b2) = _byteCache[b];
-            hexBytes[index] = b1;
-            hexBytes[index + 1] = b2;
+            (hexBytes[index], hexBytes[index + 1]) = _byteCache[b];
             index += 2;
         }
 
         return hexBytes;
     }
-
+    
     private static (byte, byte)[] BuildByteCache()
     {
         var cache = new(byte, byte)[byte.MaxValue + 1];

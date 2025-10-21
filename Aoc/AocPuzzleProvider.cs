@@ -15,8 +15,8 @@ public class AocPuzzleProvider : IPuzzleProvider
         var paddedDay = day.ToString().PadLeft(2, '0');
         var id = $"{year}{paddedDay}";
         var sortId = $"aoc {id}";
-        var title = $"Advent of Code {year}-{paddedDay}";
-        var listTitle = $"Aoc {year}-{paddedDay}";
+        var title = $"Advent of Code {year} Day {paddedDay}";
+        var listTitle = $"aoc {year}-{paddedDay}";
         List<string> tags = ["aoc", year.ToString(), day.ToString()];
 
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);

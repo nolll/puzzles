@@ -15,7 +15,7 @@ public class EulerPuzzleProvider : IPuzzleProvider
         var paddedId = id.PadLeft(3, '0');
         var sortId = $"euler {paddedId}";
         var title = $"Project Euler {id}";
-        var listTitle = $"Euler {paddedId}";
+        var listTitle = $"euler {paddedId}";
         List<string> tags = ["euler", id];
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }

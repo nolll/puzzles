@@ -7,7 +7,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq36;
 [IsSlow]
 [NeedsRewrite]
 [Name("Tetonor Terror")]
-[Comment("1 hour for part 2!")]
+[Comment("1 hour!")]
 public class Aquaq36 : AquaqPuzzle
 {
     public PuzzleResult Run(string input)

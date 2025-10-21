@@ -15,7 +15,7 @@ public class AquaqPuzzleProvider : IPuzzleProvider
         var paddedId = id.PadLeft(2, '0');
         var sortId = $"aquaq {paddedId}";
         var title = $"AquaQ Challenge {id}";
-        var listTitle = $"AquaQ {paddedId}";
+        var listTitle = $"aquaq {paddedId}";
         List<string> tags = ["aquaq", id];
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }

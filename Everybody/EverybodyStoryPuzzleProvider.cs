@@ -15,8 +15,8 @@ public class EverybodyStoryPuzzleProvider : IPuzzleProvider
         var paddedPart = part.ToString().PadLeft(2, '0');
         var id = $"{story}{paddedPart}";
         var sortId = $"ecs {id}";
-        var title = $"Everybody Codes Story {story}-{paddedPart}";
-        var listTitle = $"Ecs {story}-{paddedPart}";
+        var title = $"Everybody Codes Story {story} Part {paddedPart}";
+        var listTitle = $"ecs {story}-{paddedPart}";
         List<string> tags = ["ecs", $"s{story}", part.ToString()];
 
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);

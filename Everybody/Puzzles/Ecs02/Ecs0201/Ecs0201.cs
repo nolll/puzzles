@@ -47,28 +47,27 @@ public class Ecs0201 : EverybodyStoryPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        var (grid, tokens, slotCount) = Parse(input);
+        var (grid, tokenRules, slotCount) = Parse(input);
         var scores = new Dictionary<(int token, int slot), int>();
 
-        for (var index = 0; index < tokens.Length; index++)
+        for (var token = 0; token < tokenRules.Length; token++)
         {
-            var token = tokens[index];
+            var rule = tokenRules[token];
             for (var slot = 1; slot <= slotCount; slot++)
             {
-                var result = Play(grid, token, slot);
-                scores.Add((index, slot), result.score);
+                var result = Play(grid, rule, slot);
+                scores.Add((token, slot), result.score);
             }
         }
 
-        var allSlots = Enumerable.Range(1, slotCount).ToList();
-        var combinations = PermutationGenerator.GetPermutations(allSlots, tokens.Length).ToArray();
-
         var worst = int.MaxValue;
         var best = int.MinValue;
+        var allSlots = Enumerable.Range(1, slotCount).ToList();
+        var combinations = PermutationGenerator.GetPermutations(allSlots, tokenRules.Length);
 
         foreach (var slots in combinations)
         {
-            var score = slots.Select((t, token) => scores[(token, t)]).Sum();
+            var score = slots.Select((slot, token) => scores[(token, slot)]).Sum();
 
             worst = Math.Min(worst, score);
             best = Math.Max(best, score);

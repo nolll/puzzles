@@ -14,10 +14,10 @@ public class EverybodyEventPuzzleProvider : IPuzzleProvider
         var (year, day) = EverybodyEventPuzzleParser.ParseYearAndDay(data.Type);
         var paddedDay = day.ToString().PadLeft(2, '0');
         var id = $"{year}{paddedDay}";
-        var sortId = $"ece {id}";
+        var sortId = $"ec e{id}";
         var title = $"Everybody Codes Event {year} Day {paddedDay}";
-        var listTitle = $"ece {year}-{paddedDay}";
-        List<string> tags = ["ece", year.ToString(), day.ToString()];
+        var listTitle = $"ec {year}-{paddedDay}";
+        List<string> tags = ["ec", year.ToString(), day.ToString()];
 
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }

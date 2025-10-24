@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Pzl.Aquaq.Puzzles.Aquaq05;
 
 public class Aquaq05Tests

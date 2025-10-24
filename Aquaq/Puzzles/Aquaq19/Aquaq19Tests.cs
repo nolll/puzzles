@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Pzl.Aquaq.Puzzles.Aquaq19;
 
 public class Aquaq19Tests

@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Pzl.Client.Timing;
 
 public class TimerTests

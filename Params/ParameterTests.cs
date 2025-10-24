@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Pzl.Client.Params;
 
 public class ParameterTests

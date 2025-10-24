@@ -1,4 +1,3 @@
-using FluentAssertions.Equivalency;
 using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202411;

@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Pzl.Everybody.Puzzles.Ecs02.Ecs0201;
 
 public class Ecs0201Tests

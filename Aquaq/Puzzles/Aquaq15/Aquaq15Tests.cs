@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Pzl.Common;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq15;

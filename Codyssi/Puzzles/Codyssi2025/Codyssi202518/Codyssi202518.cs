@@ -1,5 +1,4 @@
 using Pzl.Common;
-using Pzl.Tools.Debug;
 
 namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202518;
 

@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Pzl.Aquaq.Puzzles.Aquaq31.RubiksCube;
 
 public class CubeSolverTests

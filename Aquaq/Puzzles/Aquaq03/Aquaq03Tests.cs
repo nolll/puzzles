@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Pzl.Tools.Grids.Grids2d;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq03;

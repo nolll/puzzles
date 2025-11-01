@@ -7,31 +7,18 @@ namespace Pzl.Common;
 
 public static class PuzzleDataReader
 {
-    public static List<PuzzleData> ReadData<T>() where T : Puzzle
-    {
-        return GetConcreteSubclassesOf<T>().Select(CreateData).ToList();
-    }
+    public static List<PuzzleData> ReadData<T>() where T : Puzzle => 
+        GetConcreteSubclassesOf<T>().Select(CreateData).ToList();
 
-    private static PuzzleData CreateData(Type type)
-    {
-        var name = GetName(type);
-        var comment = GetComment(type);
-        var isSlow = IsSlow(type);
-        var needsRewrite = NeedsRewrite(type);
-        var isFunToOptimize = IsFunToOptimize(type);
-        var numberOfParts = GetNumberOfParts(type);
-        var hasUniqueInputsPerPart = HasUniqueInputsForParts(type);
-
-        return new PuzzleData(
-            type,
-            name,
-            comment,
-            isSlow,
-            needsRewrite,
-            isFunToOptimize,
-            numberOfParts,
-            hasUniqueInputsPerPart);
-    }
+    private static PuzzleData CreateData(Type type) => new(
+        type,
+        GetName(type),
+        GetComment(type),
+        IsSlow(type),
+        NeedsRewrite(type),
+        IsFunToOptimize(type),
+        GetNumberOfParts(type),
+        HasUniqueInputsForParts(type));
 
     private static string GetName(MemberInfo type) =>
         type.GetCustomAttribute<NameAttribute>(false)?.Name ?? "No name provided";

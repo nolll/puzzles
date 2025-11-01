@@ -79,7 +79,7 @@ public class Aquaq37Tests
     [InlineData(GroupInput, "group")]
     public void FindWords(string input, string expected)
     {
-        var result = new Aquaq37().FindWords(input, new FileReader().ReadCommon("Words.txt"));
+        var result = new Aquaq37().FindWords(input, FileReader.ReadCommon("Words.txt"));
 
         result.FirstOrDefault().Should().Be(expected);
     }

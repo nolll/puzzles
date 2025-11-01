@@ -57,6 +57,18 @@ public class CombinationGeneratorTests
         
         ListAssert.IsEquivalent(result, expected);
     }
+    
+    [Fact]
+    public void GeneratesAllUniqueCombinationsOfMaxSizeWhenizeIsOne()
+    {
+        var result = CombinationGenerator.GetUniqueCombinationsMaxSize([1], 2).ToList();
+        int[][] expected =
+        [
+            [1]
+        ];
+        
+        ListAssert.IsEquivalent(result, expected);
+    }
 
     [Fact]
     public void GeneratesAllCombinationsIncludingDuplicatesOfSpecifiedSize()

@@ -1,20 +1,27 @@
 using Pzl.Common;
 using Pzl.Tools.Lists;
+using Pzl.Tools.Numbers;
 
 namespace Pzl.Everybody.Puzzles.Ece2025.Ece202502;
 
 [Name("From Complex to Clarity")]
 public class Ece202502 : EverybodyEventPuzzle
 {
+    private const long Part1Divisor = 10;
+    private const long Part2And3Divisor = 100_000;
+    private const long InitialValue = 0L;
+    private const int NumCycles = 100;
+    private const long Limit = 1_000_000;
+
     public PuzzleResult RunPart1(string input)
     {
-        var (a, b) = Parse(input);
+        var (a, b) = Numbers.LongsFromString(input);
 
-        var result = (0L, 0L);
+        var result = (InitialValue, InitialValue);
         for (var i = 0; i < 3; i++)
         {
             result = Multiply(result, result);
-            result = Divide(result, (10, 10));
+            result = Divide(result, (Part1Divisor, Part1Divisor));
             result = Add(result, (a, b));
         }
 
@@ -36,7 +43,7 @@ public class Ece202502 : EverybodyEventPuzzle
 
     private int RunPart2And3(string input, int gridSize, int increment)
     {
-        var (sx, sy) = Parse(input);
+        var (sx, sy) = Numbers.LongsFromString(input);
         var count = 0;
         
         for (var iy = 0; iy < gridSize; iy++)
@@ -54,45 +61,25 @@ public class Ece202502 : EverybodyEventPuzzle
 
         return count;
     }
-    
-    private static long[] Parse(string input) => 
-        input.Split('=').Last().Trim('[', ']').Split(',').Select(long.Parse).ToArray();
 
-    public bool ShouldBeEngraved(long x, long y)
+    public static bool ShouldBeEngraved(long x, long y)
     {
-        var result = (0L, 0L);
+        var result = (InitialValue, InitialValue);
                 
-        for (var i = 0; i < 100; i++)
+        for (var i = 0; i < NumCycles; i++)
         {
             result = Multiply(result, result);
-            result = Divide(result, (100_000, 100_000));
+            result = Divide(result, (Part2And3Divisor, Part2And3Divisor));
             result = Add(result, (x, y));
 
-            if (Math.Abs(result.Item1) > 1_000_000 || Math.Abs(result.Item2) > 1_000_000)
+            if (Math.Abs(result.Item1) > Limit || Math.Abs(result.Item2) > Limit)
                 return false;
         }
 
         return true;
     }
 
-    private (long, long) Multiply((long, long) a, (long, long) b)
-    {
-        var (x1, y1) = a;
-        var (x2, y2) = b;
-        return (x1 * x2 - y1 * y2, x1 * y2 + y1 * x2);
-    }
-    
-    private (long, long) Divide((long, long) a, (long, long) b)
-    {
-        var (x1, y1) = a;
-        var (x2, y2) = b;
-        return (x1 / x2, y1 / y2);
-    }
-    
-    private (long, long) Add((long, long) a, (long, long) b)
-    {
-        var (x1, y1) = a;
-        var (x2, y2) = b;
-        return (x1 + x2, y1 + y2);
-    }
+    private static (long, long) Multiply((long a, long b) a, (long a, long b) b) => (a.a * b.a - a.b * b.b, a.a * b.b + a.b * b.a);
+    private static (long, long) Divide((long a, long b) a, (long a, long b) b) => (a.a / b.a, a.b / b.b);
+    private static (long, long) Add((long a, long b) a, (long a, long b) b) => (a.a + b.a, a.b + b.b);
 }

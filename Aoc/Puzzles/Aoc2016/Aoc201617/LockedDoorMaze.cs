@@ -32,7 +32,7 @@ public class LockedDoorMaze
                 continue;
             }
 
-            var hash = _hashFactory.StringHashFromString(passcode + current.Path).Substring(0, 4);
+            var hash = _hashFactory.StringHash(passcode + current.Path).Substring(0, 4);
             var x = current.Address.X;
             var y = current.Address.Y;
 

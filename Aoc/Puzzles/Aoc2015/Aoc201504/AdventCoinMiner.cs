@@ -11,7 +11,7 @@ public abstract class AdventCoinMiner
         var isCoinFound = GetCompareFunc(leadingZeros);
         while (true)
         {
-            var hashedBytes = hashFactory.ByteHashFromString($"{key}{index}");
+            var hashedBytes = hashFactory.ByteHash($"{key}{index}");
 
             if (isCoinFound(hashedBytes))
                 return index;

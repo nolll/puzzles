@@ -106,7 +106,7 @@ public class KeyGenerator(int stretchCount)
     }
 
     private byte[] CreateSimpleHash(byte[] bytes) => 
-        ConvertToHexBytes(_hashFactory.ByteHashFromBytes(bytes));
+        ConvertToHexBytes(_hashFactory.ByteHash(bytes));
 
     public byte[] CreateHash(string str)
     {
@@ -126,10 +126,9 @@ public class KeyGenerator(int stretchCount)
         var index = 0;
         foreach (var b in hashedBytes)
         {
-            (hexBytes[index], hexBytes[index + 1]) = _byteCache[b];
-            index += 2;
+            (hexBytes[index++], hexBytes[index++]) = _byteCache[b];
         }
-
+    
         return hexBytes;
     }
     

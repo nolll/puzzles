@@ -8,15 +8,8 @@ public class HashFactory
 {
     private readonly MD5 _md5 = MD5.Create();
 
-    public string StringHashFromString(string str) => 
-        StringHashFromBytes(Encoding.ASCII.GetBytes(str));
-
-    public string StringHashFromBytes(byte[] bytes) => 
-        ByteConverter.ToHexString(ByteHashFromBytes(bytes));
-
-    public byte[] ByteHashFromString(string str) => 
-        ByteHashFromBytes(Encoding.ASCII.GetBytes(str));
-
-    public byte[] ByteHashFromBytes(byte[] bytes) => 
-        _md5.ComputeHash(bytes);
+    public string StringHash(string str) => StringHash(Encoding.ASCII.GetBytes(str));
+    public string StringHash(byte[] bytes) => ByteConverter.ToHexString(ByteHash(bytes));
+    public byte[] ByteHash(string str) => ByteHash(Encoding.ASCII.GetBytes(str));
+    public byte[] ByteHash(byte[] bytes) => _md5.ComputeHash(bytes);
 }

@@ -17,7 +17,7 @@ public class PasswordGenerator
         while (pwd.Length < 8)
         {
             var bytesToHash = Encoding.ASCII.GetBytes(_index.ToString());
-            var byteHash = hashFactory.ByteHashFromBytes([..keyBytes, ..bytesToHash]);
+            var byteHash = hashFactory.ByteHash([..keyBytes, ..bytesToHash]);
             if (HasFiveLeadingZeros(byteHash))
             {
                 _cache.Add(byteHash);
@@ -54,7 +54,7 @@ public class PasswordGenerator
         while (filledPositions < allPositionsFilled)
         {
             var bytesToHash = Encoding.ASCII.GetBytes(_index.ToString());
-            var byteHash = hashFactory.ByteHashFromBytes([..keyBytes, ..bytesToHash]);
+            var byteHash = hashFactory.ByteHash([..keyBytes, ..bytesToHash]);
             if (HasFiveLeadingZeros(byteHash))
             {
                 var position = byteHash[2];

@@ -48,6 +48,7 @@ public class Ece202415 : EverybodyEventPuzzle
         {
             var (d, r, c, found) = q.Dequeue();
             var key = found * height * width + r * width + c;
+            
             if (seen[key])
                 continue;
 

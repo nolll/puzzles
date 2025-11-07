@@ -20,7 +20,7 @@ public class ResultVerifier(HashFactory hashFactory, string seed)
     private string GetHash(string answer)
     {
         return answer != string.Empty 
-            ? hashFactory.StringHashFromString($"{seed}{answer}") 
+            ? hashFactory.StringHash($"{seed}{answer}") 
             : string.Empty;
     }
 

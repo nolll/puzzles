@@ -106,10 +106,7 @@ public class Aoc202305 : AocPuzzle
 
     private static Range ParseRange(string s)
     {
-        var p = s.Split(' ').Select(long.Parse).ToList();
-        var destination = p[0];
-        var source = p[1];
-        var length = p[2];
+        var (destination, source, length) = s.Split(' ').Select(long.Parse).ToArray();
         return new Range(destination, source, length);
     }
 }

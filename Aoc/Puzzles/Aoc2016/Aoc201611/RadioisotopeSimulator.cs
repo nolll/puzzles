@@ -9,8 +9,6 @@ public class RadioisotopeSimulator
     private readonly IsotopeNameProvider _isotopeNameProvider = new();
     private readonly AnonymousNameProvider _anonymousNameProvider = new();
 
-    private int _itemCounter = 0;
-
     public int StepCount { get; }
 
     public RadioisotopeSimulator(string input)
@@ -80,16 +78,12 @@ public class RadioisotopeSimulator
     private bool AlreadyVisited(RadioisotopeFacility f) => _previousFacilities.Contains(f.AnonymizedId);
     private void TrackVisit(RadioisotopeFacility f) => _previousFacilities.Add(f.AnonymizedId);
 
-    private RadioisotopeFacility ParseFacility(string input)
-    {
-        return new RadioisotopeFacility(
-            StringReader.ReadLines(input).Select(ParseFloor).ToList(), 0, _isotopeNameProvider, _anonymousNameProvider);
-    }
+    private RadioisotopeFacility ParseFacility(string input) => new(
+        StringReader.ReadLines(input).Select(ParseFloor).ToList(), 0, _isotopeNameProvider, _anonymousNameProvider);
 
-    private RadioisotopeFloor ParseFloor(string s)
+    private static RadioisotopeFloor ParseFloor(string s)
     {
-        s = s.Replace(" microchip", "-microchip").Replace(" generator", "-generator").Replace(",", "").Replace(".", "");
-        var parts = s.Split(" ");
+        var parts = s.Replace(" microchip", "-microchip").Replace(" generator", "-generator").Replace(",", "").Replace(".", "").Split(" ");
         var items = parts
             .Where(o => o.EndsWith("microchip") || o.EndsWith("generator"))
             .Select(CreateItem)
@@ -97,9 +91,8 @@ public class RadioisotopeSimulator
         return new RadioisotopeFloor(items);
     }
 
-    private RadioisotopeItem CreateItem(string s, int index)
+    private static RadioisotopeItem CreateItem(string s, int index)
     {
-        _itemCounter++;
         var parts = s.Split('-');
         var name = parts.First();
         var type = parts.Last();

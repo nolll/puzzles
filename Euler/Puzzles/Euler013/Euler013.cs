@@ -9,18 +9,12 @@ public class Euler013 : EulerPuzzle
 {
     public PuzzleResult Run(string input)
     {
-        var result = RunInternal(input);
-        return new PuzzleResult(result, "9a8a979a38f81877c39016dde66dda45");
-    }
-
-    public string RunInternal(string listOfNumbers)
-    {
-        var rows = StringReader.ReadLines(listOfNumbers);
+        var rows = input.Split(LineBreaks.Single);
         var numbers = rows.Select(BigInteger.Parse);
 
         var sum = new BigInteger();
         sum = numbers.Aggregate(sum, (current, n) => current + n);
-
-        return sum.ToString()[..10];
+        var result = sum.ToString()[..10];
+        return new PuzzleResult(result, "9a8a979a38f81877c39016dde66dda45");
     }
 }

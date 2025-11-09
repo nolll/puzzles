@@ -6,23 +6,16 @@ namespace Pzl.Euler.Puzzles.Euler018;
 [Name("Maximum path sum I")]
 public class Euler018 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    public PuzzleResult Run(string input)
     {
-        var result = RunInternal(Triangle);
-        return new PuzzleResult(result, "ac0ed37fe47b088e57246f49e0564317");
-    }
-
-    public int RunInternal(string triangleString)
-    {
-        var triangle = BuildTriangle(triangleString);
+        var triangle = BuildTriangle(input);
         var sum = triangle.First().First().BestPath;
-           
-        return sum;
+        return new PuzzleResult(sum, "ac0ed37fe47b088e57246f49e0564317");
     }
 
     private static IEnumerable<List<TriangleNode>> BuildTriangle(string triangleString)
     {
-        var lines = StringReader.ReadLines(triangleString);
+        var lines = triangleString.Split(LineBreaks.Single);
         var triangle = new List<List<TriangleNode>>();
         foreach (var line in lines)
         {
@@ -75,22 +68,4 @@ public class Euler018 : EulerPuzzle
 
         public void AddChild(TriangleNode triangleNode) => Children.Add(triangleNode);
     }
-
-    private const string Triangle = """
-                                    75
-                                    95 64
-                                    17 47 82
-                                    18 35 87 10
-                                    20 04 82 47 65
-                                    19 01 23 75 03 34
-                                    88 02 77 73 07 63 67
-                                    99 65 04 28 06 16 70 92
-                                    41 41 26 56 83 40 80 70 33
-                                    41 48 72 33 47 32 37 16 94 29
-                                    53 71 44 65 25 43 91 52 97 51 14
-                                    70 11 33 28 77 73 17 78 39 68 17 57
-                                    91 71 52 38 17 14 91 43 58 50 27 29 48
-                                    63 66 04 68 89 53 67 30 73 16 69 87 40 31
-                                    04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
-                                    """;
 }

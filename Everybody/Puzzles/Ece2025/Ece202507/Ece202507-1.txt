@@ -1,0 +1,18 @@
+Sylverax,Sylgnaris,Tharlorath,Tharverax,Azverax,Thargnaris,Azgnaris,Azlorath,Syllorath
+
+o > r
+t > h
+S > y
+z > g,b
+g > n
+v > e
+l > o,v,l,g
+r > i,v,a,l,g
+i > s
+T > h
+a > r,x,t
+h > b
+A > z
+n > a
+y > b
+e > r

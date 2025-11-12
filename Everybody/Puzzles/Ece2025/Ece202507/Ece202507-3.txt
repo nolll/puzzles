@@ -1,0 +1,33 @@
+Ny,Nyl,Nyth,Nyss,Nyrix,Laz,Qal,Oron,Fen,Pyr,Gorath,Aure,Aer,Elvar,Thym,Rah,Lir,Pald,Tarl,Ral
+
+t > h,a,y
+d > a,g,p,b,l,t,s
+l > g,u,p,b,l,a,t,s,v,d
+A > u,e
+a > l,d,r,x,v,t
+p > h
+O > r
+Q > a
+b > e
+n > g,p,b,l,a,t,s
+e > l,v,g,p,b,a,t,s
+z > g,p,b,l,a,t,s
+o > r,n,v
+y > v,r,m
+E > l
+N > y
+F > e
+R > a
+s > o,s,g,p,b,l,a,t
+g > o
+P > y,a
+m > g,p,b,l,a,t,s
+T > h,a
+r > i,v,g,p,b,l,a,t,s,e
+h > o,g,p,b,l,a,t,s,v
+u > t,v
+i > l,n,x,v
+v > a
+x > a,g,p,b,l,t,s
+L > a,i
+G > o

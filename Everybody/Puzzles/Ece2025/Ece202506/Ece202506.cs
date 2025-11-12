@@ -64,16 +64,16 @@ public class Ece202506 : EverybodyEventPuzzle
                 indexes[c].Add(i);
         }
 
-        var p1Count = MentorCountInRange2(tents, indexes, 0, segmentLength);
-        var p2Count = MentorCountInRange2(tents, indexes, segmentLength, segmentLength + input.Length);
-        var p3Count = MentorCountInRange2(tents, indexes, segmentLength + input.Length, tents.Length);
+        var p1Count = MentorCountInRange(tents, indexes, 0, segmentLength);
+        var p2Count = MentorCountInRange(tents, indexes, segmentLength, segmentLength + input.Length);
+        var p3Count = MentorCountInRange(tents, indexes, segmentLength + input.Length, tents.Length);
 
         var pairCount = p1Count + p2Count * (Repeats - repeatsInSegment * 2) + p3Count;
         
         return new PuzzleResult(pairCount, "c8488eedc9facc7555706017e12be89a");
     }
 
-    private static int MentorCountInRange2(string tents, Dictionary<char, List<int>> indexes, int startIndex, int endIndex)
+    private static int MentorCountInRange(string tents, Dictionary<char, List<int>> indexes, int startIndex, int endIndex)
     {
         var count = 0;
         for (var i = startIndex; i < endIndex; i++)

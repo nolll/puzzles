@@ -1,0 +1,27 @@
+Gavorath,Eldenirin,Garjoris,Garfyr,Ralulrix,Azkynar,Xanjoris,Ralthel,Cynderfyr,Gavulrix,Cynderjoris,Cynderkynar,Gavsar,Elvarthel,Elvaririn,Azthel,Azkynar,Cynderorath,Ralsar,Azulrix,Garorath,Cynderrax,Gavjoris,Xanthel,Ralfyr,Eldenkynar,Gavthel,Gavirin,Azjoris,Elvarulrix,Eldenulrix,Zyrorath,Eldenjoris,Azorath,Elvarsar,Raljoris,Xanjoris,Elvarjoris,Cynderulrix,Eldensar,Gavjoris,Cynderirin,Azulrix,Azfyr,Xanorath,Raljoris,Azrax,Zyrjoris,Zyrjoris,Azorath,Azsar,Elvarkynar,Ralrax,Garulrix,Elvarjoris,Azjoris,Azsar,Azirin,Ralorath,Cynderthel,Azrax,Azjoris,Eldenorath,Ralkynar,Zyrsar,Cynderjoris,Garsar,Ralirin,Gavkynar,Garthel,Zyrrax,Gavrax,Elvarfyr,Azfyr,Cyndersar,Elvarrax,Garkynar,Eldenthel,Elvarorath,Xansar,Garrax,Xanrax,Azjoris,Azthel,Xankynar,Zyrthel,Eldenfyr,Eldenjoris,Azirin,Zyririn,Garirin,Xanulrix,Garjoris,Zyrfyr,Eldenrax,Zyrulrix,Xanfyr,Zyrkynar,Gavfyr,Xanirin
+
+E > l
+u > l
+a > n,r,t,x,v
+v > j,k,o,i,r,u,f,t,s,a
+G > a
+o > r
+C > y
+z > v
+A > z
+f > y
+R > a
+j > o
+n > j,a,d,k,o,i,r,u,f,t,s
+r > i,a,j,k,o,r,u,f,t,s
+e > l,r,n
+y > n,r,v
+h > e
+t > h
+s > a
+d > e
+k > y
+X > a
+Z > y
+i > s,r,n,x
+l > r,j,k,o,i,u,f,t,s,v

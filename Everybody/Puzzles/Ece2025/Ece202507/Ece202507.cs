@@ -1,5 +1,4 @@
 using Pzl.Common;
-using Pzl.Tools.HashSets;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Ece2025.Ece202507;
@@ -35,45 +34,27 @@ public class Ece202507 : EverybodyEventPuzzle
     public PuzzleResult Part3(string input)
     {
         var (prefixes, rules) = Parse(input);
-        prefixes = prefixes.Where(o => IsValidName(o, rules)).ToArray();
+        var count = prefixes.Where(o => IsValidName(o, rules))
+            .Where(prefix => !prefixes.Any(o => o != prefix && prefix.StartsWith(o)))
+            .Sum(o => GenerateNames(o.Last(), rules, o.Length, []));
 
-        var allNames = new HashSet<string>();
-        foreach (var prefix in prefixes)
-        {
-            allNames.AddRange(GetNamesFromPrefix(prefix, rules));
-        }
-
-        return new PuzzleResult(allNames.Count, "cabe960d882be6a00b754e46052381df");
+        return new PuzzleResult(count, "cabe960d882be6a00b754e46052381df");
     }
 
-    private static List<string> GetNamesFromPrefix(string prefix, Dictionary<char, char[]> rules)
+    private static int GenerateNames(char c, Dictionary<char, char[]> rules, int length, Dictionary<(char, int), int> cache)
     {
-        var minLength = MinLength - prefix.Length;
-        var maxLength = MaxLength - prefix.Length;
-        var names = new List<string>();
-        for (var length = minLength; length <= maxLength; length++)
-        {
-            names.AddRange(GetNames(prefix, rules, length));
-        }
+        var cachekey = (c, length);
+        if (cache.TryGetValue(cachekey, out var count))
+            return count; 
         
-        return names;
-    }
+        if (length >= MinLength)
+            count += 1;
 
-    private static List<string> GetNames(string s, Dictionary<char,char[]> rules, int level)
-    {
-        if (level == 0)
-            return [s];
-        
-        if (!rules.TryGetValue(s.Last(), out var rule))
-            return [];
+        if (length != MaxLength && rules.TryGetValue(c, out var rule)) 
+            count += rule.Sum(next => GenerateNames(next, rules, length + 1, cache));
 
-        var names = new List<string>();
-        foreach (var next in rule)
-        {
-            names.AddRange(GetNames(s + next, rules, level - 1));
-        }
-        
-        return names;
+        cache[cachekey] = count;
+        return count;
     }
 
     private static bool IsValidName(string name, Dictionary<char, char[]> rules)

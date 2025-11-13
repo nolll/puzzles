@@ -57,20 +57,11 @@ public class Ece202507 : EverybodyEventPuzzle
         return count;
     }
 
-    private static bool IsValidName(string name, Dictionary<char, char[]> rules)
-    {
-        for (var i = 0; i < name.Length - 1; i++)
-        {
-            var c = name[i];
-            if (!rules.TryGetValue(c, out var rule))
-                continue;
-            
-            if (!rule.Contains(name[i + 1]))
-                return false;
-        }
+    private static bool IsValidName(string name, Dictionary<char, char[]> rules) => 
+        name.Zip(name.Skip(1)).All(pair => IsValidChar(pair.First, pair.Second, rules));
 
-        return true;
-    }
+    private static bool IsValidChar(char a, char b, Dictionary<char, char[]> rules) => 
+        !rules.TryGetValue(a, out var rule) || rule.Contains(b);
 
     private static (string[], Dictionary<char, char[]>) Parse(string input)
     {

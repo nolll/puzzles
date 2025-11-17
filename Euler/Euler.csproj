@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;Single</Configurations>
-    <LangVersion>13.0</LangVersion>
+    <LangVersion>14.0</LangVersion>
     <RootNamespace>Pzl.Euler</RootNamespace>
     <OutputType>Library</OutputType>
   </PropertyGroup>

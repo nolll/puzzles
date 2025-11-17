@@ -17,13 +17,13 @@ public class Ece202508 : EverybodyEventPuzzle
         var knotCount = 0;
         foreach (var (x, y) in numbers.Zip(numbers.Skip(1)))
         {
-            foreach (var (a, b) in strings)
+            var cut = (x, y);
+            foreach (var line in strings)
             {
-                if (x == a || x == b || y == a || y == b)
+                if (HasCommonNail(cut, line))
                     continue;
 
-                
-                if ((x > a && x < b) != (y > a && y < b))
+                if (IsCrossing(cut, line))
                     knotCount++;
             }
             
@@ -51,15 +51,16 @@ public class Ece202508 : EverybodyEventPuzzle
             for (var y = x + 1; y <= nailCount; y++)
             {
                 var intersectionCount = 0;
-                foreach (var (a, b) in strings)
+                var cut = (x, y);
+                foreach (var line in strings)
                 {
-                    if (x == a && y == b || y == a && x == b)
+                    if (AreEqual(cut, line))
                         intersectionCount++;
-                    
-                    if (x == a || x == b || y == a || y == b)
+
+                    if (HasCommonNail(cut, line))
                         continue;
-                    
-                    if ((x > a && x < b) != (y > a && y < b))
+
+                    if (IsCrossing(cut, line))
                         intersectionCount++;
                 }
 
@@ -69,6 +70,15 @@ public class Ece202508 : EverybodyEventPuzzle
         
         return best;
     }
-    
+
+    private static bool IsCrossing((int x, int y) v1, (int a, int b) v2) => 
+        (v1.x > v2.a && v1.x < v2.b) != (v1.y > v2.a && v1.y < v2.b);
+
+    private static bool HasCommonNail((int a, int b) v1, (int a, int b) v2) => 
+        v1.a == v2.a || v1.a == v2.b || v1.b == v2.a || v1.b == v2.b;
+
+    private static bool AreEqual((int a, int b) v1, (int a, int b) v2) => 
+        v1.a == v2.a && v1.b == v2.b || v1.b == v2.a && v1.a == v2.b;
+
     private static int[] Parse(string input) => input.Split(',').Select(int.Parse).ToArray();
 }

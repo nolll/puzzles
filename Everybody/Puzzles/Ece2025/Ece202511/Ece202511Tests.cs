@@ -18,11 +18,38 @@ public class Ece202511Tests
     }
 
     [Fact]
-    public void Part2()
+    public void Part2_1()
     {
-        const string input = "";
+        const string input = """
+                             9
+                             1
+                             1
+                             4
+                             9
+                             6
+                             """;
 
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part2(input).Answer.Should().Be("11");
+    }
+
+    [Fact]
+    public void Part2_2()
+    {
+        const string input = """
+                             805
+                             706
+                             179
+                             48
+                             158
+                             150
+                             232
+                             885
+                             598
+                             524
+                             423
+                             """;
+
+        Sut.Part2(input).Answer.Should().Be("1579");
     }
 
     [Fact]

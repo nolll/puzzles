@@ -4,6 +4,7 @@ using Pzl.Tools.HashSets;
 
 namespace Pzl.Everybody.Puzzles.Ece2025.Ece202510;
 
+// Thanks to HyperNeutrino again
 [Name("Feast on the Board")]
 public class Ece202510 : EverybodyEventPuzzle
 {
@@ -104,6 +105,68 @@ public class Ece202510 : EverybodyEventPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        return new PuzzleResult(0);
+        var grid = GridBuilder.BuildCharGrid(input);
+        var dragon = grid.Coords.First(o => grid.ReadValueAt(o) == 'D');
+        var sheep = grid.Coords.Where(o => grid.ReadValueAt(o) == 'S').ToArray();
+        var cache = new Dictionary<(string, string, Turn), long>();
+
+        var count = CountSequences(sheep, dragon, Turn.Sheep, grid, cache);
+        
+        return new PuzzleResult(count, "d7c74983caa1983fd5342db272ce11b0");
+    }
+
+    private long CountSequences(Coord[] sheep, Coord dragon, Turn turn, Grid<char> grid, Dictionary<(string, string, Turn), long> cache)
+    {
+        var key = (string.Join("|", sheep.Select(o => o.Id)), dragon.Id, turn);
+        if (cache.TryGetValue(key, out var cached))
+            return cached;
+        
+        var total = 0L;
+        if (turn == Turn.Sheep)
+        {
+            if (sheep.Length == 0)
+                return 1;
+            
+            var moved = 0;
+
+            for (var i = 0; i < sheep.Length; i++)
+            {
+                var s = sheep[i];
+                var movedSheep = new Coord(s.X, s.Y + 1);
+                if (grid.IsOutOfRange(movedSheep))
+                {
+                    moved++;
+                }
+                else if (movedSheep != dragon || grid.ReadValueAt(movedSheep) == '#')
+                {
+                    moved++;
+                    var newSheap = sheep.Take(i).Concat([movedSheep]).Concat(sheep.Skip(i + 1)).ToArray();
+                    total += CountSequences(newSheap, dragon, Turn.Dragon, grid, cache);
+                }
+            }
+
+            if (moved == 0)
+                return CountSequences(sheep, dragon, Turn.Dragon, grid, cache);
+        }
+        else
+        {
+            var moves = _deltas.Select(o => new Coord(dragon.X + o.x, dragon.Y + o.y))
+                .Where(o => !grid.IsOutOfRange(o));
+
+            foreach (var d in moves)
+            {
+                var s = sheep.Where(o => o != d || grid.ReadValueAt(o) == '#').ToArray();
+                total += CountSequences(s, d, Turn.Sheep, grid, cache);
+            }
+        }
+        
+        cache.Add(key, total);
+        return total;
+    }
+
+    private enum Turn
+    {
+        Sheep,
+        Dragon
     }
 }

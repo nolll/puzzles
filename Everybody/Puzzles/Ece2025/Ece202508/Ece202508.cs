@@ -2,6 +2,7 @@ using Pzl.Common;
 
 namespace Pzl.Everybody.Puzzles.Ece2025.Ece202508;
 
+// Thanks to HyperNeutrino again
 [Name("The Art of Connection")]
 public class Ece202508 : EverybodyEventPuzzle
 {

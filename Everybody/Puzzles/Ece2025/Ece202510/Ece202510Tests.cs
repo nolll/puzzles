@@ -47,11 +47,73 @@ public class Ece202510Tests
     }
 
     [Fact]
-    public void Part3()
+    public void Part3_1()
     {
-        const string input = "";
+        const string input = """
+                             SSS
+                             ..#
+                             #.#
+                             #D.
+                             """;
 
-        Sut.Part3(input).Answer.Should().Be("0");
+        Sut.Part3(input).Answer.Should().Be("15");
+    }
+    
+    [Fact]
+    public void Part3_2()
+    {
+        const string input = """
+                             SSS
+                             ..#
+                             ..#
+                             .##
+                             .D#
+                             """;
+
+        Sut.Part3(input).Answer.Should().Be("8");
+    }
+    
+    [Fact]
+    public void Part3_3()
+    {
+        const string input = """
+                             ..S..
+                             .....
+                             ..#..
+                             .....
+                             ..D..
+                             """;
+
+        Sut.Part3(input).Answer.Should().Be("44");
+    }
+    
+    [Fact]
+    public void Part3_4()
+    {
+        const string input = """
+                             .SS.S
+                             #...#
+                             ...#.
+                             ##..#
+                             .####
+                             ##D.#
+                             """;
+
+        Sut.Part3(input).Answer.Should().Be("4406");
+    }
+    
+    [Fact]
+    public void Part3_5()
+    {
+        const string input = """
+                             SSS.S
+                             .....
+                             #.#.#
+                             .#.#.
+                             #.D.#
+                             """;
+
+        Sut.Part3(input).Answer.Should().Be("13033988838");
     }
 
     private static Ece202510 Sut => new();

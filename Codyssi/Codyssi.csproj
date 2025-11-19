@@ -12,9 +12,6 @@
 
     <ItemGroup>
         <None Include="Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
-        <None Update="Puzzles\Codyssi2025\Codyssi202511\Codyssi202511.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
     </ItemGroup>
 
     <ItemGroup>

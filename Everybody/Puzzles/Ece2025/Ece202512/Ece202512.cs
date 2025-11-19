@@ -25,38 +25,18 @@ public class Ece202512 : EverybodyEventPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        var origGrid = GridBuilder.BuildIntGridFromNonSeparated(input);
-        var changingGrid = origGrid.Clone();
-        
-        (changingGrid, var best1) = FindBest(changingGrid);
-        (changingGrid, var best2) = FindBest(changingGrid);
-        var (_, best3) = FindBest(changingGrid);
+        var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
+        var allResults = FindAll(grid).ToList();
+        var total = new HashSet<Coord>();
 
-        var result = Destroy(origGrid, best1);
-        result.UnionWith(Destroy(origGrid, best2));
-        result.UnionWith(Destroy(origGrid, best3));
+        foreach (var _ in Enumerable.Range(0, 3)) 
+            total.UnionWith(allResults.MaxBy(o => o.Except(total).Count())!);
         
-        return new PuzzleResult(result.Count, "757124c4b4c1a7a826289c980216e1ed");
+        return new PuzzleResult(total.Count, "757124c4b4c1a7a826289c980216e1ed");
     }
 
-    private static (Grid<int> grid, Coord coord) FindBest(Grid<int> grid)
-    {
-        var plausibleCoords = grid.Coords.Where(o => grid.ReadValueAt(o) > 2).ToList();
-        var coordResults = new List<(Coord coord, HashSet<Coord> destroyed)>();
-        foreach (var coord in plausibleCoords)
-        {
-            coordResults.Add((coord, Destroy(grid, coord, true)));
-        }
-
-        var mutableGrid = grid.Clone();
-        var best1 = coordResults.MaxBy(o => o.destroyed.Count);
-        foreach (var coord in best1.destroyed)
-        {
-            mutableGrid.WriteValueAt(coord, 0);
-        }
-
-        return (mutableGrid, best1.coord);
-    }
+    private static IEnumerable<HashSet<Coord>> FindAll(Grid<int> grid) => 
+        grid.Coords.Where(o => grid.ReadValueAt(o) > 2).ToList().Select(coord => Destroy(grid, coord, true));
     
     private static HashSet<Coord> Destroy(Grid<int> grid, Coord start, bool excludeZero = false)
     {

@@ -28,7 +28,7 @@ public class Ece202512 : EverybodyEventPuzzle
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
         var allResults = FindAll(grid).ToList();
         var total = new HashSet<Coord>();
-
+    
         foreach (var _ in Enumerable.Range(0, 3)) 
             total.UnionWith(allResults.MaxBy(o => o.Except(total).Count())!);
         

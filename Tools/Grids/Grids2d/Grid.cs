@@ -168,9 +168,9 @@ public class Grid<T> where T : struct
     public bool MoveTo(int x, int y) => MoveTo(new Coord(x, y), true);
     public bool TryMoveTo(Coord address) => MoveTo(address, false);
     public bool TryMoveTo(int x, int y) => MoveTo(new Coord(x, y), false);
-    public bool MoveForward() => MoveForward(true);
-    private bool MoveForward(bool extend) => MoveTo(new Coord(Coord.X + Direction.X, Coord.Y + Direction.Y), extend);
-    public bool TryMoveForward() => MoveForward(false);
+    public bool MoveForward(int steps = 1) => MoveForward(steps, true);
+    private bool MoveForward(int steps, bool extend) => MoveTo(new Coord(Coord.X + Direction.X * steps, Coord.Y + Direction.Y * steps), extend);
+    public bool TryMoveForward() => MoveForward(1, false);
     public bool MoveBackward() => MoveBackward(true);
     private bool MoveBackward(bool extend) => MoveTo(new Coord(Coord.X - Direction.X, Coord.Y - Direction.Y), extend);
     public bool TryMoveBackward() => MoveBackward(false);

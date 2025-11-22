@@ -136,7 +136,16 @@ public class Grid<T> where T : struct
     public IEnumerable<Coord> PossibleOrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoordsTo(Coord);
     public IEnumerable<Coord> PossibleOrthogonalAdjacentCoordsTo(Coord address) => 
         GridConstants.OrthogonalDirections.Select(dir => new Coord(address.X + dir.x, address.Y + dir.y));
+    
+    public IList<T> DiagonalAdjacentValues => DiagonalAdjacentCoords.Select(ReadValueAt).ToList();
+    public IList<T> DiagonalAdjacentValuesTo(Coord address) => DiagonalAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
+    public IList<Coord> DiagonalAdjacentCoords => DiagonalAdjacentCoordsTo(Coord);
+    public IList<Coord> DiagonalAdjacentCoordsTo(Coord address) => PossibleDiagonalAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
 
+    public IEnumerable<Coord> PossibleDiagonalAdjacentCoords => PossibleDiagonalAdjacentCoordsTo(Coord);
+    public IEnumerable<Coord> PossibleDiagonalAdjacentCoordsTo(Coord address) => 
+        GridConstants.DiagonalDirections.Select(dir => new Coord(address.X + dir.x, address.Y + dir.y));
+    
     public IList<T> AllAdjacentValues => AllAdjacentCoordsTo(Coord).Select(ReadValueAt).ToList();
     public IList<T> AllAdjacentValuesTo(Coord address) => AllAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
     public IList<Coord> AllAdjacentCoords => AllAdjacentCoordsTo(Coord);

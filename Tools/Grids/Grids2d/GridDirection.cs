@@ -37,6 +37,28 @@ public class GridDirection : IEquatable<GridDirection>
         _ => Right
     };
     
+    public GridDirection TurnLeft()
+    {
+        if (Equals(Up))
+            return Left;
+        if (Equals(Right))
+            return Up;
+        if (Equals(Down))
+            return Right;
+        return Down;
+    }
+    
+    public GridDirection TurnRight()
+    {
+        if (Equals(Up))
+            return Right;
+        if (Equals(Right))
+            return Down;
+        if (Equals(Down))
+            return Left;
+        return Up;
+    }
+    
     public static readonly List<GridDirection> All = [Up, Right, Down, Left];
 
     public bool Equals(GridDirection? other)

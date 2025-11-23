@@ -217,27 +217,8 @@ public class Grid<T> where T : struct
         return true;
     }
 
-    public GridDirection TurnLeft()
-    {
-        if (Direction.Equals(GridDirection.Up))
-            return TurnTo(GridDirection.Left);
-        if (Direction.Equals(GridDirection.Right))
-            return TurnTo(GridDirection.Up);
-        if (Direction.Equals(GridDirection.Down))
-            return TurnTo(GridDirection.Right);
-        return TurnTo(GridDirection.Down);
-    }
-
-    public GridDirection TurnRight()
-    {
-        if (Direction.Equals(GridDirection.Up))
-            return TurnTo(GridDirection.Right);
-        if (Direction.Equals(GridDirection.Right))
-            return TurnTo(GridDirection.Down);
-        if (Direction.Equals(GridDirection.Down))
-            return TurnTo(GridDirection.Left);
-        return TurnTo(GridDirection.Up);
-    }
+    public GridDirection TurnLeft() => TurnTo(Direction.TurnLeft());
+    public GridDirection TurnRight() => TurnTo(Direction.TurnRight());
 
     public GridDirection TurnTo(GridDirection direction)
     {

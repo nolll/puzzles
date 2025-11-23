@@ -15,30 +15,7 @@ public class Ece202515 : EverybodyEventPuzzle
 
     public static int Solve(string input)
     {
-        var instructions = input.Split(',');
-        var grid = new Grid<char>(1, 1, '.');
-        grid.WriteValue('S');
-        grid.TurnTo(GridDirection.Up);
-        List<Coord> corners = [grid.Coord];
-        
-        foreach (var instruction in instructions)
-        {
-            var direction = instruction.First();
-            var distance = int.Parse(instruction[1..]);
-            if (direction == 'L')
-                grid.TurnLeft();
-            else
-                grid.TurnRight();
-            grid.MoveForward(distance);
-            grid.WriteValue('#');
-            
-            corners.Add(grid.Coord);
-        }
-        
-        var offsetX = -grid.XMin;
-        var offsetY = -grid.YMin;
-        corners = corners.Select(o => new Coord(o.X + offsetX, o.Y + offsetY)).ToList();
-
+        var corners = GetCorners(input);
         var xmap = new Dictionary<int, int>();
         var xCosts = new Dictionary<(int, int), int>();
         var xValues = corners.Select(o => o.X).Distinct().Order().ToArray();
@@ -147,5 +124,25 @@ public class Ece202515 : EverybodyEventPuzzle
         }
         
         return Dijkstra.BestCost(edges, startPoint.Id, endPoint.Id);
+    }
+
+    private static List<Coord> GetCorners(string input)
+    {
+        var instructions = input.Split(',').Select(o => (o.First(), int.Parse(o[1..])));
+        var grid = new Grid<char>(1, 1, '.');
+        grid.TurnTo(GridDirection.Up);
+        List<Coord> corners = [grid.Coord];
+        
+        foreach (var (direction, distance) in instructions)
+        {
+            Action turnFunc = direction == 'L' ? () => grid.TurnLeft() : () => grid.TurnRight();
+            turnFunc();
+            grid.MoveForward(distance);
+            corners.Add(grid.Coord);
+        }
+        
+        var offsetX = corners.Select(o => o.X).Min();
+        var offsetY = corners.Select(o => o.Y).Min();
+        return corners.Select(o => new Coord(o.X + offsetX, o.Y + offsetY)).ToList();
     }
 }

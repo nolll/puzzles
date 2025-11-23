@@ -11,11 +11,27 @@ public class Ece202515Tests
     }
 
     [Fact]
-    public void Part2And3()
+    public void Part2And3_1()
+    {
+        const string input = "R3,R4,L3,L4,R3,R6,R9";
+
+        Ece202515.Solve(input).Should().Be(6);
+    }
+    
+    [Fact]
+    public void Part2And3_2()
     {
         const string input = "L6,L3,L6,R3,L6,L3,L3,R6,L6,R6,L6,L6,R3,L3,L3,R3,R3,L6,L6,L3";
 
-        Sut.Part2And3(input).Should().Be(16);
+        Ece202515.Solve(input).Should().Be(16);
+    }
+    
+    [Fact]
+    public void Part2And3_3()
+    {
+        const string input = "L88,L66,L44,R77,L99,L77,L11,R99,L22,R44,L77,L11,L22,R33,R44,L22,R33,L22,R44,L77,L77,R55,R33,L44,L88,L33,R33,R44,L99,L22,L22,R33,R44,L77,L55,R55,R66,L77,L77,R88,L11,R88,L44,L33,R88,L55,L33,R66,R44,L22,R99,L88,R44,L99,L66,L22,R22,R99,L11,R22,L33,R88,L99,L22,R99,L66,R33,L22,R44,L77,R55,L66,L44,R22,R66,L55,L44,R66,L66,R66,R99,L88,L11,L55,R44,R77,L88,R77,L22,L77,R44,L11,R66,R44,L99,L99,L33,R77,R99,L33,R88,L22,L88,R66,R44,L44,R44,L77,R88,L33,L11,R44,L99,L44,R99,R66,R66,L44,L22,R66,L55,L44,R11,R44,L44,R55,L33,L33,R66,L22,R11,R99,L88,L88,R77,L22,L11,R66,R99,L77,L22,R44,R11,L66,R55,L11,L11,R88,L11,R66,L22,L33,R22,R55,R66,L66,R66,L55,L55,R55,L33,L66,L33,R33,R44,R77,L88,R66,L11,R44,L22,L22,R88,L66,R77,R22,L33,R44,L55,L33,R99,L11,R66,L88,L77,R66,R99,L33,L44,R11";
+
+        Ece202515.Solve(input).Should().Be(4621);
     }
 
     private static Ece202515 Sut => new();

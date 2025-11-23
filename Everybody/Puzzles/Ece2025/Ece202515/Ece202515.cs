@@ -7,94 +7,13 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202515;
 [Name("Definitely Not a Maze")]
 public class Ece202515 : EverybodyEventPuzzle
 {
-    public PuzzleResult Part1(string input)
-    {
-        var instructions = input.Split(',');
-        var grid = new Grid<char>(1, 1, '.');
-        grid.WriteValue('S');
-        grid.TurnTo(GridDirection.Up);
-        
-        foreach (var instruction in instructions)
-        {
-            var direction = instruction.First();
-            var distance = int.Parse(instruction[1..]);
-            if (direction == 'L')
-                grid.TurnLeft();
-            else
-                grid.TurnRight();
-            for (var _ = 0; _ < distance; _++)
-            {
-                grid.MoveForward();
-                grid.WriteValue('#');
-            }
-        }
-        
-        var startPoint = grid.Coords.First(o => grid.ReadValueAt(o) == 'S');
-        var endPoint = grid.Coord;
-        grid.WriteValueAt(startPoint, '.');
-        grid.WriteValueAt(endPoint, '.');
-        
-        var edges = new List<GraphEdge>();
-        foreach (var coord in grid.Coords)
-        {
-            if (grid.ReadValueAt(coord) == '#')
-                continue;
-            
-            var adj = grid.OrthogonalAdjacentCoordsTo(coord).Where(o => grid.ReadValueAt(o) != '#');
-            foreach (var ac in adj)
-            {
-                edges.Add(new GraphEdge(ac.Id, coord.Id));
-                edges.Add(new GraphEdge(coord.Id, ac.Id));
-            }
-        }
-        var cost = Dijkstra.BestCost(edges, startPoint.Id, endPoint.Id);
-        
-        return new PuzzleResult(cost, "4a1a3b7a0e4af4aaf4c4f9e0b95430d4");
-    }
-
-    // public PuzzleResult Part2(string input)
-    // {
-    //     var instructions = input.Split(',');
-    //     var grid = new Grid<char>(1, 1, '.');
-    //     grid.WriteValue('S');
-    //     grid.TurnTo(GridDirection.Up);
-    //     grid.ExtendDown();
-    //     
-    //     foreach (var instruction in instructions)
-    //     {
-    //         var direction = instruction.First();
-    //         var distance = int.Parse(instruction[1..]);
-    //         if (direction == 'L')
-    //             grid.TurnLeft();
-    //         else
-    //             grid.TurnRight();
-    //         for (var _ = 0; _ < distance; _++)
-    //         {
-    //             grid.MoveForward();
-    //             grid.WriteValue('#');
-    //         }
-    //     }
-    //
-    //     var startPoint = grid.Coords.First(o => grid.ReadValueAt(o) == 'S');
-    //     grid.WriteValueAt(startPoint, '.');
-    //     var endPoint = grid.Coord;
-    //
-    //     var path = PathFinder.ShortestPathTo(grid, startPoint, endPoint);
-    //     
-    //     return new PuzzleResult(path.Count(), "c9e63859efb2156d5906e433e50285d0");
-    // }
+    private const int MaxDistance = 3;
     
-    public PuzzleResult Part2(string input)
-    {
-        return new PuzzleResult(Part2And3(input), "c9e63859efb2156d5906e433e50285d0");
-    }
+    public PuzzleResult Part1(string input) => new(Solve(input), "4a1a3b7a0e4af4aaf4c4f9e0b95430d4");
+    public PuzzleResult Part2(string input) => new(Solve(input), "c9e63859efb2156d5906e433e50285d0");
+    public PuzzleResult Part3(string input) => new(Solve(input), "f5a3b1e436cc12fdbacea6f28f381b67");
 
-    public PuzzleResult Part3(string input)
-    {
-        return new PuzzleResult(Part2And3(input));
-    }
-    
-    public int Part2And3(string input)
+    public static int Solve(string input)
     {
         var instructions = input.Split(',');
         var grid = new Grid<char>(1, 1, '.');
@@ -116,56 +35,62 @@ public class Ece202515 : EverybodyEventPuzzle
             corners.Add(grid.Coord);
         }
         
-        var refStartPoint = grid.Coords.First(o => grid.ReadValueAt(o) == 'S');
-        var refEndPoint = grid.Coord;
-        grid = grid.Slice(new Coord(grid.XMin, grid.YMin), new Coord(grid.XMax, grid.YMax));
-        var startPoint = grid.Coords.First(o => grid.ReadValueAt(o) == 'S');
-        var offsetX = startPoint.X - refStartPoint.X;
-        var offsetY = startPoint.Y - refStartPoint.Y;
-        var endPoint = new Coord(refEndPoint.X + offsetX, refEndPoint.Y + offsetY);
+        var offsetX = -grid.XMin;
+        var offsetY = -grid.YMin;
         corners = corners.Select(o => new Coord(o.X + offsetX, o.Y + offsetY)).ToList();
-        
-        grid.WriteValueAt(startPoint, '.');
-        grid.WriteValueAt(endPoint, '.');
 
         var xmap = new Dictionary<int, int>();
         var xCosts = new Dictionary<(int, int), int>();
         var xValues = corners.Select(o => o.X).Distinct().Order().ToArray();
-        var nx = 0;
-        foreach (var x in xValues)
-        {
-            if (!xmap.TryAdd(x, nx))
-                continue;
-            nx += 3;
-        }
-
+        var currentx = xValues.First();
+        xmap.Add(currentx, currentx);
         foreach (var (x1, x2) in xValues.Zip(xValues.Skip(1)))
         {
-            var a = x1 + 1;
-            var b = x2 - 1;
-            var diff = b - a;
-            xCosts.TryAdd((a, a + 1), diff);
-            xCosts.TryAdd((b, b - 1), diff);
+            if(xmap.ContainsKey(x2))
+                continue;
+            
+            var distance = x2 - x1;
+            var needsShortening = distance > MaxDistance;
+            if (needsShortening)
+            {
+                var cost = distance - MaxDistance + 1;
+                xCosts.TryAdd((currentx + 1, currentx + 2), cost);
+                xCosts.TryAdd((currentx + 2, currentx + 1), cost);
+                currentx += MaxDistance;
+            }
+            else
+            {
+                currentx += distance;
+            }
+            
+            xmap.TryAdd(x2, currentx);
         }
-        
+
         var ymap = new Dictionary<int, int>();
         var yCosts = new Dictionary<(int, int), int>();
         var yValues = corners.Select(o => o.Y).Distinct().Order().ToArray();
-        var ny = 0;
-        foreach (var y in yValues)
-        {
-            if (!ymap.TryAdd(y, ny))
-                continue;
-            ny += 3;
-        }
-        
+        var currenty = yValues.First();
+        ymap.Add(currenty, currenty);
         foreach (var (y1, y2) in yValues.Zip(yValues.Skip(1)))
         {
-            var a = y1 + 1;
-            var b = y2 - 1;
-            var diff = b - a;
-            yCosts.TryAdd((a, a + 1), diff);
-            yCosts.TryAdd((b, b - 1), diff);
+            if (ymap.ContainsKey(y2))
+                continue;
+            
+            var distance = y2 - y1;
+            var needsShortening = distance > MaxDistance;
+            if (needsShortening)
+            {
+                var cost = distance - MaxDistance + 1;
+                yCosts.TryAdd((currenty + 1, currenty + 2), cost);
+                yCosts.TryAdd((currenty + 2, currenty + 1), cost);
+                currenty += MaxDistance;
+            }
+            else
+            {
+                currenty += distance;
+            }
+               
+            ymap.TryAdd(y2, currenty);
         }
 
         for (var i = 0; i < corners.Count; i++)
@@ -196,8 +121,8 @@ public class Ece202515 : EverybodyEventPuzzle
             smallGrid.MoveTo(corner);
         }
 
-        startPoint = corners.First();
-        endPoint = corners.Last();
+        var startPoint = corners.First();
+        var endPoint = corners.Last();
         
         smallGrid.WriteValueAt(startPoint, '.');
         smallGrid.WriteValueAt(endPoint, '.');
@@ -211,15 +136,12 @@ public class Ece202515 : EverybodyEventPuzzle
             var adj = smallGrid.OrthogonalAdjacentCoordsTo(coord).Where(o => smallGrid.ReadValueAt(o) != '#');
             foreach (var ac in adj)
             {
-                var cost = 0;
+                var cost = 1;
                 if (xCosts.ContainsKey((coord.X, ac.X)))
-                    cost += xCosts[(coord.X, ac.X)];
+                    cost += xCosts[(coord.X, ac.X)] - 1;
                 if (yCosts.ContainsKey((coord.Y, ac.Y)))
-                    cost += yCosts[(coord.Y, ac.Y)];
-                if (cost == 0)
-                    cost = 1;
-
-                edges.Add(new GraphEdge(ac.Id, coord.Id, cost));
+                    cost += yCosts[(coord.Y, ac.Y)] - 1;
+                
                 edges.Add(new GraphEdge(coord.Id, ac.Id, cost));
             }
         }

@@ -11,19 +11,11 @@ public class Ece202515Tests
     }
 
     [Fact]
-    public void Part2()
+    public void Part2And3()
     {
-        const string input = "";
+        const string input = "L6,L3,L6,R3,L6,L3,L3,R6,L6,R6,L6,L6,R3,L3,L3,R3,R3,L6,L6,L3";
 
-        Sut.Part2(input).Answer.Should().Be("0");
-    }
-
-    [Fact]
-    public void Part3()
-    {
-        const string input = "";
-
-        Sut.Part3(input).Answer.Should().Be("0");
+        Sut.Part2And3(input).Should().Be(16);
     }
 
     private static Ece202515 Sut => new();

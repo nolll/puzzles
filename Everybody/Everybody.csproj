@@ -25,4 +25,10 @@
       <PackageReference Include="xunit" Version="2.9.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="Tools">
+        <HintPath>..\bin\Single\net10.0\Tools.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

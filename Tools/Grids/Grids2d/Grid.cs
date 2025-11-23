@@ -84,6 +84,17 @@ public class Grid<T> where T : struct
             }
         }
     }
+    
+    public Coord? CoordOf(T value)
+    {
+        foreach (var key in _grid.Keys)
+        {
+            if (_grid[key].Equals(value))
+                return Coord;
+        }
+
+        return null;
+    }
 
     public T ReadValue() => ReadValueAt(Coord);
     public T ReadValueAt(int x, int y) => ReadValueAt(new Coord(x, y));
@@ -249,10 +260,11 @@ public class Grid<T> where T : struct
     {
         if (address.X < XMin)
             ExtendLeft(address);
-        ExtendRight(address);
+        else
+            ExtendRight(address);
     }
 
-    private void ExtendLeft(Coord address) => AddCols(-address.X, GridAddMode.Prepend);
+    private void ExtendLeft(Coord address) => AddCols(XMin - address.X, GridAddMode.Prepend);
 
     private void ExtendRight(Coord address)
     {
@@ -265,10 +277,11 @@ public class Grid<T> where T : struct
     {
         if (address.Y < YMin)
             ExtendTop(address);
-        ExtendBottom(address);
+        else
+            ExtendBottom(address);
     }
 
-    private void ExtendTop(Coord address) => AddRows(-address.Y, GridAddMode.Prepend);
+    private void ExtendTop(Coord address) => AddRows(YMin - address.Y, GridAddMode.Prepend);
 
     private void ExtendBottom(Coord address)
     {

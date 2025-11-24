@@ -24,17 +24,8 @@ public class Ece202407 : EverybodyEventPuzzle
         return new PuzzleResult(result, "05a999b2ab72fff505423f40ee4af56b");
     }
 
-    public PuzzleResult RunPart2(string input)
-    {
-        var result = Part2(Part2Track, input);
-        return new PuzzleResult(result, "f315ce3865ed329f4eee3ec0d64bb032");
-    }
-
-    public PuzzleResult RunPart3(string input)
-    {
-        var result = Part3(Part3Track, input);
-        return new PuzzleResult(result, "2945d46a4a840d740dfe233d50659d0c");
-    }
+    public PuzzleResult RunPart2(string input) => new(Part2(Part2Track, input), "f315ce3865ed329f4eee3ec0d64bb032");
+    public PuzzleResult RunPart3(string input) => new(Part3(Part3Track, input), "2945d46a4a840d740dfe233d50659d0c");
 
     public string Part2(string trackString, string input)
     {
@@ -67,13 +58,10 @@ public class Ece202407 : EverybodyEventPuzzle
             .Count(o => o > rivalScore);
     }
 
-    private static IEnumerable<int[]> GenerateActionCombinations()
-    {
-        return GenerateActionCombinations("", 11, ['+', '-', '='])
-            .Select(BuildActions)
-            .Where(o => o.Count(x => x == 0) == 3 && o.Count(x => x == -1) == 3 && o.Count(x => x == 1) == 5);
-    }
-    
+    private static IEnumerable<int[]> GenerateActionCombinations() => GenerateActionCombinations("", 11, ['+', '-', '='])
+        .Select(BuildActions)
+        .Where(o => o.Count(x => x == 0) == 3 && o.Count(x => x == -1) == 3 && o.Count(x => x == 1) == 5);
+
     private static IEnumerable<string> GenerateActionCombinations(string s, int depth, char[] chars)
     {
         if (depth == 0)
@@ -135,14 +123,13 @@ public class Ece202407 : EverybodyEventPuzzle
 
     private static int[] BuildActions(string actions) => BuildActions(actions.Replace(",", "").ToCharArray());
     private static int[] BuildActions(IEnumerable<char> actions) => actions.Select(ConvertToInt).ToArray();
-    
-    private static int ConvertToInt(char c) =>
-        c switch
-        {
-            '+' => 1,
-            '-' => -1,
-            _ => 0
-        };
+
+    private static int ConvertToInt(char c) => c switch
+    {
+        '+' => 1,
+        '-' => -1,
+        _ => 0
+    };
 
     private record Knight(string Name, long Score);
     

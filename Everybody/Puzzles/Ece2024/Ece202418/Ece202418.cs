@@ -6,17 +6,8 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202418;
 [Name("The Ring")]
 public class Ece202418 : EverybodyEventPuzzle
 {
-    public PuzzleResult Part1(string input)
-    {
-        var time = Part1And2(input);
-        return new PuzzleResult(time, "58a8744a3bef1c6dcbf739d171b22ea5");
-    }
-
-    public PuzzleResult Part2(string input)
-    {
-        var time = Part1And2(input);
-        return new PuzzleResult(time, "e709ebaa41c12566e0524c796fac3615");
-    }
+    public PuzzleResult Part1(string input) => new(Part1And2(input), "58a8744a3bef1c6dcbf739d171b22ea5");
+    public PuzzleResult Part2(string input) => new(Part1And2(input), "e709ebaa41c12566e0524c796fac3615");
 
     private int Part1And2(string input)
     {

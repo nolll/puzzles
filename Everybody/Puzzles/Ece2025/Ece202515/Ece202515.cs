@@ -7,8 +7,6 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202515;
 [Name("Definitely Not a Maze")]
 public class Ece202515 : EverybodyEventPuzzle
 {
-    private const int MaxDistance = 3;
-    
     public PuzzleResult Part1(string input) => new(Solve(input), "4a1a3b7a0e4af4aaf4c4f9e0b95430d4");
     public PuzzleResult Part2(string input) => new(Solve(input), "c9e63859efb2156d5906e433e50285d0");
     public PuzzleResult Part3(string input) => new(Solve(input), "f5a3b1e436cc12fdbacea6f28f381b67");
@@ -95,15 +93,18 @@ public class Ece202515 : EverybodyEventPuzzle
 
     private class CoordMapper
     {
-        private readonly List<Coord> _corners;
-        private readonly Dictionary<(int, int), int> _xcost = new();
-        private readonly Dictionary<(int, int), int> _ycost = new();
-        private readonly Dictionary<int, int> _xmap = new();
-        private readonly Dictionary<int, int> _ymap = new();
+        private const int MaxDistance = 3;
+        private readonly Dictionary<(int, int), int> _xcost;
+        private readonly Dictionary<(int, int), int> _ycost;
+        private readonly Dictionary<int, int> _xmap;
+        private readonly Dictionary<int, int> _ymap;
+        
+        public List<Coord> MappedCorners => field.Select(MapCoord).ToList();
+        private Coord MapCoord(Coord coord) => new(_xmap[coord.X], _ymap[coord.Y]);
 
         public CoordMapper(List<Coord> corners)
         {
-            _corners = corners;
+            MappedCorners = corners;
             (_xmap, _xcost) = GetMapAndCost(corners.Select(o => o.X).Distinct().Order().ToList());
             (_ymap, _ycost) = GetMapAndCost(corners.Select(o => o.Y).Distinct().Order().ToList());
         }
@@ -138,9 +139,6 @@ public class Ece202515 : EverybodyEventPuzzle
 
             return (m, c);
         }
-
-        public List<Coord> MappedCorners => _corners.Select(MapCoord).ToList();
-        private Coord MapCoord(Coord coord) => new(_xmap[coord.X], _ymap[coord.Y]);
 
         public int CalculateCost(Coord from, Coord to)
         {

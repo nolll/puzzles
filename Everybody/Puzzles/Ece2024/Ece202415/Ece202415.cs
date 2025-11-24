@@ -13,25 +13,11 @@ public class Ece202415 : EverybodyEventPuzzle
 {
     private readonly (int r, int c)[] _diffs = [(-1, 0), (1, 0), (0, 1), (0, -1)];
     
-    public PuzzleResult Part1(string input)
-    {
-        var cost = Run(input);
-        return new PuzzleResult(cost, "4d832f8cc35ae0da374a91187caa538b");
-    }
+    public PuzzleResult Part1(string input) => new(Solve(input), "4d832f8cc35ae0da374a91187caa538b");
+    public PuzzleResult Part2(string input) => new(Solve(input), "88139015cfdd3b0563287eff1d2229c1");
+    public PuzzleResult Part3(string input) => new(Solve(input), "3a179922baba26e752177ed54092cfdc");
 
-    public PuzzleResult Part2(string input)
-    {
-        var result = Run(input);
-        return new PuzzleResult(result, "88139015cfdd3b0563287eff1d2229c1");
-    }
-    
-    public PuzzleResult Part3(string input)
-    {
-        var result = Run(input);
-        return new PuzzleResult(result, "3a179922baba26e752177ed54092cfdc");
-    }
-
-    private long Run(string input)
+    private long Solve(string input)
     {
         var grid = input.Split(LineBreaks.Single).Select(o => o.ToCharArray()).ToArray();
         var height = grid.Length;

@@ -6,7 +6,7 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202403;
 [Name("Mining Maestro")]
 public class Ece202403 : EverybodyEventPuzzle
 {
-    public enum SlopeRule
+    private enum SlopeRule
     {
         Orthogonal,
         Diagonal

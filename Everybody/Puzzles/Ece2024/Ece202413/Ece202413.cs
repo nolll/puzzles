@@ -7,25 +7,11 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202413;
 [Name("Never Gonna Let You Down")]
 public class Ece202413 : EverybodyEventPuzzle
 {
-    public PuzzleResult Part1(string input)
-    {
-        var result = Solve(input);
-        return new PuzzleResult(result, "cc8e51053c4445ee974c4672602452ae");
-    }
+    public PuzzleResult Part1(string input) => new(Solve(input), "cc8e51053c4445ee974c4672602452ae");
+    public PuzzleResult Part2(string input) => new(Solve(input), "a66cce437d7531d58ae98d0084ae5e9d");
+    public PuzzleResult Part3(string input) => new(Solve(input), "3bebcd17eed852e6918bf8d5eae753cb");
 
-    public PuzzleResult Part2(string input)
-    {
-        var result = Solve(input);
-        return new PuzzleResult(result, "a66cce437d7531d58ae98d0084ae5e9d");
-    }
-
-    public PuzzleResult Part3(string input)
-    {
-        var result = Solve(input);
-        return new PuzzleResult(result, "3bebcd17eed852e6918bf8d5eae753cb");
-    }
-    
-    private int Solve(string input)
+    private static int Solve(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var start = grid.FindAddresses('E').First();

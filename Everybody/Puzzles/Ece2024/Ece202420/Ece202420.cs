@@ -123,11 +123,7 @@ public class Ece202420 : EverybodyEventPuzzle
         return new PuzzleResult(time, "455f69d24dffb75a22302c1cbad1475b");
     }
 
-    public PuzzleResult Part3(string input)
-    {
-        var result = RunPart3(input, -3);
-        return new PuzzleResult(result, "f410a855e124b277c01cf1caebd9778e");
-    }
+    public PuzzleResult Part3(string input) => new(RunPart3(input, -3), "f410a855e124b277c01cf1caebd9778e");
 
     // The best col was obvious. 4 cols to the right for the test input and three steps to the right for the real input
     public static int RunPart3(string input, int stepsToGoodCol)

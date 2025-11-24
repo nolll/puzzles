@@ -8,17 +8,8 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202412;
 [Name("Desert Shower")]
 public class Ece202412 : EverybodyEventPuzzle
 {
-    public PuzzleResult Part1(string input)
-    {
-        var result = Part1And2(input);
-        return new PuzzleResult(result, "7266a18eef65c4745c844164ef32f61d");
-    }
-
-    public PuzzleResult Part2(string input)
-    {
-        var result = Part1And2(input);
-        return new PuzzleResult(result, "e6468a990e5dfdb3b572e72c4c24ed5b");
-    }
+    public PuzzleResult Part1(string input) => new(Part1And2(input), "7266a18eef65c4745c844164ef32f61d");
+    public PuzzleResult Part2(string input) => new(Part1And2(input), "e6468a990e5dfdb3b572e72c4c24ed5b");
 
     private int Part1And2(string input)
     {

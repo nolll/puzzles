@@ -17,17 +17,11 @@ public class Ece202416 : EverybodyEventPuzzle
         return new PuzzleResult(result, "1a56d927da3da48fad02fb78b95a91cb");
     }
 
-    public PuzzleResult Part2(string input)
-    {
-        var score = Part2(input, 202420242024);
-        
-        return new PuzzleResult(score, "8ba1d5c403e6bf5c0aad202e81e5e515");
-    }
-    
+    public PuzzleResult Part2(string input) => new(Part2(input, 202420242024), "8ba1d5c403e6bf5c0aad202e81e5e515");
+
     public PuzzleResult Part3(string input)
     {
         var (min, max) = Part3(input, 256);
-        
         return new PuzzleResult($"{max} {min}", "912149637877bbdd3f19be24133372ed");
     }
     

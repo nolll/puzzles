@@ -22,17 +22,8 @@ public class Ece202408 : EverybodyEventPuzzle
         return new PuzzleResult(result, "5dbd06d4622464e1becf46096ff400a7");
     }
 
-    public PuzzleResult RunPart2(string input)
-    {
-        var result = RunPart2(input, 20240000, 1111);
-        return new PuzzleResult(result, "afafe068673279bd495b7ccfc71a0064");
-    }
-
-    public PuzzleResult RunPart3(string input)
-    {
-        var result = RunPart3(input, 202400000, 10);
-        return new PuzzleResult(result, "52ce3b750999eebc1512e2d801e327a4");
-    }
+    public PuzzleResult RunPart2(string input) => new(RunPart2(input, 20240000, 1111), "afafe068673279bd495b7ccfc71a0064");
+    public PuzzleResult RunPart3(string input) => new(RunPart3(input, 202400000, 10), "52ce3b750999eebc1512e2d801e327a4");
 
     public long RunPart2(string input, int availableBlocks, int acolyteCount)
     {

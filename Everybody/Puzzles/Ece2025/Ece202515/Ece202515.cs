@@ -15,66 +15,37 @@ public class Ece202515 : EverybodyEventPuzzle
 
     public static int Solve(string input)
     {
-        var corners = GetCorners(input);
-        var xmap = new Dictionary<int, int>();
-        var xCosts = new Dictionary<(int, int), int>();
-        var xValues = corners.Select(o => o.X).Distinct().Order().ToArray();
-        var currentx = xValues.First();
-        xmap.Add(currentx, currentx);
-        foreach (var (x1, x2) in xValues.Zip(xValues.Skip(1)))
-        {
-            if(xmap.ContainsKey(x2))
-                continue;
-            
-            var distance = x2 - x1;
-            var needsShortening = distance > MaxDistance;
-            if (needsShortening)
-            {
-                var cost = distance - MaxDistance + 1;
-                xCosts.TryAdd((currentx + 1, currentx + 2), cost);
-                xCosts.TryAdd((currentx + 2, currentx + 1), cost);
-                currentx += MaxDistance;
-            }
-            else
-            {
-                currentx += distance;
-            }
-            
-            xmap.TryAdd(x2, currentx);
-        }
+        var originalCorners = GetCorners(input);
+        var coordMapper = new CoordMapper(originalCorners);
+        var corners = coordMapper.MappedCorners;
+        var grid = BuildGrid(corners);
+        var edges = BuildGraph(grid, coordMapper);
+        
+        return Dijkstra.BestCost(edges, corners.First().Id, corners.Last().Id);
+    }
 
-        var ymap = new Dictionary<int, int>();
-        var yCosts = new Dictionary<(int, int), int>();
-        var yValues = corners.Select(o => o.Y).Distinct().Order().ToArray();
-        var currenty = yValues.First();
-        ymap.Add(currenty, currenty);
-        foreach (var (y1, y2) in yValues.Zip(yValues.Skip(1)))
+    private static List<Coord> GetCorners(string input)
+    {
+        var instructions = input.Split(',').Select(o => (o.First(), int.Parse(o[1..])));
+        var grid = new Grid<char>(1, 1, '.');
+        grid.TurnTo(GridDirection.Up);
+        List<Coord> corners = [grid.Coord];
+        
+        foreach (var (direction, distance) in instructions)
         {
-            if (ymap.ContainsKey(y2))
-                continue;
-            
-            var distance = y2 - y1;
-            var needsShortening = distance > MaxDistance;
-            if (needsShortening)
-            {
-                var cost = distance - MaxDistance + 1;
-                yCosts.TryAdd((currenty + 1, currenty + 2), cost);
-                yCosts.TryAdd((currenty + 2, currenty + 1), cost);
-                currenty += MaxDistance;
-            }
-            else
-            {
-                currenty += distance;
-            }
-               
-            ymap.TryAdd(y2, currenty);
+            Action turnFunc = direction == 'L' ? () => grid.TurnLeft() : () => grid.TurnRight();
+            turnFunc();
+            grid.MoveForward(distance);
+            corners.Add(grid.Coord);
         }
+        
+        var offsetX = corners.Select(o => o.X).Min();
+        var offsetY = corners.Select(o => o.Y).Min();
+        return corners.Select(o => new Coord(o.X + offsetX, o.Y + offsetY)).ToList();
+    }
 
-        for (var i = 0; i < corners.Count; i++)
-        {
-            corners[i] = new Coord(xmap[corners[i].X], ymap[corners[i].Y]);
-        }
-
+    private static Grid<char> BuildGrid(List<Coord> corners)
+    {
         var smallGrid = new Grid<char>(corners.Max(o => o.X) + 1, corners.Max(o => o.Y) + 1, '.');
 
         smallGrid.MoveTo(corners.First());
@@ -103,46 +74,83 @@ public class Ece202515 : EverybodyEventPuzzle
         
         smallGrid.WriteValueAt(startPoint, '.');
         smallGrid.WriteValueAt(endPoint, '.');
-        
-        var edges = new List<GraphEdge>();
-        foreach (var coord in smallGrid.Coords)
-        {
-            if (smallGrid.ReadValueAt(coord) == '#')
-                continue;
-            
-            var adj = smallGrid.OrthogonalAdjacentCoordsTo(coord).Where(o => smallGrid.ReadValueAt(o) != '#');
-            foreach (var ac in adj)
-            {
-                var cost = 1;
-                if (xCosts.ContainsKey((coord.X, ac.X)))
-                    cost += xCosts[(coord.X, ac.X)] - 1;
-                if (yCosts.ContainsKey((coord.Y, ac.Y)))
-                    cost += yCosts[(coord.Y, ac.Y)] - 1;
-                
-                edges.Add(new GraphEdge(coord.Id, ac.Id, cost));
-            }
-        }
-        
-        return Dijkstra.BestCost(edges, startPoint.Id, endPoint.Id);
+
+        return smallGrid;
     }
 
-    private static List<Coord> GetCorners(string input)
+    private static List<GraphEdge> BuildGraph(Grid<char> grid, CoordMapper coordMapper)
     {
-        var instructions = input.Split(',').Select(o => (o.First(), int.Parse(o[1..])));
-        var grid = new Grid<char>(1, 1, '.');
-        grid.TurnTo(GridDirection.Up);
-        List<Coord> corners = [grid.Coord];
-        
-        foreach (var (direction, distance) in instructions)
+        var edges = new List<GraphEdge>();
+        foreach (var coord in grid.Coords)
         {
-            Action turnFunc = direction == 'L' ? () => grid.TurnLeft() : () => grid.TurnRight();
-            turnFunc();
-            grid.MoveForward(distance);
-            corners.Add(grid.Coord);
+            if (grid.ReadValueAt(coord) == '#')
+                continue;
+            
+            var adj = grid.OrthogonalAdjacentCoordsTo(coord).Where(o => grid.ReadValueAt(o) != '#');
+            edges.AddRange(adj.Select(ac => new GraphEdge(coord.Id, ac.Id, coordMapper.CalculateCost(coord, ac))));
         }
-        
-        var offsetX = corners.Select(o => o.X).Min();
-        var offsetY = corners.Select(o => o.Y).Min();
-        return corners.Select(o => new Coord(o.X + offsetX, o.Y + offsetY)).ToList();
+
+        return edges;
+    }
+
+    private class CoordMapper
+    {
+        private readonly List<Coord> _corners;
+        private readonly Dictionary<(int, int), int> _xcost = new();
+        private readonly Dictionary<(int, int), int> _ycost = new();
+        private readonly Dictionary<int, int> _xmap = new();
+        private readonly Dictionary<int, int> _ymap = new();
+
+        public CoordMapper(List<Coord> corners)
+        {
+            _corners = corners;
+            (_xmap, _xcost) = GetMapAndCost(corners.Select(o => o.X).Distinct().Order().ToList());
+            (_ymap, _ycost) = GetMapAndCost(corners.Select(o => o.Y).Distinct().Order().ToList());
+        }
+
+        private (Dictionary<int, int> map, Dictionary<(int, int), int> cost) GetMapAndCost(List<int> values)
+        {
+            var m = new Dictionary<int, int>();
+            var c = new Dictionary<(int, int), int>();
+            var current = values.First();
+            m.Add(current, current);
+            foreach (var (a, b) in values.Zip(values.Skip(1)))
+            {
+                if(m.ContainsKey(b))
+                    continue;
+            
+                var distance = b - a;
+                var needsShortening = distance > MaxDistance;
+                if (needsShortening)
+                {
+                    var cost = distance - MaxDistance + 1;
+                    c.TryAdd((current + 1, current + 2), cost);
+                    c.TryAdd((current + 2, current + 1), cost);
+                    current += MaxDistance;
+                }
+                else
+                {
+                    current += distance;
+                }
+            
+                m.TryAdd(b, current);
+            }
+
+            return (m, c);
+        }
+
+        public List<Coord> MappedCorners => _corners.Select(MapCoord).ToList();
+        private Coord MapCoord(Coord coord) => new(_xmap[coord.X], _ymap[coord.Y]);
+
+        public int CalculateCost(Coord from, Coord to)
+        {
+            var cost = 0;
+            if (_xcost.ContainsKey((from.X, to.X)))
+                cost += _xcost[(from.X, to.X)];
+            if (_ycost.ContainsKey((from.Y, to.Y)))
+                cost += _ycost[(from.Y, to.Y)];
+            
+            return cost == 0 ? 1 : cost;
+        }
     }
 }

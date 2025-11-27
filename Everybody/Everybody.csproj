@@ -12,18 +12,6 @@
 
     <ItemGroup>
         <None Include="Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
-        <None Update="Puzzles\Ece2025\Ece202516\Ece202515-1.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Ece2025\Ece202516\Ece202516-3.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Ece2025\Ece202517\Ece202516-1.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="Puzzles\Ece2025\Ece202518\Ece202517-1.txt">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
     </ItemGroup>
 
     <ItemGroup>

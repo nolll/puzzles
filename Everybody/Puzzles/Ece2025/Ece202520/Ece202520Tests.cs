@@ -50,9 +50,19 @@ public class Ece202520Tests
     [Fact]
     public void Part2()
     {
-        const string input = "";
+        const string input = """
+                             TTTTTTTTTTTTTTTTT
+                             .TTTT#T#T#TTTTTT.
+                             ..TT#TTTETT#TTT..
+                             ...TT#T#TTT#TT...
+                             ....TTT#T#TTT....
+                             .....TTTTTT#.....
+                             ......TT#TT......
+                             .......#TT.......
+                             ........S........
+                             """;
 
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part2(input).Answer.Should().Be("32");
     }
 
     [Fact]

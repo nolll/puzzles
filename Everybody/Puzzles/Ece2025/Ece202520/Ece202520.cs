@@ -106,6 +106,11 @@ public class Ece202520 : EverybodyEventPuzzle
                 if (v != 'T')
                     continue;
                 
+                var colIsEven = coord.X % 2 == 0;
+                var rowIsEven = coord.Y % 2 == 0;
+                var canMoveUp = !colIsEven && !rowIsEven || colIsEven && rowIsEven;
+                var canMoveDown = !colIsEven && rowIsEven || colIsEven && !rowIsEven;
+                
                 if (!nextGrid.IsOutOfRange(coord) && nextGrid.ReadValueAt(coord) == 'T')
                 {
                     edges.Add(new GraphEdge(GetId(i, coord), GetId(nextIndex, coord)));
@@ -123,24 +128,19 @@ public class Ece202520 : EverybodyEventPuzzle
                     edges.Add(new GraphEdge(GetId(i, coord), GetId(nextIndex, right)));
                 }
                 
-                var colIsEven = coord.X % 2 == 0;
-                var colIsOdd = coord.X % 2 != 0;
-                var rowIsEven = coord.Y % 2 == 0;
-                var rowIsOdd = coord.Y % 2 != 0;
-
-                var up = new Coord(coord.X, coord.Y - 1);
-                if (!nextGrid.IsOutOfRange(up) && nextGrid.ReadValueAt(up) == 'T')
+                if (canMoveUp)
                 {
-                    if (colIsOdd && rowIsOdd || colIsEven && rowIsEven)
+                    var up = new Coord(coord.X, coord.Y - 1);
+                    if (!nextGrid.IsOutOfRange(up) && nextGrid.ReadValueAt(up) == 'T')
                     {
                         edges.Add(new GraphEdge(GetId(i, coord), GetId(nextIndex, up)));
-                    }
+                    }   
                 }
                 
-                var down = new Coord(coord.X, coord.Y + 1);
-                if (!nextGrid.IsOutOfRange(down) && nextGrid.ReadValueAt(down) == 'T')
+                if (canMoveDown)
                 {
-                    if (colIsOdd && rowIsEven || colIsEven && rowIsOdd)
+                    var down = new Coord(coord.X, coord.Y + 1);
+                    if (!nextGrid.IsOutOfRange(down) && nextGrid.ReadValueAt(down) == 'T')
                     {
                         edges.Add(new GraphEdge(GetId(i, coord), GetId(nextIndex, down)));
                     }

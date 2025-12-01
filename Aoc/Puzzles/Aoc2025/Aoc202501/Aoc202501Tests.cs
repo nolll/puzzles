@@ -18,11 +18,8 @@ public class Aoc202501Tests
     [Fact]
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("3");
 
-    [Theory]
-    [InlineData(0, 6)]
-    [InlineData(1, 16)]
-    [InlineData(10, 106)]
-    public void Part2(int extraOrbits, int expected) => Sut.Part2(Input, extraOrbits).Should().Be(expected);
+    [Fact]
+    public void Part2() => Sut.Part2(Input).Answer.Should().Be("6");
 
     private static Aoc202501 Sut => new();
 }

@@ -19,13 +19,13 @@ public class Aoc202501 : AocPuzzle
         var passCount = 0;
         foreach (var instruction in instructions)
         {
-            var dir = instruction.First();
             var distance = int.Parse(instruction[1..]);
-            var sign = dir == 'L' ? -1 : 1;
+            var sign = instruction.First() == 'L' ? -1 : 1;
 
             for (var i = 0; i < distance; i++)
             {
-                dial = (dial + Size + sign * 1) % Size;
+                dial += sign + Size;
+                dial %= Size;
                 if (dial == 0)
                     passCount++;
             }

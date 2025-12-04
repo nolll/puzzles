@@ -3,20 +3,15 @@ using Pzl.Tools.Grids.Grids2d;
 
 namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202504;
 
-[Name("")]
+[Name("Printing Department")]
 public class Aoc202504 : AocPuzzle
 {
+    private const char Roll = '@';
+
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var count = 0;
-        foreach (var coord in grid.Coords)
-        {
-            var cv = grid.ReadValueAt(coord);
-            if (cv != '@') continue;
-            if (grid.AllAdjacentValuesTo(coord).Count(o => o == '@') < 4)
-                count++;
-        }
+        var count = grid.Coords.Count(o => grid.ReadValueAt(o) == Roll && grid.AllAdjacentValuesTo(o).Count(r => r == Roll) < 4);
         
         return new PuzzleResult(count, "4da6779dc3e7cebb5219ce6536767d75");
     }
@@ -24,34 +19,19 @@ public class Aoc202504 : AocPuzzle
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var removed = 0;
-        var count = 0;
-        var coords = grid.FindAddresses('@').ToHashSet();
-        var adjacent = new Dictionary<Coord, List<Coord>>();
-        foreach (var coord in coords)
-        {
-            adjacent.Add(coord, grid.AllAdjacentCoordsTo(coord).ToList());
-        }
-        
-        while (true)
-        {
-            if (coords.Count == count)
-                break;
+        var lastCount = 0;
+        var coords = grid.FindAddresses(Roll).ToHashSet();
+        var adjacentCache = coords.ToDictionary(o => o, o => grid.AllAdjacentCoordsTo(o).ToList());
 
-            count = coords.Count;
-            
-            foreach (var coord in coords)
+        while (coords.Count != lastCount)
+        {
+            lastCount = coords.Count;
+            foreach (var coord in coords.Where(o => adjacentCache[o].Count(r => coords.Contains(r)) < 4))
             {
-                var cv = grid.ReadValueAt(coord);
-                if (cv != '@') continue;
-                if (adjacent[coord].Select(o => grid.ReadValueAt(o)).Count(o => o == '@') >= 4) continue;
-                grid.WriteValueAt(coord, '.');
                 coords.Remove(coord);
-                removed++;
-                break;
             }
         }
 
-        return new PuzzleResult(removed, "b5c22cfe2a53283e5f093ac4f07fd1db");
+        return new PuzzleResult(adjacentCache.Count - coords.Count, "b5c22cfe2a53283e5f093ac4f07fd1db");
     }
 }

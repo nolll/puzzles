@@ -22,14 +22,10 @@ public class Aoc202505 : AocPuzzle
         return new PuzzleResult(count, "be06dfd5fc2345c5df5b1b53d430fff5");
     }
 
-    private List<long[]> GetRanges(string rangeInput)
+    private static List<long[]> GetRanges(string rangeInput) => MergeRanges(ParseRanges(rangeInput));
+
+    private static List<long[]> MergeRanges(List<long[]> ranges)
     {
-        var ranges = rangeInput
-            .Split(LineBreaks.Single)
-            .Select(o => o.Split('-').Select(long.Parse).ToArray())
-            .OrderBy(o => o[0])
-            .ToList();
-        
         var removed = ranges.Select(_ => false).ToArray();
         for (var i = 0; i < ranges.Count; i++)
         {
@@ -60,4 +56,10 @@ public class Aoc202505 : AocPuzzle
 
         return ranges.Where((_, i) => !removed[i]).ToList();
     }
+
+    private static List<long[]> ParseRanges(string rangeInput) => rangeInput
+        .Split(LineBreaks.Single)
+        .Select(o => o.Split('-').Select(long.Parse).ToArray())
+        .OrderBy(o => o[0])
+        .ToList();
 }

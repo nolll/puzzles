@@ -53,7 +53,7 @@ public class Aoc202505 : AocPuzzle
 
             ranges[i] = [cmin, cmax];
         }
-
+        
         return ranges.Where((_, i) => !removed[i]).ToList();
     }
 

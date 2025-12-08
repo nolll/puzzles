@@ -29,7 +29,7 @@ public class Aoc202508Tests
     public void Part1() => Sut.Part1(Input, 10).Should().Be(40);
 
     [Fact]
-    public void Part2() => Sut.Part2(Input, 10).Should().Be(25272);
+    public void Part2() => Sut.Part2(Input).Answer.Should().Be("25272");
 
     private static Aoc202508 Sut => new();
 }

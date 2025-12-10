@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202509;
 
 [Name("Movie Theater")]
 [IsFunToOptimize]
-[Comment("Use fancy algorithms instead of brute force")]
+[Comment("Could probably use the corners in a more clever way")]
 public class Aoc202509 : AocPuzzle
 {
     public PuzzleResult Part1(string input)
@@ -151,9 +151,7 @@ public class Aoc202509 : AocPuzzle
     
     private class CoordMapper
     {
-        private const int MaxDistance = 3;
-        private readonly Dictionary<(int, int), int> _xcost;
-        private readonly Dictionary<(int, int), int> _ycost;
+        private const int MaxDistance = 2;
         private readonly Dictionary<int, int> _xmap;
         private readonly Dictionary<int, int> _ymap;
         
@@ -164,14 +162,13 @@ public class Aoc202509 : AocPuzzle
         public CoordMapper(List<Coord> corners)
         {
             MappedCorners = corners;
-            (_xmap, _xcost) = GetMapAndCost(corners.Select(o => o.X).Distinct().Order().ToList());
-            (_ymap, _ycost) = GetMapAndCost(corners.Select(o => o.Y).Distinct().Order().ToList());
+            _xmap = GetMap(corners.Select(o => o.X).Distinct().Order().ToList());
+            _ymap = GetMap(corners.Select(o => o.Y).Distinct().Order().ToList());
         }
 
-        private (Dictionary<int, int> map, Dictionary<(int, int), int> cost) GetMapAndCost(List<int> values)
+        private static Dictionary<int, int> GetMap(List<int> values)
         {
             var m = new Dictionary<int, int>();
-            var c = new Dictionary<(int, int), int>();
             var current = values.First();
             m.Add(current, current);
             foreach (var (a, b) in values.Zip(values.Skip(1)))
@@ -182,21 +179,14 @@ public class Aoc202509 : AocPuzzle
                 var distance = b - a;
                 var needsShortening = distance > MaxDistance;
                 if (needsShortening)
-                {
-                    var cost = distance - MaxDistance + 1;
-                    c.TryAdd((current + 1, current + 2), cost);
-                    c.TryAdd((current + 2, current + 1), cost);
                     current += MaxDistance;
-                }
                 else
-                {
                     current += distance;
-                }
-            
+
                 m.TryAdd(b, current);
             }
 
-            return (m, c);
+            return m;
         }
     }
 }

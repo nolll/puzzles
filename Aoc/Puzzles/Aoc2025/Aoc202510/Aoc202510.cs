@@ -5,6 +5,8 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202510;
 
 [Name("Factory")]
+[IsSlow]
+[Comment("30s for part 1. Infinite for part 2.")]
 public class Aoc202510 : AocPuzzle
 {
     public PuzzleResult Part1(string input)

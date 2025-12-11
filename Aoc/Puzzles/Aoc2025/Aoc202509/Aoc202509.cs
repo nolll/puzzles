@@ -25,7 +25,7 @@ public class Aoc202509 : AocPuzzle
         var filled = new HashSet<(int, int)>();
         corners = corners.Select(o => new Coord(o.X - minx + 1, o.Y - miny + 1)).ToList();
         var mapper = new CoordCompressor(corners);
-        var mappedCorners = mapper.MappedCorners;
+        var mappedCorners = mapper.CompressedCoords;
         
         var w = mappedCorners.Max(o => o.X) + 2;
         var h = mappedCorners.Max(o => o.Y) + 2;
@@ -80,8 +80,8 @@ public class Aoc202509 : AocPuzzle
         var fromby = Math.Min(item.a.Y, item.b.Y);
         var tobx = Math.Max(item.a.X, item.b.X);
         var toby = Math.Max(item.a.Y, item.b.Y);
-        var (fromx, fromy) = compressor.MapCoord((frombx, fromby));
-        var (tox, toy) = compressor.MapCoord((tobx, toby));
+        var (fromx, fromy) = compressor.CompressCoord((frombx, fromby));
+        var (tox, toy) = compressor.CompressCoord((tobx, toby));
             
         for (var y = fromy; y <= toy; y++)
         {

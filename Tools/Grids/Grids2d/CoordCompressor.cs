@@ -6,14 +6,14 @@ public class CoordCompressor
     private readonly Dictionary<int, int> _xmap;
     private readonly Dictionary<int, int> _ymap;
         
-    public List<Coord> MappedCorners => field.Select(MapCoord).ToList();
-    public (int x, int y) MapCoord((int x, int y) coord) => (_xmap[coord.x], _ymap[coord.y]);
-    public Coord MapCoord(Coord coord) => new(_xmap[coord.X], _ymap[coord.Y]);
+    public List<Coord> Compressed => field.Select(Compress).ToList();
+    public (int x, int y) Compress((int x, int y) coord) => (_xmap[coord.x], _ymap[coord.y]);
+    public Coord Compress(Coord coord) => new(_xmap[coord.X], _ymap[coord.Y]);
 
     public CoordCompressor(List<Coord> corners, int maxDistance = 1)
     {
         _maxDistance = maxDistance;
-        MappedCorners = corners;
+        Compressed = corners;
         _xmap = GetMap(corners.Select(o => o.X).Distinct().Order().ToList());
         _ymap = GetMap(corners.Select(o => o.Y).Distinct().Order().ToList());
     }

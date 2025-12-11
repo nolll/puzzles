@@ -140,15 +140,25 @@ public class Ece202515 : EverybodyEventPuzzle
             return (m, c);
         }
 
+        // public int CalculateCost(Coord from, Coord to)
+        // {
+        //     var cost = 0;
+        //     if (_xcost.ContainsKey((from.X, to.X)))
+        //         cost += _xcost[(from.X, to.X)];
+        //     if (_ycost.ContainsKey((from.Y, to.Y)))
+        //         cost += _ycost[(from.Y, to.Y)];
+        //     
+        //     return cost == 0 ? 1 : cost;
+        // }
+        
         public int CalculateCost(Coord from, Coord to)
         {
+            var origFrom = MapCoord(from);
+            var origTo = MapCoord(to);
             var cost = 0;
-            if (_xcost.ContainsKey((from.X, to.X)))
-                cost += _xcost[(from.X, to.X)];
-            if (_ycost.ContainsKey((from.Y, to.Y)))
-                cost += _ycost[(from.Y, to.Y)];
-            
-            return cost == 0 ? 1 : cost;
+            cost += Math.Abs(origFrom.X - origTo.X);
+            cost += Math.Abs(origFrom.Y - origTo.Y);
+            return cost;
         }
     }
 }

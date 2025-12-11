@@ -24,7 +24,7 @@ public class Aoc202509 : AocPuzzle
         var miny = corners.Min(o => o.Y);
         var filled = new HashSet<(int, int)>();
         corners = corners.Select(o => new Coord(o.X - minx + 1, o.Y - miny + 1)).ToList();
-        var mapper = new CoordMapper(corners);
+        var mapper = new CoordCompressor(corners);
         var mappedCorners = mapper.MappedCorners;
         
         var w = mappedCorners.Max(o => o.X) + 2;
@@ -74,14 +74,14 @@ public class Aoc202509 : AocPuzzle
         return PuzzleResult.Empty;
     }
 
-    private static bool IsValidArea((Coord a, Coord b, long area) item, CoordMapper mapper, HashSet<(int, int)> filled)
+    private static bool IsValidArea((Coord a, Coord b, long area) item, CoordCompressor compressor, HashSet<(int, int)> filled)
     {
         var frombx = Math.Min(item.a.X, item.b.X);
         var fromby = Math.Min(item.a.Y, item.b.Y);
         var tobx = Math.Max(item.a.X, item.b.X);
         var toby = Math.Max(item.a.Y, item.b.Y);
-        var (fromx, fromy) = mapper.MapCoord((frombx, fromby));
-        var (tox, toy) = mapper.MapCoord((tobx, toby));
+        var (fromx, fromy) = compressor.MapCoord((frombx, fromby));
+        var (tox, toy) = compressor.MapCoord((tobx, toby));
             
         for (var y = fromy; y <= toy; y++)
         {
@@ -147,46 +147,5 @@ public class Aoc202509 : AocPuzzle
         }
 
         throw new Exception("No inside coord was found.");
-    }
-    
-    private class CoordMapper
-    {
-        private const int MaxDistance = 2;
-        private readonly Dictionary<int, int> _xmap;
-        private readonly Dictionary<int, int> _ymap;
-        
-        public List<Coord> MappedCorners => field.Select(MapCoord).ToList();
-        public (int x, int y) MapCoord((int x, int y) coord) => (_xmap[coord.x], _ymap[coord.y]);
-        public Coord MapCoord(Coord coord) => new(_xmap[coord.X], _ymap[coord.Y]);
-
-        public CoordMapper(List<Coord> corners)
-        {
-            MappedCorners = corners;
-            _xmap = GetMap(corners.Select(o => o.X).Distinct().Order().ToList());
-            _ymap = GetMap(corners.Select(o => o.Y).Distinct().Order().ToList());
-        }
-
-        private static Dictionary<int, int> GetMap(List<int> values)
-        {
-            var m = new Dictionary<int, int>();
-            var current = values.First();
-            m.Add(current, current);
-            foreach (var (a, b) in values.Zip(values.Skip(1)))
-            {
-                if(m.ContainsKey(b))
-                    continue;
-            
-                var distance = b - a;
-                var needsShortening = distance > MaxDistance;
-                if (needsShortening)
-                    current += MaxDistance;
-                else
-                    current += distance;
-
-                m.TryAdd(b, current);
-            }
-
-            return m;
-        }
     }
 }

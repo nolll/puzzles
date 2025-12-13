@@ -1,60 +1,50 @@
 using Pzl.Common;
+using Pzl.Tools.Combinatorics;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202510;
 
 [Name("Factory")]
-[IsSlow]
-[Comment("30s for part 1. Infinite for part 2.")]
 public class Aoc202510 : AocPuzzle
 {
     public PuzzleResult Part1(string input)
     {
         var items = input.Split(LineBreaks.Single).Select(Parse).ToList();
-        var results = items.Select((o, index) =>
-        {
-            return SolvePart1(o.lights, o.buttons);
-        });
+        var results = items.Select(o => SolvePart1(o.lights, o.buttons));
         
         return new PuzzleResult(results.Sum(), "f19c91b91f25b5bde865c715075e4907");
     }
 
     public PuzzleResult Part2(string input)
     {
-        var items = input.Split(LineBreaks.Single).Select(Parse).ToList();
-        var results = items.Select((o, index) =>
-        {
-            return SolvePart2(o.counters, o.buttons);
-        });
+        //var items = input.Split(LineBreaks.Single).Select(Parse).ToList();
+        //var results = items.Select(o => SolvePart2(o.counters, o.buttons));
         
-        return new PuzzleResult(results.Sum());
+        return new PuzzleResult(0);
     }
 
     private static int SolvePart1(string lights, int[][] buttons)
     {
         var initialState = lights.Replace('#', '.');
-        var seen = new Dictionary<string, int>();
-        var queue = new Queue<(string state, int steps)>();
-        queue.Enqueue((initialState, 0));
-        while (queue.Count > 0)
+        var combinations = CombinationGenerator.GetUniqueCombinationsAnySize(buttons);
+        var validCombinations = new List<List<int[]>>();
+        foreach (var combination in combinations)
         {
-            var (state, steps) = queue.Dequeue();
-
-            if (seen.TryGetValue(state, out var s1) && s1 < steps)
-                continue;
-            
-            seen[state] = steps;
-            
-            foreach (var button in buttons)
+            var state = initialState.Select(o => o == '#').ToArray();
+            foreach (var button in combination)
             {
-                var nextState = GetNextStatePart1(state, button);
-                if (!seen.TryGetValue(nextState, out var s2) || s2 > steps + 1)
-                    queue.Enqueue((nextState, steps + 1));
+                foreach (var index in button)
+                {
+                    state[index] = !state[index];
+                }
             }
+            
+            if(string.Join("", state.Select(o => o ? '#' : '.')) == lights)
+                validCombinations.Add(combination);
         }
-        
-        return seen[lights];
+
+        return validCombinations.Min(o => o.Count);
     }
     
     private static int SolvePart2(string counters, int[][] buttons)

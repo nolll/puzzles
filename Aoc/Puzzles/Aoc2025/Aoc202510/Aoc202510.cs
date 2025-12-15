@@ -1,4 +1,3 @@
-using Printmaster;
 using Pzl.Common;
 using Pzl.Tools.Combinatorics;
 using Pzl.Tools.Numbers;
@@ -8,7 +7,6 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202510;
 
 [Name("Factory")]
 // Thanks to Tenth Mascot
-[IsSlow]
 public class Aoc202510 : AocPuzzle
 {
     public PuzzleResult Part1(string input)
@@ -57,14 +55,7 @@ public class Aoc202510 : AocPuzzle
     private static long SolvePart2(int[] counters, int[][] buttons)
     {
         var patterns = GetPatterns(buttons, counters.Length).ToList();
-        var result = SolveRecursive(patterns, counters);
-        
-        if(result < 1)
-        {
-            Printr.Print(buttons, counters);
-            Console.WriteLine(result);
-            Console.WriteLine();
-        }
+        var result = SolveRecursive(patterns, counters, []);
 
         return result;
     }
@@ -88,24 +79,31 @@ public class Aoc202510 : AocPuzzle
         }
     }
 
-    private static long SolveRecursive(List<(int[] pattern, long cost)> patterns, int[] goal)
+    private static long SolveRecursive(List<(int[] pattern, long cost)> patterns, int[] goal, Dictionary<string, long> cache)
     {
-        if (goal.All(o => o == 0))
-            return 0;
+        var key = string.Join(",", goal);
+        if (cache.TryGetValue(key, out var score))
+            return score;
         
-        var result = 1_000_000L;
+        if (goal.All(o => o == 0))
+        {
+            cache.TryAdd(key, score);
+            return 0;
+        }
+
+        score = 1_000_000L;
         foreach (var (pattern, cost) in patterns)
         {
             var zip = pattern.Zip(goal).ToList();
             if (zip.All(o => o.First <= o.Second && o.First % 2 == o.Second % 2))
             {
                 var newGoal = zip.Select(o => (o.Second - o.First) / 2).ToArray();
-                var next = SolveRecursive(patterns, newGoal);
-                result = Math.Min(result, cost + 2 * next);
+                var next = SolveRecursive(patterns, newGoal, cache);
+                score = Math.Min(score, cost + 2 * next);
             }
         }
-        
-        return result;
+        cache.TryAdd(key, score);
+        return score;
     }
 
     private static (string lights, int[][] buttons, int[] counters) Parse(string s)

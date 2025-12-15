@@ -54,7 +54,7 @@ public class Aoc202510 : AocPuzzle
     
     private static long SolvePart2(int[] counters, int[][] buttons)
     {
-        var patterns = GetPatterns(buttons, counters.Length).ToList();
+        var patterns = GetPatternsCache(buttons, counters.Length);
         var result = SolveRecursive(patterns, counters, []);
 
         return result;
@@ -78,8 +78,23 @@ public class Aoc202510 : AocPuzzle
             yield return (a, combination.Count);
         }
     }
+    
+    private static Dictionary<string, List<(int[] pattern, long cost)>> GetPatternsCache(int[][] buttons, int size)
+    {
+        var patterns = GetPatterns(buttons, size);
 
-    private static long SolveRecursive(List<(int[] pattern, long cost)> patterns, int[] goal, Dictionary<string, long> cache)
+        var dict = new Dictionary<string, List<(int[] pattern, long cost)>>();
+        foreach (var (pattern, cost) in patterns)
+        {
+            var key = string.Join("", pattern.Select(o => o % 2 == 1 ? '#' : '.'));
+            dict.TryAdd(key, []);
+            dict[key].Add((pattern, cost));
+        }
+
+        return dict;
+    }
+
+    private static long SolveRecursive(Dictionary<string, List<(int[] pattern, long cost)>> patterns, int[] goal, Dictionary<string, long> cache)
     {
         var key = string.Join(",", goal);
         if (cache.TryGetValue(key, out var score))
@@ -92,11 +107,13 @@ public class Aoc202510 : AocPuzzle
         }
 
         score = 1_000_000L;
-        foreach (var (pattern, cost) in patterns)
+        var patternKey = string.Join("", goal.Select(o => o % 2 == 1 ? '#' : '.'));
+        if (patterns.TryGetValue(patternKey, out var currentPatterns))
         {
-            var zip = pattern.Zip(goal).ToList();
-            if (zip.All(o => o.First <= o.Second && o.First % 2 == o.Second % 2))
+            foreach (var (pattern, cost) in currentPatterns)
             {
+                var zip = pattern.Zip(goal).ToList();
+                if (!zip.All(o => o.First <= o.Second)) continue;
                 var newGoal = zip.Select(o => (o.Second - o.First) / 2).ToArray();
                 var next = SolveRecursive(patterns, newGoal, cache);
                 score = Math.Min(score, cost + 2 * next);

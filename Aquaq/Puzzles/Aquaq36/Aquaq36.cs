@@ -110,18 +110,27 @@ public class Aquaq36 : AquaqPuzzle
     public class FactorCache
     {
         private readonly Dictionary<int, List<GridNumber>> _gridNumberCache = new();
-        private readonly Dictionary<int, List<int>> _factorCache = new();
+        private readonly Dictionary<int, List<(int a, int b)>> _factorCache = new();
 
         public List<GridNumber> Get(int n)
         {
             if (_gridNumberCache.TryGetValue(n, out var gridNumbers))
                 return gridNumbers;
 
-            var factors = MathTools.GetMultiplicationFactors(n);
+            var factors = GetMultiplicationFactors(n, _factorCache);
             gridNumbers = factors.Select(o => new GridNumber(n, o.a, o.b)).ToList();
             _gridNumberCache.Add(n, gridNumbers);
             return gridNumbers;
         }
+    }
+
+    private static List<(int a, int b)> GetMultiplicationFactors(int n, Dictionary<int, List<(int a, int b)>> factorCache)
+    {
+        if (factorCache.TryGetValue(n, out var factors))
+            return factors;
+        factors = MathTools.GetMultiplicationFactors(n);
+        factorCache.Add(n, factors);
+        return factors;
     }
 
     public static List<int> GetAllFactors(IEnumerable<int> gridNumbers)

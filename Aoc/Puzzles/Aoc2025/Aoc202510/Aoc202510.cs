@@ -94,9 +94,9 @@ public class Aoc202510 : AocPuzzle
         return dict;
     }
 
-    private static long SolveRecursive(Dictionary<string, List<(int[] pattern, long cost)>> patterns, int[] goal, Dictionary<string, long> cache)
+    private static long SolveRecursive(Dictionary<string, List<(int[] pattern, long cost)>> patterns, int[] goal, Dictionary<int, long> cache)
     {
-        var key = string.Join(",", goal);
+        var key = GetHashCode(goal);
         if (cache.TryGetValue(key, out var score))
             return score;
         
@@ -122,6 +122,8 @@ public class Aoc202510 : AocPuzzle
         cache.TryAdd(key, score);
         return score;
     }
+
+    private static int GetHashCode(IEnumerable<int> items) => items.Aggregate(983, (current, item) => current * 457 + item.GetHashCode());
 
     private static (string lights, int[][] buttons, int[] counters) Parse(string s)
     {

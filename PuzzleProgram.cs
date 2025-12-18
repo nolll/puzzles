@@ -10,6 +10,7 @@ using Pzl.Codyssi;
 using Pzl.Common;
 using Pzl.Euler;
 using Pzl.Everybody;
+using Pzl.FlipFlop;
 using Pzl.Tools.Cryptography;
 using Spectre.Console;
 
@@ -28,10 +29,11 @@ public class PuzzleProgram
         {
             new AocPuzzleProvider(),
             new AquaqPuzzleProvider(),
+            new CodyssiPuzzleProvider(),
             new EulerPuzzleProvider(),
             new EverybodyEventPuzzleProvider(),
             new EverybodyStoryPuzzleProvider(),
-            new CodyssiPuzzleProvider()
+            new FlipFlopPuzzleProvider()
         };
 
         var fileReader = new FileReader();

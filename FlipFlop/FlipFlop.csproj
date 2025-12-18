@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <Configurations>Debug;Release;Single</Configurations>
         <LangVersion>14.0</LangVersion>
-        <RootNamespace>Pzl.Everybody</RootNamespace>
+        <RootNamespace>Pzl.FlipFlop</RootNamespace>
         <OutputType>Library</OutputType>
     </PropertyGroup>
 
@@ -15,20 +15,21 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Common\Common.csproj" />
-      <ProjectReference Include="..\Tools\Tools.csproj" />
+        <ProjectReference Include="..\Common\Common.csproj" />
+        <ProjectReference Include="..\Tools\Tools.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AwesomeAssertions" Version="9.2.1" />
-      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
-      <PackageReference Include="xunit" Version="2.9.3" />
+        <PackageReference Include="AwesomeAssertions" Version="9.2.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+        <PackageReference Include="xunit" Version="2.9.3" />
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="Tools">
-        <HintPath>..\bin\Single\net10.0\Tools.dll</HintPath>
-      </Reference>
+        <Reference Include="Tools">
+            <HintPath>..\bin\Single\net10.0\Tools.dll</HintPath>
+        </Reference>
     </ItemGroup>
+
 
 </Project>

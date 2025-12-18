@@ -15,20 +15,10 @@ public class FlipFlop202503Tests
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("10,20,30");
 
     [Fact]
-    public void Part2()
-    {
-        const string input = "";
-
-        Sut.Part2(input).Answer.Should().Be("0");
-    }
+    public void Part2() => Sut.Part2(Input).Answer.Should().Be("0");
 
     [Fact]
-    public void Part3()
-    {
-        const string input = "";
-
-        Sut.Part3(input).Answer.Should().Be("0");
-    }
+    public void Part3() => Sut.Part3(Input).Answer.Should().Be("37");
 
     private static FlipFlop202503 Sut => new();
 }

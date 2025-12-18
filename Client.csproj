@@ -29,6 +29,7 @@
     <Compile Remove="Euler\**" />
     <Compile Remove="Everybody\**" />
     <Compile Remove="Codyssi\**" />
+    <Compile Remove="FlipFlop\**" />
     <EmbeddedResource Remove="Aoc\**" />
     <EmbeddedResource Remove="Aquaq\**" />
     <EmbeddedResource Remove="Common\**" />
@@ -36,6 +37,7 @@
     <EmbeddedResource Remove="Euler\**" />
     <EmbeddedResource Remove="Everybody\**" />
     <EmbeddedResource Remove="Codyssi\**" />
+    <EmbeddedResource Remove="FlipFlop\**" />
     <None Remove="Aoc\**" />
     <None Remove="Aquaq\**" />
     <None Remove="Common\**" />
@@ -43,6 +45,7 @@
     <None Remove="Euler\**" />
     <None Remove="Everybody\**" />
     <None Remove="Codyssi\**" />
+    <None Remove="FlipFlop\**" />
   </ItemGroup>
 
   <ItemGroup>

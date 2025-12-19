@@ -26,23 +26,8 @@ public class FlipFlop202503 : FlipFlopPuzzle
     public PuzzleResult Part2(string input)
     {
         var lines = input.Split(LineBreaks.Single);
-        var labels = new List<string>();
-        foreach (var line in lines)
-        {
-            var (r, g, b) = Numbers.IntsFromString(line);
-            if(r == g || r == b || g == b)
-                labels.Add("special");
-            else if(r > g && r > b)
-                labels.Add("red");
-            else if(g > r && g > b)
-                labels.Add("green");
-            else if(b > r && b > g)
-                labels.Add("blue");
-            else
-                labels.Add("");
-        }
-
-        var greenCount = labels.Count(o => o == "green");
+        var colors = lines.Select(GetColor);
+        var greenCount = colors.Count(o => o.Name == "green");
         
         return new PuzzleResult(greenCount, "f7c0b43b9ccea17bd677b165584ea494");
     }
@@ -50,20 +35,25 @@ public class FlipFlop202503 : FlipFlopPuzzle
     public PuzzleResult Part3(string input)
     {
         var lines = input.Split(LineBreaks.Single);
-        var price = 0; 
-        foreach (var line in lines)
-        {
-            var (r, g, b) = Numbers.IntsFromString(line);
-            if (r == g || r == b || g == b)
-                price += 10;
-            else if (r > g && r > b)
-                price += 5;
-            else if (g > r && g > b)
-                price += 2;
-            else if (b > r && b > g)
-                price += 4;
-        }
+        var colors = lines.Select(GetColor);
+        var price = colors.Sum(o => o.Price);
         
         return new PuzzleResult(price, "9b4c07da2c7aed1de44933ed08388508");
     }
+
+    private static Color GetColor(string line)
+    {
+        var (r, g, b) = Numbers.IntsFromString(line);
+        if(r == g || r == b || g == b)
+            return new Color("special", 10);
+        if(r > g && r > b)
+            return new Color("red", 5);
+        if(g > r && g > b)
+            return new Color("green", 2);
+        if(b > r && b > g)
+            return new Color("blue", 4);
+        return new Color("unknown", 0);
+    }
+
+    private record Color(string Name, int Price);
 }

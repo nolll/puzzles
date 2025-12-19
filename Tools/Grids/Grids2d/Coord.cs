@@ -5,8 +5,7 @@ namespace Pzl.Tools.Grids.Grids2d;
 [DebuggerDisplay("{X},{Y}")]
 public record Coord(int X, int Y)
 {
-    private string? _id;
-    public string Id => _id ??= $"{X},{Y}";
+    public string Id => field ??= $"{X},{Y}";
 
     public int ManhattanDistanceTo(Coord other) => Math.Abs(X - other.X) + Math.Abs(Y - other.Y);
     

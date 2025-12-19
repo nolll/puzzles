@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Text.RegularExpressions;
 
 namespace Pzl.Tools.Numbers;
@@ -170,6 +171,17 @@ public static class Numbers
     public static long Fibonacci(long n) => Fibonacci(n, []);
 
     public static long Fibonacci(long n, Dictionary<long, long> cache)
+    {
+        if (cache.TryGetValue(n, out var result))
+            return result;
+        result = n < 2 ? n : Fibonacci(n - 1, cache) + Fibonacci(n - 2, cache);
+        cache.Add(n, result);
+        return result;
+    }
+    
+    public static BigInteger Fibonacci(BigInteger n) => Fibonacci(n, []);
+
+    public static BigInteger Fibonacci(BigInteger n, Dictionary<BigInteger, BigInteger> cache)
     {
         if (cache.TryGetValue(n, out var result))
             return result;

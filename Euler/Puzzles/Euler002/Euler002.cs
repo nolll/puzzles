@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler002;
 
@@ -11,20 +12,22 @@ public class Euler002 : EulerPuzzle
         return new PuzzleResult(sum, "abd3fbf8c9d403cd14e0a01404ae011d");
     }
 
-    public int Run(int limit)
+    public long Run(long limit)
     {
-        var numbers = new List<int> { 1, 2 };
+        var index = 0L;
+        var sum = 0L;
+        var cache = new Dictionary<long, long>();
         while (true)
         {
-            var lastNumbers = numbers.TakeLast(2);
-            var nextNumber = lastNumbers.Sum();
-
-            if (nextNumber > limit)
+            var fib = Numbers.Fibonacci(index, cache);
+            if (fib > limit)
                 break;
-                
-            numbers.Add(nextNumber);
+
+            if(fib % 2 == 0)
+                sum += fib;
+            index++;
         }
 
-        return numbers.Where(o => o % 2 == 0).Sum();
+        return sum;
     }
 }

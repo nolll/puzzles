@@ -1,5 +1,6 @@
 using System.Numerics;
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler025;
 
@@ -12,19 +13,21 @@ public class Euler025 : EulerPuzzle
         return new PuzzleResult(result, "b0f9f78357a59417863c853ccb8cff75");
     }
 
-    public int Run(int digitCount)
+    public BigInteger Run(int digitCount)
     {
-        var numbers = new List<BigInteger> {1, 1};
-            
+        var index = new BigInteger(0);
+        var cache = new Dictionary<BigInteger, BigInteger>();
         while (true)
         {
-            var lastTwo = numbers.TakeLast(2).ToList();
-            var next = lastTwo.First() + lastTwo.Last();
-            var s = next.ToString();
-            numbers.Add(next);
-                
+            var fib = Numbers.Fibonacci(index, cache);
+            var s = fib.ToString();
+            
             if (s.Length >= digitCount)
-                return numbers.Count;
+                break;
+
+            index++;
         }
+
+        return index;
     }
 }

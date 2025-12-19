@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 
 namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202502;
 
@@ -45,8 +46,8 @@ public class FlipFlop202502 : FlipFlopPuzzle
 
     public PuzzleResult Part3(string input)
     {
-        var best = 0;
-        var height = 0;
+        var best = 0L;
+        var height = 0L;
 
         var chars = input.ToCharArray();
         var lastchar = chars.First();
@@ -67,19 +68,11 @@ public class FlipFlop202502 : FlipFlopPuzzle
         var direction = lastchar == '^' ? 1 : -1;
         foreach (var sequence in sequences)
         {
-            height += direction * Fibonacci(sequence);
+            height += direction * Numbers.Fibonacci(sequence);
             best = Math.Max(best, height);
             direction *= -1;
         }
         
         return new PuzzleResult(best, "9116cf946c0d82e0d08bffc0da078dd1");
-    }
-    
-    public static int Fibonacci(int n)
-    {
-        if (n < 2)
-            return n;
-
-        return Fibonacci(n - 1) + Fibonacci(n - 2);
     }
 }

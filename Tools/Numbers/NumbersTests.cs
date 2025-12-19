@@ -113,4 +113,17 @@ public class NumbersTests
     [InlineData(28, 84, 2884)]
     [InlineData(46456, 54, 4645654)]
     public void ConcatInts(int a, int b, int expected) => Numbers.Concat([a, b]).Should().Be(expected);
+    
+    [Theory]
+    [InlineData(0, 0)]
+    [InlineData(1, 1)]
+    [InlineData(2, 1)]
+    [InlineData(3, 2)]
+    [InlineData(4, 3)]
+    [InlineData(5, 5)]
+    [InlineData(6, 8)]
+    [InlineData(10, 55)]
+    [InlineData(20, 6765)]
+    [InlineData(100, 3736710778780434371)]
+    public void Fibonacci(long input, long expected) => Numbers.Fibonacci(input).Should().Be(expected);
 }

@@ -166,4 +166,15 @@ public static class Numbers
         if (i == 0) return 0;
         return 1 + (int) (Math.Log(i) / Math.Log(10));
     }
+    
+    public static long Fibonacci(long n) => Fibonacci(n, []);
+
+    public static long Fibonacci(long n, Dictionary<long, long> cache)
+    {
+        if (cache.TryGetValue(n, out var result))
+            return result;
+        result = n < 2 ? n : Fibonacci(n - 1, cache) + Fibonacci(n - 2, cache);
+        cache.Add(n, result);
+        return result;
+    }
 }

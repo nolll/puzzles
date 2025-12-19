@@ -6,7 +6,6 @@ using Pzl.Tools.Strings;
 namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202506;
 
 [Name("Bird spotters")]
-[IsSlow]
 public class FlipFlop202506 : FlipFlopPuzzle
 {
     public PuzzleResult Part1(string input)

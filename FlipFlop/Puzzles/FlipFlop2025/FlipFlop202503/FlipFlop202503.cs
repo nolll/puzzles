@@ -44,13 +44,13 @@ public class FlipFlop202503 : FlipFlopPuzzle
     private static Color GetColor(string line)
     {
         var (r, g, b) = Numbers.IntsFromString(line);
-        if(r == g || r == b || g == b)
+        if (r == g || r == b || g == b)
             return new Color("special", 10);
-        if(r > g && r > b)
+        if (r > g && r > b)
             return new Color("red", 5);
-        if(g > r && g > b)
+        if (g > r && g > b)
             return new Color("green", 2);
-        if(b > r && b > g)
+        if (b > r && b > g)
             return new Color("blue", 4);
         return new Color("unknown", 0);
     }

@@ -32,13 +32,5 @@ public class FlipFlop202507Tests
     [InlineData(2, 3, 2, 12)]
     public void CountWays3d(int width, int height, int depth, int expected) => Sut.CountWays(width, height, depth).Should().Be(expected);
 
-    [Theory]
-    [InlineData(1, 1)]
-    [InlineData(2, 2)]
-    [InlineData(3, 6)]
-    [InlineData(4, 24)]
-    [InlineData(5, 120)]
-    public void Factorial(int n, int expected) => Sut.Factorial(n).Should().Be(expected);
-
     private static FlipFlop202507 Sut => new();
 }

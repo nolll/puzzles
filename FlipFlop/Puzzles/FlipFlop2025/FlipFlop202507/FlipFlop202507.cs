@@ -36,16 +36,8 @@ public class FlipFlop202507 : FlipFlopPuzzle
 
     public long CountWays(params int[] dimensions)
     {
-        var n = Factorial(dimensions.Sum() - dimensions.Length);
-        var d = dimensions.Aggregate(1L, (current, dimension) => current * Factorial(dimension - 1));
+        var n = Numbers.Factorial(dimensions.Sum() - dimensions.Length);
+        var d = dimensions.Aggregate(1L, (current, dimension) => current * Numbers.Factorial(dimension - 1));
         return n / d;
-    }
-    
-    public long Factorial(long n)
-    {
-        var r = 1L;
-        for (var i = 1; i <= n; i++) 
-            r *= i;
-        return r;
     }
 }

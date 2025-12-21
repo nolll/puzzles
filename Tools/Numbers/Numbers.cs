@@ -189,4 +189,18 @@ public static class Numbers
         cache.Add(n, result);
         return result;
     }
+    
+    public static long Factorial(long n)
+    {
+        var r = 1L;
+        for (var i = 1; i <= n; i++) r *= i;
+        return r;
+    }
+    
+    private static BigInteger Factorial(BigInteger n)
+    {
+        var r = new BigInteger(1);
+        for (var i = 1; i <= n; i++) r *= i;
+        return r;
+    }
 }

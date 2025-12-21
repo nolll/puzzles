@@ -1,5 +1,6 @@
 using System.Numerics;
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 
 namespace Pzl.Euler.Puzzles.Euler053;
 
@@ -18,23 +19,12 @@ public class Euler053 : EulerPuzzle
             {
                 var r = new BigInteger(j);
                 
-                var permutations = Factorial(n) / (Factorial(r) * Factorial(n - r));
+                var permutations = Numbers.Factorial(n) / (Numbers.Factorial(r) * Numbers.Factorial(n - r));
                 if (permutations > 1_000_000)
                     count++;
             }
         }
         
         return new PuzzleResult(count, "afc3b71561c7dde3bc566dc3985992bf");
-    }
-
-    private static BigInteger Factorial(BigInteger n)
-    {
-        var r = new BigInteger(1);
-        for (var i = 1; i <= n; i++)
-        {
-            r *= i;
-        }
-
-        return r;
     }
 }

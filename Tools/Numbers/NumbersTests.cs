@@ -129,4 +129,12 @@ public class NumbersTests
     [InlineData(20, 6765)]
     [InlineData(100, 3736710778780434371)]
     public void Fibonacci(long input, long expected) => Numbers.Fibonacci(input).Should().Be(expected);
+    
+    [Theory]
+    [InlineData(1, 1)]
+    [InlineData(2, 2)]
+    [InlineData(3, 6)]
+    [InlineData(4, 24)]
+    [InlineData(5, 120)]
+    public void Factorial(int n, int expected) => Numbers.Factorial(n).Should().Be(expected);
 }

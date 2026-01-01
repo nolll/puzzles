@@ -196,8 +196,8 @@ public static class Numbers
         for (var i = 1; i <= n; i++) r *= i;
         return r;
     }
-    
-    private static BigInteger Factorial(BigInteger n)
+
+    public static BigInteger Factorial(BigInteger n)
     {
         var r = new BigInteger(1);
         for (var i = 1; i <= n; i++) r *= i;

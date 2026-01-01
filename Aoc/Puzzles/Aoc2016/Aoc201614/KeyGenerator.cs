@@ -54,7 +54,7 @@ public class KeyGenerator(int stretchCount)
         return false;
     }
     
-    private bool HasFiveInARowOf(LinkedList<HashInfo> hashInfos, byte searchFor)
+    private static bool HasFiveInARowOf(LinkedList<HashInfo> hashInfos, byte searchFor)
     {
         var current = hashInfos.First?.Next;
         while (current is not null)
@@ -105,8 +105,7 @@ public class KeyGenerator(int stretchCount)
         return (hasThree, hasFive);
     }
 
-    private byte[] CreateSimpleHash(byte[] bytes) => 
-        ConvertToHexBytes(_hashFactory.ByteHash(bytes));
+    private byte[] CreateSimpleHash(byte[] bytes) => ConvertToHexBytes(_hashFactory.ByteHash(bytes));
 
     public byte[] CreateHash(string str)
     {

@@ -1,0 +1,38 @@
+namespace Pzl.Everybody.Puzzles.Ecs03.Ecs0302;
+
+public class Ecs0302Tests
+{
+    [Fact]
+    public void Part1()
+    {
+        const string input = """
+                             .......
+                             .......
+                             .......
+                             .#.@...
+                             .......
+                             .......
+                             .......
+                             """;
+
+        Sut.Part1(input).Answer.Should().Be("12");
+    }
+
+    [Fact]
+    public void Part2()
+    {
+        const string input = "";
+
+        Sut.Part2(input).Answer.Should().Be("0");
+    }
+
+    [Fact]
+    public void Part3()
+    {
+        const string input = "";
+
+        Sut.Part3(input).Answer.Should().Be("0");
+    }
+
+    private static Ecs0302 Sut => new();
+}

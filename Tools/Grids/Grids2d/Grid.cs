@@ -96,6 +96,8 @@ public class Grid<T> where T : struct
         return null;
     }
 
+    public IEnumerable<Coord> CoordsWithSavedValue => _grid.Keys;
+
     public T ReadValue() => ReadValueAt(Coord);
     public T ReadValueAt(int x, int y) => ReadValueAt(new Coord(x, y));
 
@@ -117,8 +119,11 @@ public class Grid<T> where T : struct
             YMin = coord.Y;
         else if (coord.Y > YMax)
             YMax = coord.Y;
-        
-        _grid[coord] = value;
+
+        if (value.Equals(DefaultValue))
+            _grid.Remove(coord);
+        else
+            _grid[coord] = value;
     }
     
     public void ClearValueAt(Coord coord) => _grid.Remove(coord);

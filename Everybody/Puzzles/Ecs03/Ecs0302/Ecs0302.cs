@@ -175,7 +175,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
         {
             var current = queue.Dequeue();
 
-            // Just picked a number to make it easier. Could search for min and max x and y or something
+            // Hand crafted number to make it easier. Could search for min and max x and y or something
             if (seen.Count > 175)
                 return [];
 

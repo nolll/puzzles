@@ -95,6 +95,15 @@ public class Grid<T> where T : struct
 
         return null;
     }
+    
+    public IEnumerable<Coord> CoordsOf(T value)
+    {
+        foreach (var key in _grid.Keys)
+        {
+            if (_grid[key].Equals(value))
+                yield return key;
+        }
+    }
 
     public IEnumerable<Coord> CoordsWithSavedValue => _grid.Keys;
 

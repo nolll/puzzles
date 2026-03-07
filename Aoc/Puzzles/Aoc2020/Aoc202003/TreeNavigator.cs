@@ -10,7 +10,7 @@ public class TreeNavigator(string input)
         grid.MoveTo(0, 0);
 
         var treeCount = 0;
-        while (!grid.IsAtBottomEdge)
+        while (!grid.IsAtBottomEdge())
         {
             for (var i = 0; i < trajectory.Right; i++)
             {

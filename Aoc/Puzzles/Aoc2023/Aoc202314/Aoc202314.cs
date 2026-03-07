@@ -122,16 +122,16 @@ public class Aoc202314 : AocPuzzle
     }
 
     private static bool CanMoveNorth(Grid<char> grid) =>
-        CanMove(() => grid.IsAtTopEdge, () => grid.ReadValueAt(grid.Coord.X, grid.Coord.Y - 1));
+        CanMove(grid.IsAtTopEdge, () => grid.ReadValueAt(grid.Coord.X, grid.Coord.Y - 1));
 
     private static bool CanMoveEast(Grid<char> grid) =>
-        CanMove(() => grid.IsAtRightEdge, () => grid.ReadValueAt(grid.Coord.X + 1, grid.Coord.Y));
+        CanMove(grid.IsAtRightEdge, () => grid.ReadValueAt(grid.Coord.X + 1, grid.Coord.Y));
 
     private static bool CanMoveSouth(Grid<char> grid) =>
-        CanMove(() => grid.IsAtBottomEdge, () => grid.ReadValueAt(grid.Coord.X, grid.Coord.Y + 1));
+        CanMove(grid.IsAtBottomEdge, () => grid.ReadValueAt(grid.Coord.X, grid.Coord.Y + 1));
 
     private static bool CanMoveWest(Grid<char> grid) => 
-        CanMove(() => grid.IsAtLeftEdge, () => grid.ReadValueAt(grid.Coord.X - 1, grid.Coord.Y));
+        CanMove(grid.IsAtLeftEdge, () => grid.ReadValueAt(grid.Coord.X - 1, grid.Coord.Y));
 
     private static bool CanMove(Func<bool> isAtEdge, Func<char> readValue)
     {

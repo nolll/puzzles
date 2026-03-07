@@ -173,18 +173,16 @@ public class Ecs0302 : EverybodyStoryPuzzle
 
         while (queue.Count > 0)
         {
-            var current = queue.Dequeue();
+            var coord = queue.Dequeue();
 
-            // Hand crafted number to make it easier. Could search for min and max x and y or something
-            if (seen.Count > 175)
+            if (grid.IsAtEdge(coord))
                 return [];
-
-            var adj = grid.PossibleOrthogonalAdjacentCoordsTo(current).Where(o => grid.ReadValueAt(o) == Empty);
+            
+            var adj = grid.PossibleOrthogonalAdjacentCoordsTo(coord).Where(o => grid.ReadValueAt(o) == Empty);
             foreach (var a in adj)
             {
                 if (seen.Add(a))
                     queue.Enqueue(a);
-                
             }
         }
         

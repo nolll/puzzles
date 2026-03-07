@@ -80,16 +80,16 @@ public class Aoc202316 : AocPuzzle
             {
                 if (isHorizontal)
                 {
-                    if(!grid.IsAtTopEdge)
+                    if(!grid.IsAtTopEdge())
                         beams.Enqueue(new Beam(new Coord(grid.Coord.X, grid.Coord.Y - 1), GridDirection.Up));
-                    if (!grid.IsAtBottomEdge)
+                    if (!grid.IsAtBottomEdge())
                         beams.Enqueue(new Beam(new Coord(grid.Coord.X, grid.Coord.Y + 1), GridDirection.Down));
                 }
                 else 
                 {
-                    if (!grid.IsAtRightEdge)
+                    if (!grid.IsAtRightEdge())
                         beams.Enqueue(new Beam(new Coord(grid.Coord.X + 1, grid.Coord.Y), GridDirection.Right));
-                    if (!grid.IsAtLeftEdge)
+                    if (!grid.IsAtLeftEdge())
                         beams.Enqueue(new Beam(new Coord(grid.Coord.X - 1, grid.Coord.Y), GridDirection.Left));
                 }
             }

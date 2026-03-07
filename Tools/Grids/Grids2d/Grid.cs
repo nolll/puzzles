@@ -18,11 +18,17 @@ public class Grid<T> where T : struct
     public GridDirection Direction { get; private set; }
     public Coord Coord { get; private set; }
     public Coord StartCoord { get; }
-    public bool IsAtTopEdge => Coord.Y == YMin;
-    public bool IsAtRightEdge => Coord.X == XMax;
-    public bool IsAtBottomEdge => Coord.Y == YMax;
-    public bool IsAtLeftEdge => Coord.X == XMin;
-    public bool IsAtEdge => IsAtTopEdge || IsAtRightEdge || IsAtBottomEdge || IsAtLeftEdge;
+    public bool IsAtTopEdge() => IsAtTopEdge(Coord);
+    public bool IsAtTopEdge(Coord coord) => coord.Y == YMin;
+    public bool IsAtRightEdge() => IsAtRightEdge(Coord);
+    public bool IsAtRightEdge(Coord coord) => coord.X == XMax;
+    public bool IsAtBottomEdge() => IsAtBottomEdge(Coord);
+    public bool IsAtBottomEdge(Coord coord) => coord.Y == YMax;
+    public bool IsAtLeftEdge() => IsAtLeftEdge(Coord);
+    public bool IsAtLeftEdge(Coord coord) => coord.X == XMin;
+    public bool IsAtEdge() => IsAtEdge(Coord);
+    public bool IsAtEdge(Coord coord) => IsAtTopEdge(coord) || IsAtRightEdge(coord) || IsAtBottomEdge(coord) || IsAtLeftEdge(coord);
+    
     
     public Coord Center
     {

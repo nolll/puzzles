@@ -61,7 +61,7 @@ public class Aquaq28 : AquaqPuzzle
                     break;
             }
 
-            encrypted += grid.IsAtBottomEdge || grid.IsAtTopEdge
+            encrypted += grid.IsAtBottomEdge() || grid.IsAtTopEdge()
                 ? Characters[grid.Coord.X]
                 : Characters[grid.Coord.Y];
         }

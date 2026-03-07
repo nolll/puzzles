@@ -20,7 +20,7 @@ public class GridTests
         var grid = new Grid<int>(5, 5);
         grid.MoveTo(1, y);
 
-        grid.IsAtTopEdge.Should().Be(expected);
+        grid.IsAtTopEdge().Should().Be(expected);
     }
 
     [Theory]
@@ -31,7 +31,7 @@ public class GridTests
         var grid = new Grid<int>(5, 5);
         grid.MoveTo(x, 1);
 
-        grid.IsAtRightEdge.Should().Be(expected);
+        grid.IsAtRightEdge().Should().Be(expected);
     }
 
     [Theory]
@@ -42,7 +42,7 @@ public class GridTests
         var grid = new Grid<int>(5, 5);
         grid.MoveTo(1, y);
 
-        grid.IsAtBottomEdge.Should().Be(expected);
+        grid.IsAtBottomEdge().Should().Be(expected);
     }
 
     [Theory]
@@ -53,7 +53,7 @@ public class GridTests
         var grid = new Grid<int>(5, 5);
         grid.MoveTo(x, 1);
 
-        grid.IsAtLeftEdge.Should().Be(expected);
+        grid.IsAtLeftEdge().Should().Be(expected);
     }
 
     [Theory]

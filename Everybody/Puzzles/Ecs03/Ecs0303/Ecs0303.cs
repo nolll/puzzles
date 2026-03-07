@@ -8,29 +8,16 @@ namespace Pzl.Everybody.Puzzles.Ecs03.Ecs0303;
 [Name("Plug and Play")]
 public class Ecs0303 : EverybodyStoryPuzzle
 {
-    public PuzzleResult Part1(string input)
-    {
-        var nodes = ParseNodes(input).ToList();
-        var root = nodes.First();
+    public PuzzleResult Part1(string input) => 
+        new(Solve(input, new Options()), "d02f51fc7c9cf34d3a3cf5b92623309d");
 
-        foreach (var node in nodes.Skip(1)) 
-            root.AddNodePart1(node);
-        
-        return new PuzzleResult(root.Checksum, "d02f51fc7c9cf34d3a3cf5b92623309d");
-    }
+    public PuzzleResult Part2(string input) => 
+        new(Solve(input, new Options(true)), "f70e34ae97fef1a1756adfe0db17d1ec");
 
-    public PuzzleResult Part2(string input)
-    {
-        var nodes = ParseNodes(input).ToList();
-        var root = nodes.First();
+    public PuzzleResult Part3(string input) => 
+        new(Solve(input, new Options(true, true)), "c91d39a7c30ea5416f0e8adea6490f1c");
 
-        foreach (var node in nodes.Skip(1)) 
-            root.AddNodePart2(node);
-        
-        return new PuzzleResult(root.Checksum, "f70e34ae97fef1a1756adfe0db17d1ec");
-    }
-
-    public PuzzleResult Part3(string input)
+    private static int Solve(string input, Options options)
     {
         var nodes = ParseNodes(input).ToList();
         var root = nodes.First();
@@ -38,13 +25,11 @@ public class Ecs0303 : EverybodyStoryPuzzle
         foreach (var node in nodes.Skip(1))
         {
             var nodeToAdd = node;
-            while (nodeToAdd is not null)
-            {
-                nodeToAdd = root.AddNodePart3(nodeToAdd);
-            }
+            while (nodeToAdd is not null) 
+                nodeToAdd = root.AddNode(nodeToAdd, options);
         }
 
-        return new PuzzleResult(root.Checksum, "c91d39a7c30ea5416f0e8adea6490f1c");
+        return root.Checksum;
     }
     
     private static IEnumerable<Node> ParseNodes(string input)
@@ -57,94 +42,22 @@ public class Ecs0303 : EverybodyStoryPuzzle
         }
     }
     
-    [DebuggerDisplay("{Id}")]
-    public class Node
+    public class Node(int id, Connection plug, Connection leftSocket, Connection rightSocket)
     {
-        private Connection Plug { get; }
-        private Connection LeftSocket { get; }
-        private Connection RightSocket { get; }
+        private int Id { get; } = id;
+        private Connection Plug { get; } = plug;
+        private Connection LeftSocket { get; } = leftSocket;
+        private Connection RightSocket { get; } = rightSocket;
         
-        public int Id { get; }
         private Node? LeftNode { get; set; }
         private Node? RightNode { get; set; }
 
-        public Node(int id, Connection plug, Connection leftSocket, Connection rightSocket)
+        public Node? AddNode(Node? node, Options options)
         {
-            Id = id;
-            Plug = plug;
-            LeftSocket = leftSocket;
-            RightSocket = rightSocket;
-        }
-        
-        public bool AddNodePart1(Node node)
-        {
-            var foundSpot = false;
+            if (node is null)
+                return null;
             
-            if (LeftNode is null && node.Plug.IsStrongConnection(LeftSocket))
-            {
-                LeftNode = node;
-                return true;
-            }
-            
-            if (LeftNode is not null)
-            {
-                foundSpot = LeftNode.AddNodePart1(node);
-            }
-
-            if (foundSpot)
-                return foundSpot;
-            
-            if (RightNode is null && node.Plug.IsStrongConnection(RightSocket))
-            {
-                RightNode = node;
-                return true;
-            }
-
-            if (RightNode is not null)
-            {
-                foundSpot = RightNode.AddNodePart1(node);
-            }
-
-            return foundSpot;
-        }
-        
-        public bool AddNodePart2(Node node)
-        {
-            var foundSpot = false;
-            
-            if (LeftNode is null && node.Plug.IsConnection(LeftSocket))
-            {
-                LeftNode = node;
-                return true;
-            }
-            
-            if (LeftNode is not null)
-            {
-                foundSpot = LeftNode.AddNodePart2(node);
-            }
-
-            if (foundSpot)
-                return foundSpot;
-            
-            if (RightNode is null && node.Plug.IsConnection(RightSocket))
-            {
-                RightNode = node;
-                return true;
-            }
-
-            if (RightNode is not null)
-            {
-                foundSpot = RightNode.AddNodePart2(node);
-            }
-
-            return foundSpot;
-        }
-        
-        public Node? AddNodePart3(Node node)
-        {
-            Node? unplacedNode = node;
-            
-            if (LeftNode is null && node.Plug.IsConnection(LeftSocket))
+            if (LeftNode is null && IsConnection(LeftSocket))
             {
                 LeftNode = node;
                 return null;
@@ -152,70 +65,56 @@ public class Ecs0303 : EverybodyStoryPuzzle
             
             if (LeftNode is not null)
             {
-                if (node.Plug.IsStrongConnection(LeftSocket) && !LeftNode.Plug.IsStrongConnection(LeftSocket))
-                {
+                if (options.IsReplacentsEnabled && node.Plug.IsStrongConnection(LeftSocket) && !LeftNode.Plug.IsStrongConnection(LeftSocket))
                     (LeftNode, node) = (node, LeftNode);
-                    unplacedNode = node;
-                }
                 else
-                {
-                    unplacedNode = LeftNode.AddNodePart3(node);
-                }
+                    node = LeftNode.AddNode(node, options);
             }
 
-            if (unplacedNode is null)
+            if (node is null)
                 return null;
             
-            if (RightNode is null && unplacedNode.Plug.IsConnection(RightSocket))
+            if (RightNode is null && IsConnection(RightSocket))
             {
-                RightNode = unplacedNode;
+                RightNode = node;
                 return null;
             }
 
-            if (RightNode is not null)
-            {
-                if (unplacedNode.Plug.IsStrongConnection(RightSocket) && !RightNode.Plug.IsStrongConnection(RightSocket))
-                {
-                    (RightNode, unplacedNode) = (unplacedNode, RightNode);
-                }
-                else
-                {
-                    unplacedNode = RightNode.AddNodePart3(unplacedNode);
-                }
-            }
-
-            return unplacedNode;
-        }
-
-        private Node[] GetTreeOrder()
-        {
-            Node[] list = [];
-            if (LeftNode is not null)
-                list = LeftNode.GetTreeOrder();
-
-            list = [..list, this];
+            if (RightNode is null)
+                return node;
             
-            if (RightNode is not null)
-                list = [..list, ..RightNode.GetTreeOrder()];
+            if (options.IsReplacentsEnabled && node.Plug.IsStrongConnection(RightSocket) && !RightNode.Plug.IsStrongConnection(RightSocket))
+                (RightNode, node) = (node, RightNode);
+            else
+                node = RightNode.AddNode(node, options);
 
-            return list;
+            return node;
+
+            bool IsConnection(Connection socket) => 
+                options.UseWeakConnections 
+                    ? node.Plug.IsConnection(socket) 
+                    : node.Plug.IsStrongConnection(socket);
         }
 
-        public int Checksum => GetTreeOrder().Select((o, i) => o.Id * (i + 1)).Sum();
+        private Node[] TraverseTree() =>
+        [
+            ..LeftNode?.TraverseTree() ?? [],
+            this,
+            ..RightNode?.TraverseTree() ?? []
+        ];
+
+        public int Checksum => TraverseTree().Select((o, i) => o.Id * (i + 1)).Sum();
     }
     
     public class Connection
     {
-        public string Color { get; }
-        public string Shape { get; }
+        private string Color { get; }
+        private string Shape { get; }
         
-        public Connection(string description)
-        {
-            (Color, Shape) = description.Split();
-        }
-        
+        public Connection(string description) => (Color, Shape) = description.Split();
         public bool IsStrongConnection(Connection c) => c.Color == Color && c.Shape == Shape;
         public bool IsConnection(Connection c) => c.Color == Color || c.Shape == Shape;
-        public override string ToString() => $"{Color} {Shape}";
     }
+
+    public record Options(bool UseWeakConnections = false, bool IsReplacentsEnabled = false);
 }

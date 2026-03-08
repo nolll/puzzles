@@ -9,13 +9,12 @@ public class Aquaq09 : AquaqPuzzle
 {
     public PuzzleResult Run(string input)
     {
-        var numbers = StringReader.ReadLines(input)
-            .Select(BigInteger.Parse);
+        var numbers = input.Split(LineBreaks.Single).Select(BigInteger.Parse);
         var result = MultiplyLargeNumbers(numbers);
 
         return new PuzzleResult(result, "bcead4ceeb598db4924ff4939d43049f");
     }
 
-    public static BigInteger MultiplyLargeNumbers(IEnumerable<BigInteger> numbers) 
-        => numbers.Aggregate(new BigInteger(1), BigInteger.Multiply);
+    public static BigInteger MultiplyLargeNumbers(IEnumerable<BigInteger> numbers) => 
+        numbers.Aggregate(new BigInteger(1), BigInteger.Multiply);
 }

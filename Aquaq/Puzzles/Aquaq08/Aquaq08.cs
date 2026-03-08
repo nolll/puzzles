@@ -16,16 +16,16 @@ public class Aquaq08 : AquaqPuzzle
 
     public static (int milk, int cereal) RunInternal(string input)
     {
-        var days = StringReader.ReadLines(input)
+        var days = input.Split(LineBreaks.Single)
             .Skip(1)
             .Select(o =>
-        {
-            var parts = o.Split(',');
-            var dateTime = DateTime.Parse(parts[0]);
-            var milk = int.Parse(parts[1]);
-            var cereal = int.Parse(parts[02]);
-            return new Day(dateTime, milk, cereal);
-        }).ToList();
+            {
+                var parts = o.Split(',');
+                var dateTime = DateTime.Parse(parts[0]);
+                var milk = int.Parse(parts[1]);
+                var cereal = int.Parse(parts[02]);
+                return new Day(dateTime, milk, cereal);
+            }).ToList();
 
         days.Add(new Day(days.Last().DateTime.AddDays(1), 0, 0));
 

@@ -12,7 +12,7 @@ public class SnailfishMath
 
     public int LargestMagnitude(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = input.Split(LineBreaks.Single);
         var largestMagnitude = 0;
         foreach (var line1 in lines)
         {
@@ -156,12 +156,8 @@ public class SnailfishMath
         }
     }
 
-    private static List<SnailfishNumber> ParseNumbers(string input)
-    {
-        var lines = StringReader.ReadLines(input);
-        var numbers = lines.Select(o => new SnailfishNumber(o)).ToList();
-        return numbers;
-    }
+    private static List<SnailfishNumber> ParseNumbers(string input) => 
+        input.Split(LineBreaks.Single).Select(o => new SnailfishNumber(o)).ToList();
 
     public SnailfishNumber Sum(SnailfishNumber number1, SnailfishNumber number2)
     {

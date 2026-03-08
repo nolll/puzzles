@@ -8,21 +8,9 @@ public class SevenSegmentDisplayDecoder
 
     public SevenSegmentDisplayDecoder(string input)
     {
-        var lines = StringReader.ReadLines(input);
-        _decoders = new List<DigitDecoder>();
-        foreach (var line in lines)
-        {
-            _decoders.Add(new DigitDecoder(line));
-        }
+        _decoders = input.Split(LineBreaks.Single).Select(o => new DigitDecoder(o)).ToList();
     }
 
-    public int GetDecodedSum()
-    {
-        return _decoders.Sum(o => o.DecodedNumber);
-    }
-
-    public int GetEasyNumbers()
-    {
-        return _decoders.Sum(o => o.EasyNumberCount);
-    }
+    public int GetDecodedSum() => _decoders.Sum(o => o.DecodedNumber);
+    public int GetEasyNumbers() => _decoders.Sum(o => o.EasyNumberCount);
 }

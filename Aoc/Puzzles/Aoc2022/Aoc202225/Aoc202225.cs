@@ -13,10 +13,6 @@ public class Aoc202225 : AocPuzzle
         return new PuzzleResult(result, "793d1443281edc7d7e628e25d8aa07a4");
     }
 
-    public string Part1(string input)
-    {
-        var lines = StringReader.ReadLines(input);
-        var sum = lines.Select(SnafuConverter.ToNumber).Sum();
-        return SnafuConverter.ToSnafu(sum);
-    }
+    public string Part1(string input) => 
+        SnafuConverter.ToSnafu(input.Split(LineBreaks.Single).Select(SnafuConverter.ToNumber).Sum());
 }

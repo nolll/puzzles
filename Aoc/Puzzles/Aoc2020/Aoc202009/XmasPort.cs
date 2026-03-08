@@ -3,23 +3,16 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202009;
 
-public class XmasPort
+public class XmasPort(string input, int preambleLength)
 {
-    private readonly IList<long> _values;
-    private readonly int _preambleLength;
-
-    public XmasPort(string input, int preambleLength)
-    {
-        _values = StringReader.ReadLines(input).Select(long.Parse).ToList();
-        _preambleLength = preambleLength;
-    }
+    private readonly IList<long> _values = input.Split(LineBreaks.Single).Select(long.Parse).ToList();
 
     public long FindFirstInvalidNumber()
     {
-        for (var i = _preambleLength; i < _values.Count; i++)
+        for (var i = preambleLength; i < _values.Count; i++)
         {
-            var valuesToSkip = i - _preambleLength;
-            var previousNumbers = _values.Skip(valuesToSkip).Take(_preambleLength).ToList();
+            var valuesToSkip = i - preambleLength;
+            var previousNumbers = _values.Skip(valuesToSkip).Take(preambleLength).ToList();
             if (!IsSumOfTwoNumbers(_values[i], previousNumbers))
                 return _values[i];
         }
@@ -53,9 +46,6 @@ public class XmasPort
         return 0;
     }
 
-    private static bool IsSumOfTwoNumbers(long target, IList<long> numbers)
-    {
-        var permutations = PermutationGenerator.GetPermutations(numbers, 2);
-        return permutations.Any(o => o.Sum() == target);
-    }
+    private static bool IsSumOfTwoNumbers(long target, IList<long> numbers) => 
+        PermutationGenerator.GetPermutations(numbers, 2).Any(o => o.Sum() == target);
 }

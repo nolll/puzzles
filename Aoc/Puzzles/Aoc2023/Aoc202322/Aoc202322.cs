@@ -7,22 +7,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202322;
 [Name("Sand Slabs")]
 public class Aoc202322 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
-    {
-        return new PuzzleResult(CountBricksThatCanBeRemoved(input), "1365c818d49ae8af1974dc302f134abb");
-    }
+    public PuzzleResult RunPart1(string input) => new(CountBricksThatCanBeRemoved(input), "1365c818d49ae8af1974dc302f134abb");
+    public PuzzleResult RunPart2(string input) => new(CountTotalRemovedBricks(input), "81d92f2381d8798f847dd6eb9e0ea6b2");
 
-    public PuzzleResult RunPart2(string input)
-    {
-        return new PuzzleResult(CountTotalRemovedBricks(input), "81d92f2381d8798f847dd6eb9e0ea6b2");
-    }
-
-    public static int CountBricksThatCanBeRemoved(string s)
-    {
-        var bricks = GetBricksWithInfo(GetSettledBricks(s));
-        var bricksThatCanBeRemoved = bricks.Where(o => o.CanBeRemoved);
-        return bricksThatCanBeRemoved.Count();
-    }
+    public static int CountBricksThatCanBeRemoved(string s) => 
+        GetBricksWithInfo(GetSettledBricks(s)).Count(o => o.CanBeRemoved);
 
     public static int CountTotalRemovedBricks(string s)
     {
@@ -62,8 +51,7 @@ public class Aoc202322 : AocPuzzle
 
     private static List<Brick> GetSettledBricks(string s)
     {
-        var bricks = StringReader.ReadLines(s).Select(ParseBrick).OrderBy(o => o.Bottom.Z).ToList();
-
+        var bricks = s.Split(LineBreaks.Single).Select(ParseBrick).OrderBy(o => o.Bottom.Z).ToList();
         return MoveDownAsFarAsPossible(bricks).OrderBy(o => o.Bottom.Z).ToList();
     }
 

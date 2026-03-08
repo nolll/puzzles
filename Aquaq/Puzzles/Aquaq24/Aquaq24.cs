@@ -9,7 +9,7 @@ public class Aquaq24 : AquaqPuzzle
 {
     public PuzzleResult Run(string input)
     {
-        var parts = StringReader.ReadLines(input);
+        var parts = input.Split(LineBreaks.Single);
 
         var charset = parts[0];
         var encoded = parts[1];

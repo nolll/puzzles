@@ -23,7 +23,7 @@ public class HexagonalFloor
 
     public HexagonalFloor(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         _instructions = rows.Select(ParseInstruction);
         _grid = new Grid<char>(defaultValue: Nothing);
         _adjacentCoordsCache = new Dictionary<string, List<Coord>>();

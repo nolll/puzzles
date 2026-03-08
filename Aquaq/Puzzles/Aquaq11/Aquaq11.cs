@@ -19,7 +19,7 @@ public class Aquaq11 : AquaqPuzzle
 
     public static int CountRequiredTiles(string input)
     {
-        var areas = StringReader.ReadLines(input)
+        var areas = input.Split(LineBreaks.Single)
             .Skip(1)
             .Select(line => line.Split(',').Select(int.Parse).ToArray())
             .Select(o => new TileSquare(new Coord(o[0], o[1]), new Coord(o[2], o[3])))
@@ -43,22 +43,15 @@ public class Aquaq11 : AquaqPuzzle
         return grid.Values.Count(o => o == Filled);
     }
 
-    private class TileSquare
+    private class TileSquare(Coord from, Coord to)
     {
-        public Coord From { get; }
-        public Coord To { get; }
-
-        public TileSquare(Coord from, Coord to)
-        {
-            From = from;
-            To = to;
-        }
+        public Coord From { get; } = from;
+        public Coord To { get; } = to;
 
         public bool IsOverlapping(TileSquare other) =>
             IsOverlapping(From.X, To.X, other.From.X, other.To.X) &&
             IsOverlapping(From.Y, To.Y, other.From.Y, other.To.Y);
 
-        private static bool IsOverlapping(int fromA, int toA, int fromB, int toB)
-            => (fromA <= toB && toA >= fromB);
+        private static bool IsOverlapping(int fromA, int toA, int fromB, int toB) => fromA <= toB && toA >= fromB;
     }
 }

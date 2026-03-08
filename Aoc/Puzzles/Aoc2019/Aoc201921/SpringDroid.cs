@@ -14,18 +14,15 @@ public class SpringDroid
     public SpringDroid(string program, string script)
     {
         _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
-        _currentCommand = new List<char>();
-        _commands = StringReader.ReadLines(script.Trim());
+        _currentCommand = [];
+        _commands = script.Trim().Split(LineBreaks.Single).ToList();
     }
 
-    public void Run()
-    {
-        _computer.Start();
-    }
+    public void Run() => _computer.Start();
 
     private long ReadInput()
     {
-        if (!_currentCommand.Any())
+        if (_currentCommand.Count == 0)
         {
             if (_commands.Any())
             {
@@ -36,7 +33,7 @@ public class SpringDroid
             }
         }
 
-        if (_currentCommand.Any())
+        if (_currentCommand.Count != 0)
         {
             var c = _currentCommand.First();
             _currentCommand.RemoveAt(0);
@@ -50,8 +47,6 @@ public class SpringDroid
     {
         if (output > 200)
             HullDamage = output;
-        //else
-        //    Console.Write((char)output);
 
         return true;
     }

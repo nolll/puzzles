@@ -93,7 +93,7 @@ public class Aquaq25 : AquaqPuzzle
 
     public static string ClicksToMorse(string input)
     {
-        var timeStamps = StringReader.ReadLines(input)
+        var timeStamps = input.Split(LineBreaks.Single)
             .Select(o => o.Trim())
             .Where(o => o.Length > 0)
             .Select(o => DateTime.Parse($"2020-02-02 {o}"))

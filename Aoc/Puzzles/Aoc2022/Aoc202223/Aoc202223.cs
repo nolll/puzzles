@@ -139,8 +139,8 @@ public class Aoc202223 : AocPuzzle
     private HashSet<Coord> ParseElves(string input)
     {
         var elves = new HashSet<Coord>();
-        var lines = StringReader.ReadLines(input);
-        for (var y = 0; y < lines.Count; y++)
+        var lines = input.Split(LineBreaks.Single);
+        for (var y = 0; y < lines.Length; y++)
         {
             var line = lines[y];
             for (var x = 0; x < line.Length; x++)

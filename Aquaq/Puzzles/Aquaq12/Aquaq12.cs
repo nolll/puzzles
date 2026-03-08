@@ -15,7 +15,7 @@ public class Aquaq12 : AquaqPuzzle
 
     public static int RideLift(string input)
     {
-        var floors = StringReader.ReadLines(input)
+        var floors = input.Split(LineBreaks.Single)
             .Select(o => o.Split(' ').Select(int.Parse).ToArray())
             .Select(o => new Floor(o[0] == 0, o[1])).ToArray();
 

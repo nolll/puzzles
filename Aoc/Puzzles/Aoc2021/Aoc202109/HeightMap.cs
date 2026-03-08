@@ -80,7 +80,7 @@ public class HeightMap
     private static Grid<int> CreateGrid(string input)
     {
         var grid = new Grid<int>();
-        var lines = StringReader.ReadLines(input);
+        var lines = input.Split(LineBreaks.Single);
 
         var y = 0;
         foreach (var line in lines)

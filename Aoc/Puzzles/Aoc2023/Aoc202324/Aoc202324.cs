@@ -7,13 +7,9 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202324;
 [Comment("Learn more about equation systems")]
 public class Aoc202324 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
-    {
-        var result = CountIntersectingWithin(input, 200_000_000_000_000, 400_000_000_000_000);
+    public PuzzleResult RunPart1(string input) => 
+        new(CountIntersectingWithin(input, 200_000_000_000_000, 400_000_000_000_000), "907db44ec104f348525996e3821ac11d");
 
-        return new PuzzleResult(result, "907db44ec104f348525996e3821ac11d");
-    }
-    
     public static int CountIntersectingWithin(string s, long min, long max)
     {
         var count = 0;
@@ -45,14 +41,7 @@ public class Aoc202324 : AocPuzzle
         return count;
     }
 
-    public PuzzleResult RunPart2(string input)
-    {
-        var stones = ParseHailstones(input);
-
-        var res = Solve(stones);
-        
-        return new PuzzleResult(res, "95042738f3ece8b6cd45dd711ee9d3fa");
-    }
+    public PuzzleResult RunPart2(string input) => new(Solve(ParseHailstones(input)), "95042738f3ece8b6cd45dd711ee9d3fa");
 
     private long Solve(List<Hailstone> stones)
     {
@@ -171,11 +160,8 @@ public class Aoc202324 : AocPuzzle
         return sum;
     }
 
-    private static List<Hailstone> ParseHailstones(string s)
-    {
-        var lines = StringReader.ReadLines(s);
-        return lines.Select(o => o.Replace(" @", ",").Replace(" ", "").Split(',').Select(long.Parse).ToArray())
+    private static List<Hailstone> ParseHailstones(string s) =>
+        s.Split(LineBreaks.Single).Select(o => o.Replace(" @", ",").Replace(" ", "").Split(',').Select(long.Parse).ToArray())
             .Select((o, i) => new Hailstone(i, o[0], o[1], o[2], o[3], o[4], o[5]))
             .ToList();
-    }
 }

@@ -22,7 +22,7 @@ public class Aoc202304 : AocPuzzle
 
     public static (int Score, int CardCount) FlipThroughCards(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = input.Split(LineBreaks.Single);
         var totalScore = 0;
         var cards = new Dictionary<int, int>();
         var index = 1;
@@ -57,8 +57,8 @@ public class Aoc202304 : AocPuzzle
         return (totalScore, cardCount);
     }
 
-    private static IEnumerable<int> ParseCards(string s)
-        => s.Trim().Split(' ').Select(o => int.Parse(o.Trim()));
+    private static IEnumerable<int> ParseCards(string s) => 
+        s.Trim().Split(' ').Select(o => int.Parse(o.Trim()));
 
     private static int GetScore(Dictionary<int, int> cards, int cardKey)
     {

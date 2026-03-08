@@ -9,7 +9,7 @@ public class PowerAdapterChain
 
     public PowerAdapterChain(string input)
     {
-        _adapters = StringReader.ReadLines(input).Select(int.Parse).OrderBy(o => o).ToList();
+        _adapters = input.Split(LineBreaks.Single).Select(int.Parse).OrderBy(o => o).ToList();
         var currentValue = 0;
         var diffOneCount = 0;
         var diffThreeCount = 0;
@@ -43,8 +43,8 @@ public class PowerAdapterChain
 
     private long CalculateCount(IDictionary<int, long> counts, int adapter)
     {
-        if (counts.ContainsKey(adapter))
-            return counts[adapter];
+        if (counts.TryGetValue(adapter, out var c))
+            return c;
 
         var possibleAdapters = _adapters.Where(o => IsWithinRange(adapter, o)).ToList();
         var count = possibleAdapters.Sum(nextAdapter => CalculateCount(counts, nextAdapter));
@@ -56,9 +56,5 @@ public class PowerAdapterChain
         return count;
     }
 
-    private static bool IsWithinRange(int adapter, int nextAdapter)
-    {
-        var diff = nextAdapter - adapter;
-        return diff > 0 && diff <= 3;
-    }
+    private static bool IsWithinRange(int adapter, int nextAdapter) => nextAdapter - adapter is > 0 and <= 3;
 }

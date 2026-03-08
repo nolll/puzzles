@@ -8,17 +8,13 @@ public class Aoc202312 : AocPuzzle
 {
     public PuzzleResult RunPart1(string input)
     {
-        var lines = StringReader.ReadLines(input);
-        var counts = lines.Select(o => CombinationCount(o));
-
+        var counts = input.Split(LineBreaks.Single).Select(o => CombinationCount(o));
         return new PuzzleResult(counts.Sum(), "ec83138b082ab4da38bb60e88263c52f");
     }
 
     public PuzzleResult RunPart2(string input)
     {
-        var lines = StringReader.ReadLines(input);
-        var counts = lines.Select(o => CombinationCount(o, true));
-
+        var counts = input.Split(LineBreaks.Single).Select(o => CombinationCount(o, true));
         return new PuzzleResult(counts.Sum(), "2ecb30790515e2ebbae12a478dbf36f7");
     }
 

@@ -10,7 +10,7 @@ public class EncryptionKeyFinder
 
     public EncryptionKeyFinder(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         _cardPublicKey = long.Parse(rows[0]);
         _doorPublicKey = long.Parse(rows[1]);
     }
@@ -40,17 +40,13 @@ public class EncryptionKeyFinder
     private long GetKey(long loopSize, long publicKey)
     {
         long value = 1;
-        var subjectNumber = publicKey;
         for (var i = 0; i < loopSize; i++)
         {
-            value = Transform(value, subjectNumber);
+            value = Transform(value, publicKey);
         }
 
         return value;
     }
 
-    private static long Transform(long value, long subjectNumber)
-    {
-        return (value * subjectNumber) % DivideBy;
-    }
+    private static long Transform(long value, long subjectNumber) => value * subjectNumber % DivideBy;
 }

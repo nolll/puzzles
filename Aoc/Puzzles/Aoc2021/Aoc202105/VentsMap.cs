@@ -7,7 +7,7 @@ public class VentsMap
 {
     public int Run(string input, bool orthogonalOnly)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         var lines = ParseLines(rows);
         if (orthogonalOnly)
             lines = lines.Where(o => o.IsOrthogonal).ToList();

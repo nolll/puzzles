@@ -7,7 +7,7 @@ public class SubmarineReactor
 {
     public int Reboot(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = input.Split(LineBreaks.Single);
         var instructions = lines.Select(ParseInstruction).ToList();
         
         var grid = new Dictionary<(int, int, int), bool>();
@@ -33,7 +33,7 @@ public class SubmarineReactor
 
     public long Reboot2(string input, int? maxSize = null)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = input.Split(LineBreaks.Single);
         var instructions = lines.Select(ParseInstruction).ToList();
 
         var areas = new List<RebootArea>();

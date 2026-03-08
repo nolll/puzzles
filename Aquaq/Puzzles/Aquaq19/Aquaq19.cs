@@ -7,14 +7,11 @@ namespace Pzl.Aquaq.Puzzles.Aquaq19;
 [Name("It's alive")]
 public class Aquaq19 : AquaqPuzzle
 {
-    private const char Filled = '#';
     private const char Empty = '.';
 
     public PuzzleResult Run(string input)
     {
-        var result = StringReader.ReadLines(input)
-            .Select(o => RunGame(o, true)).Sum();
-
+        var result = input.Split(LineBreaks.Single).Select(o => RunGame(o, true)).Sum();
         return new PuzzleResult(result, "99a57b5b2a95e407216743a84d68c0e0");
     }
 

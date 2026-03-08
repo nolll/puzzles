@@ -22,16 +22,11 @@ public class SyntaxChecker
         _byClosingTag = tags.ToDictionary(k => k.ClosingTag, v => v);
     }
 
-    public int GetTotalErrorScore(string input)
-    {
-        var lines = StringReader.ReadLines(input);
-
-        return lines.Sum(GetErrorScore);
-    }
+    public int GetTotalErrorScore(string input) => input.Split(LineBreaks.Single).Sum(GetErrorScore);
 
     public long FindMiddleScore(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = input.Split(LineBreaks.Single);
         var completionStrings = new List<string>();
             
         foreach (var line in lines)
@@ -98,34 +93,9 @@ public class SyntaxChecker
         return 0;
     }
 
-    private int GetCompletionScore(char closingTag)
-    {
-        return _byClosingTag[closingTag].CompletionScore;
-    }
+    private int GetCompletionScore(char closingTag) => _byClosingTag[closingTag].CompletionScore;
+    private char GetClosingTag(char openingTag) => _byOpeningTag[openingTag].ClosingTag;
+    private int GetErrorScore(char closingTag) => _byClosingTag[closingTag].ErrorScore;
 
-    private char GetClosingTag(char openingTag)
-    {
-        return _byOpeningTag[openingTag].ClosingTag;
-    }
-
-    private int GetErrorScore(char closingTag)
-    {
-        return _byClosingTag[closingTag].ErrorScore;
-    }
-
-    private class SyntaxTag
-    {
-        public char OpeningTag { get; }
-        public char ClosingTag { get; }
-        public int CompletionScore { get; }
-        public int ErrorScore { get; }
-
-        public SyntaxTag(char openingTag, char closingTag, int completionScore, int errorScore)
-        {
-            OpeningTag = openingTag;
-            ClosingTag = closingTag;
-            CompletionScore = completionScore;
-            ErrorScore = errorScore;
-        }
-    }
+    private record SyntaxTag(char OpeningTag, char ClosingTag, int CompletionScore, int ErrorScore);
 }

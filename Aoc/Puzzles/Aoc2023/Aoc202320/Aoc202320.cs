@@ -77,12 +77,12 @@ public class Aoc202320 : AocPuzzle
         var modules = new Dictionary<string, Module>();
         var button = new ButtonModule();
         modules.Add(button.Name, button);
-        var lines = StringReader.ReadLines(s);
+        var lines = s.Split(LineBreaks.Single);
 
         foreach (var line in lines)
         {
-            var parts = line.Split(" -> ").ToArray();
-            var targets = parts[1].Split(", ").ToArray();
+            var parts = line.Split(" -> ");
+            var targets = parts[1].Split(", ");
             var type = parts[0][0];
             if (type is '%' or '&')
             {

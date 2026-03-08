@@ -47,7 +47,7 @@ public class Aquaq16 : AquaqPuzzle
 
     private static IEnumerable<Letter> ParseLetters(string alphabet)
     {
-        var lines = StringReader.ReadLines(alphabet).ToArray();
+        var lines = alphabet.Split(LineBreaks.Single);
         var c = 'A';
         for (var i = 0; i < alphabet.Length; i += LetterHeight)
         {
@@ -70,17 +70,10 @@ public class Aquaq16 : AquaqPuzzle
         }
     }
 
-    private class LetterRow
+    private class LetterRow(string s)
     {
-        public string String { get; }
-        public int LeftSpace { get; }
-        public int RightSpace { get; }
-
-        public LetterRow(string s)
-        {
-            String = s.Replace(' ', '.');
-            LeftSpace = s.Length - s.TrimStart().Length;
-            RightSpace = s.Length - s.TrimEnd().Length;
-        }
+        public string String { get; } = s.Replace(' ', '.');
+        public int LeftSpace { get; } = s.Length - s.TrimStart().Length;
+        public int RightSpace { get; } = s.Length - s.TrimEnd().Length;
     }
 }

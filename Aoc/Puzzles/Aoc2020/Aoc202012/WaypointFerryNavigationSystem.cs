@@ -12,7 +12,7 @@ public class WaypointFerryNavigationSystem
 
     public WaypointFerryNavigationSystem(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         _intructions = rows.Select(FerryNavigationInstruction.Parse);
 
         _address = new Coord(0, 0);
@@ -55,10 +55,8 @@ public class WaypointFerryNavigationSystem
         }
     }
 
-    private void MoveForward(int steps)
-    {
+    private void MoveForward(int steps) => 
         _address = new Coord(_address.X + _waypoint.X * steps, _address.Y + _waypoint.Y * steps);
-    }
 
     private void RotateLeft(int degrees)
     {
@@ -76,13 +74,6 @@ public class WaypointFerryNavigationSystem
         }
     }
 
-    private void RotateLeft()
-    {
-        _waypoint = new Coord(-_waypoint.Y, _waypoint.X);
-    }
-
-    private void RotateRight()
-    {
-        _waypoint = new Coord(_waypoint.Y, -_waypoint.X);
-    }
+    private void RotateLeft() => _waypoint = new Coord(-_waypoint.Y, _waypoint.X);
+    private void RotateRight() => _waypoint = new Coord(_waypoint.Y, -_waypoint.X);
 }

@@ -85,7 +85,7 @@ public class Aoc202325 : AocPuzzle
 
     private static Dictionary<string, List<string>> ParseComponents(string s)
     {
-        var lines = StringReader.ReadLines(s);
+        var lines = s.Split(LineBreaks.Single);
         var components = new Dictionary<string, List<string>>();
 
         foreach (var line in lines)

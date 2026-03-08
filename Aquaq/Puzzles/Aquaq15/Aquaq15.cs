@@ -15,7 +15,7 @@ public class Aquaq15 : AquaqPuzzle
 
     public int RunInternal(string input, string additionalInput) 
     {
-        var transformations = StringReader.ReadLines(input)
+        var transformations = input.Split(LineBreaks.Single)
             .Select(o => o.Split(','))
             .Select(o => new WordTransformation(o[0], o[1]))
             .ToList();
@@ -24,7 +24,7 @@ public class Aquaq15 : AquaqPuzzle
         var maxLength = wordLengths.Max();
         var minLength = wordLengths.Min();
 
-        var validWords = StringReader.ReadLines(additionalInput)
+        var validWords = additionalInput.Split(LineBreaks.Single)
             .Where(o => o.Length >= minLength && o.Length <= maxLength)
             .GroupBy(o => o.Length)
             .ToDictionary(k => k.Key, o => BuildEdges(o.ToList()).ToList());

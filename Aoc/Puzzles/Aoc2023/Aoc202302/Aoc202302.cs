@@ -13,21 +13,12 @@ public class Aoc202302 : AocPuzzle
         { "blue", 14 }
     };
 
-    public PuzzleResult RunPart1(string input)
-    {
-        var result = PlayGames(input);
-        return new PuzzleResult(result.ValidGames, "70e2be8af168fc9534f8384b244c60f7");
-    }
-
-    public PuzzleResult RunPart2(string input)
-    {
-        var result = PlayGames(input);
-        return new PuzzleResult(result.GamePower, "45825cd43460cbc76a940d6eb06ebc6b");
-    }
+    public PuzzleResult RunPart1(string input) => new(PlayGames(input).ValidGames, "70e2be8af168fc9534f8384b244c60f7");
+    public PuzzleResult RunPart2(string input) => new(PlayGames(input).GamePower, "45825cd43460cbc76a940d6eb06ebc6b");
 
     public static TotalResult PlayGames(string input)
     {
-        var games = StringReader.ReadLines(input);
+        var games = input.Split(LineBreaks.Single);
         var results = games.Select(PlayGame).ToList();
         var validGameSum = results.Where(o => o.IsValid).Sum(o => o.GameId);
         var totalPower = results.Sum(o => o.GamePower);
@@ -42,7 +33,7 @@ public class Aoc202302 : AocPuzzle
         var gameId = int.Parse(gameParts[0].Split(' ')[1]);
         var sets = gameParts[1].Trim().Split(';');
 
-        var maxCubeCounts = new Dictionary<string, int>()
+        var maxCubeCounts = new Dictionary<string, int>
         {
             { "red", 0 },
             { "green", 0 },

@@ -3,15 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202013;
 
-public class BusScheduler2
+public class BusScheduler2(string input)
 {
-    private readonly List<string> _busDepartureMinutes;
-
-    public BusScheduler2(string input)
-    {
-        var rows = StringReader.ReadLines(input);
-        _busDepartureMinutes = rows[1].Split(',').ToList();
-    }
+    private readonly List<string> _busDepartureMinutes = input.Split(LineBreaks.Single)[1].Split(',').ToList();
 
     public long GetContestMinute()
     {
@@ -19,10 +13,8 @@ public class BusScheduler2
         for (var i = 0; i < _busDepartureMinutes.Count; i++)
         {
             var busStr = _busDepartureMinutes[i];
-            if (busStr != "x")
-            {
+            if (busStr != "x") 
                 buses.Add(new Bus(long.Parse(busStr), i));
-            }
         }
 
         buses = buses.OrderByDescending(o => o.Id).ToList();
@@ -49,9 +41,5 @@ public class BusScheduler2
 
     private static bool IsMatching(Bus bus, long time) => (time + bus.Delay) % bus.Id == 0;
 
-    private class Bus(long id, long delay)
-    {
-        public long Id { get; } = id;
-        public long Delay { get; } = delay;
-    }
+    private record Bus(long Id, long Delay);
 }

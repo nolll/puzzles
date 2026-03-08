@@ -21,7 +21,7 @@ public class Aquaq28 : AquaqPuzzle
 
     public static string Encrypt(string input, string word)
     {
-        var lines = StringReader.ReadLines(input)
+        var lines = input.Split(LineBreaks.Single)
             .Skip(1).SkipLast(1)
             .Select(o => o.Substring(1, o.Length - 2));
         var gridInput = string.Join(LineBreaks.Single, lines);
@@ -69,6 +69,6 @@ public class Aquaq28 : AquaqPuzzle
         return encrypted;
     }
 
-    private static bool IsMovingHorizontally(Grid<char> grid) 
-        => grid.Direction.Equals(GridDirection.Right) || grid.Direction.Equals(GridDirection.Left);
+    private static bool IsMovingHorizontally(Grid<char> grid) => 
+        grid.Direction.Equals(GridDirection.Right) || grid.Direction.Equals(GridDirection.Left);
 }

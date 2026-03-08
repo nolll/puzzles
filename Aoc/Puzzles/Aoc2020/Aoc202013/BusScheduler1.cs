@@ -9,7 +9,7 @@ public class BusScheduler1
 
     public BusScheduler1(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         _earliestMinute = int.Parse(rows[0]);
         _busDepartureMinutes = rows[1].Split(',').Where(o => o != "x").Select(int.Parse).ToList();
     }
@@ -21,15 +21,5 @@ public class BusScheduler1
         return bestBus.Id * bestBus.Delay;
     }
 
-    private class Bus
-    {
-        public int Id { get; }
-        public int Delay { get; }
-
-        public Bus(int id, int delay)
-        {
-            Id = id;
-            Delay = delay;
-        }
-    }
+    private record Bus(int Id, int Delay);
 }

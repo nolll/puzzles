@@ -18,7 +18,7 @@ public class Aquaq36 : AquaqPuzzle
 
         foreach (var tetonor in tetonors)
         {
-            var rows = StringReader.ReadLines(tetonor);
+            var rows = tetonor.Split(LineBreaks.Single);
             var grid = rows[0][2..].Split(' ').Select(int.Parse).ToList();
             var inp = rows[1][2..].Split(' ').Select(o => (int?)(o == "*" ? null : int.Parse(o))).ToList();
             var result = Solve(grid, inp, factorProvider);
@@ -37,10 +37,10 @@ public class Aquaq36 : AquaqPuzzle
         var inputs = FindPossibleInputNumbers(input, sortedGrid.Max(), factorSet);
 
         var result = Solve(sortedGrid, inputs, concreteFactorCache, 0);
-        if (result > 0)
-            return result;
-
-        return 0;
+        
+        return result > 0 
+            ? result 
+            : 0;
     }
 
     private static List<GridPair> GetGridPairs(int n, List<int> grid, FactorCache factorCache)
@@ -98,7 +98,7 @@ public class Aquaq36 : AquaqPuzzle
         return 0;
     }
 
-    public static IEnumerable<int> IndicesContaining(List<HashSet<int>> inputs, int n)
+    private static IEnumerable<int> IndicesContaining(List<HashSet<int>> inputs, int n)
     {
         for (var i = 0; i < inputs.Count; i++)
         {

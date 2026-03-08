@@ -3,34 +3,26 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202018;
 
-public class HomeworkCalculator
+public partial class HomeworkCalculator
 {
     private const string Addition = "+";
     private const string Multiplication = "*";
     private const char GroupStart = '(';
     private const char GroupEnd = ')';
 
-    public long SumOfAll(string input, MathPrecedence precedence)
-    {
-        var rows = StringReader.ReadLines(input);
-        return rows.Sum(o => Sum(o, precedence));
-    }
+    public long SumOfAll(string input, MathPrecedence precedence) => 
+        input.Split(LineBreaks.Single).Sum(o => Sum(o, precedence));
 
-    public long Sum(string input, MathPrecedence precedence)
-    {
-        var rootGroup = new Group(input, precedence);
-        var result = rootGroup.Result;
-        return result;
-    }
+    public long Sum(string input, MathPrecedence precedence) => new Group(input, precedence).Result;
 
-    private class Group
+    private partial class Group
     {
         public long Result { get; }
 
         public Group(string s, MathPrecedence precedence)
         {
             var calc = GetCalcFunc(precedence);
-            var regex = new Regex(@"\([0-9 \*\+]+\)");
+            var regex = GroupingRegex();
             while (s.Contains('('))
             {
                 var matches = regex.Matches(s);
@@ -45,7 +37,7 @@ public class HomeworkCalculator
             Result = calc(s);
         }
 
-        private long CalcWithOrderPrecedence(string s)
+        private static long CalcWithOrderPrecedence(string s)
         {
             var parts = s.Split(' ').ToList();
             while (parts.Count > 1)
@@ -65,7 +57,7 @@ public class HomeworkCalculator
             return long.Parse(parts[0]);
         }
 
-        private long CalcWithAdditionPrecedence(string s)
+        private static long CalcWithAdditionPrecedence(string s)
         {
             var parts = s.Split(' ').ToList();
 
@@ -79,7 +71,7 @@ public class HomeworkCalculator
                 parts.RemoveAt(nextAdditionOperator);
             }
 
-            while (parts.Count() > 1)
+            while (parts.Count > 1)
             {
                 var current = long.Parse(parts[0]);
                 var next = long.Parse(parts[2]);
@@ -93,11 +85,10 @@ public class HomeworkCalculator
             return long.Parse(parts[0]);
         }
 
-        private Func<string, long> GetCalcFunc(MathPrecedence precedence)
-        {
-            if (precedence == MathPrecedence.Addition)
-                return CalcWithAdditionPrecedence;
-            return CalcWithOrderPrecedence;
-        }
+        private static Func<string, long> GetCalcFunc(MathPrecedence precedence) => precedence == MathPrecedence.Addition 
+            ? CalcWithAdditionPrecedence 
+            : CalcWithOrderPrecedence;
+        [GeneratedRegex(@"\([0-9 \*\+]+\)")]
+        private static partial Regex GroupingRegex();
     }
 }

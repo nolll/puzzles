@@ -6,8 +6,7 @@ public class BinaryDiagnostics
 {
     public int GetFuelConsumption(string input)
     {
-        var lines = StringReader.ReadLines(input);
-        var charLists = lines.Select(o => o.ToCharArray()).ToList();
+        var charLists = input.Split(LineBreaks.Single).Select(o => o.ToCharArray()).ToList();
 
         var size = charLists.First().Length;
         var zeroCounts = new int[size];
@@ -45,7 +44,7 @@ public class BinaryDiagnostics
 
     public int GetLifeSupportRating(string input)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = input.Split(LineBreaks.Single);
         var charLists = lines.Select(o => o.ToCharArray()).ToList();
         var size = lines.First().Length;
         var oxygenGeneratorRating = charLists.ToList();

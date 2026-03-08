@@ -11,7 +11,7 @@ public class SimpleFerryNavigationSystem
         
     public SimpleFerryNavigationSystem(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         _intructions = rows.Select(FerryNavigationInstruction.Parse);
 
         _grid = new Grid<int>();

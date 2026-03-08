@@ -2,16 +2,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202021;
 
-public class AllergenDetector
+public class AllergenDetector(string input)
 {
-    private IEnumerable<Food> _foods;
-
-    public AllergenDetector(string input)
-    {
-        var rows = StringReader.ReadLines(input);
-        _foods = rows.Select(Food.Parse);
-    }
-
+    private readonly IEnumerable<Food> _foods = input.Split(LineBreaks.Single).Select(Food.Parse);
 
     public int FindIngredientsWithoutAllergens()
     {

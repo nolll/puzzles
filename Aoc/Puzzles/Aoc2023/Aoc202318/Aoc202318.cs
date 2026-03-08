@@ -48,18 +48,17 @@ public class Aoc202318 : AocPuzzle
     public static int ParseHex(string hex) => Convert.ToInt32(hex, 16);
     
     private static IEnumerable<Instruction> ParseInstructions(Func<string, Instruction> parse, string s) => 
-        StringReader.ReadLines(s).Select(parse);
+        s.Split(LineBreaks.Single).Select(parse);
 
     private static Instruction ParseInstructionPart1(string s)
     {
-        var ds = s.Split(' ').ToArray()[1];
+        var ds = s.Split(' ')[1];
         return new Instruction(DirectionFromString(s), int.Parse(ds));
     }
     
     private static Instruction ParseInstructionPart2(string s)
     {
         var hex = s.Split(' ').Last().TrimStart('(').TrimEnd(')').TrimStart('#');
-
         return new Instruction(DirectionFromColor(hex), ParseHex(hex[..5]));
     }
     

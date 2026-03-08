@@ -2,25 +2,13 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202102;
 
-public class SubmarineControl
+public class SubmarineControl(string input, bool useAim)
 {
-    private readonly bool _useAim;
-    private readonly IList<string> _lines;
+    private readonly IList<string> _lines = input.Split(LineBreaks.Single);
     private long _x;
     private long _y;
     private long _aim;
     public long Result { get; private set; }
-
-    public SubmarineControl(string input, bool useAim)
-    {
-        _useAim = useAim;
-        _lines = StringReader.ReadLines(input);
-
-        _x = 0;
-        _y = 0;
-        _aim = 0;
-        Result = 0;
-    }
 
     public void Move()
     {
@@ -30,7 +18,7 @@ public class SubmarineControl
             var action = parts[0];
             var value = long.Parse(parts[1]);
 
-            if (_useAim)
+            if (useAim)
                 MoveWithAim(action, value);
             else
                 MoveWithoutAim(action, value);

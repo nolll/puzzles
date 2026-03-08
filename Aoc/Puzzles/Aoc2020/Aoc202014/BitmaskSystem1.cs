@@ -8,7 +8,7 @@ public class BitmaskSystem1
     {
         var bitmask = "";
         var mem = new Dictionary<int, long>();
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         foreach (var row in rows)
         {
             if (row.StartsWith("mask"))

@@ -9,7 +9,7 @@ public class Aquaq38 : AquaqPuzzle
     public PuzzleResult Run(string input)
     {
         var indexStreakProvider = new IndexStreakProvider();
-        var lists = StringReader.ReadLines(input)
+        var lists = input.Split(LineBreaks.Single)
             .Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();
         var sum = lists.Sum(o => GetComfScore(indexStreakProvider, o));
 
@@ -44,9 +44,9 @@ public class Aquaq38 : AquaqPuzzle
         return score;
     }
 
-    private static bool IsCosy(int length, int[] a, int[] indices) 
-        => GetStreakSum(a, indices) % length == 0;
+    private static bool IsCosy(int length, int[] a, int[] indices) => 
+        GetStreakSum(a, indices) % length == 0;
 
-    private static int GetStreakSum(int[] a, int[] indices)
-        => indices.Sum(index => a[index]);
+    private static int GetStreakSum(int[] a, int[] indices) => 
+        indices.Sum(index => a[index]);
 }

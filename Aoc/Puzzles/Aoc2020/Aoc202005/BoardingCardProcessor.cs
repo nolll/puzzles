@@ -2,16 +2,11 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202005;
 
-public class BoardingCardProcessor
+public class BoardingCardProcessor(string input)
 {
-    private readonly IEnumerable<BoardingCard> _boardingCards;
+    private readonly IEnumerable<BoardingCard> _boardingCards = input.Split(LineBreaks.Single).Select(BoardingCard.Parse);
 
     public int HighestId => _boardingCards.Max(o => o.Id);
-
-    public BoardingCardProcessor(string input)
-    {
-        _boardingCards = StringReader.ReadLines(input).Select(BoardingCard.Parse);
-    }
 
     public BoardingCard? FindMySeat()
     {

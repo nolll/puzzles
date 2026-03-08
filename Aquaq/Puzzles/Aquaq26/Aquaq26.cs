@@ -10,7 +10,7 @@ public class Aquaq26 : AquaqPuzzle
 {
     public PuzzleResult Run(string input)
     {
-        var inputNumbers = StringReader.ReadLines(input)
+        var inputNumbers = input.Split(LineBreaks.Single)
             .Select(BigInteger.Parse);
 
         var sum = inputNumbers.Aggregate(BigInteger.Zero, (current, n) => current + FindFirstLargerNumber(n) - n);

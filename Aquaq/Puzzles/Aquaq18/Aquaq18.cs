@@ -8,7 +8,7 @@ public class Aquaq18 : AquaqPuzzle
 {
     public PuzzleResult Run(string input)
     {
-        var sum = StringReader.ReadLines(input)
+        var sum = input.Split(LineBreaks.Single)
             .Select(o => DateTime.Parse($"2020-02-02 {o}"))
             .Select(StepsToPalindrome)
             .Sum();
@@ -16,8 +16,7 @@ public class Aquaq18 : AquaqPuzzle
         return new PuzzleResult(sum, "9730fe5001e883b1b33acd8c976dd938");
     }
 
-    public static bool IsPalindromeTime(DateTime dateTime)
-        => dateTime.ToString("HH:mm:ss").IsPalindrome();
+    public static bool IsPalindromeTime(DateTime dateTime) => dateTime.ToString("HH:mm:ss").IsPalindrome();
 
     public static int StepsToPalindrome(DateTime dateTime)
     {

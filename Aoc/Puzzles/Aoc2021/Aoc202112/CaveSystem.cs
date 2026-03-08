@@ -10,7 +10,7 @@ public class CaveSystem
     public CaveSystem(string input, bool allowSmallRevisit)
     {
         _allowSmallRevisit = allowSmallRevisit;
-        var lines = StringReader.ReadLines(input);
+        var lines = input.Split(LineBreaks.Single);
         _connections = new Dictionary<string, HashSet<string>>();
         foreach (var line in lines)
         {
@@ -27,19 +27,14 @@ public class CaveSystem
     {
         if (!_connections.TryGetValue(from, out var connection))
         {
-            connection = new HashSet<string>();
+            connection = [];
             _connections.Add(from, connection);
         }
 
         connection.Add(to);
     }
         
-    public int CountPaths()
-    {
-        var paths = FindPaths("-", "start", "-");
-
-        return paths.Count;
-    }
+    public int CountPaths() => FindPaths("-", "start", "-").Count;
 
     private List<string> FindPaths(string path, string current, string lowercasePath)
     {

@@ -8,7 +8,7 @@ public class Aquaq07 : AquaqPuzzle
 {
     public PuzzleResult Run(string input)
     {
-        var games = StringReader.ReadLines(input)
+        var games = input.Split(LineBreaks.Single)
             .Skip(1)
             .Select(o => o.Split(','))
             .ToList();
@@ -43,9 +43,6 @@ public class Aquaq07 : AquaqPuzzle
         return new PuzzleResult(result, "194aa6e361f7a234543335a05da32ec4");
     }
     
-    public static double ExpectedWinrate(double a, double b) 
-        => 1 / (1 + Math.Pow(10, (b - a) / 400));
-
-    public static double RatingChange(double expectedWinrate) 
-        => 20 * (1 - expectedWinrate);
+    public static double ExpectedWinrate(double a, double b) => 1 / (1 + Math.Pow(10, (b - a) / 400));
+    public static double RatingChange(double expectedWinrate) => 20 * (1 - expectedWinrate);
 }

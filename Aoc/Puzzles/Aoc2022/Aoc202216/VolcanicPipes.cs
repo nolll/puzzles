@@ -21,7 +21,7 @@ public class VolcanicPipes
     {
         var valves = new List<string>();
         var tunnels = new Dictionary<string, List<string>>();
-        var lines = StringReader.ReadLines(input);
+        var lines = input.Split(LineBreaks.Single);
 
         foreach (var line in lines)
         {

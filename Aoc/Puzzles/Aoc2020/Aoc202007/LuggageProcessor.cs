@@ -14,7 +14,7 @@ public class LuggageProcessor
 
     private void ParseBags(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         foreach (var row in rows)
         {
             ParseBag(row);
@@ -27,17 +27,17 @@ public class LuggageProcessor
         var bagName = parts[0].Replace("bags", "").Trim();
         var bag = GetOrAdd(bagName);
         var allSubBagsString = parts[1].Replace(".", "");
-        if (allSubBagsString != "no other bags")
+        if (allSubBagsString == "no other bags")
+            return;
+        
+        var subBagsStrings = allSubBagsString.Split(",");
+        foreach (var subBagString in subBagsStrings)
         {
-            var subBagsStrings = allSubBagsString.Split(",");
-            foreach (var subBagString in subBagsStrings)
-            {
-                var subBagParts = subBagString.Trim().Split(" ").SkipLast(1).ToList();
-                var quantity = int.Parse(subBagParts.First());
-                var name = string.Join(" ", subBagParts.Skip(1));
-                var subBag = GetOrAdd(name);
-                bag.AddSubBag(subBag, quantity);
-            }
+            var subBagParts = subBagString.Trim().Split(" ").SkipLast(1).ToList();
+            var quantity = int.Parse(subBagParts.First());
+            var name = string.Join(" ", subBagParts.Skip(1));
+            var subBag = GetOrAdd(name);
+            bag.AddSubBag(subBag, quantity);
         }
     }
 
@@ -64,7 +64,7 @@ public class LuggageProcessor
         return count;
     }
 
-    private bool CanContainGoldenBag(Bag bag)
+    private static bool CanContainGoldenBag(Bag bag)
     {
         foreach (var subBag in bag.SubBags)
         {
@@ -78,11 +78,7 @@ public class LuggageProcessor
         return false;
     }
 
-    public int NumberOfBagsThatAGoldBagContains()
-    {
-        var goldBag = _bags["shiny gold"];
-        return GetSubBagCount(goldBag);
-    }
+    public int NumberOfBagsThatAGoldBagContains() => GetSubBagCount(_bags["shiny gold"]);
 
     private int GetSubBagCount(Bag bag)
     {

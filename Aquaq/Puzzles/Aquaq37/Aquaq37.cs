@@ -19,11 +19,11 @@ public class Aquaq37 : AquaqPuzzle
 
     public List<string> FindWords(string input, string additionalInput)
     {
-        var words = StringReader.ReadLines(additionalInput)
+        var words = additionalInput.Split(LineBreaks.Single)
             .Where(o => o.Length == WordLength)
             .ToList();
 
-        var guesses = StringReader.ReadLines(input)
+        var guesses = input.Split(LineBreaks.Single)
             .Skip(1)
             .Select(ParseGuess)
             .ToList();
@@ -66,25 +66,18 @@ public class Aquaq37 : AquaqPuzzle
 
     public static int GetWordScore(string word) => word.Select(o => o - 'a').Sum();
 
-    public class Guess
+    public class Guess(string word, int[] result)
     {
-        public string Word { get; }
-        private readonly int[] _result;
-
-        public Guess(string word, int[] result)
-        {
-            Word = word;
-            _result = result;
-        }
+        public string Word { get; } = word;
 
         public bool IsMatch(string other)
         {
             for (var i = 0; i < WordLength; i++)
             {
-                var result = _result[i];
+                var result1 = result[i];
                 var wordChar = Word[i];
                 var otherChar = other[i];
-                switch (result)
+                switch (result1)
                 {
                     case 2 when wordChar != otherChar:
                     case 0 or 1 when wordChar == otherChar:
@@ -97,16 +90,16 @@ public class Aquaq37 : AquaqPuzzle
             var remainingChars = new List<char>();
             for (var i = 0; i < WordLength; i++)
             {
-                var result = _result[i];
+                var result1 = result[i];
                 var wordChar = Word[i];
                 var otherChar = other[i];
-                if (result is 0 or 1)
+                if (result1 is 0 or 1)
                     remainingChars.Add(otherChar);
 
-                if (result == 1)
+                if (result1 == 1)
                     possibleChars.Add(wordChar);
 
-                if (result == 0)
+                if (result1 == 0)
                     blockedChars.Add(wordChar);
             }
 

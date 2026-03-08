@@ -7,18 +7,14 @@ namespace Pzl.Aquaq.Puzzles.Aquaq10;
 [Name("Troll Toll")]
 public class Aquaq10 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
-    {
-        var result = Run(input, "TUPAC", "DIDDY");
-
-        return new PuzzleResult(result, "970a7dc35bbbeae207c821cbc8bbb930");
-    }
+    public PuzzleResult Run(string input) => new(Run(input, "TUPAC", "DIDDY"), "970a7dc35bbbeae207c821cbc8bbb930");
 
     public static int Run(string input, string source, string target)
     {
-        var graphInput = StringReader.ReadLines(input)
+        var graphInput = input.Split(LineBreaks.Single)
             .Skip(1)
-            .Select(ParseGraphInput).ToList();
+            .Select(ParseGraphInput)
+            .ToList();
 
         return Dijkstra.BestCost(graphInput, source, target);
     }

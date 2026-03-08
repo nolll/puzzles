@@ -13,7 +13,7 @@ public class Aquaq17 : AquaqPuzzle
 
     public static string RunInternal(string input)
     {
-        var lines = StringReader.ReadLines(input).Skip(1);
+        var lines = input.Split(LineBreaks.Single).Skip(1);
 
         var scoreList = new List<TeamScore>();
 
@@ -40,11 +40,8 @@ public class Aquaq17 : AquaqPuzzle
         return $"{longestShame.Team} {firstGoalDate} {lastGoalDate}";
     }
 
-    private static TeamShame FindLongestShame(Dictionary<string, List<TeamScore>> teamScores)
-    {
-        var teamShames = teamScores.Select(o => FindLongestShame(o.Value));
-        return teamShames.OrderByDescending(o => o.To - o.From).First();
-    }
+    private static TeamShame FindLongestShame(Dictionary<string, List<TeamScore>> teamScores) => 
+        teamScores.Select(o => FindLongestShame(o.Value)).OrderByDescending(o => o.To - o.From).First();
 
     private static TeamShame FindLongestShame(List<TeamScore> teamScores)
     {

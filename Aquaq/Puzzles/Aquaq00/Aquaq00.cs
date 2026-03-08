@@ -8,7 +8,7 @@ public class Aquaq00 : AquaqPuzzle
 {
     public PuzzleResult Run(string input)
     {
-        var keyPresses = StringReader.ReadLines(input)
+        var keyPresses = input.Split(LineBreaks.Single)
             .Select(o => o.Trim().Split(' ').ToArray())
             .Select(o => (int.Parse(o[0]), int.Parse(o[1])));
 

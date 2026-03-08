@@ -7,7 +7,7 @@ public class LavaCubes
 {
     public int Part1(string input)
     {
-        var cubes = StringReader.ReadLines(input)
+        var cubes = input.Split(LineBreaks.Single)
             .Select(o => o.Split(',').ToArray())
             .Select(o => new Cube(int.Parse(o[0]), int.Parse(o[1]), int.Parse(o[2])))
             .ToList();
@@ -27,7 +27,7 @@ public class LavaCubes
     {
         const int padding = 1;
 
-        var cubes = StringReader.ReadLines(input)
+        var cubes = input.Split(LineBreaks.Single)
             .Select(o => o.Split(',').ToArray())
             .Select(o => new Cube(int.Parse(o[0]) + padding, int.Parse(o[1]) + padding, int.Parse(o[2]) + padding))
             .ToList();

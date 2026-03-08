@@ -8,19 +8,12 @@ public class PassportProcessor
 
     public PassportProcessor(string input)
     {
-        var rows = StringReader.ReadLines(input.Replace(LineBreaks.Double, "--").Replace(LineBreaks.Single, " ").Replace("--", LineBreaks.Single));
+        var rows = input.Replace(LineBreaks.Double, "--").Replace(LineBreaks.Single, " ").Replace("--", LineBreaks.Single).Split(LineBreaks.Single);
         _passports = rows.Select(o => new Passport(o.Trim())).ToList();
     }
 
-    public int GetNumberOfPassportsThatHasAllFields()
-    {
-        return _passports.Count(o => o.HasAllFields());
-    }
-
-    public int GetNumberOfValidPassports()
-    {
-        return _passports.Count(o => o.IsValid());
-    }
+    public int GetNumberOfPassportsThatHasAllFields() => _passports.Count(o => o.HasAllFields());
+    public int GetNumberOfValidPassports() => _passports.Count(o => o.IsValid());
 
     public class Passport
     {
@@ -47,54 +40,40 @@ public class PassportProcessor
             }
         }
 
-        private string? GetValue(string key)
-        {
-            return _props.TryGetValue(key, out var value)
-                ? value
-                : null;
-        }
+        private string? GetValue(string key) => _props.TryGetValue(key, out var value)
+            ? value
+            : null;
 
-        public bool HasAllFields()
-        {
-            return GetValue(BirthYear) != null &&
-                   GetValue(IssueYear) != null &&
-                   GetValue(ExpirationYear) != null &&
-                   GetValue(Height) != null &&
-                   GetValue(HairColor) != null &&
-                   GetValue(EyeColor) != null &&
-                   GetValue(PassportId) != null;
-        }
+        public bool HasAllFields() =>
+            GetValue(BirthYear) != null &&
+            GetValue(IssueYear) != null &&
+            GetValue(ExpirationYear) != null &&
+            GetValue(Height) != null &&
+            GetValue(HairColor) != null &&
+            GetValue(EyeColor) != null &&
+            GetValue(PassportId) != null;
 
-        public bool IsValid()
-        {
-            return IsBirthYearValid &&
-                   IsIssueYearValid &&
-                   IsExpirationYearValid &&
-                   IsHeightValid &&
-                   IsHairColorValid &&
-                   IsEyeColorValid &&
-                   IsPassportIdValid;
-        }
+        public bool IsValid() =>
+            IsBirthYearValid &&
+            IsIssueYearValid &&
+            IsExpirationYearValid &&
+            IsHeightValid &&
+            IsHairColorValid &&
+            IsEyeColorValid &&
+            IsPassportIdValid;
 
         private bool IsBirthYearValid => IsIntBetween(GetValue(BirthYear), 1920, 2002);
         private bool IsIssueYearValid => IsIntBetween(GetValue(IssueYear), 2010, 2020);
         private bool IsExpirationYearValid => IsIntBetween(GetValue(ExpirationYear), 2020, 2030);
 
-        private bool IsEyeColorValid
-        {
-            get
-            {
-                var v = GetValue(EyeColor);
-                return v is "amb" or "blu" or "brn" or "gry" or "grn" or "hzl" or "oth";
-            }
-        }
+        private bool IsEyeColorValid => GetValue(EyeColor) is "amb" or "blu" or "brn" or "gry" or "grn" or "hzl" or "oth";
 
         private bool IsPassportIdValid
         {
             get
             {
                 var v = GetValue(PassportId);
-                return v != null && v.Length == 9 && IsDigitsOnly(v);
+                return v is { Length: 9 } && IsDigitsOnly(v);
             }
         }
 
@@ -145,7 +124,7 @@ public class PassportProcessor
             }
         }
             
-        private bool IsIntBetween(string? s, int from, int to)
+        private static bool IsIntBetween(string? s, int from, int to)
         {
             if (s == null)
                 return false;
@@ -157,29 +136,10 @@ public class PassportProcessor
             return v >= from && v <= to;
         }
 
-        private static bool IsDigitsOnly(string? s)
-        {
-            return s != null && s.All(IsDigit);
-        }
-
-        private static bool IsHexCharsOnly(string s)
-        {
-            return s != null && s.All(IsHexChar);
-        }
-
-        private static bool IsDigit(char c)
-        {
-            return IsBetween(c, '0', '9');
-        }
-
-        private static bool IsHexChar(char c)
-        {
-            return IsDigit(c) || IsBetween(c, 'a', 'f');
-        }
-
-        private static bool IsBetween(char c, char from, char to)
-        {
-            return c >= from && c <= to;
-        }
+        private static bool IsDigitsOnly(string? s) => s != null && s.All(IsDigit);
+        private static bool IsHexCharsOnly(string s) => s.All(IsHexChar);
+        private static bool IsDigit(char c) => IsBetween(c, '0', '9');
+        private static bool IsHexChar(char c) => IsDigit(c) || IsBetween(c, 'a', 'f');
+        private static bool IsBetween(char c, char from, char to) => c >= from && c <= to;
     }
 }

@@ -47,7 +47,7 @@ public class OpComputer
 
     public long RunInstructionPointerProgram(string programInput, long register0Value, bool useOptimization, bool debug)
     {
-        var inputRows = StringReader.ReadLines(programInput);
+        var inputRows = programInput.Split(LineBreaks.Single);
         var pointerRegister = int.Parse(inputRows.First().Split(' ').Last());
         var commands = inputRows.Skip(1).Select(ParseStringCommand).ToList();
         var registers = new[] { register0Value, 0, 0, 0, 0, 0 };
@@ -85,7 +85,7 @@ public class OpComputer
     {
         long lastRegisterZeroValue = 0;
         var registerZeroValues = new HashSet<long>();
-        var inputRows = StringReader.ReadLines(programInput);
+        var inputRows = programInput.Split(LineBreaks.Single);
         var pointerRegister = int.Parse(inputRows.First().Split(' ').Last());
         var commands = inputRows.Skip(1).Select(ParseStringCommand).ToList();
         var registers = new[] { register0Value, 0, 0, 0, 0, 0 };
@@ -150,17 +150,13 @@ public class OpComputer
         return operations;
     }
 
-    public int InputsMatchingThreeOrMore(string input)
-    {
-        var matchingOperations = MapMatchingOperations(input);
-        return matchingOperations.Count(o => o.Operations.Count >= 3);
-    }
+    public int InputsMatchingThreeOrMore(string input) => MapMatchingOperations(input).Count(o => o.Operations.Count >= 3);
 
     private IList<OperationMatch> MapMatchingOperations(string input)
     {
-        var rows = StringReader.ReadLines(input.Replace(":", "").Replace("[", "").Replace("]", "").Replace(",", ""));
-        var before = new long[0];
-        var command = new int[0];
+        var rows = input.Replace(":", "").Replace("[", "").Replace("]", "").Replace(",", "").Split(LineBreaks.Single);
+        long[] before = [];
+        int[] command = [];
         var matchingOperations = new List<OperationMatch>();
         foreach (var row in rows)
         {

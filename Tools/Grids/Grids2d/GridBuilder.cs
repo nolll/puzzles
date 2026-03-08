@@ -6,13 +6,13 @@ public static class GridBuilder
 {
     public static Grid<char> BuildCharGrid(string input, char defaultValue = default)
     {
-        var rows = StringReader.ReadLines(input.Trim()).Select(o => o.Trim()).ToArray();
+        var rows = input.Trim().Split(LineBreaks.Single).Select(o => o.Trim()).ToArray();
         return BuildCharGrid(new Grid<char>(1, 1, defaultValue), rows);
     }
 
     public static Grid<char> BuildCharGridWithoutTrim(string input, char defaultValue = default)
     {
-        var rows = StringReader.ReadLines(input).ToArray();
+        var rows = input.Split(LineBreaks.Single);
         return BuildCharGridWithoutTrim(new Grid<char>(1, 1, defaultValue), rows);
     }
 
@@ -59,7 +59,7 @@ public static class GridBuilder
     public static Grid<int> BuildIntGridFromSpaceSeparated(string input, int defaultValue = default)
     {
         var grid = new Grid<int>(1, 1, defaultValue);
-        var rows = StringReader.ReadLines(input.Trim());
+        var rows = input.Trim().Split(LineBreaks.Single);
         var y = 0;
         foreach (var row in rows)
         {
@@ -86,7 +86,7 @@ public static class GridBuilder
 
     private static Grid<int> BuildIntGridFromNonSeparated(Grid<int> grid, string input)
     {
-        var rows = StringReader.ReadLines(input.Trim());
+        var rows = input.Trim().Split(LineBreaks.Single);
         var y = 0;
         foreach (var row in rows)
         {
@@ -107,9 +107,9 @@ public static class GridBuilder
 
     private static (int w, int h) GetNonSeparatedSize(string input)
     {
-        var rows = StringReader.ReadLines(input.Trim());
+        var rows = input.Trim().Split(LineBreaks.Single);
         var w = rows.First().Trim().Length;
-        var h = rows.Count();
+        var h = rows.Length;
         return (w, h);
     }
 }

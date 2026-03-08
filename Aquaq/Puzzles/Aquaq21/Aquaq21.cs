@@ -14,7 +14,7 @@ public class Aquaq21 : AquaqPuzzle
 
     public static int Run(string input, int width)
     {
-        var lines = StringReader.ReadLines(input);
+        var lines = input.Split(LineBreaks.Single);
         var rows = lines.Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();
 
         var edges = new List<GraphEdge>();

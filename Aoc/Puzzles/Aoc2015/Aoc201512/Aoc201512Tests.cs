@@ -11,10 +11,5 @@ public class Aoc201512Tests
     [InlineData("[-1,{\"a\":1}]", 0)]
     [InlineData("[]", 0)]
     [InlineData("{}", 0)]
-    public void CalculatesTheSumOfAllNumbers(string input, int expected)
-    {
-        var doc = new JsonDoc(input, true);
-
-        doc.Sum.Should().Be(expected);
-    }
+    public void CalculatesTheSumOfAllNumbers(string input, int expected) => new JsonDoc(input, true).Sum.Should().Be(expected);
 }

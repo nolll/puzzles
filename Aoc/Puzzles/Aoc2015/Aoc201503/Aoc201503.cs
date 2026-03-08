@@ -5,19 +5,21 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201503;
 [Name("Perfectly Spherical Houses in a Vacuum")]
 public class Aoc201503 : AocPuzzle
 {
-    public PuzzleResult Part1(string input)
+    [Puzzle("68e2d15877e8590fe0285bff9141a8cf")]
+    public int Part1(string input)
     {
         var grid = new DeliveryGrid();
         grid.DeliverBySanta(input);
             
-        return new PuzzleResult(grid.SantaDeliveryCount, "68e2d15877e8590fe0285bff9141a8cf");
+        return grid.SantaDeliveryCount;
     }
 
-    public PuzzleResult Part2(string input)
+    [Puzzle("7d063c75c9ee4f2a8fe2d97228a36f79")]
+    public int Part2(string input)
     {
         var grid = new DeliveryGrid();
         grid.DeliverBySantaAndRobot(input);
             
-        return new PuzzleResult(grid.SantaDeliveryCount, "7d063c75c9ee4f2a8fe2d97228a36f79");
+        return grid.SantaDeliveryCount;
     }
 }

@@ -7,19 +7,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201502;
 [Name("I Was Told There Would Be No Math")]
 public class Aoc201502 : AocPuzzle
 {
-    public PuzzleResult Part1(string input)
-    {
-        var paperResult = GetRequiredPaper(input);
-        return new PuzzleResult(paperResult, "dfdf9c79dfad493d6417a9a284a9670b");
-    }
+    [Puzzle("dfdf9c79dfad493d6417a9a284a9670b")]
+    public int Part1(string input) => GetRequiredPaper(input);
 
-    public PuzzleResult Part2(string input)
-    {
-        var ribbonResult = GetRequiredRibbon(input);
-        return new PuzzleResult(ribbonResult, "385d3372d91329e3166413c1cb3126d5");
-    }
+    [Puzzle("385d3372d91329e3166413c1cb3126d5")]
+    public int Part2(string input) => GetRequiredRibbon(input);
 
-    public int GetRequiredPaper(string input) => 
+    private int GetRequiredPaper(string input) => 
         input.Split(LineBreaks.Single).Sum(GetRequiredPaperForOneBox);
 
     public int GetRequiredPaperForOneBox(string input)
@@ -35,7 +29,7 @@ public class Aoc201502 : AocPuzzle
         return sides[0] * 3 + sides[1] * 2 + sides[2] * 2;
     }
 
-    public int GetRequiredRibbon(string input) => 
+    private int GetRequiredRibbon(string input) => 
         input.Split(LineBreaks.Single).Sum(GetRequiredRibbonForOneBox);
 
     public int GetRequiredRibbonForOneBox(string input)

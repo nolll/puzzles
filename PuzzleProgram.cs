@@ -18,15 +18,20 @@ namespace Pzl.Client;
 
 public class PuzzleProgram
 {
+    private readonly Options _options;
     private readonly PuzzleRepository _puzzleRepository;
     private readonly HelpPrinter _helpPrinter;
-    private readonly PuzzleRunner _runner;
     private readonly ParameterProvider _parameterProvider;
+    private readonly PuzzleFactory _puzzleFactory;
+    private readonly ResultVerifier _resultVerifier;
+    private readonly RunMode _runMode;
 
     public PuzzleProgram(Options options)
     {
-        var puzzleProviders = new List<IPuzzleProvider>
-        {
+        _options = options;
+        
+        IPuzzleProvider[] puzzleProviders =
+        [
             new AocPuzzleProvider(),
             new AquaqPuzzleProvider(),
             new CodyssiPuzzleProvider(),
@@ -34,17 +39,16 @@ public class PuzzleProgram
             new EverybodyEventPuzzleProvider(),
             new EverybodyStoryPuzzleProvider(),
             new FlipFlopPuzzleProvider()
-        };
+        ];
 
         var fileReader = new FileReader();
-        var puzzleFactory = new PuzzleFactory(fileReader);
+        _puzzleFactory = new PuzzleFactory(fileReader);
         var hashFactory = new HashFactory();
-        var resultVerifier = new ResultVerifier(hashFactory, options.HashSeed);
-        var runMode = new RunMode();
-        _parameterProvider = new ParameterProvider(runMode, options.DebugTags);
+        _resultVerifier = new ResultVerifier(hashFactory, options.HashSeed);
+        _runMode = new RunMode();
+        _parameterProvider = new ParameterProvider(_runMode, options.DebugTags);
         _puzzleRepository = new PuzzleRepository(puzzleProviders);
         _helpPrinter = new HelpPrinter();
-        _runner = new PuzzleRunner(puzzleFactory, resultVerifier, options.TimeoutSeconds, runMode);
     }
 
     public void Run(IEnumerable<string> args) => Run(_parameterProvider.GetParameters(args));
@@ -65,8 +69,16 @@ public class PuzzleProgram
     {
         var puzzles = _puzzleRepository.GetPuzzles();
         var filteredPuzzles = new PuzzleFilter(parameters).Filter(puzzles).ToList();
-        _runner.Run(filteredPuzzles);
+        var runFunc = GetRunFunc(filteredPuzzles);
+        runFunc();
     }
+    
+    private Action GetRunFunc(List<PuzzleDefinition> puzzles) => puzzles.Count switch
+    {
+        0 => () => AnsiConsole.WriteLine("No puzzles found."),
+        1 => () => new StandaloneSinglePuzzleRunner(_puzzleFactory, _resultVerifier, puzzles.First(), _runMode).Run(),
+        _ => () => new MultiPuzzleRunner(_puzzleFactory, _resultVerifier, puzzles, _options.TimeoutSeconds).Run()
+    };
 
     private void Search(string query)
     {
@@ -89,5 +101,5 @@ public class ParameterProvider(RunMode runMode, string debugTags)
             ? DebugParameters
             : Parameters.Parse(args);
 
-    private Parameters DebugParameters => new(tags: debugTags.Split(',').ToArray());
+    private Parameters DebugParameters => new(tags: debugTags.Split(','));
 }

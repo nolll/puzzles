@@ -43,3 +43,9 @@ public class AdditionalLocalInputFileAttribute(string fileName) : Attribute
 {
     public string FileName { get; } = fileName;
 }
+
+[AttributeUsage(AttributeTargets.Method)]
+public class PuzzleAttribute(string? hash = null) : Attribute
+{
+    public string? Hash { get; } = hash;
+}

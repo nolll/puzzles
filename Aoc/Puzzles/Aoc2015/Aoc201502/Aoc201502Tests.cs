@@ -14,7 +14,7 @@ public class Aoc201502Tests
         Sut.GetRequiredPaperForOneBox(input).Should().Be(expected);
 
     [Fact]
-    public void CorrectSquareFeetForMultipleGifts() => Sut.Part1(MultipleInput).Answer.Should().Be("101");
+    public void CorrectSquareFeetForMultipleGifts() => Sut.Part1(MultipleInput).Should().Be(101);
 
     [Theory]
     [InlineData("2x3x4", 34)]
@@ -23,7 +23,7 @@ public class Aoc201502Tests
         Sut.GetRequiredRibbonForOneBox(input).Should().Be(expected);
 
     [Fact]
-    public void CorrectRibbonLengthForMultipleGifts() => Sut.Part2(MultipleInput).Answer.Should().Be("48");
+    public void CorrectRibbonLengthForMultipleGifts() => Sut.Part2(MultipleInput).Should().Be(48);
 
     private static Aoc201502 Sut => new();
 }

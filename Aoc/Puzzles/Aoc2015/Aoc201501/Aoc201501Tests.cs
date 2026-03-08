@@ -12,12 +12,12 @@ public class Aoc201501Tests
     [InlineData("))(", -1)]
     [InlineData(")))", -3)]
     [InlineData(")())())", -3)]
-    public void Part1(string input, int expected) => Sut.Part1(input).Answer.Should().Be(expected.ToString());
+    public void Part1(string input, int expected) => Sut.Part1(input).Should().Be(expected);
 
     [Theory]
     [InlineData(")", 1)]
     [InlineData("()())", 5)]
-    public void Part2(string input, int expected) => Sut.Part2(input).Answer.Should().Be(expected.ToString());
+    public void Part2(string input, int expected) => Sut.Part2(input).Should().Be(expected);
     
     private static Aoc201501 Sut => new();
 }

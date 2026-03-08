@@ -16,8 +16,6 @@ public class StandaloneSinglePuzzleRunner(
     RunMode runMode)
     : SinglePuzzleRunner
 {
-    private const int StatusPadding = 15;
-
     public void Run()
     {
         if(runMode.IsDebug)
@@ -59,13 +57,14 @@ public class StandaloneSinglePuzzleRunner(
 
     private static void WriteHeader(PuzzleDefinition puzzle)
     {
-        AnsiConsole.WriteLine($"{puzzle.Title}");
+        var title = string.IsNullOrEmpty(puzzle.Name)
+            ? puzzle.Name
+            : $"{puzzle.Title}: {puzzle.Name}";
         
-        if (!string.IsNullOrEmpty(puzzle.Name))
-            AnsiConsole.WriteLine(puzzle.Name);
+        AnsiConsole.MarkupLine($"[DarkTurquoise]{title}[/]");
         
         if (puzzle.Comment is not null)
-            AnsiConsole.MarkupLine($"[yellow]{puzzle.Comment}[/]");
+            AnsiConsole.MarkupLine($"[Yellow]{puzzle.Comment}[/]");
     }
     
     private void RunAndPrintPuzzleResult(int puzzleIndex, PuzzleFunction func)

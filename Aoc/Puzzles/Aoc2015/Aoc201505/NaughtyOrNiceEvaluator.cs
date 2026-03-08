@@ -6,8 +6,8 @@ public abstract class NaughtyOrNiceEvaluator
 {
     private const string Vowels = "aeiou";
 
-    public static int GetNiceCount1(string input) => StringReader.ReadLines(input).Count(IsNice1);
-    public static int GetNiceCount2(string input) => StringReader.ReadLines(input).Count(IsNice2);
+    public static int GetNiceCount1(string input) => input.Split(LineBreaks.Single).Count(IsNice1);
+    public static int GetNiceCount2(string input) => input.Split(LineBreaks.Single).Count(IsNice2);
 
     public static bool IsNice1(string input)
     {

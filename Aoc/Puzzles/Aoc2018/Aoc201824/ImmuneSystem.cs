@@ -3,11 +3,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201824;
 
-public class ImmuneSystem
+public partial class ImmuneSystem(string immuneInput, string infectionInput)
 {
-    private readonly string _immuneInput;
-    private readonly string _infectionInput;
-    private readonly Regex _regex = new Regex(@"^(\d+) units each with (\d+) hit points( \(.+\) | )with an attack that does (\d+) (.+) damage at initiative (\d+)$");
+    private readonly Regex _regex = ParseRegex();
     private IDictionary<string, ImmuneSystemGroup> _groups = new Dictionary<string, ImmuneSystemGroup>();
     private IDictionary<string, string> _targets = new Dictionary<string, string>();
     private bool _fightIsActive;
@@ -16,18 +14,12 @@ public class ImmuneSystem
     public IList<ImmuneSystemGroup> InfectionGroups => _groups.Values.Where(o => o.Army == ImmuneSystemArmy.Infection).ToList();
     public int WinningArmyUnitCount => _groups.Values.Sum(o => o.UnitCount);
 
-    public ImmuneSystem(string immuneInput, string infectionInput)
-    {
-        _immuneInput = immuneInput;
-        _infectionInput = infectionInput;
-    }
-
     private void Reset(int boost)
     {
         _groups = new Dictionary<string, ImmuneSystemGroup>();
         _targets = new Dictionary<string, string>();
-        ParseGroups(ImmuneSystemArmy.Immune, _immuneInput, boost);
-        ParseGroups(ImmuneSystemArmy.Infection, _infectionInput, 0);
+        ParseGroups(ImmuneSystemArmy.Immune, immuneInput, boost);
+        ParseGroups(ImmuneSystemArmy.Infection, infectionInput, 0);
     }
 
     public void Fight(int boost = 0)
@@ -70,16 +62,16 @@ public class ImmuneSystem
                 .Where(o => o.Item2 > 0)
                 .ToList();
 
-            if (targetsWithDamages.Any())
-            {
-                var target = targetsWithDamages
-                    .OrderByDescending(o => o.Item2)
-                    .ThenByDescending(o => o.Item1.EffectivePower)
-                    .ThenByDescending(o => o.Item1.Initiative)
-                    .First().Item1;
+            if (targetsWithDamages.Count == 0)
+                continue;
+            
+            var target = targetsWithDamages
+                .OrderByDescending(o => o.Item2)
+                .ThenByDescending(o => o.Item1.EffectivePower)
+                .ThenByDescending(o => o.Item1.Initiative)
+                .First().Item1;
 
-                _targets.Add(group.Id, target.Id);
-            }
+            _targets.Add(group.Id, target.Id);
         }
     }
 
@@ -111,7 +103,7 @@ public class ImmuneSystem
 
     private void ParseGroups(ImmuneSystemArmy army, string s, int boost)
     {
-        var rows = StringReader.ReadLines(s).Skip(1);
+        var rows = s.Split(LineBreaks.Single).Skip(1);
         var counter = 0;
         foreach (var row in rows)
         {
@@ -153,4 +145,7 @@ public class ImmuneSystem
         }
         return (immunities, weaknesses);
     }
+
+    [GeneratedRegex(@"^(\d+) units each with (\d+) hit points( \(.+\) | )with an attack that does (\d+) (.+) damage at initiative (\d+)$")]
+    private static partial Regex ParseRegex();
 }

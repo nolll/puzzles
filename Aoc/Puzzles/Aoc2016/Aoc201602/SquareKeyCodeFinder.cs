@@ -42,5 +42,5 @@ public class SquareKeyCodeFinder
     }
 
     private static IList<char[]> ParseCommands(string input) => 
-        StringReader.ReadLines(input).Select(o => o.ToCharArray()).ToList();
+        input.Split(LineBreaks.Single).Select(o => o.ToCharArray()).ToList();
 }

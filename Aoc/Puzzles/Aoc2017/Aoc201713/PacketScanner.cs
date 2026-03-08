@@ -2,14 +2,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201713;
 
-public class PacketScanner
+public class PacketScanner(string input)
 {
-    private IList<FirewallLayer> _layers;
-
-    public PacketScanner(string input)
-    {
-        _layers = ParseLayers(input);
-    }
+    private readonly IList<FirewallLayer> _layers = ParseLayers(input);
 
     public int GetSeverity()
     {
@@ -56,10 +51,10 @@ public class PacketScanner
         return false;
     }
 
-    private IList<FirewallLayer> ParseLayers(string input)
+    private static IList<FirewallLayer> ParseLayers(string input)
     {
         var dictionary = new Dictionary<int, FirewallLayer>();
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         foreach (var row in rows)
         {
             var parts = row.Split(": ");
@@ -73,14 +68,10 @@ public class PacketScanner
         var layers = new List<FirewallLayer>();
         for (var i = 0; i <= lastIndex; i++)
         {
-            if (dictionary.ContainsKey(i))
-            {
-                layers.Add(dictionary[i]);
-            }
-            else
-            {
-                layers.Add(new FirewallLayer());
-            }
+            var layer = dictionary.TryGetValue(i, out var value)
+                ? value
+                : new FirewallLayer();
+            layers.Add(layer);
         }
             
         return layers;

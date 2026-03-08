@@ -21,7 +21,7 @@ public class ChristmasLightsController(int size = 1000)
     }
 
     private static IEnumerable<Command> ParseCommands(string input, bool useBrightness) => 
-        StringReader.ReadLines(input).Select(o => CreateCommand(o, useBrightness)).ToList();
+        input.Split(LineBreaks.Single).Select(o => CreateCommand(o, useBrightness)).ToList();
 
     private static Command CreateCommand(string s, bool useBrightness)
     {

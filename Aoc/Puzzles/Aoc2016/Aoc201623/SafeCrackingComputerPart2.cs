@@ -11,7 +11,7 @@ public class SafeCrackingComputerPart2
 
     public SafeCrackingComputerPart2(string input, int a, int c)
     {
-        var instructions = StringReader.ReadLines(input).Select(o => new AssembunnyInstruction(o)).ToArray();
+        var instructions = input.Split(LineBreaks.Single).Select(o => new AssembunnyInstruction(o)).ToArray();
         _registers = new Dictionary<char, int>
         {
             ['a'] = a,

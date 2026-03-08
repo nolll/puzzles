@@ -20,9 +20,9 @@ public class Circuit(string input)
         return Wires[readKey].Signal;
     }
 
-    private IDictionary<string, Wire> GetWires(string input)
+    private static IDictionary<string, Wire> GetWires(string input)
     {
-        var strings = StringReader.ReadLines(input);
+        var strings = input.Split(LineBreaks.Single);
         var wires = new Dictionary<string, Wire>();
         foreach (var s in strings)
         {

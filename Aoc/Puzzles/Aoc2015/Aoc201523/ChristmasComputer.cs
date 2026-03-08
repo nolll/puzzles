@@ -14,9 +14,9 @@ public class ChristmasComputer
         _registers['a'] = a;
         _registers['b'] = 0;
 
-        var instructions = StringReader.ReadLines(program);
+        var instructions = program.Split(LineBreaks.Single);
         var pointer = 0;
-        while (pointer >= 0 && pointer < instructions.Count)
+        while (pointer >= 0 && pointer < instructions.Length)
         {
             var instruction = instructions[pointer];
             var parts = instruction.Split(' ');

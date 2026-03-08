@@ -2,22 +2,13 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201825;
 
-public class ConstellationFinder
+public class ConstellationFinder(string input)
 {
-    private readonly IList<Point4d> _points;
+    private readonly IList<Point4d> _points = ParsePoints(input);
 
-    public ConstellationFinder(string input)
-    {
-        _points = ParsePoints(input);
-    }
-
-    private IList<Point4d> ParsePoints(string input)
-    {
-        var rows = StringReader.ReadLines(input);
-        return rows.Select(ParsePoint).ToList();
-    }
-
-    private Point4d ParsePoint(string s)
+    private static IList<Point4d> ParsePoints(string input) => input.Split(LineBreaks.Single).Select(ParsePoint).ToList();
+    
+    private static Point4d ParsePoint(string s)
     {
         var coords = s.Trim().Split(',').Select(int.Parse).ToList();
         return new Point4d(coords[0], coords[1], coords[2], coords[3]);

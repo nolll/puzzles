@@ -74,9 +74,9 @@ public class SleighAssembler
         return c - 'A' + 1 + _timeOffset;
     }
 
-    private IDictionary<string, SleighStep> GetSteps(string input)
+    private static IDictionary<string, SleighStep> GetSteps(string input)
     {
-        var instructions = StringReader.ReadLines(input);
+        var instructions = input.Split(LineBreaks.Single);
         var steps = new Dictionary<string, SleighStep>();
         foreach (var instruction in instructions)
         {

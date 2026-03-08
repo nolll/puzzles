@@ -51,7 +51,6 @@ public class CookieBakery
     private static int GetCalories(IList<CookieIngredient> ingredients, List<int> percentages)
     {
         var calories = ingredients.Select((t, i) => percentages[i] * t.Calories).Sum();
-
         return calories > 0 ? calories : 0;
     }
 
@@ -92,7 +91,7 @@ public class CookieBakery
     }
 
     private static IList<CookieIngredient> ParseIngredients(string input) => 
-        StringReader.ReadLines(input).Select(ParseIngredient).ToList();
+        input.Split(LineBreaks.Single).Select(ParseIngredient).ToList();
 
     private static CookieIngredient ParseIngredient(string s)
     {

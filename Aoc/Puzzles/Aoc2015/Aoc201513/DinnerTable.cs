@@ -38,7 +38,7 @@ public class DinnerTable
 
     private static IDictionary<string, DinnerGuest> ParseGuests(string input, bool includeMe)
     {
-        var rules = StringReader.ReadLines(input);
+        var rules = input.Split(LineBreaks.Single);
         var guests = new Dictionary<string, DinnerGuest>();
 
         if (includeMe) 

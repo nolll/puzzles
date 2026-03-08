@@ -4,9 +4,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201622;
 
-public class StorageGrid
+public partial class StorageGrid
 {
-    private readonly Regex _whiteSpaceRegex = new("[ ]{2,}", RegexOptions.None);
+    private readonly Regex _whiteSpaceRegex = WhitespaceRegex();
     private readonly Grid<StorageNode> _storage;
 
     public StorageGrid(string input)
@@ -81,7 +81,7 @@ public class StorageGrid
 
     private Grid<StorageNode> ParseGrid(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         var dataRows = rows.Skip(2);
         var grid = new Grid<StorageNode>();
 
@@ -105,8 +105,7 @@ public class StorageGrid
         return grid;
     }
 
-    private string RemoveExtraSpaces(string s)
-    {
-        return _whiteSpaceRegex.Replace(s, " ");
-    }
+    private string RemoveExtraSpaces(string s) => _whiteSpaceRegex.Replace(s, " ");
+    [GeneratedRegex("[ ]{2,}", RegexOptions.None)]
+    private static partial Regex WhitespaceRegex();
 }

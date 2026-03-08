@@ -8,7 +8,7 @@ public class Aoc201903 : AocPuzzle
 {
     public PuzzleResult RunPart1(string input)
     {
-        var wirePaths = StringReader.ReadLines(input);
+        var wirePaths = input.Split(LineBreaks.Single);
         var wirePathA = wirePaths[0];
         var wirePathB = wirePaths[1];
 
@@ -19,7 +19,7 @@ public class Aoc201903 : AocPuzzle
 
     public PuzzleResult RunPart2(string input)
     {
-        var wirePaths = StringReader.ReadLines(input);
+        var wirePaths = input.Split(LineBreaks.Single);
         var wirePathA = wirePaths[0];
         var wirePathB = wirePaths[1];
 

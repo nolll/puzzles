@@ -11,10 +11,10 @@ public class ParticleTracker
     {
         Particles = ReadData(map);
     }
-
+    
     private IList<Particle> ReadData(string data)
     {
-        var rows = StringReader.ReadLines(data);
+        var rows = data.Split(LineBreaks.Single);
         var particles = new List<Particle>();
         var id = 0;
         foreach (var row in rows)
@@ -30,13 +30,10 @@ public class ParticleTracker
         return particles;
     }
 
-    private int[] ReadValues(string s)
-    {
-        return s.TrimEnd('>').Split('<')[1]
-            .Split(',')
-            .Select(int.Parse)
-            .ToArray();
-    }
+    private static int[] ReadValues(string s) => s.TrimEnd('>').Split('<')[1]
+        .Split(',')
+        .Select(int.Parse)
+        .ToArray();
 
     public void Run(int maxIterations)
     {
@@ -53,28 +50,17 @@ public class ParticleTracker
         while (_iterations < maxIterations)
         {
             Run();
-
-            var particles = new List<Particle>();
-            foreach (var particle in Particles)
-            {
-                if (Particles.Count(o => o.IsColliding(particle)) == 1)
-                    particles.Add(particle);
-            }
-
+            var particles = Particles.Where(particle => Particles.Count(o => o.IsColliding(particle)) == 1).ToList();
             Particles = particles;
-
             _iterations++;
         }
 
         return Particles.Count;
     }
 
-    public int GetClosestParticleInTheLongRunSimple()
-    {
-        return Particles
-            .OrderBy(o => Math.Abs(o.Ax) + Math.Abs(o.Ay) + Math.Abs(o.Az))
-            .First().Id;
-    }
+    public int GetClosestParticleInTheLongRunSimple() => Particles
+        .OrderBy(o => Math.Abs(o.Ax) + Math.Abs(o.Ay) + Math.Abs(o.Az))
+        .First().Id;
 
     private void Run()
     {

@@ -6,13 +6,12 @@ public class SafeCrackingComputerPart1
 {
     private readonly Dictionary<char, int> _registers;
     private int _index;
-    private readonly string[] _instructions;
 
     public int ValueA => _registers['a'];
 
     public SafeCrackingComputerPart1(string input, int a, int c)
     {
-        _instructions = StringReader.ReadLines(input).ToArray();
+        var instructions = input.Split(LineBreaks.Single);
         _registers = new Dictionary<char, int>
         {
             ['a'] = a,
@@ -22,9 +21,9 @@ public class SafeCrackingComputerPart1
         };
         _index = 0;
 
-        while (_index < _instructions.Length)
+        while (_index < instructions.Length)
         {
-            var s = _instructions[_index];
+            var s = instructions[_index];
             //Console.WriteLine($"{_index}. {s}");
             var parts = s.Split(' ');
             var command = parts[0];
@@ -35,13 +34,9 @@ public class SafeCrackingComputerPart1
                     var value = parts[1];
                     var target = parts[2].First();
                     if (int.TryParse(value, out var num))
-                    {
                         _registers[target] = num;
-                    }
                     else
-                    {
                         _registers[target] = _registers[value.First()];
-                    }
 
                     IncrementIndex();
                 }
@@ -81,9 +76,9 @@ public class SafeCrackingComputerPart1
                     var target = parts[1].First();
                     var val = _registers[target];
                     var indexToToggle = _index + val;
-                    if (indexToToggle >= 0 && indexToToggle < _instructions.Length)
+                    if (indexToToggle >= 0 && indexToToggle < instructions.Length)
                     {
-                        var instructionToToggle = _instructions[indexToToggle];
+                        var instructionToToggle = instructions[indexToToggle];
                         var toggleParts = instructionToToggle.Split(" ");
                         var name = toggleParts[0];
                         if (toggleParts.Length == 2)
@@ -101,7 +96,7 @@ public class SafeCrackingComputerPart1
                                 toggleParts[0] = "jnz";
                         }
 
-                        _instructions[indexToToggle] = string.Join(' ', toggleParts);
+                        instructions[indexToToggle] = string.Join(' ', toggleParts);
                     }
 
                     IncrementIndex();

@@ -12,10 +12,9 @@ public class CoProcessor
 
     private bool IsRunning => _currentOperation < _operations.Count && _currentOperation >= 0;
     public int MulCount { get; private set; }
-    public long RegisterH => _registers["h"];
 
     public CoProcessor(string input, long registerA = 0)
-        : this(StringReader.ReadLines(input), registerA)
+        : this(input.Split(LineBreaks.Single), registerA)
     {
     }
 
@@ -36,13 +35,13 @@ public class CoProcessor
             var command = parts[0];
             var part1 = parts[1];
             var val1IsNumeric = long.TryParse(part1, out var val1);
-            val1 = !val1IsNumeric && _registers.ContainsKey(part1) ? _registers[part1] : val1;
+            val1 = !val1IsNumeric && _registers.TryGetValue(part1, out var part1Value) ? part1Value : val1;
             long operationIncrement = 1;
 
             var part2 = parts.Length > 2 ? parts[2] : null;
             long val2 = 0;
             var val2IsNumeric = part2 != null && long.TryParse(part2, out val2);
-            val2 = !val2IsNumeric && part2 != null && _registers.ContainsKey(part2) ? _registers[part2] : val2;
+            val2 = !val2IsNumeric && part2 != null && _registers.TryGetValue(part2, out var part2Value) ? part2Value : val2;
 
             if (command == "set")
             {

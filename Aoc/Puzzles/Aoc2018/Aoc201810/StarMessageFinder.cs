@@ -47,16 +47,14 @@ public class StarMessageFinder
 
     private IEnumerable<StarPosition> ParsePositions(string input)
     {
-        var strings = StringReader.ReadLines(input);
+        var strings = input.Split(LineBreaks.Single);
         foreach (var s in strings)
-        {
             yield return ParsePosition(s);
-        }
     }
 
-    private StarPosition ParsePosition(string s)
+    private static StarPosition ParsePosition(string s)
     {
-        var positionEndsAt = s.IndexOf(">", StringComparison.InvariantCulture) + 1;
+        var positionEndsAt = s.IndexOf('>') + 1;
         var strPos = s[..positionEndsAt];
         var strVel = s.Replace(strPos, "");
 
@@ -66,7 +64,7 @@ public class StarMessageFinder
         return new StarPosition(tPos.x, tPos.y, tVel.x, tVel.y);
     }
 
-    private (int x, int y) ParseXy(string s)
+    private static (int x, int y) ParseXy(string s)
     {
         var angle1 = s.IndexOf("<", StringComparison.InvariantCulture);
         var comma = s.IndexOf(",", StringComparison.InvariantCulture);

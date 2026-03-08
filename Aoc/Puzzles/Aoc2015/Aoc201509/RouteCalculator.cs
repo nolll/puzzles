@@ -91,14 +91,11 @@ public class RouteCalculator
     private static string GetKey(string from, string to) => $"{from}->{to}";
 
     private static IList<Distance> GetDistances(string input) => 
-        StringReader.ReadLines(input).Select(CreateDistance).ToList();
+        input.Split(LineBreaks.Single).Select(CreateDistance).ToList();
 
     private static Distance CreateDistance(string s)
     {
-        var parts = s.Split(' ');
-        var from = parts[0];
-        var to = parts[2];
-        var dist = int.Parse(parts[4]);
-        return new Distance(from, to, dist);
+        var (from, _, to, _, dist) = s.Split(' ');
+        return new Distance(from, to, int.Parse(dist));
     }
 }

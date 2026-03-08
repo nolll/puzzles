@@ -9,7 +9,8 @@ public class EggnogContainers
 
     public EggnogContainers(string input)
     {
-        _containers = StringReader.ReadLines(input).Select((o, index) => new EggnogContainer(index, int.Parse((string) o))).ToList();
+        _containers = input.Split(LineBreaks.Single).Select((o, index) 
+            => new EggnogContainer(index, int.Parse(o))).ToList();
     }
         
     public IList<List<EggnogContainer>> GetCombinations(int targetVolume) => 

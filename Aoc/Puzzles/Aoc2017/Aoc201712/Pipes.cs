@@ -9,7 +9,7 @@ public class Pipes
 
     public Pipes(string input)
     {
-        var strRows = StringReader.ReadLines(input);
+        var strRows = input.Split(LineBreaks.Single);
         var dictionary = new Dictionary<int, IList<int>>();
         var groups = new List<List<int>>();
 
@@ -33,14 +33,14 @@ public class Pipes
                 var current = lookup.First();
                 lookup.RemoveAt(0);
 
-                if (!group.Contains(current))
-                {
-                    group.Add(current);
-                    if(dictionary.TryGetValue(current, out var key))
-                        lookup.AddRange(dictionary[current]);
+                if (group.Contains(current))
+                    continue;
+                
+                group.Add(current);
+                if(dictionary.TryGetValue(current, out var value))
+                    lookup.AddRange(value);
 
-                    dictionary.Remove(current);
-                }
+                dictionary.Remove(current);
             }
 
             groups.Add(group);

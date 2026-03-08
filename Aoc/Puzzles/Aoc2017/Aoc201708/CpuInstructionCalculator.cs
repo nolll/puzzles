@@ -11,7 +11,7 @@ public class CpuInstructionCalculator
     public CpuInstructionCalculator(string input)
     {
         _registers = new Dictionary<string, int>();
-        var instructions = StringReader.ReadLines(input);
+        var instructions = input.Split(LineBreaks.Single);
             
         foreach (var instruction in instructions)
         {
@@ -39,26 +39,18 @@ public class CpuInstructionCalculator
 
     private int ReadValue(string key)
     {
-        if (!_registers.ContainsKey(key))
-            _registers.Add(key, 0);
-
+        _registers.TryAdd(key, 0);
         return _registers[key];
     }
 
-    private bool IsConditionTrue(int a, string condition, int b)
+    private static bool IsConditionTrue(int a, string condition, int b) => condition switch
     {
-        if (condition == ">")
-            return a > b;
-        if (condition == "<")
-            return a < b;
-        if (condition == ">=")
-            return a >= b;
-        if (condition == "<=")
-            return a <= b;
-        if (condition == "==")
-            return a == b;
-        if (condition == "!=")
-            return a != b;
-        return false;
-    }
+        ">" => a > b,
+        "<" => a < b,
+        ">=" => a >= b,
+        "<=" => a <= b,
+        "==" => a == b,
+        "!=" => a != b,
+        _ => false
+    };
 }

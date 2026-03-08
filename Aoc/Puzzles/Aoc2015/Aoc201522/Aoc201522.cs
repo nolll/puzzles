@@ -24,7 +24,7 @@ public class Aoc201522 : AocPuzzle
 
     private static Params GetParams(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
 
         return new Params
         {
@@ -33,10 +33,7 @@ public class Aoc201522 : AocPuzzle
         };
     }
 
-    private static int GetIntFromRow(string s)
-    {
-        return int.Parse(s.Split(':')[1].Trim());
-    }
+    private static int GetIntFromRow(string s) => int.Parse(s.Split(':')[1].Trim());
 
     private class Params
     {

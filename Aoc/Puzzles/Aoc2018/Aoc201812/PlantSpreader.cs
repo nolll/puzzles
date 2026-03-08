@@ -5,21 +5,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201812;
 public class PlantSpreader
 {
     private readonly List<bool> _pots;
-    private int _padding;
     public int PlantScore20 { get; }
     public long PlantScore50B { get; }
 
     public PlantSpreader(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         var state = rows.First().Split(' ')[2];
-        var paddingStr = "..............................................................................................................................................................................................................................................................................................................................................................";
+        const string paddingStr = "..............................................................................................................................................................................................................................................................................................................................................................";
         state = $"{paddingStr}{state}{paddingStr}";
         _pots = GetPots(state);
         var rules = rows.Skip(2).Select(o => new PlantRule(o)).ToList();
         const int patternLength = 5;
         var generation = 0;
-        _padding = paddingStr.Length;
+        var padding = paddingStr.Length;
         var lastScore = 0;
         var scoreDiff = 0;
 
@@ -38,7 +37,7 @@ public class PlantSpreader
 
             _pots = newPots;
 
-            var index = -_padding;
+            var index = -padding;
             foreach (var p in _pots)
             {
                 if (p)
@@ -56,41 +55,11 @@ public class PlantSpreader
         }
 
         var plantScore200 = lastScore;
-        var generationsLeft = 50000000000 - 200;
+        const long generationsLeft = 50000000000 - 200;
 
         PlantScore50B = generationsLeft * scoreDiff + plantScore200;
     }
-
-    private string Print(IList<bool> bools)
-    {
-        return string.Concat(bools.Select(o => o ? '#' : '.'));
-    }
-
-    private void Pad()
-    {
-        if (_pots[0])
-        {
-            _pots.Insert(0, false);
-            _padding++;
-        }
-
-        if (_pots[1])
-        {
-            _pots.Insert(0, false);
-            _padding++;
-        }
-
-        if (_pots[^1])
-        {
-            _pots.Add(false);
-        }
-
-        if (_pots[^2])
-        {
-            _pots.Add(false);
-        }
-    }
-
+    
     private void Pad(int padding)
     {
         for (var i = 0; i < padding; i++)
@@ -100,8 +69,5 @@ public class PlantSpreader
         }
     }
 
-    private List<bool> GetPots(string state)
-    {
-        return state.Select(c => c == '#').ToList();
-    }
+    private static List<bool> GetPots(string state) => state.Select(c => c == '#').ToList();
 }

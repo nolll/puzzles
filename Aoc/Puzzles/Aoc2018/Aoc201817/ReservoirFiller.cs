@@ -92,7 +92,7 @@ public class ReservoirFiller
         _grid.MoveTo(_source);
         _grid.WriteValue(SourceTile);
 
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
 
         foreach (var row in rows)
         {

@@ -8,7 +8,7 @@ public class Aoc201822 : AocPuzzle
 {
     public PuzzleResult RunPart1(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         var depth = int.Parse(rows.First().Split(' ').Last());
         var targetCoords = rows.Last().Split(' ').Last().Split(',').Select(int.Parse).ToList();
         var targetX = targetCoords.First();
@@ -20,7 +20,7 @@ public class Aoc201822 : AocPuzzle
 
     public PuzzleResult RunPart2(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         var depth = int.Parse(rows.First().Split(' ').Last());
         var targetCoords = rows.Last().Split(' ').Last().Split(',').Select(int.Parse).ToList();
         var targetX = targetCoords.First();

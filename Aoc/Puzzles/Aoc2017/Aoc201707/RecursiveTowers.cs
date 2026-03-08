@@ -9,7 +9,7 @@ public class RecursiveTowers
 
     public RecursiveTowers(string input)
     {
-        var strings = StringReader.ReadLines(input);
+        var strings = input.Split(LineBreaks.Single);
         var discs = new Dictionary<string, Disc>();
         foreach (var strDisc in strings)
         {
@@ -17,7 +17,7 @@ public class RecursiveTowers
             var idAndWeight = a[0];
             var children = a.Count > 1 
                 ? a[1].Split(",").Select(o => o.Trim()).ToList()
-                : new List<string>();
+                : [];
 
             idAndWeight = idAndWeight.Replace("(", "").Replace(")", "");
             var b = idAndWeight.Split(' ');
@@ -40,10 +40,8 @@ public class RecursiveTowers
 
         foreach (var key in discs.Keys)
         {
-            if (discs[key].ParentId == null)
-            {
+            if (discs[key].ParentId == null) 
                 BottomName = key;
-            }
         }
 
         var unbalanced = discs.Values.First(o => !o.IsBalanced && o.HasBalancedChildren);

@@ -2,18 +2,11 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201620;
 
-public class FirewallRules
+public class FirewallRules(string input)
 {
-    private readonly string _input;
-
-    public FirewallRules(string input)
-    {
-        _input = input;
-    }
-
     public long? GetLowestUnblockedIp()
     {
-        var blockedRanges = StringReader.ReadLines(_input).Select(ParseIpRange).OrderBy(o => o.Start).ToArray();
+        var blockedRanges = input.Split(LineBreaks.Single).Select(ParseIpRange).OrderBy(o => o.Start).ToArray();
         long ip = 0;
         while (true)
         {
@@ -29,7 +22,7 @@ public class FirewallRules
     public long GetAllowedIpCount(long upperbound)
     {
         var rangesWithoutOverlaps = new List<IpRange>();
-        var blockedRanges = StringReader.ReadLines(_input).Select(ParseIpRange).ToList();
+        var blockedRanges = input.Split(LineBreaks.Single).Select(ParseIpRange).ToList();
         while (blockedRanges.Any())
         {
             var range = blockedRanges.First();
@@ -55,7 +48,7 @@ public class FirewallRules
         return upperbound + 1 - rangesWithoutOverlaps.Sum(o => o.Length);
     }
 
-    private IpRange ParseIpRange(string s)
+    private static IpRange ParseIpRange(string s)
     {
         var parts = s.Split('-');
         return new IpRange(long.Parse(parts[0]), long.Parse(parts[1]));

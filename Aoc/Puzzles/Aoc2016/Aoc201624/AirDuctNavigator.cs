@@ -82,7 +82,7 @@ public class AirDuctNavigator
     {
         _locations = [];
         _grid = new Grid<char>();
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         var y = 0;
         foreach (var row in rows)
         {

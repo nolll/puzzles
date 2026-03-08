@@ -9,10 +9,9 @@ public class PresentBalancer
 
     public PresentBalancer(string input, int groupCount)
     {
-        var presents = StringReader.ReadLines(input).Select(long.Parse).ToList();
+        var presents = input.Split(LineBreaks.Single).Select(long.Parse).ToList();
         presents.Reverse();
-        var sum = presents.Sum();
-        var partitionSum = sum / groupCount;
+        var partitionSum = presents.Sum() / groupCount;
         var groups = FindGroups(presents, partitionSum);
         var quantumEntanglements = groups.Select(o => o.Aggregate((long)1, (x, y) => x * y));
         QuantumEntanglementOfFirstGroup = quantumEntanglements.Min();

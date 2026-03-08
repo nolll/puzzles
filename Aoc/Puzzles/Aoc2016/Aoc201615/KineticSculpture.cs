@@ -36,13 +36,10 @@ public class KineticSculpture
         TimeToPressButton = time - 1;
     }
 
-    private IList<KineticSculptureDisc> ParseDiscs(string input)
-    {
-        var rows = StringReader.ReadLines(input);
-        return rows.Select(ParseDisc).ToList();
-    }
+    private static IList<KineticSculptureDisc> ParseDiscs(string input) => 
+        input.Split(LineBreaks.Single).Select(ParseDisc).ToList();
 
-    private KineticSculptureDisc ParseDisc(string s)
+    private static KineticSculptureDisc ParseDisc(string s)
     {
         var parts = s.Replace(".", "").Split(' ');
         var position = int.Parse(parts[3]);

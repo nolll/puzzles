@@ -15,23 +15,18 @@ public class AsteroidMap
     private IList<IList<Asteroid?>> GetAsteroidGrid(string map)
     {
         var asteroids = new List<IList<Asteroid?>>();
-        var rows = StringReader.ReadLines(map);
-        for (var y = 0; y < rows.Count; y++)
+        var rows = map.Split(LineBreaks.Single);
+        for (var y = 0; y < rows.Length; y++)
         {
-            var asteroidRow = new List<Asteroid?>();
             var cols = rows[y].Trim().ToCharArray();
-            for (var x = 0; x < cols.Length; x++)
-            {
-                var asteroid = cols[x] != '.' ? new Asteroid(cols[x], x, y) : null;
-                asteroidRow.Add(asteroid);
-            }
+            var asteroidRow = cols.Select((t, x) => t != '.' ? new Asteroid(t, x, y) : null).ToList();
             asteroids.Add(asteroidRow);
         }
 
         return asteroids;
     }
 
-    private IList<Asteroid> GetAsteroidList(IList<IList<Asteroid?>> grid)
+    private static IList<Asteroid> GetAsteroidList(IList<IList<Asteroid?>> grid)
     {
         var list = new List<Asteroid>();
         foreach (var row in grid)
@@ -49,27 +44,19 @@ public class AsteroidMap
         Asteroid? asteroidWithHighestRayCount = null;
         foreach (var asteroid in _list)
         {
-            var rays = GetRays(asteroid, _list);
+            var rays = GetRays(asteroid, _list).ToList();
             var uniqueRayCount = rays.Distinct().Count();
-            if (uniqueRayCount > highestRayCount)
-            {
-                highestRayCount = uniqueRayCount;
-                asteroidWithHighestRayCount = asteroid;
-                mostRays = rays;
-            }
+            if (uniqueRayCount <= highestRayCount)
+                continue;
+            
+            highestRayCount = uniqueRayCount;
+            asteroidWithHighestRayCount = asteroid;
+            mostRays = rays;
         }
 
         return (asteroidWithHighestRayCount!, highestRayCount, mostRays);
     }
 
-    private IList<Ray> GetRays(Asteroid asteroid, IList<Asteroid> list)
-    {
-        var rays = new List<Ray>();
-        foreach (var a in list)
-        {
-            if (!a.Equals(asteroid))
-                rays.Add(new Ray(asteroid, a));
-        }
-        return rays;
-    }
+    private static IEnumerable<Ray> GetRays(Asteroid asteroid, IList<Asteroid> list) => 
+        list.Where(o => !o.Equals(asteroid)).Select(o => new Ray(asteroid, o));
 }

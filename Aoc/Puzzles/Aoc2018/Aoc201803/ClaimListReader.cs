@@ -3,16 +3,13 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201803;
 
-public static class ClaimListReader
+public static partial class ClaimListReader
 {
-    public static List<Claim> Read(string str)
-    {
-        return StringReader.ReadLines(str).Select(ConvertToClaim).ToList();
-    }
+    public static List<Claim> Read(string str) => str.Split(LineBreaks.Single).Select(ConvertToClaim).ToList();
 
     private static Claim ConvertToClaim(string str)
     {
-        var regex = new Regex(@"^#(\d+) @ (\d+),(\d+): (\d+)x(\d+)$");
+        var regex = ClaimRegex();
         var match = regex.Match(str);
         var id = GetGroupValue(match.Groups[1]);
         var left = GetGroupValue(match.Groups[2]);
@@ -22,8 +19,8 @@ public static class ClaimListReader
         return new Claim(id, left, top, width, height);
     }
 
-    private static int GetGroupValue(Group matchGroup)
-    {
-        return int.Parse(matchGroup.Value);
-    }
+    private static int GetGroupValue(Group matchGroup) => int.Parse(matchGroup.Value);
+
+    [GeneratedRegex(@"^#(\d+) @ (\d+),(\d+): (\d+)x(\d+)$")]
+    private static partial Regex ClaimRegex();
 }

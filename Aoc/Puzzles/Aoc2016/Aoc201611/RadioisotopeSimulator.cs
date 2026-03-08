@@ -79,7 +79,7 @@ public class RadioisotopeSimulator
     private void TrackVisit(RadioisotopeFacility f) => _previousFacilities.Add(f.AnonymizedId);
 
     private RadioisotopeFacility ParseFacility(string input) => new(
-        StringReader.ReadLines(input).Select(ParseFloor).ToList(), 0, _isotopeNameProvider, _anonymousNameProvider);
+        input.Split(LineBreaks.Single).Select(ParseFloor).ToList(), 0, _isotopeNameProvider, _anonymousNameProvider);
 
     private static RadioisotopeFloor ParseFloor(string s)
     {

@@ -2,23 +2,16 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201715;
 
-public class GeneratorDuel
+public class GeneratorDuel(long startValueA, long startValueB)
 {
-    private readonly Generator _generatorA;
-    private readonly Generator _generatorB;
+    private readonly Generator _generatorA = new(startValueA, 16807, 4);
+    private readonly Generator _generatorB = new(startValueB, 48271, 8);
 
     public int FinalCount { get; private set; }
 
-    public GeneratorDuel(long startValueA, long startValueB)
-    {
-        _generatorA = new Generator(startValueA, 16807, 4);
-        _generatorB = new Generator(startValueB, 48271, 8);
-        FinalCount = 0;
-    }
-
     public static GeneratorDuel Parse(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         var startValues = rows.Select(o => long.Parse(o.Split(' ').Last())).ToList();
 
         return new GeneratorDuel(startValues.First(), startValues.Last());

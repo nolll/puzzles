@@ -2,22 +2,16 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017.Aoc201718;
 
-public class DuetRunner
+public class DuetRunner(string input)
 {
-    private readonly IList<string> _operations;
-    private readonly List<List<long>> _queues;
+    private readonly IList<string> _operations = input.Split(LineBreaks.Single);
+    private readonly List<List<long>> _queues =
+    [
+        [],
+        []
+    ];
 
     public int Program1SendCount { get; private set; }
-
-    public DuetRunner(string input)
-    {
-        _operations = StringReader.ReadLines(input);
-        _queues = new List<List<long>>
-        {
-            new List<long>(),
-            new List<long>()
-        };
-    }
 
     public void Run()
     {
@@ -28,7 +22,7 @@ public class DuetRunner
             program0.ExecuteNextOperation();
             program1.ExecuteNextOperation();
 
-            if (program0.IsWaiting && program1.IsWaiting && !_queues[0].Any() && !_queues[1].Any())
+            if (program0.IsWaiting && program1.IsWaiting && _queues[0].Count == 0 && _queues[1].Count == 0)
             {
                 break;
             }
@@ -39,13 +33,12 @@ public class DuetRunner
     {
         var otherId = id == 1 ? 0 : 1;
         var queue = _queues[otherId];
-        if (queue.Any())
-        {
-            var value = queue.First();
-            queue.RemoveAt(0);
-            return value;
-        }
-        return null;
+        if (queue.Count == 0)
+            return null;
+        
+        var value = queue.First();
+        queue.RemoveAt(0);
+        return value;
     }
 
     private void AddToQueue(int id, long value)

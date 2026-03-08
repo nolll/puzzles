@@ -8,7 +8,10 @@ public class MedicineMachine
 
     public MedicineMachine(string input)
     {
-        _replacements = StringReader.ReadLines(input).Select(ParseReplacement).OrderByDescending(o => o.Right.Length).ThenBy(o => o.Right);
+        _replacements = input.Split(LineBreaks.Single)
+            .Select(ParseReplacement)
+            .OrderByDescending(o => o.Right.Length)
+            .ThenBy(o => o.Right);
     }
 
     public IList<string> GetCalibrationMolecules(string startMolecule)

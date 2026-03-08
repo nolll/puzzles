@@ -21,7 +21,7 @@ public class BridgeBuilder
     private Bridge BuildBridge(Bridge bridge, int port, IList<BridgeComponent> availableComponents)
     {
         var usable = availableComponents.Where(o => o.Port1 == port || o.Port2 == port).ToList();
-        if (!usable.Any())
+        if (usable.Count == 0)
             return bridge;
 
         var bridges = new List<Bridge>();
@@ -41,11 +41,11 @@ public class BridgeBuilder
 
     private void InitComponents(string input)
     {
-        var rows = StringReader.ReadLines(input);
+        var rows = input.Split(LineBreaks.Single);
         _components = rows.Select(ParseComponent).ToList();
     }
 
-    private BridgeComponent ParseComponent(string s)
+    private static BridgeComponent ParseComponent(string s)
     {
         var parts = s.Split('/');
         return new BridgeComponent(int.Parse(parts[0]), int.Parse(parts[1]));

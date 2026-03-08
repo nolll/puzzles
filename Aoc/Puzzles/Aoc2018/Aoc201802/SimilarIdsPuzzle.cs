@@ -9,7 +9,7 @@ public class SimilarIdsPuzzle
 
     public SimilarIdsPuzzle(string input)
     {
-        var ids = StringReader.ReadLines(input);
+        var ids = input.Split(LineBreaks.Single);
         var similarIds = GetSimilarIds(ids);
         if (similarIds.Count != 2)
             throw new WrongNumberOfSimilarIdsException(similarIds);
@@ -23,9 +23,9 @@ public class SimilarIdsPuzzle
         {
             var similarId = ids.FirstOrDefault(o => LevenshteinDistance.Compute(id, o) == 1);
             if (similarId != null)
-                return new List<string> { id, similarId };
+                return [id, similarId];
         }
-        return new List<string>();
+        return [];
     }
 
     public static string GetCommonLetters(string str1, string str2)
@@ -37,10 +37,8 @@ public class SimilarIdsPuzzle
         for (var i = 0; i < str1.Length; i++)
         {
             var c = str1[i];
-            if (c == str2[i])
-            {
+            if (c == str2[i]) 
                 sb.Append(c);
-            }
         }
 
         return sb.ToString();

@@ -2,15 +2,10 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201823;
 
-public class NanobotFormation
+public class NanobotFormation(string input)
 {
     private readonly Point3d _origo = new(0, 0, 0);
-    private readonly IList<Nanobot> _bots;
-
-    public NanobotFormation(string input)
-    {
-        _bots = ParseBots(input);
-    }
+    private readonly IList<Nanobot> _bots = ParseBots(input);
 
     public int FindManhattanDistanceToBestCoords()
     {
@@ -63,16 +58,10 @@ public class NanobotFormation
         return bestCoords;
     }
 
-    public class PriorityQueue
+    private class PriorityQueue
     {
-        private readonly Dictionary<int, IList<PriorityQueueItem>> _dict;
+        private readonly Dictionary<int, IList<PriorityQueueItem>> _dict = new();
         public int Length { get; private set; }
-
-        public PriorityQueue()
-        {
-            _dict = new Dictionary<int, IList<PriorityQueueItem>>();
-            Length = 0;
-        }
 
         public void Enqueue(PriorityQueueItem item)
         {
@@ -96,22 +85,13 @@ public class NanobotFormation
         }
     }
 
-    public class PriorityQueueItem : IEquatable<PriorityQueueItem>
+    public class PriorityQueueItem(SpaceBox box, int botsInRange, int distanceFromOrigo) : IEquatable<PriorityQueueItem>
     {
-        public string Id { get; }
-        public SpaceBox Box { get; }
-        public long BoxSize { get; }
-        public int BotsInRange { get; }
-        public int DistanceFromOrigo { get; }
-
-        public PriorityQueueItem(SpaceBox box, int botsInRange, int distanceFromOrigo)
-        {
-            Id = $"{box.Min.X},{box.Min.Y},{box.Min.Z}-{box.Max.X},{box.Max.Y},{box.Max.Z}:{box.Size}";
-            Box = box;
-            BoxSize = box.Size;
-            BotsInRange = botsInRange;
-            DistanceFromOrigo = distanceFromOrigo;
-        }
+        private string Id { get; } = $"{box.Min.X},{box.Min.Y},{box.Min.Z}-{box.Max.X},{box.Max.Y},{box.Max.Z}:{box.Size}";
+        public SpaceBox Box { get; } = box;
+        public long BoxSize { get; } = box.Size;
+        public int BotsInRange { get; } = botsInRange;
+        public int DistanceFromOrigo { get; } = distanceFromOrigo;
 
         public bool Equals(PriorityQueueItem? other)
         {
@@ -124,14 +104,11 @@ public class NanobotFormation
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((PriorityQueueItem) obj);
         }
 
-        public override int GetHashCode()
-        {
-            return (Id != null ? Id.GetHashCode() : 0);
-        }
+        public override int GetHashCode() => Id.GetHashCode();
     }
 
     private SpaceBox? FindBestCoords(SpaceBox rootBox)
@@ -154,48 +131,14 @@ public class NanobotFormation
         return null;
     }
 
-    private int CountBotsInRange(SpaceBox spaceBox)
-    {
-        return _bots.Count(o => IsInRange(o, spaceBox));
-    }
+    private int CountBotsInRange(SpaceBox spaceBox) => _bots.Count(o => IsInRange(o, spaceBox));
 
-    private int ManhattanDistanceTo(Point3d point, SpaceBox box)
-    {
-        var closestPoint = GetClosestPoint(point, box);
-        return point.ManhattanDistanceTo(closestPoint);
-    }
+    private static int ManhattanDistanceTo(Point3d point, SpaceBox box) => 
+        point.ManhattanDistanceTo(GetClosestPoint(point, box));
 
-    private bool IsInRange(Nanobot bot, SpaceBox box)
-    {
-        var distance = ManhattanDistanceTo(bot.Coords, box);
-        return distance <= bot.SignalRadius;
-    }
+    private bool IsInRange(Nanobot bot, SpaceBox box) => ManhattanDistanceTo(bot.Coords, box) <= bot.SignalRadius;
 
-    private bool IsInRange2(Nanobot bot, SpaceBox box)
-    {
-        var dist1 = bot.Coords.ManhattanDistanceTo(box.Max.X, box.Max.Y, box.Max.Z);
-        var dist2 = bot.Coords.ManhattanDistanceTo(box.Max.X, box.Max.Y, box.Min.Z);
-        var dist3 = bot.Coords.ManhattanDistanceTo(box.Max.X, box.Min.Y, box.Max.Z);
-        var dist4 = bot.Coords.ManhattanDistanceTo(box.Max.X, box.Min.Y, box.Min.Z);
-
-        var dist5 = bot.Coords.ManhattanDistanceTo(box.Min.X, box.Max.Y, box.Max.Z);
-        var dist6 = bot.Coords.ManhattanDistanceTo(box.Min.X, box.Max.Y, box.Min.Z);
-            
-        var dist7 = bot.Coords.ManhattanDistanceTo(box.Min.X, box.Min.Y, box.Max.Z);
-            
-        var dist8 = bot.Coords.ManhattanDistanceTo(box.Min.X, box.Min.Y, box.Min.Z);
-
-        return dist1 <= bot.SignalRadius &&
-               dist2 <= bot.SignalRadius &&
-               dist3 <= bot.SignalRadius &&
-               dist4 <= bot.SignalRadius &&
-               dist5 <= bot.SignalRadius &&
-               dist6 <= bot.SignalRadius &&
-               dist7 <= bot.SignalRadius &&
-               dist8 <= bot.SignalRadius;
-    }
-
-    private Point3d GetClosestPoint(Point3d point, SpaceBox box)
+    private static Point3d GetClosestPoint(Point3d point, SpaceBox box)
     {
         var x = point.X;
         var y = point.Y;
@@ -218,15 +161,9 @@ public class NanobotFormation
         return new Point3d(x, y, z);
     }
 
-    private IEnumerable<SpaceBox> DivideBox(SpaceBox box)
-    {
-        return box.Divide();
-    }
+    private static IEnumerable<SpaceBox> DivideBox(SpaceBox box) => box.Divide();
 
-    private Nanobot FindStrongestBot()
-    {
-        return _bots.OrderByDescending(o => o.SignalRadius).First();
-    }
+    private Nanobot FindStrongestBot() => _bots.OrderByDescending(o => o.SignalRadius).First();
 
     public IList<Nanobot> GetBotsInRangeOfStrongestBot()
     {
@@ -234,12 +171,10 @@ public class NanobotFormation
         return _bots.Where(o => strongestBot.IsInRange(o)).ToList();
     }
 
-    private IList<Nanobot> ParseBots(string input)
-    {
-        return StringReader.ReadLines(input).Select(ParseBot).ToList();
-    }
+    private static IList<Nanobot> ParseBots(string input) => 
+        input.Split(LineBreaks.Single).Select(ParseBot).ToList();
 
-    private Nanobot ParseBot(string s)
+    private static Nanobot ParseBot(string s)
     {
         var parts = s.Split(' ');
         var coordParts = parts[0].Replace("pos=<", "").Replace(">", "").Split(',');

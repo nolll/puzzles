@@ -2,14 +2,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201621;
 
-public class StringScrambler
+public class StringScrambler(string input)
 {
-    private readonly IList<IScrambleInstruction> _instructions;
-
-    public StringScrambler(string input)
-    {
-        _instructions = ParseInstructions(input);
-    }
+    private readonly IList<IScrambleInstruction> _instructions = ParseInstructions(input);
 
     public string Scramble(string str)
     {
@@ -28,27 +23,18 @@ public class StringScrambler
         return str;
     }
 
-    private IList<IScrambleInstruction> ParseInstructions(string input)
-    {
-        var instructions = new List<IScrambleInstruction>();
-        var rows = StringReader.ReadLines(input);
-        foreach (var row in rows)
-        {
-            instructions.Add(ParseInstruction(row));
-        }
+    private static IList<IScrambleInstruction> ParseInstructions(string input) => 
+        input.Split(LineBreaks.Single).Select(ParseInstruction).ToList();
 
-        return instructions;
-    }
-
-    private IScrambleInstruction ParseInstruction(string s)
+    private static IScrambleInstruction ParseInstruction(string s)
     {
         var parts = s.Split(' ');
         var command = parts[0];
         if (command == "swap")
         {
-            if (parts[1] == "position")
-                return new SwapPositionInstruction(int.Parse(parts[2]), int.Parse(parts[5]));
-            return new SwapLetterInstruction(parts[2].First(), parts[5].First());
+            return parts[1] == "position"
+                ? new SwapPositionInstruction(int.Parse(parts[2]), int.Parse(parts[5]))
+                : new SwapLetterInstruction(parts[2].First(), parts[5].First());
         }
 
         if (command == "rotate")

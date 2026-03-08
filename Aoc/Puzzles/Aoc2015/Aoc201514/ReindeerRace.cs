@@ -35,14 +35,11 @@ public class ReindeerRace
     }
 
     private static IList<Reindeer> ParseReindeers(string input) => 
-        StringReader.ReadLines(input).Select(ParseReindeer).ToList();
+        input.Split(LineBreaks.Single).Select(ParseReindeer).ToList();
 
     private static Reindeer ParseReindeer(string str)
     {
-        var ints = Numbers.IntsFromString(str);
-        var speed = ints[0];
-        var flyTime = ints[1];
-        var restTime = ints[2];
+        var (speed, flyTime, restTime) = Numbers.IntsFromString(str);
 
         return new Reindeer(speed, flyTime, restTime);
     }

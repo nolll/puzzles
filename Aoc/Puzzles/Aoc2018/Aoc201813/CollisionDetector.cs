@@ -5,8 +5,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2018.Aoc201813;
 
 public class CollisionDetector
 {
-    private Grid<char> _grid = new Grid<char>(1, 1);
-    private IList<MineCart> _carts = new List<MineCart>();
+    private Grid<char> _grid = new();
+    private List<MineCart> _carts = [];
     public Coord? LocationOfFirstCollision { get; private set; }
     public Coord? LocationOfLastCart { get; private set; }
 
@@ -79,9 +79,9 @@ public class CollisionDetector
 
     private void BuildGridAndCarts(string input)
     {
-        var rows = StringReader.ReadLines(input).ToList();
+        var rows = input.Split(LineBreaks.Single);
         var width = rows.First().Length;
-        var height = rows.Count();
+        var height = rows.Length;
         _grid = new Grid<char>(width, height);
         _carts = new List<MineCart>();
         for (var y = 0; y < height; y++)
@@ -105,24 +105,17 @@ public class CollisionDetector
         }
     }
 
-    private static bool IsCartChar(char c)
-    {
-        return c is CharConstants.Up or CharConstants.Right or CharConstants.Down or CharConstants.Left;
-    }
+    private static bool IsCartChar(char c) => 
+        c is CharConstants.Up or CharConstants.Right or CharConstants.Down or CharConstants.Left;
 
-    private static char GetMapChar(char c)
-    {
-        return c is CharConstants.Up or CharConstants.Down ? CharConstants.Vertical : CharConstants.Horizontal;
-    }
+    private static char GetMapChar(char c) => 
+        c is CharConstants.Up or CharConstants.Down ? CharConstants.Vertical : CharConstants.Horizontal;
 
-    private GridDirection GetDirection(char c)
+    private static GridDirection GetDirection(char c) => c switch
     {
-        return c switch
-        {
-            CharConstants.Up => GridDirection.Up,
-            CharConstants.Right => GridDirection.Right,
-            CharConstants.Down => GridDirection.Down,
-            _ => GridDirection.Left
-        };
-    }
+        CharConstants.Up => GridDirection.Up,
+        CharConstants.Right => GridDirection.Right,
+        CharConstants.Down => GridDirection.Down,
+        _ => GridDirection.Left
+    };
 }

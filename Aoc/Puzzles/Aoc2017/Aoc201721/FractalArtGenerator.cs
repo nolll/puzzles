@@ -31,11 +31,8 @@ public class FractalArtGenerator
         _transformCache = new Dictionary<string, Grid<char>>();
     }
 
-    private static IList<FractalRule> ParseRules(string input)
-    {
-        var rows = StringReader.ReadLines(input);
-        return rows.Select(ParseRule).ToList();
-    }
+    private static IList<FractalRule> ParseRules(string input) => 
+        input.Split(LineBreaks.Single).Select(ParseRule).ToList();
 
     private static FractalRule ParseRule(string s)
     {
@@ -89,11 +86,11 @@ public class FractalArtGenerator
             }
 
             col++;
-            if (col >= gridsPerRow)
-            {
-                col = 0;
-                row++;
-            }
+            if (col < gridsPerRow)
+                continue;
+            
+            col = 0;
+            row++;
         }
 
         return newGrid;
@@ -162,16 +159,12 @@ public class FractalArtGenerator
 
         foreach (var rule in rules)
         {
-            foreach (var variant in variants)
-            {
-                if (rule.IsMatch(variant.Key))
-                {
-                    transformedGrid = rule.Output;
-                    _transformCache.Add(key, transformedGrid);
-                    return transformedGrid;
-                }
-                        
-            }
+            if (!variants.Any(variant => rule.IsMatch(variant.Key)))
+                continue;
+            
+            transformedGrid = rule.Output;
+            _transformCache.Add(key, transformedGrid);
+            return transformedGrid;
         }
 
         throw new Exception("No transformation rule matched");

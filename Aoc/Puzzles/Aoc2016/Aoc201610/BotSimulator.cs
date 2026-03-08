@@ -9,7 +9,7 @@ public class BotSimulator
 
     public BotSimulator(string input)
     {
-        var instructions = StringReader.ReadLines(input);
+        var instructions = input.Split(LineBreaks.Single);
         var valueInstructions = new List<string>();
         var passInstructions = new List<string>();
         _bots = new Dictionary<int, Bot>();

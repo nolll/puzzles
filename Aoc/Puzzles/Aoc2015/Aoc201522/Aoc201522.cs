@@ -6,38 +6,27 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201522;
 [Name("Wizard Simulator 20XX")]
 public class Aoc201522 : AocPuzzle
 {
-    public PuzzleResult Part1(string input)
+    [Puzzle("1f020968b40b91444beee0e8a33624d1")]
+    public int Part1(string input)
     {
         var p = GetParams(input);
-        var simulator = new WizardRpgSimulator(WizardRpgGameMode.Easy);
-        var leastManaRequiredToWinEasy = simulator.WinWithLowestCost(p.HitPoints, p.Damage);
-        return new PuzzleResult(leastManaRequiredToWinEasy, "1f020968b40b91444beee0e8a33624d1");
+        return new WizardRpgSimulator(WizardRpgGameMode.Easy).WinWithLowestCost(p.HitPoints, p.Damage);
     }
 
-    public PuzzleResult Part2(string input)
+    [Puzzle("d76b3b0ad8b9bce7fab0c1ba0de0d20e")]
+    public int Part2(string input)
     {
         var p = GetParams(input);
-        var simulator = new WizardRpgSimulator(WizardRpgGameMode.Hard);
-        var leastManaRequiredToWinHard = simulator.WinWithLowestCost(p.HitPoints, p.Damage);
-        return new PuzzleResult(leastManaRequiredToWinHard, "d76b3b0ad8b9bce7fab0c1ba0de0d20e");
+        return new WizardRpgSimulator(WizardRpgGameMode.Hard).WinWithLowestCost(p.HitPoints, p.Damage);
     }
 
     private static Params GetParams(string input)
     {
         var rows = input.Split(LineBreaks.Single);
-
-        return new Params
-        {
-            HitPoints = GetIntFromRow(rows[0]),
-            Damage = GetIntFromRow(rows[1])
-        };
+        return new Params(GetIntFromRow(rows[0]), GetIntFromRow(rows[1]));
     }
 
     private static int GetIntFromRow(string s) => int.Parse(s.Split(':')[1].Trim());
 
-    private class Params
-    {
-        public int HitPoints { get; set; }
-        public int Damage { get; set; }
-    }
+    private record Params(int HitPoints, int Damage);
 }

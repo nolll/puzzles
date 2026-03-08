@@ -31,7 +31,7 @@ public class PuzzleResult
     {
     }
 
-    private PuzzleResult(PuzzleType type, string? answer, string? hash = null)
+    public PuzzleResult(PuzzleType type, string? answer, string? hash = null)
     {
         Type = type;
         Answer = answer ?? string.Empty;

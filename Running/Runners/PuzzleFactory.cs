@@ -35,9 +35,7 @@ public class PuzzleFactory(FileReader fileReader)
                     parameters = [.. inputs, additionalInput];
             }
 
-            var hash = GetHash(method);
-
-            var func = new PuzzleFunction(puzzle, method, parameters, hash);
+            var func = new PuzzleFunction(puzzle, method, parameters, GetHash(method));
             funcs.Add(func);
         }
 

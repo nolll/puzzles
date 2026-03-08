@@ -3,23 +3,8 @@ using Pzl.Common;
 
 namespace Pzl.Client.Filter;
 
-public class PuzzleFilter
+public class PuzzleFilter(Parameters parameters)
 {
-    private readonly Parameters _parameters;
-
-    public PuzzleFilter(Parameters parameters)
-    {
-        _parameters = parameters;
-    }
-
-    public IEnumerable<PuzzleDefinition> Filter(IEnumerable<PuzzleDefinition> puzzles)
-    {
-        var r = puzzles;
-        foreach (var tag in _parameters.Tags)
-        {
-            r = r.Where(o => o.Tags.Contains(tag));
-        }
-
-        return r;
-    }
+    public IEnumerable<PuzzleDefinition> Filter(IEnumerable<PuzzleDefinition> puzzles) => 
+        parameters.Tags.Aggregate(puzzles, (current, tag) => current.Where(o => o.Tags.Contains(tag)));
 }

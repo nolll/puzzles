@@ -6,20 +6,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2015.Aoc201516;
 [Name("Aunt Sue")]
 public class Aoc201516 : AocPuzzle
 {
-    public PuzzleResult Part1(string input)
-    {
-        var sues = ParseSues(input);
-        var correctSuePart1 = sues.FirstOrDefault(o => o.IsCorrectSuePart1);
-        var result = correctSuePart1?.Number ?? 0;
-        return new PuzzleResult(result, "fc9e347f58cd62a8056800cedf1772ff");
-    }
+    [Puzzle("fc9e347f58cd62a8056800cedf1772ff")]
+    public int Part1(string input) => ParseSues(input).FirstOrDefault(o => o.IsCorrectSuePart1)?.Number ?? 0;
 
-    public PuzzleResult Part2(string input)
+    [Puzzle("d0cfc435d1459e83bcc2be3046271a1a")]
+    public int Part2(string input)
     {
-        var sues = ParseSues(input);
-        var correctSuePart2 = sues.FirstOrDefault(o => o.IsCorrectSuePart2);
-        var result = correctSuePart2?.Number ?? 0;
-        return new PuzzleResult(result, "d0cfc435d1459e83bcc2be3046271a1a");
+        return ParseSues(input).FirstOrDefault(o => o.IsCorrectSuePart2)?.Number ?? 0;
     }
     
     private static IList<Sue> ParseSues(string input) => input.Split(LineBreaks.Single).Select(ParseSue).ToList();

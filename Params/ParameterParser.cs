@@ -31,14 +31,7 @@ public class ParameterParser(IEnumerable<string> args)
         return target;
     }
 
-    public string[] GetListValue(params string[] keys)
-    {
-        var val = GetValue(keys);
-        if (val == null)
-            return [];
-
-        return val.Split(',').ToArray();
-    }
+    public string[] GetListValue(params string[] keys) => GetValue(keys)?.Split(',').Select(o => o.Trim()).ToArray() ?? [];
 
     public string? GetValue(params string[] keys)
     {

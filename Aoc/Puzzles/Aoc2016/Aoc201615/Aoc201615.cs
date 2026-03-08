@@ -5,15 +5,9 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201615;
 [Name("Timing is Everything")]
 public class Aoc201615 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
-    {
-        var sculpture = new KineticSculpture(input);
-        return new PuzzleResult(sculpture.TimeToPressButton, "c2b25510c1da608c5f3a22a5d84c55dd");
-    }
+    [Puzzle("c2b25510c1da608c5f3a22a5d84c55dd")]
+    public int Part1(string input) => new KineticSculpture(input).TimeToPressButton;
 
-    public PuzzleResult RunPart2(string input)
-    {
-        var sculpture = new KineticSculpture(input, true);
-        return new PuzzleResult(sculpture.TimeToPressButton, "7e078d8dabad268a34def302abd59ce8");
-    }
+    [Puzzle("7e078d8dabad268a34def302abd59ce8")]
+    public int Part2(string input) => new KineticSculpture(input, true).TimeToPressButton;
 }

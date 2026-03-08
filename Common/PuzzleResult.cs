@@ -2,39 +2,17 @@ using System.Numerics;
 
 namespace Pzl.Common;
 
-public class PuzzleResult
+public class PuzzleResult(PuzzleType type, string? answer, string? hash = null)
 {
-    public PuzzleType Type { get; }
-    public string? Hash { get; }
-    public string Answer { get; }
+    public PuzzleType Type { get; } = type;
+    public string? Hash { get; } = hash;
+    public string Answer { get; } = answer ?? string.Empty;
 
     public static PuzzleResult Empty => new(PuzzleType.Empty, "No puzzle here");
     public static PuzzleResult Failed => new(PuzzleType.Default, "Failed");
 
-    public PuzzleResult(string? answer, string? hash = null)
-        : this(PuzzleType.Default, answer, hash)
-    {
-    }
-
-    public PuzzleResult(int? answer, string? hash = null)
-        : this(answer?.ToString(), hash)
-    {
-    }
-
-    public PuzzleResult(long? answer, string? hash = null)
-        : this(answer?.ToString(), hash)
-    {
-    }
-
-    public PuzzleResult(BigInteger? answer, string? hash = null)
-        : this(answer?.ToString(), hash)
-    {
-    }
-
-    public PuzzleResult(PuzzleType type, string? answer, string? hash = null)
-    {
-        Type = type;
-        Answer = answer ?? string.Empty;
-        Hash = hash;
-    }
+    public PuzzleResult(string? answer, string? hash = null) : this(PuzzleType.Default, answer, hash) {}
+    public PuzzleResult(int? answer, string? hash = null) : this(answer?.ToString(), hash) {}
+    public PuzzleResult(long? answer, string? hash = null) : this(answer?.ToString(), hash) {}
+    public PuzzleResult(BigInteger? answer, string? hash = null) : this(answer?.ToString(), hash) {}
 }

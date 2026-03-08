@@ -47,5 +47,5 @@ public class AdditionalLocalInputFileAttribute(string fileName) : Attribute
 [AttributeUsage(AttributeTargets.Method)]
 public class PuzzleAttribute(string? hash = null) : Attribute
 {
-    public string? Hash { get; } = hash;
+    public string? Hash { get; } = string.IsNullOrEmpty(hash) ? null : hash;
 }

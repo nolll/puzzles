@@ -5,17 +5,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
 [Name("Radioisotope Thermoelectric Generators")]
 public class Aoc201611 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
-    {
-        var simulator = new RadioisotopeSimulator(Input1);
-        return new PuzzleResult(simulator.StepCount, "ad33c84632fce9c362c34badb2563b3e");
-    }
+    [Puzzle("ad33c84632fce9c362c34badb2563b3e")]
+    public int Part1(string input) => new RadioisotopeSimulator(Input1).StepCount;
 
-    public PuzzleResult RunPart2(string input)
-    {
-        var simulator = new RadioisotopeSimulator(Input2);
-        return new PuzzleResult(simulator.StepCount, "19a0276a07d73a49e5bde8ad4f1ee6ee");
-    }
+    [Puzzle("19a0276a07d73a49e5bde8ad4f1ee6ee")]
+    public int Part2(string input) => new RadioisotopeSimulator(Input2).StepCount;
 
     private const string Input1 = """
                                   The first floor contains a strontium generator, a strontium-compatible microchip, a plutonium generator, and a plutonium-compatible microchip.

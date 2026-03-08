@@ -5,17 +5,9 @@ namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201606;
 [Name("Signals and Noise")]
 public class Aoc201606 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
-    {
-        var reader = new RepetitionCodeReader();
-        var messageMostCommon = reader.ReadMostCommon(input);
-        return new PuzzleResult(messageMostCommon, "d501463dd43fdef3d85d722210ab3940");
-    }
+    [Puzzle("d501463dd43fdef3d85d722210ab3940")]
+    public string Part1(string input) => new RepetitionCodeReader().ReadMostCommon(input);
 
-    public PuzzleResult RunPart2(string input)
-    {
-        var reader = new RepetitionCodeReader();
-        var messageLeastCommon = reader.ReadLeastCommon(input);
-        return new PuzzleResult(messageLeastCommon, "509675b487b1cf475001b9592fab4a95");
-    }
+    [Puzzle("509675b487b1cf475001b9592fab4a95")]
+    public string Part2(string input) => new RepetitionCodeReader().ReadLeastCommon(input);
 }

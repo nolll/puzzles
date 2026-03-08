@@ -11,17 +11,46 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202517;
 // https://www.reddit.com/r/codyssi/comments/1jr576z/journey_to_atlantis_spiralling_stairs_solutions/
 public class Codyssi202517 : CodyssiPuzzle
 {
-    public PuzzleResult Part1(string input)
+    [Puzzle("954b1dfc4c0c7b16d0de1201eebc2460")]
+    public BigInteger Part1(string input)
+    {
+        var (moves, stairById, nextStairs) = Parse(input);
+        return Dfs([], "S1", 0, true, moves, stairById, nextStairs);
+    }
+
+    [Puzzle("4125a5e00319f6235bfd4790450f0688")]
+    public BigInteger Part2(string input)
+    {
+        var (moves, stairById, nextStairs) = Parse(input);
+        return Dfs([], "S1", 0, false, moves, stairById, nextStairs);
+    }
+
+    [Puzzle("96a73b4de344a21efaae671cdb265561")]
+    public string Part3(string input)
     {
         var (moves, stairById, nextStairs) = Parse(input);
         var cache = new Dictionary<string, BigInteger>();
-        var comb = Dfs(cache, "S1", 0, true, moves, stairById, nextStairs);
+        var targetIndex = BigInteger.Parse("100000000000000000000000000000");
+        if (targetIndex > cache["S1_0"])
+        {
+            targetIndex = cache["S1_0"];
+        }
 
-        return new PuzzleResult(comb, "954b1dfc4c0c7b16d0de1201eebc2460");
+        return FindPathAtIndex(
+            cache, 
+            "S1_0", 
+            targetIndex, 
+            "S1_" + stairById["S1"].FloorTo, 
+            "S1_0", 
+            moves,
+            stairById, 
+            nextStairs);
     }
-
-    private (int[] moves, Dictionary<string, Stair> stairById, Dictionary<string, List<string>> nextStairs)
-        Parse(string input)
+    
+    private static (
+        int[] moves, 
+        Dictionary<string, Stair> stairById, 
+        Dictionary<string, List<string>> nextStairs) Parse(string input)
     {
         var (p1, p2) = input.Split(LineBreaks.Double);
         var stairs = p1.Split(LineBreaks.Single)
@@ -40,32 +69,6 @@ public class Codyssi202517 : CodyssiPuzzle
         }
 
         return (moves, stairById, nextStairs);
-    }
-
-    public PuzzleResult Part2(string input)
-    {
-        var (moves, stairById, nextStairs) = Parse(input);
-        var cache = new Dictionary<string, BigInteger>();
-        var comb = Dfs(cache, "S1", 0, false, moves, stairById, nextStairs);
-
-        return new PuzzleResult(comb, "4125a5e00319f6235bfd4790450f0688");
-    }
-
-    public PuzzleResult Part3(string input)
-    {
-        var (moves, stairById, nextStairs) = Parse(input);
-        var cache = new Dictionary<string, BigInteger>();
-        var comb = Dfs(cache, "S1", 0, false, moves, stairById, nextStairs);
-        var targetIndex = BigInteger.Parse("100000000000000000000000000000");
-        if (targetIndex > cache["S1_0"])
-        {
-            targetIndex = cache["S1_0"];
-        }
-
-        var path = FindPathAtIndex(cache, "S1_0", targetIndex, "S1_" + stairById["S1"].FloorTo, "S1_0", moves,
-            stairById, nextStairs);
-
-        return new PuzzleResult(path, "96a73b4de344a21efaae671cdb265561");
     }
 
     private static BigInteger Dfs(

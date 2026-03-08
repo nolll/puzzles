@@ -10,7 +10,9 @@ public class CargoCrane
 
     public CargoCrane(string input)
     {
-        var groups = StringReader.ReadLineGroupsWithWhiteSpace(input);
+        var groups = input.Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single))
+            .ToList();;
         _stacks = ParseStacks(groups.First());
         _moves = groups[1];
     }
@@ -53,7 +55,7 @@ public class CargoCrane
         Message = GetMessage();
     }
 
-    private IDictionary<int, Stack<char>> ParseStacks(IEnumerable<string> lines)
+    private static IDictionary<int, Stack<char>> ParseStacks(IEnumerable<string> lines)
     {
         var stackLines = lines.Reverse().Skip(1);
         var stacks = new Dictionary<int, Stack<char>>();
@@ -81,7 +83,7 @@ public class CargoCrane
         return stacks;
     }
     
-    private (int count, int from, int to) ParseMove(string s)
+    private static (int count, int from, int to) ParseMove(string s)
     {
         var moveParts = s.Split(' ');
         var count = int.Parse(moveParts[1]);

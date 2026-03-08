@@ -6,23 +6,15 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202220;
 [Name("Grove Positioning System")]
 public class Aoc202220 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
-    {
-        var result = Run(input, 1, 1);
-
-        return new PuzzleResult(result, "7b8b8bc2da7c3dc6f35e0079a36a0aea");
-    }
-
-    public PuzzleResult RunPart2(string input)
-    {
-        var result = Run(input, 811_589_153, 10);
-
-        return new PuzzleResult(result, "ad028751d05a122940933df675dc9eb5");
-    }
+    public PuzzleResult RunPart1(string input) => new(Run(input, 1, 1), "7b8b8bc2da7c3dc6f35e0079a36a0aea");
+    public PuzzleResult RunPart2(string input) => new(Run(input, 811_589_153, 10), "ad028751d05a122940933df675dc9eb5");
 
     public static long Run(string input, long multiplier, int iterationCount)
     {
-        var numbers = StringReader.ReadLines(input, false).Select(s => long.Parse(s) * multiplier).ToList();
+        var numbers = input.Split(LineBreaks.Single)
+            .Where(o => o.Length > 0)
+            .Select(s => long.Parse(s) * multiplier)
+            .ToList();
 
         var list = new LinkedList<long>();
         var set = new Dictionary<long, LinkedListNode<long>>();

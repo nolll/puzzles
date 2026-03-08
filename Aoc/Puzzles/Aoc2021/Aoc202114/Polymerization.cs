@@ -6,7 +6,10 @@ public class Polymerization
 {
     public long Run(string input, int stepCount)
     {
-        var groups = StringReader.ReadLineGroups(input);
+        var groups = input
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single))
+            .ToList();
 
         var rules = new Dictionary<(char, char), char>();
         foreach (var strRule in groups[1])

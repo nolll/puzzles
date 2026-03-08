@@ -18,7 +18,10 @@ public class Aoc202319 : AocPuzzle
 
     public static int SortParts(string s)
     {
-        var groups = StringReader.ReadLineGroups(s);
+        var groups = s
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single).ToList())
+            .ToList();
         var workflowList = groups.First().Select(ParseWorkflow).ToList();
         var workflows = workflowList.ToDictionary(o => o.Label, o => o);
         var parts = groups.Last().Select(ParsePart);
@@ -47,7 +50,9 @@ public class Aoc202319 : AocPuzzle
 
     public static long CountCombinations(string str)
     {
-        var groups = StringReader.ReadLineGroups(str);
+        var groups = str
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single));
         var workflowList = groups.First().Select(ParseWorkflow).ToList();
         var workflows = workflowList.ToDictionary(o => o.Label, o => o);
 

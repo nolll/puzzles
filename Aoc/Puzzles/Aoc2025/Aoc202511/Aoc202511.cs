@@ -47,7 +47,7 @@ public class Aoc202511 : AocPuzzle
 
         var count = svrdac * dacfft * fftout + svrfft * fftdac * dacout;
         
-        return new PuzzleResult(count);
+        return new PuzzleResult(count, "87ba1881b0f0c32fd99d1ea492990d16");
     }
     
     private List<List<string>> FindPathsPart1(List<string> path, string current, string target, Dictionary<string, string[]> devices)

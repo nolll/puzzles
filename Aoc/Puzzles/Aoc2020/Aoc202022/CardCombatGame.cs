@@ -2,16 +2,14 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202022;
 
-public class CardCombatGame
+public class CardCombatGame(string input)
 {
-    private readonly IList<IList<string>> _groups;
+    private readonly List<string[]> _groups = input
+        .Split(LineBreaks.Double)
+        .Select(o => o.Split(LineBreaks.Single))
+        .ToList();
 
-    public CardCombatGame(string input)
-    {
-        _groups = StringReader.ReadLineGroups(input);
-    }
-
-    public List<List<int>> CreatePlayers()
+    private List<List<int>> CreatePlayers()
     {
         var players = new List<List<int>>();
         foreach (var g in _groups)
@@ -25,8 +23,6 @@ public class CardCombatGame
     public long Play()
     {
         var players = CreatePlayers();
-        var p0 = players[0];
-        var p1 = players[1];
 
         while (players.All(o => o.Count > 0))
         {
@@ -58,7 +54,7 @@ public class CardCombatGame
             var winningPlayer = PlayRecursive(players, 0);
             return CalculateScore(players[winningPlayer]);
         }
-        catch (RecursiveException )
+        catch (RecursiveException)
         {
             return CalculateScore(players[0]);
         }
@@ -123,11 +119,9 @@ public class CardCombatGame
     private class RecursiveException : Exception
     {
     }
-
-    private string CreateCacheKey(List<List<int>> players)
+    
+    private static string CreateCacheKey(List<List<int>> players)
     {
-        //var cards0 = string.Join(',', players[0]);
-        //return $"{cards0}";
         var cards0 = string.Join(',', players[0]);
         var cards1 = string.Join(',', players[1]);
         return $"{cards0}-{cards1}";

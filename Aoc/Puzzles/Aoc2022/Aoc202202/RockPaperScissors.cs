@@ -4,17 +4,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202202;
 
 public class RockPaperScissors
 {
-    public int Part1(string input)
-    {
-        return StringReader
-            .ReadLines(input, false)
-            .Select(Part1Round.Parse).Sum(o => o.Score);
-    }
+    public int Part1(string input) => Solve(input, Part1Round.Parse);
 
-    public int Part2(string input)
-    {
-        return StringReader
-            .ReadLines(input, false)
-            .Select(Part2Round.Parse).Sum(o => o.Score);
-    }
+    public int Part2(string input) => Solve(input, Part2Round.Parse);
+
+    private static int Solve(string input, Func<string, RockPaperScissorsRound> parse) => input.Split(LineBreaks.Single)
+        .Where(o => o.Length > 0)
+        .Select(parse)
+        .Sum(o => o.Score);
 }

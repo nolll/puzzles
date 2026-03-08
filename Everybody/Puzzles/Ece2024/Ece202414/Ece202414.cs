@@ -5,6 +5,8 @@ using Pzl.Tools.Strings;
 namespace Pzl.Everybody.Puzzles.Ece2024.Ece202414;
 
 [Name("The House of Palms")]
+[Comment("Part 3 takes around 10s")]
+[IsSlow]
 public class Ece202414 : EverybodyEventPuzzle
 {
     public PuzzleResult Part1(string input)

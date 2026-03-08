@@ -6,13 +6,13 @@ public static class Rucksacks
 {
     public static int GetPriority1(string input)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0).ToList();
         return GetPrioritySumForLines(lines);
     }
 
     public static int GetPriority2(string input)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0).ToList();
         return GetPrioritySumForGroups(lines);
     }
 
@@ -29,9 +29,7 @@ public static class Rucksacks
         foreach (var c in a1)
         {
             if (a2.Contains(c))
-            {
                 return GetPriority(c);
-            }
         }
 
         return 0;
@@ -66,19 +64,13 @@ public static class Rucksacks
         return 0;
     }
 
-    private static int GetPriority(char c)
-    {
-        return char.IsUpper(c)
-            ? c - 38
-            : c - 96;
-    }
+    private static int GetPriority(char c) => char.IsUpper(c)
+        ? c - 38
+        : c - 96;
 
-    private static string[] SplitInTwo(string s)
-    {
-        return new[]
-        {
-            s[..(s.Length / 2)],
-            s[(s.Length / 2)..]
-        };
-    }
+    private static string[] SplitInTwo(string s) =>
+    [
+        s[..(s.Length / 2)],
+        s[(s.Length / 2)..]
+    ];
 }

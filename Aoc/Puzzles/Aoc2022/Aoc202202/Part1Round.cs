@@ -19,7 +19,7 @@ public class Part1Round : RockPaperScissorsRound
         return new Part1Round(villainAction, heroAction);
     }
 
-    public int Score
+    public override int Score
     {
         get
         {
@@ -31,21 +31,13 @@ public class Part1Round : RockPaperScissorsRound
         }
     }
 
-    private bool IsWinner
+    private bool IsWinner => _villainAction switch
     {
-        get
-        {
-            switch (_villainAction)
-            {
-                case Action.Paper when _heroAction == Action.Scissors:
-                case Action.Rock when _heroAction == Action.Paper:
-                case Action.Scissors when _heroAction == Action.Rock:
-                    return true;
-                default:
-                    return false;
-            }
-        }
-    }
+        Action.Paper when _heroAction == Action.Scissors => true,
+        Action.Rock when _heroAction == Action.Paper => true,
+        Action.Scissors when _heroAction == Action.Rock => true,
+        _ => false
+    };
 
     private bool IsDraw => _villainAction == _heroAction;
 

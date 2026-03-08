@@ -7,7 +7,10 @@ public class BeaconSystem
 {
     public BeaconSystemResult GetResult(string input)
     {
-        var groups = StringReader.ReadLineGroups(input);
+        var groups = input
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single))
+            .ToList();
         var scanners = groups.Select(ParseScanner).ToList();
 
         var baseScanner = scanners.First();
@@ -55,7 +58,7 @@ public class BeaconSystem
         return new BeaconSystemResult(baseScanner.BeaconCoords.Count, maxDistance);
     }
 
-    private static BeaconScanner ParseScanner(IList<string> lines)
+    private static BeaconScanner ParseScanner(string[] lines)
     {
         var id = int.Parse(lines.First().Split(' ')[2]);
         var beaconCoords = lines.Skip(1).Select(ParseCoord).ToHashSet();

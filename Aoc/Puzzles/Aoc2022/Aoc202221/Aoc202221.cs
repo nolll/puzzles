@@ -22,7 +22,7 @@ public class Aoc202221 : AocPuzzle
 
     public long Part1(string input)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0);
         var monkeys = GetMonkeys(lines);
 
         var root = monkeys["root"];
@@ -31,7 +31,7 @@ public class Aoc202221 : AocPuzzle
         return result;
     }
 
-    private Dictionary<string, YellMonkey> GetMonkeys(IEnumerable<string> lines)
+    private static Dictionary<string, YellMonkey> GetMonkeys(IEnumerable<string> lines)
     {
         var monkeys = new Dictionary<string, YellMonkey>();
         foreach (var line in lines)
@@ -41,25 +41,15 @@ public class Aoc202221 : AocPuzzle
             var actionParts = parts[1].Split(' ');
 
             if (actionParts.Length == 1)
-            {
                 monkeys.Add(name, new NumberMonkey(monkeys, long.Parse(actionParts[0])));
-            }
             else if (actionParts[1] == "+")
-            {
                 monkeys.Add(name, new AdditionMonkey(monkeys, actionParts[0], actionParts[2]));
-            }
             else if (actionParts[1] == "-")
-            {
                 monkeys.Add(name, new SubtractionMonkey(monkeys, actionParts[0], actionParts[2]));
-            }
             else if (actionParts[1] == "*")
-            {
                 monkeys.Add(name, new MultiplicationMonkey(monkeys, actionParts[0], actionParts[2]));
-            }
-            else if (actionParts[1] == "/")
-            {
+            else if (actionParts[1] == "/") 
                 monkeys.Add(name, new DivisionMonkey(monkeys, actionParts[0], actionParts[2]));
-            }
         }
 
         return monkeys;
@@ -67,7 +57,7 @@ public class Aoc202221 : AocPuzzle
 
     public long Part2(string input)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0).ToList();
 
         var tempMonkeys = GetMonkeys(lines);
         var numbers = new Dictionary<string, long>();
@@ -130,20 +120,14 @@ public class Aoc202221 : AocPuzzle
                 }
                 else
                 {
-                    if (!leftIsNumber && numbers.TryGetValue(left, out var leftResult))
-                    {
+                    if (!leftIsNumber && numbers.TryGetValue(left, out var leftResult)) 
                         current = current.Replace(left, leftResult.ToString());
-                    }
-
-                    if (!middleIsNumber && numbers.TryGetValue(middle, out var middleResult))
-                    {
+                    
+                    if (!middleIsNumber && numbers.TryGetValue(middle, out var middleResult)) 
                         current = current.Replace(middle, middleResult.ToString());
-                    }
 
-                    if (!rightIsNumber && numbers.TryGetValue(right, out var rightResult))
-                    {
+                    if (!rightIsNumber && numbers.TryGetValue(right, out var rightResult)) 
                         current = current.Replace(right, rightResult.ToString());
-                    }
 
                     queue.Enqueue(current);
                 }
@@ -163,42 +147,22 @@ public class Aoc202221 : AocPuzzle
         var right = parts[4];
         var searchedIsMiddle = key == middle;
 
-        if (op == "+")
+        return op switch
         {
-            return searchedIsMiddle
-                ? $"{middle} = {left} - {right}"
-                : $"{right} = {left} - {middle}";
-        }
-        if (op == "-")
-        {
-            return searchedIsMiddle
-                ? $"{middle} = {left} + {right}"
-                : $"{right} = {left} + {middle}";
-        }
-        if (op == "*")
-        {
-            return searchedIsMiddle
-                ? $"{middle} = {left} / {right}"
-                : $"{right} = {left} / {middle}";
-        }
-        return searchedIsMiddle
-            ? $"{middle} = {left} * {right}"
-            : $"{right} = {left} * {middle}";
+            "+" => searchedIsMiddle ? $"{middle} = {left} - {right}" : $"{right} = {left} - {middle}",
+            "-" => searchedIsMiddle ? $"{middle} = {left} + {right}" : $"{right} = {left} + {middle}",
+            "*" => searchedIsMiddle ? $"{middle} = {left} / {right}" : $"{right} = {left} / {middle}",
+            _ => searchedIsMiddle ? $"{middle} = {left} * {right}" : $"{right} = {left} * {middle}"
+        };
     }
 
-    private static long PerformCalc(long leftNumber, long rightNumber, string operation)
+    private static long PerformCalc(long leftNumber, long rightNumber, string operation) => operation switch
     {
-        if (operation == "+")
-            return (leftNumber + rightNumber);
-        if (operation == "-")
-            return (leftNumber - rightNumber);
-        if (operation == "*")
-            return (leftNumber * rightNumber);
-        return (leftNumber / rightNumber);
-    }
+        "+" => (leftNumber + rightNumber),
+        "-" => (leftNumber - rightNumber),
+        "*" => (leftNumber * rightNumber),
+        _ => (leftNumber / rightNumber)
+    };
 
-    private bool IsNumber(string s)
-    {
-        return long.TryParse(s, out _);
-    }
+    private static bool IsNumber(string s) => long.TryParse(s, out _);
 }

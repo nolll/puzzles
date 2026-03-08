@@ -10,7 +10,7 @@ public class BingoGame
 
     public BingoGame(string input)
     {
-        var groups = StringReader.ReadStringGroups(input);
+        var groups = input.Trim().Split(LineBreaks.Double);
         _numbers = groups.First().Split(',').Select(int.Parse).ToList();
         _boards = ParseBoards(groups.Skip(1));
     }
@@ -41,11 +41,8 @@ public class BingoGame
         return 0;
     }
 
-    private int CalculateScore(BingoBoard board, in int number)
-    {
-        return board.Score * number;
-    }
-        
+    private static int CalculateScore(BingoBoard board, in int number) => board.Score * number;
+
     private void MarkNumber(in int number)
     {
         foreach (var board in _boards.Values)

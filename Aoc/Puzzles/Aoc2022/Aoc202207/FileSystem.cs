@@ -2,14 +2,9 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202207;
 
-public class FileSystem
+public class FileSystem(string input)
 {
-    private readonly ElfDirectory _fileSystem;
-
-    public FileSystem(string input)
-    {
-        _fileSystem = ParseFileSystem(input);
-    }
+    private readonly ElfDirectory _fileSystem = ParseFileSystem(input);
 
     public long Part1()
     {
@@ -37,7 +32,7 @@ public class FileSystem
 
     private static ElfDirectory ParseFileSystem(string input)
     {
-        var lines = StringReader.ReadLines(input, false).Skip(1);
+        var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0).Skip(1);
 
         var fileSystem = new ElfDirectory();
         var currentDir = fileSystem;

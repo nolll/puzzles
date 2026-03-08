@@ -62,7 +62,7 @@ public class FallingSand
     private static Grid<char> BuildGrid(string input, int part)
     {
         var grid = new Grid<char>(1, 1, Chars.Space);
-        var lines = StringReader.ReadLines(input, false);
+        var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0);
 
         var coordLists = lines.Select(o => o.Split(" -> "));
         foreach (var coordList in coordLists)

@@ -6,7 +6,10 @@ public class DistressSignal
 {
     public int Part1(string input)
     {
-        var lineGroups = StringReader.ReadLineGroups(input);
+        var lineGroups = input
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single).ToList())
+            .ToList();
         var indexSum = 0;
         
         for (var i = 0; i < lineGroups.Count; i++)
@@ -25,8 +28,11 @@ public class DistressSignal
 
     public int Part2(string input)
     {
-        var lines = StringReader.ReadLines(input, false);
-        var items = lines.Select(ParseSignalItem).ToList();
+        var items = input
+            .Split(LineBreaks.Single)
+            .Where(o => o.Length > 0)
+            .Select(ParseSignalItem)
+            .ToList();
         var dividerItems = CreateDividerItems();
         items.AddRange(dividerItems);
         items.Sort(SignalComparer.Compare);

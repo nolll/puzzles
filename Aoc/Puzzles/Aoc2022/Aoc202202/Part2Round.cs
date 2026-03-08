@@ -19,42 +19,24 @@ public class Part2Round : RockPaperScissorsRound
         return new Part2Round(villainAction, preferredResult);
     }
 
-    public int Score
+    public override int Score => _preferredResult switch
     {
-        get
-        {
-            return _preferredResult switch
-            {
-                PreferredResult.Win => GetWinScore(WinAction),
-                PreferredResult.Draw => GetDrawScore(_villainAction),
-                _ => GetLoserScore(LoseAction)
-            };
-        }
-    }
+        PreferredResult.Win => GetWinScore(WinAction),
+        PreferredResult.Draw => GetDrawScore(_villainAction),
+        _ => GetLoserScore(LoseAction)
+    };
 
-    private Action WinAction
+    private Action WinAction => _villainAction switch
     {
-        get
-        {
-            return _villainAction switch
-            {
-                Action.Paper => Action.Scissors,
-                Action.Rock => Action.Paper,
-                _ => Action.Rock
-            };
-        }
-    }
+        Action.Paper => Action.Scissors,
+        Action.Rock => Action.Paper,
+        _ => Action.Rock
+    };
 
-    private Action LoseAction
+    private Action LoseAction => _villainAction switch
     {
-        get
-        {
-            return _villainAction switch
-            {
-                Action.Paper => Action.Rock,
-                Action.Rock => Action.Scissors,
-                _ => Action.Paper
-            };
-        }
-    }
+        Action.Paper => Action.Rock,
+        Action.Rock => Action.Scissors,
+        _ => Action.Paper
+    };
 }

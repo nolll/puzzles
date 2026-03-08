@@ -6,16 +6,17 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202019;
 
 public class MonsterImageValidator
 {
-    private const int MaxDepth = 100;
-
     private readonly IList<string> _messages;
     private readonly Dictionary<int, Rule> _rules;
 
     public MonsterImageValidator(string input, bool useRecursiveRules = false)
     {
-        var groups = StringReader.ReadLineGroups(input);
+        var groups = input
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single).ToList())
+            .ToList();
         var ruleStrings = groups[0];
-        _messages = groups.Count > 1 ? groups[1] : new List<string>();
+        _messages = groups.Count > 1 ? groups[1] : [];
         _rules = ParseRules(ruleStrings);
         if (useRecursiveRules)
         {
@@ -24,14 +25,8 @@ public class MonsterImageValidator
         }
     }
 
-    private class Rule8 : RecursiveRule
+    private class Rule8(Dictionary<int, Rule> allRules) : RecursiveRule(8, RuleSets, allRules)
     {
-        public Rule8(Dictionary<int, Rule> allRules)
-            : base(8, RuleSets, allRules)
-        {
-
-        }
-
         private static IList<IList<int>> RuleSets =>
             new List<IList<int>>
             {
@@ -46,14 +41,8 @@ public class MonsterImageValidator
             };
     }
 
-    private class Rule11 : RecursiveRule
+    private class Rule11(Dictionary<int, Rule> allRules) : RecursiveRule(11, RuleSets, allRules)
     {
-        public Rule11(Dictionary<int, Rule> allRules)
-            : base(11, RuleSets, allRules)
-        {
-
-        }
-
         private static IList<IList<int>> RuleSets =>
             new List<IList<int>>
             {
@@ -68,7 +57,7 @@ public class MonsterImageValidator
             };
     }
 
-    private Dictionary<int, Rule> ParseRules(IList<string> ruleStrings)
+    private static Dictionary<int, Rule> ParseRules(List<string> ruleStrings)
     {
         var rules = new Dictionary<int, Rule>();
             

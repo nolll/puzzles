@@ -4,29 +4,21 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202219;
 
 public class RobotFactory
 {
-    public int Part1(string input)
-    {
-        var lines = StringReader.ReadLines(input, false);
-        var blueprints = lines.Select(ParseBlueprint);
-        var qualityLevels = blueprints.Select(GetQualityLevel);
+    public int Part1(string input) => input.Split(LineBreaks.Single)
+        .Where(o => o.Length > 0)
+        .Select(ParseBlueprint)
+        .Select(GetQualityLevel)
+        .Sum();
 
-        return qualityLevels.Sum();
-    }
+    public int Part2(string input) => input.Split(LineBreaks.Single)
+        .Where(o => o.Length > 0)
+        .Take(3)
+        .Select(ParseBlueprint)
+        .Select(o => FindBestConfiguration(o, 32).GeodeCount)
+        .Aggregate(1, (x, y) => x * y);
 
-    public int Part2(string input)
-    {
-        var lines = StringReader.ReadLines(input, false).Take(3);
-        var blueprints = lines.Select(ParseBlueprint);
-        var qualityLevels = blueprints.Select(o => FindBestConfiguration(o, 32).GeodeCount);
-
-        return qualityLevels.Aggregate(1, (x, y) => x * y);
-    }
-
-    private static int GetQualityLevel(FactoryBlueprint blueprint)
-    {
-        var best = FindBestConfiguration(blueprint, 24);
-        return blueprint.Id * best.GeodeCount;
-    }
+    private static int GetQualityLevel(FactoryBlueprint blueprint) => 
+        blueprint.Id * FindBestConfiguration(blueprint, 24).GeodeCount;
 
     public static FactoryState FindBestConfiguration(FactoryBlueprint blueprint, int time)
     {

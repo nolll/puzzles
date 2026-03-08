@@ -10,7 +10,10 @@ public class TransparentPaper
 
     public TransparentPaper(string input)
     {
-        var groups = StringReader.ReadLineGroups(input);
+        var groups = input
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single))
+            .ToList();
 
         _grid = BuildGrid(groups.First());
         _folds = groups[1];

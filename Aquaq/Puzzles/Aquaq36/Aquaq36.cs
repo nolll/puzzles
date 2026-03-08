@@ -13,7 +13,7 @@ public class Aquaq36 : AquaqPuzzle
     public PuzzleResult Run(string input)
     {
         var factorProvider = new FactorCache();
-        var tetonors = StringReader.ReadStringGroups(input);
+        var tetonors = input.Trim().Split(LineBreaks.Double);
         var sum = 0;
 
         foreach (var tetonor in tetonors)

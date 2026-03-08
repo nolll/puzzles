@@ -63,7 +63,10 @@ public class Aoc202308 : AocPuzzle
     {
         var connections = new Dictionary<string, (string Left, string Right)>();
 
-        var groups = StringReader.ReadLineGroups(input);
+        var groups = input
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single))
+            .ToList();
         var directions = groups.First().First().ToCharArray();
 
         foreach (var line in groups.Last())

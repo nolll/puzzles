@@ -5,13 +5,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202210;
 
 public class CathodeRayTube
 {
-    private const string NoopOperation = "noop";
     private const string AddXOperation = "addx";
 
     public (int sum, string letters, string image) Run(string input)
     {
         var values = new List<int>();
-        var lines = StringReader.ReadLines(input, false);
+        var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0).ToList();
         var cycle = 0;
         var x = 1;
         var command = "";

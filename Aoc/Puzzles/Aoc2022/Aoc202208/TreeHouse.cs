@@ -15,13 +15,13 @@ public class TreeHouse
 
     public TreeHouse(string input)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0).ToList();
         var patchWidth = lines[0].Length;
         var patchHeight = lines.Count;
         _treeGrid = GridBuilder.BuildIntGridFromNonSeparated(input);
         _part1Grid = new Grid<bool>(patchWidth, patchHeight);
         _part2Grid = new Grid<int>(patchWidth, patchHeight);
-        _directions = new [] {GridDirection.Up, GridDirection.Right, GridDirection.Down, GridDirection.Left };
+        _directions = [GridDirection.Up, GridDirection.Right, GridDirection.Down, GridDirection.Left];
     }
 
     public void Calc()

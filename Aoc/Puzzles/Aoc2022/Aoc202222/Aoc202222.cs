@@ -7,21 +7,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202222;
 [Name("Monkey Map")]
 public class Aoc202222 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
-    {
-        var result = Part1(input);
-        return new PuzzleResult(result, "5230885ca3521519a0995658751be3a5");
-    }
-
-    public PuzzleResult RunPart2(string input)
-    {
-        var result = Part2(input);
-        return new PuzzleResult(result, "192dc6b2bb8fcfe7b7deaa5f30ec9f80");
-    }
+    public PuzzleResult RunPart1(string input) => new(Part1(input), "5230885ca3521519a0995658751be3a5");
+    public PuzzleResult RunPart2(string input) => new(Part2(input), "192dc6b2bb8fcfe7b7deaa5f30ec9f80");
 
     public static int Part1(string input)
     {
-        var groups = StringReader.ReadStringGroupsWithWhitespace(input);
+        var groups = input.Split(LineBreaks.Double);
         var grid = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
         grid.MoveTo(0, 0);
         grid.TurnTo(GridDirection.Right);
@@ -99,7 +90,7 @@ public class Aoc202222 : AocPuzzle
 
     public static int Part2(string input)
     {
-        var groups = StringReader.ReadStringGroupsWithWhitespace(input);
+        var groups = input.Split(LineBreaks.Double);
         var grid = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
         grid.MoveTo(0, 0);
         grid.TurnTo(GridDirection.Right);
@@ -227,7 +218,7 @@ public class Aoc202222 : AocPuzzle
     private static IEnumerable<string> ParsePath(string s)
     {
         var css = s.Replace("R", ",R,").Replace("L", ",L,");
-        return css.Split(',').ToArray();
+        return css.Split(',');
     }
 
     private static int GetFacingScore(GridDirection d)

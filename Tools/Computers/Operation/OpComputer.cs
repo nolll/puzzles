@@ -35,7 +35,7 @@ public class OpComputer
     public long RunTestProgram(string operationsInput, string programInput)
     {
         var operationNames = GetOperationNameDictionary(operationsInput);
-        var commands = StringReader.ReadLines(programInput, false).Select(s => ParseIntCommand(s, operationNames));
+        var commands = programInput.Split(LineBreaks.Single).Where(o => o.Length > 0).Select(s => ParseIntCommand(s, operationNames));
         var registers = new long[] { 0, 0, 0, 0 };
         foreach (var command in commands)
         {

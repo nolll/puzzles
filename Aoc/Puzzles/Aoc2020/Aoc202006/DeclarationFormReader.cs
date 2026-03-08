@@ -2,40 +2,18 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202006;
 
-public class DeclarationFormReader
+public class DeclarationFormReader(string input)
 {
-    private readonly IList<IList<string>> _groups;
+    private readonly List<List<string>> _groups = input
+        .Split(LineBreaks.Double)
+        .Select(o => o.Split(LineBreaks.Single).ToList())
+        .ToList();
 
-    public DeclarationFormReader(string input)
-    {
-        _groups = StringReader.ReadLineGroups(input);
-    }
+    public int SumOfAtLeastOneYes => _groups.Select(GetLettersWithAtLeastOneYes).Select(o => o.Length).Sum();
+    public int SumOfAllYes => _groups.Select(GetLettersWithAllYes).Select(o => o.Length).Sum();
 
-    public int SumOfAtLeastOneYes
-    {
-        get
-        {
-            var lettersByGroup = _groups.Select(GetLettersWithAtLeastOneYes);
-            var groupCounts = lettersByGroup.Select(o => o.Length);
-            return groupCounts.Sum();
-        }
-    }
-
-    public int SumOfAllYes
-    {
-        get
-        {
-            var lettersByGroup = _groups.Select(GetLettersWithAllYes);
-            var groupCounts = lettersByGroup.Select(o => o.Length);
-            return groupCounts.Sum();
-        }
-    }
-
-    private static char[] GetLettersWithAtLeastOneYes(IList<string> group)
-    {
-        var allAnswers = string.Join("", group);
-        return allAnswers.ToCharArray().Distinct().OrderBy(o => o).ToArray();
-    }
+    private static char[] GetLettersWithAtLeastOneYes(IList<string> group) => 
+        string.Join("", group).ToCharArray().Distinct().OrderBy(o => o).ToArray();
 
     private static char[] GetLettersWithAllYes(IList<string> group)
     {

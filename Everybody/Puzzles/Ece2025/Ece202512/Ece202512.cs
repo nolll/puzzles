@@ -4,6 +4,8 @@ using Pzl.Tools.Grids.Grids2d;
 namespace Pzl.Everybody.Puzzles.Ece2025.Ece202512;
 
 [Name("One Spark to Burn Them All")]
+[Comment("Part 3 takes around 10s")]
+[IsSlow]
 public class Ece202512 : EverybodyEventPuzzle
 {
     public PuzzleResult Part1(string input)

@@ -47,14 +47,13 @@ public class MonkeyBusiness
         return topLevels[0] * topLevels[1];
     }
 
-    private static Monkey[] ParseMonkeys(string input)
-    {
-        return StringReader.ReadLineGroups(input)
-            .Select(ParseMonkey)
-            .ToArray();
-    }
+    private static Monkey[] ParseMonkeys(string input) => input
+        .Split(LineBreaks.Double)
+        .Select(o => o.Split(LineBreaks.Single).ToList())
+        .Select(ParseMonkey)
+        .ToArray();
 
-    private static Monkey ParseMonkey(IList<string> group)
+    private static Monkey ParseMonkey(List<string> group)
     {
         var items = ParseItems(group[1]);
         var operation = ParseOperation(group[2]);

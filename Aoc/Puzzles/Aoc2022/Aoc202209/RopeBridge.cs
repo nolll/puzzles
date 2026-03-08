@@ -5,19 +5,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202209;
 
 public class RopeBridge
 {
-    public int Part1(string input)
-    {
-        return Run(input, 2);
-    }
-
-    public int Part2(string input)
-    {
-        return Run(input, 10);
-    }
+    public int Part1(string input) => Run(input, 2);
+    public int Part2(string input) => Run(input, 10);
 
     private int Run(string input, int knotCount)
     {
-        var lines = StringReader.ReadLines(input, false);
+        var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0);
         var visited = new HashSet<Coord>();
         var knots = new Coord[knotCount];
         for (var i = 0; i < knotCount; i++)
@@ -62,25 +55,11 @@ public class RopeBridge
         return result;
     }
 
-    private Coord GetPosAfterMove(Coord coord, string direction)
+    private Coord GetPosAfterMove(Coord coord, string direction) => direction switch
     {
-        return direction switch
-        {
-            "U" => new Coord(coord.X, coord.Y + 1),
-            "R" => new Coord(coord.X + 1, coord.Y),
-            "D" => new Coord(coord.X, coord.Y - 1),
-            _ => new Coord(coord.X - 1, coord.Y)
-        };
-    }
-
-    private GridDirection GetDir(string part)
-    {
-        return part switch
-        {
-            "U" => GridDirection.Up,
-            "R" => GridDirection.Right,
-            "D" => GridDirection.Down,
-            _ => GridDirection.Left
-        };
-    }
+        "U" => new Coord(coord.X, coord.Y + 1),
+        "R" => new Coord(coord.X + 1, coord.Y),
+        "D" => new Coord(coord.X, coord.Y - 1),
+        _ => new Coord(coord.X - 1, coord.Y)
+    };
 }

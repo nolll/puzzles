@@ -7,21 +7,15 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202305;
 [Comment("Range solution for part 2 inspired by HyperNeutrino")]
 public class Aoc202305 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
-    {
-        var result = Part1(input);
-        return new PuzzleResult(result, "8af1efe2f5bf2d0e78873be92fcd8fff");
-    }
-
-    public PuzzleResult RunPart2(string input)
-    {
-        var result = Part2(input);
-        return new PuzzleResult(result, "bd7466367c1fe654a2ec0e3f1fe3f112");
-    }
+    public PuzzleResult RunPart1(string input) => new(Part1(input), "8af1efe2f5bf2d0e78873be92fcd8fff");
+    public PuzzleResult RunPart2(string input) => new(Part2(input), "bd7466367c1fe654a2ec0e3f1fe3f112");
 
     public static long Part1(string input)
     {
-        var groups = StringReader.ReadLineGroups(input);
+        var groups = input
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single).ToList())
+            .ToList();
         var seeds = ParseSeeds(groups.First());
         var rangeGroups = groups.Skip(1).Select(ParseGroup).ToList();
         var locations = seeds.Select(seed => Convert(rangeGroups, seed));
@@ -48,7 +42,10 @@ public class Aoc202305 : AocPuzzle
 
     public static long Part2(string input)
     {
-        var groups = StringReader.ReadLineGroups(input);
+        var groups = input
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single).ToList())
+            .ToList();
 
         var seedNumbers = ParseSeeds(groups.First());
         var rangeGroups = groups.Skip(1).Select(ParseGroup).ToList();
@@ -99,10 +96,10 @@ public class Aoc202305 : AocPuzzle
         return seeds.MinBy(o => o.Start)!.Start;
     }
 
-    private static List<long> ParseSeeds(IEnumerable<string> firstGroup) => firstGroup.First().Split(": ").Last().Split(' ').Select(long.Parse).ToList();
+    private static List<long> ParseSeeds(IEnumerable<string> firstGroup) => 
+        firstGroup.First().Split(": ").Last().Split(' ').Select(long.Parse).ToList();
 
-    private static RangeGroup ParseGroup(IList<string> group) 
-        => new(group.Skip(1).Select(ParseRange).ToList());
+    private static RangeGroup ParseGroup(IList<string> group) => new(group.Skip(1).Select(ParseRange).ToList());
 
     private static Range ParseRange(string s)
     {

@@ -10,7 +10,10 @@ public class CalorieCounts
 
     public CalorieCounts(string input)
     {
-        var stringGroups = StringReader.ReadLineGroups(input);
-        _sums = stringGroups.Select(o => o.Sum(int.Parse)).ToArray();
+        _sums = input
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single))
+            .Select(o => o.Sum(int.Parse))
+            .ToArray();
     }
 }

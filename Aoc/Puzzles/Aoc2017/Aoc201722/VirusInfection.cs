@@ -21,7 +21,7 @@ public class VirusInfection
         _grid.TurnTo(GridDirection.Up);
     }
 
-    public int RunPart1(int iterations)
+    public int Part1(int iterations)
     {
         var infectionCount = 0;
         for (var i = 0; i < iterations; i++)
@@ -45,7 +45,7 @@ public class VirusInfection
         return infectionCount;
     }
 
-    public int RunPart2(int iterations)
+    public int Part2(int iterations)
     {
         var infectionCount = 0;
         for (var i = 0; i < iterations; i++)

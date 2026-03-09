@@ -15,7 +15,7 @@ public class Aoc201722Tests
     public void InfectionCountIsCorrectForPart1(int iterations, int expected)
     {
         var infection = new VirusInfection(Input);
-        var infectionCount = infection.RunPart1(iterations);
+        var infectionCount = infection.Part1(iterations);
 
         infectionCount.Should().Be(expected);
     }
@@ -26,7 +26,7 @@ public class Aoc201722Tests
     public void InfectionCountIsCorrectForPart2(int iterations, int expected)
     {
         var infection = new VirusInfection(Input);
-        var infectionCount = infection.RunPart2(iterations);
+        var infectionCount = infection.Part2(iterations);
 
         infectionCount.Should().Be(expected);
     }

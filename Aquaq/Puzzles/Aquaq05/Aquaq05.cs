@@ -5,11 +5,12 @@ namespace Pzl.Aquaq.Puzzles.Aquaq05;
 [Name("Snake eyes")]
 public class Aquaq05 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("618a2293fcd6600e06eb2d002758bd97")]
+    public PuzzleResult Solve(string input)
     {
         var sum = FindSumOfIndexesWithMatchingDice(input);
 
-        return new PuzzleResult(sum, "618a2293fcd6600e06eb2d002758bd97");
+        return new PuzzleResult(sum);
     }
 
     public static int FindSumOfIndexesWithMatchingDice(string input)

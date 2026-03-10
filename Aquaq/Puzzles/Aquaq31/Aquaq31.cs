@@ -5,11 +5,12 @@ namespace Pzl.Aquaq.Puzzles.Aquaq31;
 [Name("Brandless Combination Cubes")]
 public class Aquaq31 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("a5034749df5937c49bba3b06acc7119c")]
+    public PuzzleResult Solve(string input)
     {
         var result = Rotate(input);
 
-        return new PuzzleResult(result, "a5034749df5937c49bba3b06acc7119c");
+        return new PuzzleResult(result);
     }
 
     public static int Rotate(string input)

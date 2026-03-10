@@ -7,12 +7,13 @@ namespace Pzl.Aquaq.Puzzles.Aquaq21;
 [Name("Clean Sweep")]
 public class Aquaq21 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("e9476ebab07e71bb8b8872bca85185f5")]
+    public PuzzleResult Solve(string input)
     {
-        return new PuzzleResult(Run(input, 5), "e9476ebab07e71bb8b8872bca85185f5");
+        return new PuzzleResult(Solve(input, 5));
     }
 
-    public static int Run(string input, int width)
+    public static int Solve(string input, int width)
     {
         var lines = input.Split(LineBreaks.Single);
         var rows = lines.Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();

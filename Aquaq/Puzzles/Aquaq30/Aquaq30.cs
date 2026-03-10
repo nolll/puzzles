@@ -6,12 +6,13 @@ namespace Pzl.Aquaq.Puzzles.Aquaq30;
 [Name("Flip Out")]
 public class Aquaq30 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("a7ac2d6ffdd2d7759b9d51599832deae")]
+    public PuzzleResult Solve(string input)
     {
         var cardFlipper = new CardFlipper();
         var decks = input.Split(LineBreaks.Single);
         var sum = decks.Sum(cardFlipper.CountValidStartingMoves);
 
-        return new PuzzleResult(sum, "a7ac2d6ffdd2d7759b9d51599832deae");
+        return new PuzzleResult(sum);
     }
 }

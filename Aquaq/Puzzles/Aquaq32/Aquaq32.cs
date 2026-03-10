@@ -7,12 +7,13 @@ namespace Pzl.Aquaq.Puzzles.Aquaq32;
 [Name("In Parenthesis")]
 public partial class Aquaq32 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("8b52d401a6c9cf4350dc85e2cebcec81")]
+    public PuzzleResult Solve(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var result = lines.Count(IsBalanced);
 
-        return new PuzzleResult(result, "8b52d401a6c9cf4350dc85e2cebcec81");
+        return new PuzzleResult(result);
     }
 
     public static bool IsBalanced(string input) => RemoveMatchingParenthesis(RemoveClutter(input)).Length == 0;

@@ -8,11 +8,12 @@ public class Aquaq39 : AquaqPuzzle
     private const int GameTarget = 501;
     private const int DartsPerTurn = 3;
 
-    public PuzzleResult Run(string input)
+    [Puzzle("5522d4ea2615abc82626c1563f788ce8")]
+    public PuzzleResult Solve(string input)
     {
         var result = PlayGame(input);
 
-        return new PuzzleResult(result, "5522d4ea2615abc82626c1563f788ce8");
+        return new PuzzleResult(result);
     }
 
     public static int PlayGame(string input)

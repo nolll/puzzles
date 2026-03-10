@@ -10,11 +10,12 @@ public class Aquaq11 : AquaqPuzzle
     private const char Empty = '.';
     private const char Filled = '#';
 
-    public PuzzleResult Run(string input)
+    [Puzzle("f8ed67eec68206fe2abe5c3685719e46")]
+    public PuzzleResult Solve(string input)
     {
         var result = CountRequiredTiles(input);
 
-        return new PuzzleResult(result, "f8ed67eec68206fe2abe5c3685719e46");
+        return new PuzzleResult(result);
     }
 
     public static int CountRequiredTiles(string input)

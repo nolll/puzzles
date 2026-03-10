@@ -9,9 +9,10 @@ public class Aquaq16 : AquaqPuzzle
     private const int LetterHeight = 6;
 
     [AdditionalLocalInputFile("Alphabet.txt")]
-    public PuzzleResult Run(string input, string additionalInput)
+    [Puzzle("b900eb74f94c2243de65005bcc4ebd2c")]
+    public PuzzleResult Solve(string input, string additionalInput)
     {
-        return new PuzzleResult(RunInternal(input, additionalInput), "b900eb74f94c2243de65005bcc4ebd2c");
+        return new PuzzleResult(RunInternal(input, additionalInput));
     }
     
     public int RunInternal(string input, string additionalInput)

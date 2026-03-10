@@ -4,20 +4,12 @@ using Pzl.Common;
 namespace Pzl.Aquaq.Puzzles.Aquaq01;
 
 [Name("Rose by any other name")]
-public class Aquaq01 : AquaqPuzzle
+public partial class Aquaq01 : AquaqPuzzle
 {
-    private static readonly Regex HexRegex = new("[^0123456789abcdef]");
-
-    public PuzzleResult Run(string input)
+    [Puzzle("8ee5a43d96dd610ecf1d39eccfddf218")]
+    public string Solve(string input)
     {
-        var result = GetHexString(input);
-
-        return new PuzzleResult(result, "8ee5a43d96dd610ecf1d39eccfddf218");
-    }
-
-    public static string GetHexString(string input)
-    {
-        var s = HexRegex.Replace(input.ToLower(), "0");
+        var s = HexRegex().Replace(input.ToLower(), "0");
 
         var length = s.Length % 3 == 0 
             ? s.Length 
@@ -33,4 +25,7 @@ public class Aquaq01 : AquaqPuzzle
 
         return result;
     }
+
+    [GeneratedRegex("[^0123456789abcdef]")]
+    private static partial Regex HexRegex();
 }

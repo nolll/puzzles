@@ -12,11 +12,12 @@ public class Aquaq28 : AquaqPuzzle
     private const char Empty = ' ';
     private const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789";
 
-    public PuzzleResult Run(string input)
+    [Puzzle("b2f9a54afc1e88e86671425bfc4e48b4")]
+    public PuzzleResult Solve(string input)
     {
         var result = Encrypt(input, "FISSION_MAILED");
 
-        return new PuzzleResult(result, "b2f9a54afc1e88e86671425bfc4e48b4");
+        return new PuzzleResult(result);
     }
 
     public static string Encrypt(string input, string word)

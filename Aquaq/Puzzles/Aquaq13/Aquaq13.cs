@@ -6,8 +6,8 @@ namespace Pzl.Aquaq.Puzzles.Aquaq13;
 [Name("O RLE?")]
 public class Aquaq13 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input) => 
-        new(input.Split(LineBreaks.Single).Sum(FindMaxRepeats), "86680930d41e9acceb49215121585640");
+    [Puzzle("86680930d41e9acceb49215121585640")]
+    public PuzzleResult Solve(string input) => new(input.Split(LineBreaks.Single).Sum(FindMaxRepeats));
 
     public static int FindMaxRepeats(string s)
     {

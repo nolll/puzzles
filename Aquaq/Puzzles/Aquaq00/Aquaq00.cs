@@ -6,15 +6,14 @@ namespace Pzl.Aquaq.Puzzles.Aquaq00;
 [Name("What's a numpad?")]
 public class Aquaq00 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("7b9dc822e24a14068d6a4c005470f906")]
+    public string Solve(string input)
     {
         var keyPresses = input.Split(LineBreaks.Single)
-            .Select(o => o.Trim().Split(' ').ToArray())
+            .Select(o => o.Trim().Split(' '))
             .Select(o => (int.Parse(o[0]), int.Parse(o[1])));
 
-        var result = HandleKeyPresses(keyPresses);
-
-        return new PuzzleResult(result, "7b9dc822e24a14068d6a4c005470f906");
+        return HandleKeyPresses(keyPresses);
     }
 
     public static string HandleKeyPresses(IEnumerable<(int key, int count)> input) => 

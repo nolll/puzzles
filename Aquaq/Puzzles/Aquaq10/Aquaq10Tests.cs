@@ -18,7 +18,7 @@ public class Aquaq10Tests
     [Fact]
     public void SmallestCost()
     {
-        var result = Aquaq10.Run(Input, "A", "C");
+        var result = Aquaq10.Solve(Input, "A", "C");
 
         result.Should().Be(29);
     }

@@ -8,12 +8,13 @@ namespace Pzl.Aquaq.Puzzles.Aquaq35;
 public class Aquaq35 : AquaqPuzzle
 {
     [AdditionalCommonInputFile("Words.txt")]
-    public PuzzleResult Run(string input, string additionalInput)
+    [Puzzle("47f8ac801da35487059c7f5acb1c77ac")]
+    public PuzzleResult Solve(string input, string additionalInput)
     {
         var words = additionalInput.Split(LineBreaks.Single);
         var keyword = FindKeyword(words, input);
 
-        return new PuzzleResult(keyword, "47f8ac801da35487059c7f5acb1c77ac");
+        return new PuzzleResult(keyword);
     }
 
     private static string FindKeyword(IEnumerable<string> words, string input)

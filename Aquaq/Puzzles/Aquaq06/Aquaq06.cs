@@ -5,12 +5,13 @@ namespace Pzl.Aquaq.Puzzles.Aquaq06;
 [Name("Let me count the ways")]
 public class Aquaq06 : AquaqPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("a693902fb2b369af1febd8b1d529364f")]
+    public PuzzleResult Solve()
     {
         const int n = 123;
         var result = FindOneCount(n);
 
-        return new PuzzleResult(result, "a693902fb2b369af1febd8b1d529364f");
+        return new PuzzleResult(result);
     }
 
     public static int FindOneCount(int n)

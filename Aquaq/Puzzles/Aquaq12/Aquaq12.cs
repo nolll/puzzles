@@ -6,11 +6,12 @@ namespace Pzl.Aquaq.Puzzles.Aquaq12;
 [Name("A Day In The Lift")]
 public class Aquaq12 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("a6668fd005e7ebda4e124253eea1e56e")]
+    public PuzzleResult Solve(string input)
     {
         var result = RideLift(input);
 
-        return new PuzzleResult(result, "a6668fd005e7ebda4e124253eea1e56e");
+        return new PuzzleResult(result);
     }
 
     public static int RideLift(string input)

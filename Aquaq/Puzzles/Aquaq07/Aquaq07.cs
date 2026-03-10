@@ -6,7 +6,8 @@ namespace Pzl.Aquaq.Puzzles.Aquaq07;
 [Name("What is best in life?")]
 public class Aquaq07 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("194aa6e361f7a234543335a05da32ec4")]
+    public PuzzleResult Solve(string input)
     {
         var games = input.Split(LineBreaks.Single)
             .Skip(1)
@@ -40,7 +41,7 @@ public class Aquaq07 : AquaqPuzzle
         var max = (int)Math.Floor(values.Max());
         var result = max - min;
 
-        return new PuzzleResult(result, "194aa6e361f7a234543335a05da32ec4");
+        return new PuzzleResult(result);
     }
     
     public static double ExpectedWinrate(double a, double b) => 1 / (1 + Math.Pow(10, (b - a) / 400));

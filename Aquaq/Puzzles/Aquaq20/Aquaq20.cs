@@ -5,9 +5,10 @@ namespace Pzl.Aquaq.Puzzles.Aquaq20;
 [Name("Blackjack")]
 public class Aquaq20 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("112a5875109cbca20cbe3dd1d02fe9fd")]
+    public PuzzleResult Solve(string input)
     {
-        return new PuzzleResult(PlayBlackjack(input), "112a5875109cbca20cbe3dd1d02fe9fd");
+        return new PuzzleResult(PlayBlackjack(input));
     }
 
     public static int PlayBlackjack(string input)

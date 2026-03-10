@@ -6,14 +6,15 @@ namespace Pzl.Aquaq.Puzzles.Aquaq38;
 [Name("Number Neighbours")]
 public class Aquaq38 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("56082eb21bc29c4cc0607606e3d88ddd")]
+    public PuzzleResult Solve(string input)
     {
         var indexStreakProvider = new IndexStreakProvider();
         var lists = input.Split(LineBreaks.Single)
             .Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();
         var sum = lists.Sum(o => GetComfScore(indexStreakProvider, o));
 
-        return new PuzzleResult(sum, "56082eb21bc29c4cc0607606e3d88ddd");
+        return new PuzzleResult(sum);
     }
 
     public static int GetComfScore(IndexStreakProvider indexStreakProvider, int[] a)

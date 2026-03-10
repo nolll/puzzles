@@ -6,12 +6,13 @@ namespace Pzl.Aquaq.Puzzles.Aquaq08;
 [Name("Cron Flakes")]
 public class Aquaq08 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("dd27abc4b9d9ddead1ae574a69b3edbc")]
+    public PuzzleResult Solve(string input)
     {
         var (milk, cereal) = RunInternal(input);
         var sum = milk + cereal;
 
-        return new PuzzleResult(sum, "dd27abc4b9d9ddead1ae574a69b3edbc");
+        return new PuzzleResult(sum);
     }
 
     public static (int milk, int cereal) RunInternal(string input)

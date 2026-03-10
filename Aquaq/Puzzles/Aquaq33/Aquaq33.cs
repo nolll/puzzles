@@ -5,9 +5,10 @@ namespace Pzl.Aquaq.Puzzles.Aquaq33;
 [Name("Bit of Bully")]
 public class Aquaq33 : AquaqPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("3c08f90044660194d3d619fa4c14d736")]
+    public PuzzleResult Solve()
     {
-        return new PuzzleResult(Run(245701), "3c08f90044660194d3d619fa4c14d736");
+        return new PuzzleResult(Run(245701));
     }
 
     public static long Run(int maxTarget)

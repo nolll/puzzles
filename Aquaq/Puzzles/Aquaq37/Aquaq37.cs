@@ -9,12 +9,13 @@ public class Aquaq37 : AquaqPuzzle
     private const int WordLength = 5;
 
     [AdditionalCommonInputFile("Words.txt")]
-    public PuzzleResult Run(string input, string additionalInput)
+    [Puzzle("ba0ef798d7f57b80a0675236159ccfb1")]
+    public PuzzleResult Solve(string input, string additionalInput)
     {
         var words = FindWords(input, additionalInput);
         var score = words.Sum(GetWordScore);
 
-        return new PuzzleResult(score, "ba0ef798d7f57b80a0675236159ccfb1");
+        return new PuzzleResult(score);
     }
 
     public List<string> FindWords(string input, string additionalInput)

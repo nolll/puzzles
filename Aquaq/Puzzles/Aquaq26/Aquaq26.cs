@@ -9,12 +9,9 @@ namespace Pzl.Aquaq.Puzzles.Aquaq26;
 public class Aquaq26 : AquaqPuzzle
 {
     [Puzzle("36fec1139b2f97e4783a60a6d4756578")]
-    public BigInteger Run(string input)
-    {
-        return input.Split(LineBreaks.Single)
-            .Select(BigInteger.Parse)
-            .Aggregate(BigInteger.Zero, (current, n) => current + FindFirstLargerNumber(n) - n);
-    }
+    public BigInteger Solve(string input) => input.Split(LineBreaks.Single)
+        .Select(BigInteger.Parse)
+        .Aggregate(BigInteger.Zero, (current, n) => current + FindFirstLargerNumber(n) - n);
 
     public static BigInteger FindFirstLargerNumber(BigInteger input)
     {

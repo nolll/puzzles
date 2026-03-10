@@ -9,11 +9,12 @@ public class Aquaq34 : AquaqPuzzle
     private const int TimeAtStation = 5;
     private static readonly IComparer<Train> WaitingTrainComparer = new WaitingTrainComparer();
 
-    public PuzzleResult Run(string input)
+    [Puzzle("7730ffba6665d8cc2f907ff7ea6fe6ea")]
+    public PuzzleResult Solve(string input)
     {
         var result = LongestRouteTime(input);
 
-        return new PuzzleResult(result, "7730ffba6665d8cc2f907ff7ea6fe6ea");
+        return new PuzzleResult(result);
     }
 
     public static int LongestRouteTime(string input)

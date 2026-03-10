@@ -8,11 +8,12 @@ public class Aquaq27 : AquaqPuzzle
 {
     private const char Empty = ' ';
 
-    public PuzzleResult Run(string input)
+    [Puzzle("c803fdd834b45081e38679f19c527374")]
+    public PuzzleResult Solve(string input)
     {
         var result = CalculateSnakeScore(input);
 
-        return new PuzzleResult(result, "c803fdd834b45081e38679f19c527374");
+        return new PuzzleResult(result);
     }
 
     public static int CalculateSnakeScore(string input)

@@ -6,9 +6,10 @@ namespace Pzl.Aquaq.Puzzles.Aquaq17;
 [Name("The Beautiful Shame")]
 public class Aquaq17 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("033640f1946bb06d49b637ee7b1c3a80")]
+    public PuzzleResult Solve(string input)
     {
-        return new PuzzleResult(RunInternal(input), "033640f1946bb06d49b637ee7b1c3a80");
+        return new PuzzleResult(RunInternal(input));
     }
 
     public static string RunInternal(string input)

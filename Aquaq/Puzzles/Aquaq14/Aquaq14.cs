@@ -22,10 +22,11 @@ public class Aquaq14 : AquaqPuzzle
     private static readonly IEnumerable<Coord> Diagonal1 = BuildDiagonal1();
     private static readonly IEnumerable<Coord> Diagonal2 = BuildDiagonal2();
 
-    public PuzzleResult Run(string input)
+    [Puzzle("d9665f8161f8ada6709d7be1564965fa")]
+    public PuzzleResult Solve(string input)
     {
         var result = PlayBingo(input);
-        return new PuzzleResult(result, "d9665f8161f8ada6709d7be1564965fa");
+        return new PuzzleResult(result);
     }
 
     public static int PlayBingo(string input)

@@ -6,10 +6,11 @@ namespace Pzl.Aquaq.Puzzles.Aquaq04;
 [Name("This is good co-primen")]
 public class Aquaq04 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("7a296f6d92cf29d6ec3b4e51af411018")]
+    public PuzzleResult Solve(string input)
     {
         var sum = FindCoPrimesFor(int.Parse(input)).Sum();
-        return new PuzzleResult(sum, "7a296f6d92cf29d6ec3b4e51af411018");
+        return new PuzzleResult(sum);
     }
 
     public static IEnumerable<long> FindCoPrimesFor(int n)

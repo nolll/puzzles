@@ -8,9 +8,10 @@ namespace Pzl.Aquaq.Puzzles.Aquaq15;
 public class Aquaq15 : AquaqPuzzle
 {
     [AdditionalCommonInputFile("Words.txt")]
-    public PuzzleResult Run(string input, string additionalInput)
+    [Puzzle("ffafde1afff1c3904275c8225e772bf1")]
+    public PuzzleResult Solve(string input, string additionalInput)
     {
-        return new PuzzleResult(RunInternal(input, additionalInput), "ffafde1afff1c3904275c8225e772bf1");
+        return new PuzzleResult(RunInternal(input, additionalInput));
     }
 
     public int RunInternal(string input, string additionalInput) 

@@ -5,11 +5,12 @@ namespace Pzl.Aquaq.Puzzles.Aquaq40;
 [Name("Prominence promenade")]
 public class Aquaq40 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("d0882d4e6f6cf4f90adcda93e5d420bc")]
+    public PuzzleResult Solve(string input)
     {
         var sum = GetSum(input);
 
-        return new PuzzleResult(sum, "d0882d4e6f6cf4f90adcda93e5d420bc");
+        return new PuzzleResult(sum);
     }
 
     public static int GetSum(string input)

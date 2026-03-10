@@ -7,13 +7,14 @@ namespace Pzl.Aquaq.Puzzles.Aquaq22;
 [Name("Veni Vidi Vitavi")]
 public class Aquaq22 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("7d8d3bfb160f0e65ad6f9266e5174745")]
+    public PuzzleResult Solve(string input)
     {
         var numbers = input.Split(' ').Select(int.Parse);
         var romanNumbers = numbers.Select(Conversion.ToRoman);
         var sum = ToCaesarCipherSum(string.Join("", romanNumbers));
 
-        return new PuzzleResult(sum, "7d8d3bfb160f0e65ad6f9266e5174745");
+        return new PuzzleResult(sum);
     }
 
     public static int ToCaesarCipherSum(string input)

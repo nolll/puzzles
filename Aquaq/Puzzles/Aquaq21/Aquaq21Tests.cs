@@ -12,7 +12,7 @@ public class Aquaq21Tests
     [Fact]
     public void CollectDust()
     {
-        var result = Aquaq21.Run(Input, 3);
+        var result = Aquaq21.Solve(Input, 3);
 
         result.Should().Be(65);
     }

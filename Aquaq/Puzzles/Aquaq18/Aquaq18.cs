@@ -6,14 +6,15 @@ namespace Pzl.Aquaq.Puzzles.Aquaq18;
 [Name("Emit time")]
 public class Aquaq18 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("9730fe5001e883b1b33acd8c976dd938")]
+    public PuzzleResult Solve(string input)
     {
         var sum = input.Split(LineBreaks.Single)
             .Select(o => DateTime.Parse($"2020-02-02 {o}"))
             .Select(StepsToPalindrome)
             .Sum();
 
-        return new PuzzleResult(sum, "9730fe5001e883b1b33acd8c976dd938");
+        return new PuzzleResult(sum);
     }
 
     public static bool IsPalindromeTime(DateTime dateTime) => dateTime.ToString("HH:mm:ss").IsPalindrome();

@@ -5,12 +5,13 @@ namespace Pzl.Aquaq.Puzzles.Aquaq02;
 [Name("One is all you need")]
 public class Aquaq02 : AquaqPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("7397f491441078a2bddb62ede05a1f8c")]
+    public PuzzleResult Solve(string input)
     {
         var input2 = input.Split(' ').Select(int.Parse);
         var uniqueNumbers = GetUniqueNumbers(input2);
 
-        return new PuzzleResult(uniqueNumbers.Sum(), "7397f491441078a2bddb62ede05a1f8c");
+        return new PuzzleResult(uniqueNumbers.Sum());
     }
 
     public static IEnumerable<int> GetUniqueNumbers(IEnumerable<int> input)

@@ -5,18 +5,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201921;
 [Name("Springdroid Adventure")]
 public class Aoc201921 : AocPuzzle
 {
+    [Puzzle("94b1bc03281d28814cbce9dd5bcc5806")]
     public PuzzleResult RunPart1(string input)
     {
         var walkingDroid = new SpringDroid(input, WalkProgram);
         walkingDroid.Run();
-        return new PuzzleResult(walkingDroid.HullDamage, "94b1bc03281d28814cbce9dd5bcc5806");
+        return new PuzzleResult(walkingDroid.HullDamage);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("4b70c64b560c7856fb229521380a084d")]
+    public PuzzleResult Part2(string input)
     {
         var runningDroid = new SpringDroid(input, RunProgram);
         runningDroid.Run();
-        return new PuzzleResult(runningDroid.HullDamage, "4b70c64b560c7856fb229521380a084d");
+        return new PuzzleResult(runningDroid.HullDamage);
     }
 
     private const string WalkProgram = """

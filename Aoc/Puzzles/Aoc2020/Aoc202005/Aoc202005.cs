@@ -5,16 +5,18 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202005;
 [Name("Binary Boarding")]
 public class Aoc202005 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("0c707dd92ed04ceea0c32086af11620a")]
+    public PuzzleResult Part1(string input)
     {
         var processor = new BoardingCardProcessor(input);
-        return new PuzzleResult(processor.HighestId, "0c707dd92ed04ceea0c32086af11620a");
+        return new PuzzleResult(processor.HighestId);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("886c488b39cd9f4848e5a6a2358861c6")]
+    public PuzzleResult Part2(string input)
     {
         var processor = new BoardingCardProcessor(input);
         var mySeat = processor.FindMySeat();
-        return new PuzzleResult(mySeat?.Id, "886c488b39cd9f4848e5a6a2358861c6");
+        return new PuzzleResult(mySeat?.Id);
     }
 }

@@ -7,18 +7,20 @@ public class Aoc202117 : AocPuzzle
 {
     private TrickshotResult? _result;
 
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("375d1d4838312873a7516c061904317c")]
+    public PuzzleResult Part1(string input)
     {
         var result = Shoot();
 
-        return new PuzzleResult(result.MaxHeight, "375d1d4838312873a7516c061904317c");
+        return new PuzzleResult(result.MaxHeight);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("25eea3cce163ac31e5c10a5df5210cee")]
+    public PuzzleResult Part2(string input)
     {
         var result = Shoot();
 
-        return new PuzzleResult(result.HitCount, "25eea3cce163ac31e5c10a5df5210cee");
+        return new PuzzleResult(result.HitCount);
     }
 
     private TrickshotResult Shoot()

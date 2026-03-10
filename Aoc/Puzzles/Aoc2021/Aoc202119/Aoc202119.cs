@@ -7,18 +7,20 @@ public class Aoc202119 : AocPuzzle
 {
     private BeaconSystemResult? _result;
 
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("a6668fd005e7ebda4e124253eea1e56e")]
+    public PuzzleResult Part1(string input)
     {
         var result = GetResult(input);
 
-        return new PuzzleResult(result.BeaconCount, "a6668fd005e7ebda4e124253eea1e56e");
+        return new PuzzleResult(result.BeaconCount);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("ce2bc05651a369b5171388ec7e4f2438")]
+    public PuzzleResult Part2(string input)
     {
         var result = GetResult(input);
 
-        return new PuzzleResult(result.MaxDistance, "ce2bc05651a369b5171388ec7e4f2438");
+        return new PuzzleResult(result.MaxDistance);
     }
 
     private BeaconSystemResult GetResult(string input)

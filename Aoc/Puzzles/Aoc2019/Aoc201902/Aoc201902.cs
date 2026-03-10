@@ -6,19 +6,21 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201902;
 [Name("1202 Program Alarm")]
 public class Aoc201902 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("85e8cb8123555ca9bd39b2c6b962e54a")]
+    public PuzzleResult Part1(string input)
     {
         var computer = new ConsoleComputer(input);
         computer.Start(false, 12, 2);
         var value = computer.Result;
-        return new PuzzleResult(value, "85e8cb8123555ca9bd39b2c6b962e54a");
+        return new PuzzleResult(value);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("b505e47f6dc62ca5acbbe708dd2192a5")]
+    public PuzzleResult Part2(string input)
     {
         var solutionFinder = new ComputerSolutionFinder(input);
         var result = solutionFinder.FindSolution(19690720);
         var answer = 100 * result!.Noun + result.Verb;
-        return new PuzzleResult(answer, "b505e47f6dc62ca5acbbe708dd2192a5");
+        return new PuzzleResult(answer);
     }
 }

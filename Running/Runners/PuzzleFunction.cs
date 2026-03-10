@@ -14,11 +14,11 @@ public class PuzzleFunction(Puzzle puzzle, MethodInfo method, object[] passedPar
         return result switch
         {
             null => PuzzleResult.Empty,
-            PuzzleResult o => new PuzzleResult(o.Type, o.Answer, hash ?? o.Hash),
-            string o => new PuzzleResult(o, hash),
-            int o => new PuzzleResult(o, hash),
-            long o => new PuzzleResult(o, hash),
-            BigInteger o => new PuzzleResult(o, hash),
+            PuzzleResult o => PuzzleResult.Create(o.Type, o.Answer, hash ?? o.Hash),
+            string o => PuzzleResult.Create(o, hash),
+            int o => PuzzleResult.Create(o, hash),
+            long o => PuzzleResult.Create(o, hash),
+            BigInteger o => PuzzleResult.Create(o, hash),
             _ => throw new Exception("Result is not of type PuzzleResult or a valid base type")
         };
     }

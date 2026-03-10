@@ -6,7 +6,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201903;
 [Name("Crossed Wires")]
 public class Aoc201903 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("3dbd15d37a682cfa1ca55525a248c184")]
+    public PuzzleResult Part1(string input)
     {
         var wirePaths = input.Split(LineBreaks.Single);
         var wirePathA = wirePaths[0];
@@ -14,10 +15,11 @@ public class Aoc201903 : AocPuzzle
 
         var intersectionFinder = new IntersectionFinder(wirePathA, wirePathB);
         var distance = intersectionFinder.ClosestIntersection.Distance;
-        return new PuzzleResult(distance, "3dbd15d37a682cfa1ca55525a248c184");
+        return new PuzzleResult(distance);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("51670676a41763c6093416dd009a8ba6")]
+    public PuzzleResult Part2(string input)
     {
         var wirePaths = input.Split(LineBreaks.Single);
         var wirePathA = wirePaths[0];
@@ -25,6 +27,6 @@ public class Aoc201903 : AocPuzzle
 
         var intersectionFinder = new IntersectionFinder(wirePathA, wirePathB);
         var steps = intersectionFinder.FewestSteps.Steps;
-        return new PuzzleResult(steps, "51670676a41763c6093416dd009a8ba6");
+        return new PuzzleResult(steps);
     }
 }

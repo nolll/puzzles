@@ -9,12 +9,14 @@ public class Aoc202001 : AocPuzzle
 {
     private const int Target = 2020;
     
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var product = FindNumbersThatAddUpTo(input.Split(LineBreaks.Single).Select(int.Parse).ToList(), Target, 2).Aggregate(1, (a, b) => a * b);
         return new PuzzleResult(product, "89120e7d60fb863cc69d69128748e52d");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var product = FindNumbersThatAddUpTo(Parse(input), Target, 3).Aggregate(1, (a, b) => a * b);

@@ -5,7 +5,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201904;
 [Name("Secure Container")]
 public class Aoc201904 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("130c5099df019116c1fa98e589523b7c")]
+    public PuzzleResult Part1(string input)
     {
         var passwordBounds = input.Split('-');
         var passwordLowerbound = int.Parse(passwordBounds[0]);
@@ -14,10 +15,11 @@ public class Aoc201904 : AocPuzzle
         var passwordFinder = new PasswordFinder();
         var passwords = passwordFinder.FindPart1(passwordLowerbound, passwordUpperbound);
         var passwordCount = passwords.Count();
-        return new PuzzleResult(passwordCount, "130c5099df019116c1fa98e589523b7c");
+        return new PuzzleResult(passwordCount);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("a91290a19800def81b170a8a45592c43")]
+    public PuzzleResult Part2(string input)
     {
         var passwordBounds = input.Split('-');
         var passwordLowerbound = int.Parse(passwordBounds[0]);
@@ -26,6 +28,6 @@ public class Aoc201904 : AocPuzzle
         var passwordFinder = new PasswordFinder();
         var passwords = passwordFinder.FindPart2(passwordLowerbound, passwordUpperbound);
         var passwordCount = passwords.Count();
-        return new PuzzleResult(passwordCount, "a91290a19800def81b170a8a45592c43");
+        return new PuzzleResult(passwordCount);
     }
 }

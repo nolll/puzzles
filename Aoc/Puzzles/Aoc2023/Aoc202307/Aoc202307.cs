@@ -6,8 +6,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202307;
 [Name("Camel Cards")]
 public class Aoc202307 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input) => new(PokerPart1(input), "eb6c5937d75bbb79d79d7e01895aacd4");
-    public PuzzleResult RunPart2(string input) => new(PokerPart2(input), "dd9dfa02733e4b1eec0869e16d5b27ff");
+    [Puzzle("eb6c5937d75bbb79d79d7e01895aacd4")]
+    public PuzzleResult Part1(string input) => new(PokerPart1(input));
+    
+    [Puzzle("dd9dfa02733e4b1eec0869e16d5b27ff")]
+    public PuzzleResult Part2(string input) => new(PokerPart2(input));
 
     public static long PokerPart1(string input) => Poker(input, new Part1PokerHandComparer());
     public static long PokerPart2(string input) => Poker(input, new Part2PokerHandComparer());

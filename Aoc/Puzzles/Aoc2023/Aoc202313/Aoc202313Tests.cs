@@ -113,7 +113,7 @@ public class Aoc202313Tests
                              #....#..#
                              """;
 
-        var result = new Aoc202313().RunPart1(input);
+        var result = new Aoc202313().Part1(input);
 
         result.Answer.Should().Be("405");
     }
@@ -139,7 +139,7 @@ public class Aoc202313Tests
                              #....#..#
                              """;
 
-        var result = new Aoc202313().RunPart2(input);
+        var result = new Aoc202313().Part2(input);
 
         result.Answer.Should().Be("400");
     }

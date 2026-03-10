@@ -10,6 +10,7 @@ public class Aoc202507 : AocPuzzle
     private const int Splitter = '^';
     private const char Start = 'S';
 
+    [Puzzle("10482c1ae04bcd37818ff193c2d01562")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -37,9 +38,10 @@ public class Aoc202507 : AocPuzzle
             y++;
         }
         
-        return new PuzzleResult(splitCount, "10482c1ae04bcd37818ff193c2d01562");
+        return new PuzzleResult(splitCount);
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);

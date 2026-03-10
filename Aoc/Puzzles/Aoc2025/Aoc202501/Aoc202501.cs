@@ -8,8 +8,11 @@ public class Aoc202501 : AocPuzzle
 {
     private const int Size = 100;
 
-    public PuzzleResult Part1(string input) => new(Solve(input).stops, "d2f803dcf38047e9fad770d795e8b7f9");
-    public PuzzleResult Part2(string input) => new(Solve(input).passes, "db97ff1b6b08f45e787696e9baa69bab");
+    [Puzzle("d2f803dcf38047e9fad770d795e8b7f9")]
+    public PuzzleResult Part1(string input) => new(Solve(input).stops);
+    
+    [Puzzle("db97ff1b6b08f45e787696e9baa69bab")]
+    public PuzzleResult Part2(string input) => new(Solve(input).passes);
 
     private static (int stops, int passes) Solve(string input)
     {

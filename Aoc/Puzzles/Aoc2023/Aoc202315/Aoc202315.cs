@@ -5,14 +5,16 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202315;
 [Name("Lens Library")]
 public class Aoc202315 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("4c69a3b3d84dfabf7180d2d8541d7389")]
+    public PuzzleResult Part1(string input)
     {
         var result = input.Split(',').Sum(HashScore);
 
-        return new PuzzleResult(result, "4c69a3b3d84dfabf7180d2d8541d7389");
+        return new PuzzleResult(result);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("c596fa2656ce06bc3fb557ddd741c834")]
+    public PuzzleResult Part2(string input)
     {
         var instructions = input.Split(',').ToList();
         var boxes = Enumerable.Range(0, 256).Select((_, index) => new Box(index + 0)).ToArray();
@@ -44,7 +46,7 @@ public class Aoc202315 : AocPuzzle
 
         var sum = boxes.Sum(o => o.FocusingPower);
 
-        return new PuzzleResult(sum, "c596fa2656ce06bc3fb557ddd741c834");
+        return new PuzzleResult(sum);
     }
 
     public static int HashScore(string s) => 

@@ -7,6 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202325;
 public class Aoc202325 : AocPuzzle
 {
     // Thanks to HyperNeutrino again
+    [Puzzle("fe62765fd563deae239d0e76689b31d7")]
     public PuzzleResult Part1(string input)
     {
         var components = ParseComponents(input);
@@ -80,7 +81,7 @@ public class Aoc202325 : AocPuzzle
         var b = components.Count - a;
         var result = a * b;
 
-        return new PuzzleResult(result, "fe62765fd563deae239d0e76689b31d7");
+        return new PuzzleResult(result);
     }
 
     private static Dictionary<string, List<string>> ParseComponents(string s)

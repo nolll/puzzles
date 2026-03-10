@@ -6,8 +6,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202503;
 [Name("Lobby")]
 public class Aoc202503 : AocPuzzle
 {
-    public PuzzleResult Part1(string input) => new(Solve(input, 2), "ce9af8880b553c9cab99abd575d740d4");
-    public PuzzleResult Part2(string input) => new(Solve(input, 12), "36d07bc1885b57661b710706722959fa");
+    [Puzzle("ce9af8880b553c9cab99abd575d740d4")]
+    public PuzzleResult Part1(string input) => new(Solve(input, 2));
+    
+    [Puzzle("36d07bc1885b57661b710706722959fa")]
+    public PuzzleResult Part2(string input) => new(Solve(input, 12));
+    
     private static long Solve(string input, int batteryCount) => input.Split(LineBreaks.Single).Sum(o => GetJoltage(o, batteryCount));
     private static long GetJoltage(string s, int batteryCount) => long.Parse(string.Join("", GetJoltageDigits(s, batteryCount)));
 

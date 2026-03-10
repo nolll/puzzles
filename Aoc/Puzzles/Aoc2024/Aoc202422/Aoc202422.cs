@@ -6,14 +6,16 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202422;
 [Name("Monkey Market")]
 public class Aoc202422 : AocPuzzle
 {
+    [Puzzle("225cb6b8a716ce111cab52fc1ee82264")]
     public PuzzleResult Part1(string input)
     {
         var nums = input.Split(LineBreaks.Single).Select(long.Parse);
         var sum = nums.Sum(o => Generate(o, 2000).Last());
         
-        return new PuzzleResult(sum, "225cb6b8a716ce111cab52fc1ee82264");
+        return new PuzzleResult(sum);
     }
 
+    [Puzzle("30bda12ed882f20608645b8e3425f8f5")]
     public PuzzleResult Part2(string input)
     {
         var nums = input.Split(LineBreaks.Single).Select(long.Parse);
@@ -54,7 +56,7 @@ public class Aoc202422 : AocPuzzle
             max = Math.Max(sequenceScores[key], max);
         }
         
-        return new PuzzleResult(max, "30bda12ed882f20608645b8e3425f8f5");
+        return new PuzzleResult(max);
     }
 
     public static long[] Generate(long n, int iterations)

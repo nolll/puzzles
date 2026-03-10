@@ -7,14 +7,16 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202403;
 [Name("Mull It Over")]
 public class Aoc202403 : AocPuzzle
 {
+    [Puzzle("106efdc638384c80769741faa573a260")]
     public PuzzleResult Part1(string input)
     {
         var instructions = new Regex(@"mul\(\d{1,3},\d{1,3}\)").Matches(input).Select(o => o.ToString());
         var pairs = instructions.Select(Numbers.IntsFromString).ToArray();
         var result = pairs.Sum(o => o[0] * o[1]);
-        return new PuzzleResult(result, "106efdc638384c80769741faa573a260");
+        return new PuzzleResult(result);
     }
 
+    [Puzzle("7c76f7c7072aeaf4950328540fc4266b")]
     public PuzzleResult Part2(string input)
     {
         var instructions = new Regex(@"(mul\(\d+,\d+\)|do\(\)|don't\(\))").Matches(input).Select(o => o.ToString());
@@ -36,6 +38,6 @@ public class Aoc202403 : AocPuzzle
             total += a * b;
         }
         
-        return new PuzzleResult(total, "7c76f7c7072aeaf4950328540fc4266b");
+        return new PuzzleResult(total);
     }
 }

@@ -6,6 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202417;
 [Name("Chronospatial Computer")]
 public class Aoc202417 : AocPuzzle
 {
+    [Puzzle("8ecd8cdd2990f11eb9ae9f0793770018")]
     public PuzzleResult Part1(string input)
     {
         var nums = Numbers.IntsFromString(input);
@@ -13,7 +14,7 @@ public class Aoc202417 : AocPuzzle
         var output = RunProgram(program, nums[0], nums[1], nums[2]);
         var res = string.Join(",", output);
         
-        return new PuzzleResult(res, "8ecd8cdd2990f11eb9ae9f0793770018");
+        return new PuzzleResult(res);
     }
 
     private long[] RunProgram(int[] program, long a, long b, long c)
@@ -75,6 +76,7 @@ public class Aoc202417 : AocPuzzle
         _ => throw new Exception($"Invalid combo operator {op}")
     };
     
+    [Puzzle("a8156e51eb5968f253630b3ceb297916")]
     public PuzzleResult Part2(string input)
     {
         var nums = Numbers.IntsFromString(input);
@@ -82,7 +84,7 @@ public class Aoc202417 : AocPuzzle
 
         var res = Find(program);
 
-        return new PuzzleResult(res, "a8156e51eb5968f253630b3ceb297916");
+        return new PuzzleResult(res);
     }
 
     private static long? Find(int[] program) => Find(program, program, 0);

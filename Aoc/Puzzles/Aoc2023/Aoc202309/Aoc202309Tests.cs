@@ -11,7 +11,7 @@ public class Aoc202309Tests
                              10 13 16 21 30 45
                              """;
 
-        var result = Aoc202309.Part1(input);
+        var result = Aoc202309.SolvePart1(input);
 
         result.Should().Be(114);
     }
@@ -25,7 +25,7 @@ public class Aoc202309Tests
                              10 13 16 21 30 45
                              """;
 
-        var result = Aoc202309.Part2(input);
+        var result = Aoc202309.SolvePart2(input);
 
         result.Should().Be(2);
     }

@@ -14,14 +14,14 @@ public class Aoc202401Tests
     [Fact]
     public void Part1()
     {
-        var result = Aoc202401.Part1(Input);
+        var result = Aoc202401.SolvePart1(Input);
         result.Should().Be(11);
     }
     
     [Fact]
     public void Part2()
     {
-        var result = Aoc202401.Part2(Input);
+        var result = Aoc202401.SolvePart2(Input);
         result.Should().Be(31);
     }
 }

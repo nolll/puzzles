@@ -7,16 +7,18 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202313;
 [Name("Point of Incidence")]
 public class Aoc202313 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("ee9ffa0006ecc43014e2c3a817904396")]
+    public PuzzleResult Part1(string input)
     {
         var result = input.Trim().Split(LineBreaks.Double).Sum(CountReflections);
-        return new PuzzleResult(result, "ee9ffa0006ecc43014e2c3a817904396");
+        return new PuzzleResult(result);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("32a6556a3bdfe559c36bdafb480740ef")]
+    public PuzzleResult Part2(string input)
     {
         var result = input.Trim().Split(LineBreaks.Double).Sum(CountSmudgedReflections);
-        return new PuzzleResult(result, "32a6556a3bdfe559c36bdafb480740ef");
+        return new PuzzleResult(result);
     }
 
     public static int CountReflections(string s)

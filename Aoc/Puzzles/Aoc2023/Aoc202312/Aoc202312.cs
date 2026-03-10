@@ -6,16 +6,18 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202312;
 [Name("Hot Springs")]
 public class Aoc202312 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("ec83138b082ab4da38bb60e88263c52f")]
+    public PuzzleResult Part1(string input)
     {
         var counts = input.Split(LineBreaks.Single).Select(o => CombinationCount(o));
-        return new PuzzleResult(counts.Sum(), "ec83138b082ab4da38bb60e88263c52f");
+        return new PuzzleResult(counts.Sum());
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("2ecb30790515e2ebbae12a478dbf36f7")]
+    public PuzzleResult Part2(string input)
     {
         var counts = input.Split(LineBreaks.Single).Select(o => CombinationCount(o, true));
-        return new PuzzleResult(counts.Sum(), "2ecb30790515e2ebbae12a478dbf36f7");
+        return new PuzzleResult(counts.Sum());
     }
 
     public static long CombinationCount(string s, bool isPart2 = false)

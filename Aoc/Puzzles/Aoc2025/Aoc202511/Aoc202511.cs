@@ -6,6 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202511;
 [Name("Reactor")]
 public class Aoc202511 : AocPuzzle
 {
+    [Puzzle("815a49e75c9abbb49de207da8a44c044")]
     public PuzzleResult Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
@@ -20,9 +21,10 @@ public class Aoc202511 : AocPuzzle
 
         var paths = FindPathsPart1([], "you", "out", devices);
         
-        return new PuzzleResult(paths.Count, "815a49e75c9abbb49de207da8a44c044");
+        return new PuzzleResult(paths.Count);
     }
 
+    [Puzzle("87ba1881b0f0c32fd99d1ea492990d16")]
     public PuzzleResult Part2(string input)
     {
         var lines = input.Split(LineBreaks.Single);
@@ -47,7 +49,7 @@ public class Aoc202511 : AocPuzzle
 
         var count = svrdac * dacfft * fftout + svrfft * fftdac * dacout;
         
-        return new PuzzleResult(count, "87ba1881b0f0c32fd99d1ea492990d16");
+        return new PuzzleResult(count);
     }
     
     private List<List<string>> FindPathsPart1(List<string> path, string current, string target, Dictionary<string, string[]> devices)

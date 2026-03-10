@@ -5,7 +5,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202207;
 [Name("No Space Left On Device")]
 public class Aoc202207 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         var fileSystem = new FileSystem(input);
         var result = fileSystem.Part1();
@@ -13,7 +14,8 @@ public class Aoc202207 : AocPuzzle
         return new PuzzleResult(result, "4f30884d94a8463608dcc378747e00f7");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
         var fileSystem = new FileSystem(input);
         var result = fileSystem.Part2();

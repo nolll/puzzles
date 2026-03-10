@@ -5,6 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202409;
 [Name("Disk Fragmenter")]
 public class Aoc202409 : AocPuzzle
 {
+    [Puzzle("4ca7aa30f44261b47440a1e8e3647d44")]
     public PuzzleResult Part1(string input)
     {
         var nums = input.ToCharArray().Select(o => int.Parse(o.ToString())).ToArray();
@@ -48,9 +49,10 @@ public class Aoc202409 : AocPuzzle
 
         var checksum = GetChecksum(blocks);
         
-        return new PuzzleResult(checksum, "4ca7aa30f44261b47440a1e8e3647d44");
+        return new PuzzleResult(checksum);
     }
 
+    [Puzzle("f3d4ebfe09ec0844f2c28f0c22458833")]
     public PuzzleResult Part2(string input)
     {
         var nums = input.ToCharArray().Select(o => int.Parse(o.ToString())).ToArray();
@@ -123,7 +125,7 @@ public class Aoc202409 : AocPuzzle
 
         var checksum = GetChecksum(blocks);
         
-        return new PuzzleResult(checksum, "f3d4ebfe09ec0844f2c28f0c22458833");
+        return new PuzzleResult(checksum);
     }
 
     private static long GetChecksum(int[] blocks)

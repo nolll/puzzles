@@ -21,7 +21,7 @@ public class Aoc202324Tests
     [Fact]
     public void Part2()
     {
-        var result = Sut.RunPart2(Input);
+        var result = Sut.Part2(Input);
 
         result.Answer.Should().Be("47");
     }

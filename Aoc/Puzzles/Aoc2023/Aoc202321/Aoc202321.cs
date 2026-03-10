@@ -6,14 +6,16 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202321;
 [Name("Step Counter")]
 public class Aoc202321 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("c843850a004e76c6cad0745f43786af0")]
+    public PuzzleResult Part1(string input)
     {
-        return new PuzzleResult(CountPositionsAfter64(input), "c843850a004e76c6cad0745f43786af0");
+        return new PuzzleResult(CountPositionsAfter64(input));
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("82eccc3aebc6a8cca12ce692d9765520")]
+    public PuzzleResult Part2(string input)
     {
-        return new PuzzleResult(CountPositionsAfterMany(input), "82eccc3aebc6a8cca12ce692d9765520");
+        return new PuzzleResult(CountPositionsAfterMany(input));
     }
 
     public static long CountPositionsAfter64(string s, int steps = 64)

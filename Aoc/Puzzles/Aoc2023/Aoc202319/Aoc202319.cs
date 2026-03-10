@@ -6,14 +6,16 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202319;
 [Name("Aplenty")]
 public class Aoc202319 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("7b8de33db969cb470b0df2112b952250")]
+    public PuzzleResult Part1(string input)
     {
-        return new PuzzleResult(SortParts(input), "7b8de33db969cb470b0df2112b952250");
+        return new PuzzleResult(SortParts(input));
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("ad71ffd5c3aaba62bb775dfc6a95358e")]
+    public PuzzleResult Part2(string input)
     {
-        return new PuzzleResult(CountCombinations(input), "ad71ffd5c3aaba62bb775dfc6a95358e");
+        return new PuzzleResult(CountCombinations(input));
     }
 
     public static int SortParts(string s)

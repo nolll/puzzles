@@ -6,18 +6,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202304;
 [Name("Scratchcards")]
 public class Aoc202304 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("5e02a1c34982f7f74973f0d751dd71da")]
+    public PuzzleResult Part1(string input)
     {
         var result = FlipThroughCards(input);
 
-        return new PuzzleResult(result.Score, "5e02a1c34982f7f74973f0d751dd71da");
+        return new PuzzleResult(result.Score);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("283e4ad08baa8b2611e44898628a8363")]
+    public PuzzleResult Part2(string input)
     {
         var result = FlipThroughCards(input);
 
-        return new PuzzleResult(result.CardCount, "283e4ad08baa8b2611e44898628a8363");
+        return new PuzzleResult(result.CardCount);
     }
 
     public static (int Score, int CardCount) FlipThroughCards(string input)

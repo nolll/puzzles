@@ -7,16 +7,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202512;
 [Name("Christmas Tree Farm")]
 public class Aoc202512 : AocPuzzle
 {
+    [Puzzle("18ccf03875ad98259b4de347203fb45a")]
     public PuzzleResult Part1(string input)
     {
         var parts = input.Split(LineBreaks.Double);
         var presentsStrings = parts.SkipLast(1);
-        var presents = new List<int>();
-        foreach (var s in presentsStrings)
-        {
-            presents.Add(s.Count(o => o == '#'));
-        }
-        
+        var presents = presentsStrings.Select(s => s.Count(o => o == '#')).ToList();
         var regions = parts.Last().Split(LineBreaks.Single);
         var possible = 0;
         var impossible = 0;
@@ -48,7 +44,7 @@ public class Aoc202512 : AocPuzzle
         }
 
         return uncertain == 0 
-            ? new PuzzleResult(possible, "18ccf03875ad98259b4de347203fb45a") 
+            ? new PuzzleResult(possible) 
             : throw new Exception("Can't be solved the easy way");
     }
 }

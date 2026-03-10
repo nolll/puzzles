@@ -13,8 +13,11 @@ public class Aoc202302 : AocPuzzle
         { "blue", 14 }
     };
 
-    public PuzzleResult RunPart1(string input) => new(PlayGames(input).ValidGames, "70e2be8af168fc9534f8384b244c60f7");
-    public PuzzleResult RunPart2(string input) => new(PlayGames(input).GamePower, "45825cd43460cbc76a940d6eb06ebc6b");
+    [Puzzle("70e2be8af168fc9534f8384b244c60f7")]
+    public PuzzleResult Part1(string input) => new(PlayGames(input).ValidGames);
+    
+    [Puzzle("45825cd43460cbc76a940d6eb06ebc6b")]
+    public PuzzleResult Part2(string input) => new(PlayGames(input).GamePower);
 
     public static TotalResult PlayGames(string input)
     {

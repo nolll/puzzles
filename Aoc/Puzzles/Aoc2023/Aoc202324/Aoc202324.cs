@@ -7,8 +7,9 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202324;
 [Comment("Learn more about equation systems")]
 public class Aoc202324 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input) => 
-        new(CountIntersectingWithin(input, 200_000_000_000_000, 400_000_000_000_000), "907db44ec104f348525996e3821ac11d");
+    [Puzzle("907db44ec104f348525996e3821ac11d")]
+    public PuzzleResult Part1(string input) => 
+        new(CountIntersectingWithin(input, 200_000_000_000_000, 400_000_000_000_000));
 
     public static int CountIntersectingWithin(string s, long min, long max)
     {
@@ -41,7 +42,8 @@ public class Aoc202324 : AocPuzzle
         return count;
     }
 
-    public PuzzleResult RunPart2(string input) => new(Solve(ParseHailstones(input)), "95042738f3ece8b6cd45dd711ee9d3fa");
+    [Puzzle("95042738f3ece8b6cd45dd711ee9d3fa")]
+    public PuzzleResult Part2(string input) => new(Solve(ParseHailstones(input)));
 
     private long Solve(List<Hailstone> stones)
     {

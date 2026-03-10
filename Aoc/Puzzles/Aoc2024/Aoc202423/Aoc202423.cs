@@ -8,6 +8,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202423;
 [Name("LAN Party")]
 public class Aoc202423 : AocPuzzle
 {
+    [Puzzle("97ab68c276be721e860fa345dd875ad5")]
     public PuzzleResult Part1(string input)
     {
         var pairs = input.Split(LineBreaks.Single).Select(o => o.Split('-'));
@@ -52,9 +53,10 @@ public class Aoc202423 : AocPuzzle
             }    
         }
         
-        return new PuzzleResult(seen.Count, "97ab68c276be721e860fa345dd875ad5");
+        return new PuzzleResult(seen.Count);
     }
 
+    [Puzzle("e5522cb6dd3d3913820759dee7696eb4")]
     public PuzzleResult Part2(string input)
     {
         var pairs = input.Split(LineBreaks.Single).Select(o => o.Split('-'));
@@ -97,6 +99,6 @@ public class Aoc202423 : AocPuzzle
 
         var s = string.Join(",", bestGroup.Order());
         
-        return new PuzzleResult(s, "e5522cb6dd3d3913820759dee7696eb4");
+        return new PuzzleResult(s);
     }
 }

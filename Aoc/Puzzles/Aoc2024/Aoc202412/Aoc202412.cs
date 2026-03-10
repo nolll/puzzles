@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Runtime.Serialization;
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
 
@@ -8,6 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202412;
 [Name("Garden Groups")]
 public class Aoc202412 : AocPuzzle
 {
+    [Puzzle("4aa3d13909317089109521b0f29d1226")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -53,9 +52,10 @@ public class Aoc202412 : AocPuzzle
             totalPrice += landCount * fenceCount;
         }
         
-        return new PuzzleResult(totalPrice, "4aa3d13909317089109521b0f29d1226");
+        return new PuzzleResult(totalPrice);
     }
 
+    [Puzzle("95703fce5b68137cec2afe8da4553cf6")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, '.');
@@ -146,6 +146,6 @@ public class Aoc202412 : AocPuzzle
             totalPrice += price;
         }
         
-        return new PuzzleResult(totalPrice, "95703fce5b68137cec2afe8da4553cf6");
+        return new PuzzleResult(totalPrice);
     }
 }

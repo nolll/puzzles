@@ -13,7 +13,7 @@ public class Aoc202221Tests
     [Fact]
     public void Part2()
     {
-        var result = new Aoc202221().Part2(Input);
+        var result = new Aoc202221().SolvePart2(Input);
 
         result.Should().Be(301);
     }

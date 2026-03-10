@@ -5,7 +5,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202214;
 [Name("Regolith Reservoir")]
 public class Aoc202214 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         var fallingSand = new FallingSand();
         var result = fallingSand.Part1(input);
@@ -13,7 +14,8 @@ public class Aoc202214 : AocPuzzle
         return new PuzzleResult(result, "8772ddaaa456233ff5c9888ae72de902");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
         var fallingSand = new FallingSand();
         var result = fallingSand.Part2(input);

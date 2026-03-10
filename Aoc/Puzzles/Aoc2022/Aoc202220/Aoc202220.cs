@@ -6,8 +6,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202220;
 [Name("Grove Positioning System")]
 public class Aoc202220 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input) => new(Run(input, 1, 1), "7b8b8bc2da7c3dc6f35e0079a36a0aea");
-    public PuzzleResult RunPart2(string input) => new(Run(input, 811_589_153, 10), "ad028751d05a122940933df675dc9eb5");
+    [Puzzle("")]
+    public PuzzleResult Part1(string input) => new(Run(input, 1, 1), "7b8b8bc2da7c3dc6f35e0079a36a0aea");
+    
+    [Puzzle("")]
+    public PuzzleResult Part2(string input) => new(Run(input, 811_589_153, 10), "ad028751d05a122940933df675dc9eb5");
 
     public static long Run(string input, long multiplier, int iterationCount)
     {

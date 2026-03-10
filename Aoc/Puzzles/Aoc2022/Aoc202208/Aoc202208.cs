@@ -7,7 +7,8 @@ public class Aoc202208 : AocPuzzle
 {
     private TreeHouse? _treeHouse;
 
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         _treeHouse = new TreeHouse(input);
         _treeHouse.Calc();
@@ -16,7 +17,8 @@ public class Aoc202208 : AocPuzzle
         return new PuzzleResult(result, "db3773cdd4aa7c677d0d7b5276a6f31c");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
         _treeHouse?.Calc();
         var result = _treeHouse?.HighestScenicScore;

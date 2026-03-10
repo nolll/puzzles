@@ -5,7 +5,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202211;
 [Name("Monkey in the Middle")]
 public class Aoc202211 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         var monkeyBusiness = new MonkeyBusiness();
         var result = monkeyBusiness.Part1(input);
@@ -13,7 +14,8 @@ public class Aoc202211 : AocPuzzle
         return new PuzzleResult(result, "7d4be1aa43422b2344a6125943e730c4");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
         var monkeyBusiness = new MonkeyBusiness();
         var result = monkeyBusiness.Part2(input);

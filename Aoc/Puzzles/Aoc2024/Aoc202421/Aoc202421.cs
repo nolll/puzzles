@@ -29,16 +29,18 @@ public class Aoc202421 : AocPuzzle
     private static readonly Dictionary<(char, char), int> ArrowLengths =
         ArrowSeqs.ToDictionary(k => k.Key, v => v.Value.First().Length);
 
+    [Puzzle("0e39f69d96697459d6010612d45068b8")]
     public PuzzleResult Part1(string input)
     {
         var result = Run(input, 2);
-        return new PuzzleResult(result, "0e39f69d96697459d6010612d45068b8");
+        return new PuzzleResult(result);
     }
     
+    [Puzzle("11dc3947e6394cb17a12fc9fb6d874c7")]
     public PuzzleResult Part2(string input)
     {
         var result = Run(input, 25);
-        return new PuzzleResult(result, "11dc3947e6394cb17a12fc9fb6d874c7");
+        return new PuzzleResult(result);
     }
 
     private long Run(string input, int robotCount) => 

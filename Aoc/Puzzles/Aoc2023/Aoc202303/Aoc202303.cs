@@ -7,18 +7,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202303;
 [Name("Gear Ratios")]
 public class Aoc202303 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("9f5f9a7fa049bd552fc05c71b10aab1c")]
+    public PuzzleResult Part1(string input)
     {
         var result = Run(input);
 
-        return new PuzzleResult(result.EngineParts, "9f5f9a7fa049bd552fc05c71b10aab1c");
+        return new PuzzleResult(result.EngineParts);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("0ec5347a4e1a8f41769180000882ae7d")]
+    public PuzzleResult Part2(string input)
     {
         var result = Run(input);
 
-        return new PuzzleResult(result.GearRatios, "0ec5347a4e1a8f41769180000882ae7d");
+        return new PuzzleResult(result.GearRatios);
     }
 
     public static Result Run(string input)

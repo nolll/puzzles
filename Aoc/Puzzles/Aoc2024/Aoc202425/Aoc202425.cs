@@ -7,6 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202425;
 [Name("Code Chronicle")]
 public class Aoc202425 : AocPuzzle
 {
+    [Puzzle("ff96adb8fa4ccab9294acf5f8c332256")]
     public PuzzleResult Part1(string input)
     {
         var parts = input.Split(LineBreaks.Double);
@@ -34,7 +35,7 @@ public class Aoc202425 : AocPuzzle
 
         var matchCount = locks.Sum(l => keys.Sum(k => IsMatch(l, k) ? 1 : 0));
 
-        return new PuzzleResult(matchCount, "ff96adb8fa4ccab9294acf5f8c332256");
+        return new PuzzleResult(matchCount);
     }
 
     private static bool IsMatch(int[] l, int[] k) => !l.Where((t, i) => k[i] + t > 5).Any();

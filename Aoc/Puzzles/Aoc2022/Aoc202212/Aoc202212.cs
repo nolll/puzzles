@@ -5,7 +5,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202212;
 [Name("Hill Climbing Algorithm")]
 public class Aoc202212 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         var hillClimbing = new HillClimbing();
         var result = hillClimbing.Part1(input);
@@ -13,7 +14,8 @@ public class Aoc202212 : AocPuzzle
         return new PuzzleResult(result, "48b865d6e753e7b8f1cd6f83d797bd43");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
         var hillClimbing = new HillClimbing();
         var result = hillClimbing.Part2(input);

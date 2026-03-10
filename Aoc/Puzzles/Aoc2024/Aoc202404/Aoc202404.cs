@@ -9,6 +9,7 @@ public class Aoc202404 : AocPuzzle
 {
     private const int Part1WordLength = 4;
 
+    [Puzzle("31feb999cd31f07ccd5a86b42272d1d3")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -28,9 +29,10 @@ public class Aoc202404 : AocPuzzle
             xmasCount += words.Count(o => o == "XMAS");
         }
         
-        return new PuzzleResult(xmasCount, "31feb999cd31f07ccd5a86b42272d1d3");
+        return new PuzzleResult(xmasCount);
     }
     
+    [Puzzle("be01756ac17140a11342a320132dee7e")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, '.');
@@ -42,7 +44,7 @@ public class Aoc202404 : AocPuzzle
             xmasCount += IsX(grid) ? 1 : 0;
         }
         
-        return new PuzzleResult(xmasCount, "be01756ac17140a11342a320132dee7e");
+        return new PuzzleResult(xmasCount);
     }
 
     private static string ReadWord(Grid<char> grid, (int x, int y) dir) => 

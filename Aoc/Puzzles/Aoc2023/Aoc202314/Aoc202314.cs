@@ -6,18 +6,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202314;
 [Name("Parabolic Reflector Dish")]
 public class Aoc202314 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("38c4a3857389e8b424b86782b940d736")]
+    public PuzzleResult Part1(string input)
     {
         var result = RollNorth(input);
 
-        return new PuzzleResult(result, "38c4a3857389e8b424b86782b940d736");
+        return new PuzzleResult(result);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("bc4f573f0b32490dec258ffe95e3b88b")]
+    public PuzzleResult Part2(string input)
     {
         var result = RunManyCycles(input);
         
-        return new PuzzleResult(result, "bc4f573f0b32490dec258ffe95e3b88b");
+        return new PuzzleResult(result);
     }
 
     public static int RunManyCycles(string s)

@@ -7,10 +7,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202305;
 [Comment("Range solution for part 2 inspired by HyperNeutrino")]
 public class Aoc202305 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input) => new(Part1(input), "8af1efe2f5bf2d0e78873be92fcd8fff");
-    public PuzzleResult RunPart2(string input) => new(Part2(input), "bd7466367c1fe654a2ec0e3f1fe3f112");
+    [Puzzle("8af1efe2f5bf2d0e78873be92fcd8fff")]
+    public PuzzleResult Part1(string input) => new(SolvePart1(input));
+    
+    [Puzzle("bd7466367c1fe654a2ec0e3f1fe3f112")]
+    public PuzzleResult Part2(string input) => new(SolvePart2(input));
 
-    public static long Part1(string input)
+    public static long SolvePart1(string input)
     {
         var groups = input
             .Split(LineBreaks.Double)
@@ -40,7 +43,7 @@ public class Aoc202305 : AocPuzzle
         return v;
     }
 
-    public static long Part2(string input)
+    public static long SolvePart2(string input)
     {
         var groups = input
             .Split(LineBreaks.Double)

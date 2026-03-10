@@ -8,7 +8,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202508;
 [Name("Playground")]
 public class Aoc202508 : AocPuzzle
 {
-    public PuzzleResult Part1(string input) => new(Part1(input, 1000), "9d41b63fae3576e9a5715332340db926");
+    [Puzzle("9d41b63fae3576e9a5715332340db926")]
+    public PuzzleResult Part1(string input) => new(Part1(input, 1000));
 
     public long Part1(string input, int pairCount)
     {
@@ -26,6 +27,7 @@ public class Aoc202508 : AocPuzzle
         return top3[0].Count * top3[1].Count * top3[2].Count;
     }
     
+    [Puzzle("c56dc2d8144124824b8b8cdb4b49d868")]
     public PuzzleResult Part2(string input)
     {
         var coords = ParseCoords(input);
@@ -38,7 +40,7 @@ public class Aoc202508 : AocPuzzle
             var groups = Graph.GetConnectedComponents(nodes).Select(o => o.Values).ToList();
             if (groups.Count == 1 && groups.First().Count == coords.Count)
             {
-                return new(d.from.X * d.to.X, "c56dc2d8144124824b8b8cdb4b49d868");
+                return new(d.from.X * d.to.X);
             }
         }
         

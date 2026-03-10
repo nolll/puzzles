@@ -7,18 +7,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202317;
 [Name("Clumsy Crucible")]
 public class Aoc202317 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("cf7fd7c685bf666303ab74ad1d2252e2")]
+    public PuzzleResult Part1(string input)
     {
         var result = LeastHeatPart1(input);
 
-        return new PuzzleResult(result, "cf7fd7c685bf666303ab74ad1d2252e2");
+        return new PuzzleResult(result);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("fe2a6d3aee0dee95dae6c0880d11d812")]
+    public PuzzleResult Part2(string input)
     {
         var result = LeastHeatPart2(input);
 
-        return new PuzzleResult(result, "fe2a6d3aee0dee95dae6c0880d11d812");
+        return new PuzzleResult(result);
     }
 
     public static int LeastHeatPart1(string s) => LeastHeat(s, 1, 3);

@@ -5,8 +5,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202411;
 [Name("Plutonian Pebbles")]
 public class Aoc202411 : AocPuzzle
 {
-    public PuzzleResult Part1(string input) => new(Solve(input, 25), "adf47aa5d6a1f75ef41af973082e5a60");
-    public PuzzleResult Part2(string input) => new(Solve(input, 75), "a58ca60460c322a69523c3daf83c423d");
+    [Puzzle("adf47aa5d6a1f75ef41af973082e5a60")]
+    public PuzzleResult Part1(string input) => new(Solve(input, 25));
+    
+    [Puzzle("a58ca60460c322a69523c3daf83c423d")]
+    public PuzzleResult Part2(string input) => new(Solve(input, 75));
 
     private static long Solve(string input, int blinkCount) => input.Split(' ')
         .Select(long.Parse)

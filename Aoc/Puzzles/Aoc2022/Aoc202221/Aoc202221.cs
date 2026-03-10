@@ -6,21 +6,23 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202221;
 [Name("Monkey Math")]
 public class Aoc202221 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
-        var result = Part1(input);
+        var result = SolvePart1(input);
 
         return new PuzzleResult(result, "b3adb16b1c9bf83decdb14842cf25854");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
-        var result = Part2(input);
+        var result = SolvePart2(input);
 
         return new PuzzleResult(result, "cdbf9008c2bea6596aa238829913849e");
     }
 
-    public long Part1(string input)
+    public long SolvePart1(string input)
     {
         var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0);
         var monkeys = GetMonkeys(lines);
@@ -55,7 +57,7 @@ public class Aoc202221 : AocPuzzle
         return monkeys;
     }
 
-    public long Part2(string input)
+    public long SolvePart2(string input)
     {
         var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0).ToList();
 

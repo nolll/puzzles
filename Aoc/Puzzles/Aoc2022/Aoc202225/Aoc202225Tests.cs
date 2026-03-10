@@ -6,7 +6,7 @@ public class Aoc202225Tests
     public void Part1()
     {
         var puzzle = new Aoc202225();
-        var result = puzzle.Part1(Input);
+        var result = puzzle.SolvePart1(Input);
 
         result.Should().Be("2=-1=0");
     }

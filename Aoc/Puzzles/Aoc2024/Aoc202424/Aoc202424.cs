@@ -7,6 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202424;
 [Comment("Solved by manual inspection of printout")]
 public class Aoc202424 : AocPuzzle
 {
+    [Puzzle("9fc2d4daac695a3b88d61a9cfe083437")]
     public PuzzleResult Part1(string input)
     {
         var (wires, gates) = ParseWiresAndGates(input);
@@ -17,9 +18,10 @@ public class Aoc202424 : AocPuzzle
         var results = zgates.Select(o => processor.Process(o));
         var binary = Convert.ToInt64(string.Join("", results), 2);
         
-        return new PuzzleResult(binary, "9fc2d4daac695a3b88d61a9cfe083437");
+        return new PuzzleResult(binary);
     }
 
+    [Puzzle("664e08ee1c7756ec0bf56764e81d2280")]
     public PuzzleResult Part2(string input)
     {
         var (wires, gates) = ParseWiresAndGates(input);
@@ -56,7 +58,7 @@ public class Aoc202424 : AocPuzzle
 
         var result = string.Join(",", swapped);
         
-        return new PuzzleResult(result, "664e08ee1c7756ec0bf56764e81d2280");
+        return new PuzzleResult(result);
     }
 
     private (Dictionary<string, long> wires, Dictionary<string, (string, string, string)> gates) ParseWiresAndGates(

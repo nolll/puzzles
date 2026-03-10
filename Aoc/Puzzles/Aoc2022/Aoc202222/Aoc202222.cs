@@ -7,10 +7,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202222;
 [Name("Monkey Map")]
 public class Aoc202222 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input) => new(Part1(input), "5230885ca3521519a0995658751be3a5");
-    public PuzzleResult RunPart2(string input) => new(Part2(input), "192dc6b2bb8fcfe7b7deaa5f30ec9f80");
+    [Puzzle("")]
+    public PuzzleResult Part1(string input) => new(SolvePart1(input), "5230885ca3521519a0995658751be3a5");
+    
+    [Puzzle("")]
+    public PuzzleResult Part2(string input) => new(SolvePart2(input), "192dc6b2bb8fcfe7b7deaa5f30ec9f80");
 
-    public static int Part1(string input)
+    public static int SolvePart1(string input)
     {
         var groups = input.Split(LineBreaks.Double);
         var grid = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
@@ -88,7 +91,7 @@ public class Aoc202222 : AocPuzzle
         return password;
     }
 
-    public static int Part2(string input)
+    public static int SolvePart2(string input)
     {
         var groups = input.Split(LineBreaks.Double);
         var grid = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');

@@ -6,20 +6,22 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202505;
 [Name("Cafeteria")]
 public class Aoc202505 : AocPuzzle
 {
+    [Puzzle("a90b6ec9ee3627fb518f272a19fb02f7")]
     public PuzzleResult Part1(string input)
     {
         var (rangeInput, numberInput) = input.Split(LineBreaks.Double);
         var ranges = GetRanges(rangeInput);
         var numbers = numberInput.Split(LineBreaks.Single).Select(long.Parse);
         var count = numbers.Count(n => ranges.Any(r => n >= r[0] && n <= r[1]));
-        return new PuzzleResult(count, "a90b6ec9ee3627fb518f272a19fb02f7");
+        return new PuzzleResult(count);
     }
 
+    [Puzzle("be06dfd5fc2345c5df5b1b53d430fff5")]
     public PuzzleResult Part2(string input)
     {
         var rangeInput = input.Split(LineBreaks.Double).First();
         var count = GetRanges(rangeInput).Sum(range => range[1] - range[0] + 1);
-        return new PuzzleResult(count, "be06dfd5fc2345c5df5b1b53d430fff5");
+        return new PuzzleResult(count);
     }
 
     private static List<long[]> GetRanges(string rangeInput) => MergeRanges(ParseRanges(rangeInput));

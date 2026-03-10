@@ -9,11 +9,11 @@ public class Aoc202301 : AocPuzzle
     private static readonly List<string> Words =
         ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
-    public PuzzleResult RunPart1(string input) => 
-        new(FindCalibrationNumberPart1(input).Sum(), "93e7c44a86bd9d03f7156e6fc3ed61c8");
+    [Puzzle("")]
+    public PuzzleResult Part1(string input) => new(FindCalibrationNumberPart1(input).Sum());
 
-    public PuzzleResult RunPart2(string input) => 
-        new(FindCalibrationNumberPart2(input).Sum(), "1a8775b7ae93118b31708e052207307d");
+    [Puzzle("1a8775b7ae93118b31708e052207307d")]
+    public PuzzleResult Part2(string input) => new(FindCalibrationNumberPart2(input).Sum(), "");
 
     public static List<int> FindCalibrationNumberPart1(string input) => input.Split(LineBreaks.Single)
         .Select(FindCalibrationNumber)

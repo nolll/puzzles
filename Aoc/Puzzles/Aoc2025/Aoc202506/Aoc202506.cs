@@ -7,8 +7,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202506;
 [Name("Trash Compactor")]
 public class Aoc202506 : AocPuzzle
 {
-    public PuzzleResult Part1(string input) => new(Solve(input, ParseProblemsPart1), "14aae46a086cd49de712be9f0e651af3");
-    public PuzzleResult Part2(string input) => new(Solve(input, ParseProblemsPart2), "2454d59e49a2a8376cfe3e826b7a14f8");
+    [Puzzle("14aae46a086cd49de712be9f0e651af3")]
+    public PuzzleResult Part1(string input) => new(Solve(input, ParseProblemsPart1));
+    
+    [Puzzle("2454d59e49a2a8376cfe3e826b7a14f8")]
+    public PuzzleResult Part2(string input) => new(Solve(input, ParseProblemsPart2));
 
     private static long Solve(string input, Func<string, List<(List<long> numbers, char op)>> parse) => 
         parse(input).Select(o => PerformOperation(o.numbers, o.op)).ToList().Sum();

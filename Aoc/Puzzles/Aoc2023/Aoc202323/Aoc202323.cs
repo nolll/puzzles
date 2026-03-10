@@ -14,14 +14,16 @@ public class Aoc202323 : AocPuzzle
         { GridDirection.Left, '<' }
     };
 
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("854218011528db376afeffbf53800ecd")]
+    public PuzzleResult Part1(string input)
     {
-        return new PuzzleResult(LongestHike(input, false), "854218011528db376afeffbf53800ecd");
+        return new PuzzleResult(LongestHike(input, false));
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("22bcf9382d0e8177c5c6ef52f07fd7b9")]
+    public PuzzleResult Part2(string input)
     {
-        return new PuzzleResult(LongestHike(input, true), "22bcf9382d0e8177c5c6ef52f07fd7b9");
+        return new PuzzleResult(LongestHike(input, true));
     }
 
     public static int LongestHike(string s, bool canClimbSlopes)

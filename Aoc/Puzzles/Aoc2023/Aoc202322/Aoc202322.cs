@@ -7,8 +7,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202322;
 [Name("Sand Slabs")]
 public class Aoc202322 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input) => new(CountBricksThatCanBeRemoved(input), "1365c818d49ae8af1974dc302f134abb");
-    public PuzzleResult RunPart2(string input) => new(CountTotalRemovedBricks(input), "81d92f2381d8798f847dd6eb9e0ea6b2");
+    [Puzzle("1365c818d49ae8af1974dc302f134abb")]
+    public PuzzleResult Part1(string input) => new(CountBricksThatCanBeRemoved(input));
+    
+    [Puzzle("81d92f2381d8798f847dd6eb9e0ea6b2")]
+    public PuzzleResult Part2(string input) => new(CountTotalRemovedBricks(input));
 
     public static int CountBricksThatCanBeRemoved(string s) => 
         GetBricksWithInfo(GetSettledBricks(s)).Count(o => o.CanBeRemoved);

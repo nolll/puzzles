@@ -6,18 +6,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202420;
 [Name("Race Condition")]
 public class Aoc202420 : AocPuzzle
 {
+    [Puzzle("345ad458eb8fecd2bee1b07cda111f5b")]
     public PuzzleResult Part1(string input)
     {
         var result = CountCheatsBetterThan(input, 2, 100);
         
-        return new PuzzleResult(result, "345ad458eb8fecd2bee1b07cda111f5b");
+        return new PuzzleResult(result);
     }
 
+    [Puzzle("180cd20a00ef865aeaee6f0f6484da86")]
     public PuzzleResult Part2(string input)
     {
         var result = CountCheatsBetterThan(input, 20, 100);
         
-        return new PuzzleResult(result, "180cd20a00ef865aeaee6f0f6484da86");
+        return new PuzzleResult(result);
     }
 
     public static int CountCheatsBetterThan(string input, int radius, int limit) => 

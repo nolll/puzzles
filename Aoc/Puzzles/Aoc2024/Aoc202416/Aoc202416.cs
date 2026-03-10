@@ -10,6 +10,7 @@ public class Aoc202416 : AocPuzzle
 {
     private const char EmptySpace = '.';
 
+    [Puzzle("7f6e0e55c1b9ba30973eeb8218555c3a")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -26,9 +27,10 @@ public class Aoc202416 : AocPuzzle
         List<string> endKeys = [$"{GridDirection.Right}|{end.Id}", $"{GridDirection.Up}|{end.Id}"];
         var shortestPath = Dijkstra.BestCost(inputs, startKey, endKeys);
         
-        return new PuzzleResult(shortestPath, "7f6e0e55c1b9ba30973eeb8218555c3a");
+        return new PuzzleResult(shortestPath);
     }
 
+    [Puzzle("6f785a700e3bd5c59db14bf9f8eb6d46")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, '.');
@@ -41,7 +43,7 @@ public class Aoc202416 : AocPuzzle
         
         var visited = FindVisitedCoords(grid, start, end);
         
-        return new PuzzleResult(visited.Count, "6f785a700e3bd5c59db14bf9f8eb6d46");
+        return new PuzzleResult(visited.Count);
     }
 
     private HashSet<Coord> FindVisitedCoords(Grid<char> grid, Coord start, Coord end)

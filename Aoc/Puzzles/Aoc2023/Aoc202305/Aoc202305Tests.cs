@@ -41,7 +41,7 @@ public class Aoc202305Tests
     [Fact]
     public void Part1()
     {
-        var result = Aoc202305.Part1(Input);
+        var result = Aoc202305.SolvePart1(Input);
 
         result.Should().Be(35);
     }
@@ -49,7 +49,7 @@ public class Aoc202305Tests
     [Fact]
     public void Part2()
     {
-        var result = Aoc202305.Part2(Input);
+        var result = Aoc202305.SolvePart2(Input);
 
         result.Should().Be(46);
     }

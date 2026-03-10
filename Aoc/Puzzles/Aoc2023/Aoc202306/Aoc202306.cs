@@ -6,18 +6,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202306;
 [Name("Wait For It")]
 public class Aoc202306 : AocPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("7eb8c120d057c526ef2c425f6db9493c")]
+    public PuzzleResult Part1(string input)
     {
         var result = BoatRace1(input);
 
-        return new PuzzleResult(result, "7eb8c120d057c526ef2c425f6db9493c");
+        return new PuzzleResult(result);
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("365c29b8564f3c2e47e2bcfca7b191de")]
+    public PuzzleResult Part2(string input)
     {
         var result = BoatRace2(input);
 
-        return new PuzzleResult(result, "365c29b8564f3c2e47e2bcfca7b191de");
+        return new PuzzleResult(result);
     }
 
     public static long BoatRace1(string input)

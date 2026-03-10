@@ -16,6 +16,7 @@ public class Aoc202415 : AocPuzzle
         public const char Wall = '#';
     }
     
+    [Puzzle("8b8573e47a8beee67caf8b6ab4142420")]
     public PuzzleResult Part1(string input)
     {
         var parts = input.Split(LineBreaks.Double);
@@ -56,7 +57,7 @@ public class Aoc202415 : AocPuzzle
         var score = allBoxes.SelectMany(box => box.Coords)
             .Aggregate(0L, (current, coord) => current + (100 * coord.Y + coord.X));
 
-        return new PuzzleResult(score, "8b8573e47a8beee67caf8b6ab4142420");
+        return new PuzzleResult(score);
     }
 
     private (bool canMove, HashSet<IBox> boxesThatMustMove) CanMoveRobot(
@@ -126,6 +127,7 @@ public class Aoc202415 : AocPuzzle
             _ => GridDirection.Left
         };
 
+    [Puzzle("48a79a74450762d492fd151f9c3c6400")]
     public PuzzleResult Part2(string input)
     {
         var parts = input.Split(LineBreaks.Double);
@@ -181,7 +183,7 @@ public class Aoc202415 : AocPuzzle
         var score = allBoxes.SelectMany(box => box.Coords.Take(1))
             .Aggregate(0L, (current, coord) => current + (100 * coord.Y + coord.X));
 
-        return new PuzzleResult(score, "48a79a74450762d492fd151f9c3c6400");
+        return new PuzzleResult(score);
     }
 
     public interface IBox

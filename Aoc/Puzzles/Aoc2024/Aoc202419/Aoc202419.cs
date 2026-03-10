@@ -6,6 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202419;
 [Name("Linen Layout")]
 public class Aoc202419 : AocPuzzle
 {
+    [Puzzle("74853ae023c415398e9e1aa4ee83c0f1")]
     public PuzzleResult Part1(string input)
     {
         var parts = input.Split(LineBreaks.Double, StringSplitOptions.RemoveEmptyEntries);
@@ -13,9 +14,10 @@ public class Aoc202419 : AocPuzzle
         var combinations = parts[1].Split(LineBreaks.Single);
         var count = combinations.Count(o => IsPossible(towels, o));
         
-        return new PuzzleResult(count, "74853ae023c415398e9e1aa4ee83c0f1");
+        return new PuzzleResult(count);
     }
 
+    [Puzzle("83d5af4b54081e746c3cfc203a9a544e")]
     public PuzzleResult Part2(string input)
     {
         var parts = input.Split(LineBreaks.Double, StringSplitOptions.RemoveEmptyEntries);
@@ -23,7 +25,7 @@ public class Aoc202419 : AocPuzzle
         var combinations = parts[1].Split(LineBreaks.Single);
         var sum = combinations.Sum(o => CountCombinations(towels, o, new Dictionary<string, long>()));
         
-        return new PuzzleResult(sum, "83d5af4b54081e746c3cfc203a9a544e");
+        return new PuzzleResult(sum);
     }
     
     private static bool IsPossible(HashSet<string> towels, string combination)

@@ -7,22 +7,25 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202502;
 [Name("Absurd Arithmetic")]
 public class Codyssi202502 : CodyssiPuzzle
 {
+    [Puzzle("08f294141be67fb8ce4f13e39d3f12d0")]
     public PuzzleResult Part1(string input)
     {
         var (parameters, rooms) = Parse(input);
         var cost = ApplyFunction(rooms[rooms.Length / 2], parameters);
         
-        return new PuzzleResult(cost, "08f294141be67fb8ce4f13e39d3f12d0");
+        return new PuzzleResult(cost);
     }
 
+    [Puzzle("f53524668fe091cf2cd65be1bf22d73f")]
     public PuzzleResult Part2(string input)
     {
         var (parameters, rooms) = Parse(input);
         var cost = ApplyFunction(rooms.Where(o => o % 2 == 0).Sum(), parameters);
         
-        return new PuzzleResult(cost, "f53524668fe091cf2cd65be1bf22d73f");
+        return new PuzzleResult(cost);
     }
 
+    [Puzzle("4366f7c950d582ccdb298e25d136b3b9")]
     public PuzzleResult Part3(string input)
     {
         const long max = 15_000_000_000_000;
@@ -39,7 +42,7 @@ public class Codyssi202502 : CodyssiPuzzle
             best = (item, cost);
         }
         
-        return new PuzzleResult(best.room, "4366f7c950d582ccdb298e25d136b3b9");
+        return new PuzzleResult(best.room);
     }
 
     private static long ApplyFunction(long input, int[] parameters) => 

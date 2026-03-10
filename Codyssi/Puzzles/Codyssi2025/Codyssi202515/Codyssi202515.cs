@@ -6,6 +6,7 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202515;
 [Name("Artifacts at Atlantis")]
 public class Codyssi202515 : CodyssiPuzzle
 {
+    [Puzzle("8b00815147aec7076ca7268d8709583c")]
     public PuzzleResult Part1(string input)
     {
         var nodes = ParseNodes(input.Split(LineBreaks.Double).First());
@@ -21,9 +22,10 @@ public class Codyssi202515 : CodyssiPuzzle
 
         var result = bestSum * levelCount;
 
-        return new PuzzleResult(result, "8b00815147aec7076ca7268d8709583c");
+        return new PuzzleResult(result);
     }
 
+    [Puzzle("4b91364b84392b399b44d31d662a9fa1")]
     public PuzzleResult Part2(string input)
     {
         var nodes = ParseNodes(input.Split(LineBreaks.Double).First());
@@ -35,9 +37,10 @@ public class Codyssi202515 : CodyssiPuzzle
         var path = GetPathTo(special);
         var result = string.Join("-",path.Select(o => o.Name));
 
-        return new PuzzleResult(result, "4b91364b84392b399b44d31d662a9fa1");
+        return new PuzzleResult(result);
     }
 
+    [Puzzle("cdb171b505a56eed22f6483b7e0bf002")]
     public PuzzleResult Part3(string input)
     {
         var nodes = ParseNodes(input.Split(LineBreaks.Double).First());
@@ -49,7 +52,7 @@ public class Codyssi202515 : CodyssiPuzzle
         var specialsPaths = specials.Select(GetPathTo).ToArray();
         var common = GetLowestCommonAncestor(specialsPaths);
 
-        return new PuzzleResult(common?.Name, "cdb171b505a56eed22f6483b7e0bf002");
+        return new PuzzleResult(common?.Name);
     }
     
     public class Node(string name, int id)

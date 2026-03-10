@@ -8,14 +8,16 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202505;
 [Name("Patron Islands")]
 public class Codyssi202505 : CodyssiPuzzle
 {
+    [Puzzle("8970c66cc5feb9663d03802a881d2305")]
     public PuzzleResult Part1(string input)
     {
         var ship = new Coord(0, 0);
         var coords = SortByDistance(Parse(input), ship);
         var result = coords.Last().ManhattanDistanceTo(ship) - coords.First().ManhattanDistanceTo(ship);
-        return new PuzzleResult(result, "8970c66cc5feb9663d03802a881d2305");
+        return new PuzzleResult(result);
     }
 
+    [Puzzle("9b3a3aaa26debdeb546daa2dcd3f0873")]
     public PuzzleResult Part2(string input)
     {
         var ship = new Coord(0, 0);
@@ -23,9 +25,10 @@ public class Codyssi202505 : CodyssiPuzzle
         var closest = coords.First();
         coords = SortByDistance(coords.Skip(1), closest);
         var result = closest.ManhattanDistanceTo(coords.First());
-        return new PuzzleResult(result, "9b3a3aaa26debdeb546daa2dcd3f0873");
+        return new PuzzleResult(result);
     }
 
+    [Puzzle("9f7fe9e9b27c388197a28609ca587687")]
     public PuzzleResult Part3(string input)
     {
         var current = new Coord(0, 0);
@@ -43,7 +46,7 @@ public class Codyssi202505 : CodyssiPuzzle
             coords = coords.Skip(1).ToList();
         }
         
-        return new PuzzleResult(total, "9f7fe9e9b27c388197a28609ca587687");
+        return new PuzzleResult(total);
     }
 
     private static List<Coord> SortByDistance(IEnumerable<Coord> coords, Coord current) =>

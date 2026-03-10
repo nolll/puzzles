@@ -6,6 +6,7 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202501;
 [Name("Compass Calibration")]
 public class Codyssi202501 : CodyssiPuzzle
 {
+    [Puzzle("1f17ebbf90b3d2771a89172125b9fcb0")]
     public PuzzleResult Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
@@ -13,9 +14,10 @@ public class Codyssi202501 : CodyssiPuzzle
         var multipliers = GetMultipliers(lines.Last());
         var n = multipliers.Select((t, i) => numbers[i] * t).Sum();
 
-        return new PuzzleResult(n, "1f17ebbf90b3d2771a89172125b9fcb0");
+        return new PuzzleResult(n);
     }
 
+    [Puzzle("d79852c3963ccb64147853df691ef1cf")]
     public PuzzleResult Part2(string input)
     {
         var lines = input.Split(LineBreaks.Single).ToList();
@@ -23,9 +25,10 @@ public class Codyssi202501 : CodyssiPuzzle
         var multipliers = GetMultipliers(lines.Last().Reversed());
         var n = multipliers.Select((t, i) => numbers[i] * t).Sum();
 
-        return new PuzzleResult(n, "d79852c3963ccb64147853df691ef1cf");
+        return new PuzzleResult(n);
     }
 
+    [Puzzle("7e2613ac221549d96730491340a1b69e")]
     public PuzzleResult Part3(string input)
     {
         var lines = input.Split(LineBreaks.Single).ToList();
@@ -38,7 +41,7 @@ public class Codyssi202501 : CodyssiPuzzle
         var multipliers = GetMultipliers(lines.Last().Reversed());
         var n = numbers.Select((t, i) => t * multipliers[i]).Sum();
 
-        return new PuzzleResult(n, "7e2613ac221549d96730491340a1b69e");
+        return new PuzzleResult(n);
     }
     
     private static IEnumerable<int> GetMultipliers(string s) => GetMultipliers(s.ToCharArray());

@@ -8,6 +8,7 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202510;
 [Name("Cyclops Chaos")]
 public class Codyssi202510 : CodyssiPuzzle
 {
+    [Puzzle("1e10a803d525ec160795a9bed9161106")]
     public PuzzleResult Part1(string input)
     {
         var data = input.Split(LineBreaks.Single)
@@ -33,21 +34,23 @@ public class Codyssi202510 : CodyssiPuzzle
 
         var min = Math.Min(hmin, vmin);
         
-        return new PuzzleResult(min, "1e10a803d525ec160795a9bed9161106");
+        return new PuzzleResult(min);
     }
 
+    [Puzzle("8e0e2fd983585eea7c17bb92929d6c32")]
     public PuzzleResult Part2(string input)
     {
         var cost = RunPart2And3(input, new Coord(14, 14));
         
-        return new PuzzleResult(cost, "8e0e2fd983585eea7c17bb92929d6c32");
+        return new PuzzleResult(cost);
     }
 
+    [Puzzle("ef05794a9a4d22520dd94a67775c2c15")]
     public PuzzleResult Part3(string input)
     {
         var cost = RunPart2And3(input);
         
-        return new PuzzleResult(cost, "ef05794a9a4d22520dd94a67775c2c15");
+        return new PuzzleResult(cost);
     }
     
     public int RunPart2And3(string input, Coord? target = null)

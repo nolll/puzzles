@@ -7,6 +7,7 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202509;
 [Name("Windy Bargain")]
 public class Codyssi202509 : CodyssiPuzzle
 {
+    [Puzzle("f2d434aaa0fe259865b9d9cfe1d06f6f")]
     public PuzzleResult Part1(string input)
     {
         var (officials, transactions) = Parse(input);
@@ -18,9 +19,10 @@ public class Codyssi202509 : CodyssiPuzzle
 
         var sum = officials.Values.Select(o => o.Balance).OrderDescending().Take(3).Sum();
         
-        return new PuzzleResult(sum, "f2d434aaa0fe259865b9d9cfe1d06f6f");
+        return new PuzzleResult(sum);
     }
 
+    [Puzzle("df8f313313f13f9a6361b0c692e92061")]
     public PuzzleResult Part2(string input)
     {
         var (officials, transactions) = Parse(input);
@@ -32,9 +34,10 @@ public class Codyssi202509 : CodyssiPuzzle
 
         var sum = officials.Values.Select(o => o.Balance).OrderDescending().Take(3).Sum();
         
-        return new PuzzleResult(sum, "df8f313313f13f9a6361b0c692e92061");
+        return new PuzzleResult(sum);
     }
 
+    [Puzzle("2636591baa425722553a06d9e6e95dd3")]
     public PuzzleResult Part3(string input)
     {
         var (officials, transactions) = Parse(input);
@@ -46,7 +49,7 @@ public class Codyssi202509 : CodyssiPuzzle
         
         var sum = officials.Values.Select(o => o.Balance).OrderDescending().Take(3).Sum();
         
-        return new PuzzleResult(sum, "2636591baa425722553a06d9e6e95dd3");
+        return new PuzzleResult(sum);
     }
 
     private static (

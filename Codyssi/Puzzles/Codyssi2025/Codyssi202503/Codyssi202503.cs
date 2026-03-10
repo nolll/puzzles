@@ -7,6 +7,7 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202503;
 [Name("Supplies in Surplus")]
 public class Codyssi202503 : CodyssiPuzzle
 {
+    [Puzzle("01d1552220dda559a422036ab711923e")]
     public PuzzleResult Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
@@ -21,17 +22,19 @@ public class Codyssi202503 : CodyssiPuzzle
             }
         }
         
-        return new PuzzleResult(boxCount, "01d1552220dda559a422036ab711923e");
+        return new PuzzleResult(boxCount);
     }
 
+    [Puzzle("1cb7e24878302f60b0ba3be5141cdc32")]
     public PuzzleResult Part2(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var boxCount = lines.Sum(line => GetLabels(line).Count);
 
-        return new PuzzleResult(boxCount, "1cb7e24878302f60b0ba3be5141cdc32");
+        return new PuzzleResult(boxCount);
     }
 
+    [Puzzle("2cbe9f9e03bce403a08a5395b3be8757")]
     public PuzzleResult Part3(string input)
     {
         var lines = input.Split(LineBreaks.Single);
@@ -43,7 +46,7 @@ public class Codyssi202503 : CodyssiPuzzle
             best = Math.Max(set.Count, best);
         }
 
-        return new PuzzleResult(best, "2cbe9f9e03bce403a08a5395b3be8757");
+        return new PuzzleResult(best);
     }
     
     private static HashSet<int> GetLabels(string line)

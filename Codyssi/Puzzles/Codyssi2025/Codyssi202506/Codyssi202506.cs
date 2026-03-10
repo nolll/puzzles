@@ -9,18 +9,21 @@ public class Codyssi202506 : CodyssiPuzzle
 {
     private const int UpperBound = 52;
 
+    [Puzzle("fdcf01fc54fbd900671723d23cced1f2")]
     public PuzzleResult Part1(string input)
     {
         var count = input.Select(Chars.IsAlphabetic).Select(isLetter => isLetter ? 1 : 0).Sum();
-        return new PuzzleResult(count, "fdcf01fc54fbd900671723d23cced1f2");
+        return new PuzzleResult(count);
     }
 
+    [Puzzle("88ffc67653d041684f125e23ab4c8764")]
     public PuzzleResult Part2(string input)
     {
         var score = input.Sum(GetScore);
-        return new PuzzleResult(score, "88ffc67653d041684f125e23ab4c8764");
+        return new PuzzleResult(score);
     }
 
+    [Puzzle("31fa3178274e6a4bb86259563a07d7d0")]
     public PuzzleResult Part3(string input)
     {
         var scores = input.Select(GetScore).ToArray();
@@ -31,7 +34,7 @@ public class Codyssi202506 : CodyssiPuzzle
 
             scores[i] = CalculateScoreFromPrevious(scores[i - 1]);
         }
-        return new PuzzleResult(scores.Sum(), "31fa3178274e6a4bb86259563a07d7d0");
+        return new PuzzleResult(scores.Sum());
     }
 
     private static int CalculateScoreFromPrevious(int prevScore) => MathTools.Clamp(prevScore * 2 - 5, 1, UpperBound);

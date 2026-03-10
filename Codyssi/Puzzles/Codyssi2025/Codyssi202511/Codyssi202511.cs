@@ -9,19 +9,22 @@ public class Codyssi202511 : CodyssiPuzzle
 {
     private readonly Dictionary<char, int> _chars = BuildCharDictionary();
     
+    [Puzzle("8c350540f538dfbb227fe9c86f28e4db")]
     public PuzzleResult Part1(string input)
     {
         var base10Numbers = GetBase10Numbers(input);
-        return new PuzzleResult(base10Numbers.Max(), "8c350540f538dfbb227fe9c86f28e4db");
+        return new PuzzleResult(base10Numbers.Max());
     }
 
+    [Puzzle("c677dee7cd5d27aa22c862b72d8317a1")]
     public PuzzleResult Part2(string input)
     {
         var sum = GetBase10Numbers(input).Sum();
         var base68 = ToBase68(sum);
-        return new PuzzleResult(base68, "c677dee7cd5d27aa22c862b72d8317a1");
+        return new PuzzleResult(base68);
     }
 
+    [Puzzle("9b2126706485aa8c523f0ff6809cfe15")]
     public PuzzleResult Part3(string input)
     {
         var sum = GetBase10Numbers(input).Sum();
@@ -29,7 +32,7 @@ public class Codyssi202511 : CodyssiPuzzle
         while (Math.Pow(b, 4) < sum)
             b++;
         
-        return new PuzzleResult(b, "9b2126706485aa8c523f0ff6809cfe15");
+        return new PuzzleResult(b);
     }
 
     private IEnumerable<long> GetBase10Numbers(string input)

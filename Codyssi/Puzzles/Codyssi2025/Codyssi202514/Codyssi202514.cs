@@ -7,6 +7,7 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202514;
 [Name("Crucial Crafting")]
 public class Codyssi202514 : CodyssiPuzzle
 {
+    [Puzzle("43dd1272123cf25f4341c003d0fc6018")]
     public PuzzleResult Part1(string input)
     {
         var data = input.Split(LineBreaks.Single).Select(Numbers.IntsFromString);
@@ -14,19 +15,21 @@ public class Codyssi202514 : CodyssiPuzzle
         data2 = data2.OrderByDescending(o => o.quality).ThenByDescending(o => o.cost);
         var top5Sum = data2.Take(5).Select(o => o.count).Sum();
         
-        return new PuzzleResult(top5Sum, "43dd1272123cf25f4341c003d0fc6018");
+        return new PuzzleResult(top5Sum);
     }
 
+    [Puzzle("034d794512e58624f111ea6c90e4abcc")]
     public PuzzleResult Part2(string input)
     {
         var result = RunPart2And3(input, 30);
-        return new PuzzleResult(result, "034d794512e58624f111ea6c90e4abcc");
+        return new PuzzleResult(result);
     }
     
+    [Puzzle("3bafbd664e33fa504df74844376f1c19")]
     public PuzzleResult Part3(string input, int unitCount = 300)
     {
         var result = RunPart2And3(input, unitCount);
-        return new PuzzleResult(result, "3bafbd664e33fa504df74844376f1c19");
+        return new PuzzleResult(result);
     }
 
     public int RunPart2And3(string input, int unitCount)

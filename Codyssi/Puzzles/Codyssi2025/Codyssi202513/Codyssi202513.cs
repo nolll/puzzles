@@ -9,18 +9,21 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202513;
 [Name("Laestrygonian Guards")]
 public class Codyssi202513 : CodyssiPuzzle
 {
+    [Puzzle("4b6f984898442eee284f3fe1ae2050c9")]
     public PuzzleResult Part1(string input)
     {
         var p = RunPart1And2(input, 1);
-        return new PuzzleResult(p, "4b6f984898442eee284f3fe1ae2050c9");
+        return new PuzzleResult(p);
     }
 
+    [Puzzle("04afa91a62dd50ed3b96b0d436d91135")]
     public PuzzleResult Part2(string input)
     {
         var p = RunPart1And2(input);
-        return new PuzzleResult(p, "04afa91a62dd50ed3b96b0d436d91135");
+        return new PuzzleResult(p);
     }
     
+    [Puzzle("00f6f13fa8e4c7e8a5e7e790d285ab85")]
     public PuzzleResult Part3(string input)
     {
         var (edges, _) = Parse(input);
@@ -31,7 +34,7 @@ public class Codyssi202513 : CodyssiPuzzle
 
         var costs = paths.Select(o => o.Item2).Max();
         
-        return new PuzzleResult(costs, "00f6f13fa8e4c7e8a5e7e790d285ab85");
+        return new PuzzleResult(costs);
     }
 
     private IEnumerable<(string, int)> FindPaths(Dictionary<string, GraphNode> nodes, GraphNode node, string used, int cost)

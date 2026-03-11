@@ -13,7 +13,8 @@ public class Ece202502 : EverybodyEventPuzzle
     private const int NumCycles = 100;
     private const long Limit = 1_000_000;
 
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         var (a, b) = Numbers.LongsFromString(input);
 
@@ -29,13 +30,15 @@ public class Ece202502 : EverybodyEventPuzzle
         return new PuzzleResult($"[{ra},{rb}]", "c80ae8a8504b69e6b4fa4a851004d919");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
         var count = RunPart2And3(input, 101, 10);
         return new PuzzleResult(count, "814e2b7637e129a0a60b36d921916b8c");
     }
 
-    public PuzzleResult RunPart3(string input)
+    [Puzzle("")]
+    public PuzzleResult Part3(string input)
     {
         var count = RunPart2And3(input, 1001, 1);
         return new PuzzleResult(count, "0265c1e5ddcd8eec040e8ccb3bd0ac11");

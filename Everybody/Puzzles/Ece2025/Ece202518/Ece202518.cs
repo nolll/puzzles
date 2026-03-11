@@ -11,8 +11,10 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202518;
 // That is not true in the test input
 public class Ece202518 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input) => new(ParsePlants(input).Last().Energy, "3c9317ed77a5948ad8c6ca11172055bd");
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var (plantstr, teststr) = input.Split(LineBreaks.Triple);
@@ -22,6 +24,7 @@ public class Ece202518 : EverybodyEventPuzzle
         return new PuzzleResult(sum, "810932c961238e78746d0d6f239e398d");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var (plantstr, teststr) = input.Split(LineBreaks.Triple);

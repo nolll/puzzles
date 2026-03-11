@@ -20,8 +20,13 @@ public class Ece202419 : EverybodyEventPuzzle
         { (0, -1), (-1, -1) }
     };
 
+    [Puzzle("")]
     public PuzzleResult Part1(string input) => new(Run(input, 1), "d9c02c79770322919192525a442c576d");
+    
+    [Puzzle("")]
     public PuzzleResult Part2(string input) => new(Run(input, 100), "81f686ab8d66b6fc14b37f46ec85d6f2");
+    
+    [Puzzle("")]
     public PuzzleResult Part3(string input) => new(Run(input, 1048576000), "4974156d795debf10be98bd14077a889");
 
     private string Run(string input, int iterations)

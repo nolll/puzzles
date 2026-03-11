@@ -11,7 +11,7 @@ public class Ece202501Tests
                              R3,L2,R3,L1
                              """;
 
-        Sut.RunPart1(input).Answer.Should().Be("Fyrryn");
+        Sut.Part1(input).Answer.Should().Be("Fyrryn");
     }
     
     [Fact]
@@ -23,7 +23,7 @@ public class Ece202501Tests
                              R3,L2,R3,L1
                              """;
 
-        Sut.RunPart2(input).Answer.Should().Be("Elarzris");
+        Sut.Part2(input).Answer.Should().Be("Elarzris");
     }
     
     [Fact]
@@ -35,7 +35,7 @@ public class Ece202501Tests
                              R3,L2,R3,L3
                              """;
 
-        Sut.RunPart3(input).Answer.Should().Be("Drakzyph");
+        Sut.Part3(input).Answer.Should().Be("Drakzyph");
     }
 
     private Ece202501 Sut => new();

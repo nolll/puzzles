@@ -18,14 +18,14 @@ public class Ece202406Tests
     [Fact]
     public void Part1()
     {
-        var result = Sut.RunPart1(Input);
+        var result = Sut.Part1(Input);
         result.Answer.Should().Be("RRB@");
     }
     
     [Fact]
     public void Part2And3()
     {
-        var result = Sut.RunPart2(Input);
+        var result = Sut.Part2(Input);
         result.Answer.Should().Be("RB@");
     }
     

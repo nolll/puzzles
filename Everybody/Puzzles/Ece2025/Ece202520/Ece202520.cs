@@ -7,6 +7,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202520;
 [Name("Dream in Triangles")]
 public class Ece202520 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -33,6 +34,7 @@ public class Ece202520 : EverybodyEventPuzzle
         return new PuzzleResult(count, "d8ee6b0475f3971b598eab03bf31bed4");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -75,6 +77,7 @@ public class Ece202520 : EverybodyEventPuzzle
         return new PuzzleResult(cost, "2564cba88ff81fc3fa2632c3749d06e5");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var grid1 = GridBuilder.BuildCharGrid(input);

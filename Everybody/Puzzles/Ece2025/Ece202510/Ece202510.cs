@@ -19,6 +19,7 @@ public class Ece202510 : EverybodyEventPuzzle
         (-1, -2)
     ];
 
+    [Puzzle("")]
     public PuzzleResult Part1(string input) => new(Part1(input, 4), "742e9c5b98a1f2e9dfe76f5e8a1f560d");
 
     public int Part1(string input, int moveCount)
@@ -47,6 +48,7 @@ public class Ece202510 : EverybodyEventPuzzle
         return visited.Count(o => grid.ReadValueAt(o) == 'S');
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input) => new(Part2(input, 20), "c092efde26d8cc546f5805df698cf529");
 
     public int Part2(string input, int moveCount)
@@ -103,6 +105,7 @@ public class Ece202510 : EverybodyEventPuzzle
         return eaten;
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);

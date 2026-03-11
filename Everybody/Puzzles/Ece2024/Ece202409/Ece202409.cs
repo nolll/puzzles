@@ -6,7 +6,8 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202409;
 [Name("Sparkling Bugs")]
 public class Ece202409 : EverybodyEventPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         int[] stamps = [1, 3, 5, 10];
         var balls = ParseBalls(input);
@@ -16,7 +17,8 @@ public class Ece202409 : EverybodyEventPuzzle
         return new PuzzleResult(result, "dffa64bee7ea0c0ad66724de7afe7c08");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
         int[] stamps = [1, 3, 5, 10, 15, 16, 20, 24, 25, 30];
         var balls = ParseBalls(input);
@@ -26,7 +28,8 @@ public class Ece202409 : EverybodyEventPuzzle
         return new PuzzleResult(result, "6032109447891782512325cb9251f9e2");
     }
     
-    public PuzzleResult RunPart3(string input)
+    [Puzzle("")]
+    public PuzzleResult Part3(string input)
     {
         const int rangeSize = 100;
         int[] stamps = [1, 3, 5, 10, 15, 16, 20, 24, 25, 30, 37, 38, 49, 50, 74, 75, 100, 101];

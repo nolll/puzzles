@@ -7,6 +7,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202504;
 [Name("Teeth of the Wind")]
 public class Ece202504 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var numbers = Numbers.IntsFromString(input).ToArray();
@@ -15,6 +16,7 @@ public class Ece202504 : EverybodyEventPuzzle
         return new PuzzleResult(result, "eb41f6c9a8921d8fcdff38044b3bfe9d");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var numbers = Numbers.IntsFromString(input).ToArray();
@@ -23,6 +25,7 @@ public class Ece202504 : EverybodyEventPuzzle
         return new PuzzleResult(result, "0257539e71c9dbe0dd69df3f4d79eb4f");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var lines = input.Split(LineBreaks.Single);

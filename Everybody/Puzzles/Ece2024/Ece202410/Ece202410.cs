@@ -8,6 +8,7 @@ public class Ece202410 : EverybodyEventPuzzle
 {
     private const int SegmentSize = 8;
 
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -18,6 +19,7 @@ public class Ece202410 : EverybodyEventPuzzle
         return new PuzzleResult(word, "b62fc815678f7269aae352e26d1c3600");
     }
     
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -32,6 +34,7 @@ public class Ece202410 : EverybodyEventPuzzle
         return new PuzzleResult(result, "ca8e2900fb3be19c6e0fbea1fa76eff6");
     }
     
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);

@@ -6,9 +6,14 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202404;
 [Name("Royal Smith's Puzzle")]
 public class Ece202404 : EverybodyEventPuzzle
 {
-    public PuzzleResult RunPart1(string input) => new(RunPart1And2(input), "eabb36cc8d28867fc0f0d332eda02eb3");
-    public PuzzleResult RunPart2(string input) => new(RunPart1And2(input), "0a37c73499ec6bdb6af25453b7099e38");
-    public PuzzleResult RunPart3(string input) => new(Part3(input), "17d992743f071f1de07d587e4026af89");
+    [Puzzle("")]
+    public PuzzleResult Part1(string input) => new(RunPart1And2(input), "eabb36cc8d28867fc0f0d332eda02eb3");
+    
+    [Puzzle("")]
+    public PuzzleResult Part2(string input) => new(RunPart1And2(input), "0a37c73499ec6bdb6af25453b7099e38");
+    
+    [Puzzle("")]
+    public PuzzleResult Part3(string input) => new(SolvePart3(input), "17d992743f071f1de07d587e4026af89");
 
     private static int RunPart1And2(string input)
     {
@@ -17,7 +22,7 @@ public class Ece202404 : EverybodyEventPuzzle
         return nails.Sum(o => o - smallest);
     }
 
-    private static int Part3(string input)
+    private static int SolvePart3(string input)
     {
         var nails = ParseNails(input);
         var smallest = nails.First();

@@ -12,7 +12,7 @@ public class Ece202407Tests
                              D:=,=,=,+
                              """;
 
-        Sut.RunPart1(input).Answer.Should().Be("BDCA");
+        Sut.Part1(input).Answer.Should().Be("BDCA");
     }
     
     [Fact]
@@ -31,7 +31,7 @@ public class Ece202407Tests
                              D:=,=,=,+
                              """;
 
-        Sut.Part2(track, input).Should().Be("DCBA");
+        Sut.SolvePart2(track, input).Should().Be("DCBA");
     }
     
     private static Ece202407 Sut => new();

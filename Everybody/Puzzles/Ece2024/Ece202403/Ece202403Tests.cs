@@ -15,14 +15,14 @@ public class Ece202403Tests
     [Fact]
     public void Part1And2()
     {
-        var result = Sut.RunPart1(Input);
+        var result = Sut.Part1(Input);
         result.Answer.Should().Be("35");
     }
     
     [Fact]
     public void Part3()
     {
-        var result = Sut.RunPart3(Input);
+        var result = Sut.Part3(Input);
         result.Answer.Should().Be("29");
     }
 

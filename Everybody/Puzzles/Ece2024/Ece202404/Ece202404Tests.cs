@@ -12,7 +12,7 @@ public class Ece202404Tests
                              8
                              """;
 
-        Sut.RunPart1(input).Answer.Should().Be("10");
+        Sut.Part1(input).Answer.Should().Be("10");
     }
     
     [Fact]
@@ -26,7 +26,7 @@ public class Ece202404Tests
                              8
                              """;
 
-        Sut.RunPart3(input).Answer.Should().Be("8");
+        Sut.Part3(input).Answer.Should().Be("8");
     }
 
     private static Ece202404 Sut => new();

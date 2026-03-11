@@ -12,19 +12,22 @@ public class Ece202403 : EverybodyEventPuzzle
         Diagonal
     }
     
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         var result = Run(input, SlopeRule.Orthogonal);
         return new PuzzleResult(result, "f8809d3064586fdc87c819e0caa76093");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
         var result = Run(input, SlopeRule.Orthogonal);
         return new PuzzleResult(result, "d6f8a8bfba935c69e51e8d3249dc7264");
     }
 
-    public PuzzleResult RunPart3(string input)
+    [Puzzle("")]
+    public PuzzleResult Part3(string input)
     {
         var result = Run(input, SlopeRule.Diagonal);
         return new PuzzleResult(result, "b37fb7a9a2f7e97880544e19b5c4e323");

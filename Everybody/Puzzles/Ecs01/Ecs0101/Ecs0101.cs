@@ -8,19 +8,22 @@ namespace Pzl.Everybody.Puzzles.Ecs01.Ecs0101;
 [Name("EniCode")]
 public class Ecs0101 : EverybodyStoryPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         var result = FindBestResult(Eni1, input);
         return new PuzzleResult(result, "400b09c8e50afd8c884e7693f14f2d76");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
         var result = FindBestResult(Eni2, input);
         return new PuzzleResult(result, "218170e1ab319a7f79e6be73f824bcb7");
     }
 
-    public PuzzleResult RunPart3(string input)
+    [Puzzle("")]
+    public PuzzleResult Part3(string input)
     {
         var result = FindBestResult(Eni3, input);
         return new PuzzleResult(result, "66e6499f59383f4a9fd43d9320e68816");

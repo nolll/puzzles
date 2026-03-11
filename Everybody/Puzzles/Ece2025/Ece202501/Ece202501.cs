@@ -7,7 +7,8 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202501;
 [Name("Whispers in the Shell")]
 public class Ece202501 : EverybodyEventPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         var (names, instructions) = Parse(input);
         var index = 0;
@@ -23,7 +24,8 @@ public class Ece202501 : EverybodyEventPuzzle
         return new PuzzleResult(names[index], "471e7e193cef7ed98fca951fa22d1b63");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
         var (names, instructions) = Parse(input);
         var index = 0;
@@ -37,7 +39,8 @@ public class Ece202501 : EverybodyEventPuzzle
         return new PuzzleResult(names[index], "4c1a9174f14f00b9309ceb208fb603b6");
     }
 
-    public PuzzleResult RunPart3(string input)
+    [Puzzle("")]
+    public PuzzleResult Part3(string input)
     {
         var (names, instructions) = Parse(input);
 

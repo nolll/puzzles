@@ -6,11 +6,13 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202508;
 [Name("The Art of Connection")]
 public class Ece202508 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input) => new(Part1(input, 32), "13e1a785ec9325ce343a99dda7a6745f");
 
     public int Part1(string input, int nailCount) => 
         Parse(input).Zip(Parse(input).Skip(1)).Count(o => Math.Abs(o.Second - o.First) == nailCount / 2);
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var numbers = Parse(input);
@@ -34,6 +36,7 @@ public class Ece202508 : EverybodyEventPuzzle
         return new PuzzleResult(knotCount, "b5e871831bb11b7eddb421c81e170748");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input) => new(Part3(input, 256), "2681ae91ee4e40ef531ab7d2cdd31f8b");
 
     public int Part3(string input, int nailCount)

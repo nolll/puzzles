@@ -11,6 +11,7 @@ namespace Pzl.Everybody.Puzzles.Ecs02.Ecs0201;
 [IsSlow]
 public class Ecs0201 : EverybodyStoryPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var (grid, tokens, _) = Parse(input);
@@ -26,6 +27,7 @@ public class Ecs0201 : EverybodyStoryPuzzle
         return new PuzzleResult(coins, "dad5d715238be69f7117d91bb3938a10");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var (grid, tokens, slotCount) = Parse(input);
@@ -47,6 +49,7 @@ public class Ecs0201 : EverybodyStoryPuzzle
         return new PuzzleResult(coins, "26c70e45583b5816af23beaeb77e8940");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var (grid, tokenRules, slotCount) = Parse(input);

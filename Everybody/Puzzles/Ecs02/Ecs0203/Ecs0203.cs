@@ -10,6 +10,7 @@ namespace Pzl.Everybody.Puzzles.Ecs02.Ecs0203;
 [Name("The Dice that Never Lie (Unless I Tell Them To)")]
 public class Ecs0203 : EverybodyStoryPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var dice = ParseDice(input);
@@ -24,6 +25,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
         return new PuzzleResult(rollCount, "afba3780df3e7caae7832176dc41303e");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var (diceInput, racetrackInput) = input.Split(LineBreaks.Double);
@@ -55,6 +57,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
         return new PuzzleResult(result, "7171b572bda6f1b6df3618de04406256");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var (diceInput, gridInput) = input.Split(LineBreaks.Double);

@@ -44,7 +44,7 @@ public class Ece202405Tests
                              6 7 8 9
                              """;
 
-        Sut.RunPart3(input).Answer.Should().Be("6584");
+        Sut.Part3(input).Answer.Should().Be("6584");
     }
 
     private static Ece202405 Sut => new();

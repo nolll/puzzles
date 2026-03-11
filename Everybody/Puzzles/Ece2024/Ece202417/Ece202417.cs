@@ -9,9 +9,13 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202417;
 [Name("Galactic Geometry")]
 public class Ece202417 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input) => new(Part1And2(input), "97b6801bcd6671e60725568f976b6480");
+    
+    [Puzzle("")]
     public PuzzleResult Part2(string input) => new(Part1And2(input), "2484ccfa9b3e6b666a7ad01d6204724f");
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var stars = FindStars(input);

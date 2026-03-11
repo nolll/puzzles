@@ -7,6 +7,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202514;
 [Name("The Game of Light")]
 public class Ece202514 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -20,6 +21,7 @@ public class Ece202514 : EverybodyEventPuzzle
         return new PuzzleResult(count, "a0147003c53749f3fe07887624e7f4fb");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -33,6 +35,7 @@ public class Ece202514 : EverybodyEventPuzzle
         return new PuzzleResult(count, "18d5ea1ad565154844e4544540b67cf5");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var seen = new Dictionary<string, (int index, int count)>();

@@ -5,9 +5,14 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202401;
 [Name("The Battle for the Farmlands")]
 public class Ece202401 : EverybodyEventPuzzle
 {
-    public PuzzleResult RunPart1(string input) => new(PotionsNeeded(input, 1), "93584fbfb539341540431fdcbdd43e43");
-    public PuzzleResult RunPart2(string input) => new(PotionsNeeded(input, 2), "29c8c2e9da7059c271b37645091e3caa");
-    public PuzzleResult RunPart3(string input) => new(PotionsNeeded(input, 3), "114dce9075f6d580a84376f6f7eceeeb");
+    [Puzzle("")]
+    public PuzzleResult Part1(string input) => new(PotionsNeeded(input, 1), "93584fbfb539341540431fdcbdd43e43");
+    
+    [Puzzle("")]
+    public PuzzleResult Part2(string input) => new(PotionsNeeded(input, 2), "29c8c2e9da7059c271b37645091e3caa");
+    
+    [Puzzle("")]
+    public PuzzleResult Part3(string input) => new(PotionsNeeded(input, 3), "114dce9075f6d580a84376f6f7eceeeb");
 
     private static int PotionsNeeded(string input, int groupSize) => 
         SplitToSize(input, groupSize)

@@ -7,7 +7,8 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202407;
 [Name("Not Fast but Furious")]
 public class Ece202407 : EverybodyEventPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var knights = new List<Knight>();
@@ -24,10 +25,13 @@ public class Ece202407 : EverybodyEventPuzzle
         return new PuzzleResult(result, "05a999b2ab72fff505423f40ee4af56b");
     }
 
-    public PuzzleResult RunPart2(string input) => new(Part2(Part2Track, input), "f315ce3865ed329f4eee3ec0d64bb032");
-    public PuzzleResult RunPart3(string input) => new(Part3(Part3Track, input), "2945d46a4a840d740dfe233d50659d0c");
+    [Puzzle("")]
+    public PuzzleResult Part2(string input) => new(SolvePart2(Part2Track, input), "f315ce3865ed329f4eee3ec0d64bb032");
+    
+    [Puzzle("")]
+    public PuzzleResult Part3(string input) => new(SolvePart3(Part3Track, input), "2945d46a4a840d740dfe233d50659d0c");
 
-    public string Part2(string trackString, string input)
+    public string SolvePart2(string trackString, string input)
     {
         const int loopCount = 10;
         
@@ -47,7 +51,7 @@ public class Ece202407 : EverybodyEventPuzzle
         return string.Join("", knights.OrderByDescending(o => o.Score).Select(o => o.Name));
     }
 
-    private static int Part3(string trackString, string input)
+    private static int SolvePart3(string trackString, string input)
     {
         var track = BuildTerrain(trackString);
         var rivalActions = BuildActions(input.Split(':').Last());

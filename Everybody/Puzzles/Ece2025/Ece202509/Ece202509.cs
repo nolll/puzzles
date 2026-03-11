@@ -8,6 +8,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202509;
 [Name("Encoded in the Scales")]
 public class Ece202509 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var totalScore = FindChildren(ParseDucks(input)).Sum(o => o.Score);
@@ -15,6 +16,7 @@ public class Ece202509 : EverybodyEventPuzzle
         return new PuzzleResult(totalScore, "02cb5b8f30a69972766eb4d6122b6667");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var totalScore = FindChildren(ParseDucks(input)).Sum(o => o.Score);
@@ -22,6 +24,7 @@ public class Ece202509 : EverybodyEventPuzzle
         return new PuzzleResult(totalScore, "f1dada234df0c5304571179c87ccfa7c");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var ducks = ParseDucks(input);

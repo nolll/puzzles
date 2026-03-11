@@ -47,5 +47,5 @@ public class PuzzleFactory(FileReader fileReader)
     
     private static bool IsPuzzleFunc(MethodInfo method) =>
         method is { IsPublic: true, IsStatic: false } &&
-        (method.GetCustomAttribute<PuzzleAttribute>(false) is not null || method.ReturnType == typeof(PuzzleResult));
+        method.GetCustomAttribute<PuzzleAttribute>(false) is not null;
 }

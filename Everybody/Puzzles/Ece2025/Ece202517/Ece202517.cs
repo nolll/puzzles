@@ -15,6 +15,7 @@ public class Ece202517 : EverybodyEventPuzzle
     private const string RightSet = "right";
     private const string LeftSet = "left";
 
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -25,6 +26,7 @@ public class Ece202517 : EverybodyEventPuzzle
         return new PuzzleResult(sum, "058525ed0b94d59517e415b1660aa68a");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -50,6 +52,7 @@ public class Ece202517 : EverybodyEventPuzzle
         return new PuzzleResult(best * bestRadius, "5d4764c0cfb73f6caa5342ac5cbce4db");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);

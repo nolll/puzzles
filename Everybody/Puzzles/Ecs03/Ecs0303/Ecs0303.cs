@@ -8,12 +8,15 @@ namespace Pzl.Everybody.Puzzles.Ecs03.Ecs0303;
 [Name("Plug and Play")]
 public class Ecs0303 : EverybodyStoryPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input) => 
         new(Solve(input, new Options()), "d02f51fc7c9cf34d3a3cf5b92623309d");
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input) => 
         new(Solve(input, new Options(true)), "f70e34ae97fef1a1756adfe0db17d1ec");
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input) => 
         new(Solve(input, new Options(true, true)), "c91d39a7c30ea5416f0e8adea6490f1c");
 

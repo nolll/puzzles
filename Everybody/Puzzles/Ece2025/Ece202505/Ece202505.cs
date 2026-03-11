@@ -7,6 +7,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202505;
 [Name("Fishbone Order")]
 public class Ece202505 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var result = Sword.Parse(input).Quality;
@@ -14,6 +15,7 @@ public class Ece202505 : EverybodyEventPuzzle
         return new PuzzleResult(result, "da8e81f2fb0217604074c546d70d3b9d");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var qualities = ParseSwords(input).Select(o => o.Quality).ToList();
@@ -21,6 +23,7 @@ public class Ece202505 : EverybodyEventPuzzle
         return new PuzzleResult(result, "08078be2afe2fd502f81f20a8088d436");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var swords = ParseSwords(input).OrderDescending().ToArray();

@@ -6,7 +6,10 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202418;
 [Name("The Ring")]
 public class Ece202418 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input) => new(Part1And2(input), "58a8744a3bef1c6dcbf739d171b22ea5");
+    
+    [Puzzle("")]
     public PuzzleResult Part2(string input) => new(Part1And2(input), "e709ebaa41c12566e0524c796fac3615");
 
     private int Part1And2(string input)
@@ -46,6 +49,7 @@ public class Ece202418 : EverybodyEventPuzzle
         return time;
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);

@@ -6,6 +6,7 @@ namespace Pzl.Everybody.Puzzles.Ecs03.Ecs0301;
 [Name("Scales, Bags and a Bit of a Mess")]
 public class Ecs0301 : EverybodyStoryPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var sum = ParseDucks(input).Where(o => o.g > o.r && o.g > o.b).Sum(duck => duck.scale);
@@ -13,6 +14,7 @@ public class Ecs0301 : EverybodyStoryPuzzle
         return new PuzzleResult(sum, "f53ab300aa62ab2e8a5e077d2166592a");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var ducks = ParseDucks(input).ToArray();
@@ -22,6 +24,7 @@ public class Ecs0301 : EverybodyStoryPuzzle
         return new PuzzleResult(darkest.scale, "92c6e926b88305ce851562ac3de0460a");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var ducks = ParseDucks(input).ToArray();

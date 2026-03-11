@@ -8,6 +8,7 @@ public class Ece202416 : EverybodyEventPuzzle
 {
     private readonly int[] _diffs = [-1, 0, 1];
 
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var (increments, wheels) = Parse(input);
@@ -17,8 +18,10 @@ public class Ece202416 : EverybodyEventPuzzle
         return new PuzzleResult(result, "1a56d927da3da48fad02fb78b95a91cb");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input) => new(Part2(input, 202420242024), "8ba1d5c403e6bf5c0aad202e81e5e515");
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var (min, max) = Part3(input, 256);

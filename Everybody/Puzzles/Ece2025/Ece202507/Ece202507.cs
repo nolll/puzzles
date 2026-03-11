@@ -9,6 +9,7 @@ public class Ece202507 : EverybodyEventPuzzle
     private const int MinLength = 7;
     private const int MaxLength = 11;
 
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var (names, rules) = Parse(input);
@@ -17,6 +18,7 @@ public class Ece202507 : EverybodyEventPuzzle
         return new PuzzleResult(name, "f58cf5d880834e0e0823d1891e8b7a9e");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var (names, rules) = Parse(input);
@@ -31,6 +33,7 @@ public class Ece202507 : EverybodyEventPuzzle
         return new PuzzleResult(sum, "8a08f6570e988d7a1b4c17645d937b1f");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var (prefixes, rules) = Parse(input);

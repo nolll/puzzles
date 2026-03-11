@@ -6,7 +6,7 @@ public class Ece202401Tests
     public void OneCreature()
     {
         const string input = "ABBAC";
-        var result = Sut.RunPart1(input);
+        var result = Sut.Part1(input);
 
         result.Answer.Should().Be("5");
     }
@@ -15,7 +15,7 @@ public class Ece202401Tests
     public void TwoCreatures()
     {
         const string input = "AxBCDDCAxD";
-        var result = Sut.RunPart2(input);
+        var result = Sut.Part2(input);
 
         result.Answer.Should().Be("28");
     }
@@ -24,7 +24,7 @@ public class Ece202401Tests
     public void ThreeCreatures()
     {
         const string input = "xBxAAABCDxCC";
-        var result = Sut.RunPart3(input);
+        var result = Sut.Part3(input);
 
         result.Answer.Should().Be("30");
     }

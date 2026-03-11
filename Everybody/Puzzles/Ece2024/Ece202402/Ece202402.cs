@@ -7,7 +7,8 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202402;
 [Name("The Runes of Power")]
 public class Ece202402 : EverybodyEventPuzzle
 {
-    public PuzzleResult RunPart1(string input)
+    [Puzzle("")]
+    public PuzzleResult Part1(string input)
     {
         var (words, strings) = ParseWordsAndStrings(input);
         var count = CountRunicWords(words, strings);
@@ -15,7 +16,8 @@ public class Ece202402 : EverybodyEventPuzzle
         return new PuzzleResult(count, "a95c75956922f6f91c685f01d8548eb1");
     }
 
-    public PuzzleResult RunPart2(string input)
+    [Puzzle("")]
+    public PuzzleResult Part2(string input)
     {
         var (words, strings) = ParseWordsAndStrings(input);
         var count = CountRunicSymbols(words, strings);
@@ -23,7 +25,8 @@ public class Ece202402 : EverybodyEventPuzzle
         return new PuzzleResult(count, "df79c139a238567f7809c68a9e99d7bc");
     }
 
-    public PuzzleResult RunPart3(string input)
+    [Puzzle("")]
+    public PuzzleResult Part3(string input)
     {
         var (words, strings) = ParseWordsAndStrings(input);
         var count = CountRunicSymbolsInGrid(words, strings);

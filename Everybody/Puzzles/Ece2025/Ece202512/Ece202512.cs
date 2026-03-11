@@ -8,6 +8,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202512;
 [IsSlow]
 public class Ece202512 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
@@ -16,6 +17,7 @@ public class Ece202512 : EverybodyEventPuzzle
         return new PuzzleResult(seen.Count, "f81b4b34e7f317b195c2bfb97a67f3de");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
@@ -25,6 +27,7 @@ public class Ece202512 : EverybodyEventPuzzle
         return new PuzzleResult(seen.Count, "12da343d20059e681858ba5ec807ec10");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);

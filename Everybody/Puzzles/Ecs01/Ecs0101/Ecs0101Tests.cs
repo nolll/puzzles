@@ -14,7 +14,7 @@ public class Ecs0101Tests
                              A=8 B=8 C=8 X=6 Y=9 Z=6 M=16
                              """;
 
-        Sut.RunPart1(input).Answer.Should().Be("11611972920");
+        Sut.Part1(input).Answer.Should().Be("11611972920");
     }
     
     [Fact]
@@ -29,7 +29,7 @@ public class Ecs0101Tests
                              A=8 B=8 C=8 X=6 Y=19 Z=16 M=16
                              """;
 
-        Sut.RunPart2(input).Answer.Should().Be("11051340");
+        Sut.Part2(input).Answer.Should().Be("11051340");
     }
     
     [Fact]
@@ -43,7 +43,7 @@ public class Ecs0101Tests
                              A=7334 B=9016 C=8524 X=297284338 Y=1565962337 Z=86750102612 M=145
                              """;
 
-        Sut.RunPart2(input).Answer.Should().Be("1507702060886");
+        Sut.Part2(input).Answer.Should().Be("1507702060886");
     }
     
     [Fact]
@@ -58,7 +58,7 @@ public class Ecs0101Tests
                              A=8 B=8 C=8 X=6000 Y=19000 Z=16000 M=160
                              """;
 
-        Sut.RunPart3(input).Answer.Should().Be("3279640");
+        Sut.Part3(input).Answer.Should().Be("3279640");
     }
     
     [Fact]
@@ -72,7 +72,7 @@ public class Ecs0101Tests
                              A=7334 B=9016 C=8524 X=297284338 Y=1565962337 Z=86750102612 M=145
                              """;
 
-        Sut.RunPart3(input).Answer.Should().Be("7276515438396");
+        Sut.Part3(input).Answer.Should().Be("7276515438396");
     }
     
     [Theory]

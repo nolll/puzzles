@@ -5,7 +5,7 @@ public class EveryBody08Tests
     [Fact]
     public void Part1()
     {
-        var result = Sut.RunPart1("13");
+        var result = Sut.Part1("13");
         result.Answer.Should().Be("21");
     }
     

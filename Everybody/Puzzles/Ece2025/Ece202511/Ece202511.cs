@@ -6,6 +6,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202511;
 [Name("The Scout Duck Protocol")]
 public class Ece202511 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var cols = input.Split(LineBreaks.Single).Select(int.Parse).ToArray();
@@ -48,6 +49,7 @@ public class Ece202511 : EverybodyEventPuzzle
         return new PuzzleResult(checksum, "f8edf60eba791291edc0affdd3910b97");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var cols = input.Split(LineBreaks.Single).Select(int.Parse).ToArray();
@@ -89,6 +91,7 @@ public class Ece202511 : EverybodyEventPuzzle
         return new PuzzleResult(rounds, "0190e3fea8360b204a353840cb82c001");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var cols = input.Split(LineBreaks.Single).Select(long.Parse).ToArray();

@@ -8,7 +8,10 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202412;
 [Name("Desert Shower")]
 public class Ece202412 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input) => new(Part1And2(input), "7266a18eef65c4745c844164ef32f61d");
+    
+    [Puzzle("")]
     public PuzzleResult Part2(string input) => new(Part1And2(input), "e6468a990e5dfdb3b572e72c4c24ed5b");
 
     private int Part1And2(string input)
@@ -92,6 +95,7 @@ public class Ece202412 : EverybodyEventPuzzle
         return sum;
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var meteors = input.Split(LineBreaks.Single)

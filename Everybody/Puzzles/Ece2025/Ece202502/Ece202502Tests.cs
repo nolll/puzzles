@@ -7,7 +7,7 @@ public class Ece202502Tests
     {
         const string input = "A=[25,9]";
 
-        Sut.RunPart1(input).Answer.Should().Be("[357,862]");
+        Sut.Part1(input).Answer.Should().Be("[357,862]");
     }
     
     [Theory]
@@ -31,7 +31,7 @@ public class Ece202502Tests
     {
         const string input = "A=[35300,-64910]";
 
-        Sut.RunPart2(input).Answer.Should().Be("4076");
+        Sut.Part2(input).Answer.Should().Be("4076");
     }
     
     [Fact]
@@ -39,7 +39,7 @@ public class Ece202502Tests
     {
         const string input = "A=[35300,-64910]";
 
-        Sut.RunPart3(input).Answer.Should().Be("406954");
+        Sut.Part3(input).Answer.Should().Be("406954");
     }
 
     private Ece202502 Sut => new();

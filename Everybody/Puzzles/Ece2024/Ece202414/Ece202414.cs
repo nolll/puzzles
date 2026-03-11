@@ -9,6 +9,7 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202414;
 [IsSlow]
 public class Ece202414 : EverybodyEventPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var y = 0;
@@ -32,6 +33,7 @@ public class Ece202414 : EverybodyEventPuzzle
         return new PuzzleResult(maxy, "4d7ad96354959558ed0b95fa70be777c");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var seen = new HashSet<(int x, int y, int z)>();
@@ -61,6 +63,7 @@ public class Ece202414 : EverybodyEventPuzzle
         return new PuzzleResult(result, "1ceb1e594b0f47c1b64f940bb505f9ce");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var leaves = new HashSet<(int x, int y, int z)>();

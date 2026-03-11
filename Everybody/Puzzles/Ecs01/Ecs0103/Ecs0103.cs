@@ -8,6 +8,7 @@ namespace Pzl.Everybody.Puzzles.Ecs01.Ecs0103;
 [Name("The Conical Snail Clock")]
 public class Ecs0103 : EverybodyStoryPuzzle
 {
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var snails = ParseSnails(input);
@@ -22,7 +23,10 @@ public class Ecs0103 : EverybodyStoryPuzzle
         return new PuzzleResult(sum, "d051048d8661618a7c960f4992e086fd");
     }
     
+    [Puzzle("")]
     public PuzzleResult Part2(string input) => new(Part2And3(input), "6e4751eb49b140761150b2eca665319e");
+    
+    [Puzzle("")]
     public PuzzleResult Part3(string input) => new(Part2And3(input), "4473ea2d23dce203ae09dd779eaca555");
 
     private static long Part2And3(string input)

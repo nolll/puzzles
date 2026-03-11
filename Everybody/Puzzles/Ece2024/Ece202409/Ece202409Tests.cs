@@ -12,7 +12,7 @@ public class Ece202409Tests
                              16
                              """;
         
-        var result = Sut.RunPart1(input);
+        var result = Sut.Part1(input);
         result.Answer.Should().Be("10");
     }
     
@@ -26,7 +26,7 @@ public class Ece202409Tests
                              99
                              """;
         
-        var result = Sut.RunPart2(input);
+        var result = Sut.Part2(input);
         result.Answer.Should().Be("10");
     }
     
@@ -39,7 +39,7 @@ public class Ece202409Tests
                              546212
                              """;
         
-        var result = Sut.RunPart3(input);
+        var result = Sut.Part3(input);
         result.Answer.Should().Be("10449");
     }
     

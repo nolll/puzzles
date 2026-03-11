@@ -11,6 +11,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
     private const char Empty = '.';
     private const char Bone = '#';
 
+    [Puzzle("")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);
@@ -44,6 +45,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
         return new PuzzleResult(stepCount, "38aac781a486c5ca9eb6efe32f529b4e");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);
@@ -89,6 +91,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
         return new PuzzleResult(stepCount, "9621d21040a0ca3450ce213d1dca7bb5");
     }
 
+    [Puzzle("")]
     public PuzzleResult Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);

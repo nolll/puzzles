@@ -9,22 +9,25 @@ namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202504;
 [Name("Beach cleanup")]
 public class FlipFlop202504 : FlipFlopPuzzle
 {
+    [Puzzle("6a12a1e4bd346aae239fb0db99946862")]
     public PuzzleResult Part1(string input)
     {
         var coords = ParseCoords(input).ToList();
         var distance = GetTotalDistance(coords, ManhattanDistanceBetween);
         
-        return new PuzzleResult(distance, "6a12a1e4bd346aae239fb0db99946862");
+        return new PuzzleResult(distance);
     }
 
+    [Puzzle("fc0b902be6ab40fa1e0f7ab2b914f25c")]
     public PuzzleResult Part2(string input)
     {
         var coords = ParseCoords(input).ToList();
         var distance = GetTotalDistance(coords, ShortcutDistanceBetween);
         
-        return new PuzzleResult(distance, "fc0b902be6ab40fa1e0f7ab2b914f25c");
+        return new PuzzleResult(distance);
     }
 
+    [Puzzle("856f25ae0316989620812f8a89518d48")]
     public PuzzleResult Part3(string input)
     {
         var coords = ParseCoords(input).ToList();
@@ -32,7 +35,7 @@ public class FlipFlop202504 : FlipFlopPuzzle
         coords = coords.OrderBy(o => o.ManhattanDistanceTo(start)).ToList();
         var distance = GetTotalDistance(coords, ShortcutDistanceBetween);
         
-        return new PuzzleResult(distance, "856f25ae0316989620812f8a89518d48");
+        return new PuzzleResult(distance);
     }
     
     private static int ManhattanDistanceBetween(Coord a, Coord b) => a.ManhattanDistanceTo(b);

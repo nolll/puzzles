@@ -8,6 +8,7 @@ namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202503;
 [Name("Bush Salesman")]
 public class FlipFlop202503 : FlipFlopPuzzle
 {
+    [Puzzle("97a59e8e51b506fc2e1640cd479042d1")]
     public PuzzleResult Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
@@ -20,25 +21,27 @@ public class FlipFlop202503 : FlipFlopPuzzle
 
         var best2 = counts.MaxBy(o => o.Value).Key;
         
-        return new PuzzleResult(best2, "97a59e8e51b506fc2e1640cd479042d1");
+        return new PuzzleResult(best2);
     }
 
+    [Puzzle("f7c0b43b9ccea17bd677b165584ea494")]
     public PuzzleResult Part2(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var colors = lines.Select(GetColor);
         var greenCount = colors.Count(o => o.Name == "green");
         
-        return new PuzzleResult(greenCount, "f7c0b43b9ccea17bd677b165584ea494");
+        return new PuzzleResult(greenCount);
     }
 
+    [Puzzle("9b4c07da2c7aed1de44933ed08388508")]
     public PuzzleResult Part3(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var colors = lines.Select(GetColor);
         var price = colors.Sum(o => o.Price);
         
-        return new PuzzleResult(price, "9b4c07da2c7aed1de44933ed08388508");
+        return new PuzzleResult(price);
     }
 
     private static Color GetColor(string line)

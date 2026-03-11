@@ -15,15 +15,17 @@ public class FlipFlop202506 : FlipFlopPuzzle
     private const int GridEnd = GridSize * 3 / 4;
     private const int PictureCount = 1000;
 
+    [Puzzle("d0cfc435d1459e83bcc2be3046271a1a")]
     public PuzzleResult Part1(string input)
     {
         var speeds = input.Split(LineBreaks.Single).Select(Numbers.IntsFromString).Select(o => new Coord(o[0], o[1]));
         const int time = 100;
         var birdsInFrame = speeds.Select(o => Move(o, time)).Where(IsInFrame);
         
-        return new PuzzleResult(birdsInFrame.Count(), "d0cfc435d1459e83bcc2be3046271a1a");
+        return new PuzzleResult(birdsInFrame.Count());
     }
 
+    [Puzzle("6b4351b8336078bb7ea6ade68803e6d4")]
     public PuzzleResult Part2(string input)
     {
         var speeds = input.Split(LineBreaks.Single).Select(Numbers.IntsFromString).Select(o => new Coord(o[0], o[1])).ToList();
@@ -35,9 +37,10 @@ public class FlipFlop202506 : FlipFlopPuzzle
             birdCount += speeds.Select(o => Move(o, time)).Count(IsInFrame);
         }
         
-        return new PuzzleResult(birdCount, "6b4351b8336078bb7ea6ade68803e6d4");
+        return new PuzzleResult(birdCount);
     }
     
+    [Puzzle("61dc24a9d639e326619bf87ce21094f7")]
     public PuzzleResult Part3(string input)
     {
         var speeds = input.Split(LineBreaks.Single).Select(Numbers.IntsFromString).Select(o => new Coord(o[0], o[1])).ToList();
@@ -49,7 +52,7 @@ public class FlipFlop202506 : FlipFlopPuzzle
             birdCount += speeds.Select(o => Move(o, time)).Count(IsInFrame);
         }
         
-        return new PuzzleResult(birdCount, "61dc24a9d639e326619bf87ce21094f7");
+        return new PuzzleResult(birdCount);
     }
 
     private static Coord Move(Coord coord, long time)

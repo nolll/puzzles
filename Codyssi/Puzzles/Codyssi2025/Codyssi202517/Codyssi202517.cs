@@ -30,6 +30,7 @@ public class Codyssi202517 : CodyssiPuzzle
     {
         var (moves, stairById, nextStairs) = Parse(input);
         var cache = new Dictionary<string, BigInteger>();
+        Dfs(cache, "S1", 0, false, moves, stairById, nextStairs);
         var targetIndex = BigInteger.Parse("100000000000000000000000000000");
         if (targetIndex > cache["S1_0"])
         {

@@ -5,6 +5,7 @@ namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202505;
 [Name("Strange tunnels")]
 public class FlipFlop202505 : FlipFlopPuzzle
 {
+    [Puzzle("5abb4bbf3aabd7a9ebecda15d22947ca")]
     public PuzzleResult Part1(string input)
     {
         var (chars, tunnels) = Parse(input);
@@ -18,9 +19,10 @@ public class FlipFlop202505 : FlipFlopPuzzle
             steps += Math.Abs(first - last);
         }
         
-        return new PuzzleResult(steps, "5abb4bbf3aabd7a9ebecda15d22947ca");
+        return new PuzzleResult(steps);
     }
 
+    [Puzzle("68e4f28e3a2dc0c8cc1c3eabf161d53e")]
     public PuzzleResult Part2(string input)
     {
         var (chars, tunnels) = Parse(input);
@@ -36,9 +38,10 @@ public class FlipFlop202505 : FlipFlopPuzzle
 
         var notSeen = string.Join("", chars.Distinct().Where(o => !seen.Contains(o)));
         
-        return new PuzzleResult(notSeen, "68e4f28e3a2dc0c8cc1c3eabf161d53e");
+        return new PuzzleResult(notSeen);
     }
 
+    [Puzzle("36c49d43c6bb2d7a410d976dda77c3f2")]
     public PuzzleResult Part3(string input)
     {
         var (chars, tunnels) = Parse(input);
@@ -53,7 +56,7 @@ public class FlipFlop202505 : FlipFlopPuzzle
             steps += direction * Math.Abs(first - last);
         }
         
-        return new PuzzleResult(steps, "36c49d43c6bb2d7a410d976dda77c3f2");
+        return new PuzzleResult(steps);
     }
     
     private (char[] chars, Dictionary<char, (int first, int last)> tunnels) Parse(string input)

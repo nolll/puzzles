@@ -8,14 +8,17 @@ namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202507;
 [Name("Hyper grids")]
 public class FlipFlop202507 : FlipFlopPuzzle
 {
+    [Puzzle("7b616e8fb5d65258e63524b0fc6a38a8")]
     public PuzzleResult Part1(string input) => 
-        new(Solve(input, ParseDimensionsPart1), "7b616e8fb5d65258e63524b0fc6a38a8");
+        new(Solve(input, ParseDimensionsPart1));
     
+    [Puzzle("acc5b7834fbceedcbea8e40329558fe9")]
     public PuzzleResult Part2(string input) => 
-        new(Solve(input, ParseDimensionsPart2), "acc5b7834fbceedcbea8e40329558fe9");
+        new(Solve(input, ParseDimensionsPart2));
 
+    [Puzzle("4b85e2a44300b9cdb015d5b57f717a50")]
     public PuzzleResult Part3(string input) => 
-        new(Solve(input, ParseDimensionsPart3), "4b85e2a44300b9cdb015d5b57f717a50");
+        new(Solve(input, ParseDimensionsPart3));
 
     private long Solve(string input, Func<string, int[]> parseDimensions) => 
         input.Split(LineBreaks.Single).Sum(line => CountWays(parseDimensions(line)));

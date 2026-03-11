@@ -9,7 +9,7 @@ public class Aoc202301 : AocPuzzle
     private static readonly List<string> Words =
         ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
-    [Puzzle("")]
+    [Puzzle("93e7c44a86bd9d03f7156e6fc3ed61c8")]
     public PuzzleResult Part1(string input) => new(FindCalibrationNumberPart1(input).Sum());
 
     [Puzzle("1a8775b7ae93118b31708e052207307d")]

@@ -8,12 +8,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202305;
 public class Aoc202305 : AocPuzzle
 {
     [Puzzle("8af1efe2f5bf2d0e78873be92fcd8fff")]
-    public PuzzleResult Part1(string input) => new(SolvePart1(input));
-    
-    [Puzzle("bd7466367c1fe654a2ec0e3f1fe3f112")]
-    public PuzzleResult Part2(string input) => new(SolvePart2(input));
-
-    public static long SolvePart1(string input)
+    public long Part1(string input)
     {
         var groups = input
             .Split(LineBreaks.Double)
@@ -21,29 +16,11 @@ public class Aoc202305 : AocPuzzle
             .ToList();
         var seeds = ParseSeeds(groups.First());
         var rangeGroups = groups.Skip(1).Select(ParseGroup).ToList();
-        var locations = seeds.Select(seed => Convert(rangeGroups, seed));
-
-        return locations.Min();
+        return seeds.Select(seed => Convert(rangeGroups, seed)).Min();
     }
 
-    private static long Convert(List<RangeGroup> rangeGroups, long v)
-    {
-        foreach (var rangeGroup in rangeGroups)
-        {
-            foreach (var range in rangeGroup.Ranges)
-            {
-                if (!range.IsInRange(v))
-                    continue;
-                
-                v = v - range.Source + range.Destination;
-                break;
-            }
-        }
-
-        return v;
-    }
-
-    public static long SolvePart2(string input)
+    [Puzzle("bd7466367c1fe654a2ec0e3f1fe3f112")]
+    public long Part2(string input)
     {
         var groups = input
             .Split(LineBreaks.Double)
@@ -97,6 +74,23 @@ public class Aoc202305 : AocPuzzle
         }
 
         return seeds.MinBy(o => o.Start)!.Start;
+    }
+
+    private static long Convert(List<RangeGroup> rangeGroups, long v)
+    {
+        foreach (var rangeGroup in rangeGroups)
+        {
+            foreach (var range in rangeGroup.Ranges)
+            {
+                if (!range.IsInRange(v))
+                    continue;
+                
+                v = v - range.Source + range.Destination;
+                break;
+            }
+        }
+
+        return v;
     }
 
     private static List<long> ParseSeeds(IEnumerable<string> firstGroup) => 

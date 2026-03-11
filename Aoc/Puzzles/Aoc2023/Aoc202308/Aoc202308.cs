@@ -8,38 +8,25 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202308;
 public class Aoc202308 : AocPuzzle
 {
     [Puzzle("fc2f3ff0b243fed57135f9ca59507411")]
-    public PuzzleResult Part1(string input)
+    public long Part1(string input)
     {
-        return new PuzzleResult(DesertPath1(input));
+        var (directions, connections) = ParseInput(input);
+        return GetStepCount(connections, directions, CompareFunc, "AAA");
+
+        bool CompareFunc(string s) => s != "ZZZ";
     }
 
     [Puzzle("ea69e01b93e2a5ffbd263edd44ecc7e8")]
-    public PuzzleResult Part2(string input)
-    {
-        return new PuzzleResult(DesertPath2(input));
-    }
-
-    public static long DesertPath1(string input)
+    public long Part2(string input)
     {
         var (directions, connections) = ParseInput(input);
-
-        bool CompareFunc(string s) => s != "ZZZ";
-        return GetStepCount(connections, directions, CompareFunc, "AAA");
-    }
-
-    public static long DesertPath2(string input)
-    {
-        var (directions, connections) = ParseInput(input);
-
         var startPositions = connections.Keys.Where(o => o.EndsWith('A')).ToList();
+        var pathLengths = startPositions.Select(o => GetStepCount(connections, directions, CompareFunc, o));
+        return MathTools.Lcm(pathLengths);
 
         bool CompareFunc(string s) => !s.EndsWith('Z');
-        var pathLengths = startPositions.Select(
-            startPosition => GetStepCount(connections, directions, CompareFunc, startPosition)).ToList();
-
-        return MathTools.Lcm(pathLengths);
     }
-
+    
     private static long GetStepCount(
         IReadOnlyDictionary<string, (string Left, string Right)> connections,
         char[] directions,

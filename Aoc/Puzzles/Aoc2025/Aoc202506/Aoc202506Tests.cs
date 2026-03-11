@@ -12,7 +12,7 @@ public class Aoc202506Tests
                              *   +   *   +  
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("4277556");
+        Sut.Part1(input).Should().Be(4277556);
     }
 
     [Fact]
@@ -20,7 +20,7 @@ public class Aoc202506Tests
     {
         const string input = "";
 
-        Sut.Part2(input).Answer.Should().Be("0");
+        Sut.Part2(input).Should().Be(0);
     }
 
     private static Aoc202506 Sut => new();

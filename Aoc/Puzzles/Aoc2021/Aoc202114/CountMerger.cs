@@ -9,9 +9,7 @@ public static class CountMerger
         {
             foreach (var key in dictionary.Keys)
             {
-                if (!merged.ContainsKey(key))
-                    merged[key] = 0;
-
+                merged.TryAdd(key, 0);
                 merged[key] += dictionary[key];
             }
         }

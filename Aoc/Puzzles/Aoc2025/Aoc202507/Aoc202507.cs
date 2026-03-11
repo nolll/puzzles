@@ -42,13 +42,12 @@ public class Aoc202507 : AocPuzzle
     }
 
     [Puzzle("624e84121647191ef2c3da13286b605a")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var beam = grid.FindAddresses(Start).First();
-        var timelineCount = CountTimelines(beam, grid, []);
-        
-        return new PuzzleResult(timelineCount);
+
+        return CountTimelines(beam, grid, []);
     }
 
     private static long CountTimelines(Coord beam, Grid<char> grid, Dictionary<Coord, long> cache)

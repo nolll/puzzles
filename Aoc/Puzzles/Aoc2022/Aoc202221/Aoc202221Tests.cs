@@ -3,20 +3,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202221;
 public class Aoc202221Tests
 {
     [Fact]
-    public void Part1()
-    {
-        var result = new Aoc202221().Part1(Input);
-
-        result.Should().Be(152);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(152);
 
     [Fact]
-    public void Part2()
-    {
-        var result = new Aoc202221().SolvePart2(Input);
+    public void Part2() => Sut.Part2(Input).Should().Be(301);
 
-        result.Should().Be(301);
-    }
+    private static Aoc202221 Sut => new();
 
     private const string Input = """
                                  root: pppw + sjmn

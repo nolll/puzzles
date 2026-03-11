@@ -10,13 +10,13 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202417;
 public class Ece202417 : EverybodyEventPuzzle
 {
     [Puzzle("97b6801bcd6671e60725568f976b6480")]
-    public PuzzleResult Part1(string input) => new(Part1And2(input));
+    public long Part1(string input) => Part1And2(input);
     
     [Puzzle("2484ccfa9b3e6b666a7ad01d6204724f")]
-    public PuzzleResult Part2(string input) => new(Part1And2(input));
+    public long Part2(string input) => Part1And2(input);
 
     [Puzzle("7906b8b4e0147d5e4d4c422a2042a3d8")]
-    public PuzzleResult Part3(string input)
+    public long Part3(string input)
     {
         var stars = FindStars(input);
         var edges = GetEdges(stars).Where(o => o.Cost < 6);
@@ -25,7 +25,7 @@ public class Ece202417 : EverybodyEventPuzzle
         var starGroups = components.Select(o => o.Keys.Select(Coord.Parse).ToList());
         var result = starGroups.Select(GetSize).OrderDescending().Take(3).Aggregate((long)1, (a, b) => a * b);
         
-        return new PuzzleResult(result);
+        return result;
     }
     
     private static long Part1And2(string input) => GetSize(FindStars(input));

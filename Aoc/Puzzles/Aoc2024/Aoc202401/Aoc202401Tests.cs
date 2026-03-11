@@ -12,16 +12,10 @@ public class Aoc202401Tests
                                  """;
 
     [Fact]
-    public void Part1()
-    {
-        var result = Aoc202401.SolvePart1(Input);
-        result.Should().Be(11);
-    }
-    
+    public void Part1() => Sut.Part1(Input).Should().Be(11);
+
     [Fact]
-    public void Part2()
-    {
-        var result = Aoc202401.SolvePart2(Input);
-        result.Should().Be(31);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(31);
+
+    private static Aoc202401 Sut => new();
 }

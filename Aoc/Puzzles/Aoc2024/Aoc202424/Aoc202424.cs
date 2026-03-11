@@ -8,7 +8,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202424;
 public class Aoc202424 : AocPuzzle
 {
     [Puzzle("9fc2d4daac695a3b88d61a9cfe083437")]
-    public PuzzleResult Part1(string input)
+    public long Part1(string input)
     {
         var (wires, gates) = ParseWiresAndGates(input);
 
@@ -16,9 +16,8 @@ public class Aoc202424 : AocPuzzle
         
         var zgates = gates.Keys.Where(o => o.StartsWith('z')).OrderDescending();
         var results = zgates.Select(o => processor.Process(o));
-        var binary = Convert.ToInt64(string.Join("", results), 2);
-        
-        return new PuzzleResult(binary);
+
+        return Convert.ToInt64(string.Join("", results), 2);
     }
 
     [Puzzle("664e08ee1c7756ec0bf56764e81d2280")]

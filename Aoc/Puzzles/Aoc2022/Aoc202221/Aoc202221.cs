@@ -7,57 +7,15 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202221;
 public class Aoc202221 : AocPuzzle
 {
     [Puzzle("b3adb16b1c9bf83decdb14842cf25854")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = SolvePart1(input);
-
-        return new PuzzleResult(result);
-    }
-
-    [Puzzle("cdbf9008c2bea6596aa238829913849e")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = SolvePart2(input);
-
-        return new PuzzleResult(result);
-    }
-
-    public long SolvePart1(string input)
+    public long Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0);
         var monkeys = GetMonkeys(lines);
-
-        var root = monkeys["root"];
-        var result = root.Yell(0);
-
-        return result;
+        return monkeys["root"].Yell(0);
     }
 
-    private static Dictionary<string, YellMonkey> GetMonkeys(IEnumerable<string> lines)
-    {
-        var monkeys = new Dictionary<string, YellMonkey>();
-        foreach (var line in lines)
-        {
-            var parts = line.Split(": ");
-            var name = parts[0];
-            var actionParts = parts[1].Split(' ');
-
-            if (actionParts.Length == 1)
-                monkeys.Add(name, new NumberMonkey(monkeys, long.Parse(actionParts[0])));
-            else if (actionParts[1] == "+")
-                monkeys.Add(name, new AdditionMonkey(monkeys, actionParts[0], actionParts[2]));
-            else if (actionParts[1] == "-")
-                monkeys.Add(name, new SubtractionMonkey(monkeys, actionParts[0], actionParts[2]));
-            else if (actionParts[1] == "*")
-                monkeys.Add(name, new MultiplicationMonkey(monkeys, actionParts[0], actionParts[2]));
-            else if (actionParts[1] == "/") 
-                monkeys.Add(name, new DivisionMonkey(monkeys, actionParts[0], actionParts[2]));
-        }
-
-        return monkeys;
-    }
-
-    public long SolvePart2(string input)
+    [Puzzle("cdbf9008c2bea6596aa238829913849e")]
+    public long Part2(string input)
     {
         var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0).ToList();
 
@@ -136,8 +94,31 @@ public class Aoc202221 : AocPuzzle
             }
         }
         
-        var human = numbers["humn"];
-        return human;
+        return numbers["humn"];
+    }
+
+    private static Dictionary<string, YellMonkey> GetMonkeys(IEnumerable<string> lines)
+    {
+        var monkeys = new Dictionary<string, YellMonkey>();
+        foreach (var line in lines)
+        {
+            var parts = line.Split(": ");
+            var name = parts[0];
+            var actionParts = parts[1].Split(' ');
+
+            if (actionParts.Length == 1)
+                monkeys.Add(name, new NumberMonkey(monkeys, long.Parse(actionParts[0])));
+            else if (actionParts[1] == "+")
+                monkeys.Add(name, new AdditionMonkey(monkeys, actionParts[0], actionParts[2]));
+            else if (actionParts[1] == "-")
+                monkeys.Add(name, new SubtractionMonkey(monkeys, actionParts[0], actionParts[2]));
+            else if (actionParts[1] == "*")
+                monkeys.Add(name, new MultiplicationMonkey(monkeys, actionParts[0], actionParts[2]));
+            else if (actionParts[1] == "/") 
+                monkeys.Add(name, new DivisionMonkey(monkeys, actionParts[0], actionParts[2]));
+        }
+
+        return monkeys;
     }
 
     private static string FindFormulaFor(string s, string key)

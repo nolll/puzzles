@@ -17,7 +17,7 @@ public class Aoc202415 : AocPuzzle
     }
     
     [Puzzle("8b8573e47a8beee67caf8b6ab4142420")]
-    public PuzzleResult Part1(string input)
+    public long Part1(string input)
     {
         var parts = input.Split(LineBreaks.Double);
         var grid = GridBuilder.BuildCharGrid(parts[0]);
@@ -53,11 +53,9 @@ public class Aoc202415 : AocPuzzle
                 box.Move(grid.Direction);
             }
         }
-        
-        var score = allBoxes.SelectMany(box => box.Coords)
-            .Aggregate(0L, (current, coord) => current + (100 * coord.Y + coord.X));
 
-        return new PuzzleResult(score);
+        return allBoxes.SelectMany(box => box.Coords)
+            .Aggregate(0L, (current, coord) => current + (100 * coord.Y + coord.X));
     }
 
     private (bool canMove, HashSet<IBox> boxesThatMustMove) CanMoveRobot(
@@ -128,7 +126,7 @@ public class Aoc202415 : AocPuzzle
         };
 
     [Puzzle("48a79a74450762d492fd151f9c3c6400")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var parts = input.Split(LineBreaks.Double);
         var grid = GridBuilder.BuildCharGrid(parts[0]);
@@ -179,11 +177,9 @@ public class Aoc202415 : AocPuzzle
                 box.Move(grid.Direction);
             }
         }
-        
-        var score = allBoxes.SelectMany(box => box.Coords.Take(1))
-            .Aggregate(0L, (current, coord) => current + (100 * coord.Y + coord.X));
 
-        return new PuzzleResult(score);
+        return allBoxes.SelectMany(box => box.Coords.Take(1))
+            .Aggregate(0L, (current, coord) => current + (100 * coord.Y + coord.X));
     }
 
     public interface IBox

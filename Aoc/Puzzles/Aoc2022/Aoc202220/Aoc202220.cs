@@ -7,12 +7,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202220;
 public class Aoc202220 : AocPuzzle
 {
     [Puzzle("7b8b8bc2da7c3dc6f35e0079a36a0aea")]
-    public PuzzleResult Part1(string input) => new(Run(input, 1, 1));
+    public long Part1(string input) => Solve(input, 1, 1);
     
     [Puzzle("ad028751d05a122940933df675dc9eb5")]
-    public PuzzleResult Part2(string input) => new(Run(input, 811_589_153, 10));
+    public long Part2(string input) => Solve(input, 811_589_153, 10);
 
-    public static long Run(string input, long multiplier, int iterationCount)
+    public static long Solve(string input, long multiplier, int iterationCount)
     {
         var numbers = input.Split(LineBreaks.Single)
             .Where(o => o.Length > 0)

@@ -14,10 +14,10 @@ public class Aoc202023 : AocPuzzle
     }
 
     [Puzzle("86b2d5ff30f1a76d6a5de3dfc06e89e9")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var game = new CrabCupsGame(int.Parse(input), true);
         game.Play(10_000_000);
-        return new PuzzleResult(game.ResultProduct);
+        return game.ResultProduct;
     }
 }

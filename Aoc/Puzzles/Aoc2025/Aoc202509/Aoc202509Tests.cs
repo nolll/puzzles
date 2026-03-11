@@ -14,10 +14,10 @@ public class Aoc202509Tests
                                  """;
 
     [Fact]
-    public void Part1() => Sut.Part1(Input).Answer.Should().Be("50");
+    public void Part1() => Sut.Part1(Input).Should().Be(50);
 
     [Fact]
-    public void Part2() => Sut.Part2(Input).Answer.Should().Be("24");
+    public void Part2() => Sut.Part2(Input).Should().Be(24);
 
     private static Aoc202509 Sut => new();
 }

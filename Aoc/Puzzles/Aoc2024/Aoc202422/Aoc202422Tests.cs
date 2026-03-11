@@ -26,7 +26,7 @@ public class Aoc202422Tests
                              2024
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("37327623");
+        Sut.Part1(input).Should().Be(37327623);
     }
     
     [Fact]
@@ -39,7 +39,7 @@ public class Aoc202422Tests
                              2024
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("23");
+        Sut.Part2(input).Should().Be(23);
     }
 
     private static Aoc202422 Sut => new();

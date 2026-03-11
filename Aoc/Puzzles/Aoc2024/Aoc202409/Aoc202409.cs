@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202409;
 public class Aoc202409 : AocPuzzle
 {
     [Puzzle("4ca7aa30f44261b47440a1e8e3647d44")]
-    public PuzzleResult Part1(string input)
+    public long Part1(string input)
     {
         var nums = input.ToCharArray().Select(o => int.Parse(o.ToString())).ToArray();
         var blocks = new int[nums.Sum()];
@@ -47,13 +47,11 @@ public class Aoc202409 : AocPuzzle
             r--;
         }
 
-        var checksum = GetChecksum(blocks);
-        
-        return new PuzzleResult(checksum);
+        return GetChecksum(blocks);
     }
 
     [Puzzle("f3d4ebfe09ec0844f2c28f0c22458833")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var nums = input.ToCharArray().Select(o => int.Parse(o.ToString())).ToArray();
         var blocks = new int[nums.Sum()];
@@ -123,9 +121,7 @@ public class Aoc202409 : AocPuzzle
             fileIndex--;
         }
 
-        var checksum = GetChecksum(blocks);
-        
-        return new PuzzleResult(checksum);
+        return GetChecksum(blocks);
     }
 
     private static long GetChecksum(int[] blocks)

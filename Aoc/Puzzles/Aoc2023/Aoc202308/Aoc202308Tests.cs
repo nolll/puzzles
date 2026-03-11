@@ -17,9 +17,7 @@ public class Aoc202308Tests
                             ZZZ = (ZZZ, ZZZ)
                             """;
 
-        var result = Aoc202308.DesertPath1(input);
-
-        result.Should().Be(2);
+        Sut.Part1(input).Should().Be(2);
     }
 
     [Fact]
@@ -33,11 +31,9 @@ public class Aoc202308Tests
                              ZZZ = (ZZZ, ZZZ)
                              """;
 
-        var result = Aoc202308.DesertPath1(input);
-
-        result.Should().Be(6);
+        Sut.Part1(input).Should().Be(6);
     }
-
+    
     [Fact]
     public void DesertPart2()
     {
@@ -54,8 +50,8 @@ public class Aoc202308Tests
                              XXX = (XXX, XXX)
                              """;
 
-        var result = Aoc202308.DesertPath2(input);
-
-        result.Should().Be(6);
+        Sut.Part2(input).Should().Be(6);
     }
+    
+    private static Aoc202308 Sut => new();
 }

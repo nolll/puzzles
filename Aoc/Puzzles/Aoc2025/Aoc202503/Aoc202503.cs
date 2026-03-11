@@ -7,10 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202503;
 public class Aoc202503 : AocPuzzle
 {
     [Puzzle("ce9af8880b553c9cab99abd575d740d4")]
-    public PuzzleResult Part1(string input) => new(Solve(input, 2));
+    public long Part1(string input) => Solve(input, 2);
     
     [Puzzle("36d07bc1885b57661b710706722959fa")]
-    public PuzzleResult Part2(string input) => new(Solve(input, 12));
+    public long Part2(string input) => Solve(input, 12);
     
     private static long Solve(string input, int batteryCount) => input.Split(LineBreaks.Single).Sum(o => GetJoltage(o, batteryCount));
     private static long GetJoltage(string s, int batteryCount) => long.Parse(string.Join("", GetJoltageDigits(s, batteryCount)));

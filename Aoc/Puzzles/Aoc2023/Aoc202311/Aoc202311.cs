@@ -7,16 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202311;
 public class Aoc202311 : AocPuzzle
 {
     [Puzzle("04a7795748b2f6d2e38898623e8ef01a")]
-    public PuzzleResult Part1(string input)
-    {
-        return new PuzzleResult(Distances(input, 1));
-    }
+    public long Part1(string input) => Distances(input, 1);
 
     [Puzzle("73bccfdcdd826f77dcdaf67bedecded9")]
-    public PuzzleResult Part2(string input)
-    {
-        return new PuzzleResult(Distances(input, 1_000_000));
-    }
+    public long Part2(string input) => Distances(input, 1_000_000);
 
     public static long Distances(string input, long multiplier)
     {

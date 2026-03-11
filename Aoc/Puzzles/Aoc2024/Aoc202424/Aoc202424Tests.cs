@@ -18,7 +18,7 @@ public class Aoc202424Tests
                              x02 OR y02 -> z02
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("4");
+        Sut.Part1(input).Should().Be(4);
     }
     
     [Fact]
@@ -74,7 +74,7 @@ public class Aoc202424Tests
                              tnw OR pbm -> gnj
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("2024");
+        Sut.Part1(input).Should().Be(2024);
     }
 
     private static Aoc202424 Sut => new();

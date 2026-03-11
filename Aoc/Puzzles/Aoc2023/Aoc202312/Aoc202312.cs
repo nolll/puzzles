@@ -7,18 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202312;
 public class Aoc202312 : AocPuzzle
 {
     [Puzzle("ec83138b082ab4da38bb60e88263c52f")]
-    public PuzzleResult Part1(string input)
-    {
-        var counts = input.Split(LineBreaks.Single).Select(o => CombinationCount(o));
-        return new PuzzleResult(counts.Sum());
-    }
+    public long Part1(string input) => input.Split(LineBreaks.Single).Select(o => CombinationCount(o)).Sum();
 
     [Puzzle("2ecb30790515e2ebbae12a478dbf36f7")]
-    public PuzzleResult Part2(string input)
-    {
-        var counts = input.Split(LineBreaks.Single).Select(o => CombinationCount(o, true));
-        return new PuzzleResult(counts.Sum());
-    }
+    public long Part2(string input) => input.Split(LineBreaks.Single).Select(o => CombinationCount(o, true)).Sum();
 
     public static long CombinationCount(string s, bool isPart2 = false)
     {

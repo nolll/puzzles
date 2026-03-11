@@ -13,10 +13,7 @@ public class Aoc202319 : AocPuzzle
     }
 
     [Puzzle("ad71ffd5c3aaba62bb775dfc6a95358e")]
-    public PuzzleResult Part2(string input)
-    {
-        return new PuzzleResult(CountCombinations(input));
-    }
+    public long Part2(string input) => CountCombinations(input);
 
     public static int SortParts(string s)
     {
@@ -60,8 +57,7 @@ public class Aoc202319 : AocPuzzle
 
         var ranges = new ValidValues();
 
-        var count = CountAcceptedValues(workflows, "in", ranges);
-        return count;
+        return CountAcceptedValues(workflows, "in", ranges);
     }
 
     private static long CountAcceptedValues(

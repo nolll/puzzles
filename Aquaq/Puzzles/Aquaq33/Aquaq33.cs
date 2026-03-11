@@ -6,10 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq33;
 public class Aquaq33 : AquaqPuzzle
 {
     [Puzzle("3c08f90044660194d3d619fa4c14d736")]
-    public PuzzleResult Solve()
-    {
-        return new PuzzleResult(Run(245701));
-    }
+    public long Solve() => Run(245701);
 
     public static long Run(int maxTarget)
     {

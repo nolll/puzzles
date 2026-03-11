@@ -29,7 +29,7 @@ public class Ece202504Tests
                              13
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("1274509803922");
+        Sut.Part2(input).Should().Be(1274509803922);
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public class Ece202504Tests
                              11
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("6818");
+        Sut.Part3(input).Should().Be(6818);
     }
 
     private static Ece202504 Sut => new();

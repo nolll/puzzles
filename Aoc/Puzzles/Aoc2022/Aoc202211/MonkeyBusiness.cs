@@ -4,15 +4,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202211;
 
 public class MonkeyBusiness
 {
-    public long Part1(string input)
-    {
-        return Run(input, false);
-    }
-
-    public long Part2(string input)
-    {
-        return Run(input, true);
-    }
+    public long Part1(string input) => Run(input, false);
+    public long Part2(string input) => Run(input, true);
 
     private long Run(string input, bool isReallyWorried)
     {
@@ -64,28 +57,26 @@ public class MonkeyBusiness
         return new Monkey(items, operation, divisor, trueTarget, falseTarget);
     }
 
-    private static List<long> ParseItems(string line)
-    {
-        return line.Trim().Split(':').Last().Trim().Split(',').Select(o => long.Parse(o.Trim())).ToList();
-    }
+    private static List<long> ParseItems(string line) => 
+        line.Trim().Split(':').Last().Trim().Split(',').Select(o => long.Parse(o.Trim())).ToList();
 
-    private static MonkeyOperation ParseOperation(string line)
+    private static MonkeyOperation ParseOperation(string s)
     {
-        var parts = line.Trim().Split('=').Last().Trim().Split();
+        var parts = s.Trim().Split('=').Last().Trim().Split();
         var op = parts[1];
         var right = parts[2];
         return new MonkeyOperation(op, right);
     }
 
-    private static long ParseDivisor(string line)
+    private static long ParseDivisor(string s)
     {
-        var parts = line.Trim().Split(' ');
+        var parts = s.Trim().Split(' ');
         return long.Parse(parts.Last());
     }
 
-    private static int ParseTarget(string line)
+    private static int ParseTarget(string s)
     {
-        var parts = line.Trim().Split(' ');
+        var parts = s.Trim().Split(' ');
         return int.Parse(parts.Last());
     }
 }

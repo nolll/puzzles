@@ -11,20 +11,10 @@ public class Aoc202324Tests
                                  """;
 
     [Fact]
-    public void CountIntersecting()
-    {
-        var result = Aoc202324.CountIntersectingWithin(Input, 7, 27);
+    public void CountIntersecting() => Sut.CountIntersectingWithin(Input, 7, 27).Should().Be(2);
 
-        result.Should().Be(2);
-    }
-    
     [Fact]
-    public void Part2()
-    {
-        var result = Sut.Part2(Input);
-
-        result.Answer.Should().Be("47");
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(47);
 
     private static Aoc202324 Sut => new();
 }

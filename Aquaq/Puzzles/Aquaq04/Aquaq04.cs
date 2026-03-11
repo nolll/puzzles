@@ -7,11 +7,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq04;
 public class Aquaq04 : AquaqPuzzle
 {
     [Puzzle("7a296f6d92cf29d6ec3b4e51af411018")]
-    public PuzzleResult Solve(string input)
-    {
-        var sum = FindCoPrimesFor(int.Parse(input)).Sum();
-        return new PuzzleResult(sum);
-    }
+    public long Solve(string input) => FindCoPrimesFor(int.Parse(input)).Sum();
 
     public static IEnumerable<long> FindCoPrimesFor(int n)
     {
@@ -25,10 +21,7 @@ public class Aquaq04 : AquaqPuzzle
         }
     }
 
-    private static HashSet<int> FindDivisors(int n)
-    {
-        return Numbers.GetAllDivisors(n)
-            .Where(o => o > 1)
-            .ToHashSet();
-    }
+    private static HashSet<int> FindDivisors(int n) => Numbers.GetAllDivisors(n)
+        .Where(o => o > 1)
+        .ToHashSet();
 }

@@ -10,11 +10,7 @@ public class Codyssi202511 : CodyssiPuzzle
     private readonly Dictionary<char, int> _chars = BuildCharDictionary();
     
     [Puzzle("8c350540f538dfbb227fe9c86f28e4db")]
-    public PuzzleResult Part1(string input)
-    {
-        var base10Numbers = GetBase10Numbers(input);
-        return new PuzzleResult(base10Numbers.Max());
-    }
+    public long Part1(string input) => GetBase10Numbers(input).Max();
 
     [Puzzle("c677dee7cd5d27aa22c862b72d8317a1")]
     public string Part2(string input) => ToBase68(GetBase10Numbers(input).Sum());

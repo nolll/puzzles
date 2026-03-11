@@ -7,30 +7,19 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202407;
 public class Aoc202407 : AocPuzzle
 {
     [Puzzle("d8627e3b777340dd66a65a22e6ea7e85")]
-    public PuzzleResult Part1(string input)
-    {
-        var sum = ParseNumbers(input)
-            .Where(row => IsValid(row, [Add, Multiply]))
-            .Sum(o => o.target);
-        
-        return new PuzzleResult(sum);
-    }
+    public long Part1(string input) => ParseNumbers(input)
+        .Where(row => IsValid(row, [Add, Multiply]))
+        .Sum(o => o.target);
 
     [Puzzle("caf0656b286d7fb0cfa38222a516fc08")]
-    public PuzzleResult Part2(string input)
-    {
-        var sum = ParseNumbers(input)
-            .Where(row => IsValid(row, [Add, Multiply, Concat]))
-            .Sum(o => o.target);
-        
-        return new PuzzleResult(sum);
-    }
-    
+    public long Part2(string input) => ParseNumbers(input)
+        .Where(row => IsValid(row, [Add, Multiply, Concat]))
+        .Sum(o => o.target);
+
     private static bool IsValid((long target, long[] units) row, Func<long, long, long>[] evaluationFuncs)
     {
         var (target, units) = row;
-        var combinations = GetCombinations(units.Skip(1).ToList(), units.First(), evaluationFuncs);
-        return combinations.Any(o => o == target);
+        return GetCombinations(units.Skip(1).ToList(), units.First(), evaluationFuncs).Any(o => o == target);
     }
     
     private static IEnumerable<long> GetCombinations(List<long> units, long v, Func<long, long, long>[] evaluationFuncs)

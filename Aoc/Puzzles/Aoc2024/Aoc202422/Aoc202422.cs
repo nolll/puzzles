@@ -7,16 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202422;
 public class Aoc202422 : AocPuzzle
 {
     [Puzzle("225cb6b8a716ce111cab52fc1ee82264")]
-    public PuzzleResult Part1(string input)
-    {
-        var nums = input.Split(LineBreaks.Single).Select(long.Parse);
-        var sum = nums.Sum(o => Generate(o, 2000).Last());
-        
-        return new PuzzleResult(sum);
-    }
+    public long Part1(string input) => input.Split(LineBreaks.Single).Select(long.Parse).Sum(o => Generate(o, 2000).Last());
 
     [Puzzle("30bda12ed882f20608645b8e3425f8f5")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var nums = input.Split(LineBreaks.Single).Select(long.Parse);
         var buyers = nums.Select(o => Generate(o, 2000));
@@ -56,7 +50,7 @@ public class Aoc202422 : AocPuzzle
             max = Math.Max(sequenceScores[key], max);
         }
         
-        return new PuzzleResult(max);
+        return max;
     }
 
     public static long[] Generate(long n, int iterations)

@@ -13,7 +13,7 @@ public class Codyssi202512 : CodyssiPuzzle
     private const long UpperBound = MaxValue - 1;
 
     [Puzzle("4e6d5c783aaba03ba76ecc3a36c8ef46")]
-    public PuzzleResult Part1(string input)
+    public long Part1(string input)
     {
         var (p1, p2, _) = input.Split(LineBreaks.Double);
         var grid = GridBuilder.BuildIntGridFromSpaceSeparated(p1);
@@ -24,13 +24,11 @@ public class Codyssi202512 : CodyssiPuzzle
             ExecuteInstruction(grid, instruction);
         }
 
-        var best = GetBestSum(grid);
-        
-        return new PuzzleResult(best);
+        return GetBestSum(grid);
     }
     
     [Puzzle("accb423e9bcc4987fa6994b21c8968da")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var (p1, p2, p3) = input.Split(LineBreaks.Double);
         var grid = GridBuilder.BuildIntGridFromSpaceSeparated(p1);
@@ -59,11 +57,12 @@ public class Codyssi202512 : CodyssiPuzzle
 
         var best = GetBestSum(grid);
         
-        return new PuzzleResult(best);
+        // ReSharper disable once ArrangeRedundantParentheses
+        return (best);
     }
 
     [Puzzle("939c50d043eda275028daf308085dcf8")]
-    public PuzzleResult Part3(string input)
+    public long Part3(string input)
     {
         var (p1, p2, p3) = input.Split(LineBreaks.Double);
         var grid = GridBuilder.BuildIntGridFromSpaceSeparated(p1);
@@ -97,9 +96,7 @@ public class Codyssi202512 : CodyssiPuzzle
             index++;
         }
 
-        var best = GetBestSum(grid);
-        
-        return new PuzzleResult(best);
+        return GetBestSum(grid);
     }
 
     private void ExecuteInstruction(Grid<int> grid, string instruction)

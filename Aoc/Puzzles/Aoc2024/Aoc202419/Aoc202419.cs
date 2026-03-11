@@ -18,14 +18,13 @@ public class Aoc202419 : AocPuzzle
     }
 
     [Puzzle("83d5af4b54081e746c3cfc203a9a544e")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var parts = input.Split(LineBreaks.Double, StringSplitOptions.RemoveEmptyEntries);
         var towels = parts[0].Split(", ").ToHashSet();
         var combinations = parts[1].Split(LineBreaks.Single);
-        var sum = combinations.Sum(o => CountCombinations(towels, o, new Dictionary<string, long>()));
-        
-        return new PuzzleResult(sum);
+
+        return combinations.Sum(o => CountCombinations(towels, o, new Dictionary<string, long>()));
     }
     
     private static bool IsPossible(HashSet<string> towels, string combination)

@@ -23,7 +23,7 @@ public class Aoc202413Tests
     [Fact]
     public void Part1()
     {
-        Sut.Part1(Input).Answer.Should().Be("480");
+        Sut.Part1(Input).Should().Be(480);
     }
     
     [Fact]

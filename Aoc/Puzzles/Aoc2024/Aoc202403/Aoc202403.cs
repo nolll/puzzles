@@ -17,7 +17,7 @@ public class Aoc202403 : AocPuzzle
     }
 
     [Puzzle("7c76f7c7072aeaf4950328540fc4266b")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var instructions = new Regex(@"(mul\(\d+,\d+\)|do\(\)|don't\(\))").Matches(input).Select(o => o.ToString());
 
@@ -38,6 +38,6 @@ public class Aoc202403 : AocPuzzle
             total += a * b;
         }
         
-        return new PuzzleResult(total);
+        return total;
     }
 }

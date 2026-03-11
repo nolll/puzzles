@@ -8,10 +8,33 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202324;
 public class Aoc202324 : AocPuzzle
 {
     [Puzzle("907db44ec104f348525996e3821ac11d")]
-    public PuzzleResult Part1(string input) => 
-        new(CountIntersectingWithin(input, 200_000_000_000_000, 400_000_000_000_000));
+    public int Part1(string input) => CountIntersectingWithin(input, 200_000_000_000_000, 400_000_000_000_000);
 
-    public static int CountIntersectingWithin(string s, long min, long max)
+    [Puzzle("95042738f3ece8b6cd45dd711ee9d3fa")]
+    public long Part2(string input) => Solve(ParseHailstones(input));
+
+    private long Solve(List<Hailstone> stones)
+    {
+        for (var i = 0; i < stones.Count; i++)
+        {
+            for (var j = 0; j < stones.Count; j++)
+            {
+                for (var k = 0; k < stones.Count; k++)
+                {
+                    if (i == j || i == k || j == k)
+                        continue;
+                    
+                    var res = Solve(stones, i, j, k);
+                    if (res != 0)
+                        return res;
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    public int CountIntersectingWithin(string s, long min, long max)
     {
         var count = 0;
         var hailstones = ParseHailstones(s);
@@ -42,31 +65,6 @@ public class Aoc202324 : AocPuzzle
         return count;
     }
 
-    [Puzzle("95042738f3ece8b6cd45dd711ee9d3fa")]
-    public PuzzleResult Part2(string input) => new(Solve(ParseHailstones(input)));
-
-    private long Solve(List<Hailstone> stones)
-    {
-        for (var i = 0; i < stones.Count; i++)
-        {
-            for (var j = 0; j < stones.Count; j++)
-            {
-                for (var k = 0; k < stones.Count; k++)
-                {
-                    if (i == j || i == k || j == k)
-                        continue;
-                    
-                    var res = Solve(stones, i, j, k);
-                    if (res != 0)
-                        return res;
-                }
-            }
-        }
-
-        return 0;
-    }
-
-    // Followed this solution. Will try to learn more about equation systems
     private long Solve(List<Hailstone> stones, int ai, int bi, int ci)
     {
         double ax = stones[ai].X;

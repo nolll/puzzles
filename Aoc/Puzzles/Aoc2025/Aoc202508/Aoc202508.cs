@@ -9,7 +9,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202508;
 public class Aoc202508 : AocPuzzle
 {
     [Puzzle("9d41b63fae3576e9a5715332340db926")]
-    public PuzzleResult Part1(string input) => new(Part1(input, 1000));
+    public long Part1(string input) => Part1(input, 1000);
 
     public long Part1(string input, int pairCount)
     {

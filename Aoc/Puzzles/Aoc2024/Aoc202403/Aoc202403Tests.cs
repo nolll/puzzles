@@ -17,8 +17,8 @@ public class Aoc202403Tests
         const string input = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))";
         
         var result = Sut.Part2(input);
-        result.Answer.Should().Be("48");
+        result.Should().Be(48);
     }
 
-    private Aoc202403 Sut => new();
+    private static Aoc202403 Sut => new();
 }

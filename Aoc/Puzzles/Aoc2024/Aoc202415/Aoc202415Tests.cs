@@ -18,7 +18,7 @@ public class Aoc202415Tests
                              <^^>>>vv<v>>v<<
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("2028");
+        Sut.Part1(input).Should().Be(2028);
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public class Aoc202415Tests
                              <vv<<^^<<^^
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("618");
+        Sut.Part2(input).Should().Be(618);
     }
     
     [Fact]
@@ -66,7 +66,7 @@ public class Aoc202415Tests
                              v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("9021");
+        Sut.Part2(input).Should().Be(9021);
     }
 
     private static Aoc202415 Sut => new();

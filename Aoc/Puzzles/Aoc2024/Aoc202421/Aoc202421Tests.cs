@@ -21,7 +21,7 @@ public class Aoc202421Tests
                              379A
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("126384");
+        Sut.Part1(input).Should().Be(126384);
     }
 
     private static Aoc202421 Sut => new();

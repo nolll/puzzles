@@ -25,18 +25,8 @@ public class Aoc202124 : AocPuzzle
     private long LargestValidNumber => long.Parse(ValidNumbers.Last());
 
     [Puzzle("e513806c32f88d6227c6a529844981ef")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = LargestValidNumber;
-
-        return new PuzzleResult(result);
-    }
+    public long Part1(string input) => LargestValidNumber;
 
     [Puzzle("aa756b55fecfa23d098754af71fcc02a")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = SmallestValidNumber;
-
-        return new PuzzleResult(result);
-    }
+    public long Part2(string input) => SmallestValidNumber;
 }

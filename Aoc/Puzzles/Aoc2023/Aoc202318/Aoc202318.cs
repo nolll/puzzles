@@ -10,13 +10,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202318;
 public class Aoc202318 : AocPuzzle
 {
     [Puzzle("61347c48a0a4bc715d0c1c2ea446a36e")]
-    public PuzzleResult Part1(string input) => new(SolvePart1(input));
+    public long Part1(string input) => Solve(ParseInstructionPart1, input);
     
     [Puzzle("5ad2f7a72c31e629c55fb65dab16d204")]
-    public PuzzleResult Part2(string input) => new(SolvePart2(input));
-    
-    public static long SolvePart1(string s) => Solve(ParseInstructionPart1, s);
-    public static long SolvePart2(string s) => Solve(ParseInstructionPart2, s);
+    public long Part2(string input) => Solve(ParseInstructionPart2, input);
 
     private static long Solve(Func<string, Instruction> parse, string s)
     {
@@ -49,18 +46,14 @@ public class Aoc202318 : AocPuzzle
         int Clamp(int n) => MathTools.Clamp(n, 0, coords.Count - 1);
     }
 
-    public static int ParseHex(string hex) => Convert.ToInt32(hex, 16);
+    public int ParseHex(string hex) => Convert.ToInt32(hex, 16);
     
     private static IEnumerable<Instruction> ParseInstructions(Func<string, Instruction> parse, string s) => 
         s.Split(LineBreaks.Single).Select(parse);
 
-    private static Instruction ParseInstructionPart1(string s)
-    {
-        var ds = s.Split(' ')[1];
-        return new Instruction(DirectionFromString(s), int.Parse(ds));
-    }
-    
-    private static Instruction ParseInstructionPart2(string s)
+    private static Instruction ParseInstructionPart1(string s) => new(DirectionFromString(s), int.Parse(s.Split(' ')[1]));
+
+    private Instruction ParseInstructionPart2(string s)
     {
         var hex = s.Split(' ').Last().TrimStart('(').TrimEnd(')').TrimStart('#');
         return new Instruction(DirectionFromColor(hex), ParseHex(hex[..5]));

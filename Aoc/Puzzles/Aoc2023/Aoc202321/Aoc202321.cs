@@ -7,16 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202321;
 public class Aoc202321 : AocPuzzle
 {
     [Puzzle("c843850a004e76c6cad0745f43786af0")]
-    public PuzzleResult Part1(string input)
-    {
-        return new PuzzleResult(CountPositionsAfter64(input));
-    }
+    public long Part1(string input) => CountPositionsAfter64(input);
 
     [Puzzle("82eccc3aebc6a8cca12ce692d9765520")]
-    public PuzzleResult Part2(string input)
-    {
-        return new PuzzleResult(CountPositionsAfterMany(input));
-    }
+    public long Part2(string input) => CountPositionsAfterMany(input);
 
     public static long CountPositionsAfter64(string s, int steps = 64)
     {
@@ -72,13 +66,11 @@ public class Aoc202321 : AocPuzzle
         var stl = CountPositionsAfter(grid, new Coord(right, bottom), smallSteps);
         var ltl = CountPositionsAfter(grid, new Coord(right, bottom), largeSteps);
 
-        var filledPlots = oddPoints * odd
-                          + evenPoints * even
-                          + ct + cr + cb + cl
-                          + (str + sbr + sbl + stl) * smallCount
-                          + (ltr + lbr + lbl + ltl) * largeCount;
-
-        return filledPlots;
+        return oddPoints * odd
+               + evenPoints * even
+               + ct + cr + cb + cl
+               + (str + sbr + sbl + stl) * smallCount
+               + (ltr + lbr + lbl + ltl) * largeCount;
     }
 
     private static long CountPositionsAfter(Grid<char> grid, Coord start, int steps = 64)

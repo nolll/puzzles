@@ -13,7 +13,7 @@ public class Ece202417Tests
                              *.*..
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("16");
+        Sut.Part1(input).Should().Be(16);
     }
 
     [Fact]
@@ -29,7 +29,7 @@ public class Ece202417Tests
                              .......................................
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("15624");
+        Sut.Part3(input).Should().Be(15624);
     }
 
     private static Ece202417 Sut => new();

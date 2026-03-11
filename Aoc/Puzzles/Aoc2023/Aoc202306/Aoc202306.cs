@@ -7,22 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202306;
 public class Aoc202306 : AocPuzzle
 {
     [Puzzle("7eb8c120d057c526ef2c425f6db9493c")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = BoatRace1(input);
-
-        return new PuzzleResult(result);
-    }
-
-    [Puzzle("365c29b8564f3c2e47e2bcfca7b191de")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = BoatRace2(input);
-
-        return new PuzzleResult(result);
-    }
-
-    public static long BoatRace1(string input)
+    public long Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var times = lines.First().Split(":").Last().Split(' ').Where(o => o.Length > 0).Select(int.Parse).ToList();
@@ -40,7 +25,8 @@ public class Aoc202306 : AocPuzzle
         return total;
     }
 
-    public static long BoatRace2(string input)
+    [Puzzle("365c29b8564f3c2e47e2bcfca7b191de")]
+    public long Part2(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var time = long.Parse(string.Join("", lines.First().Split(":").Last().Split(' ').Where(o => o.Length > 0)));

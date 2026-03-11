@@ -2,55 +2,28 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202318;
 
 public class Aoc202318Tests
 {
-    [Fact]
-    public void LavaPoolPart1()
-    {
-        const string input = """
-                             R 6 (#70c710)
-                             D 5 (#0dc571)
-                             L 2 (#5713f0)
-                             D 2 (#d2c081)
-                             R 2 (#59c680)
-                             D 2 (#411b91)
-                             L 5 (#8ceee2)
-                             U 2 (#caa173)
-                             L 1 (#1b58a2)
-                             U 2 (#caa171)
-                             R 2 (#7807d2)
-                             U 3 (#a77fa3)
-                             L 2 (#015232)
-                             U 2 (#7a21e3)
-                             """;
-
-        var result = Aoc202318.SolvePart1(input);
-
-        result.Should().Be(62);
-    }
+    private const string Input = """
+                                 R 6 (#70c710)
+                                 D 5 (#0dc571)
+                                 L 2 (#5713f0)
+                                 D 2 (#d2c081)
+                                 R 2 (#59c680)
+                                 D 2 (#411b91)
+                                 L 5 (#8ceee2)
+                                 U 2 (#caa173)
+                                 L 1 (#1b58a2)
+                                 U 2 (#caa171)
+                                 R 2 (#7807d2)
+                                 U 3 (#a77fa3)
+                                 L 2 (#015232)
+                                 U 2 (#7a21e3)
+                                 """;
 
     [Fact]
-    public void LavaPoolPart2()
-    {
-        const string input = """
-                             R 6 (#70c710)
-                             D 5 (#0dc571)
-                             L 2 (#5713f0)
-                             D 2 (#d2c081)
-                             R 2 (#59c680)
-                             D 2 (#411b91)
-                             L 5 (#8ceee2)
-                             U 2 (#caa173)
-                             L 1 (#1b58a2)
-                             U 2 (#caa171)
-                             R 2 (#7807d2)
-                             U 3 (#a77fa3)
-                             L 2 (#015232)
-                             U 2 (#7a21e3)
-                             """;
+    public void LavaPoolPart1() => Sut.Part1(Input).Should().Be(62);
 
-        var result = Aoc202318.SolvePart2(input);
-
-        result.Should().Be(952408144115);
-    }
+    [Fact]
+    public void LavaPoolPart2() => Sut.Part2(Input).Should().Be(952408144115);
 
     [Theory]
     [InlineData("0dc57", 56407)]
@@ -66,10 +39,7 @@ public class Aoc202318Tests
     [InlineData("8ceee", 577262)]
     [InlineData("caa17", 829975)]
     [InlineData("d2c08", 863240)]
-    public void ParseHex(string input, int expected)
-    {
-        var result = Aoc202318.ParseHex(input);
+    public void ParseHex(string input, int expected) => Sut.ParseHex(input).Should().Be(expected);
 
-        result.Should().Be(expected);
-    }
+    private static Aoc202318 Sut => new();
 }

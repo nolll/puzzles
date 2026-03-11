@@ -21,13 +21,13 @@ public class Codyssi202502Tests
                                  """;
 
     [Fact]
-    public void Part1() => Sut.Part1(Input).Answer.Should().Be("9130674516975");
+    public void Part1() => Sut.Part1(Input).Should().Be(9130674516975);
 
     [Fact]
-    public void Part2() => Sut.Part2(Input).Answer.Should().Be("1000986169836015");
+    public void Part2() => Sut.Part2(Input).Should().Be(1000986169836015);
 
     [Fact]
-    public void Part3() => Sut.Part3(Input).Answer.Should().Be("5496");
+    public void Part3() => Sut.Part3(Input).Should().Be(5496);
 
     private static Codyssi202502 Sut => new();
 }

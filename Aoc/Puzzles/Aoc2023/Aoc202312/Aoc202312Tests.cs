@@ -16,7 +16,7 @@ public class Aoc202312Tests
 
         var result = new Aoc202312().Part1(input);
 
-        result.Answer.Should().Be("21");
+        result.Should().Be(21);
     }
 
     [Fact]
@@ -33,7 +33,7 @@ public class Aoc202312Tests
 
         var result = new Aoc202312().Part2(input);
 
-        result.Answer.Should().Be("525152");
+        result.Should().Be(525152);
     }
 
     [Theory]

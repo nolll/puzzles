@@ -17,16 +17,14 @@ public class Ece202504 : EverybodyEventPuzzle
     }
 
     [Puzzle("0257539e71c9dbe0dd69df3f4d79eb4f")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var numbers = Numbers.IntsFromString(input).ToArray();
-        var result = (long)Math.Ceiling((double)numbers.Last() * 10_000_000_000_000 / numbers.First());
-        
-        return new PuzzleResult(result);
+        return (long)Math.Ceiling((double)numbers.Last() * 10_000_000_000_000 / numbers.First());
     }
 
     [Puzzle("92e07b9860871133c085a70db37ea249")]
-    public PuzzleResult Part3(string input)
+    public long Part3(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var first = long.Parse(lines.First());
@@ -35,8 +33,7 @@ public class Ece202504 : EverybodyEventPuzzle
             .Select(o => o.Split('|').Select(long.Parse).ToArray())
             .Select(o => o.Last() / o.First())
             .Aggregate(first, (current, m) => current * m);
-        var result = 100 * multiplier / last;
-        
-        return new PuzzleResult(result);
+
+        return 100 * multiplier / last;
     }
 }

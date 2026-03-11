@@ -17,11 +17,10 @@ public class Aoc202505 : AocPuzzle
     }
 
     [Puzzle("be06dfd5fc2345c5df5b1b53d430fff5")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var rangeInput = input.Split(LineBreaks.Double).First();
-        var count = GetRanges(rangeInput).Sum(range => range[1] - range[0] + 1);
-        return new PuzzleResult(count);
+        return GetRanges(rangeInput).Sum(range => range[1] - range[0] + 1);
     }
 
     private static List<long[]> GetRanges(string rangeInput) => MergeRanges(ParseRanges(rangeInput));

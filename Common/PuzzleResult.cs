@@ -18,8 +18,7 @@ public class PuzzleResult
         Answer = answer ?? string.Empty;
     }
     
-    public PuzzleResult(int? answer) : this(PuzzleType.Default, answer.ToString()){}
-    public PuzzleResult(long? answer) : this(PuzzleType.Default, answer.ToString()){}
+    // public PuzzleResult(int? answer) : this(PuzzleType.Default, answer.ToString()){}
 
     public static PuzzleResult Create(PuzzleType type, string? answer, string? hash) => new(type, answer, hash);
     public static PuzzleResult Create(string? answer, string? hash) => new(PuzzleType.Default, answer, hash);

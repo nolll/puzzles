@@ -10,19 +10,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202414;
 public class Aoc202414 : AocPuzzle
 {
     [Puzzle("b1d1ce0325bc4a8e41d033f8bfb0a58e")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = Part1(input, 101, 103);
+    public long Part1(string input) => Part1(input, 101, 103);
 
-        return new PuzzleResult(result);
-    }
-    
     [Puzzle("258b802fdbfe2ab2ad0cf4f04b73be1d")]
-    public PuzzleResult Part2(string input)
-    {
-        var s = Part2(input, 101, 103);
-        return new PuzzleResult(s);
-    }
+    public long Part2(string input) => Part2(input, 101, 103);
 
     public long Part1(string input, int width, int height)
     {

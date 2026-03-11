@@ -10,10 +10,10 @@ public class Aoc202503Tests
                                  """;
 
     [Fact]
-    public void Part1() => Sut.Part1(Input).Answer.Should().Be("357");
+    public void Part1() => Sut.Part1(Input).Should().Be(357);
 
     [Fact]
-    public void Part2() => Sut.Part2(Input).Answer.Should().Be("3121910778619");
+    public void Part2() => Sut.Part2(Input).Should().Be(3121910778619);
 
     private static Aoc202503 Sut => new();
 }

@@ -27,7 +27,7 @@ public class Aoc202417Tests
                              Program: 0,3,5,4,3,0
                              """;
         
-        Sut.Part2(input).Answer.Should().Be("117440");
+        Sut.Part2(input).Should().Be(117440);
     }
 
     private static Aoc202417 Sut => new();

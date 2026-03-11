@@ -12,7 +12,7 @@ public class Codyssi202511Tests
                                  """;
 
     [Fact]
-    public void Part1() => Sut.Part1(Input).Answer.Should().Be("9047685997827");
+    public void Part1() => Sut.Part1(Input).Should().Be(9047685997827);
 
     [Fact]
     public void Part2() => Sut.Part2(Input).Should().Be("4iWAbo%6");

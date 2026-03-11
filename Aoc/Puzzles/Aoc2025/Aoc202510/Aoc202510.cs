@@ -19,13 +19,10 @@ public class Aoc202510 : AocPuzzle
     }
 
     [Puzzle("328efb57c96e68e01778dad1dd089540")]
-    public PuzzleResult Part2(string input)
-    {
-        var items = input.Split(LineBreaks.Single).Select(Parse).ToList();
-        var result = items.Select(o => SolvePart2(o.counters, o.buttons)).ToList();
-        
-        return new PuzzleResult(result.Sum());
-    }
+    public long Part2(string input) => input.Split(LineBreaks.Single)
+        .Select(Parse).ToList()
+        .Select(o => SolvePart2(o.counters, o.buttons))
+        .Sum();
 
     private static int SolvePart1(string targetLights, int[][] buttons)
     {

@@ -39,18 +39,10 @@ public class Aoc202305Tests
                                   """;
 
     [Fact]
-    public void Part1()
-    {
-        var result = Aoc202305.SolvePart1(Input);
-
-        result.Should().Be(35);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(35);
 
     [Fact]
-    public void Part2()
-    {
-        var result = Aoc202305.SolvePart2(Input);
+    public void Part2() => Sut.Part2(Input).Should().Be(46);
 
-        result.Should().Be(46);
-    }
+    private static Aoc202305 Sut => new();
 }

@@ -6,20 +6,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202211;
 public class Aoc202211 : AocPuzzle
 {
     [Puzzle("7d4be1aa43422b2344a6125943e730c4")]
-    public PuzzleResult Part1(string input)
-    {
-        var monkeyBusiness = new MonkeyBusiness();
-        var result = monkeyBusiness.Part1(input);
-
-        return new PuzzleResult(result);
-    }
+    public long Part1(string input) => new MonkeyBusiness().Part1(input);
 
     [Puzzle("9b6edc59f2fbcf1491af28eecdb326fb")]
-    public PuzzleResult Part2(string input)
-    {
-        var monkeyBusiness = new MonkeyBusiness();
-        var result = monkeyBusiness.Part2(input);
-
-        return new PuzzleResult(result);
-    }
+    public long Part2(string input) => new MonkeyBusiness().Part2(input);
 }

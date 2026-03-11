@@ -5,7 +5,7 @@ public class Aoc202220Tests
     [Fact]
     public void Part1()
     {
-        var result = Aoc202220.Run(Input, 1, 1);
+        var result = Aoc202220.Solve(Input, 1, 1);
 
         result.Should().Be(3);
     }
@@ -13,7 +13,7 @@ public class Aoc202220Tests
     [Fact]
     public void Part2()
     {
-        var result = Aoc202220.Run(Input, 811_589_153, 10);
+        var result = Aoc202220.Solve(Input, 811_589_153, 10);
 
         result.Should().Be(1623178306);
     }

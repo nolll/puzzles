@@ -30,21 +30,13 @@ public class Aoc202421 : AocPuzzle
         ArrowSeqs.ToDictionary(k => k.Key, v => v.Value.First().Length);
 
     [Puzzle("0e39f69d96697459d6010612d45068b8")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = Run(input, 2);
-        return new PuzzleResult(result);
-    }
-    
-    [Puzzle("11dc3947e6394cb17a12fc9fb6d874c7")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = Run(input, 25);
-        return new PuzzleResult(result);
-    }
+    public long Part1(string input) => Run(input, 2);
 
-    private long Run(string input, int robotCount) => 
-        input.Split(LineBreaks.Single)
+    [Puzzle("11dc3947e6394cb17a12fc9fb6d874c7")]
+    public long Part2(string input) => Run(input, 25);
+
+    private long Run(string codes, int robotCount) => 
+        codes.Split(LineBreaks.Single)
             .Sum(code => Solve(code, robotCount) * Numbers.IntsFromString(code).First());
 
     public long Solve(string code, int robotCount) =>

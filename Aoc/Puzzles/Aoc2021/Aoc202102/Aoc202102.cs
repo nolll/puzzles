@@ -6,20 +6,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202102;
 public class Aoc202102 : AocPuzzle
 {
     [Puzzle("9d9dec9baf0fe61bbb7a9e95cc1ae2de")]
-    public PuzzleResult Part1(string input)
+    public long Part1(string input)
     {
         var control = new SubmarineControl(input, false);
         control.Move();
             
-        return new PuzzleResult(control.Result);
+        return control.Result;
     }
 
     [Puzzle("6b29326368c507ef0dbbe41523850cd2")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var control = new SubmarineControl(input, true);
         control.Move();
 
-        return new PuzzleResult(control.Result);
+        return control.Result;
     }
 }

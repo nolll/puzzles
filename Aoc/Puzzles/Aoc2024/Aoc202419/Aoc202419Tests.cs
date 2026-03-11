@@ -24,7 +24,7 @@ public class Aoc202419Tests
     [Fact]
     public void Part2()
     {
-        Sut.Part2(Input).Answer.Should().Be("16");
+        Sut.Part2(Input).Should().Be(16);
     }
 
     private static Aoc202419 Sut => new();

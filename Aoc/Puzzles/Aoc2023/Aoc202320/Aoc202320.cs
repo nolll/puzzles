@@ -9,12 +9,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202320;
 public class Aoc202320 : AocPuzzle
 {
     [Puzzle("826f2e187e18624950644293ef2e6c8d")]
-    public PuzzleResult Part1(string input) => 
-        new(CountPulses(input, 1000));
+    public long Part1(string input) => CountPulses(input, 1000);
 
     [Puzzle("1fd3846c9dc834364bf2cdc9c11dfbdb")]
-    public PuzzleResult Part2(string input) =>
-        new(CountPulses(input, 5000, true));
+    public long Part2(string input) => CountPulses(input, 5000, true);
 
     public static long CountPulses(string s, int iterations, bool isPart2 = false)
     {

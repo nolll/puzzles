@@ -40,7 +40,7 @@ public class Aoc202511Tests
                              hhh: out
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("2");
+        Sut.Part2(input).Should().Be(2);
     }
 
     private static Aoc202511 Sut => new();

@@ -3,40 +3,16 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202114;
 public class Aoc202114Tests
 {
     [Fact]
-    public void OneStep()
-    {
-        var polymerization = new Polymerization();
-        var result = polymerization.Run(Input, 1);
-
-        result.Should().Be(1);
-    }
+    public void OneStep() => Sut.Solve(Input, 1).Should().Be(1);
 
     [Fact]
-    public void TwoSteps()
-    {
-        var polymerization = new Polymerization();
-        var result = polymerization.Run(Input, 2);
-
-        result.Should().Be(5);
-    }
+    public void TwoSteps() => Sut.Solve(Input, 2).Should().Be(5);
 
     [Fact]
-    public void TenSteps()
-    {
-        var polymerization = new Polymerization();
-        var result = polymerization.Run(Input, 10);
-
-        result.Should().Be(1588);
-    }
+    public void TenSteps() => Sut.Solve(Input, 10).Should().Be(1588);
 
     [Fact]
-    public void Part2()
-    {
-        var polymerization = new Polymerization();
-        var result = polymerization.Run(Input, 40);
-
-        result.Should().Be(2188189693529);
-    }
+    public void Part2() => Sut.Solve(Input, 40).Should().Be(2188189693529);
 
     private const string Input = """
                                  NNCB
@@ -58,4 +34,6 @@ public class Aoc202114Tests
                                  CC -> N
                                  CN -> C
                                  """;
+
+    public Aoc202114 Sut => new();
 }

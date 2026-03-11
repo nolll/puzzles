@@ -8,21 +8,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202413;
 public class Aoc202413 : AocPuzzle
 {
     [Puzzle("56660d12b57edc245008c03e719df0bf")]
-    public PuzzleResult Part1(string input)
-    {
-        var cost = Solve(input);
-        
-        return new PuzzleResult(cost);
-    }
+    public long Part1(string input) => Solve(input);
 
     [Puzzle("54b0ade17d9b06307b53d22672608ba6")]
-    public PuzzleResult Part2(string input)
-    {
-        var cost = Solve(input, 10_000_000_000_000);
-        
-        return new PuzzleResult(cost);
-    }
-    
+    public long Part2(string input) => Solve(input, 10_000_000_000_000);
+
     public static long Solve(string input, long extension = 0)
     {
         var groups = input.Split(LineBreaks.Double);

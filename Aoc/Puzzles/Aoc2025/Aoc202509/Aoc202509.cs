@@ -10,16 +10,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202509;
 public class Aoc202509 : AocPuzzle
 {
     [Puzzle("703b2c49bc827700bb8947a8bd64d264")]
-    public PuzzleResult Part1(string input)
-    {
-        var coords = ParseCoords(input);
-        var best = GetAreas(coords).Select(o => o.area).Max();
-        
-        return new PuzzleResult(best);
-    }
+    public long Part1(string input) => GetAreas(ParseCoords(input)).Select(o => o.area).Max();
 
     [Puzzle("83d4cb5ecc9d6a6e763f9d96944b412b")]
-    public PuzzleResult Part2(string input)
+    public long? Part2(string input)
     {
         var corners = ParseCoords(input);
         var minx = corners.Min(o => o.X);
@@ -70,10 +64,10 @@ public class Aoc202509 : AocPuzzle
         foreach (var item in areas)
         {
             if (IsValidArea(item, mapper, filled))
-                return new PuzzleResult(item.area);
+                return item.area;
         }
         
-        return PuzzleResult.Empty;
+        return null;
     }
 
     private static bool IsValidArea((Coord a, Coord b, long area) item, CoordCompressor compressor, HashSet<(int, int)> filled)

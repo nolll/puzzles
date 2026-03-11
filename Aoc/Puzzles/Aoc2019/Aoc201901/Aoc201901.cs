@@ -6,16 +6,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201901;
 public class Aoc201901 : AocPuzzle
 {
     [Puzzle("863ba725f4b926c82a67e448dbacc8ca")]
-    public PuzzleResult Part1(string input)
-    {
-        var massCalculator = new MassCalculator(input);
-        return new PuzzleResult(massCalculator.MassFuel);
-    }
+    public int Part1(string input) => new MassCalculator(input).MassFuel;
 
     [Puzzle("9a6de12a9f00b9360ead07efc0249b8c")]
-    public PuzzleResult Part2(string input)
-    {
-        var massCalculator = new MassCalculator(input);
-        return new PuzzleResult(massCalculator.TotalFuel);
-    }
+    public int Part2(string input) => new MassCalculator(input).TotalFuel;
 }

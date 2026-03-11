@@ -8,7 +8,7 @@ namespace Pzl.Euler.Puzzles.Euler055;
 public class Euler055 : EulerPuzzle
 {
     [Puzzle("2cfc10140c99d8efac8a77765769479d")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var n = new BigInteger(1);
         var lychrelCount = 0;
@@ -38,6 +38,6 @@ public class Euler055 : EulerPuzzle
             n++;
         }
         
-        return new PuzzleResult(lychrelCount);
+        return lychrelCount;
     }
 }

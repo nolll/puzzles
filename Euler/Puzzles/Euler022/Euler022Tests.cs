@@ -3,11 +3,5 @@ namespace Pzl.Euler.Puzzles.Euler022;
 public class Euler022Tests
 {
     [Fact]
-    public void Test()
-    {
-        var puzzle = new Euler022();
-        var result = puzzle.GetNameScore("COLIN");
-
-        result.Should().Be(49714);
-    }
+    public void Test() => new Euler022.Names().GetScore("COLIN").Should().Be(49714);
 }

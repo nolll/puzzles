@@ -1,17 +1,10 @@
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201910;
 
-public class Asteroid : IEquatable<Asteroid>
+public class Asteroid(char name, int x, int y) : IEquatable<Asteroid>
 {
-    public char Name { get; }
-    public int X { get; }
-    public int Y { get; }
-
-    public Asteroid(char name, int x, int y)
-    {
-        Name = name;
-        X = x;
-        Y = y;
-    }
+    public char Name { get; } = name;
+    public int X { get; } = x;
+    public int Y { get; } = y;
 
     public bool Equals(Asteroid? other)
     {

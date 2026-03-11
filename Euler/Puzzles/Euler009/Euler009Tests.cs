@@ -6,7 +6,7 @@ public class Euler009Tests
     public void Test()
     {
         var puzzle = new Euler009();
-        var result = puzzle.Run(12);
+        var result = puzzle.Solve(12);
 
         result.Should().Be(60);
     }

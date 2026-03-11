@@ -6,15 +6,10 @@ namespace Pzl.Euler.Puzzles.Euler039;
 public class Euler039 : EulerPuzzle
 {
     [Puzzle("e5acdbe3ca4832e6abd355009a432f2e")]
-    public PuzzleResult Solve()
-    {
-        var solutions = FindSolutions(1000);
-        
-        var groups = solutions.GroupBy(o => o.a + o.b + o.c);
-        var perimeterWithMostSolutions = groups.OrderByDescending(o => o.Count()).First();
-
-        return new PuzzleResult(perimeterWithMostSolutions.Key);
-    }
+    public int Solve() => FindSolutions(1000)
+        .GroupBy(o => o.a + o.b + o.c)
+        .OrderByDescending(o => o.Count()).First()
+        .Key;
 
     private static IEnumerable<(int a, int b, int c)> FindSolutions(int n)
     {

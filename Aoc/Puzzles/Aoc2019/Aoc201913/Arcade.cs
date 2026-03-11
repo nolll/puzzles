@@ -8,10 +8,10 @@ public class Arcade
     private readonly IntCodeComputer _computer;
     private readonly Grid<char> _screen;
     private ArcadeMode _mode;
-    private int _x = 0;
-    private int _y = 0;
-    private int _ballX = 0;
-    private int _paddleX = 0;
+    private int _x;
+    private int _y;
+    private int _ballX;
+    private int _paddleX;
 
     public int Score { get; private set; } = 0;
 
@@ -80,19 +80,6 @@ public class Arcade
         _mode = ArcadeMode.X;
 
         return true;
-    }
-
-    private void PrintScreen()
-    {
-        Console.Clear();
-        Console.SetCursorPosition(0, 0);
-        Console.Write(_screen.Print());
-    }
-
-    private void PrintScore()
-    {
-        Console.WriteLine();
-        Console.WriteLine($"Score: {Score}");
     }
 
     private void WriteToScreen(int x, int y, int tile)

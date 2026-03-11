@@ -6,7 +6,7 @@ public class Euler017Tests
     public void Test()
     {
         var puzzle = new Euler017();
-        var result = puzzle.Run(5);
+        var result = puzzle.Solve(5);
 
         result.Should().Be(19);
     }

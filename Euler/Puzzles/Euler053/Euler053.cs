@@ -8,7 +8,7 @@ namespace Pzl.Euler.Puzzles.Euler053;
 public class Euler053 : EulerPuzzle
 {
     [Puzzle("afc3b71561c7dde3bc566dc3985992bf")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var count = 0;
         
@@ -26,6 +26,6 @@ public class Euler053 : EulerPuzzle
             }
         }
         
-        return new PuzzleResult(count);
+        return count;
     }
 }

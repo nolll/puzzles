@@ -8,22 +8,15 @@ namespace Pzl.Euler.Puzzles.Euler060;
 [IsSlow, Comment("Better prime cache?")]
 public class Euler060 : EulerPuzzle
 {
+    private const int Upperbound = 8500; // Found answer with 10000, then decreased. Still too slow
+    
     private readonly Dictionary<int, bool> _primeCache = new();
     private readonly Dictionary<int[], bool> _cache = new();
     private const int Depth = 5;
     private const int RecursiveDepth = Depth - 1;
     
     [Puzzle("3889e098b841c125e0922c73ad776234")]
-    public PuzzleResult Solve()
-    {
-        const int upperbound = 8500; // Found answer with 10000, then decreased. Still too slow
-        var primes = Numbers.FindPrimesBelow(upperbound).ToArray();
-
-        var results = RunRecursive(primes, 0, []);
-        var best = results.Min();
-        
-        return new PuzzleResult(best);
-    }
+    public int Solve() => RunRecursive(Numbers.FindPrimesBelow(Upperbound).ToArray(), 0, []).Min();
 
     private List<int> RunRecursive(int[] primes, int startPos, int[] set)
     {

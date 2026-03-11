@@ -6,13 +6,9 @@ namespace Pzl.Euler.Puzzles.Euler005;
 public class Euler005 : EulerPuzzle
 {
     [Puzzle("6a929ec1d5586fac0506b20ad87b56e5")]
-    public PuzzleResult Solve()
-    {
-        var smallestMultiple = Run(20);
-        return new PuzzleResult(smallestMultiple);
-    }
-    
-    public int Run(int max)
+    public int Solve() => Solve(20);
+
+    public int Solve(int max)
     {
         var smallest = 0;
         var i = 0;

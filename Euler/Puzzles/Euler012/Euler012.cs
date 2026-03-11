@@ -7,13 +7,9 @@ namespace Pzl.Euler.Puzzles.Euler012;
 public class Euler012 : EulerPuzzle
 {
     [Puzzle("fea73831ed90d121b1b03e10004a2ead")]
-    public PuzzleResult Solve()
-    {
-        var result = Run(501);
-        return new PuzzleResult(result);
-    }
+    public int Solve() => Solve(501);
 
-    public int Run(int maxFactorCount)
+    public int Solve(int maxFactorCount)
     {
         var current = 1;
         var triangle = current;

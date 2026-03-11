@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler021;
 public class Euler021 : EulerPuzzle
 {
     [Puzzle("bfa83952447e586ff82b1adaed0d53ea")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var sums = new Dictionary<int, int>();
         var amicableNumbers = new HashSet<int>();
@@ -41,7 +41,7 @@ public class Euler021 : EulerPuzzle
 
         var amicableSum = amicableNumbers.Sum();
             
-        return new PuzzleResult(amicableSum);
+        return amicableSum;
     }
 
     public static int GetFactorialSum(int n) => Numbers.GetProperDivisors(n).Sum();

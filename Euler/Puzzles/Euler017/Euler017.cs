@@ -7,13 +7,9 @@ namespace Pzl.Euler.Puzzles.Euler017;
 public class Euler017 : EulerPuzzle
 {
     [Puzzle("96bf6c43cf870a65a7526b18a8d55292")]
-    public PuzzleResult Solve()
-    {
-        var result = Run(1000);
-        return new PuzzleResult(result);
-    }
+    public int Solve() => Solve(1000);
 
-    public int Run(int target)
+    public int Solve(int target)
     {
         var strings = new List<string>();
         for (var i = 1; i <= target; i++)

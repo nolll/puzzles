@@ -8,13 +8,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201911;
 public class Aoc201911 : AocPuzzle
 {
     [Puzzle("450a7268b37892570104286b9fd8e5f2")]
-    public PuzzleResult Part1(string input)
-    {
-        var robot1 = new PaintRobot(input);
-        var result1 = robot1.Paint(false);
-
-        return new PuzzleResult(result1.PaintedPanelCount);
-    }
+    public int Part1(string input) => new PaintRobot(input).Paint(false).PaintedPanelCount;
 
     [Puzzle("f5a3ea8d16e26ffd7e4c01382dfcd31c")]
     public string Part2(string input)

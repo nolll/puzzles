@@ -9,7 +9,7 @@ public class Euler064 : EulerPuzzle
     // Don't really understand this one. Tried to code along with
     // https://martin-ueding.de/posts/project-euler-solution-64-odd-period-square-roots
     [Puzzle("44e91baf8c82f4b22ddd38842c45659b")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var result = 0;
         for (var n = 2L; n <= 10_000L; n++)
@@ -19,7 +19,7 @@ public class Euler064 : EulerPuzzle
                 result++;
         }
         
-        return new PuzzleResult(result);
+        return result;
     }
 
     public static (long a0, long[] cycle) GetContinuedFraction(long n)

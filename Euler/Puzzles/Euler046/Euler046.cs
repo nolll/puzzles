@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler046;
 public class Euler046 : EulerPuzzle
 {
     [Puzzle("062b9f78d646c2335a67be87369acfeb")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var n = 1;
         var found = true;
@@ -33,7 +33,7 @@ public class Euler046 : EulerPuzzle
             }
         }
         
-        return new PuzzleResult(n); 
+        return n; 
     }
 
     private static IEnumerable<int> FindSquaresBelow(int max)

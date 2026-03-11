@@ -5,18 +5,12 @@ namespace Pzl.Euler.Puzzles.Euler031;
 [Name("Coin sums")]
 public class Euler031 : EulerPuzzle
 {
+    private const int TargetSum = 200;
+
     [Puzzle("7175474dc7b139b075af256e2253a076")]
-    public PuzzleResult Solve()
-    {
-        var denominations = new List<int> { 1, 2, 5, 10, 20, 50, 100, 200 };
-        const int targetSum = 200;
+    public int Solve() => Solve([1, 2, 5, 10, 20, 50, 100, 200], TargetSum);
 
-        var result = Run(denominations, targetSum);
-
-        return new PuzzleResult(result);
-    }
-
-    public int Run(IEnumerable<int> denominations, int target) => 
+    public int Solve(IEnumerable<int> denominations, int target) => 
         CountCombinations(denominations.OrderByDescending(o => o).ToList(), target);
 
     private static int CountCombinations(IReadOnlyCollection<int> denominations, int target)

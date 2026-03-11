@@ -9,7 +9,7 @@ public class Euler023 : EulerPuzzle
     private const int UpperLimit = 28123;
 
     [Puzzle("3e9b4a09c05ed3005778e9aa2770d373")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var abundantNumbers = FindAbundantNumbers(UpperLimit).ToList();
         var sumsOfAbundantNumbers = GetSums(abundantNumbers);
@@ -21,7 +21,7 @@ public class Euler023 : EulerPuzzle
                 sum += i;
         }
             
-        return new PuzzleResult(sum);
+        return sum;
     }
 
     private static HashSet<int> GetSums(List<int> abundantNumbers)

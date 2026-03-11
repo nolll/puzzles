@@ -7,12 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler018;
 public class Euler018 : EulerPuzzle
 {
     [Puzzle("ac0ed37fe47b088e57246f49e0564317")]
-    public PuzzleResult Solve(string input)
-    {
-        var triangle = BuildTriangle(input);
-        var sum = triangle.First().First().BestPath;
-        return new PuzzleResult(sum);
-    }
+    public int Solve(string input) => BuildTriangle(input).First().First().BestPath;
 
     private static IEnumerable<List<TriangleNode>> BuildTriangle(string triangleString)
     {

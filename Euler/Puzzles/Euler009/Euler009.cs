@@ -6,17 +6,11 @@ namespace Pzl.Euler.Puzzles.Euler009;
 public class Euler009 : EulerPuzzle
 {
     [Puzzle("e24ed4780cdb9cc23ed514f804dc2c80")]
-    public PuzzleResult Solve()
-    {
-        var product = Run(1000);
-        return new PuzzleResult(product);
-    }
+    public int Solve() => Solve(1000);
 
-    public int Run(int targetSum)
+    public int Solve(int targetSum)
     {
-        var combinations = GetPermutations(targetSum);
-
-        foreach (var (a, b, c) in combinations)
+        foreach (var (a, b, c) in GetPermutations(targetSum))
         {
             if (a + b + c == targetSum && a * a + b * b == c * c)
                 return a * b * c;

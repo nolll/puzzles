@@ -8,7 +8,7 @@ namespace Pzl.Euler.Puzzles.Euler057;
 public class Euler057 : EulerPuzzle
 {
     [Puzzle("a108ed87069fbb10b6d6595e8795dc16")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var n = 1;
         var count = 0;
@@ -21,7 +21,7 @@ public class Euler057 : EulerPuzzle
             n++;
         }
         
-        return new PuzzleResult(count);
+        return count;
     }
 
     public static Fraction Solve(int levels)

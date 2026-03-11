@@ -8,17 +8,11 @@ namespace Pzl.Euler.Puzzles.Euler059;
 public class Euler059 : EulerPuzzle
 {
     private const string Chars = "abcdefghijklmnopqrstuvwxyz";
-    
+
     [Puzzle("d9dbe56c9710bdd032f5e12c46940879")]
-    public PuzzleResult Solve(string input)
-    {
-        var keys = GenerateKeys();
-        var encryptedText = ParseEncryptedText(input);
-        var decryptedText = BruteForceDecrypt(keys, encryptedText);
-        var asciiSum = decryptedText.Select(o => (int)o).Sum();
-        
-        return new PuzzleResult(asciiSum);
-    }
+    public int Solve(string input) => BruteForceDecrypt(GenerateKeys(), ParseEncryptedText(input))
+        .Select(o => (int)o)
+        .Sum();
 
     private static string ParseEncryptedText(string input) => string.Join("", input.Split(",")
         .Select(int.Parse)

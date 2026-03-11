@@ -7,17 +7,9 @@ namespace Pzl.Euler.Puzzles.Euler028;
 public class Euler028 : EulerPuzzle
 {
     [Puzzle("3966c6e62dfa03219f032ab903568901")]
-    public PuzzleResult Solve()
-    {
-        var result = Run(1001);
-        return new PuzzleResult(result);
-    }
-    
-    public int Run(int size)
-    {
-        var grid = BuildGrid(size);
-        return CalculateDiagonalSum(grid);
-    }
+    public int Solve() => Solve(1001);
+
+    public int Solve(int size) => CalculateDiagonalSum(BuildGrid(size));
 
     private static int CalculateDiagonalSum(Grid<int> grid)
     {

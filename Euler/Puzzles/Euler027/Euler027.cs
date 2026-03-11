@@ -9,7 +9,7 @@ public class Euler027 : EulerPuzzle
     private readonly Dictionary<int, bool> _primeCache = new();
 
     [Puzzle("f850d309dbbe391934e0e67a6344442d")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         const int bLimit = 1000;
         const int aLimit = bLimit - 1;
@@ -31,7 +31,7 @@ public class Euler027 : EulerPuzzle
             }
         }
             
-        return new PuzzleResult(product);
+        return product;
     }
 
     public int GetPrimeCount(int a, int b)

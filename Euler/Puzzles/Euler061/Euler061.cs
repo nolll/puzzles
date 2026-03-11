@@ -9,7 +9,7 @@ public class Euler061 : EulerPuzzle
     private const int UpperBound = 9999;
     
     [Puzzle("2000cca1f4a265ef136355dac9daadd1")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var numbers = new List<CyclicalNumber>();
         numbers.AddRange(GenerateNumbers(GenerateTriangular).Select(o => new CyclicalNumber(o, 3)));
@@ -42,9 +42,7 @@ public class Euler061 : EulerPuzzle
         }
 
         var validCycles = potentialCycles.Where(o => o.Last().Last == o.First().First);
-        var sum = validCycles.First().Sum(o => o.Number);
-        
-        return new PuzzleResult(sum);
+        return validCycles.First().Sum(o => o.Number);
     }
 
     private List<List<CyclicalNumber>> FindCycle(List<CyclicalNumber> sequence)

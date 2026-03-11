@@ -7,15 +7,10 @@ namespace Pzl.Euler.Puzzles.Euler016;
 public class Euler016 : EulerPuzzle
 {
     [Puzzle("09386463dd33adc5ea634c4084b68919")]
-    public PuzzleResult Solve()
-    {
-        var result = Run(1000);
-        return new PuzzleResult(result);
-    }
+    public int Solve() => Solve(1000);
 
-    public int Run(int power) => MathTools.ToPowerOf(2, power).ToString()
+    public int Solve(int power) => MathTools.ToPowerOf(2, power).ToString()
         .ToCharArray()
-        .Select(o => o.ToString())
-        .Select(int.Parse)
+        .Select(o => int.Parse(o.ToString()))
         .Sum();
 }

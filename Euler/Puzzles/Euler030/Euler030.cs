@@ -7,19 +7,9 @@ namespace Pzl.Euler.Puzzles.Euler030;
 public class Euler030 : EulerPuzzle
 {
     [Puzzle("7ba4d46ba8ab138fff39c45c1e2b574b")]
-    public PuzzleResult Solve()
-    {
-        var result = Run(5);
-        return new PuzzleResult(result);
-    }
+    public int Solve() => Solve(5);
 
-    public int Run(int power)
-    {
-        var upperBound = GetUpperBound(power);
-        var results = GetNumbers(power, upperBound);
-            
-        return results.Sum();
-    }
+    public int Solve(int power) => GetNumbers(power, GetUpperBound(power)).Sum();
 
     private static IEnumerable<int> GetNumbers(int power, int upperBound)
     {

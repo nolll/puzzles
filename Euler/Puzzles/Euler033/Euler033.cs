@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler033;
 public class Euler033 : EulerPuzzle
 {
     [Puzzle("4c0b4de9a0e1327b801b1dc029237223")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var fractions = new List<Fraction>();
 
@@ -26,8 +26,6 @@ public class Euler033 : EulerPuzzle
         var combinedDenominator = fractions.Select(o => o.Denominator).Aggregate(1, (a, b) => a * b);
         
         // Found by inspecting the numbers. The denominator is the numerator * 100
-        var resultDenominator = combinedDenominator / combinedNumerator;
-
-        return new PuzzleResult(resultDenominator);
+        return combinedDenominator / combinedNumerator;
     }
 }

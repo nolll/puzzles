@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler034;
 public class Euler034 : EulerPuzzle
 {
     [Puzzle("2464ceb2b2cb7b3a2ecb0a4eab5de58b")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var total = 0;
 
@@ -17,7 +17,7 @@ public class Euler034 : EulerPuzzle
             if (i == sum)
                 total += i;
         }
-        return new PuzzleResult(total);
+        return total;
     }
 
     public static int GetDigitFactorialSum(int n) => GetDigits(n)
@@ -29,6 +29,5 @@ public class Euler034 : EulerPuzzle
         .ToCharArray()
         .Select(o => int.Parse(o.ToString()));
 
-    private static int GetFactorial(int n) => 
-        Enumerable.Range(1, n).Aggregate(1, (a, b) => a * b);
+    private static int GetFactorial(int n) => Enumerable.Range(1, n).Aggregate(1, (a, b) => a * b);
 }

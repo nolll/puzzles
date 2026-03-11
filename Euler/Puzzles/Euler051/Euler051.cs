@@ -8,7 +8,7 @@ namespace Pzl.Euler.Puzzles.Euler051;
 public class Euler051 : EulerPuzzle
 {
     [Puzzle("359af98eb6058f7574c6d66b403910c5")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var n = 0;
         const int target = 8;
@@ -47,7 +47,7 @@ public class Euler051 : EulerPuzzle
                     }
                             
                     if (primes.Count == target)
-                        return new PuzzleResult(primes.Min());
+                        return primes.Min();
                 }
             }
         }

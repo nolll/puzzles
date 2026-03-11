@@ -6,7 +6,7 @@ namespace Pzl.Euler.Puzzles.Euler052;
 public class Euler052 : EulerPuzzle
 {
     [Puzzle("7e25d491fc51dd8d228120bc98f3eb50")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var n = 1;
 
@@ -26,7 +26,7 @@ public class Euler052 : EulerPuzzle
             }
 
             if (isValid)
-                return new PuzzleResult(n);
+                return n;
 
             n++;
         }

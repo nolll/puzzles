@@ -7,13 +7,9 @@ namespace Pzl.Euler.Puzzles.Euler007;
 public class Euler007 : EulerPuzzle
 {
     [Puzzle("42330f784700c1eb6c8e5aab1559caa5")]
-    public PuzzleResult Solve()
-    {
-        var nthPrime = Run(10001);
-        return new PuzzleResult(nthPrime);
-    }
+    public int Solve() => Solve(10001);
 
-    public int Run(int index)
+    public int Solve(int index)
     {
         var primeCount = 0;
         var lastPrime = 0;

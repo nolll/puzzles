@@ -7,13 +7,9 @@ namespace Pzl.Euler.Puzzles.Euler029;
 public class Euler029 : EulerPuzzle
 {
     [Puzzle("b83681bf81eb63901be2e8b5b1569c45")]
-    public PuzzleResult Solve()
-    {
-        var result = Run(100);
-        return new PuzzleResult(result);
-    }
+    public int Solve() => Solve(100);
 
-    public int Run(int limit)
+    public int Solve(int limit)
     {
         var cache = new HashSet<BigInteger>();
 

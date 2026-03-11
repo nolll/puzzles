@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler063;
 public class Euler063 : EulerPuzzle
 {
     [Puzzle("f8456799fb007870bc7065fe8d61b770")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var results = new HashSet<BigInteger>();
         var n = 1;
@@ -23,7 +23,7 @@ public class Euler063 : EulerPuzzle
             n++;
         }
         
-        return new PuzzleResult(results.Count);
+        return results.Count;
     }
 
 }

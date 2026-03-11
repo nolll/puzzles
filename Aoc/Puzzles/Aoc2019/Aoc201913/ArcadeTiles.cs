@@ -8,5 +8,5 @@ public static class ArcadeTiles
     public const char Paddle = '=';
     public const char Ball = 'o';
 
-    public static readonly char[] Chars = {Empty, Wall, Block, Paddle, Ball};
+    public static readonly char[] Chars = [Empty, Wall, Block, Paddle, Ball];
 }

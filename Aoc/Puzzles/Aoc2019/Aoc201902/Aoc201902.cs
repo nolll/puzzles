@@ -15,11 +15,10 @@ public class Aoc201902 : AocPuzzle
     }
 
     [Puzzle("b505e47f6dc62ca5acbbe708dd2192a5")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var solutionFinder = new ComputerSolutionFinder(input);
         var result = solutionFinder.FindSolution(19690720);
-        var answer = 100 * result!.Noun + result.Verb;
-        return new PuzzleResult(answer);
+        return 100 * result!.Noun + result.Verb;
     }
 }

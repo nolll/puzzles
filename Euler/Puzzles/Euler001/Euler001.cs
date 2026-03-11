@@ -6,13 +6,9 @@ namespace Pzl.Euler.Puzzles.Euler001;
 public class Euler001 : EulerPuzzle
 {
     [Puzzle("b292a6e3a2240594d56a2ccc91c9f797")]
-    public PuzzleResult Solve()
-    {
-        var sum = Run(1000);
-        return new PuzzleResult(sum);
-    }
+    public int Solve() => Solve(1000);
 
-    public int Run(int limit)
+    public int Solve(int limit)
     {
         var multiplesOf3Or5 = new List<int>();
         for (var i = 0; i < limit; i++)

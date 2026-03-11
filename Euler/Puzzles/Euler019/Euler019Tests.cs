@@ -10,7 +10,7 @@ public class Euler019Tests
         var endDate = DateTime.Parse("2020-12-31");
 
         var puzzle = new Euler019();
-        var result = puzzle.Run(startDate, endDate);
+        var result = puzzle.Solve(startDate, endDate);
 
         result.Should().Be(2);
     }

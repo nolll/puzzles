@@ -11,7 +11,7 @@ public class Euler040 : EulerPuzzle
     private const int StepMultiplier = 10;
 
     [Puzzle("1e10a803d525ec160795a9bed9161106")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var sb = new StringBuilder();
         var i = Initial;
@@ -27,8 +27,6 @@ public class Euler040 : EulerPuzzle
         for (var j = Initial; j < MaxLength; j *= StepMultiplier) 
             numbers.Add(int.Parse(s[j - 1].ToString()));
 
-        var product = numbers.Aggregate(1, (a, b) => a * b);
-
-        return new PuzzleResult(product);
+        return numbers.Aggregate(1, (a, b) => a * b);
     }
 }

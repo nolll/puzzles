@@ -6,13 +6,9 @@ namespace Pzl.Euler.Puzzles.Euler004;
 public class Euler004 : EulerPuzzle
 {
     [Puzzle("bf66c93b5263ee5be1d362b688a9a581")]
-    public PuzzleResult Solve()
-    {
-        var largestPalindrome = Run(100, 999);
-        return new PuzzleResult(largestPalindrome);
-    }
-    
-    public int Run(int minFactor, int maxFactor)
+    public int Solve() => Solve(100, 999);
+
+    public int Solve(int minFactor, int maxFactor)
     {
         var tried = new HashSet<(int, int)>();
         var largestPalindrome = 0;

@@ -6,13 +6,9 @@ namespace Pzl.Euler.Puzzles.Euler014;
 public class Euler014 : EulerPuzzle
 {
     [Puzzle("0450ecdacdabfdc1139c86a81684b5ef")]
-    public PuzzleResult Solve()
-    {
-        var result = Run(1_000_000);
-        return new PuzzleResult(result);
-    }
+    public int Solve() => Solve(1_000_000);
 
-    private int Run(int limit)
+    private int Solve(int limit)
     {
         var longestSequence = (Num: 1, Length: 1);
         var i = 0;

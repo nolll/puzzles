@@ -6,13 +6,9 @@ namespace Pzl.Euler.Puzzles.Euler006;
 public class Euler006 : EulerPuzzle
 {
     [Puzzle("87e872f8edddae501e3813163ca22680")]
-    public PuzzleResult Solve()
-    {
-        var diff = Run(100);
-        return new PuzzleResult(diff);
-    }
-        
-    public int Run(int numCount)
+    public int Solve() => Solve(100);
+
+    public int Solve(int numCount)
     {
         var numbers = Enumerable.Range(1, numCount).ToList();
         var sum = numbers.Sum();

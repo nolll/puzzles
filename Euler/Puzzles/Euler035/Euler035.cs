@@ -8,7 +8,7 @@ namespace Pzl.Euler.Puzzles.Euler035;
 public class Euler035 : EulerPuzzle
 {
     [Puzzle("5363390b461681375e68f3cea9b968df")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var count = 0;
         for (var i = 0; i < 1_000_000; i++)
@@ -19,7 +19,7 @@ public class Euler035 : EulerPuzzle
                 count++;
         }
 
-        return new PuzzleResult(count);
+        return count;
     }
 
     public static IEnumerable<int> GetRotations(int n)

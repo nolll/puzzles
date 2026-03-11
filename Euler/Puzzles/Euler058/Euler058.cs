@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler058;
 public class Euler058 : EulerPuzzle
 {
     [Puzzle("5f412b91d43e2c0e840ce0ef16b76436")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         const int cornerCount = 4;
         var n = 1;
@@ -34,6 +34,6 @@ public class Euler058 : EulerPuzzle
                 break;
         }
         
-        return new PuzzleResult(width);
+        return width;
     }
 }

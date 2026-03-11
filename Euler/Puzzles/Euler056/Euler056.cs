@@ -8,7 +8,7 @@ namespace Pzl.Euler.Puzzles.Euler056;
 public class Euler056 : EulerPuzzle
 {
     [Puzzle("376414390a4252665a1c96ce1464a605")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         const int limit = 100;
         var best = 0;
@@ -22,6 +22,6 @@ public class Euler056 : EulerPuzzle
             }
         }
         
-        return new PuzzleResult(best);
+        return best;
     }
 }

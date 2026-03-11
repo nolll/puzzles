@@ -6,10 +6,11 @@ namespace Pzl.Euler.Puzzles.Euler012;
 [Name("Highly divisible triangular number")]
 public class Euler012 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("fea73831ed90d121b1b03e10004a2ead")]
+    public PuzzleResult Solve()
     {
         var result = Run(501);
-        return new PuzzleResult(result, "fea73831ed90d121b1b03e10004a2ead");
+        return new PuzzleResult(result);
     }
 
     public int Run(int maxFactorCount)

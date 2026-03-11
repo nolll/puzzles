@@ -6,12 +6,13 @@ namespace Pzl.Euler.Puzzles.Euler042;
 [Name("Coded Triangle Numbers")]
 public class Euler042 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("b8170c241f9f4405debc7e76a6e8623e")]
+    public PuzzleResult Solve(string input)
     {
         var words = input.Split(',').Select(o => o.Trim('\"'));
         var count = words.Select(GetWordValue).Count(o => Numbers.IsTriangularNumber(o));
 
-        return new PuzzleResult(count, "b8170c241f9f4405debc7e76a6e8623e");
+        return new PuzzleResult(count);
     }
 
     public static int GetWordValue(string word) 

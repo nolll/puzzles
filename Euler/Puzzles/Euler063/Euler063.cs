@@ -6,7 +6,8 @@ namespace Pzl.Euler.Puzzles.Euler063;
 [Name("Powerful Digit Counts")]
 public class Euler063 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("f8456799fb007870bc7065fe8d61b770")]
+    public PuzzleResult Solve()
     {
         var results = new HashSet<BigInteger>();
         var n = 1;
@@ -22,7 +23,7 @@ public class Euler063 : EulerPuzzle
             n++;
         }
         
-        return new PuzzleResult(results.Count, "f8456799fb007870bc7065fe8d61b770");
+        return new PuzzleResult(results.Count);
     }
 
 }

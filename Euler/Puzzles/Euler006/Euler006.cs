@@ -5,10 +5,11 @@ namespace Pzl.Euler.Puzzles.Euler006;
 [Name("Sum square difference")]
 public class Euler006 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("87e872f8edddae501e3813163ca22680")]
+    public PuzzleResult Solve()
     {
         var diff = Run(100);
-        return new PuzzleResult(diff, "87e872f8edddae501e3813163ca22680");
+        return new PuzzleResult(diff);
     }
         
     public int Run(int numCount)

@@ -6,10 +6,11 @@ namespace Pzl.Euler.Puzzles.Euler030;
 [Name("Digit fifth powers")]
 public class Euler030 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("7ba4d46ba8ab138fff39c45c1e2b574b")]
+    public PuzzleResult Solve()
     {
         var result = Run(5);
-        return new PuzzleResult(result, "7ba4d46ba8ab138fff39c45c1e2b574b");
+        return new PuzzleResult(result);
     }
 
     public int Run(int power)

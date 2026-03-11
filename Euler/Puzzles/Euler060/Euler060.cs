@@ -13,7 +13,8 @@ public class Euler060 : EulerPuzzle
     private const int Depth = 5;
     private const int RecursiveDepth = Depth - 1;
     
-    public PuzzleResult Run()
+    [Puzzle("3889e098b841c125e0922c73ad776234")]
+    public PuzzleResult Solve()
     {
         const int upperbound = 8500; // Found answer with 10000, then decreased. Still too slow
         var primes = Numbers.FindPrimesBelow(upperbound).ToArray();
@@ -21,7 +22,7 @@ public class Euler060 : EulerPuzzle
         var results = RunRecursive(primes, 0, []);
         var best = results.Min();
         
-        return new PuzzleResult(best, "3889e098b841c125e0922c73ad776234");
+        return new PuzzleResult(best);
     }
 
     private List<int> RunRecursive(int[] primes, int startPos, int[] set)

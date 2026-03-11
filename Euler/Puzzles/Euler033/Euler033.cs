@@ -5,7 +5,8 @@ namespace Pzl.Euler.Puzzles.Euler033;
 [Name("Digit Cancelling Fraction")]
 public class Euler033 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("4c0b4de9a0e1327b801b1dc029237223")]
+    public PuzzleResult Solve()
     {
         var fractions = new List<Fraction>();
 
@@ -27,6 +28,6 @@ public class Euler033 : EulerPuzzle
         // Found by inspecting the numbers. The denominator is the numerator * 100
         var resultDenominator = combinedDenominator / combinedNumerator;
 
-        return new PuzzleResult(resultDenominator, "4c0b4de9a0e1327b801b1dc029237223");
+        return new PuzzleResult(resultDenominator);
     }
 }

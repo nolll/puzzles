@@ -7,7 +7,8 @@ public class Euler032 : EulerPuzzle
 {
     private const string AllChars = "123456789";
 
-    public PuzzleResult Run()
+    [Puzzle("735c4542e52acbb81533403307c46237")]
+    public PuzzleResult Solve()
     {
         const int limit = 2000;
         var pandigitalProducts = new HashSet<int>();
@@ -26,7 +27,7 @@ public class Euler032 : EulerPuzzle
 
         var result = pandigitalProducts.Sum();
 
-        return new PuzzleResult(result, "735c4542e52acbb81533403307c46237");
+        return new PuzzleResult(result);
     }
 
     public static bool IsPandigital(int a, int b) => IsPandigital(a, b, a * b);

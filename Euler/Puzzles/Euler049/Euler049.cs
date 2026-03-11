@@ -7,7 +7,8 @@ namespace Pzl.Euler.Puzzles.Euler049;
 [Name("Prime Permutations")]
 public class Euler049 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("bcc1d5d8d784166b3294d174f872c8a8")]
+    public PuzzleResult Solve()
     {
         const int limit = 10_000;
         var primes = Numbers.FindPrimesBelow(limit).ToArray();
@@ -31,7 +32,7 @@ public class Euler049 : EulerPuzzle
                     continue;
                 
                 var result = $"{p1}{p2}{p3}";
-                return new PuzzleResult(result, "bcc1d5d8d784166b3294d174f872c8a8");
+                return new PuzzleResult(result);
             }
         }
         

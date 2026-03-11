@@ -8,7 +8,7 @@ namespace Pzl.Euler.Puzzles.Euler025;
 public class Euler025 : EulerPuzzle
 {
     [Puzzle("b0f9f78357a59417863c853ccb8cff75")]
-    public BigInteger Run() => Run(1000);
+    public BigInteger Solve() => Run(1000);
 
     public BigInteger Run(int digitCount)
     {

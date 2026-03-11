@@ -6,7 +6,8 @@ namespace Pzl.Euler.Puzzles.Euler058;
 [Name("Spiral Primes")]
 public class Euler058 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("5f412b91d43e2c0e840ce0ef16b76436")]
+    public PuzzleResult Solve()
     {
         const int cornerCount = 4;
         var n = 1;
@@ -33,6 +34,6 @@ public class Euler058 : EulerPuzzle
                 break;
         }
         
-        return new PuzzleResult(width, "5f412b91d43e2c0e840ce0ef16b76436");
+        return new PuzzleResult(width);
     }
 }

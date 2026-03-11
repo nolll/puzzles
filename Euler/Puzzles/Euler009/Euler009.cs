@@ -5,10 +5,11 @@ namespace Pzl.Euler.Puzzles.Euler009;
 [Name("Special Pythagorean triplet")]
 public class Euler009 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("e24ed4780cdb9cc23ed514f804dc2c80")]
+    public PuzzleResult Solve()
     {
         var product = Run(1000);
-        return new PuzzleResult(product, "e24ed4780cdb9cc23ed514f804dc2c80");
+        return new PuzzleResult(product);
     }
 
     public int Run(int targetSum)

@@ -6,7 +6,8 @@ namespace Pzl.Euler.Puzzles.Euler050;
 [Name("Consecutive Prime Sum")]
 public class Euler050 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("637f443473ae731a5a53aebf19543597")]
+    public PuzzleResult Solve()
     {
         const int limit = 1_000_000;
         var primes = Numbers.FindPrimesBelow(limit).ToArray();
@@ -29,6 +30,6 @@ public class Euler050 : EulerPuzzle
             }
         }
         
-        return new PuzzleResult(best.sum, "637f443473ae731a5a53aebf19543597");
+        return new PuzzleResult(best.sum);
     }
 }

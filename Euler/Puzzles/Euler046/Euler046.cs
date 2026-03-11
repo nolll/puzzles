@@ -6,7 +6,8 @@ namespace Pzl.Euler.Puzzles.Euler046;
 [Name("Goldbach's Other Conjecture")]
 public class Euler046 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("062b9f78d646c2335a67be87369acfeb")]
+    public PuzzleResult Solve()
     {
         var n = 1;
         var found = true;
@@ -32,7 +33,7 @@ public class Euler046 : EulerPuzzle
             }
         }
         
-        return new PuzzleResult(n, "062b9f78d646c2335a67be87369acfeb"); 
+        return new PuzzleResult(n); 
     }
 
     private static IEnumerable<int> FindSquaresBelow(int max)

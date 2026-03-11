@@ -6,7 +6,8 @@ namespace Pzl.Euler.Puzzles.Euler044;
 [Name("Pentagon Numbers")]
 public class Euler044 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("204982446e51e0168bb4850543d28cd6")]
+    public PuzzleResult Solve()
     {
         var i = 0;
         while(true)
@@ -27,7 +28,7 @@ public class Euler044 : EulerPuzzle
                 if (!Numbers.IsPentagonalNumber(diff))
                     continue;
 
-                return new PuzzleResult(diff, "204982446e51e0168bb4850543d28cd6");
+                return new PuzzleResult(diff);
             }
 
             i++;

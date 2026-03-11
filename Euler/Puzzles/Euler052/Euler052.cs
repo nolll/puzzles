@@ -5,7 +5,8 @@ namespace Pzl.Euler.Puzzles.Euler052;
 [Name("Permuted Multiples")]
 public class Euler052 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("7e25d491fc51dd8d228120bc98f3eb50")]
+    public PuzzleResult Solve()
     {
         var n = 1;
 
@@ -25,7 +26,7 @@ public class Euler052 : EulerPuzzle
             }
 
             if (isValid)
-                return new PuzzleResult(n, "7e25d491fc51dd8d228120bc98f3eb50");
+                return new PuzzleResult(n);
 
             n++;
         }

@@ -7,7 +7,8 @@ namespace Pzl.Euler.Puzzles.Euler051;
 [Name("Prime Digit Replacements")]
 public class Euler051 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("359af98eb6058f7574c6d66b403910c5")]
+    public PuzzleResult Solve()
     {
         var n = 0;
         const int target = 8;
@@ -46,7 +47,7 @@ public class Euler051 : EulerPuzzle
                     }
                             
                     if (primes.Count == target)
-                        return new PuzzleResult(primes.Min(), "359af98eb6058f7574c6d66b403910c5");
+                        return new PuzzleResult(primes.Min());
                 }
             }
         }

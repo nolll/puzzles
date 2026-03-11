@@ -7,7 +7,8 @@ namespace Pzl.Euler.Puzzles.Euler057;
 [Name("Square Root Convergents")]
 public class Euler057 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("a108ed87069fbb10b6d6595e8795dc16")]
+    public PuzzleResult Solve()
     {
         var n = 1;
         var count = 0;
@@ -20,7 +21,7 @@ public class Euler057 : EulerPuzzle
             n++;
         }
         
-        return new PuzzleResult(count, "a108ed87069fbb10b6d6595e8795dc16");
+        return new PuzzleResult(count);
     }
 
     public static Fraction Solve(int levels)

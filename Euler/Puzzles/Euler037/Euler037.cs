@@ -9,7 +9,8 @@ public class Euler037 : EulerPuzzle
     private const int Target = 11;
     private const int Initial = 8;
 
-    public PuzzleResult Run()
+    [Puzzle("89fae62491c03802ab17f278061a576d")]
+    public PuzzleResult Solve()
     {
         var count = 0;
         var sum = 0;
@@ -25,7 +26,7 @@ public class Euler037 : EulerPuzzle
             i++;
         }
 
-        return new PuzzleResult(sum, "89fae62491c03802ab17f278061a576d");
+        return new PuzzleResult(sum);
     }
 
     public static bool IsTruncatable(int n) => IsTruncatableLeft(n) && IsTruncatableRight(n);

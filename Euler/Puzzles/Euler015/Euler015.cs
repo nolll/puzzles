@@ -5,10 +5,11 @@ namespace Pzl.Euler.Puzzles.Euler015;
 [Name("Lattice paths")]
 public class Euler015 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("24564b04f61254168e07eb4d1c9df79f")]
+    public PuzzleResult Solve()
     {
         var result = Run(20);
-        return new PuzzleResult(result, "24564b04f61254168e07eb4d1c9df79f");
+        return new PuzzleResult(result);
     }
 
     public long Run(int gridSize) => PascalTriangle(gridSize).Max();

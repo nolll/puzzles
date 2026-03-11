@@ -6,7 +6,8 @@ namespace Pzl.Euler.Puzzles.Euler054;
 [Name("Poker Hands")]
 public class Euler054 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("8d522a87a80f6f36a9599b3158b73a2b")]
+    public PuzzleResult Solve(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var p1WinCount = 0;
@@ -21,7 +22,7 @@ public class Euler054 : EulerPuzzle
                 p1WinCount++;
         }
 
-        return new PuzzleResult(p1WinCount, "8d522a87a80f6f36a9599b3158b73a2b");
+        return new PuzzleResult(p1WinCount);
     }
 
     private class Card(char suit, char value)

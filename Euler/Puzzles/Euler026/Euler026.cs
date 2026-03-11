@@ -8,10 +8,11 @@ namespace Pzl.Euler.Puzzles.Euler026;
 [Comment("My original solution involved regex and is left as the RunSlow method. At least I learned something!")]
 public class Euler026 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("dbf66eed8ad4924ee0ac82e9f5354934")]
+    public PuzzleResult Solve()
     {
         var result = Run(999);
-        return new PuzzleResult(result, "dbf66eed8ad4924ee0ac82e9f5354934");
+        return new PuzzleResult(result);
     }
 
     public int Run(int maxDivisor)

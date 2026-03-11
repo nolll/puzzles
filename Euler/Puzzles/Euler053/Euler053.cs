@@ -7,7 +7,8 @@ namespace Pzl.Euler.Puzzles.Euler053;
 [Name("Combinatoric Selections")]
 public class Euler053 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("afc3b71561c7dde3bc566dc3985992bf")]
+    public PuzzleResult Solve()
     {
         var count = 0;
         
@@ -25,6 +26,6 @@ public class Euler053 : EulerPuzzle
             }
         }
         
-        return new PuzzleResult(count, "afc3b71561c7dde3bc566dc3985992bf");
+        return new PuzzleResult(count);
     }
 }

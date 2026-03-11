@@ -7,7 +7,8 @@ namespace Pzl.Euler.Puzzles.Euler041;
 [Name("Pandigital Prime")]
 public class Euler041 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("6aecd31e595c9172b15112c8ef913306")]
+    public PuzzleResult Solve()
     {
         var largest = 0L;
         for (var x = 9; x >= 1; x--)
@@ -26,6 +27,6 @@ public class Euler041 : EulerPuzzle
                 break;
         }
         
-        return new PuzzleResult(largest, "6aecd31e595c9172b15112c8ef913306");
+        return new PuzzleResult(largest);
     }
 }

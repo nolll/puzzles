@@ -12,7 +12,7 @@ public class Euler018Tests
                                 8 5 9 3
                                 """;
         
-        Sut.Run(input).Answer.Should().Be("23");
+        Sut.Solve(input).Answer.Should().Be("23");
     }
 
     private static Euler018 Sut => new();

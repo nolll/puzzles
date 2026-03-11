@@ -9,14 +9,15 @@ public class Euler059 : EulerPuzzle
 {
     private const string Chars = "abcdefghijklmnopqrstuvwxyz";
     
-    public PuzzleResult Run(string input)
+    [Puzzle("d9dbe56c9710bdd032f5e12c46940879")]
+    public PuzzleResult Solve(string input)
     {
         var keys = GenerateKeys();
         var encryptedText = ParseEncryptedText(input);
         var decryptedText = BruteForceDecrypt(keys, encryptedText);
         var asciiSum = decryptedText.Select(o => (int)o).Sum();
         
-        return new PuzzleResult(asciiSum, "d9dbe56c9710bdd032f5e12c46940879");
+        return new PuzzleResult(asciiSum);
     }
 
     private static string ParseEncryptedText(string input) => string.Join("", input.Split(",")

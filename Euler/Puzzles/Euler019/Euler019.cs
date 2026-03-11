@@ -5,12 +5,13 @@ namespace Pzl.Euler.Puzzles.Euler019;
 [Name("Counting Sundays")]
 public class Euler019 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("67c16f14538a051c5a6d1a2508e38851")]
+    public PuzzleResult Solve()
     {
         var startDate = DateTime.Parse("1901-01-01");
         var endDate = DateTime.Parse("2000-12-31");
         var result = Run(startDate, endDate);
-        return new PuzzleResult(result, "67c16f14538a051c5a6d1a2508e38851");
+        return new PuzzleResult(result);
     }
 
     public int Run(DateTime startDate, DateTime endDate)

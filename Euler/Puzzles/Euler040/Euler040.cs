@@ -10,7 +10,8 @@ public class Euler040 : EulerPuzzle
     private const int MaxLength = 1_000_000;
     private const int StepMultiplier = 10;
 
-    public PuzzleResult Run()
+    [Puzzle("1e10a803d525ec160795a9bed9161106")]
+    public PuzzleResult Solve()
     {
         var sb = new StringBuilder();
         var i = Initial;
@@ -28,6 +29,6 @@ public class Euler040 : EulerPuzzle
 
         var product = numbers.Aggregate(1, (a, b) => a * b);
 
-        return new PuzzleResult(product, "1e10a803d525ec160795a9bed9161106");
+        return new PuzzleResult(product);
     }
 }

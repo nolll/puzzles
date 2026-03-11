@@ -7,7 +7,8 @@ public class Euler062 : EulerPuzzle
 {
     private const int SearchFor = 5;
     
-    public PuzzleResult Run()
+    [Puzzle("9ec99ac7e0cd756c60d4e894d6be9371")]
+    public PuzzleResult Solve()
     {
         var n = 1;
         var cubes = new Dictionary<string, List<long>>();
@@ -27,7 +28,6 @@ public class Euler062 : EulerPuzzle
 
         var result = cubes.Values.MaxBy(o => o.Count)!.Min();
         
-        return new PuzzleResult(result, "9ec99ac7e0cd756c60d4e894d6be9371");
+        return new PuzzleResult(result);
     }
-
 }

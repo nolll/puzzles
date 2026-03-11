@@ -7,7 +7,8 @@ namespace Pzl.Euler.Puzzles.Euler056;
 [Name("Powerful Digit Sum")]
 public class Euler056 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("376414390a4252665a1c96ce1464a605")]
+    public PuzzleResult Solve()
     {
         const int limit = 100;
         var best = 0;
@@ -21,6 +22,6 @@ public class Euler056 : EulerPuzzle
             }
         }
         
-        return new PuzzleResult(best, "376414390a4252665a1c96ce1464a605");
+        return new PuzzleResult(best);
     }
 }

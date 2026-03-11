@@ -8,7 +8,8 @@ public class Euler038 : EulerPuzzle
     private const int Limit = 10_000;
     private const int MaxLength = 9;
 
-    public PuzzleResult Run()
+    [Puzzle("257cb268ef4192a7317720ad9cdfe042")]
+    public PuzzleResult Solve()
     {
         var products = new List<long>();
         var n = 1;
@@ -20,7 +21,7 @@ public class Euler038 : EulerPuzzle
             n++;
         }
 
-        return new PuzzleResult(products.Max(), "257cb268ef4192a7317720ad9cdfe042");
+        return new PuzzleResult(products.Max());
     }
 
     public static long? GetConcatenatedProduct(int n)

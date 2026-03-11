@@ -6,11 +6,12 @@ namespace Pzl.Euler.Puzzles.Euler018;
 [Name("Maximum path sum I")]
 public class Euler018 : EulerPuzzle
 {
-    public PuzzleResult Run(string input)
+    [Puzzle("ac0ed37fe47b088e57246f49e0564317")]
+    public PuzzleResult Solve(string input)
     {
         var triangle = BuildTriangle(input);
         var sum = triangle.First().First().BestPath;
-        return new PuzzleResult(sum, "ac0ed37fe47b088e57246f49e0564317");
+        return new PuzzleResult(sum);
     }
 
     private static IEnumerable<List<TriangleNode>> BuildTriangle(string triangleString)

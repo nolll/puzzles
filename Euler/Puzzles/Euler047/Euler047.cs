@@ -7,7 +7,8 @@ namespace Pzl.Euler.Puzzles.Euler047;
 [Name("Distinct Primes Factors")]
 public class Euler047 : EulerPuzzle
 {
-    public PuzzleResult Run() => new(FindSeries(4), "eac3c019f679164d514795ae37eaa2c7");
+    [Puzzle("eac3c019f679164d514795ae37eaa2c7")]
+    public PuzzleResult Solve() => new(FindSeries(4));
 
     public int FindSeries(int searchFor)
     {

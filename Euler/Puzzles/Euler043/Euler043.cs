@@ -5,7 +5,8 @@ namespace Pzl.Euler.Puzzles.Euler043;
 [Name("Sub-string Divisibility")]
 public class Euler043 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("0700006fb08f1a62536c94a99b1e1adc")]
+    public PuzzleResult Solve()
     {
         var divisors = new[] { 2, 3, 5, 7, 11, 13, 17 };
         var remainingNumbers = Enumerable.Range(0, 10).ToList();
@@ -14,7 +15,7 @@ public class Euler043 : EulerPuzzle
             .Select(long.Parse)
             .ToList();
 
-        return new PuzzleResult(numbers.Sum(), "0700006fb08f1a62536c94a99b1e1adc");
+        return new PuzzleResult(numbers.Sum());
     }
 
     private static List<string> FindNumbers(string s, List<int> remainingNumbers, int[] divisors)

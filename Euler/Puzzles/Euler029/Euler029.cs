@@ -6,10 +6,11 @@ namespace Pzl.Euler.Puzzles.Euler029;
 [Name("Distinct powers")]
 public class Euler029 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("b83681bf81eb63901be2e8b5b1569c45")]
+    public PuzzleResult Solve()
     {
         var result = Run(100);
-        return new PuzzleResult(result, "b83681bf81eb63901be2e8b5b1569c45");
+        return new PuzzleResult(result);
     }
 
     public int Run(int limit)

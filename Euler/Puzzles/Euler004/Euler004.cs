@@ -5,10 +5,11 @@ namespace Pzl.Euler.Puzzles.Euler004;
 [Name("Largest palindrome product")]
 public class Euler004 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("bf66c93b5263ee5be1d362b688a9a581")]
+    public PuzzleResult Solve()
     {
         var largestPalindrome = Run(100, 999);
-        return new PuzzleResult(largestPalindrome, "bf66c93b5263ee5be1d362b688a9a581");
+        return new PuzzleResult(largestPalindrome);
     }
     
     public int Run(int minFactor, int maxFactor)

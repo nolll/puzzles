@@ -5,10 +5,11 @@ namespace Pzl.Euler.Puzzles.Euler008;
 [Name("Largest product in a series")]
 public class Euler008 : EulerPuzzle
 {
-    public PuzzleResult Run()
+    [Puzzle("aa2c16e42ce883b208743426f74df8df")]
+    public PuzzleResult Solve()
     {
         var largestProduct = Run(13);
-        return new PuzzleResult(largestProduct, "aa2c16e42ce883b208743426f74df8df");
+        return new PuzzleResult(largestProduct);
     }
         
     public long Run(long digitCount)

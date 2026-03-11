@@ -7,14 +7,14 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202413;
 [Name("Never Gonna Let You Down")]
 public class Ece202413 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(Solve(input), "cc8e51053c4445ee974c4672602452ae");
+    [Puzzle("cc8e51053c4445ee974c4672602452ae")]
+    public PuzzleResult Part1(string input) => new(Solve(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(Solve(input), "a66cce437d7531d58ae98d0084ae5e9d");
+    [Puzzle("a66cce437d7531d58ae98d0084ae5e9d")]
+    public PuzzleResult Part2(string input) => new(Solve(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part3(string input) => new(Solve(input), "3bebcd17eed852e6918bf8d5eae753cb");
+    [Puzzle("3bebcd17eed852e6918bf8d5eae753cb")]
+    public PuzzleResult Part3(string input) => new(Solve(input));
 
     private static int Solve(string input)
     {

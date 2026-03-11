@@ -7,25 +7,25 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202504;
 [Name("Teeth of the Wind")]
 public class Ece202504 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("eb41f6c9a8921d8fcdff38044b3bfe9d")]
     public PuzzleResult Part1(string input)
     {
         var numbers = Numbers.IntsFromString(input).ToArray();
         var result = numbers.First() * 2025 / numbers.Last();
         
-        return new PuzzleResult(result, "eb41f6c9a8921d8fcdff38044b3bfe9d");
+        return new PuzzleResult(result);
     }
 
-    [Puzzle("")]
+    [Puzzle("0257539e71c9dbe0dd69df3f4d79eb4f")]
     public PuzzleResult Part2(string input)
     {
         var numbers = Numbers.IntsFromString(input).ToArray();
         var result = (long)Math.Ceiling((double)numbers.Last() * 10_000_000_000_000 / numbers.First());
         
-        return new PuzzleResult(result, "0257539e71c9dbe0dd69df3f4d79eb4f");
+        return new PuzzleResult(result);
     }
 
-    [Puzzle("")]
+    [Puzzle("92e07b9860871133c085a70db37ea249")]
     public PuzzleResult Part3(string input)
     {
         var lines = input.Split(LineBreaks.Single);
@@ -37,6 +37,6 @@ public class Ece202504 : EverybodyEventPuzzle
             .Aggregate(first, (current, m) => current * m);
         var result = 100 * multiplier / last;
         
-        return new PuzzleResult(result, "92e07b9860871133c085a70db37ea249");
+        return new PuzzleResult(result);
     }
 }

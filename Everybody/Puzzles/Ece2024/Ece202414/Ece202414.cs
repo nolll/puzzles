@@ -9,7 +9,7 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202414;
 [IsSlow]
 public class Ece202414 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("4d7ad96354959558ed0b95fa70be777c")]
     public PuzzleResult Part1(string input)
     {
         var y = 0;
@@ -30,10 +30,10 @@ public class Ece202414 : EverybodyEventPuzzle
             maxy = Math.Max(y, maxy);
         }
         
-        return new PuzzleResult(maxy, "4d7ad96354959558ed0b95fa70be777c");
+        return new PuzzleResult(maxy);
     }
 
-    [Puzzle("")]
+    [Puzzle("1ceb1e594b0f47c1b64f940bb505f9ce")]
     public PuzzleResult Part2(string input)
     {
         var seen = new HashSet<(int x, int y, int z)>();
@@ -60,10 +60,10 @@ public class Ece202414 : EverybodyEventPuzzle
 
         var result = seen.Count;
         
-        return new PuzzleResult(result, "1ceb1e594b0f47c1b64f940bb505f9ce");
+        return new PuzzleResult(result);
     }
 
-    [Puzzle("")]
+    [Puzzle("55d3e09b26d9f60ed08c206a7505561f")]
     public PuzzleResult Part3(string input)
     {
         var leaves = new HashSet<(int x, int y, int z)>();
@@ -108,7 +108,7 @@ public class Ece202414 : EverybodyEventPuzzle
             best = Math.Min(best, sum);
         }
         
-        return new PuzzleResult(best, "55d3e09b26d9f60ed08c206a7505561f");
+        return new PuzzleResult(best);
     }
 
     private static bool IsTrunk(Dictionary<char, int> pos) => pos['x'] == 0 && pos['z'] == 0;

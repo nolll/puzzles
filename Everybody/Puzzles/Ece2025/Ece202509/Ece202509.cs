@@ -8,23 +8,23 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202509;
 [Name("Encoded in the Scales")]
 public class Ece202509 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("02cb5b8f30a69972766eb4d6122b6667")]
     public PuzzleResult Part1(string input)
     {
         var totalScore = FindChildren(ParseDucks(input)).Sum(o => o.Score);
 
-        return new PuzzleResult(totalScore, "02cb5b8f30a69972766eb4d6122b6667");
+        return new PuzzleResult(totalScore);
     }
 
-    [Puzzle("")]
+    [Puzzle("f1dada234df0c5304571179c87ccfa7c")]
     public PuzzleResult Part2(string input)
     {
         var totalScore = FindChildren(ParseDucks(input)).Sum(o => o.Score);
         
-        return new PuzzleResult(totalScore, "f1dada234df0c5304571179c87ccfa7c");
+        return new PuzzleResult(totalScore);
     }
 
-    [Puzzle("")]
+    [Puzzle("1b1c63b79876197254b3c527798a8269")]
     public PuzzleResult Part3(string input)
     {
         var ducks = ParseDucks(input);
@@ -75,7 +75,7 @@ public class Ece202509 : EverybodyEventPuzzle
         var best = families.MaxBy(o => o.Count);
         var score = best?.Sum(o => o.Id) ?? 0;
         
-        return new PuzzleResult(score, "1b1c63b79876197254b3c527798a8269");
+        return new PuzzleResult(score);
     }
     
     private static Duck[] ParseDucks(string input) => 

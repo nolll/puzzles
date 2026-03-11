@@ -6,14 +6,14 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202404;
 [Name("Royal Smith's Puzzle")]
 public class Ece202404 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(RunPart1And2(input), "eabb36cc8d28867fc0f0d332eda02eb3");
+    [Puzzle("eabb36cc8d28867fc0f0d332eda02eb3")]
+    public PuzzleResult Part1(string input) => new(RunPart1And2(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(RunPart1And2(input), "0a37c73499ec6bdb6af25453b7099e38");
+    [Puzzle("0a37c73499ec6bdb6af25453b7099e38")]
+    public PuzzleResult Part2(string input) => new(RunPart1And2(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part3(string input) => new(SolvePart3(input), "17d992743f071f1de07d587e4026af89");
+    [Puzzle("17d992743f071f1de07d587e4026af89")]
+    public PuzzleResult Part3(string input) => new(SolvePart3(input));
 
     private static int RunPart1And2(string input)
     {

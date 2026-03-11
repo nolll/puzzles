@@ -8,11 +8,11 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202412;
 [Name("Desert Shower")]
 public class Ece202412 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(Part1And2(input), "7266a18eef65c4745c844164ef32f61d");
+    [Puzzle("7266a18eef65c4745c844164ef32f61d")]
+    public PuzzleResult Part1(string input) => new(Part1And2(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(Part1And2(input), "e6468a990e5dfdb3b572e72c4c24ed5b");
+    [Puzzle("e6468a990e5dfdb3b572e72c4c24ed5b")]
+    public PuzzleResult Part2(string input) => new(Part1And2(input));
 
     private int Part1And2(string input)
     {
@@ -95,7 +95,7 @@ public class Ece202412 : EverybodyEventPuzzle
         return sum;
     }
 
-    [Puzzle("")]
+    [Puzzle("10d32566118d059169a691eef70e6b1e")]
     public PuzzleResult Part3(string input)
     {
         var meteors = input.Split(LineBreaks.Single)
@@ -147,7 +147,7 @@ public class Ece202412 : EverybodyEventPuzzle
 
         var sum = bestList.Sum(o => o.power);
 
-        return new PuzzleResult(sum, "10d32566118d059169a691eef70e6b1e");
+        return new PuzzleResult(sum);
     }
 
     private List<((int x, int y) coord, int time, int power)> SimulateTrajectories(

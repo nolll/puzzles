@@ -6,11 +6,11 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202418;
 [Name("The Ring")]
 public class Ece202418 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(Part1And2(input), "58a8744a3bef1c6dcbf739d171b22ea5");
+    [Puzzle("58a8744a3bef1c6dcbf739d171b22ea5")]
+    public PuzzleResult Part1(string input) => new(Part1And2(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(Part1And2(input), "e709ebaa41c12566e0524c796fac3615");
+    [Puzzle("e709ebaa41c12566e0524c796fac3615")]
+    public PuzzleResult Part2(string input) => new(Part1And2(input));
 
     private int Part1And2(string input)
     {
@@ -49,7 +49,7 @@ public class Ece202418 : EverybodyEventPuzzle
         return time;
     }
 
-    [Puzzle("")]
+    [Puzzle("393186167939da99eb22eccf3da6b31b")]
     public PuzzleResult Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -93,6 +93,6 @@ public class Ece202418 : EverybodyEventPuzzle
 
         var best = hits.Values.Select(o => o.Values.Sum()).Min();
 
-        return new PuzzleResult(best, "393186167939da99eb22eccf3da6b31b");
+        return new PuzzleResult(best);
     }
 }

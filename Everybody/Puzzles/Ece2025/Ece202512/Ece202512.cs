@@ -8,26 +8,26 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202512;
 [IsSlow]
 public class Ece202512 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("f81b4b34e7f317b195c2bfb97a67f3de")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
         var seen = Destroy(grid, new Coord(grid.XMin, grid.YMin));
         
-        return new PuzzleResult(seen.Count, "f81b4b34e7f317b195c2bfb97a67f3de");
+        return new PuzzleResult(seen.Count);
     }
 
-    [Puzzle("")]
+    [Puzzle("12da343d20059e681858ba5ec807ec10")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
         var seen = Destroy(grid, new Coord(grid.XMin, grid.YMin));
         seen.UnionWith(Destroy(grid, new Coord(grid.XMax, grid.YMax)));
         
-        return new PuzzleResult(seen.Count, "12da343d20059e681858ba5ec807ec10");
+        return new PuzzleResult(seen.Count);
     }
 
-    [Puzzle("")]
+    [Puzzle("757124c4b4c1a7a826289c980216e1ed")]
     public PuzzleResult Part3(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
@@ -37,7 +37,7 @@ public class Ece202512 : EverybodyEventPuzzle
         foreach (var _ in Enumerable.Range(0, 3)) 
             total.UnionWith(allResults.MaxBy(o => o.Except(total).Count())!);
         
-        return new PuzzleResult(total.Count, "757124c4b4c1a7a826289c980216e1ed");
+        return new PuzzleResult(total.Count);
     }
 
     private static IEnumerable<HashSet<Coord>> FindAll(Grid<int> grid) => 

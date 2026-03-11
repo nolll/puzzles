@@ -8,24 +8,24 @@ public class Ece202416 : EverybodyEventPuzzle
 {
     private readonly int[] _diffs = [-1, 0, 1];
 
-    [Puzzle("")]
+    [Puzzle("1a56d927da3da48fad02fb78b95a91cb")]
     public PuzzleResult Part1(string input)
     {
         var (increments, wheels) = Parse(input);
         var cats = wheels.Select((wheel, i) => wheel[100 * increments[i] % wheel.Length]).ToList();
         var result = string.Join(" ", cats);
         
-        return new PuzzleResult(result, "1a56d927da3da48fad02fb78b95a91cb");
+        return new PuzzleResult(result);
     }
 
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(Part2(input, 202420242024), "8ba1d5c403e6bf5c0aad202e81e5e515");
+    [Puzzle("8ba1d5c403e6bf5c0aad202e81e5e515")]
+    public PuzzleResult Part2(string input) => new(Part2(input, 202420242024));
 
-    [Puzzle("")]
+    [Puzzle("912149637877bbdd3f19be24133372ed")]
     public PuzzleResult Part3(string input)
     {
         var (min, max) = Part3(input, 256);
-        return new PuzzleResult($"{max} {min}", "912149637877bbdd3f19be24133372ed");
+        return new PuzzleResult($"{max} {min}");
     }
     
     public long Part2(string input, long target)

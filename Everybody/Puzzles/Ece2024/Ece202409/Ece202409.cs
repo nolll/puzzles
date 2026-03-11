@@ -6,7 +6,7 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202409;
 [Name("Sparkling Bugs")]
 public class Ece202409 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("dffa64bee7ea0c0ad66724de7afe7c08")]
     public PuzzleResult Part1(string input)
     {
         int[] stamps = [1, 3, 5, 10];
@@ -14,10 +14,10 @@ public class Ece202409 : EverybodyEventPuzzle
         var precomputedCounts = PrecomputeCounts(stamps, balls.Max());
         var result = balls.Sum(o => precomputedCounts[o]);
         
-        return new PuzzleResult(result, "dffa64bee7ea0c0ad66724de7afe7c08");
+        return new PuzzleResult(result);
     }
 
-    [Puzzle("")]
+    [Puzzle("6032109447891782512325cb9251f9e2")]
     public PuzzleResult Part2(string input)
     {
         int[] stamps = [1, 3, 5, 10, 15, 16, 20, 24, 25, 30];
@@ -25,10 +25,10 @@ public class Ece202409 : EverybodyEventPuzzle
         var precomputedCounts = PrecomputeCounts(stamps, balls.Max());
         var result = balls.Sum(o => precomputedCounts[o]);
 
-        return new PuzzleResult(result, "6032109447891782512325cb9251f9e2");
+        return new PuzzleResult(result);
     }
     
-    [Puzzle("")]
+    [Puzzle("fb766ccc85f0b992daa8d54a92c61b5c")]
     public PuzzleResult Part3(string input)
     {
         const int rangeSize = 100;
@@ -56,7 +56,7 @@ public class Ece202409 : EverybodyEventPuzzle
             total += best;
         }
 
-        return new PuzzleResult(total, "fb766ccc85f0b992daa8d54a92c61b5c");
+        return new PuzzleResult(total);
     }
 
     private static int[] ParseBalls(string input) => 

@@ -8,7 +8,7 @@ public class Ece202410 : EverybodyEventPuzzle
 {
     private const int SegmentSize = 8;
 
-    [Puzzle("")]
+    [Puzzle("b62fc815678f7269aae352e26d1c3600")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -16,10 +16,10 @@ public class Ece202410 : EverybodyEventPuzzle
         FillSymbols(grid, offset);
         var word = ReadWord(grid, offset);
         
-        return new PuzzleResult(word, "b62fc815678f7269aae352e26d1c3600");
+        return new PuzzleResult(word);
     }
     
-    [Puzzle("")]
+    [Puzzle("ca8e2900fb3be19c6e0fbea1fa76eff6")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -31,10 +31,10 @@ public class Ece202410 : EverybodyEventPuzzle
         }
 
         var result = offsets.Select(offset => ReadWord(grid, offset)).ToList().Sum(GetScore);
-        return new PuzzleResult(result, "ca8e2900fb3be19c6e0fbea1fa76eff6");
+        return new PuzzleResult(result);
     }
     
-    [Puzzle("")]
+    [Puzzle("97cbe83a7e216984c51535fb553cf098")]
     public PuzzleResult Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -57,7 +57,7 @@ public class Ece202410 : EverybodyEventPuzzle
             .Where(o => !o.Contains('.'))
             .Sum(GetScore);
         
-        return new PuzzleResult(result, "97cbe83a7e216984c51535fb553cf098");
+        return new PuzzleResult(result);
     }
 
     public static long GetScore(string word)

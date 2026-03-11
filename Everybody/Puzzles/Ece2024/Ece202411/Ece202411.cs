@@ -6,13 +6,13 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202411;
 [Name("Biological Warfare")]
 public class Ece202411 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(Solve(input, "A", 4), "cc639f849dfc284544c7bf69de29eeb5");
+    [Puzzle("cc639f849dfc284544c7bf69de29eeb5")]
+    public PuzzleResult Part1(string input) => new(Solve(input, "A", 4));
     
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(Solve(input, "Z", 10), "e3f350e482453f5bf53e0c29f66820a6");
+    [Puzzle("e3f350e482453f5bf53e0c29f66820a6")]
+    public PuzzleResult Part2(string input) => new(Solve(input, "Z", 10));
 
-    [Puzzle("")]
+    [Puzzle("aa7535c76fba2d10eeeabdf3d5479c7a")]
     public PuzzleResult Part3(string input)
     {
         var conversions = ParseConversions(input);
@@ -20,7 +20,7 @@ public class Ece202411 : EverybodyEventPuzzle
         var results = termites.Select(termite => Solve(conversions, termite, 20)).ToList();
         var diff = results.Max() - results.Min();
         
-        return new PuzzleResult(diff, "aa7535c76fba2d10eeeabdf3d5479c7a");
+        return new PuzzleResult(diff);
     }
 
     public long Solve(string input, string initalTermite, long days) => 

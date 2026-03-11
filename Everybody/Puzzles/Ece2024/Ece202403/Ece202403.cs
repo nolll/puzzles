@@ -12,25 +12,25 @@ public class Ece202403 : EverybodyEventPuzzle
         Diagonal
     }
     
-    [Puzzle("")]
+    [Puzzle("f8809d3064586fdc87c819e0caa76093")]
     public PuzzleResult Part1(string input)
     {
         var result = Run(input, SlopeRule.Orthogonal);
-        return new PuzzleResult(result, "f8809d3064586fdc87c819e0caa76093");
+        return new PuzzleResult(result);
     }
 
-    [Puzzle("")]
+    [Puzzle("d6f8a8bfba935c69e51e8d3249dc7264")]
     public PuzzleResult Part2(string input)
     {
         var result = Run(input, SlopeRule.Orthogonal);
-        return new PuzzleResult(result, "d6f8a8bfba935c69e51e8d3249dc7264");
+        return new PuzzleResult(result);
     }
 
-    [Puzzle("")]
+    [Puzzle("b37fb7a9a2f7e97880544e19b5c4e323")]
     public PuzzleResult Part3(string input)
     {
         var result = Run(input, SlopeRule.Diagonal);
-        return new PuzzleResult(result, "b37fb7a9a2f7e97880544e19b5c4e323");
+        return new PuzzleResult(result);
     }
 
     private static int Run(string input, SlopeRule slopeRule)

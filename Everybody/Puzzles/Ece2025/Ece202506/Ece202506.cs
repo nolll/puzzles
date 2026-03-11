@@ -8,7 +8,7 @@ public class Ece202506 : EverybodyEventPuzzle
     private const int Repeats = 1000;
     private const int Limit = 1000;
     
-    [Puzzle("")]
+    [Puzzle("b25b0bb41622a516674c2bc66a9fa6cc")]
     public PuzzleResult Part1(string input)
     {
         var pairCount = 0;
@@ -21,10 +21,10 @@ public class Ece202506 : EverybodyEventPuzzle
                 pairCount += mentorCount;
         }
         
-        return new PuzzleResult(pairCount, "b25b0bb41622a516674c2bc66a9fa6cc");
+        return new PuzzleResult(pairCount);
     }
 
-    [Puzzle("")]
+    [Puzzle("1ed970fa12bad936e8d2adb6440fc930")]
     public PuzzleResult Part2(string input)
     {
         var pairCounts = new Dictionary<char, int>();
@@ -45,10 +45,10 @@ public class Ece202506 : EverybodyEventPuzzle
             }
         }
         
-        return new PuzzleResult(pairCounts.Values.Sum(), "1ed970fa12bad936e8d2adb6440fc930");
+        return new PuzzleResult(pairCounts.Values.Sum());
     }
 
-    [Puzzle("")]
+    [Puzzle("c8488eedc9facc7555706017e12be89a")]
     public PuzzleResult Part3(string input)
     {
         var segmentLength = (int)Math.Ceiling((double)Limit / input.Length) * input.Length;
@@ -73,7 +73,7 @@ public class Ece202506 : EverybodyEventPuzzle
 
         var pairCount = p1Count + p2Count * (Repeats - repeatsInSegment * 2) + p3Count;
         
-        return new PuzzleResult(pairCount, "c8488eedc9facc7555706017e12be89a");
+        return new PuzzleResult(pairCount);
     }
 
     private static int MentorCountInRange(string tents, Dictionary<char, List<int>> indexes, int startIndex, int endIndex)

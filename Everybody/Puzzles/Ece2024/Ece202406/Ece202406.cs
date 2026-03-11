@@ -6,14 +6,14 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202406;
 [Name("The Tree of Titans")]
 public class Ece202406 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(SolvePart1(input), "1e1f24ab14407ffbaf4f6b9143384384");
+    [Puzzle("1e1f24ab14407ffbaf4f6b9143384384")]
+    public PuzzleResult Part1(string input) => new(SolvePart1(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(Part2And3(input), "aaacecff7b5d20d54ea2d96c4797166e");
+    [Puzzle("aaacecff7b5d20d54ea2d96c4797166e")]
+    public PuzzleResult Part2(string input) => new(Part2And3(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part3(string input) => new(Part2And3(input), "c3544a49e37c3dfedc6dec99596402da");
+    [Puzzle("c3544a49e37c3dfedc6dec99596402da")]
+    public PuzzleResult Part3(string input) => new(Part2And3(input));
 
     private static string SolvePart1(string input) => string.Join("", Run(input));
     private static string Part2And3(string input) => string.Join("", Run(input).Select(o => o[0]));

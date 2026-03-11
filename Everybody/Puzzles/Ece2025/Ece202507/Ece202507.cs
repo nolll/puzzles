@@ -9,16 +9,16 @@ public class Ece202507 : EverybodyEventPuzzle
     private const int MinLength = 7;
     private const int MaxLength = 11;
 
-    [Puzzle("")]
+    [Puzzle("f58cf5d880834e0e0823d1891e8b7a9e")]
     public PuzzleResult Part1(string input)
     {
         var (names, rules) = Parse(input);
         var name = names.First(o => IsValidName(o, rules));
         
-        return new PuzzleResult(name, "f58cf5d880834e0e0823d1891e8b7a9e");
+        return new PuzzleResult(name);
     }
 
-    [Puzzle("")]
+    [Puzzle("8a08f6570e988d7a1b4c17645d937b1f")]
     public PuzzleResult Part2(string input)
     {
         var (names, rules) = Parse(input);
@@ -30,10 +30,10 @@ public class Ece202507 : EverybodyEventPuzzle
                 sum += i + 1;
         }
         
-        return new PuzzleResult(sum, "8a08f6570e988d7a1b4c17645d937b1f");
+        return new PuzzleResult(sum);
     }
 
-    [Puzzle("")]
+    [Puzzle("cabe960d882be6a00b754e46052381df")]
     public PuzzleResult Part3(string input)
     {
         var (prefixes, rules) = Parse(input);
@@ -41,7 +41,7 @@ public class Ece202507 : EverybodyEventPuzzle
             .Where(prefix => !prefixes.Any(o => o != prefix && prefix.StartsWith(o)))
             .Sum(o => GenerateNames(o.Last(), rules, o.Length, []));
 
-        return new PuzzleResult(count, "cabe960d882be6a00b754e46052381df");
+        return new PuzzleResult(count);
     }
 
     private static int GenerateNames(char c, Dictionary<char, char[]> rules, int length, Dictionary<(char, int), int> cache)

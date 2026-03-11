@@ -7,7 +7,7 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202407;
 [Name("Not Fast but Furious")]
 public class Ece202407 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("05a999b2ab72fff505423f40ee4af56b")]
     public PuzzleResult Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
@@ -22,14 +22,14 @@ public class Ece202407 : EverybodyEventPuzzle
 
         var result = string.Join("", knights.OrderByDescending(o => o.Score).Select(o => o.Name));
         
-        return new PuzzleResult(result, "05a999b2ab72fff505423f40ee4af56b");
+        return new PuzzleResult(result);
     }
 
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(SolvePart2(Part2Track, input), "f315ce3865ed329f4eee3ec0d64bb032");
+    [Puzzle("f315ce3865ed329f4eee3ec0d64bb032")]
+    public PuzzleResult Part2(string input) => new(SolvePart2(Part2Track, input));
     
-    [Puzzle("")]
-    public PuzzleResult Part3(string input) => new(SolvePart3(Part3Track, input), "2945d46a4a840d740dfe233d50659d0c");
+    [Puzzle("2945d46a4a840d740dfe233d50659d0c")]
+    public PuzzleResult Part3(string input) => new(SolvePart3(Part3Track, input));
 
     public string SolvePart2(string trackString, string input)
     {

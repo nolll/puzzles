@@ -6,14 +6,14 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202513;
 [Name("Unlocking the Mountain")]
 public class Ece202513 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(Solve(input, 2025), "18ccf03875ad98259b4de347203fb45a");
+    [Puzzle("18ccf03875ad98259b4de347203fb45a")]
+    public PuzzleResult Part1(string input) => new(Solve(input, 2025));
     
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(Solve(input, 20252025), "120dc70bb2265cf1dd44b351a776f4eb");
+    [Puzzle("120dc70bb2265cf1dd44b351a776f4eb")]
+    public PuzzleResult Part2(string input) => new(Solve(input, 20252025));
     
-    [Puzzle("")]
-    public PuzzleResult Part3(string input) => new(Solve(input, 202520252025), "ad5947829c2a32c895e2406a54daa389");
+    [Puzzle("ad5947829c2a32c895e2406a54daa389")]
+    public PuzzleResult Part3(string input) => new(Solve(input, 202520252025));
 
     private static int Solve(string input, long steps)
     {

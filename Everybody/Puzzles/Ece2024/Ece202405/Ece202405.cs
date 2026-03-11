@@ -6,14 +6,14 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202405;
 [Name("Pseudo-Random Clap Dance")]
 public class Ece202405 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(RunPart1(input, 10), "950b4825d76ba062befffe8cb9a0be2c");
+    [Puzzle("950b4825d76ba062befffe8cb9a0be2c")]
+    public PuzzleResult Part1(string input) => new(RunPart1(input, 10));
     
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(RunPart2(input, 2024), "6b4db5dbf70faa6e08d4a645d6d2b4cc");
+    [Puzzle("6b4db5dbf70faa6e08d4a645d6d2b4cc")]
+    public PuzzleResult Part2(string input) => new(RunPart2(input, 2024));
     
-    [Puzzle("")]
-    public PuzzleResult Part3(string input) => new(ParseDance(input).DanceForever(), "5789564a5b01f519e8eddcfc0f7aa6a2");
+    [Puzzle("5789564a5b01f519e8eddcfc0f7aa6a2")]
+    public PuzzleResult Part3(string input) => new(ParseDance(input).DanceForever());
 
     public string RunPart1(string input, int rounds)
     {

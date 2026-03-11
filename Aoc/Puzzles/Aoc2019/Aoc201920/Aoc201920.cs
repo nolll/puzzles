@@ -6,16 +6,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201920;
 public class Aoc201920 : AocPuzzle
 {
     [Puzzle("58adb5666e2e47bbe945955687e3e3c6")]
-    public PuzzleResult Part1(string input)
-    {
-        var mazeSolver = new DonutMazeSolver(input);
-        return new PuzzleResult(mazeSolver.ShortestStepCount);
-    }
+    public int Part1(string input) => new DonutMazeSolver(input).ShortestStepCount;
 
     [Puzzle("01cf53a29e92f3092e973f5c97ac5595")]
-    public PuzzleResult Part2(string input)
-    {
-        var recursiveDonutMazeSolver = new RecursiveDonutMazeSolver(input);
-        return new PuzzleResult(recursiveDonutMazeSolver.ShortestStepCount);
-    }
+    public int Part2(string input) => new RecursiveDonutMazeSolver(input).ShortestStepCount;
 }

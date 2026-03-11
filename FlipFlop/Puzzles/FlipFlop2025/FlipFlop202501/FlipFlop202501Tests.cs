@@ -11,13 +11,13 @@ public class FlipFlop202501Tests
                                  """;
 
     [Fact]
-    public void Part1() => Sut.Part1(Input).Answer.Should().Be("24");
+    public void Part1() => Sut.Part1(Input).Should().Be(24);
 
     [Fact]
-    public void Part2() => Sut.Part2(Input).Answer.Should().Be("16");
+    public void Part2() => Sut.Part2(Input).Should().Be(16);
 
     [Fact]
-    public void Part3() => Sut.Part3(Input).Answer.Should().Be("19");
+    public void Part3() => Sut.Part3(Input).Should().Be(19);
 
     private static FlipFlop202501 Sut => new();
 }

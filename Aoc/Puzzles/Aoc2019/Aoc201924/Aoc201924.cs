@@ -15,11 +15,11 @@ public class Aoc201924 : AocPuzzle
     }
 
     [Puzzle("4309fbaca8e02ca8066a8fa6b49f9b2b")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var recursiveSimulator = new RecursiveBugLifeSimulator(input);
         recursiveSimulator.Run(200);
 
-        return new PuzzleResult(recursiveSimulator.BugCount);
+        return recursiveSimulator.BugCount;
     }
 }

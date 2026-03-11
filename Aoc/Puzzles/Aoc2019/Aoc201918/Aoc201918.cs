@@ -8,20 +8,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201918;
 public class Aoc201918 : AocPuzzle
 {
     [Puzzle("0a9fd52dc2a8f923fd89261df9e58465")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var keyCollector = new KeyCollector(input);
         keyCollector.Run();
 
-        return new PuzzleResult(keyCollector.ShortestPath);
+        return keyCollector.ShortestPath;
     }
 
     [Puzzle("f8dde84b510c969a3840ba944d60ddac")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var keyCollector = new KeyCollector(input, true);
         keyCollector.Run();
 
-        return new PuzzleResult(keyCollector.ShortestPath);
+        return keyCollector.ShortestPath;
     }
 }

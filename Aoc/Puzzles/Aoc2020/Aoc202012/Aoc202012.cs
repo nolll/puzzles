@@ -6,18 +6,18 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202012;
 public class Aoc202012 : AocPuzzle
 {
     [Puzzle("c78da9d22889e3d4313249117e3752f4")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var system = new SimpleFerryNavigationSystem(input);
         system.Run();
-        return new PuzzleResult(system.DistanceTravelled);
+        return system.DistanceTravelled;
     }
 
     [Puzzle("c0c5befc741f65a1030078ab200ffe10")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var system = new WaypointFerryNavigationSystem(input);
         system.Run();
-        return new PuzzleResult(system.DistanceTravelled);
+        return system.DistanceTravelled;
     }
 }

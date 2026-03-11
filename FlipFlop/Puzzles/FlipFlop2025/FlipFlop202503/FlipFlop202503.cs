@@ -11,9 +11,8 @@ public class FlipFlop202503 : FlipFlopPuzzle
     [Puzzle("97a59e8e51b506fc2e1640cd479042d1")]
     public string Part1(string input)
     {
-        var lines = input.Split(LineBreaks.Single);
         var counts = new Dictionary<string, int>();
-        foreach (var line in lines)
+        foreach (var line in input.Split(LineBreaks.Single))
         {
             if (!counts.TryAdd(line, 1)) 
                 counts[line]++;
@@ -23,24 +22,10 @@ public class FlipFlop202503 : FlipFlopPuzzle
     }
 
     [Puzzle("f7c0b43b9ccea17bd677b165584ea494")]
-    public PuzzleResult Part2(string input)
-    {
-        var lines = input.Split(LineBreaks.Single);
-        var colors = lines.Select(GetColor);
-        var greenCount = colors.Count(o => o.Name == "green");
-        
-        return new PuzzleResult(greenCount);
-    }
+    public int Part2(string input) => input.Split(LineBreaks.Single).Select(GetColor).Count(o => o.Name == "green");
 
     [Puzzle("9b4c07da2c7aed1de44933ed08388508")]
-    public PuzzleResult Part3(string input)
-    {
-        var lines = input.Split(LineBreaks.Single);
-        var colors = lines.Select(GetColor);
-        var price = colors.Sum(o => o.Price);
-        
-        return new PuzzleResult(price);
-    }
+    public int Part3(string input) => input.Split(LineBreaks.Single).Select(GetColor).Sum(o => o.Price);
 
     private static Color GetColor(string line)
     {

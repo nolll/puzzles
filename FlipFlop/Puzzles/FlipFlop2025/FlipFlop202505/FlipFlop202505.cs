@@ -6,7 +6,7 @@ namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202505;
 public class FlipFlop202505 : FlipFlopPuzzle
 {
     [Puzzle("5abb4bbf3aabd7a9ebecda15d22947ca")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var (chars, tunnels) = Parse(input);
 
@@ -19,7 +19,7 @@ public class FlipFlop202505 : FlipFlopPuzzle
             steps += Math.Abs(first - last);
         }
         
-        return new PuzzleResult(steps);
+        return steps;
     }
 
     [Puzzle("68e4f28e3a2dc0c8cc1c3eabf161d53e")]
@@ -40,7 +40,7 @@ public class FlipFlop202505 : FlipFlopPuzzle
     }
 
     [Puzzle("36c49d43c6bb2d7a410d976dda77c3f2")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var (chars, tunnels) = Parse(input);
 
@@ -54,7 +54,7 @@ public class FlipFlop202505 : FlipFlopPuzzle
             steps += direction * Math.Abs(first - last);
         }
         
-        return new PuzzleResult(steps);
+        return steps;
     }
     
     private (char[] chars, Dictionary<char, (int first, int last)> tunnels) Parse(string input)

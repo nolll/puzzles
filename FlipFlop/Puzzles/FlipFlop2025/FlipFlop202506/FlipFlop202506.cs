@@ -14,21 +14,18 @@ public class FlipFlop202506 : FlipFlopPuzzle
     private const int FrameStart = GridSize / 4;
     private const int GridEnd = GridSize * 3 / 4;
     private const int PictureCount = 1000;
+    private const int Time = 100;
 
     [Puzzle("d0cfc435d1459e83bcc2be3046271a1a")]
-    public PuzzleResult Part1(string input)
-    {
-        var speeds = input.Split(LineBreaks.Single).Select(Numbers.IntsFromString).Select(o => new Coord(o[0], o[1]));
-        const int time = 100;
-        var birdsInFrame = speeds.Select(o => Move(o, time)).Where(IsInFrame);
-        
-        return new PuzzleResult(birdsInFrame.Count());
-    }
+    public int Part1(string input) => Parse(input)
+        .Select(o => Move(o, Time))
+        .Where(IsInFrame)
+        .Count();
 
     [Puzzle("6b4351b8336078bb7ea6ade68803e6d4")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
-        var speeds = input.Split(LineBreaks.Single).Select(Numbers.IntsFromString).Select(o => new Coord(o[0], o[1])).ToList();
+        var speeds = Parse(input).ToList();
         var birdCount = 0;
     
         for (var i = 1; i <= PictureCount; i++)
@@ -37,13 +34,13 @@ public class FlipFlop202506 : FlipFlopPuzzle
             birdCount += speeds.Select(o => Move(o, time)).Count(IsInFrame);
         }
         
-        return new PuzzleResult(birdCount);
+        return birdCount;
     }
-    
+
     [Puzzle("61dc24a9d639e326619bf87ce21094f7")]
     public long Part3(string input)
     {
-        var speeds = input.Split(LineBreaks.Single).Select(Numbers.IntsFromString).Select(o => new Coord(o[0], o[1])).ToList();
+        var speeds = Parse(input).ToList();
         var birdCount = 0L;
 
         for (var i = 1; i <= PictureCount; i++)
@@ -63,4 +60,8 @@ public class FlipFlop202506 : FlipFlopPuzzle
     }
 
     private static bool IsInFrame(Coord o) => o.X is > FrameStart and <= GridEnd && o.Y is > FrameStart and <= GridEnd;
+
+    private static IEnumerable<Coord> Parse(string input) => input.Split(LineBreaks.Single)
+        .Select(Numbers.IntsFromString)
+        .Select(o => new Coord(o[0], o[1]));
 }

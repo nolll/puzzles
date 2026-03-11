@@ -13,7 +13,7 @@ public class Ece202419Tests
                              W---<
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("WIN");
+        Sut.Part1(input).Should().Be("WIN");
     }
     
     [Fact]
@@ -27,7 +27,7 @@ public class Ece202419Tests
                              Whij<
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("WIN");
+        Sut.Part1(input).Should().Be("WIN");
     }
 
     [Fact]
@@ -44,7 +44,7 @@ public class Ece202419Tests
                              D.H........
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("VICTORY");
+        Sut.Part2(input).Should().Be("VICTORY");
     }
     
     private static Ece202419 Sut => new();

@@ -6,26 +6,26 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202516;
 [Name("Harmonics of Stone")]
 public class Ece202516 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("c43ffe414cd1f0d7024f9014c035703a")]
     public PuzzleResult Part1(string input)
     {
         var spell = Numbers.IntsFromString(input).ToList();
         var blockCount = CountRequiredBlocks(spell, 90);
 
-        return new PuzzleResult(blockCount, "c43ffe414cd1f0d7024f9014c035703a");
+        return new PuzzleResult(blockCount);
     }
 
-    [Puzzle("")]
+    [Puzzle("d543f8d5b11ac6d4e21685cd8674fc6f")]
     public PuzzleResult Part2(string input)
     {
         var spell = GetSpell(input);
         var product = spell.Aggregate(1L, (current, b) => current * b);
 
-        return new PuzzleResult(product, "d543f8d5b11ac6d4e21685cd8674fc6f");
+        return new PuzzleResult(product);
     }
 
-    [Puzzle("")]
-    public PuzzleResult Part3(string input) => new(Part3(input, 202_520_252_025_000), "b91ced40f2ab99acef778dbb6b61aeee");
+    [Puzzle("b91ced40f2ab99acef778dbb6b61aeee")]
+    public PuzzleResult Part3(string input) => new(Part3(input, 202_520_252_025_000));
 
     public long Part3(string input, long blocksAvailable) => BinarySearch(GetSpell(input), blocksAvailable);
 

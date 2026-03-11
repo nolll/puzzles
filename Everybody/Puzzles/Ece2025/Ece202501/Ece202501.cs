@@ -8,7 +8,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202501;
 public class Ece202501 : EverybodyEventPuzzle
 {
     [Puzzle("471e7e193cef7ed98fca951fa22d1b63")]
-    public PuzzleResult Part1(string input)
+    public string Part1(string input)
     {
         var (names, instructions) = Parse(input);
         var index = 0;
@@ -21,11 +21,11 @@ public class Ece202501 : EverybodyEventPuzzle
             index = Math.Clamp(index + direction * distance, min, max);
         }
         
-        return new PuzzleResult(names[index]);
+        return names[index];
     }
 
     [Puzzle("4c1a9174f14f00b9309ceb208fb603b6")]
-    public PuzzleResult Part2(string input)
+    public string Part2(string input)
     {
         var (names, instructions) = Parse(input);
         var index = 0;
@@ -36,11 +36,11 @@ public class Ece202501 : EverybodyEventPuzzle
             index = EnsureBetween(index + direction * distance, 0, names.Length);
         }
         
-        return new PuzzleResult(names[index]);
+        return names[index];
     }
 
     [Puzzle("e09ddbd33e9031bea67180ca55d1c14e")]
-    public PuzzleResult Part3(string input)
+    public string Part3(string input)
     {
         var (names, instructions) = Parse(input);
 
@@ -51,7 +51,7 @@ public class Ece202501 : EverybodyEventPuzzle
             (names[index], names[0]) = (names[0], names[index]);
         }
         
-        return new PuzzleResult(names[0]);
+        return names[0];
     }
 
     private static (string[] names, string[] instructions) Parse(string input)

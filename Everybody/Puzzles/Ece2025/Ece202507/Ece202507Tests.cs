@@ -20,7 +20,7 @@ public class Ece202507Tests
                              t > h
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("Oroneth");
+        Sut.Part1(input).Should().Be("Oroneth");
     }
 
     [Fact]

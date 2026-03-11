@@ -13,7 +13,7 @@ public class Aoc202301 : AocPuzzle
     public PuzzleResult Part1(string input) => new(FindCalibrationNumberPart1(input).Sum());
 
     [Puzzle("1a8775b7ae93118b31708e052207307d")]
-    public PuzzleResult Part2(string input) => new(FindCalibrationNumberPart2(input).Sum(), "");
+    public PuzzleResult Part2(string input) => new(FindCalibrationNumberPart2(input).Sum());
 
     public static List<int> FindCalibrationNumberPart1(string input) => input.Split(LineBreaks.Single)
         .Select(FindCalibrationNumber)

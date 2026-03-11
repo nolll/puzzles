@@ -57,7 +57,7 @@ public class Aoc202423 : AocPuzzle
     }
 
     [Puzzle("e5522cb6dd3d3913820759dee7696eb4")]
-    public PuzzleResult Part2(string input)
+    public string Part2(string input)
     {
         var pairs = input.Split(LineBreaks.Single).Select(o => o.Split('-'));
         var connections = new Dictionary<string, List<string>>();
@@ -97,8 +97,6 @@ public class Aoc202423 : AocPuzzle
             }
         }
 
-        var s = string.Join(",", bestGroup.Order());
-        
-        return new PuzzleResult(s);
+        return string.Join(",", bestGroup.Order());
     }
 }

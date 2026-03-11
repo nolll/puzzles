@@ -20,7 +20,7 @@ public class Codyssi202403Tests
     public void Part2() => Sut.Part2(Input).Answer.Should().Be("3487996082");
 
     [Fact]
-    public void Part3() => Sut.Part3(Input).Answer.Should().Be("30PzDC");
+    public void Part3() => Sut.Part3(Input).Should().Be("30PzDC");
 
     private static Codyssi202403 Sut => new();
 }

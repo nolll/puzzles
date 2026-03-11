@@ -22,13 +22,8 @@ public class Aoc202418 : AocPuzzle
     }
     
     [Puzzle("5cc0c24dab0cf72c881e5a427edc0e1b")]
-    public PuzzleResult Part2(string input)
-    {
-        var res = Part2(input, Size, Size);
-        
-        return new PuzzleResult(res);
-    }
-    
+    public string Part2(string input) => Part2(input, Size, Size);
+
     public int Part1(string input, int steps, int width, int height)
     {
         var coords = input.Split(LineBreaks.Single)

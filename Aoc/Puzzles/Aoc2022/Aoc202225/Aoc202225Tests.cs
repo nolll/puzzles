@@ -5,8 +5,8 @@ public class Aoc202225Tests
     [Fact]
     public void Part1()
     {
-        var puzzle = new Aoc202225();
-        var result = puzzle.SolvePart1(Input);
+        var sut = new Aoc202225();
+        var result = sut.Part1(Input);
 
         result.Should().Be("2=-1=0");
     }

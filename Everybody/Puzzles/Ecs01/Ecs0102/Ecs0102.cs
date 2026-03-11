@@ -7,16 +7,16 @@ namespace Pzl.Everybody.Puzzles.Ecs01.Ecs0102;
 [Name("Tangled Trees")]
 public class Ecs0102 : EverybodyStoryPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(Run(SimpleSwap, input), "d01fa4a99d218a85cc2d618feac1fc3a");
+    [Puzzle("d01fa4a99d218a85cc2d618feac1fc3a")]
+    public string Part1(string input) => Solve(SimpleSwap, input);
     
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(Run(SimpleSwap, input), "f9758c5ab09c84d7c166731aedc8beaa");
+    [Puzzle("f9758c5ab09c84d7c166731aedc8beaa")]
+    public string Part2(string input) => Solve(SimpleSwap, input);
     
-    [Puzzle("")]
-    public PuzzleResult Part3(string input) => new(Run(FullSwap, input), "034d6deb943709125409c3ed3f859821");
+    [Puzzle("034d6deb943709125409c3ed3f859821")]
+    public string Part3(string input) => Solve(FullSwap, input);
 
-    private static string Run(Action<TreeNode, string> swap, string input)
+    private static string Solve(Action<TreeNode, string> swap, string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var root = new TreeNode("", "", 0);

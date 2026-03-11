@@ -16,10 +16,5 @@ public class Aquaq17Tests
                                  """;
 
     [Fact]
-    public void FindShame()
-    {
-        var result = Aquaq17.RunInternal(Input);
-
-        result.Should().Be("Somaliland 19000103 19020101");
-    }
+    public void FindShame() => new Aquaq17().Solve(Input).Should().Be("Somaliland 19000103 19020101");
 }

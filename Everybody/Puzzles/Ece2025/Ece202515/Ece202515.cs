@@ -7,14 +7,14 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202515;
 [Name("Definitely Not a Maze")]
 public class Ece202515 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(Solve(input), "4a1a3b7a0e4af4aaf4c4f9e0b95430d4");
+    [Puzzle("4a1a3b7a0e4af4aaf4c4f9e0b95430d4")]
+    public PuzzleResult Part1(string input) => new(Solve(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(Solve(input), "c9e63859efb2156d5906e433e50285d0");
+    [Puzzle("c9e63859efb2156d5906e433e50285d0")]
+    public PuzzleResult Part2(string input) => new(Solve(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part3(string input) => new(Solve(input), "f5a3b1e436cc12fdbacea6f28f381b67");
+    [Puzzle("f5a3b1e436cc12fdbacea6f28f381b67")]
+    public PuzzleResult Part3(string input) => new(Solve(input));
 
     public static int Solve(string input)
     {

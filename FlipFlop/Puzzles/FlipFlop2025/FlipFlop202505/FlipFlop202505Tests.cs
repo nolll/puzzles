@@ -8,7 +8,7 @@ public class FlipFlop202505Tests
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("38");
 
     [Fact]
-    public void Part2() => Sut.Part2(Input).Answer.Should().Be("Bc");
+    public void Part2() => Sut.Part2(Input).Should().Be("Bc");
 
     [Fact]
     public void Part3() => Sut.Part3(Input).Answer.Should().Be("-6");

@@ -14,10 +14,5 @@ public class Aoc202021 : AocPuzzle
     }
 
     [Puzzle("6adefc0d0ced658ef54a524396bb93a1")]
-    public PuzzleResult Part2(string input)
-    {
-        var detector = new AllergenDetector(input);
-        var ingredientList = detector.GetIngredientList();
-        return new PuzzleResult(ingredientList);
-    }
+    public string Part2(string input) => new AllergenDetector(input).GetIngredientList();
 }

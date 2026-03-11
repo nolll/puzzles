@@ -7,11 +7,12 @@ namespace Pzl.Euler.Puzzles.Euler049;
 [Name("Prime Permutations")]
 public class Euler049 : EulerPuzzle
 {
+    private const int Limit = 10_000;
+
     [Puzzle("bcc1d5d8d784166b3294d174f872c8a8")]
-    public PuzzleResult Solve()
+    public string? Solve()
     {
-        const int limit = 10_000;
-        var primes = Numbers.FindPrimesBelow(limit).ToArray();
+        var primes = Numbers.FindPrimesBelow(Limit).ToArray();
         var permutationCache = primes.ToDictionary(k => k, v => string.Join("", v.ToString().ToCharArray().Order()));
 
         for (var i = 0; i < primes.Length; i++)
@@ -28,14 +29,13 @@ public class Euler049 : EulerPuzzle
                 
                 var diff = p2 - p1;
                 var p3 = p2 + diff;
-                if (p3 >= limit || !Numbers.IsPrime(p3) || permutationCache[p1] != permutationCache[p3])
+                if (p3 >= Limit || !Numbers.IsPrime(p3) || permutationCache[p1] != permutationCache[p3])
                     continue;
-                
-                var result = $"{p1}{p2}{p3}";
-                return new PuzzleResult(result);
+
+                return $"{p1}{p2}{p3}";
             }
         }
         
-        return PuzzleResult.Failed;
+        return null;
     }
 }

@@ -7,7 +7,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202520;
 [Name("Dream in Triangles")]
 public class Ece202520 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("d8ee6b0475f3971b598eab03bf31bed4")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -31,10 +31,10 @@ public class Ece202520 : EverybodyEventPuzzle
             }
         }
         
-        return new PuzzleResult(count, "d8ee6b0475f3971b598eab03bf31bed4");
+        return new PuzzleResult(count);
     }
 
-    [Puzzle("")]
+    [Puzzle("2564cba88ff81fc3fa2632c3749d06e5")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -74,10 +74,10 @@ public class Ece202520 : EverybodyEventPuzzle
 
         var cost = Dijkstra.BestCost(edges.ToList(), start.Id, end.Id);
         
-        return new PuzzleResult(cost, "2564cba88ff81fc3fa2632c3749d06e5");
+        return new PuzzleResult(cost);
     }
 
-    [Puzzle("")]
+    [Puzzle("20c605f31a1458e47d7cc3a1cc7d8971")]
     public PuzzleResult Part3(string input)
     {
         var grid1 = GridBuilder.BuildCharGrid(input);
@@ -154,7 +154,7 @@ public class Ece202520 : EverybodyEventPuzzle
         List<string> targets = [GetId(0, end1), GetId(1, end2), GetId(2, end3)]; 
         var cost = Dijkstra.BestCost(edges.ToList(), GetId(0, start), targets);
         
-        return new PuzzleResult(cost, "20c605f31a1458e47d7cc3a1cc7d8971");
+        return new PuzzleResult(cost);
     }
 
     private string GetId(int gridIndex, Coord coord) => $"{gridIndex}-{coord.Id}";

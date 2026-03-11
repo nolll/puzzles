@@ -15,7 +15,7 @@ public class Ecs0102Tests
                              ADD id=7 left=[4,E] right=[21,N]
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("CFGNLK");
+        Sut.Part1(input).Should().Be("CFGNLK");
     }
 
     [Fact]
@@ -33,7 +33,7 @@ public class Ecs0102Tests
                              ADD id=7 left=[4,E] right=[21,N]
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("MGFLNK");
+        Sut.Part2(input).Should().Be("MGFLNK");
     }
 
     [Fact]
@@ -52,7 +52,7 @@ public class Ecs0102Tests
                              SWAP 2
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("DJMGL");
+        Sut.Part3(input).Should().Be("DJMGL");
     }
     
     [Fact]
@@ -72,7 +72,7 @@ public class Ecs0102Tests
                              SWAP 5
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("DJCGL");
+        Sut.Part3(input).Should().Be("DJCGL");
     }
 
     private static Ecs0102 Sut => new();

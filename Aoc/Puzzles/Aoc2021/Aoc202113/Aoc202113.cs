@@ -16,12 +16,5 @@ public class Aoc202113 : AocPuzzle
     }
 
     [Puzzle("e96b781220e2551d8c04eaa523de4934")]
-    public PuzzleResult Part2(string input)
-    {
-        var paper = new TransparentPaper(input);
-        var result = paper.MessageAfterFold();
-        var letters = OcrSmallFont.ReadString(result);
-
-        return new PuzzleResult(letters);
-    }
+    public string Part2(string input) => OcrSmallFont.ReadString(new TransparentPaper(input).MessageAfterFold());
 }

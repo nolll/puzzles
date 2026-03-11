@@ -44,20 +44,20 @@ public class Aoc202223 : AocPuzzle
         NorthWest,
     };
 
-    [Puzzle("")]
+    [Puzzle("b2078a7c2a582e68796f55a71f1fe1cd")]
     public PuzzleResult Part1(string input)
     {
         var (emptyCount, _) = Run(input, 10);
 
-        return new PuzzleResult(emptyCount, "b2078a7c2a582e68796f55a71f1fe1cd");
+        return new PuzzleResult(emptyCount);
     }
 
-    [Puzzle("")]
+    [Puzzle("b4b9f7dae4709930cd73d70f45eac0ae")]
     public PuzzleResult Part2(string input)
     {
         var (_, endRound) = Run(input);
 
-        return new PuzzleResult(endRound, "b4b9f7dae4709930cd73d70f45eac0ae");
+        return new PuzzleResult(endRound);
     }
     
     public (int emptyCount, int endRound) Run(string input, int rounds = int.MaxValue)

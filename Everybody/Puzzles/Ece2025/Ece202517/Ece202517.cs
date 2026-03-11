@@ -15,7 +15,7 @@ public class Ece202517 : EverybodyEventPuzzle
     private const string RightSet = "right";
     private const string LeftSet = "left";
 
-    [Puzzle("")]
+    [Puzzle("058525ed0b94d59517e415b1660aa68a")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -23,10 +23,10 @@ public class Ece202517 : EverybodyEventPuzzle
 
         var sum = CountDestroyed(grid, volcano, 10);
         
-        return new PuzzleResult(sum, "058525ed0b94d59517e415b1660aa68a");
+        return new PuzzleResult(sum);
     }
 
-    [Puzzle("")]
+    [Puzzle("5d4764c0cfb73f6caa5342ac5cbce4db")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -49,10 +49,10 @@ public class Ece202517 : EverybodyEventPuzzle
             r++;
         }
         
-        return new PuzzleResult(best * bestRadius, "5d4764c0cfb73f6caa5342ac5cbce4db");
+        return new PuzzleResult(best * bestRadius);
     }
 
-    [Puzzle("")]
+    [Puzzle("6efa9d887ba005740c281c0027064b53")]
     public PuzzleResult Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -110,7 +110,7 @@ public class Ece202517 : EverybodyEventPuzzle
             var result = Dijkstra.BestPath(edges, GetId(RightSet, start), GetId(LeftSet, start));
             
             if (result.Cost < availableSeconds)
-                return new PuzzleResult(result.Cost * r, "6efa9d887ba005740c281c0027064b53");
+                return new PuzzleResult(result.Cost * r);
 
             radius++;
         }

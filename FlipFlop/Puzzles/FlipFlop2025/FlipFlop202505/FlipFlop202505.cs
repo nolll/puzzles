@@ -23,7 +23,7 @@ public class FlipFlop202505 : FlipFlopPuzzle
     }
 
     [Puzzle("68e4f28e3a2dc0c8cc1c3eabf161d53e")]
-    public PuzzleResult Part2(string input)
+    public string Part2(string input)
     {
         var (chars, tunnels) = Parse(input);
         
@@ -36,9 +36,7 @@ public class FlipFlop202505 : FlipFlopPuzzle
             seen.Add(c);
         }
 
-        var notSeen = string.Join("", chars.Distinct().Where(o => !seen.Contains(o)));
-        
-        return new PuzzleResult(notSeen);
+        return string.Join("", chars.Distinct().Where(o => !seen.Contains(o)));
     }
 
     [Puzzle("36c49d43c6bb2d7a410d976dda77c3f2")]

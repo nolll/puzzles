@@ -22,7 +22,7 @@ public class Aoc202424 : AocPuzzle
     }
 
     [Puzzle("664e08ee1c7756ec0bf56764e81d2280")]
-    public PuzzleResult Part2(string input)
+    public string Part2(string input)
     {
         var (wires, gates) = ParseWiresAndGates(input);
 
@@ -56,9 +56,7 @@ public class Aoc202424 : AocPuzzle
         
         var swapped = swaps.SelectMany(o => o).Order();
 
-        var result = string.Join(",", swapped);
-        
-        return new PuzzleResult(result);
+        return string.Join(",", swapped);
     }
 
     private (Dictionary<string, long> wires, Dictionary<string, (string, string, string)> gates) ParseWiresAndGates(

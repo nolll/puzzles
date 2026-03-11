@@ -7,12 +7,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq17;
 public class Aquaq17 : AquaqPuzzle
 {
     [Puzzle("033640f1946bb06d49b637ee7b1c3a80")]
-    public PuzzleResult Solve(string input)
-    {
-        return new PuzzleResult(RunInternal(input));
-    }
-
-    public static string RunInternal(string input)
+    public string Solve(string input)
     {
         var lines = input.Split(LineBreaks.Single).Skip(1);
 

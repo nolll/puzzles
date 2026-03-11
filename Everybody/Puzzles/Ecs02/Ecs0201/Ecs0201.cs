@@ -11,7 +11,7 @@ namespace Pzl.Everybody.Puzzles.Ecs02.Ecs0201;
 [IsSlow]
 public class Ecs0201 : EverybodyStoryPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("dad5d715238be69f7117d91bb3938a10")]
     public PuzzleResult Part1(string input)
     {
         var (grid, tokens, _) = Parse(input);
@@ -24,10 +24,10 @@ public class Ecs0201 : EverybodyStoryPuzzle
             coins += Play(grid, token, slot).score;
         }
         
-        return new PuzzleResult(coins, "dad5d715238be69f7117d91bb3938a10");
+        return new PuzzleResult(coins);
     }
 
-    [Puzzle("")]
+    [Puzzle("26c70e45583b5816af23beaeb77e8940")]
     public PuzzleResult Part2(string input)
     {
         var (grid, tokens, slotCount) = Parse(input);
@@ -46,11 +46,11 @@ public class Ecs0201 : EverybodyStoryPuzzle
             coins += best.score;
         }
         
-        return new PuzzleResult(coins, "26c70e45583b5816af23beaeb77e8940");
+        return new PuzzleResult(coins);
     }
 
-    [Puzzle("")]
-    public PuzzleResult Part3(string input)
+    [Puzzle("28c4bfb9e7bb062915af989c9b4b8e33")]
+    public string Part3(string input)
     {
         var (grid, tokenRules, slotCount) = Parse(input);
         var scores = new Dictionary<(int token, int slot), int>();
@@ -78,7 +78,7 @@ public class Ecs0201 : EverybodyStoryPuzzle
             best = Math.Max(best, score);
         }
 
-        return new PuzzleResult($"{worst} {best}", "28c4bfb9e7bb062915af989c9b4b8e33");
+        return $"{worst} {best}";
     }
 
     private static (int slot, int finalSlot, int score) Play(Grid<char> grid, string token, int slot)

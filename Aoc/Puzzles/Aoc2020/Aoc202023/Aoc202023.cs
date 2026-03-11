@@ -6,11 +6,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202023;
 public class Aoc202023 : AocPuzzle
 {
     [Puzzle("060b60050b1b5e81909b30f5b00b81dc")]
-    public PuzzleResult Part1(string input)
+    public string Part1(string input)
     {
         var game = new CrabCupsGame(int.Parse(input));
         game.Play(100);
-        return new PuzzleResult(game.ResultString);
+        return game.ResultString;
     }
 
     [Puzzle("86b2d5ff30f1a76d6a5de3dfc06e89e9")]

@@ -41,7 +41,7 @@ public class Aoc202423Tests
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("7");
 
     [Fact]
-    public void Part2() => Sut.Part2(Input).Answer.Should().Be("co,de,ka,ta");
+    public void Part2() => Sut.Part2(Input).Should().Be("co,de,ka,ta");
 
     private static Aoc202423 Sut => new();
 }

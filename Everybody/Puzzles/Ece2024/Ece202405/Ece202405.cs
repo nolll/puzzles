@@ -7,29 +7,16 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202405;
 public class Ece202405 : EverybodyEventPuzzle
 {
     [Puzzle("950b4825d76ba062befffe8cb9a0be2c")]
-    public PuzzleResult Part1(string input) => new(RunPart1(input, 10));
+    public string Part1(string input) => SolvePart1(input, 10);
     
     [Puzzle("6b4db5dbf70faa6e08d4a645d6d2b4cc")]
-    public PuzzleResult Part2(string input) => new(RunPart2(input, 2024));
+    public long Part2(string input) => SolvePart2(input, 2024);
     
     [Puzzle("5789564a5b01f519e8eddcfc0f7aa6a2")]
-    public PuzzleResult Part3(string input) => new(ParseDance(input).DanceForever());
+    public long Part3(string input) => ParseDance(input).DanceForever();
 
-    public string RunPart1(string input, int rounds)
-    {
-        var columns = ParseDance(input);
-        var result = columns.DanceRounds(rounds);
-        
-        return result;
-    }
-    
-    public long RunPart2(string input, int target)
-    {
-        var columns = ParseDance(input);
-        var result = columns.DanceUntilRepeatCount(target);
-        
-        return result;
-    }
+    public string SolvePart1(string input, int rounds) => ParseDance(input).DanceRounds(rounds);
+    public long SolvePart2(string input, int target) => ParseDance(input).DanceUntilRepeatCount(target);
 
     private static ClapDance ParseDance(string input)
     {

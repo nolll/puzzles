@@ -39,7 +39,7 @@ public class Aquaq25 : AquaqPuzzle
     private static readonly Dictionary<string, char> MorseToChar = CharToMorse.ToDictionary(k => k.Value, v => v.Key);
 
     [Puzzle("f00ce886bf2534f2f98813743c48cb6e")]
-    public PuzzleResult Solve(string input)
+    public string Solve(string input)
     {
         var morse = ClicksToMorse(input);
         var result = DecodeMorse(morse);
@@ -54,9 +54,7 @@ public class Aquaq25 : AquaqPuzzle
             ((char)(resultParts[49].First() + 1)).ToString()
         };
 
-        var joinedResult = string.Join("", parsedResult);
-
-        return new PuzzleResult(joinedResult);
+        return string.Join("", parsedResult);
     }
 
     public static string EncodeMorse(string input)

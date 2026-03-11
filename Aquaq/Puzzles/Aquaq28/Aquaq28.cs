@@ -13,12 +13,7 @@ public class Aquaq28 : AquaqPuzzle
     private const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789";
 
     [Puzzle("b2f9a54afc1e88e86671425bfc4e48b4")]
-    public PuzzleResult Solve(string input)
-    {
-        var result = Encrypt(input, "FISSION_MAILED");
-
-        return new PuzzleResult(result);
-    }
+    public string Solve(string input) => Encrypt(input, "FISSION_MAILED");
 
     public static string Encrypt(string input, string word)
     {

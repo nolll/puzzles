@@ -26,7 +26,7 @@ public class Codyssi202515 : CodyssiPuzzle
     }
 
     [Puzzle("4b91364b84392b399b44d31d662a9fa1")]
-    public PuzzleResult Part2(string input)
+    public string Part2(string input)
     {
         var nodes = ParseNodes(input.Split(LineBreaks.Double).First());
         var root = nodes.First();
@@ -35,13 +35,11 @@ public class Codyssi202515 : CodyssiPuzzle
         var special = new Node("special", 500_000); 
         root.Add(special);
         var path = GetPathTo(special);
-        var result = string.Join("-",path.Select(o => o.Name));
-
-        return new PuzzleResult(result);
+        return string.Join("-",path.Select(o => o.Name));
     }
 
     [Puzzle("cdb171b505a56eed22f6483b7e0bf002")]
-    public PuzzleResult Part3(string input)
+    public string? Part3(string input)
     {
         var nodes = ParseNodes(input.Split(LineBreaks.Double).First());
         var root = nodes.First();
@@ -50,9 +48,7 @@ public class Codyssi202515 : CodyssiPuzzle
         var specials = ParseNodes(input.Split(LineBreaks.Double).Last());
         root.Add(specials);
         var specialsPaths = specials.Select(GetPathTo).ToArray();
-        var common = GetLowestCommonAncestor(specialsPaths);
-
-        return new PuzzleResult(common?.Name);
+        return GetLowestCommonAncestor(specialsPaths)?.Name;
     }
     
     public class Node(string name, int id)

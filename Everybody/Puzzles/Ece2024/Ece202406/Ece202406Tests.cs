@@ -16,18 +16,10 @@ public class Ece202406Tests
                                  """;
 
     [Fact]
-    public void Part1()
-    {
-        var result = Sut.Part1(Input);
-        result.Answer.Should().Be("RRB@");
-    }
-    
+    public void Part1() => Sut.Part1(Input).Should().Be("RRB@");
+
     [Fact]
-    public void Part2And3()
-    {
-        var result = Sut.Part2(Input);
-        result.Answer.Should().Be("RB@");
-    }
-    
+    public void Part2And3() => Sut.Part2(Input).Should().Be("RB@");
+
     private static Ece202406 Sut => new();
 }

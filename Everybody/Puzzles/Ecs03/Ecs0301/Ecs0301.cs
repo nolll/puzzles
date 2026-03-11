@@ -6,25 +6,25 @@ namespace Pzl.Everybody.Puzzles.Ecs03.Ecs0301;
 [Name("Scales, Bags and a Bit of a Mess")]
 public class Ecs0301 : EverybodyStoryPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("f53ab300aa62ab2e8a5e077d2166592a")]
     public PuzzleResult Part1(string input)
     {
         var sum = ParseDucks(input).Where(o => o.g > o.r && o.g > o.b).Sum(duck => duck.scale);
 
-        return new PuzzleResult(sum, "f53ab300aa62ab2e8a5e077d2166592a");
+        return new PuzzleResult(sum);
     }
 
-    [Puzzle("")]
+    [Puzzle("92c6e926b88305ce851562ac3de0460a")]
     public PuzzleResult Part2(string input)
     {
         var ducks = ParseDucks(input).ToArray();
         var maxShine = ducks.Select(o => o.s).Max();
         var darkest = ducks.Where(o => o.s == maxShine).OrderBy(o => o.r + o.g + o.b).First();
         
-        return new PuzzleResult(darkest.scale, "92c6e926b88305ce851562ac3de0460a");
+        return new PuzzleResult(darkest.scale);
     }
 
-    [Puzzle("")]
+    [Puzzle("223bb40782130b1addaa4909da48b31f")]
     public PuzzleResult Part3(string input)
     {
         var ducks = ParseDucks(input).ToArray();
@@ -52,7 +52,7 @@ public class Ecs0301 : EverybodyStoryPuzzle
         var biggestGroup = buckets.Values.MaxBy(o => o.Count);
         var sum = biggestGroup?.Sum() ?? 0;
         
-        return new PuzzleResult(sum, "223bb40782130b1addaa4909da48b31f");
+        return new PuzzleResult(sum);
     }
 
     private static char? GetColorBucket(int r, int g, int b)

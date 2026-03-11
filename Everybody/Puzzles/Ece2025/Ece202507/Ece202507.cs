@@ -10,12 +10,10 @@ public class Ece202507 : EverybodyEventPuzzle
     private const int MaxLength = 11;
 
     [Puzzle("f58cf5d880834e0e0823d1891e8b7a9e")]
-    public PuzzleResult Part1(string input)
+    public string Part1(string input)
     {
         var (names, rules) = Parse(input);
-        var name = names.First(o => IsValidName(o, rules));
-        
-        return new PuzzleResult(name);
+        return names.First(o => IsValidName(o, rules));
     }
 
     [Puzzle("8a08f6570e988d7a1b4c17645d937b1f")]

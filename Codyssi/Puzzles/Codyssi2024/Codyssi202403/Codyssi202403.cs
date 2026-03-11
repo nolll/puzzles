@@ -23,13 +23,8 @@ public class Codyssi202403 : CodyssiPuzzle
     }
 
     [Puzzle("b1273b880eaaf6e24e986fdcdd291ef9")]
-    public PuzzleResult Part3(string input)
-    {
-        var sum = CalculateSum(input);
-        var result = ToBase65(sum);
-        return new PuzzleResult(result);
-    }
-    
+    public string Part3(string input) => ToBase65(CalculateSum(input));
+
     public static string ToBase65(long v) => 
         Conversion.ToBaseX(v, 65, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#");
     

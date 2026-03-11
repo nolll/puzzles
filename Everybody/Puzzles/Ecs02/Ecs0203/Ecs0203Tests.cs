@@ -26,7 +26,7 @@ public class Ecs0203Tests
                              51257284
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("1,3,4,2");
+        Sut.Part2(input).Should().Be("1,3,4,2");
     }
 
     [Fact]

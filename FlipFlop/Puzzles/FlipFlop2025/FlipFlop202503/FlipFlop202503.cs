@@ -9,7 +9,7 @@ namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202503;
 public class FlipFlop202503 : FlipFlopPuzzle
 {
     [Puzzle("97a59e8e51b506fc2e1640cd479042d1")]
-    public PuzzleResult Part1(string input)
+    public string Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var counts = new Dictionary<string, int>();
@@ -19,9 +19,7 @@ public class FlipFlop202503 : FlipFlopPuzzle
                 counts[line]++;
         }
 
-        var best2 = counts.MaxBy(o => o.Value).Key;
-        
-        return new PuzzleResult(best2);
+        return counts.MaxBy(o => o.Value).Key;
     }
 
     [Puzzle("f7c0b43b9ccea17bd677b165584ea494")]

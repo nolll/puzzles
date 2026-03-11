@@ -17,14 +17,12 @@ public class Aoc201911 : AocPuzzle
     }
 
     [Puzzle("f5a3ea8d16e26ffd7e4c01382dfcd31c")]
-    public PuzzleResult Part2(string input)
+    public string Part2(string input)
     {
         var robot2 = new PaintRobot(input);
         var result2 = robot2.Paint(true);
         var printout = CleanPrintout(result2.Printout);
-        var letters = OcrSmallFont.ReadString(printout);
-
-        return new PuzzleResult(letters);
+        return OcrSmallFont.ReadString(printout);
     }
 
     private string CleanPrintout(string s)

@@ -7,14 +7,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202417;
 public class Aoc202417 : AocPuzzle
 {
     [Puzzle("8ecd8cdd2990f11eb9ae9f0793770018")]
-    public PuzzleResult Part1(string input)
+    public string Part1(string input)
     {
         var nums = Numbers.IntsFromString(input);
         var program = nums.Skip(3).ToArray();
         var output = RunProgram(program, nums[0], nums[1], nums[2]);
-        var res = string.Join(",", output);
-        
-        return new PuzzleResult(res);
+        return string.Join(",", output);
     }
 
     private long[] RunProgram(int[] program, long a, long b, long c)

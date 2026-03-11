@@ -13,7 +13,7 @@ public class Aoc202417Tests
                              Program: 0,1,5,4,3,0
                              """;
     
-        Sut.Part1(input).Answer.Should().Be("4,6,3,5,6,3,5,2,1,0");
+        Sut.Part1(input).Should().Be("4,6,3,5,6,3,5,2,1,0");
     }
     
     [Fact(Skip = "Fails, but I dont't understand why. The real input works fine")]

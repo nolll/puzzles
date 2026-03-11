@@ -11,20 +11,20 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202518;
 // That is not true in the test input
 public class Ece202518 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(ParsePlants(input).Last().Energy, "3c9317ed77a5948ad8c6ca11172055bd");
+    [Puzzle("3c9317ed77a5948ad8c6ca11172055bd")]
+    public PuzzleResult Part1(string input) => new(ParsePlants(input).Last().Energy);
 
-    [Puzzle("")]
+    [Puzzle("810932c961238e78746d0d6f239e398d")]
     public PuzzleResult Part2(string input)
     {
         var (plantstr, teststr) = input.Split(LineBreaks.Triple);
         var plants = ParsePlants(plantstr);
         var sum = teststr.Split(LineBreaks.Single).Select(ParseTestCase).Sum(o => ActivateAndGetEnergy(plants, o.ToArray()));
 
-        return new PuzzleResult(sum, "810932c961238e78746d0d6f239e398d");
+        return new PuzzleResult(sum);
     }
 
-    [Puzzle("")]
+    [Puzzle("e784c3249103e09adf84a2ac82143826")]
     public PuzzleResult Part3(string input)
     {
         var (plantstr, teststr) = input.Split(LineBreaks.Triple);
@@ -36,7 +36,7 @@ public class Ece202518 : EverybodyEventPuzzle
             .Where(energy => energy > 0)
             .Sum(energy => optimal - energy);
 
-        return new PuzzleResult(sum, "e784c3249103e09adf84a2ac82143826");
+        return new PuzzleResult(sum);
     }
 
     private static long GetOptimalEnergy(Plant[] plants)

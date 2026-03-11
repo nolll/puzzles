@@ -13,7 +13,7 @@ public class Ece202416Tests
                                  """;
 
     [Fact]
-    public void Part1() => Sut.Part1(Input).Answer.Should().Be(">.- -.- ^,-");
+    public void Part1() => Sut.Part1(Input).Should().Be(">.- -.- ^,-");
 
     [Theory]
     [InlineData(1, 1)]

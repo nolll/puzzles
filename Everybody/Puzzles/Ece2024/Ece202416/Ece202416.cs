@@ -9,23 +9,22 @@ public class Ece202416 : EverybodyEventPuzzle
     private readonly int[] _diffs = [-1, 0, 1];
 
     [Puzzle("1a56d927da3da48fad02fb78b95a91cb")]
-    public PuzzleResult Part1(string input)
+    public string Part1(string input)
     {
         var (increments, wheels) = Parse(input);
         var cats = wheels.Select((wheel, i) => wheel[100 * increments[i] % wheel.Length]).ToList();
-        var result = string.Join(" ", cats);
-        
-        return new PuzzleResult(result);
+
+        return string.Join(" ", cats);
     }
 
     [Puzzle("8ba1d5c403e6bf5c0aad202e81e5e515")]
-    public PuzzleResult Part2(string input) => new(Part2(input, 202420242024));
+    public long Part2(string input) => Part2(input, 202420242024);
 
     [Puzzle("912149637877bbdd3f19be24133372ed")]
-    public PuzzleResult Part3(string input)
+    public string Part3(string input)
     {
         var (min, max) = Part3(input, 256);
-        return new PuzzleResult($"{max} {min}");
+        return $"{max} {min}";
     }
     
     public long Part2(string input, long target)

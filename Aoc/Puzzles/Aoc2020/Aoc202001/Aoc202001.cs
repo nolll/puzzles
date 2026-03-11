@@ -9,18 +9,18 @@ public class Aoc202001 : AocPuzzle
 {
     private const int Target = 2020;
     
-    [Puzzle("")]
+    [Puzzle("89120e7d60fb863cc69d69128748e52d")]
     public PuzzleResult Part1(string input)
     {
         var product = FindNumbersThatAddUpTo(input.Split(LineBreaks.Single).Select(int.Parse).ToList(), Target, 2).Aggregate(1, (a, b) => a * b);
-        return new PuzzleResult(product, "89120e7d60fb863cc69d69128748e52d");
+        return new PuzzleResult(product);
     }
 
-    [Puzzle("")]
+    [Puzzle("12c4424e1149b29c37b5be950a3c5939")]
     public PuzzleResult Part2(string input)
     {
         var product = FindNumbersThatAddUpTo(Parse(input), Target, 3).Aggregate(1, (a, b) => a * b);
-        return new PuzzleResult(product, "12c4424e1149b29c37b5be950a3c5939");
+        return new PuzzleResult(product);
     }
 
     private static List<int> Parse(string input) => input.Split(LineBreaks.Single).Select(int.Parse).ToList();

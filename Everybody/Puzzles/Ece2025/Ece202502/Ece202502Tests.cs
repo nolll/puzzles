@@ -7,7 +7,7 @@ public class Ece202502Tests
     {
         const string input = "A=[25,9]";
 
-        Sut.Part1(input).Answer.Should().Be("[357,862]");
+        Sut.Part1(input).Should().Be("[357,862]");
     }
     
     [Theory]

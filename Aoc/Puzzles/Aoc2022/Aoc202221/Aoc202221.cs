@@ -6,20 +6,20 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202221;
 [Name("Monkey Math")]
 public class Aoc202221 : AocPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("b3adb16b1c9bf83decdb14842cf25854")]
     public PuzzleResult Part1(string input)
     {
         var result = SolvePart1(input);
 
-        return new PuzzleResult(result, "b3adb16b1c9bf83decdb14842cf25854");
+        return new PuzzleResult(result);
     }
 
-    [Puzzle("")]
+    [Puzzle("cdbf9008c2bea6596aa238829913849e")]
     public PuzzleResult Part2(string input)
     {
         var result = SolvePart2(input);
 
-        return new PuzzleResult(result, "cdbf9008c2bea6596aa238829913849e");
+        return new PuzzleResult(result);
     }
 
     public long SolvePart1(string input)

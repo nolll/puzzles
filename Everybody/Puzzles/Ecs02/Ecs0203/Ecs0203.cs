@@ -10,7 +10,7 @@ namespace Pzl.Everybody.Puzzles.Ecs02.Ecs0203;
 [Name("The Dice that Never Lie (Unless I Tell Them To)")]
 public class Ecs0203 : EverybodyStoryPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("afba3780df3e7caae7832176dc41303e")]
     public PuzzleResult Part1(string input)
     {
         var dice = ParseDice(input);
@@ -22,11 +22,11 @@ public class Ecs0203 : EverybodyStoryPuzzle
             rollCount++;
         }
         
-        return new PuzzleResult(rollCount, "afba3780df3e7caae7832176dc41303e");
+        return new PuzzleResult(rollCount);
     }
 
-    [Puzzle("")]
-    public PuzzleResult Part2(string input)
+    [Puzzle("7171b572bda6f1b6df3618de04406256")]
+    public string Part2(string input)
     {
         var (diceInput, racetrackInput) = input.Split(LineBreaks.Double);
         var dice = ParseDice(diceInput);
@@ -53,11 +53,10 @@ public class Ecs0203 : EverybodyStoryPuzzle
             }
         }
 
-        var result = string.Join(",", done.Select(o => o.Id));
-        return new PuzzleResult(result, "7171b572bda6f1b6df3618de04406256");
+        return string.Join(",", done.Select(o => o.Id));
     }
 
-    [Puzzle("")]
+    [Puzzle("0573f4383c024a477b878cfe7f4997a7")]
     public PuzzleResult Part3(string input)
     {
         var (diceInput, gridInput) = input.Split(LineBreaks.Double);
@@ -91,7 +90,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
             totalSet.UnionWith(set);
         }
         
-        return new PuzzleResult(totalSet.Count, "0573f4383c024a477b878cfe7f4997a7");
+        return new PuzzleResult(totalSet.Count);
     }
 
     private static Die[] ParseDice(string input)

@@ -2,6 +2,18 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202405;
 
 public class Ece202405Tests
 {
+    private const string Part1Input = """
+                                      2 3 4 5
+                                      3 4 5 2
+                                      4 5 2 3
+                                      5 2 3 4
+                                      """;
+
+    private const string Part2And3Input = """
+                                          2 3 4 5
+                                          6 7 8 9
+                                          """;
+
     [Theory]
     [InlineData(1, "3345")]
     [InlineData(2, "3245")]
@@ -13,39 +25,13 @@ public class Ece202405Tests
     [InlineData(8, "4423")]
     [InlineData(9, "2423")]
     [InlineData(10, "2323")]
-    public void Part1(int rounds, string expected)
-    {
-        const string input = """
-                             2 3 4 5
-                             3 4 5 2
-                             4 5 2 3
-                             5 2 3 4
-                             """;
+    public void Part1(int rounds, string expected) => Sut.SolvePart1(Part1Input, rounds).Should().Be(expected);
 
-        Sut.RunPart1(input, rounds).Should().Be(expected);
-    }
-    
     [Fact]
-    public void Part2()
-    {
-        const string input = """
-                             2 3 4 5
-                             6 7 8 9
-                             """;
+    public void Part2() => Sut.SolvePart2(Part2And3Input, 2024).Should().Be(50877075);
 
-        Sut.RunPart2(input, 2024).Should().Be(50877075);
-    }
-    
     [Fact]
-    public void Part3()
-    {
-        const string input = """
-                             2 3 4 5
-                             6 7 8 9
-                             """;
-
-        Sut.Part3(input).Answer.Should().Be("6584");
-    }
+    public void Part3() => Sut.Part3(Part2And3Input).Should().Be(6584);
 
     private static Ece202405 Sut => new();
 }

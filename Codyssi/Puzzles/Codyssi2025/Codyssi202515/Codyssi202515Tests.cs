@@ -27,10 +27,10 @@ public class Codyssi202515Tests
     public void Part1() => Sut.Part1(Input).Answer.Should().Be("12645822");
 
     [Fact]
-    public void Part2() => Sut.Part2(Input).Answer.Should().Be("ozNxANO-pYNonIG-MUantNm-lOSlxki-SDJtdpa-JSXfNAJ");
+    public void Part2() => Sut.Part2(Input).Should().Be("ozNxANO-pYNonIG-MUantNm-lOSlxki-SDJtdpa-JSXfNAJ");
 
     [Fact]
-    public void Part3() => Sut.Part3(Input).Answer.Should().Be("pYNonIG");
+    public void Part3() => Sut.Part3(Input).Should().Be("pYNonIG");
 
     private static Codyssi202515 Sut => new();
 }

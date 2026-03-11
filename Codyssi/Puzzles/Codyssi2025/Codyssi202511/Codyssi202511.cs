@@ -17,12 +17,7 @@ public class Codyssi202511 : CodyssiPuzzle
     }
 
     [Puzzle("c677dee7cd5d27aa22c862b72d8317a1")]
-    public PuzzleResult Part2(string input)
-    {
-        var sum = GetBase10Numbers(input).Sum();
-        var base68 = ToBase68(sum);
-        return new PuzzleResult(base68);
-    }
+    public string Part2(string input) => ToBase68(GetBase10Numbers(input).Sum());
 
     [Puzzle("9b2126706485aa8c523f0ff6809cfe15")]
     public PuzzleResult Part3(string input)

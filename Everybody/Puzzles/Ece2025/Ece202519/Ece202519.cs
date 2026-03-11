@@ -9,14 +9,14 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202519;
 [Name("Flappy Quack")]
 public class Ece202519 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
-    public PuzzleResult Part1(string input) => new(Solve(input), "0e9f546a10105800c2c014d1d8205cc2");
+    [Puzzle("0e9f546a10105800c2c014d1d8205cc2")]
+    public PuzzleResult Part1(string input) => new(Solve(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part2(string input) => new(Solve(input), "42fd601e0fc19354f8ef71fe2e4d3564");
+    [Puzzle("42fd601e0fc19354f8ef71fe2e4d3564")]
+    public PuzzleResult Part2(string input) => new(Solve(input));
     
-    [Puzzle("")]
-    public PuzzleResult Part3(string input) => new(Solve(input), "ef0c8788bb5ab3f59c9942f9beea54f0");
+    [Puzzle("ef0c8788bb5ab3f59c9942f9beea54f0")]
+    public PuzzleResult Part3(string input) => new(Solve(input));
 
     private static int Solve(string input)
     {

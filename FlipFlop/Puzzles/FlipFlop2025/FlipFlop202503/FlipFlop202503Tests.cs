@@ -12,7 +12,7 @@ public class FlipFlop202503Tests
                                  """;
 
     [Fact]
-    public void Part1() => Sut.Part1(Input).Answer.Should().Be("10,20,30");
+    public void Part1() => Sut.Part1(Input).Should().Be("10,20,30");
 
     [Fact]
     public void Part2() => Sut.Part2(Input).Answer.Should().Be("0");

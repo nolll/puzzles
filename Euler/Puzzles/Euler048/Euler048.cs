@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler048;
 public class Euler048 : EulerPuzzle
 {
     [Puzzle("667aee07963751238f094fa9d2b5487f")]
-    public PuzzleResult Solve()
+    public string Solve()
     {
         var sum = new BigInteger(0);
         
@@ -16,8 +16,6 @@ public class Euler048 : EulerPuzzle
             sum += BigInteger.Pow(i, i);
         }
 
-        var result = sum.ToString()[^10..];
-        
-        return new PuzzleResult(result);
+        return sum.ToString()[^10..];
     }
 }

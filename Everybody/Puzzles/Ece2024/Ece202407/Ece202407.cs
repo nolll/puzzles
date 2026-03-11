@@ -8,7 +8,7 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202407;
 public class Ece202407 : EverybodyEventPuzzle
 {
     [Puzzle("05a999b2ab72fff505423f40ee4af56b")]
-    public PuzzleResult Part1(string input)
+    public string Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var knights = new List<Knight>();
@@ -20,16 +20,14 @@ public class Ece202407 : EverybodyEventPuzzle
             knights.Add(new Knight(parts[0], score));
         }
 
-        var result = string.Join("", knights.OrderByDescending(o => o.Score).Select(o => o.Name));
-        
-        return new PuzzleResult(result);
+        return string.Join("", knights.OrderByDescending(o => o.Score).Select(o => o.Name));
     }
 
     [Puzzle("f315ce3865ed329f4eee3ec0d64bb032")]
-    public PuzzleResult Part2(string input) => new(SolvePart2(Part2Track, input));
+    public string Part2(string input) => SolvePart2(Part2Track, input);
     
     [Puzzle("2945d46a4a840d740dfe233d50659d0c")]
-    public PuzzleResult Part3(string input) => new(SolvePart3(Part3Track, input));
+    public int Part3(string input) => SolvePart3(Part3Track, input);
 
     public string SolvePart2(string trackString, string input)
     {

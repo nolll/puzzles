@@ -9,14 +9,13 @@ public class Ece202410 : EverybodyEventPuzzle
     private const int SegmentSize = 8;
 
     [Puzzle("b62fc815678f7269aae352e26d1c3600")]
-    public PuzzleResult Part1(string input)
+    public string Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var offset = new Coord(0, 0);
         FillSymbols(grid, offset);
-        var word = ReadWord(grid, offset);
-        
-        return new PuzzleResult(word);
+
+        return ReadWord(grid, offset);
     }
     
     [Puzzle("ca8e2900fb3be19c6e0fbea1fa76eff6")]

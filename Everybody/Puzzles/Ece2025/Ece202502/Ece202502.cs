@@ -14,7 +14,7 @@ public class Ece202502 : EverybodyEventPuzzle
     private const long Limit = 1_000_000;
 
     [Puzzle("c80ae8a8504b69e6b4fa4a851004d919")]
-    public PuzzleResult Part1(string input)
+    public string Part1(string input)
     {
         var (a, b) = Numbers.LongsFromString(input);
 
@@ -27,7 +27,7 @@ public class Ece202502 : EverybodyEventPuzzle
         }
 
         var (ra, rb) = result;
-        return new PuzzleResult($"[{ra},{rb}]");
+        return $"[{ra},{rb}]";
     }
 
     [Puzzle("814e2b7637e129a0a60b36d921916b8c")]

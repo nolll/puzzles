@@ -21,15 +21,15 @@ public class Ece202419 : EverybodyEventPuzzle
     };
 
     [Puzzle("d9c02c79770322919192525a442c576d")]
-    public PuzzleResult Part1(string input) => new(Run(input, 1));
+    public string Part1(string input) => Solve(input, 1);
     
     [Puzzle("81f686ab8d66b6fc14b37f46ec85d6f2")]
-    public PuzzleResult Part2(string input) => new(Run(input, 100));
+    public string Part2(string input) => Solve(input, 100);
     
     [Puzzle("4974156d795debf10be98bd14077a889")]
-    public PuzzleResult Part3(string input) => new(Run(input, 1048576000));
+    public string Part3(string input) => Solve(input, 1048576000);
 
-    private string Run(string input, int iterations)
+    private string Solve(string input, int iterations)
     {
         var (directions, encryptedMessage) = input.Split(LineBreaks.Double);
         var grid = GetGrid(encryptedMessage);

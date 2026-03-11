@@ -16,17 +16,12 @@ public class Ece202410Tests
                              **GMJH**
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("PTBVRCZHFLJWGMNS");
+        Sut.Part1(input).Should().Be("PTBVRCZHFLJWGMNS");
     }
     
     [Fact]
-    public void GetScore()
-    {
-        const string input = "PTBVRCZHFLJWGMNS";
+    public void GetScore() => Ece202410.GetScore("PTBVRCZHFLJWGMNS").Should().Be(1851);
 
-        Ece202410.GetScore(input).Should().Be(1851);
-    }
-    
     [Fact]
     public void Part3()
     {

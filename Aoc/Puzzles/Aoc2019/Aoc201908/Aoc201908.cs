@@ -7,19 +7,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201908;
 public class Aoc201908 : AocPuzzle
 {
     [Puzzle("f120f42ddc8c176e63cab4413a41bd99")]
-    public PuzzleResult Part1(string input)
-    {
-        var image = new SpaceImage(input);
-        var checksum = image.Checksum;
-        return new PuzzleResult(checksum);
-    }
+    public int Part1(string input) => new SpaceImage(input).Checksum;
 
     [Puzzle("a51c490e0a182d6faf996faa2205c829")]
-    public PuzzleResult Part2(string input)
-    {
-        var image = new SpaceImage(input);
-        var printedImage = image.Print();
-        var letters = OcrSmallFont.ReadString(printedImage);
-        return new PuzzleResult(letters);
-    }
+    public string Part2(string input) => OcrSmallFont.ReadString(new SpaceImage(input).Print());
 }

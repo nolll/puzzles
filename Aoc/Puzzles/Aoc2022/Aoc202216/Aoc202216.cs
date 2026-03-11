@@ -5,21 +5,21 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202216;
 [Name("Proboscidea Volcanium")]
 public class Aoc202216 : AocPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("dd3e51c50edd114901226b469c51dd40")]
     public PuzzleResult Part1(string input)
     {
         var pipes = new VolcanicPipes(input);
         var result = pipes.Part1();
 
-        return new PuzzleResult(result, "dd3e51c50edd114901226b469c51dd40");
+        return new PuzzleResult(result);
     }
 
-    [Puzzle("")]
+    [Puzzle("29db1cdba5fd2b052581c68854027ea8")]
     public PuzzleResult Part2(string input)
     {
         var pipes = new VolcanicPipes(input);
         var result = pipes.Part2();
 
-        return new PuzzleResult(result, "29db1cdba5fd2b052581c68854027ea8");
+        return new PuzzleResult(result);
     }
 }

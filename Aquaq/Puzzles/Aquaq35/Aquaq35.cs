@@ -9,13 +9,7 @@ public class Aquaq35 : AquaqPuzzle
 {
     [AdditionalCommonInputFile("Words.txt")]
     [Puzzle("47f8ac801da35487059c7f5acb1c77ac")]
-    public PuzzleResult Solve(string input, string additionalInput)
-    {
-        var words = additionalInput.Split(LineBreaks.Single);
-        var keyword = FindKeyword(words, input);
-
-        return new PuzzleResult(keyword);
-    }
+    public string Solve(string input, string additionalInput) => FindKeyword(additionalInput.Split(LineBreaks.Single), input);
 
     private static string FindKeyword(IEnumerable<string> words, string input)
     {

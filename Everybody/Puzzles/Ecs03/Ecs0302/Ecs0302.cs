@@ -11,7 +11,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
     private const char Empty = '.';
     private const char Bone = '#';
 
-    [Puzzle("")]
+    [Puzzle("38aac781a486c5ca9eb6efe32f529b4e")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);
@@ -42,10 +42,10 @@ public class Ecs0302 : EverybodyStoryPuzzle
             grid.TurnRight();
         }
         
-        return new PuzzleResult(stepCount, "38aac781a486c5ca9eb6efe32f529b4e");
+        return new PuzzleResult(stepCount);
     }
 
-    [Puzzle("")]
+    [Puzzle("9621d21040a0ca3450ce213d1dca7bb5")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);
@@ -88,10 +88,10 @@ public class Ecs0302 : EverybodyStoryPuzzle
             grid.TurnRight();
         }
         
-        return new PuzzleResult(stepCount, "9621d21040a0ca3450ce213d1dca7bb5");
+        return new PuzzleResult(stepCount);
     }
 
-    [Puzzle("")]
+    [Puzzle("91141abd782d1d77e4fc599ef1a7d8f3")]
     public PuzzleResult Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);
@@ -161,7 +161,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
             }
         }
         
-        return new PuzzleResult(stepCount, "91141abd782d1d77e4fc599ef1a7d8f3");
+        return new PuzzleResult(stepCount);
     }
 
     private static IEnumerable<Coord> GetEnclosedCoords(Grid<char> grid, Coord start)

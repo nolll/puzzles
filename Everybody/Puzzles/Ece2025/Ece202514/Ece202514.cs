@@ -7,7 +7,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202514;
 [Name("The Game of Light")]
 public class Ece202514 : EverybodyEventPuzzle
 {
-    [Puzzle("")]
+    [Puzzle("a0147003c53749f3fe07887624e7f4fb")]
     public PuzzleResult Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -18,10 +18,10 @@ public class Ece202514 : EverybodyEventPuzzle
             count += grid.Values.Count(o => o == '#');
         }
         
-        return new PuzzleResult(count, "a0147003c53749f3fe07887624e7f4fb");
+        return new PuzzleResult(count);
     }
 
-    [Puzzle("")]
+    [Puzzle("18d5ea1ad565154844e4544540b67cf5")]
     public PuzzleResult Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
@@ -32,10 +32,10 @@ public class Ece202514 : EverybodyEventPuzzle
             count += grid.Values.Count(o => o == '#');
         }
         
-        return new PuzzleResult(count, "18d5ea1ad565154844e4544540b67cf5");
+        return new PuzzleResult(count);
     }
 
-    [Puzzle("")]
+    [Puzzle("4093ed780cd8cd567ea1d2fdf4e14cb6")]
     public PuzzleResult Part3(string input)
     {
         var seen = new Dictionary<string, (int index, int count)>();
@@ -81,7 +81,7 @@ public class Ece202514 : EverybodyEventPuzzle
             }
         }
         
-        return new PuzzleResult(totalCount, "4093ed780cd8cd567ea1d2fdf4e14cb6");
+        return new PuzzleResult(totalCount);
     }
 
     private static Grid<char> NextStep(Grid<char> grid)

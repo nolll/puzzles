@@ -8,7 +8,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq24;
 public class Aquaq24 : AquaqPuzzle
 {
     [Puzzle("23ad8be7b57a17a9bee0021b20637f29")]
-    public PuzzleResult Solve(string input)
+    public string Solve(string input)
     {
         var parts = input.Split(LineBreaks.Single);
 
@@ -19,8 +19,6 @@ public class Aquaq24 : AquaqPuzzle
         var decoded = huffman.Decode(encoded);
 
         // The answer is just a part of the string
-        var result = decoded.Split(" ").Last().Trim();
-
-        return new PuzzleResult(result);
+        return decoded.Split(" ").Last().Trim();
     }
 }

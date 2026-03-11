@@ -98,7 +98,7 @@ public class Ecs0201Tests
                              LRLRLLLRRRRL
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("13 43");
+        Sut.Part3(input).Should().Be("13 43");
     }
     
     private static Ecs0201 Sut => new();

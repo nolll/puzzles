@@ -7,18 +7,18 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202406;
 public class Ece202406 : EverybodyEventPuzzle
 {
     [Puzzle("1e1f24ab14407ffbaf4f6b9143384384")]
-    public PuzzleResult Part1(string input) => new(SolvePart1(input));
+    public string Part1(string input) => SolvePart1(input);
     
     [Puzzle("aaacecff7b5d20d54ea2d96c4797166e")]
-    public PuzzleResult Part2(string input) => new(Part2And3(input));
+    public string Part2(string input) => SolvePart2And3(input);
     
     [Puzzle("c3544a49e37c3dfedc6dec99596402da")]
-    public PuzzleResult Part3(string input) => new(Part2And3(input));
+    public string Part3(string input) => SolvePart2And3(input);
 
-    private static string SolvePart1(string input) => string.Join("", Run(input));
-    private static string Part2And3(string input) => string.Join("", Run(input).Select(o => o[0]));
+    private static string SolvePart1(string input) => string.Join("", Solve(input));
+    private static string SolvePart2And3(string input) => string.Join("", Solve(input).Select(o => o[0]));
 
-    private static string[] Run(string input)
+    private static string[] Solve(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var nodes = new Dictionary<string, string[]>();

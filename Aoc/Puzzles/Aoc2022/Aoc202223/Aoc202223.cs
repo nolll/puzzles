@@ -16,24 +16,24 @@ public class Aoc202223 : AocPuzzle
     private static readonly (int x, int y) West = (-1, 0);
     private static readonly (int x, int y) NorthWest = (-1, -1);
 
-    private readonly List<List<(int x, int y)>> _searchDeltas = new()
-    {
-        new () { North, NorthWest, NorthEast },
-        new () { South, SouthWest, SouthEast },
-        new() { West, NorthWest, SouthWest },
-        new() { East, NorthEast, SouthEast }
-    };
+    private readonly List<List<(int x, int y)>> _searchDeltas =
+    [
+        [North, NorthWest, NorthEast],
+        [South, SouthWest, SouthEast],
+        [West, NorthWest, SouthWest],
+        [East, NorthEast, SouthEast]
+    ];
 
-    private readonly List<(int x, int y)> _searchResults = new()
-    {
+    private readonly List<(int x, int y)> _searchResults =
+    [
         North,
         South,
         West,
         East
-    };
+    ];
 
-    private readonly List<(int x, int y)> _deltas = new()
-    {
+    private readonly List<(int x, int y)> _deltas =
+    [
         North,
         NorthEast,
         East,
@@ -41,23 +41,21 @@ public class Aoc202223 : AocPuzzle
         South,
         SouthWest,
         West,
-        NorthWest,
-    };
+        NorthWest
+    ];
 
     [Puzzle("b2078a7c2a582e68796f55a71f1fe1cd")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var (emptyCount, _) = Run(input, 10);
-
-        return new PuzzleResult(emptyCount);
+        return emptyCount;
     }
 
     [Puzzle("b4b9f7dae4709930cd73d70f45eac0ae")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var (_, endRound) = Run(input);
-
-        return new PuzzleResult(endRound);
+        return endRound;
     }
     
     public (int emptyCount, int endRound) Run(string input, int rounds = int.MaxValue)

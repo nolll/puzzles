@@ -6,16 +6,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202203;
 public class Aoc202203 : AocPuzzle
 {
     [Puzzle("734ddef10b36997c859308e094bc4baf")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = Rucksacks.GetPriority1(input);
-        return new PuzzleResult(result);
-    }
+    public int Part1(string input) => Rucksacks.GetPriority1(input);
 
     [Puzzle("9fd65a1dd39fabc5782fd0b774cda196")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = Rucksacks.GetPriority2(input);
-        return new PuzzleResult(result);
-    }
+    public int Part2(string input) => Rucksacks.GetPriority2(input);
 }

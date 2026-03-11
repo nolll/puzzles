@@ -60,10 +60,7 @@ public class BlizzardNavigation
         }
     }
 
-    public int Part1()
-    {
-        return CountSteps(_enter, _exit);
-    }
+    public int Part1() => CountSteps(_enter, _exit);
 
     public int Part2()
     {

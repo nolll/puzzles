@@ -3,31 +3,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202209;
 public class Aoc202209Tests
 {
     [Fact]
-    public void Part1()
-    {
-        var ropeBridge = new RopeBridge();
-        var result = ropeBridge.Part1(Input1);
-
-        result.Should().Be(13);
-    }
+    public void Part1() => Sut.Part1(Input1).Should().Be(13);
 
     [Fact]
-    public void Part2Example1()
-    {
-        var ropeBridge = new RopeBridge();
-        var result = ropeBridge.Part2(Input1);
-
-        result.Should().Be(1);
-    }
+    public void Part2Example1() => Sut.Part2(Input1).Should().Be(1);
 
     [Fact]
-    public void Part2Example2()
-    {
-        var ropeBridge = new RopeBridge();
-        var result = ropeBridge.Part2(Input2);
-
-        result.Should().Be(36);
-    }
+    public void Part2Example2() => Sut.Part2(Input2).Should().Be(36);
 
     private const string Input1 = """
                                   R 4
@@ -50,4 +32,6 @@ public class Aoc202209Tests
                                   L 25
                                   U 20
                                   """;
+
+    private static Aoc202209 Sut => new();
 }

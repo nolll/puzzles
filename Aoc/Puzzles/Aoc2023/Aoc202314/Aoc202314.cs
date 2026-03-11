@@ -7,20 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202314;
 public class Aoc202314 : AocPuzzle
 {
     [Puzzle("38c4a3857389e8b424b86782b940d736")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = RollNorth(input);
-
-        return new PuzzleResult(result);
-    }
+    public int Part1(string input) => RollNorth(input);
 
     [Puzzle("bc4f573f0b32490dec258ffe95e3b88b")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = RunManyCycles(input);
-        
-        return new PuzzleResult(result);
-    }
+    public int Part2(string input) => RunManyCycles(input);
 
     public static int RunManyCycles(string s)
     {

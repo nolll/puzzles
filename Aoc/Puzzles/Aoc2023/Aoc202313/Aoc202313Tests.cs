@@ -115,7 +115,7 @@ public class Aoc202313Tests
 
         var result = new Aoc202313().Part1(input);
 
-        result.Answer.Should().Be("405");
+        result.Should().Be(405);
     }
 
     [Fact]
@@ -141,6 +141,6 @@ public class Aoc202313Tests
 
         var result = new Aoc202313().Part2(input);
 
-        result.Answer.Should().Be("400");
+        result.Should().Be(400);
     }
 }

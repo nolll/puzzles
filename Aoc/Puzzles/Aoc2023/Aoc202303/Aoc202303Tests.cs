@@ -18,7 +18,7 @@ public class Aoc202303Tests
     [Fact]
     public void EngineParts()
     {
-        var result = Aoc202303.Run(Input);
+        var result = Aoc202303.Solve(Input);
 
         result.EngineParts.Should().Be(4361);
     }
@@ -26,7 +26,7 @@ public class Aoc202303Tests
     [Fact]
     public void GearRatios()
     {
-        var result = Aoc202303.Run(Input);
+        var result = Aoc202303.Solve(Input);
 
         result.GearRatios.Should().Be(467835);
     }

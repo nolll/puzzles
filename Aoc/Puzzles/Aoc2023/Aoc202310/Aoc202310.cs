@@ -7,12 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202310;
 public class Aoc202310 : AocPuzzle
 {
     [Puzzle("7307413d1efe2d8b5a4994a204a50a86")]
-    public PuzzleResult Part1(string input) => 
-        new(FarthestPoint(input));
+    public int Part1(string input) => FarthestPoint(input);
 
     [Puzzle("59413d1f83d3d395818ceddd09c64bbf")]
-    public PuzzleResult Part2(string input) => 
-        new(EnclosedTileCount(input));
+    public int Part2(string input) => EnclosedTileCount(input);
 
     public static int FarthestPoint(string input)
     {

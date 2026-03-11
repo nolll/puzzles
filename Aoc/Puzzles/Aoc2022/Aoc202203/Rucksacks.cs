@@ -4,23 +4,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202203;
 
 public static class Rucksacks
 {
-    public static int GetPriority1(string input)
-    {
-        var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0).ToList();
-        return GetPrioritySumForLines(lines);
-    }
+    public static int GetPriority1(string input) => GetPrioritySumForLines(Parse(input));
+    public static int GetPriority2(string input) => GetPrioritySumForGroups(Parse(input));
+    private static List<string> Parse(string input) => input.Split(LineBreaks.Single).Where(o => o.Length > 0).ToList();
 
-    public static int GetPriority2(string input)
-    {
-        var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0).ToList();
-        return GetPrioritySumForGroups(lines);
-    }
-
-    private static int GetPrioritySumForLines(IList<string> lines)
-    {
-        var partsList = lines.Select(SplitInTwo);
-        return partsList.Sum(parts => GetPriorityForLine(parts[0], parts[1]));
-    }
+    private static int GetPrioritySumForLines(IList<string> lines) => 
+        lines.Select(SplitInTwo).Sum(parts => GetPriorityForLine(parts[0], parts[1]));
 
     private static int GetPriorityForLine(string s1, string s2)
     {
@@ -38,8 +27,8 @@ public static class Rucksacks
     private static int GetPrioritySumForGroups(IList<string> lines)
     {
         var totalSum = 0;
-
-        for (var i = 0; i < lines.Count(); i += 3)
+        
+        for (var i = 0; i < lines.Count; i += 3)
         {
             totalSum += GetPriorityForGroup(lines[i], lines[i + 1], lines[i + 2]);
         }

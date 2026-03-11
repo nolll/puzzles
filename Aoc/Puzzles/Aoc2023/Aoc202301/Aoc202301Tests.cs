@@ -12,11 +12,9 @@ public class Aoc202301Tests
                              treb7uchet
                              """;
 
-        var result = Aoc202301.FindCalibrationNumberPart1(input).Sum();
-
-        result.Should().Be(142);
+        Sut.Part1(input).Should().Be(142);
     }
-    
+
     [Fact]
     public void CalibrationNumbersPart2()
     {
@@ -30,8 +28,8 @@ public class Aoc202301Tests
                              7pqrstsixteen
                              """;
 
-        var result = Aoc202301.FindCalibrationNumberPart2(input).Sum();
-
-        result.Should().Be(281);
+        Sut.Part2(input).Should().Be(281);
     }
+
+    private static Aoc202301 Sut => new();
 }

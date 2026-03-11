@@ -8,22 +8,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202303;
 public class Aoc202303 : AocPuzzle
 {
     [Puzzle("9f5f9a7fa049bd552fc05c71b10aab1c")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = Run(input);
-
-        return new PuzzleResult(result.EngineParts);
-    }
+    public int Part1(string input) => Solve(input).EngineParts;
 
     [Puzzle("0ec5347a4e1a8f41769180000882ae7d")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = Run(input);
+    public int Part2(string input) => Solve(input).GearRatios;
 
-        return new PuzzleResult(result.GearRatios);
-    }
-
-    public static Result Run(string input)
+    public static Result Solve(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var width = lines.First().Length;

@@ -6,12 +6,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202210;
 public class Aoc202210 : AocPuzzle
 {
     [Puzzle("cbd8f00e296a6ea077faf3fd0363b201")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var tube = new CathodeRayTube();
         var (result, _, _) = tube.Run(input);
 
-        return new PuzzleResult(result);
+        return result;
     }
 
     [Puzzle("0b3ccbb8211fc474bd2156e662bf15fd")]

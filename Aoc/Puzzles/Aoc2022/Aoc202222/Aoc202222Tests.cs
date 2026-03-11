@@ -5,19 +5,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202222;
 public class Aoc202222Tests
 {
     [Fact]
-    public void Part1() => Aoc202222.SolvePart1(Input).Should().Be(6032);
-
-    // todo: write tests for part 2 test data (separate mapping, or sort out general mapping).
-    // There are tests for the mapping of the real data though
-    
-    //[Fact]
-    //public void Part2()
-    //{                            
-    //    var puzzle = new Year2022Day22();
-    //    var result = puzzle.Part2(Input);
-
-    //    result.Should().Be(5031);
-    //}
+    public void Part1() => new Aoc202222().Part1(Input).Should().Be(6032);
 
     [Theory]
     [InlineData(0, 100, '^', 50, 50, '>')]

@@ -8,12 +8,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2022.Aoc202222;
 public class Aoc202222 : AocPuzzle
 {
     [Puzzle("5230885ca3521519a0995658751be3a5")]
-    public PuzzleResult Part1(string input) => new(SolvePart1(input));
-    
-    [Puzzle("192dc6b2bb8fcfe7b7deaa5f30ec9f80")]
-    public PuzzleResult Part2(string input) => new(SolvePart2(input));
-
-    public static int SolvePart1(string input)
+    public int Part1(string input)
     {
         var groups = input.Split(LineBreaks.Double);
         var grid = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
@@ -91,7 +86,8 @@ public class Aoc202222 : AocPuzzle
         return password;
     }
 
-    public static int SolvePart2(string input)
+    [Puzzle("192dc6b2bb8fcfe7b7deaa5f30ec9f80")]
+    public int Part2(string input)
     {
         var groups = input.Split(LineBreaks.Double);
         var grid = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');

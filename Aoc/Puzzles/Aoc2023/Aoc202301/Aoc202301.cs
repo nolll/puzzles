@@ -10,20 +10,16 @@ public class Aoc202301 : AocPuzzle
         ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
     [Puzzle("93e7c44a86bd9d03f7156e6fc3ed61c8")]
-    public PuzzleResult Part1(string input) => new(FindCalibrationNumberPart1(input).Sum());
+    public int Part1(string input) => input.Split(LineBreaks.Single)
+        .Select(FindCalibrationNumber)
+        .Sum();
 
     [Puzzle("1a8775b7ae93118b31708e052207307d")]
-    public PuzzleResult Part2(string input) => new(FindCalibrationNumberPart2(input).Sum());
-
-    public static List<int> FindCalibrationNumberPart1(string input) => input.Split(LineBreaks.Single)
-        .Select(FindCalibrationNumber)
-        .ToList();
-
-    public static List<int> FindCalibrationNumberPart2(string input) => input.Split(LineBreaks.Single)
+    public int Part2(string input) => input.Split(LineBreaks.Single)
         .Select(ReplaceStringDigits)
         .Select(FindCalibrationNumber)
-        .ToList();
-
+        .Sum();
+    
     private static int FindCalibrationNumber(string input) => int.Parse($"{FindFirstDigit(input)}{FindLastDigit(input)}");
 
     private static string ReplaceStringDigits(string s)

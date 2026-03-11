@@ -106,16 +106,14 @@ public class Ece202510 : EverybodyEventPuzzle
     }
 
     [Puzzle("d7c74983caa1983fd5342db272ce11b0")]
-    public PuzzleResult Part3(string input)
+    public long Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var dragon = grid.Coords.First(o => grid.ReadValueAt(o) == 'D');
         var sheep = grid.Coords.Where(o => grid.ReadValueAt(o) == 'S').ToArray();
         var cache = new Dictionary<(string, string, Turn), long>();
 
-        var count = CountSequences(sheep, dragon, Turn.Sheep, grid, cache);
-        
-        return new PuzzleResult(count);
+        return CountSequences(sheep, dragon, Turn.Sheep, grid, cache);
     }
 
     private long CountSequences(Coord[] sheep, Coord dragon, Turn turn, Grid<char> grid, Dictionary<(string, string, Turn), long> cache)

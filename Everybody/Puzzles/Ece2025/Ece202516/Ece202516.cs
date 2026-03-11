@@ -7,27 +7,15 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202516;
 public class Ece202516 : EverybodyEventPuzzle
 {
     [Puzzle("c43ffe414cd1f0d7024f9014c035703a")]
-    public PuzzleResult Part1(string input)
-    {
-        var spell = Numbers.IntsFromString(input).ToList();
-        var blockCount = CountRequiredBlocks(spell, 90);
-
-        return new PuzzleResult(blockCount);
-    }
+    public long Part1(string input) => CountRequiredBlocks(Numbers.IntsFromString(input).ToList(), 90);
 
     [Puzzle("d543f8d5b11ac6d4e21685cd8674fc6f")]
-    public PuzzleResult Part2(string input)
-    {
-        var spell = GetSpell(input);
-        var product = spell.Aggregate(1L, (current, b) => current * b);
-
-        return new PuzzleResult(product);
-    }
+    public long Part2(string input) => GetSpell(input).Aggregate(1L, (current, b) => current * b);
 
     [Puzzle("b91ced40f2ab99acef778dbb6b61aeee")]
-    public PuzzleResult Part3(string input) => new(Part3(input, 202_520_252_025_000));
+    public long Part3(string input) => SolvePart3(input, 202_520_252_025_000);
 
-    public long Part3(string input, long blocksAvailable) => BinarySearch(GetSpell(input), blocksAvailable);
+    public long SolvePart3(string input, long blocksAvailable) => BinarySearch(GetSpell(input), blocksAvailable);
 
     private static List<int> GetSpell(string input)
     {

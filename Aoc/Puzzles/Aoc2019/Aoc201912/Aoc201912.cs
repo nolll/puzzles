@@ -16,11 +16,11 @@ public class Aoc201912 : AocPuzzle
     }
 
     [Puzzle("b61b39d42360ecd83bd6094a285a4251")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var tracker2 = new MoonTracker(input);
         tracker2.RunUntilRepeat();
 
-        return new PuzzleResult(tracker2.Iterations);
+        return tracker2.Iterations;
     }
 }

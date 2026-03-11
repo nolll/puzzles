@@ -36,7 +36,7 @@ public class Ece202514 : EverybodyEventPuzzle
     }
 
     [Puzzle("4093ed780cd8cd567ea1d2fdf4e14cb6")]
-    public PuzzleResult Part3(string input)
+    public long Part3(string input)
     {
         var seen = new Dictionary<string, (int index, int count)>();
         const int size = 34;
@@ -81,7 +81,7 @@ public class Ece202514 : EverybodyEventPuzzle
             }
         }
         
-        return new PuzzleResult(totalCount);
+        return totalCount;
     }
 
     private static Grid<char> NextStep(Grid<char> grid)

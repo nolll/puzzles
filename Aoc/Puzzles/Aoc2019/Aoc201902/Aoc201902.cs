@@ -7,12 +7,11 @@ namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201902;
 public class Aoc201902 : AocPuzzle
 {
     [Puzzle("85e8cb8123555ca9bd39b2c6b962e54a")]
-    public PuzzleResult Part1(string input)
+    public long Part1(string input)
     {
         var computer = new ConsoleComputer(input);
         computer.Start(false, 12, 2);
-        var value = computer.Result;
-        return new PuzzleResult(value);
+        return computer.Result;
     }
 
     [Puzzle("b505e47f6dc62ca5acbbe708dd2192a5")]

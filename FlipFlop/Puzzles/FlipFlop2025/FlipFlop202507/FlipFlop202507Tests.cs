@@ -9,13 +9,13 @@ public class FlipFlop202507Tests
                                  """;
 
     [Fact]
-    public void Part1() => Sut.Part1(Input).Answer.Should().Be("11");
+    public void Part1() => Sut.Part1(Input).Should().Be(11);
 
     [Fact]
-    public void Part2() => Sut.Part2(Input).Answer.Should().Be("108");
+    public void Part2() => Sut.Part2(Input).Should().Be(108);
 
     [Fact]
-    public void Part3() => Sut.Part3(Input).Answer.Should().Be("98");
+    public void Part3() => Sut.Part3(Input).Should().Be(98);
 
     [Theory]
     [InlineData(2, 2, 2)]

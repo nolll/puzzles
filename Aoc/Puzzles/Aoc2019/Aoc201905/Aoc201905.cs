@@ -9,25 +9,25 @@ public class Aoc201905 : AocPuzzle
     private long _output;
 
     [Puzzle("fb635501f54f36e602ebf7e465625fba")]
-    public PuzzleResult Part1(string input)
+    public long Part1(string input)
     {
         var ci1 = new IntCodeComputer(input, ReadInputPart1, WriteOutput);
         ci1.Start();
 
-        return new PuzzleResult(_output);
+        return _output;
     }
 
     [Puzzle("35062337f01f4ea95b2e1f10c739b629")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var ci2 = new IntCodeComputer(input, ReadInputPart2, WriteOutput);
         ci2.Start();
 
-        return new PuzzleResult(_output);
+        return _output;
     }
 
-    private long ReadInputPart1() => 1;
-    private long ReadInputPart2() => 5;
+    private static long ReadInputPart1() => 1;
+    private static long ReadInputPart2() => 5;
 
     private bool WriteOutput(long output)
     {

@@ -15,28 +15,25 @@ public class Ece202518 : EverybodyEventPuzzle
     public PuzzleResult Part1(string input) => new(ParsePlants(input).Last().Energy);
 
     [Puzzle("810932c961238e78746d0d6f239e398d")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var (plantstr, teststr) = input.Split(LineBreaks.Triple);
-        var plants = ParsePlants(plantstr);
-        var sum = teststr.Split(LineBreaks.Single).Select(ParseTestCase).Sum(o => ActivateAndGetEnergy(plants, o.ToArray()));
-
-        return new PuzzleResult(sum);
+        return teststr.Split(LineBreaks.Single)
+            .Select(ParseTestCase)
+            .Sum(o => ActivateAndGetEnergy(ParsePlants(plantstr), o.ToArray()));
     }
 
     [Puzzle("e784c3249103e09adf84a2ac82143826")]
-    public PuzzleResult Part3(string input)
+    public long Part3(string input)
     {
         var (plantstr, teststr) = input.Split(LineBreaks.Triple);
         var plants = ParsePlants(plantstr);
         var optimal = GetOptimalEnergy(plants);
-        var sum = teststr.Split(LineBreaks.Single)
+        return teststr.Split(LineBreaks.Single)
             .Select(ParseTestCase)
             .Select(o => ActivateAndGetEnergy(plants, o))
             .Where(energy => energy > 0)
             .Sum(energy => optimal - energy);
-
-        return new PuzzleResult(sum);
     }
 
     private static long GetOptimalEnergy(Plant[] plants)

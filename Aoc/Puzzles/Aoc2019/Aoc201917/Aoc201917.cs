@@ -17,11 +17,5 @@ public class Aoc201917 : AocPuzzle
     }
 
     [Puzzle("8972452161d6f5ef5e3681d5ce31f9b6")]
-    public PuzzleResult Part2(string input)
-    {
-        var sc2 = new ScaffoldingComputer2(input);
-        var result2 = sc2.Run();
-
-        return new PuzzleResult(result2);
-    }
+    public long Part2(string input) => new ScaffoldingComputer2(input).Run();
 }

@@ -12,7 +12,7 @@ public class Ecs0103Tests
                              x=4 y=4
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("1310");
+        Sut.Part1(input).Should().Be(1310);
     }
 
     [Fact]
@@ -26,7 +26,7 @@ public class Ecs0103Tests
                              x=1 y=3
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("14");
+        Sut.Part2(input).Should().Be(14);
     }
     
     private static Ecs0103 Sut => new();

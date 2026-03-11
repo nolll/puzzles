@@ -8,19 +8,13 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202505;
 public class Ece202505 : EverybodyEventPuzzle
 {
     [Puzzle("da8e81f2fb0217604074c546d70d3b9d")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = Sword.Parse(input).Quality;
-        
-        return new PuzzleResult(result);
-    }
+    public long Part1(string input) => Sword.Parse(input).Quality;
 
     [Puzzle("08078be2afe2fd502f81f20a8088d436")]
-    public PuzzleResult Part2(string input)
+    public long Part2(string input)
     {
         var qualities = ParseSwords(input).Select(o => o.Quality).ToList();
-        var result = qualities.Max() - qualities.Min();
-        return new PuzzleResult(result);
+        return qualities.Max() - qualities.Min();
     }
 
     [Puzzle("379c8b556406dfefbd579b47d63c2b93")]

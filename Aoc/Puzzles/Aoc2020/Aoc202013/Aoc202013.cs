@@ -14,10 +14,5 @@ public class Aoc202013 : AocPuzzle
     }
 
     [Puzzle("3b77da892f95806bf7e9daa18ede02a0")]
-    public PuzzleResult Part2(string input)
-    {
-        var system = new BusScheduler2(input);
-        var value = system.GetContestMinute();
-        return new PuzzleResult(value);
-    }
+    public long Part2(string input) => new BusScheduler2(input).GetContestMinute();
 }

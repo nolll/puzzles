@@ -92,11 +92,10 @@ public class Ece202511 : EverybodyEventPuzzle
     }
 
     [Puzzle("a6ce160669697ddf6f40132abe96f3a1")]
-    public PuzzleResult Part3(string input)
+    public long Part3(string input)
     {
         var cols = input.Split(LineBreaks.Single).Select(long.Parse).ToArray();
         var avg = cols.Sum() / cols.Length;
-        var totalDistanceToAvg = cols.Where(o => o < avg).Select(o => avg - o).Sum();
-        return new PuzzleResult(totalDistanceToAvg);
+        return cols.Where(o => o < avg).Select(o => avg - o).Sum();
     }
 }

@@ -13,10 +13,5 @@ public class Aoc202010 : AocPuzzle
     }
 
     [Puzzle("791600ed80a4c8e120ae60a88193043f")]
-    public PuzzleResult Part2(string input)
-    {
-        var chain = new PowerAdapterChain(input);
-        var combinations = chain.GetTotalNumberOfCombinations();
-        return new PuzzleResult(combinations);
-    }
+    public long Part2(string input) => new PowerAdapterChain(input).GetTotalNumberOfCombinations();
 }

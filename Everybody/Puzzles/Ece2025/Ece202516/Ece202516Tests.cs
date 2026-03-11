@@ -7,7 +7,7 @@ public class Ece202516Tests
     {
         const string input = "1,2,3,5,9";
 
-        Sut.Part1(input).Answer.Should().Be("193");
+        Sut.Part1(input).Should().Be(193);
     }
 
     [Fact]
@@ -15,7 +15,7 @@ public class Ece202516Tests
     {
         const string input = "1,2,2,2,2,3,1,2,3,3,1,3,1,2,3,2,1,4,1,3,2,2,1,3,2,2";
 
-        Sut.Part2(input).Answer.Should().Be("270");
+        Sut.Part2(input).Should().Be(270);
     }
 
     [Theory]
@@ -39,7 +39,7 @@ public class Ece202516Tests
     {
         const string input = "1,2,2,2,2,3,1,2,3,3,1,3,1,2,3,2,1,4,1,3,2,2,1,3,2,2";
 
-        Sut.Part3(input, availableBlocks).Should().Be(expected);
+        Sut.SolvePart3(input, availableBlocks).Should().Be(expected);
     }
 
     private static Ece202516 Sut => new();

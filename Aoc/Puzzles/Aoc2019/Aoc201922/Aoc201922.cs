@@ -1,3 +1,4 @@
+using System.Numerics;
 using Pzl.Common;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019.Aoc201922;
@@ -17,10 +18,5 @@ public class Aoc201922 : AocPuzzle
     }
 
     [Puzzle("19df07b5230d776df66b9378ef69dfc8")]
-    public PuzzleResult Part2(string input)
-    {
-        var shuffler2 = new CardShuffler();
-        var cardAtPosition2020 = shuffler2.ShuffleBig(input);
-        return new PuzzleResult((long)cardAtPosition2020);
-    }
+    public BigInteger Part2(string input) => new CardShuffler().ShuffleBig(input);
 }

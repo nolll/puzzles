@@ -7,16 +7,13 @@ namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202502;
 public class FlipFlop202502 : FlipFlopPuzzle
 {
     [Puzzle("a108ed87069fbb10b6d6595e8795dc16")]
-    public PuzzleResult Part1(string input) => 
-        new(Solve(input, sequenceLength => sequenceLength));
+    public long Part1(string input) => Solve(input, sequenceLength => sequenceLength);
 
     [Puzzle("3d520917bed77059dbbb4bf1f7433ffa")]
-    public PuzzleResult Part2(string input) => 
-        new(Solve(input, sequenceLength => Enumerable.Range(1, sequenceLength).Sum()));
+    public long Part2(string input) => Solve(input, sequenceLength => Enumerable.Range(1, sequenceLength).Sum());
 
     [Puzzle("9116cf946c0d82e0d08bffc0da078dd1")]
-    public PuzzleResult Part3(string input) => 
-        new(Solve(input, sequenceLength => Numbers.Fibonacci(sequenceLength)));
+    public long Part3(string input) => Solve(input, sequenceLength => Numbers.Fibonacci(sequenceLength));
 
     private static long Solve(string input, Func<int, long> heightDelta)
     {

@@ -41,7 +41,7 @@ public class FlipFlop202506 : FlipFlopPuzzle
     }
     
     [Puzzle("61dc24a9d639e326619bf87ce21094f7")]
-    public PuzzleResult Part3(string input)
+    public long Part3(string input)
     {
         var speeds = input.Split(LineBreaks.Single).Select(Numbers.IntsFromString).Select(o => new Coord(o[0], o[1])).ToList();
         var birdCount = 0L;
@@ -52,7 +52,7 @@ public class FlipFlop202506 : FlipFlopPuzzle
             birdCount += speeds.Select(o => Move(o, time)).Count(IsInFrame);
         }
         
-        return new PuzzleResult(birdCount);
+        return birdCount;
     }
 
     private static Coord Move(Coord coord, long time)

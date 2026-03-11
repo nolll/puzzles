@@ -9,7 +9,7 @@ namespace Pzl.Everybody.Puzzles.Ecs01.Ecs0103;
 public class Ecs0103 : EverybodyStoryPuzzle
 {
     [Puzzle("d051048d8661618a7c960f4992e086fd")]
-    public PuzzleResult Part1(string input)
+    public long Part1(string input)
     {
         var snails = ParseSnails(input);
         const int iterations = 100;
@@ -18,18 +18,16 @@ public class Ecs0103 : EverybodyStoryPuzzle
             snails = MoveSnails(snails);
         }
 
-        var sum = snails.Select(o => o.x + 100 * o.y).Sum();
-        
-        return new PuzzleResult(sum);
+        return snails.Select(o => o.x + 100 * o.y).Sum();
     }
     
     [Puzzle("6e4751eb49b140761150b2eca665319e")]
-    public PuzzleResult Part2(string input) => new(Part2And3(input));
+    public long Part2(string input) => SolvePart2And3(input);
     
     [Puzzle("4473ea2d23dce203ae09dd779eaca555")]
-    public PuzzleResult Part3(string input) => new(Part2And3(input));
+    public long Part3(string input) => SolvePart2And3(input);
 
-    private static long Part2And3(string input)
+    private static long SolvePart2And3(string input)
     {
         var snails = ParseSnails(input)
             .Select(o => (loopSize: GetLoopSize(o), offset: GetOffset(o)))
@@ -62,11 +60,11 @@ public class Ecs0103 : EverybodyStoryPuzzle
         {
             snails[i].x += 1;
             snails[i].y -= 1;
-            if (snails[i].y == 0)
-            {
-                snails[i].y = snails[i].x - 1;
-                snails[i].x = 1;
-            }
+            if (snails[i].y != 0) 
+                continue;
+            
+            snails[i].y = snails[i].x - 1;
+            snails[i].x = 1;
         }
 
         return snails;

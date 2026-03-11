@@ -68,7 +68,7 @@ public class Ece202518Tests
                              0 1 1
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("324");
+        Sut.Part2(input).Should().Be(324);
     }
 
     private static Ece202518 Sut => new();

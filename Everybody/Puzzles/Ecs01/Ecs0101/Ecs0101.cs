@@ -9,25 +9,13 @@ namespace Pzl.Everybody.Puzzles.Ecs01.Ecs0101;
 public class Ecs0101 : EverybodyStoryPuzzle
 {
     [Puzzle("400b09c8e50afd8c884e7693f14f2d76")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = FindBestResult(Eni1, input);
-        return new PuzzleResult(result);
-    }
+    public long Part1(string input) => FindBestResult(Eni1, input);
 
     [Puzzle("218170e1ab319a7f79e6be73f824bcb7")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = FindBestResult(Eni2, input);
-        return new PuzzleResult(result);
-    }
+    public long Part2(string input) => FindBestResult(Eni2, input);
 
     [Puzzle("66e6499f59383f4a9fd43d9320e68816")]
-    public PuzzleResult Part3(string input)
-    {
-        var result = FindBestResult(Eni3, input);
-        return new PuzzleResult(result);
-    }
+    public long Part3(string input) => FindBestResult(Eni3, input);
 
     private static long FindBestResult(Func<long, long, long, long> eni, string input)
     {

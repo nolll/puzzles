@@ -7,7 +7,7 @@ public class Ece202505Tests
     {
         const string input = "58:5,3,7,8,9,10,4,5,7,8,8";
 
-        Sut.Part1(input).Answer.Should().Be("581078");
+        Sut.Part1(input).Should().Be(581078);
     }
 
     [Fact]
@@ -26,7 +26,7 @@ public class Ece202505Tests
                              10:4,1,9,3,8,5,4,3,5,5
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("77053");
+        Sut.Part2(input).Should().Be(77053);
     }
 
     [Fact]

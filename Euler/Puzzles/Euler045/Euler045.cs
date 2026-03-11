@@ -7,7 +7,7 @@ namespace Pzl.Euler.Puzzles.Euler045;
 public class Euler045 : EulerPuzzle
 {
     [Puzzle("a0326c7014766ece5b2d88116aeb9ff6")]
-    public PuzzleResult Solve()
+    public long Solve()
     {
         const int inputValue = 285;
         var i = inputValue + 1;
@@ -16,7 +16,7 @@ public class Euler045 : EulerPuzzle
         {
             var t = Numbers.GetTriangularNumber(i);
             if (Numbers.IsPentagonalNumber(t) && Numbers.IsHexagonalNumber(t))
-                return new PuzzleResult(t);
+                return t;
             i++;
         }
     }

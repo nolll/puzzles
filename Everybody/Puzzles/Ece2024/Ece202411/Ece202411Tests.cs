@@ -27,7 +27,7 @@ public class Ece202411Tests
                              C:A
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("268815");
+        Sut.Part3(input).Should().Be(268815);
     }
 
     private static Ece202411 Sut => new();

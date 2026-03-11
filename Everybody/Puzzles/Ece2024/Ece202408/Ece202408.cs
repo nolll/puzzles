@@ -24,12 +24,12 @@ public class Ece202408 : EverybodyEventPuzzle
     }
 
     [Puzzle("afafe068673279bd495b7ccfc71a0064")]
-    public PuzzleResult Part2(string input) => new(RunPart2(input, 20240000, 1111));
+    public long Part2(string input) => SolvePart2(input, 20240000, 1111);
     
     [Puzzle("52ce3b750999eebc1512e2d801e327a4")]
-    public PuzzleResult Part3(string input) => new(RunPart3(input, 202400000, 10));
+    public long Part3(string input) => SolvePart3(input, 202400000, 10);
 
-    public long RunPart2(string input, int availableBlocks, int acolyteCount)
+    public long SolvePart2(string input, int availableBlocks, int acolyteCount)
     {
         var priestCount = int.Parse(input);
         var thickness = 1;
@@ -50,7 +50,7 @@ public class Ece202408 : EverybodyEventPuzzle
         return (sum - availableBlocks) * cols.Count;
     }
     
-    public long RunPart3(string input, int availableBlocks, int acolyteCount)
+    public long SolvePart3(string input, int availableBlocks, int acolyteCount)
     {
         var priestCount = int.Parse(input);
         var thickness = 1L;

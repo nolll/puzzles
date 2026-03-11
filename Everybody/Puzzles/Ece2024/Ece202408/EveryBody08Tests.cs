@@ -12,14 +12,14 @@ public class EveryBody08Tests
     [Fact]
     public void Part2()
     {
-        var result = Sut.RunPart2("3", 50, 5);
+        var result = Sut.SolvePart2("3", 50, 5);
         result.Should().Be(27);
     }
     
     [Fact]
     public void Part3()
     {
-        var result = Sut.RunPart3("2", 160, 5);
+        var result = Sut.SolvePart3("2", 160, 5);
         result.Should().Be(2);
     }
     

@@ -7,12 +7,8 @@ namespace Pzl.Euler.Puzzles.Euler010;
 public class Euler010 : EulerPuzzle
 {
     [Puzzle("91e6ee4eecd36e3d7d1278ed37721706")]
-    public PuzzleResult Solve()
-    {
-        var result = Run(2_000_000);
-        return new PuzzleResult(result);
-    }
+    public long Solve() => Solve(2_000_000);
 
-    public long Run(int limit) => 
+    public long Solve(int limit) => 
         Numbers.FindPrimesBelow(limit).Aggregate<int, long>(0, (current, p) => current + p);
 }

@@ -7,13 +7,9 @@ namespace Pzl.Euler.Puzzles.Euler002;
 public class Euler002 : EulerPuzzle
 {
     [Puzzle("abd3fbf8c9d403cd14e0a01404ae011d")]
-    public PuzzleResult Solve()
-    {
-        var sum = Run(4_000_000);
-        return new PuzzleResult(sum);
-    }
+    public long Solve() => Solve(4_000_000);
 
-    public long Run(long limit)
+    public long Solve(long limit)
     {
         var index = 0L;
         var sum = 0L;

@@ -7,18 +7,9 @@ namespace Pzl.Euler.Puzzles.Euler011;
 public class Euler011 : EulerPuzzle
 {
     [Puzzle("7dc8a53ba7f75787b1ab0d03ba571c17")]
-    public PuzzleResult Solve()
-    {
-        var result = RunInternal(Input);
-        return new PuzzleResult(result);
-    }
+    public long Solve() => Solve(Input);
 
-    public long RunInternal(string input)
-    {
-        var grid = BuildGrid(input);
-        var sumFinder = new GridProductFinder(grid);
-        return sumFinder.FindLargestSum();
-    }
+    public long Solve(string input) => new GridProductFinder(BuildGrid(input)).FindLargestSum();
 
     private class GridProductFinder(Grid<int> grid)
     {

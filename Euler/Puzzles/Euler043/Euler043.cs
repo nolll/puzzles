@@ -6,16 +6,14 @@ namespace Pzl.Euler.Puzzles.Euler043;
 public class Euler043 : EulerPuzzle
 {
     [Puzzle("0700006fb08f1a62536c94a99b1e1adc")]
-    public PuzzleResult Solve()
+    public long Solve()
     {
-        var divisors = new[] { 2, 3, 5, 7, 11, 13, 17 };
+        int[] divisors = [2, 3, 5, 7, 11, 13, 17];
         var remainingNumbers = Enumerable.Range(0, 10).ToList();
 
-        var numbers = FindNumbers("", remainingNumbers, divisors)
+        return FindNumbers("", remainingNumbers, divisors)
             .Select(long.Parse)
-            .ToList();
-
-        return new PuzzleResult(numbers.Sum());
+            .Sum();
     }
 
     private static List<string> FindNumbers(string s, List<int> remainingNumbers, int[] divisors)

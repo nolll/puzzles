@@ -9,7 +9,7 @@ public class Euler015Tests
     public void Test(int gridSize, long expected)
     {
         var puzzle = new Euler015();
-        var result = puzzle.Run(gridSize);
+        var result = puzzle.Solve(gridSize);
 
         result.Should().Be(expected);
     }

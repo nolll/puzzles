@@ -14,13 +14,13 @@ public class Ece202415 : EverybodyEventPuzzle
     private readonly (int r, int c)[] _diffs = [(-1, 0), (1, 0), (0, 1), (0, -1)];
     
     [Puzzle("4d832f8cc35ae0da374a91187caa538b")]
-    public PuzzleResult Part1(string input) => new(Solve(input));
+    public long Part1(string input) => Solve(input);
     
     [Puzzle("88139015cfdd3b0563287eff1d2229c1")]
-    public PuzzleResult Part2(string input) => new(Solve(input));
+    public long Part2(string input) => Solve(input);
     
     [Puzzle("3a179922baba26e752177ed54092cfdc")]
-    public PuzzleResult Part3(string input) => new(Solve(input));
+    public long Part3(string input) => Solve(input);
 
     private long Solve(string input)
     {

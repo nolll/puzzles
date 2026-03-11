@@ -7,20 +7,18 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202411;
 public class Ece202411 : EverybodyEventPuzzle
 {
     [Puzzle("cc639f849dfc284544c7bf69de29eeb5")]
-    public PuzzleResult Part1(string input) => new(Solve(input, "A", 4));
+    public long Part1(string input) => Solve(input, "A", 4);
     
     [Puzzle("e3f350e482453f5bf53e0c29f66820a6")]
-    public PuzzleResult Part2(string input) => new(Solve(input, "Z", 10));
+    public long Part2(string input) => Solve(input, "Z", 10);
 
     [Puzzle("aa7535c76fba2d10eeeabdf3d5479c7a")]
-    public PuzzleResult Part3(string input)
+    public long Part3(string input)
     {
         var conversions = ParseConversions(input);
         var termites = conversions.Keys;
         var results = termites.Select(termite => Solve(conversions, termite, 20)).ToList();
-        var diff = results.Max() - results.Min();
-        
-        return new PuzzleResult(diff);
+        return results.Max() - results.Min();
     }
 
     public long Solve(string input, string initalTermite, long days) => 

@@ -42,7 +42,7 @@ public class Ece202410Tests
                              **DWZN**GCJV**
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("3889");
+        Sut.Part3(input).Should().Be(3889);
     }
 
     private static Ece202410 Sut => new();

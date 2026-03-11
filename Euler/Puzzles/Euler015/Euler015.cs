@@ -6,13 +6,8 @@ namespace Pzl.Euler.Puzzles.Euler015;
 public class Euler015 : EulerPuzzle
 {
     [Puzzle("24564b04f61254168e07eb4d1c9df79f")]
-    public PuzzleResult Solve()
-    {
-        var result = Run(20);
-        return new PuzzleResult(result);
-    }
-
-    public long Run(int gridSize) => PascalTriangle(gridSize).Max();
+    public long Solve() => Solve(20);
+    public long Solve(int gridSize) => PascalTriangle(gridSize).Max();
 
     private static IEnumerable<long> PascalTriangle(int levels)
     {

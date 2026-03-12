@@ -2,19 +2,14 @@ namespace Pzl.Aquaq.Puzzles.Aquaq34;
 
 public class Aquaq34Tests
 {
+    private const string Input = """
+                                 station,r1,r2,r3
+                                 a,00:01,,00:02
+                                 b,00:16,,00:17
+                                 c,,00:21,
+                                 d,00:46,00:51,00:47
+                                 """;
+
     [Fact]
-    public void TrainRoutes()
-    {
-        const string input = """
-                             station,r1,r2,r3
-                             a,00:01,,00:02
-                             b,00:16,,00:17
-                             c,,00:21,
-                             d,00:46,00:51,00:47
-                             """;
-
-        var result = Aquaq34.LongestRouteTime(input);
-
-        result.Should().Be(64);
-    }
+    public void TrainRoutes() => new Aquaq34().Solve(Input).Should().Be(64);
 }

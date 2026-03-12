@@ -7,7 +7,7 @@ public class Ecs0202Tests
     {
         const string input = "GRBGGGBBBRRRRRRRR";
 
-        Sut.Part1(input).Answer.Should().Be("7");
+        Sut.Part1(input).Should().Be(7);
     }
 
     [Fact]

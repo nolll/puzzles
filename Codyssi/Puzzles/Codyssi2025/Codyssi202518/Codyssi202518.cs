@@ -10,25 +10,16 @@ public class Codyssi202518 : CodyssiPuzzle
     private const int SizeZ = 60;
 
     [Puzzle("a8c76203a26abde805a1a11cbd419b79")]
-    public PuzzleResult Part1(string input, int sizex = SizeX, int sizey = SizeY, int sizez = SizeZ)
-    {
-        var result = DebrisParser.Parse(input, sizex, sizey, sizez).Count;
-        return new PuzzleResult(result);
-    }
-    
+    public int Part1(string input, int sizex = SizeX, int sizey = SizeY, int sizez = SizeZ) => 
+        DebrisParser.Parse(input, sizex, sizey, sizez).Count;
+
     [Puzzle("c8dcfc39bf271a441c80feaf46160a32")]
-    public PuzzleResult Part2(string input, int sizex = SizeX, int sizey = SizeY, int sizez = SizeZ)
-    {
-        var result = RunPart2And3(input, sizex, sizey, sizez, 0);
-        return new PuzzleResult(result);
-    }
-    
+    public int Part2(string input, int sizex = SizeX, int sizey = SizeY, int sizez = SizeZ) => 
+        RunPart2And3(input, sizex, sizey, sizez, 0);
+
     [Puzzle("f81b4b34e7f317b195c2bfb97a67f3de")]
-    public PuzzleResult Part3(string input, int sizex = SizeX, int sizey = SizeY, int sizez = SizeZ)
-    {
-        var result = RunPart2And3(input, sizex, sizey, sizez, 3);
-        return new PuzzleResult(result);
-    }
+    public int Part3(string input, int sizex = SizeX, int sizey = SizeY, int sizez = SizeZ) => 
+        RunPart2And3(input, sizex, sizey, sizez, 3);
 
     private static int RunPart2And3(string input, int sizex, int sizey, int sizez, int acceptableDamage)
     {

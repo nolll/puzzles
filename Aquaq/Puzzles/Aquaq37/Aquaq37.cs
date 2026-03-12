@@ -10,13 +10,7 @@ public class Aquaq37 : AquaqPuzzle
 
     [AdditionalCommonInputFile("Words.txt")]
     [Puzzle("ba0ef798d7f57b80a0675236159ccfb1")]
-    public PuzzleResult Solve(string input, string additionalInput)
-    {
-        var words = FindWords(input, additionalInput);
-        var score = words.Sum(GetWordScore);
-
-        return new PuzzleResult(score);
-    }
+    public int Solve(string input, string additionalInput) => FindWords(input, additionalInput).Sum(GetWordScore);
 
     public List<string> FindWords(string input, string additionalInput)
     {

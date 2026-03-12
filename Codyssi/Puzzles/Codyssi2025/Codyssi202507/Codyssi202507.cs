@@ -8,7 +8,7 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202507;
 public class Codyssi202507 : CodyssiPuzzle
 {
     [Puzzle("845956d7694a6519373387779e2244af")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var (tracks, swaps, testIndex) = Parse(input);
         
@@ -19,11 +19,11 @@ public class Codyssi202507 : CodyssiPuzzle
             (tracks[a], tracks[b]) = (tracks[b], tracks[a]);
         }
         
-        return new PuzzleResult(tracks[testIndex]);
+        return tracks[testIndex];
     }
 
     [Puzzle("5b9f5658d2df37a466100d66dd0c6c33")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var (tracks, swaps, testIndex) = Parse(input);
         var swapCount = swaps.Length;
@@ -38,11 +38,11 @@ public class Codyssi202507 : CodyssiPuzzle
             (tracks[a], tracks[b], tracks[c]) = (tracks[c], tracks[a], tracks[b]);
         }
         
-        return new PuzzleResult(tracks[testIndex]);
+        return tracks[testIndex];
     }
 
     [Puzzle("e9f3598b7a6018657eea31863471e5ea")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var (tracks, swaps, testIndex) = Parse(input);
 
@@ -62,7 +62,7 @@ public class Codyssi202507 : CodyssiPuzzle
             }
         }
         
-        return new PuzzleResult(tracks[testIndex]);
+        return tracks[testIndex];
     }
 
     private static (int[] tracks, int[][] swaps, int testIndex) Parse(string input)

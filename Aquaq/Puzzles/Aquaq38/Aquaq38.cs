@@ -7,15 +7,9 @@ namespace Pzl.Aquaq.Puzzles.Aquaq38;
 public class Aquaq38 : AquaqPuzzle
 {
     [Puzzle("56082eb21bc29c4cc0607606e3d88ddd")]
-    public PuzzleResult Solve(string input)
-    {
-        var indexStreakProvider = new IndexStreakProvider();
-        var lists = input.Split(LineBreaks.Single)
-            .Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();
-        var sum = lists.Sum(o => GetComfScore(indexStreakProvider, o));
-
-        return new PuzzleResult(sum);
-    }
+    public int Solve(string input) => input.Split(LineBreaks.Single)
+        .Select(o => o.Split(' ').Select(int.Parse).ToArray())
+        .Sum(o => GetComfScore(new IndexStreakProvider(), o));
 
     public static int GetComfScore(IndexStreakProvider indexStreakProvider, int[] a)
     {
@@ -45,9 +39,6 @@ public class Aquaq38 : AquaqPuzzle
         return score;
     }
 
-    private static bool IsCosy(int length, int[] a, int[] indices) => 
-        GetStreakSum(a, indices) % length == 0;
-
-    private static int GetStreakSum(int[] a, int[] indices) => 
-        indices.Sum(index => a[index]);
+    private static bool IsCosy(int length, int[] a, int[] indices) => GetStreakSum(a, indices) % length == 0;
+    private static int GetStreakSum(int[] a, int[] indices) => indices.Sum(index => a[index]);
 }

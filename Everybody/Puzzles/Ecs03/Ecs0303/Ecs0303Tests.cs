@@ -13,7 +13,7 @@ public class Ecs0303Tests
                              id=5, plug=RED HEXAGON, leftSocket=GREEN CIRCLE, rightSocket=RED HEXAGON, data=?
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("43");
+        Sut.Part1(input).Should().Be(43);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class Ecs0303Tests
                              id=5, plug=RED PENTAGON, leftSocket=GREEN CIRCLE, rightSocket=GREEN CIRCLE, data=?
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("50");
+        Sut.Part2(input).Should().Be(50);
     }
 
     [Fact]
@@ -41,7 +41,7 @@ public class Ecs0303Tests
                              id=5, plug=RED PENTAGON, leftSocket=GREEN CIRCLE, rightSocket=GREEN CIRCLE, data=?
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("38");
+        Sut.Part3(input).Should().Be(38);
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public class Ecs0303Tests
                              id=6, plug=BLUE TRIANGLE, leftSocket=GREEN CIRCLE, rightSocket=RED CIRCLE, data=?
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("60");
+        Sut.Part3(input).Should().Be(60);
     }
 
     private static Ecs0303 Sut => new();

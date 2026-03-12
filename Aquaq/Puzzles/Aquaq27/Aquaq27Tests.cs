@@ -19,6 +19,5 @@ public class Aquaq27Tests
                                  """;
 
     [Fact] 
-    public void SnakeScore() => Aquaq27.CalculateSnakeScore(Input)
-        .Should().Be(7995);
+    public void SnakeScore() => new Aquaq27().Solve(Input).Should().Be(7995);
 }

@@ -16,14 +16,14 @@ public class Codyssi202511 : CodyssiPuzzle
     public string Part2(string input) => ToBase68(GetBase10Numbers(input).Sum());
 
     [Puzzle("9b2126706485aa8c523f0ff6809cfe15")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var sum = GetBase10Numbers(input).Sum();
         var b = 0;
         while (Math.Pow(b, 4) < sum)
             b++;
         
-        return new PuzzleResult(b);
+        return b;
     }
 
     private IEnumerable<long> GetBase10Numbers(string input)

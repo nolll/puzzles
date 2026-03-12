@@ -15,7 +15,7 @@ public class Ecs0302Tests
                              .......
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("12");
+        Sut.Part1(input).Should().Be(12);
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class Ecs0302Tests
                              .......
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("47");
+        Sut.Part2(input).Should().Be(47);
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class Ecs0302Tests
                              .......
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("87");
+        Sut.Part3(input).Should().Be(87);
     }
     
     [Fact]
@@ -67,7 +67,7 @@ public class Ecs0302Tests
                              ##......#######
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("239");
+        Sut.Part3(input).Should().Be(239);
     }
     
     [Fact]
@@ -112,7 +112,7 @@ public class Ecs0302Tests
                              ................................................................
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("1539");
+        Sut.Part3(input).Should().Be(1539);
     }
 
     private static Ecs0302 Sut => new();

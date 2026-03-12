@@ -12,7 +12,7 @@ public class Ecs0301Tests
                              6710:rrrRRr ggGGGg bbBBbB
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("9166");
+        Sut.Part1(input).Should().Be(9166);
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public class Ecs0301Tests
                              6710:rrrRRr ggGGGg bbBBbB ssSSss
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("2456");
+        Sut.Part2(input).Should().Be(2456);
     }
 
     [Fact]
@@ -50,7 +50,7 @@ public class Ecs0301Tests
                              80219:rRRrRR GGGggg BBbbbb SssSSs
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("292320");
+        Sut.Part3(input).Should().Be(292320);
     }
 
     private static Ecs0301 Sut => new();

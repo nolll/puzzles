@@ -12,7 +12,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
     private const char Bone = '#';
 
     [Puzzle("38aac781a486c5ca9eb6efe32f529b4e")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);
         var start = grid.FindAddresses(Current).First();
@@ -42,11 +42,11 @@ public class Ecs0302 : EverybodyStoryPuzzle
             grid.TurnRight();
         }
         
-        return new PuzzleResult(stepCount);
+        return stepCount;
     }
 
     [Puzzle("9621d21040a0ca3450ce213d1dca7bb5")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);
         var start = grid.FindAddresses(Current).First();
@@ -88,11 +88,11 @@ public class Ecs0302 : EverybodyStoryPuzzle
             grid.TurnRight();
         }
         
-        return new PuzzleResult(stepCount);
+        return stepCount;
     }
 
     [Puzzle("91141abd782d1d77e4fc599ef1a7d8f3")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);
         var start = grid.FindAddresses(Current).First();
@@ -161,7 +161,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
             }
         }
         
-        return new PuzzleResult(stepCount);
+        return stepCount;
     }
 
     private static IEnumerable<Coord> GetEnclosedCoords(Grid<char> grid, Coord start)

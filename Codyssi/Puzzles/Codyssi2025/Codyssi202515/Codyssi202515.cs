@@ -7,7 +7,7 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202515;
 public class Codyssi202515 : CodyssiPuzzle
 {
     [Puzzle("8b00815147aec7076ca7268d8709583c")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var nodes = ParseNodes(input.Split(LineBreaks.Double).First());
         var root = nodes.First();
@@ -20,9 +20,7 @@ public class Codyssi202515 : CodyssiPuzzle
             bestSum = Math.Max(bestSum, nodes.Where(o => o.Level == level).Sum(o => o.Id));
         }
 
-        var result = bestSum * levelCount;
-
-        return new PuzzleResult(result);
+        return bestSum * levelCount;
     }
 
     [Puzzle("4b91364b84392b399b44d31d662a9fa1")]

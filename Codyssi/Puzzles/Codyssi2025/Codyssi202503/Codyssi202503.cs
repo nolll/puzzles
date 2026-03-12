@@ -8,7 +8,7 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202503;
 public class Codyssi202503 : CodyssiPuzzle
 {
     [Puzzle("01d1552220dda559a422036ab711923e")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var boxCount = 0;
@@ -22,20 +22,14 @@ public class Codyssi202503 : CodyssiPuzzle
             }
         }
         
-        return new PuzzleResult(boxCount);
+        return boxCount;
     }
 
     [Puzzle("1cb7e24878302f60b0ba3be5141cdc32")]
-    public PuzzleResult Part2(string input)
-    {
-        var lines = input.Split(LineBreaks.Single);
-        var boxCount = lines.Sum(line => GetLabels(line).Count);
-
-        return new PuzzleResult(boxCount);
-    }
+    public int Part2(string input) => input.Split(LineBreaks.Single).Sum(o => GetLabels(o).Count);
 
     [Puzzle("2cbe9f9e03bce403a08a5395b3be8757")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var best = 0;
@@ -46,7 +40,7 @@ public class Codyssi202503 : CodyssiPuzzle
             best = Math.Max(set.Count, best);
         }
 
-        return new PuzzleResult(best);
+        return best;
     }
     
     private static HashSet<int> GetLabels(string line)

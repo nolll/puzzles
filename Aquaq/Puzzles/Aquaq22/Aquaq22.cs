@@ -8,15 +8,12 @@ namespace Pzl.Aquaq.Puzzles.Aquaq22;
 public class Aquaq22 : AquaqPuzzle
 {
     [Puzzle("7d8d3bfb160f0e65ad6f9266e5174745")]
-    public PuzzleResult Solve(string input)
+    public int Solve(string input)
     {
         var numbers = input.Split(' ').Select(int.Parse);
         var romanNumbers = numbers.Select(Conversion.ToRoman);
-        var sum = ToCaesarCipherSum(string.Join("", romanNumbers));
-
-        return new PuzzleResult(sum);
+        return ToCaesarCipherSum(string.Join("", romanNumbers));
     }
 
-    public static int ToCaesarCipherSum(string input)
-        => input.ToCharArray().Select(CaesarCipher.Encrypt).Sum();
+    public static int ToCaesarCipherSum(string input) => input.ToCharArray().Select(CaesarCipher.Encrypt).Sum();
 }

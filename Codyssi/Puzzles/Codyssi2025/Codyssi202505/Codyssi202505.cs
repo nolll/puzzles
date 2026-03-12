@@ -9,27 +9,25 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202505;
 public class Codyssi202505 : CodyssiPuzzle
 {
     [Puzzle("8970c66cc5feb9663d03802a881d2305")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var ship = new Coord(0, 0);
         var coords = SortByDistance(Parse(input), ship);
-        var result = coords.Last().ManhattanDistanceTo(ship) - coords.First().ManhattanDistanceTo(ship);
-        return new PuzzleResult(result);
+        return coords.Last().ManhattanDistanceTo(ship) - coords.First().ManhattanDistanceTo(ship);
     }
 
     [Puzzle("9b3a3aaa26debdeb546daa2dcd3f0873")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var ship = new Coord(0, 0);
         var coords = SortByDistance(Parse(input), ship);
         var closest = coords.First();
         coords = SortByDistance(coords.Skip(1), closest);
-        var result = closest.ManhattanDistanceTo(coords.First());
-        return new PuzzleResult(result);
+        return closest.ManhattanDistanceTo(coords.First());
     }
 
     [Puzzle("9f7fe9e9b27c388197a28609ca587687")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var current = new Coord(0, 0);
         var coords = Parse(input);
@@ -46,15 +44,14 @@ public class Codyssi202505 : CodyssiPuzzle
             coords = coords.Skip(1).ToList();
         }
         
-        return new PuzzleResult(total);
+        return total;
     }
 
-    private static List<Coord> SortByDistance(IEnumerable<Coord> coords, Coord current) =>
-        coords
-            .OrderBy(o => o.ManhattanDistanceTo(current))
-            .ThenBy(o => o.X)
-            .ThenBy(o => o.Y)
-            .ToList();
+    private static List<Coord> SortByDistance(IEnumerable<Coord> coords, Coord current) => coords
+        .OrderBy(o => o.ManhattanDistanceTo(current))
+        .ThenBy(o => o.X)
+        .ThenBy(o => o.Y)
+        .ToList();
 
     private static List<Coord> Parse(string input) => input.Split(LineBreaks.Single)
         .Select(Numbers.IntsFromString)

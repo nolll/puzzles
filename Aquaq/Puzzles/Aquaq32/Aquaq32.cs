@@ -8,13 +8,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq32;
 public partial class Aquaq32 : AquaqPuzzle
 {
     [Puzzle("8b52d401a6c9cf4350dc85e2cebcec81")]
-    public PuzzleResult Solve(string input)
-    {
-        var lines = input.Split(LineBreaks.Single);
-        var result = lines.Count(IsBalanced);
-
-        return new PuzzleResult(result);
-    }
+    public int Solve(string input) => input.Split(LineBreaks.Single).Count(IsBalanced);
 
     public static bool IsBalanced(string input) => RemoveMatchingParenthesis(RemoveClutter(input)).Length == 0;
 

@@ -8,14 +8,10 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202504;
 public class Codyssi202504 : CodyssiPuzzle
 {
     [Puzzle("655c9020b1a64d3b94692c414d0aaca1")]
-    public PuzzleResult Part1(string input)
-    {
-        var score = input.Replace(LineBreaks.Single, "").Select(GetScore).Sum();
-        return new PuzzleResult(score);
-    }
+    public int Part1(string input) => input.Replace(LineBreaks.Single, "").Select(GetScore).Sum();
 
     [Puzzle("8e544343c5f171e432e0b356d86e28c6")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var score = 0;
@@ -26,11 +22,11 @@ public class Codyssi202504 : CodyssiPuzzle
             var str = $"{line[..charsToRemove]}{numberToInsert}{line[^charsToRemove..]}";
             score += str.Select(GetScore).Sum();
         }
-        return new PuzzleResult(score);
+        return score;
     }
 
     [Puzzle("5129cb83e24bb391c88e0378d0a19562")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var score = 0;
@@ -56,7 +52,7 @@ public class Codyssi202504 : CodyssiPuzzle
             var str = sb.ToString();
             score += str.Select(GetScore).Sum();
         }
-        return new PuzzleResult(score);
+        return score;
     }
     
     private static int GetScore(char c) => char.IsNumber(c) 

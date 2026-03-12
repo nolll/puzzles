@@ -7,29 +7,23 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202501;
 public class Codyssi202501 : CodyssiPuzzle
 {
     [Puzzle("1f17ebbf90b3d2771a89172125b9fcb0")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var numbers = lines.SkipLast(1).Select(int.Parse).ToArray();
-        var multipliers = GetMultipliers(lines.Last());
-        var n = multipliers.Select((t, i) => numbers[i] * t).Sum();
-
-        return new PuzzleResult(n);
+        return GetMultipliers(lines.Last()).Select((t, i) => numbers[i] * t).Sum();
     }
 
     [Puzzle("d79852c3963ccb64147853df691ef1cf")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var lines = input.Split(LineBreaks.Single).ToList();
         var numbers = lines.SkipLast(1).Select(int.Parse).ToArray();
-        var multipliers = GetMultipliers(lines.Last().Reversed());
-        var n = multipliers.Select((t, i) => numbers[i] * t).Sum();
-
-        return new PuzzleResult(n);
+        return GetMultipliers(lines.Last().Reversed()).Select((t, i) => numbers[i] * t).Sum();
     }
 
     [Puzzle("7e2613ac221549d96730491340a1b69e")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var lines = input.Split(LineBreaks.Single).ToList();
         var digits = lines.SkipLast(1).Select(int.Parse).ToArray();
@@ -39,9 +33,8 @@ public class Codyssi202501 : CodyssiPuzzle
             numbers.Add(int.Parse($"{digits[i]}{digits[i + 1]}"));
         }
         var multipliers = GetMultipliers(lines.Last().Reversed());
-        var n = numbers.Select((t, i) => t * multipliers[i]).Sum();
 
-        return new PuzzleResult(n);
+        return numbers.Select((t, i) => t * multipliers[i]).Sum();
     }
     
     private static IEnumerable<int> GetMultipliers(string s) => GetMultipliers(s.ToCharArray());

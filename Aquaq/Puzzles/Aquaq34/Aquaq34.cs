@@ -10,14 +10,7 @@ public class Aquaq34 : AquaqPuzzle
     private static readonly IComparer<Train> WaitingTrainComparer = new WaitingTrainComparer();
 
     [Puzzle("7730ffba6665d8cc2f907ff7ea6fe6ea")]
-    public PuzzleResult Solve(string input)
-    {
-        var result = LongestRouteTime(input);
-
-        return new PuzzleResult(result);
-    }
-
-    public static int LongestRouteTime(string input)
+    public int Solve(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var dataLines = lines.Skip(1).ToArray();

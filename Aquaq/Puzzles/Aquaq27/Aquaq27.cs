@@ -9,14 +9,7 @@ public class Aquaq27 : AquaqPuzzle
     private const char Empty = ' ';
 
     [Puzzle("c803fdd834b45081e38679f19c527374")]
-    public PuzzleResult Solve(string input)
-    {
-        var result = CalculateSnakeScore(input);
-
-        return new PuzzleResult(result);
-    }
-
-    public static int CalculateSnakeScore(string input)
+    public int Solve(string input)
     {
         var grid = GridBuilder.BuildCharGridWithoutTrim(input, Empty);
         var coordsWithChars = grid.Coords.Where(o => grid.ReadValueAt(o) != Empty).ToHashSet();

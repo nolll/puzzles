@@ -21,22 +21,22 @@ public class Codyssi202518Tests
                                   """;
 
     [Fact]
-    public void Part1_1() => Sut.Part1(Input1, 3, 3, 5).Answer.Should().Be("146");
+    public void Part1_1() => Sut.Part1(Input1, 3, 3, 5).Should().Be(146);
     
     [Fact]
-    public void Part1_2() => Sut.Part1(Input2).Answer.Should().Be("32545");
+    public void Part1_2() => Sut.Part1(Input2).Should().Be(32545);
 
     [Fact]
-    public void Part2_1() => Sut.Part2(Input1, 3, 3, 5).Answer.Should().Be("23");
+    public void Part2_1() => Sut.Part2(Input1, 3, 3, 5).Should().Be(23);
     
     [Fact]
-    public void Part2_2() => Sut.Part2(Input2).Answer.Should().Be("217");
+    public void Part2_2() => Sut.Part2(Input2).Should().Be(217);
 
     [Fact]
-    public void Part3_1() => Sut.Part3(Input1, 3, 3, 5).Answer.Should().Be("8");
+    public void Part3_1() => Sut.Part3(Input1, 3, 3, 5).Should().Be(8);
     
     [Fact]
-    public void Part3_2() => Sut.Part3(Input2).Answer.Should().Be("166");
+    public void Part3_2() => Sut.Part3(Input2).Should().Be(166);
 
     private static Codyssi202518 Sut => new();
 }

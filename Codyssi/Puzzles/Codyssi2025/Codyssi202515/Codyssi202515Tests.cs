@@ -24,7 +24,7 @@ public class Codyssi202515Tests
                                  """;
 
     [Fact]
-    public void Part1() => Sut.Part1(Input).Answer.Should().Be("12645822");
+    public void Part1() => Sut.Part1(Input).Should().Be(12645822);
 
     [Fact]
     public void Part2() => Sut.Part2(Input).Should().Be("ozNxANO-pYNonIG-MUantNm-lOSlxki-SDJtdpa-JSXfNAJ");

@@ -7,12 +7,5 @@ namespace Pzl.Aquaq.Puzzles.Aquaq30;
 public class Aquaq30 : AquaqPuzzle
 {
     [Puzzle("a7ac2d6ffdd2d7759b9d51599832deae")]
-    public PuzzleResult Solve(string input)
-    {
-        var cardFlipper = new CardFlipper();
-        var decks = input.Split(LineBreaks.Single);
-        var sum = decks.Sum(cardFlipper.CountValidStartingMoves);
-
-        return new PuzzleResult(sum);
-    }
+    public int Solve(string input) => input.Split(LineBreaks.Single).Sum(new CardFlipper().CountValidStartingMoves);
 }

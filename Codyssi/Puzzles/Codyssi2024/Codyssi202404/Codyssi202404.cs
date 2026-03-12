@@ -12,7 +12,7 @@ public class Codyssi202404 : CodyssiPuzzle
     private const string StartLocation = "STT";
 
     [Puzzle("48687e590201772c8544f0344efbceda")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var set = new HashSet<string>();
@@ -20,11 +20,11 @@ public class Codyssi202404 : CodyssiPuzzle
         {
             set.AddRange(line.Split(" <-> "));
         }
-        return new PuzzleResult(set.Count);
+        return set.Count;
     }
 
     [Puzzle("c14e646bf6a935788f1de3ed40cdbf6b")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var set = new HashSet<string>();
         var edges = BuildGraph(input);
@@ -45,17 +45,14 @@ public class Codyssi202404 : CodyssiPuzzle
             }
         }
         
-        return new PuzzleResult(set.Count);
+        return set.Count;
     }
     
     [Puzzle("ef1be406fe88e18c982f118992d26f58")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var edges = BuildGraph(input).ToList();
-        var nodes = Graph.GetNodes(edges);
-        var total = nodes.Keys.Sum(name => Dijkstra.BestCost(edges, StartLocation, name));
-
-        return new PuzzleResult(total);
+        return Graph.GetNodes(edges).Keys.Sum(o => Dijkstra.BestCost(edges, StartLocation, o));
     }
 
     private static IEnumerable<GraphEdge> BuildGraph(string input)

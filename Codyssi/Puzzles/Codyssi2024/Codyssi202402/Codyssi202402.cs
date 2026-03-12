@@ -7,15 +7,10 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2024.Codyssi202402;
 public class Codyssi202402 : CodyssiPuzzle
 {
     [Puzzle("129ad912c3dd4bdfd31569b370017fcc")]
-    public PuzzleResult Part1(string input)
-    {
-        var sum = input.Split(LineBreaks.Single).Select((t, i) => t == "TRUE" ? i + 1 : 0).Sum();
-
-        return new PuzzleResult(sum);
-    }
+    public int Part1(string input) => input.Split(LineBreaks.Single).Select((t, i) => t == "TRUE" ? i + 1 : 0).Sum();
 
     [Puzzle("742e9c5b98a1f2e9dfe76f5e8a1f560d")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var bools = input.Split(LineBreaks.Single).Select(bool.Parse).ToList();
         var gates = new List<(bool, bool)>();
@@ -24,13 +19,11 @@ public class Codyssi202402 : CodyssiPuzzle
             gates.Add((bools[i], bools[i + 1]));
         }
 
-        var count = gates.Where(EvaluateGate).Count();
-
-        return new PuzzleResult(count);
+        return gates.Where(EvaluateGate).Count();
     }
 
     [Puzzle("a772b930c8006d31219141df44c6b8e0")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var bools = input.Split(LineBreaks.Single).Select(bool.Parse).ToList();
         var count = bools.Count(o => o);;
@@ -46,7 +39,7 @@ public class Codyssi202402 : CodyssiPuzzle
             count += bools.Count(o => o);
         }
         
-        return new PuzzleResult(count);
+        return count;
     }
 
     private bool EvaluateGate((bool, bool) gate, int index)

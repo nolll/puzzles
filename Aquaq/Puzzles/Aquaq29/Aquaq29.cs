@@ -6,7 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq29;
 public class Aquaq29 : AquaqPuzzle
 {
     [Puzzle("f29bbf87cdece98ecf1360bce7e5a63e")]
-    public PuzzleResult Solve()
+    public int Solve()
     {
         var count = 0;
         for (var i = 0; i <= 520185742; i++)
@@ -15,7 +15,7 @@ public class Aquaq29 : AquaqPuzzle
                 count++;
         }
         
-        return new PuzzleResult(count);
+        return count;
     }
 
     public static int CountGoodNumbers(IEnumerable<int> input) => input.Count(IsGoodNumber);

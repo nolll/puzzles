@@ -11,7 +11,7 @@ namespace Pzl.Everybody.Puzzles.Ecs02.Ecs0203;
 public class Ecs0203 : EverybodyStoryPuzzle
 {
     [Puzzle("afba3780df3e7caae7832176dc41303e")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var dice = ParseDice(input);
         var score = 0;
@@ -22,7 +22,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
             rollCount++;
         }
         
-        return new PuzzleResult(rollCount);
+        return rollCount;
     }
 
     [Puzzle("7171b572bda6f1b6df3618de04406256")]
@@ -57,7 +57,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
     }
 
     [Puzzle("0573f4383c024a477b878cfe7f4997a7")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var (diceInput, gridInput) = input.Split(LineBreaks.Double);
         var dice = ParseDice(diceInput);
@@ -90,7 +90,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
             totalSet.UnionWith(set);
         }
         
-        return new PuzzleResult(totalSet.Count);
+        return totalSet.Count;
     }
 
     private static Die[] ParseDice(string input)

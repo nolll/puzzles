@@ -11,7 +11,7 @@ public class Ecs0203Tests
                              3: faces=[9,8,7,8,9] seed=17
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("844");
+        Sut.Part1(input).Should().Be(844);
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class Ecs0203Tests
                              1799773472
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("33");
+        Sut.Part3(input).Should().Be(33);
     }
     
     [Fact]
@@ -96,7 +96,7 @@ public class Ecs0203Tests
                              43457237419516813368452247532764649744546181229533942414983335895
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("1125");
+        Sut.Part3(input).Should().Be(1125);
     }
 
     private static Ecs0203 Sut => new();

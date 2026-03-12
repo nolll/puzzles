@@ -9,14 +9,7 @@ public class Aquaq39 : AquaqPuzzle
     private const int DartsPerTurn = 3;
 
     [Puzzle("5522d4ea2615abc82626c1563f788ce8")]
-    public PuzzleResult Solve(string input)
-    {
-        var result = PlayGame(input);
-
-        return new PuzzleResult(result);
-    }
-
-    public static int PlayGame(string input)
+    public int Solve(string input)
     {
         var darts = input.Split(' ').Select(int.Parse).ToArray();
 

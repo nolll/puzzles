@@ -12,7 +12,7 @@ namespace Pzl.Everybody.Puzzles.Ecs02.Ecs0201;
 public class Ecs0201 : EverybodyStoryPuzzle
 {
     [Puzzle("dad5d715238be69f7117d91bb3938a10")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var (grid, tokens, _) = Parse(input);
         var coins = 0;
@@ -24,11 +24,11 @@ public class Ecs0201 : EverybodyStoryPuzzle
             coins += Play(grid, token, slot).score;
         }
         
-        return new PuzzleResult(coins);
+        return coins;
     }
 
     [Puzzle("26c70e45583b5816af23beaeb77e8940")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var (grid, tokens, slotCount) = Parse(input);
         var coins = 0;
@@ -46,7 +46,7 @@ public class Ecs0201 : EverybodyStoryPuzzle
             coins += best.score;
         }
         
-        return new PuzzleResult(coins);
+        return coins;
     }
 
     [Puzzle("28c4bfb9e7bb062915af989c9b4b8e33")]

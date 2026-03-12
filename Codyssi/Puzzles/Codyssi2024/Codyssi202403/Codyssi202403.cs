@@ -8,11 +8,7 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2024.Codyssi202403;
 public class Codyssi202403 : CodyssiPuzzle
 {
     [Puzzle("91e41490538d35c28c473cc837069068")]
-    public PuzzleResult Part1(string input)
-    {
-        var sum = input.Split(LineBreaks.Single).Select(o => int.Parse(o.Split(' ')[1])).Sum();
-        return new PuzzleResult(sum);
-    }
+    public int Part1(string input) => input.Split(LineBreaks.Single).Select(o => int.Parse(o.Split(' ')[1])).Sum();
 
     [Puzzle("b54e3ab42745c500fdac546b4f65242b")]
     public long Part2(string input) => CalculateSum(input);
@@ -25,10 +21,9 @@ public class Codyssi202403 : CodyssiPuzzle
     
     private static long ParseLine((string v, int b) line) => ParseLine(line.v, line.b);
     private static long ParseLine(string v, int b) => Convert.ToInt32(v, b);
-    
-    private static long CalculateSum(string input) =>
-        input.Split(LineBreaks.Single)
-            .Select(o => o.Split(' '))
-            .Select(o => (o.First(), int.Parse(o.Last())))
-            .Sum(ParseLine);
+
+    private static long CalculateSum(string input) => input.Split(LineBreaks.Single)
+        .Select(o => o.Split(' '))
+        .Select(o => (o.First(), int.Parse(o.Last())))
+        .Sum(ParseLine);
 }

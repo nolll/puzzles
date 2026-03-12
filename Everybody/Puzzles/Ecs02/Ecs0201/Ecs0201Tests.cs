@@ -30,7 +30,7 @@ public class Ecs0201Tests
                              RLLLLLRLLLRL
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("26");
+        Sut.Part1(input).Should().Be(26);
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public class Ecs0201Tests
                              RLLRRRRLRLRLRLRLLRRL
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("115");
+        Sut.Part2(input).Should().Be(115);
     }
 
     [Fact]

@@ -10,21 +10,13 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202513;
 public class Codyssi202513 : CodyssiPuzzle
 {
     [Puzzle("4b6f984898442eee284f3fe1ae2050c9")]
-    public PuzzleResult Part1(string input)
-    {
-        var p = RunPart1And2(input, 1);
-        return new PuzzleResult(p);
-    }
+    public int Part1(string input) => RunPart1And2(input, 1);
 
     [Puzzle("04afa91a62dd50ed3b96b0d436d91135")]
-    public PuzzleResult Part2(string input)
-    {
-        var p = RunPart1And2(input);
-        return new PuzzleResult(p);
-    }
-    
+    public int Part2(string input) => RunPart1And2(input);
+
     [Puzzle("00f6f13fa8e4c7e8a5e7e790d285ab85")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var (edges, _) = Parse(input);
         var nodes = Graph.GetNodes(edges);
@@ -32,9 +24,7 @@ public class Codyssi202513 : CodyssiPuzzle
         foreach (var node in nodes.Values) 
             paths.AddRange(FindPaths(nodes, node, node.Name, 0));
 
-        var costs = paths.Select(o => o.Item2).Max();
-        
-        return new PuzzleResult(costs);
+        return paths.Select(o => o.Item2).Max();
     }
 
     private IEnumerable<(string, int)> FindPaths(Dictionary<string, GraphNode> nodes, GraphNode node, string used, int cost)

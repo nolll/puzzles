@@ -6,14 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq40;
 public class Aquaq40 : AquaqPuzzle
 {
     [Puzzle("d0882d4e6f6cf4f90adcda93e5d420bc")]
-    public PuzzleResult Solve(string input)
-    {
-        var sum = GetSum(input);
-
-        return new PuzzleResult(sum);
-    }
-
-    public static int GetSum(string input)
+    public int Solve(string input)
     {
         var heights = input.Split(' ').Select(int.Parse).ToArray();
         var peakIndices = FindPeakIndices(heights);
@@ -67,10 +60,7 @@ public class Aquaq40 : AquaqPuzzle
         return null;
     }
 
-    public static int[] FindPeakIndices(string input)
-    {
-        return FindPeakIndices(input.Split(' ').Select(int.Parse).ToArray());
-    }
+    public int[] FindPeakIndices(string input) => FindPeakIndices(input.Split(' ').Select(int.Parse).ToArray());
 
     private static int[] FindPeakIndices(int[] input)
     {

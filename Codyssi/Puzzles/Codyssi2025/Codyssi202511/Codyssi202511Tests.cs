@@ -18,7 +18,7 @@ public class Codyssi202511Tests
     public void Part2() => Sut.Part2(Input).Should().Be("4iWAbo%6");
 
     [Fact]
-    public void Part3() => Sut.Part3(Input).Answer.Should().Be("2366");
+    public void Part3() => Sut.Part3(Input).Should().Be(2366);
 
     private static Codyssi202511 Sut => new();
 }

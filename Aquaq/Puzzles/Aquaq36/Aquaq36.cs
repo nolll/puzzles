@@ -11,7 +11,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq36;
 public class Aquaq36 : AquaqPuzzle
 {
     [Puzzle("ed32dfd657e38da7c712ea1c69f58f6d")]
-    public PuzzleResult Solve(string input)
+    public int Solve(string input)
     {
         var factorProvider = new FactorCache();
         var tetonors = input.Trim().Split(LineBreaks.Double);
@@ -27,7 +27,7 @@ public class Aquaq36 : AquaqPuzzle
             sum += result;
         }
 
-        return new PuzzleResult(sum);
+        return sum;
     }
 
     public static int Solve(List<int> grid, List<int?> input, FactorCache? factorCache = null)

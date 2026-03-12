@@ -9,7 +9,7 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202510;
 public class Codyssi202510 : CodyssiPuzzle
 {
     [Puzzle("1e10a803d525ec160795a9bed9161106")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var data = input.Split(LineBreaks.Single)
             .Select(o => o.Replace(" ", "").ToCharArray().Select(p => int.Parse(p.ToString())).ToArray())
@@ -32,27 +32,15 @@ public class Codyssi202510 : CodyssiPuzzle
             vmin = Math.Min(vsum, vmin);
         }
 
-        var min = Math.Min(hmin, vmin);
-        
-        return new PuzzleResult(min);
+        return Math.Min(hmin, vmin);
     }
 
     [Puzzle("8e0e2fd983585eea7c17bb92929d6c32")]
-    public PuzzleResult Part2(string input)
-    {
-        var cost = RunPart2And3(input, new Coord(14, 14));
-        
-        return new PuzzleResult(cost);
-    }
+    public int Part2(string input) => RunPart2And3(input, new Coord(14, 14));
 
     [Puzzle("ef05794a9a4d22520dd94a67775c2c15")]
-    public PuzzleResult Part3(string input)
-    {
-        var cost = RunPart2And3(input);
-        
-        return new PuzzleResult(cost);
-    }
-    
+    public int Part3(string input) => RunPart2And3(input);
+
     public int RunPart2And3(string input, Coord? target = null)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input.Replace(" ", ""));

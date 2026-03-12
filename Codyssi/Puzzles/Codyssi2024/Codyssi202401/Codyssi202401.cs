@@ -7,21 +7,13 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2024.Codyssi202401;
 public class Codyssi202401 : CodyssiPuzzle
 {
     [Puzzle("2c9b60f4690033fb65c71e08bbc479a7")]
-    public PuzzleResult Part1(string input)
-    {
-        var sum = input.Split(LineBreaks.Single).Select(int.Parse).Sum();
-        return new PuzzleResult(sum);
-    }
+    public int Part1(string input) => input.Split(LineBreaks.Single).Select(int.Parse).Sum();
 
     [Puzzle("c0e85368ae1524b621528b134724ecaa")]
-    public PuzzleResult Part2(string input, int freeItemCount = 20)
-    {
-        var sum = input.Split(LineBreaks.Single).Select(int.Parse).Order().SkipLast(freeItemCount).Sum();
-        return new PuzzleResult(sum);
-    }
+    public int Part2(string input, int freeItemCount = 20) => input.Split(LineBreaks.Single).Select(int.Parse).Order().SkipLast(freeItemCount).Sum();
 
     [Puzzle("e7acbc96d2194896218445e87e203855")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var items = input.Split(LineBreaks.Single).Select(int.Parse).ToArray();
         var sum = 0;
@@ -30,6 +22,6 @@ public class Codyssi202401 : CodyssiPuzzle
             var multiplier = i % 2 == 0 ? 1 : -1;
             sum += items[i] * multiplier;
         }
-        return new PuzzleResult(sum);
+        return sum;
     }
 }

@@ -8,7 +8,7 @@ public class Ecs0202 : EverybodyStoryPuzzle
     private static readonly char[] Arrows = ['R', 'G', 'B'];
 
     [Puzzle("4648ca473c884f7676991b343c2db8e0")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var i = 0;
         var arrowIndex = 0;
@@ -21,22 +21,14 @@ public class Ecs0202 : EverybodyStoryPuzzle
             i++;
         }
         
-        return new PuzzleResult(arrowIndex);
+        return arrowIndex;
     }
 
     [Puzzle("00ed6d0c92fbd2e3d164be5870f33a3f")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = Part2And3(input, 100);
-        return new PuzzleResult(result);
-    }
+    public int Part2(string input) => Part2And3(input, 100);
 
     [Puzzle("c2eff10d6d075e935bd2a23732fe7ef2")]
-    public PuzzleResult Part3(string input)
-    {
-        var result = Part2And3(input, 100_000);
-        return new PuzzleResult(result);
-    }
+    public int Part3(string input) => Part2And3(input, 100_000);
 
     public static int Part2And3(string input, int repeats)
     {

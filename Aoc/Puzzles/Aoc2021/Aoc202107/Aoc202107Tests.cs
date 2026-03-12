@@ -6,7 +6,7 @@ public class Aoc202107Tests
     public void Part1()
     {
         var crabSubmarines = new CrabSubmarines();
-        var result = crabSubmarines.GetFuel1(Input, false);
+        var result = crabSubmarines.GetFuel(Input, false);
 
         result.Should().Be(37);
     }
@@ -15,7 +15,7 @@ public class Aoc202107Tests
     public void Part2()
     {
         var crabSubmarines = new CrabSubmarines();
-        var result = crabSubmarines.GetFuel1(Input, true);
+        var result = crabSubmarines.GetFuel(Input, true);
 
         result.Should().Be(168);
     }

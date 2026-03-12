@@ -4,11 +4,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202118;
 
 public class SnailfishMath
 {
-    public SnailfishNumber Sum(string input)
-    {
-        var numbers = ParseNumbers(input);
-        return Sum(numbers);
-    }
+    public SnailfishNumber Sum(string input) => Sum(ParseNumbers(input));
 
     public int LargestMagnitude(string input)
     {

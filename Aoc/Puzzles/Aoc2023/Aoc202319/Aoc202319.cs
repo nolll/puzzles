@@ -7,10 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202319;
 public class Aoc202319 : AocPuzzle
 {
     [Puzzle("7b8de33db969cb470b0df2112b952250")]
-    public PuzzleResult Part1(string input)
-    {
-        return new PuzzleResult(SortParts(input));
-    }
+    public int Part1(string input) => SortParts(input);
 
     [Puzzle("ad71ffd5c3aaba62bb775dfc6a95358e")]
     public long Part2(string input) => CountCombinations(input);

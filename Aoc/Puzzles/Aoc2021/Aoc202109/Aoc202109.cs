@@ -6,18 +6,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202109;
 public class Aoc202109 : AocPuzzle
 {
     [Puzzle("de7031e6bc6f92fb3ebea43ee2b3fe27")]
-    public PuzzleResult Part1(string input)
-    {
-        var heightMap = new HeightMap();
-        var result = heightMap.FindLowPointSum(input);
-        return new PuzzleResult(result);
-    }
+    public int Part1(string input) => new HeightMap().FindLowPointSum(input);
 
     [Puzzle("1079be915c188387b9068d26a9911fcc")]
-    public PuzzleResult Part2(string input)
-    {
-        var heightMap = new HeightMap();
-        var result = heightMap.FindBasinSizes(input);
-        return new PuzzleResult(result);
-    }
+    public int Part2(string input) => new HeightMap().FindBasinSizes(input);
 }

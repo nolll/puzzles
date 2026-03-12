@@ -6,11 +6,5 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202125;
 public class Aoc202125 : AocPuzzle
 {
     [Puzzle("b2c5d4f507c64adf10e3434888f5c9a9")]
-    public PuzzleResult Part1(string input)
-    {
-        var herd = new HerdOfSeaCucumbers(input);
-        var result = herd.MoveUntilStop();
-
-        return new PuzzleResult(result);
-    }
+    public int Part1(string input) => new HerdOfSeaCucumbers(input).MoveUntilStop();
 }

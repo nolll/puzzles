@@ -2,7 +2,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202107;
 
 public class CrabSubmarines
 {
-    public int GetFuel1(string input, bool useCrabEngineering)
+    public int GetFuel(string input, bool useCrabEngineering)
     {
         Func<int, int, int> getCost = useCrabEngineering
             ? GetCrabEnginerringCost
@@ -22,10 +22,7 @@ public class CrabSubmarines
         return minCost;
     }
 
-    public static int GetCost(int a, int b)
-    {
-        return GetDiff(a, b);
-    }
+    public static int GetCost(int a, int b) => GetDiff(a, b);
 
     public int GetCrabEnginerringCost(int a, int b)
     {
@@ -33,8 +30,5 @@ public class CrabSubmarines
         return diff * (diff + 1) / 2;
     }
 
-    private static int GetDiff(int a, int b)
-    {
-        return Math.Max(a, b) - Math.Min(a, b);
-    }
+    private static int GetDiff(int a, int b) => Math.Max(a, b) - Math.Min(a, b);
 }

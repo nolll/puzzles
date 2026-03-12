@@ -15,16 +15,10 @@ public class Aoc202323 : AocPuzzle
     };
 
     [Puzzle("854218011528db376afeffbf53800ecd")]
-    public PuzzleResult Part1(string input)
-    {
-        return new PuzzleResult(LongestHike(input, false));
-    }
+    public int Part1(string input) => LongestHike(input, false);
 
     [Puzzle("22bcf9382d0e8177c5c6ef52f07fd7b9")]
-    public PuzzleResult Part2(string input)
-    {
-        return new PuzzleResult(LongestHike(input, true));
-    }
+    public int Part2(string input) => LongestHike(input, true);
 
     public static int LongestHike(string s, bool canClimbSlopes)
     {

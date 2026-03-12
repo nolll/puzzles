@@ -7,20 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202316;
 public class Aoc202316 : AocPuzzle
 {
     [Puzzle("2e8a9c0e869279c02d7e2cdcf12d40ff")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = EnergizedCount(input);
-
-        return new PuzzleResult(result);
-    }
+    public int Part1(string input) => EnergizedCount(input);
 
     [Puzzle("67135aadd3392286aed149b56d3e6417")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = MostEnergy(input);
-
-        return new PuzzleResult(result);
-    }
+    public int Part2(string input) => MostEnergy(input);
 
     public static int MostEnergy(string s)
     {
@@ -139,14 +129,4 @@ public class Aoc202316 : AocPuzzle
     }
 }
 
-public class Beam
-{
-    public Coord Position { get; }
-    public GridDirection Direction { get; }
-
-    public Beam(Coord position, GridDirection direction)
-    {
-        Position = position;
-        Direction = direction;
-    }
-}
+public record Beam(Coord Position, GridDirection Direction);

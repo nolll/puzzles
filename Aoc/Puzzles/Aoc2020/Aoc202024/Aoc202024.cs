@@ -6,19 +6,19 @@ namespace Pzl.Aoc.Puzzles.Aoc2020.Aoc202024;
 public class Aoc202024 : AocPuzzle
 {
     [Puzzle("5d93c546616fcdf4656b6333d8457200")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var floor = new HexagonalFloor(input);
         floor.Arrange();
-        return new PuzzleResult(floor.BlackTileCount);
+        return floor.BlackTileCount;
     }
 
     [Puzzle("812d3dec4e5955c3c44ead98ed889522")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var floor = new HexagonalFloor(input);
         floor.Arrange();
         floor.Modify(100);
-        return new PuzzleResult(floor.BlackTileCount);
+        return floor.BlackTileCount;
     }
 }

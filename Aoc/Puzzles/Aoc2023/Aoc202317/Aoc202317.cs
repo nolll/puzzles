@@ -8,20 +8,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202317;
 public class Aoc202317 : AocPuzzle
 {
     [Puzzle("cf7fd7c685bf666303ab74ad1d2252e2")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = LeastHeatPart1(input);
-
-        return new PuzzleResult(result);
-    }
+    public int Part1(string input) => LeastHeatPart1(input);
 
     [Puzzle("fe2a6d3aee0dee95dae6c0880d11d812")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = LeastHeatPart2(input);
-
-        return new PuzzleResult(result);
-    }
+    public int Part2(string input) => LeastHeatPart2(input);
 
     public static int LeastHeatPart1(string s) => LeastHeat(s, 1, 3);
     public static int LeastHeatPart2(string s) => LeastHeat(s, 4, 10);

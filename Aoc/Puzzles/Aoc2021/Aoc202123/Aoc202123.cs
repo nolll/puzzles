@@ -8,23 +8,21 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202123;
 public class Aoc202123 : AocPuzzle
 {
     [Puzzle("8547c3b85863d2e52d88fad570aefbe9")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var amphipods = new Amphipods(Input1);
         amphipods.ArrangePart1();
-        var result = amphipods.Energy;
 
-        return new PuzzleResult(result);
+        return amphipods.Energy;
     }
 
     [Puzzle("afb93cd8fe6106e1b659d77f58b53c61")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var amphipods = new Amphipods(Input2);
         amphipods.ArrangePart2();
-        var result = amphipods.Energy;
 
-        return new PuzzleResult(result);
+        return amphipods.Energy;
     }
 
     private const string Input1 = """

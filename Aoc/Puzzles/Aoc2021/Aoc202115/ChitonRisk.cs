@@ -60,20 +60,7 @@ public class ChitonRisk
             sum += grid.ReadValueAt(coord);
         }
 
-        //PrintPath(grid, path);
-
         return sum;
-    }
-
-    private void PrintPath(Grid<int> grid, IList<Coord> path)
-    {
-        var pathGrid = new Grid<char>(grid.Width, grid.Height, defaultValue: '.');
-        foreach (var coord in path)
-        {
-            pathGrid.WriteValueAt(coord, '#');
-        }
-
-        Console.WriteLine(pathGrid.Print());
     }
 
     private Grid<int> GetCoordCounts(Grid<int> grid, Coord from, Coord to)

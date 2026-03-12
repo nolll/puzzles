@@ -3,22 +3,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202120;
 public class Aoc202120Tests
 {
     [Fact]
-    public void Part1()
-    {
-        var trenchMap = new TrenchMap();
-        var result = trenchMap.GetLitPixelCount(Input, 2);
-
-        result.Should().Be(35);
-    }
+    public void Part1() => Sut.GetLitPixelCount(Input, 2).Should().Be(35);
 
     [Fact]
-    public void Part2()
-    {
-        var trenchMap = new TrenchMap();
-        var result = trenchMap.GetLitPixelCount(Input, 50);
+    public void Part2() => Sut.GetLitPixelCount(Input, 50).Should().Be(3351);
 
-        result.Should().Be(3351);
-    }
+    private static Aoc202120 Sut => new();
 
     private const string Input = """
                                  ..#.#..#####.#.#.#.###.##.....###.##.#..###.####..#####..#....#..#..##..###..######.###...####..#..#####..##..#.#####...##.#.#..#.##..#.#......#.###.######.###.####...#.##.##..#..#..#####.....#.#....###..#.##......#.....#..#..#..##..#...##.######.####.####.#.#...#.......#..#.#.#...####.##.#......#..#...##.#.##..#...##.#.##..###.#......#.#.......#.#.#.####.###.##...#.....####.#..#..#.##.#....##..#.####....##...##..#...#......#.#.......#.......##..####..#...#.#.#...##..#.#..###..#####........#..####......#..#

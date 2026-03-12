@@ -7,13 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202113;
 public class Aoc202113 : AocPuzzle
 {
     [Puzzle("d90cdd38e041f8d021655ac90de64e69")]
-    public PuzzleResult Part1(string input)
-    {
-        var paper = new TransparentPaper(input);
-        var result = paper.DotCountAfterFirstFold();
-
-        return new PuzzleResult(result);
-    }
+    public int Part1(string input) => new TransparentPaper(input).DotCountAfterFirstFold();
 
     [Puzzle("e96b781220e2551d8c04eaa523de4934")]
     public string Part2(string input) => OcrSmallFont.ReadString(new TransparentPaper(input).MessageAfterFold());

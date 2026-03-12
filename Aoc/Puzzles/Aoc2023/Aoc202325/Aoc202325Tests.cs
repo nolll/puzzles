@@ -23,7 +23,7 @@ public class Aoc202325Tests
                              frs: qnr lhk lsr
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("54");
+        Sut.Part1(input).Should().Be(54);
     }
 
     private Aoc202325 Sut => new();

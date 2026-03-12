@@ -8,7 +8,7 @@ public class Aoc202325 : AocPuzzle
 {
     // Thanks to HyperNeutrino again
     [Puzzle("fe62765fd563deae239d0e76689b31d7")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var components = ParseComponents(input);
 
@@ -79,9 +79,8 @@ public class Aoc202325 : AocPuzzle
 
         var a = group.Count;
         var b = components.Count - a;
-        var result = a * b;
 
-        return new PuzzleResult(result);
+        return a * b;
     }
 
     private static Dictionary<string, List<string>> ParseComponents(string s)

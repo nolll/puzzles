@@ -6,18 +6,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2021.Aoc202107;
 public class Aoc202107 : AocPuzzle
 {
     [Puzzle("666d31015d60e4cd37891ed574d5227f")]
-    public PuzzleResult Part1(string input)
-    {
-        var crabSubmarines = new CrabSubmarines();
-        var result = crabSubmarines.GetFuel1(input, false);
-        return new PuzzleResult(result);
-    }
+    public int Part1(string input) => new CrabSubmarines().GetFuel(input, false);
 
     [Puzzle("7930686503708646dfb6d7f6a7e36ab2")]
-    public PuzzleResult Part2(string input)
-    {
-        var crabSubmarines = new CrabSubmarines();
-        var result = crabSubmarines.GetFuel1(input, true);
-        return new PuzzleResult(result);
-    }
+    public int Part2(string input) => new CrabSubmarines().GetFuel(input, true);
 }

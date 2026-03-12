@@ -6,15 +6,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2023.Aoc202315;
 public class Aoc202315 : AocPuzzle
 {
     [Puzzle("4c69a3b3d84dfabf7180d2d8541d7389")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = input.Split(',').Sum(HashScore);
-
-        return new PuzzleResult(result);
-    }
+    public int Part1(string input) => input.Split(',').Sum(HashScore);
 
     [Puzzle("c596fa2656ce06bc3fb557ddd741c834")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var instructions = input.Split(',').ToList();
         var boxes = Enumerable.Range(0, 256).Select((_, index) => new Box(index + 0)).ToArray();
@@ -44,13 +39,10 @@ public class Aoc202315 : AocPuzzle
             }
         }
 
-        var sum = boxes.Sum(o => o.FocusingPower);
-
-        return new PuzzleResult(sum);
+        return boxes.Sum(o => o.FocusingPower);
     }
 
-    public static int HashScore(string s) => 
-        s.Aggregate(0, (current, c) => (current + c) * 17 % 256);
+    public static int HashScore(string s) => s.Aggregate(0, (current, c) => (current + c) * 17 % 256);
 
     private enum Operation
     {
@@ -61,7 +53,7 @@ public class Aoc202315 : AocPuzzle
 
 public class Box(int id)
 {
-    public List<Lens> Lenses { get; set; } = new();
+    public List<Lens> Lenses { get; set; } = [];
     public int FocusingPower => Lenses.Select((t, i) => (id + 1) * (i + 1) * t.FocalLength).Sum();
 }
 

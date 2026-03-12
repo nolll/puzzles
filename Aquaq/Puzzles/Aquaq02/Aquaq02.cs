@@ -6,13 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq02;
 public class Aquaq02 : AquaqPuzzle
 {
     [Puzzle("7397f491441078a2bddb62ede05a1f8c")]
-    public PuzzleResult Solve(string input)
-    {
-        var input2 = input.Split(' ').Select(int.Parse);
-        var uniqueNumbers = GetUniqueNumbers(input2);
-
-        return new PuzzleResult(uniqueNumbers.Sum());
-    }
+    public int Solve(string input) => GetUniqueNumbers(input.Split(' ').Select(int.Parse)).Sum();
 
     public static IEnumerable<int> GetUniqueNumbers(IEnumerable<int> input)
     {

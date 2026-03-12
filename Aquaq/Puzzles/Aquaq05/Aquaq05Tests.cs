@@ -59,7 +59,5 @@ public class Aquaq05Tests
     }
 
     [Fact]
-    public void FindSumOfIndexes() =>
-        Aquaq05.FindSumOfIndexesWithMatchingDice("LRDLU")
-            .Should().Be(5);
+    public void FindSumOfIndexes() => new Aquaq05().Solve("LRDLU").Should().Be(5);
 }

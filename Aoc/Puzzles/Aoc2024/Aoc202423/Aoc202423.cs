@@ -9,7 +9,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202423;
 public class Aoc202423 : AocPuzzle
 {
     [Puzzle("97ab68c276be721e860fa345dd875ad5")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var pairs = input.Split(LineBreaks.Single).Select(o => o.Split('-'));
         var connections = new HashSet<(string, string)>();
@@ -53,7 +53,7 @@ public class Aoc202423 : AocPuzzle
             }    
         }
         
-        return new PuzzleResult(seen.Count);
+        return seen.Count;
     }
 
     [Puzzle("e5522cb6dd3d3913820759dee7696eb4")]

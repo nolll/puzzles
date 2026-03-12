@@ -11,10 +11,7 @@ public class Aquaq12Tests
                                  """;
 
     [Fact]
-    public void RideTheLift()
-    {
-        var result = Aquaq12.RideLift(Input);
+    public void RideTheLift() => Sut.Solve(Input).Should().Be(7);
 
-        result.Should().Be(7);
-    }
+    private static Aquaq12 Sut => new();
 }

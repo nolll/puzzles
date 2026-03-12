@@ -9,12 +9,7 @@ public class Aquaq15 : AquaqPuzzle
 {
     [AdditionalCommonInputFile("Words.txt")]
     [Puzzle("ffafde1afff1c3904275c8225e772bf1")]
-    public PuzzleResult Solve(string input, string additionalInput)
-    {
-        return new PuzzleResult(RunInternal(input, additionalInput));
-    }
-
-    public int RunInternal(string input, string additionalInput) 
+    public int Solve(string input, string additionalInput)
     {
         var transformations = input.Split(LineBreaks.Single)
             .Select(o => o.Split(','))

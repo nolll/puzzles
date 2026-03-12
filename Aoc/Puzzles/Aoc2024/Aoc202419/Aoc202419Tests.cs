@@ -16,16 +16,10 @@ public class Aoc202419Tests
                                  """;
 
     [Fact]
-    public void Part1()
-    {
-        Sut.Part1(Input).Answer.Should().Be("6");
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(6);
 
     [Fact]
-    public void Part2()
-    {
-        Sut.Part2(Input).Should().Be(16);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(16);
 
     private static Aoc202419 Sut => new();
 }

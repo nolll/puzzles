@@ -10,12 +10,7 @@ public class Aquaq16 : AquaqPuzzle
 
     [AdditionalLocalInputFile("Alphabet.txt")]
     [Puzzle("b900eb74f94c2243de65005bcc4ebd2c")]
-    public PuzzleResult Solve(string input, string additionalInput)
-    {
-        return new PuzzleResult(RunInternal(input, additionalInput));
-    }
-    
-    public int RunInternal(string input, string additionalInput)
+    public int Solve(string input, string additionalInput)
     {
         var alphabet = ParseLetters(additionalInput)
             .ToDictionary(k => k.Character, v => v);
@@ -34,7 +29,7 @@ public class Aquaq16 : AquaqPuzzle
         
         return spaceCount;
     }
-
+    
     private static int Tighten(Letter left, Letter right)
     {
         var commonSpaces = new List<int>();

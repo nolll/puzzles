@@ -8,7 +8,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202425;
 public class Aoc202425 : AocPuzzle
 {
     [Puzzle("ff96adb8fa4ccab9294acf5f8c332256")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var parts = input.Split(LineBreaks.Double);
         var locks = new List<int[]>();
@@ -33,9 +33,7 @@ public class Aoc202425 : AocPuzzle
                 keys.Add(a);
         }
 
-        var matchCount = locks.Sum(l => keys.Sum(k => IsMatch(l, k) ? 1 : 0));
-
-        return new PuzzleResult(matchCount);
+        return locks.Sum(l => keys.Sum(k => IsMatch(l, k) ? 1 : 0));
     }
 
     private static bool IsMatch(int[] l, int[] k) => !l.Where((t, i) => k[i] + t > 5).Any();

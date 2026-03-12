@@ -14,13 +14,8 @@ public class Aoc202418 : AocPuzzle
     private const char Wall = '#';
 
     [Puzzle("4cfa9a7af37f61d855606a891023473a")]
-    public PuzzleResult Part1(string input)
-    {
-        var res = Part1(input, Steps, Size, Size);
-        
-        return new PuzzleResult(res);
-    }
-    
+    public int Part1(string input) => Part1(input, Steps, Size, Size);
+
     [Puzzle("5cc0c24dab0cf72c881e5a427edc0e1b")]
     public string Part2(string input) => Part2(input, Size, Size);
 

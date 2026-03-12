@@ -8,7 +8,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202512;
 public class Aoc202512 : AocPuzzle
 {
     [Puzzle("18ccf03875ad98259b4de347203fb45a")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var parts = input.Split(LineBreaks.Double);
         var presentsStrings = parts.SkipLast(1);
@@ -44,7 +44,7 @@ public class Aoc202512 : AocPuzzle
         }
 
         return uncertain == 0 
-            ? new PuzzleResult(possible) 
+            ? possible 
             : throw new Exception("Can't be solved the easy way");
     }
 }

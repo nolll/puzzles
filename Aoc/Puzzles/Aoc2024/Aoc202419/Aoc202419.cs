@@ -7,14 +7,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202419;
 public class Aoc202419 : AocPuzzle
 {
     [Puzzle("74853ae023c415398e9e1aa4ee83c0f1")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var parts = input.Split(LineBreaks.Double, StringSplitOptions.RemoveEmptyEntries);
         var towels = parts[0].Split(", ").ToHashSet();
         var combinations = parts[1].Split(LineBreaks.Single);
-        var count = combinations.Count(o => IsPossible(towels, o));
-        
-        return new PuzzleResult(count);
+
+        return combinations.Count(o => IsPossible(towels, o));
     }
 
     [Puzzle("83d5af4b54081e746c3cfc203a9a544e")]

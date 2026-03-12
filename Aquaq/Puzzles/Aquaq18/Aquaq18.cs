@@ -7,15 +7,10 @@ namespace Pzl.Aquaq.Puzzles.Aquaq18;
 public class Aquaq18 : AquaqPuzzle
 {
     [Puzzle("9730fe5001e883b1b33acd8c976dd938")]
-    public PuzzleResult Solve(string input)
-    {
-        var sum = input.Split(LineBreaks.Single)
-            .Select(o => DateTime.Parse($"2020-02-02 {o}"))
-            .Select(StepsToPalindrome)
-            .Sum();
-
-        return new PuzzleResult(sum);
-    }
+    public int Solve(string input) => input.Split(LineBreaks.Single)
+        .Select(o => DateTime.Parse($"2020-02-02 {o}"))
+        .Select(StepsToPalindrome)
+        .Sum();
 
     public static bool IsPalindromeTime(DateTime dateTime) => dateTime.ToString("HH:mm:ss").IsPalindrome();
 

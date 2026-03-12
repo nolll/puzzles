@@ -9,16 +9,14 @@ public class Aoc202504 : AocPuzzle
     private const char Roll = '@';
 
     [Puzzle("4da6779dc3e7cebb5219ce6536767d75")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var count = grid.Coords.Count(o => grid.ReadValueAt(o) == Roll && grid.AllAdjacentValuesTo(o).Count(r => r == Roll) < 4);
-        
-        return new PuzzleResult(count);
+        return grid.Coords.Count(o => grid.ReadValueAt(o) == Roll && grid.AllAdjacentValuesTo(o).Count(r => r == Roll) < 4);
     }
 
     [Puzzle("b5c22cfe2a53283e5f093ac4f07fd1db")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var lastCount = 0;
@@ -34,6 +32,6 @@ public class Aoc202504 : AocPuzzle
             }
         }
 
-        return new PuzzleResult(adjacentCache.Count - coords.Count);
+        return adjacentCache.Count - coords.Count;
     }
 }

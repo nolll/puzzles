@@ -28,7 +28,7 @@ public class Aoc202508 : AocPuzzle
     }
     
     [Puzzle("c56dc2d8144124824b8b8cdb4b49d868")]
-    public PuzzleResult Part2(string input)
+    public int? Part2(string input)
     {
         var coords = ParseCoords(input);
         var distances = CalculateDistances(coords);
@@ -40,11 +40,11 @@ public class Aoc202508 : AocPuzzle
             var groups = Graph.GetConnectedComponents(nodes).Select(o => o.Values).ToList();
             if (groups.Count == 1 && groups.First().Count == coords.Count)
             {
-                return new(d.from.X * d.to.X);
+                return d.from.X * d.to.X;
             }
         }
         
-        return PuzzleResult.Empty;
+        return null;
     }
 
     private static List<Coord3d> ParseCoords(string input) => input.Split(LineBreaks.Single)

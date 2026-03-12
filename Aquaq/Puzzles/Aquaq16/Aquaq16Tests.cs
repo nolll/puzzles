@@ -5,14 +5,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq16;
 public class Aquaq16Tests
 {
     [Fact]
-    public void KerningSpaces()
-    {
-        const string input = "LTA";
+    public void KerningSpaces() => Sut.Solve("LTA", FileReader.ReadLocal(typeof(Aquaq16), "Alphabet.txt")).Should().Be(53);
 
-        var result = Sut.RunInternal(input, FileReader.ReadLocal(typeof(Aquaq16), "Alphabet.txt"));
-
-        result.Should().Be(53);
-    }
-
-    private static Aquaq16 Sut => new Aquaq16();
+    private static Aquaq16 Sut => new();
 }

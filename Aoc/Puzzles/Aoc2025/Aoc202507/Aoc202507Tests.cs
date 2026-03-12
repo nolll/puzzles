@@ -22,7 +22,7 @@ public class Aoc202507Tests
                                  """;
 
     [Fact]
-    public void Part1() => Sut.Part1(Input).Answer.Should().Be("21");
+    public void Part1() => Sut.Part1(Input).Should().Be(21);
 
     [Fact]
     public void Part2() => Sut.Part2(Input).Should().Be(40);

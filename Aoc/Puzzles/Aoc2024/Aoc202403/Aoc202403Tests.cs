@@ -8,7 +8,7 @@ public class Aoc202403Tests
         const string input = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))";
         
         var result = Sut.Part1(input);
-        result.Answer.Should().Be("161");
+        result.Should().Be(161);
     }
     
     [Fact]

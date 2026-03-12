@@ -36,13 +36,13 @@ public class Aoc202405Tests
     [Fact]
     public void Part1()
     {
-        Sut.Part1(Input).Answer.Should().Be("143");
+        Sut.Part1(Input).Should().Be(143);
     }
 
     [Fact]
     public void Part2()
     {
-        Sut.Part2(Input).Answer.Should().Be("123");
+        Sut.Part2(Input).Should().Be(123);
     }
 
     private static Aoc202405 Sut => new();

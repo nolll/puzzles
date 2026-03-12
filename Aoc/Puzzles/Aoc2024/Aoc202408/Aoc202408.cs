@@ -9,22 +9,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202408;
 public class Aoc202408 : AocPuzzle
 {
     [Puzzle("af57e33340c00c6ce0f53d7c2f21f201")]
-    public PuzzleResult Part1(string input)
-    {
-        var grid = GridBuilder.BuildCharGrid(input, '.');
-        var count = FindAntinodes1(grid).Count;
-        
-        return new PuzzleResult(count);
-    }
-    
+    public int Part1(string input) => FindAntinodes1(GridBuilder.BuildCharGrid(input, '.')).Count;
+
     [Puzzle("e01777da998c6b596501f3853bd26a8d")]
-    public PuzzleResult Part2(string input)
-    {
-        var grid = GridBuilder.BuildCharGrid(input, '.');
-        var count = FindAntinodes2(grid).Count;
-        
-        return new PuzzleResult(count);
-    }
+    public int Part2(string input) => FindAntinodes2(GridBuilder.BuildCharGrid(input, '.')).Count;
 
     private static List<Coord> FindAntinodes1(Grid<char> grid)
     {

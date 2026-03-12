@@ -6,13 +6,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq06;
 public class Aquaq06 : AquaqPuzzle
 {
     [Puzzle("a693902fb2b369af1febd8b1d529364f")]
-    public PuzzleResult Solve()
-    {
-        const int n = 123;
-        var result = FindOneCount(n);
-
-        return new PuzzleResult(result);
-    }
+    public int Solve() => FindOneCount(123);
 
     public static int FindOneCount(int n)
     {

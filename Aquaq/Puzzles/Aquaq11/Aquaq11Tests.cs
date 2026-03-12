@@ -10,10 +10,7 @@ public class Aquaq11Tests
                                  """;
 
     [Fact]
-    public void CountRequiredTile()
-    {
-        var result = Aquaq11.CountRequiredTiles(Input);
+    public void CountRequiredTile() => Sut.Solve(Input).Should().Be(14);
 
-        result.Should().Be(14);
-    }
+    private static Aquaq11 Sut => new();
 }

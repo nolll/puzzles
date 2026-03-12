@@ -8,10 +8,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq21;
 public class Aquaq21 : AquaqPuzzle
 {
     [Puzzle("e9476ebab07e71bb8b8872bca85185f5")]
-    public PuzzleResult Solve(string input)
-    {
-        return new PuzzleResult(Solve(input, 5));
-    }
+    public int Solve(string input) => Solve(input, 5);
 
     public static int Solve(string input, int width)
     {

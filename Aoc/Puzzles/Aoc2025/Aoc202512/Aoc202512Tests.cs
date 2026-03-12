@@ -41,7 +41,7 @@ public class Aoc202512Tests
                              6x3: 0 0 0 0 2 0
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("2");
+        Sut.Part1(input).Should().Be(2);
     }
 
     private static Aoc202512 Sut => new();

@@ -6,14 +6,9 @@ namespace Pzl.Aquaq.Puzzles.Aquaq20;
 public class Aquaq20 : AquaqPuzzle
 {
     [Puzzle("112a5875109cbca20cbe3dd1d02fe9fd")]
-    public PuzzleResult Solve(string input)
+    public int Solve(string input)
     {
-        return new PuzzleResult(PlayBlackjack(input));
-    }
-
-    public static int PlayBlackjack(string input)
-    {
-        var deck = input.Split(' ').ToArray();
+        var deck = input.Split(' ');
         var winCount = 0;
 
         var currentGame = new List<int>();

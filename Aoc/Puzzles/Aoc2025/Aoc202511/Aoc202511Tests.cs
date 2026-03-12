@@ -18,7 +18,7 @@ public class Aoc202511Tests
                              iii: out
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("5");
+        Sut.Part1(input).Should().Be(5);
     }
 
     [Fact]

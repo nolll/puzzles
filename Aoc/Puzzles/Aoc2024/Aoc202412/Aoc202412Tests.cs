@@ -12,7 +12,7 @@ public class Aoc202412Tests
                              EEEC
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("140");
+        Sut.Part1(input).Should().Be(140);
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class Aoc202412Tests
                              MMMISSJEEE
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("1930");
+        Sut.Part1(input).Should().Be(1930);
     }
     
     [Fact]
@@ -44,7 +44,7 @@ public class Aoc202412Tests
                              EEEC
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("80");
+        Sut.Part2(input).Should().Be(80);
     }
     
     [Fact]
@@ -63,7 +63,7 @@ public class Aoc202412Tests
                              MMMISSJEEE
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("1206");
+        Sut.Part2(input).Should().Be(1206);
     }
     
     [Fact]
@@ -77,7 +77,7 @@ public class Aoc202412Tests
                              EEEEE
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("236");
+        Sut.Part2(input).Should().Be(236);
     }
     
     [Fact]
@@ -92,7 +92,7 @@ public class Aoc202412Tests
                              AAAAAA
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("368");
+        Sut.Part2(input).Should().Be(368);
     }
 
     private static Aoc202412 Sut => new();

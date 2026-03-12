@@ -15,14 +15,14 @@ public class Aoc202402Tests
     public void Part1()
     {
         var result = Sut.Part1(Input);
-        result.Answer.Should().Be("2");
+        result.Should().Be(2);
     }
     
     [Fact]
     public void Part2()
     {
         var result = Sut.Part2(Input);
-        result.Answer.Should().Be("4");
+        result.Should().Be(4);
     }
 
     private static Aoc202402 Sut => new();

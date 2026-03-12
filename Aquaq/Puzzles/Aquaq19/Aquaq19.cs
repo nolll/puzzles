@@ -10,11 +10,7 @@ public class Aquaq19 : AquaqPuzzle
     private const char Empty = '.';
 
     [Puzzle("99a57b5b2a95e407216743a84d68c0e0")]
-    public PuzzleResult Solve(string input)
-    {
-        var result = input.Split(LineBreaks.Single).Select(o => RunGame(o, true)).Sum();
-        return new PuzzleResult(result);
-    }
+    public int Solve(string input) => input.Split(LineBreaks.Single).Select(o => RunGame(o, true)).Sum();
 
     public static int RunGame(string s, bool optimized)
     {

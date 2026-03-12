@@ -7,23 +7,17 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202410;
 public class Aoc202410 : AocPuzzle
 {
     [Puzzle("6149f23d412a8b5869010747e43f41ea")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
-        var trailHeads = grid.FindAddresses(0);
-        var totalScore = trailHeads.Sum(trailHead => CountPaths(grid, trailHead, []));
-
-        return new PuzzleResult(totalScore);
+        return grid.FindAddresses(0).Sum(trailHead => CountPaths(grid, trailHead, []));
     }
 
     [Puzzle("9f0c79d76028ec84f2fda12a86e15c52")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
-        var trailHeads = grid.FindAddresses(0);
-        var totalScore = trailHeads.Sum(trailHead => CountPaths(grid, trailHead));
-
-        return new PuzzleResult(totalScore);
+        return grid.FindAddresses(0).Sum(trailHead => CountPaths(grid, trailHead));
     }
 
     private static int CountPaths(Grid<int> grid, Coord coord, HashSet<Coord>? seen = null)

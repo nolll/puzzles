@@ -7,24 +7,19 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202406;
 public class Aoc202406 : AocPuzzle
 {
     [Puzzle("471731c253513e4cf775d088dc806f6a")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var startCoord = grid.FindAddresses('^').First();
-        var visitCount = GetVisitCount(grid, startCoord) ?? 0;
-        
-        return new PuzzleResult(visitCount);
+        return GetVisitCount(grid, startCoord) ?? 0;
     }
 
     [Puzzle("ff1f7615465eed4279ca5994cb797751")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var startCoord = grid.FindAddresses('^').First();
-        var visited = GetVisited(grid, startCoord);
-        var loopCount = visited!.Sum(blockedCoord => GetVisitCount(grid, startCoord, blockedCoord) is null ? 1 : 0);
-
-        return new PuzzleResult(loopCount);
+        return GetVisited(grid, startCoord)!.Count(o => GetVisitCount(grid, startCoord, o) is null);
     }
 
     private static int? GetVisitCount(

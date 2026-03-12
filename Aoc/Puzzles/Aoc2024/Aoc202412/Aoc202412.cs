@@ -7,7 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202412;
 public class Aoc202412 : AocPuzzle
 {
     [Puzzle("4aa3d13909317089109521b0f29d1226")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var totalPrice = 0;
@@ -52,11 +52,11 @@ public class Aoc202412 : AocPuzzle
             totalPrice += landCount * fenceCount;
         }
         
-        return new PuzzleResult(totalPrice);
+        return totalPrice;
     }
 
     [Puzzle("95703fce5b68137cec2afe8da4553cf6")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, '.');
         var totalPrice = 0;
@@ -146,6 +146,6 @@ public class Aoc202412 : AocPuzzle
             totalPrice += price;
         }
         
-        return new PuzzleResult(totalPrice);
+        return totalPrice;
     }
 }

@@ -7,20 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202402;
 public class Aoc202402 : AocPuzzle
 {
     [Puzzle("d02b04efe3e126e637aa49339a13e490")]
-    public PuzzleResult Part1(string input)
-    {
-        var reports = ParseReports(input);
-        var safeCount = reports.Count(IsSafe);
-        return new PuzzleResult(safeCount);
-    }
-    
+    public int Part1(string input) => ParseReports(input).Count(IsSafe);
+
     [Puzzle("913ea818784ae836ec632c9e92026a7b")]
-    public PuzzleResult Part2(string input)
-    {
-        var reports = ParseReports(input);
-        var safeCount = reports.Count(IsSafeWithDamping);
-        return new PuzzleResult(safeCount);
-    }
+    public int Part2(string input) => ParseReports(input).Count(IsSafeWithDamping);
 
     private static IEnumerable<List<int>> ParseReports(string input) => 
         input.Split(LineBreaks.Single).Select(o => o.Split(' ').Select(int.Parse).ToList());

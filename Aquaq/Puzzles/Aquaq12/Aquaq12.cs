@@ -7,14 +7,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq12;
 public class Aquaq12 : AquaqPuzzle
 {
     [Puzzle("a6668fd005e7ebda4e124253eea1e56e")]
-    public PuzzleResult Solve(string input)
-    {
-        var result = RideLift(input);
-
-        return new PuzzleResult(result);
-    }
-
-    public static int RideLift(string input)
+    public int Solve(string input)
     {
         var floors = input.Split(LineBreaks.Single)
             .Select(o => o.Split(' ').Select(int.Parse).ToArray())

@@ -7,24 +7,17 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202405;
 public class Aoc202405 : AocPuzzle
 {
     [Puzzle("52e320d42cefb1f61089609c0f8bbf25")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var (rules, updates) = ParseRulesAndUpdates(input);
-        var result = updates.Where(o => IsCorrect(rules, o))
-            .Sum(GetMiddleValue);
-        
-        return new PuzzleResult(result);
+        return updates.Where(o => IsCorrect(rules, o)).Sum(GetMiddleValue);
     }
 
     [Puzzle("4e2cd8cd0086290e712bf6f5f8799fe3")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var (rules, updates) = ParseRulesAndUpdates(input);
-        var result = updates.Where(o => !IsCorrect(rules, o))
-            .Select(o => Fix(rules, o))
-            .Sum(GetMiddleValue);
-        
-        return new PuzzleResult(result);
+        return updates.Where(o => !IsCorrect(rules, o)).Select(o => Fix(rules, o)).Sum(GetMiddleValue);
     }
     
     private static (int[][] rules, int[][] updates) ParseRulesAndUpdates(string input)

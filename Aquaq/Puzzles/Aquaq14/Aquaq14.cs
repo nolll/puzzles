@@ -23,13 +23,7 @@ public class Aquaq14 : AquaqPuzzle
     private static readonly IEnumerable<Coord> Diagonal2 = BuildDiagonal2();
 
     [Puzzle("d9665f8161f8ada6709d7be1564965fa")]
-    public PuzzleResult Solve(string input)
-    {
-        var result = PlayBingo(input);
-        return new PuzzleResult(result);
-    }
-
-    public static int PlayBingo(string input)
+    public int Solve(string input)
     {
         var games = input.Split(LineBreaks.Single).Select(o => o.Split(' ').Select(int.Parse));
 

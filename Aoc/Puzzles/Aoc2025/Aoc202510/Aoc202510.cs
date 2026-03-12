@@ -10,17 +10,14 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202510;
 public class Aoc202510 : AocPuzzle
 {
     [Puzzle("f19c91b91f25b5bde865c715075e4907")]
-    public PuzzleResult Part1(string input)
-    {
-        var items = input.Split(LineBreaks.Single).Select(Parse).ToList();
-        var results = items.Select(o => SolvePart1(o.lights, o.buttons));
-        
-        return new PuzzleResult(results.Sum());
-    }
+    public int Part1(string input) => input.Split(LineBreaks.Single)
+        .Select(Parse)
+        .Select(o => SolvePart1(o.lights, o.buttons))
+        .Sum();
 
     [Puzzle("328efb57c96e68e01778dad1dd089540")]
     public long Part2(string input) => input.Split(LineBreaks.Single)
-        .Select(Parse).ToList()
+        .Select(Parse)
         .Select(o => SolvePart2(o.counters, o.buttons))
         .Sum();
 

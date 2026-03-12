@@ -7,10 +7,7 @@ public class Aquaq14Tests
     [InlineData("400 500 17 21 25 30 23 600 700", 7)]
     [InlineData("400 500 6 21 36 54 62 600 700", 7)]
     [InlineData("400 500 15 30 36 53 68 600 700", 7)]
-    public void Bingo(string input, int expected)
-    {
-        var result = Aquaq14.PlayBingo(input);
+    public void Bingo(string input, int expected) => Sut.Solve(input).Should().Be(expected);
 
-        result.Should().Be(expected);
-    }
+    private static Aquaq14 Sut => new();
 }

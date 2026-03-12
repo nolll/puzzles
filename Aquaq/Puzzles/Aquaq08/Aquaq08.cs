@@ -7,12 +7,10 @@ namespace Pzl.Aquaq.Puzzles.Aquaq08;
 public class Aquaq08 : AquaqPuzzle
 {
     [Puzzle("dd27abc4b9d9ddead1ae574a69b3edbc")]
-    public PuzzleResult Solve(string input)
+    public int Solve(string input)
     {
         var (milk, cereal) = RunInternal(input);
-        var sum = milk + cereal;
-
-        return new PuzzleResult(sum);
+        return milk + cereal;
     }
 
     public static (int milk, int cereal) RunInternal(string input)

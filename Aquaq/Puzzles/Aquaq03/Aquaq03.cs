@@ -6,11 +6,5 @@ namespace Pzl.Aquaq.Puzzles.Aquaq03;
 public class Aquaq03 : AquaqPuzzle
 {
     [Puzzle("3fdb562cfba1d01d5ae2817d476f3120")]
-    public PuzzleResult Solve(string input)
-    {
-        var walker = new Walker();
-        var result = walker.Walk(input);
-
-        return new PuzzleResult(result);
-    }
+    public int Solve(string input) => new Walker().Walk(input);
 }

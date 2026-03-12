@@ -11,7 +11,7 @@ public class Aoc202507 : AocPuzzle
     private const char Start = 'S';
 
     [Puzzle("10482c1ae04bcd37818ff193c2d01562")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var beams = grid.FindAddresses(Start).ToHashSet();
@@ -38,7 +38,7 @@ public class Aoc202507 : AocPuzzle
             y++;
         }
         
-        return new PuzzleResult(splitCount);
+        return splitCount;
     }
 
     [Puzzle("624e84121647191ef2c3da13286b605a")]

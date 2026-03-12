@@ -7,7 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202511;
 public class Aoc202511 : AocPuzzle
 {
     [Puzzle("815a49e75c9abbb49de207da8a44c044")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var devices = new Dictionary<string, string[]>();
@@ -19,9 +19,7 @@ public class Aoc202511 : AocPuzzle
             devices.Add(name, connections);
         }
 
-        var paths = FindPathsPart1([], "you", "out", devices);
-        
-        return new PuzzleResult(paths.Count);
+        return FindPathsPart1([], "you", "out", devices).Count;
     }
 
     [Puzzle("87ba1881b0f0c32fd99d1ea492990d16")]

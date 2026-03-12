@@ -11,14 +11,7 @@ public class Aquaq11 : AquaqPuzzle
     private const char Filled = '#';
 
     [Puzzle("f8ed67eec68206fe2abe5c3685719e46")]
-    public PuzzleResult Solve(string input)
-    {
-        var result = CountRequiredTiles(input);
-
-        return new PuzzleResult(result);
-    }
-
-    public static int CountRequiredTiles(string input)
+    public int Solve(string input)
     {
         var areas = input.Split(LineBreaks.Single)
             .Skip(1)

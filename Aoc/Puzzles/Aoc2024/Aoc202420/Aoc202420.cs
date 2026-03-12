@@ -7,20 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2024.Aoc202420;
 public class Aoc202420 : AocPuzzle
 {
     [Puzzle("345ad458eb8fecd2bee1b07cda111f5b")]
-    public PuzzleResult Part1(string input)
-    {
-        var result = CountCheatsBetterThan(input, 2, 100);
-        
-        return new PuzzleResult(result);
-    }
+    public int Part1(string input) => CountCheatsBetterThan(input, 2, 100);
 
     [Puzzle("180cd20a00ef865aeaee6f0f6484da86")]
-    public PuzzleResult Part2(string input)
-    {
-        var result = CountCheatsBetterThan(input, 20, 100);
-        
-        return new PuzzleResult(result);
-    }
+    public int Part2(string input) => CountCheatsBetterThan(input, 20, 100);
 
     public static int CountCheatsBetterThan(string input, int radius, int limit) => 
         GetCheats(input, radius).Count(o => o.Value >= limit);

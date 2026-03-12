@@ -7,7 +7,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq07;
 public class Aquaq07 : AquaqPuzzle
 {
     [Puzzle("194aa6e361f7a234543335a05da32ec4")]
-    public PuzzleResult Solve(string input)
+    public int Solve(string input)
     {
         var games = input.Split(LineBreaks.Single)
             .Skip(1)
@@ -39,9 +39,7 @@ public class Aquaq07 : AquaqPuzzle
         var values = players.Values;
         var min = (int)Math.Floor(values.Min());
         var max = (int)Math.Floor(values.Max());
-        var result = max - min;
-
-        return new PuzzleResult(result);
+        return max - min;
     }
     
     public static double ExpectedWinrate(double a, double b) => 1 / (1 + Math.Pow(10, (b - a) / 400));

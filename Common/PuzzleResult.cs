@@ -15,8 +15,6 @@ public class PuzzleResult
         Answer = answer ?? string.Empty;
     }
     
-    public PuzzleResult(int? answer) : this(PuzzleType.Default, answer.ToString()){}
-    
     public static PuzzleResult Empty => new(PuzzleType.Empty, "No puzzle here");
     public static PuzzleResult Failed => new(PuzzleType.Default, "Failed");
 

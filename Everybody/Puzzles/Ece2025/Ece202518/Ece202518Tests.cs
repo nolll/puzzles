@@ -32,7 +32,7 @@ public class Ece202518Tests
                              - branch to Plant 6 with thickness 34
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("774");
+        Sut.Part1(input).Should().Be(774);
     }
 
     [Fact]

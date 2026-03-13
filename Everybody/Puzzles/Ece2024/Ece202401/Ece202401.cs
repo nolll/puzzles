@@ -6,17 +6,16 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202401;
 public class Ece202401 : EverybodyEventPuzzle
 {
     [Puzzle("93584fbfb539341540431fdcbdd43e43")]
-    public PuzzleResult Part1(string input) => new(PotionsNeeded(input, 1));
+    public int Part1(string input) => PotionsNeeded(input, 1);
     
     [Puzzle("29c8c2e9da7059c271b37645091e3caa")]
-    public PuzzleResult Part2(string input) => new(PotionsNeeded(input, 2));
+    public int Part2(string input) => PotionsNeeded(input, 2);
     
     [Puzzle("114dce9075f6d580a84376f6f7eceeeb")]
-    public PuzzleResult Part3(string input) => new(PotionsNeeded(input, 3));
+    public int Part3(string input) => PotionsNeeded(input, 3);
 
-    private static int PotionsNeeded(string input, int groupSize) => 
-        SplitToSize(input, groupSize)
-            .Sum(s => s.Sum(GetPotionCount) + CalculateBonus(GetCreatureCount(s)));
+    private static int PotionsNeeded(string input, int groupSize) => SplitToSize(input, groupSize)
+        .Sum(s => s.Sum(GetPotionCount) + CalculateBonus(GetCreatureCount(s)));
 
     private static IEnumerable<string> SplitToSize(string s, int size)
     {

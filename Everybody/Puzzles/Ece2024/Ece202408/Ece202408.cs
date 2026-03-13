@@ -6,7 +6,7 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202408;
 public class Ece202408 : EverybodyEventPuzzle
 {
     [Puzzle("5dbd06d4622464e1becf46096ff400a7")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var availableBlocks = int.Parse(input);
         var level = 1;
@@ -17,10 +17,8 @@ public class Ece202408 : EverybodyEventPuzzle
             level += 2;
             cols.Add(level);
         }
-        
-        var result = (cols.Sum() - availableBlocks) * cols.Last();
-        
-        return new PuzzleResult(result);
+
+        return (cols.Sum() - availableBlocks) * cols.Last();
     }
 
     [Puzzle("afafe068673279bd495b7ccfc71a0064")]

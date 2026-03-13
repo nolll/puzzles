@@ -12,7 +12,7 @@ public class Ece202512Tests
                              766789
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("16");
+        Sut.Part1(input).Should().Be(16);
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class Ece202512Tests
                              5443329859
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("58");
+        Sut.Part2(input).Should().Be(58);
     }
 
     [Fact]
@@ -44,7 +44,7 @@ public class Ece202512Tests
                              3112
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("14");
+        Sut.Part3(input).Should().Be(14);
     }
     
     [Fact]
@@ -64,7 +64,7 @@ public class Ece202512Tests
                              56111126279711111517
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("136");
+        Sut.Part3(input).Should().Be(136);
     }
 
     private static Ece202512 Sut => new();

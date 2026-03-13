@@ -7,12 +7,12 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202418;
 public class Ece202418 : EverybodyEventPuzzle
 {
     [Puzzle("58a8744a3bef1c6dcbf739d171b22ea5")]
-    public PuzzleResult Part1(string input) => new(Part1And2(input));
+    public int Part1(string input) => SolvePart1And2(input);
     
     [Puzzle("e709ebaa41c12566e0524c796fac3615")]
-    public PuzzleResult Part2(string input) => new(Part1And2(input));
+    public int Part2(string input) => SolvePart1And2(input);
 
-    private int Part1And2(string input)
+    private int SolvePart1And2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var palmtrees = grid.FindAddresses('P');
@@ -50,7 +50,7 @@ public class Ece202418 : EverybodyEventPuzzle
     }
 
     [Puzzle("393186167939da99eb22eccf3da6b31b")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var palmtrees = grid.FindAddresses('P');
@@ -91,8 +91,6 @@ public class Ece202418 : EverybodyEventPuzzle
             time++;
         }
 
-        var best = hits.Values.Select(o => o.Values.Sum()).Min();
-
-        return new PuzzleResult(best);
+        return hits.Values.Select(o => o.Values.Sum()).Min();
     }
 }

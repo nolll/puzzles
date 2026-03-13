@@ -3,13 +3,8 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202502;
 public class Ece202502Tests
 {
     [Fact]
-    public void Part1()
-    {
-        const string input = "A=[25,9]";
+    public void Part1() => Sut.Part1("A=[25,9]").Should().Be("[357,862]");
 
-        Sut.Part1(input).Should().Be("[357,862]");
-    }
-    
     [Theory]
     [InlineData(35630, -64880)]
     [InlineData(35630, -64870)]
@@ -27,20 +22,10 @@ public class Ece202502Tests
     public void ShouldNotBeEngraved(long x, long y) => Ece202502.ShouldBeEngraved(x, y).Should().BeFalse();
     
     [Fact]
-    public void Part2()
-    {
-        const string input = "A=[35300,-64910]";
+    public void Part2() => Sut.Part2("A=[35300,-64910]").Should().Be(4076);
 
-        Sut.Part2(input).Answer.Should().Be("4076");
-    }
-    
     [Fact]
-    public void Part3()
-    {
-        const string input = "A=[35300,-64910]";
+    public void Part3() => Sut.Part3("A=[35300,-64910]").Should().Be(406954);
 
-        Sut.Part3(input).Answer.Should().Be("406954");
-    }
-
-    private Ece202502 Sut => new();
+    private static Ece202502 Sut => new();
 }

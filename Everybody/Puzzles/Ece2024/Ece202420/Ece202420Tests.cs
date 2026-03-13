@@ -15,7 +15,7 @@ public class Ece202420Tests
                              #.........#
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("1045");
+        Sut.Part1(input).Should().Be(1045);
     }
 
     [Fact]
@@ -32,7 +32,7 @@ public class Ece202420Tests
                              #########
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("24");
+        Sut.Part2(input).Should().Be(24);
     }
     
     [Fact]
@@ -58,7 +58,7 @@ public class Ece202420Tests
                              ###############################
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("78");
+        Sut.Part2(input).Should().Be(78);
     }
     
     [Fact]
@@ -86,7 +86,7 @@ public class Ece202420Tests
                              ###############################
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("206");
+        Sut.Part2(input).Should().Be(206);
     }
 
     [Fact]
@@ -103,7 +103,7 @@ public class Ece202420Tests
                              #..#...+...+..#
                              """;
 
-        Ece202420.RunPart3(input, 4).Should().Be(768790);
+        Sut.SolvePart3(input, 4).Should().Be(768790);
     }
 
     private static Ece202420 Sut => new();

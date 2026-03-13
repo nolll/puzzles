@@ -11,9 +11,8 @@ public class Ece202409Tests
                              7
                              16
                              """;
-        
-        var result = Sut.Part1(input);
-        result.Answer.Should().Be("10");
+
+        Sut.Part1(input).Should().Be(10);
     }
     
     [Fact]
@@ -25,9 +24,8 @@ public class Ece202409Tests
                              55
                              99
                              """;
-        
-        var result = Sut.Part2(input);
-        result.Answer.Should().Be("10");
+
+        Sut.Part2(input).Should().Be(10);
     }
     
     [Fact]
@@ -38,9 +36,8 @@ public class Ece202409Tests
                              352486
                              546212
                              """;
-        
-        var result = Sut.Part3(input);
-        result.Answer.Should().Be("10449");
+
+        Sut.Part3(input).Should().Be(10449);
     }
     
     private static Ece202409 Sut => new();

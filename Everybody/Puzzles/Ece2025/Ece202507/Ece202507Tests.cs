@@ -51,7 +51,7 @@ public class Ece202507Tests
                              T > i
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("23");
+        Sut.Part2(input).Should().Be(23);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class Ece202507Tests
                              y > p,t
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("25");
+        Sut.Part3(input).Should().Be(25);
     }
     
     [Fact]
@@ -100,7 +100,7 @@ public class Ece202507Tests
                              T > i
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("1154");
+        Sut.Part3(input).Should().Be(1154);
     }
 
     private static Ece202507 Sut => new();

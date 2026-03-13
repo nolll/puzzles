@@ -3,12 +3,7 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202414;
 public class Ece202414Tests
 {
     [Fact]
-    public void Part1()
-    {
-        const string input = "U5,R3,D2,L5,U4,R5,D2";
-
-        Sut.Part1(input).Answer.Should().Be("7");
-    }
+    public void Part1() => Sut.Part1("U5,R3,D2,L5,U4,R5,D2").Should().Be(7);
 
     [Fact]
     public void Part2()
@@ -18,7 +13,7 @@ public class Ece202414Tests
                              U6,L1,D2,R3,U2,L1
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("32");
+        Sut.Part2(input).Should().Be(32);
     }
 
     [Fact]
@@ -29,7 +24,7 @@ public class Ece202414Tests
                              U6,L1,D2,R3,U2,L1
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("5");
+        Sut.Part3(input).Should().Be(5);
     }
     
     [Fact]
@@ -43,7 +38,7 @@ public class Ece202414Tests
                              U16,L1,B1,L1,B3,L1,B1,F1
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("46");
+        Sut.Part3(input).Should().Be(46);
     }
 
     private static Ece202414 Sut => new();

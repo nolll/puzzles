@@ -17,7 +17,7 @@ public class Ece202507 : EverybodyEventPuzzle
     }
 
     [Puzzle("8a08f6570e988d7a1b4c17645d937b1f")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var (names, rules) = Parse(input);
 
@@ -28,18 +28,16 @@ public class Ece202507 : EverybodyEventPuzzle
                 sum += i + 1;
         }
         
-        return new PuzzleResult(sum);
+        return sum;
     }
 
     [Puzzle("cabe960d882be6a00b754e46052381df")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var (prefixes, rules) = Parse(input);
-        var count = prefixes.Where(o => IsValidName(o, rules))
+        return prefixes.Where(o => IsValidName(o, rules))
             .Where(prefix => !prefixes.Any(o => o != prefix && prefix.StartsWith(o)))
             .Sum(o => GenerateNames(o.Last(), rules, o.Length, []));
-
-        return new PuzzleResult(count);
     }
 
     private static int GenerateNames(char c, Dictionary<char, char[]> rules, int length, Dictionary<(char, int), int> cache)

@@ -9,26 +9,24 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202512;
 public class Ece202512 : EverybodyEventPuzzle
 {
     [Puzzle("f81b4b34e7f317b195c2bfb97a67f3de")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
         var seen = Destroy(grid, new Coord(grid.XMin, grid.YMin));
-        
-        return new PuzzleResult(seen.Count);
+        return seen.Count;
     }
 
     [Puzzle("12da343d20059e681858ba5ec807ec10")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
         var seen = Destroy(grid, new Coord(grid.XMin, grid.YMin));
         seen.UnionWith(Destroy(grid, new Coord(grid.XMax, grid.YMax)));
-        
-        return new PuzzleResult(seen.Count);
+        return seen.Count;
     }
 
     [Puzzle("757124c4b4c1a7a826289c980216e1ed")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
         var allResults = FindAll(grid).ToList();
@@ -37,7 +35,7 @@ public class Ece202512 : EverybodyEventPuzzle
         foreach (var _ in Enumerable.Range(0, 3)) 
             total.UnionWith(allResults.MaxBy(o => o.Except(total).Count())!);
         
-        return new PuzzleResult(total.Count);
+        return total.Count;
     }
 
     private static IEnumerable<HashSet<Coord>> FindAll(Grid<int> grid) => 

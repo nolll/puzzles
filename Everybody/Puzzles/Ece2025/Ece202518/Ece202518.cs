@@ -12,7 +12,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202518;
 public class Ece202518 : EverybodyEventPuzzle
 {
     [Puzzle("3c9317ed77a5948ad8c6ca11172055bd")]
-    public PuzzleResult Part1(string input) => new(ParsePlants(input).Last().Energy);
+    public int Part1(string input) => ParsePlants(input).Last().Energy;
 
     [Puzzle("810932c961238e78746d0d6f239e398d")]
     public long Part2(string input)

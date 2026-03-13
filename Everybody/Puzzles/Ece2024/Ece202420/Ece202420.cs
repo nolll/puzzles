@@ -29,7 +29,7 @@ public class Ece202420 : EverybodyEventPuzzle
     };
 
     [Puzzle("ad1b597677b7daffac4e3c11d973c8be")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var s = grid.FindAddresses('S').First();
@@ -69,12 +69,11 @@ public class Ece202420 : EverybodyEventPuzzle
             states = next;
         }
 
-        var result = states.Values.Max();
-        return new PuzzleResult(result);
+        return states.Values.Max();
     }
 
     [Puzzle("455f69d24dffb75a22302c1cbad1475b")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var s = grid.FindAddresses('S').First();
@@ -124,14 +123,14 @@ public class Ece202420 : EverybodyEventPuzzle
             states = next;
         }
         
-        return new PuzzleResult(time);
+        return time;
     }
 
     [Puzzle("f410a855e124b277c01cf1caebd9778e")]
-    public PuzzleResult Part3(string input) => new(RunPart3(input, -3));
+    public int Part3(string input) => SolvePart3(input, -3);
 
     // The best col was obvious. 4 cols to the right for the test input and three steps to the right for the real input
-    public static int RunPart3(string input, int stepsToGoodCol)
+    public int SolvePart3(string input, int stepsToGoodCol)
     {
         var changes = new Dictionary<char, int>
         {

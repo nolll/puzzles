@@ -8,15 +8,15 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202515;
 public class Ece202515 : EverybodyEventPuzzle
 {
     [Puzzle("4a1a3b7a0e4af4aaf4c4f9e0b95430d4")]
-    public PuzzleResult Part1(string input) => new(Solve(input));
+    public int Part1(string input) => Solve(input);
     
     [Puzzle("c9e63859efb2156d5906e433e50285d0")]
-    public PuzzleResult Part2(string input) => new(Solve(input));
+    public int Part2(string input) => Solve(input);
     
     [Puzzle("f5a3b1e436cc12fdbacea6f28f381b67")]
-    public PuzzleResult Part3(string input) => new(Solve(input));
+    public int Part3(string input) => Solve(input);
 
-    public static int Solve(string input)
+    public int Solve(string input)
     {
         var originalCorners = GetCorners(input);
         var coordMapper = new CoordMapper(originalCorners);

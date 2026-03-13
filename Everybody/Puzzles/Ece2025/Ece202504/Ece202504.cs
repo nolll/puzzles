@@ -8,12 +8,10 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202504;
 public class Ece202504 : EverybodyEventPuzzle
 {
     [Puzzle("eb41f6c9a8921d8fcdff38044b3bfe9d")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var numbers = Numbers.IntsFromString(input).ToArray();
-        var result = numbers.First() * 2025 / numbers.Last();
-        
-        return new PuzzleResult(result);
+        return numbers.First() * 2025 / numbers.Last();
     }
 
     [Puzzle("0257539e71c9dbe0dd69df3f4d79eb4f")]

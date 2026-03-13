@@ -16,18 +16,16 @@ public class Ece202517 : EverybodyEventPuzzle
     private const string LeftSet = "left";
 
     [Puzzle("058525ed0b94d59517e415b1660aa68a")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var volcano = grid.Coords.First(o => grid.ReadValueAt(o) == '@');
 
-        var sum = CountDestroyed(grid, volcano, 10);
-        
-        return new PuzzleResult(sum);
+        return CountDestroyed(grid, volcano, 10);
     }
 
     [Puzzle("5d4764c0cfb73f6caa5342ac5cbce4db")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var volcano = grid.Coords.First(o => grid.ReadValueAt(o) == '@');
@@ -49,11 +47,11 @@ public class Ece202517 : EverybodyEventPuzzle
             r++;
         }
         
-        return new PuzzleResult(best * bestRadius);
+        return best * bestRadius;
     }
 
     [Puzzle("6efa9d887ba005740c281c0027064b53")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var radius = 1;
@@ -110,7 +108,7 @@ public class Ece202517 : EverybodyEventPuzzle
             var result = Dijkstra.BestPath(edges, GetId(RightSet, start), GetId(LeftSet, start));
             
             if (result.Cost < availableSeconds)
-                return new PuzzleResult(result.Cost * r);
+                return result.Cost * r;
 
             radius++;
         }

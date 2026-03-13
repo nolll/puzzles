@@ -17,12 +17,9 @@ public class ResultVerifier(HashFactory hashFactory, string seed)
         return new VerifiedPuzzleResult(result, hash, status);
     }
 
-    private string GetHash(string answer)
-    {
-        return answer != string.Empty 
-            ? hashFactory.StringHash($"{seed}{answer}") 
-            : string.Empty;
-    }
+    private string GetHash(string answer) => answer != string.Empty
+        ? hashFactory.StringHash($"{seed}{answer}")
+        : string.Empty;
 
     private static ResultStatus GetStatus(
         PuzzleType type, 

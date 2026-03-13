@@ -14,7 +14,7 @@ public class Ece202519Tests
                              40,8,2
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("24");
+        Sut.Part1(input).Should().Be(24);
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class Ece202519Tests
                              40,8,2
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("22");
+        Sut.Part2(input).Should().Be(22);
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public class Ece202519Tests
                              40,8,2
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("22");
+        Sut.Part3(input).Should().Be(22);
     }
 
     private static Ece202519 Sut => new();

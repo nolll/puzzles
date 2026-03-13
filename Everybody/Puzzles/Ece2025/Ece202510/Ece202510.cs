@@ -20,9 +20,9 @@ public class Ece202510 : EverybodyEventPuzzle
     ];
 
     [Puzzle("742e9c5b98a1f2e9dfe76f5e8a1f560d")]
-    public PuzzleResult Part1(string input) => new(Part1(input, 4));
+    public int Part1(string input) => SolvePart1(input, 4);
 
-    public int Part1(string input, int moveCount)
+    public int SolvePart1(string input, int moveCount)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var dragonPos = grid.Coords.First(o => grid.ReadValueAt(o) == 'D');
@@ -49,9 +49,9 @@ public class Ece202510 : EverybodyEventPuzzle
     }
 
     [Puzzle("c092efde26d8cc546f5805df698cf529")]
-    public PuzzleResult Part2(string input) => new(Part2(input, 20));
+    public int Part2(string input) => SolvePart2(input, 20);
 
-    public int Part2(string input, int moveCount)
+    public int SolvePart2(string input, int moveCount)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var dragon = grid.Coords.First(o => grid.ReadValueAt(o) == 'D');

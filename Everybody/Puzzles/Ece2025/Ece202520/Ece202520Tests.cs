@@ -16,7 +16,7 @@ public class Ece202520Tests
                              .....#.....
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("7");
+        Sut.Part1(input).Should().Be(7);
     }
     
     [Fact]
@@ -31,7 +31,7 @@ public class Ece202520Tests
                              .....T.....
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("0");
+        Sut.Part1(input).Should().Be(0);
     }
     
     [Fact]
@@ -46,7 +46,7 @@ public class Ece202520Tests
                              .....#.....
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("0");
+        Sut.Part1(input).Should().Be(0);
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public class Ece202520Tests
                              ........S........
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("32");
+        Sut.Part2(input).Should().Be(32);
     }
 
     [Fact]
@@ -134,7 +134,7 @@ public class Ece202520Tests
                              .........S.........
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("23");
+        Sut.Part3(input).Should().Be(23);
     }
 
     private static Ece202520 Sut => new();

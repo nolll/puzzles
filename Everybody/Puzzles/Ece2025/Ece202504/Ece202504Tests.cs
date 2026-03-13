@@ -15,7 +15,7 @@ public class Ece202504Tests
                              13
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("15888");
+        Sut.Part1(input).Should().Be(15888);
     }
 
     [Fact]

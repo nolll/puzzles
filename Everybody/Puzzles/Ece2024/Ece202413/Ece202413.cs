@@ -8,13 +8,13 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202413;
 public class Ece202413 : EverybodyEventPuzzle
 {
     [Puzzle("cc8e51053c4445ee974c4672602452ae")]
-    public PuzzleResult Part1(string input) => new(Solve(input));
+    public int Part1(string input) => Solve(input);
     
     [Puzzle("a66cce437d7531d58ae98d0084ae5e9d")]
-    public PuzzleResult Part2(string input) => new(Solve(input));
+    public int Part2(string input) => Solve(input);
     
     [Puzzle("3bebcd17eed852e6918bf8d5eae753cb")]
-    public PuzzleResult Part3(string input) => new(Solve(input));
+    public int Part3(string input) => Solve(input);
 
     private static int Solve(string input)
     {

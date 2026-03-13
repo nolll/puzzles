@@ -18,18 +18,9 @@ public class Ece202505 : EverybodyEventPuzzle
     }
 
     [Puzzle("379c8b556406dfefbd579b47d63c2b93")]
-    public PuzzleResult Part3(string input)
-    {
-        var swords = ParseSwords(input).OrderDescending().ToArray();
-        var checksum = GetChecksum(swords);
-        return new PuzzleResult(checksum);
-    }
+    public int Part3(string input) => GetChecksum(ParseSwords(input).OrderDescending().ToArray());
 
-    private static Sword[] ParseSwords(string input)
-    {
-        var lines = input.Split(LineBreaks.Single);
-        return lines.Select(Sword.Parse).ToArray();
-    }
+    private static Sword[] ParseSwords(string input) => input.Split(LineBreaks.Single).Select(Sword.Parse).ToArray();
 
     private static int GetChecksum(Sword[] swords)
     {

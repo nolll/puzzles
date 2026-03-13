@@ -8,7 +8,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202520;
 public class Ece202520 : EverybodyEventPuzzle
 {
     [Puzzle("d8ee6b0475f3971b598eab03bf31bed4")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var count = 0;
@@ -31,11 +31,11 @@ public class Ece202520 : EverybodyEventPuzzle
             }
         }
         
-        return new PuzzleResult(count);
+        return count;
     }
 
     [Puzzle("2564cba88ff81fc3fa2632c3749d06e5")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var edges = new HashSet<GraphEdge>();
@@ -72,13 +72,11 @@ public class Ece202520 : EverybodyEventPuzzle
             }
         }
 
-        var cost = Dijkstra.BestCost(edges.ToList(), start.Id, end.Id);
-        
-        return new PuzzleResult(cost);
+        return Dijkstra.BestCost(edges.ToList(), start.Id, end.Id);
     }
 
     [Puzzle("20c605f31a1458e47d7cc3a1cc7d8971")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var grid1 = GridBuilder.BuildCharGrid(input);
         var start = grid1.FindAddresses('S').First();
@@ -151,10 +149,9 @@ public class Ece202520 : EverybodyEventPuzzle
             }
         }
 
-        List<string> targets = [GetId(0, end1), GetId(1, end2), GetId(2, end3)]; 
-        var cost = Dijkstra.BestCost(edges.ToList(), GetId(0, start), targets);
-        
-        return new PuzzleResult(cost);
+        List<string> targets = [GetId(0, end1), GetId(1, end2), GetId(2, end3)];
+
+        return Dijkstra.BestCost(edges.ToList(), GetId(0, start), targets);
     }
 
     private string GetId(int gridIndex, Coord coord) => $"{gridIndex}-{coord.Id}";

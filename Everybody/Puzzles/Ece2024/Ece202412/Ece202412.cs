@@ -9,12 +9,12 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202412;
 public class Ece202412 : EverybodyEventPuzzle
 {
     [Puzzle("7266a18eef65c4745c844164ef32f61d")]
-    public PuzzleResult Part1(string input) => new(Part1And2(input));
+    public int Part1(string input) => SolvePart1And2(input);
     
     [Puzzle("e6468a990e5dfdb3b572e72c4c24ed5b")]
-    public PuzzleResult Part2(string input) => new(Part1And2(input));
+    public int Part2(string input) => SolvePart1And2(input);
 
-    private int Part1And2(string input)
+    private int SolvePart1And2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, '.');
         grid.ExtendUp(15);
@@ -96,7 +96,7 @@ public class Ece202412 : EverybodyEventPuzzle
     }
 
     [Puzzle("10d32566118d059169a691eef70e6b1e")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var meteors = input.Split(LineBreaks.Single)
             .Select(Numbers.IntsFromString)
@@ -145,9 +145,7 @@ public class Ece202412 : EverybodyEventPuzzle
             bestList.Add(best);
         }
 
-        var sum = bestList.Sum(o => o.power);
-
-        return new PuzzleResult(sum);
+        return bestList.Sum(o => o.power);
     }
 
     private List<((int x, int y) coord, int time, int power)> SimulateTrajectories(

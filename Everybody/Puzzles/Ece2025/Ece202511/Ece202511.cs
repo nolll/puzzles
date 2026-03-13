@@ -7,7 +7,7 @@ namespace Pzl.Everybody.Puzzles.Ece2025.Ece202511;
 public class Ece202511 : EverybodyEventPuzzle
 {
     [Puzzle("f8edf60eba791291edc0affdd3910b97")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var cols = input.Split(LineBreaks.Single).Select(int.Parse).ToArray();
         var phase = 1;
@@ -46,11 +46,11 @@ public class Ece202511 : EverybodyEventPuzzle
 
         var checksum = cols.Select((t, i) => t * (i + 1)).Sum();
 
-        return new PuzzleResult(checksum);
+        return checksum;
     }
 
     [Puzzle("0190e3fea8360b204a353840cb82c001")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var cols = input.Split(LineBreaks.Single).Select(int.Parse).ToArray();
         var rounds = 0;
@@ -88,7 +88,7 @@ public class Ece202511 : EverybodyEventPuzzle
             }
         }
         
-        return new PuzzleResult(rounds);
+        return rounds;
     }
 
     [Puzzle("a6ce160669697ddf6f40132abe96f3a1")]

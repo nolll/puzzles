@@ -13,18 +13,10 @@ public class Ece202403Tests
                                  """;
 
     [Fact]
-    public void Part1And2()
-    {
-        var result = Sut.Part1(Input);
-        result.Answer.Should().Be("35");
-    }
-    
+    public void Part1And2() => Sut.Part1(Input).Should().Be(35);
+
     [Fact]
-    public void Part3()
-    {
-        var result = Sut.Part3(Input);
-        result.Answer.Should().Be("29");
-    }
+    public void Part3() => Sut.Part3(Input).Should().Be(29);
 
     private static Ece202403 Sut => new();
 }

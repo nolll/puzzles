@@ -13,7 +13,7 @@ public class Ece202513Tests
                              67
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("67");
+        Sut.Part1(input).Should().Be(67);
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class Ece202513Tests
                              30-37
                              """;
 
-        Sut.Part2(input).Answer.Should().Be("30");
+        Sut.Part2(input).Should().Be(30);
     }
 
     private static Ece202513 Sut => new();

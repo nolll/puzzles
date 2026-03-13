@@ -14,7 +14,7 @@ public class Ece202514Tests
                              ###.##
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("200");
+        Sut.Part1(input).Should().Be(200);
     }
 
     [Fact]

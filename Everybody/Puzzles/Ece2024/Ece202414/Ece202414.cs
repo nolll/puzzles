@@ -10,7 +10,7 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202414;
 public class Ece202414 : EverybodyEventPuzzle
 {
     [Puzzle("4d7ad96354959558ed0b95fa70be777c")]
-    public PuzzleResult Part1(string input)
+    public int Part1(string input)
     {
         var y = 0;
         var maxy = 0;
@@ -30,11 +30,11 @@ public class Ece202414 : EverybodyEventPuzzle
             maxy = Math.Max(y, maxy);
         }
         
-        return new PuzzleResult(maxy);
+        return maxy;
     }
 
     [Puzzle("1ceb1e594b0f47c1b64f940bb505f9ce")]
-    public PuzzleResult Part2(string input)
+    public int Part2(string input)
     {
         var seen = new HashSet<(int x, int y, int z)>();
 
@@ -58,13 +58,11 @@ public class Ece202414 : EverybodyEventPuzzle
             }   
         }
 
-        var result = seen.Count;
-        
-        return new PuzzleResult(result);
+        return seen.Count;
     }
 
     [Puzzle("55d3e09b26d9f60ed08c206a7505561f")]
-    public PuzzleResult Part3(string input)
+    public int Part3(string input)
     {
         var leaves = new HashSet<(int x, int y, int z)>();
         var trunk = new HashSet<(int x, int y, int z)>();
@@ -108,7 +106,7 @@ public class Ece202414 : EverybodyEventPuzzle
             best = Math.Min(best, sum);
         }
         
-        return new PuzzleResult(best);
+        return best;
     }
 
     private static bool IsTrunk(Dictionary<char, int> pos) => pos['x'] == 0 && pos['z'] == 0;

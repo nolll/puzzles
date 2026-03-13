@@ -31,20 +31,12 @@ public class Ece202502 : EverybodyEventPuzzle
     }
 
     [Puzzle("814e2b7637e129a0a60b36d921916b8c")]
-    public PuzzleResult Part2(string input)
-    {
-        var count = RunPart2And3(input, 101, 10);
-        return new PuzzleResult(count);
-    }
+    public int Part2(string input) => SolvePart2And3(input, 101, 10);
 
     [Puzzle("0265c1e5ddcd8eec040e8ccb3bd0ac11")]
-    public PuzzleResult Part3(string input)
-    {
-        var count = RunPart2And3(input, 1001, 1);
-        return new PuzzleResult(count);
-    }
+    public int Part3(string input) => SolvePart2And3(input, 1001, 1);
 
-    private int RunPart2And3(string input, int gridSize, int increment)
+    private int SolvePart2And3(string input, int gridSize, int increment)
     {
         var (sx, sy) = Numbers.LongsFromString(input);
         var count = 0;

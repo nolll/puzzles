@@ -44,7 +44,7 @@ public class Ece202505Tests
                              9:3,7,2,2,7,4,1,6,3,7
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("260");
+        Sut.Part3(input).Should().Be(260);
     }
 
     private static Ece202505 Sut => new();

@@ -3,31 +3,13 @@ namespace Pzl.Everybody.Puzzles.Ece2024.Ece202401;
 public class Ece202401Tests
 {
     [Fact]
-    public void OneCreature()
-    {
-        const string input = "ABBAC";
-        var result = Sut.Part1(input);
+    public void OneCreature() => Sut.Part1("ABBAC").Should().Be(5);
 
-        result.Answer.Should().Be("5");
-    }
-    
     [Fact]
-    public void TwoCreatures()
-    {
-        const string input = "AxBCDDCAxD";
-        var result = Sut.Part2(input);
+    public void TwoCreatures() => Sut.Part2("AxBCDDCAxD").Should().Be(28);
 
-        result.Answer.Should().Be("28");
-    }
-    
     [Fact]
-    public void ThreeCreatures()
-    {
-        const string input = "xBxAAABCDxCC";
-        var result = Sut.Part3(input);
+    public void ThreeCreatures() => Sut.Part3("xBxAAABCDxCC").Should().Be(30);
 
-        result.Answer.Should().Be("30");
-    }
-    
     private static Ece202401 Sut => new();
 }

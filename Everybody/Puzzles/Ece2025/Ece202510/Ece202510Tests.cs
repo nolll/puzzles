@@ -21,7 +21,7 @@ public class Ece202510Tests
                              SS.....S..S..
                              """;
 
-        Sut.Part1(input, 3).Should().Be(27);
+        Sut.SolvePart1(input, 3).Should().Be(27);
     }
 
     [Fact]
@@ -43,7 +43,7 @@ public class Ece202510Tests
                              SS...#.S.#S..
                              """;
 
-        Sut.Part2(input, 3).Should().Be(27);
+        Sut.SolvePart2(input, 3).Should().Be(27);
     }
 
     [Fact]

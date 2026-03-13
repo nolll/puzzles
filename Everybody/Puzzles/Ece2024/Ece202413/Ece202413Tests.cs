@@ -13,7 +13,7 @@ public class Ece202413Tests
                              #######
                              """;
 
-        Sut.Part1(input).Answer.Should().Be("28");
+        Sut.Part1(input).Should().Be(28);
     }
     
     [Theory]
@@ -21,11 +21,8 @@ public class Ece202413Tests
     [InlineData(1, 2, 1)]
     [InlineData(1, 9, 2)]
     [InlineData(9, 1, 2)]
-    public void Cost(int a, int b, int expected)
-    {
-        Ece202413.GetCost(a, b).Should().Be(expected);
-    }
-    
+    public void Cost(int a, int b, int expected) => Ece202413.GetCost(a, b).Should().Be(expected);
+
     [Fact]
     public void Part3()
     {
@@ -41,7 +38,7 @@ public class Ece202413Tests
                              SSSSSSSSSSS
                              """;
 
-        Sut.Part3(input).Answer.Should().Be("14");
+        Sut.Part3(input).Should().Be(14);
     }
 
     private static Ece202413 Sut => new();

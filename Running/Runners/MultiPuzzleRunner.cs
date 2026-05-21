@@ -31,7 +31,7 @@ public class MultiPuzzleRunner
 
     public void Run()
     {
-        AnsiConsole.Cursor.Show(false);
+        Printer.HideCursor();
         PrintHeader();
 
         foreach (var puzzle in _definitions)
@@ -48,7 +48,7 @@ public class MultiPuzzleRunner
         }
 
         PrintFooter();
-        AnsiConsole.Cursor.Show(true);
+        Printer.ShowCursor();
     }
 
     private void PrintHeader()
@@ -59,22 +59,19 @@ public class MultiPuzzleRunner
         var paddedPartTitles = partTitles.Select(o => o.PadRight(10));
         var variableParts = string.Join(" | ", paddedPartTitles);
 
-        AnsiConsole.WriteLine($"Running {_definitions.Count} puzzles");
+        Printer.WriteLine($"Running {_definitions.Count} puzzles");
         PrintDivider();
-        AnsiConsole.WriteLine($"| {"puzzle",-TitleLength} | {variableParts} | {"comment",-CommentLength} |");
+        Printer.WriteLine($"| {"puzzle",-TitleLength} | {variableParts} | {"comment",-CommentLength} |");
         PrintDivider();
     }
 
-    private void PrintFooter()
-    {
-        PrintDivider();
-    }
+    private void PrintFooter() => PrintDivider();
 
     private void PrintDivider()
     {
         var partsDividers = Enumerable.Range(1, _funcCount).Select(_ => "----------");
         var variableDividers = string.Join("---", partsDividers);
         var divider = $"----------------{variableDividers}-----------------------------";
-        AnsiConsole.WriteLine(divider);
+        Printer.WriteLine(divider);
     }
 }

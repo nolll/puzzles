@@ -1,4 +1,4 @@
-﻿using Spectre.Console;
+﻿using Pzl.Client.Running.Runners;
 
 namespace Pzl.Client.Help;
 
@@ -29,15 +29,15 @@ public class HelpPrinter
 
     public void Print()
     {
-        AnsiConsole.WriteLine(HelpText);
-        AnsiConsole.WriteLine();
-        // AnsiConsole.WriteLine("Links:");
-        // AnsiConsole.MarkupLine("[blue underline link=https://adventofcode.com]Advent of Code[/]");
-        // AnsiConsole.WriteLine("AquaQ Challenge: https://challenges.aquaq.co.uk");
-        // AnsiConsole.WriteLine("Codyssi: https://www.codyssi.com");
-        // AnsiConsole.WriteLine("FlipFlop: https://flipflop.slome.org");
-        // AnsiConsole.WriteLine("Everybody Codes: https://everybody.codes");
-        // AnsiConsole.WriteLine("Project Euler: https://projecteuler.net");
-        // AnsiConsole.WriteLine();
+        Printer.WriteLine(HelpText);
+        Printer.WriteLine();
+        // Printer.WriteLine("Links:");
+        // Printer.MarkupLine("[blue underline link=https://adventofcode.com]Advent of Code[/]");
+        // Printer.WriteLine("AquaQ Challenge: https://challenges.aquaq.co.uk");
+        // Printer.WriteLine("Codyssi: https://www.codyssi.com");
+        // Printer.WriteLine("FlipFlop: https://flipflop.slome.org");
+        // Printer.WriteLine("Everybody Codes: https://everybody.codes");
+        // Printer.WriteLine("Project Euler: https://projecteuler.net");
+        // Printer.WriteLine();
     }
 }

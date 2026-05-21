@@ -12,7 +12,6 @@ using Pzl.Euler;
 using Pzl.Everybody;
 using Pzl.FlipFlop;
 using Pzl.Tools.Cryptography;
-using Spectre.Console;
 
 namespace Pzl.Client;
 
@@ -75,7 +74,7 @@ public class PuzzleProgram
     
     private Action GetRunFunc(List<PuzzleDefinition> puzzles) => puzzles.Count switch
     {
-        0 => () => AnsiConsole.WriteLine("No puzzles found."),
+        0 => () => Printer.WriteLine("No puzzles found."),
         1 => () => new StandaloneSinglePuzzleRunner(_puzzleFactory, _resultVerifier, puzzles.First(), _runMode).Run(),
         _ => () => new MultiPuzzleRunner(_puzzleFactory, _resultVerifier, puzzles, _options.TimeoutSeconds).Run()
     };
@@ -83,13 +82,13 @@ public class PuzzleProgram
     private void Search(string query)
     {
         var puzzles = _puzzleRepository.Search(query);
-        AnsiConsole.WriteLine($"Search: {query}");
+        Printer.WriteLine($"Search: {query}");
         if(puzzles.Count == 0)
-            AnsiConsole.WriteLine("No puzzles found!");
+            Printer.WriteLine("No puzzles found!");
 
         foreach (var puzzle in puzzles)
         {
-            AnsiConsole.WriteLine($"{puzzle.Title}: {puzzle.Name}");
+            Printer.WriteLine($"{puzzle.Title}: {puzzle.Name}");
         }
     }
 }

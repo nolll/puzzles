@@ -58,7 +58,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
             RunPart(() => func.Invoke(), i);
         }
         
-        AnsiConsole.WriteLine();
+        Printer.WriteLine();
     }
 
     private void RunPart(Func<PuzzleResult> runFunc, int index)
@@ -93,23 +93,20 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 
     private void UpdateResult(int index, string markup) => _markups[index] = markup;
 
-    private string MarkupTime(TimeSpan time, ResultStatus status)
+    private string MarkupTime(TimeSpan time, ResultStatus status) => status switch
     {
-        return status switch
-        {
-            ResultStatus.Correct =>
-                MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Green),
-            ResultStatus.Failed or ResultStatus.Wrong => 
-                MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red),
-            ResultStatus.Missing =>
-                MarkupColor(PadResult(""), Color.Grey),
-            ResultStatus.Timeout => 
-                MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
-            ResultStatus.Completed or ResultStatus.Unverified => 
-                MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Yellow),
-            _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
-        };
-    }
+        ResultStatus.Correct =>
+            MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Green),
+        ResultStatus.Failed or ResultStatus.Wrong =>
+            MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red),
+        ResultStatus.Missing =>
+            MarkupColor(PadResult(""), Color.Grey),
+        ResultStatus.Timeout =>
+            MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
+        ResultStatus.Completed or ResultStatus.Unverified =>
+            MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Yellow),
+        _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
+    };
 
     private string PadResult(string s) => Pad(s, _resultLength);
     private string PadComment(string s) => Pad(s, _commentLength);
@@ -118,16 +115,15 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     private void PrintRow()
     {
         var results = string.Join(" | ", _markups);
-        AnsiConsole.Markup($"\r| {_title} | {results} | {_commentMarkup} |");
+        Printer.CarriageReturn();
+        Printer.Markup($"| {_title} | {results} | {_commentMarkup} |");
     }
 
-    private string MarkupComment(string? comment) =>
-        comment is null
-            ? PadComment(string.Empty)
-            : MarkupColor(PadComment(TruncateComment(comment)), Color.Yellow);
+    private string MarkupComment(string? comment) => comment is null
+        ? PadComment(string.Empty)
+        : MarkupColor(PadComment(TruncateComment(comment)), Color.Yellow);
 
-    private string TruncateComment(string fullComment) =>
-        fullComment.Length > _truncatedCommentLength
-            ? fullComment[.._truncatedCommentLength] + "..."
-            : fullComment;
+    private string TruncateComment(string fullComment) => fullComment.Length > _truncatedCommentLength
+        ? fullComment[.._truncatedCommentLength] + "..."
+        : fullComment;
 }

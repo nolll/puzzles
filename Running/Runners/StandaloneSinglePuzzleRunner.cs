@@ -26,7 +26,7 @@ public class StandaloneSinglePuzzleRunner(
 
     private void RunStandardMode()
     {
-        AnsiConsole.Cursor.Show(false);
+        Printer.HideCursor();
         WriteHeader(puzzle);
         
         var instance = puzzleFactory.CreateInstance(puzzle);
@@ -35,11 +35,11 @@ public class StandaloneSinglePuzzleRunner(
         {
             var func = instance.Funcs[i];
             
-            AnsiConsole.WriteLine();
+            Printer.WriteLine();
             RunAndPrintPuzzleResult(i + 1, func);
         }
 
-        AnsiConsole.Cursor.Show(true);
+        Printer.ShowCursor();
     }
 
     private void RunDebugMode()
@@ -51,7 +51,7 @@ public class StandaloneSinglePuzzleRunner(
         {
             var result = func.Invoke();
 
-            AnsiConsole.WriteLine(result.Answer);
+            Printer.WriteLine(result.Answer);
         }
     }
 
@@ -61,16 +61,16 @@ public class StandaloneSinglePuzzleRunner(
             ? puzzle.Name
             : $"{puzzle.Title}: {puzzle.Name}";
         
-        AnsiConsole.MarkupLine($"[DarkTurquoise]{title}[/]");
+        Printer.MarkupLine($"[DarkTurquoise]{title}[/]");
         
         if (puzzle.Comment is not null)
-            AnsiConsole.MarkupLine($"[Yellow]{puzzle.Comment}[/]");
+            Printer.MarkupLine($"[Yellow]{puzzle.Comment}[/]");
     }
     
     private void RunAndPrintPuzzleResult(int puzzleIndex, PuzzleFunction func)
     {
         var result = RunPuzzle(puzzleIndex, func);
-        AnsiConsole.WriteLine();
+        Printer.WriteLine();
         WriteAnswer(result);
     }
     
@@ -105,15 +105,15 @@ public class StandaloneSinglePuzzleRunner(
             ? Formatter.FormatTime(time.Value)
             : string.Empty;
 
-        AnsiConsole.Write($"\rPart {puzzleNumber}: {formattedTime} ");
+        Console.Write($"\rPart {puzzleNumber}: {formattedTime} ");
     }
     
     private static void WriteAnswer(VerifiedPuzzleResult? result)
     {
         if (result is null)
-            AnsiConsole.MarkupLine(MarkupColor("Missing", Color.Red));
+            Printer.MarkupLine(MarkupColor("Missing", Color.Red));
         else if (result.Status is ResultStatus.Missing)
-            AnsiConsole.MarkupLine(MarkupColor("No puzzle", Color.Grey));
+            Printer.MarkupLine(MarkupColor("No puzzle", Color.Grey));
         else if (result.Status is ResultStatus.Correct)
             WriteAnswer(result, Color.Green);
         else if (result.Status is ResultStatus.Failed or ResultStatus.Timeout or ResultStatus.Wrong)
@@ -124,8 +124,8 @@ public class StandaloneSinglePuzzleRunner(
 
     private static void WriteAnswer(VerifiedPuzzleResult result, Color color)
     {
-        AnsiConsole.MarkupLine(MarkupColor(result.Answer.Answer, color));
+        Printer.MarkupLine(MarkupColor(result.Answer.Answer, color));
         if(result.Status == ResultStatus.Completed)
-            AnsiConsole.MarkupLine(MarkupColor(result.Hash, Color.Grey));
+            Printer.MarkupLine(MarkupColor(result.Hash, Color.Grey));
     }
 }

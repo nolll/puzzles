@@ -13,7 +13,7 @@ public class Aoc201503 : AocPuzzle
             
         return grid.SantaDeliveryCount;
     }
-
+    
     [Puzzle("7d063c75c9ee4f2a8fe2d97228a36f79")]
     public int Part2(string input)
     {

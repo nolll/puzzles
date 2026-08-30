@@ -57,7 +57,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
         grid.TurnTo(GridDirection.Up);
         var stepCount = 0;
         
-        var endAdjCoords = grid.PossibleOrthogonalAdjacentCoordsTo(end).ToList();
+        var endAdjCoords = Grid<char>.PossibleOrthogonalAdjacentCoordsTo(end).ToList();
 
         while (endAdjCoords.Any(o => grid.ReadValueAt(o) != Visited))
         {
@@ -98,7 +98,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
         var start = grid.FindAddresses(Current).First();
         
         var boneCoords = grid.CoordsOf(Bone).ToList();
-        var boneAdjCoords = boneCoords.SelectMany(o => grid.PossibleOrthogonalAdjacentCoordsTo(o)).ToHashSet();
+        var boneAdjCoords = boneCoords.SelectMany(Grid<char>.PossibleOrthogonalAdjacentCoordsTo).ToHashSet();
         
         grid.MoveTo(start);
         grid.WriteValue(Visited);
@@ -181,7 +181,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
             if (grid.IsAtEdge(coord))
                 return [];
             
-            var adj = grid.PossibleOrthogonalAdjacentCoordsTo(coord).Where(o => grid.ReadValueAt(o) == Empty);
+            var adj = Grid<char>.PossibleOrthogonalAdjacentCoordsTo(coord).Where(o => grid.ReadValueAt(o) == Empty);
             foreach (var a in adj)
             {
                 if (seen.Add(a))

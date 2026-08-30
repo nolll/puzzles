@@ -29,7 +29,6 @@ public class Grid<T> where T : struct
     public bool IsAtEdge() => IsAtEdge(Coord);
     public bool IsAtEdge(Coord coord) => IsAtTopEdge(coord) || IsAtRightEdge(coord) || IsAtBottomEdge(coord) || IsAtLeftEdge(coord);
     
-    
     public Coord Center
     {
         get
@@ -165,7 +164,7 @@ public class Grid<T> where T : struct
     public IList<Coord> OrthogonalAdjacentCoordsTo(Coord address) => PossibleOrthogonalAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
 
     public IEnumerable<Coord> PossibleOrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoordsTo(Coord);
-    public IEnumerable<Coord> PossibleOrthogonalAdjacentCoordsTo(Coord address) => 
+    public static IEnumerable<Coord> PossibleOrthogonalAdjacentCoordsTo(Coord address) => 
         GridConstants.OrthogonalDirections.Select(dir => new Coord(address.X + dir.x, address.Y + dir.y));
     
     public IList<T> DiagonalAdjacentValues => DiagonalAdjacentCoords.Select(ReadValueAt).ToList();

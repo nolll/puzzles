@@ -90,10 +90,10 @@ public class Ecs0401Tests
     }
     
     [Fact]
-    public void IsCrossing()
-    {
-        Ecs0401.IsCrossing([(6, 10)], 9, 12).Should().Be(true);
-    }
+    public void IsCrossing() => Ecs0401.IsCrossing([(6, 10)], (9, 12)).Should().Be(true);
+
+    [Fact]
+    public void IsCrossing2() => Ecs0401.IsCrossing((6, 10), (9, 12)).Should().Be(true);
 
     private static Ecs0401 Sut => new();
 }

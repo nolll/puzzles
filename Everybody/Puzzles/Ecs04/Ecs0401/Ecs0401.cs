@@ -63,7 +63,7 @@ public class Ecs0401 : EverybodyStoryPuzzle
         foreach (var jump in sequence)
         {
             var back = n - jump;
-            if (back >= 0 && !numbers.Contains(back) && !IsCrossing(arcs[selectedArcs], back, n))
+            if (back >= 0 && !numbers.Contains(back) && !IsCrossing(arcs[selectedArcs], (back, n)))
             {
                 arcs[selectedArcs].Add((back, n));
                 n = back;
@@ -75,7 +75,7 @@ public class Ecs0401 : EverybodyStoryPuzzle
             var forward = n + jump;
             var isPossible = true;
             
-            while (numbers.Contains(forward) || IsCrossing(arcs[selectedArcs], n, forward))
+            while (numbers.Contains(forward) || IsCrossing(arcs[selectedArcs], (n, forward)))
             {
                 if (forward > numbers.Max())
                 {
@@ -98,15 +98,15 @@ public class Ecs0401 : EverybodyStoryPuzzle
         return n;
     }
 
-    public static bool IsCrossing(List<(int min, int max)> arcs, int start, int end)
+    public static bool IsCrossing(List<(int, int)> ranges, (int, int) range) => 
+        ranges.Any(o => IsCrossing(o, range));
+
+    public static bool IsCrossing((int start, int end) a, (int start, int end) b)
     {
-        foreach (var (min, max) in arcs)
-        {
-            if (start > max) continue;
-            if (end < min) continue;
-            if (start >= min && start <= max && end >= max) return true;
-            if (end <= max && end >= min && start <= min) return true;
-        }
+        if (b.start > a.end) return false;
+        if (b.end < a.start) return false;
+        if (b.start >= a.start && b.start <= a.end && b.end >= a.end) return true;
+        if (b.end <= a.end && b.end >= a.start && b.start <= a.start) return true;
 
         return false;
     }

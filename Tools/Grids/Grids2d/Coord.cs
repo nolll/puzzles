@@ -17,4 +17,8 @@ public record Coord(int X, int Y)
 
     public virtual bool Equals(Coord? other) => X == other?.X && Y == other.Y;
     public override int GetHashCode() => HashCode.Combine(X, Y);
+
+    public static Coord FromArray(int[] coords) => coords.Length == 2
+        ? new Coord(coords[0], coords[1])
+        : throw new ArgumentException("Array has to be to length 2");
 }

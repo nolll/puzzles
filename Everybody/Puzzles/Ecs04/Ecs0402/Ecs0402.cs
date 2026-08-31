@@ -64,7 +64,6 @@ public class Ecs0402 : EverybodyStoryPuzzle
         var moves = lines[4].Split('=').Last().ToCharArray();
         var currentPos = new Coord(sx, sy);
         lights.Add(currentPos);
-        fireflies.AddRange(Grid<int>.PossibleOrthogonalAdjacentCoordsTo(currentPos));
 
         foreach (var move in moves)
         {
@@ -81,15 +80,63 @@ public class Ecs0402 : EverybodyStoryPuzzle
             var newY = (int)Math.Floor(maxY - distY);
             currentPos = new Coord(newX, newY);
             lights.Add(currentPos);
-            fireflies.AddRange(Grid<int>.PossibleOrthogonalAdjacentCoordsTo(currentPos));
+        }
+
+        foreach (var light in lights)
+        {
+            var flies = Grid<int>.PossibleOrthogonalAdjacentCoordsTo(light)
+                .Where(o => !lights.Contains(o));
+            fireflies.AddRange(flies);
         }
         
         return fireflies.Count(o => !lights.Contains(o));
     }
 
-    [Puzzle("")]
+    [Puzzle("78153ed03b4013c9023ede0fe313fd8e")]
     public int Part3(string input)
     {
-        return 0;
+        var lines = input.Split(LineBreaks.Single);
+        var beacons = new List<Coord>();
+        var lights = new HashSet<Coord>();
+        var fireflies = new HashSet<Coord>();
+        var (sx, sy) = Numbers.IntsFromString(lines[0]);
+        var (ax, ay) = Numbers.IntsFromString(lines[1]);
+        beacons.Add(new Coord(ax, ay));
+        var (bx, by) = Numbers.IntsFromString(lines[2]);
+        beacons.Add(new Coord(bx, by));
+        var (cx, cy) = Numbers.IntsFromString(lines[3]);
+        beacons.Add(new Coord(cx, cy));
+
+        var queue = new Queue<Coord>([new Coord(sx, sy)]);
+        while (queue.Count > 0)
+        {
+            var currentPos = queue.Dequeue();
+            lights.Add(currentPos);
+            foreach (var beaconPos in beacons)
+            {
+                var maxX = Math.Max(currentPos.X, beaconPos.X);
+                var minX = Math.Min(currentPos.X, beaconPos.X);
+                var maxY = Math.Max(currentPos.Y, beaconPos.Y);
+                var minY = Math.Min(currentPos.Y, beaconPos.Y);
+                var diffX = maxX - minX;
+                var diffY = maxY - minY;
+                var distX = (float)diffX / 2;
+                var distY = (float)diffY / 2;
+                var newX = (int)Math.Floor(maxX - distX);
+                var newY = (int)Math.Floor(maxY - distY);
+                var newPos = new Coord(newX, newY);
+                if(!lights.Contains(newPos))
+                    queue.Enqueue(newPos);
+            }
+        }
+
+        foreach (var light in lights)
+        {
+            var flies = Grid<int>.PossibleOrthogonalAdjacentCoordsTo(light)
+                .Where(o => !lights.Contains(o));
+            fireflies.AddRange(flies);
+        }
+        
+        return fireflies.Count(o => !lights.Contains(o));
     }
 }

@@ -148,11 +148,14 @@ public static class Numbers
     public static long GetHexagonalNumber(long n) => n * (2 * n - 1);
     public static bool IsHexagonalNumber(long x) => (Math.Sqrt(8 * x + 1) + 1) % 4 == 0;
 
+    public static string[] DigitsFromString(string s) => 
+        DigitRegex.Matches(s).Select(o => o.ToString()).ToArray();
+    
     public static int[] IntsFromString(string s) => 
-        DigitRegex.Matches(s).Select(o => int.Parse(o.ToString())).ToArray();
+        DigitsFromString(s).Select(int.Parse).ToArray();
 
     public static long[] LongsFromString(string s) => 
-        DigitRegex.Matches(s).Select(o => long.Parse(o.ToString())).ToArray();
+        DigitsFromString(s).Select(long.Parse).ToArray();
     
     public static int Concat(int[] values) {
         var num = values.Length;

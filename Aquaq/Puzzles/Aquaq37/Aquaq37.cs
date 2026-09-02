@@ -8,7 +8,7 @@ public class Aquaq37 : AquaqPuzzle
 {
     private const int WordLength = 5;
 
-    [AdditionalCommonInputFile("Words.txt")]
+    [AdditionalInputFile("Words.txt")]
     [Puzzle("ba0ef798d7f57b80a0675236159ccfb1")]
     public int Solve(string input, string additionalInput) => FindWords(input, additionalInput).Sum(GetWordScore);
 

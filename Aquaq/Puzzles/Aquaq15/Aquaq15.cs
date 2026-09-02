@@ -7,7 +7,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq15;
 [Name("word wore more mare maze")]
 public class Aquaq15 : AquaqPuzzle
 {
-    [AdditionalCommonInputFile("Words.txt")]
+    [AdditionalInputFile("Words.txt")]
     [Puzzle("ffafde1afff1c3904275c8225e772bf1")]
     public int Solve(string input, string additionalInput)
     {

@@ -7,7 +7,7 @@ namespace Pzl.Aquaq.Puzzles.Aquaq35;
 [Name("Columns")]
 public class Aquaq35 : AquaqPuzzle
 {
-    [AdditionalCommonInputFile("Words.txt")]
+    [AdditionalInputFile("Words.txt")]
     [Puzzle("47f8ac801da35487059c7f5acb1c77ac")]
     public string Solve(string input, string additionalInput) => FindKeyword(additionalInput.Split(LineBreaks.Single), input);
 

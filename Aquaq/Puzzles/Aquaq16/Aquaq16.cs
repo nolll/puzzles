@@ -8,7 +8,7 @@ public class Aquaq16 : AquaqPuzzle
 {
     private const int LetterHeight = 6;
 
-    [AdditionalLocalInputFile("Alphabet.txt")]
+    [AdditionalInputFile("Alphabet.txt")]
     [Puzzle("b900eb74f94c2243de65005bcc4ebd2c")]
     public int Solve(string input, string additionalInput)
     {

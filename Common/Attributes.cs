@@ -33,13 +33,7 @@ public class NumberOfPartsAttribute(int numberOfParts) : Attribute
 public class HasUniqueInputsForParts : Attribute;
 
 [AttributeUsage(AttributeTargets.Method)]
-public class AdditionalCommonInputFileAttribute(string fileName) : Attribute
-{
-    public string FileName { get; } = fileName;
-}
-
-[AttributeUsage(AttributeTargets.Method)]
-public class AdditionalLocalInputFileAttribute(string fileName) : Attribute
+public class AdditionalInputFileAttribute(string fileName) : Attribute
 {
     public string FileName { get; } = fileName;
 }

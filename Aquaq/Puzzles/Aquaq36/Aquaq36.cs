@@ -4,10 +4,7 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles.Aquaq36;
 
-[IsSlow]
-[NeedsRewrite]
 [Name("Tetonor Terror")]
-[Comment("1 hour!")]
 public class Aquaq36 : AquaqPuzzle
 {
     [Puzzle("ed32dfd657e38da7c712ea1c69f58f6d")]
@@ -37,7 +34,7 @@ public class Aquaq36 : AquaqPuzzle
         var factorSet = GetAllFactors(sortedGrid).Distinct().ToHashSet();
         var inputs = FindPossibleInputNumbers(input, sortedGrid.Max(), factorSet);
 
-        var result = Solve(sortedGrid, inputs, concreteFactorCache, 0);
+        var result = Solve(sortedGrid, inputs, concreteFactorCache, 0, []);
         
         return result > 0 
             ? result 
@@ -62,10 +59,14 @@ public class Aquaq36 : AquaqPuzzle
         return list;
     }
 
-    private static int Solve(List<int> grid, List<HashSet<int>> inputs, FactorCache factorCache, int sum)
+    private static int Solve(List<int> grid, List<HashSet<int>> inputs, FactorCache factorCache, int sum, Dictionary<string, int> memoization)
     {
         if (!grid.Any())
             return sum;
+
+        var cacheKey = GenerateCacheKey(grid, inputs);
+        if (memoization.TryGetValue(cacheKey, out var cachedResult))
+            return cachedResult > 0 ? cachedResult + sum : 0;
 
         foreach (var gridNumber in grid)
         {
@@ -88,14 +89,19 @@ public class Aquaq36 : AquaqPuzzle
                         newGrid.Remove(pair.Sum);
                         newInput.RemoveAt(Math.Max(a, b));
                         newInput.RemoveAt(Math.Min(a, b));
-                        var result = Solve(newGrid, newInput, factorCache, sum + Math.Abs(pair.B - pair.A));
+                        var diff = Math.Abs(pair.B - pair.A);
+                        var result = Solve(newGrid, newInput, factorCache, sum + diff, memoization);
                         if (result > 0)
+                        {
+                            memoization[cacheKey] = diff;
                             return result;
+                        }
                     }
                 }
             }
         }
-        
+
+        memoization[cacheKey] = 0;
         return 0;
     }
 
@@ -106,6 +112,13 @@ public class Aquaq36 : AquaqPuzzle
             if (inputs[i].Contains(n))
                 yield return i;
         }
+    }
+
+    private static string GenerateCacheKey(List<int> grid, List<HashSet<int>> inputs)
+    {
+        var gridKey = string.Join(",", grid.Order());
+        var inputsKey = string.Join(";", inputs.Select(s => string.Join(",", s.Order())));
+        return $"{gridKey}|{inputsKey}";
     }
 
     public class FactorCache

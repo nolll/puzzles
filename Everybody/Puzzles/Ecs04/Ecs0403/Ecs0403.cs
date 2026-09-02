@@ -1,3 +1,4 @@
+using System.Numerics;
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
 using Pzl.Tools.Numbers;
@@ -28,13 +29,59 @@ public class Ecs0403 : EverybodyStoryPuzzle
     }
 
     [Puzzle("e892ee05396cdeb1fb3fd0ed01a43dd6")]
-    public int Part2(string input) => Part2And3(input);
-    
-    public int Part3(string input) => Part2And3(input);
+    public long Part2(string input) => Part2And3(input);
 
-    private int Part2And3(string input)
+    [Puzzle("0edfff096f607e6b96c4fc492eb03316")]
+    public long Part3(string input) => Part2And3(input);
+
+    private long Part2And3(string input)
     {
         var (w, h, ho, vo) = Parse(input);
+        var repeatWidth = vo.Length * 2;
+        var repeatHeight = ho.Length * 2;
+
+        var wRepeatCount = w / repeatWidth;
+        var hRepeatCount = h / repeatHeight;
+        var wRest = w % repeatWidth;
+        var hRest = h % repeatHeight;
+        
+        var w1 = repeatWidth;
+        var h1 = repeatHeight;
+        var m1 = wRepeatCount * hRepeatCount;
+
+        var w2 = wRest;
+        var h2 = repeatHeight;
+        var m2 = hRepeatCount;
+
+        var w3 = repeatWidth;
+        var h3 = hRest;
+        var m3 = wRepeatCount;
+
+        var w4 = wRest;
+        var h4 = hRest;
+        
+        var q1 = Solve(w1, h1, ho, vo);
+        var q2 = Solve(w2, h2, ho, vo);
+        var q3 = Solve(w3, h3, ho, vo);
+        var q4 = Solve(w4, h4, ho, vo);
+        
+        var color1 = q1[false] * m1 + q2[false] * m2 + q3[false] * m3 + q4[false];
+        var color2 = q1[true] * m1 + q2[true] * m2 + q3[true] * m3 + q4[true];
+
+        return Math.Max(color1, color2);
+    }
+
+    private static Dictionary<bool, long> Solve(long w, long h, int[] ho, int[] vo)
+    {
+        if (w == 0 || h == 0)
+        {
+            return new Dictionary<bool, long>
+            {
+                { false, 0 },
+                { true, 0 }
+            };
+        }
+
         var mask = new Dictionary<Coord, int>();
 
         PlaceHorizontalStitches(mask, w, h, ho);
@@ -95,13 +142,15 @@ public class Ecs0403 : EverybodyStoryPuzzle
         }
         
         var isolatedCoords = mask.Where(o => o.Value == Sum).Select(o => o.Key).ToArray();
-        var groups = isolatedCoords.GroupBy(o => visited[o]);
-        var maxCount = groups.Max(o => o.Count());
+        var groups = isolatedCoords.GroupBy(o => visited[o]).ToDictionary(o => o.Key, o => (long)o.Count());
 
-        return maxCount;
+        groups.TryAdd(false, 0);
+        groups.TryAdd(true, 0);
+        
+        return groups;
     }
     
-    private IEnumerable<Coord> GetFloorCoords(int w, int h)
+    private static IEnumerable<Coord> GetFloorCoords(long w, long h)
     {
         for (var y = 0; y < h; y++)
         {
@@ -112,7 +161,7 @@ public class Ecs0403 : EverybodyStoryPuzzle
         }
     }
 
-    private static void PlaceHorizontalStitches(Dictionary<Coord, int> mask, int w, int h, int[] offsets)
+    private static void PlaceHorizontalStitches(Dictionary<Coord, int> mask, long w, long h, int[] offsets)
     {
         for (var y = 0; y <= h; y++)
         {
@@ -129,7 +178,7 @@ public class Ecs0403 : EverybodyStoryPuzzle
         }
     }
     
-    private static void PlaceVerticalStitches(Dictionary<Coord, int> mask, int w, int h, int[] offsets)
+    private static void PlaceVerticalStitches(Dictionary<Coord, int> mask, long w, long h, int[] offsets)
     {
         for (var x = 0; x <= w; x++)
         {
@@ -146,11 +195,11 @@ public class Ecs0403 : EverybodyStoryPuzzle
         }
     }
     
-    private static (int, int, int[], int[]) Parse(string input)
+    private static (long, long, int[], int[]) Parse(string input)
     {
         var digits = Numbers.DigitsFromString(input.ReplaceLineEndings(" "));
-        var w = int.Parse(digits[0]);
-        var h = int.Parse(digits[1]);
+        var w = long.Parse(digits[0]);
+        var h = long.Parse(digits[1]);
         var ho = digits[2].ToCharArray().Select(o => int.Parse(o.ToString())).ToArray();
         var vo = digits[3].ToCharArray().Select(o => int.Parse(o.ToString())).ToArray();
 

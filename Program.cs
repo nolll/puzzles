@@ -8,6 +8,7 @@ var configuration = new ConfigurationBuilder()
 var options = new Options(
     configuration["hashSeed"],
     configuration["timeoutSeconds"],
-    configuration["debugTags"]);
+    configuration["debugTags"],
+    configuration["inputLocation"]);
 
 new PuzzleProgram(options).Run(args);

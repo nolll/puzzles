@@ -7,9 +7,16 @@ using System.Text;
 
 namespace Pzl.Common;
 
-public class FileReader
+public class FileReader(string? inputLocation = null)
 {
-    private static string[] PuzzlePathParts(Type t) => t.FullName!.Split('.').Skip(2).ToArray();
+    private static string[] InternalPuzzlePathParts(Type t) => t.FullName!.Split('.').Skip(2).ToArray();
+    private static string[] ExternalPuzzlePathParts(Type t)
+    {
+        var parts = t.FullName!.Split('.').Skip(1).ToList();
+        return parts.Count == 4 
+            ? [parts[0], parts[2]] 
+            : [parts[0], parts[2], parts[3]];
+    }
 
     public string[] ReadInputs(PuzzleDefinition definition) => definition.HasUniqueInputsPerPart
         ? Enumerable.Range(0, definition.NumberOfParts)
@@ -36,10 +43,10 @@ public class FileReader
     private static string? GetAdditionalLocalInputFile(MethodInfo method) =>
         method.GetCustomAttribute<AdditionalLocalInputFileAttribute>(false)?.FileName;
 
-    private static string ReadInput(Type t) => ReadTextFile($"{Path.Combine(PuzzlePathParts(t))}.txt");
-    private static string ReadPartInput(Type t, int part) => ReadTextFile($"{Path.Combine(PuzzlePathParts(t))}-{part}.txt");
+    private string ReadInput(Type t) => ReadInputFile(t, ".txt");
+    private string ReadPartInput(Type t, int part) => ReadInputFile(t, $"-{part}.txt");
 
-    public static string ReadCommon(string fileName)
+    public string ReadCommon(string fileName)
     {
         var parts = new List<string>
         {
@@ -47,21 +54,46 @@ public class FileReader
             fileName
         };
         var filePath = Path.Combine(parts.ToArray());
-        return ReadTextFile(filePath);
+        return ReadInternalTextFile(filePath);
     }
 
-    public static string ReadLocal(Type t, string fileName)
+    public string ReadLocal(Type t, string fileName)
     {
-        var parts = PuzzlePathParts(t).SkipLast(1).ToList();
+        var parts = InternalPuzzlePathParts(t).SkipLast(1).ToList();
         parts.Add(fileName);
         var filePath = Path.Combine(parts.ToArray());
-        return ReadTextFile(filePath);
+        return ReadInternalTextFile(filePath);
+    }
+    
+    private string ReadInputFile(Type t, string suffix)
+    {
+        if (inputLocation is not null)
+        {
+            var externalPath = $"{Path.Combine(ExternalPuzzlePathParts(t))}{suffix}";
+            var content = ReadExternalTextFile(externalPath);
+            if(content != "")
+                return content;
+        }
+
+        var internalPath = $"{Path.Combine(InternalPuzzlePathParts(t))}{suffix}";
+        return ReadInternalTextFile(internalPath);
     }
 
-    private static string ReadTextFile(string path)
+    private string ReadInternalTextFile(string path)
     {
         var filePath = Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory,
+            path);
+
+        return File.Exists(filePath) 
+            ? File.ReadAllText(filePath, Encoding.UTF8) 
+            : "";
+    }
+    
+    private string ReadExternalTextFile(string path)
+    {
+        var filePath = Path.Combine(
+            inputLocation!,
             path);
 
         return File.Exists(filePath) 

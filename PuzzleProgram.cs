@@ -40,7 +40,7 @@ public class PuzzleProgram
             new FlipFlopPuzzleProvider()
         ];
 
-        var fileReader = new FileReader();
+        var fileReader = new FileReader(options.InputLocation);
         _puzzleFactory = new PuzzleFactory(fileReader);
         var hashFactory = new HashFactory();
         _resultVerifier = new ResultVerifier(hashFactory, options.HashSeed);

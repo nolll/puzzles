@@ -9,7 +9,7 @@ public class Aquaq15Tests
     {
         const string input = "fly,try";
 
-        Sut.Solve(input, FileReader.ReadCommon("Words.txt")).Should().Be(3);
+        Sut.Solve(input, new FileReader().ReadCommon("Words.txt")).Should().Be(3);
     }
 
     [Fact]
@@ -21,7 +21,7 @@ public class Aquaq15Tests
                              word,maze
                              """;
 
-        Sut.Solve(input, FileReader.ReadCommon("Words.txt")).Should().Be(45);
+        Sut.Solve(input, new FileReader().ReadCommon("Words.txt")).Should().Be(45);
     }
 
     private static Aquaq15 Sut => new();

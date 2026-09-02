@@ -7,8 +7,6 @@ using Pzl.Tools.Strings;
 namespace Pzl.Everybody.Puzzles.Ecs02.Ecs0201;
 
 [Name("Nail Down Your Luck")]
-[Comment("Part 3 takes around 10s")]
-[IsSlow]
 public class Ecs0201 : EverybodyStoryPuzzle
 {
     [Puzzle("dad5d715238be69f7117d91bb3938a10")]

@@ -11,10 +11,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="Puzzles/**/*.txt" CopyToOutputDirectory="Always" />
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\Common\Common.csproj" />
         <ProjectReference Include="..\Tools\Tools.csproj" />
     </ItemGroup>

@@ -109,6 +109,13 @@ public class NumbersTests
     public void CountDigits(int n, int expected) => Numbers.NumDigits(n).Should().Be(expected);
     
     [Theory]
+    [InlineData(1, 1)]
+    [InlineData(12, 3)]
+    [InlineData(123, 6)]
+    [InlineData(1234, 10)]
+    public void DititSum(int n, int expected) => Numbers.DigitSum(n).Should().Be(expected);
+    
+    [Theory]
     [InlineData(6, 3, 63)]
     [InlineData(28, 84, 2884)]
     [InlineData(46456, 54, 4645654)]

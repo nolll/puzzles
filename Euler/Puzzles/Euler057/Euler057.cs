@@ -1,12 +1,14 @@
-using System.Diagnostics;
-using System.Numerics;
 using Pzl.Common;
+using Pzl.Tools.Maths;
 
 namespace Pzl.Euler.Puzzles.Euler057;
 
 [Name("Square Root Convergents")]
 public class Euler057 : EulerPuzzle
 {
+    private readonly int[] _sequence = [2];
+    private const int Start = 1;
+    
     [Puzzle("a108ed87069fbb10b6d6595e8795dc16")]
     public int Solve()
     {
@@ -14,8 +16,7 @@ public class Euler057 : EulerPuzzle
         var count = 0;
         while (n <= 1000)
         {
-            var result = Solve(n);
-            if (result.Numerator.ToString().Length > result.Denominator.ToString().Length)
+            if (HasLongerNumerator(n))
                 count++;
             
             n++;
@@ -24,21 +25,9 @@ public class Euler057 : EulerPuzzle
         return count;
     }
 
-    public static Fraction Solve(int levels)
+    public bool HasLongerNumerator(int levels)
     {
-        var result = SolveRecursive(levels);
-        return new Fraction(result.Numerator + result.Denominator, result.Numerator);
+        var result = MathTools.ContinuedFraction(Start, _sequence, levels);
+        return result.Numerator.ToString().Length > result.Denominator.ToString().Length;
     }
-    
-    private static Fraction SolveRecursive(int level)
-    {
-        if (level == 1)
-            return new Fraction(2, 1);
-        
-        var result = SolveRecursive(level - 1);
-        return new Fraction(2 * result.Numerator + result.Denominator, result.Numerator);
-    }
-
-    [DebuggerDisplay("{Numerator}/{Denominator}")]
-    public record Fraction(BigInteger Numerator, BigInteger Denominator);
 }

@@ -42,4 +42,28 @@ public class MathToolsTests
     [InlineData(-1, 99)]
     [InlineData(101, 1)]
     public void ClampLong(long input, long expected) => MathTools.Clamp(input, 1, 100).Should().Be(expected);
+    
+    [Theory]
+    [InlineData(1, 3, 2)]
+    [InlineData(2, 7, 5)]
+    [InlineData(3, 17, 12)]
+    [InlineData(4, 41, 29)]
+    [InlineData(8, 1393, 985)]
+    public void ContinuedFractionSquareRootOfTwo(int levels, int expectedNumerator, int expectedDenominator)
+    {
+        var result = MathTools.ContinuedFraction(1, [2], levels);
+        result.ToString().Should().Be($"{expectedNumerator}/{expectedDenominator}");
+    }
+    
+    [Theory]
+    [InlineData(1, 3, 1)]
+    [InlineData(2, 8, 3)]
+    [InlineData(3, 11, 4)]
+    [InlineData(4, 19, 7)]
+    [InlineData(5, 87, 32)]
+    public void ContinuedFractionNaturalNumber(int levels, int expectedNumerator, int expectedDenominator)
+    {
+        var result = MathTools.ContinuedFraction(2, [1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, 1, 1, 10, 1, 1], levels);
+        result.ToString().Should().Be($"{expectedNumerator}/{expectedDenominator}");
+    }
 }

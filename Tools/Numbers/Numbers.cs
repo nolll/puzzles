@@ -166,9 +166,19 @@ public static class Numbers
         return total;
     }
 
-    public static int NumDigits(int i) {
-        if (i == 0) return 0;
-        return 1 + (int) (Math.Log(i) / Math.Log(10));
+    public static int NumDigits(int n) {
+        if (n == 0) return 0;
+        return 1 + (int) (Math.Log(n) / Math.Log(10));
+    }
+    
+    public static BigInteger DigitSum(BigInteger n) {
+        BigInteger sum = 0;
+        while (n != 0) {
+            sum += n % 10;
+            n /= 10;
+        }
+
+        return sum;
     }
     
     public static long Fibonacci(long n) => Fibonacci(n, []);

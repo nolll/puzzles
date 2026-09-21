@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Numerics;
 
 namespace Pzl.Tools.Maths;
@@ -69,5 +70,28 @@ public static class MathTools
             v -= incr;
 
         return v;
+    }
+
+    public static Fraction ContinuedFraction(int s, int[] sequence, int levels)
+    {
+        var result = ContinuedFractionRecursive(sequence, levels, 0);
+        return new Fraction(s * result.Numerator + result.Denominator, result.Numerator);
+    }
+
+    private static Fraction ContinuedFractionRecursive(int[] sequence, int levels, int level)
+    {
+        var denominator = sequence[level % sequence.Length];
+        
+        if (level == levels - 1)
+            return new Fraction(denominator, 1);
+        
+        var result = ContinuedFractionRecursive(sequence, levels, level + 1);
+        return new Fraction(denominator * result.Numerator + result.Denominator, result.Numerator);
+    }
+
+    [DebuggerDisplay("{Numerator}/{Denominator}")]
+    public record Fraction(BigInteger Numerator, BigInteger Denominator)
+    {
+        public override string ToString() => $"{Numerator}/{Denominator}";
     }
 }

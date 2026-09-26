@@ -1,4 +1,6 @@
-namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
+using Pzl.Aoc.Puzzles.Aoc2016.Aoc201611;
+
+namespace Tests.Aoc.Puzzles.Aoc2016.Aoc201611;
 
 public class Aoc201611Tests
 {

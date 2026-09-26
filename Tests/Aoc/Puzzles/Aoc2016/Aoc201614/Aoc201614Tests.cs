@@ -1,6 +1,7 @@
+using Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
 using Pzl.Tools.Strings;
 
-namespace Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
+namespace Tests.Aoc.Puzzles.Aoc2016.Aoc201614;
 
 public class Aoc201614Tests
 {

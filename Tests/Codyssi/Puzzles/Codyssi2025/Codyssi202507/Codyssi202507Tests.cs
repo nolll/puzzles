@@ -1,0 +1,46 @@
+namespace Tests.Codyssi.Puzzles.Codyssi2025.Codyssi202507;
+
+public class Codyssi202507Tests
+{
+    private const string Input = """
+                                 159
+                                 527
+                                 827
+                                 596
+                                 296
+                                 413
+                                 45
+                                 796
+                                 853
+                                 778
+                                 
+                                 4-8
+                                 5-8
+                                 10-1
+                                 6-5
+                                 2-1
+                                 6-5
+                                 8-7
+                                 3-6
+                                 7-8
+                                 2-10
+                                 6-4
+                                 8-10
+                                 1-9
+                                 3-6
+                                 7-10
+                                 
+                                 10
+                                 """;
+
+    [Fact]
+    public void Part1() => Sut.Part1(Input).Should().Be(45);
+
+    [Fact]
+    public void Part2() => Sut.Part2(Input).Should().Be(796);
+
+    [Fact]
+    public void Part3() => Sut.Part3(Input).Should().Be(827);
+
+    private static Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202507.Codyssi202507 Sut => new();
+}

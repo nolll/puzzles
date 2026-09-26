@@ -1,0 +1,24 @@
+namespace Tests.Codyssi.Puzzles.Codyssi2024.Codyssi202401;
+
+public class Codyssi202401Tests
+{
+    private const string Input = """
+                                 912372
+                                 283723
+                                 294281
+                                 592382
+                                 721395
+                                 91238
+                                 """;
+
+    [Fact]
+    public void Part1() => Sut.Part1(Input).Should().Be(2895391);
+
+    [Fact]
+    public void Part2() => Sut.Part2(Input, 2).Should().Be(1261624);
+
+    [Fact]
+    public void Part3() => Sut.Part3(Input).Should().Be(960705);
+
+    private static Pzl.Codyssi.Puzzles.Codyssi2024.Codyssi202401.Codyssi202401 Sut => new();
+}

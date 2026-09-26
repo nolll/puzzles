@@ -1,0 +1,30 @@
+namespace Tests.Codyssi.Puzzles.Codyssi2025.Codyssi202513;
+
+public class Codyssi202513Tests
+{
+    private const string Input = """
+                                 STT -> MFP | 5
+                                 AIB -> ZGK | 6
+                                 ZGK -> KVX | 20
+                                 STT -> AFG | 4
+                                 AFG -> ZGK | 16
+                                 MFP -> BDD | 13
+                                 BDD -> AIB | 5
+                                 AXU -> MFP | 4
+                                 CLB -> BLV | 20
+                                 AIB -> BDD | 13
+                                 BLV -> AXU | 17
+                                 AFG -> CLB | 2
+                                 """;
+
+    [Fact]
+    public void Part1() => Sut.Part1(Input).Should().Be(36);
+
+    [Fact]
+    public void Part2() => Sut.Part2(Input).Should().Be(44720);
+
+    [Fact]
+    public void Part3() => Sut.Part3(Input).Should().Be(18);
+
+    private static Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202513.Codyssi202513 Sut => new();
+}

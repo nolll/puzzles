@@ -1,0 +1,25 @@
+namespace Tests.Aoc.Puzzles.Aoc2024.Aoc202419;
+
+public class Aoc202419Tests
+{
+    private const string Input = """
+                                 r, wr, b, g, bwu, rb, gb, br
+
+                                 brwrr
+                                 bggr
+                                 gbbr
+                                 rrbgbr
+                                 ubwu
+                                 bwurrg
+                                 brgr
+                                 bbrgwb
+                                 """;
+
+    [Fact]
+    public void Part1() => Sut.Part1(Input).Should().Be(6);
+
+    [Fact]
+    public void Part2() => Sut.Part2(Input).Should().Be(16);
+
+    private static Pzl.Aoc.Puzzles.Aoc2024.Aoc202419.Aoc202419 Sut => new();
+}

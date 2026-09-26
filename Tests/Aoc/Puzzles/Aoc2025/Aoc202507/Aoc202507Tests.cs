@@ -1,4 +1,4 @@
-namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202507;
+namespace Tests.Aoc.Puzzles.Aoc2025.Aoc202507;
 
 public class Aoc202507Tests
 {
@@ -27,5 +27,5 @@ public class Aoc202507Tests
     [Fact]
     public void Part2() => Sut.Part2(Input).Should().Be(40);
 
-    private static Aoc202507 Sut => new();
+    private static Pzl.Aoc.Puzzles.Aoc2025.Aoc202507.Aoc202507 Sut => new();
 }

@@ -1,4 +1,4 @@
-namespace Pzl.Aoc.Puzzles.Aoc2025.Aoc202512;
+namespace Tests.Aoc.Puzzles.Aoc2025.Aoc202512;
 
 // Very simplified test since the provided test data didn't match the real data
 public class Aoc202512Tests
@@ -44,5 +44,5 @@ public class Aoc202512Tests
         Sut.Part1(input).Should().Be(2);
     }
 
-    private static Aoc202512 Sut => new();
+    private static Pzl.Aoc.Puzzles.Aoc2025.Aoc202512.Aoc202512 Sut => new();
 }

@@ -1,4 +1,7 @@
-namespace Pzl.Client.Params;
+using AwesomeAssertions;
+using Pzl.Client.Params;
+
+namespace Tests.Client.Params;
 
 public class ParameterTests
 {

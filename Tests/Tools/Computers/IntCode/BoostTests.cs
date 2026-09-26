@@ -1,4 +1,6 @@
-namespace Pzl.Tools.Computers.IntCode;
+using Pzl.Tools.Computers.IntCode;
+
+namespace Tests.Tools.Computers.IntCode;
 
 public class BoostTests
 {

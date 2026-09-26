@@ -1,4 +1,8 @@
-namespace Pzl.Client.Timing;
+using AwesomeAssertions;
+using Pzl.Client.Timing;
+using Timer = Pzl.Client.Timing.Timer;
+
+namespace Tests.Client.Timing;
 
 public class TimerTests
 {

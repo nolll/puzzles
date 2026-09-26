@@ -30,6 +30,7 @@
     <Compile Remove="Everybody\**" />
     <Compile Remove="Codyssi\**" />
     <Compile Remove="FlipFlop\**" />
+    <Compile Remove="Tests\**" />
     <EmbeddedResource Remove="Aoc\**" />
     <EmbeddedResource Remove="Aquaq\**" />
     <EmbeddedResource Remove="Common\**" />
@@ -38,6 +39,7 @@
     <EmbeddedResource Remove="Everybody\**" />
     <EmbeddedResource Remove="Codyssi\**" />
     <EmbeddedResource Remove="FlipFlop\**" />
+    <EmbeddedResource Remove="Tests\**" />
     <None Remove="Aoc\**" />
     <None Remove="Aquaq\**" />
     <None Remove="Common\**" />
@@ -46,6 +48,7 @@
     <None Remove="Everybody\**" />
     <None Remove="Codyssi\**" />
     <None Remove="FlipFlop\**" />
+    <None Remove="Tests\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,13 +57,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AwesomeAssertions" Version="9.6.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.11" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.11" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.11" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />
     <PackageReference Include="Spectre.Console" Version="0.57.2" />
-    <PackageReference Include="xunit" Version="2.9.3" />
   </ItemGroup>
 
   <ItemGroup>

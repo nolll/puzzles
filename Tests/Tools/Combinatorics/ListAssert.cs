@@ -1,4 +1,4 @@
-namespace Pzl.Tools.Combinatorics;
+namespace Tests.Tools.Combinatorics;
 
 public static class ListAssert
 {

@@ -1,4 +1,4 @@
-namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202504;
+namespace Tests.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202504;
 
 public class FlipFlop202504Tests
 {
@@ -17,5 +17,5 @@ public class FlipFlop202504Tests
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be(9);
 
-    private static FlipFlop202504 Sut => new();
+    private static Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202504.FlipFlop202504 Sut => new();
 }

@@ -1,0 +1,43 @@
+using Pzl.Aquaq.Puzzles.Aquaq38;
+
+namespace Tests.Aquaq.Puzzles.Aquaq38;
+
+public class Aquaq38Tests
+{
+    [Fact]
+    public void IndexStreaks()
+    {
+        var streaks = new IndexStreakProvider().Get([1, 3, 2]);
+
+        var expected = new[]
+        {
+            new[]
+            {
+                new[] { 0 },
+                [0, 1],
+                [0, 1, 2]
+            },
+            [
+                [1],
+                [0, 1],
+                [1, 2],
+                [0, 1, 2]
+            ],
+            [
+                [0, 1, 2],
+                [1, 2],
+                [2]
+            ]
+        };
+
+        streaks.Should().BeEquivalentTo(expected);
+    }
+
+    [Fact]
+    public void ComfScore()
+    {
+        var streaks = Pzl.Aquaq.Puzzles.Aquaq38.Aquaq38.GetComfScore(new IndexStreakProvider(), [1, 3, 2]);
+
+        streaks.Should().Be(7);
+    }
+}

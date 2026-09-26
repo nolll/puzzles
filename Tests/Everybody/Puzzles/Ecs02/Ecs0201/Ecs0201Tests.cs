@@ -1,0 +1,105 @@
+namespace Tests.Everybody.Puzzles.Ecs02.Ecs0201;
+
+public class Ecs0201Tests
+{
+    [Fact]
+    public void Part1()
+    {
+        const string input = """
+                             *.*.*.*.*.*.*.*.*
+                             .*.*.*.*.*.*.*.*.
+                             *.*.*...*.*...*..
+                             .*.*.*.*.*...*.*.
+                             *.*.....*...*.*.*
+                             .*.*.*.*.*.*.*.*.
+                             *...*...*.*.*.*.*
+                             .*.*.*.*.*.*.*.*.
+                             *.*.*...*.*.*.*.*
+                             .*...*...*.*.*.*.
+                             *.*.*.*.*.*.*.*.*
+                             .*.*.*.*.*.*.*.*.
+                             
+                             RRRLRLRRRRRL
+                             LLLLRLRRRRRR
+                             RLLLLLRLRLRL
+                             LRLLLRRRLRLR
+                             LLRLLRLLLRRL
+                             LRLRLLLRRRRL
+                             LRLLLLLLRLLL
+                             RRLLLRLLRLRR
+                             RLLLLLRLLLRL
+                             """;
+
+        Sut.Part1(input).Should().Be(26);
+    }
+
+    [Fact]
+    public void Part2()
+    {
+        const string input = """
+                             *.*.*.*.*.*.*.*.*.*.*.*.*
+                             .*.*.*.*.*.*.*.*.*.*.*.*.
+                             ..*.*.*.*...*.*...*.*.*..
+                             .*...*.*.*.*.*.*.....*.*.
+                             *.*...*.*.*.*.*.*...*.*.*
+                             .*.*.*.*.*.*.*.*.......*.
+                             *.*.*.*.*.*.*.*.*.*...*..
+                             .*.*.*.*.*.*.*.*.....*.*.
+                             *.*...*.*.*.*.*.*.*.*....
+                             .*.*.*.*.*.*.*.*.*.*.*.*.
+                             *.*.*.*.*.*.*.*.*.*.*.*.*
+                             .*.*.*.*.*.*.*.*.*...*.*.
+                             *.*.*.*.*.*.*.*.*...*.*.*
+                             .*.*.*.*.*.*.*.*.....*.*.
+                             *.*.*.*.*.*.*.*...*...*.*
+                             .*.*.*.*.*.*.*.*.*.*.*.*.
+                             *.*.*...*.*.*.*.*.*.*.*.*
+                             .*...*.*.*.*...*.*.*...*.
+                             *.*.*.*.*.*.*.*.*.*.*.*.*
+                             .*.*.*.*.*.*.*.*.*.*.*.*.
+
+                             RRRLLRRRLLRLRRLLLRLR
+                             RRRRRRRRRRLRRRRRLLRR
+                             LLLLLLLLRLRRLLRRLRLL
+                             RRRLLRRRLLRLLRLLLRRL
+                             RLRLLLRRLRRRLRRLRRRL
+                             LLLLLLLLRLLRRLLRLLLL
+                             LRLLRRLRLLLLLLLRLRRL
+                             LRLLRRLLLRRRRRLRRLRR
+                             LRLLRRLRLLRLRRLLLRLL
+                             RLLRRRRLRLRLRLRLLRRL
+                             """;
+
+        Sut.Part2(input).Should().Be(115);
+    }
+
+    [Fact]
+    public void Part3()
+    {
+        const string input = """
+                             *.*.*.*.*.*.*.*.*
+                             .*.*.*.*.*.*.*.*.
+                             *.*.*...*.*...*..
+                             .*.*.*.*.*...*.*.
+                             *.*.....*...*.*.*
+                             .*.*.*.*.*.*.*.*.
+                             *...*...*.*.*.*.*
+                             .*.*.*.*.*.*.*.*.
+                             *.*.*...*.*.*.*.*
+                             .*...*...*.*.*.*.
+                             *.*.*.*.*.*.*.*.*
+                             .*.*.*.*.*.*.*.*.
+                             
+                             RRRLRLRRRRRL
+                             LLLLRLRRRRRR
+                             RLLLLLRLRLRL
+                             LRLLLRRRLRLR
+                             LLRLLRLLLRRL
+                             LRLRLLLRRRRL
+                             """;
+
+        Sut.Part3(input).Should().Be("13 43");
+    }
+    
+    private static Pzl.Everybody.Puzzles.Ecs02.Ecs0201.Ecs0201 Sut => new();
+}

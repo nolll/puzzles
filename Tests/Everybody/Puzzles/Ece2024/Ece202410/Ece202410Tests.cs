@@ -1,0 +1,49 @@
+namespace Tests.Everybody.Puzzles.Ece2024.Ece202410;
+
+public class Ece202410Tests
+{
+    [Fact]
+    public void Part1()
+    {
+        const string input = """
+                             **PCBS**
+                             **RLNW**
+                             BV....PT
+                             CR....HZ
+                             FL....JW
+                             SG....MN
+                             **FTZV**
+                             **GMJH**
+                             """;
+
+        Sut.Part1(input).Should().Be("PTBVRCZHFLJWGMNS");
+    }
+    
+    [Fact]
+    public void GetScore() => Pzl.Everybody.Puzzles.Ece2024.Ece202410.Ece202410.GetScore("PTBVRCZHFLJWGMNS").Should().Be(1851);
+
+    [Fact]
+    public void Part3()
+    {
+        const string input = """
+                             **XFZB**DCST**
+                             **LWQK**GQJH**
+                             ?G....WL....DQ
+                             BS....H?....CN
+                             P?....KJ....TV
+                             NM....Z?....SG
+                             **NSHM**VKWZ**
+                             **PJGV**XFNL**
+                             WQ....?L....YS
+                             FX....DJ....HV
+                             ?Y....WM....?J
+                             TJ....YK....LP
+                             **XRTK**BMSP**
+                             **DWZN**GCJV**
+                             """;
+
+        Sut.Part3(input).Should().Be(3889);
+    }
+
+    private static Pzl.Everybody.Puzzles.Ece2024.Ece202410.Ece202410 Sut => new();
+}

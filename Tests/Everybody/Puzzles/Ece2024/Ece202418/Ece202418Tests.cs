@@ -1,0 +1,52 @@
+namespace Tests.Everybody.Puzzles.Ece2024.Ece202418;
+
+public class Ece202418Tests
+{
+    [Fact]
+    public void Part1()
+    {
+        const string input = """
+                             ##########
+                             ..#......#
+                             #.P.####P#
+                             #.#...P#.#
+                             ##########
+                             """;
+
+        Sut.Part1(input).Should().Be(11);
+    }
+
+    [Fact]
+    public void Part2()
+    {
+        const string input = """
+                             #######################
+                             ...P..P...#P....#.....#
+                             #.#######.#.#.#.#####.#
+                             #.....#...#P#.#..P....#
+                             #.#####.#####.#########
+                             #...P....P.P.P.....P#.#
+                             #.#######.#####.#.#.#.#
+                             #...#.....#P...P#.#....
+                             #######################
+                             """;
+
+        Sut.Part2(input).Should().Be(21);
+    }
+
+    [Fact]
+    public void Part3()
+    {
+        const string input = """
+                             ##########
+                             #.#......#
+                             #.P.####P#
+                             #.#...P#.#
+                             ##########
+                             """;
+
+        Sut.Part3(input).Should().Be(12);
+    }
+
+    private static Pzl.Everybody.Puzzles.Ece2024.Ece202418.Ece202418 Sut => new();
+}

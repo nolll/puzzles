@@ -1,0 +1,26 @@
+using AwesomeAssertions;
+using Pzl.Tools.Graphs;
+
+namespace Tests.Tools.Graphs;
+
+public class DijkstraTests
+{
+    [Fact]
+    public void SmallestCost()
+    {
+        var edges = new List<GraphEdge>
+        {
+            new("A", "B", 8),
+            new("B", "A", 8),
+            new("B", "C", 50),
+            new("B", "D", 5),
+            new("C", "B", 50),
+            new("C", "E", 6),
+            new("D", "B", 5),
+            new("D", "E", 10),
+            new("E", "C", 6)
+        };
+
+        Dijkstra.BestCost(edges, "A", "C").Should().Be(29);
+    }
+}

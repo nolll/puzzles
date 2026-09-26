@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codyssi", "Codyssi\Codyssi.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlipFlop", "FlipFlop\FlipFlop.csproj", "{43C18ECF-3913-4E35-9102-40F198C5CECC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{1B45C23E-76D0-444F-B4DE-BBD90AEC3A59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,12 @@ Global
 		{43C18ECF-3913-4E35-9102-40F198C5CECC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{43C18ECF-3913-4E35-9102-40F198C5CECC}.Single|Any CPU.ActiveCfg = Debug|Any CPU
 		{43C18ECF-3913-4E35-9102-40F198C5CECC}.Single|Any CPU.Build.0 = Debug|Any CPU
+		{1B45C23E-76D0-444F-B4DE-BBD90AEC3A59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B45C23E-76D0-444F-B4DE-BBD90AEC3A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B45C23E-76D0-444F-B4DE-BBD90AEC3A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B45C23E-76D0-444F-B4DE-BBD90AEC3A59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B45C23E-76D0-444F-B4DE-BBD90AEC3A59}.Single|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B45C23E-76D0-444F-B4DE-BBD90AEC3A59}.Single|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

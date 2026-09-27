@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq36Tests
@@ -11,7 +13,7 @@ public class Aquaq36Tests
         var inputNumbers = "1 2 2 5 6 6 8 10 14 16 21 23 24 26 28 42"
             .Split().Select(int.Parse).Cast<int?>().ToList();
 
-        var result = Pzl.Aquaq.Puzzles.Aquaq36.Aquaq36.Solve(gridNumbers, inputNumbers);
+        var result = Aquaq36.Solve(gridNumbers, inputNumbers);
 
         result.Should().Be(142);
     }
@@ -22,7 +24,7 @@ public class Aquaq36Tests
         var gridNumbers = "10 12 25"
             .Split().Select(int.Parse).ToList();
 
-        var result = Pzl.Aquaq.Puzzles.Aquaq36.Aquaq36.GetAllFactors(gridNumbers);
+        var result = Aquaq36.GetAllFactors(gridNumbers);
 
         var expected = new[] { 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 10, 12, 25 };
         
@@ -37,7 +39,7 @@ public class Aquaq36Tests
 
         var factors = new HashSet<int> { 2, 4, 7, 9, 14, 15 };
 
-        var result = Pzl.Aquaq.Puzzles.Aquaq36.Aquaq36.FindPossibleInputNumbers(input, 70, factors);
+        var result = Aquaq36.FindPossibleInputNumbers(input, 70, factors);
 
         result.Should().BeEquivalentTo(new List<List<int>>
         {

@@ -1,13 +1,15 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq25Tests
 {
     [Fact]
-    public void EncodeMorse() => Pzl.Aquaq.Puzzles.Aquaq25.Aquaq25.EncodeMorse("jam donut")
+    public void EncodeMorse() => Aquaq25.EncodeMorse("jam donut")
         .Should().Be(".--- .- --   -.. --- -. ..- -");
 
     [Fact]
-    public void DecodeMorse() => Pzl.Aquaq.Puzzles.Aquaq25.Aquaq25.DecodeMorse(".--- .- --   -.. --- -. ..- -")
+    public void DecodeMorse() => Aquaq25.DecodeMorse(".--- .- --   -.. --- -. ..- -")
         .Should().Be("jam donut");
 
     [Fact]
@@ -37,7 +39,7 @@ public class Aquaq25Tests
                              21:46:5.043
                              """;
 
-        Pzl.Aquaq.Puzzles.Aquaq25.Aquaq25.ClicksToMorse(input)
+        Aquaq25.ClicksToMorse(input)
             .Should().Be(".--- .- --   -.");
     }
 }

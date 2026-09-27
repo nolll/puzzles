@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq37Tests
@@ -87,7 +89,7 @@ public class Aquaq37Tests
     [Fact]
     public void MajorMarry()
     {
-        var guess = new Pzl.Aquaq.Puzzles.Aquaq37.Aquaq37.Guess("marry", [2, 2, 1, 0, 0]);
+        var guess = new Aquaq37.Guess("marry", [2, 2, 1, 0, 0]);
         var result = guess.IsMatch("major");
 
         result.Should().BeTrue();
@@ -96,7 +98,7 @@ public class Aquaq37Tests
     [Fact]
     public void GroomDoggo()
     {
-        var guess = new Pzl.Aquaq.Puzzles.Aquaq37.Aquaq37.Guess("doggo", [0, 1, 1, 0, 0]);
+        var guess = new Aquaq37.Guess("doggo", [0, 1, 1, 0, 0]);
         var result = guess.IsMatch("groom");
 
         result.Should().BeFalse();
@@ -109,6 +111,6 @@ public class Aquaq37Tests
     [InlineData("mince", 39)]
     public void WordScore(string input, int expected)
     {
-        Pzl.Aquaq.Puzzles.Aquaq37.Aquaq37.GetWordScore(input).Should().Be(expected);
+        Aquaq37.GetWordScore(input).Should().Be(expected);
     }
 }

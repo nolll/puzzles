@@ -1,4 +1,4 @@
-using Pzl.Aquaq.Puzzles.Aquaq30;
+using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
@@ -10,7 +10,7 @@ public class Aquaq30Tests
     [InlineData("00101011010", 3)]
     public void CountValidStartingMoves(string input, int expected)
     {
-        var result = new CardFlipper().CountValidStartingMoves(input);
+        var result = new Aquaq30.CardFlipper().CountValidStartingMoves(input);
 
         result.Should().Be(expected);
     }
@@ -21,7 +21,7 @@ public class Aquaq30Tests
     [InlineData("11010", 3, "111.1")]
     public void Flip(string input, int index, string expected)
     {
-        var result = CardFlipper.Flip(input, index);
+        var result = Aquaq30.CardFlipper.Flip(input, index);
 
         result.Should().Be(expected);
     }
@@ -33,7 +33,7 @@ public class Aquaq30Tests
     public void CanBeSolved(string input, bool expected)
     {
         var inputArray = input.ToCharArray();
-        var cardFlipper = new CardFlipper();
+        var cardFlipper = new Aquaq30.CardFlipper();
         var result = cardFlipper.CanBeSolved(inputArray);
 
         result.Should().Be(expected);

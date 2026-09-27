@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq20Tests
@@ -7,5 +9,5 @@ public class Aquaq20Tests
     [InlineData("K Q 2 9 4 8 A A A K A 7", 2)]
     public void PlayBlackjack(string deck, int expected) => Sut.Solve(deck).Should().Be(expected);
 
-    private static Pzl.Aquaq.Puzzles.Aquaq20.Aquaq20 Sut => new();
+    private static Aquaq20 Sut => new();
 }

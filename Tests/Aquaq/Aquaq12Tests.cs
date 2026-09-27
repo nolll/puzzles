@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq12Tests
@@ -13,5 +15,5 @@ public class Aquaq12Tests
     [Fact]
     public void RideTheLift() => Sut.Solve(Input).Should().Be(7);
 
-    private static Pzl.Aquaq.Puzzles.Aquaq12.Aquaq12 Sut => new();
+    private static Aquaq12 Sut => new();
 }

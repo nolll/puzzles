@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq15Tests
@@ -24,5 +26,5 @@ public class Aquaq15Tests
     //     Sut.Solve(input, new FileReader().ReadCommon(typeof(Aquaq15), "Words.txt")).Should().Be(45);
     // }
 
-    private static Pzl.Aquaq.Puzzles.Aquaq15.Aquaq15 Sut => new();
+    private static Aquaq15 Sut => new();
 }

@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq28Tests
@@ -12,6 +14,6 @@ public class Aquaq28Tests
                                  """;
 
     [Fact]
-    public void MirrorEncrypt() => Pzl.Aquaq.Puzzles.Aquaq28.Aquaq28.Encrypt(Input, "DAD")
+    public void MirrorEncrypt() => Aquaq28.Encrypt(Input, "DAD")
         .Should().Be("CCC");
 }

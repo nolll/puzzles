@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq17Tests
@@ -16,5 +18,5 @@ public class Aquaq17Tests
                                  """;
 
     [Fact]
-    public void FindShame() => new Pzl.Aquaq.Puzzles.Aquaq17.Aquaq17().Solve(Input).Should().Be("Somaliland 19000103 19020101");
+    public void FindShame() => new Aquaq17().Solve(Input).Should().Be("Somaliland 19000103 19020101");
 }

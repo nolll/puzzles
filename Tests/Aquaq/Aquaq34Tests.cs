@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq34Tests
@@ -11,5 +13,5 @@ public class Aquaq34Tests
                                  """;
 
     [Fact]
-    public void TrainRoutes() => new Pzl.Aquaq.Puzzles.Aquaq34.Aquaq34().Solve(Input).Should().Be(64);
+    public void TrainRoutes() => new Aquaq34().Solve(Input).Should().Be(64);
 }

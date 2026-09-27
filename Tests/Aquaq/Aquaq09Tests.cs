@@ -1,4 +1,5 @@
 using System.Numerics;
+using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
@@ -9,7 +10,7 @@ public class Aquaq09Tests
     {
         var input = new List<int> { 2, 4, 8 }.Select(o => new BigInteger(o));
 
-        var result = Pzl.Aquaq.Puzzles.Aquaq09.Aquaq09.MultiplyLargeNumbers(input);
+        var result = Aquaq09.MultiplyLargeNumbers(input);
 
         result.Should().Be(new BigInteger(64));
     }

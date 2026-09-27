@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq40Tests
@@ -10,5 +12,5 @@ public class Aquaq40Tests
     [Fact]
     public void Sum() => Sut.Solve(Input).Should().Be(17);
 
-    private static Pzl.Aquaq.Puzzles.Aquaq40.Aquaq40 Sut => new();
+    private static Aquaq40 Sut => new();
 }

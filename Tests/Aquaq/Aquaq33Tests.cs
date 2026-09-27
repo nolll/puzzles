@@ -1,4 +1,4 @@
-using Pzl.Aquaq.Puzzles.Aquaq33;
+using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
@@ -7,7 +7,7 @@ public class Aquaq33Tests
     [Fact]
     public void ThrowDarts()
     {
-        var result = Pzl.Aquaq.Puzzles.Aquaq33.Aquaq33.Run(30);
+        var result = Aquaq33.Run(30);
 
         result.Should().Be(32);
     }
@@ -22,7 +22,7 @@ public class Aquaq33Tests
     [InlineData(361, 7)]
     public void PlayOneGame(int target, int expected)
     {
-        var dartGame = new DartGame();
+        var dartGame = new Aquaq33.DartGame();
         var result = dartGame.Play(target);
 
         result.Should().Be(expected);

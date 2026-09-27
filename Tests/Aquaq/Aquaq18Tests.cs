@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq18Tests
@@ -8,7 +10,7 @@ public class Aquaq18Tests
     public void IsPalindrome(string input, bool expected)
     {
         var dateTime = DateTime.Parse($"2020-02-02 {input}");
-        var result = Pzl.Aquaq.Puzzles.Aquaq18.Aquaq18.IsPalindromeTime(dateTime);
+        var result = Aquaq18.IsPalindromeTime(dateTime);
 
         result.Should().Be(expected);
     }
@@ -17,7 +19,7 @@ public class Aquaq18Tests
     public void StepsToPalindrome()
     {
         var dateTime = DateTime.Parse("2020-02-02 13:41:00");
-        var result = Pzl.Aquaq.Puzzles.Aquaq18.Aquaq18.StepsToPalindrome(dateTime);
+        var result = Aquaq18.StepsToPalindrome(dateTime);
 
         result.Should().Be(211);
     }

@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq02Tests
@@ -10,7 +12,7 @@ public class Aquaq02Tests
             1, 4, 3, 2, 4, 7, 2, 6, 3, 6
         };
 
-        var result = Pzl.Aquaq.Puzzles.Aquaq02.Aquaq02.GetUniqueNumbers(input).ToArray();
+        var result = Aquaq02.GetUniqueNumbers(input).ToArray();
 
         result.Count().Should().Be(5);
         result[0].Should().Be(1);

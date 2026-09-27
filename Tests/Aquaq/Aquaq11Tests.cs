@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq11Tests
@@ -12,5 +14,5 @@ public class Aquaq11Tests
     [Fact]
     public void CountRequiredTile() => Sut.Solve(Input).Should().Be(14);
 
-    private static Pzl.Aquaq.Puzzles.Aquaq11.Aquaq11 Sut => new();
+    private static Aquaq11 Sut => new();
 }

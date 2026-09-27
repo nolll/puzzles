@@ -1,0 +1,61 @@
+using Pzl.Common;
+using Pzl.Tools.Grids.Grids2d;
+
+namespace Pzl.Aquaq.Puzzles;
+
+[Name("Snake Eater")]
+public class Aquaq27 : AquaqPuzzle
+{
+    private const char Empty = ' ';
+
+    [Puzzle("c803fdd834b45081e38679f19c527374")]
+    public int Solve(string input)
+    {
+        var grid = GridBuilder.BuildCharGridWithoutTrim(input, Empty);
+        var coordsWithChars = grid.Coords.Where(o => grid.ReadValueAt(o) != Empty).ToHashSet();
+        var adjacentDictionary = coordsWithChars
+            .ToDictionary(k => k, v => grid.OrthogonalAdjacentCoordsTo(v).Where(coordsWithChars.Contains).ToList());
+        var ends = adjacentDictionary.Where(o => o.Value.Count == 1).Select(o => o.Key);
+        var visited = new HashSet<Coord>();
+        var words = new List<string>();
+
+        foreach (var start in ends)
+        {
+            if (visited.Contains(start))
+                continue;
+
+            var word = "";
+            var cur = start;
+            while (true)
+            {
+                visited.Add(cur);
+                var adjacent = adjacentDictionary[cur];
+                var isEndOfWord = word.Length > 0 &&
+                                  adjacent.Count == 2 &&
+                                  adjacent.First().X != adjacent.Last().X
+                                  && adjacent.First().Y != adjacent.Last().Y;
+                var isEndOfSnake = adjacent.All(visited.Contains);
+                word += grid.ReadValueAt(cur);
+
+                if (isEndOfSnake || isEndOfWord)
+                {
+                    words.Add(word);
+                    word = "";
+                }
+
+                if (isEndOfSnake)
+                    break;
+
+                if (isEndOfWord)
+                    continue;
+
+                cur = adjacent.First(o => !visited.Contains(o));
+            }
+        }
+
+        return words.Sum(GetWordScore);
+    }
+
+    private static int GetWordScore(string word) => word.Sum(GetCharScore) * word.Length;
+    private static int GetCharScore(char c) => (int)(c - 'a') + 1;
+}

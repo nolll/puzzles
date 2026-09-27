@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq00Tests
@@ -36,7 +38,7 @@ public class Aquaq00Tests
             (9, 4)
         };
 
-        var result = Pzl.Aquaq.Puzzles.Aquaq00.Aquaq00.HandleKeyPresses(keyPresses);
+        var result = Aquaq00.HandleKeyPresses(keyPresses);
 
         result.Should().Be(" abcdefghijklmnopqrstuvwxyz");
     }

@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq10Tests
@@ -18,7 +20,7 @@ public class Aquaq10Tests
     [Fact]
     public void SmallestCost()
     {
-        var result = Pzl.Aquaq.Puzzles.Aquaq10.Aquaq10.Solve(Input, "A", "C");
+        var result = Aquaq10.Solve(Input, "A", "C");
 
         result.Should().Be(29);
     }

@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq29Tests
@@ -16,7 +18,7 @@ public class Aquaq29Tests
             2099
         };
 
-        Pzl.Aquaq.Puzzles.Aquaq29.Aquaq29.CountGoodNumbers(input)
+        Aquaq29.CountGoodNumbers(input)
             .Should().Be(4);
     }
 }

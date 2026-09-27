@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq04Tests
@@ -5,7 +7,7 @@ public class Aquaq04Tests
     [Fact]
     public void FindCoPrimes()
     {
-        var result = Pzl.Aquaq.Puzzles.Aquaq04.Aquaq04.FindCoPrimesFor(15).ToArray();
+        var result = Aquaq04.FindCoPrimesFor(15).ToArray();
 
         result.Length.Should().Be(8);
         result[0].Should().Be(1);

@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq14Tests
@@ -9,5 +11,5 @@ public class Aquaq14Tests
     [InlineData("400 500 15 30 36 53 68 600 700", 7)]
     public void Bingo(string input, int expected) => Sut.Solve(input).Should().Be(expected);
 
-    private static Pzl.Aquaq.Puzzles.Aquaq14.Aquaq14 Sut => new();
+    private static Aquaq14 Sut => new();
 }

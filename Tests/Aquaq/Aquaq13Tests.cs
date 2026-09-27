@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq13Tests
@@ -10,7 +12,7 @@ public class Aquaq13Tests
     [InlineData("AbuhtbuhtBbuhtbuhtbuhtbuhtbuhtC", 5)]
     public void FindMaxRepeats(string input, int expected)
     {
-        var result = Pzl.Aquaq.Puzzles.Aquaq13.Aquaq13.FindMaxRepeats(input);
+        var result = Aquaq13.FindMaxRepeats(input);
 
         result.Should().Be(expected);
     }

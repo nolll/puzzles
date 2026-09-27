@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq21Tests
@@ -12,7 +14,7 @@ public class Aquaq21Tests
     [Fact]
     public void CollectDust()
     {
-        var result = Pzl.Aquaq.Puzzles.Aquaq21.Aquaq21.Solve(Input, 3);
+        var result = Aquaq21.Solve(Input, 3);
 
         result.Should().Be(65);
     }

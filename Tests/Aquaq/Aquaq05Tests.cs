@@ -1,4 +1,4 @@
-using Pzl.Aquaq.Puzzles.Aquaq05;
+using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
@@ -7,7 +7,7 @@ public class Aquaq05Tests
     [Fact]
     public void RotateDiceLeft()
     {
-        var dice = new Dice(1, 6, 2, 5, 3, 4);
+        var dice = new Aquaq05.Dice(1, 6, 2, 5, 3, 4);
         dice.RotateLeft();
 
         dice.Front.Should().Be(5);
@@ -21,7 +21,7 @@ public class Aquaq05Tests
     [Fact]
     public void RotateDiceRight()
     {
-        var dice = new Dice(1, 6, 2, 5, 3, 4);
+        var dice = new Aquaq05.Dice(1, 6, 2, 5, 3, 4);
         dice.RotateRight();
 
         dice.Front.Should().Be(2);
@@ -35,7 +35,7 @@ public class Aquaq05Tests
     [Fact]
     public void RotateDiceUp()
     {
-        var dice = new Dice(1, 6, 2, 5, 3, 4);
+        var dice = new Aquaq05.Dice(1, 6, 2, 5, 3, 4);
         dice.RotateUp();
 
         dice.Front.Should().Be(4);
@@ -49,7 +49,7 @@ public class Aquaq05Tests
     [Fact]
     public void RotateDiceDown()
     {
-        var dice = new Dice(1, 6, 2, 5, 3, 4);
+        var dice = new Aquaq05.Dice(1, 6, 2, 5, 3, 4);
         dice.RotateDown();
 
         dice.Front.Should().Be(3);
@@ -61,5 +61,5 @@ public class Aquaq05Tests
     }
 
     [Fact]
-    public void FindSumOfIndexes() => new Pzl.Aquaq.Puzzles.Aquaq05.Aquaq05().Solve("LRDLU").Should().Be(5);
+    public void FindSumOfIndexes() => new Aquaq05().Solve("LRDLU").Should().Be(5);
 }

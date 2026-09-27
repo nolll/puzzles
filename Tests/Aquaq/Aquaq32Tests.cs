@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq32Tests
@@ -12,7 +14,7 @@ public class Aquaq32Tests
     [InlineData("((a)){]", false)]
     public void IsBalanced(string input, bool expected)
     {
-        var result = Pzl.Aquaq.Puzzles.Aquaq32.Aquaq32.IsBalanced(input);
+        var result = Aquaq32.IsBalanced(input);
 
         result.Should().Be(expected);
     }

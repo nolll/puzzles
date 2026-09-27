@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq27Tests
@@ -19,5 +21,5 @@ public class Aquaq27Tests
                                  """;
 
     [Fact] 
-    public void SnakeScore() => new Pzl.Aquaq.Puzzles.Aquaq27.Aquaq27().Solve(Input).Should().Be(7995);
+    public void SnakeScore() => new Aquaq27().Solve(Input).Should().Be(7995);
 }

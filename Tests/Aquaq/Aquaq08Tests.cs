@@ -1,3 +1,5 @@
+using Pzl.Aquaq.Puzzles;
+
 namespace Tests.Aquaq;
 
 public class Aquaq08Tests
@@ -5,7 +7,7 @@ public class Aquaq08Tests
     [Fact]
     public void DaySixState()
     {
-        var result = Pzl.Aquaq.Puzzles.Aquaq08.Aquaq08.RunInternal(Input);
+        var result = Aquaq08.RunInternal(Input);
 
         result.milk.Should().Be(1600);
         result.cereal.Should().Be(600);

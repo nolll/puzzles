@@ -3,7 +3,7 @@ using Pzl.Tools.Lists;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
-namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202507;
+namespace Pzl.FlipFlop.Puzzles.FlipFlop2025;
 
 [Name("Hyper grids")]
 public class FlipFlop202507 : FlipFlopPuzzle

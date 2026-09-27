@@ -1,7 +1,7 @@
 using Pzl.Common;
 using Pzl.Tools.Strings;
 
-namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202501;
+namespace Pzl.FlipFlop.Puzzles.FlipFlop2025;
 
 [Name("Dream Vacation")]
 public class FlipFlop202501 : FlipFlopPuzzle

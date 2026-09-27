@@ -1,9 +1,9 @@
 using Pzl.Common;
 using Pzl.Tools.Lists;
-using Pzl.Tools.Strings;
 using Pzl.Tools.Numbers;
+using Pzl.Tools.Strings;
 
-namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202503;
+namespace Pzl.FlipFlop.Puzzles.FlipFlop2025;
 
 [Name("Bush Salesman")]
 public class FlipFlop202503 : FlipFlopPuzzle

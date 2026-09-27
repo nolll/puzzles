@@ -4,7 +4,7 @@ using Pzl.Tools.Lists;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
-namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202504;
+namespace Pzl.FlipFlop.Puzzles.FlipFlop2025;
 
 [Name("Beach cleanup")]
 public class FlipFlop202504 : FlipFlopPuzzle

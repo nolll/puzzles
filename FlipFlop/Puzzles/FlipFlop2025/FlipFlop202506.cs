@@ -3,7 +3,7 @@ using Pzl.Tools.Grids.Grids2d;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
-namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202506;
+namespace Pzl.FlipFlop.Puzzles.FlipFlop2025;
 
 [Name("Bird spotters")]
 public class FlipFlop202506 : FlipFlopPuzzle

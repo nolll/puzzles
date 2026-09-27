@@ -1,6 +1,6 @@
 using Pzl.Common;
 
-namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202505;
+namespace Pzl.FlipFlop.Puzzles.FlipFlop2025;
 
 [Name("Strange tunnels")]
 public class FlipFlop202505 : FlipFlopPuzzle

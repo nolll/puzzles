@@ -1,7 +1,7 @@
 using Pzl.Common;
 using Pzl.Tools.Numbers;
 
-namespace Pzl.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202502;
+namespace Pzl.FlipFlop.Puzzles.FlipFlop2025;
 
 [Name("Rollercoaster Heights")]
 public class FlipFlop202502 : FlipFlopPuzzle

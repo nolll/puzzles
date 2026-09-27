@@ -8,11 +8,8 @@ public class Aoc201601Tests
     [InlineData("R2, L3", 5)]
     [InlineData("R2, R2, R2", 2)]
     [InlineData("R5, L5, R5, R3", 12)]
-    public void ManhattanDistanceToTargetIsCorrect(string input, int expected)
-    {
-        var calc = new Aoc201601.EasterbunnyDistanceCalculator();
-        calc.Go(input);
+    public void ManhattanDistanceToTargetIsCorrect(string input, int expected) => 
+        Sut.Part1(input).Should().Be(expected);
 
-        calc.DistanceToTarget.Should().Be(expected);
-    }
+    private Aoc201601 Sut => new();
 }

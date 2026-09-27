@@ -1,4 +1,4 @@
-namespace Tests.FlipFlop.Puzzles.FlipFlop2025.FlipFlop202507;
+namespace Tests.FlipFlop.FlipFlop2025;
 
 public class FlipFlop202507Tests
 {

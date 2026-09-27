@@ -9,7 +9,7 @@ public class Euler033Tests
     [InlineData(34, 56, false)]
     public void CanBeReduced(int numerator, int denominator, bool result)
     {
-        var fraction = new Fraction(numerator, denominator);
+        var fraction = new Euler033.Fraction(numerator, denominator);
 
         fraction.CanBeReduced.Should().Be(result);
     }
@@ -20,7 +20,7 @@ public class Euler033Tests
     [InlineData(17, 78, 0.125)]
     public void ReducedResult(int numerator, int denominator, double result)
     {
-        var fraction = new Fraction(numerator, denominator);
+        var fraction = new Euler033.Fraction(numerator, denominator);
 
         fraction.ReducedResult.Should().Be(result);
     }

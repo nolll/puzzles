@@ -7,7 +7,7 @@ public class Aoc201506Tests
     [Fact]
     public void TurnsOnAllLights()
     {
-        var controller = new ChristmasLightsController(5);
+        var controller = new Aoc201506.ChristmasLightsController(5);
         controller.TurnOn(0, 0, 4, 4);
 
         controller.LitCount.Should().Be(25);
@@ -16,7 +16,7 @@ public class Aoc201506Tests
     [Fact]
     public void TurnsOnAllLightsTurnsOffFiveLights()
     {
-        var controller = new ChristmasLightsController(5);
+        var controller = new Aoc201506.ChristmasLightsController(5);
         controller.TurnOn(0, 0, 4, 4);
         controller.TurnOff(0, 2, 4, 2);
 
@@ -26,7 +26,7 @@ public class Aoc201506Tests
     [Fact]
     public void TurnsOnAllLightsTurnsOffFiveLightsTogglesAllLights()
     {
-        var controller = new ChristmasLightsController(5);
+        var controller = new Aoc201506.ChristmasLightsController(5);
         controller.TurnOn(0, 0, 4, 4);
         controller.TurnOff(0, 2, 4, 2);
         controller.Toggle(0, 0, 4, 4);

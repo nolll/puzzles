@@ -11,7 +11,7 @@ public class Aoc201505Tests
     [InlineData("haegwjzuvuyypxyu", false)]
     [InlineData("dvszwmarrgswjxmb", false)]
     public void NaughtyOrNice_AlgorithmOne(string input, bool expected) => 
-        NaughtyOrNiceEvaluator.IsNice1(input).Should().Be(expected);
+        Aoc201505.IsNice1(input).Should().Be(expected);
 
     [Theory]
     [InlineData("qjhvhtzxzqqjkmpb", true)]
@@ -19,5 +19,5 @@ public class Aoc201505Tests
     [InlineData("uurcxstgmygtbstg", false)]
     [InlineData("ieodomkazucvgmuy", false)]
     public void NaughtyOrNice_AlgorithmTwo(string input, bool expected) => 
-        NaughtyOrNiceEvaluator.IsNice2(input).Should().Be(expected);
+        Aoc201505.IsNice2(input).Should().Be(expected);
 }

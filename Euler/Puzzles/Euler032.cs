@@ -1,0 +1,35 @@
+using Pzl.Common;
+
+namespace Pzl.Euler.Puzzles;
+
+[Name("Pandigital products")]
+public class Euler032 : EulerPuzzle
+{
+    private const string AllChars = "123456789";
+
+    [Puzzle("735c4542e52acbb81533403307c46237")]
+    public int Solve()
+    {
+        const int limit = 2000;
+        var pandigitalProducts = new HashSet<int>();
+
+        for (var i = 1; i < limit; i++)
+        {
+            for (var j = i; j < limit; j++)
+            {
+                var product = i * j;
+                if (!pandigitalProducts.Contains(product) && IsPandigital(i, j, product))
+                {
+                    pandigitalProducts.Add(product);
+                }
+            }
+        }
+
+        return pandigitalProducts.Sum();
+    }
+
+    public static bool IsPandigital(int a, int b) => IsPandigital(a, b, a * b);
+
+    private static bool IsPandigital(int a, int b, int product) => 
+        string.Concat($"{a}{b}{product}".OrderBy(c => c)) == AllChars;
+}

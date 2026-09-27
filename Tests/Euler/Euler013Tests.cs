@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler013Tests
@@ -14,5 +16,5 @@ public class Euler013Tests
         Sut.Solve(numbers).Should().Be("6000000000");
     }
 
-    private static Pzl.Euler.Puzzles.Euler013.Euler013 Sut => new();
+    private static Euler013 Sut => new();
 }

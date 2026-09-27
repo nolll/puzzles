@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler019Tests
@@ -9,7 +11,7 @@ public class Euler019Tests
         var startDate = DateTime.Parse("2020-01-01");
         var endDate = DateTime.Parse("2020-12-31");
 
-        var puzzle = new Pzl.Euler.Puzzles.Euler019.Euler019();
+        var puzzle = new Euler019();
         var result = puzzle.Solve(startDate, endDate);
 
         result.Should().Be(2);

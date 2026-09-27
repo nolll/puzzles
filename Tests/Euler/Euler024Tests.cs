@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler024Tests
@@ -5,7 +7,7 @@ public class Euler024Tests
     [Fact]
     public void PermutationsAreGeneratedInLexicographicOrder()
     {
-        var permutations = Pzl.Euler.Puzzles.Euler024.Euler024.GetPermutations(3);
+        var permutations = Euler024.GetPermutations(3);
 
         permutations.Should().BeEquivalentTo(new List<List<int>>
         {

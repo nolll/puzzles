@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler015Tests
@@ -8,7 +10,7 @@ public class Euler015Tests
     [InlineData(4, 70)]
     public void Test(int gridSize, long expected)
     {
-        var puzzle = new Pzl.Euler.Puzzles.Euler015.Euler015();
+        var puzzle = new Euler015();
         var result = puzzle.Solve(gridSize);
 
         result.Should().Be(expected);

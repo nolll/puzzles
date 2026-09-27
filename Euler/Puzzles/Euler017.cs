@@ -1,0 +1,26 @@
+using Pzl.Common;
+using Pzl.Tools.Strings;
+
+namespace Pzl.Euler.Puzzles;
+
+[Name("Number letter counts")]
+public class Euler017 : EulerPuzzle
+{
+    [Puzzle("96bf6c43cf870a65a7526b18a8d55292")]
+    public int Solve() => Solve(1000);
+
+    public int Solve(int target)
+    {
+        var strings = new List<string>();
+        for (var i = 1; i <= target; i++)
+        {
+            var numberAsWords = new NumberAsString(i).ToString();
+            strings.Add(numberAsWords);
+        }
+
+        return CountLetters(strings);
+    }
+        
+    private static int CountLetters(IEnumerable<string> strings) => strings.Select(CountLetters).Sum();
+    private static int CountLetters(string s) => s.Replace(" ", "").Length;
+}

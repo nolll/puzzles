@@ -1,0 +1,40 @@
+using Pzl.Common;
+using Pzl.Tools.Numbers;
+
+namespace Pzl.Euler.Puzzles;
+
+[Name("Prime Permutations")]
+public class Euler049 : EulerPuzzle
+{
+    private const int Limit = 10_000;
+
+    [Puzzle("bcc1d5d8d784166b3294d174f872c8a8")]
+    public string? Solve()
+    {
+        var primes = Numbers.FindPrimesBelow(Limit).ToArray();
+        var permutationCache = primes.ToDictionary(k => k, v => string.Join("", v.ToString().ToCharArray().Order()));
+
+        for (var i = 0; i < primes.Length; i++)
+        {
+            var p1 = primes[i];
+            for (var j = i + 1; j < primes.Length; j++)
+            {
+                if (p1 == 1487)
+                    continue;
+                
+                var p2 = primes[j];
+                if (permutationCache[p1] != permutationCache[p2])
+                    continue;
+                
+                var diff = p2 - p1;
+                var p3 = p2 + diff;
+                if (p3 >= Limit || !Numbers.IsPrime(p3) || permutationCache[p1] != permutationCache[p3])
+                    continue;
+
+                return $"{p1}{p2}{p3}";
+            }
+        }
+        
+        return null;
+    }
+}

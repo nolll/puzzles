@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler037Tests
@@ -7,7 +9,7 @@ public class Euler037Tests
     [InlineData(3797, true)]
     public void IsTruncatable(int n, bool expected)
     {
-        var result = Pzl.Euler.Puzzles.Euler037.Euler037.IsTruncatable(n);
+        var result = Euler037.IsTruncatable(n);
 
         result.Should().Be(expected);
     }

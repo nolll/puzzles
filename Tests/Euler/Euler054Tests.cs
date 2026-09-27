@@ -1,19 +1,21 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler054Tests
 {
     [Theory]
-    [InlineData("AH KH QH JH TH", Pzl.Euler.Puzzles.Euler054.Euler054.HandRank.Str8Flush)]
-    [InlineData("AH 2H 3H 4H 5H", Pzl.Euler.Puzzles.Euler054.Euler054.HandRank.Str8Flush)]
-    [InlineData("AH AS AD AC KS", Pzl.Euler.Puzzles.Euler054.Euler054.HandRank.Quads)]
-    [InlineData("AH AS AD KC KS", Pzl.Euler.Puzzles.Euler054.Euler054.HandRank.Boat)]
-    [InlineData("AH KC QS JD TH", Pzl.Euler.Puzzles.Euler054.Euler054.HandRank.Str8)]
-    [InlineData("AH 2C 3S 4D 5H", Pzl.Euler.Puzzles.Euler054.Euler054.HandRank.Str8)]
-    [InlineData("AH AS AD KC QS", Pzl.Euler.Puzzles.Euler054.Euler054.HandRank.Trips)]
-    [InlineData("AH AS KD KC QS", Pzl.Euler.Puzzles.Euler054.Euler054.HandRank.TwoPair)]
-    [InlineData("AH AS KD QC JS", Pzl.Euler.Puzzles.Euler054.Euler054.HandRank.OnePair)]
-    [InlineData("AH KS QD JC 9S", Pzl.Euler.Puzzles.Euler054.Euler054.HandRank.HighCard)]
-    public void IsParsedCorrect(string hand, Pzl.Euler.Puzzles.Euler054.Euler054.HandRank expected) => new Pzl.Euler.Puzzles.Euler054.Euler054.Hand(hand).Rank.Should().Be(expected);
+    [InlineData("AH KH QH JH TH", Euler054.HandRank.Str8Flush)]
+    [InlineData("AH 2H 3H 4H 5H", Euler054.HandRank.Str8Flush)]
+    [InlineData("AH AS AD AC KS", Euler054.HandRank.Quads)]
+    [InlineData("AH AS AD KC KS", Euler054.HandRank.Boat)]
+    [InlineData("AH KC QS JD TH", Euler054.HandRank.Str8)]
+    [InlineData("AH 2C 3S 4D 5H", Euler054.HandRank.Str8)]
+    [InlineData("AH AS AD KC QS", Euler054.HandRank.Trips)]
+    [InlineData("AH AS KD KC QS", Euler054.HandRank.TwoPair)]
+    [InlineData("AH AS KD QC JS", Euler054.HandRank.OnePair)]
+    [InlineData("AH KS QD JC 9S", Euler054.HandRank.HighCard)]
+    public void IsParsedCorrect(string hand, Euler054.HandRank expected) => new Euler054.Hand(hand).Rank.Should().Be(expected);
     
     [Theory]
     [InlineData("2H 3H 4H 5H 6H", "AH 2H 3H 4H 5H")]
@@ -30,5 +32,5 @@ public class Euler054Tests
     [InlineData("AH AS QD JC 9S", "AH AS QD JC 8S")]
     [InlineData("AH AS QD JC 9S", "KH KS QD JC 9S")]
     [InlineData("AH KS QD JC 9S", "AH KS QD JC 8S")]
-    public void CompareHands_LeftHandWins(string left, string right) => new Pzl.Euler.Puzzles.Euler054.Euler054.Hand(left).CompareTo(new Pzl.Euler.Puzzles.Euler054.Euler054.Hand(right)).Should().Be(1);
+    public void CompareHands_LeftHandWins(string left, string right) => new Euler054.Hand(left).CompareTo(new Euler054.Hand(right)).Should().Be(1);
 }

@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler065Tests
@@ -20,5 +22,5 @@ public class Euler065Tests
         Sut.GetSequence(20).Should().BeEquivalentTo(expected);
     }
 
-    private static Pzl.Euler.Puzzles.Euler065.Euler065 Sut => new();
+    private static Euler065 Sut => new();
 }

@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler034Tests
@@ -9,7 +11,7 @@ public class Euler034Tests
     [InlineData(145, 145)]
     public void DigitFactorialSum(int input, int expected)
     {
-        var result = Pzl.Euler.Puzzles.Euler034.Euler034.GetDigitFactorialSum(input);
+        var result = Euler034.GetDigitFactorialSum(input);
 
         result.Should().Be(expected);
     }

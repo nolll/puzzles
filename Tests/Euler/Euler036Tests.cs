@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler036Tests
@@ -8,7 +10,7 @@ public class Euler036Tests
     [InlineData(21, false)]
     public void IsPalindromeInBothBases(int input, bool expected)
     {
-        var result = Pzl.Euler.Puzzles.Euler036.Euler036.IsPalindromeInBothBases(input);
+        var result = Euler036.IsPalindromeInBothBases(input);
 
         result.Should().Be(expected);
     }

@@ -11,7 +11,7 @@ public class FileReader(string inputLocation)
     private static string[] PuzzlePathParts(Type t)
     {
         var parts = t.FullName!.Split('.').Skip(1).ToList();
-        return parts.Count == 4 
+        return parts.Count < 5 
             ? [parts[0], parts[2]] 
             : [parts[0], parts[2], parts[3]];
     }

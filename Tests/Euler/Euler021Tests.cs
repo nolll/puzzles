@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler021Tests
@@ -8,8 +10,8 @@ public class Euler021Tests
         const int a = 220;
         const int b = 284;
 
-        var sumA = Pzl.Euler.Puzzles.Euler021.Euler021.GetFactorialSum(a);
-        var sumB = Pzl.Euler.Puzzles.Euler021.Euler021.GetFactorialSum(b);
+        var sumA = Euler021.GetFactorialSum(a);
+        var sumB = Euler021.GetFactorialSum(b);
 
         sumA.Should().Be(b);
         sumB.Should().Be(a);

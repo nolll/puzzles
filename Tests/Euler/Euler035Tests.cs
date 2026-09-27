@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler035Tests
@@ -5,7 +7,7 @@ public class Euler035Tests
     [Fact]
     public void Rotations()
     {
-        var result = Pzl.Euler.Puzzles.Euler035.Euler035.GetRotations(12345).ToArray();
+        var result = Euler035.GetRotations(12345).ToArray();
 
         result.Length.Should().Be(5);
         result[0].Should().Be(12345);

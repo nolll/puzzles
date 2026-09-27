@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler018Tests
@@ -15,5 +17,5 @@ public class Euler018Tests
         Sut.Solve(input).Should().Be(23);
     }
 
-    private static Pzl.Euler.Puzzles.Euler018.Euler018 Sut => new();
+    private static Euler018 Sut => new();
 }

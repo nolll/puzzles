@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler011Tests
@@ -13,7 +15,7 @@ public class Euler011Tests
                             01 01 01 01 04
                             """;
 
-        var puzzle = new Pzl.Euler.Puzzles.Euler011.Euler011();
+        var puzzle = new Euler011();
         var result = puzzle.Solve(grid);
 
         result.Should().Be(48);

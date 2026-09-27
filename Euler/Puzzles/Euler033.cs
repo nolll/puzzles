@@ -1,0 +1,82 @@
+using Pzl.Common;
+
+namespace Pzl.Euler.Puzzles;
+
+[Name("Digit Cancelling Fraction")]
+public class Euler033 : EulerPuzzle
+{
+    [Puzzle("4c0b4de9a0e1327b801b1dc029237223")]
+    public int Solve()
+    {
+        var fractions = new List<Fraction>();
+
+        for (var numerator = 10; numerator < 100; numerator++)
+        {
+            for (var denominator = 10; denominator < 100; denominator++)
+            {
+                var fraction = new Fraction(numerator, denominator);
+                if(Math.Abs(fraction.Result - 1) > 0)
+                    fractions.Add(new Fraction(numerator, denominator));
+            }
+        }
+
+        fractions = fractions.Where(o => o.CanBeReduced && o.Result < 1 && o.Result == o.ReducedResult).ToList();
+        
+        var combinedNumerator = fractions.Select(o => o.Numerator).Aggregate(1, (a, b) => a * b);
+        var combinedDenominator = fractions.Select(o => o.Denominator).Aggregate(1, (a, b) => a * b);
+        
+        // Found by inspecting the numbers. The denominator is the numerator * 100
+        return combinedDenominator / combinedNumerator;
+    }
+    
+    public class Fraction
+    {
+        public int Numerator { get; }
+        public int Denominator { get; }
+        public int ReducedNumerator { get; set; }
+        public int ReducedDenominator { get; set; }
+        public bool CanBeReduced { get; }
+
+        public Fraction(int numerator, int denominator)
+        {
+            Numerator = numerator;
+            Denominator = denominator;
+            CanBeReduced = GetCanBeReduced();
+        }
+
+        public double Result => (double)Numerator / Denominator;
+        public double ReducedResult => ReducedDenominator > 0
+            ? (double)ReducedNumerator / ReducedDenominator
+            : 0;
+
+        private bool GetCanBeReduced()
+        {
+            var numeratorString = Numerator.ToString();
+            var denominatorString = Denominator.ToString();
+
+            var numeratorChars = numeratorString.ToCharArray();
+            var denominatorChars = denominatorString.ToCharArray();
+
+            if (numeratorChars.First() == numeratorChars.Last())
+                return false;
+
+            if (denominatorChars.First() == denominatorChars.Last())
+                return false;
+
+            if (numeratorChars.Last() == '0' && denominatorChars.Last() == '0')
+                return false;
+
+            var commonChar = numeratorChars.FirstOrDefault(o => denominatorChars.Contains(o));
+
+            ReducedNumerator = int.Parse(numeratorString.Replace(commonChar.ToString(), ""));
+            ReducedDenominator = int.Parse(denominatorString.Replace(commonChar.ToString(), ""));
+
+            return commonChar != default;
+        }
+
+        public string Print()
+        {
+            return $"{Numerator} / {Denominator} => {Result}";
+        }
+    }
+}

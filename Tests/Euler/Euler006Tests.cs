@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler006Tests
@@ -5,7 +7,7 @@ public class Euler006Tests
     [Fact]
     public void Test()
     {
-        var puzzle = new Pzl.Euler.Puzzles.Euler006.Euler006();
+        var puzzle = new Euler006();
         var result = puzzle.Solve(10);
 
         result.Should().Be(2640);

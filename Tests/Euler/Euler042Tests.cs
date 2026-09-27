@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler042Tests
@@ -5,7 +7,7 @@ public class Euler042Tests
     [Fact]
     public void GetWordValue()
     {
-        var result = Pzl.Euler.Puzzles.Euler042.Euler042.GetWordValue("SKY");
+        var result = Euler042.GetWordValue("SKY");
 
         result.Should().Be(55);
     }

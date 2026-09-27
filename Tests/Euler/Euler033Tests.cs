@@ -1,4 +1,4 @@
-using Pzl.Euler.Puzzles.Euler033;
+using Pzl.Euler.Puzzles;
 
 namespace Tests.Euler;
 

@@ -1,3 +1,5 @@
+using Pzl.Euler.Puzzles;
+
 namespace Tests.Euler;
 
 public class Euler038Tests
@@ -7,7 +9,7 @@ public class Euler038Tests
     [InlineData(192, 192384576)]
     public void GetConcatenatedProduct(int n, long expected)
     {
-        var result = Pzl.Euler.Puzzles.Euler038.Euler038.GetConcatenatedProduct(n);
+        var result = Euler038.GetConcatenatedProduct(n);
 
         result.Should().Be(expected);
     }

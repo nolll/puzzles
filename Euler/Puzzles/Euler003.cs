@@ -1,0 +1,12 @@
+using Pzl.Common;
+using Pzl.Tools.Numbers;
+
+namespace Pzl.Euler.Puzzles;
+
+[Name("Largest prime factor")]
+public class Euler003 : EulerPuzzle
+{
+    [Puzzle("bc05f2cc254574e3679f0a25c811dea1")]
+    public long Solve() => Solve(600_851_475_143);
+    public long Solve(long number) => Numbers.LargestPrimeFactor(number);
+}

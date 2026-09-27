@@ -1,0 +1,22 @@
+namespace Tests.Aquaq;
+
+public class Aquaq02Tests
+{
+    [Fact]
+    public void UniqueNumbers()
+    {
+        var input = new[]
+        {
+            1, 4, 3, 2, 4, 7, 2, 6, 3, 6
+        };
+
+        var result = Pzl.Aquaq.Puzzles.Aquaq02.Aquaq02.GetUniqueNumbers(input).ToArray();
+
+        result.Count().Should().Be(5);
+        result[0].Should().Be(1);
+        result[1].Should().Be(4);
+        result[2].Should().Be(7);
+        result[3].Should().Be(2);
+        result[4].Should().Be(6);
+    }
+}

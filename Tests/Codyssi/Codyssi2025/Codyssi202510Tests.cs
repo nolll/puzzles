@@ -1,3 +1,5 @@
+using Pzl.Codyssi.Puzzles.Codyssi2025;
+
 namespace Tests.Codyssi.Codyssi2025;
 
 public class Codyssi202510Tests
@@ -34,5 +36,5 @@ public class Codyssi202510Tests
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be(120);
 
-    private static Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202510.Codyssi202510 Sut => new();
+    private static Codyssi202510 Sut => new();
 }

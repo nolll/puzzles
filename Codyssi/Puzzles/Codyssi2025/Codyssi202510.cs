@@ -1,0 +1,70 @@
+using Pzl.Common;
+using Pzl.Tools.Graphs;
+using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Strings;
+
+namespace Pzl.Codyssi.Puzzles.Codyssi2025;
+
+[Name("Cyclops Chaos")]
+public class Codyssi202510 : CodyssiPuzzle
+{
+    [Puzzle("1e10a803d525ec160795a9bed9161106")]
+    public int Part1(string input)
+    {
+        var data = input.Split(LineBreaks.Single)
+            .Select(o => o.Replace(" ", "").ToCharArray().Select(p => int.Parse(p.ToString())).ToArray())
+            .ToArray();
+
+        var hmin = int.MaxValue;
+        var vmin = int.MaxValue;
+
+        for (var i = 0; i < data.Length; i++)
+        {
+            var hsum = 0;
+            var vsum = 0;
+            for (var j = 0; j < data[i].Length; j++)
+            {
+                hsum += data[i][j];
+                vsum += data[j][i];
+            }
+
+            hmin = Math.Min(hsum, hmin);
+            vmin = Math.Min(vsum, vmin);
+        }
+
+        return Math.Min(hmin, vmin);
+    }
+
+    [Puzzle("8e0e2fd983585eea7c17bb92929d6c32")]
+    public int Part2(string input) => RunPart2And3(input, new Coord(14, 14));
+
+    [Puzzle("ef05794a9a4d22520dd94a67775c2c15")]
+    public int Part3(string input) => RunPart2And3(input);
+
+    public int RunPart2And3(string input, Coord? target = null)
+    {
+        var grid = GridBuilder.BuildIntGridFromNonSeparated(input.Replace(" ", ""));
+        var edges = new List<GraphEdge>();
+        var queue = new Queue<Coord>();
+        var start = new Coord(0, 0);
+        var end = target ?? new Coord(grid.XMax, grid.YMax);
+        var startCost = grid.ReadValueAt(start);
+        queue.Enqueue(start);
+        var seen = new HashSet<string>();
+        while (queue.Count > 0)
+        {
+            var current = queue.Dequeue();
+            var next = grid.OrthogonalAdjacentCoordsTo(current).Where(o => o.X > current.X || o.Y > current.Y);
+            foreach (var n in next)
+            {
+                edges.Add(new GraphEdge(current.Id, n.Id, grid.ReadValueAt(n)));
+                if (!seen.Add(n.Id))
+                    continue;
+
+                queue.Enqueue(n);
+            }
+        }
+
+        return Dijkstra.BestCost(edges, start.Id, end.Id) + startCost;
+    }
+}

@@ -1,4 +1,5 @@
 using System.Numerics;
+using Pzl.Codyssi.Puzzles.Codyssi2025;
 
 namespace Tests.Codyssi.Codyssi2025;
 
@@ -56,5 +57,5 @@ public class Codyssi202517Tests
     public void Part3_3() => Sut.Part3(Input3).Should()
         .Be("S1_0-S1_6-S2_11-S2_17-S2_23-S2_29-S9_34-S9_37-S5_42-S5_48-S5_54-S5_60-S5_66-S5_72-S5_73-S5_74-S1_79-S3_84-S8_88-S8_89-S8_90-S3_90-S3_91-S1_96-S1_99");
 
-    private static Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202517.Codyssi202517 Sut => new();
+    private static Codyssi202517 Sut => new();
 }

@@ -1,3 +1,5 @@
+using Pzl.Codyssi.Puzzles.Codyssi2025;
+
 namespace Tests.Codyssi.Codyssi2025;
 
 public class Codyssi202515Tests
@@ -32,5 +34,5 @@ public class Codyssi202515Tests
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be("pYNonIG");
 
-    private static Pzl.Codyssi.Puzzles.Codyssi2025.Codyssi202515.Codyssi202515 Sut => new();
+    private static Codyssi202515 Sut => new();
 }

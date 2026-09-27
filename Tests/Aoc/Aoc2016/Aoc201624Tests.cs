@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201624;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -15,7 +15,7 @@ public class Aoc201624Tests
                              ###########
                              """;
 
-        var navigator = new AirDuctNavigator(input);
+        var navigator = new Aoc201624.AirDuctNavigator(input);
         var shortestPath = navigator.Run(false);
 
         shortestPath.Should().Be(14);
@@ -32,7 +32,7 @@ public class Aoc201624Tests
                              ###########
                              """;
 
-        var navigator = new AirDuctNavigator(input);
+        var navigator = new Aoc201624.AirDuctNavigator(input);
         var shortestPath = navigator.Run(true);
 
         shortestPath.Should().Be(20);

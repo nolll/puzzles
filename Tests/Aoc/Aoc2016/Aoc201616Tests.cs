@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201616;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -11,7 +11,7 @@ public class Aoc201616Tests
     [InlineData("111100001010", "1111000010100101011110000")]
     public void DataIsCorrect(string input, string expected)
     {
-        var dragonCurve = new DragonCurve();
+        var dragonCurve = new Aoc201616.DragonCurve();
         var data = dragonCurve.ApplyAlgorithm(input);
 
         data.Should().Be(expected);
@@ -24,7 +24,7 @@ public class Aoc201616Tests
         const string expected = "11110000101001010111";
         const int expectedLength = 20;
 
-        var dragonCurve = new DragonCurve();
+        var dragonCurve = new Aoc201616.DragonCurve();
         var data = dragonCurve.FillDisk(input, expectedLength);
 
         data.Should().Be(expected);
@@ -37,7 +37,7 @@ public class Aoc201616Tests
         const string input = "110010110100";
         const string expected = "100";
 
-        var dragonCurve = new DragonCurve();
+        var dragonCurve = new Aoc201616.DragonCurve();
         var checksum = dragonCurve.Checksum(input);
 
         checksum.Should().Be(expected);

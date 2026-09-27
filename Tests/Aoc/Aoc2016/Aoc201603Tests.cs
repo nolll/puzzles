@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201603;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -9,8 +9,8 @@ public class Aoc201603Tests
     [InlineData("1 2 5", false)]
     public void ValidateTriangles(string triangleSpec, bool expectedResult)
     {
-        var validator = new TriangleValidator();
-        var isValid = TriangleValidator.IsValid(triangleSpec);
+        var validator = new Aoc201603.TriangleValidator();
+        var isValid = Aoc201603.TriangleValidator.IsValid(triangleSpec);
 
         isValid.Should().Be(expectedResult);
     }
@@ -23,7 +23,7 @@ public class Aoc201603Tests
                              1 2 5
                              """;
 
-        var validator = new TriangleValidator();
+        var validator = new Aoc201603.TriangleValidator();
         var validCount = validator.GetHorizontalValidCount(input);
 
         validCount.Should().Be(1);
@@ -41,7 +41,7 @@ public class Aoc201603Tests
                              203 403 603
                              """;
 
-        var validator = new TriangleValidator();
+        var validator = new Aoc201603.TriangleValidator();
         var validCount = validator.GetVerticalValidCount(input);
 
         validCount.Should().Be(6);

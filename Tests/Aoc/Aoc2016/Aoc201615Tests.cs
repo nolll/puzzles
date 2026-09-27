@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201615;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -12,7 +12,7 @@ public class Aoc201615Tests
     [InlineData(2, 1, 1, true)]
     public void CapsulePassesDisc(int positions, int startPos, int time, bool expected)
     {
-        var disc = new KineticSculptureDisc(positions, startPos);
+        var disc = new Aoc201615.KineticSculptureDisc(positions, startPos);
         var pos = disc.Passed(time);
 
         pos.Should().Be(expected);
@@ -26,7 +26,7 @@ public class Aoc201615Tests
                              Disc #2 has 2 positions; at time=0, it is at position 1.
                              """;
 
-        var sculpture = new KineticSculpture(input.Trim());
+        var sculpture = new Aoc201615.KineticSculpture(input.Trim());
             
         sculpture.TimeToPressButton.Should().Be(5);
     }

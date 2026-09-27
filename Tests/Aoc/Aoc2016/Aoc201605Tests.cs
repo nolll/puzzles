@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201605;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -8,7 +8,7 @@ public class Aoc201605Tests
     public void GeneratesPasswordWithFirstAlgorithm()
     {
         const string input = "abc";
-        var generator = new PasswordGenerator();
+        var generator = new Aoc201605.PasswordGenerator();
         var pwd = generator.Generate1(input);
 
         pwd.Should().Be("18f47a30");
@@ -18,7 +18,7 @@ public class Aoc201605Tests
     public void GeneratesPasswordWithSecondAlgorithm()
     {
         const string input = "abc";
-        var generator = new PasswordGenerator();
+        var generator = new Aoc201605.PasswordGenerator();
         var pwd = generator.Generate2(input);
 
         pwd.Should().Be("05ace8e3");

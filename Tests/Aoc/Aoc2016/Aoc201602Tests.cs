@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201602;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -14,7 +14,7 @@ public class Aoc201602Tests
                              UUUUD
                              """;
 
-        var finder = new SquareKeyCodeFinder();
+        var finder = new Aoc201602.SquareKeyCodeFinder();
         var code = finder.Find(input.Trim());
 
         code.Should().Be("1985");
@@ -30,7 +30,7 @@ public class Aoc201602Tests
                              UUUUD
                              """;
 
-        var finder = new DiamondKeyCodeFinder();
+        var finder = new Aoc201602.DiamondKeyCodeFinder();
         var code = finder.Find(input.Trim());
 
         code.Should().Be("5DB3");

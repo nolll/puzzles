@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201621;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -20,7 +20,7 @@ public class Aoc201621Tests
 
         const string pwd = "abcde";
 
-        var scrambler = new StringScrambler(input.Trim());
+        var scrambler = new Aoc201621.StringScrambler(input.Trim());
         var result = scrambler.Scramble(pwd);
 
         result.Should().Be("decab");
@@ -42,7 +42,7 @@ public class Aoc201621Tests
 
         const string pwd = "decab";
 
-        var scrambler = new StringScrambler(input.Trim());
+        var scrambler = new Aoc201621.StringScrambler(input.Trim());
         var result = scrambler.Unscramble(pwd);
 
         result.Should().Be("abcde");

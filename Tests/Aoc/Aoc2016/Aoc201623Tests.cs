@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201623;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -16,7 +16,7 @@ public class Aoc201623Tests
                              dec a
                              """;
 
-        var control = new SafeCrackingComputerPart1(input.Trim(), 0, 0);
+        var control = new Aoc201623.SafeCrackingComputerPart1(input.Trim(), 0, 0);
 
         control.ValueA.Should().Be(42);
     }
@@ -34,7 +34,7 @@ public class Aoc201623Tests
                              dec a
                              """;
 
-        var control = new SafeCrackingComputerPart1(input.Trim(), 0, 0);
+        var control = new Aoc201623.SafeCrackingComputerPart1(input.Trim(), 0, 0);
 
         control.ValueA.Should().Be(3);
     }

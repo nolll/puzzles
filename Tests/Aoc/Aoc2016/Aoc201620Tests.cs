@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201620;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -13,7 +13,7 @@ public class Aoc201620Tests
                              4-7
                              """;
 
-        var rules = new FirewallRules(input.Trim());
+        var rules = new Aoc201620.FirewallRules(input.Trim());
         var lowestIp = rules.GetLowestUnblockedIp();
 
         lowestIp.Should().Be(3);
@@ -28,7 +28,7 @@ public class Aoc201620Tests
                              4-7
                              """;
 
-        var rules = new FirewallRules(input.Trim());
+        var rules = new Aoc201620.FirewallRules(input.Trim());
         var lowestIp = rules.GetAllowedIpCount(9);
 
         lowestIp.Should().Be(2);

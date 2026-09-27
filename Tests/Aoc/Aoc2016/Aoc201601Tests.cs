@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201601;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -10,7 +10,7 @@ public class Aoc201601Tests
     [InlineData("R5, L5, R5, R3", 12)]
     public void ManhattanDistanceToTargetIsCorrect(string input, int expected)
     {
-        var calc = new EasterbunnyDistanceCalculator();
+        var calc = new Aoc201601.EasterbunnyDistanceCalculator();
         calc.Go(input);
 
         calc.DistanceToTarget.Should().Be(expected);

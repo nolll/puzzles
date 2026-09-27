@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201607;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -11,7 +11,7 @@ public class Aoc201607Tests
     [InlineData("ioxxoj[asdfgh]zxcvbn", true)]
     public void SupportsTls(string ip, bool expected)
     {
-        var ipTester = new IpTester();
+        var ipTester = new Aoc201607.IpTester();
         var result = ipTester.SupportsTls(ip);
 
         result.Should().Be(expected);
@@ -24,7 +24,7 @@ public class Aoc201607Tests
     [InlineData("zazbz[bzb]cdb", true)]
     public void SupportsSsl(string ip, bool expected)
     {
-        var ipTester = new IpTester();
+        var ipTester = new Aoc201607.IpTester();
         var result = ipTester.SupportsSsl(ip);
 
         result.Should().Be(expected);

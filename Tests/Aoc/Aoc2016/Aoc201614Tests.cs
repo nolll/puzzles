@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201614;
+using Pzl.Aoc.Puzzles.Aoc2016;
 using Pzl.Tools.Strings;
 
 namespace Tests.Aoc.Aoc2016;
@@ -8,7 +8,7 @@ public class Aoc201614Tests
     [Fact]
     public void GeneratesCorrectKeys()
     {
-        var generator = new KeyGenerator(0);
+        var generator = new Aoc201614.KeyGenerator(0);
         var index = generator.GetIndexOfNThKey("abc", 64);
 
         index.Should().Be(22728);
@@ -17,7 +17,7 @@ public class Aoc201614Tests
     [Fact]
     public void GeneratesCorrectStretchedKeys()
     {
-        var generator = new KeyGenerator(10);
+        var generator = new Aoc201614.KeyGenerator(10);
         var index = generator.GetIndexOfNThKey("abc", 64);
 
         index.Should().Be(12665);
@@ -30,7 +30,7 @@ public class Aoc201614Tests
     [InlineData(10, "8de2bfc94801e26c8c6729bd30d5c952")]
     public void StretchedHash(int stretchCount, string expected)
     {
-        var generator = new KeyGenerator(stretchCount);
+        var generator = new Aoc201614.KeyGenerator(stretchCount);
         var hashedBytes = generator.CreateHash("abc0");
         var hash = ByteConverter.ToString(hashedBytes);
             
@@ -45,7 +45,7 @@ public class Aoc201614Tests
     public void RepeatedChars(string str, char expected)
     {
         var byteHash = str.ToCharArray().Select(o => (byte)o).ToArray();
-        KeyGenerator.TryGetRepeatingByte(byteHash, out var c);
+        Aoc201614.KeyGenerator.TryGetRepeatingByte(byteHash, out var c);
         
         c.Should().Be((byte)expected);
     }
@@ -58,7 +58,7 @@ public class Aoc201614Tests
     public void ByteHashFiveInARowOf(string stringHash, bool expected)
     {
         var byteHash = stringHash.ToCharArray().Select(o => (byte)o).ToArray();
-        var hasFiveInARow = KeyGenerator.HasFiveInARowOf(byteHash, (byte)'a');
+        var hasFiveInARow = Aoc201614.KeyGenerator.HasFiveInARowOf(byteHash, (byte)'a');
 
         hasFiveInARow.Should().Be(expected);
     }

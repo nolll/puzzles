@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201613;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -9,7 +9,7 @@ public class Aoc201613Tests
     {
         const int input = 10;
 
-        var maze = new Maze(10, 7, input);
+        var maze = new Aoc201613.Maze(10, 7, input);
         var stepCount = maze.StepCountToTarget(7, 4);
         stepCount.Should().Be(11);
     }
@@ -24,7 +24,7 @@ public class Aoc201613Tests
     {
         const int input = 10;
 
-        var maze = new Maze(10, 7, input);
+        var maze = new Aoc201613.Maze(10, 7, input);
         var stepCount = maze.LocationCountAfter(steps);
         stepCount.Should().Be(expected);
     }

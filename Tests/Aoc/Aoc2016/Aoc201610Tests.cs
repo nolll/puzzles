@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201610;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -16,7 +16,7 @@ public class Aoc201610Tests
                              value 2 goes to bot 2
                              """;
 
-        var botSimulator = new BotSimulator(input.Trim());
+        var botSimulator = new Aoc201610.BotSimulator(input.Trim());
         var botId = botSimulator.FindIdByChips(2, 5);
 
         botId.Should().Be(2);

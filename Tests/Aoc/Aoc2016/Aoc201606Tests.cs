@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201606;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -26,7 +26,7 @@ public class Aoc201606Tests
     [Fact]
     public void MessageIsCorrect_MostCommon()
     {
-        var reader = new RepetitionCodeReader();
+        var reader = new Aoc201606.RepetitionCodeReader();
         var coin = reader.ReadMostCommon(Input);
 
         coin.Should().Be("easter");
@@ -35,7 +35,7 @@ public class Aoc201606Tests
     [Fact]
     public void MessageIsCorrect_LeastCommon()
     {
-        var reader = new RepetitionCodeReader();
+        var reader = new Aoc201606.RepetitionCodeReader();
         var coin = reader.ReadLeastCommon(Input);
 
         coin.Should().Be("advent");

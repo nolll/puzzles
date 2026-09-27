@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201608;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -14,7 +14,7 @@ public class Aoc201608Tests
                              rotate column x=1 by 1
                              """;
 
-        var simulator = new ScreenSimulator(7, 3);
+        var simulator = new Aoc201608.ScreenSimulator(7, 3);
         var result = simulator.Run(input);
 
         result.PixelCount.Should().Be(6);

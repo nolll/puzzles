@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2016.Aoc201604;
+using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
@@ -11,7 +11,7 @@ public class Aoc201604Tests
     [InlineData("totally-real-room-200[decoy]", false)]
     public void ValidatesRooms(string input, bool expected)
     {
-        var room = new Room(input);
+        var room = new Aoc201604.Room(input);
 
         room.IsValid.Should().Be(expected);
     }

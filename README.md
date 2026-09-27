@@ -1,22 +1,36 @@
-# Running Puzzles
+# Puzzles
 
-This repository includes convenient shortcut scripts to run puzzles without typing the full dotnet command.
+My solutions to programming challenges
 
-## Quick Start
+- [Advent of Code](https://adventofcode.com)
+- [AquaQ Challenge](https://challenges.aquaq.co.uk)
+- [Codyssi](https://www.codyssi.com)
+- [Everybody Codes](https://everybody.codes)
+- [FlipFlop Codes](https://flipflop.slome.org)
+- [Project Euler](https://projecteuler.net)
 
-### macOS / Linux
+## Running Puzzles
+
+Use these shortcut scripts to run puzzles without typing the full dotnet command.
+
+### Quick Start
+
+#### macOS / Linux
+
 ```bash
 ./run [options]
 ```
 
-### Windows
+#### Windows
+
 ```cmd
 run [options]
 ```
 
-## Options
+### Options
 
 **`-t, --tags`** - Filter puzzles by comma-separated tags
+
 ```bash
 ./run --tags euler,65          # Run Euler puzzle 65
 ./run --tags aoc,2022          # Run all 2022 Advent of Code puzzles
@@ -28,19 +42,22 @@ run [options]
 ```
 
 **`-s, --search`** - Search by title, class name, or comments
+
 ```bash
 ./run --search "fibonacci"
 ./run --search "prime numbers"
 ```
 
 **`-h, --help`** - Display help text
+
 ```bash
 ./run --help
 ```
 
-## What These Scripts Do
+### What These Scripts Do
 
 These scripts are shortcuts for:
+
 ```bash
 dotnet run --project Client/Client.csproj -- [options]
 ```

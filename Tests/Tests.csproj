@@ -20,7 +20,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Aoc\Aoc.csproj" />
       <ProjectReference Include="..\Aquaq\Aquaq.csproj" />
-      <ProjectReference Include="..\Client.csproj" />
+      <ProjectReference Include="..\Client\Client.csproj" />
       <ProjectReference Include="..\Codyssi\Codyssi.csproj" />
       <ProjectReference Include="..\Common\Common.csproj" />
       <ProjectReference Include="..\Euler\Euler.csproj" />

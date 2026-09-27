@@ -1,9 +1,8 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client.csproj", "{7BCB32B5-D40E-4AB5-BC2E-DCF75DEDDC29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{7BCB32B5-D40E-4AB5-BC2E-DCF75DEDDC29}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools", "Tools\Tools.csproj", "{94184920-152B-466E-B6EE-CD37059A9CB9}"
 EndProject
@@ -22,6 +21,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlipFlop", "FlipFlop\FlipFlop.csproj", "{43C18ECF-3913-4E35-9102-40F198C5CECC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{1B45C23E-76D0-444F-B4DE-BBD90AEC3A59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{EDA8C4AF-6E28-4911-82BC-3DBE9DFE5E83}"
+	ProjectSection(SolutionItems) = preProject
+		run = run
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

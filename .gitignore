@@ -333,3 +333,5 @@ ASALocalRun/
 **/*.ncrunchproject
 
 **/.DS_Store
+
+.env

@@ -1,21 +1,18 @@
-﻿using Microsoft.Extensions.Configuration;
-using Pzl.Client;
+﻿using Pzl.Client;
 
-var configuration = new ConfigurationBuilder()
-    .AddJsonFile("appsettings.json", true, false)
-    .Build();
+EnvReader.Read();
 
-var inputLocation = configuration["inputLocation"];
+var inputLocation = Environment.GetEnvironmentVariable("INPUT_LOCATION");
 if (string.IsNullOrEmpty(inputLocation))
 {
-    Console.WriteLine("Error: inputLocation is not set in appsettings.json");
+    Console.WriteLine("Error: INPUT_LOCATION is not set in .env");
     return;
 }
 
 var options = new Options(
-    configuration["hashSeed"],
-    configuration["timeoutSeconds"],
-    configuration["debugTags"],
+    Environment.GetEnvironmentVariable("HASH_SEED"),
+    Environment.GetEnvironmentVariable("TIMEOUT_SECONDS"),
+    Environment.GetEnvironmentVariable("DEBUG_TAGS"),
     inputLocation);
 
 new PuzzleProgram(options).Run(args);

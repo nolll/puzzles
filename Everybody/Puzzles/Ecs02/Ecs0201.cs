@@ -1,0 +1,125 @@
+using Pzl.Common;
+using Pzl.Tools.Combinatorics;
+using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Lists;
+using Pzl.Tools.Strings;
+
+namespace Pzl.Everybody.Puzzles.Ecs02;
+
+[Name("Nail Down Your Luck")]
+public class Ecs0201 : EverybodyStoryPuzzle
+{
+    [Puzzle("dad5d715238be69f7117d91bb3938a10")]
+    public int Part1(string input)
+    {
+        var (grid, tokens, _) = Parse(input);
+        var coins = 0;
+        
+        for (var i = 0; i < tokens.Length; i++)
+        {
+            var token = tokens[i];
+            var slot = i + 1;
+            coins += Play(grid, token, slot).score;
+        }
+        
+        return coins;
+    }
+
+    [Puzzle("26c70e45583b5816af23beaeb77e8940")]
+    public int Part2(string input)
+    {
+        var (grid, tokens, slotCount) = Parse(input);
+        var coins = 0;
+        
+        foreach (var token in tokens)
+        {
+            var best = (slot: 0, finalSlot: 0, score: 0);
+            for (var slot = 1; slot <= slotCount; slot++)
+            {
+                var result = Play(grid, token, slot);
+                if (result.score > best.score)
+                    best = result;
+            }
+            
+            coins += best.score;
+        }
+        
+        return coins;
+    }
+
+    [Puzzle("28c4bfb9e7bb062915af989c9b4b8e33")]
+    public string Part3(string input)
+    {
+        var (grid, tokenRules, slotCount) = Parse(input);
+        var scores = new Dictionary<(int token, int slot), int>();
+
+        for (var token = 0; token < tokenRules.Length; token++)
+        {
+            var rule = tokenRules[token];
+            for (var slot = 1; slot <= slotCount; slot++)
+            {
+                var result = Play(grid, rule, slot);
+                scores.Add((token, slot), result.score);
+            }
+        }
+
+        var worst = int.MaxValue;
+        var best = int.MinValue;
+        var allSlots = Enumerable.Range(1, slotCount).ToList();
+        var combinations = PermutationGenerator.GetPermutations(allSlots, tokenRules.Length);
+
+        foreach (var slots in combinations)
+        {
+            var score = slots.Select((slot, token) => scores[(token, slot)]).Sum();
+
+            worst = Math.Min(worst, score);
+            best = Math.Max(best, score);
+        }
+
+        return $"{worst} {best}";
+    }
+
+    private static (int slot, int finalSlot, int score) Play(Grid<char> grid, string token, int slot)
+    {
+        var x = (slot - 1) * 2;
+        grid.MoveTo(x, grid.YMin);
+        var tokenIndex = 0;
+        
+        while (grid.TryMoveDown())
+        {
+            if (grid.ReadValue() == '*')
+                grid.MoveUp();
+            else
+                continue;
+                
+            var instruction = token[tokenIndex];
+                
+            if (instruction == 'L')
+            {
+                if (!grid.TryMoveLeft())
+                    grid.MoveRight();
+            }
+            else
+            {
+                if (!grid.TryMoveRight())
+                    grid.MoveLeft();
+            }
+
+            tokenIndex += 1;
+        }
+
+        var finalSlot = grid.Coord.X / 2 + 1;
+        return (slot, finalSlot, Math.Max(finalSlot * 2 - slot, 0));
+    }
+
+    private static (Grid<char> m, string[] t, int slotCount) Parse(string input)
+    {
+        var (input1, input2) = input.Split(LineBreaks.Double);
+        var grid = GridBuilder.BuildCharGrid(input1, '.');
+        grid.ExtendUp();
+        var tokens = input2.Split(LineBreaks.Single);
+        var slotCount = (grid.Width + 1) / 2;
+
+        return (grid, tokens, slotCount);
+    }
+}

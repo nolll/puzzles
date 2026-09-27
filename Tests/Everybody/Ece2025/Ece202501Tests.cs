@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ece2025;
+
 namespace Tests.Everybody.Ece2025;
 
 public class Ece202501Tests
@@ -38,5 +40,5 @@ public class Ece202501Tests
         Sut.Part3(input).Should().Be("Drakzyph");
     }
 
-    private Pzl.Everybody.Puzzles.Ece2025.Ece202501.Ece202501 Sut => new();
+    private Ece202501 Sut => new();
 }

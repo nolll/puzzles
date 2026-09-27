@@ -1,0 +1,243 @@
+using Pzl.Common;
+using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Numbers;
+using Pzl.Tools.Strings;
+
+namespace Pzl.Everybody.Puzzles.Ece2024;
+
+[Name("Desert Shower")]
+public class Ece202412 : EverybodyEventPuzzle
+{
+    [Puzzle("7266a18eef65c4745c844164ef32f61d")]
+    public int Part1(string input) => SolvePart1And2(input);
+    
+    [Puzzle("e6468a990e5dfdb3b572e72c4c24ed5b")]
+    public int Part2(string input) => SolvePart1And2(input);
+
+    private int SolvePart1And2(string input)
+    {
+        var grid = GridBuilder.BuildCharGrid(input, '.');
+        grid.ExtendUp(15);
+        grid.ExtendRight(20);
+
+        var aCoord = grid.FindAddresses('A').First();
+        var bCoord = grid.FindAddresses('B').First();
+        var cCoord = grid.FindAddresses('C').First();
+        (char name, Coord coord)[] catapults = [('A', aCoord), ('B', bCoord), ('C', cCoord)];
+
+        var bestShots = new Dictionary<Coord, (char name, int power)>();
+        foreach (var catapult in catapults)
+        {
+            var power = 1;
+            var outOfBounds = false;
+            while (!outOfBounds)
+            {
+                grid.MoveTo(catapult.coord);
+                var range = Enumerable.Range(0, power).ToArray();
+                
+                // Move up
+                foreach (var _ in range)
+                {
+                    grid.MoveUp();
+                    grid.MoveRight();
+                }
+                
+                // Move right
+                foreach (var _ in range) grid.MoveRight();
+
+                // Move down until bottom
+                while (true)
+                {
+                    if (!grid.TryMoveRight())
+                    {
+                        outOfBounds = true;
+                        break;
+                    }
+
+                    grid.MoveDown();
+                    if (grid.Coord.Y == grid.YMax)
+                        break;
+                    
+                    if (grid.ReadValue() != 'T' && grid.ReadValue() != 'H')
+                        continue;
+                    
+                    if (bestShots.TryGetValue(grid.Coord, out var bestShot))
+                    {
+                        if(power < bestShot.power)
+                            bestShots[grid.Coord] = (catapult.name, power);
+                    }
+                    else
+                        bestShots[grid.Coord] = (catapult.name, power);
+                }
+                
+                power++;
+            }
+        }
+
+        var sum = 0;
+        foreach (var key in bestShots.Keys)
+        {
+            var shot = bestShots[key];
+            var multiplier = shot.name switch
+            {
+                'C' => 3,
+                'B' => 2,
+                _ => 1
+            };
+
+            var shotsRequired = grid.ReadValueAt(key) == 'H'
+                ? 2
+                : 1;
+
+            sum += shot.power * multiplier * shotsRequired;
+        }
+
+        return sum;
+    }
+
+    [Puzzle("10d32566118d059169a691eef70e6b1e")]
+    public int Part3(string input)
+    {
+        var meteors = input.Split(LineBreaks.Single)
+            .Select(Numbers.IntsFromString)
+            .Select(o => (x: o[0], y: o[1]))
+            .ToList();
+
+        var aCoord = (x: 0, y: 2);
+        var bCoord = (x: 0, y: 1);
+        var cCoord = (x: 0, y: 0);
+        (char name, (int x, int y) coord)[] catapults = [('A', aCoord), ('B', bCoord), ('C', cCoord)];
+        
+        var limits = (xmin: 0, xmax: meteors.Max(o => o.x), ymax: aCoord.y + 1);
+        var meteorCoords = GetAllMeteorCoords(limits, meteors, aCoord, catapults);
+
+        var trajectories = SimulateTrajectories(limits, catapults, meteorCoords)
+            .GroupBy(o => o.coord)
+            .ToDictionary(o => o.Key, v => v.OrderBy(o => o.coord.y).ThenBy(o => o.power).ToList());
+        
+        var bestList = new List<(int altitude, int power, int time)>();
+        foreach (var meteor in meteors)
+        {
+            var best = (altitude: int.MaxValue, power: int.MaxValue, time: 0);
+            var coord = (x: aCoord.x + meteor.x, y: aCoord.y - meteor.y);
+            var isDone = false;
+            var time = 0;
+            while (!isDone)
+            {
+                if (trajectories.TryGetValue(coord, out var hits))
+                {
+                    var validHits = hits.Where(o => o.time <= time).ToList();
+                    if (validHits.Any())
+                    {
+                        var bestHit = validHits.OrderBy(o => o.time).First();
+                        if (bestHit.coord.y < best.altitude || bestHit.coord.y == best.altitude && bestHit.power < best.power)
+                            best = (bestHit.coord.y, bestHit.power, bestHit.time);
+                    }
+                }
+
+                coord = (coord.x - 1, coord.y + 1);
+                isDone = coord.y == limits.ymax ||
+                         coord.x == limits.xmin ||
+                         catapults.Any(o => o.coord.Equals(coord));
+                time++;
+            }
+
+            bestList.Add(best);
+        }
+
+        return bestList.Sum(o => o.power);
+    }
+
+    private List<((int x, int y) coord, int time, int power)> SimulateTrajectories(
+        (int xmin, int xmax, int ymax) limits,
+        (char name, (int x, int y) coord)[] catapults,
+        HashSet<(int x, int y)> meteorCoords)
+    {
+        var list = new List<((int x, int y) coord, int time, int power)>();
+        foreach (var catapult in catapults)
+        {
+            var power = 1;
+            var outOfBounds = false;
+            var multiplier = catapult.name switch
+            {
+                'C' => 3,
+                'B' => 2,
+                _ => 1
+            };
+            
+            while (!outOfBounds)
+            {
+                var t = 0;
+                var (x, y) = catapult.coord;
+                var range = Enumerable.Range(0, power).ToArray();
+            
+                // Move up
+                foreach (var _ in range)
+                {
+                    y--;
+                    x++;
+                    t++;
+                    if(meteorCoords.Contains((x, y)))
+                        list.Add(((x, y), t, power * multiplier));
+                }
+            
+                // Move right
+                foreach (var _ in range)
+                {
+                    x++;
+                    t++;
+                    if(meteorCoords.Contains((x, y)))
+                        list.Add(((x, y), t, power * multiplier));
+                }
+
+                // Move down until bottom
+                while (true)
+                {
+                    x++;
+                    if (x > limits.xmax)
+                    {
+                        outOfBounds = true;
+                        break;
+                    }
+
+                    y++;
+                    if (y == limits.ymax)
+                        break;
+
+                    t++;
+                    if(meteorCoords.Contains((x, y)))
+                        list.Add(((x, y), t, power * multiplier));
+                }
+            
+                power++;
+            }
+        }
+
+        return list;
+    }
+
+    private static HashSet<(int x, int y)> GetAllMeteorCoords(
+        (int xmin, int xmax, int ymax) limits,
+        List<(int x, int y)> meteors,
+        (int x, int y) aCoord,
+        (char name, (int x, int y) coord)[] catapults)
+    {
+        var coords = new HashSet<(int x, int y)>();
+        for (var meteorId = 0; meteorId < meteors.Count; meteorId++)
+        {
+            var meteor = meteors[meteorId];
+            var coord = (x: aCoord.x + meteor.x, y: aCoord.y - meteor.y);
+            var isDone = false;
+            while (!isDone)
+            {
+                coord = (coord.x - 1, coord.y + 1);
+                coords.Add(coord);
+                isDone = coord.y == limits.ymax ||
+                         coord.x == limits.xmin ||
+                         catapults.Any(o => o.coord.Equals(coord));
+            }
+        }
+
+        return coords;
+    }
+}

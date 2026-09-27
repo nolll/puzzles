@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ece2025;
+
 namespace Tests.Everybody.Ece2025;
 
 public class Ece202504Tests
@@ -46,5 +48,5 @@ public class Ece202504Tests
         Sut.Part3(input).Should().Be(6818);
     }
 
-    private static Pzl.Everybody.Puzzles.Ece2025.Ece202504.Ece202504 Sut => new();
+    private static Ece202504 Sut => new();
 }

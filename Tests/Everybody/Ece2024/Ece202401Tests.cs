@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ece2024;
+
 namespace Tests.Everybody.Ece2024;
 
 public class Ece202401Tests
@@ -11,5 +13,5 @@ public class Ece202401Tests
     [Fact]
     public void ThreeCreatures() => Sut.Part3("xBxAAABCDxCC").Should().Be(30);
 
-    private static Pzl.Everybody.Puzzles.Ece2024.Ece202401.Ece202401 Sut => new();
+    private static Ece202401 Sut => new();
 }

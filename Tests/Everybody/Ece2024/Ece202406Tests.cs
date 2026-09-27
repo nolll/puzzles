@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ece2024;
+
 namespace Tests.Everybody.Ece2024;
 
 public class Ece202406Tests
@@ -21,5 +23,5 @@ public class Ece202406Tests
     [Fact]
     public void Part2And3() => Sut.Part2(Input).Should().Be("RB@");
 
-    private static Pzl.Everybody.Puzzles.Ece2024.Ece202406.Ece202406 Sut => new();
+    private static Ece202406 Sut => new();
 }

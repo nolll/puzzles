@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ecs01;
+
 namespace Tests.Everybody.Ecs01;
 
 public class Ecs0101Tests
@@ -78,17 +80,17 @@ public class Ecs0101Tests
     [Theory]
     [InlineData(2, 4, 5, 1342)]
     [InlineData(3, 5, 16, 311193)]
-    public void Eni1(long n, long exp, long mod, long expected) => Pzl.Everybody.Puzzles.Ecs01.Ecs0101.Ecs0101.Eni1(n, exp, mod).Should().Be(expected);
+    public void Eni1(long n, long exp, long mod, long expected) => Ecs0101.Eni1(n, exp, mod).Should().Be(expected);
     
     [Fact]
-    public void Eni1Sum() => Pzl.Everybody.Puzzles.Ecs01.Ecs0101.Ecs0101.EniSum(Pzl.Everybody.Puzzles.Ecs01.Ecs0101.Ecs0101.Eni1, 4, 4, 6, 3, 4, 5, 11).Should().Be(114644);
+    public void Eni1Sum() => Ecs0101.EniSum(Ecs0101.Eni1, 4, 4, 6, 3, 4, 5, 11).Should().Be(114644);
 
     [Theory]
     [InlineData(2, 7, 5, 34213)]
     [InlineData(3, 8, 16, 111931)]
     [InlineData(4, 14, 11, 39541)]
     public void Eni2(long n, long exp, long mod, long expected) =>
-        Pzl.Everybody.Puzzles.Ecs01.Ecs0101.Ecs0101.Eni2(n, exp, mod).Should().Be(expected);
+        Ecs0101.Eni2(n, exp, mod).Should().Be(expected);
     
     [Theory]
     [InlineData(4, 4, 6, 3, 14, 15, 11, 150231)]
@@ -98,19 +100,19 @@ public class Ecs0101Tests
     [InlineData(5, 9, 7, 6, 16, 18, 15, 11051340)]
     [InlineData(8, 8, 8, 6, 19, 16, 16, 0)]
     public void Eni2Sum(long a, long b, long c, long x, long y, long z, long m, long expected) => 
-        Pzl.Everybody.Puzzles.Ecs01.Ecs0101.Ecs0101.EniSum(Pzl.Everybody.Puzzles.Ecs01.Ecs0101.Ecs0101.Eni2, a, b, c, x, y, z, m).Should().Be(expected);
+        Ecs0101.EniSum(Ecs0101.Eni2, a, b, c, x, y, z, m).Should().Be(expected);
     
     [Theory]
     [InlineData(2, 7, 5, 19)]
     [InlineData(3, 8, 16, 48)]
     public void Eni3(long n, long exp, long mod, long expected) =>
-        Pzl.Everybody.Puzzles.Ecs01.Ecs0101.Ecs0101.Eni3(n, exp, mod).Should().Be(expected);
+        Ecs0101.Eni3(n, exp, mod).Should().Be(expected);
     
     [Theory]
     [InlineData(2, 8, 6, 2000, 14000, 15000, 130, 2079860)]
     [InlineData(8, 8, 8, 6000, 19000, 16000, 160, 3279640)]
     public void Eni3Sum(long a, long b, long c, long x, long y, long z, long m, long expected) => 
-        Pzl.Everybody.Puzzles.Ecs01.Ecs0101.Ecs0101.EniSum(Pzl.Everybody.Puzzles.Ecs01.Ecs0101.Ecs0101.Eni3, a, b, c, x, y, z, m).Should().Be(expected);
+        Ecs0101.EniSum(Ecs0101.Eni3, a, b, c, x, y, z, m).Should().Be(expected);
 
-    private static Pzl.Everybody.Puzzles.Ecs01.Ecs0101.Ecs0101 Sut => new();
+    private static Ecs0101 Sut => new();
 }

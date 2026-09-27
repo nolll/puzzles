@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ecs01;
+
 namespace Tests.Everybody.Ecs01;
 
 public class Ecs0103Tests
@@ -29,5 +31,5 @@ public class Ecs0103Tests
         Sut.Part2(input).Should().Be(14);
     }
     
-    private static Pzl.Everybody.Puzzles.Ecs01.Ecs0103.Ecs0103 Sut => new();
+    private static Ecs0103 Sut => new();
 }

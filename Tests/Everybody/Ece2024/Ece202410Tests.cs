@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ece2024;
+
 namespace Tests.Everybody.Ece2024;
 
 public class Ece202410Tests
@@ -20,7 +22,7 @@ public class Ece202410Tests
     }
     
     [Fact]
-    public void GetScore() => Pzl.Everybody.Puzzles.Ece2024.Ece202410.Ece202410.GetScore("PTBVRCZHFLJWGMNS").Should().Be(1851);
+    public void GetScore() => Ece202410.GetScore("PTBVRCZHFLJWGMNS").Should().Be(1851);
 
     [Fact]
     public void Part3()
@@ -45,5 +47,5 @@ public class Ece202410Tests
         Sut.Part3(input).Should().Be(3889);
     }
 
-    private static Pzl.Everybody.Puzzles.Ece2024.Ece202410.Ece202410 Sut => new();
+    private static Ece202410 Sut => new();
 }

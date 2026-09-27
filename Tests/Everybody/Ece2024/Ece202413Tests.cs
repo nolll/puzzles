@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ece2024;
+
 namespace Tests.Everybody.Ece2024;
 
 public class Ece202413Tests
@@ -21,7 +23,7 @@ public class Ece202413Tests
     [InlineData(1, 2, 1)]
     [InlineData(1, 9, 2)]
     [InlineData(9, 1, 2)]
-    public void Cost(int a, int b, int expected) => Pzl.Everybody.Puzzles.Ece2024.Ece202413.Ece202413.GetCost(a, b).Should().Be(expected);
+    public void Cost(int a, int b, int expected) => Ece202413.GetCost(a, b).Should().Be(expected);
 
     [Fact]
     public void Part3()
@@ -41,5 +43,5 @@ public class Ece202413Tests
         Sut.Part3(input).Should().Be(14);
     }
 
-    private static Pzl.Everybody.Puzzles.Ece2024.Ece202413.Ece202413 Sut => new();
+    private static Ece202413 Sut => new();
 }

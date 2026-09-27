@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ece2025;
+
 namespace Tests.Everybody.Ece2025;
 
 public class Ece202502Tests
@@ -11,7 +13,7 @@ public class Ece202502Tests
     [InlineData(35640, -64860)]
     [InlineData(36230, -64270)]
     [InlineData(36250, -64270)]
-    public void ShouldBeEngraved(long x, long y) => Pzl.Everybody.Puzzles.Ece2025.Ece202502.Ece202502.ShouldBeEngraved(x, y).Should().BeTrue();
+    public void ShouldBeEngraved(long x, long y) => Ece202502.ShouldBeEngraved(x, y).Should().BeTrue();
     
     [Theory]
     [InlineData(35460, -64910)]
@@ -19,7 +21,7 @@ public class Ece202502Tests
     [InlineData(35480, -64910)]
     [InlineData(35680, -64850)]
     [InlineData(35630, -64830)]
-    public void ShouldNotBeEngraved(long x, long y) => Pzl.Everybody.Puzzles.Ece2025.Ece202502.Ece202502.ShouldBeEngraved(x, y).Should().BeFalse();
+    public void ShouldNotBeEngraved(long x, long y) => Ece202502.ShouldBeEngraved(x, y).Should().BeFalse();
     
     [Fact]
     public void Part2() => Sut.Part2("A=[35300,-64910]").Should().Be(4076);
@@ -27,5 +29,5 @@ public class Ece202502Tests
     [Fact]
     public void Part3() => Sut.Part3("A=[35300,-64910]").Should().Be(406954);
 
-    private static Pzl.Everybody.Puzzles.Ece2025.Ece202502.Ece202502 Sut => new();
+    private static Ece202502 Sut => new();
 }

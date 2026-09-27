@@ -1,3 +1,4 @@
+using Pzl.Everybody.Puzzles.Ece2025;
 using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Everybody.Ece2025;
@@ -137,5 +138,5 @@ public class Ece202520Tests
         Sut.Part3(input).Should().Be(23);
     }
 
-    private static Pzl.Everybody.Puzzles.Ece2025.Ece202520.Ece202520 Sut => new();
+    private static Ece202520 Sut => new();
 }

@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ece2024;
+
 namespace Tests.Everybody.Ece2024;
 
 public class Ece202416Tests
@@ -107,7 +109,7 @@ public class Ece202416Tests
     [InlineData("-_->.>>.<", 1)]
     [InlineData("^_^^_^>.<", 2)]
     [InlineData("^_^^_^^_^", 5)]
-    public void Scoring(string input, int expected) => Pzl.Everybody.Puzzles.Ece2024.Ece202416.Ece202416.Score(input).Should().Be(expected);
+    public void Scoring(string input, int expected) => Ece202416.Score(input).Should().Be(expected);
 
-    private static Pzl.Everybody.Puzzles.Ece2024.Ece202416.Ece202416 Sut => new();
+    private static Ece202416 Sut => new();
 }

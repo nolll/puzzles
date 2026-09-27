@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ecs02;
+
 namespace Tests.Everybody.Ecs02;
 
 public class Ecs0202Tests
@@ -15,8 +17,8 @@ public class Ecs0202Tests
     {
         const string input = "GGBR";
 
-        Pzl.Everybody.Puzzles.Ecs02.Ecs0202.Ecs0202.Part2And3(input, 5).Should().Be(14);
+        Ecs0202.Part2And3(input, 5).Should().Be(14);
     }
 
-    private static Pzl.Everybody.Puzzles.Ecs02.Ecs0202.Ecs0202 Sut => new();
+    private static Ecs0202 Sut => new();
 }

@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ecs01;
+
 namespace Tests.Everybody.Ecs01;
 
 public class Ecs0102Tests
@@ -75,5 +77,5 @@ public class Ecs0102Tests
         Sut.Part3(input).Should().Be("DJCGL");
     }
 
-    private static Pzl.Everybody.Puzzles.Ecs01.Ecs0102.Ecs0102 Sut => new();
+    private static Ecs0102 Sut => new();
 }

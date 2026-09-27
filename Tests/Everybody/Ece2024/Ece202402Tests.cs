@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ece2024;
+
 namespace Tests.Everybody.Ece2024;
 
 public class Ece202402Tests
@@ -47,7 +49,7 @@ public class Ece202402Tests
         count.Should().Be(10);
     }
     
-    private static Pzl.Everybody.Puzzles.Ece2024.Ece202402.Ece202402 Sut => new();
+    private static Ece202402 Sut => new();
 }
 
     

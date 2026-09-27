@@ -1,3 +1,5 @@
+using Pzl.Everybody.Puzzles.Ece2025;
+
 namespace Tests.Everybody.Ece2025;
 
 public class Ece202516Tests
@@ -42,5 +44,5 @@ public class Ece202516Tests
         Sut.SolvePart3(input, availableBlocks).Should().Be(expected);
     }
 
-    private static Pzl.Everybody.Puzzles.Ece2025.Ece202516.Ece202516 Sut => new();
+    private static Ece202516 Sut => new();
 }

@@ -1,0 +1,10 @@
+#!/bin/bash
+# Shortcut script for running puzzles
+# Usage: ./run [options]
+#   ./run --tags euler,65
+#   ./run --tags aoc,2022
+#   ./run --search "puzzle name"
+#   ./run --help
+
+cd "$(dirname "$0")" || exit 1
+dotnet run --project Client/Client.csproj -- "$@"

@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2015;
+
 namespace Tests.Aoc.Aoc2015;
 
 public class Aoc201516Tests
@@ -11,5 +13,5 @@ public class Aoc201516Tests
     [Fact]
     public void SelectsCorrectAuntSue() => Sut.Part1(Input).Should().Be(2);
 
-    private static Pzl.Aoc.Puzzles.Aoc2015.Aoc201516.Aoc201516 Sut => new();
+    private static Aoc201516 Sut => new();
 }

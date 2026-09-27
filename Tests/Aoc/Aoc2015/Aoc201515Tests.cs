@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201515;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -12,7 +12,7 @@ public class Aoc201515Tests
     [Fact]
     public void FindsHighestCookieScore()
     {
-        var baker = new CookieBakery(Input);
+        var baker = new Aoc201515.CookieBakery(Input);
         var score = baker.HighestScore;
 
         score.Should().Be(62842880);
@@ -21,7 +21,7 @@ public class Aoc201515Tests
     [Fact]
     public void FindsHighestCookieScoreWith500Calories()
     {
-        var baker = new CookieBakery(Input);
+        var baker = new Aoc201515.CookieBakery(Input);
         var score = baker.HighestScoreWith500Calories;
 
         score.Should().Be(57600000);

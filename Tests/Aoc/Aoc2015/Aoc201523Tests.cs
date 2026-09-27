@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201523;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -14,7 +14,7 @@ public class Aoc201523Tests
                              inc a
                              """;
 
-        var computer = new ChristmasComputer();
+        var computer = new Aoc201523.ChristmasComputer();
         computer.Run(input.Trim());
 
         computer.RegisterA.Should().Be(2);

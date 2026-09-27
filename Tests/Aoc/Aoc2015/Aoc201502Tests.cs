@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2015;
+
 namespace Tests.Aoc.Aoc2015;
 
 public class Aoc201502Tests
@@ -25,5 +27,5 @@ public class Aoc201502Tests
     [Fact]
     public void CorrectRibbonLengthForMultipleGifts() => Sut.Part2(MultipleInput).Should().Be(48);
 
-    private static Pzl.Aoc.Puzzles.Aoc2015.Aoc201502.Aoc201502 Sut => new();
+    private static Aoc201502 Sut => new();
 }

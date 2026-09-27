@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201520;
+using Pzl.Aoc.Puzzles.Aoc2015;
 using Pzl.Tools.Maths;
 
 namespace Tests.Aoc.Aoc2015;
@@ -10,7 +10,7 @@ public class Aoc201520Tests
     {
         const int input = 150;
 
-        var presentDelivery = new PresentDelivery();
+        var presentDelivery = new Aoc201520.PresentDelivery();
         var house = presentDelivery.Deliver1(input, false);
 
         house.Should().Be(8);
@@ -19,7 +19,7 @@ public class Aoc201520Tests
     [Fact]
     public void FindIntFactors8()
     {
-        var delivery = new PresentDelivery();
+        var delivery = new Aoc201520.PresentDelivery();
         var result = delivery.FindIntFactors(8).OrderBy(o => o).ToList();
 
         result.Count.Should().Be(4);
@@ -32,7 +32,7 @@ public class Aoc201520Tests
     [Fact]
     public void FindIntFactors81()
     {
-        var delivery = new PresentDelivery();
+        var delivery = new Aoc201520.PresentDelivery();
         var result = delivery.FindIntFactors(81).OrderBy(o => o).ToList();
 
         result.Count.Should().Be(5);
@@ -46,7 +46,7 @@ public class Aoc201520Tests
     [Fact]
     public void FindIntFactors2354()
     {
-        var delivery = new PresentDelivery();
+        var delivery = new Aoc201520.PresentDelivery();
         var result = delivery.FindIntFactors(2354).OrderBy(o => o).ToList();
 
         result.Count.Should().Be(8);
@@ -63,7 +63,7 @@ public class Aoc201520Tests
     [Fact]
     public void IntFactorFuncIsCorrect()
     {
-        var delivery = new PresentDelivery();
+        var delivery = new Aoc201520.PresentDelivery();
         var myResult = delivery.FindIntFactors(786_240).OrderBy(o => o).ToList();
         var internetResult = MathTools.GetFactors(786_240);
         myResult.Count.Should().Be(internetResult.Count);

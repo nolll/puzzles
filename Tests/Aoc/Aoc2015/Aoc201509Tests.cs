@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201509;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -13,7 +13,7 @@ public class Aoc201509Tests
                              Dublin to Belfast = 141
                              """;
 
-        var calculator = new RouteCalculator(input.Trim());
+        var calculator = new Aoc201509.RouteCalculator(input.Trim());
 
         calculator.ShortestDistance.Should().Be(605);
         calculator.LongestDistance.Should().Be(982);

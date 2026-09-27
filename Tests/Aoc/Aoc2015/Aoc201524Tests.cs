@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201524;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -20,7 +20,7 @@ public class Aoc201524Tests
                              11
                              """;
 
-        var balancer = new PresentBalancer(input.Trim(), 3);
+        var balancer = new Aoc201524.PresentBalancer(input.Trim(), 3);
 
         balancer.QuantumEntanglementOfFirstGroup.Should().Be(99);
     }

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201525;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -10,7 +10,7 @@ public class Aoc201525Tests
         const int targetX = 3;
         const int targetY = 3;
 
-        var codeFinder = new WeatherMachineCodeFinder();
+        var codeFinder = new Aoc201525.WeatherMachineCodeFinder();
         var code = codeFinder.FindCodeAt(targetX, targetY);
 
         code.Should().Be(1601130);
@@ -22,7 +22,7 @@ public class Aoc201525Tests
         const int targetX = 6;
         const int targetY = 4;
 
-        var codeFinder = new WeatherMachineCodeFinder();
+        var codeFinder = new Aoc201525.WeatherMachineCodeFinder();
         var code = codeFinder.FindCodeAt(targetX, targetY);
 
         code.Should().Be(31527494);

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201517;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -15,7 +15,7 @@ public class Aoc201517Tests
                              5
                              """;
 
-        var containers = new EggnogContainers(input.Trim());
+        var containers = new Aoc201517.EggnogContainers(input.Trim());
         var combinations = containers.GetCombinations(25);
 
         combinations.Count.Should().Be(4);

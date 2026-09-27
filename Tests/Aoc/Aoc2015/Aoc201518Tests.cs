@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201518;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -16,7 +16,7 @@ public class Aoc201518Tests
     [Fact]
     public void LightCountAfterOneStep()
     {
-        var gif = new AnimatedGif(Input);
+        var gif = new Aoc201518.AnimatedGif(Input);
         gif.RunAnimation(1);
 
         gif.LightCount.Should().Be(11);
@@ -25,7 +25,7 @@ public class Aoc201518Tests
     [Fact]
     public void LightCountAfterTwoSteps()
     {
-        var gif = new AnimatedGif(Input);
+        var gif = new Aoc201518.AnimatedGif(Input);
         gif.RunAnimation(2);
 
         gif.LightCount.Should().Be(8);
@@ -34,7 +34,7 @@ public class Aoc201518Tests
     [Fact]
     public void LightCountAfterThreeSteps()
     {
-        var gif = new AnimatedGif(Input);
+        var gif = new Aoc201518.AnimatedGif(Input);
         gif.RunAnimation(3);
 
         gif.LightCount.Should().Be(4);
@@ -43,7 +43,7 @@ public class Aoc201518Tests
     [Fact]
     public void LightCountAfterFourSteps()
     {
-        var gif = new AnimatedGif(Input);
+        var gif = new Aoc201518.AnimatedGif(Input);
         gif.RunAnimation(4);
 
         gif.LightCount.Should().Be(4);
@@ -52,7 +52,7 @@ public class Aoc201518Tests
     [Fact]
     public void LightCountAfterOneStepWithLitCorners()
     {
-        var gif = new AnimatedGif(Input, true);
+        var gif = new Aoc201518.AnimatedGif(Input, true);
         gif.RunAnimation(1);
 
         gif.LightCount.Should().Be(18);
@@ -61,7 +61,7 @@ public class Aoc201518Tests
     [Fact]
     public void LightCountAfterTwoStepsWithLitCorners()
     {
-        var gif = new AnimatedGif(Input, true);
+        var gif = new Aoc201518.AnimatedGif(Input, true);
         gif.RunAnimation(2);
 
         gif.LightCount.Should().Be(18);
@@ -70,7 +70,7 @@ public class Aoc201518Tests
     [Fact]
     public void LightCountAfterThreeStepsWithLitCorners()
     {
-        var gif = new AnimatedGif(Input, true);
+        var gif = new Aoc201518.AnimatedGif(Input, true);
         gif.RunAnimation(3);
 
         gif.LightCount.Should().Be(18);
@@ -79,7 +79,7 @@ public class Aoc201518Tests
     [Fact]
     public void LightCountAfterFourStepsWithLitCorners()
     {
-        var gif = new AnimatedGif(Input, true);
+        var gif = new Aoc201518.AnimatedGif(Input, true);
         gif.RunAnimation(4);
 
         gif.LightCount.Should().Be(14);
@@ -88,7 +88,7 @@ public class Aoc201518Tests
     [Fact]
     public void LightCountAfterFiveStepsWithLitCorners()
     {
-        var gif = new AnimatedGif(Input, true);
+        var gif = new Aoc201518.AnimatedGif(Input, true);
         gif.RunAnimation(5);
 
         gif.LightCount.Should().Be(17);

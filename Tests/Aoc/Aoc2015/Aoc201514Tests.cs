@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201514;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -14,7 +14,7 @@ public class Aoc201514Tests
 
         const int time = 1000;
 
-        var race = new ReindeerRace(input.Trim(), time);
+        var race = new Aoc201514.ReindeerRace(input.Trim(), time);
 
         race.WinningDistance.Should().Be(1120);
     }
@@ -29,7 +29,7 @@ public class Aoc201514Tests
 
         const int time = 1000;
 
-        var race = new ReindeerRace(input.Trim(), time);
+        var race = new Aoc201514.ReindeerRace(input.Trim(), time);
 
         race.WinningScore.Should().Be(689);
     }

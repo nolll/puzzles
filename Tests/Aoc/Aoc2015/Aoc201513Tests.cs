@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201513;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -22,7 +22,7 @@ public class Aoc201513Tests
                              David would gain 41 happiness units by sitting next to Carol.
                              """;
 
-        var table = new DinnerTable(input);
+        var table = new Aoc201513.DinnerTable(input);
 
         table.HappinessChange.Should().Be(330);
     }

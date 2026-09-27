@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201507;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -18,7 +18,7 @@ public class Aoc201507Tests
                              NOT y -> i
                              """;
 
-        var circuit = new Circuit(input.Trim());
+        var circuit = new Aoc201507.Circuit(input.Trim());
         circuit.RunOne("i");
 
         circuit.Wires["d"].Signal.Should().Be(72);

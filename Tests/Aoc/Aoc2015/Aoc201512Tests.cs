@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201512;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -13,5 +13,6 @@ public class Aoc201512Tests
     [InlineData("[-1,{\"a\":1}]", 0)]
     [InlineData("[]", 0)]
     [InlineData("{}", 0)]
-    public void CalculatesTheSumOfAllNumbers(string input, int expected) => new JsonDoc(input, true).Sum.Should().Be(expected);
+    public void CalculatesTheSumOfAllNumbers(string input, int expected) => 
+        new Aoc201512.JsonDoc(input, true).Sum.Should().Be(expected);
 }

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201508;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -14,7 +14,7 @@ public class Aoc201508Tests
                              "\x27"
                              """;
 
-        var digitalList = new DigitalList(input.Trim());
+        var digitalList = new Aoc201508.DigitalList(input.Trim());
 
         digitalList.CodeMinusMemoryDiff.Should().Be(12);
     }
@@ -29,7 +29,7 @@ public class Aoc201508Tests
                              "\x27"
                              """;
 
-        var digitalList = new DigitalList(input.Trim());
+        var digitalList = new Aoc201508.DigitalList(input.Trim());
 
         digitalList.EncodedMinusCodeDiff.Should().Be(19);
     }

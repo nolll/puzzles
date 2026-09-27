@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2015;
+
 namespace Tests.Aoc.Aoc2015;
 
 public class Aoc201501Tests
@@ -19,5 +21,5 @@ public class Aoc201501Tests
     [InlineData("()())", 5)]
     public void Part2(string input, int expected) => Sut.Part2(input).Should().Be(expected);
     
-    private static Pzl.Aoc.Puzzles.Aoc2015.Aoc201501.Aoc201501 Sut => new();
+    private static Aoc201501 Sut => new();
 }

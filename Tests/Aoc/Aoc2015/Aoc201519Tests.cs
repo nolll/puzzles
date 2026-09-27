@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201519;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -14,7 +14,7 @@ public class Aoc201519Tests
                              O => HH
                              """;
 
-        var machine = new MedicineMachine(input.Trim());
+        var machine = new Aoc201519.MedicineMachine(input.Trim());
         var molecules = machine.GetCalibrationMolecules(startMolecule);
 
         molecules.Count.Should().Be(4);
@@ -33,7 +33,7 @@ public class Aoc201519Tests
                              O => HH
                              """;
 
-        var machine = new MedicineMachine(input.Trim());
+        var machine = new Aoc201519.MedicineMachine(input.Trim());
         var stepCount = machine.StepsToMake(molecule);
 
         stepCount.Should().Be(steps);

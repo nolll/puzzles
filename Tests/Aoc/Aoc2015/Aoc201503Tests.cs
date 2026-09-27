@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2015;
+
 namespace Tests.Aoc.Aoc2015;
 
 public class Aoc201503Tests
@@ -16,5 +18,5 @@ public class Aoc201503Tests
     public void DeliversToCorrectNumberOfHouses_SantaAndRobot(string input, int expected) => 
         Sut.Part2(input).Should().Be(expected);
 
-    private static Pzl.Aoc.Puzzles.Aoc2015.Aoc201503.Aoc201503 Sut => new();
+    private static Aoc201503 Sut => new();
 }

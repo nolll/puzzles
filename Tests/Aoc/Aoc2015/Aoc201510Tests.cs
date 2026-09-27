@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2015.Aoc201510;
+using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
@@ -12,7 +12,7 @@ public class Aoc201510Tests
     [InlineData("111221", "312211")]
     public void CorrectSequence(string input, string expected)
     {
-        var game = new LookAndSayGame(input, 1);
+        var game = new Aoc201510.LookAndSayGame(input, 1);
 
         game.Result.Should().Be(expected);
     }

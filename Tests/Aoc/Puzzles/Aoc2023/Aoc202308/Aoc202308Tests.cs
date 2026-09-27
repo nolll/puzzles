@@ -1,0 +1,57 @@
+namespace Tests.Aoc.Puzzles.Aoc2023.Aoc202308;
+
+public class Aoc202308Tests
+{
+    [Fact]
+    public void DesertPart1Example1()
+    {
+        const string input ="""
+                            RL
+                            
+                            AAA = (BBB, CCC)
+                            BBB = (DDD, EEE)
+                            CCC = (ZZZ, GGG)
+                            DDD = (DDD, DDD)
+                            EEE = (EEE, EEE)
+                            GGG = (GGG, GGG)
+                            ZZZ = (ZZZ, ZZZ)
+                            """;
+
+        Sut.Part1(input).Should().Be(2);
+    }
+
+    [Fact]
+    public void DesertPart1Example2()
+    {
+        const string input = """
+                             LLR
+                             
+                             AAA = (BBB, BBB)
+                             BBB = (AAA, ZZZ)
+                             ZZZ = (ZZZ, ZZZ)
+                             """;
+
+        Sut.Part1(input).Should().Be(6);
+    }
+    
+    [Fact]
+    public void DesertPart2()
+    {
+        const string input = """
+                             LR
+                             
+                             11A = (11B, XXX)
+                             11B = (XXX, 11Z)
+                             11Z = (11B, XXX)
+                             22A = (22B, XXX)
+                             22B = (22C, 22C)
+                             22C = (22Z, 22Z)
+                             22Z = (22B, 22B)
+                             XXX = (XXX, XXX)
+                             """;
+
+        Sut.Part2(input).Should().Be(6);
+    }
+    
+    private static Pzl.Aoc.Puzzles.Aoc2023.Aoc202308.Aoc202308 Sut => new();
+}

@@ -1,0 +1,13 @@
+namespace Tests.Euler.Puzzles.Euler009;
+
+public class Euler009Tests
+{
+    [Fact]
+    public void Test()
+    {
+        var puzzle = new Pzl.Euler.Puzzles.Euler009.Euler009();
+        var result = puzzle.Solve(12);
+
+        result.Should().Be(60);
+    }
+}

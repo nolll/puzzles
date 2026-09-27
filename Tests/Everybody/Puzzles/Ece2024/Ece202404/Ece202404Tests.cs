@@ -1,0 +1,33 @@
+namespace Tests.Everybody.Puzzles.Ece2024.Ece202404;
+
+public class Ece202404Tests
+{
+    [Fact]
+    public void Part1And2()
+    {
+        const string input = """
+                             3
+                             4
+                             7
+                             8
+                             """;
+
+        Sut.Part1(input).Should().Be(10);
+    }
+    
+    [Fact]
+    public void Part3()
+    {
+        const string input = """
+                             2
+                             4
+                             5
+                             6
+                             8
+                             """;
+
+        Sut.Part3(input).Should().Be(8);
+    }
+
+    private static Pzl.Everybody.Puzzles.Ece2024.Ece202404.Ece202404 Sut => new();
+}

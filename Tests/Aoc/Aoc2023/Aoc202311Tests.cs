@@ -1,0 +1,46 @@
+namespace Tests.Aoc.Aoc2023;
+
+public class Aoc202311Tests
+{
+    [Fact]
+    public void Distances1()
+    {
+        const string input = """
+                             ...#......
+                             .......#..
+                             #.........
+                             ..........
+                             ......#...
+                             .#........
+                             .........#
+                             ..........
+                             .......#..
+                             #...#.....
+                             """;
+
+        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202311.Aoc202311.Distances(input, 2);
+
+        result.Should().Be(374);
+    }
+
+    [Fact]
+    public void Distances2()
+    {
+        const string input = """
+                             ...#......
+                             .......#..
+                             #.........
+                             ..........
+                             ......#...
+                             .#........
+                             .........#
+                             ..........
+                             .......#..
+                             #...#.....
+                             """;
+
+        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202311.Aoc202311.Distances(input, 10);
+
+        result.Should().Be(1030);
+    }
+}

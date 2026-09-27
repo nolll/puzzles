@@ -1,9 +1,8 @@
-using AwesomeAssertions;
 using Pzl.Client.Filter;
 using Pzl.Client.Params;
 using Pzl.Common;
 
-namespace Tests.Client.Filter;
+namespace Tests.Client;
 
 public class PuzzleFilterTests
 {

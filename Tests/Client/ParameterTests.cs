@@ -1,7 +1,6 @@
-using AwesomeAssertions;
 using Pzl.Client.Params;
 
-namespace Tests.Client.Params;
+namespace Tests.Client;
 
 public class ParameterTests
 {

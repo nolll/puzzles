@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201804;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -7,7 +7,7 @@ public class Aoc201804Tests
     [Fact]
     public void StrategyOne()
     {
-        var puzzle = new GuardSleepPuzzle(Input);
+        var puzzle = new Aoc201804.GuardSleepPuzzle(Input);
         puzzle.StrategyOneGuardId.Should().Be(10);
         puzzle.StrategyOneMinute.Should().Be(24);
         puzzle.StrategyOneScore.Should().Be(240);
@@ -16,7 +16,7 @@ public class Aoc201804Tests
     [Fact]
     public void StrategyTwo()
     {
-        var puzzle = new GuardSleepPuzzle(Input);
+        var puzzle = new Aoc201804.GuardSleepPuzzle(Input);
         puzzle.StrategyTwoGuardId.Should().Be(99);
         puzzle.StrategyTwoMinute.Should().Be(45);
         puzzle.StrategyTwoScore.Should().Be(4455);

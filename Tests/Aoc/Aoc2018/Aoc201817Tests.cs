@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201817;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -18,7 +18,7 @@ public class Aoc201817Tests
                              y=13, x=498..504
                              """;
 
-        var filler = new ReservoirFiller(input.Trim());
+        var filler = new Aoc201817.ReservoirFiller(input.Trim());
         filler.Fill();
 
         filler.TotalWaterTileCount.Should().Be(57);

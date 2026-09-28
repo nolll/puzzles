@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201810;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -52,7 +52,7 @@ public class Aoc201810Tests
                                 #...#..###
                                 """;
 
-        var finder = new StarMessageFinder(input, 7);
+        var finder = new Aoc201810.StarMessageFinder(input, 7);
 
         finder.StarMessage.Trim().Should().Be(expected);
         finder.IterationCount.Should().Be(3);

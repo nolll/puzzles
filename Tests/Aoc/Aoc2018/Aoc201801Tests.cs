@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201801;
+using Pzl.Aoc.Puzzles.Aoc2018;
 using Pzl.Tools.Strings;
 
 namespace Tests.Aoc.Aoc2018;
@@ -9,7 +9,7 @@ public class Aoc201801Tests
     public void HandleOneNegativeChange()
     {
         const string changes = "-1";
-        var puzzle = new FrequencyPuzzle(changes);
+        var puzzle = new Aoc201801.FrequencyPuzzle(changes);
         puzzle.ResultingFrequency.Should().Be(-1);
     }
 
@@ -17,7 +17,7 @@ public class Aoc201801Tests
     public void HandleOnePositiveChange()
     {
         const string changes = "+1";
-        var puzzle = new FrequencyPuzzle(changes);
+        var puzzle = new Aoc201801.FrequencyPuzzle(changes);
         puzzle.ResultingFrequency.Should().Be(1);
     }
 
@@ -25,7 +25,7 @@ public class Aoc201801Tests
     public void HandleTwoChanges()
     {
         const string changes = "-1 +2";
-        var puzzle = new FrequencyPuzzle(SpacesToNewLines(changes));
+        var puzzle = new Aoc201801.FrequencyPuzzle(SpacesToNewLines(changes));
         puzzle.ResultingFrequency.Should().Be(1);
     }
 
@@ -35,7 +35,7 @@ public class Aoc201801Tests
     [InlineData("-1 -2 -3", -6)]
     public void HandleProvidedPart1Examples(string changes, int expected)
     {
-        var puzzle = new FrequencyPuzzle(SpacesToNewLines(changes));
+        var puzzle = new Aoc201801.FrequencyPuzzle(SpacesToNewLines(changes));
         puzzle.ResultingFrequency.Should().Be(expected);
     }
 
@@ -46,7 +46,7 @@ public class Aoc201801Tests
     [InlineData("+7 +7 -2 -7 -4", 14)]
     public void HandleProvidedPart2Examples(string changes, int expected)
     {
-        var puzzle = new FrequencyRepeatPuzzle(SpacesToNewLines(changes));
+        var puzzle = new Aoc201801.FrequencyRepeatPuzzle(SpacesToNewLines(changes));
         puzzle.FirstRepeatedFrequency.Should().Be(expected);
     }
 

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201812;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -26,7 +26,7 @@ public class Aoc201812Tests
                              ####. => #
                              """;
 
-        var spreader = new PlantSpreader(input);
+        var spreader = new Aoc201812.PlantSpreader(input);
 
         spreader.PlantScore20.Should().Be(325);
     }

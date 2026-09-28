@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201813;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -16,7 +16,7 @@ public class Aoc201813Tests
                                \------/   
                              """;
 
-        var detector = new CollisionDetector(input);
+        var detector = new Aoc201813.CollisionDetector(input);
         detector.RunCarts();
         var coords = detector.LocationOfFirstCollision;
 
@@ -37,7 +37,7 @@ public class Aoc201813Tests
                                \<->/
                              """;
 
-        var detector = new CollisionDetector(input);
+        var detector = new Aoc201813.CollisionDetector(input);
         detector.RunCarts();
         var coords = detector.LocationOfLastCart;
 

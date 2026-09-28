@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201820;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -12,7 +12,7 @@ public class Aoc201820Tests
     [InlineData("^WSSEESWWWNW(S|NENNEEEENN(ESSSSW(NWSW|SSEN)|WSWWN(E|WWS(E|SS))))$", 31)]
     public void FindRoomThatRequiresMostDoors(string regex, int doorCount)
     {
-        var navigator = new RegularMapNavigator(regex);
+        var navigator = new Aoc201820.RegularMapNavigator(regex);
 
         navigator.MostDoors.Should().Be(doorCount);
     }

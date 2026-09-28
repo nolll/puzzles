@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201809;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -12,7 +12,7 @@ public class Aoc201809Tests
     [InlineData(30, 5807, 37305)]
     public void WinnerScoreIsCorrect(int playerCount, int lastMarbleValue, int expectedScore)
     {
-        var game = new MarbleGame(playerCount, lastMarbleValue);
+        var game = new Aoc201809.MarbleGame(playerCount, lastMarbleValue);
 
         game.WinnerScore.Should().Be(expectedScore);
     }

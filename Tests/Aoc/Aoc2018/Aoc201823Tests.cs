@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201823;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -19,7 +19,7 @@ public class Aoc201823Tests
                              pos=<1,3,1>, r=1
                              """;
 
-        var formation = new NanobotFormation(input.Trim());
+        var formation = new Aoc201823.NanobotFormation(input.Trim());
         var botCount = formation.GetBotsInRangeOfStrongestBot().Count;
 
         botCount.Should().Be(7);
@@ -28,7 +28,7 @@ public class Aoc201823Tests
     [Fact]
     public void CubeDivision1X2X2()
     {
-        var cube = new SpaceBox(new Point3d(0, 0, 0), new Point3d(0, 1, 1));
+        var cube = new Aoc201823.SpaceBox(new Aoc201823.Point3d(0, 0, 0), new Aoc201823.Point3d(0, 1, 1));
         var subCubes = cube.Divide().ToList();
 
         subCubes.Count.Should().Be(4);
@@ -65,7 +65,7 @@ public class Aoc201823Tests
     [Fact]
     public void CubeDivision2X2X2()
     {
-        var cube = new SpaceBox(new Point3d(0, 0, 0), new Point3d(1, 1, 1));
+        var cube = new Aoc201823.SpaceBox(new Aoc201823.Point3d(0, 0, 0), new Aoc201823.Point3d(1, 1, 1));
         var subCubes = cube.Divide().ToList();
 
         subCubes.Count.Should().Be(8);
@@ -130,7 +130,7 @@ public class Aoc201823Tests
     [Fact]
     public void CubeDivision4X4X4()
     {
-        var cube = new SpaceBox(new Point3d(0, 0, 0), new Point3d(3, 3, 3));
+        var cube = new Aoc201823.SpaceBox(new Aoc201823.Point3d(0, 0, 0), new Aoc201823.Point3d(3, 3, 3));
         var subCubes = cube.Divide().ToList();
 
         subCubes.Count.Should().Be(8);
@@ -195,7 +195,7 @@ public class Aoc201823Tests
     [Fact]
     public void CubeDivision5X5X5()
     {
-        var cube = new SpaceBox(new Point3d(0, 0, 0), new Point3d(4, 4, 4));
+        var cube = new Aoc201823.SpaceBox(new Aoc201823.Point3d(0, 0, 0), new Aoc201823.Point3d(4, 4, 4));
         var subCubes = cube.Divide().ToList();
 
         subCubes.Count.Should().Be(8);
@@ -260,7 +260,7 @@ public class Aoc201823Tests
     [Fact]
     public void CubeDivision4X4X4Negative()
     {
-        var cube = new SpaceBox(new Point3d(-3, -3, -3), new Point3d(0, 0, 0));
+        var cube = new Aoc201823.SpaceBox(new Aoc201823.Point3d(-3, -3, -3), new Aoc201823.Point3d(0, 0, 0));
         var subCubes = cube.Divide().ToList();
 
         subCubes.Count.Should().Be(8);
@@ -334,7 +334,7 @@ public class Aoc201823Tests
                              pos=<10,10,10>, r=5
                              """;
 
-        var formation = new NanobotFormation(input.Trim());
+        var formation = new Aoc201823.NanobotFormation(input.Trim());
         var distance = formation.FindManhattanDistanceToBestCoords();
 
         distance.Should().Be(36);

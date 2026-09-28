@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201818;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -20,7 +20,7 @@ public class Aoc201818Tests
                              ...#.|..|.
                              """;
 
-        var collection = new LumberCollection(input);
+        var collection = new Aoc201818.LumberCollection(input);
         collection.Run(10);
         collection.ResourceValue.Should().Be(1147);
     }

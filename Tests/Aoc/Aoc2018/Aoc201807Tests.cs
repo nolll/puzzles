@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201807;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -17,7 +17,7 @@ public class Aoc201807Tests
                              Step F must be finished before step E can begin.
                              """;
 
-        var assembler = new SleighAssembler(input.Trim(), 1, 0);
+        var assembler = new Aoc201807.SleighAssembler(input.Trim(), 1, 0);
         var result = assembler.Assemble();
 
         result.Order.Should().Be("CABDFE");
@@ -36,7 +36,7 @@ public class Aoc201807Tests
                              Step F must be finished before step E can begin.
                              """;
 
-        var assembler = new SleighAssembler(input.Trim(), 2, 0);
+        var assembler = new Aoc201807.SleighAssembler(input.Trim(), 2, 0);
         var result = assembler.Assemble();
 
         result.Order.Should().Be("CABFDE");

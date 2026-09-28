@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201811;
+using Pzl.Aoc.Puzzles.Aoc2018;
 using Pzl.Common;
 
 namespace Tests.Aoc.Aoc2018;
@@ -11,7 +11,7 @@ public class Aoc201811Tests
     [InlineData(101, 153, 71, 4)]
     public void SinglePowerLevelIsCorrect(int x, int y, int serialNumber, int expected)
     {
-        var grid = new PowerGrid(300, serialNumber);
+        var grid = new Aoc201811.PowerGrid(300, serialNumber);
         var level = grid.GetSinglePowerLevel(x, y);
 
         level.Should().Be(expected);
@@ -22,7 +22,7 @@ public class Aoc201811Tests
     [InlineData(42, "232,251,12")]
     public void AnySizePowerLevelIsCorrect(int serialNumber, string expected)
     {
-        var grid = new PowerGrid(300, serialNumber);
+        var grid = new Aoc201811.PowerGrid(300, serialNumber);
         var (coords, size) = grid.GetMaxCoordsAnySize();
         var str = $"{coords.X},{coords.Y},{size}";
 

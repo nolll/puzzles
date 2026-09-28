@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201803;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -13,7 +13,7 @@ public class Aoc201803Tests
                               #3 @ 5,5: 1x1
                               """;
 
-        var puzzle = new ClaimsOverlapCountPuzzle(claims);
+        var puzzle = new Aoc201803.ClaimsOverlapCountPuzzle(claims);
         puzzle.OverlapCount.Should().Be(0);
     }
 
@@ -26,7 +26,7 @@ public class Aoc201803Tests
                               #3 @ 5,5: 2x2
                               """;
 
-        var puzzle = new ClaimsOverlapCountPuzzle(claims);
+        var puzzle = new Aoc201803.ClaimsOverlapCountPuzzle(claims);
         puzzle.OverlapCount.Should().Be(4);
     }
 
@@ -38,7 +38,7 @@ public class Aoc201803Tests
                               #2 @ 3,1: 4x4
                               #3 @ 5,5: 2x2
                               """;
-        var puzzle = new ClaimThatDoesNotOverlapPuzzle(claims);
+        var puzzle = new Aoc201803.ClaimThatDoesNotOverlapPuzzle(claims);
         puzzle.ClaimId.Should().Be(3);
     }
 }

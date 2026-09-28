@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201805;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -9,7 +9,7 @@ public class Aoc201805Tests
     {
         const string input = "dabAcCaCBAcCcaDA";
 
-        var puzzle = new PolymerPuzzle();
+        var puzzle = new Aoc201805.PolymerPuzzle();
         var reducedPolymer = puzzle.GetReducedPolymer(input);
         reducedPolymer.Should().Be("dabCBAcaDA");
     }
@@ -19,7 +19,7 @@ public class Aoc201805Tests
     {
         const string input = "dabAcCaCBAcCcaDA";
 
-        var puzzle = new PolymerPuzzle();
+        var puzzle = new Aoc201805.PolymerPuzzle();
         var improvedPolymer = puzzle.GetImprovedPolymer(input);
         improvedPolymer.Should().Be("daDA");
     }

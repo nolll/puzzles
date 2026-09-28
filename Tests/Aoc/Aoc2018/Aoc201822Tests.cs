@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201822;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -11,7 +11,7 @@ public class Aoc201822Tests
     [Fact]
     public void CaveRiskLevelIsCorrect()
     {
-        var caveSystem = new CaveSystem(Depth, TargetX, TargetY);
+        var caveSystem = new Aoc201822.CaveSystem(Depth, TargetX, TargetY);
 
         caveSystem.TotalRiskLevel.Should().Be(114);
     }
@@ -19,7 +19,7 @@ public class Aoc201822Tests
     [Fact]
     public void ShortestTimeToResque()
     {
-        var caveSystem = new CaveSystem(Depth, TargetX, TargetY);
+        var caveSystem = new Aoc201822.CaveSystem(Depth, TargetX, TargetY);
         var time = caveSystem.ResqueMan();
 
         time.Should().Be(45);

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201802;
+using Pzl.Aoc.Puzzles.Aoc2018;
 using Pzl.Tools.Strings;
 
 namespace Tests.Aoc.Aoc2018;
@@ -9,7 +9,7 @@ public class Aoc201802Tests
     public void NoSimilarIds()
     {
         var ids = new List<string> { "abcde", "fghij" };
-        var similarIds = SimilarIdsPuzzle.GetSimilarIds(ids);
+        var similarIds = Aoc201802.SimilarIdsPuzzle.GetSimilarIds(ids);
         similarIds.Count.Should().Be(0);
     }
 
@@ -17,7 +17,7 @@ public class Aoc201802Tests
     public void EqualIdsIds_ReturnsNoMatch()
     {
         var ids = new List<string> { "abcde", "abcde" };
-        var similarIds = SimilarIdsPuzzle.GetSimilarIds(ids);
+        var similarIds = Aoc201802.SimilarIdsPuzzle.GetSimilarIds(ids);
         similarIds.Count.Should().Be(0);
     }
 
@@ -25,7 +25,7 @@ public class Aoc201802Tests
     public void OneSimilarId()
     {
         var ids = new List<string> { "abcde", "abcdX" };
-        var similarIds = SimilarIdsPuzzle.GetSimilarIds(ids);
+        var similarIds = Aoc201802.SimilarIdsPuzzle.GetSimilarIds(ids);
         similarIds.Count.Should().Be(2);
     }
 
@@ -33,7 +33,7 @@ public class Aoc201802Tests
     public void TwoSimilarIds_ReturnsOnlyFirstMatch()
     {
         var ids = new List<string> { "abcde", "abcdX", "fghij", "fghiX" };
-        var similarIds = SimilarIdsPuzzle.GetSimilarIds(ids);
+        var similarIds = Aoc201802.SimilarIdsPuzzle.GetSimilarIds(ids);
         similarIds.Count.Should().Be(2);
     }
 
@@ -41,7 +41,7 @@ public class Aoc201802Tests
     public void HandleProvidedExample()
     {
         const string ids = "abcdef bababc abbcde abcccd aabcdd abcdee ababab";
-        var puzzle = new BoxChecksumPuzzle(SpacesToNewLines(ids));
+        var puzzle = new Aoc201802.BoxChecksumPuzzle(SpacesToNewLines(ids));
         puzzle.Checksum.Should().Be(12);
     }
 
@@ -49,7 +49,7 @@ public class Aoc201802Tests
     public void AllLettersCommon()
     {
         const string str = "abcde";
-        var commonLetters = SimilarIdsPuzzle.GetCommonLetters(str, str);
+        var commonLetters = Aoc201802.SimilarIdsPuzzle.GetCommonLetters(str, str);
         commonLetters.Should().Be("abcde");
     }
 
@@ -58,7 +58,7 @@ public class Aoc201802Tests
     {
         const string str1 = "abcde";
         const string str2 = "fghij";
-        var commonLetters = SimilarIdsPuzzle.GetCommonLetters(str1, str2);
+        var commonLetters = Aoc201802.SimilarIdsPuzzle.GetCommonLetters(str1, str2);
         commonLetters.Should().Be("");
     }
 
@@ -67,7 +67,7 @@ public class Aoc201802Tests
     {
         const string str1 = "abcde";
         const string str2 = "aXcYe";
-        var commonLetters = SimilarIdsPuzzle.GetCommonLetters(str1, str2);
+        var commonLetters = Aoc201802.SimilarIdsPuzzle.GetCommonLetters(str1, str2);
         commonLetters.Should().Be("ace");
     }
 

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201825;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -18,7 +18,7 @@ public class Aoc201825Tests
                              12,0,0,0
                              """;
 
-        var finder = new ConstellationFinder(input.Trim());
+        var finder = new Aoc201825.ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
         constellationCount.Should().Be(2);
@@ -40,7 +40,7 @@ public class Aoc201825Tests
                              3,0,0,0
                              """;
 
-        var finder = new ConstellationFinder(input.Trim());
+        var finder = new Aoc201825.ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
         constellationCount.Should().Be(4);
@@ -62,7 +62,7 @@ public class Aoc201825Tests
                              3,2,0,2
                              """;
 
-        var finder = new ConstellationFinder(input.Trim());
+        var finder = new Aoc201825.ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
         constellationCount.Should().Be(3);
@@ -84,7 +84,7 @@ public class Aoc201825Tests
                              -1,-2,0,-2
                              """;
 
-        var finder = new ConstellationFinder(input.Trim());
+        var finder = new Aoc201825.ConstellationFinder(input.Trim());
         var constellationCount = finder.Find();
 
         constellationCount.Should().Be(8);

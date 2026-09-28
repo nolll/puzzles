@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201806;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -16,7 +16,7 @@ public class Aoc201806Tests
                              8, 9
                              """;
 
-        var finder = new LargestAreaFinder(input);
+        var finder = new Aoc201806.LargestAreaFinder(input);
         var area = finder.GetSizeOfLargestArea();
 
         area.Should().Be(17);
@@ -34,7 +34,7 @@ public class Aoc201806Tests
                              8, 9
                              """;
 
-        var finder = new LargestAreaFinder(input);
+        var finder = new Aoc201806.LargestAreaFinder(input);
         var area = finder.GetSizeOfCentralArea(32);
 
         area.Should().Be(16);

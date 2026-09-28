@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2018.Aoc201814;
+using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -11,7 +11,7 @@ public class Aoc201814Tests
     [InlineData(2018, "5941429882")]
     public void FindRecipeScores1(int input, string expected)
     {
-        var generator = new RecipeGenerator();
+        var generator = new Aoc201814.RecipeGenerator();
         var scores = generator.ScoresAfter(input);
 
         scores.Should().Be(expected);
@@ -24,7 +24,7 @@ public class Aoc201814Tests
     [InlineData("59414", 2018)]
     public void FindRecipeScores2(string input, int expected)
     {
-        var generator = new RecipeGenerator();
+        var generator = new Aoc201814.RecipeGenerator();
         var count = generator.RecipeCountBefore(input);
 
         count.Should().Be(expected);

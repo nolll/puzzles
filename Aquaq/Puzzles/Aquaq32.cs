@@ -5,8 +5,10 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles;
 
 [Name("In Parenthesis")]
-public partial class Aquaq32 : AquaqPuzzle
+public class Aquaq32 : AquaqPuzzle
 {
+    private static readonly Regex ClutterRegex = new("[^\\(\\)\\[\\]\\{\\}]");
+    
     [Puzzle("8b52d401a6c9cf4350dc85e2cebcec81")]
     public int Solve(string input) => input.Split(LineBreaks.Single).Count(IsBalanced);
 
@@ -25,8 +27,5 @@ public partial class Aquaq32 : AquaqPuzzle
         return s;
     }
 
-    private static string RemoveClutter(string input) => ClutterRegex().Replace(input, "");
-    
-    [GeneratedRegex("[^\\(\\)\\[\\]\\{\\}]")]
-    private static partial Regex ClutterRegex();
+    private static string RemoveClutter(string input) => ClutterRegex.Replace(input, "");
 }

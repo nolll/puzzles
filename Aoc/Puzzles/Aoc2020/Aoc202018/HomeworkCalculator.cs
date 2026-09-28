@@ -9,23 +9,24 @@ public partial class HomeworkCalculator
     private const string Multiplication = "*";
     private const char GroupStart = '(';
     private const char GroupEnd = ')';
+    
+    private static readonly Regex GroupingRegex = new(@"\([0-9 \*\+]+\)");
 
     public long SumOfAll(string input, MathPrecedence precedence) => 
         input.Split(LineBreaks.Single).Sum(o => Sum(o, precedence));
 
     public long Sum(string input, MathPrecedence precedence) => new Group(input, precedence).Result;
 
-    private partial class Group
+    private class Group
     {
         public long Result { get; }
 
         public Group(string s, MathPrecedence precedence)
         {
             var calc = GetCalcFunc(precedence);
-            var regex = GroupingRegex();
             while (s.Contains('('))
             {
-                var matches = regex.Matches(s);
+                var matches = GroupingRegex.Matches(s);
                 foreach (Match match in matches)
                 {
                     var hit = match.ToString();
@@ -88,7 +89,5 @@ public partial class HomeworkCalculator
         private static Func<string, long> GetCalcFunc(MathPrecedence precedence) => precedence == MathPrecedence.Addition 
             ? CalcWithAdditionPrecedence 
             : CalcWithOrderPrecedence;
-        [GeneratedRegex(@"\([0-9 \*\+]+\)")]
-        private static partial Regex GroupingRegex();
     }
 }

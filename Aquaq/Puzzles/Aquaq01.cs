@@ -6,10 +6,12 @@ namespace Pzl.Aquaq.Puzzles;
 [Name("Rose by any other name")]
 public partial class Aquaq01 : AquaqPuzzle
 {
+    private static readonly Regex HexRegex = new("[^0123456789abcdef]");
+    
     [Puzzle("8ee5a43d96dd610ecf1d39eccfddf218")]
     public string Solve(string input)
     {
-        var s = HexRegex().Replace(input.ToLower(), "0");
+        var s = HexRegex.Replace(input.ToLower(), "0");
 
         var length = s.Length % 3 == 0 
             ? s.Length 
@@ -25,7 +27,4 @@ public partial class Aquaq01 : AquaqPuzzle
 
         return result;
     }
-
-    [GeneratedRegex("[^0123456789abcdef]")]
-    private static partial Regex HexRegex();
 }

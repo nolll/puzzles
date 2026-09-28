@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202313Tests
@@ -15,7 +17,7 @@ public class Aoc202313Tests
                              #.#.##.#.
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202313.Aoc202313.CountReflections(input);
+        var result = Aoc202313.CountReflections(input);
 
         result.Should().Be(5);
     }
@@ -33,7 +35,7 @@ public class Aoc202313Tests
                              #...##..#
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202313.Aoc202313.CountReflections(input);
+        var result = Aoc202313.CountReflections(input);
 
         result.Should().Be(600);
     }
@@ -51,7 +53,7 @@ public class Aoc202313Tests
                              #...##.##
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202313.Aoc202313.CountReflections(input);
+        var result = Aoc202313.CountReflections(input);
 
         result.Should().Be(8);
     }
@@ -69,7 +71,7 @@ public class Aoc202313Tests
                              #.#.##.#.
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202313.Aoc202313.CountSmudgedReflections(input);
+        var result = Aoc202313.CountSmudgedReflections(input);
 
         result.Should().Be(300);
     }
@@ -87,7 +89,7 @@ public class Aoc202313Tests
                              #....#..#
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202313.Aoc202313.CountSmudgedReflections(input);
+        var result = Aoc202313.CountSmudgedReflections(input);
 
         result.Should().Be(100);
     }
@@ -113,7 +115,7 @@ public class Aoc202313Tests
                              #....#..#
                              """;
 
-        var result = new Pzl.Aoc.Puzzles.Aoc2023.Aoc202313.Aoc202313().Part1(input);
+        var result = new Aoc202313().Part1(input);
 
         result.Should().Be(405);
     }
@@ -139,7 +141,7 @@ public class Aoc202313Tests
                              #....#..#
                              """;
 
-        var result = new Pzl.Aoc.Puzzles.Aoc2023.Aoc202313.Aoc202313().Part2(input);
+        var result = new Aoc202313().Part2(input);
 
         result.Should().Be(400);
     }

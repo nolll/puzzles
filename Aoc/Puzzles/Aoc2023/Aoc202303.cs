@@ -1,0 +1,160 @@
+using Pzl.Common;
+using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Strings;
+
+namespace Pzl.Aoc.Puzzles.Aoc2023;
+
+[Name("Gear Ratios")]
+public class Aoc202303 : AocPuzzle
+{
+    [Puzzle("9f5f9a7fa049bd552fc05c71b10aab1c")]
+    public int Part1(string input) => Solve(input).EngineParts;
+
+    [Puzzle("0ec5347a4e1a8f41769180000882ae7d")]
+    public int Part2(string input) => Solve(input).GearRatios;
+
+    public static Result Solve(string input)
+    {
+        var lines = input.Split(LineBreaks.Single);
+        var width = lines.First().Length;
+        var height = lines.Length;
+        var numberCoordList = FindNumberCoords(lines);
+        var symbolGrid = BuildSymbolGrid(lines, width, height);
+        var numberGrid = BuildNumberGrid(numberCoordList, width, height);
+        var engineParts = FindEngineParts(numberCoordList, symbolGrid);
+        var gearRatios = FindGearRatios(numberGrid, symbolGrid);
+
+        return new Result(engineParts.Sum(), gearRatios.Sum());
+    }
+
+    private static List<NumberCoord> FindNumberCoords(IEnumerable<string> lines)
+    {
+        var numberCoordList = new List<NumberCoord>();
+
+        var row = 0;
+        foreach (var line in lines)
+        {
+            var items = RemoveSymbols(line).Split('.');
+
+            var index = 0;
+            foreach (var item in items)
+            {
+                var numberLength = item.Length;
+
+                if (int.TryParse(item, out var number))
+                {
+                    var coords = new List<Coord>();
+                    for (var i = 0; i < numberLength; i++)
+                    {
+                        var x = index + i;
+                        coords.Add(new Coord(x, row));
+                    }
+
+                    numberCoordList.Add(new NumberCoord(number, coords));
+                    index += numberLength;
+                }
+                index++;
+            }
+
+            row++;
+        }
+
+        return numberCoordList;
+    }
+
+    private static string RemoveSymbols(string line)
+    {
+        var cleanedLine = line.ToCharArray();
+        for (var i = 0; i < cleanedLine.Length; i++)
+        {
+            var c = cleanedLine[i];
+            if (!char.IsDigit(c))
+                cleanedLine[i] = '.';
+        }
+
+        return string.Join("", cleanedLine);
+    }
+
+    private static Grid<char> BuildSymbolGrid(IEnumerable<string> lines, int width, int height)
+    {
+        var symbolGrid = new Grid<char>(width, height);
+        var row = 0;
+        foreach (var line in lines)
+        {
+            var chars = line.ToCharArray();
+            for (var i = 0; i < chars.Length; i++)
+            {
+                var c = chars[i];
+                var isDigit = char.IsDigit(c);
+                var isSymbol = !isDigit && c != '.';
+                var symbol = isSymbol ? c : '.';
+                symbolGrid.WriteValueAt(i, row, symbol);
+            }
+
+            row++;
+        }
+
+        return symbolGrid;
+    }
+
+    private static Grid<int> BuildNumberGrid(List<NumberCoord> numberCoordList, int width, int height)
+    {
+        var numberGrid = new Grid<int>(width, height);
+
+        foreach (var numberCoord in numberCoordList)
+        {
+            foreach (var coord in numberCoord.Coords)
+            {
+                numberGrid.WriteValueAt(coord, numberCoord.Number);
+            }
+        }
+
+        return numberGrid;
+    }
+
+    private static List<int> FindEngineParts(List<NumberCoord> numberCoordList, Grid<char> symbolGrid)
+    {
+        var engineParts = new List<int>();
+        foreach (var numberCoord in numberCoordList)
+        {
+            var hasAdjacentSymbol = false;
+            foreach (var coord in numberCoord.Coords)
+            {
+                var adjacent = symbolGrid.AllAdjacentValuesTo(coord);
+                if (adjacent.Any(o => o != '.'))
+                    hasAdjacentSymbol = true;
+            }
+
+            if (hasAdjacentSymbol)
+                engineParts.Add(numberCoord.Number);
+        }
+
+        return engineParts;
+    }
+
+    private static List<int> FindGearRatios(Grid<int> numberGrid, Grid<char> symbolGrid)
+    {
+        var symbolCoords = symbolGrid.Coords;
+        var gearRatios = new List<int>();
+        foreach (var symbolCoord in symbolCoords)
+        {
+            if (symbolGrid.ReadValueAt(symbolCoord) != '*')
+                continue;
+
+            var adjacentValues = numberGrid.AllAdjacentValuesTo(symbolCoord)
+                .Where(o => o > 0)
+                .Distinct()
+                .ToList();
+
+            if (adjacentValues.Count == 2)
+            {
+                gearRatios.Add(adjacentValues.First() * adjacentValues.Last());
+            }
+        }
+
+        return gearRatios;
+    }
+
+    private record NumberCoord(int Number, List<Coord> Coords);
+    public record Result(int EngineParts, int GearRatios);
+}

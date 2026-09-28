@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202204;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202204Tests
     [Fact]
     public void Part1()
     {
-        var cleaning = new Cleaning();
+        var cleaning = new Aoc202204.Cleaning();
         var result = cleaning.Part1(Input);
 
         result.Should().Be(2);
@@ -16,7 +16,7 @@ public class Aoc202204Tests
     [Fact]
     public void Part2()
     {
-        var cleaning = new Cleaning();
+        var cleaning = new Aoc202204.Cleaning();
         var result = cleaning.Part2(Input);
 
         result.Should().Be(4);

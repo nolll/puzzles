@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2022;
+
 namespace Tests.Aoc.Aoc2022;
 
 public class Aoc202206Tests
@@ -17,5 +19,5 @@ public class Aoc202206Tests
     [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26)]
     public void Part2(string input, int expected) => Sut.Part2(input).Should().Be(expected);
 
-    private static Pzl.Aoc.Puzzles.Aoc2022.Aoc202206.Aoc202206 Sut => new();
+    private static Aoc202206 Sut => new();
 }

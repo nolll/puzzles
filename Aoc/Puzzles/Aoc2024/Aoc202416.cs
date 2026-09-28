@@ -1,0 +1,98 @@
+using Pzl.Common;
+using Pzl.Tools.Graphs;
+using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Numbers;
+
+namespace Pzl.Aoc.Puzzles.Aoc2024;
+
+[Name("Reindeer Maze")]
+public class Aoc202416 : AocPuzzle
+{
+    private const char EmptySpace = '.';
+
+    [Puzzle("7f6e0e55c1b9ba30973eeb8218555c3a")]
+    public int Part1(string input)
+    {
+        var grid = GridBuilder.BuildCharGrid(input);
+        var start = grid.FindAddresses('S').First();
+        var end = grid.FindAddresses('E').First();
+        grid.WriteValueAt(start, EmptySpace);
+        grid.WriteValueAt(end, EmptySpace);
+        grid.MoveTo(start);
+        grid.TurnTo(GridDirection.Right);
+
+        var inputs = BuildGraph(grid);
+        
+        var startKey = $"{GridDirection.Right}|{start.Id}";
+        List<string> endKeys = [$"{GridDirection.Right}|{end.Id}", $"{GridDirection.Up}|{end.Id}"];
+
+        return Dijkstra.BestCost(inputs, startKey, endKeys);
+    }
+
+    [Puzzle("6f785a700e3bd5c59db14bf9f8eb6d46")]
+    public int Part2(string input)
+    {
+        var grid = GridBuilder.BuildCharGrid(input, '.');
+        var start = grid.FindAddresses('S').First();
+        var end = grid.FindAddresses('E').First();
+        grid.WriteValueAt(start, EmptySpace);
+        grid.WriteValueAt(end, EmptySpace);
+        grid.MoveTo(start);
+        grid.TurnTo(GridDirection.Right);
+
+        return FindVisitedCoords(grid, start, end).Count;
+    }
+
+    private HashSet<Coord> FindVisitedCoords(Grid<char> grid, Coord start, Coord end)
+    {
+        var startKey = $"{GridDirection.Right}|{start.Id}";
+        List<string> endKeys = [$"{GridDirection.Right}|{end.Id}", $"{GridDirection.Up}|{end.Id}"];
+        var inputs = BuildGraph(grid);
+        var (_, paths) = Dijkstra.BestPaths(inputs, startKey, endKeys);
+        
+        var usedCoords = paths
+            .SelectMany(o => o)
+            .Select(Numbers.IntsFromString)
+            .Select(o => new Coord(o[0], o[1]))
+            .ToHashSet();
+
+        return usedCoords;
+    }
+
+    private static List<GraphEdge> BuildGraph(Grid<char> grid)
+    {
+        var edges = new List<GraphEdge>();
+
+        var spaceCoords = grid.FindAddresses(EmptySpace);
+        foreach (var coord in spaceCoords)
+        {
+            foreach (var dir in GridDirection.All)
+            {
+                grid.MoveTo(coord);
+                grid.TurnTo(dir);
+
+                grid.MoveForward();
+                if (grid.ReadValue() == EmptySpace)
+                {
+                    var fromKey = $"{dir.Name}|{coord.Id}";
+                    var toKey = $"{grid.Direction.Name}|{grid.Coord.Id}";
+                    edges.Add(new GraphEdge(fromKey, toKey));
+                }
+                grid.MoveBackward();
+                
+                for (var i = 1; i <= 3; i++)
+                {
+                    grid.TurnRight();
+                    if(i % 2 == 0)
+                        continue;
+                    
+                    var fromKey = $"{dir.Name}|{coord.Id}";
+                    var toKey = $"{grid.Direction.Name}|{grid.Coord.Id}";
+                    edges.Add(new GraphEdge(fromKey, toKey, 1000));
+                }
+            }
+        }
+
+        return edges;
+    }
+}

@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202311Tests
@@ -18,7 +20,7 @@ public class Aoc202311Tests
                              #...#.....
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202311.Aoc202311.Distances(input, 2);
+        var result = Aoc202311.Distances(input, 2);
 
         result.Should().Be(374);
     }
@@ -39,7 +41,7 @@ public class Aoc202311Tests
                              #...#.....
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202311.Aoc202311.Distances(input, 10);
+        var result = Aoc202311.Distances(input, 10);
 
         result.Should().Be(1030);
     }

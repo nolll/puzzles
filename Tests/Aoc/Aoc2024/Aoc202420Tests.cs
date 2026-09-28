@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2024;
+
 namespace Tests.Aoc.Aoc2024;
 
 public class Aoc202420Tests
@@ -21,15 +23,15 @@ public class Aoc202420Tests
                                  """;
 
     [Fact]
-    public void Part1_1() => Pzl.Aoc.Puzzles.Aoc2024.Aoc202420.Aoc202420.CountCheatsBetterThan(Input, 2, 35).Should().Be(4);
+    public void Part1_1() => Aoc202420.CountCheatsBetterThan(Input, 2, 35).Should().Be(4);
 
     [Fact]
-    public void Part2_1() => Pzl.Aoc.Puzzles.Aoc2024.Aoc202420.Aoc202420.CountCheatsBetterThan(Input, 20, 50).Should().Be(285);
+    public void Part2_1() => Aoc202420.CountCheatsBetterThan(Input, 20, 50).Should().Be(285);
 
     [Fact]
     public void Part1_2()
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2024.Aoc202420.Aoc202420.GetCheats(Input, 2);
+        var result = Aoc202420.GetCheats(Input, 2);
         
         var bucket2 = result.Where(o => o.Value == 2).ToList();
         var bucket4 = result.Where(o => o.Value == 4).ToList();
@@ -59,7 +61,7 @@ public class Aoc202420Tests
     [Fact]
     public void Part2_2()
     {
-        var rSavings = Pzl.Aoc.Puzzles.Aoc2024.Aoc202420.Aoc202420.GetCheats(Input, 20);
+        var rSavings = Aoc202420.GetCheats(Input, 20);
         
         var bucket50 = rSavings.Where(o => o.Value == 50).ToList();
         var bucket52 = rSavings.Where(o => o.Value == 52).ToList();
@@ -92,5 +94,5 @@ public class Aoc202420Tests
         bucket76.Count.Should().Be(3);
     }
 
-    private static Pzl.Aoc.Puzzles.Aoc2024.Aoc202420.Aoc202420 Sut => new();
+    private static Aoc202420 Sut => new();
 }

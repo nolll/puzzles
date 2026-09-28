@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2025;
+
 namespace Tests.Aoc.Aoc2025;
 
 public class Aoc202507Tests
@@ -27,5 +29,5 @@ public class Aoc202507Tests
     [Fact]
     public void Part2() => Sut.Part2(Input).Should().Be(40);
 
-    private static Pzl.Aoc.Puzzles.Aoc2025.Aoc202507.Aoc202507 Sut => new();
+    private static Aoc202507 Sut => new();
 }

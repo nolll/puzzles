@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202302Tests
@@ -13,7 +15,7 @@ public class Aoc202302Tests
     [Fact]
     public void ValidGames()
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202302.Aoc202302.PlayGames(Input);
+        var result = Aoc202302.PlayGames(Input);
 
         result.ValidGames.Should().Be(8);
     }
@@ -21,7 +23,7 @@ public class Aoc202302Tests
     [Fact]
     public void GamePower()
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202302.Aoc202302.PlayGames(Input);
+        var result = Aoc202302.PlayGames(Input);
 
         result.GamePower.Should().Be(2286);
     }

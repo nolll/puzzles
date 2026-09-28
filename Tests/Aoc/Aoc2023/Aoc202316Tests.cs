@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202316Tests
@@ -18,7 +20,7 @@ public class Aoc202316Tests
                              ..//.|....
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202316.Aoc202316.EnergizedCount(input);
+        var result = Aoc202316.EnergizedCount(input);
 
         result.Should().Be(46);
     }
@@ -39,7 +41,7 @@ public class Aoc202316Tests
                              ..//.|....
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202316.Aoc202316.MostEnergy(input);
+        var result = Aoc202316.MostEnergy(input);
 
         result.Should().Be(51);
     }

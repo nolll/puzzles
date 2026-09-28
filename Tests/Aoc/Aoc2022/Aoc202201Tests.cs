@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2022;
+
 namespace Tests.Aoc.Aoc2022;
 
 public class Aoc202201Tests
@@ -25,5 +27,5 @@ public class Aoc202201Tests
                                  10000
                                  """;
 
-    private Pzl.Aoc.Puzzles.Aoc2022.Aoc202201.Aoc202201 Sut { get; } = new();
+    private Aoc202201 Sut { get; } = new();
 }

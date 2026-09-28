@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202217;
+using Pzl.Aoc.Puzzles.Aoc2022;
 using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Aoc.Aoc2022;
@@ -10,7 +10,7 @@ public class Aoc202217SquareTests
     {
         var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 2);
-        var shape = new SquareShape();
+        var shape = new Aoc202217.SquareShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveRight(grid, bottomLeft);
@@ -23,7 +23,7 @@ public class Aoc202217SquareTests
     {
         var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(2, 2);
-        var shape = new SquareShape();
+        var shape = new Aoc202217.SquareShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveRight(grid, bottomLeft);
@@ -36,7 +36,7 @@ public class Aoc202217SquareTests
     {
         var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 2);
-        var shape = new SquareShape();
+        var shape = new Aoc202217.SquareShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveLeft(grid, bottomLeft);
@@ -49,7 +49,7 @@ public class Aoc202217SquareTests
     {
         var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(0, 2);
-        var shape = new SquareShape();
+        var shape = new Aoc202217.SquareShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveLeft(grid, bottomLeft);
@@ -62,7 +62,7 @@ public class Aoc202217SquareTests
     {
         var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 2);
-        var shape = new SquareShape();
+        var shape = new Aoc202217.SquareShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveDown(grid, bottomLeft);
@@ -75,7 +75,7 @@ public class Aoc202217SquareTests
     {
         var grid = new Grid<char>(4, 4, '.');
         var bottomLeft = new Coord(1, 3);
-        var shape = new SquareShape();
+        var shape = new Aoc202217.SquareShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveDown(grid, bottomLeft);

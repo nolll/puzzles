@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202205;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202205Tests
     [Fact]
     public void Part1()
     {
-        var crane = new CargoCrane(Input);
+        var crane = new Aoc202205.CargoCrane(Input);
         crane.Run1();
         var result = crane.Message;
 
@@ -17,7 +17,7 @@ public class Aoc202205Tests
     [Fact]
     public void Part2()
     {
-        var crane = new CargoCrane(Input);
+        var crane = new Aoc202205.CargoCrane(Input);
         crane.Run2();
         var result = crane.Message;
 

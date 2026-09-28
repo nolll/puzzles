@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202314Tests
@@ -18,7 +20,7 @@ public class Aoc202314Tests
                              #OO..#....
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202314.Aoc202314.RollNorth(input);
+        var result = Aoc202314.RollNorth(input);
 
         result.Should().Be(136);
     }
@@ -52,7 +54,7 @@ public class Aoc202314Tests
                                 #..OO#....
                                 """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202314.Aoc202314.RunCycle(input, 1);
+        var result = Aoc202314.RunCycle(input, 1);
 
         result.Print().Should().Be(expected);
     }
@@ -73,7 +75,7 @@ public class Aoc202314Tests
                              #OO..#....
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202314.Aoc202314.RunManyCycles(input);
+        var result = Aoc202314.RunManyCycles(input);
 
         result.Should().Be(64);
     }
@@ -107,7 +109,7 @@ public class Aoc202314Tests
                                 #.OOO#...O
                                 """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202314.Aoc202314.RunCycle(input, 2);
+        var result = Aoc202314.RunCycle(input, 2);
 
         result.Print().Should().Be(expected);
     }

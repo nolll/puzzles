@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202215;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202215Tests
     [Fact]
     public void Part1()
     {
-        var zone = new BeaconZone();
+        var zone = new Aoc202215.BeaconZone();
         var result = zone.Part1(Input, 10);
 
         result.Should().Be(26);
@@ -16,7 +16,7 @@ public class Aoc202215Tests
     [Fact]
     public void Part2()
     {
-        var zone = new BeaconZone();
+        var zone = new Aoc202215.BeaconZone();
         var result = zone.Part2(Input, 20);
 
         result.Should().Be(56_000_011);

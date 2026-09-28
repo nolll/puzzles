@@ -1,3 +1,4 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
 using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Aoc.Aoc2023;
@@ -15,7 +16,7 @@ public class Aoc202310Tests
                              .....
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202310.Aoc202310.FarthestPoint(input);
+        var result = Aoc202310.FarthestPoint(input);
 
         result.Should().Be(4);
     }
@@ -48,7 +49,7 @@ public class Aoc202310Tests
 
         var grid = GridBuilder.BuildCharGrid(input);
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202310.Aoc202310.EnlargeGrid(grid);
+        var result = Aoc202310.EnlargeGrid(grid);
 
         result.Print().Should().Be(expected);
     }
@@ -68,7 +69,7 @@ public class Aoc202310Tests
                              ...........
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202310.Aoc202310.EnclosedTileCount(input);
+        var result = Aoc202310.EnclosedTileCount(input);
 
         result.Should().Be(4);
     }
@@ -88,7 +89,7 @@ public class Aoc202310Tests
                              ..........
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202310.Aoc202310.EnclosedTileCount(input);
+        var result = Aoc202310.EnclosedTileCount(input);
 
         result.Should().Be(4);
     }
@@ -109,7 +110,7 @@ public class Aoc202310Tests
                              ....L---J.LJ.LJLJ...
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202310.Aoc202310.EnclosedTileCount(input);
+        var result = Aoc202310.EnclosedTileCount(input);
 
         result.Should().Be(8);
     }
@@ -130,7 +131,7 @@ public class Aoc202310Tests
                              L7JLJL-JLJLJL--JLJ.L
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202310.Aoc202310.EnclosedTileCount(input);
+        var result = Aoc202310.EnclosedTileCount(input);
 
         result.Should().Be(10);
     }

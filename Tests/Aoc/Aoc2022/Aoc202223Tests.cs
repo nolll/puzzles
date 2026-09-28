@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2022;
+
 namespace Tests.Aoc.Aoc2022;
 
 public class Aoc202223Tests
@@ -5,7 +7,7 @@ public class Aoc202223Tests
     [Fact]
     public void Part1Small()
     {
-        var puzzle = new Pzl.Aoc.Puzzles.Aoc2022.Aoc202223.Aoc202223();
+        var puzzle = new Aoc202223();
         var (emptyCount, endRound) = puzzle.Run(SmallInput);
 
         emptyCount.Should().Be(25);
@@ -15,7 +17,7 @@ public class Aoc202223Tests
     [Fact]
     public void Part1Large()
     {
-        var puzzle = new Pzl.Aoc.Puzzles.Aoc2022.Aoc202223.Aoc202223();
+        var puzzle = new Aoc202223();
         var (emptyCount, endRound) = puzzle.Run(LargeInput, 10);
 
         emptyCount.Should().Be(110);
@@ -25,7 +27,7 @@ public class Aoc202223Tests
     [Fact]
     public void Part2()
     {
-        var puzzle = new Pzl.Aoc.Puzzles.Aoc2022.Aoc202223.Aoc202223();
+        var puzzle = new Aoc202223();
         var (emptyCount, endRound) = puzzle.Run(LargeInput);
 
         emptyCount.Should().Be(146);

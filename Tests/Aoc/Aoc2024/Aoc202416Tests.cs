@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2024;
+
 namespace Tests.Aoc.Aoc2024;
 
 public class Aoc202416Tests
@@ -52,5 +54,5 @@ public class Aoc202416Tests
     [Fact]
     public void Part2_2() => Sut.Part2(Input2).Should().Be(64);
 
-    private static Pzl.Aoc.Puzzles.Aoc2024.Aoc202416.Aoc202416 Sut => new();
+    private static Aoc202416 Sut => new();
 }

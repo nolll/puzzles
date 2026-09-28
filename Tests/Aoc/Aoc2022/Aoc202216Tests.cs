@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202216;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202216Tests
     [Fact]
     public void Part1()
     {
-        var pipes = new VolcanicPipes(Input);
+        var pipes = new Aoc202216.VolcanicPipes(Input);
         var result = pipes.Part1();
 
         result.Should().Be(1651);
@@ -17,7 +17,7 @@ public class Aoc202216Tests
     public void Part1Linear()
     {
         // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
-        var pipes = new VolcanicPipes(LinearInput);
+        var pipes = new Aoc202216.VolcanicPipes(LinearInput);
         var result = pipes.Part1();
 
         result.Should().Be(2640);
@@ -27,7 +27,7 @@ public class Aoc202216Tests
     public void Part1Quadratic()
     {
         // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
-        var pipes = new VolcanicPipes(QuadraticInput);
+        var pipes = new Aoc202216.VolcanicPipes(QuadraticInput);
         var result = pipes.Part1();
 
         result.Should().Be(13468);
@@ -37,7 +37,7 @@ public class Aoc202216Tests
     public void Part1Circular()
     {
         // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
-        var pipes = new VolcanicPipes(CircularInput);
+        var pipes = new Aoc202216.VolcanicPipes(CircularInput);
         var result = pipes.Part1();
 
         result.Should().Be(1288);
@@ -47,7 +47,7 @@ public class Aoc202216Tests
     public void Part1Clustered()
     {
         // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
-        var pipes = new VolcanicPipes(ClusteredInput);
+        var pipes = new Aoc202216.VolcanicPipes(ClusteredInput);
         var result = pipes.Part1();
 
         result.Should().Be(2400);
@@ -56,7 +56,7 @@ public class Aoc202216Tests
     [Fact]
     public void Part2()
     {
-        var pipes = new VolcanicPipes(Input);
+        var pipes = new Aoc202216.VolcanicPipes(Input);
         var result = pipes.Part2();
 
         result.Should().Be(1707);

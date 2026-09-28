@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202203;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202203Tests
     [Fact]
     public void Part1()
     {
-        var result = Rucksacks.GetPriority1(Input);
+        var result = Aoc202203.Rucksacks.GetPriority1(Input);
 
         result.Should().Be(157);
     }
@@ -15,7 +15,7 @@ public class Aoc202203Tests
     [Fact]
     public void Part2()
     {
-        var result = Rucksacks.GetPriority2(Input);
+        var result = Aoc202203.Rucksacks.GetPriority2(Input);
 
         result.Should().Be(70);
     }

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202225;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202225Tests
     [Fact]
     public void Part1()
     {
-        var sut = new Pzl.Aoc.Puzzles.Aoc2022.Aoc202225.Aoc202225();
+        var sut = new Aoc202225();
         var result = sut.Part1(Input);
 
         result.Should().Be("2=-1=0");
@@ -29,7 +29,7 @@ public class Aoc202225Tests
     [InlineData("122", 37)]
     public void ToDecimal(string input, int expected)
     {
-        var result = SnafuConverter.ToNumber(input);
+        var result = Aoc202225.SnafuConverter.ToNumber(input);
 
         result.Should().Be(expected);
     }
@@ -50,7 +50,7 @@ public class Aoc202225Tests
     [InlineData(37, "122")]
     public void ToSnafu(int input, string expected)
     {
-        var result = SnafuConverter.ToSnafu(input);
+        var result = Aoc202225.SnafuConverter.ToSnafu(input);
 
         result.Should().Be(expected);
     }

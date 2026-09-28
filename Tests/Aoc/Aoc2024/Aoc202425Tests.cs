@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2024;
+
 namespace Tests.Aoc.Aoc2024;
 
 public class Aoc202425Tests
@@ -47,5 +49,5 @@ public class Aoc202425Tests
                                  #####
                                  """;
 
-    private static Pzl.Aoc.Puzzles.Aoc2024.Aoc202425.Aoc202425 Sut => new();
+    private static Aoc202425 Sut => new();
 }

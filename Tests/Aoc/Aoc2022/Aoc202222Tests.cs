@@ -1,3 +1,4 @@
+using Pzl.Aoc.Puzzles.Aoc2022;
 using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Aoc.Aoc2022;
@@ -5,7 +6,7 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202222Tests
 {
     [Fact]
-    public void Part1() => new Pzl.Aoc.Puzzles.Aoc2022.Aoc202222.Aoc202222().Part1(Input).Should().Be(6032);
+    public void Part1() => new Aoc202222().Part1(Input).Should().Be(6032);
 
     [Theory]
     [InlineData(0, 100, '^', 50, 50, '>')]
@@ -55,7 +56,7 @@ public class Aoc202222Tests
     {
         var fromDirection = GridDirection.Get(fromDir);
         var toDirection = GridDirection.Get(toDir);
-        var (c, d) = Pzl.Aoc.Puzzles.Aoc2022.Aoc202222.Aoc202222.MapExitPosition(new Coord(fromX, fromY), fromDirection, 50);
+        var (c, d) = Aoc202222.MapExitPosition(new Coord(fromX, fromY), fromDirection, 50);
 
         c.X.Should().Be(toX);
         c.Y.Should().Be(toY);

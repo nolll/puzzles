@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202312Tests
@@ -14,7 +16,7 @@ public class Aoc202312Tests
                              ?###???????? 3,2,1
                              """;
 
-        var result = new Pzl.Aoc.Puzzles.Aoc2023.Aoc202312.Aoc202312().Part1(input);
+        var result = new Aoc202312().Part1(input);
 
         result.Should().Be(21);
     }
@@ -31,7 +33,7 @@ public class Aoc202312Tests
                              ?###???????? 3,2,1
                              """;
 
-        var result = new Pzl.Aoc.Puzzles.Aoc2023.Aoc202312.Aoc202312().Part2(input);
+        var result = new Aoc202312().Part2(input);
 
         result.Should().Be(525152);
     }
@@ -45,7 +47,7 @@ public class Aoc202312Tests
     [InlineData("?###???????? 3,2,1", 10)]
     public void CombinationCount(string input, int expected)
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202312.Aoc202312.CombinationCount(input);
+        var result = Aoc202312.CombinationCount(input);
 
         result.Should().Be(expected);
     }
@@ -57,7 +59,7 @@ public class Aoc202312Tests
     [InlineData("##??##??#?.?.??. 10,1", 3)]
     public void SelectedRealData(string input, int expected)
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202312.Aoc202312.CombinationCount(input);
+        var result = Aoc202312.CombinationCount(input);
 
         result.Should().Be(expected);
     }
@@ -71,7 +73,7 @@ public class Aoc202312Tests
     [InlineData("?###???????? 3,2,1", 506250)]
     public void CombinationCountPart2(string input, int expected)
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202312.Aoc202312.CombinationCount(input, true);
+        var result = Aoc202312.CombinationCount(input, true);
 
         result.Should().Be(expected);   
     }
@@ -80,7 +82,7 @@ public class Aoc202312Tests
     [InlineData("????.???????#?#.? 1,5", 108778)]
     public void RealCombinationCountPart2(string input, int expected)
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202312.Aoc202312.CombinationCount(input, true);
+        var result = Aoc202312.CombinationCount(input, true);
 
         result.Should().Be(expected);
     }

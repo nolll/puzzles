@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202319Tests
@@ -25,7 +27,7 @@ public class Aoc202319Tests
                              {x=2127,m=1623,a=2188,s=1013}
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202319.Aoc202319.SortParts(input);
+        var result = Aoc202319.SortParts(input);
 
         result.Should().Be(19114);
     }
@@ -53,7 +55,7 @@ public class Aoc202319Tests
                              {x=2127,m=1623,a=2188,s=1013}
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202319.Aoc202319.CountCombinations(input);
+        var result = Aoc202319.CountCombinations(input);
 
         result.Should().Be(167409079868000);
     }

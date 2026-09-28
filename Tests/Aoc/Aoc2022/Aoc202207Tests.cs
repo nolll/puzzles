@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202207;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202207Tests
     [Fact]
     public void Part1()
     {
-        var fileSystem = new FileSystem(Input);
+        var fileSystem = new Aoc202207.FileSystem(Input);
         var result = fileSystem.Part1();
 
         result.Should().Be(95437);
@@ -16,7 +16,7 @@ public class Aoc202207Tests
     [Fact]
     public void Part2()
     {
-        var fileSystem = new FileSystem(Input);
+        var fileSystem = new Aoc202207.FileSystem(Input);
         var result = fileSystem.Part2();
 
         result.Should().Be(24933642);

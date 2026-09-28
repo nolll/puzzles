@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202321Tests
@@ -18,13 +20,13 @@ public class Aoc202321Tests
 
     [Fact]
     public void CountPositionsAfter1() => 
-        Pzl.Aoc.Puzzles.Aoc2023.Aoc202321.Aoc202321.CountPositionsAfter64(Input, 1).Should().Be(2);
+        Aoc202321.CountPositionsAfter64(Input, 1).Should().Be(2);
 
     [Fact]
     public void CountPositionsAfter2() => 
-        Pzl.Aoc.Puzzles.Aoc2023.Aoc202321.Aoc202321.CountPositionsAfter64(Input, 2).Should().Be(4);
+        Aoc202321.CountPositionsAfter64(Input, 2).Should().Be(4);
 
     [Fact]
     public void CountPositionsAfter3() => 
-        Pzl.Aoc.Puzzles.Aoc2023.Aoc202321.Aoc202321.CountPositionsAfter64(Input, 3).Should().Be(6);
+        Aoc202321.CountPositionsAfter64(Input, 3).Should().Be(6);
 }

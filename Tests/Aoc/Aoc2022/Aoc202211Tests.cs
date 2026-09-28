@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202211;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202211Tests
     [Fact]
     public void Part1()
     {
-        var monkeyBusiness = new MonkeyBusiness();
+        var monkeyBusiness = new Aoc202211.MonkeyBusiness();
         var result = monkeyBusiness.Part1(Input);
 
         result.Should().Be(10605);
@@ -16,7 +16,7 @@ public class Aoc202211Tests
     [Fact]
     public void Part2()
     {
-        var monkeyBusiness = new MonkeyBusiness();
+        var monkeyBusiness = new Aoc202211.MonkeyBusiness();
         var result = monkeyBusiness.Part2(Input);
 
         result.Should().Be(2_713_310_158);

@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2024;
+
 namespace Tests.Aoc.Aoc2024;
 
 public class Aoc202422Tests
@@ -14,7 +16,7 @@ public class Aoc202422Tests
     [InlineData(9, 7753432)]
     [InlineData(10, 5908254)]
     public void Generate(int iterations, long expected) => 
-        Pzl.Aoc.Puzzles.Aoc2024.Aoc202422.Aoc202422.Generate(123, iterations).Last().Should().Be(expected);
+        Aoc202422.Generate(123, iterations).Last().Should().Be(expected);
 
     [Fact]
     public void Part1()
@@ -42,5 +44,5 @@ public class Aoc202422Tests
         Sut.Part2(input).Should().Be(23);
     }
 
-    private static Pzl.Aoc.Puzzles.Aoc2024.Aoc202422.Aoc202422 Sut => new();
+    private static Aoc202422 Sut => new();
 }

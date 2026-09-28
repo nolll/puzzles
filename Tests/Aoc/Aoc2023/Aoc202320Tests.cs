@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202320Tests
@@ -13,7 +15,7 @@ public class Aoc202320Tests
                              &inv -> a
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202320.Aoc202320.CountPulses(input, 1000);
+        var result = Aoc202320.CountPulses(input, 1000);
 
         result.Should().Be(32000000);
     }
@@ -29,7 +31,7 @@ public class Aoc202320Tests
                              &con -> output
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202320.Aoc202320.CountPulses(input, 1000);
+        var result = Aoc202320.CountPulses(input, 1000);
 
         result.Should().Be(11687500);
     }

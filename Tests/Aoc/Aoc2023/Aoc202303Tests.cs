@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202303Tests
@@ -18,7 +20,7 @@ public class Aoc202303Tests
     [Fact]
     public void EngineParts()
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202303.Aoc202303.Solve(Input);
+        var result = Aoc202303.Solve(Input);
 
         result.EngineParts.Should().Be(4361);
     }
@@ -26,7 +28,7 @@ public class Aoc202303Tests
     [Fact]
     public void GearRatios()
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202303.Aoc202303.Solve(Input);
+        var result = Aoc202303.Solve(Input);
 
         result.GearRatios.Should().Be(467835);
     }

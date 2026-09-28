@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202218;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202218Tests
     [Fact]
     public void Part1Small()
     {
-        var lavaCubes = new LavaCubes();
+        var lavaCubes = new Aoc202218.LavaCubes();
         var result = lavaCubes.Part1(SmallInput);
 
         result.Should().Be(10);
@@ -16,7 +16,7 @@ public class Aoc202218Tests
     [Fact]
     public void Part1Large()
     {
-        var lavaCubes = new LavaCubes();
+        var lavaCubes = new Aoc202218.LavaCubes();
         var result = lavaCubes.Part1(LargeInput);
 
         result.Should().Be(64);
@@ -25,7 +25,7 @@ public class Aoc202218Tests
     [Fact]
     public void Part2()
     {
-        var lavaCubes = new LavaCubes();
+        var lavaCubes = new Aoc202218.LavaCubes();
         var result = lavaCubes.Part2(LargeInput);
 
         result.Should().Be(58);

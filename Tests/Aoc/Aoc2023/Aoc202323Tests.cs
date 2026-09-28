@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202323Tests
@@ -31,7 +33,7 @@ public class Aoc202323Tests
     [Fact]
     public void LongestHikePart1()
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202323.Aoc202323.LongestHike(Input, false);
+        var result = Aoc202323.LongestHike(Input, false);
 
         result.Should().Be(94);
     }
@@ -39,7 +41,7 @@ public class Aoc202323Tests
     [Fact]
     public void LongestHikePart2()
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202323.Aoc202323.LongestHike(Input, true);
+        var result = Aoc202323.LongestHike(Input, true);
 
         result.Should().Be(154);
     }

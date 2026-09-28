@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202212;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202212Tests
     [Fact]
     public void Part1()
     {
-        var hillClimbing = new HillClimbing();
+        var hillClimbing = new Aoc202212.HillClimbing();
         var result = hillClimbing.Part1(Input);
 
         result.Should().Be(31);
@@ -16,7 +16,7 @@ public class Aoc202212Tests
     [Fact]
     public void Part2()
     {
-        var hillClimbing = new HillClimbing();
+        var hillClimbing = new Aoc202212.HillClimbing();
         var result = hillClimbing.Part2(Input);
 
         result.Should().Be(29);

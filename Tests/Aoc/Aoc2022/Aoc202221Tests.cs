@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2022;
+
 namespace Tests.Aoc.Aoc2022;
 
 public class Aoc202221Tests
@@ -8,7 +10,7 @@ public class Aoc202221Tests
     [Fact]
     public void Part2() => Sut.Part2(Input).Should().Be(301);
 
-    private static Pzl.Aoc.Puzzles.Aoc2022.Aoc202221.Aoc202221 Sut => new();
+    private static Aoc202221 Sut => new();
 
     private const string Input = """
                                  root: pppw + sjmn

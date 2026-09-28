@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202304Tests
@@ -14,7 +16,7 @@ public class Aoc202304Tests
     [Fact]
     public void ScratchCards()
     {
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202304.Aoc202304.FlipThroughCards(Input);
+        var result = Aoc202304.FlipThroughCards(Input);
 
         result.Score.Should().Be(13);
         result.CardCount.Should().Be(30);

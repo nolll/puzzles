@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202317Tests
@@ -21,7 +23,7 @@ public class Aoc202317Tests
                              4322674655533
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202317.Aoc202317.LeastHeatPart1(input);
+        var result = Aoc202317.LeastHeatPart1(input);
 
         result.Should().Be(102);
     }
@@ -45,7 +47,7 @@ public class Aoc202317Tests
                              4322674655533
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202317.Aoc202317.LeastHeatPart2(input);
+        var result = Aoc202317.LeastHeatPart2(input);
 
         result.Should().Be(94);
     }
@@ -61,7 +63,7 @@ public class Aoc202317Tests
                              999999999991
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202317.Aoc202317.LeastHeatPart2(input);
+        var result = Aoc202317.LeastHeatPart2(input);
 
         result.Should().Be(71);
     }

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202208;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202208Tests
     [Fact]
     public void Part1()
     {
-        var treeHouse = new TreeHouse(Input);
+        var treeHouse = new Aoc202208.TreeHouse(Input);
         treeHouse.Calc();
         var result = treeHouse.VisibleTreesCount;
 
@@ -17,7 +17,7 @@ public class Aoc202208Tests
     [Fact]
     public void Part2()
     {
-        var treeHouse = new TreeHouse(Input);
+        var treeHouse = new Aoc202208.TreeHouse(Input);
         treeHouse.Calc();
         var result = treeHouse.HighestScenicScore;
 

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202217;
+using Pzl.Aoc.Puzzles.Aoc2022;
 using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Aoc.Aoc2022;
@@ -10,7 +10,7 @@ public class Aoc202217PlusTests
     {
         var grid = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(1, 3);
-        var shape = new PlusShape();
+        var shape = new Aoc202217.PlusShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveRight(grid, bottomLeft);
@@ -23,7 +23,7 @@ public class Aoc202217PlusTests
     {
         var grid = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(2, 3);
-        var shape = new PlusShape();
+        var shape = new Aoc202217.PlusShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveRight(grid, bottomLeft);
@@ -37,7 +37,7 @@ public class Aoc202217PlusTests
         var grid = new Grid<char>(5, 5, '.');
         grid.WriteValueAt(3, 1, 'o');
         var bottomLeft = new Coord(1, 3);
-        var shape = new PlusShape();
+        var shape = new Aoc202217.PlusShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveRight(grid, bottomLeft);
@@ -50,7 +50,7 @@ public class Aoc202217PlusTests
     {
         var grid = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(1, 3);
-        var shape = new PlusShape();
+        var shape = new Aoc202217.PlusShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveLeft(grid, bottomLeft);
@@ -63,7 +63,7 @@ public class Aoc202217PlusTests
     {
         var grid = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(0, 3);
-        var shape = new PlusShape();
+        var shape = new Aoc202217.PlusShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveLeft(grid, bottomLeft);
@@ -77,7 +77,7 @@ public class Aoc202217PlusTests
         var grid = new Grid<char>(5, 5, '.');
         grid.WriteValueAt(1, 1, 'o');
         var bottomLeft = new Coord(1, 3);
-        var shape = new PlusShape();
+        var shape = new Aoc202217.PlusShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveLeft(grid, bottomLeft);
@@ -90,7 +90,7 @@ public class Aoc202217PlusTests
     {
         var grid = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(1, 3);
-        var shape = new PlusShape();
+        var shape = new Aoc202217.PlusShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveDown(grid, bottomLeft);
@@ -103,7 +103,7 @@ public class Aoc202217PlusTests
     {
         var grid = new Grid<char>(5, 5, '.');
         var bottomLeft = new Coord(1, 4);
-        var shape = new PlusShape();
+        var shape = new Aoc202217.PlusShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveDown(grid, bottomLeft);
@@ -117,7 +117,7 @@ public class Aoc202217PlusTests
         var grid = new Grid<char>(5, 5, '.');
         grid.WriteValueAt(1, 3, 'o');
         var bottomLeft = new Coord(1, 3);
-        var shape = new PlusShape();
+        var shape = new Aoc202217.PlusShape();
         shape.Paint(grid, bottomLeft);
 
         var result = shape.CanMoveDown(grid, bottomLeft);

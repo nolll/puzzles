@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2022.Aoc202210;
+using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
@@ -7,7 +7,7 @@ public class Aoc202210Tests
     [Fact]
     public void Part1Short()
     {
-        var tube = new CathodeRayTube();
+        var tube = new Aoc202210.CathodeRayTube();
         var (result, _, _) = tube.Run(ShortInput);
 
         result.Should().Be(0);
@@ -16,7 +16,7 @@ public class Aoc202210Tests
     [Fact]
     public void Part1Long()
     {
-        var tube = new CathodeRayTube();
+        var tube = new Aoc202210.CathodeRayTube();
         var (result, _, _) = tube.Run(LongInput);
 
         result.Should().Be(13140);
@@ -25,7 +25,7 @@ public class Aoc202210Tests
     [Fact]
     public void Part2()
     {
-        var tube = new CathodeRayTube();
+        var tube = new Aoc202210.CathodeRayTube();
         var (_, _, result) = tube.Run(LongInput);
 
         const string expected = """

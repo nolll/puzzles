@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2023;
+
 namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202322Tests
@@ -15,7 +17,7 @@ public class Aoc202322Tests
                              1,1,8~1,1,9
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202322.Aoc202322.CountBricksThatCanBeRemoved(input);
+        var result = Aoc202322.CountBricksThatCanBeRemoved(input);
 
         result.Should().Be(5);
     }
@@ -33,7 +35,7 @@ public class Aoc202322Tests
                              1,1,8~1,1,9
                              """;
 
-        var result = Pzl.Aoc.Puzzles.Aoc2023.Aoc202322.Aoc202322.CountTotalRemovedBricks(input);
+        var result = Aoc202322.CountTotalRemovedBricks(input);
 
         result.Should().Be(7);
     }

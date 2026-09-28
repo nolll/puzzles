@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201901;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -10,7 +10,7 @@ public class Aoc201901Tests
     [InlineData(100756, 33583)]
     public void RequiredFuelIsCorrect(int mass, int expectedFuel)
     {
-        var module = new Module(mass);
+        var module = new Aoc201901.Module(mass);
         module.MassFuel.Should().Be(expectedFuel);
     }
 
@@ -20,7 +20,7 @@ public class Aoc201901Tests
     [InlineData(100756, 50346)]
     public void TotalFuelIsCorrect(int mass, int expectedFuel)
     {
-        var module = new Module(mass);
+        var module = new Aoc201901.Module(mass);
         module.TotalFuel.Should().Be(expectedFuel);
     }
 }

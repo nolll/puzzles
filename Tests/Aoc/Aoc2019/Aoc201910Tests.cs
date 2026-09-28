@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201910;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -15,7 +15,7 @@ public class Aoc201910Tests
                            ...##
                            """;
 
-        var detector = new AsteroidDetector();
+        var detector = new Aoc201910.AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
         result.BestAsteroid.X.Should().Be(3);
@@ -39,7 +39,7 @@ public class Aoc201910Tests
                            .#....####
                            """;
 
-        var detector = new AsteroidDetector();
+        var detector = new Aoc201910.AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
         result.BestAsteroid.X.Should().Be(5);
@@ -63,7 +63,7 @@ public class Aoc201910Tests
                            .####.###.
                            """;
 
-        var detector = new AsteroidDetector();
+        var detector = new Aoc201910.AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
         result.BestAsteroid.X.Should().Be(1);
@@ -87,7 +87,7 @@ public class Aoc201910Tests
                            .....#.#..
                            """;
 
-        var detector = new AsteroidDetector();
+        var detector = new Aoc201910.AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
         result.BestAsteroid.X.Should().Be(6);
@@ -121,7 +121,7 @@ public class Aoc201910Tests
                            ###.##.####.##.#..##
                            """;
 
-        var detector = new AsteroidDetector();
+        var detector = new Aoc201910.AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
         result.BestAsteroid.X.Should().Be(11);
@@ -140,7 +140,7 @@ public class Aoc201910Tests
                            ..#.#.....#....##
                            """;
 
-        var detector = new AsteroidDetector();
+        var detector = new Aoc201910.AsteroidDetector();
         var result = detector.Detect(map.Trim());
 
         result.BestAsteroid.X.Should().Be(8);
@@ -158,7 +158,7 @@ public class Aoc201910Tests
                            ..6.7.....8....90
                            """;
 
-        var detector = new AsteroidVaporizer();
+        var detector = new Aoc201910.AsteroidVaporizer();
         var result = detector.Vaporize(map.Trim());
 
         result.DestroyedAsteroids[0].Name.Should().Be('L');

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201920;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -29,7 +29,7 @@ public class Aoc201920Tests
                                           Z       
                              """;
 
-        var solver = new DonutMazeSolver(input);
+        var solver = new Aoc201920.DonutMazeSolver(input);
 
         solver.ShortestStepCount.Should().Be(23);
     }
@@ -77,7 +77,7 @@ public class Aoc201920Tests
                                         U   P   P               
                              """;
 
-        var solver = new DonutMazeSolver(input);
+        var solver = new Aoc201920.DonutMazeSolver(input);
 
         solver.ShortestStepCount.Should().Be(58);
     }
@@ -125,7 +125,7 @@ public class Aoc201920Tests
                                             A A D   M                     
                              """;
 
-        var solver = new RecursiveDonutMazeSolver(input);
+        var solver = new Aoc201920.RecursiveDonutMazeSolver(input);
 
         solver.ShortestStepCount.Should().Be(396);
     }

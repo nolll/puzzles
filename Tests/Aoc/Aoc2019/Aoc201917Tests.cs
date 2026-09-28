@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201917;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -17,7 +17,7 @@ public class Aoc201917Tests
                              ..#####...^..
                              """;
 
-        var intersectionFinder = new ScaffoldIntersectionFinder(input);
+        var intersectionFinder = new Aoc201917.ScaffoldIntersectionFinder(input);
         var result = intersectionFinder.GetSumOfAlignmentParameters();
 
         result.Should().Be(76);

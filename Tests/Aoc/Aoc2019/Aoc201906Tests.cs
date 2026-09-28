@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201906;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -21,7 +21,7 @@ public class Aoc201906Tests
                              K)L
                              """;
 
-        var calculator = new OrbitCalculator(input);
+        var calculator = new Aoc201906.OrbitCalculator(input);
         var result = calculator.GetOrbitCount();
 
         result.Should().Be(42);
@@ -46,7 +46,7 @@ public class Aoc201906Tests
                              I)SAN
                              """;
 
-        var calculator = new OrbitCalculator(input);
+        var calculator = new Aoc201906.OrbitCalculator(input);
         var result = calculator.GetSantaDistance();
 
         result.Should().Be(4);

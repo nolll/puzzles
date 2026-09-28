@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201918;
+using Pzl.Aoc.Puzzles.Aoc2019;
 using Pzl.Common;
 
 namespace Tests.Aoc.Aoc2019;
@@ -14,7 +14,7 @@ public class Aoc201918Tests
                              #########
                              """;
 
-        var keyCollector = new KeyCollector(input);
+        var keyCollector = new Aoc201918.KeyCollector(input);
         keyCollector.Run();
 
         keyCollector.ShortestPath.Should().Be(8);
@@ -31,7 +31,7 @@ public class Aoc201918Tests
                              ########################
                              """;
 
-        var keyCollector = new KeyCollector(input);
+        var keyCollector = new Aoc201918.KeyCollector(input);
         keyCollector.Run();
 
         keyCollector.ShortestPath.Should().Be(86);
@@ -48,7 +48,7 @@ public class Aoc201918Tests
                              ########################
                              """;
 
-        var keyCollector = new KeyCollector(input);
+        var keyCollector = new Aoc201918.KeyCollector(input);
         keyCollector.Run();
 
         keyCollector.ShortestPath.Should().Be(132);
@@ -69,7 +69,7 @@ public class Aoc201918Tests
                              #################
                              """;
 
-        var keyCollector = new KeyCollector(input);
+        var keyCollector = new Aoc201918.KeyCollector(input);
         keyCollector.Run();
 
         keyCollector.ShortestPath.Should().Be(136);
@@ -87,7 +87,7 @@ public class Aoc201918Tests
                              ########################
                              """;
 
-        var keyCollector = new KeyCollector(input);
+        var keyCollector = new Aoc201918.KeyCollector(input);
         keyCollector.Run();
 
         keyCollector.ShortestPath.Should().Be(81);
@@ -106,7 +106,7 @@ public class Aoc201918Tests
                              #######
                              """;
 
-        var keyCollector = new KeyCollector(input, true);
+        var keyCollector = new Aoc201918.KeyCollector(input, true);
         keyCollector.Run();
 
         keyCollector.ShortestPath.Should().Be(8);
@@ -125,7 +125,7 @@ public class Aoc201918Tests
                              ###############
                              """;
 
-        var keyCollector = new KeyCollector(input, true);
+        var keyCollector = new Aoc201918.KeyCollector(input, true);
         keyCollector.Run();
 
         keyCollector.ShortestPath.Should().Be(24);
@@ -144,7 +144,7 @@ public class Aoc201918Tests
                              #############
                              """;
 
-        var keyCollector = new KeyCollector(input, true);
+        var keyCollector = new Aoc201918.KeyCollector(input, true);
         keyCollector.Run();
 
         keyCollector.ShortestPath.Should().Be(32);
@@ -167,7 +167,7 @@ public class Aoc201918Tests
                              #############
                              """;
 
-        var keyCollector = new KeyCollector(input, true);
+        var keyCollector = new Aoc201918.KeyCollector(input, true);
         keyCollector.Run();
 
         keyCollector.ShortestPath.Should().Be(72);

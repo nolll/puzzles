@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201916;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -8,7 +8,7 @@ public class Aoc201916Tests
     public void SimpleAfterOnePhase()
     {
         const string input = "12345678";
-        var algorithm = new FrequencyAlgorithmPart1(input);
+        var algorithm = new Aoc201916.FrequencyAlgorithmPart1(input);
         var result = algorithm.Run(1);
 
         result.Should().Be("48226158");
@@ -18,7 +18,7 @@ public class Aoc201916Tests
     public void SimpleAfterTwoPhases()
     {
         const string input = "12345678";
-        var algorithm = new FrequencyAlgorithmPart1(input);
+        var algorithm = new Aoc201916.FrequencyAlgorithmPart1(input);
         var result = algorithm.Run(2);
 
         result.Should().Be("34040438");
@@ -28,7 +28,7 @@ public class Aoc201916Tests
     public void SimpleAfterThreePhases()
     {
         const string input = "12345678";
-        var algorithm = new FrequencyAlgorithmPart1(input);
+        var algorithm = new Aoc201916.FrequencyAlgorithmPart1(input);
         var result = algorithm.Run(3);
 
         result.Should().Be("03415518");
@@ -38,7 +38,7 @@ public class Aoc201916Tests
     public void SimpleAfterFourPhases()
     {
         const string input = "12345678";
-        var algorithm = new FrequencyAlgorithmPart1(input);
+        var algorithm = new Aoc201916.FrequencyAlgorithmPart1(input);
         var result = algorithm.Run(4);
 
         result.Should().Be("01029498");
@@ -50,7 +50,7 @@ public class Aoc201916Tests
     [InlineData("69317163492948606335995924319873", "52432133")]
     public void FirstEightDigitsAfter100Phases(string input, string expected)
     {
-        var algorithm = new FrequencyAlgorithmPart1(input);
+        var algorithm = new Aoc201916.FrequencyAlgorithmPart1(input);
         var result = algorithm.Run(100);
 
         result.Should().Be(expected);
@@ -62,7 +62,7 @@ public class Aoc201916Tests
     [InlineData("03081770884921959731165446850517", "53553731")]
     public void MessageAfter100RealPhases(string input, string expected)
     {
-        var algorithm = new FrequencyAlgorithmPart2(input);
+        var algorithm = new Aoc201916.FrequencyAlgorithmPart2(input);
         var result = algorithm.Run(100);
 
         result.Should().Be(expected);

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201914;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -16,7 +16,7 @@ public class Aoc201914Tests
                              7 A, 1 E => 1 FUEL
                              """;
 
-        var reactor = new NanoReactor(input);
+        var reactor = new Aoc201914.NanoReactor(input);
         reactor.Run();
         var result = reactor.RequiredOreForOneFuel;
 
@@ -36,7 +36,7 @@ public class Aoc201914Tests
                              2 AB, 3 BC, 4 CA => 1 FUEL
                              """;
 
-        var reactor = new NanoReactor(input);
+        var reactor = new Aoc201914.NanoReactor(input);
         reactor.Run();
         var result = reactor.RequiredOreForOneFuel;
 
@@ -58,7 +58,7 @@ public class Aoc201914Tests
                              3 DCFZ, 7 NZVS, 5 HKGWZ, 10 PSHF => 8 KHKGT
                              """;
 
-        var reactor = new NanoReactor(input);
+        var reactor = new Aoc201914.NanoReactor(input);
         reactor.Run();
         var result = reactor.RequiredOreForOneFuel;
 
@@ -83,7 +83,7 @@ public class Aoc201914Tests
                              176 ORE => 6 VJHF
                              """;
 
-        var reactor = new NanoReactor(input);
+        var reactor = new Aoc201914.NanoReactor(input);
         reactor.Run();
         var result = reactor.RequiredOreForOneFuel;
 
@@ -113,7 +113,7 @@ public class Aoc201914Tests
                              5 BHXH, 4 VRPVC => 5 LTCX
                              """;
 
-        var reactor = new NanoReactor(input);
+        var reactor = new Aoc201914.NanoReactor(input);
         reactor.Run();
         var result = reactor.RequiredOreForOneFuel;
 
@@ -135,7 +135,7 @@ public class Aoc201914Tests
                              3 DCFZ, 7 NZVS, 5 HKGWZ, 10 PSHF => 8 KHKGT
                              """;
 
-        var reactor = new NanoReactor(input);
+        var reactor = new Aoc201914.NanoReactor(input);
         reactor.Run();
         var fuel = reactor.FuelFromOneTrillionOre;
 
@@ -160,7 +160,7 @@ public class Aoc201914Tests
                              176 ORE => 6 VJHF
                              """;
 
-        var reactor = new NanoReactor(input);
+        var reactor = new Aoc201914.NanoReactor(input);
         reactor.Run();
         var fuel = reactor.FuelFromOneTrillionOre;
 
@@ -190,7 +190,7 @@ public class Aoc201914Tests
                              5 BHXH, 4 VRPVC => 5 LTCX
                              """;
 
-        var reactor = new NanoReactor(input);
+        var reactor = new Aoc201914.NanoReactor(input);
         reactor.Run();
         var fuel = reactor.FuelFromOneTrillionOre;
 

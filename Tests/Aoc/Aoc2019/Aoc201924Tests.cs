@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201924;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -15,7 +15,7 @@ public class Aoc201924Tests
                              #....
                              """;
 
-        var simulator = new BugLifeSimulator(input);
+        var simulator = new Aoc201924.BugLifeSimulator(input);
         simulator.Run(0);
 
         simulator.String.Should().Be("....##..#.#..##..#..#....");
@@ -32,7 +32,7 @@ public class Aoc201924Tests
                              #....
                              """;
 
-        var simulator = new BugLifeSimulator(input);
+        var simulator = new Aoc201924.BugLifeSimulator(input);
         simulator.Run(1);
 
         simulator.String.Should().Be("#..#.####.###.###.##.##..");
@@ -49,7 +49,7 @@ public class Aoc201924Tests
                              #....
                              """;
 
-        var simulator = new BugLifeSimulator(input);
+        var simulator = new Aoc201924.BugLifeSimulator(input);
         simulator.Run(2);
 
         simulator.String.Should().Be("#####....#....#...#.#.###");
@@ -66,7 +66,7 @@ public class Aoc201924Tests
                              #....
                              """;
 
-        var simulator = new BugLifeSimulator(input);
+        var simulator = new Aoc201924.BugLifeSimulator(input);
         simulator.Run(3);
 
         simulator.String.Should().Be("#....####....###.##..##.#");
@@ -83,7 +83,7 @@ public class Aoc201924Tests
                              #....
                              """;
 
-        var simulator = new BugLifeSimulator(input);
+        var simulator = new Aoc201924.BugLifeSimulator(input);
         simulator.Run(4);
 
         simulator.String.Should().Be("####.....###..#.....##...");
@@ -100,7 +100,7 @@ public class Aoc201924Tests
                              #....
                              """;
 
-        var simulator = new BugLifeSimulator(input);
+        var simulator = new Aoc201924.BugLifeSimulator(input);
         simulator.RunUntilRepeat();
 
         simulator.String.Should().Be("...............#.....#...");
@@ -117,7 +117,7 @@ public class Aoc201924Tests
                              #....
                              """;
 
-        var simulator = new BugLifeSimulator(input);
+        var simulator = new Aoc201924.BugLifeSimulator(input);
         simulator.RunUntilRepeat();
 
         simulator.BiodiversityRating.Should().Be(2129920);
@@ -134,7 +134,7 @@ public class Aoc201924Tests
                              #....
                              """;
 
-        var simulator = new RecursiveBugLifeSimulator(input);
+        var simulator = new Aoc201924.RecursiveBugLifeSimulator(input);
         simulator.Run(10);
 
         simulator.BugCount.Should().Be(99);

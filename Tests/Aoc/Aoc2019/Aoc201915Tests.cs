@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201915;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -15,7 +15,7 @@ public class Aoc201915Tests
                             ###
                            """;
 
-        var filler = new OxygenFiller(map);
+        var filler = new Aoc201915.OxygenFiller(map);
         var result = filler.Fill();
 
         result.Should().Be(4);

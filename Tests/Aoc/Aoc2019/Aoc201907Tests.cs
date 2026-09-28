@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201907;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -11,7 +11,7 @@ public class Aoc201907Tests
     public void ThrustCalculationsAreCorrect1(string program, int phase0, int phase1, int phase2, int phase3, int phase4, int expectedThrust)
     {
         var sequence = new[] { phase0, phase1, phase2, phase3, phase4 };
-        var calculator = new ThrustCalculator(program);
+        var calculator = new Aoc201907.ThrustCalculator(program);
         var thrust = calculator.GetThrust(sequence);
 
         thrust.Should().Be(expectedThrust);
@@ -23,7 +23,7 @@ public class Aoc201907Tests
     public void ThrustCalculationsAreCorrect2(string program, int phase0, int phase1, int phase2, int phase3, int phase4, int expectedThrust)
     {
         var sequence = new[] { phase0, phase1, phase2, phase3, phase4 };
-        var calculator = new ThrustCalculator(program);
+        var calculator = new Aoc201907.ThrustCalculator(program);
         var thrust = calculator.GetThrust(sequence);
 
         thrust.Should().Be(expectedThrust);

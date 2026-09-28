@@ -1,0 +1,131 @@
+using Pzl.Common;
+using Pzl.Tools.Computers.IntCode;
+using Pzl.Tools.Grids.Grids2d;
+
+namespace Pzl.Aoc.Puzzles.Aoc2019;
+
+[Name("Care Package")]
+public class Aoc201913 : AocPuzzle
+{
+    [Puzzle("65621a57e5ba6bbdc37540f0d2320098")]
+    public int Part1(string input)
+    {
+        var arcade = new Arcade(input);
+        arcade.Play();
+
+        return arcade.NumberOfBlockTiles;
+    }
+
+    [Puzzle("6c32f2b8d2a26180534728ccb213e116")]
+    public int Part2(string input)
+    {
+        var arcade = new Arcade(input);
+        arcade.Play(2);
+
+        return arcade.Score;
+    }
+    
+    public class Arcade
+    {
+        private readonly IntCodeComputer _computer;
+        private readonly Grid<char> _screen;
+        private ArcadeMode _mode;
+        private int _x;
+        private int _y;
+        private int _ballX;
+        private int _paddleX;
+
+        public int Score { get; private set; } = 0;
+
+        public Arcade(string program)
+        {
+            _mode = ArcadeMode.X;
+
+            _screen = new Grid<char>();
+            _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
+        }
+
+        public void Play(int? startValue = null)
+        {
+            if(startValue != null)
+                _computer.SetMemory(0, startValue.Value);
+            _computer.Start();
+        }
+
+        public int NumberOfBlockTiles => _screen.Values.Count(o => o == ArcadeTiles.Block);
+
+        private long ReadInput()
+        {
+            if (_ballX < _paddleX)
+                return -1;
+            if (_ballX > _paddleX)
+                return 1;
+            return 0;
+        }
+
+        private bool WriteOutput(long output)
+        {
+            var value = (int) output;
+            if (_mode == ArcadeMode.X)
+            {
+                _x = value;
+                _mode = ArcadeMode.Y;
+                return true;
+            }
+
+            if (_mode == ArcadeMode.Y)
+            {
+                _y = value;
+                _mode = ArcadeMode.Type;
+                return true;
+            }
+
+            if (_x == -1 && _y == 0)
+            {
+                Score = value;
+            }
+            else
+            {
+                WriteToScreen(_x, _y, value);
+                var tile = ArcadeTiles.Chars[value];
+                if (tile == ArcadeTiles.Ball)
+                {
+                    _ballX = _x;
+                }
+
+                if (tile == ArcadeTiles.Paddle)
+                {
+                    _paddleX = _x;
+                }
+            }
+
+            _mode = ArcadeMode.X;
+
+            return true;
+        }
+
+        private void WriteToScreen(int x, int y, int tile)
+        {
+            _screen.MoveTo(new Coord(x, y));
+            _screen.WriteValue(ArcadeTiles.Chars[tile]);
+        }
+    }
+    
+    public enum ArcadeMode
+    {
+        X,
+        Y,
+        Type
+    }
+    
+    public static class ArcadeTiles
+    {
+        public const char Empty = ' ';
+        public const char Wall = '#';
+        public const char Block = '_';
+        public const char Paddle = '=';
+        public const char Ball = 'o';
+
+        public static readonly char[] Chars = [Empty, Wall, Block, Paddle, Ball];
+    }
+}

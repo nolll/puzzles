@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201922;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -8,7 +8,7 @@ public class Aoc201922Tests
     public void DealIntoNewStack()
     {
         var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        var shuffler = new CardShuffler();
+        var shuffler = new Aoc201922.CardShuffler();
         deck = shuffler.Reverse(deck).ToArray();
 
         var expectedDeck = new[] { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
@@ -19,7 +19,7 @@ public class Aoc201922Tests
     public void PositiveCut()
     {
         var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        var shuffler = new CardShuffler();
+        var shuffler = new Aoc201922.CardShuffler();
         deck = shuffler.Cut(deck, 3).ToArray();
 
         var expectedDeck = new[] { 3, 4, 5, 6, 7, 8, 9, 0, 1, 2 };
@@ -30,7 +30,7 @@ public class Aoc201922Tests
     public void NegativeCut()
     {
         var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        var shuffler = new CardShuffler();
+        var shuffler = new Aoc201922.CardShuffler();
         deck = shuffler.Cut(deck, -4).ToArray();
 
         var expectedDeck = new[] { 6, 7, 8, 9, 0, 1, 2, 3, 4, 5 };
@@ -41,7 +41,7 @@ public class Aoc201922Tests
     public void Increment()
     {
         var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        var shuffler = new CardShuffler();
+        var shuffler = new Aoc201922.CardShuffler();
         deck = shuffler.Increment(deck, 3).ToArray();
 
         var expectedDeck = new[] { 0, 7, 4, 1, 8, 5, 2, 9, 6, 3 };
@@ -51,7 +51,7 @@ public class Aoc201922Tests
     [Fact]
     public void ShuffleMany()
     {
-        var shuffler = new CardShuffler();
+        var shuffler = new Aoc201922.CardShuffler();
 
         const string input = """
                              deal into new stack

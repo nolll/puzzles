@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201912;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -14,7 +14,7 @@ public class Aoc201912Tests
                            <x=3, y=5, z=-1>
                            """;
 
-        var moonTracker = new MoonTracker(map);
+        var moonTracker = new Aoc201912.MoonTracker(map);
         moonTracker.Run(1);
 
         moonTracker.Moons[0].X.Should().Be(2);
@@ -44,7 +44,7 @@ public class Aoc201912Tests
                            <x=3, y=5, z=-1>
                            """;
 
-        var moonTracker = new MoonTracker(map);
+        var moonTracker = new Aoc201912.MoonTracker(map);
         moonTracker.Run(5);
 
         moonTracker.Moons[0].X.Should().Be(-1);
@@ -74,7 +74,7 @@ public class Aoc201912Tests
                            <x=3, y=5, z=-1>
                            """;
 
-        var moonTracker = new MoonTracker(map);
+        var moonTracker = new Aoc201912.MoonTracker(map);
         moonTracker.Run(2770);
 
         moonTracker.Moons[0].X.Should().Be(2);
@@ -104,7 +104,7 @@ public class Aoc201912Tests
                            <x=3, y=5, z=-1>
                            """;
 
-        var moonTracker = new MoonTracker(map);
+        var moonTracker = new Aoc201912.MoonTracker(map);
         moonTracker.Run(10);
 
         moonTracker.TotalEnergy.Should().Be(179);
@@ -120,7 +120,7 @@ public class Aoc201912Tests
                            <x=9, y=-8, z=-3>
                            """;
 
-        var moonTracker = new MoonTracker(map);
+        var moonTracker = new Aoc201912.MoonTracker(map);
         moonTracker.Run(100);
 
         moonTracker.TotalEnergy.Should().Be(1940);
@@ -160,7 +160,7 @@ public class Aoc201912Tests
                            <x=3, y=5, z=-1>
                            """;
 
-        var moonTracker = new MoonTracker(map);
+        var moonTracker = new Aoc201912.MoonTracker(map);
         moonTracker.RunUntilRepeat();
 
         moonTracker.Iterations.Should().Be(2772);
@@ -176,7 +176,7 @@ public class Aoc201912Tests
                            <x=9, y=-8, z=-3>
                            """;
 
-        var moonTracker = new MoonTracker(map);
+        var moonTracker = new Aoc201912.MoonTracker(map);
         moonTracker.RunUntilRepeat();
 
         moonTracker.Iterations.Should().Be(4686774924);

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2019.Aoc201904;
+using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
@@ -9,7 +9,7 @@ public class Aoc201904Tests
     [InlineData(111122)]
     public void PasswordIsValid(int pwd)
     {
-        var passwordValidator = new PasswordValidator();
+        var passwordValidator = new Aoc201904.PasswordValidator();
         var result = passwordValidator.IsValidPart2(pwd);
 
         result.Should().BeTrue();
@@ -22,7 +22,7 @@ public class Aoc201904Tests
     [InlineData(123444)]
     public void PasswordIsInvalid(int pwd)
     {
-        var passwordValidator = new PasswordValidator();
+        var passwordValidator = new Aoc201904.PasswordValidator();
         var result = passwordValidator.IsValidPart2(pwd);
 
         result.Should().BeFalse();
@@ -33,7 +33,7 @@ public class Aoc201904Tests
     {
         const int pwd = 123789;
         var str = pwd.ToString().ToCharArray();
-        var result = PasswordAnalyzer.HasGroupOfTwo(str);
+        var result = Aoc201904.PasswordAnalyzer.HasGroupOfTwo(str);
 
         result.Should().BeFalse();
     }
@@ -43,7 +43,7 @@ public class Aoc201904Tests
     {
         const int pwd = 223450;
         var str = pwd.ToString().ToCharArray();
-        var result = PasswordAnalyzer.HasGroupOfTwo(str);
+        var result = Aoc201904.PasswordAnalyzer.HasGroupOfTwo(str);
 
         result.Should().BeTrue();
     }
@@ -53,7 +53,7 @@ public class Aoc201904Tests
     {
         const int pwd = 123444;
         var str = pwd.ToString().ToCharArray();
-        var result = PasswordAnalyzer.HasGroupOfTwo(str);
+        var result = Aoc201904.PasswordAnalyzer.HasGroupOfTwo(str);
 
         result.Should().BeFalse();
     }

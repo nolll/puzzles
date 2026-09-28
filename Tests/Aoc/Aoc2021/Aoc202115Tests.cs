@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202115;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202115Tests
     [Fact]
     public void Part1()
     {
-        var chitonRisk = new ChitonRisk();
+        var chitonRisk = new Aoc202115.ChitonRisk();
         var result = chitonRisk.FindRiskLevelForSmallCave(Input);
 
         result.Should().Be(40);
@@ -16,7 +16,7 @@ public class Aoc202115Tests
     [Fact]
     public void Part2()
     {
-        var chitonRisk = new ChitonRisk();
+        var chitonRisk = new Aoc202115.ChitonRisk();
         var result = chitonRisk.FindRiskLevelForLargeCave(Input);
 
         result.Should().Be(315);

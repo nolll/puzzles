@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202103;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202103Tests
     [Fact]
     public void Part1()
     {
-        var diagnostics = new BinaryDiagnostics();
+        var diagnostics = new Aoc202103.BinaryDiagnostics();
         var result = diagnostics.GetFuelConsumption(Input.Trim());
 
         result.Should().Be(198);
@@ -16,7 +16,7 @@ public class Aoc202103Tests
     [Fact]
     public void Part2()
     {
-        var diagnostics = new BinaryDiagnostics();
+        var diagnostics = new Aoc202103.BinaryDiagnostics();
         var result = diagnostics.GetLifeSupportRating(Input.Trim());
 
         result.Should().Be(230);

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202108;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202108Tests
     [Fact]
     public void Part1()
     {
-        var puzzle = new SevenSegmentDisplayDecoder(Input.Trim());
+        var puzzle = new Aoc202108.SevenSegmentDisplayDecoder(Input.Trim());
         var result = puzzle.GetEasyNumbers();
 
         result.Should().Be(26);
@@ -18,8 +18,8 @@ public class Aoc202108Tests
     [InlineData("abc", "abde", false)]
     public void IsSubsetOf(string sShort, string sLong, bool expected)
     {
-        var decoder = new DigitDecoder(SingleInput);
-        var result = DigitDecoder.IsSubsetOf(sShort, sLong);
+        var decoder = new Aoc202108.DigitDecoder(SingleInput);
+        var result = Aoc202108.DigitDecoder.IsSubsetOf(sShort, sLong);
             
         result.Should().Be(expected);
     }
@@ -27,14 +27,14 @@ public class Aoc202108Tests
     [Fact]
     public void Part2Single()
     {
-        var decoder = new DigitDecoder(SingleInput);
+        var decoder = new Aoc202108.DigitDecoder(SingleInput);
         decoder.DecodedNumber.Should().Be(5353);
     }
         
     [Fact]
     public void Part2()
     {
-        var puzzle = new SevenSegmentDisplayDecoder(Input.Trim());
+        var puzzle = new Aoc202108.SevenSegmentDisplayDecoder(Input.Trim());
         var result = puzzle.GetDecodedSum();
 
         result.Should().Be(61229);

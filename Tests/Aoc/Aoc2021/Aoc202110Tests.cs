@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202110;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202110Tests
     [Fact]
     public void Part1()
     {
-        var syntaxChecker = new SyntaxChecker();
+        var syntaxChecker = new Aoc202110.SyntaxChecker();
         var result = syntaxChecker.GetTotalErrorScore(Input);
 
         result.Should().Be(26397);
@@ -16,7 +16,7 @@ public class Aoc202110Tests
     [Fact]
     public void ValidateSingle()
     {
-        var syntaxChecker = new SyntaxChecker();
+        var syntaxChecker = new Aoc202110.SyntaxChecker();
         var result = syntaxChecker.GetErrorScore("{([(<{}[<>[]}>{[]{[(<()>");
 
         result.Should().Be(1197);
@@ -25,7 +25,7 @@ public class Aoc202110Tests
     [Fact]
     public void Part2()
     {
-        var syntaxChecker = new SyntaxChecker();
+        var syntaxChecker = new Aoc202110.SyntaxChecker();
         var result = syntaxChecker.FindMiddleScore(Input.Trim());
 
         result.Should().Be(288957);
@@ -34,7 +34,7 @@ public class Aoc202110Tests
     [Fact]
     public void CompletionString()
     {
-        var syntaxChecker = new SyntaxChecker();
+        var syntaxChecker = new Aoc202110.SyntaxChecker();
         var result = syntaxChecker.GetCompletionString("[({(<(())[]>[[{[]{<()<>>");
 
         result.Should().Be("}}]])})]");
@@ -43,7 +43,7 @@ public class Aoc202110Tests
     [Fact]
     public void CompletionScore()
     {
-        var syntaxChecker = new SyntaxChecker();
+        var syntaxChecker = new Aoc202110.SyntaxChecker();
         var result = syntaxChecker.GetErrorScore("{([(<{}[<>[]}>{[]{[(<()>");
 
         result.Should().Be(1197);

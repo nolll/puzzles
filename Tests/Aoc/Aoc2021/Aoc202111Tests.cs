@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202111;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202111Tests
     [Fact]
     public void Part1()
     {
-        var flasher = new OctopusFlasher(Input);
+        var flasher = new Aoc202111.OctopusFlasher(Input);
         var result = flasher.Run(100);
 
         result.Should().Be(1656);
@@ -16,7 +16,7 @@ public class Aoc202111Tests
     [Fact]
     public void Part2()
     {
-        var flasher = new OctopusFlasher(Input);
+        var flasher = new Aoc202111.OctopusFlasher(Input);
         var result = flasher.Run();
 
         result.Should().Be(195);

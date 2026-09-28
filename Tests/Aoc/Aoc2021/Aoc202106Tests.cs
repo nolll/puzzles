@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202106;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -10,7 +10,7 @@ public class Aoc202106Tests
     [InlineData(256, 26_984_457_539)]
     public void Test(int days, long expected)
     {
-        var fishCounter = new FishCounter(Input);
+        var fishCounter = new Aoc202106.FishCounter(Input);
         var result = fishCounter.FishCountAfter(days);
 
         result.Should().Be(expected);

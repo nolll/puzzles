@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202112;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202112Tests
     [Fact]
     public void Part1()
     {
-        var caveSystem = new CaveSystem(Input.Trim(), false);
+        var caveSystem = new Aoc202112.CaveSystem(Input.Trim(), false);
         var result = caveSystem.CountPaths();
 
         result.Should().Be(10);
@@ -16,7 +16,7 @@ public class Aoc202112Tests
     [Fact]
     public void Part2()
     {
-        var caveSystem = new CaveSystem(Input.Trim(), true);
+        var caveSystem = new Aoc202112.CaveSystem(Input.Trim(), true);
         var result = caveSystem.CountPaths();
 
         result.Should().Be(36);

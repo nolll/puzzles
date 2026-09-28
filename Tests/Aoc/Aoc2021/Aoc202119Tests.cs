@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202119;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202119Tests
     [Fact]
     public void Part1()
     {
-        var system = new BeaconSystem();
+        var system = new Aoc202119.BeaconSystem();
         var result = system.GetResult(Input);
 
         result.BeaconCount.Should().Be(79);
@@ -16,7 +16,7 @@ public class Aoc202119Tests
     [Fact]
     public void Part2()
     {
-        var system = new BeaconSystem();
+        var system = new Aoc202119.BeaconSystem();
         var result = system.GetResult(Input);
 
         result.MaxDistance.Should().Be(3621);

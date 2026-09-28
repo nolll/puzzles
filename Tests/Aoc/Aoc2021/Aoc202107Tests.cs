@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202107;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202107Tests
     [Fact]
     public void Part1()
     {
-        var crabSubmarines = new CrabSubmarines();
+        var crabSubmarines = new Aoc202107.CrabSubmarines();
         var result = crabSubmarines.GetFuel(Input, false);
 
         result.Should().Be(37);
@@ -16,7 +16,7 @@ public class Aoc202107Tests
     [Fact]
     public void Part2()
     {
-        var crabSubmarines = new CrabSubmarines();
+        var crabSubmarines = new Aoc202107.CrabSubmarines();
         var result = crabSubmarines.GetFuel(Input, true);
 
         result.Should().Be(168);
@@ -28,7 +28,7 @@ public class Aoc202107Tests
     [InlineData(2, 2, 0)]
     public void CostPart1(int a, int b, int expected)
     {
-        var result = CrabSubmarines.GetCost(a, b);
+        var result = Aoc202107.CrabSubmarines.GetCost(a, b);
 
         result.Should().Be(expected);
     }
@@ -45,7 +45,7 @@ public class Aoc202107Tests
     [InlineData(5, 5, 0)]
     public void CostPart2(int a, int b, int expected)
     {
-        var crabSubmarines = new CrabSubmarines();
+        var crabSubmarines = new Aoc202107.CrabSubmarines();
         var result = crabSubmarines.GetCrabEnginerringCost(a, b);
 
         result.Should().Be(expected);

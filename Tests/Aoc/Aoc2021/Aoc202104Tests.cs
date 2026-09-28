@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202104;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202104Tests
     [Fact]
     public void Part1()
     {
-        var game = new BingoGame(Input);
+        var game = new Aoc202104.BingoGame(Input);
         var result = game.Play(false);
 
         result.Should().Be(4512);
@@ -16,7 +16,7 @@ public class Aoc202104Tests
     [Fact]
     public void Part2()
     {
-        var game = new BingoGame(Input);
+        var game = new Aoc202104.BingoGame(Input);
         var result = game.Play(true);
 
         result.Should().Be(1924);

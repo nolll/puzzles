@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202125;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202125Tests
     [Fact]
     public void Part1()
     {
-        var herd = new HerdOfSeaCucumbers(Input);
+        var herd = new Aoc202125.HerdOfSeaCucumbers(Input);
         var result = herd.MoveUntilStop();
 
         result.Should().Be(58);

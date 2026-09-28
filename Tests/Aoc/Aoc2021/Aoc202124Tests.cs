@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202124;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -15,7 +15,7 @@ public class Aoc202124Tests
                              mul x -1
                              """;
 
-        var alu = new Alu(input.Trim());
+        var alu = new Aoc202124.Alu(input.Trim());
         var result = alu.Process(p);
 
         result.Memory['x'].Should().Be(expected);
@@ -36,7 +36,7 @@ public class Aoc202124Tests
                              eql z x
                              """;
 
-        var alu = new Alu(input.Trim());
+        var alu = new Aoc202124.Alu(input.Trim());
         var result = alu.Process(p);
 
         result.Memory['z'].Should().Be(expected);
@@ -68,7 +68,7 @@ public class Aoc202124Tests
                              mod w 2
                              """;
 
-        var alu = new Alu(input.Trim());
+        var alu = new Aoc202124.Alu(input.Trim());
         var result = alu.Process(p);
 
         result.Memory['w'].Should().Be(expW);

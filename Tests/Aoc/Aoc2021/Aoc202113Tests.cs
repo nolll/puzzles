@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202113;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202113Tests
     [Fact]
     public void Part1()
     {
-        var paper = new TransparentPaper(Input);
+        var paper = new Aoc202113.TransparentPaper(Input);
         var result = paper.DotCountAfterFirstFold();
 
         result.Should().Be(17);
@@ -16,7 +16,7 @@ public class Aoc202113Tests
     [Fact]
     public void Part2()
     {
-        var paper = new TransparentPaper(Input);
+        var paper = new Aoc202113.TransparentPaper(Input);
         var result = paper.MessageAfterFold().Trim();
 
         result.Should().Be(Result.Trim());

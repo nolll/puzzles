@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202109;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202109Tests
     [Fact]
     public void Part1()
     {
-        var heightMap = new HeightMap();
+        var heightMap = new Aoc202109.HeightMap();
 
         var result = heightMap.FindLowPointSum(Input.Trim());
 
@@ -17,7 +17,7 @@ public class Aoc202109Tests
     [Fact]
     public void Part2()
     {
-        var heightMap = new HeightMap();
+        var heightMap = new Aoc202109.HeightMap();
         var result = heightMap.FindBasinSizes(Input.Trim());
 
         result.Should().Be(1134);

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202101;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202101Tests
     [Fact]
     public void Part1()
     {
-        var validator = new DepthMeasurement();
+        var validator = new Aoc202101.DepthMeasurement();
         var result = validator.GetNumberOfIncreasingMeasurements(Input.Trim(), false);
 
         result.Should().Be(7);
@@ -16,7 +16,7 @@ public class Aoc202101Tests
     [Fact]
     public void Part2()
     {
-        var validator = new DepthMeasurement();
+        var validator = new Aoc202101.DepthMeasurement();
         var result = validator.GetNumberOfIncreasingMeasurements(Input.Trim(), true);
 
         result.Should().Be(5);

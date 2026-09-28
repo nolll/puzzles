@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2021;
+
 namespace Tests.Aoc.Aoc2021;
 
 public class Aoc202114Tests
@@ -35,5 +37,5 @@ public class Aoc202114Tests
                                  CN -> C
                                  """;
 
-    public Pzl.Aoc.Puzzles.Aoc2021.Aoc202114.Aoc202114 Sut => new();
+    public Aoc202114 Sut => new();
 }

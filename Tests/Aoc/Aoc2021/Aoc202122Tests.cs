@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202122;
+using Pzl.Aoc.Puzzles.Aoc2021;
 using Pzl.Tools.Grids.Grids3d;
 
 namespace Tests.Aoc.Aoc2021;
@@ -8,7 +8,7 @@ public class Aoc202122Tests
     [Fact]
     public void GetSize()
     {
-        var area = new RebootArea(new Coord3d(-54112, -85059, -27449), new Coord3d(-39298, -49293, 7877));
+        var area = new Aoc202122.RebootArea(new Coord3d(-54112, -85059, -27449), new Coord3d(-39298, -49293, 7877));
         var result = area.GetSize();
 
         result.Should().Be(18_719_357_085_335);
@@ -17,8 +17,8 @@ public class Aoc202122Tests
     [Fact]
     public void GetRemainingParts_CornerOverlap_LeftBottomCloseOverlapping()
     {
-        var area1 = new RebootArea(new Coord3d(0, 0, 0), new Coord3d(2, 2, 2));
-        var area2 = new RebootArea(new Coord3d(1, 1, 1), new Coord3d(3, 3, 3));
+        var area1 = new Aoc202122.RebootArea(new Coord3d(0, 0, 0), new Coord3d(2, 2, 2));
+        var area2 = new Aoc202122.RebootArea(new Coord3d(1, 1, 1), new Coord3d(3, 3, 3));
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(3);
@@ -33,8 +33,8 @@ public class Aoc202122Tests
     [Fact]
     public void GetRemainingParts_CornerOverlap_LeftTopCloseOverlapping()
     {
-        var area1 = new RebootArea(new Coord3d(1, 1, 1), new Coord3d(3, 3, 3));
-        var area2 = new RebootArea(new Coord3d(0, 0, 0), new Coord3d(2, 2, 2));
+        var area1 = new Aoc202122.RebootArea(new Coord3d(1, 1, 1), new Coord3d(3, 3, 3));
+        var area2 = new Aoc202122.RebootArea(new Coord3d(0, 0, 0), new Coord3d(2, 2, 2));
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(3);
@@ -49,8 +49,8 @@ public class Aoc202122Tests
     [Fact]
     public void GetRemainingParts_EdgeOverlap_LeftBottomOverlapping()
     {
-        var area1 = new RebootArea(new Coord3d(0, 0, 0), new Coord3d(3, 3, 3));
-        var area2 = new RebootArea(new Coord3d(2, 2, 1), new Coord3d(4, 4, 2));
+        var area1 = new Aoc202122.RebootArea(new Coord3d(0, 0, 0), new Coord3d(3, 3, 3));
+        var area2 = new Aoc202122.RebootArea(new Coord3d(2, 2, 1), new Coord3d(4, 4, 2));
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(4);
@@ -67,7 +67,7 @@ public class Aoc202122Tests
     [Fact]
     public void Part1()
     {
-        var reactor = new SubmarineReactor();
+        var reactor = new Aoc202122.SubmarineReactor();
         var result = reactor.Reboot(Input1.Trim());
 
         result.Should().Be(39);
@@ -76,7 +76,7 @@ public class Aoc202122Tests
     [Fact]
     public void Part1Advanced_WithInput1()
     {
-        var reactor = new SubmarineReactor();
+        var reactor = new Aoc202122.SubmarineReactor();
         var result = reactor.Reboot2(Input1.Trim(), 50);
 
         result.Should().Be(39);
@@ -85,7 +85,7 @@ public class Aoc202122Tests
     [Fact]
     public void Part1Advanced_WithInput2()
     {
-        var reactor = new SubmarineReactor();
+        var reactor = new Aoc202122.SubmarineReactor();
         var result = reactor.Reboot2(Input2.Trim(), 50);
 
         result.Should().Be(590784);
@@ -94,7 +94,7 @@ public class Aoc202122Tests
     [Fact]
     public void Part1Advanced_WithInput3()
     {
-        var reactor = new SubmarineReactor();
+        var reactor = new Aoc202122.SubmarineReactor();
         var result = reactor.Reboot2(Input3.Trim());
 
         result.Should().Be(2758514936282235);

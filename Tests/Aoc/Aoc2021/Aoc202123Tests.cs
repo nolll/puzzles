@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202123;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202123Tests
     [Fact]
     public void Moving()
     {
-        var amphipods = new Amphipods(Input2, true);
+        var amphipods = new Aoc202123.Amphipods(Input2, true);
         amphipods.TestArrange();
         var result = amphipods.Energy;
 

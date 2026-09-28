@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202105;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202105Tests
     [Fact]
     public void Part1()
     {
-        var game = new VentsMap();
+        var game = new Aoc202105.VentsMap();
         var result = game.Run(Input.Trim(), true);
 
         result.Should().Be(5);
@@ -16,7 +16,7 @@ public class Aoc202105Tests
     [Fact]
     public void Part2()
     {
-        var game = new VentsMap();
+        var game = new Aoc202105.VentsMap();
         var result = game.Run(Input.Trim(), false);
 
         result.Should().Be(12);

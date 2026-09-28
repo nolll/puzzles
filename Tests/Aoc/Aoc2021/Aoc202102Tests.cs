@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2021.Aoc202102;
+using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -7,7 +7,7 @@ public class Aoc202102Tests
     [Fact]
     public void Part1()
     {
-        var validator = new SubmarineControl(Input.Trim(), false);
+        var validator = new Aoc202102.SubmarineControl(Input.Trim(), false);
         validator.Move();
 
         validator.Result.Should().Be(150);
@@ -16,7 +16,7 @@ public class Aoc202102Tests
     [Fact]
     public void Part2()
     {
-        var validator = new SubmarineControl(Input.Trim(), true);
+        var validator = new Aoc202102.SubmarineControl(Input.Trim(), true);
         validator.Move();
 
         validator.Result.Should().Be(900);

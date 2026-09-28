@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202010;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -57,7 +57,7 @@ public class Aoc202010Tests
     [InlineData(Input2, 220)]
     public void PowerAdapterChainIsCorrect(string input, int expected)
     {
-        var chain = new PowerAdapterChain(input.Trim());
+        var chain = new Aoc202010.PowerAdapterChain(input.Trim());
         var product = chain.DifferenceProduct;
 
         product.Should().Be(expected);
@@ -68,7 +68,7 @@ public class Aoc202010Tests
     [InlineData(Input2, 19208)]
     public void PowerAdapterChainTotalCombinations(string input, int expected)
     {
-        var chain = new PowerAdapterChain(input.Trim());
+        var chain = new Aoc202010.PowerAdapterChain(input.Trim());
         var combinations = chain.GetTotalNumberOfCombinations();
 
         combinations.Should().Be(expected);

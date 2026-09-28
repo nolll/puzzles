@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202005;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -11,7 +11,7 @@ public class Aoc202005Tests
     [InlineData("BBFFBBFRLL", 102, 4, 820)]
     public void ParseBoardingCard(string boardingCard, int row, int col, int id)
     {
-        var processor = BoardingCard.Parse(boardingCard);
+        var processor = Aoc202005.BoardingCard.Parse(boardingCard);
 
         processor.Row.Should().Be(row);
         processor.Column.Should().Be(col);
@@ -28,7 +28,7 @@ public class Aoc202005Tests
                              BBFFBBFRLL
                              """;
 
-        var processor = new BoardingCardProcessor(input.Trim());
+        var processor = new Aoc202005.BoardingCardProcessor(input.Trim());
 
         processor.HighestId.Should().Be(820);
     }

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202012;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -15,7 +15,7 @@ public class Aoc202012Tests
                              F11
                              """;
 
-        var system = new SimpleFerryNavigationSystem(input.Trim());
+        var system = new Aoc202012.SimpleFerryNavigationSystem(input.Trim());
         system.Run();
         var result = system.DistanceTravelled;
 
@@ -33,7 +33,7 @@ public class Aoc202012Tests
                              F11
                              """;
 
-        var system = new WaypointFerryNavigationSystem(input.Trim());
+        var system = new Aoc202012.WaypointFerryNavigationSystem(input.Trim());
         system.Run();
         var result = system.DistanceTravelled;
 

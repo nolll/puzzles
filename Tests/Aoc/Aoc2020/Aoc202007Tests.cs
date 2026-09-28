@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202007;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -19,7 +19,7 @@ public class Aoc202007Tests
                              dotted black bags contain no other bags.
                              """;
 
-        var processor = new LuggageProcessor(input.Trim());
+        var processor = new Aoc202007.LuggageProcessor(input.Trim());
         var count = processor.NumberOfBagsThatCanContainGoldBags();
 
         count.Should().Be(4);
@@ -40,7 +40,7 @@ public class Aoc202007Tests
                              dotted black bags contain no other bags.
                              """;
 
-        var processor = new LuggageProcessor(input.Trim());
+        var processor = new Aoc202007.LuggageProcessor(input.Trim());
         var count = processor.NumberOfBagsThatAGoldBagContains();
 
         count.Should().Be(32);

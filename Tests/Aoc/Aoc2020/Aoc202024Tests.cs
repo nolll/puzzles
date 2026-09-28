@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202024;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -9,7 +9,7 @@ public class Aoc202024Tests
     [InlineData("nwwswee")]
     public void OneTileIsBlackAfterArrange(string input)
     {
-        var floor = new HexagonalFloor(input);
+        var floor = new Aoc202024.HexagonalFloor(input);
         floor.Arrange();
         var result = floor.BlackTileCount;
 
@@ -19,7 +19,7 @@ public class Aoc202024Tests
     [Fact]
     public void FiveTilesAreBlackAfterArrange()
     {
-        var floor = new HexagonalFloor(Input.Trim());
+        var floor = new Aoc202024.HexagonalFloor(Input.Trim());
         floor.Arrange();
         var result = floor.BlackTileCount;
 
@@ -29,7 +29,7 @@ public class Aoc202024Tests
     [Fact]
     public void FiveTilesAreBlack()
     {
-        var floor = new HexagonalFloor(Input.Trim());
+        var floor = new Aoc202024.HexagonalFloor(Input.Trim());
         floor.Arrange();
         var result = floor.BlackTileCount;
 
@@ -39,7 +39,7 @@ public class Aoc202024Tests
     [Fact]
     public void BlackTilesCorrectAfterEachRun()
     {
-        var floor = new HexagonalFloor(Input.Trim());
+        var floor = new Aoc202024.HexagonalFloor(Input.Trim());
         floor.Arrange();
 
         floor.Modify(1); // 1

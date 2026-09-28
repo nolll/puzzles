@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202013;
+using Pzl.Aoc.Puzzles.Aoc2020;
 using Pzl.Tools.Strings;
 
 namespace Tests.Aoc.Aoc2020;
@@ -13,7 +13,7 @@ public class Aoc202013Tests
                              7,13,x,x,59,x,31,19
                              """;
 
-        var scheduler = new BusScheduler1(input.Trim());
+        var scheduler = new Aoc202013.BusScheduler1(input.Trim());
         var value = scheduler.GetBusValue();
 
         value.Should().Be(295);
@@ -28,7 +28,7 @@ public class Aoc202013Tests
     [InlineData("1789,37,47,1889", 1_202_161_486)]
     public void ScheduleContest(string input, long expected)
     {
-        var scheduler = new BusScheduler2($"0{LineBreaks.Single}{input}");
+        var scheduler = new Aoc202013.BusScheduler2($"0{LineBreaks.Single}{input}");
         var value = scheduler.GetContestMinute();
 
         value.Should().Be(expected);

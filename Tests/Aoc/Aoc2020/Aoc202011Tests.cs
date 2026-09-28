@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202011;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -20,7 +20,7 @@ public class Aoc202011Tests
                              L.LLLLL.LL
                              """;
 
-        var simulator = new SeatingSimulatorAdjacentSeats(input);
+        var simulator = new Aoc202011.SeatingSimulatorAdjacentSeats(input);
         simulator.Run();
         var result = simulator.OccupiedSeatCount;
 
@@ -43,7 +43,7 @@ public class Aoc202011Tests
                              L.LLLLL.LL
                              """;
 
-        var simulator = new SeatingSimulatorVisibleSeats(input);
+        var simulator = new Aoc202011.SeatingSimulatorVisibleSeats(input);
         simulator.Run();
         var result = simulator.OccupiedSeatCount;
 

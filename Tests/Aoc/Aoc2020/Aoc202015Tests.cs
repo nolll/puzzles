@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202015;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -21,7 +21,7 @@ public class Aoc202015Tests
     [InlineData("3,1,2", 30000000, 362)]
     public void Find2020ThNumber(string input, int until, long expected)
     {
-        var numbers = new MemoryGame(input);
+        var numbers = new Aoc202015.MemoryGame(input);
         var result = numbers.Play(until);
 
         result.Should().Be(expected);

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202019;
+using Pzl.Aoc.Puzzles.Aoc2020;
 using Pzl.Tools.Strings;
 
 namespace Tests.Aoc.Aoc2020;
@@ -8,7 +8,7 @@ public class Aoc202019Tests
     [Fact]
     public void NumberOfValidMessagesIs2()
     {
-        var validator = new MonsterImageValidator(RulesAndMessages1, false);
+        var validator = new Aoc202019.MonsterImageValidator(RulesAndMessages1, false);
         var result = validator.ValidCount();
 
         result.Should().Be(2);
@@ -17,7 +17,7 @@ public class Aoc202019Tests
     [Fact]
     public void NumberOfValidMessagesIs3()
     {
-        var validator = new MonsterImageValidator(RulesAndMessages2, false);
+        var validator = new Aoc202019.MonsterImageValidator(RulesAndMessages2, false);
         var result = validator.ValidCount();
 
         result.Should().Be(3);
@@ -41,7 +41,7 @@ public class Aoc202019Tests
     [InlineData("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", false)]
     public void SpecificMessagesIsValid_UnmodifiedRules(string message, bool expected)
     {
-        var validator = new MonsterImageValidator(Rules2, false);
+        var validator = new Aoc202019.MonsterImageValidator(Rules2, false);
         var isValid = validator.IsValid(message);
 
         isValid.Should().Be(expected);
@@ -65,7 +65,7 @@ public class Aoc202019Tests
     [InlineData("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", true)]
     public void SpecificMessageIsValid_ModifiedRules(string message, bool expected)
     {
-        var validator = new MonsterImageValidator(Rules2, true);
+        var validator = new Aoc202019.MonsterImageValidator(Rules2, true);
         var isValid = validator.IsValid(message);
 
         isValid.Should().Be(expected);
@@ -74,7 +74,7 @@ public class Aoc202019Tests
     [Fact]
     public void NumberOfValidMessagesIs12()
     {
-        var validator = new MonsterImageValidator(RulesAndMessages2, true);
+        var validator = new Aoc202019.MonsterImageValidator(RulesAndMessages2, true);
         var result = validator.ValidCount();
 
         result.Should().Be(12);

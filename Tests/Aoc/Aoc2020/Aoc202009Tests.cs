@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202009;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -30,7 +30,7 @@ public class Aoc202009Tests
     [Fact]
     public void FirstInvalidNumber()
     {
-        var port = new XmasPort(Input.Trim(), 5);
+        var port = new Aoc202009.XmasPort(Input.Trim(), 5);
         var num = port.FindFirstInvalidNumber();
 
         num.Should().Be(127);
@@ -39,7 +39,7 @@ public class Aoc202009Tests
     [Fact]
     public void FirstWeakness()
     {
-        var port = new XmasPort(Input.Trim(), 5);
+        var port = new Aoc202009.XmasPort(Input.Trim(), 5);
         var num = port.FindWeakness();
 
         num.Should().Be(62);

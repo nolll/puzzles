@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202020;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -21,7 +21,7 @@ public class Aoc202020Tests
                              ..###..###
                              """;
 
-        var tile = JigsawTile.Parse(input);
+        var tile = Aoc202020.JigsawTile.Parse(input);
 
         tile.Edges["top"].Should().Be("..##.#..#.");
         tile.Edges["right"].Should().Be("...#.##..#");
@@ -33,7 +33,7 @@ public class Aoc202020Tests
     [InlineData(2311, 3079)]
     public void TilesHasMatchingEdge(long tileId1, long tileId2)
     {
-        var puzzle = new ImageJigsawPuzzle(Input);
+        var puzzle = new Aoc202020.ImageJigsawPuzzle(Input);
         var tile1 = puzzle.TilesById[tileId1];
         var tile2 = puzzle.TilesById[tileId2];
 
@@ -45,7 +45,7 @@ public class Aoc202020Tests
     [Fact]
     public void CornerTilesAreCorrect()
     {
-        var puzzle = new ImageJigsawPuzzle(Input);
+        var puzzle = new Aoc202020.ImageJigsawPuzzle(Input);
         var cornerTiles = puzzle.CornerTiles;
 
         cornerTiles.Count.Should().Be(4);
@@ -58,7 +58,7 @@ public class Aoc202020Tests
     [Fact]
     public void EdgeTilesAreCorrect()
     {
-        var puzzle = new ImageJigsawPuzzle(Input);
+        var puzzle = new Aoc202020.ImageJigsawPuzzle(Input);
         var cornerTiles = puzzle.EdgeTiles;
 
         cornerTiles.Count.Should().Be(4);
@@ -71,7 +71,7 @@ public class Aoc202020Tests
     [Fact]
     public void CenterTilesAreCorrect()
     {
-        var puzzle = new ImageJigsawPuzzle(Input);
+        var puzzle = new Aoc202020.ImageJigsawPuzzle(Input);
         var cornerTiles = puzzle.CenterTiles;
 
         cornerTiles.Count.Should().Be(1);
@@ -81,7 +81,7 @@ public class Aoc202020Tests
     [Fact]
     public void CornerTileProductIsCorrect()
     {
-        var puzzle = new ImageJigsawPuzzle(Input);
+        var puzzle = new Aoc202020.ImageJigsawPuzzle(Input);
         var product = puzzle.ProductOfCornerTileIds;
 
         product.Should().Be(20899048083289);
@@ -115,7 +115,7 @@ public class Aoc202020Tests
                                 ##...#.#
                                 """;
 
-        var tile = JigsawTile.Parse(input);
+        var tile = Aoc202020.JigsawTile.Parse(input);
         tile.RemoveBorder();
 
         tile.Grid.Print().Should().Be(expected);
@@ -124,7 +124,7 @@ public class Aoc202020Tests
     [Fact]
     public void NumberOfHashesNotPartOfSeaMonsters()
     {
-        var puzzle = new ImageJigsawPuzzle(Input);
+        var puzzle = new Aoc202020.ImageJigsawPuzzle(Input);
         var hashes = puzzle.NumberOfHashesThatAreNotPartOfASeaMonster;
 
         hashes.Should().Be(273);

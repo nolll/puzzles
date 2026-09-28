@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202018;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -15,8 +15,8 @@ public class Aoc202018Tests
     [InlineData("(5 + (2 + 9 * 2) * 3) * (6 * 3 * 4 * 3 * 9 + (6 + 3 * 8 + 9 + 6 + 2)) + 8 * (7 * 3 + 3 * 9) * (6 + 6)", 426_853_152)]
     public void SumIsCorrect(string input, long expected)
     {
-        var calculator = new HomeworkCalculator();
-        var sum = calculator.Sum(input, MathPrecedence.Order);
+        var calculator = new Aoc202018.HomeworkCalculator();
+        var sum = calculator.Sum(input, Aoc202018.MathPrecedence.Order);
 
         sum.Should().Be(expected);
     }
@@ -35,8 +35,8 @@ public class Aoc202018Tests
 
         const int expected = 26_457;
 
-        var calculator = new HomeworkCalculator();
-        var sum = calculator.SumOfAll(input.Trim(), MathPrecedence.Order);
+        var calculator = new Aoc202018.HomeworkCalculator();
+        var sum = calculator.SumOfAll(input.Trim(), Aoc202018.MathPrecedence.Order);
 
         sum.Should().Be(expected);
     }
@@ -50,8 +50,8 @@ public class Aoc202018Tests
     [InlineData("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2", 23340)]
     public void SumWithAdditionPrecedenceIsCorrect(string input, long expected)
     {
-        var calculator = new HomeworkCalculator();
-        var sum = calculator.Sum(input, MathPrecedence.Addition);
+        var calculator = new Aoc202018.HomeworkCalculator();
+        var sum = calculator.Sum(input, Aoc202018.MathPrecedence.Addition);
 
         sum.Should().Be(expected);
     }

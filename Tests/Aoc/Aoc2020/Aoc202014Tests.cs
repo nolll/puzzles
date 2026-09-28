@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202014;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -14,7 +14,7 @@ public class Aoc202014Tests
                              mem[8] = 0
                              """;
 
-        var system = new BitmaskSystem1();
+        var system = new Aoc202014.BitmaskSystem1();
         var sum = system.Run(input.Trim());
 
         sum.Should().Be(165);
@@ -30,7 +30,7 @@ public class Aoc202014Tests
                              mem[26] = 1
                              """;
 
-        var system = new BitmaskSystem2();
+        var system = new Aoc202014.BitmaskSystem2();
         var sum = system.Run(input.Trim());
 
         sum.Should().Be(208);

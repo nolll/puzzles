@@ -1,0 +1,60 @@
+using Pzl.Common;
+using Pzl.Tools.Strings;
+
+namespace Pzl.Aoc.Puzzles.Aoc2020;
+
+[Name("Combo Breaker")]
+public class Aoc202025 : AocPuzzle
+{
+    [Puzzle("340def679154dbcee66df7e80ce2dd0d")]
+    public long Part1(string input) => new EncryptionKeyFinder(input).FindKey();
+    
+    public class EncryptionKeyFinder
+    {
+        private const int DivideBy = 20_201_227;
+        private readonly long _cardPublicKey;
+        private readonly long _doorPublicKey;
+
+        public EncryptionKeyFinder(string input)
+        {
+            var rows = input.Split(LineBreaks.Single);
+            _cardPublicKey = long.Parse(rows[0]);
+            _doorPublicKey = long.Parse(rows[1]);
+        }
+
+        public long FindKey()
+        {
+            var cardLoopSize = GetLoopSize(_cardPublicKey);
+            var key = GetKey(cardLoopSize, _doorPublicKey);
+            return key;
+        }
+
+        private long GetLoopSize(long publicKey)
+        {
+            long value = 1;
+            const long subjectNumber = 7;
+            long loopSize = 1;
+            while (true)
+            {
+                value = Transform(value, subjectNumber);
+                if (value == publicKey)
+                    return loopSize;
+
+                loopSize++;
+            }
+        }
+
+        private long GetKey(long loopSize, long publicKey)
+        {
+            long value = 1;
+            for (var i = 0; i < loopSize; i++)
+            {
+                value = Transform(value, publicKey);
+            }
+
+            return value;
+        }
+
+        private static long Transform(long value, long subjectNumber) => value * subjectNumber % DivideBy;
+    }
+}

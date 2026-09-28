@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202022;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -7,7 +7,7 @@ public class Aoc202022Tests
     [Fact]
     public void NormalGame_WinningScoreIs306()
     {
-        var game = new CardCombatGame(Input);
+        var game = new Aoc202022.CardCombatGame(Input);
         var score = game.Play();
 
         score.Should().Be(306);
@@ -27,7 +27,7 @@ public class Aoc202022Tests
                              14
                              """;
 
-        var game = new CardCombatGame(input);
+        var game = new Aoc202022.CardCombatGame(input);
         game.PlayRecursive();
         const bool ended = true;
 
@@ -37,7 +37,7 @@ public class Aoc202022Tests
     [Fact]
     public void RecursiveGame_WinningScoreIs306()
     {
-        var game = new CardCombatGame(Input);
+        var game = new Aoc202022.CardCombatGame(Input);
         var score = game.PlayRecursive();
 
         score.Should().Be(291);

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202016;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -22,7 +22,7 @@ public class Aoc202016Tests
                              38,6,12
                              """;
 
-        var validator = new TicketValidator();
+        var validator = new Aoc202016.TicketValidator();
         var result = validator.GetErrorRate(input);
 
         result.Should().Be(71);
@@ -45,8 +45,8 @@ public class Aoc202016Tests
                              5,14,9
                              """;
 
-        var validator = new TicketValidator();
-        var ticket = TicketValidator.FindFields(input);
+        var validator = new Aoc202016.TicketValidator();
+        var ticket = Aoc202016.TicketValidator.FindFields(input);
 
         ticket.Fields["class"].Should().Be(12);
         ticket.Fields["row"].Should().Be(11);

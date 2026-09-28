@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202004;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -9,7 +9,7 @@ public class Aoc202004Tests
     [InlineData("hcl:#ae17e1 iyr:2013 eyr:2024 ecl:brn pid:760753108 byr:1931 hgt:179cm")]
     public void HasAllFields(string input)
     {
-        var passport = new PassportProcessor.Passport(input);
+        var passport = new Aoc202004.PassportProcessor.Passport(input);
         var isValid = passport.HasAllFields();
 
         isValid.Should().BeTrue();
@@ -20,7 +20,7 @@ public class Aoc202004Tests
     [InlineData("hcl:#cfa07d eyr:2025 pid:166559648 iyr:2011 ecl:brn hgt:59in")]
     public void HasMissingFields(string input)
     {
-        var passport = new PassportProcessor.Passport(input);
+        var passport = new Aoc202004.PassportProcessor.Passport(input);
         var isValid = passport.HasAllFields();
 
         isValid.Should().BeFalse();
@@ -45,7 +45,7 @@ public class Aoc202004Tests
                              iyr:2011 ecl:brn hgt:59in
                              """;
 
-        var processor = new PassportProcessor(input);
+        var processor = new Aoc202004.PassportProcessor(input);
         var count = processor.GetNumberOfPassportsThatHasAllFields();
 
         count.Should().Be(2);
@@ -69,7 +69,7 @@ public class Aoc202004Tests
                              iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719
                              """;
 
-        var processor = new PassportProcessor(input);
+        var processor = new Aoc202004.PassportProcessor(input);
         var count = processor.GetNumberOfValidPassports();
 
         count.Should().Be(4);
@@ -94,7 +94,7 @@ public class Aoc202004Tests
                              pid:3556412378 byr:2007
                              """;
 
-        var processor = new PassportProcessor(input);
+        var processor = new Aoc202004.PassportProcessor(input);
         var count = processor.GetNumberOfValidPassports();
 
         count.Should().Be(0);

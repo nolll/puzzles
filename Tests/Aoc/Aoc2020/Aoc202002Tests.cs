@@ -1,3 +1,5 @@
+using Pzl.Aoc.Puzzles.Aoc2020;
+
 namespace Tests.Aoc.Aoc2020;
 
 public class Aoc202002Tests
@@ -20,5 +22,5 @@ public class Aoc202002Tests
     [InlineData("2-9 c: ccccccccc")]
     public void PasswordIsInvalidAccordingToRuleTwo(string policy) => Sut.IsValidAccordingToRuleTwo(policy).Should().BeFalse();
 
-    private static Pzl.Aoc.Puzzles.Aoc2020.Aoc202002.Aoc202002 Sut => new();
+    private static Aoc202002 Sut => new();
 }

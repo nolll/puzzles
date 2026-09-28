@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202003;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -21,8 +21,8 @@ public class Aoc202003Tests
     [Fact]
     public void TreeCount_3_1_IsCorrect()
     {
-        var navigator = new TreeNavigator(Input);
-        var treeCount = navigator.GetTreeCount(new TreeTrajectory(3, 1));
+        var navigator = new Aoc202003.TreeNavigator(Input);
+        var treeCount = navigator.GetTreeCount(new Aoc202003.TreeTrajectory(3, 1));
 
         treeCount.Should().Be(7);
     }
@@ -30,8 +30,8 @@ public class Aoc202003Tests
     [Fact]
     public void TreeCount_1_2_IsCorrect()
     {
-        var navigator = new TreeNavigator(Input);
-        var treeCount = navigator.GetTreeCount(new TreeTrajectory(1, 2));
+        var navigator = new Aoc202003.TreeNavigator(Input);
+        var treeCount = navigator.GetTreeCount(new Aoc202003.TreeTrajectory(1, 2));
 
         treeCount.Should().Be(2);
     }
@@ -39,7 +39,7 @@ public class Aoc202003Tests
     [Fact]
     public void TreeCountsAreCorrect()
     {
-        var navigator = new TreeNavigator(Input);
+        var navigator = new Aoc202003.TreeNavigator(Input);
         var treeCounts = navigator.GetAllTreeCounts().ToList();
 
         treeCounts[0].Should().Be(2);

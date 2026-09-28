@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2020.Aoc202008;
+using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
@@ -7,7 +7,7 @@ public class Aoc202008Tests
     [Fact]
     public void AccIsCorrectBeforeInfiniteLoop()
     {
-        var console = new GameConsoleRunner(Input.Trim());
+        var console = new Aoc202008.GameConsoleRunner(Input.Trim());
         var accBeforeRepeat = console.RunUntilLoop();
 
         accBeforeRepeat.Should().Be(5);
@@ -16,7 +16,7 @@ public class Aoc202008Tests
     [Fact]
     public void AccIsCorrectAfterTerminateInModifiedProgram()
     {
-        var console = new GameConsoleRunner(Input.Trim());
+        var console = new Aoc202008.GameConsoleRunner(Input.Trim());
         var accAtTermination = console.RunUntilTermination();
 
         accAtTermination.Should().Be(8);
@@ -37,11 +37,11 @@ public class Aoc202008Tests
                              acc +6
                              """;
 
-        var instructions = GameConsoleRunner.ParseInstructions(input.Trim());
-        var console = new GameConsole(instructions);
+        var instructions = Aoc202008.GameConsoleRunner.ParseInstructions(input.Trim());
+        var console = new Aoc202008.GameConsole(instructions);
         var exit = console.Run();
 
-        exit.Status.Should().Be(ExitStatus.End);
+        exit.Status.Should().Be(Aoc202008.ExitStatus.End);
         exit.ExitValue.Should().Be(8);
     }
 

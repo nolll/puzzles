@@ -13,9 +13,7 @@ public class Aoc201702Tests
                              2 4 6 8
                              """;
 
-        var spreadsheet = new Aoc201702.Spreadsheet(input);
-
-        spreadsheet.ChecksumMaxMin.Should().Be(18);
+        Sut.Part1(input).Should().Be(18);
     }
 
     [Fact]
@@ -27,8 +25,8 @@ public class Aoc201702Tests
                              3 8 6 5
                              """;
 
-        var spreadsheet = new Aoc201702.Spreadsheet(input);
-
-        spreadsheet.ChecksumDivision.Should().Be(9);
+        Sut.Part2(input).Should().Be(9);
     }
+    
+    private static Aoc201702 Sut => new();
 }

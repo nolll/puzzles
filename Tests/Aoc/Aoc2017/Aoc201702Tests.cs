@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201702;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -13,7 +13,7 @@ public class Aoc201702Tests
                              2 4 6 8
                              """;
 
-        var spreadsheet = new Spreadsheet(input);
+        var spreadsheet = new Aoc201702.Spreadsheet(input);
 
         spreadsheet.ChecksumMaxMin.Should().Be(18);
     }
@@ -27,7 +27,7 @@ public class Aoc201702Tests
                              3 8 6 5
                              """;
 
-        var spreadsheet = new Spreadsheet(input);
+        var spreadsheet = new Aoc201702.Spreadsheet(input);
 
         spreadsheet.ChecksumDivision.Should().Be(9);
     }

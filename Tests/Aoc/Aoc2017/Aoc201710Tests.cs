@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201710;
+using Pzl.Aoc.Puzzles.Aoc2017;
 using Pzl.Tools.Cryptography;
 
 namespace Tests.Aoc.Aoc2017;
@@ -9,7 +9,7 @@ public class Aoc201710Tests
     public void SimulatesIntHash()
     {
         const string input = "3,4,1,5";
-        var hasher = new IntKnotHasher(input, 5);
+        var hasher = new Aoc201710.IntKnotHasher(input, 5);
 
         hasher.Checksum.Should().Be(12);
     }

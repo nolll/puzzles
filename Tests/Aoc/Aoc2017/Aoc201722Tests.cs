@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201722;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -16,7 +16,7 @@ public class Aoc201722Tests
     [InlineData(10000, 5587)]
     public void InfectionCountIsCorrectForPart1(int iterations, int expected)
     {
-        var infection = new VirusInfection(Input);
+        var infection = new Aoc201722.VirusInfection(Input);
         var infectionCount = infection.Part1(iterations);
 
         infectionCount.Should().Be(expected);
@@ -27,7 +27,7 @@ public class Aoc201722Tests
     [InlineData(10_000_000, 2_511_944)]
     public void InfectionCountIsCorrectForPart2(int iterations, int expected)
     {
-        var infection = new VirusInfection(Input);
+        var infection = new Aoc201722.VirusInfection(Input);
         var infectionCount = infection.Part2(iterations);
 
         infectionCount.Should().Be(expected);

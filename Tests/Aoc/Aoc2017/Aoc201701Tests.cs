@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201701;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -11,7 +11,7 @@ public class Aoc201701Tests
     [InlineData("91212129", 9)]
     public void CorrectSumOfMatchingNumbers_Sum1(string input, int sum)
     {
-        var captcha = new CaptchaCalculator(input);
+        var captcha = new Aoc201701.CaptchaCalculator(input);
 
         captcha.Sum1.Should().Be(sum);
     }
@@ -24,7 +24,7 @@ public class Aoc201701Tests
     [InlineData("12131415", 4)]
     public void CorrectSumOfMatchingNumbers_Sum2(string input, int sum)
     {
-        var captcha = new CaptchaCalculator(input);
+        var captcha = new Aoc201701.CaptchaCalculator(input);
 
         captcha.Sum2.Should().Be(sum);
     }

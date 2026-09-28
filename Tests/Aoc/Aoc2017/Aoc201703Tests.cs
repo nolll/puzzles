@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201703;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -11,7 +11,7 @@ public class Aoc201703Tests
     [InlineData(1024, 31)]
     public void NumberOfStepsIsCorrect(int targetSquare, int expectedSteps)
     {
-        var spiralMemory = new SpiralMemory(targetSquare, SpiralMemoryMode.RunToTarget);
+        var spiralMemory = new Aoc201703.SpiralMemory(targetSquare, Aoc201703.SpiralMemoryMode.RunToTarget);
 
         spiralMemory.Distance.Should().Be(expectedSteps);
     }

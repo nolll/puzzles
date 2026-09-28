@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201718;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -20,7 +20,7 @@ public class Aoc201718Tests
                              jgz a -2
                              """;
 
-        var single = new SingleRunner(input.Trim());
+        var single = new Aoc201718.SingleRunner(input.Trim());
         single.Run();
 
         single.RecoveredFrequency.Should().Be(4);
@@ -39,7 +39,7 @@ public class Aoc201718Tests
                              rcv d
                              """;
 
-        var duet = new DuetRunner(input.Trim());
+        var duet = new Aoc201718.DuetRunner(input.Trim());
         duet.Run();
 
         duet.Program1SendCount.Should().Be(3);

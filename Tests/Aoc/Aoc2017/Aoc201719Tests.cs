@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201719;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -16,7 +16,7 @@ public class Aoc201719Tests
                                   +B-+  +--+ 
                              """;
 
-        var finder = new TubeRouteFinder(input);
+        var finder = new Aoc201719.TubeRouteFinder(input);
         finder.FindRoute();
 
         finder.Route.Should().Be("ABCDEF");

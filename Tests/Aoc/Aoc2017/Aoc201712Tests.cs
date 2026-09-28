@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201712;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -17,7 +17,7 @@ public class Aoc201712Tests
                              6 <-> 4, 5
                              """;
 
-        var pipes = new Pipes(input.Trim());
+        var pipes = new Aoc201712.Pipes(input.Trim());
 
         pipes.PipesInGroupZero.Should().Be(6);
         pipes.GroupCount.Should().Be(2);

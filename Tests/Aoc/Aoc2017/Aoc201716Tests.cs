@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201716;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -10,7 +10,7 @@ public class Aoc201716Tests
         const string input = "s1,x3/4,pe/b";
         const string programs = "abcde";
 
-        var dancingPrograms = new DancingPrograms(programs);
+        var dancingPrograms = new Aoc201716.DancingPrograms(programs);
         dancingPrograms.Dance(input, 1);
 
         dancingPrograms.Programs.Should().Be("baedc");
@@ -22,7 +22,7 @@ public class Aoc201716Tests
         const string input = "s1,x3/4,pe/b";
         const string programs = "abcde";
 
-        var dancingPrograms = new DancingPrograms(programs);
+        var dancingPrograms = new Aoc201716.DancingPrograms(programs);
         dancingPrograms.Dance(input, 1_000_000_000);
 
         dancingPrograms.Programs.Should().Be("abcde");

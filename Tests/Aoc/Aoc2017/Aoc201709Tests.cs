@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201709;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -16,7 +16,7 @@ public class Aoc201709Tests
     [InlineData("{{<!!>},{<!!>},{<!!>},{<!!>}}", "{{},{},{},{}}", 5, 9)]
     public void GroupCountAndScoreIsCorrect(string input, string expectedCleaned, int expectedCount, int expectedScore)
     {
-        var processor = new StreamProcessor(input);
+        var processor = new Aoc201709.StreamProcessor(input);
 
         processor.Cleaned.Should().Be(expectedCleaned);
         processor.GroupCount.Should().Be(expectedCount);
@@ -33,7 +33,7 @@ public class Aoc201709Tests
     [InlineData("{<{o\"i!a,<{i<a>}", 10)]
     public void GarbageCountIsCorrect(string input, int expected)
     {
-        var processor = new StreamProcessor(input);
+        var processor = new Aoc201709.StreamProcessor(input);
 
         processor.GarbageCount.Should().Be(expected);
     }

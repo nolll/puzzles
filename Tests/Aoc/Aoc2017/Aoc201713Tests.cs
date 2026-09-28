@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201713;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -14,7 +14,7 @@ public class Aoc201713Tests
                              6: 4
                              """;
 
-        var scanner = new PacketScanner(input.Trim());
+        var scanner = new Aoc201713.PacketScanner(input.Trim());
         var severity = scanner.GetSeverity();
         severity.Should().Be(24);
     }
@@ -30,7 +30,7 @@ public class Aoc201713Tests
     [InlineData(3, 4, true)]
     public void IsCaughtAfterIterations(int range, int iteration, bool expected)
     {
-        var layer = new FirewallLayer(range);
+        var layer = new Aoc201713.FirewallLayer(range);
         var pos = layer.IsCaught(iteration);
 
         pos.Should().Be(expected);
@@ -46,7 +46,7 @@ public class Aoc201713Tests
                              6: 4
                              """;
 
-        var scanner = new PacketScanner(input.Trim());
+        var scanner = new Aoc201713.PacketScanner(input.Trim());
         var delay = scanner.DelayUntilPass();
         delay.Should().Be(10);
     }

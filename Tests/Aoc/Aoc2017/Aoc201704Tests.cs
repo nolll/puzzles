@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201704;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -10,7 +10,7 @@ public class Aoc201704Tests
     [InlineData("aa bb cc dd aaa", true)]
     public void ValidatePassword1(string input, bool expected)
     {
-        var validator = new PassphraseValidator();
+        var validator = new Aoc201704.PassphraseValidator();
         var coin = validator.IsValid1(input);
 
         coin.Should().Be(expected);
@@ -24,7 +24,7 @@ public class Aoc201704Tests
     [InlineData("oiii ioii iioi iiio", false)]
     public void ValidatePassword2(string input, bool expected)
     {
-        var validator = new PassphraseValidator();
+        var validator = new Aoc201704.PassphraseValidator();
         var coin = validator.IsValid2(input);
 
         coin.Should().Be(expected);

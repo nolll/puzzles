@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201708;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -14,7 +14,7 @@ public class Aoc201708Tests
                              c inc -20 if c == 10
                              """;
 
-        var calculator = new CpuInstructionCalculator(input.Trim());
+        var calculator = new Aoc201708.CpuInstructionCalculator(input.Trim());
 
         calculator.LargestValueAtEnd.Should().Be(1);
         calculator.LargestValueEver.Should().Be(10);

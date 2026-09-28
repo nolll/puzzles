@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201724;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -7,7 +7,7 @@ public class Aoc201724Tests
     [Fact]
     public void FindsStrongestBridge()
     {
-        var builder = new BridgeBuilder(Input.Trim(), false);
+        var builder = new Aoc201724.BridgeBuilder(Input.Trim(), false);
         var bridge = builder.Build();
 
         bridge.Strength.Should().Be(31);
@@ -16,7 +16,7 @@ public class Aoc201724Tests
     [Fact]
     public void FindsLongestBridge()
     {
-        var builder = new BridgeBuilder(Input.Trim(), true);
+        var builder = new Aoc201724.BridgeBuilder(Input.Trim(), true);
         var bridge = builder.Build();
 
         bridge.Strength.Should().Be(19);

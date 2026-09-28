@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201715;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -7,7 +7,7 @@ public class Aoc201715Tests
     [Fact]
     public void Part1_MatchCountIsOneAfter5Runs()
     {
-        var duel = new GeneratorDuel(65, 8921);
+        var duel = new Aoc201715.GeneratorDuel(65, 8921);
         duel.Run(5);
 
         duel.FinalCount.Should().Be(1);
@@ -16,7 +16,7 @@ public class Aoc201715Tests
     [Fact]
     public void Part1_MatchCountIsOneAfter40MRuns()
     {
-        var duel = new GeneratorDuel(65, 8921);
+        var duel = new Aoc201715.GeneratorDuel(65, 8921);
         duel.Run(40_000_000);
 
         duel.FinalCount.Should().Be(588);
@@ -25,7 +25,7 @@ public class Aoc201715Tests
     [Fact]
     public void Part2_Finds309PairsIn5Runs()
     {
-        var duel = new GeneratorDuel(65, 8921);
+        var duel = new Aoc201715.GeneratorDuel(65, 8921);
         duel.Run2(5_000_000);
 
         duel.FinalCount.Should().Be(309);

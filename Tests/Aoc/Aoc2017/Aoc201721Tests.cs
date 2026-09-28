@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201721;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -12,7 +12,7 @@ public class Aoc201721Tests
                              .#./..#/### => #..#/..../..../#..#
                              """;
 
-        var generator = new FractalArtGenerator(input.Trim());
+        var generator = new Aoc201721.FractalArtGenerator(input.Trim());
         generator.Run(2);
 
         generator.PixelsOn.Should().Be(12);

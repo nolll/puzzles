@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201707;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -23,7 +23,7 @@ public class Aoc201707Tests
     [Fact]
     public void FindsNameOfBottomProgram()
     {
-        var towers = new RecursiveTowers(Input);
+        var towers = new Aoc201707.RecursiveTowers(Input);
         var name = towers.BottomName;
 
         name.Should().Be("tknk");
@@ -32,7 +32,7 @@ public class Aoc201707Tests
     [Fact]
     public void FindsWeightDiff()
     {
-        var towers = new RecursiveTowers(Input);
+        var towers = new Aoc201707.RecursiveTowers(Input);
         var diff = towers.AdjustedWeight;
 
         diff.Should().Be(60);

@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201725;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -32,7 +32,7 @@ public class Aoc201725Tests
                                  - Continue with state A.
                              """;
 
-        var turingMachine = new TuringMachine(input.Trim());
+        var turingMachine = new Aoc201725.TuringMachine(input.Trim());
         var checksum = turingMachine.Run();
 
         checksum.Should().Be(3);

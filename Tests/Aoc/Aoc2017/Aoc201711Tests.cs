@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201711;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -11,7 +11,7 @@ public class Aoc201711Tests
     [InlineData("se,sw,se,sw,sw", 3)]
     public void DistanceIsCorrect(string input, int expected)
     {
-        var navigator = new HexGridNavigator(input);
+        var navigator = new Aoc201711.HexGridNavigator(input);
 
         navigator.EndDistance.Should().Be(expected);
     }

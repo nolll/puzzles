@@ -1,4 +1,4 @@
-using Pzl.Aoc.Puzzles.Aoc2017.Aoc201705;
+using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
@@ -15,7 +15,7 @@ public class Aoc201705Tests
                              -3
                              """;
 
-        var jumper = new InstructionJumper(input);
+        var jumper = new Aoc201705.InstructionJumper(input);
         jumper.Start1();
 
         jumper.StepCount.Should().Be(5);
@@ -32,7 +32,7 @@ public class Aoc201705Tests
                              -3
                              """;
 
-        var jumper = new InstructionJumper(input);
+        var jumper = new Aoc201705.InstructionJumper(input);
         jumper.Start2();
 
         jumper.StepCount.Should().Be(10);

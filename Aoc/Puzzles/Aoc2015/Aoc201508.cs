@@ -9,56 +9,39 @@ public class Aoc201508 : AocPuzzle
     [Puzzle("d1ca0ea6d28dd7f5e3d1551600b6b2c5")]
     public int Part1(string input)
     {
-        var digitalList = new DigitalList(input);
-        return digitalList.CodeMinusMemoryDiff;
+        var strings = input.Split(LineBreaks.Single);
+        var codeCount = strings.Sum(CountCode);
+        var memoryCount = strings.Sum(CountMemory);
+        return codeCount - memoryCount;
     }
 
     [Puzzle("6ea0bb2ac1526f96307f0eeb8c4d25b7")]
     public int Part2(string input)
     {
-        var digitalList = new DigitalList(input);
-        return digitalList.EncodedMinusCodeDiff;
+        var strings = input.Split(LineBreaks.Single);
+        var codeCount = strings.Sum(CountCode);
+        var encodedCount = strings.Sum(CountEncoded);
+        return encodedCount - codeCount;
     }
     
-    public class DigitalList
+    private static int CountCode(string s) => s.Length;
+
+    private static int CountMemory(string s)
     {
-        public int CodeMinusMemoryDiff { get; }
-        public int EncodedMinusCodeDiff { get; }
+        s = s.Remove(0, 1);
+        s = s.Remove(s.Length - 1);
 
-        public DigitalList(string input)
+        while (s.Contains('\\'))
         {
-            var strings = input.Split(LineBreaks.Single);
-            var codeCount = strings.Sum(CountCode);
-            var memoryCount = strings.Sum(CountMemory);
-            var encodedCount = strings.Sum(CountEncoded);
-            CodeMinusMemoryDiff = codeCount - memoryCount;
-            EncodedMinusCodeDiff = encodedCount - codeCount;
+            var backslashIndex = s.IndexOf('\\');
+            var nextChar = s[backslashIndex + 1];
+            var charactersToRemove = nextChar is '\"' or '\\' ? 2 : 4;
+            s = s.Remove(backslashIndex, charactersToRemove);
+            s = s.Insert(backslashIndex, "-");
         }
 
-        private static int CountCode(string s) => s.Length;
-
-        private static int CountMemory(string s)
-        {
-            s = s.Remove(0, 1);
-            s = s.Remove(s.Length - 1);
-
-            while (s.Contains("\\"))
-            {
-                var backslashIndex = s.IndexOf("\\", StringComparison.InvariantCulture);
-                var nextChar = s[backslashIndex + 1];
-                var charactersToRemove = nextChar == '\"' || nextChar == '\\' ? 2 : 4;
-                s = s.Remove(backslashIndex, charactersToRemove);
-                s = s.Insert(backslashIndex, "-");
-            }
-
-            return s.Length;
-        }
-
-        private static int CountEncoded(string s)
-        {
-            s = s.Replace("\\", "\\\\");
-            s = s.Replace("\"", "\\\"");
-            return s.Length + 2;
-        }
+        return s.Length;
     }
+
+    private static int CountEncoded(string s) => s.Replace(@"\", @"\\").Replace("\"", "\\\"").Length + 2;
 }

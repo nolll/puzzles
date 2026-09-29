@@ -13,10 +13,8 @@ public class Aoc201508Tests
                              "aaa\"aaa"
                              "\x27"
                              """;
-
-        var digitalList = new Aoc201508.DigitalList(input.Trim());
-
-        digitalList.CodeMinusMemoryDiff.Should().Be(12);
+        
+        Sut.Part1(input).Should().Be(12);
     }
 
     [Fact]
@@ -29,8 +27,8 @@ public class Aoc201508Tests
                              "\x27"
                              """;
 
-        var digitalList = new Aoc201508.DigitalList(input.Trim());
-
-        digitalList.EncodedMinusCodeDiff.Should().Be(19);
+        Sut.Part2(input).Should().Be(19);
     }
+
+    private static Aoc201508 Sut => new();
 }

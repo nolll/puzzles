@@ -1,175 +1,128 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids3d;
 using Pzl.Tools.Maths;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
 [Name("The N-Body Problem")]
 public class Aoc201912 : AocPuzzle
 {
-    private const int Iterations = 1000;
-
     [Puzzle("f4aa1e6262770dd457b3fc1a02f903b9")]
-    public int Part1(string input)
-    {
-        var tracker1 = new MoonTracker(input);
-        tracker1.Run(Iterations);
-
-        return tracker1.TotalEnergy;
-    }
+    public int Part1(string input, int iterations = 1000) => Run(ReadMap(input), iterations);
 
     [Puzzle("b61b39d42360ecd83bd6094a285a4251")]
-    public long Part2(string input)
+    public long Part2(string input) => RunUntilRepeat(ReadMap(input));
+
+    private static int TotalEnergy(IList<Moon> moons) => moons.Sum(o => o.Energy);
+
+    private int Run(Moon[] moons, int maxIterations)
     {
-        var tracker2 = new MoonTracker(input);
-        tracker2.RunUntilRepeat();
-
-        return tracker2.Iterations;
-    }
-
-    public class MoonTracker
-    {
-        public IList<Moon> Moons { get; }
-        public long Iterations { get; private set; }
-        public int TotalEnergy => Moons.Sum(o => o.TotalEnergy);
-
-        public MoonTracker(string map)
+        var i = 0;
+        while (i < maxIterations)
         {
-            Moons = ReadMap(map);
-        }
-
-        private IList<Moon> ReadMap(string map)
-        {
-            var rows = map.Trim().Split('\n');
-            var moons = new List<Moon>();
-            foreach (var row in rows)
-            {
-                var items = row.Trim().TrimStart('<').TrimEnd('>').Replace(" ", "").Split(',');
-                var coords = items.Select(o => int.Parse(o.Split('=')[1])).ToArray();
-                var moon = new Moon(coords[0], coords[1], coords[2]);
-                moons.Add(moon);
-            }
-
-            return moons;
-        }
-
-        public void Run(int maxIterations)
-        {
-            while (Iterations < maxIterations)
-            {
-                foreach (var dimension in Dimension.Dimensions)
-                {
-                    UpdateVelocities(dimension);
-                    Move(dimension);
-                }
-
-                Iterations++;
-            }
-        }
-
-        public void RunUntilRepeat()
-        {
-            var iterations = Dimension.Dimensions.Select(o => (long)0).ToArray();
             foreach (var dimension in Dimension.Dimensions)
             {
-                while (!IsDone(dimension))
-                {
-                    UpdateVelocities(dimension);
-                    Move(dimension);
-                    iterations[dimension] += 1;
-                }
+                UpdateVelocities(moons, dimension);
+                Move(moons, dimension);
             }
 
-            Iterations = MathTools.Lcm(iterations);
+            i++;
         }
 
-        private bool IsDone(int dimension) => Moons.All(o => o.IsBackAtStart(dimension));
+        return TotalEnergy(moons);
+    }
 
-        private void Move(int dimension)
+    private long RunUntilRepeat(Moon[] moons)
+    {
+        var iterations = Dimension.Dimensions.Select(_ => (long)0).ToArray();
+        foreach (var dimension in Dimension.Dimensions)
         {
-            foreach (var moon in Moons)
-                moon.Move(dimension);
-        }
-
-        private void UpdateVelocities(int dimension)
-        {
-            for (var i = 0; i < Moons.Count; i++)
+            while (!IsDone(moons, dimension))
             {
-                for (var j = 0; j < Moons.Count; j++)
-                {
-                    if (i != j)
-                        UpdateVelocity(dimension, Moons[i], Moons[j]);
-                }
+                UpdateVelocities(moons, dimension);
+                Move(moons, dimension);
+                iterations[dimension] += 1;
             }
         }
 
-        private void UpdateVelocity(int dimension, Moon moon, Moon otherMoon)
-        {
-            var change = GetVelocityChange(moon.Position[dimension], otherMoon.Position[dimension]);
-            moon.ChangeVelocity(dimension, moon.Velocity[dimension] + change);
-        }
+        return MathTools.Lcm(iterations);
+    }
 
-        private int GetVelocityChange(int moonX, int otherMoonX)
-        {
-            var diff = otherMoonX - moonX;
-            if (diff == 0)
-                return 0;
+    private bool IsDone(Moon[] moons, int dimension) => moons.All(o => o.IsBackAtStart(dimension));
 
-            return diff / Math.Abs(diff);
+    private void Move(Moon[] moons, int dimension)
+    {
+        foreach (var moon in moons)
+            moon.Move(dimension);
+    }
+
+    private void UpdateVelocities(Moon[] moons, int dimension)
+    {
+        for (var i = 0; i < moons.Length; i++)
+        {
+            for (var j = 0; j < moons.Length; j++)
+            {
+                if (i != j)
+                    UpdateVelocity(dimension, moons[i], moons[j]);
+            }
         }
     }
-    
-    public class Velocity
+
+    private void UpdateVelocity(int dimension, Moon moon, Moon otherMoon)
     {
-        public int X { get; }
-        public int Y { get; }
-        public int Z { get; }
-
-        public int KineticEnergy => Math.Abs(X) + Math.Abs(Y) + Math.Abs(Z);
-
-        public Velocity(int x, int y, int z)
-        {
-            X = x;
-            Y = y;
-            Z = z;
-        }
+        var change = GetVelocityChange(moon.Position[dimension], otherMoon.Position[dimension]);
+        moon.ChangeVelocity(dimension, moon.Velocity[dimension] + change);
     }
-    
-    public class Moon
-    {
-        private readonly int[] _startPosition;
-        private readonly bool[] _hasMoved;
 
-        public int[] Position { get; }
-        public int[] Velocity { get; }
-        public int X => Position[Dimension.X];
-        public int Y => Position[Dimension.Y];
-        public int Z => Position[Dimension.Z];
-        public int Vx => Velocity[Dimension.X];
-        public int Vy => Velocity[Dimension.Y];
-        public int Vz => Velocity[Dimension.Z];
+    private static int GetVelocityChange(int moonX, int otherMoonX)
+    {
+        var diff = otherMoonX - moonX;
+        if (diff == 0)
+            return 0;
+
+        return diff / Math.Abs(diff);
+    }
+
+    private static Moon[] ReadMap(string map)
+    {
+        var rows = map.Trim().Split(LineBreaks.Single);
+        var moons = new List<Moon>();
+        foreach (var row in rows)
+        {
+            var items = row.Trim().TrimStart('<').TrimEnd('>').Replace(" ", "").Split(',');
+            var (x, y, z) = items.Select(o => int.Parse(o.Split('=')[1])).ToArray();
+            var moon = new Moon(x, y, z);
+            moons.Add(moon);
+        }
+
+        return [.. moons];
+    }
+
+    private class Moon(int x, int y, int z, int vx = 0, int vy = 0, int vz = 0)
+    {
+        private readonly int[] _startPosition = [x, y, z];
+        private readonly bool[] _hasMoved = new bool[3];
+
+        public int[] Position { get; } = [x, y, z];
+        public int[] Velocity { get; } = [vx, vy, vz];
+        private int X => Position[Dimension.X];
+        private int Y => Position[Dimension.Y];
+        private int Z => Position[Dimension.Z];
+        private int Vx => Velocity[Dimension.X];
+        private int Vy => Velocity[Dimension.Y];
+        private int Vz => Velocity[Dimension.Z];
 
         private int PotentialEnergy => Math.Abs(X) + Math.Abs(Y) + Math.Abs(Z);
         private int KineticEnergy => Math.Abs(Vx) + Math.Abs(Vy) + Math.Abs(Vz);
-        public int TotalEnergy => PotentialEnergy * KineticEnergy;
+        public int Energy => PotentialEnergy * KineticEnergy;
+
         public bool IsBackAtStart(int dimension) =>
             _hasMoved[dimension] &&
             Position[dimension] == _startPosition[dimension]
             && Velocity[dimension] == 0;
 
-        public Moon(int x, int y, int z, int vx = 0, int vy = 0, int vz = 0)
-        {
-            _hasMoved = new bool[3];
-            _startPosition = new[] { x, y, z };
-
-            Position = new[] { x, y, z };
-            Velocity = new[] { vx, vy, vz };
-        }
-
-        public void ChangeVelocity(int dimension, int velocity)
-        {
-            Velocity[dimension] = velocity;
-        }
+        public void ChangeVelocity(int dimension, int velocity) => Velocity[dimension] = velocity;
 
         public void Move(int dimension)
         {

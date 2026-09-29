@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017;
 
@@ -32,7 +33,7 @@ public class Aoc201705 : AocPuzzle
         public InstructionJumper(string input)
         {
             StepCount = 0;
-            _numbers = input.Trim().Split('\n').Select(o => int.Parse((string) o.Trim())).ToList();
+            _numbers = input.Trim().Split(LineBreaks.Single).Select(o => int.Parse(o.Trim())).ToList();
         }
 
         public void Start1()

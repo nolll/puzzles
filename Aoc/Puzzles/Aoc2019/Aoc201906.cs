@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
@@ -17,7 +18,7 @@ public class Aoc201906 : AocPuzzle
 
         public OrbitCalculator(string input)
         {
-            var items = input.Trim().Split('\n').Select(o => o.Trim());
+            var items = input.Trim().Split(LineBreaks.Single).Select(o => o.Trim());
             foreach (var item in items)
             {
                 var parts = item.Split(')');

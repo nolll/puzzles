@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Euler.Puzzles;
 
@@ -70,7 +71,7 @@ public class Euler011 : EulerPuzzle
     private static Grid<int> BuildGrid(string input, char defaultValue = default)
     {
         var grid = new Grid<int>(1, 1, defaultValue);
-        var rows = input.Trim().Split('\n');
+        var rows = input.Trim().Split(LineBreaks.Single);
         var y = 0;
         foreach (var row in rows)
         {

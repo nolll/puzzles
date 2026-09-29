@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
@@ -25,7 +26,7 @@ public class Aoc201901 : AocPuzzle
 
         private IList<Module> GetModules(string input)
         {
-            var massStrings = input.Trim().Split('\n');
+            var massStrings = input.Trim().Split(LineBreaks.Single);
             return massStrings.Select(o => new Module(int.Parse(o.Trim()))).ToList();
         }
     }

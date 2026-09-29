@@ -1,6 +1,7 @@
 using System.Text;
 using Pzl.Common;
 using Pzl.Tools.Computers.IntCode;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
@@ -113,7 +114,7 @@ public class Aoc201925 : AocPuzzle
         {
             _computer.Start();
 
-            var lastSentence = _output.ToString().Trim().Split('\n').Last().Trim();
+            var lastSentence = _output.ToString().Trim().Split(LineBreaks.Single).Last().Trim();
             return lastSentence.Split(' ')[11];
         }
 

@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017;
 
@@ -17,8 +18,8 @@ public class Aoc201704 : AocPuzzle
     
     public class PassphraseValidator
     {
-        public int GetValidCount1(string input) => input.Split('\n').Count(IsValid1);
-        public int GetValidCount2(string input) => input.Split('\n').Count(IsValid2);
+        public int GetValidCount1(string input) => input.Split(LineBreaks.Single).Count(IsValid1);
+        public int GetValidCount2(string input) => input.Split(LineBreaks.Single).Count(IsValid2);
 
         public bool IsValid1(string input)
         {

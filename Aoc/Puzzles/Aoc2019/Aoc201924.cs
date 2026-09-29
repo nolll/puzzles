@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
@@ -109,8 +110,8 @@ public class Aoc201924 : AocPuzzle
 
         private Grid<char> BuildGrid(string map)
         {
-            var grid = new Grid<char>(1, 1);
-            var rows = map.Trim().Split('\n');
+            var grid = new Grid<char>();
+            var rows = map.Trim().Split(LineBreaks.Single);
             var y = 0;
             foreach (var row in rows)
             {
@@ -227,8 +228,8 @@ public class Aoc201924 : AocPuzzle
 
         private static Grid<char> BuildGrid(string map)
         {
-            var grid = new Grid<char>(1, 1);
-            var rows = map.Trim().Split('\n');
+            var grid = new Grid<char>();
+            var rows = map.Trim().Split(LineBreaks.Single);
             var y = 0;
             foreach (var row in rows)
             {

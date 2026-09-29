@@ -2,6 +2,7 @@ using System.Text;
 using Pzl.Common;
 using Pzl.Tools.Computers.IntCode;
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
@@ -74,7 +75,7 @@ public class Aoc201917 : AocPuzzle
         private Grid<char> BuildGrid(string map)
         {
             var grid = new Grid<char>();
-            var rows = map.Trim().Split('\n');
+            var rows = map.Trim().Split(LineBreaks.Single);
             var y = 0;
             foreach (var row in rows)
             {

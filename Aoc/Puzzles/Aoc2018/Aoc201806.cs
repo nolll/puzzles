@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2018;
 
@@ -116,7 +117,7 @@ public class Aoc201806 : AocPuzzle
 
         private static IList<Coord> GetCoords(string input)
         {
-            var strCoords = input.Trim().Split('\n');
+            var strCoords = input.Trim().Split(LineBreaks.Single);
             var coords = new List<Coord>();
             foreach (var str in strCoords)
             {

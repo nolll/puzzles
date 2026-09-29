@@ -18,13 +18,13 @@ public class Aoc201502 : AocPuzzle
 
     public int GetRequiredPaperForOneBox(string input)
     {
-        var dimensions = Numbers.IntsFromString(input);
+        var (length, width, height) = Numbers.IntsFromString(input);
         var sides = new List<int>
         {
-            dimensions[0] * dimensions[1],
-            dimensions[0] * dimensions[2],
-            dimensions[1] * dimensions[2]
-        }.OrderBy(o => o).ToList();
+            length * width,
+            length * height,
+            width * height,
+        }.OrderBy(o => o).ToArray();
 
         return sides[0] * 3 + sides[1] * 2 + sides[2] * 2;
     }
@@ -34,7 +34,7 @@ public class Aoc201502 : AocPuzzle
 
     public int GetRequiredRibbonForOneBox(string input)
     {
-        var dimensions = Numbers.IntsFromString(input).OrderBy(o => o).ToList();
-        return dimensions[0] * 2 + dimensions[1] * 2 + dimensions[0] * dimensions[1] * dimensions[2];
+        var (length, width, height) = Numbers.IntsFromString(input).OrderBy(o => o).ToArray();
+        return length * 2 + width * 2 + length * width * height;
     }
 }

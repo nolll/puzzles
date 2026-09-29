@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
@@ -123,7 +124,7 @@ public class Aoc201914 : AocPuzzle
     {
         public IList<Reaction> Parse(string input)
         {
-            var rows = input.Trim().Split('\n').Select(o => o.Trim());
+            var rows = input.Trim().Split(LineBreaks.Single).Select(o => o.Trim());
             var reactions = new List<Reaction>();
             foreach (var row in rows)
             {

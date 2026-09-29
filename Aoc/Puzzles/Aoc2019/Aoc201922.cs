@@ -1,5 +1,6 @@
 using System.Numerics;
 using Pzl.Common;
+using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
@@ -60,10 +61,10 @@ public class Aoc201922 : AocPuzzle
         public IList<int> Shuffle(int deckSize, string input)
         {
             var deck = Enumerable.Range(0, deckSize).ToList();
-            return Shuffle(deck, input.Trim().Split('\n').Select(o => o.Trim()).ToList());
+            return Shuffle(deck, input.Trim().Split(LineBreaks.Single).Select(o => o.Trim()).ToList());
         }
 
-        public BigInteger ShuffleBig(string input) => ShuffleBig(input.Trim().Split('\n').Select(o => o.Trim()).ToList());
+        public BigInteger ShuffleBig(string input) => ShuffleBig(input.Trim().Split(LineBreaks.Single).Select(o => o.Trim()).ToList());
 
         private IList<int> Shuffle(IList<int> deck, IList<string> shuffles)
         {

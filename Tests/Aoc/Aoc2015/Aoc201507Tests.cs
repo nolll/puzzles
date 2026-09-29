@@ -17,17 +17,18 @@ public class Aoc201507Tests
                              NOT x -> h
                              NOT y -> i
                              """;
+        
+        var wires = Sut.RunOne(input);
 
-        var circuit = new Aoc201507.Circuit(input.Trim());
-        circuit.RunOne("i");
-
-        circuit.Wires["d"].Signal.Should().Be(72);
-        circuit.Wires["e"].Signal.Should().Be(507);
-        circuit.Wires["f"].Signal.Should().Be(492);
-        circuit.Wires["g"].Signal.Should().Be(114);
-        circuit.Wires["h"].Signal.Should().Be(65412);
-        circuit.Wires["i"].Signal.Should().Be(65079);
-        circuit.Wires["x"].Signal.Should().Be(123);
-        circuit.Wires["y"].Signal.Should().Be(456);
+        wires["d"].Signal.Should().Be(72);
+        wires["e"].Signal.Should().Be(507);
+        wires["f"].Signal.Should().Be(492);
+        wires["g"].Signal.Should().Be(114);
+        wires["h"].Signal.Should().Be(65412);
+        wires["i"].Signal.Should().Be(65079);
+        wires["x"].Signal.Should().Be(123);
+        wires["y"].Signal.Should().Be(456);
     }
+
+    private static Aoc201507 Sut => new();
 }

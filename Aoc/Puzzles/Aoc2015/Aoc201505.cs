@@ -7,10 +7,10 @@ namespace Pzl.Aoc.Puzzles.Aoc2015;
 public class Aoc201505 : AocPuzzle
 {
     [Puzzle("9acaaf3fc5bc7b60d024ccf5dee1c098")]
-    public int Part1(string input) => input.Split(LineBreaks.Single).Count(IsNice1);
+    public int Part1(string input) => Parse(input).Count(IsNice1);
 
     [Puzzle("5363390b461681375e68f3cea9b968df")]
-    public int Part2(string input) => input.Split(LineBreaks.Single).Count(IsNice2);
+    public int Part2(string input) => Parse(input).Count(IsNice2);
 
     private const string Vowels = "aeiou";
     
@@ -82,4 +82,5 @@ public class Aoc201505 : AocPuzzle
 
     private static int GetVowelCount(string input) => input.Count(IsVowel);
     private static bool IsVowel(char c) => Vowels.Contains(c);
+    private static string[] Parse(string input) => input.Split(LineBreaks.Single);
 }

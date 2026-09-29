@@ -1,36 +1,36 @@
 using Pzl.Aoc.Puzzles.Aoc2015;
+using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Aoc.Aoc2015;
 
 public class Aoc201506Tests
 {
+    private const int Size = 5;
+
     [Fact]
     public void TurnsOnAllLights()
     {
-        var controller = new Aoc201506.ChristmasLightsController(5);
-        controller.TurnOn(0, 0, 4, 4);
-
-        controller.LitCount.Should().Be(25);
+        var grid = new Grid<int>(Size, Size);
+        new Aoc201506.TurnOnCommand(0, 0, 4, 4).Move(grid);
+        Aoc201506.LitCount(grid).Should().Be(25);
     }
 
     [Fact]
     public void TurnsOnAllLightsTurnsOffFiveLights()
     {
-        var controller = new Aoc201506.ChristmasLightsController(5);
-        controller.TurnOn(0, 0, 4, 4);
-        controller.TurnOff(0, 2, 4, 2);
-
-        controller.LitCount.Should().Be(20);
+        var grid = new Grid<int>(Size, Size);
+        new Aoc201506.TurnOnCommand(0, 0, 4, 4).Move(grid);
+        new Aoc201506.TurnOffCommand(0, 2, 4, 2).Move(grid);
+        Aoc201506.LitCount(grid).Should().Be(20);
     }
 
     [Fact]
     public void TurnsOnAllLightsTurnsOffFiveLightsTogglesAllLights()
     {
-        var controller = new Aoc201506.ChristmasLightsController(5);
-        controller.TurnOn(0, 0, 4, 4);
-        controller.TurnOff(0, 2, 4, 2);
-        controller.Toggle(0, 0, 4, 4);
-
-        controller.LitCount.Should().Be(5);
+        var grid = new Grid<int>(Size, Size);
+        new Aoc201506.TurnOnCommand(0, 0, 4, 4).Move(grid);
+        new Aoc201506.TurnOffCommand(0, 2, 4, 2).Move(grid);
+        new Aoc201506.ToggleCommand(0, 0, 4, 4).Move(grid);
+        Aoc201506.LitCount(grid).Should().Be(5);
     }
 }

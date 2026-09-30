@@ -13,11 +13,8 @@ public class Aoc201519Tests : PuzzleTest<Aoc201519>
                              H => OH
                              O => HH
                              """;
-
-        var machine = new Aoc201519.MedicineMachine(input.Trim());
-        var molecules = machine.GetCalibrationMolecules(startMolecule);
-
-        molecules.Count.Should().Be(4);
+        
+        Sut.GetCalibrationMoleculeCount(input, startMolecule).Should().Be(4);
     }
 
     [Theory]
@@ -32,10 +29,7 @@ public class Aoc201519Tests : PuzzleTest<Aoc201519>
                              H => OH
                              O => HH
                              """;
-
-        var machine = new Aoc201519.MedicineMachine(input.Trim());
-        var stepCount = machine.StepsToMake(molecule);
-
-        stepCount.Should().Be(steps);
+        
+        Sut.StepsToMake(input, molecule).Should().Be(steps);
     }
 }

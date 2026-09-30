@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201623Tests
+public class Aoc201623Tests : PuzzleTest<Aoc201623>
 {
     [Fact]
     public void RegisterAIsCorrect()

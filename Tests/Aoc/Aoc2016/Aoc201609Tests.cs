@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201609Tests
+public class Aoc201609Tests : PuzzleTest<Aoc201609>
 {
     [Theory]
     [InlineData("ADVENT", 6)]

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201613Tests
+public class Aoc201613Tests : PuzzleTest<Aoc201613>
 {
     [Fact]
     public void ShortestStepCountIsCorrect()

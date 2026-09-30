@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201621Tests
+public class Aoc201621Tests :  PuzzleTest<Aoc201621>
 {
     [Fact]
     public void CorrectScramble()

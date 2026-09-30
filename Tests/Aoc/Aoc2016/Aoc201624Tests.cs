@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201624Tests
+public class Aoc201624Tests :  PuzzleTest<Aoc201624>
 {
     [Fact]
     public void FindsClosestRoute()

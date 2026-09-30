@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201610Tests
+public class Aoc201610Tests : PuzzleTest<Aoc201610>
 {
     [Fact]
     public void FindsBot()

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201608Tests
+public class Aoc201608Tests : PuzzleTest<Aoc201608>
 {
     [Fact]
     public void PixelCount()

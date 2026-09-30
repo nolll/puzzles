@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201619Tests
+public class Aoc201619Tests : PuzzleTest<Aoc201619>
 {
     [Fact]
     public void StealFromNextElf_ThirdElfGetsAllPresents()

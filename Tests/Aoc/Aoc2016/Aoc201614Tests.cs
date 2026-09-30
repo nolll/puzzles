@@ -3,7 +3,7 @@ using Pzl.Tools.Strings;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201614Tests
+public class Aoc201614Tests : PuzzleTest<Aoc201614>
 {
     [Fact]
     public void GeneratesCorrectKeys()

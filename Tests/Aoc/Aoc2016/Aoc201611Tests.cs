@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201611Tests
+public class Aoc201611Tests : PuzzleTest<Aoc201611>
 {
     [Fact]
     public void StepCountIsCorrect()

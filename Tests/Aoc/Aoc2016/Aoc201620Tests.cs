@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201620Tests
+public class Aoc201620Tests : PuzzleTest<Aoc201620>
 {
     [Fact]
     public void FindsUnblockedIps()

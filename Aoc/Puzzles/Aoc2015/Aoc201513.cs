@@ -8,81 +8,76 @@ namespace Pzl.Aoc.Puzzles.Aoc2015;
 public class Aoc201513 : AocPuzzle
 {
     [Puzzle("dc9344b26ae0a5267f6fed8baed68a66")]
-    public int Part1(string input) => new DinnerTable(input).HappinessChange;
+    public int Part1(string input) => GetHappinessChange(input, false);
 
     [Puzzle("a65dc47bae92b7cf052aa4311e6a429a")]
-    public int Part2(string input) => new DinnerTable(input, true).HappinessChange;
+    public int Part2(string input) => GetHappinessChange(input, true);
 
-    public class DinnerTable
+    private const string Me = "Me";
+
+    private static int GetHappinessChange(string input, bool includeMe)
     {
-        private const string Me = "Me";
+        var guests = ParseGuests(input, includeMe);
+        var names = guests.Keys;
+        var nameLists = PermutationGenerator.GetPermutations([.. names]);
+        var happiness = nameLists.Select(nl => CalculateHappiness([.. nl.Select(p => guests[p])]));
 
-        public int HappinessChange { get; }
-
-        public DinnerTable(string input, bool includeMe = false)
-        {
-            var guests = ParseGuests(input, includeMe);
-            var names = guests.Keys;
-            var nameLists = PermutationGenerator.GetPermutations(names.ToList());
-            var happiness = nameLists.Select(nl => CalculateHappiness(nl.Select(p => guests[p]).ToList()));
-
-            HappinessChange = happiness.Max();
-        }
-
-        private int CalculateHappiness(IList<DinnerGuest> guests)
-        {
-            var happiness = 0;
-            for (var i = 0; i < guests.Count; i++)
-            {
-                var guest = guests[i];
-                var nextGuestIndex = i + 1 >= guests.Count ? 0 : i + 1;
-                var prevGuestIndex = i - 1 < 0 ? guests.Count - 1 : i - 1;
-                var nextGuest = guests[nextGuestIndex];
-                var prevGuest = guests[prevGuestIndex];
-                var nextGuestHappiness = guest.GetHappiness(nextGuest.Name);
-                var prevGuestHappiness = guest.GetHappiness(prevGuest.Name);
-                happiness += nextGuestHappiness + prevGuestHappiness;
-            }
-
-            return happiness;
-        }
-
-        private static IDictionary<string, DinnerGuest> ParseGuests(string input, bool includeMe)
-        {
-            var rules = input.Split(LineBreaks.Single);
-            var guests = new Dictionary<string, DinnerGuest>();
-
-            if (includeMe)
-                guests.Add(Me, new DinnerGuest(Me));
-
-            foreach (var r in rules)
-            {
-                var parts = r.TrimEnd('.').Split(' ');
-                var name = parts[0];
-                var sign = parts[2] == "lose" ? -1 : 1;
-                var happiness = sign * int.Parse(parts[3]);
-                var otherName = parts[10];
-                var rule = new DinnerGuestRule(otherName, happiness);
-                if (!guests.TryGetValue(name, out var guest))
-                {
-                    guest = new DinnerGuest(name);
-                    guests.Add(name, guest);
-                }
-
-                guest.AddRule(rule);
-            }
-
-            return guests;
-        }
+        return happiness.Max();
     }
-    
-    public record DinnerGuest(string Name)
+
+    private static int CalculateHappiness(DinnerGuest[] guests)
     {
-        private IList<DinnerGuestRule> Rules { get; } = new List<DinnerGuestRule>();
+        var happiness = 0;
+        for (var i = 0; i < guests.Length; i++)
+        {
+            var guest = guests[i];
+            var nextGuestIndex = i + 1 >= guests.Length ? 0 : i + 1;
+            var prevGuestIndex = i - 1 < 0 ? guests.Length - 1 : i - 1;
+            var nextGuest = guests[nextGuestIndex];
+            var prevGuest = guests[prevGuestIndex];
+            var nextGuestHappiness = guest.GetHappiness(nextGuest.Name);
+            var prevGuestHappiness = guest.GetHappiness(prevGuest.Name);
+            happiness += nextGuestHappiness + prevGuestHappiness;
+        }
+
+        return happiness;
+    }
+
+    private static IDictionary<string, DinnerGuest> ParseGuests(string input, bool includeMe)
+    {
+        var rules = input.Split(LineBreaks.Single);
+        var guests = new Dictionary<string, DinnerGuest>();
+
+        if (includeMe)
+            guests.Add(Me, new DinnerGuest(Me));
+
+        foreach (var r in rules)
+        {
+            var parts = r.TrimEnd('.').Split(' ');
+            var name = parts[0];
+            var sign = parts[2] == "lose" ? -1 : 1;
+            var happiness = sign * int.Parse(parts[3]);
+            var otherName = parts[10];
+            var rule = new DinnerGuestRule(otherName, happiness);
+            if (!guests.TryGetValue(name, out var guest))
+            {
+                guest = new DinnerGuest(name);
+                guests.Add(name, guest);
+            }
+
+            guest.AddRule(rule);
+        }
+
+        return guests;
+    }
+
+    private record DinnerGuest(string Name)
+    {
+        private IList<DinnerGuestRule> Rules { get; } = [];
 
         public void AddRule(DinnerGuestRule rule) => Rules.Add(rule);
         public int GetHappiness(string otherName) => Rules.FirstOrDefault(o => o.Name == otherName)?.Happiness ?? 0;
     }
-    
-    public record DinnerGuestRule(string Name, int Happiness);
+
+    private record DinnerGuestRule(string Name, int Happiness);
 }

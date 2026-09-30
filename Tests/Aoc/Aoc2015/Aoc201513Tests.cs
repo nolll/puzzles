@@ -22,8 +22,8 @@ public class Aoc201513Tests
                              David would gain 41 happiness units by sitting next to Carol.
                              """;
 
-        var table = new Aoc201513.DinnerTable(input);
-
-        table.HappinessChange.Should().Be(330);
+        Sut.Part1(input).Should().Be(330);
     }
+    
+    private static Aoc201513 Sut => new();
 }

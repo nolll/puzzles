@@ -10,20 +10,8 @@ public class Aoc201515Tests : PuzzleTest<Aoc201515>
                                  """;
 
     [Fact]
-    public void FindsHighestCookieScore()
-    {
-        var baker = new Aoc201515.CookieBakery(Input);
-        var score = baker.HighestScore;
-
-        score.Should().Be(62842880);
-    }
+    public void FindsHighestCookieScore() => Sut.Part1(Input).Should().Be(62842880);
 
     [Fact]
-    public void FindsHighestCookieScoreWith500Calories()
-    {
-        var baker = new Aoc201515.CookieBakery(Input);
-        var score = baker.HighestScoreWith500Calories;
-
-        score.Should().Be(57600000);
-    }
+    public void FindsHighestCookieScoreWith500Calories() => Sut.Part2(Input).Should().Be(57600000);
 }

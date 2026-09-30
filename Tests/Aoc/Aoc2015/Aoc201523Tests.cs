@@ -13,10 +13,7 @@ public class Aoc201523Tests : PuzzleTest<Aoc201523>
                              tpl a
                              inc a
                              """;
-
-        var computer = new Aoc201523.ChristmasComputer();
-        computer.Run(input.Trim());
-
-        computer.RegisterA.Should().Be(2);
+        
+        Sut.Run([], input)['a'].Should().Be(2);
     }
 }

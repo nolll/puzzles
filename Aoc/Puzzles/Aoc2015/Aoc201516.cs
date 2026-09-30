@@ -10,25 +10,22 @@ public class Aoc201516 : AocPuzzle
     public int Part1(string input) => ParseSues(input).FirstOrDefault(o => o.IsCorrectSuePart1)?.Number ?? 0;
 
     [Puzzle("d0cfc435d1459e83bcc2be3046271a1a")]
-    public int Part2(string input)
-    {
-        return ParseSues(input).FirstOrDefault(o => o.IsCorrectSuePart2)?.Number ?? 0;
-    }
-    
-    private static IList<Sue> ParseSues(string input) => input.Split(LineBreaks.Single).Select(ParseSue).ToList();
+    public int Part2(string input) => ParseSues(input).FirstOrDefault(o => o.IsCorrectSuePart2)?.Number ?? 0;
 
+    private static Sue[] ParseSues(string input) => [.. input.Split(LineBreaks.Single).Select(ParseSue)];
+    
     private static Sue ParseSue(string s)
     {
-        var parts = s.Replace(":", "").Replace(",", "").Split(' ');
-        var number = int.Parse(parts[1]);
+        var (_, id, name1, value1, name2, value2, name3, value3) = s.Replace(":", "").Replace(",", "").Split(' ');
+        var number = int.Parse(id);
         var sue = new Sue(number);
-        sue.Set(parts[2], int.Parse(parts[3]));
-        sue.Set(parts[4], int.Parse(parts[5]));
-        sue.Set(parts[6], int.Parse(parts[7]));
+        sue.Set(name1, int.Parse(value1));
+        sue.Set(name2, int.Parse(value2));
+        sue.Set(name3, int.Parse(value3));
         return sue;
     }
-    
-    public class Sue(int number)
+
+    private class Sue(int number)
     {
         private readonly IDictionary<string, int> _properties = new Dictionary<string, int>();
         public int Number { get; } = number;

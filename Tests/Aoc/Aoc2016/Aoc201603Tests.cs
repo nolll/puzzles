@@ -2,18 +2,13 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201603Tests
+public class Aoc201603Tests : PuzzleTest<Aoc201603>
 {
     [Theory]
     [InlineData("12 13 14", true)]
     [InlineData("1 2 5", false)]
-    public void ValidateTriangles(string triangleSpec, bool expectedResult)
-    {
-        var validator = new Aoc201603.TriangleValidator();
-        var isValid = Aoc201603.TriangleValidator.IsValid(triangleSpec);
-
-        isValid.Should().Be(expectedResult);
-    }
+    public void ValidateTriangles(string triangleSpec, bool expectedResult) => 
+        Sut.IsValid(triangleSpec).Should().Be(expectedResult);
 
     [Fact]
     public void ValidHorizontalCount()
@@ -22,11 +17,8 @@ public class Aoc201603Tests
                              12 13 14
                              1 2 5
                              """;
-
-        var validator = new Aoc201603.TriangleValidator();
-        var validCount = validator.GetHorizontalValidCount(input);
-
-        validCount.Should().Be(1);
+        
+        Sut.GetHorizontalValidCount(input).Should().Be(1);
     }
 
     [Fact]
@@ -40,10 +32,7 @@ public class Aoc201603Tests
                              202 402 602
                              203 403 603
                              """;
-
-        var validator = new Aoc201603.TriangleValidator();
-        var validCount = validator.GetVerticalValidCount(input);
-
-        validCount.Should().Be(6);
+        
+        Sut.GetVerticalValidCount(input).Should().Be(6);
     }
 }

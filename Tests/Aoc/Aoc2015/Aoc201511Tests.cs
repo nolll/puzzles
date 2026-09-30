@@ -9,8 +9,7 @@ public class Aoc201511Tests
     [InlineData("abbceffg", false)]
     [InlineData("abbcegjk", false)]
     [InlineData("abckkmmn", true)]
-    public void ValidatePasswords(string pwd, bool expected) => 
-        Aoc201511.CorporatePasswordValidator.IsValid(pwd).Should().Be(expected);
+    public void ValidatePasswords(string pwd, bool expected) => Sut.IsValid(pwd).Should().Be(expected);
 
     [Theory]
     [InlineData("abcdefgh", "abcdffaa")]

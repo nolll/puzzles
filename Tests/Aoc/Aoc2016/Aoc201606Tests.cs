@@ -24,20 +24,8 @@ public class Aoc201606Tests : PuzzleTest<Aoc201606>
                                  """;
 
     [Fact]
-    public void MessageIsCorrect_MostCommon()
-    {
-        var reader = new Aoc201606.RepetitionCodeReader();
-        var coin = reader.ReadMostCommon(Input);
-
-        coin.Should().Be("easter");
-    }
+    public void MessageIsCorrect_MostCommon() => Sut.Part1(Input).Should().Be("easter");
 
     [Fact]
-    public void MessageIsCorrect_LeastCommon()
-    {
-        var reader = new Aoc201606.RepetitionCodeReader();
-        var coin = reader.ReadLeastCommon(Input);
-
-        coin.Should().Be("advent");
-    }
+    public void MessageIsCorrect_LeastCommon() => Sut.Part2(Input).Should().Be("advent");
 }

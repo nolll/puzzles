@@ -14,5 +14,7 @@ public class Aoc201512Tests
     [InlineData("[]", 0)]
     [InlineData("{}", 0)]
     public void CalculatesTheSumOfAllNumbers(string input, int expected) => 
-        new Aoc201512.JsonDoc(input, true).Sum.Should().Be(expected);
+        Sut.Part1(input).Should().Be(expected);
+    
+    private static Aoc201512 Sut => new();
 }

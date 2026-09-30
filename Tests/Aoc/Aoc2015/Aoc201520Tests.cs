@@ -6,21 +6,12 @@ namespace Tests.Aoc.Aoc2015;
 public class Aoc201520Tests : PuzzleTest<Aoc201520>
 {
     [Fact]
-    public void FirstHouseToGet150Presents()
-    {
-        const int input = 150;
-
-        var presentDelivery = new Aoc201520.PresentDelivery();
-        var house = presentDelivery.Deliver1(input, false);
-
-        house.Should().Be(8);
-    }
+    public void FirstHouseToGet150Presents() => Sut.Deliver1(150, false).Should().Be(8);
 
     [Fact]
     public void FindIntFactors8()
     {
-        var delivery = new Aoc201520.PresentDelivery();
-        var result = delivery.FindIntFactors(8).OrderBy(o => o).ToList();
+        var result = Sut.FindIntFactors(8).OrderBy(o => o).ToList();
 
         result.Count.Should().Be(4);
         result[0].Should().Be(1);
@@ -32,8 +23,7 @@ public class Aoc201520Tests : PuzzleTest<Aoc201520>
     [Fact]
     public void FindIntFactors81()
     {
-        var delivery = new Aoc201520.PresentDelivery();
-        var result = delivery.FindIntFactors(81).OrderBy(o => o).ToList();
+        var result = Sut.FindIntFactors(81).OrderBy(o => o).ToList();
 
         result.Count.Should().Be(5);
         result[0].Should().Be(1);
@@ -46,8 +36,7 @@ public class Aoc201520Tests : PuzzleTest<Aoc201520>
     [Fact]
     public void FindIntFactors2354()
     {
-        var delivery = new Aoc201520.PresentDelivery();
-        var result = delivery.FindIntFactors(2354).OrderBy(o => o).ToList();
+        var result = Sut.FindIntFactors(2354).OrderBy(o => o).ToList();
 
         result.Count.Should().Be(8);
         result[0].Should().Be(1);
@@ -63,8 +52,7 @@ public class Aoc201520Tests : PuzzleTest<Aoc201520>
     [Fact]
     public void IntFactorFuncIsCorrect()
     {
-        var delivery = new Aoc201520.PresentDelivery();
-        var myResult = delivery.FindIntFactors(786_240).OrderBy(o => o).ToList();
+        var myResult = Sut.FindIntFactors(786_240).OrderBy(o => o).ToList();
         var internetResult = MathTools.GetFactors(786_240);
         myResult.Count.Should().Be(internetResult.Count);
     }

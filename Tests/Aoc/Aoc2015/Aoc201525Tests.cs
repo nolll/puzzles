@@ -5,26 +5,8 @@ namespace Tests.Aoc.Aoc2015;
 public class Aoc201525Tests : PuzzleTest<Aoc201525>
 {
     [Fact]
-    public void FindsCode3_3()
-    {
-        const int targetX = 3;
-        const int targetY = 3;
-
-        var codeFinder = new Aoc201525.WeatherMachineCodeFinder();
-        var code = codeFinder.FindCodeAt(targetX, targetY);
-
-        code.Should().Be(1601130);
-    }
+    public void FindsCode3_3() => Sut.FindCodeAt(3, 3).Should().Be(1601130);
 
     [Fact]
-    public void FindsCode6_4()
-    {
-        const int targetX = 6;
-        const int targetY = 4;
-
-        var codeFinder = new Aoc201525.WeatherMachineCodeFinder();
-        var code = codeFinder.FindCodeAt(targetX, targetY);
-
-        code.Should().Be(31527494);
-    }
+    public void FindsCode6_4() => Sut.FindCodeAt(6, 4).Should().Be(31527494);
 }

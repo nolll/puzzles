@@ -8,54 +8,46 @@ namespace Pzl.Aoc.Puzzles.Aoc2015;
 public class Aoc201514 : AocPuzzle
 {
     [Puzzle("730cd532676e91e7ec7210ec497bba1d")]
-    public int Part1(string input) => new ReindeerRace(input, 2503).WinningDistance;
+    public int Part1(string input) => GetWinningDistance(input, 2503);
 
     [Puzzle("d78ca8ddf15b143efbebe5519ac2abf1")]
-    public int Part2(string input) => new ReindeerRace(input, 2503).WinningScore;
+    public int Part2(string input) => GetWinningScore(input, 2503);
     
-    public class ReindeerRace
+    public int GetWinningDistance(string input, int time) => 
+        ParseReindeers(input).Max(o => o.DistanceAfter(time));
+
+    public int GetWinningScore(string input, int time) =>
+        GetWinningScore(ParseReindeers(input), time);
+    
+    private static int GetWinningScore(IList<Reindeer> reindeers, int time)
     {
-        public int WinningDistance { get; }
-        public int WinningScore { get; }
-
-        public ReindeerRace(string input, int time)
+        for (var i = 1; i <= time; i++)
         {
-            var reindeers = ParseReindeers(input);
+            var distances = reindeers.Select(reindeer => (distance: reindeer.DistanceAfter(i), reindeer))
+                .OrderByDescending(o => o.distance)
+                .ToList();
+            var maxValue = distances.First().distance;
+            var leaders = distances.Where(o => o.distance == maxValue).Select(o => o.reindeer);
 
-            WinningDistance = reindeers.Max(o => o.DistanceAfter(time));
-            WinningScore = GetWinningScore(reindeers, time);
-        }
-
-        private static int GetWinningScore(IList<Reindeer> reindeers, int time)
-        {
-            for (var i = 1; i <= time; i++)
+            foreach (var leader in leaders)
             {
-                var distances = reindeers.Select(reindeer => (distance: reindeer.DistanceAfter(i), reindeer))
-                    .OrderByDescending(o => o.distance)
-                    .ToList();
-                var maxValue = distances.First().distance;
-                var leaders = distances.Where(o => o.distance == maxValue).Select(o => o.reindeer);
-
-                foreach (var leader in leaders)
-                {
-                    leader.IncreaseScore();
-                }
+                leader.IncreaseScore();
             }
-            return reindeers.Max(o => o.Score);
         }
-
-        private static IList<Reindeer> ParseReindeers(string input) => 
-            input.Split(LineBreaks.Single).Select(ParseReindeer).ToList();
-
-        private static Reindeer ParseReindeer(string str)
-        {
-            var (speed, flyTime, restTime) = Numbers.IntsFromString(str);
-
-            return new Reindeer(speed, flyTime, restTime);
-        }
+        return reindeers.Max(o => o.Score);
     }
-    
-    public class Reindeer
+
+    private static IList<Reindeer> ParseReindeers(string input) => 
+        input.Split(LineBreaks.Single).Select(ParseReindeer).ToList();
+
+    private static Reindeer ParseReindeer(string str)
+    {
+        var (speed, flyTime, restTime) = Numbers.IntsFromString(str);
+
+        return new Reindeer(speed, flyTime, restTime);
+    }
+
+    private class Reindeer
     {
         private readonly int _period;
         private readonly int _speed;
@@ -72,7 +64,7 @@ public class Aoc201514 : AocPuzzle
 
         public void IncreaseScore() => Score += 1;
 
-        public int DistanceAfter(in int seconds)
+        public int DistanceAfter(int seconds)
         {
             var completedPeriods = (int)Math.Floor((decimal)seconds / _period);
             var secondsInCurrentPeriod = seconds % _period;

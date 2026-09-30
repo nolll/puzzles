@@ -14,10 +14,7 @@ public class Aoc201517Tests : PuzzleTest<Aoc201517>
                              5
                              5
                              """;
-
-        var containers = new Aoc201517.EggnogContainers(input.Trim());
-        var combinations = containers.GetCombinations(25);
-
-        combinations.Count.Should().Be(4);
+        
+        Sut.GetCombinations(input, 25).Count().Should().Be(4);
     }
 }

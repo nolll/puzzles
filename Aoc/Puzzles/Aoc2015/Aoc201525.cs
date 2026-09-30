@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2015;
 public class Aoc201525 : AocPuzzle
 {
     [Puzzle("d755f54368cc6c88fb38633954dddb9f")]
-    public long Part1(string input)
+    public long Solve(string input)
     {
         var p = GetParams(input);
         return FindCodeAt(p.TargetX, p.TargetY);

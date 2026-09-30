@@ -2,37 +2,18 @@ using Pzl.Aoc.Puzzles.Aoc2016;
 
 namespace Tests.Aoc.Aoc2016;
 
-public class Aoc201602Tests
+public class Aoc201602Tests : PuzzleTest<Aoc201602>
 {
-    [Fact]
-    public void FindsSquareKeycode()
-    {
-        const string input = """
-                             ULL
-                             RRDDD
-                             LURDL
-                             UUUUD
-                             """;
-
-        var finder = new Aoc201602.SquareKeyCodeFinder();
-        var code = finder.Find(input.Trim());
-
-        code.Should().Be("1985");
-    }
+    private const string Input = """
+                                 ULL
+                                 RRDDD
+                                 LURDL
+                                 UUUUD
+                                 """;
 
     [Fact]
-    public void FindsDiamondKeycode()
-    {
-        const string input = """
-                             ULL
-                             RRDDD
-                             LURDL
-                             UUUUD
-                             """;
+    public void FindsSquareKeycode() => Sut.FindPart1Code(Input).Should().Be("1985");
 
-        var finder = new Aoc201602.DiamondKeyCodeFinder();
-        var code = finder.Find(input.Trim());
-
-        code.Should().Be("5DB3");
-    }
+    [Fact]
+    public void FindsDiamondKeycode() => Sut.FindPart2Code(Input).Should().Be("5DB3");
 }

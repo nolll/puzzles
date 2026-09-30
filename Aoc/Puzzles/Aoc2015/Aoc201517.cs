@@ -13,39 +13,19 @@ public class Aoc201517 : AocPuzzle
     [Puzzle("b5099aa249856738b5000cb46145f473")]
     public int Part2(string input) => GetCombinationsWithLeastContainers(input, 150).Count();
 
-    private static EggnogContainer[] Parse(string input) =>
-        [.. input.Split(LineBreaks.Single).Select((o, index) => new EggnogContainer(index, int.Parse(o)))];
+    private static Container[] Parse(string input) =>
+        [.. input.Split(LineBreaks.Single).Select((o, index) => new Container(index, int.Parse(o)))];
 
-    public IEnumerable<List<EggnogContainer>> GetCombinations(string input, int targetVolume) =>
+    public IEnumerable<List<Container>> GetCombinations(string input, int targetVolume) =>
         CombinationGenerator.GetUniqueCombinationsAnySize(Parse(input))
             .Where(o => o.Sum(c => c.Volume) == targetVolume);
 
-    private IEnumerable<List<EggnogContainer>> GetCombinationsWithLeastContainers(string input, int targetVolume)
+    private IEnumerable<List<Container>> GetCombinationsWithLeastContainers(string input, int targetVolume)
     {
         var combinations = GetCombinations(input, targetVolume).ToList();
         var minCount = combinations.Min(c => c.Count);
         return combinations.Where(o => o.Count == minCount);
     }
 
-    public class EggnogContainer(int id, int volume) : IEquatable<EggnogContainer>
-    {
-        private readonly int _id = id;
-        public int Volume { get; } = volume;
-
-        public bool Equals(EggnogContainer? other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return _id == other._id;
-        }
-
-        public override bool Equals(object? obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((EggnogContainer)obj);
-        }
-
-        public override int GetHashCode() => _id;
-    }
+    public record Container(int Id, int Volume);
 }

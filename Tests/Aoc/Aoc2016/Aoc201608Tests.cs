@@ -13,10 +13,7 @@ public class Aoc201608Tests : PuzzleTest<Aoc201608>
                              rotate row y=0 by 4
                              rotate column x=1 by 1
                              """;
-
-        var simulator = new Aoc201608.ScreenSimulator(7, 3);
-        var result = simulator.Run(input);
-
-        result.PixelCount.Should().Be(6);
+        
+        Sut.SolvePart1(input, 7, 5).Should().Be(6);
     }
 }

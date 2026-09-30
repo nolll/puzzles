@@ -13,84 +13,16 @@ public class Aoc201518Tests : PuzzleTest<Aoc201518>
                                  ####..
                                  """;
 
-    [Fact]
-    public void LightCountAfterOneStep()
-    {
-        var gif = new Aoc201518.AnimatedGif(Input);
-        gif.RunAnimation(1);
-
-        gif.LightCount.Should().Be(11);
-    }
-
-    [Fact]
-    public void LightCountAfterTwoSteps()
-    {
-        var gif = new Aoc201518.AnimatedGif(Input);
-        gif.RunAnimation(2);
-
-        gif.LightCount.Should().Be(8);
-    }
-
-    [Fact]
-    public void LightCountAfterThreeSteps()
-    {
-        var gif = new Aoc201518.AnimatedGif(Input);
-        gif.RunAnimation(3);
-
-        gif.LightCount.Should().Be(4);
-    }
-
-    [Fact]
-    public void LightCountAfterFourSteps()
-    {
-        var gif = new Aoc201518.AnimatedGif(Input);
-        gif.RunAnimation(4);
-
-        gif.LightCount.Should().Be(4);
-    }
-
-    [Fact]
-    public void LightCountAfterOneStepWithLitCorners()
-    {
-        var gif = new Aoc201518.AnimatedGif(Input, true);
-        gif.RunAnimation(1);
-
-        gif.LightCount.Should().Be(18);
-    }
-
-    [Fact]
-    public void LightCountAfterTwoStepsWithLitCorners()
-    {
-        var gif = new Aoc201518.AnimatedGif(Input, true);
-        gif.RunAnimation(2);
-
-        gif.LightCount.Should().Be(18);
-    }
-
-    [Fact]
-    public void LightCountAfterThreeStepsWithLitCorners()
-    {
-        var gif = new Aoc201518.AnimatedGif(Input, true);
-        gif.RunAnimation(3);
-
-        gif.LightCount.Should().Be(18);
-    }
-
-    [Fact]
-    public void LightCountAfterFourStepsWithLitCorners()
-    {
-        var gif = new Aoc201518.AnimatedGif(Input, true);
-        gif.RunAnimation(4);
-
-        gif.LightCount.Should().Be(14);
-    }
-
-    [Fact]
-    public void LightCountAfterFiveStepsWithLitCorners()
-    {
-        var gif = new Aoc201518.AnimatedGif(Input, true);
-        gif.RunAnimation(5);
-
-        gif.LightCount.Should().Be(17);
-    }
+    [Theory]
+    [InlineData(1, false, 11)]
+    [InlineData(2, false, 8)]
+    [InlineData(3, false, 4)]
+    [InlineData(4, false, 4)]
+    [InlineData(1, true, 18)]
+    [InlineData(2, true, 18)]
+    [InlineData(3, true, 18)]
+    [InlineData(4, true, 14)]
+    [InlineData(5, true, 17)]
+    public void LightCountAfterOneStep(int steps, bool litCorners, int expected) =>
+        Sut.RunAnimation(Input, steps, litCorners).Should().Be(expected);
 }

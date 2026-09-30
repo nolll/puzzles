@@ -7,79 +7,55 @@ namespace Pzl.Aoc.Puzzles.Aoc2015;
 public class Aoc201518 : AocPuzzle
 {
     [Puzzle("cf54372c819da8af501619293a164f4f")]
-    public int Part1(string input)
-    {
-        var gif = new AnimatedGif(input);
-        gif.RunAnimation(100);
-        return gif.LightCount;
-    }
+    public int Part1(string input) => RunAnimation(input, 100);
 
     [Puzzle("91a84e73c4b0d0185f19367fdc75f4a7")]
-    public int Part2(string input)
+    public int Part2(string input) => RunAnimation(input, 100, true);
+
+    private const char LightOn = '#';
+    private const char LightOff = '.';
+
+    private static int LightCount(Grid<char> grid) => grid.Values.Count(o => o == LightOn);
+
+    public int RunAnimation(string input, int steps, bool isCornersLit = false)
     {
-        var gif = new AnimatedGif(input, true);
-        gif.RunAnimation(100);
-        return gif.LightCount;
-    }
-    
-    public class AnimatedGif
-    {
-        private const char LightOn = '#';
-        private const char LightOff = '.';
-
-        private readonly bool _isCornersLit;
-        private Grid<char> _grid;
-
-        public int LightCount => _grid.Values.Count(o => o == LightOn);
-
-        public AnimatedGif(in string input, in bool isCornersLit = false)
-        {
-            _isCornersLit = isCornersLit;
-            _grid = GridBuilder.BuildCharGrid(input);
-            if (_isCornersLit)
-                TurnOnCornerLights();
-        }
-
-        public void RunAnimation(in int steps)
-        {
-            for (var i = 0; i < steps; i++)
-            {
-                var newGrid = new Grid<char>();
-
-                foreach (var coord in _grid.Coords)
-                {
-                    var adjacentValues = _grid.AllAdjacentValuesTo(coord);
-                    newGrid.WriteValueAt(coord, GetNewState(_grid.ReadValueAt(coord), adjacentValues.Count(o => o == LightOn)));
-                }
+        var grid = GridBuilder.BuildCharGrid(input);
+        if (isCornersLit)
+            TurnOnCornerLights(grid);
             
-                _grid = newGrid;
-                if (_isCornersLit)
-                    TurnOnCornerLights();
-            }
-        }
-
-        private void TurnOnCornerLights()
+        for (var i = 0; i < steps; i++)
         {
-            TurnOnLight(_grid.XMin, _grid.YMin);
-            TurnOnLight(_grid.XMax, _grid.YMin);
-            TurnOnLight(_grid.XMax, _grid.YMax);
-            TurnOnLight(_grid.XMin, _grid.YMax);
-        }
+            var newGrid = new Grid<char>();
 
-        private void TurnOnLight(int x, int y) => _grid.WriteValueAt(x, y, LightOn);
-
-        private static char GetNewState(in char value, in int adjacentOnCount)
-        {
-            if (value == LightOn)
+            foreach (var coord in grid.Coords)
             {
-                return adjacentOnCount is 2 or 3 
-                    ? LightOn 
-                    : LightOff;
+                var adjacentValues = grid.AllAdjacentValuesTo(coord);
+                newGrid.WriteValueAt(coord, GetNewState(grid.ReadValueAt(coord), adjacentValues.Count(o => o == LightOn)));
             }
-
-            return adjacentOnCount == 3 
-                ? LightOn 
-                : LightOff;
+            
+            grid = newGrid;
+            if (isCornersLit)
+                TurnOnCornerLights(grid);
         }
+
+        return LightCount(grid);
     }
+
+    private static void TurnOnCornerLights(Grid<char> grid)
+    {
+        TurnOnLight(grid, grid.XMin, grid.YMin);
+        TurnOnLight(grid, grid.XMax, grid.YMin);
+        TurnOnLight(grid, grid.XMax, grid.YMax);
+        TurnOnLight(grid, grid.XMin, grid.YMax);
+    }
+
+    private static void TurnOnLight(Grid<char> grid, int x, int y) => grid.WriteValueAt(x, y, LightOn);
+
+    private static char GetNewState(in char value, in int adjacentOnCount) => value == LightOn
+        ? adjacentOnCount is 2 or 3
+            ? LightOn
+            : LightOff
+        : adjacentOnCount == 3
+            ? LightOn
+            : LightOff;
 }

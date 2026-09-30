@@ -10,10 +10,8 @@ public class Aoc201510Tests
     [InlineData("21", "1211")]
     [InlineData("1211", "111221")]
     [InlineData("111221", "312211")]
-    public void CorrectSequence(string input, string expected)
-    {
-        var game = new Aoc201510.LookAndSayGame(input, 1);
+    public void CorrectSequence(string input, string expected) => 
+        Sut.NextString(input, 1).Should().Be(expected);
 
-        game.Result.Should().Be(expected);
-    }
+    private static Aoc201510 Sut => new();
 }

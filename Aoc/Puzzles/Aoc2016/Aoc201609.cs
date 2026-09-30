@@ -7,83 +7,71 @@ namespace Pzl.Aoc.Puzzles.Aoc2016;
 public class Aoc201609 : AocPuzzle
 {
     [Puzzle("963b04cd929c376aa9a75d813a774205")]
-    public int Part1(string input) => new FileDecompressor(input).DecompressedLengthV1;
+    public int Part1(string input) => GetLengthV1(input);
 
     [Puzzle("bfe4afdea90f1f177895b3bbde55f5a5")]
-    public long Part2(string input) => new FileDecompressor(input).DecompressedLengthV2;
+    public long Part2(string input) => GetLengthV2(input);
 
-    public class FileDecompressor
+    private int GetLengthV1(string input)
     {
-        public int DecompressedLengthV1 { get; }
-        public long DecompressedLengthV2 { get; }
-
-        public FileDecompressor(string input)
+        var result = new StringBuilder();
+        while (input.Length > 0)
         {
-            DecompressedLengthV1 = GetLengthV1(input);
-            DecompressedLengthV2 = GetLengthV2(input);
-        }
+            var stringToMove = input[..1];
+            input = input.Remove(0, 1);
 
-        private int GetLengthV1(string input)
-        {
-            var result = new StringBuilder();
-            while (input.Length > 0)
+            if (stringToMove == "(")
             {
-                var stringToMove = input.Substring(0, 1);
-                input = input.Remove(0, 1);
-
-                if (stringToMove == "(")
+                var instructionEndIndex = input.IndexOf(')');
+                var instruction = input[..instructionEndIndex];
+                input = input.Remove(0, instructionEndIndex + 1);
+                var instructionParts = instruction.Split('x');
+                var charCount = int.Parse(instructionParts[0]);
+                var repeatCount = int.Parse(instructionParts[1]);
+                var str = input[..charCount];
+                input = input.Remove(0, charCount);
+                var repeatStr = new StringBuilder();
+                for (var i = 0; i < repeatCount; i++)
                 {
-                    var instructionEndIndex = input.IndexOf(")", StringComparison.InvariantCulture);
-                    var instruction = input.Substring(0, instructionEndIndex);
-                    input = input.Remove(0, instructionEndIndex + 1);
-                    var instructionParts = instruction.Split('x');
-                    var charCount = int.Parse(instructionParts[0]);
-                    var repeatCount = int.Parse(instructionParts[1]);
-                    var str = input.Substring(0, charCount);
-                    input = input.Remove(0, charCount);
-                    var repeatStr = new StringBuilder();
-                    for (var i = 0; i < repeatCount; i++)
-                    {
-                        repeatStr.Append(str);
-                    }
-
-                    stringToMove = repeatStr.ToString();
+                    repeatStr.Append(str);
                 }
 
-                if (!string.IsNullOrWhiteSpace(stringToMove))
-                    result.Append(stringToMove);
+                stringToMove = repeatStr.ToString();
             }
 
-            return result.ToString().Length;
+            if (!string.IsNullOrWhiteSpace(stringToMove))
+                result.Append(stringToMove);
         }
 
-        private long GetLengthV2(string input)
+        return result.ToString().Length;
+    }
+
+    private long GetLengthV2(string input)
+    {
+        long length = 0;
+        while (input.Length > 0)
         {
-            long length = 0;
-            while (input.Length > 0)
+            var stringToMove = input[..1];
+            input = input.Remove(0, 1);
+
+            if (stringToMove == "(")
             {
-                var stringToMove = input.Substring(0, 1);
-                input = input.Remove(0, 1);
-
-                if (stringToMove == "(")
-                {
-                    var instructionEndIndex = input.IndexOf(")", StringComparison.InvariantCulture);
-                    var instruction = input.Substring(0, instructionEndIndex);
-                    input = input.Remove(0, instructionEndIndex + 1);
-                    var instructionParts = instruction.Split('x');
-                    var charCount = int.Parse(instructionParts[0]);
-                    var repeatCount = int.Parse(instructionParts[1]);
-                    var str = input.Substring(0, charCount);
-                    input = input.Remove(0, charCount);
-                    length += repeatCount * GetLengthV2(str);
-                }
-                else
-                {
-                    length += 1;
-                }
+                var instructionEndIndex = input.IndexOf(')');
+                var instruction = input[..instructionEndIndex];
+                input = input.Remove(0, instructionEndIndex + 1);
+                var instructionParts = instruction.Split('x');
+                var charCount = int.Parse(instructionParts[0]);
+                var repeatCount = int.Parse(instructionParts[1]);
+                var str = input[..charCount];
+                input = input.Remove(0, charCount);
+                length += repeatCount * GetLengthV2(str);
             }
-
-            return length;
+            else
+            {
+                length += 1;
+            }
         }
+
+        return length;
     }
 }

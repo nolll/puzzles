@@ -3,7 +3,7 @@ using Pzl.Tools.Maths;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201520Tests
+public class Aoc201520Tests : PuzzleTest<Aoc201520>
 {
     [Fact]
     public void FirstHouseToGet150Presents()

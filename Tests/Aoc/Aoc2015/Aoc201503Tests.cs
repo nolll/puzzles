@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201503Tests
+public class Aoc201503Tests : PuzzleTest<Aoc201503>
 {
     [Theory]
     [InlineData(">", 2)]
@@ -17,6 +17,4 @@ public class Aoc201503Tests
     [InlineData("^v^v^v^v^v", 11)]
     public void DeliversToCorrectNumberOfHouses_SantaAndRobot(string input, int expected) => 
         Sut.Part2(input).Should().Be(expected);
-
-    private static Aoc201503 Sut => new();
 }

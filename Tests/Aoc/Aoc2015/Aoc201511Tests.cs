@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201511Tests
+public class Aoc201511Tests : PuzzleTest<Aoc201511>
 {
     [Theory]
     [InlineData("hijklmmn", false)]
@@ -15,6 +15,4 @@ public class Aoc201511Tests
     [InlineData("abcdefgh", "abcdffaa")]
     [InlineData("ghijklmn", "ghjaabcc")]
     public void FindsNextPassword(string pwd, string expected) => Sut.Part1(pwd).Should().Be(expected);
-
-    private static Aoc201511 Sut => new();
 }

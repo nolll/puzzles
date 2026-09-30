@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201509Tests
+public class Aoc201509Tests : PuzzleTest<Aoc201509>
 {
     private const string Input = """
                                  London to Dublin = 464
@@ -15,6 +15,4 @@ public class Aoc201509Tests
 
     [Fact]
     public void Part2() => Sut.Part2(Input).Should().Be(982);
-
-    private static Aoc201509 Sut => new();
 }

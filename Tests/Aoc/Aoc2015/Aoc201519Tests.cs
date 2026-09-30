@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201519Tests
+public class Aoc201519Tests : PuzzleTest<Aoc201519>
 {
     [Fact]
     public void FindsDistinctMolecules()

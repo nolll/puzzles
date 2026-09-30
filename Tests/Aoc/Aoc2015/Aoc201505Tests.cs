@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201505Tests
+public class Aoc201505Tests : PuzzleTest<Aoc201505>
 {
     [Theory]
     [InlineData("ugknbfddgicrmopn", true)]

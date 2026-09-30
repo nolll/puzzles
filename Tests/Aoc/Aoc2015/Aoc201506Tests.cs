@@ -3,7 +3,7 @@ using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201506Tests
+public class Aoc201506Tests : PuzzleTest<Aoc201506>
 {
     private const int Size = 5;
 

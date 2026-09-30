@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201512Tests
+public class Aoc201512Tests : PuzzleTest<Aoc201512>
 {
     [Theory]
     [InlineData("[1,2,3]", 6)]
@@ -15,6 +15,4 @@ public class Aoc201512Tests
     [InlineData("{}", 0)]
     public void CalculatesTheSumOfAllNumbers(string input, int expected) => 
         Sut.Part1(input).Should().Be(expected);
-    
-    private static Aoc201512 Sut => new();
 }

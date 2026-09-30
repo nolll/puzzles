@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201525Tests
+public class Aoc201525Tests : PuzzleTest<Aoc201525>
 {
     [Fact]
     public void FindsCode3_3()

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201513Tests
+public class Aoc201513Tests : PuzzleTest<Aoc201513>
 {
     [Fact]
     public void HappinessChangeIsCorrect()
@@ -24,6 +24,4 @@ public class Aoc201513Tests
 
         Sut.Part1(input).Should().Be(330);
     }
-    
-    private static Aoc201513 Sut => new();
 }

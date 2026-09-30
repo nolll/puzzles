@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201521Tests
+public class Aoc201521Tests : PuzzleTest<Aoc201521>
 {
     [Fact]
     public void PlayerWinsInFourRounds()

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201514Tests
+public class Aoc201514Tests : PuzzleTest<Aoc201514>
 {
     private const int Time = 1000;
 
@@ -16,6 +16,4 @@ public class Aoc201514Tests
 
     [Fact]
     public void WinningReindeerScore() => Sut.GetWinningScore(Input, Time).Should().Be(689);
-
-    private static Aoc201514 Sut => new();
 }

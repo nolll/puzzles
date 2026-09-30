@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201507Tests
+public class Aoc201507Tests : PuzzleTest<Aoc201507>
 {
     [Fact]
     public void SignalsAreCorrect()
@@ -29,6 +29,4 @@ public class Aoc201507Tests
         wires["x"].Signal.Should().Be(123);
         wires["y"].Signal.Should().Be(456);
     }
-
-    private static Aoc201507 Sut => new();
 }

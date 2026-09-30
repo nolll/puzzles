@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201508Tests
+public class Aoc201508Tests : PuzzleTest<Aoc201508>
 {
     [Fact]
     public void CodeToMemoryDifference()
@@ -29,6 +29,4 @@ public class Aoc201508Tests
 
         Sut.Part2(input).Should().Be(19);
     }
-
-    private static Aoc201508 Sut => new();
 }

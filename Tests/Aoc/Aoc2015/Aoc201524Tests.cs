@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201524Tests
+public class Aoc201524Tests : PuzzleTest<Aoc201524>
 {
     [Fact]
     public void QuantumEntanglementOfFirstGroupIsCorrect()

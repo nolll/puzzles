@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201517Tests
+public class Aoc201517Tests : PuzzleTest<Aoc201517>
 {
     [Fact]
     public void NumberOfCombinationsIsCorrect()

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2015;
 
 namespace Tests.Aoc.Aoc2015;
 
-public class Aoc201515Tests
+public class Aoc201515Tests : PuzzleTest<Aoc201515>
 {
     private const string Input = """
                                  Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8

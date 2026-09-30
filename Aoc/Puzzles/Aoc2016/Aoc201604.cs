@@ -8,16 +8,21 @@ namespace Pzl.Aoc.Puzzles.Aoc2016;
 public class Aoc201604 : AocPuzzle
 {
     [Puzzle("3b14ab13eff601ab04f28f18a3f59bda")]
-    public int Part1(string input) => new RoomValidator(input).SumOfIds;
+    public int Part1(string input) => GetValidRooms(Parse(input)).Sum(o => o.Id);
 
     [Puzzle("f53ac47ed914c513f86ae488f0f3c61c")]
-    public int Part2(string input) => new RoomValidator(input).NorthpoleObjectStorageId;
+    public int Part2(string input) => 
+        GetValidRooms(Parse(input)).First(o => o.Name == "northpole object storage").Id;
+
+    private static IEnumerable<Room> GetValidRooms(IEnumerable<Room> rooms) => rooms.Where(o => o.IsValid);
     
-    public class CharacterCount(char c)
+    private static IEnumerable<Room> Parse(string input) => 
+        input.Trim().Split(LineBreaks.Single).Select(o => new Room(o.Trim()));
+
+    private class CharacterCount(char c)
     {
         public char C { get; } = c;
         public int Count { get; private set; }
-
         public void Increment() => Count += 1;
     }
     
@@ -76,17 +81,5 @@ public class Aoc201604 : AocPuzzle
                 return name.ToString();
             }
         }
-    }
-    
-    public class RoomValidator
-    {
-        private readonly IList<Room> _rooms;
-        private IList<Room> ValidRooms => _rooms.Where(o => o.IsValid).ToList();
-        public int NorthpoleObjectStorageId => ValidRooms.First(o => o.Name == "northpole object storage").Id;
-
-        public RoomValidator(string input) => 
-            _rooms = input.Trim().Split(LineBreaks.Single).Select(o => new Room(o.Trim())).ToList();
-
-        public int SumOfIds => ValidRooms.Sum(o => o.Id);
     }
 }

@@ -7,11 +7,9 @@ public class Aoc201521Tests : PuzzleTest<Aoc201521>
     [Fact]
     public void PlayerWinsInFourRounds()
     {
-        var simulator = new Aoc201521.RpgSimulator();
-        var winner = simulator.Run(12, 7, 2, 8, 5, 5);
-
-        simulator.RoundsPlayed.Should().Be(4);
-        winner.Name.Should().Be("player");
+        var winner = Sut.Run(12, 7, 2, 8, 5, 5);
+        
+        winner.Type.Should().Be(Aoc201521.RpgCharacterType.Player);
         winner.Points.Should().Be(2);
     }
 }

@@ -3,7 +3,7 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016;
 
-[IsSlow] // 98s for part 2
+[IsSlow] // 28s for part 2
 [Name("Safe Cracking")]
 [Comment("Factorial of 12")]
 public class Aoc201623 : AocPuzzle
@@ -14,19 +14,6 @@ public class Aoc201623 : AocPuzzle
     [Puzzle("eb0c83e21e8bd77e7f0b5686e8f1c31a")]
     public int Part2(string input) => new SafeCrackingComputerPart2(input, 12, 0).ValueA;  // 12! + 7708
     
-    public class AssembunnyInstruction
-    {
-        public string Name { get; set; }
-        public IList<string> Args { get; }
-
-        public AssembunnyInstruction(string s)
-        {
-            var parts = s.Split(' ');
-            Name = parts.First();
-            Args = parts.Skip(1).ToList();
-        }
-    }
-
     public class SafeCrackingComputerPart1
     {
         private readonly Dictionary<char, int> _registers;
@@ -49,7 +36,6 @@ public class Aoc201623 : AocPuzzle
             while (_index < instructions.Length)
             {
                 var s = instructions[_index];
-                //Console.WriteLine($"{_index}. {s}");
                 var parts = s.Split(' ');
                 var command = parts[0];
                 try
@@ -57,7 +43,7 @@ public class Aoc201623 : AocPuzzle
                     if (command == "cpy")
                     {
                         var value = parts[1];
-                        var target = parts[2].First();
+                        var target = parts[2][0];
                         if (int.TryParse(value, out var num))
                             _registers[target] = num;
                         else
@@ -68,14 +54,14 @@ public class Aoc201623 : AocPuzzle
 
                     else if (command == "inc")
                     {
-                        var target = parts[1].First();
+                        var target = parts[1][0];
                         _registers[target]++;
                         IncrementIndex();
                     }
 
                     else if (command == "dec")
                     {
-                        var target = parts[1].First();
+                        var target = parts[1][0];
                         _registers[target]--;
                         IncrementIndex();
                     }
@@ -84,7 +70,7 @@ public class Aoc201623 : AocPuzzle
                     {
                         var value = parts[1];
                         var isInt = int.TryParse(parts[2], out var steps);
-                        steps = isInt ? steps : _registers[parts[2].First()];
+                        steps = isInt ? steps : _registers[parts[2][0]];
 
                         if (int.TryParse(value, out var num))
                         {
@@ -92,7 +78,7 @@ public class Aoc201623 : AocPuzzle
                         }
                         else
                         {
-                            IncrementIndex(_registers[value.First()] != 0 ? steps : 1);
+                            IncrementIndex(_registers[value[0]] != 0 ? steps : 1);
                         }
                     }
 
@@ -149,7 +135,7 @@ public class Aoc201623 : AocPuzzle
 
         public SafeCrackingComputerPart2(string input, int a, int c)
         {
-            var instructions = input.Split(LineBreaks.Single).Select(o => new AssembunnyInstruction(o)).ToArray();
+            var instructions = input.Split(LineBreaks.Single).Select(o => new Instruction(o)).ToArray();
             _registers = new Dictionary<char, int>
             {
                 ['a'] = a,
@@ -162,33 +148,32 @@ public class Aoc201623 : AocPuzzle
             while (_index < instructions.Length)
             {
                 var s = instructions[_index];
-                var command = s.Name;
-                if (command == "cpy")
+                if (s.Type == InstructionType.Copy)
                 {
                     var value = s.Args[0];
                     var target = s.Args[1][0];
                     _registers[target] = int.TryParse(value, out var num)
                         ? num
-                        : _registers[value.First()];
+                        : _registers[value[0]];
 
                     IncrementIndex();
                 }
 
-                else if (command == "inc")
+                else if (s.Type == InstructionType.Increment)
                 {
                     var target = s.Args[0][0];
                     _registers[target]++;
                     IncrementIndex();
                 }
 
-                else if (command == "dec")
+                else if (s.Type == InstructionType.Decrement)
                 {
                     var target = s.Args[0][0];
                     _registers[target]--;
                     IncrementIndex();
                 }
 
-                else if (command == "jnz")
+                else if (s.Type == InstructionType.Jump)
                 {
                     var value = s.Args[0];
                     var isInt = int.TryParse(s.Args[1], out var steps);
@@ -200,11 +185,11 @@ public class Aoc201623 : AocPuzzle
                     }
                     else
                     {
-                        IncrementIndex(_registers[value.First()] != 0 ? steps : 1);
+                        IncrementIndex(_registers[value[0]] != 0 ? steps : 1);
                     }
                 }
 
-                else if (command == "tgl")
+                else if (s.Type == InstructionType.Toggle)
                 {
                     var indexToToggle = _index + _registers[s.Args[0][0]];
                     if (indexToToggle >= 0 && indexToToggle < instructions.Length)
@@ -212,15 +197,15 @@ public class Aoc201623 : AocPuzzle
                         var instructionToToggle = instructions[indexToToggle];
                         if (instructionToToggle.Args.Count == 1)
                         {
-                            instructionToToggle.Name = instructionToToggle.Name == "inc"
-                                ? "dec"
-                                : "inc";
+                            instructionToToggle.Type = instructionToToggle.Type == InstructionType.Increment
+                                ? InstructionType.Decrement
+                                : InstructionType.Increment;
                         }
                         else
                         {
-                            instructionToToggle.Name = instructionToToggle.Name == "jnz"
-                                ? "cpy"
-                                : "jnz";
+                            instructionToToggle.Type = instructionToToggle.Type == InstructionType.Jump
+                                ? InstructionType.Copy
+                                : InstructionType.Jump;
                         }
                     }
 
@@ -233,5 +218,39 @@ public class Aoc201623 : AocPuzzle
         {
             _index += steps;
         }
+    }
+    
+    private class Instruction
+    {
+        public string Name { get; set; }
+        public InstructionType Type { get; set; }
+        public IList<string> Args { get; }
+
+        public Instruction(string s)
+        {
+            var parts = s.Split(' ');
+            Name = parts.First();
+            Args = parts.Skip(1).ToList();
+            Type = GetType(Name);
+        }
+
+        private static InstructionType GetType(string name) => name switch
+        {
+            "cpy" => InstructionType.Copy,
+            "inc" => InstructionType.Increment,
+            "dec" => InstructionType.Decrement,
+            "jnz" => InstructionType.Jump,
+            "tgl" => InstructionType.Toggle,
+            _ => throw new Exception($"Unknown instruction {name}")
+        };
+    }
+
+    private enum InstructionType
+    {
+        Copy,
+        Increment,
+        Decrement,
+        Jump,
+        Toggle
     }
 }

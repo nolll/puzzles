@@ -7,4 +7,4 @@
 #   ./run --help
 
 cd "$(dirname "$0")" || exit 1
-dotnet run --project Client/Client.csproj -- "$@"
+dotnet run --configuration Release --project Client/Client.csproj -- "$@"

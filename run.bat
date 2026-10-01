@@ -6,4 +6,4 @@ REM   run --tags aoc,2022
 REM   run --search "puzzle name"
 REM   run --help
 
-dotnet run --project Client/Client.csproj -- %*
+dotnet run --configuration Release --project Client/Client.csproj -- %*

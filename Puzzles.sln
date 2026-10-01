@@ -25,6 +25,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{EDA8C4AF-6E28-4911-82BC-3DBE9DFE5E83}"
 	ProjectSection(SolutionItems) = preProject
 		run = run
+		run.bat = run.bat
 	EndProjectSection
 EndProject
 Global

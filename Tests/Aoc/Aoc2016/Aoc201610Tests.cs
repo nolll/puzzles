@@ -15,10 +15,7 @@ public class Aoc201610Tests : PuzzleTest<Aoc201610>
                              bot 0 gives low to output 2 and high to output 0
                              value 2 goes to bot 2
                              """;
-
-        var botSimulator = new Aoc201610.BotSimulator(input.Trim());
-        var botId = botSimulator.FindIdByChips(2, 5);
-
-        botId.Should().Be(2);
+        
+        Sut.FindIdByChips(input, 2, 5).Should().Be(2);
     }
 }

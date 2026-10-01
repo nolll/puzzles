@@ -5,7 +5,7 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016;
 
-[IsSlow] // 16s for part 2
+[IsSlow] // 13.5s for part 2
 [Name("One-Time Pad")]
 [Comment("Slow hashing")]
 public class Aoc201614 : AocPuzzle
@@ -27,12 +27,10 @@ public class Aoc201614 : AocPuzzle
         var list = new LinkedList<HashInfo>();
         while (keyCount < n)
         {
-            var has1000 = index > ListLength;
             var hash = CreateHash(byteCache, stretchCount, $"{salt}{index}");
-            var (hasThree, hasFive) = HasRepeadedChars(hash);
-            list.AddLast(new HashInfo(hash, hasThree, hasFive));
+            list.AddLast(GetHashInfo(hash));
 
-            if (has1000)
+            if (index > ListLength)
             {
                 list.RemoveFirst();
                 if (list.First!.Value.HasThree && TryGetRepeatingByte(list.First!.Value.Hash, out var repeatingByte) &&
@@ -93,7 +91,7 @@ public class Aoc201614 : AocPuzzle
         return false;
     }
 
-    private static (bool hasThree, bool hasFive) HasRepeadedChars(byte[] hash)
+    private static HashInfo GetHashInfo(byte[] hash)
     {
         var count = 0;
         var hasThree = false;
@@ -113,7 +111,7 @@ public class Aoc201614 : AocPuzzle
             }
         }
 
-        return (hasThree, hasFive);
+        return new(hash, hasThree, hasFive);
     }
 
     private byte[] CreateSimpleHash((byte, byte)[] byteCache, byte[] bytes) => ConvertToHexBytes(byteCache, _hashFactory.ByteHash(bytes));
@@ -154,10 +152,5 @@ public class Aoc201614 : AocPuzzle
         return cache;
     }
 
-    private class HashInfo(byte[] hash, bool hasThree, bool hasFive)
-    {
-        public byte[] Hash { get; } = hash;
-        public bool HasThree { get; } = hasThree;
-        public bool HasFive { get; } = hasFive;
-    }
+    private record HashInfo(byte[] Hash, bool HasThree, bool HasFive);
 }

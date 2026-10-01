@@ -4,15 +4,13 @@ namespace Tests.Aoc.Aoc2016;
 
 public class Aoc201613Tests : PuzzleTest<Aoc201613>
 {
-    [Fact]
-    public void ShortestStepCountIsCorrect()
-    {
-        const int input = 10;
+    private const int Input = 10;
+    private const int Width = 10;
+    private const int Height = 10;
 
-        var maze = new Aoc201613.Maze(10, 7, input);
-        var stepCount = maze.StepCountToTarget(7, 4);
-        stepCount.Should().Be(11);
-    }
+    [Fact]
+    public void ShortestStepCountIsCorrect() => 
+        Sut.StepCountToTarget(Width, Height, Input, 7, 4).Should().Be(11);
 
     [Theory]
     [InlineData(0, 1)]
@@ -20,12 +18,6 @@ public class Aoc201613Tests : PuzzleTest<Aoc201613>
     [InlineData(2, 5)]
     [InlineData(3, 6)]
     [InlineData(4, 9)]
-    public void LocationCountIsCorrect(int steps, int expected)
-    {
-        const int input = 10;
-
-        var maze = new Aoc201613.Maze(10, 7, input);
-        var stepCount = maze.LocationCountAfter(steps);
-        stepCount.Should().Be(expected);
-    }
+    public void LocationCountIsCorrect(int steps, int expected) => 
+        Sut.LocationCountAfter(Width, Height, Input, steps).Should().Be(expected);
 }

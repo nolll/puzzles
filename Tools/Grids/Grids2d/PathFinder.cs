@@ -17,7 +17,7 @@ public static class PathFinder
         while (!currentAddress.Equals(to))
         {
             var bestAddress = grid.OrthogonalAdjacentCoordsTo(currentAddress)
-                .Where(o => coordSet.ContainsKey(o))
+                .Where(coordSet.ContainsKey)
                 .OrderBy(o => coordSet[o])
                 .ThenBy(o => o.Y)
                 .ThenBy(o => o.X)

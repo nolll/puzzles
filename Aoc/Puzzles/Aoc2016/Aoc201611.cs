@@ -8,25 +8,122 @@ namespace Pzl.Aoc.Puzzles.Aoc2016;
 public class Aoc201611 : AocPuzzle
 {
     [Puzzle("ad33c84632fce9c362c34badb2563b3e")]
-    public int Part1(string input) => new RadioisotopeSimulator(Input1).StepCount;
+    public int Part1(string input) => Solve(input);
 
     [Puzzle("19a0276a07d73a49e5bde8ad4f1ee6ee")]
-    public int Part2(string input) => new RadioisotopeSimulator(Input2).StepCount;
+    public int Part2(string input) => Solve(ModifyInput(input));
 
-    private const string Input1 = """
-                                  The first floor contains a strontium generator, a strontium-compatible microchip, a plutonium generator, and a plutonium-compatible microchip.
-                                  The second floor contains a thulium generator, a ruthenium generator, a ruthenium-compatible microchip, a curium generator, and a curium-compatible microchip.
-                                  The third floor contains a thulium-compatible microchip.
-                                  The fourth floor contains nothing relevant.
-                                  """;
+    public int Solve(string input)
+    {
+        HashSet<string> visited = [];
+        IsotopeNameProvider isotopeNameProvider = new();
+        AnonymousNameProvider anonymousNameProvider = new();
+        var facility = ParseFacility(isotopeNameProvider, anonymousNameProvider, input);
+        TrackVisit(visited, facility);
+        var finishedFacility = FindFinishedFacility(
+            visited,
+            isotopeNameProvider,
+            anonymousNameProvider,
+            new List<RadioisotopeFacility> { facility });
+        return finishedFacility?.IterationCount ?? 0;
+    }
 
-    private const string Input2 = """
-                                  The first floor contains a strontium generator, a strontium-compatible microchip, a plutonium generator, a plutonium-compatible microchip, an elerium generator, an elerium-compatible microchip, a dilithium generator, and a dilithium-compatible microchip.
-                                  The second floor contains a thulium generator, a ruthenium generator, a ruthenium-compatible microchip, a curium generator, and a curium-compatible microchip.
-                                  The third floor contains a thulium-compatible microchip.
-                                  The fourth floor contains nothing relevant.
-                                  """;
+    private static RadioisotopeFacility? FindFinishedFacility(
+        HashSet<string> visited,
+        IsotopeNameProvider isotopeNameProvider,
+        AnonymousNameProvider anonymousNameProvider,
+        IEnumerable<RadioisotopeFacility> facilities)
+    {
+        var newFacilities = new List<RadioisotopeFacility>();
+        foreach (var facility in facilities)
+        {
+            if (facility.ShouldMoveUp)
+            {
+                var itemCombinations = CombinationGenerator.GetUniqueCombinationsMaxSize(facility.Floors[facility.ElevatorFloor].Items, 2);
+                var oldFloor = facility.ElevatorFloor;
+                var newFloor = oldFloor + 1;
+                foreach (var combination in itemCombinations)
+                {
+                    var f = new RadioisotopeFacility(facility, newFloor, isotopeNameProvider, anonymousNameProvider);
+                    foreach (var item in combination)
+                    {
+                        f.Floors[oldFloor].Items.Remove(item);
+                        f.Floors[newFloor].Items.Add(item);
+                    }
+
+                    if (AlreadyVisited(visited, f))
+                        continue;
+
+                    TrackVisit(visited, f);
+                    if (f.IsValid)
+                        newFacilities.Add(f);
+                }
+            }
+
+            if (facility.ShouldMoveDown)
+            {
+                var oldFloor = facility.ElevatorFloor;
+                var newFloor = oldFloor - 1;
+
+                foreach (var item in facility.Floors[facility.ElevatorFloor].Items)
+                {
+                    var f = new RadioisotopeFacility(facility, newFloor, isotopeNameProvider, anonymousNameProvider);
+                    f.Floors[oldFloor].Items.Remove(item);
+                    f.Floors[newFloor].Items.Add(item);
+
+                    if (AlreadyVisited(visited, f))
+                        continue;
+
+                    TrackVisit(visited, f);
+                    if (f.IsValid)
+                        newFacilities.Add(f);
+                }
+            }
+        }
+
+        if (!newFacilities.Any())
+            return null;
+
+        var finishedFacility = newFacilities.FirstOrDefault(o => o.IsDone);
+        return finishedFacility ?? FindFinishedFacility(visited, isotopeNameProvider, anonymousNameProvider, newFacilities);
+    }
+
+    private static bool AlreadyVisited(HashSet<string> visited, RadioisotopeFacility f) => visited.Contains(f.AnonymizedId);
+    private static void TrackVisit(HashSet<string> visited, RadioisotopeFacility f) => visited.Add(f.AnonymizedId);
+
+    private static RadioisotopeFacility ParseFacility(
+        IsotopeNameProvider isotopeNameProvider,
+        AnonymousNameProvider anonymousNameProvider,
+        string input) => new(
+        input.Split(LineBreaks.Single).Select(ParseFloor).ToList(), 0, isotopeNameProvider, anonymousNameProvider);
     
+    private static string ModifyInput(string input)
+    {
+        var lines = input.Split(LineBreaks.Single);
+        lines[0] = $"{lines[0]}  an elerium generator, an elerium-compatible microchip, a dilithium generator, and a dilithium-compatible microchip.";
+        return string.Join(LineBreaks.Single, lines);
+    }
+
+    private static RadioisotopeFloor ParseFloor(string s)
+    {
+        var parts = s.Replace(" microchip", "-microchip").Replace(" generator", "-generator").Replace(",", "").Replace(".", "").Split(" ");
+        var items = parts
+            .Where(o => o.EndsWith("microchip") || o.EndsWith("generator"))
+            .Select(CreateItem)
+            .ToList();
+        return new RadioisotopeFloor(items);
+    }
+
+    private static RadioisotopeItem CreateItem(string s, int index)
+    {
+        var parts = s.Split('-');
+        var name = parts.First();
+        var type = parts.Last();
+        return type == "microchip" 
+            ? new Microchip(name) 
+            : new Generator(name);
+    }
+
     public class AnonymousNameProvider
     {
         private readonly Dictionary<int, string> _generatorCache = new();
@@ -36,7 +133,7 @@ public class Aoc201611 : AocPuzzle
         {
             if (_generatorCache.TryGetValue(counter, out var s))
                 return s;
-        
+
             s = string.Concat(counter, 'X');
             _generatorCache.Add(counter, s);
 
@@ -47,14 +144,14 @@ public class Aoc201611 : AocPuzzle
         {
             if (_microchipCache.TryGetValue(counter, out var s))
                 return s;
-        
+
             s = string.Concat(counter, 'Y');
             _microchipCache.Add(counter, s);
 
             return s;
         }
     }
-    
+
     public class IsotopeNameProvider
     {
         private readonly Dictionary<char, string> _generatorCache = new();
@@ -64,7 +161,7 @@ public class Aoc201611 : AocPuzzle
         {
             if (_generatorCache.TryGetValue(name, out var s))
                 return s;
-        
+
             s = string.Concat(name, 'G');
             _generatorCache.Add(name, s);
 
@@ -73,16 +170,16 @@ public class Aoc201611 : AocPuzzle
 
         public string GetMicrochipName(char name)
         {
-            if (_microchipCache.TryGetValue(name, out var s)) 
+            if (_microchipCache.TryGetValue(name, out var s))
                 return s;
-        
+
             s = string.Concat(name, 'M');
             _microchipCache.Add(name, s);
 
             return s;
         }
     }
-    
+
     public class Generator(string name) : RadioisotopeItem(name, RadioisotopeType.Generator);
     public class Microchip(string name) : RadioisotopeItem(name, RadioisotopeType.Microchip);
 
@@ -90,8 +187,6 @@ public class Aoc201611 : AocPuzzle
     {
         private readonly IsotopeNameProvider _isotopeNameProvider;
         private readonly AnonymousNameProvider _anonymousNameProvider;
-        private string? _id;
-        private string? _anonymizedId;
 
         public IList<RadioisotopeFloor> Floors { get; }
         private int ItemCount => Floors.Sum(o => o.Items.Count);
@@ -162,11 +257,11 @@ public class Aoc201611 : AocPuzzle
         {
             get
             {
-                if (_id != null)
-                    return _id;
+                if (field != null)
+                    return field;
 
-                _id = $"{ElevatorFloor}:{FloorIds}";
-                return _id;
+                field = $"{ElevatorFloor}:{FloorIds}";
+                return field;
             }
         }
 
@@ -174,29 +269,29 @@ public class Aoc201611 : AocPuzzle
         {
             get
             {
-                if (_anonymizedId != null)
-                    return _anonymizedId;
+                if (field != null)
+                    return field;
 
-                _anonymizedId = Id;
+                field = Id;
                 var counter = 1;
-                var i = _anonymizedId.IndexOf('G');
+                var i = field.IndexOf('G');
 
                 while (i > -1)
                 {
-                    var n = _anonymizedId[i - 1];
+                    var n = field[i - 1];
 
-                    _anonymizedId = _anonymizedId
+                    field = field
                         .Replace(_isotopeNameProvider.GetGeneratorName(n), _anonymousNameProvider.GetGeneratorName(counter))
                         .Replace(_isotopeNameProvider.GetMicrochipName(n), _anonymousNameProvider.GetMicrochipName(counter));
                     counter++;
-                    i = _anonymizedId.IndexOf('G');
+                    i = field.IndexOf('G');
                 }
 
-                return _anonymizedId;
+                return field;
             }
         }
     }
-    
+
     public class RadioisotopeFloor(IList<RadioisotopeItem> items)
     {
         public IList<RadioisotopeItem> Items { get; } = items;
@@ -212,7 +307,7 @@ public class Aoc201611 : AocPuzzle
             }
         }
     }
-    
+
     public abstract class RadioisotopeItem
     {
         public string Name { get; }
@@ -225,111 +320,12 @@ public class Aoc201611 : AocPuzzle
             Type = type;
             Id = BuildId();
         }
-    
+
         private string BuildId()
         {
             var n = Name.ToUpper().First();
             var t = Type.ToString().ToUpper().First();
             return string.Concat(n, t);
-        }
-    }
-
-    public class RadioisotopeSimulator
-    {
-        private readonly HashSet<string> _previousFacilities = [];
-        private readonly IsotopeNameProvider _isotopeNameProvider = new();
-        private readonly AnonymousNameProvider _anonymousNameProvider = new();
-
-        public int StepCount { get; }
-
-        public RadioisotopeSimulator(string input)
-        {
-            var facility = ParseFacility(input);
-            TrackVisit(facility);
-            var finishedFacility = FindFinishedFacility(new List<RadioisotopeFacility> { facility });
-            StepCount = finishedFacility?.IterationCount ?? 0;
-        }
-
-        private RadioisotopeFacility? FindFinishedFacility(IEnumerable<RadioisotopeFacility> facilities)
-        {
-            var newFacilities = new List<RadioisotopeFacility>();
-            foreach (var facility in facilities)
-            {
-                if (facility.ShouldMoveUp)
-                {
-                    var itemCombinations = CombinationGenerator.GetUniqueCombinationsMaxSize(facility.Floors[facility.ElevatorFloor].Items, 2);
-                    var oldFloor = facility.ElevatorFloor;
-                    var newFloor = oldFloor + 1;
-                    foreach (var combination in itemCombinations)
-                    {
-                        var f = new RadioisotopeFacility(facility, newFloor, _isotopeNameProvider, _anonymousNameProvider);
-                        foreach (var item in combination)
-                        {
-                            f.Floors[oldFloor].Items.Remove(item);
-                            f.Floors[newFloor].Items.Add(item);
-                        }
-
-                        if (AlreadyVisited(f))
-                            continue;
-
-                        TrackVisit(f);
-                        if (f.IsValid)
-                            newFacilities.Add(f);
-                    }
-                }
-
-                if (facility.ShouldMoveDown)
-                {
-                    var oldFloor = facility.ElevatorFloor;
-                    var newFloor = oldFloor - 1;
-
-                    foreach (var item in facility.Floors[facility.ElevatorFloor].Items)
-                    {
-                        var f = new RadioisotopeFacility(facility, newFloor, _isotopeNameProvider, _anonymousNameProvider);
-                        f.Floors[oldFloor].Items.Remove(item);
-                        f.Floors[newFloor].Items.Add(item);
-
-                        if (AlreadyVisited(f))
-                            continue;
-
-                        TrackVisit(f);
-                        if (f.IsValid)
-                            newFacilities.Add(f);
-                    }
-                }
-            }
-
-            if (!newFacilities.Any())
-                return null;
-
-            var finishedFacility = newFacilities.FirstOrDefault(o => o.IsDone);
-            return finishedFacility ?? FindFinishedFacility(newFacilities);
-        }
-
-        private bool AlreadyVisited(RadioisotopeFacility f) => _previousFacilities.Contains(f.AnonymizedId);
-        private void TrackVisit(RadioisotopeFacility f) => _previousFacilities.Add(f.AnonymizedId);
-
-        private RadioisotopeFacility ParseFacility(string input) => new(
-            input.Split(LineBreaks.Single).Select(ParseFloor).ToList(), 0, _isotopeNameProvider, _anonymousNameProvider);
-
-        private static RadioisotopeFloor ParseFloor(string s)
-        {
-            var parts = s.Replace(" microchip", "-microchip").Replace(" generator", "-generator").Replace(",", "").Replace(".", "").Split(" ");
-            var items = parts
-                .Where(o => o.EndsWith("microchip") || o.EndsWith("generator"))
-                .Select(CreateItem)
-                .ToList();
-            return new RadioisotopeFloor(items);
-        }
-
-        private static RadioisotopeItem CreateItem(string s, int index)
-        {
-            var parts = s.Split('-');
-            var name = parts.First();
-            var type = parts.Last();
-            if (type == "microchip")
-                return new Microchip(name);
-            return new Generator(name);
         }
     }
 

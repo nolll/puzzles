@@ -14,9 +14,7 @@ public class Aoc201611Tests : PuzzleTest<Aoc201611>
                              The fourth floor contains nothing relevant.
                              """;
 
-        var simulator = new Aoc201611.RadioisotopeSimulator(input);
-
-        simulator.StepCount.Should().Be(11);
+        Sut.Solve(input).Should().Be(11);
     }
 
     [Fact]

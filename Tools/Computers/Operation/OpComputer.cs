@@ -5,7 +5,7 @@ namespace Pzl.Tools.Computers.Operation;
 
 public class OpComputer
 {
-    private readonly IDictionary<string, Operation> _operationsDictionary;
+    protected readonly IDictionary<string, Operation> _operationsDictionary;
 
     public OpComputer()
     {
@@ -79,37 +79,6 @@ public class OpComputer
             pointer++;
         }
         return registers[0];
-    }
-
-    public long RunSpecialForDay21(string programInput, long register0Value, bool findFirst)
-    {
-        long lastRegisterZeroValue = 0;
-        var registerZeroValues = new HashSet<long>();
-        var inputRows = programInput.Split(LineBreaks.Single);
-        var pointerRegister = int.Parse(inputRows.First().Split(' ').Last());
-        var commands = inputRows.Skip(1).Select(ParseStringCommand).ToList();
-        var registers = new[] { register0Value, 0, 0, 0, 0, 0 };
-        var pointer = (int)registers[pointerRegister];
-        while (pointer >= 0 && pointer < commands.Count)
-        {
-            registers[pointerRegister] = pointer;
-            var command = commands[pointer];
-            var operation = _operationsDictionary[command.Operation];
-            if (operation.Name == "eqrr")
-            {
-                var v = registers[command.A];
-                if (findFirst && !registerZeroValues.Any())
-                    return v;
-                if (registerZeroValues.Contains(v))
-                    return lastRegisterZeroValue;
-                lastRegisterZeroValue = v;
-                registerZeroValues.Add(v);
-            }
-            operation.Execute(registers, command.A, command.B, command.C);
-            pointer = (int)registers[pointerRegister];
-            pointer++;
-        }
-        return 0;
     }
 
     private static IEnumerable<long> FindIntFactors(long target)
@@ -192,7 +161,7 @@ public class OpComputer
         return new OpCommand(name, values[0], values[1], values[2]);
     }
 
-    private OpCommand ParseStringCommand(string s)
+    protected OpCommand ParseStringCommand(string s)
     {
         var parts = s.Split(' ');
         var name = parts.First();

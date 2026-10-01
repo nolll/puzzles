@@ -6,23 +6,11 @@ namespace Tests.Aoc.Aoc2016;
 public class Aoc201614Tests : PuzzleTest<Aoc201614>
 {
     [Fact]
-    public void GeneratesCorrectKeys()
-    {
-        var generator = new Aoc201614.KeyGenerator(0);
-        var index = generator.GetIndexOfNThKey("abc", 64);
-
-        index.Should().Be(22728);
-    }
+    public void GeneratesCorrectKeys() => Sut.GetIndexOfNThKey(0, "abc", 64).Should().Be(22728);
 
     [Fact]
-    public void GeneratesCorrectStretchedKeys()
-    {
-        var generator = new Aoc201614.KeyGenerator(10);
-        var index = generator.GetIndexOfNThKey("abc", 64);
+    public void GeneratesCorrectStretchedKeys() => Sut.GetIndexOfNThKey(10, "abc", 64).Should().Be(12665);
 
-        index.Should().Be(12665);
-    }
-    
     [Theory]
     [InlineData(0, "577571be4de9dcce85a041ba0410f29f")]
     [InlineData(1, "eec80a0c92dc8a0777c619d9bb51e910")]
@@ -30,11 +18,8 @@ public class Aoc201614Tests : PuzzleTest<Aoc201614>
     [InlineData(10, "8de2bfc94801e26c8c6729bd30d5c952")]
     public void StretchedHash(int stretchCount, string expected)
     {
-        var generator = new Aoc201614.KeyGenerator(stretchCount);
-        var hashedBytes = generator.CreateHash("abc0");
-        var hash = ByteConverter.ToString(hashedBytes);
-            
-        hash.Should().Be(expected);
+        var hashedBytes = Sut.CreateHash(Sut.BuildByteCache(), stretchCount, "abc0");
+        ByteConverter.ToString(hashedBytes).Should().Be(expected);
     }
 
     [Theory]
@@ -45,8 +30,7 @@ public class Aoc201614Tests : PuzzleTest<Aoc201614>
     public void RepeatedChars(string str, char expected)
     {
         var byteHash = str.ToCharArray().Select(o => (byte)o).ToArray();
-        Aoc201614.KeyGenerator.TryGetRepeatingByte(byteHash, out var c);
-        
+        Sut.TryGetRepeatingByte(byteHash, out var c);
         c.Should().Be((byte)expected);
     }
     
@@ -58,8 +42,6 @@ public class Aoc201614Tests : PuzzleTest<Aoc201614>
     public void ByteHashFiveInARowOf(string stringHash, bool expected)
     {
         var byteHash = stringHash.ToCharArray().Select(o => (byte)o).ToArray();
-        var hasFiveInARow = Aoc201614.KeyGenerator.HasFiveInARowOf(byteHash, (byte)'a');
-
-        hasFiveInARow.Should().Be(expected);
+        Sut.HasFiveInARowOf(byteHash, (byte)'a').Should().Be(expected);
     }
 }

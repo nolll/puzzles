@@ -7,23 +7,29 @@ namespace Pzl.Aoc.Puzzles.Aoc2016;
 public class Aoc201621 : AocPuzzle
 {
     [Puzzle("d23262df6c0ae121dad862c4941b0e84")]
-    public string Part1(string input) => new StringScrambler(input).Scramble("abcdefgh");
+    public string Part1(string input) => Scramble(input, "abcdefgh");
 
     [Puzzle("c7601768c42b9f9aa8cbb994da21b9fd")]
-    public string Part2(string input) => new StringScrambler(input).Unscramble("fbgdceah");
+    public string Part2(string input) => Unscramble(input, "fbgdceah");
     
-    public interface IScrambleInstruction
+    public string Scramble(string input, string str) => 
+        ParseInstructions(input).Aggregate(str, (current, instruction) => instruction.Run(current));
+
+    public string Unscramble(string input, string str) => 
+        ParseInstructions(input).Reverse().Aggregate(str, (current, instruction) => instruction.RunBackwards(current));
+
+    private interface IScrambleInstruction
     {
         string Run(string s);
         string RunBackwards(string s);
     }
-    
-    public class MoveInstruction(int from, int to) : IScrambleInstruction
+
+    private class MoveInstruction(int from, int to) : IScrambleInstruction
     {
         public string Run(string s) => Move(s, from, to);
         public string RunBackwards(string s) => Move(s, to, from);
 
-        private string Move(string s, int from, int to)
+        private static string Move(string s, int from, int to)
         {
             var letters = s.ToList();
             var letterToMove = s.Skip(from).Take(1).First();
@@ -32,8 +38,8 @@ public class Aoc201621 : AocPuzzle
             return string.Concat(letters);
         }
     }
-    
-    public class ReverseInstruction(int from, int to) : IScrambleInstruction
+
+    private class ReverseInstruction(int from, int to) : IScrambleInstruction
     {
         public string Run(string s) => Reverse(s);
         public string RunBackwards(string s) => Reverse(s);
@@ -47,8 +53,8 @@ public class Aoc201621 : AocPuzzle
             return string.Concat(startRange.Concat(range.Reverse()).Concat(endRange).ToList());
         }
     }
-    
-    public class RotateBasedOnPositionInstruction(char letter) : RotateInstruction
+
+    private class RotateBasedOnPositionInstruction(char letter) : RotateInstruction
     {
         public override string Run(string s)
         {
@@ -78,8 +84,8 @@ public class Aoc201621 : AocPuzzle
             return steps + 1;
         }
     }
-    
-    public abstract class RotateInstruction : IScrambleInstruction
+
+    private abstract class RotateInstruction : IScrambleInstruction
     {
         public abstract string Run(string s);
         public abstract string RunBackwards(string s);
@@ -110,77 +116,56 @@ public class Aoc201621 : AocPuzzle
             return string.Concat(letters);
         }
     }
-    
-    public class RotateLeftInstruction(int steps) : RotateInstruction
+
+    private class RotateLeftInstruction(int steps) : RotateInstruction
     {
         public override string Run(string s) => RotateLeft(s, steps);
         public override string RunBackwards(string s) => RotateRight(s, steps);
     }
-    
-    public class RotateRightInstruction(int steps) : RotateInstruction
+
+    private class RotateRightInstruction(int steps) : RotateInstruction
     {
         public override string Run(string s) => RotateRight(s, steps);
         public override string RunBackwards(string s) => RotateLeft(s, steps);
     }
-    
-    public class StringScrambler(string input)
+
+    private static IList<IScrambleInstruction> ParseInstructions(string input) => 
+        input.Split(LineBreaks.Single).Select(ParseInstruction).ToList();
+
+    private static IScrambleInstruction ParseInstruction(string s)
     {
-        private readonly IList<IScrambleInstruction> _instructions = ParseInstructions(input);
-
-        public string Scramble(string str)
+        var parts = s.Split(' ');
+        var command = parts[0];
+        if (command == "swap")
         {
-            foreach (var instruction in _instructions)
-                str = instruction.Run(str);
-
-            return str;
-        }
-    
-        public string Unscramble(string str)
-        {
-            foreach (var instruction in _instructions.Reverse())
-                str = instruction.RunBackwards(str);
-
-            return str;
+            return parts[1] == "position"
+                ? new SwapPositionInstruction(int.Parse(parts[2]), int.Parse(parts[5]))
+                : new SwapLetterInstruction(parts[2].First(), parts[5].First());
         }
 
-        private static IList<IScrambleInstruction> ParseInstructions(string input) => 
-            input.Split(LineBreaks.Single).Select(ParseInstruction).ToList();
-
-        private static IScrambleInstruction ParseInstruction(string s)
+        if (command == "rotate")
         {
-            var parts = s.Split(' ');
-            var command = parts[0];
-            if (command == "swap")
-            {
-                return parts[1] == "position"
-                    ? new SwapPositionInstruction(int.Parse(parts[2]), int.Parse(parts[5]))
-                    : new SwapLetterInstruction(parts[2].First(), parts[5].First());
-            }
+            var type = parts[1];
+            if (type == "left")
+                return new RotateLeftInstruction(int.Parse(parts[2]));
 
-            if (command == "rotate")
-            {
-                var type = parts[1];
-                if (type == "left")
-                    return new RotateLeftInstruction(int.Parse(parts[2]));
+            if (type == "right")
+                return new RotateRightInstruction(int.Parse(parts[2]));
 
-                if (type == "right")
-                    return new RotateRightInstruction(int.Parse(parts[2]));
-
-                if (type == "based")
-                    return new RotateBasedOnPositionInstruction(parts[6].First());
-            }
-
-            if (command == "reverse")
-                return new ReverseInstruction(int.Parse(parts[2]), int.Parse(parts[4]));
-
-            if (command == "move")
-                return new MoveInstruction(int.Parse(parts[2]), int.Parse(parts[5]));
-
-            throw new Exception($"Error parsing instruction: {s}");
+            if (type == "based")
+                return new RotateBasedOnPositionInstruction(parts[6].First());
         }
+
+        if (command == "reverse")
+            return new ReverseInstruction(int.Parse(parts[2]), int.Parse(parts[4]));
+
+        if (command == "move")
+            return new MoveInstruction(int.Parse(parts[2]), int.Parse(parts[5]));
+
+        throw new Exception($"Error parsing instruction: {s}");
     }
-    
-    public class SwapLetterInstruction(char a, char b) : IScrambleInstruction
+
+    private class SwapLetterInstruction(char a, char b) : IScrambleInstruction
     {
         public string Run(string s) => Swap(s);
         public string RunBackwards(string s) => Swap(s);
@@ -195,8 +180,8 @@ public class Aoc201621 : AocPuzzle
             return string.Concat(letters);
         }
     }
-    
-    public class SwapPositionInstruction(int from, int to) : IScrambleInstruction
+
+    private class SwapPositionInstruction(int from, int to) : IScrambleInstruction
     {
         public string Run(string s) => Swap(s);
         public string RunBackwards(string s) => Swap(s);

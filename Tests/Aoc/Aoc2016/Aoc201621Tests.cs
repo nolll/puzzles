@@ -18,12 +18,7 @@ public class Aoc201621Tests :  PuzzleTest<Aoc201621>
                              rotate based on position of letter d
                              """;
 
-        const string pwd = "abcde";
-
-        var scrambler = new Aoc201621.StringScrambler(input.Trim());
-        var result = scrambler.Scramble(pwd);
-
-        result.Should().Be("decab");
+        Sut.Scramble(input, "abcde").Should().Be("decab");
     }
 
     [Fact]
@@ -40,11 +35,6 @@ public class Aoc201621Tests :  PuzzleTest<Aoc201621>
                              rotate based on position of letter d
                              """;
 
-        const string pwd = "decab";
-
-        var scrambler = new Aoc201621.StringScrambler(input.Trim());
-        var result = scrambler.Unscramble(pwd);
-
-        result.Should().Be("abcde");
+        Sut.Unscramble(input, "decab").Should().Be("abcde");
     }
 }

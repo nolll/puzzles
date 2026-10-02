@@ -4,33 +4,15 @@ namespace Tests.Aoc.Aoc2016;
 
 public class Aoc201620Tests : PuzzleTest<Aoc201620>
 {
-    [Fact]
-    public void FindsUnblockedIps()
-    {
-        const string input = """
-                             5-8
-                             0-2
-                             4-7
-                             """;
-
-        var rules = new Aoc201620.FirewallRules(input.Trim());
-        var lowestIp = rules.GetLowestUnblockedIp();
-
-        lowestIp.Should().Be(3);
-    }
+    private const string Input = """
+                                 5-8
+                                 0-2
+                                 4-7
+                                 """;
 
     [Fact]
-    public void AllowedIpCountIsCorrect()
-    {
-        const string input = """
-                             5-8
-                             0-2
-                             4-7
-                             """;
+    public void FindsUnblockedIps() => Sut.GetLowestUnblockedIp(Input).Should().Be(3);
 
-        var rules = new Aoc201620.FirewallRules(input.Trim());
-        var lowestIp = rules.GetAllowedIpCount(9);
-
-        lowestIp.Should().Be(2);
-    }
+    [Fact]
+    public void AllowedIpCountIsCorrect() => Sut.GetAllowedIpCount(Input, 9).Should().Be(2);
 }

@@ -6,7 +6,6 @@ namespace Pzl.Everybody.Puzzles.Ece2025;
 
 [Name("Deadline-Driven Development")]
 [Comment("Part 3 takes just over 10s")]
-[IsSlow]
 public class Ece202517 : EverybodyEventPuzzle
 {
     private const string RightSet = "right";

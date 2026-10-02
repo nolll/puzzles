@@ -7,7 +7,6 @@ namespace Pzl.Everybody.Puzzles.Ece2024;
 // Thanks to Alex Prosser
 [Name("Gliding Finale")]
 [Comment("Part 2 takes just over 10s")]
-[IsSlow]
 public class Ece202420 : EverybodyEventPuzzle
 {
     private readonly Dictionary<char, GridDirection[]> _nextDirections = new()

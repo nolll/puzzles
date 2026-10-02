@@ -6,7 +6,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Everybody.Puzzles.Ece2024;
 
 // Thanks to Jonathan Paulson
-[IsSlow]
+[IsSlow] // Just below 10 seconds
 [Comment("Complex path finding")]
 [Name("From the Herbalist's Diary")]
 public class Ece202415 : EverybodyEventPuzzle
@@ -75,10 +75,11 @@ public class Ece202415 : EverybodyEventPuzzle
         {
             for (var c = 0; c < grid[r].Length; c++)
             {
-                if (grid[r][c] is '#' or '.' or '~')
+                var herb = grid[r][c];
+                if (herb is '#' or '.' or '~')
                     continue;
 
-                herbs.Add(grid[r][c]);
+                herbs.Add(herb);
             }
         }
 

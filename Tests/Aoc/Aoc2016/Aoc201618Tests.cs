@@ -5,13 +5,5 @@ namespace Tests.Aoc.Aoc2016;
 public class Aoc201618Tests : PuzzleTest<Aoc201618>
 {
     [Fact]
-    public void SafeCountIsCorrect()
-    {
-        const string input = ".^^.^.^^^^";
-
-        var detector = new Aoc201618.FloorTrapDetector(input);
-        var safeCount = detector.CountSafeTiles(10);
-
-        safeCount.Should().Be(38);
-    }
+    public void SafeCountIsCorrect() => Sut.CountSafeTiles(".^^.^.^^^^", 10).Should().Be(38);
 }

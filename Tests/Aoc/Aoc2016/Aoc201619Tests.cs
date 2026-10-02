@@ -4,25 +4,11 @@ namespace Tests.Aoc.Aoc2016;
 
 public class Aoc201619Tests : PuzzleTest<Aoc201619>
 {
-    [Fact]
-    public void StealFromNextElf_ThirdElfGetsAllPresents()
-    {
-        const int input = 5;
-
-        var party = new Aoc201619.WhiteElephantParty(input);
-        var winner = party.StealFromNextElf();
-
-        winner.Should().Be(3);
-    }
+    private const string Input = "5";
 
     [Fact]
-    public void StealFromAcrossTheCircle_SecondElfGetsAllPresents()
-    {
-        const int input = 5;
+    public void StealFromNextElf_ThirdElfGetsAllPresents() => Sut.StealFromNextElf(Input).Should().Be(3);
 
-        var party = new Aoc201619.WhiteElephantParty(input);
-        var winner = party.StealFromElfAcrossCircle();
-
-        winner.Should().Be(2);
-    }
+    [Fact]
+    public void StealFromAcrossTheCircle_SecondElfGetsAllPresents() => Sut.StealFromElfAcrossCircle(Input).Should().Be(2);
 }

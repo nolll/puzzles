@@ -26,8 +26,6 @@ public class Aoc201615Tests : PuzzleTest<Aoc201615>
                              Disc #2 has 2 positions; at time=0, it is at position 1.
                              """;
 
-        var sculpture = new Aoc201615.KineticSculpture(input.Trim());
-            
-        sculpture.TimeToPressButton.Should().Be(5);
+        Sut.Part1(input.Trim()).Should().Be(5);
     }
 }

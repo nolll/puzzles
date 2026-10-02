@@ -7,55 +7,51 @@ namespace Pzl.Aoc.Puzzles.Aoc2016;
 public class Aoc201615 : AocPuzzle
 {
     [Puzzle("c2b25510c1da608c5f3a22a5d84c55dd")]
-    public int Part1(string input) => new KineticSculpture(input).TimeToPressButton;
+    public int Part1(string input) => Run(input);
 
     [Puzzle("7e078d8dabad268a34def302abd59ce8")]
-    public int Part2(string input) => new KineticSculpture(input, true).TimeToPressButton;
-    
-    public class KineticSculpture
+    public int Part2(string input) => Run(input, true);
+
+    private int Run(string input, bool addExtraDisc = false)
     {
-        public int TimeToPressButton { get; }
+        var discs = ParseDiscs(input);
+        if (addExtraDisc)
+            discs.Add(new KineticSculptureDisc(11, 0));
+        var time = 0;
 
-        public KineticSculpture(string input, bool addExtraDisc = false)
+        while (true)
         {
-            var discs = ParseDiscs(input);
-            if(addExtraDisc)
-                discs.Add(new KineticSculptureDisc(11, 0));
-            var time = 0;
-
-            while (true)
+            var passed = true;
+            var discCount = 0;
+            foreach (var disc in discs)
             {
-                var passed = true;
-                var discCount = 0;
-                foreach (var disc in discs)
+                if (!disc.Passed(time + discCount))
                 {
-                    if (!disc.Passed(time + discCount))
-                    {
-                        passed = false;
-                        break;
-                    }
-                    discCount++;
+                    passed = false;
+                    break;
                 }
 
-                if (passed)
-                    break;
-
-                time++;
+                discCount++;
             }
 
-            TimeToPressButton = time - 1;
+            if (passed)
+                break;
+
+            time++;
         }
 
-        private static IList<KineticSculptureDisc> ParseDiscs(string input) => 
-            input.Split(LineBreaks.Single).Select(ParseDisc).ToList();
+        return time - 1;
+    }
 
-        private static KineticSculptureDisc ParseDisc(string s)
-        {
-            var parts = s.Replace(".", "").Split(' ');
-            var position = int.Parse(parts[3]);
-            var startPos = int.Parse(parts[11]);
-            return new KineticSculptureDisc(position, startPos);
-        }
+    private static IList<KineticSculptureDisc> ParseDiscs(string input) =>
+        input.Split(LineBreaks.Single).Select(ParseDisc).ToList();
+
+    private static KineticSculptureDisc ParseDisc(string s)
+    {
+        var parts = s.Replace(".", "").Split(' ');
+        var position = int.Parse(parts[3]);
+        var startPos = int.Parse(parts[11]);
+        return new KineticSculptureDisc(position, startPos);
     }
     
     public class KineticSculptureDisc(in int positions, int startPos)

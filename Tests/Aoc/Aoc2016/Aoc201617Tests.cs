@@ -8,11 +8,5 @@ public class Aoc201617Tests : PuzzleTest<Aoc201617>
     [InlineData("ihgpwlah", "DDRRRD")]
     [InlineData("kglvqrro", "DDUDRLRRUDRD")]
     [InlineData("ulqzkmiv", "DRURDRUDDLLDLUURRDULRLDUUDDDRR")]
-    public void FindShortestPath(string passcode, string expectedPath)
-    {
-        var maze = new Aoc201617.LockedDoorMaze();
-        maze.FindPaths(passcode);
-
-        maze.ShortestPath.Should().Be(expectedPath);
-    }
+    public void FindShortestPath(string passcode, string expectedPath) => Sut.Part1(passcode).Should().Be(expectedPath);
 }

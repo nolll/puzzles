@@ -16,9 +16,7 @@ public class Aoc201623Tests : PuzzleTest<Aoc201623>
                              dec a
                              """;
 
-        var control = new Aoc201623.SafeCrackingComputerPart1(input.Trim(), 0, 0);
-
-        control.ValueA.Should().Be(42);
+        Sut.RunPart1(input, 0, 0).Should().Be(42);
     }
 
     [Fact]
@@ -34,8 +32,6 @@ public class Aoc201623Tests : PuzzleTest<Aoc201623>
                              dec a
                              """;
 
-        var control = new Aoc201623.SafeCrackingComputerPart1(input.Trim(), 0, 0);
-
-        control.ValueA.Should().Be(3);
+        Sut.RunPart2(input, 0, 0).Should().Be(3);
     }
 }

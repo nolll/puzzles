@@ -9,193 +9,153 @@ namespace Pzl.Aoc.Puzzles.Aoc2016;
 public class Aoc201623 : AocPuzzle
 {
     [Puzzle("11e66781d74c9188561ba3937d053d99")]
-    public int Part1(string input) => new SafeCrackingComputerPart1(input, 7, 0).ValueA;
+    public int Part1(string input) => RunPart1(input, 7, 0);
 
     [Puzzle("eb0c83e21e8bd77e7f0b5686e8f1c31a")]
-    public int Part2(string input) => new SafeCrackingComputerPart2(input, 12, 0).ValueA;  // 12! + 7708
-    
-    public class SafeCrackingComputerPart1
+    public int Part2(string input) => RunPart2(input, 12, 0);
+
+    public int RunPart1(string input, int a, int c)
     {
-        private readonly Dictionary<char, int> _registers;
-        private int _index;
-
-        public int ValueA => _registers['a'];
-
-        public SafeCrackingComputerPart1(string input, int a, int c)
+        var instructions = Parse(input);
+        var registers = new Dictionary<char, int>
         {
-            var instructions = input.Split(LineBreaks.Single);
-            _registers = new Dictionary<char, int>
-            {
-                ['a'] = a,
-                ['b'] = 0,
-                ['c'] = c,
-                ['d'] = 0
-            };
-            _index = 0;
+            ['a'] = a,
+            ['b'] = 0,
+            ['c'] = c,
+            ['d'] = 0
+        };
+        var index = 0;
 
-            while (_index < instructions.Length)
+        while (index < instructions.Length)
+        {
+            var instruction = instructions[index];
+            try
             {
-                var s = instructions[_index];
-                var parts = s.Split(' ');
-                var command = parts[0];
-                try
+                switch (instruction.Type)
                 {
-                    if (command == "cpy")
+                    case InstructionType.Copy:
                     {
-                        var value = parts[1];
-                        var target = parts[2][0];
-                        if (int.TryParse(value, out var num))
-                            _registers[target] = num;
+                        if (instruction.HasIntegerArg1)
+                            registers[instruction.CharArg2] = instruction.IntegerArg1;
                         else
-                            _registers[target] = _registers[value.First()];
+                            registers[instruction.CharArg2] = registers[instruction.CharArg1];
 
-                        IncrementIndex();
+                        index++;
+                        break;
                     }
-
-                    else if (command == "inc")
+                    case InstructionType.Increment:
                     {
-                        var target = parts[1][0];
-                        _registers[target]++;
-                        IncrementIndex();
+                        registers[instruction.CharArg1]++;
+                        index++;
+                        break;
                     }
-
-                    else if (command == "dec")
+                    case InstructionType.Decrement:
                     {
-                        var target = parts[1][0];
-                        _registers[target]--;
-                        IncrementIndex();
+                        registers[instruction.CharArg1]--;
+                        index++;
+                        break;
                     }
-
-                    else if (command == "jnz")
+                    case InstructionType.Jump:
                     {
-                        var value = parts[1];
-                        var isInt = int.TryParse(parts[2], out var steps);
-                        steps = isInt ? steps : _registers[parts[2][0]];
+                        var steps = instruction.HasIntegerArg2 ? instruction.IntegerArg2 : registers[instruction.CharArg2];
 
-                        if (int.TryParse(value, out var num))
-                        {
-                            IncrementIndex(num != 0 ? steps : 1);
-                        }
+                        if (instruction.HasIntegerArg1)
+                            index += instruction.IntegerArg1 != 0 ? steps : 1;
                         else
-                        {
-                            IncrementIndex(_registers[value[0]] != 0 ? steps : 1);
-                        }
+                            index += registers[instruction.CharArg1] != 0 ? steps : 1;
+                        break;
                     }
-
-                    else if (command == "tgl")
+                    case InstructionType.Toggle:
                     {
-                        var target = parts[1].First();
-                        var val = _registers[target];
-                        var indexToToggle = _index + val;
+                        var target = instruction.CharArg1;
+                        var val = registers[target];
+                        var indexToToggle = index + val;
                         if (indexToToggle >= 0 && indexToToggle < instructions.Length)
                         {
                             var instructionToToggle = instructions[indexToToggle];
-                            var toggleParts = instructionToToggle.Split(" ");
-                            var name = toggleParts[0];
-                            if (toggleParts.Length == 2)
+                            if (instructionToToggle.Type is InstructionType.Increment or InstructionType.Decrement)
                             {
-                                if (name == "inc")
-                                    toggleParts[0] = "dec";
-                                else
-                                    toggleParts[0] = "inc";
+                                instructionToToggle.Type = instructionToToggle.Type == InstructionType.Increment
+                                    ? InstructionType.Decrement
+                                    : InstructionType.Increment;
                             }
                             else
                             {
-                                if (name == "jnz")
-                                    toggleParts[0] = "cpy";
-                                else
-                                    toggleParts[0] = "jnz";
+                                instructionToToggle.Type = instructionToToggle.Type == InstructionType.Jump
+                                    ? InstructionType.Copy
+                                    : InstructionType.Jump;
                             }
-
-                            instructions[indexToToggle] = string.Join(' ', toggleParts);
                         }
 
-                        IncrementIndex();
+                        index++;
+                        break;
                     }
                 }
-                catch
-                {
-                    IncrementIndex();
-                }
+            }
+            catch
+            {
+                index++;
             }
         }
 
-        private void IncrementIndex(int steps = 1)
-        {
-            _index += steps;
-        }
+        return registers['a'];
     }
 
-    public class SafeCrackingComputerPart2
+    public int RunPart2(string input, int a, int c)
     {
-        private readonly Dictionary<char, int> _registers;
-        private int _index;
-
-        public int ValueA => _registers['a'];
-
-        public SafeCrackingComputerPart2(string input, int a, int c)
+        var instructions = Parse(input);
+        var registers = new Dictionary<char, int>
         {
-            var instructions = input.Split(LineBreaks.Single).Select(o => new Instruction(o)).ToArray();
-            _registers = new Dictionary<char, int>
+            ['a'] = a,
+            ['b'] = 0,
+            ['c'] = c,
+            ['d'] = 0
+        };
+        var index = 0;
+
+        while (index < instructions.Length)
+        {
+            var s = instructions[index];
+            switch (s.Type)
             {
-                ['a'] = a,
-                ['b'] = 0,
-                ['c'] = c,
-                ['d'] = 0
-            };
-            _index = 0;
-
-            while (_index < instructions.Length)
-            {
-                var s = instructions[_index];
-                if (s.Type == InstructionType.Copy)
+                case InstructionType.Copy:
                 {
-                    var value = s.Args[0];
-                    var target = s.Args[1][0];
-                    _registers[target] = int.TryParse(value, out var num)
-                        ? num
-                        : _registers[value[0]];
+                    registers[s.CharArg2] = s.HasIntegerArg1
+                        ? s.IntegerArg1
+                        : registers[s.CharArg1];
 
-                    IncrementIndex();
+                    index++;;
+                    break;
                 }
-
-                else if (s.Type == InstructionType.Increment)
+                case InstructionType.Increment:
                 {
-                    var target = s.Args[0][0];
-                    _registers[target]++;
-                    IncrementIndex();
+                    registers[s.CharArg1]++;
+                    index++;
+                    break;
                 }
-
-                else if (s.Type == InstructionType.Decrement)
+                case InstructionType.Decrement:
                 {
-                    var target = s.Args[0][0];
-                    _registers[target]--;
-                    IncrementIndex();
+                    registers[s.CharArg1]--;
+                    index++;;
+                    break;
                 }
-
-                else if (s.Type == InstructionType.Jump)
+                case InstructionType.Jump:
                 {
-                    var value = s.Args[0];
-                    var isInt = int.TryParse(s.Args[1], out var steps);
-                    steps = isInt ? steps : _registers[s.Args[1][0]];
+                    var steps = s.HasIntegerArg2 ? s.IntegerArg2 : registers[s.CharArg2];
 
-                    if (int.TryParse(value, out var num))
-                    {
-                        IncrementIndex(num != 0 ? steps : 1);
-                    }
+                    if (s.HasIntegerArg1)
+                        index += s.IntegerArg1 != 0 ? steps : 1;
                     else
-                    {
-                        IncrementIndex(_registers[value[0]] != 0 ? steps : 1);
-                    }
+                        index += registers[s.CharArg1] != 0 ? steps : 1;
+                    break;
                 }
-
-                else if (s.Type == InstructionType.Toggle)
+                case InstructionType.Toggle:
                 {
-                    var indexToToggle = _index + _registers[s.Args[0][0]];
+                    var indexToToggle = index + registers[s.CharArg1];
                     if (indexToToggle >= 0 && indexToToggle < instructions.Length)
                     {
                         var instructionToToggle = instructions[indexToToggle];
-                        if (instructionToToggle.Args.Count == 1)
+                        if (!instructionToToggle.HasTwoArgs)
                         {
                             instructionToToggle.Type = instructionToToggle.Type == InstructionType.Increment
                                 ? InstructionType.Decrement
@@ -209,29 +169,60 @@ public class Aoc201623 : AocPuzzle
                         }
                     }
 
-                    IncrementIndex();
+                    index++;
+                    break;
                 }
             }
         }
-
-        private void IncrementIndex(int steps = 1)
-        {
-            _index += steps;
-        }
+        
+        return registers['a'];
     }
-    
+
+    private static Instruction[] Parse(string input)
+    {
+        return input.Split(LineBreaks.Single).Select(o => new Instruction(o)).ToArray();
+    }
+
     private class Instruction
     {
-        public string Name { get; set; }
         public InstructionType Type { get; set; }
-        public IList<string> Args { get; }
+        public int IntegerArg1 { get; }
+        public bool HasIntegerArg1 { get; }
+        public int IntegerArg2 { get; }
+        public bool HasIntegerArg2 { get; }
+        public char CharArg1 { get; }
+        public bool HasTwoArgs { get; set; }
+        public char CharArg2 { get; }
 
         public Instruction(string s)
         {
             var parts = s.Split(' ');
-            Name = parts.First();
-            Args = parts.Skip(1).ToList();
-            Type = GetType(Name);
+            var args = parts.Skip(1).ToList();
+            Type = GetType(parts.First());
+
+            if (int.TryParse(args[0], out var intArg1))
+            {
+                IntegerArg1 = intArg1;
+                HasIntegerArg1 = true;
+            }
+            else
+            {
+                CharArg1 = args[0][0];
+            }
+
+            if (args.Count == 1)
+                return;
+
+            HasTwoArgs = true;
+            if (int.TryParse(args[1], out var intArg2))
+            {
+                IntegerArg2 = intArg2;
+                HasIntegerArg2 = true;
+            }
+            else
+            {
+                CharArg2 = args[1][0];
+            }
         }
 
         private static InstructionType GetType(string name) => name switch

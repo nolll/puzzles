@@ -3,7 +3,7 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016;
 
-[IsSlow] // 28s for part 2
+[IsSlow] // 15s for part 2
 [Name("Safe Cracking")]
 [Comment("Factorial of 12")]
 public class Aoc201623 : AocPuzzle
@@ -29,72 +29,64 @@ public class Aoc201623 : AocPuzzle
         while (index < instructions.Length)
         {
             var instruction = instructions[index];
-            try
+
+            switch (instruction.Type)
             {
-                switch (instruction.Type)
+                case InstructionType.Copy:
                 {
-                    case InstructionType.Copy:
-                    {
-                        if (instruction.HasIntegerArg1)
-                            registers[instruction.CharArg2] = instruction.IntegerArg1;
-                        else
-                            registers[instruction.CharArg2] = registers[instruction.CharArg1];
+                    registers[instruction.CharArg2] = instruction.HasIntegerArg1 
+                        ? instruction.IntegerArg1 
+                        : registers[instruction.CharArg1];
 
-                        index++;
-                        break;
-                    }
-                    case InstructionType.Increment:
-                    {
-                        registers[instruction.CharArg1]++;
-                        index++;
-                        break;
-                    }
-                    case InstructionType.Decrement:
-                    {
-                        registers[instruction.CharArg1]--;
-                        index++;
-                        break;
-                    }
-                    case InstructionType.Jump:
-                    {
-                        var steps = instruction.HasIntegerArg2 ? instruction.IntegerArg2 : registers[instruction.CharArg2];
-
-                        if (instruction.HasIntegerArg1)
-                            index += instruction.IntegerArg1 != 0 ? steps : 1;
-                        else
-                            index += registers[instruction.CharArg1] != 0 ? steps : 1;
-                        break;
-                    }
-                    case InstructionType.Toggle:
-                    {
-                        var target = instruction.CharArg1;
-                        var val = registers[target];
-                        var indexToToggle = index + val;
-                        if (indexToToggle >= 0 && indexToToggle < instructions.Length)
-                        {
-                            var instructionToToggle = instructions[indexToToggle];
-                            if (instructionToToggle.Type is InstructionType.Increment or InstructionType.Decrement)
-                            {
-                                instructionToToggle.Type = instructionToToggle.Type == InstructionType.Increment
-                                    ? InstructionType.Decrement
-                                    : InstructionType.Increment;
-                            }
-                            else
-                            {
-                                instructionToToggle.Type = instructionToToggle.Type == InstructionType.Jump
-                                    ? InstructionType.Copy
-                                    : InstructionType.Jump;
-                            }
-                        }
-
-                        index++;
-                        break;
-                    }
+                    index++;
+                    break;
                 }
-            }
-            catch
-            {
-                index++;
+                case InstructionType.Increment:
+                {
+                    registers[instruction.CharArg1]++;
+                    index++;
+                    break;
+                }
+                case InstructionType.Decrement:
+                {
+                    registers[instruction.CharArg1]--;
+                    index++;
+                    break;
+                }
+                case InstructionType.Jump:
+                {
+                    var steps = instruction.HasIntegerArg2 
+                        ? instruction.IntegerArg2 
+                        : registers[instruction.CharArg2];
+
+                    index += instruction.HasIntegerArg1 
+                        ? instruction.IntegerArg1 != 0 ? steps : 1 
+                        : registers[instruction.CharArg1] != 0 ? steps : 1;
+                    break;
+                }
+                case InstructionType.Toggle:
+                {
+                    var indexToToggle = index + registers[instruction.CharArg1];
+                    if (indexToToggle >= 0 && indexToToggle < instructions.Length)
+                    {
+                        var instructionToToggle = instructions[indexToToggle];
+                        if (instructionToToggle.Type is InstructionType.Increment or InstructionType.Decrement)
+                        {
+                            instructionToToggle.Type = instructionToToggle.Type == InstructionType.Increment
+                                ? InstructionType.Decrement
+                                : InstructionType.Increment;
+                        }
+                        else
+                        {
+                            instructionToToggle.Type = instructionToToggle.Type == InstructionType.Jump
+                                ? InstructionType.Copy
+                                : InstructionType.Jump;
+                        }
+                    }
+
+                    index++;
+                    break;
+                }
             }
         }
 
@@ -115,43 +107,44 @@ public class Aoc201623 : AocPuzzle
 
         while (index < instructions.Length)
         {
-            var s = instructions[index];
-            switch (s.Type)
+            var instruction = instructions[index];
+            switch (instruction.Type)
             {
                 case InstructionType.Copy:
                 {
-                    registers[s.CharArg2] = s.HasIntegerArg1
-                        ? s.IntegerArg1
-                        : registers[s.CharArg1];
+                    registers[instruction.CharArg2] = instruction.HasIntegerArg1
+                        ? instruction.IntegerArg1
+                        : registers[instruction.CharArg1];
 
-                    index++;;
+                    index++;
                     break;
                 }
                 case InstructionType.Increment:
                 {
-                    registers[s.CharArg1]++;
+                    registers[instruction.CharArg1]++;
                     index++;
                     break;
                 }
                 case InstructionType.Decrement:
                 {
-                    registers[s.CharArg1]--;
-                    index++;;
+                    registers[instruction.CharArg1]--;
+                    index++;
                     break;
                 }
                 case InstructionType.Jump:
                 {
-                    var steps = s.HasIntegerArg2 ? s.IntegerArg2 : registers[s.CharArg2];
+                    var steps = instruction.HasIntegerArg2 ? instruction.IntegerArg2 : registers[instruction.CharArg2];
 
-                    if (s.HasIntegerArg1)
-                        index += s.IntegerArg1 != 0 ? steps : 1;
-                    else
-                        index += registers[s.CharArg1] != 0 ? steps : 1;
+                    index += instruction.HasIntegerArg1
+                        ? instruction.IntegerArg1 != 0 ? steps : 1
+                        : registers[instruction.CharArg1] != 0
+                            ? steps
+                            : 1;
                     break;
                 }
                 case InstructionType.Toggle:
                 {
-                    var indexToToggle = index + registers[s.CharArg1];
+                    var indexToToggle = index + registers[instruction.CharArg1];
                     if (indexToToggle >= 0 && indexToToggle < instructions.Length)
                     {
                         var instructionToToggle = instructions[indexToToggle];
@@ -174,14 +167,12 @@ public class Aoc201623 : AocPuzzle
                 }
             }
         }
-        
+
         return registers['a'];
     }
 
-    private static Instruction[] Parse(string input)
-    {
-        return input.Split(LineBreaks.Single).Select(o => new Instruction(o)).ToArray();
-    }
+    private static Instruction[] Parse(string input) => 
+        input.Split(LineBreaks.Single).Select(o => new Instruction(o)).ToArray();
 
     private class Instruction
     {
@@ -191,7 +182,7 @@ public class Aoc201623 : AocPuzzle
         public int IntegerArg2 { get; }
         public bool HasIntegerArg2 { get; }
         public char CharArg1 { get; }
-        public bool HasTwoArgs { get; set; }
+        public bool HasTwoArgs { get; }
         public char CharArg2 { get; }
 
         public Instruction(string s)

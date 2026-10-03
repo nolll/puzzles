@@ -4,37 +4,17 @@ namespace Tests.Aoc.Aoc2016;
 
 public class Aoc201624Tests :  PuzzleTest<Aoc201624>
 {
-    [Fact]
-    public void FindsClosestRoute()
-    {
-        const string input = """
-                             ###########
-                             #0.1.....2#
-                             #.#######.#
-                             #4.......3#
-                             ###########
-                             """;
-
-        var navigator = new Aoc201624.AirDuctNavigator(input);
-        var shortestPath = navigator.Run(false);
-
-        shortestPath.Should().Be(14);
-    }
+    private const string Input = """
+                                 ###########
+                                 #0.1.....2#
+                                 #.#######.#
+                                 #4.......3#
+                                 ###########
+                                 """;
 
     [Fact]
-    public void FindsClosestRouteAndGoesBackToStart()
-    {
-        const string input = """
-                             ###########
-                             #0.1.....2#
-                             #.#######.#
-                             #4.......3#
-                             ###########
-                             """;
+    public void FindsClosestRoute() => Sut.Solve(Input, false).Should().Be(14);
 
-        var navigator = new Aoc201624.AirDuctNavigator(input);
-        var shortestPath = navigator.Run(true);
-
-        shortestPath.Should().Be(20);
-    }
+    [Fact]
+    public void FindsClosestRouteAndGoesBackToStart() => Sut.Solve(Input, true).Should().Be(20);
 }

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201701Tests
+public class Aoc201701Tests : PuzzleTest<Aoc201701>
 {
     [Theory]
     [InlineData("1122", 3)]
@@ -18,6 +18,4 @@ public class Aoc201701Tests
     [InlineData("123123", 12)]
     [InlineData("12131415", 4)]
     public void CorrectSumOfMatchingNumbers_Sum2(string input, int sum) => Sut.Part2(input).Should().Be(sum);
-
-    private static Aoc201701 Sut => new();
 }

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201718Tests
+public class Aoc201718Tests : PuzzleTest<Aoc201718>
 {
     [Fact]
     public void SingleRunnerFindsFrequency()

@@ -3,7 +3,7 @@ using Pzl.Tools.Cryptography;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201710Tests
+public class Aoc201710Tests : PuzzleTest<Aoc201710>
 {
     [Fact]
     public void SimulatesIntHash()

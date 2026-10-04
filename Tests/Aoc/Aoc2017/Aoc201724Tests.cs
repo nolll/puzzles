@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201724Tests
+public class Aoc201724Tests : PuzzleTest<Aoc201724>
 {
     [Fact]
     public void FindsStrongestBridge()

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201713Tests
+public class Aoc201713Tests : PuzzleTest<Aoc201713>
 {
     [Fact]
     public void SeverityIsCorrect()

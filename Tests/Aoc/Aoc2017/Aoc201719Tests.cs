@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201719Tests
+public class Aoc201719Tests : PuzzleTest<Aoc201719>
 {
     [Fact]
     public void FindsAllCharacters()

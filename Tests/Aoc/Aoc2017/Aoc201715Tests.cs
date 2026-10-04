@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201715Tests
+public class Aoc201715Tests : PuzzleTest<Aoc201715>
 {
     [Fact]
     public void Part1_MatchCountIsOneAfter5Runs()

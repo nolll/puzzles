@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201708Tests
+public class Aoc201708Tests : PuzzleTest<Aoc201708>
 {
     [Fact]
     public void GetLargestValue()

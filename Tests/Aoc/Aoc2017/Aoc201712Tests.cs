@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201712Tests
+public class Aoc201712Tests : PuzzleTest<Aoc201712>
 {
     [Fact]
     public void GroupCounts()

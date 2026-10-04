@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201716Tests
+public class Aoc201716Tests : PuzzleTest<Aoc201716>
 {
     [Fact]
     public void CorrectOrderAfterOneDance()

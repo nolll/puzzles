@@ -6,7 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2016;
 public class Aoc201625 : AocPuzzle
 {
     [Puzzle("5523923bd52d76e1c1d68b1cfdff95b5")]
-    public int Part1()
+    public int Solve()
     {
         var aMin = 0;
         var index = 1;

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201707Tests
+public class Aoc201707Tests : PuzzleTest<Aoc201707>
 {
     private const string Input = """
                                  pbga (66)

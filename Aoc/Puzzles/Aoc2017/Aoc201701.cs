@@ -20,14 +20,11 @@ public class Aoc201701 : AocPuzzle
         {
             var currentValue = numbers[i];
             var nextIndex = i + offset;
-            if (nextIndex > numbers.Count - 1)
-            {
+            if (nextIndex > numbers.Count - 1) 
                 nextIndex -= numbers.Count;
-            }
+            
             if (currentValue == numbers[nextIndex])
-            {
                 yield return currentValue;
-            }
         }
     }
     

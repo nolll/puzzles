@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201702Tests
+public class Aoc201702Tests : PuzzleTest<Aoc201702>
 {
     [Fact]
     public void ChecksumMaxMinIsCorrect()

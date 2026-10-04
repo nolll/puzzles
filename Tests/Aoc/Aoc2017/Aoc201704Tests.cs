@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2017;
 
 namespace Tests.Aoc.Aoc2017;
 
-public class Aoc201704Tests
+public class Aoc201704Tests : PuzzleTest<Aoc201704>
 {
     [Theory]
     [InlineData("aa bb cc dd ee", true)]

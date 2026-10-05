@@ -9,10 +9,5 @@ public class Aoc201711Tests : PuzzleTest<Aoc201711>
     [InlineData("ne,ne,sw,sw", 0)]
     [InlineData("ne,ne,s,s", 2)]
     [InlineData("se,sw,se,sw,sw", 3)]
-    public void DistanceIsCorrect(string input, int expected)
-    {
-        var navigator = new Aoc201711.HexGridNavigator(input);
-
-        navigator.EndDistance.Should().Be(expected);
-    }
+    public void DistanceIsCorrect(string input, int expected) => Sut.Part1(input).Should().Be(expected);
 }

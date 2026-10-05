@@ -8,77 +8,65 @@ public class Aoc201706 : AocPuzzle
     [Puzzle("5cc5e4c13f678b66cbe8e4c449049395")]
     public int Part1(string input)
     {
-        var reallocator = new MemoryReallocator(input);
-        reallocator.Run();
-        return reallocator.Steps;
+        var (steps, _) = Run(input);
+        return steps;
     }
 
     [Puzzle("9db0fcedbdf5df5cc87a97b23d4e1414")]
     public int Part2(string input)
     {
-        var reallocator = new MemoryReallocator(input);
-        reallocator.Run();
-        return reallocator.LoopSize;
+        var (_, loopSize) = Run(input);
+        return loopSize;
     }
     
-    public class MemoryReallocator
+    public (int, int) Run(string input)
     {
-        private readonly IList<int> _banks;
-
-        public int Steps { get; private set; }
-        public int LoopSize { get; private set; }
-
-        public MemoryReallocator(string input)
+        var steps = 0;
+        var loopSize = 0;
+        var banks = input.Replace('\t', ',').Split(',').Select(int.Parse).ToList();
+        var earlierStates = new List<string>();
+        while (true)
         {
-            _banks = input.Replace('\t', ',').Split(',').Select(int.Parse).ToList();
-        }
-
-        public void Run()
-        {
-            Steps = 0;
-            var earlierStates = new List<string>();
-            while (true)
+            var index = GetNextIndex(banks);
+            var blocks = banks[index];
+            banks[index] = 0;
+            while (blocks > 0)
             {
-                var index = GetNextIndex();
-                var blocks = _banks[index];
-                _banks[index] = 0;
-                while (blocks > 0)
-                {
-                    index += 1;
-                    if (index >= _banks.Count)
-                        index = 0;
-                    _banks[index] += 1;
-                    blocks -= 1;
-                }
-
-                Steps += 1;
-                var currentState = string.Join(',', _banks);
-                if (earlierStates.Contains(currentState))
-                {
-                    var earlierStateIndex = earlierStates.IndexOf(currentState);
-                    LoopSize = earlierStates.Count - earlierStateIndex;
-                    break;
-                }
-
-                earlierStates.Add(currentState);
-            }
-        }   
-
-        private int GetNextIndex()
-        {
-            var max = 0;
-            var maxIndex = 0;
-            for (var i = 0; i < _banks.Count; i++)
-            {
-                if (_banks[i] > max)
-                {
-                    max = _banks[i];
-                    maxIndex = i;
-                }
-
+                index += 1;
+                if (index >= banks.Count)
+                    index = 0;
+                banks[index] += 1;
+                blocks -= 1;
             }
 
-            return maxIndex;
+            steps += 1;
+            var currentState = string.Join(',', banks);
+            if (earlierStates.Contains(currentState))
+            {
+                var earlierStateIndex = earlierStates.IndexOf(currentState);
+                loopSize = earlierStates.Count - earlierStateIndex;
+                break;
+            }
+
+            earlierStates.Add(currentState);
         }
+
+        return (steps, loopSize);
+    }   
+
+    private static int GetNextIndex(List<int> banks)
+    {
+        var max = 0;
+        var maxIndex = 0;
+        for (var i = 0; i < banks.Count; i++)
+        {
+            if (banks[i] <= max)
+                continue;
+                
+            max = banks[i];
+            maxIndex = i;
+        }
+
+        return maxIndex;
     }
 }

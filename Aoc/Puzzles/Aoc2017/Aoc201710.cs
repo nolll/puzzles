@@ -7,10 +7,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2017;
 public class Aoc201710 : AocPuzzle
 {
     [Puzzle("9c105df09bcd0a4924f4fd2f82cc37db")]
-    public int Part1(string input) => new IntKnotHasher(input).Checksum;
+    public int Part1(string input) => IntKnotHasher.GetChecksum(input);
 
     [Puzzle("184cedf831647600e6b64716e141b2e9")]
-    public string Part2(string input) => new AsciiKnotHasher(input).Hash;
+    public string Part2(string input) => AsciiKnotHasher.GetHash(input);
+    
+    public int GetChecksum(string input, int size = 256) => IntKnotHasher.GetChecksum(input, size);
     
     public class IntKnotHasher
     {
@@ -21,8 +23,10 @@ public class Aoc201710 : AocPuzzle
         private readonly int[] _lengths;
 
         public int Checksum { get; }
+        
+        public static int GetChecksum(string input, int size = 256) => new IntKnotHasher(input, size).Checksum;
 
-        public IntKnotHasher(string input, int size = 256)
+        private IntKnotHasher(string input, int size = 256)
         {
             _lengths = input.Split(',').Select(int.Parse).ToArray();
             _list = FillList(size);

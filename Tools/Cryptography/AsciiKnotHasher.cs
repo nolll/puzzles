@@ -12,7 +12,9 @@ public class AsciiKnotHasher
 
     public string Hash { get; }
 
-    public AsciiKnotHasher(string input)
+    public static string GetHash(string input) => new AsciiKnotHasher(input).Hash;
+    
+    private AsciiKnotHasher(string input)
     {
         var lengths = input.ToCharArray().Select(o => (int)o).ToList();
         lengths.AddRange([17, 31, 73, 47, 23]);

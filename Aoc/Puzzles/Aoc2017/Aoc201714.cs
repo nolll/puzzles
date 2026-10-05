@@ -95,6 +95,6 @@ public class Aoc201714 : AocPuzzle
         private static string Hex2Binary(string hex) => 
             Convert.ToString(Convert.ToInt32(hex, 16), 2).PadLeft(4, '0');
 
-        private static string GetHash(string key) => new AsciiKnotHasher(key).Hash;
+        private static string GetHash(string key) => AsciiKnotHasher.GetHash(key);
     }
 }

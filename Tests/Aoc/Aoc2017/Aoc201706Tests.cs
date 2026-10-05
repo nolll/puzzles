@@ -5,7 +5,7 @@ namespace Tests.Aoc.Aoc2017;
 public class Aoc201706Tests : PuzzleTest<Aoc201706>
 {
     [Fact]
-    public void StepsUntilRepeat()
+    public void BothParts()
     {
         var (steps, loopSize) = Sut.Run("0,2,7,0");
 

@@ -9,72 +9,66 @@ public class Aoc201707 : AocPuzzle
     [Puzzle("7005dac413613feef76e5931331aac39")]
     public string Part1(string input)
     {
-        var towers = new RecursiveTowers(input);
-        return towers.BottomName ?? "";
+        var (bottomName, _) = Run(input);
+        return bottomName;
     }
 
     [Puzzle("a431cfa493227f90dd341325e0c8992b")]
-    public int Part2(string input) => new RecursiveTowers(input).AdjustedWeight;
-    
-    public class RecursiveTowers
+    public int Part2(string input)
     {
-        public string? BottomName { get; }
-        public int AdjustedWeight { get; }
-
-        public RecursiveTowers(string input)
-        {
-            var strings = input.Split(LineBreaks.Single);
-            var discs = new Dictionary<string, Disc>();
-            foreach (var strDisc in strings)
-            {
-                var a = strDisc.Split("->").Select(o => o.Trim()).ToList();
-                var idAndWeight = a[0];
-                var children = a.Count > 1 
-                    ? a[1].Split(",").Select(o => o.Trim()).ToList()
-                    : [];
-
-                idAndWeight = idAndWeight.Replace("(", "").Replace(")", "");
-                var b = idAndWeight.Split(' ');
-                var id = b[0];
-                var weight = int.Parse(b[1]);
-                var disc = new Disc(id, weight, children);
-                discs.Add(id, disc);
-            }
-
-            foreach (var key in discs.Keys)
-            {
-                var disc = discs[key];
-                foreach (var childName in disc.ChildrenIds)
-                {
-                    var child = discs[childName];
-                    child.ParentId = disc.Id;
-                    disc.Children.Add(child);
-                }
-            }
-
-            foreach (var key in discs.Keys)
-            {
-                if (discs[key].ParentId == null) 
-                    BottomName = key;
-            }
-
-            var unbalanced = discs.Values.First(o => !o.IsBalanced && o.HasBalancedChildren);
-            var weightDiff = unbalanced.WeightDiff;
-            var groups = unbalanced.Children.GroupBy(n => n.TotalWeight).
-                Select(group =>
-                    new
-                    {
-                        Weight = group.Key,
-                        Discs = group.ToList(),
-                        Count = group.Count()
-                    }).ToList();
-
-            var failingDisc = groups.FirstOrDefault(o => o.Count == 1)?.Discs.First();
-
-            AdjustedWeight = failingDisc?.Weight - weightDiff ?? 0;
-        }
+        var (_, adjustedWeight) = Run(input);
+        return adjustedWeight;
     }
-    
+
+    public (string, int) Run(string input)
+    {
+        var bottomName = "";
+        var strings = input.Split(LineBreaks.Single);
+        var discs = new Dictionary<string, Disc>();
+        foreach (var strDisc in strings)
+        {
+            var a = strDisc.Split("->").Select(o => o.Trim()).ToList();
+            var idAndWeight = a[0];
+            var children = a.Count > 1
+                ? a[1].Split(",").Select(o => o.Trim()).ToList()
+                : [];
+
+            idAndWeight = idAndWeight.Replace("(", "").Replace(")", "");
+            var b = idAndWeight.Split(' ');
+            var id = b[0];
+            var weight = int.Parse(b[1]);
+            var disc = new Disc(id, weight, children);
+            discs.Add(id, disc);
+        }
+
+        foreach (var key in discs.Keys)
+        {
+            var disc = discs[key];
+            foreach (var childName in disc.ChildrenIds)
+            {
+                var child = discs[childName];
+                child.ParentId = disc.Id;
+                disc.Children.Add(child);
+            }
+        }
+
+        bottomName = discs.First(o => o.Value.ParentId == null).Key;
+        var unbalanced = discs.Values.First(o => !o.IsBalanced && o.HasBalancedChildren);
+        var weightDiff = unbalanced.WeightDiff;
+        var groups = unbalanced.Children.GroupBy(n => n.TotalWeight).Select(group =>
+            new
+            {
+                Weight = group.Key,
+                Discs = group.ToList(),
+                Count = group.Count()
+            }).ToList();
+
+        var failingDisc = groups.FirstOrDefault(o => o.Count == 1)?.Discs.First();
+        var adjustedWeight = failingDisc?.Weight - weightDiff ?? 0;
+
+        return (bottomName, adjustedWeight);
+    }
+
     public class Disc
     {
         public string Id { get; }

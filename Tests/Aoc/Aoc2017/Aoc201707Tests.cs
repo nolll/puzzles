@@ -21,20 +21,11 @@ public class Aoc201707Tests : PuzzleTest<Aoc201707>
                                  """;
 
     [Fact]
-    public void FindsNameOfBottomProgram()
+    public void BothParts()
     {
-        var towers = new Aoc201707.RecursiveTowers(Input);
-        var name = towers.BottomName;
+        var (name, weight) = Sut.Run(Input);
 
         name.Should().Be("tknk");
-    }
-
-    [Fact]
-    public void FindsWeightDiff()
-    {
-        var towers = new Aoc201707.RecursiveTowers(Input);
-        var diff = towers.AdjustedWeight;
-
-        diff.Should().Be(60);
+        weight.Should().Be(60);
     }
 }

@@ -4,37 +4,17 @@ namespace Tests.Aoc.Aoc2017;
 
 public class Aoc201705Tests : PuzzleTest<Aoc201705>
 {
-    [Fact]
-    public void Part1_StepsUntilExit()
-    {
-        const string input = """
-                             0
-                             3
-                             0
-                             1
-                             -3
-                             """;
-
-        var jumper = new Aoc201705.InstructionJumper(input);
-        jumper.Start1();
-
-        jumper.StepCount.Should().Be(5);
-    }
+    private const string Input = """
+                                 0
+                                 3
+                                 0
+                                 1
+                                 -3
+                                 """;
 
     [Fact]
-    public void Part2_StepsUntilExit()
-    {
-        const string input = """
-                             0
-                             3
-                             0
-                             1
-                             -3
-                             """;
+    public void Part1_StepsUntilExit() => Sut.Part1(Input).Should().Be(5);
 
-        var jumper = new Aoc201705.InstructionJumper(input);
-        jumper.Start2();
-
-        jumper.StepCount.Should().Be(10);
-    }
+    [Fact]
+    public void Part2_StepsUntilExit() => Sut.Part2(Input).Should().Be(10);
 }

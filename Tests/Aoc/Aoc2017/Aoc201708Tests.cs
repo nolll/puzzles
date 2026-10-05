@@ -5,7 +5,7 @@ namespace Tests.Aoc.Aoc2017;
 public class Aoc201708Tests : PuzzleTest<Aoc201708>
 {
     [Fact]
-    public void GetLargestValue()
+    public void BothParts()
     {
         const string input = """
                              b inc 5 if a > 1
@@ -14,9 +14,9 @@ public class Aoc201708Tests : PuzzleTest<Aoc201708>
                              c inc -20 if c == 10
                              """;
 
-        var calculator = new Aoc201708.CpuInstructionCalculator(input.Trim());
+        var (largestValueAtEnd, largestValueEver) = Sut.Solve(input);
 
-        calculator.LargestValueAtEnd.Should().Be(1);
-        calculator.LargestValueEver.Should().Be(10);
+        largestValueAtEnd.Should().Be(1);
+        largestValueEver.Should().Be(10);
     }
 }

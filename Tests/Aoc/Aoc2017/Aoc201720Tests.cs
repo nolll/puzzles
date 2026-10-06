@@ -15,52 +15,10 @@ public class Aoc201720Tests : PuzzleTest<Aoc201720>
                                   p=<-2,0,0>, v=<1,0,0>, a=<0,0,0>
                                   p=<3,0,0>, v=<-1,0,0>, a=<0,0,0>
                                   """;
+    
+    [Fact]
+    public void Part1() => Sut.GetClosestParticleInTheLongRunSimple(Input1).Should().Be(0);
 
     [Fact]
-    public void After1Step()
-    {
-        var particleTracker = new Aoc201720.ParticleTracker(Input1.Trim());
-        particleTracker.Run(1);
-
-        particleTracker.Particles[0].X.Should().Be(4);
-        particleTracker.Particles[1].X.Should().Be(2);
-    }
-
-    [Fact]
-    public void After2Steps()
-    {
-        var particleTracker = new Aoc201720.ParticleTracker(Input1.Trim());
-        particleTracker.Run(2);
-
-        particleTracker.Particles[0].X.Should().Be(4);
-        particleTracker.Particles[1].X.Should().Be(-2);
-    }
-
-    [Fact]
-    public void After3Steps()
-    {
-        var particleTracker = new Aoc201720.ParticleTracker(Input1.Trim());
-        particleTracker.Run(3);
-
-        particleTracker.Particles[0].X.Should().Be(3);
-        particleTracker.Particles[1].X.Should().Be(-8);
-    }
-
-    [Fact]
-    public void ClosestParticleInTheLongRun()
-    {
-        var particleTracker = new Aoc201720.ParticleTracker(Input1.Trim());
-        var particle = particleTracker.GetClosestParticleInTheLongRunSimple();
-
-        particle.Should().Be(0);
-    }
-
-    [Fact]
-    public void Collisions()
-    {
-        var particleTracker = new Aoc201720.ParticleTracker(Input2.Trim());
-        var count = particleTracker.GetRemainingParticleCount();
-
-        count.Should().Be(1);
-    }
+    public void Part2() => Sut.GetRemainingParticleCount(Input2).Should().Be(1);
 }

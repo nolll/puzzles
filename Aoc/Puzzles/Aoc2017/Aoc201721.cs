@@ -6,25 +6,19 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2017;
 
 [Name("Fractal Art")]
+[IsFunToOptimize]
+[Comment("The grid slicing could possibly be done with the grid method, but I can't get it to work")]
 public class Aoc201721 : AocPuzzle
 {
     [Puzzle("f24d8ef1e8322a91dcdf1127a3ec636c")]
-    public int Part1(string input)
-    {
-        var artGenerator1 = new FractalArtGenerator(input);
-        artGenerator1.Run(5);
-        return artGenerator1.PixelsOn;
-    }
+    public int Part1(string input) => Run(input, 5);
 
     [Puzzle("0e5a4e760ff761a833c010149f058fbc")]
-    public int Part2(string input)
-    {
-        var artGenerator2 = new FractalArtGenerator(input);
-        artGenerator2.Run(18);
-        return artGenerator2.PixelsOn;
-    }
+    public int Part2(string input) => Run(input, 18);
 
-    public class FractalArtGenerator
+    public int Run(string input, int iterations) => new FractalArtGenerator(input).Run(iterations);
+
+    private class FractalArtGenerator
     {
         private const string Inital = """
                                       .#.
@@ -33,18 +27,16 @@ public class Aoc201721 : AocPuzzle
                                       """;
 
         private Grid<char> _grid;
-        private readonly IList<FractalRule> _transformationRules2X2;
-        private readonly IList<FractalRule> _transformationRules3X3;
+        private readonly IList<FractalRule> _rules2X2;
+        private readonly IList<FractalRule> _rules3X3;
         private readonly IDictionary<string, IList<GridVariant>> _variantCache;
         private readonly IDictionary<string, Grid<char>> _transformCache;
-
-        public int PixelsOn => _grid.Values.Count(o => o == '#');
 
         public FractalArtGenerator(string input)
         {
             var rules = ParseRules(input);
-            _transformationRules2X2 = rules.Where(o => o.Input.Length == 5).ToList();
-            _transformationRules3X3 = rules.Where(o => o.Input.Length != 5).ToList();
+            _rules2X2 = rules.Where(o => o.Input.Length == 5).ToList();
+            _rules3X3 = rules.Where(o => o.Input.Length != 5).ToList();
 
             _grid = GridBuilder.BuildCharGrid(Inital);
             _variantCache = new Dictionary<string, IList<GridVariant>>();
@@ -56,21 +48,20 @@ public class Aoc201721 : AocPuzzle
 
         private static FractalRule ParseRule(string s)
         {
-            var parts = s.Split(" => ");
-            var input = parts[0];
-            var output = parts[1];
-
+            var (input, output) = s.Split(" => ");
             return new FractalRule(input, output);
         }
 
-        public void Run(int iterations)
+        public int Run(int iterations)
         {
-            var iteration = 0;
-            while (iteration < iterations)
+            var i = 0;
+            while (i < iterations)
             {
                 Modify();
-                iteration++;
+                i++;
             }
+            
+            return _grid.Values.Count(o => o == '#');
         }
 
         private void Modify()
@@ -80,10 +71,7 @@ public class Aoc201721 : AocPuzzle
             Modify(subgridSize);
         }
 
-        private void Modify(int subSize)
-        {
-            _grid = Join(GetSubgrids(subSize).Select(Transform).ToList());
-        }
+        private void Modify(int subSize) => _grid = Join(GetSubgrids(subSize).Select(Transform).ToList());
 
         private static Grid<char> Join(List<Grid<char>> grids)
         {
@@ -131,40 +119,40 @@ public class Aoc201721 : AocPuzzle
 
         private static IEnumerable<GridVariant> CreateVariants(Grid<char> grid)
         {
-            yield return new GridVariant(GridToString(grid));
+            yield return new(GridToString(grid));
 
-            var flippedGrid = FlipGridHorizontally(grid);
-            yield return new GridVariant(GridToString(flippedGrid));
+            var flippedGrid = grid.FlipHorizontal();
+            yield return new(GridToString(flippedGrid));
 
-            flippedGrid = FlipGridVertically(grid);
-            yield return new GridVariant(GridToString(flippedGrid));
+            flippedGrid = grid.FlipVertical();
+            yield return new(GridToString(flippedGrid));
 
-            var rotatedGrid = RotateGridRight(grid);
-            yield return new GridVariant(GridToString(rotatedGrid));
+            var rotatedGrid = grid.RotateRight();
+            yield return new(GridToString(rotatedGrid));
 
-            flippedGrid = FlipGridHorizontally(rotatedGrid);
-            yield return new GridVariant(GridToString(flippedGrid));
+            flippedGrid = rotatedGrid.FlipHorizontal();
+            yield return new(GridToString(flippedGrid));
 
-            flippedGrid = FlipGridVertically(rotatedGrid);
-            yield return new GridVariant(GridToString(flippedGrid));
+            flippedGrid = rotatedGrid.FlipVertical();
+            yield return new(GridToString(flippedGrid));
 
-            rotatedGrid = RotateGridRight(rotatedGrid);
-            yield return new GridVariant(GridToString(rotatedGrid));
+            rotatedGrid = rotatedGrid.RotateRight();
+            yield return new(GridToString(rotatedGrid));
 
-            flippedGrid = FlipGridHorizontally(rotatedGrid);
-            yield return new GridVariant(GridToString(flippedGrid));
+            flippedGrid = rotatedGrid.FlipHorizontal();
+            yield return new(GridToString(flippedGrid));
 
-            flippedGrid = FlipGridVertically(rotatedGrid);
-            yield return new GridVariant(GridToString(flippedGrid));
+            flippedGrid = rotatedGrid.FlipVertical();
+            yield return new(GridToString(flippedGrid));
 
-            rotatedGrid = RotateGridRight(rotatedGrid);
-            yield return new GridVariant(GridToString(rotatedGrid));
+            rotatedGrid = rotatedGrid.RotateRight();
+            yield return new(GridToString(rotatedGrid));
 
-            flippedGrid = FlipGridHorizontally(rotatedGrid);
-            yield return new GridVariant(GridToString(flippedGrid));
+            flippedGrid = rotatedGrid.FlipHorizontal();
+            yield return new(GridToString(flippedGrid));
 
-            flippedGrid = FlipGridVertically(rotatedGrid);
-            yield return new GridVariant(GridToString(flippedGrid));
+            flippedGrid = rotatedGrid.FlipVertical();
+            yield return new(GridToString(flippedGrid));
         }
 
         private Grid<char> Transform(Grid<char> grid)
@@ -175,7 +163,7 @@ public class Aoc201721 : AocPuzzle
 
             var variants = GetVariants(grid);
             var size = grid.Width;
-            var rules = size == 2 ? _transformationRules2X2 : _transformationRules3X3;
+            var rules = size == 2 ? _rules2X2 : _rules3X3;
 
             foreach (var rule in rules)
             {
@@ -189,56 +177,7 @@ public class Aoc201721 : AocPuzzle
 
             throw new Exception("No transformation rule matched");
         }
-
-        private static Grid<char> FlipGridHorizontally(Grid<char> grid)
-        {
-            var width = grid.Width;
-            var flipped = new Grid<char>();
-            for (var y = 0; y < grid.Height; y++)
-            {
-                for (var x = 0; x < width; x++)
-                {
-                    flipped.MoveTo(width - x - 1, y);
-                    flipped.WriteValue(grid.ReadValueAt(x, y));
-                }
-            }
-
-            return flipped;
-        }
-
-        private static Grid<char> FlipGridVertically(Grid<char> grid)
-        {
-            var height = grid.Height;
-            var flipped = new Grid<char>();
-            for (var y = 0; y < height; y++)
-            {
-                for (var x = 0; x < grid.Width; x++)
-                {
-                    flipped.MoveTo(x, height - y - 1);
-                    flipped.WriteValue(grid.ReadValueAt(x, y));
-                }
-            }
-
-            return flipped;
-        }
-
-        private static Grid<char> RotateGridRight(Grid<char> grid)
-        {
-            var height = grid.Height;
-            var flipped = new Grid<char>(1, 1, ' ');
-            for (var y = 0; y < height; y++)
-            {
-                for (var x = 0; x < grid.Width; x++)
-                {
-                    var value = grid.ReadValueAt(x, y);
-                    flipped.MoveTo(height - y - 1, x);
-                    flipped.WriteValue(value);
-                }
-            }
-
-            return flipped;
-        }
-
+        
         private static string GridToString(Grid<char> grid)
         {
             var sb = new StringBuilder();
@@ -249,7 +188,7 @@ public class Aoc201721 : AocPuzzle
                     sb.Append(grid.ReadValueAt(x, y));
                 }
 
-                sb.Append("/");
+                sb.Append('/');
             }
 
             return sb.ToString().TrimEnd('/');
@@ -269,23 +208,21 @@ public class Aoc201721 : AocPuzzle
                     {
                         for (var localX = 0; localX < subSize; localX++)
                         {
-                            grid.MoveTo(localX, localY);
-                            grid.WriteValue(_grid.ReadValueAt(x + localX, y + localY));
+                            grid.WriteValueAt(localX, localY, _grid.ReadValueAt(x + localX, y + localY));
                         }
                     }
 
-                    x += subSize;
                     yield return grid;
+                    x += subSize;
                 }
 
                 y += subSize;
                 x = 0;
             }
-
         }
     }
-    
-    public class FractalRule(string input, string output)
+
+    private class FractalRule(string input, string output)
     {
         public string Input { get; } = input;
         public Grid<char> Output { get; } = GridBuilder.BuildCharGrid(output.Replace("/", LineBreaks.Single));

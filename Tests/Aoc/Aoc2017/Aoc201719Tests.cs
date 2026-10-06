@@ -15,11 +15,10 @@ public class Aoc201719Tests : PuzzleTest<Aoc201719>
                                   |  |  |  D 
                                   +B-+  +--+ 
                              """;
+        
+        var (route, stepCount) = Sut.FindRoute(input);
 
-        var finder = new Aoc201719.TubeRouteFinder(input);
-        finder.FindRoute();
-
-        finder.Route.Should().Be("ABCDEF");
-        finder.StepCount.Should().Be(38);
+        route.Should().Be("ABCDEF");
+        stepCount.Should().Be(38);
     }
 }

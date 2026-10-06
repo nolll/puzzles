@@ -19,11 +19,8 @@ public class Aoc201718Tests : PuzzleTest<Aoc201718>
                              set a 1
                              jgz a -2
                              """;
-
-        var single = new Aoc201718.SingleRunner(input.Trim());
-        single.Run();
-
-        single.RecoveredFrequency.Should().Be(4);
+        
+        Sut.RunPart1(input).Should().Be(4);
     }
 
     [Fact]
@@ -38,10 +35,7 @@ public class Aoc201718Tests : PuzzleTest<Aoc201718>
                              rcv c
                              rcv d
                              """;
-
-        var duet = new Aoc201718.DuetRunner(input.Trim());
-        duet.Run();
-
-        duet.Program1SendCount.Should().Be(3);
+        
+        Sut.RunPart2(input).Should().Be(3);
     }
 }

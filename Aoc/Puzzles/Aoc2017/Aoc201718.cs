@@ -4,104 +4,85 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2017;
 
 [Name("Duet")]
+[IsFunToOptimize]
+[Comment("Part 1 and 2 share a lot of code and can probably be combined")]
 public class Aoc201718 : AocPuzzle
 {
     [Puzzle("83f5054894620fa4e35d5a042e71f9a0")]
-    public long Part1(string input)
-    {
-        var single = new SingleRunner(input);
-        single.Run();
-        return single.RecoveredFrequency;
-    }
+    public long Part1(string input) => RunPart1(input);
 
     [Puzzle("5bfcd9b6e8755474ab31f818b763418e")]
-    public int Part2(string input)
+    public int Part2(string input) => RunPart2(input);
+
+    public long RunPart1(string input)
     {
-        var duet = new DuetRunner(input);
-        duet.Run();
-        return duet.Program1SendCount;
+        var operations = input.Split(LineBreaks.Single);
+        var program = new DuetProgramPart1(operations);
+        return program.Run();
     }
-    
-    public class SingleRunner(string input)
+
+    public int RunPart2(string input)
     {
-        private readonly IList<string> _operations = input.Split(LineBreaks.Single);
-
-        public long RecoveredFrequency { get; private set; }
-
-        public void Run()
+        const int programCount = 2;
+        var program1SendCount = 0;
+        var operations = input.Split(LineBreaks.Single);
+        var queues = CreateQueues(programCount).ToArray();
+        var programs = CreatePrograms(programCount, AddToQueue, GetFromQueue, operations).ToArray();
+        
+        while (programs.Any(o => o.IsRunning))
         {
-            var program = new DuetProgramPart1(_operations);
-            RecoveredFrequency = program.FindFrequency();
-        }
-    }
-    
-    public class DuetRunner(string input)
-    {
-        private readonly IList<string> _operations = input.Split(LineBreaks.Single);
-        private readonly List<List<long>> _queues =
-        [
-            [],
-            []
-        ];
+            foreach (var program in programs) 
+                program.ExecuteNextOperation();
 
-        public int Program1SendCount { get; private set; }
-
-        public void Run()
-        {
-            var program0 = new DuetProgramPart2(0, AddToQueue, GetFromQueue, _operations);
-            var program1 = new DuetProgramPart2(1, AddToQueue, GetFromQueue, _operations);
-            while (program0.IsRunning || program1.IsRunning)
-            {
-                program0.ExecuteNextOperation();
-                program1.ExecuteNextOperation();
-
-                if (program0.IsWaiting && program1.IsWaiting && _queues[0].Count == 0 && _queues[1].Count == 0)
-                {
-                    break;
-                }
-            }
+            if (programs.All(o => o.IsWaiting) && queues.All(o => o.Count == 0))
+                break;
         }
 
-        private long? GetFromQueue(int id)
+        return program1SendCount;
+
+        long? GetFromQueue(int id)
         {
             var otherId = id == 1 ? 0 : 1;
-            var queue = _queues[otherId];
+            var queue = queues[otherId];
             if (queue.Count == 0)
                 return null;
-        
-            var value = queue.First();
-            queue.RemoveAt(0);
-            return value;
+
+            return queue.Dequeue();
         }
 
-        private void AddToQueue(int id, long value)
+        void AddToQueue(int id, long value)
         {
             if (id == 1)
-                Program1SendCount++;
-            _queues[id].Add(value);
+                program1SendCount++;
+            queues[id].Enqueue(value);
         }
     }
 
-    public class DuetProgramPart1
+    private static IEnumerable<Queue<long>> CreateQueues(int programCount) => 
+        Enumerable.Range(0, programCount)
+            .Select(_ => new Queue<long>());
+    
+    private static IEnumerable<DuetProgramPart2> CreatePrograms(
+        int programCount, 
+        Action<int, long> send, 
+        Func<int, long?> receive, 
+        string[] operations) =>
+        Enumerable.Range(0, programCount)
+            .Select(i => new DuetProgramPart2(i, send, receive, operations));
+
+    private class DuetProgramPart1(IList<string> operations)
     {
-        private readonly IList<string> _operations;
-        private readonly IDictionary<string, long> _registers;
+        private readonly IDictionary<string, long> _registers = new Dictionary<string, long>();
         private long _playedSound;
         private long _currentOperation;
 
-        private bool IsRunning => _currentOperation < _operations.Count && _currentOperation >= 0;
+        private bool IsRunning => _currentOperation < operations.Count && _currentOperation >= 0;
 
-        public DuetProgramPart1(IList<string> operations)
-        {
-            _operations = operations;
-            _registers = new Dictionary<string, long>();
-        }
-
-        public long FindFrequency()
+        public long Run()
         {
             while (IsRunning)
             {
-                var operation = _operations[(int)_currentOperation];
+                var operation = operations[(int)_currentOperation];
                 var parts = operation.Split(' ');
                 var command = parts[0];
                 var part1 = parts[1];
@@ -157,30 +138,17 @@ public class Aoc201718 : AocPuzzle
         }
     }
 
-    public class DuetProgramPart2
+    private class DuetProgramPart2(int id, Action<int, long> send, Func<int, long?> receive, string[] operations)
     {
-        private readonly int _id;
-        private readonly Action<int, long> _send;
-        private readonly Func<int, long?> _receive;
-        private readonly IList<string> _operations;
-        private readonly IDictionary<string, long> _registers;
+        private readonly IDictionary<string, long> _registers = new Dictionary<string, long> { ["p"] = id };
         private long _currentOperation;
 
-        public bool IsRunning => _currentOperation < _operations.Count && _currentOperation >= 0;
+        public bool IsRunning => _currentOperation < operations.Length && _currentOperation >= 0;
         public bool IsWaiting { get; private set; }
-
-        public DuetProgramPart2(int id, Action<int, long> send, Func<int, long?> receive, IList<string> operations)
-        {
-            _id = id;
-            _send = send;
-            _receive = receive;
-            _operations = operations;
-            _registers = new Dictionary<string, long> { ["p"] = id };
-        }
 
         public void ExecuteNextOperation()
         {
-            var operation = _operations[(int)_currentOperation];
+            var operation = operations[(int)_currentOperation];
             var parts = operation.Split(' ');
             var command = parts[0];
             var part1 = parts[1];
@@ -194,7 +162,7 @@ public class Aoc201718 : AocPuzzle
 
             if (command == "snd")
             {
-                _send(_id, val1);
+                send(id, val1);
             }
             else if (command == "set")
             {
@@ -217,7 +185,7 @@ public class Aoc201718 : AocPuzzle
             }
             else if (command == "rcv")
             {
-                var value = _receive(_id);
+                var value = receive(id);
                 if (value == null)
                 {
                     IsWaiting = true;

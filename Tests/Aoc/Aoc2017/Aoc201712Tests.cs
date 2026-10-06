@@ -17,9 +17,9 @@ public class Aoc201712Tests : PuzzleTest<Aoc201712>
                              6 <-> 4, 5
                              """;
 
-        var pipes = new Aoc201712.Pipes(input.Trim());
+        var groups = Sut.Solve(input);
 
-        pipes.PipesInGroupZero.Should().Be(6);
-        pipes.GroupCount.Should().Be(2);
+        groups[0].Count.Should().Be(6);
+        groups.Count.Should().Be(2);
     }
 }

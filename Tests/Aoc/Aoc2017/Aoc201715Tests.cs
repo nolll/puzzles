@@ -4,30 +4,17 @@ namespace Tests.Aoc.Aoc2017;
 
 public class Aoc201715Tests : PuzzleTest<Aoc201715>
 {
-    [Fact]
-    public void Part1_MatchCountIsOneAfter5Runs()
-    {
-        var duel = new Aoc201715.GeneratorDuel(65, 8921);
-        duel.Run(5);
+    private const string Input = """
+                                 Generator A starts with 65
+                                 Generator B starts with 8921
+                                 """;
 
-        duel.FinalCount.Should().Be(1);
-    }
-
-    [Fact]
-    public void Part1_MatchCountIsOneAfter40MRuns()
-    {
-        var duel = new Aoc201715.GeneratorDuel(65, 8921);
-        duel.Run(40_000_000);
-
-        duel.FinalCount.Should().Be(588);
-    }
+    [Theory]
+    [InlineData(5, 1)]
+    [InlineData(40_000_000, 588)]
+    public void Part1_MatchCountIsOneAfter5Runs(int iterations, int expected) => 
+        Sut.Run(Input, iterations).Should().Be(expected);
 
     [Fact]
-    public void Part2_Finds309PairsIn5Runs()
-    {
-        var duel = new Aoc201715.GeneratorDuel(65, 8921);
-        duel.Run2(5_000_000);
-
-        duel.FinalCount.Should().Be(309);
-    }
+    public void Part2_Finds309PairsIn5Runs() => Sut.Run2(Input, 5_000_000).Should().Be(309);
 }

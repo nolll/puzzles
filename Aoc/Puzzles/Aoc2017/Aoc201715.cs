@@ -6,106 +6,83 @@ namespace Pzl.Aoc.Puzzles.Aoc2017;
 [Name("Dueling Generators")]
 public class Aoc201715 : AocPuzzle
 {
+    private const long FactorA = 16807;
+    private const long FactorB = 48271;
+    private const int ValidationMultipleA = 4;
+    private const int ValidationMultipleB = 8;
+    
     [Puzzle("4eda86461504e63d609bceb54bbafa32")]
-    public int Part1(string input)
-    {
-        var duel = GeneratorDuel.Parse(input);
-        duel.Run(40_000_000);
-        return duel.FinalCount;
-    }
+    public int Part1(string input) => Run(input, 40_000_000);
 
     [Puzzle("0e673f0bbb3b57c839d9267b2231a741")]
-    public int Part2(string input)
+    public int Part2(string input) => Run2(input, 5_000_000);
+
+    public int Run(string input, int iterations)
     {
-        var duel = GeneratorDuel.Parse(input);
-        duel.Run2(5_000_000);
-        return duel.FinalCount;
+        var (a, b) = CreateGenerators(input);
+        var count = 0;
+        var i = 0;
+        while (i < iterations)
+        {
+            a.Process();
+            b.Process();
+            if (a.ShortLastValue == b.ShortLastValue)
+                count++;
+            i++;
+        }
+
+        return count;
     }
-    
-    public class GeneratorDuel(long startValueA, long startValueB)
+
+    public int Run2(string input, int pairCount)
     {
-        private readonly Generator _generatorA = new(startValueA, 16807, 4);
-        private readonly Generator _generatorB = new(startValueB, 48271, 8);
+        var (a, b) = CreateGenerators(input);
+        var aValues = GetValues(a, pairCount).ToList();
+        var bValues = GetValues(b, pairCount).ToList();
 
-        public int FinalCount { get; private set; }
-
-        public static GeneratorDuel Parse(string input)
+        var count = 0;
+        for (var i = 0; i < pairCount; i++)
         {
-            var rows = input.Split(LineBreaks.Single);
-            var startValues = rows.Select(o => long.Parse(o.Split(' ').Last())).ToList();
-
-            return new GeneratorDuel(startValues.First(), startValues.Last());
+            if (aValues[i] == bValues[i])
+                count++;
         }
 
-        public void Run(int iterations)
+        return count;
+    }
+
+    private static IEnumerable<short> GetValues(Generator generator, int pairCount)
+    {
+        var count = 0;
+        while (count < pairCount)
         {
-            var count = 0;
-            var i = 0;
-            while (i < iterations)
-            {
-                _generatorA.Process();
-                _generatorB.Process();
-                if (_generatorA.ShortLastValue == _generatorB.ShortLastValue)
-                    count++;
-                i++;
-            }
-
-            FinalCount = count;
-        }
-
-        public void Run2(int pairCount)
-        {
-            var generatorAStrings = new List<short>();
-            var generatorBStrings = new List<short>();
-            var count = 0;
-            var i = 0;
-            while (generatorAStrings.Count < pairCount)
-            {
-                _generatorA.Process();
-                if (_generatorA.IsValid)
-                    generatorAStrings.Add(_generatorA.ShortLastValue);
-                i++;
-            }
-
-            i = 0;
-            while (generatorBStrings.Count < pairCount)
-            {
-                _generatorB.Process();
-                if (_generatorB.IsValid)
-                    generatorBStrings.Add(_generatorB.ShortLastValue);
-                i++;
-            }
-
-            for (i = 0; i < pairCount; i++)
-            {
-                if (generatorAStrings[i] == generatorBStrings[i])
-                    count++;
-            }
-
-            FinalCount = count;
+            generator.Process();
+            if (!generator.IsValid)
+                continue;
+            
+            yield return generator.ShortLastValue;
+            count++;
         }
     }
-    
-    public class Generator
+
+    private static (Generator, Generator) CreateGenerators(string input)
     {
-        private readonly int _validationMultiple;
+        var (a, b) = Parse(input);
+        return (new Generator(a, FactorA, ValidationMultipleA), new Generator(b, FactorB, ValidationMultipleB));
+    }
+
+    private static (long, long) Parse(string input)
+    {
+        var rows = input.Split(LineBreaks.Single);
+        var startValues = rows.Select(o => long.Parse(o.Split(' ').Last())).ToList();
+        return (startValues.First(), startValues.Last());
+    }
+    
+    private class Generator(long startValue, long factor, int validationMultiple)
+    {
         private const long Divisor = 2147483647;
-        private readonly long _factor;
-        private long _lastValue;
-        public short ShortLastValue => (short) _lastValue;
-        public bool IsValid => _lastValue % _validationMultiple == 0;
-
-        public Generator(in long startValue, in long factor, in int validationMultiple)
-        {
-            _lastValue = startValue;
-            _factor = factor;
-            _validationMultiple = validationMultiple;
-        }
-
-        public void Process()
-        {
-            var product = _lastValue * _factor;
-            _lastValue = product % Divisor;
-        }
+        private long _lastValue = startValue;
+        public short ShortLastValue => (short)_lastValue;
+        public bool IsValid => _lastValue % validationMultiple == 0;
+        public void Process() => _lastValue = _lastValue * factor % Divisor;
     }
 }

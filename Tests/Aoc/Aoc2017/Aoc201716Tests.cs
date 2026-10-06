@@ -4,27 +4,12 @@ namespace Tests.Aoc.Aoc2017;
 
 public class Aoc201716Tests : PuzzleTest<Aoc201716>
 {
-    [Fact]
-    public void CorrectOrderAfterOneDance()
-    {
-        const string input = "s1,x3/4,pe/b";
-        const string programs = "abcde";
-
-        var dancingPrograms = new Aoc201716.DancingPrograms(programs);
-        dancingPrograms.Dance(input, 1);
-
-        dancingPrograms.Programs.Should().Be("baedc");
-    }
+    private const string Input = "s1,x3/4,pe/b";
+    private const string Programs = "abcde";
 
     [Fact]
-    public void CorrectOrderAfterOneBillionDances()
-    {
-        const string input = "s1,x3/4,pe/b";
-        const string programs = "abcde";
+    public void CorrectOrderAfterOneDance() => Sut.Dance(Input, 1, Programs).Should().Be("baedc");
 
-        var dancingPrograms = new Aoc201716.DancingPrograms(programs);
-        dancingPrograms.Dance(input, 1_000_000_000);
-
-        dancingPrograms.Programs.Should().Be("abcde");
-    }
+    [Fact]
+    public void CorrectOrderAfterOneBillionDances() => Sut.Dance(Input, 1_000_000_000, Programs).Should().Be("abcde");
 }

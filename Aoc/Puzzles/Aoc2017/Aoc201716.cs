@@ -6,119 +6,94 @@ namespace Pzl.Aoc.Puzzles.Aoc2017;
 public class Aoc201716 : AocPuzzle
 {
     [Puzzle("54e5dfe8c4867e76716033345f70c9ad")]
-    public string Part1(string input)
-    {
-        var dancingPrograms = new DancingPrograms();
-        dancingPrograms.Dance(input, 1);
-        return dancingPrograms.Programs;
-    }
+    public string Part1(string input) => Dance(input, 1);
 
     [Puzzle("023321046c58453f7009348c8a83a89c")]
-    public string Part2(string input)
+    public string Part2(string input) => Dance(input, 1_000_000_000);
+
+    public string Dance(string input, int iterations, string programs = "abcdefghijklmnop")
     {
-        var dancingPrograms = new DancingPrograms();
-        dancingPrograms.Dance(input, 1_000_000_000);
-        return dancingPrograms.Programs;
+        var positions = GetPositions(programs);
+        var moves = ParseMoves(input);
+        var repeatPeriod = GetRepeatPeriod(positions, moves);
+        for (var i = 0; i < iterations % repeatPeriod; i++)
+        {
+            foreach (var move in moves)
+                move.Execute(positions);
+        }
+
+        return GetPrograms(positions);
     }
     
-    public class DancingPrograms
+    private static Dictionary<char, int> GetPositions(string programs)
     {
-        private IDictionary<char, int> _positions = new Dictionary<char, int>();
-
-        public DancingPrograms(string programs = "abcdefghijklmnop")
+        var positions = new Dictionary<char, int>();
+        var index = 0;
+        foreach (var c in programs)
         {
-            Init(programs);
+            positions.Add(c, index);
+            index++;
         }
 
-        private void Init(string programs)
+        return positions;
+    }
+
+    public static string GetPrograms(Dictionary<char, int> positions)
+    {
+        var arr = new char[positions.Count];
+        foreach (var key in positions.Keys)
         {
-            _positions = new Dictionary<char, int>();
-            var index = 0;
-            foreach (var c in programs)
-            {
-                _positions.Add(c, index);
-                index++;
-            }
+            arr[positions[key]] = key;
         }
 
-        public string Programs
+        return string.Concat(arr);
+    }
+
+    private static int GetRepeatPeriod(Dictionary<char, int> positions, IList<DanceMove> moves)
+    {
+        var i = 0;
+        var startPrograms = GetPrograms(positions);
+        while (true)
         {
-            get
-            {
-                var arr = new char[_positions.Count];
-                foreach (var key in _positions.Keys)
-                {
-                    arr[_positions[key]] = key;
-                }
+            foreach (var move in moves)
+                move.Execute(positions);
 
-                return string.Concat(arr);
-            }
-        }
-
-        public void Dance(string input, int iterations)
-        {
-            var moves = ParseMoves(input);
-            var repeatPeriod = GetRepeatPeriod(moves);
-            for (var i = 0; i < iterations % repeatPeriod; i++)
-            {
-                foreach (var move in moves)
-                    move.Execute(_positions);
-            }
-        }
-
-        private int GetRepeatPeriod(IList<DanceMove> moves)
-        {
-            var i = 0;
-            var startPrograms = Programs;
-            while (true)
-            {
-                foreach (var move in moves)
-                    move.Execute(_positions);
-
-                i++;
-                if (Programs == startPrograms)
-                    return i;
-            }
-        }
-
-        private IList<DanceMove> ParseMoves(string input)
-        {
-            return input.Split(',').Select(ParseMove).ToList();
-        }
-
-        private DanceMove ParseMove(string s)
-        {
-            var command = s.First();
-            if (command == 's')
-                return new SpinMove(s);
-            if (command == 'x')
-                return new ExchangeMove(s);
-            if (command == 'p')
-                return new PartnerMove(s);
-            return new EmptyMove();
+            i++;
+            if (GetPrograms(positions) == startPrograms)
+                return i;
         }
     }
-    
-    public abstract class DanceMove
+
+    private static DanceMove[] ParseMoves(string input) => [.. input.Split(',').Select(ParseMove)];
+
+    private static DanceMove ParseMove(string s) => s.First() switch
+    {
+        's' => new SpinMove(s),
+        'x' => new ExchangeMove(s),
+        'p' => new PartnerMove(s),
+        _ => new EmptyMove()
+    };
+
+    private abstract class DanceMove
     {
         public abstract void Execute(IDictionary<char, int> programs);
     }
-    
-    public class EmptyMove : DanceMove
+
+    private class EmptyMove : DanceMove
     {
         public override void Execute(IDictionary<char, int> programs)
         {
         }
     }
-    
-    public class ExchangeMove : DanceMove
+
+    private class ExchangeMove : DanceMove
     {
         private readonly int _index1;
         private readonly int _index2;
 
         public ExchangeMove(string command)
         {
-            var parts = command.Substring(1).Split('/');
+            var parts = command[1..].Split('/');
             _index1 = int.Parse(parts[0]);
             _index2 = int.Parse(parts[1]);
         }
@@ -140,15 +115,15 @@ public class Aoc201716 : AocPuzzle
             programs[key2!.Value] = _index1;
         }
     }
-    
-    public class PartnerMove : DanceMove
+
+    private class PartnerMove : DanceMove
     {
         private readonly char _val1;
         private readonly char _val2;
 
         public PartnerMove(string command)
         {
-            var parts = command.Substring(1).Split('/').Select(o => o.First()).ToList();
+            var parts = command[1..].Split('/').Select(o => o.First()).ToList();
             _val1 = parts[0];
             _val2 = parts[1];
         }
@@ -161,15 +136,10 @@ public class Aoc201716 : AocPuzzle
             programs[_val2] = index1;
         }
     }
-    
-    public class SpinMove : DanceMove
-    {
-        private readonly int _itemsToMove;
 
-        public SpinMove(string command)
-        {
-            _itemsToMove = int.Parse(command.Substring(1));
-        }
+    private class SpinMove(string command) : DanceMove
+    {
+        private readonly int _itemsToMove = int.Parse(command[1..]);
 
         public override void Execute(IDictionary<char, int> programs)
         {

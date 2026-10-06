@@ -4,21 +4,16 @@ namespace Tests.Aoc.Aoc2017;
 
 public class Aoc201713Tests : PuzzleTest<Aoc201713>
 {
-    [Fact]
-    public void SeverityIsCorrect()
-    {
-        const string input = """
-                             0: 3
-                             1: 2
-                             4: 4
-                             6: 4
-                             """;
+    private const string Input = """
+                                 0: 3
+                                 1: 2
+                                 4: 4
+                                 6: 4
+                                 """;
 
-        var scanner = new Aoc201713.PacketScanner(input.Trim());
-        var severity = scanner.GetSeverity();
-        severity.Should().Be(24);
-    }
-     
+    [Fact]
+    public void SeverityIsCorrect() => Sut.Part1(Input).Should().Be(24);
+
     [Theory]
     [InlineData(0, 0, false)]
     [InlineData(1, 0, false)]
@@ -37,17 +32,5 @@ public class Aoc201713Tests : PuzzleTest<Aoc201713>
     }
 
     [Fact]
-    public void DelayUntilPassIsCorrect()
-    {
-        const string input = """
-                             0: 3
-                             1: 2
-                             4: 4
-                             6: 4
-                             """;
-
-        var scanner = new Aoc201713.PacketScanner(input.Trim());
-        var delay = scanner.DelayUntilPass();
-        delay.Should().Be(10);
-    }
+    public void DelayUntilPassIsCorrect() => Sut.Part2(Input).Should().Be(10);
 }

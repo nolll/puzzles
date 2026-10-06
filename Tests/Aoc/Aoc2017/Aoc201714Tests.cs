@@ -4,23 +4,11 @@ namespace Tests.Aoc.Aoc2017;
 
 public class Aoc201714Tests : PuzzleTest<Aoc201714>
 {
-    [Fact]
-    public void UsedSquaresAreCorrect()
-    {
-        const string input = "flqrgnkx";
-
-        var defragmenter = new Aoc201714.DiskDefragmenter(input);
-
-        defragmenter.UsedCount.Should().Be(8108);
-    }
+    private const string Input = "flqrgnkx";
 
     [Fact]
-    public void FindsRegions()
-    {
-        const string input = "flqrgnkx";
+    public void UsedSquaresAreCorrect() => Sut.Part1(Input).Should().Be(8108);
 
-        var defragmenter = new Aoc201714.DiskDefragmenter(input);
-
-        defragmenter.RegionCount.Should().Be(1242);
-    }
+    [Fact]
+    public void FindsRegions() => Sut.Part2(Input).Should().Be(1242);
 }

@@ -5,23 +5,8 @@ namespace Tests.Aoc.Aoc2017;
 public class Aoc201717Tests : PuzzleTest<Aoc201717>
 {
     [Fact]
-    public void NextValueIsCorrect()
-    {
-        const int input = 3;
-        var runner = new Aoc201717.SpinlockRunnerPart1(input);
-        runner.Run(2017);
-
-        runner.NextValue.Should().Be(638);
-        runner.SecondValue.Should().Be(1226);
-    }
+    public void NextValueIsCorrect() => Sut.RunPart1(3, 2017).Should().Be(638);
 
     [Fact]
-    public void SecondValueIsCorrect()
-    {
-        const int input = 3;
-        var runner = new Aoc201717.SpinlockRunnerPart2(input);
-        runner.Run(2017);
-
-        runner.SecondValue.Should().Be(1226);
-    }
+    public void SecondValueIsCorrect() => Sut.RunPart2(3, 2017).Should().Be(1226);
 }

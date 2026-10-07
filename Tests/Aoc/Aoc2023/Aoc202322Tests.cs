@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2023;
 
 namespace Tests.Aoc.Aoc2023;
 
-public class Aoc202322Tests
+public class Aoc202322Tests : PuzzleTest<Aoc202322>
 {
     [Fact]
     public void CountBricksThatCanBeRemoved()

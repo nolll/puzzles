@@ -3,7 +3,7 @@ using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Aoc.Aoc2023;
 
-public class Aoc202310Tests
+public class Aoc202310Tests : PuzzleTest<Aoc202310>
 {
     [Fact]
     public void Pipes()

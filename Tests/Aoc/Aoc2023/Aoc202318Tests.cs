@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2023;
 
 namespace Tests.Aoc.Aoc2023;
 
-public class Aoc202318Tests
+public class Aoc202318Tests : PuzzleTest<Aoc202318>
 {
     private const string Input = """
                                  R 6 (#70c710)
@@ -42,6 +42,4 @@ public class Aoc202318Tests
     [InlineData("caa17", 829975)]
     [InlineData("d2c08", 863240)]
     public void ParseHex(string input, int expected) => Sut.ParseHex(input).Should().Be(expected);
-
-    private static Aoc202318 Sut => new();
 }

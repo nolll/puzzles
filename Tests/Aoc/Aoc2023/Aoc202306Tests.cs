@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2023;
 
 namespace Tests.Aoc.Aoc2023;
 
-public class Aoc202306Tests
+public class Aoc202306Tests : PuzzleTest<Aoc202306>
 {
     private const string Input = """
                                  Time:      7  15   30
@@ -14,6 +14,4 @@ public class Aoc202306Tests
 
     [Fact]
     public void BoatRace2() => Sut.Part2(Input).Should().Be(71503);
-
-    private static Aoc202306 Sut => new();
 }

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2023;
 
 namespace Tests.Aoc.Aoc2023;
 
-public class Aoc202314Tests
+public class Aoc202314Tests : PuzzleTest<Aoc202314>
 {
     [Fact]
     public void RollNorth()

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2023;
 
 namespace Tests.Aoc.Aoc2023;
 
-public class Aoc202303Tests
+public class Aoc202303Tests : PuzzleTest<Aoc202303>
 {
     private const string Input = """
                                  467..114..

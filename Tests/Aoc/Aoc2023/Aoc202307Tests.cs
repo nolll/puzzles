@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2023;
 
 namespace Tests.Aoc.Aoc2023;
 
-public class Aoc202307Tests
+public class Aoc202307Tests : PuzzleTest<Aoc202307>
 {
     private const string Input = """
                                  32T3K 765
@@ -42,6 +42,4 @@ public class Aoc202307Tests
 
     [Fact]
     public void PokerPart2() => Sut.Part2(Input).Should().Be(5905);
-
-    private static Aoc202307 Sut => new();
 }

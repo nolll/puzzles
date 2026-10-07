@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2023;
 
 namespace Tests.Aoc.Aoc2023;
 
-public class Aoc202319Tests
+public class Aoc202319Tests : PuzzleTest<Aoc202319>
 {
     [Fact]
     public void SortParts()

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2023;
 
 namespace Tests.Aoc.Aoc2023;
 
-public class Aoc202302Tests
+public class Aoc202302Tests : PuzzleTest<Aoc202302>
 {
     private const string Input = """
                                  Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green

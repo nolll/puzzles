@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2023;
 
 namespace Tests.Aoc.Aoc2023;
 
-public class Aoc202301Tests
+public class Aoc202301Tests : PuzzleTest<Aoc202301>
 {
     [Fact]
     public void CalibrationNumbersPart1()
@@ -32,6 +32,4 @@ public class Aoc202301Tests
 
         Sut.Part2(input).Should().Be(281);
     }
-
-    private static Aoc202301 Sut => new();
 }

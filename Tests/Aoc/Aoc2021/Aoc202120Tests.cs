@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
-public class Aoc202120Tests
+public class Aoc202120Tests : PuzzleTest<Aoc202120>
 {
     [Fact]
     public void Part1() => Sut.GetLitPixelCount(Input, 2).Should().Be(35);

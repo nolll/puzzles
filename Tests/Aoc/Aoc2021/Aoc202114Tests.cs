@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
-public class Aoc202114Tests
+public class Aoc202114Tests : PuzzleTest<Aoc202114>
 {
     [Fact]
     public void OneStep() => Sut.Solve(Input, 1).Should().Be(1);

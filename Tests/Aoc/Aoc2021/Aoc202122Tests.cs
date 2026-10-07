@@ -3,7 +3,7 @@ using Pzl.Tools.Grids.Grids3d;
 
 namespace Tests.Aoc.Aoc2021;
 
-public class Aoc202122Tests
+public class Aoc202122Tests : PuzzleTest<Aoc202122>
 {
     [Fact]
     public void GetSize()

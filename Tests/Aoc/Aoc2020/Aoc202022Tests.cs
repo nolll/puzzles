@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202022Tests
+public class Aoc202022Tests : PuzzleTest<Aoc202022>
 {
     [Fact]
     public void NormalGame_WinningScoreIs306()

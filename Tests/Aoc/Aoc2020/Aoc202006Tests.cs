@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202006Tests
+public class Aoc202006Tests : PuzzleTest<Aoc202006>
 {
     [Fact]
     public void SumOfAtLeastYesAnswerCounts()

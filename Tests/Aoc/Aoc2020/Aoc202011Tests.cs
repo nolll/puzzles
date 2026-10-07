@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202011Tests
+public class Aoc202011Tests : PuzzleTest<Aoc202011>
 {
     [Fact]
     public void NumberOfOccupiedSeatsIsCorrect_FirstAlgorithm()

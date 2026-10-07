@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202018Tests
+public class Aoc202018Tests : PuzzleTest<Aoc202018>
 {
     [Theory]
     [InlineData("1 + 2 * 3 + 4 * 5 + 6", 71)]

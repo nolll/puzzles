@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202024Tests
+public class Aoc202024Tests : PuzzleTest<Aoc202024>
 {
     [Theory]
     [InlineData("esew")]

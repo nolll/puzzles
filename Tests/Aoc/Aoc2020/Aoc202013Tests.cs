@@ -3,7 +3,7 @@ using Pzl.Tools.Strings;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202013Tests
+public class Aoc202013Tests : PuzzleTest<Aoc202013>
 {
     [Fact]
     public void EarliestDeparture()

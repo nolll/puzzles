@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202014Tests
+public class Aoc202014Tests : PuzzleTest<Aoc202014>
 {
     [Fact]
     public void Part1_SumIsCorrect()

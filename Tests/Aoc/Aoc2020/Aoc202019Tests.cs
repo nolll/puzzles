@@ -3,7 +3,7 @@ using Pzl.Tools.Strings;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202019Tests
+public class Aoc202019Tests : PuzzleTest<Aoc202019>
 {
     [Fact]
     public void NumberOfValidMessagesIs2()

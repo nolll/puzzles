@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202016Tests
+public class Aoc202016Tests : PuzzleTest<Aoc202016>
 {
     [Fact]
     public void TicketErrorRate()

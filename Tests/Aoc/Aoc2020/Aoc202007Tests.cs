@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202007Tests
+public class Aoc202007Tests : PuzzleTest<Aoc202007>
 {
     [Fact]
     public void NumberOfBagsThatCanCarryGoldBags()

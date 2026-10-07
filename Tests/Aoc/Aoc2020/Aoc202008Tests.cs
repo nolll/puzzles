@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202008Tests
+public class Aoc202008Tests : PuzzleTest<Aoc202008>
 {
     [Fact]
     public void AccIsCorrectBeforeInfiniteLoop()

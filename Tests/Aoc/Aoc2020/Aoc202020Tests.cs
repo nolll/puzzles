@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202020Tests
+public class Aoc202020Tests :  PuzzleTest<Aoc202020>
 {
     [Fact]
     public void EdgesAreCorrect()

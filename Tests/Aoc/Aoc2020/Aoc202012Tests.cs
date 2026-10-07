@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202012Tests
+public class Aoc202012Tests : PuzzleTest<Aoc202012>
 {
     [Fact]
     public void SimpleFerryNavigation()

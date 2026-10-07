@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2020;
 
 namespace Tests.Aoc.Aoc2020;
 
-public class Aoc202021Tests
+public class Aoc202021Tests : PuzzleTest<Aoc202021>
 {
     private const string Input = """
                                  mxmxvkd kfcds sqjhc nhms (contains dairy, fish)

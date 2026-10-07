@@ -3,7 +3,7 @@ using Pzl.Common;
 
 namespace Tests.Aoc.Aoc2019;
 
-public class Aoc201918Tests
+public class Aoc201918Tests : PuzzleTest<Aoc201918>
 {
     [Fact]
     public void OneRobot_ShortestPathIsFound1()

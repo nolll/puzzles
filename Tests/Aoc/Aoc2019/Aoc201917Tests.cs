@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
-public class Aoc201917Tests
+public class Aoc201917Tests : PuzzleTest<Aoc201917>
 {
     [Fact]
     public void IntersectionsFound()

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
-public class Aoc201912Tests
+public class Aoc201912Tests : PuzzleTest<Aoc201912>
 {
     [Fact]
     public void TotalEnergyAfter10Steps()

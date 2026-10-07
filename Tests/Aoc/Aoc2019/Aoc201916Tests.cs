@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
-public class Aoc201916Tests
+public class Aoc201916Tests : PuzzleTest<Aoc201916>
 {
     [Fact]
     public void SimpleAfterOnePhase()

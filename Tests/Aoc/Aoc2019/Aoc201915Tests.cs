@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
-public class Aoc201915Tests
+public class Aoc201915Tests : PuzzleTest<Aoc201915>
 {
     [Fact]
     public void Returns4Minutes()

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
-public class Aoc201920Tests
+public class Aoc201920Tests : PuzzleTest<Aoc201920>
 {
     [Fact]
     public void FindsShortestRoute1()

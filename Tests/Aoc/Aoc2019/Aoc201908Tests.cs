@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
-public class Aoc201908Tests
+public class Aoc201908Tests : PuzzleTest<Aoc201908>
 {
     [Fact]
     public void LayerGridIsCorrect()

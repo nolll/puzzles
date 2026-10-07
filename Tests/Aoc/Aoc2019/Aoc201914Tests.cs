@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
-public class Aoc201914Tests
+public class Aoc201914Tests : PuzzleTest<Aoc201914>
 {
     [Fact]
     public void NumberOfOresIs31()

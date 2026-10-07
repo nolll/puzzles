@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
-public class Aoc201910Tests
+public class Aoc201910Tests : PuzzleTest<Aoc201910>
 {
     [Fact]
     public void Asteroid_3_4_DetectsTheMostAsteroids()

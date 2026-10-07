@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
-public class Aoc201906Tests
+public class Aoc201906Tests : PuzzleTest<Aoc201906>
 {
     [Fact]
     public void ReturnsCorrectNumberOfOrbits()

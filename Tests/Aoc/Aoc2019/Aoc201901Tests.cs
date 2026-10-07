@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2019;
 
 namespace Tests.Aoc.Aoc2019;
 
-public class Aoc201901Tests
+public class Aoc201901Tests : PuzzleTest<Aoc201901>
 {
     [Theory]
     [InlineData(14, 2)]

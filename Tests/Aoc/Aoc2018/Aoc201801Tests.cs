@@ -3,52 +3,25 @@ using Pzl.Tools.Strings;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201801Tests
+public class Aoc201801Tests : PuzzleTest<Aoc201801>
 {
-    [Fact]
-    public void HandleOneNegativeChange()
-    {
-        const string changes = "-1";
-        var puzzle = new Aoc201801.FrequencyPuzzle(changes);
-        puzzle.ResultingFrequency.Should().Be(-1);
-    }
-
-    [Fact]
-    public void HandleOnePositiveChange()
-    {
-        const string changes = "+1";
-        var puzzle = new Aoc201801.FrequencyPuzzle(changes);
-        puzzle.ResultingFrequency.Should().Be(1);
-    }
-
-    [Fact]
-    public void HandleTwoChanges()
-    {
-        const string changes = "-1 +2";
-        var puzzle = new Aoc201801.FrequencyPuzzle(SpacesToNewLines(changes));
-        puzzle.ResultingFrequency.Should().Be(1);
-    }
-
     [Theory]
+    [InlineData("-1", -1)]
+    [InlineData("+1", 1)]
+    [InlineData("-1 +2", 1)]
     [InlineData("+1 +1 +1", 3)]
     [InlineData("+1 +1 -2", 0)]
     [InlineData("-1 -2 -3", -6)]
-    public void HandleProvidedPart1Examples(string changes, int expected)
-    {
-        var puzzle = new Aoc201801.FrequencyPuzzle(SpacesToNewLines(changes));
-        puzzle.ResultingFrequency.Should().Be(expected);
-    }
+    public void HandleProvidedPart1Examples(string changes, int expected) => 
+        Sut.Part1(SpacesToNewLines(changes)).Should().Be(expected);
 
     [Theory]
     [InlineData("+1 -1", 0)]
     [InlineData("+3 +3 +4 -2 -4", 10)]
     [InlineData("-6 +3 +8 +5 -6", 5)]
     [InlineData("+7 +7 -2 -7 -4", 14)]
-    public void HandleProvidedPart2Examples(string changes, int expected)
-    {
-        var puzzle = new Aoc201801.FrequencyRepeatPuzzle(SpacesToNewLines(changes));
-        puzzle.FirstRepeatedFrequency.Should().Be(expected);
-    }
+    public void HandleProvidedPart2Examples(string changes, int expected) => 
+        Sut.Part2(SpacesToNewLines(changes)).Should().Be(expected);
 
-    private string SpacesToNewLines(string input) => input.Replace(" ", LineBreaks.Single);
+    private static string SpacesToNewLines(string input) => input.Replace(" ", LineBreaks.Single);
 }

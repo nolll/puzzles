@@ -3,7 +3,7 @@ using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Aoc.Aoc2022;
 
-public class Aoc202222Tests
+public class Aoc202222Tests : PuzzleTest<Aoc202222>
 {
     [Fact]
     public void Part1() => new Aoc202222().Part1(Input).Should().Be(6032);

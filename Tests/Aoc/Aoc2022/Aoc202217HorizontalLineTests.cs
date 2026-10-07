@@ -3,7 +3,7 @@ using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Aoc.Aoc2022;
 
-public class Aoc202217HorizontalLineTests
+public class Aoc202217HorizontalLineTests : PuzzleTest<Aoc202217>
 {
     [Fact]
     public void CanMoveRight()

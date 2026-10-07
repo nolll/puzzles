@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2022;
 
 namespace Tests.Aoc.Aoc2022;
 
-public class Aoc202204Tests
+public class Aoc202204Tests : PuzzleTest<Aoc202204>
 {
     [Fact]
     public void Part1()

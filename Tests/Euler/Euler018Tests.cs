@@ -2,7 +2,7 @@ using Pzl.Euler.Puzzles;
 
 namespace Tests.Euler;
 
-public class Euler018Tests
+public class Euler018Tests : PuzzleTest<Euler018>
 {
     [Fact]
     public void Test()
@@ -17,5 +17,4 @@ public class Euler018Tests
         Sut.Solve(input).Should().Be(23);
     }
 
-    private static Euler018 Sut => new();
 }

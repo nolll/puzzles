@@ -2,7 +2,7 @@ using Pzl.Euler.Puzzles;
 
 namespace Tests.Euler;
 
-public class Euler065Tests
+public class Euler065Tests : PuzzleTest<Euler065>
 {
     [Fact]
     public void NumeratorSum() => 
@@ -22,5 +22,4 @@ public class Euler065Tests
         Sut.GetSequence(20).Should().BeEquivalentTo(expected);
     }
 
-    private static Euler065 Sut => new();
 }

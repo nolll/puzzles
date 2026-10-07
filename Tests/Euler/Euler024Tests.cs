@@ -2,7 +2,7 @@ using Pzl.Euler.Puzzles;
 
 namespace Tests.Euler;
 
-public class Euler024Tests
+public class Euler024Tests : PuzzleTest<Euler024>
 {
     [Fact]
     public void PermutationsAreGeneratedInLexicographicOrder()

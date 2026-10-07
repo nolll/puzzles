@@ -2,7 +2,7 @@ using Pzl.Euler.Puzzles;
 
 namespace Tests.Euler;
 
-public class Euler013Tests
+public class Euler013Tests : PuzzleTest<Euler013>
 {
     [Fact]
     public void Test()
@@ -16,5 +16,4 @@ public class Euler013Tests
         Sut.Solve(numbers).Should().Be("6000000000");
     }
 
-    private static Euler013 Sut => new();
 }

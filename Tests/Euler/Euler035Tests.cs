@@ -2,7 +2,7 @@ using Pzl.Euler.Puzzles;
 
 namespace Tests.Euler;
 
-public class Euler035Tests
+public class Euler035Tests : PuzzleTest<Euler035>
 {
     [Fact]
     public void Rotations()

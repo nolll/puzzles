@@ -2,7 +2,7 @@ using Pzl.Euler.Puzzles;
 
 namespace Tests.Euler;
 
-public class Euler032Tests
+public class Euler032Tests : PuzzleTest<Euler032>
 {
     [Fact]
     public void IsPandigital()

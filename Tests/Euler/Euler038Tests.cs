@@ -2,7 +2,7 @@ using Pzl.Euler.Puzzles;
 
 namespace Tests.Euler;
 
-public class Euler038Tests
+public class Euler038Tests : PuzzleTest<Euler038>
 {
     [Theory]
     [InlineData(9, 918273645)]

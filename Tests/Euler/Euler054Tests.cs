@@ -2,7 +2,7 @@ using Pzl.Euler.Puzzles;
 
 namespace Tests.Euler;
 
-public class Euler054Tests
+public class Euler054Tests : PuzzleTest<Euler054>
 {
     [Theory]
     [InlineData("AH KH QH JH TH", Euler054.HandRank.Str8Flush)]

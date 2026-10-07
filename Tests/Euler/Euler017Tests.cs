@@ -2,7 +2,7 @@ using Pzl.Euler.Puzzles;
 
 namespace Tests.Euler;
 
-public class Euler017Tests
+public class Euler017Tests : PuzzleTest<Euler017>
 {
     [Fact]
     public void Test()

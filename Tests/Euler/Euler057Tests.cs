@@ -2,7 +2,7 @@ using Pzl.Euler.Puzzles;
 
 namespace Tests.Euler;
 
-public class Euler057Tests
+public class Euler057Tests : PuzzleTest<Euler057>
 {
     [Theory]
     [InlineData(1, false)]
@@ -15,5 +15,4 @@ public class Euler057Tests
     [InlineData(8, true)]
     public void Solve(int levels, bool expected) => Sut.HasLongerNumerator(levels).Should().Be(expected);
 
-    private static Euler057 Sut => new();
 }

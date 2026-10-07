@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq22Tests
+public class Aquaq22Tests : PuzzleTest<Aquaq22>
 {
     [Fact]
     public void CaesarCipher() => Aquaq22.ToCaesarCipherSum("IVXLCDM")

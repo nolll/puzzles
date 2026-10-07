@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq07Tests
+public class Aquaq07Tests : PuzzleTest<Aquaq07>
 {
     [Fact]
     public void ExpectedWinrate()

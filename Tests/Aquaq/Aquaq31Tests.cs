@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq31Tests
+public class Aquaq31Tests : PuzzleTest<Aquaq31>
 {
     [Fact]
     public void Rotate() => new Aquaq31().Solve("U'LBRU").Should().Be(960);

@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq02Tests
+public class Aquaq02Tests : PuzzleTest<Aquaq02>
 {
     [Fact]
     public void UniqueNumbers()

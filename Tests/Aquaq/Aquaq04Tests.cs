@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq04Tests
+public class Aquaq04Tests : PuzzleTest<Aquaq04>
 {
     [Fact]
     public void FindCoPrimes()

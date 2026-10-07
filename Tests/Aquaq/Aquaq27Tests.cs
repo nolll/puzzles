@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq27Tests
+public class Aquaq27Tests : PuzzleTest<Aquaq27>
 {
     private const string Input = """
                                                  roulette

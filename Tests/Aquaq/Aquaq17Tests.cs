@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq17Tests
+public class Aquaq17Tests : PuzzleTest<Aquaq17>
 {
     private const string Input = """
                                  date,home_team,away_team,home_score,away_score,tournament,city,country,neutral

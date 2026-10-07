@@ -3,7 +3,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq09Tests
+public class Aquaq09Tests : PuzzleTest<Aquaq09>
 {
     [Fact]
     public void MultiplyLargeNumbers()

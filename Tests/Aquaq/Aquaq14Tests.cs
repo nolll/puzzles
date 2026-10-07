@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq14Tests
+public class Aquaq14Tests : PuzzleTest<Aquaq14>
 {
     [Theory]
     [InlineData("10 5 21 45 53 70 66 4", 7)]
@@ -11,5 +11,4 @@ public class Aquaq14Tests
     [InlineData("400 500 15 30 36 53 68 600 700", 7)]
     public void Bingo(string input, int expected) => Sut.Solve(input).Should().Be(expected);
 
-    private static Aquaq14 Sut => new();
 }

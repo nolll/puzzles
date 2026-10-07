@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq08Tests
+public class Aquaq08Tests : PuzzleTest<Aquaq08>
 {
     [Fact]
     public void DaySixState()

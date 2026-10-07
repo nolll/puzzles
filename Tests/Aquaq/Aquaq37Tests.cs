@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq37Tests
+public class Aquaq37Tests : PuzzleTest<Aquaq37>
 {
     private const string WordsInput = """
                                       guess,result

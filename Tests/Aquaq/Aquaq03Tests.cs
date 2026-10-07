@@ -3,7 +3,7 @@ using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Aquaq;
 
-public class Aquaq03Tests
+public class Aquaq03Tests : PuzzleTest<Aquaq03>
 {
     [Theory]
     [InlineData("UDRR", 4, 1, 14)]

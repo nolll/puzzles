@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq38Tests
+public class Aquaq38Tests : PuzzleTest<Aquaq38>
 {
     [Fact]
     public void IndexStreaks()

@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq19Tests
+public class Aquaq19Tests : PuzzleTest<Aquaq19>
 {
     [Fact]
     public void GameOfLife() => Aquaq19.RunGame("350 6 2 2 2 3", false)

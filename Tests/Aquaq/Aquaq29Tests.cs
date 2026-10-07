@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq29Tests
+public class Aquaq29Tests : PuzzleTest<Aquaq29>
 {
     [Fact]
     public void CountGoodNumbers()

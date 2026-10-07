@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq32Tests
+public class Aquaq32Tests : PuzzleTest<Aquaq32>
 {
     [Theory]
     [InlineData("()", true)]

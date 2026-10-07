@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq05Tests
+public class Aquaq05Tests : PuzzleTest<Aquaq05>
 {
     [Fact]
     public void RotateDiceLeft()

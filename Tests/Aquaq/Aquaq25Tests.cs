@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq25Tests
+public class Aquaq25Tests : PuzzleTest<Aquaq25>
 {
     [Fact]
     public void EncodeMorse() => Aquaq25.EncodeMorse("jam donut")

@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq33Tests
+public class Aquaq33Tests : PuzzleTest<Aquaq33>
 {
     [Fact]
     public void ThrowDarts()

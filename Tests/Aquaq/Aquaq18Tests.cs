@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq18Tests
+public class Aquaq18Tests : PuzzleTest<Aquaq18>
 {
     [Theory]
     [InlineData("13:41:00", false)]

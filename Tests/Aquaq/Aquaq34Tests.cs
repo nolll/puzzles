@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq34Tests
+public class Aquaq34Tests : PuzzleTest<Aquaq34>
 {
     private const string Input = """
                                  station,r1,r2,r3

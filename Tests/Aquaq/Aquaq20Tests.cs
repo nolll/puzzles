@@ -2,12 +2,11 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq20Tests
+public class Aquaq20Tests : PuzzleTest<Aquaq20>
 {
     [Theory]
     [InlineData("3 A K 9 A 7 4 9", 1)]
     [InlineData("K Q 2 9 4 8 A A A K A 7", 2)]
     public void PlayBlackjack(string deck, int expected) => Sut.Solve(deck).Should().Be(expected);
 
-    private static Aquaq20 Sut => new();
 }

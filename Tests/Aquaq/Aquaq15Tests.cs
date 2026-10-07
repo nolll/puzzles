@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq15Tests
+public class Aquaq15Tests : PuzzleTest<Aquaq15>
 {
     // todo: Make the tests work with custom input files
     
@@ -26,5 +26,4 @@ public class Aquaq15Tests
     //     Sut.Solve(input, new FileReader().ReadCommon(typeof(Aquaq15), "Words.txt")).Should().Be(45);
     // }
 
-    private static Aquaq15 Sut => new();
 }

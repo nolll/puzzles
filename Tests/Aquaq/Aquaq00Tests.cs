@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq00Tests
+public class Aquaq00Tests : PuzzleTest<Aquaq00>
 {
     [Fact]
     public void Numpad()

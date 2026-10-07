@@ -2,7 +2,7 @@ using Pzl.Aquaq.Puzzles;
 
 namespace Tests.Aquaq;
 
-public class Aquaq36Tests
+public class Aquaq36Tests : PuzzleTest<Aquaq36>
 {
     [Fact]
     public void SolveWithKnownNumbers()

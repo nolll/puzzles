@@ -31,7 +31,8 @@ public class ParameterParser(IEnumerable<string> args)
         return target;
     }
 
-    public string[] GetListValue(params string[] keys) => GetValue(keys)?.Split(',').Select(o => o.Trim()).ToArray() ?? [];
+    public string[] GetListValue(params string[] keys) => 
+        GetValue(keys)?.Split(',').Select(o => o.Trim()).Where(o => o.Length > 0).ToArray() ?? [];
 
     public string? GetValue(params string[] keys)
     {
@@ -53,9 +54,9 @@ public class ParameterParser(IEnumerable<string> args)
         for (var i = 0; i < argsList.Count; i++)
         {
             var item = argsList[i];
-            var isKeyword = item.StartsWith("-");
+            var isKeyword = item.StartsWith('-');
             var value = argsList.Count > i + 1 ? argsList[i + 1] : "";
-            var hasValue = !value?.StartsWith("-") ?? false;
+            var hasValue = !value?.StartsWith('-') ?? false;
             value = hasValue ? value : "";
             if (isKeyword)
                 dictionary.Add(item, value);

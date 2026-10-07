@@ -2,7 +2,7 @@ using Pzl.FlipFlop.Puzzles.FlipFlop2025;
 
 namespace Tests.FlipFlop.FlipFlop2025;
 
-public class FlipFlop202507Tests
+public class FlipFlop202507Tests : PuzzleTest<FlipFlop202507>
 {
     private const string Input = """
                                  2 2
@@ -34,5 +34,4 @@ public class FlipFlop202507Tests
     [InlineData(2, 3, 2, 12)]
     public void CountWays3d(int width, int height, int depth, int expected) => Sut.CountWays(width, height, depth).Should().Be(expected);
 
-    private static FlipFlop202507 Sut => new();
 }

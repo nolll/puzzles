@@ -2,7 +2,7 @@ using Pzl.FlipFlop.Puzzles.FlipFlop2025;
 
 namespace Tests.FlipFlop.FlipFlop2025;
 
-public class FlipFlop202504Tests
+public class FlipFlop202504Tests : PuzzleTest<FlipFlop202504>
 {
     private const string Input = """
                                  3,3
@@ -19,5 +19,4 @@ public class FlipFlop202504Tests
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be(9);
 
-    private static FlipFlop202504 Sut => new();
 }

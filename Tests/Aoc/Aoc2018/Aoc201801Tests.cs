@@ -1,5 +1,4 @@
 using Pzl.Aoc.Puzzles.Aoc2018;
-using Pzl.Tools.Strings;
 
 namespace Tests.Aoc.Aoc2018;
 
@@ -22,6 +21,4 @@ public class Aoc201801Tests : PuzzleTest<Aoc201801>
     [InlineData("+7 +7 -2 -7 -4", 14)]
     public void HandleProvidedPart2Examples(string changes, int expected) => 
         Sut.Part2(SpacesToNewLines(changes)).Should().Be(expected);
-
-    private static string SpacesToNewLines(string input) => input.Replace(" ", LineBreaks.Single);
 }

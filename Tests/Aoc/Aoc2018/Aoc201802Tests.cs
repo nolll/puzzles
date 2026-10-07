@@ -6,70 +6,28 @@ namespace Tests.Aoc.Aoc2018;
 public class Aoc201802Tests : PuzzleTest<Aoc201802>
 {
     [Fact]
-    public void NoSimilarIds()
-    {
-        var ids = new List<string> { "abcde", "fghij" };
-        var similarIds = Aoc201802.SimilarIdsPuzzle.GetSimilarIds(ids);
-        similarIds.Count.Should().Be(0);
-    }
+    public void NoSimilarIds() => Sut.GetSimilarIds(["abcde", "fghij"]).Count.Should().Be(0);
 
     [Fact]
-    public void EqualIdsIds_ReturnsNoMatch()
-    {
-        var ids = new List<string> { "abcde", "abcde" };
-        var similarIds = Aoc201802.SimilarIdsPuzzle.GetSimilarIds(ids);
-        similarIds.Count.Should().Be(0);
-    }
+    public void EqualIdsIds_ReturnsNoMatch() => Sut.GetSimilarIds(["abcde", "abcde"]).Count.Should().Be(0);
 
     [Fact]
-    public void OneSimilarId()
-    {
-        var ids = new List<string> { "abcde", "abcdX" };
-        var similarIds = Aoc201802.SimilarIdsPuzzle.GetSimilarIds(ids);
-        similarIds.Count.Should().Be(2);
-    }
+    public void OneSimilarId() => Sut.GetSimilarIds(["abcde", "abcdX"]).Count.Should().Be(2);
 
     [Fact]
-    public void TwoSimilarIds_ReturnsOnlyFirstMatch()
-    {
-        var ids = new List<string> { "abcde", "abcdX", "fghij", "fghiX" };
-        var similarIds = Aoc201802.SimilarIdsPuzzle.GetSimilarIds(ids);
-        similarIds.Count.Should().Be(2);
-    }
+    public void TwoSimilarIds_ReturnsOnlyFirstMatch() =>
+        Sut.GetSimilarIds(["abcde", "abcdX", "fghij", "fghiX"]).Count.Should().Be(2);
 
     [Fact]
-    public void HandleProvidedExample()
-    {
-        const string ids = "abcdef bababc abbcde abcccd aabcdd abcdee ababab";
-        var puzzle = new Aoc201802.BoxChecksumPuzzle(SpacesToNewLines(ids));
-        puzzle.Checksum.Should().Be(12);
-    }
+    public void HandleProvidedExample() => 
+        Sut.Part1(SpacesToNewLines("abcdef bababc abbcde abcccd aabcdd abcdee ababab")).Should().Be(12);
 
     [Fact]
-    public void AllLettersCommon()
-    {
-        const string str = "abcde";
-        var commonLetters = Aoc201802.SimilarIdsPuzzle.GetCommonLetters(str, str);
-        commonLetters.Should().Be("abcde");
-    }
+    public void AllLettersCommon() => Sut.GetCommonLetters("abcde", "abcde").Should().Be("abcde");
 
     [Fact]
-    public void NoLettersCommon()
-    {
-        const string str1 = "abcde";
-        const string str2 = "fghij";
-        var commonLetters = Aoc201802.SimilarIdsPuzzle.GetCommonLetters(str1, str2);
-        commonLetters.Should().Be("");
-    }
+    public void NoLettersCommon() => Sut.GetCommonLetters("abcde", "fghij").Should().Be("");
 
     [Fact]
-    public void ThreeLettersCommon()
-    {
-        const string str1 = "abcde";
-        const string str2 = "aXcYe";
-        var commonLetters = Aoc201802.SimilarIdsPuzzle.GetCommonLetters(str1, str2);
-        commonLetters.Should().Be("ace");
-    }
-
-    private string SpacesToNewLines(string input) => input.Replace(" ", LineBreaks.Single);
+    public void ThreeLettersCommon() => Sut.GetCommonLetters("abcde", "aXcYe").Should().Be("ace");
 }

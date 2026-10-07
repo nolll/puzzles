@@ -4,24 +4,6 @@ namespace Tests.Aoc.Aoc2017;
 
 public class Aoc201724Tests : PuzzleTest<Aoc201724>
 {
-    [Fact]
-    public void FindsStrongestBridge()
-    {
-        var builder = new Aoc201724.BridgeBuilder(Input.Trim(), false);
-        var bridge = builder.Build();
-
-        bridge.Strength.Should().Be(31);
-    }
-
-    [Fact]
-    public void FindsLongestBridge()
-    {
-        var builder = new Aoc201724.BridgeBuilder(Input.Trim(), true);
-        var bridge = builder.Build();
-
-        bridge.Strength.Should().Be(19);
-    }
-
     private const string Input = """
                                  0/2
                                  2/2
@@ -32,4 +14,10 @@ public class Aoc201724Tests : PuzzleTest<Aoc201724>
                                  10/1
                                  9/10
                                  """;
+    
+    [Fact]
+    public void Part1() => Sut.Part1(Input).Should().Be(31);
+
+    [Fact]
+    public void Part2() => Sut.Part2(Input).Should().Be(19);
 }

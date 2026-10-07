@@ -8,7 +8,7 @@ public class Aoc202101Tests : PuzzleTest<Aoc202101>
     public void Part1()
     {
         var validator = new Aoc202101.DepthMeasurement();
-        var result = validator.GetNumberOfIncreasingMeasurements(Input.Trim(), false);
+        var result = validator.GetNumberOfIncreasingMeasurements(Input, false);
 
         result.Should().Be(7);
     }
@@ -17,7 +17,7 @@ public class Aoc202101Tests : PuzzleTest<Aoc202101>
     public void Part2()
     {
         var validator = new Aoc202101.DepthMeasurement();
-        var result = validator.GetNumberOfIncreasingMeasurements(Input.Trim(), true);
+        var result = validator.GetNumberOfIncreasingMeasurements(Input, true);
 
         result.Should().Be(5);
     }

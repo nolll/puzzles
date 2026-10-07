@@ -9,7 +9,7 @@ public class Aoc202109Tests : PuzzleTest<Aoc202109>
     {
         var heightMap = new Aoc202109.HeightMap();
 
-        var result = heightMap.FindLowPointSum(Input.Trim());
+        var result = heightMap.FindLowPointSum(Input);
 
         result.Should().Be(15);
     }
@@ -18,7 +18,7 @@ public class Aoc202109Tests : PuzzleTest<Aoc202109>
     public void Part2()
     {
         var heightMap = new Aoc202109.HeightMap();
-        var result = heightMap.FindBasinSizes(Input.Trim());
+        var result = heightMap.FindBasinSizes(Input);
 
         result.Should().Be(1134);
     }

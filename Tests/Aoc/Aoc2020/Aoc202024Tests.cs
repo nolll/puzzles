@@ -19,7 +19,7 @@ public class Aoc202024Tests : PuzzleTest<Aoc202024>
     [Fact]
     public void FiveTilesAreBlackAfterArrange()
     {
-        var floor = new Aoc202024.HexagonalFloor(Input.Trim());
+        var floor = new Aoc202024.HexagonalFloor(Input);
         floor.Arrange();
         var result = floor.BlackTileCount;
 
@@ -29,7 +29,7 @@ public class Aoc202024Tests : PuzzleTest<Aoc202024>
     [Fact]
     public void FiveTilesAreBlack()
     {
-        var floor = new Aoc202024.HexagonalFloor(Input.Trim());
+        var floor = new Aoc202024.HexagonalFloor(Input);
         floor.Arrange();
         var result = floor.BlackTileCount;
 
@@ -39,7 +39,7 @@ public class Aoc202024Tests : PuzzleTest<Aoc202024>
     [Fact]
     public void BlackTilesCorrectAfterEachRun()
     {
-        var floor = new Aoc202024.HexagonalFloor(Input.Trim());
+        var floor = new Aoc202024.HexagonalFloor(Input);
         floor.Arrange();
 
         floor.Modify(1); // 1

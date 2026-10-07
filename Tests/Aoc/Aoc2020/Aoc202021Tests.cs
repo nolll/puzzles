@@ -14,7 +14,7 @@ public class Aoc202021Tests : PuzzleTest<Aoc202021>
     [Fact]
     public void IngredientsWithoutAllergens()
     {
-        var detector = new Aoc202021.AllergenDetector(Input.Trim());
+        var detector = new Aoc202021.AllergenDetector(Input);
         var ingredientCount = detector.FindIngredientsWithoutAllergens();
 
         ingredientCount.Should().Be(5);
@@ -23,7 +23,7 @@ public class Aoc202021Tests : PuzzleTest<Aoc202021>
     [Fact]
     public void CanonicalIngredientList()
     {
-        var detector = new Aoc202021.AllergenDetector(Input.Trim());
+        var detector = new Aoc202021.AllergenDetector(Input);
         var ingredientList = detector.GetIngredientList();
 
         ingredientList.Should().Be("mxmxvkd,sqjhc,fvjkl");

@@ -7,7 +7,7 @@ public class Aoc202008Tests : PuzzleTest<Aoc202008>
     [Fact]
     public void AccIsCorrectBeforeInfiniteLoop()
     {
-        var console = new Aoc202008.GameConsoleRunner(Input.Trim());
+        var console = new Aoc202008.GameConsoleRunner(Input);
         var accBeforeRepeat = console.RunUntilLoop();
 
         accBeforeRepeat.Should().Be(5);
@@ -16,7 +16,7 @@ public class Aoc202008Tests : PuzzleTest<Aoc202008>
     [Fact]
     public void AccIsCorrectAfterTerminateInModifiedProgram()
     {
-        var console = new Aoc202008.GameConsoleRunner(Input.Trim());
+        var console = new Aoc202008.GameConsoleRunner(Input);
         var accAtTermination = console.RunUntilTermination();
 
         accAtTermination.Should().Be(8);
@@ -37,7 +37,7 @@ public class Aoc202008Tests : PuzzleTest<Aoc202008>
                              acc +6
                              """;
 
-        var instructions = Aoc202008.GameConsoleRunner.ParseInstructions(input.Trim());
+        var instructions = Aoc202008.GameConsoleRunner.ParseInstructions(input);
         var console = new Aoc202008.GameConsole(instructions);
         var exit = console.Run();
 

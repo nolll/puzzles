@@ -19,7 +19,7 @@ public class Aoc201824Tests : PuzzleTest<Aoc201824>
     [Fact]
     public void FightIsCorrect()
     {
-        var system = new Aoc201824.ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());
+        var system = new Aoc201824.ImmuneSystem(ImmuneInput, InfectionInput);
         system.Fight();
 
         system.ImmuneGroups.Count.Should().Be(0);
@@ -32,7 +32,7 @@ public class Aoc201824Tests : PuzzleTest<Aoc201824>
     [Fact]
     public void FightWithBoostIsCorrect()
     {
-        var system = new Aoc201824.ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());
+        var system = new Aoc201824.ImmuneSystem(ImmuneInput, InfectionInput);
         system.Fight(1570);
 
         system.WinningArmyUnitCount.Should().Be(51);
@@ -41,7 +41,7 @@ public class Aoc201824Tests : PuzzleTest<Aoc201824>
     [Fact]
     public void FightUntilImmuneSystemWinsIsCorrect()
     {
-        var system = new Aoc201824.ImmuneSystem(ImmuneInput.Trim(), InfectionInput.Trim());
+        var system = new Aoc201824.ImmuneSystem(ImmuneInput, InfectionInput);
         system.FightUntilImmuneSystemWins();
 
         system.WinningArmyUnitCount.Should().Be(51);

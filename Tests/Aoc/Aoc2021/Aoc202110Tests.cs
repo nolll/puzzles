@@ -26,7 +26,7 @@ public class Aoc202110Tests : PuzzleTest<Aoc202110>
     public void Part2()
     {
         var syntaxChecker = new Aoc202110.SyntaxChecker();
-        var result = syntaxChecker.FindMiddleScore(Input.Trim());
+        var result = syntaxChecker.FindMiddleScore(Input);
 
         result.Should().Be(288957);
     }

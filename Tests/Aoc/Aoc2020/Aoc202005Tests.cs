@@ -28,7 +28,7 @@ public class Aoc202005Tests : PuzzleTest<Aoc202005>
                              BBFFBBFRLL
                              """;
 
-        var processor = new Aoc202005.BoardingCardProcessor(input.Trim());
+        var processor = new Aoc202005.BoardingCardProcessor(input);
 
         processor.HighestId.Should().Be(820);
     }

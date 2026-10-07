@@ -8,7 +8,7 @@ public class Aoc202105Tests : PuzzleTest<Aoc202105>
     public void Part1()
     {
         var game = new Aoc202105.VentsMap();
-        var result = game.Run(Input.Trim(), true);
+        var result = game.Run(Input, true);
 
         result.Should().Be(5);
     }
@@ -17,7 +17,7 @@ public class Aoc202105Tests : PuzzleTest<Aoc202105>
     public void Part2()
     {
         var game = new Aoc202105.VentsMap();
-        var result = game.Run(Input.Trim(), false);
+        var result = game.Run(Input, false);
 
         result.Should().Be(12);
     }

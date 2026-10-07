@@ -18,7 +18,7 @@ public class Aoc201817Tests : PuzzleTest<Aoc201817>
                              y=13, x=498..504
                              """;
 
-        var filler = new Aoc201817.ReservoirFiller(input.Trim());
+        var filler = new Aoc201817.ReservoirFiller(input);
         filler.Fill();
 
         filler.TotalWaterTileCount.Should().Be(57);

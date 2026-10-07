@@ -7,7 +7,7 @@ public class Aoc202108Tests : PuzzleTest<Aoc202108>
     [Fact]
     public void Part1()
     {
-        var puzzle = new Aoc202108.SevenSegmentDisplayDecoder(Input.Trim());
+        var puzzle = new Aoc202108.SevenSegmentDisplayDecoder(Input);
         var result = puzzle.GetEasyNumbers();
 
         result.Should().Be(26);
@@ -34,7 +34,7 @@ public class Aoc202108Tests : PuzzleTest<Aoc202108>
     [Fact]
     public void Part2()
     {
-        var puzzle = new Aoc202108.SevenSegmentDisplayDecoder(Input.Trim());
+        var puzzle = new Aoc202108.SevenSegmentDisplayDecoder(Input);
         var result = puzzle.GetDecodedSum();
 
         result.Should().Be(61229);

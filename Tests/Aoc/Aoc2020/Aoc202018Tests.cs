@@ -36,7 +36,7 @@ public class Aoc202018Tests : PuzzleTest<Aoc202018>
         const int expected = 26_457;
 
         var calculator = new Aoc202018.HomeworkCalculator();
-        var sum = calculator.SumOfAll(input.Trim(), Aoc202018.MathPrecedence.Order);
+        var sum = calculator.SumOfAll(input, Aoc202018.MathPrecedence.Order);
 
         sum.Should().Be(expected);
     }

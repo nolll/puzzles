@@ -20,6 +20,6 @@ public class Aoc201524Tests : PuzzleTest<Aoc201524>
                              11
                              """;
 
-        Sut.GetQuantumEntanglementOfFirstGroup(input.Trim(), 3).Should().Be(99);
+        Sut.GetQuantumEntanglementOfFirstGroup(input, 3).Should().Be(99);
     }
 }

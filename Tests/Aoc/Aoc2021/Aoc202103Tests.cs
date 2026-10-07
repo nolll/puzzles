@@ -8,7 +8,7 @@ public class Aoc202103Tests : PuzzleTest<Aoc202103>
     public void Part1()
     {
         var diagnostics = new Aoc202103.BinaryDiagnostics();
-        var result = diagnostics.GetFuelConsumption(Input.Trim());
+        var result = diagnostics.GetFuelConsumption(Input);
 
         result.Should().Be(198);
     }
@@ -17,7 +17,7 @@ public class Aoc202103Tests : PuzzleTest<Aoc202103>
     public void Part2()
     {
         var diagnostics = new Aoc202103.BinaryDiagnostics();
-        var result = diagnostics.GetLifeSupportRating(Input.Trim());
+        var result = diagnostics.GetLifeSupportRating(Input);
 
         result.Should().Be(230);
     }

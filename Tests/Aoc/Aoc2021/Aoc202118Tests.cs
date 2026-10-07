@@ -139,7 +139,7 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
                              """;
 
         var math = new Aoc202118.SnailfishMath();
-        var result = math.Sum(input.Trim());
+        var result = math.Sum(input);
 
         result.ToString().Should().Be("[[[[5,0],[7,4]],[5,5]],[6,6]]");
     }
@@ -161,7 +161,7 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
                              """;
 
         var math = new Aoc202118.SnailfishMath();
-        var result = math.Sum(input.Trim());
+        var result = math.Sum(input);
 
         result.ToString().Should().Be("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]");
     }
@@ -201,7 +201,7 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
                              """;
 
         var math = new Aoc202118.SnailfishMath();
-        var result = math.Sum(input.Trim());
+        var result = math.Sum(input);
 
         result.ToString().Should().Be("[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]");
         result.Magnitude.Should().Be(4140);
@@ -224,7 +224,7 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
                              """;
 
         var math = new Aoc202118.SnailfishMath();
-        var result = math.LargestMagnitude(input.Trim());
+        var result = math.LargestMagnitude(input);
 
         result.Should().Be(3993);
     }

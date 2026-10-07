@@ -15,7 +15,7 @@ public class Aoc202014Tests : PuzzleTest<Aoc202014>
                              """;
 
         var system = new Aoc202014.BitmaskSystem1();
-        var sum = system.Run(input.Trim());
+        var sum = system.Run(input);
 
         sum.Should().Be(165);
     }
@@ -31,7 +31,7 @@ public class Aoc202014Tests : PuzzleTest<Aoc202014>
                              """;
 
         var system = new Aoc202014.BitmaskSystem2();
-        var sum = system.Run(input.Trim());
+        var sum = system.Run(input);
 
         sum.Should().Be(208);
     }

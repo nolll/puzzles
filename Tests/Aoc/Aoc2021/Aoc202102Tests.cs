@@ -7,7 +7,7 @@ public class Aoc202102Tests : PuzzleTest<Aoc202102>
     [Fact]
     public void Part1()
     {
-        var validator = new Aoc202102.SubmarineControl(Input.Trim(), false);
+        var validator = new Aoc202102.SubmarineControl(Input, false);
         validator.Move();
 
         validator.Result.Should().Be(150);
@@ -16,7 +16,7 @@ public class Aoc202102Tests : PuzzleTest<Aoc202102>
     [Fact]
     public void Part2()
     {
-        var validator = new Aoc202102.SubmarineControl(Input.Trim(), true);
+        var validator = new Aoc202102.SubmarineControl(Input, true);
         validator.Move();
 
         validator.Result.Should().Be(900);

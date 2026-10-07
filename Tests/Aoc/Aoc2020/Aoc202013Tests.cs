@@ -13,7 +13,7 @@ public class Aoc202013Tests : PuzzleTest<Aoc202013>
                              7,13,x,x,59,x,31,19
                              """;
 
-        var scheduler = new Aoc202013.BusScheduler1(input.Trim());
+        var scheduler = new Aoc202013.BusScheduler1(input);
         var value = scheduler.GetBusValue();
 
         value.Should().Be(295);

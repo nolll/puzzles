@@ -7,7 +7,7 @@ public class Aoc202112Tests : PuzzleTest<Aoc202112>
     [Fact]
     public void Part1()
     {
-        var caveSystem = new Aoc202112.CaveSystem(Input.Trim(), false);
+        var caveSystem = new Aoc202112.CaveSystem(Input, false);
         var result = caveSystem.CountPaths();
 
         result.Should().Be(10);
@@ -16,7 +16,7 @@ public class Aoc202112Tests : PuzzleTest<Aoc202112>
     [Fact]
     public void Part2()
     {
-        var caveSystem = new Aoc202112.CaveSystem(Input.Trim(), true);
+        var caveSystem = new Aoc202112.CaveSystem(Input, true);
         var result = caveSystem.CountPaths();
 
         result.Should().Be(36);

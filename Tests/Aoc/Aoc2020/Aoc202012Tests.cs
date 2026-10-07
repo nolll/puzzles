@@ -15,7 +15,7 @@ public class Aoc202012Tests : PuzzleTest<Aoc202012>
                              F11
                              """;
 
-        var system = new Aoc202012.SimpleFerryNavigationSystem(input.Trim());
+        var system = new Aoc202012.SimpleFerryNavigationSystem(input);
         system.Run();
         var result = system.DistanceTravelled;
 
@@ -33,7 +33,7 @@ public class Aoc202012Tests : PuzzleTest<Aoc202012>
                              F11
                              """;
 
-        var system = new Aoc202012.WaypointFerryNavigationSystem(input.Trim());
+        var system = new Aoc202012.WaypointFerryNavigationSystem(input);
         system.Run();
         var result = system.DistanceTravelled;
 

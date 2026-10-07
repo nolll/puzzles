@@ -19,7 +19,7 @@ public class Aoc201823Tests : PuzzleTest<Aoc201823>
                              pos=<1,3,1>, r=1
                              """;
 
-        var formation = new Aoc201823.NanobotFormation(input.Trim());
+        var formation = new Aoc201823.NanobotFormation(input);
         var botCount = formation.GetBotsInRangeOfStrongestBot().Count;
 
         botCount.Should().Be(7);
@@ -334,7 +334,7 @@ public class Aoc201823Tests : PuzzleTest<Aoc201823>
                              pos=<10,10,10>, r=5
                              """;
 
-        var formation = new Aoc201823.NanobotFormation(input.Trim());
+        var formation = new Aoc201823.NanobotFormation(input);
         var distance = formation.FindManhattanDistanceToBestCoords();
 
         distance.Should().Be(36);

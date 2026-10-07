@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2024;
 
 namespace Tests.Aoc.Aoc2024;
 
-public class Aoc202424Tests
+public class Aoc202424Tests : PuzzleTest<Aoc202424>
 {
     [Fact]
     public void Part1_1()
@@ -79,5 +79,4 @@ public class Aoc202424Tests
         Sut.Part1(input).Should().Be(2024);
     }
 
-    private static Aoc202424 Sut => new();
 }

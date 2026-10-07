@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2024;
 
 namespace Tests.Aoc.Aoc2024;
 
-public class Aoc202413Tests
+public class Aoc202413Tests : PuzzleTest<Aoc202413>
 {
     private const string Input = """
                                  Button A: X+94, Y+34
@@ -34,5 +34,4 @@ public class Aoc202413Tests
         Aoc202413.Solve(Input, 0).Should().Be(480);
     }
     
-    private static Aoc202413 Sut => new();
 }

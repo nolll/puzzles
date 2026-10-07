@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2024;
 
 namespace Tests.Aoc.Aoc2024;
 
-public class Aoc202420Tests
+public class Aoc202420Tests : PuzzleTest<Aoc202420>
 {
     private const string Input = """
                                  ###############
@@ -94,5 +94,4 @@ public class Aoc202420Tests
         bucket76.Count.Should().Be(3);
     }
 
-    private static Aoc202420 Sut => new();
 }

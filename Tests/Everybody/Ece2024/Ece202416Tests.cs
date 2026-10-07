@@ -2,7 +2,7 @@ using Pzl.Everybody.Puzzles.Ece2024;
 
 namespace Tests.Everybody.Ece2024;
 
-public class Ece202416Tests
+public class Ece202416Tests : PuzzleTest<Ece202416>
 {
     private const string Input = """
                                  1,2,3
@@ -111,5 +111,4 @@ public class Ece202416Tests
     [InlineData("^_^^_^^_^", 5)]
     public void Scoring(string input, int expected) => Ece202416.Score(input).Should().Be(expected);
 
-    private static Ece202416 Sut => new();
 }

@@ -3,7 +3,7 @@ using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Everybody.Ece2025;
 
-public class Ece202520Tests
+public class Ece202520Tests : PuzzleTest<Ece202520>
 {
     [Fact]
     public void Part1_1()
@@ -138,5 +138,4 @@ public class Ece202520Tests
         Sut.Part3(input).Should().Be(23);
     }
 
-    private static Ece202520 Sut => new();
 }

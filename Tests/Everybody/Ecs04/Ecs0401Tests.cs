@@ -2,7 +2,7 @@ using Pzl.Everybody.Puzzles.Ecs04;
 
 namespace Tests.Everybody.Ecs04;
 
-public class Ecs0401Tests
+public class Ecs0401Tests : PuzzleTest<Ecs0401>
 {
     [Fact]
     public void Part1_1()
@@ -97,5 +97,4 @@ public class Ecs0401Tests
     [Fact]
     public void IsCrossing2() => Ecs0401.IsCrossing((6, 10), (9, 12)).Should().Be(true);
 
-    private static Ecs0401 Sut => new();
 }

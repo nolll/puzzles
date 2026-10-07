@@ -2,7 +2,7 @@ using Pzl.Everybody.Puzzles.Ecs01;
 
 namespace Tests.Everybody.Ecs01;
 
-public class Ecs0102Tests
+public class Ecs0102Tests : PuzzleTest<Ecs0102>
 {
     [Fact]
     public void Part1()
@@ -77,5 +77,4 @@ public class Ecs0102Tests
         Sut.Part3(input).Should().Be("DJCGL");
     }
 
-    private static Ecs0102 Sut => new();
 }

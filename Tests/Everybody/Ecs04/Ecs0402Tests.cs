@@ -2,7 +2,7 @@ using Pzl.Everybody.Puzzles.Ecs04;
 
 namespace Tests.Everybody.Ecs04;
 
-public class Ecs0402Tests
+public class Ecs0402Tests : PuzzleTest<Ecs0402>
 {
     [Fact]
     public void Part1()
@@ -45,5 +45,4 @@ public class Ecs0402Tests
         Sut.Part3(input).Should().Be(42);
     }
 
-    private static Ecs0402 Sut => new();
 }

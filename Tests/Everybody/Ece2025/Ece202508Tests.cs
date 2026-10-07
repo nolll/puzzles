@@ -2,7 +2,7 @@ using Pzl.Everybody.Puzzles.Ece2025;
 
 namespace Tests.Everybody.Ece2025;
 
-public class Ece202508Tests
+public class Ece202508Tests : PuzzleTest<Ece202508>
 {
     [Fact]
     public void Part1() => Sut.SolvePart1("1,5,2,6,8,4,1,7,3", 8).Should().Be(4);
@@ -13,5 +13,4 @@ public class Ece202508Tests
     [Fact]
     public void Part3() => Sut.SolvePart3("1,5,2,6,8,4,1,7,3,6", 8).Should().Be(7);
 
-    private static Ece202508 Sut => new();
 }

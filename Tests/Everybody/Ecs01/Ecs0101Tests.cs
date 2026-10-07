@@ -2,7 +2,7 @@ using Pzl.Everybody.Puzzles.Ecs01;
 
 namespace Tests.Everybody.Ecs01;
 
-public class Ecs0101Tests
+public class Ecs0101Tests : PuzzleTest<Ecs0101>
 {
     [Fact]
     public void Part1()
@@ -114,5 +114,4 @@ public class Ecs0101Tests
     public void Eni3Sum(long a, long b, long c, long x, long y, long z, long m, long expected) => 
         Ecs0101.EniSum(Ecs0101.Eni3, a, b, c, x, y, z, m).Should().Be(expected);
 
-    private static Ecs0101 Sut => new();
 }

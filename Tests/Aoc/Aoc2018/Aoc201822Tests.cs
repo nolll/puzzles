@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201822Tests
+public class Aoc201822Tests : PuzzleTest<Aoc201822>
 {
     private const long Depth = 510;
     private const int TargetX = 10;

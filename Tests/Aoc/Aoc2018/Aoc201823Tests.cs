@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201823Tests
+public class Aoc201823Tests : PuzzleTest<Aoc201823>
 {
     [Fact]
     public void NanobotsInRangeOfStrongestNanobot()

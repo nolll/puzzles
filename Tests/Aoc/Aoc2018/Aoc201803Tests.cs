@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201803Tests
+public class Aoc201803Tests : PuzzleTest<Aoc201803>
 {
     [Fact]
     public void NoOverlap()

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201825Tests
+public class Aoc201825Tests : PuzzleTest<Aoc201825>
 {
     [Fact]
     public void FindsConstellations1()

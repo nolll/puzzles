@@ -3,7 +3,7 @@ using Pzl.Tools.Strings;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201802Tests
+public class Aoc201802Tests : PuzzleTest<Aoc201802>
 {
     [Fact]
     public void NoSimilarIds()

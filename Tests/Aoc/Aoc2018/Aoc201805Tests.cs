@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201805Tests
+public class Aoc201805Tests : PuzzleTest<Aoc201805>
 {
     [Fact]
     public void FullPolymer()

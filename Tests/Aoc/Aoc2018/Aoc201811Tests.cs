@@ -3,7 +3,7 @@ using Pzl.Common;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201811Tests
+public class Aoc201811Tests : PuzzleTest<Aoc201811>
 {
     [Theory]
     [InlineData(122, 79, 57, -5)]

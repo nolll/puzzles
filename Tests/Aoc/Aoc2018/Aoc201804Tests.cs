@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201804Tests
+public class Aoc201804Tests : PuzzleTest<Aoc201804>
 {
     [Fact]
     public void StrategyOne()

@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201810Tests
+public class Aoc201810Tests : PuzzleTest<Aoc201810>
 {
     [Fact]
     public void FindsMessage()

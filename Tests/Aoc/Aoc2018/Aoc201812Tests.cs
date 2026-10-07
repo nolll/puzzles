@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201812Tests
+public class Aoc201812Tests : PuzzleTest<Aoc201812>
 {
     [Fact]
     public void PlantScoreIsCorrect()

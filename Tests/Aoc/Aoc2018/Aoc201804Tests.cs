@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2018;
 public class Aoc201804Tests : PuzzleTest<Aoc201804>
 {
     [Fact]
-    public void StrategyOne()
-    {
-        var puzzle = new Aoc201804.GuardSleepPuzzle(Input);
-        puzzle.StrategyOneGuardId.Should().Be(10);
-        puzzle.StrategyOneMinute.Should().Be(24);
-        puzzle.StrategyOneScore.Should().Be(240);
-    }
+    public void StrategyOne() => Sut.Part1(Input).Should().Be(240);
 
     [Fact]
-    public void StrategyTwo()
-    {
-        var puzzle = new Aoc201804.GuardSleepPuzzle(Input);
-        puzzle.StrategyTwoGuardId.Should().Be(99);
-        puzzle.StrategyTwoMinute.Should().Be(45);
-        puzzle.StrategyTwoScore.Should().Be(4455);
-    }
+    public void StrategyTwo() => Sut.Part2(Input).Should().Be(4455);
 
     private const string Input = """
                                  [1518-11-01 00:00] Guard #10 begins shift

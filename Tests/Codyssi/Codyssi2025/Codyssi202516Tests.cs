@@ -3,7 +3,7 @@ using Pzl.Codyssi.Puzzles.Codyssi2025;
 
 namespace Tests.Codyssi.Codyssi2025;
 
-public class Codyssi202516Tests
+public class Codyssi202516Tests : PuzzleTest<Codyssi202516>
 {
     private const string Input1 = """
                                  FACE - VALUE 38
@@ -81,5 +81,4 @@ public class Codyssi202516Tests
     [Fact]
     public void Part3_2() => Sut.Part3(Input2).Should().Be(BigInteger.Parse("118479211258970523303936"));
 
-    private static Codyssi202516 Sut => new();
 }

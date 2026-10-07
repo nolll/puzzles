@@ -2,7 +2,7 @@ using Pzl.Codyssi.Puzzles.Codyssi2025;
 
 namespace Tests.Codyssi.Codyssi2025;
 
-public class Codyssi202509Tests
+public class Codyssi202509Tests : PuzzleTest<Codyssi202509>
 {
     private const string Input = """
                                  Alpha HAS 131
@@ -33,5 +33,4 @@ public class Codyssi202509Tests
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be(2511);
 
-    private static Codyssi202509 Sut => new();
 }

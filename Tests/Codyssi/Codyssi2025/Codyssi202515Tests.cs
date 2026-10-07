@@ -2,7 +2,7 @@ using Pzl.Codyssi.Puzzles.Codyssi2025;
 
 namespace Tests.Codyssi.Codyssi2025;
 
-public class Codyssi202515Tests
+public class Codyssi202515Tests : PuzzleTest<Codyssi202515>
 {
     private const string Input = """
                                  ozNxANO | 576690
@@ -34,5 +34,4 @@ public class Codyssi202515Tests
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be("pYNonIG");
 
-    private static Codyssi202515 Sut => new();
 }

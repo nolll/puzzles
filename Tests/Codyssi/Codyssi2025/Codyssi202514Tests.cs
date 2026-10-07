@@ -2,7 +2,7 @@ using Pzl.Codyssi.Puzzles.Codyssi2025;
 
 namespace Tests.Codyssi.Codyssi2025;
 
-public class Codyssi202514Tests
+public class Codyssi202514Tests : PuzzleTest<Codyssi202514>
 {
     private const string Input = """
                                  1 ETdhCGi | Quality : 36, Cost : 25, Unique Materials : 7
@@ -31,5 +31,4 @@ public class Codyssi202514Tests
     [Fact]
     public void Part3() => Sut.Part3(Input, 150).Should().Be(59388);
 
-    private static Codyssi202514 Sut => new();
 }

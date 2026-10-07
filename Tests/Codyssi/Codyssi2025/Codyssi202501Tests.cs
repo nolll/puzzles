@@ -2,7 +2,7 @@ using Pzl.Codyssi.Puzzles.Codyssi2025;
 
 namespace Tests.Codyssi.Codyssi2025;
 
-public class Codyssi202501Tests
+public class Codyssi202501Tests : PuzzleTest<Codyssi202501>
 {
     private const string Input = """
                                  8
@@ -27,5 +27,4 @@ public class Codyssi202501Tests
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be(189);
 
-    private static Codyssi202501 Sut => new();
 }

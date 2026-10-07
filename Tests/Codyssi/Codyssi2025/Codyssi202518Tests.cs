@@ -2,7 +2,7 @@ using Pzl.Codyssi.Puzzles.Codyssi2025;
 
 namespace Tests.Codyssi.Codyssi2025;
 
-public class Codyssi202518Tests
+public class Codyssi202518Tests : PuzzleTest<Codyssi202518>
 {
     private const string Input1 = """
                                   RULE 1: 8x+2y+3z+5a DIVIDE 9 HAS REMAINDER 4 | DEBRIS VELOCITY (0, -1, 0, 1)
@@ -40,5 +40,4 @@ public class Codyssi202518Tests
     [Fact]
     public void Part3_2() => Sut.Part3(Input2).Should().Be(166);
 
-    private static Codyssi202518 Sut => new();
 }

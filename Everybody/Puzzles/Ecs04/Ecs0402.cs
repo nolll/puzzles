@@ -90,12 +90,12 @@ public class Ecs0402 : EverybodyStoryPuzzle
     private static (Coord, Dictionary<char, Coord>, char[]) Parse(string input)
     {
         var lines = input.Split(LineBreaks.Single);
-        var s = Coord.FromArray(Numbers.IntsFromString(lines[0]));
+        var s = new Coord(Numbers.IntsFromString(lines[0]));
         var beacons = new Dictionary<char, Coord>
         {
-            ['A'] = Coord.FromArray(Numbers.IntsFromString(lines[1])),
-            ['B'] = Coord.FromArray(Numbers.IntsFromString(lines[2])),
-            ['C'] = Coord.FromArray(Numbers.IntsFromString(lines[3]))
+            ['A'] = new(Numbers.IntsFromString(lines[1])),
+            ['B'] = new(Numbers.IntsFromString(lines[2])),
+            ['C'] = new(Numbers.IntsFromString(lines[3]))
         };
         var moves = lines.Length == 5 ? lines[4].Split('=').Last().ToCharArray() : [];
 

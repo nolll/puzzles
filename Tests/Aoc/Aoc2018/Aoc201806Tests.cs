@@ -4,39 +4,18 @@ namespace Tests.Aoc.Aoc2018;
 
 public class Aoc201806Tests : PuzzleTest<Aoc201806>
 {
-    [Fact]
-    public void FindsLargestArea()
-    {
-        const string input = """
-                             1, 1
-                             1, 6
-                             8, 3
-                             3, 4
-                             5, 5
-                             8, 9
-                             """;
-
-        var finder = new Aoc201806.LargestAreaFinder(input);
-        var area = finder.GetSizeOfLargestArea();
-
-        area.Should().Be(17);
-    }
+    private const string Input = """
+                                 1, 1
+                                 1, 6
+                                 8, 3
+                                 3, 4
+                                 5, 5
+                                 8, 9
+                                 """;
 
     [Fact]
-    public void FindsAreaOfCentralArea()
-    {
-        const string input = """
-                             1, 1
-                             1, 6
-                             8, 3
-                             3, 4
-                             5, 5
-                             8, 9
-                             """;
+    public void FindsLargestArea() => Sut.GetSizeOfLargestArea(Input).Should().Be(17);
 
-        var finder = new Aoc201806.LargestAreaFinder(input);
-        var area = finder.GetSizeOfCentralArea(32);
-
-        area.Should().Be(16);
-    }
+    [Fact]
+    public void FindsAreaOfCentralArea() => Sut.GetSizeOfCentralArea(Input, 32).Should().Be(16);
 }

@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Pzl.Tools.Lists;
 
 namespace Pzl.Tools.Grids.Grids2d;
 
@@ -7,18 +8,22 @@ public record Coord(int X, int Y)
 {
     public string Id => field ??= $"{X},{Y}";
 
+    public Coord((int x, int y) tuple) : this(tuple.x, tuple.y)
+    {
+    }
+    
+    public Coord(int[] values) : this(values[0], values[1])
+    {
+    }
+    
     public int ManhattanDistanceTo(Coord other) => Math.Abs(X - other.X) + Math.Abs(Y - other.Y);
     
     public static Coord Parse(string s)
     {
-        var nums = s.Split(',').Select(int.Parse).ToArray();
-        return new Coord(nums[0], nums[1]);
+        var (x, y) = s.Split(',').Select(int.Parse).ToArray();
+        return new Coord(x, y);
     }
 
     public virtual bool Equals(Coord? other) => X == other?.X && Y == other.Y;
     public override int GetHashCode() => HashCode.Combine(X, Y);
-
-    public static Coord FromArray(int[] coords) => coords.Length == 2
-        ? new Coord(coords[0], coords[1])
-        : throw new ArgumentException("Array has to be to length 2");
 }

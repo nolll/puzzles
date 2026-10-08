@@ -17,10 +17,8 @@ public class Aoc201807Tests : PuzzleTest<Aoc201807>
                              Step F must be finished before step E can begin.
                              """;
 
-        var assembler = new Aoc201807.SleighAssembler(input, 1, 0);
-        var result = assembler.Assemble();
-
-        result.Order.Should().Be("CABDFE");
+        var (order, _) = Sut.Solve(input, 1, 0);
+        order.Should().Be("CABDFE");
     }
 
     [Fact]
@@ -36,10 +34,8 @@ public class Aoc201807Tests : PuzzleTest<Aoc201807>
                              Step F must be finished before step E can begin.
                              """;
 
-        var assembler = new Aoc201807.SleighAssembler(input, 2, 0);
-        var result = assembler.Assemble();
-
-        result.Order.Should().Be("CABFDE");
-        result.Time.Should().Be(15);
+        var (order, time) = Sut.Solve(input, 2, 0);
+        order.Should().Be("CABFDE");
+        time.Should().Be(15);
     }
 }

@@ -16,12 +16,7 @@ public class Aoc201813Tests : PuzzleTest<Aoc201813>
                                \------/   
                              """;
 
-        var detector = new Aoc201813.CollisionDetector(input);
-        detector.RunCarts();
-        var coords = detector.LocationOfFirstCollision;
-
-        var str = $"{coords!.X},{coords.Y}";
-        str.Should().Be("7,3");
+        Sut.Part1(input).Should().Be("7,3");
     }
 
     [Fact]
@@ -36,12 +31,7 @@ public class Aoc201813Tests : PuzzleTest<Aoc201813>
                                |   ^
                                \<->/
                              """;
-
-        var detector = new Aoc201813.CollisionDetector(input);
-        detector.RunCarts();
-        var coords = detector.LocationOfLastCart;
-
-        var str = $"{coords!.X},{coords.Y}";
-        str.Should().Be("6,4");
+    
+        Sut.Part2(input).Should().Be("6,4");
     }
 }

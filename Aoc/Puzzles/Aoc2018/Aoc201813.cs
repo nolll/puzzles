@@ -10,137 +10,118 @@ public class Aoc201813 : AocPuzzle
     [Puzzle("289dd4c6742ccddf660417b3b45acad3")]
     public string Part1(string input)
     {
-        var detector = new CollisionDetector(input);
-        detector.RunCarts();
-        return detector.LocationOfFirstCollision!.Id;
+        var (firstCollision, _) = Solve(input);
+        return firstCollision;
     }
 
     [Puzzle("b4f2a42936a725f796e9f00399495d54")]
     public string Part2(string input)
     {
-        var detector = new CollisionDetector(input);
-        detector.RunCarts();
-        return detector.LocationOfLastCart!.Id;
+        var (_, lastCart) = Solve(input);
+        return lastCart;
     }
 
-    public class CollisionDetector
+    private static (string firstCollision, string lastCart) Solve(string input)
     {
-        private Grid<char> _grid = new();
-        private List<MineCart> _carts = [];
-        public Coord? LocationOfFirstCollision { get; private set; }
-        public Coord? LocationOfLastCart { get; private set; }
-
-        public CollisionDetector(string input)
+        Coord? locationOfFirstCollision = null;
+        var (grid, carts) = BuildGridAndCarts(input);
+        while (true)
         {
-            LocationOfFirstCollision = null;
-            LocationOfLastCart = null;
-            BuildGridAndCarts(input);
-        }
-
-        public void RunCarts()
-        {
-            while (LocationOfLastCart == null)
+            var cartsToMove = carts.OrderBy(o => o.Coords.Y).ThenBy(o => o.Coords.X).ToList();
+            var movedCarts = new List<MineCart>();
+            while (cartsToMove.Count != 0)
             {
-                var cartsToMove = _carts.OrderBy(o => o.Coords.Y).ThenBy(o => o.Coords.X).ToList();
-                var movedCarts = new List<MineCart>();
-                while (cartsToMove.Any())
+                var cart = cartsToMove.First();
+                cartsToMove.RemoveAt(0);
+                grid.MoveTo(cart.Coords);
+                grid.TurnTo(cart.Direction);
+                grid.MoveForward();
+                cart.MoveTo(grid.Coord);
+                var val = grid.ReadValue();
+                cart.Turn(val);
+
+                if (HasCrashed(cartsToMove, movedCarts, grid.Coord))
                 {
-                    var cart = cartsToMove.First();
-                    cartsToMove.RemoveAt(0);
-                    _grid.MoveTo(cart.Coords);
-                    _grid.TurnTo(cart.Direction);
-                    _grid.MoveForward();
-                    cart.MoveTo(_grid.Coord);
-                    var val = _grid.ReadValue();
-                    cart.Turn(val);
-
-                    if (HasCrashed(cartsToMove, movedCarts, _grid.Coord))
-                    {
-                        if (LocationOfFirstCollision == null)
-                            LocationOfFirstCollision = _grid.Coord;
-
-                        RemoveCartAt(cartsToMove, _grid.Coord);
-                        RemoveCartAt(movedCarts, _grid.Coord);
-                    }
-                    else
-                    {
-                        movedCarts.Add(cart);
-                    }
+                    locationOfFirstCollision ??= grid.Coord;
+                    RemoveCartAt(cartsToMove, grid.Coord);
+                    RemoveCartAt(movedCarts, grid.Coord);
                 }
-
-                _carts = movedCarts.Select(o => o).ToList();
-                if (_carts.Count < 2)
+                else
                 {
-                    var lastCart = _carts.FirstOrDefault();
-                    LocationOfLastCart = lastCart?.Coords ?? new Coord(0, 0);
-                    break;
+                    movedCarts.Add(cart);
                 }
             }
+
+            carts = movedCarts.Select(o => o).ToList();
+            if (carts.Count < 2)
+                break;
         }
 
-        private static bool HasCrashed(IEnumerable<MineCart> carts1, IEnumerable<MineCart> carts2, Coord coords)
-        {
-            return carts1.Any(cart => cart.Coords.X == coords.X && cart.Coords.Y == coords.Y)
-                   || carts2.Any(cart => cart.Coords.X == coords.X && cart.Coords.Y == coords.Y);
-        }
-
-        private static void RemoveCartAt(IList<MineCart> carts, Coord coords)
-        {
-            for (var i = 0; i < carts.Count; i++)
-            {
-                var cart = carts[i];
-                if (cart.Coords.X == coords.X && cart.Coords.Y == coords.Y)
-                {
-                    carts.RemoveAt(i);
-                    i--;
-                }
-            }
-        }
-
-        private void BuildGridAndCarts(string input)
-        {
-            var rows = input.Split(LineBreaks.Single);
-            var width = rows.First().Length;
-            var height = rows.Length;
-            _grid = new Grid<char>(width, height);
-            _carts = new List<MineCart>();
-            for (var y = 0; y < height; y++)
-            {
-                var row = rows[y].ToCharArray();
-                for (var x = 0; x < width; x++)
-                {
-                    var c = row[x];
-                    var mapChar = c;
-                    var coords = new Coord(x, y);
-                    if (IsCartChar(c))
-                    {
-                        mapChar = GetMapChar(c);
-                        var direction = GetDirection(c);
-                        var cart = new MineCart(coords, direction);
-                        _carts.Add(cart);
-                    }
-
-                    _grid.WriteValueAt(x, y, mapChar);
-                }
-            }
-        }
-
-        private static bool IsCartChar(char c) =>
-            c is CharConstants.Up or CharConstants.Right or CharConstants.Down or CharConstants.Left;
-
-        private static char GetMapChar(char c) =>
-            c is CharConstants.Up or CharConstants.Down ? CharConstants.Vertical : CharConstants.Horizontal;
-
-        private static GridDirection GetDirection(char c) => c switch
-        {
-            CharConstants.Up => GridDirection.Up,
-            CharConstants.Right => GridDirection.Right,
-            CharConstants.Down => GridDirection.Down,
-            _ => GridDirection.Left
-        };
+        return (locationOfFirstCollision?.Id ?? "", carts.FirstOrDefault()?.Coords.Id ?? "");
     }
-    
-    public static class CharConstants
+
+    private static bool HasCrashed(IEnumerable<MineCart> carts1, IEnumerable<MineCart> carts2, Coord coords) =>
+        carts1.Any(cart => cart.Coords.X == coords.X && cart.Coords.Y == coords.Y) ||
+        carts2.Any(cart => cart.Coords.X == coords.X && cart.Coords.Y == coords.Y);
+
+    private static void RemoveCartAt(IList<MineCart> carts, Coord coords)
+    {
+        for (var i = 0; i < carts.Count; i++)
+        {
+            var cart = carts[i];
+            if (cart.Coords.X != coords.X || cart.Coords.Y != coords.Y)
+                continue;
+
+            carts.RemoveAt(i);
+            i--;
+        }
+    }
+
+    private static (Grid<char>, List<MineCart>) BuildGridAndCarts(string input)
+    {
+        var rows = input.Split(LineBreaks.Single);
+        var width = rows.First().Length;
+        var height = rows.Length;
+        var grid = new Grid<char>(width, height);
+        var carts = new List<MineCart>();
+        for (var y = 0; y < height; y++)
+        {
+            var row = rows[y].ToCharArray();
+            for (var x = 0; x < width; x++)
+            {
+                var c = row[x];
+                var mapChar = c;
+                var coords = new Coord(x, y);
+                if (IsCartChar(c))
+                {
+                    mapChar = GetMapChar(c);
+                    var direction = GetDirection(c);
+                    var cart = new MineCart(coords, direction);
+                    carts.Add(cart);
+                }
+
+                grid.WriteValueAt(x, y, mapChar);
+            }
+        }
+
+        return (grid, carts);
+    }
+
+    private static bool IsCartChar(char c) =>
+        c is CharConstants.Up or CharConstants.Right or CharConstants.Down or CharConstants.Left;
+
+    private static char GetMapChar(char c) =>
+        c is CharConstants.Up or CharConstants.Down ? CharConstants.Vertical : CharConstants.Horizontal;
+
+    private static GridDirection GetDirection(char c) => c switch
+    {
+        CharConstants.Up => GridDirection.Up,
+        CharConstants.Right => GridDirection.Right,
+        CharConstants.Down => GridDirection.Down,
+        _ => GridDirection.Left
+    };
+
+    private static class CharConstants
     {
         public const char Up = '^';
         public const char Right = '>';
@@ -153,24 +134,14 @@ public class Aoc201813 : AocPuzzle
         public const char Plus = '+';
     }
 
-    public class MineCart
+    private class MineCart(Coord coords, GridDirection direction)
     {
-        private MineCartTurn _nextTurn;
+        private MineCartTurn _nextTurn = MineCartTurn.Left;
 
-        public Coord Coords { get; private set; }
-        public GridDirection Direction { get; private set; }
+        public Coord Coords { get; private set; } = coords;
+        public GridDirection Direction { get; private set; } = direction;
 
-        public MineCart(Coord coords, GridDirection direction)
-        {
-            Coords = coords;
-            Direction = direction;
-            _nextTurn = MineCartTurn.Left;
-        }
-
-        public void MoveTo(Coord coords)
-        {
-            Coords = coords;
-        }
+        public void MoveTo(Coord coords) => Coords = coords;
 
         public void Turn(in char c)
         {
@@ -181,54 +152,43 @@ public class Aoc201813 : AocPuzzle
                 _nextTurn = GetNextTurn();
         }
 
-        private bool ShouldChangeDirection(in char c)
+        private static bool ShouldChangeDirection(in char c) =>
+            c is CharConstants.Backslash or CharConstants.Slash or CharConstants.Plus;
+
+        private static bool ShouldChangeNextTurn(in char c) => c == CharConstants.Plus;
+
+        private MineCartTurn GetNextTurn() => _nextTurn switch
         {
-            return c == CharConstants.Backslash || c == CharConstants.Slash || c == CharConstants.Plus;
-        }
+            MineCartTurn.Left => MineCartTurn.Straight,
+            MineCartTurn.Straight => MineCartTurn.Right,
+            _ => MineCartTurn.Left
+        };
 
-        private bool ShouldChangeNextTurn(in char c)
+        private GridDirection GetDirection(in char c) => c switch
         {
-            return c == CharConstants.Plus;
-        }
-
-        private MineCartTurn GetNextTurn()
-        {
-            if (_nextTurn == MineCartTurn.Left)
-                return MineCartTurn.Straight;
-            if (_nextTurn == MineCartTurn.Straight)
-                return MineCartTurn.Right;
-            return MineCartTurn.Left;
-        }
-
-        private GridDirection GetDirection(in char c)
-        {
-            if (c == CharConstants.Backslash)
-                return GetDirectionForBackslash();
-
-            if (c == CharConstants.Slash)
-                return GetDirectionForSlash();
-
-            return GetDirectionForPlus();
-        }
+            CharConstants.Backslash => GetDirectionForBackslash(),
+            CharConstants.Slash => GetDirectionForSlash(),
+            _ => GetDirectionForPlus()
+        };
 
         private GridDirection GetDirectionForBackslash()
         {
-            if (Direction.Equals(GridDirection.Up))
+            if (Direction == GridDirection.Up)
                 return GridDirection.Left;
-            if (Direction.Equals(GridDirection.Right))
+            if (Direction == GridDirection.Right)
                 return GridDirection.Down;
-            if (Direction.Equals(GridDirection.Down))
+            if (Direction == GridDirection.Down)
                 return GridDirection.Right;
             return GridDirection.Up;
         }
 
         private GridDirection GetDirectionForSlash()
         {
-            if (Direction.Equals(GridDirection.Up))
+            if (Direction == GridDirection.Up)
                 return GridDirection.Right;
-            if (Direction.Equals(GridDirection.Right))
+            if (Direction == GridDirection.Right)
                 return GridDirection.Up;
-            if (Direction.Equals(GridDirection.Down))
+            if (Direction == GridDirection.Down)
                 return GridDirection.Left;
             return GridDirection.Down;
         }
@@ -238,20 +198,20 @@ public class Aoc201813 : AocPuzzle
             if (_nextTurn == MineCartTurn.Straight)
                 return Direction;
 
-            if (Direction.Equals(GridDirection.Up))
+            if (Direction == GridDirection.Up)
                 return _nextTurn == MineCartTurn.Left ? GridDirection.Left : GridDirection.Right;
 
-            if (Direction.Equals(GridDirection.Right))
+            if (Direction == GridDirection.Right)
                 return _nextTurn == MineCartTurn.Left ? GridDirection.Up : GridDirection.Down;
 
-            if (Direction.Equals(GridDirection.Down))
+            if (Direction == GridDirection.Down)
                 return _nextTurn == MineCartTurn.Left ? GridDirection.Right : GridDirection.Left;
 
             return _nextTurn == MineCartTurn.Left ? GridDirection.Down : GridDirection.Up;
         }
     }
-    
-    public enum MineCartTurn
+
+    private enum MineCartTurn
     {
         Left,
         Right,

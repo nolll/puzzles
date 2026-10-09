@@ -3,19 +3,8 @@ using System.Diagnostics;
 namespace Pzl.Tools.Grids.Grids2d;
 
 [DebuggerDisplay("{Name}")]
-public class GridDirection : IEquatable<GridDirection>
+public record GridDirection(char Name, int X, int Y)
 {
-    public char Name { get; }
-    public int X { get; }
-    public int Y { get; }
-
-    private GridDirection(char name, int x, int y)
-    {
-        Name = name;
-        X = x;
-        Y = y;
-    }
-
     public static readonly GridDirection Up = new(DirectionName.Up, 0, -1);
     public static readonly GridDirection Right = new(DirectionName.Right, 1, 0);
     public static readonly GridDirection Down = new(DirectionName.Down, 0, 1);
@@ -36,46 +25,23 @@ public class GridDirection : IEquatable<GridDirection>
         DirectionName.Down => Up,
         _ => Right
     };
-    
-    public GridDirection TurnLeft()
+
+    public GridDirection TurnLeft() => Name switch
     {
-        if (Equals(Up))
-            return Left;
-        if (Equals(Right))
-            return Up;
-        if (Equals(Down))
-            return Right;
-        return Down;
-    }
-    
-    public GridDirection TurnRight()
+        DirectionName.Up => Left,
+        DirectionName.Right => Up,
+        DirectionName.Down => Right,
+        _ => Down
+    };
+
+    public GridDirection TurnRight() => Name switch
     {
-        if (Equals(Up))
-            return Right;
-        if (Equals(Right))
-            return Down;
-        if (Equals(Down))
-            return Left;
-        return Up;
-    }
-    
+        DirectionName.Up => Right,
+        DirectionName.Right => Down,
+        DirectionName.Down => Left,
+        _ => Up
+    };
+
     public static readonly List<GridDirection> All = [Up, Right, Down, Left];
-
-    public bool Equals(GridDirection? other)
-    {
-        if (ReferenceEquals(null, other)) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Name == other.Name;
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (ReferenceEquals(null, obj)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != this.GetType()) return false;
-        return Equals((GridDirection)obj);
-    }
-
-    public override int GetHashCode() => Name.GetHashCode();
     public override string ToString() => Name.ToString();
 }

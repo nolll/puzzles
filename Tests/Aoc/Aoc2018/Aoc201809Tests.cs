@@ -10,10 +10,6 @@ public class Aoc201809Tests : PuzzleTest<Aoc201809>
     [InlineData(17, 1104, 2764)]
     [InlineData(21, 6111, 54718)]
     [InlineData(30, 5807, 37305)]
-    public void WinnerScoreIsCorrect(int playerCount, int lastMarbleValue, int expectedScore)
-    {
-        var game = new Aoc201809.MarbleGame(playerCount, lastMarbleValue);
-
-        game.WinnerScore.Should().Be(expectedScore);
-    }
+    public void WinnerScoreIsCorrect(int playerCount, int lastMarbleValue, int expectedScore) => 
+        Sut.Solve(playerCount, lastMarbleValue).Should().Be(expectedScore);
 }

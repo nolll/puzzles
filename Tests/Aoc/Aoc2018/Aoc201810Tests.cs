@@ -52,9 +52,9 @@ public class Aoc201810Tests : PuzzleTest<Aoc201810>
                                 #...#..###
                                 """;
 
-        var finder = new Aoc201810.StarMessageFinder(input, 7);
+        var (starMessage, _, iterations) = Sut.Solve(input, 7);
 
-        finder.StarMessage.Trim().Should().Be(expected);
-        finder.IterationCount.Should().Be(3);
+        starMessage.Should().Be(expected);
+        iterations.Should().Be(3);
     }
 }

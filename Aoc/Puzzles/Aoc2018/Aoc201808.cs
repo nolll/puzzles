@@ -6,84 +6,51 @@ namespace Pzl.Aoc.Puzzles.Aoc2018;
 public class Aoc201808 : AocPuzzle
 {
     [Puzzle("9c669208d829c31c0fdab74511ee9b14")]
-    public int Part1(string input) => new LicenseNumberCalculator(input).MetadataSum;
+    public int Part1(string input) => ReadNode(Parse(input)).MetadataSum;
 
     [Puzzle("67f685a992923369c5d0aca6b658a5d0")]
-    public int Part2(string input) => new LicenseNumberCalculator(input).RootNodeValue;
-    
-    public class LicenseNumberCalculator
+    public int Part2(string input) => ReadNode(Parse(input)).Value;
+
+    private static List<int> Parse(string input) => [.. input.Split(' ').Select(int.Parse)];
+
+    private LicenseNode ReadNode(List<int> numbers)
     {
-        private readonly List<int> _numbers;
+        var nodeCount = ReadAndRemove(numbers);
+        var metadataCount = ReadAndRemove(numbers);
 
-        public int MetadataSum { get; }
-        public int RootNodeValue { get; }
-
-        public LicenseNumberCalculator(string input)
+        var children = new List<LicenseNode>();
+        for (var i = 0; i < nodeCount; i++)
         {
-            _numbers = input.Split(' ').Select(int.Parse).ToList();
-
-            var rootNode = ReadNode();
-            MetadataSum = rootNode.MetadataSum;
-            RootNodeValue = rootNode.Value;
+            children.Add(ReadNode(numbers));
         }
 
-        private LicenseNode ReadNode()
+        var metadata = new List<int>();
+        for (var i = 0; i < metadataCount; i++)
         {
-            var nodeCount = ReadAndRemove();
-            var metadataCount = ReadAndRemove();
-
-            var children = new List<LicenseNode>();
-            for (var i = 0; i < nodeCount; i++)
-            {
-                children.Add(ReadNode());
-            }
-
-            var metadata = new List<int>();
-            for (var i = 0; i < metadataCount; i++)
-            {
-                metadata.Add(ReadAndRemove());
-            }
-
-            return new LicenseNode(children, metadata);
+            metadata.Add(ReadAndRemove(numbers));
         }
 
-        private int ReadAndRemove()
-        {
-            var val = _numbers.First();
-            _numbers.RemoveAt(0);
-            return val;
-        }
+        return new LicenseNode(children, metadata);
     }
-    
-    public class LicenseNode
+
+    private static int ReadAndRemove(List<int> numbers)
     {
-        public IList<LicenseNode> Children { get; }
-        public IList<int> Metadata { get; }
+        var val = numbers.First();
+        numbers.RemoveAt(0);
+        return val;
+    }
+
+    public class LicenseNode(IList<LicenseNode> children, IList<int> metadata)
+    {
+        private IList<LicenseNode> Children { get; } = children;
+        private IList<int> Metadata { get; } = metadata;
         public int MetadataSum => Metadata.Sum() + Children.Sum(o => o.MetadataSum);
-
-        public LicenseNode(IList<LicenseNode> children, IList<int> metadata)
-        {
-            Children = children;
-            Metadata = metadata;
-        }
-
-        public int Value
-        {
-            get
-            {
-                if (Children.Count == 0)
-                    return Metadata.Sum();
-
-                return Metadata.Sum(ChildNodeValue);
-            }
-        }
+        public int Value => Children.Count == 0 ? Metadata.Sum() : Metadata.Sum(ChildNodeValue);
 
         private int ChildNodeValue(int nodeNumber)
         {
             var index = nodeNumber - 1;
-            if (Children.Count > index)
-                return Children[index].Value;
-            return 0;
+            return Children.Count > index ? Children[index].Value : 0;
         }
     }
 }

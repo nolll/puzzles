@@ -54,7 +54,7 @@ public class Aoc201817 : AocPuzzle
                 var current = _openAddresses.First();
                 _grid.MoveTo(current);
                 var valueBelow = _grid.ReadValueAt(_grid.Coord.X, _grid.Coord.Y + 1);
-                if (valueBelow == WallTile || valueBelow == RestingWaterTile)
+                if (valueBelow is WallTile or RestingWaterTile)
                 {
                     _openAddresses.RemoveAt(0);
                     AddToOpenAddresses(new Coord(_grid.Coord.X, _grid.Coord.Y - 1));
@@ -96,12 +96,9 @@ public class Aoc201817 : AocPuzzle
                         _openAddresses.RemoveAt(0);
                         break;
                     }
-
-                    if (value is EmptyTile or RunningWaterTile)
-                    {
-                        if (value == EmptyTile)
-                            _grid.WriteValue(RunningWaterTile);
-                    }
+                    
+                    if (value == EmptyTile)
+                        _grid.WriteValue(RunningWaterTile);
                 }
             }
         }
@@ -124,10 +121,8 @@ public class Aoc201817 : AocPuzzle
                     var yValues = parts[1].Split('=')[1].Split("..").Select(int.Parse).ToList();
                     var startY = yValues[0];
                     var endY = yValues[1];
-                    for (var y = startY; y <= endY; y++)
-                    {
+                    for (var y = startY; y <= endY; y++) 
                         WriteWall(x, y);
-                    }
                 }
                 else
                 {
@@ -135,10 +130,8 @@ public class Aoc201817 : AocPuzzle
                     var xValues = parts[1].Split('=')[1].Split("..").Select(int.Parse).ToList();
                     var startX = xValues[0];
                     var endX = xValues[1];
-                    for (var x = startX; x <= endX; x++)
-                    {
+                    for (var x = startX; x <= endX; x++) 
                         WriteWall(x, y);
-                    }
                 }
             }
         }
@@ -170,21 +163,19 @@ public class Aoc201817 : AocPuzzle
             {
                 _grid.MoveRight();
                 var value = _grid.ReadValue();
-                if (value == EmptyTile || value == RunningWaterTile)
+                if (value is EmptyTile or RunningWaterTile)
                 {
                     if (value == EmptyTile)
                         _grid.WriteValue(RunningWaterTile);
                     var valueBelow = _grid.ReadValueAt(_grid.Coord.X, _grid.Coord.Y + 1);
-                    if (valueBelow == EmptyTile || valueBelow == RunningWaterTile)
+                    if (valueBelow is EmptyTile or RunningWaterTile)
                     {
                         AddToOpenAddresses(_grid.Coord);
                         return true;
                     }
                 }
                 else if (value == WallTile)
-                {
                     return false;
-                }
             }
         }
 
@@ -194,21 +185,20 @@ public class Aoc201817 : AocPuzzle
             {
                 _grid.MoveLeft();
                 var value = _grid.ReadValue();
-                if (value == EmptyTile || value == RunningWaterTile)
+                if (value is EmptyTile or RunningWaterTile)
                 {
                     if (value == EmptyTile)
                         _grid.WriteValue(RunningWaterTile);
+                    
                     var valueBelow = _grid.ReadValueAt(_grid.Coord.X, _grid.Coord.Y + 1);
-                    if (valueBelow == EmptyTile || valueBelow == RunningWaterTile)
+                    if (valueBelow is EmptyTile or RunningWaterTile)
                     {
                         AddToOpenAddresses(_grid.Coord);
                         return true;
                     }
                 }
                 else if (value == WallTile)
-                {
                     return false;
-                }
             }
         }
 

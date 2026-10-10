@@ -6,80 +6,66 @@ namespace Pzl.Aoc.Puzzles.Aoc2018;
 public class Aoc201814 : AocPuzzle
 {
     [Puzzle("0d4f97136a1cd3a6231512be77e5a06d")]
-    public string Part1(string input) => new RecipeGenerator().ScoresAfter(int.Parse(input));
+    public string Part1(string input)
+    {
+        var i = 0;
+        var elf1Pos = 0;
+        var elf2Pos = 1;
+        var scores = InitialScores;
+        var skip = int.Parse(input);
+        var target = skip + 10;
+        while (i < target)
+        {
+            var val1 = scores.ElementAt(elf1Pos);
+            var val2 = scores.ElementAt(elf2Pos);
+            var score = val1 + val2;
+            var hasTwoDigits = score >= 10;
+            scores.Add(hasTwoDigits ? 1 : score);
+            if (hasTwoDigits)
+                scores.Add(score - 10);
+            elf1Pos = GetElfPos(scores, elf1Pos, val1);
+            elf2Pos = GetElfPos(scores, elf2Pos, val2);
+            i++;
+        }
+
+        var result = scores.Skip(skip).Take(10);
+        return string.Concat(result.Select(o => o.ToString()));
+    }
 
     [Puzzle("e266a7be3c46a5ed35b66710ecd16496")]
-    public int Part2(string input) => new RecipeGenerator().RecipeCountBefore(input);
-    
-    public class RecipeGenerator
+    public int Part2(string input)
     {
-        private readonly List<int> _scores;
-        private int _elf1Pos;
-        private int _elf2Pos;
-
-        public RecipeGenerator()
+        var lastEleven = "";
+        var elf1Pos = 0;
+        var elf2Pos = 1;
+        var scores = InitialScores;
+        while (!lastEleven.Contains(input))
         {
-            _scores = new List<int> {3, 7};
-            _elf1Pos = 0;
-            _elf2Pos = 1;
+            var val1 = scores.ElementAt(elf1Pos);
+            var val2 = scores.ElementAt(elf2Pos);
+            var score = val1 + val2;
+            var hasTwoDigits = score >= 10;
+            scores.Add(hasTwoDigits ? 1 : score);
+            if (hasTwoDigits)
+                scores.Add(score - 10);
+
+            lastEleven = string.Concat(scores.TakeLast(11));
+            elf1Pos = GetElfPos(scores, elf1Pos, val1);
+            elf2Pos = GetElfPos(scores, elf2Pos, val2);
         }
 
-        public string ScoresAfter(in int input)
-        {
-            var i = 0;
-            var target = input + 10;
-            while (i < target)
-            {
-                var val1 = _scores.ElementAt(_elf1Pos);
-                var val2 = _scores.ElementAt(_elf2Pos);
-                var score = val1 + val2;
-                var hasTwoDigits = score >= 10;
-                _scores.Add(hasTwoDigits ? 1 : score);
-                if (hasTwoDigits)
-                    _scores.Add(score - 10);
-                _elf1Pos = GetElfPos(_elf1Pos, val1);
-                _elf2Pos = GetElfPos(_elf2Pos, val2);
-                i++;
-            }
-
-            var result = _scores.Skip(input).Take(10);
-            return string.Concat(result.Select(o => o.ToString()));
-        }
-
-        public int RecipeCountBefore(in string input)
-        {
-            var lastEleven = "";
-            while (!lastEleven.Contains(input))
-            {
-                var val1 = _scores.ElementAt(_elf1Pos);
-                var val2 = _scores.ElementAt(_elf2Pos);
-                var score = val1 + val2;
-                var hasTwoDigits = score >= 10;
-                _scores.Add(hasTwoDigits ? 1 : score);
-                if (hasTwoDigits)
-                {
-                    _scores.Add(score - 10);
-                }
-
-                lastEleven = string.Concat(_scores.TakeLast(11));
-                _elf1Pos = GetElfPos(_elf1Pos, val1);
-                _elf2Pos = GetElfPos(_elf2Pos, val2);
-            }
-
-
-            return string.Concat(_scores).IndexOf(input, StringComparison.InvariantCulture);
-        }
-
-        private int GetElfPos(in int currentPos, in int steps)
-        {
-            var newPos = currentPos + steps + 1;
-            var maxPos = _scores.Count - 1;
-            while (newPos > maxPos)
-            {
-                newPos -= _scores.Count;
-            }
-
-            return newPos;
-        }
+        return string.Concat(scores).IndexOf(input, StringComparison.InvariantCulture);
     }
+
+    private static int GetElfPos(List<int> scores, int currentPos, int steps)
+    {
+        var newPos = currentPos + steps + 1;
+        var maxPos = scores.Count - 1;
+        while (newPos > maxPos) 
+            newPos -= scores.Count;
+
+        return newPos;
+    }
+
+    private static List<int> InitialScores => [3, 7];
 }

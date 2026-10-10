@@ -21,4 +21,7 @@ public static class StringExtensions
 
     public static bool IsLower(this string s) => s.All(char.IsLower);
     public static bool IsUpper(this string s) => s.All(char.IsUpper);
+
+    public static string Replace(this string s, string[] search, string replacement) => 
+        search.Aggregate(s, (current, item) => current.Replace(item, replacement));
 }

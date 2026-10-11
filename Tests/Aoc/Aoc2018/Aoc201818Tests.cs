@@ -4,24 +4,19 @@ namespace Tests.Aoc.Aoc2018;
 
 public class Aoc201818Tests : PuzzleTest<Aoc201818>
 {
-    [Fact]
-    public void ResourceValueIsCorrect()
-    {
-        const string input = """
-                             .#.#...|#.
-                             .....#|##|
-                             .|..|...#.
-                             ..|#.....#
-                             #.#|||#|#|
-                             ...#.||...
-                             .|....|...
-                             ||...#|.#|
-                             |.||||..|.
-                             ...#.|..|.
-                             """;
+    private const string Input = """
+                                 .#.#...|#.
+                                 .....#|##|
+                                 .|..|...#.
+                                 ..|#.....#
+                                 #.#|||#|#|
+                                 ...#.||...
+                                 .|....|...
+                                 ||...#|.#|
+                                 |.||||..|.
+                                 ...#.|..|.
+                                 """;
 
-        var collection = new Aoc201818.LumberCollection(input);
-        collection.Run(10);
-        collection.ResourceValue.Should().Be(1147);
-    }
+    [Fact]
+    public void ResourceValueIsCorrect() => Sut.Solve(Input, 10).Should().Be(1147);
 }

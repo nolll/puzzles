@@ -7,94 +7,68 @@ namespace Pzl.Aoc.Puzzles.Aoc2018;
 public class Aoc201818 : AocPuzzle
 {
     [Puzzle("005b4c9579d6ddb74c9a713c7859b558")]
-    public int Part1(string input)
-    {
-        var collection = new LumberCollection(input);
-        collection.Run(10);
-        return collection.ResourceValue;
-    }
+    public int Part1(string input) => Solve(input, 10);
 
     [Puzzle("8ca0e3bcb9441bd0e9d01aa29a11a817")]
-    public int Part2(string input)
+    public int Part2(string input) => Solve(input, 1_000_000_000);
+
+    private const char Open = '.';
+    private const char Wood = '|';
+    private const char Lumber = '#';
+
+    public int Solve(string input, int minutes)
     {
-        var collection2 = new LumberCollection(input);
-        collection2.Run(1_000_000_000);
-        return collection2.ResourceValue;
+        var foundPeriod = false;
+        var grid = GridBuilder.BuildCharGrid(input);
+        var earlierLayouts = new List<string> { grid.Print() };
+        for (var i = 0; i < minutes; i++)
+        {
+            grid = GetNextIteration(grid);
+
+            if (foundPeriod)
+                continue;
+
+            var print = grid.Print();
+            var earlierIndex = earlierLayouts.IndexOf(print);
+            if (earlierIndex != -1)
+            {
+                foundPeriod = true;
+                var period = i - earlierIndex + 1;
+                while (i < minutes) 
+                    i += period;
+
+                i -= period;
+            }
+
+            earlierLayouts.Add(print);
+        }
+
+        var lumberCount = grid.Values.Count(o => o == Lumber);
+        var woodCount = grid.Values.Count(o => o == Wood);
+        return lumberCount * woodCount;
     }
 
-    public class LumberCollection
+    private static Grid<char> GetNextIteration(Grid<char> grid)
     {
-        private const char Open = '.';
-        private const char Wood = '|';
-        private const char Lumber = '#';
-
-        private Grid<char> _grid;
-        private int LumberCount => _grid.Values.Count(o => o == Lumber);
-        private int WoodCount => _grid.Values.Count(o => o == Wood);
-        public int ResourceValue => LumberCount * WoodCount;
-
-        public LumberCollection(string input)
+        var newGrid = new Grid<char>();
+        foreach (var coord in grid.Coords)
         {
-            _grid = GridBuilder.BuildCharGrid(input);
+            newGrid.WriteValueAt(coord, GetNewValue(grid, coord));
         }
 
-        public void Run(int minutes)
+        return newGrid;
+    }
+
+    private static char GetNewValue(Grid<char> grid, Coord coord)
+    {
+        var adjacent = grid.AllAdjacentValuesTo(coord);
+        var currentValue = grid.ReadValueAt(coord);
+        return currentValue switch
         {
-            var foundPeriod = false;
-            var earlierLayouts = new List<string> { _grid.Print() };
-            for (var i = 0; i < minutes; i++)
-            {
-                _grid = GetNextIteration();
-
-                if (!foundPeriod)
-                {
-                    var print = _grid.Print();
-                    var earlierIndex = earlierLayouts.IndexOf(print);
-                    if (earlierIndex != -1)
-                    {
-                        foundPeriod = true;
-                        var period = i - earlierIndex + 1;
-                        while (i < minutes)
-                        {
-                            i += period;
-                        }
-
-                        i -= period;
-                    }
-
-                    earlierLayouts.Add(print);
-                }
-            }
-        }
-
-        private Grid<char> GetNextIteration()
-        {
-            var newGrid = new Grid<char>();
-            for (var y = 0; y < _grid.Height; y++)
-            {
-                for (var x = 0; x < _grid.Width; x++)
-                {
-                    _grid.MoveTo(x, y);
-                    newGrid.MoveTo(x, y);
-                    newGrid.WriteValue(GetNewValue());
-                }
-            }
-
-            return newGrid;
-        }
-
-        private char GetNewValue()
-        {
-            var adjacent = _grid.AllAdjacentValues;
-            var currentValue = _grid.ReadValue();
-            if (currentValue == Open)
-                return adjacent.Count(o => o == Wood) >= 3 ? Wood : currentValue;
-            if (currentValue == Wood)
-                return adjacent.Count(o => o == Lumber) >= 3 ? Lumber : currentValue;
-            if (currentValue == Lumber)
-                return adjacent.Count(o => o == Lumber) >= 1 && adjacent.Count(o => o == Wood) >= 1 ? Lumber : Open;
-
-            return Open;
-        }
+            Open => adjacent.Count(o => o == Wood) >= 3 ? Wood : currentValue,
+            Wood => adjacent.Count(o => o == Lumber) >= 3 ? Lumber : currentValue,
+            Lumber => adjacent.Any(o => o == Lumber) && adjacent.Any(o => o == Wood) ? Lumber : Open,
+            _ => Open
+        };
     }
 }

@@ -26,4 +26,9 @@ public record Coord(int X, int Y)
 
     public virtual bool Equals(Coord? other) => X == other?.X && Y == other.Y;
     public override int GetHashCode() => HashCode.Combine(X, Y);
+    
+    public Coord Up => new(X, Y - 1);
+    public Coord Right => new(X + 1, Y);
+    public Coord Down => new(X, Y + 1);
+    public Coord Left => new(X - 1, Y);
 }

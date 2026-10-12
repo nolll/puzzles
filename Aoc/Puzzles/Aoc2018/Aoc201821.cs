@@ -30,7 +30,7 @@ public class Aoc201821 : AocPuzzle
             {
                 registers[pointerRegister] = pointer;
                 var command = commands[pointer];
-                var operation = _operationsDictionary[command.Operation];
+                var operation = OperationsDictionary[command.Operation];
                 if (operation.Type == OperationType.Eqrr)
                 {
                     var v = registers[command.A];

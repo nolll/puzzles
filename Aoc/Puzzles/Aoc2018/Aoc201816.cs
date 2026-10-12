@@ -21,7 +21,7 @@ public class Aoc201816 : AocPuzzle
         return new Computer().RunTestProgram(section1, section2);
     }
 
-    private class Computer : OpComputer
+    public class Computer : OpComputer
     {
         public long RunTestProgram(string operationsInput, string programInput)
         {
@@ -30,7 +30,7 @@ public class Aoc201816 : AocPuzzle
             var registers = new long[] { 0, 0, 0, 0 };
             foreach (var command in commands)
             {
-                var operation = _operationsDictionary[command.Operation];
+                var operation = OperationsDictionary[command.Operation];
                 operation.Execute(registers, command.A, command.B, command.C);
             }
             return registers[0];
@@ -41,7 +41,7 @@ public class Aoc201816 : AocPuzzle
             var operationMatches = MapMatchingOperations(input);
             var operations = new Dictionary<int, string>();
 
-            while (operations.Count < _operationsDictionary.Values.Count)
+            while (operations.Count < OperationsDictionary.Values.Count)
             {
                 var singles = operationMatches.Where(o => o.Operations.Count == 1);
                 foreach (var match in singles)
@@ -102,6 +102,36 @@ public class Aoc201816 : AocPuzzle
                 name = operationNames[id];
 
             return new OpCommand(name, values[0], values[1], values[2]);
+        }
+        
+        public IList<Operation> GetMatchingOperations(long[] before, long[] after, long a, long b, long c)
+        {
+            var matchingOperations = new List<Operation>();
+            foreach (var operation in OperationsDictionary.Values)
+            {
+                var register = new long[4];
+                before.CopyTo(register, 0);
+                operation.Execute(register, a, b, c);
+                if (IsEqual(register, after))
+                    matchingOperations.Add(operation);
+            }
+
+            return matchingOperations;
+        }
+
+        private static bool IsEqual(IReadOnlyList<long> a, IReadOnlyList<long> b)
+        {
+            if (a.Count != b.Count)
+                return false;
+
+            var index = 0;
+            while (index < a.Count)
+            {
+                if (a[index] != b[index])
+                    return false;
+                index++;
+            }
+            return true;
         }
     }
 }

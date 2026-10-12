@@ -7,98 +7,54 @@ namespace Pzl.Aoc.Puzzles.Aoc2019;
 public class Aoc201906 : AocPuzzle
 {
     [Puzzle("47b7e7a9aac22c8d0dc3f8a1f510498a")]
-    public int Part1(string input) => new OrbitCalculator(input).GetOrbitCount();
+    public int Part1(string input) => BuildDictionary(input).Values.Sum(o => o.OrbitCount);
 
     [Puzzle("b69467aeda98c0291c1767a24409e868")]
-    public int Part2(string input) => new OrbitCalculator(input).GetSantaDistance();
-    
-    public class OrbitCalculator
+    public int Part2(string input)
     {
-        Dictionary<string, Body> d = new();
+        var dictionary = BuildDictionary(input);
+        var youPath = dictionary["YOU"].ParentPath;
+        var santaPath = dictionary["SAN"].ParentPath;
 
-        public OrbitCalculator(string input)
-        {
-            var items = input.Trim().Split(LineBreaks.Single).Select(o => o.Trim());
-            foreach (var item in items)
-            {
-                var parts = item.Split(')');
-                var parentName = parts[0];
-                var childName = parts[1];
-
-                if (!d.TryGetValue(parentName, out var parent))
-                {
-                    parent = new Body(parentName);
-                    d.Add(parentName, parent);
-                }
-
-                if (!d.TryGetValue(childName, out var child))
-                {
-                    child = new Body(childName);
-                    d.Add(childName, child);
-                }
-
-                if (child.Parent == null)
-                {
-                    child.Parent = parent;
-                }
-            }
-        }
-
-        public int GetOrbitCount()
-        {
-            return d.Values.Sum(o => o.OrbitCount);
-        }
-
-        public int GetSantaDistance()
-        {
-            var youPath = d["YOU"].ParentPath;
-            var santaPath = d["SAN"].ParentPath;
-
-            var allNames = $"{youPath}|{santaPath}".Split('|').ToList();
-            var uniqueSingles = new List<string>();
-            foreach (var name in allNames)
-            {
-                if(name == "SAN" || name == "YOU")
-                    continue;
-
-                if (allNames.Count(o => o == name) == 1)
-                {
-                    uniqueSingles.Add(name);
-                }
-            }
-            return uniqueSingles.Count;
-        }
+        return $"{youPath}|{santaPath}".Split('|')
+            .GroupBy(o => o)
+            .Count(o => o.Key != "SAN" && o.Key != "YOU" && o.Count() == 1);
     }
-    
-    public class Body
+
+    private static Dictionary<string, Body> BuildDictionary(string input)
     {
-        private readonly string _name;
-        public Body? Parent { get; set; }
-
-        public Body(string name)
+        var items = input.Trim().Split(LineBreaks.Single).Select(o => o.Trim());
+        var dictionary = new Dictionary<string, Body>();
+        foreach (var item in items)
         {
-            _name = name;
-        }
+            var (parentName, childName) = item.Split(')');
 
-        public int OrbitCount
-        {
-            get
+            if (!dictionary.TryGetValue(parentName, out var parent))
             {
-                if (Parent == null)
-                    return 0;
-                return Parent.OrbitCount + 1;
+                parent = new Body(parentName);
+                dictionary.Add(parentName, parent);
             }
+
+            if (!dictionary.TryGetValue(childName, out var child))
+            {
+                child = new Body(childName);
+                dictionary.Add(childName, child);
+            }
+
+            child.Parent ??= parent;
         }
+
+        return dictionary;
+    }
+
+    public class Body(string name)
+    {
+        public Body? Parent { get; set; }
+        public int OrbitCount => Parent == null ? 0 : Parent.OrbitCount + 1;
 
         public string ParentPath
         {
-            get
-            {
-                if (Parent == null)
-                    return _name;
-
-                return $"{Parent.ParentPath}|{_name}";
-            }
-        }
+            get => Parent == null ? field : $"{Parent.ParentPath}|{field}";
+        } = name;
     }
 }

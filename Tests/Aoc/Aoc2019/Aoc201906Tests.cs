@@ -21,10 +21,7 @@ public class Aoc201906Tests : PuzzleTest<Aoc201906>
                              K)L
                              """;
 
-        var calculator = new Aoc201906.OrbitCalculator(input);
-        var result = calculator.GetOrbitCount();
-
-        result.Should().Be(42);
+        Sut.Part1(input).Should().Be(42);
     }
 
     [Fact]
@@ -46,9 +43,6 @@ public class Aoc201906Tests : PuzzleTest<Aoc201906>
                              I)SAN
                              """;
 
-        var calculator = new Aoc201906.OrbitCalculator(input);
-        var result = calculator.GetSantaDistance();
-
-        result.Should().Be(4);
+        Sut.Part2(input).Should().Be(4);
     }
 }

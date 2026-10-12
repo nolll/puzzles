@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.Computers.IntCode;
 
 namespace Tests.Tools.Computers.IntCode;
@@ -12,7 +11,7 @@ public class IntCodeComputerTests
     [InlineData("1,1,1,4,99,5,6,0,99", 30)]
     public void OutputsAreCorrect(string input, int expectedResult)
     {
-        var computer = new ConsoleComputer(input);
+        var computer = new TestComputer(input);
         computer.Start();
         var result = computer.Result;
         result.Should().Be(expectedResult);

@@ -3,29 +3,16 @@ using Pzl.Tools.Computers.IntCode.Parameters;
 
 namespace Pzl.Tools.Computers.IntCode;
 
-public class IntCodeProcess
+public class IntCodeProcess(IList<long> memory, bool haltAfterInput, Func<long> readInputFunc, Func<long, bool> writeOutputFunc)
 {
-    private readonly IList<long> _memory;
-    private readonly bool _haltAfterInput;
     private int _pointer;
     private int _relativeBase;
 
-    private readonly Func<long, bool> _writeOutputFunc;
-    private readonly Func<long> _readInputFunc;
-    public IList<long> Memory => _memory;
-    private bool _stop = false;
+    public IList<long> Memory { get; } = memory;
 
-    public long Result => ReadFromMemory(0); 
+    private bool _stop;
 
-    public IntCodeProcess(IList<long> memory, bool haltAfterInput, Func<long> readInputFunc, Func<long, bool> writeOutputFunc)
-    {
-        _memory = memory;
-        _haltAfterInput = haltAfterInput;
-        _relativeBase = 0;
-        _pointer = 0;
-        _readInputFunc = readInputFunc;
-        _writeOutputFunc = writeOutputFunc;
-    }
+    public long Result => ReadFromMemory(0);
 
     public void Stop()
     {
@@ -34,9 +21,9 @@ public class IntCodeProcess
 
     public long Run()
     {
-        while (_pointer < _memory.Count)
+        while (_pointer < Memory.Count)
         {
-            var instruction = InstructionParser.Parse(_memory, _pointer, _relativeBase);
+            var instruction = InstructionParser.Parse(Memory, _pointer, _relativeBase);
 
             if (_stop || instruction is null || instruction.Type == InstructionType.Halt)
                 break;
@@ -50,7 +37,7 @@ public class IntCodeProcess
             if (instruction.Type == InstructionType.Input)
             {
                 PerformInput(instruction);
-                if (_haltAfterInput)
+                if (haltAfterInput)
                     break;
             }
 
@@ -84,13 +71,12 @@ public class IntCodeProcess
     {
         var storedValue = ReadFromMemory(p.Position);
 
-        if (p.Type == ParameterType.Immediate)
-            return storedValue;
-
-        if (p.Type == ParameterType.Position)
-            return ReadFromMemory((int)storedValue);
-
-        return ReadFromMemory((int)storedValue + _relativeBase);
+        return p.Type switch
+        {
+            ParameterType.Immediate => storedValue,
+            ParameterType.Position => ReadFromMemory((int)storedValue),
+            _ => ReadFromMemory((int)storedValue + _relativeBase)
+        };
     }
 
     private long ReadTargetPosition(Parameter p)
@@ -125,7 +111,7 @@ public class IntCodeProcess
 
     private void PerformInput(Instruction instruction)
     {
-        var input = _readInputFunc();
+        var input = readInputFunc();
         var target = ReadTargetPosition(instruction.Parameters[0]);
 
         WriteToMemory((int) target, input);
@@ -137,7 +123,7 @@ public class IntCodeProcess
         var a = ReadParam(instruction.Parameters[0]);
 
         IncrementPointer(instruction);
-        return _writeOutputFunc(a);
+        return writeOutputFunc(a);
     }
 
     private void PerformJumpIfTrue(Instruction instruction)
@@ -192,23 +178,23 @@ public class IntCodeProcess
 
     private long ReadFromMemory(int pos)
     {
-        if (pos >= _memory.Count)
+        if (pos >= Memory.Count)
             return 0;
-        return _memory[pos];
+        return Memory[pos];
     }
 
     private void WriteToMemory(int pos, long val)
     {
-        if (pos >= _memory.Count)
+        if (pos >= Memory.Count)
             IncreaseMemory(pos);
-        _memory[pos] = val;
+        Memory[pos] = val;
     }
 
     private void IncreaseMemory(int pos)
     {
-        while(pos >= _memory.Count)
+        while(pos >= Memory.Count)
         {
-            _memory.Add(0);
+            Memory.Add(0);
         }
     }
 

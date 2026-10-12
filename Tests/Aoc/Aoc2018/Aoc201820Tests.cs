@@ -2,7 +2,7 @@ using Pzl.Aoc.Puzzles.Aoc2018;
 
 namespace Tests.Aoc.Aoc2018;
 
-public class Aoc201820Tests : PuzzleTest<Aoc201818>
+public class Aoc201820Tests : PuzzleTest<Aoc201820>
 {
     [Theory]
     [InlineData("^WNE$", 3)]
@@ -10,10 +10,5 @@ public class Aoc201820Tests : PuzzleTest<Aoc201818>
     [InlineData("^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$", 18)]
     [InlineData("^ESSWWN(E|NNENN(EESS(WNSE|)SSS|WWWSSSSE(SW|NNNE)))$", 23)]
     [InlineData("^WSSEESWWWNW(S|NENNEEEENN(ESSSSW(NWSW|SSEN)|WSWWN(E|WWS(E|SS))))$", 31)]
-    public void FindRoomThatRequiresMostDoors(string regex, int doorCount)
-    {
-        var navigator = new Aoc201820.RegularMapNavigator(regex);
-
-        navigator.MostDoors.Should().Be(doorCount);
-    }
+    public void FindRoomThatRequiresMostDoors(string regex, int doorCount) => Sut.Part1(regex).Should().Be(doorCount);
 }

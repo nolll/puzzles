@@ -18,10 +18,7 @@ public class Aoc201825Tests : PuzzleTest<Aoc201825>
                              12,0,0,0
                              """;
 
-        var finder = new Aoc201825.ConstellationFinder(input);
-        var constellationCount = finder.Find();
-
-        constellationCount.Should().Be(2);
+        Sut.Part1(input).Should().Be(2);
     }
 
     [Fact]
@@ -39,11 +36,8 @@ public class Aoc201825Tests : PuzzleTest<Aoc201825>
                              0,2,1,-2
                              3,0,0,0
                              """;
-
-        var finder = new Aoc201825.ConstellationFinder(input);
-        var constellationCount = finder.Find();
-
-        constellationCount.Should().Be(4);
+        
+        Sut.Part1(input).Should().Be(4);
     }
 
     [Fact]
@@ -62,10 +56,7 @@ public class Aoc201825Tests : PuzzleTest<Aoc201825>
                              3,2,0,2
                              """;
 
-        var finder = new Aoc201825.ConstellationFinder(input);
-        var constellationCount = finder.Find();
-
-        constellationCount.Should().Be(3);
+        Sut.Part1(input).Should().Be(3);
     }
 
     [Fact]
@@ -84,9 +75,6 @@ public class Aoc201825Tests : PuzzleTest<Aoc201825>
                              -1,-2,0,-2
                              """;
 
-        var finder = new Aoc201825.ConstellationFinder(input);
-        var constellationCount = finder.Find();
-
-        constellationCount.Should().Be(8);
+        Sut.Part1(input).Should().Be(8);
     }
 }

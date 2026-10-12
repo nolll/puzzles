@@ -19,10 +19,22 @@ public class Aoc201823Tests : PuzzleTest<Aoc201823>
                              pos=<1,3,1>, r=1
                              """;
 
-        var formation = new Aoc201823.NanobotFormation(input);
-        var botCount = formation.GetBotsInRangeOfStrongestBot().Count;
+        Sut.Part1(input).Should().Be(7);
+    }
+    
+    [Fact]
+    public void FindDistanceToBestCoords()
+    {
+        const string input = """
+                             pos=<10,12,12>, r=2
+                             pos=<12,14,12>, r=2
+                             pos=<16,12,12>, r=4
+                             pos=<14,14,14>, r=6
+                             pos=<50,50,50>, r=200
+                             pos=<10,10,10>, r=5
+                             """;
 
-        botCount.Should().Be(7);
+        Sut.Part2(input).Should().Be(36);
     }
 
     [Fact]
@@ -320,23 +332,5 @@ public class Aoc201823Tests : PuzzleTest<Aoc201823>
         subCubes[7].Max.X.Should().Be(0);
         subCubes[7].Max.Y.Should().Be(0);
         subCubes[7].Max.Z.Should().Be(0);
-    }
-
-    [Fact]
-    public void FindDistanceToBestCoords()
-    {
-        const string input = """
-                             pos=<10,12,12>, r=2
-                             pos=<12,14,12>, r=2
-                             pos=<16,12,12>, r=4
-                             pos=<14,14,14>, r=6
-                             pos=<50,50,50>, r=200
-                             pos=<10,10,10>, r=5
-                             """;
-
-        var formation = new Aoc201823.NanobotFormation(input);
-        var distance = formation.FindManhattanDistanceToBestCoords();
-
-        distance.Should().Be(36);
     }
 }

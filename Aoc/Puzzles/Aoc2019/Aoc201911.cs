@@ -35,7 +35,13 @@ public class Aoc201911 : AocPuzzle
         if (startOnWhitePanel)
             PaintWhite(panels);
 
-        var computer = new IntCodeComputer(program, () => panels.ReadValue(), output =>
+        var computer = new IntCodeComputer(program, () => panels.ReadValue(), WriteOutput);
+
+        computer.Start();
+
+        return (paintCounts, panels);
+
+        bool WriteOutput(long output)
         {
             if (mode == PaintMode.Paint)
             {
@@ -54,11 +60,7 @@ public class Aoc201911 : AocPuzzle
             }
 
             return true;
-        });
-
-        computer.Start();
-
-        return (paintCounts, panels);
+        }
     }
 
     private static void Paint(Grid<int> panels, int color) => panels.WriteValue(color);

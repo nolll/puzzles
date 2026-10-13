@@ -10,115 +10,96 @@ public class Aoc201913 : AocPuzzle
     [Puzzle("65621a57e5ba6bbdc37540f0d2320098")]
     public int Part1(string input)
     {
-        var arcade = new Arcade(input);
-        arcade.Play();
-
-        return arcade.NumberOfBlockTiles;
+        var (count, _) = Play(input);
+        return count;
     }
 
     [Puzzle("6c32f2b8d2a26180534728ccb213e116")]
     public int Part2(string input)
     {
-        var arcade = new Arcade(input);
-        arcade.Play(2);
-
-        return arcade.Score;
+        var (_, score) = Play(input, 2);
+        return score;
     }
-    
-    public class Arcade
+
+    private static (int, int) Play(string input, int? startValue = null)
     {
-        private readonly IntCodeComputer _computer;
-        private readonly Grid<char> _screen;
-        private ArcadeMode _mode;
-        private int _x;
-        private int _y;
-        private int _ballX;
-        private int _paddleX;
+        var mode = ArcadeMode.X;
+        var score = 0;
+        var x = 0;
+        var y = 0;
+        var ballX = 0;
+        var paddleX = 0;
+        var screen = new Grid<char>();
+        var computer = new IntCodeComputer(input, ReadInput, WriteOutput);
 
-        public int Score { get; private set; } = 0;
-
-        public Arcade(string program)
+        long ReadInput()
         {
-            _mode = ArcadeMode.X;
-
-            _screen = new Grid<char>();
-            _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
-        }
-
-        public void Play(int? startValue = null)
-        {
-            if(startValue != null)
-                _computer.SetMemory(0, startValue.Value);
-            _computer.Start();
-        }
-
-        public int NumberOfBlockTiles => _screen.Values.Count(o => o == ArcadeTiles.Block);
-
-        private long ReadInput()
-        {
-            if (_ballX < _paddleX)
+            if (ballX < paddleX)
                 return -1;
-            if (_ballX > _paddleX)
+            if (ballX > paddleX)
                 return 1;
             return 0;
         }
 
-        private bool WriteOutput(long output)
+        bool WriteOutput(long output)
         {
-            var value = (int) output;
-            if (_mode == ArcadeMode.X)
+            var value = (int)output;
+            if (mode == ArcadeMode.X)
             {
-                _x = value;
-                _mode = ArcadeMode.Y;
+                x = value;
+                mode = ArcadeMode.Y;
                 return true;
             }
 
-            if (_mode == ArcadeMode.Y)
+            if (mode == ArcadeMode.Y)
             {
-                _y = value;
-                _mode = ArcadeMode.Type;
+                y = value;
+                mode = ArcadeMode.Type;
                 return true;
             }
 
-            if (_x == -1 && _y == 0)
+            if (x == -1 && y == 0)
             {
-                Score = value;
+                score = value;
             }
             else
             {
-                WriteToScreen(_x, _y, value);
+                WriteToScreen(screen, x, y, value);
                 var tile = ArcadeTiles.Chars[value];
                 if (tile == ArcadeTiles.Ball)
-                {
-                    _ballX = _x;
-                }
+                    ballX = x;
 
                 if (tile == ArcadeTiles.Paddle)
-                {
-                    _paddleX = _x;
-                }
+                    paddleX = x;
             }
 
-            _mode = ArcadeMode.X;
+            mode = ArcadeMode.X;
 
             return true;
         }
 
-        private void WriteToScreen(int x, int y, int tile)
-        {
-            _screen.MoveTo(new Coord(x, y));
-            _screen.WriteValue(ArcadeTiles.Chars[tile]);
-        }
+        if (startValue != null)
+            computer.SetMemory(0, startValue.Value);
+        computer.Start();
+
+        var numberOfBlockTiles = screen.Values.Count(o => o == ArcadeTiles.Block);
+        return (numberOfBlockTiles, score);
     }
-    
-    public enum ArcadeMode
+
+    private static void WriteToScreen(Grid<char> screen, int x, int y, int tile)
+    {
+        screen.MoveTo(new Coord(x, y));
+        screen.WriteValue(ArcadeTiles.Chars[tile]);
+    }
+
+    private enum ArcadeMode
     {
         X,
         Y,
         Type
     }
-    
-    public static class ArcadeTiles
+
+    private static class ArcadeTiles
     {
         public const char Empty = ' ';
         public const char Wall = '#';

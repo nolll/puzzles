@@ -42,6 +42,4 @@ public class Aoc201912Tests : PuzzleTest<Aoc201912>
 
         Sut.Part2(input).Should().Be(4686774924);
     }
-    
-    private static Aoc201912 Sut => new();
 }

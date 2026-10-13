@@ -36,6 +36,4 @@ public class Aoc202114Tests : PuzzleTest<Aoc202114>
                                  CC -> N
                                  CN -> C
                                  """;
-
-    public Aoc202114 Sut => new();
 }

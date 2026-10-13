@@ -9,6 +9,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2019;
 [Name("Space Police")]
 public class Aoc201911 : AocPuzzle
 {
+    private const int ShipSize = 100;
+
     [Puzzle("450a7268b37892570104286b9fd8e5f2")]
     public int Part1(string input)
     {
@@ -24,11 +26,11 @@ public class Aoc201911 : AocPuzzle
         return OcrSmallFont.ReadString(printout);
     }
 
-    private static (Grid<int> paintCounts, Grid<int> panels) Paint(string program, bool startOnWhitePanel, int shipWidth = 100, int shipHeight = 100)
+    private static (Grid<int> paintCounts, Grid<int> panels) Paint(string program, bool startOnWhitePanel)
     {
         var mode = PaintMode.Paint;
-        var panels = new Grid<int>(shipWidth, shipHeight);
-        var paintCounts = new Grid<int>(shipWidth, shipHeight);
+        var panels = new Grid<int>(ShipSize, ShipSize);
+        var paintCounts = new Grid<int>(ShipSize, ShipSize);
 
         if (startOnWhitePanel)
             PaintWhite(panels);

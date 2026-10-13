@@ -21,6 +21,4 @@ public class Aoc202002Tests : PuzzleTest<Aoc202002>
     [InlineData("1-3 b: cdefg")]
     [InlineData("2-9 c: ccccccccc")]
     public void PasswordIsInvalidAccordingToRuleTwo(string policy) => Sut.IsValidAccordingToRuleTwo(policy).Should().BeFalse();
-
-    private static Aoc202002 Sut => new();
 }

@@ -16,7 +16,7 @@ public class Aoc201912 : AocPuzzle
 
     private static int TotalEnergy(IList<Moon> moons) => moons.Sum(o => o.Energy);
 
-    private int Run(Moon[] moons, int maxIterations)
+    private static int Run(Moon[] moons, int maxIterations)
     {
         var i = 0;
         while (i < maxIterations)
@@ -33,7 +33,7 @@ public class Aoc201912 : AocPuzzle
         return TotalEnergy(moons);
     }
 
-    private long RunUntilRepeat(Moon[] moons)
+    private static long RunUntilRepeat(Moon[] moons)
     {
         var iterations = Dimension.Dimensions.Select(_ => (long)0).ToArray();
         foreach (var dimension in Dimension.Dimensions)
@@ -49,15 +49,15 @@ public class Aoc201912 : AocPuzzle
         return MathTools.Lcm(iterations);
     }
 
-    private bool IsDone(Moon[] moons, int dimension) => moons.All(o => o.IsBackAtStart(dimension));
+    private static bool IsDone(Moon[] moons, int dimension) => moons.All(o => o.IsBackAtStart(dimension));
 
-    private void Move(Moon[] moons, int dimension)
+    private static void Move(Moon[] moons, int dimension)
     {
         foreach (var moon in moons)
             moon.Move(dimension);
     }
 
-    private void UpdateVelocities(Moon[] moons, int dimension)
+    private static void UpdateVelocities(Moon[] moons, int dimension)
     {
         for (var i = 0; i < moons.Length; i++)
         {
@@ -69,7 +69,7 @@ public class Aoc201912 : AocPuzzle
         }
     }
 
-    private void UpdateVelocity(int dimension, Moon moon, Moon otherMoon)
+    private static void UpdateVelocity(int dimension, Moon moon, Moon otherMoon)
     {
         var change = GetVelocityChange(moon.Position[dimension], otherMoon.Position[dimension]);
         moon.ChangeVelocity(dimension, moon.Velocity[dimension] + change);

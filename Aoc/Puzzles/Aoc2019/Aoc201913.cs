@@ -64,7 +64,7 @@ public class Aoc201913 : AocPuzzle
             }
             else
             {
-                WriteToScreen(screen, x, y, value);
+                screen.WriteValueAt(new Coord(x, y), ArcadeTiles.Chars[value]);
                 var tile = ArcadeTiles.Chars[value];
                 if (tile == ArcadeTiles.Ball)
                     ballX = x;
@@ -86,12 +86,6 @@ public class Aoc201913 : AocPuzzle
         return (numberOfBlockTiles, score);
     }
 
-    private static void WriteToScreen(Grid<char> screen, int x, int y, int tile)
-    {
-        screen.MoveTo(new Coord(x, y));
-        screen.WriteValue(ArcadeTiles.Chars[tile]);
-    }
-
     private enum ArcadeMode
     {
         X,
@@ -101,12 +95,10 @@ public class Aoc201913 : AocPuzzle
 
     private static class ArcadeTiles
     {
-        public const char Empty = ' ';
-        public const char Wall = '#';
         public const char Block = '_';
         public const char Paddle = '=';
         public const char Ball = 'o';
 
-        public static readonly char[] Chars = [Empty, Wall, Block, Paddle, Ball];
+        public static readonly char[] Chars = [' ', '#', Block, Paddle, Ball];
     }
 }

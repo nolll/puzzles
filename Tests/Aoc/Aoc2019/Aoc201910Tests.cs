@@ -15,12 +15,11 @@ public class Aoc201910Tests : PuzzleTest<Aoc201910>
                            ...##
                            """;
 
-        var detector = new Aoc201910.AsteroidDetector();
-        var result = detector.Detect(map.Trim());
+        var (asteroid, rayCount) = Sut.Detect(map);
 
-        result.BestAsteroid.X.Should().Be(3);
-        result.BestAsteroid.Y.Should().Be(4);
-        result.RayCount.Should().Be(8);
+        asteroid.X.Should().Be(3);
+        asteroid.Y.Should().Be(4);
+        rayCount.Should().Be(8);
     }
 
     [Fact]
@@ -38,13 +37,12 @@ public class Aoc201910Tests : PuzzleTest<Aoc201910>
                            ##...#..#.
                            .#....####
                            """;
+        
+        var (asteroid, rayCount) = Sut.Detect(map);
 
-        var detector = new Aoc201910.AsteroidDetector();
-        var result = detector.Detect(map.Trim());
-
-        result.BestAsteroid.X.Should().Be(5);
-        result.BestAsteroid.Y.Should().Be(8);
-        result.RayCount.Should().Be(33);
+        asteroid.X.Should().Be(5);
+        asteroid.Y.Should().Be(8);
+        rayCount.Should().Be(33);
     }
 
     [Fact]
@@ -62,13 +60,12 @@ public class Aoc201910Tests : PuzzleTest<Aoc201910>
                            ......#...
                            .####.###.
                            """;
+        
+        var (asteroid, rayCount) = Sut.Detect(map);
 
-        var detector = new Aoc201910.AsteroidDetector();
-        var result = detector.Detect(map.Trim());
-
-        result.BestAsteroid.X.Should().Be(1);
-        result.BestAsteroid.Y.Should().Be(2);
-        result.RayCount.Should().Be(35);
+        asteroid.X.Should().Be(1);
+        asteroid.Y.Should().Be(2);
+        rayCount.Should().Be(35);
     }
 
     [Fact]
@@ -86,13 +83,12 @@ public class Aoc201910Tests : PuzzleTest<Aoc201910>
                            .##...##.#
                            .....#.#..
                            """;
+        
+        var (asteroid, rayCount) = Sut.Detect(map);
 
-        var detector = new Aoc201910.AsteroidDetector();
-        var result = detector.Detect(map.Trim());
-
-        result.BestAsteroid.X.Should().Be(6);
-        result.BestAsteroid.Y.Should().Be(3);
-        result.RayCount.Should().Be(41);
+        asteroid.X.Should().Be(6);
+        asteroid.Y.Should().Be(3);
+        rayCount.Should().Be(41);
     }
 
     [Fact]
@@ -120,13 +116,12 @@ public class Aoc201910Tests : PuzzleTest<Aoc201910>
                            #.#.#.#####.####.###
                            ###.##.####.##.#..##
                            """;
+        
+        var (asteroid, rayCount) = Sut.Detect(map);
 
-        var detector = new Aoc201910.AsteroidDetector();
-        var result = detector.Detect(map.Trim());
-
-        result.BestAsteroid.X.Should().Be(11);
-        result.BestAsteroid.Y.Should().Be(13);
-        result.RayCount.Should().Be(210);
+        asteroid.X.Should().Be(11);
+        asteroid.Y.Should().Be(13);
+        rayCount.Should().Be(210);
     }
 
     [Fact]
@@ -139,12 +134,11 @@ public class Aoc201910Tests : PuzzleTest<Aoc201910>
                            ..#.....X...###..
                            ..#.#.....#....##
                            """;
+        
+        var (asteroid, _) = Sut.Detect(map);
 
-        var detector = new Aoc201910.AsteroidDetector();
-        var result = detector.Detect(map.Trim());
-
-        result.BestAsteroid.X.Should().Be(8);
-        result.BestAsteroid.Y.Should().Be(3);
+        asteroid.X.Should().Be(8);
+        asteroid.Y.Should().Be(3);
     }
 
     [Fact]
@@ -158,17 +152,16 @@ public class Aoc201910Tests : PuzzleTest<Aoc201910>
                            ..6.7.....8....90
                            """;
 
-        var detector = new Aoc201910.AsteroidVaporizer();
-        var result = detector.Vaporize(map.Trim());
+        var result = Sut.Vaporize(map);
 
-        result.DestroyedAsteroids[0].Name.Should().Be('L');
-        result.DestroyedAsteroids[1].Name.Should().Be('E');
-        result.DestroyedAsteroids[2].Name.Should().Be('M');
-        result.DestroyedAsteroids[3].Name.Should().Be('F');
-        result.DestroyedAsteroids[4].Name.Should().Be('V');
-        result.DestroyedAsteroids[5].Name.Should().Be('O');
-        result.DestroyedAsteroids[6].Name.Should().Be('P');
-        result.DestroyedAsteroids[7].Name.Should().Be('W');
-        result.DestroyedAsteroids[8].Name.Should().Be('Q');
+        result[0].Name.Should().Be('L');
+        result[1].Name.Should().Be('E');
+        result[2].Name.Should().Be('M');
+        result[3].Name.Should().Be('F');
+        result[4].Name.Should().Be('V');
+        result[5].Name.Should().Be('O');
+        result[6].Name.Should().Be('P');
+        result[7].Name.Should().Be('W');
+        result[8].Name.Should().Be('Q');
     }
 }

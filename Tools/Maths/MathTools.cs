@@ -5,6 +5,8 @@ namespace Pzl.Tools.Maths;
 
 public static class MathTools
 {
+    private const double DoubleTolerance = 0.00001;
+    
     public static long Gcd(long a, long b) => b == 0 ? a : Gcd(b, a % b);
     public static long Lcm(params long[] numbers) => Lcm((IEnumerable<long>)numbers);
     public static long Lcm(IEnumerable<long> numbers) => numbers.Aggregate(Lcm);
@@ -94,4 +96,6 @@ public static class MathTools
     {
         public override string ToString() => $"{Numerator}/{Denominator}";
     }
+
+    public static bool PrettyEqual(double a, double b) => Math.Abs(a - b) < DoubleTolerance;
 }

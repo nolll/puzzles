@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Maths;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023;
@@ -168,8 +169,6 @@ public class Aoc202324 : AocPuzzle
     
     public class Hailstone
     {
-        public static double DoubleTolerance = 0.00001;
-    
         public long Id { get; }
     
         public Double? Slope => Vx == 0 ? null : (double)Vy / Vx;
@@ -200,7 +199,7 @@ public class Aoc202324 : AocPuzzle
     
         public Intersection? IntersectsWith(Hailstone other)
         {
-            if (Slope is null || other.Slope is null || Math.Abs(Slope.Value - other.Slope.Value) < DoubleTolerance)
+            if (Slope is null || other.Slope is null || MathTools.PrettyEqual(Slope.Value, other.Slope.Value))
                 return null;
 
             var slope = Slope.Value;

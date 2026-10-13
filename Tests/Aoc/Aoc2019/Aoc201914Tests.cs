@@ -15,12 +15,8 @@ public class Aoc201914Tests : PuzzleTest<Aoc201914>
                              7 A, 1 D => 1 E
                              7 A, 1 E => 1 FUEL
                              """;
-
-        var reactor = new Aoc201914.NanoReactor(input);
-        reactor.Run();
-        var result = reactor.RequiredOreForOneFuel;
-
-        result.Should().Be(31);
+        
+        Sut.Part1(input).Should().Be(31);
     }
 
     [Fact]
@@ -36,11 +32,7 @@ public class Aoc201914Tests : PuzzleTest<Aoc201914>
                              2 AB, 3 BC, 4 CA => 1 FUEL
                              """;
 
-        var reactor = new Aoc201914.NanoReactor(input);
-        reactor.Run();
-        var result = reactor.RequiredOreForOneFuel;
-
-        result.Should().Be(165);
+        Sut.Part1(input).Should().Be(165);
     }
 
     [Fact]
@@ -58,11 +50,7 @@ public class Aoc201914Tests : PuzzleTest<Aoc201914>
                              3 DCFZ, 7 NZVS, 5 HKGWZ, 10 PSHF => 8 KHKGT
                              """;
 
-        var reactor = new Aoc201914.NanoReactor(input);
-        reactor.Run();
-        var result = reactor.RequiredOreForOneFuel;
-
-        result.Should().Be(13312);
+        Sut.Part1(input).Should().Be(13312);
     }
 
     [Fact]
@@ -83,11 +71,7 @@ public class Aoc201914Tests : PuzzleTest<Aoc201914>
                              176 ORE => 6 VJHF
                              """;
 
-        var reactor = new Aoc201914.NanoReactor(input);
-        reactor.Run();
-        var result = reactor.RequiredOreForOneFuel;
-
-        result.Should().Be(180697);
+        Sut.Part1(input).Should().Be(180697);
     }
 
     [Fact]
@@ -113,11 +97,7 @@ public class Aoc201914Tests : PuzzleTest<Aoc201914>
                              5 BHXH, 4 VRPVC => 5 LTCX
                              """;
 
-        var reactor = new Aoc201914.NanoReactor(input);
-        reactor.Run();
-        var result = reactor.RequiredOreForOneFuel;
-
-        result.Should().Be(2210736);
+        Sut.Part1(input).Should().Be(2210736);
     }
 
     [Fact]
@@ -135,11 +115,7 @@ public class Aoc201914Tests : PuzzleTest<Aoc201914>
                              3 DCFZ, 7 NZVS, 5 HKGWZ, 10 PSHF => 8 KHKGT
                              """;
 
-        var reactor = new Aoc201914.NanoReactor(input);
-        reactor.Run();
-        var fuel = reactor.FuelFromOneTrillionOre;
-
-        fuel.Should().Be(82892753);
+        Sut.Part2(input).Should().Be(82892753);
     }
 
     [Fact]
@@ -159,12 +135,8 @@ public class Aoc201914Tests : PuzzleTest<Aoc201914>
                              1 VJHF, 6 MNCFX => 4 RFSQX
                              176 ORE => 6 VJHF
                              """;
-
-        var reactor = new Aoc201914.NanoReactor(input);
-        reactor.Run();
-        var fuel = reactor.FuelFromOneTrillionOre;
-
-        fuel.Should().Be(5586022);
+        
+        Sut.Part2(input).Should().Be(5586022);
     }
 
     [Fact]
@@ -189,11 +161,7 @@ public class Aoc201914Tests : PuzzleTest<Aoc201914>
                              7 XCVML => 6 RJRHP
                              5 BHXH, 4 VRPVC => 5 LTCX
                              """;
-
-        var reactor = new Aoc201914.NanoReactor(input);
-        reactor.Run();
-        var fuel = reactor.FuelFromOneTrillionOre;
-
-        fuel.Should().Be(460664);
+        
+        Sut.Part2(input).Should().Be(460664);
     }
 }

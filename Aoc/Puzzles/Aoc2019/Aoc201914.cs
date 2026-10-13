@@ -9,141 +9,116 @@ public class Aoc201914 : AocPuzzle
     [Puzzle("4f7b51a9155bea7c24bbb1d4757e4bf1")]
     public long Part1(string input)
     {
-        var reactor = new NanoReactor(input);
-        reactor.Run();
-        return reactor.RequiredOreForOneFuel;
+        var (requiredOreForOneFuel, _) = Solve(input);
+        return requiredOreForOneFuel;
     }
 
     [Puzzle("d2bf7b83647cf534681bd96e1a53db40")]
     public long Part2(string input)
     {
-        var reactor = new NanoReactor(input);
-        reactor.Run();
-        return reactor.FuelFromOneTrillionOre;
+        var (_, fuelCount) = Solve(input);
+        return fuelCount;
     }
 
-    public class NanoReactor
+    private (Dictionary<string, long> _storage, Dictionary<string, Reaction> _recipes) Init(string input)
     {
-        private readonly IList<Reaction> _reactions;
-        private readonly IDictionary<string, long> _storage;
-        private readonly IDictionary<string, Reaction> _recipes;
-        private long _fuelCount;
+        var reactions = Parse(input);
+        var storage = new Dictionary<string, long>();
+        var recipes = new Dictionary<string, Reaction>();
 
-        public long RequiredOreForOneFuel { get; private set; }
-        public long FuelFromOneTrillionOre { get; private set; }
-
-        public NanoReactor(string input)
+        storage.Add("ORE", 1_000_000_000_000);
+        foreach (var reaction in reactions)
         {
-            _reactions = new ReactionParser().Parse(input);
-            _storage = new Dictionary<string, long>();
-            _recipes = new Dictionary<string, Reaction>();
-
-            _storage.Add("ORE", 1_000_000_000_000);
-            foreach (var reaction in _reactions)
-            {
-                _recipes.Add(reaction.Output.Name, reaction);
-                _storage.Add(reaction.Output.Name, 0);
-            }
+            recipes.Add(reaction.Output.Name, reaction);
+            storage.Add(reaction.Output.Name, 0);
         }
 
-        public void Run()
-        {
-            MakeFuel(1);
-            const long oreLimit = 1_000_000_000_000;
-            RequiredOreForOneFuel = oreLimit - _storage["ORE"];
-            long batchSize = 1;
-
-            while (_storage["ORE"] > 0 && batchSize > 0)
-            {
-                batchSize = (long)Math.Floor((double)_storage["ORE"] / RequiredOreForOneFuel);
-                MakeFuel(batchSize);
-            }
-
-            while (_storage["ORE"] > 0)
-            {
-                try
-                {
-                    MakeFuel(1);
-                }
-                catch
-                {
-                    break;
-                }
-            }
-
-            FuelFromOneTrillionOre = _fuelCount;
-        }
-
-        private void MakeFuel(long quantity)
-        {
-            var fuel = Get("FUEL", quantity);
-            _fuelCount += fuel.Quantity;
-        }
-
-        private ChemicalQuantity Get(string name, long quantity)
-        {
-            var inStorage = _storage[name];
-            if (inStorage < quantity)
-            {
-                var amountToMake = quantity - inStorage;
-                Make(name, amountToMake);
-            }
-
-            RemoveFromStorage(name, quantity);
-            return new ChemicalQuantity(name, quantity);
-        }
-
-        private void Make(string name, long quantity)
-        {
-            var recipe = _recipes[name];
-            foreach (var input in recipe.Inputs)
-            {
-                var cq = Get(input.Name, input.Quantity * (long)Math.Ceiling((double)quantity / recipe.Output.Quantity));
-            }
-
-            AddToStorage(name, recipe.Output.Quantity * (long)Math.Ceiling((double)quantity / recipe.Output.Quantity));
-        }
-
-        private void AddToStorage(string name, long quantity)
-        {
-            var inStorage = _storage[name];
-            _storage[name] = inStorage + quantity;
-        }
-
-        private void RemoveFromStorage(string name, long quantity)
-        {
-            var inStorage = _storage[name];
-            _storage[name] = inStorage - quantity;
-        }
+        return (storage, recipes);
     }
-    
+
+    private (long RequiredOreForOneFuel, long fuelCount) Solve(string input)
+    {
+        var (storage, recipes) = Init(input);
+        var fuelCount = 0L;
+        fuelCount += MakeFuel(storage, recipes, 1);
+        const long oreLimit = 1_000_000_000_000;
+        var requiredOreForOneFuel = oreLimit - storage["ORE"];
+        long batchSize = 1;
+
+        while (storage["ORE"] > 0 && batchSize > 0)
+        {
+            batchSize = (long)Math.Floor((double)storage["ORE"] / requiredOreForOneFuel);
+            fuelCount += MakeFuel(storage, recipes, batchSize);
+        }
+
+        while (storage["ORE"] > 0)
+        {
+            try
+            {
+                fuelCount += MakeFuel(storage, recipes, 1);
+            }
+            catch
+            {
+                break;
+            }
+        }
+
+        return (requiredOreForOneFuel, fuelCount);
+    }
+
+    private long MakeFuel(Dictionary<string, long> storage, Dictionary<string, Reaction> recipes, long quantity) => 
+        Get(storage, recipes, "FUEL", quantity).Quantity;
+
+    private ChemicalQuantity Get(Dictionary<string, long> storage, Dictionary<string, Reaction> recipes, string name, long quantity)
+    {
+        var inStorage = storage[name];
+        if (inStorage < quantity)
+        {
+            var amountToMake = quantity - inStorage;
+            Make(storage, recipes, name, amountToMake);
+        }
+
+        RemoveFromStorage(storage, name, quantity);
+        return new ChemicalQuantity(name, quantity);
+    }
+
+    private void Make(Dictionary<string, long> storage, Dictionary<string, Reaction> recipes, string name, long quantity)
+    {
+        var recipe = recipes[name];
+        foreach (var input in recipe.Inputs)
+        {
+            Get(storage, recipes, input.Name, input.Quantity * (long)Math.Ceiling((double)quantity / recipe.Output.Quantity));
+        }
+
+        AddToStorage(storage, name, recipe.Output.Quantity * (long)Math.Ceiling((double)quantity / recipe.Output.Quantity));
+    }
+
+    private static void AddToStorage(Dictionary<string, long> storage, string name, long quantity) => storage[name] += quantity;
+    private static void RemoveFromStorage(Dictionary<string, long> storage, string name, long quantity) => storage[name] -= quantity;
+
     public record ChemicalQuantity(string Name, long Quantity);
     public record Reaction(ChemicalQuantity Output, IList<ChemicalQuantity> Inputs);
     
-    public class ReactionParser
+    public static IList<Reaction> Parse(string input)
     {
-        public IList<Reaction> Parse(string input)
+        var rows = input.Split(LineBreaks.Single);
+        var reactions = new List<Reaction>();
+        foreach (var row in rows)
         {
-            var rows = input.Trim().Split(LineBreaks.Single).Select(o => o.Trim());
-            var reactions = new List<Reaction>();
-            foreach (var row in rows)
-            {
-                var parts = row.Trim().Split("=>").Select(o => o.Trim()).ToList();
-                var inputPart = parts[0].Trim();
-                var outputPart = parts[1].Trim();
-                var inputQuantities = inputPart.Split(',').Select(ParseQuantity).ToList();
-                var outputQuantity = ParseQuantity(outputPart);
-                reactions.Add(new Reaction(outputQuantity, inputQuantities));
-            }
-            return reactions;
+            var (inputPart, outputPart) = row.Split("=>");
+            var inputQuantities = inputPart.Split(',').Select(ParseQuantity).ToList();
+            var outputQuantity = ParseQuantity(outputPart);
+            reactions.Add(new Reaction(outputQuantity, inputQuantities));
         }
 
-        private ChemicalQuantity ParseQuantity(string input)
-        {
-            var parts = input.Trim().Split(' ').ToList();
-            var quantity = int.Parse(parts[0].Trim());
-            var name = parts[1].Trim();
-            return new ChemicalQuantity(name, quantity);
-        }
+        return reactions;
+    }
+
+    private static ChemicalQuantity ParseQuantity(string input)
+    {
+        var parts = input.Trim().Split(' ').ToList();
+        var quantity = int.Parse(parts[0]);
+        var name = parts[1];
+        return new ChemicalQuantity(name, quantity);
     }
 }

@@ -9,7 +9,7 @@ public class Aoc201908Tests : PuzzleTest<Aoc201908>
     {
         const string data = "012011210021";
         const int width = 4;
-        var layer = new Aoc201908.SpaceImageLayer(data, width);
+        var layer = new Aoc201908.Layer(data, width);
 
         layer.GetChar(0, 0).Should().Be('0');
         layer.GetChar(1, 0).Should().Be('1');

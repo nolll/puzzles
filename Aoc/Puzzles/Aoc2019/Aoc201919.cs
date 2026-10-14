@@ -4,7 +4,6 @@ using Pzl.Tools.Computers.IntCode;
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
 [Name("Tractor Beam")]
-[Comment("Fix warning about outer scope")]
 public class Aoc201919 : AocPuzzle
 {
     [Puzzle("984c01d5977631fa8cd48a8fbd689c1c")]
@@ -13,7 +12,7 @@ public class Aoc201919 : AocPuzzle
     [Puzzle("c22eb8f92f96b6e515142cffa3b161c0")]
     public int Part2(string input) => Find100By100Square(input);
 
-    public int GetPullCount(string program, int width, int height)
+    private static int GetPullCount(string program, int width, int height)
     {
         var x = 0;
         var y = 0;
@@ -57,13 +56,12 @@ public class Aoc201919 : AocPuzzle
             return true;
         }
     }
-    
-    public int Find100By100Square(string program)
+
+    private static int Find100By100Square(string program)
     {
+        var state = new BeamProbeState();
         var x = 0;
         var y = 100;
-        var tempX = 0;
-        var tempY = 0;
         var output = 0;
         var mode = TractorBeamInputMode.X;
 
@@ -71,13 +69,13 @@ public class Aoc201919 : AocPuzzle
 
         while (true)
         {
-            tempX = x;
-            tempY = y;
+            state.X = x;
+            state.Y = y;
             computer.Start();
             if (output == 1)
             {
-                tempX = x + 99;
-                tempY = y - 99;
+                state.X= x + 99;
+                state.Y = y - 99;
                 computer.Start();
                 if (output == 1)
                     break;
@@ -95,11 +93,11 @@ public class Aoc201919 : AocPuzzle
             if (mode == TractorBeamInputMode.X)
             {
                 mode = TractorBeamInputMode.Y;
-                return tempX;
+                return state.X;
             }
 
             mode = TractorBeamInputMode.X;
-            return tempY;
+            return state.Y;
         }
 
         bool WriteOutput(long o)
@@ -107,6 +105,12 @@ public class Aoc201919 : AocPuzzle
             output = (int)o;
             return true;
         }
+    }
+    
+    private sealed class BeamProbeState
+    {
+        public int X { get; set; }
+        public int Y { get; set; } = 100;
     }
 
     private enum TractorBeamInputMode

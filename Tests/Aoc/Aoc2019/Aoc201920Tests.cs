@@ -29,9 +29,7 @@ public class Aoc201920Tests : PuzzleTest<Aoc201920>
                                           Z       
                              """;
 
-        var solver = new Aoc201920.DonutMazeSolver(input);
-
-        solver.ShortestStepCount.Should().Be(23);
+        Sut.Part1(input).Should().Be(23);
     }
 
     [Fact]
@@ -77,9 +75,7 @@ public class Aoc201920Tests : PuzzleTest<Aoc201920>
                                         U   P   P               
                              """;
 
-        var solver = new Aoc201920.DonutMazeSolver(input);
-
-        solver.ShortestStepCount.Should().Be(58);
+        Sut.Part1(input).Should().Be(58);
     }
 
     [Fact]
@@ -125,8 +121,6 @@ public class Aoc201920Tests : PuzzleTest<Aoc201920>
                                             A A D   M                     
                              """;
 
-        var solver = new Aoc201920.RecursiveDonutMazeSolver(input);
-
-        solver.ShortestStepCount.Should().Be(396);
+        Sut.Part2(input).Should().Be(396);
     }
 }

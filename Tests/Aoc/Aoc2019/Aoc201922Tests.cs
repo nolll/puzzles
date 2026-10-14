@@ -5,54 +5,20 @@ namespace Tests.Aoc.Aoc2019;
 public class Aoc201922Tests : PuzzleTest<Aoc201922>
 {
     [Fact]
-    public void DealIntoNewStack()
-    {
-        var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        var shuffler = new Aoc201922.CardShuffler();
-        deck = shuffler.Reverse(deck).ToArray();
-
-        var expectedDeck = new[] { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
-        deck.Should().BeEquivalentTo(expectedDeck);
-    }
+    public void DealIntoNewStack() => Sut.Reverse([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).Should().BeEquivalentTo([9, 8, 7, 6, 5, 4, 3, 2, 1, 0]);
 
     [Fact]
-    public void PositiveCut()
-    {
-        var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        var shuffler = new Aoc201922.CardShuffler();
-        deck = shuffler.Cut(deck, 3).ToArray();
-
-        var expectedDeck = new[] { 3, 4, 5, 6, 7, 8, 9, 0, 1, 2 };
-        deck.Should().BeEquivalentTo(expectedDeck);
-    }
+    public void PositiveCut() => Sut.Cut([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 3).Should().BeEquivalentTo([3, 4, 5, 6, 7, 8, 9, 0, 1, 2]);
 
     [Fact]
-    public void NegativeCut()
-    {
-        var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        var shuffler = new Aoc201922.CardShuffler();
-        deck = shuffler.Cut(deck, -4).ToArray();
-
-        var expectedDeck = new[] { 6, 7, 8, 9, 0, 1, 2, 3, 4, 5 };
-        deck.Should().BeEquivalentTo(expectedDeck);
-    }
+    public void NegativeCut() => Sut.Cut([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], -4).Should().BeEquivalentTo([6, 7, 8, 9, 0, 1, 2, 3, 4, 5]);
 
     [Fact]
-    public void Increment()
-    {
-        var deck = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        var shuffler = new Aoc201922.CardShuffler();
-        deck = shuffler.Increment(deck, 3).ToArray();
-
-        var expectedDeck = new[] { 0, 7, 4, 1, 8, 5, 2, 9, 6, 3 };
-        deck.Should().BeEquivalentTo(expectedDeck);
-    }
+    public void Increment() => Sut.Increment([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 3).Should().BeEquivalentTo([0, 7, 4, 1, 8, 5, 2, 9, 6, 3]);
 
     [Fact]
     public void ShuffleMany()
     {
-        var shuffler = new Aoc201922.CardShuffler();
-
         const string input = """
                              deal into new stack
                              cut -2
@@ -66,9 +32,6 @@ public class Aoc201922Tests : PuzzleTest<Aoc201922>
                              cut -1
                              """;
 
-        var deck = shuffler.Shuffle(10, input);
-
-        var expectedDeck = new[] { 9, 2, 5, 8, 1, 4, 7, 0, 3, 6 };
-        deck.Should().BeEquivalentTo(expectedDeck);
+        Sut.Shuffle(10, input).Should().BeEquivalentTo([9, 2, 5, 8, 1, 4, 7, 0, 3, 6]);
     }
 }

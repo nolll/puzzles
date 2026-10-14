@@ -5,186 +5,162 @@ using Pzl.Tools.Grids.Grids2d;
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
 [Name("Oxygen System")]
+[IsFunToOptimize]
+[Comment("Fix warning about outer scope")]
 public class Aoc201915 : AocPuzzle
 {
     [Puzzle("d20cf84c4da08d20e303bd7439d54765")]
     public int Part1(string input)
     {
-        var (result, _) = new RepairDroid(input).Run();
+        var (result, _) = Run(input);
         return result;
     }
 
     [Puzzle("d728ed642372031f836424a9f131f6f2")]
     public int Part2(string input)
     {
-        var (_, map) = new RepairDroid(input).Run();
-        return new OxygenFiller(map).Fill();
+        var (_, map) = Run(input);
+        return Fill(map);
     }
 
-    public class RepairDroid
+    private const int HitWall = 0;
+    private const int Moved = 1;
+    private const int Found = 2;
+
+    private Coord _target = new(0, 0);
+
+    private (int, Grid<char>) Run(string input)
     {
-        private const int HitWall = 0;
-        private const int Moved = 1;
-        private const int Found = 2;
+        var grid = new Grid<char>(defaultValue: ' ');
+        var queue = new Queue<(Coord, GridDirection, IntCodeComputer)>();
 
-        private IntCodeComputer _computer;
-        private readonly Grid<char> _grid;
-        private readonly Queue<(Coord, GridDirection, IntCodeComputer)> _queue;
-        private Coord _target = new Coord(0, 0);
+        var computer = new IntCodeComputer(MemoryParser.Parse(input));
+        computer.ReadInput = () => (int)GetDroidDirection(grid);
+        computer.WriteOutput = WriteOutput;
+        computer.Start();
 
-        public RepairDroid(string program)
+        while (queue.Any())
         {
-            _computer = new IntCodeComputer(MemoryParser.Parse(program), ReadInput, WriteOutput);
-            _grid = new Grid<char>(defaultValue: ' ');
-            _queue = new Queue<(Coord, GridDirection, IntCodeComputer)>();
+            var (address, direction, newComputer) = queue.Dequeue();
+            grid.MoveTo(address);
+            grid.TurnTo(direction);
+            computer = newComputer;
+            newComputer.Start();
         }
 
-        public (int, Grid<char>) Run()
-        {
-            _computer.Start();
+        grid.MoveTo(grid.StartCoord);
 
-            while (_queue.Any())
-            {
-                var (address, direction, computer) = _queue.Dequeue();
-                _grid.MoveTo(address);
-                _grid.TurnTo(direction);
-                _computer = computer;
-                computer.Start();
-            }
+        var path = PathFinder.ShortestPathTo(grid, grid.StartCoord, _target);
+        return (path.Count(), grid);
 
-            _grid.MoveTo(_grid.StartCoord);
-
-            var path = PathFinder.ShortestPathTo(_grid, _grid.StartCoord, _target);
-            return (path.Count(), _grid);
-        }
-
-        private long ReadInput()
-        {
-            return (int)GetDroidDirection();
-        }
-
-        private bool WriteOutput(long output)
+        bool WriteOutput(long output)
         {
             switch (output)
             {
                 case HitWall:
-                    _grid.MoveForward();
-                    _grid.WriteValue('#');
-                    _grid.MoveBackward();
+                    grid.MoveForward();
+                    grid.WriteValue('#');
+                    grid.MoveBackward();
                     break;
                 case Moved:
-                    _grid.MoveForward();
-                    _grid.WriteValue('.');
+                    grid.MoveForward();
+                    grid.WriteValue('.');
                     break;
                 case Found:
-                    _grid.MoveForward();
-                    _grid.WriteValue('X');
-                    _target = _grid.Coord;
+                    grid.MoveForward();
+                    grid.WriteValue('X');
+                    _target = grid.Coord;
                     break;
             }
 
-            var directions = FindUnvisitedDirections();
-            _computer.Stop();
+            var directions = FindUnvisitedDirections(grid);
+            computer.Stop();
             foreach (var direction in directions)
             {
-                _queue.Enqueue((_grid.Coord, direction, _computer.Clone()));
+                queue.Enqueue((grid.Coord, direction, computer.Clone()));
             }
 
             return false;
         }
-
-        private IEnumerable<GridDirection> FindUnvisitedDirections()
-        {
-            var directions = new List<GridDirection>();
-
-            _grid.MoveForward();
-            if (_grid.ReadValue() == ' ')
-                directions.Add(_grid.Direction);
-            _grid.MoveBackward();
-            _grid.TurnRight();
-
-            _grid.MoveForward();
-            if (_grid.ReadValue() == ' ')
-                directions.Add(_grid.Direction);
-            _grid.MoveBackward();
-            _grid.TurnRight();
-
-            _grid.MoveForward();
-            if (_grid.ReadValue() == ' ')
-                directions.Add(_grid.Direction);
-            _grid.MoveBackward();
-            _grid.TurnRight();
-
-            _grid.MoveForward();
-            if (_grid.ReadValue() == ' ')
-                directions.Add(_grid.Direction);
-            _grid.MoveBackward();
-            _grid.TurnRight();
-
-            return directions;
-        }
-
-        private DroidDirection GetDroidDirection()
-        {
-            if (_grid.Direction.Equals(GridDirection.Right))
-                return DroidDirection.East;
-            if (_grid.Direction.Equals(GridDirection.Down))
-                return DroidDirection.South;
-            if (_grid.Direction.Equals(GridDirection.Left))
-                return DroidDirection.West;
-            return DroidDirection.North;
-        }
     }
-    
-    public enum DroidDirection
+
+    private IEnumerable<GridDirection> FindUnvisitedDirections(Grid<char> grid)
     {
-        None = 0,
+        var directions = new List<GridDirection>();
+
+        grid.MoveForward();
+        if (grid.ReadValue() == ' ')
+            directions.Add(grid.Direction);
+        grid.MoveBackward();
+        grid.TurnRight();
+
+        grid.MoveForward();
+        if (grid.ReadValue() == ' ')
+            directions.Add(grid.Direction);
+        grid.MoveBackward();
+        grid.TurnRight();
+
+        grid.MoveForward();
+        if (grid.ReadValue() == ' ')
+            directions.Add(grid.Direction);
+        grid.MoveBackward();
+        grid.TurnRight();
+
+        grid.MoveForward();
+        if (grid.ReadValue() == ' ')
+            directions.Add(grid.Direction);
+        grid.MoveBackward();
+        grid.TurnRight();
+
+        return directions;
+    }
+
+    private DroidDirection GetDroidDirection(Grid<char> grid)
+    {
+        if (grid.Direction.Equals(GridDirection.Right))
+            return DroidDirection.East;
+        if (grid.Direction.Equals(GridDirection.Down))
+            return DroidDirection.South;
+        if (grid.Direction.Equals(GridDirection.Left))
+            return DroidDirection.West;
+        return DroidDirection.North;
+    }
+
+    private enum DroidDirection
+    {
         North = 1,
         South = 2,
         West = 3,
         East = 4
     }
     
-    public class OxygenFiller
+    public int Fill(string map) => Fill(GridBuilder.BuildCharGrid(map.Replace(' ', '#'), ' '));
+
+    public int Fill(Grid<char> grid)
     {
-        private readonly Grid<char> _grid;
-
-        public OxygenFiller(Grid<char> grid)
+        grid.MoveTo(grid.StartCoord);
+        grid.TurnTo(GridDirection.Up);
+        var iterations = 0;
+        var recentlyFilledAddresses = grid.FindAddresses('X');
+        while (grid.Values.Any(o => o == '.'))
         {
-            grid.MoveTo(grid.StartCoord);
-            grid.TurnTo(GridDirection.Up);
-            _grid = grid;
-        }
-
-        public OxygenFiller(string map)
-            : this(GridBuilder.BuildCharGrid(map.Replace(' ', '#'), ' '))
-        {
-        }
-
-        public int Fill()
-        {
-            var iterations = 0;
-            var recentlyFilledAddresses = _grid.FindAddresses('X');
-            while (_grid.Values.Any(o => o == '.'))
+            var addressesToFill = new List<Coord>();
+            foreach (var a in recentlyFilledAddresses)
             {
-                var addressesToFill = new List<Coord>();
-                foreach (var a in recentlyFilledAddresses)
-                {
-                    var validAddresses = _grid.OrthogonalAdjacentCoordsTo(a).Where(o => _grid.ReadValueAt(o) == '.');
-                    addressesToFill.AddRange(validAddresses);
-                }
-
-                recentlyFilledAddresses.Clear();
-                foreach (var atf in addressesToFill)
-                {
-                    _grid.WriteValueAt(atf, 'O');
-                    recentlyFilledAddresses.Add(atf);
-                }
-
-                iterations += 1;
+                var validAddresses = grid.OrthogonalAdjacentCoordsTo(a).Where(o => grid.ReadValueAt(o) == '.');
+                addressesToFill.AddRange(validAddresses);
             }
 
-            return iterations;
+            recentlyFilledAddresses.Clear();
+            foreach (var atf in addressesToFill)
+            {
+                grid.WriteValueAt(atf, 'O');
+                recentlyFilledAddresses.Add(atf);
+            }
+
+            iterations += 1;
         }
+
+        return iterations;
     }
 }

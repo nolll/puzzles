@@ -4,20 +4,14 @@ namespace Tests.Aoc.Aoc2019;
 
 public class Aoc201915Tests : PuzzleTest<Aoc201915>
 {
+    private const string Input = """
+                                  ##
+                                 #..##
+                                 #.#..#
+                                 #.X.#
+                                  ###
+                                 """;
+
     [Fact]
-    public void Returns4Minutes()
-    {
-        const string map = """
-                            ##
-                           #..##
-                           #.#..#
-                           #.X.#
-                            ###
-                           """;
-
-        var filler = new Aoc201915.OxygenFiller(map);
-        var result = filler.Fill();
-
-        result.Should().Be(4);
-    }
+    public void Returns4Minutes() => Sut.Fill(Input).Should().Be(4);
 }

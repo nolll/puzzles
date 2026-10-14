@@ -5,7 +5,6 @@ using Pzl.Tools.Grids.Grids2d;
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
 [Name("Oxygen System")]
-[IsFunToOptimize]
 [Comment("Fix warning about outer scope")]
 public class Aoc201915 : AocPuzzle
 {

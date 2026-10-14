@@ -16,8 +16,8 @@ public class Aoc201921 : AocPuzzle
     private long Run(string program, string script)
     {
         var damage = 0L;
-        List<char> currentCommand = [];
-        var commands = script.Trim().Split(LineBreaks.Single).ToList();
+        Queue<char> currentCommand = [];
+        var commands = new Queue<string>(script.Trim().Split(LineBreaks.Single));
         var computer = new IntCodeComputer(program, ReadInput, WriteOutput);
         computer.Start();
 
@@ -27,20 +27,14 @@ public class Aoc201921 : AocPuzzle
         {
             if (currentCommand.Count == 0 && commands.Count != 0)
             {
-                var nextCommand = commands.First().ToCharArray().ToList();
-                nextCommand.Add((char)10);
-                commands.RemoveAt(0);
+                var nextCommand = new Queue<char>(commands.Dequeue());
+                nextCommand.Enqueue((char)10);
                 currentCommand = nextCommand;
             }
 
-            if (currentCommand.Count != 0)
-            {
-                var c = currentCommand.First();
-                currentCommand.RemoveAt(0);
-                return c;
-            }
-
-            return Console.Read();
+            return currentCommand.Count != 0 
+                ? currentCommand.Dequeue() 
+                : Console.Read();
         }
 
         bool WriteOutput(long output)

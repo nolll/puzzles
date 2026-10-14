@@ -33,17 +33,21 @@ public class Aoc201915 : AocPuzzle
         var grid = new Grid<char>(defaultValue: ' ');
         var queue = new Queue<(Coord, GridDirection, IntCodeComputer)>();
 
-        var computer = new IntCodeComputer(MemoryParser.Parse(input));
-        computer.ReadInput = () => (int)GetDroidDirection(grid);
-        computer.WriteOutput = WriteOutput;
+        var container = new ComputerContainer();
+        var computer = new IntCodeComputer(MemoryParser.Parse(input))
+        {
+            ReadInput = () => (int)GetDroidDirection(grid),
+            WriteOutput = WriteOutput
+        };
         computer.Start();
+        container.Computer = computer;
 
         while (queue.Any())
         {
             var (address, direction, newComputer) = queue.Dequeue();
             grid.MoveTo(address);
             grid.TurnTo(direction);
-            computer = newComputer;
+            container.Computer = newComputer;
             newComputer.Start();
         }
 
@@ -73,14 +77,19 @@ public class Aoc201915 : AocPuzzle
             }
 
             var directions = FindUnvisitedDirections(grid);
-            computer.Stop();
+            container.Computer.Stop();
             foreach (var direction in directions)
             {
-                queue.Enqueue((grid.Coord, direction, computer.Clone()));
+                queue.Enqueue((grid.Coord, direction, container.Computer.Clone()));
             }
 
             return false;
         }
+    }
+
+    private class ComputerContainer
+    {
+        public IntCodeComputer Computer { get; set; } = null!;
     }
 
     private IEnumerable<GridDirection> FindUnvisitedDirections(Grid<char> grid)

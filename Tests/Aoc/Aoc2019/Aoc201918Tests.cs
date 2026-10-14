@@ -13,11 +13,8 @@ public class Aoc201918Tests : PuzzleTest<Aoc201918>
                              #b.A.@.a#
                              #########
                              """;
-
-        var keyCollector = new Aoc201918.KeyCollector(input);
-        keyCollector.Run();
-
-        keyCollector.ShortestPath.Should().Be(8);
+        
+        Sut.Part1(input).Should().Be(8);
     }
         
     [Fact]
@@ -31,10 +28,7 @@ public class Aoc201918Tests : PuzzleTest<Aoc201918>
                              ########################
                              """;
 
-        var keyCollector = new Aoc201918.KeyCollector(input);
-        keyCollector.Run();
-
-        keyCollector.ShortestPath.Should().Be(86);
+        Sut.Part1(input).Should().Be(86);
     }
 
     [Fact]
@@ -48,10 +42,7 @@ public class Aoc201918Tests : PuzzleTest<Aoc201918>
                              ########################
                              """;
 
-        var keyCollector = new Aoc201918.KeyCollector(input);
-        keyCollector.Run();
-
-        keyCollector.ShortestPath.Should().Be(132);
+        Sut.Part1(input).Should().Be(132);
     }
 
     [Fact]
@@ -69,10 +60,7 @@ public class Aoc201918Tests : PuzzleTest<Aoc201918>
                              #################
                              """;
 
-        var keyCollector = new Aoc201918.KeyCollector(input);
-        keyCollector.Run();
-
-        keyCollector.ShortestPath.Should().Be(136);
+        Sut.Part1(input).Should().Be(136);
     }
 
     [Fact]
@@ -87,10 +75,7 @@ public class Aoc201918Tests : PuzzleTest<Aoc201918>
                              ########################
                              """;
 
-        var keyCollector = new Aoc201918.KeyCollector(input);
-        keyCollector.Run();
-
-        keyCollector.ShortestPath.Should().Be(81);
+        Sut.Part1(input).Should().Be(81);
     }
 
     [Fact]
@@ -106,10 +91,7 @@ public class Aoc201918Tests : PuzzleTest<Aoc201918>
                              #######
                              """;
 
-        var keyCollector = new Aoc201918.KeyCollector(input, true);
-        keyCollector.Run();
-
-        keyCollector.ShortestPath.Should().Be(8);
+        Sut.Part2(input).Should().Be(8);
     }
 
     [Fact]
@@ -125,10 +107,7 @@ public class Aoc201918Tests : PuzzleTest<Aoc201918>
                              ###############
                              """;
 
-        var keyCollector = new Aoc201918.KeyCollector(input, true);
-        keyCollector.Run();
-
-        keyCollector.ShortestPath.Should().Be(24);
+        Sut.Part2(input).Should().Be(24);
     }
 
     [Fact]
@@ -144,10 +123,7 @@ public class Aoc201918Tests : PuzzleTest<Aoc201918>
                              #############
                              """;
 
-        var keyCollector = new Aoc201918.KeyCollector(input, true);
-        keyCollector.Run();
-
-        keyCollector.ShortestPath.Should().Be(32);
+        Sut.Part2(input).Should().Be(32);
     }
     
     // This completes in 70 steps, and the code works for the real data. 
@@ -167,9 +143,6 @@ public class Aoc201918Tests : PuzzleTest<Aoc201918>
                              #############
                              """;
 
-        var keyCollector = new Aoc201918.KeyCollector(input, true);
-        keyCollector.Run();
-
-        keyCollector.ShortestPath.Should().Be(72);
+        Sut.Part2(input).Should().Be(72);
     }
 }

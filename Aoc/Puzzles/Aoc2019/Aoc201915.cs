@@ -5,7 +5,6 @@ using Pzl.Tools.Grids.Grids2d;
 namespace Pzl.Aoc.Puzzles.Aoc2019;
 
 [Name("Oxygen System")]
-[Comment("Fix warning about outer scope")]
 public class Aoc201915 : AocPuzzle
 {
     [Puzzle("d20cf84c4da08d20e303bd7439d54765")]
@@ -39,8 +38,8 @@ public class Aoc201915 : AocPuzzle
             ReadInput = () => (int)GetDroidDirection(grid),
             WriteOutput = WriteOutput
         };
-        computer.Start();
         container.Computer = computer;
+        computer.Start();
 
         while (queue.Any())
         {

@@ -1,5 +1,6 @@
 using System.Text;
 using Pzl.Common;
+using Pzl.Tools.Combinatorics;
 using Pzl.Tools.Computers.IntCode;
 using Pzl.Tools.Strings;
 
@@ -9,142 +10,96 @@ namespace Pzl.Aoc.Puzzles.Aoc2019;
 public class Aoc201925 : AocPuzzle
 {
     [Puzzle("378fea8b73ddddacf10ae3b5978e47ab")]
-    public string Part1(string input) => new InvestigationDroid(input).Run();
-
-    public class InvestigationDroid
+    public string Part1(string input)
     {
-        private readonly IntCodeComputer _computer;
-        private readonly List<string> _commands;
-        private List<char> _currentCommand;
-        private readonly StringBuilder _output = new();
+        Queue<char> currentCommand = [];
+        var output = new StringBuilder();
+        var commands = new Queue<string>(GetCommands());
+        var computer = new IntCodeComputer(input, ReadInput, WriteOutput);
+        computer.Start();
 
-        public InvestigationDroid(string program)
+        var lastSentence = output.ToString().Trim().Split(LineBreaks.Single).Last().Trim();
+        return lastSentence.Split(' ')[11];
+
+        long ReadInput()
         {
-            _computer = new IntCodeComputer(program, ReadInput, WriteOutput);
-            _currentCommand = [];
-            _commands =
-            [
-                "west",
-                "south",
-                "south",
-                "south",
-                "take asterisk",
-                "north",
-                "north",
-                "north",
-                "west",
-                "west",
-                "west",
-                "take dark matter",
-                "east",
-                "south",
-                "take fixed point",
-                "west",
-                "take food ration",
-                "east",
-                "north",
-                "east",
-                "south",
-                "take astronaut ice cream",
-                "south",
-                "take polygon",
-                "east",
-                "take easter egg",
-                "east",
-                "take weather machine",
-                "north",
-                .. GetBruteForceCommands()
-            ];
-        }
-
-        private IList<string> GetBruteForceCommands()
-        {
-            string[] inv =
-            [
-                "polygon",
-                "fixed point",
-                "astronaut ice cream",
-                "easter egg",
-                "dark matter",
-                "food ration",
-                "asterisk",
-                "weather machine"
-            ];
-
-            var commands = new List<string>();
-            foreach (var i in inv)
+            if (currentCommand.Count == 0 && commands.Count != 0)
             {
-                commands.Add($"drop {i}");
+                var nextCommand = new Queue<char>(commands.Dequeue());
+                nextCommand.Enqueue((char)10);
+                currentCommand = nextCommand;
             }
 
-            var permutations = Permutations(inv);
-            foreach (var perm in permutations)
-            {
-                foreach (var i in perm)
-                {
-                    commands.Add($"take {i}");
-                }
-
-                commands.Add("north");
-
-                foreach (var i in perm)
-                {
-                    commands.Add($"drop {i}");
-                }
-            }
-
-            return commands;
+            return currentCommand.Count != 0 
+                ? currentCommand.Dequeue()
+                : Console.Read();
         }
 
-        public static IEnumerable<T[]> Permutations<T>(IEnumerable<T> source)
+        bool WriteOutput(long o)
         {
-            if (null == source)
-                throw new ArgumentNullException(nameof(source));
-
-            T[] data = source.ToArray();
-
-            return Enumerable
-                .Range(0, 1 << (data.Length))
-                .Select(index => data
-                    .Where((v, i) => (index & (1 << i)) != 0)
-                    .ToArray());
-        }
-
-        public string Run()
-        {
-            _computer.Start();
-
-            var lastSentence = _output.ToString().Trim().Split(LineBreaks.Single).Last().Trim();
-            return lastSentence.Split(' ')[11];
-        }
-
-        private long ReadInput()
-        {
-            if (!_currentCommand.Any())
-            {
-                if (_commands.Any())
-                {
-                    var nextCommand = _commands.First().ToCharArray().ToList();
-                    nextCommand.Add((char)10);
-                    _commands.RemoveAt(0);
-                    _currentCommand = nextCommand;
-                }
-            }
-
-            if (_currentCommand.Any())
-            {
-                var c = _currentCommand.First();
-                _currentCommand.RemoveAt(0);
-                return c;
-            }
-
-            return Console.Read();
-        }
-
-        private bool WriteOutput(long output)
-        {
-            _output.Append((char)output);
+            output.Append((char)o);
             return true;
         }
+    }
+
+    private static string[] GetCommands() =>
+    [
+        "west",
+        "south",
+        "south",
+        "south",
+        "take asterisk",
+        "north",
+        "north",
+        "north",
+        "west",
+        "west",
+        "west",
+        "take dark matter",
+        "east",
+        "south",
+        "take fixed point",
+        "west",
+        "take food ration",
+        "east",
+        "north",
+        "east",
+        "south",
+        "take astronaut ice cream",
+        "south",
+        "take polygon",
+        "east",
+        "take easter egg",
+        "east",
+        "take weather machine",
+        "north",
+        .. GetBruteForceCommands()
+    ];
+
+    private static IList<string> GetBruteForceCommands()
+    {
+        string[] inv =
+        [
+            "polygon",
+            "fixed point",
+            "astronaut ice cream",
+            "easter egg",
+            "dark matter",
+            "food ration",
+            "asterisk",
+            "weather machine"
+        ];
+
+        var commands = inv.Select(i => $"drop {i}").ToList();
+
+        var permutations = CombinationGenerator.GetUniqueCombinationsMaxSize(inv, inv.Length);
+        foreach (var perm in permutations)
+        {
+            commands.AddRange(perm.Select(i => $"take {i}"));
+            commands.Add("north");
+            commands.AddRange(perm.Select(i => $"drop {i}"));
+        }
+
+        return commands;
     }
 }

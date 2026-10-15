@@ -9,13 +9,13 @@ public class Aoc202005Tests : PuzzleTest<Aoc202005>
     [InlineData("BFFFBBFRRR", 70, 7, 567)]
     [InlineData("FFFBBBFRRR", 14, 7, 119)]
     [InlineData("BBFFBBFRLL", 102, 4, 820)]
-    public void ParseBoardingCard(string boardingCard, int row, int col, int id)
+    public void ParseBoardingCard(string input, int row, int col, int id)
     {
-        var processor = Aoc202005.BoardingCard.Parse(boardingCard);
+        var boardingCard = Aoc202005.BoardingCard.Parse(input);
 
-        processor.Row.Should().Be(row);
-        processor.Column.Should().Be(col);
-        processor.Id.Should().Be(id);
+        boardingCard.Row.Should().Be(row);
+        boardingCard.Column.Should().Be(col);
+        boardingCard.Id.Should().Be(id);
     }
 
     [Fact]
@@ -28,8 +28,6 @@ public class Aoc202005Tests : PuzzleTest<Aoc202005>
                              BBFFBBFRLL
                              """;
 
-        var processor = new Aoc202005.BoardingCardProcessor(input);
-
-        processor.HighestId.Should().Be(820);
+        Sut.Part1(input).Should().Be(820);
     }
 }

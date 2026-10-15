@@ -7,19 +7,19 @@ namespace Pzl.Aoc.Puzzles.Aoc2020;
 public class Aoc202002 : AocPuzzle
 {
     [Puzzle("ebf6e414ef8abc275a90f1a99df980cf")]
-    public int Part1(string input) => input.Split(LineBreaks.Single).Count(IsValidAccordingToRuleOne);
+    public int Part1(string input) => input.Split(LineBreaks.Single).Count(IsValid1);
 
     [Puzzle("0bcc20cf5a222049f20c6e88aa2731a9")]
-    public int Part2(string input) => input.Split(LineBreaks.Single).Count(IsValidAccordingToRuleTwo);
+    public int Part2(string input) => input.Split(LineBreaks.Single).Count(IsValid2);
 
-    public static bool IsValidAccordingToRuleOne(string policy)
+    public bool IsValid1(string policy)
     {
         var (c, pwd, lowerBound, upperBound) = Parse(policy);
         var validLetterCount = pwd.Count(o => o == c);
         return validLetterCount >= lowerBound && validLetterCount <= upperBound;
     }
 
-    public static bool IsValidAccordingToRuleTwo(string policy)
+    public bool IsValid2(string policy)
     {
         var (c, pwd, lowerBound, upperBound) = Parse(policy);
         var firstPosition = lowerBound - 1;

@@ -9,96 +9,71 @@ public class Aoc201923 : AocPuzzle
     [Puzzle("d95714c17b4e575c231127539580c9ac")]
     public long Part1(string input)
     {
-        var network = new CategorySixNetwork(input);
-        network.Run();
-
-        return network.FirstNatPacket!.Y;
+        var (first, _) = Run(input);
+        return first;
     }
 
     [Puzzle("d30f34de7c79a751083a20b903069390")]
     public long Part2(string input)
     {
-        var network = new CategorySixNetwork(input);
-        network.Run();
-
-        return network.FirstRepeatedNatPacket!.Y;
+        var (_, repeated) = Run(input);
+        return repeated;
     }
-    
-    public class CategorySixNetwork
+
+    private (long, long) Run(string program)
     {
-        private readonly Dictionary<int, CategorySixComputer> _computers;
-        private bool _isIdle;
-        private CategorySixPacket? _natPacket;
-        private CategorySixPacket? _lastSentNatPacket;
-        
-        public CategorySixPacket? FirstRepeatedNatPacket { get; private set; }
-        public CategorySixPacket? FirstNatPacket { get; private set; }
+        CategorySixPacket? natPacket = null;
+        CategorySixPacket? lastSentNatPacket = null;
+        CategorySixPacket? firstRepeatedNatPacket = null;
+        CategorySixPacket? firstNatPacket = null;
+        var computers = new Dictionary<int, CategorySixComputer>();
+        var idle = true;
 
-        public CategorySixNetwork(string program)
+        for (var i = 0; i < 50; i++)
+            computers[i] = new CategorySixComputer(program, i, SendPacket, HasReadInput);
+
+        foreach (var computer in computers.Values)
+            computer.Run();
+
+        while (firstRepeatedNatPacket == null)
         {
-            _computers = new Dictionary<int, CategorySixComputer>();
-            _isIdle = true;
+            idle = true;
 
-            for (var i = 0; i < 50; i++)
-            {
-                _computers[i] = new CategorySixComputer(program, i, SendPacket, HasReadInput);
-            }
+            foreach (var computer in computers.Values)
+                computer.Resume();
+
+            if (!idle || natPacket == null)
+                continue;
+
+            var natPacketRepeated = lastSentNatPacket != null && natPacket.X == lastSentNatPacket.X && natPacket.Y == lastSentNatPacket.Y;
+            if (natPacketRepeated && firstRepeatedNatPacket == null)
+                firstRepeatedNatPacket = natPacket;
+
+            lastSentNatPacket = natPacket;
+            SendPacket(0, natPacket);
+            natPacket = null;
         }
 
-        public void Run()
-        {
-            foreach (var computer in _computers.Values)
-            {
-                computer.Run();
-            }
+        return (firstNatPacket!.Y, firstRepeatedNatPacket.Y);
 
-            while (FirstRepeatedNatPacket == null)
-            {
-                _isIdle = true;
-
-                foreach (var computer in _computers.Values)
-                {
-                    computer.Resume();
-                }
-
-                if (_isIdle && _natPacket != null)
-                {
-                    var natPacketRepeated = _lastSentNatPacket != null && _natPacket.X == _lastSentNatPacket.X && _natPacket.Y == _lastSentNatPacket.Y;
-                    if (natPacketRepeated && FirstRepeatedNatPacket == null)
-                    {
-                        FirstRepeatedNatPacket = _natPacket;
-                    }
-
-                    _lastSentNatPacket = _natPacket;
-                    SendPacket(0, _natPacket);
-                    _natPacket = null;
-                }
-            }
-        }
-
-        private void SendPacket(int address, CategorySixPacket packet)
+        void SendPacket(int address, CategorySixPacket packet)
         {
             if (address == 255)
             {
-                if (FirstNatPacket == null)
-                    FirstNatPacket = packet;
-
-                _natPacket = packet;
+                firstNatPacket ??= packet;
+                natPacket = packet;
             }
             else
             {
-                _isIdle = false;
-                _computers[address].ReceivePacket(packet);
+                idle = false;
+                computers[address].ReceivePacket(packet);
             }
         }
 
-        private void HasReadInput()
-        {
-            _isIdle = false;
-        }
+        void HasReadInput() => idle = false;
     }
 
-    public class CategorySixComputer
+    private class CategorySixComputer
     {
         private readonly IntCodeComputer _computer;
         private readonly int _address;
@@ -126,15 +101,8 @@ public class Aoc201923 : AocPuzzle
             Queue = new Queue<CategorySixPacket>();
         }
 
-        public void Run()
-        {
-            _computer.Start(true);
-        }
-
-        public void Resume()
-        {
-            _computer.Resume();
-        }
+        public void Run() => _computer.Start(true);
+        public void Resume() => _computer.Resume();
 
         private long ReadInput()
         {
@@ -148,9 +116,7 @@ public class Aoc201923 : AocPuzzle
             if (_inputMode == CategorySixComputerMode.X)
             {
                 if (Queue.Count == 0)
-                {
                     return -1;
-                }
 
                 _inputPacket = Queue.Dequeue();
                 _inputMode = CategorySixComputerMode.Y;
@@ -199,13 +165,13 @@ public class Aoc201923 : AocPuzzle
                 Run();
         }
     }
-    
-    public enum CategorySixComputerMode
+
+    private enum CategorySixComputerMode
     {
         Address,
         X,
         Y
     }
-    
-    public record CategorySixPacket(long X, long Y);
+
+    private record CategorySixPacket(long X, long Y);
 }

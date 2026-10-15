@@ -15,10 +15,8 @@ public class Aoc202001 : AocPuzzle
     [Puzzle("12c4424e1149b29c37b5be950a3c5939")]
     public int Part2(string input) => FindNumbersThatAddUpTo(Parse(input), Target, 3).Aggregate(1, (a, b) => a * b);
 
-    private static List<int> Parse(string input) => input.Split(LineBreaks.Single).Select(int.Parse).ToList();
+    private static IEnumerable<int> Parse(string input) => input.Split(LineBreaks.Single).Select(int.Parse);
 
-    private static IList<int> FindNumbersThatAddUpTo(List<int> numbers, int target, int numbersToFind) => 
-        PermutationGenerator.GetPermutations(numbers, numbersToFind)
-            .First(o => o.Sum() == target)
-            .ToList();
+    private static IEnumerable<int> FindNumbersThatAddUpTo(IEnumerable<int> numbers, int target, int numbersToFind) => 
+        PermutationGenerator.GetPermutations([.. numbers], numbersToFind).First(o => o.Sum() == target);
 }

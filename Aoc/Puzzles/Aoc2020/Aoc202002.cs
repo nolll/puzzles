@@ -11,39 +11,37 @@ public class Aoc202002 : AocPuzzle
 
     [Puzzle("0bcc20cf5a222049f20c6e88aa2731a9")]
     public int Part2(string input) => input.Split(LineBreaks.Single).Count(IsValidAccordingToRuleTwo);
-    
-    public bool IsValidAccordingToRuleOne(string policy)
+
+    public static bool IsValidAccordingToRuleOne(string policy)
     {
-        var parts = policy.Split(':');
-        var ruleParts = parts[0].Split(' ');
-        var c = ruleParts[1][0];
-        var pwd = parts[1].Trim();
-        var bounds = ruleParts[0].Split('-');
-        var lowerBound = int.Parse(bounds[0]);
-        var upperBound = int.Parse(bounds[1]);
-
-        var pwdLetters = pwd.ToCharArray();
-        var validLetters = pwdLetters.Where(o => o == c);
-        var validLetterCount = validLetters.Count();
-
+        var (c, pwd, lowerBound, upperBound) = Parse(policy);
+        var validLetterCount = pwd.Count(o => o == c);
         return validLetterCount >= lowerBound && validLetterCount <= upperBound;
     }
 
-    public bool IsValidAccordingToRuleTwo(string policy)
+    public static bool IsValidAccordingToRuleTwo(string policy)
     {
-        var parts = policy.Split(':');
-        var ruleParts = parts[0].Split(' ');
-        var c = ruleParts[1][0];
-        var pwd = parts[1].Trim();
-        var positions = ruleParts[0].Split('-');
-        var firstPosition = int.Parse(positions[0]) - 1;
-        var secondPosition = int.Parse(positions[1]) - 1;
-
+        var (c, pwd, lowerBound, upperBound) = Parse(policy);
+        var firstPosition = lowerBound - 1;
+        var secondPosition = upperBound - 1;
         var firstMatch = pwd[firstPosition] == c;
         var secondMatch = pwd[secondPosition] == c;
         var isBothMatch = firstMatch && secondMatch;
         var isOneMatch = firstMatch || secondMatch;
 
         return isOneMatch && !isBothMatch;
+    }
+
+    private static (char c, string pwd, int lowerBound, int upperBound) Parse(string input)
+    {
+        var parts = input.Split(": ");
+        var ruleParts = parts[0].Split(' ');
+        var c = ruleParts[1][0];
+        var pwd = parts[1];
+        var bounds = ruleParts[0].Split('-');
+        var lowerBound = int.Parse(bounds[0]);
+        var upperBound = int.Parse(bounds[1]);
+
+        return (c, pwd, lowerBound, upperBound);
     }
 }

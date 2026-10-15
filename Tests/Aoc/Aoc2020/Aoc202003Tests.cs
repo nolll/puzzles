@@ -19,36 +19,11 @@ public class Aoc202003Tests : PuzzleTest<Aoc202003>
                                  """;
 
     [Fact]
-    public void TreeCount_3_1_IsCorrect()
-    {
-        var navigator = new Aoc202003.TreeNavigator(Input);
-        var treeCount = navigator.GetTreeCount(new Aoc202003.TreeTrajectory(3, 1));
-
-        treeCount.Should().Be(7);
-    }
+    public void TreeCount_3_1_IsCorrect() => Sut.GetTreeCount(Input, new Aoc202003.TreeTrajectory(3, 1)).Should().Be(7);
 
     [Fact]
-    public void TreeCount_1_2_IsCorrect()
-    {
-        var navigator = new Aoc202003.TreeNavigator(Input);
-        var treeCount = navigator.GetTreeCount(new Aoc202003.TreeTrajectory(1, 2));
-
-        treeCount.Should().Be(2);
-    }
+    public void TreeCount_1_2_IsCorrect() => Sut.GetTreeCount(Input, new Aoc202003.TreeTrajectory(1, 2)).Should().Be(2);
 
     [Fact]
-    public void TreeCountsAreCorrect()
-    {
-        var navigator = new Aoc202003.TreeNavigator(Input);
-        var treeCounts = navigator.GetAllTreeCounts().ToList();
-
-        treeCounts[0].Should().Be(2);
-        treeCounts[1].Should().Be(7);
-        treeCounts[2].Should().Be(3);
-        treeCounts[3].Should().Be(4);
-        treeCounts[4].Should().Be(2);
-
-        var product = treeCounts.Aggregate((long)1, (a, b) => a * b);
-        product.Should().Be(336);
-    }
+    public void TreeCountsAreCorrect() => Sut.Part2(Input).Should().Be(336);
 }

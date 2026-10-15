@@ -9,10 +9,8 @@ public class Aoc202004Tests : PuzzleTest<Aoc202004>
     [InlineData("hcl:#ae17e1 iyr:2013 eyr:2024 ecl:brn pid:760753108 byr:1931 hgt:179cm")]
     public void HasAllFields(string input)
     {
-        var passport = new Aoc202004.PassportProcessor.Passport(input);
-        var isValid = passport.HasAllFields();
-
-        isValid.Should().BeTrue();
+        var passport = new Aoc202004.Passport(input);
+        passport.HasAllFields().Should().BeTrue();
     }
 
     [Theory]
@@ -20,10 +18,8 @@ public class Aoc202004Tests : PuzzleTest<Aoc202004>
     [InlineData("hcl:#cfa07d eyr:2025 pid:166559648 iyr:2011 ecl:brn hgt:59in")]
     public void HasMissingFields(string input)
     {
-        var passport = new Aoc202004.PassportProcessor.Passport(input);
-        var isValid = passport.HasAllFields();
-
-        isValid.Should().BeFalse();
+        var passport = new Aoc202004.Passport(input);
+        passport.HasAllFields().Should().BeFalse();
     }
 
     [Fact]
@@ -44,11 +40,8 @@ public class Aoc202004Tests : PuzzleTest<Aoc202004>
                              hcl:#cfa07d eyr:2025 pid:166559648
                              iyr:2011 ecl:brn hgt:59in
                              """;
-
-        var processor = new Aoc202004.PassportProcessor(input);
-        var count = processor.GetNumberOfPassportsThatHasAllFields();
-
-        count.Should().Be(2);
+        
+        Sut.Part1(input).Should().Be(2);
     }
 
     [Fact]
@@ -69,10 +62,7 @@ public class Aoc202004Tests : PuzzleTest<Aoc202004>
                              iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719
                              """;
 
-        var processor = new Aoc202004.PassportProcessor(input);
-        var count = processor.GetNumberOfValidPassports();
-
-        count.Should().Be(4);
+        Sut.Part2(input).Should().Be(4);
     }
 
     [Fact]
@@ -94,9 +84,6 @@ public class Aoc202004Tests : PuzzleTest<Aoc202004>
                              pid:3556412378 byr:2007
                              """;
 
-        var processor = new Aoc202004.PassportProcessor(input);
-        var count = processor.GetNumberOfValidPassports();
-
-        count.Should().Be(0);
+        Sut.Part2(input).Should().Be(0);
     }
 }

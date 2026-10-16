@@ -7,19 +7,13 @@ public class Aoc202006Tests : PuzzleTest<Aoc202006>
     [Fact]
     public void SumOfAtLeastYesAnswerCounts()
     {
-        var reader = new Aoc202006.DeclarationFormReader(Input);
-        var sum = reader.SumOfAtLeastOneYes;
-
-        sum.Should().Be(11);
+        Sut.Part1(Input).Should().Be(11);
     }
 
     [Fact]
     public void SumOfAllAnswerCounts()
     {
-        var reader = new Aoc202006.DeclarationFormReader(Input);
-        var sum = reader.SumOfAllYes;
-
-        sum.Should().Be(6);
+        Sut.Part2(Input).Should().Be(6);
     }
 
     private const string Input = """

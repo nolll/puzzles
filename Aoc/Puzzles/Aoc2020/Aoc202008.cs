@@ -7,78 +7,61 @@ namespace Pzl.Aoc.Puzzles.Aoc2020;
 public class Aoc202008 : AocPuzzle
 {
     [Puzzle("2a2e64378fc4cf027efb60009544e68b")]
-    public int Part1(string input) => new GameConsoleRunner(input).RunUntilLoop();
+    public int Part1(string input)
+    {
+        var instructions = ParseInstructions(input);
+        var console = new GameConsole(instructions);
+        return console.Run().ExitValue;
+    }
 
     [Puzzle("e903a634ebeec273f64636f8b241c21b")]
-    public int Part2(string input) => new GameConsoleRunner(input).RunUntilTermination();
-    
-    public class GameConsoleRunner(string input)
+    public int Part2(string input)
     {
-        private readonly int _instructionCount = input.Split(LineBreaks.Single).Length;
-
-        public static IList<GameConsoleInstruction> ParseInstructions(string input)
-        {
-            var rows = input.Split(LineBreaks.Single);
-            return rows.Select(GameConsoleInstruction.Parse).ToList();
-        }
-
-        public int RunUntilLoop()
+        var instructionCount = input.Split(LineBreaks.Single).Length;
+        for (var i = 0; i < instructionCount; i++)
         {
             var instructions = ParseInstructions(input);
-            var console = new GameConsole(instructions);
-            return console.Run().ExitValue;
-        }
+            var currentInstruction = instructions[i];
+            if (currentInstruction.Name == "acc")
+                continue;
 
-        public int RunUntilTermination()
-        {
-            for (var i = 0; i < _instructionCount; i++)
+            if (currentInstruction.Name is "nop" or "jmp")
             {
-                var instructions = ParseInstructions(input);
-                var currentInstruction = instructions[i];
-                if (currentInstruction.Name == "acc")
-                    continue;
-
-                if (currentInstruction.Name is "nop" or "jmp")
-                {
-                    var newName = currentInstruction.Name == "nop" ? "jmp" : "nop";
-                    instructions[i] = new GameConsoleInstruction(newName, currentInstruction.Value);
-                }
-
-                var console = new GameConsole(instructions);
-                var exit = console.Run();
-                if (exit.Status == ExitStatus.End)
-                    return exit.ExitValue;
+                var newName = currentInstruction.Name == "nop" ? "jmp" : "nop";
+                instructions[i] = new GameConsoleInstruction(newName, currentInstruction.Value);
             }
 
-            return 0;
+            var console = new GameConsole(instructions);
+            var exit = console.Run();
+            if (exit.Status == ExitStatus.End)
+                return exit.ExitValue;
         }
+
+        return 0;
     }
-    
-    public enum ExitStatus
+
+    private static IList<GameConsoleInstruction> ParseInstructions(string input) =>
+        input.Split(LineBreaks.Single).Select(GameConsoleInstruction.Parse).ToList();
+
+    private enum ExitStatus
     {
         End,
         Loop
     }
-    
-    public class GameConsole
+
+    private class GameConsole(IList<GameConsoleInstruction> instructions)
     {
-        private readonly IList<GameConsoleInstruction> _instructions;
         private int _acc;
         private int _pos;
-
-        public GameConsole(IList<GameConsoleInstruction> instructions)
-        {
-            _instructions = instructions;
-        }
 
         public GameConsoleExit Run()
         {
             var wasRun = true;
             while (wasRun)
             {
-                if(_pos >= _instructions.Count)
+                if (_pos >= instructions.Count)
                     return new GameConsoleExit(ExitStatus.End, _acc);
-                wasRun = RunInstruction(_instructions[_pos]);
+                wasRun = RunInstruction(instructions[_pos]);
             }
 
             return new GameConsoleExit(ExitStatus.Loop, _acc);
@@ -100,38 +83,20 @@ public class Aoc202008 : AocPuzzle
             if (instruction.Name == "acc")
             {
                 _acc += instruction.Value;
-                _pos += 1;
-                return true;
             }
 
             _pos += 1;
             return true;
         }
     }
-    
-    public class GameConsoleExit
-    {
-        public ExitStatus Status { get; }
-        public int ExitValue { get; }
 
-        public GameConsoleExit(ExitStatus status, int exitValue)
-        {
-            Status = status;
-            ExitValue = exitValue;
-        }
-    }
-    
-    public class GameConsoleInstruction
+    private record GameConsoleExit(ExitStatus Status, int ExitValue);
+
+    public class GameConsoleInstruction(string name, int value)
     {
-        public string Name { get; }
-        public int Value { get; }
+        public string Name { get; } = name;
+        public int Value { get; } = value;
         public int ExecutionCount { get; private set; }
-
-        public GameConsoleInstruction(string name, int value)
-        {
-            Name = name;
-            Value = value;
-        }
 
         public static GameConsoleInstruction Parse(string s)
         {
@@ -141,9 +106,6 @@ public class Aoc202008 : AocPuzzle
             return new GameConsoleInstruction(name, value);
         }
 
-        public void IncreaseExecutionCount()
-        {
-            ExecutionCount += 1;
-        }
+        public void IncreaseExecutionCount() => ExecutionCount += 1;
     }
 }

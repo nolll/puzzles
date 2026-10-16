@@ -55,22 +55,10 @@ public class Aoc202010Tests : PuzzleTest<Aoc202010>
     [Theory]
     [InlineData(Input1, 35)]
     [InlineData(Input2, 220)]
-    public void PowerAdapterChainIsCorrect(string input, int expected)
-    {
-        var chain = new Aoc202010.PowerAdapterChain(input);
-        var product = chain.DifferenceProduct;
-
-        product.Should().Be(expected);
-    }
+    public void PowerAdapterChainIsCorrect(string input, int expected) => Sut.Part1(input).Should().Be(expected);
 
     [Theory]
     [InlineData(Input1, 8)]
     [InlineData(Input2, 19208)]
-    public void PowerAdapterChainTotalCombinations(string input, int expected)
-    {
-        var chain = new Aoc202010.PowerAdapterChain(input);
-        var combinations = chain.GetTotalNumberOfCombinations();
-
-        combinations.Should().Be(expected);
-    }
+    public void PowerAdapterChainTotalCombinations(string input, int expected) => Sut.Part2(input).Should().Be(expected);
 }

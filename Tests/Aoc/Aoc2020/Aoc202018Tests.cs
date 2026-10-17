@@ -13,13 +13,7 @@ public class Aoc202018Tests : PuzzleTest<Aoc202018>
     [InlineData("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2", 13_632)]
     [InlineData("(3 * (6 * 4 * 2 * 2 + 3) + 9) + 4 + (6 * 2 + (8 + 4 * 8 * 4 + 8)) + 5", 719)]
     [InlineData("(5 + (2 + 9 * 2) * 3) * (6 * 3 * 4 * 3 * 9 + (6 + 3 * 8 + 9 + 6 + 2)) + 8 * (7 * 3 + 3 * 9) * (6 + 6)", 426_853_152)]
-    public void SumIsCorrect(string input, long expected)
-    {
-        var calculator = new Aoc202018.HomeworkCalculator();
-        var sum = calculator.Sum(input, Aoc202018.MathPrecedence.Order);
-
-        sum.Should().Be(expected);
-    }
+    public void SumIsCorrect(string input, long expected) => Sut.Part1(input).Should().Be(expected);
 
     [Fact]
     public void SumofAllIsCorrect()
@@ -35,10 +29,7 @@ public class Aoc202018Tests : PuzzleTest<Aoc202018>
 
         const int expected = 26_457;
 
-        var calculator = new Aoc202018.HomeworkCalculator();
-        var sum = calculator.SumOfAll(input, Aoc202018.MathPrecedence.Order);
-
-        sum.Should().Be(expected);
+        Sut.Part1(input).Should().Be(expected);
     }
 
     [Theory]
@@ -48,11 +39,5 @@ public class Aoc202018Tests : PuzzleTest<Aoc202018>
     [InlineData("5 + (8 * 3 + 9 + 3 * 4 * 3)", 1445)]
     [InlineData("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))", 669060)]
     [InlineData("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2", 23340)]
-    public void SumWithAdditionPrecedenceIsCorrect(string input, long expected)
-    {
-        var calculator = new Aoc202018.HomeworkCalculator();
-        var sum = calculator.Sum(input, Aoc202018.MathPrecedence.Addition);
-
-        sum.Should().Be(expected);
-    }
+    public void SumWithAdditionPrecedenceIsCorrect(string input, long expected) => Sut.Part2(input).Should().Be(expected);
 }

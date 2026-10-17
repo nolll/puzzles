@@ -159,44 +159,27 @@ public class Grid<T> where T : struct
     }
 
     public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<T> OrthogonalAdjacentValuesTo(Coord address) => OrthogonalAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
+    public IList<T> OrthogonalAdjacentValuesTo(Coord coord) => OrthogonalAdjacentCoordsTo(coord).Select(ReadValueAt).ToList();
     public IList<Coord> OrthogonalAdjacentCoords => OrthogonalAdjacentCoordsTo(Coord);
-    public IList<Coord> OrthogonalAdjacentCoordsTo(Coord address) => PossibleOrthogonalAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
+    public IList<Coord> OrthogonalAdjacentCoordsTo(Coord coord) => PossibleOrthogonalAdjacentCoordsTo(coord).Where(o => !IsOutOfRange(o)).ToList();
 
     public IEnumerable<Coord> PossibleOrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoordsTo(Coord);
-    public static IEnumerable<Coord> PossibleOrthogonalAdjacentCoordsTo(Coord address) => 
-        GridConstants.OrthogonalDirections.Select(dir => new Coord(address.X + dir.x, address.Y + dir.y));
-    
+    public static IEnumerable<Coord> PossibleOrthogonalAdjacentCoordsTo(Coord coord) => coord.OrthogonalAdjacent();
     public IList<T> DiagonalAdjacentValues => DiagonalAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<T> DiagonalAdjacentValuesTo(Coord address) => DiagonalAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
+    public IList<T> DiagonalAdjacentValuesTo(Coord coord) => DiagonalAdjacentCoordsTo(coord).Select(ReadValueAt).ToList();
     public IList<Coord> DiagonalAdjacentCoords => DiagonalAdjacentCoordsTo(Coord);
-    public IList<Coord> DiagonalAdjacentCoordsTo(Coord address) => PossibleDiagonalAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
-
+    public IList<Coord> DiagonalAdjacentCoordsTo(Coord coord) => PossibleDiagonalAdjacentCoordsTo(coord).Where(o => !IsOutOfRange(o)).ToList();
     public IEnumerable<Coord> PossibleDiagonalAdjacentCoords => PossibleDiagonalAdjacentCoordsTo(Coord);
-    public IEnumerable<Coord> PossibleDiagonalAdjacentCoordsTo(Coord address) => 
-        GridConstants.DiagonalDirections.Select(dir => new Coord(address.X + dir.x, address.Y + dir.y));
-    
+    public IEnumerable<Coord> PossibleDiagonalAdjacentCoordsTo(Coord coord) => coord.DiagonalAdjacent();
     public IList<T> AllAdjacentValues => AllAdjacentCoordsTo(Coord).Select(ReadValueAt).ToList();
-    public IList<T> AllAdjacentValuesTo(Coord address) => AllAdjacentCoordsTo(address).Select(ReadValueAt).ToList();
+    public IList<T> AllAdjacentValuesTo(Coord coord) => AllAdjacentCoordsTo(coord).Select(ReadValueAt).ToList();
     public IList<Coord> AllAdjacentCoords => AllAdjacentCoordsTo(Coord);
-    public IList<Coord> AllAdjacentCoordsTo(Coord address) => AllPossibleAdjacentCoordsTo(address).Where(o => !IsOutOfRange(o)).ToList();
+    public IList<Coord> AllAdjacentCoordsTo(Coord coord) => AllPossibleAdjacentCoordsTo(coord).Where(o => !IsOutOfRange(o)).ToList();
+    private IEnumerable<Coord> AllPossibleAdjacentCoordsTo(Coord coord) => coord.AllAdjacent();
 
-    private IEnumerable<Coord> AllPossibleAdjacentCoordsTo(Coord address)
-    {
-        foreach (var dy in GridConstants.AdjacentDeltas)
-        {
-            foreach (var dx in GridConstants.AdjacentDeltas)
-            {
-                var coord = new Coord(address.X + dx, address.Y + dy);
-                if (!coord.Equals(address))
-                    yield return coord;
-            }
-        }
-    }
-
-    public bool MoveTo(Coord address) => MoveTo(address, true);
+    public bool MoveTo(Coord coord) => MoveTo(coord, true);
     public bool MoveTo(int x, int y) => MoveTo(new Coord(x, y), true);
-    public bool TryMoveTo(Coord address) => MoveTo(address, false);
+    public bool TryMoveTo(Coord coord) => MoveTo(coord, false);
     public bool TryMoveTo(int x, int y) => MoveTo(new Coord(x, y), false);
     public bool MoveForward(int steps = 1) => MoveForward(steps, true);
     private bool MoveForward(int steps, bool extend) => MoveTo(Coord.Forward(Direction, steps), extend);
@@ -217,21 +200,21 @@ public class Grid<T> where T : struct
     private bool MoveLeft(int steps, bool extend) => MoveTo(Coord.Left(steps), extend);
     public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
     public bool Move(GridDirection dir, int steps = 1) => Move(dir, steps, true);
-    private bool Move(GridDirection dir, int steps, bool extend) => MoveTo(Coord.Move(dir, steps), extend);
+    private bool Move(GridDirection dir, int steps, bool extend) => MoveTo(Coord.Direction(dir, steps), extend);
     public bool TryMove(GridDirection dir, int steps = 1) => Move(dir, steps, false);
 
-    public bool MoveTo(Coord address, bool extend)
+    public bool MoveTo(Coord coord, bool extend)
     {
-        if (IsOutOfRange(address))
+        if (IsOutOfRange(coord))
         {
             if (extend)
-                ExtendGrid(address);
+                ExtendGrid(coord);
             else
                 return false;
         }
 
-        var x = address.X > XMin ? address.X : XMin;
-        var y = address.Y > YMin ? address.Y : YMin;
+        var x = coord.X > XMin ? coord.X : XMin;
+        var y = coord.Y > YMin ? coord.Y : YMin;
         Coord = new Coord(x, y);
         return true;
     }
@@ -260,42 +243,42 @@ public class Grid<T> where T : struct
     public GridDirection FaceDown() => TurnTo(GridDirection.Down);
     public GridDirection FaceLeft() => TurnTo(GridDirection.Left);
 
-    private void ExtendGrid(Coord address)
+    private void ExtendGrid(Coord coord)
     {
-        ExtendX(address);
-        ExtendY(address);
+        ExtendX(coord);
+        ExtendY(coord);
     }
 
-    private void ExtendX(Coord address)
+    private void ExtendX(Coord coord)
     {
-        if (address.X < XMin)
-            ExtendLeft(address);
+        if (coord.X < XMin)
+            ExtendLeft(coord);
         else
-            ExtendRight(address);
+            ExtendRight(coord);
     }
 
-    private void ExtendLeft(Coord address) => AddCols(XMin - address.X, GridAddMode.Prepend);
+    private void ExtendLeft(Coord coord) => AddCols(XMin - coord.X, GridAddMode.Prepend);
 
-    private void ExtendRight(Coord address)
+    private void ExtendRight(Coord coord)
     {
-        var extendBy = address.X - XMax;
+        var extendBy = coord.X - XMax;
         if (extendBy > 0)
             AddCols(extendBy, GridAddMode.Append);
     }
 
-    private void ExtendY(Coord address)
+    private void ExtendY(Coord coord)
     {
-        if (address.Y < YMin)
-            ExtendTop(address);
+        if (coord.Y < YMin)
+            ExtendTop(coord);
         else
-            ExtendBottom(address);
+            ExtendBottom(coord);
     }
 
-    private void ExtendTop(Coord address) => AddRows(YMin - address.Y, GridAddMode.Prepend);
+    private void ExtendTop(Coord coord) => AddRows(YMin - coord.Y, GridAddMode.Prepend);
 
-    private void ExtendBottom(Coord address)
+    private void ExtendBottom(Coord coord)
     {
-        var extendBy = address.Y - YMax;
+        var extendBy = coord.Y - YMax;
         if (extendBy > 0)
             AddRows(extendBy, GridAddMode.Append);
     }
@@ -329,7 +312,7 @@ public class Grid<T> where T : struct
     public void ExtendDown(int steps = 1) => AddRows(steps, GridAddMode.Append);
     public void ExtendLeft(int steps = 1) => AddCols(steps, GridAddMode.Prepend);
 
-    public string Print(bool markCurrentAddress = false, bool markStartAddress = false, T currentAddressMarker = default, T startAddressMarker = default, bool spacing = false)
+    public string Print(bool markCurrentCoord = false, bool markStartCoord = false, T currentCoordMarker = default, T startCoordMarker = default, bool spacing = false)
     {
         var sb = new StringBuilder();
 
@@ -337,9 +320,9 @@ public class Grid<T> where T : struct
         {
             for (var x = XMin; x <= XMax; x++)
             {
-                if (markCurrentAddress && x == Coord.X && y == Coord.Y)
+                if (markCurrentCoord && x == Coord.X && y == Coord.Y)
                     sb.Append('D');
-                else if (markStartAddress && x == StartCoord.X && y == StartCoord.Y)
+                else if (markStartCoord && x == StartCoord.X && y == StartCoord.Y)
                     sb.Append('S');
                 else
                     sb.Append(ReadValueAt(x, y));
@@ -355,7 +338,7 @@ public class Grid<T> where T : struct
         return sb.ToString();
     }
 
-    public IList<Coord> FindAddresses(T value)
+    public IList<Coord> FindCoords(T value)
     {
         var coords = new List<Coord>();
         for (var y = YMin; y <= YMax; y++)
@@ -384,7 +367,7 @@ public class Grid<T> where T : struct
 
         var values = GetValuesForClone(multiplier);
         var min = new Coord(XMin, YMin);
-        var max = GetMaxAddressForClone(multiplier);
+        var max = GetMaxCoordForClone(multiplier);
         return new Grid<T>(min, max, values, DefaultValue);
     }
 
@@ -411,7 +394,7 @@ public class Grid<T> where T : struct
         return extendedValues;
     }
 
-    private Coord GetMaxAddressForClone(int multiplier) => 
+    private Coord GetMaxCoordForClone(int multiplier) => 
         new(XMax + Width * (multiplier - 1), YMax + Height * (multiplier - 1));
 
     public Grid<T> RotateLeft()

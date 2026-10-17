@@ -148,7 +148,7 @@ public class Aoc201915 : AocPuzzle
         grid.MoveTo(grid.StartCoord);
         grid.TurnTo(GridDirection.Up);
         var iterations = 0;
-        var recentlyFilledAddresses = grid.FindAddresses('X');
+        var recentlyFilledAddresses = grid.FindCoords('X');
         while (grid.Values.Any(o => o == '.'))
         {
             var addressesToFill = new List<Coord>();

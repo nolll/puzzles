@@ -14,8 +14,8 @@ public class Aoc202416 : AocPuzzle
     public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var start = grid.FindAddresses('S').First();
-        var end = grid.FindAddresses('E').First();
+        var start = grid.FindCoords('S').First();
+        var end = grid.FindCoords('E').First();
         grid.WriteValueAt(start, EmptySpace);
         grid.WriteValueAt(end, EmptySpace);
         grid.MoveTo(start);
@@ -33,8 +33,8 @@ public class Aoc202416 : AocPuzzle
     public int Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, '.');
-        var start = grid.FindAddresses('S').First();
-        var end = grid.FindAddresses('E').First();
+        var start = grid.FindCoords('S').First();
+        var end = grid.FindCoords('E').First();
         grid.WriteValueAt(start, EmptySpace);
         grid.WriteValueAt(end, EmptySpace);
         grid.MoveTo(start);
@@ -63,7 +63,7 @@ public class Aoc202416 : AocPuzzle
     {
         var edges = new List<GraphEdge>();
 
-        var spaceCoords = grid.FindAddresses(EmptySpace);
+        var spaceCoords = grid.FindCoords(EmptySpace);
         foreach (var coord in spaceCoords)
         {
             foreach (var dir in GridDirection.All)

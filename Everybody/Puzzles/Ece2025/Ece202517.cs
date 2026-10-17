@@ -51,8 +51,8 @@ public class Ece202517 : EverybodyEventPuzzle
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var radius = 1;
-        var start = grid.FindAddresses('S').First();
-        var volcano = grid.FindAddresses('@').First();
+        var start = grid.FindCoords('S').First();
+        var volcano = grid.FindCoords('@').First();
         var centerX = grid.Width / 2;
         var centerY = grid.Height / 2;
         grid.WriteValueAt(start, '0');

@@ -19,7 +19,7 @@ public class Aoc202408 : AocPuzzle
         var types = grid.Values.Distinct().Where(o => o != grid.DefaultValue);
         foreach (var type in types)
         {
-            var antennas = grid.FindAddresses(type);
+            var antennas = grid.FindCoords(type);
             var pairs = GetPairs(antennas);
             foreach (var pair in pairs)
             {
@@ -49,7 +49,7 @@ public class Aoc202408 : AocPuzzle
         var types = grid.Values.Distinct().Where(o => o != grid.DefaultValue);
         foreach (var type in types)
         {
-            var antennas = grid.FindAddresses(type);
+            var antennas = grid.FindCoords(type);
             var pairs = GetPairs(antennas);
             foreach (var pair in pairs)
             {

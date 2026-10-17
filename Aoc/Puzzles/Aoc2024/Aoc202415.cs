@@ -23,10 +23,10 @@ public class Aoc202415 : AocPuzzle
         var grid = GridBuilder.BuildCharGrid(parts[0]);
         var moves = parts[1].Replace(LineBreaks.Single, "").ToCharArray();
         
-        grid.MoveTo(grid.FindAddresses(Symbol.Robot).First());
+        grid.MoveTo(grid.FindCoords(Symbol.Robot).First());
         grid.WriteValue(Symbol.Empty);
 
-        var allBoxes = grid.FindAddresses(Symbol.Box).Select(o => new BoxPart1(o)).Cast<IBox>().ToList();
+        var allBoxes = grid.FindCoords(Symbol.Box).Select(o => new BoxPart1(o)).Cast<IBox>().ToList();
         foreach (var box in allBoxes)
         {
             grid.WriteValueAt(box.Coords.First(), Symbol.Empty);
@@ -132,17 +132,17 @@ public class Aoc202415 : AocPuzzle
         var grid = GridBuilder.BuildCharGrid(parts[0]);
         var moves = parts[1].Replace(LineBreaks.Single, "").ToCharArray();
         
-        grid.MoveTo(grid.FindAddresses(Symbol.Robot).First());
+        grid.MoveTo(grid.FindCoords(Symbol.Robot).First());
         grid.WriteValue(Symbol.Empty);
 
-        var boxCoords = grid.FindAddresses(Symbol.Box); 
+        var boxCoords = grid.FindCoords(Symbol.Box); 
         foreach (var coord in boxCoords)
         {
             grid.WriteValueAt(coord, Symbol.Empty);
         }
 
         var wideGrid = new Grid<char>(grid.Width * 2, grid.Height, Symbol.Empty);
-        var walls = grid.FindAddresses(Symbol.Wall);
+        var walls = grid.FindCoords(Symbol.Wall);
         foreach (var wall in walls)
         {
             wideGrid.WriteValueAt(new Coord(wall.X * 2, wall.Y), Symbol.Wall);

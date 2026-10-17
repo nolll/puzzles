@@ -39,8 +39,8 @@ public class Ece202520 : EverybodyEventPuzzle
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var edges = new HashSet<GraphEdge>();
-        var start = grid.FindAddresses('S').First();
-        var end = grid.FindAddresses('E').First();
+        var start = grid.FindCoords('S').First();
+        var end = grid.FindCoords('E').First();
         grid.WriteValueAt(start, 'T');
         grid.WriteValueAt(end, 'T');
 
@@ -79,15 +79,15 @@ public class Ece202520 : EverybodyEventPuzzle
     public int Part3(string input)
     {
         var grid1 = GridBuilder.BuildCharGrid(input);
-        var start = grid1.FindAddresses('S').First();
+        var start = grid1.FindCoords('S').First();
         grid1.WriteValueAt(start, 'T');
 
         var grid2 = Rotate(grid1);
         var grid3 = Rotate(grid2);
         
-        var end1 = grid1.FindAddresses('E').First();
-        var end2 = grid2.FindAddresses('E').First();
-        var end3 = grid3.FindAddresses('E').First();
+        var end1 = grid1.FindCoords('E').First();
+        var end2 = grid2.FindCoords('E').First();
+        var end3 = grid3.FindCoords('E').First();
         grid1.WriteValueAt(end1, 'T');
         grid2.WriteValueAt(end2, 'T');
         grid3.WriteValueAt(end3, 'T');

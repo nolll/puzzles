@@ -13,7 +13,7 @@ public class Aoc202507 : AocPuzzle
     public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var beams = grid.FindAddresses(Start).ToHashSet();
+        var beams = grid.FindCoords(Start).ToHashSet();
         var splitCount = 0;
         var y = 0;
         while (y < grid.YMax)
@@ -44,7 +44,7 @@ public class Aoc202507 : AocPuzzle
     public long Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var beam = grid.FindAddresses(Start).First();
+        var beam = grid.FindCoords(Start).First();
 
         return CountTimelines(beam, grid, []);
     }

@@ -31,10 +31,14 @@ public record Coord(int X, int Y)
     public Coord Right(int steps = 1) => Forward(GridDirection.Right, steps);
     public Coord Down(int steps = 1) => Forward(GridDirection.Down, steps);
     public Coord Left(int steps = 1) => Forward(GridDirection.Left, steps);
-    public Coord Forward(GridDirection direction, int steps = 1) => Move(direction, steps);
-    public Coord Backward(GridDirection direction, int steps = 1) => Move(direction, -steps);
-    public Coord Move(GridDirection direction, int steps = 1) => new(X + direction.X * steps, Y + direction.Y * steps);
-    public Coord Move(int x, int y) => new(X + x, Y + y);
+    public Coord Forward(GridDirection direction, int steps = 1) => Direction(direction, steps);
+    public Coord Backward(GridDirection direction, int steps = 1) => Direction(direction, -steps);
+    public Coord Direction(GridDirection direction, int steps = 1) => new(X + direction.X * steps, Y + direction.Y * steps);
+    public Coord Relative(int x, int y) => new(X + x, Y + y);
     public Coord RotateLeft() => new(-Y, X);
     public Coord RotateRight() => new(Y, -X);
+    
+    public IEnumerable<Coord> OrthogonalAdjacent() => GridConstants.OrthogonalDirections.Select(o => new Coord(X + o.x, Y + o.y));
+    public IEnumerable<Coord> DiagonalAdjacent() => GridConstants.DiagonalDirections.Select(o => new Coord(X + o.x, Y + o.y));
+    public IEnumerable<Coord> AllAdjacent() => GridConstants.AllDirections.Select(o => new Coord(X + o.x, Y + o.y));
 }

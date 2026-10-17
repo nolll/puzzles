@@ -18,8 +18,8 @@ public class Aoc202420 : AocPuzzle
     public static Dictionary<(Coord from, Coord to), int> GetCheats(string input, int radius)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var start = grid.FindAddresses('S').First();
-        var end = grid.FindAddresses('E').First();
+        var start = grid.FindCoords('S').First();
+        var end = grid.FindCoords('E').First();
         grid.WriteValueAt(start, '.');
         grid.WriteValueAt(end, '.');
         

@@ -98,7 +98,7 @@ public class Aoc202012 : AocPuzzle
     }
 
     private static void MoveForward(State state, int steps) => 
-        state.Address = state.Address.Move(state.Waypoint.X * steps, state.Waypoint.Y * steps);
+        state.Address = state.Address.Relative(state.Waypoint.X * steps, state.Waypoint.Y * steps);
 
     private static void RotateLeft(State state, int degrees) => Rotate(RotateLeft, state, degrees);
     private static void RotateRight(State state, int degrees) => Rotate(RotateRight, state, degrees);

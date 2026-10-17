@@ -7,236 +7,186 @@ namespace Pzl.Aoc.Puzzles.Aoc2020;
 [Name("Lobby Layout")]
 public class Aoc202024 : AocPuzzle
 {
+
+    private const char Nothing = '.';
+    private const char White = 'w';
+    private const char Black = 'b';
+
+    private const string NorthEast = "ne";
+    private const string East = "e";
+    private const string SouthEast = "se";
+    private const string SouthWest = "sw";
+    private const string West = "w";
+    private const string NorthWest = "nw";
+
     [Puzzle("5d93c546616fcdf4656b6333d8457200")]
-    public int Part1(string input)
-    {
-        var floor = new HexagonalFloor(input);
-        floor.Arrange();
-        return floor.BlackTileCount;
-    }
+    public int Part1(string input) => BlackTileCount(Arrange(input));
 
     [Puzzle("812d3dec4e5955c3c44ead98ed889522")]
-    public int Part2(string input)
+    public int Part2(string input, int modifications = 100) => BlackTileCount(Modify(Arrange(input), modifications, []));
+
+    public int BlackTileCount(Grid<char> grid) => grid.Values.Count(o => o == Black);
+
+    private static List<string> ParseInstruction(string s)
     {
-        var floor = new HexagonalFloor(input);
-        floor.Arrange();
-        floor.Modify(100);
-        return floor.BlackTileCount;
+        var instructions = new List<string>();
+        var array = s.ToCharArray();
+        for (var i = 0; i < array.Length; i++)
+        {
+            var c = array[i];
+            if (c is 'w' or 'e')
+            {
+                instructions.Add(c.ToString());
+            }
+            else
+            {
+                var nextChar = array[i + 1];
+                instructions.Add($"{c}{nextChar}");
+                i++;
+            }
+        }
+
+        return instructions;
     }
 
-    public class HexagonalFloor
+    public Grid<char> Arrange(string input)
     {
-        private const char Nothing = '.';
-        private const char White = 'w';
-        private const char Black = 'b';
-
-        private const string NorthEast = "ne";
-        private const string East = "e";
-        private const string SouthEast = "se";
-        private const string SouthWest = "sw";
-        private const string West = "w";
-        private const string NorthWest = "nw";
-
-        private readonly IEnumerable<List<string>> _instructions;
-        private readonly Grid<char> _grid;
-        private readonly Dictionary<string, List<Coord>> _adjacentCoordsCache;
-        public int BlackTileCount => _grid.Values.Count(o => o == Black);
-
-        public HexagonalFloor(string input)
+        var instructions = input.Split(LineBreaks.Single).Select(ParseInstruction);
+        var grid = new Grid<char>(defaultValue: Nothing);
+        grid.WriteValue(White);
+        foreach (var instruction in instructions)
         {
-            var rows = input.Split(LineBreaks.Single);
-            _instructions = rows.Select(ParseInstruction);
-            _grid = new Grid<char>(defaultValue: Nothing);
-            _adjacentCoordsCache = new Dictionary<string, List<Coord>>();
-        }
-
-        private static List<string> ParseInstruction(string s)
-        {
-            var instructions = new List<string>();
-            var array = s.ToCharArray();
-            for (var i = 0; i < array.Length; i++)
+            grid.MoveTo(grid.StartCoord);
+            foreach (var step in instruction)
             {
-                var c = array[i];
-                if (c is 'w' or 'e')
+                switch (step)
                 {
-                    instructions.Add(c.ToString());
-                }
-                else
-                {
-                    var nextChar = array[i + 1];
-                    instructions.Add($"{c}{nextChar}");
-                    i++;
-                }
-            }
-
-            return instructions;
-        }
-
-        public void Arrange()
-        {
-            _grid.WriteValue(White);
-            foreach (var instruction in _instructions)
-            {
-                _grid.MoveTo(_grid.StartCoord);
-                foreach (var step in instruction)
-                {
-                    switch (step)
-                    {
-                        case NorthEast:
-                            _grid.MoveUp();
-                            _grid.MoveRight();
-                            break;
-                        case East:
-                            _grid.MoveRight();
-                            _grid.MoveRight();
-                            break;
-                        case SouthEast:
-                            _grid.MoveDown();
-                            _grid.MoveRight();
-                            break;
-                        case SouthWest:
-                            _grid.MoveDown();
-                            _grid.MoveLeft();
-                            break;
-                        case West:
-                            _grid.MoveLeft();
-                            _grid.MoveLeft();
-                            break;
-                        case NorthWest:
-                            _grid.MoveUp();
-                            _grid.MoveLeft();
-                            break;
-                    }
-
-                    if (_grid.ReadValue() == Nothing)
-                        _grid.WriteValue(White);
+                    case NorthEast:
+                        grid.MoveUp();
+                        grid.MoveRight();
+                        break;
+                    case East:
+                        grid.MoveRight();
+                        grid.MoveRight();
+                        break;
+                    case SouthEast:
+                        grid.MoveDown();
+                        grid.MoveRight();
+                        break;
+                    case SouthWest:
+                        grid.MoveDown();
+                        grid.MoveLeft();
+                        break;
+                    case West:
+                        grid.MoveLeft();
+                        grid.MoveLeft();
+                        break;
+                    case NorthWest:
+                        grid.MoveUp();
+                        grid.MoveLeft();
+                        break;
                 }
 
-                var tile = _grid.ReadValue() == Black ? White : Black;
-                _grid.WriteValue(tile);
+                if (grid.ReadValue() == Nothing)
+                    grid.WriteValue(White);
             }
+
+            var tile = grid.ReadValue() == Black ? White : Black;
+            grid.WriteValue(tile);
         }
 
-        public void Modify(int dayCount)
+        return grid;
+    }
+
+    public Grid<char> Modify(Grid<char> grid, int dayCount, Dictionary<string, List<Coord>> cache)
+    {
+        for (var day = 0; day < dayCount; day++)
         {
-            for (var day = 0; day < dayCount; day++)
-            {
-                _grid.ExtendUp(1);
-                _grid.ExtendRight(2);
-                _grid.ExtendDown(1);
-                _grid.ExtendLeft(2);
-                FillEmptyTilesWithWhite();
-                ApplyRules();
-            }
+            grid.ExtendUp();
+            grid.ExtendRight(2);
+            grid.ExtendDown();
+            grid.ExtendLeft(2);
+            FillEmptyTilesWithWhite(grid, cache);
+            ApplyRules(grid, cache);
         }
 
-        private void ApplyRules()
+        return grid;
+    }
+
+    private void ApplyRules(Grid<char> grid, Dictionary<string, List<Coord>> cache)
+    {
+        var tilesToFlipToBlack = new List<Coord>();
+        var tilesToFlipToWhite = new List<Coord>();
+
+        foreach (var coord in grid.Coords)
         {
-            var tilesToFlipToBlack = new List<Coord>();
-            var tilesToFlipToWhite = new List<Coord>();
+            var thisValue = grid.ReadValueAt(coord);
 
-            foreach (var coord in _grid.Coords)
+            if (thisValue == Nothing)
+                continue;
+
+            var adjacentValues = GetAdjacent6Values(grid, coord, cache);
+            var blackAdjacentCount = adjacentValues.Count(o => o == Black);
+            if (thisValue == Black && blackAdjacentCount is 0 or > 2)
+                tilesToFlipToWhite.Add(coord);
+            else if (blackAdjacentCount == 2)
+                tilesToFlipToBlack.Add(coord);
+        }
+
+        foreach (var coord in tilesToFlipToBlack)
+            grid.WriteValueAt(coord, Black);
+
+        foreach (var coord in tilesToFlipToWhite)
+            grid.WriteValueAt(coord, White);
+    }
+
+    private static void FillEmptyTilesWithWhite(Grid<char> grid, Dictionary<string, List<Coord>> cache)
+    {
+        var tilesToFill = new List<Coord>();
+
+        foreach (var coord in grid.Coords)
+        {
+            if (grid.ReadValueAt(coord) == Nothing)
+                continue;
+
+            var adjacentValues = GetAdjacent6Values(grid, coord, cache);
+            if (adjacentValues.All(o => o == Nothing))
+                continue;
+
+            var adjacentCoords = GetAdjacent6Coords(coord, cache);
+            foreach (var adj in adjacentCoords)
             {
-                var thisValue = _grid.ReadValueAt(coord);
-
-                if (thisValue != Nothing)
+                if (grid.TryMoveTo(adj) && grid.ReadValueAt(adj) == Nothing)
                 {
-                    var adjacentValues = GetAdjacent6Values(coord);
-                    var blackAdjacentCount = adjacentValues.Count(o => o == Black);
-                    if (thisValue == Black)
-                    {
-                        // Any black tile with zero or more than 2 black tiles immediately adjacent to it is flipped to white.
-                        if (blackAdjacentCount is 0 or > 2)
-                        {
-                            tilesToFlipToWhite.Add(coord);
-                        }
-                    }
-                    else
-                    {
-                        // Any white tile with exactly 2 black tiles immediately adjacent to it is flipped to black.
-                        if (blackAdjacentCount == 2)
-                        {
-                            tilesToFlipToBlack.Add(coord);
-                        }
-                    }
+                    tilesToFill.Add(grid.Coord);
                 }
             }
-
-            foreach (var address in tilesToFlipToBlack)
-            {
-                _grid.WriteValueAt(address, Black);
-            }
-
-            foreach (var address in tilesToFlipToWhite)
-            {
-                _grid.WriteValueAt(address, White);
-            }
         }
 
-        private void FillEmptyTilesWithWhite()
-        {
-            var tilesToFill = new List<Coord>();
+        foreach (var address in tilesToFill)
+            grid.WriteValueAt(address, White);
+    }
 
-            foreach (var coord in _grid.Coords)
-            {
-                if (_grid.ReadValueAt(coord) != Nothing)
-                {
-                    var adjacentAddresses = GetAdjacent6Coords(coord);
-                    var adjacentValues = GetAdjacent6Values(coord);
-                    if (adjacentValues.Any(o => o != Nothing))
-                    {
-                        foreach (var address in adjacentAddresses)
-                        {
-                            if (_grid.TryMoveTo(address) && _grid.ReadValueAt(address) == Nothing)
-                            {
-                                tilesToFill.Add(_grid.Coord);
-                            }
-                        }
-                    }
-                }
-            }
+    private static List<char> GetAdjacent6Values(Grid<char> grid, Coord coord, Dictionary<string, List<Coord>> cache) =>
+        [.. GetAdjacent6Coords(coord, cache).Where(o => !grid.IsOutOfRange(o)).Select(grid.ReadValueAt)];
 
-            foreach (var address in tilesToFill)
-            {
-                _grid.WriteValueAt(address, White);
-            }
-        }
-
-        private List<char> GetAdjacent6Values(Coord coord)
-        {
-            var currentAddress = _grid.Coord;
-            var addresses = GetAdjacent6Coords(coord);
-            var values = new List<char>();
-            foreach (var address in addresses)
-            {
-                if (_grid.TryMoveTo(address))
-                {
-                    values.Add(_grid.ReadValue());
-                }
-            }
-
-            _grid.MoveTo(currentAddress);
-            return values;
-        }
-
-        private List<Coord> GetAdjacent6Coords(Coord coord)
-        {
-            var key = coord.Id;
-            if (_adjacentCoordsCache.TryGetValue(key, out var coords))
-                return coords;
-
-            coords =
-            [
-                new(coord.X + 1, coord.Y - 1),
-                new(coord.X + 2, coord.Y),
-                new(coord.X + 1, coord.Y + 1),
-                new(coord.X - 1, coord.Y + 1),
-                new(coord.X - 2, coord.Y),
-                new(coord.X - 1, coord.Y - 1)
-            ];
-
-            _adjacentCoordsCache.Add(key, coords);
+    private static List<Coord> GetAdjacent6Coords(Coord coord, Dictionary<string, List<Coord>> cache)
+    {
+        var key = coord.Id;
+        if (cache.TryGetValue(key, out var coords))
             return coords;
-        }
+
+        coords =
+        [
+            coord.Relative(1, -1),
+            coord.Relative(2, 0),
+            coord.Relative(1, 1),
+            coord.Relative(-1, 1),
+            coord.Relative(-2, 0),
+            coord.Relative(-1, -1)
+        ];
+
+        cache.Add(key, coords);
+        return coords;
     }
 }

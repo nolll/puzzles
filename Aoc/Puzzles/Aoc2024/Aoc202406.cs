@@ -10,7 +10,7 @@ public class Aoc202406 : AocPuzzle
     public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var startCoord = grid.FindAddresses('^').First();
+        var startCoord = grid.FindCoords('^').First();
         return GetVisitCount(grid, startCoord) ?? 0;
     }
 
@@ -18,7 +18,7 @@ public class Aoc202406 : AocPuzzle
     public int Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var startCoord = grid.FindAddresses('^').First();
+        var startCoord = grid.FindCoords('^').First();
         return GetVisited(grid, startCoord)!.Count(o => GetVisitCount(grid, startCoord, o) is null);
     }
 

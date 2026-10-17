@@ -15,8 +15,8 @@ public class Ecs0302 : EverybodyStoryPuzzle
     public int Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);
-        var start = grid.FindAddresses(Current).First();
-        var end = grid.FindAddresses(Bone).First();
+        var start = grid.FindCoords(Current).First();
+        var end = grid.FindCoords(Bone).First();
         grid.MoveTo(start);
         grid.WriteValue(Visited);
         grid.TurnTo(GridDirection.Up);
@@ -49,8 +49,8 @@ public class Ecs0302 : EverybodyStoryPuzzle
     public int Part2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);
-        var start = grid.FindAddresses(Current).First();
-        var end = grid.FindAddresses(Bone).First();
+        var start = grid.FindCoords(Current).First();
+        var end = grid.FindCoords(Bone).First();
         grid.MoveTo(start);
         grid.WriteValue(Visited);
         grid.WriteValueAt(end, Visited);
@@ -95,7 +95,7 @@ public class Ecs0302 : EverybodyStoryPuzzle
     public int Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input, Empty);
-        var start = grid.FindAddresses(Current).First();
+        var start = grid.FindCoords(Current).First();
         
         var boneCoords = grid.CoordsOf(Bone).ToList();
         var boneAdjCoords = boneCoords.SelectMany(Grid<char>.PossibleOrthogonalAdjacentCoordsTo).ToHashSet();

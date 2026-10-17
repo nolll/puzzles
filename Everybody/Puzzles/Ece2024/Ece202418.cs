@@ -15,7 +15,7 @@ public class Ece202418 : EverybodyEventPuzzle
     private int SolvePart1And2(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var palmtrees = grid.FindAddresses('P');
+        var palmtrees = grid.FindCoords('P');
         var current = grid.Coords.Where(o => (o.X == 0 || o.X == grid.XMax) && grid.ReadValueAt(o) == '.')
             .ToHashSet();
         var reached = new HashSet<Coord>();
@@ -53,8 +53,8 @@ public class Ece202418 : EverybodyEventPuzzle
     public int Part3(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var palmtrees = grid.FindAddresses('P');
-        var possibleStarts = grid.FindAddresses('.');
+        var palmtrees = grid.FindCoords('P');
+        var possibleStarts = grid.FindCoords('.');
         var hits = possibleStarts.ToDictionary(k => k, _ => new Dictionary<Coord, int>());
         var allcurrent = palmtrees
             .Select(o => (palmtree: o, current: new HashSet<Coord> { o }, seen: new HashSet<Coord>()))

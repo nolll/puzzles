@@ -66,7 +66,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
         
         foreach (var die in dice)
         {
-            var spaces = grid.FindAddresses(die.Roll());
+            var spaces = grid.FindCoords(die.Roll());
             var set = new HashSet<Coord>();
             set.AddRange(spaces);
 

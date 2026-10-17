@@ -31,7 +31,7 @@ public class Ece202417 : EverybodyEventPuzzle
     private static long Part1And2(string input) => GetSize(FindStars(input));
 
     private static IList<Coord> FindStars(string input) => 
-        GridBuilder.BuildCharGrid(input).FindAddresses('*');
+        GridBuilder.BuildCharGrid(input).FindCoords('*');
 
     private static long GetSize(IList<Coord> stars) => 
         Kruskal.MinimumSpanningTree(GetEdges(stars).ToList()) + stars.Count;

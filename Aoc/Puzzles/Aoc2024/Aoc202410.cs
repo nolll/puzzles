@@ -10,14 +10,14 @@ public class Aoc202410 : AocPuzzle
     public int Part1(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
-        return grid.FindAddresses(0).Sum(trailHead => CountPaths(grid, trailHead, []));
+        return grid.FindCoords(0).Sum(trailHead => CountPaths(grid, trailHead, []));
     }
 
     [Puzzle("9f0c79d76028ec84f2fda12a86e15c52")]
     public int Part2(string input)
     {
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
-        return grid.FindAddresses(0).Sum(trailHead => CountPaths(grid, trailHead));
+        return grid.FindCoords(0).Sum(trailHead => CountPaths(grid, trailHead));
     }
 
     private static int CountPaths(Grid<int> grid, Coord coord, HashSet<Coord>? seen = null)

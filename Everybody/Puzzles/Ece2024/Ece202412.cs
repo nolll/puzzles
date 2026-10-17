@@ -20,9 +20,9 @@ public class Ece202412 : EverybodyEventPuzzle
         grid.ExtendUp(15);
         grid.ExtendRight(20);
 
-        var aCoord = grid.FindAddresses('A').First();
-        var bCoord = grid.FindAddresses('B').First();
-        var cCoord = grid.FindAddresses('C').First();
+        var aCoord = grid.FindCoords('A').First();
+        var bCoord = grid.FindCoords('B').First();
+        var cCoord = grid.FindCoords('C').First();
         (char name, Coord coord)[] catapults = [('A', aCoord), ('B', bCoord), ('C', cCoord)];
 
         var bestShots = new Dictionary<Coord, (char name, int power)>();

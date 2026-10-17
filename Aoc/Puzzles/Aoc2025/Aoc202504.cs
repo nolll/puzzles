@@ -20,7 +20,7 @@ public class Aoc202504 : AocPuzzle
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var lastCount = 0;
-        var coords = grid.FindAddresses(Roll).ToHashSet();
+        var coords = grid.FindCoords(Roll).ToHashSet();
         var adjacentCache = coords.ToDictionary(o => o, o => grid.AllAdjacentCoordsTo(o).ToList());
 
         while (coords.Count != lastCount)

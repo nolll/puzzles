@@ -15,7 +15,7 @@ public class Aoc202321 : AocPuzzle
     public static long CountPositionsAfter64(string s, int steps = 64)
     {
         var grid = GridBuilder.BuildCharGrid(s);
-        var start = grid.FindAddresses('S').First();
+        var start = grid.FindCoords('S').First();
         grid.WriteValueAt(start, '.');
         return CountPositionsAfter(grid, start, steps);
     }
@@ -23,7 +23,7 @@ public class Aoc202321 : AocPuzzle
     public static long CountPositionsAfterMany(string s)
     {
         var grid = GridBuilder.BuildCharGrid(s);
-        var start = grid.FindAddresses('S').First();
+        var start = grid.FindCoords('S').First();
         var center = start.X;
         var (left, top) = new Coord(grid.XMin, grid.YMin);
         var (right, bottom) = new Coord(grid.XMax, grid.YMax);

@@ -19,9 +19,9 @@ public class Ece202413 : EverybodyEventPuzzle
     private static int Solve(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var start = grid.FindAddresses('E').First();
+        var start = grid.FindCoords('E').First();
         grid.WriteValueAt(start, '0');
-        var targets = grid.FindAddresses('S');
+        var targets = grid.FindCoords('S');
         foreach (var target in targets)
         {
             grid.WriteValueAt(target, '0');

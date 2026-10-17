@@ -5,19 +5,13 @@ namespace Tests.Aoc.Aoc2020;
 
 public class Aoc202013Tests : PuzzleTest<Aoc202013>
 {
+    private const string Input = """
+                                 939
+                                 7,13,x,x,59,x,31,19
+                                 """;
+
     [Fact]
-    public void EarliestDeparture()
-    {
-        const string input = """
-                             939
-                             7,13,x,x,59,x,31,19
-                             """;
-
-        var scheduler = new Aoc202013.BusScheduler1(input);
-        var value = scheduler.GetBusValue();
-
-        value.Should().Be(295);
-    }
+    public void EarliestDeparture() => Sut.Part1(Input).Should().Be(295);
 
     [Theory]
     [InlineData("7,13,x,x,59,x,31,19", 1_068_781)]
@@ -26,11 +20,5 @@ public class Aoc202013Tests : PuzzleTest<Aoc202013>
     [InlineData("67,x,7,59,61", 779_210)]
     [InlineData("67,7,x,59,61", 1_261_476)]
     [InlineData("1789,37,47,1889", 1_202_161_486)]
-    public void ScheduleContest(string input, long expected)
-    {
-        var scheduler = new Aoc202013.BusScheduler2($"0{LineBreaks.Single}{input}");
-        var value = scheduler.GetContestMinute();
-
-        value.Should().Be(expected);
-    }
+    public void ScheduleContest(string input, long expected) => Sut.Part2(string.Concat(LineBreaks.Single, input)).Should().Be(expected);
 }

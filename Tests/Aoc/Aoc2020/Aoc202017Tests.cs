@@ -4,33 +4,15 @@ namespace Tests.Aoc.Aoc2020;
 
 public class Aoc202017Tests : PuzzleTest<Aoc202017>
 {
-    [Fact]
-    public void AfterSixIterations_3D()
-    {
-        const string input = """
-                             .#.
-                             ..#
-                             ###
-                             """;
-
-        var cube = new Aoc202017.ConwayCube();
-        var activeCubes = cube.Boot3D(input, 6);
-
-        activeCubes.Should().Be(112);
-    }
+    private const string Input = """
+                                 .#.
+                                 ..#
+                                 ###
+                                 """;
 
     [Fact]
-    public void AfterSixIterations_4D()
-    {
-        const string input = """
-                             .#.
-                             ..#
-                             ###
-                             """;
+    public void AfterSixIterations_3D() => Sut.Part1(Input).Should().Be(112);
 
-        var cube = new Aoc202017.ConwayCube();
-        var activeCubes = cube.Boot4D(input, 6);
-
-        activeCubes.Should().Be(848);
-    }
+    [Fact]
+    public void AfterSixIterations_4D() => Sut.Part2(Input).Should().Be(848);
 }

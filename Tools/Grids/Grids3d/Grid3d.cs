@@ -8,7 +8,7 @@ public class Grid3d<T> where T : struct
     private readonly IDictionary<Coord3d, T> _grid;
     public Coord3d Address { get; private set; }
     public Coord3d StartAddress { get; set; }
-    
+
     public int Width => XMax - XMin + 1;
     public int Height => YMax - YMin + 1;
     public int Depth => ZMax - ZMin + 1;
@@ -22,7 +22,7 @@ public class Grid3d<T> where T : struct
     public bool IsAtRightEdge => Address.X == Width - 1;
     public bool IsAtBottom => Address.Y == Height - 1;
     public bool IsAtLeftEdge => Address.X == 0;
-    
+
     public Coord3d Center
     {
         get
@@ -44,10 +44,10 @@ public class Grid3d<T> where T : struct
         Address = new Coord3d(0, 0, 0);
         StartAddress = new Coord3d(0, 0, 0);
     }
-    
+
     public IEnumerable<T> Values =>
-        Coords.Select(coord => _grid.TryGetValue(coord, out var v) 
-            ? v 
+        Coords.Select(coord => _grid.TryGetValue(coord, out var v)
+            ? v
             : _defaultValue);
 
     public IEnumerable<Coord3d> Coords
@@ -62,7 +62,7 @@ public class Grid3d<T> where T : struct
                     {
                         yield return new Coord3d(x, y, z);
                     }
-                }   
+                }
             }
         }
     }
@@ -109,7 +109,7 @@ public class Grid3d<T> where T : struct
 
     public T ReadValueAt(int x, int y, int z) => ReadValueAt(new Coord3d(x, y, z));
     public void WriteValue(T value) => WriteValueAt(Address, value);
-    
+
     public void WriteValueAt(Coord3d coord, T value)
     {
         if (coord.X < XMin)
@@ -121,18 +121,18 @@ public class Grid3d<T> where T : struct
             YMin = coord.Y;
         else if (coord.Y > YMax)
             YMax = coord.Y;
-        
+
         if (coord.Z < ZMin)
             ZMin = coord.Z;
         else if (coord.Z > ZMax)
             ZMax = coord.Z;
-        
+
         _grid[coord] = value;
     }
 
     public bool IsOutOfRange(Coord3d address) =>
         address.Z > ZMax ||
-        address.Z < ZMin || 
+        address.Z < ZMin ||
         address.Y > YMax ||
         address.Y < YMin ||
         address.X > XMax ||
@@ -152,22 +152,23 @@ public class Grid3d<T> where T : struct
     ];
 
     public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
+    public IList<T> AllAdjacentValuesTo(Coord3d coord) => AllAdjacentCoordsTo(coord).Select(ReadValueAt).ToList();
     public IList<Coord3d> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
+    public IList<Coord3d> AllAdjacentCoordsTo(Coord3d coord) => AllPossibleAdjacentCoordsTo(coord).Where(o => !IsOutOfRange(o)).ToList();
+    
+    private IEnumerable<Coord3d> AllPossibleAdjacentCoords => AllPossibleAdjacentCoordsTo(Address);
 
-    private IEnumerable<Coord3d> AllPossibleAdjacentCoords
+    private IEnumerable<Coord3d> AllPossibleAdjacentCoordsTo(Coord3d coord)
     {
-        get
+        foreach (var dz in GridConstants.AdjacentDeltas)
         {
-            foreach (var dz in GridConstants.AdjacentDeltas)
+            foreach (var dy in GridConstants.AdjacentDeltas)
             {
-                foreach (var dy in GridConstants.AdjacentDeltas)
+                foreach (var dx in GridConstants.AdjacentDeltas)
                 {
-                    foreach (var dx in GridConstants.AdjacentDeltas)
-                    {
-                        var coord = new Coord3d(Address.X + dx, Address.Y - dy, Address.Z - dz);
-                        if (!coord.Equals(Address))
-                            yield return coord;
-                    }
+                    var adj = new Coord3d(coord.X + dx, coord.Y - dy, coord.Z - dz);
+                    if (!adj.Equals(coord))
+                        yield return adj;
                 }
             }
         }
@@ -309,7 +310,7 @@ public class Grid3d<T> where T : struct
         else
             ZMax += numberOfLevels;
     }
-    
+
     public string Print(int z)
     {
         var sb = new StringBuilder();
@@ -317,11 +318,11 @@ public class Grid3d<T> where T : struct
         for (var y = YMin; y <= YMax; y++)
         {
             for (var x = XMin; x <= XMax; x++)
-            { 
+            {
                 sb.Append(ReadValueAt(x, y, z));
             }
 
-            if(y < YMax)
+            if (y < YMax)
                 sb.AppendLine();
         }
 

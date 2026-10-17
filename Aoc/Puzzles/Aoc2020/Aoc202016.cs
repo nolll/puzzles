@@ -7,208 +7,138 @@ namespace Pzl.Aoc.Puzzles.Aoc2020;
 public class Aoc202016 : AocPuzzle
 {
     [Puzzle("7d78cfbc759526833a4566918a854e5b")]
-    public long Part1(string input) => new TicketValidator().GetErrorRate(input);
+    public long Part1(string input) => FindInvalidValues(ParseData(input)).Sum();
 
     [Puzzle("f42f08ba29065a89fd379a7eceb34b50")]
-    public long Part2(string input) => new TicketValidator().CalculateAnswer(input);
+    public long Part2(string input) => CalculateAnswer(input);
 
-    public class TicketValidator
+    private static List<int> FindInvalidValues(Data data)
     {
-        public long GetErrorRate(string input)
+        var invalidValues = new List<int>();
+
+        foreach (var ticket in data.OtherTickets)
         {
-            var data = ParseData(input);
-            var invalidValues = FindInvalidValues(data);
-
-            return invalidValues.Sum();
-        }
-
-        private static List<int> FindInvalidValues(Data data)
-        {
-            var invalidValues = new List<int>();
-
-            foreach (var ticket in data.OtherTickets)
+            foreach (var num in ticket.Numbers)
             {
-                foreach (var num in ticket.Numbers)
+                if (!data.Rules.Values.Any(o => o.IsValid(num)))
                 {
-                    if (!data.Rules.Values.Any(o => o.IsValid(num)))
-                    {
-                        invalidValues.Add(num);
-                    }
+                    invalidValues.Add(num);
                 }
             }
-
-            return invalidValues;
         }
 
-        public long CalculateAnswer(string input)
+        return invalidValues;
+    }
+
+    private static long CalculateAnswer(string input) =>
+        FindFields(input).Fields.Where(field => field.Key.StartsWith("departure"))
+            .Aggregate<KeyValuePair<string, int>, long>(1, (current, field) => current * field.Value);
+
+    public static Ticket FindFields(string input)
+    {
+        var data = ParseData(input);
+        var otherTickets = FilterValidTickets(data.OtherTickets, FindInvalidValues(data)).ToList();
+
+        var possiblePositions = new Dictionary<string, List<int>>();
+
+        foreach (var rule in data.Rules.Values)
         {
-            var ticket = FindFields(input);
-            long product = 1;
-            foreach (var field in ticket.Fields)
+            for (var pos = 0; pos < data.MyTicket.Numbers.Count; pos++)
             {
-                if (field.Key.StartsWith("departure"))
-                {
-                    product *= field.Value;
-                }
-            }
+                var currentPos = pos;
+                var ticketValuesAtThisPosition = otherTickets.Select(o => o.Numbers[currentPos]);
+                var isPossibleAtThisPosition = ticketValuesAtThisPosition.All(o => rule.IsValid(o));
 
-            return product;
+                if (!isPossibleAtThisPosition)
+                    continue;
+
+                if (!possiblePositions.ContainsKey(rule.Name))
+                    possiblePositions.Add(rule.Name, new List<int>());
+
+                possiblePositions[rule.Name].Add(pos);
+            }
         }
 
-        public static Ticket FindFields(string input)
+        var donePositions = new Dictionary<string, int>();
+
+        while (possiblePositions.Count != 0)
         {
-            var data = ParseData(input);
-            var otherTickets = FilterValidTickets(data.OtherTickets, FindInvalidValues(data)).ToList();
+            var nextDone = possiblePositions.First(o => o.Value.Count == 1);
+            var doneValue = nextDone.Value.First();
+            donePositions.Add(nextDone.Key, doneValue);
+            possiblePositions.Remove(nextDone.Key);
 
-            var possiblePositions = new Dictionary<string, List<int>>();
-
-            foreach (var rule in data.Rules.Values)
+            foreach (var key in possiblePositions.Keys)
             {
-                for (var pos = 0; pos < data.MyTicket.Numbers.Count; pos++)
-                {
-                    var currentPos = pos;
-                    var ticketValuesAtThisPosition = otherTickets.Select(o => o.Numbers[currentPos]);
-                    var isPossibleAtThisPosition = ticketValuesAtThisPosition.All(o => rule.IsValid(o));
-
-                    if (!isPossibleAtThisPosition)
-                        continue;
-
-                    if (!possiblePositions.ContainsKey(rule.Name))
-                        possiblePositions.Add(rule.Name, new List<int>());
-
-                    possiblePositions[rule.Name].Add(pos);
-                }
+                possiblePositions[key] = possiblePositions[key].Where(o => o != doneValue).ToList();
             }
-
-            var donePositions = new Dictionary<string, int>();
-
-            while (possiblePositions.Any())
-            {
-                var nextDone = possiblePositions.First(o => o.Value.Count == 1);
-                var doneValue = nextDone.Value.First();
-                donePositions.Add(nextDone.Key, doneValue);
-                possiblePositions.Remove(nextDone.Key);
-
-                foreach (var key in possiblePositions.Keys)
-                {
-                    possiblePositions[key] = possiblePositions[key].Where(o => o != doneValue).ToList();
-                }
-            }
-
-            data.MyTicket.SetFields(donePositions);
-
-            return data.MyTicket;
         }
 
-        private static IEnumerable<Ticket> FilterValidTickets(IEnumerable<Ticket> tickets, ICollection<int> invalidValues)
+        data.MyTicket.SetFields(donePositions);
+
+        return data.MyTicket;
+    }
+
+    private static IEnumerable<Ticket> FilterValidTickets(IEnumerable<Ticket> tickets, ICollection<int> invalidValues) => 
+        tickets.Where(ticket => !ticket.Numbers.Any(invalidValues.Contains)).ToList();
+
+    private static Data ParseData(string input)
+    {
+        var groups = input
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single).ToList())
+            .ToList();
+        var ruleRows = groups[0];
+        var rules = ruleRows.Select(Rule.Parse).ToDictionary(rule => rule.Name);
+        var myTicket = Ticket.Parse(groups[1][1]);
+        var otherTickets = groups[2].Skip(1).Select(Ticket.Parse).ToList();
+
+        return new Data(rules, myTicket, otherTickets);
+    }
+
+    private record Data(Dictionary<string, Rule> Rules, Ticket MyTicket, List<Ticket> OtherTickets);
+
+    public class Range(int from, int to)
+    {
+        public bool IsInRange(int num) => num >= from && num <= to;
+
+        public static Range Parse(string s)
         {
-            return tickets.Where(ticket => !ticket.Numbers.Any(invalidValues.Contains)).ToList();
+            var parts = s.Split('-');
+            return new Range(int.Parse(parts[0]), int.Parse(parts[1]));
         }
+    }
 
-        private static Data ParseData(string input)
+    public record Rule(string Name, List<Range> Ranges)
+    {
+        public bool IsValid(int num) => Ranges.Any(o => o.IsInRange(num));
+
+        public static Rule Parse(string s)
         {
-            var groups = input
-                .Split(LineBreaks.Double)
-                .Select(o => o.Split(LineBreaks.Single).ToList())
-                .ToList();
-            var ruleRows = groups[0];
-            var rules = ruleRows.Select(Rule.Parse).ToDictionary(rule => rule.Name);
-            var myTicket = Ticket.Parse(groups[1][1]);
-            var otherTickets = groups[2].Skip(1).Select(Ticket.Parse).ToList();
-
-            return new Data(rules, myTicket, otherTickets);
+            var parts = s.Split(':');
+            var name = parts[0];
+            var rangeParts = parts[1].Trim().Split(' '); 
+            List<string> ruleStrings =
+            [
+                rangeParts[0], rangeParts[2]
+            ];
+            var ranges = ruleStrings.Select(Range.Parse).ToList();
+            return new Rule(name, ranges);
         }
+    }
 
-        private class Data
+    public record Ticket(List<int> Numbers)
+    {
+        public Dictionary<string, int> Fields { get; } = new();
+
+        public void SetFields(Dictionary<string, int> fieldPositions)
         {
-            public Dictionary<string, Rule> Rules { get; }
-            public Ticket MyTicket { get; }
-            public List<Ticket> OtherTickets { get; }
-
-            public Data(Dictionary<string, Rule> rules, Ticket myTicket, List<Ticket> otherTickets)
+            foreach (var field in fieldPositions)
             {
-                Rules = rules;
-                MyTicket = myTicket;
-                OtherTickets = otherTickets;
+                Fields[field.Key] = Numbers[field.Value];
             }
         }
 
-        public class Range
-        {
-            private readonly int _from;
-            private readonly int _to;
-
-            private Range(int from, int to)
-            {
-                _from = from;
-                _to = to;
-            }
-
-            public bool IsInRange(int num)
-            {
-                return num >= _from && num <= _to;
-            }
-
-            public static Range Parse(string s)
-            {
-                var parts = s.Split('-');
-                return new Range(int.Parse(parts[0]), int.Parse(parts[1]));
-            }
-        }
-
-        public class Rule
-        {
-            public string Name { get; }
-            private List<Range> Ranges { get; }
-
-            private Rule(string name, List<Range> ranges)
-            {
-                Name = name;
-                Ranges = ranges;
-            }
-
-            public bool IsValid(int num)
-            {
-                return Ranges.Any(o => o.IsInRange(num));
-            }
-
-            public static Rule Parse(string s)
-            {
-                var parts = s.Split(':');
-                var name = parts[0];
-                var rangeParts = parts[1].Trim().Split(' ');
-                var ruleStrings = new List<string>
-                {
-                    rangeParts[0], rangeParts[2]
-                };
-                var ranges = ruleStrings.Select(Range.Parse).ToList();
-                return new Rule(name, ranges);
-            }
-        }
-
-        public class Ticket
-        {
-            public Dictionary<string, int> Fields { get; }
-            public List<int> Numbers { get; }
-
-            private Ticket(List<int> numbers)
-            {
-                Numbers = numbers;
-                Fields = new Dictionary<string, int>();
-            }
-
-            public void SetFields(Dictionary<string, int> fieldPositions)
-            {
-                foreach (var field in fieldPositions)
-                {
-                    Fields[field.Key] = Numbers[field.Value];
-                }
-            }
-
-            public static Ticket Parse(string s)
-            {
-                return new Ticket(s.Split(',').Select(int.Parse).ToList());
-            }
-        }
+        public static Ticket Parse(string s) => new(s.Split(',').Select(int.Parse).ToList());
     }
 }

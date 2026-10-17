@@ -22,10 +22,7 @@ public class Aoc202016Tests : PuzzleTest<Aoc202016>
                              38,6,12
                              """;
 
-        var validator = new Aoc202016.TicketValidator();
-        var result = validator.GetErrorRate(input);
-
-        result.Should().Be(71);
+        Sut.Part1(input).Should().Be(71);
     }
 
     [Fact]
@@ -44,9 +41,8 @@ public class Aoc202016Tests : PuzzleTest<Aoc202016>
                              15,1,5
                              5,14,9
                              """;
-
-        var validator = new Aoc202016.TicketValidator();
-        var ticket = Aoc202016.TicketValidator.FindFields(input);
+        
+        var ticket = Aoc202016.FindFields(input);
 
         ticket.Fields["class"].Should().Be(12);
         ticket.Fields["row"].Should().Be(11);

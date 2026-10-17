@@ -6,83 +6,63 @@ namespace Pzl.Aoc.Puzzles.Aoc2020;
 public class Aoc202015 : AocPuzzle
 {
     [Puzzle("9b1872aba49cfd16a3cc25436caa89e4")]
-    public long Part1(string input) => new MemoryGame(input).Play(2020);
+    public long Part1(string input) => Solve(input, 2020);
 
     [Puzzle("7bcf2e0ed295f1de70b3d5368e465107")]
-    public long Part2(string input) => new MemoryGame(input).Play(30000000);
+    public long Part2(string input) => Solve(input, 30000000);
     
-    public class MemoryGame
+    private static long Solve(string input, int until)
     {
-        private readonly List<long> _inputNumbers;
-        private readonly Dictionary<long, GameNumber> _numbers;
+        var inputNumbers = input.Split(',').Select(long.Parse).ToList();
+        var numbers = new Dictionary<long, GameNumber>();
 
-        public MemoryGame(string input)
+        var turn = 0;
+        GameNumber? lastSpokenNumber = null;
+        foreach (var num in inputNumbers)
         {
-            _inputNumbers = input.Split(',').Select(long.Parse).ToList();
-            _numbers = new Dictionary<long, GameNumber>();
+            lastSpokenNumber = Speak(numbers, num, turn);
+            turn++;
         }
 
-        public long Play(int until)
+        while (turn < until)
         {
-            var turn = 0;
-            GameNumber? lastSpokenNumber = null;
-            foreach (var num in _inputNumbers)
-            {
-                lastSpokenNumber = Speak(num, turn);
-                turn++;
-            }
-
-            if(lastSpokenNumber == null)
-                throw new Exception("No number spoken");
-
-            while (turn < until)
-            {
-                var numberToSpeak = lastSpokenNumber.SpeakCount == 1
-                    ? 0
-                    : lastSpokenNumber.Age;
-                lastSpokenNumber = Speak(numberToSpeak, turn);
-                turn++;
-            }
-
-            return lastSpokenNumber.Num;
+            var numberToSpeak = lastSpokenNumber!.SpeakCount == 1
+                ? 0
+                : lastSpokenNumber.Age;
+            lastSpokenNumber = Speak(numbers, numberToSpeak, turn);
+            turn++;
         }
 
-        private GameNumber Speak(long num, int turn)
-        {
-            if (!_numbers.TryGetValue(num, out var gameNum))
-            {
-                gameNum = new GameNumber(num);
-                _numbers.Add(num, gameNum);
-            }
+        return lastSpokenNumber!.Num;
+    }
 
-            gameNum.Speak(turn);
-            return gameNum;
+    private static GameNumber Speak(Dictionary<long, GameNumber> numbers, long num, int turn)
+    {
+        if (!numbers.TryGetValue(num, out var gameNum))
+        {
+            gameNum = new GameNumber(num);
+            numbers.Add(num, gameNum);
         }
 
-        private class GameNumber
+        gameNum.Speak(turn);
+        return gameNum;
+    }
+
+    private class GameNumber(long num)
+    {
+        private long _prevSpoken;
+        private long _lastSpoken;
+
+        public long Num { get; } = num;
+        public long SpeakCount { get; private set; }
+
+        public long Age => _lastSpoken - _prevSpoken;
+
+        public void Speak(int time)
         {
-            private long _prevSpoken;
-            private long _lastSpoken;
-            
-            public long Num { get; }
-            public long SpeakCount { get; private set; }
-
-            public GameNumber(long num)
-            {
-                _prevSpoken = 0;
-                _lastSpoken = 0;
-                Num = num;
-                SpeakCount = 0;
-            }
-
-            public long Age => _lastSpoken - _prevSpoken;
-
-            public void Speak(int time)
-            {
-                _prevSpoken = _lastSpoken;
-                _lastSpoken = time;
-                SpeakCount++;
-            }
+            _prevSpoken = _lastSpoken;
+            _lastSpoken = time;
+            SpeakCount++;
         }
     }
 }

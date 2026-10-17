@@ -150,7 +150,7 @@ public class Aoc201817 : AocPuzzle
             if (value == EmptyTile)
                 grid.WriteValue(RunningWaterTile);
 
-            var coordBelow = grid.Coord.Down;
+            var coordBelow = grid.Coord.Down();
             var valueBelow = grid.ReadValueAt(coordBelow);
             if (valueBelow is not (EmptyTile or RunningWaterTile))
                 continue;

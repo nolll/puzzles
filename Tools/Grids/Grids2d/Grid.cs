@@ -199,25 +199,25 @@ public class Grid<T> where T : struct
     public bool TryMoveTo(Coord address) => MoveTo(address, false);
     public bool TryMoveTo(int x, int y) => MoveTo(new Coord(x, y), false);
     public bool MoveForward(int steps = 1) => MoveForward(steps, true);
-    private bool MoveForward(int steps, bool extend) => MoveTo(new Coord(Coord.X + Direction.X * steps, Coord.Y + Direction.Y * steps), extend);
+    private bool MoveForward(int steps, bool extend) => MoveTo(Coord.Forward(Direction, steps), extend);
     public bool TryMoveForward() => MoveForward(1, false);
     public bool MoveBackward() => MoveBackward(true);
-    private bool MoveBackward(bool extend) => MoveTo(new Coord(Coord.X - Direction.X, Coord.Y - Direction.Y), extend);
+    private bool MoveBackward(bool extend) => MoveTo(Coord.Backward(Direction), extend);
     public bool TryMoveBackward() => MoveBackward(false);
     public bool MoveUp(int steps = 1) => MoveUp(steps, true);
-    private bool MoveUp(int steps, bool extend) => MoveTo(new Coord(Coord.X, Coord.Y - steps), extend);
+    private bool MoveUp(int steps, bool extend) => MoveTo(Coord.Up(steps), extend);
     public bool TryMoveUp(int steps = 1) => MoveUp(steps, false);
     public bool MoveRight(int steps = 1) => MoveRight(steps, true);
-    private bool MoveRight(int steps, bool extend) => MoveTo(new Coord(Coord.X + steps, Coord.Y), extend);
+    private bool MoveRight(int steps, bool extend) => MoveTo(Coord.Right(steps), extend);
     public bool TryMoveRight(int steps = 1) => MoveRight(steps, false);
     public bool MoveDown(int steps = 1) => MoveDown(steps, true);
-    private bool MoveDown(int steps, bool extend) => MoveTo(new Coord(Coord.X, Coord.Y + steps), extend);
+    private bool MoveDown(int steps, bool extend) => MoveTo(Coord.Down(steps), extend);
     public bool TryMoveDown(int steps = 1) => MoveDown(steps, false);
     public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
-    private bool MoveLeft(int steps, bool extend) => MoveTo(new Coord(Coord.X - steps, Coord.Y), extend);
+    private bool MoveLeft(int steps, bool extend) => MoveTo(Coord.Left(steps), extend);
     public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
     public bool Move(GridDirection dir, int steps = 1) => Move(dir, steps, true);
-    private bool Move(GridDirection dir, int steps, bool extend) => MoveTo(new Coord(Coord.X + dir.X, Coord.Y + dir.Y), extend);
+    private bool Move(GridDirection dir, int steps, bool extend) => MoveTo(Coord.Move(dir, steps), extend);
     public bool TryMove(GridDirection dir, int steps = 1) => Move(dir, steps, false);
 
     public bool MoveTo(Coord address, bool extend)
@@ -237,7 +237,17 @@ public class Grid<T> where T : struct
     }
 
     public GridDirection TurnLeft() => TurnTo(Direction.TurnLeft());
+    public GridDirection TurnLeft(int degrees) => Turn(TurnLeft, degrees);
     public GridDirection TurnRight() => TurnTo(Direction.TurnRight());
+    public GridDirection TurnRight(int degrees) => Turn(TurnRight, degrees);
+
+    private GridDirection Turn(Func<GridDirection> turnFunc, int degrees)
+    {
+        for (var i = 0; i < degrees / 90; i++) 
+            turnFunc();
+
+        return Direction;
+    }
 
     public GridDirection TurnTo(GridDirection direction)
     {

@@ -27,8 +27,14 @@ public record Coord(int X, int Y)
     public virtual bool Equals(Coord? other) => X == other?.X && Y == other.Y;
     public override int GetHashCode() => HashCode.Combine(X, Y);
     
-    public Coord Up => new(X, Y - 1);
-    public Coord Right => new(X + 1, Y);
-    public Coord Down => new(X, Y + 1);
-    public Coord Left => new(X - 1, Y);
+    public Coord Up(int steps = 1) => Forward(GridDirection.Up, steps);
+    public Coord Right(int steps = 1) => Forward(GridDirection.Right, steps);
+    public Coord Down(int steps = 1) => Forward(GridDirection.Down, steps);
+    public Coord Left(int steps = 1) => Forward(GridDirection.Left, steps);
+    public Coord Forward(GridDirection direction, int steps = 1) => Move(direction, steps);
+    public Coord Backward(GridDirection direction, int steps = 1) => Move(direction, -steps);
+    public Coord Move(GridDirection direction, int steps = 1) => new(X + direction.X * steps, Y + direction.Y * steps);
+    public Coord Move(int x, int y) => new(X + x, Y + y);
+    public Coord RotateLeft() => new(-Y, X);
+    public Coord RotateRight() => new(Y, -X);
 }

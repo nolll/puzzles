@@ -53,19 +53,19 @@ public class Aoc201917 : AocPuzzle
         if (v == '.')
             return false;
 
-        v = GetValueAt(grid, coord.Up);
+        v = GetValueAt(grid, coord.Up());
         if (v == '.')
             return false;
 
-        v = GetValueAt(grid, coord.Right);
+        v = GetValueAt(grid, coord.Right());
         if (v == '.')
             return false;
 
-        v = GetValueAt(grid, coord.Down);
+        v = GetValueAt(grid, coord.Down());
         if (v == '.')
             return false;
 
-        v = GetValueAt(grid, coord.Left);
+        v = GetValueAt(grid, coord.Left());
         if (v == '.')
             return false;
 

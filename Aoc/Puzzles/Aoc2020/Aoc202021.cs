@@ -7,12 +7,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2020;
 public class Aoc202021 : AocPuzzle
 {
     [Puzzle("a3862d6533f785e932eeaa517ad2549d")]
-    public int Part1(string input) => FindIngredientsWithoutAllergens(input);
-
-    [Puzzle("6adefc0d0ced658ef54a524396bb93a1")]
-    public string Part2(string input) => GetIngredientList(input);
-
-    public int FindIngredientsWithoutAllergens(string input)
+    public int Part1(string input)
     {
         var foods = Parse(input);
         var possibleIngredients = GetPossibleIngredientsByAllergen(foods);
@@ -21,23 +16,8 @@ public class Aoc202021 : AocPuzzle
         return ingredientInstancesWithoutAllergens.Count();
     }
 
-    private Dictionary<string, List<string>> GetPossibleIngredientsByAllergen(IEnumerable<Food> foods)
-    {
-        var d = new Dictionary<string, List<string>>();
-        foreach (var food in foods)
-        {
-            foreach (var allergen in food.Allergens)
-            {
-                d[allergen] = !d.TryGetValue(allergen, out var possibleIngredients)
-                    ? [.. food.Ingredients]
-                    : [.. possibleIngredients.Where(ingredient => food.Ingredients.Contains(ingredient))];
-            }
-        }
-
-        return d;
-    }
-
-    public string GetIngredientList(string input)
+    [Puzzle("6adefc0d0ced658ef54a524396bb93a1")]
+    public string Part2(string input)
     {
         var foods = Parse(input);
         var possibleIngredients = GetPossibleIngredientsByAllergen(foods);
@@ -52,21 +32,32 @@ public class Aoc202021 : AocPuzzle
 
             foreach (var ingredient in possibleIngredients)
             {
-                if (ingredient.Value.Contains(ingredientName))
-                {
-                    ingredient.Value.Remove(ingredientName);
-                }
+                ingredient.Value.Remove(ingredientName);
 
-                if (!ingredient.Value.Any())
-                {
+                if (ingredient.Value.Count == 0) 
                     possibleIngredients.Remove(allergenName);
-                }
             }
         }
 
         var canonicalList = canonical.OrderBy(o => o.Key).Select(o => o.Value);
 
         return string.Join(',', canonicalList);
+    }
+
+    private static Dictionary<string, List<string>> GetPossibleIngredientsByAllergen(IEnumerable<Food> foods)
+    {
+        var d = new Dictionary<string, List<string>>();
+        foreach (var food in foods)
+        {
+            foreach (var allergen in food.Allergens)
+            {
+                d[allergen] = !d.TryGetValue(allergen, out var possibleIngredients)
+                    ? [.. food.Ingredients]
+                    : [.. possibleIngredients.Where(ingredient => food.Ingredients.Contains(ingredient))];
+            }
+        }
+
+        return d;
     }
 
     private static Food[] Parse(string input) => [.. input.Split(LineBreaks.Single).Select(Food.ParseFood)];

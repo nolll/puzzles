@@ -8,179 +8,147 @@ namespace Pzl.Aoc.Puzzles.Aoc2020;
 [Name("Jurassic Jigsaw")]
 public class Aoc202020 : AocPuzzle
 {
+    private const int NumberOfHashesInSeaMonster = 15;
+
     [Puzzle("53852ec33c717ff2cc141d5403967cd3")]
-    public long Part1(string input) => new ImageJigsawPuzzle(input).ProductOfCornerTileIds;
+    public long Part1(string input)
+    {
+        var tilesById = GetTiles(input);
+        var matchesById = FindMatchingTiles([.. tilesById.Values]);
+        return GetCornerTiles(matchesById, tilesById)
+            .Aggregate<JigsawTile, long>(1, (current, tile) => current * tile.Id);
+    }
 
     [Puzzle("064e1e2e30b4fed6bb576ee48cd6c9c1")]
-    public long Part2(string input) => new ImageJigsawPuzzle(input).NumberOfHashesThatAreNotPartOfASeaMonster;
-
-    public class ImageJigsawPuzzle
+    public long Part2(string input)
     {
-        public readonly Dictionary<long, JigsawTile> TilesById;
-        private readonly Dictionary<string, List<JigsawTile>> _matchesByEdge;
-        private readonly Dictionary<long, List<JigsawTile>> _matchesById;
+        var image = ArrangeTilesAndPaintImage(input);
+        var numberOfSeaMonsters = CountMonsters(image);
+        return image.Values.Count(o => o == '#') - numberOfSeaMonsters * NumberOfHashesInSeaMonster;
+    }
 
-        public long ProductOfCornerTileIds { get; }
+    private Dictionary<long, JigsawTile> GetTiles(string input) =>
+        input.Trim().Split(LineBreaks.Double).Select(JigsawTile.Parse).ToDictionary(tile => tile.Id);
 
-        public ImageJigsawPuzzle(string input)
+    // public IList<JigsawTile> CornerTiles =>
+    //     _matchesById.Where(o => o.Value.Count == 2).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
+
+    public static IList<JigsawTile> GetCornerTiles(Dictionary<long, List<JigsawTile>> matchesById, Dictionary<long, JigsawTile> tilesById) =>
+        matchesById.Where(o => o.Value.Count == 2).Select(o => tilesById[o.Key]).OrderBy(o => o.Id).ToList();
+
+    // public IList<JigsawTile> EdgeTiles =>
+    //     _matchesById.Where(o => o.Value.Count == 3).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
+    //
+    // public IList<JigsawTile> CenterTiles =>
+    //     _matchesById.Where(o => o.Value.Count == 4).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
+
+    private Grid<char> ArrangeTilesAndPaintImage(string input)
+    {
+        var tilesById = GetTiles(input);
+        var tileList = tilesById.Values.ToList();
+        var matchesById = FindMatchingTiles(tileList);
+        var matchesByEdge = FindMatchingEdges(tilesById);
+
+        var cornerTilesLeft = GetCornerTiles(matchesById, tilesById);
+        var tileGrid = new Grid<long>();
+        var currentTile = cornerTilesLeft.First();
+
+        tileGrid.MoveTo(0, 0);
+        tileGrid.WriteValue(currentTile.Id);
+
+        new TopLeftCornerMatcher(matchesByEdge).TryAllRotations(currentTile);
+
+        while (tileGrid.Values.Count(o => o != 0) < tilesById.Values.Count)
         {
-            var groups = input.Trim().Split(LineBreaks.Double);
-            TilesById = new Dictionary<long, JigsawTile>();
-            foreach (var group in groups)
+            var edgeToFit = currentTile.Edges["right"];
+            var matches = matchesByEdge[edgeToFit];
+            currentTile = matches.FirstOrDefault(o => o.Id != currentTile.Id);
+            if (currentTile != null)
             {
-                var tile = JigsawTile.Parse(group);
-                TilesById.Add(tile.Id, tile);
+                tileGrid.MoveRight();
+                new LeftEdgeMatcher(edgeToFit).TryAllRotations(currentTile);
+                tileGrid.WriteValue(currentTile.Id);
             }
-
-            _matchesById = FindMatchingTiles(TilesById.Values.ToList());
-            _matchesByEdge = FindMatchingEdges(TilesById.Values.ToList());
-
-            ProductOfCornerTileIds = CornerTiles.Aggregate<JigsawTile, long>(1, (current, tile) => current * tile.Id);
+            else
+            {
+                tileGrid.MoveTo(0, tileGrid.Coord.Y);
+                currentTile = tilesById[tileGrid.ReadValue()];
+                tileGrid.MoveDown();
+                edgeToFit = currentTile.Edges["bottom"];
+                matches = matchesByEdge[edgeToFit];
+                currentTile = matches.First(o => o.Id != currentTile.Id);
+                new TopEdgeMatcher(edgeToFit).TryAllRotations(currentTile);
+                tileGrid.WriteValue(currentTile.Id);
+            }
         }
 
-        public long NumberOfHashesThatAreNotPartOfASeaMonster
+        foreach (var tile in tilesById.Values)
+            tile.RemoveBorder();
+
+        var imageGrid = new Grid<char>();
+        for (var tileY = 0; tileY < tileGrid.Height; tileY++)
         {
-            get
+            for (var tileX = 0; tileX < tileGrid.Width; tileX++)
             {
-                var image = ArrangeTilesAndPaintImage();
-                var numberOfSeaMonsters = new SeaMonsterCounter().GetCount(image);
-                var numberOfHashes = image.Values.Count(o => o == '#');
-                const int numberOfHashesInSeaMonster = 15;
-                return numberOfHashes - numberOfSeaMonsters * numberOfHashesInSeaMonster;
-            }
-        }
-
-        public IList<JigsawTile> CornerTiles => _matchesById.Where(o => o.Value.Count == 2).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
-        public IList<JigsawTile> EdgeTiles => _matchesById.Where(o => o.Value.Count == 3).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
-        public IList<JigsawTile> CenterTiles => _matchesById.Where(o => o.Value.Count == 4).Select(o => TilesById[o.Key]).OrderBy(o => o.Id).ToList();
-
-        private Grid<char> ArrangeTilesAndPaintImage()
-        {
-            var cornerTilesLeft = CornerTiles.ToList();
-            var tileGrid = new Grid<long>();
-            var currentTile = cornerTilesLeft.First();
-
-            tileGrid.MoveTo(0, 0);
-            tileGrid.WriteValue(currentTile.Id);
-
-            new TopLeftCornerMatcher(_matchesByEdge).TryAllRotations(currentTile);
-
-            while (tileGrid.Values.Count(o => o != 0) < TilesById.Values.Count)
-            {
-                var edgeToFit = currentTile.Edges["right"];
-                var matches = _matchesByEdge[edgeToFit];
-                currentTile = matches.FirstOrDefault(o => o.Id != currentTile.Id);
-                if (currentTile != null)
+                var tile = tilesById[tileGrid.ReadValueAt(tileX, tileY)];
+                var tileOffsetX = tileX * tile.Grid.Width;
+                var tileOffsetY = tileY * tile.Grid.Height;
+                for (var localY = 0; localY < tile.Grid.Height; localY++)
                 {
-                    tileGrid.MoveRight();
-                    new LeftEdgeMatcher(edgeToFit).TryAllRotations(currentTile);
-                    tileGrid.WriteValue(currentTile.Id);
-                }
-                else
-                {
-                    tileGrid.MoveTo(0, tileGrid.Coord.Y);
-                    currentTile = TilesById[tileGrid.ReadValue()];
-                    tileGrid.MoveDown();
-                    edgeToFit = currentTile.Edges["bottom"];
-                    matches = _matchesByEdge[edgeToFit];
-                    currentTile = matches.First(o => o.Id != currentTile.Id);
-                    new TopEdgeMatcher(edgeToFit).TryAllRotations(currentTile);
-                    tileGrid.WriteValue(currentTile.Id);
-                }
-            }
-
-            foreach (var tile in TilesById.Values)
-            {
-                tile.RemoveBorder();
-            }
-
-            var imageGrid = new Grid<char>();
-            for (var tileY = 0; tileY < tileGrid.Height; tileY++)
-            {
-                for (var tileX = 0; tileX < tileGrid.Width; tileX++)
-                {
-                    var tile = TilesById[tileGrid.ReadValueAt(tileX, tileY)];
-                    var tileOffsetX = tileX * tile.Grid.Width;
-                    var tileOffsetY = tileY * tile.Grid.Height;
-                    for (var localY = 0; localY < tile.Grid.Height; localY++)
+                    for (var localX = 0; localX < tile.Grid.Width; localX++)
                     {
-                        for (var localX = 0; localX < tile.Grid.Width; localX++)
-                        {
-                            var x = localX + tileOffsetX;
-                            var y = localY + tileOffsetY;
+                        var x = localX + tileOffsetX;
+                        var y = localY + tileOffsetY;
 
-                            imageGrid.WriteValueAt(x, y, tile.Grid.ReadValueAt(localX, localY));
-                        }
+                        imageGrid.WriteValueAt(x, y, tile.Grid.ReadValueAt(localX, localY));
                     }
                 }
             }
-
-            return imageGrid;
         }
 
-        private static Dictionary<long, List<JigsawTile>> FindMatchingTiles(IList<JigsawTile> tiles)
-        {
-            var matches = new Dictionary<long, List<JigsawTile>>();
-            foreach (var tile in tiles)
-            {
-                var tileMatches = tiles.Where(o => o.Id != tile.Id && o.HasMatchingEdge(tile)).ToList();
-                matches.Add(tile.Id, tileMatches);
-            }
+        return imageGrid;
+    }
 
-            return matches;
+    private static Dictionary<long, List<JigsawTile>> FindMatchingTiles(IList<JigsawTile> tiles)
+    {
+        var matches = new Dictionary<long, List<JigsawTile>>();
+        foreach (var tile in tiles)
+        {
+            var tileMatches = tiles.Where(o => o.Id != tile.Id && o.HasMatchingEdge(tile)).ToList();
+            matches.Add(tile.Id, tileMatches);
         }
 
-        private Dictionary<string, List<JigsawTile>> FindMatchingEdges(IList<JigsawTile> tiles)
+        return matches;
+    }
+
+    private Dictionary<string, List<JigsawTile>> FindMatchingEdges(Dictionary<long, JigsawTile> tilesById)
+    {
+        var matches = new Dictionary<string, List<JigsawTile>>();
+        foreach (var tile in tilesById.Values)
         {
-            var matches = new Dictionary<string, List<JigsawTile>>();
-            foreach (var tile in tiles)
+            foreach (var edge in tile.Edges.Values)
             {
-                foreach (var edge in tile.Edges.Values)
+                var reversedEdge = edge.ReverseString();
+                if (!matches.TryGetValue(edge, out var list))
                 {
-                    var reversedEdge = edge.ReverseString();
-                    if (!matches.TryGetValue(edge, out var list))
-                    {
-                        list = new List<JigsawTile>();
-                        matches.Add(edge, list);
-                        matches.Add(reversedEdge, list);
-                    }
-
-                    var matchedTile = TilesById.Values.FirstOrDefault(o => o.HasMatchingEdge(edge) && o.Id != tile.Id);
-                    if (matchedTile is not null)
-                        list.Add(matchedTile);
+                    list = new List<JigsawTile>();
+                    matches.Add(edge, list);
+                    matches.Add(reversedEdge, list);
                 }
+
+                var matchedTile = tilesById.Values.FirstOrDefault(o => o.HasMatchingEdge(edge) && o.Id != tile.Id);
+                if (matchedTile is not null)
+                    list.Add(matchedTile);
             }
-
-            return matches;
-        }
-    }
-    
-    public abstract class EdgeMatcher : TileMatcher
-    {
-        private readonly string _edgeToMatch;
-        protected abstract string Edge { get; }
-
-        protected EdgeMatcher(string edgeToMatch)
-        {
-            _edgeToMatch = edgeToMatch;
         }
 
-        protected override bool IsMatch(JigsawTile tile)
-        {
-            return tile.Edges[Edge] == _edgeToMatch;
-        }
+        return matches;
     }
 
-    public class JigsawTile
+    public class JigsawTile(long id, Grid<char> grid)
     {
-        public long Id { get; }
-        public Grid<char> Grid;
-
-        private JigsawTile(long id, Grid<char> grid)
-        {
-            Id = id;
-            Grid = grid;
-        }
+        public long Id { get; } = id;
+        public Grid<char> Grid { get; private set; } = grid;
 
         public bool HasMatchingEdge(JigsawTile otherTile) =>
             Edges.Values.Any(edge => otherTile.Edges.Values.Any(HasMatchingEdge));
@@ -241,80 +209,68 @@ public class Aoc202020 : AocPuzzle
             return new JigsawTile(id, grid);
         }
 
-        public void RemoveBorder()
-        {
-            Grid = Grid.Slice(new Coord(Grid.XMin + 1, Grid.YMin + 1), new Coord(Grid.XMax - 1, Grid.YMax - 1));
-        }
+        public void RemoveBorder() => Grid = Grid.Slice(new Coord(Grid.XMin + 1, Grid.YMin + 1), new Coord(Grid.XMax - 1, Grid.YMax - 1));
     }
-    
-    public class SeaMonsterCounter
+
+    private const string SeaMonsterPattern = """
+                                             ..................#.
+                                             #....##....##....###
+                                             .#..#..#..#..#..#...
+                                             """;
+
+    private List<Func<Grid<char>, Grid<char>>> SearchFlips =>
+    [
+        grid => grid.FlipVertical(),
+        grid => grid.FlipHorizontal(),
+        grid => grid.FlipVertical(),
+        grid => grid.FlipHorizontal()
+    ];
+
+    private int Count(Grid<char> seaMonsterGrid, List<Coord> seaMonsterHashCoords, Grid<char> grid)
     {
-        private const string SeaMonsterPattern = """
-                                                 ..................#.
-                                                 #....##....##....###
-                                                 .#..#..#..#..#..#...
-                                                 """;
-
-        private readonly List<Func<Grid<char>, Grid<char>>> _searchFlips =
-        [
-            grid => grid.FlipVertical(),
-            grid => grid.FlipHorizontal(),
-            grid => grid.FlipVertical(),
-            grid => grid.FlipHorizontal()
-        ];
-
-        private readonly Grid<char> _seaMonsterGrid;
-        private readonly List<Coord> _seaMonsterHashAddresses;
-
-        public SeaMonsterCounter()
+        var seaMonsterCount = 0;
+        for (var y = 0; y < grid.Height - seaMonsterGrid.Height; y++)
         {
-            _seaMonsterGrid = GridBuilder.BuildCharGrid(SeaMonsterPattern);
-            _seaMonsterHashAddresses = _seaMonsterGrid.Coords.Where(o => _seaMonsterGrid.ReadValueAt(o) == '#').ToList();
-        }
-
-        private int Count(Grid<char> grid)
-        {
-            var seaMonsterCount = 0;
-            for (var y = 0; y < grid.Height - _seaMonsterGrid.Height; y++)
+            for (var x = 0; x < grid.Width - seaMonsterGrid.Width; x++)
             {
-                for (var x = 0; x < grid.Width - _seaMonsterGrid.Width; x++)
-                {
-                    var foundSeaMonster = _seaMonsterHashAddresses.All(address => grid.ReadValueAt(x + address.X, y + address.Y) == '#');
-                    seaMonsterCount += foundSeaMonster ? 1 : 0;
-                }
+                var foundSeaMonster = seaMonsterHashCoords.All(address => grid.ReadValueAt(x + address.X, y + address.Y) == '#');
+                seaMonsterCount += foundSeaMonster ? 1 : 0;
             }
-
-            return seaMonsterCount;
         }
 
-        public int GetCount(Grid<char> grid)
-        {
-            foreach (var flip in _searchFlips)
-            {
-                grid = flip(grid);
-                for (var i = 0; i < 4; i++)
-                {
-                    grid = grid.RotateRight();
-
-                    var count = Count(grid);
-                    if (count > 0)
-                        return count;
-                }
-            }
-
-            return 0;
-        }
+        return seaMonsterCount;
     }
-    
+
+    public int CountMonsters(Grid<char> grid)
+    {
+        var seaMonsterGrid = GridBuilder.BuildCharGrid(SeaMonsterPattern);
+        var seaMonsterHashCoords = seaMonsterGrid.Coords.Where(o => seaMonsterGrid.ReadValueAt(o) == '#').ToList();
+
+        foreach (var flip in SearchFlips)
+        {
+            grid = flip(grid);
+            for (var i = 0; i < 4; i++)
+            {
+                grid = grid.RotateRight();
+
+                var count = Count(seaMonsterGrid, seaMonsterHashCoords, grid);
+                if (count > 0)
+                    return count;
+            }
+        }
+
+        return 0;
+    }
+
     public abstract class TileMatcher
     {
-        private readonly List<Action<JigsawTile>> _searchFlips = new()
-        {
-            (tile) => tile.FlipVertical(),
-            (tile) => tile.FlipHorizontal(),
-            (tile) => tile.FlipVertical(),
-            (tile) => tile.FlipHorizontal()
-        };
+        private readonly List<Action<JigsawTile>> _searchFlips =
+        [
+            tile => tile.FlipVertical(),
+            tile => tile.FlipHorizontal(),
+            tile => tile.FlipVertical(),
+            tile => tile.FlipHorizontal()
+        ];
 
         protected abstract bool IsMatch(JigsawTile tile);
 
@@ -327,42 +283,33 @@ public class Aoc202020 : AocPuzzle
                 {
                     tile.RotateRight();
 
-                    if (IsMatch(tile)) 
+                    if (IsMatch(tile))
                         return;
                 }
             }
         }
     }
     
-    public class LeftEdgeMatcher : EdgeMatcher
+    public abstract class EdgeMatcher(string edgeToMatch) : TileMatcher
+    {
+        protected abstract string Edge { get; }
+        protected override bool IsMatch(JigsawTile tile) => tile.Edges[Edge] == edgeToMatch;
+    }
+
+    private class LeftEdgeMatcher(string edgeToMatch) : EdgeMatcher(edgeToMatch)
     {
         protected override string Edge => "left";
-
-        public LeftEdgeMatcher(string edgeToMatch) : base(edgeToMatch)
-        {
-        }
     }
-    
-    public class TopEdgeMatcher : EdgeMatcher
+
+    private class TopEdgeMatcher(string edgeToMatch) : EdgeMatcher(edgeToMatch)
     {
         protected override string Edge => "top";
-
-        public TopEdgeMatcher(string edgeToMatch) : base(edgeToMatch)
-        {
-        }
     }
-    
-    public class TopLeftCornerMatcher : TileMatcher
+
+    private class TopLeftCornerMatcher(Dictionary<string, List<JigsawTile>> matchesByEdge) : TileMatcher
     {
-        private readonly Dictionary<string, List<JigsawTile>> _matchesByEdge;
-
-        public TopLeftCornerMatcher(Dictionary<string, List<JigsawTile>> matchesByEdge)
-        {
-            _matchesByEdge = matchesByEdge;
-        }
-
         protected override bool IsMatch(JigsawTile tile) =>
-            _matchesByEdge[tile.Edges["left"]].Count == 0 &&
-            _matchesByEdge[tile.Edges["top"]].Count == 0;
+            matchesByEdge[tile.Edges["left"]].Count == 0 &&
+            matchesByEdge[tile.Edges["top"]].Count == 0;
     }
 }

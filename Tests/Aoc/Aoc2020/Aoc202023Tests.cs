@@ -4,23 +4,11 @@ namespace Tests.Aoc.Aoc2020;
 
 public class Aoc202023Tests : PuzzleTest<Aoc202023>
 {
-    private const int Input = 389_125_467;
+    private const string Input = "389125467";
 
     [Fact]
-    public void ResultAfter10MovesIsCorrect()
-    {
-        var game = new Aoc202023.CrabCupsGame(Input);
-        game.Play(10);
-
-        game.ResultString.Should().Be("92658374");
-    }
+    public void ResultAfter10MovesIsCorrect() => Sut.Part1(Input, 10).Should().Be("92658374");
 
     [Fact]
-    public void ExtendedResultAfter10MillionMovesIsCorrect()
-    {
-        var game = new Aoc202023.CrabCupsGame(Input, true);
-        game.Play(10_000_000);
-
-        game.ResultProduct.Should().Be(149_245_887_792);
-    }
+    public void ExtendedResultAfter10MillionMovesIsCorrect() => Sut.Part2(Input).Should().Be(149_245_887_792);
 }

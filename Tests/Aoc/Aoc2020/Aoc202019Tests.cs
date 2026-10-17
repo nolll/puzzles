@@ -6,22 +6,10 @@ namespace Tests.Aoc.Aoc2020;
 public class Aoc202019Tests : PuzzleTest<Aoc202019>
 {
     [Fact]
-    public void NumberOfValidMessagesIs2()
-    {
-        var validator = new Aoc202019.MonsterImageValidator(RulesAndMessages1, false);
-        var result = validator.ValidCount();
-
-        result.Should().Be(2);
-    }
+    public void NumberOfValidMessagesIs2() => Sut.Part1(RulesAndMessages1).Should().Be(2);
 
     [Fact]
-    public void NumberOfValidMessagesIs3()
-    {
-        var validator = new Aoc202019.MonsterImageValidator(RulesAndMessages2, false);
-        var result = validator.ValidCount();
-
-        result.Should().Be(3);
-    }
+    public void NumberOfValidMessagesIs3() => Sut.Part1(RulesAndMessages2).Should().Be(3);
 
     [Theory]
     [InlineData("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
@@ -39,13 +27,8 @@ public class Aoc202019Tests : PuzzleTest<Aoc202019>
     [InlineData("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", false)]
     [InlineData("babaaabbbaaabaababbaabababaaab", false)]
     [InlineData("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", false)]
-    public void SpecificMessagesIsValid_UnmodifiedRules(string message, bool expected)
-    {
-        var validator = new Aoc202019.MonsterImageValidator(Rules2, false);
-        var isValid = validator.IsValid(message);
-
-        isValid.Should().Be(expected);
-    }
+    public void SpecificMessagesIsValid_UnmodifiedRules(string message, bool expected) => 
+        Sut.IsValid(ParseRules(Rules2), message).Should().Be(expected);
 
     [Theory]
     [InlineData("abbbbbabbbaaaababbaabbbbabababbbabbbbbbabaaaa", false)]
@@ -63,22 +46,11 @@ public class Aoc202019Tests : PuzzleTest<Aoc202019>
     [InlineData("aaaabbaabbaaaaaaabbbabbbaaabbaabaaa", true)]
     [InlineData("babaaabbbaaabaababbaabababaaab", false)]
     [InlineData("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba", true)]
-    public void SpecificMessageIsValid_ModifiedRules(string message, bool expected)
-    {
-        var validator = new Aoc202019.MonsterImageValidator(Rules2, true);
-        var isValid = validator.IsValid(message);
-
-        isValid.Should().Be(expected);
-    }
+    public void SpecificMessageIsValid_ModifiedRules(string message, bool expected) => 
+        Sut.IsValid(Sut.ModifyRules(ParseRules(Rules2)), message).Should().Be(expected);
 
     [Fact]
-    public void NumberOfValidMessagesIs12()
-    {
-        var validator = new Aoc202019.MonsterImageValidator(RulesAndMessages2, true);
-        var result = validator.ValidCount();
-
-        result.Should().Be(12);
-    }
+    public void NumberOfValidMessagesIs12() => Sut.Part2(RulesAndMessages2).Should().Be(12);
 
     private const string Rules1 = """
                                   0: 4 1 5
@@ -151,4 +123,5 @@ public class Aoc202019Tests : PuzzleTest<Aoc202019>
 
     private static string RulesAndMessages1 => $"{Rules1}{LineBreaks.Double}{Messages1}";
     private static string RulesAndMessages2 => $"{Rules2}{LineBreaks.Double}{Messages2}";
+    private static Dictionary<int, Aoc202019.Rule> ParseRules(string input) => Sut.ParseRules([.. input.Split(LineBreaks.Single)]);
 }

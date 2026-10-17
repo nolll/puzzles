@@ -22,6 +22,7 @@ public static class Conversion
     ];
 
     public static string ToBinary(int n) => Convert.ToString(n, 2);
+    public static string ToBinary(long n) => Convert.ToString(n, 2);
 
     public static string ToRoman(int input)
     {

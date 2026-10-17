@@ -14,10 +14,7 @@ public class Aoc202014Tests : PuzzleTest<Aoc202014>
                              mem[8] = 0
                              """;
 
-        var system = new Aoc202014.BitmaskSystem1();
-        var sum = system.Run(input);
-
-        sum.Should().Be(165);
+        Sut.Part1(input).Should().Be(165);
     }
 
     [Fact]
@@ -30,9 +27,6 @@ public class Aoc202014Tests : PuzzleTest<Aoc202014>
                              mem[26] = 1
                              """;
 
-        var system = new Aoc202014.BitmaskSystem2();
-        var sum = system.Run(input);
-
-        sum.Should().Be(208);
+        Sut.Part2(input).Should().Be(208);
     }
 }

@@ -5,8 +5,7 @@ namespace Pzl.Common;
 
 public class PuzzleDefinition(
     Type type,
-    string puzzleTypeName,
-    string puzzleTypeShortName,
+    PuzzleType puzzleType,
     IEnumerable<string> tags,
     string sortId,
     string title,
@@ -17,8 +16,7 @@ public class PuzzleDefinition(
     bool hasUniqueInputsPerPart)
 {
     public Type Type { get; } = type;
-    public string PuzzleTypeName { get; } = puzzleTypeName;
-    public string PuzzleTypeShortName { get; } = puzzleTypeShortName;
+    public PuzzleType PuzzleType { get; } = puzzleType;
     public IEnumerable<string> Tags { get; } = tags;
     public string SortId { get; } = sortId;
     public string Title { get; } = title;
@@ -36,8 +34,7 @@ public class PuzzleDefinition(
         string listTitle)
         : this(
             data.Type,
-            data.PuzzleTypeName,
-            data.PuzzleTypeShortName,
+            data.PuzzleType,
             [..tags, ..CreateTags(data)],
             sortId,
             title,

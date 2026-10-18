@@ -4,8 +4,7 @@ namespace Pzl.Client.Filter;
 
 public class PuzzleDefinitionInTest(
     IEnumerable<string>? tags = null,
-    string? puzzleTypeName = null,
-    string? puzzleTypeShortName = null,
+    PuzzleType? puzzleType = null,
     string? sortId = null,
     string? title = null,
     string? listTitle = null,
@@ -15,8 +14,7 @@ public class PuzzleDefinitionInTest(
     bool? hasUniqueInputsPerPart = null)
     : PuzzleDefinition(
         typeof(Puzzle),
-        puzzleTypeName ?? "",
-        puzzleTypeShortName ?? "",
+        puzzleType ?? new PuzzleType("", ""),
         tags ?? [],
         sortId ?? "",
         title ?? "",

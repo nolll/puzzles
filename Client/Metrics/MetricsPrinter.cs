@@ -8,7 +8,7 @@ public class MetricsPrinter(PuzzleRepository puzzleRepository)
     public void Print()
     {
         var puzzles = puzzleRepository.GetPuzzles();
-        var groups = puzzles.GroupBy(o => o.PuzzleTypeName);
+        var groups = puzzles.GroupBy(o => o.PuzzleType.Name);
         
         Printer.WriteMarkupLine(Printer.MarkupColor("Puzzle Metrics", Color.DarkTurquoise));
         Console.WriteLine();

@@ -2,4 +2,9 @@ using Pzl.Common;
 
 namespace Pzl.FlipFlop;
 
-public abstract class FlipFlopPuzzle : ThreePartsPuzzle;
+[PuzzleType(Name, ShortName)]
+public abstract class FlipFlopPuzzle : ThreePartsPuzzle
+{
+    public const string Name = "FlipFlop";
+    public const string ShortName = "ff";
+}

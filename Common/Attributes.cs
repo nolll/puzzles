@@ -30,6 +30,13 @@ public class NumberOfPartsAttribute(int numberOfParts) : Attribute
 }
 
 [AttributeUsage(AttributeTargets.Class)]
+public class PuzzleTypeAttribute(string name, string shortName) : Attribute
+{
+    public string Name { get; } = name;
+    public string ShortName { get; } = shortName;
+}
+
+[AttributeUsage(AttributeTargets.Class)]
 public class HasUniqueInputsForParts : Attribute;
 
 [AttributeUsage(AttributeTargets.Method)]

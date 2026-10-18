@@ -2,4 +2,9 @@
 
 namespace Pzl.Aoc;
 
-public abstract class AocPuzzle : TwoPartsPuzzle;
+[PuzzleType(Name, ShortName)]
+public abstract class AocPuzzle : TwoPartsPuzzle
+{
+    public const string Name = "Advent of Code";
+    public const string ShortName = "aoc";
+}

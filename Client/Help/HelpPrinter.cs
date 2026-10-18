@@ -24,20 +24,14 @@ public class HelpPrinter
                                     -s    --search    search query. Searches titles, class names and comments.  
                                                       Use quotes if the query contains spaces
 
-                                    -h    --help      display this help text
+                                    -m    --metrics   print puzzle metrics
+                                    
+                                    -h    --help      print this help text
                                     """;
 
     public void Print()
     {
         Printer.WriteLine(HelpText);
         Printer.WriteLine();
-        // Printer.WriteLine("Links:");
-        // Printer.MarkupLine("[blue underline link=https://adventofcode.com]Advent of Code[/]");
-        // Printer.WriteLine("AquaQ Challenge: https://challenges.aquaq.co.uk");
-        // Printer.WriteLine("Codyssi: https://www.codyssi.com");
-        // Printer.WriteLine("FlipFlop: https://flipflop.slome.org");
-        // Printer.WriteLine("Everybody Codes: https://everybody.codes");
-        // Printer.WriteLine("Project Euler: https://projecteuler.net");
-        // Printer.WriteLine();
     }
 }

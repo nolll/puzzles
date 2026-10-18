@@ -14,10 +14,10 @@ public class EverybodyStoryPuzzleProvider : IPuzzleProvider
         var (story, part) = EverybodyStoryPuzzleParser.ParseStoryAndPart(data.Type);
         var paddedPart = part.ToString().PadLeft(2, '0');
         var id = $"{story}{paddedPart}";
-        var sortId = $"ec s{id}";
-        var title = $"Everybody Codes Story {story} Part {paddedPart}";
-        var listTitle = $"ec s{story}-{paddedPart}";
-        List<string> tags = ["ec", $"s{story}", part.ToString()];
+        var sortId = $"{data.PuzzleTypeShortName} s{id}";
+        var title = $"{data.PuzzleTypeName} Story {story} Part {paddedPart}";
+        var listTitle = $"{data.PuzzleTypeShortName} s{story}-{paddedPart}";
+        List<string> tags = [data.PuzzleTypeShortName, $"s{story}", part.ToString()];
 
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }

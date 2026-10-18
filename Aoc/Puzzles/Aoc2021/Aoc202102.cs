@@ -12,7 +12,7 @@ public class Aoc202102 : AocPuzzle
     [Puzzle("6b29326368c507ef0dbbe41523850cd2")]
     public long Part2(string input) => new AimingSubmarine().Move(input);
 
-    public class Submarine
+    private class Submarine
     {
         protected long X;
         protected long Y;
@@ -30,7 +30,7 @@ public class Aoc202102 : AocPuzzle
             return X * Y;
         }
 
-        public virtual void Move(string action, long value)
+        protected virtual void Move(string action, long value)
         {
             if (action == "forward")
                 X += value;
@@ -46,8 +46,8 @@ public class Aoc202102 : AocPuzzle
     private class AimingSubmarine : Submarine
     {
         private long _aim;
-        
-        public override void Move(string action, long value)
+
+        protected override void Move(string action, long value)
         {
             if (action == "forward")
             {

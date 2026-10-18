@@ -13,10 +13,10 @@ public class EulerPuzzleProvider : IPuzzleProvider
     {
         var id = EulerPuzzleParser.GetPuzzleId(data.Type).ToString();
         var paddedId = id.PadLeft(3, '0');
-        var sortId = $"{EulerPuzzle.ShortName} {paddedId}";
-        var title = $"{EulerPuzzle.Name} {id}";
-        var listTitle = $"{EulerPuzzle.ShortName} {paddedId}";
-        List<string> tags = [EulerPuzzle.ShortName, id];
+        var sortId = $"{data.PuzzleTypeShortName} {paddedId}";
+        var title = $"{data.PuzzleTypeName} {id}";
+        var listTitle = $"{data.PuzzleTypeShortName} {paddedId}";
+        List<string> tags = [data.PuzzleTypeShortName, id];
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }
 }

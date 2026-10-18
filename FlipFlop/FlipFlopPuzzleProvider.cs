@@ -14,10 +14,10 @@ public class FlipFlopPuzzleProvider : IPuzzleProvider
         var (year, day) = FlipFlopPuzzleParser.GetPuzzleId(data.Type);
         var paddedDay = day.ToString().PadLeft(2, '0');
         var id = $"{year}{paddedDay}";
-        var sortId = $"{FlipFlopPuzzle.ShortName} {id}";
-        var title = $"{FlipFlopPuzzle.Name} {year} Day {paddedDay}";
-        var listTitle = $"{FlipFlopPuzzle.ShortName} {year}-{paddedDay}";
-        List<string> tags = [FlipFlopPuzzle.ShortName, year.ToString(), day.ToString()];
+        var sortId = $"{data.PuzzleTypeShortName} {id}";
+        var title = $"{data.PuzzleTypeName} {year} Day {paddedDay}";
+        var listTitle = $"{data.PuzzleTypeShortName} {year}-{paddedDay}";
+        List<string> tags = [data.PuzzleTypeShortName, year.ToString(), day.ToString()];
 
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }

@@ -14,10 +14,10 @@ public class AocPuzzleProvider : IPuzzleProvider
         var (year, day) = AocPuzzleParser.ParseYearAndDay(data.Type);
         var paddedDay = day.ToString().PadLeft(2, '0');
         var id = $"{year}{paddedDay}";
-        var sortId = $"{AocPuzzle.ShortName} {id}";
-        var title = $"{AocPuzzle.Name} {year} Day {paddedDay}";
-        var listTitle = $"{AocPuzzle.ShortName} {year}-{paddedDay}";
-        List<string> tags = [AocPuzzle.ShortName, year.ToString(), day.ToString()];
+        var sortId = $"{data.PuzzleTypeShortName} {id}";
+        var title = $"{data.PuzzleTypeName} {year} Day {paddedDay}";
+        var listTitle = $"{data.PuzzleTypeShortName} {year}-{paddedDay}";
+        List<string> tags = [data.PuzzleTypeShortName, year.ToString(), day.ToString()];
 
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }

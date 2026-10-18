@@ -5,10 +5,8 @@ namespace Pzl.Everybody;
 public class EverybodyStoryPuzzleProvider : IPuzzleProvider
 {
     public List<PuzzleDefinition> GetPuzzles() =>
-        PuzzleDataReader.ReadData<EverybodyStoryPuzzle>()
-            .Select(CreatePuzzleDefinition)
-            .ToList();
-    
+        [.. PuzzleDataReader.ReadData<EverybodyStoryPuzzle>().Select(CreatePuzzleDefinition)];
+
     private static PuzzleDefinition CreatePuzzleDefinition(PuzzleData data)
     {
         var (story, part) = EverybodyStoryPuzzleParser.ParseStoryAndPart(data.Type);

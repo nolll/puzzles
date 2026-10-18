@@ -7,66 +7,52 @@ namespace Pzl.Aoc.Puzzles.Aoc2021;
 public class Aoc202102 : AocPuzzle
 {
     [Puzzle("9d9dec9baf0fe61bbb7a9e95cc1ae2de")]
-    public long Part1(string input)
-    {
-        var control = new SubmarineControl(input, false);
-        control.Move();
-            
-        return control.Result;
-    }
+    public long Part1(string input) => new Submarine().Move(input);
 
     [Puzzle("6b29326368c507ef0dbbe41523850cd2")]
-    public long Part2(string input)
-    {
-        var control = new SubmarineControl(input, true);
-        control.Move();
+    public long Part2(string input) => new AimingSubmarine().Move(input);
 
-        return control.Result;
-    }
-    
-    public class SubmarineControl(string input, bool useAim)
+    public class Submarine
     {
-        private readonly IList<string> _lines = input.Split(LineBreaks.Single);
-        private long _x;
-        private long _y;
-        private long _aim;
-        public long Result { get; private set; }
+        protected long X;
+        protected long Y;
 
-        public void Move()
+        public long Move(string input)
         {
-            foreach (var line in _lines)
+            var lines = input.Split(LineBreaks.Single);
+            foreach (var line in lines)
             {
-                var parts = line.Split(' ');
-                var action = parts[0];
-                var value = long.Parse(parts[1]);
-
-                if (useAim)
-                    MoveWithAim(action, value);
-                else
-                    MoveWithoutAim(action, value);
+                var (action, stringValue) = line.Split(' ');
+                var value = long.Parse(stringValue);
+                Move(action, value);
             }
 
-            Result = _x * _y;
+            return X * Y;
         }
 
-        private void MoveWithoutAim(string action, long value)
+        public virtual void Move(string action, long value)
         {
             if (action == "forward")
-                _x += value;
+                X += value;
 
             if (action == "down")
-                _y += value;
+                Y += value;
 
             if (action == "up")
-                _y -= value;
+                Y -= value;
         }
+    }
 
-        private void MoveWithAim(string action, long value)
+    private class AimingSubmarine : Submarine
+    {
+        private long _aim;
+        
+        public override void Move(string action, long value)
         {
             if (action == "forward")
             {
-                _x += value;
-                _y += _aim * value;
+                X += value;
+                Y += _aim * value;
             }
 
             if (action == "down")

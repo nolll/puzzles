@@ -14,7 +14,7 @@ public class PuzzleFunction(Puzzle puzzle, MethodInfo method, object[] passedPar
         return result switch
         {
             null => PuzzleResult.Empty,
-            PuzzleResult o => PuzzleResult.Create(o.Type, o.Answer, hash ?? o.Hash),
+            PuzzleResult o => PuzzleResult.Create(o.ResultType, o.Answer, hash ?? o.Hash),
             string o => PuzzleResult.Create(o, hash),
             int o => PuzzleResult.Create(o, hash),
             long o => PuzzleResult.Create(o, hash),

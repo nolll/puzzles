@@ -12,6 +12,7 @@ public static class PuzzleDataReader
 
     private static PuzzleData CreateData(Type type) => new(
         type,
+        GetPuzzleType(type),
         GetName(type),
         GetComment(type),
         IsSlow(type),
@@ -19,6 +20,14 @@ public static class PuzzleDataReader
         IsFunToOptimize(type),
         GetNumberOfParts(type),
         HasUniqueInputsForParts(type));
+
+    private static PuzzleType GetPuzzleType(MemberInfo type)
+    {
+        var attr = type.GetCustomAttribute<PuzzleTypeAttribute>(true);
+        return attr is null 
+            ? throw new InvalidOperationException($"Puzzle type {type} is not defined") 
+            : new PuzzleType(attr.Name, attr.ShortName);
+    }
 
     private static string GetName(MemberInfo type) =>
         type.GetCustomAttribute<NameAttribute>(false)?.Name ?? "No name provided";

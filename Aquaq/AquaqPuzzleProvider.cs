@@ -13,10 +13,10 @@ public class AquaqPuzzleProvider : IPuzzleProvider
     {
         var id = AquaqPuzzleParser.GetPuzzleId(data.Type).ToString();
         var paddedId = id.PadLeft(2, '0');
-        var sortId = $"aquaq {paddedId}";
-        var title = $"AquaQ Challenge {id}";
-        var listTitle = $"aquaq {paddedId}";
-        List<string> tags = ["aquaq", id];
+        var sortId = $"{data.PuzzleType.ShortName} {paddedId}";
+        var title = $"{data.PuzzleType.Name} {id}";
+        var listTitle = $"{data.PuzzleType.ShortName} {paddedId}";
+        List<string> tags = [data.PuzzleType.ShortName, id];
         return new PuzzleDefinition(data, tags, sortId, title, listTitle);
     }
 }

@@ -1,6 +1,3 @@
-using Pzl.Common;
-
 namespace Pzl.Everybody;
 
-[HasUniqueInputsForParts]
-public abstract class EverybodyEventPuzzle : ThreePartsPuzzle;
+public abstract class EverybodyEventPuzzle : EverybodyPuzzle;

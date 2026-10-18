@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2021;
 public class Aoc202101Tests : PuzzleTest<Aoc202101>
 {
     [Fact]
-    public void Part1()
-    {
-        var validator = new Aoc202101.DepthMeasurement();
-        var result = validator.GetNumberOfIncreasingMeasurements(Input, false);
-
-        result.Should().Be(7);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(7);
 
     [Fact]
-    public void Part2()
-    {
-        var validator = new Aoc202101.DepthMeasurement();
-        var result = validator.GetNumberOfIncreasingMeasurements(Input, true);
-
-        result.Should().Be(5);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(5);
 
     private const string Input = """
                                  199

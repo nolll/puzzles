@@ -61,10 +61,10 @@ public class StandaloneSinglePuzzleRunner(
             ? puzzle.Name
             : $"{puzzle.Title}: {puzzle.Name}";
         
-        Printer.MarkupLine($"[DarkTurquoise]{title}[/]");
+        Printer.WriteMarkupLine(Printer.MarkupColor(title, Color.DarkTurquoise));
         
         if (puzzle.Comment is not null)
-            Printer.MarkupLine($"[Yellow]{puzzle.Comment}[/]");
+            Printer.WriteMarkupLine(Printer.MarkupColor(puzzle.Comment, Color.Yellow));
     }
     
     private void RunAndPrintPuzzleResult(int puzzleIndex, PuzzleFunction func)
@@ -105,15 +105,16 @@ public class StandaloneSinglePuzzleRunner(
             ? Formatter.FormatTime(time.Value)
             : string.Empty;
 
-        Console.Write($"\rPart {puzzleNumber}: {formattedTime} ");
+        Printer.CarriageReturn();
+        Console.Write($"Part {puzzleNumber}: {formattedTime} ");
     }
     
     private static void WriteAnswer(VerifiedPuzzleResult? result)
     {
         if (result is null)
-            Printer.MarkupLine(MarkupColor("Missing", Color.Red));
+            Printer.WriteMarkupLine(Printer.MarkupColor("Missing", Color.Red));
         else if (result.Status is ResultStatus.Missing)
-            Printer.MarkupLine(MarkupColor("No puzzle", Color.Grey));
+            Printer.WriteMarkupLine(Printer.MarkupColor("No puzzle", Color.Grey));
         else if (result.Status is ResultStatus.Correct)
             WriteAnswer(result, Color.Green);
         else if (result.Status is ResultStatus.Failed or ResultStatus.Timeout or ResultStatus.Wrong)
@@ -124,8 +125,8 @@ public class StandaloneSinglePuzzleRunner(
 
     private static void WriteAnswer(VerifiedPuzzleResult result, Color color)
     {
-        Printer.MarkupLine(MarkupColor(result.Answer.Answer, color));
+        Printer.WriteMarkupLine(Printer.MarkupColor(result.Answer.Answer, color));
         if(result.Status == ResultStatus.Completed)
-            Printer.MarkupLine(MarkupColor(result.Hash, Color.Grey));
+            Printer.WriteMarkupLine(Printer.MarkupColor(result.Hash, Color.Grey));
     }
 }

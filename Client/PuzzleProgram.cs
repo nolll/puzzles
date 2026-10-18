@@ -3,6 +3,7 @@ using Pzl.Aquaq;
 using Pzl.Client.Debugging;
 using Pzl.Client.Filter;
 using Pzl.Client.Help;
+using Pzl.Client.Metrics;
 using Pzl.Client.Params;
 using Pzl.Client.Running.Results;
 using Pzl.Client.Running.Runners;
@@ -20,6 +21,7 @@ public class PuzzleProgram
     private readonly Options _options;
     private readonly PuzzleRepository _puzzleRepository;
     private readonly HelpPrinter _helpPrinter;
+    private readonly MetricsPrinter _metricsPrinter;
     private readonly ParameterProvider _parameterProvider;
     private readonly PuzzleFactory _puzzleFactory;
     private readonly ResultVerifier _resultVerifier;
@@ -48,6 +50,7 @@ public class PuzzleProgram
         _parameterProvider = new ParameterProvider(_runMode, options.DebugTags);
         _puzzleRepository = new PuzzleRepository(puzzleProviders);
         _helpPrinter = new HelpPrinter();
+        _metricsPrinter = new MetricsPrinter(_puzzleRepository);
     }
 
     public void Run(IEnumerable<string> args) => Run(_parameterProvider.GetParameters(args));
@@ -55,14 +58,17 @@ public class PuzzleProgram
     private void Run(Parameters parameters)
     {
         if (parameters.ShowHelp)
-            Print();
+            PrintHelp();
+        else if (parameters.ShowMetrics)
+            PrintMetrics();
         else if (parameters.Query is not null)
             Search(parameters.Query);
         else
             RunPuzzles(parameters);
     }
     
-    private void Print() => _helpPrinter.Print();
+    private void PrintHelp() => _helpPrinter.Print();
+    private void PrintMetrics() => _metricsPrinter.Print();
 
     private void RunPuzzles(Parameters parameters)
     {
@@ -100,5 +106,5 @@ public class ParameterProvider(RunMode runMode, string debugTags)
             ? DebugParameters
             : Parameters.Parse(args);
 
-    private Parameters DebugParameters => new(tags: debugTags.Split(','));
+    private Parameters DebugParameters => Parameters.Create(debugTags.Split(','));
 }

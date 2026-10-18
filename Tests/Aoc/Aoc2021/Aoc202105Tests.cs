@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2021;
 public class Aoc202105Tests : PuzzleTest<Aoc202105>
 {
     [Fact]
-    public void Part1()
-    {
-        var game = new Aoc202105.VentsMap();
-        var result = game.Run(Input, true);
-
-        result.Should().Be(5);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(5);
 
     [Fact]
-    public void Part2()
-    {
-        var game = new Aoc202105.VentsMap();
-        var result = game.Run(Input, false);
-
-        result.Should().Be(12);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(12);
 
     private const string Input = """
                                  0,9 -> 5,9

@@ -8,58 +8,55 @@ namespace Pzl.Aoc.Puzzles.Aoc2021;
 public class Aoc202105 : AocPuzzle
 {
     [Puzzle("72e2846f2036e57e75a10d9d0b5a99ad")]
-    public int Part1(string input) => new VentsMap().Run(input, true);
+    public int Part1(string input) => Solve(input, true);
 
     [Puzzle("e07b568228a7ed5a9bc9276d343e6973")]
-    public int Part2(string input) => new VentsMap().Run(input, false);
-    
-    public class VentsMap
+    public int Part2(string input) => Solve(input, false);
+
+    public int Solve(string input, bool orthogonalOnly)
     {
-        public int Run(string input, bool orthogonalOnly)
-        {
-            var rows = input.Split(LineBreaks.Single);
-            var lines = ParseLines(rows);
-            if (orthogonalOnly)
-                lines = lines.Where(o => o.IsOrthogonal).ToList();
-            var width = lines.Max(o => Math.Max(o.Start.X, o.End.X));
-            var height = lines.Max(o => Math.Max(o.Start.Y, o.End.Y));
-            var grid = new Grid<int>(width, height);
+        var rows = input.Split(LineBreaks.Single);
+        var lines = ParseLines(rows);
+        if (orthogonalOnly)
+            lines = lines.Where(o => o.IsOrthogonal).ToList();
+        var width = lines.Max(o => Math.Max(o.Start.X, o.End.X));
+        var height = lines.Max(o => Math.Max(o.Start.Y, o.End.Y));
+        var grid = new Grid<int>(width, height);
 
-            grid = MapLines(grid, lines);
-            var c = grid.Values.Count(o => o >= 2);
+        grid = MapLines(grid, lines);
+        var c = grid.Values.Count(o => o >= 2);
 
-            return c;
-        }
-
-        private static Grid<int> MapLines(Grid<int> grid, List<Line2d> lines)
-        {
-            foreach (var line in lines)
-            {
-                foreach (var pos in line.Positions)
-                {
-                    grid.WriteValueAt(pos.X, pos.Y, grid.ReadValueAt(pos.X, pos.Y) + 1);
-                }
-            }
-
-            return grid;
-        }
-
-        private static List<Line2d> ParseLines(IEnumerable<string> rows) => rows.Select(ParseLine).ToList();
-
-        private static Line2d ParseLine(string s)
-        {
-            var (a, b) = s.Split(" -> ").Select(ParsePosition).ToArray();
-            return new Line2d(a, b);
-        }
-
-        private static Position2d ParsePosition(string s)
-        {
-            var (a, b) = s.Split(',').Select(int.Parse).ToArray();
-            return new Position2d(a, b);
-        }
+        return c;
     }
-    
-    public class Line2d
+
+    private static Grid<int> MapLines(Grid<int> grid, List<Line2d> lines)
+    {
+        foreach (var line in lines)
+        {
+            foreach (var pos in line.Positions)
+            {
+                grid.WriteValueAt(pos.X, pos.Y, grid.ReadValueAt(pos.X, pos.Y) + 1);
+            }
+        }
+
+        return grid;
+    }
+
+    private static List<Line2d> ParseLines(IEnumerable<string> rows) => rows.Select(ParseLine).ToList();
+
+    private static Line2d ParseLine(string s)
+    {
+        var (a, b) = s.Split(" -> ").Select(ParsePosition).ToArray();
+        return new Line2d(a, b);
+    }
+
+    private static Position2d ParsePosition(string s)
+    {
+        var (a, b) = s.Split(',').Select(int.Parse).ToArray();
+        return new Position2d(a, b);
+    }
+
+    private class Line2d
     {
         public Position2d Start { get; }
         public Position2d End { get; }
@@ -105,6 +102,6 @@ public class Aoc202105 : AocPuzzle
             }
         }
     }
-    
+
     public record Position2d(int X, int Y);
 }

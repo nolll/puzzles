@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2021;
@@ -8,74 +9,68 @@ namespace Pzl.Aoc.Puzzles.Aoc2021;
 public class Aoc202104 : AocPuzzle
 {
     [Puzzle("95287604b1b5cd043b3268068d4c34ef")]
-    public int Part1(string input) => new BingoGame(input).Play(false);
+    public int Part1(string input) => Solve(input, false);
 
     [Puzzle("d3b6f7e7618d28f0aac8b2a2c99f5b2e")]
-    public int Part2(string input) => new BingoGame(input).Play(true);
-    
-    public class BingoGame
+    public int Part2(string input) => Solve(input, true);
+
+    public int Solve(string input, bool findLastWinner)
     {
-        private readonly IList<int> _numbers;
-        private readonly IDictionary<int, BingoBoard> _boards;
-
-        public BingoGame(string input)
+        var (numbers, boards) = Parse(input);
+        foreach (var number in numbers)
         {
-            var groups = input.Trim().Split(LineBreaks.Double);
-            _numbers = groups.First().Split(',').Select(int.Parse).ToList();
-            _boards = ParseBoards(groups.Skip(1));
+            MarkNumber(boards, number);
+            var boardsWithBingo = boards.Values.Where(o => o.HasBingo).ToList();
+            if (boardsWithBingo.Count == 0)
+                continue;
+            
+            var currentBoard = boardsWithBingo.First();
+
+            if (!findLastWinner)
+                return CalculateScore(currentBoard, number);
+
+            foreach (var board in boardsWithBingo) 
+                boards.Remove(board.Id);
+
+            if (!boards.Any())
+                return CalculateScore(currentBoard, number);
         }
 
-        public int Play(bool findLastWinner)
+        return 0;
+    }
+
+    private static int CalculateScore(BingoBoard board, in int number) => board.Score * number;
+
+    private void MarkNumber(Dictionary<int, BingoBoard> boards, int number)
+    {
+        foreach (var board in boards.Values)
         {
-            foreach (var number in _numbers)
-            {
-                MarkNumber(number);
-                var boardsWithBingo = _boards.Values.Where(o => o.HasBingo).ToList();
-                if (boardsWithBingo.Any())
-                {
-                    var currentBoard = boardsWithBingo.First();
-                    
-                    if (!findLastWinner)
-                        return CalculateScore(currentBoard, number);
-
-                    foreach (var board in boardsWithBingo)
-                    {
-                        _boards.Remove(board.Id);
-                    }
-
-                    if (!_boards.Any())
-                        return CalculateScore(currentBoard, number);
-                }
-            }
-
-            return 0;
-        }
-
-        private static int CalculateScore(BingoBoard board, in int number) => board.Score * number;
-
-        private void MarkNumber(in int number)
-        {
-            foreach (var board in _boards.Values)
-            {
-                board.MarkNumber(number);
-            }
-        }
-
-        private Dictionary<int, BingoBoard> ParseBoards(IEnumerable<string> inputs)
-        {
-            var d = new Dictionary<int, BingoBoard>();
-            var i = 0;
-            foreach (var input in inputs)
-            {
-                d.Add(i, new BingoBoard(i, GridBuilder.BuildIntGridFromSpaceSeparated(input), new Grid<bool>(5, 5)));
-                i++;
-            }
-
-            return d;
+            board.MarkNumber(number);
         }
     }
 
-    public class BingoBoard
+    private (int[], Dictionary<int, BingoBoard>) Parse(string input)
+    {
+        var groups = input.Trim().Split(LineBreaks.Double);
+        var numbers = Numbers.IntsFromString(groups.First());
+        var boards = ParseBoards(groups.Skip(1));
+        return (numbers, boards);
+    }
+
+    private Dictionary<int, BingoBoard> ParseBoards(IEnumerable<string> inputs)
+    {
+        var d = new Dictionary<int, BingoBoard>();
+        var i = 0;
+        foreach (var input in inputs)
+        {
+            d.Add(i, new BingoBoard(i, GridBuilder.BuildIntGridFromSpaceSeparated(input), new Grid<bool>(5, 5)));
+            i++;
+        }
+
+        return d;
+    }
+
+    private class BingoBoard
     {
         public int Id { get; }
         private readonly Grid<int> _numbers;

@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2021;
 public class Aoc202104Tests : PuzzleTest<Aoc202104>
 {
     [Fact]
-    public void Part1()
-    {
-        var game = new Aoc202104.BingoGame(Input);
-        var result = game.Play(false);
-
-        result.Should().Be(4512);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(4512);
 
     [Fact]
-    public void Part2()
-    {
-        var game = new Aoc202104.BingoGame(Input);
-        var result = game.Play(true);
-
-        result.Should().Be(1924);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(1924);
 
     private const string Input = """
                                  7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
@@ -30,7 +18,7 @@ public class Aoc202104Tests : PuzzleTest<Aoc202104>
                                  21  9 14 16  7
                                   6 10  3 18  5
                                   1 12 20 15 19
-                                 
+
                                   3 15  0  2 22
                                   9 18 13 17  5
                                  19  8  7 25 23

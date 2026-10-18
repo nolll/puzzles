@@ -13,60 +13,53 @@ public class Aoc202105 : AocPuzzle
     [Puzzle("e07b568228a7ed5a9bc9276d343e6973")]
     public int Part2(string input) => Solve(input, false);
 
-    public int Solve(string input, bool orthogonalOnly)
+    private static int Solve(string input, bool orthogonalOnly)
     {
         var rows = input.Split(LineBreaks.Single);
         var lines = ParseLines(rows);
         if (orthogonalOnly)
-            lines = lines.Where(o => o.IsOrthogonal).ToList();
+            lines = [.. lines.Where(o => o.IsOrthogonal)];
+
+        return MapLines(lines).Values.Count(o => o >= 2);
+    }
+
+    private static Grid<int> MapLines(List<Line> lines)
+    {
         var width = lines.Max(o => Math.Max(o.Start.X, o.End.X));
         var height = lines.Max(o => Math.Max(o.Start.Y, o.End.Y));
         var grid = new Grid<int>(width, height);
-
-        grid = MapLines(grid, lines);
-        var c = grid.Values.Count(o => o >= 2);
-
-        return c;
-    }
-
-    private static Grid<int> MapLines(Grid<int> grid, List<Line2d> lines)
-    {
-        foreach (var line in lines)
-        {
-            foreach (var pos in line.Positions)
-            {
-                grid.WriteValueAt(pos.X, pos.Y, grid.ReadValueAt(pos.X, pos.Y) + 1);
-            }
-        }
+        
+        foreach (var pos in lines.SelectMany(line => line.Positions)) 
+            grid.WriteValueAt(pos.X, pos.Y, grid.ReadValueAt(pos.X, pos.Y) + 1);
 
         return grid;
     }
 
-    private static List<Line2d> ParseLines(IEnumerable<string> rows) => rows.Select(ParseLine).ToList();
+    private static List<Line> ParseLines(IEnumerable<string> rows) => rows.Select(ParseLine).ToList();
 
-    private static Line2d ParseLine(string s)
+    private static Line ParseLine(string s)
     {
         var (a, b) = s.Split(" -> ").Select(ParsePosition).ToArray();
-        return new Line2d(a, b);
+        return new Line(a, b);
     }
 
-    private static Position2d ParsePosition(string s)
+    private static Coord ParsePosition(string s)
     {
         var (a, b) = s.Split(',').Select(int.Parse).ToArray();
-        return new Position2d(a, b);
+        return new Coord(a, b);
     }
 
-    private class Line2d
+    private class Line
     {
-        public Position2d Start { get; }
-        public Position2d End { get; }
-        public List<Position2d> Positions { get; }
+        public Coord Start { get; }
+        public Coord End { get; }
+        public List<Coord> Positions { get; }
         public bool IsOrthogonal { get; }
 
-        public Line2d(Position2d a, Position2d b)
+        public Line(Coord a, Coord b)
         {
-            var list = new List<Position2d> { a, b };
-            list = list.OrderBy(o => o.X).ThenBy(o => o.Y).ToList();
+            var list = new List<Coord> { a, b };
+            list = [.. list.OrderBy(o => o.X).ThenBy(o => o.Y)];
 
             Start = list.First();
             End = list.Last();
@@ -75,10 +68,10 @@ public class Aoc202105 : AocPuzzle
             var isVertical = a.X == b.X;
             IsOrthogonal = isHorizontal || isVertical;
 
-            Positions = GetPositions().ToList();
+            Positions = [.. GetPositions()];
         }
 
-        private IEnumerable<Position2d> GetPositions()
+        private IEnumerable<Coord> GetPositions()
         {
             var x = Start.X;
             var y = Start.Y;
@@ -92,16 +85,14 @@ public class Aoc202105 : AocPuzzle
             var yMax = Math.Max(Start.Y, End.Y);
 
             if (xDiff == 0 && yDiff == 0)
-                yield return new Position2d(Start.X, Start.Y);
+                yield return new Coord(Start.X, Start.Y);
 
             while (x >= xMin && x <= xMax && y >= yMin && y <= yMax)
             {
-                yield return new Position2d(x, y);
+                yield return new Coord(x, y);
                 x += xDelta;
                 y += yDelta;
             }
         }
     }
-
-    public record Position2d(int X, int Y);
 }

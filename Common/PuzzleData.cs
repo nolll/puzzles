@@ -4,6 +4,7 @@ namespace Pzl.Common;
 
 public class PuzzleData(
     Type type,
+    PuzzleType puzzleType,
     string name,
     string? comment,
     bool isSlow,
@@ -13,6 +14,7 @@ public class PuzzleData(
     bool hasUniqueInputsPerPart)
 {
     public Type Type { get; } = type;
+    public PuzzleType PuzzleType { get; } = puzzleType;
     public string Name { get; } = name;
     public string? Comment { get; } = comment;
     public bool IsSlow { get; } = isSlow;

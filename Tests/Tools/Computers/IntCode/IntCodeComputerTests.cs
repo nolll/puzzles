@@ -11,9 +11,12 @@ public class IntCodeComputerTests
     [InlineData("1,1,1,4,99,5,6,0,99", 30)]
     public void OutputsAreCorrect(string input, int expectedResult)
     {
-        var computer = new TestComputer(input);
+        var computer = new IntCodeComputer(input, ReadInput, WriteOutput);
         computer.Start();
         var result = computer.Result;
         result.Should().Be(expectedResult);
     }
+    
+    private static long ReadInput() => 0;
+    private static bool WriteOutput(long output) => true;
 }

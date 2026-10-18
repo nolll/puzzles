@@ -15,7 +15,7 @@ public class PuzzleFilterTests
             new PlainPuzzleDefinitionInTest()
         };
 
-        var parameters = new Parameters(tags: [PuzzleTag.Slow]);
+        var parameters = Parameters.Create([PuzzleTag.Slow]);
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 
@@ -31,7 +31,7 @@ public class PuzzleFilterTests
             new PlainPuzzleDefinitionInTest()
         };
         
-        var parameters = new Parameters(tags: [PuzzleTag.Commented]);
+        var parameters = Parameters.Create([PuzzleTag.Commented]);
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 
@@ -48,7 +48,7 @@ public class PuzzleFilterTests
             new PlainPuzzleDefinitionInTest()
         };
 
-        var parameters = new Parameters(tags: [PuzzleTag.Fun]);
+        var parameters = Parameters.Create([PuzzleTag.Fun]);
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 

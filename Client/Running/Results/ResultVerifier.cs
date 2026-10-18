@@ -13,7 +13,7 @@ public class ResultVerifier(HashFactory hashFactory, string seed)
             return new VerifiedPuzzleResult(result, "", ResultStatus.Unverified);
 
         var hash = GetHash(result.Answer);
-        var status = GetStatus(result.Type, result.Answer, hash, result.Hash);
+        var status = GetStatus(result.ResultType, result.Answer, hash, result.Hash);
         return new VerifiedPuzzleResult(result, hash, status);
     }
 
@@ -22,12 +22,12 @@ public class ResultVerifier(HashFactory hashFactory, string seed)
         : string.Empty;
 
     private static ResultStatus GetStatus(
-        PuzzleType type, 
+        PuzzleResultType resultType, 
         string? answer, 
         string answerHash,
         string? checkHash)
     {
-        if (type is PuzzleType.Empty)
+        if (resultType is PuzzleResultType.Empty)
             return ResultStatus.Missing;
 
         if (answer is null)

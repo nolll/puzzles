@@ -96,15 +96,15 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     private string MarkupTime(TimeSpan time, ResultStatus status) => status switch
     {
         ResultStatus.Correct =>
-            MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Green),
+            Printer.MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Green),
         ResultStatus.Failed or ResultStatus.Wrong =>
-            MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red),
+            Printer.MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red),
         ResultStatus.Missing =>
-            MarkupColor(PadResult(""), Color.Grey),
+            Printer.MarkupColor(PadResult(""), Color.Grey),
         ResultStatus.Timeout =>
-            MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
+            Printer.MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
         ResultStatus.Completed or ResultStatus.Unverified =>
-            MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Yellow),
+            Printer.MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Yellow),
         _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
     };
 
@@ -116,12 +116,12 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     {
         var results = string.Join(" | ", _markups);
         Printer.CarriageReturn();
-        Printer.Markup($"| {_title} | {results} | {_commentMarkup} |");
+        Printer.WriteMarkup($"| {_title} | {results} | {_commentMarkup} |");
     }
 
     private string MarkupComment(string? comment) => comment is null
         ? PadComment(string.Empty)
-        : MarkupColor(PadComment(TruncateComment(comment)), Color.Yellow);
+        : Printer.MarkupColor(PadComment(TruncateComment(comment)), Color.Yellow);
 
     private string TruncateComment(string fullComment) => fullComment.Length > _truncatedCommentLength
         ? fullComment[.._truncatedCommentLength] + "..."

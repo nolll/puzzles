@@ -1,7 +1,3 @@
 namespace Pzl.Common;
 
-public enum PuzzleType
-{
-    Default,
-    Empty
-}
+public record PuzzleType(string Name, string ShortName);

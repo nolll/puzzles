@@ -12,11 +12,7 @@ public class PuzzleFactory(FileReader fileReader)
         if (ctor.Invoke([]) is not Puzzle puzzle)
             throw new Exception($"Could not create puzzle: {definition.Type}");
         
-        var methods = definition.Type.GetMethods()
-            .Where(IsPuzzleFunc)
-            .OrderBy(o => o.Name)
-            .ToArray();
-        
+        var methods = GetPuzzleFuncs(definition);
         var inputs = fileReader.ReadInputs(definition);
 
         var funcs = new List<PuzzleFunction>();
@@ -41,10 +37,15 @@ public class PuzzleFactory(FileReader fileReader)
 
         return new PuzzleInstance(puzzle, funcs.ToArray());
     }
-    
+
+    public static MethodInfo[] GetPuzzleFuncs(PuzzleDefinition definition) => definition.Type.GetMethods()
+        .Where(IsPuzzleFunc)
+        .OrderBy(o => o.Name)
+        .ToArray();
+
     private static string? GetHash(MethodInfo method) =>
         method.GetCustomAttribute<PuzzleAttribute>(false)?.Hash;
-    
+
     private static bool IsPuzzleFunc(MethodInfo method) =>
         method is { IsPublic: true, IsStatic: false } &&
         method.GetCustomAttribute<PuzzleAttribute>(false) is not null;

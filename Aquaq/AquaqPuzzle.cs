@@ -2,4 +2,9 @@ using Pzl.Common;
 
 namespace Pzl.Aquaq;
 
-public abstract class AquaqPuzzle : OnePartPuzzle;
+[PuzzleType(Name, ShortName)]
+public abstract class AquaqPuzzle : OnePartPuzzle
+{
+    public const string Name = "AquaQ Challenge";
+    public const string ShortName = "aqua";
+}

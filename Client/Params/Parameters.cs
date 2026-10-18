@@ -1,23 +1,23 @@
 namespace Pzl.Client.Params;
 
-public class Parameters(
-    string[]? tags = null,
-    string? query = null,
-    bool showHelp = false)
+public record Parameters(
+    string[] Tags,
+    string? Query,
+    bool ShowHelp,
+    bool ShowMetrics)
 {
-    public string[] Tags { get; } = tags ?? [];
-    public string? Query { get; } = query;
-    public bool ShowHelp { get; } = showHelp;
-
     public static Parameters Parse(IEnumerable<string> args)
     {
         var parser = new ParameterParser(args);
         var tags = parser.GetListValue("-t", "--tags");
         var query = parser.GetValue("-s", "--search");
         var showHelp = parser.GetBoolValue("-h", "--help") ?? false;
+        var showMetrics = parser.GetBoolValue("-m", "--metrics") ?? false;
 
-        return new Parameters(tags, query, showHelp);
+        return new Parameters(tags, query, showHelp, showMetrics);
     }
 
     public static Parameters Parse(string args) => Parse(args.Split(' '));
+    public static Parameters Create(string[] tags, string? query = null, bool showHelp = false, bool showMetrics = false) => 
+        new(tags, query, showHelp, showMetrics);
 }

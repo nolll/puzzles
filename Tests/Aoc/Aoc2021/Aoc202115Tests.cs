@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2021;
 public class Aoc202115Tests : PuzzleTest<Aoc202115>
 {
     [Fact]
-    public void Part1()
-    {
-        var chitonRisk = new Aoc202115.ChitonRisk();
-        var result = chitonRisk.FindRiskLevelForSmallCave(Input);
-
-        result.Should().Be(40);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(40);
 
     [Fact]
-    public void Part2()
-    {
-        var chitonRisk = new Aoc202115.ChitonRisk();
-        var result = chitonRisk.FindRiskLevelForLargeCave(Input);
-
-        result.Should().Be(315);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(315);
 
     private const string Input = """
                                  1163751742

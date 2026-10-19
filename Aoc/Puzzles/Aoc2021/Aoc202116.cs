@@ -1,5 +1,6 @@
 using System.Numerics;
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 
 namespace Pzl.Aoc.Puzzles.Aoc2021;
 
@@ -7,11 +8,18 @@ namespace Pzl.Aoc.Puzzles.Aoc2021;
 public class Aoc202116 : AocPuzzle
 {
     [Puzzle("25c39d184ba82383f9e2854e892394d4")]
-    public int Part1(string input) => BitsPacket.FromHex(input).VersionSum;
+    public int Part1(string input) => Solve(input).VersionSum;
 
     [Puzzle("0c7656c225e533d843c1637c804609c8")]
-    public BigInteger Part2(string input) => BitsPacket.FromHex(input).Value;
-
+    public BigInteger Part2(string input) => Solve(input).Value;
+    
+    public BitsPacket Solve(string hexString)
+    {
+        var charToBitString = Enumerable.Range(0, 16).ToDictionary(k => k.ToString("X")[0], v => Conversion.ToBinary(v).PadLeft(4, '0'));
+        var binaryStrings = hexString.ToCharArray().Select(o => charToBitString[o]);
+        return new BitsPacket(string.Concat(binaryStrings));
+    }
+    
     public class BitsPacket
     {
         public int Version { get; }
@@ -22,9 +30,9 @@ public class Aoc202116 : AocPuzzle
 
         public int VersionSum => Version + SubPackets.Sum(o => o.VersionSum);
 
-        private BitsPacket(string binary)
+        public BitsPacket(string binary)
         {
-            SubPackets = new List<BitsPacket>();
+            SubPackets = [];
             Version = GetPacketVersion(binary);
             binary = ConsumeBinary(binary, 3);
             Type = GetPacketType(binary);
@@ -78,36 +86,23 @@ public class Aoc202116 : AocPuzzle
             return binary[count..];
         }
 
-        public BigInteger Value
+        public BigInteger Value => Type switch
         {
-            get
-            {
-                return Type switch
-                {
-                    (int)PacketType.Sum => SubPackets.Aggregate((BigInteger)0, (a, b) => a + b.Value),
-                    (int)PacketType.Product => SubPackets.Aggregate((BigInteger)1, (a, b) => a * b.Value),
-                    (int)PacketType.Minimum => SubPackets.Min(o => o.Value),
-                    (int)PacketType.Maximum => SubPackets.Max(o => o.Value),
-                    (int)PacketType.LiteralValue => LiteralValue ?? 0,
-                    (int)PacketType.GreaterThan => SubPackets.First().Value > SubPackets.Last().Value ? 1 : 0,
-                    (int)PacketType.LessThan => SubPackets.First().Value < SubPackets.Last().Value ? 1 : 0,
-                    (int)PacketType.Equal => SubPackets.First().Value == SubPackets.Last().Value ? 1 : 0,
-                    _ => 0
-                };
-            }
-        }
+            (int)PacketType.Sum => SubPackets.Aggregate((BigInteger)0, (a, b) => a + b.Value),
+            (int)PacketType.Product => SubPackets.Aggregate((BigInteger)1, (a, b) => a * b.Value),
+            (int)PacketType.Minimum => SubPackets.Min(o => o.Value),
+            (int)PacketType.Maximum => SubPackets.Max(o => o.Value),
+            (int)PacketType.LiteralValue => LiteralValue ?? 0,
+            (int)PacketType.GreaterThan => SubPackets.First().Value > SubPackets.Last().Value ? 1 : 0,
+            (int)PacketType.LessThan => SubPackets.First().Value < SubPackets.Last().Value ? 1 : 0,
+            (int)PacketType.Equal => SubPackets.First().Value == SubPackets.Last().Value ? 1 : 0,
+            _ => 0
+        };
 
-        private int GetSubPacketCount(string binary)
-        {
-            var s = binary[..11];
-            return Convert.ToInt32(s, 2);
-        }
-
-        private int GetSubPacketLength(string binary)
-        {
-            var s = binary[..15];
-            return Convert.ToInt32(s, 2);
-        }
+        private static int GetSubPacketCount(string binary) => Convert.ToInt32(binary[..11], 2);
+        private static int GetSubPacketLength(string binary) => Convert.ToInt32(binary[..15], 2);
+        private static int GetPacketVersion(string bitString) => Convert.ToInt32(bitString[..3], 2);
+        private static int GetPacketType(string bitString) => Convert.ToInt32(bitString[..3], 2);
 
         private long GetLiteralValue(string binary)
         {
@@ -127,48 +122,9 @@ public class Aoc202116 : AocPuzzle
 
             return Convert.ToInt64(literalBinary, 2);
         }
-
-        private int GetPacketVersion(string bitString)
-        {
-            var s = bitString[..3];
-            return Convert.ToInt32(s, 2);
-        }
-
-        private int GetPacketType(string bitString)
-        {
-            var s = bitString[..3];
-            return Convert.ToInt32(s, 2);
-        }
-
-        public static BitsPacket FromHex(string hexString)
-        {
-            var binaryStrings = hexString.ToCharArray().Select(o => CharToBitString[o]);
-            var binaryString = string.Join("", binaryStrings);
-            return new BitsPacket(binaryString);
-        }
-
-        private static readonly Dictionary<char, string> CharToBitString = new()
-        {
-            { '0', "0000" },
-            { '1', "0001" },
-            { '2', "0010" },
-            { '3', "0011" },
-            { '4', "0100" },
-            { '5', "0101" },
-            { '6', "0110" },
-            { '7', "0111" },
-            { '8', "1000" },
-            { '9', "1001" },
-            { 'A', "1010" },
-            { 'B', "1011" },
-            { 'C', "1100" },
-            { 'D', "1101" },
-            { 'E', "1110" },
-            { 'F', "1111" }
-        };
     }
-    
-    public enum PacketType
+
+    private enum PacketType
     {
         Sum = 0,
         Product = 1,

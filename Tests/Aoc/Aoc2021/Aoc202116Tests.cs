@@ -8,7 +8,7 @@ public class Aoc202116Tests : PuzzleTest<Aoc202116>
     [Fact]
     public void Test1()
     {
-        var result = Aoc202116.BitsPacket.FromHex("D2FE28");
+        var result = Sut.Solve("D2FE28");
 
         result.Version.Should().Be(6);
         result.Type.Should().Be(4);
@@ -20,7 +20,7 @@ public class Aoc202116Tests : PuzzleTest<Aoc202116>
     [Fact]
     public void Test2()
     {
-        var result = Aoc202116.BitsPacket.FromHex("38006F45291200");
+        var result = Sut.Solve("38006F45291200");
 
         result.Version.Should().Be(1);
         result.Type.Should().Be(6);
@@ -33,7 +33,7 @@ public class Aoc202116Tests : PuzzleTest<Aoc202116>
     [Fact]
     public void Test3()
     {
-        var result = Aoc202116.BitsPacket.FromHex("EE00D40C823060");
+        var result = Sut.Solve("EE00D40C823060");
 
         result.Version.Should().Be(7);
         result.Type.Should().Be(3);
@@ -49,12 +49,7 @@ public class Aoc202116Tests : PuzzleTest<Aoc202116>
     [InlineData("620080001611562C8802118E34", 12)]
     [InlineData("C0015000016115A2E0802F182340", 23)]
     [InlineData("A0016C880162017C3686B18A3D4780", 31)]
-    public void VersionSum(string hex, int expected)
-    {
-        var result = Aoc202116.BitsPacket.FromHex(hex);
-
-        result.VersionSum.Should().Be(expected);
-    }
+    public void VersionSum(string hex, int expected) => Sut.Solve(hex).VersionSum.Should().Be(expected);
 
     [Theory]
     [InlineData("C200B40A82", 3)]
@@ -65,10 +60,5 @@ public class Aoc202116Tests : PuzzleTest<Aoc202116>
     [InlineData("F600BC2D8F", 0)]
     [InlineData("9C005AC2F8F0", 0)]
     [InlineData("9C0141080250320F1802104A08", 1)]
-    public void Value(string hex, long expected)
-    {
-        var result = Aoc202116.BitsPacket.FromHex(hex);
-
-        result.Value.Should().Be(new BigInteger(expected));
-    }
+    public void Value(string hex, long expected) => Sut.Solve(hex).Value.Should().Be(new BigInteger(expected));
 }

@@ -4,36 +4,14 @@ namespace Tests.Aoc.Aoc2021;
 
 public class Aoc202117Tests : PuzzleTest<Aoc202117>
 {
+    private static Aoc202117.TrickshotTarget Target => new(20, 30, -10, -5);
+    
     [Fact]
-    public void Part1()
-    {
-        var target = new Aoc202117.TrickshotTarget(20, 30, -10, -5);
-
-        var trickshot = new Aoc202117.TrickShot();
-        var result = trickshot.Shoot(target);
-
-        result.MaxHeight.Should().Be(45);
-    }
+    public void Part1() => Sut.Shoot(Target).MaxHeight.Should().Be(45);
 
     [Fact]
-    public void SingleMaxHeight()
-    {
-        var target = new Aoc202117.TrickshotTarget(20, 30, -10, -5);
-
-        var trickshot = new Aoc202117.TrickShot();
-        var result = trickshot.GetMaxHeight(target, 6, 9);
-
-        result.Should().Be(45);
-    }
+    public void SingleMaxHeight() => Sut.GetMaxHeight(Target, 6, 9).Should().Be(45);
 
     [Fact]
-    public void SingleVelocityCount()
-    {
-        var target = new Aoc202117.TrickshotTarget(20, 30, -10, -5);
-
-        var trickshot = new Aoc202117.TrickShot();
-        var result = trickshot.Shoot(target);
-
-        result.HitCount.Should().Be(112);
-    }
+    public void SingleVelocityCount() => Sut.Shoot(Target).HitCount.Should().Be(112);
 }

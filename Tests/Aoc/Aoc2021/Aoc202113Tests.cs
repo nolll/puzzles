@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2021;
 public class Aoc202113Tests : PuzzleTest<Aoc202113>
 {
     [Fact]
-    public void Part1()
-    {
-        var paper = new Aoc202113.TransparentPaper(Input);
-        var result = paper.DotCountAfterFirstFold();
-
-        result.Should().Be(17);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(17);
 
     [Fact]
-    public void Part2()
-    {
-        var paper = new Aoc202113.TransparentPaper(Input);
-        var result = paper.MessageAfterFold().Trim();
-
-        result.Should().Be(Result.Trim());
-    }
+    public void Part2() => Sut.MessageAfterFold(Input).Should().Be(Result.Trim());
 
     private const string Input = """
                                  6,10

@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2021;
@@ -8,81 +9,78 @@ namespace Pzl.Aoc.Puzzles.Aoc2021;
 public class Aoc202119 : AocPuzzle
 {
     [Puzzle("a6668fd005e7ebda4e124253eea1e56e")]
-    public int Part1(string input) => new BeaconSystem().GetResult(input).BeaconCount;
+    public int Part1(string input) => GetResult(input).BeaconCount;
 
     [Puzzle("ce2bc05651a369b5171388ec7e4f2438")]
-    public int Part2(string input) => new BeaconSystem().GetResult(input).MaxDistance;
+    public int Part2(string input) => GetResult(input).MaxDistance;
 
-    public class BeaconSystem
+    public BeaconSystemResult GetResult(string input)
     {
-        public BeaconSystemResult GetResult(string input)
+        var groups = input
+            .Split(LineBreaks.Double)
+            .Select(o => o.Split(LineBreaks.Single))
+            .ToList();
+        var scanners = groups.Select(ParseScanner).ToList();
+
+        var baseScanner = scanners.First();
+        var otherScanners = scanners.Skip(1).ToList();
+
+        var scannerLocations = new List<Coord3d>();
+
+        while (otherScanners.Count != 0)
         {
-            var groups = input
-                .Split(LineBreaks.Double)
-                .Select(o => o.Split(LineBreaks.Single))
-                .ToList();
-            var scanners = groups.Select(ParseScanner).ToList();
-
-            var baseScanner = scanners.First();
-            var otherScanners = scanners.Skip(1).ToList();
-
-            var scannerLocations = new List<Coord3d>();
-
-            while (otherScanners.Any())
+            foreach (var otherScanner in otherScanners)
             {
-                foreach (var otherScanner in otherScanners)
+                var found = baseScanner.FindMatchingRotation(otherScanner.BeaconCoords);
+                if (found == null)
+                    continue;
+
+                scannerLocations.Add(found.Value.scannerCoord);
+
+                foreach (var relCoord in found.Value.beaconCoords)
                 {
-                    var found = baseScanner.FindMatchingRotation(otherScanner.BeaconCoords);
-                    if (found == null)
-                        continue;
-
-                    scannerLocations.Add(found.Value.scannerCoord);
-
-                    foreach (var relCoord in found.Value.beaconCoords)
-                    {
-                        baseScanner.AddCoord(new Coord3d(
-                            found.Value.scannerCoord.X - relCoord.X,
-                            found.Value.scannerCoord.Y - relCoord.Y,
-                            found.Value.scannerCoord.Z - relCoord.Z));
-                    }
-
-                    otherScanners = otherScanners.Where(o => o.Id != otherScanner.Id).ToList();
-                    break;
+                    baseScanner.AddCoord(new Coord3d(
+                        found.Value.scannerCoord.X - relCoord.X,
+                        found.Value.scannerCoord.Y - relCoord.Y,
+                        found.Value.scannerCoord.Z - relCoord.Z));
                 }
-            }
 
-            var maxDistance = 0;
-            foreach (var a in scannerLocations)
+                otherScanners = [.. otherScanners.Where(o => o.Id != otherScanner.Id)];
+                break;
+            }
+        }
+
+        var maxDistance = 0;
+        foreach (var a in scannerLocations)
+        {
+            foreach (var b in scannerLocations)
             {
-                foreach (var b in scannerLocations)
-                {
-                    if (a.Id == b.Id)
-                        continue;
+                if (a.Id == b.Id)
+                    continue;
 
-                    var distance = a.ManhattanDistanceTo(b);
-                    if (distance > maxDistance)
-                        maxDistance = distance;
-                }
+                var distance = a.ManhattanDistanceTo(b);
+                if (distance > maxDistance)
+                    maxDistance = distance;
             }
-
-            return new BeaconSystemResult(baseScanner.BeaconCoords.Count, maxDistance);
         }
 
-        private static BeaconScanner ParseScanner(string[] lines)
-        {
-            var id = int.Parse(lines.First().Split(' ')[2]);
-            var beaconCoords = lines.Skip(1).Select(ParseCoord).ToHashSet();
-            return new BeaconScanner(id, beaconCoords);
-        }
-
-        private static Coord3d ParseCoord(string s)
-        {
-            var numbers = s.Split(',').Select(int.Parse).ToArray();
-            return new Coord3d(numbers[0], numbers[1], numbers[2]);
-        }
+        return new BeaconSystemResult(baseScanner.BeaconCoords.Count, maxDistance);
     }
 
-    internal class BeaconScanner(int id, HashSet<Coord3d> beaconCoords)
+    private static BeaconScanner ParseScanner(string[] lines)
+    {
+        var id = int.Parse(lines.First().Split(' ')[2]);
+        var beaconCoords = lines.Skip(1).Select(ParseCoord).ToHashSet();
+        return new BeaconScanner(id, beaconCoords);
+    }
+
+    private static Coord3d ParseCoord(string s)
+    {
+        var (x, y, z) = Numbers.IntsFromString(s);
+        return new Coord3d(x, y, z);
+    }
+
+    private class BeaconScanner(int id, HashSet<Coord3d> beaconCoords)
     {
         public int Id { get; } = id;
         public HashSet<Coord3d> BeaconCoords { get; } = beaconCoords;
@@ -151,11 +149,8 @@ public class Aoc202119 : AocPuzzle
             return null;
         }
 
-        public void AddCoord(Coord3d newCoord)
-        {
-            BeaconCoords.Add(newCoord);
-        }
+        public void AddCoord(Coord3d newCoord) => BeaconCoords.Add(newCoord);
     }
-    
+
     public record BeaconSystemResult(int BeaconCount, int MaxDistance);
 }

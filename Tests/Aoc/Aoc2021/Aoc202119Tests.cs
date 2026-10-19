@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2021;
 public class Aoc202119Tests : PuzzleTest<Aoc202119>
 {
     [Fact]
-    public void Part1()
-    {
-        var system = new Aoc202119.BeaconSystem();
-        var result = system.GetResult(Input);
-
-        result.BeaconCount.Should().Be(79);
-    }
+    public void Part1() => Sut.GetResult(Input).BeaconCount.Should().Be(79);
 
     [Fact]
-    public void Part2()
-    {
-        var system = new Aoc202119.BeaconSystem();
-        var result = system.GetResult(Input);
-
-        result.MaxDistance.Should().Be(3621);
-    }
+    public void Part2() => Sut.GetResult(Input).MaxDistance.Should().Be(3621);
 
     private const string Input = """
                                  --- scanner 0 ---

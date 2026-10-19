@@ -5,23 +5,10 @@ namespace Tests.Aoc.Aoc2021;
 public class Aoc202109Tests : PuzzleTest<Aoc202109>
 {
     [Fact]
-    public void Part1()
-    {
-        var heightMap = new Aoc202109.HeightMap();
-
-        var result = heightMap.FindLowPointSum(Input);
-
-        result.Should().Be(15);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(15);
 
     [Fact]
-    public void Part2()
-    {
-        var heightMap = new Aoc202109.HeightMap();
-        var result = heightMap.FindBasinSizes(Input);
-
-        result.Should().Be(1134);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(1134);
 
     private const string Input = """
                                  2199943210

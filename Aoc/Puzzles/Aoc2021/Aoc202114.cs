@@ -11,7 +11,7 @@ public class Aoc202114 : AocPuzzle
 
     [Puzzle("d36de0cab46393825975a1adaea40dc4")]
     public long Part2(string input) => Solve(input, 40);
-    
+
     public long Solve(string input, int stepCount)
     {
         var groups = input
@@ -39,7 +39,7 @@ public class Aoc202114 : AocPuzzle
             countList.Add(combination.CountsChars(cache));
         }
 
-        var counts = CountMerger.MergeCounts(countList.ToArray());
+        var counts = MergeCounts(countList.ToArray());
         counts[lastChar]++;
 
         var min = counts.Values.Min();
@@ -47,26 +47,23 @@ public class Aoc202114 : AocPuzzle
 
         return max - min;
     }
-    
-    public static class CountMerger
-    {
-        public static Dictionary<char, long> MergeCounts(params Dictionary<char, long>[] dictionaries)
-        {
-            var merged = new Dictionary<char, long>();
-            foreach (var dictionary in dictionaries)
-            {
-                foreach (var key in dictionary.Keys)
-                {
-                    merged.TryAdd(key, 0);
-                    merged[key] += dictionary[key];
-                }
-            }
 
-            return merged;
+    private static Dictionary<char, long> MergeCounts(params Dictionary<char, long>[] dictionaries)
+    {
+        var merged = new Dictionary<char, long>();
+        foreach (var dictionary in dictionaries)
+        {
+            foreach (var key in dictionary.Keys)
+            {
+                merged.TryAdd(key, 0);
+                merged[key] += dictionary[key];
+            }
         }
+
+        return merged;
     }
-    
-    public class PolymerCombination(Dictionary<(char, char), char> rules, char a, char b, int level, int maxLevel)
+
+    private class PolymerCombination(Dictionary<(char, char), char> rules, char a, char b, int level, int maxLevel)
     {
         public Dictionary<char, long> CountsChars(Dictionary<(char, char, int), Dictionary<char, long>> cache)
         {
@@ -83,7 +80,7 @@ public class Aoc202114 : AocPuzzle
                 var right = new PolymerCombination(rules, insert, b, level + 1, maxLevel);
                 var leftCounts = left.CountsChars(cache);
                 var rightCounts = right.CountsChars(cache);
-                counts = CountMerger.MergeCounts(counts, leftCounts, rightCounts);
+                counts = MergeCounts(counts, leftCounts, rightCounts);
             }
             else
             {

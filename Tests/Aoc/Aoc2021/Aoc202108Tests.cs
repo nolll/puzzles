@@ -5,40 +5,18 @@ namespace Tests.Aoc.Aoc2021;
 public class Aoc202108Tests : PuzzleTest<Aoc202108>
 {
     [Fact]
-    public void Part1()
-    {
-        var puzzle = new Aoc202108.SevenSegmentDisplayDecoder(Input);
-        var result = puzzle.GetEasyNumbers();
-
-        result.Should().Be(26);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(26);
 
     [Theory]
     [InlineData("abc", "abcd", true)]
     [InlineData("abc", "abde", false)]
-    public void IsSubsetOf(string sShort, string sLong, bool expected)
-    {
-        var decoder = new Aoc202108.DigitDecoder(SingleInput);
-        var result = Aoc202108.DigitDecoder.IsSubsetOf(sShort, sLong);
-            
-        result.Should().Be(expected);
-    }
+    public void IsSubsetOf(string sShort, string sLong, bool expected) => Sut.IsSubsetOf(sShort, sLong).Should().Be(expected);
 
     [Fact]
-    public void Part2Single()
-    {
-        var decoder = new Aoc202108.DigitDecoder(SingleInput);
-        decoder.DecodedNumber.Should().Be(5353);
-    }
-        
-    [Fact]
-    public void Part2()
-    {
-        var puzzle = new Aoc202108.SevenSegmentDisplayDecoder(Input);
-        var result = puzzle.GetDecodedSum();
+    public void Part2Single() => Sut.Part2(SingleInput).Should().Be(5353);
 
-        result.Should().Be(61229);
-    }
+    [Fact]
+    public void Part2() => Sut.Part2(Input).Should().Be(61229);
 
     private const string SingleInput = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
 

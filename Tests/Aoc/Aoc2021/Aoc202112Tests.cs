@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2021;
 public class Aoc202112Tests : PuzzleTest<Aoc202112>
 {
     [Fact]
-    public void Part1()
-    {
-        var caveSystem = new Aoc202112.CaveSystem(Input, false);
-        var result = caveSystem.CountPaths();
-
-        result.Should().Be(10);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(10);
 
     [Fact]
-    public void Part2()
-    {
-        var caveSystem = new Aoc202112.CaveSystem(Input, true);
-        var result = caveSystem.CountPaths();
-
-        result.Should().Be(36);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(36);
 
     private const string Input = """
                                  start-A

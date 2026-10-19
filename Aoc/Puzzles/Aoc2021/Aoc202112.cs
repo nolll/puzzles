@@ -7,83 +7,76 @@ namespace Pzl.Aoc.Puzzles.Aoc2021;
 public class Aoc202112 : AocPuzzle
 {
     [Puzzle("f0ddaeeb33f1a0ff7a113ef020e9decd")]
-    public int Part1(string input) => new CaveSystem(input, false).CountPaths();
+    public int Part1(string input) => Solve(input, false);
 
     [Puzzle("435c45d6610ccd392e06c43e52654eb5")]
-    public int Part2(string input) => new CaveSystem(input, true).CountPaths();
+    public int Part2(string input) => Solve(input, true);
 
-    public class CaveSystem
+    private static int Solve(string input, bool allowRevisit)
     {
-        private readonly bool _allowSmallRevisit;
-        private readonly Dictionary<string, HashSet<string>> _connections;
-
-        public CaveSystem(string input, bool allowSmallRevisit)
+        var lines = input.Split(LineBreaks.Single);
+        var connections = new Dictionary<string, HashSet<string>>();
+        foreach (var line in lines)
         {
-            _allowSmallRevisit = allowSmallRevisit;
-            var lines = input.Split(LineBreaks.Single);
-            _connections = new Dictionary<string, HashSet<string>>();
-            foreach (var line in lines)
-            {
-                var parts = line.Split('-');
-                var left = parts[0];
-                var right = parts[1];
+            var parts = line.Split('-');
+            var left = parts[0];
+            var right = parts[1];
 
-                AddConnection(left, right);
-                AddConnection(right, left);
-            }
+            AddConnection(connections, left, right);
+            AddConnection(connections, right, left);
         }
 
-        private void AddConnection(string from, string to)
+        return FindPaths(connections, allowRevisit, "-", "start", "-").Count;
+    }
+    
+    private static void AddConnection(Dictionary<string, HashSet<string>> connections, string from, string to)
+    {
+        if (!connections.TryGetValue(from, out var connection))
         {
-            if (!_connections.TryGetValue(from, out var connection))
-            {
-                connection = [];
-                _connections.Add(from, connection);
-            }
-
-            connection.Add(to);
+            connection = [];
+            connections.Add(from, connection);
         }
 
-        public int CountPaths() => FindPaths("-", "start", "-").Count;
+        connection.Add(to);
+    }
 
-        private List<string> FindPaths(string path, string current, string lowercasePath)
+    private static List<string> FindPaths(Dictionary<string, HashSet<string>> connections, bool allowRevisit, string path, string current,
+        string lowercasePath)
+    {
+        var paths = new List<string>();
+        path = $"{path}{current}-";
+        if (current.IsLower())
+            lowercasePath = $"{lowercasePath}{current}-";
+        var links = connections[current];
+
+        if (current == "end")
+            return [path];
+
+        foreach (var link in links)
         {
-            var paths = new List<string>();
-            path = $"{path}{current}-";
-            if (current.IsLower())
-                lowercasePath = $"{lowercasePath}{current}-";
-            var links = _connections[current];
-
-            if (current == "end")
-                return new List<string> { path };
-
-            foreach (var link in links)
-            {
-                var isUpper = link.IsUpper();
-                var wasUsed = WasUsed(lowercasePath, link);
-                var canBeUsed = isUpper || !wasUsed;
-                if (canBeUsed)
-                    paths.AddRange(FindPaths(path, link, lowercasePath));
-            }
-
-            return paths;
+            var wasUsed = WasUsed(lowercasePath, link, allowRevisit);
+            var canBeUsed = link.IsUpper() || !wasUsed;
+            if (canBeUsed)
+                paths.AddRange(FindPaths(connections, allowRevisit, path, link, lowercasePath));
         }
 
-        private bool WasUsed(string lowercasePath, string cave)
+        return paths;
+    }
+
+    private static bool WasUsed(string lowercasePath, string cave, bool allowRevisit)
+    {
+        if (cave == "start")
+            return true;
+
+        if (allowRevisit)
         {
-            if (cave == "start")
-                return true;
+            var list = lowercasePath.Trim('-').Split('-');
+            var distinct = list.Distinct();
 
-            if (_allowSmallRevisit)
-            {
-                var list = lowercasePath.Trim('-').Split('-');
-                var distinct = list.Distinct();
-
-                if (list.Length == distinct.Count())
-                    return false;
-            }
-
-            return lowercasePath.IndexOf(cave, StringComparison.Ordinal) > -1;
+            if (list.Length == distinct.Count())
+                return false;
         }
+
+        return lowercasePath.IndexOf(cave, StringComparison.Ordinal) > -1;
     }
 }

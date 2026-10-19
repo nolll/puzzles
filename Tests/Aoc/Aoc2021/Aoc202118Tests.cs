@@ -88,9 +88,8 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
     [Fact]
     public void Exploding1()
     {
-        var math = new Aoc202118.SnailfishMath();
         var number = new Aoc202118.SnailfishNumber("[[[[[9,8],1],2],3],4]");
-        var result = math.Explode(number);
+        var result = Sut.Explode(number);
 
         result.ToString().Should().Be("[[[[0,9],2],3],4]");
     }
@@ -98,9 +97,8 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
     [Fact]
     public void Exploding2()
     {
-        var math = new Aoc202118.SnailfishMath();
         var number = new Aoc202118.SnailfishNumber("[7,[6,[5,[4,[3,2]]]]]");
-        var result = math.Explode(number);
+        var result = Sut.Explode(number);
 
         result.ToString().Should().Be("[7,[6,[5,[7,0]]]]");
     }
@@ -108,9 +106,8 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
     [Fact]
     public void Exploding3()
     {
-        var math = new Aoc202118.SnailfishMath();
         var number = new Aoc202118.SnailfishNumber("[[3,[2,[1,[7,3]]]],[6,[5,[4,[3,2]]]]]");
-        var result = math.Explode(number);
+        var result = Sut.Explode(number);
 
         result.ToString().Should().Be("[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]");
     }
@@ -118,10 +115,9 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
     [Fact]
     public void Adding1()
     {
-        var math = new Aoc202118.SnailfishMath();
         var number1 = new Aoc202118.SnailfishNumber("[[[[4,3],4],4],[7,[[8,4],9]]]");
         var number2 = new Aoc202118.SnailfishNumber("[1,1]");
-        var result = math.Sum(number1, number2);
+        var result = Sut.Sum(number1, number2);
 
         result.ToString().Should().Be("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]");
     }
@@ -137,9 +133,8 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
                              [5,5]
                              [6,6]
                              """;
-
-        var math = new Aoc202118.SnailfishMath();
-        var result = math.Sum(input);
+        
+        var result = Sut.Sum(Sut.ParseNumbers(input));
 
         result.ToString().Should().Be("[[[[5,0],[7,4]],[5,5]],[6,6]]");
     }
@@ -159,30 +154,18 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
                              [[[5,[7,4]],7],1]
                              [[[[4,2],2],6],[8,7]]
                              """;
-
-        var math = new Aoc202118.SnailfishMath();
-        var result = math.Sum(input);
+        
+        var result = Sut.Sum(Sut.ParseNumbers(input));
 
         result.ToString().Should().Be("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]");
     }
 
     [Fact]
-    public void Magnitude1()
-    {
-        var math = new Aoc202118.SnailfishMath();
-        var number = new Aoc202118.SnailfishNumber("[[1,2],[[3,4],5]]");
-
-        number.Magnitude.Should().Be(143);
-    }
+    public void Magnitude1() => new Aoc202118.SnailfishNumber("[[1,2],[[3,4],5]]").Magnitude.Should().Be(143);
 
     [Fact]
-    public void Magnitude2()
-    {
-        var math = new Aoc202118.SnailfishMath();
-        var number = new Aoc202118.SnailfishNumber("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]");
-
-        number.Magnitude.Should().Be(3488);
-    }
+    public void Magnitude2() => 
+        new Aoc202118.SnailfishNumber("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]").Magnitude.Should().Be(3488);
 
     [Fact]
     public void Part1()
@@ -200,11 +183,7 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
                              [[[[5,2],5],[8,[3,7]]],[[5,[7,5]],[4,4]]]
                              """;
 
-        var math = new Aoc202118.SnailfishMath();
-        var result = math.Sum(input);
-
-        result.ToString().Should().Be("[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]");
-        result.Magnitude.Should().Be(4140);
+        Sut.Part1(input).Should().Be(4140);
     }
 
     [Fact]
@@ -222,9 +201,8 @@ public class Aoc202118Tests : PuzzleTest<Aoc202118>
                              [[2,[[7,7],7]],[[5,8],[[9,3],[0,2]]]]
                              [[[[5,2],5],[8,[3,7]]],[[5,[7,5]],[4,4]]]
                              """;
-
-        var math = new Aoc202118.SnailfishMath();
-        var result = math.LargestMagnitude(input);
+        
+        var result = Sut.Part2(input);
 
         result.Should().Be(3993);
     }

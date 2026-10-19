@@ -2,25 +2,13 @@ using Pzl.Aoc.Puzzles.Aoc2021;
 
 namespace Tests.Aoc.Aoc2021;
 
-public class Aoc202111Tests : PuzzleTest<Aoc202107>
+public class Aoc202111Tests : PuzzleTest<Aoc202111>
 {
     [Fact]
-    public void Part1()
-    {
-        var flasher = new Aoc202111.OctopusFlasher(Input);
-        var result = flasher.Run(100);
-
-        result.Should().Be(1656);
-    }
+    public void Part1() => Sut.Solve(Input, 100).Should().Be(1656);
 
     [Fact]
-    public void Part2()
-    {
-        var flasher = new Aoc202111.OctopusFlasher(Input);
-        var result = flasher.Run();
-
-        result.Should().Be(195);
-    }
+    public void Part2() => Sut.Solve(Input).Should().Be(195);
 
     private const string Input = """
                                  5483143223

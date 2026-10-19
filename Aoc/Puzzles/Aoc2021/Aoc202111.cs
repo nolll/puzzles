@@ -7,81 +7,63 @@ namespace Pzl.Aoc.Puzzles.Aoc2021;
 public class Aoc202111 : AocPuzzle
 {
     [Puzzle("4aec5027d57e852d3dc2c0fa275d9d7a")]
-    public int Part1(string input) => new OctopusFlasher(input).Run(100);
+    public int Part1(string input) => Solve(input, 100);
 
     [Puzzle("ffd6657cda58c97fce2c4c27d8fd43a9")]
-    public int Part2(string input) => new OctopusFlasher(input).Run();
-    
-    public class OctopusFlasher
+    public int Part2(string input) => Solve(input);
+
+    public int Solve(string input, int? maxSteps = null)
     {
-        private readonly Grid<int> _grid;
-        private readonly IList<Coord> _coords;
+        var grid = GridBuilder.BuildIntGridFromNonSeparated(input);
+        var coords = grid.Coords.ToList();
+        var flashCount = 0;
 
-        public OctopusFlasher(string input)
+        var i = 0;
+        while (true)
         {
-            _grid = GridBuilder.BuildIntGridFromNonSeparated(input);
-            _coords = _grid.Coords.ToList();
-        }
+            var flashed = new HashSet<Coord>();
 
-        public int Run(int? maxSteps = null)
-        {
-            var flashCount = 0;
+            IncrementAll(coords, grid);
+            var coordsToFlash = GetCoordsToFlash(coords, grid);
 
-            var i = 0;
-            while(true)
+            while (coordsToFlash.Any())
             {
-                var flashed = new HashSet<Coord>();
+                var flashCoord = coordsToFlash.First();
+                grid.MoveTo(flashCoord);
+                grid.WriteValue(0);
+                flashed.Add(flashCoord);
 
-                IncrementAll();
-                var coordsToFlash = GetCoordsToFlash();
-
-                while (coordsToFlash.Any())
+                foreach (var adjacentCoord in grid.AllAdjacentCoords)
                 {
-                    var flashCoord = coordsToFlash.First();
-                    _grid.MoveTo(flashCoord);
-                    _grid.WriteValue(0);
-                    flashed.Add(flashCoord);
+                    if (flashed.Contains(adjacentCoord))
+                        continue;
 
-                    foreach (var adjacentCoord in _grid.AllAdjacentCoords)
-                    {
-                        if (flashed.Contains(adjacentCoord))
-                            continue;
-
-                        _grid.MoveTo(adjacentCoord);
-                        var adjacentValue = _grid.ReadValue();
-                        var newAdjacentValue = adjacentValue + 1;
-                        _grid.WriteValue(newAdjacentValue);
-                    }
-
-                    coordsToFlash = GetCoordsToFlash();
+                    grid.MoveTo(adjacentCoord);
+                    var adjacentValue = grid.ReadValue();
+                    var newAdjacentValue = adjacentValue + 1;
+                    grid.WriteValue(newAdjacentValue);
                 }
-                
-                flashCount += flashed.Count;
 
-                if (i >= maxSteps - 1)
-                    return flashCount;
-
-                i++;
-
-                if (flashed.Count == _coords.Count)
-                    return i;
+                coordsToFlash = GetCoordsToFlash(coords, grid);
             }
-        }
 
-        private IList<Coord> GetCoordsToFlash()
-        {
-            return _coords.Where(o => _grid.ReadValueAt(o) > 9).ToList();
-        }
+            flashCount += flashed.Count;
 
-        private void IncrementAll()
-        {
-            foreach (var coord in _coords)
-            {
-                _grid.MoveTo(coord);
-                var v = _grid.ReadValue();
-                var newValue = v + 1;
-                _grid.WriteValue(newValue);
-            }
+            if (i >= maxSteps - 1)
+                return flashCount;
+
+            i++;
+
+            if (flashed.Count == coords.Count)
+                return i;
         }
+    }
+
+    private static IList<Coord> GetCoordsToFlash(List<Coord> coords, Grid<int> grid) => coords.Where(o => grid.ReadValueAt(o) > 9).ToList();
+
+    private static void IncrementAll(List<Coord> coords, Grid<int> grid)
+    {
+        foreach (var coord in coords)
+            grid.WriteValueAt(coord, grid.ReadValueAt(coord) + 1);
     }
 }

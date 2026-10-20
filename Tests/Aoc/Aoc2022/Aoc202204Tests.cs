@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202204Tests : PuzzleTest<Aoc202204>
 {
     [Fact]
-    public void Part1()
-    {
-        var cleaning = new Aoc202204.Cleaning();
-        var result = cleaning.Part1(Input);
-
-        result.Should().Be(2);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(2);
 
     [Fact]
-    public void Part2()
-    {
-        var cleaning = new Aoc202204.Cleaning();
-        var result = cleaning.Part2(Input);
-
-        result.Should().Be(4);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(4);
 
     private const string Input = """
                                  2-4,6-8

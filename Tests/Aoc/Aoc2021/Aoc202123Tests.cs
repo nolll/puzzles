@@ -7,11 +7,10 @@ public class Aoc202123Tests : PuzzleTest<Aoc202123>
     [Fact]
     public void Moving()
     {
-        var amphipods = new Aoc202123.Amphipods(Input2, true);
+        var amphipods = new Aoc202123.Amphipods(Input2);
         amphipods.TestArrange();
-        var result = amphipods.Energy;
 
-        result.Should().Be(44169);
+        amphipods.Energy.Should().Be(44169);
     }
 
     private const string Input2 = """

@@ -28,7 +28,6 @@ public class Aoc202123 : AocPuzzle
 
     public class Amphipods
     {
-        private readonly bool _isPrinterEnabled;
         private readonly Grid<char> _grid;
         private readonly Dictionary<char, int> _stepCosts;
 
@@ -62,9 +61,8 @@ public class Aoc202123 : AocPuzzle
 
         public int Energy { get; private set; }
 
-        public Amphipods(string input, bool isPrinterEnabled = false)
+        public Amphipods(string input)
         {
-            _isPrinterEnabled = isPrinterEnabled;
             _grid = GridBuilder.BuildCharGrid(input.Replace('.', ' ').Replace('#', '.'));
             _stepCosts = new Dictionary<char, int>
             {
@@ -107,8 +105,6 @@ public class Aoc202123 : AocPuzzle
 
         public void ArrangePart2()
         {
-            Print();
-
             // Clear room C
             Move(_roomC1, _hallwayLeft);
             Move(_roomC2, _hallwayD);
@@ -176,20 +172,18 @@ public class Aoc202123 : AocPuzzle
             Move(_hallwayRight, _roomD1);
         }
 
-        private void Move(Coord from, Coord to)
+        public void Move(Coord from, Coord to)
         {
-            _grid.MoveTo(from);
-            var c = _grid.ReadValue();
+            var c = _grid.ReadValueAt(from);
 
-            if (c == '.' || c == ' ')
+            if (c is '.' or ' ')
                 throw new Exception($"Read character was '{c}'. Must be a letter");
 
             if (_grid.ReadValueAt(to) != ' ')
                 throw new Exception($"Target character was '{c}'. Must be ' '");
 
-            _grid.WriteValue(' ');
-            _grid.MoveTo(to);
-            _grid.WriteValue(c);
+            _grid.WriteValueAt(from, ' ');
+            _grid.WriteValueAt(to, c);
 
             var stepCost = _stepCosts[c];
             var stepCount = 0;
@@ -200,18 +194,6 @@ public class Aoc202123 : AocPuzzle
 
             var cost = stepCost * stepCount;
             Energy += cost;
-
-            Print();
-        }
-
-        private void Print()
-        {
-            if (!_isPrinterEnabled)
-                return;
-
-            Console.WriteLine(_grid.Print());
-            Console.WriteLine($"Energy: {Energy}");
-            Console.WriteLine();
         }
     }
 

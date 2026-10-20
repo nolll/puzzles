@@ -5,21 +5,7 @@ namespace Tests.Aoc.Aoc2021;
 public class Aoc202125Tests : PuzzleTest<Aoc202125>
 {
     [Fact]
-    public void Part1()
-    {
-        var herd = new Aoc202125.HerdOfSeaCucumbers(Input);
-        var result = herd.MoveUntilStop();
-
-        result.Should().Be(58);
-    }
-
-    [Fact]
-    public void Part2()
-    {
-        var result = 0;
-
-        result.Should().Be(0);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(58);
 
     private const string Input = """
                                  v...>>.vv>

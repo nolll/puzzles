@@ -7,115 +7,85 @@ namespace Pzl.Aoc.Puzzles.Aoc2021;
 public class Aoc202125 : AocPuzzle
 {
     [Puzzle("b2c5d4f507c64adf10e3434888f5c9a9")]
-    public int Part1(string input) => new HerdOfSeaCucumbers(input).MoveUntilStop();
-
-    public class HerdOfSeaCucumbers
+    public int Part1(string input)
     {
-        private readonly Grid<char> _grid;
+        var grid = GridBuilder.BuildCharGrid(input);
 
-        public HerdOfSeaCucumbers(string input)
+        var steps = 0;
+        var moved = true;
+        while (moved)
         {
-            _grid = GridBuilder.BuildCharGrid(input);
+            moved = Move(grid);
+            steps++;
         }
 
-        public int MoveUntilStop()
+        return steps;
+    }
+
+    private static bool Move(Grid<char> grid)
+    {
+        var cucumbersToMoveEast = FindCucumbersToMoveEast(grid);
+        MoveCucumberEast(grid, cucumbersToMoveEast);
+
+        var cucumbersToMoveSouth = FindCucumbersToMoveSouth(grid);
+        MoveCucumberSouth(grid, cucumbersToMoveSouth);
+
+        return cucumbersToMoveEast.Count != 0 || cucumbersToMoveSouth.Count != 0;
+    }
+
+    private static List<Coord> FindCucumbersToMoveEast(Grid<char> grid) => FindCucumbersToMove(grid, '>', NextValueEast);
+    private static List<Coord> FindCucumbersToMoveSouth(Grid<char> grid) => FindCucumbersToMove(grid, 'v', NextValueSouth);
+
+    private static List<Coord> FindCucumbersToMove(Grid<char> grid, char direction, Func<Grid<char>, char> nextValue)
+    {
+        var cucumbersToMove = new List<Coord>();
+        foreach (var coord in grid.Coords)
         {
-            var steps = 0;
-            var moved = true;
-            while (moved)
+            grid.MoveTo(coord);
+            if (grid.ReadValue() != direction)
+                continue;
+
+            if (nextValue(grid) == '.')
+                cucumbersToMove.Add(coord);
+        }
+
+        return cucumbersToMove;
+    }
+
+    private static char NextValueEast(Grid<char> grid) => grid.TryMoveRight() ? grid.ReadValue() : grid.ReadValueAt(0, grid.Coord.Y);
+    private static char NextValueSouth(Grid<char> grid) => grid.TryMoveDown() ? grid.ReadValue() : grid.ReadValueAt(grid.Coord.X, 0);
+
+    private static void MoveCucumberSouth(Grid<char> grid, List<Coord> cucumbersToMove) =>
+        MoveCucumber(grid, cucumbersToMove, 'v', TryMoveDown, WrapAroundDown);
+
+    private static void MoveCucumberEast(Grid<char> grid, List<Coord> cucumbersToMove) =>
+        MoveCucumber(grid, cucumbersToMove, '>', TryMoveRight, WrapAroundRight);
+
+    private static void MoveCucumber(
+        Grid<char> grid,
+        List<Coord> cucumbersToMove,
+        char direction,
+        Func<Grid<char>, bool> tryMove,
+        Action<Grid<char>> wrapAround)
+    {
+        foreach (var coord in cucumbersToMove)
+        {
+            grid.MoveTo(coord);
+            grid.WriteValue('.');
+            if (tryMove(grid))
             {
-                moved = Move();
-                steps++;
+                grid.WriteValue(direction);
             }
-
-            return steps;
-        }
-
-        private bool Move()
-        {
-            var cucumbersToMoveEast = FindCucumbersToMoveEast();
-            MoveCucumberEast(cucumbersToMoveEast);
-
-            var cucumbersToMoveSouth = FindCucumbersToMoveSouth();
-            MoveCucumberSouth(cucumbersToMoveSouth);
-
-            return cucumbersToMoveEast.Any() || cucumbersToMoveSouth.Any();
-        }
-
-        private List<Coord> FindCucumbersToMoveEast()
-        {
-            var cucumbersToMoveEast = new List<Coord>();
-            for (var y = 0; y < _grid.Height; y++)
+            else
             {
-                for (var x = 0; x < _grid.Width; x++)
-                {
-                    _grid.MoveTo(x, y);
-                    var current = _grid.ReadValue();
-                    if (current == '>')
-                    {
-                        var next = _grid.TryMoveRight() ? _grid.ReadValue() : _grid.ReadValueAt(0, _grid.Coord.Y);
-                        if (next == '.')
-                            cucumbersToMoveEast.Add(new Coord(x, y));
-                    }
-                }
-            }
-
-            return cucumbersToMoveEast;
-        }
-
-        private void MoveCucumberEast(List<Coord> cucumbersToMove)
-        {
-            foreach (var coord in cucumbersToMove)
-            {
-                _grid.MoveTo(coord);
-                _grid.WriteValue('.');
-                if (_grid.TryMoveRight())
-                {
-                    _grid.WriteValue('>');
-                }
-                else
-                {
-                    _grid.MoveTo(0, _grid.Coord.Y);
-                    _grid.WriteValue('>');
-                }
-            }
-        }
-
-        private List<Coord> FindCucumbersToMoveSouth()
-        {
-            var cucumbersToMoveSouth = new List<Coord>();
-
-            foreach (var coord in _grid.Coords)
-            {
-                _grid.MoveTo(coord);
-                var current = _grid.ReadValue();
-                if (current == 'v')
-                {
-                    var next = _grid.TryMoveDown() ? _grid.ReadValue() : _grid.ReadValueAt(_grid.Coord.X, 0);
-                    if (next == '.')
-                        cucumbersToMoveSouth.Add(coord);
-                }
-            }
-
-            return cucumbersToMoveSouth;
-        }
-
-        private void MoveCucumberSouth(List<Coord> cucumbersToMove)
-        {
-            foreach (var coord in cucumbersToMove)
-            {
-                _grid.MoveTo(coord);
-                _grid.WriteValue('.');
-                if (_grid.TryMoveDown())
-                {
-                    _grid.WriteValue('v');
-                }
-                else
-                {
-                    _grid.MoveTo(_grid.Coord.X, 0);
-                    _grid.WriteValue('v');
-                }
+                wrapAround(grid);
+                grid.WriteValue(direction);
             }
         }
     }
+
+    private static bool TryMoveRight(Grid<char> grid) => grid.TryMoveRight();
+    private static bool TryMoveDown(Grid<char> grid) => grid.TryMoveDown();
+    private static void WrapAroundRight(Grid<char> grid) => grid.MoveTo(0, grid.Coord.Y);
+    private static void WrapAroundDown(Grid<char> grid) => grid.MoveTo(grid.Coord.X, 0);
 }

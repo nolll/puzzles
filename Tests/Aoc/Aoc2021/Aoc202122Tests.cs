@@ -6,19 +6,14 @@ namespace Tests.Aoc.Aoc2021;
 public class Aoc202122Tests : PuzzleTest<Aoc202122>
 {
     [Fact]
-    public void GetSize()
-    {
-        var area = new Aoc202122.RebootArea(new Coord3d(-54112, -85059, -27449), new Coord3d(-39298, -49293, 7877));
-        var result = area.GetSize();
-
-        result.Should().Be(18_719_357_085_335);
-    }
+    public void GetSize() => 
+        new Aoc202122.RebootArea(new(-54112, -85059, -27449), new(-39298, -49293, 7877)).GetSize().Should().Be(18_719_357_085_335);
 
     [Fact]
     public void GetRemainingParts_CornerOverlap_LeftBottomCloseOverlapping()
     {
-        var area1 = new Aoc202122.RebootArea(new Coord3d(0, 0, 0), new Coord3d(2, 2, 2));
-        var area2 = new Aoc202122.RebootArea(new Coord3d(1, 1, 1), new Coord3d(3, 3, 3));
+        var area1 = new Aoc202122.RebootArea(new(0, 0, 0), new(2, 2, 2));
+        var area2 = new Aoc202122.RebootArea(new(1, 1, 1), new(3, 3, 3));
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(3);
@@ -33,8 +28,8 @@ public class Aoc202122Tests : PuzzleTest<Aoc202122>
     [Fact]
     public void GetRemainingParts_CornerOverlap_LeftTopCloseOverlapping()
     {
-        var area1 = new Aoc202122.RebootArea(new Coord3d(1, 1, 1), new Coord3d(3, 3, 3));
-        var area2 = new Aoc202122.RebootArea(new Coord3d(0, 0, 0), new Coord3d(2, 2, 2));
+        var area1 = new Aoc202122.RebootArea(new(1, 1, 1), new(3, 3, 3));
+        var area2 = new Aoc202122.RebootArea(new(0, 0, 0), new(2, 2, 2));
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(3);
@@ -49,8 +44,8 @@ public class Aoc202122Tests : PuzzleTest<Aoc202122>
     [Fact]
     public void GetRemainingParts_EdgeOverlap_LeftBottomOverlapping()
     {
-        var area1 = new Aoc202122.RebootArea(new Coord3d(0, 0, 0), new Coord3d(3, 3, 3));
-        var area2 = new Aoc202122.RebootArea(new Coord3d(2, 2, 1), new Coord3d(4, 4, 2));
+        var area1 = new Aoc202122.RebootArea(new(0, 0, 0), new(3, 3, 3));
+        var area2 = new Aoc202122.RebootArea(new(2, 2, 1), new(4, 4, 2));
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(4);
@@ -65,40 +60,13 @@ public class Aoc202122Tests : PuzzleTest<Aoc202122>
     }
 
     [Fact]
-    public void Part1()
-    {
-        var reactor = new Aoc202122.SubmarineReactor();
-        var result = reactor.Reboot(Input1.Trim());
-
-        result.Should().Be(39);
-    }
+    public void Part1Advanced_WithInput1() => Sut.Solve(Input1).Should().Be(39);
 
     [Fact]
-    public void Part1Advanced_WithInput1()
-    {
-        var reactor = new Aoc202122.SubmarineReactor();
-        var result = reactor.Reboot2(Input1.Trim(), 50);
-
-        result.Should().Be(39);
-    }
+    public void Part1Advanced_WithInput2() => Sut.Solve(Input2, 50).Should().Be(590784);
 
     [Fact]
-    public void Part1Advanced_WithInput2()
-    {
-        var reactor = new Aoc202122.SubmarineReactor();
-        var result = reactor.Reboot2(Input2.Trim(), 50);
-
-        result.Should().Be(590784);
-    }
-
-    [Fact]
-    public void Part1Advanced_WithInput3()
-    {
-        var reactor = new Aoc202122.SubmarineReactor();
-        var result = reactor.Reboot2(Input3.Trim());
-
-        result.Should().Be(2758514936282235);
-    }
+    public void Part1Advanced_WithInput3() => Sut.Solve(Input3).Should().Be(2758514936282235);
 
     private const string Input1 = """
                                   on x=10..12,y=10..12,z=10..12

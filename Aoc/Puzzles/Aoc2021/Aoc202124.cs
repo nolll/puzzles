@@ -5,24 +5,10 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2021;
 
 [Name("Arithmetic Logic Unit")]
+[NeedsRewrite]
+[Comment("Optimized code that does not use the input.")]
 public class Aoc202124 : AocPuzzle
 {
-    private List<string> ValidNumbers
-    {
-        get
-        {
-            if (field == null)
-            {
-                field = [];
-                var monad = new Monad();
-                monad.Search(0, 0, new int[14], field);
-                field = field.OrderBy(o => o).ToList();
-            }
-
-            return field;
-        }
-    }
-
     private long SmallestValidNumber => long.Parse(ValidNumbers.First());
     private long LargestValidNumber => long.Parse(ValidNumbers.Last());
 
@@ -32,7 +18,23 @@ public class Aoc202124 : AocPuzzle
     [Puzzle("aa756b55fecfa23d098754af71fcc02a")]
     public long Part2(string input) => SmallestValidNumber;
     
-    public class Monad
+    private List<string> ValidNumbers
+    {
+        get
+        {
+            if (field != null)
+                return field;
+            
+            field = [];
+            var monad = new Monad();
+            monad.Search(0, 0, new int[14], field);
+            field = [.. field.OrderBy(o => o)];
+
+            return field;
+        }
+    }
+
+    private class Monad
     {
         private readonly int[] _p3;
         private readonly int[] _p1;
@@ -78,10 +80,8 @@ public class Aoc202124 : AocPuzzle
             // found valid solution
             if (depth == 14)
             {
-                if (z == 0)
-                {
-                    solutions.Add(string.Join("", solution));
-                }
+                if (z == 0) 
+                    solutions.Add(string.Concat(solution));
                 return;
             }
 
@@ -99,55 +99,36 @@ public class Aoc202124 : AocPuzzle
     }
 
     [DebuggerDisplay("{W},{X},{Y},{Z}")]
-    public class AluState
+    public class AluState(List<int> inputs, Dictionary<char, long>? memory = null)
     {
-        public Dictionary<char, long> Memory { get; }
-        public List<int> Inputs { get; private set; }
+        public Dictionary<char, long> Memory { get; } = memory ?? new Dictionary<char, long>
+        {
+            { 'w', 0 },
+            { 'x', 0 },
+            { 'y', 0 },
+            { 'z', 0 }
+        };
+
+        private List<int> _inputs = inputs;
 
         private long W => Memory['w'];
         private long X => Memory['x'];
         private long Y => Memory['y'];
         private long Z => Memory['z'];
 
-        public AluState(List<int> inputs, Dictionary<char, long>? memory = null)
-        {
-            Inputs = inputs;
-            Memory = memory ?? new Dictionary<char, long>
-            {
-                { 'w', 0 },
-                { 'x', 0 },
-                { 'y', 0 },
-                { 'z', 0 }
-            };
-        }
-
         public int ReadInput()
         {
-            var nextInput = Inputs.First();
-            Inputs = Inputs.Skip(1).ToList();
+            var nextInput = _inputs.First();
+            _inputs = [.. _inputs.Skip(1)];
             return nextInput;
         }
 
-        public override string ToString()
-        {
-            return $"{W},{X},{Y},{Z}";
-        }
+        public override string ToString() => $"{W},{X},{Y},{Z}";
     }
 
-    public class AluInstruction
+    public class AluInstruction(string operation, char address, string? b)
     {
-        private readonly char _address;
-        private readonly string? _b;
-        public string Operation { get; }
-
-        public AluInstruction(string operation, char address, string? b)
-        {
-            _address = address;
-            _b = b;
-            Operation = operation;
-        }
-
-        public AluState Execute(AluState state)
+        public void Execute(AluState state)
         {
             //inp a - Read an input value and write it to variable a.
             //add a b - Add the value of a to the value of b, then store the result in variable a.
@@ -155,68 +136,40 @@ public class Aoc202124 : AocPuzzle
             //div a b - Divide the value of a by the value of b, truncate the result to an integer, then store the result in variable a. (Here, "truncate" means to round the value toward zero.)
             //mod a b - Divide the value of a by the value of b, then store the remainder in variable a. (This is also called the modulo operation.)
             //eql a b - If the value of a and b are equal, then store the value 1 in variable a. Otherwise, store the value 0 in variable a.
-            if (Operation == "inp")
+            if (operation == "inp")
             {
                 var input = state.ReadInput();
-                state.Memory[_address] = input;
-                return state;
+                state.Memory[address] = input;
+                return;
             }
 
-            var value = GetValue(state, _b);
-            if (Operation == "add")
-            {
-                state.Memory[_address] += value;
-            }
+            var value = GetValue(state, b);
+            if (operation == "add") 
+                state.Memory[address] += value;
 
-            if (Operation == "mul")
-            {
-                state.Memory[_address] *= value;
-            }
+            if (operation == "mul") 
+                state.Memory[address] *= value;
 
-            if (Operation == "div")
-            {
-                state.Memory[_address] = (int)Math.Floor((double)state.Memory[_address] / value);
-            }
+            if (operation == "div") 
+                state.Memory[address] = (int)Math.Floor((double)state.Memory[address] / value);
 
-            if (Operation == "mod")
-            {
-                state.Memory[_address] = state.Memory[_address] % value;
-            }
+            if (operation == "mod") 
+                state.Memory[address] %= value;
 
-            if (Operation == "eql")
-            {
-                state.Memory[_address] = state.Memory[_address] == value ? 1 : 0;
-            }
-
-            return state;
+            if (operation == "eql") 
+                state.Memory[address] = state.Memory[address] == value ? 1 : 0;
         }
 
-        private long GetValue(AluState state, string? s)
-        {
-            var isAddress = IsAddress(s);
-            if (isAddress)
-            {
-                var address = s![..1].ToCharArray().First();
-                return state.Memory[address];
-            }
-            else
-            {
-                return int.Parse(s!);
-            }
-        }
+        private static long GetValue(AluState state, string? s) => IsAddress(s) 
+            ? state.Memory[s![..1].First()] 
+            : int.Parse(s!);
 
         private static bool IsAddress(string? s) => s is "w" or "x" or "y" or "z";
     }
     
-    public class Alu
+    public class Alu(string input)
     {
-        private readonly IEnumerable<AluInstruction> _instructions;
-
-        public Alu(string input)
-        {
-            var lines = input.Split(LineBreaks.Single);
-            _instructions = lines.Select(ParseInstruction);
-        }
+        private readonly IEnumerable<AluInstruction> _instructions = input.Split(LineBreaks.Single).Select(ParseInstruction);
 
         private static AluInstruction ParseInstruction(string s)
         {
@@ -233,10 +186,8 @@ public class Aoc202124 : AocPuzzle
             var inputs = input.ToString().Select(o => int.Parse(o.ToString())).ToList();
             var state = new AluState(inputs, memory);
 
-            foreach (var instruction in _instructions)
-            {
+            foreach (var instruction in _instructions) 
                 instruction.Execute(state);
-            }
 
             return state;
         }

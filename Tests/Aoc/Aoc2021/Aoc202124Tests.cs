@@ -15,8 +15,7 @@ public class Aoc202124Tests : PuzzleTest<Aoc202124>
                              mul x -1
                              """;
 
-        var alu = new Aoc202124.Alu(input);
-        var result = alu.Process(p);
+        var result = new Aoc202124.Alu(input).Process(p);
 
         result.Memory['x'].Should().Be(expected);
     }
@@ -36,9 +35,7 @@ public class Aoc202124Tests : PuzzleTest<Aoc202124>
                              eql z x
                              """;
 
-        var alu = new Aoc202124.Alu(input);
-        var result = alu.Process(p);
-
+        var result = new Aoc202124.Alu(input).Process(p);
         result.Memory['z'].Should().Be(expected);
     }
 
@@ -68,8 +65,7 @@ public class Aoc202124Tests : PuzzleTest<Aoc202124>
                              mod w 2
                              """;
 
-        var alu = new Aoc202124.Alu(input);
-        var result = alu.Process(p);
+        var result = new Aoc202124.Alu(input).Process(p);
 
         result.Memory['w'].Should().Be(expW);
         result.Memory['x'].Should().Be(expX);

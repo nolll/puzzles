@@ -31,8 +31,8 @@ public class CommentedPuzzleDefinitionInTest() : PuzzleDefinitionInTest(
     name: "Commented Puzzle",
     comment: "Comment");
 
-public class FunPuzzleDefinitionInTest() : PuzzleDefinitionInTest(
-    tags: [PuzzleTag.Fun],
+public class RewritePuzzleDefinitionInTest() : PuzzleDefinitionInTest(
+    tags: [PuzzleTag.Rewrite],
     name: "Fun Puzzle");
 
 public class SlowPuzzleDefinitionInTest() : PuzzleDefinitionInTest(

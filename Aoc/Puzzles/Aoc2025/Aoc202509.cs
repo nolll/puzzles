@@ -5,7 +5,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2025;
 
 [Name("Movie Theater")]
-[IsFunToOptimize]
+[NeedsRewrite]
 [Comment("Could probably use the corners in a more clever way")]
 public class Aoc202509 : AocPuzzle
 {

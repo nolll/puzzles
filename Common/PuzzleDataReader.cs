@@ -17,7 +17,6 @@ public static class PuzzleDataReader
         GetComment(type),
         IsSlow(type),
         NeedsRewrite(type),
-        IsFunToOptimize(type),
         GetNumberOfParts(type),
         HasUniqueInputsForParts(type));
 
@@ -40,9 +39,6 @@ public static class PuzzleDataReader
 
     private static bool NeedsRewrite(MemberInfo type) =>
         type.GetCustomAttribute<NeedsRewriteAttribute>(false) is not null;
-
-    private static bool IsFunToOptimize(MemberInfo type) =>
-        type.GetCustomAttribute<IsFunToOptimizeAttribute>(false) is not null;
 
     private static int GetNumberOfParts(MemberInfo type) =>
         type.GetCustomAttribute<NumberOfPartsAttribute>(true)?.NumberOfParts ?? 1;

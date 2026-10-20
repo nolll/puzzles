@@ -40,15 +40,15 @@ public class PuzzleFilterTests
     }
 
     [Fact]
-    public void FilterFun()
+    public void FilterRewrite()
     {
         var puzzles = new List<PuzzleDefinition>
         {
-            new FunPuzzleDefinitionInTest(),
+            new RewritePuzzleDefinitionInTest(),
             new PlainPuzzleDefinitionInTest()
         };
 
-        var parameters = Parameters.Create([PuzzleTag.Fun]);
+        var parameters = Parameters.Create([PuzzleTag.Rewrite]);
         var filter = new PuzzleFilter(parameters);
         var result = filter.Filter(puzzles).ToList();
 

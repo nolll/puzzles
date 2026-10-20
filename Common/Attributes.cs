@@ -18,9 +18,6 @@ public class CommentAttribute(string comment) : Attribute
 public class IsSlowAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class IsFunToOptimizeAttribute : Attribute;
-
-[AttributeUsage(AttributeTargets.Class)]
 public class NeedsRewriteAttribute : Attribute;
 
 [AttributeUsage(AttributeTargets.Class)]

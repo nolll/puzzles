@@ -5,7 +5,7 @@ using Pzl.Tools.Grids.Grids4d;
 namespace Pzl.Aoc.Puzzles.Aoc2020;
 
 [Name("Conway Cubes")]
-[IsFunToOptimize]
+[NeedsRewrite]
 [Comment("The 4d grid is still array based")]
 public class Aoc202017 : AocPuzzle
 {

@@ -4,7 +4,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2017;
 
 [Name("Duet")]
-[IsFunToOptimize]
+[NeedsRewrite]
 [Comment("Part 1 and 2 share a lot of code and can probably be combined")]
 public class Aoc201718 : AocPuzzle
 {

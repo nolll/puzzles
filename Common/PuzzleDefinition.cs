@@ -56,8 +56,5 @@ public class PuzzleDefinition(
 
         if (data.NeedsRewrite)
             yield return PuzzleTag.Rewrite;
-
-        if (data.IsFunToOptimize)
-            yield return PuzzleTag.Fun;
     }
 }

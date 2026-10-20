@@ -6,7 +6,7 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2017;
 
 [Name("Fractal Art")]
-[IsFunToOptimize]
+[NeedsRewrite]
 [Comment("The grid slicing could possibly be done with the grid method, but I can't get it to work")]
 public class Aoc201721 : AocPuzzle
 {

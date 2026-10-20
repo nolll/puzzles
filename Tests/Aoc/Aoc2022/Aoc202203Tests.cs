@@ -5,20 +5,10 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202203Tests : PuzzleTest<Aoc202203>
 {
     [Fact]
-    public void Part1()
-    {
-        var result = Aoc202203.Rucksacks.GetPriority1(Input);
-
-        result.Should().Be(157);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(157);
 
     [Fact]
-    public void Part2()
-    {
-        var result = Aoc202203.Rucksacks.GetPriority2(Input);
-
-        result.Should().Be(70);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(70);
 
     private const string Input = """
                                  vJrwpWtwJgWrhcsFMMfFFhFp

@@ -5,62 +5,18 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202216Tests : PuzzleTest<Aoc202216>
 {
     [Fact]
-    public void Part1()
-    {
-        var pipes = new Aoc202216.VolcanicPipes(Input);
-        var result = pipes.Part1();
-
-        result.Should().Be(1651);
-    }
-
+    public void Part1() => Sut.Part1(Input).Should().Be(1651);
+    
+    [Theory]
+    [InlineData(LinearInput, 2640)]
+    [InlineData(QuadraticInput, 13468)]
+    [InlineData(CircularInput, 1288)]
+    [InlineData(ClusteredInput, 2400)]
+    // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
+    public void ExtraInputs(string input, int expected) => Sut.Part1(input).Should().Be(expected);
+    
     [Fact]
-    public void Part1Linear()
-    {
-        // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
-        var pipes = new Aoc202216.VolcanicPipes(LinearInput);
-        var result = pipes.Part1();
-
-        result.Should().Be(2640);
-    }
-
-    [Fact]
-    public void Part1Quadratic()
-    {
-        // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
-        var pipes = new Aoc202216.VolcanicPipes(QuadraticInput);
-        var result = pipes.Part1();
-
-        result.Should().Be(13468);
-    }
-
-    [Fact]
-    public void Part1Circular()
-    {
-        // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
-        var pipes = new Aoc202216.VolcanicPipes(CircularInput);
-        var result = pipes.Part1();
-
-        result.Should().Be(1288);
-    }
-
-    [Fact]
-    public void Part1Clustered()
-    {
-        // https://www.reddit.com/r/adventofcode/comments/znklnh/2022_day_16_some_extra_test_cases_for_day_16/
-        var pipes = new Aoc202216.VolcanicPipes(ClusteredInput);
-        var result = pipes.Part1();
-
-        result.Should().Be(2400);
-    }
-
-    [Fact]
-    public void Part2()
-    {
-        var pipes = new Aoc202216.VolcanicPipes(Input);
-        var result = pipes.Part2();
-
-        result.Should().Be(1707);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(1707);
 
     private const string Input = """
                                  Valve AA has flow rate=0; tunnels lead to valves DD, II, BB

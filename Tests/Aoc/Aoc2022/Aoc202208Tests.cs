@@ -5,24 +5,10 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202208Tests : PuzzleTest<Aoc202208>
 {
     [Fact]
-    public void Part1()
-    {
-        var treeHouse = new Aoc202208.TreeHouse(Input);
-        treeHouse.Calc();
-        var result = treeHouse.VisibleTreesCount;
-
-        result.Should().Be(21);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(21);
 
     [Fact]
-    public void Part2()
-    {
-        var treeHouse = new Aoc202208.TreeHouse(Input);
-        treeHouse.Calc();
-        var result = treeHouse.HighestScenicScore;
-
-        result.Should().Be(8);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(8);
 
     private const string Input = """
                                  30373

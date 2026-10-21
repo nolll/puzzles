@@ -1,6 +1,5 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
-using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022;
 
@@ -10,88 +9,69 @@ public class Aoc202208 : AocPuzzle
     [Puzzle("db3773cdd4aa7c677d0d7b5276a6f31c")]
     public int Part1(string input)
     {
-        var treeHouse = new TreeHouse(input);
-        treeHouse.Calc();
-        return treeHouse.VisibleTreesCount;
+        var treeGrid = Parse(input);
+        var grid = new Grid<bool>(treeGrid.Width, treeGrid.Height);
+        foreach (var coord in treeGrid.Coords)
+        {
+            var visibility = InitVisibility();
+
+            treeGrid.MoveTo(coord);
+            var currentTreeHeight = treeGrid.ReadValue();
+
+            foreach (var direction in GridDirection.All)
+            {
+                treeGrid.TurnTo(direction);
+                while (treeGrid.TryMoveForward())
+                {
+                    if (treeGrid.ReadValue() < currentTreeHeight)
+                        continue;
+
+                    visibility[direction] = false;
+                    break;
+                }
+
+                treeGrid.MoveTo(coord);
+            }
+
+            grid.WriteValueAt(coord, visibility.Values.Any(o => o));
+        }
+
+        return grid.Values.Count(o => o);
     }
 
     [Puzzle("20def27ee2db6df6b7e178884edb9c87")]
     public int? Part2(string input)
     {
-        var treeHouse = new TreeHouse(input);
-        treeHouse.Calc();
-        return treeHouse?.HighestScenicScore;
-    }
-
-    public class TreeHouse
-    {
-        private readonly Grid<int> _treeGrid;
-        private readonly Grid<bool> _part1Grid;
-        private readonly Grid<int> _part2Grid;
-        private readonly GridDirection[] _directions;
-
-        public int VisibleTreesCount { get; private set; }
-        public int HighestScenicScore { get; private set; }
-
-        public TreeHouse(string input)
+        var treeGrid = Parse(input);
+        var grid = new Grid<int>(treeGrid.Width, treeGrid.Height);
+        foreach (var coord in treeGrid.Coords)
         {
-            var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0).ToList();
-            var patchWidth = lines[0].Length;
-            var patchHeight = lines.Count;
-            _treeGrid = GridBuilder.BuildIntGridFromNonSeparated(input);
-            _part1Grid = new Grid<bool>(patchWidth, patchHeight);
-            _part2Grid = new Grid<int>(patchWidth, patchHeight);
-            _directions = [GridDirection.Up, GridDirection.Right, GridDirection.Down, GridDirection.Left];
-        }
+            var scores = InitScores();
 
-        public void Calc()
-        {
-            foreach (var coord in _treeGrid.Coords)
+            treeGrid.MoveTo(coord);
+            var currentTreeHeight = treeGrid.ReadValue();
+
+            foreach (var direction in GridDirection.All)
             {
-                var visibility = new Dictionary<GridDirection, bool>
+                treeGrid.TurnTo(direction);
+                while (treeGrid.TryMoveForward())
                 {
-                    [GridDirection.Up] = true,
-                    [GridDirection.Right] = true,
-                    [GridDirection.Down] = true,
-                    [GridDirection.Left] = true
-                };
-
-                var scenicScores = new Dictionary<GridDirection, int>
-                {
-                    [GridDirection.Up] = 0,
-                    [GridDirection.Right] = 0,
-                    [GridDirection.Down] = 0,
-                    [GridDirection.Left] = 0
-                };
-
-                _treeGrid.MoveTo(coord);
-                var currentTreeHeight = _treeGrid.ReadValue();
-
-                foreach (var direction in _directions)
-                {
-                    _treeGrid.TurnTo(direction);
-                    while (_treeGrid.TryMoveForward())
-                    {
-                        scenicScores[direction]++;
-                        if (_treeGrid.ReadValue() >= currentTreeHeight)
-                        {
-                            visibility[direction] = false;
-                            break;
-                        }
-                    }
-
-                    _treeGrid.MoveTo(coord);
+                    scores[direction]++;
+                    if (treeGrid.ReadValue() >= currentTreeHeight)
+                        break;
                 }
 
-                var isVisible = visibility.Values.Count(o => o) > 0;
-                _part1Grid.WriteValueAt(coord, isVisible);
-
-                var scenicScore = scenicScores.Values.Aggregate(1, (x, y) => x * y);
-                _part2Grid.WriteValueAt(coord, scenicScore);
+                treeGrid.MoveTo(coord);
             }
 
-            VisibleTreesCount = _part1Grid.Values.Count(o => o);
-            HighestScenicScore = _part2Grid.Values.Max();
+            var scenicScore = scores.Values.Aggregate(1, (x, y) => x * y);
+            grid.WriteValueAt(coord, scenicScore);
         }
+
+        return grid.Values.Max();
     }
+
+    private static Grid<int> Parse(string input) => GridBuilder.BuildIntGridFromNonSeparated(input);
+    private static Dictionary<GridDirection, int> InitScores() => GridDirection.All.ToDictionary(k => k, _ => 0);
+    private static Dictionary<GridDirection, bool> InitVisibility() => GridDirection.All.ToDictionary(k => k, _ => true);
 }

@@ -6,397 +6,205 @@ namespace Pzl.Aoc.Puzzles.Aoc2022;
 [Name("Pyroclastic Flow")]
 public class Aoc202217 : AocPuzzle
 {
+    private const char CharLeft = '<';
+    private const char CharRight = '>';
+    private const long Part1RockCount = 2022;
+    private const long Part2RockCount = 1_000_000_000_000;
+
     [Puzzle("cdc90a19ac724ffd4fa126a641706d13")]
-    public long Part1(string input) => new Tetris().Run(input, 2022);
+    public long Part1(string input) => GetHeightDiffs(input, Part1RockCount).Sum();
 
     [Puzzle("3a90eb3ba5f3fc471fa832e199a1b7f9")]
-    public long Part2(string input) => new Tetris().Run(input, 1_000_000_000_000);
-
-    public class Tetris
+    public long Part2(string input)
     {
-        private static readonly TetrisShape[] Shapes =
+        var inputLength = input.Length;
+        var rockCountUntilRepeat = inputLength * Shapes.Length;
+        var heightDiffs = GetHeightDiffs(input, rockCountUntilRepeat).ToArray();
+        var cycle = FindRepeatCycle(heightDiffs, 50, inputLength / 2);
+
+        var startCount = cycle.Index;
+        var middleCount = cycle.Length;
+        var startItems = heightDiffs.Take(startCount);
+        var middleItems = heightDiffs.Skip(startCount).Take(middleCount);
+
+        var multiplier = Part2RockCount / cycle.Length - 1;
+
+        var endCount = Math.Abs(Part2RockCount - startCount - middleCount * multiplier);
+        var totalCount = startCount + middleCount * multiplier + endCount;
+        if (totalCount > Part2RockCount)
+            endCount -= cycle.Length;
+        var endItems = heightDiffs.Skip(startCount + middleCount).Take((int)endCount);
+
+        var startSum = startItems.Sum();
+        var middleSum = middleItems.Sum();
+        var endSum = endItems.Sum();
+
+        return startSum + multiplier * middleSum + endSum;
+    }
+
+    private static readonly TetrisShape[] Shapes =
+    [
+        TetrisShape.HorizontalLine,
+        TetrisShape.Plus,
+        TetrisShape.ReversedL,
+        TetrisShape.VerticalLine,
+        TetrisShape.Square
+    ];
+
+    private static List<int> GetHeightDiffs(string input, long rockCount)
+    {
+        var moves = input.ToCharArray();
+        var grid = new Grid<char>(7, 1, '.');
+        long rockIndex = 0;
+        var moveIndex = 0;
+        var lastShapeTop = 0;
+        var highestTop = 0;
+        var heightDiffs = new List<int>();
+
+        while (rockIndex < rockCount)
         {
-            TetrisShape.HorizontalLine,
-            TetrisShape.Plus,
-            TetrisShape.ReversedL,
-            TetrisShape.VerticalLine,
-            TetrisShape.Square
-        };
+            var shapeBottomLeft = new Coord(2, highestTop - 3);
+            var shapeIndex = rockIndex % Shapes.Length;
+            var shape = Shapes[shapeIndex];
+            grid.MoveTo(shapeBottomLeft);
+            grid.MoveUp(shape.Height);
+            var movedDown = true;
+            var heightBefore = highestTop;
 
-        private const char Left = '<';
-        private const char Right = '>';
-
-        public long Part1(string input, long rockCount)
-        {
-            var heightDiffs = GetHeightDiffs(input, rockCount);
-            return heightDiffs.Sum();
-        }
-
-        public long Run(string input, long rockCount)
-        {
-            var inputLength = input.Length;
-            var rockCountUntilRepeat = inputLength * Shapes.Length;
-            var heightDiffs = GetHeightDiffs(input, rockCountUntilRepeat).ToArray();
-            var cycle = CycleFinder.FindRepeatCycle(heightDiffs, 50, inputLength / 2);
-
-            var startCount = cycle.Index;
-            var middleCount = cycle.Length;
-            var startItems = heightDiffs.Take(startCount);
-            var middleItems = heightDiffs.Skip(startCount).Take(middleCount);
-
-            var multiplier = rockCount / cycle.Length - 1;
-
-            var endCount = Math.Abs(rockCount - startCount - middleCount * multiplier);
-            var totalCount = startCount + middleCount * multiplier + endCount;
-            if (totalCount > rockCount)
-                endCount -= cycle.Length;
-            var endItems = heightDiffs.Skip(startCount + middleCount).Take((int)endCount);
-
-            var startSum = startItems.Sum();
-            var middleSum = middleItems.Sum();
-            var endSum = endItems.Sum();
-
-            return startSum + multiplier * middleSum + endSum;
-        }
-
-        private static List<int> GetHeightDiffs(string input, long rockCount)
-        {
-            var moves = input.ToCharArray();
-            var grid = new Grid<char>(7, 1, '.');
-            long rockIndex = 0;
-            var moveIndex = 0;
-            var lastShapeTop = 0;
-            var highestTop = 0;
-            var heightDiffs = new List<int>();
-
-            while (rockIndex < rockCount)
+            while (movedDown)
             {
-                var shapeBottomLeft = new Coord(2, highestTop - 3);
-                var shapeIndex = rockIndex % Shapes.Length;
-                var shape = Shapes[shapeIndex];
-                grid.MoveTo(shapeBottomLeft);
-                grid.MoveUp(shape.Height);
-                var movedDown = true;
-                var heightBefore = highestTop;
+                var move = moves[moveIndex % moves.Length];
 
-                while (movedDown)
-                {
-                    var move = moves[moveIndex % moves.Length];
+                if (move == CharLeft && shape.CanMoveLeft(grid, shapeBottomLeft))
+                    shapeBottomLeft = new Coord(shapeBottomLeft.X - 1, shapeBottomLeft.Y);
+                else if (move == CharRight && shape.CanMoveRight(grid, shapeBottomLeft))
+                    shapeBottomLeft = new Coord(shapeBottomLeft.X + 1, shapeBottomLeft.Y);
 
-                    if (move == Left && shape.CanMoveLeft(grid, shapeBottomLeft))
-                        shapeBottomLeft = new Coord(shapeBottomLeft.X - 1, shapeBottomLeft.Y);
-                    else if (move == Right && shape.CanMoveRight(grid, shapeBottomLeft))
-                        shapeBottomLeft = new Coord(shapeBottomLeft.X + 1, shapeBottomLeft.Y);
+                if (shape.CanMoveDown(grid, shapeBottomLeft))
+                    shapeBottomLeft = new Coord(shapeBottomLeft.X, shapeBottomLeft.Y + 1);
+                else
+                    movedDown = false;
 
-                    if (shape.CanMoveDown(grid, shapeBottomLeft))
-                        shapeBottomLeft = new Coord(shapeBottomLeft.X, shapeBottomLeft.Y + 1);
-                    else
-                        movedDown = false;
-
-                    lastShapeTop = shapeBottomLeft.Y - shape.Height;
-                    moveIndex++;
-                }
-
-                highestTop = Math.Min(highestTop, lastShapeTop);
-                var heightAdded = highestTop - heightBefore;
-                heightDiffs.Add(Math.Abs(heightAdded));
-                shape.Paint(grid, shapeBottomLeft);
-                rockIndex++;
+                lastShapeTop = shapeBottomLeft.Y - shape.Height;
+                moveIndex++;
             }
 
-            return heightDiffs;
-        }
-    }
-    
-    public static class CycleFinder
-    {
-        public static RepeatCycle FindRepeatCycle(int[] numbers, int minLength = 0, int startSearchAt = 0)
-        {
-            var searchList = numbers.Skip(startSearchAt).ToArray();
-            var repeatList = FindRepeatSequence(searchList, minLength);
-            var repeatStart = FindCycleStart(numbers, repeatList);
-            return repeatList.Length > 0
-                ? new RepeatCycle(repeatStart, repeatList.Length) 
-                : new RepeatCycle(0, 0);
+            highestTop = Math.Min(highestTop, lastShapeTop);
+            var heightAdded = highestTop - heightBefore;
+            heightDiffs.Add(Math.Abs(heightAdded));
+            shape.Paint(grid, shapeBottomLeft);
+            rockIndex++;
         }
 
-        private static int FindCycleStart(int[] numbers, int[] repeatList)
+        return heightDiffs;
+    }
+
+    public RepeatCycle FindRepeatCycle(int[] numbers, int minLength = 0, int startSearchAt = 0)
+    {
+        var searchList = numbers.Skip(startSearchAt).ToArray();
+        var repeatList = FindRepeatSequence(searchList, minLength);
+        var repeatStart = FindCycleStart(numbers, repeatList);
+        return repeatList.Length > 0
+            ? new RepeatCycle(repeatStart, repeatList.Length)
+            : new RepeatCycle(0, 0);
+    }
+
+    private static int FindCycleStart(int[] numbers, int[] repeatList)
+    {
+        for (var i = 0; i < numbers.Length; i++)
         {
-            for (var i = 0; i < numbers.Length; i++)
+            var length = repeatList.Length;
+            var compareList = numbers.Skip(i).Take(length);
+            if (repeatList.SequenceEqual(compareList))
+                return i;
+        }
+
+        return 0;
+    }
+
+    private static int[] FindRepeatSequence(int[] numbers, int minLength = 0)
+    {
+        var repeatList = Array.Empty<int>();
+
+        for (var length = minLength; length < numbers.Length; length++)
+        {
+            var list1 = numbers.Take(length).ToList();
+            var list2 = numbers.Skip(length).Take(length);
+            if (list1.SequenceEqual(list2))
             {
-                var length = repeatList.Length;
-                var compareList = numbers.Skip(i).Take(length);
-                if (repeatList.SequenceEqual(compareList))
-                    return i;
+                repeatList = [.. list1];
+                break;
             }
-
-            return 0;
         }
 
-        private static int[] FindRepeatSequence(int[] numbers, int minLength = 0)
-        {
-            var repeatList = Array.Empty<int>();
-
-            for (var length = minLength; length < numbers.Length; length++)
-            {
-                var list1 = numbers.Take(length);
-                var list2 = numbers.Skip(length).Take(length);
-                if (list1.SequenceEqual(list2))
-                {
-                    repeatList = list1.ToArray();
-                    break;
-                }
-            }
-
-            return repeatList;
-        }
+        return repeatList;
     }
-    
-    public class HorizontalLineShape : TetrisShape
+
+    public record RepeatCycle(int Index, int Length);
+
+    public record HorizontalLineShape() : TetrisShape([new(), new(1, 0), new(2, 0), new(3, 0)])
     {
-        private readonly Coord[] _shape = {
-            new(0, 0),
-            new(1, 0),
-            new(2, 0),
-            new(3, 0)
-        };
-
-        private readonly Coord[] _left = {
-            new(-1, 0)
-        };
-
-        private readonly Coord[] _right =
-        {
-            new(4, 0)
-        };
-
-        private readonly Coord[] _down =
-        {
-            new(0, 1),
-            new(1, 1),
-            new(2, 1),
-            new(3, 1)
-        };
-
-        public HorizontalLineShape() : base(4, 1)
-        {
-        }
-
-        public override bool CanMoveLeft(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _left);
-        }
-
-        public override bool CanMoveRight(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _right);
-        }
-
-        public override bool CanMoveDown(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _down);
-        }
-
-        public override void Paint(Grid<char> grid, Coord bottomLeft)
-        {
-            Paint(grid, bottomLeft, _shape);
-        }
+        private Coord[] Left { get; } = [new(-1, 0)];
+        private Coord[] Right { get; } = [new(4, 0)];
+        private Coord[] Down { get; } = [new(0, 1), new(1, 1), new(2, 1), new(3, 1)];
+        public override bool CanMoveLeft(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Left);
+        public override bool CanMoveRight(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Right);
+        public override bool CanMoveDown(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Down);
+        public override void Paint(Grid<char> grid, Coord bottomLeft) => Paint(grid, bottomLeft, Shape);
     }
-    
-    public class PlusShape : TetrisShape
+
+    public record PlusShape() : TetrisShape([new(1, 0), new(1, -1), new(1, -2), new(0, -1), new(2, -1)])
     {
-        private readonly Coord[] _shape = {
-            new(1, 0),
-            new(1, -1),
-            new(1, -2),
-            new(0, -1),
-            new(2, -1)
-        };
-
-        private readonly Coord[] _left = {
-            new(0, -2),
-            new(-1, -1),
-            new(0, 0)
-        };
-
-        private readonly Coord[] _right =
-        {
-            new(2, -2),
-            new(3, -1),
-            new(2, 0)
-        };
-
-        private readonly Coord[] _down =
-        {
-            new(0, 0),
-            new(1, 1),
-            new(2, 0)
-        };
-
-        public PlusShape() : base(3, 3)
-        {
-        }
-
-        public override bool CanMoveLeft(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _left);
-        }
-
-        public override bool CanMoveRight(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _right);
-        }
-
-        public override bool CanMoveDown(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _down);
-        }
-
-        public override void Paint(Grid<char> grid, Coord bottomLeft)
-        {
-            Paint(grid, bottomLeft, _shape);
-        }
+        private Coord[] Left { get; } = [new(0, -2), new(-1, -1), new(0, 0)];
+        private Coord[] Right { get; } = [new(2, -2), new(3, -1), new(2, 0)];
+        private Coord[] Down { get; } = [new(0, 0), new(1, 1), new(2, 0)];
+        public override bool CanMoveLeft(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Left);
+        public override bool CanMoveRight(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Right);
+        public override bool CanMoveDown(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Down);
+        public override void Paint(Grid<char> grid, Coord bottomLeft) => Paint(grid, bottomLeft, Shape);
     }
-    
-    public class RepeatCycle
-    {
-        public int Index { get; }
-        public int Length { get; }
 
-        public RepeatCycle(int index, int length)
-        {
-            Index = index;
-            Length = length;
-        }
+    public record ReversedLShape() : TetrisShape([new(), new(1, 0), new(2, 0), new(2, -1), new(2, -2)])
+    {
+        private Coord[] Left { get; } = [new(-1, 0), new(1, -1), new(1, -2)];
+        private Coord[] Right { get; } = [new(3, 0), new(3, -1), new(3, -2)];
+        private Coord[] Down { get; } = [new(0, 1), new(1, 1), new(2, 1)];
+        public override bool CanMoveLeft(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Left);
+        public override bool CanMoveRight(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Right);
+        public override bool CanMoveDown(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Down);
+        public override void Paint(Grid<char> grid, Coord bottomLeft) => Paint(grid, bottomLeft, Shape);
     }
-    
-    public class ReversedLShape : TetrisShape
+
+    public record SquareShape() : TetrisShape([new(), new(0, -1), new(1, 0), new(1, -1)])
     {
-        private readonly Coord[] _shape = {
-            new(0, 0),
-            new(1, 0),
-            new(2, 0),
-            new(2, -1),
-            new(2, -2)
-        };
-
-        private readonly Coord[] _left = {
-            new(-1, 0),
-            new(1, -1),
-            new(1, -2)
-        };
-
-        private readonly Coord[] _right =
-        {
-            new(3, 0),
-            new(3, -1),
-            new(3, -2)
-        };
-
-        private readonly Coord[] _down =
-        {
-            new(0, 1),
-            new(1, 1),
-            new(2, 1),
-        };
-
-        public ReversedLShape() : base(3, 3)
-        {
-        }
-
-        public override bool CanMoveLeft(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _left);
-        }
-
-        public override bool CanMoveRight(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _right);
-        }
-
-        public override bool CanMoveDown(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _down);
-        }
-
-        public override void Paint(Grid<char> grid, Coord bottomLeft)
-        {
-            Paint(grid, bottomLeft, _shape);
-        }
+        private Coord[] Left { get; } = [new(-1, 0), new(-1, -1)];
+        private Coord[] Right { get; } = [new(2, 0), new(2, -1)];
+        private Coord[] Down { get; } = [new(0, 1), new(1, 1)];
+        public override bool CanMoveLeft(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Left);
+        public override bool CanMoveRight(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Right);
+        public override bool CanMoveDown(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Down);
+        public override void Paint(Grid<char> grid, Coord bottomLeft) => Paint(grid, bottomLeft, Shape);
     }
-    
-    public class SquareShape : TetrisShape
+
+    public record VerticalLineShape() : TetrisShape([new(), new(0, -1), new(0, -2), new(0, -3)])
     {
-        private readonly Coord[] _shape = {
-            new(0, 0),
-            new(0, -1),
-            new(1, 0),
-            new(1, -1)
-        };
-
-        private readonly Coord[] _left = {
-            new(-1, 0),
-            new(-1, -1)
-        };
-
-        private readonly Coord[] _right =
-        {
-            new(2, 0),
-            new(2, -1)
-        };
-
-        private readonly Coord[] _down =
-        {
-            new(0, 1),
-            new(1, 1)
-        };
-
-        public SquareShape() : base(2, 2)
-        {
-        }
-
-        public override bool CanMoveLeft(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _left);
-        }
-
-        public override bool CanMoveRight(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _right);
-        }
-
-        public override bool CanMoveDown(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _down);
-        }
-
-        public override void Paint(Grid<char> grid, Coord bottomLeft)
-        {
-            Paint(grid, bottomLeft, _shape);
-        }
+        private Coord[] Left { get; } = [new(-1, 0), new(-1, -1), new(-1, -2), new(-1, -3)];
+        private Coord[] Right { get; } = [new(1, 0), new(1, -1), new(1, -2), new(1, -3)];
+        private Coord[] Down { get; } = [new(0, 1)];
+        public override bool CanMoveLeft(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Left);
+        public override bool CanMoveRight(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Right);
+        public override bool CanMoveDown(Grid<char> grid, Coord bottomLeft) => CheckCoords(grid, bottomLeft, Down);
+        public override void Paint(Grid<char> grid, Coord bottomLeft) => Paint(grid, bottomLeft, Shape);
     }
-    
-    public abstract class TetrisShape
+
+    public abstract record TetrisShape(Coord[] Shape)
     {
-        public int Width { get; }
-        public int Height { get; }
+        private static IEnumerable<Coord> TranslateCoords(Coord baseCoord, IEnumerable<Coord> deltas) =>
+            deltas.Select(o => new Coord(baseCoord.X + o.X, baseCoord.Y + o.Y));
 
-        protected TetrisShape(int width, int height)
-        {
-            Width = width;
-            Height = height;
-        }
-
-        private static IEnumerable<Coord> TranslateCoords(Coord baseCoord, IEnumerable<Coord> deltas)
-        {
-            return deltas.Select(o => new Coord(baseCoord.X + o.X, baseCoord.Y + o.Y));
-        }
-
-        protected static bool CheckCoords(Grid<char> grid, Coord bottomLeft, IEnumerable<Coord> deltas)
-        {
-            var coords = deltas.Select(o => new Coord(bottomLeft.X + o.X, bottomLeft.Y + o.Y));
-            return coords.All(o => !grid.IsOutOfRange(o) && grid.ReadValueAt(o) == '.');
-        }
+        protected static bool CheckCoords(Grid<char> grid, Coord bottomLeft, IEnumerable<Coord> deltas) => deltas
+            .Select(o => new Coord(bottomLeft.X + o.X, bottomLeft.Y + o.Y))
+            .All(o => !grid.IsOutOfRange(o) && grid.ReadValueAt(o) == '.');
 
         public abstract bool CanMoveLeft(Grid<char> grid, Coord bottomLeft);
         public abstract bool CanMoveRight(Grid<char> grid, Coord bottomLeft);
@@ -405,12 +213,11 @@ public class Aoc202217 : AocPuzzle
 
         protected static void Paint(Grid<char> grid, Coord bottomLeft, IEnumerable<Coord> deltas)
         {
-            var coords = TranslateCoords(bottomLeft, deltas);
-            foreach (var coord in coords)
-            {
+            foreach (var coord in TranslateCoords(bottomLeft, deltas))
                 grid.WriteValueAt(coord, '#');
-            }
         }
+        
+        public int Height { get; } = Math.Abs(Shape.Max(o => o.Y) - Shape.Min(o => o.Y)) + 1;
 
         public static readonly TetrisShape VerticalLine = new VerticalLineShape();
         public static readonly TetrisShape Plus = new PlusShape();
@@ -418,58 +225,4 @@ public class Aoc202217 : AocPuzzle
         public static readonly TetrisShape HorizontalLine = new HorizontalLineShape();
         public static readonly TetrisShape Square = new SquareShape();
     }
-    
-    public class VerticalLineShape : TetrisShape
-    {
-        private readonly Coord[] _shape = {
-            new(0, 0),
-            new(0, -1),
-            new(0, -2),
-            new(0, -3)
-        };
-
-        private readonly Coord[] _left = {
-            new(-1, 0),
-            new(-1, -1),
-            new(-1, -2),
-            new(-1, -3)
-        };
-
-        private readonly Coord[] _right =
-        {
-            new(1, 0),
-            new(1, -1),
-            new(1, -2),
-            new(1, -3)
-        };
-
-        private readonly Coord[] _down =
-        {
-            new(0, 1)
-        };
-
-        public VerticalLineShape() : base(1, 4)
-        {
-        }
-
-        public override bool CanMoveLeft(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _left);
-        }
-
-        public override bool CanMoveRight(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _right);
-        }
-
-        public override bool CanMoveDown(Grid<char> grid, Coord bottomLeft)
-        {
-            return CheckCoords(grid, bottomLeft, _down);
-        }
-
-        public override void Paint(Grid<char> grid, Coord bottomLeft)
-        {
-            Paint(grid, bottomLeft, _shape);
-        }
-    }
-}   
+}

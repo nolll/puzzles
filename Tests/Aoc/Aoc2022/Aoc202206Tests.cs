@@ -18,5 +18,4 @@ public class Aoc202206Tests : PuzzleTest<Aoc202206>
     [InlineData("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 29)]
     [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26)]
     public void Part2(string input, int expected) => Sut.Part2(input).Should().Be(expected);
-
 }

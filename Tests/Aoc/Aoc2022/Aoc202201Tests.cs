@@ -26,5 +26,4 @@ public class Aoc202201Tests : PuzzleTest<Aoc202201>
 
                                  10000
                                  """;
-
 }

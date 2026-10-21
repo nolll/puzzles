@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202214Tests : PuzzleTest<Aoc202214>
 {
     [Fact]
-    public void Part1()
-    {
-        var fallingSand = new Aoc202214.FallingSand();
-        var result = fallingSand.Part1(Input);
-
-        result.Should().Be(24);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(24);
 
     [Fact]
-    public void Part2()
-    {
-        var fallingSand = new Aoc202214.FallingSand();
-        var result = fallingSand.Part2(Input);
-
-        result.Should().Be(93);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(93);
 
     private const string Input = """
                                  498,4 -> 498,6 -> 496,6

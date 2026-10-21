@@ -34,5 +34,4 @@ public class Aoc202209Tests : PuzzleTest<Aoc202209>
                                   L 25
                                   U 20
                                   """;
-
 }

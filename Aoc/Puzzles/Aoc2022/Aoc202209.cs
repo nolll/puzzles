@@ -16,14 +16,11 @@ public class Aoc202209 : AocPuzzle
     private int Solve(string input, int knotCount)
     {
         var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0);
-        var visited = new HashSet<Coord>();
         var knots = new Coord[knotCount];
-        for (var i = 0; i < knotCount; i++)
-        {
-            knots[i] = new Coord(0, 0);
-        }
+        for (var i = 0; i < knotCount; i++) 
+            knots[i] = new Coord();
         
-        visited.Add(knots.Last());
+        var visited = new HashSet<Coord> { knots.Last() };
 
         foreach (var line in lines)
         {
@@ -55,9 +52,8 @@ public class Aoc202209 : AocPuzzle
                 visited.Add(knots.Last());
             }
         }
-        var result = visited.Count;
 
-        return result;
+        return visited.Count;
     }
 
     private static Coord GetPosAfterMove(Coord coord, string direction) => direction switch

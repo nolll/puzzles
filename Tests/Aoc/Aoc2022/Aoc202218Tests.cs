@@ -5,31 +5,13 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202218Tests : PuzzleTest<Aoc202218>
 {
     [Fact]
-    public void Part1Small()
-    {
-        var lavaCubes = new Aoc202218.LavaCubes();
-        var result = lavaCubes.Part1(SmallInput);
-
-        result.Should().Be(10);
-    }
+    public void Part1Small() => Sut.Part1(SmallInput).Should().Be(10);
 
     [Fact]
-    public void Part1Large()
-    {
-        var lavaCubes = new Aoc202218.LavaCubes();
-        var result = lavaCubes.Part1(LargeInput);
-
-        result.Should().Be(64);
-    }
+    public void Part1Large() => Sut.Part1(LargeInput).Should().Be(64);
 
     [Fact]
-    public void Part2()
-    {
-        var lavaCubes = new Aoc202218.LavaCubes();
-        var result = lavaCubes.Part2(LargeInput);
-
-        result.Should().Be(58);
-    }
+    public void Part2() => Sut.Part2(LargeInput).Should().Be(58);
 
     private const string SmallInput = """
                                       1,1,1

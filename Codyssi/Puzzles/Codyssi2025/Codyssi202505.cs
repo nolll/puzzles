@@ -11,7 +11,7 @@ public class Codyssi202505 : CodyssiPuzzle
     [Puzzle("8970c66cc5feb9663d03802a881d2305")]
     public int Part1(string input)
     {
-        var ship = new Coord(0, 0);
+        var ship = new Coord();
         var coords = SortByDistance(Parse(input), ship);
         return coords.Last().ManhattanDistanceTo(ship) - coords.First().ManhattanDistanceTo(ship);
     }
@@ -19,7 +19,7 @@ public class Codyssi202505 : CodyssiPuzzle
     [Puzzle("9b3a3aaa26debdeb546daa2dcd3f0873")]
     public int Part2(string input)
     {
-        var ship = new Coord(0, 0);
+        var ship = new Coord();
         var coords = SortByDistance(Parse(input), ship);
         var closest = coords.First();
         coords = SortByDistance(coords.Skip(1), closest);
@@ -29,7 +29,7 @@ public class Codyssi202505 : CodyssiPuzzle
     [Puzzle("9f7fe9e9b27c388197a28609ca587687")]
     public int Part3(string input)
     {
-        var current = new Coord(0, 0);
+        var current = new Coord();
         var coords = Parse(input);
 
         var total = 0;

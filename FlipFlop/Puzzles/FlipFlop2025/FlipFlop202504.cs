@@ -41,7 +41,7 @@ public class FlipFlop202504 : FlipFlopPuzzle
 
     private static IEnumerable<Coord> ParseCoords(string input)
     {
-        yield return new Coord(0, 0);
+        yield return new Coord();
         foreach (var line in input.Split(LineBreaks.Single))
         {
             var (x, y) = Numbers.IntsFromString(line);

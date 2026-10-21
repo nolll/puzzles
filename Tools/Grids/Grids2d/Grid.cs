@@ -53,8 +53,8 @@ public class Grid<T> where T : struct
     private Grid(T defaultValue)
     {
         DefaultValue = defaultValue;
-        Coord = new Coord(0, 0);
-        StartCoord = new Coord(0, 0);
+        Coord = new Coord();
+        StartCoord = new Coord();
         Direction = GridDirection.Up;
     }
 

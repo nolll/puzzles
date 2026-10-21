@@ -32,7 +32,7 @@ public class Aoc202418 : AocPuzzle
             grid.WriteValueAt(coord, Wall);
         }
 
-        var start = new Coord(0, 0);
+        var start = new Coord();
         var end = new Coord(grid.XMax, grid.YMax);
 
         return PathFinder.ShortestPathTo(grid, start, end).Count();
@@ -46,7 +46,7 @@ public class Aoc202418 : AocPuzzle
             .ToArray();
 
         var grid = new Grid<char>(width, height, EmptySpace);
-        var start = new Coord(0, 0);
+        var start = new Coord();
         var end = new Coord(grid.XMax, grid.YMax);
 
         var lo = 0;

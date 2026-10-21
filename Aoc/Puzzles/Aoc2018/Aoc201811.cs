@@ -22,7 +22,7 @@ public class Aoc201811 : AocPuzzle
     {
         var grid = BuildGrid(gridSize, serialNumber);
         var maxPowerLevel = int.MinValue;
-        var maxPowerLevelAddress = new Coord(0, 0);
+        var maxPowerLevelAddress = new Coord();
         for (var y = 0; y < gridSize - 2; y++)
         {
             for (var x = 0; x < gridSize - 2; x++)
@@ -44,7 +44,7 @@ public class Aoc201811 : AocPuzzle
         var grid = BuildGrid(gridSize, serialNumber);
         var maxPowerLevel = int.MinValue;
         var maxPowerLevelSize = 0;
-        var maxPowerLevelAddress = new Coord(0, 0);
+        var maxPowerLevelAddress = new Coord();
         for (var ySquare = 0; ySquare < gridSize; ySquare++)
         {
             for (var xSquare = 0; xSquare < gridSize; xSquare++)

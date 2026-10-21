@@ -46,7 +46,7 @@ public class Codyssi202510 : CodyssiPuzzle
         var grid = GridBuilder.BuildIntGridFromNonSeparated(input.Replace(" ", ""));
         var edges = new List<GraphEdge>();
         var queue = new Queue<Coord>();
-        var start = new Coord(0, 0);
+        var start = new Coord();
         var end = target ?? new Coord(grid.XMax, grid.YMax);
         var startCost = grid.ReadValueAt(start);
         queue.Enqueue(start);

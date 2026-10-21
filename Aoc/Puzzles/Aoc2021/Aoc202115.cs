@@ -43,7 +43,7 @@ public class Aoc202115 : AocPuzzle
 
     private static int FindRiskLevel(Grid<int> grid, Dictionary<Coord, IList<Coord>> cache)
     {
-        var from = new Coord(0, 0);
+        var from = new Coord();
         var to = new Coord(grid.Width - 1, grid.Height - 1);
         return GetBestPathTo(grid, cache, from, to).Sum(grid.ReadValueAt);
     }

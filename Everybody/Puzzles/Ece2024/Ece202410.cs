@@ -12,7 +12,7 @@ public class Ece202410 : EverybodyEventPuzzle
     public string Part1(string input)
     {
         var grid = GridBuilder.BuildCharGrid(input);
-        var offset = new Coord(0, 0);
+        var offset = new Coord();
         FillSymbols(grid, offset);
 
         return ReadWord(grid, offset);

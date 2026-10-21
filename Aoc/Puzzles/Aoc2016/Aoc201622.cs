@@ -66,7 +66,7 @@ public class Aoc201622 : AocPuzzle
             grid.WriteValue('.');
         }
 
-        var startAddress = new Coord(0, 0);
+        var startAddress = new Coord();
         for (var y = 0; y < storage.Height; y++)
         {
             for (var x = 0; x < storage.Width; x++)
@@ -77,7 +77,7 @@ public class Aoc201622 : AocPuzzle
             }
         }
 
-        var topLeft = new Coord(0, 0);
+        var topLeft = new Coord();
         var topRight = new Coord(grid.Width - 1, 0);
         var goal = new Coord(topRight.X - 1, topRight.Y);
         var distance1 = PathFinder.ShortestPathTo(grid, startAddress, goal).Count();

@@ -16,6 +16,10 @@ public record Coord(int X, int Y)
     {
     }
     
+    public Coord() : this(0, 0)
+    {
+    }
+    
     public int ManhattanDistanceTo(Coord other) => Math.Abs(X - other.X) + Math.Abs(Y - other.Y);
     
     public static Coord Parse(string s)

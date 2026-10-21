@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202211Tests : PuzzleTest<Aoc202211>
 {
     [Fact]
-    public void Part1()
-    {
-        var monkeyBusiness = new Aoc202211.MonkeyBusiness();
-        var result = monkeyBusiness.Part1(Input);
-
-        result.Should().Be(10605);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(10605);
 
     [Fact]
-    public void Part2()
-    {
-        var monkeyBusiness = new Aoc202211.MonkeyBusiness();
-        var result = monkeyBusiness.Part2(Input);
-
-        result.Should().Be(2_713_310_158);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(2_713_310_158);
 
     private const string Input = """
                                  Monkey 0:

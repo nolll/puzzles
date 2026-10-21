@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202207Tests : PuzzleTest<Aoc202207>
 {
     [Fact]
-    public void Part1()
-    {
-        var fileSystem = new Aoc202207.FileSystem(Input);
-        var result = fileSystem.Part1();
-
-        result.Should().Be(95437);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(95437);
 
     [Fact]
-    public void Part2()
-    {
-        var fileSystem = new Aoc202207.FileSystem(Input);
-        var result = fileSystem.Part2();
-
-        result.Should().Be(24933642);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(24933642);
 
     private const string Input = """
                                  $ cd /

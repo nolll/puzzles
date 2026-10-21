@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202215Tests : PuzzleTest<Aoc202215>
 {
     [Fact]
-    public void Part1()
-    {
-        var zone = new Aoc202215.BeaconZone();
-        var result = zone.Part1(Input, 10);
-
-        result.Should().Be(26);
-    }
+    public void Part1() => Sut.Part1(Input, 10).Should().Be(26);
 
     [Fact]
-    public void Part2()
-    {
-        var zone = new Aoc202215.BeaconZone();
-        var result = zone.Part2(Input, 20);
-
-        result.Should().Be(56_000_011);
-    }
+    public void Part2() => Sut.Part2(Input, 20).Should().Be(56_000_011);
 
     private const string Input = """
                                  Sensor at x=2, y=18: closest beacon is at x=-2, y=15

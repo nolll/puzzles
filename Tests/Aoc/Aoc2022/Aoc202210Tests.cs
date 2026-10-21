@@ -7,27 +7,20 @@ public class Aoc202210Tests : PuzzleTest<Aoc202210>
     [Fact]
     public void Part1Short()
     {
-        var tube = new Aoc202210.CathodeRayTube();
-        var (result, _, _) = tube.Run(ShortInput);
-
+        var (result, _, _) = Sut.Solve(ShortInput);
         result.Should().Be(0);
     }
 
     [Fact]
     public void Part1Long()
     {
-        var tube = new Aoc202210.CathodeRayTube();
-        var (result, _, _) = tube.Run(LongInput);
-
+        var (result, _, _) = Sut.Solve(LongInput);
         result.Should().Be(13140);
     }
 
     [Fact]
     public void Part2()
     {
-        var tube = new Aoc202210.CathodeRayTube();
-        var (_, _, result) = tube.Run(LongInput);
-
         const string expected = """
                                 ##..##..##..##..##..##..##..##..##..##..
                                 ###...###...###...###...###...###...###.
@@ -36,7 +29,8 @@ public class Aoc202210Tests : PuzzleTest<Aoc202210>
                                 ######......######......######......####
                                 #######.......#######.......#######.....
                                 """;
-
+        
+        var (_, _, result) = Sut.Solve(LongInput);
         result.Should().Be(expected);
     }
 

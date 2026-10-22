@@ -11,7 +11,7 @@ public class Aoc202221 : AocPuzzle
     {
         var lines = input.Split(LineBreaks.Single).Where(o => o.Length > 0);
         var monkeys = GetMonkeys(lines);
-        return monkeys["root"].Yell(0);
+        return monkeys["root"].Yell();
     }
 
     [Puzzle("cdbf9008c2bea6596aa238829913849e")]
@@ -27,17 +27,12 @@ public class Aoc202221 : AocPuzzle
 
         var rootLeft = tempMonkeys["root"].AName;
         var rootRight = tempMonkeys["root"].BName;
-        var rootRightYell = tempMonkeys[rootRight!].Yell(0);
-        numbers[rootRight!] = long.Parse(rootRightYell.ToString());
-        numbers[rootLeft!] = long.Parse(rootRightYell.ToString());
+        var rootRightYell = tempMonkeys[rootRight].Yell();
+        numbers[rootRight] = long.Parse(rootRightYell.ToString());
+        numbers[rootLeft] = long.Parse(rootRightYell.ToString());
         numbers.Remove("humn");
 
-        var queue = new Queue<string>();
-        foreach (var item in list)
-        {
-            queue.Enqueue(item);
-        }
-        
+        var queue = new Queue<string>(list);
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
@@ -123,11 +118,7 @@ public class Aoc202221 : AocPuzzle
 
     private static string FindFormulaFor(string s, string key)
     {
-        var parts = s.Split();
-        var left = parts[0];
-        var middle = parts[2];
-        var op = parts[3];
-        var right = parts[4];
+        var (left, _, middle, op, right) = s.Split();
         var searchedIsMiddle = key == middle;
 
         return op switch
@@ -141,135 +132,54 @@ public class Aoc202221 : AocPuzzle
 
     private static long PerformCalc(long leftNumber, long rightNumber, string operation) => operation switch
     {
-        "+" => (leftNumber + rightNumber),
-        "-" => (leftNumber - rightNumber),
-        "*" => (leftNumber * rightNumber),
-        _ => (leftNumber / rightNumber)
+        "+" => leftNumber + rightNumber,
+        "-" => leftNumber - rightNumber,
+        "*" => leftNumber * rightNumber,
+        _ => leftNumber / rightNumber
     };
 
     private static bool IsNumber(string s) => long.TryParse(s, out _);
-    
-    public abstract class YellMonkey
+
+    private class AdditionMonkey(Dictionary<string, YellMonkey> monkeys, string aName, string bName) : MathMonkey(monkeys, aName, bName)
     {
-        protected readonly Dictionary<string, YellMonkey> Monkeys;
-        public string? AName { get; set; }
-        public string? BName { get; set; }
-        public virtual YellMonkey? A { get; set; } = null;
-        public virtual YellMonkey? B { get; set; } = null;
+        public override long Yell() => A.Yell() + B.Yell();
+    }
 
-        protected YellMonkey(Dictionary<string, YellMonkey> monkeys)
-        {
-            Monkeys = monkeys;
-        }
+    private class DivisionMonkey(Dictionary<string, YellMonkey> monkeys, string aName, string bName) : MathMonkey(monkeys, aName, bName)
+    {
+        public override long Yell() => A.Yell() / B.Yell();
+    }
 
-        public abstract long Yell(int level);
+    private class MultiplicationMonkey(Dictionary<string, YellMonkey> monkeys, string aName, string bName) : MathMonkey(monkeys, aName, bName)
+    {
+        public override long Yell() => A.Yell() * B.Yell();
+    }
+
+    private class SubtractionMonkey(Dictionary<string, YellMonkey> monkeys, string aName, string bName) : MathMonkey(monkeys, aName, bName)
+    {
+        public override long Yell() => A.Yell() - B.Yell();
     }
     
-    public class AdditionMonkey : MathMonkey
+    private class NumberMonkey(Dictionary<string, YellMonkey> monkeys, long number) : YellMonkey(monkeys)
     {
-        public AdditionMonkey(Dictionary<string, YellMonkey> monkeys, string aName, string bName)
-            : base(monkeys, aName, bName)
-        {
-        }
-
-        public override long Yell(int level)
-        {
-            return A!.Yell(level + 1) + B!.Yell(level + 1);
-        }
+        public override string AName => "";
+        public override string BName => "";
+        public override long Yell() => number;
     }
     
-    public class DivisionMonkey : MathMonkey
+    private abstract class MathMonkey(Dictionary<string, YellMonkey> monkeys, string aName, string bName) : YellMonkey(monkeys)
     {
-        public DivisionMonkey(Dictionary<string, YellMonkey> monkeys, string aName, string bName)
-            : base(monkeys, aName, bName)
-        {
-        }
-
-        public override long Yell(int level)
-        {
-            return A!.Yell(level + 1) / B!.Yell(level + 1);
-        }
+        public override string AName { get; } = aName;
+        public override string BName { get; } = bName;
+        protected YellMonkey A => field ??= Monkeys[AName];
+        protected YellMonkey B => field ??= Monkeys[BName];
     }
     
-    public class EqualityMonkey : MathMonkey
+    public abstract class YellMonkey(Dictionary<string, YellMonkey> monkeys)
     {
-        public EqualityMonkey(Dictionary<string, YellMonkey> monkeys, string aName, string bName)
-            : base(monkeys, aName, bName)
-        {
-        }
-
-        public override long Yell(int level)
-        {
-            var aYell = A!.Yell(level + 1);
-            var bYell = B!.Yell(level + 1);
-            return Math.Abs(aYell) - Math.Abs(bYell);
-        }
-    }
-    
-    public abstract class MathMonkey : YellMonkey
-    {
-        private YellMonkey? _monkeyA;
-        private YellMonkey? _monkeyB;
-
-        public override YellMonkey? A
-        {
-            get => _monkeyA ??= Monkeys[AName!];
-            set => _monkeyA = value;
-        }
-
-        public override YellMonkey? B
-        {
-            get => _monkeyB ??= Monkeys[BName!];
-            set => _monkeyB = value;
-        }
-
-        protected MathMonkey(Dictionary<string, YellMonkey> monkeys, string aName, string bName)
-            : base(monkeys)
-        {
-            AName = aName;
-            BName = bName;
-        }
-    }
-    
-    public class MultiplicationMonkey : MathMonkey
-    {
-        public MultiplicationMonkey(Dictionary<string, YellMonkey> monkeys, string aName, string bName)
-            : base(monkeys, aName, bName)
-        {
-        }
-
-        public override long Yell(int level)
-        {
-            return A!.Yell(level + 1) * B!.Yell(level + 1);
-        }
-    }
-    
-    public class NumberMonkey : YellMonkey
-    {
-        private readonly long _number;
-
-        public NumberMonkey(Dictionary<string, YellMonkey> monkeys, long number)
-            : base(monkeys)
-        {
-            _number = number;
-        }
-
-        public override long Yell(int level)
-        {
-            return _number;
-        }
-    }
-    
-    public class SubtractionMonkey : MathMonkey
-    {
-        public SubtractionMonkey(Dictionary<string, YellMonkey> monkeys, string aName, string bName)
-            : base(monkeys, aName, bName)
-        {
-        }
-
-        public override long Yell(int level)
-        {
-            return A!.Yell(level + 1) - B!.Yell(level + 1);
-        }
+        protected readonly Dictionary<string, YellMonkey> Monkeys = monkeys;
+        public abstract string AName { get; }
+        public abstract string BName { get; }
+        public abstract long Yell();
     }
 }

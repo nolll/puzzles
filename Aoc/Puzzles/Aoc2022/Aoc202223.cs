@@ -16,49 +16,21 @@ public class Aoc202223 : AocPuzzle
     private static readonly (int x, int y) West = (-1, 0);
     private static readonly (int x, int y) NorthWest = (-1, -1);
 
-    private readonly List<List<(int x, int y)>> _searchDeltas =
-    [
-        [North, NorthWest, NorthEast],
-        [South, SouthWest, SouthEast],
-        [West, NorthWest, SouthWest],
-        [East, NorthEast, SouthEast]
-    ];
-
-    private readonly List<(int x, int y)> _searchResults =
-    [
-        North,
-        South,
-        West,
-        East
-    ];
-
-    private readonly List<(int x, int y)> _deltas =
-    [
-        North,
-        NorthEast,
-        East,
-        SouthEast,
-        South,
-        SouthWest,
-        West,
-        NorthWest
-    ];
-
     [Puzzle("b2078a7c2a582e68796f55a71f1fe1cd")]
     public int Part1(string input)
     {
-        var (emptyCount, _) = Run(input, 10);
+        var (emptyCount, _) = Solve(input, 10);
         return emptyCount;
     }
 
     [Puzzle("b4b9f7dae4709930cd73d70f45eac0ae")]
     public int Part2(string input)
     {
-        var (_, endRound) = Run(input);
+        var (_, endRound) = Solve(input);
         return endRound;
     }
     
-    public (int emptyCount, int endRound) Run(string input, int rounds = int.MaxValue)
+    public (int emptyCount, int endRound) Solve(string input, int rounds = int.MaxValue)
     {
         var elves = ParseElves(input);
 
@@ -111,11 +83,11 @@ public class Aoc202223 : AocPuzzle
                 if (!targets.TryGetValue(elf, out var to))
                     continue;
 
-                if (targetCount[to] == 1)
-                {
-                    elves.Remove(elf);
-                    elves.Add(to);
-                }
+                if (targetCount[to] != 1)
+                    continue;
+                
+                elves.Remove(elf);
+                elves.Add(to);
             }
 
             startDeltaIndex = (startDeltaIndex + 1) % _searchDeltas.Count;
@@ -136,7 +108,7 @@ public class Aoc202223 : AocPuzzle
         return (emptyCount, round);
     }
 
-    private HashSet<Coord> ParseElves(string input)
+    private static HashSet<Coord> ParseElves(string input)
     {
         var elves = new HashSet<Coord>();
         var lines = input.Split(LineBreaks.Single);
@@ -153,27 +125,34 @@ public class Aoc202223 : AocPuzzle
         return elves;
     }
 
-    private bool HasNeighbors(HashSet<Coord> elfs, Coord elf)
-    {
-        foreach (var delta in _deltas)
-        {
-            var neighbor = new Coord(elf.X + delta.x, elf.Y + delta.y);
-            if (elfs.Contains(neighbor))
-                return true;
-        }
+    private bool HasNeighbors(HashSet<Coord> elfs, Coord elf) => 
+        _deltas.Any(delta => elfs.Contains(new Coord(elf.X + delta.x, elf.Y + delta.y)));
+    
+    private readonly List<List<(int x, int y)>> _searchDeltas =
+    [
+        [North, NorthWest, NorthEast],
+        [South, SouthWest, SouthEast],
+        [West, NorthWest, SouthWest],
+        [East, NorthEast, SouthEast]
+    ];
 
-        return false;
-    }
+    private readonly List<(int x, int y)> _searchResults =
+    [
+        North,
+        South,
+        West,
+        East
+    ];
 
-    private string Print(HashSet<Coord> coords)
-    {
-        var grid = new Grid<char>(1, 1, '.');
-        foreach (var coord in coords)
-        {
-            grid.MoveTo(coord);
-            grid.WriteValue('#');
-        }
-
-        return grid.Print();
-    }
+    private readonly List<(int x, int y)> _deltas =
+    [
+        North,
+        NorthEast,
+        East,
+        SouthEast,
+        South,
+        SouthWest,
+        West,
+        NorthWest
+    ];
 }

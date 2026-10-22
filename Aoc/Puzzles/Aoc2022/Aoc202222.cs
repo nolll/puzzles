@@ -131,10 +131,8 @@ public class Aoc202222 : AocPuzzle
                     if (!moveSucceeded)
                     {
                         var (newCoord, newDirection) = MapExitPosition(grid.Coord, grid.Direction, 50);
-                        if (grid.TryMoveTo(newCoord))
-                        {
+                        if (grid.TryMoveTo(newCoord)) 
                             grid.TurnTo(newDirection);
-                        }
                     }
 
                     if (grid.ReadValue() == '#')
@@ -167,8 +165,7 @@ public class Aoc202222 : AocPuzzle
 
     public static (Coord newCoord, GridDirection newDirection) MapExitPosition(Coord c, GridDirection d, int size)
     {
-        var x = c.X;
-        var y = c.Y;
+        var (x, y) = c;
 
         if (d.Equals(GridDirection.Up))
         {
@@ -214,19 +211,15 @@ public class Aoc202222 : AocPuzzle
         return (new Coord(0, 0), GridDirection.Up);
     }
 
-    private static IEnumerable<string> ParsePath(string s)
-    {
-        var css = s.Replace("R", ",R,").Replace("L", ",L,");
-        return css.Split(',');
-    }
+    private static IEnumerable<string> ParsePath(string s) => s.Replace("R", ",R,").Replace("L", ",L,").Split(',');
 
     private static int GetFacingScore(GridDirection d)
     {
-        if (d.Equals(GridDirection.Up))
+        if (d == GridDirection.Up)
             return 3;
-        if (d.Equals(GridDirection.Right))
+        if (d == GridDirection.Right)
             return 0;
-        if (d.Equals(GridDirection.Down))
+        if (d == GridDirection.Down)
             return 1;
         return 2;
     }

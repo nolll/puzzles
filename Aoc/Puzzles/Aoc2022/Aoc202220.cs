@@ -21,13 +21,11 @@ public class Aoc202220 : AocPuzzle
 
         var list = new LinkedList<long>();
         var set = new Dictionary<long, LinkedListNode<long>>();
-
-        var index = 0;
-        foreach (var number in numbers)
+        
+        foreach (var (number, index) in numbers.Select((o, i) => (o, i)))
         {
             var node = list.AddLast(number);
             set.Add(index, node);
-            index++;
         }
 
         for (var iteration = 0; iteration < iterationCount; iteration++)
@@ -39,10 +37,9 @@ public class Aoc202220 : AocPuzzle
 
                 for (var j = 0; j < Math.Abs(steps); j++)
                 {
-                    var value = currentNode.Value;
                     var nextNode = steps > 0 ? currentNode.NextOrFirst() : currentNode.PreviousOrLast();
                     list.Remove(currentNode);
-                    currentNode = steps > 0 ? list.AddAfter(nextNode, value) : list.AddBefore(nextNode, value);
+                    currentNode = steps > 0 ? list.AddAfter(nextNode, currentNode.Value) : list.AddBefore(nextNode, currentNode.Value);
                 }
 
                 set[i] = currentNode;
@@ -52,6 +49,6 @@ public class Aoc202220 : AocPuzzle
         var array = list.ToList();
         var offset = array.IndexOf(0);
 
-        return new[] { 1, 2, 3 }.Select(o => array[(offset + o * 1000) % array.Count]).Sum();
+        return Enumerable.Range(1, 3).Select(o => array[(offset + o * 1000) % array.Count]).Sum();
     }
 }

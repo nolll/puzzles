@@ -13,7 +13,7 @@ public class Aoc202303 : AocPuzzle
     [Puzzle("0ec5347a4e1a8f41769180000882ae7d")]
     public int Part2(string input) => Solve(input).GearRatios;
 
-    public static Result Solve(string input)
+    public Result Solve(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var width = lines.First().Length;
@@ -72,7 +72,7 @@ public class Aoc202303 : AocPuzzle
                 cleanedLine[i] = '.';
         }
 
-        return string.Join("", cleanedLine);
+        return string.Concat(cleanedLine);
     }
 
     private static Grid<char> BuildSymbolGrid(IEnumerable<string> lines, int width, int height)
@@ -112,25 +112,9 @@ public class Aoc202303 : AocPuzzle
         return numberGrid;
     }
 
-    private static List<int> FindEngineParts(List<NumberCoord> numberCoordList, Grid<char> symbolGrid)
-    {
-        var engineParts = new List<int>();
-        foreach (var numberCoord in numberCoordList)
-        {
-            var hasAdjacentSymbol = false;
-            foreach (var coord in numberCoord.Coords)
-            {
-                var adjacent = symbolGrid.AllAdjacentValuesTo(coord);
-                if (adjacent.Any(o => o != '.'))
-                    hasAdjacentSymbol = true;
-            }
-
-            if (hasAdjacentSymbol)
-                engineParts.Add(numberCoord.Number);
-        }
-
-        return engineParts;
-    }
+    private static List<int> FindEngineParts(List<NumberCoord> numberCoordList, Grid<char> symbolGrid) =>
+        numberCoordList.Where(o => o.Coords.Select(symbolGrid.AllAdjacentValuesTo).Any(a => a.Any(c => c != '.')))
+            .Select(o => o.Number).ToList();
 
     private static List<int> FindGearRatios(Grid<int> numberGrid, Grid<char> symbolGrid)
     {
@@ -146,10 +130,8 @@ public class Aoc202303 : AocPuzzle
                 .Distinct()
                 .ToList();
 
-            if (adjacentValues.Count == 2)
-            {
+            if (adjacentValues.Count == 2) 
                 gearRatios.Add(adjacentValues.First() * adjacentValues.Last());
-            }
         }
 
         return gearRatios;

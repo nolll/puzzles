@@ -18,18 +18,8 @@ public class Aoc202303Tests : PuzzleTest<Aoc202303>
                                  """;
 
     [Fact]
-    public void EngineParts()
-    {
-        var result = Aoc202303.Solve(Input);
-
-        result.EngineParts.Should().Be(4361);
-    }
+    public void EngineParts() => Sut.Solve(Input).EngineParts.Should().Be(4361);
 
     [Fact]
-    public void GearRatios()
-    {
-        var result = Aoc202303.Solve(Input);
-
-        result.GearRatios.Should().Be(467835);
-    }
+    public void GearRatios() => Sut.Solve(Input).GearRatios.Should().Be(467835);
 }

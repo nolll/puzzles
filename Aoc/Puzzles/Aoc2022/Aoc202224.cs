@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Text;
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
 
@@ -9,197 +10,155 @@ namespace Pzl.Aoc.Puzzles.Aoc2022;
 public class Aoc202224 : AocPuzzle
 {
     [Puzzle("2cfc10140c99d8efac8a77765769479d")]
-    public int Part1(string input) => new BlizzardNavigation(input).Part1();
+    public int Part1(string input)
+    {
+        var (cache, blizzards, enter, exit) = Init(input);
+        return CountSteps(blizzards, cache, enter, exit);
+    }
 
     [Puzzle("f055d2b6a8b11466406da741a5dd4b83")]
-    public int Part2(string input) => new BlizzardNavigation(input).Part2();
-
-    public class BlizzardNavigation
+    public int Part2(string input)
     {
-        private const char Up = '^';
-        private const char Right = '>';
-        private const char Down = 'v';
-        private const char Left = '<';
-
-        private readonly Coord _enter = new(0, 0);
-        private readonly Coord _exit = new(0, 0);
-        private readonly Dictionary<Coord, IList<Coord>> _neighborCache = new();
-        private readonly List<ImmutableHashSet<Coord>> _uniqueBlizzards = new();
-        private readonly Grid<char> _grid;
-
-        public BlizzardNavigation(string input)
-        {
-            _grid = GridBuilder.BuildCharGrid(input);
-            var blizzards = new List<Blizzard>();
-            var walls = new List<Coord>();
-            foreach (var coord in _grid.Coords)
-            {
-                var value = _grid.ReadValueAt(coord);
-                if (coord.Y == _grid.YMin && value == '.')
-                {
-                    _enter = coord;
-                }
-                else if (coord.Y == _grid.YMax && value == '.')
-                {
-                    _exit = coord;
-                }
-                else if (value != '#' && value != '.')
-                {
-                    blizzards.Add(new Blizzard(value, coord));
-                    _grid.WriteValueAt(coord, '.');
-                }
-                else if (value == '#')
-                {
-                    walls.Add(coord);
-                }
-
-                _neighborCache.Add(coord, _grid.OrthogonalAdjacentCoordsTo(coord).ToList());
-            }
-
-            var prints = new HashSet<string>();
-            while (true)
-            {
-                var print = PrintGrid(blizzards);
-                if (prints.Contains(print))
-                    break;
-
-                prints.Add(print);
-                var addresses = blizzards.Distinct().Select(o => o.Address).Union(walls);
-                var blizzardSet = addresses.ToImmutableHashSet();
-                _uniqueBlizzards.Add(blizzardSet);
-                blizzards = MoveBlizzards(blizzards);
-            }
-        }
-
-        public int Part1() => CountSteps(_enter, _exit);
-
-        public int Part2()
-        {
-            var leg1 = CountSteps(_enter, _exit);
-            var leg2 = CountSteps(_exit, _enter, leg1);
-            var leg3 = CountSteps(_enter, _exit, leg2);
-            return leg3;
-        }
-
-        private int CountSteps(Coord from, Coord to, int offset = 0)
-        {
-            var uniqueCount = _uniqueBlizzards.Count;
-            var seen = new HashSet<(Coord, int)>();
-            var queue = new List<BlizzardCoordCount> { new(from, offset) };
-            var index = 0;
-
-            while (index < queue.Count)
-            {
-                var current = queue[index];
-                var nextCount = current.Count + 1;
-                var nextState = (nextCount) % uniqueCount;
-                var blizzardSet = _uniqueBlizzards[nextState];
-
-                var adjacentCoords = _neighborCache[current.Coord]
-                    .Where(neighbor => !blizzardSet.Contains(neighbor) && !seen.Contains((neighbor, nextState)))
-                    .ToList();
-                var newCoordCounts = adjacentCoords.Select(o => new BlizzardCoordCount(o, nextCount)).ToList();
-                if (!blizzardSet.Contains(current.Coord) && !seen.Contains((current.Coord, nextState)))
-                    newCoordCounts.Add(new BlizzardCoordCount(current.Coord, nextCount));
-
-                foreach (var coordCount in newCoordCounts)
-                {
-                    queue.Add(coordCount);
-                    seen.Add((coordCount.Coord, nextState));
-                }
-
-                if (newCoordCounts.Any(o => o.Coord.X == to.X && o.Coord.Y == to.Y))
-                    break;
-
-                index++;
-            }
-
-            return queue.FirstOrDefault(o => o.Coord.X == to.X && o.Coord.Y == to.Y)?.Count ?? 0;
-        }
-
-        private List<Blizzard> MoveBlizzards(List<Blizzard> blizzards)
-        {
-            var movedBlizzards = new List<Blizzard>();
-            foreach (var blizzard in blizzards)
-            {
-                var x = blizzard.Address.X;
-                var y = blizzard.Address.Y;
-                if (blizzard.Direction == Up)
-                {
-                    var newCoord = new Coord(x, y - 1);
-                    if (newCoord.Y == _grid.YMin)
-                        newCoord = new Coord(x, _grid.YMax - 1);
-                    movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
-                }
-                else if (blizzard.Direction == Right)
-                {
-                    var newCoord = new Coord(x + 1, y);
-                    if (newCoord.X == _grid.XMax)
-                        newCoord = new Coord(1, y);
-                    movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
-                }
-                else if (blizzard.Direction == Down)
-                {
-                    var newCoord = new Coord(x, y + 1);
-                    if (newCoord.Y == _grid.YMax)
-                        newCoord = new Coord(x, 1);
-                    movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
-                }
-                else
-                {
-                    var newCoord = new Coord(x - 1, y);
-                    if (newCoord.X == _grid.XMin)
-                        newCoord = new Coord(_grid.XMax - 1, y);
-                    movedBlizzards.Add(new Blizzard(blizzard.Direction, newCoord));
-                }
-            }
-
-            return movedBlizzards;
-        }
-
-        private string PrintGrid(List<Blizzard> blizzards)
-        {
-            var newGrid = _grid.Clone();
-            foreach (var blizzard in blizzards)
-            {
-                var v = newGrid.ReadValueAt(blizzard.Address);
-                if (v == '.')
-                    newGrid.WriteValueAt(blizzard.Address, blizzard.Direction);
-                else if (int.TryParse(v.ToString(), out var i))
-                    newGrid.WriteValueAt(blizzard.Address, (i + 1).ToString().First());
-                else
-                    newGrid.WriteValueAt(blizzard.Address, '2');
-            }
-
-            return newGrid.Print();
-        }
+        var (cache, blizzards, enter, exit) = Init(input);
+        var leg1 = CountSteps(blizzards, cache, enter, exit);
+        var leg2 = CountSteps(blizzards, cache, exit, enter, leg1);
+        return CountSteps(blizzards, cache, enter, exit, leg2);
     }
 
-    public class Blizzard
-    {
-        public char Direction { get; }
-        public Coord Address { get; }
+    private const char Up = '^';
+    private const char Right = '>';
+    private const char Down = 'v';
 
-        public Blizzard(char direction, Coord address)
+    private (Dictionary<Coord, IList<Coord>>, List<ImmutableHashSet<Coord>>, Coord, Coord) Init(string input)
+    {
+        var enter = new Coord();
+        var exit = new Coord();
+        var neighborCache = new Dictionary<Coord, IList<Coord>>();
+        var uniqueBlizzards = new List<ImmutableHashSet<Coord>>();
+        var grid = GridBuilder.BuildCharGrid(input);
+        var blizzards = new List<Blizzard>();
+        var walls = new List<Coord>();
+        foreach (var coord in grid.Coords)
         {
-            Direction = direction;
-            Address = address;
+            var value = grid.ReadValueAt(coord);
+            if (grid.IsAtTopEdge(coord) && value == '.')
+            {
+                enter = coord;
+            }
+            else if (grid.IsAtBottomEdge(coord) && value == '.')
+            {
+                exit = coord;
+            }
+            else if (value is not '#' && value is not '.')
+            {
+                blizzards.Add(new Blizzard(value, coord));
+                grid.WriteValueAt(coord, '.');
+            }
+            else if (value == '#')
+            {
+                walls.Add(coord);
+            }
+
+            neighborCache.Add(coord, [.. grid.OrthogonalAdjacentCoordsTo(coord)]);
         }
+
+        var prints = new HashSet<string>();
+        while (true)
+        {
+            var print = PrintGrid(grid, blizzards);
+            if (!prints.Add(print))
+                break;
+
+            uniqueBlizzards.Add([.. blizzards.Select(o => o.Coord), .. walls]);
+            blizzards = MoveBlizzards(grid, blizzards);
+        }
+
+        return (neighborCache, uniqueBlizzards, enter, exit);
     }
-    
+
+    private int CountSteps(List<ImmutableHashSet<Coord>> blizzards, Dictionary<Coord, IList<Coord>> cache, Coord from, Coord to, int offset = 0)
+    {
+        var uniqueCount = blizzards.Count;
+        var seen = new HashSet<(Coord, int)>();
+        var queue = new List<BlizzardCoordCount> { new(from, offset) };
+        var index = 0;
+
+        while (index < queue.Count)
+        {
+            var current = queue[index];
+            var nextCount = current.Count + 1;
+            var nextState = nextCount % uniqueCount;
+            var blizzardSet = blizzards[nextState];
+
+            var adjacentCoords = cache[current.Coord]
+                .Where(neighbor => !blizzardSet.Contains(neighbor) && !seen.Contains((neighbor, nextState)))
+                .ToList();
+            var newCoordCounts = adjacentCoords.Select(o => new BlizzardCoordCount(o, nextCount)).ToList();
+            if (!blizzardSet.Contains(current.Coord) && !seen.Contains((current.Coord, nextState)))
+                newCoordCounts.Add(new BlizzardCoordCount(current.Coord, nextCount));
+
+            foreach (var coordCount in newCoordCounts)
+            {
+                queue.Add(coordCount);
+                seen.Add((coordCount.Coord, nextState));
+            }
+
+            if (newCoordCounts.Any(o => o.Coord.X == to.X && o.Coord.Y == to.Y))
+                break;
+
+            index++;
+        }
+
+        return queue.FirstOrDefault(o => o.Coord.X == to.X && o.Coord.Y == to.Y)?.Count ?? 0;
+    }
+
+    private List<Blizzard> MoveBlizzards(Grid<char> grid, List<Blizzard> blizzards) =>
+        blizzards.Select(blizzard => blizzard with { Coord = GetNewCoord(grid, blizzard) }).ToList();
+
+    private static Coord GetNewCoord(Grid<char> grid, Blizzard blizzard) => blizzard.Direction switch
+    {
+        Up => GetNewCoordUp(grid, blizzard.Coord),
+        Right => GetNewCoordRight(grid, blizzard.Coord),
+        Down => GetNewCoordDown(grid, blizzard.Coord),
+        _ => GetNewCoordLeft(grid, blizzard.Coord)
+    };
+
+    private static Coord GetNewCoordUp(Grid<char> g, Coord coord) => coord.Y == g.YMin + 1 ? new Coord(coord.X, g.YMax - 1) : coord.Up();
+    private static Coord GetNewCoordRight(Grid<char> g, Coord coord) => coord.X == g.XMax - 1 ? new Coord(1, coord.Y) : coord.Right();
+    private static Coord GetNewCoordDown(Grid<char> g, Coord coord) => coord.Y == g.YMax - 1 ? new Coord(coord.X, 1) : coord.Down();
+    private static Coord GetNewCoordLeft(Grid<char> g, Coord coord) => coord.X == g.XMin + 1 ? new Coord(g.XMax - 1, coord.Y) : coord.Left();
+
+    private static string PrintGrid(Grid<char> grid, List<Blizzard> blizzards)
+    {
+        var sb = new StringBuilder();
+        foreach (var blizzard in blizzards)
+        {
+            var v = grid.ReadValueAt(blizzard.Coord);
+            var pv = GetPrintValue(v);
+            sb.Append(blizzard.Coord.Id);
+            sb.Append(pv);
+        }
+        
+        return sb.ToString();
+    }
+
+    private static char GetPrintValue(char v)
+    {
+        if (v == '.')
+            return v;
+
+        if (char.IsDigit(v))
+            return (char)(v + 1);
+
+        return '2';
+    }
+
+    private record Blizzard(char Direction, Coord Coord);
+
     [DebuggerDisplay("{X},{Y},{Count}")]
-    public class BlizzardCoordCount
+    private record BlizzardCoordCount(Coord Coord, int Count)
     {
-        public Coord Coord { get; }
-        public int Count { get; }
-
         public int X => Coord.X;
         public int Y => Coord.Y;
-
-        public BlizzardCoordCount(Coord coord, int count)
-        {
-            Coord = coord;
-            Count = count;
-        }
     }
 }

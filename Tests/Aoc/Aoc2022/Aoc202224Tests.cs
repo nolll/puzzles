@@ -5,22 +5,10 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202224Tests : PuzzleTest<Aoc202224>
 {
     [Fact]
-    public void Part1()
-    {
-        var blizzardNavigation = new Aoc202224.BlizzardNavigation(Input);
-        var result = blizzardNavigation.Part1();
-
-        result.Should().Be(18);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(18);
 
     [Fact]
-    public void Part2()
-    {
-        var blizzardNavigation = new Aoc202224.BlizzardNavigation(Input);
-        var result = blizzardNavigation.Part2();
-
-        result.Should().Be(54);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(54);
 
     private const string Input = """
                                  #.######

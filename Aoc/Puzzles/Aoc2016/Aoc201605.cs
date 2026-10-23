@@ -62,7 +62,7 @@ public class Aoc201605 : AocPuzzle
             index++;
         }
 
-        return string.Join("", pwdArray);
+        return string.Concat(pwdArray);
     }
 
     private static bool HasFiveLeadingZeros(byte[] bytes) => bytes[0] == 0 && bytes[1] == 0 && bytes[2] < 16;

@@ -517,7 +517,7 @@ public class Aquaq31 : AquaqPuzzle
 
         public void RotateRight() => _grid = _grid.RotateRight();
         public void RotateLeft() => _grid = _grid.RotateLeft();
-        public string PrintFlat() => string.Join("", _grid.Values);
+        public string PrintFlat() => string.Concat(_grid.Values);
         public string Print() => _grid.Print();
         public int Product => _grid.Values.Select(GetColorValue).Aggregate(1, (a, b) => a * b);
 

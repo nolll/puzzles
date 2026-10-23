@@ -13,12 +13,12 @@ public class Euler059 : EulerPuzzle
         .Select(o => (int)o)
         .Sum();
 
-    private static string ParseEncryptedText(string input) => string.Join("", input.Split(",")
+    private static string ParseEncryptedText(string input) => string.Concat(input.Split(",")
         .Select(int.Parse)
         .Select(o => (char)o));
 
     private static string[] GenerateKeys() => PermutationGenerator.GetPermutations(Chars.ToCharArray(), 3)
-        .Select(o => string.Join("", o))
+        .Select(o => string.Concat(o))
         .ToArray();
 
     private static string BruteForceDecrypt(string[] keys, string inputText)
@@ -44,7 +44,7 @@ public class Euler059 : EulerPuzzle
             pos++;
         }
 
-        return string.Join("", current);
+        return string.Concat(current);
     }
 
     public static int Decrypt(int key, int s) => s ^ key;

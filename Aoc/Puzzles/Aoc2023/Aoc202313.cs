@@ -92,8 +92,8 @@ public class Aoc202313 : AocPuzzle
     }
 
     private static string ReadRow(Grid<char> grid, int y) => 
-        string.Join("", Enumerable.Range(0, grid.Width).Select(x => grid.ReadValueAt(x, y)));
+        string.Concat(Enumerable.Range(0, grid.Width).Select(x => grid.ReadValueAt(x, y)));
 
     private static string ReadCol(Grid<char> grid, int x) =>
-        string.Join("", Enumerable.Range(0, grid.Height).Select(y => grid.ReadValueAt(x, y)));
+        string.Concat(Enumerable.Range(0, grid.Height).Select(y => grid.ReadValueAt(x, y)));
 }

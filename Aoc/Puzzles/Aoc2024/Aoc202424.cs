@@ -17,7 +17,7 @@ public class Aoc202424 : AocPuzzle
         var zgates = gates.Keys.Where(o => o.StartsWith('z')).OrderDescending();
         var results = zgates.Select(o => processor.Process(o));
 
-        return Convert.ToInt64(string.Join("", results), 2);
+        return Convert.ToInt64(string.Concat(results), 2);
     }
 
     [Puzzle("664e08ee1c7756ec0bf56764e81d2280")]
@@ -28,8 +28,8 @@ public class Aoc202424 : AocPuzzle
         var zgates = gates.Keys.Where(o => o.StartsWith('z')).Order().ToList();
         var xwires = wires.Where(o => o.Key.StartsWith('x')).OrderByDescending(o => o.Key).Select(o => o.Value);
         var ywires = wires.Where(o => o.Key.StartsWith('y')).OrderByDescending(o => o.Key).Select(o => o.Value);
-        var x = Convert.ToInt64(string.Join("", xwires), 2);
-        var y = Convert.ToInt64(string.Join("", ywires), 2);
+        var x = Convert.ToInt64(string.Concat(xwires), 2);
+        var y = Convert.ToInt64(string.Concat(ywires), 2);
 
         // Found by inspecting printout
         List<string[]> swaps =
@@ -47,7 +47,7 @@ public class Aoc202424 : AocPuzzle
         
         var processor = new Processor(gates, wires);
         var results = zgates.Select(zgate => processor.Process(zgate)).ToList();
-        var r = Convert.ToInt64(string.Join("", results.Reversed()), 2);
+        var r = Convert.ToInt64(string.Concat(results.Reversed()), 2);
         
         // Make sure result is correct. This will fail without the swaps
         if (r != x + y)

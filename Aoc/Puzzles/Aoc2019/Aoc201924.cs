@@ -60,7 +60,7 @@ public class Aoc201924 : AocPuzzle
         return newGrid;
     }
 
-    private static string GridToString(Grid<char> grid) => string.Join("", grid.Values);
+    private static string GridToString(Grid<char> grid) => string.Concat(grid.Values);
     
     private static char GetNewValue(char currentValue, int neighborCount) => currentValue switch
     {

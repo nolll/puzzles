@@ -39,7 +39,7 @@ public class Aoc202506 : AocPuzzle
         {
             var index = i;
             var chars = lines.Select(o => o[index]).Where(o => o != ' ').ToList();
-            var num = long.Parse(string.Join("", chars.Where(char.IsDigit)));
+            var num = long.Parse(string.Concat(chars.Where(char.IsDigit)));
             current.Add(num);
             var lastChar = chars.Last();
             if (char.IsDigit(lastChar)) continue;

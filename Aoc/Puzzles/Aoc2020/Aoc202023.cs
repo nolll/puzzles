@@ -19,7 +19,7 @@ public class Aoc202023 : AocPuzzle
             currentCup = currentCup.NextOrFirst();
         }
 
-        return string.Join("", resultNumbers.Select(o => o.ToString()));
+        return string.Concat(resultNumbers.Select(o => o.ToString()));
     }
 
     [Puzzle("86b2d5ff30f1a76d6a5de3dfc06e89e9")]

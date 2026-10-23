@@ -118,7 +118,7 @@ public class Ece202405 : EverybodyEventPuzzle
             else
                 columns[danceCol].Insert(insertIndex, clapper);
 
-            return string.Join("", columns.Select(o => o.First()));
+            return string.Concat(columns.Select(o => o.First()));
         }
 
         public override string ToString() => string.Join("|", columns.Select(o => string.Join(",", o)));

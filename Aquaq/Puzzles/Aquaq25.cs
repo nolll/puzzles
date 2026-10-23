@@ -54,7 +54,7 @@ public class Aquaq25 : AquaqPuzzle
             ((char)(resultParts[49].First() + 1)).ToString()
         };
 
-        return string.Join("", parsedResult);
+        return string.Concat(parsedResult);
     }
 
     public static string EncodeMorse(string input)
@@ -80,7 +80,7 @@ public class Aquaq25 : AquaqPuzzle
     private static string DecodeMorseWord(string input)
     {
         var decodedLetters = input.Split(' ').Select(GetChar);
-        return string.Join("", decodedLetters);
+        return string.Concat(decodedLetters);
     }
 
     private static string GetChar(string morse)

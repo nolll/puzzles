@@ -77,6 +77,6 @@ public class Ecs0301 : EverybodyStoryPuzzle
         return (scale, r, g, b, s);
     }
 
-    private static int ToNumber(string rs) => Convert.ToInt32(string.Join("", ToNumber(rs.ToCharArray())), 2);
+    private static int ToNumber(string rs) => Convert.ToInt32(string.Concat(ToNumber(rs.ToCharArray())), 2);
     private static IEnumerable<char> ToNumber(char[] chars) => chars.Select(c => char.IsUpper(c) ? '1' : '0');
 }

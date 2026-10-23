@@ -99,5 +99,5 @@ public class Ecs0101 : EverybodyStoryPuzzle
         return score;
     }
     
-    private static long GetResult(IEnumerable<long> list) => long.Parse(string.Join("", list.Reversed().ToList()));
+    private static long GetResult(IEnumerable<long> list) => long.Parse(string.Concat(list.Reversed().ToList()));
 }

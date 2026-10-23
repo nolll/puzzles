@@ -12,7 +12,7 @@ public class Aquaq22 : AquaqPuzzle
     {
         var numbers = input.Split(' ').Select(int.Parse);
         var romanNumbers = numbers.Select(Conversion.ToRoman);
-        return ToCaesarCipherSum(string.Join("", romanNumbers));
+        return ToCaesarCipherSum(string.Concat(romanNumbers));
     }
 
     public static int ToCaesarCipherSum(string input) => input.ToCharArray().Select(CaesarCipher.Encrypt).Sum();

@@ -18,7 +18,7 @@ public class Euler041 : EulerPuzzle
 
             foreach (var combination in combinations)
             {
-                var n = long.Parse(string.Join("", combination));
+                var n = long.Parse(string.Concat(combination));
                 if (n > largest && Numbers.IsPrime(n))
                     largest = n;
             }

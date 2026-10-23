@@ -25,7 +25,7 @@ public class Aquaq26 : AquaqPuzzle
             var positions = Enumerable.Range(0, charsToMove.Length).ToArray();
             var largerNumbers = PermutationGenerator.GetPermutations(positions, positions.Length)
                 .Select(o => o.Select(p => charsToMove[p]))
-                .Select(o => BigInteger.Parse($"{untouchedChars}{string.Join("", o)}"))
+                .Select(o => BigInteger.Parse($"{untouchedChars}{string.Concat(o)}"))
                 .Where(o => o > input).ToList();
             if (largerNumbers.Any())
                 return largerNumbers.Min();

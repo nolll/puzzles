@@ -48,7 +48,7 @@ public class Aoc202404 : AocPuzzle
     }
 
     private static string ReadWord(Grid<char> grid, (int x, int y) dir) => 
-        string.Join("", ReadWordAsEnumerable(grid, dir));
+        string.Concat(ReadWordAsEnumerable(grid, dir));
 
     private static IEnumerable<char> ReadWordAsEnumerable(Grid<char> grid, (int x, int y) dir)
     {

@@ -52,7 +52,7 @@ public class Aoc202421 : AocPuzzle
 
         var results = CombinationGenerator.CartesianProduct(options);
         
-        return results.Select(o => string.Join("", o)).ToList();
+        return results.Select(o => string.Concat(o)).ToList();
     }
 
     private static long ComputeLength(Dictionary<(string seq, int depth), long> cache, string seq, int depth)

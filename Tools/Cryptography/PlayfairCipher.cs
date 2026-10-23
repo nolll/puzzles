@@ -20,7 +20,7 @@ public class PlayfairCipher
         var distinct = _keyword.Replace(" ", "").ToCharArray().Distinct();
         var otherChars = CipherAlphabet.Where(o => !distinct.Contains(o));
         var combined = distinct.Concat(otherChars);
-        return string.Join("", combined);
+        return string.Concat(combined);
     }
 
     public string Encrypt(string input)
@@ -29,7 +29,7 @@ public class PlayfairCipher
         var bigrams = SplitIntoBigrams(prepared);
         var encrypted = bigrams.Select(EncryptBigram);
 
-        return string.Join("", encrypted);
+        return string.Concat(encrypted);
     }
 
     public string Decrypt(string input)
@@ -37,7 +37,7 @@ public class PlayfairCipher
         var bigrams = SplitIntoBigrams(input);
         var decrypted = bigrams.Select(DecryptBigram);
 
-        return string.Join("", decrypted);
+        return string.Concat(decrypted);
     }
 
     private string EncryptBigram(string input)

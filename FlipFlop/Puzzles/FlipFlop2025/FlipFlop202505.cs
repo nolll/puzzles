@@ -36,7 +36,7 @@ public class FlipFlop202505 : FlipFlopPuzzle
             seen.Add(c);
         }
 
-        return string.Join("", chars.Distinct().Where(o => !seen.Contains(o)));
+        return string.Concat(chars.Distinct().Where(o => !seen.Contains(o)));
     }
 
     [Puzzle("36c49d43c6bb2d7a410d976dda77c3f2")]

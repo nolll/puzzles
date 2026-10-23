@@ -12,7 +12,7 @@ public class Euler049 : EulerPuzzle
     public string? Solve()
     {
         var primes = Numbers.FindPrimesBelow(Limit).ToArray();
-        var permutationCache = primes.ToDictionary(k => k, v => string.Join("", v.ToString().ToCharArray().Order()));
+        var permutationCache = primes.ToDictionary(k => k, v => string.Concat(v.ToString().ToCharArray().Order()));
 
         for (var i = 0; i < primes.Length; i++)
         {

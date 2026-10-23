@@ -40,7 +40,7 @@ public class Euler051 : EulerPuzzle
                             current[positionToReplace] = c;
                         }
                             
-                        var currentNum = int.Parse(string.Join("", current));
+                        var currentNum = int.Parse(string.Concat(current));
                             
                         if (Numbers.IsPrime(currentNum)) 
                             primes.Add(currentNum);

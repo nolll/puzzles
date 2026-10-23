@@ -73,7 +73,7 @@ public class Ece202410 : EverybodyEventPuzzle
     {
         var wordGrid = grid.Slice(new Coord(offset.X + 2, offset.Y + 2), 4, 4);
         var chars = wordGrid.Coords.Select(o => wordGrid.ReadValueAt(o));
-        return string.Join("", chars);
+        return string.Concat(chars);
     }
     
     private static void FillSymbols(Grid<char> grid, Coord offset)

@@ -33,7 +33,7 @@ public static class ColumnarTranspositionCipher
             }
         }
         
-        return string.Join("", encryptedGrid.Transpose().Values);
+        return string.Concat(encryptedGrid.Transpose().Values);
     }
 
     public static string Decrypt(string keyword, string input)
@@ -59,7 +59,7 @@ public static class ColumnarTranspositionCipher
             }
         }
 
-        return string.Join("", decryptedGrid.Values);
+        return string.Concat(decryptedGrid.Values);
     }
 
     public static int[] GetEncryptSelectionOrder(string input) =>

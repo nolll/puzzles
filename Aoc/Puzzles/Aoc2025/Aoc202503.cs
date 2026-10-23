@@ -13,7 +13,7 @@ public class Aoc202503 : AocPuzzle
     public long Part2(string input) => Solve(input, 12);
     
     private static long Solve(string input, int batteryCount) => input.Split(LineBreaks.Single).Sum(o => GetJoltage(o, batteryCount));
-    private static long GetJoltage(string s, int batteryCount) => long.Parse(string.Join("", GetJoltageDigits(s, batteryCount)));
+    private static long GetJoltage(string s, int batteryCount) => long.Parse(string.Concat(GetJoltageDigits(s, batteryCount)));
 
     private static IEnumerable<char> GetJoltageDigits(string s, int batteryCount)
     { 

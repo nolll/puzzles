@@ -16,7 +16,7 @@ public class Euler062 : EulerPuzzle
         while (true)
         {
             var cube = (long)Math.Pow(n, 3);
-            var key = string.Join("", cube.ToString().Order());
+            var key = string.Concat(cube.ToString().Order());
             if (!cubes.TryAdd(key, [cube]))
                 cubes[key].Add(cube);
 

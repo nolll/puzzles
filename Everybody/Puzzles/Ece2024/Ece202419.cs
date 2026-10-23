@@ -37,7 +37,7 @@ public class Ece202419 : EverybodyEventPuzzle
         var extendedPermutation = ExtendPermutation(permutation, iterations);
         grid = ApplyPermutation(extendedPermutation, grid);
 
-        var print = string.Join("", grid.Select(o => string.Join("", o)));
+        var print = string.Concat(grid.Select(o => string.Concat(o)));
         return FindMessage(print);
     }
 

@@ -64,7 +64,7 @@ public class Aquaq19 : AquaqPuzzle
             if(optimized)
                 idsForCasheKey = idsForCasheKey.Take(200);
             
-            var cacheKey = string.Join("", idsForCasheKey);
+            var cacheKey = string.Concat(idsForCasheKey);
             if (seen.ContainsKey(cacheKey))
             {
                 var repeatLength = i - seen[cacheKey];

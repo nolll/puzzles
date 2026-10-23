@@ -22,7 +22,7 @@ public class Aoc201916 : AocPuzzle
             list = RunPhasePart1(list);
         }
 
-        return string.Join("", list)[..8];
+        return string.Concat(list)[..8];
     }
 
     private int[] RunPhasePart1(int[] inputList)
@@ -61,7 +61,7 @@ public class Aoc201916 : AocPuzzle
             list = RunPhasePart2(list);
         }
 
-        return string.Join("", list)[..8];
+        return string.Concat(list)[..8];
     }
 
     private static int[] RunPhasePart2(int[] inputList)

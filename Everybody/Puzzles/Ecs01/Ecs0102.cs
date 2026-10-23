@@ -110,7 +110,7 @@ public class Ecs0102 : EverybodyStoryPuzzle
             .OrderBy(o => o.SortOrder)
             .Select(o => o.Name);
 
-        return string.Join("", nodeNames);
+        return string.Concat(nodeNames);
     }
 }
 

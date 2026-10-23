@@ -171,7 +171,7 @@ public class Ece202416 : EverybodyEventPuzzle
         return wheels.Select(o => o.ToArray()).ToArray();
     }
 
-    private static int Score(IEnumerable<string> cats) => Score(string.Join("", cats.Select(o => $"{o[0]}{o[2]}")));
+    private static int Score(IEnumerable<string> cats) => Score(string.Concat(cats.Select(o => $"{o[0]}{o[2]}")));
     public static int Score(string s) => s.GroupBy(o => o).Select(o => o.Count() - 2).Where(o => o > 0).Sum();
 
     private enum FindMode

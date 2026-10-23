@@ -47,7 +47,7 @@ public class Aoc202312 : AocPuzzle
         if (groups.Length == 0)
             return pattern.Any(o => o == '#') ? 0 : 1;
 
-        var cacheKey = (string.Join("", pattern), string.Join(",", groups));
+        var cacheKey = (string.Concat(pattern), string.Join(",", groups));
         if (seen.TryGetValue(cacheKey, out var validCount))
             return validCount;
 

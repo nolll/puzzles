@@ -43,7 +43,7 @@ public class Aoc202510 : AocPuzzle
                 }
             }
             
-            if(string.Join("", state.Select(o => o ? '#' : '.')) == to)
+            if(string.Concat(state.Select(o => o ? '#' : '.')) == to)
                 yield return combination;
         }
     }
@@ -82,7 +82,7 @@ public class Aoc202510 : AocPuzzle
         var dict = new Dictionary<string, List<(int[] pattern, long cost)>>();
         foreach (var (pattern, cost) in patterns)
         {
-            var key = string.Join("", pattern.Select(o => o % 2 == 1 ? '#' : '.'));
+            var key = string.Concat(pattern.Select(o => o % 2 == 1 ? '#' : '.'));
             dict.TryAdd(key, []);
             dict[key].Add((pattern, cost));
         }
@@ -103,7 +103,7 @@ public class Aoc202510 : AocPuzzle
         }
 
         score = 1_000_000L;
-        var patternKey = string.Join("", goal.Select(o => o % 2 == 1 ? '#' : '.'));
+        var patternKey = string.Concat(goal.Select(o => o % 2 == 1 ? '#' : '.'));
         if (patterns.TryGetValue(patternKey, out var currentPatterns))
         {
             foreach (var (pattern, cost) in currentPatterns)

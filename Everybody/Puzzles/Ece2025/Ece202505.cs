@@ -44,7 +44,7 @@ public class Ece202505 : EverybodyEventPuzzle
         private Sword(int id, SwordSegment[] segments)
         {
             Id = id;
-            Quality = long.Parse(string.Join("", segments.Select(o => o.Spine)));
+            Quality = long.Parse(string.Concat(segments.Select(o => o.Spine)));
             Segments = segments;
         }
         

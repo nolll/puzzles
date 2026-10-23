@@ -20,7 +20,7 @@ public class Ece202407 : EverybodyEventPuzzle
             knights.Add(new Knight(parts[0], score));
         }
 
-        return string.Join("", knights.OrderByDescending(o => o.Score).Select(o => o.Name));
+        return string.Concat(knights.OrderByDescending(o => o.Score).Select(o => o.Name));
     }
 
     [Puzzle("f315ce3865ed329f4eee3ec0d64bb032")]
@@ -46,7 +46,7 @@ public class Ece202407 : EverybodyEventPuzzle
             knights.Add(new Knight(parts[0], score));
         }
 
-        return string.Join("", knights.OrderByDescending(o => o.Score).Select(o => o.Name));
+        return string.Concat(knights.OrderByDescending(o => o.Score).Select(o => o.Name));
     }
 
     private static int SolvePart3(string trackString, string input)

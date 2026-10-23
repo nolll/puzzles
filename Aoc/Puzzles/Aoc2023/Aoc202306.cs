@@ -29,8 +29,8 @@ public class Aoc202306 : AocPuzzle
     public long Part2(string input)
     {
         var lines = input.Split(LineBreaks.Single);
-        var time = long.Parse(string.Join("", lines.First().Split(":").Last().Split(' ').Where(o => o.Length > 0)));
-        var targetDistance = long.Parse(string.Join("", lines.Last().Split(":").Last().Split(' ').Where(o => o.Length > 0)));
+        var time = long.Parse(string.Concat(lines.First().Split(":").Last().Split(' ').Where(o => o.Length > 0)));
+        var targetDistance = long.Parse(string.Concat(lines.Last().Split(":").Last().Split(' ').Where(o => o.Length > 0)));
 
         return BoatRace(time, targetDistance);
     }

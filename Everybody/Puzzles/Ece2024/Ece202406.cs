@@ -15,8 +15,8 @@ public class Ece202406 : EverybodyEventPuzzle
     [Puzzle("c3544a49e37c3dfedc6dec99596402da")]
     public string Part3(string input) => SolvePart2And3(input);
 
-    private static string SolvePart1(string input) => string.Join("", Solve(input));
-    private static string SolvePart2And3(string input) => string.Join("", Solve(input).Select(o => o[0]));
+    private static string SolvePart1(string input) => string.Concat(Solve(input));
+    private static string SolvePart2And3(string input) => string.Concat(Solve(input).Select(o => o[0]));
 
     private static string[] Solve(string input)
     {

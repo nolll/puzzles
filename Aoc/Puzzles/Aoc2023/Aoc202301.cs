@@ -6,8 +6,7 @@ namespace Pzl.Aoc.Puzzles.Aoc2023;
 [Name("Trebuchet?!")]
 public class Aoc202301 : AocPuzzle
 {
-    private static readonly List<string> Words =
-        ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    private static readonly List<string> Words = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
     [Puzzle("93e7c44a86bd9d03f7156e6fc3ed61c8")]
     public int Part1(string input) => input.Split(LineBreaks.Single)
@@ -20,17 +19,10 @@ public class Aoc202301 : AocPuzzle
         .Select(FindCalibrationNumber)
         .Sum();
     
-    private static int FindCalibrationNumber(string input) => int.Parse($"{FindFirstDigit(input)}{FindLastDigit(input)}");
+    private static int FindCalibrationNumber(string input) => int.Parse(string.Concat(FindFirstDigit(input), FindLastDigit(input)));
 
-    private static string ReplaceStringDigits(string s)
-    {
-        for (var i = 0; i < Words.Count; i++)
-        {
-            s = ReplaceWord(s, i + 1);
-        }
-
-        return s;
-    }
+    private static string ReplaceStringDigits(string s) => 
+        Enumerable.Range(0, Words.Count).Aggregate(s, (current, i) => ReplaceWord(current, i + 1));
 
     private static string ReplaceWord(string s, int digit)
     {
@@ -38,7 +30,6 @@ public class Aoc202301 : AocPuzzle
         return s.Replace(word, $"{word}{digit}{word}");
     }
 
-    private static int FindFirstDigit(string input) => int.Parse(input.ToCharArray().First(IsDigit).ToString());
-    private static int FindLastDigit(string input) => int.Parse(input.ToCharArray().Last(IsDigit).ToString());
-    private static bool IsDigit(char c) => int.TryParse(c.ToString(), out _);
+    private static int FindFirstDigit(string input) => int.Parse(input.First(char.IsDigit).ToString());
+    private static int FindLastDigit(string input) => int.Parse(input.Last(char.IsDigit).ToString());
 }

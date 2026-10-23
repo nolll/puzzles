@@ -13,18 +13,8 @@ public class Aoc202302Tests : PuzzleTest<Aoc202302>
                                  """;
 
     [Fact]
-    public void ValidGames()
-    {
-        var result = Aoc202302.PlayGames(Input);
-
-        result.ValidGames.Should().Be(8);
-    }
+    public void ValidGames() => Sut.Solve(Input).ValidGames.Should().Be(8);
 
     [Fact]
-    public void GamePower()
-    {
-        var result = Aoc202302.PlayGames(Input);
-
-        result.GamePower.Should().Be(2286);
-    }
+    public void GamePower() => Sut.Solve(Input).GamePower.Should().Be(2286);
 }

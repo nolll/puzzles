@@ -6,20 +6,13 @@ namespace Pzl.Aoc.Puzzles.Aoc2023;
 [Name("Cube Conundrum")]
 public class Aoc202302 : AocPuzzle
 {
-    private static readonly Dictionary<string, int> ValidGameCubeCounts = new()
-    {
-        { "red", 12 },
-        { "green", 13 },
-        { "blue", 14 }
-    };
-
     [Puzzle("70e2be8af168fc9534f8384b244c60f7")]
-    public int Part1(string input) => PlayGames(input).ValidGames;
+    public int Part1(string input) => Solve(input).ValidGames;
     
     [Puzzle("45825cd43460cbc76a940d6eb06ebc6b")]
-    public int Part2(string input) => PlayGames(input).GamePower;
+    public int Part2(string input) => Solve(input).GamePower;
 
-    public static TotalResult PlayGames(string input)
+    public TotalResult Solve(string input)
     {
         var games = input.Split(LineBreaks.Single);
         var results = games.Select(PlayGame).ToList();
@@ -29,19 +22,14 @@ public class Aoc202302 : AocPuzzle
         return new TotalResult(validGameSum, totalPower);
     }
 
-    private static GameResult PlayGame(string game)
+    private static GameResult PlayGame(string input)
     {
         var isValid = true;
-        var gameParts = game.Split(':').ToList();
+        var gameParts = input.Split(':').ToList();
         var gameId = int.Parse(gameParts[0].Split(' ')[1]);
         var sets = gameParts[1].Trim().Split(';');
 
-        var maxCubeCounts = new Dictionary<string, int>
-        {
-            { "red", 0 },
-            { "green", 0 },
-            { "blue", 0 }
-        };
+        var maxCubeCounts = CreateCubeCounts();
 
         foreach (var set in sets)
         {
@@ -62,6 +50,16 @@ public class Aoc202302 : AocPuzzle
         var gamePower = maxCubeCounts.Values.Aggregate(1, (a, b) => a * b);
         return new GameResult(gameId, isValid, gamePower);
     }
+
+    private static Dictionary<string, int> CreateCubeCounts() => CreateCubeCounts(0, 0, 0);
+    private static readonly Dictionary<string, int> ValidGameCubeCounts = CreateCubeCounts(12, 13, 14);
+    
+    private static Dictionary<string, int> CreateCubeCounts(int red, int green, int blue) => new()
+    {
+        { "red", red },
+        { "green", green },
+        { "blue", blue }
+    };
 
     private record GameResult(int GameId, bool IsValid, int GamePower);
     public record TotalResult(int ValidGames, int GamePower);

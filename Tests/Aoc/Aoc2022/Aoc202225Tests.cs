@@ -5,14 +5,8 @@ namespace Tests.Aoc.Aoc2022;
 public class Aoc202225Tests : PuzzleTest<Aoc202225>
 {
     [Fact]
-    public void Part1()
-    {
-        var sut = new Aoc202225();
-        var result = sut.Part1(Input);
+    public void Part1() => Sut.Part1(Input).Should().Be("2=-1=0");
 
-        result.Should().Be("2=-1=0");
-    }
-    
     [Theory]
     [InlineData("1=-0-2", 1747)]
     [InlineData("12111", 906)]
@@ -27,12 +21,7 @@ public class Aoc202225Tests : PuzzleTest<Aoc202225>
     [InlineData("12", 7)]
     [InlineData("1=", 3)]
     [InlineData("122", 37)]
-    public void ToDecimal(string input, int expected)
-    {
-        var result = Aoc202225.SnafuConverter.ToNumber(input);
-
-        result.Should().Be(expected);
-    }
+    public void ToDecimal(string input, int expected) => Sut.ToNumber(input).Should().Be(expected);
 
     [Theory]
     [InlineData(1747, "1=-0-2")]
@@ -48,12 +37,7 @@ public class Aoc202225Tests : PuzzleTest<Aoc202225>
     [InlineData(7, "12")]
     [InlineData(3, "1=")]
     [InlineData(37, "122")]
-    public void ToSnafu(int input, string expected)
-    {
-        var result = Aoc202225.SnafuConverter.ToSnafu(input);
-
-        result.Should().Be(expected);
-    }
+    public void ToSnafu(int input, string expected) => Sut.ToSnafu(input).Should().Be(expected);
 
     private const string Input = """
                                  1=-0-2

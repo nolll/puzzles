@@ -7,100 +7,85 @@ namespace Pzl.Aoc.Puzzles.Aoc2022;
 public class Aoc202225 : AocPuzzle
 {
     [Puzzle("793d1443281edc7d7e628e25d8aa07a4")]
-    public string Part1(string input) => 
-        SnafuConverter.ToSnafu(input.Split(LineBreaks.Single).Select(SnafuConverter.ToNumber).Sum());
-    
-    public static class SnafuConverter
+    public string Part1(string input) => ToSnafu(input.Split(LineBreaks.Single).Select(ToNumber).Sum());
+
+    public long ToNumber(string input)
     {
-        public static long ToNumber(string input)
+        long sum = 0;
+        long multiplier = 1;
+        for (var i = input.Length - 1; i >= 0; i--)
         {
-            long sum = 0;
-            long multiplier = 1;
-            for (var i = input.Length - 1; i >= 0; i--)
-            {
-                sum += multiplier * ToNumber(input[i]);
-                multiplier *= 5;
-            }
-
-            return sum;
+            sum += multiplier * ToNumber(input[i]);
+            multiplier *= 5;
         }
 
-        private static long ToNumber(char input)
+        return sum;
+    }
+    
+    private static long ToNumber(char input) => input switch
+    {
+        '2' => 2,
+        '1' => 1,
+        '-' => -1,
+        '=' => -2,
+        _ => 0
+    };
+
+    public string ToSnafu(long input)
+    {
+        var power = FindUpperPower(input);
+        var values = new long[power + 1];
+        for (var i = 0; i < values.Length; i++) 
+            values[i] = 2;
+
+        var pos = 0;
+        while (Sum(values) > input)
         {
-            return input switch
-            {
-                '2' => 2,
-                '1' => 1,
-                '-' => -1,
-                '=' => -2,
-                _ => 0
-            };
+            values[pos]--;
+
+            if (values[pos] >= -2 && Sum(values) >= input)
+                continue;
+            
+            values[pos]++;
+            pos++;
+            power--;
         }
 
-        public static string ToSnafu(long input)
+        return ToSnafu(values);
+    }
+
+    private static string ToSnafu(long[] values) => string.Concat(values.Select(ToSnafuChar)).TrimStart('0');
+    
+    private static char ToSnafuChar(long value) => value switch
+    {
+        2 => '2',
+        1 => '1',
+        -1 => '-',
+        -2 => '=',
+        _ => '0'
+    };
+
+    private static long Sum(long[] values)
+    {
+        long sum = 0;
+        for (var i = 0; i < values.Length; i++)
         {
-            var power = FindUpperPower(input);
-            var values = new long[power + 1];
-            for (var i = 0; i < values.Length; i++)
-            {
-                values[i] = 2;
-            }
-
-            var pos = 0;
-            while (Sum(values) > input)
-            {
-                values[pos]--;
-
-                if (values[pos] < -2 || Sum(values) < input)
-                {
-                    values[pos]++;
-                    pos++;
-                    power--;
-                }
-            }
-
-            return ToSnafu(values);
+            var multiplier = (long)Math.Pow(5, values.Length - i - 1);
+            sum += values[i] * multiplier;
         }
 
-        private static string ToSnafu(long[] values)
+        return sum;
+    }
+
+    private static int FindUpperPower(long num)
+    {
+        var power = 0;
+        while (true)
         {
-            return string.Join("", values.Select(ToSnafuChar)).TrimStart('0');
-        }
+            if (num < Math.Pow(5, power) * 2)
+                return power;
 
-        private static char ToSnafuChar(long value)
-        {
-            return value switch
-            {
-                2 => '2',
-                1 => '1',
-                -1 => '-',
-                -2 => '=',
-                _ => '0'
-            };
-        }
-
-        private static long Sum(long[] values)
-        {
-            long sum = 0;
-            for (var i = 0; i < values.Length; i++)
-            {
-                var multiplier = (long)Math.Pow(5, values.Length - i - 1);
-                sum += values[i] * multiplier;
-            }
-
-            return sum;
-        }
-
-        private static int FindUpperPower(long num)
-        {
-            var power = 0;
-            while (true)
-            {
-                if (num < Math.Pow(5, power) * 2)
-                    return power;
-
-                power++;
-            }
+            power++;
         }
     }
 }

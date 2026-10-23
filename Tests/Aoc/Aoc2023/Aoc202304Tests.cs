@@ -14,11 +14,8 @@ public class Aoc202304Tests : PuzzleTest<Aoc202304>
                                  """;
 
     [Fact]
-    public void ScratchCards()
-    {
-        var result = Aoc202304.FlipThroughCards(Input);
+    public void Part1() => Sut.Part1(Input).Should().Be(13);
 
-        result.Score.Should().Be(13);
-        result.CardCount.Should().Be(30);
-    }
+    [Fact]
+    public void Part2() => Sut.Part2(Input).Should().Be(30);
 }

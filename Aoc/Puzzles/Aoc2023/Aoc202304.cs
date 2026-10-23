@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023;
@@ -12,7 +13,7 @@ public class Aoc202304 : AocPuzzle
     [Puzzle("283e4ad08baa8b2611e44898628a8363")]
     public int Part2(string input) => FlipThroughCards(input).CardCount;
 
-    public static (int Score, int CardCount) FlipThroughCards(string input)
+    private static (int Score, int CardCount) FlipThroughCards(string input)
     {
         var lines = input.Split(LineBreaks.Single);
         var totalScore = 0;
@@ -20,23 +21,20 @@ public class Aoc202304 : AocPuzzle
         var index = 1;
         foreach (var line in lines)
         {
-            var parts = line.Replace("  ", " ").Split(':', '|');
-            var winning = ParseCards(parts[1]);
-            var mine = ParseCards(parts[2]);
+            var parts = line.Split(':', '|');
+            var winning = Numbers.IntsFromString(parts[1]);
+            var mine = Numbers.IntsFromString(parts[2]);
 
             var myCards = mine.ToHashSet();
             var score = 0;
             var matchCount = 0;
             foreach (var winningCard in winning)
             {
-                if (myCards.Contains(winningCard))
-                {
-                    matchCount++;
-                    if (score == 0)
-                        score = 1;
-                    else
-                        score *= 2;
-                }
+                if (!myCards.Contains(winningCard))
+                    continue;
+                
+                matchCount++;
+                score = score == 0 ? 1 : score * 2;
             }
 
             totalScore += score;
@@ -44,24 +42,9 @@ public class Aoc202304 : AocPuzzle
             index++;
         }
 
-        var cardCount = cards.Keys.Sum(key => GetScore(cards, key));
-
-        return (totalScore, cardCount);
+        return (totalScore, cards.Keys.Sum(key => GetScore(cards, key)));
     }
 
-    private static IEnumerable<int> ParseCards(string s) => 
-        s.Trim().Split(' ').Select(o => int.Parse(o.Trim()));
-
-    private static int GetScore(Dictionary<int, int> cards, int cardKey)
-    {
-        var wins = cards[cardKey];
-        var cardCount = 1;
-        for (var i = 0; i < wins; i++)
-        {
-            var nextKey = cardKey + i + 1;
-            cardCount += GetScore(cards, nextKey);
-        }
-
-        return cardCount;
-    }
+    private static int GetScore(Dictionary<int, int> cards, int cardKey) => 
+        Enumerable.Range(0, cards[cardKey]).Sum(i => GetScore(cards, cardKey + i + 1)) + 1;
 }

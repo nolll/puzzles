@@ -17,23 +17,14 @@ public class Aoc202223 : AocPuzzle
     private static readonly (int x, int y) NorthWest = (-1, -1);
 
     [Puzzle("b2078a7c2a582e68796f55a71f1fe1cd")]
-    public int Part1(string input)
-    {
-        var (emptyCount, _) = Solve(input, 10);
-        return emptyCount;
-    }
+    public int Part1(string input) => Solve(input, 10).EmptyCount;
 
     [Puzzle("b4b9f7dae4709930cd73d70f45eac0ae")]
-    public int Part2(string input)
-    {
-        var (_, endRound) = Solve(input);
-        return endRound;
-    }
-    
-    public (int emptyCount, int endRound) Solve(string input, int rounds = int.MaxValue)
+    public int Part2(string input) => Solve(input).EndRound;
+
+    public (int EmptyCount, int EndRound) Solve(string input, int rounds = int.MaxValue)
     {
         var elves = ParseElves(input);
-
         var startDeltaIndex = 0;
         var round = 0;
 
@@ -72,7 +63,7 @@ public class Aoc202223 : AocPuzzle
                 }
             }
 
-            if (!targets.Any())
+            if (targets.Count == 0)
             {
                 round++;
                 break;
@@ -94,16 +85,9 @@ public class Aoc202223 : AocPuzzle
             round++;
         }
 
-        var minX = elves.Select(o => o.X).Min();
-        var minY = elves.Select(o => o.Y).Min();
-        var maxX = elves.Select(o => o.X).Max();
-        var maxY = elves.Select(o => o.Y).Max();
-        var elfCount = elves.Count;
-
-        var width = maxX - minX + 1;
-        var height = maxY - minY + 1;
-        var area = width * height;
-        var emptyCount = area - elfCount;
+        var width = elves.Max(o => o.X) - elves.Min(o => o.X) + 1;
+        var height = elves.Max(o => o.Y) - elves.Min(o => o.Y) + 1;
+        var emptyCount = width * height - elves.Count;
 
         return (emptyCount, round);
     }

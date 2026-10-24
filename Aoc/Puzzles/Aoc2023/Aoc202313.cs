@@ -13,7 +13,7 @@ public class Aoc202313 : AocPuzzle
     [Puzzle("32a6556a3bdfe559c36bdafb480740ef")]
     public int Part2(string input) => input.Trim().Split(LineBreaks.Double).Sum(CountSmudgedReflections);
 
-    public static int CountReflections(string s)
+    public int CountReflections(string s)
     {
         var grid = GridBuilder.BuildCharGrid(s);
         return CountReflections(grid, -1);
@@ -28,7 +28,7 @@ public class Aoc202313 : AocPuzzle
         return Columns(grid, orig);
     }
 
-    public static int CountSmudgedReflections(string s)
+    public int CountSmudgedReflections(string s)
     {
         var grid = GridBuilder.BuildCharGrid(s);
         var orig = CountReflections(grid, -1);

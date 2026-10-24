@@ -17,9 +17,7 @@ public class Aoc202313Tests : PuzzleTest<Aoc202313>
                              #.#.##.#.
                              """;
 
-        var result = Aoc202313.CountReflections(input);
-
-        result.Should().Be(5);
+        Sut.CountReflections(input).Should().Be(5);
     }
 
     [Fact]
@@ -35,9 +33,7 @@ public class Aoc202313Tests : PuzzleTest<Aoc202313>
                              #...##..#
                              """;
 
-        var result = Aoc202313.CountReflections(input);
-
-        result.Should().Be(600);
+        Sut.CountReflections(input).Should().Be(600);
     }
 
     [Fact]
@@ -52,10 +48,8 @@ public class Aoc202313Tests : PuzzleTest<Aoc202313>
                              ##..##.##
                              #...##.##
                              """;
-
-        var result = Aoc202313.CountReflections(input);
-
-        result.Should().Be(8);
+        
+        Sut.CountReflections(input).Should().Be(8);
     }
     
     [Fact]
@@ -71,9 +65,7 @@ public class Aoc202313Tests : PuzzleTest<Aoc202313>
                              #.#.##.#.
                              """;
 
-        var result = Aoc202313.CountSmudgedReflections(input);
-
-        result.Should().Be(300);
+        Sut.CountSmudgedReflections(input).Should().Be(300);
     }
 
     [Fact]
@@ -89,9 +81,7 @@ public class Aoc202313Tests : PuzzleTest<Aoc202313>
                              #....#..#
                              """;
 
-        var result = Aoc202313.CountSmudgedReflections(input);
-
-        result.Should().Be(100);
+        Sut.CountSmudgedReflections(input).Should().Be(100);
     }
 
     [Fact]
@@ -115,9 +105,7 @@ public class Aoc202313Tests : PuzzleTest<Aoc202313>
                              #....#..#
                              """;
 
-        var result = new Aoc202313().Part1(input);
-
-        result.Should().Be(405);
+        Sut.Part1(input).Should().Be(405);
     }
 
     [Fact]
@@ -141,8 +129,6 @@ public class Aoc202313Tests : PuzzleTest<Aoc202313>
                              #....#..#
                              """;
 
-        var result = new Aoc202313().Part2(input);
-
-        result.Should().Be(400);
+        Sut.Part2(input).Should().Be(400);
     }
 }

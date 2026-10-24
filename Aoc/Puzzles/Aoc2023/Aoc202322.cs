@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023;
@@ -13,10 +14,10 @@ public class Aoc202322 : AocPuzzle
     [Puzzle("81d92f2381d8798f847dd6eb9e0ea6b2")]
     public int Part2(string input) => CountTotalRemovedBricks(input);
 
-    public static int CountBricksThatCanBeRemoved(string s) => 
+    public int CountBricksThatCanBeRemoved(string s) => 
         GetBricksWithInfo(GetSettledBricks(s)).Count(o => o.CanBeRemoved);
 
-    public static int CountTotalRemovedBricks(string s)
+    public int CountTotalRemovedBricks(string s)
     {
         var bricks = GetBricksWithInfo(GetSettledBricks(s));
         var dict = bricks.ToDictionary(k => k.Id, v => v);
@@ -26,24 +27,20 @@ public class Aoc202322 : AocPuzzle
         {
             var queue = new Queue<int>();
             var removed = new HashSet<int> { removedBrick.Id };
-            foreach (var supporting in removedBrick.Supporting)
-            {
+            foreach (var supporting in removedBrick.Supporting) 
                 queue.Enqueue(supporting);
-            }
 
             while (queue.Count > 0)
             {
                 var id = queue.Dequeue();
                 var brick = dict[id];
-                if (brick.SupportedBy.All(removed.Contains))
-                {
-                    removed.Add(id);
+                if (!brick.SupportedBy.All(removed.Contains))
+                    continue;
+                
+                removed.Add(id);
 
-                    foreach (var supportedBrick in brick.Supporting)
-                    {
-                        queue.Enqueue(supportedBrick);
-                    }
-                }
+                foreach (var supportedBrick in brick.Supporting) 
+                    queue.Enqueue(supportedBrick);
             }
 
             totalRemoved += removed.Count - 1;
@@ -113,15 +110,13 @@ public class Aoc202322 : AocPuzzle
     private static Brick ParseBrick(string s, int index)
     {
         var parts = s.Split('~');
-        var bottom = ParseAddress(parts[0]);
-        var top = ParseAddress(parts[1]);
-        return new Brick(index, bottom, top);
+        return new Brick(index, ParseAddress(parts[0]), ParseAddress(parts[1]));
     }
 
     private static Coord3d ParseAddress(string s)
     {
-        var parts = s.Split(',').Select(int.Parse).ToArray();
-        return new Coord3d(parts[0], parts[1], parts[2]);
+        var (x, y, z) = Numbers.IntsFromString(s);
+        return new Coord3d(x, y, z);
     }
     
     internal class Brick(int id, Coord3d bottom, Coord3d top)
@@ -148,6 +143,6 @@ public class Aoc202322 : AocPuzzle
         }
 
         private static bool IsOverlapping(int fromA, int toA, int fromB, int toB)
-            => (fromA <= toB && toA >= fromB);
+            => fromA <= toB && toA >= fromB;
     }
 }

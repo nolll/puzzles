@@ -16,9 +16,7 @@ public class Aoc202310Tests : PuzzleTest<Aoc202310>
                              .....
                              """;
 
-        var result = Aoc202310.FarthestPoint(input);
-
-        result.Should().Be(4);
+        Aoc202310.FarthestPoint(input).Should().Be(4);
     }
 
     [Fact]
@@ -47,11 +45,7 @@ public class Aoc202310Tests : PuzzleTest<Aoc202310>
                              ............
                              """;
 
-        var grid = GridBuilder.BuildCharGrid(input);
-
-        var result = Aoc202310.EnlargeGrid(grid);
-
-        result.Print().Should().Be(expected);
+        Aoc202310.EnlargeGrid(GridBuilder.BuildCharGrid(input)).Print().Should().Be(expected);
     }
 
     [Fact]
@@ -69,9 +63,7 @@ public class Aoc202310Tests : PuzzleTest<Aoc202310>
                              ...........
                              """;
 
-        var result = Aoc202310.EnclosedTileCount(input);
-
-        result.Should().Be(4);
+        Aoc202310.EnclosedTileCount(input).Should().Be(4);
     }
 
     [Fact]
@@ -89,9 +81,7 @@ public class Aoc202310Tests : PuzzleTest<Aoc202310>
                              ..........
                              """;
 
-        var result = Aoc202310.EnclosedTileCount(input);
-
-        result.Should().Be(4);
+        Aoc202310.EnclosedTileCount(input).Should().Be(4);
     }
     
     [Fact]
@@ -110,9 +100,7 @@ public class Aoc202310Tests : PuzzleTest<Aoc202310>
                              ....L---J.LJ.LJLJ...
                              """;
 
-        var result = Aoc202310.EnclosedTileCount(input);
-
-        result.Should().Be(8);
+        Aoc202310.EnclosedTileCount(input).Should().Be(8);
     }
 
     [Fact]
@@ -131,8 +119,6 @@ public class Aoc202310Tests : PuzzleTest<Aoc202310>
                              L7JLJL-JLJLJL--JLJ.L
                              """;
 
-        var result = Aoc202310.EnclosedTileCount(input);
-
-        result.Should().Be(10);
+        Aoc202310.EnclosedTileCount(input).Should().Be(10);
     }
 }

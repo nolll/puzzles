@@ -25,16 +25,10 @@ public class Aoc202310 : AocPuzzle
 
     private static char GetStartPointChar(Grid<char> grid, Coord startPoint)
     {
-        var (x, y) = startPoint;
-        var top = grid.ReadValueAt(new Coord(x, y - 1));
-        var right = grid.ReadValueAt(new Coord(x + 1, y));
-        var bottom = grid.ReadValueAt(new Coord(x, y + 1));
-        var left = grid.ReadValueAt(new Coord(x - 1, y));
-
-        var enterFromTop = top is 'F' or '|' or '7';
-        var enterFromRight = right is 'J' or '-' or '7';
-        var enterFromBottom = bottom is 'J' or '|' or 'L';
-        var enterFromLeft = left is 'F' or '-' or 'L';
+        var enterFromTop = grid.ReadValueAt(startPoint.Up()) is 'F' or '|' or '7';
+        var enterFromRight = grid.ReadValueAt(startPoint.Right()) is 'J' or '-' or '7';
+        var enterFromBottom = grid.ReadValueAt(startPoint.Down()) is 'J' or '|' or 'L';
+        var enterFromLeft = grid.ReadValueAt(startPoint.Left()) is 'F' or '-' or 'L';
 
         if (enterFromTop && enterFromRight)
             return 'L';
@@ -58,10 +52,8 @@ public class Aoc202310 : AocPuzzle
         var loopPath = GetLoop(grid, startPoint).ToHashSet();
         var otherCoords = grid.Coords.Where(o => !loopPath.Contains(o)).ToList();
 
-        foreach (var otherCoord in otherCoords)
-        {
+        foreach (var otherCoord in otherCoords) 
             grid.WriteValueAt(otherCoord, '.');
-        }
 
         var enlargedGrid = EnlargeGrid(grid);
         var target = new Coord(enlargedGrid.XMax, enlargedGrid.YMax);
@@ -114,12 +106,11 @@ public class Aoc202310 : AocPuzzle
     private static IEnumerable<Coord> FindConnections(Grid<char> grid, Coord currentPoint)
     {
         var currentPipePart = grid.ReadValueAt(currentPoint);
-
-        var (x, y) = currentPoint;
-        var top = new Coord(x, y - 1);
-        var right = new Coord(x + 1, y);
-        var bottom = new Coord(x, y + 1);
-        var left = new Coord(x - 1, y);
+        
+        var top = currentPoint.Up();
+        var right = currentPoint.Right();
+        var bottom = currentPoint.Down();
+        var left = currentPoint.Left();
 
         return currentPipePart switch
         {
@@ -128,7 +119,6 @@ public class Aoc202310 : AocPuzzle
             '7' => [bottom, left],
             'J' => [top, left],
             'L' => [top, right],
-            'F' => [right, bottom],
             _ => [right, bottom]
         };
     }
@@ -138,8 +128,6 @@ public class Aoc202310 : AocPuzzle
         var enlarged = new Grid<char>(grid.Width * 2 + 2, grid.Height * 2 + 2, '.');
         foreach (var coord in grid.Coords)
         {
-            var x = coord.X * 2 + 1;
-            var y = coord.Y * 2 + 1;
             var v = grid.ReadValueAt(coord);
             var downValue = v is '|' or 'F' or '7'
                 ? '|'
@@ -147,10 +135,11 @@ public class Aoc202310 : AocPuzzle
             var rightValue = v is '-' or 'F' or 'L'
                 ? '-'
                 : '.';
-            enlarged.WriteValueAt(x, y, v);
-            enlarged.WriteValueAt(x + 1, y, rightValue);
-            enlarged.WriteValueAt(x, y + 1, downValue);
-            enlarged.WriteValueAt(x + 1, y + 1, '.');
+            var newCoord = new Coord(coord.X * 2 + 1, coord.Y * 2 + 1);
+            enlarged.WriteValueAt(newCoord, v);
+            enlarged.WriteValueAt(newCoord.Right(), rightValue);
+            enlarged.WriteValueAt(newCoord.Down(), downValue);
+            enlarged.WriteValueAt(newCoord.Right().Down(), '.');
         }
 
         return enlarged;

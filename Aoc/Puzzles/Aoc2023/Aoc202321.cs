@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.HashSets;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023;
 
@@ -12,7 +13,7 @@ public class Aoc202321 : AocPuzzle
     [Puzzle("82eccc3aebc6a8cca12ce692d9765520")]
     public long Part2(string input) => CountPositionsAfterMany(input);
 
-    public static long CountPositionsAfter64(string s, int steps = 64)
+    public long CountPositionsAfter64(string s, int steps = 64)
     {
         var grid = GridBuilder.BuildCharGrid(s);
         var start = grid.FindCoords('S').First();
@@ -20,7 +21,7 @@ public class Aoc202321 : AocPuzzle
         return CountPositionsAfter(grid, start, steps);
     }
 
-    public static long CountPositionsAfterMany(string s)
+    private static long CountPositionsAfterMany(string s)
     {
         var grid = GridBuilder.BuildCharGrid(s);
         var start = grid.FindCoords('S').First();
@@ -82,14 +83,7 @@ public class Aoc202321 : AocPuzzle
             var newLit = new HashSet<Coord>();
             foreach (var litCoord in lit)
             {
-                var allAdjacent = grid.OrthogonalAdjacentCoordsTo(litCoord);
-                foreach (var a in allAdjacent)
-                {
-                    if (grid.ReadValueAt(a) != '#')
-                    {
-                        newLit.Add(a);
-                    }
-                }
+                newLit.AddRange(grid.OrthogonalAdjacentCoordsTo(litCoord).Where(o => grid.ReadValueAt(o) != '#'));
             }
 
             lit = newLit;

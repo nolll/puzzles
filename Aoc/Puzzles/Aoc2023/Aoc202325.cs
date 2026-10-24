@@ -16,10 +16,8 @@ public class Aoc202325 : AocPuzzle
         
         foreach (var start in components.Keys.ToList())
         {
-            var queue = new Queue<string>();
-            queue.Enqueue(start);
-            var seen = new HashSet<string>();
-            seen.Add(start);
+            var queue = new Queue<string>([start]);
+            var seen = new HashSet<string>([start]);
             var prev = new Dictionary<string, string>();
 
             while (queue.Count > 0)
@@ -61,10 +59,8 @@ public class Aoc202325 : AocPuzzle
         }
 
         var first = components.Keys.First();
-        var q = new Queue<string>();
-        q.Enqueue(first);
-        var group = new HashSet<string>();
-        group.Add(first);
+        var q = new Queue<string>([first]);
+        var group = new HashSet<string>([first]);
         while (q.Count > 0)
         {
             var node = q.Dequeue();
@@ -92,18 +88,14 @@ public class Aoc202325 : AocPuzzle
         {
             var parts = line.Split(": ");
             var compName = parts[0];
-            if (!components.ContainsKey(compName))
-            {
+            if (!components.ContainsKey(compName)) 
                 components.Add(compName, []);
-            }
 
             var connectedNames = parts[1].Split(' ');
             foreach (var connectedName in connectedNames)
             {
-                if (!components.ContainsKey(connectedName))
-                {
+                if (!components.ContainsKey(connectedName)) 
                     components.Add(connectedName, []);
-                }
 
                 components[connectedName].Add(compName);
                 components[compName].Add(connectedName);

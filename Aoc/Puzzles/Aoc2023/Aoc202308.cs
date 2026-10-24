@@ -47,23 +47,17 @@ public class Aoc202308 : AocPuzzle
         return stepCount;
     }
 
-    private static (char[] Directions, Dictionary<string, (string Left, string Right)> Connections)
-        ParseInput(string input)
+    private static (char[] Directions, Dictionary<string, (string Left, string Right)> Connections) ParseInput(string input)
     {
         var connections = new Dictionary<string, (string Left, string Right)>();
+        var (directionInput, connectionInput) = input.Split(LineBreaks.Double);
+        var directions = directionInput.ToCharArray();
 
-        var groups = input
-            .Split(LineBreaks.Double)
-            .Select(o => o.Split(LineBreaks.Single))
-            .ToList();
-        var directions = groups.First().First().ToCharArray();
-
-        foreach (var line in groups.Last())
+        foreach (var line in connectionInput.Split(LineBreaks.Single))
         {
-            var parts = line.Split(" = ");
-            var key = parts.First();
-            var destinations = parts.Last().TrimStart('(').TrimEnd(')').Split(", ").ToList();
-            connections.Add(key, (destinations.First(), destinations.Last()));
+            var (key, remaining) = line.Split(" = ");
+            var (left, right) = remaining.TrimStart('(').TrimEnd(')').Split(", ");
+            connections.Add(key, (left, right));
         }
 
         return (directions, connections);

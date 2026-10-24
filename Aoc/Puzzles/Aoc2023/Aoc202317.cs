@@ -13,8 +13,8 @@ public class Aoc202317 : AocPuzzle
     [Puzzle("fe2a6d3aee0dee95dae6c0880d11d812")]
     public int Part2(string input) => LeastHeatPart2(input);
 
-    public static int LeastHeatPart1(string s) => LeastHeat(s, 1, 3);
-    public static int LeastHeatPart2(string s) => LeastHeat(s, 4, 10);
+    public int LeastHeatPart1(string s) => LeastHeat(s, 1, 3);
+    public int LeastHeatPart2(string s) => LeastHeat(s, 4, 10);
 
     private static int LeastHeat(string s, int minStraightCount, int maxStraightCount)
     {
@@ -23,7 +23,7 @@ public class Aoc202317 : AocPuzzle
         var graph = BuildGraph(grid, minStraightCount, maxStraightCount);
         var sourceCoord = new Coord(grid.XMin, grid.XMin);
         var targetCoord = new Coord(grid.XMax, grid.YMax);
-        
+
         List<string> sources =
         [
             // start up and left instead of down and right to avoid special case for first move
@@ -41,21 +41,15 @@ public class Aoc202317 : AocPuzzle
         return sources.Select(source => Dijkstra.BestCost(graph, source, targets)).Min();
     }
 
-    private static List<GraphEdge> BuildGraph(Grid<int> grid, int minStraightCount, int maxStraightCount)
-    {
-        var graph = new List<GraphEdge>();
-        foreach (var coord in grid.Coords)
-        {
-            graph.AddRange(GetDirectionGraph(grid, coord, GridDirection.Up, minStraightCount, maxStraightCount));
-            graph.AddRange(GetDirectionGraph(grid, coord, GridDirection.Right, minStraightCount, maxStraightCount));
-            graph.AddRange(GetDirectionGraph(grid, coord, GridDirection.Down, minStraightCount, maxStraightCount));
-            graph.AddRange(GetDirectionGraph(grid, coord, GridDirection.Left, minStraightCount, maxStraightCount));
-        }
+    private static List<GraphEdge> BuildGraph(Grid<int> grid, int minStraightCount, int maxStraightCount) =>
+        [.. grid.Coords.SelectMany(o => GridDirection.All.SelectMany(p => GetDirectionGraph(grid, o, p, minStraightCount, maxStraightCount)))];
 
-        return graph;
-    }
-
-    private static IEnumerable<GraphEdge> GetDirectionGraph(Grid<int> grid, Coord coord, GridDirection forward, int minStraightCount, int maxStraightCount)
+    private static IEnumerable<GraphEdge> GetDirectionGraph(
+        Grid<int> grid
+        , Coord coord,
+        GridDirection forward,
+        int minStraightCount,
+        int maxStraightCount)
     {
         grid.MoveTo(coord);
         grid.TurnTo(forward);

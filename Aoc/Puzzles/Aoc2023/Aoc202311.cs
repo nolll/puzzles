@@ -7,12 +7,12 @@ namespace Pzl.Aoc.Puzzles.Aoc2023;
 public class Aoc202311 : AocPuzzle
 {
     [Puzzle("04a7795748b2f6d2e38898623e8ef01a")]
-    public long Part1(string input) => Distances(input, 1);
+    public long Part1(string input) => Solve(input, 1);
 
     [Puzzle("73bccfdcdd826f77dcdaf67bedecded9")]
-    public long Part2(string input) => Distances(input, 1_000_000);
+    public long Part2(string input) => Solve(input, 1_000_000);
 
-    public static long Distances(string input, long multiplier)
+    public long Solve(string input, long multiplier)
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var expandedXValues = ExpandX(grid, multiplier);
@@ -24,22 +24,9 @@ public class Aoc202311 : AocPuzzle
         return GetManhattanTotal(expandedCoords);
     }
 
-    private static long GetManhattanTotal(List<(long, long)> expandedCoords)
-    {
-        var total = 0L;
-        foreach (var a in expandedCoords)
-        {
-            foreach (var b in expandedCoords)
-            {
-                if (!a.Equals(b))
-                {
-                    total += ManhattanDistance(a, b);
-                }
-            }
-        }
-
-        return total / 2;
-    }
+    private static long GetManhattanTotal(List<(long, long)> expandedCoords) => expandedCoords
+        .Select((a, i) => expandedCoords.Skip(i + 1).Sum(b => ManhattanDistance(a, b)))
+        .Sum();
 
     private static List<long> ExpandX(Grid<char> grid, long multiplier)
     {

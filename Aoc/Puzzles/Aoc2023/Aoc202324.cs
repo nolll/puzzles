@@ -67,7 +67,7 @@ public class Aoc202324 : AocPuzzle
         return count;
     }
 
-    private long Solve(List<Hailstone> stones, int ai, int bi, int ci)
+    private static long Solve(List<Hailstone> stones, int ai, int bi, int ci)
     {
         double ax = stones[ai].X;
         double ay = stones[ai].Y;
@@ -167,35 +167,19 @@ public class Aoc202324 : AocPuzzle
             .Select((o, i) => new Hailstone(i, o[0], o[1], o[2], o[3], o[4], o[5]))
             .ToList();
     
-    public class Hailstone
+    public class Hailstone(long id, long x, long y, long z, long vx, long vy, long vz)
     {
-        public long Id { get; }
-    
-        public Double? Slope => Vx == 0 ? null : (double)Vy / Vx;
-        public long[] Position { get; }
-        public long[] Velocity { get; }
+        public long Id { get; } = id;
+
+        private Double? Slope => Vx == 0 ? null : (double)Vy / Vx;
+        private long[] Position { get; } = [x, y, z];
+        private long[] Velocity { get; } = [vx, vy, vz];
         public long X => Position[Dimension.X];
         public long Y => Position[Dimension.Y];
         public long Z => Position[Dimension.Z];
         public long Vx => Velocity[Dimension.X];
         public long Vy => Velocity[Dimension.Y];
         public long Vz => Velocity[Dimension.Z];
-
-        public Hailstone(long id, long x, long y, long z, long vx, long vy, long vz)
-        {
-            Id = id;
-            Position = [x, y, z];
-            Velocity = [vx, vy, vz];
-        }
-
-        public string Print()
-        {
-            return $"{X}, {Y}, {Z} @ {Vx}, {Vy}, {Vz}";
-        }
-
-        public Hailstone WithVelocityDelta(long dvx, long dvy) => new(Id, X, Y, Z, Vx + dvx, Vy + dvy, Vz);
-
-        public double TestZ(double time, long deltaVz) => (double)Z + time * ((double)Vz + deltaVz);
     
         public Intersection? IntersectsWith(Hailstone other)
         {
@@ -216,14 +200,13 @@ public class Aoc202324 : AocPuzzle
                 return null;
 
             var y = slope * (x - X) + Y;
-            return new Intersection(x, y, t1);
+            return new Intersection(x, y);
         }
     }
     
-    public class Intersection(double x, double y, double time)
+    public class Intersection(double x, double y)
     {
         public double X { get; } = x;
         public double Y { get; } = y;
-        public double Time { get; } = time;
     }
 }

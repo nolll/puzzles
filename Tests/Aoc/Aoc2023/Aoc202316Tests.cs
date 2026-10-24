@@ -4,45 +4,22 @@ namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202316Tests : PuzzleTest<Aoc202316>
 {
-    [Fact]
-    public void Part1()
-    {
-        const string input = """
-                             .|...\....
-                             |.-.\.....
-                             .....|-...
-                             ........|.
-                             ..........
-                             .........\
-                             ..../.\\..
-                             .-.-/..|..
-                             .|....-|.\
-                             ..//.|....
-                             """;
-
-        var result = Aoc202316.EnergizedCount(input);
-
-        result.Should().Be(46);
-    }
+    private const string Input = """
+                                 .|...\....
+                                 |.-.\.....
+                                 .....|-...
+                                 ........|.
+                                 ..........
+                                 .........\
+                                 ..../.\\..
+                                 .-.-/..|..
+                                 .|....-|.\
+                                 ..//.|....
+                                 """;
 
     [Fact]
-    public void Part2()
-    {
-        const string input = """
-                             .|...\....
-                             |.-.\.....
-                             .....|-...
-                             ........|.
-                             ..........
-                             .........\
-                             ..../.\\..
-                             .-.-/..|..
-                             .|....-|.\
-                             ..//.|....
-                             """;
+    public void Part1() => Sut.EnergizedCount(Input).Should().Be(46);
 
-        var result = Aoc202316.MostEnergy(input);
-
-        result.Should().Be(51);
-    }
+    [Fact]
+    public void Part2() => Sut.MostEnergy(Input).Should().Be(51);
 }

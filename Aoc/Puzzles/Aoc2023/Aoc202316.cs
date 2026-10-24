@@ -12,7 +12,7 @@ public class Aoc202316 : AocPuzzle
     [Puzzle("67135aadd3392286aed149b56d3e6417")]
     public int Part2(string input) => MostEnergy(input);
 
-    public static int MostEnergy(string s)
+    public int MostEnergy(string s)
     {
         var grid = GridBuilder.BuildCharGrid(s);
 
@@ -32,7 +32,7 @@ public class Aoc202316 : AocPuzzle
         return max;
     }
 
-    public static int EnergizedCount(string s) => 
+    public int EnergizedCount(string s) => 
         EnergizedCount(GridBuilder.BuildCharGrid(s), new Beam(new Coord(0, 0), GridDirection.Right));
 
     public static int EnergizedCount(Grid<char> grid, Beam start)
@@ -73,60 +73,54 @@ public class Aoc202316 : AocPuzzle
                 if (isHorizontal)
                 {
                     if(!grid.IsAtTopEdge())
-                        beams.Enqueue(new Beam(new Coord(grid.Coord.X, grid.Coord.Y - 1), GridDirection.Up));
+                        beams.Enqueue(new Beam(grid.Coord.Up(), GridDirection.Up));
                     if (!grid.IsAtBottomEdge())
-                        beams.Enqueue(new Beam(new Coord(grid.Coord.X, grid.Coord.Y + 1), GridDirection.Down));
+                        beams.Enqueue(new Beam(grid.Coord.Down(), GridDirection.Down));
                 }
                 else 
                 {
                     if (!grid.IsAtRightEdge())
-                        beams.Enqueue(new Beam(new Coord(grid.Coord.X + 1, grid.Coord.Y), GridDirection.Right));
+                        beams.Enqueue(new Beam(grid.Coord.Right(), GridDirection.Right));
                     if (!grid.IsAtLeftEdge())
-                        beams.Enqueue(new Beam(new Coord(grid.Coord.X - 1, grid.Coord.Y), GridDirection.Left));
+                        beams.Enqueue(new Beam(grid.Coord.Left(), GridDirection.Left));
                 }
             }
 
             if (isMirror)
             {
-                if (beam.Direction.Equals(GridDirection.Up))
-                {
-                    var direction = v == '\\' ? GridDirection.Left : GridDirection.Right;
-                    grid.TurnTo(direction);
-                    if (grid.TryMoveForward())
-                        beams.Enqueue(new Beam(grid.Coord, direction));
-                }
-                else if (beam.Direction.Equals(GridDirection.Right))
-                {
-                    var direction = v == '\\' ? GridDirection.Down : GridDirection.Up;
-                    grid.TurnTo(direction);
-                    if (grid.TryMoveForward())
-                        beams.Enqueue(new Beam(grid.Coord, direction));
-                }
-                else if (beam.Direction.Equals(GridDirection.Down))
-                {
-                    var direction = v == '\\' ? GridDirection.Right : GridDirection.Left;
-                    grid.TurnTo(direction);
-                    if (grid.TryMoveForward())
-                        beams.Enqueue(new Beam(grid.Coord, direction));
-                }
-                else
-                {
-                    var direction = v == '\\' ? GridDirection.Up : GridDirection.Down;
-                    grid.TurnTo(direction);
-                    if (grid.TryMoveForward())
-                        beams.Enqueue(new Beam(grid.Coord, direction));
-                }
+                var direction = GetNextDirection(beam.Direction, v);
+                grid.TurnTo(direction);
+                if (grid.TryMoveForward())
+                    beams.Enqueue(new Beam(grid.Coord, direction));
             }
         }
 
         var m = new Grid<char>(grid.Width, grid.Height, '.');
-        foreach (var l in lit)
-        {
+        foreach (var l in lit) 
             m.WriteValueAt(l, '#');
-        }
 
         return lit.Count;
     }
+
+    private static GridDirection GetNextDirection(GridDirection dir, char value) => value == '\\' 
+        ? GetNextDirectionForBackslashMirror(dir) 
+        : GetNextDirectionForSlashMirror(dir);
+
+    private static GridDirection GetNextDirectionForBackslashMirror(GridDirection dir) => dir.Name switch
+    {
+        DirectionName.Up => GridDirection.Left,
+        DirectionName.Right => GridDirection.Down,
+        DirectionName.Down => GridDirection.Right,
+        _ => GridDirection.Up,
+    };
+    
+    private static GridDirection GetNextDirectionForSlashMirror(GridDirection dir) => dir.Name switch
+    {
+        DirectionName.Up => GridDirection.Right,
+        DirectionName.Right => GridDirection.Up,
+        DirectionName.Down => GridDirection.Left,
+        _ => GridDirection.Down,
+    };
 }
 
 public record Beam(Coord Position, GridDirection Direction);

@@ -7,28 +7,30 @@ namespace Pzl.Aoc.Puzzles.Aoc2023;
 public class Aoc202307 : AocPuzzle
 {
     [Puzzle("eb6c5937d75bbb79d79d7e01895aacd4")]
-    public long Part1(string input) => Poker(input, new Part1PokerHandComparer());
-    
+    public long Part1(string input) => Solve(input, CreatePart1PokerHand);
+
     [Puzzle("dd9dfa02733e4b1eec0869e16d5b27ff")]
-    public long Part2(string input) => Poker(input, new Part2PokerHandComparer());
+    public long Part2(string input) => Solve(input, CreatePart2PokerHand);
 
-    private static long Poker(string input, PokerHandComparer comparer) => input.Split(LineBreaks.Single)
-        .Select(o => o.Split())
-        .Select(o => new PokerHand(o.First(), int.Parse(o.Last())))
-        .Order(comparer)
-        .Select((o, index) => o.Bid * (index + 1))
-        .Sum();
-    
-    public record PokerHand(string Hand, int Bid)
+    private static long Solve(string input, Func<string, int, PokerHand> createHand) => GetWinnings(ParseHands(input, createHand).Order());
+
+    private static PokerHand CreatePart1PokerHand(string hand, int bid) => new PokerHand(hand, bid);
+    private static PokerHand CreatePart2PokerHand(string hand, int bid) => new Part2PokerHand(hand, bid);
+
+    public record PokerHand(string Hand, int Bid) : IComparable<PokerHand>
     {
-        public HandRank Part1Rank => GetPart1Rank(Hand);
-        public HandRank Part2Rank => GetPart2Rank(Hand);
+        private HandRank? _rank;
+        public HandRank Rank => GetRank(Hand);
+        protected virtual int JackValue => 11;
 
-        public static HandRank GetPart1Rank(string hand)
+        protected virtual HandRank GetRank(string hand)
         {
+            if(_rank is not null)
+                return _rank.Value;
+            
             var d = hand.GroupBy(o => o).ToDictionary(k => k.Key, v => v.Count());
 
-            return d.Keys.Count switch
+            _rank = d.Keys.Count switch
             {
                 1 => HandRank.FiveOfAKind,
                 2 => d.Values.Max() == 4 ? HandRank.FourOfAKind : HandRank.FullHouse,
@@ -36,24 +38,70 @@ public class Aoc202307 : AocPuzzle
                 4 => HandRank.OnePair,
                 _ => HandRank.HighCard
             };
+            
+            return _rank.Value;
         }
 
-        public static HandRank GetPart2Rank(string hand)
+        private int GetCharValue(char c) => c switch
+        {
+            'A' => 14,
+            'K' => 13,
+            'Q' => 12,
+            'J' => JackValue,
+            'T' => 10,
+            '9' => 9,
+            '8' => 8,
+            '7' => 7,
+            '6' => 6,
+            '5' => 5,
+            '4' => 4,
+            '3' => 3,
+            _ => 2
+        };
+
+        public int CompareTo(PokerHand? b)
+        {
+            if (b is null)
+                return 0;
+
+            if (Rank != b.Rank)
+                return Rank.CompareTo(b.Rank);
+
+            return Compare(Hand, b.Hand);
+        }
+
+        private int Compare(string a, string b)
+        {
+            for (var i = 0; i < a.Length; i++)
+            {
+                if (a[i] != b[i])
+                    return GetCharValue(a[i]).CompareTo(GetCharValue(b[i]));
+            }
+
+            return 0;
+        }
+    }
+
+    public record Part2PokerHand(string Hand, int Bid) : PokerHand(Hand, Bid)
+    {
+        protected override int JackValue => 1;
+        
+        protected override HandRank GetRank(string hand)
         {
             var jackCount = hand.ToCharArray().Count(o => o == 'J');
 
             if (jackCount is 0 or 5)
-                return GetPart1Rank(hand);
+                return base.GetRank(hand);
 
             var mostCommonCard = hand.Replace("J", "")
                 .GroupBy(o => o)
                 .ToDictionary(k => k.Key, v => v.Count())
                 .MaxBy(o => o.Value).Key;
 
-            return GetPart1Rank(hand.Replace('J', mostCommonCard));
+            return base.GetRank(hand.Replace('J', mostCommonCard));
         }
     }
-    
+
     public enum HandRank
     {
         FiveOfAKind = 6,
@@ -64,68 +112,11 @@ public class Aoc202307 : AocPuzzle
         OnePair = 1,
         HighCard = 0
     }
-    
-    public class Part1PokerHandComparer() : PokerHandComparer(11)
-    {
-        public override int Compare(PokerHand? a, PokerHand? b)
-        {
-            if (a is null || b is null)
-                return 0;
 
-            if (a.Part1Rank != b.Part1Rank)
-                return a.Part1Rank.CompareTo(b.Part1Rank);
+    private static int GetWinnings(IOrderedEnumerable<PokerHand> orderedHands) =>
+        orderedHands.Select((o, index) => o.Bid * (index + 1)).Sum();
 
-            return Compare(a.Hand, b.Hand);
-        }
-    }
-    
-    public class Part2PokerHandComparer() : PokerHandComparer(1)
-    {
-        public override int Compare(PokerHand? a, PokerHand? b)
-        {
-            if (a is null || b is null)
-                return 0;
-
-            if (a.Part2Rank != b.Part2Rank)
-                return a.Part2Rank.CompareTo(b.Part2Rank);
-
-            return Compare(a.Hand, b.Hand);
-        }
-    }
-    
-    public abstract class PokerHandComparer(int jackValue) : IComparer<PokerHand>
-    {
-        private readonly Dictionary<char, int> _charValues = new()
-        {
-            { 'A', 14 },
-            { 'K', 13 },
-            { 'Q', 12 },
-            { 'J', jackValue },
-            { 'T', 10 },
-            { '9', 9 },
-            { '8', 8 },
-            { '7', 7 },
-            { '6', 6 },
-            { '5', 5 },
-            { '4', 4 },
-            { '3', 3 },
-            { '2', 2 },
-        };
-
-        protected int Compare(string a, string b)
-        {
-            var aArray = a.ToCharArray();
-            var bArray = b.ToCharArray();
-
-            for (var i = 0; i < a.Length; i++)
-            {
-                if (aArray[i] != bArray[i])
-                    return _charValues[aArray[i]].CompareTo(_charValues[bArray[i]]);
-            }
-
-            return 0;
-        }
-
-        public abstract int Compare(PokerHand? x, PokerHand? y);
-    }
+    private static IEnumerable<PokerHand> ParseHands(string input, Func<string, int, PokerHand> createHand) => input.Split(LineBreaks.Single)
+        .Select(o => o.Split())
+        .Select(o => createHand(o.First(), int.Parse(o.Last())));
 }

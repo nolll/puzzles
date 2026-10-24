@@ -4,43 +4,25 @@ namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202314Tests : PuzzleTest<Aoc202314>
 {
+    private const string Input = """
+                                 O....#....
+                                 O.OO#....#
+                                 .....##...
+                                 OO.#O....O
+                                 .O.....O#.
+                                 O.#..O.#.#
+                                 ..O..#O..O
+                                 .......O..
+                                 #....###..
+                                 #OO..#....
+                                 """;
+
     [Fact]
-    public void RollNorth()
-    {
-        const string input = """
-                             O....#....
-                             O.OO#....#
-                             .....##...
-                             OO.#O....O
-                             .O.....O#.
-                             O.#..O.#.#
-                             ..O..#O..O
-                             .......O..
-                             #....###..
-                             #OO..#....
-                             """;
-
-        var result = Aoc202314.RollNorth(input);
-
-        result.Should().Be(136);
-    }
+    public void RollNorth() => Sut.RollNorth(Input).Should().Be(136);
 
     [Fact]
     public void RunOneCycle()
     {
-        const string input = """
-                             O....#....
-                             O.OO#....#
-                             .....##...
-                             OO.#O....O
-                             .O.....O#.
-                             O.#..O.#.#
-                             ..O..#O..O
-                             .......O..
-                             #....###..
-                             #OO..#....
-                             """;
-
         const string expected = """
                                 .....#....
                                 ....#...O#
@@ -54,48 +36,15 @@ public class Aoc202314Tests : PuzzleTest<Aoc202314>
                                 #..OO#....
                                 """;
 
-        var result = Aoc202314.RunCycle(input, 1);
-
-        result.Print().Should().Be(expected);
+        Sut.RunCycle(Input, 1).Print().Should().Be(expected);
     }
 
     [Fact]
-    public void RunManyCycles()
-    {
-        const string input = """
-                             O....#....
-                             O.OO#....#
-                             .....##...
-                             OO.#O....O
-                             .O.....O#.
-                             O.#..O.#.#
-                             ..O..#O..O
-                             .......O..
-                             #....###..
-                             #OO..#....
-                             """;
-
-        var result = Aoc202314.RunManyCycles(input);
-
-        result.Should().Be(64);
-    }
+    public void RunManyCycles() => Sut.RunManyCycles(Input).Should().Be(64);
 
     [Fact]
     public void RunTwoCycles()
     {
-        const string input = """
-                             O....#....
-                             O.OO#....#
-                             .....##...
-                             OO.#O....O
-                             .O.....O#.
-                             O.#..O.#.#
-                             ..O..#O..O
-                             .......O..
-                             #....###..
-                             #OO..#....
-                             """;
-
         const string expected = """
                                 .....#....
                                 ....#...O#
@@ -109,8 +58,6 @@ public class Aoc202314Tests : PuzzleTest<Aoc202314>
                                 #.OOO#...O
                                 """;
 
-        var result = Aoc202314.RunCycle(input, 2);
-
-        result.Print().Should().Be(expected);
+        Sut.RunCycle(Input, 2).Print().Should().Be(expected);
     }
 }

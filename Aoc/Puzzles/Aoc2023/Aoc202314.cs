@@ -12,7 +12,7 @@ public class Aoc202314 : AocPuzzle
     [Puzzle("bc4f573f0b32490dec258ffe95e3b88b")]
     public int Part2(string input) => RunManyCycles(input);
 
-    public static int RunManyCycles(string s)
+    public int RunManyCycles(string s)
     {
         const int iterations = 1_000_000_000;
         var seen = new Dictionary<string, int>();
@@ -47,14 +47,13 @@ public class Aoc202314 : AocPuzzle
         return sum;
     }
 
-    public static int RollNorth(string s)
+    public int RollNorth(string s)
     {
         var grid = GridBuilder.BuildCharGrid(s);
         MoveNorth(grid);
         var roundRocks = grid.Coords.Where(o => grid.ReadValueAt(o) == 'O').ToList();
-        var sum = roundRocks.Sum(o => grid.Height - o.Y);
 
-        return sum;
+        return roundRocks.Sum(o => grid.Height - o.Y);
     }
 
     private static void MoveNorth(Grid<char> grid) =>
@@ -90,7 +89,7 @@ public class Aoc202314 : AocPuzzle
         }
     }
 
-    public static Grid<char> RunCycle(string s, int iterations)
+    public Grid<char> RunCycle(string s, int iterations)
     {
         var grid = GridBuilder.BuildCharGrid(s);
         RunCycle(grid, iterations);
@@ -114,22 +113,16 @@ public class Aoc202314 : AocPuzzle
     }
 
     private static bool CanMoveNorth(Grid<char> grid) =>
-        CanMove(grid.IsAtTopEdge, () => grid.ReadValueAt(grid.Coord.X, grid.Coord.Y - 1));
+        CanMove(grid.IsAtTopEdge, () => grid.ReadValueAt(grid.Coord.Up()));
 
     private static bool CanMoveEast(Grid<char> grid) =>
-        CanMove(grid.IsAtRightEdge, () => grid.ReadValueAt(grid.Coord.X + 1, grid.Coord.Y));
+        CanMove(grid.IsAtRightEdge, () => grid.ReadValueAt(grid.Coord.Right()));
 
     private static bool CanMoveSouth(Grid<char> grid) =>
-        CanMove(grid.IsAtBottomEdge, () => grid.ReadValueAt(grid.Coord.X, grid.Coord.Y + 1));
+        CanMove(grid.IsAtBottomEdge, () => grid.ReadValueAt(grid.Coord.Down()));
 
     private static bool CanMoveWest(Grid<char> grid) => 
-        CanMove(grid.IsAtLeftEdge, () => grid.ReadValueAt(grid.Coord.X - 1, grid.Coord.Y));
+        CanMove(grid.IsAtLeftEdge, () => grid.ReadValueAt(grid.Coord.Left()));
 
-    private static bool CanMove(Func<bool> isAtEdge, Func<char> readValue)
-    {
-        if (isAtEdge())
-            return false;
-
-        return readValue() is not ('#' or 'O');
-    }
+    private static bool CanMove(Func<bool> isAtEdge, Func<char> readValue) => !isAtEdge() && readValue() is not ('#' or 'O');
 }

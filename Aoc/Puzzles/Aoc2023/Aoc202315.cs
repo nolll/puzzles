@@ -49,16 +49,16 @@ public class Aoc202315 : AocPuzzle
         Subtract,
         Equal
     }
-}
 
-public class Box(int id)
-{
-    public List<Lens> Lenses { get; set; } = [];
-    public int FocusingPower => Lenses.Select((t, i) => (id + 1) * (i + 1) * t.FocalLength).Sum();
-}
+    private class Box(int id)
+    {
+        public List<Lens> Lenses { get; set; } = [];
+        public int FocusingPower => Lenses.Select((t, i) => (id + 1) * (i + 1) * t.FocalLength).Sum();
+    }
 
-public class Lens(string label, int focalLength)
-{
-    public string Label { get; set; } = label;
-    public int FocalLength { get; set; } = focalLength;
+    private class Lens(string label, int focalLength)
+    {
+        public string Label { get; } = label;
+        public int FocalLength { get; set; } = focalLength;
+    }
 }

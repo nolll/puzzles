@@ -12,7 +12,7 @@ public class Aoc202312 : AocPuzzle
     [Puzzle("2ecb30790515e2ebbae12a478dbf36f7")]
     public long Part2(string input) => input.Split(LineBreaks.Single).Select(o => CombinationCount(o, true)).Sum();
 
-    public static long CombinationCount(string s, bool isPart2 = false)
+    public long CombinationCount(string s, bool isPart2 = false)
     {
         var parts = s.Split(' ');
         var pattern = parts.First();
@@ -52,10 +52,8 @@ public class Aoc202312 : AocPuzzle
             return validCount;
 
         var c = pattern.First();
-        if (c is '.' or '?')
-        {
-            validCount += GetValidCount(pattern.Skip(1).ToArray(), groups, seen);
-        }
+        if (c is '.' or '?') 
+            validCount += GetValidCount([.. pattern.Skip(1)], groups, seen);
 
         if (c is '#' or '?')
         {
@@ -67,7 +65,7 @@ public class Aoc202312 : AocPuzzle
                 {
                     var hasAdjacentGroup = pattern.Length > groupLength && pattern[groupLength] == '#';
                     if (!hasAdjacentGroup) 
-                        validCount += GetValidCount(pattern.Skip(groupLength + 1).ToArray(), groups.Skip(1).ToArray(), seen);
+                        validCount += GetValidCount([.. pattern.Skip(groupLength + 1)], [.. groups.Skip(1)], seen);
                 }
             }
         }

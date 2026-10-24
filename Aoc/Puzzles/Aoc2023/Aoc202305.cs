@@ -93,8 +93,8 @@ public class Aoc202305 : AocPuzzle
         var (destination, source, length) = Numbers.LongsFromString(s);
         return new Range(destination, source, length);
     }
-    
-    public record Range(long Destination, long Source, long Length)
+
+    private record Range(long Destination, long Source, long Length)
     {
         public bool IsInRange(long input) => input >= Source && input < Source + Length;
     }
@@ -111,6 +111,6 @@ public class Aoc202305 : AocPuzzle
         return (seedNumbers, rangeGroups);
     }
 
-    public record RangeGroup(List<Range> Ranges);
-    public record SeedRange(long Start, long End);
+    private record RangeGroup(List<Range> Ranges);
+    private record SeedRange(long Start, long End);
 }

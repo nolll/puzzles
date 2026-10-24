@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2023;
@@ -9,40 +10,27 @@ public class Aoc202306 : AocPuzzle
     [Puzzle("7eb8c120d057c526ef2c425f6db9493c")]
     public long Part1(string input)
     {
-        var lines = input.Split(LineBreaks.Single);
-        var times = lines.First().Split(":").Last().Split(' ').Where(o => o.Length > 0).Select(int.Parse).ToList();
-        var distances = lines.Last().Split(":").Last().Split(' ').Where(o => o.Length > 0).Select(int.Parse).ToList();
-
-        var total = 1L;
-        for (var raceIndex = 0; raceIndex < times.Count; raceIndex++)
-        {
-            var time = times[raceIndex];
-            var targetDistance = distances[raceIndex];
-            
-            total *= BoatRace(time, targetDistance);
-        }
-
-        return total;
+        var (first, last) = input.Split(LineBreaks.Single);
+        var times = Numbers.IntsFromString(first);
+        var distances = Numbers.IntsFromString(last);
+        return times.Zip(distances, (t, d) => BoatRace(t, d)).Aggregate(1L, (total, race) => total * race);
     }
 
     [Puzzle("365c29b8564f3c2e47e2bcfca7b191de")]
     public long Part2(string input)
     {
-        var lines = input.Split(LineBreaks.Single);
-        var time = long.Parse(string.Concat(lines.First().Split(":").Last().Split(' ').Where(o => o.Length > 0)));
-        var targetDistance = long.Parse(string.Concat(lines.Last().Split(":").Last().Split(' ').Where(o => o.Length > 0)));
-
+        var (first, last) = input.Split(LineBreaks.Single);
+        var time = long.Parse(string.Concat(Numbers.DigitsFromString(first)));
+        var targetDistance = long.Parse(string.Concat(Numbers.DigitsFromString(last)));
         return BoatRace(time, targetDistance);
     }
 
     private static long BoatRace(long time, long targetDistance)
     {
-        var count = 0L;
+        var count = 0;
         for (var charge = 0; charge < time; charge++)
         {
-            var travelTime = time - charge;
-            var distance = travelTime * charge;
-            if (distance > targetDistance)
+            if ((time - charge) * charge > targetDistance)
                 count++;
         }
 

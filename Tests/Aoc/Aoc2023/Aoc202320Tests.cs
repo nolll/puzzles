@@ -15,9 +15,7 @@ public class Aoc202320Tests : PuzzleTest<Aoc202320>
                              &inv -> a
                              """;
 
-        var result = Aoc202320.CountPulses(input, 1000);
-
-        result.Should().Be(32000000);
+        Sut.CountPulses(input, 1000).Should().Be(32000000);
     }
     
     [Fact]
@@ -31,8 +29,6 @@ public class Aoc202320Tests : PuzzleTest<Aoc202320>
                              &con -> output
                              """;
 
-        var result = Aoc202320.CountPulses(input, 1000);
-
-        result.Should().Be(11687500);
+        Sut.CountPulses(input, 1000).Should().Be(11687500);
     }
 }

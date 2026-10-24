@@ -46,15 +46,14 @@ public class Aoc202319 : AocPuzzle
 
     public static long CountCombinations(string str)
     {
-        var groups = str
+        var workflows = str
             .Split(LineBreaks.Double)
-            .Select(o => o.Split(LineBreaks.Single));
-        var workflowList = groups.First().Select(ParseWorkflow).ToList();
-        var workflows = workflowList.ToDictionary(o => o.Label, o => o);
+            .Select(o => o.Split(LineBreaks.Single))
+            .First()
+            .Select(ParseWorkflow)
+            .ToDictionary(o => o.Label, o => o);
 
-        var ranges = new ValidValues();
-
-        return CountAcceptedValues(workflows, "in", ranges);
+        return CountAcceptedValues(workflows, "in", new ValidValues());
     }
 
     private static long CountAcceptedValues(
@@ -70,7 +69,7 @@ public class Aoc202319 : AocPuzzle
 
         var currentValues = validValues;
         var workflow = workflows[target];
-    
+
         var total = 0L;
         var moreToProcess = true;
 
@@ -79,7 +78,7 @@ public class Aoc202319 : AocPuzzle
             var includedValues = rule.Include(currentValues);
             var excludedValues = rule.Exclude(currentValues);
 
-            if(includedValues.Count > 0)
+            if (includedValues.Count > 0)
                 total += CountAcceptedValues(workflows, rule.Target, includedValues);
 
             if (excludedValues.Count == 0)
@@ -91,7 +90,7 @@ public class Aoc202319 : AocPuzzle
             currentValues = excludedValues;
         }
 
-        if(moreToProcess)
+        if (moreToProcess)
             total += CountAcceptedValues(workflows, workflow.Fallback, currentValues);
 
         return total;
@@ -99,7 +98,7 @@ public class Aoc202319 : AocPuzzle
 
     private static Part ParsePart(string inp)
     {
-        var parts = inp.TrimStart('{').TrimEnd('}').Split(',').ToArray();
+        var parts = inp.TrimStart('{').TrimEnd('}').Split(',');
         var fields = new Dictionary<string, int>();
         for (var i = 0; i < 4; i++)
         {
@@ -107,7 +106,7 @@ public class Aoc202319 : AocPuzzle
             var value = int.Parse(parts[i][2..]);
             fields.Add(label, value);
         }
-        
+
         return new Part(fields);
     }
 
@@ -129,74 +128,63 @@ public class Aoc202319 : AocPuzzle
         var comparison = parts[0].Substring(1, 1);
         var value = int.Parse(parts[0][2..]);
 
-        return comparison == "<" 
-            ? new LessThanRule(target, field, value) 
+        return comparison == "<"
+            ? new LessThanRule(target, field, value)
             : new GreaterThanRule(target, field, value);
     }
-    
-    public class GreaterThanRule(string target, string field, int value) : WorkflowRule
+
+    private class GreaterThanRule(string target, string field, int value) : WorkflowRule
     {
         public override string Target { get; } = target;
         protected override string Field { get; } = field;
         public override bool Evaluate(Part part) => Evaluate(part.Fields[Field]);
         protected override bool Evaluate(int v) => v > value;
     }
-    
-    public class LessThanRule(string target, string field, int value) : WorkflowRule
+
+    private class LessThanRule(string target, string field, int value) : WorkflowRule
     {
         public override string Target { get; } = target;
         protected override string Field { get; } = field;
         public override bool Evaluate(Part part) => Evaluate(part.Fields[Field]);
         protected override bool Evaluate(int v) => v < value;
     }
-    
-    public class Part(Dictionary<string, int> fields)
+
+    private class Part(Dictionary<string, int> fields)
     {
         public Dictionary<string, int> Fields { get; } = fields;
     }
-    
+
     public class ValidValues
     {
         private const int RangeStart = 1;
         private const int RangeEnd = 4000;
+        private readonly string[] _letters = ["x", "m", "a", "s"];
 
         public Dictionary<string, List<int>> Ranges { get; }
 
         public ValidValues()
         {
-            Ranges = new Dictionary<string, List<int>>
-            {
-                { "x", FillRange() },
-                { "m", FillRange() },
-                { "a", FillRange() },
-                { "s", FillRange() }
-            };
+            Ranges = _letters.ToDictionary(k => k, _ => FillRange());
         }
 
         public ValidValues(ValidValues validValues)
         {
-            Ranges = new Dictionary<string, List<int>>
-            {
-                { "x", validValues.Ranges["x"].ToList() },
-                { "m", validValues.Ranges["m"].ToList() },
-                { "a", validValues.Ranges["a"].ToList() },
-                { "s", validValues.Ranges["s"].ToList() }
-            };
+            Ranges = _letters.ToDictionary(k => k, v => validValues.Ranges[v]);
         }
 
         public long Count => Ranges.Values.Select(o => o.Count).Aggregate(1L, (a, b) => a * b);
 
-        private static List<int> FillRange() => Enumerable.Range(RangeStart, RangeEnd).ToList();
+        private static List<int> FillRange() => [.. Enumerable.Range(RangeStart, RangeEnd)];
     }
-    
-    public class Workflow(string label, List<WorkflowRule> rules, string fallback)
+
+    private class Workflow(string label, List<WorkflowRule> rules, string fallback)
     {
         public string Label { get; } = label;
         public List<WorkflowRule> Rules { get; } = rules;
         public string Fallback { get; } = fallback;
     }
-    
-    public abstract class WorkflowRule
+
+    private abstract class WorkflowRule
     {
         public abstract string Target { get; }
         protected abstract string Field { get; }
@@ -206,8 +194,8 @@ public class Aoc202319 : AocPuzzle
         public ValidValues Include(ValidValues validValues)
         {
             var v = new ValidValues(validValues);
-            if(Field != "")
-                v.Ranges[Field] = validValues.Ranges[Field].Where(Evaluate).ToList();
+            if (Field != "")
+                v.Ranges[Field] = [.. validValues.Ranges[Field].Where(Evaluate)];
             return v;
         }
 
@@ -215,7 +203,7 @@ public class Aoc202319 : AocPuzzle
         {
             var v = new ValidValues(validValues);
             if (Field != "")
-                v.Ranges[Field] = validValues.Ranges[Field].Where(o => !Evaluate(o)).ToList();
+                v.Ranges[Field] = [.. validValues.Ranges[Field].Where(o => !Evaluate(o))];
             return v;
         }
     }

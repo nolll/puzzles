@@ -13,7 +13,7 @@ public class Aoc202320 : AocPuzzle
     [Puzzle("1fd3846c9dc834364bf2cdc9c11dfbdb")]
     public long Part2(string input) => CountPulses(input, 5000, true);
 
-    public static long CountPulses(string s, int iterations, bool isPart2 = false)
+    public long CountPulses(string s, int iterations, bool isPart2 = false)
     {
         var modules = ParseModules(s);
         var part2State = new Dictionary<string, long>();
@@ -73,9 +73,8 @@ public class Aoc202320 : AocPuzzle
 
     private static Dictionary<string, Module> ParseModules(string s)
     {
-        var modules = new Dictionary<string, Module>();
         var button = new ButtonModule();
-        modules.Add(button.Name, button);
+        var modules = new Dictionary<string, Module> { { button.Name, button } };
         var lines = s.Split(LineBreaks.Single);
 
         foreach (var line in lines)
@@ -110,15 +109,13 @@ public class Aoc202320 : AocPuzzle
             }
         }
 
-        foreach (var module in devnullModules)
-        {
+        foreach (var module in devnullModules) 
             modules.Add(module.Name, module);
-        }
 
         return modules;
     }
-    
-    public class BroadcasterModule(string[] targets) : Module("broadcaster", targets)
+
+    private class BroadcasterModule(string[] targets) : Module("broadcaster", targets)
     {
         public override void ReceivePulse(string from, Pulse pulse)
         {
@@ -132,19 +129,17 @@ public class Aoc202320 : AocPuzzle
         public override bool ShouldSend => true;
         public override void RegisterSource(string source) { }
     }
-    
-    public class ButtonModule() : Module("button", [])
+
+    private class ButtonModule() : Module("button", [])
     {
-        public override void ReceivePulse(string from, Pulse pulse)
-        {
-        }
+        public override void ReceivePulse(string from, Pulse pulse) {}
 
         public override Pulse OutputPulse => Pulse.Low;
         public override bool ShouldSend => true;
         public override void RegisterSource(string source) { }
     }
-    
-    public class ConjunctionModule(string name, string[] targets) : Module(name, targets)
+
+    private class ConjunctionModule(string name, string[] targets) : Module(name, targets)
     {
         private readonly Dictionary<string, Pulse> _memory = new();
 
@@ -165,8 +160,8 @@ public class Aoc202320 : AocPuzzle
             _memory[source] = Pulse.Low;
         }
     }
-    
-    public class DevNullModule(string name) : Module(name, [])
+
+    private class DevNullModule(string name) : Module(name, [])
     {
         public override void ReceivePulse(string from, Pulse pulse)
         {
@@ -180,12 +175,12 @@ public class Aoc202320 : AocPuzzle
         public override bool ShouldSend => true;
         public override void RegisterSource(string source) { }
     }
-    
-    public class FlipFlopModule(string name, string[] targets) : Module(name, targets)
+
+    private class FlipFlopModule(string name, string[] targets) : Module(name, targets)
     {
         private State _state = State.Off;
         private Pulse _output = Pulse.Low;
-        private bool _shouldSend = false;
+        private bool _shouldSend;
 
         public override void ReceivePulse(string from, Pulse pulse)
         {
@@ -218,8 +213,8 @@ public class Aoc202320 : AocPuzzle
         public override bool ShouldSend => _shouldSend;
         public override void RegisterSource(string source){}
     }
-    
-    public abstract class Module(string name, string[] targets)
+
+    private abstract class Module(string name, string[] targets)
     {
         public string Name { get; } = name;
         public string[] Targets { get; } = targets;
@@ -231,14 +226,14 @@ public class Aoc202320 : AocPuzzle
         public long HighPulseCount { get; protected set; } = 0;
         public abstract void RegisterSource(string source);
     }
-    
-    public enum Pulse
+
+    private enum Pulse
     {
         Low,
         High
     }
-    
-    public enum State
+
+    private enum State
     {
         Off,
         On

@@ -4,59 +4,29 @@ namespace Tests.Aoc.Aoc2023;
 
 public class Aoc202319Tests : PuzzleTest<Aoc202319>
 {
-    [Fact]
-    public void SortParts()
-    {
-        const string input = """
-                             px{a<2006:qkq,m>2090:A,rfg}
-                             pv{a>1716:R,A}
-                             lnx{m>1548:A,A}
-                             rfg{s<537:gd,x>2440:R,A}
-                             qs{s>3448:A,lnx}
-                             qkq{x<1416:A,crn}
-                             crn{x>2662:A,R}
-                             in{s<1351:px,qqz}
-                             qqz{s>2770:qs,m<1801:hdj,R}
-                             gd{a>3333:R,R}
-                             hdj{m>838:A,pv}
-                             
-                             {x=787,m=2655,a=1222,s=2876}
-                             {x=1679,m=44,a=2067,s=496}
-                             {x=2036,m=264,a=79,s=2244}
-                             {x=2461,m=1339,a=466,s=291}
-                             {x=2127,m=1623,a=2188,s=1013}
-                             """;
+    private const string Input = """
+                                 px{a<2006:qkq,m>2090:A,rfg}
+                                 pv{a>1716:R,A}
+                                 lnx{m>1548:A,A}
+                                 rfg{s<537:gd,x>2440:R,A}
+                                 qs{s>3448:A,lnx}
+                                 qkq{x<1416:A,crn}
+                                 crn{x>2662:A,R}
+                                 in{s<1351:px,qqz}
+                                 qqz{s>2770:qs,m<1801:hdj,R}
+                                 gd{a>3333:R,R}
+                                 hdj{m>838:A,pv}
 
-        var result = Aoc202319.SortParts(input);
-
-        result.Should().Be(19114);
-    }
+                                 {x=787,m=2655,a=1222,s=2876}
+                                 {x=1679,m=44,a=2067,s=496}
+                                 {x=2036,m=264,a=79,s=2244}
+                                 {x=2461,m=1339,a=466,s=291}
+                                 {x=2127,m=1623,a=2188,s=1013}
+                                 """;
 
     [Fact]
-    public void CountCombinations()
-    {
-        const string input = """
-                             px{a<2006:qkq,m>2090:A,rfg}
-                             pv{a>1716:R,A}
-                             lnx{m>1548:A,A}
-                             rfg{s<537:gd,x>2440:R,A}
-                             qs{s>3448:A,lnx}
-                             qkq{x<1416:A,crn}
-                             crn{x>2662:A,R}
-                             in{s<1351:px,qqz}
-                             qqz{s>2770:qs,m<1801:hdj,R}
-                             gd{a>3333:R,R}
-                             hdj{m>838:A,pv}
+    public void Part1() => Sut.Part1(Input).Should().Be(19114);
 
-                             {x=787,m=2655,a=1222,s=2876}
-                             {x=1679,m=44,a=2067,s=496}
-                             {x=2036,m=264,a=79,s=2244}
-                             {x=2461,m=1339,a=466,s=291}
-                             {x=2127,m=1623,a=2188,s=1013}
-                             """;
-
-        var result = Aoc202319.CountCombinations(input);
-
-        result.Should().Be(167409079868000);
-    }
+    [Fact]
+    public void Part2() => Sut.Part2(Input).Should().Be(167409079868000);
 }

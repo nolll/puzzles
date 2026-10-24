@@ -31,18 +31,8 @@ public class Aoc202323Tests : PuzzleTest<Aoc202323>
                                  """;
 
     [Fact]
-    public void LongestHikePart1()
-    {
-        var result = Aoc202323.LongestHike(Input, false);
-
-        result.Should().Be(94);
-    }
+    public void LongestHikePart1() => Sut.LongestHike(Input, false).Should().Be(94);
 
     [Fact]
-    public void LongestHikePart2()
-    {
-        var result = Aoc202323.LongestHike(Input, true);
-
-        result.Should().Be(154);
-    }
+    public void LongestHikePart2() => Sut.LongestHike(Input, true).Should().Be(154);
 }

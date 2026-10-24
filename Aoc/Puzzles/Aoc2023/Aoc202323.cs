@@ -20,7 +20,7 @@ public class Aoc202323 : AocPuzzle
     [Puzzle("22bcf9382d0e8177c5c6ef52f07fd7b9")]
     public int Part2(string input) => LongestHike(input, true);
 
-    public static int LongestHike(string s, bool canClimbSlopes)
+    public int LongestHike(string s, bool canClimbSlopes)
     {
         var grid = GridBuilder.BuildCharGrid(s);
         var start = new Coord(grid.XMin + 1, grid.YMin);
@@ -112,10 +112,10 @@ public class Aoc202323 : AocPuzzle
     private static List<Coord> GetNeighbors(Grid<char> grid, Coord coord, bool canClimbSlopes)
     {
         var adjacent = new List<Coord>();
-        var north = GetCoord(coord, GridDirection.Up);
-        var east = GetCoord(coord, GridDirection.Right);
-        var south = GetCoord(coord, GridDirection.Down);
-        var west = GetCoord(coord, GridDirection.Left);
+        var north = coord.Up();
+        var east = coord.Right();
+        var south = coord.Down();
+        var west = coord.Left();
 
         if (CanGoDirection(grid, north, canClimbSlopes, GridDirection.Up)) adjacent.Add(north);
         if (CanGoDirection(grid, east, canClimbSlopes, GridDirection.Right)) adjacent.Add(east);
@@ -136,7 +136,4 @@ public class Aoc202323 : AocPuzzle
 
         return value == '.' || value == ValidSlopes[direction];
     }
-
-    private static Coord GetCoord(Coord coord, GridDirection direction) => 
-        new(coord.X + direction.X, coord.Y + direction.Y);
 }

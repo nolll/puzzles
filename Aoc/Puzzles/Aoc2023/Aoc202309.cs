@@ -13,7 +13,6 @@ public class Aoc202309 : AocPuzzle
     [Puzzle("652e203bd80c5889b310a0a8efdb2301")]
     public long Part2(string input) => input.Split(LineBreaks.Single).Select(FindPrevNumber).Sum();
 
-    private static long FindNextNumber(string input) => Sequence.Next(ParseNumbers(input));
-    private static long FindPrevNumber(string input) => Sequence.Previous(ParseNumbers(input));
-    private static IEnumerable<long> ParseNumbers(string input) => input.Split(' ').Select(long.Parse);
+    private static long FindNextNumber(string input) => Sequence.Next(Numbers.LongsFromString(input));
+    private static long FindPrevNumber(string input) => Sequence.Previous(Numbers.LongsFromString(input));
 }

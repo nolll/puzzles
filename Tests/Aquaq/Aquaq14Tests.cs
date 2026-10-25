@@ -10,5 +10,4 @@ public class Aquaq14Tests : PuzzleTest<Aquaq14>
     [InlineData("400 500 6 21 36 54 62 600 700", 7)]
     [InlineData("400 500 15 30 36 53 68 600 700", 7)]
     public void Bingo(string input, int expected) => Sut.Solve(input).Should().Be(expected);
-
 }

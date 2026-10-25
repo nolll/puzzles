@@ -10,10 +10,5 @@ public class Aquaq13Tests : PuzzleTest<Aquaq13>
     [InlineData("AAAAAABAAAAAB", 6)]
     [InlineData("buhtbuhtbuhtbuhtbuhtbuhtbuhtA", 7)]
     [InlineData("AbuhtbuhtBbuhtbuhtbuhtbuhtbuhtC", 5)]
-    public void FindMaxRepeats(string input, int expected)
-    {
-        var result = Aquaq13.FindMaxRepeats(input);
-
-        result.Should().Be(expected);
-    }
+    public void FindMaxRepeats(string input, int expected) => Sut.Solve(input).Should().Be(expected);
 }

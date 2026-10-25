@@ -13,5 +13,4 @@ public class Aquaq11Tests : PuzzleTest<Aquaq11>
 
     [Fact]
     public void CountRequiredTile() => Sut.Solve(Input).Should().Be(14);
-
 }

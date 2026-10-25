@@ -14,5 +14,4 @@ public class Aquaq12Tests : PuzzleTest<Aquaq12>
 
     [Fact]
     public void RideTheLift() => Sut.Solve(Input).Should().Be(7);
-
 }

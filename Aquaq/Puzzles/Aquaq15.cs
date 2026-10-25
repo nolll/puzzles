@@ -5,6 +5,8 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles;
 
 [Name("word wore more mare maze")]
+[NeedsRewrite]
+[Comment("The tests do not work")]
 public class Aquaq15 : AquaqPuzzle
 {
     [AdditionalInputFile("Words.txt")]

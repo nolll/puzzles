@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles;
@@ -17,7 +18,7 @@ public class Aquaq14 : AquaqPuzzle
                                       15 23 41 51 62
                                       """;
 
-    private static readonly int[] Range = Enumerable.Range(0, BoardSize).ToArray();
+    private static readonly int[] Range = [.. Enumerable.Range(0, BoardSize)];
     private static readonly Dictionary<int, Coord> Board = BuildBoard();
     private static readonly IEnumerable<Coord> Diagonal1 = BuildDiagonal1();
     private static readonly IEnumerable<Coord> Diagonal2 = BuildDiagonal2();
@@ -25,7 +26,7 @@ public class Aquaq14 : AquaqPuzzle
     [Puzzle("d9665f8161f8ada6709d7be1564965fa")]
     public int Solve(string input)
     {
-        var games = input.Split(LineBreaks.Single).Select(o => o.Split(' ').Select(int.Parse));
+        var games = input.Split(LineBreaks.Single).Select(Numbers.IntsFromString);
 
         var totalSum = 0;
         foreach (var numbers in games)
@@ -35,13 +36,12 @@ public class Aquaq14 : AquaqPuzzle
             foreach (var number in numbers)
             {
                 numberCount++;
-                if(Board.TryGetValue(number, out var address))
-                {
-                    game.Add(address);
-
-                    if (IsBingo(game))
-                        break;
-                }
+                if (!Board.TryGetValue(number, out var coord))
+                    continue;
+                
+                game.Add(coord);
+                if (IsBingo(game))
+                    break;
             }
 
             totalSum += numberCount;
@@ -52,13 +52,13 @@ public class Aquaq14 : AquaqPuzzle
 
     private static Dictionary<int, Coord> BuildBoard()
     {
-        var boardLines = BoardInput.Replace("  ", " ").Split(LineBreaks.Single);
+        var boardLines = BoardInput.Split(LineBreaks.Single);
         var board = new Dictionary<int, Coord>();
 
         var y = 0;
         foreach (var boardLine in boardLines)
         {
-            var lineNumbers = boardLine.Split(' ').Select(int.Parse);
+            var lineNumbers = Numbers.IntsFromString(boardLine);
             var x = 0;
             foreach (var lineNumber in lineNumbers)
             {
@@ -77,13 +77,11 @@ public class Aquaq14 : AquaqPuzzle
         IsHorizontalBingo(game) || IsVerticalBingo(game) || IsDiagonalBingo(game);
 
     private static bool IsHorizontalBingo(IEnumerable<Coord> game) => game.GroupBy(o => o.X).Any(o => o.Count() == 5);
-
     private static bool IsVerticalBingo(IEnumerable<Coord> game) => game.GroupBy(o => o.Y).Any(o => o.Count() == 5);
 
     private static bool IsDiagonalBingo(IReadOnlyCollection<Coord> game) => 
         Diagonal1.All(game.Contains) || Diagonal2.All(game.Contains);
 
     private static IEnumerable<Coord> BuildDiagonal1() => Range.Select(o => new Coord(o, o));
-
     private static IEnumerable<Coord> BuildDiagonal2() => Range.Select(o => new Coord(BoardSize - o - 1, o));
 }

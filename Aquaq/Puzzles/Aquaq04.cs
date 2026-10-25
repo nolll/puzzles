@@ -14,14 +14,10 @@ public class Aquaq04 : AquaqPuzzle
         var nFactors = FindDivisors(n);
         for (var i = 1; i < n; i++)
         {
-            var factors = FindDivisors(i);
-            var isOverlapping = factors.Overlaps(nFactors);
-            if (!isOverlapping)
+            if (!FindDivisors(i).Overlaps(nFactors))
                 yield return i;
         }
     }
 
-    private static HashSet<int> FindDivisors(int n) => Numbers.GetAllDivisors(n)
-        .Where(o => o > 1)
-        .ToHashSet();
+    private static HashSet<int> FindDivisors(int n) => [.. Numbers.GetAllDivisors(n).Where(o => o > 1)];
 }

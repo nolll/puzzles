@@ -22,9 +22,9 @@ public class Aoc202405 : AocPuzzle
     
     private static (int[][] rules, int[][] updates) ParseRulesAndUpdates(string input)
     {
-        var parts = input.Split(LineBreaks.Double);
-        var rules = parts[0].Split(LineBreaks.Single).Select(o => o.Split('|').Select(int.Parse).ToArray()).ToArray();
-        var updates = parts[1].Split(LineBreaks.Single).Select(o => o.Split(',').Select(int.Parse).ToArray()).ToArray();
+        var (rulesInput, updatesInput) = input.Split(LineBreaks.Double);
+        var rules = rulesInput.Split(LineBreaks.Single).Select(o => o.Split('|').Select(int.Parse).ToArray()).ToArray();
+        var updates = updatesInput.Split(LineBreaks.Single).Select(o => o.Split(',').Select(int.Parse).ToArray()).ToArray();
         return (rules, updates);
     }
 
@@ -34,10 +34,8 @@ public class Aoc202405 : AocPuzzle
     private static int[] Fix(int[][] rules, int[] update)
     {
         var copy = update.ToArray();
-        while (!IsCorrect(rules, copy))
-        {
+        while (!IsCorrect(rules, copy)) 
             copy = ApplyRules(rules, copy);
-        }
 
         return copy;
     }
@@ -57,11 +55,7 @@ public class Aoc202405 : AocPuzzle
         return copy;
     }
     
-    private static bool IsAffectedByRule(int[] update, int[] rule) => 
-        update.Contains(rule[0]) && update.Contains(rule[1]);
-
-    private static bool IsInCorrectOrder(int[] update, int[] rule) => 
-        update.IndexOf(rule[1]) > update.IndexOf(rule[0]);
-    
+    private static bool IsAffectedByRule(int[] update, int[] rule) => update.Contains(rule[0]) && update.Contains(rule[1]);
+    private static bool IsInCorrectOrder(int[] update, int[] rule) => update.IndexOf(rule[1]) > update.IndexOf(rule[0]);
     private static int GetMiddleValue(int[] o) => o[o.Length / 2];
 }

@@ -18,10 +18,5 @@ public class Aquaq10Tests : PuzzleTest<Aquaq10>
                                  """;
 
     [Fact]
-    public void SmallestCost()
-    {
-        var result = Aquaq10.Solve(Input, "A", "C");
-
-        result.Should().Be(29);
-    }
+    public void SmallestCost() => Sut.Solve(Input, "A", "C").Should().Be(29);
 }

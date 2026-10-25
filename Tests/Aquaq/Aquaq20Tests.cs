@@ -8,5 +8,4 @@ public class Aquaq20Tests : PuzzleTest<Aquaq20>
     [InlineData("3 A K 9 A 7 4 9", 1)]
     [InlineData("K Q 2 9 4 8 A A A K A 7", 2)]
     public void PlayBlackjack(string deck, int expected) => Sut.Solve(deck).Should().Be(expected);
-
 }

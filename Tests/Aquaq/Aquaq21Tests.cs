@@ -12,10 +12,5 @@ public class Aquaq21Tests : PuzzleTest<Aquaq21>
                                  """;
 
     [Fact]
-    public void CollectDust()
-    {
-        var result = Aquaq21.Solve(Input, 3);
-
-        result.Should().Be(65);
-    }
+    public void CollectDust() => Sut.Solve(Input, 3).Should().Be(65);
 }

@@ -4,6 +4,8 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles;
 
 [Name("Keming")]
+[NeedsRewrite]
+[Comment("The tests do not work")]
 public class Aquaq16 : AquaqPuzzle
 {
     private const int LetterHeight = 6;
@@ -12,8 +14,7 @@ public class Aquaq16 : AquaqPuzzle
     [Puzzle("b900eb74f94c2243de65005bcc4ebd2c")]
     public int Solve(string input, string additionalInput)
     {
-        var alphabet = ParseLetters(additionalInput)
-            .ToDictionary(k => k.Character, v => v);
+        var alphabet = ParseLetters(additionalInput).ToDictionary(k => k.Character, v => v);
 
         var letters = input.ToCharArray().Select(o => alphabet[o]).ToArray();
         var spaceCount = 0;
@@ -25,21 +26,11 @@ public class Aquaq16 : AquaqPuzzle
             spaceCount += left.SpaceCount + LetterHeight - tighten * LetterHeight;
         }
 
-        spaceCount += letters.Last().SpaceCount;
-        
-        return spaceCount;
+        return spaceCount + letters.Last().SpaceCount;
     }
     
-    private static int Tighten(Letter left, Letter right)
-    {
-        var commonSpaces = new List<int>();
-        for (var i = 0; i < left.Rows.Count; i++)
-        {
-            commonSpaces.Add(left.Rows[i].RightSpace + right.Rows[i].LeftSpace);
-        }
-
-        return commonSpaces.Min();
-    }
+    private static int Tighten(Letter left, Letter right) => 
+        left.Rows.Select((t, i) => t.RightSpace + right.Rows[i].LeftSpace).ToList().Min();
 
     private static IEnumerable<Letter> ParseLetters(string alphabet)
     {

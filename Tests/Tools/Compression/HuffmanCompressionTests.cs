@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.Compression;
 
 namespace Tests.Tools.Compression;
@@ -8,14 +7,10 @@ public class HuffmanCompressionTests
     private const string Charset = "A_DEAD_DAD_CEDED_A_BAD_BABE_A_BEADED_ABACA_BED";
 
     [Fact]
-    public void Encode() => new HuffmanCompression(Charset)
-        .Encode("CEDED")
-        .Should().Be("11101100011000");
+    public void Encode() => new HuffmanCompression(Charset).Encode("CEDED").Should().Be("11101100011000");
 
     [Fact]
-    public void Decode() => new HuffmanCompression(Charset)
-        .Decode("11101100011000")
-        .Should().Be("CEDED");
+    public void Decode() => new HuffmanCompression(Charset).Decode("11101100011000").Should().Be("CEDED");
 
     [Fact]
     public void GetNodes()

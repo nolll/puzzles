@@ -5,5 +5,4 @@ namespace Tests.Aquaq;
 // {
 //     [Fact]
 //     public void KerningSpaces() => Sut.Solve("LTA", new FileReader().ReadCommon(typeof(Pzl.Aquaq.Puzzles.Aquaq16.Aquaq16), "Alphabet.txt")).Should().Be(53);
-//
 // }

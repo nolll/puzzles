@@ -7,5 +7,5 @@ namespace Pzl.Aquaq.Puzzles;
 public class Aquaq23 : AquaqPuzzle
 {
     [Puzzle("bf98b9864ec8815e9bfb28dcdba4c0d6")]
-    public string Solve(string input) => new PlayfairCipher("power plant").Decrypt("vepcundbyoaeirotivluxnotpstfnbwept");
+    public string Solve() => new PlayfairCipher("power plant").Decrypt("vepcundbyoaeirotivluxnotpstfnbwept");
 }

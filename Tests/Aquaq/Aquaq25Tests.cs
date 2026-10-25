@@ -5,12 +5,10 @@ namespace Tests.Aquaq;
 public class Aquaq25Tests : PuzzleTest<Aquaq25>
 {
     [Fact]
-    public void EncodeMorse() => Aquaq25.EncodeMorse("jam donut")
-        .Should().Be(".--- .- --   -.. --- -. ..- -");
+    public void EncodeMorse() => Sut.EncodeMorse("jam donut").Should().Be(".--- .- --   -.. --- -. ..- -");
 
     [Fact]
-    public void DecodeMorse() => Aquaq25.DecodeMorse(".--- .- --   -.. --- -. ..- -")
-        .Should().Be("jam donut");
+    public void DecodeMorse() => Sut.DecodeMorse(".--- .- --   -.. --- -. ..- -").Should().Be("jam donut");
 
     [Fact]
     public void ClicksToMorse()
@@ -39,7 +37,6 @@ public class Aquaq25Tests : PuzzleTest<Aquaq25>
                              21:46:5.043
                              """;
 
-        Aquaq25.ClicksToMorse(input)
-            .Should().Be(".--- .- --   -.");
+        Sut.ClicksToMorse(input).Should().Be(".--- .- --   -.");
     }
 }

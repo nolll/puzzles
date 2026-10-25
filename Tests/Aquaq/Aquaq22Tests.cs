@@ -5,6 +5,5 @@ namespace Tests.Aquaq;
 public class Aquaq22Tests : PuzzleTest<Aquaq22>
 {
     [Fact]
-    public void CaesarCipher() => Aquaq22.ToCaesarCipherSum("IVXLCDM")
-        .Should().Be(87);
+    public void CaesarCipher() => Sut.ToCaesarCipherSum("IVXLCDM").Should().Be(87);
 }

@@ -20,10 +20,8 @@ public class Aquaq19 : AquaqPuzzle
         var filledCoords = new HashSet<Coord>();
         var adjacentCache = new Dictionary<Coord, IList<Coord>>();
 
-        for (var i = 2; i < parts.Length; i += 2)
-        {
+        for (var i = 2; i < parts.Length; i += 2) 
             filledCoords.Add(new Coord(int.Parse(parts[i + 1]), int.Parse(parts[i])));
-        }
 
         var grid = new Grid<char>(size, size, Empty);
 
@@ -65,9 +63,9 @@ public class Aquaq19 : AquaqPuzzle
                 idsForCasheKey = idsForCasheKey.Take(200);
             
             var cacheKey = string.Concat(idsForCasheKey);
-            if (seen.ContainsKey(cacheKey))
+            if (seen.TryGetValue(cacheKey, out var value))
             {
-                var repeatLength = i - seen[cacheKey];
+                var repeatLength = i - value;
                 while (i < iterations - repeatLength)
                 {
                     i += repeatLength;

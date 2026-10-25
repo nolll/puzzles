@@ -10,7 +10,7 @@ public class Aquaq21 : AquaqPuzzle
     [Puzzle("e9476ebab07e71bb8b8872bca85185f5")]
     public int Solve(string input) => Solve(input, 5);
 
-    public static int Solve(string input, int width)
+    public int Solve(string input, int width)
     {
         var lines = input.Split(LineBreaks.Single);
         var rows = lines.Select(o => o.Split(' ').Select(int.Parse).ToArray()).ToList();

@@ -6,38 +6,6 @@ namespace Pzl.Aquaq.Puzzles;
 [Name("S'morse")]
 public class Aquaq25 : AquaqPuzzle
 {
-    private static readonly Dictionary<char, string> CharToMorse = new()
-    {
-        { 'a', ".-" },
-        { 'b', "-..." },
-        { 'c', "-.-." },
-        { 'd', "-.." },
-        { 'e', "." },
-        { 'f', "..-." },
-        { 'g', "--." },
-        { 'h', "...." },
-        { 'i', ".." },
-        { 'j', ".---" },
-        { 'k', "-.-" },
-        { 'l', ".-.." },
-        { 'm', "--" },
-        { 'n', "-." },
-        { 'o', "---" },
-        { 'p', ".--." },
-        { 'q', "--.-" },
-        { 'r', ".-." },
-        { 's', "..." },
-        { 't', "-" },
-        { 'u', "..-" },
-        { 'v', "...-" },
-        { 'w', ".--" },
-        { 'x', "-..-" },
-        { 'y', "-.--" },
-        { 'z', "--.." }
-    };
-
-    private static readonly Dictionary<string, char> MorseToChar = CharToMorse.ToDictionary(k => k.Value, v => v.Key);
-
     [Puzzle("f00ce886bf2534f2f98813743c48cb6e")]
     public string Solve(string input)
     {
@@ -57,40 +25,13 @@ public class Aquaq25 : AquaqPuzzle
         return string.Concat(parsedResult);
     }
 
-    public static string EncodeMorse(string input)
-    {
-        var words = input.Split(' ');
-        var encodedWords = words.Select(EncodeMorseWord);
-        return string.Join("   ", encodedWords);
-    }
+    public string EncodeMorse(string input) => string.Join("   ", input.Split(' ').Select(EncodeMorseWord));
+    private static string EncodeMorseWord(string input) => string.Join(" ", input.Select(o => CharToMorse[o]));
+    public string DecodeMorse(string input) => string.Join(" ", input.Split("   ").Select(DecodeMorseWord));
+    private static string DecodeMorseWord(string input) => string.Concat(input.Split(' ').Select(GetChar));
+    private static string GetChar(string morse) => MorseToChar.TryGetValue(morse, out var c) ? c.ToString() : "";
 
-    private static string EncodeMorseWord(string input)
-    {
-        var encodedLetters = input.Select(o => CharToMorse[o]);
-        return string.Join(" ", encodedLetters);
-    }
-
-    public static string DecodeMorse(string input)
-    {
-        var words = input.Split("   ");
-        var decodedWords = words.Select(DecodeMorseWord);
-        return string.Join(" ", decodedWords);
-    }
-
-    private static string DecodeMorseWord(string input)
-    {
-        var decodedLetters = input.Split(' ').Select(GetChar);
-        return string.Concat(decodedLetters);
-    }
-
-    private static string GetChar(string morse)
-    {
-        if (MorseToChar.TryGetValue(morse, out var c))
-            return c.ToString();
-        return "";
-    }
-
-    public static string ClicksToMorse(string input)
+    public string ClicksToMorse(string input)
     {
         var timeStamps = input.Split(LineBreaks.Single)
             .Select(o => o.Trim())
@@ -138,4 +79,36 @@ public class Aquaq25 : AquaqPuzzle
             return " ";
         return "   ";
     }
+    
+    private static readonly Dictionary<char, string> CharToMorse = new()
+    {
+        { 'a', ".-" },
+        { 'b', "-..." },
+        { 'c', "-.-." },
+        { 'd', "-.." },
+        { 'e', "." },
+        { 'f', "..-." },
+        { 'g', "--." },
+        { 'h', "...." },
+        { 'i', ".." },
+        { 'j', ".---" },
+        { 'k', "-.-" },
+        { 'l', ".-.." },
+        { 'm', "--" },
+        { 'n', "-." },
+        { 'o', "---" },
+        { 'p', ".--." },
+        { 'q', "--.-" },
+        { 'r', ".-." },
+        { 's', "..." },
+        { 't', "-" },
+        { 'u', "..-" },
+        { 'v', "...-" },
+        { 'w', ".--" },
+        { 'x', "-..-" },
+        { 'y', "-.--" },
+        { 'z', "--.." }
+    };
+
+    private static readonly Dictionary<string, char> MorseToChar = CharToMorse.ToDictionary(k => k.Value, v => v.Key);
 }

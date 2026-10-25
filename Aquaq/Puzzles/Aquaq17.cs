@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Lists;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles;
@@ -15,15 +16,10 @@ public class Aquaq17 : AquaqPuzzle
 
         foreach (var line in lines)
         {
-            var parts = line.Split(',');
-            var date = DateTime.Parse(parts[0]);
-            var team1 = parts[1];
-            var team2 = parts[2];
-            var result1 = int.Parse(parts[3]);
-            var result2 = int.Parse(parts[4]);
-
-            scoreList.Add(new TeamScore(date, team1, result1));
-            scoreList.Add(new TeamScore(date, team2, result2));
+            var (dateString, team1, team2, result1, result2) = line.Split(',');
+            var date = DateTime.Parse(dateString);
+            scoreList.Add(new TeamScore(date, team1, int.Parse(result1)));
+            scoreList.Add(new TeamScore(date, team2, int.Parse(result2)));
         }
 
         var teamScores = scoreList.GroupBy(o => o.Team).ToDictionary(k => k.Key, o => o.ToList());
@@ -62,11 +58,11 @@ public class Aquaq17 : AquaqPuzzle
                 }
             }
 
-            if (!isInStreak && teamScore.Score == 0)
-            {
-                isInStreak = true;
-                streakStartTime = teamScore.Date;
-            }
+            if (isInStreak || teamScore.Score != 0)
+                continue;
+            
+            isInStreak = true;
+            streakStartTime = teamScore.Date;
         }
 
         return new TeamShame(teamScores.First().Team, longestStreakDates.Item1, longestStreakDates.Item2);

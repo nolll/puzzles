@@ -35,13 +35,10 @@ public class Aquaq20 : AquaqPuzzle
         return winCount;
     }
 
-    private static int GetCardValue(string card)
+    private static int GetCardValue(string card) => card switch
     {
-        return card switch
-        {
-            "A" => 11,
-            "K" or "Q" or "J" or "10" => 10,
-            _ => int.Parse(card)
-        };
-    }
+        "A" => 11,
+        "K" or "Q" or "J" or "10" => 10,
+        _ => int.Parse(card)
+    };
 }

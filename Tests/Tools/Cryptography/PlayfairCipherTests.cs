@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.Cryptography;
 
 namespace Tests.Tools.Cryptography;
@@ -6,17 +5,11 @@ namespace Tests.Tools.Cryptography;
 public class PlayfairCipherTests
 {
     [Fact]
-    public void CreateStringBoard() => new PlayfairCipher("play fair")
-        .CreateStringCipherBoard()
-        .Should().Be("playfirbcdeghkmnoqstuvwxz");
+    public void CreateStringBoard() => new PlayfairCipher("play fair").CreateStringCipherBoard().Should().Be("playfirbcdeghkmnoqstuvwxz");
 
     [Fact]
-    public void Encrypt() => new PlayfairCipher("play fair")
-        .Encrypt("flawless")
-        .Should().Be("pabapgxyxy");
+    public void Encrypt() => new PlayfairCipher("play fair").Encrypt("flawless").Should().Be("pabapgxyxy");
 
     [Fact]
-    public void Decrypt() => new PlayfairCipher("play fair")
-        .Decrypt("pabapgxyxy")
-        .Should().Be("flawlesxsx");
+    public void Decrypt() => new PlayfairCipher("play fair").Decrypt("pabapgxyxy").Should().Be("flawlesxsx");
 }

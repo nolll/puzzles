@@ -47,8 +47,7 @@ public class Aoc202404 : AocPuzzle
         return xmasCount;
     }
 
-    private static string ReadWord(Grid<char> grid, (int x, int y) dir) => 
-        string.Concat(ReadWordAsEnumerable(grid, dir));
+    private static string ReadWord(Grid<char> grid, (int x, int y) dir) => string.Concat(ReadWordAsEnumerable(grid, dir));
 
     private static IEnumerable<char> ReadWordAsEnumerable(Grid<char> grid, (int x, int y) dir)
     {
@@ -71,8 +70,7 @@ public class Aoc202404 : AocPuzzle
         if (c != 'A')
             return false;
 
-        var chars = GridConstants.DiagonalDirections
-            .Select(o => grid.ReadValueAt(grid.Coord.X + o.x, grid.Coord.Y - o.y)).ToArray();
+        var chars = GridConstants.DiagonalDirections.Select(o => grid.ReadValueAt(grid.Coord.X + o.x, grid.Coord.Y - o.y)).ToArray();
         
         return IsMas($"{chars[0]}A{chars[2]}") && IsMas($"{chars[1]}A{chars[3]}");
     }

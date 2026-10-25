@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024;
@@ -44,16 +45,7 @@ public class Aoc202407 : AocPuzzle
 
     private static (long target, long[] units)[] ParseNumbers(string input)
     {
-        var list = new List<(long, long[])>();
         var lines = input.Split(LineBreaks.Single);
-        foreach (var line in lines)
-        {
-            var parts = line.Split(": ");
-            var target = long.Parse(parts[0]);
-            var units = parts[1].Split(' ').Select(long.Parse).ToArray();
-            list.Add((target, units));
-        }
-
-        return list.ToArray();
+        return [.. lines.Select(Numbers.LongsFromString).Select(o => ((long, long[]))(o.First(), [.. o.Skip(1)]))];
     }
 }

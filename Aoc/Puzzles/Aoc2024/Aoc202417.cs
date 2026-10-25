@@ -16,6 +16,9 @@ public class Aoc202417 : AocPuzzle
         var output = RunProgram(program, nums[0], nums[1], nums[2]);
         return string.Join(",", output);
     }
+    
+    [Puzzle("a8156e51eb5968f253630b3ceb297916")]
+    public long? Part2(string input) => Find([.. Numbers.IntsFromString(input).Skip(3)]);
 
     private long[] RunProgram(int[] program, long a, long b, long c)
     {
@@ -75,9 +78,6 @@ public class Aoc202417 : AocPuzzle
         6 => c,
         _ => throw new Exception($"Invalid combo operator {op}")
     };
-    
-    [Puzzle("a8156e51eb5968f253630b3ceb297916")]
-    public long? Part2(string input) => Find(Numbers.IntsFromString(input).Skip(3).ToArray());
 
     private static long? Find(int[] program) => Find(program, program, 0);
 

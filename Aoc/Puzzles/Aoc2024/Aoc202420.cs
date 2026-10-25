@@ -12,8 +12,7 @@ public class Aoc202420 : AocPuzzle
     [Puzzle("180cd20a00ef865aeaee6f0f6484da86")]
     public int Part2(string input) => CountCheatsBetterThan(input, 20, 100);
 
-    public int CountCheatsBetterThan(string input, int radius, int limit) => 
-        GetCheats(input, radius).Count(o => o.Value >= limit);
+    public int CountCheatsBetterThan(string input, int radius, int limit) => GetCheats(input, radius).Count(o => o.Value >= limit);
 
     public static Dictionary<(Coord from, Coord to), int> GetCheats(string input, int radius)
     {

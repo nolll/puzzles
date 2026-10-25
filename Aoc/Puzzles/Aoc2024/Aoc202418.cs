@@ -27,10 +27,8 @@ public class Aoc202418 : AocPuzzle
             .Take(steps);
 
         var grid = new Grid<char>(width, height, EmptySpace);
-        foreach (var coord in coords)
-        {
+        foreach (var coord in coords) 
             grid.WriteValueAt(coord, Wall);
-        }
 
         var start = new Coord();
         var end = new Coord(grid.XMax, grid.YMax);
@@ -63,20 +61,10 @@ public class Aoc202418 : AocPuzzle
         return coords[lo].Id;
     }
 
-    private static bool CanReachExit(Grid<char> grid,
-        Coord start,
-        Coord end,
-        Coord[] coords,
-        int n)
+    private static bool CanReachExit(Grid<char> grid, Coord start, Coord end, Coord[] coords, int n)
     {
         var m = grid.Clone();
-
-        for (var i = 0; i < n; i++)
-        {
-            m.WriteValueAt(coords[i], Wall);
-        }
-        
-        var r = PathFinder.ShortestPathTo(m, start, end);
-        return r.Count() != 0;
+        m.WriteValueAt(coords.Take(n), Wall);
+        return PathFinder.ShortestPathTo(m, start, end).Any();
     }
 }

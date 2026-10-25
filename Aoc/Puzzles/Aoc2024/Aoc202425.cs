@@ -21,13 +21,13 @@ public class Aoc202425 : AocPuzzle
             {
                 for (var y = 1; y < grid.Height - 1; y++)
                 {
-                    if(grid.ReadValueAt(x, y) == '#')
+                    if (grid.ReadValueAt(x, y) == '#')
                         a[x]++;
                 }
             }
-            
+
             var isLock = IsLock(grid);
-            if(isLock)
+            if (isLock)
                 locks.Add(a);
             else
                 keys.Add(a);
@@ -37,14 +37,5 @@ public class Aoc202425 : AocPuzzle
     }
 
     private static bool IsMatch(int[] l, int[] k) => !l.Where((t, i) => k[i] + t > 5).Any();
-
-    private static bool IsLock(Grid<char> grid)
-    {
-        for (var x = 0; x < grid.Width; x++)
-        {
-            if (grid.ReadValueAt(x, 0) == '.')
-                return false;
-        }
-        return true;
-    }
+    private static bool IsLock(Grid<char> grid) => Enumerable.Range(0, grid.Width).All(o => grid.ReadValueAt(o, 0) == '.');
 }

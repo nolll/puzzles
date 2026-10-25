@@ -27,14 +27,12 @@ public class Aoc202415 : AocPuzzle
         grid.WriteValue(Symbol.Empty);
 
         var allBoxes = grid.FindCoords(Symbol.Box).Select(o => new BoxPart1(o)).Cast<IBox>().ToList();
-        foreach (var box in allBoxes)
-        {
+        foreach (var box in allBoxes) 
             grid.WriteValueAt(box.Coords.First(), Symbol.Empty);
-        }
         
         foreach (var move in moves)
         {
-            var direction = GetDirection(move);
+            var direction = GridDirection.Get(move);
             grid.TurnTo(direction);
             var lastCoord = grid.Coord;
 
@@ -109,21 +107,13 @@ public class Aoc202415 : AocPuzzle
                 var res = CanMoveBox(grid, allBoxes, subBox, direction);
                 if (!res.canMove)
                     return (false, []);
+                
                 list.AddRange(res.boxesThatMustMove);
             }
         }
 
         return (true, [..list, box]);
     }
-
-    private GridDirection GetDirection(char dir) =>
-        dir switch
-        {
-            '^' => GridDirection.Up,
-            '>' => GridDirection.Right,
-            'v' => GridDirection.Down,
-            _ => GridDirection.Left
-        };
 
     [Puzzle("48a79a74450762d492fd151f9c3c6400")]
     public long Part2(string input)
@@ -158,7 +148,7 @@ public class Aoc202415 : AocPuzzle
         
         foreach (var move in moves)
         {
-            var direction = GetDirection(move);
+            var direction = GridDirection.Get(move);
             grid.TurnTo(direction);
             var lastCoord = grid.Coord;
 
@@ -182,7 +172,7 @@ public class Aoc202415 : AocPuzzle
             .Aggregate(0L, (current, coord) => current + (100 * coord.Y + coord.X));
     }
 
-    public interface IBox
+    private interface IBox
     {
         public List<Coord> Coords { get; }
         public void Move(GridDirection dir);

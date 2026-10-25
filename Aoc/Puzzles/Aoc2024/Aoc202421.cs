@@ -36,23 +36,17 @@ public class Aoc202421 : AocPuzzle
     public long Part2(string input) => Run(input, 25);
 
     private long Run(string codes, int robotCount) => 
-        codes.Split(LineBreaks.Single)
-            .Sum(code => Solve(code, robotCount) * Numbers.IntsFromString(code).First());
+        codes.Split(LineBreaks.Single).Sum(code => Solve(code, robotCount) * Numbers.IntsFromString(code).First());
 
-    public long Solve(string code, int robotCount) =>
-        Solve(code, NumSeqs).Select(o => ComputeLength([], o, robotCount)).Min();
+    public long Solve(string code, int robotCount) => Solve(code, NumSeqs).Select(o => ComputeLength([], o, robotCount)).Min();
 
     private List<string> Solve(string code, Dictionary<(char, char), List<string>> seqs)
     {
         var options = new List<List<string>>();
-        foreach (var (x, y) in ("A" + code).Zip(code))
-        {
+        foreach (var (x, y) in ("A" + code).Zip(code)) 
             options.Add(seqs[(x, y)]);
-        }
 
-        var results = CombinationGenerator.CartesianProduct(options);
-        
-        return results.Select(o => string.Concat(o)).ToList();
+        return CombinationGenerator.CartesianProduct(options).Select(o => string.Concat(o)).ToList();
     }
 
     private static long ComputeLength(Dictionary<(string seq, int depth), long> cache, string seq, int depth)
@@ -65,10 +59,8 @@ public class Aoc202421 : AocPuzzle
             return cachedlength;
         
         var length = 0L;
-        foreach (var (x, y) in ("A" + seq).Zip(seq))
-        {
+        foreach (var (x, y) in ("A" + seq).Zip(seq)) 
             length += ArrowSeqs[(x, y)].Select(o => ComputeLength(cache, o, depth - 1)).Min();
-        }
 
         cache.TryAdd(cachekey, length);
         
@@ -100,8 +92,7 @@ public class Aoc202421 : AocPuzzle
                 }
 
                 var possibilities = new List<string>();
-                var q = new Queue<((int r, int c), string sequence)>();
-                q.Enqueue((pos[x], ""));
+                var q = new Queue<((int r, int c), string sequence)>([(pos[x], "")]);
                 var optimal = int.MaxValue;
                 var foundOptimal = false;
                 while (q.Count > 0)
@@ -134,7 +125,6 @@ public class Aoc202421 : AocPuzzle
 
                     if (foundOptimal)
                         break;
-
                 }
                 
                 seqs[(x, y)] = possibilities;

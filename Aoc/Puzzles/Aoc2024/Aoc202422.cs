@@ -62,16 +62,14 @@ public class Aoc202422 : AocPuzzle
             nums.Add(n);
         }
 
-        return nums.ToArray();
+        return [.. nums];
     }
 
     private static long Generate(long n)
     {
         n = Prune(Mix(n, n * 64));
         n = Prune(Mix(n, n / 32));
-        n = Prune(Mix(n, n * 2048));
-        
-        return n;
+        return Prune(Mix(n, n * 2048));
     }
     
     private static long Mix(long a, long b) => a ^ b;

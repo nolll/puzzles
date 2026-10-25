@@ -4,18 +4,16 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aoc.Puzzles.Aoc2024;
 
 [Name("Crossed Wires")]
-[Comment("Solved by manual inspection of printout")]
+[NeedsRewrite]
+[Comment("Solved by manual inspection of printout. Could possibly remove hardcoded swaps")]
 public class Aoc202424 : AocPuzzle
 {
     [Puzzle("9fc2d4daac695a3b88d61a9cfe083437")]
     public long Part1(string input)
     {
         var (wires, gates) = ParseWiresAndGates(input);
-
         var processor = new Processor(gates, wires);
-        
-        var zgates = gates.Keys.Where(o => o.StartsWith('z')).OrderDescending();
-        var results = zgates.Select(o => processor.Process(o));
+        var results = gates.Keys.Where(o => o.StartsWith('z')).OrderDescending().Select(processor.Process);
 
         return Convert.ToInt64(string.Concat(results), 2);
     }
@@ -25,7 +23,6 @@ public class Aoc202424 : AocPuzzle
     {
         var (wires, gates) = ParseWiresAndGates(input);
 
-        var zgates = gates.Keys.Where(o => o.StartsWith('z')).Order().ToList();
         var xwires = wires.Where(o => o.Key.StartsWith('x')).OrderByDescending(o => o.Key).Select(o => o.Value);
         var ywires = wires.Where(o => o.Key.StartsWith('y')).OrderByDescending(o => o.Key).Select(o => o.Value);
         var x = Convert.ToInt64(string.Concat(xwires), 2);
@@ -40,19 +37,17 @@ public class Aoc202424 : AocPuzzle
             ["z31", "bgs"]
         ];
 
-        foreach (var swap in swaps) 
+        foreach (var swap in swaps)
             (gates[swap[0]], gates[swap[1]]) = (gates[swap[1]], gates[swap[0]]);
-        
-        // Print(gates, zgates);
-        
+
         var processor = new Processor(gates, wires);
-        var results = zgates.Select(zgate => processor.Process(zgate)).ToList();
+        var results = gates.Keys.Where(o => o.StartsWith('z')).Order().ToList().Select(processor.Process).ToList();
         var r = Convert.ToInt64(string.Concat(results.Reversed()), 2);
-        
+
         // Make sure result is correct. This will fail without the swaps
         if (r != x + y)
             throw new Exception("Calculation not correct");
-        
+
         var swapped = swaps.SelectMany(o => o).Order();
 
         return string.Join(",", swapped);
@@ -72,35 +67,11 @@ public class Aoc202424 : AocPuzzle
         return (wires, gates);
     }
 
-    private void Print(Dictionary<string, (string, string, string)> gates, List<string> zgates)
-    {
-        foreach (var zgate in zgates)
-        {
-            Console.WriteLine();
-            Print(gates, zgate, 3, 0);
-        }
-    }
-
-    private void Print(Dictionary<string, (string, string, string)> gates, string name, int maxdepth, int depth)
-    {
-        if (depth == maxdepth)
-            return;
-
-        if (!gates.TryGetValue(name, out var gate))
-            return;
-        
-        var space = new string(' ', depth * 2);
-        Console.WriteLine($"{space}{name} = {gate.Item1} {gate.Item3} {gate.Item2}");
-        
-        Print(gates, gates[name].Item1, maxdepth, depth + 1);
-        Print(gates, gates[name].Item2, maxdepth, depth + 1);
-    }
-
     private class Processor
     {
         private readonly Dictionary<string, long> _wires;
         private readonly Dictionary<string, (string a, string b, Func<string, string, long> f)> _gates;
-        
+
         public Processor(Dictionary<string, (string a, string b, string op)> gates, Dictionary<string, long> wires)
         {
             _gates = gates.ToDictionary(o => o.Key, o => (o.Value.a, o.Value.b, f: GetProcessFunc(o.Value.op)));
@@ -111,7 +82,7 @@ public class Aoc202424 : AocPuzzle
         {
             if (_wires.TryGetValue(name, out var v))
                 return v;
-            
+
             var gate = _gates[name];
             return gate.f(gate.a, gate.b);
         }

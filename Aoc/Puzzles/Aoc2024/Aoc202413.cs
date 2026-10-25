@@ -19,13 +19,9 @@ public class Aoc202413 : AocPuzzle
         var totalCost = 0L;
         foreach (var s in groups)
         {
-            var nums = Numbers.IntsFromString(s);
-            var ax = nums[0];
-            var ay = nums[1];
-            var bx = nums[2];
-            var by = nums[3];
-            var tx = nums[4] + extension;
-            var ty = nums[5] + extension;
+            var (ax, ay, bx, by, itx, ity) = Numbers.IntsFromString(s);
+            var tx = itx + extension;
+            var ty = ity + extension;
             var a = (tx * by - ty * bx) / (ax * by - ay * bx);
             var b = (ty - ay * a) / by;
             if (a * ax + b * bx == tx && a * ay + b * by == ty)

@@ -22,10 +22,7 @@ public class Aoc202406 : AocPuzzle
         return GetVisited(grid, startCoord)!.Count(o => GetVisitCount(grid, startCoord, o) is null);
     }
 
-    private static int? GetVisitCount(
-        Grid<char> grid,
-        Coord startCoord,
-        Coord? blockedCoord = null) =>
+    private static int? GetVisitCount(Grid<char> grid, Coord startCoord, Coord? blockedCoord = null) =>
         GetVisited(grid, startCoord, blockedCoord)?.Count;
     
     private static HashSet<Coord>? GetVisited(Grid<char> grid, Coord startCoord, Coord? blockedCoord = null)

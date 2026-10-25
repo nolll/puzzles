@@ -5,10 +5,5 @@ namespace Tests.Aquaq;
 public class Aquaq06Tests : PuzzleTest<Aquaq06>
 {
     [Fact]
-    public void CountOccurrencesOfOne()
-    {
-        var result = Aquaq06.FindOneCount(3);
-
-        result.Should().Be(9);
-    }
+    public void CountOccurrencesOfOne() => Sut.FindOneCount(3).Should().Be(9);
 }

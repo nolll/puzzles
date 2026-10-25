@@ -37,9 +37,7 @@ public class Aquaq07 : AquaqPuzzle
         }
 
         var values = players.Values;
-        var min = (int)Math.Floor(values.Min());
-        var max = (int)Math.Floor(values.Max());
-        return max - min;
+        return (int)Math.Floor(values.Max()) - (int)Math.Floor(values.Min());
     }
     
     public static double ExpectedWinrate(double a, double b) => 1 / (1 + Math.Pow(10, (b - a) / 400));

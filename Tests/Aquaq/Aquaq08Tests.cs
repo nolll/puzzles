@@ -5,13 +5,7 @@ namespace Tests.Aquaq;
 public class Aquaq08Tests : PuzzleTest<Aquaq08>
 {
     [Fact]
-    public void DaySixState()
-    {
-        var result = Aquaq08.RunInternal(Input);
-
-        result.milk.Should().Be(1600);
-        result.cereal.Should().Be(600);
-    }
+    public void DaySixState() => Sut.Solve(Input).Should().Be(2200);
 
     private const string Input = """
                                  date,milk,cereal

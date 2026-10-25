@@ -9,23 +9,7 @@ public class Aquaq08 : AquaqPuzzle
     [Puzzle("dd27abc4b9d9ddead1ae574a69b3edbc")]
     public int Solve(string input)
     {
-        var (milk, cereal) = RunInternal(input);
-        return milk + cereal;
-    }
-
-    public static (int milk, int cereal) RunInternal(string input)
-    {
-        var days = input.Split(LineBreaks.Single)
-            .Skip(1)
-            .Select(o =>
-            {
-                var parts = o.Split(',');
-                var dateTime = DateTime.Parse(parts[0]);
-                var milk = int.Parse(parts[1]);
-                var cereal = int.Parse(parts[02]);
-                return new Day(dateTime, milk, cereal);
-            }).ToList();
-
+        var days = input.Split(LineBreaks.Single).Skip(1).Select(Day.Parse).ToList();
         days.Add(new Day(days.Last().DateTime.AddDays(1), 0, 0));
 
         var milks = new List<Milk>();
@@ -54,11 +38,11 @@ public class Aquaq08 : AquaqPuzzle
             if (day.MilkAmount > 0)
                 milks.Add(new Milk(day.MilkAmount));
 
-            milks = milks.Where(o => o is { Age: < 5, Amount: > 0 }).OrderByDescending(o => o.Age).ToList();
-            cereals = cereals.Where(o => o.Amount > 0).ToList();
+            milks = [.. milks.Where(o => o is { Age: < 5, Amount: > 0 }).OrderByDescending(o => o.Age)];
+            cereals = [.. cereals.Where(o => o.Amount > 0)];
         }
 
-        return (morningTotalMilk, morningTotalCereal);
+        return morningTotalMilk + morningTotalCereal;
     }
 
     private abstract class Product(int amount)
@@ -81,5 +65,14 @@ public class Aquaq08 : AquaqPuzzle
         public DateTime DateTime { get; } = dateTime;
         public int MilkAmount { get; } = milkAmount;
         public int CerealAmount { get; } = cerealAmount;
+
+        public static Day Parse(string line)
+        {
+            var parts = line.Split(',');
+            var dateTime = DateTime.Parse(parts[0]);
+            var milk = int.Parse(parts[1]);
+            var cereal = int.Parse(parts[2]);
+            return new Day(dateTime, milk, cereal);
+        }
     }
 }

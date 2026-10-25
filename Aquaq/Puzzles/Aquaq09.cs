@@ -8,8 +8,7 @@ namespace Pzl.Aquaq.Puzzles;
 public class Aquaq09 : AquaqPuzzle
 {
     [Puzzle("bcead4ceeb598db4924ff4939d43049f")]
-    public BigInteger Solve(string input) => MultiplyLargeNumbers(input.Split(LineBreaks.Single).Select(BigInteger.Parse));
-
-    public static BigInteger MultiplyLargeNumbers(IEnumerable<BigInteger> numbers) => 
-        numbers.Aggregate(new BigInteger(1), BigInteger.Multiply);
+    public BigInteger Solve(string input) => input.Split(LineBreaks.Single)
+        .Select(BigInteger.Parse)
+        .Aggregate(new BigInteger(1), BigInteger.Multiply);
 }

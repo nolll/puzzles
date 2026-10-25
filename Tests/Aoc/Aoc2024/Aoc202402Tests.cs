@@ -14,17 +14,8 @@ public class Aoc202402Tests : PuzzleTest<Aoc202402>
                                  """;
 
     [Fact]
-    public void Part1()
-    {
-        var result = Sut.Part1(Input);
-        result.Should().Be(2);
-    }
-    
-    [Fact]
-    public void Part2()
-    {
-        var result = Sut.Part2(Input);
-        result.Should().Be(4);
-    }
+    public void Part1() => Sut.Part1(Input).Should().Be(2);
 
+    [Fact]
+    public void Part2() => Sut.Part2(Input).Should().Be(4);
 }

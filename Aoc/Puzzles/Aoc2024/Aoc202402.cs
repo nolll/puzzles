@@ -15,8 +15,7 @@ public class Aoc202402 : AocPuzzle
     private static IEnumerable<List<int>> ParseReports(string input) => 
         input.Split(LineBreaks.Single).Select(o => o.Split(' ').Select(int.Parse).ToList());
 
-    private static bool IsSafe(List<int> levels) => 
-        IsSafeDecreasing(levels) || IsSafeDecreasing(levels.Reversed().ToList());
+    private static bool IsSafe(List<int> levels) => IsSafeDecreasing(levels) || IsSafeDecreasing([.. levels.Reversed()]);
 
     private static bool IsSafeWithDamping(List<int> levels)
     {

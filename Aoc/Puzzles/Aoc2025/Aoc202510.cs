@@ -21,13 +21,11 @@ public class Aoc202510 : AocPuzzle
         .Select(o => SolvePart2(o.counters, o.buttons))
         .Sum();
 
-    private static int SolvePart1(string targetLights, int[][] buttons)
-    {
-        var from = targetLights.Replace('#', '.');
-        var combinations = FindCombinations(from, targetLights, buttons);
-
-        return combinations.Min(o => o.Count);
-    }
+    private static int SolvePart1(string targetLights, int[][] buttons) => 
+        FindCombinations(targetLights.Replace('#', '.'), targetLights, buttons).Min(o => o.Count);
+    
+    private static long SolvePart2(int[] counters, int[][] buttons) => 
+        SolveRecursive(GetPatternsCache(buttons, counters.Length), counters, []);
 
     private static IEnumerable<List<int[]>> FindCombinations(string initialState, string to, int[][] buttons)
     {
@@ -46,14 +44,6 @@ public class Aoc202510 : AocPuzzle
             if(string.Concat(state.Select(o => o ? '#' : '.')) == to)
                 yield return combination;
         }
-    }
-    
-    private static long SolvePart2(int[] counters, int[][] buttons)
-    {
-        var patterns = GetPatternsCache(buttons, counters.Length);
-        var result = SolveRecursive(patterns, counters, []);
-
-        return result;
     }
 
     private static IEnumerable<(int[] pattern, long cost)> GetPatterns(int[][] buttons, int size)

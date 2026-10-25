@@ -9,6 +9,8 @@ namespace Pzl.Aoc.Puzzles.Aoc2025;
 [Comment("Could probably use the corners in a more clever way")]
 public class Aoc202509 : AocPuzzle
 {
+    private static List<int[]> _deltas = [[1, -1], [1, 1], [-1, 1], [-1, -1]];
+
     [Puzzle("703b2c49bc827700bb8947a8bd64d264")]
     public long Part1(string input) => GetAreas(ParseCoords(input)).Select(o => o.area).Max();
 
@@ -19,7 +21,7 @@ public class Aoc202509 : AocPuzzle
         var minx = corners.Min(o => o.X);
         var miny = corners.Min(o => o.Y);
         var filled = new HashSet<(int, int)>();
-        corners = corners.Select(o => new Coord(o.X - minx + 1, o.Y - miny + 1)).ToList();
+        corners = [.. corners.Select(o => new Coord(o.X - minx + 1, o.Y - miny + 1))];
         var mapper = new CoordCompressor(corners);
         var mappedCorners = mapper.Compressed;
         
@@ -43,8 +45,7 @@ public class Aoc202509 : AocPuzzle
         
         var insideCoord = FindInsideCoord(grid, mappedCorners.First());
 
-        var queue = new Queue<Coord>();
-        queue.Enqueue(insideCoord);
+        var queue = new Queue<Coord>([insideCoord]);
         var seen = new HashSet<Coord>();
 
         while (queue.Count > 0)
@@ -110,20 +111,15 @@ public class Aoc202509 : AocPuzzle
         return areas;
     }
 
-    private static List<Coord> ParseCoords(string input) => input.Split(LineBreaks.Single).Select(line => line.Split(',').Select(int.Parse).ToArray())
+    private static List<Coord> ParseCoords(string input) => input.Split(LineBreaks.Single)
+        .Select(line => line.Split(',').Select(int.Parse).ToArray())
         .Select(nums => new Coord(nums[0], nums[1]))
         .ToList();
 
     private static Coord FindInsideCoord(Grid<char> grid, Coord corner)
     {
-        List<int[]> deltas = new List<int[]>();
-        deltas.Add([1, -1]);
-        deltas.Add([1, 1]);
-        deltas.Add([-1, 1]);
-        deltas.Add([-1, -1]);
-
         var firstCoord = corner;
-        var adjCoords = deltas.Select(o => new Coord(firstCoord.X + o[0], firstCoord.Y + o[1]));
+        var adjCoords = _deltas.Select(o => new Coord(firstCoord.X + o[0], firstCoord.Y + o[1]));
         
         foreach (var adjCoord in adjCoords)
         {

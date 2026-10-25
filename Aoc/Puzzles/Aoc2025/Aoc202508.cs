@@ -1,6 +1,7 @@
 using Pzl.Common;
 using Pzl.Tools.Graphs;
 using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2025;
@@ -22,7 +23,7 @@ public class Aoc202508 : AocPuzzle
         var nodes = Graph.GetNodes(edges);
         var groups = Graph.GetConnectedComponents(nodes).Select(o => o.Values);
         
-        groups = groups.OrderByDescending(o => o.Count).ToList();
+        groups = [.. groups.OrderByDescending(o => o.Count)];
         var top3 = groups.Take(3).ToList();
         return top3[0].Count * top3[1].Count * top3[2].Count;
     }
@@ -47,9 +48,13 @@ public class Aoc202508 : AocPuzzle
         return null;
     }
 
-    private static List<Coord3d> ParseCoords(string input) => input.Split(LineBreaks.Single)
-        .Select(o => o.Split(',').Select(int.Parse).ToArray())
-        .Select(o => new Coord3d(o[0], o[1], o[2])).ToList();
+    private static List<Coord3d> ParseCoords(string input) => [.. input.Split(LineBreaks.Single).Select(ParseCoord)];
+
+    private static Coord3d ParseCoord(string s)
+    {
+        var (x, y, z) = Numbers.IntsFromString(s);
+        return new Coord3d(x, y, z);
+    }
 
     private List<(Coord3d from, Coord3d to, double distance)> CalculateDistances(List<Coord3d> coords)
     {

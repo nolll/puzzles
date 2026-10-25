@@ -63,7 +63,7 @@ public class Aoc202511 : AocPuzzle
         return list;
     }
     
-    private long CountPaths(
+    private static long CountPaths(
         string current,
         string target,
         Dictionary<string, string[]> devices,
@@ -75,14 +75,8 @@ public class Aoc202511 : AocPuzzle
         if (current == target)
             return 1;
 
-        var sum = 0L;
-        foreach (var connection in devices[current])
-        {
-            sum += CountPaths(connection, target, devices, seen);
-        }
-
+        var sum = devices[current].Sum(connection => CountPaths(connection, target, devices, seen));
         seen[current] = sum;
-        
         return sum;
     }
 }

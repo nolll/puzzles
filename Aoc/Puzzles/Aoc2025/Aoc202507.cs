@@ -60,8 +60,7 @@ public class Aoc202507 : AocPuzzle
         var nextPos = new Coord(beam.X, beam.Y + 1);
         count = grid.ReadValueAt(nextPos) != Splitter
             ? CountTimelines(nextPos, grid, cache)
-            : CountTimelines(new Coord(nextPos.X - 1, nextPos.Y), grid, cache) +
-              CountTimelines(new Coord(nextPos.X + 1, nextPos.Y), grid, cache);
+            : CountTimelines(new Coord(nextPos.X - 1, nextPos.Y), grid, cache) + CountTimelines(new Coord(nextPos.X + 1, nextPos.Y), grid, cache);
         
         cache.Add(beam, count);
         return count;

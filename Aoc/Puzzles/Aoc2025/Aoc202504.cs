@@ -26,7 +26,7 @@ public class Aoc202504 : AocPuzzle
         while (coords.Count != lastCount)
         {
             lastCount = coords.Count;
-            foreach (var coord in coords.Where(o => adjacentCache[o].Count(r => coords.Contains(r)) < 4))
+            foreach (var coord in coords.Where(o => adjacentCache[o].Count(coords.Contains) < 4))
             {
                 coords.Remove(coord);
             }

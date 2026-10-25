@@ -38,22 +38,11 @@ public class Aoc202502 : AocPuzzle
             return false;
         
         var segments = new List<string>();
-        for (var i = 0; i < id.Length / patternLength; i++)
-        {
+        for (var i = 0; i < id.Length / patternLength; i++) 
             segments.Add(id.Substring(i * patternLength, patternLength));
-        }
 
         return segments.Distinct().Count() == 1;
     }
     
-    private static bool HasRepeatingPattern(string id)
-    {
-        for (var repeats = 2; repeats <= id.Length; repeats++)
-        {
-            if (HasRepeatingPattern(id, repeats))
-                return true;
-        }
-
-        return false;
-    }
+    private static bool HasRepeatingPattern(string id) => Enumerable.Sequence(2, id.Length + 1, 1).Any(o => HasRepeatingPattern(id, o));
 }

@@ -1,4 +1,5 @@
 ﻿using Pzl.Common;
+using Pzl.Tools.Numbers;
 
 namespace Pzl.Aquaq.Puzzles;
 
@@ -6,9 +7,9 @@ namespace Pzl.Aquaq.Puzzles;
 public class Aquaq02 : AquaqPuzzle
 {
     [Puzzle("7397f491441078a2bddb62ede05a1f8c")]
-    public int Solve(string input) => GetUniqueNumbers(input.Split(' ').Select(int.Parse)).Sum();
+    public int Solve(string input) => GetUniqueNumbers(Numbers.IntsFromString(input)).Sum();
 
-    public static IEnumerable<int> GetUniqueNumbers(IEnumerable<int> input)
+    public IEnumerable<int> GetUniqueNumbers(IEnumerable<int> input)
     {
         var result = new List<int>();
 
@@ -16,7 +17,7 @@ public class Aquaq02 : AquaqPuzzle
         {
             var existingIndex = result.IndexOf(i);
             if(existingIndex > -1)
-                result = result.Take(existingIndex).ToList();
+                result = [.. result.Take(existingIndex)];
 
             result.Add(i);
         }

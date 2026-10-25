@@ -7,60 +7,45 @@ namespace Pzl.Aquaq.Puzzles;
 public class Aquaq03 : AquaqPuzzle
 {
     [Puzzle("3fdb562cfba1d01d5ae2817d476f3120")]
-    public int Solve(string input) => new Walker().Walk(input);
-    
-    public class Walker
+    public int Solve(string input)
     {
-        private readonly Grid<char> _grid;
-    
-        public Coord Pos => _grid.Coord;
+        var sum = 0;
+        var grid = GridBuilder.BuildCharGridWithoutTrim(Room);
+        grid.MoveTo(2, 0);
 
-        public Walker()
+        foreach (var c in input)
         {
-            _grid = GridBuilder.BuildCharGridWithoutTrim(Room);
-            _grid.MoveTo(2, 0);
+            Move(grid, c);
+            sum += grid.Coord.X + grid.Coord.Y;
         }
 
-        public int Walk(string input)
-        {
-            var sum = 0;
-
-            foreach (var c in input)
-            {
-                Move(c);
-                sum += Pos.X + Pos.Y;
-            }
-
-            return sum;
-        }
-
-        private void Move(char c)
-        {
-            Turn(c);
-
-            _grid.TryMoveForward();
-            if (_grid.ReadValue() == ' ')
-                _grid.MoveBackward();
-        }
-
-        private void Turn(char c)
-        {
-            _ = c switch
-            {
-                'U' => _grid.TurnTo(GridDirection.Up),
-                'R' => _grid.TurnTo(GridDirection.Right),
-                'D' => _grid.TurnTo(GridDirection.Down),
-                _ => _grid.TurnTo(GridDirection.Left)
-            };
-        }
-
-        private const string Room = """
-                                      ##  
-                                     #### 
-                                    ######
-                                    ######
-                                     #### 
-                                      ##  
-                                    """;
+        return sum;
     }
+
+    private static void Move(Grid<char> grid, char c)
+    {
+        Turn(grid, c);
+        grid.TryMoveForward();
+        if (grid.ReadValue() == ' ')
+            grid.MoveBackward();
+    }
+
+    private static void Turn(Grid<char> grid, char c) => grid.TurnTo(GetDirection(c));
+
+    private static GridDirection GetDirection(char c) => c switch
+    {
+        'U' => GridDirection.Up,
+        'R' => GridDirection.Right,
+        'D' => GridDirection.Down,
+        _ => GridDirection.Left
+    };
+
+    private const string Room = """
+                                  ##  
+                                 #### 
+                                ######
+                                ######
+                                 #### 
+                                  ##  
+                                """;
 }

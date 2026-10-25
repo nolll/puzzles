@@ -16,7 +16,7 @@ public class Aquaq00 : AquaqPuzzle
         return HandleKeyPresses(keyPresses);
     }
 
-    public static string HandleKeyPresses(IEnumerable<(int key, int count)> input) => 
+    public string HandleKeyPresses(IEnumerable<(int key, int count)> input) => 
         string.Concat(input.Select(HandleKeyPresses).Where(o => o is not null));
 
     private static char? HandleKeyPresses((int key, int count) input) => input.key switch

@@ -41,8 +41,6 @@ public class Aoc202411 : AocPuzzle
     {
         var s = x.ToString();
         var halfLength = s.Length / 2;
-        var p1 = long.Parse(s[..halfLength]);
-        var p2 = long.Parse(s[halfLength..]);
-        return [p1, p2];
+        return [long.Parse(s[..halfLength]), long.Parse(s[halfLength..])];
     }
 }

@@ -18,11 +18,5 @@ public class Aoc202506Tests : PuzzleTest<Aoc202506>
     }
 
     [Fact]
-    public void Part2()
-    {
-        const string input = "";
-
-        Sut.Part2(input).Should().Be(0);
-    }
-
+    public void Part2() => Sut.Part2("").Should().Be(0);
 }

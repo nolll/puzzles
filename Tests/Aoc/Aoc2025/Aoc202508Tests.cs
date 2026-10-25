@@ -32,5 +32,4 @@ public class Aoc202508Tests : PuzzleTest<Aoc202508>
 
     [Fact]
     public void Part2() => Sut.Part2(Input).Should().Be(25272);
-
 }

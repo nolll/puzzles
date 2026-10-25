@@ -89,7 +89,7 @@ public class Aoc202408 : AocPuzzle
                     continue;
                 
                 Coord[] pair = [antennas[i], antennas[j]];
-                pair = pair.OrderBy(o => o.Y).ThenBy(o => o.X).ToArray();
+                pair = [.. pair.OrderBy(o => o.Y).ThenBy(o => o.X)];
                 yield return (pair[0], pair[1]);
             }
         }

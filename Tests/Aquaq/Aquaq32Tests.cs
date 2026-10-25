@@ -12,10 +12,5 @@ public class Aquaq32Tests : PuzzleTest<Aquaq32>
     [InlineData("([a)]", false)]
     [InlineData("]{}[", false)]
     [InlineData("((a)){]", false)]
-    public void IsBalanced(string input, bool expected)
-    {
-        var result = Aquaq32.IsBalanced(input);
-
-        result.Should().Be(expected);
-    }
+    public void IsBalanced(string input, bool expected) => Sut.IsBalanced(input).Should().Be(expected);
 }

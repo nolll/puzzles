@@ -13,22 +13,24 @@ public class Aquaq26 : AquaqPuzzle
         .Select(BigInteger.Parse)
         .Aggregate(BigInteger.Zero, (current, n) => current + FindFirstLargerNumber(n) - n);
 
-    public static BigInteger FindFirstLargerNumber(BigInteger input)
+    public BigInteger FindFirstLargerNumber(BigInteger input)
     {
         var digits = input.ToString();
         
         var numChars = 2;
         while (numChars <= digits.Length)
         {
-            var untouchedChars = digits.Substring(0, digits.Length - numChars);
+            var untouchedChars = digits[..^numChars];
             var charsToMove = digits.Substring(digits.Length - numChars, numChars);
             var positions = Enumerable.Range(0, charsToMove.Length).ToArray();
             var largerNumbers = PermutationGenerator.GetPermutations(positions, positions.Length)
                 .Select(o => o.Select(p => charsToMove[p]))
                 .Select(o => BigInteger.Parse($"{untouchedChars}{string.Concat(o)}"))
                 .Where(o => o > input).ToList();
-            if (largerNumbers.Any())
+            
+            if (largerNumbers.Count != 0)
                 return largerNumbers.Min();
+            
             numChars++;
         }
 

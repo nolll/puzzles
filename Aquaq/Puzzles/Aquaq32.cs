@@ -12,7 +12,7 @@ public class Aquaq32 : AquaqPuzzle
     [Puzzle("8b52d401a6c9cf4350dc85e2cebcec81")]
     public int Solve(string input) => input.Split(LineBreaks.Single).Count(IsBalanced);
 
-    public static bool IsBalanced(string input) => RemoveMatchingParenthesis(RemoveClutter(input)).Length == 0;
+    public bool IsBalanced(string input) => RemoveMatchingParenthesis(RemoveClutter(input)).Length == 0;
 
     private static string RemoveMatchingParenthesis(string input)
     {

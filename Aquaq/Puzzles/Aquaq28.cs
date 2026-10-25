@@ -17,14 +17,11 @@ public class Aquaq28 : AquaqPuzzle
 
     public static string Encrypt(string input, string word)
     {
-        var lines = input.Split(LineBreaks.Single)
-            .Skip(1).SkipLast(1)
-            .Select(o => o.Substring(1, o.Length - 2));
+        var lines = input.Split(LineBreaks.Single).Skip(1).SkipLast(1).Select(o => o.Substring(1, o.Length - 2));
         var gridInput = string.Join(LineBreaks.Single, lines);
-
         var grid = GridBuilder.BuildCharGridWithoutTrim(gridInput, Empty);
-
         var encrypted = string.Empty;
+        
         foreach (var c in word)
         {
             var startPos = new Coord(0, Characters.IndexOf(c));

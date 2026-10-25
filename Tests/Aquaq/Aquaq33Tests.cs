@@ -5,12 +5,7 @@ namespace Tests.Aquaq;
 public class Aquaq33Tests : PuzzleTest<Aquaq33>
 {
     [Fact]
-    public void ThrowDarts()
-    {
-        var result = Aquaq33.Run(30);
-
-        result.Should().Be(32);
-    }
+    public void ThrowDarts() => Sut.Run(30).Should().Be(32);
 
     [Theory]
     [InlineData(301, 6)]
@@ -20,11 +15,5 @@ public class Aquaq33Tests : PuzzleTest<Aquaq33>
     [InlineData(181, 4)]
     [InlineData(342, 6)]
     [InlineData(361, 7)]
-    public void PlayOneGame(int target, int expected)
-    {
-        var dartGame = new Aquaq33.DartGame();
-        var result = dartGame.Play(target);
-
-        result.Should().Be(expected);
-    }
+    public void PlayOneGame(int target, int expected) => Sut.Play(target).Should().Be(expected);
 }

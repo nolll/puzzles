@@ -18,7 +18,7 @@ public class Aquaq29 : AquaqPuzzle
         return count;
     }
 
-    public static int CountGoodNumbers(IEnumerable<int> input) => input.Count(IsGoodNumber);
+    public int CountGoodNumbers(IEnumerable<int> input) => input.Count(IsGoodNumber);
 
     private static bool IsGoodNumber(int n)
     {

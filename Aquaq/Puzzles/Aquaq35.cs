@@ -5,6 +5,8 @@ using Pzl.Tools.Strings;
 namespace Pzl.Aquaq.Puzzles;
 
 [Name("Columns")]
+[NeedsRewrite]
+[Comment("Makes assumptions about where to start, based on the correct answer")]
 public class Aquaq35 : AquaqPuzzle
 {
     [AdditionalInputFile("Words.txt")]

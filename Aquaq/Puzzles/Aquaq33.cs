@@ -9,89 +9,87 @@ public class Aquaq33 : AquaqPuzzle
     [Puzzle("3c08f90044660194d3d619fa4c14d736")]
     public long Solve() => Run(245701);
 
-    public static long Run(int maxTarget)
+    public long Run(int maxTarget)
     {
-        var dartGame = new DartGame();
+        var dartCounts = GetDartCounts();
         var sum = 0L;
         for (var i = 1; i <= maxTarget; i++)
         {
-            sum += dartGame.Play(i);
+            sum += Play(dartCounts, i);
         }
 
         return sum;
     }
 
-    public class DartGame
+    public int Play(int remaining) => Play(GetDartCounts(), remaining);
+
+    private int Play(Dictionary<int, int> dartCounts, int remaining)
     {
-        private const int MaxScore = 60;
-
-        private readonly HashSet<int> _allScores =
-        [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-            2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40,
-            3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60,
-            25, 50
-        ];
-
-        private readonly Dictionary<int, int> _dartCounts;
-        private readonly Dictionary<int, IList<IList<int>>> _comboCache = new();
-
-        public DartGame()
-        {
-            _dartCounts = GetDartCounts();
-        }
-
-        public int Play(int remaining)
-        {
-            var bulkCount = PlayMaxScores(remaining);
-            remaining -= bulkCount * MaxScore;
-            return bulkCount + _dartCounts[remaining];
-        }
-
-        private static int PlayMaxScores(int target)
-        {
-            var sixtyCount = 0;
-            while (target > MaxScore * 3)
-            {
-                sixtyCount += 1;
-                target -= MaxScore;
-            }
-
-            return sixtyCount;
-        }
-
-        private Dictionary<int, int> GetDartCounts()
-        {
-            var dartCounts = new Dictionary<int, int> { { 0, 0 } };
-            for (var i = 1; i <= MaxScore * 3; i++)
-            {
-                if (_allScores.Contains(i))
-                {
-                    dartCounts.Add(i, 1);
-                    continue;
-                }
-
-                var comboLength = 2;
-                while (comboLength < 10)
-                {
-                    if (!_comboCache.TryGetValue(comboLength, out var combos))
-                    {
-                        combos = CombinationGenerator.GetCombinationsFixedSize(_allScores.ToList(), comboLength).ToList();
-                        _comboCache.Add(comboLength, combos);
-                    }
-
-                    var matchingCombos = combos.Where(o => o.Sum() == i).ToList();
-                    if (matchingCombos.Any())
-                    {
-                        dartCounts.Add(i, comboLength);
-                        break;
-                    }
-
-                    comboLength++;
-                }
-            }
-
-            return dartCounts;
-        }
+        var bulkCount = PlayMaxScores(remaining);
+        remaining -= bulkCount * MaxScore;
+        return bulkCount + dartCounts[remaining];
     }
+
+    private static int PlayMaxScores(int target)
+    {
+        var sixtyCount = 0;
+        while (target > MaxScore * 3)
+        {
+            sixtyCount += 1;
+            target -= MaxScore;
+        }
+
+        return sixtyCount;
+    }
+
+    public Dictionary<int, int> GetDartCounts()
+    {
+        var comboCache = new Dictionary<int, IList<IList<int>>>();
+        var dartCounts = new Dictionary<int, int> { { 0, 0 } };
+        for (var i = 1; i <= MaxScore * 3; i++)
+        {
+            if (_allScores.Contains(i))
+            {
+                dartCounts.Add(i, 1);
+                continue;
+            }
+
+            var comboLength = 2;
+            while (comboLength < 10)
+            {
+                if (!comboCache.TryGetValue(comboLength, out var combos))
+                {
+                    combos = [.. CombinationGenerator.GetCombinationsFixedSize([.. _allScores], comboLength)];
+                    comboCache.Add(comboLength, combos);
+                }
+
+                var matchingCombos = combos.Where(o => o.Sum() == i).ToList();
+                if (matchingCombos.Count != 0)
+                {
+                    dartCounts.Add(i, comboLength);
+                    break;
+                }
+
+                comboLength++;
+            }
+        }
+
+        return dartCounts;
+    }
+    
+    private const int MaxScore = 60;
+
+    private readonly HashSet<int> _allScores =
+    [
+        .. SingleScores,
+        .. DoubleScores,
+        .. TripleScores,
+        .. BullScores,
+    ];
+
+    private static IEnumerable<int> SingleScores => ScoreSequence(1, 20);
+    private static IEnumerable<int> DoubleScores => ScoreSequence(2, 40);
+    private static IEnumerable<int> TripleScores => ScoreSequence(3, 60);
+    private static IEnumerable<int> BullScores => ScoreSequence(25, 50);
+    private static IEnumerable<int> ScoreSequence(int step, int max) => Enumerable.Sequence(step, max, step);
 }

@@ -1,4 +1,3 @@
-using System.Text;
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
 
@@ -8,44 +7,16 @@ namespace Pzl.Aquaq.Puzzles;
 public class Aquaq31 : AquaqPuzzle
 {
     [Puzzle("a5034749df5937c49bba3b06acc7119c")]
-    public int Solve(string input)
-    {
-        var cube = new Cube();
-        cube.Rotate(input);
-        return cube.Front.Product;
-    }
-
-    public class CubeSolver(Cube cube)
-    {
-        public Cube Cube { get; } = cube;
-
-        public void BringToFront(char color) => BringToFace(Cube.Front, color, FrontBackSearchRotations);
-        public void BringToUp(char color) => BringToFace(Cube.Up, color, UpDownSearchRotations);
-        public void BringToDown(char color) => BringToFace(Cube.Down, color, UpDownSearchRotations);
-
-        private static readonly string[] FrontBackSearchRotations = ["X", "X", "X", "X", "XY", "YY"];
-        private static readonly string[] UpDownSearchRotations = ["X", "X", "X", "X", "XZ", "ZZ"];
-
-        private void BringToFace(CubeFace face, char color, string[] rotations)
-        {
-            foreach (var rotation in rotations)
-            {
-                if (face.Center == color)
-                    return;
-
-                Cube.Rotate(rotation);
-            }
-        }
-    }
+    public int Solve(string input) => new Cube().Rotate(input);
 
     public class Cube
     {
-        public CubeFace Front { get; } = new(CubeColors.Blue);
-        public CubeFace Up { get; } = new(CubeColors.White);
-        public CubeFace Left { get; } = new(CubeColors.Red);
-        public CubeFace Right { get; } = new(CubeColors.Orange);
-        public CubeFace Down { get; } = new(CubeColors.Yellow);
-        public CubeFace Back { get; } = new(CubeColors.Green);
+        private CubeFace Front { get; } = new(CubeColors.Blue);
+        private CubeFace Up { get; } = new(CubeColors.White);
+        private CubeFace Left { get; } = new(CubeColors.Red);
+        private CubeFace Right { get; } = new(CubeColors.Orange);
+        private CubeFace Down { get; } = new(CubeColors.Yellow);
+        private CubeFace Back { get; } = new(CubeColors.Green);
 
         private readonly CubeFace[] _faces;
 
@@ -60,8 +31,8 @@ public class Aquaq31 : AquaqPuzzle
         {
             _faces = [Front, Up, Left, Right, Down, Back];
         }
-
-        public void Rotate(string instructions)
+        
+        public int Rotate(string instructions)
         {
             var rotations = ParseInstructions(instructions);
             foreach (var rotation in rotations)
@@ -69,6 +40,8 @@ public class Aquaq31 : AquaqPuzzle
                 var rotateFunc = GetRotateFunc(rotation);
                 rotateFunc();
             }
+
+            return Front.Product;
         }
 
         private Action GetRotateFunc(string instruction) => instruction switch
@@ -349,43 +322,7 @@ public class Aquaq31 : AquaqPuzzle
             Down.WriteAll(left);
             Down.RotateLeft();
         }
-
-        public string PrintFlat()
-        {
-            var s = new StringBuilder();
-            s.AppendLine(Front.PrintFlat());
-            s.AppendLine(Up.PrintFlat());
-            s.AppendLine(Left.PrintFlat());
-            s.AppendLine(Right.PrintFlat());
-            s.AppendLine(Down.PrintFlat());
-            s.AppendLine(Back.PrintFlat());
-
-            return s.ToString().Trim();
-        }
-
-        public string Print3d()
-        {
-            var pm = new Grid<char>(9, 12, '.');
-            var frontGrid = Front.Grid;
-            var upGrid = Up.Grid;
-            var leftGrid = Left.Grid;
-            var rightGrid = Right.Grid;
-            var downGrid = Down.Grid;
-            var backGrid = Back.Grid.RotateLeft().RotateLeft();
-
-            ApplyToPrintGrid(pm, upGrid, new Coord(3, 0));
-            ApplyToPrintGrid(pm, leftGrid, new Coord(0, 3));
-            ApplyToPrintGrid(pm, frontGrid, new Coord(3, 3));
-            ApplyToPrintGrid(pm, rightGrid, new Coord(6, 3));
-            ApplyToPrintGrid(pm, downGrid, new Coord(3, 6));
-            ApplyToPrintGrid(pm, backGrid, new Coord(3, 9));
-
-            return pm.Print();
-        }
-
-        /// <summary>
-        /// Prints front, up, left, right, down, back
-        /// </summary>
+        
         public string Print()
         {
             var pm = new Grid<char>(23, 3, ' ');
@@ -408,19 +345,15 @@ public class Aquaq31 : AquaqPuzzle
 
         private void ApplyToPrintGrid(Grid<char> printGrid, Grid<char> faceGrid, Coord startAddress)
         {
-            foreach (var coord in faceGrid.Coords)
-            {
+            foreach (var coord in faceGrid.Coords) 
                 printGrid.WriteValueAt(startAddress.X + coord.X, startAddress.Y + coord.Y, faceGrid.ReadValueAt(coord));
-            }
         }
 
         public void Scramble(int rotationsCount = 100)
         {
             var rotations = CubeRotations.Random(rotationsCount);
-            foreach (var rotation in rotations)
-            {
+            foreach (var rotation in rotations) 
                 Rotate(rotation);
-            }
         }
 
         private static IEnumerable<string> ParseInstructions(string s)
@@ -448,15 +381,10 @@ public class Aquaq31 : AquaqPuzzle
         public const char Green = 'g';
     }
 
-    public class CubeFace
+    public class CubeFace(char initial)
     {
         private const int Size = 3;
-        private Grid<char> _grid;
-
-        public CubeFace(char initial)
-        {
-            _grid = new(Size, Size, initial);
-        }
+        private Grid<char> _grid = new(Size, Size, initial);
 
         public char TopLeft => _grid.ReadValueAt(0, 0);
         public char Top => _grid.ReadValueAt(1, 0);
@@ -517,8 +445,6 @@ public class Aquaq31 : AquaqPuzzle
 
         public void RotateRight() => _grid = _grid.RotateRight();
         public void RotateLeft() => _grid = _grid.RotateLeft();
-        public string PrintFlat() => string.Concat(_grid.Values);
-        public string Print() => _grid.Print();
         public int Product => _grid.Values.Select(GetColorValue).Aggregate(1, (a, b) => a * b);
 
         private static int GetColorValue(char c) => c switch
@@ -532,8 +458,8 @@ public class Aquaq31 : AquaqPuzzle
             _ => throw new Exception("Unknown color")
         };
     }
-    
-    public static class CubeRotations
+
+    private static class CubeRotations
     {
         public const string Front = "F";
         public const string FrontPrime = "F'";
@@ -579,12 +505,10 @@ public class Aquaq31 : AquaqPuzzle
         {
             var rnd = new Random((int)DateTime.Now.Ticks);
             var rotations = new List<string>();
-            for (var i = 0; i < count; i++)
-            {
+            for (var i = 0; i < count; i++) 
                 rotations.Add(All[rnd.Next(All.Length - 1)]);
-            }
 
-            return rotations.ToArray();
+            return [.. rotations];
         }
     }
 }

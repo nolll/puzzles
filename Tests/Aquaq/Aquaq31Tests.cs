@@ -5,78 +5,8 @@ namespace Tests.Aquaq;
 public class Aquaq31Tests : PuzzleTest<Aquaq31>
 {
     [Fact]
-    public void Rotate() => new Aquaq31().Solve("U'LBRU").Should().Be(960);
-}
-
-public class CubeSolverTests
-{
-    [Fact]
-    public void BringToFront()
-    {
-        var cube = new Aquaq31.Cube();
-        cube.Scramble();
-
-        var solver = new Aquaq31.CubeSolver(cube);
-        solver.BringToFront(Aquaq31.CubeColors.Blue);
-
-        solver.Cube.Front.Center.Should().Be(Aquaq31.CubeColors.Blue);
-    }
-
-    [Fact]
-    public void BringToTop()
-    {
-        var cube = new Aquaq31.Cube();
-        cube.Scramble();
-
-        var solver = new Aquaq31.CubeSolver(cube);
-        solver.BringToUp(Aquaq31.CubeColors.Blue);
-
-        solver.Cube.Up.Center.Should().Be(Aquaq31.CubeColors.Blue);
-    }
-
-    [Fact]
-    public void BringToDown()
-    {
-        var cube = new Aquaq31.Cube();
-        cube.Scramble();
-
-        var solver = new Aquaq31.CubeSolver(cube);
-        solver.BringToDown(Aquaq31.CubeColors.Blue);
-
-        solver.Cube.Down.Center.Should().Be(Aquaq31.CubeColors.Blue);
-    }
-
-    //[Fact]
-    //public void MoveWhiteEdgesToYellowFace()
-    //{
-    //    var cube = CubeTestHelper.CreateScrambledCube();
-
-    //    cube.YellowFace.Top.Should().Be(CubeColors.White);
-    //    cube.YellowFace.Left.Should().Be(CubeColors.White);
-    //    cube.YellowFace.Right.Should().Be(CubeColors.White);
-    //    cube.YellowFace.Bottom.Should().Be(CubeColors.White);
-    //}
-}
-
-public static class CubeTestHelper
-{
-    public static Aquaq31.Cube CreateScrambledCube()
-    {
-        var cube = new Aquaq31.Cube();
-        cube.Rotate("UL'RDBDU'FLF'");
-        
-        cube.Print().Should().Be("""
-                                 orr rbb gww yoy owb oow
-                                 yby rww wrr oog gyg ogb
-                                 ygw gbb ryg orr wyg ybb
-                                 """);
-
-        return cube;
-    }
-}
-
-public class CubeTests
-{
+    public void Rotate() => Sut.Solve("U'LBRU").Should().Be(960);
+    
     [Fact]
     public void RotateFront()
     {
@@ -236,7 +166,7 @@ public class CubeTests
     [Fact]
     public void RotateX()
     {
-        var cube = CubeTestHelper.CreateScrambledCube();
+        var cube = CreateScrambledCube();
         cube.RotateX();
 
         cube.Print().Should().Be("""
@@ -249,7 +179,7 @@ public class CubeTests
     [Fact]
     public void RotateXPrime()
     {
-        var cube = CubeTestHelper.CreateScrambledCube();
+        var cube = CreateScrambledCube();
         cube.RotateXPrime();
 
         cube.Print().Should().Be("""
@@ -262,7 +192,7 @@ public class CubeTests
     [Fact]
     public void RotateY()
     {
-        var cube = CubeTestHelper.CreateScrambledCube();
+        var cube = CreateScrambledCube();
         cube.RotateY();
 
         cube.Print().Should().Be("""
@@ -275,7 +205,7 @@ public class CubeTests
     [Fact]
     public void RotateYPrime()
     {
-        var cube = CubeTestHelper.CreateScrambledCube();
+        var cube = CreateScrambledCube();
         cube.RotateYPrime();
 
         cube.Print().Should().Be("""
@@ -288,7 +218,7 @@ public class CubeTests
     [Fact]
     public void RotateZ()
     {
-        var cube = CubeTestHelper.CreateScrambledCube();
+        var cube = CreateScrambledCube();
         cube.RotateZ();
 
         cube.Print().Should().Be("""
@@ -301,7 +231,7 @@ public class CubeTests
     [Fact]
     public void RotateZPrime()
     {
-        var cube = CubeTestHelper.CreateScrambledCube();
+        var cube = CreateScrambledCube();
         cube.RotateZPrime();
 
         cube.Print().Should().Be("""
@@ -323,7 +253,7 @@ public class CubeTests
     [InlineData("XZX'X'Z'YX'Z")]
     public void MultipleCubeRotations_BackToStart(string rotations)
     {
-        var cube = CubeTestHelper.CreateScrambledCube();
+        var cube = CreateScrambledCube();
         cube.Rotate(rotations);
 
         cube.Print().Should().Be("""
@@ -345,5 +275,19 @@ public class CubeTests
         cube.OrangeFace.Center.Should().Be(Aquaq31.CubeColors.Orange);
         cube.YellowFace.Center.Should().Be(Aquaq31.CubeColors.Yellow);
         cube.GreenFace.Center.Should().Be(Aquaq31.CubeColors.Green);
+    }
+
+    private static Aquaq31.Cube CreateScrambledCube()
+    {
+        var cube = new Aquaq31.Cube();
+        cube.Rotate("UL'RDBDU'FLF'");
+        
+        cube.Print().Should().Be("""
+                                 orr rbb gww yoy owb oow
+                                 yby rww wrr oog gyg ogb
+                                 ygw gbb ryg orr wyg ybb
+                                 """);
+
+        return cube;
     }
 }

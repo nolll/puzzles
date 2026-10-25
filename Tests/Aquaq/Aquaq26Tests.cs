@@ -11,6 +11,5 @@ public class Aquaq26Tests : PuzzleTest<Aquaq26>
     [InlineData("10290", "10902")]
     [InlineData("4321", "4321")]
     public void FindFirstLargestNumber(string input, string expected) => 
-        Aquaq26.FindFirstLargerNumber(BigInteger.Parse(input))
-            .Should().Be(BigInteger.Parse(expected));
+        Sut.FindFirstLargerNumber(BigInteger.Parse(input)).Should().Be(BigInteger.Parse(expected));
 }

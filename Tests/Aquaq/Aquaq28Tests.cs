@@ -14,6 +14,5 @@ public class Aquaq28Tests : PuzzleTest<Aquaq28>
                                  """;
 
     [Fact]
-    public void MirrorEncrypt() => Aquaq28.Encrypt(Input, "DAD")
-        .Should().Be("CCC");
+    public void MirrorEncrypt() => Aquaq28.Encrypt(Input, "DAD").Should().Be("CCC");
 }

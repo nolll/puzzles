@@ -57,5 +57,5 @@ public class Aquaq27 : AquaqPuzzle
     }
 
     private static int GetWordScore(string word) => word.Sum(GetCharScore) * word.Length;
-    private static int GetCharScore(char c) => (int)(c - 'a') + 1;
+    private static int GetCharScore(char c) => c - 'a' + 1;
 }

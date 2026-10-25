@@ -27,7 +27,7 @@ public class Aquaq36 : AquaqPuzzle
         return sum;
     }
 
-    public static int Solve(List<int> grid, List<int?> input, FactorCache? factorCache = null)
+    public int Solve(List<int> grid, List<int?> input, FactorCache? factorCache = null)
     {
         var concreteFactorCache = factorCache ?? new FactorCache();
         var sortedGrid = grid.OrderDescending().ToList();
@@ -91,11 +91,11 @@ public class Aquaq36 : AquaqPuzzle
                         newInput.RemoveAt(Math.Min(a, b));
                         var diff = Math.Abs(pair.B - pair.A);
                         var result = Solve(newGrid, newInput, factorCache, sum + diff, memoization);
-                        if (result > 0)
-                        {
-                            memoization[cacheKey] = diff;
-                            return result;
-                        }
+                        if (result <= 0)
+                            continue;
+                        
+                        memoization[cacheKey] = diff;
+                        return result;
                     }
                 }
             }
@@ -132,7 +132,7 @@ public class Aquaq36 : AquaqPuzzle
                 return gridNumbers;
 
             var factors = GetMultiplicationFactors(n, _factorCache);
-            gridNumbers = factors.Select(o => new GridNumber(n, o.a, o.b)).ToList();
+            gridNumbers = [.. factors.Select(o => new GridNumber(o.a, o.b))];
             _gridNumberCache.Add(n, gridNumbers);
             return gridNumbers;
         }
@@ -147,7 +147,7 @@ public class Aquaq36 : AquaqPuzzle
         return factors;
     }
 
-    public static List<int> GetAllFactors(IEnumerable<int> gridNumbers)
+    public List<int> GetAllFactors(IEnumerable<int> gridNumbers)
     {
         var list = new List<int>();
         foreach (var n in gridNumbers)
@@ -159,7 +159,7 @@ public class Aquaq36 : AquaqPuzzle
         return list.Order().ToList();
     }
 
-    public static List<HashSet<int>> FindPossibleInputNumbers(List<int?> input, int max, HashSet<int>? factors = null)
+    public List<HashSet<int>> FindPossibleInputNumbers(List<int?> input, int max, HashSet<int>? factors = null)
     {
         var list = new List<HashSet<int>>();
         for (var i = 0; i < input.Count; i++)
@@ -208,6 +208,6 @@ public class Aquaq36 : AquaqPuzzle
         return max;
     }
 
-    public record GridPair(int Product, int Sum, int A, int B);
-    public record GridNumber(int Product, int A, int B);
+    private record GridPair(int Product, int Sum, int A, int B);
+    public record GridNumber(int A, int B);
 }

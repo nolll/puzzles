@@ -13,5 +13,5 @@ public class Aquaq34Tests : PuzzleTest<Aquaq34>
                                  """;
 
     [Fact]
-    public void TrainRoutes() => new Aquaq34().Solve(Input).Should().Be(64);
+    public void TrainRoutes() => Sut.Solve(Input).Should().Be(64);
 }

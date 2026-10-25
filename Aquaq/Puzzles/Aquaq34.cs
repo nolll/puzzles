@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Pzl.Common;
+using Pzl.Tools.Lists;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles;
@@ -47,7 +48,7 @@ public class Aquaq34 : AquaqPuzzle
             for (var i = 0; i < timestamps.Count; i++)
             {
                 var timestamp = timestamps[i];
-                if(timestamp is null)
+                if (timestamp is null)
                     continue;
 
                 var station = stations[i];
@@ -59,11 +60,11 @@ public class Aquaq34 : AquaqPuzzle
                 }
                 else
                 {
-                    var from = train.Legs.Any() 
-                        ? train.Legs.Last().To 
+                    var from = train.Legs.Count != 0
+                        ? train.Legs.Last().To
                         : train.StartStation;
 
-                    var departureTime = train.Legs.Any()
+                    var departureTime = train.Legs.Count != 0
                         ? train.Legs.Last().ArrivalTime
                         : train.StartTime;
 
@@ -93,19 +94,19 @@ public class Aquaq34 : AquaqPuzzle
             foreach (var train in atStation)
             {
                 train.TimeLeftAtStation--;
-                if (train.TimeLeftAtStation == 0)
+                if (train.TimeLeftAtStation != 0)
+                    continue;
+
+                train.CurrentStation = null;
+                if (train.Legs.Count == 0)
                 {
-                    train.CurrentStation = null;
-                    if (!train.Legs.Any())
-                    {
-                        train.State = TrainState.Finished;
-                        train.ArrivalTime = elapsed;
-                    }
-                    else
-                    {
-                        train.State = TrainState.Travelling;
-                        train.TimeLeftToDestination = train.Legs.First().TravelTime;
-                    }
+                    train.State = TrainState.Finished;
+                    train.ArrivalTime = elapsed;
+                }
+                else
+                {
+                    train.State = TrainState.Travelling;
+                    train.TimeLeftToDestination = train.Legs.First().TravelTime;
                 }
             }
 
@@ -113,12 +114,12 @@ public class Aquaq34 : AquaqPuzzle
             var notStarted = trains.Where(o => o.State == TrainState.NotStarted);
             foreach (var train in notStarted)
             {
-                if (train.StartTime == elapsed)
-                {
-                    train.State = TrainState.Waiting;
-                    train.CurrentStation = train.StartStation;
-                    train.TimeWaited = 1;
-                }
+                if (train.StartTime != elapsed)
+                    continue;
+
+                train.State = TrainState.Waiting;
+                train.CurrentStation = train.StartStation;
+                train.TimeWaited = 1;
             }
 
             // TRAVELLING -> WAITING
@@ -143,15 +144,15 @@ public class Aquaq34 : AquaqPuzzle
             // WAITING -> AT STATION
             foreach (var station in stations)
             {
-                var trainIsInStation = trains.Any(o => o.State == TrainState.AtStation && o.CurrentStation?.Name == station.Name);
-                if(trainIsInStation)
+                var trainIsInStation = trains.Any(o => o.State == TrainState.AtStation && o.CurrentStation?.StationName == station.StationName);
+                if (trainIsInStation)
                     continue;
 
                 var waiting = trains
-                    .Where(o => o.State == TrainState.Waiting && o.CurrentStation?.Name == station.Name)
+                    .Where(o => o.State == TrainState.Waiting && o.CurrentStation?.StationName == station.StationName)
                     .Order(TrainComparer)
                     .ToList();
-                
+
                 var firstInLine = waiting.FirstOrDefault();
                 if (firstInLine is not null)
                 {
@@ -173,13 +174,15 @@ public class Aquaq34 : AquaqPuzzle
 
     private static int ParseMinutes(string time)
     {
-        var parts = time.Split(':');
-        int.TryParse(parts[0].TrimStart('0'), out var hours);
-        int.TryParse(parts[1].TrimStart('0'), out var minutes);
+        var (h, m) = time.Split(':');
+        if (!int.TryParse(h.TrimStart('0'), out var hours))
+            hours = 0;
+        if (!int.TryParse(m.TrimStart('0'), out var minutes))
+            minutes = 0;
         return hours * 60 + minutes;
     }
-    
-    public class Leg
+
+    private class Leg
     {
         public Station? From { get; init; }
         public Station? To { get; init; }
@@ -187,11 +190,11 @@ public class Aquaq34 : AquaqPuzzle
         public int ArrivalTime { get; init; }
         public int TravelTime => ArrivalTime - DepartureTime;
     }
-    
-    [DebuggerDisplay("{Name}")]
-    public record Station(string Name);
-    
-    public class Train
+
+    [DebuggerDisplay("{StationName}")]
+    private record Station(string StationName);
+
+    private class Train
     {
         public TrainState State { get; set; }
         public int RouteId { get; init; }
@@ -206,8 +209,8 @@ public class Aquaq34 : AquaqPuzzle
         public int TimeLeftToDestination { get; set; }
         public int TimeWaited { get; set; }
     }
-    
-    public enum TrainState
+
+    private enum TrainState
     {
         NotStarted,
         Waiting,
@@ -237,19 +240,19 @@ public class Aquaq34 : AquaqPuzzle
             if (a.LastStation is not null && b.LastStation is null)
                 return 1;
 
-            var startStationCompare = string.Compare(a.StartStation?.Name, b.StartStation?.Name, StringComparison.Ordinal);
-        
-            return startStationCompare != 0 
-                ? startStationCompare 
+            var startStationCompare = string.Compare(a.StartStation?.StationName, b.StartStation?.StationName, StringComparison.Ordinal);
+
+            return startStationCompare != 0
+                ? startStationCompare
                 : a.RouteId.CompareTo(b.RouteId);
         }
 
         private static int CompareOtherTrains(Train a, Train b)
         {
-            var lastStationCompare = string.Compare(a.LastStation?.Name, b.LastStation?.Name, StringComparison.Ordinal);
-        
-            return lastStationCompare != 0 
-                ? lastStationCompare 
+            var lastStationCompare = string.Compare(a.LastStation?.StationName, b.LastStation?.StationName, StringComparison.Ordinal);
+
+            return lastStationCompare != 0
+                ? lastStationCompare
                 : b.TimeWaited.CompareTo(a.TimeWaited);
         }
     }

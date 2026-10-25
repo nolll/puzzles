@@ -14,10 +14,10 @@ public class Aoc202417Tests : PuzzleTest<Aoc202417>
 
                              Program: 0,1,5,4,3,0
                              """;
-    
+
         Sut.Part1(input).Should().Be("4,6,3,5,6,3,5,2,1,0");
     }
-    
+
     [Fact(Skip = "Fails, but I dont't understand why. The real input works fine")]
     public void Part2()
     {
@@ -25,11 +25,10 @@ public class Aoc202417Tests : PuzzleTest<Aoc202417>
                              Register A: 2024
                              Register B: 0
                              Register C: 0
-                             
+
                              Program: 0,3,5,4,3,0
                              """;
-        
+
         Sut.Part2(input).Should().Be(117440);
     }
-
 }

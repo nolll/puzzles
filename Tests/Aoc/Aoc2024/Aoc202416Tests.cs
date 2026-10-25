@@ -21,7 +21,7 @@ public class Aoc202416Tests : PuzzleTest<Aoc202416>
                                   #S..#.....#...#
                                   ###############
                                   """;
-    
+
     private const string Input2 = """
                                   #################
                                   #...#...#...#..E#
@@ -53,5 +53,4 @@ public class Aoc202416Tests : PuzzleTest<Aoc202416>
 
     [Fact]
     public void Part2_2() => Sut.Part2(Input2).Should().Be(64);
-
 }

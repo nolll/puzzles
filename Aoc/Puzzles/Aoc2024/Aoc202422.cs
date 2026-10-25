@@ -53,7 +53,7 @@ public class Aoc202422 : AocPuzzle
         return max;
     }
 
-    public static long[] Generate(long n, int iterations)
+    public long[] Generate(long n, int iterations)
     {
         var nums = new List<long> { n };
         for (var i = 0; i < iterations; i++)

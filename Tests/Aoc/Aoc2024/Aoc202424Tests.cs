@@ -14,7 +14,7 @@ public class Aoc202424Tests : PuzzleTest<Aoc202424>
                              y00: 0
                              y01: 1
                              y02: 0
-                             
+
                              x00 AND y00 -> z00
                              x01 XOR y01 -> z01
                              x02 OR y02 -> z02
@@ -22,7 +22,7 @@ public class Aoc202424Tests : PuzzleTest<Aoc202424>
 
         Sut.Part1(input).Should().Be(4);
     }
-    
+
     [Fact]
     public void Part1_2()
     {
@@ -37,7 +37,7 @@ public class Aoc202424Tests : PuzzleTest<Aoc202424>
                              y02: 1
                              y03: 1
                              y04: 1
-                             
+
                              ntg XOR fgs -> mjb
                              y02 OR x01 -> tnw
                              kwq OR kpj -> z05
@@ -78,5 +78,4 @@ public class Aoc202424Tests : PuzzleTest<Aoc202424>
 
         Sut.Part1(input).Should().Be(2024);
     }
-
 }

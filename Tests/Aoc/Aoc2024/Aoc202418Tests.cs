@@ -33,15 +33,8 @@ public class Aoc202418Tests : PuzzleTest<Aoc202418>
                                  """;
 
     [Fact]
-    public void Part1()
-    {
-        Sut.Part1(Input, 12, 7, 7).Should().Be(22);
-    }
+    public void Part1() => Sut.Part1(Input, 12, 7, 7).Should().Be(22);
 
     [Fact]
-    public void Part2()
-    {
-        Sut.Part2(Input, 7, 7).Should().Be("6,1");
-    }
-
+    public void Part2() => Sut.Part2(Input, 7, 7).Should().Be("6,1");
 }

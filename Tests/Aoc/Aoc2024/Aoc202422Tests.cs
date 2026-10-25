@@ -15,8 +15,7 @@ public class Aoc202422Tests : PuzzleTest<Aoc202422>
     [InlineData(8, 12249484)]
     [InlineData(9, 7753432)]
     [InlineData(10, 5908254)]
-    public void Generate(int iterations, long expected) => 
-        Aoc202422.Generate(123, iterations).Last().Should().Be(expected);
+    public void Generate(int iterations, long expected) => Sut.Generate(123, iterations).Last().Should().Be(expected);
 
     [Fact]
     public void Part1()
@@ -30,7 +29,7 @@ public class Aoc202422Tests : PuzzleTest<Aoc202422>
 
         Sut.Part1(input).Should().Be(37327623);
     }
-    
+
     [Fact]
     public void Part2()
     {
@@ -43,5 +42,4 @@ public class Aoc202422Tests : PuzzleTest<Aoc202422>
 
         Sut.Part2(input).Should().Be(23);
     }
-
 }

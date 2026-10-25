@@ -24,5 +24,4 @@ public class Aoc202414Tests : PuzzleTest<Aoc202414>
 
         Sut.Part1(input, 11, 7).Should().Be(12);
     }
-
 }

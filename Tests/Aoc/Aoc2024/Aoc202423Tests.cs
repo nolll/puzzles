@@ -44,5 +44,4 @@ public class Aoc202423Tests : PuzzleTest<Aoc202423>
 
     [Fact]
     public void Part2() => Sut.Part2(Input).Should().Be("co,de,ka,ta");
-
 }

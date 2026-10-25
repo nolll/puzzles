@@ -4,6 +4,8 @@ using Pzl.Tools.Numbers;
 namespace Pzl.Aoc.Puzzles.Aoc2024;
 
 [Name("Chronospatial Computer")]
+[NeedsRewrite]
+[Comment("One of the test cases fails. Might be a bug that does not affect the real input")]
 public class Aoc202417 : AocPuzzle
 {
     [Puzzle("8ecd8cdd2990f11eb9ae9f0793770018")]

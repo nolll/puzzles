@@ -23,16 +23,16 @@ public class Aoc202420Tests : PuzzleTest<Aoc202420>
                                  """;
 
     [Fact]
-    public void Part1_1() => Aoc202420.CountCheatsBetterThan(Input, 2, 35).Should().Be(4);
+    public void Part1_1() => Sut.CountCheatsBetterThan(Input, 2, 35).Should().Be(4);
 
     [Fact]
-    public void Part2_1() => Aoc202420.CountCheatsBetterThan(Input, 20, 50).Should().Be(285);
+    public void Part2_1() => Sut.CountCheatsBetterThan(Input, 20, 50).Should().Be(285);
 
     [Fact]
     public void Part1_2()
     {
         var result = Aoc202420.GetCheats(Input, 2);
-        
+
         var bucket2 = result.Where(o => o.Value == 2).ToList();
         var bucket4 = result.Where(o => o.Value == 4).ToList();
         var bucket6 = result.Where(o => o.Value == 6).ToList();
@@ -44,7 +44,7 @@ public class Aoc202420Tests : PuzzleTest<Aoc202420>
         var bucket38 = result.Where(o => o.Value == 38).ToList();
         var bucket40 = result.Where(o => o.Value == 40).ToList();
         var bucket64 = result.Where(o => o.Value == 64).ToList();
-        
+
         bucket2.Count.Should().Be(14);
         bucket4.Count.Should().Be(14);
         bucket6.Count.Should().Be(2);
@@ -57,12 +57,12 @@ public class Aoc202420Tests : PuzzleTest<Aoc202420>
         bucket40.Count.Should().Be(1);
         bucket64.Count.Should().Be(1);
     }
-    
+
     [Fact]
     public void Part2_2()
     {
         var rSavings = Aoc202420.GetCheats(Input, 20);
-        
+
         var bucket50 = rSavings.Where(o => o.Value == 50).ToList();
         var bucket52 = rSavings.Where(o => o.Value == 52).ToList();
         var bucket54 = rSavings.Where(o => o.Value == 54).ToList();
@@ -77,7 +77,7 @@ public class Aoc202420Tests : PuzzleTest<Aoc202420>
         var bucket72 = rSavings.Where(o => o.Value == 72).ToList();
         var bucket74 = rSavings.Where(o => o.Value == 74).ToList();
         var bucket76 = rSavings.Where(o => o.Value == 76).ToList();
-        
+
         bucket50.Count.Should().Be(32);
         bucket52.Count.Should().Be(31);
         bucket54.Count.Should().Be(29);
@@ -93,5 +93,4 @@ public class Aoc202420Tests : PuzzleTest<Aoc202420>
         bucket74.Count.Should().Be(4);
         bucket76.Count.Should().Be(3);
     }
-
 }

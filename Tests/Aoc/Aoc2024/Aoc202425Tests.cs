@@ -48,5 +48,4 @@ public class Aoc202425Tests : PuzzleTest<Aoc202425>
                                  #.#.#
                                  #####
                                  """;
-
 }

@@ -16,7 +16,7 @@ public class Aoc202415Tests : PuzzleTest<Aoc202415>
                              #...O..#
                              #......#
                              ########
-                             
+
                              <^^>>>vv<v>>v<<
                              """;
 
@@ -34,13 +34,13 @@ public class Aoc202415Tests : PuzzleTest<Aoc202415>
                              #..O..#
                              #.....#
                              #######
-                             
+
                              <vv<<^^<<^^
                              """;
 
         Sut.Part2(input).Should().Be(618);
     }
-    
+
     [Fact]
     public void Part2_2()
     {
@@ -70,5 +70,4 @@ public class Aoc202415Tests : PuzzleTest<Aoc202415>
 
         Sut.Part2(input).Should().Be(9021);
     }
-
 }

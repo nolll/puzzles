@@ -5,13 +5,8 @@ namespace Tests.Aoc.Aoc2024;
 public class Aoc202421Tests : PuzzleTest<Aoc202421>
 {
     [Fact]
-    public void Part1()
-    {
-        const string input = "029A";
+    public void Part1() => Sut.Solve("029A", 2).Should().Be(68);
 
-        Sut.Solve(input, 2).Should().Be(68);
-    }
-    
     [Fact]
     public void Part1_All()
     {
@@ -25,5 +20,4 @@ public class Aoc202421Tests : PuzzleTest<Aoc202421>
 
         Sut.Part1(input).Should().Be(126384);
     }
-
 }

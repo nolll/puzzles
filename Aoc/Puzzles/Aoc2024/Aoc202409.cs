@@ -15,7 +15,7 @@ public class Aoc202409 : AocPuzzle
         var isFile = true;
         for (var i = 0; i < nums.Length; i++)
         {
-            for (int j = 0; j < nums[i]; j++)
+            for (var j = 0; j < nums[i]; j++)
             {
                 blocks[b] = isFile ? i / 2 : -1;
                 b++;

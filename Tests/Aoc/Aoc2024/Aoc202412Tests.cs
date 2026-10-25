@@ -35,7 +35,7 @@ public class Aoc202412Tests : PuzzleTest<Aoc202412>
 
         Sut.Part1(input).Should().Be(1930);
     }
-    
+
     [Fact]
     public void Part2_1()
     {
@@ -48,7 +48,7 @@ public class Aoc202412Tests : PuzzleTest<Aoc202412>
 
         Sut.Part2(input).Should().Be(80);
     }
-    
+
     [Fact]
     public void Part2_2()
     {
@@ -67,7 +67,7 @@ public class Aoc202412Tests : PuzzleTest<Aoc202412>
 
         Sut.Part2(input).Should().Be(1206);
     }
-    
+
     [Fact]
     public void Part2_3()
     {
@@ -81,7 +81,7 @@ public class Aoc202412Tests : PuzzleTest<Aoc202412>
 
         Sut.Part2(input).Should().Be(236);
     }
-    
+
     [Fact]
     public void Part2_4()
     {
@@ -96,5 +96,4 @@ public class Aoc202412Tests : PuzzleTest<Aoc202412>
 
         Sut.Part2(input).Should().Be(368);
     }
-
 }

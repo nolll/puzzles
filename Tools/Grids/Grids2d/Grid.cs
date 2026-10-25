@@ -139,6 +139,12 @@ public class Grid<T> where T : struct
         else
             _grid[coord] = value;
     }
+
+    public void WriteValueAt(IEnumerable<Coord> coords, T value)
+    {
+        foreach (var coord in coords)
+            WriteValueAt(coord, value);
+    }
     
     public void ClearValueAt(Coord coord) => _grid.Remove(coord);
 

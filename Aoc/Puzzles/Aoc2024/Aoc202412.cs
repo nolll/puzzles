@@ -11,7 +11,7 @@ public class Aoc202412 : AocPuzzle
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var totalPrice = 0;
-        
+
         while (true)
         {
             var coord = grid.Coords.FirstOrDefault(o => grid.ReadValueAt(o) != '.');
@@ -19,13 +19,12 @@ public class Aoc202412 : AocPuzzle
                 break;
 
             var v = grid.ReadValueAt(coord);
-            var queue = new Queue<Coord>();
-            queue.Enqueue(coord);
+            var queue = new Queue<Coord>([coord]);
             var set = new HashSet<Coord>();
             while (queue.Count > 0)
             {
                 var c = queue.Dequeue();
-                if(!set.Add(c))
+                if (!set.Add(c))
                     continue;
 
                 var neighbors = grid.OrthogonalAdjacentCoordsTo(c).Where(o => grid.ReadValueAt(o) == v);
@@ -44,14 +43,11 @@ public class Aoc202412 : AocPuzzle
                 landCount += 1;
             }
 
-            foreach (var c in set)
-            {
-                grid.WriteValueAt(c, '.');
-            }
-            
+            grid.WriteValueAt(set, '.');
+
             totalPrice += landCount * fenceCount;
         }
-        
+
         return totalPrice;
     }
 
@@ -60,7 +56,7 @@ public class Aoc202412 : AocPuzzle
     {
         var grid = GridBuilder.BuildCharGrid(input, '.');
         var totalPrice = 0;
-        
+
         while (true)
         {
             var coord = grid.Coords.FirstOrDefault(o => grid.ReadValueAt(o) != '.');
@@ -74,16 +70,16 @@ public class Aoc202412 : AocPuzzle
             while (queue.Count > 0)
             {
                 var c = queue.Dequeue();
-                if(!set.Add(c))
+                if (!set.Add(c))
                     continue;
 
                 var neighbors = grid.OrthogonalAdjacentCoordsTo(c).Where(o => grid.ReadValueAt(o) == v);
-                foreach (var neighbor in neighbors) 
+                foreach (var neighbor in neighbors)
                     queue.Enqueue(neighbor);
             }
-            
+
             var plantGrid = new Grid<char>(grid.Width + 1, grid.Height + 1, '.');
-            foreach (var c in set) 
+            foreach (var c in set)
                 plantGrid.WriteValueAt(c, v);
 
             var width = plantGrid.Width;
@@ -93,18 +89,18 @@ public class Aoc202412 : AocPuzzle
             for (var y = 0; y < height; y++)
             {
                 var row = new int[width];
-                for (var x = 0; x < width; x++) 
+                for (var x = 0; x < width; x++)
                     row[x] = plantGrid.ReadValueAt(x, y) == v ? 1 : 0;
 
                 var diff = new int[width];
-                for (var x = 0; x < width; x++) 
+                for (var x = 0; x < width; x++)
                     diff[x] = row[x] - lastRow[x];
 
                 var f = 0;
                 var lastDiff = 0;
                 for (var x = 0; x < width; x++)
                 {
-                    if (diff[x] != lastDiff && diff[x] != 0) 
+                    if (diff[x] != lastDiff && diff[x] != 0)
                         f++;
 
                     lastDiff = diff[x];
@@ -113,39 +109,38 @@ public class Aoc202412 : AocPuzzle
                 fenceCount += f;
                 lastRow = row;
             }
-            
+
             var lastCol = new int[height];
             for (var x = 0; x < width; x++)
             {
                 var col = new int[height];
-                for (var y = 0; y < height; y++) 
+                for (var y = 0; y < height; y++)
                     col[y] = plantGrid.ReadValueAt(x, y) == v ? 1 : 0;
 
                 var diff = new int[height];
-                for (var y = 0; y < height; y++) 
+                for (var y = 0; y < height; y++)
                     diff[y] = col[y] - lastCol[y];
 
                 var f = 0;
                 var lastDiff = 0;
                 for (var y = 0; y < height; y++)
                 {
-                    if (diff[y] != lastDiff && diff[y] != 0) 
+                    if (diff[y] != lastDiff && diff[y] != 0)
                         f++;
-                    
+
                     lastDiff = diff[y];
                 }
 
                 fenceCount += f;
                 lastCol = col;
             }
-            
-            foreach (var c in set) 
-                grid.WriteValueAt(c, '.');
-            
+
+            grid.WriteValueAt(set, '.');
+
             var price = set.Count * fenceCount;
             totalPrice += price;
         }
-        
+
         return totalPrice;
     }
 }

@@ -1,5 +1,5 @@
 using Pzl.Common;
-using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Grids.Grids3D;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
@@ -25,7 +25,7 @@ public class Aoc202119 : AocPuzzle
         var baseScanner = scanners.First();
         var otherScanners = scanners.Skip(1).ToList();
 
-        var scannerLocations = new List<Coord3d>();
+        var scannerLocations = new List<Coord3D>();
 
         while (otherScanners.Count != 0)
         {
@@ -39,7 +39,7 @@ public class Aoc202119 : AocPuzzle
 
                 foreach (var relCoord in found.Value.beaconCoords)
                 {
-                    baseScanner.AddCoord(new Coord3d(
+                    baseScanner.AddCoord(new Coord3D(
                         found.Value.scannerCoord.X - relCoord.X,
                         found.Value.scannerCoord.Y - relCoord.Y,
                         found.Value.scannerCoord.Z - relCoord.Z));
@@ -74,27 +74,27 @@ public class Aoc202119 : AocPuzzle
         return new BeaconScanner(id, beaconCoords);
     }
 
-    private static Coord3d ParseCoord(string s)
+    private static Coord3D ParseCoord(string s)
     {
         var (x, y, z) = Numbers.IntsFromString(s);
-        return new Coord3d(x, y, z);
+        return new Coord3D(x, y, z);
     }
 
-    private class BeaconScanner(int id, HashSet<Coord3d> beaconCoords)
+    private class BeaconScanner(int id, HashSet<Coord3D> beaconCoords)
     {
         public int Id { get; } = id;
-        public HashSet<Coord3d> BeaconCoords { get; } = beaconCoords;
+        public HashSet<Coord3D> BeaconCoords { get; } = beaconCoords;
 
-        public (Coord3d scannerCoord, List<Coord3d> beaconCoords)? FindMatchingRotation(HashSet<Coord3d> otherCoords)
+        public (Coord3D scannerCoord, List<Coord3D> beaconCoords)? FindMatchingRotation(HashSet<Coord3D> otherCoords)
         {
-            var transforms = new List<Func<Coord3d, Coord3d>>
+            var transforms = new List<Func<Coord3D, Coord3D>>
             {
-                coord => new Coord3d(coord.X, coord.Y, coord.Z),
-                coord => new Coord3d(coord.Z, coord.X, coord.Y),
-                coord => new Coord3d(coord.Y, coord.Z, coord.X),
-                coord => new Coord3d(coord.X, coord.Z, coord.Y),
-                coord => new Coord3d(coord.Z, coord.Y, coord.X),
-                coord => new Coord3d(coord.Y, coord.X, coord.Z),
+                coord => new Coord3D(coord.X, coord.Y, coord.Z),
+                coord => new Coord3D(coord.Z, coord.X, coord.Y),
+                coord => new Coord3D(coord.Y, coord.Z, coord.X),
+                coord => new Coord3D(coord.X, coord.Z, coord.Y),
+                coord => new Coord3D(coord.Z, coord.Y, coord.X),
+                coord => new Coord3D(coord.Y, coord.X, coord.Z),
             };
 
             var rotations = new List<(int x, int y, int z)>
@@ -113,22 +113,22 @@ public class Aoc202119 : AocPuzzle
             {
                 foreach (var rotation in rotations)
                 {
-                    var compareCoords = new List<Coord3d>();
+                    var compareCoords = new List<Coord3D>();
                     foreach (var otherCoord in otherCoords)
                     {
                         var transformedCoord = transform(otherCoord);
                         var x = transformedCoord.X * rotation.x;
                         var y = transformedCoord.Y * rotation.y;
                         var z = transformedCoord.Z * rotation.z;
-                        compareCoords.Add(new Coord3d(x, y, z));
+                        compareCoords.Add(new Coord3D(x, y, z));
                     }
 
-                    var scannerPositions = new Dictionary<Coord3d, int>();
+                    var scannerPositions = new Dictionary<Coord3D, int>();
                     foreach (var coord in BeaconCoords)
                     {
                         foreach (var compareCoord in compareCoords)
                         {
-                            var scannerPosition = new Coord3d(
+                            var scannerPosition = new Coord3D(
                                 coord.X + compareCoord.X,
                                 coord.Y + compareCoord.Y,
                                 coord.Z + compareCoord.Z);
@@ -149,7 +149,7 @@ public class Aoc202119 : AocPuzzle
             return null;
         }
 
-        public void AddCoord(Coord3d newCoord) => BeaconCoords.Add(newCoord);
+        public void AddCoord(Coord3D newCoord) => BeaconCoords.Add(newCoord);
     }
 
     public record BeaconSystemResult(int BeaconCount, int MaxDistance);

@@ -1,6 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Graphs;
-using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Grids.Grids3D;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
@@ -48,17 +48,17 @@ public class Aoc202508 : AocPuzzle
         return null;
     }
 
-    private static List<Coord3d> ParseCoords(string input) => [.. input.Split(LineBreaks.Single).Select(ParseCoord)];
+    private static List<Coord3D> ParseCoords(string input) => [.. input.Split(LineBreaks.Single).Select(ParseCoord)];
 
-    private static Coord3d ParseCoord(string s)
+    private static Coord3D ParseCoord(string s)
     {
         var (x, y, z) = Numbers.IntsFromString(s);
-        return new Coord3d(x, y, z);
+        return new Coord3D(x, y, z);
     }
 
-    private List<(Coord3d from, Coord3d to, double distance)> CalculateDistances(List<Coord3d> coords)
+    private List<(Coord3D from, Coord3D to, double distance)> CalculateDistances(List<Coord3D> coords)
     {
-        var distances = new List<(Coord3d from, Coord3d to, double distance)>();
+        var distances = new List<(Coord3D from, Coord3D to, double distance)>();
         for (var i = 0; i < coords.Count - 1; i++)
         {
             for (var j = i + 1; j < coords.Count; j++)
@@ -70,7 +70,7 @@ public class Aoc202508 : AocPuzzle
         return distances.OrderBy(o => o.distance).ToList();
     }
 
-    private static IEnumerable<GraphEdge> CreateEdges(Coord3d a, Coord3d b)
+    private static IEnumerable<GraphEdge> CreateEdges(Coord3D a, Coord3D b)
     {
         yield return new GraphEdge(a.Id, b.Id);
         yield return new GraphEdge(b.Id, a.Id);

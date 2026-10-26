@@ -1,5 +1,5 @@
 using Pzl.Common;
-using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Grids.Grids3D;
 using Pzl.Tools.Grids.Grids4d;
 
 namespace Pzl.Aoc.Puzzles.Aoc2020;
@@ -12,19 +12,19 @@ public class Aoc202017 : AocPuzzle
     [Puzzle("86fb7e6bf0dd282e332fdf0fe14cb572")]
     public int Part1(string input)
     {
-        var grid = Grid3dBuilder.BuildCharGrid(input, '.');
+        var grid = Grid3DBuilder.BuildCharGrid(input, '.');
 
         for (var i = 0; i < 6; i++)
         {
             grid.ExtendAllDirections();
-            var ons = new List<Coord3d>();
+            var ons = new List<Coord3D>();
             for (var z = grid.ZMin; z <= grid.ZMax; z++)
             {
                 for (var y = grid.YMin; y <= grid.YMax; y++)
                 {
                     for (var x = grid.XMin; x <= grid.XMax; x++)
                     {
-                        var coord = new Coord3d(x, y, z);
+                        var coord = new Coord3D(x, y, z);
                         var currentValue = grid.ReadValueAt(coord);
                         var adjacentValues = grid.AllAdjacentValuesTo(coord);
                         var neighborCount = adjacentValues.Count(o => o == '#');
@@ -46,12 +46,12 @@ public class Aoc202017 : AocPuzzle
     [Puzzle("7d43e2d315b28ef823069e2b5aef74e8")]
     public int Part2(string input)
     {
-        var grid = Grid4dBuilder.BuildCharGrid(input, '.');
+        var grid = Grid4DBuilder.BuildCharGrid(input, '.');
 
         for (var i = 0; i < 6; i++)
         {
             grid.ExtendAllDirections();
-            var newGrid = new Grid4d<char>(1, 1, 1, 1, '.');
+            var newGrid = new Grid4D<char>(1, 1, 1, 1, '.');
             for (var w = 0; w < grid.Duration; w++)
             {
                 for (var z = 0; z < grid.Depth; z++)
@@ -72,7 +72,7 @@ public class Aoc202017 : AocPuzzle
                 }
             }
 
-            newGrid.StartAddress = grid.StartAddress;
+            newGrid.StartCoord = grid.StartCoord;
             grid = newGrid;
         }
 

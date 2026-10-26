@@ -2,36 +2,36 @@ using System.Text;
 
 namespace Pzl.Tools.Grids.Grids4d;
 
-public class Grid4d<T> where T : struct
+public class Grid4D<T> where T : struct
 {
     private readonly T _defaultValue;
     private readonly IList<IList<IList<IList<T>>>> _grid;
-    public Coord4d Address { get; private set; }
-    public Coord4d StartAddress { get; set; }
+    public Coord4D Coord { get; private set; }
+    public Coord4D StartCoord { get; set; }
 
     public IList<T> Values => _grid.SelectMany(x => x).SelectMany(x => x).SelectMany(x => x).ToList();
     public int Duration => _grid.Count;
     public int Depth => _grid.Any() ? _grid[0].Count : 0;
     public int Height => _grid.Any() && _grid[0].Any() ? _grid[0][0].Count : 0;
     public int Width => _grid.Any() && _grid[0].Any() && _grid[0][0].Any() ? _grid[0][0][0].Count : 0;
-    public bool IsAtTop => Address.Y == 0;
-    public bool IsAtRightEdge => Address.X == Width - 1;
-    public bool IsAtBottom => Address.Y == Height - 1;
-    public bool IsAtLeftEdge => Address.X == 0;
-    public Coord4d Center => new(Width / 2, Height / 2, Depth / 2, Duration / 2);
+    public bool IsAtTop => Coord.Y == 0;
+    public bool IsAtRightEdge => Coord.X == Width - 1;
+    public bool IsAtBottom => Coord.Y == Height - 1;
+    public bool IsAtLeftEdge => Coord.X == 0;
+    public Coord4D Center => new(Width / 2, Height / 2, Depth / 2, Duration / 2);
 
-    public Grid4d(int width = 1, int height = 1, int depth = 1, int duration = 1, T defaultValue = default)
+    public Grid4D(int width = 1, int height = 1, int depth = 1, int duration = 1, T defaultValue = default)
     {
         _defaultValue = defaultValue;
         _grid = BuildGrid(width, height, depth, duration, defaultValue);
-        Address = new Coord4d(0, 0, 0, 0);
-        StartAddress = new Coord4d(0, 0, 0, 0);
+        Coord = new Coord4D(0, 0, 0, 0);
+        StartCoord = new Coord4D(0, 0, 0, 0);
     }
 
-    public bool TryMoveTo(Coord4d address) => MoveTo(address, false);
-    public bool MoveTo(Coord4d address) => MoveTo(address, true);
+    public bool TryMoveTo(Coord4D address) => MoveTo(address, false);
+    public bool MoveTo(Coord4D address) => MoveTo(address, true);
 
-    private bool MoveTo(Coord4d address, bool extend)
+    private bool MoveTo(Coord4D address, bool extend)
     {
         if (IsOutOfRange(address))
         {
@@ -45,30 +45,30 @@ public class Grid4d<T> where T : struct
         var y = address.Y > 0 ? address.Y : 0;
         var z = address.Z > 0 ? address.Z : 0;
         var w = address.W > 0 ? address.W : 0;
-        Address = new Coord4d(x, y, z, w);
+        Coord = new Coord4D(x, y, z, w);
         return true;
     }
 
-    public bool TryMoveTo(int x, int y, int z, int w) => MoveTo(new Coord4d(x, y, z, w), false);
-    public bool MoveTo(int x, int y, int z, int w) => MoveTo(new Coord4d(x, y, z, w), true);
+    public bool TryMoveTo(int x, int y, int z, int w) => MoveTo(new Coord4D(x, y, z, w), false);
+    public bool MoveTo(int x, int y, int z, int w) => MoveTo(new Coord4D(x, y, z, w), true);
     public bool TryMoveUp(int steps = 1) => MoveUp(steps, false);
     public bool MoveUp(int steps = 1) => MoveUp(steps, true);
-    private bool MoveUp(int steps, bool extend) => MoveTo(new Coord4d(Address.X, Address.Y - steps, Address.Z, Address.W), extend);
+    private bool MoveUp(int steps, bool extend) => MoveTo(new Coord4D(Coord.X, Coord.Y - steps, Coord.Z, Coord.W), extend);
     public bool TryMoveRight(int steps = 1) => MoveRight(steps, false);
     public bool MoveRight(int steps = 1) => MoveRight(steps, true);
-    private bool MoveRight(int steps, bool extend) => MoveTo(new Coord4d(Address.X + steps, Address.Y, Address.Z, Address.W), extend);
+    private bool MoveRight(int steps, bool extend) => MoveTo(new Coord4D(Coord.X + steps, Coord.Y, Coord.Z, Coord.W), extend);
     public bool TryMoveDown(int steps = 1) => MoveDown(steps, false);
     public bool MoveDown(int steps = 1) => MoveDown(steps, true);
-    private bool MoveDown(int steps, bool extend) => MoveTo(new Coord4d(Address.X, Address.Y + steps, Address.Z, Address.W), extend);
+    private bool MoveDown(int steps, bool extend) => MoveTo(new Coord4D(Coord.X, Coord.Y + steps, Coord.Z, Coord.W), extend);
     public bool TryMoveLeft(int steps = 1) => MoveLeft(steps, false);
     public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
-    private bool MoveLeft(int steps, bool extend) => MoveTo(new Coord4d(Address.X - steps, Address.Y, Address.Z, Address.W), extend);
-    public T ReadValue() => ReadValueAt(Address.X, Address.Y, Address.Z, Address.W);
-    public T ReadValueAt(Coord4d address) => ReadValueAt(address.X, address.Y, address.Z, address.W);
+    private bool MoveLeft(int steps, bool extend) => MoveTo(new Coord4D(Coord.X - steps, Coord.Y, Coord.Z, Coord.W), extend);
+    public T ReadValue() => ReadValueAt(Coord.X, Coord.Y, Coord.Z, Coord.W);
+    public T ReadValueAt(Coord4D address) => ReadValueAt(address.X, address.Y, address.Z, address.W);
     public T ReadValueAt(int x, int y, int z, int w) => _grid[w][z][y][x];
-    public void WriteValue(T value) => _grid[Address.W][Address.Z][Address.Y][Address.X] = value;
+    public void WriteValue(T value) => _grid[Coord.W][Coord.Z][Coord.Y][Coord.X] = value;
 
-    public bool IsOutOfRange(Coord4d address) =>
+    public bool IsOutOfRange(Coord4D address) =>
         address.W >= Duration ||
         address.W < 0 ||
         address.Z >= Depth ||
@@ -79,24 +79,24 @@ public class Grid4d<T> where T : struct
         address.X < 0;
 
     public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<Coord4d> OrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
+    public IList<Coord4D> OrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-    private IList<Coord4d> PossibleOrthogonalAdjacentCoords =>
+    private IList<Coord4D> PossibleOrthogonalAdjacentCoords =>
     [
-        new(Address.X + 1, Address.Y, Address.Z, Address.W),
-        new(Address.X - 1, Address.Y, Address.Z, Address.W),
-        new(Address.X, Address.Y + 1, Address.Z, Address.W),
-        new(Address.X, Address.Y - 1, Address.Z, Address.W),
-        new(Address.X, Address.Y, Address.Z + 1, Address.W),
-        new(Address.X, Address.Y, Address.Z - 1, Address.W),
-        new(Address.X, Address.Y, Address.Z, Address.W + 1),
-        new(Address.X, Address.Y, Address.Z, Address.W - 1)
+        new(Coord.X + 1, Coord.Y, Coord.Z, Coord.W),
+        new(Coord.X - 1, Coord.Y, Coord.Z, Coord.W),
+        new(Coord.X, Coord.Y + 1, Coord.Z, Coord.W),
+        new(Coord.X, Coord.Y - 1, Coord.Z, Coord.W),
+        new(Coord.X, Coord.Y, Coord.Z + 1, Coord.W),
+        new(Coord.X, Coord.Y, Coord.Z - 1, Coord.W),
+        new(Coord.X, Coord.Y, Coord.Z, Coord.W + 1),
+        new(Coord.X, Coord.Y, Coord.Z, Coord.W - 1)
     ];
 
     public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
-    public IList<Coord4d> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
+    public IList<Coord4D> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-    private IEnumerable<Coord4d> AllPossibleAdjacentCoords
+    private IEnumerable<Coord4D> AllPossibleAdjacentCoords
     {
         get
         {
@@ -108,8 +108,8 @@ public class Grid4d<T> where T : struct
                     {
                         foreach (var dx in GridConstants.AdjacentDeltas)
                         {
-                            var coord = new Coord4d(Address.X + dx, Address.Y + dy, Address.Z + dz, Address.W + dw);
-                            if(!coord.Equals(Address))
+                            var coord = new Coord4D(Coord.X + dx, Coord.Y + dy, Coord.Z + dz, Coord.W + dw);
+                            if(!coord.Equals(Coord))
                                 yield return coord;
                         }
                     }
@@ -118,9 +118,9 @@ public class Grid4d<T> where T : struct
         }
     }
 
-    public Grid4d<T> Copy()
+    public Grid4D<T> Copy()
     {
-        var grid = new Grid4d<T>();
+        var grid = new Grid4D<T>();
         for (var w = 0; w < Duration; w++)
         {
             for (var z = 0; z < Depth; z++)
@@ -136,7 +136,7 @@ public class Grid4d<T> where T : struct
             }
         }
 
-        grid.MoveTo(Address);
+        grid.MoveTo(Coord);
         return grid;
     }
 
@@ -169,7 +169,7 @@ public class Grid4d<T> where T : struct
         return grid;
     }
 
-    private void ExtendGrid(Coord4d address)
+    private void ExtendGrid(Coord4D address)
     {
         ExtendX(address);
         ExtendY(address);
@@ -177,80 +177,80 @@ public class Grid4d<T> where T : struct
         ExtendW(address);
     }
 
-    private void ExtendX(Coord4d address)
+    private void ExtendX(Coord4D address)
     {
         if (address.X < 0)
             ExtendLeft(address);
         ExtendRight(address);
     }
 
-    private void ExtendLeft(Coord4d address)
+    private void ExtendLeft(Coord4D address)
     {
         AddCols(-address.X, GridAddMode.Prepend);
-        StartAddress = new Coord4d(StartAddress.X - address.X, StartAddress.Y, StartAddress.Z, StartAddress.W);
+        StartCoord = new Coord4D(StartCoord.X - address.X, StartCoord.Y, StartCoord.Z, StartCoord.W);
     }
 
-    private void ExtendRight(Coord4d address)
+    private void ExtendRight(Coord4D address)
     {
         var extendBy = address.X - (Width - 1);
         if (extendBy > 0)
             AddCols(extendBy, GridAddMode.Append);
     }
 
-    private void ExtendY(Coord4d address)
+    private void ExtendY(Coord4D address)
     {
         if (address.Y < 0)
             ExtendTop(address);
         ExtendBottom(address);
     }
 
-    private void ExtendTop(Coord4d address)
+    private void ExtendTop(Coord4D address)
     {
         AddRows(-address.Y, GridAddMode.Prepend);
-        StartAddress = new Coord4d(StartAddress.X, StartAddress.Y - address.Y, StartAddress.Z, StartAddress.W);
+        StartCoord = new Coord4D(StartCoord.X, StartCoord.Y - address.Y, StartCoord.Z, StartCoord.W);
     }
 
-    private void ExtendBottom(Coord4d address)
+    private void ExtendBottom(Coord4D address)
     {
         var extendBy = address.Y - (Height - 1);
         if (extendBy > 0)
             AddRows(extendBy, GridAddMode.Append);
     }
 
-    private void ExtendZ(Coord4d address)
+    private void ExtendZ(Coord4D address)
     {
         if (address.Z < 0)
             ExtendClose(address);
         ExtendFar(address);
     }
 
-    private void ExtendClose(Coord4d address)
+    private void ExtendClose(Coord4D address)
     {
         AddLevels(-address.Z, GridAddMode.Prepend);
-        StartAddress = new Coord4d(StartAddress.X, StartAddress.Y, StartAddress.Z - address.Z, StartAddress.W);
+        StartCoord = new Coord4D(StartCoord.X, StartCoord.Y, StartCoord.Z - address.Z, StartCoord.W);
     }
 
-    private void ExtendFar(Coord4d address)
+    private void ExtendFar(Coord4D address)
     {
         var extendBy = address.Z - (Depth - 1);
         if (extendBy > 0)
             AddLevels(extendBy, GridAddMode.Append);
     }
 
-    private void ExtendW(Coord4d address)
+    private void ExtendW(Coord4D address)
     {
         if (address.W < 0)
             ExtendNow(address);
         ExtendThen(address);
     }
 
-    private void ExtendNow(Coord4d address)
+    private void ExtendNow(Coord4D address)
     {
         AddTime(-address.W, GridAddMode.Prepend);
-        StartAddress = new Coord4d(StartAddress.X, StartAddress.Y, StartAddress.Z, StartAddress.W - address.W);
+        StartCoord = new Coord4D(StartCoord.X, StartCoord.Y, StartCoord.Z, StartCoord.W - address.W);
     }
 
-    private void ExtendThen(Coord4d address)
+    private void ExtendThen(Coord4D address)
     {
         var extendBy = address.W - (Duration - 1);
         if (extendBy > 0)

@@ -1,5 +1,5 @@
 using Pzl.Common;
-using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Grids.Grids3D;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2017;

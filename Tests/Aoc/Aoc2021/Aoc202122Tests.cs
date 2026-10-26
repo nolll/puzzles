@@ -1,5 +1,5 @@
 using Pzl.Aoc.Puzzles.Aoc2021;
-using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Grids.Grids3D;
 
 namespace Tests.Aoc.Aoc2021;
 
@@ -17,12 +17,12 @@ public class Aoc202122Tests : PuzzleTest<Aoc202122>
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(3);
-        result[0].From.Should().Be(new Coord3d(0, 0, 0));
-        result[0].To.Should().Be(new Coord3d(0, 2, 2));
-        result[1].From.Should().Be(new Coord3d(1, 0, 0));
-        result[1].To.Should().Be(new Coord3d(2, 0, 2));
-        result[2].From.Should().Be(new Coord3d(1, 1, 0));
-        result[2].To.Should().Be(new Coord3d(2, 2, 0));
+        result[0].From.Should().Be(new Coord3D(0, 0, 0));
+        result[0].To.Should().Be(new Coord3D(0, 2, 2));
+        result[1].From.Should().Be(new Coord3D(1, 0, 0));
+        result[1].To.Should().Be(new Coord3D(2, 0, 2));
+        result[2].From.Should().Be(new Coord3D(1, 1, 0));
+        result[2].To.Should().Be(new Coord3D(2, 2, 0));
     }
 
     [Fact]
@@ -33,12 +33,12 @@ public class Aoc202122Tests : PuzzleTest<Aoc202122>
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(3);
-        result[0].From.Should().Be(new Coord3d(1, 1, 3));
-        result[0].To.Should().Be(new Coord3d(2, 2, 3));
-        result[1].From.Should().Be(new Coord3d(1, 3, 1));
-        result[1].To.Should().Be(new Coord3d(2, 3, 3));
-        result[2].From.Should().Be(new Coord3d(3, 1, 1));
-        result[2].To.Should().Be(new Coord3d(3, 3, 3));
+        result[0].From.Should().Be(new Coord3D(1, 1, 3));
+        result[0].To.Should().Be(new Coord3D(2, 2, 3));
+        result[1].From.Should().Be(new Coord3D(1, 3, 1));
+        result[1].To.Should().Be(new Coord3D(2, 3, 3));
+        result[2].From.Should().Be(new Coord3D(3, 1, 1));
+        result[2].To.Should().Be(new Coord3D(3, 3, 3));
     }
 
     [Fact]
@@ -49,14 +49,14 @@ public class Aoc202122Tests : PuzzleTest<Aoc202122>
         var result = area1.GetSortedRemainingParts(area2);
 
         result.Count.Should().Be(4);
-        result[0].From.Should().Be(new Coord3d(0, 0, 0));
-        result[0].To.Should().Be(new Coord3d(1, 3, 3));
-        result[1].From.Should().Be(new Coord3d(2, 0, 0));
-        result[1].To.Should().Be(new Coord3d(3, 1, 3));
-        result[2].From.Should().Be(new Coord3d(2, 2, 0));
-        result[2].To.Should().Be(new Coord3d(3, 3, 0));
-        result[3].From.Should().Be(new Coord3d(2, 2, 3));
-        result[3].To.Should().Be(new Coord3d(3, 3, 3));
+        result[0].From.Should().Be(new Coord3D(0, 0, 0));
+        result[0].To.Should().Be(new Coord3D(1, 3, 3));
+        result[1].From.Should().Be(new Coord3D(2, 0, 0));
+        result[1].To.Should().Be(new Coord3D(3, 1, 3));
+        result[2].From.Should().Be(new Coord3D(2, 2, 0));
+        result[2].To.Should().Be(new Coord3D(3, 3, 0));
+        result[3].From.Should().Be(new Coord3D(2, 2, 3));
+        result[3].To.Should().Be(new Coord3D(3, 3, 3));
     }
 
     [Fact]

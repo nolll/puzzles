@@ -1,5 +1,5 @@
 using Pzl.Common;
-using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Grids.Grids3D;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aoc.Puzzles.Aoc2022;
@@ -42,16 +42,16 @@ public class Aoc202218 : AocPuzzle
         var height = cubes.Select(o => o.Y).Max() + Padding * 2;
         var depth = cubes.Select(o => o.Z).Max() + Padding * 2;
 
-        var grid = new Grid3d<char>(width, height, depth, '.');
+        var grid = new Grid3D<char>(width, height, depth, '.');
         foreach (var cube in cubes)
         {
             grid.MoveTo(cube.X, cube.Y, cube.Z);
             grid.WriteValue('#');
         }
 
-        var start = new Coord3d(0, 0, 0);
-        var queue = new Queue<Coord3d>([start]);
-        var seen = new HashSet<Coord3d>();
+        var start = new Coord3D(0, 0, 0);
+        var queue = new Queue<Coord3D>([start]);
+        var seen = new HashSet<Coord3D>();
 
         while (queue.Count > 0)
         {
@@ -67,14 +67,14 @@ public class Aoc202218 : AocPuzzle
             }
         }
 
-        var trappedCoords = new List<Coord3d>();
+        var trappedCoords = new List<Coord3D>();
         for (var x = grid.XMin; x <= grid.XMax; x++)
         {
             for (var y = grid.YMin; y <= grid.YMax; y++)
             {
                 for (var z = grid.ZMin; z <= grid.ZMax; z++)
                 {
-                    var c = new Coord3d(x, y, z);
+                    var c = new Coord3D(x, y, z);
                     if (grid.ReadValueAt(c) == '.')
                         trappedCoords.Add(c);
                 }

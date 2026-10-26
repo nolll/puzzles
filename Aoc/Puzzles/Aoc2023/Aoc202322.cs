@@ -1,5 +1,5 @@
 using Pzl.Common;
-using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Grids.Grids3D;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
@@ -113,17 +113,17 @@ public class Aoc202322 : AocPuzzle
         return new Brick(index, ParseAddress(parts[0]), ParseAddress(parts[1]));
     }
 
-    private static Coord3d ParseAddress(string s)
+    private static Coord3D ParseAddress(string s)
     {
         var (x, y, z) = Numbers.IntsFromString(s);
-        return new Coord3d(x, y, z);
+        return new Coord3D(x, y, z);
     }
     
-    internal class Brick(int id, Coord3d bottom, Coord3d top)
+    internal class Brick(int id, Coord3D bottom, Coord3D top)
     {
         public int Id { get; } = id;
-        public Coord3d Bottom { get; private set; } = bottom;
-        public Coord3d Top { get; private set; } = top;
+        public Coord3D Bottom { get; private set; } = bottom;
+        public Coord3D Top { get; private set; } = top;
         public bool CanBeRemoved { get; set; }
         public HashSet<int> Supporting { get; } = new();
         public HashSet<int> SupportedBy { get; } = new();
@@ -138,8 +138,8 @@ public class Aoc202322 : AocPuzzle
         private void MoveTo(int zBottom)
         {
             var diff = Top.Z - Bottom.Z;
-            Bottom = new Coord3d(Bottom.X, Bottom.Y, zBottom);
-            Top = new Coord3d(Top.X, Top.Y, zBottom + diff);
+            Bottom = new Coord3D(Bottom.X, Bottom.Y, zBottom);
+            Top = new Coord3D(Top.X, Top.Y, zBottom + diff);
         }
 
         private static bool IsOverlapping(int fromA, int toA, int fromB, int toB)

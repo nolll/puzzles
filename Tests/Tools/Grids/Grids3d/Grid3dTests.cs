@@ -1,5 +1,5 @@
 using AwesomeAssertions;
-using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Grids.Grids3D;
 
 namespace Tests.Tools.Grids.Grids3d;
 
@@ -11,7 +11,7 @@ public class Grid3dTests
     [Fact]
     public void ExtendAllTo3()
     {
-        var grid = new Grid3d<char>(1, 1, 1, DefaultValue);
+        var grid = new Grid3D<char>(1, 1, 1, DefaultValue);
         grid.WriteValue(WriteValue);
         grid.ExtendAllDirections();
 
@@ -27,7 +27,7 @@ public class Grid3dTests
     [Fact]
     public void ExtendAll5()
     {
-        var grid = new Grid3d<char>(1, 1, 1, DefaultValue);
+        var grid = new Grid3D<char>(1, 1, 1, DefaultValue);
         grid.WriteValue(WriteValue);
         grid.ExtendAllDirections(2);
 
@@ -43,7 +43,7 @@ public class Grid3dTests
     [Fact]
     public void AllAdjacent6Exists()
     {
-        var grid = new Grid3d<char>(1, 1, 1, DefaultValue);
+        var grid = new Grid3D<char>(1, 1, 1, DefaultValue);
         grid.WriteValue(WriteValue);
         grid.ExtendAllDirections();
 
@@ -63,7 +63,7 @@ public class Grid3dTests
     [Fact]
     public void AllAdjacent26Exists()
     {
-        var grid = new Grid3d<char>(1, 1, 1, DefaultValue);
+        var grid = new Grid3D<char>(1, 1, 1, DefaultValue);
         grid.WriteValue(WriteValue);
         grid.ExtendAllDirections();
 

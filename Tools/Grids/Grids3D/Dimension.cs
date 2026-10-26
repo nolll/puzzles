@@ -1,4 +1,4 @@
-namespace Pzl.Tools.Grids.Grids3d;
+namespace Pzl.Tools.Grids.Grids3D;
 
 public static class Dimension
 {

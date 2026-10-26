@@ -11,7 +11,7 @@ public class Grid4dTests
     [Fact]
     public void ExtendAllTo3()
     {
-        var grid = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
+        var grid = new Grid4D<char>(1, 1, 1, 1, DefaultValue);
         grid.WriteValue(WriteValue);
         grid.ExtendAllDirections();
 
@@ -29,7 +29,7 @@ public class Grid4dTests
     [Fact]
     public void ExtendAll5()
     {
-        var grid = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
+        var grid = new Grid4D<char>(1, 1, 1, 1, DefaultValue);
         grid.WriteValue(WriteValue);
         grid.ExtendAllDirections(2);
 
@@ -47,7 +47,7 @@ public class Grid4dTests
     [Fact]
     public void AllAdjacentExists()
     {
-        var grid = new Grid4d<char>(1, 1, 1, 1, DefaultValue);
+        var grid = new Grid4D<char>(1, 1, 1, 1, DefaultValue);
         grid.WriteValue(WriteValue);
         grid.ExtendAllDirections();
 

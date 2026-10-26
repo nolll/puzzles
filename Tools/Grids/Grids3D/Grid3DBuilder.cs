@@ -1,14 +1,13 @@
 using Pzl.Tools.Strings;
 
-namespace Pzl.Tools.Grids.Grids4d;
+namespace Pzl.Tools.Grids.Grids3D;
 
-public static class Grid4dBuilder
+public static class Grid3DBuilder
 {
-    public static Grid4d<char> BuildCharGrid(string input, char defaultValue = default)
+    public static Grid3D<char> BuildCharGrid(string input, char defaultValue = default)
     {
-        var grid = new Grid4d<char>(1, 1, 1, 1, defaultValue);
+        var grid = new Grid3D<char>(1, 1, 1, defaultValue);
         var rows = input.Trim().Split(LineBreaks.Single);
-        const int w = 0;
         const int z = 0;
         var y = 0;
         foreach (var row in rows)
@@ -17,7 +16,7 @@ public static class Grid4dBuilder
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {
-                grid.MoveTo(x, y, z, w);
+                grid.MoveTo(x, y, z);
                 grid.WriteValue(c);
                 x += 1;
             }

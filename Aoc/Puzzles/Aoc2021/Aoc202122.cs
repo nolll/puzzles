@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Pzl.Common;
-using Pzl.Tools.Grids.Grids3d;
+using Pzl.Tools.Grids.Grids3D;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
@@ -66,7 +66,7 @@ public class Aoc202122 : AocPuzzle
         return new RebootInstruction(mode, coords.from, coords.to);
     }
 
-    private (Coord3d from, Coord3d to) ParseCoords(string s)
+    private (Coord3D from, Coord3D to) ParseCoords(string s)
     {
         var (x, y, z) = s.Split(',').Select(ParseFromTo).ToArray();
         return (from: new(x.from, y.from, z.from), to: new(x.to, y.to, z.to));
@@ -79,7 +79,7 @@ public class Aoc202122 : AocPuzzle
     }
 
     [DebuggerDisplay("{From.X},{From.Y},{From.Z}..{To.X},{To.Y},{To.Z}")]
-    public record RebootArea(Coord3d From, Coord3d To)
+    public record RebootArea(Coord3D From, Coord3D To)
     {
         public long GetSize()
         {
@@ -172,5 +172,5 @@ public class Aoc202122 : AocPuzzle
             From.Z < other.From.Z && To.Z > other.To.Z;
     }
 
-    private record RebootInstruction(string Mode, Coord3d From, Coord3d To);
+    private record RebootInstruction(string Mode, Coord3D From, Coord3D To);
 }

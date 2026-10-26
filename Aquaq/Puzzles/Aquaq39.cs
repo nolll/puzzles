@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 
 namespace Pzl.Aquaq.Puzzles;
 
@@ -11,15 +12,12 @@ public class Aquaq39 : AquaqPuzzle
     [Puzzle("5522d4ea2615abc82626c1563f788ce8")]
     public int Solve(string input)
     {
-        var darts = input.Split(' ').Select(int.Parse).ToArray();
-
+        var darts = Numbers.IntsFromString(input);
         var scores = new int[2];
         var winCount = new int[2];
         var winningDartSum = 0;
-
         var pStart = 0;
         var pUp = pStart;
-
         var dartIndex = 0;
         var dartsLeft = DartsPerTurn;
 

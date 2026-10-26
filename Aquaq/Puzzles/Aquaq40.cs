@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 
 namespace Pzl.Aquaq.Puzzles;
 
@@ -8,7 +9,7 @@ public class Aquaq40 : AquaqPuzzle
     [Puzzle("d0882d4e6f6cf4f90adcda93e5d420bc")]
     public int Solve(string input)
     {
-        var heights = input.Split(' ').Select(int.Parse).ToArray();
+        var heights = Numbers.IntsFromString(input);
         var peakIndices = FindPeakIndices(heights);
         var prominences = new List<int>();
 
@@ -30,7 +31,7 @@ public class Aquaq40 : AquaqPuzzle
     }
 
     private static int? FindProminenceRight(int[] heights, int peakIndex, int peakHeight) 
-        => FindProminence(GetRightHeights(heights, peakIndex), peakIndex, peakHeight);
+        => FindProminence(GetRightHeights(heights, peakIndex), peakHeight);
 
     private static IEnumerable<int> GetRightHeights(IReadOnlyList<int> heights, int peakIndex)
     {
@@ -39,7 +40,7 @@ public class Aquaq40 : AquaqPuzzle
     }
 
     private static int? FindProminenceLeft(int[] heights, int peakIndex, int peakHeight)
-        => FindProminence(GetLeftHeights(heights, peakIndex), peakIndex, peakHeight);
+        => FindProminence(GetLeftHeights(heights, peakIndex), peakHeight);
     
     private static IEnumerable<int> GetLeftHeights(IReadOnlyList<int> heights, int peakIndex)
     {
@@ -47,7 +48,7 @@ public class Aquaq40 : AquaqPuzzle
             yield return heights[i];
     }
 
-    private static int? FindProminence(IEnumerable<int> heights, int peakIndex, int peakHeight)
+    private static int? FindProminence(IEnumerable<int> heights, int peakHeight)
     {
         var dropped = 0;
         foreach (var height in heights)
@@ -60,7 +61,7 @@ public class Aquaq40 : AquaqPuzzle
         return null;
     }
 
-    public int[] FindPeakIndices(string input) => FindPeakIndices(input.Split(' ').Select(int.Parse).ToArray());
+    public int[] FindPeakIndices(string input) => FindPeakIndices(Numbers.IntsFromString(input));
 
     private static int[] FindPeakIndices(int[] input)
     {

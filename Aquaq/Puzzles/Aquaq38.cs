@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles;
@@ -7,13 +8,12 @@ namespace Pzl.Aquaq.Puzzles;
 public class Aquaq38 : AquaqPuzzle
 {
     [Puzzle("56082eb21bc29c4cc0607606e3d88ddd")]
-    public int Solve(string input) => input.Split(LineBreaks.Single)
-        .Select(o => o.Split(' ').Select(int.Parse).ToArray())
-        .Sum(o => GetComfScore(new IndexStreakProvider(), o));
+    public int Solve(string input) => input.Split(LineBreaks.Single).Select(Numbers.IntsFromString).Sum(GetComfScore);
 
-    public static int GetComfScore(IndexStreakProvider indexStreakProvider, int[] a)
+    public int GetComfScore(int[] a)
     {
-        var allIndexStreaks = indexStreakProvider.Get(a);
+        var cache = new Dictionary<int, int[][][]>();
+        var allIndexStreaks = GetIndexStreaks(cache, a);
         var score = 0;
 
         for (var i = 0; i < a.Length; i++)
@@ -41,33 +41,29 @@ public class Aquaq38 : AquaqPuzzle
 
     private static bool IsCosy(int length, int[] a, int[] indices) => GetStreakSum(a, indices) % length == 0;
     private static int GetStreakSum(int[] a, int[] indices) => indices.Sum(index => a[index]);
-    
-    public class IndexStreakProvider
+
+    public int[][][] GetIndexStreaks(Dictionary<int, int[][][]> cache, int[] a)
     {
-        private readonly Dictionary<int, int[][][]> _cache = new();
+        if (cache.TryGetValue(a.Length, out var cached))
+            return cached;
 
-        public int[][][] Get(int[] a)
+        var allStreaks = new List<int[][]>();
+        for (var pos = 0; pos < a.Length; pos++)
         {
-            if (_cache.TryGetValue(a.Length, out var cached))
-                return cached;
-
-            var allStreaks = new List<int[][]>();
-            for (var pos = 0; pos < a.Length; pos++)
+            var streaks = new List<int[]>();
+            for (var start = 0; start <= pos; start++)
             {
-                var streaks = new List<int[]>();
-                for (var start = 0; start <= pos; start++)
+                for (var end = pos; end < a.Length; end++)
                 {
-                    for (var end = pos; end < a.Length; end++)
-                    {
-                        streaks.Add(Enumerable.Range(start, end - start + 1).ToArray());
-                    }
+                    streaks.Add(Enumerable.Range(start, end - start + 1).ToArray());
                 }
-                allStreaks.Add(streaks.ToArray());
             }
 
-            var allStreaksArray = allStreaks.ToArray();
-            _cache.Add(a.Length, allStreaksArray);
-            return allStreaksArray;
+            allStreaks.Add(streaks.ToArray());
         }
+
+        var allStreaksArray = allStreaks.ToArray();
+        cache.Add(a.Length, allStreaksArray);
+        return allStreaksArray;
     }
 }

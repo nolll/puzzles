@@ -11,5 +11,4 @@ public class Aquaq40Tests : PuzzleTest<Aquaq40>
 
     [Fact]
     public void Sum() => Sut.Solve(Input).Should().Be(17);
-
 }

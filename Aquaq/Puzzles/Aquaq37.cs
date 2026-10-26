@@ -1,9 +1,13 @@
 ﻿using Pzl.Common;
+using Pzl.Tools.Lists;
+using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Aquaq.Puzzles;
 
 [Name("GUESS WORDS")]
+[NeedsRewrite]
+[Comment("The tests don't work properly.")]
 public class Aquaq37 : AquaqPuzzle
 {
     private const int WordLength = 5;
@@ -27,16 +31,13 @@ public class Aquaq37 : AquaqPuzzle
         var used = new HashSet<string>();
         var remainingGuesses = guesses.ToList();
         var matchingWords = words.ToList();
-        while (remainingGuesses.Any())
+        while (remainingGuesses.Count != 0)
         {
             var guess = remainingGuesses.First();
             remainingGuesses = remainingGuesses.Skip(1).ToList();
             used.Add(guess.Word);
 
-            matchingWords = matchingWords
-                .Where(o => !used.Contains(o))
-                .Where(o => guess.IsMatch(o))
-                .ToList();
+            matchingWords = matchingWords.Where(o => !used.Contains(o)).Where(guess.IsMatch).ToList();
 
             if (matchingWords.Count > 1)
                 continue;
@@ -52,9 +53,8 @@ public class Aquaq37 : AquaqPuzzle
 
     private static Guess ParseGuess(string s)
     {
-        var parts = s.Split(',');
-        var word = parts[0];
-        var results = parts[1].Split(' ').Select(int.Parse).ToArray();
+        var (word, numbers) = s.Split(',');
+        var results = Numbers.IntsFromString(numbers);
 
         return new Guess(word, results);
     }
@@ -72,12 +72,8 @@ public class Aquaq37 : AquaqPuzzle
                 var result1 = result[i];
                 var wordChar = Word[i];
                 var otherChar = other[i];
-                switch (result1)
-                {
-                    case 2 when wordChar != otherChar:
-                    case 0 or 1 when wordChar == otherChar:
-                        return false;
-                }
+                if (result1 is 2 && wordChar != otherChar || result1 is 0 or 1 && wordChar == otherChar)
+                    return false;
             }
 
             var possibleChars = new List<char>();

@@ -69,7 +69,6 @@ public class Aquaq37Tests : PuzzleTest<Aquaq37>
                                       """;
 
     // todo: Make the test work with custom input files
-    
     // [Theory]
     // [InlineData(WordsInput, "words")]
     // [InlineData(MajorInput, "major")]
@@ -87,30 +86,15 @@ public class Aquaq37Tests : PuzzleTest<Aquaq37>
     // }
 
     [Fact]
-    public void MajorMarry()
-    {
-        var guess = new Aquaq37.Guess("marry", [2, 2, 1, 0, 0]);
-        var result = guess.IsMatch("major");
-
-        result.Should().BeTrue();
-    }
+    public void MajorMarry() => new Aquaq37.Guess("marry", [2, 2, 1, 0, 0]).IsMatch("major").Should().BeTrue();
 
     [Fact]
-    public void GroomDoggo()
-    {
-        var guess = new Aquaq37.Guess("doggo", [0, 1, 1, 0, 0]);
-        var result = guess.IsMatch("groom");
-
-        result.Should().BeFalse();
-    }
+    public void GroomDoggo() => new Aquaq37.Guess("doggo", [0, 1, 1, 0, 0]).IsMatch("groom").Should().BeFalse();
 
     [Theory]
     [InlineData("a", 0)]
     [InlineData("wordsmince", 113)]
     [InlineData("words", 74)]
     [InlineData("mince", 39)]
-    public void WordScore(string input, int expected)
-    {
-        Aquaq37.GetWordScore(input).Should().Be(expected);
-    }
+    public void WordScore(string input, int expected) => Aquaq37.GetWordScore(input).Should().Be(expected);
 }

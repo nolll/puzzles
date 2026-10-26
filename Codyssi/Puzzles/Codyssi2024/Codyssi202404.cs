@@ -16,10 +16,9 @@ public class Codyssi202404 : CodyssiPuzzle
     {
         var lines = input.Split(LineBreaks.Single);
         var set = new HashSet<string>();
-        foreach (var line in lines)
-        {
+        foreach (var line in lines) 
             set.AddRange(line.Split(" <-> "));
-        }
+        
         return set.Count;
     }
 

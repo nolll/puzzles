@@ -14,10 +14,8 @@ public class Codyssi202402 : CodyssiPuzzle
     {
         var bools = input.Split(LineBreaks.Single).Select(bool.Parse).ToList();
         var gates = new List<(bool, bool)>();
-        for (var i = 0; i < bools.Count; i += 2)
-        {
+        for (var i = 0; i < bools.Count; i += 2) 
             gates.Add((bools[i], bools[i + 1]));
-        }
 
         return gates.Where(EvaluateGate).Count();
     }
@@ -30,10 +28,8 @@ public class Codyssi202402 : CodyssiPuzzle
         while (bools.Count > 1)
         {
             var gates = new List<(bool, bool)>();
-            for (var i = 0; i < bools.Count; i += 2)
-            {
+            for (var i = 0; i < bools.Count; i += 2) 
                 gates.Add((bools[i], bools[i + 1]));
-            }
 
             bools = gates.Select(EvaluateGate).ToList();
             count += bools.Count(o => o);

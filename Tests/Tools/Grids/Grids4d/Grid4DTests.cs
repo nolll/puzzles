@@ -1,9 +1,8 @@
-using AwesomeAssertions;
 using Pzl.Tools.Grids.Grids4d;
 
 namespace Tests.Tools.Grids.Grids4d;
 
-public class Grid4dTests
+public class Grid4DTests
 {
     private const char DefaultValue = '.';
     private const char WriteValue = '#';
@@ -15,9 +14,9 @@ public class Grid4dTests
         grid.WriteValue(WriteValue);
         grid.ExtendAllDirections();
 
-        var emptyRowsValue = grid.ReadValueAt(0, 0, 0, 0);
-        var writtenValue = grid.ReadValueAt(1, 1, 1, 1);
-        grid.Values.Count.Should().Be(81);
+        var emptyRowsValue = grid.ReadValueAt(-1, -1, -1, -1);
+        var writtenValue = grid.ReadValueAt(0, 0, 0, 0);
+        grid.Values.Count().Should().Be(81);
         emptyRowsValue.Should().Be(DefaultValue);
         writtenValue.Should().Be(WriteValue);
         grid.Width.Should().Be(3);
@@ -33,9 +32,9 @@ public class Grid4dTests
         grid.WriteValue(WriteValue);
         grid.ExtendAllDirections(2);
 
-        var emptyRowsValue = grid.ReadValueAt(0, 0, 0, 0);
-        var writtenValue = grid.ReadValueAt(2, 2, 2, 2);
-        grid.Values.Count.Should().Be(625);
+        var emptyRowsValue = grid.ReadValueAt(-2, -2, -2, -2);
+        var writtenValue = grid.ReadValueAt(0, 0, 0, 0);
+        grid.Values.Count().Should().Be(625);
         emptyRowsValue.Should().Be(DefaultValue);
         writtenValue.Should().Be(WriteValue);
         grid.Width.Should().Be(5);
@@ -51,7 +50,7 @@ public class Grid4dTests
         grid.WriteValue(WriteValue);
         grid.ExtendAllDirections();
 
-        grid.MoveTo(1, 1, 1, 1);
+        grid.MoveTo(0, 0, 0, 0);
             
         grid.AllAdjacentCoords.Count.Should().Be(80);
 
@@ -60,9 +59,9 @@ public class Grid4dTests
         var cubesAtYZero = adjacentCoords.Where(o => o.Y == 0).ToList();
         var cubesAtZZero = adjacentCoords.Where(o => o.Z == 0).ToList();
         var cubesAtWZero = adjacentCoords.Where(o => o.W == 0).ToList();
-        cubesAtXZero.Count.Should().Be(27);
-        cubesAtYZero.Count.Should().Be(27);
-        cubesAtZZero.Count.Should().Be(27);
-        cubesAtWZero.Count.Should().Be(27);
+        cubesAtXZero.Count.Should().Be(26);
+        cubesAtYZero.Count.Should().Be(26);
+        cubesAtZZero.Count.Should().Be(26);
+        cubesAtWZero.Count.Should().Be(26);
     }
 }

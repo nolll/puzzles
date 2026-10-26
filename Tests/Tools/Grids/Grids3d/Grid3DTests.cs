@@ -1,9 +1,8 @@
-using AwesomeAssertions;
 using Pzl.Tools.Grids.Grids3D;
 
 namespace Tests.Tools.Grids.Grids3d;
 
-public class Grid3dTests
+public class Grid3DTests
 {
     private const char DefaultValue = '.';
     private const char WriteValue = '#';

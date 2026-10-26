@@ -5,6 +5,8 @@ namespace Pzl.Tools.Grids.Grids3D;
 [DebuggerDisplay("{X},{Y},{Z}")]
 public record Coord3D(int X, int Y, int Z)
 {
+    public Coord3D() : this(0, 0, 0) {}
+    
     public string Id { get; } = $"{X},{Y},{Z}";
 
     public int ManhattanDistanceTo(Coord3D other) => 

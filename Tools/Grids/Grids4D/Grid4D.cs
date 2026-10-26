@@ -1,19 +1,24 @@
-using System.Text;
-
 namespace Pzl.Tools.Grids.Grids4d;
 
 public class Grid4D<T> where T : struct
 {
-    private readonly T _defaultValue;
-    private readonly IList<IList<IList<IList<T>>>> _grid;
+    public T DefaultValue { get; }
+    private readonly IDictionary<Coord4D, T> _grid = new Dictionary<Coord4D, T>();
     public Coord4D Coord { get; private set; }
     public Coord4D StartCoord { get; set; }
 
-    public IList<T> Values => _grid.SelectMany(x => x).SelectMany(x => x).SelectMany(x => x).ToList();
-    public int Duration => _grid.Count;
-    public int Depth => _grid.Any() ? _grid[0].Count : 0;
-    public int Height => _grid.Any() && _grid[0].Any() ? _grid[0][0].Count : 0;
-    public int Width => _grid.Any() && _grid[0].Any() && _grid[0][0].Any() ? _grid[0][0][0].Count : 0;
+    public int Width => XMax - XMin + 1;
+    public int Height => YMax - YMin + 1;
+    public int Depth => ZMax - ZMin + 1;
+    public int Duration => WMax - WMin + 1;
+    public int XMin { get; private set; }
+    public int XMax { get; private set; }
+    public int YMin { get; private set; }
+    public int YMax { get; private set; }
+    public int ZMin { get; private set; }
+    public int ZMax { get; private set; }
+    public int WMin { get; private set; }
+    public int WMax { get; private set; }
     public bool IsAtTop => Coord.Y == 0;
     public bool IsAtRightEdge => Coord.X == Width - 1;
     public bool IsAtBottom => Coord.Y == Height - 1;
@@ -21,11 +26,66 @@ public class Grid4D<T> where T : struct
     public Coord4D Center => new(Width / 2, Height / 2, Depth / 2, Duration / 2);
 
     public Grid4D(int width = 1, int height = 1, int depth = 1, int duration = 1, T defaultValue = default)
+        : this(
+            new Coord4D(),
+            new Coord4D(width - 1, height - 1, depth - 1, duration - 1),
+            new Dictionary<Coord4D, T>(),
+            defaultValue)
     {
-        _defaultValue = defaultValue;
-        _grid = BuildGrid(width, height, depth, duration, defaultValue);
-        Coord = new Coord4D(0, 0, 0, 0);
-        StartCoord = new Coord4D(0, 0, 0, 0);
+        XMax = width - 1;
+        YMax = height - 1;
+        ZMax = depth - 1;
+        WMax = duration - 1;
+    }
+
+    private Grid4D(T defaultValue)
+    {
+        DefaultValue = defaultValue;
+        Coord = new Coord4D();
+        StartCoord = new Coord4D();
+    }
+
+    private Grid4D(
+        Coord4D min,
+        Coord4D max,
+        IDictionary<Coord4D, T> values,
+        T defaultValue = default)
+        : this(defaultValue)
+    {
+        _grid = values;
+        XMin = min.X;
+        XMax = max.X;
+        YMin = min.Y;
+        YMax = max.Y;
+        ZMin = min.Z;
+        ZMax = max.Z;
+        WMin = min.W;
+        WMax = max.W;
+    }
+
+    public IEnumerable<T> Values =>
+        Coords.Select(coord => _grid.TryGetValue(coord, out var v)
+            ? v
+            : DefaultValue);
+
+    public IEnumerable<Coord4D> Coords
+    {
+        get
+        {
+            for (var w = WMin; w <= WMax; w++)
+            {
+                for (var z = ZMin; z <= ZMax; z++)
+                {
+                    for (var y = YMin; y <= YMax; y++)
+                    {
+                        for (var x = XMin; x <= XMax; x++)
+                        {
+                            yield return new Coord4D(x, y, z, w);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public bool TryMoveTo(Coord4D address) => MoveTo(address, false);
@@ -64,19 +124,51 @@ public class Grid4D<T> where T : struct
     public bool MoveLeft(int steps = 1) => MoveLeft(steps, true);
     private bool MoveLeft(int steps, bool extend) => MoveTo(new Coord4D(Coord.X - steps, Coord.Y, Coord.Z, Coord.W), extend);
     public T ReadValue() => ReadValueAt(Coord.X, Coord.Y, Coord.Z, Coord.W);
-    public T ReadValueAt(Coord4D address) => ReadValueAt(address.X, address.Y, address.Z, address.W);
-    public T ReadValueAt(int x, int y, int z, int w) => _grid[w][z][y][x];
-    public void WriteValue(T value) => _grid[Coord.W][Coord.Z][Coord.Y][Coord.X] = value;
+    public T ReadValueAt(int x, int y, int z, int w) => ReadValueAt(new Coord4D(x, y, z, w));
 
-    public bool IsOutOfRange(Coord4D address) =>
-        address.W >= Duration ||
-        address.W < 0 ||
-        address.Z >= Depth ||
-        address.Z < 0 ||
-        address.Y >= Height ||
-        address.Y < 0 ||
-        address.X >= Width ||
-        address.X < 0;
+    public T ReadValueAt(Coord4D coord) => _grid.TryGetValue(coord, out var v)
+        ? v
+        : DefaultValue;
+
+    public void WriteValue(T value) => WriteValueAt(Coord, value);
+
+    public void WriteValueAt(Coord4D coord, T value)
+    {
+        if (coord.X < XMin)
+            XMin = coord.X;
+        else if (coord.X > XMax)
+            XMax = coord.X;
+
+        if (coord.Y < YMin)
+            YMin = coord.Y;
+        else if (coord.Y > YMax)
+            YMax = coord.Y;
+
+        if (coord.Z < ZMin)
+            ZMin = coord.Z;
+        else if (coord.Z > ZMax)
+            ZMax = coord.Z;
+
+        if (coord.W < WMin)
+            WMin = coord.W;
+        else if (coord.W > WMax)
+            WMax = coord.W;
+
+        if (value.Equals(DefaultValue))
+            _grid.Remove(coord);
+        else
+            _grid[coord] = value;
+    }
+
+    public bool IsOutOfRange(Coord4D coord) =>
+        coord.W > WMax ||
+        coord.W < WMin ||
+        coord.Z > ZMax ||
+        coord.Z < ZMin ||
+        coord.Y > YMax ||
+        coord.Y < YMin ||
+        coord.X > XMax ||
+        coord.X < XMin;
 
     public IList<T> OrthogonalAdjacentValues => OrthogonalAdjacentCoords.Select(ReadValueAt).ToList();
     public IList<Coord4D> OrthogonalAdjacentCoords => PossibleOrthogonalAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
@@ -94,165 +186,115 @@ public class Grid4D<T> where T : struct
     ];
 
     public IList<T> AllAdjacentValues => AllAdjacentCoords.Select(ReadValueAt).ToList();
+    public IList<T> AllAdjacentValuesTo(Coord4D coord) => AllAdjacentCoordsTo(coord).Select(ReadValueAt).ToList();
+    public IList<Coord4D> AllAdjacentCoordsTo(Coord4D coord) => AllPossibleAdjacentCoordsTo(coord).Where(o => !IsOutOfRange(o)).ToList();
     public IList<Coord4D> AllAdjacentCoords => AllPossibleAdjacentCoords.Where(o => !IsOutOfRange(o)).ToList();
 
-    private IEnumerable<Coord4D> AllPossibleAdjacentCoords
+    private IEnumerable<Coord4D> AllPossibleAdjacentCoords => AllPossibleAdjacentCoordsTo(Coord);
+
+    public IEnumerable<Coord4D> AllPossibleAdjacentCoordsTo(Coord4D coord)
     {
-        get
+        foreach (var dw in GridConstants.AdjacentDeltas)
         {
-            foreach (var dw in GridConstants.AdjacentDeltas)
+            foreach (var dz in GridConstants.AdjacentDeltas)
             {
-                foreach (var dz in GridConstants.AdjacentDeltas)
+                foreach (var dy in GridConstants.AdjacentDeltas)
                 {
-                    foreach (var dy in GridConstants.AdjacentDeltas)
+                    foreach (var dx in GridConstants.AdjacentDeltas)
                     {
-                        foreach (var dx in GridConstants.AdjacentDeltas)
-                        {
-                            var coord = new Coord4D(Coord.X + dx, Coord.Y + dy, Coord.Z + dz, Coord.W + dw);
-                            if(!coord.Equals(Coord))
-                                yield return coord;
-                        }
+                        var newCoord = new Coord4D(coord.X + dx, coord.Y + dy, coord.Z + dz, coord.W + dw);
+                        if (!newCoord.Equals(coord))
+                            yield return newCoord;
                     }
                 }
             }
         }
     }
 
-    public Grid4D<T> Copy()
+    private void ExtendGrid(Coord4D coord)
     {
-        var grid = new Grid4D<T>();
-        for (var w = 0; w < Duration; w++)
-        {
-            for (var z = 0; z < Depth; z++)
-            {
-                for (var y = 0; y < Height; y++)
-                {
-                    for (var x = 0; x < Width; x++)
-                    {
-                        grid.MoveTo(x, y, z, w);
-                        grid.WriteValue(ReadValueAt(x, y, z, w));
-                    }
-                }
-            }
-        }
-
-        grid.MoveTo(Coord);
-        return grid;
+        ExtendX(coord);
+        ExtendY(coord);
+        ExtendZ(coord);
+        ExtendW(coord);
     }
 
-    private IList<IList<IList<IList<T>>>> BuildGrid(int width, int height, int depth, int duration, T defaultValue)
+    private void ExtendX(Coord4D coord)
     {
-        var grid = new List<IList<IList<IList<T>>>>();
-        for (var w = 0; w < duration; w++)
-        {
-            var time = new List<IList<IList<T>>>();
-            for (var z = 0; z < depth; z++)
-            {
-                var level = new List<IList<T>>();
-                for (var y = 0; y < height; y++)
-                {
-                    var row = new List<T>();
-                    for (var x = 0; x < width; x++)
-                    {
-                        row.Add(defaultValue);
-                    }
-
-                    level.Add(row);
-                }
-
-                time.Add(level);
-            }
-
-            grid.Add(time);
-        }
-
-        return grid;
+        if (coord.X < 0)
+            ExtendLeft(coord);
+        ExtendRight(coord);
     }
 
-    private void ExtendGrid(Coord4D address)
+    private void ExtendLeft(Coord4D coord)
     {
-        ExtendX(address);
-        ExtendY(address);
-        ExtendZ(address);
-        ExtendW(address);
+        AddCols(-coord.X, GridAddMode.Prepend);
+        StartCoord = new Coord4D(StartCoord.X - coord.X, StartCoord.Y, StartCoord.Z, StartCoord.W);
     }
 
-    private void ExtendX(Coord4D address)
+    private void ExtendRight(Coord4D coord)
     {
-        if (address.X < 0)
-            ExtendLeft(address);
-        ExtendRight(address);
-    }
-
-    private void ExtendLeft(Coord4D address)
-    {
-        AddCols(-address.X, GridAddMode.Prepend);
-        StartCoord = new Coord4D(StartCoord.X - address.X, StartCoord.Y, StartCoord.Z, StartCoord.W);
-    }
-
-    private void ExtendRight(Coord4D address)
-    {
-        var extendBy = address.X - (Width - 1);
+        var extendBy = coord.X - (Width - 1);
         if (extendBy > 0)
             AddCols(extendBy, GridAddMode.Append);
     }
 
-    private void ExtendY(Coord4D address)
+    private void ExtendY(Coord4D coord)
     {
-        if (address.Y < 0)
-            ExtendTop(address);
-        ExtendBottom(address);
+        if (coord.Y < 0)
+            ExtendTop(coord);
+        ExtendBottom(coord);
     }
 
-    private void ExtendTop(Coord4D address)
+    private void ExtendTop(Coord4D coord)
     {
-        AddRows(-address.Y, GridAddMode.Prepend);
-        StartCoord = new Coord4D(StartCoord.X, StartCoord.Y - address.Y, StartCoord.Z, StartCoord.W);
+        AddRows(-coord.Y, GridAddMode.Prepend);
+        StartCoord = new Coord4D(StartCoord.X, StartCoord.Y - coord.Y, StartCoord.Z, StartCoord.W);
     }
 
-    private void ExtendBottom(Coord4D address)
+    private void ExtendBottom(Coord4D coord)
     {
-        var extendBy = address.Y - (Height - 1);
+        var extendBy = coord.Y - (Height - 1);
         if (extendBy > 0)
             AddRows(extendBy, GridAddMode.Append);
     }
 
-    private void ExtendZ(Coord4D address)
+    private void ExtendZ(Coord4D coord)
     {
-        if (address.Z < 0)
-            ExtendClose(address);
-        ExtendFar(address);
+        if (coord.Z < 0)
+            ExtendClose(coord);
+        ExtendFar(coord);
     }
 
-    private void ExtendClose(Coord4D address)
+    private void ExtendClose(Coord4D coord)
     {
-        AddLevels(-address.Z, GridAddMode.Prepend);
-        StartCoord = new Coord4D(StartCoord.X, StartCoord.Y, StartCoord.Z - address.Z, StartCoord.W);
+        AddLevels(-coord.Z, GridAddMode.Prepend);
+        StartCoord = new Coord4D(StartCoord.X, StartCoord.Y, StartCoord.Z - coord.Z, StartCoord.W);
     }
 
-    private void ExtendFar(Coord4D address)
+    private void ExtendFar(Coord4D coord)
     {
-        var extendBy = address.Z - (Depth - 1);
+        var extendBy = coord.Z - (Depth - 1);
         if (extendBy > 0)
             AddLevels(extendBy, GridAddMode.Append);
     }
 
-    private void ExtendW(Coord4D address)
+    private void ExtendW(Coord4D coord)
     {
-        if (address.W < 0)
-            ExtendNow(address);
-        ExtendThen(address);
+        if (coord.W < 0)
+            ExtendNow(coord);
+        ExtendThen(coord);
     }
 
-    private void ExtendNow(Coord4D address)
+    private void ExtendNow(Coord4D coord)
     {
-        AddTime(-address.W, GridAddMode.Prepend);
-        StartCoord = new Coord4D(StartCoord.X, StartCoord.Y, StartCoord.Z, StartCoord.W - address.W);
+        AddTime(-coord.W, GridAddMode.Prepend);
+        StartCoord = new Coord4D(StartCoord.X, StartCoord.Y, StartCoord.Z, StartCoord.W - coord.W);
     }
 
-    private void ExtendThen(Coord4D address)
+    private void ExtendThen(Coord4D coord)
     {
-        var extendBy = address.W - (Duration - 1);
+        var extendBy = coord.W - (Duration - 1);
         if (extendBy > 0)
             AddTime(extendBy, GridAddMode.Append);
     }
@@ -271,133 +313,33 @@ public class Grid4D<T> where T : struct
 
     private void AddRows(int count, GridAddMode addMode)
     {
-        var width = Width;
-        var depth = Depth;
-        var duration = Duration;
-        for (var w = 0; w < duration; w++)
-        {
-            var time = _grid[w];
-            for (var z = 0; z < depth; z++)
-            {
-                var level = time[z];
-                for (var y = 0; y < count; y++)
-                {
-                    var row = new List<T>();
-                    for (var x = 0; x < width; x++)
-                    {
-                        row.Add(_defaultValue);
-                    }
-
-                    if (addMode == GridAddMode.Prepend)
-                        level.Insert(0, row);
-                    else
-                        level.Add(row);
-
-                }
-            }
-        }
+        if (addMode == GridAddMode.Prepend)
+            YMin -= count;
+        else
+            YMax += count;
     }
 
     private void AddCols(int count, GridAddMode addMode)
     {
-        var height = Height;
-        var depth = Depth;
-        var duration = Duration;
-        for (var w = 0; w < duration; w++)
-        {
-            var time = _grid[w];
-            for (var z = 0; z < depth; z++)
-            {
-                var level = time[z];
-                for (var y = 0; y < height; y++)
-                {
-                    var row = level[y];
-                    for (var x = 0; x < count; x++)
-                    {
-                        if (addMode == GridAddMode.Prepend)
-                            row.Insert(0, _defaultValue);
-                        else
-                            row.Add(_defaultValue);
-                    }
-                }
-            }
-        }
+        if (addMode == GridAddMode.Prepend)
+            XMin -= count;
+        else
+            XMax += count;
     }
 
     private void AddLevels(int count, GridAddMode addMode)
     {
-        var height = Height;
-        var width = Width;
-        var duration = Duration;
-        for (var w = 0; w < duration; w++)
-        {
-            var time = _grid[w];
-            for (var z = 0; z < count; z++)
-            {
-                var level = new List<IList<T>>();
-                for (var y = 0; y < height; y++)
-                {
-                    var row = new List<T>();
-                    for (var x = 0; x < width; x++)
-                    {
-                        row.Add(_defaultValue);
-                    }
-
-                    level.Add(row);
-                }
-
-                if (addMode == GridAddMode.Prepend)
-                    time.Insert(0, level);
-                else
-                    time.Add(level);
-                    
-            }
-        }
+        if (addMode == GridAddMode.Prepend)
+            ZMin -= count;
+        else
+            ZMax += count;
     }
 
     private void AddTime(int count, GridAddMode addMode)
     {
-        var height = Height;
-        var width = Width;
-        var depth = Depth;
-        for (var w = 0; w < count; w++)
-        {
-            var time = new List<IList<IList<T>>>();
-            for (var z = 0; z < depth; z++)
-            {
-                var level = new List<IList<T>>();
-                for (var y = 0; y < height; y++)
-                {
-                    var row = new List<T>();
-                    for (var x = 0; x < width; x++)
-                    {
-                        row.Add(_defaultValue);
-                    }
-                    level.Add(row);
-                }
-                time.Add(level);
-            }
-
-            if(addMode == GridAddMode.Prepend)
-                _grid.Insert(0, time);
-            else
-                _grid.Add(time);
-        }
-    }
-
-    public string PrintLevel(int time, int level)
-    {
-        var sb = new StringBuilder();
-        foreach (var row in _grid[time][level])
-        {
-            foreach (var o in row)
-            {
-                sb.Append(o);
-            }
-
-            sb.AppendLine();
-        }
-
-        return sb.ToString().Trim();
+        if (addMode == GridAddMode.Prepend)
+            WMin -= count;
+        else
+            WMax += count;
     }
 }

@@ -4,8 +4,8 @@ namespace Pzl.Tools.Grids.Grids3D;
 
 public class Grid3D<T> where T : struct
 {
-    private readonly T _defaultValue;
-    private readonly IDictionary<Coord3D, T> _grid;
+    public T DefaultValue { get; }
+    private readonly IDictionary<Coord3D, T> _grid = new Dictionary<Coord3D, T>();
     public Coord3D Coord { get; private set; }
     public Coord3D StartCoord { get; set; }
 
@@ -22,33 +22,46 @@ public class Grid3D<T> where T : struct
     public bool IsAtRightEdge => Coord.X == Width - 1;
     public bool IsAtBottom => Coord.Y == Height - 1;
     public bool IsAtLeftEdge => Coord.X == 0;
-
-    public Coord3D Center
-    {
-        get
-        {
-            var xDiff = Math.Abs(XMax - XMin);
-            var yDiff = Math.Abs(YMax - YMin);
-            var zDiff = Math.Abs(ZMax - ZMin);
-            return new(XMax - xDiff / 2, YMax - yDiff / 2, ZMax - zDiff / 2);
-        }
-    }
-
+    
     public Grid3D(int width = 1, int height = 1, int depth = 1, T defaultValue = default)
+        : this(
+            new Coord3D(), 
+            new Coord3D(width - 1, height - 1, depth - 1),
+            new Dictionary<Coord3D, T>(), 
+            defaultValue)
     {
-        _defaultValue = defaultValue;
-        _grid = BuildGrid(width, height, depth, defaultValue);
         XMax = width - 1;
         YMax = height - 1;
         ZMax = depth - 1;
-        Coord = new Coord3D(0, 0, 0);
-        StartCoord = new Coord3D(0, 0, 0);
+    }
+
+    private Grid3D(T defaultValue)
+    {
+        DefaultValue = defaultValue;
+        Coord = new Coord3D();
+        StartCoord = new Coord3D();
+    }
+
+    private Grid3D(
+        Coord3D min, 
+        Coord3D max, 
+        IDictionary<Coord3D, T> values, 
+        T defaultValue = default)
+        : this(defaultValue)
+    {
+        _grid = values;
+        XMin = min.X;
+        XMax = max.X;
+        YMin = min.Y;
+        YMax = max.Y;
+        ZMin = min.Z;
+        ZMax = max.Z;
     }
 
     public IEnumerable<T> Values =>
         Coords.Select(coord => _grid.TryGetValue(coord, out var v)
             ? v
-            : _defaultValue);
+            : DefaultValue);
 
     public IEnumerable<Coord3D> Coords
     {
@@ -64,6 +77,17 @@ public class Grid3D<T> where T : struct
                     }
                 }
             }
+        }
+    }
+    
+    public Coord3D Center
+    {
+        get
+        {
+            var xDiff = Math.Abs(XMax - XMin);
+            var yDiff = Math.Abs(YMax - YMin);
+            var zDiff = Math.Abs(ZMax - ZMin);
+            return new(XMax - xDiff / 2, YMax - yDiff / 2, ZMax - zDiff / 2);
         }
     }
 
@@ -105,7 +129,7 @@ public class Grid3D<T> where T : struct
 
     public T ReadValueAt(Coord3D coord) => _grid.TryGetValue(coord, out var v)
         ? v
-        : _defaultValue;
+        : DefaultValue;
 
     public T ReadValueAt(int x, int y, int z) => ReadValueAt(new Coord3D(x, y, z));
     public void WriteValue(T value) => WriteValueAt(Coord, value);
@@ -127,7 +151,10 @@ public class Grid3D<T> where T : struct
         else if (coord.Z > ZMax)
             ZMax = coord.Z;
 
-        _grid[coord] = value;
+        if (value.Equals(DefaultValue))
+            _grid.Remove(coord);
+        else
+            _grid[coord] = value;
     }
 
     public bool IsOutOfRange(Coord3D address) =>
@@ -172,42 +199,6 @@ public class Grid3D<T> where T : struct
                 }
             }
         }
-    }
-
-    public Grid3D<T> Copy()
-    {
-        var grid = new Grid3D<T>();
-        for (var z = 0; z < Depth; z++)
-        {
-            for (var y = 0; y < Height; y++)
-            {
-                for (var x = 0; x < Width; x++)
-                {
-                    grid.MoveTo(x, y, z);
-                    grid.WriteValue(ReadValueAt(x, y, z));
-                }
-            }
-        }
-
-        grid.MoveTo(Coord);
-        return grid;
-    }
-
-    private Dictionary<Coord3D, T> BuildGrid(int width, int height, int depth, T defaultValue)
-    {
-        var grid = new Dictionary<Coord3D, T>();
-        for (var z = 0; z < depth; z++)
-        {
-            for (var y = 0; y < height; y++)
-            {
-                for (var x = 0; x < width; x++)
-                {
-                    grid.Add(new Coord3D(x, y, z), defaultValue);
-                }
-            }
-        }
-
-        return grid;
     }
 
     private void ExtendGrid(Coord3D address)
@@ -287,46 +278,28 @@ public class Grid3D<T> where T : struct
         AddLevels(steps, GridAddMode.Append);
     }
 
-    private void AddRows(int numberOfRows, GridAddMode addMode)
+    private void AddRows(int count, GridAddMode addMode)
     {
         if (addMode == GridAddMode.Prepend)
-            YMin -= numberOfRows;
+            YMin -= count;
         else
-            YMax += numberOfRows;
+            YMax += count;
     }
 
-    private void AddCols(int numberOfCols, GridAddMode addMode)
+    private void AddCols(int count, GridAddMode addMode)
     {
         if (addMode == GridAddMode.Prepend)
-            XMin -= numberOfCols;
+            XMin -= count;
         else
-            XMax += numberOfCols;
+            XMax += count;
     }
 
-    private void AddLevels(int numberOfLevels, GridAddMode addMode)
+    private void AddLevels(int count, GridAddMode addMode)
     {
         if (addMode == GridAddMode.Prepend)
-            ZMin -= numberOfLevels;
+            ZMin -= count;
         else
-            ZMax += numberOfLevels;
-    }
-
-    public string Print(int z)
-    {
-        var sb = new StringBuilder();
-
-        for (var y = YMin; y <= YMax; y++)
-        {
-            for (var x = XMin; x <= XMax; x++)
-            {
-                sb.Append(ReadValueAt(x, y, z));
-            }
-
-            if (y < YMax)
-                sb.AppendLine();
-        }
-
-        return sb.ToString();
+            ZMax += count;
     }
 
     public void Clear() => _grid.Clear();

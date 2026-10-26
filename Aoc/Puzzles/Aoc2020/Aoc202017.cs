@@ -51,26 +51,36 @@ public class Aoc202017 : AocPuzzle
         for (var i = 0; i < 6; i++)
         {
             grid.ExtendAllDirections();
-            var newGrid = new Grid4D<char>(1, 1, 1, 1, '.');
-            for (var w = 0; w < grid.Duration; w++)
+            var newGrid = new Grid4D<char>(grid.Width, grid.Height, grid.Depth, grid.Duration, '.');
+
+            foreach (var coord in grid.Coords)
             {
-                for (var z = 0; z < grid.Depth; z++)
-                {
-                    for (var y = 0; y < grid.Height; y++)
-                    {
-                        for (var x = 0; x < grid.Width; x++)
-                        {
-                            grid.MoveTo(x, y, z, w);
-                            var currentValue = grid.ReadValue();
-                            var adjacentValues = grid.AllAdjacentValues;
-                            var neighborCount = adjacentValues.Count(o => o == '#');
-                            var newValue = GetNewValue(currentValue, neighborCount);
-                            newGrid.MoveTo(x, y, z, w);
-                            newGrid.WriteValue(newValue);
-                        }
-                    }
-                }
+                var currentValue = grid.ReadValueAt(coord);
+                var adjacentValues = grid.AllAdjacentValuesTo(coord);
+                var neighborCount = adjacentValues.Count(o => o == '#');
+                var newValue = GetNewValue(currentValue, neighborCount);
+                newGrid.WriteValueAt(coord, newValue);
             }
+            
+            // for (var w = 0; w < grid.Duration; w++)
+            // {
+            //     for (var z = 0; z < grid.Depth; z++)
+            //     {
+            //         for (var y = 0; y < grid.Height; y++)
+            //         {
+            //             for (var x = 0; x < grid.Width; x++)
+            //             {
+            //                 grid.MoveTo(x, y, z, w);
+            //                 var currentValue = grid.ReadValue();
+            //                 var adjacentValues = grid.AllAdjacentValues;
+            //                 var neighborCount = adjacentValues.Count(o => o == '#');
+            //                 var newValue = GetNewValue(currentValue, neighborCount);
+            //                 newGrid.MoveTo(x, y, z, w);
+            //                 newGrid.WriteValue(newValue);
+            //             }
+            //         }
+            //     }
+            // }
 
             newGrid.StartCoord = grid.StartCoord;
             grid = newGrid;

@@ -8,44 +8,28 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025;
 public class Codyssi202509 : CodyssiPuzzle
 {
     [Puzzle("f2d434aaa0fe259865b9d9cfe1d06f6f")]
-    public int Part1(string input)
-    {
-        var (officials, transactions) = Parse(input);
-
-        foreach (var (from, to, amount) in transactions)
-        {
-            officials[from].PayPlain(officials[to], amount);
-        }
-
-        return officials.Values.Select(o => o.Balance).OrderDescending().Take(3).Sum();
-    }
+    public int Part1(string input) => Solve(input, PayPlain);
 
     [Puzzle("df8f313313f13f9a6361b0c692e92061")]
-    public int Part2(string input)
-    {
-        var (officials, transactions) = Parse(input);
-
-        foreach (var (from, to, amount) in transactions)
-        {
-            officials[from].PayLimited(officials[to], amount);
-        }
-
-        return officials.Values.Select(o => o.Balance).OrderDescending().Take(3).Sum();
-    }
+    public int Part2(string input) => Solve(input, PayLimited);
 
     [Puzzle("2636591baa425722553a06d9e6e95dd3")]
-    public int Part3(string input)
+    public int Part3(string input) => Solve(input, PayWithDebt);
+
+    private int Solve(string input, Action<Official, Official, int> pay)
     {
         var (officials, transactions) = Parse(input);
-        
+
         foreach (var (from, to, amount) in transactions)
-        {
-            officials[from].PayWithDebt(officials[to], amount);
-        }
+            pay(officials[from], officials[to], amount);
 
         return officials.Values.Select(o => o.Balance).OrderDescending().Take(3).Sum();
     }
 
+    private void PayPlain(Official from, Official to, int amount) => from.PayPlain(to, amount);
+    private void PayLimited(Official from, Official to, int amount) => from.PayLimited(to, amount);
+    private void PayWithDebt(Official from, Official to, int amount) => from.PayWithDebt(to, amount);
+    
     private static (
         Dictionary<string, Official> officials, 
         IEnumerable<(string from, string to, int amount)> transactions) Parse(string input)
@@ -61,7 +45,7 @@ public class Codyssi202509 : CodyssiPuzzle
         return (officials, transactions);
     }
 
-    private class Official(int balance)
+    public class Official(int balance)
     {
         private List<Debt> _debts = [];
         public int Balance { get; private set; } = balance;

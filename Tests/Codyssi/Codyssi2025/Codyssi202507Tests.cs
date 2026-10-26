@@ -15,7 +15,7 @@ public class Codyssi202507Tests : PuzzleTest<Codyssi202507>
                                  796
                                  853
                                  778
-                                 
+
                                  4-8
                                  5-8
                                  10-1
@@ -31,7 +31,7 @@ public class Codyssi202507Tests : PuzzleTest<Codyssi202507>
                                  1-9
                                  3-6
                                  7-10
-                                 
+
                                  10
                                  """;
 
@@ -43,5 +43,4 @@ public class Codyssi202507Tests : PuzzleTest<Codyssi202507>
 
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be(827);
-
 }

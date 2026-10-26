@@ -30,5 +30,4 @@ public class Codyssi202514Tests : PuzzleTest<Codyssi202514>
 
     [Fact]
     public void Part3() => Sut.Part3(Input, 150).Should().Be(59388);
-
 }

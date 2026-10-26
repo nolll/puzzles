@@ -10,7 +10,7 @@ public class Codyssi202518Tests : PuzzleTest<Codyssi202518>
                                   RULE 3: 6x+3y+7z+3a DIVIDE 4 HAS REMAINDER 1 | DEBRIS VELOCITY (-1, 0, 1, -1)
                                   RULE 4: 3x+11y+11z+3a DIVIDE 2 HAS REMAINDER 1 | DEBRIS VELOCITY (-1, 1, 0, -1)
                                   """;
-    
+
     private const string Input2 = """
                                   RULE 1: 8x+10y+3z+5a DIVIDE 9 HAS REMAINDER 4 | DEBRIS VELOCITY (0, -1, 0, 1)
                                   RULE 2: 3x+7y+10z+9a DIVIDE 9 HAS REMAINDER 4 | DEBRIS VELOCITY (0, 1, 0, 1)
@@ -24,20 +24,19 @@ public class Codyssi202518Tests : PuzzleTest<Codyssi202518>
 
     [Fact]
     public void Part1_1() => Sut.Part1(Input1, 3, 3, 5).Should().Be(146);
-    
+
     [Fact]
     public void Part1_2() => Sut.Part1(Input2).Should().Be(32545);
 
     [Fact]
     public void Part2_1() => Sut.Part2(Input1, 3, 3, 5).Should().Be(23);
-    
+
     [Fact]
     public void Part2_2() => Sut.Part2(Input2).Should().Be(217);
 
     [Fact]
     public void Part3_1() => Sut.Part3(Input1, 3, 3, 5).Should().Be(8);
-    
+
     [Fact]
     public void Part3_2() => Sut.Part3(Input2).Should().Be(166);
-
 }

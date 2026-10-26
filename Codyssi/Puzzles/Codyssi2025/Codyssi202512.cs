@@ -19,10 +19,8 @@ public class Codyssi202512 : CodyssiPuzzle
         var grid = GridBuilder.BuildIntGridFromSpaceSeparated(p1);
         var instructions = p2.Split(LineBreaks.Single);
 
-        foreach (var instruction in instructions)
-        {
+        foreach (var instruction in instructions) 
             ExecuteInstruction(grid, instruction);
-        }
 
         return GetBestSum(grid);
     }
@@ -55,10 +53,7 @@ public class Codyssi202512 : CodyssiPuzzle
             }
         }
 
-        var best = GetBestSum(grid);
-        
-        // ReSharper disable once ArrangeRedundantParentheses
-        return (best);
+        return GetBestSum(grid);
     }
 
     [Puzzle("939c50d043eda275028daf308085dcf8")]
@@ -119,21 +114,16 @@ public class Codyssi202512 : CodyssiPuzzle
     private static long GetBestSum(Grid<int> grid)
     {
         var best = 0L;
-        for (var y = grid.YMin; y <= grid.YMax; y++)
-        {
+        for (var y = grid.YMin; y <= grid.YMax; y++) 
             best = Math.Max(best, grid.ReadRowValues(y).Select(o => (long)o).Sum());
-        }
         
-        for (var x = grid.XMin; x <= grid.XMax; x++)
-        {
+        for (var x = grid.XMin; x <= grid.XMax; x++) 
             best = Math.Max(best, grid.ReadColValues(x).Select(o => (long)o).Sum());
-        }
 
         return best;
     }
 
-    private static void Shift(Grid<int> grid, string what, int which, int steps) => 
-        GetShiftFunc(what)(grid, which, steps);
+    private static void Shift(Grid<int> grid, string what, int which, int steps) => GetShiftFunc(what)(grid, which, steps);
 
     private static Action<Grid<int>, int, int> GetShiftFunc(string what) => what == "COL" 
         ? ShiftCol 
@@ -142,43 +132,31 @@ public class Codyssi202512 : CodyssiPuzzle
     private static void ShiftCol(Grid<int> grid, int col, int steps)
     {
         var values = new List<int>();
-        for (var row = 0; row < grid.Height; row++)
-        {
+        for (var row = 0; row < grid.Height; row++) 
             values.Add(grid.ReadValueAt(col, row));
-        }
 
         var origValues = values.ToArray();
         var newValues = new int[origValues.Length];
-        for (var i = 0; i < origValues.Length; i++)
-        {
+        for (var i = 0; i < origValues.Length; i++) 
             newValues[(i + steps) % origValues.Length] = origValues[i];
-        }
         
-        for (var row = 0; row < grid.Height; row++)
-        {
+        for (var row = 0; row < grid.Height; row++) 
             grid.WriteValueAt(new Coord(col, row), newValues[row]);
-        }
     }
     
     private static void ShiftRow(Grid<int> grid, int row, int steps)
     {
         var values = new List<int>();
-        for (var col = 0; col < grid.Width; col++)
-        {
+        for (var col = 0; col < grid.Width; col++) 
             values.Add(grid.ReadValueAt(col, row));
-        }
 
         var origValues = values.ToArray();
         var newValues = new int[origValues.Length];
-        for (var i = 0; i < origValues.Length; i++)
-        {
+        for (var i = 0; i < origValues.Length; i++) 
             newValues[(i + steps) % origValues.Length] = origValues[i];
-        }
         
-        for (var col = 0; col < grid.Width; col++)
-        {
+        for (var col = 0; col < grid.Width; col++) 
             grid.WriteValueAt(new Coord(col, row), newValues[col]);
-        }
     }
 
     private static void ModifyAll(Grid<int> grid, string modification, int amount) => 
@@ -187,24 +165,17 @@ public class Codyssi202512 : CodyssiPuzzle
     private static void Modify(Grid<int> grid, string modification, string what, int which, int amount) => 
         Modify(grid, GetCoordsToModify(grid, what, which), modification, amount);
 
-    private static IEnumerable<Coord> GetCoordsToModify(Grid<int> grid, string what, int which) => 
-        what == "COL"
-            ? grid.Coords.Where(o => o.X == which)
-            : grid.Coords.Where(o => o.Y == which);
+    private static IEnumerable<Coord> GetCoordsToModify(Grid<int> grid, string what, int which) => what == "COL"
+        ? grid.Coords.Where(o => o.X == which)
+        : grid.Coords.Where(o => o.Y == which);
 
     private static void Modify(Grid<int> grid, IEnumerable<Coord> coords, string modification, int amount) => 
         ApplyModification(grid, GetModificationFunc(modification), coords, amount);
 
-    private static void ApplyModification(
-        Grid<int> grid, 
-        Func<int, int, int> func, 
-        IEnumerable<Coord> coords, 
-        int amount)
+    private static void ApplyModification(Grid<int> grid, Func<int, int, int> func, IEnumerable<Coord> coords, int amount)
     {
-        foreach (var coord in coords)
-        {
+        foreach (var coord in coords) 
             grid.WriteValueAt(coord, (int)Clamp(func(grid.ReadValueAt(coord), amount)));
-        }
     }
 
     private static Func<int, int, int> GetModificationFunc(string modification) => modification switch

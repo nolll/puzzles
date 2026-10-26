@@ -10,7 +10,7 @@ public class Codyssi202512Tests : PuzzleTest<Codyssi202512>
                                  742 697 425 362 568
                                  833 408 425 349 631
                                  874 671 202 430 602
-                                 
+
                                  SHIFT COL 2 BY 1
                                  MULTIPLY 4 COL 5
                                  SUB 28 ALL
@@ -19,7 +19,7 @@ public class Codyssi202512Tests : PuzzleTest<Codyssi202512>
                                  ADD 26 ROW 3
                                  SHIFT COL 4 BY 2
                                  ADD 68 ROW 2
-                                 
+
                                  TAKE
                                  CYCLE
                                  TAKE
@@ -36,5 +36,4 @@ public class Codyssi202512Tests : PuzzleTest<Codyssi202512>
 
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be(19022);
-
 }

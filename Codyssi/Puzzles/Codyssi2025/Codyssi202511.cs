@@ -26,17 +26,10 @@ public class Codyssi202511 : CodyssiPuzzle
         return b;
     }
 
-    private IEnumerable<long> GetBase10Numbers(string input)
-    {
-        var base10 = input.Split(LineBreaks.Single)
-            .Select(o => o.Split(' '))
-            .Select(o => ConvertToBase10(o[0], int.Parse(o[1])));
+    private IEnumerable<long> GetBase10Numbers(string input) => 
+        input.Split(LineBreaks.Single).Select(o => o.Split(' ')).Select(o => ConvertToBase10(o[0], int.Parse(o[1])));
 
-        return base10;
-    }
-    
-    private long ConvertToBase10(string s, int b) => 
-        s.Reversed().ToArray().Select((t, i) => _chars[t] * (long)Math.Pow(b, i)).Sum();
+    private long ConvertToBase10(string s, int b) => s.Reversed().ToArray().Select((t, i) => _chars[t] * (long)Math.Pow(b, i)).Sum();
 
     private static Dictionary<char, int> BuildCharDictionary()
     {

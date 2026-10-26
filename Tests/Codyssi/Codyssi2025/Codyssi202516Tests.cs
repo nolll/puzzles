@@ -6,15 +6,15 @@ namespace Tests.Codyssi.Codyssi2025;
 public class Codyssi202516Tests : PuzzleTest<Codyssi202516>
 {
     private const string Input1 = """
-                                 FACE - VALUE 38
-                                 ROW 2 - VALUE 71
-                                 ROW 1 - VALUE 57
-                                 ROW 3 - VALUE 68
-                                 COL 1 - VALUE 52
-                                 
-                                 LURD
-                                 """;
-    
+                                  FACE - VALUE 38
+                                  ROW 2 - VALUE 71
+                                  ROW 1 - VALUE 57
+                                  ROW 3 - VALUE 68
+                                  COL 1 - VALUE 52
+
+                                  LURD
+                                  """;
+
     private const string Input2 = """
                                   FACE - VALUE 38
                                   COL 32 - VALUE 39
@@ -26,10 +26,10 @@ public class Codyssi202516Tests : PuzzleTest<Codyssi202516>
                                   ROW 73 - VALUE 83
                                   COL 15 - VALUE 87
                                   COL 76 - VALUE 57
-                                  
+
                                   ULDLRLLRU
                                   """;
-    
+
     private const string Input3 = """
                                   FACE - VALUE 99
                                   FACE - VALUE 10
@@ -59,7 +59,7 @@ public class Codyssi202516Tests : PuzzleTest<Codyssi202516>
                                   FACE - VALUE 72
                                   ROW 9 - VALUE 82
                                   COL 71 - VALUE 92
-                                  
+
                                   ULDDRUURDRULRDLLURLDRLURLLL
                                   """;
 
@@ -68,17 +68,16 @@ public class Codyssi202516Tests : PuzzleTest<Codyssi202516>
 
     [Fact]
     public void Part2_1() => Sut.Part2(Input1, 3).Should().Be(BigInteger.Parse("118727856"));
-    
+
     [Fact]
     public void Part2_2() => Sut.Part2(Input2).Should().Be(BigInteger.Parse("369594451623936000000"));
-    
+
     [Fact]
     public void Part2_3() => Sut.Part2(Input3).Should().Be(BigInteger.Parse("41477439119464857600000"));
 
     [Fact]
     public void Part3_1() => Sut.Part3(Input1, 3).Should().Be(BigInteger.Parse("59477096746944"));
-    
+
     [Fact]
     public void Part3_2() => Sut.Part3(Input2).Should().Be(BigInteger.Parse("118479211258970523303936"));
-
 }

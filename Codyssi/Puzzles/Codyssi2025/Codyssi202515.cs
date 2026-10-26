@@ -15,10 +15,8 @@ public class Codyssi202515 : CodyssiPuzzle
 
         var levelCount = nodes.Max(o => o.Level) + 1;
         var bestSum = 0;
-        for (var level = 0; level < levelCount; level++)
-        {
+        for (var level = 0; level < levelCount; level++) 
             bestSum = Math.Max(bestSum, nodes.Where(o => o.Level == level).Sum(o => o.Id));
-        }
 
         return bestSum * levelCount;
     }
@@ -33,7 +31,7 @@ public class Codyssi202515 : CodyssiPuzzle
         var special = new Node("special", 500_000); 
         root.Add(special);
         var path = GetPathTo(special);
-        return string.Join("-",path.Select(o => o.Name));
+        return string.Join("-",path.Select(o => o.NodeName));
     }
 
     [Puzzle("cdb171b505a56eed22f6483b7e0bf002")]
@@ -46,13 +44,13 @@ public class Codyssi202515 : CodyssiPuzzle
         var specials = ParseNodes(input.Split(LineBreaks.Double).Last());
         root.Add(specials);
         var specialsPaths = specials.Select(GetPathTo).ToArray();
-        return GetLowestCommonAncestor(specialsPaths)?.Name;
+        return GetLowestCommonAncestor(specialsPaths)?.NodeName;
     }
     
-    public class Node(string name, int id)
+    public class Node(string nodeName, int id)
     {
         private readonly Node?[] _children = [null, null];
-        public string Name { get; } = name;
+        public string NodeName { get; } = nodeName;
         public int Id { get; } = id;
         public int Level { get; private set; }
         public Node? Parent { get; private set; }
@@ -74,10 +72,8 @@ public class Codyssi202515 : CodyssiPuzzle
         
         public void Add(IEnumerable<Node> nodes)
         {
-            foreach (var node in nodes)
-            {
+            foreach (var node in nodes) 
                 Add(node);
-            }
         }
     }
 
@@ -97,14 +93,14 @@ public class Codyssi202515 : CodyssiPuzzle
             path.Add(current);
         }
 
-        return path.Reversed().ToArray();
+        return [.. path.Reversed()];
     }
 
     private static Node GetLowestCommonAncestor(Node[][] paths)
     {
         for (var i = 0; i < paths.Select(o => o.Length).Min(); i++)
         {
-            if (paths[0][i].Name == paths[1][i].Name)
+            if (paths[0][i].NodeName == paths[1][i].NodeName)
                 continue;
             
             return paths[0][i].Parent!;

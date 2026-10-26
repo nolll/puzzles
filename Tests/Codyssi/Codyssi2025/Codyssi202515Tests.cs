@@ -20,7 +20,7 @@ public class Codyssi202515Tests : PuzzleTest<Codyssi202515>
                                  PtRtdSE | 314969
                                  gwHsSzH | 960026
                                  JoyLmZv | 833936
-                                 
+
                                  MUantNm | 422646
                                  FyNcJHX | 9047
                                  """;
@@ -33,5 +33,4 @@ public class Codyssi202515Tests : PuzzleTest<Codyssi202515>
 
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be("pYNonIG");
-
 }

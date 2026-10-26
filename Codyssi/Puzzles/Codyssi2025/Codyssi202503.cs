@@ -50,10 +50,8 @@ public class Codyssi202503 : CodyssiPuzzle
         foreach (var pile in piles)
         {
             var nums = Numbers.IntsFromString(pile.Replace('-', ' '));
-            for (var i = nums[0]; i <= nums[1]; i++)
-            {
+            for (var i = nums[0]; i <= nums[1]; i++) 
                 set.Add(i);
-            }
         }
 
         return set;

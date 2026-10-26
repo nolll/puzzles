@@ -15,7 +15,7 @@ public class Codyssi202518 : CodyssiPuzzle
 
     [Puzzle("a8c76203a26abde805a1a11cbd419b79")]
     public int Part1(string input, int sizex = SizeX, int sizey = SizeY, int sizez = SizeZ) =>
-        DebrisParser.Parse(input, sizex, sizey, sizez).Count;
+        Parse(input, sizex, sizey, sizez).Count;
 
     [Puzzle("c8dcfc39bf271a441c80feaf46160a32")]
     public int Part2(string input, int sizex = SizeX, int sizey = SizeY, int sizez = SizeZ) =>
@@ -32,7 +32,7 @@ public class Codyssi202518 : CodyssiPuzzle
         var tz = sizez - 1;
         const int tw = 0;
 
-        var debrisSystem = DebrisParser.Parse(input, sizex, sizey, sizez);
+        var debrisSystem = Parse(input, sizex, sizey, sizez);
 
         var seen = new HashSet<(int x, int y, int z, int w, int damage, int time)>();
         var queue = new Queue<(int x, int y, int z, int w, int damage, int time)>();
@@ -73,42 +73,39 @@ public class Codyssi202518 : CodyssiPuzzle
 
     public record Debris(int X, int Y, int Z, int W, int Vx, int Vy, int Vz, int Vw);
 
-    public static class DebrisParser
+    public static DebrisSystem Parse(string input, int sizex, int sizey, int sizez)
     {
-        public static DebrisSystem Parse(string input, int sizex, int sizey, int sizez)
-        {
-            var rules = input.Split(LineBreaks.Single);
-            var coords = GetCoords(sizex, sizey, sizez).ToArray();
-            var debris = GetDebris(rules, coords).ToArray();
-            return new DebrisSystem(sizex, sizey, sizez, debris);
-        }
+        var rules = input.Split(LineBreaks.Single);
+        var coords = GetCoords(sizex, sizey, sizez).ToArray();
+        var debris = GetDebris(rules, coords).ToArray();
+        return new DebrisSystem(sizex, sizey, sizez, debris);
+    }
 
-        private static IEnumerable<Debris> GetDebris(IEnumerable<string> rules, (int x, int y, int z, int w)[] coords)
+    private static IEnumerable<Debris> GetDebris(IEnumerable<string> rules, (int x, int y, int z, int w)[] coords)
+    {
+        foreach (var (_, x, y, z, w, divide, remainder, vx, vy, vz, vw) in rules.Select(Numbers.IntsFromString))
         {
-            foreach (var (_, x, y, z, w, divide, remainder, vx, vy, vz, vw) in rules.Select(Numbers.IntsFromString))
+            foreach (var c in coords)
             {
-                foreach (var c in coords)
-                {
-                    var sum = c.x * x + c.y * y + c.z * z + c.w * w;
-                    var res = (sum % divide + divide) % divide;
-                    if (res == remainder)
-                        yield return new Debris(c.x, c.y, c.z, c.w, vx, vy, vz, vw);
-                }
+                var sum = c.x * x + c.y * y + c.z * z + c.w * w;
+                var res = (sum % divide + divide) % divide;
+                if (res == remainder)
+                    yield return new Debris(c.x, c.y, c.z, c.w, vx, vy, vz, vw);
             }
         }
+    }
 
-        private static IEnumerable<(int x, int y, int z, int w)> GetCoords(int sizex, int sizey, int sizez)
+    private static IEnumerable<(int x, int y, int z, int w)> GetCoords(int sizex, int sizey, int sizez)
+    {
+        for (var x = 0; x < sizex; x++)
         {
-            for (var x = 0; x < sizex; x++)
+            for (var y = 0; y < sizey; y++)
             {
-                for (var y = 0; y < sizey; y++)
+                for (var z = 0; z < sizez; z++)
                 {
-                    for (var z = 0; z < sizez; z++)
+                    for (var w = -1; w < 2; w++)
                     {
-                        for (var w = -1; w < 2; w++)
-                        {
-                            yield return (x, y, z, w);
-                        }
+                        yield return (x, y, z, w);
                     }
                 }
             }

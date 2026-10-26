@@ -7,6 +7,8 @@ namespace Pzl.Codyssi.Puzzles.Codyssi2025;
 [Name("Absurd Arithmetic")]
 public class Codyssi202502 : CodyssiPuzzle
 {
+    private const long Part3Max = 15_000_000_000_000;
+
     [Puzzle("08f294141be67fb8ce4f13e39d3f12d0")]
     public long Part1(string input)
     {
@@ -24,15 +26,13 @@ public class Codyssi202502 : CodyssiPuzzle
     [Puzzle("4366f7c950d582ccdb298e25d136b3b9")]
     public long Part3(string input)
     {
-        const long max = 15_000_000_000_000;
-        
         var (parameters, rooms) = Parse(input);
         (long room, long cost) best = (0, 0);
         foreach (var item in rooms)
         {
             var cost = ApplyFunction(item, parameters);
 
-            if (cost > max || cost <= best.cost)
+            if (cost > Part3Max || cost <= best.cost)
                 continue;
 
             best = (item, cost);
@@ -41,8 +41,7 @@ public class Codyssi202502 : CodyssiPuzzle
         return best.room;
     }
 
-    private static long ApplyFunction(long input, int[] parameters) => 
-        (long)Math.Pow(input, parameters[2]) * parameters[1] + parameters[0];
+    private static long ApplyFunction(long input, int[] parameters) => (long)Math.Pow(input, parameters[2]) * parameters[1] + parameters[0];
 
     private static (int[] parameters, long[] rooms) Parse(string input)
     {

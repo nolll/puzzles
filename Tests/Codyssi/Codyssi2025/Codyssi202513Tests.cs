@@ -27,5 +27,4 @@ public class Codyssi202513Tests : PuzzleTest<Codyssi202513>
 
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be(18);
-
 }

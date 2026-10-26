@@ -23,7 +23,7 @@ public class Codyssi202514 : CodyssiPuzzle
     [Puzzle("3bafbd664e33fa504df74844376f1c19")]
     public int Part3(string input, int unitCount = 300) => RunPart2And3(input, unitCount);
 
-    public int RunPart2And3(string input, int unitCount)
+    private int RunPart2And3(string input, int unitCount)
     {
         var items = input.Split(LineBreaks.Single)
             .Select(o => o.Replace(",", "").Split(' '))
@@ -78,11 +78,5 @@ public class Codyssi202514 : CodyssiPuzzle
     }
     
     private record GridCell(int Value, List<Item> Items);
-
-    private class Item(int quality, int cost, int count)
-    {
-        public int Quality { get; } = quality;
-        public int Cost { get; } = cost;
-        public int Count { get; } = count;
-    }
+    private record Item(int Quality, int Cost, int Count);
 }

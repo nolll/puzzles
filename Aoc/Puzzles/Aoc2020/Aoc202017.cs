@@ -5,34 +5,27 @@ using Pzl.Tools.Grids.Grids4d;
 namespace Pzl.Aoc.Puzzles.Aoc2020;
 
 [Name("Conway Cubes")]
-[NeedsRewrite]
-[Comment("The 4d grid is still array based")]
 public class Aoc202017 : AocPuzzle
 {
+    private const int CycleCount = 6;
+
     [Puzzle("86fb7e6bf0dd282e332fdf0fe14cb572")]
     public int Part1(string input)
     {
         var grid = Grid3DBuilder.BuildCharGrid(input, '.');
 
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < CycleCount; i++)
         {
             grid.ExtendAllDirections();
             var ons = new List<Coord3D>();
-            for (var z = grid.ZMin; z <= grid.ZMax; z++)
+            foreach (var coord in grid.Coords)
             {
-                for (var y = grid.YMin; y <= grid.YMax; y++)
-                {
-                    for (var x = grid.XMin; x <= grid.XMax; x++)
-                    {
-                        var coord = new Coord3D(x, y, z);
-                        var currentValue = grid.ReadValueAt(coord);
-                        var adjacentValues = grid.AllAdjacentValuesTo(coord);
-                        var neighborCount = adjacentValues.Count(o => o == '#');
-                        var newValue = GetNewValue(currentValue, neighborCount);
-                        if (newValue == '#')
-                            ons.Add(coord);
-                    }
-                }
+                var currentValue = grid.ReadValueAt(coord);
+                var adjacentValues = grid.AllAdjacentValuesTo(coord);
+                var neighborCount = adjacentValues.Count(o => o == '#');
+                var newValue = GetNewValue(currentValue, neighborCount);
+                if (newValue == '#')
+                    ons.Add(coord);
             }
 
             grid.Clear();
@@ -48,39 +41,18 @@ public class Aoc202017 : AocPuzzle
     {
         var grid = Grid4DBuilder.BuildCharGrid(input, '.');
 
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < CycleCount; i++)
         {
             grid.ExtendAllDirections();
-            var newGrid = new Grid4D<char>(grid.Width, grid.Height, grid.Depth, grid.Duration, '.');
+            var newGrid = new Grid4D<char>(1, 1, 1, 1, '.');
 
             foreach (var coord in grid.Coords)
             {
                 var currentValue = grid.ReadValueAt(coord);
                 var adjacentValues = grid.AllAdjacentValuesTo(coord);
                 var neighborCount = adjacentValues.Count(o => o == '#');
-                var newValue = GetNewValue(currentValue, neighborCount);
-                newGrid.WriteValueAt(coord, newValue);
+                newGrid.WriteValueAt(coord, GetNewValue(currentValue, neighborCount));
             }
-            
-            // for (var w = 0; w < grid.Duration; w++)
-            // {
-            //     for (var z = 0; z < grid.Depth; z++)
-            //     {
-            //         for (var y = 0; y < grid.Height; y++)
-            //         {
-            //             for (var x = 0; x < grid.Width; x++)
-            //             {
-            //                 grid.MoveTo(x, y, z, w);
-            //                 var currentValue = grid.ReadValue();
-            //                 var adjacentValues = grid.AllAdjacentValues;
-            //                 var neighborCount = adjacentValues.Count(o => o == '#');
-            //                 var newValue = GetNewValue(currentValue, neighborCount);
-            //                 newGrid.MoveTo(x, y, z, w);
-            //                 newGrid.WriteValue(newValue);
-            //             }
-            //         }
-            //     }
-            // }
 
             newGrid.StartCoord = grid.StartCoord;
             grid = newGrid;

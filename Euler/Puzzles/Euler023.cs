@@ -32,7 +32,7 @@ public class Euler023 : EulerPuzzle
             foreach (var inner in abundantNumbers)
             {
                 var sum = inner + outer;
-                if (sum < 28123 && !sums.Contains(sum))
+                if (sum < 28123)
                     sums.Add(sum);
             }
         }

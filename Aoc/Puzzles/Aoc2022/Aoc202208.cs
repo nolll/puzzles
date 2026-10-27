@@ -18,7 +18,7 @@ public class Aoc202208 : AocPuzzle
             treeGrid.MoveTo(coord);
             var currentTreeHeight = treeGrid.ReadValue();
 
-            foreach (var direction in GridDirection.All)
+            foreach (var direction in GridDirection.Orthogonal)
             {
                 treeGrid.TurnTo(direction);
                 while (treeGrid.TryMoveForward())
@@ -51,7 +51,7 @@ public class Aoc202208 : AocPuzzle
             treeGrid.MoveTo(coord);
             var currentTreeHeight = treeGrid.ReadValue();
 
-            foreach (var direction in GridDirection.All)
+            foreach (var direction in GridDirection.Orthogonal)
             {
                 treeGrid.TurnTo(direction);
                 while (treeGrid.TryMoveForward())
@@ -72,6 +72,6 @@ public class Aoc202208 : AocPuzzle
     }
 
     private static Grid<int> Parse(string input) => GridBuilder.BuildIntGridFromNonSeparated(input);
-    private static Dictionary<GridDirection, int> InitScores() => GridDirection.All.ToDictionary(k => k, _ => 0);
-    private static Dictionary<GridDirection, bool> InitVisibility() => GridDirection.All.ToDictionary(k => k, _ => true);
+    private static Dictionary<GridDirection, int> InitScores() => GridDirection.Orthogonal.ToDictionary(k => k, _ => 0);
+    private static Dictionary<GridDirection, bool> InitVisibility() => GridDirection.Orthogonal.ToDictionary(k => k, _ => true);
 }

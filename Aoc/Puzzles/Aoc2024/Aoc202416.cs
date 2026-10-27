@@ -66,7 +66,7 @@ public class Aoc202416 : AocPuzzle
         var spaceCoords = grid.FindCoords(EmptySpace);
         foreach (var coord in spaceCoords)
         {
-            foreach (var dir in GridDirection.All)
+            foreach (var dir in GridDirection.Orthogonal)
             {
                 grid.MoveTo(coord);
                 grid.TurnTo(dir);

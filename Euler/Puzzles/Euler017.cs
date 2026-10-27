@@ -14,8 +14,7 @@ public class Euler017 : EulerPuzzle
         var strings = new List<string>();
         for (var i = 1; i <= target; i++)
         {
-            var numberAsWords = new NumberAsString(i).ToString();
-            strings.Add(numberAsWords);
+            strings.Add(new NumberAsString(i).ToString());
         }
 
         return CountLetters(strings);

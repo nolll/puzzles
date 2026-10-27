@@ -42,7 +42,7 @@ public class Aoc202317 : AocPuzzle
     }
 
     private static List<GraphEdge> BuildGraph(Grid<int> grid, int minStraightCount, int maxStraightCount) =>
-        [.. grid.Coords.SelectMany(o => GridDirection.All.SelectMany(p => GetDirectionGraph(grid, o, p, minStraightCount, maxStraightCount)))];
+        [.. grid.Coords.SelectMany(o => GridDirection.Orthogonal.SelectMany(p => GetDirectionGraph(grid, o, p, minStraightCount, maxStraightCount)))];
 
     private static IEnumerable<GraphEdge> GetDirectionGraph(
         Grid<int> grid

@@ -32,7 +32,7 @@ public class Ece202420 : EverybodyEventPuzzle
         var grid = GridBuilder.BuildCharGrid(input);
         var s = grid.FindCoords('S').First();
         grid.WriteValueAt(s, '.');
-        var states = GridDirection.All.ToDictionary(k => (s.X, s.Y, k.Name), _ => 1000);
+        var states = GridDirection.Orthogonal.ToDictionary(k => (s.X, s.Y, k.Name), _ => 1000);
 
         for (var i = 0; i < 100; i++)
         {
@@ -76,7 +76,7 @@ public class Ece202420 : EverybodyEventPuzzle
         var grid = GridBuilder.BuildCharGrid(input);
         var s = grid.FindCoords('S').First();
         grid.WriteValueAt(s, '.');
-        var states = GridDirection.All.ToDictionary(k => (s.X, s.Y, k.Name, ' '), _ => 10000);
+        var states = GridDirection.Orthogonal.ToDictionary(k => (s.X, s.Y, k.Name, ' '), _ => 10000);
         var time = 0;
         var found = false;
         

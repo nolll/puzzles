@@ -16,10 +16,7 @@ public class Euler025 : EulerPuzzle
         var cache = new Dictionary<BigInteger, BigInteger>();
         while (true)
         {
-            var fib = Numbers.Fibonacci(index, cache);
-            var s = fib.ToString();
-            
-            if (s.Length >= digitCount)
+            if (Numbers.Fibonacci(index, cache).ToString().Length >= digitCount)
                 break;
 
             index++;

@@ -12,5 +12,5 @@ public class Euler024 : EulerPuzzle
     public string Solve(int digitCount, int nthToFind) => string.Concat(GetPermutations(digitCount)[nthToFind - 1]);
 
     public IList<IEnumerable<int>> GetPermutations(int digitCount) => 
-        PermutationGenerator.GetPermutations(Enumerable.Range(0, digitCount).ToList());
+        PermutationGenerator.GetPermutations([.. Enumerable.Range(0, digitCount)]);
 }

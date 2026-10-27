@@ -9,21 +9,9 @@ public class Euler018 : EulerPuzzle
     [Puzzle("ac0ed37fe47b088e57246f49e0564317")]
     public int Solve(string input) => BuildTriangle(input).First().First().BestPath;
 
-    private static IEnumerable<List<TriangleNode>> BuildTriangle(string triangleString)
+    private static IEnumerable<List<TriangleNode>> BuildTriangle(string input)
     {
-        var lines = triangleString.Split(LineBreaks.Single);
-        var triangle = new List<List<TriangleNode>>();
-        foreach (var line in lines)
-        {
-            var numbers = line
-                .Trim()
-                .Replace("  ", " ")
-                .Split(' ')
-                .Select(o => o.TrimStart('0'))
-                .Select(o => new TriangleNode(int.Parse(o)))
-                .ToList();
-            triangle.Add(numbers);
-        }
+        var triangle = ParseTriangle(input);
 
         for (var i = 0; i < triangle.Count - 1; i++)
         {
@@ -43,18 +31,34 @@ public class Euler018 : EulerPuzzle
         return triangle;
     }
 
+    private static List<List<TriangleNode>> ParseTriangle(string input)
+    {
+        var lines = input.Split(LineBreaks.Single);
+        var triangle = new List<List<TriangleNode>>();
+        foreach (var line in lines)
+        {
+            triangle.Add(line.Replace("  ", " ")
+                .Split(' ')
+                .Select(o => o.TrimStart('0'))
+                .Select(o => new TriangleNode(int.Parse(o)))
+                .ToList());
+        }
+        
+        return triangle;
+    }
+
     protected class TriangleNode(int value)
     {
         private int? _bestPath;
 
         private int Value { get; } = value;
-        private List<TriangleNode> Children { get; } = new();
+        private List<TriangleNode> Children { get; } = [];
 
         public int BestPath
         {
             get
             {
-                _bestPath ??= Children.Any()
+                _bestPath ??= Children.Count != 0
                     ? Value + Children.Max(o => o.BestPath)
                     : Value;
 

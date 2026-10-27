@@ -12,5 +12,5 @@ public class Euler042 : EulerPuzzle
         .Select(GetWordValue)
         .Count(o => Numbers.IsTriangularNumber(o));
 
-    public static int GetWordValue(string word) => word.ToCharArray().Select(o => o - 64).Sum();
+    public int GetWordValue(string word) => word.ToCharArray().Select(o => o - 64).Sum();
 }

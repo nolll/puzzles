@@ -9,7 +9,7 @@ public class Euler064Tests : PuzzleTest<Euler064>
     [InlineData(23, "[4; (1, 3, 1, 8)]")]
     public void FractionsFor(int n, string expected)
     {
-        var result = Euler064.GetContinuedFraction(n);
+        var result = Sut.GetContinuedFraction(n);
         var period = string.Join(", ", result.cycle);
         $"[{result.a0}; ({period})]".Should().Be(expected);
     }

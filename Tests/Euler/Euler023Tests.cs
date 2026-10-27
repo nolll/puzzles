@@ -5,10 +5,5 @@ namespace Tests.Euler;
 public class Euler023Tests : PuzzleTest<Euler023>
 {
     [Fact]
-    public void Test()
-    {
-        var result = Euler023.FindAbundantNumbers(13);
-
-        result.Count().Should().Be(1);
-    }
+    public void Test() => Sut.FindAbundantNumbers(13).Count().Should().Be(1);
 }

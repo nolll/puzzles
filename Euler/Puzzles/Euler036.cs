@@ -12,6 +12,6 @@ public class Euler036 : EulerPuzzle
         .Where(IsPalindromeInBothBases)
         .Sum();
 
-    public static bool IsPalindromeInBothBases(int n) => 
+    public bool IsPalindromeInBothBases(int n) => 
         n.ToString().IsPalindrome() && Conversion.ToBinary(n).IsPalindrome();
 }

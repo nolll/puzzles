@@ -44,5 +44,5 @@ public class Euler021 : EulerPuzzle
         return amicableSum;
     }
 
-    public static int GetFactorialSum(int n) => Numbers.GetProperDivisors(n).Sum();
+    public int GetFactorialSum(int n) => Numbers.GetProperDivisors(n).Sum();
 }

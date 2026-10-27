@@ -5,29 +5,11 @@ namespace Tests.Euler;
 public class Euler031Tests : PuzzleTest<Euler031>
 {
     [Fact]
-    public void TwoDenominations()
-    {
-        var puzzle = new Euler031();
-        var result = puzzle.Solve(new List<int> { 1, 2 }, 2);
-
-        result.Should().Be(2);
-    }
+    public void TwoDenominations() => Sut.Solve(new List<int> { 1, 2 }, 2).Should().Be(2);
 
     [Fact]
-    public void ThreeDenominations()
-    {
-        var puzzle = new Euler031();
-        var result = puzzle.Solve(new List<int> { 1, 2, 5 }, 5);
-
-        result.Should().Be(4);
-    }
+    public void ThreeDenominations() => Sut.Solve(new List<int> { 1, 2, 5 }, 5).Should().Be(4);
 
     [Fact]
-    public void FourDenominations()
-    {
-        var puzzle = new Euler031();
-        var result = puzzle.Solve(new List<int> { 1, 2, 5, 10 }, 10);
-
-        result.Should().Be(11);
-    }
+    public void FourDenominations() => Sut.Solve(new List<int> { 1, 2, 5, 10 }, 10).Should().Be(11);
 }

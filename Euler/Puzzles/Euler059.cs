@@ -21,7 +21,7 @@ public class Euler059 : EulerPuzzle
         .Select(o => string.Concat(o))
         .ToArray();
 
-    private static string BruteForceDecrypt(string[] keys, string inputText)
+    private string BruteForceDecrypt(string[] keys, string inputText)
     {
         foreach (var chars in keys)
         {
@@ -33,7 +33,7 @@ public class Euler059 : EulerPuzzle
         throw new Exception("Decryption failed.");
     }
 
-    private static string Decrypt(string key, string inputText)
+    private string Decrypt(string key, string inputText)
     {
         var pos = 0;
         var current = new List<char>();
@@ -47,5 +47,5 @@ public class Euler059 : EulerPuzzle
         return string.Concat(current);
     }
 
-    public static int Decrypt(int key, int s) => s ^ key;
+    public int Decrypt(int key, int s) => s ^ key;
 }

@@ -24,7 +24,7 @@ public class Euler038 : EulerPuzzle
         return products.Max();
     }
 
-    public static long? GetConcatenatedProduct(int n)
+    public long? GetConcatenatedProduct(int n)
     {
         var s = "";
         var multipler = 1;

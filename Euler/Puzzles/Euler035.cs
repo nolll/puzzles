@@ -22,7 +22,7 @@ public class Euler035 : EulerPuzzle
         return count;
     }
 
-    public static IEnumerable<int> GetRotations(int n)
+    public IEnumerable<int> GetRotations(int n)
     {
         var s = n.ToString();
 

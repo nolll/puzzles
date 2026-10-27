@@ -4,16 +4,8 @@ namespace Tests.Euler;
 
 public class Euler021Tests : PuzzleTest<Euler021>
 {
-    [Fact]
-    public void Test()
-    {
-        const int a = 220;
-        const int b = 284;
-
-        var sumA = Euler021.GetFactorialSum(a);
-        var sumB = Euler021.GetFactorialSum(b);
-
-        sumA.Should().Be(b);
-        sumB.Should().Be(a);
-    }
+    [Theory]
+    [InlineData(220, 284)]
+    [InlineData(284, 220)]
+    public void Test(int input, int expected) => Sut.GetFactorialSum(input).Should().Be(expected);
 }

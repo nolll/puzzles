@@ -5,11 +5,5 @@ namespace Tests.Euler;
 public class Euler026Tests : PuzzleTest<Euler026>
 {
     [Fact]
-    public void Test()
-    {
-        var puzzle = new Euler026();
-        var result = puzzle.Solve(10);
-
-        result.Should().Be(7);
-    }
+    public void Test() => Sut.Solve(10).Should().Be(7);
 }

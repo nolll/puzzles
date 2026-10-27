@@ -5,10 +5,5 @@ namespace Tests.Euler;
 public class Euler042Tests : PuzzleTest<Euler042>
 {
     [Fact]
-    public void GetWordValue()
-    {
-        var result = Euler042.GetWordValue("SKY");
-
-        result.Should().Be(55);
-    }
+    public void GetWordValue() => Sut.GetWordValue("SKY").Should().Be(55);
 }

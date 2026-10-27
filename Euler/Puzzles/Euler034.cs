@@ -20,7 +20,7 @@ public class Euler034 : EulerPuzzle
         return total;
     }
 
-    public static int GetDigitFactorialSum(int n) => GetDigits(n)
+    public int GetDigitFactorialSum(int n) => GetDigits(n)
         .Select(GetFactorial)
         .Sum();
 

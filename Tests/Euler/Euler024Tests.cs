@@ -5,18 +5,6 @@ namespace Tests.Euler;
 public class Euler024Tests : PuzzleTest<Euler024>
 {
     [Fact]
-    public void PermutationsAreGeneratedInLexicographicOrder()
-    {
-        var permutations = Euler024.GetPermutations(3);
-
-        permutations.Should().BeEquivalentTo(new List<List<int>>
-        {
-            new() { 0, 1, 2 },
-            new() { 0, 2, 1 },
-            new() { 1, 0, 2 },
-            new() { 1, 2, 0 },
-            new() { 2, 0, 1 },
-            new() { 2, 1, 0 }
-        });
-    }
+    public void PermutationsAreGeneratedInLexicographicOrder() => 
+        Sut.GetPermutations(3).Should().BeEquivalentTo((List<List<int>>)[[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]]);
 }

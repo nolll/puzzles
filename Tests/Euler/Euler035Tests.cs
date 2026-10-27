@@ -7,8 +7,7 @@ public class Euler035Tests : PuzzleTest<Euler035>
     [Fact]
     public void Rotations()
     {
-        var result = Euler035.GetRotations(12345).ToArray();
-
+        var result = Sut.GetRotations(12345).ToArray();
         result.Length.Should().Be(5);
         result[0].Should().Be(12345);
         result[1].Should().Be(23451);

@@ -40,7 +40,7 @@ public class Euler023 : EulerPuzzle
         return sums;
     }
 
-    public static IEnumerable<int> FindAbundantNumbers(int upperLimit)
+    public IEnumerable<int> FindAbundantNumbers(int upperLimit)
     {
         for (var i = 12; i <= upperLimit; i++)
         {

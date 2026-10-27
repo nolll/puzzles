@@ -28,7 +28,7 @@ public class Euler032 : EulerPuzzle
         return pandigitalProducts.Sum();
     }
 
-    public static bool IsPandigital(int a, int b) => IsPandigital(a, b, a * b);
+    public bool IsPandigital(int a, int b) => IsPandigital(a, b, a * b);
 
     private static bool IsPandigital(int a, int b, int product) => 
         string.Concat($"{a}{b}{product}".OrderBy(c => c)) == AllChars;

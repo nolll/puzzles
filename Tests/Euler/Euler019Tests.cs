@@ -4,16 +4,6 @@ namespace Tests.Euler;
 
 public class Euler019Tests : PuzzleTest<Euler019>
 {
-
     [Fact]
-    public void Test()
-    {
-        var startDate = DateTime.Parse("2020-01-01");
-        var endDate = DateTime.Parse("2020-12-31");
-
-        var puzzle = new Euler019();
-        var result = puzzle.Solve(startDate, endDate);
-
-        result.Should().Be(2);
-    }
+    public void Test() => Sut.Solve(DateTime.Parse("2020-01-01"), DateTime.Parse("2020-12-31")).Should().Be(2);
 }

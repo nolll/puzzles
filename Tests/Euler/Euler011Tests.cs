@@ -4,20 +4,14 @@ namespace Tests.Euler;
 
 public class Euler011Tests : PuzzleTest<Euler011>
 {
+    private const string Input = """
+                                 01 01 01 01 01
+                                 01 02 02 02 01
+                                 01 02 02 02 01
+                                 01 02 02 03 01
+                                 01 01 01 01 04
+                                 """;
+
     [Fact]
-    public void Test()
-    {
-        const string grid = """
-                            01 01 01 01 01
-                            01 02 02 02 01
-                            01 02 02 02 01
-                            01 02 02 03 01
-                            01 01 01 01 04
-                            """;
-
-        var puzzle = new Euler011();
-        var result = puzzle.Solve(grid);
-
-        result.Should().Be(48);
-    }
+    public void Test() => Sut.Solve(Input).Should().Be(48);
 }

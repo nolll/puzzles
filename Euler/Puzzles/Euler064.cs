@@ -22,7 +22,7 @@ public class Euler064 : EulerPuzzle
         return result;
     }
 
-    public static (long a0, long[] cycle) GetContinuedFraction(long n)
+    public (long a0, long[] cycle) GetContinuedFraction(long n)
     {
         var floor = (long)Math.Sqrt(n);
         if ((long)Math.Pow(floor, 2) == n)

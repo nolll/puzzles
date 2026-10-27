@@ -8,10 +8,5 @@ public class Euler036Tests : PuzzleTest<Euler036>
     [InlineData(383, false)]
     [InlineData(585, true)]
     [InlineData(21, false)]
-    public void IsPalindromeInBothBases(int input, bool expected)
-    {
-        var result = Euler036.IsPalindromeInBothBases(input);
-
-        result.Should().Be(expected);
-    }
+    public void IsPalindromeInBothBases(int input, bool expected) => Sut.IsPalindromeInBothBases(input).Should().Be(expected);
 }

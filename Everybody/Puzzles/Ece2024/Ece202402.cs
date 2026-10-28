@@ -36,11 +36,8 @@ public class Ece202402 : EverybodyEventPuzzle
         return (words, strings);
     }
 
-    public int CountRunicWords(string[] words, string[] strings) => 
-        strings.Sum(s => words.Sum(o => OccurrencesInString(o, s)));
-
-    public int CountRunicSymbols(string[] words, string[] strings) => 
-        strings.Sum(s => CountRunicSymbols(words, s));
+    public int CountRunicWords(string[] words, string[] strings) => strings.Sum(s => words.Sum(o => OccurrencesInString(o, s)));
+    public int CountRunicSymbols(string[] words, string[] strings) => strings.Sum(s => CountRunicSymbols(words, s));
 
     private static int CountRunicSymbols(string[] words, string s)
     {
@@ -112,6 +109,5 @@ public class Ece202402 : EverybodyEventPuzzle
     }
 
     private static int OccurrencesInString(string word, string s) => 
-        Enumerable.Range(0, s.Length - word.Length + 1)
-            .Count(o => s.Substring(o, word.Length) == word);
+        Enumerable.Range(0, s.Length - word.Length + 1).Count(o => s.Substring(o, word.Length) == word);
 }

@@ -17,7 +17,7 @@ public class Ece202413Tests : PuzzleTest<Ece202413>
 
         Sut.Part1(input).Should().Be(28);
     }
-    
+
     [Theory]
     [InlineData(0, 0, 0)]
     [InlineData(1, 2, 1)]
@@ -42,5 +42,4 @@ public class Ece202413Tests : PuzzleTest<Ece202413>
 
         Sut.Part3(input).Should().Be(14);
     }
-
 }

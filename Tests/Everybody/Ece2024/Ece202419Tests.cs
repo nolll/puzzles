@@ -9,7 +9,7 @@ public class Ece202419Tests : PuzzleTest<Ece202419>
     {
         const string input = """
                              LR
-                             
+
                              >-IN-
                              -----
                              W---<
@@ -17,7 +17,7 @@ public class Ece202419Tests : PuzzleTest<Ece202419>
 
         Sut.Part1(input).Should().Be("WIN");
     }
-    
+
     [Fact]
     public void Part1_Details()
     {
@@ -37,7 +37,7 @@ public class Ece202419Tests : PuzzleTest<Ece202419>
     {
         const string input = """
                              RRLL
-                             
+
                              A.VI..>...T
                              .CC...<...O
                              .....EIB.R.
@@ -48,5 +48,4 @@ public class Ece202419Tests : PuzzleTest<Ece202419>
 
         Sut.Part2(input).Should().Be("VICTORY");
     }
-    
 }

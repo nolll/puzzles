@@ -20,7 +20,7 @@ public class Ece202410Tests : PuzzleTest<Ece202410>
 
         Sut.Part1(input).Should().Be("PTBVRCZHFLJWGMNS");
     }
-    
+
     [Fact]
     public void GetScore() => Ece202410.GetScore("PTBVRCZHFLJWGMNS").Should().Be(1851);
 
@@ -46,5 +46,4 @@ public class Ece202410Tests : PuzzleTest<Ece202410>
 
         Sut.Part3(input).Should().Be(3889);
     }
-
 }

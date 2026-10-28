@@ -12,5 +12,4 @@ public class Ece202401Tests : PuzzleTest<Ece202401>
 
     [Fact]
     public void ThreeCreatures() => Sut.Part3("xBxAAABCDxCC").Should().Be(30);
-
 }

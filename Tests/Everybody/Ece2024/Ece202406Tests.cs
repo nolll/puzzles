@@ -22,5 +22,4 @@ public class Ece202406Tests : PuzzleTest<Ece202406>
 
     [Fact]
     public void Part2And3() => Sut.Part2(Input).Should().Be("RB@");
-
 }

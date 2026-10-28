@@ -34,5 +34,4 @@ public class Ece202405Tests : PuzzleTest<Ece202405>
 
     [Fact]
     public void Part3() => Sut.Part3(Part2And3Input).Should().Be(6584);
-
 }

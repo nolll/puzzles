@@ -19,5 +19,4 @@ public class Ece202403Tests : PuzzleTest<Ece202403>
 
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be(29);
-
 }

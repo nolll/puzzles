@@ -33,5 +33,4 @@ public class Ece202417Tests : PuzzleTest<Ece202417>
 
         Sut.Part3(input).Should().Be(15624);
     }
-
 }

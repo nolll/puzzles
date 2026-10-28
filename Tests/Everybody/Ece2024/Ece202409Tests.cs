@@ -16,7 +16,7 @@ public class Ece202409Tests : PuzzleTest<Ece202409>
 
         Sut.Part1(input).Should().Be(10);
     }
-    
+
     [Fact]
     public void Part2()
     {
@@ -29,7 +29,7 @@ public class Ece202409Tests : PuzzleTest<Ece202409>
 
         Sut.Part2(input).Should().Be(10);
     }
-    
+
     [Fact]
     public void Part3()
     {
@@ -41,5 +41,4 @@ public class Ece202409Tests : PuzzleTest<Ece202409>
 
         Sut.Part3(input).Should().Be(10449);
     }
-    
 }

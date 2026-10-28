@@ -36,7 +36,7 @@ public class Ece202416Tests : PuzzleTest<Ece202416>
     [InlineData(100000000000, 138333333333)]
     [InlineData(202420242024, 280014668134)]
     public void Part2(long target, long expected) => Sut.Part2(Input, target).Should().Be(expected);
-    
+
     [Theory]
     [InlineData(1, 4, 1)]
     [InlineData(2, 6, 1)]
@@ -63,7 +63,7 @@ public class Ece202416Tests : PuzzleTest<Ece202416>
 
     private readonly int[] _counts = [3, 5, 4];
     private readonly int[] _increments = [1, 2, 3];
-    
+
     [Fact]
     public void PrevNext1()
     {
@@ -73,7 +73,7 @@ public class Ece202416Tests : PuzzleTest<Ece202416>
         result[1].Should().BeEquivalentTo([1, 2, 3]);
         result[2].Should().BeEquivalentTo([2, 3, 0]);
     }
-    
+
     [Fact]
     public void PrevNext2()
     {
@@ -83,7 +83,7 @@ public class Ece202416Tests : PuzzleTest<Ece202416>
         result[1].Should().BeEquivalentTo([1, 3, 1]);
         result[2].Should().BeEquivalentTo([2, 4, 2]);
     }
-    
+
     [Fact]
     public void PrevNext3()
     {
@@ -93,7 +93,7 @@ public class Ece202416Tests : PuzzleTest<Ece202416>
         result[1].Should().BeEquivalentTo([2, 4, 2]);
         result[2].Should().BeEquivalentTo([0, 0, 3]);
     }
-    
+
     [Fact]
     public void PrevNext4()
     {
@@ -110,5 +110,4 @@ public class Ece202416Tests : PuzzleTest<Ece202416>
     [InlineData("^_^^_^>.<", 2)]
     [InlineData("^_^^_^^_^", 5)]
     public void Scoring(string input, int expected) => Ece202416.Score(input).Should().Be(expected);
-
 }

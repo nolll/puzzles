@@ -22,5 +22,4 @@ public class Ece202407Tests : PuzzleTest<Ece202407>
 
     [Fact]
     public void Part2() => Sut.SolvePart2(Track, Input).Should().Be("DCBA");
-
 }

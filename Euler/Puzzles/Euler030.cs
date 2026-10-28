@@ -15,7 +15,7 @@ public class Euler030 : EulerPuzzle
     {
         for (var i = 2; i < upperBound; i++)
         {
-            var digits = i.ToString().ToCharArray().Select(o => int.Parse(o.ToString()));
+            var digits = i.ToString().Select(o => int.Parse(o.ToString()));
             var sumOfPowers = digits.Select(o => MathTools.Pow(o, power)).Sum();
             if (sumOfPowers == i)
                 yield return i;

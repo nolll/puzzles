@@ -6,10 +6,7 @@ namespace Pzl.Euler.Puzzles;
 public class Euler039 : EulerPuzzle
 {
     [Puzzle("e5acdbe3ca4832e6abd355009a432f2e")]
-    public int Solve() => FindSolutions(1000)
-        .GroupBy(o => o.a + o.b + o.c)
-        .OrderByDescending(o => o.Count()).First()
-        .Key;
+    public int Solve() => FindSolutions(1000).GroupBy(o => o.a + o.b + o.c).OrderByDescending(o => o.Count()).First().Key;
 
     private static IEnumerable<(int a, int b, int c)> FindSolutions(int n)
     {

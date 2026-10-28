@@ -43,8 +43,9 @@ public class Euler028 : EulerPuzzle
     private static Grid<int> BuildGrid(int size)
     {
         var i = 1;
-        var grid = new Grid<int>(1001, 1001);
-        grid.MoveTo(500, 500);
+        var grid = new Grid<int>(size, size);
+        var midpoint = grid.Width / 2;
+        grid.MoveTo(midpoint, midpoint);
         grid.WriteValue(i);
         grid.TurnTo(GridDirection.Right);
         grid.MoveForward();

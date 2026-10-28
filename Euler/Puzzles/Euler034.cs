@@ -3,6 +3,8 @@ using Pzl.Common;
 namespace Pzl.Euler.Puzzles;
 
 [Name("Digit Factorials")]
+[NeedsRewrite]
+[Comment("Is there any other way to know that we are done?")]
 public class Euler034 : EulerPuzzle
 {
     [Puzzle("2464ceb2b2cb7b3a2ecb0a4eab5de58b")]
@@ -20,14 +22,7 @@ public class Euler034 : EulerPuzzle
         return total;
     }
 
-    public int GetDigitFactorialSum(int n) => GetDigits(n)
-        .Select(GetFactorial)
-        .Sum();
-
-    private static IEnumerable<int> GetDigits(int n) => n
-        .ToString()
-        .ToCharArray()
-        .Select(o => int.Parse(o.ToString()));
-
+    public int GetDigitFactorialSum(int n) => GetDigits(n).Select(GetFactorial).Sum();
+    private static IEnumerable<int> GetDigits(int n) => n.ToString().Select(o => int.Parse(o.ToString()));
     private static int GetFactorial(int n) => Enumerable.Range(1, n).Aggregate(1, (a, b) => a * b);
 }

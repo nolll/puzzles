@@ -11,9 +11,7 @@ public class Euler043 : EulerPuzzle
         int[] divisors = [2, 3, 5, 7, 11, 13, 17];
         var remainingNumbers = Enumerable.Range(0, 10).ToList();
 
-        return FindNumbers("", remainingNumbers, divisors)
-            .Select(long.Parse)
-            .Sum();
+        return FindNumbers("", remainingNumbers, divisors).Select(long.Parse).Sum();
     }
 
     private static List<string> FindNumbers(string s, List<int> remainingNumbers, int[] divisors)
@@ -30,10 +28,8 @@ public class Euler043 : EulerPuzzle
             return [s];
 
         var list = new List<string>();
-        foreach (var n in remainingNumbers)
-        {
-            list.AddRange(FindNumbers(s + n, remainingNumbers.Where(o => o != n).ToList(), divisors));
-        }
+        foreach (var n in remainingNumbers) 
+            list.AddRange(FindNumbers(s + n, [.. remainingNumbers.Where(o => o != n)], divisors));
 
         return list;
     }

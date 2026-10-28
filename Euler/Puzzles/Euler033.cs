@@ -20,7 +20,7 @@ public class Euler033 : EulerPuzzle
             }
         }
 
-        fractions = fractions.Where(o => o.CanBeReduced && o.Result < 1 && o.Result == o.ReducedResult).ToList();
+        fractions = fractions.Where(o => o is { CanBeReduced: true, Result: < 1 } && o.Result == o.ReducedResult).ToList();
         
         var combinedNumerator = fractions.Select(o => o.Numerator).Aggregate(1, (a, b) => a * b);
         var combinedDenominator = fractions.Select(o => o.Denominator).Aggregate(1, (a, b) => a * b);
@@ -44,9 +44,9 @@ public class Euler033 : EulerPuzzle
             CanBeReduced = GetCanBeReduced();
         }
 
-        public double Result => (double)Numerator / Denominator;
-        public double ReducedResult => ReducedDenominator > 0
-            ? (double)ReducedNumerator / ReducedDenominator
+        public decimal Result => (decimal)Numerator / Denominator;
+        public decimal ReducedResult => ReducedDenominator > 0
+            ? (decimal)ReducedNumerator / ReducedDenominator
             : 0;
 
         private bool GetCanBeReduced()
@@ -72,11 +72,6 @@ public class Euler033 : EulerPuzzle
             ReducedDenominator = int.Parse(denominatorString.Replace(commonChar.ToString(), ""));
 
             return commonChar != default;
-        }
-
-        public string Print()
-        {
-            return $"{Numerator} / {Denominator} => {Result}";
         }
     }
 }

@@ -8,10 +8,6 @@ namespace Pzl.Euler.Puzzles;
 public class Euler036 : EulerPuzzle
 {
     [Puzzle("710d458ea3f1a020b4ad4198a1ec846f")]
-    public int Solve() => Enumerable.Range(0, 1_000_000)
-        .Where(IsPalindromeInBothBases)
-        .Sum();
-
-    public bool IsPalindromeInBothBases(int n) => 
-        n.ToString().IsPalindrome() && Conversion.ToBinary(n).IsPalindrome();
+    public int Solve() => Enumerable.Range(0, 1_000_000).Where(IsPalindromeInBothBases).Sum();
+    public bool IsPalindromeInBothBases(int n) => n.ToString().IsPalindrome() && Conversion.ToBinary(n).IsPalindrome();
 }

@@ -11,11 +11,11 @@ public class Euler031 : EulerPuzzle
     public int Solve() => Solve([1, 2, 5, 10, 20, 50, 100, 200], TargetSum);
 
     public int Solve(IEnumerable<int> denominations, int target) => 
-        CountCombinations(denominations.OrderByDescending(o => o).ToList(), target);
+        CountCombinations([.. denominations.OrderByDescending(o => o)], target);
 
     private static int CountCombinations(IReadOnlyCollection<int> denominations, int target)
     {
-        if (target < 0 || !denominations.Any())
+        if (target < 0 || denominations.Count == 0)
             return 0;
 
         if (target == 0)

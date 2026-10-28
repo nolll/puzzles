@@ -41,7 +41,7 @@ public class Euler038 : EulerPuzzle
         if (s.Contains('0'))
             return null;
 
-        var set = s.ToCharArray().ToHashSet();
+        var set = s.ToHashSet();
         if (set.Count < MaxLength)
             return null;
 

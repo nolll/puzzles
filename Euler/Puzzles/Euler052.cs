@@ -32,5 +32,5 @@ public class Euler052 : EulerPuzzle
         }
     }
 
-    private static string GetDigits(int n) => string.Concat(n.ToString().ToCharArray().Order());
+    private static string GetDigits(int n) => string.Concat(n.ToString().Order());
 }

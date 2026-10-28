@@ -29,7 +29,5 @@ public class Euler032 : EulerPuzzle
     }
 
     public bool IsPandigital(int a, int b) => IsPandigital(a, b, a * b);
-
-    private static bool IsPandigital(int a, int b, int product) => 
-        string.Concat($"{a}{b}{product}".OrderBy(c => c)) == AllChars;
+    private static bool IsPandigital(int a, int b, int product) => string.Concat($"{a}{b}{product}".OrderBy(c => c)) == AllChars;
 }

@@ -6,8 +6,6 @@ namespace Pzl.Euler.Puzzles;
 [Name("Quadratic primes")]
 public class Euler027 : EulerPuzzle
 {
-    private readonly Dictionary<int, bool> _primeCache = new();
-
     [Puzzle("f850d309dbbe391934e0e67a6344442d")]
     public int Solve()
     {
@@ -17,12 +15,13 @@ public class Euler027 : EulerPuzzle
         const int bMin = -bLimit;
         var mostPrimes = 0;
         var product = 0;
+        var cache = new Dictionary<int, bool>();
 
         for (var a = aMin; a <= aLimit; a++)
         {
             for (var b = bMin; b <= bLimit; b++)
             {
-                var primeCount = GetPrimeCount(a, b);
+                var primeCount = GetPrimeCount(cache, a, b);
                 if (primeCount <= mostPrimes)
                     continue;
                 
@@ -34,7 +33,7 @@ public class Euler027 : EulerPuzzle
         return product;
     }
 
-    public int GetPrimeCount(int a, int b)
+    public int GetPrimeCount(Dictionary<int, bool> cache, int a, int b)
     {
         var n = -1;
         var isPrime = true;
@@ -43,19 +42,19 @@ public class Euler027 : EulerPuzzle
         {
             n++;
             var r = n * n + a * n + b;
-            isPrime = IsPrime(Math.Abs(r));
+            isPrime = IsPrime(cache, Math.Abs(r));
         }
 
         return n;
     }
 
-    private bool IsPrime(int r)
+    private bool IsPrime(Dictionary<int, bool> cache, int r)
     {
-        if (_primeCache.TryGetValue(r, out var isPrime))
+        if (cache.TryGetValue(r, out var isPrime))
             return isPrime;
             
         isPrime = Numbers.IsPrime(r);
-        _primeCache.Add(r, isPrime);
+        cache.Add(r, isPrime);
         return isPrime;
     }
 }

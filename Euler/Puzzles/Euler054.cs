@@ -97,7 +97,7 @@ public class Euler054 : EulerPuzzle
             var rankGroups = cards.GroupBy(o => o.Value).OrderByDescending(o => o.Count()).ThenByDescending(o => o.First().Rank).ToList();
             var rankGroupCount = rankGroups.Count;
             var largestGroupSize = rankGroups.First().Count();
-            _rankComparer = rankGroups.Select(o => o.First().Rank).ToArray();
+            _rankComparer = [.. rankGroups.Select(o => o.First().Rank)];
             
             switch (rankGroupCount)
             {

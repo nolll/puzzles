@@ -14,6 +14,6 @@ public class Euler033Tests : PuzzleTest<Euler033>
     [InlineData(34, 43, 1)]
     [InlineData(49, 98, 0.5)]
     [InlineData(17, 78, 0.125)]
-    public void ReducedResult(int numerator, int denominator, double result) => 
+    public void ReducedResult(int numerator, int denominator, decimal result) => 
         new Euler033.Fraction(numerator, denominator).ReducedResult.Should().Be(result);
 }

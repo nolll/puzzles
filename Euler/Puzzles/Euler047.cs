@@ -5,6 +5,8 @@ using Pzl.Tools.Numbers;
 namespace Pzl.Euler.Puzzles;
 
 [Name("Distinct Primes Factors")]
+[NeedsRewrite]
+[Comment("Try to remove optimization")]
 public class Euler047 : EulerPuzzle
 {
     [Puzzle("eac3c019f679164d514795ae37eaa2c7")]

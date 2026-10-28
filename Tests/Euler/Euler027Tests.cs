@@ -5,5 +5,5 @@ namespace Tests.Euler;
 public class Euler027Tests : PuzzleTest<Euler027>
 {
     [Fact]
-    public void Test() => Sut.GetPrimeCount(-79, 1601).Should().Be(80);
+    public void Test() => Sut.GetPrimeCount([], -79, 1601).Should().Be(80);
 }

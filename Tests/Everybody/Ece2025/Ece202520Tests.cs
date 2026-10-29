@@ -19,7 +19,7 @@ public class Ece202520Tests : PuzzleTest<Ece202520>
 
         Sut.Part1(input).Should().Be(7);
     }
-    
+
     [Fact]
     public void Part1_2()
     {
@@ -34,7 +34,7 @@ public class Ece202520Tests : PuzzleTest<Ece202520>
 
         Sut.Part1(input).Should().Be(0);
     }
-    
+
     [Fact]
     public void Part1_3()
     {
@@ -118,7 +118,7 @@ public class Ece202520Tests : PuzzleTest<Ece202520>
         grid = Sut.Rotate(grid);
         grid.Print().Should().Be(state1);
     }
-    
+
     [Fact]
     public void Part3()
     {
@@ -137,5 +137,4 @@ public class Ece202520Tests : PuzzleTest<Ece202520>
 
         Sut.Part3(input).Should().Be(23);
     }
-
 }

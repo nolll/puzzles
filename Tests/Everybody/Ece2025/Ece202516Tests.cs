@@ -5,20 +5,10 @@ namespace Tests.Everybody.Ece2025;
 public class Ece202516Tests : PuzzleTest<Ece202516>
 {
     [Fact]
-    public void Part1()
-    {
-        const string input = "1,2,3,5,9";
-
-        Sut.Part1(input).Should().Be(193);
-    }
+    public void Part1() => Sut.Part1("1,2,3,5,9").Should().Be(193);
 
     [Fact]
-    public void Part2()
-    {
-        const string input = "1,2,2,2,2,3,1,2,3,3,1,3,1,2,3,2,1,4,1,3,2,2,1,3,2,2";
-
-        Sut.Part2(input).Should().Be(270);
-    }
+    public void Part2() => Sut.Part2("1,2,2,2,2,3,1,2,3,3,1,3,1,2,3,2,1,4,1,3,2,2,1,3,2,2").Should().Be(270);
 
     [Theory]
     [InlineData(1, 1)]
@@ -37,11 +27,6 @@ public class Ece202516Tests : PuzzleTest<Ece202516>
     [InlineData(10000000000000, 4663212435233)]
     [InlineData(100000000000000, 46632124352332)]
     [InlineData(202520252025000, 94439495762954)]
-    public void Part3(long availableBlocks, long expected)
-    {
-        const string input = "1,2,2,2,2,3,1,2,3,3,1,3,1,2,3,2,1,4,1,3,2,2,1,3,2,2";
-
-        Sut.SolvePart3(input, availableBlocks).Should().Be(expected);
-    }
-
+    public void Part3(long availableBlocks, long expected) => 
+        Sut.SolvePart3("1,2,2,2,2,3,1,2,3,3,1,3,1,2,3,2,1,4,1,3,2,2,1,3,2,2", availableBlocks).Should().Be(expected);
 }

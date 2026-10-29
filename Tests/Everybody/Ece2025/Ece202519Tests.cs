@@ -52,5 +52,4 @@ public class Ece202519Tests : PuzzleTest<Ece202519>
 
         Sut.Part3(input).Should().Be(22);
     }
-
 }

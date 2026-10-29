@@ -79,7 +79,7 @@ public class Ece202517Tests : PuzzleTest<Ece202517>
 
         Sut.Part3(input).Should().Be(592);
     }
-    
+
     [Fact]
     public void Part3_2()
     {
@@ -119,5 +119,4 @@ public class Ece202517Tests : PuzzleTest<Ece202517>
 
         Sut.Part3(input).Should().Be(3180);
     }
-
 }

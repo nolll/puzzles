@@ -9,7 +9,7 @@ public class Ece202507Tests : PuzzleTest<Ece202507>
     {
         const string input = """
                              Oronris,Urakris,Oroneth,Uraketh
-                             
+
                              r > a,i,o
                              i > p,w
                              n > e,r
@@ -30,7 +30,7 @@ public class Ece202507Tests : PuzzleTest<Ece202507>
     {
         const string input = """
                              Xanverax,Khargyth,Nexzeth,Helther,Braerex,Tirgryph,Kharverax
-                             
+
                              r > v,e,a,g,y
                              a > e,v,x,r
                              e > r,x,v,t
@@ -61,7 +61,7 @@ public class Ece202507Tests : PuzzleTest<Ece202507>
     {
         const string input = """
                              Xaryt
-                             
+
                              X > a,o
                              a > r,t
                              r > y,e,a
@@ -73,13 +73,13 @@ public class Ece202507Tests : PuzzleTest<Ece202507>
 
         Sut.Part3(input).Should().Be(25);
     }
-    
+
     [Fact]
     public void Part3_2()
     {
         const string input = """
                              Khara,Xaryt,Noxer,Kharax
-                             
+
                              r > v,e,a,g,y
                              a > e,v,x,r,g
                              e > r,x,v,t
@@ -104,5 +104,4 @@ public class Ece202507Tests : PuzzleTest<Ece202507>
 
         Sut.Part3(input).Should().Be(1154);
     }
-
 }

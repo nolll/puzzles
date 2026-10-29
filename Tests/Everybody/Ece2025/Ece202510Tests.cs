@@ -60,7 +60,7 @@ public class Ece202510Tests : PuzzleTest<Ece202510>
 
         Sut.Part3(input).Should().Be(15);
     }
-    
+
     [Fact]
     public void Part3_2()
     {
@@ -74,7 +74,7 @@ public class Ece202510Tests : PuzzleTest<Ece202510>
 
         Sut.Part3(input).Should().Be(8);
     }
-    
+
     [Fact]
     public void Part3_3()
     {
@@ -88,7 +88,7 @@ public class Ece202510Tests : PuzzleTest<Ece202510>
 
         Sut.Part3(input).Should().Be(44);
     }
-    
+
     [Fact]
     public void Part3_4()
     {
@@ -103,7 +103,7 @@ public class Ece202510Tests : PuzzleTest<Ece202510>
 
         Sut.Part3(input).Should().Be(4406);
     }
-    
+
     [Fact]
     public void Part3_5()
     {
@@ -117,5 +117,4 @@ public class Ece202510Tests : PuzzleTest<Ece202510>
 
         Sut.Part3(input).Should().Be(13033988838);
     }
-
 }

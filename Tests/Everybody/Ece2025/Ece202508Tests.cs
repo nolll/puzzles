@@ -12,5 +12,4 @@ public class Ece202508Tests : PuzzleTest<Ece202508>
 
     [Fact]
     public void Part3() => Sut.SolvePart3("1,5,2,6,8,4,1,7,3,6", 8).Should().Be(7);
-
 }

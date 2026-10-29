@@ -4,35 +4,20 @@ namespace Tests.Everybody.Ece2025;
 
 public class Ece202511Tests : PuzzleTest<Ece202511>
 {
-    [Fact]
-    public void Part1()
-    {
-        const string input = """
-                             9
-                             1
-                             1
-                             4
-                             9
-                             6
-                             """;
-
-        Sut.Part1(input).Should().Be(109);
-    }
+    private const string InputPart1And2 = """
+                                          9
+                                          1
+                                          1
+                                          4
+                                          9
+                                          6
+                                          """;
 
     [Fact]
-    public void Part2_1()
-    {
-        const string input = """
-                             9
-                             1
-                             1
-                             4
-                             9
-                             6
-                             """;
+    public void Part1() => Sut.Part1(InputPart1And2).Should().Be(109);
 
-        Sut.Part2(input).Should().Be(11);
-    }
+    [Fact]
+    public void Part2_1() => Sut.Part2(InputPart1And2).Should().Be(11);
 
     [Fact]
     public void Part2_2()
@@ -53,5 +38,4 @@ public class Ece202511Tests : PuzzleTest<Ece202511>
 
         Sut.Part2(input).Should().Be(1579);
     }
-
 }

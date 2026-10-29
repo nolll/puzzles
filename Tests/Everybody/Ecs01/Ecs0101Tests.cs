@@ -89,8 +89,7 @@ public class Ecs0101Tests : PuzzleTest<Ecs0101>
     [InlineData(2, 7, 5, 34213)]
     [InlineData(3, 8, 16, 111931)]
     [InlineData(4, 14, 11, 39541)]
-    public void Eni2(long n, long exp, long mod, long expected) =>
-        Ecs0101.Eni2(n, exp, mod).Should().Be(expected);
+    public void Eni2(long n, long exp, long mod, long expected) => Ecs0101.Eni2(n, exp, mod).Should().Be(expected);
     
     [Theory]
     [InlineData(4, 4, 6, 3, 14, 15, 11, 150231)]
@@ -105,13 +104,11 @@ public class Ecs0101Tests : PuzzleTest<Ecs0101>
     [Theory]
     [InlineData(2, 7, 5, 19)]
     [InlineData(3, 8, 16, 48)]
-    public void Eni3(long n, long exp, long mod, long expected) =>
-        Ecs0101.Eni3(n, exp, mod).Should().Be(expected);
+    public void Eni3(long n, long exp, long mod, long expected) => Ecs0101.Eni3(n, exp, mod).Should().Be(expected);
     
     [Theory]
     [InlineData(2, 8, 6, 2000, 14000, 15000, 130, 2079860)]
     [InlineData(8, 8, 8, 6000, 19000, 16000, 160, 3279640)]
     public void Eni3Sum(long a, long b, long c, long x, long y, long z, long m, long expected) => 
         Ecs0101.EniSum(Ecs0101.Eni3, a, b, c, x, y, z, m).Should().Be(expected);
-
 }

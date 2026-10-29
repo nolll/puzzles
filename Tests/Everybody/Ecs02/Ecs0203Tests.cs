@@ -24,7 +24,7 @@ public class Ecs0203Tests : PuzzleTest<Ecs0203>
                              2: faces=[1,2,3,4,5,6,7,8,9] seed=29
                              3: faces=[1,2,3,4,5,6,7,8,9] seed=37
                              4: faces=[1,2,3,4,5,6,7,8,9] seed=43
-                             
+
                              51257284
                              """;
 
@@ -36,7 +36,7 @@ public class Ecs0203Tests : PuzzleTest<Ecs0203>
     {
         const string input = """
                              1: faces=[1,2,3,4,5,6,7,8,9] seed=13
-                             
+
                              1523758297
                              4822941583
                              7627997892
@@ -46,7 +46,7 @@ public class Ecs0203Tests : PuzzleTest<Ecs0203>
 
         Sut.Part3(input).Should().Be(33);
     }
-    
+
     [Fact]
     public void Part3_2()
     {
@@ -60,7 +60,7 @@ public class Ecs0203Tests : PuzzleTest<Ecs0203>
                              7: faces=[1,2,3,4,5,6,7,8,9] seed=339679
                              8: faces=[1,2,3,4,5,6,7,8,9] seed=339121
                              9: faces=[1,2,3,4,5,6,7,8,9] seed=338851
-                             
+
                              94129478611916584144567479397512595367821487689499329543245932151
                              45326719759656232865938673559697851227323497148536117267854241288
                              44425936468288462848395149959678842215853561564389485413422813386
@@ -100,5 +100,4 @@ public class Ecs0203Tests : PuzzleTest<Ecs0203>
 
         Sut.Part3(input).Should().Be(1125);
     }
-
 }

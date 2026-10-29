@@ -4,6 +4,13 @@ namespace Tests.Everybody.Ecs04;
 
 public class Ecs0401Tests : PuzzleTest<Ecs0401>
 {
+    private const string Input = """
+                                 1,1,1,1,1
+                                 5,1,2,3,4,5,1,2,3,4
+                                 2,1,1,2,1,1,2,1,1,2,1,1
+                                 5,1,2,1,2,7,1,2,1,2,7,1,2,1,2
+                                 """;
+
     [Fact]
     public void Part1_1()
     {
@@ -16,30 +23,10 @@ public class Ecs0401Tests : PuzzleTest<Ecs0401>
     }
     
     [Fact]
-    public void Part1_2()
-    {
-        const string input = """
-                             1,1,1,1,1
-                             5,1,2,3,4,5,1,2,3,4
-                             2,1,1,2,1,1,2,1,1,2,1,1
-                             5,1,2,1,2,7,1,2,1,2,7,1,2,1,2
-                             """;
-
-        Sut.Part1(input).Should().Be(34);
-    }
+    public void Part1_2() => Sut.Part1(Input).Should().Be(34);
 
     [Fact]
-    public void Part2()
-    {
-        const string input = """
-                             1,1,1,1,1
-                             5,1,2,3,4,5,1,2,3,4
-                             2,1,1,2,1,1,2,1,1,2,1,1
-                             5,1,2,1,2,7,1,2,1,2,7,1,2,1,2
-                             """;
-
-        Sut.Part2(input).Should().Be(43);
-    }
+    public void Part2() => Sut.Part2(Input).Should().Be(43);
 
     [Fact]
     public void Part3_Single_1_1() => Sut.Part3("1,1,1,1,1").Should().Be(5);
@@ -54,18 +41,8 @@ public class Ecs0401Tests : PuzzleTest<Ecs0401>
     public void Part3_Single_1_4() => Sut.Part3("5,1,2,1,2,7,1,2,1,2,7,1,2,1,2").Should().Be(1);
 
     [Fact]
-    public void Part3_All_1()
-    {
-        const string input = """
-                             1,1,1,1,1
-                             5,1,2,3,4,5,1,2,3,4
-                             2,1,1,2,1,1,2,1,1,2,1,1
-                             5,1,2,1,2,7,1,2,1,2,7,1,2,1,2
-                             """;
+    public void Part3_All_1() => Sut.Part3(Input).Should().Be(27);
 
-        Sut.Part3(input).Should().Be(27);
-    }
-    
     [Fact]
     public void Part3_Single_2_1() => Sut.Part3("5,3,1,1").Should().Be(6);
 

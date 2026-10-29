@@ -30,7 +30,7 @@ public class Ecs0202 : EverybodyStoryPuzzle
     [Puzzle("c2eff10d6d075e935bd2a23732fe7ef2")]
     public int Part3(string input) => Part2And3(input, 100_000);
 
-    public static int Part2And3(string input, int repeats)
+    public int Part2And3(string input, int repeats)
     {
         var (list1, list2) = BuildLists(input, repeats);
         var balloonCount = list1.Count + list2.Count;

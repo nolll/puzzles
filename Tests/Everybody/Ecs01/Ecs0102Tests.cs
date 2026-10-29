@@ -56,7 +56,7 @@ public class Ecs0102Tests : PuzzleTest<Ecs0102>
 
         Sut.Part3(input).Should().Be("DJMGL");
     }
-    
+
     [Fact]
     public void Part3_2()
     {
@@ -76,5 +76,4 @@ public class Ecs0102Tests : PuzzleTest<Ecs0102>
 
         Sut.Part3(input).Should().Be("DJCGL");
     }
-
 }

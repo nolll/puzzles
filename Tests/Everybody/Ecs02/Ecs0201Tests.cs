@@ -20,7 +20,7 @@ public class Ecs0201Tests : PuzzleTest<Ecs0201>
                              .*...*...*.*.*.*.
                              *.*.*.*.*.*.*.*.*
                              .*.*.*.*.*.*.*.*.
-                             
+
                              RRRLRLRRRRRL
                              LLLLRLRRRRRR
                              RLLLLLRLRLRL
@@ -91,7 +91,7 @@ public class Ecs0201Tests : PuzzleTest<Ecs0201>
                              .*...*...*.*.*.*.
                              *.*.*.*.*.*.*.*.*
                              .*.*.*.*.*.*.*.*.
-                             
+
                              RRRLRLRRRRRL
                              LLLLRLRRRRRR
                              RLLLLLRLRLRL
@@ -102,5 +102,4 @@ public class Ecs0201Tests : PuzzleTest<Ecs0201>
 
         Sut.Part3(input).Should().Be("13 43");
     }
-    
 }

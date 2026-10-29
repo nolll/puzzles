@@ -4,32 +4,19 @@ namespace Tests.Everybody.Ecs04;
 
 public class Ecs0403Tests : PuzzleTest<Ecs0403>
 {
-    [Fact]
-    public void Part1()
-    {
-        const string input = """
-                             width=30
-                             height=10
-                             horizontal-offsets=10011
-                             vertical-offsets=11011
-                             """;
-
-        Sut.Part1(input).Should().Be(27);
-    }
+    private const string Input = """
+                                 width=30
+                                 height=10
+                                 horizontal-offsets=10011
+                                 vertical-offsets=11011
+                                 """;
 
     [Fact]
-    public void Part2_1()
-    {
-        const string input = """
-                             width=30
-                             height=10
-                             horizontal-offsets=10011
-                             vertical-offsets=11011
-                             """;
+    public void Part1() => Sut.Part1(Input).Should().Be(27);
 
-        Sut.Part2(input).Should().Be(15);
-    }
-    
+    [Fact]
+    public void Part2_1() => Sut.Part2(Input).Should().Be(15);
+
     [Fact]
     public void Part2_2()
     {

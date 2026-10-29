@@ -60,5 +60,4 @@ public class Ecs0303Tests : PuzzleTest<Ecs0303>
 
         Sut.Part3(input).Should().Be(60);
     }
-
 }

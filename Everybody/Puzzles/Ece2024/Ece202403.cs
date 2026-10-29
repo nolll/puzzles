@@ -30,11 +30,11 @@ public class Ece202403 : EverybodyEventPuzzle
         
         foreach (var coord in charGrid.Coords)
         {
-            if (charGrid.ReadValueAt(coord) == '#')
-            {
-                coords.Add(coord);
-                grid.WriteValueAt(coord, digLevel);
-            }
+            if (charGrid.ReadValueAt(coord) != '#')
+                continue;
+            
+            coords.Add(coord);
+            grid.WriteValueAt(coord, digLevel);
         }
 
         var requiredNeighbors = slopeRule == SlopeRule.Diagonal ? 8 : 4;
@@ -47,12 +47,12 @@ public class Ece202403 : EverybodyEventPuzzle
                 var neighbors = slopeRule == SlopeRule.Diagonal
                     ? grid.AllAdjacentValuesTo(coord)
                     : grid.OrthogonalAdjacentValuesTo(coord);
+
+                if (neighbors.Count < requiredNeighbors || neighbors.Any(o => o < digLevel))
+                    continue;
                 
-                if (neighbors.Count == requiredNeighbors && neighbors.All(o => o >= digLevel))
-                {
-                    grid.WriteValueAt(coord, digLevel + 1);
-                    nextCoords.Add(coord);
-                }
+                grid.WriteValueAt(coord, digLevel + 1);
+                nextCoords.Add(coord);
             }
             digLevel++;
             coords = nextCoords;

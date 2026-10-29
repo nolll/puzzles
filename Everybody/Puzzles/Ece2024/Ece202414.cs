@@ -108,7 +108,6 @@ public class Ece202414 : EverybodyEventPuzzle
     }
 
     private static bool IsTrunk(Dictionary<char, int> pos) => pos['x'] == 0 && pos['z'] == 0;
-
     private static (int, int, int) ToTuple(Dictionary<char, int> pos) => (pos['x'], pos['y'], pos['z']);
 
     private static Dictionary<char, int> GetStartPos() => new()

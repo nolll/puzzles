@@ -24,10 +24,8 @@ public class Ece202410 : EverybodyEventPuzzle
         var grid = GridBuilder.BuildCharGrid(input);
         var offsets = GetOffsets(grid, 1).ToList();
 
-        foreach (var offset in offsets)
-        {
+        foreach (var offset in offsets) 
             FillSymbols(grid, offset);
-        }
 
         return offsets.Select(offset => ReadWord(grid, offset)).ToList().Sum(GetScore);
     }
@@ -109,14 +107,16 @@ public class Ece202410 : EverybodyEventPuzzle
             var all = horizontal.Concat(vertical).Where(o => !o.Equals(coord)).ToList();
             var questionMarkCoords = all.Where(o => grid.ReadValueAt(o) == '?').ToList();
             var allChars = all.Select(grid.ReadValueAt);
-            var charsWithOneOccurrence = allChars.Where(o => o != '.' && o != '?').GroupBy(o => o).Where(o => o.Count() == 1).Select(o => o.Key).ToList();
-            if (charsWithOneOccurrence.Count == 1)
-            {
-                var c = charsWithOneOccurrence.First();
-                grid.WriteValueAt(coord, charsWithOneOccurrence.First());
-                if(questionMarkCoords.Count == 1)
-                    grid.WriteValueAt(questionMarkCoords.First(), c);
-            }
+            var charsWithOneOccurrence = allChars.Where(o => o != '.' && o != '?')
+                .GroupBy(o => o).Where(o => o.Count() == 1).Select(o => o.Key).ToList();
+
+            if (charsWithOneOccurrence.Count != 1)
+                continue;
+            
+            var c = charsWithOneOccurrence.First();
+            grid.WriteValueAt(coord, charsWithOneOccurrence.First());
+            if(questionMarkCoords.Count == 1)
+                grid.WriteValueAt(questionMarkCoords.First(), c);
         }
     }
     

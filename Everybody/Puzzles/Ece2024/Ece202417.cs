@@ -23,18 +23,14 @@ public class Ece202417 : EverybodyEventPuzzle
         var nodes = Graph.GetNodes(edges);
         var components = Graph.GetConnectedComponents(nodes);
         var starGroups = components.Select(o => o.Keys.Select(Coord.Parse).ToList());
-        var result = starGroups.Select(GetSize).OrderDescending().Take(3).Aggregate((long)1, (a, b) => a * b);
-        
-        return result;
+        return starGroups.Select(GetSize).OrderDescending().Take(3).Aggregate((long)1, (a, b) => a * b);
     }
     
     private static long Part1And2(string input) => GetSize(FindStars(input));
 
-    private static IList<Coord> FindStars(string input) => 
-        GridBuilder.BuildCharGrid(input).FindCoords('*');
+    private static IList<Coord> FindStars(string input) => GridBuilder.BuildCharGrid(input).FindCoords('*');
 
-    private static long GetSize(IList<Coord> stars) => 
-        Kruskal.MinimumSpanningTree(GetEdges(stars).ToList()) + stars.Count;
+    private static long GetSize(IList<Coord> stars) => Kruskal.MinimumSpanningTree([.. GetEdges(stars)]) + stars.Count;
 
     private static IEnumerable<GraphEdge> GetEdges(IList<Coord> stars)
     {

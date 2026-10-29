@@ -7,15 +7,14 @@ namespace Pzl.Everybody.Puzzles.Ece2024;
 public class Ece202406 : EverybodyEventPuzzle
 {
     [Puzzle("1e1f24ab14407ffbaf4f6b9143384384")]
-    public string Part1(string input) => SolvePart1(input);
+    public string Part1(string input) => string.Concat(Solve(input));
     
     [Puzzle("aaacecff7b5d20d54ea2d96c4797166e")]
     public string Part2(string input) => SolvePart2And3(input);
     
     [Puzzle("c3544a49e37c3dfedc6dec99596402da")]
     public string Part3(string input) => SolvePart2And3(input);
-
-    private static string SolvePart1(string input) => string.Concat(Solve(input));
+    
     private static string SolvePart2And3(string input) => string.Concat(Solve(input).Select(o => o[0]));
 
     private static string[] Solve(string input)

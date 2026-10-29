@@ -27,10 +27,10 @@ public class Ece202405Tests : PuzzleTest<Ece202405>
     [InlineData(8, "4423")]
     [InlineData(9, "2423")]
     [InlineData(10, "2323")]
-    public void Part1(int rounds, string expected) => Sut.SolvePart1(Part1Input, rounds).Should().Be(expected);
+    public void Part1(int rounds, string expected) => Sut.Part1(Part1Input, rounds).Should().Be(expected);
 
     [Fact]
-    public void Part2() => Sut.SolvePart2(Part2And3Input, 2024).Should().Be(50877075);
+    public void Part2() => Sut.Part2(Part2And3Input).Should().Be(50877075);
 
     [Fact]
     public void Part3() => Sut.Part3(Part2And3Input).Should().Be(6584);

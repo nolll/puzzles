@@ -43,7 +43,8 @@ public class Ece202412 : EverybodyEventPuzzle
                 }
                 
                 // Move right
-                foreach (var _ in range) grid.MoveRight();
+                foreach (var _ in range)
+                    grid.MoveRight();
 
                 // Move down until bottom
                 while (true)

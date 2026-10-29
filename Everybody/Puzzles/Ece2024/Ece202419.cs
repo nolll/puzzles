@@ -36,9 +36,7 @@ public class Ece202419 : EverybodyEventPuzzle
         var permutation = GetPermutation(grid, directions.ToCharArray());
         var extendedPermutation = ExtendPermutation(permutation, iterations);
         grid = ApplyPermutation(extendedPermutation, grid);
-
-        var print = string.Concat(grid.Select(o => string.Concat(o)));
-        return FindMessage(print);
+        return FindMessage(string.Concat(grid.Select(o => string.Concat(o))));
     }
 
     private static char[][] GetGrid(string s)
@@ -50,10 +48,8 @@ public class Ece202419 : EverybodyEventPuzzle
         for (var r = 0; r < height; r++)
         {
             grid[r] = new char[width];
-            for (var c = 0; c < width; c++)
-            {
+            for (var c = 0; c < width; c++) 
                 grid[r][c] = lines[r][c];
-            }
         }
 
         return grid;
@@ -67,10 +63,8 @@ public class Ece202419 : EverybodyEventPuzzle
         for (var r = 0; r < height; r++)
         {
             coordGrid[r] = new (int r, int c)[width];
-            for (var c = 0; c < width; c++)
-            {
+            for (var c = 0; c < width; c++) 
                 coordGrid[r][c] = (r, c);
-            }
         }
 
         var directionIndex = 0;
@@ -97,10 +91,8 @@ public class Ece202419 : EverybodyEventPuzzle
         var transformed = new Dictionary<(int r, int c), (int r, int c)>();
         for (var r = 0; r < height; r++)
         {
-            for (var c = 0; c < width; c++)
-            {
+            for (var c = 0; c < width; c++) 
                 transformed[(r, c)] = coordGrid[r][c];
-            }
         }
 
         return transformed;
@@ -111,10 +103,8 @@ public class Ece202419 : EverybodyEventPuzzle
         Dictionary<(int r, int c), (int r, int c)> p2)
     {
         var result = new Dictionary<(int r, int c), (int r, int c)>();
-        foreach (var key in p1.Keys)
-        {
+        foreach (var key in p1.Keys) 
             result[key] = p1[p2[key]];
-        }
 
         return result;
     }

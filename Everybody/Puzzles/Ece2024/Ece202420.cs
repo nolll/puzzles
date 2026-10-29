@@ -58,7 +58,7 @@ public class Ece202420 : EverybodyEventPuzzle
                             else
                                 next[key] = newScore;
                         }
-                            
+
                         grid.MoveBackward();
                     }
                 }
@@ -79,7 +79,7 @@ public class Ece202420 : EverybodyEventPuzzle
         var states = GridDirection.Orthogonal.ToDictionary(k => (s.X, s.Y, k.Name, ' '), _ => 10000);
         var time = 0;
         var found = false;
-        
+
         while (!found)
         {
             time++;
@@ -98,8 +98,8 @@ public class Ece202420 : EverybodyEventPuzzle
                         var v = grid.ReadValue();
                         if (v != '#')
                         {
-                            var newCheckpoint = checkpoint == ' ' && v == 'A' || 
-                                                checkpoint == 'A' && v == 'B' || 
+                            var newCheckpoint = checkpoint == ' ' && v == 'A' ||
+                                                checkpoint == 'A' && v == 'B' ||
                                                 checkpoint == 'B' && v == 'C'
                                 ? v
                                 : checkpoint;
@@ -112,15 +112,15 @@ public class Ece202420 : EverybodyEventPuzzle
                             else
                                 next[key] = newScore;
                         }
-                            
+
                         grid.MoveBackward();
                     }
                 }
             }
-            
+
             states = next;
         }
-        
+
         return time;
     }
 
@@ -140,25 +140,32 @@ public class Ece202420 : EverybodyEventPuzzle
         var grid = input.Split(LineBreaks.Single).Select(line => line.ToCharArray()).ToArray();
         var width = grid[0].Length;
         var height = grid.Length;
-        
+
         var start = (x: 0, y: 0);
-        for (var y = 0; y < height; y++) {
-            for (var x = 0; x < width; x++) {
-                if (grid[y][x] == 'S') {
-                    start = (x, y);
-                    grid[y][x] = '.';
-                }
+        for (var y = 0; y < height; y++)
+        {
+            for (var x = 0; x < width; x++)
+            {
+                if (grid[y][x] != 'S')
+                    continue;
+
+                start = (x, y);
+                grid[y][x] = '.';
             }
         }
-        
+
         var altitude = 384400;
         var distance = 0;
         var rightMovement = stepsToGoodCol;
-        while (altitude > 0) {
-            if (rightMovement != 0) {
+        while (altitude > 0)
+        {
+            if (rightMovement != 0)
+            {
                 start.x += Math.Sign(stepsToGoodCol);
                 rightMovement += -Math.Sign(stepsToGoodCol);
-            } else {
+            }
+            else
+            {
                 start.y = (start.y + 1) % height;
                 distance++;
             }

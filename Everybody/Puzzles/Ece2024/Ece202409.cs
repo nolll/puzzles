@@ -7,22 +7,15 @@ namespace Pzl.Everybody.Puzzles.Ece2024;
 public class Ece202409 : EverybodyEventPuzzle
 {
     [Puzzle("dffa64bee7ea0c0ad66724de7afe7c08")]
-    public int Part1(string input)
-    {
-        int[] stamps = [1, 3, 5, 10];
-        var balls = ParseBalls(input);
-        var precomputedCounts = PrecomputeCounts(stamps, balls.Max());
-
-        return balls.Sum(o => precomputedCounts[o]);
-    }
+    public int Part1(string input) => SolvePart1And2(input, [1, 3, 5, 10]);
 
     [Puzzle("6032109447891782512325cb9251f9e2")]
-    public int Part2(string input)
+    public int Part2(string input) => SolvePart1And2(input, [1, 3, 5, 10, 15, 16, 20, 24, 25, 30]);
+
+    private int SolvePart1And2(string input, int[] stamps)
     {
-        int[] stamps = [1, 3, 5, 10, 15, 16, 20, 24, 25, 30];
         var balls = ParseBalls(input);
         var precomputedCounts = PrecomputeCounts(stamps, balls.Max());
-
         return balls.Sum(o => precomputedCounts[o]);
     }
     

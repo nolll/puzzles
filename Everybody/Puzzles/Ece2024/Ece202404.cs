@@ -38,5 +38,5 @@ public class Ece202404 : EverybodyEventPuzzle
         return smallestDiff;
     }
 
-    private static int[] ParseNails(string input) => input.Split(LineBreaks.Single).Select(int.Parse).Order().ToArray();
+    private static int[] ParseNails(string input) => [.. input.Split(LineBreaks.Single).Select(int.Parse).Order()];
 }

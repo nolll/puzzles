@@ -16,8 +16,7 @@ public class Ece202418 : EverybodyEventPuzzle
     {
         var grid = GridBuilder.BuildCharGrid(input);
         var palmtrees = grid.FindCoords('P');
-        var current = grid.Coords.Where(o => (o.X == 0 || o.X == grid.XMax) && grid.ReadValueAt(o) == '.')
-            .ToHashSet();
+        var current = grid.Coords.Where(o => (o.X == 0 || o.X == grid.XMax) && grid.ReadValueAt(o) == '.').ToHashSet();
         var reached = new HashSet<Coord>();
         var seen = new HashSet<Coord>();
         var time = 0;

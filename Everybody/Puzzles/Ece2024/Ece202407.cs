@@ -1,5 +1,6 @@
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Lists;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Ece2024;
@@ -14,13 +15,13 @@ public class Ece202407 : EverybodyEventPuzzle
         var knights = new List<Knight>();
         foreach (var line in lines)
         {
-            var parts = line.Split(':');
-            var score = RunRace([0], BuildActions(parts[1]), 10);
+            var (letter, actions) = line.Split(':');
+            var score = RunRace([0], BuildActions(actions), 10);
             
-            knights.Add(new Knight(parts[0], score));
+            knights.Add(new Knight(letter, score));
         }
 
-        return string.Concat(knights.OrderByDescending(o => o.Score).Select(o => o.Name));
+        return string.Concat(knights.OrderByDescending(o => o.Score).Select(o => o.KnightName));
     }
 
     [Puzzle("f315ce3865ed329f4eee3ec0d64bb032")]
@@ -46,7 +47,7 @@ public class Ece202407 : EverybodyEventPuzzle
             knights.Add(new Knight(parts[0], score));
         }
 
-        return string.Concat(knights.OrderByDescending(o => o.Score).Select(o => o.Name));
+        return string.Concat(knights.OrderByDescending(o => o.Score).Select(o => o.KnightName));
     }
 
     private static int SolvePart3(string trackString, string input)
@@ -124,7 +125,7 @@ public class Ece202407 : EverybodyEventPuzzle
     }
 
     private static int[] BuildActions(string actions) => BuildActions(actions.Replace(",", "").ToCharArray());
-    private static int[] BuildActions(IEnumerable<char> actions) => actions.Select(ConvertToInt).ToArray();
+    private static int[] BuildActions(IEnumerable<char> actions) => [.. actions.Select(ConvertToInt)];
 
     private static int ConvertToInt(char c) => c switch
     {
@@ -133,7 +134,7 @@ public class Ece202407 : EverybodyEventPuzzle
         _ => 0
     };
 
-    private record Knight(string Name, long Score);
+    private record Knight(string KnightName, long Score);
     
     private const string Part2Track = """
                                       S-=++=-==++=++=-=+=-=+=+=--=-=++=-==++=-+=-=+=-=+=+=++=-+==++=++=-=-=--

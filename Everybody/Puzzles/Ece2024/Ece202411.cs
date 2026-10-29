@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Lists;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Ece2024;
@@ -51,9 +52,8 @@ public class Ece202411 : EverybodyEventPuzzle
         var conversions = new Dictionary<string, string[]>();
         foreach (var line in lines)
         {
-            var parts = line.Split(':');
-            var name = parts[0];
-            var convertsTo = parts[1].Split(',').ToList();
+            var (name, to) = line.Split(':');
+            var convertsTo = to.Split(',').ToList();
             conversions.Add(name, convertsTo.ToArray());
         }
 

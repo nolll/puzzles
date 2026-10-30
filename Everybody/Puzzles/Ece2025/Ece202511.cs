@@ -44,9 +44,7 @@ public class Ece202511 : EverybodyEventPuzzle
             phase = 2;
         }
 
-        var checksum = cols.Select((t, i) => t * (i + 1)).Sum();
-
-        return checksum;
+        return cols.Select((t, i) => t * (i + 1)).Sum();
     }
 
     [Puzzle("0190e3fea8360b204a353840cb82c001")]

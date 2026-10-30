@@ -111,7 +111,7 @@ public class Ece202517 : EverybodyEventPuzzle
 
     private static string GetId(string set, Coord coord) => $"{set}-{coord.Id}";
     private static bool IsDestroyed(Coord v, Coord c, int r) => (v.X - c.X) * (v.X - c.X) + (v.Y - c.Y) * (v.Y - c.Y) <= r * r;
-    
-    private static int CountDestroyed(Grid<char> grid, Coord volcano, int r) => 
-        grid.Coords.Where(o => o != volcano && IsDestroyed(volcano, o, r)).Select(o => int.Parse(grid.ReadValueAt(o).ToString())).Sum();
+
+    private static int CountDestroyed(Grid<char> grid, Coord volcano, int r) => grid.Coords
+        .Where(o => o != volcano && IsDestroyed(volcano, o, r)).Select(o => int.Parse(grid.ReadValueAt(o).ToString())).Sum();
 }

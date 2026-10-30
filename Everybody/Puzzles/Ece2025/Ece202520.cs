@@ -58,17 +58,17 @@ public class Ece202520 : EverybodyEventPuzzle
             }
 
             var below = new Coord(coord.X, coord.Y + 1);
-            if (!grid.IsOutOfRange(below) && grid.ReadValueAt(below) == 'T')
+            if (grid.IsOutOfRange(below) || grid.ReadValueAt(below) != 'T')
+                continue;
+            
+            var colIsOdd = coord.X % 2 != 0;
+            var rowIsEven = coord.Y % 2 == 0;
+            var rowIsOdd = coord.Y % 2 != 0;
+            var colIsEven = coord.X % 2 == 0;
+            if (colIsOdd && rowIsEven || colIsEven && rowIsOdd)
             {
-                var colIsOdd = coord.X % 2 != 0;
-                var rowIsEven = coord.Y % 2 == 0;
-                var rowIsOdd = coord.Y % 2 != 0;
-                var colIsEven = coord.X % 2 == 0;
-                if (colIsOdd && rowIsEven || colIsEven && rowIsOdd)
-                {
-                    edges.Add(new GraphEdge(coord.Id, below.Id));
-                    edges.Add(new GraphEdge(below.Id, coord.Id));
-                }
+                edges.Add(new GraphEdge(coord.Id, below.Id));
+                edges.Add(new GraphEdge(below.Id, coord.Id));
             }
         }
 

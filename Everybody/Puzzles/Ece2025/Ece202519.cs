@@ -73,7 +73,6 @@ public class Ece202519 : EverybodyEventPuzzle
     {
         var dx = to.X - from.X;
         var dy = to.Y - from.Y;
-        var diff = dx - dy;
-        return dx - diff / 2;
+        return dx - (dx - dy) / 2;
     }
 }

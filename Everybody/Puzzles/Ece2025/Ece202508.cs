@@ -84,5 +84,5 @@ public class Ece202508 : EverybodyEventPuzzle
     private static bool AreEqual((int a, int b) v1, (int a, int b) v2) => 
         v1.a == v2.a && v1.b == v2.b || v1.b == v2.a && v1.a == v2.b;
 
-    private static int[] Parse(string input) => input.Split(',').Select(int.Parse).ToArray();
+    private static int[] Parse(string input) => [.. input.Split(',').Select(int.Parse)];
 }

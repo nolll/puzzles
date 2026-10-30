@@ -105,15 +105,13 @@ public class Ece202509 : EverybodyEventPuzzle
         }
         
         public void AddChild(Duck child) => Children.Add(child);
-
-        public bool IsChildOf(Duck parent1, Duck parent2) => 
-            !Dna.Where((t, i) => t != parent1.Dna[i] && t != parent2.Dna[i]).Any();
+        public bool IsChildOf(Duck parent1, Duck parent2) => !Dna.Where((t, i) => t != parent1.Dna[i] && t != parent2.Dna[i]).Any();
 
         public int Score
         {
             get
             {
-                if (!Parents.Any())
+                if (Parents.Count == 0)
                     return 0;
 
                 var p1 = Parents[0];

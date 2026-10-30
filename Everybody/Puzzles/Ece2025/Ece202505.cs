@@ -115,9 +115,9 @@ public class Ece202505 : EverybodyEventPuzzle
         public int CompareTo(SwordSegment? other)
         {
             if (ReferenceEquals(this, other)) return 0;
-            if (other is null) return 1;
-            
-            return Score.CompareTo(other.Score);
+            return other is not null
+                ? Score.CompareTo(other.Score) 
+                : 1;
         }
     }
 }

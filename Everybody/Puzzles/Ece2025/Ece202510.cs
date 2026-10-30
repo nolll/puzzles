@@ -151,8 +151,7 @@ public class Ece202510 : EverybodyEventPuzzle
         }
         else
         {
-            var moves = _deltas.Select(o => new Coord(dragon.X + o.x, dragon.Y + o.y))
-                .Where(o => !grid.IsOutOfRange(o));
+            var moves = _deltas.Select(o => new Coord(dragon.X + o.x, dragon.Y + o.y)).Where(o => !grid.IsOutOfRange(o));
 
             foreach (var d in moves)
             {

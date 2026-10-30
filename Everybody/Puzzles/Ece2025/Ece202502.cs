@@ -9,7 +9,7 @@ public class Ece202502 : EverybodyEventPuzzle
 {
     private const long Part1Divisor = 10;
     private const long Part2And3Divisor = 100_000;
-    private const long InitialValue = 0L;
+    private const long InitialValue = 0;
     private const int NumCycles = 100;
     private const long Limit = 1_000_000;
 

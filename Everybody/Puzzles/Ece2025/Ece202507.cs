@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Lists;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Ece2025;
@@ -64,9 +65,9 @@ public class Ece202507 : EverybodyEventPuzzle
 
     private static (string[], Dictionary<char, char[]>) Parse(string input)
     {
-        var groups = input.Split(LineBreaks.Double);
-        var names = groups[0].Split(',');
-        var rules = groups[1].Split(LineBreaks.Single)
+        var (nameGroup, ruleGroup) = input.Split(LineBreaks.Double);
+        var names = nameGroup.Split(',');
+        var rules = ruleGroup.Split(LineBreaks.Single)
             .Select(o => o.Split(" > "))
             .ToDictionary(k => k[0][0], v => v[1].Split(',').Select(o => o[0]).ToArray());
         return (names, rules);

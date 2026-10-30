@@ -21,7 +21,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
             score += dice.Sum(die => die.Roll());
             rollCount++;
         }
-        
+
         return rollCount;
     }
 
@@ -34,12 +34,11 @@ public class Ecs0203 : EverybodyStoryPuzzle
         var goal = racetrack.Length;
         var players = dice.Select(o => new Player(o.Id, o)).ToList();
         var done = new List<Player>();
-        
+
         while (players.Any(o => o.Position < goal))
         {
-            for (var i = 0; i < players.Count; i++)
+            foreach (var player in players)
             {
-                var player = players[i];
                 if (player.Position == goal)
                     continue;
 
@@ -47,8 +46,8 @@ public class Ecs0203 : EverybodyStoryPuzzle
 
                 if (racetrack[player.Position] == score)
                     player.Position++;
-                
-                if(player.Position == goal)
+
+                if (player.Position == goal)
                     done.Add(player);
             }
         }
@@ -63,7 +62,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
         var dice = ParseDice(diceInput);
         var grid = GridBuilder.BuildIntGridFromNonSeparated(gridInput);
         var totalSet = new HashSet<Coord>();
-        
+
         foreach (var die in dice)
         {
             var spaces = grid.FindCoords(die.Roll());
@@ -76,20 +75,19 @@ public class Ecs0203 : EverybodyStoryPuzzle
                 var newSpaces = new HashSet<Coord>();
                 foreach (var space in spaces)
                 {
-                    if(grid.ReadValueAt(space) == score)
+                    if (grid.ReadValueAt(space) == score)
                         newSpaces.Add(space);
-                    
-                    newSpaces.AddRange(grid.OrthogonalAdjacentCoordsTo(space)
-                        .Where(o => grid.ReadValueAt(o) == score));
+
+                    newSpaces.AddRange(grid.OrthogonalAdjacentCoordsTo(space).Where(o => grid.ReadValueAt(o) == score));
                 }
 
                 set.UnionWith(newSpaces);
                 spaces = newSpaces.Distinct().ToList();
             }
-            
+
             totalSet.UnionWith(set);
         }
-        
+
         return totalSet.Count;
     }
 
@@ -106,7 +104,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
             dice.Add(new Die(id, seed, faces));
         }
 
-        return dice.ToArray();
+        return [.. dice];
     }
 
     private class Die(int id, int seed, int[] faces)
@@ -115,7 +113,7 @@ public class Ecs0203 : EverybodyStoryPuzzle
         private long _pulse = seed;
         private int _face;
         private int _rollNumber = 1;
-        
+
         public int Roll()
         {
             var spin = _rollNumber * _pulse;
@@ -123,9 +121,8 @@ public class Ecs0203 : EverybodyStoryPuzzle
             _pulse += spin;
             _pulse %= seed;
             _pulse += 1 + _rollNumber + seed;
-            var result = faces[_face];
             _rollNumber++;
-            return result;
+            return faces[_face];
         }
     }
 

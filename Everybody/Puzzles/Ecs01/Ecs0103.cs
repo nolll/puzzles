@@ -13,10 +13,8 @@ public class Ecs0103 : EverybodyStoryPuzzle
     {
         var snails = ParseSnails(input);
         const int iterations = 100;
-        for (var c = 0; c < iterations; c++)
-        {
+        for (var c = 0; c < iterations; c++) 
             snails = MoveSnails(snails);
-        }
 
         return snails.Select(o => o.x + 100 * o.y).Sum();
     }

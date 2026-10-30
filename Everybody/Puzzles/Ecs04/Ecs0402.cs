@@ -79,9 +79,7 @@ public class Ecs0402 : EverybodyStoryPuzzle
         
         foreach (var light in lights)
         {
-            var flies = Grid<int>.PossibleOrthogonalAdjacentCoordsTo(light)
-                .Where(o => !lights.Contains(o));
-            fireflies.AddRange(flies);
+            fireflies.AddRange(Grid<int>.PossibleOrthogonalAdjacentCoordsTo(light).Where(o => !lights.Contains(o)));
         }
         
         return fireflies.Count(o => !lights.Contains(o));

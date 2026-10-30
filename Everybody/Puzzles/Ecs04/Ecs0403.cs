@@ -22,9 +22,7 @@ public class Ecs0403 : EverybodyStoryPuzzle
         PlaceHorizontalStitches(mask, w, h, ho);
         PlaceVerticalStitches(mask, w, h, vo);
 
-        var isolatedCoords = mask.Where(o => o.Value == Sum).Select(o => o.Key).ToArray();
-        
-        return isolatedCoords.Length;
+        return mask.Count(o => o.Value == Sum);
     }
 
     [Puzzle("e892ee05396cdeb1fb3fd0ed01a43dd6")]
@@ -43,29 +41,16 @@ public class Ecs0403 : EverybodyStoryPuzzle
         var hRepeatCount = h / repeatHeight;
         var wRest = w % repeatWidth;
         var hRest = h % repeatHeight;
+
+        var q1 = Solve(repeatWidth, repeatHeight, ho, vo);
+        var q2 = Solve(wRest, repeatHeight, ho, vo);
+        var q3 = Solve(repeatWidth, hRest, ho, vo);
+        var q4 = Solve(wRest, hRest, ho, vo);
         
-        var w1 = repeatWidth;
-        var h1 = repeatHeight;
         var m1 = wRepeatCount * hRepeatCount;
-
-        var w2 = wRest;
-        var h2 = repeatHeight;
-        var m2 = hRepeatCount;
-
-        var w3 = repeatWidth;
-        var h3 = hRest;
-        var m3 = wRepeatCount;
-
-        var w4 = wRest;
-        var h4 = hRest;
         
-        var q1 = Solve(w1, h1, ho, vo);
-        var q2 = Solve(w2, h2, ho, vo);
-        var q3 = Solve(w3, h3, ho, vo);
-        var q4 = Solve(w4, h4, ho, vo);
-        
-        var color1 = q1[false] * m1 + q2[false] * m2 + q3[false] * m3 + q4[false];
-        var color2 = q1[true] * m1 + q2[true] * m2 + q3[true] * m3 + q4[true];
+        var color1 = q1[false] * m1 + q2[false] * hRepeatCount + q3[false] * wRepeatCount + q4[false];
+        var color2 = q1[true] * m1 + q2[true] * hRepeatCount + q3[true] * wRepeatCount + q4[true];
 
         return Math.Max(color1, color2);
     }
@@ -98,7 +83,7 @@ public class Ecs0403 : EverybodyStoryPuzzle
                 continue;
             
             var visitedAdjacent = Grid<int>.PossibleOrthogonalAdjacentCoordsTo(startCoord)
-                .Where(o => visited.ContainsKey(o)).Select(o => visited[o])
+                .Where(visited.ContainsKey).Select(o => visited[o])
                 .ToList();
 
             var color = visitedAdjacent.Count == 0 || !visitedAdjacent.First();

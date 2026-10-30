@@ -89,10 +89,9 @@ public class Ecs0303 : EverybodyStoryPuzzle
 
             return node;
 
-            bool IsConnection(Connection socket) => 
-                options.UseWeakConnections 
-                    ? node.Plug.IsConnection(socket) 
-                    : node.Plug.IsStrongConnection(socket);
+            bool IsConnection(Connection socket) => options.UseWeakConnections
+                ? node.Plug.IsConnection(socket)
+                : node.Plug.IsStrongConnection(socket);
         }
 
         private Node[] TraverseTree() =>

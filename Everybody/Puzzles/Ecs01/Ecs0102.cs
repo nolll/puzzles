@@ -85,7 +85,7 @@ public class Ecs0102 : EverybodyStoryPuzzle
         var q = new Queue<TreeNode>();
         q.Enqueue(rootLeft);
 
-        while (q.Any())
+        while (q.Count > 0)
         {
             var n = q.Dequeue();
             yield return n;

@@ -22,15 +22,7 @@ public class Ecs0301 : EverybodyStoryPuzzle
     public int Part3(string input)
     {
         var ducks = ParseDucks(input).ToArray();
-        var buckets = new Dictionary<string, List<int>>
-        {
-            { "rm", [] },
-            { "rs", [] },
-            { "gm", [] },
-            { "gs", [] },
-            { "bm", [] },
-            { "bs", [] }
-        };
+        var buckets = CreateBuckets();
 
         foreach (var (scale, r, g, b, s) in ducks)
         {
@@ -46,18 +38,21 @@ public class Ecs0301 : EverybodyStoryPuzzle
         return buckets.Values.MaxBy(o => o.Count)?.Sum() ?? 0;
     }
 
+    private static Dictionary<string, List<int>> CreateBuckets() => 
+        Color.All.SelectMany(o => Shine.All.Select(shine => $"{o}{shine}")).ToDictionary(c => c, _ => new List<int>());
+
     private static char? GetColorBucket(int r, int g, int b)
     {
-        if (r > g && r > b) return 'r';
-        if (g > r && g > b) return 'g';
-        if (b > r && b > g) return 'b';
+        if (r > g && r > b) return Color.Red;
+        if (g > r && g > b) return Color.Green;
+        if (b > r && b > g) return Color.Blue;
         return null;
     }
 
     private static char? GetShineBucket(int s) => s switch
     {
-        <= 30 => 'm',
-        >= 33 => 's',
+        <= 30 => Shine.Matte,
+        >= 33 => Shine.Shiny,
         _ => null
     };
 
@@ -79,4 +74,19 @@ public class Ecs0301 : EverybodyStoryPuzzle
 
     private static int ToNumber(string rs) => Convert.ToInt32(string.Concat(ToNumber(rs.ToCharArray())), 2);
     private static IEnumerable<char> ToNumber(char[] chars) => chars.Select(c => char.IsUpper(c) ? '1' : '0');
+
+    private static class Color
+    {
+        public const char Red = 'r';
+        public const char Green = 'g';
+        public const char Blue = 'b';
+        public static readonly char[] All = [Red, Green, Blue];
+    }
+    
+    private static class Shine
+    {
+        public const char Matte = 'm';
+        public const char Shiny = 's';
+        public static readonly char[] All = [Matte, Shiny];
+    }
 }

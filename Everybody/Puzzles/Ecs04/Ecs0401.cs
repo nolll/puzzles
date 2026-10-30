@@ -98,8 +98,7 @@ public class Ecs0401 : EverybodyStoryPuzzle
         return n;
     }
 
-    public static bool IsCrossing(List<(int, int)> ranges, (int, int) range) => 
-        ranges.Any(o => IsCrossing(o, range));
+    public static bool IsCrossing(List<(int, int)> ranges, (int, int) range) => ranges.Any(o => IsCrossing(o, range));
 
     public static bool IsCrossing((int start, int end) a, (int start, int end) b)
     {

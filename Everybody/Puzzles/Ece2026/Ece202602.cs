@@ -1,47 +1,76 @@
-using System.Text;
 using Pzl.Common;
-using Pzl.Tools.Numbers;
+using Pzl.Tools.HashSets;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Ece2026;
 
+// Got a little help from Jonathan Paulson with the filling of missing comparisons
 [Name("The Axeperiment")]
 public class Ece202602 : EverybodyEventPuzzle
 {
     [Puzzle("d2fc9610d3073f6dd8ea1275714dd9bf")]
-    public int Part1(string input)
-    {
-        var lines = input.Split(LineBreaks.Single);
-        var sum = 0;
-        foreach (var line in lines)
-        {
-            var numbers = Numbers.IntsFromString(line).Distinct().Order();
-            var dictionary = numbers.ToDictionary(k => k, _ => 0);
-            var comparisons = line.Split(' ');
-            foreach (var comparison in comparisons)
-            {
-                var n1 = int.Parse(comparison[..1]);
-                var n2 = int.Parse(comparison.Substring(2, 1));
-                var comp = comparison[1];
-                var alloyToIncrease = comp == '>' ? n1 : n2;
-                dictionary[alloyToIncrease] += 1;
-            }
+    public long Part1(string input) => Solve(input);
 
-            sum += int.Parse(string.Concat(dictionary.OrderByDescending(kv => kv.Value).Select(kv => kv.Key.ToString())));
+    [Puzzle("3ed41a314b7fa0ba8eaa2d15297745e9")]
+    public long Part2(string input) => Solve(input);
+
+    [Puzzle("71958f7da629b8d9ae7c4bd8e6d8e250")]
+    public long Part3(string input) => Solve(input);
+
+    private static long Solve(string input) => input.Split(LineBreaks.Single).Sum(SolveLine);
+
+    private static long SolveLine(string line)
+    {
+
+        var numbers = new HashSet<int>();
+        var isSmaller = new HashSet<(int smaller, int larger)>();
+        var comparisons = line.Split(' ');
+        foreach (var comparison in comparisons)
+        {
+            var left = int.Parse(comparison[..1]);
+            var right = int.Parse(comparison.Substring(2, 1));
+            numbers.AddRange([left, right]);
+            var comp = comparison[1];
+            var larger = comp == '>' ? left : right;
+            var smaller = comp == '>' ? right : left;
+            isSmaller.Add((smaller, larger));
         }
 
-        return sum;
+        FillMissingComparisons(numbers, isSmaller);
+        
+        var sorted = numbers.OrderDescending(new Comparer(isSmaller)).ToList();
+        
+        return long.Parse(string.Concat(sorted.Select(o => o.ToString())));
     }
 
-    [Puzzle("")]
-    public int Part2(string input)
+    private static void FillMissingComparisons(HashSet<int> numbers, HashSet<(int smaller, int larger)> isSmaller)
     {
-        return 0;
+        foreach (var k in numbers)
+        {
+            foreach (var a in numbers)
+            {
+                foreach (var b in numbers)
+                {
+                    if (isSmaller.Contains((a, k)) && isSmaller.Contains((k, b)))
+                    {
+                        isSmaller.Add((a, b));
+                    }
+                }
+            }
+        }
     }
 
-    [Puzzle("")]
-    public int Part3(string input)
+    private class Comparer(HashSet<(int smaller, int larger)> isSmaller) : IComparer<int>
     {
-        return 0;
+        public int Compare(int a, int b)
+        {
+            if (isSmaller.Contains((a, b)))
+                return -1;
+
+            if (a == b)
+                return 0;
+
+            return 1;
+        }
     }
 }

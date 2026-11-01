@@ -178,12 +178,12 @@ public class Aoc202024 : AocPuzzle
 
         coords =
         [
-            coord.Relative(1, -1),
-            coord.Relative(2, 0),
-            coord.Relative(1, 1),
-            coord.Relative(-1, 1),
-            coord.Relative(-2, 0),
-            coord.Relative(-1, -1)
+            coord.Add(1, -1),
+            coord.Add(2, 0),
+            coord.Add(1, 1),
+            coord.Add(-1, 1),
+            coord.Add(-2, 0),
+            coord.Add(-1, -1)
         ];
 
         cache.Add(key, coords);

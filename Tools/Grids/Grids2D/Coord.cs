@@ -38,7 +38,8 @@ public record Coord(int X, int Y)
     public Coord Forward(GridDirection direction, int steps = 1) => Direction(direction, steps);
     public Coord Backward(GridDirection direction, int steps = 1) => Direction(direction, -steps);
     public Coord Direction(GridDirection direction, int steps = 1) => new(X + direction.X * steps, Y + direction.Y * steps);
-    public Coord Relative(int x, int y) => new(X + x, Y + y);
+    public Coord Add(int x, int y) => new(X + x, Y + y);
+    public Coord Add(Coord coord) => Add(coord.X, coord.Y);
     public Coord RotateLeft() => new(-Y, X);
     public Coord RotateRight() => new(Y, -X);
     

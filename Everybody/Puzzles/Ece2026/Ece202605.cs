@@ -23,10 +23,15 @@ public class Ece202605 : EverybodyEventPuzzle
         return land.Values.Count(o => o is '=');
     }
 
-    [Puzzle("")]
+    [Puzzle("c06950c8357931ab9a5a638fa12a4723")]
     public int Part3(string input)
     {
-        return 0;
+        var (land, inputGrid) = CreateGrids(input);
+        FillLand(land, inputGrid);
+        FillSand(land);
+        FillTrees(land);
+        FillTrees(land);
+        return land.Values.Count(o => o is '@');
     }
     
     private (Grid<char> land, Grid<char> inputGrid) CreateGrids(string input)
@@ -92,4 +97,57 @@ public class Ece202605 : EverybodyEventPuzzle
             land.WriteValueAt(newSand, '=');
         }
     }
+    
+    private void FillTrees(Grid<char> land)
+    {
+        foreach (var coord in land.Coords)
+        {
+            if(IsTree(land, coord))
+                land.WriteValueAt(coord, '@');
+        }
+        
+        var newTrees = new HashSet<Coord>();
+        foreach (var coord in land.Coords)
+        {
+            if(CanGrowTree(land, coord))
+                newTrees.Add(coord);
+        }
+        
+        land.WriteValueAt(newTrees, '@');
+    }
+
+    private bool IsTree(Grid<char> land, Coord coord)
+    {
+        if (land.ReadValueAt(coord) != '#')
+            return false;
+        
+        foreach (var diff in _treeShape)
+        {
+            var v = land.ReadValueAt(coord.Add(diff));
+            if (v is '#' or '@')
+                continue;
+
+            return false;
+        }
+
+        return true;
+    }
+    
+    private bool CanGrowTree(Grid<char> land, Coord coord)
+    {
+        if (land.ReadValueAt(coord) != '#')
+            return false;
+        
+        var adjacentValues = land.AllAdjacentValuesTo(coord);
+        return adjacentValues.Count(o => o == '@') >= 4 && adjacentValues.Count(o => o == '.') == 0;
+    }
+    
+    private readonly List<Coord> _treeShape =
+    [
+        new(-1, -2), new(0, -2), new(1, -2),
+        new(-2, -1), new(-1, -1), new(0, -1), new(1, -1), new(2, -1),
+        new(-2, 0), new(-1, 0), new(1, 0), new(2, 0), 
+        new(-2, 1), new(-1, 1), new(0, 1), new(1, 1), new(2, 1),
+        new(-1, 2), new(0, 2), new(), new(1, 2),
+    ];
 }

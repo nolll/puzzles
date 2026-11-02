@@ -21,5 +21,4 @@ public class FlipFlop202503Tests : PuzzleTest<FlipFlop202503>
 
     [Fact]
     public void Part3() => Sut.Part3(Input).Should().Be(37);
-
 }

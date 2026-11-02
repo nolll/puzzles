@@ -23,8 +23,8 @@ public class FlipFlop202507Tests : PuzzleTest<FlipFlop202507>
     [InlineData(2, 2, 2)]
     [InlineData(3, 3, 6)]
     [InlineData(2, 3, 3)]
-    public void CountWays2d(int width, int height, int expected) => Sut.CountWays(width, height).Should().Be(expected);
-    
+    public void CountWays2D(int width, int height, int expected) => Sut.CountWays(width, height).Should().Be(expected);
+
     [Fact]
     public void CountWays() => Sut.CountWays(3, 3, 3, 3).Should().Be(2520);
 
@@ -32,6 +32,5 @@ public class FlipFlop202507Tests : PuzzleTest<FlipFlop202507>
     [InlineData(2, 2, 2, 6)]
     [InlineData(3, 3, 3, 90)]
     [InlineData(2, 3, 2, 12)]
-    public void CountWays3d(int width, int height, int depth, int expected) => Sut.CountWays(width, height, depth).Should().Be(expected);
-
+    public void CountWays3D(int width, int height, int depth, int expected) => Sut.CountWays(width, height, depth).Should().Be(expected);
 }

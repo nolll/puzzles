@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.State;
 
 namespace Tests.Tools.State;
@@ -18,11 +17,7 @@ public class BitStateHandlerTests
     }
     
     [Fact]
-    public void MaxValue()
-    {
-        var sut = new BitStateHandler("abcd");
-        sut.MaxValue.Should().Be(15);
-    }
+    public void MaxValue() => new BitStateHandler("abcd").MaxValue.Should().Be(15);
 
     [Fact]
     public void IsMarked()

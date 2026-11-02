@@ -18,10 +18,10 @@ public class CombinationGeneratorTests
             [3, 2],
             [3, 2, 1]
         ];
-        
+
         ListAssert.IsEquivalent(result, expected);
     }
-    
+
     [Fact]
     public void GeneratesAllUniqueCombinationsOfSpecifiedSize()
     {
@@ -37,12 +37,12 @@ public class CombinationGeneratorTests
             [2, 3, 4],
             [2, 3, 5],
             [2, 4, 5],
-            [3, 4, 5]  
+            [3, 4, 5]
         ];
-        
+
         ListAssert.IsEquivalent(result, expected);
     }
-    
+
     [Fact]
     public void GeneratesAllUniqueCombinationsOfMaxSize()
     {
@@ -56,19 +56,16 @@ public class CombinationGeneratorTests
             [3, 1],
             [3, 2]
         ];
-        
+
         ListAssert.IsEquivalent(result, expected);
     }
-    
+
     [Fact]
     public void GeneratesAllUniqueCombinationsOfMaxSizeWhenizeIsOne()
     {
         var result = CombinationGenerator.GetUniqueCombinationsMaxSize([1], 2).ToList();
-        int[][] expected =
-        [
-            [1]
-        ];
-        
+        int[][] expected = [[1]];
+
         ListAssert.IsEquivalent(result, expected);
     }
 
@@ -88,7 +85,7 @@ public class CombinationGeneratorTests
             [3, 2],
             [3, 3]
         ];
-        
+
         ListAssert.IsEquivalent(result, expected);
     }
 
@@ -111,7 +108,7 @@ public class CombinationGeneratorTests
             [2, 5, 6],
             [2, 5, 7]
         ];
-        
+
         ListAssert.IsEquivalent(result, expected);
     }
 }

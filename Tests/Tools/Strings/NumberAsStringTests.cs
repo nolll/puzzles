@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.Strings;
 
 namespace Tests.Tools.Strings;
@@ -40,7 +39,5 @@ public class NumberAsStringTests
     [InlineData(900, "nine hundred")]
     [InlineData(999, "nine hundred and ninetynine")]
     [InlineData(1000, "one thousand")]
-    public void ToString_ReturnsCorrectString(int n, string expected) =>
-        new NumberAsString(n).ToString()
-            .Should().Be(expected);
+    public void ToString_ReturnsCorrectString(int n, string expected) => new NumberAsString(n).ToString().Should().Be(expected);
 }

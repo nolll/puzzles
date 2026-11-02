@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.Graphs;
 
 namespace Tests.Tools.Graphs;
@@ -8,7 +7,7 @@ public class KruskalTests
     [Fact]
     public void MinimumSpanningTree()
     {
-        GraphEdge[] edges =
+        List<GraphEdge> edges =
         [
             new("0,0", "4,0", 4),
             new("0,0", "2,1", 3),
@@ -32,6 +31,6 @@ public class KruskalTests
             new("2,4", "0,4", 2)
         ];
 
-        Kruskal.MinimumSpanningTree(edges.ToList()).Should().Be(11);
+        Kruskal.MinimumSpanningTree(edges).Should().Be(11);
     }
 }

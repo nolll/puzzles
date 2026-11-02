@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.Lists;
 
 namespace Tests.Tools.Lists;

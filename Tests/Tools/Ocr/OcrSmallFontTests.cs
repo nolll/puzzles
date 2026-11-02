@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.Ocr;
 
 namespace Tests.Tools.Ocr;

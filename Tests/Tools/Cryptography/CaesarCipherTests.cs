@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.Cryptography;
 
 namespace Tests.Tools.Cryptography;

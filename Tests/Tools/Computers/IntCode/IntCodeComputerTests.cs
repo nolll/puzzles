@@ -13,8 +13,7 @@ public class IntCodeComputerTests
     {
         var computer = new IntCodeComputer(input, ReadInput, WriteOutput);
         computer.Start();
-        var result = computer.Result;
-        result.Should().Be(expectedResult);
+        computer.Result.Should().Be(expectedResult);
     }
     
     private static long ReadInput() => 0;

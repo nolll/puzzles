@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.Grids.Grids2d;
 
 namespace Tests.Tools.Grids.Grids2d;

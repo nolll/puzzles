@@ -1,5 +1,3 @@
-using AwesomeAssertions;
-
 namespace Tests.Tools.Numbers;
 
 public class NumbersTests
@@ -101,8 +99,7 @@ public class NumbersTests
     public void IsHexagonalNumber(int n, bool expected) => Pzl.Tools.Numbers.Numbers.IsHexagonalNumber(n).Should().Be(expected);
 
     [Fact]
-    public void IntsFromString() => 
-        Pzl.Tools.Numbers.Numbers.IntsFromString("abc123def456ghi").Should().BeEquivalentTo((int[])[123, 456]);
+    public void IntsFromString() => Pzl.Tools.Numbers.Numbers.IntsFromString("abc123def456ghi").Should().BeEquivalentTo((int[])[123, 456]);
     
     [Theory]
     [InlineData(6, 1)]

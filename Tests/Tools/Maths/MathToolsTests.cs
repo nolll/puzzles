@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.Maths;
 
 namespace Tests.Tools.Maths;
@@ -21,8 +20,7 @@ public class MathToolsTests
     [InlineData(20, 1, 2, 4, 5, 10, 20)]
     [InlineData(11, 1, 11)]
     [InlineData(17, 1, 17)]
-    public void GetFactors(int input, params int[] expected) => 
-        MathTools.GetFactors(input).Should().BeEquivalentTo(expected);
+    public void GetFactors(int input, params int[] expected) => MathTools.GetFactors(input).Should().BeEquivalentTo(expected);
 
     [Fact]
     public void GetMultiplicationFactors()
@@ -52,21 +50,16 @@ public class MathToolsTests
     [InlineData(3, 17, 12)]
     [InlineData(4, 41, 29)]
     [InlineData(8, 1393, 985)]
-    public void ContinuedFractionSquareRootOfTwo(int levels, int expectedNumerator, int expectedDenominator)
-    {
-        var result = MathTools.ContinuedFraction(1, [2], levels);
-        result.ToString().Should().Be($"{expectedNumerator}/{expectedDenominator}");
-    }
-    
+    public void ContinuedFractionSquareRootOfTwo(int levels, int expectedNumerator, int expectedDenominator) => 
+        MathTools.ContinuedFraction(1, [2], levels).ToString().Should().Be($"{expectedNumerator}/{expectedDenominator}");
+
     [Theory]
     [InlineData(1, 3, 1)]
     [InlineData(2, 8, 3)]
     [InlineData(3, 11, 4)]
     [InlineData(4, 19, 7)]
     [InlineData(5, 87, 32)]
-    public void ContinuedFractionNaturalNumber(int levels, int expectedNumerator, int expectedDenominator)
-    {
-        var result = MathTools.ContinuedFraction(2, [1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, 1, 1, 10, 1, 1], levels);
-        result.ToString().Should().Be($"{expectedNumerator}/{expectedDenominator}");
-    }
+    public void ContinuedFractionNaturalNumber(int levels, int expectedNumerator, int expectedDenominator) => 
+        MathTools.ContinuedFraction(2, [1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, 1, 1, 10, 1, 1], levels).ToString()
+            .Should().Be($"{expectedNumerator}/{expectedDenominator}");
 }

@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using Pzl.Tools.Ocr;
 
 namespace Tests.Tools.Ocr;
@@ -13,14 +12,10 @@ public class OcrLargeFontTests
     [InlineData(InputP, 'P')]
     [InlineData(InputR, 'R')]
     [InlineData(InputSpace, ' ')]
-    public void TestReadLetter(string input, char expected) =>
-        OcrLargeFont.ReadLetter(input)
-            .Should().Be(expected);
+    public void TestReadLetter(string input, char expected) => OcrLargeFont.ReadLetter(input).Should().Be(expected);
 
     [Fact]
-    public void TestReadString() =>
-        OcrLargeFont.ReadString(Input)
-            .Should().Be("HRP");
+    public void TestReadString() => OcrLargeFont.ReadString(Input).Should().Be("HRP");
 
     private const string Input = """
                                  #....#..#####...#####...

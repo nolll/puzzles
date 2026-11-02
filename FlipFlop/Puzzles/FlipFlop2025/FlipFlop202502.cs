@@ -15,12 +15,8 @@ public class FlipFlop202502 : FlipFlopPuzzle
     [Puzzle("9116cf946c0d82e0d08bffc0da078dd1")]
     public long Part3(string input) => Solve(input, sequenceLength => Numbers.Fibonacci(sequenceLength));
 
-    private static long Solve(string input, Func<int, long> heightDelta)
-    {
-        var sequenceLengths = GetSequenceLengths(input);
-        var initialDirection = input.First() == '^' ? 1 : -1;
-        return GetBestHeight(sequenceLengths, initialDirection, heightDelta);
-    }
+    private static long Solve(string input, Func<int, long> heightDelta) => 
+        GetBestHeight(GetSequenceLengths(input), input.First() == '^' ? 1 : -1, heightDelta);
 
     private static IEnumerable<int> GetSequenceLengths(string input)
     {

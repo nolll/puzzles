@@ -31,10 +31,8 @@ public class FlipFlop202504 : FlipFlopPuzzle
     private static int GetTotalDistance(List<Coord> coords, Func<Coord, Coord, int> distanceFunc)
     {
         var distance = 0;
-        foreach (var (a, b) in coords.Zip(coords.Skip(1)))
-        {
+        foreach (var (a, b) in coords.Zip(coords.Skip(1))) 
             distance += distanceFunc(a, b);
-        }
 
         return distance;
     }

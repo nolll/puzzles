@@ -4,7 +4,7 @@ public class OpComputer
 {
     protected readonly IDictionary<string, Operation> OperationsDictionary;
 
-    public OpComputer()
+    protected OpComputer()
     {
         OperationsDictionary = GetOperations().ToDictionary(o => o.Name);
     }

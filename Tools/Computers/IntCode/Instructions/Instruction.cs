@@ -2,10 +2,8 @@ using Pzl.Tools.Computers.IntCode.Parameters;
 
 namespace Pzl.Tools.Computers.IntCode.Instructions;
 
-public abstract class Instruction(IList<long> memory, int pointer, int relativeBase, IList<ParameterType> parameterTypes)
+public abstract class Instruction(int pointer, IList<ParameterType> parameterTypes)
 {
-    private readonly IList<long> _memory = memory;
-    private readonly int _relativeBase = relativeBase;
     public IList<Parameter> Parameters { get; } = new List<Parameter>();
     public int Length => Parameters.Count;
     public abstract InstructionType Type { get; }

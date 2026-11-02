@@ -4,8 +4,7 @@ public class JumpIfTrueInstruction : Instruction
 {
     public override InstructionType Type => InstructionType.JumpIfTrue;
 
-    public JumpIfTrueInstruction(IList<long> memory, int position, int relativeBase, IList<ParameterType> parameterTypes)
-        : base(memory, position, relativeBase, parameterTypes)
+    public JumpIfTrueInstruction(int position, IList<ParameterType> parameterTypes) : base(position, parameterTypes)
     {
         ReadParameter(0);
         ReadParameter(1);

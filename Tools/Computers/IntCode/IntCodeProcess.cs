@@ -23,7 +23,7 @@ public class IntCodeProcess(IList<long> memory, bool haltAfterInput, Func<long> 
     {
         while (_pointer < Memory.Count)
         {
-            var instruction = InstructionParser.Parse(Memory, _pointer, _relativeBase);
+            var instruction = InstructionParser.Parse(Memory, _pointer);
 
             if (_stop || instruction is null || instruction.Type == InstructionType.Halt)
                 break;

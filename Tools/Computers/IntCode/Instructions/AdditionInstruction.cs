@@ -4,8 +4,7 @@ public class AdditionInstruction : Instruction
 {
     public override InstructionType Type => InstructionType.Addition;
 
-    public AdditionInstruction(IList<long> memory, int position, int relativeBase, IList<ParameterType> parameterTypes)
-        : base(memory, position, relativeBase, parameterTypes)
+    public AdditionInstruction(int position, IList<ParameterType> parameterTypes) : base(position, parameterTypes)
     {
         ReadParameter(0);
         ReadParameter(1);

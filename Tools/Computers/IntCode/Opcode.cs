@@ -9,18 +9,18 @@ public class Opcode
     {
         var str = code.ToString();
         var strOperation = str.Length > 2
-            ? str.Substring(str.Length - 2)
+            ? str[^2..]
             : str;
 
-        if (strOperation.StartsWith("0"))
-            strOperation = strOperation.Substring(1);
+        if (strOperation.StartsWith('0'))
+            strOperation = strOperation[1..];
 
         Code = int.Parse(strOperation);
 
         var parameterTypes = new List<ParameterType>();
         if (str.Length > 2)
         {
-            str = str.Substring(0, str.Length - 2);
+            str = str[..^2];
             foreach (var c in str)
             {
                 var parameterType = GetParameterType(c);
@@ -31,21 +31,10 @@ public class Opcode
         ParameterTypes = parameterTypes;
     }
 
-    private ParameterType GetParameterType(char c)
+    private ParameterType GetParameterType(char c) => c switch
     {
-        if (c == '2')
-            return ParameterType.Relative;
-
-        if (c == '1')
-            return ParameterType.Immediate;
-            
-        return ParameterType.Position;
-    }
-}
-
-public enum ParameterType
-{
-    Position,
-    Immediate,
-    Relative
+        '2' => ParameterType.Relative,
+        '1' => ParameterType.Immediate,
+        _ => ParameterType.Position
+    };
 }

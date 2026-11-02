@@ -6,12 +6,12 @@ namespace Tests.Tools.Computers.IntCode;
 public class InstructionParserTests
 {
     [Fact]
-    public void ReturnsNull() => InstructionParser.Parse(new List<long>(), 0, 0).Should().BeNull();
+    public void ReturnsNull() => InstructionParser.Parse(new List<long>(), 0).Should().BeNull();
 
     [Fact]
     public void ReturnsAdditionInstruction()
     {
-        var result = InstructionParser.Parse(MemoryParser.Parse("1,0,0,0"), 0, 0);
+        var result = InstructionParser.Parse(MemoryParser.Parse("1,0,0,0"), 0);
 
         result.Should().BeOfType<AdditionInstruction>();
         result.Parameters.Count.Should().Be(3);
@@ -23,7 +23,7 @@ public class InstructionParserTests
     [Fact]
     public void ReturnsMultiplicationInstruction()
     {
-        var result = InstructionParser.Parse(MemoryParser.Parse("2,0,0,0"), 0, 0);
+        var result = InstructionParser.Parse(MemoryParser.Parse("2,0,0,0"), 0);
 
         result.Should().BeOfType<MultiplicationInstruction>();
         result.Parameters.Count.Should().Be(3);
@@ -35,7 +35,7 @@ public class InstructionParserTests
     [Fact]
     public void ReturnsInputInstruction()
     {
-        var result = InstructionParser.Parse(MemoryParser.Parse("3,0,0,0"), 0, 0);
+        var result = InstructionParser.Parse(MemoryParser.Parse("3,0,0,0"), 0);
 
         result!.Type.Should().Be(InstructionType.Input);
         result.Parameters.Count.Should().Be(1);
@@ -45,7 +45,7 @@ public class InstructionParserTests
     [Fact]
     public void ReturnsOutputInstruction()
     {
-        var result = InstructionParser.Parse(MemoryParser.Parse("4,0,0,0"), 0, 0);
+        var result = InstructionParser.Parse(MemoryParser.Parse("4,0,0,0"), 0);
 
         result.Should().BeOfType<OutputInstruction>();
         result.Parameters.Count.Should().Be(1);
@@ -55,7 +55,7 @@ public class InstructionParserTests
     [Fact]
     public void ReturnsHaltInstruction()
     {
-        var result = InstructionParser.Parse(MemoryParser.Parse("99,0,0,0"), 0, 0);
+        var result = InstructionParser.Parse(MemoryParser.Parse("99,0,0,0"), 0);
 
         result.Should().BeOfType<HaltInstruction>();
         result.Parameters.Count.Should().Be(0);
@@ -64,7 +64,7 @@ public class InstructionParserTests
     [Fact]
     public void ReturnsAdditionInstructionWithImmediateParameters()
     {
-        var result = InstructionParser.Parse(MemoryParser.Parse("01101,0,0,0"), 0, 0);
+        var result = InstructionParser.Parse(MemoryParser.Parse("01101,0,0,0"), 0);
 
         result!.Type.Should().Be(InstructionType.Addition);
         result.Parameters.Count.Should().Be(3);

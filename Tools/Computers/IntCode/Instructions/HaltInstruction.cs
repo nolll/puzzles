@@ -1,7 +1,6 @@
 namespace Pzl.Tools.Computers.IntCode.Instructions;
 
-public class HaltInstruction(IList<long> memory, int pointer, int relativeBase, IList<ParameterType> parameterTypes)
-    : Instruction(memory, pointer, relativeBase, parameterTypes)
+public class HaltInstruction(int pointer, IList<ParameterType> parameterTypes) : Instruction(pointer, parameterTypes)
 {
     public override InstructionType Type => InstructionType.Halt;
 }

@@ -2,8 +2,8 @@ namespace Pzl.Tools.Computers.IntCode;
 
 public class IntCodeComputer(IList<long> memory, Func<long>? readInput = null, Func<long, bool>? writeOutput = null)
 {
-    public Func<long>? ReadInput { get; set; } = readInput;
-    public Func<long, bool>? WriteOutput { get; set; } = writeOutput;
+    public Func<long>? ReadInput { get; init; } = readInput;
+    public Func<long, bool>? WriteOutput { get; init; } = writeOutput;
     private IntCodeProcess? _process;
 
     public long Result => _process?.Result ?? 0;

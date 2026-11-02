@@ -4,8 +4,7 @@ public class AdjustRelativeBaseInstruction : Instruction
 {
     public override InstructionType Type => InstructionType.AdjustRelativeBase;
 
-    public AdjustRelativeBaseInstruction(IList<long> memory, int position, int relativeBase, IList<ParameterType> parameterTypes)
-        : base(memory, position, relativeBase, parameterTypes)
+    public AdjustRelativeBaseInstruction(int position, IList<ParameterType> parameterTypes) : base(position, parameterTypes)
     {
         ReadParameter(0);
     }

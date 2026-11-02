@@ -16,19 +16,21 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     private readonly ResultVerifier _resultVerifier;
     private readonly int _resultLength;
     private readonly int _commentLength;
-    private readonly int _truncatedCommentLength;
+    private readonly int _nameLength;
     private readonly string _title;
     private readonly string _commentMarkup;
+    private readonly string _nameMarkup;
     private readonly string[] _markups;
 
     public InSequenceSinglePuzzleRunner(
         PuzzleFactory puzzleFactory,
-        PuzzleDefinition puzzle, 
-        TimeSpan timeoutTimespan, 
+        PuzzleDefinition puzzle,
+        TimeSpan timeoutTimespan,
         ResultVerifier resultVerifier,
         int titleWidth,
         int resultWidth,
         int commentWidth,
+        int nameWidth,
         int maxFuncCount)
     {
         _puzzleFactory = puzzleFactory;
@@ -37,9 +39,11 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
         _resultVerifier = resultVerifier;
         _resultLength = resultWidth;
         _commentLength = commentWidth;
-        _truncatedCommentLength = commentWidth - 3;
+        _nameLength = nameWidth;
         _title = puzzle.ListTitle.PadRight(titleWidth);
         _commentMarkup = MarkupComment(puzzle.Comment);
+        _nameMarkup = MarkupName(puzzle.Name);
+
         _markups = new string[maxFuncCount];
         for (var i = 0; i < maxFuncCount; i++)
         {
@@ -55,9 +59,9 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
         for (var i = 0; i < instance.Funcs.Length; i++)
         {
             var func = instance.Funcs[i];
-            RunPart(() => func.Invoke(), i);
+            RunPart(func.Invoke, i);
         }
-        
+
         Printer.WriteLine();
     }
 
@@ -110,20 +114,25 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 
     private string PadResult(string s) => Pad(s, _resultLength);
     private string PadComment(string s) => Pad(s, _commentLength);
+    private string PadName(string s) => Pad(s, _nameLength);
     private static string Pad(string s, int width) => s.PadRight(width);
 
     private void PrintRow()
     {
-        var results = string.Join(" | ", _markups);
         Printer.CarriageReturn();
-        Printer.WriteMarkup($"| {_title} | {results} | {_commentMarkup} |");
+        var values = new List<string>();
+        values.Add(_title);
+        values.AddRange(_markups);
+        if (_nameLength > 0)
+            values.Add(_nameMarkup);
+        if (_commentLength > 0)
+            values.Add(_commentMarkup);
+        Printer.WriteMarkup($"| {string.Join(" | ", values)} |");
     }
 
     private string MarkupComment(string? comment) => comment is null
         ? PadComment(string.Empty)
-        : Printer.MarkupColor(PadComment(TruncateComment(comment)), Color.Yellow);
+        : Printer.MarkupColor(PadComment(comment), Color.Yellow);
 
-    private string TruncateComment(string fullComment) => fullComment.Length > _truncatedCommentLength
-        ? fullComment[.._truncatedCommentLength] + "..."
-        : fullComment;
+    private string MarkupName(string name) => Printer.MarkupColor(PadName(name), Color.DarkTurquoise);
 }

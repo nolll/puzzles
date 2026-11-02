@@ -21,7 +21,6 @@ public class Ece202602 : EverybodyEventPuzzle
 
     private static long SolveLine(string line)
     {
-
         var numbers = new HashSet<int>();
         var isSmaller = new HashSet<(int smaller, int larger)>();
         var comparisons = line.Split(' ');

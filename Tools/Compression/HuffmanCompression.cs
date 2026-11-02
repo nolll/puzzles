@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Pzl.Tools.Compression;
 
 public class HuffmanCompression
@@ -19,17 +17,7 @@ public class HuffmanCompression
         Decoding = GetDecoding();
     }
 
-    public string Encode(string input)
-    {
-        var s = new StringBuilder();
-
-        foreach (var c in input)
-        {
-            s.Append(Encoding[c.ToString()]);
-        }
-
-        return s.ToString();
-    }
+    public string Encode(string input) => string.Concat(input.Select(o => Encoding[o.ToString()]));
 
     public string Decode(string input)
     {
@@ -48,13 +36,12 @@ public class HuffmanCompression
         return result;
     }
 
-    private IList<Node> GetNodes()
-        => _charset.ToCharArray()
-                .GroupBy(o => o)
-                .Select(o => new Node(o.Key.ToString(), o.Count(), []))
-                .OrderBy(o => o.Weight)
-                .ThenBy(o => o.Key.First())
-                .ToList();
+    private IList<Node> GetNodes() => _charset.ToCharArray()
+        .GroupBy(o => o)
+        .Select(o => new Node(o.Key.ToString(), o.Count(), []))
+        .OrderBy(o => o.Weight)
+        .ThenBy(o => o.Key.First())
+        .ToList();
 
     private IList<Node> BuildTree()
     {
@@ -64,7 +51,7 @@ public class HuffmanCompression
             var children = list.Take(2).ToList();
             var first = children.First();
             var second = children.Last();
-            list = list.Skip(2).ToList();
+            list = [.. list.Skip(2)];
             var node = new Node(string.Concat(first.Key, second.Key), first.Weight + second.Weight, children);
             var firstIndexWithHigherWeight = list.FindIndex(o => o.Weight > node.Weight);
             if(firstIndexWithHigherWeight > -1)
@@ -99,8 +86,7 @@ public class HuffmanCompression
         return d;
     }
 
-    private IDictionary<string, string> GetDecoding() => 
-        Encoding.ToDictionary(k => k.Value, v => v.Key);
+    private IDictionary<string, string> GetDecoding() => Encoding.ToDictionary(k => k.Value, v => v.Key);
 
     public record Node(string Key, int Weight, List<Node> Children);
 }

@@ -5,7 +5,7 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Ece2026;
 
-[Name("")]
+[Name("The ISOlation")]
 public class Ece202603 : EverybodyEventPuzzle
 {
     [Puzzle("a78aa95f2c49631f8cf0f58c476b3bf8")]

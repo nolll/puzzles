@@ -15,11 +15,7 @@ public class PuzzleFilterTests
             new PlainPuzzleDefinitionInTest()
         };
 
-        var parameters = Parameters.Create([PuzzleTag.Slow]);
-        var filter = new PuzzleFilter(parameters);
-        var result = filter.Filter(puzzles).ToList();
-
-        result.Count.Should().Be(1);
+        new PuzzleFilter(Parameters.Create([PuzzleTag.Slow])).Filter(puzzles).ToList().Count.Should().Be(1);
     }
 
     [Fact]
@@ -30,10 +26,8 @@ public class PuzzleFilterTests
             new CommentedPuzzleDefinitionInTest(),
             new PlainPuzzleDefinitionInTest()
         };
-        
-        var parameters = Parameters.Create([PuzzleTag.Commented]);
-        var filter = new PuzzleFilter(parameters);
-        var result = filter.Filter(puzzles).ToList();
+
+        var result = new PuzzleFilter(Parameters.Create([PuzzleTag.Commented])).Filter(puzzles).ToList();
 
         result.Count.Should().Be(1);
         result.First().Comment.Should().Be("Comment");
@@ -48,10 +42,6 @@ public class PuzzleFilterTests
             new PlainPuzzleDefinitionInTest()
         };
 
-        var parameters = Parameters.Create([PuzzleTag.Rewrite]);
-        var filter = new PuzzleFilter(parameters);
-        var result = filter.Filter(puzzles).ToList();
-
-        result.Count.Should().Be(1);
+        new PuzzleFilter(Parameters.Create([PuzzleTag.Rewrite])).Filter(puzzles).ToList().Count.Should().Be(1);
     }
 }

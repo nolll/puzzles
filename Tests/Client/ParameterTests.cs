@@ -29,24 +29,14 @@ public class ParameterTests
     [Theory]
     [InlineData("--search foo")]
     [InlineData("-s foo")]
-    public void ParseSearch(string input)
-    {
-        var result = Parameters.Parse(input);
-
-        result.Query.Should().Be("foo");
-    }
+    public void ParseSearch(string input) => Parameters.Parse(input).Query.Should().Be("foo");
 
     [Theory]
     [InlineData("--help")]
     [InlineData("--help true")]
     [InlineData("-h")]
     [InlineData("-h true")]
-    public void ParseHelp(string input)
-    {
-        var result = Parameters.Parse(input);
-
-        result.ShowHelp.Should().BeTrue();
-    }
+    public void ParseHelp(string input) => Parameters.Parse(input).ShowHelp.Should().BeTrue();
 
     [Theory]
     [InlineData("--aaa", true)]
@@ -59,13 +49,8 @@ public class ParameterTests
     [InlineData("-a false", false)]
     [InlineData("-a bad", null)]
     [InlineData("-b", false)]
-    public void ParseBool(string input, bool? expected)
-    {
-        var parser = new ParameterParser(input.Split(' '));
-        var result = parser.GetBoolValue("-a", "--aaa");
-
-        result.Should().Be(expected);
-    }
+    public void ParseBool(string input, bool? expected) => 
+        new ParameterParser(input.Split(' ')).GetBoolValue("-a", "--aaa").Should().Be(expected);
 
     [Theory]
     [InlineData("--aaa", null)]
@@ -78,11 +63,6 @@ public class ParameterTests
     [InlineData("-a 2", 2)]
     [InlineData("-a bad", null)]
     [InlineData("-b", null)]
-    public void ParseInt(string input, int? expected)
-    {
-        var parser = new ParameterParser(input.Split(' '));
-        var result = parser.GetIntValue("-a", "--aaa");
-
-        result.Should().Be(expected);
-    }
+    public void ParseInt(string input, int? expected) => 
+        new ParameterParser(input.Split(' ')).GetIntValue("-a", "--aaa").Should().Be(expected);
 }

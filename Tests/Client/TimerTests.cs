@@ -6,24 +6,10 @@ namespace Tests.Client;
 public class TimerTests
 {
     [Fact]
-    public void Timer()
-    {
-        var startTime = DateTime.Parse("2020-02-02 20:20:20");
-        var endTime = DateTime.Parse("2020-02-02 20:20:21");
+    public void Timer() => new Timer(
+        DateTime.Parse("2020-02-02 20:20:20"),
+        new TimeProvider(DateTime.Parse("2020-02-02 20:20:21"))
+    ).FromStart.TotalMilliseconds.Should().Be(1_000);
 
-        var systemTime = new SystemTimeProviderForTest(endTime);
-        var timer = new Timer(startTime, systemTime);
-
-        timer.FromStart.TotalMilliseconds.Should().Be(1_000);
-    }
-
-    private class SystemTimeProviderForTest : ISystemTimeProvider
-    {
-        public DateTime Now { get; }
-
-        public SystemTimeProviderForTest(DateTime now)
-        {
-            Now = now;
-        }
-    }
+    private record TimeProvider(DateTime Now) : ISystemTimeProvider;
 }

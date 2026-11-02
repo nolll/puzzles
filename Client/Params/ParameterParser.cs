@@ -31,7 +31,7 @@ public class ParameterParser(IEnumerable<string> args)
         return target;
     }
 
-    public string[] GetListValue(params string[] keys) => 
+    public string[] GetListValue(params string[] keys) =>
         GetValue(keys)?.Split(',').Select(o => o.Trim()).Where(o => o.Length > 0).ToArray() ?? [];
 
     public string? GetValue(params string[] keys)
@@ -60,7 +60,7 @@ public class ParameterParser(IEnumerable<string> args)
             value = hasValue ? value : "";
             if (isKeyword)
                 dictionary.Add(item, value);
-            if (hasValue) 
+            if (hasValue)
                 i++;
         }
 

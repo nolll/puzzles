@@ -21,7 +21,7 @@ public class HelpPrinter
                                                       --tags codyssi,2025,15 (runs codyssi challenge 15 2025)
                                                       --tags ff,2025,3 (runs flipflop puzzle 3 2025)
                                                       --tags slow (runs slow puzzles)
-                                                      --tags comment (runs puzzles with a comment)
+                                                      --tags commented (runs puzzles with a comment)
                                                       --tags rewrite (runs puzzles that need a rewrite)
 
                                     -s    --search    search query. Searches titles, class names and comments.  

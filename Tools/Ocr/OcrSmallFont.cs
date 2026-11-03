@@ -22,29 +22,29 @@ public static class OcrSmallFont
         return s;
     }
 
-    public static char ReadLetter(string crtLetter)
+    public static char ReadLetter(string crtLetter) => ReadLetter(GetRows(crtLetter));
+
+    private static char ReadLetter(string[] rows) => rows[0] switch
     {
-        var rows = crtLetter.Split(LineBreaks.Single).Select(o => o.Trim().Replace(" ", ".")).ToList();
-        return rows[0] switch
-        {
-            "###.." when rows[5] == "###.." => 'B',
-            "###.." when rows[5] == "#...." => 'P',
-            "###.." => 'R',
-            ".##.." when rows[5] == ".###." => 'G',
-            ".##.." when rows[3] == "#...." => 'C',
-            ".##.." when rows[5] == ".##.." => 'O',
-            ".##.." => 'A',
-            "####." when rows[5] == "#...." => 'F',
-            "####." when rows[2] == "###.." => 'E',
-            "####." => 'Z',
-            "#..#." when rows[5] == ".##.." => 'U',
-            "#..#." when rows[2] == "##..." => 'K',
-            "#..#." => 'H',
-            "#...." => 'L',
-            "#...#" => 'Y',
-            ".###." => 'I',
-            "..##." => 'J',
-            _ => ' '
-        };
-    }
+        "###.." when rows[5] == "###.." => 'B',
+        "###.." when rows[5] == "#...." => 'P',
+        "###.." => 'R',
+        ".##.." when rows[5] == ".###." => 'G',
+        ".##.." when rows[3] == "#...." => 'C',
+        ".##.." when rows[5] == ".##.." => 'O',
+        ".##.." => 'A',
+        "####." when rows[5] == "#...." => 'F',
+        "####." when rows[2] == "###.." => 'E',
+        "####." => 'Z',
+        "#..#." when rows[5] == ".##.." => 'U',
+        "#..#." when rows[2] == "##..." => 'K',
+        "#..#." => 'H',
+        "#...." => 'L',
+        "#...#" => 'Y',
+        ".###." => 'I',
+        "..##." => 'J',
+        _ => ' '
+    };
+
+    private static string[] GetRows(string crtLetter) => [.. crtLetter.Split(LineBreaks.Single).Select(o => o.Trim().Replace(" ", "."))];
 }

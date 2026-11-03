@@ -9,8 +9,7 @@ public static class StringExtensions
     public static string ShiftLeft(this string s, int steps = 1) => Shift(s, -steps);
     public static string ShiftRight(this string s, int steps = 1) => Shift(s, steps);
 
-    public static bool IsPalindrome(this string s) => 
-        string.Concat(s.Reverse()) == s;
+    public static bool IsPalindrome(this string s) => string.Concat(s.Reverse()) == s;
 
     public static string ReverseString(this string s)
     {

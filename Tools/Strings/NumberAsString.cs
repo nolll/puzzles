@@ -2,14 +2,13 @@
 
 public class NumberAsString(int number)
 {
-    public override string ToString() =>
-        number.ToString().Length switch
-        {
-            4 => GetWordsForFourDigits(),
-            3 => GetWordsForThreeDigits(number),
-            2 => GetWordsForTwoDigits(number),
-            _ => GetWordsForOneDigit(number)
-        };
+    public override string ToString() => number.ToString().Length switch
+    {
+        4 => GetWordsForFourDigits(),
+        3 => GetWordsForThreeDigits(number),
+        2 => GetWordsForTwoDigits(number),
+        _ => GetWordsForOneDigit(number)
+    };
 
     private static string GetWordsForOneDigit(int n) => n switch
     {
@@ -38,21 +37,18 @@ public class NumberAsString(int number)
         return $"{tens}{singles}";
     }
 
-    private static string GetWordsForTens(int n)
+    private static string GetWordsForTens(int n) => n switch
     {
-        return n switch
-        {
-            2 => "twenty",
-            3 => "thirty",
-            4 => "forty",
-            5 => "fifty",
-            6 => "sixty",
-            7 => "seventy",
-            8 => "eighty",
-            9 => "ninety",
-            _ => throw new ArgumentException($"{n} is out of range")
-        };
-    }
+        2 => "twenty",
+        3 => "thirty",
+        4 => "forty",
+        5 => "fifty",
+        6 => "sixty",
+        7 => "seventy",
+        8 => "eighty",
+        9 => "ninety",
+        _ => throw new ArgumentException($"{n} is out of range")
+    };
 
     private string GetWordsForThreeDigits(int n)
     {
@@ -87,7 +83,5 @@ public class NumberAsString(int number)
     }
 
     private static string GetWordsForFourDigits() => "one thousand";
-
-    private static string GetWordsForHundreds(int n) => 
-        $"{GetWordsForOneDigit(n)} hundred";
+    private static string GetWordsForHundreds(int n) => $"{GetWordsForOneDigit(n)} hundred";
 }

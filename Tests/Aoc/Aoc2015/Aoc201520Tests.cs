@@ -54,6 +54,6 @@ public class Aoc201520Tests : PuzzleTest<Aoc201520>
     {
         var myResult = Sut.FindIntFactors(786_240).OrderBy(o => o).ToList();
         var internetResult = MathTools.GetFactors(786_240);
-        myResult.Count.Should().Be(internetResult.Count);
+        myResult.Count.Should().Be(internetResult.Count());
     }
 }

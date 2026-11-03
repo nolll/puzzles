@@ -67,6 +67,6 @@ public static class ArrayExtensions
     private static void AssertSize<T>(T[] srcArray, int size)
     {
         if (srcArray.Length < size)
-            throw new ArgumentException(nameof(srcArray));
+            throw new ArgumentException($"Array too short: {srcArray.Length} < {size}", nameof(srcArray));
     }
 }

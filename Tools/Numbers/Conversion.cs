@@ -31,12 +31,12 @@ public static class Conversion
         {
             foreach (var (letters, value) in RomanNumberSegments)
             {
-                if (input >= value)
-                {
-                    roman.Append(letters);
-                    input -= value;
-                    break;
-                }
+                if (input < value) 
+                    continue;
+                
+                roman.Append(letters);
+                input -= value;
+                break;
             }
         }
 

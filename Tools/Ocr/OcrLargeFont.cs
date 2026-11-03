@@ -1,3 +1,4 @@
+using System.Text;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Tools.Ocr;
@@ -10,30 +11,30 @@ public static class OcrLargeFont
         var rows = crtImage.Split(LineBreaks.Single).Select(o => o.Trim()).ToList();
         var stringLength = (int)Math.Ceiling((double)rows.First().Length / charWidth);
         rows = rows.Select(o => o.PadRight(stringLength * charWidth, '.')).ToList();
-        var s = "";
+        var sb = new StringBuilder();
 
         for (var i = 0; i < stringLength; i++)
         {
             var start = i * charWidth;
             var letter = string.Join(LineBreaks.Single, rows.Select(o => o.Substring(start, charWidth)));
-            s += ReadLetter(letter);
+            sb.Append(ReadLetter(letter));
         }
 
-        return s;
+        return sb.ToString();
     }
 
-    public static char ReadLetter(string crtLetter)
+    public static char ReadLetter(string crtLetter) => ReadLetter(GetRows(crtLetter));
+
+    private static char ReadLetter(string[] rows) => rows[0] switch
     {
-        var rows = crtLetter.Split(LineBreaks.Single).Select(o => o.Trim().Replace(" ", ".")).ToList();
-        return rows[0] switch
-        {
-            "#....#.." when rows[1] == "#...#..." => 'K',
-            "#....#.." => 'H',
-            "#####..." when rows[9] == "#......." => 'P',
-            "#####..." when rows[9] == "#####..." => 'B',
-            "#####..." => 'R',
-            ".####..." => 'G',
-            _ => ' '
-        };
-    }
+        "#....#.." when rows[1] == "#...#..." => 'K',
+        "#....#.." => 'H',
+        "#####..." when rows[9] == "#......." => 'P',
+        "#####..." when rows[9] == "#####..." => 'B',
+        "#####..." => 'R',
+        ".####..." => 'G',
+        _ => ' '
+    };
+    
+    private static string[] GetRows(string crtLetter) => [.. crtLetter.Split(LineBreaks.Single).Select(o => o.Trim().Replace(" ", "."))];
 }

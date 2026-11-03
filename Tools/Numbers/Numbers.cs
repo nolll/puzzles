@@ -9,14 +9,14 @@ public static class Numbers
 
     public static IEnumerable<int> FindPrimesBelow(int limit)
     {
-        var primes = new List<int> {2};
+        var primes = new List<int> { 2 };
 
         for (var i = 3; i < limit; i += 2)
         {
             var root = Math.Sqrt(i);
             var found = false;
             var count = primes.Count;
-            
+
             for (var j = 0; j < count; j++)
             {
                 var divisor = primes[j];
@@ -57,7 +57,7 @@ public static class Numbers
             if (n % i == 0)
                 return false;
         }
-        
+
         return true;
     }
 
@@ -93,17 +93,16 @@ public static class Numbers
     {
         for (var i = 1; i * i <= n; i++)
         {
-            if (n % i != 0) 
+            if (n % i != 0)
                 continue;
-            
+
             yield return i;
             if (i != n / i)
                 yield return n / i;
         }
     }
-    
-    public static IEnumerable<int> GetProperDivisors(int x) => 
-        GetAllDivisors(x).OrderBy(o => o).SkipLast(1);
+
+    public static IEnumerable<int> GetProperDivisors(int x) => GetAllDivisors(x).OrderBy(o => o).SkipLast(1);
 
     public static bool IsPandigital1Through9(long n)
     {
@@ -148,39 +147,34 @@ public static class Numbers
     public static long GetHexagonalNumber(long n) => n * (2 * n - 1);
     public static bool IsHexagonalNumber(long x) => (Math.Sqrt(8 * x + 1) + 1) % 4 == 0;
 
-    public static string[] DigitsFromString(string s) =>
-        [.. DigitRegex.Matches(s).Select(o => o.ToString())];
-    
-    public static int[] IntsFromString(string s) =>
-        [.. DigitsFromString(s).Select(int.Parse)];
+    public static string[] DigitsFromString(string s) => [.. DigitRegex.Matches(s).Select(o => o.ToString())];
+    public static int[] IntsFromString(string s) => [.. DigitsFromString(s).Select(int.Parse)];
+    public static long[] LongsFromString(string s) => [.. DigitsFromString(s).Select(long.Parse)];
 
-    public static long[] LongsFromString(string s) =>
-        [.. DigitsFromString(s).Select(long.Parse)];
-    
-    public static int Concat(int[] values) {
+    public static int Concat(int[] values)
+    {
         var num = values.Length;
         var total = 0;
-        for (var i = num - 1; i >= 0; i--) {
+        for (var i = num - 1; i >= 0; i--) 
             total += values[i] * (int)Math.Pow(10, NumDigits(total));
-        }
+
         return total;
     }
 
-    public static int NumDigits(int n) {
-        if (n == 0) return 0;
-        return 1 + (int) (Math.Log(n) / Math.Log(10));
-    }
-    
-    public static BigInteger DigitSum(BigInteger n) {
+    public static int NumDigits(int n) => n == 0 ? 0 : 1 + (int)(Math.Log(n) / Math.Log(10));
+
+    public static BigInteger DigitSum(BigInteger n)
+    {
         BigInteger sum = 0;
-        while (n != 0) {
+        while (n != 0)
+        {
             sum += n % 10;
             n /= 10;
         }
 
         return sum;
     }
-    
+
     public static long Fibonacci(long n) => Fibonacci(n, []);
 
     public static long Fibonacci(long n, Dictionary<long, long> cache)
@@ -191,7 +185,7 @@ public static class Numbers
         cache.Add(n, result);
         return result;
     }
-    
+
     public static BigInteger Fibonacci(BigInteger n) => Fibonacci(n, []);
 
     public static BigInteger Fibonacci(BigInteger n, Dictionary<BigInteger, BigInteger> cache)
@@ -202,7 +196,7 @@ public static class Numbers
         cache.Add(n, result);
         return result;
     }
-    
+
     public static long Factorial(long n)
     {
         var r = 1L;

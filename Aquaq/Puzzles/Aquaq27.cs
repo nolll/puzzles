@@ -11,7 +11,7 @@ public class Aquaq27 : AquaqPuzzle
     [Puzzle("c803fdd834b45081e38679f19c527374")]
     public int Solve(string input)
     {
-        var grid = GridBuilder.BuildCharGridWithoutTrim(input, Empty);
+        var grid = GridBuilder.BuildCharGrid(input, Empty);
         var coordsWithChars = grid.Coords.Where(o => grid.ReadValueAt(o) != Empty).ToHashSet();
         var adjacentDictionary = coordsWithChars
             .ToDictionary(k => k, v => grid.OrthogonalAdjacentCoordsTo(v).Where(coordsWithChars.Contains).ToList());

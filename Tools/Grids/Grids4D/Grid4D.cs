@@ -132,6 +132,7 @@ public class Grid4D<T> where T : struct
 
     public void WriteValue(T value) => WriteValueAt(Coord, value);
 
+    public void WriteValueAt(int x, int y, int z, int w, T value) => WriteValueAt(new Coord4D(x, y, z, w), value);
     public void WriteValueAt(Coord4D coord, T value)
     {
         if (coord.X < XMin)

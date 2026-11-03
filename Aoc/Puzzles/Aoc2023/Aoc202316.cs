@@ -22,20 +22,13 @@ public class Aoc202316 : AocPuzzle
         beams.AddRange(grid.Coords.Where(o => o.Y == grid.YMax).Select(o => new Beam(o, GridDirection.Up)));
         beams.AddRange(grid.Coords.Where(o => o.X == grid.XMin).Select(o => new Beam(o, GridDirection.Right)));
 
-        var max = 0;
-        foreach (var beam in beams)
-        {
-            var energy = EnergizedCount(grid, beam);
-            max = Math.Max(energy, max);
-        }
-
-        return max;
+        return beams.Select(beam => EnergizedCount(grid, beam)).Prepend(0).Max();
     }
 
     public int EnergizedCount(string s) => 
         EnergizedCount(GridBuilder.BuildCharGrid(s), new Beam(new Coord(0, 0), GridDirection.Right));
 
-    public static int EnergizedCount(Grid<char> grid, Beam start)
+    private static int EnergizedCount(Grid<char> grid, Beam start)
     {
         var lit = new HashSet<Coord>();
         var beams = new Queue<Beam>();
@@ -62,10 +55,8 @@ public class Aoc202316 : AocPuzzle
             {
                 grid.TurnTo(beam.Direction);
                 var moved = grid.TryMoveForward();
-                if (moved)
-                {
+                if (moved) 
                     beams.Enqueue(new Beam(grid.Coord, grid.Direction));
-                }
             }
 
             if (isSplitter)

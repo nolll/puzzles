@@ -10,7 +10,7 @@ public class Aquaq03 : AquaqPuzzle
     public int Solve(string input)
     {
         var sum = 0;
-        var grid = GridBuilder.BuildCharGridWithoutTrim(Room);
+        var grid = GridBuilder.BuildCharGrid(Room);
         grid.MoveTo(2, 0);
 
         foreach (var c in input)

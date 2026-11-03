@@ -10,7 +10,7 @@ public class AsciiKnotHasher
     private readonly int _lengthIndex;
     private readonly int[] _lengths;
 
-    public string Hash { get; }
+    private string Hash { get; }
 
     public static string GetHash(string input) => new AsciiKnotHasher(input).Hash;
     
@@ -39,48 +39,21 @@ public class AsciiKnotHasher
         Hash = GetHash(denseHash);
     }
 
-    private static string GetHash(IEnumerable<int> denseHash)
-    {
-        var hash = new StringBuilder();
-        foreach (var v in denseHash)
-        {
-            var str = v.ToString("X2").PadLeft(2);
-            hash.Append(str);
-        }
-        return hash.ToString().ToLower();
-    }
+    private static string GetHash(IEnumerable<int> denseHash) => 
+        string.Concat(denseHash.Select(v => v.ToString("X2").PadLeft(2)).ToList()).ToLower();
 
     private IEnumerable<int> GetReducedHash()
     {
         for (var i = 0; i < _list.Length; i += 16)
         {
-            yield return _list[i] ^ 
-                         _list[i + 1] ^ 
-                         _list[i + 2] ^ 
-                         _list[i + 3] ^ 
-                         _list[i + 4] ^ 
-                         _list[i + 5] ^ 
-                         _list[i + 6] ^ 
-                         _list[i + 7] ^
-                         _list[i + 8] ^ 
-                         _list[i + 9] ^ 
-                         _list[i + 10] ^ 
-                         _list[i + 11] ^ 
-                         _list[i + 12] ^ 
-                         _list[i + 13] ^ 
-                         _list[i + 14] ^ 
-                         _list[i + 15];
+            var value = 0;
+            for (var j = 0; j < 16; j++)
+                value ^= _list[i + j];
+            yield return value;
         }
     }
 
-    private static int[] FillList(int size)
-    {
-        var list = new int[size];
-        for (var i = 0; i < size; i++) 
-            list[i] = i;
-
-        return list;
-    }
+    private static int[] FillList(int size) => [.. Enumerable.Range(0, size).Select(o => o)];
 
     private void MoveForward()
     {
@@ -106,7 +79,7 @@ public class AsciiKnotHasher
         }
     }
 
-    private IList<int> ReadValues()
+    private int[] ReadValues()
     {
         var length = _lengths[_lengthIndex];
         var values = new int[length];

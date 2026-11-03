@@ -24,10 +24,11 @@ public static class Kruskal
             // If including this edge doesn't cause cycle,
             // include it in result and increment the index
             // of result for next edge
-            if (x != y) {
-                result[e++] = nextEdge;
-                Union(subsets, x, y);
-            }
+            if (x == y)
+                continue;
+            
+            result[e++] = nextEdge;
+            Union(subsets, x, y);
         }
         
         var minimumCost = 0L;

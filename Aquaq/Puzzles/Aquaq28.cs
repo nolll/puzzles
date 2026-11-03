@@ -19,7 +19,7 @@ public class Aquaq28 : AquaqPuzzle
     {
         var lines = input.Split(LineBreaks.Single).Skip(1).SkipLast(1).Select(o => o.Substring(1, o.Length - 2));
         var gridInput = string.Join(LineBreaks.Single, lines);
-        var grid = GridBuilder.BuildCharGridWithoutTrim(gridInput, Empty);
+        var grid = GridBuilder.BuildCharGrid(gridInput, Empty);
         var encrypted = string.Empty;
         
         foreach (var c in word)

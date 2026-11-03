@@ -5,7 +5,7 @@ public class CoordCompressor
     private readonly int _maxDistance;
     private readonly Dictionary<int, int> _xmap;
     private readonly Dictionary<int, int> _ymap;
-        
+
     public List<Coord> Compressed => field.Select(Compress).ToList();
     public (int x, int y) Compress((int x, int y) coord) => (_xmap[coord.x], _ymap[coord.y]);
     public Coord Compress(Coord coord) => new(_xmap[coord.X], _ymap[coord.Y]);
@@ -25,9 +25,9 @@ public class CoordCompressor
         m.Add(current, current);
         foreach (var (a, b) in values.Zip(values.Skip(1)))
         {
-            if(m.ContainsKey(b))
+            if (m.ContainsKey(b))
                 continue;
-            
+
             var distance = b - a;
             var needsShortening = distance > _maxDistance;
             current += needsShortening ? _maxDistance : distance;

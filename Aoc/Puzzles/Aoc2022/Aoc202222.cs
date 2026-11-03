@@ -11,7 +11,7 @@ public class Aoc202222 : AocPuzzle
     public int Part1(string input)
     {
         var groups = input.Split(LineBreaks.Double);
-        var grid = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
+        var grid = GridBuilder.BuildCharGrid(groups[0], ' ');
         grid.MoveTo(0, 0);
         grid.TurnTo(GridDirection.Right);
         while (grid.ReadValue() == ' ')
@@ -90,7 +90,7 @@ public class Aoc202222 : AocPuzzle
     public int Part2(string input)
     {
         var groups = input.Split(LineBreaks.Double);
-        var grid = GridBuilder.BuildCharGridWithoutTrim(groups[0], ' ');
+        var grid = GridBuilder.BuildCharGrid(groups[0], ' ');
         grid.MoveTo(0, 0);
         grid.TurnTo(GridDirection.Right);
 

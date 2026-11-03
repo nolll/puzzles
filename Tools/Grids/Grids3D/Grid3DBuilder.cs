@@ -16,8 +16,7 @@ public static class Grid3DBuilder
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {
-                grid.MoveTo(x, y, z);
-                grid.WriteValue(c);
+                grid.WriteValueAt(x, y, z, c);
                 x += 1;
             }
 

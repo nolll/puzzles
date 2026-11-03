@@ -134,6 +134,7 @@ public class Grid3D<T> where T : struct
     public T ReadValueAt(int x, int y, int z) => ReadValueAt(new Coord3D(x, y, z));
     public void WriteValue(T value) => WriteValueAt(Coord, value);
 
+    public void WriteValueAt(int x, int y, int z, T value) => WriteValueAt(new Coord3D(x, y, z), value);
     public void WriteValueAt(Coord3D coord, T value)
     {
         if (coord.X < XMin)
@@ -217,7 +218,7 @@ public class Grid3D<T> where T : struct
 
     private void ExtendLeft(Coord3D address)
     {
-        AddCols(-address.X, GridAddMode.Prepend);
+        PrependCols(-address.X);
         StartCoord = new Coord3D(StartCoord.X - address.X, StartCoord.Y, StartCoord.Z);
     }
 
@@ -225,7 +226,7 @@ public class Grid3D<T> where T : struct
     {
         var extendBy = address.X - (Width - 1);
         if (extendBy > 0)
-            AddCols(extendBy, GridAddMode.Append);
+            AppendCols(extendBy);
     }
 
     private void ExtendY(Coord3D address)
@@ -237,7 +238,7 @@ public class Grid3D<T> where T : struct
 
     private void ExtendTop(Coord3D address)
     {
-        AddRows(-address.Y, GridAddMode.Prepend);
+        PrependRows(-address.Y);
         StartCoord = new Coord3D(StartCoord.X, StartCoord.Y - address.Y, StartCoord.Z);
     }
 
@@ -245,7 +246,7 @@ public class Grid3D<T> where T : struct
     {
         var extendBy = address.Y - (Height - 1);
         if (extendBy > 0)
-            AddRows(extendBy, GridAddMode.Append);
+            AppendRows(extendBy);
     }
 
     private void ExtendZ(Coord3D address)
@@ -257,7 +258,7 @@ public class Grid3D<T> where T : struct
 
     private void ExtendClose(Coord3D address)
     {
-        AddLevels(-address.Z, GridAddMode.Prepend);
+        PrependLevels(-address.Z);
         StartCoord = new Coord3D(StartCoord.X, StartCoord.Y, StartCoord.Z - address.Z);
     }
 
@@ -265,42 +266,25 @@ public class Grid3D<T> where T : struct
     {
         var extendBy = address.Z - (Depth - 1);
         if (extendBy > 0)
-            AddLevels(extendBy, GridAddMode.Append);
+            AppendLevels(extendBy);
     }
 
     public void ExtendAllDirections(int steps = 1)
     {
-        AddCols(steps, GridAddMode.Prepend);
-        AddCols(steps, GridAddMode.Append);
-        AddRows(steps, GridAddMode.Prepend);
-        AddRows(steps, GridAddMode.Append);
-        AddLevels(steps, GridAddMode.Prepend);
-        AddLevels(steps, GridAddMode.Append);
+        PrependCols(steps);
+        AppendCols(steps);
+        PrependRows(steps);
+        AppendRows(steps);
+        PrependLevels(steps);
+        AppendLevels(steps);
     }
 
-    private void AddRows(int count, GridAddMode addMode)
-    {
-        if (addMode == GridAddMode.Prepend)
-            YMin -= count;
-        else
-            YMax += count;
-    }
-
-    private void AddCols(int count, GridAddMode addMode)
-    {
-        if (addMode == GridAddMode.Prepend)
-            XMin -= count;
-        else
-            XMax += count;
-    }
-
-    private void AddLevels(int count, GridAddMode addMode)
-    {
-        if (addMode == GridAddMode.Prepend)
-            ZMin -= count;
-        else
-            ZMax += count;
-    }
+    private void PrependRows(int count) => YMin -= count;
+    private void AppendRows(int count) => YMax += count;
+    private void PrependCols(int count) => XMin -= count;
+    private void AppendCols(int count) => XMax += count;
+    private void PrependLevels(int count) => ZMin -= count;
+    private void AppendLevels(int count) => ZMax += count;
 
     public void Clear() => _grid.Clear();
 }

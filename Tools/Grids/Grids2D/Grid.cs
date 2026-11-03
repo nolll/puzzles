@@ -58,12 +58,7 @@ public class Grid<T> where T : struct
         Direction = GridDirection.Up;
     }
 
-    private Grid(
-        Coord min, 
-        Coord max, 
-        IDictionary<Coord, T> values, 
-        T defaultValue = default)
-        : this(defaultValue)
+    private Grid(Coord min, Coord max, IDictionary<Coord, T> values, T defaultValue = default) : this(defaultValue)
     {
         _grid = values;
         XMin = min.X;
@@ -263,13 +258,13 @@ public class Grid<T> where T : struct
             ExtendRight(coord);
     }
 
-    private void ExtendLeft(Coord coord) => AddCols(XMin - coord.X, GridAddMode.Prepend);
+    private void ExtendLeft(Coord coord) => PrependCols(XMin - coord.X);
 
     private void ExtendRight(Coord coord)
     {
         var extendBy = coord.X - XMax;
         if (extendBy > 0)
-            AddCols(extendBy, GridAddMode.Append);
+            AppendCols(extendBy);
     }
 
     private void ExtendY(Coord coord)
@@ -280,30 +275,19 @@ public class Grid<T> where T : struct
             ExtendBottom(coord);
     }
 
-    private void ExtendTop(Coord coord) => AddRows(YMin - coord.Y, GridAddMode.Prepend);
+    private void ExtendTop(Coord coord) => PrependRows(YMin - coord.Y);
 
     private void ExtendBottom(Coord coord)
     {
         var extendBy = coord.Y - YMax;
         if (extendBy > 0)
-            AddRows(extendBy, GridAddMode.Append);
+            AppendRows(extendBy);
     }
 
-    private void AddRows(int numberOfRows, GridAddMode addMode)
-    {
-        if (addMode == GridAddMode.Prepend)
-            YMin -= numberOfRows;
-        else
-            YMax += numberOfRows;
-    }
-
-    private void AddCols(int numberOfCols, GridAddMode addMode)
-    {
-        if (addMode == GridAddMode.Prepend)
-            XMin -= numberOfCols;
-        else
-            XMax += numberOfCols;
-    }
+    private void PrependRows(int numberOfRows) => YMin -= numberOfRows;
+    private void AppendRows(int numberOfRows) => YMax += numberOfRows;
+    private void PrependCols(int numberOfCols) => XMin -= numberOfCols;
+    private void AppendCols(int numberOfCols) => XMax += numberOfCols;
 
     public void ExtendAllDirections(int steps = 1)
     {
@@ -313,10 +297,10 @@ public class Grid<T> where T : struct
         ExtendLeft(steps);
     }
 
-    public void ExtendUp(int steps = 1) => AddRows(steps, GridAddMode.Prepend);
-    public void ExtendRight(int steps = 1) => AddCols(steps, GridAddMode.Append);
-    public void ExtendDown(int steps = 1) => AddRows(steps, GridAddMode.Append);
-    public void ExtendLeft(int steps = 1) => AddCols(steps, GridAddMode.Prepend);
+    public void ExtendUp(int steps = 1) => PrependRows(steps);
+    public void ExtendRight(int steps = 1) => AppendCols(steps);
+    public void ExtendDown(int steps = 1) => AppendRows(steps);
+    public void ExtendLeft(int steps = 1) => PrependCols(steps);
 
     public string Print(bool markCurrentCoord = false, bool markStartCoord = false, T currentCoordMarker = default, T startCoordMarker = default, bool spacing = false)
     {
@@ -435,30 +419,23 @@ public class Grid<T> where T : struct
 
     public Grid<T> Slice(Coord from, int size) => Slice(from, size, size);
 
-    public Grid<T> Slice(Coord from, int width, int height) => 
-        Slice(from, new Coord(from.X + width - 1, from.Y + height - 1));
+    public Grid<T> Slice(Coord from, int width, int height) => Slice(from, new Coord(from.X + width - 1, from.Y + height - 1));
 
     public Grid<T> FlipVertical()
     {
         var values = _grid.ToDictionary(item => new Coord(item.Key.X, YMax - item.Key.Y), item => item.Value);
-        var min = new Coord(XMin, YMin);
-        var max = new Coord(XMax, YMax);
-        return new Grid<T>(min, max, values, DefaultValue);
+        return new Grid<T>(new Coord(XMin, YMin), new Coord(XMax, YMax), values, DefaultValue);
     }
 
     public Grid<T> FlipHorizontal()
     {
         var values = _grid.ToDictionary(item => new Coord(XMax - item.Key.X, item.Key.Y), item => item.Value);
-        var min = new Coord(XMin, YMin);
-        var max = new Coord(XMax, YMax);
-        return new Grid<T>(min, max, values, DefaultValue);
+        return new Grid<T>(new Coord(XMin, YMin), new Coord(XMax, YMax), values, DefaultValue);
     }
 
     public Grid<T> Transpose()
     {
         var values = _grid.ToDictionary(item => new Coord(item.Key.Y, item.Key.X), item => item.Value);
-        var min = new Coord(YMin, XMin);
-        var max = new Coord(YMax, XMax);
-        return new Grid<T>(min, max, values, DefaultValue);
+        return new Grid<T>(new Coord(YMin, XMin), new Coord(YMax, XMax), values, DefaultValue);
     }
 }

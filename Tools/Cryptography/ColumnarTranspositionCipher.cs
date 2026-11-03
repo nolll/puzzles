@@ -15,23 +15,15 @@ public static class ColumnarTranspositionCipher
         var s = input.PadRight(paddedLength);
 
         var rowList = new List<string>();
-        for (var i = 0; i < paddedLength; i += keywordLength)
-        {
+        for (var i = 0; i < paddedLength; i += keywordLength) 
             rowList.Add(s.Substring(i, keywordLength));
-        }
 
-        var grid = GridBuilder.BuildCharGridWithoutTrim(string.Join(LineBreaks.Single, rowList));
+        var grid = GridBuilder.BuildCharGrid(string.Join(LineBreaks.Single, rowList));
         var encryptedGrid = new Grid<char>(grid.Width, grid.Height, ' ');
         var pickingOrder = GetEncryptSelectionOrder(keyword);
 
-        for (var y = grid.YMin; y <= grid.YMax; y++)
-        {
-            for (var x = grid.XMin; x <= grid.XMax; x++) 
-            {
-                var c = grid.ReadValueAt(pickingOrder[x], y);
-                encryptedGrid.WriteValueAt(x, y, c);
-            }
-        }
+        foreach (var coord in grid.Coords) 
+            encryptedGrid.WriteValueAt(coord, grid.ReadValueAt(pickingOrder[coord.X], coord.Y));
         
         return string.Concat(encryptedGrid.Transpose().Values);
     }
@@ -45,34 +37,25 @@ public static class ColumnarTranspositionCipher
             rowList.Add(input.Substring(i, splitLength));
         }
 
-        var grid = GridBuilder.BuildCharGridWithoutTrim(string.Join(LineBreaks.Single, rowList))
-            .Transpose();
+        var grid = GridBuilder.BuildCharGrid(string.Join(LineBreaks.Single, rowList)).Transpose();
         var decryptedGrid = new Grid<char>(grid.Width, grid.Height, ' ');
         var pickingOrder = GetDecryptSelectionOrder(keyword);
 
-        for (var y = grid.YMin; y <= grid.YMax; y++)
-        {
-            for (var x = grid.XMin; x <= grid.XMax; x++)
-            {
-                var c = grid.ReadValueAt(pickingOrder[x], y);
-                decryptedGrid.WriteValueAt(x, y, c);
-            }
-        }
+        foreach (var coord in grid.Coords) 
+            decryptedGrid.WriteValueAt(coord, grid.ReadValueAt(pickingOrder[coord.X], coord.Y));
 
         return string.Concat(decryptedGrid.Values);
     }
 
-    public static int[] GetEncryptSelectionOrder(string input) =>
-        input.ToCharArray()
-            .Select((o, index) => (index, character: o))
-            .OrderBy(o => o.character)
-            .Select(o => o.index)
-            .ToArray();
+    public static int[] GetEncryptSelectionOrder(string input) => input.ToCharArray()
+        .Select((o, index) => (index, character: o))
+        .OrderBy(o => o.character)
+        .Select(o => o.index)
+        .ToArray();
 
-    public static int[] GetDecryptSelectionOrder(string input) =>
-        GetEncryptSelectionOrder(input)
-            .Select((o, index) => (order: o, index))
-            .OrderBy(o => o.order)
-            .Select(o => o.index)
-            .ToArray();
+    public static int[] GetDecryptSelectionOrder(string input) => GetEncryptSelectionOrder(input)
+        .Select((o, index) => (order: o, index))
+        .OrderBy(o => o.order)
+        .Select(o => o.index)
+        .ToArray();
 }

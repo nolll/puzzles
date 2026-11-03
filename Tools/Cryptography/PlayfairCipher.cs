@@ -19,26 +19,11 @@ public class PlayfairCipher
     {
         var distinct = _keyword.Replace(" ", "").ToCharArray().Distinct();
         var otherChars = CipherAlphabet.Where(o => !distinct.Contains(o));
-        var combined = distinct.Concat(otherChars);
-        return string.Concat(combined);
+        return string.Concat(distinct.Concat(otherChars));
     }
 
-    public string Encrypt(string input)
-    {
-        var prepared = PrepareForEncryption(input);
-        var bigrams = SplitIntoBigrams(prepared);
-        var encrypted = bigrams.Select(EncryptBigram);
-
-        return string.Concat(encrypted);
-    }
-
-    public string Decrypt(string input)
-    {
-        var bigrams = SplitIntoBigrams(input);
-        var decrypted = bigrams.Select(DecryptBigram);
-
-        return string.Concat(decrypted);
-    }
+    public string Encrypt(string input) => string.Concat(SplitIntoBigrams(PrepareForEncryption(input)).Select(EncryptBigram));
+    public string Decrypt(string input) => string.Concat(SplitIntoBigrams(input).Select(DecryptBigram));
 
     private string EncryptBigram(string input)
     {
@@ -122,32 +107,18 @@ public class PlayfairCipher
     private (char a, char b) CharsAtVerticalOffsetFrom((char a, char b) chars, int offset) 
         => (CharAtVerticalOffsetFrom(chars.a, offset), CharAtVerticalOffsetFrom(chars.b, offset));
 
-    private char CharAtVerticalOffsetFrom(char a, int offset)
-    {
-        var aPos = _board.IndexOf(a);
-        return _board[(aPos + offset * BoardSize + _board.Length) % _board.Length];
-    }
+    private char CharAtVerticalOffsetFrom(char a, int offset) => 
+        _board[(_board.IndexOf(a) + offset * BoardSize + _board.Length) % _board.Length];
 
     private static string PrepareForEncryption(string input)
     {
-        var prepared = $"{input}";
+        var prepared = CipherAlphabet.Aggregate($"{input}", (current, c) => current.Replace($"{c}{c}", $"{c}x{c}"));
 
-        prepared = CipherAlphabet.Aggregate(prepared, (current, c) => current.Replace($"{c}{c}", $"{c}x{c}"));
-
-        if (prepared.Length % 2 != 0)
-            prepared = $"{prepared}x";
-
-        return prepared;
+        return prepared.Length % 2 != 0
+            ? $"{prepared}x"
+            : prepared;
     }
 
-    private static IEnumerable<string> SplitIntoBigrams(string input)
-    {
-        var bigrams = new List<string>();
-        for (var i = 0; i < input.Length; i += 2)
-        {
-            bigrams.Add(input.Substring(i, 2));
-        }
-
-        return bigrams;
-    }
+    private static IEnumerable<string> SplitIntoBigrams(string input) => 
+        Enumerable.Sequence(0, input.Length - 2, 2).Select(i => input.Substring(i, 2));
 }

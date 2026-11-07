@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Numerics;
 using Pzl.Common;
 using Pzl.Tools.Lists;
 using Pzl.Tools.Numbers;
@@ -6,6 +7,7 @@ using Pzl.Tools.Strings;
 
 namespace Pzl.Everybody.Puzzles.Ece2026;
 
+// Thanks to Jonathan Paulson for the optimized part 3 solution
 [Name("The Sulphurprise")]
 public class Ece202609 : EverybodyEventPuzzle
 {
@@ -18,7 +20,7 @@ public class Ece202609 : EverybodyEventPuzzle
         {
             var (_, growth, limit) = Numbers.IntsFromString(line);
             var branch = new Branch(growth, limit, []);
-            
+
             var time = 0;
             while (branch.CanGrowBigger)
             {
@@ -31,33 +33,63 @@ public class Ece202609 : EverybodyEventPuzzle
 
         return total;
     }
-    
+
     [Puzzle("f3a92d07a4ebfef85261232435765f80")]
-    public int Part2(string input) => SolvePart2And3(input);
+    public BigInteger Part2(string input) => SolvePart2And3(input);
 
-    [Puzzle("")]
-    public int Part3(string input) => SolvePart2And3(input);
+    [Puzzle("c0eb6c1d709a7950e4b93831febc93bd")]
+    public BigInteger Part3(string input) => SolvePart2And3(input);
 
-    private int SolvePart2And3(string input)
+    private BigInteger SolvePart2And3(string input)
     {
         var lines = input.Split(LineBreaks.Single);
-        var total = 0;
+        var total = new BigInteger(0);
+        var cache = new Dictionary<(long, BigInteger, long), BigInteger>();
         foreach (var line in lines)
         {
-            var (_, growth, limit) = Numbers.IntsFromString(line);
-            var branch = new Branch(growth, limit, []);
-            
-            var time = 0;
-            while (branch.CanGrowMoreLeaves)
+            var (_, growth, limit) = Numbers.LongsFromString(line);
+
+            var lo = new BigInteger(0);
+            var hi = new BigInteger(1);
+            while (BranchesAfterTime(1, hi, growth, cache) + 1 < limit)
+                hi *= 2;
+
+            while (lo < hi)
             {
-                time++;
-                branch.Grow();
+                var mid = (lo + hi) / 2;
+                if (BranchesAfterTime(1, mid, growth, cache) + 1 >= limit)
+                    hi = mid;
+                else
+                    lo = mid + 1;
             }
 
-            total += time;
+            total += lo + 1;
         }
 
         return total;
+    }
+
+    private BigInteger BranchesAfterTime(long x, BigInteger t, long growth, Dictionary<(long, BigInteger, long), BigInteger> cache)
+    {
+        if (cache.TryGetValue((x, t, growth), out var cached))
+            return cached;
+
+        if (t <= 0)
+        {
+            cache.Add((x, t, growth), 0);
+            return 0;
+        }
+
+        var dt = growth - x;
+        if (t < dt)
+        {
+            cache.Add((x, t, growth), 0);
+            return 0;
+        }
+
+        var result = 1 + 2 * BranchesAfterTime(growth / 2, t - dt, growth, cache) + BranchesAfterTime(1, t - dt, growth, cache);
+        cache.Add((x, t, growth), result);
+        return result;
     }
 
     [DebuggerDisplay("{Size},{TotalSize}")]
@@ -66,11 +98,8 @@ public class Ece202609 : EverybodyEventPuzzle
         public int Size { get; set; } = size;
         private List<Branch> Children { get; set; } = children;
         public int TotalSize => Size + Children.Sum(o => o.TotalSize) + JointSize;
-        public int TotalLeafCount => LeafCount + Children.Sum(o => o.TotalLeafCount);
         public bool CanGrowBigger => TotalSize < limit;
-        public bool CanGrowMoreLeaves => TotalLeafCount < limit;
         private int JointSize => Children.Count > 0 ? 1 : 0;
-        private int LeafCount => Children.Count > 0 ? 0 : 1;
 
         public void Grow()
         {
@@ -83,7 +112,7 @@ public class Ece202609 : EverybodyEventPuzzle
                 child.Grow();
             }
         }
-        
+
         private void Split()
         {
             Size /= 2;

@@ -27,12 +27,4 @@ public class Ece202609Tests : PuzzleTest<Ece202609>
 
         Sut.Part2(input).Should().Be(42);
     }
-
-    [Fact]
-    public void Part3()
-    {
-        const string input = "";
-
-        Sut.Part3(input).Should().Be(0);
-    }
 }

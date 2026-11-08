@@ -4,9 +4,9 @@ using Pzl.Common;
 
 namespace Pzl.Client.Running.Runners;
 
-public class PuzzleFunction(Puzzle puzzle, MethodInfo method, object[] passedParams, string? hash)
+public class PuzzleFunction(MethodInfo method, object[] passedParams, string? hash)
 {
-    public PuzzleResult Invoke()
+    public PuzzleResult Invoke(Puzzle puzzle)
     {
         var parameters = AddOptionalParameters(method, passedParams);
         var result = method.Invoke(puzzle, parameters);

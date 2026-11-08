@@ -5,13 +5,8 @@ namespace Pzl.Client.Running.Runners;
 
 public class PuzzleFactory(FileReader fileReader)
 {
-    public PuzzleInstance CreateInstance(PuzzleDefinition definition)
+    public PuzzleFunction[] GetFunctions(PuzzleDefinition definition)
     {
-        var ctor = definition.Type.GetConstructors().First();
-
-        if (ctor.Invoke([]) is not Puzzle puzzle)
-            throw new Exception($"Could not create puzzle: {definition.Type}");
-        
         var methods = GetPuzzleFuncs(definition);
         var inputs = fileReader.ReadInputs(definition);
 
@@ -31,12 +26,15 @@ public class PuzzleFactory(FileReader fileReader)
                     parameters = [.. inputs, additionalInput];
             }
 
-            var func = new PuzzleFunction(puzzle, method, parameters, GetHash(method));
+            var func = new PuzzleFunction(method, parameters, GetHash(method));
             funcs.Add(func);
         }
 
-        return new PuzzleInstance(puzzle, funcs.ToArray());
+        return funcs.ToArray();
     }
+    
+    public Puzzle CreateInstance(PuzzleDefinition definition) => 
+        definition.Type.GetConstructors().First().Invoke([]) as Puzzle ?? throw new Exception($"Could not create puzzle: {definition.Type}");
 
     public static MethodInfo[] GetPuzzleFuncs(PuzzleDefinition definition) => definition.Type.GetMethods()
         .Where(IsPuzzleFunc)

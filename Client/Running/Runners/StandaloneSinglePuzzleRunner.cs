@@ -12,7 +12,7 @@ namespace Pzl.Client.Running.Runners;
 public class StandaloneSinglePuzzleRunner(
     PuzzleFactory puzzleFactory,
     ResultVerifier resultVerifier,
-    PuzzleDefinition puzzle,
+    PuzzleDefinition puzzleDefinition,
     RunMode runMode)
     : SinglePuzzleRunner
 {
@@ -27,16 +27,17 @@ public class StandaloneSinglePuzzleRunner(
     private void RunStandardMode()
     {
         Printer.HideCursor();
-        WriteHeader(puzzle);
+        WriteHeader(puzzleDefinition);
         
-        var instance = puzzleFactory.CreateInstance(puzzle);
+        var funcs = puzzleFactory.GetFunctions(puzzleDefinition);
         
-        for (var i = 0; i < instance.Funcs.Length; i++)
+        for (var i = 0; i < funcs.Length; i++)
         {
-            var func = instance.Funcs[i];
+            var puzzle = puzzleFactory.CreateInstance(puzzleDefinition);
+            var func = funcs[i];
             
             Printer.WriteLine();
-            RunAndPrintPuzzleResult(i + 1, func);
+            RunAndPrintPuzzleResult(i + 1, puzzle, func);
         }
 
         Printer.ShowCursor();
@@ -44,12 +45,13 @@ public class StandaloneSinglePuzzleRunner(
 
     private void RunDebugMode()
     {
-        WriteHeader(puzzle);
-        var instance = puzzleFactory.CreateInstance(puzzle);
+        WriteHeader(puzzleDefinition);
+        var funcs = puzzleFactory.GetFunctions(puzzleDefinition);
         
-        foreach (var func in instance.Funcs)
+        foreach (var func in funcs)
         {
-            var result = func.Invoke();
+            var instance = puzzleFactory.CreateInstance(puzzleDefinition);
+            var result = func.Invoke(instance);
 
             Printer.WriteLine(result.Answer);
         }
@@ -67,20 +69,20 @@ public class StandaloneSinglePuzzleRunner(
             Printer.WriteMarkupLine(Printer.MarkupColor(puzzle.Comment, Color.Yellow));
     }
     
-    private void RunAndPrintPuzzleResult(int puzzleIndex, PuzzleFunction func)
+    private void RunAndPrintPuzzleResult(int puzzleIndex, Puzzle puzzle, PuzzleFunction func)
     {
-        var result = RunPuzzle(puzzleIndex, func);
+        var result = RunPuzzle(puzzleIndex, puzzle, func);
         Printer.WriteLine();
         WriteAnswer(result);
     }
     
-    private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, PuzzleFunction func)
+    private VerifiedPuzzleResult RunPuzzle(int puzzleIndex, Puzzle puzzle, PuzzleFunction func)
     {
         PuzzleResult? result = null;
         PrintTime(puzzleIndex);
         var timer = new Timer();
         
-        var task = Task.Run(() => result = func.Invoke());
+        var task = Task.Run(() => result = func.Invoke(puzzle));
         
         while (!task.IsCompleted)
         {

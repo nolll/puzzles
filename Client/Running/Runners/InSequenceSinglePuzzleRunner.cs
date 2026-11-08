@@ -24,7 +24,7 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 
     public InSequenceSinglePuzzleRunner(
         PuzzleFactory puzzleFactory,
-        PuzzleDefinition puzzle,
+        PuzzleDefinition puzzleDefinition,
         TimeSpan timeoutTimespan,
         ResultVerifier resultVerifier,
         int titleWidth,
@@ -34,15 +34,15 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
         int maxFuncCount)
     {
         _puzzleFactory = puzzleFactory;
-        _definition = puzzle;
+        _definition = puzzleDefinition;
         _timeoutTimespan = timeoutTimespan;
         _resultVerifier = resultVerifier;
         _resultLength = resultWidth;
         _commentLength = commentWidth;
         _nameLength = nameWidth;
-        _title = puzzle.ListTitle.PadRight(titleWidth);
-        _commentMarkup = MarkupComment(puzzle.Comment);
-        _nameMarkup = MarkupName(puzzle.Name);
+        _title = puzzleDefinition.ListTitle.PadRight(titleWidth);
+        _commentMarkup = MarkupComment(puzzleDefinition.Comment);
+        _nameMarkup = MarkupName(puzzleDefinition.Name);
 
         _markups = new string[maxFuncCount];
         for (var i = 0; i < maxFuncCount; i++)
@@ -54,12 +54,13 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
     public void Run()
     {
         PrintRow();
-        var instance = _puzzleFactory.CreateInstance(_definition);
-
-        for (var i = 0; i < instance.Funcs.Length; i++)
+        var funcs = _puzzleFactory.GetFunctions(_definition);
+        
+        for (var i = 0; i < funcs.Length; i++)
         {
-            var func = instance.Funcs[i];
-            RunPart(func.Invoke, i);
+            var puzzle = _puzzleFactory.CreateInstance(_definition);
+            var func = funcs[i];
+            RunPart(() => func.Invoke(puzzle), i);
         }
 
         Printer.WriteLine();
@@ -99,16 +100,11 @@ public class InSequenceSinglePuzzleRunner : SinglePuzzleRunner
 
     private string MarkupTime(TimeSpan time, ResultStatus status) => status switch
     {
-        ResultStatus.Correct =>
-            Printer.MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Green),
-        ResultStatus.Failed or ResultStatus.Wrong =>
-            Printer.MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red),
-        ResultStatus.Missing =>
-            Printer.MarkupColor(PadResult(""), Color.Grey),
-        ResultStatus.Timeout =>
-            Printer.MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
-        ResultStatus.Completed or ResultStatus.Unverified =>
-            Printer.MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Yellow),
+        ResultStatus.Correct => Printer.MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Green),
+        ResultStatus.Failed or ResultStatus.Wrong => Printer.MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Red),
+        ResultStatus.Missing => Printer.MarkupColor(PadResult(""), Color.Grey),
+        ResultStatus.Timeout => Printer.MarkupColor(PadResult($">{Formatter.FormatTime(_timeoutTimespan, 0)}"), Color.Red),
+        ResultStatus.Completed or ResultStatus.Unverified => Printer.MarkupColor(PadResult(Formatter.FormatTime(time)), Color.Yellow),
         _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
     };
 

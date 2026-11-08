@@ -4,6 +4,8 @@ using Pzl.Tools.Grids.Grids2d;
 namespace Pzl.Everybody.Puzzles.Ece2026;
 
 [Name("The Cartograffity")]
+[NeedsRewrite]
+[Comment("The test for part2 is failing. Real input works though")]
 public class Ece202605 : EverybodyEventPuzzle
 {
     private const char Land = '#';

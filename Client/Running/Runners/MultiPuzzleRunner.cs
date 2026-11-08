@@ -34,14 +34,14 @@ public class MultiPuzzleRunner
         var maxCommentWidth = _definitions.Max(o => o.Comment?.Length ?? 0);
 
         var availableWidth = windowWidth - usedWidth;
-        if (maxNameWidth + DividerWidth <= availableWidth)
+        if (maxNameWidth > 0 && maxNameWidth + DividerWidth <= availableWidth)
         {
             _nameWidth = maxNameWidth;
             usedWidth += _nameWidth + DividerWidth;
         }
         
         availableWidth = windowWidth - usedWidth;
-        if (maxCommentWidth + DividerWidth <= availableWidth)
+        if (maxCommentWidth > 0 && maxCommentWidth + DividerWidth <= availableWidth)
         {
             _commentWidth = maxCommentWidth;
             usedWidth += _commentWidth + DividerWidth;

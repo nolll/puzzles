@@ -27,9 +27,21 @@ public class Ece202610Tests : PuzzleTest<Ece202610>
     [Fact]
     public void Part2()
     {
-        const string input = "";
+        const string input = """
+                             ###########
+                             #####.#####
+                             ###.....###
+                             ##.......##
+                             ##.>>.<<.##
+                             #v...>...v#
+                             ##...v...##
+                             ##.......##
+                             ###.....###
+                             #####.#####
+                             ###########
+                             """;
 
-        Sut.Part2(input).Should().Be(0);
+        Sut.Part2(input, 10).Should().Be(53);
     }
 
     [Fact]

@@ -24,7 +24,7 @@ public record GridDirection(char Name, int X, int Y)
         _ => Left
     };
     
-    public GridDirection Opposite => Name switch
+    public GridDirection TurnAround() => Name switch
     {
         DirectionName.Up => Down,
         DirectionName.Right => Left,

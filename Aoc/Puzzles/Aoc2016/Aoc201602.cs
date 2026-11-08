@@ -73,7 +73,7 @@ public class Aoc201602 : AocPuzzle
         var dir = GetDirection(direction);
         buttons.TryMove(dir);
         if (buttons.ReadValue() == '.')
-            buttons.Move(dir.Opposite);
+            buttons.Move(dir.TurnAround());
     }
 
     private static Grid<char> BuildPart2ButtonGrid()

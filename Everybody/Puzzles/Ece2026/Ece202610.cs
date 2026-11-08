@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using Pzl.Common;
 using Pzl.Tools.Grids.Grids2d;
 
@@ -19,24 +18,13 @@ public class Ece202610 : EverybodyEventPuzzle
     }
 
     [Puzzle("7e09ad37dfd834287b97159cd2439fcc")]
-    public int Part2(string input)
-    {
-        var (ghosts, walls) = Parse(input);
-
-        var rounds = 0;
-        while (ghosts.Count > 0)
-        {
-            RunRound(ghosts, walls, 10_000);
-            rounds++;
-        }
-
-        return rounds;
-    }
+    public long Part2(string input) => SolvePart2And3(input, 10_000);
 
     [Puzzle("c6f1451be21edd9fc4df9e17bc8f3bbd")]
-    public long Part3(string input)
+    public long Part3(string input) => SolvePart2And3(input, 1_000_000_000_000);
+
+    private long SolvePart2And3(string input, long limit)
     {
-        const long limit = 1_000_000_000_000;
         var (ghosts, walls) = Parse(input);
 
         var round = 0L;
@@ -45,37 +33,24 @@ public class Ece202610 : EverybodyEventPuzzle
         {
             RunRound(ghosts, walls, limit);
             var key = string.Join(',', ghosts.Select(o => o.ToString()));
-            var ghostCollisions = ghosts.ToDictionary(k => k.Id, k => k.Collisions);
+            var collisions = ghosts.ToDictionary(k => k.Id, k => k.Collisions);
 
-            if (!seen.TryAdd(key, (round, ghostCollisions)))
+            if (!seen.TryAdd(key, (round, collisions)))
             {
-                var (lastRound, lastCollitions) = seen[key];
+                var (lastRound, savedCollisions) = seen[key];
                 var roundsPerStep = round - lastRound;
-                var steps = long.MaxValue;
+                var steps = ghosts.Select(o => (limit - o.Collisions) / (collisions[o.Id] - savedCollisions[o.Id]))
+                    .Prepend(long.MaxValue)
+                    .Min();
 
-                foreach (var ghost in ghosts)
-                {
-                    var currentCollisions = ghostCollisions[ghost.Id];
-                    var lastCollisions = lastCollitions[ghost.Id];
-                    var diff = currentCollisions - lastCollisions;
-                    var distanceLeft = limit - ghost.Collisions;
-
-                    steps = Math.Min(steps, distanceLeft / diff);
-                }
-
-                // We skip to much in the last step without this
+                // We skip to much in the last step without this. Can't figure out why
                 if (steps > 1)
                     steps--;
 
+                foreach (var ghost in ghosts) 
+                    ghost.Collisions += (collisions[ghost.Id] - savedCollisions[ghost.Id]) * steps;
+                
                 round += roundsPerStep * steps;
-
-                foreach (var ghost in ghosts)
-                {
-                    var currentCollisions = ghostCollisions[ghost.Id];
-                    var lastCollisions = lastCollitions[ghost.Id];
-                    var diff = currentCollisions - lastCollisions;
-                    ghost.Collisions += diff * steps;
-                }
             }
 
             round++;

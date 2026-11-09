@@ -51,17 +51,18 @@ public class Ece202415 : EverybodyEventPuzzle
             foreach (var (dr, dc) in _diffs)
             {
                 var rr = r + dr;
-                var cc = c + dc;
-                var v = grid[r][c];
-
-                if (rr < 0 || rr >= height || cc < 0 || cc >= width || v is '#' or '~')
+                if (rr < 0 || rr >= height)
                     continue;
                 
-                var newFound = v != '.'
-                    ? bitstate.MarkValue(found, v)
-                    : found;
+                var cc = c + dc;
+                if (cc < 0 || cc >= width)
+                    continue;
+                
+                var v = grid[r][c];
+                if (v is '#' or '~')
+                    continue;
 
-                q.Enqueue((d + 1, rr, cc, newFound));
+                q.Enqueue((d + 1, rr, cc, v != '.' ? bitstate.MarkValue(found, v) : found));
             }
         }
 

@@ -4,8 +4,6 @@ using Pzl.Tools.Grids.Grids2d;
 namespace Pzl.Everybody.Puzzles.Ece2026;
 
 [Name("The Cartograffity")]
-[NeedsRewrite]
-[Comment("The test for part2 is failing. Real input works though")]
 public class Ece202605 : EverybodyEventPuzzle
 {
     private const char Land = '#';
@@ -45,8 +43,8 @@ public class Ece202605 : EverybodyEventPuzzle
     {
         var inputGrid = GridBuilder.BuildCharGrid(input);
         var land = new Grid<char>(inputGrid.Width, inputGrid.Height, Water);
-        var adjCoords = BuildAdjacentCache(land);
         land.ExtendAllDirections();
+        var adjCoords = BuildAdjacentCache(land);
         return (land, inputGrid, adjCoords);
     }
 

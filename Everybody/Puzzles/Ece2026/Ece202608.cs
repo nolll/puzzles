@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Grids;
 using Pzl.Tools.Grids.Grids2d;
 
 namespace Pzl.Everybody.Puzzles.Ece2026;
@@ -11,7 +12,7 @@ public class Ece202608 : EverybodyEventPuzzle
     {
         var trees = GetTrees(input);
         var startTrees = GetStartTrees(CheckUpLeft, trees);
-        var (energy, _) = RunRound(trees, startTrees, MoveDownRight, false);
+        var (energy, _) = RunRound(trees, startTrees, HexagonalGrid.DownRight, false);
 
         return energy;
     }
@@ -127,34 +128,20 @@ public class Ece202608 : EverybodyEventPuzzle
             .ToDictionary(k => k.Coord, v => int.Parse(v.Height.ToString()));
     }
 
-    private static bool CheckUpRight(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(UpRight(coord));
-    private static bool CheckRight(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(Right(coord));
-    private static bool CheckDownRight(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(DownRight(coord));
-    private static bool CheckDownLeft(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(DownLeft(coord));
-    private static bool CheckLeft(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(Left(coord));
-    private static bool CheckUpLeft(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(UpLeft(coord));
-
-    private static Coord MoveUpRight(Coord coord) => UpRight(coord);
-    private static Coord MoveRight(Coord coord) => Right(coord);
-    private static Coord MoveDownRight(Coord coord) => DownRight(coord);
-    private static Coord MoveDownLeft(Coord coord) => DownLeft(coord);
-    private static Coord MoveLeft(Coord coord) => Left(coord);
-    private static Coord MoveUpLeft(Coord coord) => UpLeft(coord);
-
-    private static Coord UpLeft(Coord coord) => coord.Add(-1, -1);
-    private static Coord UpRight(Coord coord) => coord.Add(1, -1);
-    private static Coord Right(Coord coord) => coord.Add(2, 0);
-    private static Coord DownRight(Coord coord) => coord.Add(1, 1);
-    private static Coord DownLeft(Coord coord) => coord.Add(-1, 1);
-    private static Coord Left(Coord coord) => coord.Add(-2, 0);
+    private static bool CheckUpRight(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(HexagonalGrid.UpRight(coord));
+    private static bool CheckRight(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(HexagonalGrid.Right(coord));
+    private static bool CheckDownRight(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(HexagonalGrid.DownRight(coord));
+    private static bool CheckDownLeft(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(HexagonalGrid.DownLeft(coord));
+    private static bool CheckLeft(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(HexagonalGrid.Left(coord));
+    private static bool CheckUpLeft(Dictionary<Coord, int> trees, Coord coord) => !trees.ContainsKey(HexagonalGrid.UpLeft(coord));
 
     private static List<(Func<Coord, Coord>, IEnumerable<Coord>)> GetDirections(Dictionary<Coord, int> trees) =>
     [
-        (MoveDownRight, GetStartTrees(CheckUpLeft, trees)),
-        (MoveDownLeft, GetStartTrees(CheckUpRight, trees)),
-        (MoveLeft, GetStartTrees(CheckRight, trees)),
-        (MoveUpLeft, GetStartTrees(CheckDownRight, trees)),
-        (MoveUpRight, GetStartTrees(CheckDownLeft, trees)),
-        (MoveRight, GetStartTrees(CheckLeft, trees))
+        (HexagonalGrid.DownRight, GetStartTrees(CheckUpLeft, trees)),
+        (HexagonalGrid.DownLeft, GetStartTrees(CheckUpRight, trees)),
+        (HexagonalGrid.Left, GetStartTrees(CheckRight, trees)),
+        (HexagonalGrid.UpLeft, GetStartTrees(CheckDownRight, trees)),
+        (HexagonalGrid.UpRight, GetStartTrees(CheckDownLeft, trees)),
+        (HexagonalGrid.Right, GetStartTrees(CheckLeft, trees))
     ];
 }

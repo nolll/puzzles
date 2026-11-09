@@ -4,6 +4,8 @@ using Pzl.Tools.Grids.Grids2d;
 namespace Pzl.Aoc.Puzzles.Aoc2017;
 
 [Name("Hex Ed")]
+[NeedsRewrite]
+[Comment("This could use the HexagonalGrid, but the problem needs to be rotated 90 degrees")]
 public class Aoc201711 : AocPuzzle
 {
     [Puzzle("b7c04ecac2d0150916a741834019f8ec")]

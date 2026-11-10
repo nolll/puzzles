@@ -20,9 +20,14 @@ public class Ece202611Tests : PuzzleTest<Ece202611>
     [Fact]
     public void Part2()
     {
-        const string input = "";
+        const string input = """
+                             portals: 10
+                             
+                             5 10
+                             2 7
+                             """;
 
-        Sut.Part2(input).Should().Be(0);
+        Sut.Part2(input).Should().Be(6);
     }
 
     [Fact]

@@ -18,6 +18,6 @@ public class PermutationGeneratorTests
             [3, 2, 1]
         ];
         
-        ListAssert.IsEquivalent(result, expected);
+        result.Should().BeEquivalentTo(expected);
     }
 }

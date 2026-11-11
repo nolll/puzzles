@@ -111,4 +111,13 @@ public class CombinationGeneratorTests
 
         ListAssert.IsEquivalent(result, expected);
     }
+    
+    [Fact]
+    public void GetGroupsOfSize()
+    {
+        var result = CombinationGenerator.GetGroupsOfSize([1, 2, 3, 4, 5, 6, 7, 8], 2).ToList();
+        result.Count.Should().Be(105);
+        result.First().Count.Should().Be(4);
+        result.First().First().Count.Should().Be(2);
+    }
 }

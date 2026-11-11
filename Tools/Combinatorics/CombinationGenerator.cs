@@ -95,4 +95,25 @@ public static class CombinationGenerator
                 select accseq.Concat([item])              
         );
     }
+    
+    public static IEnumerable<List<List<T>>> GetGroupsOfSize<T>(List<T> items, int groupSize)
+    {
+        if (items.Count == 0)
+        {
+            yield return [];
+            yield break;
+        }
+        
+        var first = items[0];
+        var rest = items.Skip(1).ToList();
+        
+        foreach (var others in GetCombinationsFixedSize(rest, groupSize - 1))
+        {
+            List<T> currentGroup = [first, ..others];
+            var remaining = rest.Where(x => !others.Contains(x)).ToList();
+
+            foreach (var subGrouping in GetGroupsOfSize(remaining, groupSize))
+                yield return [currentGroup, .. subGrouping];
+        }
+    }
 }

@@ -22,6 +22,21 @@ public static class Graph
 
         return nodes;
     }
+    
+    public static Dictionary<string, List<string>> GetNeighbors(IEnumerable<GraphEdge> edges)
+    {
+        var adj = new Dictionary<string, List<string>>();
+
+        foreach (var edge in edges)
+        {
+            if (!adj.ContainsKey(edge.From)) 
+                adj[edge.From] = [];
+
+            adj[edge.From].Add(edge.To);
+        }
+
+        return adj;
+    }
 
     public static List<Dictionary<string, GraphNode>> GetConnectedComponents(Dictionary<string, GraphNode> nodes)
     {

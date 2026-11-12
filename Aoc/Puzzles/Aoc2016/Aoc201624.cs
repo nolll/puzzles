@@ -17,7 +17,7 @@ public class Aoc201624 : AocPuzzle
     public int Solve(string input, bool goBackToStartWhenDone)
     {
         var (locations, grid, robot) = Init(input);
-        var edges = GraphEdgeBuilder.GetEdges(grid).ToList();
+        var edges = grid.GetEdges().ToList();
         var paths = MapPaths(edges, locations, robot);
         return FindShortestPath(edges, locations, paths, robot, [], goBackToStartWhenDone);
     }

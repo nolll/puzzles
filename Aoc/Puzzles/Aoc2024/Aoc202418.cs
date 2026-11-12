@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Graphs;
 using Pzl.Tools.Grids.Grids2d;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
@@ -33,7 +34,8 @@ public class Aoc202418 : AocPuzzle
         var start = new Coord();
         var end = new Coord(grid.XMax, grid.YMax);
 
-        return PathFinder.ShortestPathTo(grid, start, end).Count();
+        var edges = grid.GetNeighbors();
+        return Bfs.BestCost(edges, start.Id, end.Id);
     }
 
     public string Part2(string input, int width, int height)
@@ -65,6 +67,7 @@ public class Aoc202418 : AocPuzzle
     {
         var m = grid.Clone();
         m.WriteValueAt(coords.Take(n), Wall);
-        return PathFinder.ShortestPathTo(m, start, end).Any();
+        var neighbors = m.GetNeighbors();
+        return Bfs.BestCost(neighbors, start.Id, end.Id) != -1;
     }
 }

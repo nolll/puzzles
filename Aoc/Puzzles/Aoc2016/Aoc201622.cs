@@ -81,7 +81,7 @@ public class Aoc201622 : AocPuzzle
         var topLeft = new Coord();
         var topRight = new Coord(grid.Width - 1, 0);
         var goal = new Coord(topRight.X - 1, topRight.Y);
-        var edges = GraphEdgeBuilder.GetEdges(grid).ToList();
+        var edges = grid.GetEdges().ToList();
         var distance1 = Bfs.BestCost(edges, startAddress.Id, goal.Id);
         var distance2 = Bfs.BestCost(edges, goal.Id, topLeft.Id);
         return distance1 + distance2 * 5 + 1;

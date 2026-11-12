@@ -17,7 +17,7 @@ public class Aoc201613 : AocPuzzle
     public int StepCountToTarget(int width, int height, int secretNumber, int targetX, int targetY)
     {
         var grid = BuildGrid(width, height, secretNumber);
-        var edges = GraphEdgeBuilder.GetEdges(grid).ToList();
+        var edges = grid.GetEdges().ToList();
         return Bfs.BestCost(edges, new Coord(1, 1).Id, new Coord(targetX, targetY).Id);
     }
 

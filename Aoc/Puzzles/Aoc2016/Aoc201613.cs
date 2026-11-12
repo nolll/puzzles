@@ -1,5 +1,7 @@
 using Pzl.Common;
+using Pzl.Tools.Graphs;
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.HashSets;
 
 namespace Pzl.Aoc.Puzzles.Aoc2016;
 
@@ -15,7 +17,8 @@ public class Aoc201613 : AocPuzzle
     public int StepCountToTarget(int width, int height, int secretNumber, int targetX, int targetY)
     {
         var grid = BuildGrid(width, height, secretNumber);
-        return PathFinder.ShortestPathTo(grid, new Coord(1, 1), new Coord(targetX, targetY)).Count();
+        var edges = GraphEdgeBuilder.GetEdges(grid).ToList();
+        return Bfs.BestCost(edges, new Coord(1, 1).Id, new Coord(targetX, targetY).Id);
     }
 
     public int LocationCountAfter(int width, int height, int secretNumber, int steps) =>
@@ -24,24 +27,24 @@ public class Aoc201613 : AocPuzzle
     private int LocationCountAfter(int width, int height, int secretNumber, Coord from, int steps)
     {
         var grid = BuildGrid(width, height, secretNumber);
+        var seen = new HashSet<Coord>([from]);
         var queue = new List<Coord> { from };
         var i = 0;
-        while (i <= steps)
+        while (i < steps)
         {
             var newQueue = new List<Coord>();
             foreach (var coord in queue)
             {
-                grid.MoveTo(coord);
-                grid.WriteValue('O');
-                var adjacentCoords = grid.OrthogonalAdjacentCoords.Where(o => grid.ReadValueAt(o) == '.').ToList();
-                newQueue.AddRange(adjacentCoords);
+                var adjCoords = grid.OrthogonalAdjacentCoordsTo(coord).Where(o => !seen.Contains(o) && grid.ReadValueAt(o) == '.').ToList();
+                seen.AddRange(adjCoords);
+                newQueue.AddRange(adjCoords);
             }
 
             queue = newQueue;
             i++;
         }
 
-        return grid.Values.Count(o => o == 'O');
+        return seen.Count;
     }
 
     private static Grid<char> BuildGrid(in int width, in int height, in int secretNumber)

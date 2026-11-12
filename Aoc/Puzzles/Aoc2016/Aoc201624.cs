@@ -1,4 +1,5 @@
 using Pzl.Common;
+using Pzl.Tools.Graphs;
 using Pzl.Tools.Grids.Grids2d;
 using Pzl.Tools.Strings;
 
@@ -16,19 +17,20 @@ public class Aoc201624 : AocPuzzle
     public int Solve(string input, bool goBackToStartWhenDone)
     {
         var (locations, grid, robot) = Init(input);
-        var paths = MapPaths(grid, locations, robot);
-        return FindShortestPath(grid, locations, paths, robot, [], goBackToStartWhenDone);
+        var edges = GraphEdgeBuilder.GetEdges(grid).ToList();
+        var paths = MapPaths(edges, locations, robot);
+        return FindShortestPath(edges, locations, paths, robot, [], goBackToStartWhenDone);
     }
 
     private int FindShortestPath(
-        Grid<char> grid,
+        List<GraphEdge> edges,
         List<AirDuctLocation> locations,
         Dictionary<(char, char), AirDuctPath> paths,
         AirDuctRobot robot,
         Dictionary<string, int> cache,
         bool goBackToStartWhenDone)
     {
-        var allPaths = GetAllPaths(grid, locations, robot.Address);
+        var allPaths = GetAllPaths(edges, locations, robot.Coord);
         var startPaths = GetStartPaths(allPaths);
         var stepCounts = startPaths.Select(path => FollowPath(locations, paths, path, [], cache, goBackToStartWhenDone)).ToList();
 
@@ -102,20 +104,19 @@ public class Aoc201624 : AocPuzzle
             var chars = row.Trim().ToCharArray();
             foreach (var c in chars)
             {
-                var address = new Coord(x, y);
-                grid.MoveTo(address);
+                var coord = new Coord(x, y);
                 var charToWrite = c;
 
                 if (char.IsNumber(c))
                 {
                     charToWrite = '.';
                     if (c == '0')
-                        robot = new AirDuctRobot(address);
+                        robot = new AirDuctRobot(coord);
                     else
-                        locations.Add(new AirDuctLocation(c, address));
+                        locations.Add(new AirDuctLocation(c, coord));
                 }
 
-                grid.WriteValue(charToWrite);
+                grid.WriteValueAt(coord, charToWrite);
 
                 x += 1;
             }
@@ -128,27 +129,27 @@ public class Aoc201624 : AocPuzzle
 
     private static IList<AirDuctPath> GetStartPaths(IList<AirDuctPath> allPaths) => allPaths.ToList();
 
-    private IList<AirDuctPath> GetAllPaths(Grid<char> grid, List<AirDuctLocation> locations, Coord startAddress)
+    private IList<AirDuctPath> GetAllPaths(List<GraphEdge> edges, List<AirDuctLocation> locations, Coord startAddress)
     {
         var paths = new List<AirDuctPath>();
 
         foreach (var location in locations)
         {
-            var coords = PathFinder.ShortestPathTo(grid, startAddress, location.Address).ToList();
-            if (coords.Count > 0)
-                paths.Add(new AirDuctPath(location, coords.Count));
+            var count = Bfs.BestCost(edges, startAddress.Id, location.Coord.Id);
+            if (count > 0)
+                paths.Add(new AirDuctPath(location, count));
         }
 
         return paths;
     }
 
     private Dictionary<(char, char), AirDuctPath> MapPaths(
-        Grid<char> grid,
+        List<GraphEdge> edges,
         List<AirDuctLocation> locations,
         AirDuctRobot robot)
     {
         var paths = new Dictionary<(char, char), AirDuctPath>();
-        var homeLocation = new AirDuctLocation('0', robot.Address);
+        var homeLocation = new AirDuctLocation('0', robot.Coord);
         var locationIncludingHomeLocation = locations.Select(o => o).ToList();
         locationIncludingHomeLocation.Add(homeLocation);
         foreach (var location in locationIncludingHomeLocation)
@@ -158,8 +159,8 @@ public class Aoc201624 : AocPuzzle
             {
                 if (paths.ContainsKey((location.Id, otherLocation.Id)) || paths.ContainsKey((otherLocation.Id, location.Id)))
                     continue;
-
-                var stepCountToLocation = PathFinder.ShortestPathTo(grid, location.Address, otherLocation.Address).Count();
+                
+                var stepCountToLocation = Bfs.BestCost(edges, location.Coord.Id, otherLocation.Coord.Id);
                 var pathToLocation = new AirDuctPath(otherLocation, stepCountToLocation);
                 var pathBack = new AirDuctPath(location, stepCountToLocation);
                 paths.Add((location.Id, otherLocation.Id), pathToLocation);
@@ -170,7 +171,7 @@ public class Aoc201624 : AocPuzzle
         return paths;
     }
 
-    public record AirDuctLocation(char Id, Coord Address);
-    public record AirDuctRobot(Coord Address);
-    public record AirDuctPath(AirDuctLocation Target, int StepCount);
+    private record AirDuctLocation(char Id, Coord Coord);
+    private record AirDuctRobot(Coord Coord);
+    private record AirDuctPath(AirDuctLocation Target, int StepCount);
 }

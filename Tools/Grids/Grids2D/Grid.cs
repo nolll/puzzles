@@ -1,4 +1,5 @@
 using System.Text;
+using Pzl.Tools.Graphs;
 
 namespace Pzl.Tools.Grids.Grids2d;
 

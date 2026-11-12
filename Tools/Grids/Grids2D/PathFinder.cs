@@ -7,10 +7,9 @@ public static class PathFinder
     public static IEnumerable<Coord> ShortestPathTo(
         Grid<char> grid, 
         Coord from, 
-        Coord to,
-        Func<Grid<char>, Coord, IEnumerable<Coord>>? neighborFunc = null)
+        Coord to)
     {
-        var coordSet = GetCoordCounts(grid, from, to, neighborFunc ?? GetNeighbors).ToDictionary(o => o.Coord, o => o.Count);
+        var coordSet = GetCoordCounts(grid, from, to, GetNeighbors).ToDictionary(o => o.Coord, o => o.Count);
 
         var path = new List<Coord>();
         var currentAddress = from;

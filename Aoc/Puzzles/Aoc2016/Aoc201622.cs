@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using Pzl.Common;
+using Pzl.Tools.Graphs;
 using Pzl.Tools.Grids.Grids2d;
 using Pzl.Tools.Strings;
 
@@ -80,8 +81,9 @@ public class Aoc201622 : AocPuzzle
         var topLeft = new Coord();
         var topRight = new Coord(grid.Width - 1, 0);
         var goal = new Coord(topRight.X - 1, topRight.Y);
-        var distance1 = PathFinder.ShortestPathTo(grid, startAddress, goal).Count();
-        var distance2 = PathFinder.ShortestPathTo(grid, goal, topLeft).Count();
+        var edges = GraphEdgeBuilder.GetEdges(grid).ToList();
+        var distance1 = Bfs.BestCost(edges, startAddress.Id, goal.Id);
+        var distance2 = Bfs.BestCost(edges, goal.Id, topLeft.Id);
         return distance1 + distance2 * 5 + 1;
     }
 

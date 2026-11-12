@@ -7,7 +7,7 @@ public static class Bfs
     public static int BestCost(List<GraphEdge> edges, string from, string to) => BestCost(Graph.GetNeighbors(edges), from, to);
     public static List<string> BestPath(List<GraphEdge> edges, string from, string to) => BestPath(Graph.GetNeighbors(edges), from, to);
 
-    private static int BestCost(Dictionary<string, List<string>> neighbors, string from, string to)
+    public static int BestCost(Dictionary<string, HashSet<string>> neighbors, string from, string to)
     {
         var queue = new Queue<(string, int)>([(from, 0)]);
         var seen = new HashSet<string>([from]);
@@ -28,7 +28,7 @@ public static class Bfs
         return -1;
     }
 
-    private static List<string> BestPath(Dictionary<string, List<string>> neighbors, string from, string to)
+    public static List<string> BestPath(Dictionary<string, HashSet<string>> neighbors, string from, string to)
     {
         var queue = new Queue<string>([from]);
         var cameFrom = new Dictionary<string, string?> { { from, null } };

@@ -1,6 +1,7 @@
 using Pzl.Common;
 using Pzl.Tools.Combinatorics;
 using Pzl.Tools.Graphs;
+using Pzl.Tools.HashSets;
 using Pzl.Tools.Lists;
 using Pzl.Tools.Numbers;
 using Pzl.Tools.Strings;
@@ -9,8 +10,7 @@ namespace Pzl.Everybody.Puzzles.Ece2026;
 
 [Name("The Portalignment")]
 [IsSlow]
-[NeedsRewrite]
-[Comment("15s for part 2, 91s for part 3. Can also use a rewrite")]
+[Comment("20s for part 3. My bfs is too slow")]
 public class Ece202611 : EverybodyEventPuzzle
 {
     [Puzzle("d3ecb33fe754cdce3362d8d1cf61380e")]
@@ -19,34 +19,9 @@ public class Ece202611 : EverybodyEventPuzzle
         var (portalCountInput, lineInput) = input.Split(LineBreaks.Double);
         var portalCount = Numbers.IntsFromString(portalCountInput).First();
         var portals = Enumerable.Range(1, portalCount).Select(o => o.ToString()).ToArray();
-
-        var edges = new List<GraphEdge>();
-        for (var i = 0; i < portals.Length; i++)
-        {
-            var prevPortal = (i + portals.Length - 1) % portals.Length;
-            var nextPortal = (i + 1) % portals.Length;
-
-            edges.Add(new GraphEdge(portals[i], portals[prevPortal]));
-            edges.Add(new GraphEdge(portals[i], portals[nextPortal]));
-        }
-
-        var initialCost = 0;
-        foreach (var portal in portals)
-        {
-            foreach (var otherPortal in portals)
-            {
-                if (otherPortal == portal)
-                    continue;
-                initialCost += Bfs.BestCost(edges, portal, otherPortal);
-            }
-        }
-
-        foreach (var line in lineInput.Split(LineBreaks.Single))
-        {
-            var (p1, p2) = Numbers.IntsFromString(line);
-            edges.Add(new GraphEdge(p1.ToString(), p2.ToString()));
-            edges.Add(new GraphEdge(p2.ToString(), p1.ToString()));
-        }
+        var neighbors = GetInitialNeighbors(portals, 1);
+        var initialCost = GetBestCost(portals, neighbors);
+        AddExtraNeighbors(neighbors, lineInput);
         
         var optimizedCost = 0;
         foreach (var portal in portals)
@@ -55,7 +30,7 @@ public class Ece202611 : EverybodyEventPuzzle
             {
                 if (otherPortal == portal)
                     continue;
-                optimizedCost += Bfs.BestCost(edges, portal, otherPortal);
+                optimizedCost += Bfs.BestCost(neighbors, portal, otherPortal);
             }
         }
         
@@ -68,44 +43,10 @@ public class Ece202611 : EverybodyEventPuzzle
         var (portalCountInput, lineInput) = input.Split(LineBreaks.Double);
         var portalCount = Numbers.IntsFromString(portalCountInput).First();
         var portals = Enumerable.Range(1, portalCount).Select(o => o.ToString()).ToArray();
+        var neighbors = GetInitialNeighbors(portals, 3);
+        var initialCost = GetBestCost(portals, neighbors);
+        AddExtraNeighbors(neighbors, lineInput);
         
-        var edges = new List<GraphEdge>();
-        for (var i = 0; i < portals.Length; i++)
-        {
-            var prevPortal1 = (i + portals.Length - 1) % portals.Length;
-            var prevPortal2 = (i + portals.Length - 2) % portals.Length;
-            var prevPortal3 = (i + portals.Length - 3) % portals.Length;
-            var nextPortal1 = (i + 1) % portals.Length;
-            var nextPortal2 = (i + 2) % portals.Length;
-            var nextPortal3 = (i + 3) % portals.Length;
-
-            edges.Add(new GraphEdge(portals[i], portals[prevPortal1]));
-            edges.Add(new GraphEdge(portals[i], portals[prevPortal2]));
-            edges.Add(new GraphEdge(portals[i], portals[prevPortal3]));
-            edges.Add(new GraphEdge(portals[i], portals[nextPortal1]));
-            edges.Add(new GraphEdge(portals[i], portals[nextPortal2]));
-            edges.Add(new GraphEdge(portals[i], portals[nextPortal3]));
-        }
-
-        var initialCost = 0;
-        foreach (var portal in portals)
-        {
-            foreach (var otherPortal in portals)
-            {
-                if (otherPortal == portal)
-                    continue;
-                initialCost += Bfs.BestCost(edges, portal, otherPortal);
-            }
-        }
-
-        foreach (var line in lineInput.Split(LineBreaks.Single))
-        {
-            var (p1, p2) = Numbers.IntsFromString(line);
-            edges.Add(new GraphEdge(p1.ToString(), p2.ToString()));
-            edges.Add(new GraphEdge(p2.ToString(), p1.ToString()));
-        }
-
-        var existingConnections = edges.Select(o => (o.From, o.To)).ToHashSet();
         var possibleConnections = new HashSet<(string, string)>();
         foreach (var portal in portals)
         {
@@ -113,9 +54,8 @@ public class Ece202611 : EverybodyEventPuzzle
             {
                 if (otherPortal == portal)
                     continue;
-
-                if (!existingConnections.Contains((portal, otherPortal)) && !possibleConnections.Contains((otherPortal, otherPortal)))
-                    possibleConnections.Add((portal, otherPortal));
+                
+                possibleConnections.Add((portal, otherPortal));
             }
         }
 
@@ -123,16 +63,16 @@ public class Ece202611 : EverybodyEventPuzzle
         foreach (var possibleConnection in possibleConnections)
         {
             var optimizedCost = 0;
-            var newEdges = edges.ToList();
-            newEdges.Add(new GraphEdge(possibleConnection.Item1, possibleConnection.Item2));
-            newEdges.Add(new GraphEdge(possibleConnection.Item2, possibleConnection.Item1));
+            var newNeighbors = neighbors.ToDictionary(o => o.Key, o => o.Value.ToHashSet());
+            newNeighbors[possibleConnection.Item1].Add(possibleConnection.Item2);
+            newNeighbors[possibleConnection.Item2].Add(possibleConnection.Item1);
             foreach (var portal in portals)
             {
                 foreach (var otherPortal in portals)
                 {
                     if (otherPortal == portal)
                         continue;
-                    var c = Bfs.BestCost(newEdges, portal, otherPortal);
+                    var c = Bfs.BestCost(newNeighbors, portal, otherPortal);
                     optimizedCost += c;
                 }
             }
@@ -149,10 +89,9 @@ public class Ece202611 : EverybodyEventPuzzle
         var (portalCountInput, lineInput) = input.Split(LineBreaks.Double);
         var portalCount = Numbers.IntsFromString(portalCountInput).First();
         var portals = Enumerable.Range(1, portalCount).Select(o => o.ToString()).ToArray();
-        
-        var edges = GetInitialEdges(portals);
-        var initialCost = GetBestCost(portals, edges);
-        edges = [.. edges, .. GetExtraEdges(lineInput)];
+        var neighbors = GetInitialNeighbors(portals, 3);
+        var initialCost = GetBestCost(portals, neighbors);
+        AddExtraNeighbors(neighbors, lineInput);
 
         const int rotationCount = 8;
         var baseIndexes = new List<int>();
@@ -192,23 +131,23 @@ public class Ece202611 : EverybodyEventPuzzle
         {
             foreach (var crystalPosition in crystalPositions)
             {
-                var newEdges = edges.ToList();
+                var newNeighbors = neighbors.ToDictionary(o => o.Key, o => o.Value.ToHashSet());
                 
                 foreach (var pair in crystalPosition)
                 {
-                    newEdges.Add(new GraphEdge(pair[0], pair[1]));
-                    newEdges.Add(new GraphEdge(pair[1], pair[0]));
+                    newNeighbors[pair[0]].Add(pair[1]);
+                    newNeighbors[pair[1]].Add(pair[0]);
                 }
                 
-                var optimizedCost = GetBestCost(portals, newEdges);
+                var optimizedCost = GetBestCost(portals, newNeighbors);
                 best = Math.Min(best, optimizedCost);
             }
         }
         
         return initialCost - best;
     }
-
-    private static int GetBestCost(string[] portals, List<GraphEdge> edges)
+    
+    private static int GetBestCost(string[] portals, Dictionary<string, HashSet<string>> neighbors)
     {
         var initialCost = 0;
         foreach (var portal in portals)
@@ -217,46 +156,41 @@ public class Ece202611 : EverybodyEventPuzzle
             {
                 if (otherPortal == portal)
                     continue;
-                initialCost += Bfs.BestCost(edges, portal, otherPortal);
+                initialCost += Bfs.BestCost(neighbors, portal, otherPortal);
             }
         }
 
         return initialCost;
     }
-
-    private static List<GraphEdge> GetInitialEdges(string[] portals)
+    
+    private static Dictionary<string, HashSet<string>> GetInitialNeighbors(string[] portals, int maxDistance)
     {
-        var edges = new List<GraphEdge>();
+        var neighbors = new Dictionary<string, HashSet<string>>();
         for (var i = 0; i < portals.Length; i++)
         {
-            var prevPortal1 = (i + portals.Length - 1) % portals.Length;
-            var prevPortal2 = (i + portals.Length - 2) % portals.Length;
-            var prevPortal3 = (i + portals.Length - 3) % portals.Length;
-            var nextPortal1 = (i + 1) % portals.Length;
-            var nextPortal2 = (i + 2) % portals.Length;
-            var nextPortal3 = (i + 3) % portals.Length;
+            neighbors[portals[i]] = [];
+            for (var steps = 1; steps <= maxDistance; steps++)
+            {
+                var prevPortal = (i + portals.Length - steps) % portals.Length;
+                var nextPortal = (i + steps) % portals.Length;
 
-            edges.Add(new GraphEdge(portals[i], portals[prevPortal1]));
-            edges.Add(new GraphEdge(portals[i], portals[prevPortal2]));
-            edges.Add(new GraphEdge(portals[i], portals[prevPortal3]));
-            edges.Add(new GraphEdge(portals[i], portals[nextPortal1]));
-            edges.Add(new GraphEdge(portals[i], portals[nextPortal2]));
-            edges.Add(new GraphEdge(portals[i], portals[nextPortal3]));
+                neighbors[portals[i]].AddRange([
+                    portals[prevPortal],
+                    portals[nextPortal]
+                ]);
+            }
         }
 
-        return edges;
+        return neighbors;
     }
-
-    private static List<GraphEdge> GetExtraEdges(string input)
+    
+    private static void AddExtraNeighbors(Dictionary<string, HashSet<string>> neighbors, string input)
     {
-        var edges = new List<GraphEdge>();
         foreach (var line in input.Split(LineBreaks.Single))
         {
             var (p1, p2) = Numbers.IntsFromString(line);
-            edges.Add(new GraphEdge(p1.ToString(), p2.ToString()));
-            edges.Add(new GraphEdge(p2.ToString(), p1.ToString()));
+            neighbors[p1.ToString()].Add(p2.ToString());
+            neighbors[p2.ToString()].Add(p1.ToString());
         }
-
-        return edges;
     }
 }

@@ -23,9 +23,9 @@ public static class Graph
         return nodes;
     }
     
-    public static Dictionary<string, List<string>> GetNeighbors(IEnumerable<GraphEdge> edges)
+    public static Dictionary<string, HashSet<string>> GetNeighbors(IEnumerable<GraphEdge> edges)
     {
-        var adj = new Dictionary<string, List<string>>();
+        var adj = new Dictionary<string, HashSet<string>>();
 
         foreach (var edge in edges)
         {

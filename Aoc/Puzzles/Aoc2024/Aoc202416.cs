@@ -48,7 +48,7 @@ public class Aoc202416 : AocPuzzle
         var startKey = $"{GridDirection.Right}|{start.Id}";
         List<string> endKeys = [$"{GridDirection.Right}|{end.Id}", $"{GridDirection.Up}|{end.Id}"];
         var inputs = BuildGraph(grid);
-        var (_, paths) = Dijkstra.BestPaths(inputs, startKey, endKeys);
+        var paths = Dijkstra.BestPaths(inputs, startKey, endKeys);
         
         var usedCoords = paths
             .SelectMany(o => o)

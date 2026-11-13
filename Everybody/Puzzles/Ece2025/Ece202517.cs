@@ -100,10 +100,10 @@ public class Ece202517 : EverybodyEventPuzzle
                 }
             }
 
-            var result = Dijkstra.BestPath(edges, GetId(RightSet, start), GetId(LeftSet, start));
+            var cost = Dijkstra.BestCost(edges, GetId(RightSet, start), GetId(LeftSet, start));
             
-            if (result.Cost < availableSeconds)
-                return result.Cost * r;
+            if (cost < availableSeconds)
+                return cost * r;
 
             radius++;
         }

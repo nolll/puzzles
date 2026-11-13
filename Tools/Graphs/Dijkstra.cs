@@ -25,12 +25,14 @@ public static class Dijkstra
         var start = nodes[source];
         var visited = nodes.Keys.ToDictionary(k => k, _ => int.MaxValue);
         visited[source] = 0;
-        var queue = new Queue<GraphNode>();
-        queue.Enqueue(start);
+        var queue = new PriorityQueue<GraphNode, int>();
+        queue.Enqueue(start, 0);
 
-        while (queue.Count > 0)
+        while (queue.TryDequeue(out var node, out var priority))
         {
-            var node = queue.Dequeue();
+            if (priority > visited[node.Name])
+                continue;
+
             var steps = visited[node.Name];
             foreach (var connection in node.Connections)
             {
@@ -42,7 +44,7 @@ public static class Dijkstra
                     continue;
 
                 visited[connection.Name] = cost;
-                queue.Enqueue(nodes[connection.Name]);
+                queue.Enqueue(nodes[connection.Name], cost);
             }
         }
 

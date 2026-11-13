@@ -1,5 +1,7 @@
 using Pzl.Common;
+using Pzl.Tools.Graphs;
 using Pzl.Tools.Grids.Grids2d;
+using Pzl.Tools.Numbers;
 
 namespace Pzl.Aoc.Puzzles.Aoc2024;
 
@@ -21,9 +23,9 @@ public class Aoc202420 : AocPuzzle
         var end = grid.FindCoords('E').First();
         grid.WriteValueAt(start, '.');
         grid.WriteValueAt(end, '.');
-        
-        var path = PathFinder.ShortestPathTo(grid, start, end).ToList();
-        path = [start, ..path];
+
+        var neighbors = grid.GetNeighbors2();
+        var path = Bfs.BestPath(neighbors, start, end).ToList();
         
         var distanceToTarget = new Dictionary<Coord, int>();
         for (var i = 0; i < path.Count; i++)

@@ -39,6 +39,23 @@ public static class GridExtensions
 
         return dictionary;
     }
+    
+    public static Dictionary<Coord, HashSet<Coord>> GetNeighbors2(this Grid<char> grid, Func<Grid<char>, Coord, IEnumerable<Coord>>? neighborFunc = null)
+    {
+        var getNeighbors = neighborFunc ?? GetNeighbors;
+
+        var dictionary = new Dictionary<Coord, HashSet<Coord>>();
+        foreach (var coord in grid.Coords)
+        {
+            dictionary.Add(coord, []);
+            foreach (var adj in getNeighbors(grid, coord))
+            {
+                dictionary[coord].Add(adj);
+            }
+        }
+
+        return dictionary;
+    }
 
     private static IEnumerable<Coord> GetNeighbors(Grid<char> grid, Coord coord) =>
         grid.OrthogonalAdjacentCoordsTo(coord).Where(o => grid.ReadValueAt(o) == '.');

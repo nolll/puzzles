@@ -1,3 +1,4 @@
+using Pzl.Tools.Grids.Grids2d;
 using Pzl.Tools.Strings;
 
 namespace Pzl.Tools.Graphs;
@@ -47,6 +48,35 @@ public static class Bfs
         }
 
         var path = new List<string>();
+        var curr = to;
+        while (curr is not null)
+        {
+            path.Add(curr);
+            curr = cameFrom.GetValueOrDefault(curr);
+        }
+
+        return [.. path.Reversed()];
+    }
+    
+    public static List<Coord> BestPath(Dictionary<Coord, HashSet<Coord>> neighbors, Coord from, Coord to)
+    {
+        var queue = new Queue<Coord>([from]);
+        var cameFrom = new Dictionary<Coord, Coord?> { { from, null } };
+
+        while (queue.Count > 0)
+        {
+            var current = queue.Dequeue();
+            if (current == to)
+                break;
+
+            foreach (var neighbor in neighbors.GetValueOrDefault(current, []))
+            {
+                if (cameFrom.TryAdd(neighbor, current))
+                    queue.Enqueue(neighbor);
+            }
+        }
+
+        var path = new List<Coord>();
         var curr = to;
         while (curr is not null)
         {

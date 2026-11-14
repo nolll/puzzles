@@ -9,8 +9,6 @@ using Pzl.Tools.Strings;
 namespace Pzl.Everybody.Puzzles.Ece2026;
 
 [Name("The Portalignment")]
-[IsSlow]
-[Comment("20s for part 3. My bfs is too slow")]
 public class Ece202611 : EverybodyEventPuzzle
 {
     [Puzzle("d3ecb33fe754cdce3362d8d1cf61380e")]
@@ -23,16 +21,7 @@ public class Ece202611 : EverybodyEventPuzzle
         var initialCost = GetBestCost(portals, neighbors);
         AddExtraNeighbors(neighbors, lineInput);
         
-        var optimizedCost = 0;
-        foreach (var portal in portals)
-        {
-            foreach (var otherPortal in portals)
-            {
-                if (otherPortal == portal)
-                    continue;
-                optimizedCost += Bfs.BestCost(neighbors, portal, otherPortal);
-            }
-        }
+        var optimizedCost = GetBestCost(portals, neighbors);
         
         return initialCost - optimizedCost;
     }
@@ -151,18 +140,19 @@ public class Ece202611 : EverybodyEventPuzzle
 
     private static int GetBestCost(string[] portals, Dictionary<string, HashSet<string>> neighbors)
     {
-        var initialCost = 0;
+        var totalCost = 0;
         foreach (var portal in portals)
         {
+            var distances = Bfs.Distances(neighbors, portal);
             foreach (var otherPortal in portals)
             {
                 if (otherPortal == portal)
                     continue;
-                initialCost += Bfs.BestCost(neighbors, portal, otherPortal);
+                totalCost += distances[otherPortal];
             }
         }
 
-        return initialCost;
+        return totalCost;
     }
     
     private static Dictionary<string, HashSet<string>> GetInitialNeighbors(string[] portals, int maxDistance)

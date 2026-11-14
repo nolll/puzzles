@@ -10,23 +10,53 @@ public static class Bfs
 
     public static int BestCost(Dictionary<string, HashSet<string>> neighbors, string from, string to)
     {
+        if (from == to)
+            return 0;
+
         var queue = new Queue<(string, int)>([(from, 0)]);
         var seen = new HashSet<string>([from]);
 
         while (queue.Count > 0)
         {
             var (current, cost) = queue.Dequeue();
-            if (current == to)
-                return cost;
+            if (!neighbors.TryGetValue(current, out var next))
+                continue;
 
-            foreach (var neighbor in neighbors.GetValueOrDefault(current, []))
+            foreach (var neighbor in next)
             {
-                if (seen.Add(neighbor))
-                    queue.Enqueue((neighbor, cost + 1));
+                if (!seen.Add(neighbor))
+                    continue;
+
+                if (neighbor == to)
+                    return cost + 1;
+
+                queue.Enqueue((neighbor, cost + 1));
             }
         }
 
         return -1;
+    }
+
+    public static Dictionary<string, int> Distances(Dictionary<string, HashSet<string>> neighbors, string from)
+    {
+        var distances = new Dictionary<string, int> { { from, 0 } };
+        var queue = new Queue<string>([from]);
+
+        while (queue.Count > 0)
+        {
+            var current = queue.Dequeue();
+            if (!neighbors.TryGetValue(current, out var next))
+                continue;
+
+            var cost = distances[current] + 1;
+            foreach (var neighbor in next)
+            {
+                if (distances.TryAdd(neighbor, cost))
+                    queue.Enqueue(neighbor);
+            }
+        }
+
+        return distances;
     }
 
     public static List<string> BestPath(Dictionary<string, HashSet<string>> neighbors, string from, string to)
@@ -34,18 +64,21 @@ public static class Bfs
         var queue = new Queue<string>([from]);
         var cameFrom = new Dictionary<string, string?> { { from, null } };
 
-        while (queue.Count > 0)
+        while (queue.Count > 0 && !cameFrom.ContainsKey(to))
         {
             var current = queue.Dequeue();
-            if (current == to)
-                break;
+            if (!neighbors.TryGetValue(current, out var next))
+                continue;
 
-            foreach (var neighbor in neighbors.GetValueOrDefault(current, []))
+            foreach (var neighbor in next)
             {
                 if (cameFrom.TryAdd(neighbor, current))
                     queue.Enqueue(neighbor);
             }
         }
+
+        if (!cameFrom.ContainsKey(to))
+            return [];
 
         var path = new List<string>();
         var curr = to;
@@ -63,18 +96,21 @@ public static class Bfs
         var queue = new Queue<Coord>([from]);
         var cameFrom = new Dictionary<Coord, Coord?> { { from, null } };
 
-        while (queue.Count > 0)
+        while (queue.Count > 0 && !cameFrom.ContainsKey(to))
         {
             var current = queue.Dequeue();
-            if (current == to)
-                break;
+            if (!neighbors.TryGetValue(current, out var next))
+                continue;
 
-            foreach (var neighbor in neighbors.GetValueOrDefault(current, []))
+            foreach (var neighbor in next)
             {
                 if (cameFrom.TryAdd(neighbor, current))
                     queue.Enqueue(neighbor);
             }
         }
+
+        if (!cameFrom.ContainsKey(to))
+            return [];
 
         var path = new List<Coord>();
         var curr = to;

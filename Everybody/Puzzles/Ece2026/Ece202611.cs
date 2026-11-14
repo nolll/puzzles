@@ -47,6 +47,27 @@ public class Ece202611 : EverybodyEventPuzzle
         var initialCost = GetBestCost(portals, neighbors);
         AddExtraNeighbors(neighbors, lineInput);
         
+        var possiblePairs = GetAllPossiblePairs(portals);
+
+        var best = int.MaxValue;
+        foreach (var pair in possiblePairs)
+        {
+            var addedTo1 = neighbors[pair.Item1].Add(pair.Item2);
+            var addedTo2 = neighbors[pair.Item2].Add(pair.Item1);
+            var optimizedCost = GetBestCost(portals, neighbors);
+            best = Math.Min(best, optimizedCost);
+            
+            if(addedTo1)
+                neighbors[pair.Item1].Remove(pair.Item2);
+            if(addedTo2)
+                neighbors[pair.Item2].Remove(pair.Item1);
+        }
+        
+        return initialCost - best;
+    }
+
+    private static HashSet<(string, string)> GetAllPossiblePairs(string[] portals)
+    {
         var possibleConnections = new HashSet<(string, string)>();
         foreach (var portal in portals)
         {
@@ -59,30 +80,9 @@ public class Ece202611 : EverybodyEventPuzzle
             }
         }
 
-        var best = int.MaxValue;
-        foreach (var possibleConnection in possibleConnections)
-        {
-            var optimizedCost = 0;
-            var newNeighbors = neighbors.ToDictionary(o => o.Key, o => o.Value.ToHashSet());
-            newNeighbors[possibleConnection.Item1].Add(possibleConnection.Item2);
-            newNeighbors[possibleConnection.Item2].Add(possibleConnection.Item1);
-            foreach (var portal in portals)
-            {
-                foreach (var otherPortal in portals)
-                {
-                    if (otherPortal == portal)
-                        continue;
-                    var c = Bfs.BestCost(newNeighbors, portal, otherPortal);
-                    optimizedCost += c;
-                }
-            }
-
-            best = Math.Min(best, optimizedCost);
-        }
-        
-        return initialCost - best;
+        return possibleConnections;
     }
-    
+
     [Puzzle("65a616a7074699be9b38af930546c7a9")]
     public int Part3(string input)
     {
@@ -93,6 +93,36 @@ public class Ece202611 : EverybodyEventPuzzle
         var initialCost = GetBestCost(portals, neighbors);
         AddExtraNeighbors(neighbors, lineInput);
 
+        var possibleCrystalPositions = GetPossibleCrystalPositions(portals);
+
+        var best = int.MaxValue;
+        
+        foreach (var crystalPositions in possibleCrystalPositions)
+        {
+            foreach (var crystalPosition in crystalPositions)
+            {
+                foreach (var pair in crystalPosition)
+                {
+                    neighbors[pair[0]].Add(pair[1]);
+                    neighbors[pair[1]].Add(pair[0]);
+                }
+                
+                var optimizedCost = GetBestCost(portals, neighbors);
+                best = Math.Min(best, optimizedCost);
+                
+                foreach (var pair in crystalPosition)
+                {
+                    neighbors[pair[0]].Remove(pair[1]);
+                    neighbors[pair[1]].Remove(pair[0]);
+                }
+            }
+        }
+        
+        return initialCost - best;
+    }
+
+    private static List<List<List<List<string>>>> GetPossibleCrystalPositions(string[] portals)
+    {
         const int rotationCount = 8;
         var baseIndexes = new List<int>();
         var rotationLength = portals.Length / rotationCount;
@@ -104,49 +134,21 @@ public class Ece202611 : EverybodyEventPuzzle
         var allIndexes = new List<List<int>>();
         for (var i = 0; i < rotationLength; i++)
         {
-            var list = new List<int>();
-            foreach (var index in baseIndexes)
-            {
-                list.Add(index + i);
-            }
-            allIndexes.Add(list);
+            allIndexes.Add(baseIndexes.Select(index => index + i).ToList());
         }
         
         var possibleCrystalPositions = new List<List<List<List<string>>>>();
         foreach (var indexes in allIndexes)
         {
-            var crystalPortals = new List<string>();
-            foreach (var index in indexes)
-            {
-                crystalPortals.Add(portals[index]);
-            }
-            
+            var crystalPortals = indexes.Select(index => portals[index]).ToList();
+
             var portalPairs = CombinationGenerator.GetGroupsOfSize(crystalPortals, 2).ToList();
             possibleCrystalPositions.Add(portalPairs);
         }
 
-        var best = int.MaxValue;
-
-        foreach (var crystalPositions in possibleCrystalPositions)
-        {
-            foreach (var crystalPosition in crystalPositions)
-            {
-                var newNeighbors = neighbors.ToDictionary(o => o.Key, o => o.Value.ToHashSet());
-                
-                foreach (var pair in crystalPosition)
-                {
-                    newNeighbors[pair[0]].Add(pair[1]);
-                    newNeighbors[pair[1]].Add(pair[0]);
-                }
-                
-                var optimizedCost = GetBestCost(portals, newNeighbors);
-                best = Math.Min(best, optimizedCost);
-            }
-        }
-        
-        return initialCost - best;
+        return possibleCrystalPositions;
     }
-    
+
     private static int GetBestCost(string[] portals, Dictionary<string, HashSet<string>> neighbors)
     {
         var initialCost = 0;

@@ -7,7 +7,11 @@ public static class MathTools
 {
     private const double DoubleTolerance = 0.00001;
     
+    public static int Gcd(int a, int b) => b == 0 ? a : Gcd(b, a % b);
     public static long Gcd(long a, long b) => b == 0 ? a : Gcd(b, a % b);
+    public static int Lcm(params int[] numbers) => Lcm((IEnumerable<int>)numbers);
+    public static int Lcm(IEnumerable<int> numbers) => numbers.Aggregate(Lcm);
+    public static int Lcm(int a, int b) => Math.Abs(a * b) / Gcd(a, b);
     public static long Lcm(params long[] numbers) => Lcm((IEnumerable<long>)numbers);
     public static long Lcm(IEnumerable<long> numbers) => numbers.Aggregate(Lcm);
     public static long Lcm(long a, long b) => Math.Abs(a * b) / Gcd(a, b);

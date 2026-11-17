@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Pzl.Common;
 using Pzl.Tools.Lists;
 using Pzl.Tools.Maths;
@@ -12,59 +11,95 @@ namespace Pzl.Everybody.Puzzles.Ece2026;
 public class Ece202613 : EverybodyEventPuzzle
 {
     [Puzzle("7cf148f86e2ddb022b403e333a229cd1")]
-    public int Part1(string input)
+    public long Part1(string input) => SolveOne(input);
+
+    [Puzzle("9d35aad7b08669b7bf272bf91e0614d1")]
+    public long Part2(string input) => input.Split(LineBreaks.Double).Sum(SolveOne);
+
+    [Puzzle("502f16ba0a524e07f5fb7715e99f64c2")]
+    public long Part3(string input) => input.Split(LineBreaks.Double).Sum(SolveOne);
+
+    private long SolveOne(string input)
     {
         var (handLine, dirLine, currentLine, moveLine) = input.Split(LineBreaks.Single);
         var handSteps = Numbers.IntsFromString(handLine);
         var dirs = dirLine.Split(' ').Last().Split(':').Select(o => o == "CCW" ? -1 : 1).ToArray();
         var positions = Numbers.IntsFromString(currentLine);
-        var moves = Numbers.IntsFromString(moveLine);
+        var moves = Numbers.LongsFromString(moveLine);
 
         var hands = new List<Hand>();
-        var id = 1;
         var lcm = MathTools.Lcm(handSteps);
 
         for (var i = 0; i < handSteps.Length; i++)
         {
             var multiplier = lcm / handSteps[i];
-            hands.Add(new Hand(id, handSteps[i], dirs[i], positions[i], moves[i], multiplier));
-            id++;
+            hands.Add(new Hand(handSteps[i], dirs[i], positions[i], moves[i], multiplier));
         }
 
-        var signalCount = 0;
-        
-        while (hands.Any(o => o.CanMove))
+        var time = 0L;
+        var signals = 0L;
+
+        var seen = new Dictionary<string, (long, long)>();
+        while (time < hands.Max(o => o.Moves))
         {
             foreach (var hand in hands) 
-                hand.Move();
+                hand.Move(time);
 
             for (var i = 0; i < hands.Count; i++)
             {
                 for (var j = i + 1; j < hands.Count; j++)
                 {
                     if (SendsSignal(lcm, hands[i], hands[j]))
-                        signalCount++;
+                        signals++;
                 }
             }
-            
-            foreach (var hand in hands) 
+
+            foreach (var hand in hands)
                 hand.Clamp();
+
+            var key = GetCacheKey(hands, time);
+
+            if (seen.TryGetValue(key, out var tpl))
+            {
+                var (os, ot) = tpl;
+                var signalDiff = signals - os;
+                var timeDiff = time - ot;
+
+                if (signalDiff > 0 && timeDiff > 0)
+                {
+                    var target = hands.Where(o => o.Moves >= time).Min(o => o.Moves);
+                    var iterationsToSkip = (target - time - 1) / timeDiff;
+                    
+                    signals += iterationsToSkip * signalDiff;
+                    time += iterationsToSkip * timeDiff;
+                }
+            }
+
+            seen.TryAdd(key, (signals, time));
+            time++;
         }
 
-        return signalCount;
+        return signals;
+    }
+
+    private static string GetCacheKey(List<Hand> hands, long time)
+    {
+        var handsKey = string.Join(',', hands.Select(o => o.Pos));
+        var movesKey = string.Join(',', hands.Select(o => o.Moves < time));
+        return $"{handsKey}|{movesKey}";
     }
 
     private bool SendsSignal(int lcm, Hand h1, Hand h2)
     {
         if (h1.LastPos == h2.LastPos)
             return false;
-        
+
         if (Overlaps(h1.LastPos, h1.Pos, h2.LastPos, h2.Pos))
             return true;
-        
+
         if (Overlaps(h1.LastPos + lcm, h1.Pos + lcm, h2.LastPos, h2.Pos))
             return true;
-        
+
         if (Overlaps(h1.LastPos - lcm, h1.Pos - lcm, h2.LastPos, h2.Pos))
             return true;
 
@@ -79,39 +114,20 @@ public class Ece202613 : EverybodyEventPuzzle
         var t = (a1 - a2) / den;
         return t is >= 0 and <= 1;
     }
-
-    [Puzzle("")]
-    public int Part2(string input)
+    
+    private class Hand(int steps, int dir, int pos, long movesLeft, int multiplier)
     {
-        return 0;
-    }
-
-    [Puzzle("")]
-    public int Part3(string input)
-    {
-        return 0;
-    }
-
-    [DebuggerDisplay("Id: {Id}, Pos: {Pos}, Steps: {Steps}, Clock: {ClockPos}")]
-    private class Hand(int id, int steps, int dir, int pos, int movesLeft, int multiplier)
-    {
-        public int Id { get; } = id;
-        public int Steps { get; } = steps * multiplier;
-        public int Pos { get; set; } = pos * multiplier;
+        private int Steps { get; } = steps * multiplier;
+        public int Pos { get; private set; } = pos * multiplier;
         public int LastPos { get; private set; } = pos;
-        private int MovesLeft { get; set; } = movesLeft;
-        public double ClockPos => Math.Round((double)Pos * 12 / Steps, 2);
-        public bool CanMove => MovesLeft > 0;
+        public long Moves { get; } = movesLeft;
         public void Clamp() => Pos = (Pos + Steps) % Steps;
         
-        public void Move()
+        public void Move(long time)
         {
             LastPos = Pos;
-            if (!CanMove)
-                return;
-            
-            Pos += dir * multiplier;
-            MovesLeft -= 1;
+            if (time < Moves)
+                Pos += dir * multiplier;
         }
     }
 }

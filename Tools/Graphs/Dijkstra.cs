@@ -17,6 +17,15 @@ public static class Dijkstra
     public static List<List<string>> BestPaths(List<GraphEdge> edges, string source, List<string> targets) => 
         BestPaths(Graph.GetNodes(edges), source, targets).paths;
 
+    public static Dictionary<string, int> AllCosts(List<GraphEdge> edges, string source) =>
+        AllCosts(Graph.GetNodes(edges), source);
+
+    public static Dictionary<string, int> AllCosts(Dictionary<string, GraphNode> nodes, string source)
+    {
+        var (costs, _) = Search(nodes, source);
+        return costs.Where(o => o.Value != int.MaxValue).ToDictionary();
+    }
+
     public static int BestCost(Dictionary<string, GraphNode> nodes, string source, string target) =>
         BestCost(nodes, source, [target]);
 

@@ -1,5 +1,6 @@
 namespace Pzl.Tools.Graphs;
 
+// Find shortest tree connecting all nodes
 public static class Kruskal
 {
     public static long MinimumSpanningTree(List<GraphEdge> edges)
@@ -10,10 +11,10 @@ public static class Kruskal
         var nodes = Graph.GetNodes(edges);
         var result = edges.OrderBy(o => o.Cost).ToArray();
         var subsets = nodes.Keys.ToDictionary(nodekey => nodekey, nodekey => new Subset(nodekey, 0));
-        
-        // Number of edges to be taken is equal to V-1
-        while (e < nodes.Count - 1) {
 
+        // Number of edges to be taken is equal to V-1
+        while (e < nodes.Count - 1)
+        {
             // Pick the smallest edge. And increment
             // the index for next iteration
             var nextEdge = result[i++];
@@ -26,19 +27,20 @@ public static class Kruskal
             // of result for next edge
             if (x == y)
                 continue;
-            
+
             result[e++] = nextEdge;
             Union(subsets, x, y);
         }
-        
+
         var minimumCost = 0L;
-        for (i = 0; i < e; ++i) {
+        for (i = 0; i < e; ++i)
+        {
             minimumCost += result[i].Cost;
         }
 
         return minimumCost;
     }
-    
+
     // A utility function to find set of an element i
     // (uses path compression technique)
     private static string Find(Dictionary<string, Subset> subsets, string id)
@@ -50,7 +52,7 @@ public static class Kruskal
 
         return subsets[id].Parent;
     }
-    
+
     // A function that does union of
     // two sets of x and y (uses union by rank)
     private static void Union(Dictionary<string, Subset> subsets, string x, string y)
@@ -67,12 +69,13 @@ public static class Kruskal
 
         // If ranks are same, then make one as root
         // and increment its rank by one
-        else {
+        else
+        {
             subsets[yroot].Parent = xroot;
             subsets[xroot].Rank++;
         }
     }
-    
+
     // A class to represent
     // a subset for union-find
     private class Subset(string parent, int rank)
